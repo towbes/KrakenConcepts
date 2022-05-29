@@ -50,9 +50,9 @@ require("scripts/globals/zone")
 --    Ex. xi.dynamis.mobList[zoneID][MobIndex].mobchildren = {#WAR, #MNK, #WHM, #BLM, #RDM, #THF, #PLD, #DRK, #BST, #BRD, #RNG, #SAM, #NIN, #DRG, #SMN}
 --    Ex. For 2 Wars: xi.dynamis.mobList[zoneID][MobIndex].mobchildren = {2, nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, nil}
 --
--- 7.  xi.dynamis.mobList[zoneID][MobIndex].NMchildren is used to spawn specific NMs outlined in xi.dynamis.mobList[zoneID][MobIndex].info
+-- 7.  xi.dynamis.mobList[zoneID][MobIndex].NMChildren is used to spawn specific NMs outlined in xi.dynamis.mobList[zoneID][MobIndex].info
 --     MobIndex is the index of the mob spawning the NM, MobIndex(NM) points to which NM in .info it should spawn.
---     Ex. xi.dynamis.mobList[zoneID][MobIndex].NMchildren = {MobIndex(NM1), MobIndex(NM2), MobIndex(NM3)}
+--     Ex. xi.dynamis.mobList[zoneID][MobIndex].NMChildren = {MobIndex(NM1), MobIndex(NM2), MobIndex(NM3)}
 --
 -- 8. xi.dynamis.mobList[zoneID][MobIndex].patrolPath is used to set a specific path for a mob, if left blank for that MobIndex,
 --    the mob will not path on a predetermined course. If it is a statue, it will not path at all. You can add
@@ -79,7 +79,7 @@ xi.dynamis.mobList[zoneID] ={ } -- Ignore me, I just start the table.
 xi.dynamis.mobList[zoneID].zoneID = zone -- Ignore me, I just ensure .zoneID exists.
 xi.dynamis.mobList[zoneID].waveDefeatRequirements = { } -- Ignore me, I just start the table.
 xi.dynamis.mobList[zoneID].waveDefeatRequirements[1] = { } -- Ignore me, I just allow for wave 1 spawning.
-xi.dynamis.mobList[zoneID].maxWaves = 10 -- Ignore me because Oph told me to
+xi.dynamis.mobList[zoneID].maxWaves = 10 -- Put in number of max waves
 
 ----------------------------------------------------------------------------------------------------
 --                                  Setup of Parent Spawning                                      --
@@ -566,30 +566,30 @@ xi.dynamis.mobList[zoneID][150].mobchildren = {   1,   1, nil,   1, nil, nil,   
 ------------------------------------------
 --            NM Child Spawn            --
 ------------------------------------------
--- xi.dynamis.mobList[zoneID][MobIndex].NMchildren = {MobIndex(NM1), MobIndex(NM2), MobIndex(NM3)}
+-- xi.dynamis.mobList[zoneID][MobIndex].NMChildren = {MobIndex(NM1), MobIndex(NM2), MobIndex(NM3)}
 -- boolean value = forceLink true/false
 
-xi.dynamis.mobList[zoneID][21 ].NMchildren = { true, 22, 23 }
-xi.dynamis.mobList[zoneID][24 ].NMchildren = { false, 25 }
-xi.dynamis.mobList[zoneID][32 ].NMchildren = { true, 33 }
-xi.dynamis.mobList[zoneID][35 ].NMchildren = { true, 36, 37 }
-xi.dynamis.mobList[zoneID][41 ].NMchildren = { false, 42 }
-xi.dynamis.mobList[zoneID][46 ].NMchildren = { true, 47, 48, 49, 50, 155 }
-xi.dynamis.mobList[zoneID][97 ].NMchildren = { false, 98 }
-xi.dynamis.mobList[zoneID][98 ].NMchildren = { false, 99 }
-xi.dynamis.mobList[zoneID][99 ].NMchildren = { false, 100 }
-xi.dynamis.mobList[zoneID][93 ].NMchildren = { true, 153 }
-xi.dynamis.mobList[zoneID][89 ].NMchildren = { false, 90 }
-xi.dynamis.mobList[zoneID][91 ].NMchildren = { false, 92 }
-xi.dynamis.mobList[zoneID][66 ].NMchildren = { true, 67, 68 }
-xi.dynamis.mobList[zoneID][84 ].NMchildren = { true, 85, 86, 87, 156 }
-xi.dynamis.mobList[zoneID][80 ].NMchildren = { false, 81, 82, 83 }
-xi.dynamis.mobList[zoneID][69 ].NMchildren = { true, 70, 71 }
-xi.dynamis.mobList[zoneID][72 ].NMchildren = { false, 73 }
-xi.dynamis.mobList[zoneID][74 ].NMchildren = { false, 75, 76 }
-xi.dynamis.mobList[zoneID][77 ].NMchildren = { false, 78, 79 }
-xi.dynamis.mobList[zoneID][116].NMchildren = { true, 117, 118, false, 119, 120}
-xi.dynamis.mobList[zoneID][121].NMchildren = { true, 122, 123, 124, 125, 151, 152 }
+xi.dynamis.mobList[zoneID][21 ].NMChildren = { true, 22, 23 }
+xi.dynamis.mobList[zoneID][24 ].NMChildren = { false, 25 }
+xi.dynamis.mobList[zoneID][32 ].NMChildren = { true, 33 }
+xi.dynamis.mobList[zoneID][35 ].NMChildren = { true, 36, 37 }
+xi.dynamis.mobList[zoneID][41 ].NMChildren = { false, 42 }
+xi.dynamis.mobList[zoneID][46 ].NMChildren = { true, 47, 48, 49, 50, 155 }
+xi.dynamis.mobList[zoneID][97 ].NMChildren = { false, 98 }
+xi.dynamis.mobList[zoneID][98 ].NMChildren = { false, 99 }
+xi.dynamis.mobList[zoneID][99 ].NMChildren = { false, 100 }
+xi.dynamis.mobList[zoneID][93 ].NMChildren = { true, 153 }
+xi.dynamis.mobList[zoneID][89 ].NMChildren = { false, 90 }
+xi.dynamis.mobList[zoneID][91 ].NMChildren = { false, 92 }
+xi.dynamis.mobList[zoneID][66 ].NMChildren = { true, 67, 68 }
+xi.dynamis.mobList[zoneID][84 ].NMChildren = { true, 85, 86, 87, 156 }
+xi.dynamis.mobList[zoneID][80 ].NMChildren = { false, 81, 82, 83 }
+xi.dynamis.mobList[zoneID][69 ].NMChildren = { true, 70, 71 }
+xi.dynamis.mobList[zoneID][72 ].NMChildren = { false, 73 }
+xi.dynamis.mobList[zoneID][74 ].NMChildren = { false, 75, 76 }
+xi.dynamis.mobList[zoneID][77 ].NMChildren = { false, 78, 79 }
+xi.dynamis.mobList[zoneID][116].NMChildren = { true, 117, 118, false, 119, 120}
+xi.dynamis.mobList[zoneID][121].NMChildren = { true, 122, 123, 124, 125, 151, 152 }
 
 ------------------------------------------
 --          Mob Position Info           --
@@ -786,25 +786,20 @@ xi.dynamis.mobList[zoneID][6  ].eyes = xi.dynamis.eyes.BLUE
 xi.dynamis.mobList[zoneID][8  ].eyes = xi.dynamis.eyes.GREEN
 xi.dynamis.mobList[zoneID][12 ].eyes = xi.dynamis.eyes.BLUE
 xi.dynamis.mobList[zoneID][17 ].eyes = xi.dynamis.eyes.GREEN
-xi.dynamis.mobList[zoneID][18 ].eyes = xi.dynamis.eyes.RED
 xi.dynamis.mobList[zoneID][19 ].eyes = xi.dynamis.eyes.BLUE
 xi.dynamis.mobList[zoneID][24 ].eyes = xi.dynamis.eyes.BLUE
 xi.dynamis.mobList[zoneID][25 ].eyes = xi.dynamis.eyes.GREEN
 xi.dynamis.mobList[zoneID][29 ].eyes = xi.dynamis.eyes.BLUE
 xi.dynamis.mobList[zoneID][30 ].eyes = xi.dynamis.eyes.GREEN
-xi.dynamis.mobList[zoneID][31 ].eyes = xi.dynamis.eyes.RED
 xi.dynamis.mobList[zoneID][32 ].eyes = xi.dynamis.eyes.GREEN
 xi.dynamis.mobList[zoneID][35 ].eyes = xi.dynamis.eyes.BLUE
 xi.dynamis.mobList[zoneID][40 ].eyes = xi.dynamis.eyes.GREEN
-xi.dynamis.mobList[zoneID][41 ].eyes = xi.dynamis.eyes.RED
 xi.dynamis.mobList[zoneID][42 ].eyes = xi.dynamis.eyes.BLUE
 xi.dynamis.mobList[zoneID][45 ].eyes = xi.dynamis.eyes.GREEN
 xi.dynamis.mobList[zoneID][51 ].eyes = xi.dynamis.eyes.BLUE
 xi.dynamis.mobList[zoneID][56 ].eyes = xi.dynamis.eyes.BLUE
 xi.dynamis.mobList[zoneID][57 ].eyes = xi.dynamis.eyes.GREEN
-xi.dynamis.mobList[zoneID][58 ].eyes = xi.dynamis.eyes.RED
 xi.dynamis.mobList[zoneID][60 ].eyes = xi.dynamis.eyes.GREEN
-xi.dynamis.mobList[zoneID][66 ].eyes = xi.dynamis.eyes.RED
 xi.dynamis.mobList[zoneID][72 ].eyes = xi.dynamis.eyes.GREEN
 xi.dynamis.mobList[zoneID][74 ].eyes = xi.dynamis.eyes.BLUE
 xi.dynamis.mobList[zoneID][77 ].eyes = xi.dynamis.eyes.GREEN
@@ -814,7 +809,6 @@ xi.dynamis.mobList[zoneID][88 ].eyes = xi.dynamis.eyes.BLUE
 xi.dynamis.mobList[zoneID][94 ].eyes = xi.dynamis.eyes.BLUE
 xi.dynamis.mobList[zoneID][95 ].eyes = xi.dynamis.eyes.BLUE
 xi.dynamis.mobList[zoneID][100].eyes = xi.dynamis.eyes.BLUE
-xi.dynamis.mobList[zoneID][101].eyes = xi.dynamis.eyes.RED
 xi.dynamis.mobList[zoneID][110].eyes = xi.dynamis.eyes.BLUE
 xi.dynamis.mobList[zoneID][111].eyes = xi.dynamis.eyes.GREEN
 xi.dynamis.mobList[zoneID][117].eyes = xi.dynamis.eyes.BLUE

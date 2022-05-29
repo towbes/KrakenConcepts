@@ -46,9 +46,9 @@ require("scripts/globals/zone")
 --    Ex. xi.dynamis.mobList[zoneID][MobIndex].mobchildren = {#WAR, #MNK, #WHM, #BLM, #RDM, #THF, #PLD, #DRK, #BST, #BRD, #RNG, #SAM, #NIN, #DRG, #SMN}
 --    Ex. For 2 Wars: xi.dynamis.mobList[zoneID][MobIndex].mobchildren = {2, nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, nil}
 --
--- 7.  xi.dynamis.mobList[zoneID][MobIndex].NMchildren is used to spawn specific NMs outlined in xi.dynamis.mobList[zoneID][MobIndex].info
+-- 7.  xi.dynamis.mobList[zoneID][MobIndex].NMChildren is used to spawn specific NMs outlined in xi.dynamis.mobList[zoneID][MobIndex].info
 --     MobIndex is the index of the mob spawning the NM, MobIndex(NM) points to which NM in .info it should spawn.
---     Ex. xi.dynamis.mobList[zoneID][MobIndex].NMchildren = {MobIndex(NM1), MobIndex(NM2), MobIndex(NM3)}
+--     Ex. xi.dynamis.mobList[zoneID][MobIndex].NMChildren = {MobIndex(NM1), MobIndex(NM2), MobIndex(NM3)}
 --
 -- 8. xi.dynamis.mobList[zoneID][MobIndex].patrolPath is used to set a specific path for a mob, if left blank for that MobIndex,
 --    the mob will not path on a predetermined course. If it is a statue, it will not path at all. You can add
@@ -75,7 +75,7 @@ xi.dynamis.mobList[zoneID] ={ } -- Ignore me, I just start the table.
 xi.dynamis.mobList[zoneID].zoneID = zone -- Ignore me, I just ensure .zoneID exists.
 xi.dynamis.mobList[zoneID].waveDefeatRequirements = { } -- Ignore me, I just start the table.
 xi.dynamis.mobList[zoneID].waveDefeatRequirements[1] = { } -- Ignore me, I just allow for wave 1 spawning.
-xi.dynamis.mobList[zoneID].maxWaves = 6 -- Ignore me because Oph told me to
+xi.dynamis.mobList[zoneID].maxWaves = 6 -- Put in number of max waves
 
 ----------------------------------------------------------------------------------------------------
 --                                  Setup of Parent Spawning                                      --
@@ -727,42 +727,42 @@ xi.dynamis.mobList[zoneID][149].mobchildren = { nil, nil, nil, nil, nil, nil,   
 ------------------------------------------
 --            NM Child Spawn            --
 ------------------------------------------
--- xi.dynamis.mobList[zoneID][MobIndex].NMchildren = {MobIndex(NM1), MobIndex(NM2), MobIndex(NM3)}
+-- xi.dynamis.mobList[zoneID][MobIndex].NMChildren = {MobIndex(NM1), MobIndex(NM2), MobIndex(NM3)}
 -- boolean value = forceLink true/false
 
-xi.dynamis.mobList[zoneID][35 ].specificChildren = { true, 36, 37, 38 }
-xi.dynamis.mobList[zoneID][39 ].specificChildren = { true, 40, 41, 42 }
-xi.dynamis.mobList[zoneID][127].specificChildren = { true, 244 } -- Marquis Decarabia
-xi.dynamis.mobList[zoneID][128].specificChildren = { true, 245 } -- Count Zaebos
-xi.dynamis.mobList[zoneID][129].specificChildren = { true, 246 } -- Duke Berith
-xi.dynamis.mobList[zoneID][130].specificChildren = { true, 247 } -- Prince Seere
-xi.dynamis.mobList[zoneID][131].specificChildren = { true, 248 } -- Duke Gomory
-xi.dynamis.mobList[zoneID][132].specificChildren = { true, 249 } -- Marquis Andras
-xi.dynamis.mobList[zoneID][133].specificChildren = { true, 250 } -- Marquis Gamygyn
-xi.dynamis.mobList[zoneID][134].specificChildren = { true, 251 } -- Duke Scox
-xi.dynamis.mobList[zoneID][135].specificChildren = { true, 252 } -- Marquis Orias
-xi.dynamis.mobList[zoneID][136].specificChildren = { true, 253 } -- Count Raum
-xi.dynamis.mobList[zoneID][137].specificChildren = { true, 254 } -- Marquis Sabnak
-xi.dynamis.mobList[zoneID][138].specificChildren = { true, 255 } -- Marquis Nebiros
-xi.dynamis.mobList[zoneID][139].specificChildren = { true, 256 } -- King Zagan
-xi.dynamis.mobList[zoneID][140].specificChildren = { true, 257 } -- Count Vine
-xi.dynamis.mobList[zoneID][141].specificChildren = { true, 258 } -- Marquis Cimerie
-xi.dynamis.mobList[zoneID][151].specificChildren = { true, 180, 181, 182, 183 } -- Satellite Hammer
-xi.dynamis.mobList[zoneID][152].specificChildren = { true, 184, 185, 186, 187 } -- Satellite Dagger
-xi.dynamis.mobList[zoneID][153].specificChildren = { true, 188, 189,	190, 191 } -- Satellite Shield
-xi.dynamis.mobList[zoneID][154].specificChildren = { true, 192, 193,	194, 195 } -- Satellite Claymore
-xi.dynamis.mobList[zoneID][155].specificChildren = { true, 196, 197,	198, 199 } -- Satellite Gun
-xi.dynamis.mobList[zoneID][156].specificChildren = { true, 200, 201,	202, 203 } -- Satellite Longbow
-xi.dynamis.mobList[zoneID][157].specificChildren = { true, 204, 205,	206, 207 } -- Satellite Tachi
-xi.dynamis.mobList[zoneID][158].specificChildren = { true, 208, 209,	210, 211 } -- Satellite Tabar
-xi.dynamis.mobList[zoneID][159].specificChildren = { true, 212, 213,	214, 215 } -- Satellite Staff
-xi.dynamis.mobList[zoneID][160].specificChildren = { true, 216, 217,	218, 219 } -- Satellite Spear
-xi.dynamis.mobList[zoneID][161].specificChildren = { true, 220, 221,	222, 223 } -- Satellite Kunai
-xi.dynamis.mobList[zoneID][162].specificChildren = { true, 224, 225,	226, 227 } -- Satellite Knuckles
-xi.dynamis.mobList[zoneID][163].specificChildren = { true, 228, 229,	230, 231 } -- Satellite Great Axe
-xi.dynamis.mobList[zoneID][164].specificChildren = { true, 232, 233,	234, 235 } -- Satellite Horn
-xi.dynamis.mobList[zoneID][165].specificChildren = { true, 236, 237,	238, 239 } -- Satellite Longsword
-xi.dynamis.mobList[zoneID][166].specificChildren = { true, 240, 241,	242, 243 } -- Satellite Scythe
+xi.dynamis.mobList[zoneID][35 ].NMChildren = { true, 36, 37, 38 }
+xi.dynamis.mobList[zoneID][39 ].NMChildren = { true, 40, 41, 42 }
+xi.dynamis.mobList[zoneID][127].NMChildren = { true, 244 } -- Marquis Decarabia
+xi.dynamis.mobList[zoneID][128].NMChildren = { true, 245 } -- Count Zaebos
+xi.dynamis.mobList[zoneID][129].NMChildren = { true, 246 } -- Duke Berith
+xi.dynamis.mobList[zoneID][130].NMChildren = { true, 247 } -- Prince Seere
+xi.dynamis.mobList[zoneID][131].NMChildren = { true, 248 } -- Duke Gomory
+xi.dynamis.mobList[zoneID][132].NMChildren = { true, 249 } -- Marquis Andras
+xi.dynamis.mobList[zoneID][133].NMChildren = { true, 250 } -- Marquis Gamygyn
+xi.dynamis.mobList[zoneID][134].NMChildren = { true, 251 } -- Duke Scox
+xi.dynamis.mobList[zoneID][135].NMChildren = { true, 252 } -- Marquis Orias
+xi.dynamis.mobList[zoneID][136].NMChildren = { true, 253 } -- Count Raum
+xi.dynamis.mobList[zoneID][137].NMChildren = { true, 254 } -- Marquis Sabnak
+xi.dynamis.mobList[zoneID][138].NMChildren = { true, 255 } -- Marquis Nebiros
+xi.dynamis.mobList[zoneID][139].NMChildren = { true, 256 } -- King Zagan
+xi.dynamis.mobList[zoneID][140].NMChildren = { true, 257 } -- Count Vine
+xi.dynamis.mobList[zoneID][141].NMChildren = { true, 258 } -- Marquis Cimerie
+xi.dynamis.mobList[zoneID][151].NMChildren = { true, 180, 181, 182, 183 } -- Satellite Hammer
+xi.dynamis.mobList[zoneID][152].NMChildren = { true, 184, 185, 186, 187 } -- Satellite Dagger
+xi.dynamis.mobList[zoneID][153].NMChildren = { true, 188, 189,	190, 191 } -- Satellite Shield
+xi.dynamis.mobList[zoneID][154].NMChildren = { true, 192, 193,	194, 195 } -- Satellite Claymore
+xi.dynamis.mobList[zoneID][155].NMChildren = { true, 196, 197,	198, 199 } -- Satellite Gun
+xi.dynamis.mobList[zoneID][156].NMChildren = { true, 200, 201,	202, 203 } -- Satellite Longbow
+xi.dynamis.mobList[zoneID][157].NMChildren = { true, 204, 205,	206, 207 } -- Satellite Tachi
+xi.dynamis.mobList[zoneID][158].NMChildren = { true, 208, 209,	210, 211 } -- Satellite Tabar
+xi.dynamis.mobList[zoneID][159].NMChildren = { true, 212, 213,	214, 215 } -- Satellite Staff
+xi.dynamis.mobList[zoneID][160].NMChildren = { true, 216, 217,	218, 219 } -- Satellite Spear
+xi.dynamis.mobList[zoneID][161].NMChildren = { true, 220, 221,	222, 223 } -- Satellite Kunai
+xi.dynamis.mobList[zoneID][162].NMChildren = { true, 224, 225,	226, 227 } -- Satellite Knuckles
+xi.dynamis.mobList[zoneID][163].NMChildren = { true, 228, 229,	230, 231 } -- Satellite Great Axe
+xi.dynamis.mobList[zoneID][164].NMChildren = { true, 232, 233,	234, 235 } -- Satellite Horn
+xi.dynamis.mobList[zoneID][165].NMChildren = { true, 236, 237,	238, 239 } -- Satellite Longsword
+xi.dynamis.mobList[zoneID][166].NMChildren = { true, 240, 241,	242, 243 } -- Satellite Scythe
 
 ------------------------------------------
 --          Mob Position Info           --
@@ -967,16 +967,11 @@ xi.dynamis.mobList[zoneID][176].pos = {-308.7357, -26.5187, -37.8035, 226   } --
 -- xi.dynamis.mobList[zoneID][MobIndex].eyes = xi.dynamis.eyes.GREEN -- Flags for green eyes. (MP)
 -- xi.dynamis.mobList[zoneID][MobIndex].eyes = xi.dynamis.eyes.RED -- Flags for red eyes. (TE)
 
-xi.dynamis.mobList[zoneID][10 ].eyes = xi.dynamis.eyes.RED
-xi.dynamis.mobList[zoneID][43 ].eyes = xi.dynamis.eyes.RED
 xi.dynamis.mobList[zoneID][52 ].eyes = xi.dynamis.eyes.BLUE
-xi.dynamis.mobList[zoneID][60 ].eyes = xi.dynamis.eyes.RED
 xi.dynamis.mobList[zoneID][73 ].eyes = xi.dynamis.eyes.GREEN
 xi.dynamis.mobList[zoneID][77 ].eyes = xi.dynamis.eyes.GREEN
 xi.dynamis.mobList[zoneID][112].eyes = xi.dynamis.eyes.BLUE
 xi.dynamis.mobList[zoneID][142].eyes = xi.dynamis.eyes.BLUE
-xi.dynamis.mobList[zoneID][143].eyes = xi.dynamis.eyes.RED
-xi.dynamis.mobList[zoneID][150].eyes = xi.dynamis.eyes.RED
 
 ------------------------------------------
 --        Time Extension Values         --

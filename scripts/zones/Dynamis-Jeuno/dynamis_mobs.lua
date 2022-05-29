@@ -50,9 +50,9 @@ require("scripts/globals/zone")
 --    Ex. xi.dynamis.mobList[zoneID][MobIndex].mobchildren = {#WAR, #MNK, #WHM, #BLM, #RDM, #THF, #PLD, #DRK, #BST, #BRD, #RNG, #SAM, #NIN, #DRG, #SMN}
 --    Ex. For 2 Wars: xi.dynamis.mobList[zoneID][MobIndex].mobchildren = {2, nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, nil}
 --
--- 7.  xi.dynamis.mobList[zoneID][MobIndex].NMchildren is used to spawn specific NMs outlined in xi.dynamis.mobList[zoneID][MobIndex].info
+-- 7.  xi.dynamis.mobList[zoneID][MobIndex].NMChildren is used to spawn specific NMs outlined in xi.dynamis.mobList[zoneID][MobIndex].info
 --     MobIndex is the index of the mob spawning the NM, MobIndex(NM) points to which NM in .info it should spawn.
---     Ex. xi.dynamis.mobList[zoneID][MobIndex].NMchildren = {MobIndex(NM1), MobIndex(NM2), MobIndex(NM3)}
+--     Ex. xi.dynamis.mobList[zoneID][MobIndex].NMChildren = {MobIndex(NM1), MobIndex(NM2), MobIndex(NM3)}
 --
 -- 8. xi.dynamis.mobList[zoneID][MobIndex].patrolPath is used to set a specific path for a mob, if left blank for that MobIndex,
 --    the mob will not path on a predetermined course. If it is a statue, it will not path at all. You can add
@@ -79,7 +79,7 @@ xi.dynamis.mobList[zoneID] ={ } -- Ignore me, I just start the table.
 xi.dynamis.mobList[zoneID].zoneID = zone -- Ignore me, I just ensure .zoneID exists.
 xi.dynamis.mobList[zoneID].waveDefeatRequirements = { } -- Ignore me, I just start the table.
 xi.dynamis.mobList[zoneID].waveDefeatRequirements[1] = { } -- Ignore me, I just allow for wave 1 spawning.
-xi.dynamis.mobList[zoneID].maxWaves = 6 -- Ignore me because Oph told me to
+xi.dynamis.mobList[zoneID].maxWaves = 6 -- Put in number of max waves
 
 ----------------------------------------------------------------------------------------------------
 --                                  Setup of Parent Spawning                                      --
@@ -609,7 +609,7 @@ xi.dynamis.mobList[zoneID][150].mobchildren = { nil, nil, nil, nil,   1,   1,   
 ------------------------------------------
 --            NM Child Spawn            --
 ------------------------------------------
--- xi.dynamis.mobList[zoneID][MobIndex].NMchildren = {MobIndex(NM1), MobIndex(NM2), MobIndex(NM3)}
+-- xi.dynamis.mobList[zoneID][MobIndex].NMChildren = {MobIndex(NM1), MobIndex(NM2), MobIndex(NM3)}
 -- boolean value = forceLink true/false
 
 xi.dynamis.mobList[zoneID][3  ].specificChildren = { true, 158 } -- Wyrmwix Snakespecs
@@ -887,8 +887,6 @@ xi.dynamis.mobList[zoneID][130].patrolPath = {  -15, 3, -10,   -15, 3,   -2,    
 -- xi.dynamis.mobList[zoneID][MobIndex].eyes = xi.dynamis.eyes.GREEN -- Flags for green eyes. (MP)
 -- xi.dynamis.mobList[zoneID][MobIndex].eyes = xi.dynamis.eyes.RED -- Flags for red eyes. (TE)
 
-xi.dynamis.mobList[zoneID][2  ].eyes = xi.dynamis.eyes.RED
-xi.dynamis.mobList[zoneID][4  ].eyes = xi.dynamis.eyes.RED
 xi.dynamis.mobList[zoneID][5  ].eyes = xi.dynamis.eyes.BLUE
 xi.dynamis.mobList[zoneID][9  ].eyes = xi.dynamis.eyes.GREEN
 xi.dynamis.mobList[zoneID][11 ].eyes = xi.dynamis.eyes.BLUE
@@ -899,13 +897,11 @@ xi.dynamis.mobList[zoneID][23 ].eyes = xi.dynamis.eyes.BLUE
 xi.dynamis.mobList[zoneID][24 ].eyes = xi.dynamis.eyes.GREEN
 xi.dynamis.mobList[zoneID][25 ].eyes = xi.dynamis.eyes.GREEN
 xi.dynamis.mobList[zoneID][26 ].eyes = xi.dynamis.eyes.BLUE
-xi.dynamis.mobList[zoneID][29 ].eyes = xi.dynamis.eyes.RED
 xi.dynamis.mobList[zoneID][30 ].eyes = xi.dynamis.eyes.GREEN
 xi.dynamis.mobList[zoneID][31 ].eyes = xi.dynamis.eyes.BLUE
 xi.dynamis.mobList[zoneID][39 ].eyes = xi.dynamis.eyes.GREEN
 xi.dynamis.mobList[zoneID][40 ].eyes = xi.dynamis.eyes.BLUE
 xi.dynamis.mobList[zoneID][44 ].eyes = xi.dynamis.eyes.GREEN
-xi.dynamis.mobList[zoneID][45 ].eyes = xi.dynamis.eyes.RED
 xi.dynamis.mobList[zoneID][56 ].eyes = xi.dynamis.eyes.GREEN
 xi.dynamis.mobList[zoneID][57 ].eyes = xi.dynamis.eyes.BLUE
 xi.dynamis.mobList[zoneID][62 ].eyes = xi.dynamis.eyes.GREEN
@@ -927,7 +923,6 @@ xi.dynamis.mobList[zoneID][93 ].eyes = xi.dynamis.eyes.BLUE
 xi.dynamis.mobList[zoneID][94 ].eyes = xi.dynamis.eyes.GREEN
 xi.dynamis.mobList[zoneID][101].eyes = xi.dynamis.eyes.GREEN
 xi.dynamis.mobList[zoneID][102].eyes = xi.dynamis.eyes.BLUE
-xi.dynamis.mobList[zoneID][113].eyes = xi.dynamis.eyes.RED
 xi.dynamis.mobList[zoneID][118].eyes = xi.dynamis.eyes.GREEN
 xi.dynamis.mobList[zoneID][119].eyes = xi.dynamis.eyes.BLUE
 xi.dynamis.mobList[zoneID][122].eyes = xi.dynamis.eyes.GREEN

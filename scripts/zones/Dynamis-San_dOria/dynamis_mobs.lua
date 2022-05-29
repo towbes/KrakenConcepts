@@ -46,9 +46,9 @@ require("scripts/globals/zone")
 --    Ex. xi.dynamis.mobList[zoneID][MobIndex].mobchildren = {#WAR, #MNK, #WHM, #BLM, #RDM, #THF, #PLD, #DRK, #BST, #BRD, #RNG, #SAM, #NIN, #DRG, #SMN}
 --    Ex. For 2 Wars: xi.dynamis.mobList[zoneID][MobIndex].mobchildren = {2, nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, nil}
 --
--- 7.  xi.dynamis.mobList[zoneID][MobIndex].NMchildren is used to spawn specific NMs outlined in xi.dynamis.mobList[zoneID][MobIndex].info
+-- 7.  xi.dynamis.mobList[zoneID][MobIndex].NMChildren is used to spawn specific NMs outlined in xi.dynamis.mobList[zoneID][MobIndex].info
 --     MobIndex is the index of the mob spawning the NM, MobIndex(NM) points to which NM in .info it should spawn.
---     Ex. xi.dynamis.mobList[zoneID][MobIndex].NMchildren = {MobIndex(NM1), MobIndex(NM2), MobIndex(NM3)}
+--     Ex. xi.dynamis.mobList[zoneID][MobIndex].NMChildren = {MobIndex(NM1), MobIndex(NM2), MobIndex(NM3)}
 --
 -- 8. xi.dynamis.mobList[zoneID][MobIndex].patrolPath is used to set a specific path for a mob, if left blank for that MobIndex,
 --    the mob will not path on a predetermined course. If it is a statue, it will not path at all. You can add
@@ -75,7 +75,7 @@ xi.dynamis.mobList[zoneID] ={ } -- Ignore me, I just start the table.
 xi.dynamis.mobList[zoneID].zoneID = zone -- Ignore me, I just ensure .zoneID exists.
 xi.dynamis.mobList[zoneID].waveDefeatRequirements = { } -- Ignore me, I just start the table.
 xi.dynamis.mobList[zoneID].waveDefeatRequirements[1] = { } -- Ignore me, I just allow for wave 1 spawning.
-xi.dynamis.mobList[zoneID].maxWaves = 6 -- Ignore me because Oph told me to
+xi.dynamis.mobList[zoneID].maxWaves = 6 -- Put in number of max waves
 ----------------------------------------------------------------------------------------------------
 --                                  Setup of Parent Spawning                                      --
 ----------------------------------------------------------------------------------------------------
@@ -563,21 +563,21 @@ xi.dynamis.mobList[zoneID][149].mobchildren = { nil, nil, nil, nil, nil, nil, ni
 ------------------------------------------
 --            NM Child Spawn            --
 ------------------------------------------
--- xi.dynamis.mobList[zoneID][MobIndex].NMchildren = {MobIndex(NM1), MobIndex(NM2), MobIndex(NM3)}
+-- xi.dynamis.mobList[zoneID][MobIndex].NMChildren = {MobIndex(NM1), MobIndex(NM2), MobIndex(NM3)}
 -- boolean value = forceLink true/false
 
 --Specific Statues
-xi.dynamis.mobList[zoneID][18 ].NMchildren = { false, 19 }                   -- Squire Square N, Spawns another statue
-xi.dynamis.mobList[zoneID][20 ].NMchildren = { false, 21 }                   -- Squire Square E, Spawns another statue
-xi.dynamis.mobList[zoneID][99 ].NMchildren = { true,  100, 101 }             -- Courtyard/WD Alley connector +2 stats
-xi.dynamis.mobList[zoneID][147].NMchildren = { false, 148 }                  -- West Tent spawns one middle statue
-xi.dynamis.mobList[zoneID][149].NMchildren = { false, 150 }                  -- East Tent spawns one middle statue
+xi.dynamis.mobList[zoneID][18 ].NMChildren = { false, 19 }                   -- Squire Square N, Spawns another statue
+xi.dynamis.mobList[zoneID][20 ].NMChildren = { false, 21 }                   -- Squire Square E, Spawns another statue
+xi.dynamis.mobList[zoneID][99 ].NMChildren = { true,  100, 101 }             -- Courtyard/WD Alley connector +2 stats
+xi.dynamis.mobList[zoneID][147].NMChildren = { false, 148 }                  -- West Tent spawns one middle statue
+xi.dynamis.mobList[zoneID][149].NMChildren = { false, 150 }                  -- East Tent spawns one middle statue
 
 -- NMs
-xi.dynamis.mobList[zoneID][32 ].NMchildren = { true, 151 }                                    -- Eastgate NM Wyrmgnasher Bjakdek (DRG)
-xi.dynamis.mobList[zoneID][70 ].NMchildren = { true, 152 }                                    -- Westgate NM Reapertongue Gadguok (SMN)
-xi.dynamis.mobList[zoneID][93 ].NMchildren = { true, 153, 94, 95 }                            -- Manor NM Voidstreaker Butchnotch (NIN) as well as N/S manor pop statues
-xi.dynamis.mobList[zoneID][109].NMchildren = { true, 154, 155, 110, 111, 112, 113, 114, 115 } -- Megaboss spawns twin BRD NMs Battlechoir Gitchfotch and Soulsender Fugbrag and a bunch of statues
+xi.dynamis.mobList[zoneID][32 ].NMChildren = { true, 151 }                                    -- Eastgate NM Wyrmgnasher Bjakdek (DRG)
+xi.dynamis.mobList[zoneID][70 ].NMChildren = { true, 152 }                                    -- Westgate NM Reapertongue Gadguok (SMN)
+xi.dynamis.mobList[zoneID][93 ].NMChildren = { true, 153, 94, 95 }                            -- Manor NM Voidstreaker Butchnotch (NIN) as well as N/S manor pop statues
+xi.dynamis.mobList[zoneID][109].NMChildren = { true, 154, 155, 110, 111, 112, 113, 114, 115 } -- Megaboss spawns twin BRD NMs Battlechoir Gitchfotch and Soulsender Fugbrag and a bunch of statues
 
 ------------------------------------------
 --          Mob Position Info           --
@@ -819,28 +819,22 @@ xi.dynamis.mobList[zoneID][146].patrolPath = { -200, -2, 87,     -193, -2, 69,  
 -- xi.dynamis.mobList[zoneID][MobIndex].eyes = xi.dynamis.eyes.RED -- Flags for red eyes. (TE)
 
 xi.dynamis.mobList[zoneID][6  ].eyes = xi.dynamis.eyes.GREEN
-xi.dynamis.mobList[zoneID][7  ].eyes = xi.dynamis.eyes.RED
-xi.dynamis.mobList[zoneID][9  ].eyes = xi.dynamis.eyes.RED
 xi.dynamis.mobList[zoneID][10 ].eyes = xi.dynamis.eyes.GREEN
 xi.dynamis.mobList[zoneID][12 ].eyes = xi.dynamis.eyes.BLUE
 xi.dynamis.mobList[zoneID][14 ].eyes = xi.dynamis.eyes.GREEN
 xi.dynamis.mobList[zoneID][15 ].eyes = xi.dynamis.eyes.BLUE
-xi.dynamis.mobList[zoneID][26 ].eyes = xi.dynamis.eyes.RED
 xi.dynamis.mobList[zoneID][32 ].eyes = xi.dynamis.eyes.GREEN
 xi.dynamis.mobList[zoneID][34 ].eyes = xi.dynamis.eyes.BLUE
 xi.dynamis.mobList[zoneID][35 ].eyes = xi.dynamis.eyes.GREEN
 xi.dynamis.mobList[zoneID][38 ].eyes = xi.dynamis.eyes.GREEN
-xi.dynamis.mobList[zoneID][41 ].eyes = xi.dynamis.eyes.RED
 xi.dynamis.mobList[zoneID][44 ].eyes = xi.dynamis.eyes.BLUE
 xi.dynamis.mobList[zoneID][47 ].eyes = xi.dynamis.eyes.GREEN
 xi.dynamis.mobList[zoneID][52 ].eyes = xi.dynamis.eyes.BLUE
 xi.dynamis.mobList[zoneID][59 ].eyes = xi.dynamis.eyes.BLUE
 xi.dynamis.mobList[zoneID][60 ].eyes = xi.dynamis.eyes.GREEN
 xi.dynamis.mobList[zoneID][62 ].eyes = xi.dynamis.eyes.GREEN
-xi.dynamis.mobList[zoneID][64 ].eyes = xi.dynamis.eyes.RED
 xi.dynamis.mobList[zoneID][70 ].eyes = xi.dynamis.eyes.GREEN
 xi.dynamis.mobList[zoneID][72 ].eyes = xi.dynamis.eyes.BLUE
-xi.dynamis.mobList[zoneID][74 ].eyes = xi.dynamis.eyes.RED
 xi.dynamis.mobList[zoneID][76 ].eyes = xi.dynamis.eyes.GREEN
 xi.dynamis.mobList[zoneID][78 ].eyes = xi.dynamis.eyes.BLUE
 xi.dynamis.mobList[zoneID][79 ].eyes = xi.dynamis.eyes.GREEN
@@ -851,7 +845,6 @@ xi.dynamis.mobList[zoneID][85 ].eyes = xi.dynamis.eyes.BLUE
 xi.dynamis.mobList[zoneID][86 ].eyes = xi.dynamis.eyes.GREEN
 xi.dynamis.mobList[zoneID][91 ].eyes = xi.dynamis.eyes.BLUE
 xi.dynamis.mobList[zoneID][92 ].eyes = xi.dynamis.eyes.GREEN
-xi.dynamis.mobList[zoneID][93 ].eyes = xi.dynamis.eyes.RED
 xi.dynamis.mobList[zoneID][97 ].eyes = xi.dynamis.eyes.BLUE
 xi.dynamis.mobList[zoneID][103].eyes = xi.dynamis.eyes.BLUE
 xi.dynamis.mobList[zoneID][104].eyes = xi.dynamis.eyes.BLUE
