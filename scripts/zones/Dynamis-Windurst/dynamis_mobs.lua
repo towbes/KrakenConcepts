@@ -10,7 +10,6 @@
 ----------------------------------------------------------------------------------------------------
 require("scripts/globals/status")
 require("scripts/globals/utils")
-require("scripts/globals/dynamis")
 require("scripts/globals/zone")
 ----------------------------------------------------------------------------------------------------
 --                                      Instructions                                              --
@@ -50,9 +49,9 @@ require("scripts/globals/zone")
 --    Ex. xi.dynamis.mobList[zoneID][MobIndex].mobchildren = {#WAR, #MNK, #WHM, #BLM, #RDM, #THF, #PLD, #DRK, #BST, #BRD, #RNG, #SAM, #NIN, #DRG, #SMN}
 --    Ex. For 2 Wars: xi.dynamis.mobList[zoneID][MobIndex].mobchildren = {2, nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, nil}
 --
--- 7.  xi.dynamis.mobList[zoneID][MobIndex].NMChildren is used to spawn specific NMs outlined in xi.dynamis.mobList[zoneID][MobIndex].info
+-- 7.  xi.dynamis.mobList[zoneID][MobIndex].nmchildren is used to spawn specific NMs outlined in xi.dynamis.mobList[zoneID][MobIndex].info
 --     MobIndex is the index of the mob spawning the NM, MobIndex(NM) points to which NM in .info it should spawn.
---     Ex. xi.dynamis.mobList[zoneID][MobIndex].NMChildren = {MobIndex(NM1), MobIndex(NM2), MobIndex(NM3)}
+--     Ex. xi.dynamis.mobList[zoneID][MobIndex].nmchildren = {MobIndex(NM1), MobIndex(NM2), MobIndex(NM3)}
 --
 -- 8. xi.dynamis.mobList[zoneID][MobIndex].patrolPath is used to set a specific path for a mob, if left blank for that MobIndex,
 --    the mob will not path on a predetermined course. If it is a statue, it will not path at all. You can add
@@ -74,12 +73,22 @@ require("scripts/globals/zone")
 --                               Dependency Setup Section (IGNORE)                                --
 ----------------------------------------------------------------------------------------------------
 local zone = xi.zone.DYNAMIS_WINDURST
-mobList = mobList or { }
-xi.dynamis.mobList[zoneID] ={ } -- Ignore me, I just start the table.
-xi.dynamis.mobList[zoneID].zoneID = zone -- Ignore me, I just ensure .zoneID exists.
-xi.dynamis.mobList[zoneID].waveDefeatRequirements = { } -- Ignore me, I just start the table.
-xi.dynamis.mobList[zoneID].waveDefeatRequirements[1] = { } -- Ignore me, I just allow for wave 1 spawning.
+local i = 1
+local iWaves = 0
+local zone = GetZone(zoneID)
+xi = xi or {} -- Ignore me I just set the global.
+xi.dynamis = xi.dynamis or {} -- Ignore me I just set the global.
+xi.dynamis.mobList = xi.dynamis.mobList or { } -- Ignore me I just set the global.
+xi.dynamis.mobList[zoneID] = { } -- Ignore me, I just start the table.
+xi.dynamis.mobList[zoneID].zoneID = zoneID -- Ignore me, I just ensure .zoneIDID exists.
+xi.dynamis.mobList[zoneID].nmchildren = { }
+xi.dynamis.mobList[zoneID].mobchildren = { }
 xi.dynamis.mobList[zoneID].maxWaves = 10 -- Put in number of max waves
+
+while i < 156 do
+    table.insert(xi.dynamis.mobList[zoneID], i, { id = i})
+    i = i + 1
+end
 
 ----------------------------------------------------------------------------------------------------
 --                                  Setup of Parent Spawning                                      --
@@ -259,15 +268,19 @@ xi.dynamis.mobList[zoneID][156].info = { "NM", "Xoo Kaza the Solemn",     "Yagud
 --------------------------------------------
 --xi.dynamis.mobList[zoneID].waveDefeatRequirements[2] = {zone:getLocalVar("MegaBoss_Killed") == 1}
 
-xi.dynamis.mobList[zoneID].waveDefeatRequirements[2 ] = { zone:getLocalVar("MegaBoss_Killed") == 1} -- Spawns statues when boss dies
-xi.dynamis.mobList[zoneID].waveDefeatRequirements[3 ] = { zone:getLocalVar("Wuu_killed") == 1 } -- Wuu Qoho the Razorclaw spawns 2 Statues at Heavens Tower
-xi.dynamis.mobList[zoneID].waveDefeatRequirements[4 ] = { zone:getLocalVar("Xoo_killed") == 1 } -- Xoo Kaza the Solemn NM spawns 2 Statues at Heavens Tower
-xi.dynamis.mobList[zoneID].waveDefeatRequirements[5 ] = { zone:getLocalVar("Haa_killed") == 1 } -- Haa Pevi the Stentorian NM spawns 2 Statues at Heavens Tower
-xi.dynamis.mobList[zoneID].waveDefeatRequirements[6 ] = { zone:getLocalVar("Wuu_killed") == 1, zone:getLocalVar("Xoo_killed") == 1, zone:getLocalVar("Haa_killed") == 1} -- Spawn main Heavens Tower statues + the RDM NM on 3 NM deaths
-xi.dynamis.mobList[zoneID].waveDefeatRequirements[7 ] = { zone:getLocalVar("58_killed" == 1) } -- pops 59-61 on bridge when defeated
-xi.dynamis.mobList[zoneID].waveDefeatRequirements[8 ] = { zone:getLocalVar("101_killed") == 1 } -- pops 102/103 under bridge when defeated
-xi.dynamis.mobList[zoneID].waveDefeatRequirements[9 ] = { zone:getLocalVar("57_killed" ) == 1 } -- pops 54/55 under bridge when defeated
-xi.dynamis.mobList[zoneID].waveDefeatRequirements[10] = { zone:getLocalVar("Loo_killed") == 1 } -- Pops zone boss
+xi.dynamis.mobList[zoneID].waveDefeatRequirements =
+{
+    {}, -- Do not touch this is wave 1
+    {"MegaBoss_Killed"}, -- Spawns statues when boss dies
+    {"Wuu_killed"}, -- Wuu Qoho the Razorclaw spawns 2 Statues at Heavens Tower
+    {"Xoo_killed"}, -- Xoo Kaza the Solemn NM spawns 2 Statues at Heavens Tower
+    {"Haa_killed"}, -- Haa Pevi the Stentorian NM spawns 2 Statues at Heavens Tower
+    {"Wuu_killed", "Xoo_killed", "Haa_killed"} -- Spawn main Heavens Tower statues + the RDM NM on 3 NM deaths
+    {"58_killed"}, -- pops 59-61 on bridge when defeated
+    {"101_killed"}, -- pops 102/103 under bridge when defeated
+    {"57_killed" }, -- pops 54/55 under bridge when defeated
+    {"Loo_killed"} -- Pops zone boss
+}
 
 ------------------------------------------
 --            Wave Spawning             --
@@ -276,7 +289,8 @@ xi.dynamis.mobList[zoneID].waveDefeatRequirements[10] = { zone:getLocalVar("Loo_
 --xi.dynamis.mobList[zoneID][MobIndex].waves = { 1,nil,nil }
 
 -- Spawns on zone entry
-xi.dynamis.mobList[zoneID].wave1 = {
+xi.dynamis.mobList[zoneID][1].wave =
+{
     1  ,    -- 001-Y/A
     2  ,    -- 002-Y/A
     3  ,    -- 003-Y/A
@@ -357,7 +371,8 @@ xi.dynamis.mobList[zoneID].wave1 = {
 }
 
 -- Spawns statues when boss dies
-xi.dynamis.mobList[zoneID].wave2 = {
+xi.dynamis.mobList[zoneID][2].wave =
+{
     126,    -- 126-Y/M(HP)
     127,    -- 127-Y/M(MP)
     128,    -- 128-Y/A
@@ -386,47 +401,55 @@ xi.dynamis.mobList[zoneID].wave2 = {
 }
 
 -- Wuu Qoho the Razorclaw spawns 2 Statues at Heavens Tower
-xi.dynamis.mobList[zoneID].wave3 = {
+xi.dynamis.mobList[zoneID][3].wave =
+{
     108,    -- 108-Y/A
     109     -- 109-Y/A
 }
 
 -- Xoo Kaza the Solemn NM spawns 2 Statues at Heavens Tower
-xi.dynamis.mobList[zoneID].wave4 = {
+xi.dynamis.mobList[zoneID][4].wave =
+{
     110,    -- 110-Y/M(HP)
     111	    -- 111-Y/M(MP)
 }
 
 -- Haa Pevi the Stentorian NM spawns 2 Statues at Heavens Tower
-xi.dynamis.mobList[zoneID].wave5 = {
+xi.dynamis.mobList[zoneID][5].wave =
+{
     113,    -- 113-Y/A
     112	    -- 112-Y/A
 }
 
 -- Spawn main Heavens Tower statues + the RDM NM on 3 NM deaths
-xi.dynamis.mobList[zoneID].wave6 = {
+xi.dynamis.mobList[zoneID][6].wave =
+{
     114,    -- 114-Y/M
     115,    -- 115-Y/M
     116     -- 116-Y/A.Idol
 }
 
-xi.dynamis.mobList[zoneID].wave7 = {
+xi.dynamis.mobList[zoneID][7].wave =
+{
     59,     -- 059-Y/A
     60,     -- 060-Y/M(MP)
     61      -- 061-Y/A
 }
 
-xi.dynamis.mobList[zoneID].wave8 = {
+xi.dynamis.mobList[zoneID][8].wave =
+{
     103,    -- 103-Y/A
     102	    -- 102-Y/A
 }
 
-xi.dynamis.mobList[zoneID].wave9 = {
+xi.dynamis.mobList[zoneID][9].wave =
+{
     55,     -- 055-Y/A
     54	    -- 054-Y/A
 }
 
-xi.dynamis.mobList[zoneID].wave10 = {
+xi.dynamis.mobList[zoneID][10].wave =
+{
     121     -- 121-Replica NM (Tzee Xicu Idol)
 }
 
@@ -566,30 +589,30 @@ xi.dynamis.mobList[zoneID][150].mobchildren = {   1,   1, nil,   1, nil, nil,   
 ------------------------------------------
 --            NM Child Spawn            --
 ------------------------------------------
--- xi.dynamis.mobList[zoneID][MobIndex].NMChildren = {MobIndex(NM1), MobIndex(NM2), MobIndex(NM3)}
+-- xi.dynamis.mobList[zoneID][MobIndex].nmchildren = {MobIndex(NM1), MobIndex(NM2), MobIndex(NM3)}
 -- boolean value = forceLink true/false
 
-xi.dynamis.mobList[zoneID][21 ].NMChildren = { true, 22, 23 }
-xi.dynamis.mobList[zoneID][24 ].NMChildren = { false, 25 }
-xi.dynamis.mobList[zoneID][32 ].NMChildren = { true, 33 }
-xi.dynamis.mobList[zoneID][35 ].NMChildren = { true, 36, 37 }
-xi.dynamis.mobList[zoneID][41 ].NMChildren = { false, 42 }
-xi.dynamis.mobList[zoneID][46 ].NMChildren = { true, 47, 48, 49, 50, 155 }
-xi.dynamis.mobList[zoneID][97 ].NMChildren = { false, 98 }
-xi.dynamis.mobList[zoneID][98 ].NMChildren = { false, 99 }
-xi.dynamis.mobList[zoneID][99 ].NMChildren = { false, 100 }
-xi.dynamis.mobList[zoneID][93 ].NMChildren = { true, 153 }
-xi.dynamis.mobList[zoneID][89 ].NMChildren = { false, 90 }
-xi.dynamis.mobList[zoneID][91 ].NMChildren = { false, 92 }
-xi.dynamis.mobList[zoneID][66 ].NMChildren = { true, 67, 68 }
-xi.dynamis.mobList[zoneID][84 ].NMChildren = { true, 85, 86, 87, 156 }
-xi.dynamis.mobList[zoneID][80 ].NMChildren = { false, 81, 82, 83 }
-xi.dynamis.mobList[zoneID][69 ].NMChildren = { true, 70, 71 }
-xi.dynamis.mobList[zoneID][72 ].NMChildren = { false, 73 }
-xi.dynamis.mobList[zoneID][74 ].NMChildren = { false, 75, 76 }
-xi.dynamis.mobList[zoneID][77 ].NMChildren = { false, 78, 79 }
-xi.dynamis.mobList[zoneID][116].NMChildren = { true, 117, 118, false, 119, 120}
-xi.dynamis.mobList[zoneID][121].NMChildren = { true, 122, 123, 124, 125, 151, 152 }
+xi.dynamis.mobList[zoneID][21 ].nmchildren = { true, 22, 23 }
+xi.dynamis.mobList[zoneID][24 ].nmchildren = { false, 25 }
+xi.dynamis.mobList[zoneID][32 ].nmchildren = { true, 33 }
+xi.dynamis.mobList[zoneID][35 ].nmchildren = { true, 36, 37 }
+xi.dynamis.mobList[zoneID][41 ].nmchildren = { false, 42 }
+xi.dynamis.mobList[zoneID][46 ].nmchildren = { true, 47, 48, 49, 50, 155 }
+xi.dynamis.mobList[zoneID][97 ].nmchildren = { false, 98 }
+xi.dynamis.mobList[zoneID][98 ].nmchildren = { false, 99 }
+xi.dynamis.mobList[zoneID][99 ].nmchildren = { false, 100 }
+xi.dynamis.mobList[zoneID][93 ].nmchildren = { true, 153 }
+xi.dynamis.mobList[zoneID][89 ].nmchildren = { false, 90 }
+xi.dynamis.mobList[zoneID][91 ].nmchildren = { false, 92 }
+xi.dynamis.mobList[zoneID][66 ].nmchildren = { true, 67, 68 }
+xi.dynamis.mobList[zoneID][84 ].nmchildren = { true, 85, 86, 87, 156 }
+xi.dynamis.mobList[zoneID][80 ].nmchildren = { false, 81, 82, 83 }
+xi.dynamis.mobList[zoneID][69 ].nmchildren = { true, 70, 71 }
+xi.dynamis.mobList[zoneID][72 ].nmchildren = { false, 73 }
+xi.dynamis.mobList[zoneID][74 ].nmchildren = { false, 75, 76 }
+xi.dynamis.mobList[zoneID][77 ].nmchildren = { false, 78, 79 }
+xi.dynamis.mobList[zoneID][116].nmchildren = { true, 117, 118, false, 119, 120}
+xi.dynamis.mobList[zoneID][121].nmchildren = { true, 122, 123, 124, 125, 151, 152 }
 
 ------------------------------------------
 --          Mob Position Info           --
@@ -780,7 +803,6 @@ xi.dynamis.mobList[zoneID][105].patrolPath = {  42,  -8,  219,      45,  -8,  21
 ------------------------------------------
 -- xi.dynamis.mobList[zoneID][MobIndex].eyes = xi.dynamis.eyes.BLUE -- Flags for blue eyes. (HP)
 -- xi.dynamis.mobList[zoneID][MobIndex].eyes = xi.dynamis.eyes.GREEN -- Flags for green eyes. (MP)
--- xi.dynamis.mobList[zoneID][MobIndex].eyes = xi.dynamis.eyes.RED -- Flags for red eyes. (TE)
 
 xi.dynamis.mobList[zoneID][6  ].eyes = xi.dynamis.eyes.BLUE
 xi.dynamis.mobList[zoneID][8  ].eyes = xi.dynamis.eyes.GREEN
@@ -827,6 +849,7 @@ xi.dynamis.mobList[zoneID][139].eyes = xi.dynamis.eyes.GREEN
 ------------------------------------------
 -- xi.dynamis.mobList[zoneID][MobIndex].timeExtension = 15
 
+xi.dynamis.mobList[zoneID].timeExtensionList = {1, 19, 41, 154, 113, 162, 163, 164}
 xi.dynamis.mobList[zoneID][8  ].timeExtension = 20 --Avatar Icon
 xi.dynamis.mobList[zoneID][18 ].timeExtension = 20 --Avatar Icon
 xi.dynamis.mobList[zoneID][31 ].timeExtension = 10 --Avatar Icon

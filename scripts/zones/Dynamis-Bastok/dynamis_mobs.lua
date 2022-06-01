@@ -6,7 +6,6 @@
 ----------------------------------------------------------------------------------------------------
 require("scripts/globals/status")
 require("scripts/globals/utils")
-require("scripts/globals/dynamis")
 require("scripts/globals/zone")
 ----------------------------------------------------------------------------------------------------
 --                                      Instructions                                              --
@@ -46,9 +45,9 @@ require("scripts/globals/zone")
 --    Ex. xi.dynamis.mobList[zoneID][MobIndex].mobchildren = {#WAR, #MNK, #WHM, #BLM, #RDM, #THF, #PLD, #DRK, #BST, #BRD, #RNG, #SAM, #NIN, #DRG, #SMN}
 --    Ex. For 2 Wars: xi.dynamis.mobList[zoneID][MobIndex].mobchildren = {2, nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, nil}
 --
--- 7.  xi.dynamis.mobList[zoneID][MobIndex].NMChildren is used to spawn specific NMs outlined in xi.dynamis.mobList[zoneID][MobIndex].info
+-- 7.  xi.dynamis.mobList[zoneID][MobIndex].nmchildren is used to spawn specific NMs outlined in xi.dynamis.mobList[zoneID][MobIndex].info
 --     MobIndex is the index of the mob spawning the NM, MobIndex(NM) points to which NM in .info it should spawn.
---     Ex. xi.dynamis.mobList[zoneID][MobIndex].NMChildren = {MobIndex(NM1), MobIndex(NM2), MobIndex(NM3)}
+--     Ex. xi.dynamis.mobList[zoneID][MobIndex].nmchildren = {MobIndex(NM1), MobIndex(NM2), MobIndex(NM3)}
 --
 -- 8. xi.dynamis.mobList[zoneID][MobIndex].patrolPath is used to set a specific path for a mob, if left blank for that MobIndex,
 --    the mob will not path on a predetermined course. If it is a statue, it will not path at all. You can add
@@ -70,12 +69,22 @@ require("scripts/globals/zone")
 --                               Dependency Setup Section (IGNORE)                                --
 ----------------------------------------------------------------------------------------------------
 local zone = xi.zone.DYNAMIS_BASTOK
-mobList = mobList or { }
-xi.dynamis.mobList[zoneID] ={ } -- Ignore me, I just start the table.
-xi.dynamis.mobList[zoneID].zoneID = zone -- Ignore me, I just ensure .zoneID exists.
-xi.dynamis.mobList[zoneID].waveDefeatRequirements = { } -- Ignore me, I just start the table.
-xi.dynamis.mobList[zoneID].waveDefeatRequirements[1] = { } -- Ignore me, I just allow for wave 1 spawning.
+local i = 1
+local iWaves = 0
+local zone = GetZone(zoneID)
+xi = xi or {} -- Ignore me I just set the global.
+xi.dynamis = xi.dynamis or {} -- Ignore me I just set the global.
+xi.dynamis.mobList = xi.dynamis.mobList or { } -- Ignore me I just set the global.
+xi.dynamis.mobList[zoneID] = { } -- Ignore me, I just start the table.
+xi.dynamis.mobList[zoneID].zoneID = zoneID -- Ignore me, I just ensure .zoneIDID exists.
+xi.dynamis.mobList[zoneID].nmchildren = { }
+xi.dynamis.mobList[zoneID].mobchildren = { }
 xi.dynamis.mobList[zoneID].maxWaves = 3 -- Put in number of max waves
+
+while i < 164 do
+    table.insert(xi.dynamis.mobList[zoneID], i, { id = i})
+    i = i + 1
+end
 
 ----------------------------------------------------------------------------------------------------
 --                                  Setup of Parent Spawning                                      --
@@ -230,7 +239,7 @@ xi.dynamis.mobList[zoneID][141].info = {"Statue", "Adamantking Effigy", nil, nil
 xi.dynamis.mobList[zoneID][142].info = {"Statue", "Adamantking Effigy", nil, nil, nil} -- (142-Q)
 
 -- NM's and Megaboss Quadav
-xi.dynamis.mobList[zoneID][110].info = {"NM", "Gu'Dha Effigy", nil, nil, "MegaBoss_Killed"} -- 110-Replica NM (Gu'Dha Effigy)(30)
+xi.dynamis.mobList[zoneID][110].info = {"NM", "Gu'Dha Effigy", nil, nil, "MegaBoss_Killed"} -- ( 110 ) Replica NM (Gu'Dha Effigy)(30)
 
 xi.dynamis.mobList[zoneID][151].info = {"NM", "Aa'Nyu Dismantler",       "Quadav", "DRK", "AaNyu_killed"} -- Aa'Nyu Dismantler
 xi.dynamis.mobList[zoneID][152].info = {"NM", "Be'Ebo Tortoisedriver",   "Quadav", "BST", "BeEbo_killed"} -- Be'Ebo Tortoisedriver
@@ -245,9 +254,9 @@ xi.dynamis.mobList[zoneID][159].info = {"NM", "Effigy Shield", "Quadav", "BRD", 
 xi.dynamis.mobList[zoneID][160].info = {"NM", "Effigy Shield", "Quadav", "DRK", nil } -- Effigy Shield
 xi.dynamis.mobList[zoneID][161].info = {"NM", "Effigy Shield", "Quadav", "SAM", nil } -- Effigy Shield
 
-xi.dynamis.mobList[zoneID][162].info = {nil, "Vanguard Vindicator", "Quadav", "WAR", nil } -- 10min TE
-xi.dynamis.mobList[zoneID][163].info = {nil, "Vanguard Constable", "Quadav", "WHM", nil } -- 10min TE
-xi.dynamis.mobList[zoneID][164].info = {nil, "Vanguard Militant", "Quadav", "MNK", nil } -- 10min TE
+xi.dynamis.mobList[zoneID][162].info = {"TE normal", "Vanguard Vindicator", "Quadav", "WAR", nil } -- 10min TE
+xi.dynamis.mobList[zoneID][163].info = {"TE normal", "Vanguard Constable",  "Quadav", "WHM", nil } -- 10min TE
+xi.dynamis.mobList[zoneID][164].info = {"TE normal", "Vanguard Militant",   "Quadav", "MNK", nil } -- 10min TE
 
 
 ----------------------------------------------------------------------------------------------------
@@ -259,8 +268,12 @@ xi.dynamis.mobList[zoneID][164].info = {nil, "Vanguard Militant", "Quadav", "MNK
 --------------------------------------------
 --xi.dynamis.mobList[zoneID].waveDefeatRequirements[2] = {zone:getLocalVar("MegaBoss_Killed") == 1}
 
-xi.dynamis.mobList[zoneID].waveDefeatRequirements[2] = { zone:getLocalVar("KoDho_killed") == 1, zone:getLocalVar("GiPha_killed") == 1, zone:getLocalVar("ZeVho_killed") == 1 } -- 3 NMS to spawn boss
-xi.dynamis.mobList[zoneID].waveDefeatRequirements[3] = { zone:getLocalVar("MegaBoss_Killed") == 1 } -- Spawans wave after megaboss dies
+xi.dynamis.mobList[zoneID].waveDefeatRequirements =
+{
+    {}, -- Do not touch this is wave 1
+    {"KoDho_killed", "GiPha_killed", "ZeVho_killed"}, -- 3 NMs to spawn Boss
+    {"MegaBoss_Killed"} -- Spawns wave after boss dies
+}
 
 ------------------------------------------
 --            Wave Spawning             --
@@ -268,148 +281,150 @@ xi.dynamis.mobList[zoneID].waveDefeatRequirements[3] = { zone:getLocalVar("MegaB
 ------------------------------------------
 --xi.dynamis.mobList[zoneID].wave# = { MobIndex#1, MobIndex#2, MobIndex#3 }
 
-xi.dynamis.mobList[zoneID].wave1 = {
-    1  , -- 001-G/R
-    2  , -- 002-G/R
-    3  , -- 003-G/R
-    4  , -- 004-G/R
-    5  , -- 005-G/R
-    6  , -- 006-G/R
-    7  , -- 007-G/R
-    8  , -- 008-G/R
-    9  , -- 009-G/R
-    10 , -- 010-G/R
-    11 , -- 011-G/R
-    12 , -- 012-G/R
-    13 , -- 013-G/R
-    14 , -- 014-G/R
-    15 , -- 015-G/R
-    16 , -- 016-G/R
-    17 , -- 017-G/R
-    18 , -- 018-G/R
-    19 , -- 019-G/R
-    20 , -- 020-G/R
-    21 , -- 021-G/R
-    22 , -- 022-G/R
-    23 , -- 023-G/R
-    24 , -- 024-G/R
-    25 , -- 025-G/R
-    27 , -- 027-G/R
-    28 , -- 028-G/R
-    32 , -- 032-G/R
-    33 , -- 033-G/R
-    34 , -- 034-G/R
-    35 , -- 035-G/R
-    36 , -- 036-G/R
-    37 , -- 037-G/R
-    38 , -- 038-G/R
-    39 , -- 039-G/R
-    40 , -- 040-G/R
-    41 , -- 041-G/R
-    42 , -- 042-G/R
-    43 , -- 043-G/R
-    44 , -- 044-G/S
-    45 , -- 045-G/R
-    46 , -- 046-G/R
-    47 , -- 047-G/R
-    48 , -- 048-G/R
-    49 , -- 049-G/R
-    50 , -- 050-G/R
-    51 , -- 051-G/R
-    52 , -- 052-G/R
-    53 , -- 053-G/R
-    55 , -- 055-G/R
-    56 , -- 056-G/R
-    57 , -- 057-G/R
-    58 , -- 058-G/R
-    59 , -- 059-G/R
-    60 , -- 060-G/R
-    61 , -- 061-G/R
-    62 , -- 062-G/R
-    63 , -- 063-G/R
-    64 , -- 064-G/S
-    65 , -- 065-G/R
-    66 , -- 066-G/R
-    67 , -- 067-G/R
-    68 , -- 068-G/R
-    69 , -- 069-G/R
-    70 , -- 070-G/R
-    71 , -- 071-G/R
-    72 , -- 072-G/R
-    73 , -- 073-G/R
-    74 , -- 074-G/R
-    75 , -- 075-G/R
-    76 , -- 076-G/R
-    77 , -- 077-G/R
-    78 , -- 078-G/R
-    79 , -- 079-G/R
-    80 , -- 080-G/R
-    81 , -- 081-G/R
-    82 , -- 082-G/R
-    83 , -- 083-G/R
-    84 , -- 084-G/R
-    85 , -- 085-G/R
-    86 , -- 086-G/R
-    87 , -- 087-G/R
-    88 , -- 088-G/R
-    90 , -- 090-G/R
-    91 , -- 091-G/R
-    93 , -- 093-G/R
-    94 , -- 094-G/R
-    95 , -- 095-G/R
-    96 , -- 096-G/R
-    97 , -- 097-G/R
-    98 , -- 098-G/R
-    99 , -- 099-G/R
-    100, -- 100-G/R
-    101, -- 101-G/R
-    102, -- 102-G/R
-    103, -- 103-G/R
-    104, -- 104-G/R
-    105, -- 105-G/R
-    106, -- 106-G/R
-    107, -- 107-G/R
-    108, -- 108-G/R
-    109  -- 109-G/R
+xi.dynamis.mobList[zoneID][1].wave =
+{
+    1  , -- (001-Q)
+    2  , -- (002-Q)
+    3  , -- (003-Q)
+    4  , -- (004-Q)
+    5  , -- (005-Q)
+    6  , -- (006-Q)
+    7  , -- (007-Q)
+    8  , -- (008-Q)
+    9  , -- (009-Q)
+    10 , -- (010-Q)
+    11 , -- (011-Q)
+    12 , -- (012-Q)
+    13 , -- (013-Q)
+    14 , -- (014-Q)
+    15 , -- (015-Q)
+    16 , -- (016-Q)
+    17 , -- (017-Q)
+    18 , -- (018-Q)
+    19 , -- (019-Q)
+    20 , -- (020-Q)
+    21 , -- (021-Q)
+    22 , -- (022-Q)
+    23 , -- (023-Q)
+    24 , -- (024-Q)
+    25 , -- (025-Q)
+    27 , -- (027-Q)
+    28 , -- (028-Q)
+    32 , -- (032-Q)
+    33 , -- (033-Q)
+    34 , -- (034-Q)
+    35 , -- (035-Q)
+    36 , -- (036-Q)
+    37 , -- (037-Q)
+    38 , -- (038-Q)
+    39 , -- (039-Q)
+    40 , -- (040-Q)
+    41 , -- (041-Q)
+    42 , -- (042-Q)
+    43 , -- (043-Q)
+    44 , -- (044-Q)
+    45 , -- (045-Q)
+    46 , -- (046-Q)
+    47 , -- (047-Q)
+    48 , -- (048-Q)
+    49 , -- (049-Q)
+    50 , -- (050-Q)
+    51 , -- (051-Q)
+    52 , -- (052-Q)
+    53 , -- (053-Q)
+    55 , -- (055-Q)
+    56 , -- (056-Q)
+    57 , -- (057-Q)
+    58 , -- (058-Q)
+    59 , -- (059-Q)
+    60 , -- (060-Q)
+    61 , -- (061-Q)
+    62 , -- (062-Q)
+    63 , -- (063-Q)
+    64 , -- (064-Q)
+    65 , -- (065-Q)
+    66 , -- (066-Q)
+    67 , -- (067-Q)
+    68 , -- (068-Q)
+    69 , -- (069-Q)
+    70 , -- (070-Q)
+    71 , -- (071-Q)
+    72 , -- (072-Q)
+    73 , -- (073-Q)
+    74 , -- (074-Q)
+    75 , -- (075-Q)
+    76 , -- (076-Q)
+    77 , -- (077-Q)
+    78 , -- (078-Q)
+    79 , -- (079-Q)
+    80 , -- (080-Q)
+    81 , -- (081-Q)
+    82 , -- (082-Q)
+    83 , -- (083-Q)
+    84 , -- (084-Q)
+    85 , -- (085-Q)
+    86 , -- (086-Q)
+    87 , -- (087-Q)
+    88 , -- (088-Q)
+    90 , -- (090-Q)
+    91 , -- (091-Q)
+    93 , -- (093-Q)
+    94 , -- (094-Q)
+    95 , -- (095-Q)
+    96 , -- (096-Q)
+    97 , -- (097-Q)
+    98 , -- (098-Q)
+    99 , -- (099-Q)
+    100, -- (100-Q)
+    101, -- (101-Q)
+    102, -- (102-Q)
+    103, -- (103-Q)
+    104, -- (104-Q)
+    105, -- (105-Q)
+    106, -- (106-Q)
+    107, -- (107-Q)
+    108, -- (108-Q)
+    109  -- (109-Q)
 }
 
-xi.dynamis.mobList[zoneID].wave2 = {
-    110, -- 110-G/R
-    111  -- 111-G/R
+xi.dynamis.mobList[zoneID][2].wave =
+{
+    110  -- (110-Q)
 }
 
-xi.dynamis.mobList[zoneID].wave3 = {
-    112, -- 112-G/R
-    113, -- 113-Replica NM (Goblin Golem)(30)
-    114, -- 114-G/R
-    115, -- 115-G/R
-    116, -- 116-G/R
-    117, -- 117-G/R
-    118, -- 118-G/R
-    119, -- 119-G/R
-    120, -- 120-G/R
-    121, -- 121-G/R
-    122, -- 122-G/R
-    123, -- 123-G/R
-    124, -- 124-G/R
-    125, -- 125-G/R
-    126, -- 126-G/R
-    127, -- 127-G/R
-    128, -- 128-G/R
-    129, -- 129-G/R
-    130, -- 130-G/R
-    131, -- 131-G/R
-    132, -- 132-G/R
-    133, -- 133-G/R
-    134, -- 134-G/R
-    135, -- 135-G/R
-    136, -- 136-G/R
-    137, -- 137-G/R
-    138, -- 138-G/R
-    139, -- 139-G/R
-    140, -- 140-G/R
-    141, -- 141-G/R
-    142  -- 142-G/R
+xi.dynamis.mobList[zoneID][3].wave =
+{
+    112, -- (112-Q)
+    113, -- (  113  )
+    114, -- (114-Q)
+    115, -- (115-Q)
+    116, -- (116-Q)
+    117, -- (117-Q)
+    118, -- (118-Q)
+    119, -- (119-Q)
+    120, -- (120-Q)
+    121, -- (121-Q)
+    122, -- (122-Q)
+    123, -- (123-Q)
+    124, -- (124-Q)
+    125, -- (125-Q)
+    126, -- (126-Q)
+    127, -- (127-Q)
+    128, -- (128-Q)
+    129, -- (129-Q)
+    130, -- (130-Q)
+    131, -- (131-Q)
+    132, -- (132-Q)
+    133, -- (133-Q)
+    134, -- (134-Q)
+    135, -- (135-Q)
+    136, -- (136-Q)
+    137, -- (137-Q)
+    138, -- (138-Q)
+    139, -- (139-Q)
+    140, -- (140-Q)
+    141, -- (141-Q)
+    142  -- (142-Q)
 }
 
 ----------------------------------------------------------------------------------------------------
@@ -545,20 +560,21 @@ xi.dynamis.mobList[zoneID][142].mobchildren = { nil, nil, nil, nil, nil, nil, ni
 ------------------------------------------
 --            NM Child Spawn            --
 ------------------------------------------
--- xi.dynamis.mobList[zoneID][MobIndex].NMChildren = {MobIndex(NM1), MobIndex(NM2), MobIndex(NM3)}
+-- xi.dynamis.mobList[zoneID][MobIndex].nmchildren = {MobIndex(NM1), MobIndex(NM2), MobIndex(NM3)}
 -- boolean value = forceLink true/false
 
-xi.dynamis.mobList[zoneID][25 ].NMChildren = { true, 26 }
-xi.dynamis.mobList[zoneID][28 ].NMChildren = { true, 29, 30, 31 }
-xi.dynamis.mobList[zoneID][42 ].NMChildren = { true, 152 } -- Be'Ebo Tortoisedriver (BST)
-xi.dynamis.mobList[zoneID][53 ].NMChildren = { true, 54, 153 } -- Gi'Pha Manameister (BLM)
-xi.dynamis.mobList[zoneID][55 ].NMChildren = { true, 154 } -- Gu'Nhi Noondozer (SMN)
-xi.dynamis.mobList[zoneID][62 ].NMChildren = { true, 151 } -- Aa'Nyu Dismantler (DRK)
-xi.dynamis.mobList[zoneID][69 ].NMChildren = { true, 156 } -- Ke'Dhe Cannonball (MNK)
-xi.dynamis.mobList[zoneID][88 ].NMChildren = { true, 89 }
-xi.dynamis.mobList[zoneID][89 ].NMChildren = { true, 162, 163, 164 } -- Vanguard Vindicator/Constable/Militant (3x 10min TEs)
-xi.dynamis.mobList[zoneID][91 ].NMChildren = { true, 92, 155 } -- Ze'Vho Fallsplitter (DRK)
-xi.dynamis.mobList[zoneID][110].NMChildren = { true, 111, 157, 158, 159, 160, 161 } -- Boss spawns 5 NMs (Effigy Shields) and 1 statueC
+xi.dynamis.mobList[zoneID][25 ].nmchildren = { true, 26 }
+xi.dynamis.mobList[zoneID][28 ].nmchildren = { true, 29, 30, 31 }
+xi.dynamis.mobList[zoneID][42 ].nmchildren = { true, 152 } -- Be'Ebo Tortoisedriver (BST)
+xi.dynamis.mobList[zoneID][53 ].nmchildren = { true, 54, 153 } -- Gi'Pha Manameister (BLM)
+xi.dynamis.mobList[zoneID][55 ].nmchildren = { true, 154 } -- Gu'Nhi Noondozer (SMN)
+xi.dynamis.mobList[zoneID][62 ].nmchildren = { true, 151 } -- Aa'Nyu Dismantler (DRK)
+xi.dynamis.mobList[zoneID][69 ].nmchildren = { true, 156 } -- Ke'Dhe Cannonball (MNK)
+xi.dynamis.mobList[zoneID][88 ].nmchildren = { true, 89 }
+xi.dynamis.mobList[zoneID][89 ].nmchildren = { true, 162, 163, 164 } -- Vanguard Vindicator/Constable/Militant (3x 10min TEs)
+xi.dynamis.mobList[zoneID][91 ].nmchildren = { true, 92, 155 } -- Ze'Vho Fallsplitter (DRK)
+xi.dynamis.mobList[zoneID][110].nmchildren = { true, 111, 157, 158, 159, 160, 161 } -- Boss spawns 5 NMs (Effigy Shields) and 1 statue
+
 ------------------------------------------
 --          Mob Position Info           --
 -- Note: Must be setup for parent mobs, --
@@ -788,6 +804,7 @@ xi.dynamis.mobList[zoneID][139].eyes = xi.dynamis.eyes.BLUE
 ------------------------------------------
 -- xi.dynamis.mobList[zoneID][MobIndex].timeExtension = 15
 
+xi.dynamis.mobList[zoneID].timeExtensionList = {1, 19, 41, 154, 113, 162, 163, 164}
 xi.dynamis.mobList[zoneID][1  ].timeExtension = 20 -- Adamantking Effigy
 xi.dynamis.mobList[zoneID][19 ].timeExtension = 20 -- Adamantking Effigy
 xi.dynamis.mobList[zoneID][41 ].timeExtension = 20 -- Adamantking Effigy

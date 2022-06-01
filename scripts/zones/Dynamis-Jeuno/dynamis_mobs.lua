@@ -10,7 +10,6 @@
 ----------------------------------------------------------------------------------------------------
 require("scripts/globals/status")
 require("scripts/globals/utils")
-require("scripts/globals/dynamis")
 require("scripts/globals/zone")
 ----------------------------------------------------------------------------------------------------
 --                                      Instructions                                              --
@@ -50,9 +49,9 @@ require("scripts/globals/zone")
 --    Ex. xi.dynamis.mobList[zoneID][MobIndex].mobchildren = {#WAR, #MNK, #WHM, #BLM, #RDM, #THF, #PLD, #DRK, #BST, #BRD, #RNG, #SAM, #NIN, #DRG, #SMN}
 --    Ex. For 2 Wars: xi.dynamis.mobList[zoneID][MobIndex].mobchildren = {2, nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, nil}
 --
--- 7.  xi.dynamis.mobList[zoneID][MobIndex].NMChildren is used to spawn specific NMs outlined in xi.dynamis.mobList[zoneID][MobIndex].info
+-- 7.  xi.dynamis.mobList[zoneID][MobIndex].nmchildren is used to spawn specific NMs outlined in xi.dynamis.mobList[zoneID][MobIndex].info
 --     MobIndex is the index of the mob spawning the NM, MobIndex(NM) points to which NM in .info it should spawn.
---     Ex. xi.dynamis.mobList[zoneID][MobIndex].NMChildren = {MobIndex(NM1), MobIndex(NM2), MobIndex(NM3)}
+--     Ex. xi.dynamis.mobList[zoneID][MobIndex].nmchildren = {MobIndex(NM1), MobIndex(NM2), MobIndex(NM3)}
 --
 -- 8. xi.dynamis.mobList[zoneID][MobIndex].patrolPath is used to set a specific path for a mob, if left blank for that MobIndex,
 --    the mob will not path on a predetermined course. If it is a statue, it will not path at all. You can add
@@ -74,12 +73,22 @@ require("scripts/globals/zone")
 --                               Dependency Setup Section (IGNORE)                                --
 ----------------------------------------------------------------------------------------------------
 local zone = xi.zone.DYNAMIS_JEUNO
-mobList = mobList or { }
-xi.dynamis.mobList[zoneID] ={ } -- Ignore me, I just start the table.
-xi.dynamis.mobList[zoneID].zoneID = zone -- Ignore me, I just ensure .zoneID exists.
-xi.dynamis.mobList[zoneID].waveDefeatRequirements = { } -- Ignore me, I just start the table.
-xi.dynamis.mobList[zoneID].waveDefeatRequirements[1] = { } -- Ignore me, I just allow for wave 1 spawning.
+local i = 1
+local iWaves = 0
+local zone = GetZone(zoneID)
+xi = xi or {} -- Ignore me I just set the global.
+xi.dynamis = xi.dynamis or {} -- Ignore me I just set the global.
+xi.dynamis.mobList = xi.dynamis.mobList or { } -- Ignore me I just set the global.
+xi.dynamis.mobList[zoneID] = { } -- Ignore me, I just start the table.
+xi.dynamis.mobList[zoneID].zoneID = zoneID -- Ignore me, I just ensure .zoneIDID exists.
+xi.dynamis.mobList[zoneID].nmchildren = { }
+xi.dynamis.mobList[zoneID].mobchildren = { }
 xi.dynamis.mobList[zoneID].maxWaves = 6 -- Put in number of max waves
+
+while i < 183 do
+    table.insert(xi.dynamis.mobList[zoneID], i, { id = i})
+    i = i + 1
+end
 
 ----------------------------------------------------------------------------------------------------
 --                                  Setup of Parent Spawning                                      --
@@ -242,40 +251,40 @@ xi.dynamis.mobList[zoneID][149].info = {"Statue", "Goblin Replica", nil, nil, ni
 xi.dynamis.mobList[zoneID][150].info = {"Statue", "Goblin Replica", nil, nil, nil} -- 150-G/R(MP)
 
 -- NM's and Megaboss
-xi.dynamis.mobList[zoneID][113].info = {"NM", "Goblin Replica",               nil, nil,  "MegaBoss_Killed"   } -- 113-Replica NM (Goblin Golem)(30)
-xi.dynamis.mobList[zoneID][151].info = {"NM", "Gabblox Magpietongue",    "Goblin", "RDM",  nil  } -- Gabblox Magpietongue
-xi.dynamis.mobList[zoneID][152].info = {"NM", "Tufflix Loglimbs",        "Goblin", "PLD",  nil  } -- Tufflix Loglimbs
-xi.dynamis.mobList[zoneID][153].info = {"NM", "Cloktix Longnail",        "Goblin", "DRK",  nil  } -- Cloktix Longnail
-xi.dynamis.mobList[zoneID][154].info = {"NM", "Smeltix Thickhide",       "Goblin", "WAR",  nil  } -- Smeltix Thickhide
-xi.dynamis.mobList[zoneID][155].info = {"NM", "Jabkix Pigeonpecs",       "Goblin", "MNK",  nil  } -- Jabkix Pigeonpecs
-xi.dynamis.mobList[zoneID][156].info = {"NM", "Wasabix Callusdigit",     "Goblin", "SAM",  nil  } -- Wasabix Callusdigit
-xi.dynamis.mobList[zoneID][157].info = {"NM", "Hermitrix Toothrot",      "Goblin", "BLM",  nil  } -- Hermitrix Toothrot
-xi.dynamis.mobList[zoneID][158].info = {"NM", "Wyrmwix Snakespecs",      "Goblin", "DRG",  nil  } -- Wyrmwix Snakespecs
-xi.dynamis.mobList[zoneID][159].info = {"NM", "Morgmox Moldnoggin",      "Goblin", "SMN",  nil  } -- Morgmox Moldnoggin
-xi.dynamis.mobList[zoneID][160].info = {"NM", "Sparkspox Sweatbrow",     "Goblin", "WAR",  nil  } -- Sparkspox Sweatbrow
-xi.dynamis.mobList[zoneID][161].info = {"NM", "Elixmix Hooknose",        "Goblin", "RDM",  nil  } -- Elixmix Hooknose
-xi.dynamis.mobList[zoneID][162].info = {"NM", "Bandrix Rockjaw",         "Goblin", "THF",  nil  } -- Bandrix Rockjaw
-xi.dynamis.mobList[zoneID][163].info = {"NM", "Buffrix Eargone",         "Goblin", "PLD",  nil  } -- Buffrix Eargone
-xi.dynamis.mobList[zoneID][164].info = {"NM", "Humnox Drumbelly",        "Goblin", "BRD",  nil  } -- Humnox Drumbelly
-xi.dynamis.mobList[zoneID][165].info = {"NM", "Ticktox Beadyeyes",       "Goblin", "DRK",  nil  } -- Ticktox Beadyeyes
-xi.dynamis.mobList[zoneID][166].info = {"NM", "Lurklox Dhalmelneck",     "Goblin", "RNG",  nil  } -- Lurklox Dhalmelneck
-xi.dynamis.mobList[zoneID][167].info = {"NM", "Trailblix Goatmug",       "Goblin", "BST",  nil  } -- Trailblix Goatmug
-xi.dynamis.mobList[zoneID][168].info = {"NM", "Kikklix Longlegs",        "Goblin", "MNK",  nil  } -- Kikklix Longlegs
-xi.dynamis.mobList[zoneID][169].info = {"NM", "Karashix Swollenskull",   "Goblin", "SAM",  nil  } -- Karashix Swollenskull
-xi.dynamis.mobList[zoneID][170].info = {"NM", "Mortilox Wartpaws",       "Goblin", "SMN",  nil  } -- Mortilox Wartpaws
-xi.dynamis.mobList[zoneID][171].info = {"NM", "Rutrix Hamgams",          "Goblin", "BST",  nil  } -- Rutrix Hamgams
-xi.dynamis.mobList[zoneID][172].info = {"NM", "Snypestix Eaglebeak",     "Goblin", "NIN",  nil  } -- Snypestix Eaglebeak
-xi.dynamis.mobList[zoneID][173].info = {"NM", "Anvilix Sootwrists",      "Goblin", "WAR",  nil  } -- Anvilix Sootwrists
-xi.dynamis.mobList[zoneID][174].info = {"NM", "Bootrix Jaggedelbow",     "Goblin", "MNK",  nil  } -- Bootrix Jaggedelbow
-xi.dynamis.mobList[zoneID][175].info = {"NM", "Mobpix Mucousmouth",      "Goblin", "THF",  nil  } -- Mobpix Mucousmouth
-xi.dynamis.mobList[zoneID][176].info = {"NM", "Distilix Stickytoes",     "Goblin", "WHM",  nil  } -- Distilix Stickytoes
-xi.dynamis.mobList[zoneID][177].info = {"NM", "Eremix Snottynostril",    "Goblin", "BLM",  nil  } -- Eremix Snottynostril
-xi.dynamis.mobList[zoneID][178].info = {"NM", "Jabbrox Grannyguise",     "Goblin", "RDM",  nil  } -- Jabbrox Grannyguise
-xi.dynamis.mobList[zoneID][179].info = {"NM", "Scruffix Shaggychest",    "Goblin", "PLD",  nil  } -- Scruffix Shaggychest
-xi.dynamis.mobList[zoneID][180].info = {"NM", "Tymexox Ninefingers",     "Goblin", "DRK",  nil  } -- Tymexox Ninefingers
-xi.dynamis.mobList[zoneID][181].info = {"NM", "Blazox Boneybod",         "Goblin", "BST",  nil  } -- Blazox Boneybod
-xi.dynamis.mobList[zoneID][182].info = {"NM", "Prowlox Barrelbelly",     "Goblin", "RNG",  nil  } -- Prowlox Barrelbelly
-xi.dynamis.mobList[zoneID][183].info = {"NM", "Slystix Megapeepers",     "Goblin", "RNG",  nil  } -- Slystix Megapeepers
+xi.dynamis.mobList[zoneID][113].info = {"NM", "Goblin Replica",               nil, nil,  "MegaBoss_Killed"} -- 113-Replica NM (Goblin Golem)(30)
+xi.dynamis.mobList[zoneID][151].info = {"NM", "Gabblox Magpietongue",    "Goblin", "RDM",  nil} -- Gabblox Magpietongue
+xi.dynamis.mobList[zoneID][152].info = {"NM", "Tufflix Loglimbs",        "Goblin", "PLD",  nil} -- Tufflix Loglimbs
+xi.dynamis.mobList[zoneID][153].info = {"NM", "Cloktix Longnail",        "Goblin", "DRK",  nil} -- Cloktix Longnail
+xi.dynamis.mobList[zoneID][154].info = {"NM", "Smeltix Thickhide",       "Goblin", "WAR",  nil} -- Smeltix Thickhide
+xi.dynamis.mobList[zoneID][155].info = {"NM", "Jabkix Pigeonpecs",       "Goblin", "MNK",  nil} -- Jabkix Pigeonpecs
+xi.dynamis.mobList[zoneID][156].info = {"NM", "Wasabix Callusdigit",     "Goblin", "SAM",  nil} -- Wasabix Callusdigit
+xi.dynamis.mobList[zoneID][157].info = {"NM", "Hermitrix Toothrot",      "Goblin", "BLM",  nil} -- Hermitrix Toothrot
+xi.dynamis.mobList[zoneID][158].info = {"NM", "Wyrmwix Snakespecs",      "Goblin", "DRG",  nil} -- Wyrmwix Snakespecs
+xi.dynamis.mobList[zoneID][159].info = {"NM", "Morgmox Moldnoggin",      "Goblin", "SMN",  nil} -- Morgmox Moldnoggin
+xi.dynamis.mobList[zoneID][160].info = {"NM", "Sparkspox Sweatbrow",     "Goblin", "WAR",  nil} -- Sparkspox Sweatbrow
+xi.dynamis.mobList[zoneID][161].info = {"NM", "Elixmix Hooknose",        "Goblin", "RDM",  nil} -- Elixmix Hooknose
+xi.dynamis.mobList[zoneID][162].info = {"NM", "Bandrix Rockjaw",         "Goblin", "THF",  nil} -- Bandrix Rockjaw
+xi.dynamis.mobList[zoneID][163].info = {"NM", "Buffrix Eargone",         "Goblin", "PLD",  nil} -- Buffrix Eargone
+xi.dynamis.mobList[zoneID][164].info = {"NM", "Humnox Drumbelly",        "Goblin", "BRD",  nil} -- Humnox Drumbelly
+xi.dynamis.mobList[zoneID][165].info = {"NM", "Ticktox Beadyeyes",       "Goblin", "DRK",  nil} -- Ticktox Beadyeyes
+xi.dynamis.mobList[zoneID][166].info = {"NM", "Lurklox Dhalmelneck",     "Goblin", "RNG",  nil} -- Lurklox Dhalmelneck
+xi.dynamis.mobList[zoneID][167].info = {"NM", "Trailblix Goatmug",       "Goblin", "BST",  nil} -- Trailblix Goatmug
+xi.dynamis.mobList[zoneID][168].info = {"NM", "Kikklix Longlegs",        "Goblin", "MNK",  nil} -- Kikklix Longlegs
+xi.dynamis.mobList[zoneID][169].info = {"NM", "Karashix Swollenskull",   "Goblin", "SAM",  nil} -- Karashix Swollenskull
+xi.dynamis.mobList[zoneID][170].info = {"NM", "Mortilox Wartpaws",       "Goblin", "SMN",  nil} -- Mortilox Wartpaws
+xi.dynamis.mobList[zoneID][171].info = {"NM", "Rutrix Hamgams",          "Goblin", "BST",  nil} -- Rutrix Hamgams
+xi.dynamis.mobList[zoneID][172].info = {"NM", "Snypestix Eaglebeak",     "Goblin", "NIN",  nil} -- Snypestix Eaglebeak
+xi.dynamis.mobList[zoneID][173].info = {"NM", "Anvilix Sootwrists",      "Goblin", "WAR",  nil} -- Anvilix Sootwrists
+xi.dynamis.mobList[zoneID][174].info = {"NM", "Bootrix Jaggedelbow",     "Goblin", "MNK",  nil} -- Bootrix Jaggedelbow
+xi.dynamis.mobList[zoneID][175].info = {"NM", "Mobpix Mucousmouth",      "Goblin", "THF",  nil} -- Mobpix Mucousmouth
+xi.dynamis.mobList[zoneID][176].info = {"NM", "Distilix Stickytoes",     "Goblin", "WHM",  nil} -- Distilix Stickytoes
+xi.dynamis.mobList[zoneID][177].info = {"NM", "Eremix Snottynostril",    "Goblin", "BLM",  nil} -- Eremix Snottynostril
+xi.dynamis.mobList[zoneID][178].info = {"NM", "Jabbrox Grannyguise",     "Goblin", "RDM",  nil} -- Jabbrox Grannyguise
+xi.dynamis.mobList[zoneID][179].info = {"NM", "Scruffix Shaggychest",    "Goblin", "PLD",  nil} -- Scruffix Shaggychest
+xi.dynamis.mobList[zoneID][180].info = {"NM", "Tymexox Ninefingers",     "Goblin", "DRK",  nil} -- Tymexox Ninefingers
+xi.dynamis.mobList[zoneID][181].info = {"NM", "Blazox Boneybod",         "Goblin", "BST",  nil} -- Blazox Boneybod
+xi.dynamis.mobList[zoneID][182].info = {"NM", "Prowlox Barrelbelly",     "Goblin", "RNG",  nil} -- Prowlox Barrelbelly
+xi.dynamis.mobList[zoneID][183].info = {"NM", "Slystix Megapeepers",     "Goblin", "RNG",  nil} -- Slystix Megapeepers
 
 ----------------------------------------------------------------------------------------------------
 --                                    Setup of Wave Spawning                                      --
@@ -286,11 +295,15 @@ xi.dynamis.mobList[zoneID][183].info = {"NM", "Slystix Megapeepers",     "Goblin
 --------------------------------------------
 --xi.dynamis.mobList[zoneID].waveDefeatRequirements[2] = {zone:getLocalVar("MegaBoss_Killed") == 1}
 
-xi.dynamis.mobList[zoneID].waveDefeatRequirements[2 ] = { zone:getLocalVar("73_killed") == 1 } -- Spawns 98-100 when 73 is killed
-xi.dynamis.mobList[zoneID].waveDefeatRequirements[3 ] = { zone:getLocalVar("98_killed") == 1, zone:getLocalVar("99_killed") == 1, zone:getLocalVar("100_killed") == 1 } -- Spawns 101-112 when 98,99 and 100 all are killed
-xi.dynamis.mobList[zoneID].waveDefeatRequirements[4 ] = { zone:getLocalVar("44_killed") == 1 } -- Spawns 89-97 when 44 is killed
-xi.dynamis.mobList[zoneID].waveDefeatRequirements[5 ] = { zone:getLocalVar("64_killed") == 1 } -- Spawns 78-89 and 113 (Megaboss) when 64 is killed
-xi.dynamis.mobList[zoneID].waveDefeatRequirements[6 ] = { zone:getLocalVar("MegaBoss_Killed") == 1 } -- Spawns 121-150 when Megaboss killed
+xi.dynamis.mobList[zoneID].waveDefeatRequirements =
+{
+    {}, -- Do not touch this is wave 1
+    {"73_killed"}, -- Spawns 98-100 when 73 is killed
+    {"98_killed", "99_killed", "100_killed"}, -- Spawns 101-112 when 98,99 and 100 all are killed
+    {"44_killed" }, -- Spawns 89-97 when 44 is killed
+    {"64_killed" }, -- Spawns 78-89 and 113 (Megaboss) when 64 is killed
+    {"MegaBoss_Killed"} -- Spawns 121-150 when Megaboss killed
+}
 
 ------------------------------------------
 --            Wave Spawning             --
@@ -298,7 +311,8 @@ xi.dynamis.mobList[zoneID].waveDefeatRequirements[6 ] = { zone:getLocalVar("Mega
 ------------------------------------------
 --xi.dynamis.mobList[zoneID].wave# = { MobIndex#1, MobIndex#2, MobIndex#3 }
 
-xi.dynamis.mobList[zoneID].wave1 = {
+xi.dynamis.mobList[zoneID][1].wave =
+{
     1 ,     -- 001-G/R
     2 ,     -- 002-G/R(30)
     77,     -- 077-G/R(HP)
@@ -378,13 +392,15 @@ xi.dynamis.mobList[zoneID].wave1 = {
     64      -- 064-G/S(MP)
 }
 
-xi.dynamis.mobList[zoneID].wave2 = {
+xi.dynamis.mobList[zoneID][2].wave =
+{
     99 ,    -- 099-G/R
     98 ,    -- 098-G/R
     100     -- 100-G/R
 }
 
-xi.dynamis.mobList[zoneID].wave3 = {
+xi.dynamis.mobList[zoneID][3].wave =
+{
     101,    -- 101-G/R(MP)
     102,    -- 102-G/R(HP)
     103,    -- 103-G/R
@@ -399,7 +415,8 @@ xi.dynamis.mobList[zoneID].wave3 = {
     112     -- 112-G/R
 }
 
-xi.dynamis.mobList[zoneID].wave4 = {
+xi.dynamis.mobList[zoneID][4].wave =
+{
      89,    -- 089-G/R
      90,    -- 090-G/R
      91,    -- 091-G/R
@@ -411,7 +428,8 @@ xi.dynamis.mobList[zoneID].wave4 = {
      97     -- 097-G/R
 }
 
-xi.dynamis.mobList[zoneID].wave5 = {
+xi.dynamis.mobList[zoneID][5].wave =
+{
      78,    -- 078-G/R(MP)
      79,    -- 079-G/R(HP)
      80,    -- 080-G/R(HP)
@@ -434,7 +452,8 @@ xi.dynamis.mobList[zoneID].wave5 = {
     120     -- 120-G/R
 }
 
-xi.dynamis.mobList[zoneID].wave6 = {
+xi.dynamis.mobList[zoneID][6].wave =
+{
     121,    -- 121-G/R
     122,    -- 122-G/R(MP)
     123,    -- 123-G/R(HP)
@@ -609,7 +628,7 @@ xi.dynamis.mobList[zoneID][150].mobchildren = { nil, nil, nil, nil,   1,   1,   
 ------------------------------------------
 --            NM Child Spawn            --
 ------------------------------------------
--- xi.dynamis.mobList[zoneID][MobIndex].NMChildren = {MobIndex(NM1), MobIndex(NM2), MobIndex(NM3)}
+-- xi.dynamis.mobList[zoneID][MobIndex].nmchildren = {MobIndex(NM1), MobIndex(NM2), MobIndex(NM3)}
 -- boolean value = forceLink true/false
 
 xi.dynamis.mobList[zoneID][3  ].specificChildren = { true, 158 } -- Wyrmwix Snakespecs
@@ -885,7 +904,7 @@ xi.dynamis.mobList[zoneID][130].patrolPath = {  -15, 3, -10,   -15, 3,   -2,    
 ------------------------------------------
 -- xi.dynamis.mobList[zoneID][MobIndex].eyes = xi.dynamis.eyes.BLUE -- Flags for blue eyes. (HP)
 -- xi.dynamis.mobList[zoneID][MobIndex].eyes = xi.dynamis.eyes.GREEN -- Flags for green eyes. (MP)
--- xi.dynamis.mobList[zoneID][MobIndex].eyes = xi.dynamis.eyes.RED -- Flags for red eyes. (TE)
+
 
 xi.dynamis.mobList[zoneID][5  ].eyes = xi.dynamis.eyes.BLUE
 xi.dynamis.mobList[zoneID][9  ].eyes = xi.dynamis.eyes.GREEN
@@ -938,6 +957,7 @@ xi.dynamis.mobList[zoneID][150].eyes = xi.dynamis.eyes.GREEN
 ------------------------------------------
 -- xi.dynamis.mobList[zoneID][MobIndex].timeExtension = 15
 
+xi.dynamis.mobList[zoneID].timeExtensionList = {2, 4, 29, 45, 113}
 xi.dynamis.mobList[zoneID][2  ].timeExtension = 30
 xi.dynamis.mobList[zoneID][4  ].timeExtension = 30
 xi.dynamis.mobList[zoneID][29 ].timeExtension = 30

@@ -6,7 +6,6 @@
 ----------------------------------------------------------------------------------------------------
 require("scripts/globals/status")
 require("scripts/globals/utils")
-require("scripts/globals/dynamis")
 require("scripts/globals/zone")
 ----------------------------------------------------------------------------------------------------
 --                                      Instructions                                              --
@@ -46,9 +45,9 @@ require("scripts/globals/zone")
 --    Ex. xi.dynamis.mobList[zoneID][MobIndex].mobchildren = {#WAR, #MNK, #WHM, #BLM, #RDM, #THF, #PLD, #DRK, #BST, #BRD, #RNG, #SAM, #NIN, #DRG, #SMN}
 --    Ex. For 2 Wars: xi.dynamis.mobList[zoneID][MobIndex].mobchildren = {2, nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, nil}
 --
--- 7.  xi.dynamis.mobList[zoneID][MobIndex].NMChildren is used to spawn specific NMs outlined in xi.dynamis.mobList[zoneID][MobIndex].info
+-- 7.  xi.dynamis.mobList[zoneID][MobIndex].nmchildren is used to spawn specific NMs outlined in xi.dynamis.mobList[zoneID][MobIndex].info
 --     MobIndex is the index of the mob spawning the NM, MobIndex(NM) points to which NM in .info it should spawn.
---     Ex. xi.dynamis.mobList[zoneID][MobIndex].NMChildren = {MobIndex(NM1), MobIndex(NM2), MobIndex(NM3)}
+--     Ex. xi.dynamis.mobList[zoneID][MobIndex].nmchildren = {MobIndex(NM1), MobIndex(NM2), MobIndex(NM3)}
 --
 -- 8. xi.dynamis.mobList[zoneID][MobIndex].patrolPath is used to set a specific path for a mob, if left blank for that MobIndex,
 --    the mob will not path on a predetermined course. If it is a statue, it will not path at all. You can add
@@ -70,12 +69,22 @@ require("scripts/globals/zone")
 --                               Dependency Setup Section (IGNORE)                                --
 ----------------------------------------------------------------------------------------------------
 local zone = xi.zone.DYNAMIS_BEAUCEDINE
-mobList = mobList or { }
+local i = 1
+local iWaves = 0
+local zone = GetZone(zoneID)
+xi = xi or {} -- Ignore me I just set the global.
+xi.dynamis = xi.dynamis or {} -- Ignore me I just set the global.
+xi.dynamis.mobList = xi.dynamis.mobList or { } -- Ignore me I just set the global.
 xi.dynamis.mobList[zoneID] = { } -- Ignore me, I just start the table.
-xi.dynamis.mobList[zoneID].zoneID = zone -- Ignore me, I just ensure .zoneID exists.
-xi.dynamis.mobList[zoneID].waveDefeatRequirements = { } -- Ignore me, I just start the table.
-xi.dynamis.mobList[zoneID].waveDefeatRequirements[1] = { } -- Ignore me, I just allow for wave 1 spawning.
+xi.dynamis.mobList[zoneID].zoneID = zoneID -- Ignore me, I just ensure .zoneIDID exists.
+xi.dynamis.mobList[zoneID].nmchildren = { }
+xi.dynamis.mobList[zoneID].mobchildren = { }
 xi.dynamis.mobList[zoneID].maxWaves = 2 -- Put in number of max waves
+
+while i < 227 do
+    table.insert(xi.dynamis.mobList[zoneID], i, { id = i})
+    i = i + 1
+end
 
 ----------------------------------------------------------------------------------------------------
 --                                  Setup of Parent Spawning                                      --
@@ -87,233 +96,233 @@ xi.dynamis.mobList[zoneID].maxWaves = 2 -- Put in number of max waves
 ------------------------------------------
 --xi.dynamis.mobList[zoneID][MobIndex].info = {"Statue/NM/Nightmare", "Mob Name", "Family", "Main Job", "MobLocalVarName"}
 
-xi.dynamis.mobList[zoneID][3  ].info = {"Statue", "Avatar Icon", "Yagudo", nil, nil} -- 003-Y
-xi.dynamis.mobList[zoneID][1  ].info = {"Statue", "Adamantking Effigy", "Quadav", nil, nil} -- 001-Q
-xi.dynamis.mobList[zoneID][2  ].info = {"Statue", "Serjent Tombstone", "Orc", nil, nil} -- 002-O
-xi.dynamis.mobList[zoneID][4  ].info = {"Statue", "Goblin Replica", "Goblin", nil, nil} -- 004-G
-xi.dynamis.mobList[zoneID][7  ].info = {"Statue", "Serjent Tombstone", "Orc", nil, nil} -- 007-O
-xi.dynamis.mobList[zoneID][6  ].info = {"Statue", "Adamantking Effigy", "Quadav", nil, nil} -- 006-Q
-xi.dynamis.mobList[zoneID][5  ].info = {"Statue", "Avatar Icon", "Yagudo", nil, nil} -- 005-Y(HP)
-xi.dynamis.mobList[zoneID][8  ].info = {"Statue", "Goblin replica", "Goblin", nil, nil} -- 008-G(MP)
-xi.dynamis.mobList[zoneID][10 ].info = {"Statue", "Avatar Icon", "Yagudo", nil, nil} -- 010-Y(15)
-xi.dynamis.mobList[zoneID][9  ].info = {"Statue", "Avatar Icon", "Yagudo", nil, nil} -- 009-Y
-xi.dynamis.mobList[zoneID][11 ].info = {"Statue", "Avatar Icon", "Yagudo", nil, nil} -- 011-Y
-xi.dynamis.mobList[zoneID][13 ].info = {"Statue", "Avatar Icon", "Yagudo", nil, nil} -- 013-Y(HP)
-xi.dynamis.mobList[zoneID][12 ].info = {"Statue", "Avatar Icon", "Yagudo", nil, nil} -- 012-Y(MP)
-xi.dynamis.mobList[zoneID][15 ].info = {"Statue", "Avatar Icon", "Yagudo", nil, nil} -- 015-Y
-xi.dynamis.mobList[zoneID][16 ].info = {"Statue", "Avatar Icon", "Yagudo", nil, nil} -- 016-Y
-xi.dynamis.mobList[zoneID][17 ].info = {"Statue", "Avatar Icon", "Yagudo", nil, nil} -- 017-Y
-xi.dynamis.mobList[zoneID][14 ].info = {"Statue", "Avatar Icon", "Yagudo", nil, nil} -- 014-Y
-xi.dynamis.mobList[zoneID][18 ].info = {"Statue", "Avatar Icon", "Yagudo", nil, nil} -- 018-Y(HP)
-xi.dynamis.mobList[zoneID][19 ].info = {"Statue", "Avatar Icon", "Yagudo", nil, nil} -- 019-Y(MP)
-xi.dynamis.mobList[zoneID][20 ].info = {"Statue", "Avatar Icon", "Yagudo", nil, nil} -- 020-Y(15)
-xi.dynamis.mobList[zoneID][21 ].info = {"Statue", "Avatar Icon", "Yagudo", nil, nil} -- 021-Y
-xi.dynamis.mobList[zoneID][23 ].info = {"Statue", "Avatar Icon", "Yagudo", nil, nil} -- 023-Y(HP)
-xi.dynamis.mobList[zoneID][22 ].info = {"Statue", "Avatar Icon", "Yagudo", nil, nil} -- 022-Y(MP)
-xi.dynamis.mobList[zoneID][28 ].info = {"Statue", "Avatar Icon", "Yagudo", nil, nil} -- 028-Y(HP)
-xi.dynamis.mobList[zoneID][27 ].info = {"Statue", "Avatar Icon", "Yagudo", nil, nil} -- 027-Y(MP)
-xi.dynamis.mobList[zoneID][29 ].info = {"Statue", "Avatar Icon", "Yagudo", nil, nil} -- 029-Y
-xi.dynamis.mobList[zoneID][26 ].info = {"Statue", "Avatar Icon", "Yagudo", nil, nil} -- 026-Y
-xi.dynamis.mobList[zoneID][30 ].info = {"Statue", "Avatar Icon", "Yagudo", nil, nil} -- 030-Y(HP)
-xi.dynamis.mobList[zoneID][25 ].info = {"Statue", "Avatar Icon", "Yagudo", nil, nil} -- 025-Y(MP)
-xi.dynamis.mobList[zoneID][24 ].info = {"Statue", "Dynamis Icon", "Yagudo", nil, nil} -- 024-Replica NM (Dynamis Icon)
-xi.dynamis.mobList[zoneID][31 ].info = {"Statue", "Goblin Statue", "Goblin", nil, nil} -- 031-G(15)
-xi.dynamis.mobList[zoneID][33 ].info = {"Statue", "Goblin Statue", "Goblin", nil, nil} -- 033-G
-xi.dynamis.mobList[zoneID][32 ].info = {"Statue", "Goblin Statue", "Goblin", nil, nil} -- 032-G
-xi.dynamis.mobList[zoneID][34 ].info = {"Statue", "Goblin Statue", "Goblin", nil, nil} -- 034-G
-xi.dynamis.mobList[zoneID][35 ].info = {"Statue", "Goblin Statue", "Goblin", nil, nil} -- 035-G
-xi.dynamis.mobList[zoneID][36 ].info = {"Statue", "Goblin Statue", "Goblin", nil, nil} -- 036-G
-xi.dynamis.mobList[zoneID][37 ].info = {"Statue", "Goblin Statue", "Goblin", nil, nil} -- 037-G(HP)
-xi.dynamis.mobList[zoneID][38 ].info = {"Statue", "Goblin Statue", "Goblin", nil, nil} -- 038-G(MP)
-xi.dynamis.mobList[zoneID][48 ].info = {"Statue", "Goblin Statue", "Goblin", nil, nil} -- 048-G
-xi.dynamis.mobList[zoneID][50 ].info = {"Statue", "Goblin Statue", "Goblin", nil, nil} -- 050-G
-xi.dynamis.mobList[zoneID][51 ].info = {"Statue", "Goblin Statue", "Goblin", nil, nil} -- 051-G(HP)
-xi.dynamis.mobList[zoneID][49 ].info = {"Statue", "Goblin Statue", "Goblin", nil, nil} -- 049-G(MP)
-xi.dynamis.mobList[zoneID][52 ].info = {"Statue", "Goblin Statue", "Goblin", nil, nil} -- 052-G(MP)
-xi.dynamis.mobList[zoneID][53 ].info = {"Statue", "Goblin Statue", "Goblin", nil, nil} -- 053-G(HP)
-xi.dynamis.mobList[zoneID][47 ].info = {"Statue", "Dynamis Statue", "Goblin", nil, nil} -- 047-Replica NM (Dynamis Statue)
-xi.dynamis.mobList[zoneID][39 ].info = {"Statue", "Goblin Statue", "Goblin", nil, nil} -- 039-G
-xi.dynamis.mobList[zoneID][41 ].info = {"Statue", "Goblin Statue", "Goblin", nil, nil} -- 041-G(HP)
-xi.dynamis.mobList[zoneID][40 ].info = {"Statue", "Goblin Statue", "Goblin", nil, nil} -- 040-G(MP)
-xi.dynamis.mobList[zoneID][43 ].info = {"Statue", "Goblin Statue", "Goblin", nil, nil} -- 043-G
-xi.dynamis.mobList[zoneID][42 ].info = {"Statue", "Goblin Statue", "Goblin", nil, nil} -- 042-G
-xi.dynamis.mobList[zoneID][44 ].info = {"Statue", "Goblin Statue", "Goblin", nil, nil} -- 044-G(HP)
-xi.dynamis.mobList[zoneID][45 ].info = {"Statue", "Goblin Statue", "Goblin", nil, nil} -- 045-G(MP)
-xi.dynamis.mobList[zoneID][46 ].info = {"Statue", "Goblin Statue", "Goblin", nil, nil} -- 046-G(15)
-xi.dynamis.mobList[zoneID][56 ].info = {"Statue", "Adamantking Effigy", "Quadav", nil, nil} -- 056-Q(HP)
-xi.dynamis.mobList[zoneID][54 ].info = {"Statue", "Adamantking Effigy", "Quadav", nil, nil} -- 054-Q
-xi.dynamis.mobList[zoneID][55 ].info = {"Statue", "Adamantking Effigy", "Quadav", nil, nil} -- 055-Q
-xi.dynamis.mobList[zoneID][57 ].info = {"Statue", "Adamantking Effigy", "Quadav", nil, nil} -- 057-Q(MP)
-xi.dynamis.mobList[zoneID][68 ].info = {"Statue", "Dynamis Effigy", "Quadav", nil, nil} -- 068-Replica NM (Dynamis Effigy)
-xi.dynamis.mobList[zoneID][76 ].info = {"Statue", "Adamantking Effigy", "Quadav", nil, nil} -- 076-Q(MP)
-xi.dynamis.mobList[zoneID][75 ].info = {"Statue", "Adamantking Effigy", "Quadav", nil, nil} -- 075-Q
-xi.dynamis.mobList[zoneID][74 ].info = {"Statue", "Adamantking Effigy", "Quadav", nil, nil} -- 074-Q(HP)
-xi.dynamis.mobList[zoneID][73 ].info = {"Statue", "Adamantking Effigy", "Quadav", nil, nil} -- 073-Q
-xi.dynamis.mobList[zoneID][72 ].info = {"Statue", "Adamantking Effigy", "Quadav", nil, nil} -- 072-Q(MP)
-xi.dynamis.mobList[zoneID][71 ].info = {"Statue", "Adamantking Effigy", "Quadav", nil, nil} -- 071-Q
-xi.dynamis.mobList[zoneID][70 ].info = {"Statue", "Adamantking Effigy", "Quadav", nil, nil} -- 070-Q(HP)
-xi.dynamis.mobList[zoneID][69 ].info = {"Statue", "Adamantking Effigy", "Quadav", nil, nil} -- 069-Q
-xi.dynamis.mobList[zoneID][58 ].info = {"Statue", "Adamantking Effigy", "Quadav", nil, nil} -- 058-Q
-xi.dynamis.mobList[zoneID][59 ].info = {"Statue", "Adamantking Effigy", "Quadav", nil, nil} -- 059-Q(HP)
-xi.dynamis.mobList[zoneID][60 ].info = {"Statue", "Adamantking Effigy", "Quadav", nil, nil} -- 060-Q
-xi.dynamis.mobList[zoneID][61 ].info = {"Statue", "Adamantking Effigy", "Quadav", nil, nil} -- 061-Q(MP)
-xi.dynamis.mobList[zoneID][62 ].info = {"Statue", "Adamantking Effigy", "Quadav", nil, nil} -- 062-Q
-xi.dynamis.mobList[zoneID][63 ].info = {"Statue", "Adamantking Effigy", "Quadav", nil, nil} -- 063-Q(15)
-xi.dynamis.mobList[zoneID][65 ].info = {"Statue", "Adamantking Effigy", "Quadav", nil, nil} -- 065-Q(HP)
-xi.dynamis.mobList[zoneID][64 ].info = {"Statue", "Adamantking Effigy", "Quadav", nil, nil} -- 064-Q
-xi.dynamis.mobList[zoneID][67 ].info = {"Statue", "Adamantking Effigy", "Quadav", nil, nil} -- 067-Q(MP)
-xi.dynamis.mobList[zoneID][66 ].info = {"Statue", "Adamantking Effigy", "Quadav", nil, nil} -- 066-Q(15)
-xi.dynamis.mobList[zoneID][90 ].info = {"Statue", "Dynamis Tombstone", "Orc", nil, nil} -- 090-Replica NM (Dynamis Tombstone)
-xi.dynamis.mobList[zoneID][91 ].info = {"Statue", "Serjeant Tombstone", "Orc", nil, nil} -- 091-O(HP)
-xi.dynamis.mobList[zoneID][92 ].info = {"Statue", "Serjeant Tombstone", "Orc", nil, nil} -- 092-O
-xi.dynamis.mobList[zoneID][93 ].info = {"Statue", "Serjeant Tombstone", "Orc", nil, nil} -- 093-O
-xi.dynamis.mobList[zoneID][94 ].info = {"Statue", "Serjeant Tombstone", "Orc", nil, nil} -- 094-O(MP)
-xi.dynamis.mobList[zoneID][98 ].info = {"Statue", "Serjeant Tombstone", "Orc", nil, nil} -- 098-O(MP)
-xi.dynamis.mobList[zoneID][97 ].info = {"Statue", "Serjeant Tombstone", "Orc", nil, nil} -- 097-O
-xi.dynamis.mobList[zoneID][96 ].info = {"Statue", "Serjeant Tombstone", "Orc", nil, nil} -- 096-O
-xi.dynamis.mobList[zoneID][95 ].info = {"Statue", "Serjeant Tombstone", "Orc", nil, nil} -- 095-O(HP)
-xi.dynamis.mobList[zoneID][77 ].info = {"Statue", "Serjeant Tombstone", "Orc", nil, nil} -- 077-O
-xi.dynamis.mobList[zoneID][78 ].info = {"Statue", "Serjeant Tombstone", "Orc", nil, nil} -- 078-O(HP)
-xi.dynamis.mobList[zoneID][79 ].info = {"Statue", "Serjeant Tombstone", "Orc", nil, nil} -- 079-O
-xi.dynamis.mobList[zoneID][80 ].info = {"Statue", "Serjeant Tombstone", "Orc", nil, nil} -- 080-O(MP)
-xi.dynamis.mobList[zoneID][81 ].info = {"Statue", "Serjeant Tombstone", "Orc", nil, nil} -- 081-O
-xi.dynamis.mobList[zoneID][84 ].info = {"Statue", "Serjeant Tombstone", "Orc", nil, nil} -- 084-O(HP)
-xi.dynamis.mobList[zoneID][83 ].info = {"Statue", "Serjeant Tombstone", "Orc", nil, nil} -- 083-O(15)
-xi.dynamis.mobList[zoneID][82 ].info = {"Statue", "Serjeant Tombstone", "Orc", nil, nil} -- 082-O(MP)
-xi.dynamis.mobList[zoneID][85 ].info = {"Statue", "Serjeant Tombstone", "Orc", nil, nil} -- 085-O
-xi.dynamis.mobList[zoneID][86 ].info = {"Statue", "Serjeant Tombstone", "Orc", nil, nil} -- 086-O(HP)
-xi.dynamis.mobList[zoneID][87 ].info = {"Statue", "Serjeant Tombstone", "Orc", nil, nil} -- 087-O(15)
-xi.dynamis.mobList[zoneID][88 ].info = {"Statue", "Serjeant Tombstone", "Orc", nil, nil} -- 088-O(MP)
-xi.dynamis.mobList[zoneID][89 ].info = {"Statue", "Serjeant Tombstone", "Orc", nil, nil} -- 089-O
-xi.dynamis.mobList[zoneID][99 ].info = {"Statue", "Serjeant Tombstone", "Orc", nil, nil} -- 099-O
-xi.dynamis.mobList[zoneID][100].info = {"Statue", "Adanantking Effigy", "Quadav", nil, nil} -- 100-Q
-xi.dynamis.mobList[zoneID][101].info = {"Statue", "Avatar Icon", "Yagudo", nil, nil} -- 101-Y
-xi.dynamis.mobList[zoneID][102].info = {"Statue", "Goblin Replica", "Goblin", nil, nil} -- 102-G
-xi.dynamis.mobList[zoneID][103].info = {"Statue", "Adanamtking Effigy", "Quadav", nil, nil} -- 103-Q(HP)
-xi.dynamis.mobList[zoneID][104].info = {"Statue", "Goblin Replica", "Goblin", nil, nil} -- 104-G(MP)
-xi.dynamis.mobList[zoneID][105].info = {"Statue", "Serjeant Tombstone", "Orc", nil, nil} -- 105-O(HP)
-xi.dynamis.mobList[zoneID][106].info = {"Statue", "Avatar Icon", "Yagudo", nil, nil} -- 106-Y(MP)
-xi.dynamis.mobList[zoneID][107].info = {"Statue", "Vanguard Eye", nil, nil, nil} -- 107-H
-xi.dynamis.mobList[zoneID][118].info = {"Statue", "Vanguard Eye", nil, nil, nil} -- 118-H
-xi.dynamis.mobList[zoneID][117].info = {"Statue", "Vanguard Eye", nil, nil, nil} -- 117-H
-xi.dynamis.mobList[zoneID][116].info = {"Statue", "Vanguard Eye", nil, nil, nil} -- 116-H
-xi.dynamis.mobList[zoneID][115].info = {"Statue", "Vanguard Eye", nil, nil, nil} -- 115-H
-xi.dynamis.mobList[zoneID][114].info = {"Statue", "Vanguard Eye", nil, nil, nil} -- 114-H
-xi.dynamis.mobList[zoneID][119].info = {"Statue", "Vanguard Eye", nil, nil, nil} -- 119-H
-xi.dynamis.mobList[zoneID][113].info = {"Statue", "Vanguard Eye", nil, nil, nil} -- 113-H
-xi.dynamis.mobList[zoneID][112].info = {"Statue", "Vanguard Eye", nil, nil, nil} -- 112-H
-xi.dynamis.mobList[zoneID][108].info = {"Statue", "Vanguard Eye", nil, nil, nil} -- 108-H
-xi.dynamis.mobList[zoneID][111].info = {"Statue", "Vanguard Eye", nil, nil, nil} -- 111-H
-xi.dynamis.mobList[zoneID][120].info = {"Statue", "Vanguard Eye", nil, nil, nil} -- 120-H(15)
-xi.dynamis.mobList[zoneID][110].info = {"Statue", "Vanguard Eye", nil, nil, nil} -- 110-H
-xi.dynamis.mobList[zoneID][109].info = {"Statue", "Vanguard Eye", nil, nil, nil} -- 109-H
-xi.dynamis.mobList[zoneID][122].info = {"Statue", "Vanguard Eye", nil, nil, nil} -- 122-H
-xi.dynamis.mobList[zoneID][121].info = {"Statue", "Vanguard Eye", nil, nil, nil} -- 121-H
-xi.dynamis.mobList[zoneID][123].info = {"Statue", "Vanguard Eye", nil, nil, nil} -- 123-H
-xi.dynamis.mobList[zoneID][124].info = {"Statue", "Vanguard Eye", nil, nil, nil} -- 124-H
-xi.dynamis.mobList[zoneID][125].info = {"Statue", "Vanguard Eye", nil, nil, nil} -- 125-H
-xi.dynamis.mobList[zoneID][126].info = {"Statue", "Vanguard Eye", nil, nil, nil} -- 126-H
-xi.dynamis.mobList[zoneID][127].info = {"Statue", "Vanguard Eye", nil, nil, nil} -- 127-H
-xi.dynamis.mobList[zoneID][128].info = {"Statue", "Vanguard Eye", nil, nil, nil} -- 128-H
-xi.dynamis.mobList[zoneID][129].info = {"Statue", "Vanguard Eye", nil, nil, nil} -- 129-H
-xi.dynamis.mobList[zoneID][130].info = {"Statue", "Vanguard Eye", nil, nil, nil} -- 130-H
-xi.dynamis.mobList[zoneID][131].info = {"Statue", "Vanguard Eye", nil, nil, nil} -- 131-H
-xi.dynamis.mobList[zoneID][132].info = {"Statue", "Vanguard Eye", nil, nil, nil} -- 132-H
-xi.dynamis.mobList[zoneID][133].info = {"Statue", "Vanguard Eye", nil, nil, nil} -- 133-H
-xi.dynamis.mobList[zoneID][136].info = {"Statue", "Vanguard Eye", nil, nil, nil} -- 136-H
-xi.dynamis.mobList[zoneID][134].info = {"Statue", "Vanguard Eye", nil, nil, nil} -- 134-H
-xi.dynamis.mobList[zoneID][135].info = {"Statue", "Vanguard Eye", nil, nil, nil} -- 135-H
-xi.dynamis.mobList[zoneID][137].info = {"Statue", "Vanguard Eye", nil, nil, nil} -- 137-H
-xi.dynamis.mobList[zoneID][138].info = {"Statue", "Vanguard Eye", nil, nil, nil} -- 138-H
-xi.dynamis.mobList[zoneID][139].info = {"Statue", "Vanguard Eye", nil, nil, nil} -- 139-H
-xi.dynamis.mobList[zoneID][140].info = {"Statue", "Vanguard Eye", nil, nil, nil} -- 140-H
-xi.dynamis.mobList[zoneID][141].info = {"Statue", "Vanguard Eye", nil, nil, nil} -- 141-H
-xi.dynamis.mobList[zoneID][142].info = {"Statue", "Vanguard Eye", nil, nil, nil} -- 142-H
-xi.dynamis.mobList[zoneID][143].info = {"Statue", "Vanguard Eye", nil, nil, nil} -- 143-H
-xi.dynamis.mobList[zoneID][144].info = {"Statue", "Vanguard Eye", nil, nil, nil} -- 144-H
-xi.dynamis.mobList[zoneID][145].info = {"Statue", "Vanguard Eye", nil, nil, nil} -- 145-H
-xi.dynamis.mobList[zoneID][146].info = {"Statue", "Vanguard Eye", nil, nil, nil} -- 146-H
-xi.dynamis.mobList[zoneID][148].info = {"Statue", "Vanguard Eye", nil, nil, nil} -- 148-H
-xi.dynamis.mobList[zoneID][147].info = {"Statue", "Vanguard Eye", nil, nil, nil} -- 147-H(15)
-xi.dynamis.mobList[zoneID][149].info = {"Statue", "Vanguard Eye", nil, nil, nil} -- 149-H
-xi.dynamis.mobList[zoneID][150].info = {"Statue", "Vanguard Eye", nil, nil, nil} -- 150-H
-xi.dynamis.mobList[zoneID][151].info = {"Statue", "Vanguard Eye", nil, nil, nil} -- 151-H
-xi.dynamis.mobList[zoneID][152].info = {"Statue", "Vanguard Eye", nil, nil, nil} -- 152-H
-xi.dynamis.mobList[zoneID][153].info = {"Statue", "Vanguard Eye", nil, nil, nil} -- 153-H
-xi.dynamis.mobList[zoneID][154].info = {"Statue", "Vanguard Eye", nil, nil, nil} -- 154-H
-xi.dynamis.mobList[zoneID][155].info = {"Statue", "Vanguard Eye", nil, nil, nil} -- 155-H
-xi.dynamis.mobList[zoneID][156].info = {"Statue", "Vanguard Eye", nil, nil, nil} -- 156-H
-xi.dynamis.mobList[zoneID][157].info = {"Statue", "Vanguard Eye", nil, nil, "157_killed"} -- 157-H
-xi.dynamis.mobList[zoneID][163].info = {"NM", "Angra Mainyu", nil, nil, nil} -- 163-Ahriman NM (Angra Mainyu)
+xi.dynamis.mobList[zoneID][1  ].info = {"Statue", "Adamantking Effigy", "Quadav", nil, nil} -- (001-Q)
+xi.dynamis.mobList[zoneID][2  ].info = {"Statue", "Serjent Tombstone", "Orc", nil, nil} -- (002-O)
+xi.dynamis.mobList[zoneID][3  ].info = {"Statue", "Avatar Icon", "Yagudo", nil, nil} -- (003-Y)
+xi.dynamis.mobList[zoneID][4  ].info = {"Statue", "Goblin Replica", "Goblin", nil, nil} -- (004-G)
+xi.dynamis.mobList[zoneID][5  ].info = {"Statue", "Avatar Icon", "Yagudo", nil, nil} -- (005-Y) (HP)
+xi.dynamis.mobList[zoneID][6  ].info = {"Statue", "Adamantking Effigy", "Quadav", nil, nil} -- (006-Q)
+xi.dynamis.mobList[zoneID][7  ].info = {"Statue", "Serjent Tombstone", "Orc", nil, nil} -- (007-O)
+xi.dynamis.mobList[zoneID][8  ].info = {"Statue", "Goblin replica", "Goblin", nil, nil} -- (008-G) (MP)
+xi.dynamis.mobList[zoneID][9  ].info = {"Statue", "Avatar Icon", "Yagudo", nil, nil} -- (009-Y)
+xi.dynamis.mobList[zoneID][10 ].info = {"Statue", "Avatar Icon", "Yagudo", nil, nil} -- (010-Y) (15)
+xi.dynamis.mobList[zoneID][11 ].info = {"Statue", "Avatar Icon", "Yagudo", nil, nil} -- (011-Y)
+xi.dynamis.mobList[zoneID][12 ].info = {"Statue", "Avatar Icon", "Yagudo", nil, nil} -- (012-Y) (MP)
+xi.dynamis.mobList[zoneID][13 ].info = {"Statue", "Avatar Icon", "Yagudo", nil, nil} -- (013-Y) (HP)
+xi.dynamis.mobList[zoneID][14 ].info = {"Statue", "Avatar Icon", "Yagudo", nil, nil} -- (014-Y)
+xi.dynamis.mobList[zoneID][15 ].info = {"Statue", "Avatar Icon", "Yagudo", nil, nil} -- (015-Y)
+xi.dynamis.mobList[zoneID][16 ].info = {"Statue", "Avatar Icon", "Yagudo", nil, nil} -- (016-Y)
+xi.dynamis.mobList[zoneID][17 ].info = {"Statue", "Avatar Icon", "Yagudo", nil, nil} -- (017-Y)
+xi.dynamis.mobList[zoneID][18 ].info = {"Statue", "Avatar Icon", "Yagudo", nil, nil} -- (018-Y) (HP)
+xi.dynamis.mobList[zoneID][19 ].info = {"Statue", "Avatar Icon", "Yagudo", nil, nil} -- (019-Y) (MP)
+xi.dynamis.mobList[zoneID][20 ].info = {"Statue", "Avatar Icon", "Yagudo", nil, nil} -- (020-Y) (15)
+xi.dynamis.mobList[zoneID][21 ].info = {"Statue", "Avatar Icon", "Yagudo", nil, nil} -- (021-Y)
+xi.dynamis.mobList[zoneID][22 ].info = {"Statue", "Avatar Icon", "Yagudo", nil, nil} -- (022-Y) (MP)
+xi.dynamis.mobList[zoneID][23 ].info = {"Statue", "Avatar Icon", "Yagudo", nil, nil} -- (023-Y) (HP)
+xi.dynamis.mobList[zoneID][24 ].info = {"Statue", "Dynamis Icon", "Yagudo", nil, nil} -- ( 024 )
+xi.dynamis.mobList[zoneID][25 ].info = {"Statue", "Avatar Icon", "Yagudo", nil, nil} -- (025-Y) (MP)
+xi.dynamis.mobList[zoneID][26 ].info = {"Statue", "Avatar Icon", "Yagudo", nil, nil} -- (026-Y)
+xi.dynamis.mobList[zoneID][27 ].info = {"Statue", "Avatar Icon", "Yagudo", nil, nil} -- (027-Y) (MP)
+xi.dynamis.mobList[zoneID][28 ].info = {"Statue", "Avatar Icon", "Yagudo", nil, nil} -- (028-Y) (HP)
+xi.dynamis.mobList[zoneID][29 ].info = {"Statue", "Avatar Icon", "Yagudo", nil, nil} -- (029-Y)
+xi.dynamis.mobList[zoneID][30 ].info = {"Statue", "Avatar Icon", "Yagudo", nil, nil} -- (030-Y) (HP)
+xi.dynamis.mobList[zoneID][31 ].info = {"Statue", "Goblin Statue", "Goblin", nil, nil} -- (031-G) (15)
+xi.dynamis.mobList[zoneID][32 ].info = {"Statue", "Goblin Statue", "Goblin", nil, nil} -- (032-G)
+xi.dynamis.mobList[zoneID][33 ].info = {"Statue", "Goblin Statue", "Goblin", nil, nil} -- (033-G)
+xi.dynamis.mobList[zoneID][34 ].info = {"Statue", "Goblin Statue", "Goblin", nil, nil} -- (034-G)
+xi.dynamis.mobList[zoneID][35 ].info = {"Statue", "Goblin Statue", "Goblin", nil, nil} -- (035-G)
+xi.dynamis.mobList[zoneID][36 ].info = {"Statue", "Goblin Statue", "Goblin", nil, nil} -- (036-G)
+xi.dynamis.mobList[zoneID][37 ].info = {"Statue", "Goblin Statue", "Goblin", nil, nil} -- (037-G) (HP)
+xi.dynamis.mobList[zoneID][38 ].info = {"Statue", "Goblin Statue", "Goblin", nil, nil} -- (038-G) (MP)
+xi.dynamis.mobList[zoneID][39 ].info = {"Statue", "Goblin Statue", "Goblin", nil, nil} -- (039-G)
+xi.dynamis.mobList[zoneID][40 ].info = {"Statue", "Goblin Statue", "Goblin", nil, nil} -- (040-G) (MP)
+xi.dynamis.mobList[zoneID][41 ].info = {"Statue", "Goblin Statue", "Goblin", nil, nil} -- (041-G) (HP)
+xi.dynamis.mobList[zoneID][42 ].info = {"Statue", "Goblin Statue", "Goblin", nil, nil} -- (042-G)
+xi.dynamis.mobList[zoneID][43 ].info = {"Statue", "Goblin Statue", "Goblin", nil, nil} -- (043-G)
+xi.dynamis.mobList[zoneID][44 ].info = {"Statue", "Goblin Statue", "Goblin", nil, nil} -- (044-G) (HP)
+xi.dynamis.mobList[zoneID][45 ].info = {"Statue", "Goblin Statue", "Goblin", nil, nil} -- (045-G) (MP)
+xi.dynamis.mobList[zoneID][46 ].info = {"Statue", "Goblin Statue", "Goblin", nil, nil} -- (046-G) (15)
+xi.dynamis.mobList[zoneID][47 ].info = {"Statue", "Dynamis Statue", "Goblin", nil, nil} -- ( 047 )
+xi.dynamis.mobList[zoneID][48 ].info = {"Statue", "Goblin Statue", "Goblin", nil, nil} -- (048-G)
+xi.dynamis.mobList[zoneID][49 ].info = {"Statue", "Goblin Statue", "Goblin", nil, nil} -- (049-G) (MP)
+xi.dynamis.mobList[zoneID][50 ].info = {"Statue", "Goblin Statue", "Goblin", nil, nil} -- (050-G)
+xi.dynamis.mobList[zoneID][51 ].info = {"Statue", "Goblin Statue", "Goblin", nil, nil} -- (051-G) (HP)
+xi.dynamis.mobList[zoneID][52 ].info = {"Statue", "Goblin Statue", "Goblin", nil, nil} -- (052-G) (MP)
+xi.dynamis.mobList[zoneID][53 ].info = {"Statue", "Goblin Statue", "Goblin", nil, nil} -- (053-G) (HP)
+xi.dynamis.mobList[zoneID][54 ].info = {"Statue", "Adamantking Effigy", "Quadav", nil, nil} -- (054-Q)
+xi.dynamis.mobList[zoneID][55 ].info = {"Statue", "Adamantking Effigy", "Quadav", nil, nil} -- (055-Q)
+xi.dynamis.mobList[zoneID][56 ].info = {"Statue", "Adamantking Effigy", "Quadav", nil, nil} -- (056-Q) (HP)
+xi.dynamis.mobList[zoneID][57 ].info = {"Statue", "Adamantking Effigy", "Quadav", nil, nil} -- (057-Q) (MP)
+xi.dynamis.mobList[zoneID][58 ].info = {"Statue", "Adamantking Effigy", "Quadav", nil, nil} -- (058-Q)
+xi.dynamis.mobList[zoneID][59 ].info = {"Statue", "Adamantking Effigy", "Quadav", nil, nil} -- (059-Q) (HP)
+xi.dynamis.mobList[zoneID][60 ].info = {"Statue", "Adamantking Effigy", "Quadav", nil, nil} -- (060-Q)
+xi.dynamis.mobList[zoneID][61 ].info = {"Statue", "Adamantking Effigy", "Quadav", nil, nil} -- (061-Q) (MP)
+xi.dynamis.mobList[zoneID][62 ].info = {"Statue", "Adamantking Effigy", "Quadav", nil, nil} -- (062-Q)
+xi.dynamis.mobList[zoneID][63 ].info = {"Statue", "Adamantking Effigy", "Quadav", nil, nil} -- (063-Q) (15)
+xi.dynamis.mobList[zoneID][64 ].info = {"Statue", "Adamantking Effigy", "Quadav", nil, nil} -- (064-Q)
+xi.dynamis.mobList[zoneID][65 ].info = {"Statue", "Adamantking Effigy", "Quadav", nil, nil} -- (065-Q) (HP)
+xi.dynamis.mobList[zoneID][66 ].info = {"Statue", "Adamantking Effigy", "Quadav", nil, nil} -- (066-Q) (15)
+xi.dynamis.mobList[zoneID][67 ].info = {"Statue", "Adamantking Effigy", "Quadav", nil, nil} -- (067-Q) (MP)
+xi.dynamis.mobList[zoneID][68 ].info = {"Statue", "Dynamis Effigy", "Quadav", nil, nil} -- ( 068 )
+xi.dynamis.mobList[zoneID][69 ].info = {"Statue", "Adamantking Effigy", "Quadav", nil, nil} -- (069-Q)
+xi.dynamis.mobList[zoneID][70 ].info = {"Statue", "Adamantking Effigy", "Quadav", nil, nil} -- (070-Q) (HP)
+xi.dynamis.mobList[zoneID][71 ].info = {"Statue", "Adamantking Effigy", "Quadav", nil, nil} -- (071-Q)
+xi.dynamis.mobList[zoneID][72 ].info = {"Statue", "Adamantking Effigy", "Quadav", nil, nil} -- (072-Q) (MP)
+xi.dynamis.mobList[zoneID][73 ].info = {"Statue", "Adamantking Effigy", "Quadav", nil, nil} -- (073-Q)
+xi.dynamis.mobList[zoneID][74 ].info = {"Statue", "Adamantking Effigy", "Quadav", nil, nil} -- (074-Q) (HP)
+xi.dynamis.mobList[zoneID][75 ].info = {"Statue", "Adamantking Effigy", "Quadav", nil, nil} -- (075-Q)
+xi.dynamis.mobList[zoneID][76 ].info = {"Statue", "Adamantking Effigy", "Quadav", nil, nil} -- (076-Q) (MP)
+xi.dynamis.mobList[zoneID][77 ].info = {"Statue", "Serjeant Tombstone", "Orc", nil, nil} -- (077-O)
+xi.dynamis.mobList[zoneID][78 ].info = {"Statue", "Serjeant Tombstone", "Orc", nil, nil} -- (078-O) (HP)
+xi.dynamis.mobList[zoneID][79 ].info = {"Statue", "Serjeant Tombstone", "Orc", nil, nil} -- (079-O)
+xi.dynamis.mobList[zoneID][80 ].info = {"Statue", "Serjeant Tombstone", "Orc", nil, nil} -- (080-O) (MP)
+xi.dynamis.mobList[zoneID][81 ].info = {"Statue", "Serjeant Tombstone", "Orc", nil, nil} -- (081-O)
+xi.dynamis.mobList[zoneID][82 ].info = {"Statue", "Serjeant Tombstone", "Orc", nil, nil} -- (082-O) (MP)
+xi.dynamis.mobList[zoneID][83 ].info = {"Statue", "Serjeant Tombstone", "Orc", nil, nil} -- (083-O) (15)
+xi.dynamis.mobList[zoneID][84 ].info = {"Statue", "Serjeant Tombstone", "Orc", nil, nil} -- (084-O) (HP)
+xi.dynamis.mobList[zoneID][85 ].info = {"Statue", "Serjeant Tombstone", "Orc", nil, nil} -- (085-O)
+xi.dynamis.mobList[zoneID][86 ].info = {"Statue", "Serjeant Tombstone", "Orc", nil, nil} -- (086-O) (HP)
+xi.dynamis.mobList[zoneID][87 ].info = {"Statue", "Serjeant Tombstone", "Orc", nil, nil} -- (087-O) (15)
+xi.dynamis.mobList[zoneID][88 ].info = {"Statue", "Serjeant Tombstone", "Orc", nil, nil} -- (088-O) (MP)
+xi.dynamis.mobList[zoneID][89 ].info = {"Statue", "Serjeant Tombstone", "Orc", nil, nil} -- (089-O)
+xi.dynamis.mobList[zoneID][90 ].info = {"Statue", "Dynamis Tombstone", "Orc", nil, nil} -- ( 090 )
+xi.dynamis.mobList[zoneID][91 ].info = {"Statue", "Serjeant Tombstone", "Orc", nil, nil} -- (091-O) (HP)
+xi.dynamis.mobList[zoneID][92 ].info = {"Statue", "Serjeant Tombstone", "Orc", nil, nil} -- (092-O)
+xi.dynamis.mobList[zoneID][93 ].info = {"Statue", "Serjeant Tombstone", "Orc", nil, nil} -- (093-O)
+xi.dynamis.mobList[zoneID][94 ].info = {"Statue", "Serjeant Tombstone", "Orc", nil, nil} -- (094-O) (MP)
+xi.dynamis.mobList[zoneID][95 ].info = {"Statue", "Serjeant Tombstone", "Orc", nil, nil} -- (095-O) (HP)
+xi.dynamis.mobList[zoneID][96 ].info = {"Statue", "Serjeant Tombstone", "Orc", nil, nil} -- (096-O)
+xi.dynamis.mobList[zoneID][97 ].info = {"Statue", "Serjeant Tombstone", "Orc", nil, nil} -- (097-O)
+xi.dynamis.mobList[zoneID][98 ].info = {"Statue", "Serjeant Tombstone", "Orc", nil, nil} -- (098-O) (MP)
+xi.dynamis.mobList[zoneID][99 ].info = {"Statue", "Serjeant Tombstone", "Orc", nil, nil} -- (099-O)
+xi.dynamis.mobList[zoneID][100].info = {"Statue", "Adanantking Effigy", "Quadav", nil, nil} -- (100-Q)
+xi.dynamis.mobList[zoneID][101].info = {"Statue", "Avatar Icon", "Yagudo", nil, nil} -- (101-Y)
+xi.dynamis.mobList[zoneID][102].info = {"Statue", "Goblin Replica", "Goblin", nil, nil} -- (102-G)
+xi.dynamis.mobList[zoneID][103].info = {"Statue", "Adanamtking Effigy", "Quadav", nil, nil} -- (103-Q) (HP)
+xi.dynamis.mobList[zoneID][104].info = {"Statue", "Goblin Replica", "Goblin", nil, nil} -- (104-G) (MP)
+xi.dynamis.mobList[zoneID][105].info = {"Statue", "Serjeant Tombstone", "Orc", nil, nil} -- (105-O) (HP)
+xi.dynamis.mobList[zoneID][106].info = {"Statue", "Avatar Icon", "Yagudo", nil, nil} -- (106-Y) (MP)
+xi.dynamis.mobList[zoneID][107].info = {"Statue", "Vanguard Eye", nil, nil, nil} -- (107-H)
+xi.dynamis.mobList[zoneID][108].info = {"Statue", "Vanguard Eye", nil, nil, nil} -- (108-H)
+xi.dynamis.mobList[zoneID][109].info = {"Statue", "Vanguard Eye", nil, nil, nil} -- (109-H)
+xi.dynamis.mobList[zoneID][110].info = {"Statue", "Vanguard Eye", nil, nil, nil} -- (110-H)
+xi.dynamis.mobList[zoneID][111].info = {"Statue", "Vanguard Eye", nil, nil, nil} -- (111-H)
+xi.dynamis.mobList[zoneID][112].info = {"Statue", "Vanguard Eye", nil, nil, nil} -- (112-H)
+xi.dynamis.mobList[zoneID][113].info = {"Statue", "Vanguard Eye", nil, nil, nil} -- (113-H)
+xi.dynamis.mobList[zoneID][114].info = {"Statue", "Vanguard Eye", nil, nil, nil} -- (114-H)
+xi.dynamis.mobList[zoneID][115].info = {"Statue", "Vanguard Eye", nil, nil, nil} -- (115-H)
+xi.dynamis.mobList[zoneID][116].info = {"Statue", "Vanguard Eye", nil, nil, nil} -- (116-H)
+xi.dynamis.mobList[zoneID][117].info = {"Statue", "Vanguard Eye", nil, nil, nil} -- (117-H)
+xi.dynamis.mobList[zoneID][118].info = {"Statue", "Vanguard Eye", nil, nil, nil} -- (118-H)
+xi.dynamis.mobList[zoneID][119].info = {"Statue", "Vanguard Eye", nil, nil, nil} -- (119-H)
+xi.dynamis.mobList[zoneID][120].info = {"Statue", "Vanguard Eye", nil, nil, nil} -- (120-H) (15)
+xi.dynamis.mobList[zoneID][121].info = {"Statue", "Vanguard Eye", nil, nil, nil} -- (121-H)
+xi.dynamis.mobList[zoneID][122].info = {"Statue", "Vanguard Eye", nil, nil, nil} -- (122-H)
+xi.dynamis.mobList[zoneID][123].info = {"Statue", "Vanguard Eye", nil, nil, nil} -- (123-H)
+xi.dynamis.mobList[zoneID][124].info = {"Statue", "Vanguard Eye", nil, nil, nil} -- (124-H)
+xi.dynamis.mobList[zoneID][125].info = {"Statue", "Vanguard Eye", nil, nil, nil} -- (125-H)
+xi.dynamis.mobList[zoneID][126].info = {"Statue", "Vanguard Eye", nil, nil, nil} -- (126-H)
+xi.dynamis.mobList[zoneID][127].info = {"Statue", "Vanguard Eye", nil, nil, nil} -- (127-H)
+xi.dynamis.mobList[zoneID][128].info = {"Statue", "Vanguard Eye", nil, nil, nil} -- (128-H)
+xi.dynamis.mobList[zoneID][129].info = {"Statue", "Vanguard Eye", nil, nil, nil} -- (129-H)
+xi.dynamis.mobList[zoneID][130].info = {"Statue", "Vanguard Eye", nil, nil, nil} -- (130-H)
+xi.dynamis.mobList[zoneID][131].info = {"Statue", "Vanguard Eye", nil, nil, nil} -- (131-H)
+xi.dynamis.mobList[zoneID][132].info = {"Statue", "Vanguard Eye", nil, nil, nil} -- (132-H)
+xi.dynamis.mobList[zoneID][133].info = {"Statue", "Vanguard Eye", nil, nil, nil} -- (133-H)
+xi.dynamis.mobList[zoneID][134].info = {"Statue", "Vanguard Eye", nil, nil, nil} -- (134-H)
+xi.dynamis.mobList[zoneID][135].info = {"Statue", "Vanguard Eye", nil, nil, nil} -- (135-H)
+xi.dynamis.mobList[zoneID][136].info = {"Statue", "Vanguard Eye", nil, nil, nil} -- (136-H)
+xi.dynamis.mobList[zoneID][137].info = {"Statue", "Vanguard Eye", nil, nil, nil} -- (137-H)
+xi.dynamis.mobList[zoneID][138].info = {"Statue", "Vanguard Eye", nil, nil, nil} -- (138-H)
+xi.dynamis.mobList[zoneID][139].info = {"Statue", "Vanguard Eye", nil, nil, nil} -- (139-H)
+xi.dynamis.mobList[zoneID][140].info = {"Statue", "Vanguard Eye", nil, nil, nil} -- (140-H)
+xi.dynamis.mobList[zoneID][141].info = {"Statue", "Vanguard Eye", nil, nil, nil} -- (141-H)
+xi.dynamis.mobList[zoneID][142].info = {"Statue", "Vanguard Eye", nil, nil, nil} -- (142-H)
+xi.dynamis.mobList[zoneID][143].info = {"Statue", "Vanguard Eye", nil, nil, nil} -- (143-H)
+xi.dynamis.mobList[zoneID][144].info = {"Statue", "Vanguard Eye", nil, nil, nil} -- (144-H)
+xi.dynamis.mobList[zoneID][145].info = {"Statue", "Vanguard Eye", nil, nil, nil} -- (145-H)
+xi.dynamis.mobList[zoneID][146].info = {"Statue", "Vanguard Eye", nil, nil, nil} -- (146-H)
+xi.dynamis.mobList[zoneID][147].info = {"Statue", "Vanguard Eye", nil, nil, nil} -- (147-H) (15)
+xi.dynamis.mobList[zoneID][148].info = {"Statue", "Vanguard Eye", nil, nil, nil} -- (148-H)
+xi.dynamis.mobList[zoneID][149].info = {"Statue", "Vanguard Eye", nil, nil, nil} -- (149-H)
+xi.dynamis.mobList[zoneID][150].info = {"Statue", "Vanguard Eye", nil, nil, nil} -- (150-H)
+xi.dynamis.mobList[zoneID][151].info = {"Statue", "Vanguard Eye", nil, nil, nil} -- (151-H)
+xi.dynamis.mobList[zoneID][152].info = {"Statue", "Vanguard Eye", nil, nil, nil} -- (152-H)
+xi.dynamis.mobList[zoneID][153].info = {"Statue", "Vanguard Eye", nil, nil, nil} -- (153-H)
+xi.dynamis.mobList[zoneID][154].info = {"Statue", "Vanguard Eye", nil, nil, nil} -- (154-H)
+xi.dynamis.mobList[zoneID][155].info = {"Statue", "Vanguard Eye", nil, nil, nil} -- (155-H)
+xi.dynamis.mobList[zoneID][156].info = {"Statue", "Vanguard Eye", nil, nil, nil} -- (156-H)
+xi.dynamis.mobList[zoneID][157].info = {"Statue", "Vanguard Eye", nil, nil, "157_killed"} -- (157-H)
+xi.dynamis.mobList[zoneID][158].info = {"NM", "Dagourmarche", "Hydra", nil, nil} -- ( 158 ) Attest. NM (Dagourmarche) (DRG+SMN+BST)
+xi.dynamis.mobList[zoneID][159].info = {"NM", "Quiebitiel", "Hydra", nil, nil} -- ( 159 ) Attest. NM (Quiebitiel) (BLM+WHM+BRD)
+xi.dynamis.mobList[zoneID][160].info = {"NM", "Goublefaupe", "Hydra", nil, nil} -- ( 160 ) Attest. NM (Goublefaupe) (RDM+PLD+WAR)
+xi.dynamis.mobList[zoneID][161].info = {"NM", "Mildaunegeux", "Hydra", nil, nil} -- ( 161 ) Attest. NM (Mildaunegeux) (MNK+NIN+THF)
+xi.dynamis.mobList[zoneID][162].info = {"NM", "Velosareon", "Hydra", nil, nil} -- ( 162 ) Attest. NM (Velosareon) (DRK+SAM+RNG)
+xi.dynamis.mobList[zoneID][163].info = {"NM", "Angra Mainyu", "Hydra", nil, nil} -- ( 163 ) Ahriman NM (Angra Mainyu)
 xi.dynamis.mobList[zoneID][164].info = {"NM", "Fire Pukis", nil, nil, nil} --   Fire Pukis
 xi.dynamis.mobList[zoneID][165].info = {"NM", "Poison Pukis", nil, nil, nil} -- Poison Pukis
 xi.dynamis.mobList[zoneID][166].info = {"NM", "Wind Pukis", nil, nil, nil} --   Wind Pukis
 xi.dynamis.mobList[zoneID][167].info = {"NM", "Petro Pukis", nil, nil, nil} --  Petro Pukis
-xi.dynamis.mobList[zoneID][160].info = {"NM", "Goublefaupe", nil, nil, nil} -- 160-Attest. NM (Goublefaupe) (RDM+PLD+WAR)
-xi.dynamis.mobList[zoneID][159].info = {"NM", "Quiebitiel", nil, nil, nil} -- 159-Attest. NM (Quiebitiel) (BLM+WHM+BRD)
-xi.dynamis.mobList[zoneID][161].info = {"NM", "Mildaunegeux", nil, nil, nil} -- 161-Attest. NM (Mildaunegeux) (MNK+NIN+THF)
-xi.dynamis.mobList[zoneID][162].info = {"NM", "Velosareon", nil, nil, nil} -- 162-Attest. NM (Velosareon) (DRK+SAM+RNG)
-xi.dynamis.mobList[zoneID][158].info = {"NM", "Dagourmarche", nil, nil, nil} -- 158-Attest. NM (Dagourmarche) (DRG+SMN+BST)
-xi.dynamis.mobList[zoneID][168].info = {"NM", "Xaa Chau the Roctalon", nil, "MNK", nil} -- MNK
-xi.dynamis.mobList[zoneID][169].info = {"NM", "Maa Zaua the Wyrmkeeper", nil, "DRG", nil} -- DRG
-xi.dynamis.mobList[zoneID][170].info = {"NM", "Soo Jopo the Fiendking", nil, "BST", nil} -- BST
-xi.dynamis.mobList[zoneID][171].info = {"NM", "Hee Mida the Meticulous", nil, "RNG", nil} -- RNG
-xi.dynamis.mobList[zoneID][172].info = {"NM", "Xhoo Fuza the Sublime", nil, "BRD", nil} -- BRD
-xi.dynamis.mobList[zoneID][173].info = {"NM", "Puu Timu the Phantasmal", nil, "SMN", nil} -- SMN
-xi.dynamis.mobList[zoneID][174].info = {"NM", "Foo Peku the Bloodcloak", nil, "WAR", nil} -- WAR
-xi.dynamis.mobList[zoneID][175].info = {"NM", "Koo Saxu the Everfast", nil, "WHM", nil} -- WHM
-xi.dynamis.mobList[zoneID][176].info = {"NM", "Kuu Xuka the Nimble", nil, "NIN", nil} -- NIN
-xi.dynamis.mobList[zoneID][177].info = {"NM", "Guu Waji the Preacher", nil, "PLD", nil} -- PLD
-xi.dynamis.mobList[zoneID][178].info = {"NM", "Nee Huxa the Judgmental", nil, "DRK", nil} -- DRK
-xi.dynamis.mobList[zoneID][179].info = {"NM", "Caa Xaza the Madpiercer", nil, "RDM", nil} -- RDM
-xi.dynamis.mobList[zoneID][180].info = {"NM", "Bhuu Wjato the Firepool", nil, "BLM", nil} -- BLM
-xi.dynamis.mobList[zoneID][181].info = {"NM", "Droprix Granitepalms", nil, "MNK", nil} -- MNK
-xi.dynamis.mobList[zoneID][182].info = {"NM", "Ascetox Ratgums", nil, "BLM", nil} -- BLM
-xi.dynamis.mobList[zoneID][183].info = {"NM", "Bordox Kittyback", nil, "THF", nil} -- THF
-xi.dynamis.mobList[zoneID][184].info = {"NM", "Draklix Scalecrust", nil, "DRG", nil} -- DRG
-xi.dynamis.mobList[zoneID][185].info = {"NM", "Swypestix Tigershins", nil, "NIN", nil} -- NIN
-xi.dynamis.mobList[zoneID][186].info = {"NM", "Shisox Widebrow", nil, "SAM", nil} -- SAM
-xi.dynamis.mobList[zoneID][187].info = {"NM", "Gibberox Pimplebeak", nil, "RDM", nil} -- RDM
-xi.dynamis.mobList[zoneID][188].info = {"NM", "Morblox Chubbychin", nil, "SMN", nil} -- SMN
-xi.dynamis.mobList[zoneID][189].info = {"NM", "Moltenox Stubthumbs", nil, "WAR", nil} -- WAR
-xi.dynamis.mobList[zoneID][190].info = {"NM", "Slinkix Trufflesniff", nil, "RNG", nil} -- RNG
-xi.dynamis.mobList[zoneID][191].info = {"NM", "Ruffbix Jumbolobes", nil, "PLD", nil} -- PLD
-xi.dynamis.mobList[zoneID][192].info = {"NM", "Routsix Rubbertendon", nil, "BST", nil} -- BST
-xi.dynamis.mobList[zoneID][193].info = {"NM", "Whistrix Toadthroat", nil, "BRD", nil} -- BRD
-xi.dynamis.mobList[zoneID][194].info = {"NM", "Ji'Fhu Infiltrator", nil, "THF", nil} -- THF
-xi.dynamis.mobList[zoneID][195].info = {"NM", "Ta'Hyu Gallanthunter", nil, "DRK", nil} -- DRK
-xi.dynamis.mobList[zoneID][196].info = {"NM", "Mu'Gha Legionkiller", nil, "PLD", nil} -- PLD
-xi.dynamis.mobList[zoneID][197].info = {"NM", "Mi'Rhe Whisperblade", nil, "NIN", nil} -- NIN
-xi.dynamis.mobList[zoneID][198].info = {"NM", "Nu'Bhi Spiraleye", nil, "BRD", nil} -- BRD
-xi.dynamis.mobList[zoneID][199].info = {"NM", "Be'Zhe Keeprazer", nil, "SMN", nil} -- SMN
-xi.dynamis.mobList[zoneID][200].info = {"NM", "Na'Hya Floodmaker", nil, "RDM", nil} -- RDM
-xi.dynamis.mobList[zoneID][201].info = {"NM", "So'Zho Metalbender", nil, "MNK", nil} -- MNK
-xi.dynamis.mobList[zoneID][202].info = {"NM", "Ga'Fho Venomtouch", nil, "WHM", nil} -- WHM
-xi.dynamis.mobList[zoneID][203].info = {"NM", "De'Bho Pyrohand", nil, "BLM", nil} -- BLM
-xi.dynamis.mobList[zoneID][204].info = {"NM", "So'Gho Adderhandler", nil, "BST", nil} -- BST
-xi.dynamis.mobList[zoneID][205].info = {"NM", "Go'Tyo Magenapper", nil, "DRG", nil} -- DRG
-xi.dynamis.mobList[zoneID][206].info = {"NM", "Ji'Khu Towercleaver", nil, "SAM", nil} -- SAM
-xi.dynamis.mobList[zoneID][207].info = {"NM", "Deathcaller Bidfbid", nil, "SMN", nil} -- SMN
-xi.dynamis.mobList[zoneID][208].info = {"NM", "Taruroaster Biggsjig", nil, "BLM", nil} -- BLM
-xi.dynamis.mobList[zoneID][209].info = {"NM", "Heavymail Djidzbad", nil, "PLD", nil} -- PLD
-xi.dynamis.mobList[zoneID][210].info = {"NM", "Skinmask Ugghfogg", nil, "DRK", nil} -- DRK
-xi.dynamis.mobList[zoneID][211].info = {"NM", "Lockbuster Zapdjipp", nil, "THF", nil} -- THF
-xi.dynamis.mobList[zoneID][212].info = {"NM", "Cobraclaw Buchzvotch", nil, "MNK", nil} -- MNK
-xi.dynamis.mobList[zoneID][213].info = {"NM", "Galkarider Retzpratz", nil, "RNG", nil} -- RNG
-xi.dynamis.mobList[zoneID][214].info = {"NM", "Drakefeast Wubmfub", nil, "DRG", nil} -- DRG
-xi.dynamis.mobList[zoneID][215].info = {"NM", "Spinalsucker Galflmall", nil, "RDM", nil} -- RDM
-xi.dynamis.mobList[zoneID][216].info = {"NM", "Elvaanlopper Grokdok", nil, "SAM", nil} -- SAM
-xi.dynamis.mobList[zoneID][217].info = {"NM", "Humegutter Adzjbadj", nil, "WAR", nil} -- WAR
-xi.dynamis.mobList[zoneID][218].info = {"NM", "Mithraslaver Debhabob", nil, "BST", nil} -- BST
-xi.dynamis.mobList[zoneID][219].info = {"NM", "Wraithdancer Gidbnod", nil, "WHM", nil} -- WHM
-xi.dynamis.mobList[zoneID][220].info = {"NM", "Gu'Nha Wallstormer", nil, "WAR", nil} -- WAR
-xi.dynamis.mobList[zoneID][221].info = {"NM", "Gu'Khu Dukesniper", nil, "RNG", nil} -- RNG
-xi.dynamis.mobList[zoneID][222].info = {"NM", "Brewnix Bittypupils", nil, "WHM", nil} -- WHM
-xi.dynamis.mobList[zoneID][223].info = {"NM", "Tocktix Thinlids", nil, "DRK", nil} -- DRK
-xi.dynamis.mobList[zoneID][224].info = {"NM", "Ultrasonic Zeknajak", nil, "BRD", nil} -- BRD
-xi.dynamis.mobList[zoneID][225].info = {"NM", "Jeunoraider Gepkzip", nil, "NIN", nil} -- NIN
-xi.dynamis.mobList[zoneID][226].info = {"NM", "Ryy Qihi the Idolrobber", nil, "THF", nil} -- THF
-xi.dynamis.mobList[zoneID][227].info = {"NM", "Knii Hoqo the Bisector", nil, "SAM", nil} -- SAM
+xi.dynamis.mobList[zoneID][168].info = {"NM", "Xaa Chau the Roctalon", "Yagudo", nil, nil} -- MNK
+xi.dynamis.mobList[zoneID][169].info = {"NM", "Maa Zaua the Wyrmkeeper", "Yagudo", nil, nil} -- DRG
+xi.dynamis.mobList[zoneID][170].info = {"NM", "Soo Jopo the Fiendking", "Yagudo", nil, nil} -- BST
+xi.dynamis.mobList[zoneID][171].info = {"NM", "Hee Mida the Meticulous", "Yagudo", nil, nil} -- RNG
+xi.dynamis.mobList[zoneID][172].info = {"NM", "Xhoo Fuza the Sublime", "Yagudo", nil, nil} -- BRD
+xi.dynamis.mobList[zoneID][173].info = {"NM", "Puu Timu the Phantasmal", "Yagudo", nil, nil} -- SMN
+xi.dynamis.mobList[zoneID][174].info = {"NM", "Foo Peku the Bloodcloak", "Yagudo", nil, nil} -- WAR
+xi.dynamis.mobList[zoneID][175].info = {"NM", "Koo Saxu the Everfast", "Yagudo", nil, nil} -- WHM
+xi.dynamis.mobList[zoneID][176].info = {"NM", "Kuu Xuka the Nimble", "Yagudo", nil, nil} -- NIN
+xi.dynamis.mobList[zoneID][177].info = {"NM", "Guu Waji the Preacher", "Yagudo", nil, nil} -- PLD
+xi.dynamis.mobList[zoneID][178].info = {"NM", "Nee Huxa the Judgmental", "Yagudo", nil, nil} -- DRK
+xi.dynamis.mobList[zoneID][179].info = {"NM", "Caa Xaza the Madpiercer", "Yagudo", nil, nil} -- RDM
+xi.dynamis.mobList[zoneID][180].info = {"NM", "Bhuu Wjato the Firepool", "Yagudo", nil, nil} -- BLM
+xi.dynamis.mobList[zoneID][181].info = {"NM", "Droprix Granitepalms", "Goblin", nil, nil} -- MNK
+xi.dynamis.mobList[zoneID][182].info = {"NM", "Ascetox Ratgums", "Goblin", nil, nil} -- BLM
+xi.dynamis.mobList[zoneID][183].info = {"NM", "Bordox Kittyback", "Goblin", nil, nil} -- THF
+xi.dynamis.mobList[zoneID][184].info = {"NM", "Draklix Scalecrust", "Goblin", nil, nil} -- DRG
+xi.dynamis.mobList[zoneID][185].info = {"NM", "Swypestix Tigershins", "Goblin", nil, nil} -- NIN
+xi.dynamis.mobList[zoneID][186].info = {"NM", "Shisox Widebrow", "Goblin", nil, nil} -- SAM
+xi.dynamis.mobList[zoneID][187].info = {"NM", "Gibberox Pimplebeak", "Goblin", nil, nil} -- RDM
+xi.dynamis.mobList[zoneID][188].info = {"NM", "Morblox Chubbychin", "Goblin", nil, nil} -- SMN
+xi.dynamis.mobList[zoneID][189].info = {"NM", "Moltenox Stubthumbs", "Goblin", nil, nil} -- WAR
+xi.dynamis.mobList[zoneID][190].info = {"NM", "Slinkix Trufflesniff", "Goblin", nil, nil} -- RNG
+xi.dynamis.mobList[zoneID][191].info = {"NM", "Ruffbix Jumbolobes", "Goblin", nil, nil} -- PLD
+xi.dynamis.mobList[zoneID][192].info = {"NM", "Routsix Rubbertendon", "Goblin", nil, nil} -- BST
+xi.dynamis.mobList[zoneID][193].info = {"NM", "Whistrix Toadthroat", "Goblin", nil, nil} -- BRD
+xi.dynamis.mobList[zoneID][194].info = {"NM", "Ji'Fhu Infiltrator", "Quadav", nil, nil} -- THF
+xi.dynamis.mobList[zoneID][195].info = {"NM", "Ta'Hyu Gallanthunter", "Quadav", nil, nil} -- DRK
+xi.dynamis.mobList[zoneID][196].info = {"NM", "Mu'Gha Legionkiller", "Quadav", nil, nil} -- PLD
+xi.dynamis.mobList[zoneID][197].info = {"NM", "Mi'Rhe Whisperblade", "Quadav", nil, nil} -- NIN
+xi.dynamis.mobList[zoneID][198].info = {"NM", "Nu'Bhi Spiraleye", "Quadav", nil, nil} -- BRD
+xi.dynamis.mobList[zoneID][199].info = {"NM", "Be'Zhe Keeprazer", "Quadav", nil, nil} -- SMN
+xi.dynamis.mobList[zoneID][200].info = {"NM", "Na'Hya Floodmaker", "Quadav", nil, nil} -- RDM
+xi.dynamis.mobList[zoneID][201].info = {"NM", "So'Zho Metalbender", "Quadav", nil, nil} -- MNK
+xi.dynamis.mobList[zoneID][202].info = {"NM", "Ga'Fho Venomtouch", "Quadav", nil, nil} -- WHM
+xi.dynamis.mobList[zoneID][203].info = {"NM", "De'Bho Pyrohand", "Quadav", nil, nil} -- BLM
+xi.dynamis.mobList[zoneID][204].info = {"NM", "So'Gho Adderhandler", "Quadav", nil, nil} -- BST
+xi.dynamis.mobList[zoneID][205].info = {"NM", "Go'Tyo Magenapper", "Quadav", nil, nil} -- DRG
+xi.dynamis.mobList[zoneID][206].info = {"NM", "Ji'Khu Towercleaver", "Quadav", nil, nil} -- SAM
+xi.dynamis.mobList[zoneID][207].info = {"NM", "Deathcaller Bidfbid", "Orc", nil, nil} -- SMN
+xi.dynamis.mobList[zoneID][208].info = {"NM", "Taruroaster Biggsjig", "Orc", nil, nil} -- BLM
+xi.dynamis.mobList[zoneID][209].info = {"NM", "Heavymail Djidzbad", "Orc", nil, nil} -- PLD
+xi.dynamis.mobList[zoneID][210].info = {"NM", "Skinmask Ugghfogg", "Orc", nil, nil} -- DRK
+xi.dynamis.mobList[zoneID][211].info = {"NM", "Lockbuster Zapdjipp", "Orc", nil, nil} -- THF
+xi.dynamis.mobList[zoneID][212].info = {"NM", "Cobraclaw Buchzvotch", "Orc", nil, nil} -- MNK
+xi.dynamis.mobList[zoneID][213].info = {"NM", "Galkarider Retzpratz", "Orc", nil, nil} -- RNG
+xi.dynamis.mobList[zoneID][214].info = {"NM", "Drakefeast Wubmfub", "Orc", nil, nil} -- DRG
+xi.dynamis.mobList[zoneID][215].info = {"NM", "Spinalsucker Galflmall", "Orc", nil, nil} -- RDM
+xi.dynamis.mobList[zoneID][216].info = {"NM", "Elvaanlopper Grokdok", "Orc", nil, nil} -- SAM
+xi.dynamis.mobList[zoneID][217].info = {"NM", "Humegutter Adzjbadj", "Orc", nil, nil} -- WAR
+xi.dynamis.mobList[zoneID][218].info = {"NM", "Mithraslaver Debhabob", "Orc", nil, nil} -- BST
+xi.dynamis.mobList[zoneID][219].info = {"NM", "Wraithdancer Gidbnod", "Orc", nil, nil} -- WHM
+xi.dynamis.mobList[zoneID][220].info = {"NM", "Gu'Nha Wallstormer", "Quadav", nil, nil} -- WAR
+xi.dynamis.mobList[zoneID][221].info = {"NM", "Gu'Khu Dukesniper", "Quadav", nil, nil} -- RNG
+xi.dynamis.mobList[zoneID][222].info = {"NM", "Brewnix Bittypupils", "Goblin", nil, nil} -- WHM
+xi.dynamis.mobList[zoneID][223].info = {"NM", "Tocktix Thinlids", "Goblin", nil, nil} -- DRK
+xi.dynamis.mobList[zoneID][224].info = {"NM", "Ultrasonic Zeknajak", "Orc", nil, nil} -- BRD
+xi.dynamis.mobList[zoneID][225].info = {"NM", "Jeunoraider Gepkzip", "Orc", nil, nil} -- NIN
+xi.dynamis.mobList[zoneID][226].info = {"NM", "Ryy Qihi the Idolrobber", "Yagudo", nil, nil} -- THF
+xi.dynamis.mobList[zoneID][227].info = {"NM", "Knii Hoqo the Bisector", "Yagudo", nil, nil} -- SAM
 
 ----------------------------------------------------------------------------------------------------
 --                                    Setup of Wave Spawning                                      --
@@ -324,7 +333,11 @@ xi.dynamis.mobList[zoneID][227].info = {"NM", "Knii Hoqo the Bisector", nil, "SA
 --------------------------------------------
 --xi.dynamis.mobList[zoneID].waveDefeatRequirements[2] = {zone:getLocalVar("MegaBoss_Killed") == 1}
 
-xi.dynamis.mobList[zoneID].waveDefeatRequirements[2] = { zone:getLocalVar("157_killed") == 1 } -- Spawns paper NMs
+xi.dynamis.mobList[zoneID].waveDefeatRequirements =
+{
+    { }, -- Do not touch this is wave 1
+    {"157_killed"} -- Spawns paper NMs
+}
 
 ------------------------------------------
 --            Wave Spawning             --
@@ -332,7 +345,8 @@ xi.dynamis.mobList[zoneID].waveDefeatRequirements[2] = { zone:getLocalVar("157_k
 ------------------------------------------
 --xi.dynamis.mobList[zoneID].wave# = { MobIndex#1, MobIndex#2, MobIndex#3 }
 
-xi.dynamis.mobList[zoneID].wave1 = {
+xi.dynamis.mobList[zoneID][1].wave =
+{
     3  , -- (003-Y)   Avatar Icon
     1  , -- (001-Q)   Adamantking Effigy
     2  , -- (002-O)   Serjent Tombstone
@@ -492,7 +506,8 @@ xi.dynamis.mobList[zoneID].wave1 = {
     163  -- (163- )   Angra Mainyu
 }
 
-xi.dynamis.mobList[zoneID].wave2 = {
+xi.dynamis.mobList[zoneID][2].wave =
+{
     160, -- ( 160 ) Attest. NM (Goublefaupe)
     159, -- ( 159 ) Attest. NM (Quiebitiel)
     161, -- ( 161 ) Attest. NM (Mildaunegeux)
@@ -517,7 +532,7 @@ xi.dynamis.mobList[zoneID][6  ].mobchildren = { nil, nil, nil, nil, nil, nil,   
 xi.dynamis.mobList[zoneID][5  ].mobchildren = { nil, nil, nil, nil,   1, nil, nil, nil, nil, nil, nil, nil,   1, nil, nil  } --   1 RDM  1 NIN
 xi.dynamis.mobList[zoneID][8  ].mobchildren = { nil, nil, nil, nil, nil,   1, nil, nil, nil, nil, nil, nil, nil, nil,   1  } --   1 THF  1 SMN
 xi.dynamis.mobList[zoneID][10 ].mobchildren = { nil, nil,   1, nil, nil, nil, nil, nil, nil,   1, nil, nil, nil, nil, nil  } --   1 WHM  1 BRD
-xi.dynamis.mobList[zoneID][9 ].mobchildren  = { nil, nil, nil, nil, nil, nil,   1, nil, nil, nil, nil, nil, nil, nil, nil  } --   1 PLD
+xi.dynamis.mobList[zoneID][9  ].mobchildren = { nil, nil, nil, nil, nil, nil,   1, nil, nil, nil, nil, nil, nil, nil, nil  } --   1 PLD
 xi.dynamis.mobList[zoneID][11 ].mobchildren = { nil, nil, nil, nil, nil, nil, nil,   1, nil, nil, nil, nil, nil, nil, nil  } --   1 DRK
 xi.dynamis.mobList[zoneID][13 ].mobchildren = {   1, nil, nil, nil, nil, nil, nil, nil,   1, nil, nil, nil, nil, nil, nil  } --   1 WAR  1 BST
 xi.dynamis.mobList[zoneID][12 ].mobchildren = { nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, nil,   1, nil, nil,   1  } --   1 SAM  1 SMN
@@ -664,55 +679,55 @@ xi.dynamis.mobList[zoneID][158].mobchildren = { nil, nil, nil, nil, nil, nil, ni
 ------------------------------------------
 --            NM Child Spawn            --
 ------------------------------------------
--- xi.dynamis.mobList[zoneID][MobIndex].NMChildren = {MobIndex(NM1), MobIndex(NM2), MobIndex(NM3)}
+-- xi.dynamis.mobList[zoneID][MobIndex].nmchildren = {MobIndex(NM1), MobIndex(NM2), MobIndex(NM3)}
 -- boolean value = forceLink true/false
 
-xi.dynamis.mobList[zoneID][10 ].NMChildren = { true,  168                     } -- (010-Y) Spawns -> MNK NM (Xaa Chau the Roctalon)
-xi.dynamis.mobList[zoneID][15 ].NMChildren = { true,  170                     } -- (015-Y) Spawns -> BST NM (Soo Jopo the Fiendking)
-xi.dynamis.mobList[zoneID][17 ].NMChildren = { true,  171                     } -- (017-Y) Spawns -> RNG NM (Hee Mida the Meticulous)
-xi.dynamis.mobList[zoneID][14 ].NMChildren = { true,  169                     } -- (014-Y) Spawns -> DRG NM (Maa Zaua the Wyrmkeeper)
-xi.dynamis.mobList[zoneID][19 ].NMChildren = { true,  172                     } -- (019-Y) Spawns -> BRD NM (Xhoo Fuza the Sublime)
-xi.dynamis.mobList[zoneID][20 ].NMChildren = { true,  173                     } -- (020-Y) Spawns -> SMN NM (Puu Timu the Phantasmal)
-xi.dynamis.mobList[zoneID][21 ].NMChildren = { true,  174                     } -- (021-Y) Spawns -> WAR NM (Foo Peku the Bloodcloak)
-xi.dynamis.mobList[zoneID][29 ].NMChildren = { true,  180                     } -- (029-Y) Spawns -> BLM NM (Bhuu Wjato the Firepool)
-xi.dynamis.mobList[zoneID][26 ].NMChildren = { true,  179                     } -- (026-Y) Spawns -> RDM NM (Caa Xaza the Madpiercer)
-xi.dynamis.mobList[zoneID][24 ].NMChildren = { true,  175, 176, 177, 178      } -- ( 024 ) Spawns -> WHM NM (Koo Saxu the Everfast),   NIN NM (Kuu Xuka the Nimble),    PLD NM (Guu Waji the Preacher), DRK NM (Nee Huxa the Judgmental)
-xi.dynamis.mobList[zoneID][31 ].NMChildren = { true,  181                     } -- (031-G) Spawns -> MNK NM (Droprix Granitepalms)
-xi.dynamis.mobList[zoneID][34 ].NMChildren = { true,  182                     } -- (034-G) Spawns -> BLM NM (Ascetox Ratgums)
-xi.dynamis.mobList[zoneID][35 ].NMChildren = { true,  183                     } -- (035-G) Spawns -> THF NM (Bordox Kittyback)
-xi.dynamis.mobList[zoneID][52 ].NMChildren = { true,  192                     } -- (052-G) Spawns -> BST NM (Routsix Rubbertendon)
-xi.dynamis.mobList[zoneID][53 ].NMChildren = { true,  193                     } -- (053-G) Spawns -> BRD NM (Whistrix Toadthroat)
-xi.dynamis.mobList[zoneID][47 ].NMChildren = { true,  188, 189, 190, 191      } -- ( 047 ) Spawns -> SMN NM (Morblox Chubbychin),      WAR NM (Moltenox Stubthumbs),    RNG NM (Slinkix Trufflesniff),  PLD NM (Ruffbix Jumbolobes)
-xi.dynamis.mobList[zoneID][41 ].NMChildren = { true,  185                     } -- (041-G) Spawns -> NIN NM (Swypestix Tigershins)
-xi.dynamis.mobList[zoneID][40 ].NMChildren = { true,  184                     } -- (040-G) Spawns -> DRG NM (Draklix Scalecrust)
-xi.dynamis.mobList[zoneID][42 ].NMChildren = { true,  186                     } -- (042-G) Spawns -> SAM NM (Shisox Widebrow)
-xi.dynamis.mobList[zoneID][46 ].NMChildren = { true,  187                     } -- (046-G) Spawns -> RDM NM (Gibberox Pimplebeak)
-xi.dynamis.mobList[zoneID][54 ].NMChildren = { true,  194                     } -- (054-Q) Spawns -> THF NM (Ji'Fhu Infiltrator)
-xi.dynamis.mobList[zoneID][55 ].NMChildren = { true,  195                     } -- (055-Q) Spawns -> DRK NM (Ta'Hyu Gallanthunter)
-xi.dynamis.mobList[zoneID][68 ].NMChildren = { true,  201, 202, 203, 204      } -- ( 068 ) Spawns -> MNK NM (So'Zho Metalbender),      WHM NM (Ga'Fho Venomtouch),      BLM NM (De'Bho Pyrohand),       BST NM (So'Gho Adderhandler)
-xi.dynamis.mobList[zoneID][76 ].NMChildren = { true,  206                     } -- (076-Q) Spawns -> SAM NM (Ji'Khu Towercleaver)
-xi.dynamis.mobList[zoneID][72 ].NMChildren = { true,  205                     } -- (072-Q) Spawns -> DRG NM (Go'Tyo Magenapper)
-xi.dynamis.mobList[zoneID][58 ].NMChildren = { true,  196                     } -- (058-Q) Spawns -> PLD NM (Mu'Gha Legionkiller)
-xi.dynamis.mobList[zoneID][60 ].NMChildren = { true,  197                     } -- (060-Q) Spawns -> NIN NM (Mi'Rhe Whisperblade)
-xi.dynamis.mobList[zoneID][62 ].NMChildren = { true,  198                     } -- (062-Q) Spawns -> BRD NM (Nu'Bhi Spiraleye)
-xi.dynamis.mobList[zoneID][63 ].NMChildren = { true,  199                     } -- (063-Q) Spawns -> SMN NM (Be'Zhe Keeprazer)
-xi.dynamis.mobList[zoneID][66 ].NMChildren = { true,  200                     } -- (066-Q) Spawns -> RDM NM (Na'Hya Floodmaker)
-xi.dynamis.mobList[zoneID][90 ].NMChildren = { true,  214, 215, 216, 217      } -- ( 090 ) Spawns -> DRG NM (Drakefeast Wubmfub),      RDM NM (Spinalsucker Galflmall), SAM NM (Elvaanlopper Grokdok),  WAR NM (Humegutter Adzjbadj)
-xi.dynamis.mobList[zoneID][91 ].NMChildren = { true,  218                     } -- (091-O) Spawns -> BST NM (Mithraslaver Debhabob)
-xi.dynamis.mobList[zoneID][98 ].NMChildren = { true,  219                     } -- (098-O) Spawns -> WHM NM (Wraithdancer Gidbnod)
-xi.dynamis.mobList[zoneID][79 ].NMChildren = { true,  207                     } -- (079-O) Spawns -> SMN NM (Deathcaller Bidfbid)
-xi.dynamis.mobList[zoneID][84 ].NMChildren = { true,  210                     } -- (084-O) Spawns -> DRK NM (Skinmask Ugghfogg)
-xi.dynamis.mobList[zoneID][83 ].NMChildren = { true,  209                     } -- (083-O) Spawns -> PLD NM (Heavymail Djidzbad)
-xi.dynamis.mobList[zoneID][82 ].NMChildren = { true,  208                     } -- (082-O) Spawns -> BLM NM (Taruroaster Biggsjig)
-xi.dynamis.mobList[zoneID][86 ].NMChildren = { true,  211                     } -- (086-O) Spawns -> THF NM (Lockbuster Zapdjipp)
-xi.dynamis.mobList[zoneID][87 ].NMChildren = { true,  212                     } -- (087-O) Spawns -> MNK NM (Cobraclaw Buchzvotch)
-xi.dynamis.mobList[zoneID][88 ].NMChildren = { true,  213                     } -- (088-O) Spawns -> RNG NM (Galkarider Retzpratz)
-xi.dynamis.mobList[zoneID][103].NMChildren = { true,  220, 221                } -- (103-Q) Spawns -> WAR NM (Gu'Nha Wallstormer),      RNG NM (Gu'Khu Dukesniper)
-xi.dynamis.mobList[zoneID][104].NMChildren = { true,  222, 223                } -- (104-G) Spawns -> WHM NM (Brewnix Bittypupils),     DRK NM (Tocktix Thinlids)
-xi.dynamis.mobList[zoneID][105].NMChildren = { true,  224, 225                } -- (105-O) Spawns -> BRD NM (Ultrasonic Zeknajak),     NIN NM (Jeunoraider Gepkzip)
-xi.dynamis.mobList[zoneID][106].NMChildren = { true,  226, 227                } -- (106-Y) Spawns -> THF NM (Ryy Qihi the Idolrobber), SAM NM (Knii Hoqo the Bisector)
-xi.dynamis.mobList[zoneID][117].NMChildren = { false, 120                     } -- (117-H) Spawns -> Vanguard Eye ( 120 )
-xi.dynamis.mobList[zoneID][163].NMChildren = { true,  164, 165, 166, 167      } -- ( 163 ) Ahriman NM (Angra Mainyu)
+xi.dynamis.mobList[zoneID][10 ].nmchildren = { true,  168                  } -- (010-Y) Spawns -> MNK NM (Xaa Chau the Roctalon)
+xi.dynamis.mobList[zoneID][15 ].nmchildren = { true,  170                  } -- (015-Y) Spawns -> BST NM (Soo Jopo the Fiendking)
+xi.dynamis.mobList[zoneID][17 ].nmchildren = { true,  171                  } -- (017-Y) Spawns -> RNG NM (Hee Mida the Meticulous)
+xi.dynamis.mobList[zoneID][14 ].nmchildren = { true,  169                  } -- (014-Y) Spawns -> DRG NM (Maa Zaua the Wyrmkeeper)
+xi.dynamis.mobList[zoneID][19 ].nmchildren = { true,  172                  } -- (019-Y) Spawns -> BRD NM (Xhoo Fuza the Sublime)
+xi.dynamis.mobList[zoneID][20 ].nmchildren = { true,  173                  } -- (020-Y) Spawns -> SMN NM (Puu Timu the Phantasmal)
+xi.dynamis.mobList[zoneID][21 ].nmchildren = { true,  174                  } -- (021-Y) Spawns -> WAR NM (Foo Peku the Bloodcloak)
+xi.dynamis.mobList[zoneID][29 ].nmchildren = { true,  180                  } -- (029-Y) Spawns -> BLM NM (Bhuu Wjato the Firepool)
+xi.dynamis.mobList[zoneID][26 ].nmchildren = { true,  179                  } -- (026-Y) Spawns -> RDM NM (Caa Xaza the Madpiercer)
+xi.dynamis.mobList[zoneID][24 ].nmchildren = { true,  175, 176, 177, 178   } -- ( 024 ) Spawns -> WHM NM (Koo Saxu the Everfast),   NIN NM (Kuu Xuka the Nimble),    PLD NM (Guu Waji the Preacher), DRK NM (Nee Huxa the Judgmental)
+xi.dynamis.mobList[zoneID][31 ].nmchildren = { true,  181                  } -- (031-G) Spawns -> MNK NM (Droprix Granitepalms)
+xi.dynamis.mobList[zoneID][34 ].nmchildren = { true,  182                  } -- (034-G) Spawns -> BLM NM (Ascetox Ratgums)
+xi.dynamis.mobList[zoneID][35 ].nmchildren = { true,  183                  } -- (035-G) Spawns -> THF NM (Bordox Kittyback)
+xi.dynamis.mobList[zoneID][52 ].nmchildren = { true,  192                  } -- (052-G) Spawns -> BST NM (Routsix Rubbertendon)
+xi.dynamis.mobList[zoneID][53 ].nmchildren = { true,  193                  } -- (053-G) Spawns -> BRD NM (Whistrix Toadthroat)
+xi.dynamis.mobList[zoneID][47 ].nmchildren = { true,  188, 189, 190, 191   } -- ( 047 ) Spawns -> SMN NM (Morblox Chubbychin),      WAR NM (Moltenox Stubthumbs),    RNG NM (Slinkix Trufflesniff),  PLD NM (Ruffbix Jumbolobes)
+xi.dynamis.mobList[zoneID][41 ].nmchildren = { true,  185                  } -- (041-G) Spawns -> NIN NM (Swypestix Tigershins)
+xi.dynamis.mobList[zoneID][40 ].nmchildren = { true,  184                  } -- (040-G) Spawns -> DRG NM (Draklix Scalecrust)
+xi.dynamis.mobList[zoneID][42 ].nmchildren = { true,  186                  } -- (042-G) Spawns -> SAM NM (Shisox Widebrow)
+xi.dynamis.mobList[zoneID][46 ].nmchildren = { true,  187                  } -- (046-G) Spawns -> RDM NM (Gibberox Pimplebeak)
+xi.dynamis.mobList[zoneID][54 ].nmchildren = { true,  194                  } -- (054-Q) Spawns -> THF NM (Ji'Fhu Infiltrator)
+xi.dynamis.mobList[zoneID][55 ].nmchildren = { true,  195                  } -- (055-Q) Spawns -> DRK NM (Ta'Hyu Gallanthunter)
+xi.dynamis.mobList[zoneID][68 ].nmchildren = { true,  201, 202, 203, 204   } -- ( 068 ) Spawns -> MNK NM (So'Zho Metalbender),      WHM NM (Ga'Fho Venomtouch),      BLM NM (De'Bho Pyrohand),       BST NM (So'Gho Adderhandler)
+xi.dynamis.mobList[zoneID][76 ].nmchildren = { true,  206                  } -- (076-Q) Spawns -> SAM NM (Ji'Khu Towercleaver)
+xi.dynamis.mobList[zoneID][72 ].nmchildren = { true,  205                  } -- (072-Q) Spawns -> DRG NM (Go'Tyo Magenapper)
+xi.dynamis.mobList[zoneID][58 ].nmchildren = { true,  196                  } -- (058-Q) Spawns -> PLD NM (Mu'Gha Legionkiller)
+xi.dynamis.mobList[zoneID][60 ].nmchildren = { true,  197                  } -- (060-Q) Spawns -> NIN NM (Mi'Rhe Whisperblade)
+xi.dynamis.mobList[zoneID][62 ].nmchildren = { true,  198                  } -- (062-Q) Spawns -> BRD NM (Nu'Bhi Spiraleye)
+xi.dynamis.mobList[zoneID][63 ].nmchildren = { true,  199                  } -- (063-Q) Spawns -> SMN NM (Be'Zhe Keeprazer)
+xi.dynamis.mobList[zoneID][66 ].nmchildren = { true,  200                  } -- (066-Q) Spawns -> RDM NM (Na'Hya Floodmaker)
+xi.dynamis.mobList[zoneID][90 ].nmchildren = { true,  214, 215, 216, 217   } -- ( 090 ) Spawns -> DRG NM (Drakefeast Wubmfub),      RDM NM (Spinalsucker Galflmall), SAM NM (Elvaanlopper Grokdok),  WAR NM (Humegutter Adzjbadj)
+xi.dynamis.mobList[zoneID][91 ].nmchildren = { true,  218                  } -- (091-O) Spawns -> BST NM (Mithraslaver Debhabob)
+xi.dynamis.mobList[zoneID][98 ].nmchildren = { true,  219                  } -- (098-O) Spawns -> WHM NM (Wraithdancer Gidbnod)
+xi.dynamis.mobList[zoneID][79 ].nmchildren = { true,  207                  } -- (079-O) Spawns -> SMN NM (Deathcaller Bidfbid)
+xi.dynamis.mobList[zoneID][84 ].nmchildren = { true,  210                  } -- (084-O) Spawns -> DRK NM (Skinmask Ugghfogg)
+xi.dynamis.mobList[zoneID][83 ].nmchildren = { true,  209                  } -- (083-O) Spawns -> PLD NM (Heavymail Djidzbad)
+xi.dynamis.mobList[zoneID][82 ].nmchildren = { true,  208                  } -- (082-O) Spawns -> BLM NM (Taruroaster Biggsjig)
+xi.dynamis.mobList[zoneID][86 ].nmchildren = { true,  211                  } -- (086-O) Spawns -> THF NM (Lockbuster Zapdjipp)
+xi.dynamis.mobList[zoneID][87 ].nmchildren = { true,  212                  } -- (087-O) Spawns -> MNK NM (Cobraclaw Buchzvotch)
+xi.dynamis.mobList[zoneID][88 ].nmchildren = { true,  213                  } -- (088-O) Spawns -> RNG NM (Galkarider Retzpratz)
+xi.dynamis.mobList[zoneID][103].nmchildren = { true,  220, 221             } -- (103-Q) Spawns -> WAR NM (Gu'Nha Wallstormer),      RNG NM (Gu'Khu Dukesniper)
+xi.dynamis.mobList[zoneID][104].nmchildren = { true,  222, 223             } -- (104-G) Spawns -> WHM NM (Brewnix Bittypupils),     DRK NM (Tocktix Thinlids)
+xi.dynamis.mobList[zoneID][105].nmchildren = { true,  224, 225             } -- (105-O) Spawns -> BRD NM (Ultrasonic Zeknajak),     NIN NM (Jeunoraider Gepkzip)
+xi.dynamis.mobList[zoneID][106].nmchildren = { true,  226, 227             } -- (106-Y) Spawns -> THF NM (Ryy Qihi the Idolrobber), SAM NM (Knii Hoqo the Bisector)
+xi.dynamis.mobList[zoneID][117].nmchildren = { false, 120                  } -- (117-H) Spawns -> Vanguard Eye ( 120 )
+xi.dynamis.mobList[zoneID][163].nmchildren = { true,  164, 165, 166, 167   } -- ( 163 ) Ahriman NM (Angra Mainyu)
 
 
 ------------------------------------------
@@ -890,72 +905,65 @@ xi.dynamis.mobList[zoneID][161].pos = {   60.1032, -0.2500, -336.3712, 191    } 
 xi.dynamis.mobList[zoneID][162].pos = {  263.2100, -0.2500, -19.8968, 253     } -- ( 162 ) Attest. NM (Velosareon) (DRK+SAM+RNG)
 xi.dynamis.mobList[zoneID][158].pos = { -176.4133, -40.2500, -219.9464,   0   } -- ( 158 ) Attest. NM (Dagourmarche) (DRG+SMN+BST)
 
-
-
 ----------------------------------------------------------------------------------------------------
 --                                    Setup of Mob Functions                                      --
 ----------------------------------------------------------------------------------------------------
-------------------------------------------
---             Patrol Paths             --
-------------------------------------------
--- xi.dynamis.mobList[zoneID][MobIndex].patrolPath = {xpos1,ypos1,zpos1, xpos2,ypos2,zpos2,  xpos3,ypos3,zpos3}
-
 ------------------------------------------
 --          Statue Eye Colors           --
 ------------------------------------------
 -- xi.dynamis.mobList[zoneID][MobIndex].eyes = xi.dynamis.eyes.BLUE -- Flags for blue eyes. (HP)
 -- xi.dynamis.mobList[zoneID][MobIndex].eyes = xi.dynamis.eyes.GREEN -- Flags for green eyes. (MP)
--- xi.dynamis.mobList[zoneID][MobIndex].eyes = xi.dynamis.eyes.RED -- Flags for red eyes. (TE)
 
-xi.dynamis.mobList[zoneID][5  ].eyes = xi.dynamis.eyes.BLUE  -- 005-Y(HP) Avatar Icon
-xi.dynamis.mobList[zoneID][13 ].eyes = xi.dynamis.eyes.BLUE  -- 013-Y(HP) Avatar Icon
-xi.dynamis.mobList[zoneID][18 ].eyes = xi.dynamis.eyes.BLUE  -- 018-Y(HP) Avatar Icon
-xi.dynamis.mobList[zoneID][23 ].eyes = xi.dynamis.eyes.BLUE  -- 023-Y(HP) Avatar Icon
-xi.dynamis.mobList[zoneID][30 ].eyes = xi.dynamis.eyes.BLUE  -- 030-Y(HP) Avatar Icon
-xi.dynamis.mobList[zoneID][37 ].eyes = xi.dynamis.eyes.BLUE  -- 037-G(HP) Goblin Statue
-xi.dynamis.mobList[zoneID][51 ].eyes = xi.dynamis.eyes.BLUE  -- 051-G(HP) Goblin Statue
-xi.dynamis.mobList[zoneID][53 ].eyes = xi.dynamis.eyes.BLUE  -- 053-G(HP) Goblin Statue
-xi.dynamis.mobList[zoneID][41 ].eyes = xi.dynamis.eyes.BLUE  -- 041-G(HP) Goblin Statue
-xi.dynamis.mobList[zoneID][44 ].eyes = xi.dynamis.eyes.BLUE  -- 044-G(HP) Goblin Statue
-xi.dynamis.mobList[zoneID][56 ].eyes = xi.dynamis.eyes.BLUE  -- 056-Q(HP) Adamantking Effigy
-xi.dynamis.mobList[zoneID][74 ].eyes = xi.dynamis.eyes.BLUE  -- 074-Q(HP) Adamantking Effigy
-xi.dynamis.mobList[zoneID][70 ].eyes = xi.dynamis.eyes.BLUE  -- 070-Q(HP) Adamantking Effigy
-xi.dynamis.mobList[zoneID][59 ].eyes = xi.dynamis.eyes.BLUE  -- 059-Q(HP) Adamantking Effigy
-xi.dynamis.mobList[zoneID][65 ].eyes = xi.dynamis.eyes.BLUE  -- 065-Q(HP) Adamantking Effigy
-xi.dynamis.mobList[zoneID][91 ].eyes = xi.dynamis.eyes.BLUE  -- 091-O(HP) Serjeant Tombstone
-xi.dynamis.mobList[zoneID][78 ].eyes = xi.dynamis.eyes.BLUE  -- 078-O(HP) Serjeant Tombstone
-xi.dynamis.mobList[zoneID][84 ].eyes = xi.dynamis.eyes.BLUE  -- 084-O(HP) Serjeant Tombstone
-xi.dynamis.mobList[zoneID][86 ].eyes = xi.dynamis.eyes.BLUE  -- 086-O(HP) Serjeant Tombstone
-xi.dynamis.mobList[zoneID][103].eyes = xi.dynamis.eyes.BLUE  -- 103-Q(HP) Adanamtking Effigy
-xi.dynamis.mobList[zoneID][105].eyes = xi.dynamis.eyes.BLUE  -- 105-O(HP) Serjeant Tombstone
-xi.dynamis.mobList[zoneID][8  ].eyes = xi.dynamis.eyes.GREEN -- 008-G(MP) Goblin replica
-xi.dynamis.mobList[zoneID][12 ].eyes = xi.dynamis.eyes.GREEN -- 012-Y(MP) Avatar Icon
-xi.dynamis.mobList[zoneID][22 ].eyes = xi.dynamis.eyes.GREEN -- 022-Y(MP) Avatar Icon
-xi.dynamis.mobList[zoneID][27 ].eyes = xi.dynamis.eyes.GREEN -- 027-Y(MP) Avatar Icon
-xi.dynamis.mobList[zoneID][25 ].eyes = xi.dynamis.eyes.GREEN -- 025-Y(MP) Avatar Icon
-xi.dynamis.mobList[zoneID][38 ].eyes = xi.dynamis.eyes.GREEN -- 038-G(MP) Goblin Statue
-xi.dynamis.mobList[zoneID][49 ].eyes = xi.dynamis.eyes.GREEN -- 049-G(MP) Goblin Statue
-xi.dynamis.mobList[zoneID][52 ].eyes = xi.dynamis.eyes.GREEN -- 052-G(MP) Goblin Statue
-xi.dynamis.mobList[zoneID][40 ].eyes = xi.dynamis.eyes.GREEN -- 040-G(MP) Goblin Statue
-xi.dynamis.mobList[zoneID][45 ].eyes = xi.dynamis.eyes.GREEN -- 045-G(MP) Goblin Statue
-xi.dynamis.mobList[zoneID][57 ].eyes = xi.dynamis.eyes.GREEN -- 057-Q(MP) Adamantking Effigy
-xi.dynamis.mobList[zoneID][76 ].eyes = xi.dynamis.eyes.GREEN -- 076-Q(MP) Adamantking Effigy
-xi.dynamis.mobList[zoneID][72 ].eyes = xi.dynamis.eyes.GREEN -- 072-Q(MP) Adamantking Effigy
-xi.dynamis.mobList[zoneID][61 ].eyes = xi.dynamis.eyes.GREEN -- 061-Q(MP) Adamantking Effigy
-xi.dynamis.mobList[zoneID][67 ].eyes = xi.dynamis.eyes.GREEN -- 067-Q(MP) Adamantking Effigy
-xi.dynamis.mobList[zoneID][94 ].eyes = xi.dynamis.eyes.GREEN -- 094-O(MP) Serjeant Tombstone
-xi.dynamis.mobList[zoneID][98 ].eyes = xi.dynamis.eyes.GREEN -- 098-O(MP) Serjeant Tombstone
-xi.dynamis.mobList[zoneID][80 ].eyes = xi.dynamis.eyes.GREEN -- 080-O(MP) Serjeant Tombstone
-xi.dynamis.mobList[zoneID][82 ].eyes = xi.dynamis.eyes.GREEN -- 082-O(MP) Serjeant Tombstone
-xi.dynamis.mobList[zoneID][88 ].eyes = xi.dynamis.eyes.GREEN -- 088-O(MP) Serjeant Tombstone
-xi.dynamis.mobList[zoneID][104].eyes = xi.dynamis.eyes.GREEN -- 104-G(MP) Goblin Replica
-xi.dynamis.mobList[zoneID][106].eyes = xi.dynamis.eyes.GREEN -- 106-Y(MP) Avatar Icon
+xi.dynamis.mobList[zoneID][5  ].eyes = xi.dynamis.eyes.BLUE  -- (005-Y) (HP) Avatar Icon
+xi.dynamis.mobList[zoneID][13 ].eyes = xi.dynamis.eyes.BLUE  -- (013-Y) (HP) Avatar Icon
+xi.dynamis.mobList[zoneID][18 ].eyes = xi.dynamis.eyes.BLUE  -- (018-Y) (HP) Avatar Icon
+xi.dynamis.mobList[zoneID][23 ].eyes = xi.dynamis.eyes.BLUE  -- (023-Y) (HP) Avatar Icon
+xi.dynamis.mobList[zoneID][30 ].eyes = xi.dynamis.eyes.BLUE  -- (030-Y) (HP) Avatar Icon
+xi.dynamis.mobList[zoneID][37 ].eyes = xi.dynamis.eyes.BLUE  -- (037-G) (HP) Goblin Statue
+xi.dynamis.mobList[zoneID][51 ].eyes = xi.dynamis.eyes.BLUE  -- (051-G) (HP) Goblin Statue
+xi.dynamis.mobList[zoneID][53 ].eyes = xi.dynamis.eyes.BLUE  -- (053-G) (HP) Goblin Statue
+xi.dynamis.mobList[zoneID][41 ].eyes = xi.dynamis.eyes.BLUE  -- (041-G) (HP) Goblin Statue
+xi.dynamis.mobList[zoneID][44 ].eyes = xi.dynamis.eyes.BLUE  -- (044-G) (HP) Goblin Statue
+xi.dynamis.mobList[zoneID][56 ].eyes = xi.dynamis.eyes.BLUE  -- (056-Q) (HP) Adamantking Effigy
+xi.dynamis.mobList[zoneID][74 ].eyes = xi.dynamis.eyes.BLUE  -- (074-Q) (HP) Adamantking Effigy
+xi.dynamis.mobList[zoneID][70 ].eyes = xi.dynamis.eyes.BLUE  -- (070-Q) (HP) Adamantking Effigy
+xi.dynamis.mobList[zoneID][59 ].eyes = xi.dynamis.eyes.BLUE  -- (059-Q) (HP) Adamantking Effigy
+xi.dynamis.mobList[zoneID][65 ].eyes = xi.dynamis.eyes.BLUE  -- (065-Q) (HP) Adamantking Effigy
+xi.dynamis.mobList[zoneID][91 ].eyes = xi.dynamis.eyes.BLUE  -- (091-O) (HP) Serjeant Tombstone
+xi.dynamis.mobList[zoneID][78 ].eyes = xi.dynamis.eyes.BLUE  -- (078-O) (HP) Serjeant Tombstone
+xi.dynamis.mobList[zoneID][84 ].eyes = xi.dynamis.eyes.BLUE  -- (084-O) (HP) Serjeant Tombstone
+xi.dynamis.mobList[zoneID][86 ].eyes = xi.dynamis.eyes.BLUE  -- (086-O) (HP) Serjeant Tombstone
+xi.dynamis.mobList[zoneID][103].eyes = xi.dynamis.eyes.BLUE  -- (103-Q) (HP) Adanamtking Effigy
+xi.dynamis.mobList[zoneID][105].eyes = xi.dynamis.eyes.BLUE  -- (105-O) (HP) Serjeant Tombstone
+xi.dynamis.mobList[zoneID][8  ].eyes = xi.dynamis.eyes.GREEN -- (008-G) (MP) Goblin replica
+xi.dynamis.mobList[zoneID][12 ].eyes = xi.dynamis.eyes.GREEN -- (012-Y) (MP) Avatar Icon
+xi.dynamis.mobList[zoneID][22 ].eyes = xi.dynamis.eyes.GREEN -- (022-Y) (MP) Avatar Icon
+xi.dynamis.mobList[zoneID][27 ].eyes = xi.dynamis.eyes.GREEN -- (027-Y) (MP) Avatar Icon
+xi.dynamis.mobList[zoneID][25 ].eyes = xi.dynamis.eyes.GREEN -- (025-Y) (MP) Avatar Icon
+xi.dynamis.mobList[zoneID][38 ].eyes = xi.dynamis.eyes.GREEN -- (038-G) (MP) Goblin Statue
+xi.dynamis.mobList[zoneID][49 ].eyes = xi.dynamis.eyes.GREEN -- (049-G) (MP) Goblin Statue
+xi.dynamis.mobList[zoneID][52 ].eyes = xi.dynamis.eyes.GREEN -- (052-G) (MP) Goblin Statue
+xi.dynamis.mobList[zoneID][40 ].eyes = xi.dynamis.eyes.GREEN -- (040-G) (MP) Goblin Statue
+xi.dynamis.mobList[zoneID][45 ].eyes = xi.dynamis.eyes.GREEN -- (045-G) (MP) Goblin Statue
+xi.dynamis.mobList[zoneID][57 ].eyes = xi.dynamis.eyes.GREEN -- (057-Q) (MP) Adamantking Effigy
+xi.dynamis.mobList[zoneID][76 ].eyes = xi.dynamis.eyes.GREEN -- (076-Q) (MP) Adamantking Effigy
+xi.dynamis.mobList[zoneID][72 ].eyes = xi.dynamis.eyes.GREEN -- (072-Q) (MP) Adamantking Effigy
+xi.dynamis.mobList[zoneID][61 ].eyes = xi.dynamis.eyes.GREEN -- (061-Q) (MP) Adamantking Effigy
+xi.dynamis.mobList[zoneID][67 ].eyes = xi.dynamis.eyes.GREEN -- (067-Q) (MP) Adamantking Effigy
+xi.dynamis.mobList[zoneID][94 ].eyes = xi.dynamis.eyes.GREEN -- (094-O) (MP) Serjeant Tombstone
+xi.dynamis.mobList[zoneID][98 ].eyes = xi.dynamis.eyes.GREEN -- (098-O) (MP) Serjeant Tombstone
+xi.dynamis.mobList[zoneID][80 ].eyes = xi.dynamis.eyes.GREEN -- (080-O) (MP) Serjeant Tombstone
+xi.dynamis.mobList[zoneID][82 ].eyes = xi.dynamis.eyes.GREEN -- (082-O) (MP) Serjeant Tombstone
+xi.dynamis.mobList[zoneID][88 ].eyes = xi.dynamis.eyes.GREEN -- (088-O) (MP) Serjeant Tombstone
+xi.dynamis.mobList[zoneID][104].eyes = xi.dynamis.eyes.GREEN -- (104-G) (MP) Goblin Replica
+xi.dynamis.mobList[zoneID][106].eyes = xi.dynamis.eyes.GREEN -- (106-Y) (MP) Avatar Icon
 
 ------------------------------------------
 --        Time Extension Values         --
 ------------------------------------------
 -- xi.dynamis.mobList[zoneID][MobIndex].timeExtension = 15
 
+xi.dynamis.mobList[zoneID].timeExtensionList = {10, 20, 31, 46, 63, 66, 83, 87, 120, 147}
 xi.dynamis.mobList[zoneID][10 ].timeExtension = 15 -- (010-Y) Avatar Icon
 xi.dynamis.mobList[zoneID][20 ].timeExtension = 15 -- (020-Y) Avatar Icon
 xi.dynamis.mobList[zoneID][31 ].timeExtension = 15 -- (031-G) Goblin Statue

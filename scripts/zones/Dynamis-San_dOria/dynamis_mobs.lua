@@ -6,7 +6,6 @@
 ----------------------------------------------------------------------------------------------------
 require("scripts/globals/status")
 require("scripts/globals/utils")
-require("scripts/globals/dynamis")
 require("scripts/globals/zone")
 ----------------------------------------------------------------------------------------------------
 --                                      Instructions                                              --
@@ -46,9 +45,9 @@ require("scripts/globals/zone")
 --    Ex. xi.dynamis.mobList[zoneID][MobIndex].mobchildren = {#WAR, #MNK, #WHM, #BLM, #RDM, #THF, #PLD, #DRK, #BST, #BRD, #RNG, #SAM, #NIN, #DRG, #SMN}
 --    Ex. For 2 Wars: xi.dynamis.mobList[zoneID][MobIndex].mobchildren = {2, nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, nil}
 --
--- 7.  xi.dynamis.mobList[zoneID][MobIndex].NMChildren is used to spawn specific NMs outlined in xi.dynamis.mobList[zoneID][MobIndex].info
+-- 7.  xi.dynamis.mobList[zoneID][MobIndex].nmchildren is used to spawn specific NMs outlined in xi.dynamis.mobList[zoneID][MobIndex].info
 --     MobIndex is the index of the mob spawning the NM, MobIndex(NM) points to which NM in .info it should spawn.
---     Ex. xi.dynamis.mobList[zoneID][MobIndex].NMChildren = {MobIndex(NM1), MobIndex(NM2), MobIndex(NM3)}
+--     Ex. xi.dynamis.mobList[zoneID][MobIndex].nmchildren = {MobIndex(NM1), MobIndex(NM2), MobIndex(NM3)}
 --
 -- 8. xi.dynamis.mobList[zoneID][MobIndex].patrolPath is used to set a specific path for a mob, if left blank for that MobIndex,
 --    the mob will not path on a predetermined course. If it is a statue, it will not path at all. You can add
@@ -70,12 +69,23 @@ require("scripts/globals/zone")
 --                               Dependency Setup Section (IGNORE)                                --
 ----------------------------------------------------------------------------------------------------
 local zone = xi.zone.DYNAMIS_SAN_DORIA
-mobList = mobList or { }
-xi.dynamis.mobList[zoneID] ={ } -- Ignore me, I just start the table.
-xi.dynamis.mobList[zoneID].zoneID = zone -- Ignore me, I just ensure .zoneID exists.
-xi.dynamis.mobList[zoneID].waveDefeatRequirements = { } -- Ignore me, I just start the table.
-xi.dynamis.mobList[zoneID].waveDefeatRequirements[1] = { } -- Ignore me, I just allow for wave 1 spawning.
+local i = 1
+local iWaves = 0
+local zone = GetZone(zoneID)
+xi = xi or {} -- Ignore me I just set the global.
+xi.dynamis = xi.dynamis or {} -- Ignore me I just set the global.
+xi.dynamis.mobList = xi.dynamis.mobList or { } -- Ignore me I just set the global.
+xi.dynamis.mobList[zoneID] = { } -- Ignore me, I just start the table.
+xi.dynamis.mobList[zoneID].zoneID = zoneID -- Ignore me, I just ensure .zoneIDID exists.
+xi.dynamis.mobList[zoneID].nmchildren = { }
+xi.dynamis.mobList[zoneID].mobchildren = { }
 xi.dynamis.mobList[zoneID].maxWaves = 6 -- Put in number of max waves
+
+while i < 155 do
+    table.insert(xi.dynamis.mobList[zoneID], i, { id = i})
+    i = i + 1
+end
+
 ----------------------------------------------------------------------------------------------------
 --                                  Setup of Parent Spawning                                      --
 ----------------------------------------------------------------------------------------------------
@@ -253,11 +263,15 @@ xi.dynamis.mobList[zoneID][155].info = {"NM", "Soulsender Fugbrag",       "Orc",
 --------------------------------------------
 --xi.dynamis.mobList[zoneID].waveDefeatRequirements[2] = {zone:getLocalVar("MegaBoss_Killed") == 1}
 
-xi.dynamis.mobList[zoneID].waveDefeatRequirements[2] = {zone:getLocalVar("Voidstreaker_Butchnotch_Killed") == 1}
-xi.dynamis.mobList[zoneID].waveDefeatRequirements[3] = {zone:getLocalVar("MegaBoss_Killed") == 1}
-xi.dynamis.mobList[zoneID].waveDefeatRequirements[4] = {zone:getLocalVar("Wyrmgnasher_Bjakdek_Killed") == 1, zone:getLocalVar("Reapertongue_Gadgquok_Killed") == 1}
-xi.dynamis.mobList[zoneID].waveDefeatRequirements[5] = {zone:getLocalVar("Wyrmgnasher_Bjakdek_Killed") == 1}
-xi.dynamis.mobList[zoneID].waveDefeatRequirements[6] = {zone:getLocalVar("Reapertongue_Gadgquok_Killed") == 1}
+xi.dynamis.mobList[zoneID].waveDefeatRequirements =
+{
+    {}, -- Do not touch this is wave 1
+    {"Voidstreaker_Butchnotch_Killed"},
+    {"MegaBoss_Killed"},
+    {"Wyrmgnasher_Bjakdek_Killed", "Reapertongue_Gadgquok_Killed"},
+    {"Wyrmgnasher_Bjakdek_Killed"},
+    {"Reapertongue_Gadgquok_Killed"}
+}
 
 ------------------------------------------
 --            Wave Spawning             --
@@ -267,7 +281,8 @@ xi.dynamis.mobList[zoneID].waveDefeatRequirements[6] = {zone:getLocalVar("Reaper
 
 -- Wave 1 Spawns on loading the zone
 
-xi.dynamis.mobList[zoneID].wave1 = {
+xi.dynamis.mobList[zoneID][1].wave =
+{
     1  ,    -- 001-O/S
     2  ,    -- 002-O/S
     3  ,    -- 003-O/S
@@ -372,7 +387,8 @@ xi.dynamis.mobList[zoneID].wave1 = {
 }
 
 -- Wave 2 spawns when Voidstreaker Butchnotch (NIN) is defeated
-xi.dynamis.mobList[zoneID].wave2 = {
+xi.dynamis.mobList[zoneID][2].wave =
+{
     145,	-- 145-O/S
     146,	-- 146-O/S
     147,	-- 147-O/S
@@ -380,7 +396,8 @@ xi.dynamis.mobList[zoneID].wave2 = {
 }
 
 -- Wave 3 spawns when Overlord's Tombstone (Mega Boss) is defeated
-xi.dynamis.mobList[zoneID].wave3 = {
+xi.dynamis.mobList[zoneID][3].wave =
+{
     116,    -- 116-O/S
     117,    -- 117-O/S
     118,    -- 118-O/S
@@ -409,20 +426,23 @@ xi.dynamis.mobList[zoneID].wave3 = {
 }
 
 -- Kill of Wyrmgnasher Bjakdek and Reapertongue Gadgquok to spawn Overlords Tombstone
-xi.dynamis.mobList[zoneID].wave4 = {
+xi.dynamis.mobList[zoneID][4].wave =
+{
     109     -- 109-Replica NM (Overlord's Tombstone)
 }
 
 -- Two statues spawn near entrance and opposite tent when Wyrmgnasher Bjakdek is killed
 
-xi.dynamis.mobList[zoneID].wave5 = {
+xi.dynamis.mobList[zoneID][5].wave =
+{
     61,     -- 061-O/S
     143,    -- 143-O/S
     144     -- 144-O/S
 }
 
 -- Two statues spawn near entrance and opposite tent when Reapertongue Gadgquok is killed
-xi.dynamis.mobList[zoneID].wave6 = {
+xi.dynamis.mobList[zoneID][6].wave =
+{
     36,     -- 036-O/S
     141,    -- 141-O/S
     142     -- 142-O/S
@@ -563,21 +583,21 @@ xi.dynamis.mobList[zoneID][149].mobchildren = { nil, nil, nil, nil, nil, nil, ni
 ------------------------------------------
 --            NM Child Spawn            --
 ------------------------------------------
--- xi.dynamis.mobList[zoneID][MobIndex].NMChildren = {MobIndex(NM1), MobIndex(NM2), MobIndex(NM3)}
+-- xi.dynamis.mobList[zoneID][MobIndex].nmchildren = {MobIndex(NM1), MobIndex(NM2), MobIndex(NM3)}
 -- boolean value = forceLink true/false
 
 --Specific Statues
-xi.dynamis.mobList[zoneID][18 ].NMChildren = { false, 19 }                   -- Squire Square N, Spawns another statue
-xi.dynamis.mobList[zoneID][20 ].NMChildren = { false, 21 }                   -- Squire Square E, Spawns another statue
-xi.dynamis.mobList[zoneID][99 ].NMChildren = { true,  100, 101 }             -- Courtyard/WD Alley connector +2 stats
-xi.dynamis.mobList[zoneID][147].NMChildren = { false, 148 }                  -- West Tent spawns one middle statue
-xi.dynamis.mobList[zoneID][149].NMChildren = { false, 150 }                  -- East Tent spawns one middle statue
+xi.dynamis.mobList[zoneID][18 ].nmchildren = { false, 19 }                   -- Squire Square N, Spawns another statue
+xi.dynamis.mobList[zoneID][20 ].nmchildren = { false, 21 }                   -- Squire Square E, Spawns another statue
+xi.dynamis.mobList[zoneID][99 ].nmchildren = { true,  100, 101 }             -- Courtyard/WD Alley connector +2 stats
+xi.dynamis.mobList[zoneID][147].nmchildren = { false, 148 }                  -- West Tent spawns one middle statue
+xi.dynamis.mobList[zoneID][149].nmchildren = { false, 150 }                  -- East Tent spawns one middle statue
 
 -- NMs
-xi.dynamis.mobList[zoneID][32 ].NMChildren = { true, 151 }                                    -- Eastgate NM Wyrmgnasher Bjakdek (DRG)
-xi.dynamis.mobList[zoneID][70 ].NMChildren = { true, 152 }                                    -- Westgate NM Reapertongue Gadguok (SMN)
-xi.dynamis.mobList[zoneID][93 ].NMChildren = { true, 153, 94, 95 }                            -- Manor NM Voidstreaker Butchnotch (NIN) as well as N/S manor pop statues
-xi.dynamis.mobList[zoneID][109].NMChildren = { true, 154, 155, 110, 111, 112, 113, 114, 115 } -- Megaboss spawns twin BRD NMs Battlechoir Gitchfotch and Soulsender Fugbrag and a bunch of statues
+xi.dynamis.mobList[zoneID][32 ].nmchildren = { true, 151 }                                    -- Eastgate NM Wyrmgnasher Bjakdek (DRG)
+xi.dynamis.mobList[zoneID][70 ].nmchildren = { true, 152 }                                    -- Westgate NM Reapertongue Gadguok (SMN)
+xi.dynamis.mobList[zoneID][93 ].nmchildren = { true, 153, 94, 95 }                            -- Manor NM Voidstreaker Butchnotch (NIN) as well as N/S manor pop statues
+xi.dynamis.mobList[zoneID][109].nmchildren = { true, 154, 155, 110, 111, 112, 113, 114, 115 } -- Megaboss spawns twin BRD NMs Battlechoir Gitchfotch and Soulsender Fugbrag and a bunch of statues
 
 ------------------------------------------
 --          Mob Position Info           --
@@ -816,7 +836,6 @@ xi.dynamis.mobList[zoneID][146].patrolPath = { -200, -2, 87,     -193, -2, 69,  
 ------------------------------------------
 -- xi.dynamis.mobList[zoneID][MobIndex].eyes = xi.dynamis.eyes.BLUE -- Flags for blue eyes. (HP)
 -- xi.dynamis.mobList[zoneID][MobIndex].eyes = xi.dynamis.eyes.GREEN -- Flags for green eyes. (MP)
--- xi.dynamis.mobList[zoneID][MobIndex].eyes = xi.dynamis.eyes.RED -- Flags for red eyes. (TE)
 
 xi.dynamis.mobList[zoneID][6  ].eyes = xi.dynamis.eyes.GREEN
 xi.dynamis.mobList[zoneID][10 ].eyes = xi.dynamis.eyes.GREEN
@@ -860,6 +879,7 @@ xi.dynamis.mobList[zoneID][115].eyes = xi.dynamis.eyes.BLUE
 ------------------------------------------
 -- xi.dynamis.mobList[zoneID][MobIndex].timeExtension = 15
 
+xi.dynamis.mobList[zoneID].timeExtensionList = {7, 9, 26, 41, 64, 74, 153}
 xi.dynamis.mobList[zoneID][7  ].timeExtension = 15 -- Serjeant Tombstone
 xi.dynamis.mobList[zoneID][9  ].timeExtension = 15 -- Serjeant Tombstone
 xi.dynamis.mobList[zoneID][26 ].timeExtension = 25 -- Serjeant Tombstone

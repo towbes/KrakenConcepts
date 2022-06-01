@@ -6,7 +6,6 @@
 ----------------------------------------------------------------------------------------------------
 require("scripts/globals/status")
 require("scripts/globals/utils")
-require("scripts/globals/dynamis")
 require("scripts/globals/zone")
 ----------------------------------------------------------------------------------------------------
 --                                      Instructions                                              --
@@ -46,9 +45,9 @@ require("scripts/globals/zone")
 --    Ex. xi.dynamis.mobList[zoneID][MobIndex].mobchildren = {#WAR, #MNK, #WHM, #BLM, #RDM, #THF, #PLD, #DRK, #BST, #BRD, #RNG, #SAM, #NIN, #DRG, #SMN}
 --    Ex. For 2 Wars: xi.dynamis.mobList[zoneID][MobIndex].mobchildren = {2, nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, nil}
 --
--- 7.  xi.dynamis.mobList[zoneID][MobIndex].NMChildren is used to spawn specific NMs outlined in xi.dynamis.mobList[zoneID][MobIndex].info
+-- 7.  xi.dynamis.mobList[zoneID][MobIndex].nmchildren is used to spawn specific NMs outlined in xi.dynamis.mobList[zoneID][MobIndex].info
 --     MobIndex is the index of the mob spawning the NM, MobIndex(NM) points to which NM in .info it should spawn.
---     Ex. xi.dynamis.mobList[zoneID][MobIndex].NMChildren = {MobIndex(NM1), MobIndex(NM2), MobIndex(NM3)}
+--     Ex. xi.dynamis.mobList[zoneID][MobIndex].nmchildren = {MobIndex(NM1), MobIndex(NM2), MobIndex(NM3)}
 --
 -- 8. xi.dynamis.mobList[zoneID][MobIndex].patrolPath is used to set a specific path for a mob, if left blank for that MobIndex,
 --    the mob will not path on a predetermined course. If it is a statue, it will not path at all. You can add
@@ -70,12 +69,22 @@ require("scripts/globals/zone")
 --                               Dependency Setup Section (IGNORE)                                --
 ----------------------------------------------------------------------------------------------------
 local zone = xi.zone.DYNAMIS_XARCABARD
-mobList = mobList or { }
-xi.dynamis.mobList[zoneID] ={ } -- Ignore me, I just start the table.
-xi.dynamis.mobList[zoneID].zoneID = zone -- Ignore me, I just ensure .zoneID exists.
-xi.dynamis.mobList[zoneID].waveDefeatRequirements = { } -- Ignore me, I just start the table.
-xi.dynamis.mobList[zoneID].waveDefeatRequirements[1] = { } -- Ignore me, I just allow for wave 1 spawning.
+local i = 1
+local iWaves = 0
+local zone = GetZone(zoneID)
+xi = xi or {} -- Ignore me I just set the global.
+xi.dynamis = xi.dynamis or {} -- Ignore me I just set the global.
+xi.dynamis.mobList = xi.dynamis.mobList or { } -- Ignore me I just set the global.
+xi.dynamis.mobList[zoneID] = { } -- Ignore me, I just start the table.
+xi.dynamis.mobList[zoneID].zoneID = zoneID -- Ignore me, I just ensure .zoneIDID exists.
+xi.dynamis.mobList[zoneID].nmchildren = { }
+xi.dynamis.mobList[zoneID].mobchildren = { }
 xi.dynamis.mobList[zoneID].maxWaves = 6 -- Put in number of max waves
+
+while i < 258 do
+    table.insert(xi.dynamis.mobList[zoneID], i, { id = i})
+    i = i + 1
+end
 
 ----------------------------------------------------------------------------------------------------
 --                                  Setup of Parent Spawning                                      --
@@ -237,32 +246,32 @@ xi.dynamis.mobList[zoneID][147].info = {"Statue", "Vanguard Eye", nil, nil, nil}
 xi.dynamis.mobList[zoneID][148].info = {"Statue", "Vanguard Eye", nil, nil, nil} -- 148-D
 xi.dynamis.mobList[zoneID][149].info = {"Statue", "Vanguard Eye", nil, nil, nil} -- 149-D
 xi.dynamis.mobList[zoneID][150].info = {"Statue", "Statue Prototype", nil, nil, nil} -- 150-G(30)     Statue Prototype
-xi.dynamis.mobList[zoneID][151].info = {"NM", "Animated Hammer",     nil, nil, nil} -- 151-Animated Hammer
-xi.dynamis.mobList[zoneID][152].info = {"NM", "Animated Dagger",     nil, nil, nil} -- 152-Animated Dagger
-xi.dynamis.mobList[zoneID][153].info = {"NM", "Animated Shield ",    nil, nil, nil} -- 153-Animated Shield
-xi.dynamis.mobList[zoneID][154].info = {"NM", "Animated Claymore ",  nil, nil, nil} -- 154-Animated Claymore
-xi.dynamis.mobList[zoneID][155].info = {"NM", "Animated Gun",        nil, nil, nil} -- 155-Animated Gun
-xi.dynamis.mobList[zoneID][156].info = {"NM", "Animated Longbow",    nil, nil, nil} -- 156-Animated Longbow
-xi.dynamis.mobList[zoneID][157].info = {"NM", "Animated Tachi",      nil, nil, nil} -- 157-Animated Tachi
-xi.dynamis.mobList[zoneID][158].info = {"NM", "Animated Tabar",      nil, nil, nil} -- 158-Animated Tabar
-xi.dynamis.mobList[zoneID][159].info = {"NM", "Animated Staff",      nil, nil, nil} -- 159-Animated Staff
-xi.dynamis.mobList[zoneID][160].info = {"NM", "Animated Spear",      nil, nil, nil} -- 160-Animated Spear
-xi.dynamis.mobList[zoneID][161].info = {"NM", "Animated Kunai",      nil, nil, nil} -- 161-Animated Kunai
-xi.dynamis.mobList[zoneID][162].info = {"NM", "Animated Knuckles",   nil, nil, nil} -- 162-Animated Knuckles
-xi.dynamis.mobList[zoneID][163].info = {"NM", "Animated Great Axe",  nil, nil, nil} -- 163-Animated Great Axe
-xi.dynamis.mobList[zoneID][164].info = {"NM", "Animated Horn",       nil, nil, nil} -- 164-Animated Horn
-xi.dynamis.mobList[zoneID][165].info = {"NM", "Animated Longsword",  nil, nil, nil} -- 165-Animated Longsword
-xi.dynamis.mobList[zoneID][166].info = {"NM", "Animated Scythe",     nil, nil, nil} -- 166-Animated Scythe
-xi.dynamis.mobList[zoneID][167].info = {"NM", "Vanguard Dragon",     nil, nil, nil} -- 167-Vanguard Dragon
-xi.dynamis.mobList[zoneID][168].info = {"NM", "Vanguard Dragon",     nil, nil, nil} -- 168-Vanguard Dragon
-xi.dynamis.mobList[zoneID][169].info = {"NM", "Vanguard Dragon",     nil, nil, nil} -- 169-Vanguard Dragon
-xi.dynamis.mobList[zoneID][170].info = {"NM", "Vanguard Dragon",     nil, nil, nil} -- 170-Vanguard Dragon
-xi.dynamis.mobList[zoneID][171].info = {"NM", "Vanguard Dragon",     nil, nil, nil} -- 171-Vanguard Dragon
-xi.dynamis.mobList[zoneID][172].info = {"NM", "Vanguard Dragon",     nil, nil, nil} -- 172-Vanguard Dragon
-xi.dynamis.mobList[zoneID][173].info = {"NM", "Vanguard Dragon",     nil, nil, nil} -- 173-Vanguard Dragon
-xi.dynamis.mobList[zoneID][174].info = {"NM", "Vanguard Dragon",     nil, nil, nil} -- 174-Vanguard Dragon
-xi.dynamis.mobList[zoneID][175].info = {"NM", "Vanguard Dragon",     nil, nil, nil} -- 175-Vanguard Dragon
-xi.dynamis.mobList[zoneID][176].info = {"NM", "Vanguard Dragon",     nil, nil, nil} -- 176-Vanguard Dragon
+xi.dynamis.mobList[zoneID][151].info = {"NM", "Animated Hammer",    nil, nil, nil} -- 151-Animated Hammer
+xi.dynamis.mobList[zoneID][152].info = {"NM", "Animated Dagger",    nil, nil, nil} -- 152-Animated Dagger
+xi.dynamis.mobList[zoneID][153].info = {"NM", "Animated Shield ",   nil, nil, nil} -- 153-Animated Shield
+xi.dynamis.mobList[zoneID][154].info = {"NM", "Animated Claymore ", nil, nil, nil} -- 154-Animated Claymore
+xi.dynamis.mobList[zoneID][155].info = {"NM", "Animated Gun",       nil, nil, nil} -- 155-Animated Gun
+xi.dynamis.mobList[zoneID][156].info = {"NM", "Animated Longbow",   nil, nil, nil} -- 156-Animated Longbow
+xi.dynamis.mobList[zoneID][157].info = {"NM", "Animated Tachi",     nil, nil, nil} -- 157-Animated Tachi
+xi.dynamis.mobList[zoneID][158].info = {"NM", "Animated Tabar",     nil, nil, nil} -- 158-Animated Tabar
+xi.dynamis.mobList[zoneID][159].info = {"NM", "Animated Staff",     nil, nil, nil} -- 159-Animated Staff
+xi.dynamis.mobList[zoneID][160].info = {"NM", "Animated Spear",     nil, nil, nil} -- 160-Animated Spear
+xi.dynamis.mobList[zoneID][161].info = {"NM", "Animated Kunai",     nil, nil, nil} -- 161-Animated Kunai
+xi.dynamis.mobList[zoneID][162].info = {"NM", "Animated Knuckles",  nil, nil, nil} -- 162-Animated Knuckles
+xi.dynamis.mobList[zoneID][163].info = {"NM", "Animated Great Axe", nil, nil, nil} -- 163-Animated Great Axe
+xi.dynamis.mobList[zoneID][164].info = {"NM", "Animated Horn",      nil, nil, nil} -- 164-Animated Horn
+xi.dynamis.mobList[zoneID][165].info = {"NM", "Animated Longsword", nil, nil, nil} -- 165-Animated Longsword
+xi.dynamis.mobList[zoneID][166].info = {"NM", "Animated Scythe",    nil, nil, nil} -- 166-Animated Scythe
+xi.dynamis.mobList[zoneID][167].info = {"TE Normal", "Vanguard Dragon", nil, nil, nil} -- 167-Vanguard Dragon
+xi.dynamis.mobList[zoneID][168].info = {"TE Normal", "Vanguard Dragon", nil, nil, nil} -- 168-Vanguard Dragon
+xi.dynamis.mobList[zoneID][169].info = {"TE Normal", "Vanguard Dragon", nil, nil, nil} -- 169-Vanguard Dragon
+xi.dynamis.mobList[zoneID][170].info = {"TE Normal", "Vanguard Dragon", nil, nil, nil} -- 170-Vanguard Dragon
+xi.dynamis.mobList[zoneID][171].info = {"TE Normal", "Vanguard Dragon", nil, nil, nil} -- 171-Vanguard Dragon
+xi.dynamis.mobList[zoneID][172].info = {"TE Normal", "Vanguard Dragon", nil, nil, nil} -- 172-Vanguard Dragon
+xi.dynamis.mobList[zoneID][173].info = {"TE Normal", "Vanguard Dragon", nil, nil, nil} -- 173-Vanguard Dragon
+xi.dynamis.mobList[zoneID][174].info = {"TE Normal", "Vanguard Dragon", nil, nil, nil} -- 174-Vanguard Dragon
+xi.dynamis.mobList[zoneID][175].info = {"TE Normal", "Vanguard Dragon", nil, nil, nil} -- 175-Vanguard Dragon
+xi.dynamis.mobList[zoneID][176].info = {"TE Normal", "Vanguard Dragon", nil, nil, nil} -- 176-Vanguard Dragon
 xi.dynamis.mobList[zoneID][177].info = {"NM", "Yang",                nil, nil, "yang_killed"} -- 177-Shadow Dragon NM (Yang)
 xi.dynamis.mobList[zoneID][178].info = {"NM", "Ying",                nil, nil, "ying_killed"} -- 178-Shadow Dragon NM (Ying)
 xi.dynamis.mobList[zoneID][179].info = {"NM", "Dynamis Lord",        nil, nil, nil} -- 179-Dynamis Lord
@@ -348,21 +357,21 @@ xi.dynamis.mobList[zoneID][241].info = {"NM", "Satellite Scythe", nil, nil, nil}
 xi.dynamis.mobList[zoneID][242].info = {"NM", "Satellite Scythe", nil, nil, nil} -- Satellite Scythe
 xi.dynamis.mobList[zoneID][243].info = {"NM", "Satellite Scythe", nil, nil, nil} -- Satellite Scythe
 -- Demon NMs
-xi.dynamis.mobList[zoneID][244].info = {"NM", "Marquis Decarabia",   nil, "BRD", "Decarabia_killed"  } -- Marquis Decarabia BRD
-xi.dynamis.mobList[zoneID][245].info = {"NM", "Count Zaebos",        nil, "WAR", "Zaebos_killed"     } -- Count Zaebos WAR
-xi.dynamis.mobList[zoneID][246].info = {"NM", "Duke Berith",         nil, "RDM", "Berith_killed"     } -- Duke Berith RDM
-xi.dynamis.mobList[zoneID][247].info = {"NM", "Prince Seere",        nil, "WHM", "Seere_killed"      } -- Prince Seere WHM
-xi.dynamis.mobList[zoneID][248].info = {"NM", "Duke Gomory",         nil, "MNK", "Gomory_killed"     } -- Duke Gomory MNK
-xi.dynamis.mobList[zoneID][249].info = {"NM", "Marquis Andras",      nil, "BST", "Andras_killed"     } -- Marquis Andras BST
-xi.dynamis.mobList[zoneID][250].info = {"NM", "Marquis Gamygyn",     nil, "NIN", "Gamygyn_killed"    } -- Marquis Gamygyn NIN
-xi.dynamis.mobList[zoneID][251].info = {"NM", "Duke Scox",           nil, "DRK", "Scox_killed"       } -- Duke Scox DRK
-xi.dynamis.mobList[zoneID][252].info = {"NM", "Marquis Orias",       nil, "BLM", "Orias_killed"      } -- Marquis Orias BLM
-xi.dynamis.mobList[zoneID][253].info = {"NM", "Count Raum",          nil, "THF", "Raum_killed"       } -- Count Raum THF
-xi.dynamis.mobList[zoneID][254].info = {"NM", "Marquis Sabnak",      nil, "PLD", "Sabnak_killed"     } -- Marquis Sabnak PLD
-xi.dynamis.mobList[zoneID][255].info = {"NM", "Marquis Nebiros",     nil, "SMN", "Nebiros_killed"    } -- Marquis Nebiros SMN
-xi.dynamis.mobList[zoneID][256].info = {"NM", "King Zagan",          nil, "DRG", "Zagan_killed"      } -- King Zagan DRG
-xi.dynamis.mobList[zoneID][257].info = {"NM", "Count Vine",          nil, "SAM", "Vine_killed"       } -- Count Vine SAM
-xi.dynamis.mobList[zoneID][258].info = {"NM", "Marquis Cimeries",    nil, "RNG", "Cimeries_killed"   } -- Marquis Cimeries RNG
+xi.dynamis.mobList[zoneID][244].info = {"NM", "Marquis Decarabia",   "Kindred", "BRD", "Decarabia_killed"  } -- Marquis Decarabia
+xi.dynamis.mobList[zoneID][245].info = {"NM", "Count Zaebos",        "Kindred", "WAR", "Zaebos_killed"     } -- Count Zaebos
+xi.dynamis.mobList[zoneID][246].info = {"NM", "Duke Berith",         "Kindred", "RDM", "Berith_killed"     } -- Duke Berith
+xi.dynamis.mobList[zoneID][247].info = {"NM", "Prince Seere",        "Kindred", "WHM", "Seere_killed"      } -- Prince Seere
+xi.dynamis.mobList[zoneID][248].info = {"NM", "Duke Gomory",         "Kindred", "MNK", "Gomory_killed"     } -- Duke Gomory
+xi.dynamis.mobList[zoneID][249].info = {"NM", "Marquis Andras",      "Kindred", "BST", "Andras_killed"     } -- Marquis Andras
+xi.dynamis.mobList[zoneID][250].info = {"NM", "Marquis Gamygyn",     "Kindred", "NIN", "Gamygyn_killed"    } -- Marquis Gamygyn
+xi.dynamis.mobList[zoneID][251].info = {"NM", "Duke Scox",           "Kindred", "DRK", "Scox_killed"       } -- Duke Scox
+xi.dynamis.mobList[zoneID][252].info = {"NM", "Marquis Orias",       "Kindred", "BLM", "Orias_killed"      } -- Marquis Orias
+xi.dynamis.mobList[zoneID][253].info = {"NM", "Count Raum",          "Kindred", "THF", "Raum_killed"       } -- Count Raum
+xi.dynamis.mobList[zoneID][254].info = {"NM", "Marquis Sabnak",      "Kindred", "PLD", "Sabnak_killed"     } -- Marquis Sabnak
+xi.dynamis.mobList[zoneID][255].info = {"NM", "Marquis Nebiros",     "Kindred", "SMN", "Nebiros_killed"    } -- Marquis Nebiros
+xi.dynamis.mobList[zoneID][256].info = {"NM", "King Zagan",          "Kindred", "DRG", "Zagan_killed"      } -- King Zagan
+xi.dynamis.mobList[zoneID][257].info = {"NM", "Count Vine",          "Kindred", "SAM", "Vine_killed"       } -- Count Vine
+xi.dynamis.mobList[zoneID][258].info = {"NM", "Marquis Cimeries",    "Kindred", "RNG", "Cimeries_killed"   } -- Marquis Cimeries
 
 ----------------------------------------------------------------------------------------------------
 --                                    Setup of Wave Spawning                                      --
@@ -373,36 +382,15 @@ xi.dynamis.mobList[zoneID][258].info = {"NM", "Marquis Cimeries",    nil, "RNG",
 --------------------------------------------
 --xi.dynamis.mobList[zoneID].waveDefeatRequirements[2] = {zone:getLocalVar("MegaBoss_Killed") == 1}
 
-xi.dynamis.mobList[zoneID].waveDefeatRequirements[2] = { zone:getLocalVar("35_killed") == 1, zone:getLocalVar("39_killed") == 1 } -- Spawns 43
-xi.dynamis.mobList[zoneID].waveDefeatRequirements[3] = { zone:getLocalVar("58_killed") == 1 } -- Spawns 60
-xi.dynamis.mobList[zoneID].waveDefeatRequirements[4] = { zone:getLocalVar("142_killed") == 1,
-                                            zone:getLocalVar("143_killed") == 1,
-                                            zone:getLocalVar("144_killed") == 1,
-                                            zone:getLocalVar("145_killed") == 1,
-                                            zone:getLocalVar("146_killed") == 1,
-                                            zone:getLocalVar("147_killed") == 1,
-                                            zone:getLocalVar("148_killed") == 1,
-                                            zone:getLocalVar("149_killed") == 1    -- Spawns 150
-                                          }
-xi.dynamis.mobList[zoneID].waveDefeatRequirements[5] = { zone:getLocalVar("Decarabia_killed") == 1,
-                                            zone:getLocalVar("Zaebos_killed") == 1,
-                                            zone:getLocalVar("Berith_killed") == 1,
-                                            zone:getLocalVar("Seere_killed") == 1,
-                                            zone:getLocalVar("Gomory_killed") == 1,
-                                            zone:getLocalVar("Andras_killed") == 1,
-                                            zone:getLocalVar("Gamygyn_killed") == 1,
-                                            zone:getLocalVar("Scox_killed") == 1,
-                                            zone:getLocalVar("Orias_killed") == 1,
-                                            zone:getLocalVar("Raum_killed") == 1,
-                                            zone:getLocalVar("Sabnak_killed") == 1,
-                                            zone:getLocalVar("Nebiros_killed") == 1,
-                                            zone:getLocalVar("Zagan_killed") == 1,
-                                            zone:getLocalVar("Vine_killed") == 1,
-                                            zone:getLocalVar("Cimeries_killed") == 1  -- Demon NMs spawn Animated Weapons, Vanguard Dragons, Ying, Yang
-                                          }
-xi.dynamis.mobList[zoneID].waveDefeatRequirements[6] = { zone:getLocalVar("ying_killed") == 1,
-                                            zone:getLocalVar("yang_killed") == 1
-                                          }
+xi.dynamis.mobList[zoneID].waveDefeatRequirements =
+{
+    {}, -- Do not touch this is wave 1
+    {"35_killed","39_killed"}, -- Spawns 43
+    {"58_killed"}, -- Spawns 60
+    {"142_killed", "143_killed", "144_killed", "145_killed", "146_killed", "147_killed", "148_killed", "149_killed"},    -- Spawns 150
+    {"Decarabia_killed", "Zaebos_killed", "Berith_killed", "Seere_killed", "Gomory_killed", "Andras_killed", "Gamygyn_killed", "Scox_killed", "Orias_killed", "Raum_killed", "Sabnak_killed", "Nebiros_killed", "Zagan_killed", "Vine_killed", "Cimeries_killed"},  -- Demon NMs spawn Animated Weapons, Vanguard Dragons, Ying, Yang
+    {"ying_killed", "yang_killed"} -- Spawns Dynalord
+}
 
 ------------------------------------------
 --            Wave Spawning             --
@@ -410,7 +398,8 @@ xi.dynamis.mobList[zoneID].waveDefeatRequirements[6] = { zone:getLocalVar("ying_
 ------------------------------------------
 --xi.dynamis.mobList[zoneID].wave# = { MobIndex#1, MobIndex#2, MobIndex#3 }
 
-xi.dynamis.mobList[zoneID].wave1 = {
+xi.dynamis.mobList[zoneID][1].wave =
+{
     1  , -- 001-D
     2  , -- 002-D
     3  , -- 003-D
@@ -554,19 +543,23 @@ xi.dynamis.mobList[zoneID].wave1 = {
     149  -- 149-D
 }
 
-xi.dynamis.mobList[zoneID].wave2 = {
+xi.dynamis.mobList[zoneID][2].wave =
+{
     43   -- Icon Prototype
 }
 
-xi.dynamis.mobList[zoneID].wave3 = {
+xi.dynamis.mobList[zoneID][3].wave =
+{
     60   -- Tombstone Prototype
 }
 
-xi.dynamis.mobList[zoneID].wave4 = {
+xi.dynamis.mobList[zoneID][4].wave =
+{
     150  -- Statue Prototype
 }
 
-xi.dynamis.mobList[zoneID].wave5 = {
+xi.dynamis.mobList[zoneID][5].wave =
+{
     151, -- Animated Hammer
     152, -- Animated Dagger
     153, -- Animated Shield
@@ -597,7 +590,8 @@ xi.dynamis.mobList[zoneID].wave5 = {
     178  -- Shadow Dragon NM (Ying)
 }
 
-xi.dynamis.mobList[zoneID].wave6 = {
+xi.dynamis.mobList[zoneID][6].wave =
+{
     179  -- Dynamis Lord
 }
 ----------------------------------------------------------------------------------------------------
@@ -727,42 +721,42 @@ xi.dynamis.mobList[zoneID][149].mobchildren = { nil, nil, nil, nil, nil, nil,   
 ------------------------------------------
 --            NM Child Spawn            --
 ------------------------------------------
--- xi.dynamis.mobList[zoneID][MobIndex].NMChildren = {MobIndex(NM1), MobIndex(NM2), MobIndex(NM3)}
+-- xi.dynamis.mobList[zoneID][MobIndex].nmchildren = {MobIndex(NM1), MobIndex(NM2), MobIndex(NM3)}
 -- boolean value = forceLink true/false
 
-xi.dynamis.mobList[zoneID][35 ].NMChildren = { true, 36, 37, 38 }
-xi.dynamis.mobList[zoneID][39 ].NMChildren = { true, 40, 41, 42 }
-xi.dynamis.mobList[zoneID][127].NMChildren = { true, 244 } -- Marquis Decarabia
-xi.dynamis.mobList[zoneID][128].NMChildren = { true, 245 } -- Count Zaebos
-xi.dynamis.mobList[zoneID][129].NMChildren = { true, 246 } -- Duke Berith
-xi.dynamis.mobList[zoneID][130].NMChildren = { true, 247 } -- Prince Seere
-xi.dynamis.mobList[zoneID][131].NMChildren = { true, 248 } -- Duke Gomory
-xi.dynamis.mobList[zoneID][132].NMChildren = { true, 249 } -- Marquis Andras
-xi.dynamis.mobList[zoneID][133].NMChildren = { true, 250 } -- Marquis Gamygyn
-xi.dynamis.mobList[zoneID][134].NMChildren = { true, 251 } -- Duke Scox
-xi.dynamis.mobList[zoneID][135].NMChildren = { true, 252 } -- Marquis Orias
-xi.dynamis.mobList[zoneID][136].NMChildren = { true, 253 } -- Count Raum
-xi.dynamis.mobList[zoneID][137].NMChildren = { true, 254 } -- Marquis Sabnak
-xi.dynamis.mobList[zoneID][138].NMChildren = { true, 255 } -- Marquis Nebiros
-xi.dynamis.mobList[zoneID][139].NMChildren = { true, 256 } -- King Zagan
-xi.dynamis.mobList[zoneID][140].NMChildren = { true, 257 } -- Count Vine
-xi.dynamis.mobList[zoneID][141].NMChildren = { true, 258 } -- Marquis Cimerie
-xi.dynamis.mobList[zoneID][151].NMChildren = { true, 180, 181, 182, 183 } -- Satellite Hammer
-xi.dynamis.mobList[zoneID][152].NMChildren = { true, 184, 185, 186, 187 } -- Satellite Dagger
-xi.dynamis.mobList[zoneID][153].NMChildren = { true, 188, 189,	190, 191 } -- Satellite Shield
-xi.dynamis.mobList[zoneID][154].NMChildren = { true, 192, 193,	194, 195 } -- Satellite Claymore
-xi.dynamis.mobList[zoneID][155].NMChildren = { true, 196, 197,	198, 199 } -- Satellite Gun
-xi.dynamis.mobList[zoneID][156].NMChildren = { true, 200, 201,	202, 203 } -- Satellite Longbow
-xi.dynamis.mobList[zoneID][157].NMChildren = { true, 204, 205,	206, 207 } -- Satellite Tachi
-xi.dynamis.mobList[zoneID][158].NMChildren = { true, 208, 209,	210, 211 } -- Satellite Tabar
-xi.dynamis.mobList[zoneID][159].NMChildren = { true, 212, 213,	214, 215 } -- Satellite Staff
-xi.dynamis.mobList[zoneID][160].NMChildren = { true, 216, 217,	218, 219 } -- Satellite Spear
-xi.dynamis.mobList[zoneID][161].NMChildren = { true, 220, 221,	222, 223 } -- Satellite Kunai
-xi.dynamis.mobList[zoneID][162].NMChildren = { true, 224, 225,	226, 227 } -- Satellite Knuckles
-xi.dynamis.mobList[zoneID][163].NMChildren = { true, 228, 229,	230, 231 } -- Satellite Great Axe
-xi.dynamis.mobList[zoneID][164].NMChildren = { true, 232, 233,	234, 235 } -- Satellite Horn
-xi.dynamis.mobList[zoneID][165].NMChildren = { true, 236, 237,	238, 239 } -- Satellite Longsword
-xi.dynamis.mobList[zoneID][166].NMChildren = { true, 240, 241,	242, 243 } -- Satellite Scythe
+xi.dynamis.mobList[zoneID][35 ].nmchildren = { true, 36, 37, 38 }
+xi.dynamis.mobList[zoneID][39 ].nmchildren = { true, 40, 41, 42 }
+xi.dynamis.mobList[zoneID][127].nmchildren = { true, 244 } -- Marquis Decarabia
+xi.dynamis.mobList[zoneID][128].nmchildren = { true, 245 } -- Count Zaebos
+xi.dynamis.mobList[zoneID][129].nmchildren = { true, 246 } -- Duke Berith
+xi.dynamis.mobList[zoneID][130].nmchildren = { true, 247 } -- Prince Seere
+xi.dynamis.mobList[zoneID][131].nmchildren = { true, 248 } -- Duke Gomory
+xi.dynamis.mobList[zoneID][132].nmchildren = { true, 249 } -- Marquis Andras
+xi.dynamis.mobList[zoneID][133].nmchildren = { true, 250 } -- Marquis Gamygyn
+xi.dynamis.mobList[zoneID][134].nmchildren = { true, 251 } -- Duke Scox
+xi.dynamis.mobList[zoneID][135].nmchildren = { true, 252 } -- Marquis Orias
+xi.dynamis.mobList[zoneID][136].nmchildren = { true, 253 } -- Count Raum
+xi.dynamis.mobList[zoneID][137].nmchildren = { true, 254 } -- Marquis Sabnak
+xi.dynamis.mobList[zoneID][138].nmchildren = { true, 255 } -- Marquis Nebiros
+xi.dynamis.mobList[zoneID][139].nmchildren = { true, 256 } -- King Zagan
+xi.dynamis.mobList[zoneID][140].nmchildren = { true, 257 } -- Count Vine
+xi.dynamis.mobList[zoneID][141].nmchildren = { true, 258 } -- Marquis Cimerie
+xi.dynamis.mobList[zoneID][151].nmchildren = { true, 180, 181, 182, 183 } -- Satellite Hammer
+xi.dynamis.mobList[zoneID][152].nmchildren = { true, 184, 185, 186, 187 } -- Satellite Dagger
+xi.dynamis.mobList[zoneID][153].nmchildren = { true, 188, 189,	190, 191 } -- Satellite Shield
+xi.dynamis.mobList[zoneID][154].nmchildren = { true, 192, 193,	194, 195 } -- Satellite Claymore
+xi.dynamis.mobList[zoneID][155].nmchildren = { true, 196, 197,	198, 199 } -- Satellite Gun
+xi.dynamis.mobList[zoneID][156].nmchildren = { true, 200, 201,	202, 203 } -- Satellite Longbow
+xi.dynamis.mobList[zoneID][157].nmchildren = { true, 204, 205,	206, 207 } -- Satellite Tachi
+xi.dynamis.mobList[zoneID][158].nmchildren = { true, 208, 209,	210, 211 } -- Satellite Tabar
+xi.dynamis.mobList[zoneID][159].nmchildren = { true, 212, 213,	214, 215 } -- Satellite Staff
+xi.dynamis.mobList[zoneID][160].nmchildren = { true, 216, 217,	218, 219 } -- Satellite Spear
+xi.dynamis.mobList[zoneID][161].nmchildren = { true, 220, 221,	222, 223 } -- Satellite Kunai
+xi.dynamis.mobList[zoneID][162].nmchildren = { true, 224, 225,	226, 227 } -- Satellite Knuckles
+xi.dynamis.mobList[zoneID][163].nmchildren = { true, 228, 229,	230, 231 } -- Satellite Great Axe
+xi.dynamis.mobList[zoneID][164].nmchildren = { true, 232, 233,	234, 235 } -- Satellite Horn
+xi.dynamis.mobList[zoneID][165].nmchildren = { true, 236, 237,	238, 239 } -- Satellite Longsword
+xi.dynamis.mobList[zoneID][166].nmchildren = { true, 240, 241,	242, 243 } -- Satellite Scythe
 
 ------------------------------------------
 --          Mob Position Info           --
@@ -965,7 +959,6 @@ xi.dynamis.mobList[zoneID][176].pos = {-308.7357, -26.5187, -37.8035, 226   } --
 ------------------------------------------
 -- xi.dynamis.mobList[zoneID][MobIndex].eyes = xi.dynamis.eyes.BLUE -- Flags for blue eyes. (HP)
 -- xi.dynamis.mobList[zoneID][MobIndex].eyes = xi.dynamis.eyes.GREEN -- Flags for green eyes. (MP)
--- xi.dynamis.mobList[zoneID][MobIndex].eyes = xi.dynamis.eyes.RED -- Flags for red eyes. (TE)
 
 xi.dynamis.mobList[zoneID][52 ].eyes = xi.dynamis.eyes.BLUE
 xi.dynamis.mobList[zoneID][73 ].eyes = xi.dynamis.eyes.GREEN
@@ -978,6 +971,7 @@ xi.dynamis.mobList[zoneID][142].eyes = xi.dynamis.eyes.BLUE
 ------------------------------------------
 -- xi.dynamis.mobList[zoneID][MobIndex].timeExtension = 15
 
+xi.dynamis.mobList[zoneID].timeExtensionList = {10, 43, 60, 143, 150}
 xi.dynamis.mobList[zoneID][10 ].timeExtension = 30 -- Tombstone Prototype
 xi.dynamis.mobList[zoneID][43 ].timeExtension = 30 -- Icon Prototype
 xi.dynamis.mobList[zoneID][60 ].timeExtension = 30 -- Tombstone Prototype

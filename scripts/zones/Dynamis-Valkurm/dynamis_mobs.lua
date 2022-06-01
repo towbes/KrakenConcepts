@@ -6,7 +6,6 @@
 ----------------------------------------------------------------------------------------------------
 require("scripts/globals/status")
 require("scripts/globals/utils")
-require("scripts/globals/dynamis")
 require("scripts/globals/zone")
 ----------------------------------------------------------------------------------------------------
 --                                      Instructions                                              --
@@ -46,9 +45,9 @@ require("scripts/globals/zone")
 --    Ex. xi.dynamis.mobList[zoneID][MobIndex].mobchildren = {#WAR, #MNK, #WHM, #BLM, #RDM, #THF, #PLD, #DRK, #BST, #BRD, #RNG, #SAM, #NIN, #DRG, #SMN}
 --    Ex. For 2 Wars: xi.dynamis.mobList[zoneID][MobIndex].mobchildren = {2, nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, nil}
 --
--- 7.  xi.dynamis.mobList[zoneID][MobIndex].NMChildren is used to spawn specific NMs outlined in xi.dynamis.mobList[zoneID][MobIndex].info
+-- 7.  xi.dynamis.mobList[zoneID][MobIndex].nmchildren is used to spawn specific NMs outlined in xi.dynamis.mobList[zoneID][MobIndex].info
 --     MobIndex is the index of the mob spawning the NM, MobIndex(NM) points to which NM in .info it should spawn.
---     Ex. xi.dynamis.mobList[zoneID][MobIndex].NMChildren = {MobIndex(NM1), MobIndex(NM2), MobIndex(NM3)}
+--     Ex. xi.dynamis.mobList[zoneID][MobIndex].nmchildren = {MobIndex(NM1), MobIndex(NM2), MobIndex(NM3)}
 --
 -- 8. xi.dynamis.mobList[zoneID][MobIndex].patrolPath is used to set a specific path for a mob, if left blank for that MobIndex,
 --    the mob will not path on a predetermined course. If it is a statue, it will not path at all. You can add
@@ -70,12 +69,22 @@ require("scripts/globals/zone")
 --                               Dependency Setup Section (IGNORE)                                --
 ----------------------------------------------------------------------------------------------------
 local zone = xi.zone.DYNAMIS_VALKURM
-mobList = mobList or { }
-xi.dynamis.mobList[zoneID] ={ } -- Ignore me, I just start the table.
-xi.dynamis.mobList[zoneID].zoneID = zone -- Ignore me, I just ensure .zoneID exists.
-xi.dynamis.mobList[zoneID].waveDefeatRequirements = { } -- Ignore me, I just start the table.
-xi.dynamis.mobList[zoneID].waveDefeatRequirements[1] = { } -- Ignore me, I just allow for wave 1 spawning.
+local i = 1
+local iWaves = 0
+local zone = GetZone(zoneID)
+xi = xi or {} -- Ignore me I just set the global.
+xi.dynamis = xi.dynamis or {} -- Ignore me I just set the global.
+xi.dynamis.mobList = xi.dynamis.mobList or { } -- Ignore me I just set the global.
+xi.dynamis.mobList[zoneID] = { } -- Ignore me, I just start the table.
+xi.dynamis.mobList[zoneID].zoneID = zoneID -- Ignore me, I just ensure .zoneIDID exists.
+xi.dynamis.mobList[zoneID].nmchildren = { }
+xi.dynamis.mobList[zoneID].mobchildren = { }
 xi.dynamis.mobList[zoneID].maxWaves = 2 -- Put in number of max waves
+
+while i < 286 do
+    table.insert(xi.dynamis.mobList[zoneID], i, { id = i})
+    i = i + 1
+end
 
 ----------------------------------------------------------------------------------------------------
 --                                  Setup of Parent Spawning                                      --
@@ -427,7 +436,11 @@ xi.dynamis.mobList[zoneID][155].info = {"Nightmare", "Nightmare_Sabotender", nil
 --------------------------------------------
 --xi.dynamis.mobList[zoneID].waveDefeatRequirements[2] = {zone:getLocalVar("MegaBoss_Killed") == 1}
 
-xi.dynamis.mobList[zoneID].waveDefeatRequirements[2] = { zone:getLocalVar("MegaBoss_Killed") == 1 } -- Spawns Nightmare Mobs
+xi.dynamis.mobList[zoneID].waveDefeatRequirements =
+{
+    {} -- Do not touch this is wave 1
+    {"MegaBoss_Killed"} -- Spawns Nightmare Mobs
+}
 
 ------------------------------------------
 --            Wave Spawning             --
@@ -435,7 +448,8 @@ xi.dynamis.mobList[zoneID].waveDefeatRequirements[2] = { zone:getLocalVar("MegaB
 ------------------------------------------
 --xi.dynamis.mobList[zoneID].wave# = { MobIndex#1, MobIndex#2, MobIndex#3 }
 
-xi.dynamis.mobList[zoneID].wave1 = {
+xi.dynamis.mobList[zoneID][1].wave =
+{
     21 , -- ( 021 ) Recover subjobs
     22 , -- ( 022 ) Recover subjobs
     23 , -- ( 023 ) Recover subjobs
@@ -540,7 +554,8 @@ xi.dynamis.mobList[zoneID].wave1 = {
     86 , -- ( 086 ) Nightmare Hippogryph (×3)
 }
 
-xi.dynamis.mobList[zoneID].wave2 = {
+xi.dynamis.mobList[zoneID][2].wave =
+{
     76 , --  ( 076 ) Nightmare Weapon (×3)
     77 , --  ( 077 ) Nightmare Weapon (×3)
     78 , --  ( 078 ) Nightmare Weapon (×3)
@@ -670,93 +685,93 @@ xi.dynamis.mobList[zoneID][52 ].mobchildren = { nil, nil, nil, nil, nil,   1, ni
 ------------------------------------------
 --            NM Child Spawn            --
 ------------------------------------------
--- xi.dynamis.mobList[zoneID][MobIndex].NMChildren = {MobIndex(NM1), MobIndex(NM2), MobIndex(NM3)}
+-- xi.dynamis.mobList[zoneID][MobIndex].nmchildren = {MobIndex(NM1), MobIndex(NM2), MobIndex(NM3)}
 -- boolean value = forceLink true/false
 
 -- Wave 1
 -- Boss Arera
-xi.dynamis.mobList[zoneID][29 ].NMChildren = { true, 136, 137            } -- ( 029 ) Nightmare Manticore (×3)
-xi.dynamis.mobList[zoneID][30 ].NMChildren = { true, 138, 139            } -- ( 030 ) Nightmare Hippogryph (×3)
-xi.dynamis.mobList[zoneID][31 ].NMChildren = { true, 140, 141            } -- ( 031 ) Nightmare Sabotender (×3)
-xi.dynamis.mobList[zoneID][32 ].NMChildren = { true, 142, 143            } -- ( 032 ) Nightmare Sheep (×3)
+xi.dynamis.mobList[zoneID][29 ].nmchildren = { true, 136, 137            } -- ( 029 ) Nightmare Manticore (×3)
+xi.dynamis.mobList[zoneID][30 ].nmchildren = { true, 138, 139            } -- ( 030 ) Nightmare Hippogryph (×3)
+xi.dynamis.mobList[zoneID][31 ].nmchildren = { true, 140, 141            } -- ( 031 ) Nightmare Sabotender (×3)
+xi.dynamis.mobList[zoneID][32 ].nmchildren = { true, 142, 143            } -- ( 032 ) Nightmare Sheep (×3)
 -- Nightmare Mobs
-xi.dynamis.mobList[zoneID][53 ].NMChildren = { true, 144, 145            } -- ( 053 ) Nightmare Sabotender (×3)
-xi.dynamis.mobList[zoneID][54 ].NMChildren = { true, 146, 147            } -- ( 054 ) Nightmare Sabotender (×3)
-xi.dynamis.mobList[zoneID][55 ].NMChildren = { true, 148, 149            } -- ( 055 ) Nightmare Sabotender (×3)
-xi.dynamis.mobList[zoneID][56 ].NMChildren = { true, 150, 151            } -- ( 056 ) Nightmare Sabotender (×3)
-xi.dynamis.mobList[zoneID][57 ].NMChildren = { true, 152, 153            } -- ( 057 ) Nightmare Sabotender (×3)
-xi.dynamis.mobList[zoneID][58 ].NMChildren = { true, 154, 155            } -- ( 058 ) Nightmare Sabotender (×3)
-xi.dynamis.mobList[zoneID][59 ].NMChildren = { true, 156, 157            } -- ( 059 ) Nightmare Hippogryph (×3)
-xi.dynamis.mobList[zoneID][60 ].NMChildren = { true, 158, 159            } -- ( 060 ) Nightmare Hippogryph (×3)
-xi.dynamis.mobList[zoneID][61 ].NMChildren = { true, 160, 161            } -- ( 061 ) Nightmare Hippogryph (×3)
-xi.dynamis.mobList[zoneID][62 ].NMChildren = { true, 162, 163            } -- ( 062 ) Nightmare Hippogryph (×3)
-xi.dynamis.mobList[zoneID][63 ].NMChildren = { true, 164, 165            } -- ( 063 ) Nightmare Hippogryph (×3)
-xi.dynamis.mobList[zoneID][64 ].NMChildren = { true, 166, 167            } -- ( 064 ) Nightmare Hippogryph (×3)
-xi.dynamis.mobList[zoneID][65 ].NMChildren = { true, 168, 169            } -- ( 065 ) Nightmare Hippogryph (×3)
-xi.dynamis.mobList[zoneID][66 ].NMChildren = { true, 170, 171            } -- ( 066 ) Nightmare Hippogryph (×3)
-xi.dynamis.mobList[zoneID][67 ].NMChildren = { true, 272, 173            } -- ( 067 ) Nightmare Hippogryph (×3)
-xi.dynamis.mobList[zoneID][68 ].NMChildren = { true, 174, 175            } -- ( 068 ) Nightmare Hippogryph (×3)
-xi.dynamis.mobList[zoneID][69 ].NMChildren = { true, 176, 177            } -- ( 069 ) Nightmare Hippogryph (×3)
-xi.dynamis.mobList[zoneID][70 ].NMChildren = { true, 178, 179            } -- ( 070 ) Nightmare Hippogryph (×3)
-xi.dynamis.mobList[zoneID][71 ].NMChildren = { true, 180, 181            } -- ( 071 ) Nightmare Hippogryph (×3)
-xi.dynamis.mobList[zoneID][72 ].NMChildren = { true, 182, 183            } -- ( 072 ) Nightmare Hippogryph (×3)
-xi.dynamis.mobList[zoneID][73 ].NMChildren = { true, 184, 185            } -- ( 073 ) Nightmare Hippogryph (×3)
-xi.dynamis.mobList[zoneID][74 ].NMChildren = { true, 186, 187            } -- ( 074 ) Nightmare Sabotender (×3)
-xi.dynamis.mobList[zoneID][75 ].NMChildren = { true, 188, 189            } -- ( 075 ) Nightmare Sabotender (×3)
-xi.dynamis.mobList[zoneID][76 ].NMChildren = { true, 190, 191            } -- ( 076 ) Nightmare Sabotender (×3)
-xi.dynamis.mobList[zoneID][77 ].NMChildren = { true, 192, 193            } -- ( 077 ) Nightmare Sabotender (×3)
-xi.dynamis.mobList[zoneID][78 ].NMChildren = { true, 194, 195            } -- ( 078 ) Nightmare Sabotender (×3)
-xi.dynamis.mobList[zoneID][79 ].NMChildren = { true, 196, 197            } -- ( 079 ) Nightmare Sabotender (×3)
-xi.dynamis.mobList[zoneID][80 ].NMChildren = { true, 198, 199            } -- ( 080 ) Nightmare Sabotender (×3)
-xi.dynamis.mobList[zoneID][81 ].NMChildren = { true, 200, 201            } -- ( 081 ) Nightmare Sabotender (×3)
-xi.dynamis.mobList[zoneID][82 ].NMChildren = { true, 202, 203            } -- ( 082 ) Nightmare Sabotender (×3)
-xi.dynamis.mobList[zoneID][83 ].NMChildren = { true, 204, 205            } -- ( 083 ) Nightmare Sabotender (×3)
-xi.dynamis.mobList[zoneID][84 ].NMChildren = { true, 206, 207            } -- ( 084 ) Nightmare Hippogryph (×3)
-xi.dynamis.mobList[zoneID][85 ].NMChildren = { true, 208, 209            } -- ( 085 ) Nightmare Hippogryph (×3)
-xi.dynamis.mobList[zoneID][86 ].NMChildren = { true, 210, 211            } -- ( 086 ) Nightmare Hippogryph (×3)
-xi.dynamis.mobList[zoneID][87 ].NMChildren = { true, 212, 213            } -- ( 087 ) Nightmare Sheep (×3)
-xi.dynamis.mobList[zoneID][88 ].NMChildren = { true, 214, 215            } -- ( 088 ) Nightmare Sheep (×3)
-xi.dynamis.mobList[zoneID][89 ].NMChildren = { true, 216, 217            } -- ( 089 ) Nightmare Sheep (×3)
-xi.dynamis.mobList[zoneID][90 ].NMChildren = { true, 218, 219            } -- ( 090 ) Nightmare Sheep (×3)
-xi.dynamis.mobList[zoneID][91 ].NMChildren = { true, 220, 221            } -- ( 091 ) Nightmare Sheep (×3)
-xi.dynamis.mobList[zoneID][92 ].NMChildren = { true, 222, 223            } -- ( 092 ) Nightmare Sheep (×3)
-xi.dynamis.mobList[zoneID][93 ].NMChildren = { true, 224,                } -- ( 093 ) Nightmare Sheep (×2)
-xi.dynamis.mobList[zoneID][94 ].NMChildren = { true, 225,                } -- ( 094 ) Nightmare Sheep (×2)
-xi.dynamis.mobList[zoneID][95 ].NMChildren = { true, 226,                } -- ( 095 ) Nightmare Sheep (×2)
-xi.dynamis.mobList[zoneID][96 ].NMChildren = { true, 227,                } -- ( 096 ) Nightmare Sheep (×2)
-xi.dynamis.mobList[zoneID][97 ].NMChildren = { true, 228,                } -- ( 097 ) Nightmare Sheep (×2)
-xi.dynamis.mobList[zoneID][98 ].NMChildren = { true, 229,                } -- ( 098 ) Nightmare Sheep (×2)
-xi.dynamis.mobList[zoneID][99 ].NMChildren = { true, 230,                } -- ( 099 ) Nightmare Sheep (×2)
-xi.dynamis.mobList[zoneID][100].NMChildren = { true, 231,                } -- ( 100 ) Nightmare Sheep (×2)
-xi.dynamis.mobList[zoneID][101].NMChildren = { true, 232,                } -- ( 101 ) Nightmare Sheep (×2)
-xi.dynamis.mobList[zoneID][102].NMChildren = { true, 233,                } -- ( 102 ) Nightmare Sheep (×2)
-xi.dynamis.mobList[zoneID][103].NMChildren = { true, 234,                } -- ( 103 ) Nightmare Sheep (×2)
-xi.dynamis.mobList[zoneID][104].NMChildren = { true, 235,                } -- ( 104 ) Nightmare Sheep (×2)
-xi.dynamis.mobList[zoneID][105].NMChildren = { true, 236,                } -- ( 105 ) Nightmare Sheep (×2)
-xi.dynamis.mobList[zoneID][106].NMChildren = { true, 237,                } -- ( 106 ) Nightmare Sheep (×2)
-xi.dynamis.mobList[zoneID][107].NMChildren = { true, 238, 239            } -- ( 107 ) Nightmare Sheep (×3)
-xi.dynamis.mobList[zoneID][108].NMChildren = { true, 240, 241            } -- ( 108 ) Nightmare Sheep (×3)
-xi.dynamis.mobList[zoneID][109].NMChildren = { true, 242, 243            } -- ( 109 ) Nightmare Sheep (×3)
-xi.dynamis.mobList[zoneID][110].NMChildren = { true, 244, 245            } -- ( 110 ) Nightmare Manticore (×3)
-xi.dynamis.mobList[zoneID][111].NMChildren = { true, 246, 247            } -- ( 111 ) Nightmare Manticore (×3)
-xi.dynamis.mobList[zoneID][112].NMChildren = { true, 248, 249            } -- ( 112 ) Nightmare Manticore (×3)
-xi.dynamis.mobList[zoneID][113].NMChildren = { true, 250, 251            } -- ( 113 ) Nightmare Manticore (×3)
-xi.dynamis.mobList[zoneID][114].NMChildren = { true, 252, 253            } -- ( 114 ) Nightmare Manticore (×3)
-xi.dynamis.mobList[zoneID][115].NMChildren = { true, 254, 255            } -- ( 115 ) Nightmare Manticore (×3)
-xi.dynamis.mobList[zoneID][116].NMChildren = { true, 256, 257            } -- ( 116 ) Nightmare Manticore (×3)
-xi.dynamis.mobList[zoneID][117].NMChildren = { true, 258, 259            } -- ( 117 ) Nightmare Manticore (×3)
-xi.dynamis.mobList[zoneID][118].NMChildren = { true, 260, 261            } -- ( 118 ) Nightmare Manticore (×3)
-xi.dynamis.mobList[zoneID][119].NMChildren = { true, 262, 263, 264       } -- ( 119 ) Nightmare Manticore (×4)
-xi.dynamis.mobList[zoneID][120].NMChildren = { true, 265, 266            } -- ( 120 ) Nightmare Manticore (×3)
-xi.dynamis.mobList[zoneID][121].NMChildren = { true, 267, 268            } -- ( 121 ) Nightmare Manticore (×3)
-xi.dynamis.mobList[zoneID][122].NMChildren = { true, 269, 270            } -- ( 122 ) Nightmare Manticore (×3)
-xi.dynamis.mobList[zoneID][123].NMChildren = { true, 271, 272, 273       } -- ( 123 ) Nightmare Manticore (×4)
-xi.dynamis.mobList[zoneID][124].NMChildren = { true, 274, 275, 276       } -- ( 124 ) Nightmare Manticore (×4)
-xi.dynamis.mobList[zoneID][125].NMChildren = { true, 277, 278            } -- ( 125 ) Nightmare Manticore (×3)
-xi.dynamis.mobList[zoneID][126].NMChildren = { true, 279, 280            } -- ( 126 ) Nightmare Manticore (×3)
-xi.dynamis.mobList[zoneID][127].NMChildren = { true, 281, 282            } -- ( 127 ) Nightmare Manticore (×3)
-xi.dynamis.mobList[zoneID][128].NMChildren = { true, 283, 284            } -- ( 128 ) Nightmare Sabotender (×3)
-xi.dynamis.mobList[zoneID][129].NMChildren = { true, 285, 286            } -- ( 129 ) Nightmare Sabotender (×3)
+xi.dynamis.mobList[zoneID][53 ].nmchildren = { true, 144, 145            } -- ( 053 ) Nightmare Sabotender (×3)
+xi.dynamis.mobList[zoneID][54 ].nmchildren = { true, 146, 147            } -- ( 054 ) Nightmare Sabotender (×3)
+xi.dynamis.mobList[zoneID][55 ].nmchildren = { true, 148, 149            } -- ( 055 ) Nightmare Sabotender (×3)
+xi.dynamis.mobList[zoneID][56 ].nmchildren = { true, 150, 151            } -- ( 056 ) Nightmare Sabotender (×3)
+xi.dynamis.mobList[zoneID][57 ].nmchildren = { true, 152, 153            } -- ( 057 ) Nightmare Sabotender (×3)
+xi.dynamis.mobList[zoneID][58 ].nmchildren = { true, 154, 155            } -- ( 058 ) Nightmare Sabotender (×3)
+xi.dynamis.mobList[zoneID][59 ].nmchildren = { true, 156, 157            } -- ( 059 ) Nightmare Hippogryph (×3)
+xi.dynamis.mobList[zoneID][60 ].nmchildren = { true, 158, 159            } -- ( 060 ) Nightmare Hippogryph (×3)
+xi.dynamis.mobList[zoneID][61 ].nmchildren = { true, 160, 161            } -- ( 061 ) Nightmare Hippogryph (×3)
+xi.dynamis.mobList[zoneID][62 ].nmchildren = { true, 162, 163            } -- ( 062 ) Nightmare Hippogryph (×3)
+xi.dynamis.mobList[zoneID][63 ].nmchildren = { true, 164, 165            } -- ( 063 ) Nightmare Hippogryph (×3)
+xi.dynamis.mobList[zoneID][64 ].nmchildren = { true, 166, 167            } -- ( 064 ) Nightmare Hippogryph (×3)
+xi.dynamis.mobList[zoneID][65 ].nmchildren = { true, 168, 169            } -- ( 065 ) Nightmare Hippogryph (×3)
+xi.dynamis.mobList[zoneID][66 ].nmchildren = { true, 170, 171            } -- ( 066 ) Nightmare Hippogryph (×3)
+xi.dynamis.mobList[zoneID][67 ].nmchildren = { true, 272, 173            } -- ( 067 ) Nightmare Hippogryph (×3)
+xi.dynamis.mobList[zoneID][68 ].nmchildren = { true, 174, 175            } -- ( 068 ) Nightmare Hippogryph (×3)
+xi.dynamis.mobList[zoneID][69 ].nmchildren = { true, 176, 177            } -- ( 069 ) Nightmare Hippogryph (×3)
+xi.dynamis.mobList[zoneID][70 ].nmchildren = { true, 178, 179            } -- ( 070 ) Nightmare Hippogryph (×3)
+xi.dynamis.mobList[zoneID][71 ].nmchildren = { true, 180, 181            } -- ( 071 ) Nightmare Hippogryph (×3)
+xi.dynamis.mobList[zoneID][72 ].nmchildren = { true, 182, 183            } -- ( 072 ) Nightmare Hippogryph (×3)
+xi.dynamis.mobList[zoneID][73 ].nmchildren = { true, 184, 185            } -- ( 073 ) Nightmare Hippogryph (×3)
+xi.dynamis.mobList[zoneID][74 ].nmchildren = { true, 186, 187            } -- ( 074 ) Nightmare Sabotender (×3)
+xi.dynamis.mobList[zoneID][75 ].nmchildren = { true, 188, 189            } -- ( 075 ) Nightmare Sabotender (×3)
+xi.dynamis.mobList[zoneID][76 ].nmchildren = { true, 190, 191            } -- ( 076 ) Nightmare Sabotender (×3)
+xi.dynamis.mobList[zoneID][77 ].nmchildren = { true, 192, 193            } -- ( 077 ) Nightmare Sabotender (×3)
+xi.dynamis.mobList[zoneID][78 ].nmchildren = { true, 194, 195            } -- ( 078 ) Nightmare Sabotender (×3)
+xi.dynamis.mobList[zoneID][79 ].nmchildren = { true, 196, 197            } -- ( 079 ) Nightmare Sabotender (×3)
+xi.dynamis.mobList[zoneID][80 ].nmchildren = { true, 198, 199            } -- ( 080 ) Nightmare Sabotender (×3)
+xi.dynamis.mobList[zoneID][81 ].nmchildren = { true, 200, 201            } -- ( 081 ) Nightmare Sabotender (×3)
+xi.dynamis.mobList[zoneID][82 ].nmchildren = { true, 202, 203            } -- ( 082 ) Nightmare Sabotender (×3)
+xi.dynamis.mobList[zoneID][83 ].nmchildren = { true, 204, 205            } -- ( 083 ) Nightmare Sabotender (×3)
+xi.dynamis.mobList[zoneID][84 ].nmchildren = { true, 206, 207            } -- ( 084 ) Nightmare Hippogryph (×3)
+xi.dynamis.mobList[zoneID][85 ].nmchildren = { true, 208, 209            } -- ( 085 ) Nightmare Hippogryph (×3)
+xi.dynamis.mobList[zoneID][86 ].nmchildren = { true, 210, 211            } -- ( 086 ) Nightmare Hippogryph (×3)
+xi.dynamis.mobList[zoneID][87 ].nmchildren = { true, 212, 213            } -- ( 087 ) Nightmare Sheep (×3)
+xi.dynamis.mobList[zoneID][88 ].nmchildren = { true, 214, 215            } -- ( 088 ) Nightmare Sheep (×3)
+xi.dynamis.mobList[zoneID][89 ].nmchildren = { true, 216, 217            } -- ( 089 ) Nightmare Sheep (×3)
+xi.dynamis.mobList[zoneID][90 ].nmchildren = { true, 218, 219            } -- ( 090 ) Nightmare Sheep (×3)
+xi.dynamis.mobList[zoneID][91 ].nmchildren = { true, 220, 221            } -- ( 091 ) Nightmare Sheep (×3)
+xi.dynamis.mobList[zoneID][92 ].nmchildren = { true, 222, 223            } -- ( 092 ) Nightmare Sheep (×3)
+xi.dynamis.mobList[zoneID][93 ].nmchildren = { true, 224,                } -- ( 093 ) Nightmare Sheep (×2)
+xi.dynamis.mobList[zoneID][94 ].nmchildren = { true, 225,                } -- ( 094 ) Nightmare Sheep (×2)
+xi.dynamis.mobList[zoneID][95 ].nmchildren = { true, 226,                } -- ( 095 ) Nightmare Sheep (×2)
+xi.dynamis.mobList[zoneID][96 ].nmchildren = { true, 227,                } -- ( 096 ) Nightmare Sheep (×2)
+xi.dynamis.mobList[zoneID][97 ].nmchildren = { true, 228,                } -- ( 097 ) Nightmare Sheep (×2)
+xi.dynamis.mobList[zoneID][98 ].nmchildren = { true, 229,                } -- ( 098 ) Nightmare Sheep (×2)
+xi.dynamis.mobList[zoneID][99 ].nmchildren = { true, 230,                } -- ( 099 ) Nightmare Sheep (×2)
+xi.dynamis.mobList[zoneID][100].nmchildren = { true, 231,                } -- ( 100 ) Nightmare Sheep (×2)
+xi.dynamis.mobList[zoneID][101].nmchildren = { true, 232,                } -- ( 101 ) Nightmare Sheep (×2)
+xi.dynamis.mobList[zoneID][102].nmchildren = { true, 233,                } -- ( 102 ) Nightmare Sheep (×2)
+xi.dynamis.mobList[zoneID][103].nmchildren = { true, 234,                } -- ( 103 ) Nightmare Sheep (×2)
+xi.dynamis.mobList[zoneID][104].nmchildren = { true, 235,                } -- ( 104 ) Nightmare Sheep (×2)
+xi.dynamis.mobList[zoneID][105].nmchildren = { true, 236,                } -- ( 105 ) Nightmare Sheep (×2)
+xi.dynamis.mobList[zoneID][106].nmchildren = { true, 237,                } -- ( 106 ) Nightmare Sheep (×2)
+xi.dynamis.mobList[zoneID][107].nmchildren = { true, 238, 239            } -- ( 107 ) Nightmare Sheep (×3)
+xi.dynamis.mobList[zoneID][108].nmchildren = { true, 240, 241            } -- ( 108 ) Nightmare Sheep (×3)
+xi.dynamis.mobList[zoneID][109].nmchildren = { true, 242, 243            } -- ( 109 ) Nightmare Sheep (×3)
+xi.dynamis.mobList[zoneID][110].nmchildren = { true, 244, 245            } -- ( 110 ) Nightmare Manticore (×3)
+xi.dynamis.mobList[zoneID][111].nmchildren = { true, 246, 247            } -- ( 111 ) Nightmare Manticore (×3)
+xi.dynamis.mobList[zoneID][112].nmchildren = { true, 248, 249            } -- ( 112 ) Nightmare Manticore (×3)
+xi.dynamis.mobList[zoneID][113].nmchildren = { true, 250, 251            } -- ( 113 ) Nightmare Manticore (×3)
+xi.dynamis.mobList[zoneID][114].nmchildren = { true, 252, 253            } -- ( 114 ) Nightmare Manticore (×3)
+xi.dynamis.mobList[zoneID][115].nmchildren = { true, 254, 255            } -- ( 115 ) Nightmare Manticore (×3)
+xi.dynamis.mobList[zoneID][116].nmchildren = { true, 256, 257            } -- ( 116 ) Nightmare Manticore (×3)
+xi.dynamis.mobList[zoneID][117].nmchildren = { true, 258, 259            } -- ( 117 ) Nightmare Manticore (×3)
+xi.dynamis.mobList[zoneID][118].nmchildren = { true, 260, 261            } -- ( 118 ) Nightmare Manticore (×3)
+xi.dynamis.mobList[zoneID][119].nmchildren = { true, 262, 263, 264       } -- ( 119 ) Nightmare Manticore (×4)
+xi.dynamis.mobList[zoneID][120].nmchildren = { true, 265, 266            } -- ( 120 ) Nightmare Manticore (×3)
+xi.dynamis.mobList[zoneID][121].nmchildren = { true, 267, 268            } -- ( 121 ) Nightmare Manticore (×3)
+xi.dynamis.mobList[zoneID][122].nmchildren = { true, 269, 270            } -- ( 122 ) Nightmare Manticore (×3)
+xi.dynamis.mobList[zoneID][123].nmchildren = { true, 271, 272, 273       } -- ( 123 ) Nightmare Manticore (×4)
+xi.dynamis.mobList[zoneID][124].nmchildren = { true, 274, 275, 276       } -- ( 124 ) Nightmare Manticore (×4)
+xi.dynamis.mobList[zoneID][125].nmchildren = { true, 277, 278            } -- ( 125 ) Nightmare Manticore (×3)
+xi.dynamis.mobList[zoneID][126].nmchildren = { true, 279, 280            } -- ( 126 ) Nightmare Manticore (×3)
+xi.dynamis.mobList[zoneID][127].nmchildren = { true, 281, 282            } -- ( 127 ) Nightmare Manticore (×3)
+xi.dynamis.mobList[zoneID][128].nmchildren = { true, 283, 284            } -- ( 128 ) Nightmare Sabotender (×3)
+xi.dynamis.mobList[zoneID][129].nmchildren = { true, 285, 286            } -- ( 129 ) Nightmare Sabotender (×3)
 
 
 ------------------------------------------
@@ -914,7 +929,6 @@ xi.dynamis.mobList[zoneID][129].pos = { 968.520, -0.415, -278.791, 99   } -- ( 1
 ------------------------------------------
 -- xi.dynamis.mobList[zoneID][MobIndex].eyes = xi.dynamis.eyes.BLUE -- Flags for blue eyes. (HP)
 -- xi.dynamis.mobList[zoneID][MobIndex].eyes = xi.dynamis.eyes.GREEN -- Flags for green eyes. (MP)
--- xi.dynamis.mobList[zoneID][MobIndex].eyes = xi.dynamis.eyes.RED -- Flags for red eyes. (TE)
 
 xi.dynamis.mobList[zoneID][6  ].eyes = xi.dynamis.eyes.BLUE
 xi.dynamis.mobList[zoneID][7  ].eyes = xi.dynamis.eyes.GREEN
@@ -925,4 +939,5 @@ xi.dynamis.mobList[zoneID][16 ].eyes = xi.dynamis.eyes.BLUE
 ------------------------------------------
 -- xi.dynamis.mobList[zoneID][MobIndex].timeExtension = 15
 
+xi.dynamis.mobList[zoneID].timeExtensionList = {24}
 xi.dynamis.mobList[zoneID][24].timeExtension = 60
