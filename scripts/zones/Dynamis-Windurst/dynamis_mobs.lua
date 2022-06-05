@@ -100,155 +100,155 @@ end
 ------------------------------------------
 --xi.dynamis.mobList[zoneID][MobIndex].info = {"Statue/NM/Nightmare", "Mob Name", "Family", "Main Job", "MobLocalVarName"}
 
-xi.dynamis.mobList[zoneID][1  ].info = { "Statue", "Avatar Icon",    nil, nil, nil }  -- 001-Y/A
-xi.dynamis.mobList[zoneID][2  ].info = { "Statue", "Avatar Icon",    nil, nil, nil }  -- 002-Y/A
-xi.dynamis.mobList[zoneID][3  ].info = { "Statue", "Avatar Icon",    nil, nil, nil }  -- 003-Y/A
-xi.dynamis.mobList[zoneID][4  ].info = { "Statue", "Avatar Icon",    nil, nil, nil }  -- 004-Y/A
-xi.dynamis.mobList[zoneID][5  ].info = { "Statue", "Avatar Icon",    nil, nil, nil }  -- 005-Y/A
-xi.dynamis.mobList[zoneID][6  ].info = { "Statue", "Manifest Icon",  nil, nil, nil }  -- 006-Y/M(HP)
-xi.dynamis.mobList[zoneID][7  ].info = { "Statue", "Avatar Icon",    nil, nil, nil }  -- 007-Y/A
-xi.dynamis.mobList[zoneID][8  ].info = { "Statue", "Manifest Icon",  nil, nil, nil }  -- 008-Y/M(MP)(20)
-xi.dynamis.mobList[zoneID][9  ].info = { "Statue", "Avatar Icon",    nil, nil, nil }  -- 009-Y/A
-xi.dynamis.mobList[zoneID][10 ].info = { "Statue", "Avatar Icon",    nil, nil, nil }  -- 010-Y/A
-xi.dynamis.mobList[zoneID][11 ].info = { "Statue", "Avatar Icon",    nil, nil, nil }  -- 011-Y/A
-xi.dynamis.mobList[zoneID][12 ].info = { "Statue", "Manifest Icon",  nil, nil, nil }  -- 012-Y/M(HP)
-xi.dynamis.mobList[zoneID][13 ].info = { "Statue", "Avatar Icon",    nil, nil, nil }  -- 013-Y/A
-xi.dynamis.mobList[zoneID][14 ].info = { "Statue", "Avatar Icon",    nil, nil, nil }  -- 014-Y/A
-xi.dynamis.mobList[zoneID][15 ].info = { "Statue", "Avatar Icon",    nil, nil, nil }  -- 015-Y/A
-xi.dynamis.mobList[zoneID][16 ].info = { "Statue", "Avatar Icon",    nil, nil, nil }  -- 016-Y/A
-xi.dynamis.mobList[zoneID][17 ].info = { "Statue", "Manifest Icon",  nil, nil, nil }  -- 017-Y/M(MP)
-xi.dynamis.mobList[zoneID][18 ].info = { "Statue", "Avatar Icon",    nil, nil, nil }  -- 018-Y/A(20)
-xi.dynamis.mobList[zoneID][19 ].info = { "Statue", "Manifest Icon",  nil, nil, nil }  -- 019-Y/M(HP)
-xi.dynamis.mobList[zoneID][20 ].info = { "Statue", "Avatar Icon",    nil, nil, nil }  -- 020-Y/A
-xi.dynamis.mobList[zoneID][21 ].info = { "Statue", "Avatar Icon",    nil, nil, nil }  -- 021-Y/A
-xi.dynamis.mobList[zoneID][22 ].info = { "Statue", "Avatar Icon",    nil, nil, nil }  -- 022-Y/A
-xi.dynamis.mobList[zoneID][23 ].info = { "Statue", "Avatar Icon",    nil, nil, nil }  -- 023-Y/A
-xi.dynamis.mobList[zoneID][24 ].info = { "Statue", "Manifest Icon",  nil, nil, nil }  -- 024-Y/M(HP)
-xi.dynamis.mobList[zoneID][25 ].info = { "Statue", "Manifest Icon",  nil, nil, nil }  -- 025-Y/M(MP)
-xi.dynamis.mobList[zoneID][26 ].info = { "Statue", "Avatar Icon",    nil, nil, nil }  -- 026-Y/A
-xi.dynamis.mobList[zoneID][27 ].info = { "Statue", "Avatar Icon",    nil, nil, nil }  -- 027-Y/A
-xi.dynamis.mobList[zoneID][28 ].info = { "Statue", "Avatar Icon",    nil, nil, nil }  -- 028-Y/A
-xi.dynamis.mobList[zoneID][29 ].info = { "Statue", "Manifest Icon",  nil, nil, nil }  -- 029-Y/M(HP)
-xi.dynamis.mobList[zoneID][30 ].info = { "Statue", "Manifest Icon",  nil, nil, nil }  -- 030-Y/M(MP)
-xi.dynamis.mobList[zoneID][31 ].info = { "Statue", "Avatar Icon",    nil, nil, nil }  -- 031-Y/A(10)
-xi.dynamis.mobList[zoneID][32 ].info = { "Statue", "Avatar Icon",    nil, nil, nil }  -- 032-Y/A
-xi.dynamis.mobList[zoneID][33 ].info = { "Statue", "Manifest Icon",  nil, nil, nil }  -- 033-Y/M(MP)
-xi.dynamis.mobList[zoneID][34 ].info = { "Statue", "Avatar Icon",    nil, nil, nil }  -- 034-Y/A
-xi.dynamis.mobList[zoneID][35 ].info = { "Statue", "Manifest Icon",  nil, nil, nil }  -- 035-Y/M(HP)
-xi.dynamis.mobList[zoneID][36 ].info = { "Statue", "Avatar Icon",    nil, nil, nil }  -- 036-Y/A
-xi.dynamis.mobList[zoneID][37 ].info = { "Statue", "Avatar Icon",    nil, nil, nil }  -- 037-Y/A
-xi.dynamis.mobList[zoneID][38 ].info = { "Statue", "Avatar Icon",    nil, nil, nil }  -- 038-Y/A
-xi.dynamis.mobList[zoneID][39 ].info = { "Statue", "Avatar Icon",    nil, nil, nil }  -- 039-Y/A
-xi.dynamis.mobList[zoneID][40 ].info = { "Statue", "Manifest Icon",  nil, nil, nil }  -- 040-Y/M(MP)
-xi.dynamis.mobList[zoneID][41 ].info = { "Statue", "Avatar Icon",    nil, nil, nil }  -- 041-Y/A(20)
-xi.dynamis.mobList[zoneID][42 ].info = { "Statue", "Manifest Icon",  nil, nil, nil }  -- 042-Y/M(HP)
-xi.dynamis.mobList[zoneID][43 ].info = { "Statue", "Avatar Icon",    nil, nil, nil }  -- 043-Y/A
-xi.dynamis.mobList[zoneID][44 ].info = { "Statue", "Avatar Icon",    nil, nil, nil }  -- 044-Y/A
-xi.dynamis.mobList[zoneID][45 ].info = { "Statue", "Manifest Icon",  nil, nil, nil }  -- 045-Y/M(MP)
-xi.dynamis.mobList[zoneID][46 ].info = { "Statue", "Avatar Idol",    nil, nil, nil }  -- 046-Y/A.Idol
-xi.dynamis.mobList[zoneID][47 ].info = { "Statue", "Avatar Icon",    nil, nil, nil }  -- 047-Y/M
-xi.dynamis.mobList[zoneID][48 ].info = { "Statue", "Avatar Icon",    nil, nil, nil }  -- 048-Y/M
-xi.dynamis.mobList[zoneID][49 ].info = { "Statue", "Avatar Icon",    nil, nil, nil }  -- 049-Y/A
-xi.dynamis.mobList[zoneID][50 ].info = { "Statue", "Avatar Icon",    nil, nil, nil }  -- 050-Y/A
-xi.dynamis.mobList[zoneID][51 ].info = { "Statue", "Manifest Icon",  nil, nil, nil }  -- 051-Y/M(HP)
-xi.dynamis.mobList[zoneID][52 ].info = { "Statue", "Avatar Icon",    nil, nil, nil }  -- 052-Y/A
-xi.dynamis.mobList[zoneID][53 ].info = { "Statue", "Avatar Icon",    nil, nil, nil }  -- 053-Y/A
-xi.dynamis.mobList[zoneID][54 ].info = { "Statue", "Avatar Icon",    nil, nil, nil }  -- 054-Y/A
-xi.dynamis.mobList[zoneID][55 ].info = { "Statue", "Avatar Icon",    nil, nil, nil }  -- 055-Y/A
-xi.dynamis.mobList[zoneID][56 ].info = { "Statue", "Manifest Icon",  nil, nil, nil }  -- 056-Y/M(HP)
-xi.dynamis.mobList[zoneID][57 ].info = { "Statue", "Manifest Icon",  nil, nil, "57_killed" }  -- 057-Y/M(MP)
-xi.dynamis.mobList[zoneID][58 ].info = { "Statue", "Avatar Icon",    nil, nil, "58_killed" }  -- 058-Y/A(10)
-xi.dynamis.mobList[zoneID][59 ].info = { "Statue", "Avatar Icon",    nil, nil, nil }  -- 059-Y/A
-xi.dynamis.mobList[zoneID][60 ].info = { "Statue", "Manifest Icon",  nil, nil, nil }  -- 060-Y/M(MP)
-xi.dynamis.mobList[zoneID][61 ].info = { "Statue", "Avatar Icon",    nil, nil, nil }  -- 061-Y/A
-xi.dynamis.mobList[zoneID][62 ].info = { "Statue", "Avatar Icon",    nil, nil, nil }  -- 062-Y/A
-xi.dynamis.mobList[zoneID][63 ].info = { "Statue", "Avatar Icon",    nil, nil, nil }  -- 063-Y/A
-xi.dynamis.mobList[zoneID][64 ].info = { "Statue", "Avatar Icon",    nil, nil, nil }  -- 064-Y/A
-xi.dynamis.mobList[zoneID][65 ].info = { "Statue", "Avatar Icon",    nil, nil, nil }  -- 065-Y/A
-xi.dynamis.mobList[zoneID][66 ].info = { "Statue", "Avatar Icon",    nil, nil, nil }  -- 066-Y/M(20)
-xi.dynamis.mobList[zoneID][67 ].info = { "Statue", "Avatar Icon",    nil, nil, nil }  -- 067-Y/A
-xi.dynamis.mobList[zoneID][68 ].info = { "Statue", "Avatar Icon",    nil, nil, nil }  -- 068-Y/A
-xi.dynamis.mobList[zoneID][69 ].info = { "Statue", "Avatar Icon",    nil, nil, nil }  -- 069-Y/A
-xi.dynamis.mobList[zoneID][70 ].info = { "Statue", "Avatar Icon",    nil, nil, nil }  -- 070-Y/A
-xi.dynamis.mobList[zoneID][71 ].info = { "Statue", "Avatar Icon",    nil, nil, nil }  -- 071-Y/A
-xi.dynamis.mobList[zoneID][72 ].info = { "Statue", "Manifest Icon",  nil, nil, nil }  -- 072-Y/M(MP)
-xi.dynamis.mobList[zoneID][73 ].info = { "Statue", "Avatar Icon",    nil, nil, nil }  -- 073-Y/A
-xi.dynamis.mobList[zoneID][74 ].info = { "Statue", "Manifest Icon",  nil, nil, nil }  -- 074-Y/M(HP)
-xi.dynamis.mobList[zoneID][75 ].info = { "Statue", "Avatar Icon",    nil, nil, nil }  -- 075-Y/A
-xi.dynamis.mobList[zoneID][76 ].info = { "Statue", "Avatar Icon",    nil, nil, nil }  -- 076-Y/A
-xi.dynamis.mobList[zoneID][77 ].info = { "Statue", "Manifest Icon",  nil, nil, nil }  -- 077-Y/M(MP)
-xi.dynamis.mobList[zoneID][78 ].info = { "Statue", "Avatar Icon",    nil, nil, nil }  -- 078-Y/A
-xi.dynamis.mobList[zoneID][79 ].info = { "Statue", "Avatar Icon",    nil, nil, nil }  -- 079-Y/A
-xi.dynamis.mobList[zoneID][80 ].info = { "Statue", "Manifest Icon",  nil, nil, nil }  -- 080-Y/M(MP)
-xi.dynamis.mobList[zoneID][81 ].info = { "Statue", "Avatar Icon",    nil, nil, nil }  -- 081-Y/A
-xi.dynamis.mobList[zoneID][82 ].info = { "Statue", "Avatar Icon",    nil, nil, nil }  -- 082-Y/A
-xi.dynamis.mobList[zoneID][83 ].info = { "Statue", "Manifest Icon",  nil, nil, nil }  -- 083-Y/M(HP)
-xi.dynamis.mobList[zoneID][84 ].info = { "Statue", "Avatar Idol",    nil, nil, nil }  -- 084-Y/A.Idol
-xi.dynamis.mobList[zoneID][85 ].info = { "Statue", "Avatar Icon",    nil, nil, nil }  -- 085-Y/A
-xi.dynamis.mobList[zoneID][86 ].info = { "Statue", "Manifest Icon",  nil, nil, nil }  -- 086-Y/M(MP)
-xi.dynamis.mobList[zoneID][87 ].info = { "Statue", "Avatar Icon",    nil, nil, nil }  -- 087-Y/A
-xi.dynamis.mobList[zoneID][88 ].info = { "Statue", "Manifest Icon",  nil, nil, nil }  -- 088-Y/M(HP)
-xi.dynamis.mobList[zoneID][89 ].info = { "Statue", "Avatar Icon",    nil, nil, nil }  -- 089-Y/A
-xi.dynamis.mobList[zoneID][90 ].info = { "Statue", "Avatar Icon",    nil, nil, nil }  -- 090-Y/A
-xi.dynamis.mobList[zoneID][91 ].info = { "Statue", "Avatar Icon",    nil, nil, nil }  -- 091-Y/A
-xi.dynamis.mobList[zoneID][92 ].info = { "Statue", "Avatar Icon",    nil, nil, nil }  -- 092-Y/A
-xi.dynamis.mobList[zoneID][93 ].info = { "Statue", "Avatar Idol",    nil, nil, nil }  -- 093-Y/A.Idol
-xi.dynamis.mobList[zoneID][94 ].info = { "Statue", "Manifest Icon",  nil, nil, nil }  -- 094-Y/M(HP)
-xi.dynamis.mobList[zoneID][95 ].info = { "Statue", "Manifest Icon",  nil, nil, nil }  -- 095-Y/M(HP)
-xi.dynamis.mobList[zoneID][96 ].info = { "Statue", "Manifest Icon",  nil, nil, nil }  -- 096-Y/M(MP)
-xi.dynamis.mobList[zoneID][97 ].info = { "Statue", "Avatar Icon",    nil, nil, nil }  -- 097-Y/A
-xi.dynamis.mobList[zoneID][98 ].info = { "Statue", "Avatar Icon",    nil, nil, nil }  -- 098-Y/A
-xi.dynamis.mobList[zoneID][99 ].info = { "Statue", "Avatar Icon",    nil, nil, nil }  -- 099-Y/A
-xi.dynamis.mobList[zoneID][100].info = { "Statue", "Manifest Icon",  nil, nil, nil }  -- 100-Y/M(HP)
-xi.dynamis.mobList[zoneID][101].info = { "Statue", "Avatar Icon",    nil, nil, "101_killed" }  -- 101-Y/M(20)
-xi.dynamis.mobList[zoneID][102].info = { "Statue", "Avatar Icon",    nil, nil, nil }  -- 102-Y/A
-xi.dynamis.mobList[zoneID][103].info = { "Statue", "Avatar Icon",    nil, nil, nil }  -- 103-Y/A
-xi.dynamis.mobList[zoneID][104].info = { "Statue", "Avatar Icon",    nil, nil, nil }  -- 104-Y/A
-xi.dynamis.mobList[zoneID][105].info = { "Statue", "Avatar Icon",    nil, nil, nil }  -- 105-Y/A
-xi.dynamis.mobList[zoneID][106].info = { "Statue", "Avatar Icon",    nil, nil, nil }  -- 106-Y/A
-xi.dynamis.mobList[zoneID][107].info = { "Statue", "Avatar Icon",    nil, nil, nil }  -- 107-Y/A
-xi.dynamis.mobList[zoneID][108].info = { "Statue", "Avatar Icon",    nil, nil, nil }  -- 108-Y/A
-xi.dynamis.mobList[zoneID][109].info = { "Statue", "Avatar Icon",    nil, nil, nil }  -- 109-Y/A
-xi.dynamis.mobList[zoneID][110].info = { "Statue", "Manifest Icon",  nil, nil, nil }  -- 110-Y/M(HP)
-xi.dynamis.mobList[zoneID][111].info = { "Statue", "Manifest Icon",  nil, nil, nil }  -- 111-Y/M(MP)
-xi.dynamis.mobList[zoneID][112].info = { "Statue", "Avatar Icon",    nil, nil, nil }  -- 112-Y/A
-xi.dynamis.mobList[zoneID][113].info = { "Statue", "Avatar Icon",    nil, nil, nil }  -- 113-Y/A
-xi.dynamis.mobList[zoneID][114].info = { "Statue", "Avatar Icon",    nil, nil, nil }  -- 114-Y/M
-xi.dynamis.mobList[zoneID][115].info = { "Statue", "Avatar Icon",    nil, nil, nil }  -- 115-Y/M
-xi.dynamis.mobList[zoneID][116].info = { "Statue", "Manifest Idol",  nil, nil, nil }  -- 116-Y/A.Idol
-xi.dynamis.mobList[zoneID][117].info = { "Statue", "Manifest Icon",  nil, nil, nil }  -- 117-Y/M(HP)
-xi.dynamis.mobList[zoneID][118].info = { "Statue", "Manifest Icon",  nil, nil, nil }  -- 118-Y/M(MP)
-xi.dynamis.mobList[zoneID][119].info = { "Statue", "Avatar Icon",    nil, nil, nil }  -- 119-Y/M
-xi.dynamis.mobList[zoneID][120].info = { "Statue", "Avatar Icon",    nil, nil, nil }  -- 120-Y/M
-xi.dynamis.mobList[zoneID][122].info = { "Statue", "Avatar Icon",    nil, nil, nil }  -- 122-Y/M
-xi.dynamis.mobList[zoneID][123].info = { "Statue", "Avatar Icon",    nil, nil, nil }  -- 123-Y/M
-xi.dynamis.mobList[zoneID][124].info = { "Statue", "Avatar Icon",    nil, nil, nil }  -- 124-Y/M
-xi.dynamis.mobList[zoneID][125].info = { "Statue", "Avatar Icon",    nil, nil, nil }  -- 125-Y/M
-xi.dynamis.mobList[zoneID][126].info = { "Statue", "Manifest Icon",  nil, nil, nil }  -- 126-Y/M(HP)
-xi.dynamis.mobList[zoneID][127].info = { "Statue", "Manifest Icon",  nil, nil, nil }  -- 127-Y/M(MP)
-xi.dynamis.mobList[zoneID][128].info = { "Statue", "Avatar Icon",    nil, nil, nil }  -- 128-Y/A
-xi.dynamis.mobList[zoneID][129].info = { "Statue", "Avatar Icon",    nil, nil, nil }  -- 129-Y/A
-xi.dynamis.mobList[zoneID][130].info = { "Statue", "Avatar Icon",    nil, nil, nil }  -- 130-Y/A
-xi.dynamis.mobList[zoneID][131].info = { "Statue", "Manifest Icon",  nil, nil, nil }  -- 131-Y/M(MP)
-xi.dynamis.mobList[zoneID][132].info = { "Statue", "Avatar Icon",    nil, nil, nil }  -- 132-Y/A
-xi.dynamis.mobList[zoneID][133].info = { "Statue", "Manifest Icon",  nil, nil, nil }  -- 133-Y/M(HP)
-xi.dynamis.mobList[zoneID][134].info = { "Statue", "Avatar Icon",    nil, nil, nil }  -- 134-Y/A
-xi.dynamis.mobList[zoneID][135].info = { "Statue", "Avatar Icon",    nil, nil, nil }  -- 135-Y/A
-xi.dynamis.mobList[zoneID][136].info = { "Statue", "Manifest Icon",  nil, nil, nil }  -- 136-Y/M(HP)
-xi.dynamis.mobList[zoneID][137].info = { "Statue", "Manifest Icon",  nil, nil, nil }  -- 137-Y/M(MP)
-xi.dynamis.mobList[zoneID][138].info = { "Statue", "Manifest Icon",  nil, nil, nil }  -- 138-Y/M(HP)
-xi.dynamis.mobList[zoneID][139].info = { "Statue", "Manifest Icon",  nil, nil, nil }  -- 139-Y/M(MP)
-xi.dynamis.mobList[zoneID][140].info = { "Statue", "Avatar Icon",    nil, nil, nil }  -- 140-Y/M
-xi.dynamis.mobList[zoneID][141].info = { "Statue", "Avatar Icon",    nil, nil, nil }  -- 141-Y/M
-xi.dynamis.mobList[zoneID][142].info = { "Statue", "Avatar Icon",    nil, nil, nil }  -- 142-Y/M
-xi.dynamis.mobList[zoneID][143].info = { "Statue", "Avatar Icon",    nil, nil, nil }  -- 143-Y/M
-xi.dynamis.mobList[zoneID][144].info = { "Statue", "Avatar Icon",    nil, nil, nil }  -- 144-Y/M
-xi.dynamis.mobList[zoneID][145].info = { "Statue", "Avatar Icon",    nil, nil, nil }  -- 145-Y/M
-xi.dynamis.mobList[zoneID][146].info = { "Statue", "Avatar Icon",    nil, nil, nil }  -- 146-Y/A
-xi.dynamis.mobList[zoneID][147].info = { "Statue", "Avatar Icon",    nil, nil, nil }  -- 147-Y/M
-xi.dynamis.mobList[zoneID][148].info = { "Statue", "Avatar Icon",    nil, nil, nil }  -- 148-Y/A
-xi.dynamis.mobList[zoneID][149].info = { "Statue", "Avatar Icon",    nil, nil, nil }  -- 149-Y/M
-xi.dynamis.mobList[zoneID][150].info = { "Statue", "Avatar Icon",    nil, nil, nil }  -- 150-Y/M
+xi.dynamis.mobList[zoneID][1  ].info = { "Statue", "Avatar Icon",    nil, nil, nil }  -- (001-Y/A)
+xi.dynamis.mobList[zoneID][2  ].info = { "Statue", "Avatar Icon",    nil, nil, nil }  -- (002-Y/A)
+xi.dynamis.mobList[zoneID][3  ].info = { "Statue", "Avatar Icon",    nil, nil, nil }  -- (003-Y/A)
+xi.dynamis.mobList[zoneID][4  ].info = { "Statue", "Avatar Icon",    nil, nil, nil }  -- (004-Y/A)
+xi.dynamis.mobList[zoneID][5  ].info = { "Statue", "Avatar Icon",    nil, nil, nil }  -- (005-Y/A)
+xi.dynamis.mobList[zoneID][6  ].info = { "Statue", "Manifest Icon",  nil, nil, nil }  -- (006-Y/M)(HP)
+xi.dynamis.mobList[zoneID][7  ].info = { "Statue", "Avatar Icon",    nil, nil, nil }  -- (007-Y/A)
+xi.dynamis.mobList[zoneID][8  ].info = { "Statue", "Manifest Icon",  nil, nil, nil }  -- (008-Y/M)(MP)(20)
+xi.dynamis.mobList[zoneID][9  ].info = { "Statue", "Avatar Icon",    nil, nil, nil }  -- (009-Y/A)
+xi.dynamis.mobList[zoneID][10 ].info = { "Statue", "Avatar Icon",    nil, nil, nil }  -- (010-Y/A)
+xi.dynamis.mobList[zoneID][11 ].info = { "Statue", "Avatar Icon",    nil, nil, nil }  -- (011-Y/A)
+xi.dynamis.mobList[zoneID][12 ].info = { "Statue", "Manifest Icon",  nil, nil, nil }  -- (012-Y/M)(HP)
+xi.dynamis.mobList[zoneID][13 ].info = { "Statue", "Avatar Icon",    nil, nil, nil }  -- (013-Y/A)
+xi.dynamis.mobList[zoneID][14 ].info = { "Statue", "Avatar Icon",    nil, nil, nil }  -- (014-Y/A)
+xi.dynamis.mobList[zoneID][15 ].info = { "Statue", "Avatar Icon",    nil, nil, nil }  -- (015-Y/A)
+xi.dynamis.mobList[zoneID][16 ].info = { "Statue", "Avatar Icon",    nil, nil, nil }  -- (016-Y/A)
+xi.dynamis.mobList[zoneID][17 ].info = { "Statue", "Manifest Icon",  nil, nil, nil }  -- (017-Y/M)(MP)
+xi.dynamis.mobList[zoneID][18 ].info = { "Statue", "Avatar Icon",    nil, nil, nil }  -- (018-Y/A)(20)
+xi.dynamis.mobList[zoneID][19 ].info = { "Statue", "Manifest Icon",  nil, nil, nil }  -- (019-Y/M)(HP)
+xi.dynamis.mobList[zoneID][20 ].info = { "Statue", "Avatar Icon",    nil, nil, nil }  -- (020-Y/A)
+xi.dynamis.mobList[zoneID][21 ].info = { "Statue", "Avatar Icon",    nil, nil, nil }  -- (021-Y/A)
+xi.dynamis.mobList[zoneID][22 ].info = { "Statue", "Avatar Icon",    nil, nil, nil }  -- (022-Y/A)
+xi.dynamis.mobList[zoneID][23 ].info = { "Statue", "Avatar Icon",    nil, nil, nil }  -- (023-Y/A)
+xi.dynamis.mobList[zoneID][24 ].info = { "Statue", "Manifest Icon",  nil, nil, nil }  -- (024-Y/M)(HP)
+xi.dynamis.mobList[zoneID][25 ].info = { "Statue", "Manifest Icon",  nil, nil, nil }  -- (025-Y/M)(MP)
+xi.dynamis.mobList[zoneID][26 ].info = { "Statue", "Avatar Icon",    nil, nil, nil }  -- (026-Y/A)
+xi.dynamis.mobList[zoneID][27 ].info = { "Statue", "Avatar Icon",    nil, nil, nil }  -- (027-Y/A)
+xi.dynamis.mobList[zoneID][28 ].info = { "Statue", "Avatar Icon",    nil, nil, nil }  -- (028-Y/A)
+xi.dynamis.mobList[zoneID][29 ].info = { "Statue", "Manifest Icon",  nil, nil, nil }  -- (029-Y/M)(HP)
+xi.dynamis.mobList[zoneID][30 ].info = { "Statue", "Manifest Icon",  nil, nil, nil }  -- (030-Y/M)(MP)
+xi.dynamis.mobList[zoneID][31 ].info = { "Statue", "Avatar Icon",    nil, nil, nil }  -- (031-Y/A)(10)
+xi.dynamis.mobList[zoneID][32 ].info = { "Statue", "Avatar Icon",    nil, nil, nil }  -- (032-Y/A)
+xi.dynamis.mobList[zoneID][33 ].info = { "Statue", "Manifest Icon",  nil, nil, nil }  -- (033-Y/M)(MP)
+xi.dynamis.mobList[zoneID][34 ].info = { "Statue", "Avatar Icon",    nil, nil, nil }  -- (034-Y/A)
+xi.dynamis.mobList[zoneID][35 ].info = { "Statue", "Manifest Icon",  nil, nil, nil }  -- (035-Y/M)(HP)
+xi.dynamis.mobList[zoneID][36 ].info = { "Statue", "Avatar Icon",    nil, nil, nil }  -- (036-Y/A)
+xi.dynamis.mobList[zoneID][37 ].info = { "Statue", "Avatar Icon",    nil, nil, nil }  -- (037-Y/A)
+xi.dynamis.mobList[zoneID][38 ].info = { "Statue", "Avatar Icon",    nil, nil, nil }  -- (038-Y/A)
+xi.dynamis.mobList[zoneID][39 ].info = { "Statue", "Avatar Icon",    nil, nil, nil }  -- (039-Y/A)
+xi.dynamis.mobList[zoneID][40 ].info = { "Statue", "Manifest Icon",  nil, nil, nil }  -- (040-Y/M)(MP)
+xi.dynamis.mobList[zoneID][41 ].info = { "Statue", "Avatar Icon",    nil, nil, nil }  -- (041-Y/A)(20)
+xi.dynamis.mobList[zoneID][42 ].info = { "Statue", "Manifest Icon",  nil, nil, nil }  -- (042-Y/M)(HP)
+xi.dynamis.mobList[zoneID][43 ].info = { "Statue", "Avatar Icon",    nil, nil, nil }  -- (043-Y/A)
+xi.dynamis.mobList[zoneID][44 ].info = { "Statue", "Avatar Icon",    nil, nil, nil }  -- (044-Y/A)
+xi.dynamis.mobList[zoneID][45 ].info = { "Statue", "Manifest Icon",  nil, nil, nil }  -- (045-Y/M)(MP)
+xi.dynamis.mobList[zoneID][46 ].info = { "Statue", "Avatar Idol",    nil, nil, nil }  -- (046-Y/A).Idol
+xi.dynamis.mobList[zoneID][47 ].info = { "Statue", "Avatar Icon",    nil, nil, nil }  -- (047-Y/M)
+xi.dynamis.mobList[zoneID][48 ].info = { "Statue", "Avatar Icon",    nil, nil, nil }  -- (048-Y/M)
+xi.dynamis.mobList[zoneID][49 ].info = { "Statue", "Avatar Icon",    nil, nil, nil }  -- (049-Y/A)
+xi.dynamis.mobList[zoneID][50 ].info = { "Statue", "Avatar Icon",    nil, nil, nil }  -- (050-Y/A)
+xi.dynamis.mobList[zoneID][51 ].info = { "Statue", "Manifest Icon",  nil, nil, nil }  -- (051-Y/M)(HP)
+xi.dynamis.mobList[zoneID][52 ].info = { "Statue", "Avatar Icon",    nil, nil, nil }  -- (052-Y/A)
+xi.dynamis.mobList[zoneID][53 ].info = { "Statue", "Avatar Icon",    nil, nil, nil }  -- (053-Y/A)
+xi.dynamis.mobList[zoneID][54 ].info = { "Statue", "Avatar Icon",    nil, nil, nil }  -- (054-Y/A)
+xi.dynamis.mobList[zoneID][55 ].info = { "Statue", "Avatar Icon",    nil, nil, nil }  -- (055-Y/A)
+xi.dynamis.mobList[zoneID][56 ].info = { "Statue", "Manifest Icon",  nil, nil, nil }  -- (056-Y/M)(HP)
+xi.dynamis.mobList[zoneID][57 ].info = { "Statue", "Manifest Icon",  nil, nil, "57_killed" }  -- (057-Y/M)(MP)
+xi.dynamis.mobList[zoneID][58 ].info = { "Statue", "Avatar Icon",    nil, nil, "58_killed" }  -- (058-Y/A)(10)
+xi.dynamis.mobList[zoneID][59 ].info = { "Statue", "Avatar Icon",    nil, nil, nil }  -- (059-Y/A)
+xi.dynamis.mobList[zoneID][60 ].info = { "Statue", "Manifest Icon",  nil, nil, nil }  -- (060-Y/M)(MP)
+xi.dynamis.mobList[zoneID][61 ].info = { "Statue", "Avatar Icon",    nil, nil, nil }  -- (061-Y/A)
+xi.dynamis.mobList[zoneID][62 ].info = { "Statue", "Avatar Icon",    nil, nil, nil }  -- (062-Y/A)
+xi.dynamis.mobList[zoneID][63 ].info = { "Statue", "Avatar Icon",    nil, nil, nil }  -- (063-Y/A)
+xi.dynamis.mobList[zoneID][64 ].info = { "Statue", "Avatar Icon",    nil, nil, nil }  -- (064-Y/A)
+xi.dynamis.mobList[zoneID][65 ].info = { "Statue", "Avatar Icon",    nil, nil, nil }  -- (065-Y/A)
+xi.dynamis.mobList[zoneID][66 ].info = { "Statue", "Avatar Icon",    nil, nil, nil }  -- (066-Y/M)(20)
+xi.dynamis.mobList[zoneID][67 ].info = { "Statue", "Avatar Icon",    nil, nil, nil }  -- (067-Y/A)
+xi.dynamis.mobList[zoneID][68 ].info = { "Statue", "Avatar Icon",    nil, nil, nil }  -- (068-Y/A)
+xi.dynamis.mobList[zoneID][69 ].info = { "Statue", "Avatar Icon",    nil, nil, nil }  -- (069-Y/A)
+xi.dynamis.mobList[zoneID][70 ].info = { "Statue", "Avatar Icon",    nil, nil, nil }  -- (070-Y/A)
+xi.dynamis.mobList[zoneID][71 ].info = { "Statue", "Avatar Icon",    nil, nil, nil }  -- (071-Y/A)
+xi.dynamis.mobList[zoneID][72 ].info = { "Statue", "Manifest Icon",  nil, nil, nil }  -- (072-Y/M)(MP)
+xi.dynamis.mobList[zoneID][73 ].info = { "Statue", "Avatar Icon",    nil, nil, nil }  -- (073-Y/A)
+xi.dynamis.mobList[zoneID][74 ].info = { "Statue", "Manifest Icon",  nil, nil, nil }  -- (074-Y/M)(HP)
+xi.dynamis.mobList[zoneID][75 ].info = { "Statue", "Avatar Icon",    nil, nil, nil }  -- (075-Y/A)
+xi.dynamis.mobList[zoneID][76 ].info = { "Statue", "Avatar Icon",    nil, nil, nil }  -- (076-Y/A)
+xi.dynamis.mobList[zoneID][77 ].info = { "Statue", "Manifest Icon",  nil, nil, nil }  -- (077-Y/M)(MP)
+xi.dynamis.mobList[zoneID][78 ].info = { "Statue", "Avatar Icon",    nil, nil, nil }  -- (078-Y/A)
+xi.dynamis.mobList[zoneID][79 ].info = { "Statue", "Avatar Icon",    nil, nil, nil }  -- (079-Y/A)
+xi.dynamis.mobList[zoneID][80 ].info = { "Statue", "Manifest Icon",  nil, nil, nil }  -- (080-Y/M)(MP)
+xi.dynamis.mobList[zoneID][81 ].info = { "Statue", "Avatar Icon",    nil, nil, nil }  -- (081-Y/A)
+xi.dynamis.mobList[zoneID][82 ].info = { "Statue", "Avatar Icon",    nil, nil, nil }  -- (082-Y/A)
+xi.dynamis.mobList[zoneID][83 ].info = { "Statue", "Manifest Icon",  nil, nil, nil }  -- (083-Y/M)(HP)
+xi.dynamis.mobList[zoneID][84 ].info = { "Statue", "Avatar Idol",    nil, nil, nil }  -- (084-Y/A).Idol
+xi.dynamis.mobList[zoneID][85 ].info = { "Statue", "Avatar Icon",    nil, nil, nil }  -- (085-Y/A)
+xi.dynamis.mobList[zoneID][86 ].info = { "Statue", "Manifest Icon",  nil, nil, nil }  -- (086-Y/M)(MP)
+xi.dynamis.mobList[zoneID][87 ].info = { "Statue", "Avatar Icon",    nil, nil, nil }  -- (087-Y/A)
+xi.dynamis.mobList[zoneID][88 ].info = { "Statue", "Manifest Icon",  nil, nil, nil }  -- (088-Y/M)(HP)
+xi.dynamis.mobList[zoneID][89 ].info = { "Statue", "Avatar Icon",    nil, nil, nil }  -- (089-Y/A)
+xi.dynamis.mobList[zoneID][90 ].info = { "Statue", "Avatar Icon",    nil, nil, nil }  -- (090-Y/A)
+xi.dynamis.mobList[zoneID][91 ].info = { "Statue", "Avatar Icon",    nil, nil, nil }  -- (091-Y/A)
+xi.dynamis.mobList[zoneID][92 ].info = { "Statue", "Avatar Icon",    nil, nil, nil }  -- (092-Y/A)
+xi.dynamis.mobList[zoneID][93 ].info = { "Statue", "Avatar Idol",    nil, nil, nil }  -- (093-Y/A).Idol
+xi.dynamis.mobList[zoneID][94 ].info = { "Statue", "Manifest Icon",  nil, nil, nil }  -- (094-Y/M)(HP)
+xi.dynamis.mobList[zoneID][95 ].info = { "Statue", "Manifest Icon",  nil, nil, nil }  -- (095-Y/M)(HP)
+xi.dynamis.mobList[zoneID][96 ].info = { "Statue", "Manifest Icon",  nil, nil, nil }  -- (096-Y/M)(MP)
+xi.dynamis.mobList[zoneID][97 ].info = { "Statue", "Avatar Icon",    nil, nil, nil }  -- (097-Y/A)
+xi.dynamis.mobList[zoneID][98 ].info = { "Statue", "Avatar Icon",    nil, nil, nil }  -- (098-Y/A)
+xi.dynamis.mobList[zoneID][99 ].info = { "Statue", "Avatar Icon",    nil, nil, nil }  -- (099-Y/A)
+xi.dynamis.mobList[zoneID][100].info = { "Statue", "Manifest Icon",  nil, nil, nil }  -- (100-Y/M)(HP)
+xi.dynamis.mobList[zoneID][101].info = { "Statue", "Avatar Icon",    nil, nil, "101_killed" }  -- (101-Y/M)(20)
+xi.dynamis.mobList[zoneID][102].info = { "Statue", "Avatar Icon",    nil, nil, nil }  -- (102-Y/A)
+xi.dynamis.mobList[zoneID][103].info = { "Statue", "Avatar Icon",    nil, nil, nil }  -- (103-Y/A)
+xi.dynamis.mobList[zoneID][104].info = { "Statue", "Avatar Icon",    nil, nil, nil }  -- (104-Y/A)
+xi.dynamis.mobList[zoneID][105].info = { "Statue", "Avatar Icon",    nil, nil, nil }  -- (105-Y/A)
+xi.dynamis.mobList[zoneID][106].info = { "Statue", "Avatar Icon",    nil, nil, nil }  -- (106-Y/A)
+xi.dynamis.mobList[zoneID][107].info = { "Statue", "Avatar Icon",    nil, nil, nil }  -- (107-Y/A)
+xi.dynamis.mobList[zoneID][108].info = { "Statue", "Avatar Icon",    nil, nil, nil }  -- (108-Y/A)
+xi.dynamis.mobList[zoneID][109].info = { "Statue", "Avatar Icon",    nil, nil, nil }  -- (109-Y/A)
+xi.dynamis.mobList[zoneID][110].info = { "Statue", "Manifest Icon",  nil, nil, nil }  -- (110-Y/M)(HP)
+xi.dynamis.mobList[zoneID][111].info = { "Statue", "Manifest Icon",  nil, nil, nil }  -- (111-Y/M)(MP)
+xi.dynamis.mobList[zoneID][112].info = { "Statue", "Avatar Icon",    nil, nil, nil }  -- (112-Y/A)
+xi.dynamis.mobList[zoneID][113].info = { "Statue", "Avatar Icon",    nil, nil, nil }  -- (113-Y/A)
+xi.dynamis.mobList[zoneID][114].info = { "Statue", "Avatar Icon",    nil, nil, nil }  -- (114-Y/M)
+xi.dynamis.mobList[zoneID][115].info = { "Statue", "Avatar Icon",    nil, nil, nil }  -- (115-Y/M)
+xi.dynamis.mobList[zoneID][116].info = { "Statue", "Manifest Idol",  nil, nil, nil }  -- (116-Y/A).Idol
+xi.dynamis.mobList[zoneID][117].info = { "Statue", "Manifest Icon",  nil, nil, nil }  -- (117-Y/M)(HP)
+xi.dynamis.mobList[zoneID][118].info = { "Statue", "Manifest Icon",  nil, nil, nil }  -- (118-Y/M)(MP)
+xi.dynamis.mobList[zoneID][119].info = { "Statue", "Avatar Icon",    nil, nil, nil }  -- (119-Y/M)
+xi.dynamis.mobList[zoneID][120].info = { "Statue", "Avatar Icon",    nil, nil, nil }  -- (120-Y/M)
+xi.dynamis.mobList[zoneID][122].info = { "Statue", "Avatar Icon",    nil, nil, nil }  -- (122-Y/M)
+xi.dynamis.mobList[zoneID][123].info = { "Statue", "Avatar Icon",    nil, nil, nil }  -- (123-Y/M)
+xi.dynamis.mobList[zoneID][124].info = { "Statue", "Avatar Icon",    nil, nil, nil }  -- (124-Y/M)
+xi.dynamis.mobList[zoneID][125].info = { "Statue", "Avatar Icon",    nil, nil, nil }  -- (125-Y/M)
+xi.dynamis.mobList[zoneID][126].info = { "Statue", "Manifest Icon",  nil, nil, nil }  -- (126-Y/M)(HP)
+xi.dynamis.mobList[zoneID][127].info = { "Statue", "Manifest Icon",  nil, nil, nil }  -- (127-Y/M)(MP)
+xi.dynamis.mobList[zoneID][128].info = { "Statue", "Avatar Icon",    nil, nil, nil }  -- (128-Y/A)
+xi.dynamis.mobList[zoneID][129].info = { "Statue", "Avatar Icon",    nil, nil, nil }  -- (129-Y/A)
+xi.dynamis.mobList[zoneID][130].info = { "Statue", "Avatar Icon",    nil, nil, nil }  -- (130-Y/A)
+xi.dynamis.mobList[zoneID][131].info = { "Statue", "Manifest Icon",  nil, nil, nil }  -- (131-Y/M)(MP)
+xi.dynamis.mobList[zoneID][132].info = { "Statue", "Avatar Icon",    nil, nil, nil }  -- (132-Y/A)
+xi.dynamis.mobList[zoneID][133].info = { "Statue", "Manifest Icon",  nil, nil, nil }  -- (133-Y/M)(HP)
+xi.dynamis.mobList[zoneID][134].info = { "Statue", "Avatar Icon",    nil, nil, nil }  -- (134-Y/A)
+xi.dynamis.mobList[zoneID][135].info = { "Statue", "Avatar Icon",    nil, nil, nil }  -- (135-Y/A)
+xi.dynamis.mobList[zoneID][136].info = { "Statue", "Manifest Icon",  nil, nil, nil }  -- (136-Y/M)(HP)
+xi.dynamis.mobList[zoneID][137].info = { "Statue", "Manifest Icon",  nil, nil, nil }  -- (137-Y/M)(MP)
+xi.dynamis.mobList[zoneID][138].info = { "Statue", "Manifest Icon",  nil, nil, nil }  -- (138-Y/M)(HP)
+xi.dynamis.mobList[zoneID][139].info = { "Statue", "Manifest Icon",  nil, nil, nil }  -- (139-Y/M)(MP)
+xi.dynamis.mobList[zoneID][140].info = { "Statue", "Avatar Icon",    nil, nil, nil }  -- (140-Y/M)
+xi.dynamis.mobList[zoneID][141].info = { "Statue", "Avatar Icon",    nil, nil, nil }  -- (141-Y/M)
+xi.dynamis.mobList[zoneID][142].info = { "Statue", "Avatar Icon",    nil, nil, nil }  -- (142-Y/M)
+xi.dynamis.mobList[zoneID][143].info = { "Statue", "Avatar Icon",    nil, nil, nil }  -- (143-Y/M)
+xi.dynamis.mobList[zoneID][144].info = { "Statue", "Avatar Icon",    nil, nil, nil }  -- (144-Y/M)
+xi.dynamis.mobList[zoneID][145].info = { "Statue", "Avatar Icon",    nil, nil, nil }  -- (145-Y/M)
+xi.dynamis.mobList[zoneID][146].info = { "Statue", "Avatar Icon",    nil, nil, nil }  -- (146-Y/A)
+xi.dynamis.mobList[zoneID][147].info = { "Statue", "Avatar Icon",    nil, nil, nil }  -- (147-Y/M)
+xi.dynamis.mobList[zoneID][148].info = { "Statue", "Avatar Icon",    nil, nil, nil }  -- (148-Y/A)
+xi.dynamis.mobList[zoneID][149].info = { "Statue", "Avatar Icon",    nil, nil, nil }  -- (149-Y/M)
+xi.dynamis.mobList[zoneID][150].info = { "Statue", "Avatar Icon",    nil, nil, nil }  -- (150-Y/M)
 
 -- NM's and Megaboss
 xi.dynamis.mobList[zoneID][121].info = { "NM", "Tzee Xicu Idol",               nil,   nil, "MegaBoss_Killed" }   -- 121-Replica NM (Tzee Xicu Idol)
@@ -275,7 +275,7 @@ xi.dynamis.mobList[zoneID].waveDefeatRequirements =
     {"Wuu_killed"}, -- Wuu Qoho the Razorclaw spawns 2 Statues at Heavens Tower
     {"Xoo_killed"}, -- Xoo Kaza the Solemn NM spawns 2 Statues at Heavens Tower
     {"Haa_killed"}, -- Haa Pevi the Stentorian NM spawns 2 Statues at Heavens Tower
-    {"Wuu_killed", "Xoo_killed", "Haa_killed"} -- Spawn main Heavens Tower statues + the RDM NM on 3 NM deaths
+    {"Wuu_killed", "Xoo_killed", "Haa_killed"}, -- Spawn main Heavens Tower statues + the RDM NM on 3 NM deaths
     {"58_killed"}, -- pops 59-61 on bridge when defeated
     {"101_killed"}, -- pops 102/103 under bridge when defeated
     {"57_killed" }, -- pops 54/55 under bridge when defeated
@@ -291,166 +291,166 @@ xi.dynamis.mobList[zoneID].waveDefeatRequirements =
 -- Spawns on zone entry
 xi.dynamis.mobList[zoneID][1].wave =
 {
-    1  ,    -- 001-Y/A
-    2  ,    -- 002-Y/A
-    3  ,    -- 003-Y/A
-    4  ,    -- 004-Y/A
-    5  ,    -- 005-Y/A
-    6  ,    -- 006-Y/M(HP)
-    7  ,    -- 007-Y/A
-    8  ,    -- 008-Y/M(MP)(20)
-    9  ,    -- 009-Y/A
-    10 ,    -- 010-Y/A
-    11 ,    -- 011-Y/A
-    12 ,    -- 012-Y/M(HP)
-    13 ,    -- 013-Y/A
-    14 ,    -- 014-Y/A
-    15 ,    -- 015-Y/A
-    16 ,    -- 016-Y/A
-    17 ,    -- 017-Y/M(MP)
-    18 ,    -- 018-Y/A(20)
-    19 ,    -- 019-Y/M(HP)
-    20 ,    -- 020-Y/A
-    21 ,    -- 021-Y/A
-    24 ,    -- 024-Y/M(HP)
-    26 ,    -- 026-Y/A
-    27 ,    -- 027-Y/A
-    28 ,    -- 028-Y/A
-    29 ,    -- 029-Y/M(HP)
-    30 ,    -- 030-Y/M(MP)
-    31 ,    -- 031-Y/A(10)
-    32 ,    -- 032-Y/A
-    34 ,    -- 034-Y/A
-    35 ,    -- 035-Y/M(HP)
-    38 ,    -- 038-Y/A
-    39 ,    -- 039-Y/A
-    40 ,    -- 040-Y/M(MP)
-    41 ,    -- 041-Y/A(20)
-    43 ,    -- 043-Y/A
-    44 ,    -- 044-Y/A
-    45 ,    -- 045-Y/M(MP)
-    46 ,    -- 046-Y/A.Idol
-    51 ,    -- 051-Y/M(HP)
-    52 ,    -- 052-Y/A
-    53 ,    -- 053-Y/A
-    56 ,    -- 056-Y/M(HP)
-    57 ,    -- 057-Y/M(MP)
-    58 ,    -- 058-Y/A(10)
-    65 ,    -- 065-Y/A
-    66 ,    -- 066-Y/M(20)
-    69 ,    -- 069-Y/A
-    72 ,    -- 072-Y/M(MP)
-    73 ,    -- 073-Y/A
-    74 ,    -- 074-Y/M(HP)
-    77 ,    -- 077-Y/M(MP)
-    80 ,    -- 080-Y/M(MP)
-    84 ,    -- 084-Y/A.Idol
-    88 ,    -- 088-Y/M(HP)
-    89 ,    -- 089-Y/A
-    91 ,    -- 091-Y/A
-    93 ,    -- 093-Y/A.Idol
-    94 ,    -- 094-Y/M(HP)
-    95 ,    -- 095-Y/M(HP)
-    96 ,    -- 096-Y/M(MP)
-    97 ,    -- 097-Y/A
-    101,    -- 101-Y/M(20)
-    104,    -- 104-Y/A
-    105,    -- 105-Y/A
-    106,    -- 106-Y/A
-    107,    -- 107-Y/A
-    108,    -- 108-Y/A
-    109,    -- 109-Y/A
-    130,    -- 130-Y/A
-    131,    -- 131-Y/M(MP)
-    132,    -- 132-Y/A
-    133,    -- 133-Y/M(HP)
-    134,    -- 134-Y/A
-    135,    -- 135-Y/A
-    136,    -- 136-Y/M(HP)
-    137     -- 137-Y/M(MP)
+    1  ,    -- (001-Y/A)  Avatar Icon
+    2  ,    -- (002-Y/A)  Avatar Icon
+    3  ,    -- (003-Y/A)  Avatar Icon
+    4  ,    -- (004-Y/A)  Avatar Icon
+    5  ,    -- (005-Y/A)  Avatar Icon
+    6  ,    -- (006-Y/M)  Manifest Icon
+    7  ,    -- (007-Y/A)  Avatar Icon
+    8  ,    -- (008-Y/M)  Manifest Icon
+    9  ,    -- (009-Y/A)  Avatar Icon
+    10 ,    -- (010-Y/A)  Avatar Icon
+    11 ,    -- (011-Y/A)  Avatar Icon
+    12 ,    -- (012-Y/M)  Manifest Icon
+    13 ,    -- (013-Y/A)  Avatar Icon
+    14 ,    -- (014-Y/A)  Avatar Icon
+    15 ,    -- (015-Y/A)  Avatar Icon
+    16 ,    -- (016-Y/A)  Avatar Icon
+    17 ,    -- (017-Y/M)  Manifest Icon
+    18 ,    -- (018-Y/A)  Avatar Icon
+    19 ,    -- (019-Y/M)  Manifest Icon
+    20 ,    -- (020-Y/A)  Avatar Icon
+    21 ,    -- (021-Y/A)  Avatar Icon
+    24 ,    -- (024-Y/M)  Manifest Icon
+    26 ,    -- (026-Y/A)  Avatar Icon
+    27 ,    -- (027-Y/A)  Avatar Icon
+    28 ,    -- (028-Y/A)  Avatar Icon
+    29 ,    -- (029-Y/M)  Manifest Icon
+    30 ,    -- (030-Y/M)  Manifest Icon
+    31 ,    -- (031-Y/A)  Avatar Icon
+    32 ,    -- (032-Y/A)  Avatar Icon
+    34 ,    -- (034-Y/A)  Avatar Icon
+    35 ,    -- (035-Y/M)  Manifest Icon
+    38 ,    -- (038-Y/A)  Avatar Icon
+    39 ,    -- (039-Y/A)  Avatar Icon
+    40 ,    -- (040-Y/M)  Manifest Icon
+    41 ,    -- (041-Y/A)  Avatar Icon
+    43 ,    -- (043-Y/A)  Avatar Icon
+    44 ,    -- (044-Y/A)  Avatar Icon
+    45 ,    -- (045-Y/M)  Manifest Icon
+    46 ,    -- (046-Y/A)  Avatar Idol
+    51 ,    -- (051-Y/M)  Manifest Icon
+    52 ,    -- (052-Y/A)  Avatar Icon
+    53 ,    -- (053-Y/A)  Avatar Icon
+    56 ,    -- (056-Y/M)  Manifest Icon
+    57 ,    -- (057-Y/M)  Manifest Icon
+    58 ,    -- (058-Y/A)  Avatar Icon
+    65 ,    -- (065-Y/A)  Avatar Icon
+    66 ,    -- (066-Y/M)  Avatar Icon
+    69 ,    -- (069-Y/A)  Avatar Icon
+    72 ,    -- (072-Y/M)  Manifest Icon
+    73 ,    -- (073-Y/A)  Avatar Icon
+    74 ,    -- (074-Y/M)  Manifest Icon
+    77 ,    -- (077-Y/M)  Manifest Icon
+    80 ,    -- (080-Y/M)  Manifest Icon
+    84 ,    -- (084-Y/A)  Avatar Idol
+    88 ,    -- (088-Y/M)  Manifest Icon
+    89 ,    -- (089-Y/A)  Avatar Icon
+    91 ,    -- (091-Y/A)  Avatar Icon
+    93 ,    -- (093-Y/A)  Avatar Idol
+    94 ,    -- (094-Y/M)  Manifest Icon
+    95 ,    -- (095-Y/M)  Manifest Icon
+    96 ,    -- (096-Y/M)  Manifest Icon
+    97 ,    -- (097-Y/A)  Avatar Icon
+    101,    -- (101-Y/M)  Avatar Icon
+    104,    -- (104-Y/A)  Avatar Icon
+    105,    -- (105-Y/A)  Avatar Icon
+    106,    -- (106-Y/A)  Avatar Icon
+    107,    -- (107-Y/A)  Avatar Icon
+    108,    -- (108-Y/A)  Avatar Icon
+    109,    -- (109-Y/A)  Avatar Icon
+    130,    -- (130-Y/A)  Avatar Icon
+    131,    -- (131-Y/M)  Manifest Icon
+    132,    -- (132-Y/A)  Avatar Icon
+    133,    -- (133-Y/M)  Manifest Icon
+    134,    -- (134-Y/A)  Avatar Icon
+    135,    -- (135-Y/A)  Avatar Icon
+    136,    -- (136-Y/M)  Manifest Icon
+    137     -- (137-Y/M)  Manifest Icon
 }
 
 -- Spawns statues when boss dies
 xi.dynamis.mobList[zoneID][2].wave =
 {
-    126,    -- 126-Y/M(HP)
-    127,    -- 127-Y/M(MP)
-    128,    -- 128-Y/A
-    129,    -- 129-Y/A
-    130,    -- 130-Y/A
-    131,    -- 131-Y/M(MP)
-    132,    -- 132-Y/A
-    133,    -- 133-Y/M(HP)
-    134,    -- 134-Y/A
-    135,    -- 135-Y/A
-    136,    -- 136-Y/M(HP)
-    137,    -- 137-Y/M(MP)
-    138,    -- 138-Y/M(HP)
-    139,    -- 139-Y/M(MP)
-    140,    -- 140-Y/M
-    141,    -- 141-Y/M
-    142,    -- 142-Y/M
-    143,    -- 143-Y/M
-    144,    -- 144-Y/M
-    145,    -- 145-Y/M
-    146,    -- 146-Y/A
-    147,    -- 147-Y/M
-    148,    -- 148-Y/A
-    149,    -- 149-Y/M
-    150     -- 150-Y/M
+    126,    -- (126-Y/M)  Manifest Icon
+    127,    -- (127-Y/M)  Manifest Icon
+    128,    -- (128-Y/A)  Avatar Icon
+    129,    -- (129-Y/A)  Avatar Icon
+    130,    -- (130-Y/A)  Avatar Icon
+    131,    -- (131-Y/M)  Manifest Icon
+    132,    -- (132-Y/A)  Avatar Icon
+    133,    -- (133-Y/M)  Manifest Icon
+    134,    -- (134-Y/A)  Avatar Icon
+    135,    -- (135-Y/A)  Avatar Icon
+    136,    -- (136-Y/M)  Manifest Icon
+    137,    -- (137-Y/M)  Manifest Icon
+    138,    -- (138-Y/M)  Manifest Icon
+    139,    -- (139-Y/M)  Manifest Icon
+    140,    -- (140-Y/M)  Avatar Icon
+    141,    -- (141-Y/M)  Avatar Icon
+    142,    -- (142-Y/M)  Avatar Icon
+    143,    -- (143-Y/M)  Avatar Icon
+    144,    -- (144-Y/M)  Avatar Icon
+    145,    -- (145-Y/M)  Avatar Icon
+    146,    -- (146-Y/A)  Avatar Icon
+    147,    -- (147-Y/M)  Avatar Icon
+    148,    -- (148-Y/A)  Avatar Icon
+    149,    -- (149-Y/M)  Avatar Icon
+    150     -- (150-Y/M)  Avatar Icon
 }
 
 -- Wuu Qoho the Razorclaw spawns 2 Statues at Heavens Tower
 xi.dynamis.mobList[zoneID][3].wave =
 {
-    108,    -- 108-Y/A
-    109     -- 109-Y/A
+    108,    -- (108-Y/A)  Avatar Icon
+    109     -- (109-Y/A)  Avatar Icon
 }
 
 -- Xoo Kaza the Solemn NM spawns 2 Statues at Heavens Tower
 xi.dynamis.mobList[zoneID][4].wave =
 {
-    110,    -- 110-Y/M(HP)
-    111	    -- 111-Y/M(MP)
+    110,    -- (110-Y/M)  Manifest Icon
+    111	    -- (111-Y/M)  Manifest Icon
 }
 
 -- Haa Pevi the Stentorian NM spawns 2 Statues at Heavens Tower
 xi.dynamis.mobList[zoneID][5].wave =
 {
-    113,    -- 113-Y/A
-    112	    -- 112-Y/A
+    113,    -- (113-Y/A) Avatar Icon
+    112	    -- (112-Y/A) Avatar Icon
 }
 
 -- Spawn main Heavens Tower statues + the RDM NM on 3 NM deaths
 xi.dynamis.mobList[zoneID][6].wave =
 {
-    114,    -- 114-Y/M
-    115,    -- 115-Y/M
-    116     -- 116-Y/A.Idol
+    114,    -- (114-Y/M)  Avatar Icon
+    115,    -- (115-Y/M)  Avatar Icon
+    116     -- (116-Y/A)  Manifest Idol
 }
 
 xi.dynamis.mobList[zoneID][7].wave =
 {
-    59,     -- 059-Y/A
-    60,     -- 060-Y/M(MP)
-    61      -- 061-Y/A
+    59,     -- (059-Y/A)  Avatar Icon
+    60,     -- (060-Y/M)  Manifest Icon
+    61      -- (061-Y/A)  Avatar Icon
 }
 
 xi.dynamis.mobList[zoneID][8].wave =
 {
-    103,    -- 103-Y/A
-    102	    -- 102-Y/A
+    103,    -- (103-Y/A)  Avatar Icon
+    102	    -- (102-Y/A)  Avatar Icon
 }
 
 xi.dynamis.mobList[zoneID][9].wave =
 {
-    55,     -- 055-Y/A
-    54	    -- 054-Y/A
+    55,     -- (055-Y/A)  Avatar Icon
+    54	    -- (054-Y/A)  Avatar Icon
 }
 
 xi.dynamis.mobList[zoneID][10].wave =
 {
-    121     -- 121-Replica NM (Tzee Xicu Idol)
+    121     -- ( 121 ) Tzee Xicu Idol
 }
 
 ----------------------------------------------------------------------------------------------------

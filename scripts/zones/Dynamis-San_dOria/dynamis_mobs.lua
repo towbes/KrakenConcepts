@@ -96,158 +96,158 @@ end
 ------------------------------------------
 --xi.dynamis.mobList[zoneID][MobIndex].info = {"Statue/NM/Nightmare", "Mob Name", "Family", "Main Job", "MobLocalVarName"}
 
-xi.dynamis.mobList[zoneID][1  ].info = {"Statue", "Serjeant Tombstone", nil, nil, nil} -- 001-O/S
-xi.dynamis.mobList[zoneID][2  ].info = {"Statue", "Serjeant Tombstone", nil, nil, nil} -- 002-O/S
-xi.dynamis.mobList[zoneID][3  ].info = {"Statue", "Serjeant Tombstone", nil, nil, nil} -- 003-O/S
-xi.dynamis.mobList[zoneID][4  ].info = {"Statue", "Serjeant Tombstone", nil, nil, nil} -- 004-O/S
-xi.dynamis.mobList[zoneID][5  ].info = {"Statue", "Serjeant Tombstone", nil, nil, nil} -- 005-O/S
-xi.dynamis.mobList[zoneID][6  ].info = {"Statue", "Warchief Tombstone", nil, nil, nil} -- 006-O/W(MP)
-xi.dynamis.mobList[zoneID][7  ].info = {"Statue", "Serjeant Tombstone", nil, nil, nil} -- 007-O/S(15)
-xi.dynamis.mobList[zoneID][8  ].info = {"Statue", "Serjeant Tombstone", nil, nil, nil} -- 008-O/S
-xi.dynamis.mobList[zoneID][9  ].info = {"Statue", "Serjeant Tombstone", nil, nil, nil} -- 009-O/S(15)
-xi.dynamis.mobList[zoneID][10 ].info = {"Statue", "Warchief Tombstone", nil, nil, nil} -- 010-O/W(MP)
-xi.dynamis.mobList[zoneID][11 ].info = {"Statue", "Serjeant Tombstone", nil, nil, nil} -- 011-O/S
-xi.dynamis.mobList[zoneID][12 ].info = {"Statue", "Warchief Tombstone", nil, nil, nil} -- 012-O/W(HP)
-xi.dynamis.mobList[zoneID][13 ].info = {"Statue", "Serjeant Tombstone", nil, nil, nil} -- 013-O/S
-xi.dynamis.mobList[zoneID][14 ].info = {"Statue", "Warchief Tombstone", nil, nil, nil} -- 014-O/W(MP)
-xi.dynamis.mobList[zoneID][15 ].info = {"Statue", "Warchief Tombstone", nil, nil, nil} -- 015-O/W(HP)
-xi.dynamis.mobList[zoneID][16 ].info = {"Statue", "Serjeant Tombstone", nil, nil, nil} -- 016-O/S
-xi.dynamis.mobList[zoneID][17 ].info = {"Statue", "Serjeant Tombstone", nil, nil, nil} -- 017-O/S
-xi.dynamis.mobList[zoneID][18 ].info = {"Statue", "Serjeant Tombstone", nil, nil, nil} -- 018-O/S
-xi.dynamis.mobList[zoneID][19 ].info = {"Statue", "Serjeant Tombstone", nil, nil, nil} -- 019-O/S
-xi.dynamis.mobList[zoneID][20 ].info = {"Statue", "Serjeant Tombstone", nil, nil, nil} -- 020-O/S
-xi.dynamis.mobList[zoneID][21 ].info = {"Statue", "Serjeant Tombstone", nil, nil, nil} -- 021-O/S
-xi.dynamis.mobList[zoneID][22 ].info = {"Statue", "Serjeant Tombstone", nil, nil, nil} -- 022-O/S
-xi.dynamis.mobList[zoneID][23 ].info = {"Statue", "Serjeant Tombstone", nil, nil, nil} -- 023-O/S
-xi.dynamis.mobList[zoneID][24 ].info = {"Statue", "Serjeant Tombstone", nil, nil, nil} -- 024-O/S
-xi.dynamis.mobList[zoneID][25 ].info = {"Statue", "Serjeant Tombstone", nil, nil, nil} -- 025-O/S
-xi.dynamis.mobList[zoneID][26 ].info = {"Statue", "Serjeant Tombstone", nil, nil, nil} -- 026-O/S(25)
-xi.dynamis.mobList[zoneID][27 ].info = {"Statue", "Serjeant Tombstone", nil, nil, nil} -- 027-O/S
-xi.dynamis.mobList[zoneID][28 ].info = {"Statue", "Serjeant Tombstone", nil, nil, nil} -- 028-O/S
-xi.dynamis.mobList[zoneID][29 ].info = {"Statue", "Serjeant Tombstone", nil, nil, nil} -- 029-O/S
-xi.dynamis.mobList[zoneID][30 ].info = {"Statue", "Serjeant Tombstone", nil, nil, nil} -- 030-O/S
-xi.dynamis.mobList[zoneID][31 ].info = {"Statue", "Serjeant Tombstone", nil, nil, nil} -- 031-O/S
-xi.dynamis.mobList[zoneID][32 ].info = {"Statue", "Warchief Tombstone", nil, nil, nil} -- 032-O/W(MP)
-xi.dynamis.mobList[zoneID][33 ].info = {"Statue", "Serjeant Tombstone", nil, nil, nil} -- 033-O/S
-xi.dynamis.mobList[zoneID][34 ].info = {"Statue", "Warchief Tombstone", nil, nil, nil} -- 034-O/W(HP)
-xi.dynamis.mobList[zoneID][35 ].info = {"Statue", "Warchief Tombstone", nil, nil, nil} -- 035-O/W(MP)
-xi.dynamis.mobList[zoneID][36 ].info = {"Statue", "Serjeant Tombstone", nil, nil, nil} -- 036-O/S
-xi.dynamis.mobList[zoneID][37 ].info = {"Statue", "Serjeant Tombstone", nil, nil, nil} -- 037-O/S
-xi.dynamis.mobList[zoneID][38 ].info = {"Statue", "Warchief Tombstone", nil, nil, nil} -- 038-O/W(MP)
-xi.dynamis.mobList[zoneID][39 ].info = {"Statue", "Serjeant Tombstone", nil, nil, nil} -- 039-O/S
-xi.dynamis.mobList[zoneID][40 ].info = {"Statue", "Serjeant Tombstone", nil, nil, nil} -- 040-O/S
-xi.dynamis.mobList[zoneID][41 ].info = {"Statue", "Serjeant Tombstone", nil, nil, nil} -- 041-O/S(30)
-xi.dynamis.mobList[zoneID][42 ].info = {"Statue", "Serjeant Tombstone", nil, nil, nil} -- 042-O/S
-xi.dynamis.mobList[zoneID][43 ].info = {"Statue", "Serjeant Tombstone", nil, nil, nil} -- 043-O/S
-xi.dynamis.mobList[zoneID][44 ].info = {"Statue", "Warchief Tombstone", nil, nil, nil} -- 044-O/W(HP)
-xi.dynamis.mobList[zoneID][45 ].info = {"Statue", "Serjeant Tombstone", nil, nil, nil} -- 045-O/S
-xi.dynamis.mobList[zoneID][46 ].info = {"Statue", "Serjeant Tombstone", nil, nil, nil} -- 046-O/S
-xi.dynamis.mobList[zoneID][47 ].info = {"Statue", "Warchief Tombstone", nil, nil, nil} -- 047-O/W(MP)
-xi.dynamis.mobList[zoneID][48 ].info = {"Statue", "Serjeant Tombstone", nil, nil, nil} -- 048-O/S
-xi.dynamis.mobList[zoneID][49 ].info = {"Statue", "Serjeant Tombstone", nil, nil, nil} -- 049-O/S
-xi.dynamis.mobList[zoneID][50 ].info = {"Statue", "Serjeant Tombstone", nil, nil, nil} -- 050-O/S
-xi.dynamis.mobList[zoneID][51 ].info = {"Statue", "Serjeant Tombstone", nil, nil, nil} -- 051-O/S
-xi.dynamis.mobList[zoneID][52 ].info = {"Statue", "Warchief Tombstone", nil, nil, nil} -- 052-O/W(HP)
-xi.dynamis.mobList[zoneID][53 ].info = {"Statue", "Serjeant Tombstone", nil, nil, nil} -- 053-O/S
-xi.dynamis.mobList[zoneID][54 ].info = {"Statue", "Serjeant Tombstone", nil, nil, nil} -- 054-O/S
-xi.dynamis.mobList[zoneID][55 ].info = {"Statue", "Serjeant Tombstone", nil, nil, nil} -- 055-O/S
-xi.dynamis.mobList[zoneID][56 ].info = {"Statue", "Serjeant Tombstone", nil, nil, nil} -- 056-O/S
-xi.dynamis.mobList[zoneID][57 ].info = {"Statue", "Serjeant Tombstone", nil, nil, nil} -- 057-O/S
-xi.dynamis.mobList[zoneID][58 ].info = {"Statue", "Serjeant Tombstone", nil, nil, nil} -- 058-O/S
-xi.dynamis.mobList[zoneID][59 ].info = {"Statue", "Warchief Tombstone", nil, nil, nil} -- 059-O/W(HP)
-xi.dynamis.mobList[zoneID][60 ].info = {"Statue", "Warchief Tombstone", nil, nil, nil} -- 060-O/W(MP)
-xi.dynamis.mobList[zoneID][61 ].info = {"Statue", "Serjeant Tombstone", nil, nil, nil} -- 061-O/S
-xi.dynamis.mobList[zoneID][62 ].info = {"Statue", "Warchief Tombstone", nil, nil, nil} -- 062-O/W(MP)
-xi.dynamis.mobList[zoneID][63 ].info = {"Statue", "Serjeant Tombstone", nil, nil, nil} -- 063-O/S
-xi.dynamis.mobList[zoneID][64 ].info = {"Statue", "Serjeant Tombstone", nil, nil, nil} -- 064-O/S(25)
-xi.dynamis.mobList[zoneID][65 ].info = {"Statue", "Serjeant Tombstone", nil, nil, nil} -- 065-O/S
-xi.dynamis.mobList[zoneID][66 ].info = {"Statue", "Serjeant Tombstone", nil, nil, nil} -- 066-O/S
-xi.dynamis.mobList[zoneID][67 ].info = {"Statue", "Serjeant Tombstone", nil, nil, nil} -- 067-O/S
-xi.dynamis.mobList[zoneID][68 ].info = {"Statue", "Serjeant Tombstone", nil, nil, nil} -- 068-O/S
-xi.dynamis.mobList[zoneID][69 ].info = {"Statue", "Serjeant Tombstone", nil, nil, nil} -- 069-O/S
-xi.dynamis.mobList[zoneID][70 ].info = {"Statue", "Warchief Tombstone", nil, nil, nil} -- 070-O/W(MP)
-xi.dynamis.mobList[zoneID][71 ].info = {"Statue", "Serjeant Tombstone", nil, nil, nil} -- 071-O/S
-xi.dynamis.mobList[zoneID][72 ].info = {"Statue", "Warchief Tombstone", nil, nil, nil} -- 072-O/W(HP)
-xi.dynamis.mobList[zoneID][73 ].info = {"Statue", "Serjeant Tombstone", nil, nil, nil} -- 073-O/S
-xi.dynamis.mobList[zoneID][74 ].info = {"Statue", "Warchief Tombstone", nil, nil, nil} -- 074-O/W(10)
-xi.dynamis.mobList[zoneID][75 ].info = {"Statue", "Serjeant Tombstone", nil, nil, nil} -- 075-O/S
-xi.dynamis.mobList[zoneID][76 ].info = {"Statue", "Warchief Tombstone", nil, nil, nil} -- 076-O/W(MP)
-xi.dynamis.mobList[zoneID][77 ].info = {"Statue", "Serjeant Tombstone", nil, nil, nil} -- 077-O/S
-xi.dynamis.mobList[zoneID][78 ].info = {"Statue", "Warchief Tombstone", nil, nil, nil} -- 078-O/W(HP)
-xi.dynamis.mobList[zoneID][79 ].info = {"Statue", "Warchief Tombstone", nil, nil, nil} -- 079-O/W(MP)
-xi.dynamis.mobList[zoneID][80 ].info = {"Statue", "Serjeant Tombstone", nil, nil, nil} -- 080-O/S
-xi.dynamis.mobList[zoneID][81 ].info = {"Statue", "Warchief Tombstone", nil, nil, nil} -- 081-O/W(HP)
-xi.dynamis.mobList[zoneID][82 ].info = {"Statue", "Serjeant Tombstone", nil, nil, nil} -- 082-O/S
-xi.dynamis.mobList[zoneID][83 ].info = {"Statue", "Warchief Tombstone", nil, nil, nil} -- 083-O/W(HP)
-xi.dynamis.mobList[zoneID][84 ].info = {"Statue", "Warchief Tombstone", nil, nil, nil} -- 084-O/W(MP)
-xi.dynamis.mobList[zoneID][85 ].info = {"Statue", "Warchief Tombstone", nil, nil, nil} -- 085-O/W(HP)
-xi.dynamis.mobList[zoneID][86 ].info = {"Statue", "Warchief Tombstone", nil, nil, nil} -- 086-O/W(MP)
-xi.dynamis.mobList[zoneID][87 ].info = {"Statue", "Serjeant Tombstone", nil, nil, nil} -- 087-O/S
-xi.dynamis.mobList[zoneID][88 ].info = {"Statue", "Serjeant Tombstone", nil, nil, nil} -- 088-O/S
-xi.dynamis.mobList[zoneID][89 ].info = {"Statue", "Serjeant Tombstone", nil, nil, nil} -- 089-O/S
-xi.dynamis.mobList[zoneID][90 ].info = {"Statue", "Serjeant Tombstone", nil, nil, nil} -- 090-O/S
-xi.dynamis.mobList[zoneID][91 ].info = {"Statue", "Warchief Tombstone", nil, nil, nil} -- 091-O/W(HP)
-xi.dynamis.mobList[zoneID][92 ].info = {"Statue", "Warchief Tombstone", nil, nil, nil} -- 092-O/W(MP)
-xi.dynamis.mobList[zoneID][93 ].info = {"Statue", "Serjeant Tombstone", nil, nil, nil} -- 093-O/S
-xi.dynamis.mobList[zoneID][94 ].info = {"Statue", "Serjeant Tombstone", nil, nil, nil} -- 094-O/S
-xi.dynamis.mobList[zoneID][95 ].info = {"Statue", "Serjeant Tombstone", nil, nil, nil} -- 095-O/S
-xi.dynamis.mobList[zoneID][96 ].info = {"Statue", "Serjeant Tombstone", nil, nil, nil} -- 096-O/S
-xi.dynamis.mobList[zoneID][97 ].info = {"Statue", "Warchief Tombstone", nil, nil, nil} -- 097-O/W(HP)
-xi.dynamis.mobList[zoneID][98 ].info = {"Statue", "Serjeant Tombstone", nil, nil, nil} -- 098-O/S
-xi.dynamis.mobList[zoneID][99 ].info = {"Statue", "Serjeant Tombstone", nil, nil, nil} -- 099-O/S
-xi.dynamis.mobList[zoneID][100].info = {"Statue", "Serjeant Tombstone", nil, nil, nil} -- 100-O/S
-xi.dynamis.mobList[zoneID][101].info = {"Statue", "Serjeant Tombstone", nil, nil, nil} -- 101-O/S
-xi.dynamis.mobList[zoneID][102].info = {"Statue", "Serjeant Tombstone", nil, nil, nil} -- 102-O/S
-xi.dynamis.mobList[zoneID][103].info = {"Statue", "Warchief Tombstone", nil, nil, nil} -- 103-O/W(HP)
-xi.dynamis.mobList[zoneID][104].info = {"Statue", "Warchief Tombstone", nil, nil, nil} -- 104-O/W(HP)
-xi.dynamis.mobList[zoneID][105].info = {"Statue", "Serjeant Tombstone", nil, nil, nil} -- 105-O/S
-xi.dynamis.mobList[zoneID][106].info = {"Statue", "Serjeant Tombstone", nil, nil, nil} -- 106-O/S
-xi.dynamis.mobList[zoneID][107].info = {"Statue", "Warchief Tombstone", nil, nil, nil} -- 107-O/W(HP)
-xi.dynamis.mobList[zoneID][108].info = {"Statue", "Warchief Tombstone", nil, nil, nil} -- 108-O/W(MP)
-xi.dynamis.mobList[zoneID][110].info = {"Statue", "Warchief Tombstone", nil, nil, nil} -- 110-O/W(MP)
-xi.dynamis.mobList[zoneID][111].info = {"Statue", "Warchief Tombstone", nil, nil, nil} -- 111-O/W(MP)
-xi.dynamis.mobList[zoneID][112].info = {"Statue", "Serjeant Tombstone", nil, nil, nil} -- 112-O/S
-xi.dynamis.mobList[zoneID][113].info = {"Statue", "Warchief Tombstone", nil, nil, nil} -- 113-O/W(HP)
-xi.dynamis.mobList[zoneID][114].info = {"Statue", "Serjeant Tombstone", nil, nil, nil} -- 114-O/S
-xi.dynamis.mobList[zoneID][115].info = {"Statue", "Warchief Tombstone", nil, nil, nil} -- 115-O/W(HP)
-xi.dynamis.mobList[zoneID][116].info = {"Statue", "Serjeant Tombstone", nil, nil, nil} -- 116-O/S
-xi.dynamis.mobList[zoneID][117].info = {"Statue", "Serjeant Tombstone", nil, nil, nil} -- 117-O/S
-xi.dynamis.mobList[zoneID][118].info = {"Statue", "Serjeant Tombstone", nil, nil, nil} -- 118-O/S
-xi.dynamis.mobList[zoneID][119].info = {"Statue", "Serjeant Tombstone", nil, nil, nil} -- 119-O/S
-xi.dynamis.mobList[zoneID][120].info = {"Statue", "Serjeant Tombstone", nil, nil, nil} -- 120-O/S
-xi.dynamis.mobList[zoneID][121].info = {"Statue", "Serjeant Tombstone", nil, nil, nil} -- 121-O/S
-xi.dynamis.mobList[zoneID][122].info = {"Statue", "Serjeant Tombstone", nil, nil, nil} -- 122-O/S
-xi.dynamis.mobList[zoneID][123].info = {"Statue", "Serjeant Tombstone", nil, nil, nil} -- 123-O/S
-xi.dynamis.mobList[zoneID][124].info = {"Statue", "Serjeant Tombstone", nil, nil, nil} -- 124-O/S
-xi.dynamis.mobList[zoneID][125].info = {"Statue", "Serjeant Tombstone", nil, nil, nil} -- 125-O/S
-xi.dynamis.mobList[zoneID][126].info = {"Statue", "Serjeant Tombstone", nil, nil, nil} -- 126-O/S
-xi.dynamis.mobList[zoneID][127].info = {"Statue", "Serjeant Tombstone", nil, nil, nil} -- 127-O/S
-xi.dynamis.mobList[zoneID][128].info = {"Statue", "Serjeant Tombstone", nil, nil, nil} -- 128-O/S
-xi.dynamis.mobList[zoneID][129].info = {"Statue", "Serjeant Tombstone", nil, nil, nil} -- 129-O/S
-xi.dynamis.mobList[zoneID][130].info = {"Statue", "Serjeant Tombstone", nil, nil, nil} -- 130-O/S
-xi.dynamis.mobList[zoneID][131].info = {"Statue", "Serjeant Tombstone", nil, nil, nil} -- 131-O/S
-xi.dynamis.mobList[zoneID][132].info = {"Statue", "Serjeant Tombstone", nil, nil, nil} -- 132-O/S
-xi.dynamis.mobList[zoneID][133].info = {"Statue", "Serjeant Tombstone", nil, nil, nil} -- 133-O/S
-xi.dynamis.mobList[zoneID][134].info = {"Statue", "Serjeant Tombstone", nil, nil, nil} -- 134-O/S
-xi.dynamis.mobList[zoneID][135].info = {"Statue", "Serjeant Tombstone", nil, nil, nil} -- 135-O/S
-xi.dynamis.mobList[zoneID][136].info = {"Statue", "Serjeant Tombstone", nil, nil, nil} -- 136-O/S
-xi.dynamis.mobList[zoneID][137].info = {"Statue", "Serjeant Tombstone", nil, nil, nil} -- 137-O/S
-xi.dynamis.mobList[zoneID][138].info = {"Statue", "Serjeant Tombstone", nil, nil, nil} -- 138-O/S
-xi.dynamis.mobList[zoneID][139].info = {"Statue", "Serjeant Tombstone", nil, nil, nil} -- 139-O/S
-xi.dynamis.mobList[zoneID][140].info = {"Statue", "Serjeant Tombstone", nil, nil, nil} -- 140-O/S
-xi.dynamis.mobList[zoneID][141].info = {"Statue", "Serjeant Tombstone", nil, nil, nil} -- 141-O/S
-xi.dynamis.mobList[zoneID][142].info = {"Statue", "Serjeant Tombstone", nil, nil, nil} -- 142-O/S
-xi.dynamis.mobList[zoneID][143].info = {"Statue", "Serjeant Tombstone", nil, nil, nil} -- 143-O/S
-xi.dynamis.mobList[zoneID][144].info = {"Statue", "Serjeant Tombstone", nil, nil, nil} -- 144-O/S
-xi.dynamis.mobList[zoneID][145].info = {"Statue", "Serjeant Tombstone", nil, nil, nil} -- 145-O/S
-xi.dynamis.mobList[zoneID][146].info = {"Statue", "Serjeant Tombstone", nil, nil, nil} -- 146-O/S
-xi.dynamis.mobList[zoneID][147].info = {"Statue", "Serjeant Tombstone", nil, nil, nil} -- 147-O/S
-xi.dynamis.mobList[zoneID][148].info = {"Statue", "Serjeant Tombstone", nil, nil, nil} -- 148-O/S
-xi.dynamis.mobList[zoneID][149].info = {"Statue", "Serjeant Tombstone", nil, nil, nil} -- 149-O/S
-xi.dynamis.mobList[zoneID][150].info = {"Statue", "Serjeant Tombstone", nil, nil, nil} -- 150-O/S
+xi.dynamis.mobList[zoneID][1  ].info = {"Statue", "Serjeant Tombstone", nil, nil, nil} -- (001-O/S)
+xi.dynamis.mobList[zoneID][2  ].info = {"Statue", "Serjeant Tombstone", nil, nil, nil} -- (002-O/S)
+xi.dynamis.mobList[zoneID][3  ].info = {"Statue", "Serjeant Tombstone", nil, nil, nil} -- (003-O/S)
+xi.dynamis.mobList[zoneID][4  ].info = {"Statue", "Serjeant Tombstone", nil, nil, nil} -- (004-O/S)
+xi.dynamis.mobList[zoneID][5  ].info = {"Statue", "Serjeant Tombstone", nil, nil, nil} -- (005-O/S)
+xi.dynamis.mobList[zoneID][6  ].info = {"Statue", "Warchief Tombstone", nil, nil, nil} -- (006-O/W)(MP)
+xi.dynamis.mobList[zoneID][7  ].info = {"Statue", "Serjeant Tombstone", nil, nil, nil} -- (007-O/S)(15)
+xi.dynamis.mobList[zoneID][8  ].info = {"Statue", "Serjeant Tombstone", nil, nil, nil} -- (008-O/S)
+xi.dynamis.mobList[zoneID][9  ].info = {"Statue", "Serjeant Tombstone", nil, nil, nil} -- (009-O/S)(15)
+xi.dynamis.mobList[zoneID][10 ].info = {"Statue", "Warchief Tombstone", nil, nil, nil} -- (010-O/W)(MP)
+xi.dynamis.mobList[zoneID][11 ].info = {"Statue", "Serjeant Tombstone", nil, nil, nil} -- (011-O/S)
+xi.dynamis.mobList[zoneID][12 ].info = {"Statue", "Warchief Tombstone", nil, nil, nil} -- (012-O/W)(HP)
+xi.dynamis.mobList[zoneID][13 ].info = {"Statue", "Serjeant Tombstone", nil, nil, nil} -- (013-O/S)
+xi.dynamis.mobList[zoneID][14 ].info = {"Statue", "Warchief Tombstone", nil, nil, nil} -- (014-O/W)(MP)
+xi.dynamis.mobList[zoneID][15 ].info = {"Statue", "Warchief Tombstone", nil, nil, nil} -- (015-O/W)(HP)
+xi.dynamis.mobList[zoneID][16 ].info = {"Statue", "Serjeant Tombstone", nil, nil, nil} -- (016-O/S)
+xi.dynamis.mobList[zoneID][17 ].info = {"Statue", "Serjeant Tombstone", nil, nil, nil} -- (017-O/S)
+xi.dynamis.mobList[zoneID][18 ].info = {"Statue", "Serjeant Tombstone", nil, nil, nil} -- (018-O/S)
+xi.dynamis.mobList[zoneID][19 ].info = {"Statue", "Serjeant Tombstone", nil, nil, nil} -- (019-O/S)
+xi.dynamis.mobList[zoneID][20 ].info = {"Statue", "Serjeant Tombstone", nil, nil, nil} -- (020-O/S)
+xi.dynamis.mobList[zoneID][21 ].info = {"Statue", "Serjeant Tombstone", nil, nil, nil} -- (021-O/S)
+xi.dynamis.mobList[zoneID][22 ].info = {"Statue", "Serjeant Tombstone", nil, nil, nil} -- (022-O/S)
+xi.dynamis.mobList[zoneID][23 ].info = {"Statue", "Serjeant Tombstone", nil, nil, nil} -- (023-O/S)
+xi.dynamis.mobList[zoneID][24 ].info = {"Statue", "Serjeant Tombstone", nil, nil, nil} -- (024-O/S)
+xi.dynamis.mobList[zoneID][25 ].info = {"Statue", "Serjeant Tombstone", nil, nil, nil} -- (025-O/S)
+xi.dynamis.mobList[zoneID][26 ].info = {"Statue", "Serjeant Tombstone", nil, nil, nil} -- (026-O/S)(25)
+xi.dynamis.mobList[zoneID][27 ].info = {"Statue", "Serjeant Tombstone", nil, nil, nil} -- (027-O/S)
+xi.dynamis.mobList[zoneID][28 ].info = {"Statue", "Serjeant Tombstone", nil, nil, nil} -- (028-O/S)
+xi.dynamis.mobList[zoneID][29 ].info = {"Statue", "Serjeant Tombstone", nil, nil, nil} -- (029-O/S)
+xi.dynamis.mobList[zoneID][30 ].info = {"Statue", "Serjeant Tombstone", nil, nil, nil} -- (030-O/S)
+xi.dynamis.mobList[zoneID][31 ].info = {"Statue", "Serjeant Tombstone", nil, nil, nil} -- (031-O/S)
+xi.dynamis.mobList[zoneID][32 ].info = {"Statue", "Warchief Tombstone", nil, nil, nil} -- (032-O/W)(MP)
+xi.dynamis.mobList[zoneID][33 ].info = {"Statue", "Serjeant Tombstone", nil, nil, nil} -- (033-O/S)
+xi.dynamis.mobList[zoneID][34 ].info = {"Statue", "Warchief Tombstone", nil, nil, nil} -- (034-O/W)(HP)
+xi.dynamis.mobList[zoneID][35 ].info = {"Statue", "Warchief Tombstone", nil, nil, nil} -- (035-O/W)(MP)
+xi.dynamis.mobList[zoneID][36 ].info = {"Statue", "Serjeant Tombstone", nil, nil, nil} -- (036-O/S)
+xi.dynamis.mobList[zoneID][37 ].info = {"Statue", "Serjeant Tombstone", nil, nil, nil} -- (037-O/S)
+xi.dynamis.mobList[zoneID][38 ].info = {"Statue", "Warchief Tombstone", nil, nil, nil} -- (038-O/W)(MP)
+xi.dynamis.mobList[zoneID][39 ].info = {"Statue", "Serjeant Tombstone", nil, nil, nil} -- (039-O/S)
+xi.dynamis.mobList[zoneID][40 ].info = {"Statue", "Serjeant Tombstone", nil, nil, nil} -- (040-O/S)
+xi.dynamis.mobList[zoneID][41 ].info = {"Statue", "Serjeant Tombstone", nil, nil, nil} -- (041-O/S)(30)
+xi.dynamis.mobList[zoneID][42 ].info = {"Statue", "Serjeant Tombstone", nil, nil, nil} -- (042-O/S)
+xi.dynamis.mobList[zoneID][43 ].info = {"Statue", "Serjeant Tombstone", nil, nil, nil} -- (043-O/S)
+xi.dynamis.mobList[zoneID][44 ].info = {"Statue", "Warchief Tombstone", nil, nil, nil} -- (044-O/W)(HP)
+xi.dynamis.mobList[zoneID][45 ].info = {"Statue", "Serjeant Tombstone", nil, nil, nil} -- (045-O/S)
+xi.dynamis.mobList[zoneID][46 ].info = {"Statue", "Serjeant Tombstone", nil, nil, nil} -- (046-O/S)
+xi.dynamis.mobList[zoneID][47 ].info = {"Statue", "Warchief Tombstone", nil, nil, nil} -- (047-O/W)(MP)
+xi.dynamis.mobList[zoneID][48 ].info = {"Statue", "Serjeant Tombstone", nil, nil, nil} -- (048-O/S)
+xi.dynamis.mobList[zoneID][49 ].info = {"Statue", "Serjeant Tombstone", nil, nil, nil} -- (049-O/S)
+xi.dynamis.mobList[zoneID][50 ].info = {"Statue", "Serjeant Tombstone", nil, nil, nil} -- (050-O/S)
+xi.dynamis.mobList[zoneID][51 ].info = {"Statue", "Serjeant Tombstone", nil, nil, nil} -- (051-O/S)
+xi.dynamis.mobList[zoneID][52 ].info = {"Statue", "Warchief Tombstone", nil, nil, nil} -- (052-O/W)(HP)
+xi.dynamis.mobList[zoneID][53 ].info = {"Statue", "Serjeant Tombstone", nil, nil, nil} -- (053-O/S)
+xi.dynamis.mobList[zoneID][54 ].info = {"Statue", "Serjeant Tombstone", nil, nil, nil} -- (054-O/S)
+xi.dynamis.mobList[zoneID][55 ].info = {"Statue", "Serjeant Tombstone", nil, nil, nil} -- (055-O/S)
+xi.dynamis.mobList[zoneID][56 ].info = {"Statue", "Serjeant Tombstone", nil, nil, nil} -- (056-O/S)
+xi.dynamis.mobList[zoneID][57 ].info = {"Statue", "Serjeant Tombstone", nil, nil, nil} -- (057-O/S)
+xi.dynamis.mobList[zoneID][58 ].info = {"Statue", "Serjeant Tombstone", nil, nil, nil} -- (058-O/S)
+xi.dynamis.mobList[zoneID][59 ].info = {"Statue", "Warchief Tombstone", nil, nil, nil} -- (059-O/W)(HP)
+xi.dynamis.mobList[zoneID][60 ].info = {"Statue", "Warchief Tombstone", nil, nil, nil} -- (060-O/W)(MP)
+xi.dynamis.mobList[zoneID][61 ].info = {"Statue", "Serjeant Tombstone", nil, nil, nil} -- (061-O/S)
+xi.dynamis.mobList[zoneID][62 ].info = {"Statue", "Warchief Tombstone", nil, nil, nil} -- (062-O/W)(MP)
+xi.dynamis.mobList[zoneID][63 ].info = {"Statue", "Serjeant Tombstone", nil, nil, nil} -- (063-O/S)
+xi.dynamis.mobList[zoneID][64 ].info = {"Statue", "Serjeant Tombstone", nil, nil, nil} -- (064-O/S)(25)
+xi.dynamis.mobList[zoneID][65 ].info = {"Statue", "Serjeant Tombstone", nil, nil, nil} -- (065-O/S)
+xi.dynamis.mobList[zoneID][66 ].info = {"Statue", "Serjeant Tombstone", nil, nil, nil} -- (066-O/S)
+xi.dynamis.mobList[zoneID][67 ].info = {"Statue", "Serjeant Tombstone", nil, nil, nil} -- (067-O/S)
+xi.dynamis.mobList[zoneID][68 ].info = {"Statue", "Serjeant Tombstone", nil, nil, nil} -- (068-O/S)
+xi.dynamis.mobList[zoneID][69 ].info = {"Statue", "Serjeant Tombstone", nil, nil, nil} -- (069-O/S)
+xi.dynamis.mobList[zoneID][70 ].info = {"Statue", "Warchief Tombstone", nil, nil, nil} -- (070-O/W)(MP)
+xi.dynamis.mobList[zoneID][71 ].info = {"Statue", "Serjeant Tombstone", nil, nil, nil} -- (071-O/S)
+xi.dynamis.mobList[zoneID][72 ].info = {"Statue", "Warchief Tombstone", nil, nil, nil} -- (072-O/W)(HP)
+xi.dynamis.mobList[zoneID][73 ].info = {"Statue", "Serjeant Tombstone", nil, nil, nil} -- (073-O/S)
+xi.dynamis.mobList[zoneID][74 ].info = {"Statue", "Warchief Tombstone", nil, nil, nil} -- (074-O/W)(10)
+xi.dynamis.mobList[zoneID][75 ].info = {"Statue", "Serjeant Tombstone", nil, nil, nil} -- (075-O/S)
+xi.dynamis.mobList[zoneID][76 ].info = {"Statue", "Warchief Tombstone", nil, nil, nil} -- (076-O/W)(MP)
+xi.dynamis.mobList[zoneID][77 ].info = {"Statue", "Serjeant Tombstone", nil, nil, nil} -- (077-O/S)
+xi.dynamis.mobList[zoneID][78 ].info = {"Statue", "Warchief Tombstone", nil, nil, nil} -- (078-O/W)(HP)
+xi.dynamis.mobList[zoneID][79 ].info = {"Statue", "Warchief Tombstone", nil, nil, nil} -- (079-O/W)(MP)
+xi.dynamis.mobList[zoneID][80 ].info = {"Statue", "Serjeant Tombstone", nil, nil, nil} -- (080-O/S)
+xi.dynamis.mobList[zoneID][81 ].info = {"Statue", "Warchief Tombstone", nil, nil, nil} -- (081-O/W)(HP)
+xi.dynamis.mobList[zoneID][82 ].info = {"Statue", "Serjeant Tombstone", nil, nil, nil} -- (082-O/S)
+xi.dynamis.mobList[zoneID][83 ].info = {"Statue", "Warchief Tombstone", nil, nil, nil} -- (083-O/W)(HP)
+xi.dynamis.mobList[zoneID][84 ].info = {"Statue", "Warchief Tombstone", nil, nil, nil} -- (084-O/W)(MP)
+xi.dynamis.mobList[zoneID][85 ].info = {"Statue", "Warchief Tombstone", nil, nil, nil} -- (085-O/W)(HP)
+xi.dynamis.mobList[zoneID][86 ].info = {"Statue", "Warchief Tombstone", nil, nil, nil} -- (086-O/W)(MP)
+xi.dynamis.mobList[zoneID][87 ].info = {"Statue", "Serjeant Tombstone", nil, nil, nil} -- (087-O/S)
+xi.dynamis.mobList[zoneID][88 ].info = {"Statue", "Serjeant Tombstone", nil, nil, nil} -- (088-O/S)
+xi.dynamis.mobList[zoneID][89 ].info = {"Statue", "Serjeant Tombstone", nil, nil, nil} -- (089-O/S)
+xi.dynamis.mobList[zoneID][90 ].info = {"Statue", "Serjeant Tombstone", nil, nil, nil} -- (090-O/S)
+xi.dynamis.mobList[zoneID][91 ].info = {"Statue", "Warchief Tombstone", nil, nil, nil} -- (091-O/W)(HP)
+xi.dynamis.mobList[zoneID][92 ].info = {"Statue", "Warchief Tombstone", nil, nil, nil} -- (092-O/W)(MP)
+xi.dynamis.mobList[zoneID][93 ].info = {"Statue", "Serjeant Tombstone", nil, nil, nil} -- (093-O/S)
+xi.dynamis.mobList[zoneID][94 ].info = {"Statue", "Serjeant Tombstone", nil, nil, nil} -- (094-O/S)
+xi.dynamis.mobList[zoneID][95 ].info = {"Statue", "Serjeant Tombstone", nil, nil, nil} -- (095-O/S)
+xi.dynamis.mobList[zoneID][96 ].info = {"Statue", "Serjeant Tombstone", nil, nil, nil} -- (096-O/S)
+xi.dynamis.mobList[zoneID][97 ].info = {"Statue", "Warchief Tombstone", nil, nil, nil} -- (097-O/W)(HP)
+xi.dynamis.mobList[zoneID][98 ].info = {"Statue", "Serjeant Tombstone", nil, nil, nil} -- (098-O/S)
+xi.dynamis.mobList[zoneID][99 ].info = {"Statue", "Serjeant Tombstone", nil, nil, nil} -- (099-O/S)
+xi.dynamis.mobList[zoneID][100].info = {"Statue", "Serjeant Tombstone", nil, nil, nil} -- (100-O/S)
+xi.dynamis.mobList[zoneID][101].info = {"Statue", "Serjeant Tombstone", nil, nil, nil} -- (101-O/S)
+xi.dynamis.mobList[zoneID][102].info = {"Statue", "Serjeant Tombstone", nil, nil, nil} -- (102-O/S)
+xi.dynamis.mobList[zoneID][103].info = {"Statue", "Warchief Tombstone", nil, nil, nil} -- (103-O/W)(HP)
+xi.dynamis.mobList[zoneID][104].info = {"Statue", "Warchief Tombstone", nil, nil, nil} -- (104-O/W)(HP)
+xi.dynamis.mobList[zoneID][105].info = {"Statue", "Serjeant Tombstone", nil, nil, nil} -- (105-O/S)
+xi.dynamis.mobList[zoneID][106].info = {"Statue", "Serjeant Tombstone", nil, nil, nil} -- (106-O/S)
+xi.dynamis.mobList[zoneID][107].info = {"Statue", "Warchief Tombstone", nil, nil, nil} -- (107-O/W)(HP)
+xi.dynamis.mobList[zoneID][108].info = {"Statue", "Warchief Tombstone", nil, nil, nil} -- (108-O/W)(MP)
+xi.dynamis.mobList[zoneID][110].info = {"Statue", "Warchief Tombstone", nil, nil, nil} -- (110-O/W)(MP)
+xi.dynamis.mobList[zoneID][111].info = {"Statue", "Warchief Tombstone", nil, nil, nil} -- (111-O/W)(MP)
+xi.dynamis.mobList[zoneID][112].info = {"Statue", "Serjeant Tombstone", nil, nil, nil} -- (112-O/S)
+xi.dynamis.mobList[zoneID][113].info = {"Statue", "Warchief Tombstone", nil, nil, nil} -- (113-O/W)(HP)
+xi.dynamis.mobList[zoneID][114].info = {"Statue", "Serjeant Tombstone", nil, nil, nil} -- (114-O/S)
+xi.dynamis.mobList[zoneID][115].info = {"Statue", "Warchief Tombstone", nil, nil, nil} -- (115-O/W)(HP)
+xi.dynamis.mobList[zoneID][116].info = {"Statue", "Serjeant Tombstone", nil, nil, nil} -- (116-O/S)
+xi.dynamis.mobList[zoneID][117].info = {"Statue", "Serjeant Tombstone", nil, nil, nil} -- (117-O/S)
+xi.dynamis.mobList[zoneID][118].info = {"Statue", "Serjeant Tombstone", nil, nil, nil} -- (118-O/S)
+xi.dynamis.mobList[zoneID][119].info = {"Statue", "Serjeant Tombstone", nil, nil, nil} -- (119-O/S)
+xi.dynamis.mobList[zoneID][120].info = {"Statue", "Serjeant Tombstone", nil, nil, nil} -- (120-O/S)
+xi.dynamis.mobList[zoneID][121].info = {"Statue", "Serjeant Tombstone", nil, nil, nil} -- (121-O/S)
+xi.dynamis.mobList[zoneID][122].info = {"Statue", "Serjeant Tombstone", nil, nil, nil} -- (122-O/S)
+xi.dynamis.mobList[zoneID][123].info = {"Statue", "Serjeant Tombstone", nil, nil, nil} -- (123-O/S)
+xi.dynamis.mobList[zoneID][124].info = {"Statue", "Serjeant Tombstone", nil, nil, nil} -- (124-O/S)
+xi.dynamis.mobList[zoneID][125].info = {"Statue", "Serjeant Tombstone", nil, nil, nil} -- (125-O/S)
+xi.dynamis.mobList[zoneID][126].info = {"Statue", "Serjeant Tombstone", nil, nil, nil} -- (126-O/S)
+xi.dynamis.mobList[zoneID][127].info = {"Statue", "Serjeant Tombstone", nil, nil, nil} -- (127-O/S)
+xi.dynamis.mobList[zoneID][128].info = {"Statue", "Serjeant Tombstone", nil, nil, nil} -- (128-O/S)
+xi.dynamis.mobList[zoneID][129].info = {"Statue", "Serjeant Tombstone", nil, nil, nil} -- (129-O/S)
+xi.dynamis.mobList[zoneID][130].info = {"Statue", "Serjeant Tombstone", nil, nil, nil} -- (130-O/S)
+xi.dynamis.mobList[zoneID][131].info = {"Statue", "Serjeant Tombstone", nil, nil, nil} -- (131-O/S)
+xi.dynamis.mobList[zoneID][132].info = {"Statue", "Serjeant Tombstone", nil, nil, nil} -- (132-O/S)
+xi.dynamis.mobList[zoneID][133].info = {"Statue", "Serjeant Tombstone", nil, nil, nil} -- (133-O/S)
+xi.dynamis.mobList[zoneID][134].info = {"Statue", "Serjeant Tombstone", nil, nil, nil} -- (134-O/S)
+xi.dynamis.mobList[zoneID][135].info = {"Statue", "Serjeant Tombstone", nil, nil, nil} -- (135-O/S)
+xi.dynamis.mobList[zoneID][136].info = {"Statue", "Serjeant Tombstone", nil, nil, nil} -- (136-O/S)
+xi.dynamis.mobList[zoneID][137].info = {"Statue", "Serjeant Tombstone", nil, nil, nil} -- (137-O/S)
+xi.dynamis.mobList[zoneID][138].info = {"Statue", "Serjeant Tombstone", nil, nil, nil} -- (138-O/S)
+xi.dynamis.mobList[zoneID][139].info = {"Statue", "Serjeant Tombstone", nil, nil, nil} -- (139-O/S)
+xi.dynamis.mobList[zoneID][140].info = {"Statue", "Serjeant Tombstone", nil, nil, nil} -- (140-O/S)
+xi.dynamis.mobList[zoneID][141].info = {"Statue", "Serjeant Tombstone", nil, nil, nil} -- (141-O/S)
+xi.dynamis.mobList[zoneID][142].info = {"Statue", "Serjeant Tombstone", nil, nil, nil} -- (142-O/S)
+xi.dynamis.mobList[zoneID][143].info = {"Statue", "Serjeant Tombstone", nil, nil, nil} -- (143-O/S)
+xi.dynamis.mobList[zoneID][144].info = {"Statue", "Serjeant Tombstone", nil, nil, nil} -- (144-O/S)
+xi.dynamis.mobList[zoneID][145].info = {"Statue", "Serjeant Tombstone", nil, nil, nil} -- (145-O/S)
+xi.dynamis.mobList[zoneID][146].info = {"Statue", "Serjeant Tombstone", nil, nil, nil} -- (146-O/S)
+xi.dynamis.mobList[zoneID][147].info = {"Statue", "Serjeant Tombstone", nil, nil, nil} -- (147-O/S)
+xi.dynamis.mobList[zoneID][148].info = {"Statue", "Serjeant Tombstone", nil, nil, nil} -- (148-O/S)
+xi.dynamis.mobList[zoneID][149].info = {"Statue", "Serjeant Tombstone", nil, nil, nil} -- (149-O/S)
+xi.dynamis.mobList[zoneID][150].info = {"Statue", "Serjeant Tombstone", nil, nil, nil} -- (150-O/S)
 
 -- NM's and Megaboss
-xi.dynamis.mobList[zoneID][109].info = {"NM", "Overlord's Tombstone",     nil,   nil,    "MegaBoss_Killed" } -- 109-Replica NM (Overlord's Tombstone)
+xi.dynamis.mobList[zoneID][109].info = {"NM", "Overlord's Tombstone",     nil,   nil,    "MegaBoss_Killed" } -- ( 109 ) Overlord's Tombstone
 xi.dynamis.mobList[zoneID][151].info = {"NM", "Wyrmgnasher Bjakdek",      "Orc", "DRG",  "Wyrmgnasher_Bjakdek_Killed"} -- DRG NM
 xi.dynamis.mobList[zoneID][152].info = {"NM", "Reapertongue Gadgquok",    "Orc", "SMN",  "Reapertongue_Gadgquok_Killed"} -- SMN NM
 xi.dynamis.mobList[zoneID][153].info = {"NM", "Voidstreaker Butchnotch",  "Orc", "NIN",  "Voidstreaker_Butchnotch_Killed"} -- NIN NM
@@ -283,146 +283,146 @@ xi.dynamis.mobList[zoneID].waveDefeatRequirements =
 
 xi.dynamis.mobList[zoneID][1].wave =
 {
-    1  ,    -- 001-O/S
-    2  ,    -- 002-O/S
-    3  ,    -- 003-O/S
-    4  ,    -- 004-O/S
-    5  ,    -- 005-O/S
-    6  ,    -- 006-O/W(MP)
-    7  ,    -- 007-O/S(15)
-    8  ,    -- 008-O/S
-    9  ,    -- 009-O/S(15)
-    10 ,    -- 010-O/W(MP)
-    11 ,    -- 011-O/S
-    12 ,    -- 012-O/W(HP)
-    13 ,    -- 013-O/S
-    14 ,    -- 014-O/W(MP)
-    15 ,    -- 015-O/W(HP)
-    16 ,    -- 016-O/S
-    17 ,    -- 017-O/S
-    18 ,    -- 018-O/S
-    20 ,    -- 020-O/S
-    22 ,    -- 022-O/S
-    23 ,    -- 023-O/S
-    24 ,    -- 024-O/S
-    25 ,    -- 025-O/S
-    26 ,    -- 026-O/S(25)
-    27 ,    -- 027-O/S
-    28 ,    -- 028-O/S
-    29 ,    -- 029-O/S
-    30 ,    -- 030-O/S
-    31 ,    -- 031-O/S
-    32 ,    -- 032-O/W(MP)
-    33 ,    -- 033-O/S
-    34 ,    -- 034-O/W(HP)
-    35 ,    -- 035-O/W(MP)
-    37 ,    -- 037-O/S
-    38 ,    -- 038-O/W(MP)
-    39 ,    -- 039-O/S
-    40 ,    -- 040-O/S
-    41 ,    -- 041-O/S(30)
-    42 ,    -- 042-O/S
-    43 ,    -- 043-O/S
-    44 ,    -- 044-O/W(HP)
-    45 ,    -- 045-O/S
-    46 ,    -- 046-O/S
-    47 ,    -- 047-O/W(MP)
-    48 ,    -- 048-O/S
-    49 ,    -- 049-O/S
-    50 ,    -- 050-O/S
-    51 ,    -- 051-O/S
-    52 ,    -- 052-O/W(HP)
-    53 ,    -- 053-O/S
-    54 ,    -- 054-O/S
-    55 ,    -- 055-O/S
-    56 ,    -- 056-O/S
-    57 ,    -- 057-O/S
-    58 ,    -- 058-O/S
-    59 ,    -- 059-O/W(HP)
-    60 ,    -- 060-O/W(MP)
-    61 ,    -- 061-O/S
-    62 ,    -- 062-O/W(MP)
-    63 ,    -- 063-O/S
-    64 ,    -- 064-O/S(25)
-    65 ,    -- 065-O/S
-    66 ,    -- 066-O/S
-    67 ,    -- 067-O/S
-    68 ,    -- 068-O/S
-    69 ,    -- 069-O/S
-    70 ,    -- 070-O/W(MP)
-    71 ,    -- 071-O/S
-    72 ,    -- 072-O/W(HP)
-    73 ,    -- 073-O/S
-    74 ,    -- 074-O/W(10)
-    75 ,    -- 075-O/S
-    76 ,    -- 076-O/W(MP)
-    77 ,    -- 077-O/S
-    78 ,    -- 078-O/W(HP)
-    79 ,    -- 079-O/W(MP)
-    80 ,    -- 080-O/S
-    81 ,    -- 081-O/W(HP)
-    82 ,    -- 082-O/S
-    83 ,    -- 083-O/W(HP)
-    84 ,    -- 084-O/W(MP)
-    85 ,    -- 085-O/W(HP)
-    86 ,    -- 086-O/W(MP)
-    87 ,    -- 087-O/S
-    88 ,    -- 088-O/S
-    89 ,    -- 089-O/S
-    90 ,    -- 090-O/S
-    91 ,    -- 091-O/W(HP)
-    92 ,    -- 092-O/W(MP)
-    93 ,    -- 093-O/S
-    96 ,    -- 096-O/S
-    97 ,    -- 097-O/W(HP)
-    98 ,    -- 098-O/S
-    99 ,    -- 099-O/S
-    102,    -- 102-O/S
-    103,    -- 103-O/W(HP)
-    104,    -- 104-O/W(HP)
-    105,    -- 105-O/S
-    106,    -- 106-O/S
-    107,    -- 107-O/W(HP)
-    108     -- 108-O/W(MP)
+    1  ,    -- (001-O/S)  Serjeant Tombstone
+    2  ,    -- (002-O/S)  Serjeant Tombstone
+    3  ,    -- (003-O/S)  Serjeant Tombstone
+    4  ,    -- (004-O/S)  Serjeant Tombstone
+    5  ,    -- (005-O/S)  Serjeant Tombstone
+    6  ,    -- (006-O/W)  Serjeant Tombstone
+    7  ,    -- (007-O/S)  Serjeant Tombstone
+    8  ,    -- (008-O/S)  Serjeant Tombstone
+    9  ,    -- (009-O/S)  Serjeant Tombstone
+    10 ,    -- (010-O/W)  Serjeant Tombstone
+    11 ,    -- (011-O/S)  Serjeant Tombstone
+    12 ,    -- (012-O/W)  Serjeant Tombstone
+    13 ,    -- (013-O/S)  Serjeant Tombstone
+    14 ,    -- (014-O/W)  Serjeant Tombstone
+    15 ,    -- (015-O/W)  Serjeant Tombstone
+    16 ,    -- (016-O/S)  Serjeant Tombstone
+    17 ,    -- (017-O/S)  Serjeant Tombstone
+    18 ,    -- (018-O/S)  Serjeant Tombstone
+    20 ,    -- (020-O/S)  Serjeant Tombstone
+    22 ,    -- (022-O/S)  Serjeant Tombstone
+    23 ,    -- (023-O/S)  Serjeant Tombstone
+    24 ,    -- (024-O/S)  Serjeant Tombstone
+    25 ,    -- (025-O/S)  Serjeant Tombstone
+    26 ,    -- (026-O/S)  Serjeant Tombstone
+    27 ,    -- (027-O/S)  Serjeant Tombstone
+    28 ,    -- (028-O/S)  Serjeant Tombstone
+    29 ,    -- (029-O/S)  Serjeant Tombstone
+    30 ,    -- (030-O/S)  Serjeant Tombstone
+    31 ,    -- (031-O/S)  Serjeant Tombstone
+    32 ,    -- (032-O/W)  Serjeant Tombstone
+    33 ,    -- (033-O/S)  Serjeant Tombstone
+    34 ,    -- (034-O/W)  Serjeant Tombstone
+    35 ,    -- (035-O/W)  Serjeant Tombstone
+    37 ,    -- (037-O/S)  Serjeant Tombstone
+    38 ,    -- (038-O/W)  Serjeant Tombstone
+    39 ,    -- (039-O/S)  Serjeant Tombstone
+    40 ,    -- (040-O/S)  Serjeant Tombstone
+    41 ,    -- (041-O/S)  Serjeant Tombstone
+    42 ,    -- (042-O/S)  Serjeant Tombstone
+    43 ,    -- (043-O/S)  Serjeant Tombstone
+    44 ,    -- (044-O/W)  Serjeant Tombstone
+    45 ,    -- (045-O/S)  Serjeant Tombstone
+    46 ,    -- (046-O/S)  Serjeant Tombstone
+    47 ,    -- (047-O/W)  Serjeant Tombstone
+    48 ,    -- (048-O/S)  Serjeant Tombstone
+    49 ,    -- (049-O/S)  Serjeant Tombstone
+    50 ,    -- (050-O/S)  Serjeant Tombstone
+    51 ,    -- (051-O/S)  Serjeant Tombstone
+    52 ,    -- (052-O/W)  Serjeant Tombstone
+    53 ,    -- (053-O/S)  Serjeant Tombstone
+    54 ,    -- (054-O/S)  Serjeant Tombstone
+    55 ,    -- (055-O/S)  Serjeant Tombstone
+    56 ,    -- (056-O/S)  Serjeant Tombstone
+    57 ,    -- (057-O/S)  Serjeant Tombstone
+    58 ,    -- (058-O/S)  Serjeant Tombstone
+    59 ,    -- (059-O/W)  Serjeant Tombstone
+    60 ,    -- (060-O/W)  Serjeant Tombstone
+    61 ,    -- (061-O/S)  Serjeant Tombstone
+    62 ,    -- (062-O/W)  Serjeant Tombstone
+    63 ,    -- (063-O/S)  Serjeant Tombstone
+    64 ,    -- (064-O/S)  Serjeant Tombstone
+    65 ,    -- (065-O/S)  Serjeant Tombstone
+    66 ,    -- (066-O/S)  Serjeant Tombstone
+    67 ,    -- (067-O/S)  Serjeant Tombstone
+    68 ,    -- (068-O/S)  Serjeant Tombstone
+    69 ,    -- (069-O/S)  Serjeant Tombstone
+    70 ,    -- (070-O/W)  Serjeant Tombstone
+    71 ,    -- (071-O/S)  Serjeant Tombstone
+    72 ,    -- (072-O/W)  Serjeant Tombstone
+    73 ,    -- (073-O/S)  Serjeant Tombstone
+    74 ,    -- (074-O/W)  Serjeant Tombstone
+    75 ,    -- (075-O/S)  Serjeant Tombstone
+    76 ,    -- (076-O/W)  Serjeant Tombstone
+    77 ,    -- (077-O/S)  Serjeant Tombstone
+    78 ,    -- (078-O/W)  Serjeant Tombstone
+    79 ,    -- (079-O/W)  Serjeant Tombstone
+    80 ,    -- (080-O/S)  Serjeant Tombstone
+    81 ,    -- (081-O/W)  Serjeant Tombstone
+    82 ,    -- (082-O/S)  Serjeant Tombstone
+    83 ,    -- (083-O/W)  Serjeant Tombstone
+    84 ,    -- (084-O/W)  Serjeant Tombstone
+    85 ,    -- (085-O/W)  Serjeant Tombstone
+    86 ,    -- (086-O/W)  Serjeant Tombstone
+    87 ,    -- (087-O/S)  Serjeant Tombstone
+    88 ,    -- (088-O/S)  Serjeant Tombstone
+    89 ,    -- (089-O/S)  Serjeant Tombstone
+    90 ,    -- (090-O/S)  Serjeant Tombstone
+    91 ,    -- (091-O/W)  Serjeant Tombstone
+    92 ,    -- (092-O/W)  Serjeant Tombstone
+    93 ,    -- (093-O/S)  Serjeant Tombstone
+    96 ,    -- (096-O/S)  Serjeant Tombstone
+    97 ,    -- (097-O/W)  Serjeant Tombstone
+    98 ,    -- (098-O/S)  Serjeant Tombstone
+    99 ,    -- (099-O/S)  Serjeant Tombstone
+    102,    -- (102-O/S)  Serjeant Tombstone
+    103,    -- (103-O/W)  Serjeant Tombstone
+    104,    -- (104-O/W)  Serjeant Tombstone
+    105,    -- (105-O/S)  Serjeant Tombstone
+    106,    -- (106-O/S)  Serjeant Tombstone
+    107,    -- (107-O/W)  Serjeant Tombstone
+    108     -- (108-O/W)  Serjeant Tombstone
 }
 
 -- Wave 2 spawns when Voidstreaker Butchnotch (NIN) is defeated
 xi.dynamis.mobList[zoneID][2].wave =
 {
-    145,	-- 145-O/S
-    146,	-- 146-O/S
-    147,	-- 147-O/S
-    149	    -- 149-O/S
+    145,	-- (145-O/S)  Serjeant Tombstone
+    146,	-- (146-O/S)  Serjeant Tombstone
+    147,	-- (147-O/S)  Serjeant Tombstone
+    149	    -- (149-O/S)  Serjeant Tombstone
 }
 
 -- Wave 3 spawns when Overlord's Tombstone (Mega Boss) is defeated
 xi.dynamis.mobList[zoneID][3].wave =
 {
-    116,    -- 116-O/S
-    117,    -- 117-O/S
-    118,    -- 118-O/S
-    119,    -- 119-O/S
-    120,    -- 120-O/S
-    121,    -- 121-O/S
-    122,    -- 122-O/S
-    123,    -- 123-O/S
-    124,    -- 124-O/S
-    125,    -- 125-O/S
-    126,    -- 126-O/S
-    127,    -- 127-O/S
-    128,    -- 128-O/S
-    129,    -- 129-O/S
-    130,    -- 130-O/S
-    131,    -- 131-O/S
-    132,    -- 132-O/S
-    133,    -- 133-O/S
-    134,    -- 134-O/S
-    135,    -- 135-O/S
-    136,    -- 136-O/S
-    137,    -- 137-O/S
-    138,    -- 138-O/S
-    139,    -- 139-O/S
-    140,    -- 140-O/S
+    116,    -- (116-O/S)  Serjeant Tombstone
+    117,    -- (117-O/S)  Serjeant Tombstone
+    118,    -- (118-O/S)  Serjeant Tombstone
+    119,    -- (119-O/S)  Serjeant Tombstone
+    120,    -- (120-O/S)  Serjeant Tombstone
+    121,    -- (121-O/S)  Serjeant Tombstone
+    122,    -- (122-O/S)  Serjeant Tombstone
+    123,    -- (123-O/S)  Serjeant Tombstone
+    124,    -- (124-O/S)  Serjeant Tombstone
+    125,    -- (125-O/S)  Serjeant Tombstone
+    126,    -- (126-O/S)  Serjeant Tombstone
+    127,    -- (127-O/S)  Serjeant Tombstone
+    128,    -- (128-O/S)  Serjeant Tombstone
+    129,    -- (129-O/S)  Serjeant Tombstone
+    130,    -- (130-O/S)  Serjeant Tombstone
+    131,    -- (131-O/S)  Serjeant Tombstone
+    132,    -- (132-O/S)  Serjeant Tombstone
+    133,    -- (133-O/S)  Serjeant Tombstone
+    134,    -- (134-O/S)  Serjeant Tombstone
+    135,    -- (135-O/S)  Serjeant Tombstone
+    136,    -- (136-O/S)  Serjeant Tombstone
+    137,    -- (137-O/S)  Serjeant Tombstone
+    138,    -- (138-O/S)  Serjeant Tombstone
+    139,    -- (139-O/S)  Serjeant Tombstone
+    140,    -- (140-O/S)  Serjeant Tombstone
 }
 
 -- Kill of Wyrmgnasher Bjakdek and Reapertongue Gadgquok to spawn Overlords Tombstone
@@ -435,17 +435,17 @@ xi.dynamis.mobList[zoneID][4].wave =
 
 xi.dynamis.mobList[zoneID][5].wave =
 {
-    61,     -- 061-O/S
-    143,    -- 143-O/S
-    144     -- 144-O/S
+    61,     -- (061-O/S)  Serjeant Tombstone
+    143,    -- (143-O/S)  Serjeant Tombstone
+    144     -- (144-O/S)  Serjeant Tombstone
 }
 
 -- Two statues spawn near entrance and opposite tent when Reapertongue Gadgquok is killed
 xi.dynamis.mobList[zoneID][6].wave =
 {
-    36,     -- 036-O/S
-    141,    -- 141-O/S
-    142     -- 142-O/S
+    36,     -- (036-O/S)  Serjeant Tombstone
+    141,    -- (141-O/S)  Serjeant Tombstone
+    142     -- (142-O/S)  Serjeant Tombstone
 }
 
 ----------------------------------------------------------------------------------------------------
