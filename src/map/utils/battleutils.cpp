@@ -403,9 +403,9 @@ namespace battleutils
     bool CanUseWeaponskill(CCharEntity* PChar, CWeaponSkill* PSkill)
     {
         return ((PSkill->getSkillLevel() > 0 && PChar->GetSkill(PSkill->getType()) >= PSkill->getSkillLevel() &&
-                 (PSkill->getUnlockId() == 0 || charutils::hasLearnedWeaponskill(PChar, PSkill->getUnlockId()))) ||
+                (PSkill->getUnlockId() == 0 || charutils::hasLearnedWeaponskill(PChar, PSkill->getUnlockId()))) ||
                 (PSkill->getSkillLevel() == 0 && (PSkill->getUnlockId() == 0 || charutils::hasLearnedWeaponskill(PChar, PSkill->getUnlockId())))) &&
-               (PSkill->getJob(PChar->GetMJob()) > 0 || (PSkill->getJob(PChar->GetSJob()) > 0 && !PSkill->mainOnly()));
+                (PSkill->getJob(PChar->GetMJob()) > 0 || (PSkill->getJob(PChar->GetSJob()) > 0 || !PSkill->mainOnly())); // Umeboshi "Subjob gains access to applicable weapon skills that are only usable by the main job."
     }
 
     /************************************************************************
@@ -2693,8 +2693,8 @@ namespace battleutils
                 critHitRate = 100;
             }
         }
-        else if (PAttacker->objtype == TYPE_PC && PAttacker->GetMJob() == JOB_THF && charutils::hasTrait((CCharEntity*)PAttacker, TRAIT_ASSASSIN) &&
-                 (!ignoreSneakTrickAttack) && PAttacker->StatusEffectContainer->HasStatusEffect(EFFECT_TRICK_ATTACK))
+        else if (PAttacker->objtype == TYPE_PC && PAttacker->GetMJob() == JOB_THF || PAttacker->GetSJob() == JOB_THF && charutils::hasTrait((CCharEntity*)PAttacker, TRAIT_ASSASSIN) &&
+                (!ignoreSneakTrickAttack) && PAttacker->StatusEffectContainer->HasStatusEffect(EFFECT_TRICK_ATTACK)) // Umeboshi "THF Sub benefits on Cactuar"
         {
             CBattleEntity* taChar = battleutils::getAvailableTrickAttackChar(PAttacker, PDefender);
             if (taChar != nullptr)
@@ -4136,7 +4136,7 @@ namespace battleutils
 
             if (ERROR_SLOTID == (SlotID = PChar->getStorage(LOC_INVENTORY)->SearchItem(toolID)))
             {
-                if (PChar->GetMJob() == JOB_NIN)
+               if (PChar->GetMJob() || PChar->GetSJob() == JOB_NIN) //Umeboshi "NIN Sub can use master tools"
                 {
                     switch (toolID)
                     {
@@ -4475,9 +4475,16 @@ namespace battleutils
         }
         else if (m_PChar->GetSJob() == JOB_DRK && m_PChar->health.hp >= 10 && m_PChar->StatusEffectContainer->HasStatusEffect(EFFECT_SOULEATER))
         {
-            // lose 10% Current HP, only HALF (5%) converted to damage
-            damage += (uint32)(m_PChar->health.hp * 0.05f);
-            m_PChar->addHP(-HandleStoneskin(m_PChar, (int32)(m_PChar->health.hp * 0.1f)));
+            // Umeboshi "DRK Sub is treated as a main job. No Nerfs"
+            // lost 10% current hp, converted to damage (displayed as just a strong regular hit)
+            float drainPercent = 0.1f;
+
+            // at most 2% bonus from gear
+            auto gearBonusPercent = m_PChar->getMod(Mod::SOULEATER_EFFECT);
+            drainPercent          = drainPercent + std::min(0.02f, 0.01f * gearBonusPercent);
+
+            damage += (uint32)(m_PChar->health.hp * drainPercent);
+            m_PChar->addHP(-HandleStoneskin(m_PChar, (int32)(m_PChar->health.hp * (drainPercent - m_PChar->getMod(Mod::STALWART_SOUL) * 0.001f))));
         }
         return damage;
     }
@@ -4503,6 +4510,10 @@ namespace battleutils
         if (PEntity->objtype == TYPE_PC)
         {
             if (((CCharEntity*)PEntity)->GetMJob() == JOB_SAM)
+            {
+                return ((CCharEntity*)PEntity)->PMeritPoints->GetMeritValue(MERIT_STORE_TP_EFFECT, (CCharEntity*)PEntity);
+            }
+            if (((CCharEntity*)PEntity)->GetSJob() == JOB_SAM) // Umeboshi "SAM sub benefits from merits"
             {
                 return ((CCharEntity*)PEntity)->PMeritPoints->GetMeritValue(MERIT_STORE_TP_EFFECT, (CCharEntity*)PEntity);
             }
@@ -4758,11 +4769,11 @@ namespace battleutils
         {
             uint16 enmityReduction = PAttacker->getMod(Mod::HIGH_JUMP_ENMITY_REDUCTION) + 50;
 
-            // DRG sub has only 30% enmity removed instead of 50%.
-            if (PAttacker->GetSJob() == JOB_DRG)
-            {
-                enmityReduction = PAttacker->getMod(Mod::HIGH_JUMP_ENMITY_REDUCTION) + 30;
-            }
+        //    DRG sub has only 30% enmity removed instead of 50%. 
+        //    if (PAttacker->GetSJob() == JOB_DRG)
+        //    {
+        //        enmityReduction = PAttacker->getMod(Mod::HIGH_JUMP_ENMITY_REDUCTION) + 30;
+        //    }
 
             // cap it
             if (enmityReduction > 100)
@@ -6543,7 +6554,7 @@ namespace battleutils
                 }
                 else
                 {
-                    recast *= 3;
+                    recast *= 2;
                 }
             }
             else if (PEntity->StatusEffectContainer->HasStatusEffect({ EFFECT_DARK_ARTS, EFFECT_ADDENDUM_BLACK }))
@@ -6584,7 +6595,7 @@ namespace battleutils
                 }
                 else
                 {
-                    recast *= 3;
+                    recast *= 2;
                 }
             }
 

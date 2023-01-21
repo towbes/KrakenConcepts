@@ -38,7 +38,9 @@ entity.onTrigger = function(player, npc)
         thePuppetMaster == QUEST_COMPLETED and
         classReunion == QUEST_AVAILABLE and
         player:getMainLvl() >= xi.settings.main.AF2_QUEST_LEVEL and
-        player:getMainJob() == xi.job.SMN and
+        player:getMainJob() == xi.job.SMN or 
+        player:getSubLvl() >= xi.settings.main.AF2_QUEST_LEVEL and --Umeboshi
+        player:getSubJob() == xi.job.SMN and
         not player:needToZone()
     then
         player:startEvent(413)
@@ -49,7 +51,9 @@ entity.onTrigger = function(player, npc)
         classReunion == QUEST_COMPLETED and
         carbuncleDebacle == QUEST_AVAILABLE and
         player:getMainLvl() >= xi.settings.main.AF3_QUEST_LEVEL and
-        player:getMainJob() == xi.job.SMN and
+        player:getMainJob() == xi.job.SMN or
+        player:getSubLvl() >= xi.settings.main.AF3_QUEST_LEVEL and
+        player:getSubJob() == xi.job.SMN and
         not player:needToZone()
     then
         player:startEvent(415)

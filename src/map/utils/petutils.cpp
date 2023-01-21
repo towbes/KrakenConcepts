@@ -745,7 +745,7 @@ namespace petutils
         }
 
         // Add Job Point Stat Bonuses
-        if (PMaster->GetMJob() == JOB_PUP)
+        if (PMaster->GetMJob() == JOB_PUP || PMaster->GetSJob() == JOB_PUP)
         {
             PPet->addModifier(Mod::ATT, PMaster->getMod(Mod::PET_ATK_DEF));
             PPet->addModifier(Mod::DEF, PMaster->getMod(Mod::PET_ATK_DEF));
@@ -1724,7 +1724,7 @@ namespace petutils
         Pet_t* PPetData = *std::find_if(g_PPetList.begin(), g_PPetList.end(), [PetID](Pet_t* t)
                                         { return t->PetID == PetID; });
 
-        if (PMaster->GetMJob() != JOB_DRG && PetID == PETID_WYVERN)
+        if (PMaster->GetMJob() != JOB_DRG || PMaster->GetSJob() == JOB_DRG && PetID == PETID_WYVERN) // Umeboshi
         {
             return;
         }

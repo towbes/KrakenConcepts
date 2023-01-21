@@ -49,6 +49,7 @@ end
 
 entity.onTrigger = function(player, npc)
     local mLvl = player:getMainLvl()
+    local sLvl = player:getSubLvl() --Umeboshi
     local aBoysDream = player:getQuestStatus(xi.quest.log_id.SANDORIA, xi.quest.id.sandoria.A_BOY_S_DREAM)
     local underOath = player:getQuestStatus(xi.quest.log_id.SANDORIA, xi.quest.id.sandoria.UNDER_OATH)
 
@@ -56,7 +57,8 @@ entity.onTrigger = function(player, npc)
     if player:getCharVar("UnderOathCS") == 8 then
         player:startEvent(89)
     elseif
-        player:getMainJob() == xi.job.PLD and mLvl >= xi.settings.main.AF2_QUEST_LEVEL and
+    player:getMainJob() == xi.job.PLD and mLvl >= xi.settings.main.AF2_QUEST_LEVEL or 
+    player:getSubJob() == xi.job.PLD and sLvl >= xi.settings.main.AF2_QUEST_LEVEL and --Umeboshi
         aBoysDream == QUEST_COMPLETED and underOath == QUEST_AVAILABLE
     then
         player:startEvent(90) -- Start
@@ -90,7 +92,7 @@ entity.onEventFinish = function(player, csid, option)
         if player:getFreeSlotsCount() == 0 then
             player:messageSpecial(ID.text.ITEM_CANNOT_BE_OBTAINED, 14095)
         else
-            if player:getMainJob() == xi.job.PLD then
+            if player:getMainJob() == xi.job.PLD or player:getSubJob() == xi.job.PLD then --Umeboshi
                 player:addQuest(xi.quest.log_id.SANDORIA, xi.quest.id.sandoria.UNDER_OATH)
             end
 

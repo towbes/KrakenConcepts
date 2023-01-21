@@ -1485,7 +1485,7 @@ end
 local function getKeyTraded(player, trade, chestInfo)
     if npcUtil.tradeHasExactly(trade, chestInfo.key) then
         return keyType.ZONE_KEY
-    elseif player:getMainJob() == xi.job.THF then
+    elseif player:getMainJob() == xi.job.THF or player:getSubJob() == xi.job.THF then -- Umeboshi "Thf Sub"
         for keyValue, keyData in pairs(thiefKeyInfo) do
             if npcUtil.tradeHasExactly(trade, keyData[1]) then
                 return keyValue
@@ -1498,7 +1498,7 @@ end
 
 local function getLockpickSuccessRate(player, keyTraded, chestInfo)
     if
-        player:getMainJob() == xi.job.THF and
+        player:getMainJob() == xi.job.THF or player:getSubJob() == xi.job.THF and --Umeboshi 
         player:getMainLvl() >= chestInfo.treasureLvl - 10
     then
         return (player:getMainLvl() / chestInfo.treasureLvl) - 0.50 + thiefKeyInfo[keyTraded][2]
@@ -1525,6 +1525,7 @@ xi.treasure.onTrade = function(player, npc, trade, chestType)
     local msgBase = ID.text.CHEST_UNLOCKED
     local info = xi.treasure.treasureInfo[chestType].zone[zoneId]
     local mJob = player:getMainJob()
+    local sJob = player:getSubJob()
     local activeHands = player:getCharVar("BorghertzAlreadyActiveWithJob")
     local illusionCooldown  = npc:getLocalVar("illusionCooldown")
 
@@ -1590,6 +1591,21 @@ xi.treasure.onTrade = function(player, npc, trade, chestType)
             if npcUtil.giveItem(player, info.af[mJob].reward) then
                 player:confirmTrade()
                 moveChest(npc, zoneId, chestType)
+            end
+        end
+
+                    -- artifact armor subjob Umeboshi "AF quests for subjobs"
+        if
+            info.af and
+            info.af[sJob] and
+            player:getQuestStatus(xi.quest.log_id.JEUNO, info.af[sJob].quest) >= QUEST_ACCEPTED and
+            not player:hasItem(info.af[sJob].reward)
+        then
+            player:messageSpecial(msgBase)
+            player:delStatusEffectsByFlag(xi.effectFlag.DETECTABLE)
+            if npcUtil.giveItem(player, info.af[sJob].reward) then
+            player:confirmTrade()
+            moveChest(npc, zoneId, chestType)
             end
 
             return

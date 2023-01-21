@@ -34,7 +34,9 @@ quest.sections =
             return status == QUEST_AVAILABLE and
                 player:hasCompletedQuest(xi.quest.log_id.OUTLANDS, xi.quest.id.outlands.YOMI_OKURI) and
                 player:getMainJob() == xi.job.SAM and
-                player:getMainLvl() >= xi.settings.main.AF3_QUEST_LEVEL
+                player:getMainLvl() >= xi.settings.main.AF3_QUEST_LEVEL or
+                player:getSubJob() == xi.job.SAM and
+                player:getSubLvl() >= xi.settings.main.AF3_QUEST_LEVEL
         end,
 
         [xi.zone.NORG] =

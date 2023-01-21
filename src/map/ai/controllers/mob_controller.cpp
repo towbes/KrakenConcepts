@@ -116,7 +116,7 @@ bool CMobController::CanPursueTarget(CBattleEntity* PTarget)
 bool CMobController::CheckHide(CBattleEntity* PTarget)
 {
     TracyZoneScoped;
-    if (PTarget->GetMJob() == JOB_THF && PTarget->StatusEffectContainer->HasStatusEffect(EFFECT_HIDE))
+    if (PTarget->GetMJob() || PTarget->GetSJob() == JOB_THF && PTarget->StatusEffectContainer->HasStatusEffect(EFFECT_HIDE)) // Umeboshi "THF Sub treated as mainjob. No nerf"
     {
         return !CanPursueTarget(PTarget) && !PMob->m_TrueDetection;
     }

@@ -106,13 +106,13 @@ namespace blueutils
         {
             for (auto& member : PChar->PParty->members)
             {
-                if (member->GetMJob() == JOB_BLU && member->objtype == TYPE_PC)
+                if (member->GetMJob() || member->GetSJob() == JOB_BLU && member->objtype == TYPE_PC) // Umeboshi "BLU sub now applies to logic."
                 {
                     PBlueMages.push_back((CCharEntity*)member);
                 }
             }
         }
-        else if (PChar->GetMJob() == JOB_BLU)
+        else if (PChar->GetMJob() == JOB_BLU || PChar->GetSJob() == JOB_BLU)
         {
             PBlueMages.push_back(PChar);
         }
@@ -194,7 +194,7 @@ namespace blueutils
         charutils::BuildingCharTraitsTable(PChar);
         PChar->pushPacket(new CCharJobExtraPacket(PChar, true));
         PChar->pushPacket(new CCharJobExtraPacket(PChar, false));
-        PChar->pushPacket(new CCharStatsPacket(PChar));
+        PChar->pushPacket(new CCharStatsPacket(PChar, true)); // Umeboshi "resetflips"
         charutils::CalculateStats(PChar);
         PChar->UpdateHealth();
         SaveSetSpells(PChar);

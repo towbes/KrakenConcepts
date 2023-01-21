@@ -23,7 +23,8 @@ entity.onTrigger = function(player, npc)
     if
         player:getCharVar("KnightStalker_Progress") == 4 and
         player:getCharVar("KnightStalker_Kill") == 0 and
-        player:getMainJob() == xi.job.DRG and
+        player:getMainJob() == xi.job.DRG or
+        player:getSubJob() == xi.job.DRG and --Umeboshi
         pet and
         pet:getPetID() == xi.pet.id.WYVERN and
         npcUtil.popFromQM(player, npc, { ID.mob.CLEUVARION_M_RESOAIX, ID.mob.ROMPAULION_S_CITALLE }, { hide = 0, claim = false })

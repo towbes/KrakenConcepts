@@ -32,7 +32,9 @@ quest.sections =
             return status == QUEST_AVAILABLE and
                 player:hasCompletedQuest(xi.quest.log_id.BASTOK, xi.quest.id.bastok.DARK_LEGACY) and
                 player:getMainJob() == xi.job.DRK and
-                player:getMainLvl() >= xi.settings.main.AF2_QUEST_LEVEL
+                player:getMainLvl() >= xi.settings.main.AF2_QUEST_LEVEL or
+                player:getSubJob() == xi.job.DRK and --Umeboshi
+                player:getSubLvl() >= xi.settings.main.AF2_QUEST_LEVEL
         end,
 
         [xi.zone.METALWORKS] =

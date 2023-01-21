@@ -26,6 +26,8 @@ entity.onTrigger = function(player, npc)
 
     local mLvl = player:getMainLvl()
     local mJob = player:getMainJob()
+    local sLvl = player:getSubLvl()
+    local sJob = player:getSubJob()
 
     -- PATH OF THE BEASTMASTER
     if saveMySon == QUEST_COMPLETED and pathOfTheBeastmaster == QUEST_AVAILABLE then
@@ -36,7 +38,9 @@ entity.onTrigger = function(player, npc)
         pathOfTheBeastmaster == QUEST_COMPLETED and
         wingsOfGold == QUEST_AVAILABLE and
         mJob == xi.job.BST and
-        mLvl >= xi.settings.main.AF1_QUEST_LEVEL
+        mLvl >= xi.settings.main.AF1_QUEST_LEVEL or
+        sJob == xi.job.BST and
+        sLvl >= xi.settings.main.AF1_QUEST_LEVEL
     then
         if player:getCharVar("wingsOfGold_shortCS") == 1 then
             player:startEvent(137) -- Start Quest "Wings of gold" (Short dialog)
@@ -56,7 +60,9 @@ entity.onTrigger = function(player, npc)
         wingsOfGold == QUEST_COMPLETED and
         scatteredIntoShadow == QUEST_AVAILABLE and
         mJob == xi.job.BST and
-        mLvl >= xi.settings.main.AF2_QUEST_LEVEL
+        mLvl >= xi.settings.main.AF2_QUEST_LEVEL or
+        sJob == xi.job.BST and -- Umeboshi
+        sLvl >= xi.settings.main.AF2_QUEST_LEVEL
     then
         if player:getCharVar("scatIntoShadow_shortCS") == 1 then
             player:startEvent(143)

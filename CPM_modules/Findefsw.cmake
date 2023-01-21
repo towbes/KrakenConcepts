@@ -1,0 +1,3 @@
+include("C:/Users/Chris/Desktop/CactuarLSB/server/cmake/CPM_0.34.0.cmake")
+CPMAddPackage(NAME;efsw;GITHUB_REPOSITORY;SpartanJ/efsw;GIT_TAG;74ca09bff89bc8de1f7b8bf3faaa6275ce23b4c5;OPTIONS;VERBOSE OFF;NO_ATOMICS OFF;BUILD_SHARED_LIBS OFF;BUILD_TEST_APP OFF;EFSW_INSTALL OFF)
+set(efsw_FOUND TRUE)

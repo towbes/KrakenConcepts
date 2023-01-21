@@ -19,6 +19,8 @@ end
 entity.onTrigger = function(player, npc)
     local mJob   = player:getMainJob()
     local mLvl   = player:getMainLvl()
+    local sJob   = player:getSubJob() --Umeboshi "Allows accepting quest with COR sub job as long as it meets requirments. Will move this to module when module bug fixed"
+    local sLvl   = player:getSubLvl() --Umeboshi
     local efao   = player:getQuestStatus(xi.quest.log_id.AHT_URHGAN, xi.quest.id.ahtUrhgan.EQUIPPED_FOR_ALL_OCCASIONS)
     local ntus   = player:getQuestStatus(xi.quest.log_id.AHT_URHGAN, xi.quest.id.ahtUrhgan.NAVIGATING_THE_UNFRIENDLY_SEAS)
 
@@ -27,7 +29,9 @@ entity.onTrigger = function(player, npc)
         efao == QUEST_COMPLETED and
         ntus == QUEST_AVAILABLE and
         mJob == xi.job.COR and
-        mLvl >= xi.settings.main.AF2_QUEST_LEVEL
+        mLvl >= xi.settings.main.AF2_QUEST_LEVEL or
+        sJob == xi.job.COR and --Umeboshi
+        sLvl >= xi.settings.main.AF2_QUEST_LEVEL --Umeboshi
     then
         player:startEvent(232)
     elseif player:getCharVar("NavigatingtheUnfriendlySeas") == 4 then

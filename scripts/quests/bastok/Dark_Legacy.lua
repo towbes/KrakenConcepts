@@ -33,7 +33,9 @@ quest.sections =
         check = function(player, status, vars)
             return status == QUEST_AVAILABLE and
                 player:getMainJob() == xi.job.DRK and
-                player:getMainLvl() >= xi.settings.main.AF1_QUEST_LEVEL
+                player:getMainLvl() >= xi.settings.main.AF1_QUEST_LEVEL or
+                player:getSubJob() == xi.job.DRK and -- Umeboshi
+                player:getSubLvl() >= xi.settings.main.AF1_QUEST_LEVEL
         end,
 
         [xi.zone.METALWORKS] =

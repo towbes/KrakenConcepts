@@ -41,7 +41,9 @@ entity.onTrigger = function(player, npc)
     elseif
         beatAroundTheBushin == QUEST_AVAILABLE and
         player:getMainJob() == xi.job.MNK and
-        player:getMainLvl() >= 71 and
+        player:getMainLvl() >= 71 or
+        player:getSubJob() == xi.job.MNK and
+        player:getSubLvl() >= 71 and
         player:getFameLevel(xi.quest.fame_area.NORG) >= 6
     then
         player:startEvent(160) -- Start Quest "Beat Around the Bushin"

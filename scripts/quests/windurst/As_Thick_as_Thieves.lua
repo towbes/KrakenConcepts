@@ -123,7 +123,9 @@ quest.sections =
             return status == QUEST_AVAILABLE and
                 player:hasCompletedQuest(xi.quest.log_id.WINDURST, xi.quest.id.windurst.THE_TENSHODO_SHOWDOWN) and
                 player:getMainJob() == xi.job.THF and
-                player:getMainLvl() >= xi.settings.main.AF2_QUEST_LEVEL
+                player:getMainLvl() >= xi.settings.main.AF2_QUEST_LEVEL or
+                player:getSubJob() == xi.job.THF and
+                player:getSubLvl() >= xi.settings.main.AF2_QUEST_LEVEL
         end,
 
         [xi.zone.WINDURST_WOODS] =
