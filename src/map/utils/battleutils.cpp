@@ -4775,11 +4775,11 @@ namespace battleutils
         {
             uint16 enmityReduction = PAttacker->getMod(Mod::HIGH_JUMP_ENMITY_REDUCTION) + 50;
 
-        //    DRG sub has only 30% enmity removed instead of 50%. 
-        //    if (PAttacker->GetSJob() == JOB_DRG)
-        //    {
-        //        enmityReduction = PAttacker->getMod(Mod::HIGH_JUMP_ENMITY_REDUCTION) + 30;
-        //    }
+            //DRG sub has only 30% enmity removed instead of 50%. 
+            if (PAttacker->GetSJob() == JOB_DRG)
+            {
+                enmityReduction = PAttacker->getMod(Mod::HIGH_JUMP_ENMITY_REDUCTION) + 50;
+            }
 
             // cap it
             if (enmityReduction > 100)

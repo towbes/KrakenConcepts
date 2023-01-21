@@ -904,7 +904,7 @@ void CBattleEntity::SetSLevel(uint8 slvl)
                     m_slvl = m_mlvl;
                 }
             }
-
+                break;
                 // m_slvl = (slvl > m_mlvl ? (m_mlvl == 1 ? 1 : m_mlvl) : slvl);
             default: // Error
                 ShowError("Error setting subjob level: Invalid ratio '%s' check your settings file!", ratio);
