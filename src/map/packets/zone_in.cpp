@@ -63,6 +63,8 @@ uint16 GetMogHouseModelID(CCharEntity* PChar)
             return PChar->profile.nation == 2 ? 0x0123 : 0x0120;
         case REGION_TYPE::JEUNO:
             return 0x0100;
+        case REGION_TYPE::ADOULIN_ISLANDS:
+            return 0x0124;
         default:
             ShowWarning("Default case reached for GetMogHouseID by %s (%u)", PChar->GetName(), PChar->getZone());
             return 0x0100;
@@ -197,7 +199,14 @@ CZoneInPacket::CZoneInPacket(CCharEntity* PChar, const EventInfo* currentEvent)
 
     if (PChar->m_moghouseID != 0)
     {
-        ref<uint8>(0x80)  = 1;
+        ref<uint8>(0x80) = 1;
+
+        if (PChar->profile.mhflag & 0x0040) // On MH2F
+        {
+            // Ensure full exit menu appears
+            ref<uint16>(0xA8) = 0x02;
+        }
+
         ref<uint16>(0xAA) = GetMogHouseModelID(PChar);
     }
     else
