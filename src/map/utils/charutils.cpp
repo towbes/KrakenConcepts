@@ -2134,7 +2134,8 @@ namespace charutils
 
             if (PWeapon && AWeapon && PWeapon->getSkillType() == AWeapon->getSkillType())
             {
-                return HasItem(PChar, AItem->getID()) && canEquipItemOnAnyJob(PChar, AItem);
+                return HasItem(PChar, AItem->getID());
+              //&& canEquipItemOnAnyJob(PChar, AItem); // Umeboshi "Style Lock"
             }
         }
         return false;
@@ -2260,10 +2261,10 @@ namespace charutils
             appearanceModel = appearance->getModelId();
         }
 
-        if (!canEquipItemOnAnyJob(PChar, appearance))
-        {
-            return;
-        }
+        //if (!canEquipItemOnAnyJob(PChar, appearance))
+        //{
+        //    return;
+        //}
 
         switch (equipSlotID)
         {
@@ -3128,7 +3129,8 @@ namespace charutils
         memset(&PChar->m_TraitList, 0, sizeof(PChar->m_TraitList));
 
         battleutils::AddTraits(PChar, traits::GetTraits(PChar->GetMJob()), PChar->GetMLevel());
-        battleutils::AddTraits(PChar, traits::GetTraits(PChar->GetSJob()), PChar->GetSLevel());
+        battleutils::AddTraitsSJ(PChar, traits::GetTraits(PChar->GetSJob()), PChar->GetSLevel(), PChar->TraitList.size());
+        // battleutils::AddTraits(PChar, traits::GetTraits(PChar->GetSJob()), PChar->GetSLevel());
 
         if (PChar->GetMJob() == JOB_BLU || PChar->GetSJob() == JOB_BLU)
         {
@@ -4300,20 +4302,20 @@ namespace charutils
                 return;
             }
 
-            if (!hasKeyItem(PMember, 2544) || PMember->GetMLevel() < 99)
+            if (!hasKeyItem(PMember, 2544) || PMember->GetMLevel() < 75)
             {
-                // Do not grant Capacity points without Job Breaker or Level 99
+                // Do not grant Capacity points without Job Breaker or Level 75
                 return;
             }
 
             bool  chainActive = false;
-            int16 levelDiff   = mobLevel - 99; // Passed previous 99 check, no need to calculate
+            int16 levelDiff   = mobLevel - 75; // Passed previous 99 check, no need to calculate
 
             // Capacity Chains are only granted for Mobs level 100+
             // Ref: https://www.bg-wiki.com/ffxi/Job_Points
             float capacityPoints = 0;
 
-            if (mobLevel > 99)
+            if (mobLevel > 75)
             {
                 // Base Capacity Point formula derived from the table located at:
                 // https://ffxiclopedia.fandom.com/wiki/Job_Points#Capacity_Points

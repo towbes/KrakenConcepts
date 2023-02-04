@@ -72,7 +72,7 @@ static uint8 cap[100] = {
     7, 7, 7, 7, 7,                          // 60-64 7
     8, 8, 8, 8, 8,                          // 65-69 8
     9, 9, 9, 9, 9,                          // 70-74 9
-    10, 10, 10, 10, 10,                     // 75-79 10
+    15, 15, 15, 15, 15,                     // 75-79 10 //Umeboshi "We use 15 as a 75 cap"
     15, 15, 15, 15, 15, 15, 15, 15, 15, 15, // 80-89 15
     15, 15, 15, 15, 15, 15, 15, 15, 15, 15, // 90-99 15
 };
@@ -494,7 +494,12 @@ int32 CMeritPoints::GetMeritValue(MERIT_TYPE merit, CCharEntity* PChar)
             meritValue = merit == MERIT_MAX_MERIT ? PMerit->count : std::min(PMerit->count, cap[PChar->GetMLevel()]);
         }
 
-        if (PMerit->catid == 25 && PChar->GetMLevel() < 96)
+        if (PMerit->catid < 5 || (PMerit->jobs & (1 << (PChar->GetSJob() - 1)) && PChar->GetSLevel() >= 75))
+        {
+            meritValue = merit == MERIT_MAX_MERIT ? PMerit->count : std::min(PMerit->count, cap[PChar->GetSLevel()]);
+        }
+
+        if (PMerit->catid == 25 && PChar->GetMLevel() == 75) //Umeboshi "We are lowering this to 75"
         { // categoryID 25 is for merit weaponskills, which only apply if the player is lv 96+
             meritValue = 0;
         }

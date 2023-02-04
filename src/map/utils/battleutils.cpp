@@ -2104,7 +2104,7 @@ namespace battleutils
 
                         // Shield Mastery
                         if ((std::max(damage - (PDefender->getMod(Mod::PHALANX) + PDefender->getMod(Mod::STONESKIN)), 0) > 0) &&
-                            charutils::hasTrait((CCharEntity*)PDefender, TRAIT_SHIELD_MASTERY))
+                            PDefender->getMod(Mod::SHIELD_MASTERY_TP) > 0) // Umeboshi "Ungated Shield Mastery Mods to not require the job trait"
                         {
                             // If the player blocked with a shield and has shield mastery, add shield mastery TP bonus
                             // unblocked damage (before block but as if affected by stoneskin/phalanx) must be greater than zero
@@ -2245,7 +2245,7 @@ namespace battleutils
             }
 
             // try to interrupt spell if not a ranged attack and not blocked by Shield Mastery
-            if ((!isRanged) && !((isBlocked) && (PDefender->objtype == TYPE_PC) && (charutils::hasTrait((CCharEntity*)PDefender, TRAIT_SHIELD_MASTERY))))
+            if ((!isRanged) && !((isBlocked) && (PDefender->objtype == TYPE_PC) && PDefender->getMod(Mod::SHIELD_MASTERY_TP) > 0))
             {
                 PDefender->TryHitInterrupt(PAttacker);
             }
@@ -2296,6 +2296,16 @@ namespace battleutils
                 float sBlow1    = std::clamp((float)PAttacker->getMod(Mod::SUBTLE_BLOW), -50.0f, 50.0f);
                 float sBlow2    = std::clamp((float)PAttacker->getMod(Mod::SUBTLE_BLOW_II), -50.0f, 50.0f);
                 float sBlowMult = ((100.0f - std::clamp(sBlow1 + sBlow2, -75.0f, 75.0f)) / 100.0f);
+
+                if (PAttacker->objtype == TYPE_PC && PAttacker->GetMJob() == JOB_NIN && PAttacker->GetMLevel() > 74)
+                {
+                    sBlowMult -= 0.01f * ((CCharEntity*)PAttacker)->PMeritPoints->GetMeritValue(MERIT_SUBTLE_BLOW_EFFECT, (CCharEntity*)PAttacker);
+                }
+
+                if (PAttacker->objtype == TYPE_PC && PAttacker->GetSJob() == JOB_NIN && PAttacker->GetSLevel() > 74)
+                {
+                    sBlowMult -= 0.01f * ((CCharEntity*)PAttacker)->PMeritPoints->GetMeritValue(MERIT_SUBTLE_BLOW_EFFECT, (CCharEntity*)PAttacker);
+                }
 
                 // mobs hit get basetp+30 whereas pcs hit get basetp/3
                 if (PDefender->objtype == TYPE_PC || (PDefender->objtype == TYPE_PET && PDefender->PMaster && PDefender->PMaster->objtype == TYPE_PC))
@@ -2441,6 +2451,11 @@ namespace battleutils
             float sBlow1    = std::clamp((float)PAttacker->getMod(Mod::SUBTLE_BLOW), -50.0f, 50.0f);
             float sBlow2    = std::clamp((float)PAttacker->getMod(Mod::SUBTLE_BLOW_II), -50.0f, 50.0f);
             float sBlowMult = (100.0f - std::clamp(sBlow1 + sBlow2, -75.0f, 75.0f)) / 100.0f;
+
+            if (PAttacker->objtype == TYPE_PC && PAttacker->GetMJob() == JOB_NIN || PAttacker->GetSJob() == JOB_NIN && PAttacker->GetMLevel() > 74)
+            {
+                sBlowMult -= 0.01f * ((CCharEntity*)PAttacker)->PMeritPoints->GetMeritValue(MERIT_SUBTLE_BLOW_EFFECT, (CCharEntity*)PAttacker);
+            }
 
             // mobs hit get basetp+30 whereas pcs hit get basetp/3
             if (PDefender->objtype == TYPE_PC)
@@ -3595,6 +3610,16 @@ namespace battleutils
                 break;
         }
 
+        if (PDefender->objtype == TYPE_PC && PDefender->GetMLevel() > 74 && PDefender->GetMJob() == JOB_BST)
+        {
+            KillerEffect += ((CCharEntity*)PDefender)->PMeritPoints->GetMeritValue(MERIT_KILLER_EFFECTS, ((CCharEntity*)PDefender));
+        }
+
+        if (PDefender->objtype == TYPE_PC && PDefender->GetSLevel() > 74 && PDefender->GetSJob() == JOB_BST)
+        {
+            KillerEffect += ((CCharEntity*)PDefender)->PMeritPoints->GetMeritValue(MERIT_KILLER_EFFECTS, ((CCharEntity*)PDefender));
+        }
+
         // Add intimidation rate from Bully
         if (CStatusEffect* PDoubtEffect = PAttacker->StatusEffectContainer->GetStatusEffect(EFFECT_DOUBT))
         {
@@ -4142,7 +4167,7 @@ namespace battleutils
 
             if (ERROR_SLOTID == (SlotID = PChar->getStorage(LOC_INVENTORY)->SearchItem(toolID)))
             {
-               if (PChar->GetMJob() || PChar->GetSJob() == JOB_NIN) //Umeboshi "NIN Sub can use master tools"
+                if (PChar->GetMJob() == JOB_NIN || PChar->GetSJob() == JOB_NIN) // Umeboshi "NIN Sub can use master tools"
                 {
                     switch (toolID)
                     {
@@ -6245,6 +6270,84 @@ namespace battleutils
         }
     }
 
+        void AddTraitsSJ(CBattleEntity* PEntity, TraitList_t* traitList, uint8 level, size_t cutoff)
+//Cactuar Umeboshi "Handling for subjob traits stacking with main job."
+    {
+        CCharEntity* PChar = PEntity->objtype == TYPE_PC ? static_cast<CCharEntity*>(PEntity) : nullptr;
+
+        for (auto&& PTrait : *traitList)
+        {
+            if (level >= PTrait->getLevel() && PTrait->getLevel() > 0)
+            {
+                std::size_t cutoffActual = cutoff;
+                if (PTrait->getID() == 18) // is dual wield
+                {
+                    cutoffActual = 0; // check the entire list
+                }
+
+                bool add = true;
+                for (std::size_t j = cutoffActual; j < PEntity->TraitList.size(); ++j)
+
+                //for (uint8 j = cutoffActual; j < PEntity->TraitList.size(); ++j)
+                {
+                    CTrait* PExistingTrait = PEntity->TraitList.at(j);
+
+                    if (PExistingTrait->getID() == PTrait->getID())
+                    {
+                        // Check if we still have the merit required for this trait
+                        if (PChar)
+                        {
+                            if (PExistingTrait->getMeritID() > 0)
+                            {
+                                if (PChar->PMeritPoints->GetMerit((MERIT_TYPE)PExistingTrait->getMeritID())->count == 0)
+                                {
+                                    PEntity->delTrait(PExistingTrait);
+                                    break;
+                                }
+                                else if (PExistingTrait->getMeritID() == PTrait->getMeritID())
+                                {
+                                    add = false;
+                                    break;
+                                }
+                            }
+                        }
+
+                        if (PExistingTrait->getRank() < PTrait->getRank())
+                        {
+                            PEntity->delTrait(PExistingTrait);
+                            break;
+                        }
+                        else if (PExistingTrait->getRank() > PTrait->getRank())
+                        {
+                            add = false;
+                            break;
+                        }
+                        else if (PExistingTrait->getMod() == PTrait->getMod())
+                        {
+                            add = false;
+                            break;
+                        }
+                    }
+                }
+
+                // Don't add traits that aren't merited yet
+                if (PChar)
+                {
+                    if (PTrait->getMeritID() > 0 && PChar->PMeritPoints->GetMerit((MERIT_TYPE)PTrait->getMeritID())->count == 0)
+                    {
+                        add = false;
+                    }
+                }
+
+                if (add)
+                {
+                    PEntity->addTrait(PTrait);
+                }
+            }
+        }
+    }
+
+
     bool HasClaim(CBattleEntity* PEntity, CBattleEntity* PTarget)
     {
         XI_DEBUG_BREAK_IF(PTarget == nullptr);
@@ -6667,7 +6770,7 @@ namespace battleutils
             if (PSpell->getSkillType() == SKILLTYPE::SKILL_ELEMENTAL_MAGIC || PSpell->getSkillType() == SKILLTYPE::SKILL_DARK_MAGIC)
             {
                 CCharEntity* PChar = static_cast<CCharEntity*>(PEntity);
-                if (charutils::hasTrait(PChar, TRAIT_OCCULT_ACUMEN))
+                if (PChar->getMod(Mod::OCCULT_ACUMEN) > 0) //Umeboshi "Ungating Occult Acumen by removing need for job trait)
                 {
                     return static_cast<int16>(PSpell->getMPCost() * PChar->getMod(Mod::OCCULT_ACUMEN) / 100.f * (1 + (PChar->getMod(Mod::STORETP) / 100.f)));
                 }

@@ -63,6 +63,12 @@ CCharJobsPacket::CCharJobsPacket(CCharEntity* PChar, bool resetflips)
                 ref<uint8>(0x08) = PChar->GetMJob();
                 ref<uint8>(0x0B) = (JOBTYPE)6; // thf
             }
+
+            else if (flipstate == 4) // 99 flipped
+            {
+                ref<uint8>(0x08) = PChar->GetMJob();
+                ref<uint8>(0x0B) = PChar->GetSJob();
+            }
         }
     }
 

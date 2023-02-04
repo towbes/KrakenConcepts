@@ -1724,7 +1724,12 @@ namespace petutils
         Pet_t* PPetData = *std::find_if(g_PPetList.begin(), g_PPetList.end(), [PetID](Pet_t* t)
                                         { return t->PetID == PetID; });
 
-        if (PMaster->GetMJob() != JOB_DRG || PMaster->GetSJob() == JOB_DRG && PetID == PETID_WYVERN) // Umeboshi
+        if (PMaster->GetMJob() != JOB_DRG && PetID == PETID_WYVERN)
+        {
+            return;
+        }
+
+        if (PMaster->GetSJob() == JOB_DRG && PetID == PETID_WYVERN) // Umeboshi
         {
             return;
         }

@@ -416,6 +416,11 @@ bool CAttack::CheckCounter()
         {
             meritCounter = ((CCharEntity*)m_victim)->PMeritPoints->GetMeritValue(MERIT_COUNTER_RATE, (CCharEntity*)m_victim);
         }
+
+                if (m_victim->GetSJob() == JOB_MNK || m_victim->GetSJob() == JOB_PUP) //Umeboshi "Merits for subjob"
+        {
+            meritCounter = ((CCharEntity*)m_victim)->PMeritPoints->GetMeritValue(MERIT_COUNTER_RATE, (CCharEntity*)m_victim);
+        }
     }
 
     // counter check (rate AND your hit rate makes it land, else its just a regular hit)
@@ -560,6 +565,10 @@ void CAttack::ProcessDamage()
     {
         m_damage += (int32)(m_damage * ((100 + (m_attacker->getMod(Mod::AUGMENTS_TA))) / 100.0f));
     }
+
+    
+
+
 
     // Try skill up.
     if (m_damage > 0)

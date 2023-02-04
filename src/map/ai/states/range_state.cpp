@@ -56,8 +56,8 @@ CRangeState::CRangeState(CBattleEntity* PEntity, uint16 targid)
     // TODO: Allow trusts to use this
     if (auto* PChar = dynamic_cast<CCharEntity*>(m_PEntity))
     {
-        if (charutils::hasTrait(PChar, TRAIT_RAPID_SHOT))
-        {
+        //if (charutils::hasTrait(PChar, TRAIT_RAPID_SHOT)) //Umeboshi "Ungating this for gear"
+        //{
             auto chance{ PChar->getMod(Mod::RAPID_SHOT) + PChar->PMeritPoints->GetMeritValue(MERIT_RAPID_SHOT_RATE, PChar) };
             if (xirand::GetRandomNumber(100) < chance)
             {
@@ -65,7 +65,7 @@ CRangeState::CRangeState(CBattleEntity* PEntity, uint16 targid)
                 delay       = (int16)(delay * (10 - xirand::GetRandomNumber(1, 6)) / 10.f);
                 m_rapidShot = true;
             }
-        }
+        //}
     }
 
     m_aimTime  = std::chrono::milliseconds(delay);

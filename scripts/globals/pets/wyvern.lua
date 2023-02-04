@@ -114,7 +114,19 @@ entity.onMobSpawn = function(mob)
         mob:addJobTraits(master:getSubJob(), master:getSubLvl())
     end
 
+    if master:getMod(xi.mod.WYVERN_SUBJOB_TRAITS) > 0 and master:getMainJob() ~= xi.job.DRG then
+        mob:addJobTraits(master:getMainJob(), master:getMainLvl()) -- Umeboshi "If DRG is subbed, we apply main job traits instead"
+    end
+
     local wyvernType = wyvernTypes[master:getSubJob()]
+
+    if (master:getSubJob() ~= xi.job.DRG) then -- Umeboshi "If DRG is a subjob, We use the main job to determine what type(Offense, Defense, Multi) of Wyvern is spawned"
+		wyvernType = wyvernTypes[master:getSubJob()]
+	end
+	
+	if (master:getMainJob() ~= xi.job.DRG) then
+		wyvernType = wyvernTypes[master:getMainJob()]
+	end
 
     if wyvernType == wyvernCapabilities.DEFENSIVE then
         master:addListener("WEAPONSKILL_USE", "PET_WYVERN_WS", function(player, target, skillid)
