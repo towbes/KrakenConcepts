@@ -731,6 +731,20 @@ namespace battleutils
 
         if (damage > 0)
         {
+            int16 magicSS = PDefender->getMod(Mod::MAGIC_STONESKIN);
+            if (magicSS)
+            {
+                if (damage >= magicSS)
+                {
+                    PDefender->setModifier(Mod::MAGIC_STONESKIN, 0);
+                    damage = damage - magicSS;
+                }
+                else
+                {
+                    PDefender->setModifier(Mod::MAGIC_STONESKIN, magicSS - damage);
+                    damage = 0;
+                }
+            }
             damage = std::max(damage - PDefender->getMod(Mod::PHALANX), 0);
             damage = HandleOneForAll(PDefender, damage);
             damage = HandleStoneskin(PDefender, damage);
@@ -836,6 +850,21 @@ namespace battleutils
             {
                 spikesDamage = std::max(spikesDamage - PAttacker->getMod(Mod::PHALANX), 0);
                 spikesDamage = HandleOneForAll(PAttacker, spikesDamage);
+                int16 magicSS  = PAttacker->getMod(Mod::MAGIC_STONESKIN);
+                if (magicSS)
+                {
+                    if (Action->spikesParam >= magicSS)
+                    {
+                        PAttacker->setModifier(Mod::MAGIC_STONESKIN, 0);
+                        Action->spikesParam = Action->spikesParam - magicSS;
+                    }
+                    else
+                    {
+                        PAttacker->setModifier(Mod::MAGIC_STONESKIN, magicSS - Action->spikesParam);
+                        Action->spikesParam = 0;
+                    }
+                }
+
                 spikesDamage = HandleStoneskin(PAttacker, spikesDamage);
             }
 
@@ -2714,7 +2743,7 @@ namespace battleutils
                 critHitRate = 100;
             }
         }
-        else if (PAttacker->objtype == TYPE_PC && PAttacker->GetMJob() == JOB_THF || PAttacker->GetSJob() == JOB_THF && charutils::hasTrait((CCharEntity*)PAttacker, TRAIT_ASSASSIN) &&
+        else if (PAttacker->objtype == TYPE_PC && PAttacker->GetMJob() == JOB_THF || PAttacker->objtype == TYPE_PC && PAttacker->GetSJob() == JOB_THF && charutils::hasTrait((CCharEntity*)PAttacker, TRAIT_ASSASSIN) &&
                 (!ignoreSneakTrickAttack) && PAttacker->StatusEffectContainer->HasStatusEffect(EFFECT_TRICK_ATTACK)) // Umeboshi "THF Sub benefits on Cactuar"
         {
             CBattleEntity* taChar = battleutils::getAvailableTrickAttackChar(PAttacker, PDefender);
@@ -5604,6 +5633,24 @@ namespace battleutils
         return damage;
     }
 
+    int32 HandleMagicStoneskin(CBattleEntity* PDefender, int32 damage)
+    {
+        int16 magicSS = PDefender->getMod(Mod::MAGIC_STONESKIN);
+        if (magicSS)
+        {
+            if (damage >= magicSS)
+            {
+                PDefender->setModifier(Mod::MAGIC_STONESKIN, 0);
+                damage = damage - magicSS;
+            }
+            else
+            {
+                PDefender->setModifier(Mod::MAGIC_STONESKIN, magicSS - damage);
+                damage = 0;
+            }
+        }
+    }
+
     int32 HandleSevereDamage(CBattleEntity* PDefender, int32 damage, bool isPhysical)
     {
         damage = HandleSevereDamageEffect(PDefender, EFFECT_MIGAWARI, damage, true);
@@ -6283,8 +6330,8 @@ namespace battleutils
         }
     }
 
-        void AddTraitsSJ(CBattleEntity* PEntity, TraitList_t* traitList, uint8 level, size_t cutoff)
-//Cactuar Umeboshi "Handling for subjob traits stacking with main job."
+            void AddTraitsSJ(CBattleEntity* PEntity, TraitList_t* traitList, uint8 level, size_t cutoff)
+    // Cactuar Umeboshi "Handling for subjob traits stacking with main job."
     {
         CCharEntity* PChar = PEntity->objtype == TYPE_PC ? static_cast<CCharEntity*>(PEntity) : nullptr;
 
@@ -6301,7 +6348,7 @@ namespace battleutils
                 bool add = true;
                 for (std::size_t j = cutoffActual; j < PEntity->TraitList.size(); ++j)
 
-                //for (uint8 j = cutoffActual; j < PEntity->TraitList.size(); ++j)
+                // for (uint8 j = cutoffActual; j < PEntity->TraitList.size(); ++j)
                 {
                     CTrait* PExistingTrait = PEntity->TraitList.at(j);
 
@@ -6359,7 +6406,6 @@ namespace battleutils
             }
         }
     }
-
 
     bool HasClaim(CBattleEntity* PEntity, CBattleEntity* PTarget)
     {

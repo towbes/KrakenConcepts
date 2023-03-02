@@ -5,7 +5,8 @@
 mixins =
 {
     require("scripts/mixins/job_special"),
-    require("scripts/mixins/rage")
+    require("scripts/mixins/rage"),
+    require("scripts/mixins/weapon_break")
 }
 require("scripts/globals/status")
 -----------------------------------
@@ -30,11 +31,32 @@ require("scripts/globals/status")
 -----------------------------------
 local entity = {}
 
+-- 2-hour map
+local JobTo2Hour = {
+    [xi.job.WHM] = xi.jsa.BENEDICTION,
+    [xi.job.BLM] = xi.jsa.MANAFONT
+}
+
 entity.onMobInitialize = function(mob)
     mob:setMobMod(xi.mobMod.IDLE_DESPAWN, 300)
+    mob:setMobMod(xi.mobMod.GIL_MIN, 3000)
+    mob:setMobMod(xi.mobMod.GIL_MAX, 5000)
+    mob:setMod(xi.mod.UFASTCAST, 50)
 end
 
 entity.onMobSpawn = function(mob)
+    mob:setLocalVar("BreakChance", 5)
+    mob:setMobMod(xi.mobMod.MAGIC_COOL, 25)
+    mob:setMod(xi.mod.FASTCAST, 25)
+    mob:setLocalVar("BLM", math.random(66,80))
+    mob:setLocalVar("BLMused", 0)
+    mob:setLocalVar("WHM", math.random(1,50))
+    mob:setLocalVar("WHMused", 0)
+    mob:setLocalVar("jobChanged", 0)
+    mob:setLocalVar("[rage]timer", 5400) -- 90 minutes
+    mob:setSpellList(296) -- Set BLM spell list
+    mob:setMobMod(xi.mobMod.NO_STANDBACK, 1)
+    mob:setMod(xi.mod.SILENCERES, 100)
     xi.mix.jobSpecial.config(mob, {
         specials =
         {
@@ -60,6 +82,13 @@ entity.onMobFight = function(mob, target)
             },
         })
     end
+
+    if mob:hasStatusEffect(xi.effect.MANAFONT) == 1 then
+        mob:setMobMod(xi.mobMod.MAGIC_COOL, 5)
+    elseif mob:hasStatusEffect(xi.effect.MANAFONT) == 0 then
+        mob:setMobMod(xi.mobMod.MAGIC_COOL, 25)
+    end
+
 end
 
 entity.onCriticalHit = function(mob)
@@ -79,6 +108,13 @@ entity.onWeaponskillHit = function(mob, attacker, weaponskill)
 
     return 0
 end
+
+entity.onMobWeaponSkill = function(target, mob, skill)
+    if skill:getID() == 1924 then
+        mob:useMobAbility(1926)
+    end
+end
+
 
 entity.onMobDeath = function(mob, killer)
 end

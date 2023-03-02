@@ -2373,6 +2373,12 @@ INSERT INTO `item_latents` VALUES (17741,23,15,6,1000);  -- Attack+15 while TP <
 INSERT INTO `item_latents` VALUES (17741,25,5,6,1000);   -- Accuracy+5 while TP <100%
 INSERT INTO `item_latents` VALUES (17741,287,6,6,1000);  -- DMG+6 while TP <100%
 
+----------------------------------------------------------
+-- Sylphid Epee
+----------------------------------------------------------
+INSERT INTO `item_latents` VALUES (17754,23,10,31,0); -- Windsday: Attack +10
+
+
 INSERT INTO `item_latents` VALUES (17759,165,7,59,20);   -- Koggelmander - Vs. vermin: Critical hit rate +7%
 
 INSERT INTO `item_latents` VALUES (17761,287,6,40,0);    -- Oberon's Rapier DMG+6 in Main hand

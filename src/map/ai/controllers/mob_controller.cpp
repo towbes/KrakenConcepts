@@ -624,8 +624,9 @@ void CMobController::Move()
         }
     }
 
-    bool  move         = PMob->PAI->PathFind->IsFollowingPath();
-    float attack_range = PMob->GetMeleeRange();
+    bool  move            = PMob->PAI->PathFind->IsFollowingPath();
+    float attack_range    = PMob->GetMeleeRange();
+    float closureDistance = attack_range - 0.2f - (static_cast<float>(PMob->getMobMod(MOBMOD_ENCROACH_TARGET)) / 10.0);
 
     if (PMob->getMobMod(MOBMOD_ATTACK_SKILL_LIST) > 0)
     {
@@ -647,7 +648,7 @@ void CMobController::Move()
         CMobEntity* posShare = (CMobEntity*)PMob->GetEntity(PMob->getMobMod(MOBMOD_SHARE_POS) + PMob->targid, TYPE_MOB);
         PMob->loc            = posShare->loc;
     }
-    else if (((currentDistance > attack_range - 0.2f) || move) && PMob->PAI->CanFollowPath())
+    else if (((currentDistance > closureDistance) || move) && PMob->PAI->CanFollowPath())
     {
         //#TODO: can this be moved to scripts entirely?
         if (PMob->getMobMod(MOBMOD_DRAW_IN) > 0)
@@ -677,18 +678,17 @@ void CMobController::Move()
                 if (!PMob->PAI->PathFind->IsFollowingPath())
                 {
                     // out of melee range, try to path towards
-                    if (currentDistance > PMob->GetMeleeRange())
+                    if (currentDistance > closureDistance)
                     {
                         // try to find path towards target
-                        PMob->PAI->PathFind->PathInRange(PTarget->loc.p, attack_range - 0.2f, PATHFLAG_WALLHACK | PATHFLAG_RUN);
+                        PMob->PAI->PathFind->PathInRange(PTarget->loc.p, closureDistance, PATHFLAG_WALLHACK | PATHFLAG_RUN);
                     }
                 }
                 else if (distanceSquared(PMob->PAI->PathFind->GetDestination(), PTarget->loc.p) > 10)
                 {
                     // try to find path towards target
-                    PMob->PAI->PathFind->PathInRange(PTarget->loc.p, attack_range - 0.2f, PATHFLAG_WALLHACK | PATHFLAG_RUN);
+                    PMob->PAI->PathFind->PathInRange(PTarget->loc.p, closureDistance, PATHFLAG_WALLHACK | PATHFLAG_RUN);
                 }
-
                 PMob->PAI->PathFind->FollowPath(m_Tick);
 
                 if (!PMob->PAI->PathFind->IsFollowingPath())

@@ -313,6 +313,9 @@ INSERT INTO `item_mods_pet` VALUES (15910,27,3,0); -- All Pets - ENMITY: 3
 -- Selemnus Belt
 INSERT INTO `item_mods_pet` VALUES (15944,163,-700,0); -- All Pets - DMGMAGIC: -700
 
+-- Dragoons Earring -- Umeboshi
+INSERT INTO `item_mods_pet` VALUES (16000,986,10,2); -- Wyvern +10 Breath Accuracy
+
 -- Pallass Shield
 INSERT INTO `item_mods_pet` VALUES (16173,1,10,0); -- All Pets - DEF: 10
 

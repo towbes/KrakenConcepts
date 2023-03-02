@@ -3130,7 +3130,7 @@ namespace charutils
 
         battleutils::AddTraits(PChar, traits::GetTraits(PChar->GetMJob()), PChar->GetMLevel());
         battleutils::AddTraitsSJ(PChar, traits::GetTraits(PChar->GetSJob()), PChar->GetSLevel(), PChar->TraitList.size());
-        // battleutils::AddTraits(PChar, traits::GetTraits(PChar->GetSJob()), PChar->GetSLevel());
+        //battleutils::AddTraits(PChar, traits::GetTraits(PChar->GetSJob()), PChar->GetSLevel());
 
         if (PChar->GetMJob() == JOB_BLU || PChar->GetSJob() == JOB_BLU)
         {

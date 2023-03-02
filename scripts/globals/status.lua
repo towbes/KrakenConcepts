@@ -1823,7 +1823,7 @@ xi.mod =
 
     DIG_BYPASS_FATIGUE      = 1074, -- Chocobo digging modifier found in "Blue Race Silks". Modifier works as a direct percent.
     BREATH_DMG_DEALT        = 1075, -- Breath damage dealt
-
+    MAGIC_STONESKIN         = 2000, -- Magic Stoneskin. Primary used for mobskill Immortal Shield.
     -- IF YOU ADD ANY NEW MODIFIER HERE, ADD IT IN src/map/modifier.h ASWELL!
 
     -- The spares take care of finding the next ID to use so long as we don't forget to list IDs that have been freed up by refactoring.
@@ -2581,6 +2581,7 @@ xi.mobMod =
     NO_REST             = 70, -- Mob cannot regain hp (e.g. re-burrowing antlions during ENM).
     LEADER              = 71, -- Used for mobs that follow a defined "leader", such as Ul'xzomit mobs.
     MAGIC_RANGE         = 72, -- magic aggro range
+    ENCROACH_TARGET     = 100, -- How close a mob will encroach on it's target, attempting to make model to model contact. Encroach distance * 10
 }
 
 -----------------------------------

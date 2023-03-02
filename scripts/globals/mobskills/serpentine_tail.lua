@@ -22,7 +22,7 @@ mobskillObject.onMobSkillCheck = function(target, mob, skill)
             return 1
         end
     elseif mob:getFamily() == 313 then -- Tinnin
-        if mob:getAnimationSub() < 2 and target:isBehind(mob, 48) then
+        if mob:getAnimationSub() < 2 and target:isBehind(mob, 96) then
             return 0
         else
             return 1

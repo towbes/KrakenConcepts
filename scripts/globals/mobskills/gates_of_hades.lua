@@ -27,6 +27,9 @@ mobskillObject.onMobSkillCheck = function(target, mob, skill)
     local mobhp = mob:getHPP()
 
     if mobhp <= 25 then
+        if (mob:getID() == 17093004) and (mob:getInstance():getStage() ~= 100) then -- Nyzul Isle Cerberus will only use this on floor 100
+            return 1
+        end
         result = 0
     end
 
@@ -36,6 +39,14 @@ end
 mobskillObject.onMobWeaponSkill = function(target, mob, skill)
     local typeEffect = xi.effect.BURN
     local power = 21
+
+    if (mob:getID() == 17093004) then -- Nyzul Isle Cerberus https://youtu.be/e7CEeeRQ8qU?t=274
+        power = 20
+        dmgmod = 0.5
+    elseif (mob:getID() == 17027485) then -- Sarameya
+        power = 40
+    end
+
 
     xi.mobskills.mobStatusEffectMove(mob, target, typeEffect, power, 3, 60)
 

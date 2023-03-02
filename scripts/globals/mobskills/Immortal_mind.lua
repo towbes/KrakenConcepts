@@ -26,7 +26,7 @@ mobskillObject.onMobWeaponSkill = function(target, mob, skill)
     end
 
     if mob:getStatusEffect(xi.effect.MAGIC_DEF_BOOST) ~= nil then
-        mabTotal = mabTotal:getPower() + 10
+        mdbTotal = mdbTotal:getPower() + 10
     end
 
     skill:setMsg(xi.mobskills.mobBuffMove(mob, typeEffect1, mabTotal, 0, 180))

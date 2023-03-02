@@ -5012,6 +5012,170 @@ INSERT INTO `mob_spell_lists` VALUES ('Slendlix_Spindlethumb',499,33,1,255); -- 
 
 -- Next Available: 500
 
+
+-- Adding Cactuar Specifics 700+ to avoid conflicts
+
+INSERT INTO `mob_spell_lists` VALUES('Kurrea', 537, 359, 1, 255);
+INSERT INTO `mob_spell_lists` VALUES('Kurrea', 537, 366, 1, 255);
+INSERT INTO `mob_spell_lists` VALUES('Kurrea', 537, 208, 1, 255);
+INSERT INTO `mob_spell_lists` VALUES('Kurrea', 537, 157, 1, 255);
+INSERT INTO `mob_spell_lists` VALUES('Kurrea', 537, 186, 1, 255);
+INSERT INTO `mob_spell_lists` VALUES('Gration', 538, 104, 1, 255);
+INSERT INTO `mob_spell_lists` VALUES('Gration', 538, 167, 1, 255);
+INSERT INTO `mob_spell_lists` VALUES('Gration', 538, 196, 1, 255);
+INSERT INTO `mob_spell_lists` VALUES('Gration', 538, 212, 1, 255);
+INSERT INTO `mob_spell_lists` VALUES('Gration', 538, 251, 1, 255);
+INSERT INTO `mob_spell_lists` VALUES('Gration', 538, 57, 1, 255);
+
+-- Ob (700)
+INSERT INTO `mob_spell_lists` VALUES('Ob', 700, 23, 1, 255); -- dia (1~255)
+INSERT INTO `mob_spell_lists` VALUES('Ob', 700, 56, 1, 255); -- slow
+INSERT INTO `mob_spell_lists` VALUES('Ob', 700, 58, 1, 255); -- paralyze
+INSERT INTO `mob_spell_lists` VALUES('Ob', 700, 254, 1, 255); -- blind
+INSERT INTO `mob_spell_lists` VALUES('Ob', 700, 3, 1, 255); -- cure iii
+INSERT INTO `mob_spell_lists` VALUES('Ob', 700, 4, 1, 255); -- cure iv
+
+-- Anantaboga (701)
+INSERT INTO `mob_spell_lists` VALUES('Anantaboga', 701, 371, 1, 255); -- Foe Requiem
+INSERT INTO `mob_spell_lists` VALUES('Anantaboga', 701, 376, 1, 255); -- Horde Lullaby
+INSERT INTO `mob_spell_lists` VALUES('Anantaboga', 701, 392, 1, 255); -- Knight's Minne
+INSERT INTO `mob_spell_lists` VALUES('Anantaboga', 701, 422, 1, 255); -- Carnage Elegy
+INSERT INTO `mob_spell_lists` VALUES('Anantaboga', 701, 466, 1, 255); -- Maiden's Virelai
+
+-- Verdelet T2ZNM
+INSERT INTO `mob_spell_lists` VALUES('Verdelet', 702, 146, 1, 255); -- Fire 3
+INSERT INTO `mob_spell_lists` VALUES('Verdelet', 702, 147, 1, 255); -- Fire 4
+INSERT INTO `mob_spell_lists` VALUES('Verdelet', 702, 175, 1, 255); -- Firaga 2
+INSERT INTO `mob_spell_lists` VALUES('Verdelet', 702, 176, 1, 255); -- Firaga 3
+INSERT INTO `mob_spell_lists` VALUES('Verdelet', 702, 151, 1, 255); -- Blizzard 3
+INSERT INTO `mob_spell_lists` VALUES('Verdelet', 702, 152, 1, 255); -- Blizzard 4
+INSERT INTO `mob_spell_lists` VALUES('Verdelet', 702, 180, 1, 255); -- Blizzaga 2
+INSERT INTO `mob_spell_lists` VALUES('Verdelet', 702, 181, 1, 255); -- Blizzaga 3
+INSERT INTO `mob_spell_lists` VALUES('Verdelet', 702, 161, 1, 255); -- Stone 3
+INSERT INTO `mob_spell_lists` VALUES('Verdelet', 702, 162, 1, 255); -- Stone 4
+INSERT INTO `mob_spell_lists` VALUES('Verdelet', 702, 190, 1, 255); -- Stonega 2
+INSERT INTO `mob_spell_lists` VALUES('Verdelet', 702, 191, 1, 255); -- Stonega 3
+INSERT INTO `mob_spell_lists` VALUES('Verdelet', 702, 166, 1, 255); -- Thunder 3
+INSERT INTO `mob_spell_lists` VALUES('Verdelet', 702, 167, 1, 255); -- Thunder 4
+INSERT INTO `mob_spell_lists` VALUES('Verdelet', 702, 195, 1, 255); -- Thundaga 2
+INSERT INTO `mob_spell_lists` VALUES('Verdelet', 702, 196, 1, 255); -- Thundaga 3
+INSERT INTO `mob_spell_lists` VALUES('Verdelet', 702, 171, 1, 255); -- Water 3
+INSERT INTO `mob_spell_lists` VALUES('Verdelet', 702, 172, 1, 255); -- Water 4
+INSERT INTO `mob_spell_lists` VALUES('Verdelet', 702, 200, 1, 255); -- Waterga 2
+INSERT INTO `mob_spell_lists` VALUES('Verdelet', 702, 201, 1, 255); -- Waterga 3
+INSERT INTO `mob_spell_lists` VALUES('Verdelet', 702, 156, 1, 255); -- Aero 3
+INSERT INTO `mob_spell_lists` VALUES('Verdelet', 702, 157, 1, 255); -- Aero 4
+INSERT INTO `mob_spell_lists` VALUES('Verdelet', 702, 185, 1, 255); -- Aeroga 2
+INSERT INTO `mob_spell_lists` VALUES('Verdelet', 702, 186, 1, 255); -- Aeroga 3
+
+-- Verdelet T2ZNM (Broken Horn)
+INSERT INTO `mob_spell_lists` VALUES('Verdelet_NoHorn', 703, 145, 1, 255); -- Fire 2
+INSERT INTO `mob_spell_lists` VALUES('Verdelet_NoHorn', 703, 174, 1, 255); -- Firaga 1 
+INSERT INTO `mob_spell_lists` VALUES('Verdelet_NoHorn', 703, 150, 1, 255); -- Blizzard 2
+INSERT INTO `mob_spell_lists` VALUES('Verdelet_NoHorn', 703, 179, 1, 255); -- Blizzaga 1
+INSERT INTO `mob_spell_lists` VALUES('Verdelet_NoHorn', 703, 160, 1, 255); -- Stone 2
+INSERT INTO `mob_spell_lists` VALUES('Verdelet_NoHorn', 703, 189, 1, 255); -- Stonega 1
+INSERT INTO `mob_spell_lists` VALUES('Verdelet_NoHorn', 703, 165, 1, 255); -- Thunder 2
+INSERT INTO `mob_spell_lists` VALUES('Verdelet_NoHorn', 703, 194, 1, 255); -- Thundaga 1
+INSERT INTO `mob_spell_lists` VALUES('Verdelet_NoHorn', 703, 170, 1, 255); -- Water 2
+INSERT INTO `mob_spell_lists` VALUES('Verdelet_NoHorn', 703, 199, 1, 255); -- Waterga 1
+INSERT INTO `mob_spell_lists` VALUES('Verdelet_NoHorn', 703, 155, 1, 255); -- Aero 2
+INSERT INTO `mob_spell_lists` VALUES('Verdelet_NoHorn', 703, 184, 1, 255); -- Aeroga 1
+
+-- Mahjlaef
+INSERT INTO `mob_spell_lists` VALUES('Mahjlaef', 704, 146, 1, 255); -- Fire 3
+INSERT INTO `mob_spell_lists` VALUES('Mahjlaef', 704, 151, 1, 255); -- Bliz 3
+INSERT INTO `mob_spell_lists` VALUES('Mahjlaef', 704, 161, 1, 255); -- Stone 3
+INSERT INTO `mob_spell_lists` VALUES('Mahjlaef', 704, 166, 1, 255); -- Thun 3
+INSERT INTO `mob_spell_lists` VALUES('Mahjlaef', 704, 171, 1, 255); -- Water 3
+INSERT INTO `mob_spell_lists` VALUES('Mahjlaef', 704, 156, 1, 255); -- Aero 3
+INSERT INTO `mob_spell_lists` VALUES('Mahjlaef', 704, 259, 1, 255); -- Sleep 2
+INSERT INTO `mob_spell_lists` VALUES('Mahjlaef', 704, 25, 1, 255); -- Dia 3
+INSERT INTO `mob_spell_lists` VALUES('Mahjlaef', 704, 79, 1, 255); --  Slow 2
+INSERT INTO `mob_spell_lists` VALUES('Mahjlaef', 704, 80, 1, 255); -- Para 2
+INSERT INTO `mob_spell_lists` VALUES('Mahjlaef', 704, 246, 1, 255); -- Drain 2
+INSERT INTO `mob_spell_lists` VALUES('Mahjlaef', 704, 248, 1, 255); -- Aspir 2
+INSERT INTO `mob_spell_lists` VALUES('Mahjlaef_2Shield', 705, 176, 1, 255); -- Fga3
+INSERT INTO `mob_spell_lists` VALUES('Mahjlaef_2Shield', 705, 181, 1, 255); -- Bga3
+INSERT INTO `mob_spell_lists` VALUES('Mahjlaef_2Shield', 705, 186, 1, 255); -- Aga3
+INSERT INTO `mob_spell_lists` VALUES('Mahjlaef_2Shield', 705, 191, 1, 255); -- Sga3
+INSERT INTO `mob_spell_lists` VALUES('Mahjlaef_2Shield', 705, 196, 1, 255); -- Tga3
+INSERT INTO `mob_spell_lists` VALUES('Mahjlaef_2Shield', 705, 201, 1, 255); -- Wga3
+INSERT INTO `mob_spell_lists` VALUES('Mahjlaef_2Shield', 705, 205, 1, 255); -- Flare2
+INSERT INTO `mob_spell_lists` VALUES('Mahjlaef_2Shield', 705, 207, 1, 255); -- Freeze2
+INSERT INTO `mob_spell_lists` VALUES('Mahjlaef_2Shield', 705, 209, 1, 255); -- Tornado2
+INSERT INTO `mob_spell_lists` VALUES('Mahjlaef_2Shield', 705, 211, 1, 255); -- Quake2
+INSERT INTO `mob_spell_lists` VALUES('Mahjlaef_2Shield', 705, 213, 1, 255); -- Burst2
+INSERT INTO `mob_spell_lists` VALUES('Mahjlaef_2Shield', 705, 215, 1, 255); -- Flood2
+INSERT INTO `mob_spell_lists` VALUES('Mahjlaef_2Shield', 705, 357, 1, 255); -- Slowga
+INSERT INTO `mob_spell_lists` VALUES('Mahjlaef_2Shield', 705, 359, 1, 255); -- Silencga
+INSERT INTO `mob_spell_lists` VALUES('Mahjlaef_2Shield', 705, 364, 1, 255); -- Sleepga 2
+INSERT INTO `mob_spell_lists` VALUES('Mahjlaef_1Shield', 706, 175, 1, 255); -- Fga2
+INSERT INTO `mob_spell_lists` VALUES('Mahjlaef_1Shield', 706, 180, 1, 255); -- Bga2
+INSERT INTO `mob_spell_lists` VALUES('Mahjlaef_1Shield', 706, 185, 1, 255); -- Aga2
+INSERT INTO `mob_spell_lists` VALUES('Mahjlaef_1Shield', 706, 190, 1, 255); -- Sga2
+INSERT INTO `mob_spell_lists` VALUES('Mahjlaef_1Shield', 706, 195, 1, 255); -- Tga2
+INSERT INTO `mob_spell_lists` VALUES('Mahjlaef_1Shield', 706, 200, 1, 255); -- Wga2
+INSERT INTO `mob_spell_lists` VALUES('Mahjlaef_1Shield', 706, 204, 1, 255); -- Flare
+INSERT INTO `mob_spell_lists` VALUES('Mahjlaef_1Shield', 706, 206, 1, 255); -- Freeze
+INSERT INTO `mob_spell_lists` VALUES('Mahjlaef_1Shield', 706, 208, 1, 255); -- Tornado
+INSERT INTO `mob_spell_lists` VALUES('Mahjlaef_1Shield', 706, 210, 1, 255); -- Quake
+INSERT INTO `mob_spell_lists` VALUES('Mahjlaef_1Shield', 706, 212, 1, 255); -- Burst
+INSERT INTO `mob_spell_lists` VALUES('Mahjlaef_1Shield', 706, 214, 1, 255); -- Flood
+INSERT INTO `mob_spell_lists` VALUES('Mahjlaef_1Shield', 706, 34, 1, 255); -- Diaga2
+INSERT INTO `mob_spell_lists` VALUES('Mahjlaef_1Shield', 706, 273, 1, 255); -- Sleepga
+
+INSERT INTO `mob_spell_lists` VALUES('Achamoth', 707, 358, 1, 255); -- Hastega
+INSERT INTO `mob_spell_lists` VALUES('Achamoth', 707, 129, 1, 255); -- Protectra V 
+INSERT INTO `mob_spell_lists` VALUES('Achamoth', 707, 134, 1, 255); -- Shellra V
+INSERT INTO `mob_spell_lists` VALUES('Achamoth', 707, 10, 1, 255); -- Curaga IV
+INSERT INTO `mob_spell_lists` VALUES('Achamoth', 707, 14, 1, 255); -- Poisona
+INSERT INTO `mob_spell_lists` VALUES('Achamoth', 707, 15, 1, 255); -- Paralyna
+INSERT INTO `mob_spell_lists` VALUES('Achamoth', 707, 16, 1, 255); -- Blindna
+INSERT INTO `mob_spell_lists` VALUES('Achamoth', 707, 19, 1, 255); -- Viruna
+INSERT INTO `mob_spell_lists` VALUES('Achamoth', 707, 20, 1, 255); -- Cursna
+INSERT INTO `mob_spell_lists` VALUES('Achamoth', 707, 143, 1, 255); -- Erase
+INSERT INTO `mob_spell_lists` VALUES('Achamoth', 707, 21, 1, 255); -- Holy
+INSERT INTO `mob_spell_lists` VALUES('Achamoth', 707, 39, 1, 255); -- Banishga 2
+
+INSERT INTO `mob_spell_lists` VALUES('Armed_Gears_Fire', 708, 146, 1, 255); -- Fire 3
+INSERT INTO `mob_spell_lists` VALUES('Armed_Gears_Earth', 709, 161, 1, 255); -- Stone 3
+INSERT INTO `mob_spell_lists` VALUES('Armed_Gears_Earth', 709, 54, 1, 255); -- Stoneskin
+INSERT INTO `mob_spell_lists` VALUES('Armed_Gears_Water', 710, 171, 1, 255); -- Water 3
+INSERT INTO `mob_spell_lists` VALUES('Armed_Gears_Water', 710, 221, 1, 255); -- Poison 2
+INSERT INTO `mob_spell_lists` VALUES('Armed_Gears_Wind', 711, 156, 1, 255); -- Aero 3
+INSERT INTO `mob_spell_lists` VALUES('Armed_Gears_Wind', 711, 59, 1, 255); -- Silence
+INSERT INTO `mob_spell_lists` VALUES('Armed_Gears_Wind', 711, 53, 1, 255); -- Blink
+INSERT INTO `mob_spell_lists` VALUES('Armed_Gears_Ice', 712, 151, 1, 255); -- Blizzard 3
+INSERT INTO `mob_spell_lists` VALUES('Armed_Gears_Ice', 712, 58, 1, 255); -- Paralyze
+INSERT INTO `mob_spell_lists` VALUES('Armed_Gears_Lightning', 713, 166, 1, 255); -- Thunder 3
+INSERT INTO `mob_spell_lists` VALUES('Armed_Gears_Light', 714, 106, 1, 255); -- Phalnax
+INSERT INTO `mob_spell_lists` VALUES('Armed_Gears_Light', 714, 25, 1, 255); -- Dia 3
+INSERT INTO `mob_spell_lists` VALUES('Armed_Gears_Light', 714, 30, 1, 255); -- Banish 3
+INSERT INTO `mob_spell_lists` VALUES('Armed_Gears_Dark', 715, 232, 1, 255); -- Bio 3
+INSERT INTO `mob_spell_lists` VALUES('Armed_Gears_Dark', 715, 254, 1, 255); -- Blind
+INSERT INTO `mob_spell_lists` VALUES('Armed_Gears_Dark', 715, 259, 1, 255); -- Sleep 2
+INSERT INTO `mob_spell_lists` VALUES('Armed_Gears_Dark', 715, 361, 1, 255); -- Blindga
+INSERT INTO `mob_spell_lists` VALUES('Armed_Gears_Enspells', 716, 100, 1, 255); -- Enfire
+INSERT INTO `mob_spell_lists` VALUES('Armed_Gears_Enspells', 716, 101, 1, 255); -- EnBlizzard
+INSERT INTO `mob_spell_lists` VALUES('Armed_Gears_Enspells', 716, 102, 1, 255); -- Enaero
+INSERT INTO `mob_spell_lists` VALUES('Armed_Gears_Enspells', 716, 103, 1, 255); -- Enstone
+INSERT INTO `mob_spell_lists` VALUES('Armed_Gears_Enspells', 716, 104, 1, 255); -- Enthunder
+INSERT INTO `mob_spell_lists` VALUES('Armed_Gears_Enspells', 716, 105, 1, 255); -- Enwater
+
+INSERT INTO `mob_spell_lists` VALUES('Reacton_Phase2', 717, 144, 1, 255); -- fire
+INSERT INTO `mob_spell_lists` VALUES('Reacton_Phase2', 717, 145, 1, 255); -- fire_ii
+INSERT INTO `mob_spell_lists` VALUES('Reacton_Phase2', 717, 146, 1, 255); -- fire_iii
+INSERT INTO `mob_spell_lists` VALUES('Reacton_Phase2', 717, 174, 1, 255); -- firaga
+INSERT INTO `mob_spell_lists` VALUES('Reacton_Phase2', 717, 249, 1, 255); -- blaze_spikes
+INSERT INTO `mob_spell_lists` VALUES('Reacton_Phase3', 718, 146, 1, 255); -- fire_iii
+INSERT INTO `mob_spell_lists` VALUES('Reacton_Phase3', 718, 147, 1, 255); -- fire_iv
+INSERT INTO `mob_spell_lists` VALUES('Reacton_Phase3', 718, 176, 1, 255); -- firaga_iii
+INSERT INTO `mob_spell_lists` VALUES('Reacton_Phase3', 718, 205, 1, 255); -- flare_ii
+
+
+
+
 /*!40000 ALTER TABLE `mob_spell_lists` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;

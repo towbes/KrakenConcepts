@@ -364,6 +364,19 @@ xi.mobskills.mobMagicalMove = function(mob, target, skill, damage, element, dmgm
 
     finaldmg = finaldmg * resist * magicDefense
 
+    --Handle Magic Stoneskin - Umeboshi
+    local magicSS = target:getMod(xi.mod.MAGIC_STONESKIN)
+    if magicSS > 0 then
+        if finaldmg >= magicSS then
+            target:setMod(xi.mod.MAGIC_STONESKIN, 0)
+            finaldmg = finaldmg - magicSS
+        else
+            target:setMod(xi.mod.MAGIC_STONESKIN, magicSS - finaldmg)
+            finaldmg = 0
+        end
+    end
+
+
     returninfo.dmg = finaldmg
 
     return returninfo
@@ -514,6 +527,19 @@ xi.mobskills.mobBreathMove = function(mob, target, percent, base, element, cap)
     if damage > 0 then
         damage = utils.clamp(utils.stoneskin(target, damage), -99999, 99999)
     end
+
+    --Handle Magic Stoneskin - Umeboshi
+    local magicSS = target:getMod(xi.mod.MAGIC_STONESKIN)
+    if magicSS > 0 then
+        if damage >= magicSS then
+            target:setMod(xi.mod.MAGIC_STONESKIN, 0)
+            damage = damage - magicSS
+        else
+            target:setMod(xi.mod.MAGIC_STONESKIN, magicSS - damage)
+            damage = 0
+        end
+    end
+
 
     return damage
 end

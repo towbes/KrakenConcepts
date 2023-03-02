@@ -10,6 +10,9 @@ local entity = {}
 
 entity.onMobInitialize = function(mob)
     mob:setMobMod(xi.mobMod.IDLE_DESPAWN, 300)
+    mob:setMod(xi.mod.MOVE, -15)
+    mob:setMobMod(xi.mobMod.GIL_MIN, 3000)
+    mob:setMobMod(xi.mobMod.GIL_MAX, 5000)
 end
 
 entity.onMobSpawn = function(mob)
