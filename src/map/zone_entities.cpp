@@ -1162,7 +1162,7 @@ void CZoneEntities::PushPacket(CBaseEntity* PEntity, GLOBAL_MESSAGE_TYPE message
         // Ensure this packet is not despawning us..
         if (packet->ref<uint8>(0x0A) != 0x20)
         {
-            delete packet;
+            destroy(packet);
             return;
         }
     }
@@ -1287,7 +1287,7 @@ void CZoneEntities::PushPacket(CBaseEntity* PEntity, GLOBAL_MESSAGE_TYPE message
         }
         // clang-format on
     }
-    delete packet;
+    destroy(packet);
 }
 
 void CZoneEntities::WideScan(CCharEntity* PChar, uint16 radius)
@@ -1372,7 +1372,7 @@ void CZoneEntities::ZoneServer(time_point tick, bool check_trigger_areas)
             it->second = nullptr;
             m_mobList.erase(it++);
             dynamicTargIdsToDelete.push_back(std::make_pair(PMob->targid, server_clock::now()));
-            delete PMob;
+            destroy(PMob);
             continue;
         }
 
@@ -1419,8 +1419,7 @@ void CZoneEntities::ZoneServer(time_point tick, bool check_trigger_areas)
                 }
             }
 
-            delete it->second;
-            it->second = nullptr;
+            destroy(it->second);
             dynamicTargIdsToDelete.push_back({ it->first, server_clock::now() });
 
             m_npcList.erase(it++);
@@ -1436,15 +1435,11 @@ void CZoneEntities::ZoneServer(time_point tick, bool check_trigger_areas)
         //     : this way, but we need to do this to keep allies working (for now).
         if (auto* PPet = static_cast<CPetEntity*>(it->second))
         {
-            PPet->PRecastContainer->Check();
-            PPet->StatusEffectContainer->CheckEffectsExpiry(tick);
-            if (tick > m_EffectCheckTime)
-            {
-                PPet->StatusEffectContainer->TickRegen(tick);
-                PPet->StatusEffectContainer->TickEffects(tick);
-            }
-            PPet->PAI->Tick(tick);
-
+            /*
+             * Pets specifically need to be removed prior to evaluating their AI Tick
+             * to prevent a number of issues which can result as a Pet having a
+             * deleted/nullptr'd PMaster
+             */
             if (PPet->status == STATUS_TYPE::DISAPPEAR)
             {
                 for (auto PMobIt : m_mobList)
@@ -1455,8 +1450,7 @@ void CZoneEntities::ZoneServer(time_point tick, bool check_trigger_areas)
 
                 if (PPet->getPetType() != PET_TYPE::AUTOMATON || !PPet->PMaster)
                 {
-                    delete it->second;
-                    it->second = nullptr;
+                    destroy(it->second);
                 }
 
                 dynamicTargIdsToDelete.push_back(std::make_pair(it->first, server_clock::now()));
@@ -1464,6 +1458,15 @@ void CZoneEntities::ZoneServer(time_point tick, bool check_trigger_areas)
                 m_petList.erase(it++);
                 continue;
             }
+
+            PPet->PRecastContainer->Check();
+            PPet->StatusEffectContainer->CheckEffectsExpiry(tick);
+            if (tick > m_EffectCheckTime)
+            {
+                PPet->StatusEffectContainer->TickRegen(tick);
+                PPet->StatusEffectContainer->TickEffects(tick);
+            }
+            PPet->PAI->Tick(tick);
         }
         it++;
     }
@@ -1503,8 +1506,7 @@ void CZoneEntities::ZoneServer(time_point tick, bool check_trigger_areas)
                     }
                 }
 
-                delete it->second;
-                it->second = nullptr;
+                destroy(it->second);
                 dynamicTargIdsToDelete.push_back(std::make_pair(it->first, server_clock::now()));
 
                 m_trustList.erase(it++);
