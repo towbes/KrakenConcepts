@@ -178,6 +178,22 @@ function utils.stoneskin(target, dmg)
     return dmg
 end
 
+function utils.magicstoneskin(target, dmg)
+    -- handling magic stoneskin - Umeboshi
+    local magicSS = target:getMod(xi.mod.MAGIC_STONESKIN)
+    if magicSS > 0 then
+        if dmg >= magicSS then
+            target:setMod(xi.mod.MAGIC_STONESKIN, 0)
+            dmg = dmg - magicSS
+        else
+            target:setMod(xi.mod.MAGIC_STONESKIN, magicSS - dmg)
+            dmg = 0
+        end
+    end
+    return dmg
+end
+
+
 -- returns reduced magic damage from RUN buff, "One for All"
 function utils.oneforall(target, dmg)
     if dmg > 0 then
@@ -747,3 +763,19 @@ end
 function utils.angleToRotation(radians)
     return radians * ffxiAngleToRotationFactor
 end
+
+ -- checks if mob is in any stage of using a mobskill or casting a spell or under the status effects listed below
+ -- prevents multiple abilities/actions to be called at the same time
+ function utils.canUseAbility(mob)
+    local act = mob:getCurrentAction()
+    if act == xi.act.MOBABILITY_START or act == xi.act.MOBABILITY_USING or act == xi.act.MOBABILITY_FINISH
+    or act == xi.act.MAGIC_START or act == xi.act.MAGIC_CASTING or mob:getStatusEffect(xi.effect.STUN) ~= nil
+    or mob:getStatusEffect(xi.effect.PETRIFICATION) ~= nil or mob:getStatusEffect(xi.effect.TERROR) ~= nil
+    or mob:getStatusEffect(xi.effect.SLEEP_I) ~= nil or mob:getStatusEffect(xi.effect.SLEEP_II) ~= nil
+    or mob:getStatusEffect(xi.effect.AMNESIA) ~= nil or mob:getStatusEffect(xi.effect.LULLABY) ~= nil then
+        return false
+    end
+
+    return true
+end
+

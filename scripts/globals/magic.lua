@@ -728,7 +728,19 @@ function finalMagicAdjustments(caster, target, spell, dmg)
     -- handle one for all
     dmg = utils.oneforall(target, dmg)
 
-    --handling stoneskin
+    -- handling magic stoneskin - Umeboshi
+    local magicSS = target:getMod(xi.mod.MAGIC_STONESKIN)
+    if magicSS > 0 then
+        if dmg >= magicSS then
+            target:setMod(xi.mod.MAGIC_STONESKIN, 0)
+            dmg = dmg - magicSS
+        else
+            target:setMod(xi.mod.MAGIC_STONESKIN, magicSS - dmg)
+            dmg = 0
+        end
+    end
+
+    -- handling stoneskin
     dmg = utils.stoneskin(target, dmg)
     dmg = utils.clamp(dmg, -99999, 99999)
 
@@ -760,6 +772,18 @@ function finalMagicNonSpellAdjustments(caster, target, ele, dmg)
 
     -- handle one for all
     dmg = utils.oneforall(target, dmg)
+
+    -- handling magic stoneskin - Umeboshi
+    local magicSS = target:getMod(xi.mod.MAGIC_STONESKIN)
+    if magicSS > 0 then
+        if dmg >= magicSS then
+            target:setMod(xi.mod.MAGIC_STONESKIN, 0)
+            dmg = dmg - magicSS
+        else
+            target:setMod(xi.mod.MAGIC_STONESKIN, magicSS - dmg)
+            dmg = 0
+        end
+    end
 
     -- handling stoneskin
     dmg = utils.stoneskin(target, dmg)

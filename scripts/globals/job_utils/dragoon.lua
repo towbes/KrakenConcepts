@@ -493,8 +493,12 @@ xi.job_utils.dragoon.useAngon = function(player, target, ability)
     end
 
     target:updateClaim(player)
-    player:removeAmmo()
 
+-- if dragoon's earring equipped, chance to not consume angon
+    local preserveAmmoChance = (player:getEquipID(xi.slot.EAR1) == 16000 or player:getEquipID(xi.slot.EAR2) == 16000) and 25 or 0
+    if math.random(100) >= preserveAmmoChance then
+        player:removeAmmo()
+    end
     return typeEffect
 end
 

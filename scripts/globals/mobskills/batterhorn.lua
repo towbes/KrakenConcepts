@@ -14,7 +14,9 @@ require("scripts/globals/mobskills")
 local mobskillObject = {}
 
 mobskillObject.onMobSkillCheck = function(target, mob, skill)
-    return 0
+    if not target:isInfront(mob, 96) then
+        return 1
+    end
 end
 
 mobskillObject.onMobWeaponSkill = function(target, mob, skill)

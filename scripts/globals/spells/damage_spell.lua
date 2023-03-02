@@ -873,6 +873,11 @@ xi.spells.damage.useDamageSpell = function(caster, target, spell)
         finalDamage = utils.clamp(utils.oneforall(target, finalDamage), 0, 99999)
     end
 
+    -- Handle Magic Stoneskin
+    if finalDamage > 0 then
+        finalDamage = utils.clamp(utils.magicstoneskin(target, finalDamage), -99999, 99999)
+    end
+
     -- Handle Stoneskin
     if finalDamage > 0 then
         finalDamage = utils.clamp(utils.stoneskin(target, finalDamage), -99999, 99999)

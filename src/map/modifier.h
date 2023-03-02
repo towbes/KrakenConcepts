@@ -956,7 +956,7 @@ enum class Mod
 
     DIG_BYPASS_FATIGUE = 1074, // Chocobo digging modifier found in "Blue Race Silks". Modifier works as a direct percent.
     BREATH_DMG_DEALT   = 1075, // Breath damage dealt
-
+    MAGIC_STONESKIN    = 2000
     // IF YOU ADD ANY NEW MODIFIER HERE, ADD IT IN scripts/globals/status.lua ASWELL!
 
     // The spares take care of finding the next ID to use so long as we don't forget to list IDs that have been freed up by refactoring.
@@ -971,6 +971,7 @@ enum class Mod
     // 261 to 280
     //
     // SPARE = 1076 and onward
+        //2000+ using for Cactuar to avoid conflicts. - Umeboshi
 };
 
 // temporary workaround for using enum class as unordered_map key until compilers support it
