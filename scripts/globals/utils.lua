@@ -764,6 +764,15 @@ function utils.angleToRotation(radians)
     return radians * ffxiAngleToRotationFactor
 end
 
+-- Returns inline value  boolean      any     any
+function utils.ternary(conditional, trueVal, falseVal)
+    if conditional then
+        return trueVal
+    end
+
+    return falseVal
+end
+
  -- checks if mob is in any stage of using a mobskill or casting a spell or under the status effects listed below
  -- prevents multiple abilities/actions to be called at the same time
  function utils.canUseAbility(mob)

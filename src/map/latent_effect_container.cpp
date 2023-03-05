@@ -159,6 +159,7 @@ void CLatentEffectContainer::CheckLatentsMP()
         switch (latentEffect.GetConditionsID())
         {
             case LATENT::MP_UNDER_PERCENT:
+            case LATENT::MP_OVER_PERCENT:
             case LATENT::MP_UNDER:
             case LATENT::MP_OVER:
             case LATENT::WEAPON_DRAWN_MP_OVER:
@@ -689,6 +690,9 @@ bool CLatentEffectContainer::ProcessLatentEffect(CLatentEffect& latentEffect)
         case LATENT::MP_UNDER_PERCENT:
             expression = m_POwner->health.maxmp && ((float)m_POwner->health.mp / m_POwner->health.maxmp) * 100 <= latentEffect.GetConditionsValue();
             break;
+        case LATENT::MP_OVER_PERCENT:
+            expression = m_POwner->health.maxmp && ((float)m_POwner->health.mp / m_POwner->health.maxmp) * 100 >= latentEffect.GetConditionsValue();
+            break;
         case LATENT::MP_UNDER:
             expression = m_POwner->health.mp <= latentEffect.GetConditionsValue();
             break;
@@ -769,7 +773,9 @@ bool CLatentEffectContainer::ProcessLatentEffect(CLatentEffect& latentEffect)
                     if (member->PPet != nullptr)
                     {
                         auto* PPet = (CPetEntity*)member->PPet;
-                        if (PPet->m_PetID == latentEffect.GetConditionsValue() && PPet->PAI->IsSpawned())
+                        //if (PPet->m_PetID == latentEffect.GetConditionsValue() && PPet->PAI->IsSpawned())
+                          if (PPet->PAI->IsSpawned() &&  PPet->m_PetID < 21 && // is an avatar
+                             (PPet->m_PetID == latentEffect.GetConditionsValue() || latentEffect.GetConditionsValue() == 21)) // avatar id matches or latent condition == 21 to match any avatar
                         {
                             expression = true;
                             break;
@@ -780,7 +786,9 @@ bool CLatentEffectContainer::ProcessLatentEffect(CLatentEffect& latentEffect)
             else if (m_POwner->PParty == nullptr && m_POwner->PPet != nullptr)
             {
                 auto* PPet = (CPetEntity*)m_POwner->PPet;
-                if (PPet->m_PetID == latentEffect.GetConditionsValue() && !PPet->isDead())
+                //if (PPet->m_PetID == latentEffect.GetConditionsValue() && !PPet->isDead())
+                  if (!PPet->isDead() && PPet->m_PetID < 21 && // is an avatar
+                     (PPet->m_PetID == latentEffect.GetConditionsValue() || latentEffect.GetConditionsValue() == 21)) // avatar id matches or latent condition == 21 to match any avatar
                 {
                     expression = true;
                 }
@@ -1138,6 +1146,9 @@ bool CLatentEffectContainer::ProcessLatentEffect(CLatentEffect& latentEffect)
             break;
         case LATENT::EQUIPPED_IN_SLOT:
             expression = latentEffect.GetSlot() == latentEffect.GetConditionsValue();
+            break;
+        case LATENT::CITIZEN_OF_NATION:
+            expression = m_POwner->profile.nation == latentEffect.GetConditionsValue();
             break;
         default:
             latentFound = false;

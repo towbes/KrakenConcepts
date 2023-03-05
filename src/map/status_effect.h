@@ -745,6 +745,14 @@ enum EFFECT
     EFFECT_HYSTERIA            = 804, // Used for Hysteroanima to stop after readying a weaponskill with no msg.
     EFFECT_TOMAHAWK            = 805, // Silent status effect inflicted by a Warrior using the "Tomahawk" job ability
     EFFECT_NUKE_WALL           = 806, // Custom effect for NM type mobs only. Applied by elemental magic damage sources
+    EFFECT_FIRE_EEM_MOD        = 900,
+    EFFECT_ICE_EEM_MOD         = 901,
+    EFFECT_WIND_EEM_MOD        = 902,
+    EFFECT_EARTH_EEM_MOD       = 903,
+    EFFECT_THUNDER_EEM_MOD     = 904,
+    EFFECT_WATER_EEM_MOD       = 905,
+    EFFECT_LIGHT_EEM_MOD       = 906,
+    EFFECT_DARK_EEM_MOD        = 907,
 
     // 807-1022
     // EFFECT_PLACEHOLDER           = 1023 // The client dat file seems to have only this many "slots", results of exceeding that are untested.

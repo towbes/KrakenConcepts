@@ -417,7 +417,7 @@ bool CAttack::CheckCounter()
             meritCounter = ((CCharEntity*)m_victim)->PMeritPoints->GetMeritValue(MERIT_COUNTER_RATE, (CCharEntity*)m_victim);
         }
 
-                if (m_victim->GetSJob() == JOB_MNK || m_victim->GetSJob() == JOB_PUP) //Umeboshi "Merits for subjob"
+        if (m_victim->GetSJob() == JOB_MNK || m_victim->GetSJob() == JOB_PUP) //Umeboshi "Merits for subjob"
         {
             meritCounter = ((CCharEntity*)m_victim)->PMeritPoints->GetMeritValue(MERIT_COUNTER_RATE, (CCharEntity*)m_victim);
         }
@@ -550,6 +550,11 @@ void CAttack::ProcessDamage()
         SetAttackType(PHYSICAL_ATTACK_TYPE::SAMBA);
     }
 
+   // if (m_attacker->objtype == TYPE_PET && m_attacker->GetBattleTarget() != nullptr && m_attacker->GetBattleTarget()->getMod(Mod::PET_DMG_TAKEN_PHYSICAL) != 0)
+   // {
+   //     m_damage *= m_attacker->GetBattleTarget()->getMod(Mod::PET_DMG_TAKEN_PHYSICAL) / 100;
+   // }
+
     // Get damage multipliers.
     m_damage =
         attackutils::CheckForDamageMultiplier((CCharEntity*)m_attacker, dynamic_cast<CItemWeapon*>(m_attacker->m_Weapons[slot]), m_damage, m_attackType, slot);
@@ -566,7 +571,58 @@ void CAttack::ProcessDamage()
         m_damage += (int32)(m_damage * ((100 + (m_attacker->getMod(Mod::AUGMENTS_TA))) / 100.0f));
     }
 
-    
+        // Circle Effects
+    if (m_victim->objtype == TYPE_MOB && m_damage > 0)
+    {
+        uint16 circlemult = 100;
+
+        switch (m_victim->m_EcoSystem)
+        {
+            case ECOSYSTEM::AMORPH:
+                circlemult += m_attacker->getMod(Mod::AMORPH_CIRCLE);
+                break;
+            case ECOSYSTEM::AQUAN:
+                circlemult += m_attacker->getMod(Mod::AQUAN_CIRCLE);
+                break;
+            case ECOSYSTEM::ARCANA:
+                circlemult += m_attacker->getMod(Mod::ARCANA_CIRCLE);
+                break;
+            case ECOSYSTEM::BEAST:
+                circlemult += m_attacker->getMod(Mod::BEAST_CIRCLE);
+                break;
+            case ECOSYSTEM::BIRD:
+                circlemult += m_attacker->getMod(Mod::BIRD_CIRCLE);
+                break;
+            case ECOSYSTEM::DEMON:
+                circlemult += m_attacker->getMod(Mod::DEMON_CIRCLE);
+                break;
+            case ECOSYSTEM::DRAGON:
+                circlemult += m_attacker->getMod(Mod::DRAGON_CIRCLE);
+                break;
+            case ECOSYSTEM::LIZARD:
+                circlemult += m_attacker->getMod(Mod::LIZARD_CIRCLE);
+                break;
+            case ECOSYSTEM::LUMINION:
+                circlemult += m_attacker->getMod(Mod::LUMINION_CIRCLE);
+                break;
+            case ECOSYSTEM::LUMINIAN:
+                circlemult += m_attacker->getMod(Mod::LUMINIAN_CIRCLE);
+                break;
+            case ECOSYSTEM::PLANTOID:
+                circlemult += m_attacker->getMod(Mod::PLANTOID_CIRCLE);
+                break;
+            case ECOSYSTEM::UNDEAD:
+                circlemult += m_attacker->getMod(Mod::UNDEAD_CIRCLE);
+                break;
+            case ECOSYSTEM::VERMIN:
+                circlemult += m_attacker->getMod(Mod::VERMIN_CIRCLE);
+                break;
+            default:
+                break;
+        }
+        m_damage = m_damage * circlemult / 100;
+    }
+
 
 
 
