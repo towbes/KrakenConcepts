@@ -292,6 +292,10 @@ xi.summon.avatarPhysicalMove = function(avatar, target, skill, numberofhits, acc
             numHitsProcessed = numHitsProcessed + 1
         end
 
+        --if target:getMod(xi.mod.PET_DMG_TAKEN_PHYSICAL) ~= 0 then
+        --    finaldmg = finaldmg * (target:getMod(xi.mod.PET_DMG_TAKEN_PHYSICAL) / 100)
+        --end    
+
         -- apply ftp bonus
         if tpeffect == xi.mobskills.magicalTpBonus.DMG_BONUS then
             finaldmg = finaldmg * avatarFTP(avatar:getTP(), mtp100, mtp200, mtp300)

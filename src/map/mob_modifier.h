@@ -101,7 +101,18 @@ enum MOBMODIFIER : int
     MOBMOD_NO_REST             = 70, // Mob cannot regain hp (e.g. re-burrowing antlions during ENM).
     MOBMOD_LEADER              = 71, // Used for mobs that follow a defined "leader", such as Ul'xzomit mobs.
     MOBMOD_MAGIC_RANGE         = 72, // magic aggro range
-    MOBMOD_ENCROACH_TARGET     = 100, // How close a mob will encroach on it's target, attempting to make model to model contact. Encroach distance * 10
+
+        // ASB Mod Start
+    MOBMOD_DRAW_IN_INCLUDE_PARTY     = 100, // this will cause the mob's draw-in to also affect all party and alliance members
+    MOBMOD_DRAW_IN_FRONT             = 101, // Mob will draw in slightly in front of them instead of the center of their hitbox
+    MOBMOD_DRAW_IN_CUSTOM_RANGE      = 102, // override the default range of MeleeRange*2 of when players start to get drawn-in
+    MOBMOD_DRAW_IN_MAXIMUM_REACH     = 103, // players further than this range (yalms) will be unaffected by the draw-in. default (0) is whole zone
+    MOBMOD_DRAW_IN_IGNORE_STATIONARY = 104, // stationary mobs draw-in the moment they cannot attack you anymore (out of range). put this mobmod on stationary mobs that have draw-in but use ranged attacks instead of melee attacks so that they will ignore this behavior (i.e. KSNM99 Wyrm or ToAU Mission Alexander)
+    MOBMOD_ATTRACT_FAMILY_NM         = 105, // NMs within the same family will link onto this mob (used on Sabotenders for Cactrot Rapido)
+    MOBMOD_LEDGE_AGGRO               = 106, // Used to increase vertical aggro range
+    MOBMOD_DISENGAGE_NO_PATH         = 107, // Used to force a disengage when there is no vertical path to the target rather than despawn.
+
+    MOBMOD_ENCROACH_TARGET     = 200, // How close a mob will encroach on it's target, attempting to make model to model contact. Encroach distance * 10
 };
 
 #endif

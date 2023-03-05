@@ -154,6 +154,9 @@ void CAutomatonEntity::setBurdenArray(std::array<uint8, 8> burdenArray)
 
 uint8 CAutomatonEntity::addBurden(uint8 element, int8 burden)
 {
+    if (!element) // fire
+        burden = (int8)((int16)burden * (100 + this->getMod(Mod::FIRE_BURDEN_PERC_EXTRA)) / 100);
+
     // Handle Kenkonken Suppress Overload
     if (PMaster->getMod(Mod::SUPPRESS_OVERLOAD) > 0)
     {

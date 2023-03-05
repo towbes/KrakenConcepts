@@ -873,7 +873,14 @@ xi.effect =
     HYSTERIA                 = 804, -- Used for Hysteroanima to stop after readying a weaponskill with no msg.
     TOMAHAWK                 = 805, -- Silent status effect inflicted by a Warrior using the "Tomahawk" job ability
     NUKE_WALL                = 806, -- Custom effect for NM type mobs only.
-
+    FIRE_EEM_MOD             = 900,
+    ICE_EEM_MOD              = 901,
+    WIND_EEM_MOD             = 902,
+    EARTH_EEM_MOD            = 903,
+    THUNDER_EEM_MOD          = 904,
+    WATER_EEM_MOD            = 905,
+    LIGHT_EEM_MOD            = 906,
+    DARK_EEM_MOD             = 907,
     -- 807-1022
     -- PLACEHOLDER           = 1023 -- The client dat file seems to have only this many "slots", results of exceeding that are untested.
 }
@@ -1342,6 +1349,8 @@ xi.mod =
     LIFE_CYCLE_EFFECT               = 1029, -- Adds bonus HP% returned to the luopan when using Life Cycle
     AURA_SIZE                       = 1030, -- Used to extend aura size, the formula is 6.25 + (PEntity->getMod(Mod::AURA_SIZE) / 100) so adding 100 will make this 7.25
 
+    WYRMAL_ABJ_KILLER_EFFECT  = 53, -- Wyrmal Abjuration (Crimson/Blood) which makes players susceptible to Dragon Killer effects
+
     -- Rune Fencer
     ENHANCES_BATTUTA            = 1004, -- Used by RUN merit point cat 2 to add +N% bonus damage to parry spikes during Battuta effect
     ENHANCES_ELEMENTAL_SFORZO   = 1005, -- Bonus duration
@@ -1565,14 +1574,15 @@ xi.mod =
     RERAISE_II                      = 457, -- Reraise II.
     RERAISE_III                     = 458, -- Reraise III.
 
-    ITEM_ADDEFFECT_TYPE     = 431, -- see procType table in scripts\globals\additional_effects.lua
-    ITEM_SUBEFFECT          = 499, -- Animation ID of Spikes and Additional Effects
-    ITEM_ADDEFFECT_DMG      = 500, -- Damage of an items Additional Effect or Spikes
-    ITEM_ADDEFFECT_CHANCE   = 501, -- Chance of an items Additional Effect or Spikes
-    ITEM_ADDEFFECT_ELEMENT  = 950, -- Element of the Additional Effect or Spikes, for resist purposes
-    ITEM_ADDEFFECT_STATUS   = 951, -- Status Effect ID to try to apply via Additional Effect or Spikes
-    ITEM_ADDEFFECT_POWER    = 952, -- Base Power for effect in MOD_ITEM_ADDEFFECT_STATUS
-    ITEM_ADDEFFECT_DURATION = 953, -- Base Duration for effect in MOD_ITEM_ADDEFFECT_STATUS
+    ITEM_ADDEFFECT_TYPE     = 431,  -- see procType table in scripts\globals\additional_effects.lua
+    ITEM_SUBEFFECT          = 499,  -- Animation ID of Spikes and Additional Effects
+    ITEM_ADDEFFECT_DMG      = 500,  -- Damage of an items Additional Effect or Spikes
+    ITEM_ADDEFFECT_CHANCE   = 501,  -- Chance of an items Additional Effect or Spikes
+    ITEM_ADDEFFECT_ELEMENT  = 950,  -- Element of the Additional Effect or Spikes, for resist purposes
+    ITEM_ADDEFFECT_STATUS   = 951,  -- Status Effect ID to try to apply via Additional Effect or Spikes
+    ITEM_ADDEFFECT_POWER    = 952,  -- Base Power for effect in MOD_ITEM_ADDEFFECT_STATUS
+    ITEM_ADDEFFECT_DURATION = 953,  -- Base Duration for effect in MOD_ITEM_ADDEFFECT_STATUS
+    ITEM_ADDEFFECT_OPTION   = 1178, -- Additional parameters for more specific latents required to proc
 
     FERAL_HOWL_DURATION             = 503, -- +20% duration per merit when wearing augmented Monster Jackcoat +2
     MANEUVER_BONUS                  = 504, -- Maneuver Stat Bonus
@@ -1823,7 +1833,72 @@ xi.mod =
 
     DIG_BYPASS_FATIGUE      = 1074, -- Chocobo digging modifier found in "Blue Race Silks". Modifier works as a direct percent.
     BREATH_DMG_DEALT        = 1075, -- Breath damage dealt
-    MAGIC_STONESKIN         = 2000, -- Magic Stoneskin. Primary used for mobskill Immortal Shield.
+
+        -- Permenant Resistance Build Modifiers
+    --SLEEPRESBUILD                 = 1138, -- Used to create a resbuild for the appropriate effect. Will decrease overall duration of effect. (Out of 1000)
+    --POISONRESBUILD                = 1139, -- Used to create a resbuild for the appropriate effect. Will decrease overall duration of effect. (Out of 1000)
+    --PARALYZERESBUILD              = 1140, -- Used to create a resbuild for the appropriate effect. Will decrease overall duration of effect. (Out of 1000)
+    --BLINDRESBUILD                 = 1141, -- Used to create a resbuild for the appropriate effect. Will decrease overall duration of effect. (Out of 1000)
+    --SILENCERESBUILD               = 1142, -- Used to create a resbuild for the appropriate effect. Will decrease overall duration of effect. (Out of 1000)
+    --VIRUSRESBUILD                 = 1143, -- Used to create a resbuild for the appropriate effect. Will decrease overall duration of effect. (Out of 1000)
+    --PETRIFYRESBUILD               = 1144, -- Used to create a resbuild for the appropriate effect. Will decrease overall duration of effect. (Out of 1000)
+    --BINDRESBUILD                  = 1145, -- Used to create a resbuild for the appropriate effect. Will decrease overall duration of effect. (Out of 1000)
+    --CURSERESBUILD                 = 1146, -- Used to create a resbuild for the appropriate effect. Will decrease overall duration of effect. (Out of 1000)
+    --GRAVITYRESBUILD               = 1147, -- Used to create a resbuild for the appropriate effect. Will decrease overall duration of effect. (Out of 1000)
+    --SLOWRESBUILD                  = 1148, -- Used to create a resbuild for the appropriate effect. Will decrease overall duration of effect. (Out of 1000)
+    --STUNRESBUILD                  = 1149, -- Used to create a resbuild for the appropriate effect. Will decrease overall duration of effect. (Out of 1000)
+    --CHARMRESBUILD                 = 1150, -- Used to create a resbuild for the appropriate effect. Will decrease overall duration of effect. (Out of 1000)
+    --AMNESIARESBUILD               = 1151, -- Used to create a resbuild for the appropriate effect. Will decrease overall duration of effect. (Out of 1000)
+    --LULLABYRESBUILD               = 1152, -- Used to create a resbuild for the appropriate effect. Will decrease overall duration of effect. (Out of 1000)
+    --DEATHRESBUILD                 = 1153, -- Used to create a resbuild for the appropriate effect. Will decrease overall duration of effect. (Out of 1000)
+    --PET_DMG_TAKEN_PHYSICAL        = 1154, -- Percent increase/decrease in pet physical damage taken for the target.
+    --PET_DMG_TAKEN_MAGICAL         = 1155, -- Percent increase/decrease in pet magical damage taken for the target.
+    --PET_DMG_TAKEN_BREATH          = 1156, -- Percent increase/decrease in pet breath damage taken for the target.
+    --FIRE_EEM                      = 1158, -- Elemental Evasion Multiplier (Known as SDT in common magic accuracy formulas) (out of 100)
+    --ICE_EEM                       = 1159, -- Elemental Evasion Multiplier (Known as SDT in common magic accuracy formulas) (out of 100)
+    --WIND_EEM                      = 1160, -- Elemental Evasion Multiplier (Known as SDT in common magic accuracy formulas) (out of 100)
+    --EARTH_EEM                     = 1161, -- Elemental Evasion Multiplier (Known as SDT in common magic accuracy formulas) (out of 100)
+    --THUNDER_EEM                   = 1162, -- Elemental Evasion Multiplier (Known as SDT in common magic accuracy formulas) (out of 100)
+    --WATER_EEM                     = 1163, -- Elemental Evasion Multiplier (Known as SDT in common magic accuracy formulas) (out of 100)
+    --LIGHT_EEM                     = 1164, -- Elemental Evasion Multiplier (Known as SDT in common magic accuracy formulas) (out of 100)
+    --DARK_EEM                      = 1165, -- Elemental Evasion Multiplier (Known as SDT in common magic accuracy formulas) (out of 100)
+    --TAME_SUCCESS_RATE             = 1166, -- Tame Success Rate +
+    --RAMPART_MAGIC_SHIELD          = 1167, -- Rampart Magic Shield
+    --CRITHITRATE_SLOT              = 1168, -- CRITHITRATE for slot
+    --ATT_SLOT                      = 1169, -- ATT for slot
+    --UDMG                          = 1170, -- Uncapped dmg taken (all types)
+
+    MAGIC_STONESKIN              = 2000, -- Magic Stoneskin. Primary used for mobskill Immortal Shield.
+    --FIRE_BURDEN_DECAY            = 2001, -- Era works for Fire, Abyssia onwards uses "BURDEN_DECAY = 847"
+    --BURDEN_DECAY_IGNORE_CHANCE   = 2002, -- Era Tactical Processor used this to increase tendancy to overload. 
+    FIRE_BURDEN_PERC_EXTRA       = 2003, -- Increases fire burden when Flame Holder attatchment is used.
+
+    -- Damage mods/reductions for circle effects.
+    VERMIN_CIRCLE         = 2004,
+    BIRD_CIRCLE           = 2005,
+    AMORPH_CIRCLE         = 2006,
+    LIZARD_CIRCLE         = 2007,
+    AQUAN_CIRCLE          = 2007,
+    PLANTOID_CIRCLE       = 2009,
+    BEAST_CIRCLE          = 2010,
+    UNDEAD_CIRCLE         = 2011,
+    ARCANA_CIRCLE         = 2012,
+    DRAGON_CIRCLE         = 2013,
+    DEMON_CIRCLE          = 2014,
+    EMPTY_CIRCLE          = 2015,
+    HUMANOID_CIRCLE       = 2016,
+    LUMINIAN_CIRCLE       = 2017, -- Should actually be LUMORIAN when have time to refactor.
+    LUMINION_CIRCLE       = 2018,
+    AUTOMATON_MAGIC_COST  = 2019,
+    AUTOMATON_CAN_BARRAGE = 2020,
+
+    -- These mods should not be directly set.  These are used to apply pet mods via latent effects
+    -- These mods should not be directly set (use item_mods_pets instead).  These are used to apply pet mods via latent effects
+    PET_ATT_LATENT  = 2021,  -- Pet Attack bonus used for latents
+    PET_ACC_LATENT  = 2022,  -- Pet Acc bonus used for latents
+    PET_MATT_LATENT = 2023,  -- Pet Magic Attack bonus used for latents
+    PET_MACC_LATENT = 2024,  -- Pet Magic Acc bonus used for latents
+    PET_DEF_LATENT  = 2025,  -- Pet DEF bonus used for latents
     -- IF YOU ADD ANY NEW MODIFIER HERE, ADD IT IN src/map/modifier.h ASWELL!
 
     -- The spares take care of finding the next ID to use so long as we don't forget to list IDs that have been freed up by refactoring.
@@ -1831,69 +1906,93 @@ xi.mod =
     -- For Next ID, see modifier.h
 }
 
+xi.immunity =
+{
+    NONE        = 0,
+    SLEEP       = 1,
+    GRAVITY     = 2,
+    BIND        = 4,
+    STUN        = 8,
+    SILENCE     = 16,
+    PARALYZE    = 32,
+    BLIND       = 64,
+    SLOW        = 128,
+    POISON      = 256,
+    ELEGY       = 512,
+    REQUIEM     = 1024,
+    LIGHT_SLEEP = 2048,
+    DARK_SLEEP  = 4096,
+    ASPIR       = 8192,
+    TERROR      = 16384,
+    DISPEL      = 32768,
+}
+
 xi.latent =
 {
-    HP_UNDER_PERCENT         = 0,  -- hp less than or equal to % - PARAM: HP PERCENT
-    HP_OVER_PERCENT          = 1,  -- hp more than % - PARAM: HP PERCENT
-    HP_UNDER_TP_UNDER_100    = 2,  -- hp less than or equal to %, tp under 100 - PARAM: HP PERCENT
-    HP_OVER_TP_UNDER_100     = 3,  -- hp more than %, tp over 100 - PARAM: HP PERCENT
-    MP_UNDER_PERCENT         = 4,  -- mp less than or equal to % - PARAM: MP PERCENT
-    MP_UNDER                 = 5,  -- mp less than # - PARAM: MP #
-    TP_UNDER                 = 6,  -- tp under # and during WS - PARAM: TP VALUE
-    TP_OVER                  = 7,  -- tp over # - PARAM: TP VALUE
-    SUBJOB                   = 8,  -- subjob - PARAM: JOBTYPE
-    PET_ID                   = 9,  -- pettype - PARAM: PETID
-    WEAPON_DRAWN             = 10, -- weapon drawn
-    WEAPON_SHEATHED          = 11, -- weapon sheathed
-    SIGNET_BONUS             = 12, -- While in conquest region and engaged to an even match or less target
-    STATUS_EFFECT_ACTIVE     = 13, -- status effect on player - PARAM: EFFECTID
-    NO_FOOD_ACTIVE           = 14, -- no food effects active on player
-    PARTY_MEMBERS            = 15, -- party size # - PARAM: # OF MEMBERS
-    PARTY_MEMBERS_IN_ZONE    = 16, -- party size # and members in zone - PARAM: # OF MEMBERS
-    SANCTION_REGEN_BONUS     = 17, -- While in besieged region and HP is less than PARAM%
-    SANCTION_REFRESH_BONUS   = 18, -- While in besieged region and MP is less than PARAM%
-    SIGIL_REGEN_BONUS        = 19, -- While in campaign region and HP is less than PARAM%
-    SIGIL_REFRESH_BONUS      = 20, -- While in campaign region and MP is less than PARAM%
-    AVATAR_IN_PARTY          = 21, -- party has a specific avatar - PARAM: same as globals/pets.lua (21 for any avatar)
-    JOB_IN_PARTY             = 22, -- party has job - PARAM: JOBTYPE
-    ZONE                     = 23, -- in zone - PARAM: zoneid
-    SYNTH_TRAINEE            = 24, -- synth skill under 40 + no support
-    SONG_ROLL_ACTIVE         = 25, -- any song or roll active
-    TIME_OF_DAY              = 26, -- PARAM: 0: DAYTIME 1: NIGHTTIME 2: DUSK-DAWN
-    HOUR_OF_DAY              = 27, -- PARAM: 1: NEW DAY, 2: DAWN, 3: DAY, 4: DUSK, 5: EVENING, 6: DEAD OF NIGHT
-    FIRESDAY                 = 28,
-    EARTHSDAY                = 29,
-    WATERSDAY                = 30,
-    WINDSDAY                 = 31,
-    DARKSDAY                 = 32,
-    ICEDAY                   = 34,
-    LIGHTNINGSDAY            = 35,
-    LIGHTSDAY                = 36,
-    MOON_PHASE               = 37, -- PARAM: 0: New Moon, 1: Waxing Crescent, 2: First Quarter, 3: Waxing Gibbous, 4: Full Moon, 5: Waning Gibbous, 6: Last Quarter, 7: Waning Crescent
-    JOB_MULTIPLE             = 38, -- PARAM: 0: ODD, 2: EVEN, 3-99: DIVISOR
-    JOB_MULTIPLE_AT_NIGHT    = 39, -- PARAM: 0: ODD, 2: EVEN, 3-99: DIVISOR
-    EQUIPPED_IN_SLOT         = 40, -- When item is equipped in the specified slot (e.g. Dweomer Knife, Erlking's Sword, etc.) PARAM: slotID
+    HP_UNDER_PERCENT           = 0,  -- hp less than or equal to % - PARAM: HP PERCENT
+    HP_OVER_PERCENT            = 1,  -- hp more than % - PARAM: HP PERCENT
+    HP_UNDER_TP_UNDER_100      = 2,  -- hp less than or equal to %, tp under 100 - PARAM: HP PERCENT
+    HP_OVER_TP_UNDER_100       = 3,  -- hp more than %, tp over 100 - PARAM: HP PERCENT
+    MP_UNDER_PERCENT           = 4,  -- mp less than or equal to % - PARAM: MP PERCENT
+    MP_UNDER                   = 5,  -- mp less than # - PARAM: MP #
+    TP_UNDER                   = 6,  -- tp under # and during WS - PARAM: TP VALUE
+    TP_OVER                    = 7,  -- tp over # - PARAM: TP VALUE
+    SUBJOB                     = 8,  -- subjob - PARAM: JOBTYPE
+    PET_ID                     = 9,  -- pettype - PARAM: PETID
+    WEAPON_DRAWN               = 10, -- weapon drawn
+    WEAPON_SHEATHED            = 11, -- weapon sheathed
+    SIGNET_BONUS               = 12, -- While in conquest region and engaged to an even match or less target
+    STATUS_EFFECT_ACTIVE       = 13, -- status effect on player - PARAM: EFFECTID
+    NO_FOOD_ACTIVE             = 14, -- no food effects active on player
+    PARTY_MEMBERS              = 15, -- party size # - PARAM: # OF MEMBERS
+    PARTY_MEMBERS_IN_ZONE      = 16, -- party size # and members in zone - PARAM: # OF MEMBERS
+    SANCTION_REGEN_BONUS       = 17, -- While in besieged region and HP is less than PARAM%
+    SANCTION_REFRESH_BONUS     = 18, -- While in besieged region and MP is less than PARAM%
+    SIGIL_REGEN_BONUS          = 19, -- While in campaign region and HP is less than PARAM%
+    SIGIL_REFRESH_BONUS        = 20, -- While in campaign region and MP is less than PARAM%
+    AVATAR_IN_PARTY            = 21, -- party has a specific avatar - PARAM: same as globals/pets.lua (21 for any avatar)
+    JOB_IN_PARTY               = 22, -- party has job - PARAM: JOBTYPE
+    ZONE                       = 23, -- in zone - PARAM: zoneid
+    SYNTH_TRAINEE              = 24, -- synth skill under 40 + no support
+    SONG_ROLL_ACTIVE           = 25, -- any song or roll active
+    TIME_OF_DAY                = 26, -- PARAM: 0: DAYTIME 1: NIGHTTIME 2: DUSK-DAWN
+    HOUR_OF_DAY                = 27, -- PARAM: 1: NEW DAY, 2: DAWN, 3: DAY, 4: DUSK, 5: EVENING, 6: DEAD OF NIGHT
+    FIRESDAY                   = 28,
+    EARTHSDAY                  = 29,
+    WATERSDAY                  = 30,
+    WINDSDAY                   = 31,
+    DARKSDAY                   = 32,
+    ICEDAY                     = 34,
+    LIGHTNINGSDAY              = 35,
+    LIGHTSDAY                  = 36,
+    MOON_PHASE                 = 37, -- PARAM: 0: New Moon, 1: Waxing Crescent, 2: First Quarter, 3: Waxing Gibbous, 4: Full Moon, 5: Waning Gibbous, 6: Last Quarter, 7: Waning Crescent
+    JOB_MULTIPLE               = 38, -- PARAM: 0: ODD, 2: EVEN, 3-99: DIVISOR
+    JOB_MULTIPLE_AT_NIGHT      = 39, -- PARAM: 0: ODD, 2: EVEN, 3-99: DIVISOR
+    EQUIPPED_IN_SLOT           = 40, -- When item is equipped in the specified slot (e.g. Dweomer Knife, Erlking's Sword, etc.) PARAM: slotID
     -- 41 free to use
     -- 42 free to use
-    WEAPON_DRAWN_HP_UNDER    = 43, -- PARAM: HP PERCENT
-    -- 44 free to use
-    MP_UNDER_VISIBLE_GEAR    = 45, -- mp less than or equal to %, calculated using MP bonuses from visible gear only
-    HP_OVER_VISIBLE_GEAR     = 46, -- hp more than or equal to %, calculated using HP bonuses from visible gear only
-    WEAPON_BROKEN            = 47,
-    IN_DYNAMIS               = 48,
-    FOOD_ACTIVE              = 49, -- food effect (foodId) active - PARAM: FOOD ITEMID
-    JOB_LEVEL_BELOW          = 50, -- PARAM: level
-    JOB_LEVEL_ABOVE          = 51, -- PARAM: level
-    WEATHER_ELEMENT          = 52, -- PARAM: 0: NONE, 1: FIRE, 2: ICE, 3: WIND, 4: EARTH, 5: THUNDER, 6: WATER, 7: LIGHT, 8: DARK
-    NATION_CONTROL           = 53, -- checks if player region is under nation's control - PARAM: 0: Under own nation's control, 1: Outside own nation's control
-    ZONE_HOME_NATION         = 54, -- in zone and citizen of nation (aketons)
-    MP_OVER                  = 55, -- mp greater than # - PARAM: MP #
-    WEAPON_DRAWN_MP_OVER     = 56, -- while weapon is drawn and mp greater than # - PARAM: MP #
-    ELEVEN_ROLL_ACTIVE       = 57, -- corsair roll of 11 active
-    IN_ASSAULT               = 58, -- is in an Instance battle in a TOAU zone
-    VS_ECOSYSTEM             = 59, -- Vs. Specific Ecosystem ID (e.g. Vs. Plantoid: Accuracy+3)
-    VS_FAMILY                = 60, -- Vs. Specific Family ID (e.g. Vs. Korrigan: Accuracy+3)
-    VS_SUPERFAMILY           = 61, -- Vs. Specific Family ID (e.g. Vs. Mandragora: Accuracy+3)
+    WEAPON_DRAWN_HP_UNDER      = 43, -- PARAM: HP PERCENT
+    HP_BASE_UNDER_TP_UNDER_100 = 44, -- Base HP (no convert or +% taken into account) <= %, TP < 100
+    MP_UNDER_VISIBLE_GEAR      = 45, -- mp less than or equal to %, calculated using MP bonuses from visible gear only
+    HP_OVER_VISIBLE_GEAR       = 46, -- hp more than or equal to %, calculated using HP bonuses from visible gear only
+    WEAPON_BROKEN              = 47,
+    IN_DYNAMIS                 = 48,
+    FOOD_ACTIVE                = 49, -- food effect (foodId) active - PARAM: FOOD ITEMID
+    JOB_LEVEL_BELOW            = 50, -- PARAM: level
+    JOB_LEVEL_ABOVE            = 51, -- PARAM: level
+    WEATHER_ELEMENT            = 52, -- PARAM: 0: NONE, 1: FIRE, 2: ICE, 3: WIND, 4: EARTH, 5: THUNDER, 6: WATER, 7: LIGHT, 8: DARK
+    NATION_CONTROL             = 53, -- checks if player region is under nation's control - PARAM: 0: Under own nation's control, 1: Outside own nation's control
+    ZONE_HOME_NATION           = 54, -- in zone and citizen of nation (aketons)
+    MP_OVER                    = 55, -- mp greater than # - PARAM: MP #
+    WEAPON_DRAWN_MP_OVER       = 56, -- while weapon is drawn and mp greater than # - PARAM: MP #
+    ELEVEN_ROLL_ACTIVE         = 57, -- corsair roll of 11 active
+    IN_ASSAULT                 = 58, -- is in an Instance battle in a TOAU zone
+    VS_ECOSYSTEM               = 59, -- Vs. Specific Ecosystem ID (e.g. Vs. Plantoid: Accuracy+3)
+    VS_FAMILY                  = 60, -- Vs. Specific Family ID (e.g. Vs. Korrigan: Accuracy+3)
+    VS_SUPERFAMILY             = 61, -- Vs. Specific Family ID (e.g. Vs. Mandragora: Accuracy+3)
+    CITIZEN_OF_NATION          = 70, -- Player is a citizen of the provided nation. 0 = Sandoria, 1 = Bastok, 2 = Windurst
+    MP_OVER_PERCENT            = 71, -- mp more than % - PARAM: MP PERCENT
+
 }
 
 -----------------------------------
@@ -2126,7 +2225,7 @@ xi.merit =
     ANCIENT_CIRCLE_RECAST       = meritCategory.DRG_1 + 0x00,
     JUMP_RECAST                 = meritCategory.DRG_1 + 0x02,
     HIGH_JUMP_RECAST            = meritCategory.DRG_1 + 0x04,
-    SUPER_JUMP_RECAST           = meritCategory.DRG_1 + 0x05,
+    SUPER_JUMP_RECAST           = meritCategory.DRG_1 + 0x05, -- 0x06 in ASB
     SPIRIT_LINK_RECAST          = meritCategory.DRG_1 + 0x08,
 
     -- SMN 1
@@ -2581,7 +2680,17 @@ xi.mobMod =
     NO_REST             = 70, -- Mob cannot regain hp (e.g. re-burrowing antlions during ENM).
     LEADER              = 71, -- Used for mobs that follow a defined "leader", such as Ul'xzomit mobs.
     MAGIC_RANGE         = 72, -- magic aggro range
-    ENCROACH_TARGET     = 100, -- How close a mob will encroach on it's target, attempting to make model to model contact. Encroach distance * 10
+    ENCROACH_TARGET     = 200, -- How close a mob will encroach on it's target, attempting to make model to model contact. Encroach distance * 10
+
+        -- ASB Mod Start
+    DRAW_IN_INCLUDE_PARTY     = 100, -- This will cause the mob's draw-in to also affect all party and alliance members
+    DRAW_IN_FRONT             = 101, -- Mob will draw in slightly in front of them instead of the center of their hitbox
+    DRAW_IN_CUSTOM_RANGE      = 102, -- Override the default range of MeleeRange*2 of when players start to get drawn-in
+    DRAW_IN_MAXIMUM_REACH     = 103, -- Players further than this range (yalms) will be unaffected by the draw-in. default (0) is whole zone
+    DRAW_IN_IGNORE_STATIONARY = 104, -- Stationary mobs draw-in the moment they cannot attack you anymore (out of range). put this mobmod on stationary mobs that have draw-in but use ranged attacks instead of melee attacks so that they will ignore this behavior (i.e. KSNM99 Wyrm or ToAU Mission Alexander)
+    ATTRACT_FAMILY_NM         = 105, -- NMs within the same family will link onto this mob (used on Sabotenders for Cactrot Rapido)
+    LEDGE_AGGRO               = 106, -- Used to increase vertical aggro range
+    DISENGAGE_NO_PATH         = 107, -- Used to force a disengage when there is no vertical path to the target rather than despawn.
 }
 
 -----------------------------------
