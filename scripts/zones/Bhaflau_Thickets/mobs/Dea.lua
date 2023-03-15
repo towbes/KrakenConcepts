@@ -20,6 +20,7 @@ end
 entity.onMobSpawn = function(mob)
     mob:setLocalVar("QueuedAbility", 0)
     mob:setLocalVar("[rage]timer", 5400)
+    mob:setBehaviour(bit.bor(mob:getBehaviour(), xi.behavior.NO_TURN))
 end
 
 entity.onMobWeaponSkillPrepare = function(mob, target)

@@ -3254,7 +3254,7 @@ void SmallPacket0x04E(map_session_data_t* const PSession, CCharEntity* const PCh
 
                 if (PItem != nullptr)
                 {
-                    if (PItem->getFlag() & ITEM_FLAG_RARE)
+                    if (PItem->isRare())
                     {
                         for (uint8 LocID = 0; LocID < CONTAINER_ID::MAX_CONTAINER_ID; ++LocID)
                         {
