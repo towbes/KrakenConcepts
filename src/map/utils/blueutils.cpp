@@ -106,7 +106,11 @@ namespace blueutils
         {
             for (auto& member : PChar->PParty->members)
             {
-                if (member->GetMJob() || member->GetSJob() == JOB_BLU && member->objtype == TYPE_PC) // Umeboshi "BLU sub now applies to logic."
+                if (member->GetMJob() == JOB_BLU && member->objtype == TYPE_PC)
+                {
+                    PBlueMages.push_back((CCharEntity*)member);
+                }
+                if (member->GetSJob() == JOB_BLU && member->objtype == TYPE_PC) // Umeboshi "BLU sub now applies to logic."
                 {
                     PBlueMages.push_back((CCharEntity*)member);
                 }
