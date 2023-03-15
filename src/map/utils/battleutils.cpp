@@ -2479,7 +2479,12 @@ namespace battleutils
             float sBlow2    = std::clamp((float)PAttacker->getMod(Mod::SUBTLE_BLOW_II), -50.0f, 50.0f);
             float sBlowMult = (100.0f - std::clamp(sBlow1 + sBlow2, -75.0f, 75.0f)) / 100.0f;
 
-            if (PAttacker->objtype == TYPE_PC && PAttacker->GetMJob() == JOB_NIN || PAttacker->GetSJob() == JOB_NIN && PAttacker->GetMLevel() > 74)
+            if (PAttacker->objtype == TYPE_PC && PAttacker->GetMJob() == JOB_NIN && PAttacker->GetMLevel() > 74)
+            {
+                sBlowMult -= 0.01f * ((CCharEntity*)PAttacker)->PMeritPoints->GetMeritValue(MERIT_SUBTLE_BLOW_EFFECT, (CCharEntity*)PAttacker);
+            }
+
+            if (PAttacker->objtype == TYPE_PC && PAttacker->GetSJob() == JOB_NIN && PAttacker->GetMLevel() > 74)
             {
                 sBlowMult -= 0.01f * ((CCharEntity*)PAttacker)->PMeritPoints->GetMeritValue(MERIT_SUBTLE_BLOW_EFFECT, (CCharEntity*)PAttacker);
             }
