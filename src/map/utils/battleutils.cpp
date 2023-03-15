@@ -5666,8 +5666,8 @@ namespace battleutils
                 PDefender->setModifier(Mod::MAGIC_STONESKIN, magicSS - damage);
                 damage = 0;
             }
-            return damage;
         }
+        return damage;
     }
 
     int32 HandleSevereDamage(CBattleEntity* PDefender, int32 damage, bool isPhysical)
