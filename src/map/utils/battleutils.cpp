@@ -2746,8 +2746,17 @@ namespace battleutils
                 critHitRate = 100;
             }
         }
-        else if (PAttacker->objtype == TYPE_PC && PAttacker->GetMJob() == JOB_THF || PAttacker->objtype == TYPE_PC && PAttacker->GetSJob() == JOB_THF && charutils::hasTrait((CCharEntity*)PAttacker, TRAIT_ASSASSIN) &&
-                (!ignoreSneakTrickAttack) && PAttacker->StatusEffectContainer->HasStatusEffect(EFFECT_TRICK_ATTACK)) // Umeboshi "THF Sub benefits on Cactuar"
+        else if (PAttacker->objtype == TYPE_PC && PAttacker->GetMJob() == JOB_THF && charutils::hasTrait((CCharEntity*)PAttacker, TRAIT_ASSASSIN) &&
+                (!ignoreSneakTrickAttack) && PAttacker->StatusEffectContainer->HasStatusEffect(EFFECT_TRICK_ATTACK)) 
+        {
+            CBattleEntity* taChar = battleutils::getAvailableTrickAttackChar(PAttacker, PDefender);
+            if (taChar != nullptr)
+            {
+                critHitRate = 100;
+            }
+        }
+        else if (PAttacker->objtype == TYPE_PC && PAttacker->GetMJob() == JOB_THF && charutils::hasTrait((CCharEntity*)PAttacker, TRAIT_ASSASSIN) &&
+                 (!ignoreSneakTrickAttack) && PAttacker->StatusEffectContainer->HasStatusEffect(EFFECT_TRICK_ATTACK)) // Umeboshi "THF Sub benefits on Cactuar"
         {
             CBattleEntity* taChar = battleutils::getAvailableTrickAttackChar(PAttacker, PDefender);
             if (taChar != nullptr)
@@ -5657,6 +5666,7 @@ namespace battleutils
                 PDefender->setModifier(Mod::MAGIC_STONESKIN, magicSS - damage);
                 damage = 0;
             }
+            return damage;
         }
     }
 
@@ -6759,14 +6769,14 @@ namespace battleutils
         {
             if (PSpell->getAOE() == SPELLAOE_RADIAL_MANI && PEntity->StatusEffectContainer->HasStatusEffect(EFFECT_MANIFESTATION))
             {
-                if (PEntity->GetMJob() == JOB_SCH)
-                {
+                //if (PEntity->GetMJob() == JOB_SCH)
+                //{
                     recast *= 2;
-                }
-                else
-                {
-                    recast *= 2;
-                }
+                //}
+                //else
+                //{
+                //    recast *= 2;
+                //}
             }
             else if (PEntity->StatusEffectContainer->HasStatusEffect({ EFFECT_DARK_ARTS, EFFECT_ADDENDUM_BLACK }))
             {
@@ -6800,14 +6810,14 @@ namespace battleutils
         {
             if (PSpell->getAOE() == SPELLAOE_RADIAL_ACCE && PEntity->StatusEffectContainer->HasStatusEffect(EFFECT_ACCESSION))
             {
-                if (PEntity->GetMJob() == JOB_SCH)
-                {
+                //if (PEntity->GetMJob() == JOB_SCH)
+                //{
                     recast *= 2;
-                }
-                else
-                {
-                    recast *= 2;
-                }
+                //}
+                //else
+                //{
+                //    recast *= 2;
+                //}
             }
 
             if (PEntity->StatusEffectContainer->HasStatusEffect({ EFFECT_LIGHT_ARTS, EFFECT_ADDENDUM_WHITE }))
