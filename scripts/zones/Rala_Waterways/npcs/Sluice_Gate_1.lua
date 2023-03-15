@@ -1,7 +1,6 @@
 -----------------------------------
--- Area: Outer Ra'Kaznar
---  NPC: Entwined Roots (1)
--- !pos -222.581 -150 -145.591 274
+-- Area: Rala Waterways (258)
+--  NPC: Sluice Gate #1
 -----------------------------------
 local entity = {}
 
@@ -9,17 +8,16 @@ entity.onTrade = function(player, npc, trade)
 end
 
 entity.onTrigger = function(player, npc)
-    player:startEvent(31)
+    local zone = npc:getZone()
+    local resultTable = zone:queryEntitiesByName('_76s')
+
+    resultTable[1]:openDoor(15)
 end
 
 entity.onEventUpdate = function(player, csid, option)
 end
 
 entity.onEventFinish = function(player, csid, option)
-    -- TODO: Verify that CS moves the player
-    if csid == 31 and option == 1 then
-        player:setPos(820, 90, -139)
-    end
 end
 
 return entity

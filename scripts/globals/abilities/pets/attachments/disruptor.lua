@@ -20,7 +20,6 @@ attachmentObject.onEquip = function(pet)
         end
     end)
 end
-
 attachmentObject.onUnequip = function(pet)
 end
 

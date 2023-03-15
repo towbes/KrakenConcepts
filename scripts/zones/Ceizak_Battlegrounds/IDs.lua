@@ -54,9 +54,9 @@ zones[xi.zone.CEIZAK_BATTLEGROUNDS] =
             -- Knotted Vines
             obstacles =
             {
-                17846624,
+                --17846624,
                 17846625,
-                17846626,
+                --17846626,
             },
             collision =
             {

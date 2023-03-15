@@ -1296,7 +1296,8 @@ namespace charutils
             return 0;
         }
 
-        if (PItem->getFlag() & ITEM_FLAG_RARE)
+        //if (PItem->getFlag() & ITEM_FLAG_RARE)
+        if (PItem->isRare())
         {
             if (HasItem(PChar, PItem->getID()))
             {
@@ -1581,7 +1582,8 @@ namespace charutils
         {
             CItem* PItem = PChar->UContainer->GetItem(slotid);
 
-            if (PItem != nullptr && PItem->getFlag() & ITEM_FLAG_RARE)
+            //if (PItem != nullptr && PItem->getFlag() & ITEM_FLAG_RARE)
+            if (PItem != nullptr && PItem->isRare())
             {
                 if (HasItem(PTarget, PItem->getID()))
                 {

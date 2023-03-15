@@ -495,7 +495,7 @@ xi.additionalEffect.attack = function(attacker, defender, baseAttackDamage, item
                 msgParam = damage
             end
         else
-            print("Vs Ecosystem condition Not passed, bailing")
+            --print("Vs Ecosystem condition Not passed, bailing")
             return 0, 0, 0 -- Conditions not hit
         end
     end

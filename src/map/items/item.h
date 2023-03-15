@@ -95,6 +95,7 @@ public:
     bool isSent() const;
     bool isType(ITEM_TYPE) const;
     bool isSubType(ITEM_SUBTYPE) const;
+    bool isRare();
     bool isStorageSlip() const;
 
     void setID(uint16);
