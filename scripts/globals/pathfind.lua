@@ -35,6 +35,11 @@ xi.path =
         return xi.path.get(points, 1)
     end,
 
+    -- are two points the same?
+    equal = function(point1, point2)
+        return point1[1] == point2[1] and point1[2] == point2[2] and point1[3] == point2[3]
+    end,
+    
     -- returns last point in given path
     last = function(points)
         local length = xi.path.length(points)
@@ -58,5 +63,5 @@ xi.path =
             local target = points[validPoints[math.random(1, #validPoints)]]
             mob:pathThrough({ target.x, target.y, target.z })
         end
-    end
+    end 
 }

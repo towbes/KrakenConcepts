@@ -23,6 +23,7 @@ abilityObject.onAutomatonAbility = function(target, automaton, skill, master, ac
         else
             spell:setMsg(xi.msg.basic.MAGIC_ERASE)
         end
+    end
 
         return spellEffect
 end

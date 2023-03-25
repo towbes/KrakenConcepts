@@ -3626,6 +3626,7 @@ INSERT INTO `nm_spawn_points` VALUES (17330430,0,33.587,-23.791,-108.695); -- Ki
 INSERT INTO `nm_spawn_points` VALUES (17330440,0,-40.975,-23.718,-95.814); -- Count_Vine
 INSERT INTO `nm_spawn_points` VALUES (17330451,0,-72.227,-24.311,-79.561); -- Marquis_Gamygyn
 INSERT INTO `nm_spawn_points` VALUES (17330481,0,-127.792,-23.643,-32.870); -- Marquis_Nebiros
+INSERT INTO `nm_spawn_points` VALUES (17334336,0,282.000,0.900,218.000);
 INSERT INTO `nm_spawn_points` VALUES (17334482,0,-242,-80.3,-127); -- Grand'Goule
 INSERT INTO `nm_spawn_points` VALUES (17338386,0,284.000,0.001,-253.000); -- Graoully
 INSERT INTO `nm_spawn_points` VALUES (17350826,0,123.357,-0.102,332.706);

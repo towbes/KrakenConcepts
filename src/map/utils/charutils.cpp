@@ -867,6 +867,8 @@ namespace charutils
         PChar->animation = (HP == 0 ? ANIMATION_DEATH : ANIMATION_NONE);
 
         PChar->StatusEffectContainer->LoadStatusEffects();
+        PChar->m_pixieHate = GetCharVar(PChar, "PIXIE_HATE");
+
 
         charutils::LoadEquip(PChar);
         charutils::EmptyRecycleBin(PChar);
@@ -1847,7 +1849,7 @@ namespace charutils
             return false;
         }
 
-       if ((PChar->m_EquipBlock & (1 << equipSlotID)) || !(PItem->getJobs() & (1 << (PChar->GetMJob() - 1))) && !(PItem->getJobs() & (1 << (PChar->GetSJob() - 1))) || // Umeboshi "Allows player to equip items usable by subjob"
+       if ((PChar->m_EquipBlock & (1 << equipSlotID)) || (!(PItem->getJobs() & (1 << (PChar->GetMJob() - 1))) && !(PItem->getJobs() & (1 << (PChar->GetSJob() - 1)))) || // Umeboshi "Allows player to equip items usable by subjob"
             (PItem->getSuperiorLevel() > PChar->getMod(Mod::SUPERIOR_LEVEL)) ||
             (PItem->getReqLvl() > (settings::get<bool>("map.DISABLE_GEAR_SCALING") ? PChar->GetMLevel() : PChar->jobs.job[PChar->GetMJob()])))
         {

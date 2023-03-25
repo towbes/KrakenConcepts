@@ -5175,7 +5175,9 @@ INSERT INTO `mob_spell_lists` VALUES('Reacton_Phase3', 718, 146, 1, 255); -- fir
 INSERT INTO `mob_spell_lists` VALUES('Reacton_Phase3', 718, 147, 1, 255); -- fire_iv
 INSERT INTO `mob_spell_lists` VALUES('Reacton_Phase3', 718, 176, 1, 255); -- firaga_iii
 INSERT INTO `mob_spell_lists` VALUES('Reacton_Phase3', 718, 205, 1, 255); -- flare_ii
-
+INSERT INTO `mob_spell_lists` VALUES('Scylla', 719, 225, 1, 255); -- poisonga
+INSERT INTO `mob_spell_lists` VALUES('Scylla', 719, 356, 1, 255); -- paralyga
+INSERT INTO `mob_spell_lists` VALUES('Scylla', 719, 362, 1, 255); -- bindga
 
 
 

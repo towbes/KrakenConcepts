@@ -246,7 +246,7 @@ INSERT INTO `mob_family_system` VALUES (191,'Orobon',107,'Orobon',2,'Aquan',1,40
 INSERT INTO `mob_family_system` VALUES (192,'Peiste',108,'Peiste',14,'Lizard',1,40,90,90,1,3,4,3,6,6,5,1,3,1,3,6,1,0);
 INSERT INTO `mob_family_system` VALUES (193,'Wyvern-Pet',109,'Wyvern',10,'Dragon',0,40,70,90,4,2,3,4,6,3,3,1,3,1,3,0,1,0);
 INSERT INTO `mob_family_system` VALUES (194,'Phuabo',110,'Phuabo',15,'Luminian',2,70,90,140,1,3,4,1,1,5,4,1,3,1,3,0,2,0);
-INSERT INTO `mob_family_system` VALUES (195,'Pixie',111,'Pixie',18,'Fairy',0,40,90,100,4,6,4,5,5,1,3,1,3,1,3,3,1,0);
+INSERT INTO `mob_family_system` VALUES (195,'Pixie',111,'Pixie',18,'Fairy',0,40,90,100,4,6,4,5,5,1,3,3,3,3,3,3,5,0);
 INSERT INTO `mob_family_system` VALUES (196,'Poroggo',112,'frog-toad',7,'Beastmen',0,40,70,140,5,5,5,1,1,6,3,1,3,1,3,6,2,0);
 -- if needed for frogs: INSERT INTO `mob_family_system` VALUES (???,'Toad',112,'frog-toad',2,'Aquan',0,40,70,140,5,5,5,1,1,6,3,1,3,1,3,6,2,0);
 INSERT INTO `mob_family_system` VALUES (197,'Pugil',113,'Pugil',2,'Aquan',1,40,90,90,4,4,4,3,4,4,5,1,3,1,4,6,2,1);
@@ -495,7 +495,6 @@ INSERT INTO `mob_family_system` VALUES (471,'Harpeia',184,'Harpeia',8,'Bird',3,6
 INSERT INTO `mob_family_system` VALUES (472,'Naraka',185,'Naraka',19,'Undead',2,40,70,140,6,3,6,3,1,5,4,1,3,1,3,2,6,0);
 INSERT INTO `mob_family_system` VALUES (473,'Lady_Lilith',86,'Humanoid',13,'Humanoid',0,40,90,110,3,3,2,3,2,2,3,1,3,1,3,0,1,0);
 INSERT INTO `mob_family_system` VALUES (474,'Lilith_Ascendant',78,'Supreme_Being',0,'Unclassified',1,40,120,140,1,1,1,1,1,1,1,1,1,1,1,8,1,0);
-
 -- Believe it or not demon killer can proc on Shinryu in retail, and dragon killer won't. CONFIRMED. Crazy!
 INSERT INTO `mob_family_system` VALUES (475,'Shinryu',78,'Supreme_Being',10,'Demon',4,50,115,90,1,2,1,3,6,3,3,1,3,1,3,7,1,0);
 
@@ -531,6 +530,7 @@ INSERT INTO `mob_family_system` VALUES (504,'Luopan',0,'undefined',0,'Unclassifi
 INSERT INTO `mob_family_system` VALUES (505,'Fungi',0,'undefined',0,'Unclassified',0,0,130,180,1,3,4,3,6,6,5,1,3,1,3,4,2,0);
 INSERT INTO `mob_family_system` VALUES (506,'Meeble',189,'Meeble',7,'Beastmen',0,40,125,90,3,2,5,2,6,4,5,1,2,1,3,5,1,0);
 INSERT INTO `mob_family_system` VALUES (507,'Quasilumin',15,'Luminian',0,'Unclassified',1,25,100,100,5,5,5,5,5,5,5,5,5,5,5,0,2,0);
+INSERT INTO `mob_family_system` VALUES (600,'Sidhe',600,'Sidhe',18,'Fairy',0,40,90,100,4,6,4,5,5,1,3,3,3,3,3,3,5,0);
 
 INSERT INTO `mob_family_system` VALUES (411,'Pet-Siren',16,'Siren',5,'Avatar',0,40,100,120,3,3,3,3,3,3,3,1,3,1,3,0,41,0);
 
