@@ -2681,6 +2681,7 @@ xi.mobMod =
     LEADER              = 71, -- Used for mobs that follow a defined "leader", such as Ul'xzomit mobs.
     MAGIC_RANGE         = 72, -- magic aggro range
     ENCROACH_TARGET     = 200, -- How close a mob will encroach on it's target, attempting to make model to model contact. Encroach distance * 10
+    PIXIE               = 201,  -- Pixie (heals players)
 
         -- ASB Mod Start
     DRAW_IN_INCLUDE_PARTY     = 100, -- This will cause the mob's draw-in to also affect all party and alliance members

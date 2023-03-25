@@ -26797,6 +26797,15 @@ INSERT INTO `mob_droplist` VALUES (3237,0,0,1000,1875,@ALWAYS); -- Ancient Beast
 INSERT INTO `mob_droplist` VALUES (3237,0,0,1000,1875,@ALWAYS); -- Ancient Beastcoin (Always, 100%)
 INSERT INTO `mob_droplist` VALUES (3237,0,0,1000,1875,@UNCOMMON); -- Ancient Beastcoin (Uncommon, 10%)
 
+-- Scylla
+INSERT INTO `mob_droplist` VALUES(3800,0,0,1000,1312,@UNCOMMON);    -- piece_of_angel_skin
+INSERT INTO `mob_droplist` VALUES(3800,2,0,1000,2754,@VCOMMON);     -- ruszor_fang
+INSERT INTO `mob_droplist` VALUES(3800,0,0,1000,2755,@VCOMMON);   -- ruszor_hide
+INSERT INTO `mob_droplist` VALUES(3800,0,0,1000,2810,@ALWAYS);  -- vial_of_ebur_pigment
+INSERT INTO `mob_droplist` VALUES(3800,0,0,1000,2824,@COMMON);   -- square_of_shagreen
+INSERT INTO `mob_droplist` VALUES(3800,0,0,1000,19126,@VCOMMON);  -- papilio_kirpan
+
+
 /*!40000 ALTER TABLE `mob_droplist` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;

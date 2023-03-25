@@ -37702,7 +37702,7 @@ INSERT INTO `item_mods` VALUES (18447,306,100); -- ZANSHIN: 100
 
 -- Hacchonenbutsu Dangozashi
 INSERT INTO `item_mods` VALUES (18448,25,4); -- ACC: 4
-INSERT INTO `item_mods` VALUES (18448,25,4); -- Double Attack
+INSERT INTO `item_mods` VALUES (18448,288,4); -- Double Attack
 
 -- Namioyogi
 INSERT INTO `item_mods` VALUES (18449,27,5); -- ENMITY: 5

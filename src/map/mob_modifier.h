@@ -113,6 +113,8 @@ enum MOBMODIFIER : int
     MOBMOD_DISENGAGE_NO_PATH         = 107, // Used to force a disengage when there is no vertical path to the target rather than despawn.
 
     MOBMOD_ENCROACH_TARGET     = 200, // How close a mob will encroach on it's target, attempting to make model to model contact. Encroach distance * 10
+    MOBMOD_PIXIE               = 201,  // Pixie (heals players)
+
 };
 
 #endif

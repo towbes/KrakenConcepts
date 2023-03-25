@@ -7,6 +7,12 @@ local zoneObject = {}
 
 zoneObject.onInitialize = function(zone)
     xi.voidwalker.zoneOnInit(zone)
+    local ScyllaRespawn = GetServerVariable("ScyllaRespawn")
+    if os.time() < ScyllaRespawn then
+        GetMobByID(ID.mob.SCYLLA):setRespawnTime(ScyllaRespawn - os.time())
+    else
+        SpawnMob(ID.mob.SCYLLA)
+    end
 end
 
 zoneObject.onZoneIn = function(player, prevZone)
