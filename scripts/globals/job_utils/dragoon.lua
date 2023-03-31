@@ -535,6 +535,7 @@ xi.job_utils.dragoon.useAngon = function(player, target, ability)
     if math.random(100) >= preserveAmmoChance then
         player:removeAmmo()
     end
+    
     return typeEffect
 end
 

@@ -88,6 +88,7 @@ entity.onMobFight = function(mob, target)
 end
 
 function onMobDeath(mob, player, isKiller)
+    mob:setAnimationSub(0) -- If he dies with Immortal Shield up, the shield effect will go down on death.
 end
 
 return entity
