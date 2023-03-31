@@ -29739,6 +29739,9 @@ INSERT INTO `item_mods` VALUES (15995,296,1); -- CONSERVE_MP: 1
 -- Guignol Earring
 INSERT INTO `item_mods` VALUES (15999,854,20); -- REPAIR_POTENCY: 20
 
+-- Dragoons Earring
+INSERT INTO `item_mods` VALUES (16000,986,10);  -- Wyvern Breath Accuracy
+
 -- Crapaud Earring
 INSERT INTO `item_mods` VALUES (16001,2,5);  -- HP: 5
 INSERT INTO `item_mods` VALUES (16001,5,-5); -- MP: -5

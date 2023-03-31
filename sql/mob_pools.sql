@@ -7140,6 +7140,8 @@ INSERT INTO `mob_pools` VALUES (7068,'Mystic_Avatar','Mystic_Avatar',321,0x00001
 INSERT INTO `mob_pools` VALUES (7069,'Mystic_Avatar','Mystic_Avatar',320,0x00001E0300000000000000000000000000000000,1,1,12,240,100,0,1,1,1,18,759,0,0,131,0,0,0,0,256,320,320);
 INSERT INTO `mob_pools` VALUES (7070,'Mystic_Avatar','Mystic_Avatar',323,0x00001B0300000000000000000000000000000000,1,1,8,240,100,0,1,1,1,18,759,0,0,131,0,0,0,0,256,323,323);
 
+-- Caedarva Mire
+INSERT INTO `mob_pools` VALUES (8000,'Vidhuwa_the_Wrathborn','Vidhuwa_the_Wrathborn',233,_binary 0x0000ef0600000000000000000000000000000000,4,4,5,240,100,0,1,3,1,2,0,0,404,133,0,1,0,0,0,233,233);
 -- ------------------------------------------------------------
 -- Start of Ambuscade section
 -- NOTE: The mobs are changed every update in the DATs, so using out-of-date

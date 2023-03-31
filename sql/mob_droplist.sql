@@ -26805,7 +26805,8 @@ INSERT INTO `mob_droplist` VALUES(3800,0,0,1000,2810,@ALWAYS);  -- vial_of_ebur_
 INSERT INTO `mob_droplist` VALUES(3800,0,0,1000,2824,@COMMON);   -- square_of_shagreen
 INSERT INTO `mob_droplist` VALUES(3800,0,0,1000,19126,@VCOMMON);  -- papilio_kirpan
 
-
+-- Vidhuwa the Wrathborn
+INSERT INTO `mob_droplist` VALUES(3801, 0, 0, 1000, 18958, 200);
 /*!40000 ALTER TABLE `mob_droplist` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
