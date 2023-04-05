@@ -1328,13 +1328,16 @@ void SmallPacket0x01E(map_session_data_t* const PSession, CCharEntity* const PCh
 
     const uint8 HEADER_LENGTH = 4;
 
+    // clang-format off
     std::vector<char> chars;
     std::for_each(data[HEADER_LENGTH], data[HEADER_LENGTH] + (data.getSize() - HEADER_LENGTH), [&](char ch)
-                  {
+    {
         if (isascii(ch) && ch != '\0')
         {
             chars.emplace_back(ch);
-        } });
+        }
+    });
+    // clang-format on
     auto str = std::string(chars.begin(), chars.end());
     luautils::OnPlayerVolunteer(PChar, str);
 }
@@ -3157,7 +3160,7 @@ void SmallPacket0x04E(map_session_data_t* const PSession, CCharEntity* const PCh
 
     if (PChar->m_GMlevel == 0 && !PChar->loc.zone->CanUseMisc(MISC_AH))
     {
-        ShowDebug("%s is trying to use the auction house in a disallowed zone [%s]", PChar->GetName(), PChar->loc.zone->GetName());
+        ShowWarning("%s is trying to use the auction house in a disallowed zone [%s]", PChar->GetName(), PChar->loc.zone->GetName());
         return;
     }
 
@@ -3179,7 +3182,7 @@ void SmallPacket0x04E(map_session_data_t* const PSession, CCharEntity* const PCh
             {
                 if (PItem->isSubType(ITEM_CHARGED) && ((CItemUsable*)PItem)->getCurrentCharges() < ((CItemUsable*)PItem)->getMaxCharges())
                 {
-                    PChar->pushPacket(new CAuctionHousePacket(action, 197, 0, 0));
+                    PChar->pushPacket(new CAuctionHousePacket(action, 197, 0, 0, 0, 0));
                     return;
                 }
                 PChar->pushPacket(new CAuctionHousePacket(action, PItem, quantity, price));
@@ -3217,7 +3220,7 @@ void SmallPacket0x04E(map_session_data_t* const PSession, CCharEntity* const PCh
             }
             else
             {
-                PChar->pushPacket(new CAuctionHousePacket(action, 246, 0, 0)); // try again in a little while msg
+                PChar->pushPacket(new CAuctionHousePacket(action, 246, 0, 0, 0, 0)); // try again in a little while msg
                 break;
             }
         }
@@ -3240,7 +3243,7 @@ void SmallPacket0x04E(map_session_data_t* const PSession, CCharEntity* const PCh
             {
                 if (PItem->isSubType(ITEM_CHARGED) && ((CItemUsable*)PItem)->getCurrentCharges() < ((CItemUsable*)PItem)->getMaxCharges())
                 {
-                    PChar->pushPacket(new CAuctionHousePacket(action, 197, 0, 0));
+                    PChar->pushPacket(new CAuctionHousePacket(action, 197, 0, 0, 0, 0));
                     return;
                 }
                 uint32 auctionFee = 0;
@@ -3249,7 +3252,7 @@ void SmallPacket0x04E(map_session_data_t* const PSession, CCharEntity* const PCh
                     if (PItem->getStackSize() == 1 || PItem->getStackSize() != PItem->getQuantity())
                     {
                         ShowError("SmallPacket0x04E::AuctionHouse: Incorrect quantity of item %s", PItem->getName());
-                        PChar->pushPacket(new CAuctionHousePacket(action, 197, 0, 0)); // Failed to place up
+                        PChar->pushPacket(new CAuctionHousePacket(action, 197, 0, 0, 0, 0)); // Failed to place up
                         return;
                     }
                     auctionFee = (uint32)(settings::get<uint32>("map.AH_BASE_FEE_STACKS") + (price * settings::get<float>("map.AH_TAX_RATE_STACKS") / 100));
@@ -3263,7 +3266,7 @@ void SmallPacket0x04E(map_session_data_t* const PSession, CCharEntity* const PCh
 
                 if (PChar->getStorage(LOC_INVENTORY)->GetItem(0)->getQuantity() < auctionFee)
                 {
-                    PChar->pushPacket(new CAuctionHousePacket(action, 197, 0, 0)); // Not enough gil to pay fee
+                    PChar->pushPacket(new CAuctionHousePacket(action, 197, 0, 0, 0, 0)); // Not enough gil to pay fee
                     return;
                 }
 
@@ -3281,7 +3284,7 @@ void SmallPacket0x04E(map_session_data_t* const PSession, CCharEntity* const PCh
 
                 if (settings::get<uint8>("map.AH_LIST_LIMIT") && ah_listings >= settings::get<uint8>("map.AH_LIST_LIMIT"))
                 {
-                    PChar->pushPacket(new CAuctionHousePacket(action, 197, 0, 0)); // Failed to place up
+                    PChar->pushPacket(new CAuctionHousePacket(action, 197, 0, 0, 0, 0)); // Failed to place up
                     return;
                 }
 
@@ -3290,13 +3293,13 @@ void SmallPacket0x04E(map_session_data_t* const PSession, CCharEntity* const PCh
                 if (sql->Query(fmtQuery, PItem->getID(), quantity == 0, PChar->id, PChar->GetName(), (uint32)time(nullptr), price) == SQL_ERROR)
                 {
                     ShowError("SmallPacket0x04E::AuctionHouse: Cannot insert item %s to database", PItem->getName());
-                    PChar->pushPacket(new CAuctionHousePacket(action, 197, 0, 0)); // failed to place up
+                    PChar->pushPacket(new CAuctionHousePacket(action, 197, 0, 0, 0, 0)); // failed to place up
                     return;
                 }
                 charutils::UpdateItem(PChar, LOC_INVENTORY, slot, -(int32)(quantity != 0 ? 1 : PItem->getStackSize()));
                 charutils::UpdateItem(PChar, LOC_INVENTORY, 0, -(int32)auctionFee); // Deduct AH fee
 
-                PChar->pushPacket(new CAuctionHousePacket(action, 1, 0, 0));                 // Merchandise put up on auction msg
+                PChar->pushPacket(new CAuctionHousePacket(action, 1, 0, 0, 0, 0));           // Merchandise put up on auction msg
                 PChar->pushPacket(new CAuctionHousePacket(0x0C, (uint8)ah_listings, PChar)); // Inform history of slot
             }
         }
@@ -3307,7 +3310,7 @@ void SmallPacket0x04E(map_session_data_t* const PSession, CCharEntity* const PCh
 
             if (PChar->getStorage(LOC_INVENTORY)->GetFreeSlotsCount() == 0)
             {
-                PChar->pushPacket(new CAuctionHousePacket(action, 0xE5, 0, 0));
+                PChar->pushPacket(new CAuctionHousePacket(action, 0xE5, 0, 0, 0, 0));
             }
             else
             {
@@ -3321,7 +3324,7 @@ void SmallPacket0x04E(map_session_data_t* const PSession, CCharEntity* const PCh
                         {
                             if (PChar->getStorage(LocID)->SearchItem(itemid) != ERROR_SLOTID)
                             {
-                                PChar->pushPacket(new CAuctionHousePacket(action, 0xE5, 0, 0));
+                                PChar->pushPacket(new CAuctionHousePacket(action, 0xE5, 0, 0, 0, 0));
                                 return;
                             }
                         }
@@ -3342,14 +3345,22 @@ void SmallPacket0x04E(map_session_data_t* const PSession, CCharEntity* const PCh
                             {
                                 charutils::UpdateItem(PChar, LOC_INVENTORY, 0, -(int32)(price));
 
-                                PChar->pushPacket(new CAuctionHousePacket(action, 0x01, itemid, price));
+                                PChar->pushPacket(new CAuctionHousePacket(action, 0x01, itemid, price, quantity, PItem->getStackSize()));
                                 PChar->pushPacket(new CInventoryFinishPacket());
                             }
                             return;
                         }
                     }
                 }
-                PChar->pushPacket(new CAuctionHousePacket(action, 0xC5, itemid, price));
+                // You were unable to buy the {qty} {item}
+                if (PItem)
+                {
+                    PChar->pushPacket(new CAuctionHousePacket(action, 0xC5, itemid, price, quantity, PItem->getStackSize()));
+                }
+                else
+                {
+                    PChar->pushPacket(new CAuctionHousePacket(action, 0xC5, itemid, price, quantity, 0));
+                }
             }
         }
         break;
@@ -5242,7 +5253,9 @@ void SmallPacket0x0B5(map_session_data_t* const PSession, CCharEntity* const PCh
                 if (settings::get<bool>("map.AUDIT_CHAT") && settings::get<uint8>("map.AUDIT_SAY"))
                 {
                     // clang-format off
-                    Async::getInstance()->query([name = PChar->GetName(), rawMessage = (const char*)data[6]](SqlConnection* _sql)
+                    // NOTE: We capture rawMessage as a std::string because if we cast data[6] into a const char*, the underlying data might
+                    //     : be gone by the time we action this lambda on the worker thread.
+                    Async::getInstance()->query([name = PChar->GetName(), rawMessage = std::string((const char*)data[6])](SqlConnection* _sql)
                     {
                         auto message = _sql->EscapeString(rawMessage);
                         std::ignore  = _sql->Query("INSERT INTO audit_chat (speaker,type,message,datetime) VALUES('%s','SAY','%s',current_timestamp())",
@@ -5266,7 +5279,9 @@ void SmallPacket0x0B5(map_session_data_t* const PSession, CCharEntity* const PCh
                     if (settings::get<bool>("map.AUDIT_CHAT") && settings::get<uint8>("map.AUDIT_SAY"))
                     {
                         // clang-format off
-                        Async::getInstance()->query([name = PChar->GetName(), rawMessage = (const char*)data[6]](SqlConnection* _sql)
+                        // NOTE: We capture rawMessage as a std::string because if we cast data[6] into a const char*, the underlying data might
+                        //     : be gone by the time we action this lambda on the worker thread.
+                        Async::getInstance()->query([name = PChar->GetName(), rawMessage = std::string((const char*)data[6])](SqlConnection* _sql)
                         {
                             auto message = _sql->EscapeString(rawMessage);
                             std::ignore  = _sql->Query("INSERT INTO audit_chat (speaker,type,message,datetime) VALUES('%s','SAY','%s',current_timestamp())",
@@ -5287,7 +5302,9 @@ void SmallPacket0x0B5(map_session_data_t* const PSession, CCharEntity* const PCh
                     if (settings::get<bool>("map.AUDIT_CHAT") && settings::get<uint8>("map.AUDIT_SHOUT"))
                     {
                         // clang-format off
-                        Async::getInstance()->query([name = PChar->GetName(), rawMessage = (const char*)data[6]](SqlConnection* _sql)
+                        // NOTE: We capture rawMessage as a std::string because if we cast data[6] into a const char*, the underlying data might
+                        //     : be gone by the time we action this lambda on the worker thread.
+                        Async::getInstance()->query([name = PChar->GetName(), rawMessage = std::string((const char*)data[6])](SqlConnection* _sql)
                         {
                             auto message = _sql->EscapeString(rawMessage);
                             std::ignore  = _sql->Query("INSERT INTO audit_chat (speaker,type,message,datetime) VALUES('%s','SHOUT','%s',current_timestamp())",
@@ -5313,7 +5330,9 @@ void SmallPacket0x0B5(map_session_data_t* const PSession, CCharEntity* const PCh
                             char decodedLinkshellName[DecodeStringLength];
                             DecodeStringLinkshell(PChar->PLinkshell1->getName(), decodedLinkshellName);
                             // clang-format off
-                            Async::getInstance()->query([name = PChar->GetName(), rawMessage = (const char*)data[6], decodedLinkshellName](SqlConnection* _sql)
+                            // NOTE: We capture rawMessage as a std::string because if we cast data[6] into a const char*, the underlying data might
+                            //     : be gone by the time we action this lambda on the worker thread.
+                            Async::getInstance()->query([name = PChar->GetName(), rawMessage = std::string((const char*)data[6]), decodedLinkshellName](SqlConnection* _sql)
                             {
                                 auto message = _sql->EscapeString(rawMessage);
                                 std::ignore  = _sql->Query("INSERT INTO audit_chat (speaker,type,lsName,message,datetime) VALUES('%s','LINKSHELL','%s','%s',current_timestamp())",
@@ -5339,7 +5358,9 @@ void SmallPacket0x0B5(map_session_data_t* const PSession, CCharEntity* const PCh
                             char decodedLinkshellName[DecodeStringLength];
                             DecodeStringLinkshell(PChar->PLinkshell2->getName(), decodedLinkshellName);
                             // clang-format off
-                            Async::getInstance()->query([name = PChar->GetName(), rawMessage = (const char*)data[6], decodedLinkshellName](SqlConnection* _sql)
+                            // NOTE: We capture rawMessage as a std::string because if we cast data[6] into a const char*, the underlying data might
+                            //     : be gone by the time we action this lambda on the worker thread.
+                            Async::getInstance()->query([name = PChar->GetName(), rawMessage = std::string((const char*)data[6]), decodedLinkshellName](SqlConnection* _sql)
                             {
                                 auto message = _sql->EscapeString(rawMessage);
                                 std::ignore  = _sql->Query("INSERT INTO audit_chat (speaker,type,lsName,message,datetime) VALUES('%s','LINKSHELL','%s','%s',current_timestamp())",
@@ -5361,7 +5382,9 @@ void SmallPacket0x0B5(map_session_data_t* const PSession, CCharEntity* const PCh
                         if (settings::get<bool>("map.AUDIT_CHAT") && settings::get<uint8>("map.AUDIT_PARTY"))
                         {
                             // clang-format off
-                            Async::getInstance()->query([name = PChar->GetName(), rawMessage = (const char*)data[6]](SqlConnection* _sql)
+                            // NOTE: We capture rawMessage as a std::string because if we cast data[6] into a const char*, the underlying data might
+                            //     : be gone by the time we action this lambda on the worker thread.
+                            Async::getInstance()->query([name = PChar->GetName(), rawMessage = std::string((const char*)data[6])](SqlConnection* _sql)
                             {
                                 auto message = _sql->EscapeString(rawMessage);
                                 std::ignore  = _sql->Query("INSERT INTO audit_chat (speaker,type,message,datetime) VALUES('%s','PARTY','%s',current_timestamp())",
@@ -5392,7 +5415,9 @@ void SmallPacket0x0B5(map_session_data_t* const PSession, CCharEntity* const PCh
                         if (settings::get<bool>("map.AUDIT_CHAT") && settings::get<uint8>("map.AUDIT_YELL"))
                         {
                             // clang-format off
-                            Async::getInstance()->query([name = PChar->GetName(), rawMessage = (const char*)data[6]](SqlConnection* _sql)
+                            // NOTE: We capture rawMessage as a std::string because if we cast data[6] into a const char*, the underlying data might
+                            //     : be gone by the time we action this lambda on the worker thread.
+                            Async::getInstance()->query([name = PChar->GetName(), rawMessage = std::string((const char*)data[6])](SqlConnection* _sql)
                             {
                                 auto message = _sql->EscapeString(rawMessage);
                                 std::ignore  = _sql->Query("INSERT INTO audit_chat (speaker,type,message,datetime) VALUES('%s','YELL','%s',current_timestamp())",
@@ -5422,7 +5447,9 @@ void SmallPacket0x0B5(map_session_data_t* const PSession, CCharEntity* const PCh
                         if (settings::get<bool>("map.AUDIT_CHAT") && settings::get<uint8>("map.AUDIT_UNITY"))
                         {
                             // clang-format off
-                            Async::getInstance()->query([name = PChar->GetName(), rawMessage = (const char*)data[6]](SqlConnection* _sql)
+                            // NOTE: We capture rawMessage as a std::string because if we cast data[6] into a const char*, the underlying data might
+                            //     : be gone by the time we action this lambda on the worker thread.
+                            Async::getInstance()->query([name = PChar->GetName(), rawMessage = std::string((const char*)data[6])](SqlConnection* _sql)
                             {
                                 auto message = _sql->EscapeString(rawMessage);
                                 std::ignore  = _sql->Query("INSERT INTO audit_chat (speaker,type,message,datetime) VALUES('%s','UNITY','%s',current_timestamp())",
@@ -5528,13 +5555,17 @@ void SmallPacket0x0BE(map_session_data_t* const PSession, CCharEntity* const PCh
 
                 if (PChar->PMeritPoints->IsMeritExist(merit))
                 {
+                    const Merit_t* PMerit = PChar->PMeritPoints->GetMerit(merit);
+
                     switch (operation)
                     {
                         case 0:
                             PChar->PMeritPoints->LowerMerit(merit);
+                            PChar->pushPacket(new CMessageBasicPacket(PChar, PChar, data.ref<uint16>(0x06), PMerit->count, MSGBASIC_MERIT_DECREASE));
                             break;
                         case 1:
                             PChar->PMeritPoints->RaiseMerit(merit);
+                            PChar->pushPacket(new CMessageBasicPacket(PChar, PChar, data.ref<uint16>(0x06), PMerit->count, MSGBASIC_MERIT_INCREASE));
                             break;
                     }
                     PChar->pushPacket(new CMenuMeritPacket(PChar));

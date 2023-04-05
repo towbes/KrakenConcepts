@@ -167,6 +167,7 @@ struct teleport_t
     telepoint_t survival;
     uint8       abysseaConflux[MAX_ABYSSEAZONES];
     waypoint_t  waypoints;
+    uint32      eschanPortal;
 
     teleport_t()
     {
