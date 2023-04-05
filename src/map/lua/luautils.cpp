@@ -282,6 +282,7 @@ namespace luautils
         CacheLuaObjectFromFile("./scripts/globals/pets/automaton.lua");
         CacheLuaObjectFromFile("./scripts/globals/pets/luopan.lua");
         CacheLuaObjectFromFile("./scripts/globals/pets/wyvern.lua");
+        CacheLuaObjectFromFile("./scripts/globals/pets/fellow.lua");
 
         if (gLoadAllLua) // Load all lua files (for sanity testing, no need for during regular use)
         {
@@ -453,6 +454,15 @@ namespace luautils
                 return cached_func;
             }
         }
+
+        else if (PEntity->objtype == TYPE_FELLOW)
+        {
+            if (auto cached_func = lua["xi"]["globals"]["pets"]["fellow"][funcName]; cached_func.valid())
+            {
+                return cached_func;
+            }
+        }
+
         else if (PEntity->objtype == TYPE_TRUST)
         {
             std::string mob_name = PEntity->GetName();
@@ -792,6 +802,10 @@ namespace luautils
         {
             std::string mob_name = static_cast<CPetEntity*>(PEntity)->GetScriptName();
             filename             = fmt::format("./scripts/globals/pets/{}.lua", static_cast<CPetEntity*>(PEntity)->GetScriptName());
+        }
+        else if (PEntity->objtype == TYPE_FELLOW)
+        {
+            filename = fmt::format("./scripts/globals/pets/fellow.lua");
         }
         else if (PEntity->objtype == TYPE_TRUST)
         {
@@ -2055,6 +2069,9 @@ namespace luautils
         {
             case TYPE_NPC:
                 pathFormat = "./scripts/zones/{}/npcs/{}.lua";
+                break;
+            case TYPE_FELLOW:
+                pathFormat = "./scripts/globals/pets/fellow.lua";
                 break;
             case TYPE_MOB:
                 pathFormat = "./scripts/zones/{}/mobs/{}.lua";
@@ -3585,7 +3602,7 @@ namespace luautils
     {
         TracyZoneScoped;
 
-        if (PMob == nullptr || PMob->objtype != TYPE_MOB)
+        if (PMob == nullptr || PMob->objtype != TYPE_MOB || PMob->objtype != TYPE_FELLOW)
         {
             return -1;
         }

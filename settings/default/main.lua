@@ -50,6 +50,10 @@ xi.settings.main =
     DAILY_TALLY_LIMIT  = 50000,
     GOBBIE_BOX_MIN_AGE = 45, -- Minimum character age in days before a character can sign up for Gobbie Mystery Box
 
+    -- Adventuring Fellows
+    ENABLE_ADVENTURING_FELLOWS         = true, -- Enable or disable the ability to quest and call Adventuring Fellows
+    ALLOW_ADVENTURING_FELLOW_KATANA_DW = true, -- Enable or disable dual wielding katanas for Adventuring Fellows
+
     -- Records of Eminence
     ENABLE_ROE            = 1, -- Enable Records of Eminence
     ENABLE_ROE_TIMED      = 1, -- Enable 4-hour timed records
