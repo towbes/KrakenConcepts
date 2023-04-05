@@ -4564,14 +4564,14 @@ namespace battleutils
             {
                 m_PChar->addHP(-HandleStoneskin(m_PChar, (int32)(bonusDamage * stalwartSoulBonus)));
 
-                if (m_PChar->GetMJob() == JOB_DRK)
+                // if (m_PChar->GetMJob() == JOB_DRK)
                 {
                     damage += bonusDamage;
                 }
-                else
-                {
-                    damage += bonusDamage / 2;
-                }
+                // else
+                // {
+                //     damage += bonusDamage / 2;
+                // }
             }
         }
         return damage;
