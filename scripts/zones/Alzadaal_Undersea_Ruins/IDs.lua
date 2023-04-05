@@ -52,6 +52,8 @@ zones[xi.zone.ALZADAAL_UNDERSEA_RUINS] =
         CHEESE_HOARDER_GIGIROON = 17072172,
         ARMED_GEARS             = 17072178,
         WULGARU                 = 17072179,
+        OUPIRE                  = 17072170,
+        BOOMPADU                = 17072133,
     },
     npc =
     {

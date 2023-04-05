@@ -261,7 +261,7 @@ local battlefields =
         { 2,   34, 1551 },   -- Wings of Fury (BS20) -- TODO: mobskills Slipstream and Turbulence
         { 3,   35, 1552 },   -- Petrifying Pair (BS30)
         { 4,   36, 1552 },   -- Toadal Recall (BS30) -- TODO: shroom-in-cap mechanic
-    --  { 5,   37,    0 },   -- Mirror, Mirror (Quest)
+        { 5,   37,    0 },   -- Mirror, Mirror (Quest)
     },
 
     [xi.zone.WAUGHROON_SHRINE] =
@@ -596,6 +596,10 @@ local function checkReqs(player, npc, bfid, registrant)
         [33] = function() -- Quest: The Holy Crest
             return player:hasKeyItem(xi.ki.DRAGON_CURSE_REMEDY)
         end,
+
+        [37] = function() -- Quest: Mirror Mirror
+            return player:getQuestStatus(xi.quest.log_id.JEUNO, xi.quest.id.jeuno.MIRROR_MIRROR) == QUEST_ACCEPTED and player:getCharVar("[Quest]Mirror_Mirror") == 2 
+        end, 
 
         [64] = function() -- Mission 2-3
             return nationStatus == 10 and
@@ -1308,6 +1312,10 @@ local function checkSkip(player, bfid)
 
         [33] = function() -- Quest: The Holy Crest
             return player:hasCompletedQuest(xi.quest.log_id.SANDORIA, xi.quest.id.sandoria.THE_HOLY_CREST)
+        end,
+
+        [37] = function() -- Quest: Mirror Mirror
+            return player:getQuestStatus(xi.quest.log_id.JEUNO, xi.quest.id.jeuno.MIRROR_MIRROR) == QUEST_ACCEPTED and player:getCharVar("[Quest]Mirror_Mirror") == 2 
         end,
 
         [64] = function() -- Mission 2-3
