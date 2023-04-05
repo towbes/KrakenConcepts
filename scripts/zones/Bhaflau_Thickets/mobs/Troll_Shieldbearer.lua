@@ -1,10 +1,10 @@
 -----------------------------------
--- Area: Halvung
---   NM: Dorgerwor the Astute
+-- Area: Bhaflau Thickets
+--  Mob: Troll Shieldbearer
 -----------------------------------
-mixins = { require("scripts/mixins/job_special") }
 mixins = {require("scripts/mixins/weapon_break")}
 -----------------------------------
+
 local entity = {}
 
 entity.onMobDeath = function(mob, player, optParams)

@@ -1,13 +1,12 @@
 -----------------------------------
--- Area: Halvung
---   NM: Dorgerwor the Astute
+--   Area: Mount Zhayolm
+--    Mob: HillTroll Red Mage
 -----------------------------------
-mixins = { require("scripts/mixins/job_special") }
 mixins = {require("scripts/mixins/weapon_break")}
 -----------------------------------
 local entity = {}
 
-entity.onMobDeath = function(mob, player, optParams)
+entity.onMobDeath = function(mob, player, isKiller)
 end
 
 return entity

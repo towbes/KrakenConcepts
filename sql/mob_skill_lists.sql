@@ -1093,14 +1093,14 @@ INSERT INTO `mob_skill_lists` VALUES ('Treant',245,328); -- drill_branch
 INSERT INTO `mob_skill_lists` VALUES ('Treant',245,329); -- pinecone_bomb
 INSERT INTO `mob_skill_lists` VALUES ('Treant',245,331); -- leafstorm
 INSERT INTO `mob_skill_lists` VALUES ('Treant',245,332); -- entangle
--- INSERT INTO `mob_skill_lists` VALUES ('Troll',246,1741);
--- INSERT INTO `mob_skill_lists` VALUES ('Troll',246,1742);
+INSERT INTO `mob_skill_lists` VALUES ('Troll',246,1741);
+INSERT INTO `mob_skill_lists` VALUES ('Troll',246,1742);
 INSERT INTO `mob_skill_lists` VALUES ('Troll',246,1743);
 INSERT INTO `mob_skill_lists` VALUES ('Troll',246,1744);
 INSERT INTO `mob_skill_lists` VALUES ('Troll',246,1745);
 INSERT INTO `mob_skill_lists` VALUES ('Troll',246,1746);
--- INSERT INTO `mob_skill_lists` VALUES ('Troll',246,1748);
--- INSERT INTO `mob_skill_lists` VALUES ('Troll',246,1749);
+INSERT INTO `mob_skill_lists` VALUES ('Troll',246,1748);
+INSERT INTO `mob_skill_lists` VALUES ('Troll',246,1749);
 -- 247: Tube
 -- 248 to 249: free
 INSERT INTO `mob_skill_lists` VALUES ('Uragnite_shell',250,1571); -- gas_shell
@@ -3890,6 +3890,21 @@ INSERT INTO `mob_skill_lists` VALUES('Nuhntwo', 5306, 1696); -- Seismic Tail
 -- Scylla exclusive lists/skills
 INSERT INTO `mob_skill_lists` VALUES('Scylla_IG', 2440, 2440);
 INSERT INTO `mob_skill_lists` VALUES('Scylla_AC', 2441, 2441);
+
+INSERT INTO `mob_skill_lists` VALUES('Troll_Red', 5307, 1741);
+INSERT INTO `mob_skill_lists` VALUES('Troll_Red', 5307, 1742);
+INSERT INTO `mob_skill_lists` VALUES('Troll_Red', 5307, 1743);
+INSERT INTO `mob_skill_lists` VALUES('Troll_Red', 5307, 1744);
+INSERT INTO `mob_skill_lists` VALUES('Troll_Red', 5307, 1745);
+INSERT INTO `mob_skill_lists` VALUES('Troll_Red', 5307, 1746);
+INSERT INTO `mob_skill_lists` VALUES('Troll_Red', 5307, 1748);
+INSERT INTO `mob_skill_lists` VALUES('Troll_Armor', 5308, 1894);
+INSERT INTO `mob_skill_lists` VALUES('Troll_Armor', 5308, 1895);
+INSERT INTO `mob_skill_lists` VALUES('Troll_Armor', 5308, 1896);
+INSERT INTO `mob_skill_lists` VALUES('Troll_Armor', 5308, 1744);
+INSERT INTO `mob_skill_lists` VALUES('Troll_Armor', 5308, 1745);
+INSERT INTO `mob_skill_lists` VALUES('Troll_Armor', 5308, 1899);
+
 
 
 -- ------------------------------------------------------------
