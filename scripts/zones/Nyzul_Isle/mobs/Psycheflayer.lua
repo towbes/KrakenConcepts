@@ -7,6 +7,10 @@ require('scripts/globals/nyzul')
 -----------------------------------
 local entity = {}
 
+entity.onMobInitialize = function(mob)
+    mob:setMod(xi.mod.SILENCERES, 100)
+end
+
 entity.onMobSpawn = function(mob)
     xi.nyzul.specifiedEnemySet(mob)
 
