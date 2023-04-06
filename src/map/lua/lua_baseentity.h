@@ -845,6 +845,7 @@ public:
     uint16 getDespoilItem();                                                             // gets ItemID of droplist despoil item from mob (steal item if no despoil item)
     uint16 getDespoilDebuff(uint16 itemID);                                              // gets the status effect id to apply to the mob on successful despoil
     bool   itemStolen();                                                                 // sets mob's ItemStolen var = true
+    int32  setStealItemID(int32 itemID);                                                   // Sets a mob's item to be stolen
     int16  getTHlevel();                                                                 // Returns the Monster's current Treasure Hunter Tier
 
     uint32 getAvailableTraverserStones();

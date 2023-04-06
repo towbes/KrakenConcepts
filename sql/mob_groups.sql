@@ -5792,11 +5792,11 @@ INSERT INTO `mob_groups` VALUES (19,1662,91,'Goblin_Franctireur',330,0,1060,0,0,
 INSERT INTO `mob_groups` VALUES (20,1724,91,'Goblins_Crawler',0,128,0,0,0,51,53,0);
 INSERT INTO `mob_groups` VALUES (21,3492,91,'Scabrous_Slug',330,0,2172,0,0,56,62,0);
 INSERT INTO `mob_groups` VALUES (22,1652,91,'Goblin_Draftee',330,0,1024,0,0,56,59,0);
-INSERT INTO `mob_groups` VALUES (23,1151,91,'Dyinyinga',0,32,728,0,0,60,60,0);
+INSERT INTO `mob_groups` VALUES (23,1151,91,'Dyinyinga',0,32,728,10000,0,65,68,0);
 INSERT INTO `mob_groups` VALUES (24,4309,91,'Water_Elemental',330,4,2629,0,0,43,43,0);
 INSERT INTO `mob_groups` VALUES (25,6505,91,'Evil_Spirit',330,1,795,0,0,43,43,0);
 INSERT INTO `mob_groups` VALUES (26,6305,91,'Death_Jacket',330,0,585,0,0,38,48,0);
-INSERT INTO `mob_groups` VALUES (27,6822,91,'Erle',0,32,0,0,0,0,0,0);
+INSERT INTO `mob_groups` VALUES (27,6822,91,'Erle',0,32,3802,6300,4000,63,63,0);
 INSERT INTO `mob_groups` VALUES (28,6327,91,'Dragonfly',330,0,142,0,0,58,62,0);
 INSERT INTO `mob_groups` VALUES (29,5840,91,'Champion_Crawler',330,0,3025,0,0,93,94,0);
 INSERT INTO `mob_groups` VALUES (30,6315,91,'Berry_Grub',330,0,256,0,0,42,52,0);
@@ -6919,7 +6919,7 @@ INSERT INTO `mob_groups` VALUES (11,474,99,'Blooming_Rafflesia',960,0,313,0,0,71
 INSERT INTO `mob_groups` VALUES (12,193,99,'Antlion_Fly',960,0,142,0,0,63,64,0);
 INSERT INTO `mob_groups` VALUES (13,1160,99,'Earth_Elemental',960,4,733,0,0,80,80,0);
 INSERT INTO `mob_groups` VALUES (14,1341,99,'Fire_Elemental',960,4,831,0,0,80,80,0);
-INSERT INTO `mob_groups` VALUES (15,1145,99,'Duu_Masa_the_Onecut',0,128,725,0,0,80,80,0);
+INSERT INTO `mob_groups` VALUES (15,1145,99,'Duu_Masa_the_Onecut',0,128,725,0,0,83,83,0);
 INSERT INTO `mob_groups` VALUES (16,6687,99,'Zhuu_Buxu_the_Silent',0,32,3033,0,0,80,84,0);
 INSERT INTO `mob_groups` VALUES (17,5347,99,'War_Lynx',960,0,413,0,0,71,73,0);
 INSERT INTO `mob_groups` VALUES (18,2062,99,'Immolatory_Pugil',960,0,1359,0,0,64,64,0);

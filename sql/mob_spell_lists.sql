@@ -5181,6 +5181,10 @@ INSERT INTO `mob_spell_lists` VALUES('Scylla', 719, 362, 1, 255); -- bindga
 
 INSERT INTO `mob_spell_lists` VALUES ('Vidhuwa_the_Paintorn',720,214,1,255); -- flood (58~255)
 
+INSERT INTO `mob_spell_lists` VALUES('Erle', 721, 156, 1, 255);
+INSERT INTO `mob_spell_lists` VALUES('Erle', 721, 185, 1, 255);
+INSERT INTO `mob_spell_lists` VALUES('Erle', 721, 208, 1, 255);
+
 
 
 /*!40000 ALTER TABLE `mob_spell_lists` ENABLE KEYS */;

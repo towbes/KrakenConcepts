@@ -100,6 +100,7 @@ CMobEntity::CMobEntity()
     m_HiPartySize  = 0;
     m_THLvl        = 0;
     m_ItemStolen   = false;
+    m_StealItemID  = 0;
 
     HPmodifier = 0;
     MPmodifier = 0;
@@ -562,6 +563,7 @@ void CMobEntity::Spawn()
     m_HiPartySize  = 0;
     m_THLvl        = 0;
     m_ItemStolen   = false;
+    m_StealItemID  = 0;
     m_DropItemTime = 1000;
     animationsub   = (uint8)getMobMod(MOBMOD_SPAWN_ANIMATIONSUB);
     SetCallForHelpFlag(false);

@@ -26891,6 +26891,9 @@ INSERT INTO `mob_droplist` VALUES(3800,0,0,1000,19126,@VCOMMON);  -- papilio_kir
 -- Vidhuwa the Wrathborn
 INSERT INTO `mob_droplist` VALUES(3801, 0, 0, 1000, 18958, 200);
 
+--Erle
+INSERT INTO `mob_droplist` VALUES(3802, 0, 0, 1000, 19122, 100);
+
 /*!40000 ALTER TABLE `mob_droplist` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;

@@ -7,7 +7,7 @@ g_mixins = g_mixins or {}
 g_mixins.families = g_mixins.families or {}
 
 g_mixins.families.funguar_s = function(mob)
-    mob:addListener("ITEM_STOLEN", "SHROOM_S_ITEM_STOLEN", function(mob, player, itemId)
+    --[[mob:addListener("ITEM_STOLEN", "SHROOM_S_ITEM_STOLEN", function(mob, player, itemId)
         -- remove bulbs on head from successful steals
         local animSum = mob:getAnimationSub()
         if animSum == 0 then
@@ -17,10 +17,10 @@ g_mixins.families.funguar_s = function(mob)
         elseif animSum == 2 then
             mob:setAnimationSub(3)
         end
-    end)
+    end)--]]
 
     mob:addListener("COMBAT_TICK", "SHROOM_S_CTICK", function(mob)
-        -- adjust steal item based on the animationsub. This is adjusted by either successfully stealing or by the mob using numbshroom or queezyshroom
+        --[[-- adjust steal item based on the animationsub. This is adjusted by either successfully stealing or by the mob using numbshroom or queezyshroom
         local animSum = mob:getAnimationSub()
         if animSum == 0 then
             mob:setStealItemID(4373) -- Woozyshroom
@@ -30,7 +30,7 @@ g_mixins.families.funguar_s = function(mob)
             mob:setStealItemID(5680) -- Agaricus
         elseif animSum == 3 then
             mob:itemStolen() -- Nothing left to steal
-        end
+        end--]]
 
         -- All funguars in shadowreign area have regen in rain weather
         if mob:getWeather() == xi.weather.RAIN or mob:getWeather() == xi.weather.SQUALL then

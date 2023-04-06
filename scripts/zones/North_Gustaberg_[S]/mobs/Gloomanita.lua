@@ -4,11 +4,18 @@
 -----------------------------------
 require("scripts/globals/hunts")
 require("scripts/globals/mobs")
+mixins = {require("scripts/mixins/families/funguar_s")}
 -----------------------------------
 local entity = {}
 
 entity.onMobInitialize = function(mob)
     mob:setMobMod(xi.mobMod.ADD_EFFECT, 1)
+end
+
+entity.onMobSpawn = function(mob)
+    mob:setAnimationSub(0)
+--    mob:setStealItemID(4373) -- Woozyshroom is default steal item, needed here in case first action on the mob is steal
+
 end
 
 entity.onAdditionalEffect = function(mob, target, damage)

@@ -14772,6 +14772,29 @@ uint16 CLuaBaseEntity::getStealItem()
 }
 
 /************************************************************************
+ *  Function: setStealItemID()
+ *  Purpose : Sets a mob's item to be stolen
+ *  Example : target:setStealItemID(1234)
+ *  Notes   :
+ ************************************************************************/
+
+inline int32 CLuaBaseEntity::setStealItemID(int32 itemID)
+{
+    XI_DEBUG_BREAK_IF(m_PBaseEntity->objtype != TYPE_MOB);
+
+    auto* PMob = dynamic_cast<CMobEntity*>(m_PBaseEntity);
+
+    if (PMob)
+    {
+        PMob->m_StealItemID = itemID;
+        PMob->m_ItemStolen  = false;
+
+    }
+    return 1;
+}
+
+
+/************************************************************************
  *  Function: getDespoilItem()
  *  Purpose : Used to return the Item ID of a mob's item which can be despoiled
  *  Example : local despoilItem = target:getDespoilItem()
@@ -16063,6 +16086,7 @@ void CLuaBaseEntity::Register()
     SOL_REGISTER("setDropID", CLuaBaseEntity::setDropID);
     SOL_REGISTER("addTreasure", CLuaBaseEntity::addTreasure);
     SOL_REGISTER("getStealItem", CLuaBaseEntity::getStealItem);
+    SOL_REGISTER("setStealItem", CLuaBaseEntity::setStealItemID);
     SOL_REGISTER("getDespoilItem", CLuaBaseEntity::getDespoilItem);
     SOL_REGISTER("getDespoilDebuff", CLuaBaseEntity::getDespoilDebuff);
     SOL_REGISTER("itemStolen", CLuaBaseEntity::itemStolen);
