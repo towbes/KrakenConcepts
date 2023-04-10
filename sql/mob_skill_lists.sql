@@ -1299,7 +1299,6 @@ INSERT INTO `mob_skill_lists` VALUES ('Gulool',285,1801);
 INSERT INTO `mob_skill_lists` VALUES ('Vulpangue',286,1718);
 INSERT INTO `mob_skill_lists` VALUES ('Vulpangue',286,1721);
 INSERT INTO `mob_skill_lists` VALUES ('Vulpangue',286,1722);
-INSERT INTO `mob_skill_lists` VALUES ('Vulpangue',286,1723);
 INSERT INTO `mob_skill_lists` VALUES ('Vulpangue',286,1724);
 INSERT INTO `mob_skill_lists` VALUES ('Vulpangue',286,2360);
 INSERT INTO `mob_skill_lists` VALUES ('Chamrosh',287,1699);
@@ -1348,16 +1347,10 @@ INSERT INTO `mob_skill_lists` VALUES ('IririSamariri',297,1958);
 INSERT INTO `mob_skill_lists` VALUES ('IririSamariri',297,1959);
 INSERT INTO `mob_skill_lists` VALUES ('IririSamariri',297,1961);
 -- INSERT INTO `mob_skill_lists` VALUES ('IririSamariri',297,1962);
-INSERT INTO `mob_skill_lists` VALUES ('Anantaboga',298,647); -- Chaosblade
-INSERT INTO `mob_skill_lists` VALUES ('Anantaboga',298,649); -- Voidsong
-INSERT INTO `mob_skill_lists` VALUES ('Anantaboga',298,650); -- Thornsong
-INSERT INTO `mob_skill_lists` VALUES ('Anantaboga',298,651); -- Lodesong
-INSERT INTO `mob_skill_lists` VALUES ('Anantaboga',298,1792); -- Nullsong
-INSERT INTO `mob_skill_lists` VALUES ('Anantaboga_Silenced',5298,644); -- Wind Breath
-INSERT INTO `mob_skill_lists` VALUES ('Anantaboga_Silenced',5298,645); -- Body Slam
-INSERT INTO `mob_skill_lists` VALUES ('Anantaboga_Silenced',5298,646); -- Heavy Stomp
-INSERT INTO `mob_skill_lists` VALUES ('Anantaboga_Silenced',5298,647); -- Chaosblade
-INSERT INTO `mob_skill_lists` VALUES ('Anantaboga_Silenced',5298,648); -- Petro Eyes
+INSERT INTO `mob_skill_lists` VALUES ('Anantaboga',298,644);
+INSERT INTO `mob_skill_lists` VALUES ('Anantaboga',298,645);
+INSERT INTO `mob_skill_lists` VALUES ('Anantaboga',298,646);
+-- INSERT INTO `mob_skill_lists` VALUES ('Anantaboga',298,256);
 INSERT INTO `mob_skill_lists` VALUES ('Dextrose',299,1821);
 INSERT INTO `mob_skill_lists` VALUES ('Dextrose',299,1822);
 -- INSERT INTO `mob_skill_lists` VALUES ('Dextrose',299,1823);
@@ -1365,8 +1358,6 @@ INSERT INTO `mob_skill_lists` VALUES ('Dextrose',299,1822);
 -- INSERT INTO `mob_skill_lists` VALUES ('Dextrose',299,1826);
 INSERT INTO `mob_skill_lists` VALUES ('Reacton',300,593);
 INSERT INTO `mob_skill_lists` VALUES ('Reacton',300,594);
-INSERT INTO `mob_skill_lists` VALUES ('Reacton',300,595);
-INSERT INTO `mob_skill_lists` VALUES ('Reacton',300,596);
 INSERT INTO `mob_skill_lists` VALUES ('Verdelet',301,1709);
 INSERT INTO `mob_skill_lists` VALUES ('Verdelet',301,1710);
 INSERT INTO `mob_skill_lists` VALUES ('Verdelet',301,1711);
@@ -1382,7 +1373,6 @@ INSERT INTO `mob_skill_lists` VALUES ('ZareehklTheJu',303,1781);
 INSERT INTO `mob_skill_lists` VALUES ('ZareehklTheJu',303,1782);
 INSERT INTO `mob_skill_lists` VALUES ('ZareehklTheJu',303,1783);
 --INSERT INTO `mob_skill_lists` VALUES ('ZareehklTheJu',303,1784);
-INSERT INTO `mob_skill_lists` VALUES('Zareehkl_Phase2', 5303, 2363);
 INSERT INTO `mob_skill_lists` VALUES ('Big_Bang',304,2218); -- penumbral_impact
 INSERT INTO `mob_skill_lists` VALUES ('Gotoh_Zha_the_Redolent',305,1920);
 INSERT INTO `mob_skill_lists` VALUES ('Gotoh_Zha_the_Redolent',305,1921);
@@ -1392,12 +1382,8 @@ INSERT INTO `mob_skill_lists` VALUES ('Gotoh_Zha_the_Redolent',305,1924);
 -- INSERT INTO `mob_skill_lists` VALUES ('Gotoh_Zha_the_Redolent',305,1925);
 INSERT INTO `mob_skill_lists` VALUES ('Gotoh_Zha_the_Redolent',305,1926);
 INSERT INTO `mob_skill_lists` VALUES ('Gotoh_Zha_the_Redolent',305,2361);
-INSERT INTO `mob_skill_lists` VALUES('Dea', 306, 2101);
-INSERT INTO `mob_skill_lists` VALUES('Dea', 306, 2102);
-INSERT INTO `mob_skill_lists` VALUES('Dea', 306, 2103);
+-- 306: Dea
 -- 307: Kalos_Eunomia
-INSERT INTO `mob_skill_lists` VALUES ('Khromasoul',308,1895);
-INSERT INTO `mob_skill_lists` VALUES ('Khromasoul',308,1899);
 INSERT INTO `mob_skill_lists` VALUES ('Khromasoul',308,1743);
 INSERT INTO `mob_skill_lists` VALUES ('Khromasoul',308,1744);
 INSERT INTO `mob_skill_lists` VALUES ('Khromasoul',308,1745);
@@ -1411,8 +1397,6 @@ INSERT INTO `mob_skill_lists` VALUES ('Nosferatu',309,2111);
 INSERT INTO `mob_skill_lists` VALUES ('Nosferatu',309,2112);
 INSERT INTO `mob_skill_lists` VALUES ('ExperimentalLa',310,1753);
 INSERT INTO `mob_skill_lists` VALUES ('ExperimentalLa',310,1758);
-INSERT INTO `mob_skill_lists` VALUES ('ExperimentalLa',310,1926);
---INSERT INTO `mob_skill_lists` VALUES ('ExperimentalLa',310,1754);
 -- 311: free
 -- INSERT INTO `mob_skill_lists` VALUES ('Nuhn',312,1977);
 -- INSERT INTO `mob_skill_lists` VALUES ('Nuhn',312,1978);
@@ -3881,6 +3865,35 @@ INSERT INTO `mob_skill_lists` VALUES('Automaton_Valoredge', 2029, 1940); -- Chim
 INSERT INTO `mob_skill_lists` VALUES('Automaton_Valoredge', 2029, 1941); -- String Clipper
 INSERT INTO `mob_skill_lists` VALUES('Automaton_Valoredge', 2029, 2065); -- Cannibal Blade
 INSERT INTO `mob_skill_lists` VALUES('Automaton_Valoredge', 2029, 2299); -- Bone Crusher
+
+INSERT INTO `mob_skill_lists` VALUES ('Vulpangue',286,1723);
+
+INSERT INTO `mob_skill_lists` VALUES ('Reacton',300,595);
+INSERT INTO `mob_skill_lists` VALUES ('Reacton',300,596);
+
+INSERT INTO `mob_skill_lists` VALUES('Zareehkl_Phase2', 5303, 2363);
+
+INSERT INTO `mob_skill_lists` VALUES('Dea', 306, 2101);
+INSERT INTO `mob_skill_lists` VALUES('Dea', 306, 2102);
+INSERT INTO `mob_skill_lists` VALUES('Dea', 306, 2103);
+
+INSERT INTO `mob_skill_lists` VALUES ('Anantaboga',298,647); -- Chaosblade
+INSERT INTO `mob_skill_lists` VALUES ('Anantaboga',298,649); -- Voidsong
+INSERT INTO `mob_skill_lists` VALUES ('Anantaboga',298,650); -- Thornsong
+INSERT INTO `mob_skill_lists` VALUES ('Anantaboga',298,651); -- Lodesong
+INSERT INTO `mob_skill_lists` VALUES ('Anantaboga',298,1792); -- Nullsong
+INSERT INTO `mob_skill_lists` VALUES ('Anantaboga_Silenced',5298,644); -- Wind Breath
+INSERT INTO `mob_skill_lists` VALUES ('Anantaboga_Silenced',5298,645); -- Body Slam
+INSERT INTO `mob_skill_lists` VALUES ('Anantaboga_Silenced',5298,646); -- Heavy Stomp
+INSERT INTO `mob_skill_lists` VALUES ('Anantaboga_Silenced',5298,647); -- Chaosblade
+INSERT INTO `mob_skill_lists` VALUES ('Anantaboga_Silenced',5298,648); -- Petro Eyes
+
+INSERT INTO `mob_skill_lists` VALUES ('Khromasoul',308,1895);
+INSERT INTO `mob_skill_lists` VALUES ('Khromasoul',308,1899);
+
+INSERT INTO `mob_skill_lists` VALUES ('ExperimentalLa',310,1926);
+--INSERT INTO `mob_skill_lists` VALUES ('ExperimentalLa',310,1754);
+
 INSERT INTO `mob_skill_lists` VALUES('Nuhn', 5305, 1693); -- gnash
 INSERT INTO `mob_skill_lists` VALUES('Nuhn', 5305, 1977); -- deathgnash
 INSERT INTO `mob_skill_lists` VALUES('Nuhn', 5305, 1695); -- hypnic lamp
@@ -3904,6 +3917,8 @@ INSERT INTO `mob_skill_lists` VALUES('Troll_Armor', 5308, 1896);
 INSERT INTO `mob_skill_lists` VALUES('Troll_Armor', 5308, 1744);
 INSERT INTO `mob_skill_lists` VALUES('Troll_Armor', 5308, 1745);
 INSERT INTO `mob_skill_lists` VALUES('Troll_Armor', 5308, 1899);
+
+
 
 
 
