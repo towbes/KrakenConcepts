@@ -10871,7 +10871,6 @@ INSERT INTO `mob_droplist` VALUES (1326,2,0,1000,748,0);       -- Gold Beastcoin
 -- ZoneID:   4 - Hobgoblin Venerer
 INSERT INTO `mob_droplist` VALUES (1327,0,0,1000,511,70); -- Goblin Mask (7.0%)
 INSERT INTO `mob_droplist` VALUES (1327,2,0,1000,748,0);  -- Gold Beastcoin (Steal)
-INSERT INTO `mob_droplist` VALUES (1325,0,0,1000,1878,70); -- Air Tank (7.0%)
 
 -- ZoneID: 193 - Hognosed Bat
 INSERT INTO `mob_droplist` VALUES (1328,0,0,1000,922,230);        -- Bat Wing (23.0%)
@@ -26893,6 +26892,9 @@ INSERT INTO `mob_droplist` VALUES(3801, 0, 0, 1000, 18958, 200);
 
 --Erle
 INSERT INTO `mob_droplist` VALUES(3802, 0, 0, 1000, 19122, 100);
+
+-- ZoneID:   4 - Hobgoblin Venerer
+INSERT INTO `mob_droplist` VALUES (1325,0,0,1000,1878,70); -- Air Tank (7.0%)
 
 /*!40000 ALTER TABLE `mob_droplist` ENABLE KEYS */;
 UNLOCK TABLES;
