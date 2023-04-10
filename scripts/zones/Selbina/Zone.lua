@@ -16,7 +16,7 @@ zoneObject.onInitialize = function(zone)
 end
 
 zoneObject.onGameHour = function(zone)
-    SetServerVariable("Selbina_Deastination", math.random(1, 100))
+    SetServerVariable("Selbina_Destination", math.random(0, 100))
 end
 
 zoneObject.onZoneIn = function(player, prevZone)
@@ -31,11 +31,19 @@ zoneObject.onZoneIn = function(player, prevZone)
             prevZone == xi.zone.SHIP_BOUND_FOR_SELBINA or
             prevZone == xi.zone.SHIP_BOUND_FOR_SELBINA_PIRATES
         then
+
+            local ship = GetNPCByID(ID.npc.SHIP)
+            ship:setAnimBegin(VanadielTime())
+
             cs = 202
             player:setPos(32.500, -2.500, -45.500, 192)
         else
             player:setPos(17.981, -16.806, 99.83, 64)
         end
+    end
+
+    if player:getZPos() < -59.5 then -- fixing player position if logged off / crashed on ship
+        player:setPos(18.05, -1.38, -56.75)
     end
 
     if
@@ -61,11 +69,12 @@ end
 
 zoneObject.onEventFinish = function(player, csid, option)
     if csid == 200 then
-        if GetServerVariable("Selbina_Deastination") > 89 then
+        if GetServerVariable("Selbina_Destination") >= 89 then
             player:setPos(0, 0, 0, 0, xi.zone.SHIP_BOUND_FOR_MHAURA_PIRATES)
         else
             player:setPos(0, 0, 0, 0, xi.zone.SHIP_BOUND_FOR_MHAURA)
         end
+
     elseif
         csid == 1101 and
         npcUtil.completeQuest(player, xi.quest.log_id.OUTLANDS, xi.quest.id.outlands.I_LL_TAKE_THE_BIG_BOX, { item = 14226, fameArea = xi.quest.fame_area.NORG, var = { "Enagakure_Killed", "illTakeTheBigBoxCS" } })

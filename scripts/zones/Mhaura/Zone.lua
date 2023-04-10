@@ -21,7 +21,7 @@ zoneObject.onGameHour = function(zone)
         GetNPCByID(ID.npc.LAUGHING_BISON):setAnimationSub(0)
     end
 
-    SetServerVariable("Mhaura_Deastination", math.random(1, 100))
+    SetServerVariable("Mhaura_Destination", math.random(0, 100))
 end
 
 zoneObject.onInitialize = function(zone)
@@ -41,11 +41,18 @@ zoneObject.onZoneIn = function(player, prevZone)
             prevZone == xi.zone.OPEN_SEA_ROUTE_TO_MHAURA or
             prevZone == xi.zone.SHIP_BOUND_FOR_MHAURA_PIRATES
         then
+            local ship = GetNPCByID(ID.npc.SHIP)
+
+            ship:setAnimBegin(VanadielTime())
             cs = 202
             player:setPos(14.960, -3.430, 18.423, 192)
         else
             player:setPos(0.003, -6.252, 117.971, 65)
         end
+    end
+
+    if player:getZPos() < 1.6 then -- fixing player position if logged off / crashed on ship
+        player:setPos(8.23, -1.3, 4.48)
     end
 
     if
@@ -88,7 +95,7 @@ zoneObject.onEventFinish = function(player, csid, option)
         local DepartureTime = VanadielHour()
 
         if DepartureTime % 8 == 0 then
-            if GetServerVariable("Mhaura_Deastination") > 89 then
+            if GetServerVariable("Mhaura_Destination") >= 89 then
                 player:setPos(0, 0, 0, 0, xi.zone.SHIP_BOUND_FOR_SELBINA_PIRATES)
             else
                 player:setPos(0, 0, 0, 0, xi.zone.SHIP_BOUND_FOR_SELBINA)

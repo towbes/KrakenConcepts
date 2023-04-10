@@ -13741,7 +13741,7 @@ INSERT INTO `mob_groups` VALUES (9,3127,227,'Phantom',300,1,1993,0,0,22,25,0);
 INSERT INTO `mob_groups` VALUES (10,5878,227,'Crossbones_blm',0,128,537,0,0,28,31,0);
 INSERT INTO `mob_groups` VALUES (11,844,227,'Crossbones_war',0,128,537,0,0,28,31,0);
 INSERT INTO `mob_groups` VALUES (12,3605,227,'Ship_Wight',0,128,0,0,0,36,39,0);
-INSERT INTO `mob_groups` VALUES (13,428,227,'Blackbeard',0,128,282,0,0,67,68,0);
+INSERT INTO `mob_groups` VALUES (13,428,227,'Blackbeard',0,128,282,9000,4500,67,70,0);
 INSERT INTO `mob_groups` VALUES (14,1213,227,'Enagakure',0,128,0,0,0,55,55,0);
 
 -- ------------------------------------------------------------
@@ -13763,7 +13763,7 @@ INSERT INTO `mob_groups` VALUES (9,3127,228,'Phantom',300,1,1993,0,0,22,25,0);
 INSERT INTO `mob_groups` VALUES (10,5878,228,'Crossbones_blm',0,128,537,0,0,28,31,0);
 INSERT INTO `mob_groups` VALUES (11,844,228,'Crossbones_war',0,128,537,0,0,28,31,0);
 INSERT INTO `mob_groups` VALUES (12,3605,228,'Ship_Wight',0,128,2239,0,0,36,39,0);
-INSERT INTO `mob_groups` VALUES (13,3626,228,'Silverhook',0,128,2249,0,0,68,70,0);
+INSERT INTO `mob_groups` VALUES (13,3626,228,'Silverhook',0,128,2249,9000,4500,67,70,0);
 
 -- ------------------------------------------------------------
 -- Abyssea-Uleguerand (Zone 253)

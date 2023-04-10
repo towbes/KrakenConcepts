@@ -23,6 +23,8 @@
 
 #include <ctime>
 
+#include "map/utils/zoneutils.h"
+
 #include "vana_time.h"
 
 CVanaTime* CVanaTime::_instance = nullptr;

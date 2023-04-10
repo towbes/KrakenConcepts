@@ -622,6 +622,15 @@ public:
 
     void LoadNavMesh();
     void LoadZoneLos();
+    void SetZoneDirection(uint8 direction);
+    void SetZoneAnimation(uint8 animation);
+    void SetZoneAnimStartTime(uint32 startTime);
+    void SetZoneAnimLength(uint16 length);
+
+    uint8  GetZoneDirection();
+    uint8  GetZoneAnimation();
+    uint32 GetZoneAnimStartTime();
+    uint16 GetZoneAnimLength();
 
 private:
     ZONEID         m_zoneID;
@@ -656,6 +665,11 @@ private:
     CTreasurePool* m_TreasurePool;
 
     time_point m_timeZoneEmpty; // The time_point when the last player left the zone
+
+    uint8  m_ZoneDirection;     // which direction for transport to travel (0 or 4)
+    uint8  m_ZoneAnimation;     // which zone animation to use (i.e. manaclipper)
+    uint32 m_ZoneAnimStartTime; // zone animation start time (i.e. boats)
+    uint16 m_ZoneAnimLength;    // zone animation length in seconds
 
     std::unordered_map<std::string, QueryByNameResult_t> m_queryByNameResults;
 

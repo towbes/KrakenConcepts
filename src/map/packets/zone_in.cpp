@@ -19,16 +19,16 @@
 ===========================================================================
 */
 
+#include "common/socket.h"
 #include "zone_in.h"
 
 #include "common/vana_time.h"
-
+#include "map/zone.h"
 #include "entities/charentity.h"
 #include "utils/zoneutils.h"
 
 #include "instance.h"
 #include "status_effect_container.h"
-#include "zone.h"
 
 // Returns the Model ID of the mog house to be used
 // This is not the same as the actual Zone ID!
@@ -148,6 +148,12 @@ CZoneInPacket::CZoneInPacket(CCharEntity* PChar, const EventInfo* currentEvent)
     }
 
     ref<uint8>(0x21) = PChar->GetGender() * 128 + (1 << PChar->look.size);
+
+        // Zone Animation for Transports
+    ref<uint8>(0x27)  = PChar->loc.zone->GetZoneDirection();
+    ref<uint8>(0x2A)  = PChar->loc.zone->GetZoneAnimation();
+    ref<uint32>(0x78) = PChar->loc.zone->GetZoneAnimStartTime();
+    ref<uint16>(0x7C) = PChar->loc.zone->GetZoneAnimLength();
 
     look_t* look      = (PChar->getStyleLocked() ? &PChar->mainlook : &PChar->look);
     ref<uint8>(0x44)  = look->face;
