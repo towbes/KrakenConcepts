@@ -26879,6 +26879,9 @@ INSERT INTO `mob_droplist` VALUES (3257,0,0,1000,5154,@RARE);   -- Tavnazian Liv
 -- ZoneID:123  - Pyuu_the_Spatemaker
 INSERT INTO `mob_droplist` VALUES (3258,0,0,1000,2850,@UNCOMMON);   -- Sahagin Gold (Uncommon, ~10%) http://www.ffxidb.com/zones/123/pyuu-the-spatemaker
 
+-- ZoneID:61  - Fahrafahr the Bloodied
+INSERT INTO `mob_droplist` VALUES (3259,0,0,1000,18872,@COMMON);   -- Lyft Ferule (Common, ~15%) http://www.ffxidb.com/items/18872
+
 -- Scylla
 INSERT INTO `mob_droplist` VALUES(3800,0,0,1000,1312,@UNCOMMON);    -- piece_of_angel_skin
 INSERT INTO `mob_droplist` VALUES(3800,2,0,1000,2754,@VCOMMON);     -- ruszor_fang
