@@ -22,6 +22,9 @@ entity.onMobSpawn = function(mob)
     -- Reset animation so it starts grounded.
     mob:setMobSkillAttack(0)
     mob:setAnimationSub(0)
+    mob:setMobMod(xi.mobMod.DRAW_IN, 1)
+    mob:setMobMod(xi.mobMod.DRAW_IN_CUSTOM_RANGE, 15)
+    mob:setMobMod(xi.mobMod.DRAW_IN_FRONT, 1)
 end
 
 entity.onMobFight = function(mob, target)
