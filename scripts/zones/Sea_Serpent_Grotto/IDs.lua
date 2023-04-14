@@ -122,6 +122,7 @@ zones[xi.zone.SEA_SERPENT_GROTTO] =
         MIMIC        = 17498564,
         WATER_LEAPER = 17498565,
         GLYRYVILU    = 17498566,
+        CHARYBDIS    = 17498522,
     },
     npc =
     {

@@ -5187,6 +5187,10 @@ INSERT INTO `mob_spell_lists` VALUES('Erle', 721, 208, 1, 255);
 
 INSERT INTO `mob_spell_lists` VALUES('Mucoid_Mass', 722, 242, 1, 255); -- absorb-acc (1~255)
 
+-- Pyuu the Spatemaker (502)
+INSERT INTO `mob_spell_lists` VALUES('PyuuTheSpatemaker',723,201,1,255); -- waterga iii (1~255)
+INSERT INTO `mob_spell_lists` VALUES('PyuuTheSpatemaker',723,172,1,255); -- water iv (1~255)
+
 
 
 /*!40000 ALTER TABLE `mob_spell_lists` ENABLE KEYS */;

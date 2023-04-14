@@ -4110,10 +4110,10 @@ INSERT INTO `mob_droplist` VALUES (454,2,0,1000,832,0);          -- Clump Of She
 INSERT INTO `mob_droplist` VALUES (455,0,0,1000,17708,@ALWAYS); -- Auriga Xiphos (Always, 100%)
 
 -- ZoneID: 176 - Charybdis
-INSERT INTO `mob_droplist` VALUES (456,0,0,1000,17652,@ALWAYS); -- Joyeuse (Always, 100%)
-INSERT INTO `mob_droplist` VALUES (456,0,0,1000,4484,60);       -- Shall Shell (6.0%)
-INSERT INTO `mob_droplist` VALUES (456,0,0,1000,792,30);        -- Pearl (3.0%)
-INSERT INTO `mob_droplist` VALUES (456,0,0,1000,1311,@VRARE);   -- Piece Of Oxblood (Very Rare, 1%)
+INSERT INTO `mob_droplist` VALUES (456,0,0,1000,17652,@ALWAYS);  -- Joyeuse (Always, 100%)
+INSERT INTO `mob_droplist` VALUES (456,0,0,1000,4484,@COMMON);   -- Shall Shell (Common, 15%)
+INSERT INTO `mob_droplist` VALUES (456,0,0,1000,792,@COMMON);    -- Pearl (Common, 15%)
+INSERT INTO `mob_droplist` VALUES (456,0,0,1000,1311,@UNCOMMON); -- Piece Of Oxblood (Uncommon, 10%)
 
 -- ZoneID: 132 - Chasmic Hornet
 INSERT INTO `mob_droplist` VALUES (457,0,0,1000,2936,780);  -- Chasmic Stinger (78.0%)
@@ -13260,10 +13260,10 @@ INSERT INTO `mob_droplist` VALUES (1636,0,0,1000,793,@VRARE); -- Black Pearl (Ve
 INSERT INTO `mob_droplist` VALUES (1636,2,0,1000,749,0);      -- Mythril Beastcoin (Steal)
 
 -- ZoneID: 176 - Masan
-INSERT INTO `mob_droplist` VALUES (1637,0,0,1000,1271,@ALWAYS);  -- Pigeons Blood Ruby (Always, 100%)
-INSERT INTO `mob_droplist` VALUES (1637,0,0,1000,924,@UNCOMMON); -- Vial Of Fiend Blood (Uncommon, 10%)
-INSERT INTO `mob_droplist` VALUES (1637,0,0,1000,1125,20);       -- Carbuncles Ruby (2.0%)
-INSERT INTO `mob_droplist` VALUES (1637,0,0,1000,930,@VRARE);    -- Vial Of Beastman Blood (Very Rare, 1%)
+INSERT INTO `mob_droplist` VALUES (1637,0,0,1000,1271,@ALWAYS); -- Pigeons Blood Ruby (Always, 100%)
+INSERT INTO `mob_droplist` VALUES (1637,0,0,1000,924,@VCOMMON); -- Vial Of Fiend Blood (Very Common, 24%)
+INSERT INTO `mob_droplist` VALUES (1637,0,0,1000,1125,@VRARE);  -- Carbuncles Ruby (Very Rare, 1%)
+INSERT INTO `mob_droplist` VALUES (1637,0,0,1000,930,@VCOMMON); -- Vial Of Beastman Blood (Very Common, 24%)
 
 -- ZoneID:   7 - Master Coeurl
 -- ZoneID: 127 - Master Coeurl
@@ -13437,6 +13437,7 @@ INSERT INTO `mob_droplist` VALUES (1665,0,0,1000,2564,0);         -- Jar Of Peis
 
 -- ZoneID: 123 - Meww The Turtlerider
 -- ZoneID: 155 - Meteor Quadav
+
 INSERT INTO `mob_droplist` VALUES (1666,0,0,1000,17843,400); -- Oliphant (40.0%)
 
 -- ZoneID: 110 - Midnight Wings
@@ -22183,11 +22184,11 @@ INSERT INTO `mob_droplist` VALUES (2675,0,0,1000,529,@VRARE);    -- Luminicloth 
 INSERT INTO `mob_droplist` VALUES (2675,2,0,1000,825,0);         -- Square Of Cotton Cloth (Steal)
 
 -- ZoneID: 176 - Wuur The Sandcomber
-INSERT INTO `mob_droplist` VALUES (2676,0,0,1000,18137,@UNCOMMON); -- Holy Ampulla (Uncommon, 10%)
-INSERT INTO `mob_droplist` VALUES (2676,0,0,1000,624,80);          -- Clump Of Pamtam Kelp (8.0%)
-INSERT INTO `mob_droplist` VALUES (2676,0,0,1000,4360,80);         -- Bastore Sardine (8.0%)
-INSERT INTO `mob_droplist` VALUES (2676,0,0,1000,4443,80);         -- Cobalt Jellyfish (8.0%)
-INSERT INTO `mob_droplist` VALUES (2676,0,0,1000,4514,80);         -- Quus (8.0%)
+INSERT INTO `mob_droplist` VALUES (2676,0,0,1000,18137,@VCOMMON); -- Holy Ampulla (Very Common, 24%)
+INSERT INTO `mob_droplist` VALUES (2676,0,0,1000,624,@VCOMMON);   -- Clump Of Pamtam Kelp (Very Common, 24%)
+INSERT INTO `mob_droplist` VALUES (2676,0,0,1000,4360,@VCOMMON);  -- Bastore Sardine (Very Common, 24%)
+INSERT INTO `mob_droplist` VALUES (2676,0,0,1000,4443,@COMMON);   -- Cobalt Jellyfish (Common, 15%)
+INSERT INTO `mob_droplist` VALUES (2676,0,0,1000,4514,@RARE);     -- Quus (Rare, 5%)
 
 -- ZoneID: 187 - Wuu Qoho The Razorclaw
 INSERT INTO `mob_droplist` VALUES (2677,0,0,1000,3355,@VCOMMON); -- Divine Bijou (Very Common, 24%)
@@ -23386,12 +23387,12 @@ INSERT INTO `mob_droplist` VALUES (2812,0,0,1000,4570,140); -- Bird Egg (14.0%)
 INSERT INTO `mob_droplist` VALUES (2812,2,0,1000,847,0);    -- Bird Feather (Steal)
 
 -- ZoneID: 176 - Zuug The Shoreleaper
-INSERT INTO `mob_droplist` VALUES (2813,0,0,1000,16884,@UNCOMMON); -- Narval (Uncommon, 10%)
-INSERT INTO `mob_droplist` VALUES (2813,0,0,1000,624,80);          -- Clump Of Pamtam Kelp (8.0%)
-INSERT INTO `mob_droplist` VALUES (2813,0,0,1000,4360,80);         -- Bastore Sardine (8.0%)
-INSERT INTO `mob_droplist` VALUES (2813,0,0,1000,4443,80);         -- Cobalt Jellyfish (8.0%)
-INSERT INTO `mob_droplist` VALUES (2813,0,0,1000,4514,80);         -- Quus (8.0%)
-INSERT INTO `mob_droplist` VALUES (2813,2,0,1000,748,0);           -- Gold Beastcoin (Steal)
+INSERT INTO `mob_droplist` VALUES (2813,0,0,1000,16884,@VCOMMON); -- Narval (Very Common, 24%)
+INSERT INTO `mob_droplist` VALUES (2813,0,0,1000,624,@VCOMMON);   -- Clump Of Pamtam Kelp (Very Common, 24%)
+INSERT INTO `mob_droplist` VALUES (2813,0,0,1000,4360,@VCOMMON);  -- Bastore Sardine (Very Common, 24%)
+INSERT INTO `mob_droplist` VALUES (2813,0,0,1000,4443,@RARE);     -- Cobalt Jellyfish (Rare, 5%)
+INSERT INTO `mob_droplist` VALUES (2813,0,0,1000,4514,@RARE);     -- Quus (Rare, 5%)
+INSERT INTO `mob_droplist` VALUES (2813,2,0,1000,748,0);          -- Gold Beastcoin (Steal)
 
 -- ZoneID: 153 - Snaggletooth Peapuk
 INSERT INTO `mob_droplist` VALUES (2814,0,0,1000,3504,@VCOMMON);  -- Peapuk Wing (Very Common, 24%)
@@ -26876,9 +26877,6 @@ INSERT INTO `mob_droplist` VALUES (3256,0,0,1000,5154,@RARE);   -- Tavnazian Liv
 INSERT INTO `mob_droplist` VALUES (3257,2,0,1000,750,0); -- Silver Beastcoin (Steal)
 INSERT INTO `mob_droplist` VALUES (3257,0,0,1000,5154,@RARE);   -- Tavnazian Liver (Rare, 5%) http://www.ffxidb.com/items/5154
 
--- ZoneID:123  - Pyuu_the_Spatemaker
-INSERT INTO `mob_droplist` VALUES (3258,0,0,1000,2850,@UNCOMMON);   -- Sahagin Gold (Uncommon, ~10%) http://www.ffxidb.com/zones/123/pyuu-the-spatemaker
-
 -- ZoneID:61  - Fahrafahr the Bloodied
 INSERT INTO `mob_droplist` VALUES (3259,0,0,1000,18872,@COMMON);   -- Lyft Ferule (Common, ~15%) http://www.ffxidb.com/items/18872
 
@@ -26908,6 +26906,12 @@ INSERT INTO `mob_droplist` VALUES (3804,0,0,1000,2822,@COMMON);   -- Aptant of S
 
 -- ZoneID: 204 - Sluagh
 INSERT INTO `mob_droplist` VALUES (3805,0,0,1000,2856,@COMMON); -- Square of Ensanguined Cloth (Common, 15%)
+
+-- ZoneID: 123 - Bayawak
+INSERT INTO `mob_droplist` VALUES (3806,0,0,1000,19237,@COMMON); -- Slick Dart (Common, 15%)
+
+-- ZoneID:123  - Pyuu_the_Spatemaker
+INSERT INTO `mob_droplist` VALUES (3807,0,0,1000,2850,@UNCOMMON);   -- Sahagin Gold (Uncommon, ~10%) http://www.ffxidb.com/zones/123/pyuu-the-spatemaker
 
 /*!40000 ALTER TABLE `mob_droplist` ENABLE KEYS */;
 UNLOCK TABLES;
