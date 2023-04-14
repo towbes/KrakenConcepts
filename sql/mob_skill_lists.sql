@@ -3920,6 +3920,8 @@ INSERT INTO `mob_skill_lists` VALUES('Troll_Armor', 5308, 1744);
 INSERT INTO `mob_skill_lists` VALUES('Troll_Armor', 5308, 1745);
 INSERT INTO `mob_skill_lists` VALUES('Troll_Armor', 5308, 1899);
 
+INSERT INTO `mob_skill_lists` VALUES ('Mind_Hoarder',5309,524);
+
 
 
 

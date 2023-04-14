@@ -5185,6 +5185,8 @@ INSERT INTO `mob_spell_lists` VALUES('Erle', 721, 156, 1, 255);
 INSERT INTO `mob_spell_lists` VALUES('Erle', 721, 185, 1, 255);
 INSERT INTO `mob_spell_lists` VALUES('Erle', 721, 208, 1, 255);
 
+INSERT INTO `mob_spell_lists` VALUES('Mucoid_Mass', 722, 242, 1, 255); -- absorb-acc (1~255)
+
 
 
 /*!40000 ALTER TABLE `mob_spell_lists` ENABLE KEYS */;

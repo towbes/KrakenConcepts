@@ -26899,6 +26899,16 @@ INSERT INTO `mob_droplist` VALUES(3802, 0, 0, 1000, 19122, 100);
 -- ZoneID:   4 - Hobgoblin Venerer
 INSERT INTO `mob_droplist` VALUES (1325,0,0,1000,1878,70); -- Air Tank (7.0%)
 
+-- ZoneID: 166 - Hyakume
+INSERT INTO `mob_droplist` VALUES (3803,0,0,1000,16029,@COMMON); -- Booster Earring (Common, 15%)
+
+-- ZoneID: 204 - Jenglot
+INSERT INTO `mob_droplist` VALUES (3804,0,0,1000,2821,@UNCOMMON); -- Aptant of Haelan (Uncommon, 10%)
+INSERT INTO `mob_droplist` VALUES (3804,0,0,1000,2822,@COMMON);   -- Aptant of Secan (Common, 15%)
+
+-- ZoneID: 204 - Sluagh
+INSERT INTO `mob_droplist` VALUES (3805,0,0,1000,2856,@COMMON); -- Square of Ensanguined Cloth (Common, 15%)
+
 /*!40000 ALTER TABLE `mob_droplist` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;

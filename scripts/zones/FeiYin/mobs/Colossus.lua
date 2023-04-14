@@ -13,7 +13,7 @@ entity.onMobDeath = function(mob, player, optParams)
 end
 
 entity.onMobDespawn = function(mob)
-    xi.mob.phOnDespawn(mob, ID.mob.GOLIATH_PH, 10, 3600) -- 1 hour
+    xi.mob.phOnDespawn(mob, ID.mob.GOLIATH_PH, 10, 1) -- No minimum respawn
 end
 
 return entity
