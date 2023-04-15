@@ -3923,6 +3923,7 @@ INSERT INTO `mob_skill_lists` VALUES('Troll_Armor', 5308, 1899);
 INSERT INTO `mob_skill_lists` VALUES ('Mind_Hoarder',5309,524);
 INSERT INTO `mob_skill_lists` VALUES ('Bayawak',5310,367);
 INSERT INTO `mob_skill_lists` VALUES ('Pyuu_The_Spatemaker',5311,770);
+INSERT INTO `mob_skill_lists` VALUES ('ZmeyGorynych',5312,380);
 
 
 

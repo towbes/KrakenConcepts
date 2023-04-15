@@ -1436,6 +1436,7 @@ xi.items =
     FLASK_OF_DISTILLED_WATER        = 4509,
     BOWL_OF_AMBROSIA                = 4511,
     BOTTLE_OF_AMRITA                = 4513,
+    QUUS                            = 4514,
     SILKWORM_EGG                    = 4526,
     CRYSTAL_BASS                    = 4528,
     ROLANBERRY_874_CE               = 4530,
