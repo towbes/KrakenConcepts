@@ -27,6 +27,7 @@ zones[xi.zone.RIVERNE_SITE_A01] =
         SD_HAS_GROWN                  = 7599, -- The spatial displacement has grown.
         SPACE_SEEMS_DISTORTED         = 7600, -- The space around you seems oddly distorted and disrupted.
         MONUMENT                      = 7607, -- Something has been engraved on this stone, but the message is too difficult to make out.
+        INSECT_WINGS                  = 7728, -- There are tiny insect wings scattered all around here.
         HOMEPOINT_SET                 = 7735, -- Home point set!
         UNITY_WANTED_BATTLE_INTERACT  = 7793, -- Those who have accepted % must pay # Unity accolades to participate. The content for this Wanted battle is #. [Ready to begin?/You do not have the appropriate object set, so your rewards will be limited.]
     },
@@ -35,19 +36,15 @@ zones[xi.zone.RIVERNE_SITE_A01] =
         HELIODROMOS_PH_OFFSET    = 16900107,
         HELIODROMOS_OFFSET       = 16900110,
         CARMINE_DOBSONFLY_OFFSET = 16900230,
+        SHIELDTRAP               = 16900320,
+        AIATAR_PH =
+        {
+            [16900305] = 16900306,
+        },    
     },
     npc =
     {
         DISPLACEMENT_OFFSET = 16900334,
     },
-    AIATAR_PH =
-    {
-        [16900301] = 16900306,
-        [16900302] = 16900306,
-        [16900303] = 16900306,
-        [16900304] = 16900306,
-        [16900305] = 16900306,
-    },
-}
 
 return zones[xi.zone.RIVERNE_SITE_A01]

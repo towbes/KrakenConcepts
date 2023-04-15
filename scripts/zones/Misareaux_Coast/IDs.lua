@@ -31,6 +31,8 @@ zones[xi.zone.MISAREAUX_COAST] =
         CREATURE_HAS_APPEARED         = 7610, -- A creature has appeared out of nowhere!
         NOTHING_ELSE_OF_INTEREST      = 7611, -- There is nothing else of interest here.
         LOGGING_IS_POSSIBLE_HERE      = 7612, -- Logging is possible here if you have <item>.
+        SHATTERED_SHIELD              = 7663, -- "The ground here is littered with the pieces of a shattered shield..."
+        SNATCHED_AWAY                 = 7664, -- "The <item> is suddenly snatched away!"
         DROP_OF_OIL                   = 7669, -- A drop of oil trickles down the cheek of the mannequin.
         LARGE_DROPS_OF_OIL            = 7670, -- Large drops of oil begin pouring from the eyes on the mannequin.
         NOTHING_HERE_YET              = 7671, -- There is nothing here yet. Check again in the morning.
@@ -48,11 +50,17 @@ zones[xi.zone.MISAREAUX_COAST] =
         {
             [16879839] = 16879847,
         },
+        ODQAN_PH =
+        {
+            [16879722] = 16879737,
+            [16879833] = 16879758,
+        },
         PM6_2_MOB_OFFSET = 16879893,
         BOGGELMANN       = 16879897,
         GRATION          = 16879899,
         ZIPHIUS          = 16879900,
         ALSHA            = 16879898,
+        ODQAN            = 16879737,
     },
     npc =
     {
@@ -67,6 +75,7 @@ zones[xi.zone.MISAREAUX_COAST] =
         },
         ZIPHIUS_QM_BASE  = 16879919,
         ALSHA_QM         = 16879978,
+        GRATION_QM       = 16879918,
     },
 }
 

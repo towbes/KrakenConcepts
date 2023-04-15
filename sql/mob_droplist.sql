@@ -17963,8 +17963,8 @@ INSERT INTO `mob_droplist` VALUES (2233,0,0,1000,3143,130);      -- Lancers Seal
 INSERT INTO `mob_droplist` VALUES (2234,0,0,1000,3101,180); -- Dented Skull (18.0%)
 
 -- ZoneID:  30 - Shieldtrap
-INSERT INTO `mob_droplist` VALUES (2235,0,0,1000,14885,@UNCOMMON); -- Sennight Bangles (Uncommon, 10%)
-INSERT INTO `mob_droplist` VALUES (2235,0,0,1000,1617,60);         -- Flytrap Leaf (6.0%)
+INSERT INTO `mob_droplist` VALUES (2235,0,0,1000,14885,@ALWAYS); -- Sennight Bangles (100%)
+INSERT INTO `mob_droplist` VALUES (2235,0,0,1000,1617,@ALWAYS);  -- Flytrap Leaf (100%)
 
 -- ZoneID: 167 - Shii
 INSERT INTO `mob_droplist` VALUES (2236,0,0,1000,16980,@ALWAYS); -- Sukesada (Always, 100%)
@@ -26942,6 +26942,26 @@ INSERT INTO `mob_droplist` VALUES (3809,0,0,1000,2830,@UNCOMMON); -- Bastet Fang
 -- ZoneID: 122 - Nargun
 INSERT INTO `mob_droplist` VALUES (3810,0,0,1000,2815,@VCOMMON); -- Aptant of Arkhe (Very Common, 24%)
 INSERT INTO `mob_droplist` VALUES (3810,0,0,1000,2817,@RARE);    -- Aptant of Pera (Rare, 5%)
+
+-- ZoneID: 125 - Dahu
+INSERT INTO `mob_droplist` VALUES (3811,0,0,1000,2835,@COMMON); -- Lock of Dahu Hair (Common, 15%)
+
+-- ZoneID: 126 - Atkorkamuy
+INSERT INTO `mob_droplist` VALUES (3812,0,0,1000,2813,@UNCOMMON); -- Aptant of Durus (Uncommon, 10%)
+INSERT INTO `mob_droplist` VALUES (3812,0,0,1000,2816,@UNCOMMON); -- Aptant of Tachus (Uncommon, 10%)
+
+-- ZoneID: 24 - Flockbock
+INSERT INTO `mob_droplist` VALUES (3813,0,0,1000,2836,@UNCOMMON); -- Woolly Pelage (Uncommon, 10%)
+
+-- ZoneID: 24 - Sengann
+INSERT INTO `mob_droplist` VALUES (3814,0,0,1000,2843,@RARE); -- Square of Lindeadach (Rare, 5%)
+
+-- ZoneID: 24 - Yal-un Eke
+INSERT INTO `mob_droplist` VALUES (3815,0,0,1000,15054,@RARE); -- Beacon Cuffs (Rare, 5%)
+
+-- ZoneID: Padfoot
+INSERT INTO `mob_droplist` VALUES (3816,1,1,1000,14676,730); -- Assailants Ring (Group 1 - 73.0%)
+INSERT INTO `mob_droplist` VALUES (3816,1,1,1000,14782,270); -- Astral Earring (Group 1 - 27.0%)
 
 /*!40000 ALTER TABLE `mob_droplist` ENABLE KEYS */;
 UNLOCK TABLES;

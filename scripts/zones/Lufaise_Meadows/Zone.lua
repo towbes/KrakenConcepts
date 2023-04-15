@@ -20,6 +20,8 @@ zoneObject.onInitialize = function(zone)
         SpawnMob(v)
     end
 
+    GetMobByID(ID.mob.YALUN_EKE):setLocalVar("chooseYalun", math.random(1,2))
+
     xi.conq.setRegionalConquestOverseers(zone:getRegionID())
 
     xi.helm.initZone(zone, xi.helm.type.LOGGING)
@@ -65,6 +67,36 @@ zoneObject.onEventFinish = function(player, csid, option)
     if csid == 116 then
         player:setCharVar("PromathiaStatus", 7)
         player:addTitle(xi.title.BANISHER_OF_EMPTINESS)
+    end
+end
+
+zone_object.onGameHour = function(zone)
+    local cooldown = GetMobByID(ID.mob.SENGANN):getLocalVar("cooldown")
+    -- Don't allow Sengann to spawn outside of night
+    if VanadielHour() >= 4 and VanadielHour() < 20 then
+        DisallowRespawn(ID.mob.SENGANN, true)
+    elseif os.time() > cooldown then
+        DisallowRespawn(ID.mob.SENGANN, false)
+    end
+end
+
+zone_object.onZoneWeatherChange = function(weather)
+    if os.time() > GetMobByID(ID.mob.YALUN_EKE):getLocalVar("yalunRespawn") and weather == xi.weather.FOG then
+        local chooseYalun = GetMobByID(ID.mob.YALUN_EKE):getLocalVar("chooseYalun")
+        local count = 1
+
+        for k, v in pairs(ID.mob.YALUN_EKE_PH) do
+            if count == chooseYalun then
+                DisallowRespawn(k, true)
+                DisallowRespawn(v, false)
+                local pos = GetMobByID(k):getSpawnPos()
+                DespawnMob(k) -- Ensure PH is not up
+                GetMobByID(v):setSpawn(pos.x, pos.y, pos.z)
+                SpawnMob(v) -- Spawn Yal-Un Eke
+            else
+                count = count + 1
+            end
+        end
     end
 end
 

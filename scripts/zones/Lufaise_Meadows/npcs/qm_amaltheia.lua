@@ -10,16 +10,20 @@ local entity = {}
 
 entity.onTrade = function(player, npc, trade)
     if
-        npcUtil.tradeHas(trade, 15066) and
+        npcUtil.tradeHas(trade, xi.items.RELIC_SHIELD) and
         npcUtil.popFromQM(player, npc, ID.mob.AMALTHEIA)
     then
         -- Relic Shield
         player:confirmTrade()
+        player:messageText(npc, ID.text.AMALTHEIA_SPAWN1, false)
+        player:messageText(npc, ID.text.AMALTHEIA_SPAWN2, false)
+    else
+        player:messageSpecial(ID.text.AMALTHEIA_WRONG_TRADE)
     end
 end
 
 entity.onTrigger = function(player, npc)
-    player:messageSpecial(ID.text.NOTHING_OUT_OF_ORDINARY)
+    player:messageSpecial(ID.text.AMALTHEIA_TRIGGER)
 end
 
 return entity
