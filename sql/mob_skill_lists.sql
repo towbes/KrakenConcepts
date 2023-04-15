@@ -3924,6 +3924,11 @@ INSERT INTO `mob_skill_lists` VALUES ('Mind_Hoarder',5309,524);
 INSERT INTO `mob_skill_lists` VALUES ('Bayawak',5310,367);
 INSERT INTO `mob_skill_lists` VALUES ('Pyuu_The_Spatemaker',5311,770);
 INSERT INTO `mob_skill_lists` VALUES ('ZmeyGorynych',5312,380);
+INSERT INTO `mob_skill_lists` VALUES ('Friar_Rush',5313,510);
+INSERT INTO `mob_skill_lists` VALUES ('Ash_Dragon',5314,645);
+INSERT INTO `mob_skill_lists` VALUES ('Ash_Dragon',5314,642);
+INSERT INTO `mob_skill_lists` VALUES ('Ash_Dragon',5314,649);
+INSERT INTO `mob_skill_lists` VALUES ('Ash_Dragon',5314,647);
 
 
 

@@ -5191,6 +5191,17 @@ INSERT INTO `mob_spell_lists` VALUES('Mucoid_Mass', 722, 242, 1, 255); -- absorb
 INSERT INTO `mob_spell_lists` VALUES('PyuuTheSpatemaker',723,201,1,255); -- waterga iii (1~255)
 INSERT INTO `mob_spell_lists` VALUES('PyuuTheSpatemaker',723,172,1,255); -- water iv (1~255)
 
+-- Sacrificial Goblet
+INSERT INTO `mob_spell_lists` VALUES('Sacrificial_Goblet', 724, 204, 1, 255); -- flare (1~255)
+INSERT INTO `mob_spell_lists` VALUES('Sacrificial_Goblet', 724, 206, 1, 255); -- freeze (1~255)
+INSERT INTO `mob_spell_lists` VALUES('Sacrificial_Goblet', 724, 208, 1, 255); -- tornado (1~255)
+INSERT INTO `mob_spell_lists` VALUES('Sacrificial_Goblet', 724, 210, 1, 255); -- quake (1~255)
+INSERT INTO `mob_spell_lists` VALUES('Sacrificial_Goblet', 724, 212, 1, 255); -- burst (1~255)
+INSERT INTO `mob_spell_lists` VALUES('Sacrificial_Goblet', 724, 214, 1, 255); -- flood (1~255)
+INSERT INTO `mob_spell_lists` VALUES('Sacrificial_Goblet', 724, 245, 1, 255); -- drain (1~255)
+INSERT INTO `mob_spell_lists` VALUES('Sacrificial_Goblet', 724, 247, 1, 255); -- aspir (1~255)
+INSERT INTO `mob_spell_lists` VALUES('Sacrificial_Goblet', 724, 226, 1, 255); -- poisonga ii (1~255)
+
 
 
 /*!40000 ALTER TABLE `mob_spell_lists` ENABLE KEYS */;

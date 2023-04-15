@@ -1148,11 +1148,21 @@ INSERT INTO `mob_spawn_mods` VALUES (17428496,55,180,1); -- IDLE_DESPAWN: 180
 -- Mimic
 INSERT INTO `mob_spawn_mods` VALUES (17428497,55,120,1); -- IDLE_DESPAWN: 120
 
+-- [Sozu Terberry]
+-- Data taken from wiki (http://ffxiclopedia.wikia.com/wiki/Crimson-toothed_Pawberry)
+INSERT INTO `mob_spawn_mods` VALUES (17428611,1,3000,1); -- Min gil 3000
+INSERT INTO `mob_spawn_mods` VALUES (17428611,2,4700,1); -- Max gil 4700
+INSERT INTO `mob_spawn_mods` VALUES (17428611,15,800,1); -- Mug gil 800
+
 -- Tonberry Kinq
 INSERT INTO `mob_spawn_mods` VALUES (17428677,1,18000,1); -- GIL_MIN: 18000
 INSERT INTO `mob_spawn_mods` VALUES (17428677,2,30000,1); -- GIL_MAX: 30000
 
--- Sozu Rogberry
+-- [Sozu Rogberry]
+-- Data taken from wiki (http://ffxiclopedia.wikia.com/wiki/Crimson-toothed_Pawberry)
+INSERT INTO `mob_spawn_mods` VALUES (17428751,1,1500,1); -- Min gil 1500
+INSERT INTO `mob_spawn_mods` VALUES (17428751,2,4600,1); -- Max gil 4600
+INSERT INTO `mob_spawn_mods` VALUES (17428751,15,1800,1); -- Mug gil 1800
 INSERT INTO `mob_spawn_mods` VALUES (17428751,55,300,1); -- IDLE_DESPAWN: 300
 
 -- Cleuvarion M Resoaix
@@ -1176,7 +1186,11 @@ INSERT INTO `mob_spawn_mods` VALUES (17428811,55,900,1); -- IDLE_DESPAWN: 900
 INSERT INTO `mob_spawn_mods` VALUES (17428812,17,1,1);   -- NO_DESPAWN: 1
 INSERT INTO `mob_spawn_mods` VALUES (17428812,55,900,1); -- IDLE_DESPAWN: 900
 
--- Crimson-Toothed Pawberry
+-- [Crimson Toothed Pawberry]
+-- Data taken from wiki (http://ffxiclopedia.wikia.com/wiki/Crimson-toothed_Pawberry)
+INSERT INTO `mob_spawn_mods` VALUES (17428813,1,18000,1); -- Min gil 18000
+INSERT INTO `mob_spawn_mods` VALUES (17428813,2,32000,1); -- Max gil 32000
+INSERT INTO `mob_spawn_mods` VALUES (17428813,15,5400,1); -- Mug gil 5400
 INSERT INTO `mob_spawn_mods` VALUES (17428813,55,300,1); -- IDLE_DESPAWN: 300
 
 -- Tonberry'S Avatar
@@ -1188,7 +1202,58 @@ INSERT INTO `mob_spawn_mods` VALUES (17428816,55,300,1); -- IDLE_DESPAWN: 300
 -- Mimic
 INSERT INTO `mob_spawn_mods` VALUES (17432583,55,120,1); -- IDLE_DESPAWN: 120
 
--- Hakutaku
+-- [Carmine-Tailed Janberry]
+-- Data taken from wiki (http://ffxiclopedia.wikia.com/wiki/Carmine-tailed_Janberry)
+INSERT INTO `mob_spawn_mods` VALUES (17432659,1,18000,1); -- Min gil 18000
+INSERT INTO `mob_spawn_mods` VALUES (17432659,2,28400,1); -- Max gil 28400
+INSERT INTO `mob_spawn_mods` VALUES (17432659,15,3500,1); -- Mug gil 3500
+
+-- [Friar Rush]
+-- Data taken from wiki (http://ffxiclopedia.wikia.com/wiki/Friar_Rush)
+INSERT INTO `mob_spawn_mods` VALUES (17432640,1,9000,1);  -- Min gil 9000
+INSERT INTO `mob_spawn_mods` VALUES (17432640,2,15000,1); -- Max gil 15000
+
+-- [Tonberry Decapitator]
+-- Data taken from wiki (http://ffxiclopedia.wikia.com/wiki/Tonberry_Decapitator)
+INSERT INTO `mob_spawn_mods` VALUES (17432989,1,5000,1); -- Min gil 5000
+INSERT INTO `mob_spawn_mods` VALUES (17432989,2,9000,1); -- Max gil 9000
+INSERT INTO `mob_spawn_mods` VALUES (17433002,1,5000,1); -- Min gil 5000
+INSERT INTO `mob_spawn_mods` VALUES (17433002,2,9000,1); -- Max gil 9000
+
+-- [Tonberry Pontifex]
+-- Best guess from kill on youtube (https://www.youtube.com/watch?v=AgOq2kGoW0g)
+INSERT INTO `mob_spawn_mods` VALUES (17433003,1,8000,1); -- Min gil 8000
+INSERT INTO `mob_spawn_mods` VALUES (17433003,2,12000,1); -- Max gil 12000
+
+-- [Tonberry Tracker]
+-- Data taken from wiki (http://ffxiclopedia.wikia.com/wiki/Tonberry_Decapitator)
+INSERT INTO `mob_spawn_mods` VALUES (17433001,1,6000,1); -- Min gil 6000
+INSERT INTO `mob_spawn_mods` VALUES (17433001,2,9200,1); -- Max gil 9200
+INSERT INTO `mob_spawn_mods` VALUES (17433004,1,6000,1); -- Min gil 6000
+INSERT INTO `mob_spawn_mods` VALUES (17433004,2,9200,1); -- Max gil 9200
+
+-- [Foreseer Oramix]
+-- Data taken from wiki (http://ffxiclopedia.wikia.com/wiki/Foreseer_Oramix)
+INSERT INTO `mob_spawn_mods` VALUES (17617062,1,6000,1); -- Min gil 6000
+INSERT INTO `mob_spawn_mods` VALUES (17617062,2,9200,1); -- Max gil 9200
+
+-- [Lindwurm]
+-- Data taken from wiki (http://ffxiclopedia.wikia.com/wiki/Lindwurm)
+INSERT INTO `mob_spawn_mods` VALUES (17617013,1,18000,1); -- Min gil 18000
+INSERT INTO `mob_spawn_mods` VALUES (17617013,2,27000,1); -- Max gil 27000
+INSERT INTO `mob_spawn_mods` VALUES (17617013,15,3000,1); -- Mug gil 3000
+
+-- [Tyrannic Tunnok]
+-- Data taken from wiki (http://ffxiclopedia.wikia.com/wiki/Tyrannic_Tunnok)
+INSERT INTO `mob_spawn_mods` VALUES (17616999,1,3000,1);  -- Min gil 3000
+INSERT INTO `mob_spawn_mods` VALUES (17616999,2,9000,1);  -- Max gil 9000
+INSERT INTO `mob_spawn_mods` VALUES (17616999,15,2000,1); -- Mug gil 2000
+
+-- [Hakutaku]
+-- Data taken from wiki (http://ffxiclopedia.wikia.com/wiki/Hakutaku)
+INSERT INTO `mob_spawn_mods` VALUES (17433005,1,11000,1); -- Min gil 11000
+INSERT INTO `mob_spawn_mods` VALUES (17433005,2,18000,1); -- Max gil 18000
+INSERT INTO `mob_spawn_mods` VALUES (17433005,15,120,1);  -- Mug gil 3500
 INSERT INTO `mob_spawn_mods` VALUES (17433005,55,120,1); -- IDLE_DESPAWN: 120
 
 -- Azrael
@@ -1428,7 +1493,10 @@ INSERT INTO `mob_spawn_mods` VALUES (17617158,2,18000,1); -- GIL_MAX: 18000
 INSERT INTO `mob_spawn_mods` VALUES (17617158,15,3370,1); -- MUG_GIL: 3370
 INSERT INTO `mob_spawn_mods` VALUES (17617158,55,900,1);  -- IDLE_DESPAWN: 900
 
--- Tarasque
+-- [Tarasque]
+-- Data taken from wiki (http://ffxiclopedia.wikia.com/wiki/Tarasque)
+INSERT INTO `mob_spawn_mods` VALUES (17617164,1,11000,1); -- Min gil 11000
+INSERT INTO `mob_spawn_mods` VALUES (17617164,2,18000,1); -- Max gil 18000
 INSERT INTO `mob_spawn_mods` VALUES (17617164,55,900,1); -- IDLE_DESPAWN: 900
 
 -- Valor

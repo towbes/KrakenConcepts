@@ -10,8 +10,7 @@ require("scripts/globals/npc_util")
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)
-    if
-        npcUtil.tradeHas(trade, { { 4366, 12 } }) and
+    if npcUtil.tradeHas(trade, {{ xi.item.LA_THEINE_CABBAGE, 12 }}) and
         not GetMobByID(ID.mob.HABETROT):isSpawned() and
         not GetMobByID(ID.mob.HABETROT + 1):isSpawned()
     then

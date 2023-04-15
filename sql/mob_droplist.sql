@@ -2570,6 +2570,7 @@ INSERT INTO `mob_droplist` VALUES (259,0,0,1000,3122,80);      -- Iga Seal Head 
 INSERT INTO `mob_droplist` VALUES (260,0,0,1000,1119,510);      -- Tonberry Coat (51.0%)
 INSERT INTO `mob_droplist` VALUES (260,0,0,1000,1162,@VCOMMON); -- Tonberry Lantern (Very Common, 24%)
 INSERT INTO `mob_droplist` VALUES (260,0,0,1000,16899,140);     -- Hototogisu (14.0%)
+INSERT INTO `mob_droplist` VALUES (260,0,0,1000,1443,@RARE);      -- Pinch Of Dried Mugwort (Rare, 5%)
 
 -- ZoneID: 134 - Gunha Wallstormer
 -- ZoneID: 134 - Nahya Floodmaker
@@ -3848,10 +3849,11 @@ INSERT INTO `mob_droplist` VALUES (416,0,0,1000,881,260);      -- Crab Shell (26
 INSERT INTO `mob_droplist` VALUES (416,0,0,1000,17650,140);    -- Nadrs (14.0%)
 
 -- ZoneID: 160 - Carmine-Tailed Janberry
-INSERT INTO `mob_droplist` VALUES (417,0,0,1000,17454,@UNCOMMON); -- Asklepios (Uncommon, 10%)
-INSERT INTO `mob_droplist` VALUES (417,0,0,1000,4901,40);         -- Water Spirit Pact (4.0%)
-INSERT INTO `mob_droplist` VALUES (417,0,0,1000,1119,30);         -- Tonberry Coat (3.0%)
-INSERT INTO `mob_droplist` VALUES (417,0,0,1000,1162,@VRARE);     -- Tonberry Lantern (Very Rare, 1%)
+INSERT INTO `mob_droplist` VALUES (417,0,0,1000,17454,@ALWAYS); -- Asklepios (Always, 100%)
+INSERT INTO `mob_droplist` VALUES (417,0,0,1000,4901,@COMMON);  -- Water Spirit Pact (Common, 15%)
+INSERT INTO `mob_droplist` VALUES (417,0,0,1000,1119,@ALWAYS);  -- Tonberry Coat (Always, 100%)
+INSERT INTO `mob_droplist` VALUES (417,0,0,1000,1162,@COMMON);  -- Tonberry Lantern (Common, 15%)
+INSERT INTO `mob_droplist` VALUES (417,0,0,1000,1443,@RARE);    -- Pinch Of Dried Mugwort (Rare, 5%)
 
 -- ZoneID:  30 - Carmine Dobsonfly
 INSERT INTO `mob_droplist` VALUES (418,0,0,1000,15183,830); -- Dobson Bandana (83.0%)
@@ -4001,8 +4003,9 @@ INSERT INTO `mob_droplist` VALUES (439,2,0,1000,17296,0);       -- Pebble (Steal
 
 -- ZoneID: 160 - Celeste-Eyed Tozberry
 INSERT INTO `mob_droplist` VALUES (440,0,0,1000,16912,@UNCOMMON); -- Kitsutsuki (Uncommon, 10%)
-INSERT INTO `mob_droplist` VALUES (440,0,0,1000,1119,30);         -- Tonberry Coat (3.0%)
-INSERT INTO `mob_droplist` VALUES (440,0,0,1000,1162,@VRARE);     -- Tonberry Lantern (Very Rare, 1%)
+INSERT INTO `mob_droplist` VALUES (440,0,0,1000,1119,@ALWAYS);    -- Tonberry Coat (Always, 100%)
+INSERT INTO `mob_droplist` VALUES (440,0,0,1000,1162,@VCOMMON);   -- Tonberry Lantern (Very Common, 24%)
+INSERT INTO `mob_droplist` VALUES (417,0,0,1000,1443,@UNCOMMON);  -- Pinch Of Dried Mugwort (Uncommon, 10%)
 
 -- ZoneID: 125 - Celphie
 INSERT INTO `mob_droplist` VALUES (441,0,0,1000,893,@UNCOMMON);   -- Giant Femur (Uncommon, 10%)
@@ -4764,9 +4767,10 @@ INSERT INTO `mob_droplist` VALUES (534,0,0,1000,2888,@VRARE);    -- Sanguinet (V
 
 -- ZoneID: 159 - Crimson-Toothed Pawberry
 INSERT INTO `mob_droplist` VALUES (535,0,0,1000,14062,@ALWAYS); -- Carbuncle Mitts (Always, 100%)
-INSERT INTO `mob_droplist` VALUES (535,0,0,1000,1119,860);      -- Tonberry Coat (86.0%)
-INSERT INTO `mob_droplist` VALUES (535,0,0,1000,1162,330);      -- Tonberry Lantern (33.0%)
-INSERT INTO `mob_droplist` VALUES (535,0,0,1000,4902,170);      -- Light Spirit Pact (17.0%)
+INSERT INTO `mob_droplist` VALUES (535,0,0,1000,1119,@ALWAYS);  -- Tonberry Coat (Always, 100%)
+INSERT INTO `mob_droplist` VALUES (535,0,0,1000,1162,@VCOMMON); -- Tonberry Lantern (Very Common, 24%)
+INSERT INTO `mob_droplist` VALUES (535,0,0,1000,4902,@COMMON);  -- Light Spirit Pact (Common, 15%)
+INSERT INTO `mob_droplist` VALUES (2440,0,0,1000,1443,@RARE);   -- Pinch Of Dried Mugwort (Rare, 5%)
 
 -- ZoneID:  24 - Crimson Knight Crab
 -- ZoneID:  25 - Crimson Knight Crab
@@ -5176,9 +5180,9 @@ INSERT INTO `mob_droplist` VALUES (582,0,0,1000,4375,@RARE); -- Danceshroom (Rar
 
 -- ZoneID: 159 - Death From Above
 INSERT INTO `mob_droplist` VALUES (583,0,0,1000,17980,@ALWAYS); -- Hornetneedle (Always, 100%)
-INSERT INTO `mob_droplist` VALUES (583,0,0,1000,4370,110);      -- Pot Of Honey (11.0%)
-INSERT INTO `mob_droplist` VALUES (583,0,0,1000,4508,90);       -- Serving Of Royal Jelly (9.0%)
-INSERT INTO `mob_droplist` VALUES (583,0,0,1000,4370,60);       -- Pot Of Honey (6.0%)
+INSERT INTO `mob_droplist` VALUES (583,0,0,1000,4370,@ALWAYS);  -- Pot Of Honey (Always, 100%)
+INSERT INTO `mob_droplist` VALUES (583,0,0,1000,4370,@ALWAYS);  -- Pot Of Honey (Always, 100%)
+INSERT INTO `mob_droplist` VALUES (583,0,0,1000,4508,@COMMON);  -- Serving Of Royal Jelly (Common, 15%)
 
 -- ZoneID:  24 - Death Jacket
 -- ZoneID:  25 - Death Jacket
@@ -7302,14 +7306,14 @@ INSERT INTO `mob_droplist` VALUES (890,0,0,1000,940,30);  -- Revival Tree Root (
 INSERT INTO `mob_droplist` VALUES (890,0,0,1000,1061,30); -- Sacrarium Chest Key (3.0%)
 
 -- ZoneID: 205 - Foreseer Oramix
-INSERT INTO `mob_droplist` VALUES (891,0,0,1000,17563,@UNCOMMON); -- Power Staff (Uncommon, 10%)
-INSERT INTO `mob_droplist` VALUES (891,0,0,1000,4719,90);         -- Scroll Of Regen Iii (9.0%)
-INSERT INTO `mob_droplist` VALUES (891,0,0,1000,4613,80);         -- Scroll Of Cure V (8.0%)
-INSERT INTO `mob_droplist` VALUES (891,0,0,1000,4618,80);         -- Scroll Of Curaga Iv (8.0%)
-INSERT INTO `mob_droplist` VALUES (891,0,0,1000,4741,80);         -- Scroll Of Shellra Iv (8.0%)
-INSERT INTO `mob_droplist` VALUES (891,0,0,1000,511,70);          -- Goblin Mask (7.0%)
-INSERT INTO `mob_droplist` VALUES (891,0,0,1000,510,@RARE);       -- Goblin Armor (Rare, 5%)
-INSERT INTO `mob_droplist` VALUES (891,0,0,1000,4659,@VRARE);     -- Scroll Of Shell Iv (Very Rare, 1%)
+INSERT INTO `mob_droplist` VALUES (891,0,0,1000,17563,@VCOMMON); -- Power Staff (Very Common, 24%)
+INSERT INTO `mob_droplist` VALUES (891,0,0,1000,4719,@VCOMMON);  -- Scroll Of Regen Iii (Very Common, 24%)
+INSERT INTO `mob_droplist` VALUES (891,0,0,1000,4613,@UNCOMMON); -- Scroll Of Cure V (Uncommon, 10%)
+INSERT INTO `mob_droplist` VALUES (891,0,0,1000,4618,@RARE);     -- Scroll Of Curaga Iv (Rare, 5%)
+INSERT INTO `mob_droplist` VALUES (891,0,0,1000,4741,@VCOMMON);  -- Scroll Of Shellra Iv (Very Common, 24%)
+INSERT INTO `mob_droplist` VALUES (891,0,0,1000,511,@ALWAYS);    -- Goblin Mask (Always, 100%)
+INSERT INTO `mob_droplist` VALUES (891,0,0,1000,510,@ALWAYS);    -- Goblin Armor (Always, 100%)
+INSERT INTO `mob_droplist` VALUES (891,0,0,1000,4659,@VRARE);    -- Scroll Of Shell Iv (Very Rare, 1%)
 
 -- ZoneID: 100 - Forest Funguar
 -- ZoneID: 101 - Forest Funguar
@@ -10445,13 +10449,12 @@ INSERT INTO `mob_droplist` VALUES (1264,0,0,1000,15138,@VRARE);  -- Valor Leggin
 INSERT INTO `mob_droplist` VALUES (1264,2,0,1000,1449,0);        -- Tukuku Whiteshell (Steal)
 
 -- ZoneID: 159 - Habetrot
-INSERT INTO `mob_droplist` VALUES (1265,0,0,1000,1295,@ALWAYS); -- Twincoon (Always, 100%)
-INSERT INTO `mob_droplist` VALUES (1265,0,0,1000,1295,500);     -- Twincoon (50.0%)
-INSERT INTO `mob_droplist` VALUES (1265,0,0,1000,1295,330);     -- Twincoon (33.0%)
-INSERT INTO `mob_droplist` VALUES (1265,0,0,1000,1295,250);     -- Twincoon (25.0%)
-INSERT INTO `mob_droplist` VALUES (1265,0,0,1000,816,70);       -- Spool Of Silk Thread (7.0%)
-INSERT INTO `mob_droplist` VALUES (1265,0,0,1000,4357,20);      -- Crawler Egg (2.0%)
-
+INSERT INTO `mob_droplist` VALUES (1265,0,0,1000,1295,@ALWAYS);  -- Twincoon (Always, 100%)
+INSERT INTO `mob_droplist` VALUES (1265,0,0,1000,1295,@ALWAYS);  -- Twincoon (Always, 100%)
+INSERT INTO `mob_droplist` VALUES (1265,0,0,1000,1295,@VCOMMON); -- Twincoon (Very Common, 24%)
+INSERT INTO `mob_droplist` VALUES (1265,0,0,1000,1295,@VCOMMON); -- Twincoon (Very Common, 24%)
+INSERT INTO `mob_droplist` VALUES (1265,0,0,1000,816,@RARE);     -- Spool Of Silk Thread (Rare, 5%)
+INSERT INTO `mob_droplist` VALUES (1265,0,0,1000,4357,@VRARE);   -- Crawler Egg (Very Rare, 1%)
 -- ZoneID: 132 - Hadal Gigas
 INSERT INTO `mob_droplist` VALUES (1266,0,0,1000,497,170);  -- Gigas Socks (17.0%)
 INSERT INTO `mob_droplist` VALUES (1266,0,0,1000,2895,170); -- Oversized Sock (17.0%)
@@ -13093,11 +13096,11 @@ INSERT INTO `mob_droplist` VALUES (1613,0,0,1000,5668,60);  -- Smilodon Liver (6
 INSERT INTO `mob_droplist` VALUES (1613,4,0,1000,2518,0);   -- Smilodon Hide (Despoil)
 
 -- ZoneID: 159 - Manipulator
-INSERT INTO `mob_droplist` VALUES (1614,0,0,1000,12378,@UNCOMMON); -- Hard Shield (Uncommon, 10%)
-INSERT INTO `mob_droplist` VALUES (1614,0,0,1000,1165,40);         -- Doll Shard (4.0%)
-INSERT INTO `mob_droplist` VALUES (1614,0,0,1000,914,20);          -- Vial Of Mercury (2.0%)
-INSERT INTO `mob_droplist` VALUES (1614,0,0,1000,1165,20);         -- Doll Shard (2.0%)
-INSERT INTO `mob_droplist` VALUES (1614,2,0,1000,1268,0);          -- Doll Gizmo (Steal)
+INSERT INTO `mob_droplist` VALUES (1614,0,0,1000,12378,@ALWAYS);  -- Hard Shield (Always, 100%)
+INSERT INTO `mob_droplist` VALUES (1614,0,0,1000,1165,@ALWAYS);   -- Doll Shard (Always, 100%)
+INSERT INTO `mob_droplist` VALUES (1614,0,0,1000,914,@VCOMMON);   -- Vial Of Mercury (Very Common, 24%)
+INSERT INTO `mob_droplist` VALUES (1614,0,0,1000,1165,@UNCOMMON); -- Doll Shard (Uncommon, 10%)
+INSERT INTO `mob_droplist` VALUES (1614,2,0,1000,1268,0);         -- Doll Gizmo (Steal)
 
 -- ZoneID: 216 - Manohra
 INSERT INTO `mob_droplist` VALUES (1615,0,0,1000,3170,440);     -- Ravagers Seal Legs (44.0%)
@@ -15055,9 +15058,9 @@ INSERT INTO `mob_droplist` VALUES (1839,0,0,1000,1630,@VCOMMON);   -- Pinch Of C
 INSERT INTO `mob_droplist` VALUES (1839,0,0,1000,15373,@UNCOMMON); -- Bravos Subligar (Uncommon, 10%)
 
 -- ZoneID: 160 - Ogama
-INSERT INTO `mob_droplist` VALUES (1840,0,0,1000,849,190);         -- Undead Skin (19.0%)
-INSERT INTO `mob_droplist` VALUES (1840,0,0,1000,16911,@UNCOMMON); -- Amanojaku (Uncommon, 10%)
-INSERT INTO `mob_droplist` VALUES (1840,0,0,1000,940,@VRARE);      -- Revival Tree Root (Very Rare, 1%)
+INSERT INTO `mob_droplist` VALUES (1840,0,0,1000,16911,@ALWAYS); -- Amanojaku (Always, 100%)
+INSERT INTO `mob_droplist` VALUES (1840,0,0,1000,849,@VCOMMON);  -- Undead Skin (Very Common, 24%)
+INSERT INTO `mob_droplist` VALUES (1840,0,0,1000,940,@VCOMMON);  -- Revival Tree Root (Very Common, 24%)
 
 -- ZoneID: 253 - Ogopogo
 INSERT INTO `mob_droplist` VALUES (1841,0,0,1000,3294,@UNCOMMON);  -- Colorless Soul (Uncommon, 10%)
@@ -17279,8 +17282,8 @@ INSERT INTO `mob_droplist` VALUES (2141,0,0,1000,1051,@RARE); -- Kuftal Coffer K
 
 -- ZoneID: 159 - Sacrificial Goblet
 INSERT INTO `mob_droplist` VALUES (2142,0,0,1000,12381,@ALWAYS); -- Charging Shield (Always, 100%)
-INSERT INTO `mob_droplist` VALUES (2142,0,0,1000,954,140);       -- Magic Pot Shard (14.0%)
-INSERT INTO `mob_droplist` VALUES (2142,0,0,1000,914,20);        -- Vial Of Mercury (2.0%)
+INSERT INTO `mob_droplist` VALUES (2142,0,0,1000,954,@ALWAYS);   -- Magic Pot Shard (Always, 100%)
+INSERT INTO `mob_droplist` VALUES (2142,0,0,1000,914,@VCOMMON);  -- Vial Of Mercury (Very Common, 24%)
 INSERT INTO `mob_droplist` VALUES (2142,2,0,1000,1269,0);        -- Mana Barrel (Steal)
 
 -- ZoneID:  84 - Tsetse Fly
@@ -18918,10 +18921,10 @@ INSERT INTO `mob_droplist` VALUES (2376,0,0,1000,914,110); -- Vial Of Mercury (1
 INSERT INTO `mob_droplist` VALUES (2376,0,0,1000,1165,40); -- Doll Shard (4.0%)
 
 -- ZoneID: 205 - Tarasque
-INSERT INTO `mob_droplist` VALUES (2377,0,0,1000,1276,@ALWAYS);    -- Tarasque Skin (Always, 100%)
-INSERT INTO `mob_droplist` VALUES (2377,0,0,1000,1276,500);        -- Tarasque Skin (50.0%)
-INSERT INTO `mob_droplist` VALUES (2377,0,0,1000,1276,330);        -- Tarasque Skin (33.0%)
-INSERT INTO `mob_droplist` VALUES (2377,0,0,1000,18042,@UNCOMMON); -- Ascention (Uncommon, 10%)
+INSERT INTO `mob_droplist` VALUES (2377,0,0,1000,1276,@ALWAYS);  -- Tarasque Skin (Always, 100%)
+INSERT INTO `mob_droplist` VALUES (2377,0,0,1000,1276,@VCOMMON); -- Tarasque Skin (Very Common, 24%)
+INSERT INTO `mob_droplist` VALUES (2377,0,0,1000,1276,@VCOMMON); -- Tarasque Skin (Very Common, 24%)
+INSERT INTO `mob_droplist` VALUES (2377,0,0,1000,18042,@COMMON); -- Ascention (Common, 15%)
 
 -- ZoneID: 137 - Tarbotaur
 INSERT INTO `mob_droplist` VALUES (2378,0,0,1000,1621,90); -- Taurus Wing (9.0%)
@@ -19449,13 +19452,15 @@ INSERT INTO `mob_droplist` VALUES (2442,0,0,1000,4774,40);        -- Scroll Of T
 INSERT INTO `mob_droplist` VALUES (2442,2,0,1000,748,0);          -- Gold Beastcoin (Steal)
 
 -- ZoneID: 160 - Tonberry Pontifex
-INSERT INTO `mob_droplist` VALUES (2443,0,0,1000,4809,60);     -- Scroll Of Waterga Iii (6.0%)
-INSERT INTO `mob_droplist` VALUES (2443,0,0,1000,4780,40);     -- Scroll Of Water Iv (4.0%)
-INSERT INTO `mob_droplist` VALUES (2443,0,0,1000,4808,40);     -- Scroll Of Waterga Ii (4.0%)
-INSERT INTO `mob_droplist` VALUES (2443,0,0,1000,1119,30);     -- Tonberry Coat (3.0%)
-INSERT INTO `mob_droplist` VALUES (2443,0,0,1000,4779,30);     -- Scroll Of Water Iii (3.0%)
-INSERT INTO `mob_droplist` VALUES (2443,0,0,1000,4822,30);     -- Scroll Of Flood (3.0%)
-INSERT INTO `mob_droplist` VALUES (2443,0,0,1000,1162,@VRARE); -- Tonberry Lantern (Very Rare, 1%)
+INSERT INTO `mob_droplist` VALUES (2443,0,0,1000,4809,@UNCOMMON); -- Scroll Of Waterga Iii (Uncommon, 10%)
+INSERT INTO `mob_droplist` VALUES (2443,0,0,1000,4780,@RARE);     -- Scroll Of Water Iv (Rare, 5%)
+INSERT INTO `mob_droplist` VALUES (2443,0,0,1000,4808,@VCOMMON);  -- Scroll Of Waterga Ii (Very Common, 24%)
+INSERT INTO `mob_droplist` VALUES (2443,0,0,1000,1119,@ALWAYS);   -- Tonberry Coat (Always, 100%)
+INSERT INTO `mob_droplist` VALUES (2443,0,0,1000,4779,@VCOMMON);  -- Scroll Of Water Iii (Very Common, 24%)
+INSERT INTO `mob_droplist` VALUES (2443,0,0,1000,4822,@RARE);     -- Scroll Of Flood (Rare, 5%)
+INSERT INTO `mob_droplist` VALUES (2511,0,0,1000,751,@VCOMMON);   -- Platinum Beastcoin (Very Common, 24%)
+INSERT INTO `mob_droplist` VALUES (2748,0,0,1000,1429,@ALWAYS);   -- Black Mages Testimony (Always, 100%)
+INSERT INTO `mob_droplist` VALUES (2443,0,0,1000,1162,@COMMON);   -- Tonberry Lantern (Common, 15%)
 
 -- ZoneID: 159 - Tonberry Pursuer
 INSERT INTO `mob_droplist` VALUES (2444,0,0,1000,1119,340);      -- Tonberry Coat (34.0%)
@@ -19506,7 +19511,7 @@ INSERT INTO `mob_droplist` VALUES (2448,0,0,1000,1543,40);   -- Coeurl Leather M
 INSERT INTO `mob_droplist` VALUES (2448,2,0,1000,749,0);     -- Mythril Beastcoin (Steal)
 
 -- ZoneID: 160 - Tonberry Tracker
-INSERT INTO `mob_droplist` VALUES (2449,0,0,1000,1431,@UNCOMMON);  -- Thiefs Testimony (Uncommon, 10%)
+INSERT INTO `mob_droplist` VALUES (2449,0,0,1000,1431,@VCOMMON);   -- Thiefs Testimony (Very Common, 24%)
 INSERT INTO `mob_droplist` VALUES (2449,0,0,1000,12748,@UNCOMMON); -- Thiefs Kote (Uncommon, 10%)
 INSERT INTO `mob_droplist` VALUES (2449,0,0,1000,1119,30);         -- Tonberry Coat (3.0%)
 INSERT INTO `mob_droplist` VALUES (2449,0,0,1000,1162,@VRARE);     -- Tonberry Lantern (Very Rare, 1%)
@@ -19971,8 +19976,8 @@ INSERT INTO `mob_droplist` VALUES (2508,0,0,1000,18857,120);    -- Antares (12.0
 
 -- ZoneID: 205 - Tyrannic Tunnok
 INSERT INTO `mob_droplist` VALUES (2509,0,0,1000,17927,@ALWAYS); -- Lohar (Always, 100%)
-INSERT INTO `mob_droplist` VALUES (2509,0,0,1000,897,560);       -- Scorpion Claw (56.0%)
-INSERT INTO `mob_droplist` VALUES (2509,0,0,1000,896,180);       -- Scorpion Shell (18.0%)
+INSERT INTO `mob_droplist` VALUES (2509,0,0,1000,897,@ALWAYS);   -- Scorpion Claw (Always, 100%)
+INSERT INTO `mob_droplist` VALUES (2509,0,0,1000,896,@ALWAYS);   -- Scorpion Shell (Always, 100%)
 INSERT INTO `mob_droplist` VALUES (2509,0,0,1000,901,@VRARE);    -- Venomous Claw (Very Rare, 1%)
 
 -- ZoneID: 187 - Tzee Xicu Idol
@@ -21532,9 +21537,10 @@ INSERT INTO `mob_droplist` VALUES (2590,0,0,1000,542,20);        -- Wild Rabbit 
 
 -- ZoneID: 205 - Vouivre
 INSERT INTO `mob_droplist` VALUES (2591,0,0,1000,16885,@ALWAYS); -- Gae Bolg (Always, 100%)
-INSERT INTO `mob_droplist` VALUES (2591,0,0,1000,1124,330);      -- Wyvern Wing (33.0%)
-INSERT INTO `mob_droplist` VALUES (2591,0,0,1000,1122,270);      -- Wyvern Skin (27.0%)
-INSERT INTO `mob_droplist` VALUES (2591,0,0,1000,866,70);        -- Handful Of Wyvern Scales (7.0%)
+INSERT INTO `mob_droplist` VALUES (2591,0,0,1000,1124,@ALWAYS);  -- Wyvern Wing (33.0%)
+INSERT INTO `mob_droplist` VALUES (2591,0,0,1000,1122,@ALWAYS);  -- Wyvern Skin (27.0%)
+INSERT INTO `mob_droplist` VALUES (2591,0,0,1000,1122,@VCOMMON); -- Wyvern Skin (27.0%)
+INSERT INTO `mob_droplist` VALUES (2591,0,0,1000,866,@ALWAYS);   -- Handful Of Wyvern Scales (7.0%)
 
 -- ZoneID: 190 - Vrtra
 INSERT INTO `mob_droplist` VALUES (2592,0,0,1000,1712,@ALWAYS);    -- Clump Of Cashmere Wool (Always, 100%)
@@ -22129,10 +22135,11 @@ INSERT INTO `mob_droplist` VALUES (2666,0,0,1000,701,530);  -- Rosewood Log (53.
 INSERT INTO `mob_droplist` VALUES (2666,0,0,1000,700,280);  -- Mahogany Log (28.0%)
 INSERT INTO `mob_droplist` VALUES (2666,0,0,1000,701,270);  -- Rosewood Log (27.0%)
 INSERT INTO `mob_droplist` VALUES (2666,0,0,1000,702,260);  -- Ebony Log (26.0%)
+INSERT INTO `mob_droplist` VALUES (2666,0,0,1000,702,260);  -- Ebony Log (26.0%)
 INSERT INTO `mob_droplist` VALUES (2666,0,0,1000,703,170);  -- Petrified Log (17.0%)
 INSERT INTO `mob_droplist` VALUES (2666,0,0,1000,700,140);  -- Mahogany Log (14.0%)
 INSERT INTO `mob_droplist` VALUES (2666,0,0,1000,700,90);   -- Mahogany Log (9.0%)
-INSERT INTO `mob_droplist` VALUES (2666,0,0,1000,17529,30); -- Sunlight Pole (3.0%)
+INSERT INTO `mob_droplist` VALUES (2666,0,0,1000,17529,@UNCOMMON); -- Sunlight Pole (Uncommon, 10%)
 
 -- ZoneID:  40 - Woodnix Shrillwhistle
 INSERT INTO `mob_droplist` VALUES (2667,0,0,1000,1449,200);      -- Tukuku Whiteshell (20.0%)
