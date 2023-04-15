@@ -1109,6 +1109,7 @@ INSERT INTO `mob_spawn_mods` VALUES (17396144,55,120,1); -- IDLE_DESPAWN: 120
 -- Voluptuous Vivian
 INSERT INTO `mob_spawn_mods` VALUES (17404331,1,20000,1); -- GIL_MIN: 20000
 INSERT INTO `mob_spawn_mods` VALUES (17404331,2,24000,1); -- GIL_MAX: 24000
+INSERT INTO `mob_spawn_mods` VALUES (17404331,15,3000,1);
 
 -- Agas
 INSERT INTO `mob_spawn_mods` VALUES (17404337,55,288,1); -- IDLE_DESPAWN: 288
@@ -1763,6 +1764,29 @@ INSERT INTO `mob_spawn_mods` VALUES (17489980,2,20000,1); -- max gil 20000
 INSERT INTO `mob_spawn_mods` VALUES (17490204,1,12000,1); -- min gil 12000
 INSERT INTO `mob_spawn_mods` VALUES (17490204,2,19000,1); -- max gil 19000
 INSERT INTO `mob_spawn_mods` VALUES (17490204,15,4000,1); -- mug gil 4000
+
+-- [Ancient Goobbue]
+-- Based on wiki (http://ffxiclopedia.wikia.com/wiki/Ancient_Goobbue)
+INSERT INTO `mob_spawn_mods` VALUES (17404290,1,18000,1); -- min gil 18000
+INSERT INTO `mob_spawn_mods` VALUES (17404290,2,30000,1); -- max gil 30000
+
+-- [Aquarius]
+-- Based on wiki (http://ffxiclopedia.wikia.com/wiki/Aquarius)
+INSERT INTO `mob_spawn_mods` VALUES (17404000,1,20000,1); -- min gil 18000
+INSERT INTO `mob_spawn_mods` VALUES (17404000,2,29000,1); -- max gil 29000
+INSERT INTO `mob_spawn_mods` VALUES (17404000,15,10000,1); -- mug gil 10000
+
+-- [Ellyllon]
+-- Based on wiki (http://ffxiclopedia.wikia.com/wiki/Ellyllon)
+INSERT INTO `mob_spawn_mods` VALUES (17092853,1,6000,1); -- min gil 6000
+INSERT INTO `mob_spawn_mods` VALUES (17092853,2,9300,1); -- max gil 9300
+INSERT INTO `mob_spawn_mods` VALUES (17092853,15,4500,1); -- mug gil 4500
+
+-- [Unut]
+-- Based on wiki (http://ffxiclopedia.wikia.com/wiki/Unut)
+INSERT INTO `mob_spawn_mods` VALUES (17092904,1,1800,1); -- min gil 1800
+INSERT INTO `mob_spawn_mods` VALUES (17092904,2,5800,1); -- max gil 5800
+INSERT INTO `mob_spawn_mods` VALUES (17092904,15,2500,1); -- mug gil 2500
 
 /*!40000 ALTER TABLE `mob_spawn_mods` ENABLE KEYS */;
 UNLOCK TABLES;

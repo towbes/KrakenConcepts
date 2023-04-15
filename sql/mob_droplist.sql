@@ -25528,7 +25528,7 @@ INSERT INTO `mob_droplist` VALUES (3140,0,0,1000,2826,@COMMON); -- Mandragora Sc
 INSERT INTO `mob_droplist` VALUES (3141,0,0,1000,919,@ALWAYS);  -- Clump Of Boyahda Moss (Always, 100%)
 INSERT INTO `mob_droplist` VALUES (3141,0,0,1000,1237,@ALWAYS); -- Bag Of Tree Cuttings (Always, 100%)
 INSERT INTO `mob_droplist` VALUES (3141,0,0,1000,1264,@ALWAYS); -- Clump Of Great Boyahda Moss (Always, 100%)
-INSERT INTO `mob_droplist` VALUES (3141,0,0,1000,16990,@RARE);  -- Daihannya (Rare, 5%)
+INSERT INTO `mob_droplist` VALUES (3141,0,0,1000,16990,@UNCOMMON); -- Daihannya (Uncommon, 10%)
 
 -- ZoneID: 120 - Bashe
 INSERT INTO `mob_droplist` VALUES (3142,0,0,1000,16031,@COMMON); -- Affinity Earring (Common, 15%)
@@ -26935,6 +26935,13 @@ INSERT INTO `mob_droplist` VALUES (3807,0,0,1000,2850,@UNCOMMON);   -- Sahagin G
 -- ZoneID: 125 - Zmey Gorynych
 INSERT INTO `mob_droplist` VALUES (3808,0,0,1000,2811,@COMMON);   -- Aptant of Primus (Common, 15%)
 INSERT INTO `mob_droplist` VALUES (3808,0,0,1000,2813,@UNCOMMON); -- Aptant of Durus (Uncommon, 10%)
+
+-- ZoneID: 121 - Bastet
+INSERT INTO `mob_droplist` VALUES (3809,0,0,1000,2830,@UNCOMMON); -- Bastet Fang (Uncommon, 10%)
+
+-- ZoneID: 122 - Nargun
+INSERT INTO `mob_droplist` VALUES (3810,0,0,1000,2815,@VCOMMON); -- Aptant of Arkhe (Very Common, 24%)
+INSERT INTO `mob_droplist` VALUES (3810,0,0,1000,2817,@RARE);    -- Aptant of Pera (Rare, 5%)
 
 /*!40000 ALTER TABLE `mob_droplist` ENABLE KEYS */;
 UNLOCK TABLES;

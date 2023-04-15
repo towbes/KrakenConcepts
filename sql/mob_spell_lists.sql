@@ -5203,6 +5203,23 @@ INSERT INTO `mob_spell_lists` VALUES('Sacrificial_Goblet', 724, 247, 1, 255); --
 INSERT INTO `mob_spell_lists` VALUES('Sacrificial_Goblet', 724, 226, 1, 255); -- poisonga ii (1~255)
 
 
+-- Bastet (499)
+INSERT INTO `mob_spell_lists` VALUES('Bastet', 725, 165, 1, 255); -- thunder ii (1~255)
+INSERT INTO `mob_spell_lists` VALUES('Bastet', 725, 195, 1, 255); -- thundaga ii (1~255)
+INSERT INTO `mob_spell_lists` VALUES('Bastet', 725, 212, 1, 255); -- burst (1~255)
+INSERT INTO `mob_spell_lists` VALUES('Bastet', 725, 239, 1, 255); -- shock (1~255)
+INSERT INTO `mob_spell_lists` VALUES('Bastet', 725, 251, 1, 255); -- shock spikes (1~255)
+INSERT INTO `mob_spell_lists` VALUES('Bastet', 725, 252, 1, 255); -- stun (1~255)
+
+-- Noble Mold (500)
+INSERT INTO `mob_spell_lists` VALUES('Noble_Mold', 726, 55, 1, 255); -- aquaveil (1~255)
+INSERT INTO `mob_spell_lists` VALUES('Noble_Mold', 726, 105, 1, 255); -- enwater (1~255)
+INSERT INTO `mob_spell_lists` VALUES('Noble_Mold', 726, 170, 1, 255); -- water ii (1~255)
+INSERT INTO `mob_spell_lists` VALUES('Noble_Mold', 726, 200, 1, 255); -- waterga ii (1~255)
+INSERT INTO `mob_spell_lists` VALUES('Noble_Mold', 726, 221, 1, 255); -- poison ii (1~255)
+INSERT INTO `mob_spell_lists` VALUES('Noble_Mold', 726, 240, 1, 255); -- drown (1~255)
+
+
 
 /*!40000 ALTER TABLE `mob_spell_lists` ENABLE KEYS */;
 UNLOCK TABLES;

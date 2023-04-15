@@ -3929,6 +3929,8 @@ INSERT INTO `mob_skill_lists` VALUES ('Ash_Dragon',5314,645);
 INSERT INTO `mob_skill_lists` VALUES ('Ash_Dragon',5314,642);
 INSERT INTO `mob_skill_lists` VALUES ('Ash_Dragon',5314,649);
 INSERT INTO `mob_skill_lists` VALUES ('Ash_Dragon',5314,647);
+INSERT INTO `mob_skill_lists` VALUES ('Huwasi',5315,678);
+INSERT INTO `mob_skill_lists` VALUES ('Rogue_Receptacle',5316,520);
 
 
 
