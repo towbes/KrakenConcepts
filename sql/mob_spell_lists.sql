@@ -5284,6 +5284,12 @@ INSERT INTO `mob_spell_lists` VALUES('Donnergugi', 732, 161, 1, 255); -- stone i
 INSERT INTO `mob_spell_lists` VALUES('Donnergugi', 732, 190, 1, 255); -- stonega ii (1~255)
 INSERT INTO `mob_spell_lists` VALUES('Donnergugi', 732, 238, 1, 255); -- rasp (1~255)
 
+-- Guesh Urvan (504)
+INSERT INTO `mob_spell_lists` VALUES('Guesh_Urvan', 733, 152, 1, 255); -- blizzard iv (1~255)
+INSERT INTO `mob_spell_lists` VALUES('Guesh_Urvan', 733, 181, 1, 255); -- blizzaga iii (1~255)
+INSERT INTO `mob_spell_lists` VALUES('Guesh_Urvan', 733, 356, 1, 255); -- paralyga (1~255)
+INSERT INTO `mob_spell_lists` VALUES('Guesh_Urvan', 733, 362, 1, 255); -- bindga (1~255)
+
 /*!40000 ALTER TABLE `mob_spell_lists` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;

@@ -3949,6 +3949,9 @@ INSERT INTO `mob_skill_lists` VALUES ('Qoofim',5325,450);
 INSERT INTO `mob_skill_lists` VALUES ('Qoofim',5325,451);
 INSERT INTO `mob_skill_lists` VALUES ('Dahu',5326,802); -- Great_Sandstorm
 INSERT INTO `mob_skill_lists` VALUES ('Picolaton',5327,403); -- Stormwind
+INSERT INTO `mob_skill_lists` VALUES ('Barbaric_Weapon',5328,514);
+INSERT INTO `mob_skill_lists` VALUES ('Marquis_Sabnock',5329,1149);
+INSERT INTO `mob_skill_lists` VALUES ('Geush_Attack',5330,1460);
 
 
 

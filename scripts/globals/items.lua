@@ -582,6 +582,7 @@ xi.items =
     FREE_CHOCOPASS                  = 1789,
     SUPERNAL_FRAGMENT               = 1822,
     SHRIMP_LANTERN                  = 1823,
+    HAUNTED_MULETA                  = 1824,
     SPOOL_OF_OPAL_SILK              = 1826,
     PREMIUM_BAG                     = 1827,
     SPOOL_OF_RED_GRASS_THREAD       = 1828,
