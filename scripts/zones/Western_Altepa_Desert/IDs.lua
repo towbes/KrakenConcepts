@@ -58,7 +58,6 @@ zones[xi.zone.WESTERN_ALTEPA_DESERT] =
         CACTUAR_CANTAUTOR_PH =
         {
             [17289559] = 17289560, -- -458.944 0.018 -557.266
-            [17289578] = 17289560, -- -478.142 -0.457 -596.091
         },
         CELPHIE_PH           =
         {
@@ -81,6 +80,7 @@ zones[xi.zone.WESTERN_ALTEPA_DESERT] =
         EASTERN_SPHINX       = 17289654,
         WESTERN_SPHINX       = 17289655,
         MAHARAJA             = 17289656,
+        DAHU                 = 17289323,
     },
     npc =
     {

@@ -67,6 +67,17 @@ zoneObject.onEventFinish = function(player, csid, option)
 end
 
 zoneObject.onZoneWeatherChange = function(weather)
+
+    local dahu = GetMobByID(ID.mob.DAHU)
+    if
+        not dahu:isSpawned() and 
+        os.time() > dahu:getLocalVar("cooldown") and
+        (weather == xi.weather.DUST_STORM or weather == xi.weather.SAND_STORM)
+    then
+        DisallowRespawn(dahu:getID(), false)
+        dahu:setRespawnTime(math.random(30, 150)) -- pop 30-150 sec after earth weather starts
+    end
+
     local kvMob = GetMobByID(ID.mob.KING_VINEGARROON)
 
     if

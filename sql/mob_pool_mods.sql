@@ -376,6 +376,9 @@ INSERT INTO `mob_pool_mods` VALUES (3301,29,100,0); -- MDEF: 100
 -- Rock Golem
 INSERT INTO `mob_pool_mods` VALUES (3379,4,4,1); -- SIGHT_RANGE: 4
 
+-- Sabotender
+INSERT INTO `mob_pool_mods` VALUES (3426,105,1,1); -- ATTRACT_FAMILY_NM
+
 -- Seiryu
 INSERT INTO `mob_pool_mods` VALUES (3540,3,100,1); -- MP_BASE: 100
 

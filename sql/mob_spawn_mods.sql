@@ -1549,6 +1549,7 @@ INSERT INTO `mob_spawn_mods` VALUES (17629483,2,9234,1); -- GIL_MAX: 9234
 -- Triarius X-Xv
 INSERT INTO `mob_spawn_mods` VALUES (17629524,1,6000,1); -- GIL_MIN: 6000
 INSERT INTO `mob_spawn_mods` VALUES (17629524,2,9234,1); -- GIL_MAX: 9234
+INSERT INTO `mob_spawn_mods` VALUES (17629524,15,2500,1); -- mug gil 2500
 
 -- Hastatus Xi-Xii
 INSERT INTO `mob_spawn_mods` VALUES (17629561,1,650,1);  -- GIL_MIN: 650
@@ -1568,6 +1569,7 @@ INSERT INTO `mob_spawn_mods` VALUES (17629642,55,600,1); -- IDLE_DESPAWN: 600
 -- Tribunus Vii-I
 INSERT INTO `mob_spawn_mods` VALUES (17629643,1,6000,1); -- GIL_MIN: 6000
 INSERT INTO `mob_spawn_mods` VALUES (17629643,2,9234,1); -- GIL_MAX: 9234
+INSERT INTO `mob_spawn_mods` VALUES (17629643,15,4000,1); -- mug gil 4000
 INSERT INTO `mob_spawn_mods` VALUES (17629643,55,900,1); -- IDLE_DESPAWN: 900
 
 -- Proconsul Xii
@@ -1787,6 +1789,25 @@ INSERT INTO `mob_spawn_mods` VALUES (17092853,15,4500,1); -- mug gil 4500
 INSERT INTO `mob_spawn_mods` VALUES (17092904,1,1800,1); -- min gil 1800
 INSERT INTO `mob_spawn_mods` VALUES (17092904,2,5800,1); -- max gil 5800
 INSERT INTO `mob_spawn_mods` VALUES (17092904,15,2500,1); -- mug gil 2500
+
+-- [Antican Praetor]
+-- Data taken from wiki (http://ffxiclopedia.wikia.com/wiki/Antican_Praetor)
+INSERT INTO `mob_spawn_mods` VALUES (17629621,1,4000,1); -- min gil 4000
+INSERT INTO `mob_spawn_mods` VALUES (17629621,2,8000,1); -- max gil 8000
+INSERT INTO `mob_spawn_mods` VALUES (17629639,1,4000,1); -- min gil 4000
+INSERT INTO `mob_spawn_mods` VALUES (17629639,2,8000,1); -- max gil 8000
+
+-- [Nussknacker]
+-- Data taken from wiki (http://ffxiclopedia.wikia.com/wiki/Nussknacker)
+INSERT INTO `mob_spawn_mods` VALUES (17093048,1,4000,1);  -- min gil 4000
+INSERT INTO `mob_spawn_mods` VALUES (17093048,2,8000,1);  -- max gil 8000
+INSERT INTO `mob_spawn_mods` VALUES (17093048,15,2000,1); -- mug gil 2000
+
+-- [Sabotender Bailarina]
+-- Data taken from wiki (http://ffxiclopedia.wikia.com/wiki/Sabotender_Bailarina)
+INSERT INTO `mob_spawn_mods` VALUES (17629587,1,12000,1); -- min gil 12000
+INSERT INTO `mob_spawn_mods` VALUES (17629587,2,20000,1); -- max gil 20000
+INSERT INTO `mob_spawn_mods` VALUES (17629587,15,3000,1); -- mug gil 3000
 
 /*!40000 ALTER TABLE `mob_spawn_mods` ENABLE KEYS */;
 UNLOCK TABLES;

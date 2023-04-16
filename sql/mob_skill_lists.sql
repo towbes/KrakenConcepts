@@ -1243,13 +1243,10 @@ INSERT INTO `mob_skill_lists` VALUES ('Serket',273,721);
 INSERT INTO `mob_skill_lists` VALUES ('Serket',273,722);
 INSERT INTO `mob_skill_lists` VALUES ('Serket',273,723);
 INSERT INTO `mob_skill_lists` VALUES ('Serket',273,724);
-INSERT INTO `mob_skill_lists` VALUES ('KingV',274,353);
 INSERT INTO `mob_skill_lists` VALUES ('KingV',274,354);
-INSERT INTO `mob_skill_lists` VALUES ('KingV',274,355);
-INSERT INTO `mob_skill_lists` VALUES ('KingV',274,719);
-INSERT INTO `mob_skill_lists` VALUES ('KingV',274,720);
 INSERT INTO `mob_skill_lists` VALUES ('KingV',274,722);
 INSERT INTO `mob_skill_lists` VALUES ('KingV',274,723);
+INSERT INTO `mob_skill_lists` VALUES ('KingV',274,355);
 -- 275: Matamata
 -- 276: Crepuscular Worm
 INSERT INTO `mob_skill_lists` VALUES ('Genbu',277,805);
@@ -3950,6 +3947,8 @@ INSERT INTO `mob_skill_lists` VALUES ('Okyupete',5323,400);
 INSERT INTO `mob_skill_lists` VALUES ('Atkorkamuy',5324,463);
 INSERT INTO `mob_skill_lists` VALUES ('Qoofim',5325,450);
 INSERT INTO `mob_skill_lists` VALUES ('Qoofim',5325,451);
+INSERT INTO `mob_skill_lists` VALUES ('Dahu',5326,802); -- Great_Sandstorm
+INSERT INTO `mob_skill_lists` VALUES ('Picolaton',5327,403); -- Stormwind
 
 
 

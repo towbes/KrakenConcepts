@@ -3670,12 +3670,12 @@ INSERT INTO `mob_droplist` VALUES (394,1,2,200,1323,@VCOMMON);  -- Earthen Abjur
 INSERT INTO `mob_droplist` VALUES (394,1,2,200,1324,@VCOMMON);  -- Aquarian Abjuration Head (Group 2 - Very Common, 24%)
 
 -- ZoneID: 114 - Cactrot Rapido
-INSERT INTO `mob_droplist` VALUES (395,0,0,1000,1817,180);        -- Cactus Arm (18.0%)
+INSERT INTO `mob_droplist` VALUES (395,0,0,1000,1817,@ALWAYS);        -- Cactus Arm (100.0%)
 INSERT INTO `mob_droplist` VALUES (395,0,0,1000,916,140);         -- Cactuar Needle (14.0%)
 INSERT INTO `mob_droplist` VALUES (395,0,0,1000,13401,@UNCOMMON); -- Arete Del Sol (Uncommon, 10%)
 INSERT INTO `mob_droplist` VALUES (395,0,0,1000,17165,@UNCOMMON); -- Arco De Velocidad (Uncommon, 10%)
-INSERT INTO `mob_droplist` VALUES (395,0,0,1000,1236,80);         -- Bag Of Cactus Stems (8.0%)
-INSERT INTO `mob_droplist` VALUES (395,0,0,1000,1592,80);         -- Cactuar Root (8.0%)
+INSERT INTO `mob_droplist` VALUES (395,0,0,1000,1236,@ALWAYS);         -- Bag Of Cactus Stems (100.0%)
+INSERT INTO `mob_droplist` VALUES (395,0,0,1000,1592,@ALWAYS);         -- Cactuar Root (100.0%)
 
 -- ZoneID: 114 - Sabotender
 -- ZoneID: 125 - Cactuar
@@ -4008,9 +4008,10 @@ INSERT INTO `mob_droplist` VALUES (440,0,0,1000,1162,@VCOMMON);   -- Tonberry La
 INSERT INTO `mob_droplist` VALUES (417,0,0,1000,1443,@UNCOMMON);  -- Pinch Of Dried Mugwort (Uncommon, 10%)
 
 -- ZoneID: 125 - Celphie
-INSERT INTO `mob_droplist` VALUES (441,0,0,1000,893,@UNCOMMON);   -- Giant Femur (Uncommon, 10%)
-INSERT INTO `mob_droplist` VALUES (441,0,0,1000,15505,@UNCOMMON); -- Dhalmel Whistle (Uncommon, 10%)
-INSERT INTO `mob_droplist` VALUES (441,0,0,1000,4359,90);         -- Slice Of Dhalmel Meat (9.0%)
+INSERT INTO `mob_droplist` VALUES (441,0,0,1000,893,@UNCOMMON);  -- Giant Femur (Uncommon, 10%)
+INSERT INTO `mob_droplist` VALUES (441,0,0,1000,15505,@VCOMMON); -- Dhalmel Whistle (Very Common, 24%)
+INSERT INTO `mob_droplist` VALUES (441,0,0,1000,4359,@VCOMMON);  -- Slice Of Dhalmel Meat (Very Common, 24%)
+INSERT INTO `mob_droplist` VALUES (632,0,0,1000,938,@VRARE);     -- Sprig Of Papaka Grass (Very Rare, 1%)
 
 -- ZoneID: 190 - Cemetery Cherry
 INSERT INTO `mob_droplist` VALUES (442,0,0,1000,700,@VCOMMON);  -- Mahogany Log (Very Common, 24%)
@@ -5572,9 +5573,9 @@ INSERT INTO `mob_droplist` VALUES (648,0,0,1000,11901,@UNCOMMON); -- Tropic Gage
 
 -- ZoneID: 208 - Diamond Daig
 INSERT INTO `mob_droplist` VALUES (649,0,0,1000,14063,@ALWAYS); -- Protecting Bangles (Always, 100%)
-INSERT INTO `mob_droplist` VALUES (649,0,0,1000,889,@COMMON);   -- Beetle Shell (Common, 15%)
-INSERT INTO `mob_droplist` VALUES (649,0,0,1000,894,@UNCOMMON); -- Beetle Jaw (Uncommon, 10%)
-INSERT INTO `mob_droplist` VALUES (649,0,0,1000,846,60);        -- Insect Wing (6.0%)
+INSERT INTO `mob_droplist` VALUES (649,0,0,1000,889,@VCOMMON);  -- Beetle Shell (Very Common, 24%)
+INSERT INTO `mob_droplist` VALUES (649,0,0,1000,894,@VCOMMON);  -- Beetle Jaw (Very Common, 24%)
+INSERT INTO `mob_droplist` VALUES (649,0,0,1000,846,@VCOMMON);  -- Insect Wing (Very Common, 24%)
 
 -- ZoneID: 148 - Diamond Quadav
 INSERT INTO `mob_droplist` VALUES (650,0,0,1000,787,950);   -- Diamond (95.0%)
@@ -17292,8 +17293,16 @@ INSERT INTO `mob_droplist` VALUES (2143,0,0,1000,846,160);    -- Insect Wing (16
 INSERT INTO `mob_droplist` VALUES (2143,0,0,1000,1031,@RARE); -- Gusgen Chest Key (Rare, 5%)
 
 -- ZoneID: 208 - Sagittarius X-Xiii
-INSERT INTO `mob_droplist` VALUES (2144,0,0,1000,1121,960);  -- Antican Robe (96.0%)
-INSERT INTO `mob_droplist` VALUES (2144,0,0,1000,17199,280); -- Loxley Bow (28.0%)
+INSERT INTO `mob_droplist` VALUES (2144,0,0,1000,1121,@ALWAYS);  -- Antican Robe (96.0%)
+INSERT INTO `mob_droplist` VALUES (2144,0,0,1000,17199,280);     -- Loxley Bow (28.0%)
+INSERT INTO `mob_droplist` VALUES (2144,0,0,1000,643,@ALWAYS);   -- Chunk Of Iron Ore (2.0%)
+INSERT INTO `mob_droplist` VALUES (2144,0,0,1000,643,@ALWAYS);   -- Chunk Of Iron Ore (2.0%)
+INSERT INTO `mob_droplist` VALUES (2144,0,0,1000,644,@VCOMMON);  -- Chunk Of Mythril Ore (Very Common, 24%)
+INSERT INTO `mob_droplist` VALUES (2144,0,0,1000,644,@VCOMMON);  -- Chunk Of Mythril Ore (Very Common, 24%)
+INSERT INTO `mob_droplist` VALUES (2144,0,0,1000,645,@UNCOMMON); -- Chunk Of Darksteel Ore (Uncommon, 10%)
+INSERT INTO `mob_droplist` VALUES (2144,0,0,1000,645,@UNCOMMON); -- Chunk Of Darksteel Ore (Uncommon, 10%)
+INSERT INTO `mob_droplist` VALUES (2144,0,0,1000,646,@RARE);     -- Chunk Of Adaman Ore (Rare, 5%)
+INSERT INTO `mob_droplist` VALUES (2144,0,0,1000,646,@RARE);     -- Chunk Of Adaman Ore (Rare, 5%)
 
 -- ZoneID:  84 - Sandworm
 -- ZoneID: 103 - Sand Bats
@@ -19675,13 +19684,13 @@ INSERT INTO `mob_droplist` VALUES (2468,0,0,1000,18007,380); -- Chiroptera Dagge
 INSERT INTO `mob_droplist` VALUES (2468,0,0,1000,17794,320); -- Niokiyotsuna (32.0%)
 
 -- ZoneID: 208 - Triarius X-Xv
-INSERT INTO `mob_droplist` VALUES (2469,0,0,1000,643,@ALWAYS);     -- Chunk Of Iron Ore (Always, 100%)
-INSERT INTO `mob_droplist` VALUES (2469,0,0,1000,1118,@ALWAYS);    -- Antican Pauldron (Always, 100%)
-INSERT INTO `mob_droplist` VALUES (2469,0,0,1000,646,980);         -- Chunk Of Adaman Ore (98.0%)
-INSERT INTO `mob_droplist` VALUES (2469,0,0,1000,643,500);         -- Chunk Of Iron Ore (50.0%)
-INSERT INTO `mob_droplist` VALUES (2469,0,0,1000,16734,@UNCOMMON); -- Pendragon Axe (Uncommon, 10%)
-INSERT INTO `mob_droplist` VALUES (2469,0,0,1000,645,80);          -- Chunk Of Darksteel Ore (8.0%)
-INSERT INTO `mob_droplist` VALUES (2469,0,0,1000,644,@VRARE);      -- Chunk Of Mythril Ore (Very Rare, 1%)
+INSERT INTO `mob_droplist` VALUES (2469,0,0,1000,643,@ALWAYS);    -- Chunk Of Iron Ore (Always, 100%)
+INSERT INTO `mob_droplist` VALUES (2469,0,0,1000,643,@ALWAYS);    -- Chunk Of Iron Ore (Always, 100%)
+INSERT INTO `mob_droplist` VALUES (2469,0,0,1000,1118,@ALWAYS);   -- Antican Pauldron (Always, 100%)
+INSERT INTO `mob_droplist` VALUES (2469,0,0,1000,646,@UNCOMMON);  -- Chunk Of Adaman Ore (Uncommon, 10%)
+INSERT INTO `mob_droplist` VALUES (2469,0,0,1000,16734,@VCOMMON); -- Pendragon Axe (Very Common, 24%)
+INSERT INTO `mob_droplist` VALUES (2469,0,0,1000,645,@VCOMMON);   -- Chunk Of Darksteel Ore (Very Common, 24%)
+INSERT INTO `mob_droplist` VALUES (2469,0,0,1000,644,@VCOMMON);   -- Chunk Of Mythril Ore (Very Common, 24%)
 
 -- ZoneID: 208 - Tribunus Vii-I
 INSERT INTO `mob_droplist` VALUES (2470,0,0,1000,643,1030);     -- Chunk Of Iron Ore (103.0%)
@@ -26291,18 +26300,17 @@ INSERT INTO `mob_droplist` VALUES (3207,0,0,1000,1453,@SRARE);  -- Montiont Silv
 INSERT INTO `mob_droplist` VALUES (3207,0,0,1000,1456,@SRARE);  -- One Hundred Byne Bill (Super Rare, 0.5%)
 
 -- ZoneID: 208 - Sabotender Bailarin
-INSERT INTO `mob_droplist` VALUES (3208,0,0,1000,1236,180);      -- Bag Of Cactus Stems (18.0%)
-INSERT INTO `mob_droplist` VALUES (3208,0,0,1000,18138,@COMMON); -- Bailathorn (Common, 15%)
-INSERT INTO `mob_droplist` VALUES (3208,0,0,1000,18138,@COMMON); -- Bailathorn (Common, 15%)
-INSERT INTO `mob_droplist` VALUES (3208,0,0,1000,916,140);       -- Cactuar Needle (14.0%)
-INSERT INTO `mob_droplist` VALUES (3208,0,0,1000,1592,80);       -- Cactuar Root (8.0%)
-INSERT INTO `mob_droplist` VALUES (3208,0,0,1000,18138,0);       -- Bailathorn (0.0%)
+INSERT INTO `mob_droplist` VALUES (3208,0,0,1000,1236,@COMMON);  -- Bag Of Cactus Stems (Common, 15%)
+INSERT INTO `mob_droplist` VALUES (3208,0,0,1000,18138,@ALWAYS); -- Bailathorn (Always, 100%)
+INSERT INTO `mob_droplist` VALUES (3208,0,0,1000,18138,@ALWAYS); -- Bailathorn (Always, 100%)
+INSERT INTO `mob_droplist` VALUES (3208,0,0,1000,916,@COMMON);   -- Cactuar Needle (Common, 15%)
+INSERT INTO `mob_droplist` VALUES (3208,0,0,1000,1592,@RARE);    -- Cactuar Root (Rare, 5%)
 
 -- ZoneID: 208 - Sabotender Bailarina
 INSERT INTO `mob_droplist` VALUES (3209,0,0,1000,14168,@ALWAYS); -- Dune Boots (Always, 100%)
 INSERT INTO `mob_droplist` VALUES (3209,0,0,1000,1236,180);      -- Bag Of Cactus Stems (18.0%)
 INSERT INTO `mob_droplist` VALUES (3209,0,0,1000,916,140);       -- Cactuar Needle (14.0%)
-INSERT INTO `mob_droplist` VALUES (3209,0,0,1000,1592,80);       -- Cactuar Root (8.0%)
+INSERT INTO `mob_droplist` VALUES (3209,0,0,1000,1592,@VCOMMON); -- Cactuar Root (Very Common, 24%)
 
 -- ZoneID: 134 - Hitaume
 INSERT INTO `mob_droplist` VALUES (3210,0,0,1000,11918,@VCOMMON); -- Khthonios Gloves (Very Common, 24%)
@@ -26966,6 +26974,9 @@ INSERT INTO `mob_droplist` VALUES (3816,1,1,1000,14782,270); -- Astral Earring (
 -- ZoneID: 126 - Atkorkamuy
 INSERT INTO `mob_droplist` VALUES (3817,0,0,1000,2813,@UNCOMMON); -- Aptant of Durus (Uncommon, 10%)
 INSERT INTO `mob_droplist` VALUES (3817,0,0,1000,2816,@UNCOMMON); -- Aptant of Tachus (Uncommon, 10%)
+
+-- ZoneID: 125 - Dahu
+INSERT INTO `mob_droplist` VALUES (3818,0,0,1000,2835,@COMMON); -- Lock of Dahu Hair (Common, 15%)
 
 /*!40000 ALTER TABLE `mob_droplist` ENABLE KEYS */;
 UNLOCK TABLES;
