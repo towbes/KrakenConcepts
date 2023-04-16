@@ -5000,11 +5000,6 @@ INSERT INTO `mob_spell_lists` VALUES ('Cemetery_Cherry',498,274,1,255); -- Sleep
 INSERT INTO `mob_spell_lists` VALUES ('Cemetery_Cherry',498,356,1,255); -- Paralyga
 INSERT INTO `mob_spell_lists` VALUES ('Cemetery_Cherry',498,366,1,255); -- Graviga
 
--- Zoredonite (498)
-INSERT INTO `mob_spell_lists` VALUES ('Zoredonite',498,3,1,255);   -- cure_iii (1~255)
-INSERT INTO `mob_spell_lists` VALUES ('Zoredonite',498,30,1,255);  -- banish_iii (1~255)
-INSERT INTO `mob_spell_lists` VALUES ('Zoredonite',498,112,1,255); -- flash (1~255)
-
 -- Slendlix Spindlethumb (498)
 INSERT INTO `mob_spell_lists` VALUES ('Slendlix_Spindlethumb',499,3,1,255);  -- cure_iii (1~255)
 INSERT INTO `mob_spell_lists` VALUES ('Slendlix_Spindlethumb',499,23,1,255); -- dia (1~255)
@@ -5289,6 +5284,11 @@ INSERT INTO `mob_spell_lists` VALUES('Guesh_Urvan', 733, 152, 1, 255); -- blizza
 INSERT INTO `mob_spell_lists` VALUES('Guesh_Urvan', 733, 181, 1, 255); -- blizzaga iii (1~255)
 INSERT INTO `mob_spell_lists` VALUES('Guesh_Urvan', 733, 356, 1, 255); -- paralyga (1~255)
 INSERT INTO `mob_spell_lists` VALUES('Guesh_Urvan', 733, 362, 1, 255); -- bindga (1~255)
+
+-- Zoredonite (498)
+INSERT INTO `mob_spell_lists` VALUES ('Zoredonite',734,3,1,255);   -- cure_iii (1~255)
+INSERT INTO `mob_spell_lists` VALUES ('Zoredonite',734,30,1,255);  -- banish_iii (1~255)
+INSERT INTO `mob_spell_lists` VALUES ('Zoredonite',734,112,1,255); -- flash (1~255)
 
 /*!40000 ALTER TABLE `mob_spell_lists` ENABLE KEYS */;
 UNLOCK TABLES;

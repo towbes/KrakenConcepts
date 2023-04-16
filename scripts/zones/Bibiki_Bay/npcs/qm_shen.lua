@@ -15,11 +15,12 @@ entity.onTrade = function(player, npc, trade)
         npcUtil.popFromQM(player, npc, shenId)
     then
         player:confirmTrade()
+        player:messageSpecial(ID.text.SHEN_SPAWN)
     end
 end
 
 entity.onTrigger = function(player, npc)
-    player:messageSpecial(ID.text.NOTHING_OUT_OF_ORDINARY)
+    player:messageSpecial(ID.text.SHEN_QM)
 end
 
 entity.onEventUpdate = function(player, csid, option)
