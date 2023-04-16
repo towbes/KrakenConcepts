@@ -3947,6 +3947,9 @@ INSERT INTO `mob_skill_lists` VALUES ('duendesHoriz',5322,393);
 INSERT INTO `mob_skill_lists` VALUES ('duendesHoriz',5322,395);
 INSERT INTO `mob_skill_lists` VALUES ('duendesHoriz',5322,1341);
 INSERT INTO `mob_skill_lists` VALUES ('Okyupete',5323,400);
+INSERT INTO `mob_skill_lists` VALUES ('Atkorkamuy',5324,463);
+INSERT INTO `mob_skill_lists` VALUES ('Qoofim',5325,450);
+INSERT INTO `mob_skill_lists` VALUES ('Qoofim',5325,451);
 
 
 
