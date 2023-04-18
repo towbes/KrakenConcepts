@@ -32,7 +32,7 @@ entity.onMobInitialize = function(mob)
 end
 
 entity.onMobSpawn = function(mob)
-    mob:setMobMod(xi.mobMod.ENCROACH_TARGET, 35)
+    mob:setMobMod(xi.mobMod.TARGET_DISTANCE_OFFSET, 50)
     mob:setMod(xi.mod.BINDRES, -75)
     mob:setMod(xi.mod.GRAVITYRES, -75)
     updateRegen(mob)

@@ -113,7 +113,7 @@ xi.race =
 xi.status =
 {
     NORMAL          =  0,
-    MOB             =  1,
+    UPDATE          =  1,
     DISAPPEAR       =  2,
     INVISIBLE       =  3,
     STATUS_4        =  4,
@@ -2681,6 +2681,8 @@ xi.mobMod =
     NO_REST             = 70, -- Mob cannot regain hp (e.g. re-burrowing antlions during ENM).
     LEADER              = 71, -- Used for mobs that follow a defined "leader", such as Ul'xzomit mobs.
     MAGIC_RANGE         = 72, -- magic aggro range
+    TARGET_DISTANCE_OFFSET = 73, -- Adjusts how close a mob will move to it's target. 12 = 1.2 yalm. Positive values to go closer, negative farther.
+
     ENCROACH_TARGET     = 200, -- How close a mob will encroach on it's target, attempting to make model to model contact. Encroach distance * 10
     PIXIE               = 201,  -- Pixie (heals players)
 

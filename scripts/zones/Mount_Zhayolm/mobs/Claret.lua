@@ -22,7 +22,7 @@ entity.onMobSpawn = function(mob)
     mob:addMod(xi.mod.REGEN, math.floor(mob:getMaxHP() * 0.004))
     mob:addMod(xi.mod.BIND_MEVA, 40)
     mob:addMod(xi.mod.MOVE, 25)
-    mob:setMobMod(xi.mobMod.ENCROACH_TARGET, 35)
+    mob:setMobMod(xi.mobMod.TARGET_DISTANCE_OFFSET, 50)
     mob:addMod(xi.mod.REGAIN, 100) -- can be seen TPing with little to no interaction from players
     mob:setAutoAttackEnabled(false)
     mob:setMod(xi.mod.UDMGMAGIC, 50)
