@@ -53,25 +53,14 @@ end
 zoneObject.onTriggerAreaEnter = function(player, triggerArea)
 end
 
-zoneObject.onZoneWeatherChange = function(weather)
-    local toxicTamlyn = GetMobByID(ID.mob.TOXIC_TAMLYN)
-    local currentTime = os.time()
-
-    if toxicTamlyn:isSpawned() then
-        if
-            weather ~= xi.weather.RAIN and
-            weather ~= xi.weather.SQUALL
-        then
-            DespawnMob(ID.mob.TOXIC_TAMLYN)
-            toxicTamlyn:setLocalVar("spawnTime", currentTime + 3600) -- 1 hour
-        end
-    else
-        if
-            (weather == xi.weather.RAIN or weather == xi.weather.SQUALL) and
-            toxicTamlyn:getLocalVar("spawnTime") < currentTime
-        then
+zone_object.onZoneWeatherChange = function(weather)
+    if weather == xi.weather.RAIN or weather == xi.weather.SQUALL then
+        DisallowRespawn(ID.mob.TOXIC_TAMLYN, false)
+        if os.time() > GetServerVariable("TamlynRespawn") then
             SpawnMob(ID.mob.TOXIC_TAMLYN)
         end
+    elseif weather ~= xi.weather.RAIN or weather ~= xi.weather.SQUALL then
+        DisallowRespawn(ID.mob.TOXIC_TAMLYN, true)
     end
 end
 

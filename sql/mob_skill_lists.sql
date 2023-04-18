@@ -3952,6 +3952,9 @@ INSERT INTO `mob_skill_lists` VALUES ('Picolaton',5327,403); -- Stormwind
 INSERT INTO `mob_skill_lists` VALUES ('Barbaric_Weapon',5328,514);
 INSERT INTO `mob_skill_lists` VALUES ('Marquis_Sabnock',5329,1149);
 INSERT INTO `mob_skill_lists` VALUES ('Geush_Attack',5330,1460);
+INSERT INTO `mob_skill_lists` VALUES ('Blighting_Brand',5331,398);
+INSERT INTO `mob_skill_lists` VALUES ('EldritchEdge',5332,397);
+INSERT INTO `mob_skill_lists` VALUES ('DynastBeetle',5333,341);
 
 
 

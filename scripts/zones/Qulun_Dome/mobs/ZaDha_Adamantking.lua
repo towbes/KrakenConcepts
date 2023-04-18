@@ -11,6 +11,7 @@ require("scripts/globals/mobs")
 local entity = {}
 
 entity.onMobInitialize = function(mob)
+    mob:setMobMod(xi.mobMod.SOUND_RANGE, 40)
     mob:setMobMod(xi.mobMod.ADD_EFFECT, 1)
 end
 

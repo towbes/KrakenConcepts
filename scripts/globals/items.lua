@@ -583,6 +583,7 @@ xi.items =
     SUPERNAL_FRAGMENT               = 1822,
     SHRIMP_LANTERN                  = 1823,
     HAUNTED_MULETA                  = 1824,
+    ANTLION_TRAP                    = 1825,
     SPOOL_OF_OPAL_SILK              = 1826,
     PREMIUM_BAG                     = 1827,
     SPOOL_OF_RED_GRASS_THREAD       = 1828,

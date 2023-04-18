@@ -5290,6 +5290,39 @@ INSERT INTO `mob_spell_lists` VALUES ('Zoredonite',734,3,1,255);   -- cure_iii (
 INSERT INTO `mob_spell_lists` VALUES ('Zoredonite',734,30,1,255);  -- banish_iii (1~255)
 INSERT INTO `mob_spell_lists` VALUES ('Zoredonite',734,112,1,255); -- flash (1~255)
 
+-- Hazmat (512)
+INSERT INTO `mob_spell_lists` VALUES ('Hazmat',735,204,1,255); -- flare (1~255)
+
+-- Lii Jixa the Somnolist (513)
+INSERT INTO `mob_spell_lists` VALUES ('Lii_Jixa_the_Somnolist',736,3,1,255);  -- cure_iii (1~255)
+INSERT INTO `mob_spell_lists` VALUES ('Lii_Jixa_the_Somnolist',736,29,1,255); -- banish_ii (1~255)
+INSERT INTO `mob_spell_lists` VALUES ('Lii_Jixa_the_Somnolist',736,98,1,255); -- repose (1~255)
+
+-- Slendlix Spindlethumb (514)
+INSERT INTO `mob_spell_lists` VALUES ('Slendlix_Spindlethumb',737,3,1,255);  -- cure_iii (1~255)
+INSERT INTO `mob_spell_lists` VALUES ('Slendlix_Spindlethumb',737,23,1,255); -- dia (1~255)
+INSERT INTO `mob_spell_lists` VALUES ('Slendlix_Spindlethumb',737,33,1,255); -- diaga (1~255)
+
+-- Hamadryad (515)
+INSERT INTO `mob_spell_lists` VALUES('Hamadryad',738,145,1,255); -- fire_ii (1~255)
+
+-- Xolotl (516)
+INSERT INTO `mob_spell_lists` VALUES ('Xolotl',739,147,1,255); -- fire_iv (1~255)
+INSERT INTO `mob_spell_lists` VALUES ('Xolotl',739,152,1,255); -- blizzard_iv (1~255)
+INSERT INTO `mob_spell_lists` VALUES ('Xolotl',739,167,1,255); -- thunder_iv (1~255)
+INSERT INTO `mob_spell_lists` VALUES ('Xolotl',739,162,1,255); -- stone_iv (1~255)
+INSERT INTO `mob_spell_lists` VALUES ('Xolotl',739,172,1,255); -- water_iv (1~255)
+INSERT INTO `mob_spell_lists` VALUES ('Xolotl',739,157,1,255); -- aero_iv (1~255)
+INSERT INTO `mob_spell_lists` VALUES ('Xolotl',739,181,1,255); -- blizzaga_iii (1~255)
+INSERT INTO `mob_spell_lists` VALUES ('Xolotl',739,186,1,255); -- aeroga_iii (1~255)
+INSERT INTO `mob_spell_lists` VALUES ('Xolotl',739,196,1,255); -- thundaga_iii (1~255)
+INSERT INTO `mob_spell_lists` VALUES ('Xolotl',739,191,1,255); -- stonega_iii (1~255)
+INSERT INTO `mob_spell_lists` VALUES ('Xolotl',739,201,1,255); -- waterga_iii (1~255)
+INSERT INTO `mob_spell_lists` VALUES ('Xolotl',739,176,1,255); -- firaga_iii (1~255)
+
+-- Toxic Tamlyn (497)
+INSERT INTO `mob_spell_lists` VALUES ('Toxic_Tamlyn',740,231,1,255); -- Bio_ii
+
 /*!40000 ALTER TABLE `mob_spell_lists` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
