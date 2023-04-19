@@ -1104,6 +1104,11 @@ function getHitRate(attacker, target, capHitRate, bonus)
 end
 
 function fTP(tp, ftp1, ftp2, ftp3)
+    -- Set TP to 1000 by default for abilities that utilize an fTP modifier (See Eagle Eye Shot)
+    if (tp < 1000) then
+        tp = 1000
+    end
+
     if tp >= 1000 and tp < 2000 then
         return ftp1 + (((ftp2 - ftp1) / 1000) * (tp - 1000))
     elseif tp >= 2000 and tp <= 3000 then
