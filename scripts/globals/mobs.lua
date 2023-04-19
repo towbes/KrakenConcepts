@@ -39,6 +39,22 @@ end
 
 -- potential lottery placeholder was killed
 xi.mob.phOnDespawn = function(ph, phList, chance, cooldown, immediate)
+    if ph:getZone():getLocalVar("[BEASTMEN]GroupIndex") ~= 0 then -- ASB Beastman Group Spawn Fix 
+        for _, group in pairs(xi.beastmengroups.zones) do
+            if ph:getZoneID() == group[1] then
+                for it, idtable in pairs(group[3]) do
+                    if idtable[1] == ph:getID() then
+                        DisallowRespawn(ph:getID(), false)
+                        table.remove(group[3], it)
+
+                        break
+                    end
+                end
+
+                break
+            end
+        end
+    end
     if type(immediate) ~= "boolean" then
         immediate = false
     end
