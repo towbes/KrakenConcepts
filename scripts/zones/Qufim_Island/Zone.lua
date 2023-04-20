@@ -1,8 +1,12 @@
 -----------------------------------
 -- Zone: Qufim_Island (126)
 -----------------------------------
-require('scripts/globals/conquest')
-require('scripts/globals/zone')
+local ID = require("scripts/zones/Qufim_Island/IDs")
+require("scripts/globals/conquest")
+require("scripts/globals/npc_util")
+require("scripts/globals/quests")
+require("scripts/globals/titles")
+require("scripts/globals/zone")
 -----------------------------------
 local zoneObject = {}
 
@@ -37,7 +41,7 @@ end
 zoneObject.onEventFinish = function(player, csid, option)
 end
 
-zone_object.onZoneWeatherChange = function(weather)
+zoneObject.onZoneWeatherChange = function(weather)
     local dosetsu = GetMobByID(ID.mob.DOSETSU_TREE)
     if
         not dosetsu:isSpawned() and os.time() > dosetsu:getLocalVar("respawn")

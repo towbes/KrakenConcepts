@@ -11,7 +11,7 @@ local entity = {}
 
 entity.onMobInitialize = function(mob)
     mob:setMobMod(xi.mobMod.MAGIC_COOL, 6)
-    mob:SetAutoAttackEnabled(false) -- Only casts and uses TP moves, no auto attacks
+    mob:setAutoAttackEnabled(false) -- Only casts and uses TP moves, no auto attacks
     mob:addListener("ITEM_DROPS", "ITEM_DROPS_CULBERRY", function(mobArg, loot)
         loot:addItemFixed(xi.items.UGGALEPIH_PENDANT, mob:getLocalVar("DropRate"))
     end)

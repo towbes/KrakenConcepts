@@ -71,7 +71,7 @@ end
 zoneObject.onEventFinish = function(player, csid, option, npc)
 end
 
-zone_object.onZoneWeatherChange = function(weather)
+zoneObject.onZoneWeatherChange = function(weather)
     local bayawak = GetMobByID(ID.mob.BAYAWAK)
     if
         not bayawak:isSpawned() and os.time() > bayawak:getLocalVar("cooldown")

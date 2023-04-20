@@ -66,7 +66,7 @@ end
 zoneObject.onEventFinish = function(player, csid, option)
 end
 
-zone_object.onZoneWeatherChange = function(weather)
+zoneObject.onZoneWeatherChange = function(weather)
     local elel = GetMobByID(ID.mob.ELEL)
     if
         not elel:isSpawned() and os.time() > elel:getLocalVar("cooldown") and

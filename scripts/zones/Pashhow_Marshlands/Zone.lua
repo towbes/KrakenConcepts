@@ -53,7 +53,7 @@ end
 zoneObject.onTriggerAreaEnter = function(player, triggerArea)
 end
 
-zone_object.onZoneWeatherChange = function(weather)
+zoneObject.onZoneWeatherChange = function(weather)
     if weather == xi.weather.RAIN or weather == xi.weather.SQUALL then
         DisallowRespawn(ID.mob.TOXIC_TAMLYN, false)
         if os.time() > GetServerVariable("TamlynRespawn") then

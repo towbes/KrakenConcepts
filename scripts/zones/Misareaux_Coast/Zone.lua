@@ -50,7 +50,7 @@ end
 zoneObject.onEventFinish = function(player, csid, option)
 end
 
-zone_object.onZoneWeatherChange = function(weather)
+zoneObject.onZoneWeatherChange = function(weather)
     if os.time() > GetMobByID(ID.mob.ODQAN):getLocalVar("odqanRespawn") and weather == xi.weather.FOG then
         local chooseOdqan = GetMobByID(ID.mob.ODQAN):getLocalVar("chooseOdqan")
         local count = 1

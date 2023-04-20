@@ -46,5 +46,6 @@ zones[xi.zone.RIVERNE_SITE_A01] =
     {
         DISPLACEMENT_OFFSET = 16900334,
     },
+}
 
 return zones[xi.zone.RIVERNE_SITE_A01]

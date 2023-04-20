@@ -70,7 +70,7 @@ zoneObject.onEventFinish = function(player, csid, option)
     end
 end
 
-zone_object.onGameHour = function(zone)
+zoneObject.onGameHour = function(zone)
     local cooldown = GetMobByID(ID.mob.SENGANN):getLocalVar("cooldown")
     -- Don't allow Sengann to spawn outside of night
     if VanadielHour() >= 4 and VanadielHour() < 20 then
@@ -80,7 +80,7 @@ zone_object.onGameHour = function(zone)
     end
 end
 
-zone_object.onZoneWeatherChange = function(weather)
+zoneObject.onZoneWeatherChange = function(weather)
     if os.time() > GetMobByID(ID.mob.YALUN_EKE):getLocalVar("yalunRespawn") and weather == xi.weather.FOG then
         local chooseYalun = GetMobByID(ID.mob.YALUN_EKE):getLocalVar("chooseYalun")
         local count = 1
