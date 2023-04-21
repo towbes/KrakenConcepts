@@ -10,7 +10,6 @@ require("scripts/globals/titles")
 local entity = {}
 
 entity.onMobSpawn = function(mob)
-    mob:setMobMod(xi.mobMod.DRAW_IN, 1)
     mob:setLocalVar("[rage]timer", 1800) -- 30 minutes
 
     -- Despawn the ???

@@ -7,7 +7,6 @@ mixins = { require("scripts/mixins/job_special") }
 local entity = {}
 
 entity.onMobInitialize = function(mob)
-    mob:setMobMod(xi.mobMod.DRAW_IN, 1)
     mob:setMod(xi.mod.CRITHITRATE, 25)
 end
 

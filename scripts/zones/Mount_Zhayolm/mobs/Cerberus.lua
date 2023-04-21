@@ -22,8 +22,8 @@ local drawInPos =
 }
 
 entity.onMobSpawn = function(mob)
-    mob:setMobMod(xi.mobMod.DRAW_IN, 1)
-    mob:setMobMod(xi.mobMod.DRAW_IN_CUSTOM_RANGE, 15)
+    --mob:setMobMod(xi.mobMod.DRAW_IN, 1)
+    --mob:setMobMod(xi.mobMod.DRAW_IN_CUSTOM_RANGE, 15)
     mob:setMod(xi.mod.STUNRES, -100) -- Need to adjust stunres so it's stunnable
     mob:setMod(xi.mod.MEVA, 350)
     mob:setMod(xi.mod.ICE_SDT, 200)

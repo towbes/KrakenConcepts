@@ -37,22 +37,6 @@ entity.onSpellPrecast = function(mob, spell)
     end
 end
 
-entity.onMobFight = function(mob, target)
-    local drawInWait = mob:getLocalVar("DrawInWait")
-
-    if (target:getXPos() > -180 and target:getZPos() > 53) and os.time() > drawInWait then -- North Tunnel Draw In
-        local rot = target:getRotPos()
-        target:setPos(-182.19,-19.83,58.34,rot)
-        mob:messageBasic(232, 0, 0, target)
-        mob:setLocalVar("DrawInWait", os.time() + 2)
-    elseif (target:getXPos() > -230 and target:getZPos() < 5) and os.time() > drawInWait then  -- South Tunnel Draw In
-        local rot = target:getRotPos()
-        target:setPos(-235.35,-20.01,-4.47,rot)
-        mob:messageBasic(232, 0, 0, target)
-        mob:setLocalVar("DrawInWait", os.time() + 2)
-    end
-end
-
 entity.onMobDeath = function(mob, player, optParams)
     player:addTitle(xi.title.BEHEMOTH_DETHRONER)
 end
