@@ -70,7 +70,7 @@ for _, zoneID in pairs(xi.beastmengroups.zones) do
             zone:setLocalVar("[BEASTMEN]GroupIndex", 1)
             local spawnedMobs = zone:getMobs()
             for _, mob in pairs(spawnedMobs) do
-                if not mob:isMobType(xi.mobskills.mobType.NOTORIOUS) and mob:getSystem() == xi.ecosystem.BEASTMEN then
+                if not mob:isMobType(xi.mobskills.mobType.NOTORIOUS) and mob:getEcosystem() == xi.ecosystem.BEASTMEN then
                     local mobID = mob:getID()
                     local prevSpawn = 0
                     local originalSpawn = mob:getSpawnPos()
@@ -107,7 +107,7 @@ for _, zoneID in pairs(xi.beastmengroups.zones) do
         end
         local mobs = zone:getMobs()
         for _, mobEntity in pairs(mobs) do
-            if not mobEntity:isMobType(xi.mobskills.mobType.NOTORIOUS) and mobEntity:getSystem() == xi.ecosystem.BEASTMEN then
+            if not mobEntity:isMobType(xi.mobskills.mobType.NOTORIOUS) and mobEntity:getEcosystem() == xi.ecosystem.BEASTMEN then
                 mobEntity:addListener("DEATH", "DEATH_BEASTMEN_MOB", function(mob)
                     local mobID = mob:getID()
                     local index = 0

@@ -464,7 +464,7 @@ xi.additionalEffect.attack = function(attacker, defender, baseAttackDamage, item
         --   Ex: Plantoid, Beast, Aquatic
         --------------------------------------
     elseif addType == procType.VS_ECOSYSTEM then
-        if defender:getSystem() == option then
+        if defender:getEcosystem() == option then
             -- If Drain effect:
             if subEffect == xi.subEffect.HP_DRAIN then
                 damage = xi.additionalEffect.calcDamage(attacker, element, defender, damage)
