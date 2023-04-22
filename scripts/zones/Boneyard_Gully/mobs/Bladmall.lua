@@ -4,6 +4,7 @@
 --  ENM: Shell We Dance?
 -----------------------------------
 local ID = require("scripts/zones/Boneyard_Gully/IDs")
+mixins = {require("scripts/mixins/families/uragnite")}
 require("scripts/globals/titles")
 require("scripts/globals/status")
 -----------------------------------
