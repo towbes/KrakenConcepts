@@ -5323,6 +5323,10 @@ INSERT INTO `mob_spell_lists` VALUES ('Xolotl',739,176,1,255); -- firaga_iii (1~
 -- Toxic Tamlyn (497)
 INSERT INTO `mob_spell_lists` VALUES ('Toxic_Tamlyn',740,231,1,255); -- Bio_ii
 
+-- Aries (5023)
+INSERT INTO `mob_spell_lists` VALUES('Aries', 741, 54, 1, 255);  -- stoneskin (1~255)
+INSERT INTO `mob_spell_lists` VALUES('Aries', 741, 356, 1, 255); -- paralyga (1~255)
+
 /*!40000 ALTER TABLE `mob_spell_lists` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
