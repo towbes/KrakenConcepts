@@ -28,7 +28,6 @@ end
 entity.onMobInitialize = function(mob)
     mob:setMobMod(xi.mobMod.ADD_EFFECT, 1)
     mob:addMod(xi.mod.REGAIN, 50)
-
 end
 
 entity.onAdditionalEffect = function(mob, target, damage)
@@ -88,22 +87,12 @@ entity.onMobFight = function(mob, target)
     utils.arenaDrawIn(mob, target, drawInTableSouth)
 end
 
-entity.onMobFight = function(mob, target)
-    entity.mobRegen(mob)
+entity.onMobRoam = function(mob)
+    updateRegen(mob)
 
-    local drawInWait = mob:getLocalVar("DrawInWait")
-
-    if target:getZPos() > -540 and os.time() > drawInWait then -- Northern Draw In
-        local rot = target:getRotPos()
-        target:setPos(target:getXPos(),target:getYPos(),-542,rot)
-        mob:messageBasic(232, 0, 0, target)
-        mob:setLocalVar("DrawInWait", os.time() + 2)
-    elseif target:getXPos() < -350 and os.time() > drawInWait then  -- Southern Draw In
-        local rot = target:getRotPos()
-        target:setPos(-348,target:getYPos(),target:getZPos(),rot)
-        mob:messageBasic(232, 0, 0, target)
-        mob:setLocalVar("DrawInWait", os.time() + 2)
-    end
+    if not (mob:getWeather() == xi.weather.DUST_STORM or mob:getWeather() == xi.weather.SAND_STORM) then
+        DespawnMob(mob:getID())
+     end
 end
 
 return entity

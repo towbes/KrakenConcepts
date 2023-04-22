@@ -12,6 +12,8 @@ local entity = {}
 entity.onMobSpawn = function(mob)
     mob:setLocalVar("[rage]timer", 1800) -- 30 minutes
 
+    mob:setMobMod(xi.mobMod.DRAW_IN, 1)
+
     -- Despawn the ???
     GetNPCByID(ID.npc.ADAMANTOISE_QM):setStatus(xi.status.DISAPPEAR)
 end

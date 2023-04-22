@@ -8,6 +8,7 @@ local entity = {}
 
 entity.onMobInitialize = function(mob)
     mob:setMod(xi.mod.CRITHITRATE, 25)
+    mob:setMobMod(xi.mobMod.DRAW_IN, 1)
 end
 
 entity.onMobSpawn = function(mob)
@@ -17,7 +18,6 @@ entity.onMobSpawn = function(mob)
             { id = xi.jsa.HUNDRED_FISTS, cooldown = 60, hpp = math.random(85, 95) },
         },
     })
-    mob:setMobMod(xi.mobMod.DRAW_IN, 1)
 end
 
 entity.onMobDeath = function(mob, player, optParams)

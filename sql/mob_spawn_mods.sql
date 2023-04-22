@@ -63,7 +63,7 @@ INSERT INTO `mob_spawn_mods` VALUES (16793860,55,180,1); -- IDLE_DESPAWN: 180
 INSERT INTO `mob_spawn_mods` VALUES (16793861,55,180,1); -- IDLE_DESPAWN: 180
 
 -- Jormungand
-INSERT INTO `mob_spawn_mods` VALUES (16797969,12,15,1); -- DRAW_IN: 15
+-- INSERT INTO `mob_spawn_mods` VALUES (16797969,12,15,1); -- DRAW_IN: 15
 
 -- Geush Urvan
 INSERT INTO `mob_spawn_mods` VALUES (16798078,1,20000,1);
@@ -86,7 +86,7 @@ INSERT INTO `mob_spawn_mods` VALUES (16806216,26,32,1); -- SUPERLINK: 32
 INSERT INTO `mob_spawn_mods` VALUES (16806217,26,32,1); -- SUPERLINK: 32
 
 -- Tiamat
-INSERT INTO `mob_spawn_mods` VALUES (16806227,12,8,1); -- DRAW_IN: 8
+-- INSERT INTO `mob_spawn_mods` VALUES (16806227,12,8,1); -- DRAW_IN: 8
 
 -- Feeler Antlion
 INSERT INTO `mob_spawn_mods` VALUES (16806242,55,120,1); -- IDLE_DESPAWN: 120
@@ -218,7 +218,7 @@ INSERT INTO `mob_spawn_mods` VALUES (16879897,55,180,1); -- IDLE_DESPAWN: 180
 INSERT INTO `mob_spawn_mods` VALUES (16879899,55,900,1); -- IDLE_DESPAWN: 900
 
 -- Minotaur
-INSERT INTO `mob_spawn_mods` VALUES (16887889,12,15,1); -- DRAW_IN: 15
+-- INSERT INTO `mob_spawn_mods` VALUES (16887889,12,15,1); -- DRAW_IN: 15
 
 -- Old Professor Mariselle
 INSERT INTO `mob_spawn_mods` VALUES (16891970,55,300,1); -- IDLE_DESPAWN: 300
@@ -239,10 +239,10 @@ INSERT INTO `mob_spawn_mods` VALUES (16892073,55,180,1); -- IDLE_DESPAWN: 180
 INSERT INTO `mob_spawn_mods` VALUES (16892074,55,180,1); -- IDLE_DESPAWN: 180
 
 -- Vrtra
-INSERT INTO `mob_spawn_mods` VALUES (16896161,12,15,1); -- DRAW_IN: 15
+-- INSERT INTO `mob_spawn_mods` VALUES (16896161,12,15,1); -- DRAW_IN: 15
 
 -- Ouryu
-INSERT INTO `mob_spawn_mods` VALUES (16900314,12,15,1); -- DRAW_IN: 15
+-- INSERT INTO `mob_spawn_mods` VALUES (16900314,12,15,1); -- DRAW_IN: 15
 
 -- Ul'Xzomit
 INSERT INTO `mob_spawn_mods` VALUES (16912394,71,2,1);  -- LEADER: 2
@@ -606,17 +606,17 @@ INSERT INTO `mob_spawn_mods` VALUES (17235987,2,2765,1); -- GIL_MAX: 2765
 INSERT INTO `mob_spawn_mods` VALUES (17236201,55,180,1); -- IDLE_DESPAWN: 180
 
 -- Boreal Hound
-INSERT INTO `mob_spawn_mods` VALUES (17236202,12,15,1);  -- DRAW_IN: 15
+-- INSERT INTO `mob_spawn_mods` VALUES (17236202,12,15,1);  -- DRAW_IN: 15
 INSERT INTO `mob_spawn_mods` VALUES (17236202,160,50,0); -- DMG: 50
 INSERT INTO `mob_spawn_mods` VALUES (17236202,169,10,0); -- MOVE: 10
 
 -- Boreal Coeurl
-INSERT INTO `mob_spawn_mods` VALUES (17236203,12,15,1);  -- DRAW_IN: 15
+-- INSERT INTO `mob_spawn_mods` VALUES (17236203,12,15,1);  -- DRAW_IN: 15
 INSERT INTO `mob_spawn_mods` VALUES (17236203,23,8,1);   -- IMMUNITY: 8
 INSERT INTO `mob_spawn_mods` VALUES (17236203,169,10,0); -- MOVE: 10
 
 -- Boreal Tiger
-INSERT INTO `mob_spawn_mods` VALUES (17236204,12,15,1);  -- DRAW_IN: 15
+-- INSERT INTO `mob_spawn_mods` VALUES (17236204,12,15,1);  -- DRAW_IN: 15
 INSERT INTO `mob_spawn_mods` VALUES (17236204,169,10,0); -- MOVE: 10
 
 -- Koenigstiger
@@ -677,7 +677,7 @@ INSERT INTO `mob_spawn_mods` VALUES (17285545,55,300,1); -- IDLE_DESPAWN: 300
 INSERT INTO `mob_spawn_mods` VALUES (17285546,55,150,1); -- IDLE_DESPAWN: 150
 
 -- King Vinegarroon
-INSERT INTO `mob_spawn_mods` VALUES (17289575,12,15,1); -- DRAW_IN: 15
+-- INSERT INTO `mob_spawn_mods` VALUES (17289575,12,15,1); -- DRAW_IN: 15
 
 -- Eastern Sphinx
 INSERT INTO `mob_spawn_mods` VALUES (17289654,55,168,1); -- IDLE_DESPAWN: 168
@@ -690,7 +690,7 @@ INSERT INTO `mob_spawn_mods` VALUES (17293486,31,5,1); -- ROAM_DISTANCE: 5
 INSERT INTO `mob_spawn_mods` VALUES (17293486,51,1,1); -- ROAM_TURNS: 1
 
 -- King Behemoth
-INSERT INTO `mob_spawn_mods` VALUES (17297441,12,25,1); -- DRAW_IN: 25
+-- INSERT INTO `mob_spawn_mods` VALUES (17297441,12,25,1); -- DRAW_IN: 25
 
 -- Picklix Longindex
 INSERT INTO `mob_spawn_mods` VALUES (17297446,55,180,1); -- IDLE_DESPAWN: 180
@@ -1106,7 +1106,7 @@ INSERT INTO `mob_spawn_mods` VALUES (17404337,55,288,1); -- IDLE_DESPAWN: 288
 INSERT INTO `mob_spawn_mods` VALUES (17404338,55,120,1); -- IDLE_DESPAWN: 120
 
 -- Fafnir
-INSERT INTO `mob_spawn_mods` VALUES (17408018,12,20,1); -- DRAW_IN: 20
+-- INSERT INTO `mob_spawn_mods` VALUES (17408018,12,20,1); -- DRAW_IN: 20
 
 -- Gerwitz'S Scythe
 INSERT INTO `mob_spawn_mods` VALUES (17420629,55,300,1); -- IDLE_DESPAWN: 300
