@@ -10,6 +10,8 @@ local entity = {}
 
 entity.onMobSpawn = function(mob)
     GetMobByID(ID.mob.CHANDELIER):setRespawnTime(0)
+    mob:setMod(xi.mod.DOUBLE_ATTACK, 10)
+    mob:addMod(xi.mod.ATT, 175)
 end
 
 entity.onMobEngaged = function(mob, target)

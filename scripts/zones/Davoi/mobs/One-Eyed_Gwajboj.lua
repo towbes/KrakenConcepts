@@ -1,13 +1,15 @@
 -----------------------------------
--- Area: Waughroon Shrine
---   NM: Rasetsu
--- Involved in Quest: A Thief in Norg
+-- Area: Davoi
+--   NM: One-Eyed Gwajboj
+-- Involved in Quest: Under Oath
 -----------------------------------
 mixins = {require("scripts/mixins/job_special")}
+require("scripts/globals/quests")
 -----------------------------------
 local entity = {}
 
-entity.onMobDeath = function(mob, player, optParams)
+entity.onMobInitialize = function(mob)
+    mob:setMobMod(xi.mobMod.IDLE_DESPAWN, 300)
 end
 
 return entity

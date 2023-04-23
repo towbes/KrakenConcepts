@@ -1,17 +1,15 @@
 -----------------------------------
--- Area: Waughroon Shrine
---   NM: Gaki
--- Involved in Quest: A Thief in Norg
+-- Area: Davoi
+--   NM: Three-Eyed Prozpuz
+-- Involved in Quest: Under Oath
 -----------------------------------
 mixins = {require("scripts/mixins/job_special")}
+require("scripts/globals/quests")
 -----------------------------------
 local entity = {}
 
 entity.onMobInitialize = function(mob)
-    mob:setMobMod(xi.mobMod.NO_STANDBACK, 1)
-end
-
-entity.onMobDeath = function(mob, player, optParams)
+    mob:setMobMod(xi.mobMod.IDLE_DESPAWN, 300)
 end
 
 return entity

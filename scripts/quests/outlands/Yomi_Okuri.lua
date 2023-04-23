@@ -238,7 +238,10 @@ quest.sections =
             onEventFinish =
             {
                 [10] = function(player, csid, option, npc)
-                    if option == 1 then
+                    if (option == 1 and player:hasStatusEffect(xi.effect.SNEAK) == true) then
+                        SpawnMob(valkurmID.mob.DOMAN)
+                        SpawnMob(valkurmID.mob.ONRYO)
+                    elseif option == 1 then
                         SpawnMob(valkurmID.mob.DOMAN):updateClaim(player)
                         SpawnMob(valkurmID.mob.ONRYO):updateClaim(player)
                     end

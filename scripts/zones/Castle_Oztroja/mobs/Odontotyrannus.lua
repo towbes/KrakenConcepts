@@ -1,17 +1,16 @@
 -----------------------------------
--- Area: Waughroon Shrine
---   NM: Gaki
--- Involved in Quest: A Thief in Norg
+-- Area: Castle Oztroja
+--   NM: Odontotyrannus
+-- Involved in Quest: A Boy's Dream
 -----------------------------------
 mixins = {require("scripts/mixins/job_special")}
+require("scripts/globals/quests")
+require("scripts/globals/status")
 -----------------------------------
 local entity = {}
 
 entity.onMobInitialize = function(mob)
-    mob:setMobMod(xi.mobMod.NO_STANDBACK, 1)
-end
-
-entity.onMobDeath = function(mob, player, optParams)
+    mob:setMobMod(xi.mobMod.IDLE_DESPAWN, 300)
 end
 
 return entity
