@@ -30,7 +30,7 @@ CREATE TABLE `mob_resistances` (
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 INSERT INTO `mob_resistances` VALUES (1,'Acrolith',1,1,1,1,0,0,0,0,0,0,0,0,0,3,3,3,2,0,6,11);
-INSERT INTO `mob_resistances` VALUES (2,'Adamantoise',1,1,1,1,0,0,0,0,0,0,0,0,4,-2,4,11,11,11,4,4);
+INSERT INTO `mob_resistances` VALUES (2,'Adamantoise',1,1,1,1,0,-2000,0,7500,0,7500,0,0,4,-2,4,11,11,11,4,4);
 INSERT INTO `mob_resistances` VALUES (3,'Aern',1,1,1,1,0,0,0,0,0,0,5000,0,0,0,0,0,0,0,0,0);
 INSERT INTO `mob_resistances` VALUES (4,'Ahriman',1,1,1,1,2500,2500,2500,2500,2500,2500,2500,2500,0,0,0,0,0,0,0,0);
 INSERT INTO `mob_resistances` VALUES (5,'Amoeban',1,1,1,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0);
