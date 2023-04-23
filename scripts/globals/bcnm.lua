@@ -110,7 +110,7 @@ local battlefields =
     --  { 3,  963,    0 },   -- Bad Seed (ENM)
     --  { 4,  964,    0 },   -- Bugard in the Clouds (ENM)
     --  { 5,  965,    0 },   -- Beloved of the Atlantes (ENM)
-    --  { 6,  966,    0 },   -- Uninvited Guests (Quest)
+        { 6,  966,    0 },   -- Uninvited Guests (Quest)
     --  { 7,  967, 3455 },   -- Nest of Nightmares (HKC50)
     --  { 8,    ?,    0 },   -- *The Savage (HTMBF)
     },
@@ -1006,6 +1006,10 @@ local function checkReqs(player, npc, bfid, registrant)
             return player:hasKeyItem(xi.ki.MONARCH_BEARD)
         end,
 
+        [966] = function() -- ENM: Uninvited Guest
+            return player:hasKeyItem(xi.ki.MONARCH_LINN_PATROL_PERMIT)
+        end,
+
         [992] = function() -- PM6-4: One to be Feared
             return promathiaMission == xi.mission.id.cop.ONE_TO_BE_FEARED and
                 player:getCharVar('Mission[6][638]Status') == 3
@@ -1151,6 +1155,10 @@ local function checkReqs(player, npc, bfid, registrant)
 
         [965] = function() -- ENM: Beloved of Atlantes
             return player:hasKeyItem(xi.ki.MONARCH_BEARD)
+        end,
+
+        [966] = function() -- Quest: Uninvited Guests
+            return player:hasKeyItem(xi.ki.MONARCH_LINN_PATROL_PERMIT)
         end,
 
         [928] = function() -- Quest: Ouryu Cometh
