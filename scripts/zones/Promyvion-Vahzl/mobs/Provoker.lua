@@ -4,6 +4,7 @@
 -----------------------------------
 require("scripts/globals/status")
 require("scripts/globals/magic")
+mixins = {require("scripts/mixins/families/empty_terroanima")}
 -----------------------------------
 local entity = {}
 
