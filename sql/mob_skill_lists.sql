@@ -3958,16 +3958,18 @@ INSERT INTO `mob_skill_lists` VALUES ('Blighting_Brand',5331,398);
 INSERT INTO `mob_skill_lists` VALUES ('EldritchEdge',5332,397);
 INSERT INTO `mob_skill_lists` VALUES ('DynastBeetle',5333,341);
 
-INSERT INTO mob_skill_lists VALUES ('Cyranuce_M_Cutauleon',5334,813); -- Dispelling_wind
-INSERT INTO mob_skill_lists VALUES ('Cyranuce_M_Cutauleon',5334,814); -- Deadly Drive
-INSERT INTO mob_skill_lists VALUES ('Cyranuce_M_Cutauleon',5334,815); -- Wind Wall
-INSERT INTO mob_skill_lists VALUES ('Cyranuce_M_Cutauleon',5334,816); -- Fang Rush
-INSERT INTO mob_skill_lists VALUES ('Cyranuce_M_Cutauleon',5334,817); -- Dread Shriek
-INSERT INTO mob_skill_lists VALUES ('Cyranuce_M_Cutauleon',5334,818); -- Tail Crush
-INSERT INTO mob_skill_lists VALUES ('Cyranuce_M_Cutauleon',5334,822); -- Chaos Breath
+INSERT INTO `mob_skill_lists` VALUES ('Cyranuce_M_Cutauleon',5334,813); -- Dispelling_wind
+INSERT INTO `mob_skill_lists` VALUES ('Cyranuce_M_Cutauleon',5334,814); -- Deadly Drive
+INSERT INTO `mob_skill_lists` VALUES ('Cyranuce_M_Cutauleon',5334,815); -- Wind Wall
+INSERT INTO `mob_skill_lists` VALUES ('Cyranuce_M_Cutauleon',5334,816); -- Fang Rush
+INSERT INTO `mob_skill_lists` VALUES ('Cyranuce_M_Cutauleon',5334,817); -- Dread Shriek
+INSERT INTO `mob_skill_lists` VALUES ('Cyranuce_M_Cutauleon',5334,818); -- Tail Crush
+INSERT INTO `mob_skill_lists` VALUES ('Cyranuce_M_Cutauleon',5334,822); -- Chaos Breath
 
 INSERT INTO `mob_skill_lists` VALUES ('Waughroon_Kid',5335,581); -- blow
 INSERT INTO `mob_skill_lists` VALUES ('Waughroon_Kid',5335,583); -- beatdown
+
+INSERT INTO `mob_skill_lists` VALUES ('Shooting_Fish',5336,1865); -- knockback splashbreath
 
 
 
