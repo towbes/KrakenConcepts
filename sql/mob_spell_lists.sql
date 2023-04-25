@@ -5338,6 +5338,11 @@ INSERT INTO `mob_spell_lists` VALUES('Osschaart', 742, 240, 1, 255); -- drown (1
 INSERT INTO `mob_spell_lists` VALUES('Osschaart', 742, 254, 1, 255); -- blind (1~255)
 INSERT INTO `mob_spell_lists` VALUES('Osschaart', 742, 258, 1, 255); -- bind (1~255)
 
+-- Anansi
+INSERT INTO `mob_spell_lists` VALUES('Anansi',743,226,1,255); -- poisonga ii (1~255)
+INSERT INTO `mob_spell_lists` VALUES('Anansi',743,356,1,255); -- paralyga (1~255)
+INSERT INTO `mob_spell_lists` VALUES('Anansi',743,357,1,255); -- slowga (1~255)
+
 /*!40000 ALTER TABLE `mob_spell_lists` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
