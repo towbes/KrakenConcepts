@@ -3966,6 +3966,9 @@ INSERT INTO mob_skill_lists VALUES ('Cyranuce_M_Cutauleon',5334,817); -- Dread S
 INSERT INTO mob_skill_lists VALUES ('Cyranuce_M_Cutauleon',5334,818); -- Tail Crush
 INSERT INTO mob_skill_lists VALUES ('Cyranuce_M_Cutauleon',5334,822); -- Chaos Breath
 
+INSERT INTO `mob_skill_lists` VALUES ('Waughroon_Kid',5335,581); -- blow
+INSERT INTO `mob_skill_lists` VALUES ('Waughroon_Kid',5335,583); -- beatdown
+
 
 
 
