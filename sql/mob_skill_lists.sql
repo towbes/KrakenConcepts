@@ -3975,6 +3975,11 @@ INSERT INTO `mob_skill_lists` VALUES ('Osschaart',5337,549); -- eyes on me
 INSERT INTO `mob_skill_lists` VALUES ('Osschaart',5337,550); -- hypnosis
 INSERT INTO `mob_skill_lists` VALUES ('Osschaart',5337,551); -- mind break
 
+INSERT INTO `mob_skill_lists` VALUES ('Gilagoge_Tlugvi',5338,332); -- entangle
+INSERT INTO `mob_skill_lists` VALUES ('Goga_Tlugvi',5339,2162); -- leafstorm
+INSERT INTO `mob_skill_lists` VALUES ('Ulagohvsdi_Tlugvi',5340,2162); -- pinecone bomb
+INSERT INTO `mob_skill_lists` VALUES ('Gola_Tlugvi',5341,2162); -- drill branch
+
 
 
 

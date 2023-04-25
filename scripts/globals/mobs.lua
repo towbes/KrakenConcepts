@@ -173,6 +173,7 @@ xi.mob.additionalEffect =
     TERROR     = 20,
     TP_DRAIN   = 21,
     WEIGHT     = 22,
+    DISPEL     = 23,
 }
 xi.mob.ae = xi.mob.additionalEffect
 
@@ -464,6 +465,17 @@ local additionalEffects =
         duration    = 30,
         minDuration = 1,
         maxDuration = 45,
+    },
+    
+    [xi.mob.ae.DISPEL] =
+    {
+        chance = 20,
+        ele = xi.magic.ele.DARK,
+        sub = xi.subEffect.DISPEL,
+        msg = xi.msg.basic.ADD_EFFECT_DISPEL,
+        mod = xi.mod.INT,
+        bonusAbilityParams = {bonusmab = 0, includemab = false},
+        code = function(mob, target) target:dispelStatusEffect() end,
     },
 }
 
