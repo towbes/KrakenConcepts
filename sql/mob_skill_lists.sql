@@ -3971,6 +3971,10 @@ INSERT INTO `mob_skill_lists` VALUES ('Waughroon_Kid',5335,583); -- beatdown
 
 INSERT INTO `mob_skill_lists` VALUES ('Shooting_Fish',5336,1865); -- knockback splashbreath
 
+INSERT INTO `mob_skill_lists` VALUES ('Osschaart',5337,549); -- eyes on me
+INSERT INTO `mob_skill_lists` VALUES ('Osschaart',5337,550); -- hypnosis
+INSERT INTO `mob_skill_lists` VALUES ('Osschaart',5337,551); -- mind break
+
 
 
 

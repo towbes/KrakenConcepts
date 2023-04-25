@@ -5327,6 +5327,17 @@ INSERT INTO `mob_spell_lists` VALUES ('Toxic_Tamlyn',740,231,1,255); -- Bio_ii
 INSERT INTO `mob_spell_lists` VALUES('Aries', 741, 54, 1, 255);  -- stoneskin (1~255)
 INSERT INTO `mob_spell_lists` VALUES('Aries', 741, 356, 1, 255); -- paralyga (1~255)
 
+-- Osschaart (493)
+INSERT INTO `mob_spell_lists` VALUES('Osschaart', 742, 181, 1, 255); -- blizzaga iii(1~255)
+INSERT INTO `mob_spell_lists` VALUES('Osschaart', 742, 191, 1, 255); -- stonega iii(1~255)
+INSERT INTO `mob_spell_lists` VALUES('Osschaart', 742, 212, 1, 255); -- burst (1~255)
+INSERT INTO `mob_spell_lists` VALUES('Osschaart', 742, 226, 1, 255); -- poisonga ii(1~255)
+INSERT INTO `mob_spell_lists` VALUES('Osschaart', 742, 232, 1, 255); -- bio iii(1~255)
+INSERT INTO `mob_spell_lists` VALUES('Osschaart', 742, 238, 1, 255); -- rasp (1~255)
+INSERT INTO `mob_spell_lists` VALUES('Osschaart', 742, 240, 1, 255); -- drown (1~255)
+INSERT INTO `mob_spell_lists` VALUES('Osschaart', 742, 254, 1, 255); -- blind (1~255)
+INSERT INTO `mob_spell_lists` VALUES('Osschaart', 742, 258, 1, 255); -- bind (1~255)
+
 /*!40000 ALTER TABLE `mob_spell_lists` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
