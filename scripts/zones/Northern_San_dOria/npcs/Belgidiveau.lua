@@ -20,6 +20,7 @@ entity.onTrigger = function(player, npc)
     local hasNeutralizerKI = player:hasKeyItem(xi.ki.NEUTRALIZER)
 
     if
+        theRumor == QUEST_COMPLETED and 
         troubleAtTheSluice == QUEST_AVAILABLE and
         player:getFameLevel(xi.quest.fame_area.SANDORIA) >= 3
     then
