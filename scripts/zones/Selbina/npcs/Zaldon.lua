@@ -607,7 +607,10 @@ entity.onTrigger = function(player, npc)
 
     local theRealGift    = player:getQuestStatus(xi.quest.log_id.OTHER_AREAS, xi.quest.id.otherAreas.THE_REAL_GIFT)
     local insideTheBelly = player:getQuestStatus(xi.quest.log_id.OTHER_AREAS, xi.quest.id.otherAreas.INSIDE_THE_BELLY)
-    local mLvl           = player:getMainLvl()
+    -- local mLvl           = player:getMainLvl()
+    local fishingSkill = player:getSkillLevel(xi.skill.FISHING)
+    local fishingRank = player:getSkillRank(xi.skill.FISHING)
+    local realSkill = (fishingSkill - fishingRank) / 32
 
     -- UNDER THE SEA
     if player:getCharVar("underTheSeaVar") == 3 then
@@ -615,12 +618,13 @@ entity.onTrigger = function(player, npc)
 
     -- INSIDE THE BELLY
     elseif
-        mLvl >= 30 and
+        -- mLvl >= 30 and
+        realSkill >= 30 and
         theRealGift == QUEST_COMPLETED and
         insideTheBelly == QUEST_AVAILABLE
     then
         player:startEvent(161)
-    elseif
+    --[[elseif
         mLvl >= 30 and
         mLvl < 39 and
         (insideTheBelly == QUEST_ACCEPTED or insideTheBelly == QUEST_COMPLETED)
@@ -643,7 +647,30 @@ entity.onTrigger = function(player, npc)
         (insideTheBelly == QUEST_ACCEPTED or insideTheBelly == QUEST_COMPLETED)
     then
         player:startEvent(165, 4451, 4477, 5803, 4307, 4478, 5467, 4304, 4474)
-
+--]]
+    elseif
+        realSkill >= 30 and 
+        realSkill < 39 and 
+        (insideTheBelly == QUEST_ACCEPTED or insideTheBelly == QUEST_COMPLETED) 
+    then
+        player:startEvent(162, 4428, 4469, 4481, 5141)
+    elseif
+        realSkill >= 40 and 
+        realSkill < 49 and 
+        (insideTheBelly == QUEST_ACCEPTED or insideTheBelly == QUEST_COMPLETED) 
+    then
+        player:startEvent(163, 4385, 4306, 4479, 4471, 4451)
+    elseif
+        realSkill >= 50 and
+        realSkill <= 74 and
+        (insideTheBelly == QUEST_ACCEPTED or insideTheBelly == QUEST_COMPLETED)
+    then
+        player:startEvent(164, 4307, 4477, 5470, 4454, 5467, 5462)
+    elseif
+        realSkill >= 75 and
+        (insideTheBelly == QUEST_ACCEPTED or insideTheBelly == QUEST_COMPLETED)
+    then
+        player:startEvent(165, 5133, 5140, 4463, 4475, 4476, 5137, 4309, 4319)
     -- STANDARD DIALOG
     else
         player:startEvent(150)

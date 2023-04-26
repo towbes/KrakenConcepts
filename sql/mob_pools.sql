@@ -7147,6 +7147,9 @@ INSERT INTO `mob_pools` VALUES (8001,'Memory_Receptacle_red','Memory_Receptacle'
 INSERT INTO `mob_pools` VALUES (8002,'Memory_Receptacle_blue','Memory_Receptacle',507,0x00005004,1,1,7,240,100,0,0,0,0,16,0,0,6,131,0,0,0,0,0,181,181);
 INSERT INTO `mob_pools` VALUES (8003,'Memory_Receptacle_green','Memory_Receptacle',507,0x00004F04,1,1,7,240,100,0,0,0,0,16,0,0,6,131,0,0,0,0,0,181,181);
 INSERT INTO `mob_pools` VALUES (8004,'Memory_Receptacle_teal','Memory_Receptacle',507,0x00004E04,1,1,7,240,100,0,0,0,0,16,0,0,6,131,0,0,0,0,0,181,181);
+
+-- Carpenters Landing
+INSERT INTO `mob_pools` VALUES (8005,'Poison_Funguar','Poison_Funguar',116,0x0000780100000000000000000000000000000000,1,1,11,240,100,0,0,0,1,0,0,0,237,131,0,0,0,0,0,116,116);
 -- ------------------------------------------------------------
 -- Start of Ambuscade section
 -- NOTE: The mobs are changed every update in the DATs, so using out-of-date
