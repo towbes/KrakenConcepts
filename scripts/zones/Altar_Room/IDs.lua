@@ -20,6 +20,7 @@ zones[xi.zone.ALTAR_ROOM] =
         MEMBERS_LEVELS_ARE_RESTRICTED = 7023, -- Your party is unable to participate because certain members' levels are restricted.
         THE_MAGICITE_GLOWS_OMINOUSLY  = 7113, -- The magicite glows ominously.
         CONQUEST_BASE                 = 7114, -- Tallying conquest results...
+        DRAWS_NEAR                    = 7358, -- You brush away all surrounding dust and place the <keyItem> on the stone lid.
     },
     mob =
     {

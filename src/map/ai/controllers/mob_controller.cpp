@@ -24,6 +24,7 @@ along with this program.  If not, see http://www.gnu.org/licenses/
 #include "ai/ai_container.h"
 #include "ai/helpers/targetfind.h"
 #include "ai/states/ability_state.h"
+#include "../states/inactive_state.h"
 #include "ai/states/magic_state.h"
 #include "ai/states/weaponskill_state.h"
 #include "common/utils.h"
@@ -468,6 +469,7 @@ bool CMobController::TryCastSpell()
         return true;
     }
 
+    TapDeaggroTime();
     return false;
 }
 
@@ -482,6 +484,7 @@ bool CMobController::CanCastSpells()
     // check for spell blockers e.g. silence
     if (PMob->StatusEffectContainer->HasStatusEffect({ EFFECT_SILENCE, EFFECT_MUTE }))
     {
+        TapDeaggroTime();
         return false;
     }
 
@@ -602,6 +605,11 @@ void CMobController::DoCombatTick(time_point tick)
 void CMobController::FaceTarget(uint16 targid)
 {
     TracyZoneScoped;
+    if (PMob->PAI->IsCurrentState<CInactiveState>())
+    {
+        return;
+    }
+
     CBaseEntity* targ = PTarget;
     if (targid != 0 && ((targ && targid != targ->targid) || !targ))
     {

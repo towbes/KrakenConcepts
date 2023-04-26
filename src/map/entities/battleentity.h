@@ -22,6 +22,7 @@
 #ifndef _BATTLEENTITY_H
 #define _BATTLEENTITY_H
 
+#include <mutex>
 #include <set>
 #include <unordered_map>
 #include <vector>
@@ -561,6 +562,8 @@ public:
     uint16 RACC(uint8 skill, uint16 bonusSkill = 0);
 
     uint8 GetSpeed();
+
+    std::mutex scMutex;
 
     bool isDead(); // проверяем, мертва ли сущность
     bool isAlive();
