@@ -3980,6 +3980,11 @@ INSERT INTO `mob_skill_lists` VALUES ('Goga_Tlugvi',5339,2162); -- leafstorm
 INSERT INTO `mob_skill_lists` VALUES ('Ulagohvsdi_Tlugvi',5340,2162); -- pinecone bomb
 INSERT INTO `mob_skill_lists` VALUES ('Gola_Tlugvi',5341,2162); -- drill branch
 
+INSERT INTO `mob_skill_lists` VALUES ('Jailer_of_Hope', 5342, 1353);
+INSERT INTO `mob_skill_lists` VALUES ('Jailer_of_Hope', 5342, 1355);
+INSERT INTO `mob_skill_lists` VALUES ('Jailer_of_Hope', 5342, 1356);
+INSERT INTO `mob_skill_lists` VALUES ('Jailer_of_Hope', 5342, 1358);
+
 
 
 

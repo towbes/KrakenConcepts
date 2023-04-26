@@ -1305,7 +1305,7 @@ INSERT INTO `mob_skills` VALUES (1342,992,'train_fall',0,7.0,2000,1500,4,0,0,0,0
 -- INSERT INTO `mob_skills` VALUES (1345,1089,'.',0,7.0,2000,1500,4,0,0,0,0,0,0);
 -- INSERT INTO `mob_skills` VALUES (1346,1090,'.',0,7.0,2000,1500,4,0,0,0,0,0,0);
 INSERT INTO `mob_skills` VALUES (1347,998,'dual_strike',0,7.0,2000,1000,4,0,0,0,0,0,0);
-INSERT INTO `mob_skills` VALUES (1348,999,'syphon_discharge',1,15.0,2000,1000,4,0,0,1,0,0,0);
+INSERT INTO `mob_skills` VALUES (1348,999,'siphon_discharge',1,15.0,2000,1000,4,0,0,1,0,0,0);
 INSERT INTO `mob_skills` VALUES (1349,1000,'mantle_pierce',0,7.0,2000,1000,4,0,0,3,0,0,0);
 INSERT INTO `mob_skills` VALUES (1350,1001,'ink_cloud',1,15.0,2000,1000,4,0,0,0,0,0,0);
 INSERT INTO `mob_skills` VALUES (1351,1002,'molluscous_mutation',0,7.0,2000,1000,1,0,0,0,0,0,0);
