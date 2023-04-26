@@ -380,7 +380,7 @@ local function getSkillLevelIndex(level, rank)
         rangeId = 80
     elseif level > 90 and level <= 99 then
         rangeId = 90
-    elseif level > 99 then
+     elseif level > 99 then -- Umeboshi: "I threw in an arbitrary number and it resolved the error. I do not know what the value should be for retail accuracy."
         rangeId = 90
     end
 
