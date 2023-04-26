@@ -751,6 +751,12 @@ namespace battleutils
 
         damage = std::clamp(damage, -99999, 99999);
 
+        // When set mob will only take 0 or 1 damage
+        if (PDefender->GetLocalVar("DAMAGE_NULL") != 0)
+        {
+            damage %= 2;
+        }
+
         return damage;
     }
 
