@@ -2,11 +2,13 @@ local ID = require('scripts/zones/Windurst_Waters/IDs')
 
 return {
     ['Akkeke']          = { event = 427 },
+    ['Chamama']         = { event = 651 },
     ['Chomoro-Kyotoro'] = { event = 432 },
     ['Cochal-Monchal']  = { event = 696 },
     ['Foi-Mui']         = { event = 430 },
     ['Fuepepe']         = { event = 423 },
     ['Furakku-Norakku'] = { event = 371 },
+    ['Gantineux']       = { event = 10018 },
     ['Hariga-Origa']    = { event = 372 },
     ['Kerutoto']        = { event = 306 },
     ['Kirarara']        = { event = 425 },
