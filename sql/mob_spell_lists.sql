@@ -5387,28 +5387,6 @@ INSERT INTO `mob_spell_lists` VALUES ('Jailer_of_Love_Dark',5031,274,1,255); -- 
 INSERT INTO `mob_spell_lists` VALUES ('Jailer_of_Love_Dark',5031,360,1,255); -- Dispelga (1~255)
 INSERT INTO `mob_spell_lists` VALUES ('Jailer_of_Love_Dark',5031,361,1,255); -- Blindga (1~255)
 
--- Princess Jelly (493)
-INSERT INTO `mob_spell_lists` VALUES('Princess_Jelly', 5032, 235, 1, 255); -- burn (1~255)
-INSERT INTO `mob_spell_lists` VALUES('Princess_Jelly', 5032, 144, 1, 255); -- fire (1~255)
-INSERT INTO `mob_spell_lists` VALUES('Princess_Jelly', 5032, 240, 1, 255); -- drown (1~255)
-INSERT INTO `mob_spell_lists` VALUES('Princess_Jelly', 5032, 169, 1, 255); -- water (1~255)
-INSERT INTO `mob_spell_lists` VALUES('Princess_Jelly', 5032, 239, 1, 255); -- shock (1~255)
-INSERT INTO `mob_spell_lists` VALUES('Princess_Jelly', 5032, 164, 1, 255); -- thunder (1~255)
-INSERT INTO `mob_spell_lists` VALUES('Princess_Jelly', 5032, 238, 1, 255); -- rasp (1~255)
-INSERT INTO `mob_spell_lists` VALUES('Princess_Jelly', 5032, 159, 1, 255); -- stone (1~255)
-INSERT INTO `mob_spell_lists` VALUES('Princess_Jelly', 5032, 237, 1, 255); -- choke (1~255)
-INSERT INTO `mob_spell_lists` VALUES('Princess_Jelly', 5032, 154, 1, 255); -- aero (1~255)
-INSERT INTO `mob_spell_lists` VALUES('Princess_Jelly', 5032, 236, 1, 255); -- frost (1~255)
-INSERT INTO `mob_spell_lists` VALUES('Princess_Jelly', 5032, 149, 1, 255); -- blizzard (1~255)
-INSERT INTO `mob_spell_lists` VALUES('Princess_Jelly', 5032, 230, 1, 255); -- bio (1~255)
-INSERT INTO `mob_spell_lists` VALUES('Princess_Jelly', 5032, 245, 1, 255); -- drain (1~255)
-INSERT INTO `mob_spell_lists` VALUES('Princess_Jelly', 5032, 23, 1, 255);  -- dia (1~255)
-INSERT INTO `mob_spell_lists` VALUES('Princess_Jelly', 5032, 28, 1, 255);  -- banish (1~255)
-
--- Queen Jelly (494)
-INSERT INTO `mob_spell_lists` VALUES('Queen_Jelly', 5033, 174, 1, 255); -- firaga (1~255)
-INSERT INTO `mob_spell_lists` VALUES('Queen_Jelly', 5033, 199, 1, 255); -- waterga (1~255)
-
 /*!40000 ALTER TABLE `mob_spell_lists` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;

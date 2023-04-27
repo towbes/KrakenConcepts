@@ -87,13 +87,6 @@ zones[xi.zone.WAUGHROON_SHRINE] =
             17367285,
         },
     },
-
-    royalJellyQueens =
-    {
-            17367173,
-            17367183,
-            17367193,
-    },
 }
 
 return zones[xi.zone.WAUGHROON_SHRINE]
