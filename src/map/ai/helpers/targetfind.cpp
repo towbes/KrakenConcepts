@@ -99,14 +99,14 @@ void CTargetFind::findWithinArea(CBattleEntity* PTarget, AOE_RADIUS radiusType, 
         m_PRadiusAround = &PTarget->loc.p;
     }
 
-    if (PTarget->loc.zone->HasReducedVerticalAggro())
-    {
-        m_PRadiusAround->y = 3.5;
-    }
-    else
-    {
-        m_PRadiusAround->y = 8;
-    }
+    // if (PTarget->loc.zone->HasReducedVerticalAggro())
+    // {
+    //     m_PRadiusAround->y = 3.5;
+    // }
+    // else
+    // {
+    //     m_PRadiusAround->y = 8;
+    // }
 
     // get master to properly handle loops
     m_PMasterTarget = findMaster(PTarget);
