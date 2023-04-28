@@ -615,7 +615,7 @@ local loot =
             { itemid = 19027, droprate =  86 }, -- Claymore Grip
             { itemid =   747, droprate =  22 }, -- Orichalcum Ingot
             { itemid = 19025, droprate = 146 }, -- Pole Grip
-            { itemid = 19024, droprate =  22 }, -- Sword Strap
+            { itemid = 19024, droprate =  220 }, -- Sword Strap
         },
 
         {

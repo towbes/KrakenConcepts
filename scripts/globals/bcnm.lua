@@ -276,14 +276,14 @@ local battlefields =
         {  7,   71, 1431 },   -- Shattering Stars (THF LB5)
         {  8,   72, 1434 },   -- Shattering Stars (BST LB5)
         {  9,   73, 1552 },   -- Birds of a Feather (BS30)
-        { 10,   74, 1551 },   -- Crustacean Conundrum (BS20) -- TODO: You can only do 0-2 damage no matter what your attack is
+        { 10,   74, 1551 },   -- Crustacean Conundrum (BS20)
         { 11,   75, 1552 },   -- Grove Guardians (BS30)
         { 12,   76, 1553 },   -- The Hills are Alive (KS99)
-        { 13,   77, 1131 },   -- Royal Jelly (BS40) -- TODO: all combat mechanics, loot
-        { 14,   78, 1177 },   -- The Final Bout (BS50) -- TODO: mobskills Big Blow and Counterstance
+        { 13,   77, 1131 },   -- Royal Jelly (BS40)
+        { 14,   78, 1177 },   -- The Final Bout (BS50)
         { 15,   79, 1130 },   -- Up in Arms (BS60)
         { 16,   80, 1175 },   -- Copycat (KS30)
-    --  { 17,   81, 1178 },   -- Operation Desert Swarm (KS30) -- TODO: Wild Rage gets stronger as they die. Build sleep resistance. Testing.
+        { 17,   81, 1178 },   -- Operation Desert Swarm (KS30)
         { 18,   82, 1180 },   -- Prehistoric Pigeons (KS30)
     --  { 19,   83, 3351 },   -- The Palborough Project (KC30)
     --  { 20,   84, 3352 },   -- Shell Shocked (KC50)
