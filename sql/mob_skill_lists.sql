@@ -227,7 +227,7 @@ INSERT INTO `mob_skill_lists` VALUES ('Bugard',58,386);
 INSERT INTO `mob_skill_lists` VALUES ('Bugard',58,387);
 INSERT INTO `mob_skill_lists` VALUES ('Bugbear',59,357);
 INSERT INTO `mob_skill_lists` VALUES ('Bugbear',59,358);
--- INSERT INTO `mob_skill_lists` VALUES ('Bugbear',59,359);
+INSERT INTO `mob_skill_lists` VALUES ('Bugbear',59,359);
 INSERT INTO `mob_skill_lists` VALUES ('Bugbear',59,360);
 INSERT INTO `mob_skill_lists` VALUES ('Bugbear',59,361);
 INSERT INTO `mob_skill_lists` VALUES ('CaitSith',60,2448);
