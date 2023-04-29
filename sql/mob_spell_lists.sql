@@ -5348,6 +5348,10 @@ INSERT INTO `mob_spell_lists` VALUES('Anansi',743,356,1,255); -- paralyga (1~255
 INSERT INTO `mob_spell_lists` VALUES('Anansi',743,357,1,255); -- slowga (1~255)
 
 
+-- Hamadryad (512)
+INSERT INTO `mob_spell_lists` VALUES('Hamadryad',744,145,1,255); -- fire_ii (1~255)
+
+
 -- Jailer of Love (Light) (493)
 INSERT INTO `mob_spell_lists` VALUES ('Jailer_of_Love_Light',5024,21,1,255); -- Holy (1~255)
 INSERT INTO `mob_spell_lists` VALUES ('Jailer_of_Love_Light',5024,30,1,255); -- Banish III (1~255)

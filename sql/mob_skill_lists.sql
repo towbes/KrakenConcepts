@@ -3994,6 +3994,11 @@ INSERT INTO `mob_skill_lists` VALUES ('Giant_Moa',5344,1333); -- contagion trans
 INSERT INTO `mob_skill_lists` VALUES ('Giant_Moa',5344,411);  -- baleful gaze
 INSERT INTO `mob_skill_lists` VALUES ('Giant_Moa',5344,406);  -- hammer beak
 
+INSERT INTO `mob_skill_lists` VALUES ('Razon',5345,567);
+INSERT INTO `mob_skill_lists` VALUES ('Razon',5345,568);
+INSERT INTO `mob_skill_lists` VALUES ('Razon',5345,569);
+INSERT INTO `mob_skill_lists` VALUES ('Razon',5345,570);
+
 
 
 
