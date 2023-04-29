@@ -3985,6 +3985,9 @@ INSERT INTO `mob_skill_lists` VALUES ('Jailer_of_Hope', 5342, 1355);
 INSERT INTO `mob_skill_lists` VALUES ('Jailer_of_Hope', 5342, 1356);
 INSERT INTO `mob_skill_lists` VALUES ('Jailer_of_Hope', 5342, 1358);
 
+INSERT INTO `mob_skill_lists` VALUES('Infernal_Swarm',5343,334); -- sharp_sting
+INSERT INTO `mob_skill_lists` VALUES('Infernal_Swarm',5343,335); -- pollen
+
 
 
 
