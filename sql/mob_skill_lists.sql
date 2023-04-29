@@ -3988,6 +3988,11 @@ INSERT INTO `mob_skill_lists` VALUES ('Jailer_of_Hope', 5342, 1358);
 INSERT INTO `mob_skill_lists` VALUES('Infernal_Swarm',5343,334); -- sharp_sting
 INSERT INTO `mob_skill_lists` VALUES('Infernal_Swarm',5343,335); -- pollen
 
+INSERT INTO `mob_skill_lists` VALUES ('Giant_Moa',5344,1335); -- toxic pick
+INSERT INTO `mob_skill_lists` VALUES ('Giant_Moa',5344,1333); -- contagion transfer
+INSERT INTO `mob_skill_lists` VALUES ('Giant_Moa',5344,411);  -- baleful gaze
+INSERT INTO `mob_skill_lists` VALUES ('Giant_Moa',5344,406);  -- hammer beak
+
 
 
 
