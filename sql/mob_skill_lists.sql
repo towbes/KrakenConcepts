@@ -327,6 +327,7 @@ INSERT INTO `mob_skill_lists` VALUES ('Diremite',81,362);
 INSERT INTO `mob_skill_lists` VALUES ('Diremite',81,363);
 INSERT INTO `mob_skill_lists` VALUES ('Diremite',81,364);
 INSERT INTO `mob_skill_lists` VALUES ('Diremite',81,365);
+INSERT INTO `mob_skill_lists` VALUES ('Diremite',81,1361); -- Viscid Secretion
 INSERT INTO `mob_skill_lists` VALUES ('Djinn',82,2216);
 INSERT INTO `mob_skill_lists` VALUES ('Djinn',82,2217);
 INSERT INTO `mob_skill_lists` VALUES ('Djinn',82,2218);
