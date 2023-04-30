@@ -26,7 +26,7 @@ mobskillObject.onMobWeaponSkill = function(target, mob, skill)
     target:takeDamage(dmg, mob, xi.attackType.PHYSICAL, xi.damageType.BLUNT)
 
     if mob:getName() == "Faust" then
-        if mob:getLocalVar("Typhoon") == 0 then
+        if mob:getLocalVar("Typhoon") == 0 and mob:getTarget() ~= nil and mob:checkDistance(mob:getTarget()) <= 10 then
             mob:useMobAbility(539)
             mob:setLocalVar("Typhoon", 1)
         else

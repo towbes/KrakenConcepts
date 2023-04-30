@@ -664,8 +664,6 @@ enum class Mod
     SAVETP      = 880, // SAVETP Effect for Miser's Roll / ATMA / Hagakure.
     CONSERVE_TP = 944, // Conserve TP trait, random chance between 10 and 200 TP
 
-    WYRMAL_ABJ_KILLER_EFFECT = 53,  // Wyrmal Abjuration(Crimson / Blood) which makes players susceptible to Dragon Killer effects
-
     // Rune Fencer
     INQUARTATA                  = 963,  // Increases parry rate by a flat %.
     ENHANCES_BATTUTA            = 1004, // Used by RUN merit point cat 2 to add +N% bonus damage to parry spikes during Battuta effect
@@ -1014,6 +1012,7 @@ enum class Mod
     HUMANOID_CIRCLE       = 2016,
     LUMINIAN_CIRCLE       = 2017, // Should actually be LUMORIAN when have time to refactor.
     LUMINION_CIRCLE       = 2018,
+
     AUTOMATON_MAGIC_COST  = 2019,
     AUTOMATON_CAN_BARRAGE = 2020,
 
@@ -1024,6 +1023,8 @@ enum class Mod
     PET_MATT_LATENT = 2023,  // Pet Magic Attack bonus used for latents
     PET_MACC_LATENT = 2024,  // Pet Magic Acc bonus used for latents
     PET_DEF_LATENT  = 2025,  // Pet DEF bonus used for latents
+
+    WYRMAL_ABJ_KILLER_EFFECT = 2026,   // Wyrmal Abjuration(Crimson / Blood) which makes players susceptible to Dragon Killer effects
 
 
     // IF YOU ADD ANY NEW MODIFIER HERE, ADD IT IN scripts/globals/status.lua ASWELL!
