@@ -4000,6 +4000,11 @@ INSERT INTO `mob_skill_lists` VALUES ('Razon',5345,568);
 INSERT INTO `mob_skill_lists` VALUES ('Razon',5345,569);
 INSERT INTO `mob_skill_lists` VALUES ('Razon',5345,570);
 
+INSERT INTO `mob_skill_lists` VALUES ('Cogitator',5346,1242); -- empty cutter
+INSERT INTO `mob_skill_lists` VALUES ('Cogitator',5346,1243); -- trinary tap
+INSERT INTO `mob_skill_lists` VALUES ('Cogitator',5346,1251); -- trinary tap
+INSERT INTO `mob_skill_lists` VALUES ('Cogitator',5346,1252); -- shadow spread
+
 
 
 
