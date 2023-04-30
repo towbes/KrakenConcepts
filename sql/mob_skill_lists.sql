@@ -4005,6 +4005,9 @@ INSERT INTO `mob_skill_lists` VALUES ('Cogitator',5346,1243); -- trinary tap
 INSERT INTO `mob_skill_lists` VALUES ('Cogitator',5346,1251); -- trinary tap
 INSERT INTO `mob_skill_lists` VALUES ('Cogitator',5346,1252); -- shadow spread
 
+INSERT INTO `mob_skill_lists` VALUES ('Ullikummi',5347,1035);
+INSERT INTO `mob_skill_lists` VALUES ('Zipacna',5348,678);
+
 
 
 

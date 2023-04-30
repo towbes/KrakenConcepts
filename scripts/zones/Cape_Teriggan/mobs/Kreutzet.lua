@@ -25,7 +25,7 @@ entity.onMobWeaponSkill = function(target, mob, skill)
 
         if stormwindCounter > 2 then
             mob:setLocalVar("stormwindCounter", 0)
-        else
+        elseif mob:checkDistance(target) < 6 then
             mob:useMobAbility(926)
         end
     end

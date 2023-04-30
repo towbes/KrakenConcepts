@@ -5357,6 +5357,11 @@ INSERT INTO `mob_spell_lists` VALUES('Snow_Devil', 745, 152, 1, 255); -- Blizzar
 INSERT INTO `mob_spell_lists` VALUES('Snow_Devil', 745, 181, 1, 255); -- Blizzaga III (1~255)
 INSERT INTO `mob_spell_lists` VALUES('Snow_Devil', 745, 455, 1, 255); -- Ice Threnody (1~255)
 
+-- Ullikummi (5032)
+INSERT INTO `mob_spell_lists` VALUES('Ullikummi', 746, 34, 1, 255); -- Diaga II
+INSERT INTO `mob_spell_lists` VALUES('Ullikummi', 746, 40, 1, 255); -- Banishga III
+INSERT INTO `mob_spell_lists` VALUES('Ullikummi', 746, 112, 1, 255); -- Flash
+
 
 -- Jailer of Love (Light) (493)
 INSERT INTO `mob_spell_lists` VALUES ('Jailer_of_Love_Light',5024,21,1,255); -- Holy (1~255)

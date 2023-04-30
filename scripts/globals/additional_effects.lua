@@ -130,26 +130,27 @@ xi.additionalEffect.attack = function(attacker, defender, baseAttackDamage, item
     local msgID = 0
     local msgParam = 0
 
-    local procType = {
+    local procType =
+    {
         -- These are arbitrary, make up new ones as needed.
-        DAMAGE = 1,
-        DEBUFF = 2,
-        HP_HEAL = 3,
-        MP_HEAL = 4,
-        HP_DRAIN = 5,
-        MP_DRAIN = 6,
-        TP_DRAIN = 7,
-        HPMPTP_DRAIN = 8,
-        DISPEL = 9,
-        ABSORB_STATUS = 10,
-        SELF_BUFF = 11,
-        DEATH = 12,
-        BRIGAND = 13,
-        VS_FAMILY = 14,
+        DAMAGE          = 1,
+        DEBUFF          = 2,
+        HP_HEAL         = 3,
+        MP_HEAL         = 4,
+        HP_DRAIN        = 5,
+        MP_DRAIN        = 6,
+        TP_DRAIN        = 7,
+        HPMPTP_DRAIN    = 8,
+        DISPEL          = 9,
+        ABSORB_STATUS   = 10,
+        SELF_BUFF       = 11,
+        DEATH           = 12,
+        BRIGAND         = 13,
+        VS_FAMILY       = 14,
         AVATAR_SUMMONED = 15,
-        NIGHTTIME = 16,
-        GOD_WIND = 17,
-        VS_ECOSYSTEM = 18
+        NIGHTTIME       = 16,
+        GOD_WIND        = 17,
+        VS_ECOSYSTEM    = 18,
     }
 
     -- If player is level synced below the level of the item, do no proc

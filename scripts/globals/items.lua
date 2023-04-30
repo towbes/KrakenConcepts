@@ -3851,6 +3851,7 @@ xi.items =
     ANCIENT_SWORD                   = 16533,
     BRONZE_SWORD                    = 16535,
     SPATHA                          = 16565,
+    CURTANA                         = 16575,
     CLAYMORE                        = 16583,
     PERDU_SWORD                     = 16602,
     RUSTY_GREATSWORD                = 16606,

@@ -9,12 +9,25 @@ require("scripts/globals/status")
 -----------------------------------
 local entity = {}
 
-entity.onMobSpawn = function(mob, target)
-    GetNPCByID(ID.npc.PORTAL_TO_SEIRYU):setAnimation(xi.anim.CLOSE_DOOR)
+entity.onMobInitialize = function(mob)
+    mob:setMod(xi.mod.SILENCERES, 90)
+    mob:addMod(xi.mod.ATT, 50)
+    mob:addMod(xi.mod.EVA, 80)
+    mob:addMod(xi.mod.DOUBLE_ATTACK, 10)
+    mob:setMobMod(xi.mobMod.ADD_EFFECT, 1)
+    mob:setMobMod(xi.mobMod.MAGIC_COOL, 35)
 end
 
-entity.onMobInitialize = function(mob)
-    mob:setMobMod(xi.mobMod.ADD_EFFECT, 1)
+entity.onMobSpawn = function(mob, target)
+    GetNPCByID(ID.npc.PORTAL_TO_SEIRYU):setAnimation(xi.anim.CLOSE_DOOR)
+    mob:setMagicCastingEnabled(false)
+end
+
+entity.onMobEngaged = function(mob, target)
+    mob:messageText(mob, ID.text.SKY_GOD_OFFSET + 9)
+    mob:timer(5000, function(mobArg)
+        mobArg:setMagicCastingEnabled(true)
+    end)
 end
 
 entity.onMobMagicPrepare = function(mob, target, spellId)
@@ -39,8 +52,10 @@ entity.onAdditionalEffect = function(mob, target, damage)
 end
 
 entity.onMobDeath = function(mob, player, optParams)
-    player:showText(mob, ID.text.SKY_GOD_OFFSET + 10)
-    GetNPCByID(ID.npc.PORTAL_TO_SEIRYU):setAnimation(xi.anim.OPEN_DOOR)
+    if optParams.isKiller then
+        player:showText(mob, ID.text.SKY_GOD_OFFSET + 10)
+        GetNPCByID(ID.npc.PORTAL_TO_SEIRYU):setAnimation(xi.anim.OPEN_DOOR)
+    end
 end
 
 entity.onMobDespawn = function(mob)
