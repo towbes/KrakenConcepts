@@ -5352,6 +5352,12 @@ INSERT INTO `mob_spell_lists` VALUES('Anansi',743,357,1,255); -- slowga (1~255)
 INSERT INTO `mob_spell_lists` VALUES('Hamadryad',744,145,1,255); -- fire_ii (1~255)
 
 
+-- Snow Devil (513)
+INSERT INTO `mob_spell_lists` VALUES('Snow_Devil', 745, 152, 1, 255); -- Blizzard IV (1~255)
+INSERT INTO `mob_spell_lists` VALUES('Snow_Devil', 745, 181, 1, 255); -- Blizzaga III (1~255)
+INSERT INTO `mob_spell_lists` VALUES('Snow_Devil', 745, 455, 1, 255); -- Ice Threnody (1~255)
+
+
 -- Jailer of Love (Light) (493)
 INSERT INTO `mob_spell_lists` VALUES ('Jailer_of_Love_Light',5024,21,1,255); -- Holy (1~255)
 INSERT INTO `mob_spell_lists` VALUES ('Jailer_of_Love_Light',5024,30,1,255); -- Banish III (1~255)
