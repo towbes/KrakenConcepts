@@ -592,6 +592,11 @@ void CMobController::DoCombatTick(time_point tick)
 
     TryLink();
 
+    if (PMob == nullptr || PTarget == nullptr)
+    {
+        return;
+    }
+
     float currentDistance = distance(PMob->loc.p, PTarget->loc.p);
 
     PMob->PAI->EventHandler.triggerListener("COMBAT_TICK", CLuaBaseEntity(PMob));
@@ -1137,6 +1142,11 @@ bool CMobController::Engage(uint16 targid)
         {
             m_LastMagicTime =
                 m_Tick - std::chrono::milliseconds(PMob->getBigMobMod(MOBMOD_MAGIC_COOL) + xirand::GetRandomNumber(PMob->getBigMobMod(MOBMOD_MAGIC_DELAY)));
+        }
+        else if (PMob->getBigMobMod(MOBMOD_MAGIC_COOL) != 0)
+        {
+            m_LastMagicTime =
+                m_Tick - std::chrono::milliseconds(PMob->getBigMobMod(MOBMOD_MAGIC_COOL));
         }
 
         if (PMob->getBigMobMod(MOBMOD_SPECIAL_DELAY) != 0)

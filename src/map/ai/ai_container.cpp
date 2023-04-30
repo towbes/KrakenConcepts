@@ -484,11 +484,21 @@ bool CAIContainer::IsSpawned()
 
 bool CAIContainer::IsRoaming()
 {
+    if (PEntity == nullptr)
+    {
+        return false;
+    }
+
     return PEntity->animation == ANIMATION_NONE;
 }
 
 bool CAIContainer::IsEngaged()
 {
+    if (PEntity == nullptr)
+    {
+        return false;
+    }
+
     return PEntity->animation == ANIMATION_ATTACK;
 }
 

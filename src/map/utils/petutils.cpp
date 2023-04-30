@@ -1664,6 +1664,11 @@ namespace petutils
             boost stats by 10%
             */
 
+        if (PPet == nullptr)
+        {
+            return;
+        }
+
         // only increase time for charmed mobs
         if (PPet->objtype == TYPE_MOB && PPet->isCharmed)
         {
