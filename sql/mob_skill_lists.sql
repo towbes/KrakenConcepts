@@ -4042,6 +4042,11 @@ INSERT INTO `mob_skill_lists` VALUES ('Celery_Ghosts',5354,475); -- terror touch
 INSERT INTO `mob_skill_lists` VALUES ('Celery_Ghosts',5354,477); -- dark sphere
 INSERT INTO `mob_skill_lists` VALUES ('Celery_Ghosts',5354,1339); -- bane
 
+INSERT INTO `mob_skill_lists` VALUES ('Orcish_Onager',5355,635); -- Burst
+INSERT INTO `mob_skill_lists` VALUES ('Orcish_Onager',5355,636); -- Flame Arrow
+INSERT INTO `mob_skill_lists` VALUES ('Orcish_Onager',5355,637); -- Fire bomb
+INSERT INTO `mob_skill_lists` VALUES ('Orcish_Onager',5355,638); -- Blast Bomb
+
 
 
 
