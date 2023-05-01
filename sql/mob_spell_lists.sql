@@ -5362,6 +5362,22 @@ INSERT INTO `mob_spell_lists` VALUES('Ullikummi', 746, 34, 1, 255); -- Diaga II
 INSERT INTO `mob_spell_lists` VALUES('Ullikummi', 746, 40, 1, 255); -- Banishga III
 INSERT INTO `mob_spell_lists` VALUES('Ullikummi', 746, 112, 1, 255); -- Flash
 
+-- Taru Taru Automaton (514)
+INSERT INTO `mob_spell_lists` VALUES('Tarutaru_Automaton',747,204,1,255); -- Flare (1~255)
+INSERT INTO `mob_spell_lists` VALUES('Tarutaru_Automaton',747,206,1,255); -- Freeze (1~255)
+INSERT INTO `mob_spell_lists` VALUES('Tarutaru_Automaton',747,208,1,255); -- Tornado (1~255)
+INSERT INTO `mob_spell_lists` VALUES('Tarutaru_Automaton',747,210,1,255); -- Quake (1~255)
+INSERT INTO `mob_spell_lists` VALUES('Tarutaru_Automaton',747,212,1,255); -- Burst (1~255)
+INSERT INTO `mob_spell_lists` VALUES('Tarutaru_Automaton',747,214,1,255); -- Flood (1~255)
+
+-- Hume Automaton (515)
+INSERT INTO `mob_spell_lists` VALUES('Hume_Automaton',748,175,1,255); -- Firaga II (1~255)
+INSERT INTO `mob_spell_lists` VALUES('Hume_Automaton',748,180,1,255); -- Blizzaga II (1~255)
+INSERT INTO `mob_spell_lists` VALUES('Hume_Automaton',748,185,1,255); -- Aeroga II (1~255)
+INSERT INTO `mob_spell_lists` VALUES('Hume_Automaton',748,190,1,255); -- Stonega II (1~255)
+INSERT INTO `mob_spell_lists` VALUES('Hume_Automaton',748,195,1,255); -- Thundaga II (1~255)
+INSERT INTO `mob_spell_lists` VALUES('Hume_Automaton',748,200,1,255); -- Waterga II (1~255)
+
 
 -- Jailer of Love (Light) (493)
 INSERT INTO `mob_spell_lists` VALUES ('Jailer_of_Love_Light',5024,21,1,255); -- Holy (1~255)

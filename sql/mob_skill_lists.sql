@@ -4014,6 +4014,13 @@ INSERT INTO `mob_skill_lists` VALUES ('Gladiatorial_Weapon',5349,398); -- Whispe
 INSERT INTO `mob_skill_lists` VALUES ('Gladiatorial_Weapon',5349,513); -- Smite of Rage
 INSERT INTO `mob_skill_lists` VALUES ('Gladiatorial_Weapon',5349,514); -- Whirl of Rage
 
+INSERT INTO `mob_skill_lists` VALUES ('Automaton_Assault',5350,49); -- Power Slash
+INSERT INTO `mob_skill_lists` VALUES ('Automaton_Assault',5350,50); -- Frostbite
+INSERT INTO `mob_skill_lists` VALUES ('Automaton_Assault',5350,51); -- Freezebite
+INSERT INTO `mob_skill_lists` VALUES ('Automaton_Assault',5350,52); -- Shockwave
+INSERT INTO `mob_skill_lists` VALUES ('Automaton_Assault',5350,53); -- Crescent Moon
+INSERT INTO `mob_skill_lists` VALUES ('Automaton_Assault',5350,54); -- Sickle Moon
+
 
 
 
