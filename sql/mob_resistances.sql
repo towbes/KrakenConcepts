@@ -498,3 +498,7 @@ INSERT INTO `mob_resistances` VALUES (505,'Fungi',1,1,1,1,0,0,-2500,1250,0,0,-25
 INSERT INTO `mob_resistances` VALUES (506,'Meeble',1,1,1,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0);
 INSERT INTO `mob_resistances` VALUES (507,'Quasilumin',1,1,1,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0);
 INSERT INTO `mob_resistances` VALUES (601,'MemoryReceptacleENM',2,2,2,2,5000,5000,5000,5000,5000,5000,5000,5000,0,0,0,0,0,0,0,0);
+INSERT INTO `mob_resistances` VALUES (602,'Annihilated_Anthony',0.25,0.75,0.5,0.5,-3000,-1500,-2500,-2500,-2500,-2500,-3000,-1500,0,0,0,0,0,0,0,0);
+INSERT INTO `mob_resistances` VALUES (603,'Shredded_Samson',1.25,0.75,0.25,0.25,-2500,5000,0,0,0,0,-2500,5000,0,0,0,0,0,0,0,0);
+INSERT INTO `mob_resistances` VALUES (604,'Punctured_Percy',0.75,1.25,0.5,0.5,-2500,5000,0,0,0,0,-2500,5000,0,0,0,0,0,0,0,0);
+INSERT INTO `mob_resistances` VALUES (605,'Mauled_Murdock',0.75,0.75,1.25,1.25,-2500,5000,0,0,0,0,-2500,5000,0,0,0,0,0,0,0,0);
