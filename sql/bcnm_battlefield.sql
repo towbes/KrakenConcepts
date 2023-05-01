@@ -170,6 +170,24 @@ INSERT INTO `bcnm_battlefield` VALUES (16,3,17346748,3);
 INSERT INTO `bcnm_battlefield` VALUES (17,1,17346750,3); -- contaminated_colosseum
 INSERT INTO `bcnm_battlefield` VALUES (17,2,17346752,3);
 INSERT INTO `bcnm_battlefield` VALUES (17,3,17346754,3);
+INSERT INTO `bcnm_battlefield` VALUES (112,1,17375422,3); -- Royale Ramble
+INSERT INTO `bcnm_battlefield` VALUES (112,1,17375423,3);
+INSERT INTO `bcnm_battlefield` VALUES (112,1,17375424,3);
+INSERT INTO `bcnm_battlefield` VALUES (112,1,17375425,3);
+INSERT INTO `bcnm_battlefield` VALUES (112,1,17375426,2);
+INSERT INTO `bcnm_battlefield` VALUES (112,1,17375427,2);
+INSERT INTO `bcnm_battlefield` VALUES (112,2,17375429,3);
+INSERT INTO `bcnm_battlefield` VALUES (112,2,17375430,3);
+INSERT INTO `bcnm_battlefield` VALUES (112,2,17375431,3);
+INSERT INTO `bcnm_battlefield` VALUES (112,2,17375432,3);
+INSERT INTO `bcnm_battlefield` VALUES (112,2,17375433,2);
+INSERT INTO `bcnm_battlefield` VALUES (112,2,17375434,2);
+INSERT INTO `bcnm_battlefield` VALUES (112,3,17375436,3);
+INSERT INTO `bcnm_battlefield` VALUES (112,3,17375437,3);
+INSERT INTO `bcnm_battlefield` VALUES (112,3,17375438,3);
+INSERT INTO `bcnm_battlefield` VALUES (112,3,17375439,3);
+INSERT INTO `bcnm_battlefield` VALUES (112,3,17375440,2);
+INSERT INTO `bcnm_battlefield` VALUES (112,3,17375441,2);
 INSERT INTO `bcnm_battlefield` VALUES (113,1,17375443,3); -- moa constrictors
 INSERT INTO `bcnm_battlefield` VALUES (113,1,17375444,3);
 INSERT INTO `bcnm_battlefield` VALUES (113,2,17375446,3);
