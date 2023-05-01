@@ -5393,8 +5393,25 @@ INSERT INTO `mob_spell_lists` VALUES ('Ziryu',751,191,1,255);-- stonega_iii
 INSERT INTO `mob_spell_lists` VALUES ('Ziryu',751,210,1,255); -- Quake
 INSERT INTO `mob_spell_lists` VALUES ('Ziryu',751,54,1,255); -- Stoneskin
 
+-- Totentaz Undead
+INSERT INTO `mob_spell_lists` VALUES('Totentanz_Undead', 752, 190, 1, 255); -- stonega ii (1~255)
+INSERT INTO `mob_spell_lists` VALUES('Totentanz_Undead', 752, 200, 1, 255); -- waterga ii (1~255)
+INSERT INTO `mob_spell_lists` VALUES('Totentanz_Undead', 752, 185, 1, 255); -- aeroga ii (1~255)
+INSERT INTO `mob_spell_lists` VALUES('Totentanz_Undead', 752, 175, 1, 255); -- firaga ii (1~255)
+INSERT INTO `mob_spell_lists` VALUES('Totentanz_Undead', 752, 180, 1, 255); -- blizzaga ii (1~255)
+INSERT INTO `mob_spell_lists` VALUES('Totentanz_Undead', 752, 195, 1, 255); -- thundaga ii (1~255)
+INSERT INTO `mob_spell_lists` VALUES('Totentanz_Undead', 752, 245, 1, 255); -- drain (1~255)
+INSERT INTO `mob_spell_lists` VALUES('Totentanz_Undead', 752, 247, 1, 255); -- aspir (1~255)
 
-
+-- Gwyn Ap Knudd
+INSERT INTO `mob_spell_lists` VALUES('Gwyn_Ap_Knudd', 753, 191, 1, 255); -- stonega iii (1~255)
+INSERT INTO `mob_spell_lists` VALUES('Gwyn_Ap_Knudd', 753, 201, 1, 255); -- waterga iii (1~255)
+INSERT INTO `mob_spell_lists` VALUES('Gwyn_Ap_Knudd', 753, 186, 1, 255); -- aeroga iii (1~255)
+INSERT INTO `mob_spell_lists` VALUES('Gwyn_Ap_Knudd', 753, 176, 1, 255); -- firaga iii (1~255)
+INSERT INTO `mob_spell_lists` VALUES('Gwyn_Ap_Knudd', 753, 181, 1, 255); -- blizzaga iii (1~255)
+INSERT INTO `mob_spell_lists` VALUES('Gwyn_Ap_Knudd', 753, 196, 1, 255); -- thundaga iii (1~255)
+INSERT INTO `mob_spell_lists` VALUES('Gwyn_Ap_Knudd', 753, 245, 1, 255); -- drain (1~255)
+INSERT INTO `mob_spell_lists` VALUES('Gwyn_Ap_Knudd', 753, 247, 1, 255); -- aspir (1~255)
 
 -- Jailer of Love (Light) (493)
 INSERT INTO `mob_spell_lists` VALUES ('Jailer_of_Love_Light',5024,21,1,255); -- Holy (1~255)
