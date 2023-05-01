@@ -483,6 +483,9 @@ INSERT INTO `mob_pool_mods` VALUES (4361,288,55,0); -- DOUBLE_ATTACK: 55
 -- Zipacna
 INSERT INTO `mob_pool_mods` VALUES (4504,4,30,1); -- SIGHT_RANGE: 30
 
+-- Ziryu
+INSERT INTO `mob_pool_mods` VALUES (4507,64,1,1);
+
 -- Genbu Pet
 INSERT INTO `mob_pool_mods` VALUES (4670,3,100,1); -- MP_BASE: 100
 

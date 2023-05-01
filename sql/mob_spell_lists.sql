@@ -1434,9 +1434,11 @@ INSERT INTO `mob_spell_lists` VALUES ('Diabolos_Club',108,361,1,255); -- blindga
 INSERT INTO `mob_spell_lists` VALUES ('Diabolos_Club',108,367,1,255); -- death (1~255)
 
 -- Ouryu (109)
-INSERT INTO `mob_spell_lists` VALUES ('Ouryu',109,54,1,255);  -- stoneskin (1~255)
-INSERT INTO `mob_spell_lists` VALUES ('Ouryu',109,190,1,255); -- stonega_ii (1~255)
-INSERT INTO `mob_spell_lists` VALUES ('Ouryu',109,357,1,255); -- slowga (1~255)
+INSERT INTO `mob_spell_lists` VALUES ('Ouryu',109,190,1,80);   -- stonega_ii
+INSERT INTO `mob_spell_lists` VALUES ('Ouryu',109,191,80,255); -- stonega_iii
+INSERT INTO `mob_spell_lists` VALUES ('Ouryu',109,255,80,255); -- break
+INSERT INTO `mob_spell_lists` VALUES ('Ouryu',109,357,1,80);   -- slowga
+INSERT INTO `mob_spell_lists` VALUES ('Ouryu',109,365,80,255); -- breakga
 
 -- Pasuk (110)
 INSERT INTO `mob_spell_lists` VALUES ('Pasuk',110,245,1,255); -- drain (1~255)
@@ -5385,6 +5387,13 @@ INSERT INTO `mob_spell_lists` VALUES('Pilwiz', 749, 190, 1, 255); -- Stonega II 
 INSERT INTO `mob_spell_lists` VALUES('Generic_Doll', 750, 194, 1, 255); -- Thundaga (1~255)
 INSERT INTO `mob_spell_lists` VALUES('Generic_Doll', 750, 251, 1, 255); -- Shock Spikes (1~255)
 INSERT INTO `mob_spell_lists` VALUES('Generic_Doll', 750, 356, 1, 255); -- Paralyga (1~255)
+
+-- Ziryu (5056)
+INSERT INTO `mob_spell_lists` VALUES ('Ziryu',751,191,1,255);-- stonega_iii
+INSERT INTO `mob_spell_lists` VALUES ('Ziryu',751,210,1,255); -- Quake
+INSERT INTO `mob_spell_lists` VALUES ('Ziryu',751,54,1,255); -- Stoneskin
+
+
 
 
 -- Jailer of Love (Light) (493)

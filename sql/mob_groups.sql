@@ -1136,7 +1136,7 @@ INSERT INTO `mob_groups` VALUES (14,708,29,'Chemical_Cook_Chemachiq',0,128,0,0,0
 INSERT INTO `mob_groups` VALUES (15,503,29,'Book_Browser_Bokabraq',0,128,0,0,0,55,55,0);
 INSERT INTO `mob_groups` VALUES (16,4102,29,'Unstable_Cluster',0,128,2523,10000,0,56,57,0);
 INSERT INTO `mob_groups` VALUES (17,325,29,'Bahamut',0,128,0,26000,20000,83,83,0);
-INSERT INTO `mob_groups` VALUES (28,325,29,'Bahamutv2',0,128,6020,34000,20000,92,92,0);
+INSERT INTO `mob_groups` VALUES (28,325,29,'Bahamutv2',0,128,3821,34000,20000,92,92,0);
 INSERT INTO `mob_groups` VALUES (18,3070,29,'Ouryu',0,128,0,6000,15000,88,88,0);
 INSERT INTO `mob_groups` VALUES (19,3916,29,'Tiamat',0,128,0,6500,15000,88,88,0);
 INSERT INTO `mob_groups` VALUES (20,2156,29,'Jormungand',0,128,0,6500,15000,88,88,0);
@@ -1166,10 +1166,10 @@ INSERT INTO `mob_groups` VALUES (11,1355,30,'Flamedrake',330,0,841,0,0,47,49,0);
 INSERT INTO `mob_groups` VALUES (12,641,30,'Carmine_Dobsonfly',86400,0,418,1550,0,44,45,0);
 INSERT INTO `mob_groups` VALUES (13,4532,30,'Darner',330,0,142,0,0,84,85,0);
 INSERT INTO `mob_groups` VALUES (14,68,30,'Aiatar',0,32,35,6500,0,44,45,0);
-INSERT INTO `mob_groups` VALUES (15,4309,30,'Water_Elemental',0,128,0,0,0,75,75,0);
-INSERT INTO `mob_groups` VALUES (16,1160,30,'Earth_Elemental',0,128,0,0,0,75,75,0);
-INSERT INTO `mob_groups` VALUES (17,3070,30,'Ouryu',0,128,1962,50000,0,85,85,0);
-INSERT INTO `mob_groups` VALUES (18,4507,30,'Ziryu',0,128,2804,0,0,75,75,0);
+INSERT INTO `mob_groups` VALUES (15,4309,30,'Water_Elemental',0,128,0,4000,10000,75,75,0);
+INSERT INTO `mob_groups` VALUES (16,1160,30,'Earth_Elemental',0,128,0,4000,10000,75,75,0);
+INSERT INTO `mob_groups` VALUES (17,8010,30,'Ouryu',0,128,1962,50000,20000,90,90,0);
+INSERT INTO `mob_groups` VALUES (18,4507,30,'Ziryu',0,128,2804,4000,10000,75,75,0);
 INSERT INTO `mob_groups` VALUES (19,215,30,'Arcane_Phantasm',0,128,0,0,0,44,45,0);
 INSERT INTO `mob_groups` VALUES (20,3596,30,'Shieldtrap',0,128,2235,0,0,39,44,0);
 
