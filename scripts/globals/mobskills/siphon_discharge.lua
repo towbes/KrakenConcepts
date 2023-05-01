@@ -13,8 +13,6 @@ local mobskillObject = {}
 require("scripts/globals/settings")
 require("scripts/globals/status")
 require("scripts/globals/mobskills")
-require("settings/main")
-
 -----------------------------------
 mobskillObject.onMobSkillCheck = function(target, mob, skill)
     return 0

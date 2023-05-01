@@ -4008,6 +4008,12 @@ INSERT INTO `mob_skill_lists` VALUES ('Cogitator',5346,1252); -- shadow spread
 INSERT INTO `mob_skill_lists` VALUES ('Ullikummi',5347,1035);
 INSERT INTO `mob_skill_lists` VALUES ('Zipacna',5348,678);
 
+INSERT INTO `mob_skill_lists` VALUES ('Gladiatorial_Weapon',5349,396); -- Smite of Fury
+INSERT INTO `mob_skill_lists` VALUES ('Gladiatorial_Weapon',5349,397); -- Flurry of Rage
+INSERT INTO `mob_skill_lists` VALUES ('Gladiatorial_Weapon',5349,398); -- Whispers of ire
+INSERT INTO `mob_skill_lists` VALUES ('Gladiatorial_Weapon',5349,513); -- Smite of Rage
+INSERT INTO `mob_skill_lists` VALUES ('Gladiatorial_Weapon',5349,514); -- Whirl of Rage
+
 
 
 
