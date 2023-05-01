@@ -94,7 +94,7 @@ local battlefields =
     [xi.zone.RIVERNE_SITE_B01] =
     {
         { 0,  896,    0 },   -- Storms of Fate (Quest)
-    --  { 1,  897, 2108 },   -- The Wyrmking Descends (BCNM)
+        { 1,  897, 2108 },   -- The Wyrmking Descends (BCNM)
     },
 
     [xi.zone.RIVERNE_SITE_A01] =
@@ -989,7 +989,11 @@ local function checkReqs(player, npc, bfid, registrant)
 
         [896] = function() -- Quest: Storms of Fate
             return player:getQuestStatus(xi.quest.log_id.JEUNO, xi.quest.id.jeuno.STORMS_OF_FATE) == QUEST_ACCEPTED and
-                player:getCharVar('StormsOfFate') == 2
+                player:getCharVar("Quest[3][86]Status") >= 2
+        end,
+
+        [897] = function() -- Quest: The Wyrmking Descends
+             return player:hasKeyItem(xi.ki.WHISPER_OF_THE_WYRMKING) 
         end,
 
         [960] = function() -- PM2-5: Ancient Vows
@@ -1552,7 +1556,7 @@ local function checkSkip(player, bfid)
             return stormsOfFateStatus == QUEST_COMPLETED or
                 (
                     stormsOfFateStatus == QUEST_ACCEPTED and
-                    player:getCharVar("StormsOfFate") > 2
+                    player:getCharVar("Quest[3][86]Status") > 2
                 )
         end,
 

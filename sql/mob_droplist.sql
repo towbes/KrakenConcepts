@@ -26989,6 +26989,22 @@ INSERT INTO `mob_droplist` VALUES (3819,0,0,1000,15507,@UNCOMMON); -- Purgatory 
 -- ZoneID: 109 - Toxic Tamlyn
 INSERT INTO `mob_droplist` VALUES (3820,0,0,1000,2855,@VCOMMON); -- Mahogany Heartwood (Very Common, 24%)
 
+-- Wyrmking Descends droplist
+INSERT INTO `mob_droplist` VALUES (3821,1,1,@ALWAYS,17598,231); -- Bahamut Staff
+INSERT INTO `mob_droplist` VALUES (3821,1,1,@ALWAYS,17597,769); -- Dragon Staff
+INSERT INTO `mob_droplist` VALUES (3821,1,2,@ALWAYS,15264,318); -- Bahamut Mask
+INSERT INTO `mob_droplist` VALUES (3821,1,2,@ALWAYS,18061,268); -- Bahamut Zaghnal
+INSERT INTO `mob_droplist` VALUES (3821,1,2,@ALWAYS,15599,414); -- Bahamut Hose
+INSERT INTO `mob_droplist` VALUES (3821,1,3,712,1704,1000);     -- Kunwu Iron
+INSERT INTO `mob_droplist` VALUES (3821,1,4,678,1703,1000);     -- Kunwu Ore
+INSERT INTO `mob_droplist` VALUES (3821,1,5,864,647,1000);      -- Moly Ore
+INSERT INTO `mob_droplist` VALUES (3821,1,6,763,647,1000);      -- Moly Ore
+INSERT INTO `mob_droplist` VALUES (3821,1,7,576,1714,1000);     -- Cashmere Cloth
+INSERT INTO `mob_droplist` VALUES (3821,1,8,593,1713,1000);     -- Cashmere Thread
+INSERT INTO `mob_droplist` VALUES (3821,1,9,746,1816,1000);     -- Wyrm Horn
+INSERT INTO `mob_droplist` VALUES (3821,1,10,864,722,1000);     -- Divine Log
+INSERT INTO `mob_droplist` VALUES (3821,1,10,864,1313,1000);    -- Sirens Hair
+
 /*!40000 ALTER TABLE `mob_droplist` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;

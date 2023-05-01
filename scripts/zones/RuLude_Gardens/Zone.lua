@@ -47,15 +47,8 @@ zoneObject.onTriggerAreaEnter = function(player, triggerArea)
                 player:getCharVar("COP_jabbos_story") == 1
             then
                 player:startEvent(122)
-            elseif player:getCharVar("PromathiaStatus") == 7 then
-                if player:getQuestStatus(xi.quest.log_id.JEUNO, xi.quest.id.jeuno.STORMS_OF_FATE) == QUEST_AVAILABLE then
-                    player:startEvent(142)
-                elseif
-                    player:getQuestStatus(xi.quest.log_id.JEUNO, xi.quest.id.jeuno.STORMS_OF_FATE) == QUEST_ACCEPTED and
-                    player:getCharVar('StormsOfFate') == 3
-                then
-                    player:startEvent(143)
-                elseif
+            if player:getCharVar("PromathiaStatus") == 7 then
+                if
                     player:hasCompletedQuest(xi.quest.log_id.JEUNO, xi.quest.id.jeuno.STORMS_OF_FATE) and
                     player:getCurrentMission(xi.mission.log_id.ZILART) == xi.mission.id.zilart.AWAKENING and
                     player:getMissionStatus(xi.mission.log_id.ZILART) == 3 and
@@ -96,13 +89,7 @@ zoneObject.onEventFinish = function(player, csid, option)
         player:setCharVar("COP_louverance_story", 0)
         player:setCharVar("COP_tenzen_story", 0)
         player:setCharVar("COP_jabbos_story", 0)
-    elseif csid == 142 then
-        player:addQuest(xi.quest.log_id.JEUNO, xi.quest.id.jeuno.STORMS_OF_FATE)
-    elseif csid == 143 then
-        player:completeQuest(xi.quest.log_id.JEUNO, xi.quest.id.jeuno.STORMS_OF_FATE)
-        player:setCharVar('StormsOfFate', 0)
-        player:setCharVar("StormsOfFateWait", getVanaMidnight())
-    elseif csid == 161 then
+    if csid == 161 then
         npcUtil.giveKeyItem(player, xi.ki.NOTE_WRITTEN_BY_ESHANTARL)
         player:addQuest(xi.quest.log_id.JEUNO, xi.quest.id.jeuno.SHADOWS_OF_THE_DEPARTED)
         player:setCharVar("StormsOfFateWait", 0)

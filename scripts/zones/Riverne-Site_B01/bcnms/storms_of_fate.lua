@@ -40,12 +40,19 @@ battlefieldObject.onEventFinish = function(player, csid, option)
     if csid == 32001 then
         if
             player:getQuestStatus(xi.quest.log_id.JEUNO, xi.quest.id.jeuno.STORMS_OF_FATE) == QUEST_ACCEPTED and
-            player:getCharVar('StormsOfFate') == 2
+            player:getCharVar('Quest[3][86]Status') == 2
         then
             player:addKeyItem(xi.ki.WHISPER_OF_THE_WYRMKING)
             player:messageSpecial(ID.text.KEYITEM_OBTAINED, xi.ki.WHISPER_OF_THE_WYRMKING)
-            player:setCharVar('StormsOfFate', 3)
+            player:setCharVar("Quest[3][86]Status", 3)
             player:addTitle(xi.title.CONQUEROR_OF_FATE)
+        end
+        if xi.settings.main.ENABLE_COP_ZONE_CAP == 1 then
+            player:addStatusEffect(xi.effect.LEVEL_RESTRICTION, 50, 0, 0)
+        end
+    elseif csid == 32002 then
+        if xi.settings.main.ENABLE_COP_ZONE_CAP == 1 then
+            player:addStatusEffect(xi.effect.LEVEL_RESTRICTION, 50, 0, 0)
         end
     end
 end
