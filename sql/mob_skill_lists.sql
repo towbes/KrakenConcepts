@@ -2296,7 +2296,7 @@ INSERT INTO `mob_skill_lists` VALUES ('Gerjis',497,270); -- roar
 INSERT INTO `mob_skill_lists` VALUES ('Gerjis',497,271); -- razor_fang
 INSERT INTO `mob_skill_lists` VALUES ('Gerjis',497,273); -- claw_cyclone
 INSERT INTO `mob_skill_lists` VALUES ('Gerjis',497,1322); -- gerjis_grip
--- INSERT INTO `mob_skill_lists` VALUES ('Gerjis',497,1681); -- crossthrash
+INSERT INTO `mob_skill_lists` VALUES ('Gerjis',497,1340); -- crossthrash
 -- 498: Cyranuce_M_Cutauleon
 -- 499 to 699: free
 INSERT INTO `mob_skill_lists` VALUES ('Mammet',503,347);
@@ -4020,6 +4020,27 @@ INSERT INTO `mob_skill_lists` VALUES ('Automaton_Assault',5350,51); -- Freezebit
 INSERT INTO `mob_skill_lists` VALUES ('Automaton_Assault',5350,52); -- Shockwave
 INSERT INTO `mob_skill_lists` VALUES ('Automaton_Assault',5350,53); -- Crescent Moon
 INSERT INTO `mob_skill_lists` VALUES ('Automaton_Assault',5350,54); -- Sickle Moon
+
+INSERT INTO `mob_skill_lists` VALUES ('COP+_Bats',5351,393); -- jetstream
+INSERT INTO `mob_skill_lists` VALUES ('COP+_Bats',5351,395); -- sonic_boom
+INSERT INTO `mob_skill_lists` VALUES ('COP+_Bats',5351,1157); -- slipstream
+INSERT INTO `mob_skill_lists` VALUES ('COP+_Bats',5351,1158); -- turbulence
+
+INSERT INTO `mob_skill_lists` VALUES ('Colo-Colo',5352,392); -- ultrasonics
+INSERT INTO `mob_skill_lists` VALUES ('Colo-Colo',5352,394); -- blood_drain
+INSERT INTO `mob_skill_lists` VALUES ('Colo-Colo',5352,1155); -- subsonics
+INSERT INTO `mob_skill_lists` VALUES ('Colo-Colo',5352,1156); -- marrow_drain
+INSERT INTO `mob_skill_lists` VALUES ('Furies',5353,395); -- jetstream
+INSERT INTO `mob_skill_lists` VALUES ('Furies',5353,393); -- sonic_boom
+INSERT INTO `mob_skill_lists` VALUES ('Furies',5353,1157); -- slipstream
+INSERT INTO `mob_skill_lists` VALUES ('Furies',5353,1158); -- turbulence
+
+INSERT INTO `mob_skill_lists` VALUES ('Celery_Ghosts',5354,472); -- grave reel
+INSERT INTO `mob_skill_lists` VALUES ('Celery_Ghosts',5354,473); -- ectosmash
+INSERT INTO `mob_skill_lists` VALUES ('Celery_Ghosts',5354,474); -- fear touch
+INSERT INTO `mob_skill_lists` VALUES ('Celery_Ghosts',5354,475); -- terror touch
+INSERT INTO `mob_skill_lists` VALUES ('Celery_Ghosts',5354,477); -- dark sphere
+INSERT INTO `mob_skill_lists` VALUES ('Celery_Ghosts',5354,1339); -- bane
 
 
 

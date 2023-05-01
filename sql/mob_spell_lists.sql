@@ -5378,6 +5378,14 @@ INSERT INTO `mob_spell_lists` VALUES('Hume_Automaton',748,190,1,255); -- Stonega
 INSERT INTO `mob_spell_lists` VALUES('Hume_Automaton',748,195,1,255); -- Thundaga II (1~255)
 INSERT INTO `mob_spell_lists` VALUES('Hume_Automaton',748,200,1,255); -- Waterga II (1~255)
 
+-- Pilwiz (510)
+INSERT INTO `mob_spell_lists` VALUES('Pilwiz', 749, 190, 1, 255); -- Stonega II (1~255)
+
+-- Generic Doll (511)
+INSERT INTO `mob_spell_lists` VALUES('Generic_Doll', 750, 194, 1, 255); -- Thundaga (1~255)
+INSERT INTO `mob_spell_lists` VALUES('Generic_Doll', 750, 251, 1, 255); -- Shock Spikes (1~255)
+INSERT INTO `mob_spell_lists` VALUES('Generic_Doll', 750, 356, 1, 255); -- Paralyga (1~255)
+
 
 -- Jailer of Love (Light) (493)
 INSERT INTO `mob_spell_lists` VALUES ('Jailer_of_Love_Light',5024,21,1,255); -- Holy (1~255)
