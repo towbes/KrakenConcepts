@@ -39,8 +39,8 @@ local battlefields =
         { 2,  674,    0 },   -- Sheep in Antlion's Clothing (ENM)
         { 3,  675,    0 },   -- Shell We Dance? (ENM)
         { 4,  676,    0 },   -- Totentanz (ENM)
-    --  { 5,  677,    0 },   -- Tango with a Tracker (Quest)
-    --  { 6,  678,    0 },   -- Requiem of Sin (Quest)
+        { 5,  677,    0 },   -- Tango with a Tracker (Quest)
+        { 6,  678,    0 },   -- Requiem of Sin (Quest)
     --  { 7,  679, 3454 },   -- Antagonistic Ambuscade (HKC30)
     --  { 8,    ?,    0 },   -- *Head Wind (HTMBF)
     },
@@ -1079,12 +1079,12 @@ local function checkReqs(player, npc, bfid, registrant)
 
         [1024] = function() -- PM8-3: When Angels Fall
             return promathiaMission == xi.mission.id.cop.WHEN_ANGELS_FALL and
-                promathiaStatus == 4
+                player:getCharVar('Mission[6][828]Status') == 4
         end,
 
         [1056] = function() -- PM8-4: Dawn
             return promathiaMission == xi.mission.id.cop.DAWN and
-                promathiaStatus == 2
+                player:getCharVar('Mission[6][840]Status')
         end,
 
         [1057] = function() -- Apocalypse Nigh
@@ -1234,6 +1234,16 @@ local function checkReqs(player, npc, bfid, registrant)
                     promathiaMission == xi.mission.id.cop.ANCIENT_VOWS and
                     player:getCharVar('Mission[6][248]Status') >= 2
                 )
+        end,
+
+        [1024] = function() -- PM8-3: When Angels Fall
+            return player:hasCompletedMission(xi.mission.log_id.COP, mi.cop.WHEN_ANGELS_FALL) or
+            player:getCharVar('Mission[6][828]Status') >= 4
+        end,
+
+        [1056] = function()-- PM8-4: Dawn
+            return player:hasCompletedMission(xi.mission.log_id.COP, mi.cop.DAWN) or
+            player:getCharVar('Mission[6][840]Status') >= 2
         end,
 
         [1057] = function() -- Quest: Apocalypse Nigh
@@ -1618,16 +1628,16 @@ local function checkSkip(player, bfid)
         [1024] = function() -- PM8-3: When Angels Fall
             return player:hasCompletedMission(xi.mission.log_id.COP, xi.mission.id.cop.WHEN_ANGELS_FALL) or
                 (
-                    promathiaMission == xi.mission.id.cop.WHEN_ANGELS_FALL and
-                    promathiaStatus > 4
+                    promathiaMission == xi.mission.id.cop.WHEN_ANGELS_FALL or
+                    player:getCharVar('Mission[6][828]Status') >= 4
                 )
         end,
 
         [1056] = function() -- PM8-4: Dawn
             return player:hasCompletedMission(xi.mission.log_id.COP, xi.mission.id.cop.DAWN) or
                 (
-                    promathiaMission == xi.mission.id.cop.DAWN and
-                    promathiaStatus > 2
+                    promathiaMission == xi.mission.id.cop.DAWN or
+                    player:getCharVar('Mission[6][840]Status') >= 2
                 )
         end,
 

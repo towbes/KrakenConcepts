@@ -37,17 +37,7 @@ end
 zoneObject.onTriggerAreaEnter = function(player, triggerArea)
     local triggerAreaID = triggerArea:GetTriggerAreaID()
 
-    if triggerAreaID == 1 then
-        if player:getCurrentMission(xi.mission.log_id.COP) == xi.mission.id.cop.DAWN then
-            if
-                player:getCharVar("COP_3-taru_story") == 2 and
-                player:getCharVar("COP_shikarees_story") == 1 and
-                player:getCharVar("COP_louverance_story") == 3 and
-                player:getCharVar("COP_tenzen_story") == 1 and
-                player:getCharVar("COP_jabbos_story") == 1
-            then
-                player:startEvent(122)
-            if player:getCharVar("PromathiaStatus") == 7 then
+            if player:getCharVar("Mission[6][840]Status") == 8 then
                 if
                     player:hasCompletedQuest(xi.quest.log_id.JEUNO, xi.quest.id.jeuno.STORMS_OF_FATE) and
                     player:getCurrentMission(xi.mission.log_id.ZILART) == xi.mission.id.zilart.AWAKENING and
@@ -82,13 +72,6 @@ zoneObject.onEventUpdate = function(player, csid, option)
 end
 
 zoneObject.onEventFinish = function(player, csid, option)
-    if csid == 122 then
-        player:setCharVar("PromathiaStatus", 4)
-        player:setCharVar("COP_3-taru_story", 0)
-        player:setCharVar("COP_shikarees_story", 0)
-        player:setCharVar("COP_louverance_story", 0)
-        player:setCharVar("COP_tenzen_story", 0)
-        player:setCharVar("COP_jabbos_story", 0)
     if csid == 161 then
         npcUtil.giveKeyItem(player, xi.ki.NOTE_WRITTEN_BY_ESHANTARL)
         player:addQuest(xi.quest.log_id.JEUNO, xi.quest.id.jeuno.SHADOWS_OF_THE_DEPARTED)
