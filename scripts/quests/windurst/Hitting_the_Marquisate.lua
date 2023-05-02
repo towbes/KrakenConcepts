@@ -203,8 +203,10 @@ quest.sections =
             ['Yatniel'] =
             {
                 onTrade = function(player, npc, trade)
+                    local yatnielProgress = quest:getVar(player, 'yatnielProg')
                     if
-                        npcUtil.tradeHasExactly(trade, { { xi.items.QUAKE_GRENADE, 4 } })
+                    npcUtil.tradeHasExactly(trade, {{ xi.items.QUAKE_GRENADE, 4 }}) and
+                    yatnielProgress == 1
                     then
                         return quest:progressEvent(10031)
                     end
@@ -241,7 +243,12 @@ quest.sections =
             ['Hagain'] =
             {
                 onTrade = function(player, npc, trade)
-                    if npcUtil.tradeHasExactly(trade, xi.items.LUMP_OF_CHANDELIER_COAL) then
+                    local hagainProgress = quest:getVar(player, 'hagainProg')
+
+                    if
+                        npcUtil.tradeHasExactly(trade, xi.items.LUMP_OF_CHANDELIER_COAL) and
+                        hagainProgress == 1
+                    then
                         return quest:progressEvent(10005)
                     end
                 end,
