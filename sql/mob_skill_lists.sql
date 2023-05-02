@@ -1760,7 +1760,7 @@ INSERT INTO `mob_skill_lists` VALUES ('Goblin',373,1106);
 INSERT INTO `mob_skill_lists` VALUES ('Goblin',373,1107);
 INSERT INTO `mob_skill_lists` VALUES ('Goblin',373,1108);
 INSERT INTO `mob_skill_lists` VALUES ('Goblin',373,1109);
-INSERT INTO `mob_skill_lists` VALUES ('Fly',374,660);
+INSERT INTO `mob_skill_lists` VALUES ('Fly',374,660); -- Venom only
 INSERT INTO `mob_skill_lists` VALUES ('FlyDark',375,318);
 INSERT INTO `mob_skill_lists` VALUES ('FlyDark',375,659);
 INSERT INTO `mob_skill_lists` VALUES ('FlyDark',375,660);
@@ -3971,7 +3971,7 @@ INSERT INTO `mob_skill_lists` VALUES ('Cyranuce_M_Cutauleon',5334,822); -- Chaos
 INSERT INTO `mob_skill_lists` VALUES ('Waughroon_Kid',5335,581); -- blow
 INSERT INTO `mob_skill_lists` VALUES ('Waughroon_Kid',5335,583); -- beatdown
 
-INSERT INTO `mob_skill_lists` VALUES ('Shooting_Fish',5336,1865); -- knockback splashbreath
+INSERT INTO `mob_skill_lists` VALUES ('Shooting_Fish',5336,313); -- knockback splashbreath
 
 INSERT INTO `mob_skill_lists` VALUES ('Osschaart',5337,549); -- eyes on me
 INSERT INTO `mob_skill_lists` VALUES ('Osschaart',5337,550); -- hypnosis
