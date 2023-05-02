@@ -57,7 +57,7 @@ local loot =
             { itemid = 4896, droprate = 174 }, -- firespirit
             { itemid = 4751, droprate =  16 }, -- vile elixir
             { itemid = 4714, droprate = 114 }, -- icespikes
-            { itemid = 4874, droprate = 174 }, -- refresh
+            { itemid = 4717, droprate = 174 }, -- refresh
             { itemid = 4947, droprate = 138 }, -- utsusemi ni
             { itemid =  772, droprate =  18 }, -- green rock
             { itemid =  775, droprate =  18 }, -- black rock
@@ -84,7 +84,7 @@ local loot =
 
         {
             { itemid = 4714, droprate = 87 }, -- icespikes
-            { itemid = 4874, droprate = 75 }, -- refresh
+            { itemid = 4717, droprate = 75 }, -- refresh
             { itemid = 4947, droprate = 75 }, -- utsusemi ni
             { itemid =  699, droprate = 80 }, -- oak log
             { itemid =  701, droprate = 97 }, -- rosewood log
