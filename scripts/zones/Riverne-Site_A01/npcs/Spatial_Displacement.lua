@@ -26,6 +26,7 @@ entity.onEventUpdate = function(player, csid, option, extras)
     if csid == 32003 then
         xi.bcnm.onEventUpdate(player, csid, option, extras)
     end
+end
 
 entity.onEventFinish = function(player, csid, option)
     if csid == 35 and option == 1 then

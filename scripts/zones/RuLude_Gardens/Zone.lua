@@ -37,30 +37,28 @@ end
 zoneObject.onTriggerAreaEnter = function(player, triggerArea)
     local triggerAreaID = triggerArea:GetTriggerAreaID()
 
-            if player:getCharVar("Mission[6][840]Status") == 8 then
-                if
-                    player:hasCompletedQuest(xi.quest.log_id.JEUNO, xi.quest.id.jeuno.STORMS_OF_FATE) and
-                    player:getCurrentMission(xi.mission.log_id.ZILART) == xi.mission.id.zilart.AWAKENING and
-                    player:getMissionStatus(xi.mission.log_id.ZILART) == 3 and
-                    player:getQuestStatus(xi.quest.log_id.JEUNO, xi.quest.id.jeuno.SHADOWS_OF_THE_DEPARTED) == QUEST_AVAILABLE and
-                    player:getCharVar("StormsOfFateWait") <= os.time()
-                then
-                    player:startEvent(161)
-                elseif
-                    player:hasKeyItem(xi.ki.PROMYVION_HOLLA_SLIVER) and
-                    player:hasKeyItem(xi.ki.PROMYVION_MEA_SLIVER) and
-                    player:hasKeyItem(xi.ki.PROMYVION_DEM_SLIVER)
-                then
-                    player:startEvent(162)
-                elseif
-                    player:hasCompletedQuest(xi.quest.log_id.JEUNO, xi.quest.id.jeuno.SHADOWS_OF_THE_DEPARTED) and
-                    player:getQuestStatus(xi.quest.log_id.JEUNO, xi.quest.id.jeuno.APOCALYPSE_NIGH) == QUEST_AVAILABLE and
-                    player:getLocalVar('ANZONE') == 0 and
-                    player:getCharVar("ApocNighWait") <= os.time()
-                then
-                    player:startEvent(123)
-                end
-            end
+     if player:getCharVar("Mission[6][840]Status") == 8 then
+        if
+            player:hasCompletedQuest(xi.quest.log_id.JEUNO, xi.quest.id.jeuno.STORMS_OF_FATE) and
+            player:getCurrentMission(xi.mission.log_id.ZILART) == xi.mission.id.zilart.AWAKENING and
+            player:getMissionStatus(xi.mission.log_id.ZILART) == 3 and
+            player:getQuestStatus(xi.quest.log_id.JEUNO, xi.quest.id.jeuno.SHADOWS_OF_THE_DEPARTED) == QUEST_AVAILABLE and
+            player:getCharVar("StormsOfFateWait") <= os.time()
+        then
+            player:startEvent(161)
+        elseif
+            player:hasKeyItem(xi.ki.PROMYVION_HOLLA_SLIVER) and
+            player:hasKeyItem(xi.ki.PROMYVION_MEA_SLIVER) and
+            player:hasKeyItem(xi.ki.PROMYVION_DEM_SLIVER)
+        then
+            player:startEvent(162)
+        elseif
+            player:hasCompletedQuest(xi.quest.log_id.JEUNO, xi.quest.id.jeuno.SHADOWS_OF_THE_DEPARTED) and
+            player:getQuestStatus(xi.quest.log_id.JEUNO, xi.quest.id.jeuno.APOCALYPSE_NIGH) == QUEST_AVAILABLE and
+            player:getLocalVar('ANZONE') == 0 and
+            player:getCharVar("ApocNighWait") <= os.time()
+        then
+            player:startEvent(123)
         end
     end
 end

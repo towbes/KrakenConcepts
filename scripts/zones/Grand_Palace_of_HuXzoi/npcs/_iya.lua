@@ -10,13 +10,13 @@ require("scripts/globals/quests")
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)
-end
-
-if player:getQuestStatus(xi.quest.log_id.JEUNO, xi.quest.id.jeuno.APOCALYPSE_NIGH) == QUEST_ACCEPTED and
+    if 
+        player:getQuestStatus(xi.quest.log_id.JEUNO, xi.quest.id.jeuno.APOCALYPSE_NIGH) == QUEST_ACCEPTED and
         player:getCharVar('ApocalypseNigh') == 2
     then
         player:startEvent(4)
     end
+    return 1
 end
 
 entity.onEventUpdate = function(player, csid, option)
