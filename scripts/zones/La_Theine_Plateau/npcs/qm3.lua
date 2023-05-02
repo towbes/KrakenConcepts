@@ -1,9 +1,11 @@
 -----------------------------------
 -- Area: La Theine Plateau
 --  NPC:??? (qm3)
--- Involved in Quest: I Can Hear A Rainbow
+-- Involved in Quest: I Can Hear A Rainbow, Waking the Beast
 -----------------------------------
 local ID = require("scripts/zones/La_Theine_Plateau/IDs")
+require("scripts/globals/spell_data")
+require("scripts/globals/keyitems")
 require("scripts/globals/npc_util")
 require("scripts/globals/quests")
 require("scripts/globals/status")

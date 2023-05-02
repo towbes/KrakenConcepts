@@ -380,7 +380,7 @@ local battlefields =
     {
         { 0,  224,    0 },   -- The Moonlit Path (Quest)
         { 1,  225,    0 },   -- Moon Reading (Windurst 9-2)
-    --  { 2,  226,    0 },   -- Waking the Beast (Quest)
+        { 2,  226,    0 },   -- Waking the Beast (Quest)
     --  { 3,  227,    0 },   -- Battaru Royale (ASA10)
     --  { 4,    ?,    0 },   -- *The Moonlit Path (HTMBF)
     --  { 5,    ?,    0 },   -- *Waking the Beast (HTMBF)
@@ -435,7 +435,7 @@ local battlefields =
         { 0,  416,    0 },   -- Trial by Wind (Quest)
         { 1,  417, 1174 },   -- Carbuncle Debacle (Quest)
         { 2,  418, 1546 },   -- Trial-size Trial by Wind (Quest)
-    --  { 3,  419,    0 },   -- Waking the Beast (Quest)
+        { 3,  419,    0 },   -- Waking the Beast (Quest)
         { 4,  420,    0 },   -- Sugar-coated Directive (ASA4)
     --  { 5,    ?,    0 },   -- *Trial by Wind (HTMBF)
     },
@@ -445,7 +445,7 @@ local battlefields =
         { 0,  448,    0 },   -- Trial by Lightning (Quest)
         { 1,  449, 1172 },   -- Carbuncle Debacle (Quest)
         { 2,  450, 1548 },   -- Trial-size Trial by Lightning (Quest)
-    --  { 3,  451,    0 },   -- Waking the Beast (Quest)
+        { 3,  451,    0 },   -- Waking the Beast (Quest)
         { 4,  452,    0 },   -- Sugar-coated Directive (ASA4)
     --  { 5,    ?,    0 },   -- *Trial by Lightning (HTMBF)
     },
@@ -455,7 +455,7 @@ local battlefields =
         { 0,  480,    0 },   -- Trial by Ice (Quest)
         { 1,  481, 1171 },   -- Class Reunion (Quest)
         { 2,  482, 1545 },   -- Trial-size Trial by Ice (Quest)
-    --  { 3,  483,    0 },   -- Waking the Beast (Quest)
+        { 3,  483,    0 },   -- Waking the Beast (Quest)
         { 4,  484,    0 },   -- Sugar-coated Directive (ASA4)
     --  { 5,    ?,    0 },   -- *Trial by Ice (HTMBF)
     },
@@ -494,7 +494,7 @@ local battlefields =
     {
         { 0,  544,    0 },   -- Trial by Fire (Quest)
         { 1,  545, 1544 },   -- Trial-size Trial by Fire (Quest)
-    --  { 2,  546,    0 },   -- Waking the Beast (Quest)
+        { 2,  546,    0 },   -- Waking the Beast (Quest)
         { 3,  547,    0 },   -- Sugar-coated Directive (ASA4)
     --  { 4,    ?,    0 },   -- *Trial by Fire (HTMBF)
     },
@@ -504,7 +504,7 @@ local battlefields =
         { 0,  576,    0 },   -- Trial by Earth (Quest)
         { 1,  577, 1169 },   -- The Puppet Master (Quest)
         { 2,  578, 1547 },   -- Trial-size Trial by Earth (Quest)
-    --  { 3,  579,    0 },   -- Waking the Beast (Quest)
+        { 3,  579,    0 },   -- Waking the Beast (Quest)
         { 4,  580,    0 },   -- Sugar-coated Directive (ASA4)
     --  { 5,    ?,    0 },   -- *Trial by Earth (HTMBF)
     },
@@ -513,7 +513,7 @@ local battlefields =
     {
         { 0,  608,    0 },   -- Trial by Water (Quest)
         { 1,  609, 1549 },   -- Trial-size Trial by Water (Quest)
-    --  { 2,  610,    0 },   -- Waking the Beast (Quest)
+        { 2,  610,    0 },   -- Waking the Beast (Quest)
         { 3,  611,    0 },   -- Sugar-coated Directive (ASA4)
     --  { 4,    ?,    0 },   -- *Trial by Water (HTMBF)
     },
@@ -696,6 +696,15 @@ local function checkReqs(player, npc, bfid, registrant)
                 zilartStatus == 2
         end,
 
+        [226] = function() -- Quest: Waking the Beast
+            return player:hasKeyItem(xi.ki.EYE_OF_GALES) and 
+                player:hasKeyItem(xi.ki.EYE_OF_FLAMES) and 
+                player:hasKeyItem(xi.ki.EYE_OF_FROST) and
+                player:hasKeyItem(xi.ki.EYE_OF_STORMS) and 
+                player:hasKeyItem(xi.ki.EYE_OF_TIDES) and
+                player:hasKeyItem(xi.ki.EYE_OF_TREMORS)
+        end,
+
         [288] = function() -- ZM14: Ark Angels (Hume)
             return zilartMission == xi.mission.id.zilart.ARK_ANGELS and
                 zilartStatus == 1 and
@@ -752,6 +761,11 @@ local function checkReqs(player, npc, bfid, registrant)
             return mainJob == xi.job.SMN and mainLevel >= 20
         end,
 
+        [419] = function() -- Quest: Waking the Beast (Cloister of Gales)
+            return player:hasKeyItem(xi.ki.RAINBOW_RESONATOR) and
+            not player:hasKeyItem(xi.ki.EYE_OF_GALES)
+        end,
+
         [420] = function() -- ASA4: Sugar-coated Directive
             return asaMission >= xi.mission.id.asa.SUGAR_COATED_DIRECTIVE and
                 player:hasKeyItem(xi.ki.DOMINAS_EMERALD_SEAL)
@@ -769,6 +783,11 @@ local function checkReqs(player, npc, bfid, registrant)
             return mainJob == xi.job.SMN and mainLevel >= 20
         end,
 
+        [451] = function() -- Quest: Waking the Beast (Cloister of Storms)
+            return player:hasKeyItem(xi.ki.RAINBOW_RESONATOR) and
+            not player:hasKeyItem(xi.ki.EYE_OF_STORMS)
+        end,
+
         [452] = function() -- ASA4: Sugar-coated Directive
             return asaMission >= xi.mission.id.asa.SUGAR_COATED_DIRECTIVE and
                 player:hasKeyItem(xi.ki.DOMINAS_VIOLET_SEAL)
@@ -784,6 +803,11 @@ local function checkReqs(player, npc, bfid, registrant)
 
         [482] = function() -- Quest: Trial-size Trial by Ice
             return mainJob == xi.job.SMN and mainLevel >= 20
+        end,
+
+        [483] = function() -- Quest: Waking the Beast (Cloister of Frost)
+            return player:hasKeyItem(xi.ki.RAINBOW_RESONATOR) and
+            not player:hasKeyItem(xi.ki.EYE_OF_FROST)
         end,
 
         [484] = function() -- ASA4: Sugar-coated Directive
@@ -835,6 +859,11 @@ local function checkReqs(player, npc, bfid, registrant)
             return mainJob == xi.job.SMN and mainLevel >= 20
         end,
 
+        [546] = function() -- Quest: Waking the Beast (Cloister of Flames)
+            return player:hasKeyItem(xi.ki.RAINBOW_RESONATOR) and
+            not player:hasKeyItem(xi.ki.EYE_OF_FLAMES)
+        end,
+
         [547] = function() -- ASA4: Sugar-coated Directive
             return asaMission >= xi.mission.id.asa.SUGAR_COATED_DIRECTIVE and
                 player:hasKeyItem(xi.ki.DOMINAS_SCARLET_SEAL)
@@ -852,6 +881,11 @@ local function checkReqs(player, npc, bfid, registrant)
             return mainJob == xi.job.SMN and mainLevel >= 20
         end,
 
+        [579] = function() -- Quest: Waking the Beast (Cloister of Tremors)
+            return player:hasKeyItem(xi.ki.RAINBOW_RESONATOR) and
+            not player:hasKeyItem(xi.ki.EYE_OF_TREMORS)
+        end,
+
         [580] = function() -- ASA4: Sugar-coated Directive
             return asaMission >= xi.mission.id.asa.SUGAR_COATED_DIRECTIVE and
                 player:hasKeyItem(xi.ki.DOMINAS_AMBER_SEAL)
@@ -863,6 +897,11 @@ local function checkReqs(player, npc, bfid, registrant)
 
         [609] = function() -- Quest: Trial-size Trial by Water
             return mainJob == xi.job.SMN and mainLevel >= 20
+        end,
+
+        [610] = function() -- Quest: Waking the Beast (Cloister of Tides)
+            return player:hasKeyItem(xi.ki.RAINBOW_RESONATOR) and
+            not player:hasKeyItem(xi.ki.EYE_OF_TIDES)
         end,
 
         [611] = function() -- ASA4: Sugar-coated Directive
