@@ -96,6 +96,11 @@ zoneObject.onEventUpdate = function(player, csid, option)
 end
 
 zoneObject.onEventFinish = function(player, csid, option)
+    if csid >= 100 and csid <= 120 then
+        for _, entry in pairs(player:getNotorietyList()) do
+            entry:clearEnmity(player) -- reset hate on player after teleporting
+        end
+    end
 end
 
 return zoneObject

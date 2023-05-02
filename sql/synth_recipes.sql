@@ -4753,6 +4753,8 @@ INSERT INTO `synth_recipes` VALUES (75531,0,0,0,0,0,0,0,0,10,0,4099,4241,2773,27
 INSERT INTO `synth_recipes` VALUES (75532,1,0,0,0,0,0,34,0,0,0,4100,4242,12994,0,0,0,0,0,0,0,818,818,848,848,2,3,1,2,'Shoes (desynth)');
 INSERT INTO `synth_recipes` VALUES (75533,1,0,0,0,0,25,0,0,0,0,4100,4242,12722,0,0,0,0,0,0,0,834,819,819,819,2,5,6,7,'Bracers (desynth)'); -- FFXIclopedia
 
+INSERT INTO `synth_recipes` VALUES (76000,1,0,0,0,0,36,0,0,0,0,4100,4242,12842,0,0,0,0,0,0,0,819,819,819,819,3,6,6,6,'Soil_Sitabaki_Desynth');
+
 -- -----------
 -- RECIPES END
 

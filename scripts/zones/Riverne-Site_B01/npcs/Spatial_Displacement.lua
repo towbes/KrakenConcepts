@@ -34,6 +34,10 @@ entity.onEventFinish = function(player, csid, option)
         -- TODO: Go! Go! Gobmuffin quest. Player just ported to J-6 island
     elseif csid == 32003 then
         xi.bcnm.onEventFinish(player, csid, option)
+    elseif csid >= 2 and csid <= 41 then
+        for _, entry in pairs(player:getNotorietyList()) do
+            entry:clearEnmity(player) -- reset hate on player after teleporting
+        end
     end
 end
 
