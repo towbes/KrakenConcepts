@@ -5427,6 +5427,9 @@ INSERT INTO `mob_spell_lists` VALUES('Gwyn_Ap_Knudd', 753, 196, 1, 255); -- thun
 INSERT INTO `mob_spell_lists` VALUES('Gwyn_Ap_Knudd', 753, 245, 1, 255); -- drain (1~255)
 INSERT INTO `mob_spell_lists` VALUES('Gwyn_Ap_Knudd', 753, 247, 1, 255); -- aspir (1~255)
 
+-- Koenigstiger (5057)
+INSERT INTO `mob_spell_lists` VALUES ('Koenigstiger',754,366,1,255);-- graviga
+
 -- Jailer of Love (Light) (493)
 INSERT INTO `mob_spell_lists` VALUES ('Jailer_of_Love_Light',5024,21,1,255); -- Holy (1~255)
 INSERT INTO `mob_spell_lists` VALUES ('Jailer_of_Love_Light',5024,30,1,255); -- Banish III (1~255)
