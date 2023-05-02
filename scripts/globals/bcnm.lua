@@ -953,7 +953,7 @@ local function checkReqs(player, npc, bfid, registrant)
         end,
 
         [677] = function() -- Quest: Tango with a Tracker
-            return player:hasKeyItem(xi.ki.LETTER_FROM_SHIKAREE_X)
+            return player:hasKeyItem(xi.ki.LETTER_FROM_SHIKAREE_X) or player:hasKeyItem(xi.ki.LETTER_FROM_THE_MITHRAN_TRACKERS)   
         end,
 
         [678] = function() -- Quest: Requiem of Sin
@@ -1555,6 +1555,14 @@ local function checkSkip(player, bfid)
                 )
         end,
 
+        [677] = function()  -- Quest: Tango with a Tracker
+            return player:hasKeyItem(xi.ki.LETTER_FROM_SHIKAREE_X)
+        end,
+
+        [678] = function() -- Quest: Requiem of Sin
+            return player:hasKeyItem(xi.ki.LETTER_FROM_SHIKAREE_Y) or player:hasKeyItem(xi.ki.LETTER_FROM_MITHRAN_TRACKERS)
+        end,
+
         [704] = function() -- PM3-5: Darkness Named
             return player:hasCompletedMission(xi.mission.log_id.COP, xi.mission.id.cop.DARKNESS_NAMED) or
                 (
@@ -1928,7 +1936,7 @@ xi.bcnm.onEventUpdate = function(player, csid, option, extras)
 
             return false
         else
-            -- Only allow entrance if battlefield is open and playerhas battlefield effect, witch can be lost mid battlefield selection.
+            -- Only allow entrance if battlefield is open and player has battlefield effect, which can be lost mid battlefield selection.
             if
                 not player:getBattlefield() and
                 player:hasStatusEffect(xi.effect.BATTLEFIELD)

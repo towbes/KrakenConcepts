@@ -55,12 +55,12 @@ entity.onTrigger = function(player, npc)
             },
 
             {
-                { itemid = xi.items.HI_POTION_III, droprate = 400 },
+                { itemid = xi.items.HI_POTION_P3, droprate = 400 },
                 { itemid = 0,                      droprate = 600 },
             },
 
             {
-                { itemid = xi.items.HI_POTION_III, droprate = 200 },
+                { itemid = xi.items.HI_POTION_P3, droprate = 200 },
                 { itemid = 0,                      droprate = 800 },
             },
         },
@@ -86,7 +86,7 @@ entity.onTrigger = function(player, npc)
         [xi.assault.mission.TROLL_FUGITIVES] =
         {
             {
-                { itemid = xi.items.HI_POTION_III, droprate = 800 },
+                { itemid = xi.items.HI_POTION_P3, droprate = 800 },
                 { itemid = 0,                      droprate = 200 },
             },
 

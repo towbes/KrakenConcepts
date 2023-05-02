@@ -14,7 +14,7 @@ end
 
 mobskillObject.onMobWeaponSkill = function(target, mob, skill)
     local typeEffect = xi.effect.CHARM_I
-    local power = 0
+    local power = 100
     local job = target:getMainJob()
     local pos = mob:getPos()
     local id = mob:getID()
