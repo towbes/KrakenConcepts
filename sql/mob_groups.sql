@@ -13014,6 +13014,7 @@ INSERT INTO `mob_groups` VALUES (45,6544,200,'Fallen_Evacuee_war',300,0,809,0,0,
 INSERT INTO `mob_groups` VALUES (46,6547,200,'Fallen_Officer_war',300,0,814,0,0,52,55,0);
 INSERT INTO `mob_groups` VALUES (47,6548,200,'Fallen_Soldier_war',300,0,815,0,0,47,49,0);
 INSERT INTO `mob_groups` VALUES (48,6891,200,'Mephitas',0,128,0,0,0,99,99,0);
+INSERT INTO `mob_groups` VALUES (49,8011,200,'Wanzo-Unzozo',0,128,0,0,0,45,45,0);
 
 -- ------------------------------------------------------------
 -- Cloister_of_Gales (Zone 201)

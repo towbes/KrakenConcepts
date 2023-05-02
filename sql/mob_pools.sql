@@ -7159,6 +7159,12 @@ INSERT INTO `mob_pools` VALUES (8009,'Nightmare_Bats_COP+','Nightmare_Bats_COP+'
 
 -- Ouryu Cometh
 INSERT INTO `mob_pools` VALUES (8010,'Ouryu','Ouryu',259,_binary 0x0000620200000000000000000000000000000000,7,4,7,240,125,1040,1,1,0,18,648,32,297,1183,0,0,109,0,0,259,259);
+
+
+-- Escort NPCS
+INSERT INTO `mob_pools` VALUES (8011,'Wanzo-Unzozo','Wanzo-Unzozo',145,0x01000205111011201130034003507B6000700000,2,2,1,480,100,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,149);
+-- INSERT INTO `mob_pools` VALUES (8012,'Olavia','Olavia',145,0x010002020A101A201B301B401B50AD6000700000,2,2,1,480,100,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,149);
+-- INSERT INTO `mob_pools` VALUES (8013,'Rondipur','Rondipur',145,0x01000E03001068200A3005400550006000700000,2,2,1,480,100,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,149);
 -- ------------------------------------------------------------
 -- Start of Ambuscade section
 -- NOTE: The mobs are changed every update in the DATs, so using out-of-date
