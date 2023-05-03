@@ -17,8 +17,6 @@ entity.onTrigger = function(player, npc)
 
     if MirrorMirror == QUEST_ACCEPTED and MirrorMirrorProgress == 1 then
         player:startEvent(745,0,0,0,0,0,0,0,fellowParam)
-    else
-        player:startEvent(651) -- 651 starts quest "A Job For The Consortium"
     end
 end
 
