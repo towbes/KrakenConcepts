@@ -56,7 +56,7 @@ local battlefields =
     [xi.zone.MINE_SHAFT_2716] =
     {
         { 0,  736,    0 },   -- A Century of Hardship (PM5-3 L3)
-    --  { 1,  737,    0 },   -- Return to the Depths (Quest)
+        { 1,  737,    0 },   -- Return to the Depths (Quest)
         { 2,  738,    0 },   -- Bionic Bug (ENM)
     --  { 3,  739,    0 },   -- Pulling the Strings (ENM)
         { 4,  740,    0 },   -- Automaton Assault (ENM)
@@ -978,6 +978,10 @@ local function checkReqs(player, npc, bfid, registrant)
                 player:getMissionStatus(xi.mission.log_id.COP, xi.mission.status.COP.LOUVERANCE) == 8
         end,
 
+        [737] = function() -- Quest: Return to the Depths
+            return (player:getCharVar("Quest[1][78]prog") == 9)
+        end,
+
         [738] = function() -- ENM: Bionic Bug
             return player:hasKeyItem(xi.ki.SHAFT_2716_OPERATING_LEVER)
         end,
@@ -1174,6 +1178,11 @@ local function checkReqs(player, npc, bfid, registrant)
 
         [705] = function() -- ENM: Test Your Mite
             return player:hasKeyItem(xi.ki.ASTRAL_COVENANT)
+        end,
+
+        [737] = function() -- Quest: Return to the Depths
+            return (player:getCharVar("Quest[1][78]prog") >= 9 or
+            player:hasCompletedQuest(xi.quest.log_id.BASTOK, xi.quest.id.bastok.RETURN_TO_THE_DEPTHS))
         end,
 
         [738] = function() -- ENM: Bionic Bug

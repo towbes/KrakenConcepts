@@ -803,6 +803,7 @@ public:
     bool isAggroable();
 
     void setDelay(uint16 delay);   // sets a mobs weapon delay
+    int16 getDelay();               // return the delay value
     void setDamage(uint16 damage); // sets a mobs weapon damage
     bool hasSpellList();
     void setSpellList(uint16 spellList);
@@ -810,6 +811,8 @@ public:
     void setMagicCastingEnabled(bool state); // halt/resumes casting magic
     void setMobAbilityEnabled(bool state);   // halt/resumes mob skills
     void setMobSkillAttack(int16 listId);    // enable/disable using mobskills as regular attacks
+    bool  isMagicCastingEnabled();            // return a true/false value if mob is able to auto-cast
+    bool  isAutoAttackEnabled();              // returns true if the mob can auto-attack
 
     int16 getMobMod(uint16 mobModID);
     void  setMobMod(uint16 mobModID, int16 value);

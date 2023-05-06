@@ -5488,6 +5488,38 @@ INSERT INTO `mob_spell_lists` VALUES ('Bloody_Coffin',761,231,1,255);  -- Bio II
 INSERT INTO `mob_spell_lists` VALUES ('Bloody_Coffin',761,250,1,255);  -- Ice Spikes (1~255)
 INSERT INTO `mob_spell_lists` VALUES ('Bloody_Coffin',761,254,1,255);  -- Blind (1~255)
 
+-- Moblin Wisewoman (5058)
+INSERT INTO `mob_spell_lists` VALUES ('Moblin_Wisewoman',762,57,1,255); -- Haste
+INSERT INTO `mob_spell_lists` VALUES ('Moblin_Wisewoman',762,108,1,255); -- Regen
+INSERT INTO `mob_spell_lists` VALUES ('Moblin_Wisewoman',762,259,1,255); -- Sleep II
+INSERT INTO `mob_spell_lists` VALUES ('Moblin_Wisewoman',762,260,1,255); -- Dispel
+
+-- Moblin Clergyman (5059)
+INSERT INTO `mob_spell_lists` VALUES ('Moblin_Clergyman',763,4,1,255); -- Cure IV
+INSERT INTO `mob_spell_lists` VALUES ('Moblin_Clergyman',763,21,1,255); -- Holy
+INSERT INTO `mob_spell_lists` VALUES ('Moblin_Clergyman',763,45,1,255); -- Protect III
+INSERT INTO `mob_spell_lists` VALUES ('Moblin_Clergyman',763,143,1,255); -- Erase
+
+-- Twilotak (5060)
+INSERT INTO `mob_spell_lists` VALUES ('Twilotak',764,144,1,255); -- Fire
+INSERT INTO `mob_spell_lists` VALUES ('Twilotak',764,149,1,255); -- Blizzard
+INSERT INTO `mob_spell_lists` VALUES ('Twilotak',764,154,1,255); -- Aero
+INSERT INTO `mob_spell_lists` VALUES ('Twilotak',764,160,1,255); -- Stone II
+INSERT INTO `mob_spell_lists` VALUES ('Twilotak',764,164,1,255); -- Thunder
+INSERT INTO `mob_spell_lists` VALUES ('Twilotak',764,169,1,255); -- Water
+INSERT INTO `mob_spell_lists` VALUES ('Twilotak',764,220,1,255); -- Poison
+INSERT INTO `mob_spell_lists` VALUES ('Twilotak',764,231,1,255); -- Bio II
+INSERT INTO `mob_spell_lists` VALUES ('Twilotak',764,245,1,255); -- Drain
+INSERT INTO `mob_spell_lists` VALUES ('Twilotak',764,247,1,255); -- Aspir
+INSERT INTO `mob_spell_lists` VALUES ('Twilotak',764,252,1,255); -- Stun
+INSERT INTO `mob_spell_lists` VALUES ('Twilotak',764,266,1,255); -- Absorb-STR
+INSERT INTO `mob_spell_lists` VALUES ('Twilotak',764,267,1,255); -- Absorb-DEX
+INSERT INTO `mob_spell_lists` VALUES ('Twilotak',764,268,1,255); -- Absorb-VIT
+INSERT INTO `mob_spell_lists` VALUES ('Twilotak',764,269,1,255); -- Absorb-AGI
+INSERT INTO `mob_spell_lists` VALUES ('Twilotak',764,270,1,255); -- Absorb-INT
+INSERT INTO `mob_spell_lists` VALUES ('Twilotak',764,271,1,255); -- Absorb-MND
+INSERT INTO `mob_spell_lists` VALUES ('Twilotak',764,272,1,255); -- Absorb-CHR
+
 -- Jailer of Love (Light) (493)
 INSERT INTO `mob_spell_lists` VALUES ('Jailer_of_Love_Light',5024,21,1,255); -- Holy (1~255)
 INSERT INTO `mob_spell_lists` VALUES ('Jailer_of_Love_Light',5024,30,1,255); -- Banish III (1~255)

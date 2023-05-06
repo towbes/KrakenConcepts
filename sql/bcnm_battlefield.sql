@@ -1491,6 +1491,28 @@ INSERT INTO `bcnm_battlefield` VALUES (736,3,16830475,3);
 INSERT INTO `bcnm_battlefield` VALUES (736,3,16830478,3);
 INSERT INTO `bcnm_battlefield` VALUES (736,3,16830477,3);
 INSERT INTO `bcnm_battlefield` VALUES (736,3,16830479,3);
+    -- Return to the Depths (737)
+INSERT INTO `bcnm_battlefield` VALUES (737,1,16830480,3), -- Twilotak
+INSERT INTO `bcnm_battlefield` VALUES (737,1,16830481,1), -- Moblin Wisewoman
+INSERT INTO `bcnm_battlefield` VALUES (737,1,16830483,1),
+INSERT INTO `bcnm_battlefield` VALUES (737,1,16830485,1),
+INSERT INTO `bcnm_battlefield` VALUES (737,1,16830482,1), -- Moblin Clergyman
+INSERT INTO `bcnm_battlefield` VALUES (737,1,16830484,1),
+INSERT INTO `bcnm_battlefield` VALUES (737,1,16830486,1),
+INSERT INTO `bcnm_battlefield` VALUES (737,2,16830487,3),
+INSERT INTO `bcnm_battlefield` VALUES (737,2,16830488,1),
+INSERT INTO `bcnm_battlefield` VALUES (737,2,16830490,1),
+INSERT INTO `bcnm_battlefield` VALUES (737,2,16830492,1),
+INSERT INTO `bcnm_battlefield` VALUES (737,2,16830489,1),
+INSERT INTO `bcnm_battlefield` VALUES (737,2,16830491,1),
+INSERT INTO `bcnm_battlefield` VALUES (737,2,16830493,1),
+INSERT INTO `bcnm_battlefield` VALUES (737,3,16830494,3),
+INSERT INTO `bcnm_battlefield` VALUES (737,3,16830495,1),
+INSERT INTO `bcnm_battlefield` VALUES (737,3,16830497,1),
+INSERT INTO `bcnm_battlefield` VALUES (737,3,16830499,1),
+INSERT INTO `bcnm_battlefield` VALUES (737,3,16830496,1),
+INSERT INTO `bcnm_battlefield` VALUES (737,3,16830498,1),
+INSERT INTO `bcnm_battlefield` VALUES (737,3,16830500,1);
 INSERT INTO `bcnm_battlefield` VALUES (738,1,16830501,3); -- Bionic Bug
 INSERT INTO `bcnm_battlefield` VALUES (738,2,16830503,3);
 INSERT INTO `bcnm_battlefield` VALUES (738,3,16830505,3);
