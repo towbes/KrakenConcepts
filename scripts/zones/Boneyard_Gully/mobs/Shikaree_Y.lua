@@ -5,7 +5,7 @@
 --  Mission: CoP 5-3 Ulmia's Path (Head Wind)
 -----------------------------------
 local ID = require("scripts/zones/Boneyard_Gully/IDs")
-mixins = {require("scripts/mixins/job_special")}
+mixins = { require("scripts/mixins/job_special") }
 require("scripts/globals/spell_data")
 require("scripts/globals/status")
 -----------------------------------
@@ -18,16 +18,10 @@ local dialogue =
     ID.text.HONEYCAKES,
 }
 
-entity.onMobEngaged = function(mob, target)
-    mob:messageText(mob, ID.text.BLOOD_RACING)
-end
-
 entity.onMobSpawn = function(mob)
-    mob:timer(1, function(mobArg)
-        mobArg:setMobMod(xi.mobMod.SKILL_LIST, 0)
-        mobArg:setMod(xi.mod.SLEEPRES, 50)
-    end)
-
+        mob:setMobMod(xi.mobMod.SKILL_LIST, 0)
+        mob:setMod(xi.mod.SLEEPRES, 50)
+        
     mob:addListener("ATTACK", "SHIKAREE_Y_ATTACK", function(attacker, defender, action)
         if math.random() < 0.25 then
             attacker:setTP(3000)
@@ -51,6 +45,10 @@ entity.onMobWeaponSkill = function(target, mob, skill)
     mob:setMobMod(xi.mobMod.SKILL_LIST, 0)
     mob:setLocalVar("control", 0)
     mob:setLocalVar("TP", 0)
+end
+
+entity.onMobEngaged = function(mob, target)
+    mob:messageText(mob, ID.text.BLOOD_RACING)
 end
 
 entity.onMobFight = function(mob, target)
