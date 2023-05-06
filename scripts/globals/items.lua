@@ -2978,6 +2978,7 @@ xi.items =
     BRONZE_LEGGINGS_P1              = 12951,
     LEATHER_HIGHBOOTS               = 12952,
     CUIR_HIGHBOOTS                  = 12955,
+    MANNEQUIN_PUMPS                 = 12973,
     ASH_CLOGS                       = 12984,
     SOLEA                           = 12992,
     STUMBLING_SANDALS               = 13013,
