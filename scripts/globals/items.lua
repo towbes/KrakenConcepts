@@ -4328,6 +4328,7 @@ xi.items =
     GRUDGE_SWORD                    = 17693,
     GUESPIERE                       = 17695,
     BAYARDS_SWORD                   = 17695,
+    BUZZARD_TUCK                    = 17696,
     MIGHTY_TALWAR                   = 17697,
     DISSECTOR                       = 17699,
     DURANDAL                        = 17700,

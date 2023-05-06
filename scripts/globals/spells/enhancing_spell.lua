@@ -389,8 +389,13 @@ xi.spells.enhancing.calculateEnhancingDuration = function(caster, target, spell,
     -- Sneak
     elseif spellEffect == xi.effect.SNEAK then
         duration = duration + target:getMod(xi.mod.SNEAK_DURATION)
-    end
 
+        -- En-Spells
+    elseif (spellEffect >= xi.effect.ENFIRE and spellEffect <= xi.effect.ENWATER) or (spellEffect >= xi.effect.ENFIRE_II and spellEffect <= xi.effect.ENWATER_II) then
+        if caster:getEquipID(xi.slot.MAIN) == xi.items.BUZZARD_TUCK or caster:getEquipID(xi.slot.SUB) == xi.items.BUZZARD_TUCK then
+            duration = duration + 30 -- Sword enhancement spell duration +5
+        end
+    end
     --------------------
     -- Status Effects
     --------------------
