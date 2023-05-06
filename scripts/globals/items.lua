@@ -3001,6 +3001,7 @@ xi.items =
     PROMISE_BADGE                   = 13135,
     STAR_NECKLACE                   = 13136,
     SPIDER_TORQUE                   = 13137,
+    YINYANG_LORGNETTE               = 13139,
     OPO_OPO_NECKLACE                = 13143,
     UGGALEPIH_PENDANT               = 13145,
     EVASION_TORQUE                  = 13148,

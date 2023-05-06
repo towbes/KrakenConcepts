@@ -16,6 +16,7 @@ zones[xi.zone.LUFAISE_MEADOWS] =
         KEYITEM_OBTAINED              = 6393, -- Obtained key item: <keyitem>.
         KEYITEM_LOST                  = 6394, -- Lost key item: <keyitem>.
         NOTHING_OUT_OF_ORDINARY       = 6404, -- There is nothing out of the ordinary here.
+        SENSE_OF_FOREBODING           = 6405, -- You are suddenly overcome with a sense of foreboding...
         FELLOW_MESSAGE_OFFSET         = 6419, -- I'm ready. I suppose.
         CARRIED_OVER_POINTS           = 7001, -- You have carried over <number> login point[/s].
         LOGIN_CAMPAIGN_UNDERWAY       = 7002, -- The [/January/February/March/April/May/June/July/August/September/October/November/December] <number> Login Campaign is currently underway!
@@ -69,6 +70,11 @@ zones[xi.zone.LUFAISE_MEADOWS] =
         {
             [16875593] = 16875600, -- 236.418, -0.573, -118.742
             [16875604] = 16875600, -- 387.196, 0.060, -115.952
+        },
+        BITTER_PAST_MOBS =
+        {
+            16875775,
+            16875776,
         },
         LESHY_OFFSET          = 16875754,
         COLORFUL_LESHY        = 16875762,
