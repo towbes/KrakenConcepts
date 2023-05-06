@@ -3702,6 +3702,7 @@ xi.items =
     BRAVOS_SUBLIGAR                 = 15373,
     TRACKERS_KECKS                  = 15387,
     ASTRAL_ROPE                     = 15431,
+    POWERFUL_ROPE                   = 15443,
     CARPENTERS_BELT                 = 15444,
     BLACKSMITHS_BELT                = 15445,
     GOLDSMITHS_BELT                 = 15446,
