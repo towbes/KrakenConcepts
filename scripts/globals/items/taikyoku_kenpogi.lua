@@ -9,24 +9,18 @@ require("scripts/globals/status")
 local itemObject = {}
 
 itemObject.onItemCheck = function(target)
-    local effect = target:getStatusEffect(xi.effect.ENCHANTMENT)
-    if effect ~= nil and effect:getSubType() == 14541 then
-        target:delStatusEffect(xi.effect.ENCHANTMENT)
+    local effect = target:getStatusEffect(xi.effect.EVASION_BOOST)
+    if effect ~= nil and effect:getItemSourceID() == xi.items.TAIKYOKU_KENPOGI then
+        target:delStatusEffect(xi.effect.EVASION_BOOST)
     end
 
     return 0
 end
 
 itemObject.onItemUse = function(target)
-    target:addStatusEffect(xi.effect.ENCHANTMENT, 0, 0, 1800, 14541)
-end
-
-itemObject.onEffectGain = function(target, effect)
-    target:addMod(xi.mod.EVA, 3)
-end
-
-itemObject.onEffectLose = function(target, effect)
-    target:delMod(xi.mod.EVA, 3)
+    if target:hasEquipped(xi.items.TAIKYOKU_KENPOGI) then
+        target:addStatusEffect(xi.effect.EVASION_BOOST, 3, 0, 1800, 0, 0, 0, xi.items.TAIKYOKU_KENPOGI)
+    end
 end
 
 return itemObject

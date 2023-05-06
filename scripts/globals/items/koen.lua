@@ -1,23 +1,23 @@
 -----------------------------------
--- ID: 16858
--- Item: Sacred Lance
--- Enchantment: Enlight
--- Duration: 3 minutes
+-- ID: 17828
+--  Item: Koen
+--  Enchantment: Enfire
+--  Duration:
 -----------------------------------
 local itemObject = {}
 
 itemObject.onItemCheck = function(target)
-    local effect = target:getStatusEffect(xi.effect.ENLIGHT)
-    if effect ~= nil and effect:getItemSourceID() == xi.items.SACRED_LANCE then
-        target:delStatusEffect(xi.effect.ENLIGHT)
+    local effect = target:getStatusEffect(xi.effect.ENFIRE)
+    if effect ~= nil and effect:getItemSourceID() == xi.items.KOEN then
+        target:delStatusEffect(xi.effect.ENFIRE)
     end
 
     return 0
 end
 
 itemObject.onItemUse = function(target)
-    if target:hasEquipped(xi.items.SACRED_LANCE) then
-        local effect = xi.effect.ENLIGHT
+    if target:hasEquipped(xi.items.KOEN) then
+        local effect = xi.effect.ENFIRE
         local magicskill = target:getSkillLevel(xi.skill.ENHANCING_MAGIC)
         local potency = 0
 
@@ -29,7 +29,7 @@ itemObject.onItemUse = function(target)
 
         potency = utils.clamp(potency, 3, 25)
 
-        target:addStatusEffect(effect, potency, 0, 180, 0, 0, 0, xi.items.SACRED_LANCE)
+        target:addStatusEffect(effect, potency, 0, 180, 0, 0, 0, xi.items.KOEN)
     end
 end
 

@@ -1,16 +1,17 @@
 -----------------------------------
--- ID: 15864
--- Item: tough_belt
--- Item Effect: VIT +3
--- Duration: 60 seconds
+-- ID: 13173
+-- Item: Memento Muffler
+-- Item Effect: VIT +7
+-- Duration: 3 minutes
 -----------------------------------
 require("scripts/globals/status")
+require("scripts/globals/msg")
 -----------------------------------
 local itemObject = {}
 
 itemObject.onItemCheck = function(target)
     local effect = target:getStatusEffect(xi.effect.VIT_BOOST)
-    if effect ~= nil and effect:getItemSourceID() == xi.items.TOUGH_BELT then
+    if effect ~= nil and effect:getItemSourceID() == xi.items.MEMENTO_MUFFLER then
         target:delStatusEffect(xi.effect.VIT_BOOST)
     end
 
@@ -18,8 +19,8 @@ itemObject.onItemCheck = function(target)
 end
 
 itemObject.onItemUse = function(target)
-    if target:hasEquipped(xi.items.TOUGH_BELT) then
-        target:addStatusEffect(xi.effect.VIT_BOOST, 3, 0, 60, 0, 0, 0, xi.items.TOUGH_BELT)
+    if target:hasEquipped(xi.items.MEMENTO_MUFFLER) then
+        target:addStatusEffect(xi.effect.VIT_BOOST, 7, 0, 300, 0, 0, 0, xi.items.MEMENTO_MUFFLER)
     end
 end
 

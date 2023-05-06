@@ -13,7 +13,8 @@ itemObject.onItemCheck = function(target)
 end
 
 itemObject.onItemUse = function(target)
-    target:addStatusEffect(xi.effect.BLAZE_SPIKES, 15, 0, 180)
+    target:delStatusEffect(xi.effect.BLAZE_SPIKES)
+    target:addStatusEffect(xi.effect.BLAZE_SPIKES, 15, 0, 180, 0, 0, 0, xi.items.BLAZE_HOSE)
 end
 
 return itemObject
