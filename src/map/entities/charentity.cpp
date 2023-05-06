@@ -2225,7 +2225,14 @@ void CCharEntity::Die()
 
     if (this->PPet)
     {
-        petutils::DespawnPet(this);
+        if (PPet->StatusEffectContainer->HasStatusEffect(EFFECT_CHARM))
+        {
+            petutils::DetachPet(this);
+        }
+        else
+        {
+            petutils::DespawnPet(this);
+        }
     }
 
     Die(death_duration);
