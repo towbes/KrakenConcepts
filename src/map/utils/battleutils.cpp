@@ -751,12 +751,6 @@ namespace battleutils
 
         damage = std::clamp(damage, -99999, 99999);
 
-        // When set mob will only take 0 or 1 damage
-        if (PDefender->GetLocalVar("DAMAGE_NULL") != 0)
-        {
-            damage %= 2;
-        }
-
         return damage;
     }
 
@@ -880,6 +874,12 @@ namespace battleutils
             else
             {
                 Action->spikesParam = static_cast<uint16>(spikesDamage);
+            }
+
+            // When set mob will only take 0 or 1 damage
+            if (PDefender->GetLocalVar("DAMAGE_NULL") != 0)
+            {
+                spikesDamage %= 2;
             }
 
             if (PDefender->objtype != TYPE_MOB || ((CMobEntity*)PDefender)->getMobMod(MOBMOD_AUTO_SPIKES) == 0)
@@ -1028,6 +1028,12 @@ namespace battleutils
                 Action->spikesParam = static_cast<uint16>(spikesDamage);
             }
 
+            // When set mob will only take 0 or 1 damage
+            if (PDefender->GetLocalVar("DAMAGE_NULL") != 0)
+            {
+                spikesDamage %= 2;
+            }
+
             PAttacker->takeDamage(spikesDamage, PDefender, ATTACK_TYPE::MAGICAL, GetSpikesDamageType(Action->spikesEffect));
 
             battleutils::DirtyExp(PAttacker, PDefender);
@@ -1072,6 +1078,12 @@ namespace battleutils
                 else
                 {
                     Action->spikesParam = static_cast<uint16>(spikesDamage);
+                }
+
+                // When set mob will only take 0 or 1 damage
+                if (PDefender->GetLocalVar("DAMAGE_NULL") != 0)
+                {
+                    spikesDamage %= 2;
                 }
 
                 PAttacker->takeDamage(spikesDamage, PDefender, ATTACK_TYPE::MAGICAL, GetSpikesDamageType(spikesType));
@@ -2533,6 +2545,12 @@ namespace battleutils
             PAttacker->StatusEffectContainer->DelStatusEffect(EFFECT_HAGAKURE);
         }
 
+        // When set mob will only take 0 or 1 damage
+        if (PDefender->GetLocalVar("DAMAGE_NULL") != 0)
+        {
+            damage %= 2;
+        }
+
         return damage;
     }
 
@@ -2544,6 +2562,14 @@ namespace battleutils
 
     int32 TakeSpellDamage(CBattleEntity* PDefender, CCharEntity* PAttacker, CSpell* PSpell, int32 damage, ATTACK_TYPE attackType, DAMAGE_TYPE damageType)
     {
+
+        // When set mob will only take 0 or 1 damage
+        if (PDefender->GetLocalVar("DAMAGE_NULL") != 0)
+        {
+            damage = PDefender->GetLocalVar("DAMAGE_DEALT");
+            damage %= 2;
+        }
+
         // Scarlet Delirium: Updates status effect power with damage bonus
         battleutils::HandleScarletDelirium(PDefender, damage);
 
@@ -5465,6 +5491,13 @@ namespace battleutils
             damage = HandleFanDance(PDefender, damage);
         }
 
+        // When set mob will only take 0 or 1 damage
+        if (PDefender->GetLocalVar("DAMAGE_NULL") != 0)
+        {
+            damage = PDefender->GetLocalVar("DAMAGE_DEALT");
+            damage %= 2;
+        }
+
         return damage;
     }
 
@@ -5503,6 +5536,13 @@ namespace battleutils
             ConvertDmgToMP(PDefender, damage, IsCovered);
 
             damage = HandleFanDance(PDefender, damage);
+        }
+
+        // When set mob will only take 0 or 1 damage
+        if (PDefender->GetLocalVar("DAMAGE_NULL") != 0)
+        {
+            damage = PDefender->GetLocalVar("DAMAGE_DEALT");
+            damage %= 2;
         }
 
         return damage;
