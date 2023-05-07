@@ -5520,6 +5520,51 @@ INSERT INTO `mob_spell_lists` VALUES ('Twilotak',764,270,1,255); -- Absorb-INT
 INSERT INTO `mob_spell_lists` VALUES ('Twilotak',764,271,1,255); -- Absorb-MND
 INSERT INTO `mob_spell_lists` VALUES ('Twilotak',764,272,1,255); -- Absorb-CHR
 
+-- Steam Cleaner (5061)
+INSERT INTO `mob_spell_lists` VALUES ('SteamCleaner',765,196,1,255); -- Thundaga III
+INSERT INTO `mob_spell_lists` VALUES ('SteamCleaner',765,167,1,255); -- Thunder IV
+INSERT INTO `mob_spell_lists` VALUES ('SteamCleaner',765,239,1,255); -- Shock
+
+-- Olla Pequena (5062)
+INSERT INTO `mob_spell_lists` VALUES ('Olla_Pequena',766,157,1,255); -- Aero_iv
+INSERT INTO `mob_spell_lists` VALUES ('Olla_Pequena',766,167,1,255); -- Thunder_iv
+INSERT INTO `mob_spell_lists` VALUES ('Olla_Pequena',766,176,1,255); -- Firaga_iii
+INSERT INTO `mob_spell_lists` VALUES ('Olla_Pequena',766,226,1,255); -- Poisonga_ii
+INSERT INTO `mob_spell_lists` VALUES ('Olla_Pequena',766,231,1,255); -- Bio_ii
+INSERT INTO `mob_spell_lists` VALUES ('Olla_Pequena',766,235,1,255); -- Burn
+INSERT INTO `mob_spell_lists` VALUES ('Olla_Pequena',766,236,1,255); -- Frost
+INSERT INTO `mob_spell_lists` VALUES ('Olla_Pequena',766,240,1,255); -- Drown
+INSERT INTO `mob_spell_lists` VALUES ('Olla_Pequena',766,245,1,255); -- Drain
+INSERT INTO `mob_spell_lists` VALUES ('Olla_Pequena',766,247,1,255); -- Aspir
+INSERT INTO `mob_spell_lists` VALUES ('Olla_Pequena',766,249,1,255); -- Blaze_spikes
+INSERT INTO `mob_spell_lists` VALUES ('Olla_Pequena',766,254,1,255); -- Blind
+INSERT INTO `mob_spell_lists` VALUES ('Olla_Pequena',766,258,1,255); -- Bind
+INSERT INTO `mob_spell_lists` VALUES ('Olla_Pequena',766,259,1,255); -- Sleep_ii
+
+-- Olla Media (5063)
+INSERT INTO `mob_spell_lists` VALUES ('Olla_Media',767,232,1,255); -- Bio_iii
+INSERT INTO `mob_spell_lists` VALUES ('Olla_Media',767,245,1,255); -- Drain
+INSERT INTO `mob_spell_lists` VALUES ('Olla_Media',767,247,1,255); -- Aspir
+INSERT INTO `mob_spell_lists` VALUES ('Olla_Media',767,252,1,255); -- Stun
+INSERT INTO `mob_spell_lists` VALUES ('Olla_Media',767,260,1,255); -- Dispel
+INSERT INTO `mob_spell_lists` VALUES ('Olla_Media',767,269,1,255); -- Absorb-agi
+INSERT INTO `mob_spell_lists` VALUES ('Olla_Media',767,270,1,255); -- Absorb-int
+INSERT INTO `mob_spell_lists` VALUES ('Olla_Media',767,271,1,255); -- Absorb-mnd
+INSERT INTO `mob_spell_lists` VALUES ('Olla_Media',767,273,1,255); -- Sleepga
+INSERT INTO `mob_spell_lists` VALUES ('Olla_Media',767,274,1,255); -- Sleepga_ii
+
+-- Olla Grande (5064)
+INSERT INTO `mob_spell_lists` VALUES ('Olla_Grande',768,21,1,255);  -- Holy
+INSERT INTO `mob_spell_lists` VALUES ('Olla_Grande',768,24,1,255);  -- Dia_ii
+INSERT INTO `mob_spell_lists` VALUES ('Olla_Grande',768,30,1,255);  -- Banish_iii
+INSERT INTO `mob_spell_lists` VALUES ('Olla_Grande',768,34,1,255);  -- Diaga_ii
+INSERT INTO `mob_spell_lists` VALUES ('Olla_Grande',768,40,1,255);  -- Banishga_iii
+INSERT INTO `mob_spell_lists` VALUES ('Olla_Grande',768,51,1,255);  -- Shell_iv
+INSERT INTO `mob_spell_lists` VALUES ('Olla_Grande',768,54,1,255);  -- Stoneskin
+INSERT INTO `mob_spell_lists` VALUES ('Olla_Grande',768,55,1,255);  -- Aquaveil
+INSERT INTO `mob_spell_lists` VALUES ('Olla_Grande',768,108,1,255); -- Regen
+INSERT INTO `mob_spell_lists` VALUES ('Olla_Grande',768,112,1,255); -- Flash
+
 -- Jailer of Love (Light) (493)
 INSERT INTO `mob_spell_lists` VALUES ('Jailer_of_Love_Light',5024,21,1,255); -- Holy (1~255)
 INSERT INTO `mob_spell_lists` VALUES ('Jailer_of_Love_Light',5024,30,1,255); -- Banish III (1~255)
