@@ -2292,7 +2292,7 @@ INSERT INTO `mob_skill_lists` VALUES ('Astral_Flow_Pet',495,918);
 INSERT INTO `mob_skill_lists` VALUES ('ChanequeMandragora',496,2210);
 INSERT INTO `mob_skill_lists` VALUES ('Gerjis',497,270); -- roar
 INSERT INTO `mob_skill_lists` VALUES ('Gerjis',497,271); -- razor_fang
-INSERT INTO `mob_skill_lists` VALUES ('Gerjis',497,273); -- claw_cyclone
+-- INSERT INTO `mob_skill_lists` VALUES ('Gerjis',497,273); -- claw_cyclone
 INSERT INTO `mob_skill_lists` VALUES ('Gerjis',497,1322); -- gerjis_grip
 INSERT INTO `mob_skill_lists` VALUES ('Gerjis',497,1340); -- crossthrash
 -- 498: Cyranuce_M_Cutauleon
@@ -4058,6 +4058,19 @@ INSERT INTO `mob_skill_lists` VALUES ('Gigas_Ice',5358,664); -- Impact Roar
 INSERT INTO `mob_skill_lists` VALUES ('Gigas_Ice',5358,665); -- Grand Slam
 INSERT INTO `mob_skill_lists` VALUES ('Gigas_Ice',5358,666); -- Power Attack
 INSERT INTO `mob_skill_lists` VALUES ('Gigas_Ice',5358,667); -- Power Attack Weapon
+
+INSERT INTO `mob_skill_lists` VALUES ('Fire_Golem',5359,676);  -- Ice Break
+INSERT INTO `mob_skill_lists` VALUES ('Fire_Golem',5359,678);  -- Crystal Rain
+INSERT INTO `mob_skill_lists` VALUES ('Fire_Golem',5359,679);  -- Crystal Weapon (Fire)
+INSERT INTO `mob_skill_lists` VALUES ('Water_Golem',5360,676); -- Ice Break
+INSERT INTO `mob_skill_lists` VALUES ('Water_Golem',5360,678); -- Crystal Rain
+INSERT INTO `mob_skill_lists` VALUES ('Water_Golem',5360,681); -- Crystal Weapon (Water)
+INSERT INTO `mob_skill_lists` VALUES ('Wind_Golem',5361,677);   -- Thunder Break
+INSERT INTO `mob_skill_lists` VALUES ('Wind_Golem',5361,678);   -- Crystal Rain
+INSERT INTO `mob_skill_lists` VALUES ('Wind_Golem',5361,682);   -- Crystal Weapon (Wind)
+INSERT INTO `mob_skill_lists` VALUES ('Earth_Golem',5362,677); -- Ice Break
+INSERT INTO `mob_skill_lists` VALUES ('Earth_Golem',5362,678); -- Crystal Rain
+INSERT INTO `mob_skill_lists` VALUES ('Earth_Golem',5362,680); -- Crystal Weapon (Earth)
 
 
 
