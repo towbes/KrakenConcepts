@@ -10,4 +10,5 @@ return {
     ['Yaya']         = { event = 153 },
     ['Jimaida']      = { event = 152 },
     ['Oswald']       = { event = 30 },
+    ['Devean']       = { event = 124 },
 }
