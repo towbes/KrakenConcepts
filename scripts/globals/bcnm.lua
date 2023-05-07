@@ -56,7 +56,7 @@ local battlefields =
     [xi.zone.MINE_SHAFT_2716] =
     {
         { 0,  736,    0 },   -- A Century of Hardship (PM5-3 L3)
-        { 1,  737,    0 },   -- Return to the Depths (Quest)
+    --    { 1,  737,    0 },   -- Return to the Depths (Quest)
         { 2,  738,    0 },   -- Bionic Bug (ENM)
     --  { 3,  739,    0 },   -- Pulling the Strings (ENM)
         { 4,  740,    0 },   -- Automaton Assault (ENM)
@@ -957,7 +957,8 @@ local function checkReqs(player, npc, bfid, registrant)
         end,
 
         [678] = function() -- Quest: Requiem of Sin
-            return player:hasKeyItem(xi.ki.LETTER_FROM_SHIKAREE_Y)
+            return player:hasKeyItem(xi.ki.LETTER_FROM_SHIKAREE_Y) or
+            player:hasKeyItem(xi.ki.LETTER_FROM_THE_MITHRAN_TRACKERS)
         end,
 
         [704] = function() -- PM3-5: Darkness Named
@@ -979,7 +980,7 @@ local function checkReqs(player, npc, bfid, registrant)
         end,
 
         [737] = function() -- Quest: Return to the Depths
-            return (player:getCharVar("Quest[1][78]prog") == 9)
+            return player:getCharVar("Quest[1][78]prog") == 9
         end,
 
         [738] = function() -- ENM: Bionic Bug
@@ -1181,8 +1182,8 @@ local function checkReqs(player, npc, bfid, registrant)
         end,
 
         [737] = function() -- Quest: Return to the Depths
-            return (player:getCharVar("Quest[1][78]prog") >= 9 or
-            player:hasCompletedQuest(xi.quest.log_id.BASTOK, xi.quest.id.bastok.RETURN_TO_THE_DEPTHS))
+            return player:getCharVar("Quest[1][78]prog") >= 9 or
+            player:hasCompletedQuest(xi.quest.log_id.BASTOK, xi.quest.id.bastok.RETURN_TO_THE_DEPTHS)
         end,
 
         [738] = function() -- ENM: Bionic Bug
@@ -1569,7 +1570,7 @@ local function checkSkip(player, bfid)
         end,
 
         [678] = function() -- Quest: Requiem of Sin
-            return player:hasKeyItem(xi.ki.LETTER_FROM_SHIKAREE_Y) or player:hasKeyItem(xi.ki.LETTER_FROM_MITHRAN_TRACKERS)
+            return player:hasKeyItem(xi.ki.LETTER_FROM_SHIKAREE_Y) or player:hasKeyItem(xi.ki.LETTER_FROM_THE_MITHRAN_TRACKERS)
         end,
 
         [704] = function() -- PM3-5: Darkness Named

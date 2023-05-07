@@ -19,21 +19,12 @@ local dialogue =
 }
 
 entity.onMobSpawn = function(mob)
-        mob:setMobMod(xi.mobMod.SKILL_LIST, 0)
-        mob:setMod(xi.mod.SLEEPRES, 50)
-        
+    mob:setMobMod(xi.mobMod.SKILL_LIST, 0)
+    mob:setMod(xi.mod.SLEEPRES, 50)
+
     mob:addListener("ATTACK", "SHIKAREE_Y_ATTACK", function(attacker, defender, action)
         if math.random() < 0.25 then
             attacker:setTP(3000)
-        end
-    end)
-
-    mob:addListener("TAKE_DAMAGE", "SHIKAREE_X_TAKE_DAMAGE", function(mobArg, amount, attacker)
-        if amount > mobArg:getHP() then
-            mobArg:messageText(mob, ID.text.I_LOST)
-            -- Reset controls so that remaining shiks don't get locked from weaponskilling
-            GetMobByID(mobArg:getID()+1):setLocalVar("control", 0)
-            GetMobByID(mobArg:getID()-1):setLocalVar("control", 0)
         end
     end)
 end
@@ -42,6 +33,7 @@ entity.onMobWeaponSkill = function(target, mob, skill)
     if skill:getID() == 695 then
         mob:messageText(mob, ID.text.SCENT_OF_BLOOD)
     end
+
     mob:setMobMod(xi.mobMod.SKILL_LIST, 0)
     mob:setLocalVar("control", 0)
     mob:setLocalVar("TP", 0)
@@ -53,8 +45,8 @@ end
 
 entity.onMobFight = function(mob, target)
     if mob:getTP() == 3000 and mob:getLocalVar("control") == 0 then
-        local shikX = GetMobByID(mob:getID()+1)
-        local shikZ = GetMobByID(mob:getID()-1)
+        local shikX = GetMobByID(mob:getID() + 1)
+        local shikZ = GetMobByID(mob:getID() - 1)
         local shikXTP = shikX:getLocalVar("TP")
         local shikZTP = shikZ:getLocalVar("TP")
         mob:setLocalVar("TP", 1)
@@ -116,13 +108,19 @@ entity.onMobFight = function(mob, target)
 
         -- Shik Y is last alive
         else
-                mob:messageText(mob, dialogue[math.random(1,3)])
+                mob:messageText(mob, dialogue[math.random(1, 3)])
                 mob:setMobMod(xi.mobMod.SKILL_LIST, 1166)
         end
     end
 end
 
 entity.onMobDeath = function(mob, player, optParams)
+    if optParams.isKiller then
+        mob:messageText(mob, ID.text.I_LOST)
+        -- Reset controls so that remaining shiks don't get locked from weaponskilling
+        GetMobByID(mob:getID() + 1):setLocalVar("control", 0)
+        GetMobByID(mob:getID() - 1):setLocalVar("control", 0)
+    end
 end
 
 return entity

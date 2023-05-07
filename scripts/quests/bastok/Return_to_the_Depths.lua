@@ -249,7 +249,7 @@ quest.sections =
                 end,
             },
         },
-        
+
         [xi.zone.OLDTON_MOVALPOLOS] =
         {
             ['Tarnotik'] =
