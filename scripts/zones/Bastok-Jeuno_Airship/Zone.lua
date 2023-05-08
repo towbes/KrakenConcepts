@@ -31,13 +31,13 @@ zoneObject.onEventFinish = function(player, csid, option)
         local prevzone = player:getPreviousZone()
 
         if prevzone == xi.zone.PORT_JEUNO then
-            player:setPos(-75, 2.39, -34.83, 0, xi.zone.PORT_BASTOK)
+            player:setPos(0, 0, 0, 0, xi.zone.PORT_BASTOK)
         elseif prevzone == xi.zone.PORT_BASTOK then
-            player:setPos(-47.69, 12, -109.88, 0, xi.zone.PORT_JEUNO)
+            player:setPos(0, 0, 0, 0, xi.zone.PORT_JEUNO)
         else
             --fix for black screen if prevzone is not getting set correctly
             --or the player logged out during the airship, and the pos_prevzone was set TO the airship
-            --set to Port Jeuno position 0,0,0
+            --set to Port Jeuno position 0, 0, 0
             player:setPos(0, 0, 0, 0, 246)
         end
     end
