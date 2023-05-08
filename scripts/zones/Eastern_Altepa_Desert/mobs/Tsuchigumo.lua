@@ -3,20 +3,22 @@
 --  Mob: Tsuchigumo
 -- Involved in Quest: 20 in Pirate Years
 -----------------------------------
-require("scripts/globals/mobs")
-require("scripts/globals/quests")
 require("scripts/globals/status")
 -----------------------------------
 local entity = {}
 
 entity.onMobInitialize = function(mob)
-    mob:setMobMod(xi.mobMod.IDLE_DESPAWN, 300)
+    mob:setMobMod(xi.mobMod.IDLE_DESPAWN, 300) -- 3 minutes
     mob:setMobMod(xi.mobMod.ADD_EFFECT, 1)
 end
 
 entity.onMobSpawn = function(mob)
     mob:setLocalVar("despawnTime", os.time() + 300)
     mob:setMobMod(xi.mobMod.NO_LINK, 1)
+end
+
+entity.onAdditionalEffect = function(mob, target, damage)
+    return xi.mob.onAddEffect(mob, target, damage, xi.mob.ae.POISON, { power = 20 })
 end
 
 entity.onMobRoam = function(mob)
@@ -29,10 +31,6 @@ entity.onMobRoam = function(mob)
     if despawnTime > 0 and os.time() > despawnTime then
         DespawnMob(mob:getID())
     end
-end
-
-entity.onAdditionalEffect = function(mob, target, damage)
-    return xi.mob.onAddEffect(mob, target, damage, xi.mob.ae.POISON, {power = 20})
 end
 
 entity.onMobDeath = function(mob, player, optParams)
