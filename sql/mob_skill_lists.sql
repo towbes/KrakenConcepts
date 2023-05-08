@@ -1232,7 +1232,7 @@ INSERT INTO `mob_skill_lists` VALUES ('Yovra',271,1376);
 -- INSERT INTO `mob_skill_lists` VALUES ('Yovra',271,1377);
 INSERT INTO `mob_skill_lists` VALUES ('Zdei',272,1463);
 INSERT INTO `mob_skill_lists` VALUES ('Zdei',272,1464);
-INSERT INTO `mob_skill_lists` VALUES ('Zdei',272,1465);
+-- INSERT INTO `mob_skill_lists` VALUES ('Zdei',272,1465);
 INSERT INTO `mob_skill_lists` VALUES ('Zdei',272,1466);
 INSERT INTO `mob_skill_lists` VALUES ('Zdei',272,1467);
 INSERT INTO `mob_skill_lists` VALUES ('Zdei',272,1468);
@@ -4079,6 +4079,13 @@ INSERT INTO `mob_skill_lists` VALUES ('Boggelman',5363,385);
 INSERT INTO `mob_skill_lists` VALUES ('Boggelman',5363,386);
 INSERT INTO `mob_skill_lists` VALUES ('Boggelman',5363,387);
 INSERT INTO `mob_skill_lists` VALUES ('Boggelman',5363,822);
+
+INSERT INTO `mob_skill_lists` VALUES ('JailerOfTemperance',5364,1463);
+INSERT INTO `mob_skill_lists` VALUES ('JailerOfTemperance',5364,1465);
+INSERT INTO `mob_skill_lists` VALUES ('JailerOfTemperance',5364,1466);
+INSERT INTO `mob_skill_lists` VALUES ('JailerOfTemperance',5364,1467);
+INSERT INTO `mob_skill_lists` VALUES ('JailerOfTemperance',5364,1468);
+INSERT INTO `mob_skill_lists` VALUES ('JailerOfTemperance',5364,1469);
 
 
 
