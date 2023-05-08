@@ -965,6 +965,10 @@ void SmallPacket0x01A(map_session_data_t* const PSession, CCharEntity* const PCh
             }
 
             PChar->PAI->Engage(TargID);
+            if (PChar->animation != ANIMATION_HEALING)
+            {
+                PChar->PAI->Engage(TargID);
+            }
         }
         break;
         case 0x03: // spellcast
