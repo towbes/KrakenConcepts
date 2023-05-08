@@ -3745,7 +3745,7 @@ namespace luautils
             return -1;
         }
 
-        auto result = onGameDay();
+        auto result = onGameDay(CLuaZone(PZone));
         if (!result.valid())
         {
             sol::error err = result;
