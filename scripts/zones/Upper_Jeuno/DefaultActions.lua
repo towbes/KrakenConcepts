@@ -11,6 +11,7 @@ return {
     ['Ilumida']      = { event = 189 },
     ['Laila']        = { event = 10120 },
     ['Mailloquetat'] = { event = 25 },
+    ['Migliorozz']   = { event = 10026 },
     ['Monberaux']    = { event = 28 },
     ['Olgald']       = { event = 10122 },
     ['Paya-Sabya']   = { event = 79 },
