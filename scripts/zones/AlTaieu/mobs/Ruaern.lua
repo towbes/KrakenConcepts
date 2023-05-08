@@ -21,7 +21,7 @@ entity.onMobDeath = function(mob, player, optParams)
 
     if
         player:getCurrentMission(xi.mission.log_id.COP) == xi.mission.id.cop.GARDEN_OF_ANTIQUITY and
-        player:getCharVar(missionVar .. 'Status') > 3 
+        player:getCharVar(missionVar .. 'Status') < 3 
     then
         local aernKills =
         {

@@ -10,78 +10,93 @@ local entity = {}
 local spellTable =
 {
     [1161] = { 476, 484 },
-    [1162] = { 473, 481 },
-    [1163] = { 475, 483 },
-    [1164] = { 472, 480 },
-    [1165] = { 471, 479 },
-    [1166] = { 474, 482 },
+    [1162] = { 471, 479 },
+    [1163] = { 472, 480 },
+    [1164] = { 473, 481 },
+    [1165] = { 474, 482 },
+    [1166] = { 475, 483 },
     [1167] = { 470, 478 },
     [1168] = { 469, 477 },
 }
 
+local dayToSkin =
+{
+    [xi.day.FIRESDAY]     = { 1161 },
+    [xi.day.EARTHSDAY]    = { 1164 },
+    [xi.day.WATERSDAY]    = { 1166 },
+    [xi.day.WINDSDAY]     = { 1163 },
+    [xi.day.ICEDAY]       = { 1162 },
+    [xi.day.LIGHTNINGDAY] = { 1165 },
+    [xi.day.LIGHTSDAY]    = { 1167 },
+    [xi.day.DARKSDAY]     = { 1168 },
+}
+
 entity.onMobSpawn = function(mob)
+    mob:setMobMod(xi.mobMod.IDLE_DESPAWN, 300)
+    mob:setMobMod(xi.mobMod.MAGIC_COOL, 30)
+    mob:setMobMod(xi.mobMod.NO_STANDBACK, 1)
+    mob:setMod(xi.mod.REGEN, 20)
     mob:setLocalVar("twoHourPer", 50)
     mob:setLocalVar("canTwoHour", 0)
-    mob:setMobMod(xi.mobMod.MAGIC_COOL, 30)
+    mob:setLocalVar("roamTime", os.time())
     mob:setAnimationSub(0)
     mob:setAggressive(false)
-    mob:setLocalVar("roamTime", os.time())
-    mob:setLocalVar("form2", math.random(1, 3))
-    local skin = math.random(1161, 1168)
+
+    local skin = dayToSkin[VanadielDayOfTheWeek()][1]
     mob:setLocalVar("skin", skin)
     if skin == 1161 then -- Fire
         mob:setSpellList(spellTable[skin][2])
         mob:setMod(xi.mod.ICE_MEVA, 80)
-        mob:setMod(xi.mod.PARALYZE_MEVA, 99)
-        mob:setMod(xi.mod.BIND_MEVA, 99)
+        mob:setMod(xi.mod.PARALYZERES, 99)
+        mob:setMod(xi.mod.BINDRES, 99)
         mob:setMod(xi.mod.FIRE_MEVA, 100)
         mob:setMod(xi.mod.WATER_MEVA, -27)
     elseif skin == 1162 then -- Ice
         mob:setSpellList(spellTable[skin][2])
         mob:setMod(xi.mod.WIND_MEVA, 80)
-        mob:setMod(xi.mod.GRAVITY_MEVA, 99)
-        mob:setMod(xi.mod.SILENCE_MEVA, 99)
+        mob:setMod(xi.mod.GRAVITYRES, 99)
+        mob:setMod(xi.mod.SILENCERES, 99)
         mob:setMod(xi.mod.ICE_MEVA, 100)
-        mob:setMod(xi.mod.PARALYZE_MEVA, 100)
-        mob:setMod(xi.mod.BIND_MEVA, 100)
+        mob:setMod(xi.mod.PARALYZERES, 100)
+        mob:setMod(xi.mod.BINDRES, 100)
         mob:setMod(xi.mod.FIRE_MEVA, -27)
     elseif skin == 1163 then -- Wind
         mob:setSpellList(spellTable[skin][2])
         mob:setMod(xi.mod.EARTH_MEVA, 80)
-        mob:setMod(xi.mod.SLOW_MEVA, 99)
+        mob:setMod(xi.mod.SLOWRES, 99)
         mob:setMod(xi.mod.WIND_MEVA, 100)
-        mob:setMod(xi.mod.GRAVITY_MEVA, 100)
-        mob:setMod(xi.mod.SILENCE_MEVA, 100)
+        mob:setMod(xi.mod.GRAVITYRES, 100)
+        mob:setMod(xi.mod.SILENCERES, 100)
         mob:setMod(xi.mod.ICE_MEVA, -27)
     elseif skin == 1164 then -- Earth
         mob:setSpellList(spellTable[skin][2])
         mob:setMod(xi.mod.THUNDER_MEVA, 80)
-        mob:setMod(xi.mod.STUN_MEVA, 99)
+        mob:setMod(xi.mod.STUNRES, 99)
         mob:setMod(xi.mod.EARTH_MEVA, 100)
-        mob:setMod(xi.mod.SLOW_MEVA, 100)
+        mob:setMod(xi.mod.SLOWRES, 100)
         mob:setMod(xi.mod.WIND_MEVA, -27)
     elseif skin == 1165 then -- Lightning
         mob:setSpellList(spellTable[skin][2])
         mob:setMod(xi.mod.WATER_MEVA, 80)
-        mob:setMod(xi.mod.POISON_MEVA, 99)
+        mob:setMod(xi.mod.POISONRES, 99)
         mob:setMod(xi.mod.THUNDER_MEVA, 100)
-        mob:setMod(xi.mod.STUN_MEVA, 100)
+        mob:setMod(xi.mod.STUNRES, 100)
         mob:setMod(xi.mod.EARTH_MEVA, -27)
     elseif skin == 1166 then -- Water
         mob:setSpellList(spellTable[skin][2])
         mob:setMod(xi.mod.FIRE_MEVA, 80)
         mob:setMod(xi.mod.WATER_MEVA, 100)
-        mob:setMod(xi.mod.POISON_MEVA, 100)
+        mob:setMod(xi.mod.POISONRES, 100)
         mob:setMod(xi.mod.THUNDER_MEVA, -27)
     elseif skin == 1167 then -- Light
         mob:setSpellList(spellTable[skin][2])
         mob:setMod(xi.mod.LIGHT_MEVA, 100)
-        mob:setMod(xi.mod.LULLABY_MEVA, 100)
+        mob:setMod(xi.mod.LULLABYRES, 100)
         mob:setMod(xi.mod.DARK_MEVA, -27)
     elseif skin == 1168 then -- Dark
         mob:setSpellList(spellTable[skin][2])
         mob:setMod(xi.mod.DARK_MEVA, 100)
-        mob:setMod(xi.mod.SLEEP_MEVA, 100)
+        mob:setMod(xi.mod.SLEEPRES, 100)
         mob:setMod(xi.mod.LIGHT_MEVA, -27)
     end
 
@@ -89,13 +104,50 @@ entity.onMobSpawn = function(mob)
 end
 
 entity.onMobFight = function(mob, target)
-    local changeTime = mob:getLocalVar("changeTime")
     local state = mob:getLocalVar("state")
     local twoHourPer = mob:getLocalVar("twoHourPer")
-    if mob:getBattleTime() - changeTime > 30 then
-        mob:setLocalVar("state", math.random(0, 3))
+    local change = mob:getLocalVar("change")
+    if change == 1 and mob:canUseAbilities() then
+        state = math.random(0, 3)
+        while state == mob:getAnimationSub() do
+            state = math.random(0, 3)
+        end
+
+        local hpp = mob:getHPP()
+        if state == 0 then -- Ball
+            mob:changeJob(xi.job.BLM)
+            -- need to set hpp back to level before job change since the change heals to full
+            mob:setHP(math.floor(mob:getMaxHP() * (hpp / 100.0)))
+            mob:setMagicCastingEnabled(true)
+            mob:setMod(xi.mod.DMG, 0)
+            mob:setMod(xi.mod.DMGPHYS, 0)
+            mob:setDamage(79)
+        elseif state == 1 then -- Human
+            mob:changeJob(xi.job.PLD)
+            mob:setHP(math.floor(mob:getMaxHP() * (hpp / 100.0)))
+            mob:setMagicCastingEnabled(true)
+            mob:setMod(xi.mod.DMG, -5000)
+            mob:setMod(xi.mod.DMGPHYS, 0)
+            mob:setDamage(79)
+        elseif state == 2 then -- Spider
+            mob:changeJob(xi.job.WAR)
+            mob:setHP(math.floor(mob:getMaxHP() * (hpp / 100.0)))
+            mob:setMagicCastingEnabled(false)
+            mob:setMod(xi.mod.DMG, 0)
+            mob:setMod(xi.mod.DMGPHYS, 3000)
+            mob:setDamage(140)
+        elseif state == 3 then -- Bird
+            mob:changeJob(xi.job.THF)
+            mob:setHP(math.floor(mob:getMaxHP() * (hpp / 100.0)))
+            mob:setMagicCastingEnabled(false)
+            mob:setMod(xi.mod.DMG, 0)
+            mob:setMod(xi.mod.DMGPHYS, 0)
+            mob:setDamage(79)
+        end
+
+        mob:setLocalVar("state", state)
         mob:setAnimationSub(state)
-        mob:setLocalVar("changeTime", mob:getBattleTime())
+        mob:setLocalVar("change", 0)
     end
 
     if
@@ -129,6 +181,19 @@ entity.onMobFight = function(mob, target)
         mob:setSpellList(spellTable[skin][2])
         mob:setLocalVar("state2", 1)
         mob:setMobMod(xi.mobMod.MAGIC_COOL, 30)
+    end
+end
+
+entity.onMobWeaponSkill = function(target, mob, skill)
+    local form = mob:getAnimationSub()
+    if form == 0 and skill:getID() == 1443 then -- In ball form and used hexidiscs
+        mob:setLocalVar("change", 1)
+    elseif form == 1 and skill:getID() == 1444 then -- In human form and used vorpal blade
+        mob:setLocalVar("change", 1)
+    elseif form == 2 and skill:getID() == 1446 then -- In spider form and used sickle slash
+        mob:setLocalVar("change", 1)
+    elseif form == 3 and skill:getID() == 1445 then -- In bird form and used damnation dive
+        mob:setLocalVar("change", 1)
     end
 end
 

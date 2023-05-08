@@ -4072,6 +4072,14 @@ INSERT INTO `mob_skill_lists` VALUES ('Earth_Golem',5362,677); -- Ice Break
 INSERT INTO `mob_skill_lists` VALUES ('Earth_Golem',5362,678); -- Crystal Rain
 INSERT INTO `mob_skill_lists` VALUES ('Earth_Golem',5362,680); -- Crystal Weapon (Earth)
 
+INSERT INTO `mob_skill_lists` VALUES ('Boggelman',5363,382);
+INSERT INTO `mob_skill_lists` VALUES ('Boggelman',5363,383);
+INSERT INTO `mob_skill_lists` VALUES ('Boggelman',5363,384);
+INSERT INTO `mob_skill_lists` VALUES ('Boggelman',5363,385);
+INSERT INTO `mob_skill_lists` VALUES ('Boggelman',5363,386);
+INSERT INTO `mob_skill_lists` VALUES ('Boggelman',5363,387);
+INSERT INTO `mob_skill_lists` VALUES ('Boggelman',5363,822);
+
 
 
 

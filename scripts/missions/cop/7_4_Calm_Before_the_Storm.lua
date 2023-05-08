@@ -99,7 +99,7 @@ mission.sections =
                     if not getMissionStatusBit(player, 1) then
                         local nmProgress = mission:getLocalVar(player, 'carpentersNm')
 
-                        if nmProgress == 15 then
+                        if nmProgress == 1 and not isCarpentersNmSpawned() then
                             return mission:progressEvent(37)
                         elseif not isCarpentersNmSpawned() then
                             local executor = GetMobByID(carpentersID.mob.CRYPTONBERRY_EXECUTOR)
@@ -116,7 +116,7 @@ mission.sections =
 
             ['Cryptonberry_Assassin'] =
             {
-                onMobDeath = function(mob, player, optParams)
+                onMobDespawn = function(mob, player, optParams)
                     local nmProgress = mission:getLocalVar(player, 'carpentersNm')
                     local nmOffset = mob:getID() - carpentersID.mob.CRYPTONBERRY_EXECUTOR
 
