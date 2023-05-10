@@ -117,6 +117,7 @@ local pathNodes =
 }
 
 entity.onMobSpawn = function(mob)
+    mob:setMobMod(xi.mobMod.ONE_WAY_LINKING, 1)
     mob:setSpeed(70)
     mob:pathThrough(pathNodes, bit.bor(xi.path.flag.PATROL, xi.path.flag.RUN))
 end
@@ -133,6 +134,14 @@ entity.onMobDisengage = function(mob)
     mob:setSpeed(70)
     mob:setAnimationSub(5)
     mob:pathThrough(pathNodes, bit.bor(xi.path.flag.PATROL, xi.path.flag.RUN))
+end
+
+entity.onMobDisengage = function(mob)
+    mob:setAnimationSub(5)
+end
+
+entity.onMobEngaged = function(mob, target)
+    mob:setAnimationSub(0)
 end
 
 entity.onMobDeath = function(mob, player, optParams)
