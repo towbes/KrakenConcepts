@@ -8,13 +8,14 @@ require('scripts/globals/items')
 require('scripts/globals/quests')
 require('scripts/globals/interaction/quest')
 -----------------------------------
-ID = require('scripts/zones/Windurst_Waters/IDs')
+local ID = require('scripts/zones/Windurst_Waters/IDs')
 -----------------------------------
 
 local quest = Quest:new(xi.quest.log_id.WINDURST, xi.quest.id.windurst.REAP_WHAT_YOU_SOW)
 
 quest.reward =
 {
+    item = xi.items.STATIONERY_SET,
     gil = 700,
     fame = 75,
     fameArea = xi.quest.fame_area.WINDURST,
@@ -23,9 +24,12 @@ quest.reward =
 quest.sections =
 {
     {
+        -- Players can only start the quest if they are below rank 4 fame
+        -- else they must complete let sleeping dogs lie
         check = function(player, status, vars)
             return status == QUEST_AVAILABLE and
-            not player:getQuestStatus(xi.quest.log_id.WINDURST, xi.quest.id.windurst.REAP_WHAT_YOU_SOW) == QUEST_ACCEPTED
+            (player:getFameLevel(xi.quest.fame_area.WINDURST) < 4 or
+            player:hasCompletedQuest(xi.quest.log_id.WINDURST, xi.quest.id.windurst.LET_SLEEPING_DOGS_LIE))
         end,
 
         [xi.zone.WINDURST_WATERS] =
@@ -36,7 +40,7 @@ quest.sections =
                     if player:getFameLevel(xi.quest.fame_area.WINDURST) >= 4 then
                         return quest:progressEvent(483)
                     else
-                        return quest:progressEvent(463, 0, 4565, 572)
+                        return quest:progressEvent(463, 0, xi.items.SOBBING_FUNGUS, xi.items.BAG_OF_HERB_SEEDS)
                     end
                 end,
             },
@@ -44,14 +48,8 @@ quest.sections =
             onEventFinish =
             {
                 [463] = function(player, csid, option, npc)
-                    if player:getFreeSlotsCount() == 0 then
-                        player:messageSpecial(ID.text.ITEM_CANNOT_BE_OBTAINED, 572)
-                    else
-                        if option == 3 then
-                            player:addItem(572)
-                            player:messageSpecial(ID.text.ITEM_OBTAINED, 572)
-                            quest:begin(player)
-                        end
+                    if npcUtil.giveItem(player, xi.items.BAG_OF_HERB_SEEDS) and option == 3 then
+                        quest:begin(player)
                     end
                 end,
             },
@@ -71,19 +69,17 @@ quest.sections =
                     local rand = math.random()
 
                     if rand > 0.5 then
-                        return quest:progressEvent(464, 0, 4565, 572)
+                        return quest:progressEvent(464, 0, xi.items.SOBBING_FUNGUS, xi.items.BAG_OF_HERB_SEEDS)
                     else
                         return quest:progressEvent(476)
                     end
                 end,
 
                 onTrade = function(player, npc, trade)
-                    if trade:getItemCount() == 1 then
-                        if (trade:hasItemQty(4565, 1) == true) then
-                            return quest:progressEvent(475, 500, 131) -- Sobbing Fungus
-                        elseif (trade:hasItemQty(4566, 1) == true) then
-                            return quest:progressEvent(477, 700) -- Deathball
-                        end
+                    if npcUtil.tradeHasExactly(trade, xi.items.SOBBING_FUNGUS) then
+                        return quest:progressEvent(475, 500, 131)
+                    elseif npcUtil.tradeHasExactly(trade, xi.items.DEATHBALL) then
+                        return quest:progressEvent(477, 700)
                     end
                 end,
             },
@@ -91,88 +87,15 @@ quest.sections =
             onEventFinish =
             {
                 [475] = function(player, csid, option, npc)
-                    player:tradeComplete()
-
-                    if player:getFreeSlotsCount() == 0 then
-                        player:messageSpecial(ID.text.ITEM_CANNOT_BE_OBTAINED, xi.items.STATIONERY_SET)
-                    else
-                        player:addGil(500)
-                        player:messageSpecial(ID.text.GIL_OBTAINED, xi.settings.main.GIL_RATE*500)
-                        player:addItem(xi.items.STATIONERY_SET)
-                        player:messageSpecial(ID.text.ITEM_OBTAINED, xi.items.STATIONERY_SET)
+                    if npcUtil.giveItem(player, xi.items.STATIONERY_SET) then
+                        player:confirmTrade()
+                        npcUtil.giveCurrency(player, 'gil', 500)
                     end
                 end,
 
                 [477] = function(player, csid, option, npc)
-                    player:tradeComplete()
-
-                    if player:getFreeSlotsCount() == 0 then
-                        player:messageSpecial(ID.text.ITEM_CANNOT_BE_OBTAINED, xi.items.STATIONERY_SET)
-                    else
-                        npcUtil.giveItem(player, xi.items.STATIONERY_SET)
-                        quest:complete(player)
-                    end
-                end,
-            },
-        },
-    },
-
-    {
-        check = function(player, status, vars)
-            return status == QUEST_COMPLETED and
-            player:hasCompletedQuest(xi.quest.log_id.WINDURST, xi.quest.id.windurst.LET_SLEEPING_DOGS_LIE)
-        end,
-
-        [xi.zone.WINDURST_WATERS] =
-        {
-            ['Mashuu-Ajuu'] =
-            {
-                onTrigger = function(player, npc)
-                    local rand = math.random()
-
-                    if rand > 0.5 then
-                        return quest:progressEvent(464, 0, 4565, 572)
-                    else
-                        player:startEvent(476)
-                    end
-                end,
-
-                onTrade = function(player, npc, trade)
-                    if trade:getItemCount() == 1 then
-                        if (trade:hasItemQty(4565, 1) == true) then
-                            player:startEvent(475, 500, 131) -- Sobbing Fungus
-                        elseif (trade:hasItemQty(4566, 1) == true) then
-                            player:startEvent(477, 700) -- Deathball
-                        end
-                    end
-                end,
-            },
-
-            onEventFinish =
-            {
-                [475] = function(player, csid, option, npc)
-                    player:tradeComplete()
-
-                    if player:getFreeSlotsCount() == 0 then
-                        player:messageSpecial(ID.text.ITEM_CANNOT_BE_OBTAINED, xi.items.STATIONERY_SET)
-                    else
-                        player:addGil(500)
-                        player:messageSpecial(ID.text.GIL_OBTAINED, xi.settings.main.GIL_RATE*500)
-                        player:addItem(xi.items.STATIONERY_SET)
-                        player:messageSpecial(ID.text.ITEM_OBTAINED, xi.items.STATIONERY_SET)
-                    end
-                end,
-
-                [477] = function(player, csid, option, npc)
-                    player:tradeComplete()
-
-                    if player:getFreeSlotsCount() == 0 then
-                        player:messageSpecial(ID.text.ITEM_CANNOT_BE_OBTAINED, xi.items.STATIONERY_SET)
-                    else
-                        player:addGil(500)
-                        player:messageSpecial(ID.text.GIL_OBTAINED, xi.settings.main.GIL_RATE*500)
-                        player:addItem(xi.items.STATIONERY_SET)
-                        player:messageSpecial(ID.text.ITEM_OBTAINED, xi.items.STATIONERY_SET)
+                    if quest:complete() then
+                        player:confirmTrade()
                     end
                 end,
             },
