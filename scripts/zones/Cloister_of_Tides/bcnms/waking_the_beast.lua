@@ -1,87 +1,43 @@
 -----------------------------------
 -- Area: Cloister of Tides
--- Mob: Leviathan Prime
--- Quest: Waking the Beast
+-- BCNM: Waking the Beast
 -----------------------------------
-require("scripts/globals/status")
-require("scripts/globals/spell_data")
+local ID = require("scripts/zones/Cloister_of_Tides/IDs")
+require("scripts/globals/battlefield")
+require("scripts/globals/keyitems")
+require("scripts/globals/npc_util")
+require("scripts/globals/quests")
+require("scripts/globals/titles")
 -----------------------------------
-local entity = {}
+local battlefieldObject = {}
 
-entity.onMobInitialize = function(mob)
-    mob:setMobMod(xi.mobMod.NO_STANDBACK, 1)
-    mob:setMobMod(xi.mobMod.SIGHT_RANGE, 21)
-    mob:setMobMod(xi.mobMod.ADD_EFFECT, 1)
+battlefieldObject.onBattlefieldTick = function(battlefield, tick)
+    xi.battlefield.onBattlefieldTick(battlefield, tick)
 end
 
-entity.onMobSpawn = function(mob)
-    mob:setLocalVar("HPThreshold", math.random(10, 90))
-    mob:setMod(xi.mod.WATER_ABSORB, 1000)
+battlefieldObject.onBattlefieldRegister = function(player, battlefield)
 end
 
-entity.onAdditionalEffect = function(mob, target, damage)
-    return xi.mob.onAddEffect(mob, target, damage, xi.mob.ae.ENWATER, { chance = 100, power = math.random(75, 125) })
+battlefieldObject.onBattlefieldEnter = function(player, battlefield)
 end
 
-entity.onMobWeaponSkill = function(target, mob, skill)
-    if skill:getID() == 865 then
-        local pos = target:getPos()
-
-        for i = 1, 4 do
-            local elemental = GetMobByID(mob:getID()+i)
-
-            if not elemental:isSpawned() then
-                SpawnMob(elemental:getID()):updateEnmity(target)
-                elemental:setPos(pos.x, pos.y, pos.z, pos.rot)
-                break
-            end
-        end
+battlefieldObject.onBattlefieldLeave = function(player, battlefield, leavecode)
+    if leavecode == xi.battlefield.leaveCode.WON then
+        local _, clearTime, partySize = battlefield:getRecord()
+        local arg8 = (player:hasCompletedQuest(xi.quest.log_id.OTHER_AREAS, xi.quest.id.otherAreas.WAKING_THE_BEAST)) and 1 or 0
+        player:startEvent(32001, battlefield:getArea(), clearTime, partySize, battlefield:getTimeInside(), 1, battlefield:getLocalVar("[cs]bit"), arg8)
+    elseif leavecode == xi.battlefield.leaveCode.LOST then
+        player:startEvent(32002)
     end
 end
 
-entity.onMobEngaged = function(mob, target)
-    mob:setLocalVar("timer", os.time() + math.random(30,60))
-    mob:setLocalVar("hateTimer", os.time() + math.random(10,20))
+battlefieldObject.onEventUpdate = function(player, csid, option)
 end
 
-entity.onMobFight = function(mob, target)
-    if mob:getLocalVar("control") == 0 and mob:getHPP() < mob:getLocalVar("HPThreshold") then
-        mob:setLocalVar("control", 1)
-        mob:useMobAbility(866)
-    end
-
-    if mob:getLocalVar("timer") < os.time() then
-        for i = 1, 4 do
-            local elemental = GetMobByID(mob:getID()+i)
-
-            if elemental:isAlive() then
-                elemental:castSpell(xi.magic.spell.WATER_IV, mob)
-                mob:setLocalVar("timer", os.time() + math.random(30,60))
-                break
-            end
-        end
-    end
-
-    if mob:getLocalVar("hateTimer") < os.time() then
-        for i = 1, 4 do
-            local elemental = GetMobByID(mob:getID()+i)
-
-            if elemental:isAlive() then
-                elemental:updateEnmity(target)
-                mob:setLocalVar("hateTimer", os.time() + math.random(10,20))
-            end
-        end
+battlefieldObject.onEventFinish = function(player, csid, option)
+    if csid == 32001 and player:hasKeyItem(xi.ki.RAINBOW_RESONATOR) then
+        npcUtil.giveKeyItem(player, xi.ki.EYE_OF_TIDES)
     end
 end
 
-entity.onMobDeath = function(mob, player, optParams)
-    if optParams.isKiller then
-        for i = 1, 4 do
-            if GetMobByID(mob:getID()+i):isAlive() then
-                GetMobByID(mob:getID()+i):setHP(0)
-            end
-        end
-    end
-end
-
-return entity
+return battlefieldObject

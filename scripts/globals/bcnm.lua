@@ -696,7 +696,7 @@ local function checkReqs(player, npc, bfid, registrant)
                 zilartStatus == 2
         end,
 
-        [226] = function() -- Quest: Waking the Beast
+        [226] = function() -- Quest: Waking the Beast (Fullmoon Fountain)
             return player:hasKeyItem(xi.ki.EYE_OF_GALES) and 
                 player:hasKeyItem(xi.ki.EYE_OF_FLAMES) and 
                 player:hasKeyItem(xi.ki.EYE_OF_FROST) and
