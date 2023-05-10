@@ -344,7 +344,7 @@ mission.sections =
                         player:messageSpecial(yuhtungaJungleID.text.THE_OPO_OPOS_ATTACK)
 
                         SpawnMob(yuhtungaJungleID.mob.TIPHA):updateClaim(player)
-                        SpawnMob(yuhtungaJungleID.mob.CARTHI):
+                        SpawnMob(yuhtungaJungleID.mob.CARTHI)
                     end
                 end,
 
