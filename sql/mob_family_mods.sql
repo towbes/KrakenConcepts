@@ -897,7 +897,6 @@ INSERT INTO `mob_family_mods` VALUES (358,51,3,1);    -- ROAM_TURNS: 3
 INSERT INTO `mob_family_mods` VALUES (358,54,120,1);  -- GIL_BONUS: 120
 INSERT INTO `mob_family_mods` VALUES (358,240,50,0);  -- SLEEPRES: 50
 INSERT INTO `mob_family_mods` VALUES (358,254,25,0);  -- LULLABYRES: 25
-INSERT INTO `mob_family_mods` VALUES (358,254,25,0);  -- LULLABYRES: 25
 INSERT INTO `mob_family_mods` VALUES (358,389,-25,0); -- UDMGMAGIC: -25
 
 -- Fomor
