@@ -457,6 +457,12 @@ bool CMobController::TryCastSpell()
         return false;
     }
 
+        // Control for worms to only cast when target is out of melee range
+    if (PMob->m_roamFlags & ROAMFLAG_WORM && distance(PMob->loc.p, PMob->GetBattleTarget()->loc.p) <= 3)
+    {
+        return false;
+    }
+
     m_LastMagicTime = m_Tick - std::chrono::milliseconds(xirand::GetRandomNumber(PMob->getBigMobMod(MOBMOD_MAGIC_COOL) / 2));
 
     // Find random spell from list
@@ -990,14 +996,14 @@ void CMobController::DoRoamTick(time_point tick)
                                                                             (uint8)PMob->getMobMod(MOBMOD_ROAM_TURNS), PMob->m_roamFlags))
                 {
                     //#TODO: #AIToScript (event probably)
-                    if (PMob->m_roamFlags & ROAMFLAG_WORM)
+                    if (PMob->m_roamFlags & ROAMFLAG_WORM && !PMob->PAI->IsCurrentState<CMagicState>())
                     {
-                        // move down
+                        // Animation to go underground
                         PMob->animationsub = 1;
                         PMob->HideName(true);
                         PMob->SetUntargetable(true);
 
-                        // don't move around until i'm fully in the ground
+                        // Doesn't move until fully underground.
                         Wait(2s);
                     }
                     else if ((PMob->m_roamFlags & ROAMFLAG_STEALTH))
@@ -1020,6 +1026,13 @@ void CMobController::DoRoamTick(time_point tick)
             }
         }
     }
+    // Prevents worms from being above ground and untargetable
+    else if (PMob->m_roamFlags & ROAMFLAG_WORM && PMob->animationsub == 0 && PMob->IsNameHidden())
+    {
+        PMob->SetUntargetable(false);
+        PMob->HideName(false);
+    }
+
     if (m_Tick >= m_LastRoamScript + 3s)
     {
         PMob->PAI->EventHandler.triggerListener("ROAM_TICK", CLuaBaseEntity(PMob));
@@ -1062,7 +1075,7 @@ void CMobController::FollowRoamPath()
             uint16 roamRandomness = (uint16)(PMob->getBigMobMod(MOBMOD_ROAM_COOL) / PMob->GetRoamRate());
             m_LastActionTime      = m_Tick - std::chrono::milliseconds(xirand::GetRandomNumber(roamRandomness));
 
-            // i'm a worm pop back up
+            // Control worm animation to pop back up
             if (PMob->m_roamFlags & ROAMFLAG_WORM)
             {
                 PMob->animationsub = 0;
@@ -1155,6 +1168,14 @@ bool CMobController::Engage(uint16 targid)
     {
         m_firstSpell = true;
 
+        // If mob is a worm, reallow players to engage
+        if (PMob->m_roamFlags & ROAMFLAG_WORM && PMob->animationsub == 1)
+        {
+            PMob->animationsub = 0;
+            PMob->SetUntargetable(false);
+            PMob->HideName(false);
+        }
+
         // Don't cast magic or use special ability right away
         if (PMob->getBigMobMod(MOBMOD_MAGIC_DELAY) != 0)
         {
@@ -1211,7 +1232,7 @@ bool CMobController::CanAggroTarget(CBattleEntity* PTarget)
     }
 
     // Don't aggro I'm an underground worm
-    if ((PMob->m_roamFlags & ROAMFLAG_WORM) && PMob->IsNameHidden())
+    if ((PMob->m_roamFlags & ROAMFLAG_WORM) && PMob->animationsub == 1)
     {
         return false;
     }
