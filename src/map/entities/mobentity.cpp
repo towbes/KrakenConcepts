@@ -575,6 +575,7 @@ void CMobEntity::Spawn()
     m_ItemStolen   = false;
     m_StealItemID  = 0;
     m_DropItemTime = 1000;
+    m_pathFindDisengage = 0;
     animationsub   = (uint8)getMobMod(MOBMOD_SPAWN_ANIMATIONSUB);
     SetCallForHelpFlag(false);
 

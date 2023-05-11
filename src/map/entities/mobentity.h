@@ -253,6 +253,8 @@ public:
     uint8 m_unk1; // (entity_update 0x25)
     uint8 m_unk2; // (entity_update 0x26)
 
+    uint16 m_pathFindDisengage;
+
     bool m_CallForHelpBlocked;
 
     CEnmityContainer* PEnmityContainer; // система ненависти монстров
