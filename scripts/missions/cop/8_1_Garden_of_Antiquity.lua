@@ -100,8 +100,8 @@ mission.sections =
                         return mission:progressEvent(100)
                     elseif mission:getVar(player, 'Status') == 0 then
                         return mission:progressEvent(164)
-                    else
-                        return mission:messageSpecial(npc, zones[npc:getZoneID()].text.IMPERVIOUS_FIELD_BLOCKS)
+                    -- else
+                    --     return mission:messageSpecial(npc, zones[npc:getZoneID()].text.IMPERVIOUS_FIELD_BLOCKS)
                     end
                 end,
             },
