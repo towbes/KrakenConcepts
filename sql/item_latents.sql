@@ -931,7 +931,7 @@ INSERT INTO `item_latents` VALUES  (14014,68,7,53,1);     -- EVA +7 in areas out
 -- Praefectus's Gloves
 -- -------------------------------------------------------
 INSERT INTO `item_latents` VALUES  (14015,10,2,53,1);     -- VIT +2 in areas outside own nation's control
-INSERT INTO `item_latents` VALUES  (14015,68,5,53,1);     -- EVA +5 in areas outside own nation's control
+INSERT INTO `item_latents` VALUES  (14015,108,5,53,1);     -- EVA +5 in areas outside own nation's control
 INSERT INTO `item_latents` VALUES  (14015,110,5,53,1);    -- Parrying skill +5 in areas outside own nation's control
 
 -- -------------------------------------------------------
@@ -2112,7 +2112,7 @@ INSERT INTO `item_latents` VALUES  (16792,25,7,59,19);    -- Goshisho's Scythe -
 INSERT INTO `item_latents` VALUES  (16793,2,-20,47,0);
 INSERT INTO `item_latents` VALUES  (16793,19,-10,47,0);
 INSERT INTO `item_latents` VALUES  (16793,21,-10,47,0);
-INSERT INTO `item_latents` VALUES  (16799,25,7,70,2);     -- Senior Musketeers Scythe
+INSERT INTO `item_latents` VALUES  (16799,25,7,70,1);     -- Senior Musketeers Scythe
 INSERT INTO `item_latents` VALUES  (16883,25,10,52,6);    -- Spear: Accuracy +10 in Water weather
 INSERT INTO `item_latents` VALUES  (16892,2,-20,47,0);
 INSERT INTO `item_latents` VALUES  (16892,20,-10,47,0);
