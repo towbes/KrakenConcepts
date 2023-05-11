@@ -35,10 +35,10 @@ spellObject.onSpellCast = function(caster, target, spell)
 
     dmg = dmg * xi.settings.main.DARK_POWER
 
-    if target:isUndead() or target:hasImmunity(xi.immunity.ASPIR) then
-        dmg = 0
+    -- Upyri: ID 4105
+    if target:isMob() and (target:isUndead() or target:getPool() == 4105) then
         spell:setMsg(xi.msg.basic.MAGIC_NO_EFFECT) -- No effect
-        return dmg
+        return 0
     end
 
     if target:getMP() > dmg then
