@@ -4087,6 +4087,13 @@ INSERT INTO `mob_skill_lists` VALUES ('JailerOfTemperance',5364,1467);
 INSERT INTO `mob_skill_lists` VALUES ('JailerOfTemperance',5364,1468);
 INSERT INTO `mob_skill_lists` VALUES ('JailerOfTemperance',5364,1469);
 
+INSERT INTO `mob_skill_lists` VALUES ('Bullheaded_Grosvez', 5365, 605); -- aerial wheel
+-- INSERT INTO `mob_skill_lists` VALUES ('Bullheaded_Grosvez', 5365, 606); -- shoulder attack
+INSERT INTO `mob_skill_lists` VALUES ('Bullheaded_Grosvez', 5365, 607); -- slam dunk
+INSERT INTO `mob_skill_lists` VALUES ('Bullheaded_Grosvez', 5365, 608); -- arm block
+INSERT INTO `mob_skill_lists` VALUES ('Bullheaded_Grosvez', 5365, 609); -- battle dance
+INSERT INTO `mob_skill_lists` VALUES ('Bullheaded_Grosvez', 5365, 790); -- shoulder slam
+
 
 
 
