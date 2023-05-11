@@ -19,7 +19,7 @@ entity.onMobFight = function(mob)
     local immunity = mob:getLocalVar("immunity")
     if os.time() > timer and immunity == 1 then -- blue: Immune to phys damage
         mob:setLocalVar("twohour_tp", mob:getTP())
-        mob:setSpellList(510)
+        mob:setSpellList(770)
         mob:useMobAbility(624)
         if mob:hasStatusEffect(xi.effect.MAGIC_SHIELD) then
             mob:delStatusEffectSilent(xi.effect.MAGIC_SHIELD)
@@ -31,7 +31,7 @@ entity.onMobFight = function(mob)
         mob:setLocalVar("timer", os.time() + 30)
     elseif os.time() > timer and immunity == 0 then -- yellow: Immune to magical damage
         mob:setLocalVar("twohour_tp", mob:getTP())
-        mob:setSpellList(509)
+        mob:setSpellList(769)
         mob:useMobAbility(625)
         mob:setMod(xi.mod.UDMGBREATH, -10000)
         if not mob:hasStatusEffect(xi.effect.MAGIC_SHIELD) then

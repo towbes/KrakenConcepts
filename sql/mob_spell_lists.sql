@@ -5584,6 +5584,11 @@ INSERT INTO `mob_spell_lists` VALUES ('Olla_Grande',768,55,1,255);  -- Aquaveil
 INSERT INTO `mob_spell_lists` VALUES ('Olla_Grande',768,108,1,255); -- Regen
 INSERT INTO `mob_spell_lists` VALUES ('Olla_Grande',768,112,1,255); -- Flash
 
+-- Gargoyle Magic (509)
+INSERT INTO `mob_spell_lists` VALUES ('Gargoyle_Magic',769,59,1,255); -- Silence (1~255)
+-- Gargoyle Physical (510)
+INSERT INTO `mob_spell_lists` VALUES ('Gargoyle_Phys',770,251,1,255); -- Shock Spikes (1~255)
+
 -- Jailer of Love (Light) (493)
 INSERT INTO `mob_spell_lists` VALUES ('Jailer_of_Love_Light',5024,21,1,255); -- Holy (1~255)
 INSERT INTO `mob_spell_lists` VALUES ('Jailer_of_Love_Light',5024,30,1,255); -- Banish III (1~255)

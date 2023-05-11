@@ -4091,6 +4091,7 @@ INSERT INTO `mob_skill_lists` VALUES ('JailerOfTemperance',5364,1469);
 
 
 
+
 -- ------------------------------------------------------------
 -- Start of Ambuscade section
 -- NOTE: The mobs are changed every update in the DATs, so using out-of-date
