@@ -1,5 +1,5 @@
 -----------------------------------
--- Area: Northern San d'Oria
+-- Area: Southern San d'Oria
 --  NPC: Taumila
 -- Starts and Finishes Quest: Tiger's Teeth (R)
 -- !pos -140 -5 -8 230
@@ -31,9 +31,9 @@ entity.onTrigger = function(player, npc)
     elseif tigersTeeth == QUEST_ACCEPTED then
         player:startEvent(575)
     elseif tigersTeeth == QUEST_COMPLETED then
-        player:startEvent(573)
-    else
         player:startEvent(571)
+    else
+        player:messageSpecial(ID.text.TAUMILA_DEFAULT)
     end
 end
 

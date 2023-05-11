@@ -799,7 +799,7 @@ INSERT INTO `item_basic` VALUES (883,0,'behemoth_horn','behemoth_horn',12,4,42,0
 INSERT INTO `item_basic` VALUES (884,0,'black_tiger_fang','blk._tiger_fang',12,4,42,0,430);
 INSERT INTO `item_basic` VALUES (885,0,'turtle_shell','turtle_shell',12,4,42,0,1224);
 INSERT INTO `item_basic` VALUES (886,0,'demon_skull','demon_skull',12,4,42,0,3562);
-INSERT INTO `item_basic` VALUES (887,0,'coral_fragment','coral_fragment',12,4,42,0,1750);
+INSERT INTO `item_basic` VALUES (887,0,'coral_fragment','coral_fragment',12,4,42,0,1591);
 INSERT INTO `item_basic` VALUES (888,0,'seashell','seashell',12,4,42,0,30);
 INSERT INTO `item_basic` VALUES (889,0,'beetle_shell','beetle_shell',12,4,42,0,63);
 INSERT INTO `item_basic` VALUES (890,0,'old_tigers_fang','old_tigers_fang',1,57408,0,0,459);
@@ -10452,7 +10452,7 @@ INSERT INTO `item_basic` VALUES (13119,0,'tiger_stole','tiger_stole',1,2052,22,0
 INSERT INTO `item_basic` VALUES (13120,0,'clay_amulet','clay_amulet',1,2052,22,0,3200);
 INSERT INTO `item_basic` VALUES (13121,0,'beast_collar','beast_collar',1,63568,0,1,0);
 INSERT INTO `item_basic` VALUES (13122,0,'miners_pendant','miners_pendant',1,63568,0,1,0);
-INSERT INTO `item_basic` VALUES (13123,0,'mermans_gorget','mermans_gorget',1,2080,22,0,3283);
+INSERT INTO `item_basic` VALUES (13123,0,'mermans_gorget','mermans_gorget',1,2080,22,0,1690);
 INSERT INTO `item_basic` VALUES (13124,0,'nodowa_+1','nodowa_+1',1,2080,22,0,3440);
 INSERT INTO `item_basic` VALUES (13125,0,'torque','torque',1,2084,22,0,2902);
 INSERT INTO `item_basic` VALUES (13126,0,'torque_+1','torque_+1',1,2080,22,0,4251);

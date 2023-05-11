@@ -5,6 +5,8 @@ return {
     ['Ailbeche']      = { event = 868 },
     ['Aivedoir']      = { text = ID.text.AIVEDOIR_DIALOG },
     ['Arienh']        = { text = ID.text.ARIENH_DIALOG },
+    ['Bacherume']     = { text = ID.text.BACHERUME_DIALOG },
+    ['Belgidiveau']   = { event = 585 },
     ['Charlaimagnat'] = { event = 702 },
     ['Chasalvige']    = { event = 6 },
     ['Emilia']        = { text = ID.text.EMILIA_DIALOG },

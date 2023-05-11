@@ -57,6 +57,7 @@ zones[xi.zone.SOUTHERN_SAN_DORIA] =
         EXOROCHE_PLEASE_TELL           = 7835,  -- Please tell my son that I'll join him as soon as I'm done, so he's to stay right there.
         LUSIANE_SHOP_DIALOG            = 7990,  -- Hello! Let Taumila's handle all your sundry needs!
         OSTALIE_SHOP_DIALOG            = 7991,  -- Welcome, customer. Please have a look.
+        TAUMILA_DEFAULT                = 7975,  -- I am Taumila, the owner of this establishment. Talk to the lady behind the counter if you wish to make a purchase.
         ASH_THADI_ENE_SHOP_DIALOG      = 8012,  -- Welcome to Helbort's Blades!
         UNLOCK_PALADIN                 = 8039,  -- You can now become a paladin!
         AMAURA_DIALOG_COMEBACK         = 8046,  -- Come back when ye've got it all. I'll make a draught to cure the wickedest of colds, I will.
