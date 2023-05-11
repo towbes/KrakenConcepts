@@ -18,7 +18,6 @@ local quest = Quest:new(xi.quest.log_id.WINDURST, xi.quest.id.windurst.WATER_WAY
 
 quest.reward =
 {
-    gil  = 900,
     fame = 40,
     fameArea = xi.quest.fame_area.WINDURST,
 }
@@ -107,9 +106,11 @@ quest.sections =
 
                 [355] = function(player, csid, option, npc)
                     if quest:complete(player) then
-                        player:confirmTrade()
+                        -- Note: Message display for gil reward is handled by the event
                         player:setLocalVar('Quest[2][17]mustZone', 1)
                         quest:setMustZone(player)
+                        player:confirmTrade()
+                        player:addGil(900)
                     end
                 end,
             },
@@ -119,7 +120,7 @@ quest.sections =
     {
         check = function(player, status, vars)
             return status == QUEST_COMPLETED and
-                not quest:getMustZone(player)
+            not quest:getMustZone(player)
         end,
 
         [xi.zone.WINDURST_WATERS] =
@@ -133,7 +134,6 @@ quest.sections =
                 end,
 
                 onTrigger = function(player, npc)
-                    print(quest:getVar(player, "waterRepeat"))
                     if
                         not player:getQuestStatus(xi.quest.log_id.WINDURST, xi.quest.id.windurst.CURSES_FOILED_A_GOLEM) ~= QUEST_ACCEPTED and
                         quest:getVar(player, "waterRepeat") == 0
@@ -148,10 +148,10 @@ quest.sections =
                         then
                             return quest:progressEvent(354)
                         else
-                            return quest:progressEvent(353)
+                            return quest:event(353)
                         end
                     else
-                        return quest:progressEvent(356, 0, xi.items.CANTEEN_OF_GIDDEUS_WATER)
+                        return quest:event(356, 0, xi.items.CANTEEN_OF_GIDDEUS_WATER)
                     end
                 end,
             },
@@ -172,11 +172,11 @@ quest.sections =
                 end,
 
                 [355] = function(player, csid, option, npc)
-                    if quest:complete(player) then
-                        player:confirmTrade()
-                        quest:setMustZone(player)
-                        quest:setVar(player, "waterRepeat", 0)
-                    end
+                    -- Note: Message display for gil reward is handled by the event
+                    quest:setVar(player, "waterRepeat", 0)
+                    quest:setMustZone(player)
+                    player:confirmTrade()
+                    player:addGil(900)
                 end,
             },
         },
