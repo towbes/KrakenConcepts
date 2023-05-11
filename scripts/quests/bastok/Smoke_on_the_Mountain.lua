@@ -59,8 +59,6 @@ quest.sections =
                 end,
             },
 
-            ['Offa'] = quest:event(222),
-
             onEventFinish =
             {
                 [429] = function(player, csid, option, npc)
@@ -73,6 +71,11 @@ quest.sections =
                     quest:complete(player)
                 end,
             },
+        },
+
+        [xi.zone.BASTOK_MARKETS] =
+        {
+            ['Offa'] = quest:event(222),
         },
 
         [xi.zone.SOUTH_GUSTABERG] =
