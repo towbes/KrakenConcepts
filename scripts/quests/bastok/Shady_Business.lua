@@ -32,12 +32,12 @@ quest.sections =
             ['Talib'] =
             {
                 onTrigger = function(player, npc)
-                    return quest:event(90)
+                    return quest:event(2)
                 end,
 
                 onTrade = function(player, npc, trade)
                     if npcUtil.tradeHasExactly(trade, { { xi.items.CHUNK_OF_ZINC_ORE, 4 } }) then
-                        return quest:progressEvent(91)
+                        return quest:progressEvent(2)
                     end
                 end,
 
