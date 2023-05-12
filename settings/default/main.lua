@@ -67,6 +67,9 @@ xi.settings.main =
     CAP_CURRENCY_SPARKS    = 99999,
     CAP_CURRENCY_VALOR     = 50000,
 
+    -- Player Data Sync/Save
+    PLAYER_DATA_SAVE = 120, -- Default time period to save player position, stats, and status effects in seconds.
+
     -- Magian Trials
     ENABLE_MAGIAN_TRIALS             = 1,
     MAGIAN_TRIALS_MOBKILL_MULTIPLIER = 1,
