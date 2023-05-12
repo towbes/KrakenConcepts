@@ -11,7 +11,7 @@ local entity = {}
 
 entity.onTrade = function(player, npc, trade)
     if
-        (npcUtil.tradeHas(trade, 4514) or npcUtil.tradeHas(trade, 5793)) and
+        (npcUtil.tradeHas(trade, 4514) or npcUtil.tradeHas(trade, 5793))
         -- Cold Light of Day Missing? 
     then
         npcUtil.popFromQM(player, npc, ID.mob.BUBBLY_BERNIE, { hide = 0 })
