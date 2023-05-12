@@ -68,7 +68,7 @@ quest.sections =
             ['Kenapa-Keppa'] =
             {
                 onTrigger = function(player, npc)
-                    return quest:progressEvent(310)
+                    return quest:event(310)
                 end
             },
 
@@ -88,7 +88,7 @@ quest.sections =
 
                     -- Before Quest: Asks you to check on others.
                     else
-                        return quest:progressEvent(312)
+                        return quest:event(312)
                     end
                 end,
             },
@@ -101,7 +101,7 @@ quest.sections =
                     if ohbiruProgress == 0 then
                         return quest:progressEvent(308)
                     elseif ohbiruProgress == 1 then
-                        return quest:progressEvent(309)
+                        return quest:event(309)
                     end
                 end,
             },
@@ -157,7 +157,7 @@ quest.sections =
                             return quest:progressEvent(327, 120)
                         end
                     else
-                        return quest:progressEvent(329)
+                        return quest:event(329)
                     end
                 end,
 
@@ -178,7 +178,7 @@ quest.sections =
                         elseif randEvent == 2 then
                             return quest:progressEvent(321) -- "Or Whatever"
                         else
-                            return quest:progressEvent(328) -- "..<Grin>.."
+                            return quest:event(328) -- "..<Grin>.."
                         end
                     end
                 end
@@ -199,9 +199,9 @@ quest.sections =
                     local kerutotoProgress = quest:getVar(player, 'kerutotoProg')
 
                     if kerutotoProgress == 1 then
-                        return quest:progressEvent(315, 0, xi.items.SLICE_OF_GRILLED_HARE)
+                        return quest:event(315, 0, xi.items.SLICE_OF_GRILLED_HARE)
                     elseif kerutotoProgress == 2 then
-                        return quest:progressEvent(333)
+                        return quest:event(333)
                     end
                 end,
             },
@@ -209,7 +209,7 @@ quest.sections =
             ['Leepe-Hoppe'] =
             {
                 onTrigger = function(player, npc)
-                    return quest:progressEvent(311)
+                    return quest:event(311)
                 end,
             },
 
@@ -242,7 +242,7 @@ quest.sections =
                     elseif ohbiruProgress == 2 then
                         return quest:progressEvent(317, 0, 4493, 624, 4408)
                     elseif ohbiruProgress == 3 then
-                        return quest:progressEvent(324)
+                        return quest:event(324)
                     end
                 end,
             },
