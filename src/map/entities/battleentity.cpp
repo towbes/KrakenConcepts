@@ -1872,6 +1872,18 @@ bool CBattleEntity::OnAttack(CAttackState& state, action_t& action)
 
                 actionTarget.reaction = REACTION::HIT;
 
+                if (this->objtype == TYPE_PC && ((CCharEntity*)this)->getCharVar("TREDECIM_COUNTER") > 12)
+                {
+                    // Check for Tredecim
+                    auto* equippedWeapon = dynamic_cast<CItemWeapon*>(this->m_Weapons[SLOT_MAIN]);
+                    if (equippedWeapon->getID() == 18052)
+                    {
+                        // Ensure critical is only set to main weapon slot
+                        attack.SetCritical(true);
+                        ((CCharEntity*)this)->setCharVar("TREDECIM_COUNTER", -1);
+                    }
+                }
+
                 // Critical hit.
                 if (attack.IsCritical())
                 {
