@@ -23,7 +23,7 @@ itemObject.onItemEquip = function(target, item)
 end
 
 itemObject.onItemUnequip = function(target, item)
-    target:removeListener('CHAOSBRINGER_KILLS')
+    target:removeListener("CHAOSBRINGER_KILLS")
 end
 
 return itemObject
