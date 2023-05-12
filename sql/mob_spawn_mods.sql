@@ -1797,6 +1797,12 @@ INSERT INTO `mob_spawn_mods` VALUES (17629587,1,12000,1); -- min gil 12000
 INSERT INTO `mob_spawn_mods` VALUES (17629587,2,20000,1); -- max gil 20000
 INSERT INTO `mob_spawn_mods` VALUES (17629587,15,3000,1); -- mug gil 3000
 
+-- Gargoyle-Iota, Gargoyle-Kappa, Gargoyle-Lambda, Gargoyle-Mu
+INSERT INTO `mob_spawn_mods` VALUES (16814231,55,180,1); -- IDLE_DESPAWN: 180
+INSERT INTO `mob_spawn_mods` VALUES (16814232,55,180,1); -- IDLE_DESPAWN: 180
+INSERT INTO `mob_spawn_mods` VALUES (16814233,55,180,1); -- IDLE_DESPAWN: 180
+INSERT INTO `mob_spawn_mods` VALUES (16814234,55,180,1); -- IDLE_DESPAWN: 180
+
 /*!40000 ALTER TABLE `mob_spawn_mods` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
