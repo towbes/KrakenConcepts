@@ -54,7 +54,7 @@ entity.onTrade = function(player, npc, trade)
                     player:startEvent(59, xi.settings.main.GIL_RATE * 250, 3)
                 end
             elseif reward == 4 then
-                if
+                if postman == QUEST_ACCEPTED then
                     player:startEvent(55, xi.settings.main.GIL_RATE * 500, 4)
                 else
                     player:startEvent(60, xi.settings.main.GIL_RATE * 500, 4)
