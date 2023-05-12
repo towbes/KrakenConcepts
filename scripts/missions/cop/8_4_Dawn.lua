@@ -245,9 +245,9 @@ mission.sections =
                 end,
             },
 
-            onRegionEnter =
+            onTriggerAreaEnter  =
             {
-                [1] = function(player, region)
+                [1] = function(player, triggerArea)
                     if mission:getVar(player, 'Status') == 4 and
                        mission:getVar(player, 'Wait') < VanadielUniqueDay() and
                        mission:getVar(player, 'LouveranceCS') == 2
@@ -353,9 +353,9 @@ mission.sections =
 
         [xi.zone.RULUDE_GARDENS] =
         {
-            onRegionEnter =
+            onTriggerAreaEnter  =
             {
-                [1] = function(player, region)
+                [1] = function(player, triggerArea)
                     if mission:getVar(player, 'Status') == 4 and checkAdditionalCS(player) == 5 then
                         return mission:progressEvent(122)
                     end
@@ -431,9 +431,9 @@ mission.sections =
 
         [xi.zone.LUFAISE_MEADOWS] =
         {
-            onRegionEnter =
+            onTriggerAreaEnter  =
             {
-                [1] = function(player, region)
+                [1] = function(player, triggerArea)
                     if mission:getVar(player, 'Status') == 7 then
                         return mission:progressEvent(116)
                     end
