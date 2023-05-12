@@ -1237,6 +1237,11 @@ bool CMobController::CanAggroTarget(CBattleEntity* PTarget)
         return false;
     }
 
+    if (PTarget->GetMLevel() > 70 && PMob->m_maxLevel < 61)
+    {
+        return false;
+    }
+
     return PMob->PMaster == nullptr && PMob->PAI->IsSpawned() && !PMob->PAI->IsEngaged() && CanDetectTarget(PTarget);
 }
 
