@@ -4094,6 +4094,9 @@ INSERT INTO `mob_skill_lists` VALUES ('Bullheaded_Grosvez', 5365, 608); -- arm b
 INSERT INTO `mob_skill_lists` VALUES ('Bullheaded_Grosvez', 5365, 609); -- battle dance
 INSERT INTO `mob_skill_lists` VALUES ('Bullheaded_Grosvez', 5365, 790); -- shoulder slam
 
+INSERT INTO `mob_skill_lists` VALUES ('Wreaker',5366,1248); -- Trinary Absorption
+INSERT INTO `mob_skill_lists` VALUES ('Wreaker',5366,1252); -- Shadow Spread
+
 
 
 
