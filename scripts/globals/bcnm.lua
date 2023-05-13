@@ -980,9 +980,9 @@ local function checkReqs(player, npc, bfid, registrant)
         end,
 
         [737] = function() -- Quest: Return to the Depths
-            return player:getCharVar("Quest[1][78]prog") == 9
+            return player:getCharVar("Quest[1][78]prog") >= 9 or
+                player:hasCompletedQuest(xi.quest.log_id.BASTOK, xi.quest.id.bastok.RETURN_TO_THE_DEPTHS)
         end,
-
         [738] = function() -- ENM: Bionic Bug
             return player:hasKeyItem(xi.ki.SHAFT_2716_OPERATING_LEVER)
         end,
@@ -1032,8 +1032,8 @@ local function checkReqs(player, npc, bfid, registrant)
         end,
 
         [896] = function() -- Quest: Storms of Fate
-            return player:getQuestStatus(xi.quest.log_id.JEUNO, xi.quest.id.jeuno.STORMS_OF_FATE) == QUEST_ACCEPTED and
-                player:getCharVar("Quest[3][86]Status") >= 2
+            return player:getQuestStatus(xi.quest.log_id.JEUNO, xi.quest.id.jeuno.STORMS_OF_FATE) == QUEST_COMPLETED or
+                player:getCharVar("Quest[3][86]Status") > 2
         end,
 
         [897] = function() -- Quest: The Wyrmking Descends
@@ -1093,8 +1093,7 @@ local function checkReqs(player, npc, bfid, registrant)
         end,
 
         [1057] = function() -- Apocalypse Nigh
-            return player:getQuestStatus(xi.quest.log_id.JEUNO, xi.quest.id.jeuno.APOCALYPSE_NIGH) == QUEST_ACCEPTED and
-                player:getCharVar('ApocalypseNigh') == 4
+            player:getCharVar('ApocalypseNigh') >= 3
         end,
 
         [1090] = function() -- Quest: Puppetmaster Blues
@@ -1570,11 +1569,11 @@ local function checkSkip(player, bfid)
         end,
 
         [677] = function()  -- Quest: Tango with a Tracker
-            return player:hasKeyItem(xi.ki.LETTER_FROM_SHIKAREE_X)
+            return player:hasCompletedQuest(xi.quest.log_id.OTHER_AREAS, xi.quest.id.otherAreas.TANGO_WITH_A_TRACKER)
         end,
 
         [678] = function() -- Quest: Requiem of Sin
-            return player:hasKeyItem(xi.ki.LETTER_FROM_SHIKAREE_Y) or player:hasKeyItem(xi.ki.LETTER_FROM_THE_MITHRAN_TRACKERS)
+            return player:hasCompletedQuest(xi.quest.log_id.OTHER_AREAS, xi.quest.id.otherAreas.REQUIEM_OF_SIN)
         end,
 
         [704] = function() -- PM3-5: Darkness Named
@@ -1622,13 +1621,8 @@ local function checkSkip(player, bfid)
         end,
 
         [896] = function() -- Quest: Storms of Fate
-            local stormsOfFateStatus = player:getQuestStatus(xi.quest.log_id.JEUNO, xi.quest.id.jeuno.STORMS_OF_FATE)
-
-            return stormsOfFateStatus == QUEST_COMPLETED or
-                (
-                    stormsOfFateStatus == QUEST_ACCEPTED and
-                    player:getCharVar("Quest[3][86]Status") > 2
-                )
+            return player:getQuestStatus(xi.quest.log_id.JEUNO, xi.quest.id.jeuno.STORMS_OF_FATE) == QUEST_COMPLETED or
+                player:getCharVar("Quest[3][86]Status") > 2
         end,
 
         [960] = function() -- PM2-5: Ancient Vows
