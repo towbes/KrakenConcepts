@@ -4078,7 +4078,7 @@ INSERT INTO `mob_skill_lists` VALUES ('Boggelman',5363,384);
 INSERT INTO `mob_skill_lists` VALUES ('Boggelman',5363,385);
 INSERT INTO `mob_skill_lists` VALUES ('Boggelman',5363,386);
 INSERT INTO `mob_skill_lists` VALUES ('Boggelman',5363,387);
-INSERT INTO `mob_skill_lists` VALUES ('Boggelman',5363,822);
+INSERT INTO `mob_skill_lists` VALUES ('Boggelman',5363,1363);
 
 INSERT INTO `mob_skill_lists` VALUES ('JailerOfTemperance',5364,1463);
 INSERT INTO `mob_skill_lists` VALUES ('JailerOfTemperance',5364,1465);
