@@ -15,7 +15,7 @@ return {
     ['Gilipese']      = { text = ID.text.GILIPESE_DIALOG },
     ['Guilerme']      = { text = ID.text.GUILERME_DIALOG },
     ['Helaku']        = { event = 541 },
-    ['Hinaree']       = { event = 580 },
+    -- ['Hinaree']       = { event = 580 },
     ['Ishwar']        = { text = ID.text.ISHWAR_DIALOG },
     ['Kasaroro']      = { event = 548 },
     ['Malfine']       = { text = ID.text.MALFINE_DIALOG },

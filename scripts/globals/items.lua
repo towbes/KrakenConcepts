@@ -1728,6 +1728,7 @@ xi.items =
     SCROLL_OF_WARP_II               = 4870,
     SCROLL_OF_RETRACE               = 4873,
     SCROLL_OF_ABSORB_INT            = 4878,
+    SCROLL_OF_SLEEPGA               = 4881,
     SCROLL_OF_STONEJA               = 4893,
     SCROLL_OF_WATERJA               = 4895,
     FIRE_SPIRIT_PACT                = 4896,
