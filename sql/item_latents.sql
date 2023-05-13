@@ -1580,11 +1580,6 @@ INSERT INTO `item_latents` VALUES  (15314,68,2,29,0);
 INSERT INTO `item_latents` VALUES  (15318,68,2,29,0);
 INSERT INTO `item_latents` VALUES  (15318,68,2,31,0);
 
--- -------------------------------------------------------
--- Caitiff's Socks
--- -------------------------------------------------------
--- INSERT INTO `item_latents` VALUES  (15324,???,1,2,25); -- Flee when HP <25% and TP <100%
-
 INSERT INTO `item_latents` VALUES  (15328,370,2,13,11);
 
 -- -------------------------------------------------------
