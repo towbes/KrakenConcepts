@@ -654,6 +654,7 @@ INSERT INTO `fishing_bait_affinity` VALUES (17404,4385,3);
 INSERT INTO `fishing_bait_affinity` VALUES (17007,5129,2);
 INSERT INTO `fishing_bait_affinity` VALUES (16996,4482,2);
 INSERT INTO `fishing_bait_affinity` VALUES (17396,4289,2);
+INSERT INTO `fishing_bait_affinity` VALUES (17396,4428,1);
 /*!40000 ALTER TABLE `fishing_bait_affinity` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
