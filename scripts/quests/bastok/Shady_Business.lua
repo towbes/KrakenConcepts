@@ -32,7 +32,7 @@ quest.sections =
             ['Talib'] =
             {
                 onTrigger = function(player, npc)
-                    return quest:event(2)
+                    return quest:event(90)
                 end,
 
                 onTrade = function(player, npc, trade)
@@ -45,7 +45,7 @@ quest.sections =
 
             onEventFinish =
             {
-                [90] = function(player, csid, option, npc)
+                [2] = function(player, csid, option, npc)
                     -- We can complete the quest without accepting it, but quest will NOT get re-accepted after completed.
                     if player:getQuestStatus(xi.quest.log_id.BASTOK, xi.quest.id.bastok.SHADY_BUSINESS) == QUEST_AVAILABLE then
                         quest:begin(player)
