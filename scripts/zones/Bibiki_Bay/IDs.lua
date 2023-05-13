@@ -61,6 +61,7 @@ zones[xi.zone.BIBIKI_BAY] =
             16793714,
             16793715,
         },
+        ROHEMOLIPAUD = 16793927,
     },
     npc =
     {
