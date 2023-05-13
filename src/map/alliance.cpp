@@ -182,6 +182,11 @@ void CAlliance::removeParty(CParty* party)
 
 void CAlliance::delParty(CParty* party)
 {
+    // Don't delete parties when there's no party in the alliance
+    if (!party->m_PAlliance || party->m_PAlliance->partyList.size() == 0)
+    {
+        return;
+    }
     // Delete the party from the alliance list
     party->m_PAlliance->partyList.erase(
         std::remove_if(party->m_PAlliance->partyList.begin(), party->m_PAlliance->partyList.end(), [=](CParty* entry)
