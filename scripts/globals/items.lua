@@ -3056,6 +3056,7 @@ xi.items =
     HICKORY_SHIELD                  = 12359,
     PICAROONS_SHIELD                = 12370,
     CLIPEUS                         = 12371,
+    LIGHT_BUCKLER                   = 12375,
     ASTRAL_ASPIS                    = 12382,
     ACHERON_SHIELD                  = 12385,
     MERCENARYS_SHIELD               = 12389,

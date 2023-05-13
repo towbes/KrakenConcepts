@@ -12,4 +12,5 @@ return {
     ['Ranemaud']   = { event = 68 },
     ['Verctissa']  = { event = 114 },
     ['Washu']      = { event = 80 },
+    ['Stray_Cloud'] = { event = 231 },
 }
