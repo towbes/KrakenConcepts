@@ -1108,6 +1108,16 @@ void CZone::CharZoneIn(CCharEntity* PChar)
         }
     }
 
+        else if (PChar->StatusEffectContainer->HasStatusEffect(EFFECT_LEVEL_SYNC))
+    {
+        // Logging in with no party and a level sync status = bad.
+        if (!PChar->PParty)
+        {
+            PChar->StatusEffectContainer->DelStatusEffectSilent(EFFECT_LEVEL_SYNC);
+            PChar->StatusEffectContainer->DelStatusEffectSilent(EFFECT_LEVEL_RESTRICTION);
+        }
+    }
+
     PChar->PLatentEffectContainer->CheckLatentsZone();
 
     charutils::ReadHistory(PChar);
