@@ -2,7 +2,7 @@
 -- Twinstone Bonding
 -----------------------------------
 -- !addquest 2 62
--- Gioh Ajirhri : !pos 107 -5 174 130
+-- Gioh Ajirhri : !pos 107 -5 174 241
 -----------------------------------
 require('scripts/globals/interaction/quest')
 require("scripts/globals/items")
@@ -13,14 +13,6 @@ require('scripts/globals/zone')
 
 -----------------------------------
 local quest = Quest:new(xi.quest.log_id.WINDURST, xi.quest.id.windurst.TWINSTONE_BONDING)
-
-quest.reward =
-{
-    fame = 80,
-    fameArea = xi.quest.fame_area.WINDURST,
-    item = xi.items.WRAPPED_BOW,
-    title = xi.title.BOND_FIXER
-}
 
 quest.sections =
 {
@@ -61,6 +53,7 @@ quest.sections =
                     if player:needToZone() then
                         return quest:event(491, 0, item)
                     end
+
                     return quest:progressEvent(488, 0, item)
                 end,
 
@@ -83,11 +76,21 @@ quest.sections =
 
                 [490] = function(player, csid, option, npc)
                     if player:getQuestStatus(quest.areaId, quest.questId) == QUEST_COMPLETED then
+                        -- rewards for repeat completion
                         quest.reward =
                         {
                             fame = 10,
                             fameArea = xi.quest.fame_area.WINDURST,
                             gil = 900 * xi.settings.main.GIL_RATE
+                        }
+                    else
+                        -- rewards for first completion
+                        quest.reward =
+                        {
+                            fame = 80,
+                            fameArea = xi.quest.fame_area.WINDURST,
+                            item = xi.items.WRAPPED_BOW,
+                            title = xi.title.BOND_FIXER
                         }
                     end
 
