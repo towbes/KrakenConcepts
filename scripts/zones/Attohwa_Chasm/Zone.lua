@@ -48,8 +48,9 @@ zoneObject.onInitialize = function(zone)
 
 
 
-    UpdateNMSpawnPoint(ID.mob.TIAMAT)
-    GetMobByID(ID.mob.TIAMAT):setRespawnTime(math.random(86400, 259200))
+    -- NM Persistence
+    xi.mob.nmTODPersistCache(zone, ID.mob.TIAMAT)
+    xi.mob.nmTODPersistCache(zone, ID.mob.SEKHMET)
 
     xi.helm.initZone(zone, xi.helm.type.EXCAVATION)
 end
