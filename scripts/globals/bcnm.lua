@@ -933,7 +933,7 @@ local function checkReqs(player, npc, bfid, registrant)
 
         [672] = function() -- PM5-3 U2: Head Wind
             return promathiaMission == xi.mission.id.cop.THREE_PATHS and
-                player:getMissionStatus(xi.mission.log_id.COP, xi.mission.status.COP.ULMIA) == 7
+                player:getMissionStatus(xi.mission.log_id.COP, xi.mission.status.COP.ULMIA) >= 7
         end,
 
         [673] = function() -- ENM: Like the Wind
@@ -976,7 +976,7 @@ local function checkReqs(player, npc, bfid, registrant)
 
         [736] = function() -- PM5-3 L3: A Century of Hardship
             return promathiaMission == xi.mission.id.cop.THREE_PATHS and
-                player:getMissionStatus(xi.mission.log_id.COP, xi.mission.status.COP.LOUVERANCE) == 8
+                player:getMissionStatus(xi.mission.log_id.COP, xi.mission.status.COP.LOUVERANCE) >= 8
         end,
 
         [737] = function() -- Quest: Return to the Depths
