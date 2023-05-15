@@ -11,6 +11,10 @@ local zoneObject = {}
 zoneObject.onInitialize = function(zone)
     xi.treasure.initZone(zone)
     xi.helm.initZone(zone, xi.helm.type.MINING)
+
+    -- NM Persistence
+    xi.mob.nmTODPersistCache(zone, ID.mob.NOMHO_CRIMSONARMOR)
+    xi.mob.nmTODPersistCache(zone, ID.mob.QUVHO_DEATHHURLER)
 end
 
 zoneObject.onZoneIn = function(player, prevZone)

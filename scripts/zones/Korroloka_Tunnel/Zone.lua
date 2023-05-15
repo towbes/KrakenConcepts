@@ -13,6 +13,9 @@ zoneObject.onInitialize = function(zone)
     zone:registerTriggerArea(2, -101, 7, -114, 0, 0, 0) -- Center Pool
     zone:registerTriggerArea(3, -112, 3, -103, 0, 0, 0) -- Right Pool
 
+    --NM Persistence
+    xi.mob.nmTODPersistCache(zone, ID.mob.THOON)
+
     xi.helm.initZone(zone, xi.helm.type.EXCAVATION)
 end
 

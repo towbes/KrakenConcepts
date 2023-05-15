@@ -16,6 +16,9 @@ end
 zoneObject.onInitialize = function(zone)
     xi.conq.setRegionalConquestOverseers(zone:getRegionID())
     xi.voidwalker.zoneOnInit(zone)
+    
+    --NM Persistence
+    xi.mob.nmTODPersistCache(zone, ID.mob.BEDROCK_BARRY)
 end
 
 zoneObject.onZoneIn = function(player, prevZone)

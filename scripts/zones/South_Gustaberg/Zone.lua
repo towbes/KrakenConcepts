@@ -13,6 +13,8 @@ zoneObject.onChocoboDig = function(player, precheck)
 end
 
 zoneObject.onInitialize = function(zone)
+    -- NM Persistence
+    xi.mob.nmTODPersistCache(zone, ID.mob.TOCOCO)
 end
 
 zoneObject.onZoneIn = function(player, prevZone)
