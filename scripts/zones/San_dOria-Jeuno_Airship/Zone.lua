@@ -29,7 +29,7 @@ zoneObject.onGameHour = function(zone)
 
     if
         IsMoonFull() and
-        vanadielHour >= 18 and
+        vanadielHour >= 18 or
         vanadielHour < 6
     then
         qmObj:setStatus(xi.status.NORMAL)
