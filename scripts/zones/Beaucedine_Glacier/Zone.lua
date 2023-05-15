@@ -9,8 +9,8 @@ require('scripts/globals/zone')
 local zoneObject = {}
 
 zoneObject.onInitialize = function(zone)
-    UpdateNMSpawnPoint(ID.mob.HUMBABA)
-    GetMobByID(ID.mob.HUMBABA):setRespawnTime(math.random(3600, 4200))
+    -- NM Persistence
+    xi.mob.nmTODPersistCache(zone, ID.mob.HUMBABA)
 
     xi.conq.setRegionalConquestOverseers(zone:getRegionID())
     xi.voidwalker.zoneOnInit(zone)
