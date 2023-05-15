@@ -4513,6 +4513,7 @@ xi.items =
     HYPNO_STAFF                     = 17117,
     SHORTBOW                        = 17152,
     SELF_BOW                        = 17153,
+    WRAPPED_BOW                     = 17154,
     LONGBOW                         = 17160,
     POWER_BOW                       = 17161,
     SPEED_BOW                       = 17170,
