@@ -106,7 +106,10 @@ xi.promyvion.receptacleOnFight = function(mob, target)
             local stray = GetMobByID(i)
             if stray:isSpawned() then
                 count = count + 1
-                if stray:getCurrentAction() == xi.act.ROAMING and mob:checkDistance(stray) < 8 then
+                if
+                    stray:getCurrentAction() == xi.act.ROAMING and
+                    mob:checkDistance(stray) < 8
+                then
                     stray:updateEnmity(target)
                 end
             end
@@ -162,7 +165,7 @@ xi.promyvion.receptacleIdle = function(mob)
 end
 
 xi.promyvion.receptacleOnDeath = function(mob, optParams)
-    if optParams.isKiller then
+    if mob:getLocalVar("deathLogic") == 0 then
         local mobId             = mob:getID()
         local zoneReceptacles   = zones[mob:getZoneID()].mob.MEMORY_RECEPTACLES
         local floor             = zoneReceptacles[mobId].group
@@ -213,6 +216,8 @@ xi.promyvion.receptacleOnDeath = function(mob, optParams)
                 end
             end
         end
+
+        mob:setLocalVar("deathLogic", 1)
     end
 end
 
