@@ -8,6 +8,10 @@ require('scripts/globals/zone')
 local zoneObject = {}
 
 zoneObject.onInitialize = function(zone)
+    -- NM Persistence
+    xi.mob.nmTODPersistCache(zone, ID.mob.MOTHER_GLOBE)
+    xi.mob.nmTODPersistCache(zone, ID.mob.FAUST)
+
     -- MAP 1
     zone:registerTriggerArea(1, -21, 29, -61, -16, 31, -57)      --> F (H-10)
     zone:registerTriggerArea(2, 16, 29, 57, 21, 31, 61)          --> E (H-7)
