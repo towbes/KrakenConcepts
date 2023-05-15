@@ -82,8 +82,8 @@ end
 zoneObject.onZoneWeatherChange = function(weather)
     local bayawak = GetMobByID(ID.mob.BAYAWAK)
     if
-            not bayawak:isSpawned() and os.time() > GetServerVariable("BAYAWAK_RESPAWN") and
-        and (weather == xi.weather.HOT_SPELL or weather == xi.weather.HEAT_WAVE)
+        not bayawak:isSpawned() and os.time() > GetServerVariable("BAYAWAK_RESPAWN") and
+        (weather == xi.weather.HOT_SPELL or weather == xi.weather.HEAT_WAVE)
     then
         DisallowRespawn(bayawak:getID(), false)
         bayawak:setRespawnTime(math.random(30, 150)) -- pop 30-150 sec after fire weather starts
