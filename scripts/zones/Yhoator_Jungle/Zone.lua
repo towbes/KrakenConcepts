@@ -27,6 +27,7 @@ zoneObject.onInitialize = function(zone)
     -- NM Persistence
     xi.mob.nmTODPersistCache(zone, ID.mob.WOODLAND_SAGE)
     xi.mob.nmTODPersistCache(zone, ID.mob.POWDERER_PENNY)
+    xi.mob.nmTODPersistCache(zone, ID.mob.BRIGHT_HANDED_KUNBERRY)
 
     UpdateNMSpawnPoint(ID.mob.BISQUE_HEELED_SUNBERRY)
     GetMobByID(ID.mob.BISQUE_HEELED_SUNBERRY):setRespawnTime(math.random(900, 10800))

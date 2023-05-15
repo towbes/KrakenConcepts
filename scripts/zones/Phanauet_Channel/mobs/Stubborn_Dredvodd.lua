@@ -14,11 +14,12 @@ end
 entity.onMobFight = function(mob)
 end
 
-entity.onMobDeath = function(mob, player, isKiller)
+entity.onMobDeath = function(mob, player, optParams)
+    xi.mob.nmTODPersist(mob, math.random(43200, 54000)) -- 12 - 15 hours
+
 end
 
 entity.onMobDespawn = function(mob)
-    mob:setRespawnTime(math.random(43200, 54000)) -- 12 - 15 hours
 end
 
 return entity

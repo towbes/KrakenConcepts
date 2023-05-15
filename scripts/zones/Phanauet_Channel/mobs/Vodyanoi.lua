@@ -8,10 +8,10 @@ mixins = { require("scripts/mixins/job_special") }
 local entity = {}
 
 entity.onMobDeath = function(mob, player, optParams)
+    mob:setRespawnTime(math.random(43200, 54000)) -- 12 - 15 hours
 end
 
 entity.onMobDespawn = function(mob)
-    mob:setRespawnTime(math.random(43200, 54000)) -- 12 - 15 hours
 end
 
 return entity
