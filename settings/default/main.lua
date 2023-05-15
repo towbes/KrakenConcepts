@@ -169,6 +169,8 @@ xi.settings.main =
     CHEST_MAX_ILLUSION_TIME  = 3600,  -- 1 hour
     CHEST_MIN_ILLUSION_TIME  = 1800,  -- 30 minutes
 
+    -- NM Persistence
+    NM_PERSISTENCE = 1, -- When set to 1, timed NM spawns will be persistent through server crashing
     -- Multiplier to NM lottery spawn chance. (Default 1.0) eg. 0 = disable lottery spawns. -1 for always 100% chance.
     NM_LOTTERY_CHANCE = 1.0,
     -- Multiplier to NM lottery cooldown time (Default 1.0) eg. 2.0 = twice as long. 0 = no cooldowns.

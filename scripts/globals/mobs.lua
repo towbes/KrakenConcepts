@@ -42,42 +42,62 @@ local function persistLotteryPrimed(phList)
     for k, v in pairs(phList) do
         nm = GetMobByID(v)
         local zone = nm:getZone()
-        local respawnPersist = zone:getLocalVar(string.format("[SPAWN]%s", nm:getID()))
+        local respawnPersist = zone:getLocalVar(string.format("\\[SPAWN\\]%s", nm:getID()))
 
         if respawnPersist == 0 then
             return false
-        elseif nm ~= nil and (nm:isSpawned() or nm:getRespawnTime() ~= 0 or (respawnPersist > os.time())) then
+        elseif
+            nm ~= nil and
+            (nm:isSpawned() or nm:getRespawnTime() ~= 0 or
+            (respawnPersist > os.time()))
+        then
             return true
         end
     end
+
     return false
 end
 
 -- Needs to be added to the NM's onDespawn() function.
 xi.mob.nmTODPersist = function(mob, cooldown)
-    SetServerVariable(string.format("[SPAWN]%s", mob:getID()), cooldown + os.time())
-    mob:getZone():setLocalVar(string.format("[SPAWN]%s", mob:getID()), cooldown + os.time())
+    if xi.settings.main.NM_PERSISTENCE == 1 then
+        SetServerVariable(string.format("[SPAWN]%s", mob:getID()), cooldown + os.time())
+        mob:getZone():setLocalVar(string.format("[SPAWN]%s", mob:getID()), cooldown + os.time())
+    end
+
+    UpdateNMSpawnPoint(mob:getID())
+
     mob:setRespawnTime(cooldown)
 end
 
 -- Needs to be added to the NM's zone onInit() function.
 xi.mob.nmTODPersistCache = function(zone, mobId)
-    local mob = GetMobByID(mobId)
-    local respawn = GetServerVariable(string.format("[SPAWN]%s", mob:getID()))
-    zone:setLocalVar(string.format("[SPAWN]%s", mob:getID()), respawn)
+    if xi.settings.main.NM_PERSISTENCE == 1 then
+        local mob = GetMobByID(mobId)
+        if mob == nil then
+            return
+        end
 
-    if respawn == 0 then
-        return
-    end
+        local respawn = GetServerVariable(string.format("\\[SPAWN\\]%s", mobId))
+        zone:setLocalVar(string.format("[SPAWN]%s", mobId), respawn)
+        if
+            mob ~= nil and
+            mob:isSpawned() and
+            os.time() < respawn -- Spawned, but hasn't reached its time yet
+        then
+            DespawnMob(mobId)
+            if CheckNMSpawnPoint(mobId) then
+                UpdateNMSpawnPoint(mobId)
+            end
 
-    if mob:isAlive() then
-        DespawnMob(mobId)
-    end
-
-    if respawn <= os.time() then
-        mob:setRespawnTime(300)
-    else
-        mob:setRespawnTime(respawn - os.time())
+            mob:setRespawnTime(respawn - os.time())
+        elseif os.time() >= respawn then -- Mob should be spawned.  Give it a few seconds.
+            UpdateNMSpawnPoint(mobId)
+            mob:setRespawnTime(30)
+        else
+            UpdateNMSpawnPoint(mobId)
+            mob:setRespawnTime(respawn - os.time()) -- Is dead when server restarts set its respawn timer
+        end
     end
 end
 
@@ -90,13 +110,13 @@ end
 -- Needs to be added to the NM's zone onInit() function.
 xi.mob.lotteryPersistCache = function(zone, mobId)
     local mob = GetMobByID(mobId)
-    local respawn = GetServerVariable(string.format("[SPAWN]%s", mob:getID()))
+    local respawn = GetServerVariable(string.format("\\[SPAWN\\]%s", mob:getID()))
     zone:setLocalVar(string.format("[SPAWN]%s", mob:getID()), respawn)
 end
 
 -- potential lottery placeholder was killed
 xi.mob.phOnDespawn = function(ph, phList, chance, cooldown, immediate)
-    if ph:getZone():getLocalVar("[BEASTMEN]GroupIndex") ~= 0 then -- ASB Beastman Group Spawn Fix 
+    if ph:getZone():getLocalVar("[BEASTMEN]GroupIndex") ~= 0 then
         for _, group in pairs(xi.beastmengroups.zones) do
             if ph:getZoneID() == group[1] then
                 for it, idtable in pairs(group[3]) do
@@ -112,6 +132,7 @@ xi.mob.phOnDespawn = function(ph, phList, chance, cooldown, immediate)
             end
         end
     end
+
     if type(immediate) ~= "boolean" then
         immediate = false
     end
