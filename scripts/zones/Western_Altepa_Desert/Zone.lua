@@ -78,7 +78,7 @@ zoneObject.onZoneWeatherChange = function(weather)
         dahu:setRespawnTime(math.random(30, 150)) -- pop 30-150 sec after earth weather starts
     end
 
-    local kvMob = GetMobByID(ID.mob.KING_VINEGARROON)
+    local kingV = GetMobByID(ID.mob.KING_VINEGARROON)
     local kvre = GetServerVariable("\\[SPAWN\\]17289575")
     
     if not kingV:isSpawned() and os.time() > kvre and weather == xi.weather.DUST_STORM then
