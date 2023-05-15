@@ -204,8 +204,14 @@ zoneObject.onEventFinish = function(player, csid, option)
     if csid == 101 and option == 1 then
         player:setPos(540, -1, -499.900, 62, 36)
         player:setCharVar("Ru-Hmet-TP", 0)
+        for _, entry in pairs(player:getNotorietyList()) do
+            entry:clearEnmity(player) -- reset hate on player after teleporting
+        end
     elseif (csid > 149 and csid < 184) or csid == 102 or csid == 103 or csid == 101 then
         player:setCharVar("Ru-Hmet-TP", 0)
+        for _, entry in pairs(player:getNotorietyList()) do
+            entry:clearEnmity(player) -- reset hate on player after teleporting
+        end
     elseif csid == 32000 and option == 1 then
         player:setPos(420, 0, 398, 68)
     end
