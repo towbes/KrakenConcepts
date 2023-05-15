@@ -18,9 +18,7 @@ itemObject.onItemCheck = function(target)
 end
 
 itemObject.onItemUse = function(target)
-    if target:hasEquipped(xi.items.STURDY_TROUSERS) then
-        target:addStatusEffect(xi.effect.MAX_HP_BOOST, 10, 0, 1800, 0, 0, 0, xi.items.STURDY_TROUSERS)
-    end
+    target:addStatusEffect(xi.effect.MAX_HP_BOOST, 10, 0, 1800, 0, 0, 0, xi.items.STURDY_TROUSERS)
 end
 
 return itemObject

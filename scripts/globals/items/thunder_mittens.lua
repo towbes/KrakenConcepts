@@ -6,6 +6,11 @@
 local itemObject = {}
 
 itemObject.onItemCheck = function(target)
+    local effect = target:getStatusEffect(xi.effect.ENTHUNDER)
+    if effect ~= nil and effect:getItemSourceID() == xi.items.THUNDER_MITTENS then
+        target:delStatusEffect(xi.effect.ENTHUNDER)
+    end
+
     return 0
 end
 

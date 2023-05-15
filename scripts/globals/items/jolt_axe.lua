@@ -18,9 +18,7 @@ itemObject.onItemCheck = function(target)
 end
 
 itemObject.onItemUse = function(target)
-    if target:hasEquipped(xi.items.JOLT_AXE) then
-        target:addStatusEffect(xi.effect.ATTACK_BOOST, 3, 0, 1800, 0, 0, 0, xi.items.JOLT_AXE)
-    end
+    target:addStatusEffect(xi.effect.ATTACK_BOOST, 3, 0, 1800, 0, 0, 0, xi.items.JOLT_AXE)
 end
 
 return itemObject

@@ -18,9 +18,7 @@ itemObject.onItemCheck = function(target)
 end
 
 itemObject.onItemUse = function(target)
-    if target:hasEquipped(xi.items.PIERCING_DAGGER) then
-        target:addStatusEffect(xi.effect.ATTACK_BOOST, 3, 0, 1800, 0, 0, 0, xi.items.PIERCING_DAGGER)
-    end
+    target:addStatusEffect(xi.effect.ATTACK_BOOST, 3, 0, 1800, 0, 0, 0, xi.items.PIERCING_DAGGER)
 end
 
 return itemObject

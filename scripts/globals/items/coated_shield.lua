@@ -9,6 +9,14 @@ require("scripts/globals/msg")
 local itemObject = {}
 
 itemObject.onItemCheck = function(target)
+    local effect = target:getStatusEffect(xi.effect.SHELL)
+    if
+        effect ~= nil and
+        effect:getItemSourceID() == xi.items.COATED_SHIELD
+    then
+        target:delStatusEffect(xi.effect.SHELL)
+    end
+
     return 0
 end
 

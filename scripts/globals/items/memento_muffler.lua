@@ -19,9 +19,7 @@ itemObject.onItemCheck = function(target)
 end
 
 itemObject.onItemUse = function(target)
-    if target:hasEquipped(xi.items.MEMENTO_MUFFLER) then
-        target:addStatusEffect(xi.effect.VIT_BOOST, 7, 0, 300, 0, 0, 0, xi.items.MEMENTO_MUFFLER)
-    end
+    target:addStatusEffect(xi.effect.VIT_BOOST, 7, 0, 300, 0, 0, 0, xi.items.MEMENTO_MUFFLER)
 end
 
 return itemObject

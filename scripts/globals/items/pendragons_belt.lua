@@ -18,9 +18,7 @@ itemObject.onItemCheck = function(target)
 end
 
 itemObject.onItemUse = function(target)
-    if target:hasEquipped(xi.items.PENDRAGONS_BELT) then
-        target:addStatusEffect(xi.effect.DEX_BOOST, 10, 0, 60, 0, 0, 0, xi.items.PENDRAGONS_BELT)
-    end
+    target:addStatusEffect(xi.effect.DEX_BOOST, 10, 0, 60, 0, 0, 0, xi.items.PENDRAGONS_BELT)
 end
 
 return itemObject

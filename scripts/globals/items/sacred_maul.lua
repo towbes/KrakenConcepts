@@ -1,25 +1,22 @@
 -----------------------------------
--- ID: 17706
--- Item: Vulcan Blade
--- Item Effect: Enfire
+-- ID: 18392
+-- Item: Sacred Maul
+-- Enchantment: Enlight
 -- Duration: 3 minutes
------------------------------------
-require("scripts/globals/status")
-require("scripts/globals/msg")
 -----------------------------------
 local itemObject = {}
 
 itemObject.onItemCheck = function(target)
-    local effect = target:getStatusEffect(xi.effect.ENFIRE)
-    if effect ~= nil and effect:getItemSourceID() == xi.items.VULCAN_BLADE then
-        target:delStatusEffect(xi.effect.ENFIRE)
+    local effect = target:getStatusEffect(xi.effect.ENLIGHT)
+    if effect ~= nil and effect:getItemSourceID() == xi.items.SACRED_MAUL then
+        target:delStatusEffect(xi.effect.ENLIGHT)
     end
 
     return 0
 end
 
 itemObject.onItemUse = function(target)
-    local effect = xi.effect.ENFIRE
+    local effect = xi.effect.ENLIGHT
     local magicskill = target:getSkillLevel(xi.skill.ENHANCING_MAGIC)
     local potency = 0
 
@@ -31,7 +28,7 @@ itemObject.onItemUse = function(target)
 
     potency = utils.clamp(potency, 3, 25)
 
-    target:addStatusEffect(effect, potency, 0, 180, 0, 0, 0, xi.items.VULCAN_BLADE)
+    target:addStatusEffect(effect, potency, 0, 180, 0, 0, 0, xi.items.SACRED_MAUL)
 end
 
 return itemObject
