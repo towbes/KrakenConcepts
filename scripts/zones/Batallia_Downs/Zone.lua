@@ -26,8 +26,9 @@ local function registerRegionAroundNPC(zone, NPCID, zoneID)
 end
 
 zoneObject.onInitialize = function(zone)
-    UpdateNMSpawnPoint(ID.mob.AHTU)
-    GetMobByID(ID.mob.AHTU):setRespawnTime(math.random(900, 10800))
+    -- NM Persistence
+    xi.mob.nmTODPersistCache(zone, ID.mob.AHTU)
+    xi.mob.nmTODPersistCache(zone, ID.mob.WEEPING_WILLOW)
 
     for i = 0, 7 do
         registerRegionAroundNPC(zone, ID.npc.RAPTOR_FOOD_BASE + i, i + 1)
