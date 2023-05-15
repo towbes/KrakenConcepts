@@ -62,6 +62,7 @@ zones[xi.zone.SACRARIUM] =
         SMALL_KEYHOLE       = 16892142,
         QM_MARISELLE_OFFSET = 16892155, -- qm_professor_mariselle in npc_list.sql
         TREASURE_CHEST      = 16892183,
+        QM_TAVNAZIAN_COOKBOOK = 16892184,
     },
 }
 
