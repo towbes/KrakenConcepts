@@ -819,7 +819,7 @@ namespace battleutils
                 bool crit = battleutils::GetCritHitRate(PDefender, PAttacker, true) > xirand::GetRandomNumber(100);
 
                 // Dmg math.
-                float  DamageRatio = GetDamageRatio(PDefender, PAttacker, crit, 0.f);
+                float  DamageRatio = GetDamageRatio(PDefender, PAttacker, crit, 1.f);
                 uint16 dmg         = (uint32)((PDefender->GetMainWeaponDmg() + battleutils::GetFSTR(PDefender, PAttacker, SLOT_MAIN)) * DamageRatio);
                 dmg                = attackutils::CheckForDamageMultiplier(((CCharEntity*)PDefender), dynamic_cast<CItemWeapon*>(PDefender->m_Weapons[SLOT_MAIN]), dmg,
                                                                            PHYSICAL_ATTACK_TYPE::NORMAL, SLOT_MAIN);
@@ -2960,11 +2960,7 @@ namespace battleutils
     float GetDamageRatio(CBattleEntity* PAttacker, CBattleEntity* PDefender, bool isCritical, float bonusAttPercent)
     {
         uint16 attack = PAttacker->ATT();
-        // Bonus attack currently only from footwork
-        if (bonusAttPercent >= 1)
-        {
-            attack = static_cast<uint16>(attack * bonusAttPercent);
-        }
+        attack        = static_cast<uint16>(attack * bonusAttPercent);
 
         // Wholly possible for DEF to be near 0 with the amount of debuffs/effects now.
         uint16 defense = PDefender->DEF();
@@ -4841,12 +4837,12 @@ namespace battleutils
                 if (!battleutils::IsAbsorbByShadow(PVictim))
                 {
                     // successful hit, add damage
-                    float AttMultiplerPercent = 0.f;
+                    float AttMultiplerPercent = 1.f;
 
                     // get jump attack bonus from gear
                     if (PAttacker->objtype == TYPE_PC)
                     {
-                        AttMultiplerPercent = PAttacker->getMod(Mod::JUMP_ATT_BONUS) / 100.f;
+                        AttMultiplerPercent = 1.f + PAttacker->getMod(Mod::JUMP_ATT_BONUS) / 100.f;
                     }
 
                     float DamageRatio = battleutils::GetDamageRatio(PAttacker, PVictim, false, AttMultiplerPercent);
