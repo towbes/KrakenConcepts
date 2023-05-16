@@ -21,6 +21,7 @@ return {
     ['Ishwar']        = { text = ID.text.ISHWAR_DIALOG },
     ['Kasaroro']      = { event = 548 },
     ['Malfine']       = { text = ID.text.MALFINE_DIALOG },
+    ['Maloquedil']    = { event = 21 },
     ['Maurine']       = { text = ID.text.MAURINE_DIALOG },  -- NOTE: These are two different NPCs
     ['Maurinne']      = { text = ID.text.MAURINNE_DIALOG },
     ['Miageau']       = { event = 517 },

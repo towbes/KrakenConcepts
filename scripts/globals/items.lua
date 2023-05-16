@@ -361,6 +361,7 @@ xi.items =
     DODO_SKIN                       = 1014,
     SAND_BAT_FANG                   = 1015,
     REMI_SHELL                      = 1016,
+    BULB_OF_SHAMAN_GARLIC           = 1018,
     SICKLE                          = 1020,
     HATCHET                         = 1021,
     SET_OF_THIEFS_TOOLS             = 1022,
