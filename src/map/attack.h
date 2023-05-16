@@ -117,6 +117,7 @@ private:
     int32                     m_trickAttackDamage{ 0 }; // The damage from trick attack.
     int32                     m_naturalH2hDamage{ 0 };  // The damage from natural H2H.
     int32                     m_baseDamage{ 0 };        // The base damage.
+    std::optional<bool>       m_isParried{ std::nullopt }; // Is this attack parried by the victim?
 };
 
 #endif
