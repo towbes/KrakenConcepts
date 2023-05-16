@@ -105,6 +105,7 @@ xi.items =
     MAGICMART_FLYER                 = 532,
     CHUNK_OF_DERFLAND_HUMUS         = 533,
     CLUMP_OF_GAUSEBIT_WILDGRASS     = 534,
+    ENGRAVED_KEY                    = 535,
     ADVENTURERS_COUPON              = 536,
     DAMSELFLY_WORM                  = 537,
     MAGICKED_SKULL                  = 538,
