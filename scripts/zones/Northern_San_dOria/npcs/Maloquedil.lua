@@ -24,6 +24,7 @@ entity.onTrigger = function(player, npc)
         not utils.mask.getBit(wildcatSandy, 7)
     then
         player:startEvent(807)
+    end
 end
 
 entity.onEventUpdate = function(player, csid, option)

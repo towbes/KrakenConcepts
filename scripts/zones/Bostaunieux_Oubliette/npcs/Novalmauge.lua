@@ -44,7 +44,7 @@ entity.onTrigger = function(player, npc)
         player:getCharVar("theHolyCrestCheck") == 0
     then
         player:startEvent(7)
-
+    end
 end
 
 entity.onEventFinish = function(player, csid, option, npc)

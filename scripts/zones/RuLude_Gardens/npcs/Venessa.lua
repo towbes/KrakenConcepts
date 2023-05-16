@@ -114,7 +114,6 @@ entity.onEventUpdate = function(player, csid, option)
             option == 4 and VanadielTime() >= acrimonyTimer and
             player:getCurrentMission(xi.mission.log_id.COP) > xi.mission.id.cop.SLANDEROUS_UTTERINGS
         then
-        player:getCurrentMission(xi.mission.log_id.COP) > xi.mission.id.cop.SLANDEROUS_UTTERINGS then
             player:updateEvent(4, 0, 0, 1)
         end
     end
