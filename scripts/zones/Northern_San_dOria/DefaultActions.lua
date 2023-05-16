@@ -24,6 +24,7 @@ return {
     ['Maurinne']      = { text = ID.text.MAURINNE_DIALOG },
     ['Miageau']       = { event = 517 },
     ['Nouveil']       = { event = 574 },
+    ['Olbergieut'] = { event = 612 },
     ['Pellimie']      = { text = ID.text.PELLIMIE_DIALOG },
     ['Pepigort']      = { text = ID.text.PEPIGORT_DIALOG },
     ['Phaviane']      = { text = ID.text.PHAVIANE_DIALOG },
