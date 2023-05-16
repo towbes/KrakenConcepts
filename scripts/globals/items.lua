@@ -3413,6 +3413,7 @@ xi.items =
     BLACK_CAPE                      = 13577,
     JESTERS_CAPE                    = 13579,
     COTTON_CAPE                     = 13584,
+    WHITE_CAPE                      = 13585,
     RED_CAPE                        = 13586,
     RAINBOW_CAPE                    = 13587,
     DHALMEL_MANTLE                  = 13588,
