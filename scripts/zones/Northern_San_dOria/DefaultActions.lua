@@ -10,6 +10,7 @@ return {
     ['Belgidiveau']   = { event = 585 },
     ['Charlaimagnat'] = { event = 702 },
     ['Chasalvige']    = { event = 6 },
+    ['Dauperiat']  = { event = 641 },
     ['Emilia']        = { text = ID.text.EMILIA_DIALOG },
     ['Eperdur']       = { event = 678 },
     ['Fittesegat']    = { text = ID.text.FITTESEGAT_DIALOG },
