@@ -49,12 +49,13 @@ end
 
 battlefieldObject.onEventFinish = function(player, csid, option)
     if
-    player:getLocalVar('newPromy') ~= 1 and
-    player:getLocalVar('promyLeaveCode') == xi.battlefield.leaveCode.WON
+        player:getLocalVar('newPromy') ~= 1 and
+        player:getLocalVar('promyLeaveCode') == xi.battlefield.leaveCode.WON
     then
         player:addExp(1500)
         xi.teleport.to(player, xi.teleport.id.EXITPROMDEM)
     end
+    
     player:setLocalVar('promyLeaveCode', 0)
     player:setLocalVar('newPromy', 0)
 end
