@@ -54,7 +54,9 @@ entity.onMagicHit = function(caster, target, spell)
 end
 
 entity.onMobDeath = function(mob, player, optParams)
-    player:addTitle(xi.title.VIRTUOUS_SAINT)
+    if player then
+        player:addTitle(xi.title.VIRTUOUS_SAINT)
+    end
 end
 
 return entity
