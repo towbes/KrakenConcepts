@@ -45,6 +45,7 @@ INSERT INTO `mob_skills` VALUES (10,25,'final_heaven',0,7.0,2000,100,4,0,0,0,13,
 INSERT INTO `mob_skills` VALUES (11,26,'ascetics_fury',0,7.0,2000,100,4,0,0,0,11,1,0);
 INSERT INTO `mob_skills` VALUES (12,27,'stringing_pummel',0,7.0,2000,100,4,0,0,0,9,3,0);	
 INSERT INTO `mob_skills` VALUES (14,29,'victory_smite',0,7.0,2000,100,4,0,0,0,13,12,0);
+-- INSERT INTO `mob_skills` VALUES (15,??,'shijin_spiral'
 INSERT INTO `mob_skills` VALUES (16,31,'wasp_sting',0,7.0,2000,100,4,0,0,0,4,0,0);
 INSERT INTO `mob_skills` VALUES (17,32,'viper_bite',0,7.0,2000,100,4,0,0,0,4,0,0);
 INSERT INTO `mob_skills` VALUES (18,33,'shadowstitch',0,7.0,2000,100,4,0,0,0,5,0,0);	
@@ -59,6 +60,7 @@ INSERT INTO `mob_skills` VALUES (26,41,'mercy_stroke',0,7.0,2000,100,4,0,0,0,14,
 INSERT INTO `mob_skills` VALUES (27,42,'mandalic_stab',0,7.0,2000,100,4,0,0,0,11,2,0);
 INSERT INTO `mob_skills` VALUES (28,43,'mordant_rime',0,7.0,2000,100,4,0,0,0,12,10,0);	
 INSERT INTO `mob_skills` VALUES (29,44,'pyrrhic_kleos',0,7.0,2000,100,4,0,0,0,10,4,0);
+INSERT INTO `mob_skills` VALUES (30,45,'aeolian_edge',0,7.0,2000,0,4,0,0,0,9,0,0);
 INSERT INTO `mob_skills` VALUES (31,236,'rudras_storm',0,7.0,2000,100,4,0,0,0,14,10,0);	
 INSERT INTO `mob_skills` VALUES (32,1,'fast_blade',0,7.0,2000,100,4,0,0,0,4,0,0);
 INSERT INTO `mob_skills` VALUES (33,2,'burning_blade',0,7.0,2000,100,4,0,0,0,3,0,0);
@@ -85,7 +87,11 @@ INSERT INTO `mob_skills` VALUES (54,112,'sickle_moon',0,7.0,2000,100,4,0,0,0,4,8
 INSERT INTO `mob_skills` VALUES (55,113,'spinning_slash',0,7.0,2000,100,4,0,0,0,12,0,0);
 INSERT INTO `mob_skills` VALUES (56,114,'ground_strike',0,7.0,2000,100,4,0,0,0,12,10,0);
 INSERT INTO `mob_skills` VALUES (57,115,'scourge',0,7.0,2000,100,4,0,0,0,13,11,0);
+-- INSERT INTO `mob_skills` VALUES (58,??,'herculean_slash'
 INSERT INTO `mob_skills` VALUES (59,117,'torcleaver',0,7.0,2000,100,4,0,0,0,13,10,0);
+-- INSERT INTO `mob_skills` VALUES (60,??,'resolution'
+-- INSERT INTO `mob_skills` VALUES (61,??,'dimidiation'
+-- INSERT INTO `mob_skills` VALUES (62,??,'fimbulvetr'
 INSERT INTO `mob_skills` VALUES (64,46,'raging_axe',0,7.0,2000,100,4,0,0,0,6,8,0);
 INSERT INTO `mob_skills` VALUES (65,47,'smash_axe',0,7.0,2000,100,4,0,0,0,7,5,0);
 INSERT INTO `mob_skills` VALUES (66,48,'gale_axe',0,7.0,2000,100,4,0,0,0,6,0,0);	
@@ -97,7 +103,10 @@ INSERT INTO `mob_skills` VALUES (71,53,'mistral_axe',0,15.0,2000,100,4,0,0,0,11,
 INSERT INTO `mob_skills` VALUES (72,54,'decimation',0,7.0,2000,100,4,0,0,0,11,5,0);
 INSERT INTO `mob_skills` VALUES (73,55,'onslaught',0,7.0,2000,100,4,0,0,0,14,9,0);
 INSERT INTO `mob_skills` VALUES (74,56,'primal_rend',0,7.0,2000,100,4,0,0,0,9,5,0);
+-- INSERT INTO `mob_skills` VALUES (75,??,'bora_axe'
 INSERT INTO `mob_skills` VALUES (76,58,'cloudsplitter',0,7.0,2000,100,4,0,0,0,14,12,0);
+-- INSERT INTO `mob_skills` VALUES (77,??,'ruinator'
+-- INSERT INTO `mob_skills` VALUES (78,??,'blitz'
 INSERT INTO `mob_skills` VALUES (80,91,'shield_break',0,7.0,2000,100,4,0,0,0,8,0,0);	
 INSERT INTO `mob_skills` VALUES (81,92,'iron_tempest',0,7.0,2000,100,4,0,0,0,4,0,0);	
 INSERT INTO `mob_skills` VALUES (82,93,'sturmwind',0,7.0,2000,100,4,0,0,0,5,4,0);
@@ -111,6 +120,8 @@ INSERT INTO `mob_skills` VALUES (89,100,'metatron_torment',0,7.0,2000,100,4,0,0,
 INSERT INTO `mob_skills` VALUES (90,101,'kings_justice',0,7.0,2000,100,4,0,0,0,12,4,0);
 INSERT INTO `mob_skills` VALUES (91,102,'fell_cleave',0,7.0,2000,100,4,0,0,0,9,0,0);
 INSERT INTO `mob_skills` VALUES (92,103,'ukkos_fury',0,7.0,2000,100,4,0,0,0,13,12,0);
+-- INSERT INTO `mob_skills` VALUES (93,??,'upheaval'
+-- INSERT INTO `mob_skills` VALUES (94,??,'disaster'
 INSERT INTO `mob_skills` VALUES (96,61,'slice',0,7.0,2000,100,4,0,0,0,4,0,0);
 INSERT INTO `mob_skills` VALUES (97,62,'dark_harvest',0,7.0,2000,100,4,0,0,0,5,0,0);	
 INSERT INTO `mob_skills` VALUES (98,63,'shadow_of_death',0,7.0,2000,100,4,0,0,0,7,5,0);
@@ -122,7 +133,10 @@ INSERT INTO `mob_skills` VALUES (103,68,'cross_reaper',0,7.0,2000,100,4,0,0,0,10
 INSERT INTO `mob_skills` VALUES (104,69,'spiral_hell',0,7.0,2000,100,4,0,0,0,10,4,0);	
 INSERT INTO `mob_skills` VALUES (105,70,'catastrophe',0,7.0,2000,100,4,0,0,0,14,9,0);	
 INSERT INTO `mob_skills` VALUES (106,71,'insurgency',0,7.0,2000,100,4,0,0,0,11,2,0);
+-- INSERT INTO `mob_skills` VALUES (107,??,'infernal_scythe'
 INSERT INTO `mob_skills` VALUES (108,73,'quietus',0,7.0,2000,100,4,0,0,0,14,10,0);	
+-- INSERT INTO `mob_skills` VALUES (109,??,'entropy'
+-- INSERT INTO `mob_skills` VALUES (110,??,'origin'
 INSERT INTO `mob_skills` VALUES (112,121,'double_thrust',0,7.0,2000,100,4,0,0,0,1,0,0);
 INSERT INTO `mob_skills` VALUES (113,122,'thunder_thrust',0,7.0,2000,100,4,0,0,0,1,8,0);
 INSERT INTO `mob_skills` VALUES (114,123,'raiden_thrust',0,7.0,2000,100,4,0,0,0,1,8,0);
@@ -134,7 +148,10 @@ INSERT INTO `mob_skills` VALUES (119,128,'wheeling_thrust',0,7.0,2000,100,4,0,0,
 INSERT INTO `mob_skills` VALUES (120,129,'impulse_drive',0,7.0,2000,100,4,0,0,0,9,7,0);
 INSERT INTO `mob_skills` VALUES (121,130,'geirskogul',0,7.0,2000,100,4,0,0,0,13,10,0);
 INSERT INTO `mob_skills` VALUES (122,131,'drakesbane',0,7.0,2000,100,4,0,0,0,11,1,0);
+-- INSERT INTO `mob_skills` VALUES (123,??,'sonic_thrust'
 INSERT INTO `mob_skills` VALUES (124,133,'camlanns_torment',0,7.0,2000,100,4,0,0,0,13,12,0);
+-- INSERT INTO `mob_skills` VALUES (125,??,'stardiver'
+-- INSERT INTO `mob_skills` VALUES (126,??,'diarmuid'
 INSERT INTO `mob_skills` VALUES (128,151,'blade_rin',0,7.0,2000,100,4,0,0,0,1,0,0);
 INSERT INTO `mob_skills` VALUES (129,152,'blade_retsu',0,7.0,2000,100,4,0,0,0,4,0,0);	
 INSERT INTO `mob_skills` VALUES (130,153,'blade_teki',0,7.0,2000,100,4,0,0,0,5,0,0);
@@ -146,7 +163,10 @@ INSERT INTO `mob_skills` VALUES (135,158,'blade_ten',0,7.0,2000,100,4,0,0,0,9,0,
 INSERT INTO `mob_skills` VALUES (136,159,'blade_ku',0,7.0,2000,100,4,0,0,0,9,1,0);
 INSERT INTO `mob_skills` VALUES (137,160,'blade_metsu',0,7.0,2000,100,4,0,0,0,14,12,0);	
 INSERT INTO `mob_skills` VALUES (138,161,'blade_kamu',0,7.0,2000,100,4,0,0,0,12,2,0);
+-- INSERT INTO `mob_skills` VALUES (139,??,'blade_yu'
+-- INSERT INTO `mob_skills` VALUES (140,??,'blade_hi'
 INSERT INTO `mob_skills` VALUES (141,164,'blade_shun',0,7.0,2000,100,4,0,0,0,11,8,0);
+-- INSERT INTO `mob_skills` VALUES (142,??,'jijin_kaimetsu'
 INSERT INTO `mob_skills` VALUES (144,166,'tachi_enpi',0,7.0,2000,100,4,0,0,0,1,4,0);
 INSERT INTO `mob_skills` VALUES (145,167,'tachi_hobaku',0,7.0,2000,100,4,0,0,0,7,0,0);
 INSERT INTO `mob_skills` VALUES (146,168,'tachi_goten',0,7.0,2000,100,4,0,0,0,1,8,0);	
@@ -158,8 +178,11 @@ INSERT INTO `mob_skills` VALUES (151,173,'tachi_gekko',0,7.0,2000,100,4,0,0,0,10
 INSERT INTO `mob_skills` VALUES (152,174,'tachi_kasha',0,7.0,2000,100,4,0,0,0,11,2,0);	
 INSERT INTO `mob_skills` VALUES (153,175,'tachi_kaiten',0,7.0,2000,100,4,0,0,0,13,12,0);
 INSERT INTO `mob_skills` VALUES (154,176,'tachi_rana',0,7.0,2000,100,4,0,0,0,9,7,0);
+-- INSERT INTO `mob_skills` VALUES (155,??,'tachi_ageha'
 INSERT INTO `mob_skills` VALUES (156,178,'tachi_fudo',0,7.0,2000,100,4,0,0,0,13,10,0);
+-- INSERT INTO `mob_skills` VALUES (157,??,'tachi_shoha'
 INSERT INTO `mob_skills` VALUES (158,175,'tachi_suikawari',0,7.0,2000,100,4,0,0,0,11,0,0);	
+-- INSERT INTO `mob_skills` VALUES (159,??,'tachi_mumei'
 INSERT INTO `mob_skills` VALUES (160,76,'shining_strike',0,7.0,2000,100,4,0,0,0,8,0,0);
 INSERT INTO `mob_skills` VALUES (161,77,'seraph_strike',0,7.0,2000,100,4,0,0,0,8,0,0);
 INSERT INTO `mob_skills` VALUES (162,78,'brainshaker',0,7.0,2000,100,4,0,0,0,5,0,0);	
@@ -172,7 +195,10 @@ INSERT INTO `mob_skills` VALUES (168,84,'hexa_strike',0,7.0,2000,100,4,0,0,0,11,
 INSERT INTO `mob_skills` VALUES (169,85,'black_halo',0,7.0,2000,100,4,0,0,0,12,2,0);
 INSERT INTO `mob_skills` VALUES (170,86,'randgrith',0,7.0,2000,100,4,0,0,0,13,12,0);
 INSERT INTO `mob_skills` VALUES (171,87,'mystic_boon',0,7.0,2000,100,4,0,0,0,0,0,0);	
+-- INSERT INTO `mob_skills` VALUES (172,??,'flash_nova'
 INSERT INTO `mob_skills` VALUES (173,89,'dagan',0,7.0,2000,100,4,0,0,0,0,0,0);
+-- INSERT INTO `mob_skills` VALUES (174,??,'realmrazer'
+-- INSERT INTO `mob_skills` VALUES (175,??,'exudation'
 INSERT INTO `mob_skills` VALUES (176,136,'heavy_swing',0,7.0,2000,100,4,0,0,0,8,0,0);	
 INSERT INTO `mob_skills` VALUES (177,137,'rock_crusher',0,7.0,2000,100,4,0,0,0,8,0,0);
 INSERT INTO `mob_skills` VALUES (178,138,'earth_crusher',1,7.0,2000,100,4,0,0,0,6,8,0);
@@ -186,17 +212,50 @@ INSERT INTO `mob_skills` VALUES (185,145,'gate_of_tartarus',0,7.0,2000,100,4,0,0
 INSERT INTO `mob_skills` VALUES (186,146,'vidohunir',0,7.0,2000,100,4,0,0,0,12,10,0);
 INSERT INTO `mob_skills` VALUES (187,147,'garland_of_bliss',0,7.0,2000,100,4,0,0,0,11,5,0);
 INSERT INTO `mob_skills` VALUES (188,148,'omniscience',0,7.0,2000,100,4,0,0,0,9,1,0);	
+-- INSERT INTO `mob_skills` VALUES (189,??,'cataclysm'
 INSERT INTO `mob_skills` VALUES (190,150,'myrkr',0,7.0,2000,100,4,0,0,0,0,0,0);
+-- INSERT INTO `mob_skills` VALUES (191,??,'shattersoul'
 INSERT INTO `mob_skills` VALUES (192,191,'flaming_arrow',0,7.0,2000,100,4,0,0,0,1,0,0);
 INSERT INTO `mob_skills` VALUES (193,192,'piercing_arrow',0,7.0,2000,100,4,0,0,0,1,0,0);
 INSERT INTO `mob_skills` VALUES (194,193,'dulling_arrow',0,7.0,2000,100,4,0,0,0,1,0,0);
 INSERT INTO `mob_skills` VALUES (196,195,'sidewinder',0,7.0,2000,100,4,0,0,0,1,0,0);
 INSERT INTO `mob_skills` VALUES (197,219,'blast_arrow',0,7.0,2000,100,4,0,0,0,1,0,0);
 INSERT INTO `mob_skills` VALUES (198,197,'arching_arrow',0,7.0,2000,100,4,0,0,0,1,0,0);
+-- INSERT INTO `mob_skills` VALUES (199,??,'empyreal_arrow'
+-- INSERT INTO `mob_skills` VALUES (200,??,'namas_arrow'
+-- INSERT INTO `mob_skills` VALUES (201,??,'refulgent_arrow'
+-- INSERT INTO `mob_skills` VALUES (202,??,'jishnus_radiance'
+-- INSERT INTO `mob_skills` VALUES (203,??,'apex_arrow'
+-- INSERT INTO `mob_skills` VALUES (204,??,'sarv'
 INSERT INTO `mob_skills` VALUES (208,196,'hot_shot',0,7.0,2000,100,4,0,0,0,1,0,0);
 INSERT INTO `mob_skills` VALUES (209,197,'split_shot',0,7.0,2000,100,4,0,0,0,1,0,0);
 INSERT INTO `mob_skills` VALUES (210,198,'sniper_shot',0,7.0,2000,100,4,0,0,0,1,0,0);
 INSERT INTO `mob_skills` VALUES (212,200,'slug_shot',0,7.0,2000,100,4,0,0,0,1,6,0);
+-- INSERT INTO `mob_skills` VALUES (213,??,'blast_shot'
+-- INSERT INTO `mob_skills` VALUES (214,??,'heavy_shot'
+-- INSERT INTO `mob_skills` VALUES (215,??,'detonator'
+-- INSERT INTO `mob_skills` VALUES (216,??,'coronach'
+-- INSERT INTO `mob_skills` VALUES (217,??,'trueflight'
+-- INSERT INTO `mob_skills` VALUES (218,??,'leaden_salute'
+-- INSERT INTO `mob_skills` VALUES (219,??,'numbing_shot'
+-- INSERT INTO `mob_skills` VALUES (220,??,'wildfire'
+-- INSERT INTO `mob_skills` VALUES (221,??,'last_stand'
+-- INSERT INTO `mob_skills` VALUES (222,??,'terminus'
+-- INSERT INTO `mob_skills` VALUES (224,??,'exenterator'
+-- INSERT INTO `mob_skills` VALUES (225,??,'chant_du_cygne'
+-- INSERT INTO `mob_skills` VALUES (226,??,'requiescat'
+-- INSERT INTO `mob_skills` VALUES (227,??,'knights_of_rotund'
+-- INSERT INTO `mob_skills` VALUES (228,??,'final_paradise'
+-- INSERT INTO `mob_skills` VALUES (229,??,'fast_blade_ii'
+-- INSERT INTO `mob_skills` VALUES (230,??,'dragon_blow'
+-- INSERT INTO `mob_skills` VALUES (231,??,'maru_kala'
+-- INSERT INTO `mob_skills` VALUES (232,??,'merciless_strike'
+-- INSERT INTO `mob_skills` VALUES (233,??,'imperator'
+-- INSERT INTO `mob_skills` VALUES (234,??,'dagda'
+-- INSERT INTO `mob_skills` VALUES (235,??,'oshala'
+-- INSERT INTO `mob_skills` VALUES (238,??,'uriel_blade'
+-- INSERT INTO `mob_skills` VALUES (239,??,'glory_slash'
+-- INSERT INTO `mob_skills` VALUES (240,??,'tartarus_torpor'
 INSERT INTO `mob_skills` VALUES (241,241,'netherspikes',4,10.0,2000,0,4,0,0,0,0,0,0);
 INSERT INTO `mob_skills` VALUES (242,242,'carnal_nightmare',1,10.0,2000,0,4,0,0,0,0,0,0);
 INSERT INTO `mob_skills` VALUES (243,243,'aegis_schism',0,7.0,2000,0,4,0,0,0,0,0,0);
@@ -1185,7 +1244,7 @@ INSERT INTO `mob_skills` VALUES (1220,837,'auroral_drape',1,13.7,2000,1500,4,0,0
 -- INSERT INTO `mob_skills` VALUES (1226,970,'memory_of_lightning',0,7.0,2000,1500,4,0,0,0,0,0,0);
 -- INSERT INTO `mob_skills` VALUES (1227,971,'memory_of_water',0,7.0,2000,1500,4,0,0,0,0,0,0);
 INSERT INTO `mob_skills` VALUES (1228,845,'memory_of_dark',1,10.0,2000,1500,4,0,0,0,0,0,0);
-INSERT INTO `mob_skills` VALUES (1229,919,'brain_spike',0,10.0,2000,1500,1,0,0,0,0,0,0);
+INSERT INTO `mob_skills` VALUES (1229,919,'brain_spike',0,10.0,2000,1500,4,0,0,0,0,0,0);
 INSERT INTO `mob_skills` VALUES (1230,920,'empty_thrash',0,10.0,2000,1500,4,0,0,0,0,0,0);
 INSERT INTO `mob_skills` VALUES (1231,921,'promyvion_brume',1,10.0,2000,1500,4,0,0,0,0,0,0);
 INSERT INTO `mob_skills` VALUES (1232,922,'murk',1,10.0,2000,1500,4,0,0,0,0,0,0);

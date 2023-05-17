@@ -1090,7 +1090,6 @@ bool CStatusEffectContainer::ApplyCorsairEffect(CStatusEffect* PStatusEffect, ui
         AddStatusEffect(PStatusEffect);
         return true;
     }
-    // return false;
 }
 
 bool CStatusEffectContainer::HasCorsairEffect(uint32 charid)

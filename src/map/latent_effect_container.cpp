@@ -333,14 +333,11 @@ void CLatentEffectContainer::CheckLatentsRollSong()
 void CLatentEffectContainer::CheckLatentsDay()
 {
     ProcessLatentEffects([this](CLatentEffect& latentEffect) {
-        switch (latentEffect.GetConditionsID())
+        if (latentEffect.GetConditionsID() == LATENT::TIME_OF_DAY)
         {
-            case LATENT::TIME_OF_DAY:
-                return ProcessLatentEffect(latentEffect);
-                break;
-            default:
-                break;
+            return ProcessLatentEffect(latentEffect);
         }
+
         return false;
     });
 }
@@ -354,14 +351,11 @@ void CLatentEffectContainer::CheckLatentsMoonPhase()
 {
     TracyZoneScoped;
     ProcessLatentEffects([this](CLatentEffect& latentEffect) {
-        switch (latentEffect.GetConditionsID())
+        if (latentEffect.GetConditionsID() == LATENT::MOON_PHASE)
         {
-            case LATENT::MOON_PHASE:
-                return ProcessLatentEffect(latentEffect);
-                break;
-            default:
-                break;
+            return ProcessLatentEffect(latentEffect);
         }
+
         return false;
     });
 }
@@ -404,14 +398,11 @@ void CLatentEffectContainer::CheckLatentsHours()
 {
     TracyZoneScoped;
     ProcessLatentEffects([this](CLatentEffect& latentEffect) {
-        switch (latentEffect.GetConditionsID())
+        if (latentEffect.GetConditionsID() == LATENT::HOUR_OF_DAY)
         {
-            case LATENT::HOUR_OF_DAY:
-                return ProcessLatentEffect(latentEffect);
-                break;
-            default:
-                break;
+            return ProcessLatentEffect(latentEffect);
         }
+
         return false;
     });
 }
@@ -473,14 +464,11 @@ void CLatentEffectContainer::CheckLatentsPartyMembers(size_t members)
 void CLatentEffectContainer::CheckLatentsPartyJobs()
 {
     ProcessLatentEffects([this](CLatentEffect& latentEffect) {
-        switch (latentEffect.GetConditionsID())
+        if (latentEffect.GetConditionsID() == LATENT::JOB_IN_PARTY)
         {
-            case LATENT::JOB_IN_PARTY:
-                return ProcessLatentEffect(latentEffect);
-                break;
-            default:
-                break;
+            return ProcessLatentEffect(latentEffect);
         }
+
         return false;
     });
 }
@@ -494,14 +482,11 @@ void CLatentEffectContainer::CheckLatentsPartyJobs()
 void CLatentEffectContainer::CheckLatentsPartyAvatar()
 {
     ProcessLatentEffects([this](CLatentEffect& latentEffect) {
-        switch (latentEffect.GetConditionsID())
+        if (latentEffect.GetConditionsID() == LATENT::AVATAR_IN_PARTY)
         {
-            case LATENT::AVATAR_IN_PARTY:
-                return ProcessLatentEffect(latentEffect);
-                break;
-            default:
-                break;
+            return ProcessLatentEffect(latentEffect);
         }
+
         return false;
     });
 }
@@ -537,14 +522,11 @@ void CLatentEffectContainer::CheckLatentsJobLevel()
 void CLatentEffectContainer::CheckLatentsPetType()
 {
     ProcessLatentEffects([this](CLatentEffect& latentEffect) {
-        switch (latentEffect.GetConditionsID())
+        if (latentEffect.GetConditionsID() == LATENT::PET_ID)
         {
-            case LATENT::PET_ID:
-                return ProcessLatentEffect(latentEffect);
-                break;
-            default:
-                break;
+            return ProcessLatentEffect(latentEffect);
         }
+
         return false;
     });
 }
