@@ -57,6 +57,8 @@ function onTrigger(player, target)
         xi.effect.DOOM,
         xi.effect.CURSE_I,
         xi.effect.CURSE_II,
+        xi.effect.COSTUME,
+        xi.effect.COSTUME_II,
     }
 
     for _, v in pairs(effects) do
