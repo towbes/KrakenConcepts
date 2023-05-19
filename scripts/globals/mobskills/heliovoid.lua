@@ -23,6 +23,8 @@ mobskillObject.onMobWeaponSkill = function(target, mob, skill)
     if effect ~= 0 then
         skill:setMsg(xi.msg.basic.EFFECT_DRAINED)
         return 1
+    else
+        skill:setMsg(xi.msg.basic.NO_EFFECT) -- no effect
     end
 end
 
