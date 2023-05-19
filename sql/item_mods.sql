@@ -6370,6 +6370,7 @@ INSERT INTO `item_mods` VALUES (11338,289,3); -- SUBTLE_BLOW: 3
 -- Channeling Robe
 INSERT INTO `item_mods` VALUES (11339,1,21); -- DEF: 21
 INSERT INTO `item_mods` VALUES (11339,5,3);  -- MP: 3
+INSERT INTO `item_mods` VALUES (11339,487,3); -- Magic Burst +3%
 
 -- Salutary Robe
 INSERT INTO `item_mods` VALUES (11340,1,21); -- DEF: 21
