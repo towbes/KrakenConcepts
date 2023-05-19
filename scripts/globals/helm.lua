@@ -374,6 +374,12 @@ local helmInfo =
                     {  420,  1236 }, -- Cactus Stems
                     {  420,  1473 }, -- High Quality Scorpion Shell
                     {  420,   769 }, -- Colored Rock
+                    {   30,  1771 }, -- Dragon Bone +
+                    {   10,   883 }, -- Behemoth Horn +
+                    {    5,  1458 }, -- Mammoth Tusk +
+                    {    6,  1518 }, -- Collosal Skull +
+                    {    4,  1463 }, -- Chronss Tooth +
+
                 },
 
                 points =
@@ -399,6 +405,12 @@ local helmInfo =
                     {  290,   896 }, -- Scorpion Shell
                     {  240,   885 }, -- Turtle Shell
                     {  190,  1888 }, -- Silica
+                    {   10,  1771 }, -- Dragon Bone +
+                    {   7,    883 }, -- Behemoth Horn +
+                    {   5,   1458 }, -- Mammoth Tusk +
+                    {   6,   1518 }, -- Collosal Skull +
+                    {   4,   1463 }, -- Chronss Tooth +
+
                 },
 
                 points =
@@ -437,6 +449,12 @@ local helmInfo =
                     {  430,   885 }, -- Turtle Shell
                     {  100,   575 }, -- Grain Seeds
                     {  640,  1985 }, -- Helmet Mole
+                    {   10,  1311 }, -- oxblood +
+                    {   15,  1312 }, -- angelskin +
+                    {   75,  1586 }, -- titanictus shell +
+                    {    6,  1521 }, -- Slime Juice
+
+
                 },
 
                 points =
@@ -466,6 +484,13 @@ local helmInfo =
                     {  230,   703 }, -- Petrified Log
                     {  100,   769 }, -- Colored Rock
                     {  470,  1888 }, -- Silica
+                    {  430,   885 }, -- Turtle Shell +
+                    {  100,  1586 }, -- titanicus shell +
+                    {    5,  1458 }, -- Mammoth Tusk +
+                    {    6,  1518 }, -- Collosal Skull +
+                    {    4,  1463 }, -- Chronss Tooth +
+                    {    6,  1521 }, -- Slime Juice
+
                 },
 
                 points =
@@ -595,6 +620,8 @@ local helmInfo =
                     {  500,  689 }, -- Lauan Log
                     {  490,  701 }, -- Rosewood Log
                     {  200,  729 }, -- Bloodwood Log
+                    {  200, 4273 }, -- Kitron +
+
                 },
 
                 points =
@@ -648,6 +675,10 @@ local helmInfo =
                     {   40, 2534 }, -- Jacaranda Log
                     {  400,  699 }, -- Oak Log
                     {  290, 2532 }, -- Teak Log
+                    {  100, 4273 }, -- Kitron +
+                    {   30, 1464 }, -- Lancewood Log +
+
+
                 },
 
                 points =
@@ -674,6 +705,8 @@ local helmInfo =
                     {  510, 4504 }, -- Acorn
                     {  170, 2534 }, -- Jacaranda Log
                     {  230, 2532 }, -- Teak Log
+                    {  100, 1464 }, -- Lancewood Log +
+
                 },
 
                 points =
@@ -715,13 +748,15 @@ local helmInfo =
             {
                 drops =
                 {
-                    { 2610, 688 }, -- Arrowwood Log
-                    { 2030, 698 }, -- Ash Log
-                    { 2570, 691 }, -- Maple Log
-                    {  540, 694 }, -- Chestnut Log
-                    {  580, 574 }, -- Fruit Seeds
-                    {  910, 696 }, -- Yew Log
-                    {  410, 639 }, -- Ronfaure Chestnut
+                    { 2610,  688 }, -- Arrowwood Log
+                    { 2030,  698 }, -- Ash Log
+                    { 2570,  691 }, -- Maple Log
+                    {  540,  694 }, -- Chestnut Log
+                    {  580,  574 }, -- Fruit Seeds
+                    {  910,  696 }, -- Yew Log
+                    {  410,  639 }, -- Ronfaure Chestnut
+                    {    5, 1464 }, -- Lancewood Log +
+
                 },
 
                 points =
@@ -766,6 +801,8 @@ local helmInfo =
                     {  580, 4504 }, -- Acorn
                     {  550,  923 }, -- Dryad Root
                     {   60,  699 }, -- Oak Log
+                    {    7, 1464 }, -- Lancewood Log +
+
                 },
 
                 points =
@@ -867,6 +904,8 @@ local helmInfo =
                     {  240,  702 }, -- Ebony Log
                     {  100,  697 }, -- Holly Log
                     {  100,  701 }, -- Rosewood Log
+                    {  100, 4274 }, -- Persikos +
+
                 },
 
                 points =
@@ -895,6 +934,8 @@ local helmInfo =
                     {  350,  700 }, -- Mahogany Log
                     {  170,  702 }, -- Ebony Log
                     {   90, 1237 }, -- Tree Cuttings
+                    {  100, 4274 }, -- Persikos +
+
                 },
 
                 points =
@@ -987,7 +1028,17 @@ local helmInfo =
                     {   80,  644 }, -- Mythril Ore
                     {   70,  737 }, -- Gold Ore
                     {   70,  738 }, -- Platium Ore
+                    {  120,  645 }, -- Darksteel Ore 80
+                    {  120,  644 }, -- Mythril Ore 80
+                    {  100,  737 }, -- Gold Ore 70
+                    {  100,  738 }, -- Platium Ore 70
+
                 },
+                eleChance = 5, --Default: 15
+				eleWeak1 = 5, -- lightning
+				eleWeak2 = 2, -- water
+				eleStrong = 0, -- fire
+
 
                 points =
                 {
@@ -1005,6 +1056,10 @@ local helmInfo =
                     {  -27.353, 11.397, -141.638 }, -- (R)I-11
                     {  -26.393, 11.359, -141.096 },
                 },
+                eleChance = 5, --Default: 15
+				eleWeak1 = 5, -- lightning
+				eleWeak2 = 2, -- water
+				eleStrong = 0, -- fire
             },
 
             [xi.zone.NEWTON_MOVALPOLOS] =
@@ -1016,13 +1071,17 @@ local helmInfo =
                     { 1450,  642 }, -- Zinc Ore
                     { 1790, 1654 }, -- Igneous Rock
                     { 1450,  736 }, -- Silver Ore
-                    {  140,  678 }, -- Aluminum Ore
+                    {  500,  678 }, -- Aluminum Ore 140 +Drop rate
                     { 1720,  643 }, -- Iron Ore
                     {   70,  645 }, -- Darksteel Ore
                     {  210,  644 }, -- Mythril Ore
                     {  140,  737 }, -- Gold Ore
                     {  340,  738 }, -- Platium Ore
                     {   70,  769 }, -- Colored Rock
+                    {   50, 1469 }, -- Wootz Ore +
+                    {   55, 1467 }, -- Relic Steel +
+                    {    5, 1460 }, -- Koh-I-Noor +
+
                 },
 
                 points =
@@ -1038,6 +1097,10 @@ local helmInfo =
                     {   69.433, 19.221,  185.247 }, -- (R)I-6
                     {  109.614, 19.689, -104.522 }, -- (R)I-10
                 },
+                eleChance = 7, --Default:15
+				eleWeak1 = 1, -- earth
+				eleWeak2 = 2, -- water
+				eleStrong = 0, -- fire
             },
 
             [xi.zone.MOUNT_ZHAYOLM] =
@@ -1057,7 +1120,10 @@ local helmInfo =
                     {  430, 1638 }, -- Moblin Mask
                     {  210,  902 }, -- Demon Horn
                     {  140,  646 }, -- Adaman Ore
-                    {   30,  685 }, -- Khroma Ore
+                    {   50,  685 }, -- Khroma Ore 30 +Droprate
+                    {   70, 1469 }, -- Wootz Ore +
+                    {   90, 1467 }, -- Relic Steel +
+
                 },
 
                 points =
@@ -1085,6 +1151,10 @@ local helmInfo =
                     { 775.692, -16.750, 163.576 },
                     { 783.844, -15.593, 172.404 },
                 },
+                eleChance = 8, --Default: 17
+				eleWeak1 = 3, -- wind
+				eleWeak2 = 6, -- light
+				eleStrong = 7, -- dark
             },
 
             [xi.zone.HALVUNG] =
@@ -1096,15 +1166,17 @@ local helmInfo =
                     { 1720,  768 }, -- Flint Stone
                     {  290,  737 }, -- Gold Ore
                     { 1440, 1155 }, -- Iron Sand
-                    {   50, 2228 }, -- Luminium Ore
+                    {  100, 2228 }, -- Luminium Ore +Droprate
                     {  430, 1631 }, -- Moblin Armor
                     {  430, 1625 }, -- Moblin Helm
                     {  480, 1632 }, -- Moblin Mail
                     {  290, 1638 }, -- Moblin Mask
-                    {  100,  739 }, -- Orichalcum Ore
+                    {  150,  739 }, -- Orichalcum Ore +Droprate
                     { 1200, 1108 }, -- Pinch of Sulfur
                     {  480, 2160 }, -- Troll Pauldron
                     {  330, 2161 }, -- Troll Vambrace
+                    {   70, 1469 }, -- Wootz Ore +
+                    {   75, 1467 }, -- Relic Steel +
                 },
 
                 points =
@@ -1130,6 +1202,10 @@ local helmInfo =
                     { 269.172,   3.433, 228.107 }, -- (R)K-6
                     { 270.880,   2.490, 226.690 },
                 },
+                eleChance = 9, --Default: 16
+				eleWeak1 = 4, -- ice
+				eleWeak2 = 2, -- water
+				eleStrong = 3, -- wind
             },
 
             [xi.zone.NORTH_GUSTABERG_S] =
@@ -1148,6 +1224,9 @@ local helmInfo =
                     {  110,  1632 }, -- Moblin Mail
                     {   50,  1631 }, -- Moblin Armor
                     {  160,   738 }, -- Platium Ore
+                    {   75,  1469 }, -- Wootz Ore +
+                    {   50,  1467 }, -- Relic Steel +
+
                 },
 
                 points =
@@ -1182,6 +1261,10 @@ local helmInfo =
                     {  376.297, -31.999, 1100.808 },
                     {  394.958, -20.922,  458.055 },
                 },
+                eleChance = 3, --Default: 2
+				eleWeak1 = 4, -- ice
+				eleWeak2 = 2, -- water
+				eleStrong = 0, -- fire
             },
 
             [xi.zone.YUGHOTT_GROTTO] =
@@ -1237,6 +1320,10 @@ local helmInfo =
                     {  330.931, -24.900,  239.451 },
                     {  363.273, -24.758,  164.485 },
                 },
+                eleChance = 2, --Default: 14
+				eleWeak1 = 0, -- fire
+				eleWeak2 = 1, -- earth
+				eleStrong = 5, -- lightning
             },
 
             [xi.zone.PALBOROUGH_MINES] =
@@ -1277,6 +1364,10 @@ local helmInfo =
                     { 290.244, -15.718,  104.856 },
                     { 306.015, -16.275,   49.876 },
                 },
+                eleChance = 5, --Default: 16
+				eleWeak1 = 6, -- light
+				eleWeak2 = 5, -- lightning
+				eleStrong = 4, -- ice
             },
 
             [xi.zone.ZERUHN_MINES] =
@@ -1320,6 +1411,10 @@ local helmInfo =
                     { 134.829, 7.634, -131.175 },
                     { 146.979, 7.881, -209.748 },
                 },
+                eleChance = 14,
+				eleWeak1 = 6, -- light
+				eleWeak2 = 7, -- dark
+				eleStrong = 2, -- water
             },
 
             [xi.zone.GUSGEN_MINES] =
@@ -1358,6 +1453,10 @@ local helmInfo =
                     {  145.349, -40.450,   24.710 }, -- (R)I-8
                     {  155.746, -20.678,  216.857 }, -- (R)I-9
                 },
+                eleChance = 6, --Default:17
+				eleWeak1 = 7, -- dark
+				eleWeak2 = 3, -- wind
+				eleStrong = 1, -- earth
             },
 
             [xi.zone.IFRITS_CAULDRON] =
@@ -1373,8 +1472,10 @@ local helmInfo =
                     {  250,   646 }, -- Adaman Ore
                     {  600,   645 }, -- Darksteel Ore
                     { 1520,  2126 }, -- Orpiment
-                    {  100,   739 }, -- Orichalcum Ore
+                    {  150,   739 }, -- Orichalcum Ore +Droprate
                     {  220,   769 }, -- Colored Rock
+                    {   90,  1469 }, -- Wootz Ore +
+
                 },
 
                 points =
@@ -1400,6 +1501,10 @@ local helmInfo =
                     {   96.820,  8.636,  141.280 }, -- Map 7 K-4 -- (R)K-4
                     {  139.082,  3.224,  -61.040 }, -- Map 1 G-8
                 },
+                eleChance = 8, --Default: 21
+				eleWeak1 = 4, -- ice
+				eleWeak2 = 2, -- water
+				eleStrong = 0, -- fire
             },
         },
     },
@@ -1419,6 +1524,22 @@ local rocks =
     [xi.magic.element.WATER  ] = xi.items.BLUE_ROCK,
     [xi.magic.element.LIGHT  ] = xi.items.WHITE_ROCK,
     [xi.magic.element.DARK   ] = xi.items.BLACK_ROCK,
+}
+
+-----------------------------------
+-- Elemental Ores Array
+-----------------------------------
+
+local elemOres =
+{
+    [xi.magic.element.FIRE   ] = xi.items.CHUNK_OF_FIRE_ORE,
+    [xi.magic.element.ICE    ] = xi.items.CHUNK_OF_ICE_ORE,
+    [xi.magic.element.WIND   ] = xi.items.CHUNK_OF_WIND_ORE,
+    [xi.magic.element.EARTH  ] = xi.items.CHUNK_OF_EARTH_ORE,
+    [xi.magic.element.THUNDER] = xi.items.CHUNK_OF_LIGHTNING_ORE,
+    [xi.magic.element.WATER  ] = xi.items.CHUNK_OF_WATER_ORE,
+    [xi.magic.element.LIGHT  ] = xi.items.CHUNK_OF_LIGHT_ORE,
+    [xi.magic.element.DARK   ] = xi.items.CHUNK_OF_DARK_ORE,
 }
 
 -----------------------------------
@@ -1493,6 +1614,92 @@ local function movePoint(player, npc, zoneId, info)
     npc:queue(3000, doMove(npc, unpack(point)))
 end
 
+local function tryEleOre(info, zoneId)
+
+	-- FIRESDAY		= 0;
+	-- EARTHSDAY	= 1;
+	-- WATERSDAY	= 2;
+	-- WINDSDAY		= 3;
+	-- ICEDAY		= 4;
+	-- LIGHTNINGDAY	= 5;
+	-- LIGHTSDAY	= 6;
+	-- DARKSDAY		= 7;
+
+	--local weak1 = info.zone[zoneId].eleWeak1;
+	--local weak2 = info.zone[zoneId].eleWeak2;
+	--local strong = info.zone[zoneId].eleStrong;
+	
+	local chance = info.zone[zoneId].eleChance;
+	
+	--[[if (VanadielDayElement() == weak1 or VanadielDayElement() == weak2) then
+		chance = math.floor(chance / 2) - 1;
+	end
+	
+	if (VanadielDayElement() == strong) then
+		chance = chance + 7;
+	end
+	
+	if (VanadielDayElement() > 5) then -- darksday or lightsday
+		chance = math.floor(chance / 2);
+	end]]
+	
+	if (chance < 1) then
+		chance = 1;
+	end
+
+	if (math.random(1,1000) <= chance) then -- Each zone has "eleChance". If we roll under that number, player gets an ore. Example: eleChance 15 = 1.5%~
+		return 1; -- success
+	else
+		return 0; -- failure
+	end
+	
+end
+
+local function setEleOre(day)
+	
+	-- 1255	chunk_of_fire_ore
+	-- 1256	chunk_of_ice_ore
+	-- 1257	chunk_of_wind_ore
+	-- 1258	chunk_of_earth_ore
+	-- 1259	chunk_of_lightning_ore
+	-- 1260	chunk_of_water_ore
+	-- 1261	chunk_of_light_ore
+	-- 1262	chunk_of_dark_ore
+	
+	local FIRESDAY		= 0;
+	local EARTHSDAY		= 1;
+	local WATERSDAY		= 2;
+	local WINDSDAY		= 3;
+	local ICEDAY		= 4;
+	local LIGHTNINGDAY	= 5;
+	local LIGHTSDAY		= 6;
+	local DARKSDAY		= 7;
+
+	local ret = 0;
+	
+	if (day == FIRESDAY) then
+		ret = 1255;
+	elseif (day == EARTHSDAY) then
+		ret = 1258;
+	elseif (day == WATERSDAY) then
+		ret = 1260;
+	elseif (day == WINDSDAY) then
+		ret = 1257;
+	elseif (day == ICEDAY) then
+		ret = 1256;
+	elseif (day == LIGHTNINGDAY) then
+		ret = 1259;
+	elseif (day == LIGHTSDAY) then
+		ret = 1261;
+	elseif (day == DARKSDAY) then
+		ret = 1262;
+	end
+	
+	return ret;
+	
+end
+
+
 -----------------------------------
 -- public functions
 -----------------------------------
@@ -1523,6 +1730,10 @@ xi.helm.onTrade = function(player, npc, trade, helmType, csid, func)
         local item  = pickItem(player, info)
         local broke = doesToolBreak(player, info) and 1 or 0
         local full  = (player:getFreeSlotsCount() == 0) and 1 or 0
+
+        if (item ~= 0 and helmType == 4 and tryEleOre(info, zoneId) == 1) then -- if helmtype is mining and we succeeded at the ele ore roll
+			item = elemOres[VanadielDayElement()]
+		end
 
         if csid then
             player:startEvent(csid, item, broke, full)
