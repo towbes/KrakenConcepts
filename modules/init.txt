@@ -37,7 +37,9 @@
 # Live example:
 
 cactuar/commands/
-cactuar/lua/
 cactuar/cpp/
+cactuar/lua/
+cactuar/sql/
+
 custom/commands/
 custom/lua/test_npcs_in_gm_home.lua

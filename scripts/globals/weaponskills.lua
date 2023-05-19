@@ -429,13 +429,11 @@ local function modifyMeleeHitDamage(attacker, target, attackTbl, wsParams, rawDa
         if attackTbl.weaponType == xi.skill.HAND_TO_HAND then
             adjustedDamage = adjustedDamage * target:getMod(xi.mod.HTH_SDT) / 1000
         elseif
-            attackTbl.weaponType == xi.skill.DAGGER or
-            attackTbl.weaponType == xi.skill.POLEARM
+            attackTbl.damageType == xi.damageType.PIERCING
         then
             adjustedDamage = adjustedDamage * target:getMod(xi.mod.PIERCE_SDT) / 1000
         elseif
-            attackTbl.weaponType == xi.skill.CLUB or
-            attackTbl.weaponType == xi.skill.STAFF
+            attackTbl.damageType == xi.damageType.BLUNT
         then
             adjustedDamage = adjustedDamage * target:getMod(xi.mod.IMPACT_SDT) / 1000
         else
