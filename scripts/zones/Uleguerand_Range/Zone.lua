@@ -6,6 +6,7 @@ require('scripts/globals/conquest')
 require('scripts/globals/missions')
 require('scripts/globals/status')
 require('scripts/globals/zone')
+require('scripts/globals/exp_controller')
 -----------------------------------
 local zoneObject = {}
 
@@ -19,6 +20,8 @@ zoneObject.onInitialize = function(zone)
     -- https://ffxiclopedia.fandom.com/wiki/White_Coney
     -- BG Wiki has no info. For now, triggers every 3 vana minutes
     GetNPCByID(ID.npc.RABBIT_FOOTPRINT):addPeriodicTrigger(0, 3, 0)
+    xi.exp_controller.onInitialize(zone)
+
 end
 
 zoneObject.onConquestUpdate = function(zone, updatetype)

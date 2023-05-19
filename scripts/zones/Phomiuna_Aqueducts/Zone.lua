@@ -4,6 +4,7 @@
 local ID = require('scripts/zones/Phomiuna_Aqueducts/IDs')
 require('scripts/globals/settings')
 require('scripts/globals/status')
+require('scripts/globals/exp_controller')
 -----------------------------------
 local zoneObject = {}
 
@@ -19,6 +20,9 @@ zoneObject.onInitialize = function(zone)
     end
     -- FFXI wiki has some info stating ~10mins realtime for Phomiuna Aqueducts
     GetNPCByID(ID.npc.QM_TAVNAZIAN_COOKBOOK):addPeriodicTrigger(0, 250, 0)
+
+    xi.exp_controller.onInitialize(zone)
+
 end
 
 zoneObject.onConquestUpdate = function(zone, updatetype)

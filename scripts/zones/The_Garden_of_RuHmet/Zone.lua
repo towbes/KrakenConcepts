@@ -7,6 +7,7 @@ require('scripts/globals/settings')
 require('scripts/globals/status')
 require('scripts/globals/missions')
 require('scripts/globals/keyitems')
+require('scripts/globals/exp_controller')
 -----------------------------------
 local zoneObject = {}
 
@@ -68,6 +69,9 @@ zoneObject.onInitialize = function(zone)
     -- Give Ix'DRG a random placeholder by picking one of the four groups at random, then adding a random number of 0-2 for the specific mob.
     local groups = ID.mob.AWAERN_DRG_GROUPS
     SetServerVariable("[SEA]IxAernDRG_PH", groups[math.random(1, #groups)] + math.random(0, 2))
+
+    xi.exp_controller.onInitialize(zone)
+
 end
 
 zoneObject.afterZoneIn = function(player)

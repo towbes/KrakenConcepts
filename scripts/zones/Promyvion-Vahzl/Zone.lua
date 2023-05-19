@@ -5,11 +5,13 @@ local ID = require('scripts/zones/Promyvion-Vahzl/IDs')
 require('scripts/globals/promyvion')
 require('scripts/globals/settings')
 require('scripts/globals/status')
+require('scripts/globals/exp_controller')
 -----------------------------------
 local zoneObject = {}
 
 zoneObject.onInitialize = function(zone)
     xi.promyvion.initZone(zone)
+    xi.exp_controller.onInitialize(zone)
 end
 
 zoneObject.onZoneIn = function(player, prevZone)

@@ -7,6 +7,7 @@ require('scripts/globals/missions')
 require('scripts/globals/settings')
 require('scripts/globals/treasure')
 require('scripts/globals/status')
+require('scripts/globals/exp_controller')
 -----------------------------------
 local zoneObject = {}
 
@@ -30,6 +31,8 @@ zoneObject.onInitialize = function(zone)
     GetNPCByID(ID.npc.ROTATING_DOOR_OFFSET[10]):addPeriodicTrigger(0, 2, 0)
 
     xi.treasure.initZone(zone)
+    xi.exp_controller.onInitialize(zone)
+
 end
 
 zoneObject.onConquestUpdate = function(zone, updatetype)

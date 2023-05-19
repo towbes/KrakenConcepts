@@ -5,10 +5,12 @@ local ID = require('scripts/zones/Phanauet_Channel/IDs')
 require('scripts/globals/conquest')
 require('scripts/globals/zone')
 require('scripts/globals/barge')
+require('scripts/globals/exp_controller')
 -----------------------------------
 local zoneObject = {}
 
 zoneObject.onInitialize = function(zone)
+    xi.exp_controller.onInitialize(zone)
 end
 
 zoneObject.onZoneIn = function(player, prevZone)

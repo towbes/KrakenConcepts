@@ -5,6 +5,7 @@ local ID = require('scripts/zones/Riverne-Site_A01/IDs')
 require('scripts/globals/conquest')
 require('scripts/globals/settings')
 require('scripts/globals/status')
+require('scripts/globals/exp_controller')
 -----------------------------------
 local zoneObject = {}
 
@@ -13,6 +14,9 @@ zoneObject.onInitialize = function(zone)
     for i = ID.mob.CARMINE_DOBSONFLY_OFFSET, ID.mob.CARMINE_DOBSONFLY_OFFSET + 9 do
         xi.mob.nmTODPersistCache(zone, i)
     end
+
+    xi.exp_controller.onInitialize(zone)
+
 end
 
 zoneObject.onConquestUpdate = function(zone, updatetype)

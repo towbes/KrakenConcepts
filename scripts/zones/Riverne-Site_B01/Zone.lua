@@ -5,12 +5,16 @@ local ID = require('scripts/zones/Riverne-Site_B01/IDs')
 require('scripts/globals/conquest')
 require('scripts/globals/settings')
 require('scripts/globals/status')
+require('scripts/globals/exp_controller')
 -----------------------------------
 local zoneObject = {}
 
 zoneObject.onInitialize = function(zone)
     -- NM Persistence
     xi.mob.nmTODPersistCache(zone, ID.mob.BOROKA)
+
+    xi.exp_controller.onInitialize(zone)
+
 end
 
 zoneObject.onConquestUpdate = function(zone, updatetype)

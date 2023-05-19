@@ -6,6 +6,8 @@ require('scripts/globals/conquest')
 require('scripts/globals/missions')
 require('scripts/globals/treasure')
 require('scripts/globals/helm')
+require('scripts/globals/status')
+require('scripts/globals/exp_controller')
 -----------------------------------
 local zoneObject = {}
 
@@ -13,6 +15,7 @@ zoneObject.onInitialize = function(zone)
     xi.conq.setRegionalConquestOverseers(zone:getRegionID())
     xi.treasure.initZone(zone)
     xi.helm.initZone(zone, xi.helm.type.MINING)
+    xi.exp_controller.onInitialize(zone)
 end
 
 zoneObject.onConquestUpdate = function(zone, updatetype)

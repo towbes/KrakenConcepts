@@ -5,12 +5,14 @@ local ID = require('scripts/zones/Newton_Movalpolos/IDs')
 require('scripts/globals/conquest')
 require('scripts/globals/treasure')
 require('scripts/globals/helm')
+require('scripts/globals/exp_controller')
 -----------------------------------
 local zoneObject = {}
 
 zoneObject.onInitialize = function(zone)
     xi.treasure.initZone(zone)
     xi.helm.initZone(zone, xi.helm.type.MINING)
+    xi.exp_controller.onInitialize(zone)
 end
 
 zoneObject.onZoneIn = function(player, prevZone)

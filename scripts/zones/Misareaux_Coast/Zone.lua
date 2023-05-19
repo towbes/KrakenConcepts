@@ -3,6 +3,7 @@
 -----------------------------------
 require('scripts/globals/conquest')
 require('scripts/globals/helm')
+require('scripts/globals/exp_controller')
 local ID = require('scripts/zones/Misareaux_Coast/IDs')
 local misareauxGlobal = require('scripts/zones/Misareaux_Coast/globals')
 -----------------------------------
@@ -14,6 +15,9 @@ zoneObject.onInitialize = function(zone)
 
     -- NM Persistence
     xi.mob.nmTODPersistCache(zone, ID.mob.ODQAN)
+
+    xi.exp_controller.onInitialize(zone)
+
 end
 
 zoneObject.onConquestUpdate = function(zone, updatetype)

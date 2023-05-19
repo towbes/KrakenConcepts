@@ -6,6 +6,7 @@ require('scripts/globals/conquest')
 require('scripts/globals/settings')
 require('scripts/globals/treasure')
 require('scripts/globals/status')
+require('scripts/globals/exp_controller')
 -----------------------------------
 local zoneObject = {}
 
@@ -17,6 +18,8 @@ zoneObject.onInitialize = function(zone)
     GetNPCByID(ID.npc.QM_TAVNAZIAN_COOKBOOK):addPeriodicTrigger(0, 250, 0)
 
     xi.treasure.initZone(zone)
+
+    xi.exp_controller.onInitialize(zone)
 end
 
 zoneObject.onZoneIn = function(player, prevZone)

@@ -3,6 +3,8 @@
 -----------------------------------
 local ID = require('scripts/zones/Bostaunieux_Oubliette/IDs')
 require('scripts/globals/conquest')
+require("scripts/globals/zone")
+
 -----------------------------------
 local zoneObject = {}
 
@@ -14,31 +16,31 @@ zoneObject.onInitialize = function(zone)
 
     
     -- Trapdoor triggers
-    zone:registerTriggerArea(1,  -66,  -2, -136, -64,  2, -134)
-    zone:registerTriggerArea(2,  -68,  -2, -146, -66,  2, -144)
-    zone:registerTriggerArea(3,  -56,  -2, -142, -54,  2, -140)
-    zone:registerTriggerArea(4,  -18,  -2, -140, -20,  2, -138)
-    zone:registerTriggerArea(5,   14,  -2, -140,  16,  2, -138)
-    zone:registerTriggerArea(6,   22,  -2, -144,  24,  2, -142)
-    zone:registerTriggerArea(7,  -22,  -2, -150, -20,  2, -148)
-    zone:registerTriggerArea(8,  -22,  -2, -172, -20,  2, -170)
-    zone:registerTriggerArea(9,  -20,  -2, -182, -18,  2, -180)
-    zone:registerTriggerArea(10, -102, -2, -180, -99,  2, -178)
-    zone:registerTriggerArea(11, -92,  -2, -182, -90,  2, -180)
-    zone:registerTriggerArea(12, -142, -2, -220, -140, 2, -218)
-    zone:registerTriggerArea(13, -140, -2, -230, -138, 2, -228)
-    zone:registerTriggerArea(14, -22,  -2, -220, -20,  2, -218)
-    zone:registerTriggerArea(15, -20,  -2, -230, -18,  2, -228)
-    zone:registerTriggerArea(16,  18,  -2, -222,  20,  2, -220)
-    zone:registerTriggerArea(17,  28,  -2, -220,  30,  2, -218)
-    zone:registerTriggerArea(18,  50,  -2, -220,  52,  2, -218)
-    zone:registerTriggerArea(19,  60,  -2, -222,  62,  2, -220)
-    zone:registerTriggerArea(20, -20,  -2, -252, -18,  2, -250)
-    zone:registerTriggerArea(21, -22,  -2, -262, -20,  2, -260)
-    zone:registerTriggerArea(22, -182, -2, -260, -180, 2, -258)
-    zone:registerTriggerArea(23, -173, -2, -262, -171, 2, -260)
-    zone:registerTriggerArea(24, -150, -2, -260, -148, 2, -258)
-    zone:registerTriggerArea(25, -140, -2, -262, -138, 2, -260)
+    zone:registerTriggerArea(1,  -66,  -2, -136, -64,  2, -134) -- 1 17461534
+    zone:registerTriggerArea(2,  -67,   0, -145,   0,  0,    0)   -- 2 17461535
+    zone:registerTriggerArea(3,  -56,  -2, -142, -54,  2, -140) -- 3 17461536
+    zone:registerTriggerArea(4,  -19,   1, -139,   0,  0,    0)    -- 4 17461537 
+    zone:registerTriggerArea(5,   14,  -2, -140,  16,  2, -138) -- 5 17461538
+    zone:registerTriggerArea(6,   22,  -2, -144,  24,  2, -142) -- 6 17461539
+    zone:registerTriggerArea(7,  -22,  -2, -150, -20,  2, -148) -- 7 17461540
+    zone:registerTriggerArea(8,  -22,  -2, -172, -20,  2, -170) -- 8 17461541
+    zone:registerTriggerArea(9,  -20,  -2, -182, -18,  2, -180) -- 9 17461542
+    zone:registerTriggerArea(10, -102, -2, -180, -99,  2, -178) -- 10 17461543
+    zone:registerTriggerArea(11, -90,  -2, -182, -92,  2, -180) -- 11 17461544 *
+    zone:registerTriggerArea(12, -141, -2, -220, -140, 2, -218) -- 12 17461545
+    zone:registerTriggerArea(13, -140, -2, -230, -138, 2, -228) -- 13 17461546
+    zone:registerTriggerArea(14, -22,  -2, -220, -20,  2, -218) -- 14 17461547
+    zone:registerTriggerArea(15, -20,  -2, -230, -18,  2, -228) -- 15 17461548
+    zone:registerTriggerArea(16,  18,  -2, -222,  20,  2, -220) -- 16 17461549
+    zone:registerTriggerArea(17,  28,  -2, -220,  30,  2, -218) -- 17 17461550
+    zone:registerTriggerArea(18,  50,  -2, -220,  52,  2, -218) -- 18 17461551
+    zone:registerTriggerArea(19,  60,  -2, -222,  62,  2, -220) -- 19 17461552
+    zone:registerTriggerArea(20, -20,  -2, -252, -18,  2, -250) -- 20 17461553
+    zone:registerTriggerArea(21, -22,  -2, -262, -20,  2, -260) -- 21 17461554
+    zone:registerTriggerArea(22, -182, -2, -260, -180, 2, -258) -- 22 17461555
+    zone:registerTriggerArea(23, -173, -2, -262, -171, 2, -260) -- 23 17461556
+    zone:registerTriggerArea(24, -150, -2, -260, -148, 2, -258) -- 24 17461557
+    zone:registerTriggerArea(25, -140, -2, -262, -138, 2, -260) -- 25 17461558
 end
 
 zoneObject.onZoneIn = function(player, prevZone)
@@ -60,84 +62,14 @@ zoneObject.onConquestUpdate = function(zone, updatetype)
 end
 
 zoneObject.onTriggerAreaEnter = function(player, triggerArea)
-    switch (triggerArea:GetTriggerAreaID()): caseof
-    {
-        [1] = function (x)
-            GetNPCByID(ID.npc.TRAPDOOR[1]):openDoor(15)
-        end,
-        [2] = function (x)
-            GetNPCByID(ID.npc.TRAPDOOR[2]):openDoor(15)
-        end,
-        [3] = function (x)
-            GetNPCByID(ID.npc.TRAPDOOR[3]):openDoor(15)
-        end,
-        [4] = function (x)
-            GetNPCByID(ID.npc.TRAPDOOR[4]):openDoor(15)
-        end,
-        [5] = function (x)
-            GetNPCByID(ID.npc.TRAPDOOR[5]):openDoor(15)
-        end,
-        [6] = function (x)
-            GetNPCByID(ID.npc.TRAPDOOR[6]):openDoor(15)
-        end,
-        [7] = function (x)
-            GetNPCByID(ID.npc.TRAPDOOR[7]):openDoor(15)
-        end,
-        [8] = function (x)
-            GetNPCByID(ID.npc.TRAPDOOR[8]):openDoor(15)
-        end,
-        [9] = function (x)
-            GetNPCByID(ID.npc.TRAPDOOR[9]):openDoor(15)
-        end,
-        [10] = function (x)
-            GetNPCByID(ID.npc.TRAPDOOR[10]):openDoor(15)
-        end,
-        [11] = function (x)
-            GetNPCByID(ID.npc.TRAPDOOR[11]):openDoor(15)
-        end,
-        [12] = function (x)
-            GetNPCByID(ID.npc.TRAPDOOR[12]):openDoor(15)
-        end,
-        [13] = function (x)
-            GetNPCByID(ID.npc.TRAPDOOR[13]):openDoor(15)
-        end,
-        [14] = function (x)
-            GetNPCByID(ID.npc.TRAPDOOR[14]):openDoor(15)
-        end,
-        [15] = function (x)
-            GetNPCByID(ID.npc.TRAPDOOR[15]):openDoor(15)
-        end,
-        [16] = function (x)
-            GetNPCByID(ID.npc.TRAPDOOR[16]):openDoor(15)
-        end,
-        [17] = function (x)
-            GetNPCByID(ID.npc.TRAPDOOR[17]):openDoor(15)
-        end,
-        [18] = function (x)
-            GetNPCByID(ID.npc.TRAPDOOR[18]):openDoor(15)
-        end,
-        [19] = function (x)
-            GetNPCByID(ID.npc.TRAPDOOR[19]):openDoor(15)
-        end,
-        [20] = function (x)
-            GetNPCByID(ID.npc.TRAPDOOR[20]):openDoor(15)
-        end,
-        [21] = function (x)
-            GetNPCByID(ID.npc.TRAPDOOR[21]):openDoor(15)
-        end,
-        [22] = function (x)
-            GetNPCByID(ID.npc.TRAPDOOR[22]):openDoor(15)
-        end,
-        [23] = function (x)
-            GetNPCByID(ID.npc.TRAPDOOR[23]):openDoor(15)
-        end,
-        [24] = function (x)
-            GetNPCByID(ID.npc.TRAPDOOR[24]):openDoor(15)
-        end,
-        [25] = function (x)
-            GetNPCByID(ID.npc.TRAPDOOR[25]):openDoor(15)
-        end,
-    }
+    local triggerAreaID = triggerArea:GetTriggerAreaID()
+
+    if triggerAreaID <= 25 then
+        local trapdoor = GetNPCByID(ID.npc.TRAPDOOR_OFFSET + triggerAreaID - 1)
+        if trapdoor ~= nil then
+            trapdoor:openDoor(15)
+        end
+    end
 end
 
 zoneObject.onEventFinish = function(player, csid, option)

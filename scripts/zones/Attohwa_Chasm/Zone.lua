@@ -4,6 +4,7 @@
 local ID = require('scripts/zones/Attohwa_Chasm/IDs')
 require('scripts/globals/helm')
 require('scripts/globals/zone')
+require('scripts/globals/exp_controller')
 -----------------------------------
 local zoneObject = {}
 
@@ -53,6 +54,9 @@ zoneObject.onInitialize = function(zone)
     xi.mob.nmTODPersistCache(zone, ID.mob.SEKHMET)
 
     xi.helm.initZone(zone, xi.helm.type.EXCAVATION)
+
+    xi.exp_controller.onInitialize(zone)
+
 end
 
 zoneObject.onZoneIn = function(player, prevZone)

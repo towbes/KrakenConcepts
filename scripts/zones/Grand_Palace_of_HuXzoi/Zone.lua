@@ -5,6 +5,7 @@ local huxzoiGlobal = require('scripts/zones/Grand_Palace_of_HuXzoi/globals')
 local ID = require('scripts/zones/Grand_Palace_of_HuXzoi/IDs')
 require('scripts/globals/conquest')
 require('scripts/globals/status')
+require('scripts/globals/exp_controller')
 -----------------------------------
 local zoneObject = {}
 
@@ -21,6 +22,9 @@ zoneObject.onInitialize = function(zone)
     zone:registerTriggerArea(10,  97, -4, 372,  103, 4, 378)
 
     huxzoiGlobal.pickTemperancePH()
+
+    xi.exp_controller.onInitialize(zone)
+
 end
 
 zoneObject.onConquestUpdate = function(zone, updatetype)

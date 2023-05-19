@@ -4033,7 +4033,22 @@ namespace charutils
                         region >= REGION_TYPE::WEST_AHT_URHGAN &&
                         region <= REGION_TYPE::ALZADAAL;
 
-                    exp *= GetPlayerShareMultiplier(pcinzone, isInSignetZone || isInSanctionZone);
+                    bool isInSigilZone =
+                        PMember->StatusEffectContainer->HasStatusEffect(EFFECT_SIGIL) &&
+                        region >= REGION_TYPE::RONFAURE_FRONT &&
+                        region <= REGION_TYPE::VALDEAUNIA_FRONT;
+
+                    exp *= GetPlayerShareMultiplier(pcinzone, isInSignetZone || isInSanctionZone || isInSigilZone);
+
+                    if (isInSigilZone)
+                    {
+                        exp *= 1.50f; // 40% XP Bonus in WOTG Areas
+                    }
+
+                    if (isInSanctionZone)
+                    {
+                        exp *= 1.40f; // 40% XP Bonus in TOAU Areas
+                    }
 
                     if (PMob->getMobMod(MOBMOD_EXP_BONUS))
                     {
@@ -4728,6 +4743,13 @@ namespace charutils
             if (PChar->StatusEffectContainer->HasStatusEffect(EFFECT_SANCTION) && (region >= REGION_TYPE::WEST_AHT_URHGAN && region <= REGION_TYPE::ALZADAAL))
             {
                 charutils::AddPoints(PChar, "imperial_standing", (int32)(exp * 0.1f));
+                PChar->pushPacket(new CConquestPacket(PChar));
+            }
+
+                        // Should this user be awarded imperial standing..
+            if (PChar->StatusEffectContainer->HasStatusEffect(EFFECT_SIGIL) && (region >= REGION_TYPE::RONFAURE_FRONT && region <= REGION_TYPE::VALDEAUNIA_FRONT))
+            {
+                charutils::AddPoints(PChar, "allied_notes", (int32)(exp * 0.1f));
                 PChar->pushPacket(new CConquestPacket(PChar));
             }
 

@@ -9,6 +9,7 @@ require('scripts/globals/missions')
 require('scripts/globals/npc_util')
 require('scripts/globals/titles')
 require('scripts/globals/helm')
+require('scripts/globals/exp_controller')
 -----------------------------------
 local zoneObject = {}
 
@@ -30,6 +31,8 @@ zoneObject.onInitialize = function(zone)
     xi.conq.setRegionalConquestOverseers(zone:getRegionID())
 
     xi.helm.initZone(zone, xi.helm.type.LOGGING)
+    xi.exp_controller.onInitialize(zone)
+
 end
 
 zoneObject.onConquestUpdate = function(zone, updatetype)

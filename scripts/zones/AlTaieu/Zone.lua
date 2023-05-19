@@ -4,10 +4,13 @@
 local ID = require('scripts/zones/AlTaieu/IDs')
 require('scripts/globals/keyitems')
 require('scripts/globals/missions')
+require('scripts/globals/exp_controller')
 -----------------------------------
 local zoneObject = {}
 
 zoneObject.onInitialize = function(zone)
+    xi.exp_controller.onInitialize(zone)
+
 end
 
 zoneObject.onConquestUpdate = function(zone, updatetype)
