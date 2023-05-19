@@ -1492,6 +1492,20 @@ xi.regime.checkRegime = function(player, mob, regimeId, index, regimeType)
 
     -- award gil and tabs once per day, or at every page completion if REGIME_WAIT is 0 in settings.lua
     local vanadielEpoch = vanaDay()
+
+        -- WINGSCUSTOM diminishing returns on page rewards for repeated completions on same day
+    if player:getCharVar("[regime]lastReward") < vanadielEpoch then
+        local completions = player:getCharVar("[regime]repeatedCompletions")
+        if completions > 0 then
+            reward = math.ceil(reward * (.85 ^ completions))
+            player:PrintToPlayer("Field Manual : You are getting a reduced reward from completing multiple pages on the same day!", xi.msg.channel.SYSTEM_3)
+            --player:PrintToPlayer(string.format("Field Manual : You are getting a reduced reward from completing %u pages on the same day!", completions), xi.msg.channel.SYSTEM_3)
+        end
+        player:setCharVar("[regime]repeatedCompletions", completions + 1)
+    else
+        player:setCharVar("[regime]repeatedCompletions", 0)
+    end    
+    
     if
         xi.settings.main.REGIME_WAIT == 0 or
         player:getCharVar("[regime]lastReward") < vanadielEpoch
