@@ -85,7 +85,7 @@ local function souleaterBonus(attacker, wsParams)
         if bonusDamage >= 1 then
             attacker:delHP(utils.stoneskin(attacker, bonusDamage * stalwartSoulBonus))
 
-            if attacker:getMainJob() ~= xi.job.DRK then
+            if attacker:getMainJob() == xi.job.DRK or attacker:getSubJob() == xi.job.DRK then
                 return bonusDamage / 2
             end
 
@@ -408,8 +408,38 @@ local function getSingleHitDamage(attacker, target, dmg, wsParams, calcParams)
                     magicdmg = utils.stoneskin(target, magicdmg)
                 end
 
-                finaldmg = finaldmg + magicdmg
-            end
+                local mab2 = 1
+            
+                if params ~= nil and params.bonusmab ~= nil and params.includemab == true then
+                    mab2 = (100 + attacker:getMod(xi.mod.MATT) + params.bonusmab) / (100 + target:getMod(xi.mod.MDEF))
+                elseif params == nil or (params ~= nil and params.includemab == true) then
+                    mab2 = (100 + attacker:getMod(xi.mod.MATT)) / (100 + target:getMod(xi.mod.MDEF))
+                end
+            
+
+                	--Ninjutsu spell debuff  --(To do) -Umeboshi
+    --if wsParams.element ~= nil then
+		--if target:getNinDebuff() == wsParams.element then
+			--dmg = dmg * params.elementmult
+			--target:setNinDebuff(205)
+		--end
+	--end
+                                --Divine/Elemental Seal Bonus
+
+                local magicseal = 1
+                if wsParams.ele ~= nil and wsParams.ele ~= xi.magic.ele.LIGHT and (attacker:hasStatusEffect(xi.effect.ELEMENTAL_SEAL)) then
+                    magicseal = math.floor(math.random(210,235)/100)
+                    attacker:delStatusEffect(xi.effect.ELEMENTAL_SEAL)
+
+                  --target:delStatusEffect(xi.effect.ninjutsu_ele_debuff)
+
+                elseif wsParams.ele ~= nil and wsParams.ele == xi.magic.ele.LIGHT and (attacker:hasStatusEffect(xi.effect.DIVINE_SEAL)) then
+                    magicseal = math.floor(math.random(225,245)/80)
+                    attacker:delStatusEffect(xi.effect.DIVINE_SEAL)
+                end
+
+                finaldmg = (finaldmg + (magicdmg * (mab2 * 1.5 * magicseal)))
+            end   
 
             calcParams.hitsLanded = calcParams.hitsLanded + 1
         else
@@ -591,7 +621,7 @@ function calculateRawWSDmg(attacker, target, wsID, tp, action, wsParams, calcPar
     finaldmg = finaldmg + hitdmg
 
     -- Have to calculate added bonus for SA/TA here since it is done outside of the fTP multiplier
-    if attacker:getMainJob() == xi.job.THF then
+    if attacker:getMainJob() == xi.job.THF or attacker:getSubJob() == xi.job.THF then
         -- Add DEX/AGI bonus to first hit if THF main and valid Sneak/Trick Attack
         if calcParams.sneakApplicable then
             finaldmg = finaldmg +
@@ -752,6 +782,16 @@ function doPhysicalWeaponskill(attacker, target, wsID, wsParams, tp, action, pri
     attacker:delStatusEffectsByFlag(xi.effectFlag.DETECTABLE)
     attacker:delStatusEffect(xi.effect.SNEAK_ATTACK)
     attacker:delStatusEffectSilent(xi.effect.BUILDING_FLOURISH)
+
+    -- Ws Specific DMG Bonus -Umeboshi
+    if (attacker:getMod(xi.mod.WEAPONSKILL_DAMAGE_BASE + wsID) > 0) then
+        bonusdmg = bonusdmg + attacker:getMod(xi.mod.WEAPONSKILL_DAMAGE_BASE + wsID)
+    end
+        
+    if wsParams.meleedmg ~= nil and finaldmg > 0 then
+            finaldmg = finaldmg + wsParams.meleedmg
+    end
+
 
     finaldmg = finaldmg * xi.settings.main.WEAPON_SKILL_POWER -- Add server bonus
     calcParams.finalDmg = finaldmg
@@ -922,6 +962,22 @@ function doMagicWeaponskill(attacker, target, wsID, wsParams, tp, action, primar
     else
         calcParams.shadowsAbsorbed = 1
     end
+
+    --Divine/Elemental Seal Bonus
+    if wsParams.ele ~= nil and wsParams.ele ~= xi.magic.ele.LIGHT and (attacker:hasStatusEffect(xi.effect.ELEMENTAL_SEAL)) then
+        dmg = math.floor(math.random(210,235)/100*dmg)
+            if wsParams.ele == xi.magic.ele.LIGHT and wsParams.skill == xi.skill.STAFF then -- Sunburst
+                   dmg = dmg * 1.52 + math.random(1,5)
+                    end
+            attacker:delStatusEffect(xi.effect.ELEMENTAL_SEAL)
+                elseif wsParams.ele ~= nil and wsParams.ele == xi.magic.ele.LIGHT and (attacker:hasStatusEffect(xi.effect.DIVINE_SEAL)) then
+                    dmg = math.floor(math.random(225,245)/100*dmg)
+                    if wsParams.ele == xi.magic.ele.DARK and wsParams.skill == xi.skill.STAFF then -- Sunburst
+                        dmg = dmg * 1.52 + math.random(1,5)
+                         end
+                    attacker:delStatusEffect(xi.effect.DIVINE_SEAL)
+                end
+
 
     calcParams.finalDmg = dmg
 

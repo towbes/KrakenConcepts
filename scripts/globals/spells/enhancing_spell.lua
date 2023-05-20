@@ -230,7 +230,7 @@ xi.spells.enhancing.calculateEnhancingBasePower = function(caster, target, spell
         else
             basePower = math.max(math.floor(math.sqrt(skillLevel)) - 1, 0)
         end
-
+          
     -- Phalanx
     elseif spellEffect == xi.effect.PHALANX then
         if skillLevel > 300 then -- Phalanx I and II over 300 skill
@@ -392,7 +392,8 @@ xi.spells.enhancing.calculateEnhancingDuration = function(caster, target, spell,
 
         -- En-Spells
     elseif (spellEffect >= xi.effect.ENFIRE and spellEffect <= xi.effect.ENWATER) or (spellEffect >= xi.effect.ENFIRE_II and spellEffect <= xi.effect.ENWATER_II) then
-        if caster:getEquipID(xi.slot.MAIN) == xi.items.BUZZARD_TUCK or caster:getEquipID(xi.slot.SUB) == xi.items.BUZZARD_TUCK then
+        if caster:getEquipID(xi.slot.MAIN) == xi.items.BUZZARD_TUCK or caster:getEquipID(xi.slot.SUB) == xi.items.BUZZARD_TUCK or
+           caster:getEquipID(xi.slot.MAIN) == xi.items.FENCING_DEGEN or caster:getEquipID(xi.slot.SUB) == xi.items.FENCING_DEGEN then
             duration = duration + 30 -- Sword enhancement spell duration +5
         end
     end
