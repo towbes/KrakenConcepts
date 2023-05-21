@@ -30,7 +30,7 @@ weaponskillObject.onUseWeaponSkill = function(player, target, wsID, tp, primary,
     params.atk100 = 1 params.atk200 = 1 params.atk300 = 1
 
     if xi.settings.main.USE_ADOULIN_WEAPON_SKILL_CHANGES then
-        params.str_wsc = 0.4 params.agi_wsc = 0.0 params.int_wsc = 0.4
+        params.str_wsc = 0.6 params.agi_wsc = 0.0 params.int_wsc = 0.4
     end
 
     -- Apply aftermath
@@ -39,7 +39,7 @@ weaponskillObject.onUseWeaponSkill = function(player, target, wsID, tp, primary,
     local damage, criticalHit, tpHits, extraHits = doPhysicalWeaponskill(player, target, wsID, params, tp, action, primary, taChar)
 
     if not target:isUndead() then
-        local drain = math.floor(damage * 0.4)
+        local drain = math.floor(damage * 0.5)
         player:addHP(drain)
     end
 

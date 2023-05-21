@@ -49,9 +49,9 @@ weaponskillObject.onUseWeaponSkill = function(player, target, wsID, tp, primary,
     if xi.settings.main.USE_ADOULIN_WEAPON_SKILL_CHANGES then
         -- Damage calculations changed based on: http://www.bg-wiki.com/bg/Spirits_Within http://www.bluegartr.com/threads/121610-Rehauled-Weapon-Skills-tier-lists?p=6142188&viewfull=1#post6142188
         if tp == 3000 then
-            wsc = playerHP
+            wsc = math.floor(playerHP * .65)
         elseif tp >= 2000 then
-            wsc = math.floor(playerHP * .5)
+            wsc = math.floor(playerHP * .35)
         elseif tp >= 1000 then
             wsc = math.floor(playerHP * .125)
         end

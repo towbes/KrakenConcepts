@@ -855,6 +855,15 @@ function doRangedWeaponskill(attacker, target, wsID, wsParams, tp, action, prima
     -- Delete statuses that may have been spent by the WS
     attacker:delStatusEffectsByFlag(xi.effectFlag.DETECTABLE)
 
+        -- Ws Specific DMG Bonus -Umeboshi
+    if (attacker:getMod(xi.mod.WEAPONSKILL_DAMAGE_BASE + wsID) > 0) then
+        bonusdmg = bonusdmg + attacker:getMod(xi.mod.WEAPONSKILL_DAMAGE_BASE + wsID)
+    end
+        
+    if wsParams.meleedmg ~= nil and finaldmg > 0 then
+            finaldmg = finaldmg + wsParams.meleedmg
+    end
+
     -- Calculate reductions
     finaldmg = target:rangedDmgTaken(finaldmg)
     finaldmg = finaldmg * target:getMod(xi.mod.PIERCE_SDT) / 1000

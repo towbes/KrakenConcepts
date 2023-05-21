@@ -20,7 +20,7 @@ local weaponskillObject = {}
 weaponskillObject.onUseWeaponSkill = function(player, target, wsID, tp, primary, action, taChar)
     local params = {}
     params.numHits = 1
-    params.ftp100 = 0.5 params.ftp200 = 0.75 params.ftp300 = 1
+    params.ftp100 = 0.5 params.ftp200 = 0.8 params.ftp300 = 1
     params.str_wsc = 0.2 params.dex_wsc = 0.0 params.vit_wsc = 0.0 params.agi_wsc = 0.0 params.int_wsc = 0.2 params.mnd_wsc = 0.0 params.chr_wsc = 0.0
     params.acc100 = 0.0 params.acc200 = 0.0 params.acc300 = 0.0
     params.atk100 = 1 params.atk200 = 1 params.atk300 = 1
@@ -30,8 +30,8 @@ weaponskillObject.onUseWeaponSkill = function(player, target, wsID, tp, primary,
     params.includemab = true
 
     if xi.settings.main.USE_ADOULIN_WEAPON_SKILL_CHANGES then
-        params.str_wsc = 0.3 params.int_wsc = 0.3
-        params.ftp200 = 1.375 params.ftp300 = 2.25 -- http://wiki.ffo.jp/html/718.html
+        params.str_wsc = 0.3 params.int_wsc = 0.4
+        params.ftp200 = 0.6 params.ftp300 = 1.5 -- http://wiki.ffo.jp/html/718.html
     end
 
     local damage, criticalHit, tpHits, extraHits = doPhysicalWeaponskill(player, target, wsID, params, tp, action, primary, taChar)

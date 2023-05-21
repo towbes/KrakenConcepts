@@ -32,19 +32,24 @@ weaponskillObject.onUseWeaponSkill = function(player, target, wsID, tp, primary,
     end
 
     local params = {}
-    params.ftp100 = 2.75 params.ftp200 = 2.75 params.ftp300 = 2.75
-    params.str_wsc = 0.3 params.dex_wsc = 0.0 params.vit_wsc = 0.0 params.agi_wsc = 0.0 params.int_wsc = 0.0 params.mnd_wsc = 0.5 params.chr_wsc = 0.0
+    params.ftp100 = 1.5 params.ftp200 = 1.5 params.ftp300 = 1.5
+    params.str_wsc = 0.0 params.dex_wsc = 0.0 params.vit_wsc = 0.0 params.agi_wsc = 0.0 params.int_wsc = 0.5 params.mnd_wsc = 0.5 params.chr_wsc = 0.0
     params.ele = xi.magic.ele.DARK
     params.skill = xi.skill.SWORD
     params.includemab = true
 
     if xi.settings.main.USE_ADOULIN_WEAPON_SKILL_CHANGES then
-        if tp >= 2000 and tp <= 2999 then
+        if tp >= 1000 and tp <= 1999 then
+            drain = 75
+        elseif (tp >= 2000 and tp <= 2999) then
             drain = 100
-        elseif tp == 3000 then
+        elseif (tp == 3000) then
             drain = 160
         end
     end
+
+    local drainmod = 1 + player:getMod(xi.mod.ENH_DRAIN_ASPIR) / 100
+    drain = drain * drainmod
 
     local damage, criticalHit, tpHits, extraHits = doMagicWeaponskill(player, target, wsID, params, tp, action, primary)
 

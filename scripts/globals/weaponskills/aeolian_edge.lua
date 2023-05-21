@@ -26,7 +26,7 @@ weaponskillObject.onUseWeaponSkill = function(player, target, wsID, tp, primary,
     params.includemab = true
 
     if xi.settings.main.USE_ADOULIN_WEAPON_SKILL_CHANGES then
-        params.ftp100 = 2 params.ftp200 = 3 params.ftp300 = 4.5 -- https://www.bg-wiki.com/bg/Aeolian_Edge
+        params.ftp100 = 2.75 params.ftp200 = 3.50 params.ftp300 = 4.0 -- https://www.bg-wiki.com/bg/Aeolian_Edge
         params.dex_wsc = 0.4 params.int_wsc = 0.4
     end
 

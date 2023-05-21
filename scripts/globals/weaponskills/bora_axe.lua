@@ -29,9 +29,9 @@ weaponskillObject.onUseWeaponSkill = function(player, target, wsID, tp, primary,
     params.atk100 = 3.5 params.atk200 = 3.5 params.atk300 = 3.5
 
     if xi.settings.main.USE_ADOULIN_WEAPON_SKILL_CHANGES then
-        params.ftp100 = 4.5 params.ftp200 = 4.5 params.ftp300 = 4.5
+        params.ftp100 = 3.75 params.ftp200 = 3.75 params.ftp300 = 3.75
         params.dex_wsc = 1.0
-        params.atk100 = 1.0 params.atk200 = 1.0 params.atk300 = 1.0
+        params.atk100 = 1.25 params.atk200 = 1.25 params.atk300 = 1.25
     end
 
     local damage, criticalHit, tpHits, extraHits = doPhysicalWeaponskill(player, target, wsID, params, tp, action, primary, taChar)
