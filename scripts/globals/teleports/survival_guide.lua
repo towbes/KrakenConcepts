@@ -47,7 +47,9 @@ xi.survivalGuide.onTrigger = function(player)
     local guide         = survival.survivalGuides[tableIndex]
     local expansions    = 3 + (4 * xi.settings.main.ENABLE_COP) + (8 * xi.settings.main.ENABLE_TOAU) + (16 * xi.settings.main.ENABLE_WOTG) + (2048 * xi.settings.main.ENABLE_SOA)
 
-    if guide then
+    player:PrintToPlayer('Survival guides are not enabled!')
+
+--[[    if guide then
         -- If this survival guide hasn't been registered yet (saved to database) do that now.
         local foundRegisteredGuide = checkForRegisteredSurvivalGuide(player, guide)
 
@@ -82,7 +84,7 @@ xi.survivalGuide.onTrigger = function(player)
         end
     else
         player:PrintToPlayer('Survival guides are not enabled!')
-    end
+    end --]]
 end
 
 xi.survivalGuide.onEventUpdate = function(player, csid, option)
