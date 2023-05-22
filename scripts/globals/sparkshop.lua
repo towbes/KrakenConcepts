@@ -462,53 +462,54 @@ local optionToItem =
     [9] = -- Equipment (Lv.71 - 98)
     {
         [ 0] = { cost = 1033, id = 16423 }, -- Manoples
-        [ 1] = { cost =  300, id = 18782 }, -- Eyra baghnakhs
+    --    [ 1] = { cost =  300, id = 18782 }, -- Eyra baghnakhs
         [ 2] = { cost =  300, id = 16470 }, -- Gully
-        [ 3] = { cost =  687, id = 16485 }, -- Yataghan
-        [ 4] = { cost =  687, id = 19138 }, -- Verus knife
-        [ 5] = { cost =  687, id = 17664 }, -- Firmament
-        [ 6] = { cost =  852, id = 18901 }, -- Falcata
+    --    [ 3] = { cost =  687, id = 16485 }, -- Yataghan
+    --    [ 4] = { cost =  687, id = 19138 }, -- Verus knife
+    --    [ 5] = { cost =  687, id = 17664 }, -- Firmament
+    --    [ 6] = { cost =  852, id = 18901 }, -- Falcata
         [ 7] = { cost = 1625, id = 19151 }, -- Bahadur
-        [ 8] = { cost =  687, id = 19165 }, -- Cratus sword
-        [ 9] = { cost =  866, id = 19170 }, -- Kardia faussar
-        [10] = { cost =  694, id = 16660 }, -- Doom tabar
-        [11] = { cost =  701, id = 18537 }, -- Maiden tabar
+    --    [ 8] = { cost =  687, id = 19165 }, -- Cratus sword
+    --    [ 9] = { cost =  866, id = 19170 }, -- Kardia faussar
+    --    [10] = { cost =  694, id = 16660 }, -- Doom tabar
+    --    [11] = { cost =  701, id = 18537 }, -- Maiden tabar
         [12] = { cost =  790, id = 16707 }, -- Bhuj
-        [13] = { cost =  687, id = 18511 }, -- Dolor bhuj
-        [14] = { cost =  687, id = 18517 }, -- Elephas axe
+    --    [13] = { cost =  687, id = 18511 }, -- Dolor bhuj
+    --    [14] = { cost =  687, id = 18517 }, -- Elephas axe
         [15] = { cost =  675, id = 16777 }, -- Death scythe
-        [16] = { cost =  687, id = 18964 }, -- Dire scythe
-        [17] = { cost =  762, id = 18555 }, -- Sectum sickle
+    --    [16] = { cost =  687, id = 18964 }, -- Dire scythe
+    --    [17] = { cost =  762, id = 18555 }, -- Sectum sickle
         [18] = { cost =  795, id = 16840 }, -- Ox tongue
         [19] = { cost =  300, id = 16861 }, -- Ice lance
-        [20] = { cost =  391, id = 19317 }, -- Borian spear
+    --    [20] = { cost =  391, id = 19317 }, -- Borian spear
         [21] = { cost =  926, id = 18420 }, -- Hayabusa
-        [22] = { cost =  687, id = 19285 }, -- Kakko
-        [23] = { cost =  561, id = 19293 }, -- Ichi-an
-        [24] = { cost =  701, id = 16971 }, -- Yukitsugu
-        [25] = { cost =  391, id = 16963 }, -- Taimakuniyuki
+    --    [22] = { cost =  687, id = 19285 }, -- Kakko
+    --    [23] = { cost =  561, id = 19293 }, -- Ichi-an
+    --    [24] = { cost =  701, id = 16971 }, -- Yukitsugu
+    --    [25] = { cost =  391, id = 16963 }, -- Taimakuniyuki
         [26] = { cost =  300, id = 18848 }, -- Brass jadagna
-        [27] = { cost =  687, id = 18875 }, -- Vodun mace
-        [28] = { cost =  302, id = 18877 }, -- Robur mace
+    --    [27] = { cost =  687, id = 18875 }, -- Vodun mace
+    --    [28] = { cost =  302, id = 18877 }, -- Robur mace
         [29] = { cost =  300, id = 17102 }, -- Eight-sided pole
-        [30] = { cost =  708, id = 18621 }, -- Warmage's pole
+    --    [30] = { cost =  708, id = 18621 }, -- Warmage's pole
         [31] = { cost =  516, id = 18695 }, -- Cerberus bow
-        [32] = { cost =  361, id = 19733 }, -- Beursault bow
+    --    [32] = { cost =  361, id = 19733 }, -- Beursault bow
         [33] = { cost =  808, id = 17252 }, -- Culverin
         [34] = { cost =  650, id = 17213 }, -- Staurobow
-        [35] = { cost =  687, id = 19265 }, -- Darkwing
-        [36] = { cost =  687, id = 19267 }, -- Ribauldequin
-        [37] = { cost =  656, id = 19735 }, -- Cecchino's fucile
+    --    [35] = { cost =  687, id = 19265 }, -- Darkwing
+    --    [36] = { cost =  687, id = 19267 }, -- Ribauldequin
+    --    [37] = { cost =  656, id = 19735 }, -- Cecchino's fucile
         [38] = { cost =  644, id = 12309 }, -- Ritter shield
         [39] = { cost =  556, id = 12305 }, -- Ice shield
         [40] = { cost = 2231, id = 12387 }, -- Koenig shield
         [41] = { cost = 2755, id = 12385 }, -- Acheron shield
-        [42] = { cost =  300,  id = 16189 }, -- Gleaming shield
+    --    [42] = { cost =  300,  id = 16189 }, -- Gleaming shield
+
     },
 
     [10] = -- Equipment (Lv.99)
     {
-        [ 0] = { cost =  3000, id = 27740 }, -- Outrider mask
+--[[    [ 0] = { cost =  3000, id = 27740 }, -- Outrider mask
         [ 1] = { cost =  5000, id = 27881 }, -- Outrider mail
         [ 2] = { cost =  3000, id = 28029 }, -- Outrider mittens
         [ 3] = { cost =  3000, id = 28168 }, -- Outrider hose
@@ -566,16 +567,16 @@ local optionToItem =
         [55] = { cost =  5000, id = 21316 }, -- Eminent bolt
         [56] = { cost =  5000, id = 21331 }, -- Eminent bullet
         [57] = { cost =  7000, id = 21355 }, -- Hachiya shuriken
-        [58] = { cost =  7000, id = 22260 }, -- Eminent animator II
+        [58] = { cost =  7000, id = 22260 }, -- Eminent animator II ]]--
     },
 
     [12] = -- Alter Ego Extravaganza Trusts
     {
-        [10133] = { cost =  500, id = xi.items.CIPHER_OF_F_COFFINS_ALTER_EGO }, -- F. Coffin
+       --[[ [10133] = { cost =  500, id = xi.items.CIPHER_OF_F_COFFINS_ALTER_EGO }, -- F. Coffin
         [10138] = { cost =  500, id = xi.items.CIPHER_OF_CIDS_ALTER_EGO }, -- Cid
         [10148] = { cost =  500, id = xi.items.CIPHER_OF_GILGAMESHS_ALTER_EGO }, -- Gilgamesh
         [10152] = { cost =  500, id = xi.items.CIPHER_OF_QULTADAS_ALTER_EGO }, -- Qultada
-        [10181] = { cost =  500, id = xi.items.CIPHER_OF_KINGS_ALTER_EGO }, -- King
+        [10181] = { cost =  500, id = xi.items.CIPHER_OF_KINGS_ALTER_EGO }, -- King ]]--
     },
 
     [20] = -- Currency Exchange
