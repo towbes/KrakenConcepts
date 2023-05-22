@@ -39,7 +39,9 @@ weaponskillObject.onUseWeaponSkill = function(player, target, wsID, tp, primary,
     local damage, criticalHit, tpHits, extraHits = doPhysicalWeaponskill(player, target, wsID, params, tp, action, primary, taChar)
 
     if not target:isUndead() then
-        local drain = math.floor(damage * 0.5)
+        local drain = math.floor(damage * (math.random(55,75)/100))
+        local drainMod = 1 + player:getMod(xi.mod.ENH_DRAIN_ASPIR) / 100
+        drain = drain * drainMod
         player:addHP(drain)
     end
 

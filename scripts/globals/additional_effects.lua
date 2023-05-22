@@ -233,6 +233,10 @@ xi.additionalEffect.attack = function(attacker, defender, baseAttackDamage, item
             damage = defender:getHP()
         end
 
+        local drainMod = 1 + attacker:getMod(xi.mod.ENH_DRAIN_ASPIR) / 100
+        damage = damage * drainMod
+
+
         msgID = xi.msg.basic.ADD_EFFECT_HP_DRAIN
         msgParam = damage
         defender:addHP(-damage)
@@ -249,6 +253,9 @@ xi.additionalEffect.attack = function(attacker, defender, baseAttackDamage, item
         elseif defender:getMP() == 0 then
             return 0, 0, 0 -- Conditions not hit
         end
+
+        local drainMod = 1 + attacker:getMod(xi.mod.ENH_DRAIN_ASPIR) / 100
+        damage = damage * drainMod
 
         msgID = xi.msg.basic.ADD_EFFECT_MP_DRAIN
         msgParam = damage
@@ -375,6 +382,9 @@ xi.additionalEffect.attack = function(attacker, defender, baseAttackDamage, item
                     damage = defender:getHP()
                 end
 
+                local drainMod = 1 + attacker:getMod(xi.mod.ENH_DRAIN_ASPIR) / 100
+                damage = damage * drainMod
+
                 msgID = xi.msg.basic.ADD_EFFECT_HP_DRAIN
                 msgParam = damage
                 defender:addHP(-damage)
@@ -473,6 +483,9 @@ xi.additionalEffect.attack = function(attacker, defender, baseAttackDamage, item
                 if damage > defender:getHP() then
                     damage = defender:getHP()
                 end
+
+                local drainMod = 1 + attacker:getMod(xi.mod.ENH_DRAIN_ASPIR) / 100
+                damage = damage * drainMod
 
                 msgID = xi.msg.basic.ADD_EFFECT_HP_DRAIN
                 msgParam = damage

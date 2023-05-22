@@ -48,15 +48,23 @@ weaponskillObject.onUseWeaponSkill = function(player, target, wsID, tp, primary,
         end
     end
 
-    local drainmod = 1 + player:getMod(xi.mod.ENH_DRAIN_ASPIR) / 100
-    drain = drain * drainmod
+    local drainMod = 1 + player:getMod(xi.mod.ENH_DRAIN_ASPIR) / 100
+    drain = drain * drainMod
 
     local damage, criticalHit, tpHits, extraHits = doMagicWeaponskill(player, target, wsID, params, tp, action, primary)
 
-    if not target:isUndead() then
-        player:addHP((damage / 100) * drain)
-    end
+    local HPDrained = (damage / 100) * drain
 
+    if not target:isUndead() then
+        local diff = (player:getMaxHP() - player:getHP())
+        if HPDrained > diff then
+            HPDrained = diff
+        end
+        player:addHP(HPDrained)
+        player:timer(3500, function(playerArg)
+            playerArg:messageBasic(xi.msg.basic.RECOVERS_HP, 0, HPDrained)
+        end)
+    end
     return tpHits, extraHits, criticalHit, damage
 end
 

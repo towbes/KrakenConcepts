@@ -32,6 +32,8 @@ weaponskillObject.onUseWeaponSkill = function(player, target, wsID, tp, primary,
     local wsc   = player:getStat(xi.mod.MND) * 1.0
 
     local mpRestored = math.floor((math.floor(skill * 0.11) + wsc) * multiplier)
+    local drainMod = 1 + player:getMod(xi.mod.ENH_DRAIN_ASPIR) / 100
+    mpRestored = mpRestored * drainMod
 
     if target:isUndead() then
         mpRestored = 0
