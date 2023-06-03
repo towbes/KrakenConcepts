@@ -885,6 +885,72 @@ xi.mod =
     DIG_BYPASS_FATIGUE      = 1074, -- Chocobo digging modifier found in "Blue Race Silks". Modifier works as a direct percent.
     BREATH_DMG_DEALT        = 1075, -- Breath damage dealt
 
+        -- Permenant Resistance Build Modifiers
+    --SLEEPRESBUILD                 = 1138, -- Used to create a resbuild for the appropriate effect. Will decrease overall duration of effect. (Out of 1000)
+    --POISONRESBUILD                = 1139, -- Used to create a resbuild for the appropriate effect. Will decrease overall duration of effect. (Out of 1000)
+    --PARALYZERESBUILD              = 1140, -- Used to create a resbuild for the appropriate effect. Will decrease overall duration of effect. (Out of 1000)
+    --BLINDRESBUILD                 = 1141, -- Used to create a resbuild for the appropriate effect. Will decrease overall duration of effect. (Out of 1000)
+    --SILENCERESBUILD               = 1142, -- Used to create a resbuild for the appropriate effect. Will decrease overall duration of effect. (Out of 1000)
+    --VIRUSRESBUILD                 = 1143, -- Used to create a resbuild for the appropriate effect. Will decrease overall duration of effect. (Out of 1000)
+    --PETRIFYRESBUILD               = 1144, -- Used to create a resbuild for the appropriate effect. Will decrease overall duration of effect. (Out of 1000)
+    --BINDRESBUILD                  = 1145, -- Used to create a resbuild for the appropriate effect. Will decrease overall duration of effect. (Out of 1000)
+    --CURSERESBUILD                 = 1146, -- Used to create a resbuild for the appropriate effect. Will decrease overall duration of effect. (Out of 1000)
+    --GRAVITYRESBUILD               = 1147, -- Used to create a resbuild for the appropriate effect. Will decrease overall duration of effect. (Out of 1000)
+    --SLOWRESBUILD                  = 1148, -- Used to create a resbuild for the appropriate effect. Will decrease overall duration of effect. (Out of 1000)
+    --STUNRESBUILD                  = 1149, -- Used to create a resbuild for the appropriate effect. Will decrease overall duration of effect. (Out of 1000)
+    --CHARMRESBUILD                 = 1150, -- Used to create a resbuild for the appropriate effect. Will decrease overall duration of effect. (Out of 1000)
+    --AMNESIARESBUILD               = 1151, -- Used to create a resbuild for the appropriate effect. Will decrease overall duration of effect. (Out of 1000)
+    --LULLABYRESBUILD               = 1152, -- Used to create a resbuild for the appropriate effect. Will decrease overall duration of effect. (Out of 1000)
+    --DEATHRESBUILD                 = 1153, -- Used to create a resbuild for the appropriate effect. Will decrease overall duration of effect. (Out of 1000)
+    --PET_DMG_TAKEN_PHYSICAL        = 1154, -- Percent increase/decrease in pet physical damage taken for the target.
+    --PET_DMG_TAKEN_MAGICAL         = 1155, -- Percent increase/decrease in pet magical damage taken for the target.
+    --PET_DMG_TAKEN_BREATH          = 1156, -- Percent increase/decrease in pet breath damage taken for the target.
+    --FIRE_EEM                      = 1158, -- Elemental Evasion Multiplier (Known as SDT in common magic accuracy formulas) (out of 100)
+    --ICE_EEM                       = 1159, -- Elemental Evasion Multiplier (Known as SDT in common magic accuracy formulas) (out of 100)
+    --WIND_EEM                      = 1160, -- Elemental Evasion Multiplier (Known as SDT in common magic accuracy formulas) (out of 100)
+    --EARTH_EEM                     = 1161, -- Elemental Evasion Multiplier (Known as SDT in common magic accuracy formulas) (out of 100)
+    --THUNDER_EEM                   = 1162, -- Elemental Evasion Multiplier (Known as SDT in common magic accuracy formulas) (out of 100)
+    --WATER_EEM                     = 1163, -- Elemental Evasion Multiplier (Known as SDT in common magic accuracy formulas) (out of 100)
+    --LIGHT_EEM                     = 1164, -- Elemental Evasion Multiplier (Known as SDT in common magic accuracy formulas) (out of 100)
+    --DARK_EEM                      = 1165, -- Elemental Evasion Multiplier (Known as SDT in common magic accuracy formulas) (out of 100)
+    --TAME_SUCCESS_RATE             = 1166, -- Tame Success Rate +
+    --RAMPART_MAGIC_SHIELD          = 1167, -- Rampart Magic Shield
+    --CRITHITRATE_SLOT              = 1168, -- CRITHITRATE for slot
+    --ATT_SLOT                      = 1169, -- ATT for slot
+    --UDMG                          = 1170, -- Uncapped dmg taken (all types)
+
+    MAGIC_STONESKIN              = 2000, -- Magic Stoneskin. Primary used for mobskill Immortal Shield.
+    --FIRE_BURDEN_DECAY            = 2001, -- Era works for Fire, Abyssia onwards uses "BURDEN_DECAY = 847"
+    --BURDEN_DECAY_IGNORE_CHANCE   = 2002, -- Era Tactical Processor used this to increase tendancy to overload. 
+    FIRE_BURDEN_PERC_EXTRA       = 2003, -- Increases fire burden when Flame Holder attatchment is used.
+
+    -- Damage mods/reductions for circle effects.
+    VERMIN_CIRCLE         = 2004,
+    BIRD_CIRCLE           = 2005,
+    AMORPH_CIRCLE         = 2006,
+    LIZARD_CIRCLE         = 2007,
+    AQUAN_CIRCLE          = 2007,
+    PLANTOID_CIRCLE       = 2009,
+    BEAST_CIRCLE          = 2010,
+    UNDEAD_CIRCLE         = 2011,
+    ARCANA_CIRCLE         = 2012,
+    DRAGON_CIRCLE         = 2013,
+    DEMON_CIRCLE          = 2014,
+    EMPTY_CIRCLE          = 2015,
+    HUMANOID_CIRCLE       = 2016,
+    LUMINIAN_CIRCLE       = 2017, -- Should actually be LUMORIAN when have time to refactor.
+    LUMINION_CIRCLE       = 2018,
+    AUTOMATON_MAGIC_COST  = 2019,
+    AUTOMATON_CAN_BARRAGE = 2020,
+
+    -- These mods should not be directly set.  These are used to apply pet mods via latent effects
+    -- These mods should not be directly set (use item_mods_pets instead).  These are used to apply pet mods via latent effects
+    PET_ATT_LATENT  = 2021,  -- Pet Attack bonus used for latents
+    PET_ACC_LATENT  = 2022,  -- Pet Acc bonus used for latents
+    PET_MATT_LATENT = 2023,  -- Pet Magic Attack bonus used for latents
+    PET_MACC_LATENT = 2024,  -- Pet Magic Acc bonus used for latents
+    PET_DEF_LATENT  = 2025,  -- Pet DEF bonus used for latents
+
     -- IF YOU ADD ANY NEW MODIFIER HERE, ADD IT IN src/map/modifier.h ASWELL!
 
     -- The spares take care of finding the next ID to use so long as we don't forget to list IDs that have been freed up by refactoring.

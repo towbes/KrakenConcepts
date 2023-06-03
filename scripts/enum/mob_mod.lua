@@ -84,4 +84,15 @@ xi.mobMod =
     ONE_WAY_LINKING        = 74, -- Will link with other mobs in its party (typically the same mob family) while roaming, but will not let others link with it once engaged
     CAN_PARRY              = 75, -- Check if a mob is allowed to have parry rank (Rank Value 1-5)
     NO_WIDESCAN            = 76, -- Disables widescan for a specific mob
+    ENCROACH_TARGET        = 200, -- How close a mob will encroach on it's target, attempting to make model to model contact. Encroach distance * 10
+    PIXIE                  = 201,  -- Pixie (heals players)
+        -- ASB Mod Start
+    DRAW_IN_INCLUDE_PARTY     = 100, -- This will cause the mob's draw-in to also affect all party and alliance members
+    DRAW_IN_FRONT             = 101, -- Mob will draw in slightly in front of them instead of the center of their hitbox
+    DRAW_IN_CUSTOM_RANGE      = 102, -- Override the default range of MeleeRange*2 of when players start to get drawn-in
+    DRAW_IN_MAXIMUM_REACH     = 103, -- Players further than this range (yalms) will be unaffected by the draw-in. default (0) is whole zone
+    DRAW_IN_IGNORE_STATIONARY = 104, -- Stationary mobs draw-in the moment they cannot attack you anymore (out of range). put this mobmod on stationary mobs that have draw-in but use ranged attacks instead of melee attacks so that they will ignore this behavior (i.e. KSNM99 Wyrm or ToAU Mission Alexander)
+    ATTRACT_FAMILY_NM         = 105, -- NMs within the same family will link onto this mob (used on Sabotenders for Cactrot Rapido)
+    LEDGE_AGGRO               = 106, -- Used to increase vertical aggro range
+    DISENGAGE_NO_PATH         = 107, -- Used to force a disengage when there is no vertical path to the target rather than despawn.
 }

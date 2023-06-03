@@ -611,7 +611,7 @@ public:
     // Status Effects
     bool   addStatusEffect(sol::variadic_args va);
     bool   addStatusEffectEx(sol::variadic_args va);
-    auto   getStatusEffect(uint16 StatusID, sol::object const& SubType) -> std::optional<CLuaStatusEffect>;
+    auto   getStatusEffect(uint16 StatusID, sol::object const& SubType, sol::object const& ItemSourceID) -> std::optional<CLuaStatusEffect>;
     //auto   getStatusEffect(uint16 StatusID, sol::object const& SubID, sol::object const& ItemSourceID)->std::optional<CLuaStatusEffect>;
     auto   getStatusEffects() -> sol::table;
     int16  getStatusEffectElement(uint16 statusId);
@@ -620,7 +620,7 @@ public:
     uint16 hasStatusEffectByFlag(uint16 StatusID);                          // Checks to see if a character has an effect with the specified flag
     uint8  countEffect(uint16 StatusID);                                    // Gets the number of effects of a specific type on the player
 
-    bool   delStatusEffect(uint16 StatusID, sol::object const& SubType);                 // Removes Status Effect
+    bool delStatusEffect(uint16 StatusID, sol::object const& SubType, sol::object const& ItemSourceID); // Removes Status Effect
     //bool   delStatusEffect(uint16 StatusID, sol::object const& SubID, sol::object const& ItemSourceID); // Removes Status Effect
     void   delStatusEffectsByFlag(uint32 flag, sol::object const& silent);               // Removes Status Effects by Flag
     bool   delStatusEffectSilent(uint16 StatusID);                                       // Removes Status Effect, suppresses message

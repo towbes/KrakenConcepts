@@ -11981,7 +11981,7 @@ bool CLuaBaseEntity::addStatusEffect(sol::variadic_args va)
         auto duration   = static_cast<uint32>(va[3].as<double>());
 
         // Optional
-        auto subID        = va[4].is<uint32>() ? va[4].as<uint32>() : 0;
+        //auto subID        = va[4].is<uint32>() ? va[4].as<uint32>() : 0;
         auto subType = va[4].is<uint32>() ? va[4].as<uint32>() : 0;
         auto subPower     = va[5].is<uint16>() ? va[5].as<uint16>() : 0;
         auto tier         = va[6].is<uint16>() ? va[6].as<uint16>() : 0;
@@ -12074,7 +12074,7 @@ bool CLuaBaseEntity::addStatusEffectEx(sol::variadic_args va)
  *  Notes   :
  ************************************************************************/
 
-std::optional<CLuaStatusEffect> CLuaBaseEntity::getStatusEffect(uint16 StatusID, sol::object const& SubType)
+std::optional<CLuaStatusEffect> CLuaBaseEntity::getStatusEffect(uint16 StatusID, sol::object const& SubType, sol::object const& ItemSourceID)
 //std::optional<CLuaStatusEffect> CLuaBaseEntity::getStatusEffect(uint16 StatusID, sol::object const& SubID, sol::object const& ItemSourceID)
 
 {
@@ -12289,7 +12289,7 @@ uint8 CLuaBaseEntity::countEffect(uint16 StatusID)
  *  Notes   : Can specify Power of the Effect as an option or the Item Source (will use power if both specified)
  ************************************************************************/
 
-bool CLuaBaseEntity::delStatusEffect(uint16 StatusID, sol::object const& SubType)
+bool CLuaBaseEntity::delStatusEffect(uint16 StatusID, sol::object const& SubType, sol::object const& ItemSourceID)
 //bool CLuaBaseEntity::delStatusEffect(uint16 StatusID, sol::object const& SubID, sol::object const& ItemSourceID)
 //{
 //    XI_DEBUG_BREAK_IF(m_PBaseEntity->objtype == TYPE_NPC);
