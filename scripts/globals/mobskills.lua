@@ -5,7 +5,6 @@
 -- this set of functions emulates.
 -----------------------------------
 require("scripts/globals/magicburst")
-require("scripts/globals/status")
 require("scripts/globals/magic")
 require("scripts/globals/utils")
 require("scripts/globals/msg")
@@ -400,7 +399,7 @@ xi.mobskills.applyPlayerResistance = function(mob, effect, target, diff, bonus, 
     end
 
     if effect ~= nil then
-        percentBonus = percentBonus - getEffectResistance(target, effect)
+        percentBonus = percentBonus - xi.magic.getEffectResistance(target, effect)
     end
 
     local p = getMagicHitRate(mob, target, 0, element, percentBonus, magicaccbonus)

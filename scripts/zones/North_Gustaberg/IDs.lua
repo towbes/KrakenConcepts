@@ -136,7 +136,7 @@ zones[xi.zone.NORTH_GUSTABERG] =
 
     npc =
     {
-        OVERSEER_BASE = 17212060, -- Ennigreaud_RK in npc_list
+        OVERSEER_BASE = GetFirstID('Ennigreaud_RK'),
     },
 }
 

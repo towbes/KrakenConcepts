@@ -1,13 +1,7 @@
 -----------------------------------
 -- Area: Northern San d'Oria
 --  NPC: Abioleget
--- Type: Quest Giver (Her Memories: The Faux Pas and The Vicasque's Sermon) / Merchant
 -- !pos 128.771 0.000 118.538 231
------------------------------------
-local ID = require("scripts/zones/Northern_San_dOria/IDs")
-require("scripts/globals/settings")
-require("scripts/globals/titles")
-require("scripts/globals/quests")
 -----------------------------------
 local entity = {}
 
@@ -17,10 +11,10 @@ end
 entity.onTrigger = function(player, npc)
 end
 
-entity.onEventUpdate = function(player, csid, option)
+entity.onEventUpdate = function(player, csid, option, npc)
 end
 
-entity.onEventFinish = function(player, csid, option)
+entity.onEventFinish = function(player, csid, option, npc)
 end
 
 return entity

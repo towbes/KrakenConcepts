@@ -170,7 +170,7 @@ public:
 
     auto   getZone(sol::object const& arg0) -> std::optional<CLuaZone>; // Get Entity zone
     uint16 getZoneID();                                                 // Get Entity zone ID
-    auto   getZoneName() -> const std::string&;                         // Get Entity zone name
+    auto   getZoneName() -> std::string;                                // Get Entity zone name
     bool   hasVisitedZone(uint16 zone);                                 // true if player has previously entered zone
     uint16 getPreviousZone();                                           // Get Entity previous zone
     uint8  getCurrentRegion();                                          // Get Entity conquest region
@@ -473,9 +473,9 @@ public:
     void   setSkillRank(uint8 skillID, uint8 newrank);                // Set new skill craft rank
     uint16 getCharSkillLevel(uint8 skillID);                          // Get char skill level
 
-    void addLearnedWeaponskill(uint8 wsID);
-    bool hasLearnedWeaponskill(uint8 wsID);
-    void delLearnedWeaponskill(uint8 wsID);
+    void addLearnedWeaponskill(uint8 wsUnlockId);
+    bool hasLearnedWeaponskill(uint8 wsUnlockId);
+    void delLearnedWeaponskill(uint8 wsUnlockId);
 
     void trySkillUp(uint8 skill, uint8 level, sol::object const& forceSkillUpObj, sol::object const& useSubSkillObj);
 
@@ -611,22 +611,24 @@ public:
     // Status Effects
     bool   addStatusEffect(sol::variadic_args va);
     bool   addStatusEffectEx(sol::variadic_args va);
-    auto   getStatusEffect(uint16 StatusID, sol::object const& SubID, sol::object const& ItemSourceID) -> std::optional<CLuaStatusEffect>;
+    auto   getStatusEffect(uint16 StatusID, sol::object const& SubType) -> std::optional<CLuaStatusEffect>;
+    //auto   getStatusEffect(uint16 StatusID, sol::object const& SubID, sol::object const& ItemSourceID)->std::optional<CLuaStatusEffect>;
     auto   getStatusEffects() -> sol::table;
     int16  getStatusEffectElement(uint16 statusId);
     bool   canGainStatusEffect(uint16 effect, sol::object const& powerObj); // Returns true if the effect can be added
-    bool   hasStatusEffect(uint16 StatusID, sol::object const& SubID);      // Checks to see if character has specified effect
+    bool   hasStatusEffect(uint16 StatusID, sol::object const& SubType);    // Checks to see if character has specified effect
     uint16 hasStatusEffectByFlag(uint16 StatusID);                          // Checks to see if a character has an effect with the specified flag
     uint8  countEffect(uint16 StatusID);                                    // Gets the number of effects of a specific type on the player
 
-    bool   delStatusEffect(uint16 StatusID, sol::object const& SubID, sol::object const& ItemSourceID); // Removes Status Effect
-    void   delStatusEffectsByFlag(uint32 flag, sol::object const& silent);                              // Removes Status Effects by Flag
-    bool   delStatusEffectSilent(uint16 StatusID);                                                      // Removes Status Effect, suppresses message
-    uint16 eraseStatusEffect();                                                                         // Used with "Erase" spell
-    uint8  eraseAllStatusEffect();                                                                      // Erases all effects and returns number erased
-    int32  dispelStatusEffect(sol::object const& flagObj);                                              // Used with "Dispel" spell
-    uint8  dispelAllStatusEffect(sol::object const& flagObj);                                           // Dispels all effects and returns number erased
-    uint16 stealStatusEffect(CLuaBaseEntity* PTargetEntity, sol::object const& flagObj);                // Used in mob skills to steal effects
+    bool   delStatusEffect(uint16 StatusID, sol::object const& SubType);                 // Removes Status Effect
+    //bool   delStatusEffect(uint16 StatusID, sol::object const& SubID, sol::object const& ItemSourceID); // Removes Status Effect
+    void   delStatusEffectsByFlag(uint32 flag, sol::object const& silent);               // Removes Status Effects by Flag
+    bool   delStatusEffectSilent(uint16 StatusID);                                       // Removes Status Effect, suppresses message
+    uint16 eraseStatusEffect();                                                          // Used with "Erase" spell
+    uint8  eraseAllStatusEffect();                                                       // Erases all effects and returns number erased
+    int32  dispelStatusEffect(sol::object const& flagObj);                               // Used with "Dispel" spell
+    uint8  dispelAllStatusEffect(sol::object const& flagObj);                            // Dispels all effects and returns number erased
+    uint16 stealStatusEffect(CLuaBaseEntity* PTargetEntity, sol::object const& flagObj); // Used in mob skills to steal effects
 
     void  addMod(uint16 type, int16 amount); // Adds Modifier Value
     int16 getMod(uint16 modID);              // Retrieves Modifier Value
@@ -646,7 +648,7 @@ public:
     uint8  numBustEffects();         // Gets the number of bust effects on the player
     uint16 healingWaltz();           // Used with "Healing Waltz" ability
     bool   addBardSong(CLuaBaseEntity* PEntity, uint16 effectID, uint16 power, uint16 tick,
-                       uint16 duration, uint16 subID, uint16 subPower, uint16 tier); // Adds bard song effect
+                       uint16 duration, uint16 SubType, uint16 subPower, uint16 tier); // Adds bard song effect
 
     void charm(CLuaBaseEntity const* target); // applies charm on target
     void uncharm();                           // removes charm on target

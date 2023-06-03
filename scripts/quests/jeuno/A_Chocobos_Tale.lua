@@ -2,36 +2,61 @@
 -- A Chocobo's Tale
 -----------------------------------
 -- Log ID: 3, Quest ID: 72
--- Nevela       !pos -60 0 80
--- Wobke        !pos
--- Outpost Gate !pos
--- ???          !pos
+-- Nevela       : !pos -60.114 0 81.125 244
+-- Wobke        : !pos 29.028 -0.126 -111.626 234
+-- Outpost Gate : !pos 473.566 23.421 413.134 109
+-- qm           : !pos -39.370 -11.093 307.285 105
 -----------------------------------
 require('scripts/globals/items')
+require('scripts/globals/keyitems')
+require('scripts/globals/missions')
 require('scripts/globals/quests')
 require('scripts/globals/status')
 require("scripts/globals/missions")
 require('scripts/globals/zone')
 require('scripts/globals/interaction/quest')
 -----------------------------------
-local ID = require("scripts/zones/Batallia_Downs/IDs")
+local batalliaID = require('scripts/zones/Batallia_Downs/IDs')
 -----------------------------------
+
 local quest = Quest:new(xi.quest.log_id.JEUNO, xi.quest.id.jeuno.A_CHOCOBOS_TALE)
 
 quest.reward =
 {
-    gil = 5200,
-    fame = 50,
+    fame     = 30,
     fameArea = xi.quest.fame_area.JEUNO,
-    title = xi.title.CHOCOBO_LOVE_GURU,
+    gil      = 5200,
+    title    = xi.title.CHOCOBO_LOVE_GURU,
 }
+
+local function isNMSpawned()
+    for nmId = batalliaID.mob.BADSHAH_OFFSET, batalliaID.mob.BADSHAH_OFFSET + 4 do
+        if GetMobByID(nmId):isSpawned() then
+            return true
+        end
+    end
+
+    return false
+end
+
+local function isNMDefeated()
+    for nmId = batalliaID.mob.BADSHAH_OFFSET, batalliaID.mob.BADSHAH_OFFSET + 4 do
+        local nmMob = GetMobByID(nmId)
+
+        if nmMob:isDead() or not nmMob:isSpawned() then
+            return true
+        end
+    end
+
+    return false
+end
 
 quest.sections =
 {
     {
         check = function(player, status, vars)
             return status == QUEST_AVAILABLE and
-            player:getCurrentMission(xi.mission.log_id.COP) > xi.mission.id.cop.A_VESSEL_WITHOUT_A_CAPTAIN
+                player:hasCompletedMission(xi.mission.log_id.COP, xi.mission.id.cop.A_VESSEL_WITHOUT_A_CAPTAIN)
         end,
 
         [xi.zone.UPPER_JEUNO] =
@@ -57,7 +82,7 @@ quest.sections =
             ['Nevela'] =
             {
                 onTrigger = function(player, npc)
-                    if player:hasKeyItem(xi.ki.SILVER_COMETS_COLLAR) then
+                    if quest:getVar(player, 'Prog') == 5 then
                         return quest:progressEvent(10017)
                     else
                         return quest:event(10016)
@@ -80,14 +105,16 @@ quest.sections =
             ['Wobke'] =
             {
                 onTrigger = function(player, npc)
-                    if quest:getVar(player, 'Prog') == 0 then
+                    local questProgress = quest:getVar(player, 'Prog')
+
+                    if questProgress == 0 then
                         return quest:progressEvent(245)
-                    elseif quest:getVar(player, 'Prog') == 1 then
-                        return quest:event(246) -- Additional dialogue
-                    elseif quest:getVar(player, 'Prog') == 3 then
-                        return quest:progressEvent(247, { [1] = xi.items.BOTTLE_OF_WARDING_OIL })
-                    elseif quest:getVar(player, 'Prog') == 4 then
-                        return quest:event(248) -- Additional dialogue
+                    elseif questProgress <= 2 then
+                        return quest:event(246)
+                    elseif questProgress == 3 then
+                        return quest:progressEvent(247, 0, xi.items.BOTTLE_OF_WARDING_OIL)
+                    else
+                        return quest:event(248)
                     end
                 end,
             },
@@ -97,6 +124,7 @@ quest.sections =
                 [245] = function(player, csid, option, npc)
                     quest:setVar(player, 'Prog', 1)
                 end,
+
                 [247] = function(player, csid, option, npc)
                     quest:setVar(player, 'Prog', 4)
                 end,
@@ -114,18 +142,29 @@ quest.sections =
                 end,
 
                 onTrade = function(player, npc, trade)
-                    if npcUtil.tradeHasExactly(trade, { { xi.items.BOTTLE_OF_WARDING_OIL, 3 } }) and
+                    if
+                        npcUtil.tradeHasExactly(trade, { { xi.items.BOTTLE_OF_WARDING_OIL, 3 } }) and
                         quest:getVar(player, 'Prog') == 2
                     then
                         return quest:progressEvent(22)
                     end
                 end,
+
+                onTrigger = function(player, npc)
+                    -- TODO: The followup after CS 21 may be different, and needs capture.
+
+                    if quest:getVar(player, 'Prog') == 1 then
+                        return quest:progressEvent(21, 0, xi.items.BOTTLE_OF_WARDING_OIL)
+                    end
+                end,
             },
+
             onEventFinish =
             {
                 [21] = function(player, csid, option, npc)
                     quest:setVar(player, 'Prog', 2)
                 end,
+
                 [22] = function(player, csid, option, npc)
                     player:tradeComplete()
                     quest:setVar(player, 'Prog', 3)
@@ -135,25 +174,36 @@ quest.sections =
 
         [xi.zone.BATALLIA_DOWNS] =
         {
-            ['qm_chocobos_tale'] =
+            ['qm_chocobotale'] =
             {
                 onTrigger = function(player, npc)
                     if
-                        quest:getVar(player, 'Prog') == 4 and
-                        npcUtil.popFromQM(player, npc, ID.mob.BADSHAHS, { claim = true, hide = 0 })
+                        not isNMSpawned() and
+                        quest:getVar(player, 'Prog') == 4
                     then
-                        return quest:message(ID.text.BEING_ATTACKED)
-                    elseif quest:getVar(player, 'Prog') == 5 and not player:hasKeyItem(xi.ki.SILVER_COMETS_COLLAR) then
-                        return quest:progressEvent(2)
+                        if quest:getLocalVar(player, 'nmDefeated') == 1 then
+                            quest:setVar(player, 'Prog', 5)
+
+                            return quest:keyItem(xi.ki.SILVER_COMETS_COLLAR)
+                        else
+                            for nmId = batalliaID.mob.BADSHAH_OFFSET, batalliaID.mob.BADSHAH_OFFSET + 4 do
+                                SpawnMob(nmId):updateClaim(player)
+                            end
+
+                            return quest:messageSpecial(batalliaID.text.YOU_ARE_BEING_ATTACKED)
+                        end
                     end
                 end,
             },
 
             ['Badshah'] =
             {
-                onMobDeath = function(mob, player)
-                    if quest:getVar(player, 'Prog') == 4 then
-                        quest:setVar(player, 'Prog', 5)
+                onMobDeath = function(mob, player, optParams)
+                    if
+                        isNMDefeated() and
+                        quest:getVar(player, 'Prog') == 4
+                    then
+                        quest:setLocalVar(player, 'nmDefeated', 1)
                     end
                 end,
             },
@@ -166,7 +216,8 @@ quest.sections =
             },
         },
     },
-     {
+
+    {
         check = function(player, status, vars)
             return status == QUEST_COMPLETED
         end,

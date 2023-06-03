@@ -337,6 +337,18 @@ function utils.thirdeye(target)
     end
 end
 
+function utils.getActiveJobLevel(actor, job)
+    local jobLevel = 0
+
+    if actor:getMainJob() == job then
+        jobLevel = actor:getMainLvl()
+    elseif actor:getSubJob() == job then
+        jobLevel = actor:getSubLvl()
+    end
+
+    return jobLevel
+end
+
 -----------------------------------
 --     SKILL LEVEL CALCULATOR
 --     Returns a skill level based on level and rating.
@@ -680,6 +692,9 @@ function utils.mobTeleport(mob, hideDuration, pos, disAnim, reapAnim)
     end)
 end
 
+------------------------------
+-- Spatial position utilities
+------------------------------
 local ffxiRotConversionFactor = 360.0 / 255.0
 
 function utils.ffxiRotToDegrees(ffxiRot)
@@ -770,7 +785,7 @@ function utils.angleWithin(origin, A, B, within)
 end
 
 local ffxiRotationToAngleFactor = 2.0 * math.pi / 256.0
-local ffxiAngleToRotationFactor  = 256.0 / (2.0 * math.pi)
+local ffxiAngleToRotationFactor = 256.0 / (2.0 * math.pi)
 
 function utils.rotationToAngle(ffxiRotation)
     return ffxiRotation * ffxiRotationToAngleFactor
@@ -802,5 +817,10 @@ end
     end
 
     return true
+end
+
+-- Returns 24h Clock Time (example: 04:30 = 430, 21:30 = 2130)
+function utils.vanadielClockTime()
+    return tonumber(VanadielHour() .. string.format("%02d", VanadielMinute()))
 end
 

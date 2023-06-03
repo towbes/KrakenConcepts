@@ -524,7 +524,7 @@ void CMobEntity::PostTick()
 
 float CMobEntity::GetRoamDistance()
 {
-    return (float)getMobMod(MOBMOD_ROAM_DISTANCE) / 10.0f;
+    return (float)getMobMod(MOBMOD_ROAM_DISTANCE);
 }
 
 float CMobEntity::GetRoamRate()
@@ -1623,4 +1623,9 @@ void CMobEntity::PixieTryHealPlayer(CCharEntity * PChar)
         }
         int32 chance = amity + 150;
         return (xirand::GetRandomNumber(100) < chance);
+    }
+
+    bool CMobEntity::isWideScannable()
+    {
+        return CBaseEntity::isWideScannable() && !getMobMod(MOBMOD_NO_WIDESCAN);
     }
