@@ -1,7 +1,5 @@
 -- Marid family mixin
 require("scripts/globals/mixins")
-require("scripts/globals/status")
-require("scripts/globals/world")
 require("scripts/globals/toau")
 -----------------------------------
 

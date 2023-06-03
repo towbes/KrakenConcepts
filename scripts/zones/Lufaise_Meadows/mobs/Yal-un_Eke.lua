@@ -3,7 +3,7 @@
 --   NM: Yal-un Eke
 -----------------------------------
 require("scripts/globals/hunts")
-require("scripts/globals/world")
+require("scripts/enum/weather")
 require("scripts/globals/mobs")
 local ID = require("scripts/zones/Lufaise_Meadows/IDs")
 -----------------------------------

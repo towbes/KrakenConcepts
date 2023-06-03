@@ -71,6 +71,7 @@ zones[xi.zone.KORROLOKA_TUNNEL] =
 
         KORROLOKA_LEECH = GetFirstID('Korroloka_Leech'),
         MORION_WORM     = 17486190,
+        THOON           = 17486171,
     },
     npc =
     {

@@ -1,7 +1,6 @@
 -- Dijinn family mixin
 require("scripts/globals/mixins")
-require("scripts/globals/status")
-require("scripts/globals/world")
+require("scripts/enum/weather")
 -----------------------------------
 
 g_mixins = g_mixins or {}
