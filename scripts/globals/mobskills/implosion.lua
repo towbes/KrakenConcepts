@@ -1,6 +1,5 @@
 -----------------------------------
 -- Implosion
---
 -- Description: Channels a wave of negative energy, damaging all targets in very wide area of effect.
 -- Type: Magical
 -- Wipes Shadows
@@ -8,8 +7,6 @@
 -- Notes:
 -----------------------------------
 require("scripts/globals/mobskills")
-require("scripts/globals/settings")
-require("scripts/globals/status")
 -----------------------------------
 local mobskillObject = {}
 

@@ -2,7 +2,6 @@
 -- Area: Mount Zhayolm
 --   NM: Cerberus
 -----------------------------------
-require("scripts/globals/status")
 require("scripts/globals/titles")
 local ID = require("scripts/zones/Mount_Zhayolm/IDs")
 -----------------------------------

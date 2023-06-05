@@ -11,7 +11,6 @@ mixins =
     require("scripts/mixins/families/gears"),
     require("scripts/mixins/rage")
 }
-require("scripts/globals/status")
 local ID = require("scripts/zones/Alzadaal_Undersea_Ruins/IDs")
 
 -----------------------------------

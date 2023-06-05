@@ -3,8 +3,6 @@
 --  ZNM: Experimental Lamia
 -- !pos -773.369 -11.824 322.298 79
 -----------------------------------
-require("scripts/globals/status")
------------------------------------
 local entity = {}
 local ID = require("scripts/zones/Caedarva_Mire/IDs")
 

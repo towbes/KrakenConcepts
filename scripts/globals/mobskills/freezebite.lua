@@ -3,13 +3,11 @@
 -- Great Sword weapon skill
 -- Delivers an ice elemental attack. Damage varies with TP.
 -----------------------------------
-local mobskillObject = {}
-
-require("scripts/globals/status")
-require("scripts/globals/settings")
 require("scripts/globals/weaponskills")
 require("scripts/globals/mobskills")
 -----------------------------------
+local mobskillObject = {}
+
 mobskillObject.onMobSkillCheck = function(target, mob, skill)
     return 0
 end

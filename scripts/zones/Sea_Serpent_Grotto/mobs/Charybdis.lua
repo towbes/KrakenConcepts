@@ -3,7 +3,6 @@
 --   NM: Charybdis
 -- !pos -152 48 -328 176
 -----------------------------------
-require("scripts/globals/status")
 local ID = require("scripts/zones/Sea_Serpent_Grotto/IDs")
 -----------------------------------
 local entity = {}

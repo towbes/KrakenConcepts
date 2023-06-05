@@ -8,7 +8,6 @@ mixins =
     require("scripts/mixins/rage"),
     require("scripts/mixins/weapon_break")
 }
-require("scripts/globals/status")
 -----------------------------------
 -- Detailed Notes & Todos
 -- (please remove these if you handle any)

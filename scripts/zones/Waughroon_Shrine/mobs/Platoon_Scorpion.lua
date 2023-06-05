@@ -3,14 +3,13 @@
 --  Mob: Platoon Scorpion
 -- BCNM: Operation Desert Swarm
 -----------------------------------
-require("scripts/globals/status")
 local ID = require("scripts/zones/Waughroon_Shrine/IDs")
 -----------------------------------
 local entity = {}
 
 entity.onMobSpawn = function(mob)
     mob:setLocalVar("wildRagePower", 1)
-    mob:setMod(xi.mod.SLEEPRESBUILD, 10)
+    -- mob:setMod(xi.mod.SLEEPRESBUILD, 10)
 
     mob:addListener("WEAPONSKILL_STATE_EXIT", "SCORPION_MIMIC_STOP", function(mobArg, skillID)
         local bf = mobArg:getBattlefield():getArea()
