@@ -58,9 +58,9 @@ xi.job_utils.dark_knight.useArcaneCircle = function(player, target, ability)
     local duration = 180 * (1 + (player:getMod(xi.mod.ARCANE_CIRCLE_DURATION) / 100))
     local power    = 15 + player:getMod(xi.mod.ARCANE_CIRCLE_POTENCY)
 
-    if player:getMainJob() ~= xi.job.DRK then
-        power = 5
-    end
+    --if player:getMainJob() ~= xi.job.DRK then
+    --    power = 5
+    --end
 
     target:addStatusEffect(xi.effect.ARCANE_CIRCLE, power, 0, duration)
 end

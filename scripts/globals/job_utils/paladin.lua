@@ -108,9 +108,9 @@ xi.job_utils.paladin.useHolyCircle = function(player, target, ability)
     local duration = 180 + player:getMod(xi.mod.HOLY_CIRCLE_DURATION)
     local power    = 15
 
-    if player:getMainJob() ~= xi.job.PLD then
-        power = 5
-    end
+    -- if player:getMainJob() ~= xi.job.PLD then
+    --    power = 5
+    -- end
 
     target:addStatusEffect(xi.effect.HOLY_CIRCLE, power, 0, duration)
 end
@@ -193,12 +193,12 @@ xi.job_utils.paladin.useShieldBash = function(player, target, ability)
     end
 
     -- Main job factors
-    if player:getMainJob() ~= xi.job.PLD then
-        damage = math.floor(damage / 2.5)
-        chance = 60
-    else
-        damage = math.floor(damage)
-    end
+    -- if player:getMainJob() ~= xi.job.PLD then
+    --    damage = math.floor(damage / 2.5)
+    --    chance = 60
+    --else
+    --    damage = math.floor(damage)
+    --end
 
     damage = damage + player:getMod(xi.mod.SHIELD_BASH) + (jpValue * 10)
 

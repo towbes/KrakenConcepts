@@ -248,7 +248,7 @@ xi.job_utils.dragoon.useAncientCircle = function(player, target, ability)
     local jpValue = player:getJobPointLevel(xi.jp.ANCIENT_CIRCLE_EFFECT)
     local power = 5
 
-    if player:getMainJob() == xi.job.DRG then
+    if player:getMainJob() == xi.job.DRG or player:getSubJob() == xi.job.DRG then
         power = 15 + jpValue
     end
 
@@ -442,9 +442,9 @@ xi.job_utils.dragoon.useHighJump = function(player, target, ability, action)
 
     if target:isMob() then
         local enmityShed = 50
-        if player:getMainJob() ~= xi.job.DRG then
-            enmityShed = 30
-        end
+        -- if player:getMainJob() ~= xi.job.DRG then
+        --     enmityShed = 30
+        -- end
 
         target:lowerEnmity(player, enmityShed + player:getMod(xi.mod.HIGH_JUMP_ENMITY_REDUCTION)) -- reduce total accumulated enmity
     end

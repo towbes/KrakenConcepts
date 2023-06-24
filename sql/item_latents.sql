@@ -1534,6 +1534,14 @@ INSERT INTO `item_latents` VALUES  (15188,288,2,7,1000);  -- "Double Attack"+2% 
 INSERT INTO `item_latents` VALUES  (15197,25,3,26,1);     -- Nighttime: ACC +3
 
 -- -------------------------------------------------------
+-- Sprout Beret (Cactuar Custom)
+-- -------------------------------------------------------
+INSERT INTO `item_latents` VALUES(15198,64,7,50,30);      -- Sprout Beret Combat Skill Gain +7 under 30 Cactuar Edit
+INSERT INTO `item_latents` VALUES(15198,65,7,50,30);      -- Sprout Beret Magic Skill Gain +7 under 30
+INSERT INTO `item_latents` VALUES(15198,169,7,50,30);     -- Sprout Beret MovementSpeed +7 under 30
+INSERT INTO `item_latents` VALUES(15198,382,100,50,30);   -- Sprout Beret EXP + 100% under 30
+
+-- -------------------------------------------------------
 -- Unicorn Cap
 -- -------------------------------------------------------
 INSERT INTO `item_latents` VALUES  (15209,8,4,1,75);      -- STR+4 when HP >75%

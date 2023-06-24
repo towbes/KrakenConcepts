@@ -296,12 +296,12 @@ xi.job_utils.rune_fencer.useSwordplay = function(player, target, ability)
     local augBonus   = 0 -- augBonus = 2 per level of merit
 
     -- gear bonuses from https://www.bg-wiki.com/ffxi/Swordplay
-    if player:getMainJob() == xi.job.RUN and target:getMainLvl() == 99 then -- don't bother with gear boost checks until 99 and main RUN
+    -- if player:getMainJob() == xi.job.RUN and target:getMainLvl() == 99 then -- don't bother with gear boost checks until 99 and main RUN
         local tickPower = 3 -- Tick power appears to be 3/tick, not 6/tick if RUN main and 3/tick if RUN sub; source : https://www.ffxiah.com/forum/topic/37086/endeavoring-to-awaken-a-guide-to-rune-fencer/180/#3615377
 
         -- add starting tick bonuses if appropriate gear is equipped
         power = tickPower + player:getMod(xi.mod.SWORDPLAY)
-    end
+    -- end
 
     if power > 0 then -- add aug bonus if appropriate gear is equipped. Note: ilvl 109+ "relic" or "AF2" gear always has the augment, so no need to check extdata. RUN does not have AF/AF2/AF3 gear below i109.
         augBonus = (meritBonus / 5) * 2
@@ -692,12 +692,12 @@ end
 
 xi.job_utils.rune_fencer.usePflug = function(player, target, ability, action)
     local highestRune  = player:getHighestRuneEffect()
-    local baseStrength = 10
+    local baseStrength = 15 -- Default 10
     local meritBonus   = player:getMerit(xi.merit.MERIT_PFLUG_EFFECT)
 
-    if player:getMainJob() == xi.job.RUN then
-        baseStrength = 15
-    end
+    --if player:getMainJob() == xi.job.RUN then
+    --    baseStrength = 15
+    --end
 
     action:speceffect(target:getID(), getSpecEffectElementWard(highestRune))
 

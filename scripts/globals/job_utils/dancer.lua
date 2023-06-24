@@ -55,12 +55,10 @@ end
 -- Expand this function as needed.
 -- TODO: Determine if step is stacked at 10, and reduce to 1 if necessary.
 local function getStepFinishingMovesBase(player)
-    local numAwardedMoves = 1
+    local numAwardedMoves = 2
 
     if player:hasStatusEffect(xi.effect.PRESTO) then
         numAwardedMoves = 5
-    elseif player:getMainJob() == xi.job.DNC then
-        numAwardedMoves = 2
     end
 
     return numAwardedMoves
@@ -463,9 +461,9 @@ xi.job_utils.dancer.useWaltzAbility = function(player, target, ability, action)
         end
     end
 
-    if player:getMainJob() ~= xi.job.DNC then
-        statMultiplier = statMultiplier / 2
-    end
+    --if player:getMainJob() ~= xi.job.DNC then
+    --    statMultiplier = statMultiplier / 2
+    --end
 
     amtCured = (target:getStat(xi.mod.VIT) + player:getStat(xi.mod.CHR)) * statMultiplier + waltzInfo[3]
     amtCured = math.floor(amtCured * (1.0 + (math.min(50, player:getMod(xi.mod.WALTZ_POTENCY)) / 100)))
