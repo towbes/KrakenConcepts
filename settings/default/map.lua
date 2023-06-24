@@ -262,4 +262,7 @@ xi.settings.map =
     -- The max GM level is 5, so setting this to 6 disables it
     -- for everone. Setting it to 0 enables for everyone.
     REPORT_LUA_ERRORS_TO_PLAYER_LEVEL = 0,
+
+    -- Enable/disable players having multiple copies of rare items.
+    DISABLE_RARE_ITEM_LIMIT = true,
 }
