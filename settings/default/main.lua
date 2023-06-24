@@ -39,8 +39,8 @@ xi.settings.main =
     -- FIELDS OF VALOR/Grounds of Valor settings
     ENABLE_FIELD_MANUALS  = 1, -- Enables Fields of Valor
     ENABLE_GROUNDS_TOMES  = 1, -- Enables Grounds of Valor
-    ENABLE_SURVIVAL_GUIDE = 1, -- Enables Survival Guides (Not Implemented)
-    REGIME_WAIT           = 1, -- Make people wait till 00:00 game time as in retail. If it's 0, there is no wait time.
+    ENABLE_SURVIVAL_GUIDE = 0, -- Enables Survival Guides (Not Implemented)
+    REGIME_WAIT           = 0, -- Make people wait till 00:00 game time as in retail. If it's 0, there is no wait time.
     FOV_REWARD_ALLIANCE   = 0, -- Allow Fields of Valor rewards while being a member of an alliance. (default retail behavior: 0)
     GOV_REWARD_ALLIANCE   = 1, -- Allow Grounds of Valor rewards while being a member of an alliance. (default retail behavior: 1)
 
@@ -97,22 +97,22 @@ xi.settings.main =
     -- CHARACTER CONFIG
     INITIAL_LEVEL_CAP              = 50, -- The initial level cap for new players.  There seems to be a hardcap of 255.
     MAX_LEVEL                      = 99, -- Level max of the server, lowers the attainable cap by disabling Limit Break quests.
-    NORMAL_MOB_MAX_LEVEL_RANGE_MIN = 0,  -- Lower Bound of Max Level Range for Normal Mobs (0 = Uncapped)
-    NORMAL_MOB_MAX_LEVEL_RANGE_MAX = 0,  -- Upper Bound of Max Level Range for Normal Mobs (0 = Uncapped)
-    START_GIL                      = 10, -- Amount of gil given to newly created characters.
+    NORMAL_MOB_MAX_LEVEL_RANGE_MIN = 85,  -- Lower Bound of Max Level Range for Normal Mobs (0 = Uncapped)
+    NORMAL_MOB_MAX_LEVEL_RANGE_MAX = 89,  -- Upper Bound of Max Level Range for Normal Mobs (0 = Uncapped)
+    START_GIL                      = 500, -- Amount of gil given to newly created characters.
     START_INVENTORY                = 30, -- Starting inventory and satchel size.  Ignores values < 30.  Do not set above 80!
     NEW_CHARACTER_CUTSCENE         = 1,  -- Set to 1 to enable opening cutscenes, 0 to disable.
     SUBJOB_QUEST_LEVEL             = 18, -- Minimum level to accept either subjob quest.  Set to 0 to start the game with subjobs unlocked.
     ADVANCED_JOB_LEVEL             = 30, -- Minimum level to accept advanced job quests.  Set to 0 to start the game with advanced jobs.
-    ALL_MAPS                       = 0,  -- Set to 1 to give starting characters all the maps.
+    ALL_MAPS                       = 1,  -- Set to 1 to give starting characters all the maps.
     UNLOCK_OUTPOST_WARPS           = 0,  -- Set to 1 to give starting characters all outpost warps.  2 to add Tu'Lia and Tavnazia.
 
     SHOP_PRICE      = 1.000, -- Multiplies prices in NPC shops.
     GIL_RATE        = 1.000, -- Multiplies gil earned from quests.  Won't always display in game.
     BAYLD_RATE      = 1.000, -- Multiples bayld earned from quests.
     -- Note: EXP rates are also influenced by conf setting
-    EXP_RATE        = 1.000, -- Multiplies exp from script (except FoV/GoV).
-    SCROLL_EXP_RATE = 1.000, -- Multiplies exp from single use XP Scrolls (e.g. Miratete's Memoirs).
+    EXP_RATE        = 2.000, -- Multiplies exp from script (except FoV/GoV).
+    SCROLL_EXP_RATE = 2.000, -- Multiplies exp from single use XP Scrolls (e.g. Miratete's Memoirs).
     CAPACITY_RATE   = 1.000, -- Multiplies capacy points gained.
     BOOK_EXP_RATE   = 1.000, -- Multiplies exp from FoV/GoV book pages.
     TABS_RATE       = 1.000, -- Multiplies tabs earned from fov.
@@ -131,8 +131,8 @@ xi.settings.main =
     DISABLE_PARTY_EXP_PENALTY        = false, -- true/false.
 
     -- TRUSTS
-    ENABLE_TRUST_CASTING           = 1,
-    ENABLE_TRUST_QUESTS            = 1,
+    ENABLE_TRUST_CASTING           = 0,
+    ENABLE_TRUST_QUESTS            = 0,
     ENABLE_TRUST_CUSTOM_ENGAGEMENT = 0,
 
     ENABLE_TRUST_ALTER_EGO_EXTRAVAGANZA          = 0, -- 0 = disabled, 1 = summer/ny, 2 = spring/autumn, 3 = both
@@ -177,11 +177,11 @@ xi.settings.main =
     NM_LOTTERY_COOLDOWN = 1.0,
 
     -- DYNAMIS SETTINGS
-    BETWEEN_2DYNA_WAIT_TIME     = 24,       -- Hours before player can re-enter Dynamis. Default is 1 Earthday (24 hours).
-    DYNA_MIDNIGHT_RESET         = true,     -- If true, makes the wait time count by number of server midnights instead of full 24 hour intervals
+    BETWEEN_2DYNA_WAIT_TIME     = 1,        -- Hours before player can re-enter Dynamis. Default is 1 Earthday (24 hours).
+    DYNA_MIDNIGHT_RESET         = false,     -- If true, makes the wait time count by number of server midnights instead of full 24 hour intervals
     DYNA_LEVEL_MIN              = 65,       -- Level min for entering in Dynamis
-    TIMELESS_HOURGLASS_COST     = 500000,   -- Refund for the timeless hourglass for Dynamis.
-    PRISMATIC_HOURGLASS_COST    = 50000,    -- Cost of the prismatic hourglass for Dynamis.
+    TIMELESS_HOURGLASS_COST     = 10000,   -- Refund for the timeless hourglass for Dynamis.
+    PRISMATIC_HOURGLASS_COST    = 5000,    -- Cost of the prismatic hourglass for Dynamis.
     CURRENCY_EXCHANGE_RATE      = 100,      -- X Tier 1 ancient currency -> 1 Tier 2, and so on. Certain values may conflict with shop items. Not designed to exceed 198.
     RELIC_2ND_UPGRADE_WAIT_TIME = 7200,     -- Wait time for 2nd relic upgrade (stage 2 -> stage 3) in seconds. 7200s = 2 hours.
     RELIC_3RD_UPGRADE_WAIT_TIME = 3600,     -- Wait time for 3rd relic upgrade (stage 3 -> stage 4) in seconds. 3600s = 1 hour.
@@ -194,9 +194,9 @@ xi.settings.main =
     AF1_QUEST_LEVEL = 40,    -- Minimum level to start AF1 quest
     AF2_QUEST_LEVEL = 50,    -- Minimum level to start AF2 quest
     AF3_QUEST_LEVEL = 50,    -- Minimum level to start AF3 quest
-    OLDSCHOOL_G1    = false, -- Set to true to require farming Exoray Mold, Bombd Coal, and Ancient Papyrus drops instead of allowing key item method.
-    OLDSCHOOL_G2    = false, -- Set true to require the NMs for "Atop the Highest Mountains" be dead to get KI like before SE changed it.
-    FRIGICITE_TIME  = 30,    -- When OLDSCHOOL_G2 is enabled, this is the time (in seconds) you have from killing Boreal NMs to click the "???" target.
+    OLDSCHOOL_G1    = true, -- Set to true to require farming Exoray Mold, Bombd Coal, and Ancient Papyrus drops instead of allowing key item method.
+    OLDSCHOOL_G2    = true, -- Set true to require the NMs for "Atop the Highest Mountains" be dead to get KI like before SE changed it.
+    FRIGICITE_TIME  = 60,    -- When OLDSCHOOL_G2 is enabled, this is the time (in seconds) you have from killing Boreal NMs to click the "???" target.
     ASSAULT_MINIMUM = 1,     -- Minimum amount of people needed to start an assault mission. TOAU era is 3, Default is 1.
 
     -- SPELL SPECIFIC SETTINGS
@@ -209,7 +209,7 @@ xi.settings.main =
     AQUAVEIL_COUNTER                = 1,     -- Base amount of hits Aquaveil absorbs to prevent spell interrupts. Retail is 1.
     ABSORB_SPELL_AMOUNT             = 8,     -- how much of a stat gets absorbed by DRK absorb spells - expected to be a multiple of 8.
     ABSORB_SPELL_TICK               = 9,     -- duration of 1 absorb spell tick
-    SNEAK_INVIS_DURATION_MULTIPLIER = 1,     -- multiplies duration of sneak, invis, deodorize to reduce player torture. 1 = retail behavior.
+    SNEAK_INVIS_DURATION_MULTIPLIER = 1.5,     -- multiplies duration of sneak, invis, deodorize to reduce player torture. 1 = retail behavior.
     USE_OLD_CURE_FORMULA            = false, -- true/false. if true, uses older cure formula (3*MND + VIT + 3*(healing skill/5)) // cure 6 will use the newer formula
     USE_OLD_MAGIC_DAMAGE            = false, -- true/false. if true, uses older magic damage formulas
 
@@ -220,7 +220,7 @@ xi.settings.main =
 
     -- Login Campaign (Set to 0 if you don't want to run a Login Campaign)
     -- Please visit scripts/globals/events/login_campaign.lua for assigning the correct campaign dates.
-    ENABLE_LOGIN_CAMPAIGN = 0,
+    ENABLE_LOGIN_CAMPAIGN = 1,
 
     -- GARRISON
     GARRISON_LOCKOUT             = 1800,  -- Time in seconds before a new garrison can be started (default: 1800)
@@ -242,13 +242,13 @@ xi.settings.main =
     ENABLE_COP_ZONE_CAP          = 0,     -- Enable or disable lvl cap
     ALLOW_MULTIPLE_EXP_RINGS     = 0,     -- Set to 1 to remove ownership restrictions on the Chariot/Empress/Emperor Band trio.
     BYPASS_EXP_RING_ONE_PER_WEEK = 0,     -- Set to 1 to bypass the limit of one ring per Conquest Tally Week.
-    NUMBER_OF_DM_EARRINGS        = 1,     -- Number of earrings players can simultaneously own from Divine Might before scripts start blocking them (Default: 1)
-    HOMEPOINT_TELEPORT           = 1,     -- Enables the homepoint teleport system
+    NUMBER_OF_DM_EARRINGS        = 3,     -- Number of earrings players can simultaneously own from Divine Might before scripts start blocking them (Default: 1)
+    HOMEPOINT_TELEPORT           = 0,     -- Enables the homepoint teleport system
     DIG_ABUNDANCE_BONUS          = 0,     -- Increase chance of digging up an item (450  = item digup chance +45)
-    DIG_FATIGUE                  = 1,     -- Set to 0 to disable Dig Fatigue
-    DIG_GRANT_BURROW             = 0,     -- Set to 1 to grant burrow ability
-    DIG_GRANT_BORE               = 0,     -- Set to 1 to grant bore ability
-    ENM_COOLDOWN                 = 120,   -- Number of hours before a player can obtain same KI for ENMs (default: 5 days)
+    DIG_FATIGUE                  = 0,     -- Set to 0 to disable Dig Fatigue
+    DIG_GRANT_BURROW             = 1,     -- Set to 1 to grant burrow ability
+    DIG_GRANT_BORE               = 1,     -- Set to 1 to grant bore ability
+    ENM_COOLDOWN                 = 24,   -- Number of hours before a player can obtain same KI for ENMs (default: 5 days)
     FORCE_SPAWN_QM_RESET_TIME    = 300,   -- Number of seconds the ??? remains hidden for after the despawning of the mob it force spawns.
     EQUIP_FROM_OTHER_CONTAINERS  = false, -- true/false. Allows equipping items from Mog Satchel, Sack, and Case. Only possible with the use of client addons.
 }

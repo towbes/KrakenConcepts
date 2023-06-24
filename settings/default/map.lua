@@ -44,7 +44,7 @@ xi.settings.map =
     AH_BASE_FEE_STACKS = 4,
     AH_TAX_RATE_SINGLE = 1.0,
     AH_TAX_RATE_STACKS = 0.5,
-    AH_MAX_FEE         = 10000,
+    AH_MAX_FEE         = 15000,
 
     -- Max open listings per player, 0 = no limit. (Default 7)
     -- Note = Settings over 7 may need client-side plugin to work under all circumstances.
@@ -52,12 +52,12 @@ xi.settings.map =
     AH_LIST_LIMIT = 7,
 
     -- Misc EXP related settings
-    EXP_RATE                = 1.0,
+    EXP_RATE                = 2.0,
     EXP_LOSS_RATE           = 1.0,
     EXP_PARTY_GAP_PENALTIES = true,
 
     -- Capacity Point Settings
-    CAPACITY_RATE = 1.0,
+    CAPACITY_RATE = 2.0,
 
     -- Determines Vana'diel time epoch (886/1/1 Firesday)
     -- current timestamp - vanadiel_time_epoch = vana'diel time
@@ -105,8 +105,8 @@ xi.settings.map =
     MOB_SPEED_MOD = 0,
 
     -- Allows you to manipulate the constant multiplier in the skill-up rate formulas, having a potent effect on skill-up rates.
-    SKILLUP_CHANCE_MULTIPLIER = 1.0,
-    CRAFT_CHANCE_MULTIPLIER   = 1.0,
+    SKILLUP_CHANCE_MULTIPLIER = 2.0,
+    CRAFT_CHANCE_MULTIPLIER   = 2.0,
 
     -- Multiplier for skillup amounts. Using anything above 1 will break the 0.5 cap, the cap will become 0.9 (For maximum, set to 5)
     SKILLUP_AMOUNT_MULTIPLIER = 1,
@@ -128,10 +128,10 @@ xi.settings.map =
     CRAFT_SPECIALIZATION_POINTS = 400,
 
     -- Enables fishing. 0 = Disabled. 1 = Enable. ENABLE AT YOUR OWN RISK.
-    FISHING_ENABLE = false,
+    FISHING_ENABLE = true,
 
     -- Multiplier for fishing skill-up chance. Default = 1.0, very hard.
-    FISHING_SKILL_MULTIPLIER = 1.0,
+    FISHING_SKILL_MULTIPLIER = 2.0,
 
     -- Enable/disable skill-ups from bloodpacts
     SKILLUP_BLOODPACT = true,
@@ -164,10 +164,11 @@ xi.settings.map =
     -- 1            = 1/2   (default, 75/37, 99/49)
     -- 2            = 2/3   (75/50, 99/66)
     -- 3            = equal (75/75, 99/99)
-    SUBJOB_RATIO = 1,
+    -- 4            = Cactuar (75/75)
+    SUBJOB_RATIO = 4,
 
     -- Also adjust monsters subjob in ratio adjustments? 1 = true / 0 = false
-    INCLUDE_MOB_SJ = false,
+    INCLUDE_MOB_SJ = true,
 
     -- Adjust base stats (str/vit/etc.) for NMs, regular mobs, players, and trusts/fellows. Acts as a multiplier, so default is 1.
     NM_STAT_MULTIPLIER        = 1.0,
@@ -197,7 +198,7 @@ xi.settings.map =
     MAX_GIL_BONUS = 9999,
 
     -- Allow mobs to walk back home instead of despawning
-    MOB_NO_DESPAWN = false,
+    MOB_NO_DESPAWN = true,
 
     -- Adds extra time to mob despawn in seconds. Base time is 25s, so a setting of 5 here would be a total of 30 seconds.
     MOB_ADDITIONAL_TIME_TO_DEAGGRO = 0,
@@ -212,7 +213,7 @@ xi.settings.map =
     BATTLE_CAP_TWEAK = 0,
 
     -- Enable/disable level cap of mission battlefields stored in database.
-    LV_CAP_MISSION_BCNM = 0,
+    LV_CAP_MISSION_BCNM = 1,
 
     -- Max allowed merits points players can hold
     -- 10 classic
@@ -230,7 +231,7 @@ xi.settings.map =
 
     -- Command Audit [logging] commands with lower permission than this will not be logged.
     -- Zero for no logging at all. Commands given to non GMs are not logged.
-    AUDIT_GM_CMD = false,
+    AUDIT_GM_CMD = true,
 
     -- Todo = other logging including anti-cheat messages
 
@@ -254,11 +255,11 @@ xi.settings.map =
     ANTICHEAT_JAIL_DISABLE = false,
 
     -- Enable/disable keeping jug pets through zoning
-    KEEP_JUGPET_THROUGH_ZONING = false,
+    KEEP_JUGPET_THROUGH_ZONING = true,
 
     -- Send stack traces to the client after caught Lua errors if
     -- their GM level is the same or higher than this number.
     -- The max GM level is 5, so setting this to 6 disables it
     -- for everone. Setting it to 0 enables for everyone.
-    REPORT_LUA_ERRORS_TO_PLAYER_LEVEL = 6,
+    REPORT_LUA_ERRORS_TO_PLAYER_LEVEL = 0,
 }
