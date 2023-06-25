@@ -1741,15 +1741,10 @@ namespace petutils
         });
         // clang-format on
 
-        if (PMaster->GetMJob() != JOB_DRG && PetID == PETID_WYVERN)
-        {
-            return;
-        }
-
-        if (PMaster->GetSJob() == JOB_DRG && PetID == PETID_WYVERN) // Umeboshi
-        {
-            return;
-        }
+        //if (PMaster->GetSJob() == JOB_DRG && PetID == PETID_WYVERN) // Umeboshi
+        //{
+        //    return;
+        //}
 
         if (PMaster->objtype == TYPE_PC)
         {

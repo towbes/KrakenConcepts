@@ -123,14 +123,14 @@ entity.onMobSpawn = function(mob)
 
     local wyvernType = wyvernTypes[master:getSubJob()]
 
-    if (master:getSubJob() ~= xi.job.DRG) then -- Umeboshi "If DRG is a subjob, We use the main job to determine what type(Offense, Defense, Multi) of Wyvern is spawned"
+    if (master:getMainJob() == xi.job.DRG) then
 		wyvernType = wyvernTypes[master:getSubJob()]
-	end
-	
-	if (master:getMainJob() ~= xi.job.DRG) then
+    end
+    
+    if (master:getSubJob() == xi.job.DRG) then -- Umeboshi "If DRG is a subjob, We use the main job to determine what type(Offense, Defense, Multi) of Wyvern is spawned"
 		wyvernType = wyvernTypes[master:getMainJob()]
 	end
-
+    
     if wyvernType == wyvernCapabilities.DEFENSIVE then
         master:addListener("WEAPONSKILL_USE", "PET_WYVERN_WS", function(player, target, skillid)
             if not doStatusBreath(player, player) then
