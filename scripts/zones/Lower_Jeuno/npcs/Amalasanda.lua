@@ -55,24 +55,24 @@ entity.onTrigger = function(player, npc)
             4958,  2849, -- Dokumori: Ichi
             4961,  2849, -- Tonko: Ichi
             4964,  9590, -- Monomi: Ichi
-            4687, 60750, -- Recall-Jugner
-            4688, 60750, -- Recall-Pashh
-            4689, 60750, -- Recall-Meriph
-            4747, 34656, -- Teleport-Vahzl
-            4728, 34656, -- Teleport-Yhoat
-            4729, 34656, -- Teleport-Altep
-            4730, 34656, -- Teleport-Holla
-            4731, 34656, -- Teleport-Dem
-            4732, 34656, -- Teleport-Mea
-            4853, 10428, -- Drain
-            4855, 12850, -- Aspir
-            4857, 10428, -- Blaze Spikes
-            4869, 11953, -- Warp
-            4870, 37200, -- Warp II
-            4873, 32320, -- Retrace
-            4882, 67818, -- Sleepga II
-            4946, 13133, -- Utsusemi: Ichi
-            4994, 11830, -- Mage's Ballad
+            4687, 182250, -- Recall-Jugner
+            4688, 182250, -- Recall-Pashh
+            4689, 182250, -- Recall-Meriph
+            4747, 138624, -- Teleport-Vahzl
+            4728, 138624, -- Teleport-Yhoat
+            4729, 138624, -- Teleport-Altep
+            4730, 138624, -- Teleport-Holla
+            4731, 138624, -- Teleport-Dem
+            4732, 138624, -- Teleport-Mea
+            4853, 41712, -- Drain
+            4855, 51400, -- Aspir
+            4857, 41712, -- Blaze Spikes
+            4869, 47812, -- Warp
+            4870, 148800, -- Warp II
+            4873, 129280, -- Retrace
+            4882, 271272, -- Sleepga II
+            4946, 52532, -- Utsusemi: Ichi
+            4994, 47320, -- Mage's Ballad
         }
 
         player:showText(npc, ID.text.AMALASANDA_SHOP_DIALOG)
