@@ -1,18 +1,8 @@
 -----------------------------------
--- func: !menu
--- desc: Player Functions
--- note: title and options are required.
---     : onStart, onCancelled, and onEnd are optional.
---     : You must provide at least one option.
---     : Incorrectly creating or configuring a menu
---     : will not result in a crash or broken menus,
---     : but will produce scary looking warnings in
---     : the log.
+-- func: !merits
+-- desc: Allows the player to spend accumulated refunded merits.
 -----------------------------------
 require("scripts/globals/msg")
-
----@type CommandSpec
-local this = {}
 
 cmdprops =
 {
@@ -75,4 +65,4 @@ cmdprops =
     player:customMenu(menu)
 end
 
-return this
+return
