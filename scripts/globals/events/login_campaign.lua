@@ -10,12 +10,11 @@ xi = xi or {}
 xi.events = xi.events or {}
 xi.events.loginCampaign = xi.events.loginCampaign or {}
 
--- Change vars below to modify settings for current login campaign
 -- NOTE: the year and month values are used in the Moogle's Event!
-local loginCampaignYear = 2021
-local loginCampaignMonth = 8
-local loginCampaignDay = 25
-local loginCampaignDuration = 23 -- Duration is set in Earth days (Average is 23 days)
+local loginCampaignMonth = GetServerVariable("LoginCampaignMonth")
+local loginCampaignDay = GetServerVariable("LoginCampaignDay")
+local loginCampaignYear = GetServerVariable("LoginCampaignYear")
+local loginCampaignDuration = GetServerVariable("LoginCampaignDuration")
 
 -- Checks if a Login Campaign is active.
 xi.events.loginCampaign.isCampaignActive = function()
@@ -56,8 +55,8 @@ xi.events.loginCampaign.onGameIn = function(player)
     -- Carry last months points if there's any
     if playercMonth ~= loginCampaignMonth or playercYear ~= loginCampaignYear then
         if loginPoints > 1500 then
-            player:setCurrency("login_points", 1500)
-            player:messageSpecial(ID.text.CARRIED_OVER_POINTS, 0, 1500)
+            player:setCurrency("login_points", 2000)
+            player:messageSpecial(ID.text.CARRIED_OVER_POINTS, 0, 2000)
         elseif loginPoints ~= 0 then
             player:messageSpecial(ID.text.CARRIED_OVER_POINTS, 0, loginPoints)
         end
@@ -66,10 +65,21 @@ xi.events.loginCampaign.onGameIn = function(player)
         player:setCharVar("LoginCampaignYear", loginCampaignYear)
         loginCount = 0
     end
-
-    -- Show Info about campaign (month, year, login time)
+    
     if nextMidnight ~= getMidnight() then
-        player:messageSpecial(ID.text.LOGIN_CAMPAIGN_UNDERWAY, loginCampaignYear, loginCampaignMonth)
+        local day = tonumber(os.date("%e"))
+        if day == 11 or day == 12 or day == 13 then
+          suffix = "th"
+        elseif day % 10 == 1 then
+          suffix = "st"
+        elseif day % 10 == 2 then
+          suffix = "nd"
+        elseif day % 10 == 3 then
+          suffix = "rd"
+        else
+          suffix = "th"
+        end
+        player:PrintToPlayer("The current Login Campaign will run until " .. os.date("%A, %B %e"..suffix..", %Y %I:%M %p", campaignEndDate), 0xD)
 
         if loginCount == 0 then
             loginCount = 1
@@ -96,7 +106,8 @@ end
 -- Handles showing the correct list of prices and hiding the options that are not available
 xi.events.loginCampaign.onTrigger = function(player, csid)
     if not xi.events.loginCampaign.isCampaignActive() then
-        -- TODO: What do the moogles do when the campaign isn't active?
+        player:PrintToPlayer("Greeter Moogle : Unfortunately, the Login Campaign is not currently underway, kupo.", 0xD)
+        player:PrintToPlayer("Please come back another time to see all the exciting prizes and bonuses we have in store for you, kupo!", 0xD)
         return
     end
 
