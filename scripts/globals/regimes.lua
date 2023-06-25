@@ -1225,15 +1225,40 @@ xi.regime.bookOnEventFinish = function(player, option, regimeType)
             end,
 
             ['REGEN'] = function()
+                local mLvl = player:getMainLvl()
+                local power = 0
+
+                local mLvl = player:getMainLvl()
+                local power = 0
+    
+                if mLvl >= 1 and mLvl <= 20 then
+                    power = 3
+                elseif mLvl >= 21 and mLvl <= 36 then
+                    power = 5
+                elseif mLvl > 37 and mLvl <= 65 then
+                    power = 12
+                elseif mLvl > 66 and mLvl <= 75 then
+                    power = 20
+                else 
+                    power = 30
+                end
                 player:delStatusEffectSilent(xi.effect.REGEN)
-                player:addStatusEffect(xi.effect.REGEN, 1, 3, 3600)
+                player:addStatusEffect(xi.effect.REGEN, power, 3, 1800)
             end,
 
             ['REFRESH'] = function()
+                local mLvl = player:getMainLvl()
+                local power = 0
+
+                if mLvl >= 1 and mLvl <= 20 then
+                    power = 2
+                else
+                    power = 3
+                end
                 player:delStatusEffectSilent(xi.effect.REFRESH)
                 player:delStatusEffect(xi.effect.SUBLIMATION_COMPLETE)
                 player:delStatusEffect(xi.effect.SUBLIMATION_ACTIVATED)
-                player:addStatusEffect(xi.effect.REFRESH, 1, 3, 3600, 0, 3)
+                player:addStatusEffect(xi.effect.REFRESH, power, 3, 1800, 0, 3)
             end,
 
             ['PROTECT'] = function()
@@ -1302,7 +1327,7 @@ xi.regime.bookOnEventFinish = function(player, option, regimeType)
 
             ['HASTE'] = function()
                 player:delStatusEffectSilent(xi.effect.HASTE)
-                player:addStatusEffect(xi.effect.HASTE, 1000, 0, 600)
+                player:addStatusEffect(xi.effect.HASTE, 1000, 0, 1800)
             end,
 
             ['DRIED_MEAT'] = function()
