@@ -5760,7 +5760,7 @@ namespace charutils
     {
         TracyZoneScoped;
         auto tstamp = static_cast<uint32>(PChar->getCharVar("mog-locker-expiry-timestamp"));
-        if (CVanaTime::getInstance()->getVanaTime() < tstamp)
+        if (CVanaTime::getInstance()->getVanaTime() < tstamp +1) // adding 1 to overflow and keep compatibility with our lua scripts assigning -1 as the expired timestamp
         {
             return true;
         }
