@@ -109,10 +109,10 @@ INSERT INTO `abilities` VALUES (89,'retreat',15,1,1,5,171,0,0,94,2000,0,6,20.0,0
 INSERT INTO `abilities` VALUES (90,'release',15,1,1,5,172,0,0,94,2000,0,6,20.0,0,-10,0,0,256,NULL);
 INSERT INTO `abilities` VALUES (91,'blood_pact_rage',15,1,1,60,173,0,0,0,2000,0,6,20.0,0,1,300,0,256,NULL);
 INSERT INTO `abilities` VALUES (92,'rampart',7,62,1,300,77,0,0,91,2000,0,6,20.0,1,320,320,776,0,NULL);
-INSERT INTO `abilities` VALUES (93,'azure_lore',16,0,1,3600,0,0,0,142,2000,0,6,20.0,0,1,300,0,0,'TOAU');
+INSERT INTO `abilities` VALUES (93,'azure_lore',16,1,1,3600,0,0,0,142,2000,0,6,20.0,0,1,300,0,0,'TOAU');
 INSERT INTO `abilities` VALUES (94,'chain_affinity',16,40,1,120,181,0,0,140,2000,0,6,20.0,0,1,300,1344,0,'TOAU');
 INSERT INTO `abilities` VALUES (95,'burst_affinity',16,25,1,120,182,0,0,141,2000,0,6,20.0,0,1,300,1346,0,'TOAU');
-INSERT INTO `abilities` VALUES (96,'wild_card',17,0,1,3600,0,0,0,132,2000,0,6,20.0,1,1,300,0,0,'TOAU');
+INSERT INTO `abilities` VALUES (96,'wild_card',17,1,1,3600,0,0,0,132,2000,0,6,20.0,1,1,300,0,0,'TOAU');
 INSERT INTO `abilities` VALUES (97,'phantom_roll',17,5,1,60,193,0,0,0,2000,0,6,18.0,0,0,0,1408,0,'TOAU');
 INSERT INTO `abilities` VALUES (98,'fighters_roll',17,49,1,60,193,420,0,98,2000,0,6,8.0,1,1,80,0,8,'TOAU');
 INSERT INTO `abilities` VALUES (99,'monks_roll',17,31,1,60,193,420,0,99,2000,0,6,8.0,1,1,80,0,8,'TOAU');
@@ -150,7 +150,7 @@ INSERT INTO `abilities` VALUES (130,'water_shot',17,40,4,1,195,110,0,130,2000,0,
 INSERT INTO `abilities` VALUES (131,'light_shot',17,40,4,1,195,0,0,123,2000,0,6,18.0,0,0,0,1410,0,'TOAU');
 INSERT INTO `abilities` VALUES (132,'dark_shot',17,40,4,1,195,0,0,124,2000,0,6,18.0,0,0,0,1410,0,'TOAU');
 INSERT INTO `abilities` VALUES (133,'random_deal',17,50,1,1200,196,0,0,131,2000,0,6,20.0,1,1,300,1414,0,'TOAU');
-INSERT INTO `abilities` VALUES (135,'overdrive',18,0,1,3600,0,0,0,143,2000,0,6,20.0,0,0,0,0,0,'TOAU');
+INSERT INTO `abilities` VALUES (135,'overdrive',18,1,1,3600,0,0,0,143,2000,0,6,20.0,0,0,0,0,0,'TOAU');
 INSERT INTO `abilities` VALUES (136,'activate',18,1,1,1200,205,0,0,83,2000,0,6,20.0,0,1,80,1478,0,'TOAU');
 INSERT INTO `abilities` VALUES (137,'repair',18,15,257,180,206,102,0,83,2000,0,6,18.0,0,0,0,1480,0,'TOAU'); -- FYI: Retail has this at 90s and its merit at 3s per upgrade due to a 99 cap Automaton HP increase (as well as reworked Auto-repair Kits and oil changes)
 INSERT INTO `abilities` VALUES (138,'deploy',18,1,4,10,207,0,0,83,2000,0,6,18.0,0,0,0,0,512,'TOAU');
