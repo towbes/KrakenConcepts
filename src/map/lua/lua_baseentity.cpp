@@ -4271,8 +4271,8 @@ bool CLuaBaseEntity::addLinkpearl(std::string const& lsname, bool equip)
     }
     return false;
 }
-
-auto CLuaBaseEntity::addSoulPlate(std::string const& name, uint16 mobFamily, uint8 zeni, uint16 skillIndex, uint8 fp) -> std::optional<CLuaItem>
+// auto CLuaBaseEntity::addSoulPlate(std::string const& name, uint16 mobFamily, uint8 zeni, uint16 skillIndex, uint8 fp) -> std::optional<CLuaItem>
+auto CLuaBaseEntity::addSoulPlate(std::string const& name, uint8 fauna, uint8 subOfInterest, uint8 ecoSystem, uint8 zeni, uint16 skillIndex, uint8 fp) -> std::optional<CLuaItem>
 {
     if (m_PBaseEntity->objtype != TYPE_PC)
     {
@@ -4295,9 +4295,8 @@ auto CLuaBaseEntity::addSoulPlate(std::string const& name, uint16 mobFamily, uin
             ShowError("PItem was null for soulplate");
             return std::nullopt;
         }
-
         PItem->setQuantity(1);
-        PItem->setSoulPlateData(name, mobFamily, zeni, skillIndex, fp);
+        PItem->setSoulPlateData(name, fauna, subOfInterest, ecoSystem, zeni, skillIndex, fp);
         auto SlotID = charutils::AddItem(PChar, LOC_INVENTORY, PItem, true);
         if (SlotID == ERROR_SLOTID)
         {

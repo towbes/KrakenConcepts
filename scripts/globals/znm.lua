@@ -380,7 +380,7 @@ xi.znm.soultrapper.getZeniValue = function(target, user, item)
 
     local zeni = 0
     -- no claim  = little to no zeni
-    if (not user:isMobOwner(target) or hpp == 100) then
+    if not target:isPet() or hpp == 100 then
         zeni = math.random(1,5)
     else
         -- base for small size mobs
@@ -466,7 +466,7 @@ xi.znm.soultrapper.onItemUse = function(target, user, item)
     local faunaMatch, subjectsOfInterestMatch = getMatchingFaunaAndSubjectsOfInterest(target)
 
     -- Add plate
-    local plate = user:addSoulPlate(target:getName(), target:getFamily(), zeni, skillIndex, skillEntry.fp)
+    local plate = user:addSoulPlate(target:getName(), faunaMatch, subjectsOfInterestMatch, target:getEcosystem(), zeni, skillIndex, skillEntry.fp)
     local data = plate:getSoulPlateData()
     utils.unused(data)
 end
@@ -654,39 +654,39 @@ local function getAllowedZNMs(player)
     local param = 2140136440 -- Defaut bitmask, Tier 1 ZNM Menu + don't ask option
 
     -- Tinnin Path
-    if player:hasKeyItem(xi.ki.MAROON_SEAL) and ZNM_Tier2 == 1 then
+    if player:hasKeyItem(xi.ki.MAROON_SEAL) then
         param = param - 0x38 -- unlocks Tinnin path tier 2 ZNMs.
     end
-    if player:hasKeyItem(xi.ki.APPLE_GREEN_SEAL) and ZNM_Tier3 == 1 then
+    if player:hasKeyItem(xi.ki.APPLE_GREEN_SEAL) then
         param = param - 0x1C0 -- unlocks Tinnin path tier 3 ZNMs.
     end
-    if player:hasKeyItem(xi.ki.CHARCOAL_GREY_SEAL) and player:hasKeyItem(xi.ki.DEEP_PURPLE_SEAL) and player:hasKeyItem(xi.ki.CHESTNUT_COLORED_SEAL) and ZNM_Tier4 == 1 then
+    if player:hasKeyItem(xi.ki.CHARCOAL_GREY_SEAL) and player:hasKeyItem(xi.ki.DEEP_PURPLE_SEAL) and player:hasKeyItem(xi.ki.CHESTNUT_COLORED_SEAL) then
         param = param - 0x200 -- unlocks Tinnin.
     end
 
     -- Sarameya Path
-    if player:hasKeyItem(xi.ki.CERISE_SEAL) and ZNM_Tier2 == 1 then
+    if player:hasKeyItem(xi.ki.CERISE_SEAL) then
         param = param - 0xE000 -- unlocks Sarameya path tier 2 ZNMs.
     end
-    if player:hasKeyItem(xi.ki.SALMON_COLORED_SEAL) and ZNM_Tier3 == 1 then
+    if player:hasKeyItem(xi.ki.SALMON_COLORED_SEAL) then
         param = param - 0x70000 -- unlocks Sarameya path tier 3 ZNMs.
     end
-    if player:hasKeyItem(xi.ki.PURPLISH_GREY_SEAL) and player:hasKeyItem(xi.ki.GOLD_COLORED_SEAL) and player:hasKeyItem(xi.ki.COPPER_COLORED_SEAL) and ZNM_Tier4 == 1 then
+    if player:hasKeyItem(xi.ki.PURPLISH_GREY_SEAL) and player:hasKeyItem(xi.ki.GOLD_COLORED_SEAL) and player:hasKeyItem(xi.ki.COPPER_COLORED_SEAL) then
         param = param - 0x80000 -- unlocks Sarameya.
     end
 
     -- Tyger Path
-    if player:hasKeyItem(xi.ki.PINE_GREEN_SEAL) and ZNM_Tier2 == 1 then
+    if player:hasKeyItem(xi.ki.PINE_GREEN_SEAL) then
         param = param - 0x3800000 -- unlocks Tyger path tier 2 ZNMs.
     end
-    if player:hasKeyItem(xi.ki.AMBER_COLORED_SEAL) and ZNM_Tier3 == 1 then
+    if player:hasKeyItem(xi.ki.AMBER_COLORED_SEAL) then
         param = param - 0x1C000000 -- unlocks Tyger path tier 3 ZNMs.
     end
-    if player:hasKeyItem(xi.ki.TAUPE_COLORED_SEAL) and player:hasKeyItem(xi.ki.FALLOW_COLORED_SEAL) and player:hasKeyItem(xi.ki.SIENNA_COLORED_SEAL) and ZNM_Tier4 == 1 then
+    if player:hasKeyItem(xi.ki.TAUPE_COLORED_SEAL) and player:hasKeyItem(xi.ki.FALLOW_COLORED_SEAL) and player:hasKeyItem(xi.ki.SIENNA_COLORED_SEAL) then
         param = param - 0x20000000 -- unlocks Tyger.
     end
 
-    if player:hasKeyItem(xi.ki.LILAC_COLORED_SEAL) and player:hasKeyItem(xi.ki.BRIGHT_BLUE_SEAL) and player:hasKeyItem(xi.ki.LAVENDER_COLORED_SEAL) and ZNM_Tier5 == 1 then
+    if player:hasKeyItem(xi.ki.LILAC_COLORED_SEAL) and player:hasKeyItem(xi.ki.BRIGHT_BLUE_SEAL) and player:hasKeyItem(xi.ki.LAVENDER_COLORED_SEAL) then
         param = param - 0x40000000 -- unlocks Pandemonium Warden.
     end
 
@@ -792,10 +792,7 @@ xi.znm.sanraku.onEventUpdate = function(player, csid, option)
                 end
             elseif option == 500 or option == 1 then -- player has declined to buy a pop item
                 local allowIslet = 0
-                if (ZNM_Tier4 == 1) then
-                    -- dont allow players to buy the salts to teleport to Tier4 NMs unless Tier4 NMs are enabled
                     allowIslet = player:getCharVar("[ZNM][Ryo]IsletDiscussion") 
-                end
                 player:updateEvent(allowIslet)
             end
         end
@@ -812,7 +809,7 @@ xi.znm.sanraku.onEventFinish = function(player, csid, option)
         player:setLocalVar("[ZNM][Sanraku]SoulPlateValue", 0)
 
         player:addCurrency("zeni_point", zeniValue)
-        zeni_fest.onSanrakuPlateTradeComplete(player, zeniValue)
+        -- zeni_fest.onSanrakuPlateTradeComplete(player, zeniValue) Need to port from Wings
     elseif csid == 908 then
         player:setCharVar("[ZNM]SanrakuIntro", 1)
     end
