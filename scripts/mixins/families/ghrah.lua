@@ -6,13 +6,16 @@ g_mixins = g_mixins or {}
 g_mixins.families.ghrah = function(ghrahMob)
     ghrahMob:addListener("SPAWN", "GHRAH_SPAWN", function(mob)
         mob:setAnimationSub(0)
+        mob:setMod(xi.mod.ATTP, 0)
         mob:setAggressive(false)
         mob:setLocalVar("roamTime", os.time())
-        if mob:getXPos() > 0 then
-            mob:setLocalVar("form2", 2)
+        --[[if mob:getXPos() > 0 then
+            mob:setLocalVar("form2", math.random(1, 2))
         else
-            mob:setLocalVar("form2", 3)
-        end
+            mob:setLocalVar("form2", math.random(1, 3))
+        end]]
+
+        mob:setLocalVar("form2", math.random(1, 3))
         local skin = math.random(1161, 1168)
         mob:setLocalVar("skin", skin)
         mob:setModelId(skin)
@@ -86,7 +89,7 @@ g_mixins.families.ghrah = function(ghrahMob)
             mob:setAggressive(true)
 
             if mob:getAnimationSub() == 2 then
-                mob:addMod(xi.mod.ATTP, 50) -- spider form att+
+                mob:setMod(xi.mod.ATTP, 50) -- spider form att+
             end
         elseif
             mob:getAnimationSub() == mob:getLocalVar("form2") and
@@ -95,7 +98,7 @@ g_mixins.families.ghrah = function(ghrahMob)
             mob:setAnimationSub(0)
             mob:setAggressive(false)
             mob:setLocalVar("roamTime", os.time())
-            mob:delMod(xi.mod.ATTP, 50)
+            mob:setMod(xi.mod.ATTP, 0)
         end
 
         -- Temporary solution until mods on spawn issue is corrected
@@ -184,7 +187,7 @@ g_mixins.families.ghrah = function(ghrahMob)
             mob:setLocalVar("changeTime", mob:getBattleTime())
 
             if mob:getAnimationSub() == 2 then
-                mob:addMod(xi.mod.ATTP, 50) -- spider form att+
+                mob:setMod(xi.mod.ATTP, 50) -- spider form att+
             end
         elseif
             mob:getAnimationSub() == mob:getLocalVar("form2") and
@@ -193,7 +196,7 @@ g_mixins.families.ghrah = function(ghrahMob)
             mob:setAnimationSub(0)
             mob:setAggressive(false)
             mob:setLocalVar("changeTime", mob:getBattleTime())
-            mob:delMod(xi.mod.ATTP, 50)
+            mob:setMod(xi.mod.ATTP, 0)
         end
     end)
 end
