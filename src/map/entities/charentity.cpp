@@ -783,7 +783,7 @@ bool CCharEntity::PersistData()
 
     if (dataToPersist & CHAR_PERSIST::EFFECTS)
     {
-        StatusEffectContainer->SaveStatusEffects(true);
+        StatusEffectContainer->SaveStatusEffects(true, false);
     }
 
     /* TODO
