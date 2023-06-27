@@ -7515,7 +7515,7 @@ void SmallPacket0x102(map_session_data_t* const PSession, CCharEntity* const PCh
                 if (spell != nullptr)
                 {
                     uint8 mLevel = PChar->m_LevelRestriction != 0 && PChar->m_LevelRestriction < PChar->GetMLevel() ? PChar->m_LevelRestriction : PChar->GetMLevel();
-                    uint8 sLevel = floor(mLevel / 2);
+                    uint8 sLevel = PChar->m_LevelRestriction != 0 && PChar->m_LevelRestriction < PChar->GetSLevel() ? PChar->m_LevelRestriction : PChar->GetSLevel();
 
                     if (mLevel < spell->getJob(PChar->GetMJob()) && sLevel < spell->getJob(PChar->GetSJob()))
                     {
