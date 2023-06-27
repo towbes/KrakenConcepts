@@ -14,7 +14,7 @@ abilityObject.onAutomatonAbility = function(target, automaton, skill, master, ac
     local params =
     {
         numHits = 1,
-        atkmulti = 1.5,
+        atkmulti = 1,
         accBonus = 100,
         ftp100 = 3.0,
         ftp200 = 3.0,
@@ -38,10 +38,10 @@ abilityObject.onAutomatonAbility = function(target, automaton, skill, master, ac
     if xi.settings.main.USE_ADOULIN_WEAPON_SKILL_CHANGES then
         params.ftp100 = 4.0
         params.ftp200 = 5.5
-        params.ftp300 = 7.0
-        params.ignored100 = 0.5
-        params.ignored200 = 0.5
-        params.ignored300 = 0.5
+        params.ftp300 = 8.0
+        params.ignored100 = 0.4
+        params.ignored200 = 0.4
+        params.ignored300 = 0.4
     end
 
     local damage = doAutoRangedWeaponskill(automaton, target, 0, params, skill:getTP(), true, skill, action)

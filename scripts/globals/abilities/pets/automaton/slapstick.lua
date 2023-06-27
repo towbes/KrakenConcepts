@@ -32,9 +32,9 @@ abilityObject.onAutomatonAbility = function(target, automaton, skill, master, ac
     }
 
     if xi.settings.main.USE_ADOULIN_WEAPON_SKILL_CHANGES then
-        params.ftp100 = 2.66
-        params.ftp200 = 2.66
-        params.ftp300 = 2.66
+        params.ftp100 = 3
+        params.ftp200 = 4
+        params.ftp300 = 6
         params.accBonus = 0.04 * skill:getTP()
     end
 

@@ -37,9 +37,9 @@ abilityObject.onAutomatonAbility = function(target, automaton, skill, master, ac
         params.ftp300 = 2.66
 
         if target:isUndead() then
-            params.ftp100 = 3.66
-            params.ftp200 = 3.66
-            params.ftp300 = 3.66
+            params.ftp100 = 3.75
+            params.ftp200 = 3.75
+            params.ftp300 = 3.75
         end
     else
         if target:isUndead() then

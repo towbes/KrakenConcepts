@@ -32,10 +32,10 @@ abilityObject.onAutomatonAbility = function(target, automaton, skill, master, ac
     }
 
     if xi.settings.main.USE_ADOULIN_WEAPON_SKILL_CHANGES then
-        params.ftp100 = 3.5
-        params.ftp200 = 3.5
-        params.ftp300 = 3.5
-        params.accBonus = 0.05 * skill:getTP()
+        params.ftp100 = 4
+        params.ftp200 = 4
+        params.ftp300 = 4
+        params.accBonus = 0.10 * skill:getTP()
     end
 
     local damage = doAutoPhysicalWeaponskill(automaton, target, 0, skill:getTP(), true, action, false, params, skill)

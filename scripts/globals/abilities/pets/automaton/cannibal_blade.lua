@@ -17,14 +17,14 @@ abilityObject.onAutomatonAbility = function(target, automaton, skill, master, ac
         numHits = 1,
         atkmulti = 20.0,
         accBonus = 1000,
-        weaponDamage = automaton:getSkillLevel(xi.skill.AUTOMATON_MELEE),
+        --weaponDamage = automaton:getSkillLevel(xi.skill.AUTOMATON_MELEE),
         weaponType = xi.skill.SWORD,
         ftp100 = 0.25,
         ftp200 = 0.4,
         ftp300 = 0.6,
-        acc100 = 0.0,
-        acc200 = 0.0,
-        acc300 = 0.0,
+        acc100 = 5.0,
+        acc200 = 5.0,
+        acc300 = 5.0,
         ignoresDef = true,
         ignored100 = 0.5,
         ignored200 = 0.5,
@@ -39,11 +39,14 @@ abilityObject.onAutomatonAbility = function(target, automaton, skill, master, ac
     }
 
     if xi.settings.main.USE_ADOULIN_WEAPON_SKILL_CHANGES then
-        params.weaponDamage = nil
+        --params.weaponDamage = automaton:getSkillLevel(xi.skill.AUTOMATON_MELEE)
         params.mnd_wsc = 1.0
-        params.ftp100 = 16.0
-        params.ftp200 = 23.5
-        params.ftp300 = 31.5
+        -- params.ftp100 = 16.0
+        -- params.ftp200 = 23.5
+        -- params.ftp300 = 31.5
+        params.ftp100 = 0.80
+        params.ftp200 = 1.75
+        params.ftp300 = 3.00
     end
 
     if automaton:checkDistance(target) > 7 then

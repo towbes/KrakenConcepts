@@ -19,9 +19,9 @@ abilityObject.onAutomatonAbility = function(target, automaton, skill, master, ac
     else
         -- Might be wrong, it may only use max hp in its new form, also it may be able to miss and take defense into account as well
         if tp >= 3000 then
-            ftp = 2.5
+            ftp = 3
         elseif tp >= 2000 then
-            ftp = 1.75 + ((0.75 / 3000) * tp)
+            ftp = 2.0 + ((0.75 / 3000) * tp)
         else
             ftp = 1.5 + ((0.25 / 3000) * tp)
         end
