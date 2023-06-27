@@ -689,9 +689,9 @@ INSERT INTO `item_equipment` VALUES (10919,'tndm._necklace_+1',75,0,4194303,0,0,
 INSERT INTO `item_equipment` VALUES (10920,'tndm._necklace_+2',75,0,4194303,0,0,0,512,0,0);
 INSERT INTO `item_equipment` VALUES (10921,'tndm._necklace_+3',75,0,4194303,0,0,0,512,0,0);
 INSERT INTO `item_equipment` VALUES (10922,'tndm._necklace_+4',75,0,4194303,0,0,0,512,0,0);
-INSERT INTO `item_equipment` VALUES (10924,'chocobo_torque',81,0,4194303,0,0,0,512,0,0);
-INSERT INTO `item_equipment` VALUES (10925,'fishers_torque',81,0,4194303,0,0,0,512,0,0);
-INSERT INTO `item_equipment` VALUES (10926,'field_torque',81,0,4194303,0,0,0,512,0,0);
+INSERT INTO `item_equipment` VALUES (10924,'chocobo_torque',70,0,4194303,0,0,0,512,0,0);
+INSERT INTO `item_equipment` VALUES (10925,'fishers_torque',70,0,4194303,0,0,0,512,0,0);
+INSERT INTO `item_equipment` VALUES (10926,'field_torque',70,0,4194303,0,0,0,512,0,0);
 INSERT INTO `item_equipment` VALUES (10927,'genesis_locket',88,0,4194303,0,0,0,512,0,0);
 INSERT INTO `item_equipment` VALUES (10928,'ganeshas_mala',90,0,10368,0,0,0,512,0,0);
 INSERT INTO `item_equipment` VALUES (10929,'apathy_gorget',86,0,8641,0,0,0,512,0,0);
