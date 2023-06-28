@@ -60,6 +60,7 @@ onTrigger = function(player)
     
     local Unstuck = player:getVar("Unstuck")
     local UnstuckUses = player:getVar("UnstuckUses")
+    local delay = 5
     if Unstuck ~= 1 then
         table.insert(menu.options, {
             "Unstuck",
@@ -71,14 +72,16 @@ onTrigger = function(player)
                 playerArg:warp()
             else
                  -- playerArg:PrintToPlayer("Unstuck Selected", xi.msg.channel.NS_LINKSHELL3)
-                    uses = UnstuckUses + 1
+                    
                     playerArg:setVar("Unstuck", 1)
-                    playerArg:addStatusEffect(xi.effect.TERROR, 60, 0, 61)
-                    if Unstuck == 1 then
+                    playerArg:addStatusEffect(xi.effect.TERROR, delay, 0, delay+1)
+                    if player:getVar("Unstuck") == 1 then
+                        uses = UnstuckUses + 1
                         playerArg:setVar("UnstuckUses", uses)
-                        playerArg:queue(60, function(playerArg)
+                        playerArg:queue(delay, function(playerArg)
                         playerArg:setPos(0, 0, 0, 0, zone, true)
                         end)
+                        playerArg:setVar("Unstuck", 0)
                     end
                 end
             end,
