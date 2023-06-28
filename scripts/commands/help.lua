@@ -1,13 +1,6 @@
 -----------------------------------
--- func: !menu
--- desc: Player Functions
--- note: title and options are required.
---     : onStart, onCancelled, and onEnd are optional.
---     : You must provide at least one option.
---     : Incorrectly creating or configuring a menu
---     : will not result in a crash or broken menus,
---     : but will produce scary looking warnings in
---     : the log.
+-- func: !help
+-- desc: Opens the Help Menu
 -----------------------------------
 require("scripts/globals/msg")
 
@@ -45,6 +38,26 @@ onTrigger = function(player)
             -- playerArg:setLocalVar("helpMenu", 0)
         end,
     }
+
+    local refundMerits = player:getVar("refundMerits")
+    if refundMerits > 0 then
+        table.insert(menu.options, {
+            "Refund Merits" .. "(" .. refundMerits .. ")",
+            function(playerArg)
+                local currentMerits = playerArg:getMeritCount()
+                local totalMerits = currentMerits + refundMerits
+                local remainder = 0
+                if totalMerits > 30 then
+                    remainder = totalMerits - 30
+                    totalMerits = 30
+                end
+                playerArg:setMerits(totalMerits)
+                playerArg:setVar("refundMerits", remainder)
+                playerArg:PrintToPlayer(string.format("Merits are now set to %i with a balance of %i", totalMerits, remainder), xi.msg.channel.NS_LINKSHELL3)
+            end,
+        })
+    end
+    
     local Unstuck = player:getVar("Unstuck")
     local UnstuckUses = player:getVar("UnstuckUses")
     if Unstuck ~= 1 then
@@ -60,9 +73,9 @@ onTrigger = function(player)
                  -- playerArg:PrintToPlayer("Unstuck Selected", xi.msg.channel.NS_LINKSHELL3)
                     uses = UnstuckUses + 1
                     playerArg:setVar("Unstuck", 1)
-                    playerArg:setVar("UnstuckUses", uses)
                     playerArg:addStatusEffect(xi.effect.TERROR, 60, 0, 61)
                     if Unstuck == 1 then
+                        playerArg:setVar("UnstuckUses", uses)
                         playerArg:queue(60, function(playerArg)
                         playerArg:setPos(0, 0, 0, 0, zone, true)
                         end)
