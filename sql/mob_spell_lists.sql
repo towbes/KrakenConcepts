@@ -355,7 +355,7 @@ INSERT INTO `mob_spell_lists` VALUES ('Beastmen_NIN',7,336,40,72);  -- suiton_ni
 INSERT INTO `mob_spell_lists` VALUES ('Beastmen_NIN',7,337,73,255); -- suiton_san (73~255)
 INSERT INTO `mob_spell_lists` VALUES ('Beastmen_NIN',7,338,12,36);  -- utsusemi_ichi (12~36)
 INSERT INTO `mob_spell_lists` VALUES ('Beastmen_NIN',7,339,37,72);  -- utsusemi_ni (37~72)
-INSERT INTO `mob_spell_lists` VALUES ('Beastmen_NIN',7,340,73,255); -- utsusemi_san (73~255)
+-- INSERT INTO `mob_spell_lists` VALUES ('Beastmen_NIN',7,340,73,255); -- utsusemi_san (73~255)
 INSERT INTO `mob_spell_lists` VALUES ('Beastmen_NIN',7,341,30,64);  -- jubaku_ichi (30~64)
 INSERT INTO `mob_spell_lists` VALUES ('Beastmen_NIN',7,342,65,255); -- jubaku_ni (65~255)
 INSERT INTO `mob_spell_lists` VALUES ('Beastmen_NIN',7,344,23,47);  -- hojo_ichi (23~47)
