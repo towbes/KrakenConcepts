@@ -80,21 +80,8 @@ onTrigger = function(player)
                         playerArg:queue(delay, function(playerArg)
                         playerArg:setPos(0, 0, 0, 0, zone, true)
                         end)
-                        playerArg:setVar("Unstuck", 0)
                     end
                 end
-            end,
-        })
-    end
-
-    local Unstuck = player:getVar("Unstuck")
-    if Unstuck ~= 0 then
-        table.insert(menu.options, {
-            "Cancel Unstuck",
-            function(playerArg)
-             -- playerArg:PrintToPlayer("Unstuck Selected", xi.msg.channel.NS_LINKSHELL3)
-                playerArg:setVar("Unstuck", 0)
-                playerArg:delStatusEffect(xi.effect.TERROR)
             end,
         })
     end
