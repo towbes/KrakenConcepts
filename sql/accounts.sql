@@ -11,7 +11,7 @@ SET SQL_MODE="NO_AUTO_VALUE_ON_ZERO";
 
 DROP TABLE IF EXISTS `accounts`;
 CREATE TABLE IF NOT EXISTS `accounts` (
-  `id` int(10) unsigned NOT NULL DEFAULT '0',
+  `id` int(10) unsigned NOT NULL AUTO_INCREMENT DEFAULT '0',
   `login` varchar(16) NOT NULL DEFAULT '',
   `password` varchar(64) NOT NULL DEFAULT '',
   `current_email` varchar(64) NOT NULL DEFAULT '',
