@@ -1,5 +1,5 @@
 -----------------------------------
--- func: refundmerits <amount> <player>
+-- func: setrefundmerits <amount> <player>
 -- desc: Sets a player's merits to use with the !merits command.
 -----------------------------------
 require("scripts/globals/msg")
@@ -12,7 +12,7 @@ cmdprops =
 
 function error(player, msg)
     player:PrintToPlayer(msg)
-    player:PrintToPlayer("!refundmerits <amount> (player)")
+    player:PrintToPlayer("!setrefundmerits <amount> (player)")
 end
 
 function onTrigger(player, amount, target)

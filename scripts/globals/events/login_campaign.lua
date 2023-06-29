@@ -30,6 +30,7 @@ xi.events.loginCampaign.isCampaignActive = function()
             sec = 0
         }) + localUtcOffset + jstUtcOffset
         local campaignEndDate = campaignStartDate + loginCampaignDuration * 24 * 60 * 60
+        EndDate = os.date("%B %d, %Y %I:%M %p", campaignEndDate)
 
         if os.time() < campaignEndDate and os.time() > campaignStartDate then
             return true
@@ -65,22 +66,10 @@ xi.events.loginCampaign.onGameIn = function(player)
         player:setCharVar("LoginCampaignYear", loginCampaignYear)
         loginCount = 0
     end
-    
-    if nextMidnight ~= getMidnight() then
-        local day = tonumber(os.date("%e"))
-        if day == 11 or day == 12 or day == 13 then
-          suffix = "th"
-        elseif day % 10 == 1 then
-          suffix = "st"
-        elseif day % 10 == 2 then
-          suffix = "nd"
-        elseif day % 10 == 3 then
-          suffix = "rd"
-        else
-          suffix = "th"
-        end
-        player:PrintToPlayer("The current Login Campaign will run until " .. os.date("%A, %B %e"..suffix..", %Y %I:%M %p", campaignEndDate), 0xD)
 
+    player:PrintToPlayer("The current Login Campaign will run until " .. EndDate, 0xD)
+
+    if nextMidnight ~= getMidnight() then
         if loginCount == 0 then
             loginCount = 1
         else
@@ -107,7 +96,7 @@ end
 xi.events.loginCampaign.onTrigger = function(player, csid)
     if not xi.events.loginCampaign.isCampaignActive() then
         player:PrintToPlayer("Greeter Moogle : Unfortunately, the Login Campaign is not currently underway, kupo.", 0xD)
-        player:PrintToPlayer("Please come back another time to see all the exciting prizes and bonuses we have in store for you, kupo!", 0xD)
+        player:PrintToPlayer("Please come back another time to see all the exciting prizes we have in store for you, kupo!", 0xD)
         return
     end
 
