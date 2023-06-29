@@ -59,7 +59,7 @@ onTrigger = function(player)
     end
     
     local UnstuckUses = player:getVar("UnstuckUses")
-    local delay = 1
+    local delay = 60
         table.insert(menu.options, {
             "Unstuck",
             function(playerArg)
