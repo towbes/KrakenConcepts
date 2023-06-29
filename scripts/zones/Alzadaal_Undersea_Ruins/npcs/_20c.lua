@@ -5,6 +5,7 @@
 -----------------------------------
 local ID = require("scripts/zones/Alzadaal_Undersea_Ruins/IDs")
 require("scripts/globals/keyitems")
+require("scripts/globals/teleports")
 -----------------------------------
 local entity = {}
 
@@ -27,6 +28,9 @@ entity.onTrigger = function(player, npc)
 end
 
 entity.onEventUpdate = function(player, csid, option)
+    if csid == 106 and option == 0 then
+        xi.teleport.clearEnmityList(player)
+	end
 end
 
 entity.onEventFinish = function(player, csid, option)

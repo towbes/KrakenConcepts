@@ -29,6 +29,11 @@ entity.onTrigger = function(player, npc)
 end
 
 entity.onEventUpdate = function(player, csid, option)
+    if csid == 106 and option == 0 then
+		for _, entry in pairs(player:getNotorietyList()) do
+			entry:clearEnmity(player) -- reset hate on player entering staging point
+		end
+	end
 end
 
 entity.onEventFinish = function(player, csid, option)
