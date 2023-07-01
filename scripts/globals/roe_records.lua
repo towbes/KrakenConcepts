@@ -9448,12 +9448,12 @@ function getRoeRecords(triggers)
         -----------------------------------
         -- Vana'versary - 15th Vana'versary I
         -----------------------------------
-
-        [3367] =
-        { -- Signet, brb (W)
-            flags = set { "weekly" },
-            reward = { sparks = 50, xp = 1115 },
-        },
+        
+        -- [3367] =
+        -- { -- Signet, brb (W)
+        --     flags = set { "unity" },
+        --     reward = { sparks = 50, xp = 1115 },
+        -- }, 
 
         -----------------------------------
         -- Other - Daily Objectives
