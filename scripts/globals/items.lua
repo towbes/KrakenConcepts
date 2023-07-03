@@ -1440,8 +1440,6 @@ xi.items =
     DEIMOS_ORB                      = 3352,
     ZELOS_ORB                       = 3454,
     BIA_ORB                         = 3455,
-<<<<<<< HEAD
-=======
     PILS_TUILLE                     = 3490,
     AKVANS_PENNON                   = 3491,
     KAGGENS_CUTICLE                 = 3492,
@@ -1450,7 +1448,6 @@ xi.items =
     FORGOTTEN_TOUCH                 = 3495,
     FORGOTTEN_JOURNEY               = 3496,
     FORGOTTEN_STEP                  = 3497,
->>>>>>> 52ff7723e6 ([lua] Add additional magian items to enum)
     CLUMP_OF_RIFTDROSS              = 3498,
     PINCH_OF_RIFTCINDER             = 3499,
     PLATE_OF_HEAVY_METAL            = 3509,
@@ -5128,8 +5125,6 @@ xi.items =
     AIZENKUNITOSHI                  = 19290,
     GLEAMING_SPEAR                  = 19309,
     GUISARME                        = 19310,
-<<<<<<< HEAD
-=======
     PUGILISTS                       = 19327,
     SIMIAN_FISTS                    = 19328,
     MANTIS                          = 19329,
@@ -5221,7 +5216,6 @@ xi.items =
     KENKONKEN_90                    = 19629,
     TERPSICHORE_90                  = 19630,
     TUPSIMATI_90                    = 19631,
->>>>>>> 52ff7723e6 ([lua] Add additional magian items to enum)
     MOGRATUITY                      = 19776,
     HERJAS_FORK                     = 19799,
     GARGOUILLE_ARROW                = 19800,
