@@ -37,7 +37,7 @@ quest.sections =
 
                 onTrade = function(player, npc, trade)
                     if npcUtil.tradeHasExactly(trade, { { xi.items.CHUNK_OF_ZINC_ORE, 4 } }) then
-                        return quest:progressEvent(2)
+                        return quest:progressEvent(91)
                     end
                 end,
 
@@ -45,7 +45,7 @@ quest.sections =
 
             onEventFinish =
             {
-                [2] = function(player, csid, option, npc)
+                [90] = function(player, csid, option, npc)
                     -- We can complete the quest without accepting it, but quest will NOT get re-accepted after completed.
                     if player:getQuestStatus(xi.quest.log_id.BASTOK, xi.quest.id.bastok.SHADY_BUSINESS) == QUEST_AVAILABLE then
                         quest:begin(player)
