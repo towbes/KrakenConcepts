@@ -368,13 +368,9 @@ local function getSingleHitDamage(attacker, target, dmg, wsParams, calcParams)
 
     if
         (missChance <= calcParams.hitRate or -- See if we hit the target
-<<<<<<< HEAD
         calcParams.guaranteedHit or
         calcParams.melee and
         math.random() < attacker:getMod(xi.mod.ZANSHIN) / 100) and
-=======
-        calcParams.guaranteedHit) and
->>>>>>> c3389341f7 ([lua] Fix weaponskills effectively having 100% accuracy)
         not calcParams.mustMiss
     then
         if not shadowAbsorb(target) then
