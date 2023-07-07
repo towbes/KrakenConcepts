@@ -31,7 +31,7 @@ local checkWorldFirstServerVar = function(player, varName, worldMessage)
     local worldFirst = string.format("WF_%s", varName)
     local worldTime  = string.format("WT_%s", varName)
 
-    if GetVolatileServerVariable(worldFirst) == 0 then -- Record hasn't been set yet
+    if GetVolatileServerVariable(worldFirst) == 0 and player:getGMLevel() == 0 then  -- Record hasn't been set yet
         local decoratedMessage = string.format("%s %s %s", openingDecoration, worldMessage, closingDecoration)
         player:PrintToArea(decoratedMessage, xi.msg.channel.SYSTEM_3, 0, "") -- Sends announcement via ZMQ to all processes and zones
 
