@@ -147,6 +147,7 @@ xi.player.charCreate = function(player)
 
     if xi.settings.main.NEW_CHARACTER_CUTSCENE == 0 then -- Do things that would normally be done in opening cutscene.
         player:addItem(xi.items.ADVENTURERS_COUPON)
+        player:additem(15198)
         player:setHomePoint()
     end
 
