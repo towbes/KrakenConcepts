@@ -71,14 +71,14 @@ xi.promyvion.initZone = function(zone)
     end
 end
 
-xi.promyvion.zoneGameDay = function(zone)
+--[[xi.promyvion.zoneGameDay = function(zone)
     local ID = zones[zone:getID()]
 
     -- randomize floor exits
     for i = 1, maxFloor(ID) do
         randomizeFloorExit(ID, i)
     end
-end
+end]]
 
 xi.promyvion.strayOnSpawn = function(mob)
     local mother = GetMobByID(findMother(mob))
@@ -137,10 +137,7 @@ xi.promyvion.receptacleIdle = function(mob)
 
         for i = mobId + 1, mobId + numStrays do
             local stray = GetMobByID(i)
-            if
-            stray ~= nil and
-            not stray:isSpawned()
-        then
+            if stray:isSpawned() then
                 count = count + 1
             end
         end
@@ -149,7 +146,10 @@ xi.promyvion.receptacleIdle = function(mob)
             mob:setLocalVar("[promy]nextStray", os.time() + 300)
             for i = mobId + 1, mobId + numStrays do
                 local stray = GetMobByID(i)
-                if not stray:isSpawned() then
+                if
+                    stray ~= nil and
+                    not stray:isSpawned()
+                then
                     count = count + 1
                     SpawnMob(stray:getID()):setPos(mob:getXPos(), mob:getYPos(), mob:getZPos())
                     break
@@ -174,12 +174,6 @@ xi.promyvion.receptacleOnDeath = function(mob, optParams)
         local alive             = receptaclesAliveOnFloor(mob)
 
         -- Memory receptacles do not respawn until all on current floor are killed
-        DisallowRespawn(mob:getID(), true)
-        receptDead = receptDead + 1
-        zone:setLocalVar(string.format("receptDead[%i][%i]", mob:getZone():getID(), floor), receptDead)
-        mob:setAnimationSub(0)
-
-        -- open floor exit portal either random choice or all receptacles dead
         DisallowRespawn(mobId, true)
         mob:setAnimationSub(2)
 
