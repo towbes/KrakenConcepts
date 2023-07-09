@@ -958,3 +958,25 @@ xi.mod =
     -- 570 - 825 used by WS DMG mods these are not spares.
     -- For Next ID, see modifier.h
 }
+
+
+xi.immunity =
+{
+    NONE        = 0,
+    SLEEP       = 1,
+    GRAVITY     = 2,
+    BIND        = 4,
+    STUN        = 8,
+    SILENCE     = 16,
+    PARALYZE    = 32,
+    BLIND       = 64,
+    SLOW        = 128,
+    POISON      = 256,
+    ELEGY       = 512,
+    REQUIEM     = 1024,
+    LIGHT_SLEEP = 2048,
+    DARK_SLEEP  = 4096,
+    ASPIR       = 8192,
+    TERROR      = 16384,
+    DISPEL      = 32768,
+}
