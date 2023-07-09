@@ -36,3 +36,14 @@ xi.effectFlag =
     HIDE_TIMER      = 0x08000000,
     ON_ZONE_PATHOS  = 0x10000000,
 }
+
+
+function removeSleepEffects(target)
+    target:delStatusEffect(xi.effect.SLEEP_I)
+    target:delStatusEffect(xi.effect.SLEEP_II)
+    target:delStatusEffect(xi.effect.LULLABY)
+end
+
+function hasSleepEffects(target)
+    return target:hasStatusEffect(xi.effect.SLEEP_I) or target:hasStatusEffect(xi.effect.SLEEP_II) or target:hasStatusEffect(xi.effect.LULLABY)
+end
