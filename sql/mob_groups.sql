@@ -9215,7 +9215,7 @@ INSERT INTO `mob_groups` VALUES (5,3122,134,'Petro_Pukis',0,128,0,10000,0,82,82,
 INSERT INTO `mob_groups` VALUES (6,1774,134,'Goublefaupe',0,128,1211,0,0,81,83,0);
 INSERT INTO `mob_groups` VALUES (7,3289,134,'Quiebitiel',0,128,2066,0,0,81,83,0);
 INSERT INTO `mob_groups` VALUES (8,2660,134,'Mildaunegeux',0,128,1672,0,0,81,83,0);
-INSERT INTO `mob_groups` VALUES (9,4219,134,'Velosareon',0,128,2574,0,0,81,83,0);
+INSERT INTO `mob_groups` VALUES (9,4219,134,'Velosareon',0,128,2574,0,1500,81,83,0);
 INSERT INTO `mob_groups` VALUES (10,892,134,'Dagourmarche',0,128,559,0,0,81,83,0);
 INSERT INTO `mob_groups` VALUES (11,893,134,'Dagourmarches_Wyvern',0,128,0,0,0,77,79,0);
 INSERT INTO `mob_groups` VALUES (12,1179,134,'Dagourmarches_Avatar',0,128,0,0,0,77,79,0);

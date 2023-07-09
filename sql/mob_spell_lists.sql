@@ -5799,6 +5799,47 @@ INSERT INTO `mob_spell_lists` VALUES ('Ixzdei_BLM_start',5074,159,2,255);  -- st
 INSERT INTO `mob_spell_lists` VALUES ('Ixzdei_BLM_start',5074,164,42,255); -- thunder (42~255)
 INSERT INTO `mob_spell_lists` VALUES ('Ixzdei_BLM_start',5074,169,10,255); -- water (10~255)
 
+-- Goublefaupe
+INSERT INTO `mob_spell_lists` VALUES ('Goublefaupe',5075,361,1,255);   -- Blindga (1~255)
+INSERT INTO `mob_spell_lists` VALUES ('Goublefaupe',5075,357,1,255);   -- Slowga (1~255)
+INSERT INTO `mob_spell_lists` VALUES ('Goublefaupe',5075,356,1,255);   -- Paralyga (1~255)
+INSERT INTO `mob_spell_lists` VALUES ('Goublefaupe',5075,362,1,255);   -- Bindga (1~255)
+INSERT INTO `mob_spell_lists` VALUES ('Goublefaupe',5075,359,1,255);   -- Blindga (1~255)
+INSERT INTO `mob_spell_lists` VALUES ('Goublefaupe',5075,273,1,255);   -- Sleepga (1~255)
+INSERT INTO `mob_spell_lists` VALUES ('Goublefaupe',5075,106,1,255);   -- Phalanx (1~255)
+INSERT INTO `mob_spell_lists` VALUES ('Goublefaupe',5075,250,1,255);   -- Ice Spikes (1~255)
+INSERT INTO `mob_spell_lists` VALUES ('Goublefaupe',5075,161,1,255);   -- Stone III (1~255)
+INSERT INTO `mob_spell_lists` VALUES ('Goublefaupe',5075,171,1,255);   -- Water III (1~255)
+INSERT INTO `mob_spell_lists` VALUES ('Goublefaupe',5075,156,1,255);   -- Aero III (1~255)
+INSERT INTO `mob_spell_lists` VALUES ('Goublefaupe',5075,146,1,255);   -- Fire III (1~255)
+INSERT INTO `mob_spell_lists` VALUES ('Goublefaupe',5075,151,1,255);   -- Blizzard III (1~255)
+INSERT INTO `mob_spell_lists` VALUES ('Goublefaupe',5075,166,1,255);   -- Stone III (1~255)
+
+-- Quiebitiel
+INSERT INTO `mob_spell_lists` VALUES ('Quiebitiel',5076,5,1,255);     -- Cure V (1~255)
+INSERT INTO `mob_spell_lists` VALUES ('Quiebitiel',5076,129,1,255);   -- Protectra V (1~255)
+INSERT INTO `mob_spell_lists` VALUES ('Quiebitiel',5076,134,1,255);   -- Shellra V (1~255)
+INSERT INTO `mob_spell_lists` VALUES ('Quiebitiel',5076,53,1,255);    -- Blink (1~255)
+INSERT INTO `mob_spell_lists` VALUES ('Quiebitiel',5076,206,1,255);   -- Freeze (1~255)
+INSERT INTO `mob_spell_lists` VALUES ('Quiebitiel',5076,214,1,255);   -- Flood (1~255)
+INSERT INTO `mob_spell_lists` VALUES ('Quiebitiel',5076,210,1,255);   -- Quake (1~255)
+INSERT INTO `mob_spell_lists` VALUES ('Quiebitiel',5076,208,1,255);   -- Tornado (1~255)
+INSERT INTO `mob_spell_lists` VALUES ('Quiebitiel',5076,212,1,255);   -- Burst (1~255)
+INSERT INTO `mob_spell_lists` VALUES ('Quiebitiel',5076,204,1,255);   -- Flare (1~255)
+INSERT INTO `mob_spell_lists` VALUES ('Quiebitiel',5076,397,1,255);   -- Valor Minuet IV (1~255)
+INSERT INTO `mob_spell_lists` VALUES ('Quiebitiel',5076,420,1,255);   -- Victory March (1~255)
+INSERT INTO `mob_spell_lists` VALUES ('Quiebitiel',5076,382,1,255);   -- Army Paeon V (1~255)
+INSERT INTO `mob_spell_lists` VALUES ('Quiebitiel',5076,462,1,255);   -- Magic Finale (1~255)
+INSERT INTO `mob_spell_lists` VALUES ('Quiebitiel',5076,463,1,255);   -- Foe Lullaby (1~255)
+INSERT INTO `mob_spell_lists` VALUES ('Quiebitiel',5076,466,1,255);   -- Maidens Virelai (1~255)
+
+
+
+
+
+
+
+
 /*!40000 ALTER TABLE `mob_spell_lists` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;

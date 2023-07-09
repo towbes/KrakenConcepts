@@ -1,0 +1,34 @@
+-----------------------------------
+-- Area: Dynamis - Beaucedine
+--  Mob: Goublefaupe
+-----------------------------------
+mixins =
+{
+    require("scripts/mixins/dynamis_beastmen"),
+    require("scripts/mixins/job_special")
+}
+-----------------------------------
+local entity = {}
+
+entity.onMobInitialize = function(mob)
+    mob:setMobMod(xi.mobMod.HP_SCALE, 300)
+    mob:setMobMod(xi.mobMod.SPELL_LIST, 5075)
+    mob:setMobMod(xi.mobMod.CAN_SHIELD_BLOCK, 1)
+end
+
+entity.onMobSpawn = function(mob)
+    xi.mix.jobSpecial.config(mob, {
+        between = 60,
+        specials =
+        {
+            { id = xi.jsa.CHAINSPELL, cooldown = 0, hpp = 95 },
+            { id = xi.jsa.INVINCIBLE, cooldown = 0, hpp = 95 },
+            { id = xi.jsa.MIGHTY_STRIKES, cooldown = 0, hpp = 95 },
+        },
+    })
+end
+
+entity.onMobDeath = function(mob, player, optParams)
+end
+
+return entity
