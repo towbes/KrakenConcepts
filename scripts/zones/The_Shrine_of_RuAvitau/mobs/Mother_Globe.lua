@@ -108,7 +108,7 @@ local spawnSlaveGlobe = function(mg, slaveGlobe, spawnPos)
         end)
     else
         mg:entityAnimationPacket("casm")
-        local pPet = slaveGlobe:getID() - 1
+        local pPet = GetMobByID(slaveGlobe:getID() - 1)
         mg:timer(3000, function(mob)
             if mob:isAlive() then
                 mob:entityAnimationPacket("shsm")
