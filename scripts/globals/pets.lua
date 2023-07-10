@@ -83,6 +83,8 @@ xi.pet.id =
     PANZER_GALAHAD        = 45,
     CHOPSUEY_CHUCKY       = 46,
     AMIGO_SABOTENDER      = 47,
+    TURBID_TOLOI          = 68,
+
 
     --  Dragoon
     WYVERN                = 48,
