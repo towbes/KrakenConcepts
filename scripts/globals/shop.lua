@@ -104,11 +104,17 @@ xi.shop =
     outpost = function(player)
         local stock =
         {
-            4148,  316, -- Antidote
-            4151,  800, -- Echo Drops
-            4128, 4832, -- Ether
-            4150, 2595, -- Eye Drops
-            4112,  910, -- Potion
+            4148, 316,   -- Antidote
+            4151, 800,   -- Echo Drops
+            4128, 4832,  -- Ether
+            4150, 2595,  -- Eye Drops
+            4112, 910,   -- Potion
+            4164, 6100,  -- Prism Powder
+            4165, 5232,  -- Silent Oil
+            5867, 17400, -- Toolbag (Ino)
+            5868, 23450, -- Toolbag (Shika)
+            5869, 24100, -- Toolbag (Cho)
+            5870, 13250, -- Trump Card Case
         }
         xi.shop.general(player, stock)
     end,

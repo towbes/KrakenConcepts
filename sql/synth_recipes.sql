@@ -4767,9 +4767,10 @@ INSERT INTO `synth_recipes` VALUES (75530,0,0,0,0,0,0,0,0,10,0,4099,4241,2773,27
 INSERT INTO `synth_recipes` VALUES (75531,0,0,0,0,0,0,0,0,10,0,4099,4241,2773,2773,2774,2774,2775,4161,0,0,2781,2781,2781,2781,1,1,1,1,'Enfeeb. Kit Sleep');
 INSERT INTO `synth_recipes` VALUES (75532,1,0,0,0,0,0,34,0,0,0,4100,4242,12994,0,0,0,0,0,0,0,818,818,848,848,2,3,1,2,'Shoes (desynth)');
 INSERT INTO `synth_recipes` VALUES (75533,1,0,0,0,0,25,0,0,0,0,4100,4242,12722,0,0,0,0,0,0,0,834,819,819,819,2,5,6,7,'Bracers (desynth)'); -- FFXIclopedia
-
 INSERT INTO `synth_recipes` VALUES (76000,1,0,0,0,0,36,0,0,0,0,4100,4242,12842,0,0,0,0,0,0,0,819,819,819,819,3,6,6,6,'Soil_Sitabaki_Desynth');
-INSERT INTO `synth_recipes` VALUES (76001,0,0,0,9,0,0,0,0,0,0,4100,4242,12432,0,0,0,0,0,0,0,649,850,850,850,1,1,1,1,'Faceguard_Desynth');-- Faceguard desynth
+INSERT INTO `synth_recipes` VALUES (76001, 1, 0, 0, 9, 0, 0, 0, 0, 0, 0, 4100, 4242, 12432, 0, 0, 0, 0, 0, 0, 0, 649, 850, 850, 850, 1, 1, 1, 1, 'Faceguard_Desynth');
+INSERT INTO `synth_recipes` VALUES (76002, 1, 0, 0, 81, 0, 0, 0, 0, 0, 0, 4100, 4242, 13079, 0, 0, 0, 0, 0, 0, 0, 851, 851, 654, 654, 1, 1, 1, 1, 'Darksteel Gorget (Desynth)');
+
 
 
 -- -----------
