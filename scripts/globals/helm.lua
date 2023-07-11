@@ -1032,10 +1032,7 @@ local helmInfo =
                     {  100,  738 }, -- Platium Ore 70
 
                 },
-                eleChance = 5, --Default: 15
-				eleWeak1 = 5, -- lightning
-				eleWeak2 = 2, -- water
-				eleStrong = 0, -- fire
+
 
 
                 points =
