@@ -4037,6 +4037,7 @@ xi.items =
     WALKURE_MASK                    = 15185,
     TRUMP_CROWN                     = 15186,
     MAATS_CAP                       = 15194,
+    SPROUT_BERET                    = 15198, 
     YAGUDO_HEADGEAR                 = 15202,
     TSOO_HAJAS_HEADGEAR             = 15216,
     ENTRANCING_RIBBON               = 15218,
