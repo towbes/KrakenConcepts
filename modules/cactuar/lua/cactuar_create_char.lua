@@ -1,14 +1,14 @@
 -----------------------------------
--- Set if you want new players to get a linkshell
+-- Cactuar's custom changes during character creation.
 -----------------------------------
 require("modules/module_utils")
 require("scripts/globals/player")
 -----------------------------------
-local m = Module:new("new_player_linkshell")
+local m = Module:new("cactuar_create_char")
 
 m:addOverride("xi.player.charCreate", function(player)
-    local lsName = "Cactuar" -- Name of linkshell
-    player:addLinkpearl(lsName, true)
+    player:addLinkpearl("Cactuar", true)
+    player:addItem(xi.items.SPROUT_BERET)
     super(player)
 end)
 
