@@ -30,15 +30,15 @@ spellObject.onSpellCast = function(caster, target, spell)
     params.scattr = SC_LIQUEFACTION
     params.scattr2 = SC_IMPACTION
     params.numhits = 6
-    params.multiplier = 0.625
-    params.tp150 = 0.625
-    params.tp300 = 0.625
-    params.azuretp = 0.625
-    params.duppercap = 21
+    params.multiplier = 1.75 -- Default: .625
+    params.tp150 = 1.75 -- Default: .625
+    params.tp300 = 1.75 -- Default: .625
+    params.azuretp = 1.75 -- Default: .625
+    params.duppercap = 50 -- Default: 21
     -- D seems low for its level, but the spell never did good damage, so a low D is a good way of keeping overall damage down.
     -- More discussion on https://ffxiclopedia.fandom.com/wiki/Talk:Asuran_Claws
-    params.str_wsc = 0.1
-    params.dex_wsc = 0.1
+    params.str_wsc = 0.2 -- Default: 0.1
+    params.dex_wsc = 0.2 -- Default: 0.1
     params.vit_wsc = 0.0
     params.agi_wsc = 0.0
     params.int_wsc = 0.0

@@ -30,10 +30,10 @@ spellObject.onSpellCast = function(caster, target, spell)
     params.scattr = SC_LIQUEFACTION
 
     params.numhits = 1
-    params.multiplier = 2.25
-    params.tp150 = 2.25
-    params.tp300 = 2.25
-    params.azuretp = 2.25
+    params.multiplier = 2.5 -- Default: 2.25
+    params.tp150 = 2.5
+    params.tp300 = 2.5
+    params.azuretp = 2.5
     params.duppercap = 37
     params.str_wsc = 0.2
     params.dex_wsc = 0.0
