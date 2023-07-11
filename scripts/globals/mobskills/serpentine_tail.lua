@@ -11,7 +11,7 @@ require("scripts/globals/mobskills")
 local mobskillObject = {}
 
 mobskillObject.onMobSkillCheck = function(target, mob, skill)
-    if mob:getFamily() == 316 then
+    if mob:getFamily() == 316 and target:isBehind(mob, 96) then
         local mobSkin = mob:getModelId()
 
         if mobSkin == 1796 then
