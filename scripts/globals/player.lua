@@ -68,14 +68,6 @@ xi.player.charCreate = function(player)
         end
     end
 
-    player:setLocalVar("WardrobeInitialLock", 1) -- Wardrobes are locked for newly created chars, skip the zone in check further down.
-    -- Lock Wardrobes 5-8 for new players.
-    player:changeContainerSize(xi.inv.WARDROBE5, -80)
-    player:changeContainerSize(xi.inv.WARDROBE6, -80)
-    player:changeContainerSize(xi.inv.WARDROBE7, -80)
-    player:changeContainerSize(xi.inv.WARDROBE8, -80)
-
-
     -- add nation-specific map
     player:addKeyItem(nationInfo.map)
 
