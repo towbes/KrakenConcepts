@@ -240,19 +240,6 @@ xi.player.onGameIn = function(player, firstLogin, zoning)
         player:setGMHidden(true)
     end
 
-    --If the returning players zonein, lock their 5-8 Wardrobes so they can buy into them. 1 = Initial Lock (New players) 0 = Returning Players 2 = Returning Players(Lock Complete)
-    if not player:getCharVar("WardrobeInitialLock") == 1 then
-        player:setCharVar("WardrobeInitialLock", 0)
-    end
-    
-    if player:getCharVar("WardrobeInitialLock") == 0 then
-    player:changeContainerSize(xi.inv.WARDROBE5, -80)
-    player:changeContainerSize(xi.inv.WARDROBE6, -80)
-    player:changeContainerSize(xi.inv.WARDROBE7, -80)
-    player:changeContainerSize(xi.inv.WARDROBE8, -80)
-    player:setCharVar("WardrobeInitialLock", 1) -- Lock is complete, skip this for players logging in from now on.
-    end
-
     -- remember time player zoned in (e.g., to support zone-in delays)
     player:setLocalVar("ZoneInTime", os.time())
 
