@@ -17,18 +17,18 @@ local optionToItem =
     {
         [ 0] = { cost =    10, id =  4181 }, -- Scroll of Instant Warp
         [ 1] = { cost =    10, id =  4182 }, -- Scroll of Instant Reraise
-        [ 2] = { cost =  7500, id =  4064 }, -- Copy of Rem's Tale, chapter 1
-        [ 3] = { cost =  7500, id =  4065 }, -- Copy of Rem's Tale, chapter 2
-        [ 4] = { cost =  7500, id =  4066 }, -- Copy of Rem's Tale, chapter 3
-        [ 5] = { cost =  7500, id =  4067 }, -- Copy of Rem's Tale, chapter 4
-        [ 6] = { cost =  7500, id =  4068 }, -- Copy of Rem's Tale, chapter 5
-        [ 7] = { cost = 15000, id =  4069 }, -- Copy of Rem's Tale, chapter 6
-        [ 8] = { cost = 15000, id =  4070 }, -- Copy of Rem's Tale, chapter 7
-        [ 9] = { cost = 15000, id =  4071 }, -- Copy of Rem's Tale, chapter 8
-        [10] = { cost = 15000, id =  4072 }, -- Copy of Rem's Tale, chapter 9
-        [11] = { cost = 15000, id =  4073 }, -- Copy of Rem's Tale, chapter 10
-        [12] = { cost =  5000, id = 28546 }, -- Capacity Ring
-        [13] = { cost = 10000, id =  9009 }, -- Etched Memory
+        -- [ 2] = { cost =  7500, id =  4064 }, -- Copy of Rem's Tale, chapter 1
+        -- [ 3] = { cost =  7500, id =  4065 }, -- Copy of Rem's Tale, chapter 2
+        -- [ 4] = { cost =  7500, id =  4066 }, -- Copy of Rem's Tale, chapter 3
+        -- [ 5] = { cost =  7500, id =  4067 }, -- Copy of Rem's Tale, chapter 4
+        -- [ 6] = { cost =  7500, id =  4068 }, -- Copy of Rem's Tale, chapter 5
+        -- [ 7] = { cost = 15000, id =  4069 }, -- Copy of Rem's Tale, chapter 6
+        -- [ 8] = { cost = 15000, id =  4070 }, -- Copy of Rem's Tale, chapter 7
+        -- [ 9] = { cost = 15000, id =  4071 }, -- Copy of Rem's Tale, chapter 8
+        -- [10] = { cost = 15000, id =  4072 }, -- Copy of Rem's Tale, chapter 9
+        -- [11] = { cost = 15000, id =  4073 }, -- Copy of Rem's Tale, chapter 10
+        -- [12] = { cost =  5000, id = 28546 }, -- Capacity Ring
+        -- [13] = { cost = 10000, id =  9009 }, -- Etched Memory
     },
 
     [2] = -- Skill-increasing tomes
@@ -64,8 +64,8 @@ local optionToItem =
         [28] = { cost = 200, id = 6175 }, -- Yomi's diagram
         [29] = { cost = 200, id = 6176 }, -- Astral Homeland
         [30] = { cost = 200, id = 6177 }, -- Life-form Study
-        [31] = { cost = 200, id = 6178 }, -- Hrohj's record
-        [32] = { cost = 200, id = 6179 }, -- The Bell Tolls
+        -- [31] = { cost = 200, id = 6178 }, -- Hrohj's record
+        -- [32] = { cost = 200, id = 6179 }, -- The Bell Tolls
     },
 
     [3] = -- Equipment (Lv.1 - 9)
@@ -585,21 +585,21 @@ local optionToItem =
         [ 1] = { amount = 1000, name = "conquest_points"        },
         [ 2] = { amount = 1000, name = "imperial_standing"      },
         [ 3] = { amount = 1000, name = "allied_notes"           },
-        [ 4] = { amount = 1000, name = "bayld"                  },
+        -- [ 4] = { amount = 1000, name = "bayld"                  },
         [ 5] = { amount = 1000, name = "valor_point"            },
         [ 6] = { amount = 1000, name = "leujaoam_assault_point" },
         [ 7] = { amount = 1000, name = "mamool_assault_point"   },
         [ 8] = { amount = 1000, name = "lebros_assault_point"   },
         [ 9] = { amount = 1000, name = "periqia_assault_point"  },
         [10] = { amount = 1000, name = "ilrusi_assault_point"   },
-        [11] = { amount = 1000, name = "cruor"                  },
-        [12] = { amount = 1000, name = "kinetic_unit"           },
-        [13] = { amount = 1000, name = "obsidian_fragment"      },
-        [14] = { amount = 1000, name = "mweya_plasm"            },
-        [15] = { amount = 1000, name = "ballista_point"         },
-        [16] = { amount = 1000, name = "unity_accolades"        },
-        [17] = { amount = 1000, name = "escha_silt"             }, -- Not Implemented
-        [18] = { amount = 1000, name = "resistance_credit"      },
+        -- [11] = { amount = 1000, name = "cruor"                  },
+        -- [12] = { amount = 1000, name = "kinetic_unit"           },
+        -- [13] = { amount = 1000, name = "obsidian_fragment"      },
+        -- [14] = { amount = 1000, name = "mweya_plasm"            },
+        -- [15] = { amount = 1000, name = "ballista_point"         },
+        -- [16] = { amount = 1000, name = "unity_accolades"        },
+        -- [17] = { amount = 1000, name = "escha_silt"             }, -- Not Implemented
+        -- [18] = { amount = 1000, name = "resistance_credit"      },
     },
 }
 
