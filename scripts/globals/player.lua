@@ -68,14 +68,6 @@ xi.player.charCreate = function(player)
         end
     end
 
-    player:setLocalVar("WardrobeInitialLock", 1) -- Wardrobes are locked for newly created chars, skip the zone in check further down.
-    -- Lock Wardrobes 5-8 for new players.
-    player:changeContainerSize(xi.inv.WARDROBE5, -80)
-    player:changeContainerSize(xi.inv.WARDROBE6, -80)
-    player:changeContainerSize(xi.inv.WARDROBE7, -80)
-    player:changeContainerSize(xi.inv.WARDROBE8, -80)
-
-
     -- add nation-specific map
     player:addKeyItem(nationInfo.map)
 
@@ -238,19 +230,6 @@ xi.player.onGameIn = function(player, firstLogin, zoning)
     -- !hide
     if player:getCharVar("GMHidden") == 1 then
         player:setGMHidden(true)
-    end
-
-    --If the returning players zonein, lock their 5-8 Wardrobes so they can buy into them. 1 = Initial Lock (New players) 0 = Returning Players 2 = Returning Players(Lock Complete)
-    if not player:getCharVar("WardrobeInitialLock") == 1 then
-        player:setCharVar("WardrobeInitialLock", 0)
-    end
-    
-    if player:getCharVar("WardrobeInitialLock") == 0 then
-    player:changeContainerSize(xi.inv.WARDROBE5, -80)
-    player:changeContainerSize(xi.inv.WARDROBE6, -80)
-    player:changeContainerSize(xi.inv.WARDROBE7, -80)
-    player:changeContainerSize(xi.inv.WARDROBE8, -80)
-    player:setCharVar("WardrobeInitialLock", 1) -- Lock is complete, skip this for players logging in from now on.
     end
 
     -- remember time player zoned in (e.g., to support zone-in delays)
