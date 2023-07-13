@@ -3001,7 +3001,7 @@ namespace fishingutils
                             "ff.ranking, "          // 22
                             "ff.contest "
                             "FROM fishing_fish ff "
-                            "WHERE ff.disabled = 0 and ff.ranking < 99";
+                            "WHERE ff.disabled = 0 and ff.ranking <= 99";
 
         int32 ret = sql->Query(Query);
 
