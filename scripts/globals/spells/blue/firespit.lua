@@ -27,14 +27,14 @@ spellObject.onSpellCast = function(caster, target, spell)
     params.attackType = xi.attackType.MAGICAL
     params.damageType = xi.damageType.FIRE
     params.attribute = xi.mod.INT
-    params.multiplier = 3.5  -- Default: 3.0
-    params.tMultiplier = 1.5
+    params.multiplier = 6  -- Default: 3.0
+    params.tMultiplier = 2 -- 1.5
     params.duppercap = 69
     params.str_wsc = 0.0
     params.dex_wsc = 0.0
     params.vit_wsc = 0.0
     params.agi_wsc = 0.0
-    params.int_wsc = 0.2
+    params.int_wsc = 0.5
     params.mnd_wsc = 0.2
     params.chr_wsc = 0.0
 

@@ -27,7 +27,7 @@ spellObject.onSpellCast = function(caster, target, spell)
     params.attackType = xi.attackType.MAGICAL
     params.damageType = xi.damageType.FIRE
     local playerHP = caster:getLocalVar("selfdestructHp")
-    local damage = playerHP - 1
+    local damage = (playerHP * 1.5) - 1
 
     if damage > 0 then
         damage = xi.spells.blue.applySpellDamage(caster, target, spell, damage, params)

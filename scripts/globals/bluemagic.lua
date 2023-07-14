@@ -198,9 +198,11 @@ xi.spells.blue.usePhysicalSpell = function(caster, target, spell, params)
     if caster:getStatusEffect(xi.effect.AZURE_LORE) then
         multiplier = params.azuretp
     end
-
+    local tp = caster:getTP()
+    tp = utils.clamp(tp, 0, 3000)
+    baseMultiplier = calculatefTP(tp, params.multiplier, params.multiplier, params.multiplier)
     -- Final D
-    local finalD = math.floor(initialD + fStr + wsc)
+    local finalD = math.floor(initialD + fStr + wsc) * baseMultiplier
 
     ----------------------------------------------
     -- Get the possible pDIF range and hit rate --
