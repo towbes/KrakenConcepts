@@ -82,7 +82,7 @@ local function checkForJobBonus(caster, job)
     if
         job ~= xi.job.NONE and
         (
-            caster:hasPartyJob(job) or
+            caster:hasPartyJob(job) or caster:hasJob(job) or
             math.random(0, 99) < caster:getMod(xi.mod.JOB_BONUS_CHANCE)
         )
     then
