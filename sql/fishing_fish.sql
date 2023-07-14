@@ -62,7 +62,7 @@ CREATE TABLE `fishing_fish` (
 
 LOCK TABLES `fishing_fish` WRITE;
 /*!40000 ALTER TABLE `fishing_fish` DISABLE KEYS */;
-INSERT INTO `fishing_fish` VALUES (5476,'Abaia',150,37,7,13,269,317,34,1,0,255,255,0,0,0,0,0,1,0,0,1,500,0,'',0,0,0,1);
+INSERT INTO `fishing_fish` VALUES (5476,'Abaia',150,37,7,13,269,317,34,1,0,255,255,0,0,0,0,0,1,0,0,1,500,0,'',0,0,0,0);
 INSERT INTO `fishing_fish` VALUES (5455,'Ahtapot',90,31,8,7,55,145,25,1,0,255,255,0,0,3,1,4,0,0,0,1,500,0,'',0,0,0,0);
 INSERT INTO `fishing_fish` VALUES (5461,'Alabaligi',37,16,5,11,1,1,15,0,0,255,255,0,0,3,1,10,0,0,0,1,1000,0,'',0,0,0,0);
 INSERT INTO `fishing_fish` VALUES (4316,'Armored Pisces',108,22,9,12,50,125,19,1,0,255,255,0,0,3,1,0,0,0,0,1,350,0,'',0,0,1,0);
