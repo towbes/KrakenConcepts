@@ -171,7 +171,7 @@ xi.spells.blue.usePhysicalSpell = function(caster, target, spell, params)
     end
 
     -- Multiplier, bonus WSC
-    local multiplier = 1
+    local multiplier = params.multiplier
     local bonusWSC = 0
 
     -- BLU AF3 bonus (triples the base WSC when it procs)
@@ -200,7 +200,7 @@ xi.spells.blue.usePhysicalSpell = function(caster, target, spell, params)
     end
 
     -- Final D
-    local finalD = math.floor(initialD + fStr + wsc)
+    local finalD = math.floor((initialD + fStr + multiplier) + wsc)
 
     ----------------------------------------------
     -- Get the possible pDIF range and hit rate --
