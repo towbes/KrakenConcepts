@@ -184,7 +184,7 @@ xi.spells.blue.usePhysicalSpell = function(caster, target, spell, params)
         local tp = caster:getTP() + caster:getMerit(xi.merit.ENCHAINMENT) -- Total TP available
         tp = utils.clamp(tp, 0, 3000)
         multiplier = calculatefTP(tp, params.multiplier, params.tp150, params.tp300)
-        bonusWSC = bonusWSC + 0.33 -- Chain Affinity doubles base WSC
+        bonusWSC = bonusWSC + 0.15 -- Chain Affinity doubles base WSC Default: 1
     end
 
     -- WSC
