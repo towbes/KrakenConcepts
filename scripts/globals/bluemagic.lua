@@ -171,7 +171,7 @@ xi.spells.blue.usePhysicalSpell = function(caster, target, spell, params)
     end
 
     -- Multiplier, bonus WSC
-    local multiplier = 1
+    local multiplier = params.multiplier
     local bonusWSC = 0
 
     -- BLU AF3 bonus (triples the base WSC when it procs)
@@ -184,7 +184,7 @@ xi.spells.blue.usePhysicalSpell = function(caster, target, spell, params)
         local tp = caster:getTP() + caster:getMerit(xi.merit.ENCHAINMENT) -- Total TP available
         tp = utils.clamp(tp, 0, 3000)
         multiplier = calculatefTP(tp, params.multiplier, params.tp150, params.tp300)
-        bonusWSC = bonusWSC + 0.15 -- Chain Affinity doubles base WSC Default: 1
+        bonusWSC = bonusWSC + 1 -- Chain Affinity doubles base WSC
     end
 
     -- WSC
@@ -198,11 +198,9 @@ xi.spells.blue.usePhysicalSpell = function(caster, target, spell, params)
     if caster:getStatusEffect(xi.effect.AZURE_LORE) then
         multiplier = params.azuretp
     end
-    local tp = caster:getTP()
-    tp = utils.clamp(tp, 0, 3000)
-    baseMultiplier = calculatefTP(tp, params.multiplier, params.multiplier, params.multiplier)
+
     -- Final D
-    local finalD = math.floor(initialD + fStr + wsc) * baseMultiplier
+    local finalD = math.floor((initialD + fStr + multiplier) + wsc)
 
     ----------------------------------------------
     -- Get the possible pDIF range and hit rate --
