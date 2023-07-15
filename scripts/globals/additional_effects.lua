@@ -90,6 +90,12 @@ xi.additionalEffect.statusAttack = function(addStatus, defender)
     return 0
 end
 
+xi.additionalEffect.calcDamagePhys = function(attacker, element, defender, damage, addType, item)
+    local params = {}
+
+    return damage
+end
+
 xi.additionalEffect.calcDamage = function(attacker, element, defender, damage, addType, item)
     local params = {}
 
@@ -150,6 +156,8 @@ xi.additionalEffect.attack = function(attacker, defender, baseAttackDamage, item
         NIGHTTIME       = 16,
         GOD_WIND        = 17,
         VS_ECOSYSTEM    = 18,
+        DAMAGE_HP_PERC  = 19,
+
     }
 
     -- If player is level synced below the level of the item, do no proc
@@ -186,6 +194,24 @@ xi.additionalEffect.attack = function(attacker, defender, baseAttackDamage, item
         end
 
         msgParam = damage
+
+    --------------------------------------
+    -- Additional Effect Damage HP % (Excalibur)
+    --------------------------------------
+
+    elseif addType == procType.DAMAGE_HP_PERC then
+        damage = math.floor(attacker.getHP(attacker) / 4)
+        local physicalResist = defender:getMod(xi.mod.SLASH_SDT) / 1000
+        damage = damage * physicalResist
+        -- damage = xi.additionalEffect.calcDamagePhys(attacker, element, defender, damage)
+        msgID = xi.msg.basic.ADD_EFFECT_DMG
+
+        if damage < 0 then
+            msgID = xi.msg.basic.ADD_EFFECT_HEAL
+        end
+
+        msgParam = damage
+
         --------------------------------------
         -- Inflicts negative effects vs target
         --------------------------------------
