@@ -200,9 +200,15 @@ xi.additionalEffect.attack = function(attacker, defender, baseAttackDamage, item
     --------------------------------------
 
     elseif addType == procType.DAMAGE_HP_PERC then
+        local damageType = attacker:getWeaponDamageType(xi.slot.MAIN)
         damage = math.floor(attacker.getHP(attacker) / 4)
         local physicalResist = defender:getMod(xi.mod.SLASH_SDT) / 1000
         damage = damage * physicalResist
+        damage = damage - defender:getMod(xi.mod.PHALANX)
+        damage = utils.clamp(damage, 0, 99999)
+        damage = utils.stoneskin(defender, damage)
+        defender:takeDamage(damage, player, xi.attackType.PHYSCIAL, damageType)
+
         -- damage = xi.additionalEffect.calcDamagePhys(attacker, element, defender, damage)
         msgID = xi.msg.basic.ADD_EFFECT_DMG
 
