@@ -9,14 +9,10 @@ require("scripts/globals/mobskills")
 local mobskillObject = {}
 
 mobskillObject.onMobSkillCheck = function(target, mob, skill)
-    if mob:getID() == 16998874 then
-        return 0
+    if not target:isBehind(mob, 96) then
+        return 1
     else
-        if not target:isBehind(mob, 96) then
-            return 1
-        else
-            return 0
-        end
+        return 0
     end
 end
 
@@ -24,7 +20,7 @@ end
 mobskillObject.onMobWeaponSkill = function(target, mob, skill)
     local numhits = 3
     local accmod  = 2
-    local dmgmod  = math.random(5, 7)
+    local dmgmod  = math.random(4, 6)
 
     local info           = xi.mobskills.mobPhysicalMove(mob, target, skill, numhits, accmod, dmgmod, xi.mobskills.physicalTpBonus.DMG_VARIES, 2, 3, 4)
     local dmg            = xi.mobskills.mobFinalAdjustments(info.dmg, mob, skill, target, xi.attackType.PHYSICAL, xi.damageType.BLUNT, xi.mobskills.shadowBehavior.NUMSHADOWS_3)
