@@ -41,12 +41,12 @@ xi.spells.enhancing.calculateNinjutsuPower = function(caster, target, spell, spe
         subPower = xi.effect.COPY_IMAGE_3
 
         -- Utsusemi: Ni non-ninja penalty
-        if
-            spellId == xi.magic.spell.UTSUSEMI_NI and
-            caster:getMainJob() ~= xi.job.NIN
-        then
-            power = power - 1
-        end
+        -- if
+        --     spellId == xi.magic.spell.UTSUSEMI_NI and
+        --     caster:getMainJob() ~= xi.job.NIN
+        -- then
+        --     power = power - 1
+        -- end
 
         if power > 3 then
             subPower = subPower + 1
