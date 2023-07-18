@@ -75,6 +75,9 @@ UPDATE npc_list SET status = 2 WHERE npcid = "16826630" AND polutils_name = "Hom
 UPDATE npc_list SET status = 2 WHERE npcid = "16826631" AND polutils_name = "Home Point #4";
 UPDATE npc_list SET status = 2 WHERE npcid = "16826632" AND polutils_name = "Home Point #5";
 
+-- Northern San d'Oria
+UPDATE npc_list SET status = 2 WHERE npcid = "17723508" AND polutils_name = "Home Point #5";
+
 -- Palborough Mines
 UPDATE npc_list SET status = 2 WHERE npcid = "17363380" AND polutils_name = "Home Point #1";
 

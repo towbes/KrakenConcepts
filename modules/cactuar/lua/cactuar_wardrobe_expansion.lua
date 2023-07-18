@@ -80,7 +80,7 @@ page1 =
         function(playerArg)
             local remaining = 80 - container.wardrobe5.size
             if remaining < 5 then
-                playerArg:PrintToPlayer("og Wardrobe 5 is already fully expanded.", xi.msg.channel.SYSTEM_3)
+                playerArg:PrintToPlayer("Mog Wardrobe 5 is already fully expanded.", xi.msg.channel.SYSTEM_3)
                 menu.options = page1
                 delaySendMenu(playerArg) 
             else
