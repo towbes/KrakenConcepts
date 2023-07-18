@@ -1,7 +1,7 @@
 ----------------------------------------
--- ID: ...
+-- ID: 4176
 -- New Years Gift
--- 
+-- Cactuar Custom: Mystery Gift
 -----------------------------------------
 require("scripts/globals/npc_util")
 require("scripts/globals/item_utils")
@@ -87,11 +87,11 @@ itemObject.onItemUse = function(target)
             {20, 1520}, -- Goblin Grease
             {20, 1521}, -- Slime Juice
             {5, 1299}, -- Fire Bead
-            {5, 1330}, -- Ice Bead
-            {5, 1331}, -- Wind Bead 
-            {5, 1332}, -- Earth Bead
-            {5, 1333}, -- Lightning Bead
-            {5, 1334}, -- Water Bead
+            {5, 1300}, -- Ice Bead
+            {5, 1301}, -- Wind Bead 
+            {5, 1302}, -- Earth Bead
+            {5, 1303}, -- Lightning Bead
+            {5, 1304}, -- Water Bead
             {5, 1305}, -- Light Bead
             {5, 1306}, -- Dark Bead
         }
