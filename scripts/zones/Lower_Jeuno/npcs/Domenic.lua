@@ -12,7 +12,11 @@ entity.onTrade = function(player, npc, trade)
 end
 
 entity.onTrigger = function(player, npc)
-    player:startEvent(10115, player:getGil())
+    if player:hasCompletedQuest(xi.quest.log_id.JEUNO, xi.quest.id.jeuno.SHATTERING_STARS) then
+        player:startEvent(10115, player:getGil())
+    else
+        player:startEvent(10116)
+    end
 end
 
 entity.onEventUpdate = function(player, csid, option)
