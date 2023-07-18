@@ -2,19 +2,6 @@
 -- Removing OOE Homepoints/adjusting their positions --
 -- ----------------------------------------------------
 
--- Aht Urhgan Whitegate
-UPDATE npc_list SET status = 0 WHERE npcid = "16982054" AND polutils_name = "Home Point #1";
-UPDATE npc_list SET status = 2 WHERE npcid = "16982055" AND polutils_name = "Home Point #2";
-UPDATE npc_list SET status = 2 WHERE npcid = "16982056" AND polutils_name = "Home Point #3";
-UPDATE npc_list SET status = 2 WHERE npcid = "16982057" AND polutils_name = "Home Point #4";
-
--- Al Zahbi
-UPDATE npc_list SET status = 2 WHERE npcid = "16974352" AND polutils_name = "Home Point #1";
-UPDATE npc_list SET status = 2 WHERE npcid = "16974353" AND polutils_name = "Home Point #2";
-UPDATE npc_list SET status = 2 WHERE npcid = "16974354" AND polutils_name = "Home Point #3";
-UPDATE npc_list SET status = 2 WHERE npcid = "16974355" AND polutils_name = "Home Point #4";
-UPDATE npc_list SET status = 2 WHERE npcid = "16974356" AND polutils_name = "Home Point #5";
-
 -- Al'Taieu
 UPDATE npc_list SET status = 2 WHERE npcid = "16912996" AND polutils_name = "Home Point #1";
 UPDATE npc_list SET status = 2 WHERE npcid = "16912997" AND polutils_name = "Home Point #2";
@@ -26,17 +13,6 @@ UPDATE npc_list SET status = 2 WHERE npcid = "16806384" AND polutils_name = "Hom
 UPDATE npc_list SET status = 2 WHERE npcid = "16806385" AND polutils_name = "Home Point #3";
 UPDATE npc_list SET status = 2 WHERE npcid = "16806386" AND polutils_name = "Home Point #4";
 UPDATE npc_list SET status = 2 WHERE npcid = "16806387" AND polutils_name = "Home Point #5";
-
--- Bastok Markets
-UPDATE npc_list SET pos_x = "-293.7912", pos_y = "-10.0000", pos_z = "-102.5386" WHERE npcid = "17739860";
-UPDATE npc_list SET status = 2 WHERE npcid = "17739861" AND polutils_name = "Home Point #2";
-UPDATE npc_list SET status = 2 WHERE npcid = "17739862" AND polutils_name = "Home Point #3";
-UPDATE npc_list SET status = 2 WHERE npcid = "17739863" AND polutils_name = "Home Point #4";
-
--- Bastok Mines
-UPDATE npc_list SET status = 0 WHERE npcid = "17735748" AND polutils_name = "Home Point #1";
-UPDATE npc_list SET status = 2 WHERE npcid = "17735749" AND polutils_name = "Home Point #2";
-UPDATE npc_list SET status = 2 WHERE npcid = "17735750" AND polutils_name = "Home Point #3";
 
 -- Bhaflau Thickets
 UPDATE npc_list SET status = 2 WHERE npcid = "16990618" AND polutils_name = "Home Point #1";
@@ -82,24 +58,6 @@ UPDATE npc_list SET status = 2 WHERE npcid = "17617277" AND polutils_name = "Hom
 UPDATE npc_list SET status = 2 WHERE npcid = "17617278" AND polutils_name = "Home Point #4";
 UPDATE npc_list SET status = 2 WHERE npcid = "17617279" AND polutils_name = "Home Point #5";
 
--- Kazham
-UPDATE npc_list SET status = 0 WHERE npcid = "17801305" AND polutils_name = "Home Point #1";
-
--- Lower Jeuno
-UPDATE npc_list SET status = 0 WHERE npcid = "17780873" AND polutils_name = "Home Point #1";
-UPDATE npc_list SET status = 2 WHERE npcid = "17780874" AND polutils_name = "Home Point #2";
-
--- Metalworks
-UPDATE npc_list SET status = 2 WHERE npcid = "17748182" AND polutils_name = "Home Point #1";
-UPDATE npc_list SET status = 2 WHERE npcid = "17748183" AND polutils_name = "Home Point #2";
-
--- Mhaura
-UPDATE npc_list SET status = 0 WHERE npcid = "17797161" AND polutils_name = "Home Point #1";
-UPDATE npc_list SET status = 2 WHERE npcid = "17797162" AND polutils_name = "Home Point #2";
-UPDATE npc_list SET status = 2 WHERE npcid = "17797163" AND polutils_name = "Home Point #3";
-UPDATE npc_list SET status = 2 WHERE npcid = "17797164" AND polutils_name = "Home Point #4";
-UPDATE npc_list SET status = 2 WHERE npcid = "17797165" AND polutils_name = "Home Point #5";
-
 -- Misareaux Coast
 UPDATE npc_list SET status = 2 WHERE npcid = "16880010" AND polutils_name = "Home Point #1";
 UPDATE npc_list SET status = 2 WHERE npcid = "16880011" AND polutils_name = "Home Point #2";
@@ -117,45 +75,8 @@ UPDATE npc_list SET status = 2 WHERE npcid = "16826630" AND polutils_name = "Hom
 UPDATE npc_list SET status = 2 WHERE npcid = "16826631" AND polutils_name = "Home Point #4";
 UPDATE npc_list SET status = 2 WHERE npcid = "16826632" AND polutils_name = "Home Point #5";
 
--- Nashmau
-UPDATE npc_list SET status = 0 WHERE npcid = "16994332" AND polutils_name = "Home Point #1";
-
--- Norg
-UPDATE npc_list SET status = 0 WHERE npcid = "17809460" AND polutils_name = "Home Point #1";
-UPDATE npc_list SET status = 2 WHERE npcid = "17809461" AND polutils_name = "Home Point #2";
-
--- Northern San d'Oria
-UPDATE npc_list SET status = 0 WHERE npcid = "17723504" AND polutils_name = "Home Point #1";
-UPDATE npc_list SET status = 2 WHERE npcid = "17723505" AND polutils_name = "Home Point #2";
-UPDATE npc_list SET status = 2 WHERE npcid = "17723506" AND polutils_name = "Home Point #3";
-UPDATE npc_list SET status = 2 WHERE npcid = "17723507" AND polutils_name = "Home Point #4";
-
 -- Palborough Mines
 UPDATE npc_list SET status = 2 WHERE npcid = "17363380" AND polutils_name = "Home Point #1";
-
--- Port Bastok
-UPDATE npc_list SET pos_x = "53.6451", pos_y = "7.5000", pos_z = "-28.6819" WHERE npcid = "17743944";
-UPDATE npc_list SET status = 2 WHERE npcid = "17743945" AND polutils_name = "Home Point #2";
-UPDATE npc_list SET status = 2 WHERE npcid = "17743946" AND polutils_name = "Home Point #3";
-
--- Port Jeuno
-UPDATE npc_list SET status = 0 WHERE npcid = "17784889" AND polutils_name = "Home Point #1";
-UPDATE npc_list SET status = 2 WHERE npcid = "17784890" AND polutils_name = "Home Point #2";
-UPDATE npc_list SET status = 2 WHERE npcid = "17784891" AND polutils_name = "Home Point #3";
-UPDATE npc_list SET status = 2 WHERE npcid = "17784892" AND polutils_name = "Home Point #4";
-UPDATE npc_list SET status = 2 WHERE npcid = "17784893" AND polutils_name = "Home Point #5";
-
--- Port San d'Oria
-UPDATE npc_list SET pos_x = "-66.0769", pos_y = "4.0000", pos_z = "-104.9475" WHERE npcid = "17727574";
-UPDATE npc_list SET status = 2 WHERE npcid = "17727575" AND polutils_name = "Home Point #2";
-UPDATE npc_list SET status = 2 WHERE npcid = "17727576" AND polutils_name = "Home Point #3";
-UPDATE npc_list SET status = 2 WHERE npcid = "17727577" AND polutils_name = "Home Point #4";
-UPDATE npc_list SET status = 2 WHERE npcid = "17727578" AND polutils_name = "Home Point #5";
-
--- Port Windurst
-UPDATE npc_list SET status = 0, pos_x = "-67.9796", pos_y = "-4.0000", pos_z = "110.6745" WHERE npcid = "17760396";
-UPDATE npc_list SET status = 2 WHERE npcid = "17760397" AND polutils_name = "Home Point #2";
-UPDATE npc_list SET status = 2 WHERE npcid = "17760398" AND polutils_name = "Home Point #3";
 
 -- Pso'Xja
 UPDATE npc_list SET status = 2 WHERE npcid = "16814567" AND polutils_name = "Home Point #1";
@@ -195,27 +116,6 @@ UPDATE npc_list SET status = 2 WHERE npcid = "17310119" AND polutils_name = "Hom
 UPDATE npc_list SET status = 2 WHERE npcid = "17310120" AND polutils_name = "Home Point #4";
 UPDATE npc_list SET status = 2 WHERE npcid = "17310121" AND polutils_name = "Home Point #5";
 
--- Ru'Lude Gardens
-UPDATE npc_list SET status = 2 WHERE npcid = "17772845" AND polutils_name = "Home Point #1";
-UPDATE npc_list SET status = 2 WHERE npcid = "17772846" AND polutils_name = "Home Point #2";
-UPDATE npc_list SET status = 2 WHERE npcid = "17772847" AND polutils_name = "Home Point #3";
-
---Selbina
-UPDATE npc_list SET status = 0 WHERE npcid = "17793069" AND polutils_name = "Home Point #1";
-
--- Southern San d'Oria
-UPDATE npc_list SET status = 0 WHERE npcid = "17719431" AND polutils_name = "Home Point #1";
-UPDATE npc_list SET status = 2 WHERE npcid = "17719432" AND polutils_name = "Home Point #2";
-UPDATE npc_list SET status = 2 WHERE npcid = "17719433" AND polutils_name = "Home Point #3";
-UPDATE npc_list SET status = 2 WHERE npcid = "17719434" AND polutils_name = "Home Point #4";
-
--- Tavnazian Safehold
-UPDATE npc_list SET status = 0 WHERE npcid = "16883801" AND polutils_name = "Home Point #1";
-UPDATE npc_list SET status = 2 WHERE npcid = "16883802" AND polutils_name = "Home Point #2";
-UPDATE npc_list SET status = 2 WHERE npcid = "16883803" AND polutils_name = "Home Point #3";
-UPDATE npc_list SET status = 2 WHERE npcid = "16883804" AND polutils_name = "Home Point #4";
-UPDATE npc_list SET status = 2 WHERE npcid = "16883805" AND polutils_name = "Home Point #5";
-
 -- The Boyahda Tree
 UPDATE npc_list SET status = 2 WHERE npcid = "17404416" AND polutils_name = "Home Point #1";
 
@@ -241,32 +141,6 @@ UPDATE npc_list SET status = 2 WHERE npcid = "16798155" AND polutils_name = "Hom
 
 -- Upper Delkfutt's Tower
 UPDATE npc_list SET status = 2 WHERE npcid = "17424571" AND polutils_name = "Home Point #1";
-
--- Upper Jeuno
-UPDATE npc_list SET status = 0 WHERE npcid = "17776727" AND polutils_name = "Home Point #1";
-UPDATE npc_list SET status = 2 WHERE npcid = "17776728" AND polutils_name = "Home Point #2";
-UPDATE npc_list SET status = 2 WHERE npcid = "17776729" AND polutils_name = "Home Point #3";
-
--- Windurst Walls
-UPDATE npc_list SET status = 2 WHERE npcid = "17756263" AND polutils_name = "Home Point #1";
-UPDATE npc_list SET status = 2 WHERE npcid = "17756264" AND polutils_name = "Home Point #2";
-UPDATE npc_list SET status = 2 WHERE npcid = "17756265" AND polutils_name = "Home Point #3";
-UPDATE npc_list SET status = 2 WHERE npcid = "17756266" AND polutils_name = "Home Point #4";
-UPDATE npc_list SET status = 2 WHERE npcid = "17756267" AND polutils_name = "Home Point #5";
-
--- Windurst Waters
-UPDATE npc_list SET status = 0 WHERE npcid = "17752216" AND polutils_name = "Home Point #1";
-UPDATE npc_list SET status = 2 WHERE npcid = "17752217" AND polutils_name = "Home Point #2";
-UPDATE npc_list SET status = 2 WHERE npcid = "17752218" AND polutils_name = "Home Point #3";
-UPDATE npc_list SET status = 2 WHERE npcid = "17752219" AND polutils_name = "Home Point #4";
-UPDATE npc_list SET status = 2 WHERE npcid = "17752220" AND polutils_name = "Home Point #5";
-
--- Windurst Woods
-UPDATE npc_list SET status = 0 WHERE npcid = "17764536" AND polutils_name = "Home Point #1";
-UPDATE npc_list SET status = 2 WHERE npcid = "17764537" AND polutils_name = "Home Point #2";
-UPDATE npc_list SET status = 2 WHERE npcid = "17764538" AND polutils_name = "Home Point #3";
-UPDATE npc_list SET status = 2 WHERE npcid = "17764539" AND polutils_name = "Home Point #4";
-UPDATE npc_list SET status = 2 WHERE npcid = "17764540" AND polutils_name = "Home Point #5";
 
 -- Yughott Grotto
 UPDATE npc_list SET status = 2 WHERE npcid = "17359094" AND polutils_name = "Home Point #1";
