@@ -86,11 +86,9 @@ UPDATE npc_list SET status = 2 WHERE npcid = "16814570" AND polutils_name = "Hom
 UPDATE npc_list SET status = 2 WHERE npcid = "16814571" AND polutils_name = "Home Point #5";
 
 -- Qufim Island
-UPDATE npc_list SET status = 2 WHERE npcid = "17293831" AND polutils_name = "Home Point #1";
-UPDATE npc_list SET status = 2 WHERE npcid = "17293832" AND polutils_name = "Home Point #2";
-UPDATE npc_list SET status = 2 WHERE npcid = "17293833" AND polutils_name = "Home Point #3";
-UPDATE npc_list SET status = 2 WHERE npcid = "17293834" AND polutils_name = "Home Point #4";
-UPDATE npc_list SET status = 2 WHERE npcid = "17293835" AND polutils_name = "Home Point #5";
+UPDATE npc_list SET status = 2 WHERE npcid = "17293833" AND polutils_name = "Home Point #1";
+UPDATE npc_list SET status = 2 WHERE npcid = "17293834" AND polutils_name = "Home Point #2";
+UPDATE npc_list SET status = 2 WHERE npcid = "17293835" AND polutils_name = "Home Point #3";
 
 -- Quicksand Caves
 UPDATE npc_list SET status = 2 WHERE npcid = "17629785" AND polutils_name = "Home Point #1";
