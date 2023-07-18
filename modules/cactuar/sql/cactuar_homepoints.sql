@@ -96,13 +96,6 @@ UPDATE npc_list SET status = 2 WHERE npcid = "17293835" AND polutils_name = "Hom
 UPDATE npc_list SET status = 2 WHERE npcid = "17629785" AND polutils_name = "Home Point #1";
 UPDATE npc_list SET status = 2 WHERE npcid = "17629786" AND polutils_name = "Home Point #2";
 
--- Rabao
-UPDATE npc_list SET status = 0 WHERE npcid = "17788955" AND polutils_name = "Home Point #1";
-UPDATE npc_list SET status = 2 WHERE npcid = "17788956" AND polutils_name = "Home Point #2";
-UPDATE npc_list SET status = 2 WHERE npcid = "17788957" AND polutils_name = "Home Point #3";
-UPDATE npc_list SET status = 2 WHERE npcid = "17788958" AND polutils_name = "Home Point #4";
-UPDATE npc_list SET status = 2 WHERE npcid = "17788959" AND polutils_name = "Home Point #5";
-
 -- Riverne - Site #A01
 UPDATE npc_list SET status = 2 WHERE npcid = "16900399" AND polutils_name = "Home Point #1";
 
