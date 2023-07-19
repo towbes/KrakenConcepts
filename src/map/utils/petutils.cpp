@@ -736,7 +736,7 @@ namespace petutils
                 def = GetJugMod(PMob, lvlmin, lvlmax, Mod::DEF, 224, 350);
                 eva = GetJugMod(PMob, lvlmin, lvlmax, Mod::EVA, 175, 268);
                 acc = GetJugMod(PMob, lvlmin, lvlmax, Mod::ACC, 185, 283);
-                att = GetJugMod(PMob, lvlmin, lvlmax, Mod::ATT, 210, 317);
+                att = GetJugMod(PMob, lvlmin, lvlmax, Mod::ATT, 225, 350);
                 break;
             case 44: // LIFEDRINKER LARS
                 PMob->addModifier(Mod::PLANTOID_KILLER, 10);
@@ -766,12 +766,19 @@ namespace petutils
                 acc = GetJugMod(PMob, lvlmin, lvlmax, Mod::ACC, 294, 308);
                 att = GetJugMod(PMob, lvlmin, lvlmax, Mod::ATT, 328, 348);
                 break;
+            case 64: // FAITHFUL FALCORR
+                PMob->addModifier(Mod::AQUAN_KILLER, 10);
+                def = GetJugMod(PMob, lvlmin, lvlmax, Mod::DEF, 250, 300);
+                eva = GetJugMod(PMob, lvlmin, lvlmax, Mod::EVA, 284, 450);
+                acc = GetJugMod(PMob, lvlmin, lvlmax, Mod::ACC, 294, 375);
+                att = GetJugMod(PMob, lvlmin, lvlmax, Mod::ATT, 328, 395);
+                break;
             case 68: // TURBID TOLOI
                 PMob->addModifier(Mod::AMORPH_KILLER, 10);
                 def = GetJugMod(PMob, lvlmin, lvlmax, Mod::DEF, 300, 320);
                 eva = GetJugMod(PMob, lvlmin, lvlmax, Mod::EVA, 284, 296);
                 acc = GetJugMod(PMob, lvlmin, lvlmax, Mod::ACC, 294, 315);
-                att = GetJugMod(PMob, lvlmin, lvlmax, Mod::ATT, 328, 375);
+                att = GetJugMod(PMob, lvlmin, lvlmax, Mod::ATT, 328, 450);
                 break;
             default:
                 break;
