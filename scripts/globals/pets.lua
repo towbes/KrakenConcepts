@@ -83,6 +83,7 @@ xi.pet.id =
     PANZER_GALAHAD        = 45,
     CHOPSUEY_CHUCKY       = 46,
     AMIGO_SABOTENDER      = 47,
+    FAITHFUL_FALCORR      = 64,
     TURBID_TOLOI          = 68,
 
 
