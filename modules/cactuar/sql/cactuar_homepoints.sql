@@ -7,6 +7,13 @@ UPDATE npc_list SET status = 2 WHERE npcid = "16912996" AND polutils_name = "Hom
 UPDATE npc_list SET status = 2 WHERE npcid = "16912997" AND polutils_name = "Home Point #2";
 UPDATE npc_list SET status = 2 WHERE npcid = "16912998" AND polutils_name = "Home Point #3";
 
+-- Al Zahbi
+UPDATE npc_list SET pos_x = "28.74", pos_y = "-63.4", pos_z = "-63.400" WHERE npcid = "16974352" AND polutils_name = "Home Point #1";
+UPDATE npc_list SET pos_x = "10.5447", pos_y = "-6", pos_z = "-10.5488" WHERE npcid = "16974353" AND polutils_name = "Home Point #2";
+UPDATE npc_list SET status = 2 WHERE npcid = "16974354" AND polutils_name = "Home Point #3";
+UPDATE npc_list SET status = 2 WHERE npcid = "16974355" AND polutils_name = "Home Point #4";
+UPDATE npc_list SET status = 2 WHERE npcid = "16974356" AND polutils_name = "Home Point #5";
+
 -- Attohwa Chasm
 UPDATE npc_list SET status = 2 WHERE npcid = "16806383" AND polutils_name = "Home Point #1";
 UPDATE npc_list SET status = 2 WHERE npcid = "16806384" AND polutils_name = "Home Point #2";
@@ -58,6 +65,10 @@ UPDATE npc_list SET status = 2 WHERE npcid = "17617277" AND polutils_name = "Hom
 UPDATE npc_list SET status = 2 WHERE npcid = "17617278" AND polutils_name = "Home Point #4";
 UPDATE npc_list SET status = 2 WHERE npcid = "17617279" AND polutils_name = "Home Point #5";
 
+-- Mhaura
+UPDATE npc_list SET status = 2 WHERE npcid = "17797164" AND polutils_name = "Home Point #4";
+UPDATE npc_list SET status = 2 WHERE npcid = "17797165" AND polutils_name = "Home Point #5";
+
 -- Misareaux Coast
 UPDATE npc_list SET status = 2 WHERE npcid = "16880010" AND polutils_name = "Home Point #1";
 UPDATE npc_list SET status = 2 WHERE npcid = "16880011" AND polutils_name = "Home Point #2";
@@ -81,6 +92,16 @@ UPDATE npc_list SET status = 2 WHERE npcid = "17723508" AND polutils_name = "Hom
 -- Palborough Mines
 UPDATE npc_list SET status = 2 WHERE npcid = "17363380" AND polutils_name = "Home Point #1";
 
+-- Port Jueno
+UPDATE npc_list SET status = 2 WHERE npcid = "17784891" AND polutils_name = "Home Point #3";
+UPDATE npc_list SET status = 2 WHERE npcid = "17784892" AND polutils_name = "Home Point #4";
+UPDATE npc_list SET status = 2 WHERE npcid = "17784893" AND polutils_name = "Home Point #5";
+
+-- Port San d'Oria
+UPDATE npc_list SET status = 2 WHERE npcid = "17784891" AND polutils_name = "Home Point #3";
+UPDATE npc_list SET status = 2 WHERE npcid = "17784892" AND polutils_name = "Home Point #4";
+UPDATE npc_list SET status = 2 WHERE npcid = "17727578" AND polutils_name = "Home Point #5";
+
 -- Pso'Xja
 UPDATE npc_list SET status = 2 WHERE npcid = "16814567" AND polutils_name = "Home Point #1";
 UPDATE npc_list SET status = 2 WHERE npcid = "16814568" AND polutils_name = "Home Point #2";
@@ -97,6 +118,10 @@ UPDATE npc_list SET status = 2 WHERE npcid = "17293835" AND polutils_name = "Hom
 UPDATE npc_list SET status = 2 WHERE npcid = "17629785" AND polutils_name = "Home Point #1";
 UPDATE npc_list SET status = 2 WHERE npcid = "17629786" AND polutils_name = "Home Point #2";
 
+-- Rabao
+UPDATE npc_list SET status = 2 WHERE npcid = "17788958" AND polutils_name = "Home Point #4";
+UPDATE npc_list SET status = 2 WHERE npcid = "17788959" AND polutils_name = "Home Point #5";
+
 -- Riverne - Site #A01
 UPDATE npc_list SET status = 2 WHERE npcid = "16900399" AND polutils_name = "Home Point #1";
 
@@ -109,6 +134,13 @@ UPDATE npc_list SET status = 2 WHERE npcid = "17310118" AND polutils_name = "Hom
 UPDATE npc_list SET status = 2 WHERE npcid = "17310119" AND polutils_name = "Home Point #3";
 UPDATE npc_list SET status = 2 WHERE npcid = "17310120" AND polutils_name = "Home Point #4";
 UPDATE npc_list SET status = 2 WHERE npcid = "17310121" AND polutils_name = "Home Point #5";
+
+-- Southern San d'Oria
+UPDATE npc_list SET status = 2 WHERE npcid = "17719435" AND polutils_name = "Home Point #5";
+
+-- Tavnazian Safehold
+UPDATE npc_list SET status = 2 WHERE npcid = "16883804" AND polutils_name = "Home Point #4";
+UPDATE npc_list SET status = 2 WHERE npcid = "16883805" AND polutils_name = "Home Point #5";
 
 -- The Boyahda Tree
 UPDATE npc_list SET status = 2 WHERE npcid = "17404416" AND polutils_name = "Home Point #1";
@@ -135,6 +167,9 @@ UPDATE npc_list SET status = 2 WHERE npcid = "16798155" AND polutils_name = "Hom
 
 -- Upper Delkfutt's Tower
 UPDATE npc_list SET status = 2 WHERE npcid = "17424571" AND polutils_name = "Home Point #1";
+
+-- Windurst Waters
+UPDATE npc_list SET status = 2 WHERE npcid = "17752220" AND polutils_name = "Home Point #5";
 
 -- Yughott Grotto
 UPDATE npc_list SET status = 2 WHERE npcid = "17359094" AND polutils_name = "Home Point #1";
