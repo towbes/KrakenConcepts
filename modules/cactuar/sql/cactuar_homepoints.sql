@@ -8,8 +8,8 @@ UPDATE npc_list SET status = 2 WHERE npcid = "16912997" AND polutils_name = "Hom
 UPDATE npc_list SET status = 2 WHERE npcid = "16912998" AND polutils_name = "Home Point #3";
 
 -- Al Zahbi
-UPDATE npc_list SET pos_x = "28.74", pos_y = "-63.4", pos_z = "-63.400" WHERE npcid = "16974352" AND polutils_name = "Home Point #1";
-UPDATE npc_list SET pos_x = "10.5447", pos_y = "-6", pos_z = "-10.5488" WHERE npcid = "16974353" AND polutils_name = "Home Point #2";
+UPDATE npc_list SET status = 2 WHERE npcid = "16974352" AND polutils_name = "Home Point #1";
+UPDATE npc_list SET status = 2 WHERE npcid = "16974353" AND polutils_name = "Home Point #2";
 UPDATE npc_list SET status = 2 WHERE npcid = "16974354" AND polutils_name = "Home Point #3";
 UPDATE npc_list SET status = 2 WHERE npcid = "16974355" AND polutils_name = "Home Point #4";
 UPDATE npc_list SET status = 2 WHERE npcid = "16974356" AND polutils_name = "Home Point #5";
