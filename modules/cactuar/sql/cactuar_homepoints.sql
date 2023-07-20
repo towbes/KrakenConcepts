@@ -65,6 +65,11 @@ UPDATE npc_list SET status = 2 WHERE npcid = "17617277" AND polutils_name = "Hom
 UPDATE npc_list SET status = 2 WHERE npcid = "17617278" AND polutils_name = "Home Point #4";
 UPDATE npc_list SET status = 2 WHERE npcid = "17617279" AND polutils_name = "Home Point #5";
 
+-- Lower Jueno
+UPDATE npc_list SET status = 2 WHERE npcid = "17780875" AND polutils_name = "Home Point #3";
+UPDATE npc_list SET status = 2 WHERE npcid = "17780876" AND polutils_name = "Home Point #4";
+UPDATE npc_list SET status = 2 WHERE npcid = "17780876" AND polutils_name = "Home Point #5";
+
 -- Mhaura
 UPDATE npc_list SET status = 2 WHERE npcid = "17797164" AND polutils_name = "Home Point #4";
 UPDATE npc_list SET status = 2 WHERE npcid = "17797165" AND polutils_name = "Home Point #5";
@@ -167,6 +172,10 @@ UPDATE npc_list SET status = 2 WHERE npcid = "16798155" AND polutils_name = "Hom
 
 -- Upper Delkfutt's Tower
 UPDATE npc_list SET status = 2 WHERE npcid = "17424571" AND polutils_name = "Home Point #1";
+
+-- Upper Jeuno
+UPDATE npc_list SET status = 2 WHERE npcid = "17776730" AND polutils_name = "Home Point #4";
+UPDATE npc_list SET status = 2 WHERE npcid = "17776731" AND polutils_name = "Home Point #5";
 
 -- Windurst Waters
 UPDATE npc_list SET status = 2 WHERE npcid = "17752220" AND polutils_name = "Home Point #5";
