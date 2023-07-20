@@ -1,6 +1,7 @@
 -----------------------------------
 -- Area: Beaucedine Glacier [S]
---   NM: Scylla
+-- NM: Scylla
+-- ID: 17334336
 -----------------------------------
 local ID = require("scripts/zones/Beaucedine_Glacier_[S]/IDs")
 mixins = {
@@ -25,22 +26,21 @@ end
 
 entity.onMobSpawn = function(mob)
     mob:setLocalVar("[rage]timer", 3600)
-
     mob:setLocalVar("fuAmount", 0)
     mob:setLocalVar("omfCooldown", 0)
 
     mob:setAnimationSub(0)
     mob:setAutoAttackEnabled(true)
-    mob:setMagicCastingEnabled(true)
     mob:setMobAbilityEnabled(true)
     mob:setMobSkillAttack(0)
+    mob:setMagicCastingEnabled(false)
 
     -- slightly faster attack speed
     mob:setMod(xi.mod.DELAY, 300)
 end
 
 entity.onMobFight = function(mob, target)
-        -- will draw in and intimidate anyone on enmity list that's out of range
+    mob:setMagicCastingEnabled(true)
         if mob:getLocalVar("omfCooldown") < os.time() then
             -- run these checks once per second
             mob:setLocalVar("omfCooldown", os.time())
@@ -122,10 +122,22 @@ entity.onMobWeaponSkill = function(target, mob, skill)
     end
 end
 
+entity.onMobMagicPrepare = function(mob, target, spellId)
+    local rnd = math.random()
+
+    if rnd < 0.7 then
+        return 226 -- Poisonga2
+    elseif rnd < 0.90 then
+        return 362 -- Bindga
+    else
+        
+    end
+end
+
 entity.onMobDisengage = function(mob)
     mob:setLocalVar("fuAmount", 0)
     mob:setAutoAttackEnabled(true)
-    mob:setMagicCastingEnabled(true)
+    mob:setMagicCastingEnabled(false)
     mob:setMobAbilityEnabled(true)
     mob:setMobSkillAttack(0)
     mob:setMod(xi.mod.DELAY, 300)
