@@ -126,9 +126,9 @@ entity.onMobMagicPrepare = function(mob, target, spellId)
     local rnd = math.random()
 
     if rnd < 0.90 then
-        return 362 -- Bindga
+        return 226 -- Bindga
     else
-        return 226 -- Poisonga 2
+        return 362 -- Poisonga 2
     end
 end
 
