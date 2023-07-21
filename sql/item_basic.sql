@@ -10159,7 +10159,7 @@ INSERT INTO `item_basic` VALUES (12824,0,'leather_trousers','leather_trousers',1
 INSERT INTO `item_basic` VALUES (12825,0,'lizard_trousers','lizard_trousers',1,2084,20,0,259);
 INSERT INTO `item_basic` VALUES (12826,0,'studded_trousers','studded_trousers',1,2084,20,0,1680);
 INSERT INTO `item_basic` VALUES (12827,0,'cuir_trousers','cuir_trousers',1,2084,20,0,1680);
-INSERT INTO `item_basic` VALUES (12828,0,'raptor_trousers','raptor_trousers',1,2084,20,0,5200);
+INSERT INTO `item_basic` VALUES (12828,0,'raptor_trousers','raptor_trousers',1,2084,20,0,2200);
 INSERT INTO `item_basic` VALUES (12829,0,'beak_trousers','beak_trousers',1,2084,20,0,3225);
 INSERT INTO `item_basic` VALUES (12830,0,'tiger_trousers','tiger_trousers',1,2084,20,0,6150);
 INSERT INTO `item_basic` VALUES (12831,0,'coeurl_trousers','coeurl_trousers',1,2084,20,0,6833);
