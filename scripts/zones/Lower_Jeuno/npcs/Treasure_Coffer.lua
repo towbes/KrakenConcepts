@@ -535,25 +535,25 @@ local argumentKeyItems =
 }
 
 entity.onTrigger = function(player, npc)
-    local receivedNexusCape = player:getCharVar("receivedNexusCape")
-    local kiArgs = { 0, 0, 0 }
+    -- local receivedNexusCape = player:getCharVar("receivedNexusCape")
+    -- local kiArgs = { 0, 0, 0 }
 
-    for argNum = 1, 3 do
-        for bitPos, keyItem in ipairs(argumentKeyItems[argNum]) do
-            if not player:hasKeyItem(keyItem) then
-                kiArgs[argNum] = utils.mask.setBit(kiArgs[argNum], bitPos, true)
-            end
-        end
-    end
+    -- for argNum = 1, 3 do
+    --     for bitPos, keyItem in ipairs(argumentKeyItems[argNum]) do
+    --         if not player:hasKeyItem(keyItem) then
+    --             kiArgs[argNum] = utils.mask.setBit(kiArgs[argNum], bitPos, true)
+    --         end
+    --     end
+    -- end
 
-    local arg4 =
-        ((xi.settings.main.ENABLE_ACP == 0 or kiArgs[1] == 254) and 2 or 0) +
-        ((xi.settings.main.ENABLE_AMK == 0 or kiArgs[2] == 254) and 4 or 0) +
-        ((xi.settings.main.ENABLE_ASA == 0 or kiArgs[3] == 254) and 8 or 0) +
-        ((xi.settings.main.ENABLE_ACP * xi.settings.main.ENABLE_AMK * xi.settings.main.ENABLE_ASA == 0 or receivedNexusCape == 1) and 16 or 0) +
-        ((xi.settings.main.ENABLE_ACP * xi.settings.main.ENABLE_AMK * xi.settings.main.ENABLE_ASA == 0 or receivedNexusCape == 0) and 32 or 0)
+    -- local arg4 =
+    --     ((xi.settings.main.ENABLE_ACP == 0 or kiArgs[1] == 254) and 2 or 0) +
+    --     ((xi.settings.main.ENABLE_AMK == 0 or kiArgs[2] == 254) and 4 or 0) +
+    --     ((xi.settings.main.ENABLE_ASA == 0 or kiArgs[3] == 254) and 8 or 0) +
+    --     ((xi.settings.main.ENABLE_ACP * xi.settings.main.ENABLE_AMK * xi.settings.main.ENABLE_ASA == 0 or receivedNexusCape == 1) and 16 or 0) +
+    --     ((xi.settings.main.ENABLE_ACP * xi.settings.main.ENABLE_AMK * xi.settings.main.ENABLE_ASA == 0 or receivedNexusCape == 0) and 32 or 0)
 
-    player:startEvent(10099, kiArgs[1], kiArgs[2], kiArgs[3], arg4, 0, 0, 0, 0)
+    -- player:startEvent(10099, kiArgs[1], kiArgs[2], kiArgs[3], arg4, 0, 0, 0, 0)
 end
 
 entity.onEventUpdate = function(player, csid, option)
