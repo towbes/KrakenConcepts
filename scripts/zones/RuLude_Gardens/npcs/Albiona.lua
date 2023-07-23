@@ -23,13 +23,10 @@ entity.onTrigger = function(player, npc)
     end
 end
 
-entity.onEventUpdate = function(player, csid, option)
+entity.onEventUpdate = function(player, csid, option, npc)
 end
 
-entity.onEventFinish = function(player, csid, option)
-    if csid == 10089 then
-        player:setCharVar("WildcatJeuno", utils.mask.setBit(player:getCharVar("WildcatJeuno"), 0, true))
-    end
+entity.onEventFinish = function(player, csid, option, npc)
 end
 
 return entity

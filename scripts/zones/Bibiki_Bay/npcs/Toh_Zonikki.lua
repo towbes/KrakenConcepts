@@ -89,7 +89,7 @@ entity.onTrigger = function(player, npc)
     end
 end
 
-entity.onEventUpdate = function(player, csid, option)
+entity.onEventUpdate = function(player, csid, option, npc)
     if csid == 28 then
         local enoughMoney = 2 -- Not enough money
         if player:getGil() >= 500 then
@@ -104,7 +104,7 @@ entity.onEventUpdate = function(player, csid, option)
     end
 end
 
-entity.onEventFinish = function(player, csid, option)
+entity.onEventFinish = function(player, csid, option, npc)
     if csid == 28 then
         if option == 1 then -- Give 50pz clamming kit
             player:setCharVar("ClammingKitSize", 50)

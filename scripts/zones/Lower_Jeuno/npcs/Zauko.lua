@@ -63,7 +63,7 @@ entity.onTrigger = function(player, npc)
     end
 end
 
-entity.onEventUpdate = function(player, csid, option)
+entity.onEventUpdate = function(player, csid, option, npc)
     if csid == 116 and option == 0 then
         -- player accepts quest
         -- if nobody else has already been assigned to the quest, including Vhana, give it to this player
@@ -88,7 +88,7 @@ entity.onEventUpdate = function(player, csid, option)
     end
 end
 
-entity.onEventFinish = function(player, csid, option)
+entity.onEventFinish = function(player, csid, option, npc)
     -- COMMUNITY SERVICE
     if csid == 117 then
         local params = { title = xi.title.TORCHBEARER, var = "currCommService" }

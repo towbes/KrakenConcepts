@@ -30,42 +30,10 @@ entity.onTrigger = function(player, npc)
 
 end
 
-entity.onEventUpdate = function(player, csid, option)
-    if csid == 100 and option == 0 then
-
-        local npc = GetNPCByID(ID.npc.MILEON)
-        local currentTotal = npc:getLocalVar("[LuckyRoll]Rabao")
-        local roll = math.random(1, 6)
-        local newTotal = currentTotal + roll
-
-        player:updateEvent(4, roll, 0, newTotal)
-        npc:setLocalVar("[LuckyRoll]Rabao", newTotal)
-    end
+entity.onEventUpdate = function(player, csid, option, npc)
 end
 
-entity.onEventFinish = function(player, csid, option)
-    if csid == 100 and option == 0 then
-        local npc = GetNPCByID(ID.npc.MILEON)
-        local newTotal = npc:getLocalVar("[LuckyRoll]Rabao")
-
-        if newTotal >= 400 then
-
-            if newTotal == 400 then
-                player:showText(npc, ID.text.LUCKY_ROLL_EXACT)
-                npcUtil.giveItem(player, math.random(4104, 4111))
-            elseif (newTotal == 401 or newTotal == 402) then
-                player:showText(npc, ID.text.LUCKY_ROLL_CLOSE)
-                npcUtil.giveItem(player, math.random(769, 776))
-            end
-
-            npc:setLocalVar("[LuckyRoll]Rabao", math.random(150, 250))
-            npc:setLocalVar("[LuckyRoll]RabaoLastWon", VanadielUniqueDay())
-            player:addGil(10000)
-        end
-
-        player:delGil(100)
-        player:setCharVar("[LuckyRoll]Played", VanadielUniqueDay())
-    end
+entity.onEventFinish = function(player, csid, option, npc)
 end
 
 return entity

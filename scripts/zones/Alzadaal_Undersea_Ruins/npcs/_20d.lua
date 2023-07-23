@@ -27,13 +27,10 @@ entity.onTrigger = function(player, npc)
     end
 end
 
-entity.onEventUpdate = function(player, csid, option)
-    if csid == 115 and option == 0 then
-        xi.teleport.clearEnmityList(player)
-	end
+entity.onEventUpdate = function(player, csid, option, npc)
 end
 
-entity.onEventFinish = function(player, csid, option)
+entity.onEventFinish = function(player, csid, option, npc)
 end
 
 return entity

@@ -38,13 +38,10 @@ battlefieldObject.onBattlefieldLeave = function(player, battlefield, leavecode)
     end
 end
 
-battlefieldObject.onEventUpdate = function(player, csid, option)
-    if csid == 32 then
-        player:updateEvent(32, 0, 0, 0, 0, 0, 0, 0)
-    end
+battlefieldObject.onEventUpdate = function(player, csid, option, npc)
 end
 
-battlefieldObject.onEventFinish = function(player, csid, option)
+battlefieldObject.onEventFinish = function(player, csid, option, npc)
     if csid == 32001 then
         player:addTitle(xi.title.THE_CHEBUKKIS_WORST_NIGHTMARE)
     end

@@ -13,7 +13,12 @@ local entity = {}
 entity.onTrigger = function(player, npc)
 end
 
-entity.onEventFinish = function(player, csid, option)
+entity.onEventFinish = function(player, csid, option, npc)
+    if csid == 18 then
+        npcUtil.giveKeyItem(player, xi.ki.CALIGINOUS_BLADE)
+        player:setCharVar("anUndyingPledgeCS", 3)
+        player:setCharVar("anUndyingPledgeNM_killed", 0)
+    end
 end
 
 return entity

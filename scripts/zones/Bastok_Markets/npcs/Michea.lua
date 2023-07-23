@@ -17,10 +17,22 @@ end
 entity.onTrigger = function(player, npc)
 end
 
-entity.onEventUpdate = function(player, csid, option)
+entity.onEventUpdate = function(player, csid, option, npc)
 end
 
-entity.onEventFinish = function(player, csid, option)
+entity.onEventFinish = function(player, csid, option, npc)
+    -- DISTANT LOYALTIES
+    if csid == 315 then
+        player:delKeyItem(xi.ki.GOLDSMITHING_ORDER)
+        player:setCharVar("DistantLoyaltiesProgress", 2)
+    elseif csid == 317 then
+        player:confirmTrade()
+        player:setCharVar("DistantLoyaltiesProgress", 3)
+        player:needToZone(true)
+    elseif csid == 318 then
+        player:setCharVar("DistantLoyaltiesProgress", 4)
+        npcUtil.giveKeyItem(player, xi.ki.MYTHRIL_HEARTS)
+    end
 end
 
 return entity

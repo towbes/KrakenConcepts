@@ -32,25 +32,11 @@ entity.onTrigger = function(player, npc)
     end
 end
 
-entity.onEventUpdate = function(player, csid, option)
-    if (csid == 265) then
-        local styleParam    = xi.fellow_utils.getStyleParam(player)
-        local lookParam     = xi.fellow_utils.getLookParam(player)
-        local fellowParam   = xi.fellow_utils.getFellowParam(player)
-
-        player:updateEvent(0, 0, 1743, 0, 0, styleParam, lookParam, fellowParam)
-    end
+entity.onEventUpdate = function(player, csid, option, npc)
 end
 
-entity.onEventFinish = function(player, csid, option)
-    if (csid == 265) then
-        player:messageSpecial(ID.text.CAN_SUMMON_FELLOW_WOTG)
-        player:setFellowValue("wotg_unlock", 1)
-        local mawDestination = { 366.858,   8.545, -228.861,  95, 120}
-        player:timer(500, function(player) player:setPos(unpack(mawDestination)) end)
-    else
-        xi.maws.onEventFinish(player, csid, option)
-    end
+entity.onEventFinish = function(player, csid, option, npc)
+    xi.maws.onEventFinish(player, csid, option, npc)
 end
 
 return entity

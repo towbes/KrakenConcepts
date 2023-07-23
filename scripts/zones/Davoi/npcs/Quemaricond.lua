@@ -38,7 +38,7 @@ entity.onTrigger = function(player, npc)
     npc:timer(2000, function(npcArg) npc:continuePath() end)
 end
 
-entity.onEventUpdate = function(player, csid, option)
+entity.onEventUpdate = function(player, csid, option, npc)
 end
 
 entity.onEventFinish = function(player, csid, option, npc)

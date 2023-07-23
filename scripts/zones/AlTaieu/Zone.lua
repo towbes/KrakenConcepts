@@ -30,10 +30,15 @@ end
 zoneObject.onTriggerAreaEnter = function(player, triggerArea)
 end
 
-zoneObject.onEventUpdate = function(player, csid, option)
+zoneObject.onEventUpdate = function(player, csid, option, npc)
 end
 
-zoneObject.onEventFinish = function(player, csid, option)
+zoneObject.onEventFinish = function(player, csid, option, npc)
+    if csid == 167 then
+        player:setCharVar("PromathiaStatus", 1)
+        player:delKeyItem(xi.ki.MYSTERIOUS_AMULET_PRISHE)
+        player:messageSpecial(ID.text.RETURN_AMULET_TO_PRISHE, xi.ki.MYSTERIOUS_AMULET)
+    end
 end
 
 zoneObject.afterZoneIn = function(player)

@@ -14,15 +14,10 @@ entity.onTrigger = function(player, npc)
     riverneAGlobal.unstableDisplacementTrigger(player, npc, 17)
 end
 
-entity.onEventUpdate = function(player, csid, option)
+entity.onEventUpdate = function(player, csid, option, npc)
 end
 
-entity.onEventFinish = function(player, csid, option)
-    if csid == 17 then
-        for _, entry in pairs(player:getNotorietyList()) do
-            entry:clearEnmity(player) -- reset hate on player after teleporting
-        end
-    end
+entity.onEventFinish = function(player, csid, option, npc)
 end
 
 return entity

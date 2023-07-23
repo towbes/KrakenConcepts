@@ -88,7 +88,7 @@ instanceObject.onInstanceComplete = function(instance)
     end
 end
 
-instanceObject.onEventFinish = function(player, csid, option)
+instanceObject.onEventFinish = function(player, csid, option, npc)
 end
 
 return instanceObject

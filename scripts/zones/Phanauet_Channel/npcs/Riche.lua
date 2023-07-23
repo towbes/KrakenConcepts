@@ -16,10 +16,10 @@ entity.onTrigger = function(player, npc)
     player:messageSpecial(ID.text.RICHE_MESSAGE) -- Ticket Count -1 Message
 end
 
-entity.onEventUpdate = function(player, csid, option)
+entity.onEventUpdate = function(player, csid, option, npc)
 end
 
-entity.onEventFinish = function(player, csid, option)
+entity.onEventFinish = function(player, csid, option, npc)
 end
 
 return entity

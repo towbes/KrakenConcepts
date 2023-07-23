@@ -89,7 +89,7 @@ entity.onTrigger = function(player, npc)
 end
 
 -- 10011  10012  700  701  702  703  704  705  832  765
-entity.onEventUpdate = function(player, csid, option)
+entity.onEventUpdate = function(player, csid, option, npc)
     if
         csid == 10011 and
         option >= xi.skill.WOODWORKING and
@@ -99,7 +99,7 @@ entity.onEventUpdate = function(player, csid, option)
     end
 end
 
-entity.onEventFinish = function(player, csid, option)
+entity.onEventFinish = function(player, csid, option, npc)
     if csid == 700 then
         player:setCharVar("moral", 2)
     elseif csid == 705 then

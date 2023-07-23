@@ -63,19 +63,15 @@ oneToBeFeared.handleMammetDeath = function(mob, player, optParams)
     end
 end
 
-oneToBeFeared.handleMammetBattleEnding = function(player, csid, option)
-    local battlefield = player:getBattlefield()
+oneToBeFeared.handleMammetBattleEnding = function(player, csid, option, npc)
+    if csid == 10 then
+        -- Players are healed in between fights, but their TP is set to 0
+        player:addTitle(xi.title.BRANDED_BY_LIGHTNING)
+        healCharacter(player)
 
-    for _, member in pairs(battlefield:getPlayers()) do
-        if csid == 10 and member:getLocalVar("[OTBF]battleCompleted") == 0 then
-            -- Players are healed in between fights, but their TP is set to 0
-            member:addTitle(xi.title.BRANDED_BY_LIGHTNING)
-            healCharacter(member)
-
-            -- Move player to instance start. End battle 1.
-            member:setLocalVar("[OTBF]battleCompleted", 1)
-            returnToAirship(member)
-        end
+        -- Move player to instance start. End battle 1.
+        player:setLocalVar("[OTBF]battleCompleted", 1)
+        returnToAirship(player)
     end
 end
 
@@ -90,19 +86,15 @@ oneToBeFeared.handleOmegaDeath = function(mob, player, optParams)
     end
 end
 
-oneToBeFeared.handleOmegaBattleEnding = function(player, csid, option)
-    local battlefield = player:getBattlefield()
+oneToBeFeared.handleOmegaBattleEnding = function(player, csid, option, npc)
+    if csid == 11 then
+        -- Players are healed in between fights, but their TP is set to 0.
+        player:addTitle(xi.title.OMEGA_OSTRACIZER)
+        healCharacter(player)
 
-    for _, member in pairs(battlefield:getPlayers()) do
-        if csid == 11 and member:getLocalVar("[OTBF]battleCompleted") == 1 then
-            -- Players are healed in between fights, but their TP is set to 0.
-            member:addTitle(xi.title.OMEGA_OSTRACIZER)
-            healCharacter(member)
-
-            -- Move player to instance start. End battle 2.
-            member:setLocalVar("[OTBF]battleCompleted", 2)
-            returnToAirship(member)
-        end
+        -- Move player to instance start. End battle 2.
+        player:setLocalVar("[OTBF]battleCompleted", 2)
+        returnToAirship(player)
     end
 end
 
@@ -122,7 +114,7 @@ oneToBeFeared.handleAirshipDoorTrigger = function(player, npc)
     player:startEvent(32003, npc:getID() - ID.npc.AIRSHIP_DOOR_OFFSET + 1, player:getLocalVar("[OTBF]battleCompleted") * 2)
 end
 
-oneToBeFeared.handleOnEventUpdate = function(player, csid, option)
+oneToBeFeared.handleOnEventUpdate = function(player, csid, option, npc)
     local battlefield = player:getBattlefield()
 
     -- Spawn Omega for given instance.
@@ -142,7 +134,7 @@ oneToBeFeared.handleOnEventUpdate = function(player, csid, option)
     end
 end
 
-oneToBeFeared.handleOnEventFinish = function(player, csid, option)
+oneToBeFeared.handleOnEventFinish = function(player, csid, option, npc)
     if csid == 32003 then
         if option >= 100 and option <= 102 then
             local party = player:getParty()

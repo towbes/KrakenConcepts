@@ -387,7 +387,7 @@ xi.dynamis.entryNpcOnTrigger = function(player, npc)
     end
 end
 
-xi.dynamis.entryNpcOnEventFinish = function(player, csid, option)
+xi.dynamis.entryNpcOnEventFinish = function(player, csid, option, npc)
     local info     = entryInfo[player:getZoneID()]
     local dynaMask = player:getCharVar("Dynamis_Status")
 
@@ -502,7 +502,7 @@ xi.dynamis.zoneOnZoneIn = function(player, prevZone)
     return cs
 end
 
-xi.dynamis.zoneOnEventFinish = function(player, csid, option)
+xi.dynamis.zoneOnEventFinish = function(player, csid, option, npc)
     local zoneId = player:getZoneID()
     local info   = dynaInfo[zoneId]
 
@@ -521,7 +521,7 @@ xi.dynamis.somnialThresholdOnTrigger = function(player, npc)
     player:startEvent(101, 0x27, canUnlockSJ, menuBits)
 end
 
-xi.dynamis.somnialThresholdOnEventFinish = function(player, csid, option)
+xi.dynamis.somnialThresholdOnEventFinish = function(player, csid, option, npc)
     local zoneId = player:getZoneID()
     local info   = dynaInfo[zoneId]
     local ID     = zones[zoneId]

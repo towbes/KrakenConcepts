@@ -34,15 +34,10 @@ entity.onTrigger = function(player, npc)
     end
 end
 
-entity.onEventUpdate = function(player, csid, option)
+entity.onEventUpdate = function(player, csid, option, npc)
 end
 
-entity.onEventFinish = function(player, csid, option)
-    if csid == 10171 then
-        player:setCharVar("[Quest]Unlisted_Qualities", utils.mask.setBit(player:getCharVar("[Quest]Unlisted_Qualities"), 3, true))
-    elseif csid == 10040 then
-        player:setCharVar("[Quest]Looking_Glass",2)
-    end
+entity.onEventFinish = function(player, csid, option, npc)
 end
 
 return entity

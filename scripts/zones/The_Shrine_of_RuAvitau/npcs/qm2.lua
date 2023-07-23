@@ -22,14 +22,10 @@ entity.onTrigger = function(player, npc)
     player:startEvent(100)
 end
 
-entity.onEventUpdate = function(player, csid, option)
+entity.onEventUpdate = function(player, csid, option, npc)
 end
 
-entity.onEventFinish = function(player, csid, option)
-    if csid == 101 then
-        SpawnMob(ID.mob.KIRIN):updateClaim(player)
-        GetNPCByID(ID.npc.KIRIN_QM):setStatus(xi.status.DISAPPEAR)
-    end
+entity.onEventFinish = function(player, csid, option, npc)
 end
 
 return entity

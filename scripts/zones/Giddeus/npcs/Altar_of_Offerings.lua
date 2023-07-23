@@ -23,10 +23,10 @@ entity.onTrigger = function(player, npc)
     end
 end
 
-entity.onEventUpdate = function(player, csid, option)
+entity.onEventUpdate = function(player, csid, option, npc)
 end
 
-entity.onEventFinish = function(player, csid, option)
+entity.onEventFinish = function(player, csid, option, npc)
     if csid == 53 and option == 1 then
         player:addKeyItem(39, xi.ki.OFF_OFFERING)
         player:messageSpecial(ID.text.KEYITEM_OBTAINED, xi.ki.OFF_OFFERING)

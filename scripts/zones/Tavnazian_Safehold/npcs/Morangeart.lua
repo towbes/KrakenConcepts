@@ -34,15 +34,10 @@ entity.onTrigger = function(player, npc)
     end
 end
 
-entity.onEventUpdate = function(player, csid, option)
+entity.onEventUpdate = function(player, csid, option, npc)
 end
 
-entity.onEventFinish = function(player, csid, option)
-    if csid == 521 then
-        player:addKeyItem(xi.ki.MONARCH_BEARD)
-        player:messageSpecial(ID.text.KEYITEM_OBTAINED, xi.ki.MONARCH_BEARD)
-        player:setCharVar("[ENM]MonarchBeard", VanadielTime() + (xi.settings.main.ENM_COOLDOWN * 3600)) -- Current time + (ENM_COOLDOWN*1hr in seconds)
-    end
+entity.onEventFinish = function(player, csid, option, npc)
 end
 
 return entity

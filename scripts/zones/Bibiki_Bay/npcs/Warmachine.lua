@@ -15,10 +15,21 @@ end
 entity.onTrigger = function(player, npc)
 end
 
-entity.onEventUpdate = function(player, csid, option)
+entity.onEventUpdate = function(player, csid, option, npc)
 end
 
-entity.onEventFinish = function(player, csid, option)
+entity.onEventFinish = function(player, csid, option, npc)
+    if csid == 43 then
+        local coloredDropID = player:getCharVar("ColoredDrop")
+        if player:getFreeSlotsCount() == 0 then
+            player:messageSpecial(ID.text.ITEM_CANNOT_BE_OBTAINED, coloredDropID)
+        else
+            player:addItem(coloredDropID)
+            player:messageSpecial(ID.text.ITEM_OBTAINED, coloredDropID)
+            player:setCharVar("COP_3-taru_story", 2)
+            player:setCharVar("ColoredDrop", 0)
+        end
+    end
 end
 
 return entity

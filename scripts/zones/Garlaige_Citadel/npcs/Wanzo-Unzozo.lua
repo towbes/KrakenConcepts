@@ -13,9 +13,13 @@ ID = require('scripts/zones/Garlaige_Citadel/IDs')
 local entity = {}
 
 entity.onTrigger = function(player, npc)
+    player:startEvent(60)
 end
 
-entity.onDeath = function(npc)
+entity.onEventUpdate = function(player, csid, option, npc)
+end
+
+entity.onEventFinish = function(player, csid, option, npc)
 end
 
 return entity

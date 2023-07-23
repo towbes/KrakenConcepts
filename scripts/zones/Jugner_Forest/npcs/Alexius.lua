@@ -20,11 +20,15 @@ entity.onTrigger = function(player, npc)
     end
 end
 
-entity.onEventUpdate = function(player, csid, option)
+entity.onEventUpdate = function(player, csid, option, npc)
 end
 
-entity.onEventFinish = function(player, csid, option)
-    if csid == 10 then
+entity.onEventFinish = function(player, csid, option, npc)
+    if csid == 5 then
+        player:delKeyItem(xi.ki.WEAPONS_ORDER)
+        player:addKeyItem(xi.ki.WEAPONS_RECEIPT)
+        player:messageSpecial(ID.text.KEYITEM_OBTAINED, xi.ki.WEAPONS_RECEIPT)
+    elseif csid == 10 then
         player:setCharVar("sinHunting", 4)
     end
 end

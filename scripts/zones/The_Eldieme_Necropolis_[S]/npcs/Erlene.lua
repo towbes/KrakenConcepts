@@ -105,28 +105,17 @@ entity.onTrigger = function(player, npc)
     end
 end
 
-entity.onEventUpdate = function(player, csid, option)
+entity.onEventUpdate = function(player, csid, option, npc)
 end
 
-entity.onEventFinish = function(player, csid, option)
-    if csid == 10 and option == 0 then
-        player:addQuest(xi.quest.log_id.CRYSTAL_WAR, xi.quest.id.crystalWar.A_LITTLE_KNOWLEDGE)
-        player:setCharVar("ALittleKnowledge", 1)
-    elseif csid == 12 then
-        player:tradeComplete()
-        player:setCharVar("ALittleKnowledge", 2)
-    elseif csid == 14 then
-        player:addKeyItem(xi.ki.GRIMOIRE)
-        player:unlockJob(xi.job.SCH)
-        player:addTitle(xi.title.SCHULTZ_SCHOLAR)
-        player:setCharVar("ALittleKnowledge", 0)
-        player:setCharVar("SheetsofVellum", 0)
-        player:messageSpecial(ID.text.YOU_CAN_NOW_BECOME_A_SCHOLAR)
-        player:completeQuest(xi.quest.log_id.CRYSTAL_WAR, xi.quest.id.crystalWar.A_LITTLE_KNOWLEDGE)
-    elseif csid == 47 then
-        if player:canLearnSpell(478) and player:canLearnSpell(502) then
-            player:addSpell(478, true)
-            player:addSpell(502, true)
+entity.onEventFinish = function(player, csid, option, npc)
+    if csid == 47 then
+        if
+            player:canLearnSpell(xi.magic.spell.EMBRAVA) and
+            player:canLearnSpell(xi.magic.spell.KAUSTRA)
+        then
+            player:addSpell(xi.magic.spell.EMBRAVA, true)
+            player:addSpell(xi.magic.spell.KAUSTRA, true)
             player:messageSpecial(ID.text.YOU_LEARN_EMBRAVA_AND_KAUSTRA)
         end
     elseif csid == 18 then

@@ -46,28 +46,10 @@ entity.onTrigger = function(player, npc)
     end
 end
 
-entity.onEventUpdate = function(player, csid, option)
+entity.onEventUpdate = function(player, csid, option, npc)
 end
 
-entity.onEventFinish = function(player, csid, option)
-    if csid == 297 and option == 1 then
-        if player:getFreeSlotsCount() == 0 then
-            player:messageSpecial(ID.text.ITEM_CANNOT_BE_OBTAINED, 1547) --Mini tuning fork
-        else
-            player:addQuest(xi.quest.log_id.BASTOK, xi.quest.id.bastok.TRIAL_SIZE_TRIAL_BY_EARTH)
-            player:addItem(1547)
-            player:messageSpecial(ID.text.ITEM_OBTAINED, 1547)
-        end
-    elseif csid == 301 and option == 1 then
-        if player:getFreeSlotsCount() == 0 then
-            player:messageSpecial(ID.text.ITEM_CANNOT_BE_OBTAINED, 1547) --Mini tuning fork
-        else
-            player:addItem(1547)
-            player:messageSpecial(ID.text.ITEM_OBTAINED, 1547)
-        end
-    elseif csid == 298 and option == 1 then
-        xi.teleport.to(player, xi.teleport.id.CLOISTER_OF_TREMORS)
-    end
+entity.onEventFinish = function(player, csid, option, npc)
 end
 
 return entity

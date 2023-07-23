@@ -30,16 +30,10 @@ battlefieldObject.onBattlefieldLeave = function(player, battlefield, leavecode)
     end
 end
 
-battlefieldObject.onEventUpdate = function(player, csid, option)
+battlefieldObject.onEventUpdate = function(player, csid, option, npc)
 end
 
-battlefieldObject.onEventFinish = function(player, csid, option)
-    if csid == 32001 then
-        player:delKeyItem(xi.ki.TUNING_FORK_OF_EARTH)
-        player:addKeyItem(xi.ki.WHISPER_OF_TREMORS)
-        player:addTitle(xi.title.HEIR_OF_THE_GREAT_EARTH)
-        player:messageSpecial(ID.text.KEYITEM_OBTAINED, xi.ki.WHISPER_OF_TREMORS)
-    end
+battlefieldObject.onEventFinish = function(player, csid, option, npc)
 end
 
 return battlefieldObject

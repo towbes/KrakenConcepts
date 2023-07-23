@@ -25,7 +25,7 @@ entity.onTrigger = function(player, npc)
     end
 end
 
-entity.onEventUpdate = function(player, csid, option)
+entity.onEventUpdate = function(player, csid, option, npc)
     if csid == 1080 or csid == 1081 then
         if option == 1 and player:getGil() >= 10000 then
             player:updateEvent(xi.ki.MAGICKED_ASTROLABE)
@@ -35,7 +35,7 @@ entity.onEventUpdate = function(player, csid, option)
     end
 end
 
-entity.onEventFinish = function(player, csid, option)
+entity.onEventFinish = function(player, csid, option, npc)
     if csid == 1080 and option ~= xi.ki.MAGICKED_ASTROLABE then
         player:setLocalVar("Astrolabe", 1)
     elseif

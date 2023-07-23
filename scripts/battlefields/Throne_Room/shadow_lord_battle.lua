@@ -25,7 +25,7 @@ local content = BattlefieldMission:new({
     title                 = xi.title.SHADOW_BANISHER,
 })
 
-function content:onEventFinishBattlefield(player, csid, option)
+function content:onEventFinishBattlefield(player, csid, option, npc)
     local battlefield = player:getBattlefield()
     local area = battlefield:getArea()
 

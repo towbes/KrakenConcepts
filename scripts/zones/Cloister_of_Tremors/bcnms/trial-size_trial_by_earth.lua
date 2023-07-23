@@ -28,24 +28,10 @@ battlefieldObject.onBattlefieldLeave = function(player, battlefield, leavecode)
     end
 end
 
-battlefieldObject.onEventUpdate = function(player, csid, option)
+battlefieldObject.onEventUpdate = function(player, csid, option, npc)
 end
 
-battlefieldObject.onEventFinish = function(player, csid, option)
-    if csid == 32001 then
-        if not player:hasSpell(299) then
-            player:addSpell(299)
-            player:messageSpecial(ID.text.TITAN_UNLOCKED, 0, 0, 1)
-        end
-
-        if not player:hasItem(4181) then
-            player:addItem(4181) -- Scroll of instant warp
-            player:messageSpecial(ID.text.ITEM_OBTAINED, 4181)
-        end
-
-        player:addFame(xi.quest.fame_area.BASTOK, 30)
-        player:completeQuest(xi.quest.log_id.BASTOK, xi.quest.id.bastok.TRIAL_SIZE_TRIAL_BY_EARTH)
-    end
+battlefieldObject.onEventFinish = function(player, csid, option, npc)
 end
 
 return battlefieldObject

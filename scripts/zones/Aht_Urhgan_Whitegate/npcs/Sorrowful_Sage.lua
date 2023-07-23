@@ -74,20 +74,8 @@ entity.onTrigger = function(player, npc)
     end
 end
 
-entity.onEventUpdate = function(player, csid, option)
-    local rank = xi.besieged.getMercenaryRank(player)
-    local haveimperialIDtag = player:hasKeyItem(xi.ki.IMPERIAL_ARMY_ID_TAG) and 1 or 0
-    local assaultPoints = player:getAssaultPoint(xi.assault.assaultArea.NYZUL_ISLE)
-    local floorProgress = player:getCharVar("NyzulFloorProgress")
-    local unchartedFloorProgress = 0
-    local vendingBoxPreferences = player:getCharVar("Nyzul_VendingBoxPref")
-
-   -- if player:hasKeyItem(xi.ki.IMPERIAL_ARMY_ID_TAG) then
-   --     haveimperialIDtag = 1
-   -- else
-   --     haveimperialIDtag = 0
-   -- end
-
+entity.onEventUpdate = function(player, csid, option, npc)
+--[[
     if csid == 278 then
         local categorytype = bit.band(option, 0x0F)
         if categorytype == 3 then
@@ -111,8 +99,7 @@ entity.onEventUpdate = function(player, csid, option)
     end
 end
 
-
-entity.onEventFinish = function(player, csid, option)
+entity.onEventFinish = function(player, csid, option, npc)
     if csid == 278 then
         local selectiontype = bit.band(option, 0xF)
         if selectiontype == 1 then

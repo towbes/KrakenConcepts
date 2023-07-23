@@ -22,13 +22,10 @@ entity.onTrigger = function(player, npc)
     end
 end
 
-entity.onEventUpdate = function(player, csid, option, extras)
-    if csid == 32003 then
-        xi.bcnm.onEventUpdate(player, csid, option, extras)
-    end
+entity.onEventUpdate = function(player, csid, option, npc)
 end
 
-entity.onEventFinish = function(player, csid, option)
+entity.onEventFinish = function(player, csid, option, npc)
     if csid == 35 and option == 1 then
         player:setPos(12.527, 0.345, -539.602, 127, 31) -- to Monarch Linn (Retail confirmed)
     elseif csid == 10 and option == 1 then

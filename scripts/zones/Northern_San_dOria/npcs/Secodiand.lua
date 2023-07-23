@@ -16,10 +16,22 @@ end
 entity.onTrigger = function(player, npc)
 end
 
-entity.onEventUpdate = function(player, csid, option)
+entity.onEventUpdate = function(player, csid, option, npc)
 end
 
-entity.onEventFinish = function(player, csid, option)
+entity.onEventFinish = function(player, csid, option, npc)
+    if csid == 19 and option == 1 then
+        player:addQuest(xi.quest.log_id.SANDORIA, xi.quest.id.sandoria.FEAR_OF_THE_DARK)
+    elseif csid == 18 then
+        player:tradeComplete()
+        npcUtil.giveCurrency(player, 'gil', 200)
+        if player:getQuestStatus(xi.quest.log_id.SANDORIA, xi.quest.id.sandoria.FEAR_OF_THE_DARK) == QUEST_ACCEPTED then
+            player:addFame(xi.quest.fame_area.SANDORIA, 30)
+            player:completeQuest(xi.quest.log_id.SANDORIA, xi.quest.id.sandoria.FEAR_OF_THE_DARK)
+        else
+            player:addFame(xi.quest.fame_area.SANDORIA, 5)
+        end
+    end
 end
 
 return entity

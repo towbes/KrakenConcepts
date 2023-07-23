@@ -20,13 +20,10 @@ entity.onTrigger = function(player, npc)
     end
 end
 
-entity.onEventUpdate = function(player, csid, option)
+entity.onEventUpdate = function(player, csid, option, npc)
 end
 
-entity.onEventFinish = function(player, csid, option)
-    if csid == 745 then
-        player:setCharVar("[Quest]Mirror_Mirror", 2)
-    end
+entity.onEventFinish = function(player, csid, option, npc)
 end
 
 return entity

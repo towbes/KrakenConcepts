@@ -12,10 +12,10 @@ entity.onTrigger = function(player, npc)
     player:startEvent(31)
 end
 
-entity.onEventUpdate = function(player, csid, option)
+entity.onEventUpdate = function(player, csid, option, npc)
 end
 
-entity.onEventFinish = function(player, csid, option)
+entity.onEventFinish = function(player, csid, option, npc)
     -- TODO: Verify that CS moves the player
     if csid == 31 and option == 1 then
         player:setPos(820, 90, -139)

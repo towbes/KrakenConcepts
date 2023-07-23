@@ -78,24 +78,11 @@ entity.onTrigger = function(player, npc)
     end
 end
 
-entity.onEventUpdate = function(player, csid, option)
+entity.onEventUpdate = function(player, csid, option, npc)
 end
 
-entity.onEventFinish = function(player, csid, option)
-    if csid == 10088 then
-        player:addQuest(xi.quest.log_id.JEUNO, xi.quest.id.jeuno.LURE_OF_THE_WILDCAT)
-        player:setCharVar("WildcatJeuno", 0)
-        player:addKeyItem(xi.ki.WHITE_SENTINEL_BADGE)
-        player:messageSpecial(ID.text.KEYITEM_OBTAINED, xi.ki.WHITE_SENTINEL_BADGE)
-    elseif csid == 10091 then
-        player:completeQuest(xi.quest.log_id.JEUNO, xi.quest.id.jeuno.LURE_OF_THE_WILDCAT)
-        player:addFame(xi.quest.fame_area.JEUNO, 150)
-        player:setCharVar("WildcatJeuno", 0)
-        player:delKeyItem(xi.ki.WHITE_SENTINEL_BADGE)
-        player:addKeyItem(xi.ki.WHITE_INVITATION_CARD)
-        player:messageSpecial(ID.text.KEYITEM_LOST, xi.ki.WHITE_SENTINEL_BADGE)
-        player:messageSpecial(ID.text.KEYITEM_OBTAINED, xi.ki.WHITE_INVITATION_CARD)
-    elseif csid == 10177 then
+entity.onEventFinish = function(player, csid, option, npc)
+    if csid == 10177 then
         player:tradeComplete()
         xi.teleport.to(player, xi.teleport.id.WHITEGATE)
     end

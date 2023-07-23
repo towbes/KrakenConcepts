@@ -19,20 +19,10 @@ entity.onTrigger = function(player, npc)
     end
 end
 
-entity.onEventUpdate = function(player, csid, option)
+entity.onEventUpdate = function(player, csid, option, npc)
 end
 
-entity.onEventFinish = function(player, csid, option)
-    if csid == 10103 and option >= 1 and option <= 3 then
-        player:setFellowValue("size", option*4)
-        player:setCharVar("[Quest]Unlisted_Qualities", utils.mask.setBit(player:getCharVar("[Quest]Unlisted_Qualities"), 0, true))
-    end
---[[
-Adventuring Fellow Size Options:
-    3   Pretty tall
-    2   Around average
-    1   On the small side
---]]
+entity.onEventFinish = function(player, csid, option, npc)
 end
 
 return entity

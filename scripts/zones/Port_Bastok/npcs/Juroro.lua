@@ -59,54 +59,10 @@ entity.onTrigger = function(player, npc)
     end
 end
 
-entity.onEventUpdate = function(player, csid, option)
+entity.onEventUpdate = function(player, csid, option, npc)
 end
 
-entity.onEventFinish = function(player, csid, option)
-    if csid == 249 and option == 1 then
-        if player:getQuestStatus(xi.quest.log_id.BASTOK, xi.quest.id.bastok.TRIAL_BY_EARTH) == QUEST_COMPLETED then
-            player:delQuest(xi.quest.log_id.BASTOK, xi.quest.id.bastok.TRIAL_BY_EARTH)
-        end
-
-        player:addQuest(xi.quest.log_id.BASTOK, xi.quest.id.bastok.TRIAL_BY_EARTH)
-        player:setCharVar("TrialByEarth_date", 0)
-        player:addKeyItem(xi.ki.TUNING_FORK_OF_EARTH)
-        player:messageSpecial(ID.text.KEYITEM_OBTAINED, xi.ki.TUNING_FORK_OF_EARTH)
-    elseif csid == 284 then
-        player:addKeyItem(xi.ki.TUNING_FORK_OF_EARTH)
-        player:messageSpecial(ID.text.KEYITEM_OBTAINED, xi.ki.TUNING_FORK_OF_EARTH)
-    elseif csid == 252 then
-        local item = 0
-        if option == 1 then
-            item = 17438         -- Titan's Cudgel
-        elseif option == 2 then
-            item = 13244  -- Earth Belt
-        elseif option == 3 then
-            item = 13563  -- Earth Ring
-        elseif option == 4 then
-            item = 1205     -- Desert Light
-        end
-
-        if player:getFreeSlotsCount() == 0 and (option ~= 5 or option ~= 6) then
-            player:messageSpecial(ID.text.ITEM_CANNOT_BE_OBTAINED, item)
-        else
-            if option == 5 then
-                npcUtil.giveCurrency(player, 'gil', 10000)
-            elseif option == 6 then
-                player:addSpell(299) -- Avatar Titan Spell
-                player:messageSpecial(ID.text.TITAN_UNLOCKED, 0, 0, 1)
-            else
-                player:addItem(item)
-                player:messageSpecial(ID.text.ITEM_OBTAINED, item) -- Item
-            end
-
-            player:addTitle(xi.title.HEIR_OF_THE_GREAT_EARTH)
-            player:delKeyItem(xi.ki.WHISPER_OF_TREMORS) --Whisper of Tremors, as a trade for the above rewards
-            player:setCharVar("TrialByEarth_date", getMidnight())
-            player:addFame(xi.quest.fame_area.BASTOK, 30)
-            player:completeQuest(xi.quest.log_id.BASTOK, xi.quest.id.bastok.TRIAL_BY_EARTH)
-        end
-    end
+entity.onEventFinish = function(player, csid, option, npc)
 end
 
 return entity

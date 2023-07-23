@@ -833,7 +833,7 @@ xi.chocoboRaising.onTriggerVCSTrainer = function(player, npc)
     xi.chocoboRaising.startCutscene(player, npc, nil)
 end
 
-xi.chocoboRaising.onEventUpdateVCSTrainer = function(player, csid, option)
+xi.chocoboRaising.onEventUpdateVCSTrainer = function(player, csid, option, npc)
     if not xi.settings.main.ENABLE_CHOCOBO_RAISING then
         return
     end
@@ -1593,7 +1593,7 @@ xi.chocoboRaising.onEventUpdateVCSTrainer = function(player, csid, option)
     end
 end
 
-xi.chocoboRaising.onEventFinishVCSTrainer = function(player, csid, option)
+xi.chocoboRaising.onEventFinishVCSTrainer = function(player, csid, option, npc)
     if not xi.settings.main.ENABLE_CHOCOBO_RAISING then
         return
     end

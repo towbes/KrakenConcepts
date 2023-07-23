@@ -48,7 +48,7 @@ content.sections =
         {
             onEventFinish =
             {
-                [207] = function(player, csid, option)
+                [207] = function(player, csid, option, npc)
                     local battlefield = player:getBattlefield()
                     if battlefield:getLocalVar("weather") == 0 then
                         battlefield:setLocalVar("weather", VanadielDayElement())

@@ -490,7 +490,7 @@ xi.znm.ryo.onTrigger = function(player, npc)
     player:startEvent(913)
 end
 
-xi.znm.ryo.onEventUpdate = function(player, csid, option)
+xi.znm.ryo.onEventUpdate = function(player, csid, option, npc)
     if csid == 914 then
         local zeniValue = player:getLocalVar("[ZNM][Ryo]SoulPlateValue")
         player:setLocalVar("[ZNM][Ryo]SoulPlateValue", 0)
@@ -524,8 +524,7 @@ xi.znm.ryo.onEventUpdate = function(player, csid, option)
     end
 end
 
-
-xi.znm.ryo.onEventFinish = function(player, csid, option)
+xi.znm.ryo.onEventFinish = function(player, csid, option, npc)
 end
 
 -----------------------------------
@@ -704,102 +703,10 @@ xi.znm.sanraku.onTrigger = function(player, npc)
     end
 end
 
-
-xi.znm.sanraku.onEventUpdate = function(player, csid, option)
-    -- taken from sanraku.lua
-    if csid == 909 then
-        local zeni = player:getCurrency("zeni_point")
-
-        if option >= 300 and option <= 302 then
-            if option == 300 then
-                salt = xi.ki.SICKLEMOON_SALT
-            elseif option == 301 then
-                salt = xi.ki.SILVER_SEA_SALT
-            elseif option == 302 then
-                salt = xi.ki.CYAN_DEEP_SALT
-            end
-            if zeni < 500 then
-                player:updateEvent(2,500) -- not enough zeni
-            elseif player:hasKeyItem(salt) then
-                player:updateEvent(3,500) -- has salt already
-            else
-                player:updateEvent(1,500,0,salt)
-                player:addKeyItem(salt)
-                player:delCurrency("zeni_point", 500)
-            end
-        else -- player is interested in buying a pop item.
-            n = option % 10
-            if n <= 2 then
-                if option == 130 or option == 440 then
-                    tier = 5
-                else
-                    tier = 1
-                end
-            elseif n >= 3 and n <= 5 then
-                tier = 2
-            elseif n >= 6 and n <= 8 then
-                tier = 3
-            else
-                tier = 4
-            end
-           
-
-            if option >= 100 and option <= 130 then
-                item = lures[option-99]
-                local itemVarName = string.format("[ZNM]PopItemCost" ..item.. "")
-                cost = tier * 1000 +  GetServerVariable(itemVarName)
-                player:updateEvent(0,0,0,0,0,0,cost)
-
-            elseif option >= 400 and option <=440 then
-                if option == 440 then
-                    option = 430
-                end
-
-                item = lures[option-399]
-
-                if option == 430 then -- Pandemonium Warden
-                    keyitem1 = xi.ki.LILAC_COLORED_SEAL keyitem2 = xi.ki.BRIGHT_BLUE_SEAL keyitem3 = xi.ki.LAVENDER_COLORED_SEAL
-                elseif option == 409 then -- Tinnin
-                    keyitem1 = xi.ki.CHARCOAL_GREY_SEAL keyitem2 = xi.ki.DEEP_PURPLE_SEAL keyitem3 = xi.ki.CHESTNUT_COLORED_SEAL
-                elseif option == 419 then -- Sarameya
-                    keyitem1 = xi.ki.PURPLISH_GREY_SEAL keyitem2 = xi.ki.GOLD_COLORED_SEAL keyitem3 = xi.ki.COPPER_COLORED_SEAL
-                elseif option == 429 then -- Tyger
-                    keyitem1 = xi.ki.TAUPE_COLORED_SEAL keyitem2 = xi.ki.FALLOW_COLORED_SEAL keyitem3 = xi.ki.SIENNA_COLORED_SEAL
-                else
-                    keyitem1 = seals[option - 402] keyitem2 = nil keyitem3 = nil
-                end
-
-                if cost > zeni then
-                    player:updateEvent(2, cost, item, keyitem1,keyitem2,keyitem3) -- you don't have enough zeni.
-                elseif player:addItem(item) then
-                    if keyitem1 ~= nil then
-                        player:delKeyItem(keyitem1)
-                    end
-                    if keyitem2 ~= nil then
-                        player:delKeyItem(keyitem2)
-                    end
-                    if keyitem3 ~= nil then
-                        player:delKeyItem(keyitem3)
-                    end
-
-                    player:updateEvent(1, cost, item, keyitem1,keyitem2,keyitem3)
-                    player:delCurrency("zeni_point", cost)
-                    local itemVarName = string.format("[ZNM]PopItemCost" ..item.. "")
-                    local currentUpcharge = GetServerVariable(itemVarName)
-                    SetServerVariable(itemVarName, currentUpcharge + 100)
-                else
-                    player:updateEvent(4, cost, item, keyitem1,keyitem2,keyitem3) -- Cannot obtain.
-                end
-            elseif option == 500 or option == 1 then -- player has declined to buy a pop item
-                local allowIslet = 0
-                    allowIslet = player:getCharVar("[ZNM][Ryo]IsletDiscussion") 
-                player:updateEvent(allowIslet)
-            end
-        end
-    end
+xi.znm.sanraku.onEventUpdate = function(player, csid, option, npc)
 end
 
-xi.znm.sanraku.onEventFinish = function(player, csid, option)
+xi.znm.sanraku.onEventFinish = function(player, csid, option, npc)
     if csid == 910 then
         player:confirmTrade()
         player:setCharVar("[ZNM][Sanraku]TradingDay", VanadielUniqueDay())

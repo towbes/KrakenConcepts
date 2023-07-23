@@ -68,8 +68,10 @@ entity.onTrigger = function(player, npc)
     end
 end
 
-entity.onEventFinish = function(player, csid, option)
-    if csid == 562 then
+entity.onEventFinish = function(player, csid, option, npc)
+    if csid == 109 and option == 1 then
+        player:addQuest(xi.quest.log_id.SANDORIA, sandyQuests.PEACE_FOR_THE_SPIRIT)
+    elseif csid == 562 then
         player:setCharVar("WildcatSandy", utils.mask.setBit(player:getCharVar("WildcatSandy"), 15, true))
     elseif csid == 573 and option == 2 then
         player:addSpell(902, true, true)

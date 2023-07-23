@@ -47,17 +47,10 @@ end
 zoneObject.onTriggerAreaEnter = function(player, triggerArea)
 end
 
-zoneObject.onConquestUpdate = function(zone, updatetype, influence, owner, ranking, isConquestAlliance)
-    xi.conq.onConquestUpdate(zone, updatetype, influence, owner, ranking, isConquestAlliance)
+zoneObject.onEventUpdate = function(player, csid, option, npc)
 end
 
-zoneObject.onEventUpdate = function(player, csid, option)
-end
-
-zoneObject.onEventFinish = function(player, csid, option)
-    if csid == 100 then
-        player:setPos(0, 0, 0, 0, xi.zone.CARPENTERS_LANDING)
-    end
+zoneObject.onEventFinish = function(player, csid, option, npc)
 end
 
 return zoneObject

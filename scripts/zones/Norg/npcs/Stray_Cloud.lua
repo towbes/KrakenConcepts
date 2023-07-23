@@ -16,10 +16,24 @@ end
 entity.onTrigger = function(player, npc)
 end
 
-entity.onEventUpdate = function(player, csid, option)
+entity.onEventUpdate = function(player, csid, option, npc)
 end
 
-entity.onEventFinish = function(player, csid, option)
+entity.onEventFinish = function(player, csid, option, npc)
+    if csid == 225 then
+        player:addQuest(xi.quest.log_id.OUTLANDS, xi.quest.id.outlands.AN_UNDYING_PLEDGE)
+        player:setCharVar("anUndyingPledgeCS", 1)
+    elseif
+        csid == 227 and
+        npcUtil.completeQuest(player, xi.quest.log_id.OUTLANDS, xi.quest.id.outlands.AN_UNDYING_PLEDGE, {
+            item = 12375,
+            fameArea = xi.quest.fame_area.NORG,
+            fame = 50,
+            var = "anUndyingPledgeCS",
+        })
+    then
+        player:delKeyItem(xi.ki.CALIGINOUS_BLADE)
+    end
 end
 
 return entity

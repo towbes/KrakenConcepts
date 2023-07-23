@@ -41,15 +41,10 @@ end
 zoneObject.onTriggerAreaEnter = function(player, triggerArea)
 end
 
-zoneObject.onEventUpdate = function(player, csid, option)
+zoneObject.onEventUpdate = function(player, csid, option, npc)
 end
 
-zoneObject.onEventFinish = function(player, csid, option)
-    if csid >= 2 and csid <= 39 then
-        for _, entry in pairs(player:getNotorietyList()) do
-            entry:clearEnmity(player) -- reset hate on player after teleporting
-        end
-    end
+zoneObject.onEventFinish = function(player, csid, option, npc)
 end
 
 return zoneObject

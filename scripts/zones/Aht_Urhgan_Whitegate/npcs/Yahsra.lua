@@ -55,7 +55,7 @@ entity.onTrigger = function(player, npc)
     end
 end
 
-entity.onEventUpdate = function(player, csid, option)
+entity.onEventUpdate = function(player, csid, option, npc)
     local selectiontype = bit.band(option, 0xF)
     if csid == 273 and selectiontype == 2 then
         local item = bit.rshift(option, 14)
@@ -67,7 +67,7 @@ entity.onEventUpdate = function(player, csid, option)
     end
 end
 
-entity.onEventFinish = function(player, csid, option)
+entity.onEventFinish = function(player, csid, option, npc)
     if csid == 273 then
         local selectiontype = bit.band(option, 0xF)
         if

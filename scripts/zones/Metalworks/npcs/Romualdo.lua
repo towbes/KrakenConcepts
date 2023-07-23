@@ -23,14 +23,10 @@ entity.onTrigger = function(player, npc)
     end
 end
 
-entity.onEventUpdate = function(player, csid, option)
+entity.onEventUpdate = function(player, csid, option, npc)
 end
 
-entity.onEventFinish = function(player, csid, option)
-    if csid == 802 then
-        player:addQuest(xi.quest.log_id.BASTOK, xi.quest.id.bastok.FADED_PROMISES)
-        player:setCharVar("FadedPromises", 1)
-    end
+entity.onEventFinish = function(player, csid, option, npc)
 end
 
 return entity

@@ -26,10 +26,10 @@ entity.onTrigger = function(player, npc)
     return 0
 end
 
-entity.onEventUpdate = function(player, csid, option)
+entity.onEventUpdate = function(player, csid, option, npc)
 end
 
-entity.onEventFinish = function(player, csid, option)
+entity.onEventFinish = function(player, csid, option, npc)
     if csid == 46 then
         player:confirmTrade()
         player:messageSpecial(ID.text.YOUR_KEY_BREAKS, 0, 1136)

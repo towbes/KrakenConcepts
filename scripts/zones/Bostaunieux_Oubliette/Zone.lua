@@ -72,7 +72,7 @@ zoneObject.onTriggerAreaEnter = function(player, triggerArea)
     end
 end
 
-zoneObject.onEventFinish = function(player, csid, option)
+zoneObject.onEventFinish = function(player, csid, option, npc)
 end
 
 zoneObject.onGameHour = function(zone)

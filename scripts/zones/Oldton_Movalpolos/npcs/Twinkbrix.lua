@@ -73,19 +73,11 @@ entity.onTrigger = function(player, npc)
     end
 end
 
-entity.onEventUpdate = function(player, csid, option)
+entity.onEventUpdate = function(player, csid, option, npc)
 end
 
-entity.onEventFinish = function(player, csid, option)
-    print(option)
-
-    if csid == 51 then
-        player:setCharVar("[ENM]OperatingLever", VanadielTime() + (xi.settings.main.ENM_COOLDOWN * 3600))
-        npcUtil.giveKeyItem(player, xi.ki.SHAFT_2716_OPERATING_LEVER)
-        player:tradeComplete()
-
-    elseif csid == 55 and option == 1 then
-        player:setCharVar("[ENM]GateDial", VanadielTime() + (xi.settings.main.ENM_COOLDOWN * 3600))
+entity.onEventFinish = function(player, csid, option, npc)
+    if csid == 55 and option == 1 then
         npcUtil.giveKeyItem(player, xi.ki.SHAFT_GATE_OPERATING_DIAL)
         player:confirmTrade()
     -- elseif csid == 55 and option == 0 then
