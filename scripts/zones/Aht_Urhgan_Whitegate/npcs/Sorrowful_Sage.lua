@@ -75,7 +75,6 @@ entity.onTrigger = function(player, npc)
 end
 
 entity.onEventUpdate = function(player, csid, option, npc)
---[[
     if csid == 278 then
         local categorytype = bit.band(option, 0x0F)
         if categorytype == 3 then
