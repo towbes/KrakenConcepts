@@ -46,6 +46,7 @@ local maps =
 entity.onTrade = function(player, npc, trade)
     local gil = trade:getGil()
     local count = trade:getItemCount()
+    local item = trade:getItemId(0)
 
     if player:hasKeyItem(xi.ki.VIAL_OF_SHROUDED_SAND) then
         -- buy prismatic hourglass
@@ -71,8 +72,18 @@ entity.onTrade = function(player, npc, trade)
             trade:hasItemQty(currency[2], xi.settings.main.CURRENCY_EXCHANGE_RATE)
         then
             player:startEvent(136, xi.settings.main.CURRENCY_EXCHANGE_RATE)
-        elseif count == 1 and trade:hasItemQty(currency[3], 1) then
-            player:startEvent(138, currency[3], currency[2], xi.settings.main.CURRENCY_EXCHANGE_RATE)
+        elseif 
+        count == 1 and trade:hasItemQty(currency[3], 1) and 
+        item  == currency[3] 
+        then
+            player:setLocalVar("currency", currency[2])
+            player:startEvent(138, item, currency[2], xi.settings.main.CURRENCY_EXCHANGE_RATE)
+        elseif 
+        count == 1 and trade:hasItemQty(currency[2], 1) and 
+        item  == currency[2] 
+        then
+            player:setLocalVar("currency", currency[1])
+            player:startEvent(138, item, currency[1], xi.settings.main.CURRENCY_EXCHANGE_RATE)
 
         -- shop
         else
@@ -139,6 +150,8 @@ entity.onEventUpdate = function(player, csid, option)
 end
 
 entity.onEventFinish = function(player, csid, option)
+    local currencyExchange = player:getLocalVar("currency")
+
     -- bought prismatic hourglass
     if csid == 134 then
         player:tradeComplete()
@@ -170,23 +183,23 @@ entity.onEventFinish = function(player, csid, option)
             player:messageSpecial(ID.text.ITEM_OBTAINED, currency[3])
         end
 
-    -- 10k pieces to hundos
-    elseif csid == 138 then
-        local slotsReq = math.ceil(xi.settings.main.CURRENCY_EXCHANGE_RATE / 99)
-        if player:getFreeSlotsCount() < slotsReq then
-            player:messageSpecial(ID.text.ITEM_CANNOT_BE_OBTAINED, currency[2])
-        else
-            player:tradeComplete()
-            for i = 1, slotsReq do
-                if i < slotsReq or (xi.settings.main.CURRENCY_EXCHANGE_RATE % 99) == 0 then
-                    player:addItem(currency[2], 99)
-                else
-                    player:addItem(currency[2], xi.settings.main.CURRENCY_EXCHANGE_RATE % 99)
-                end
+    -- 10k pieces to hundos or 100 pieces to singles
+elseif csid == 138 then
+    local slotsReq = math.ceil(xi.settings.main.CURRENCY_EXCHANGE_RATE / 99)
+    if player:getFreeSlotsCount() < slotsReq then
+        player:messageSpecial(ID.text.ITEM_CANNOT_BE_OBTAINED, currencyExchange)
+    else
+        player:tradeComplete()
+        for i = 1, slotsReq do
+            if i < slotsReq or xi.settings.main.CURRENCY_EXCHANGE_RATE % 99 == 0 then
+                player:addItem(currencyExchange, 99)
+            else
+                player:addItem(currencyExchange, xi.settings.main.CURRENCY_EXCHANGE_RATE % 99)
             end
-
-            player:messageSpecial(ID.text.ITEMS_OBTAINED, currency[2], xi.settings.main.CURRENCY_EXCHANGE_RATE)
         end
+
+        player:messageSpecial(ID.text.ITEMS_OBTAINED, currencyExchange, xi.settings.main.CURRENCY_EXCHANGE_RATE)
+    end
 
     -- bought item from shop
     elseif csid == 137 then
