@@ -14,106 +14,124 @@ require("scripts/globals/titles")
 local entity = {}
 
 -- data from http://wiki.ffxiclopedia.org/wiki/Inside_the_Belly
-local fishRewards =
-{
+local fishRewards = {
     [4304] = -- Grimmonite
     {
         gil = 350,
-        items =
+        items = {{
+            chance = 5,
+            itemId = 13445
+        }, -- Gold Ring (guessing 5%. Wiki unknown.)
         {
-            { chance = 5, itemId = 13445 }, -- Gold Ring (guessing 5%. Wiki unknown.)
-            { chance = 5, itemId = 13446 }, -- Mythril Ring (guessing 5%. Wiki unknown.)
-            { chance = 5, itemId = 13456 }, -- Silver Ring (guessing 5%. Wiki unknown.)
+            chance = 5,
+            itemId = 13446
+        }, -- Mythril Ring (guessing 5%. Wiki unknown.)
+        {
+            chance = 5,
+            itemId = 13456
+        } -- Silver Ring (guessing 5%. Wiki unknown.)
         }
     },
 
     [4305] = -- Ryugu Titan
     {
         gil = 800,
-        items =
-        {
-            { chance = 1.3, itemId = 18377 }, -- Mercurial Sword
+        items = {{
+            chance = 1.3,
+            itemId = 18377
+        } -- Mercurial Sword
         }
     },
 
     [4306] = -- Giant Donko
     {
         gil = 96,
-        items =
-        {
-            { chance = 4.7, itemId = 1833 }, -- Broken Halcyon Fishing Rod
+        items = {{
+            chance = 4.7,
+            itemId = 1833
+        } -- Broken Halcyon Fishing Rod
         }
     },
 
     [4307] = -- Jungle Catfish
     {
         gil = 300,
-        items =
-        {
-            { chance = 3, itemId = 1832 }, -- Broken Hume Fishing Rod
+        items = {{
+            chance = 3,
+            itemId = 1832
+        } -- Broken Hume Fishing Rod
         }
     },
 
     [4308] = -- Giant Chirai
     {
         gil = 550,
-        items =
-        {
-            { chance = 1.2, itemId = 1278 }, -- Spool of Twinthread
+        items = {{
+            chance = 1.2,
+            itemId = 1278
+        } -- Spool of Twinthread
         }
     },
 
     [4309] = -- Cave Cherax
     {
         gil = 800,
-        items =
-        {
-            { chance = 26.2, itemId = 17007 }, -- Dwarf Pugil
+        items = {{
+            chance = 26.2,
+            itemId = 17007
+        } -- Dwarf Pugil
         }
     },
 
     [4316] = -- Armored Pisces
     {
         gil = 475,
-        items =
-        {
-            { chance = 0.4, itemId = 13736 }, -- Stolid Breastplate
+        items = {{
+            chance = 0.4,
+            itemId = 13736
+        } -- Stolid Breastplate
         }
     },
 
     [4319] = -- Tricorn
     {
         gil = 810,
-        items =
-        {
-            { chance = 4, itemId = 645 }, -- Chunk of Darksteel Ore (guessing 4%. Wiki unknown.)
+        items = {{
+            chance = 4,
+            itemId = 645
+        } -- Chunk of Darksteel Ore (guessing 4%. Wiki unknown.)
         }
     },
 
     [4385] = -- Zafmlug Bass
     {
         gil = 15,
-        items =
-        {
-            { chance = 1.4, itemId = 770 }, -- Blue Rock
+        items = {{
+            chance = 1.4,
+            itemId = 770
+        } -- Blue Rock
         }
     },
 
     [4462] = -- Monke-Onke
     {
         gil = 150,
-        items =
-        {
-            { chance = 10, itemId = 943, min = 1, max = 6 }, -- Pinch of Poison Dust (guessing 10%. Wiki unknown.)
+        items = {{
+            chance = 10,
+            itemId = 943,
+            min = 1,
+            max = 6
+        } -- Pinch of Poison Dust (guessing 10%. Wiki unknown.)
         }
     },
 
     [4428] = -- Dark Bass
     {
         gil = 10,
-        items =
-        {
-            { chance = 4.6, itemId = 772 }, -- Green Rock
+        items = {{
+            chance = 4.6,
+            itemId = 772
+        } -- Green Rock
         }
     },
 
@@ -121,54 +139,60 @@ local fishRewards =
     {
         gil = 250,
         title = xi.title.ACE_ANGLER,
-        items =
-        {
-            { chance = 1.4, itemId = 16837 }, -- Trident
+        items = {{
+            chance = 1.4,
+            itemId = 16837
+        } -- Trident
         }
     },
 
     [4454] = -- Emperor Fish
     {
         gil = 300,
-        items =
-        {
-            { chance = 1, itemId = 12955 }, -- Cuir Highboots (guessing 1%. Wiki says 0%.)
+        items = {{
+            chance = 1,
+            itemId = 12955
+        } -- Cuir Highboots (guessing 1%. Wiki says 0%.)
         }
     },
 
     [4463] = -- Takitaro
     {
         gil = 350,
-        items =
-        {
-            { chance = 2.4, itemId = 942 }, -- Philosopher's Stone
+        items = {{
+            chance = 2.4,
+            itemId = 942
+        } -- Philosopher's Stone
         }
     },
 
     [4471] = -- Bladefish
     {
         gil = 200,
-        items =
-        {
-            { chance = 11.7, itemId = 17002 }, -- Robber Rig
+        items = {{
+            chance = 11.7,
+            itemId = 17002
+        } -- Robber Rig
         }
     },
 
     [4474] = -- Gigant Squid
     {
         gil = 300,
-        items =
-        {
-            { chance = 2.5, itemId = 12317 }, -- Flame Shield (guessing 2.5%. Wiki unknown.)
+        items = {{
+            chance = 2.5,
+            itemId = 12317
+        } -- Flame Shield (guessing 2.5%. Wiki unknown.)
         }
     },
 
     [4475] = -- Sea Zombie
     {
         gil = 350,
-        items =
-        {
-            { chance = 26.1, itemId = 17006 }, -- Drill Calamary
+        items = {{
+            chance = 26.1,
+            itemId = 17006
+        } -- Drill Calamary
         }
     },
 
@@ -176,47 +200,60 @@ local fishRewards =
     {
         gil = 350,
         title = xi.title.LU_SHANG_LIKE_FISHER_KING,
-        items =
+        items = {{
+            chance = 1.3,
+            itemId = 16533
+        }, -- Ancient Sword
         {
-            { chance = 1.3, itemId = 16533 }, -- Ancient Sword
-            { chance =   5, itemId =   888 }, -- Seashell (guessing 5%. Wiki unknown.)
+            chance = 5,
+            itemId = 888
+        } -- Seashell (guessing 5%. Wiki unknown.)
         }
     },
 
     [4477] = -- Gavial Fish
     {
         gil = 250,
-        items =
-        {
-            { chance = 4.9, itemId = 13361 }, -- Drone Earring
+        items = {{
+            chance = 4.9,
+            itemId = 13361
+        } -- Drone Earring
         }
     },
 
     [4478] = -- Three-eyed Fish
     {
         gil = 250,
-        items =
-        {
-            { chance = 10, itemId = 945, min = 1, max = 10 }, -- Pinch of Paralysis Dust (guessing 10%. Wiki unknown.)
+        items = {{
+            chance = 10,
+            itemId = 945,
+            min = 1,
+            max = 10
+        } -- Pinch of Paralysis Dust (guessing 10%. Wiki unknown.)
         }
     },
 
     [4479] = -- Bhefhel Marlin
     {
         gil = 150,
-        items =
+        items = {{
+            chance = 14.3,
+            itemId = 1873
+        }, -- Brigand's Chart
         {
-            { chance = 14.3, itemId = 1873 }, -- Brigand's Chart
-            { chance =  4.4, itemId = 1874 }, -- Pirate's Chart
+            chance = 4.4,
+            itemId = 1874
+        } -- Pirate's Chart
         }
     },
 
     [4480] = -- Gugru Tuna
     {
         gil = 50,
-        items =
-        {
-            { chance = 2.5, itemId = 19186 }, -- Tiny Tathlum
+        items = {{
+            chance = 2.5,
+            itemId = 19186
+        } -- Tiny Tathlum
         }
     },
 
@@ -224,234 +261,299 @@ local fishRewards =
     {
         gil = 16,
         title = xi.title.CORDON_BLEU_FISHER,
-        items =
-        {
-            { chance = 2.5, itemId = 13480 }, -- Turquoise Ring
+        items = {{
+            chance = 2.5,
+            itemId = 13480
+        } -- Turquoise Ring
         }
     },
 
     [5120] = -- Titanic Sawfish
     {
         gil = 810,
-        items =
-        {
-            { chance = 0.7, itemId = 19290 }, -- Aizenkunitoshi
+        items = {{
+            chance = 0.7,
+            itemId = 19290
+        } -- Aizenkunitoshi
         }
     },
 
     [5127] = -- Gugrusaurus
     {
         gil = 880,
-        items =
-        {
-            { chance = 0.4, itemId = 1837 }, -- Saber Shoot
+        items = {{
+            chance = 0.4,
+            itemId = 1837
+        } -- Saber Shoot
         }
     },
 
     [5129] = -- Lik
     {
         gil = 880,
-        items =
-        {
-            { chance = 0.5, itemId = 1826 }, -- Spool of Opal Silk
+        items = {{
+            chance = 0.5,
+            itemId = 1826
+        } -- Spool of Opal Silk
         }
     },
 
     [5133] = -- Pterygotus
     {
         gil = 390,
-        items =
-        {
-            { chance = 6.7, itemId = 795 }, -- Lapis Lazuli
+        items = {{
+            chance = 6.7,
+            itemId = 795
+        } -- Lapis Lazuli
         }
     },
 
     [5134] = -- Mola Mola
     {
         gil = 487,
-        items =
-        {
-            { chance = 1.8, itemId = 16850 }, -- Mercurial Spear
+        items = {{
+            chance = 1.8,
+            itemId = 16850
+        } -- Mercurial Spear
         }
     },
 
     [5135] = -- Rhinochimera
     {
         gil = 300,
-        items =
-        {
-            { chance = 3.2, itemId = 11624 }, -- Solon Torque
+        items = {{
+            chance = 3.2,
+            itemId = 11624
+        } -- Solon Torque
         }
     },
 
     [5136] = -- Istavrit
     {
         gil = 50,
-        items =
-        {
-            { chance = 10, itemId = 944, min = 1, max = 6 }, -- Pinch of Venom Dust (guessing 10%. Wiki unknown.)
+        items = {{
+            chance = 10,
+            itemId = 944,
+            min = 1,
+            max = 6
+        } -- Pinch of Venom Dust (guessing 10%. Wiki unknown.)
         }
     },
 
     [5137] = -- Turnabaligi
     {
         gil = 340,
-        items =
+        items = {{
+            chance = 1,
+            itemId = 1262
+        }, -- Chunk of Dark Ore
         {
-            { chance =   1, itemId = 1262 }, -- Chunk of Dark Ore
-            { chance = 1.4, itemId = 1256 }, -- Chunk of Ice Ore
-            { chance = 1.4, itemId = 1260 }, -- Chunk of Water Ore
+            chance = 1.4,
+            itemId = 1256
+        }, -- Chunk of Ice Ore
+        {
+            chance = 1.4,
+            itemId = 1260
+        } -- Chunk of Water Ore
         }
     },
 
     [5140] = -- Kalkanbaligi
     {
         gil = 390,
-        items =
-        {
-            { chance = 3.3, itemId = 16184 }, -- Flat Shield
+        items = {{
+            chance = 3.3,
+            itemId = 16184
+        } -- Flat Shield
         }
     },
 
     [5141] = -- Veydal Wrasse
     {
         gil = 225,
-        items =
+        items = {{
+            chance = 5,
+            itemId = 4361
+        }, -- Nebimonite (guessing 5%. Wiki unknown.)
         {
-            { chance = 5, itemId = 4361 }, -- Nebimonite (guessing 5%. Wiki unknown.)
-            { chance = 5, itemId =  888 }, -- Seashell (guessing 5%. Wiki unknown.)
+            chance = 5,
+            itemId = 888
+        } -- Seashell (guessing 5%. Wiki unknown.)
         }
     },
 
     [5450] = -- Lakerda
     {
         gil = 51,
-        items =
+        items = {{
+            chance = 6,
+            itemId = 792
+        }, -- Pearl
         {
-            { chance =   6, itemId = 792 }, -- Pearl
-            { chance = 1.9, itemId = 793 }, -- Black Pearl
+            chance = 1.9,
+            itemId = 793
+        } -- Black Pearl
         }
     },
 
     [5451] = -- Kilicbaligi
     {
         gil = 150,
-        items =
-        {
-            { chance = 2.5, itemId = 16606 }, -- Rusty Greatsword (guessing 2.5%. Wiki unknown.)
+        items = {{
+            chance = 2.5,
+            itemId = 16606
+        } -- Rusty Greatsword (guessing 2.5%. Wiki unknown.)
         }
     },
 
     [5455] = -- Ahtapot
     {
         gil = 350,
-        items =
+        items = {{
+            chance = 18.5,
+            itemId = 2886
+        }, -- Mildewy Ingot
         {
-            { chance = 18.5, itemId = 2886 }, -- Mildewy Ingot
-            { chance = 10.2, itemId = 2887 }, -- Decayed Ingot
+            chance = 10.2,
+            itemId = 2887
+        } -- Decayed Ingot
         }
     },
 
     [5462] = -- Morinabaligi
     {
         gil = 300,
-        items =
-        {
-            { chance = 5, itemId = 12699 }, -- Cuir Gloves (guessing 5%. Wiki unknown.)
+        items = {{
+            chance = 5,
+            itemId = 12699
+        } -- Cuir Gloves (guessing 5%. Wiki unknown.)
         }
     },
 
     [5463] = -- Yayinbaligi
     {
         gil = 50,
-        items =
-        {
-            { chance = 5, itemId = 14649 }, -- Telluric Ring (guessing 5%. Wiki unknown.)
+        items = {{
+            chance = 5,
+            itemId = 14649
+        } -- Telluric Ring (guessing 5%. Wiki unknown.)
         }
     },
 
     [5467] = -- Megalodon
     {
         gil = 532,
-        items =
+        items = {{
+            chance = 3,
+            itemId = 483
+        }, -- Broken Mithran Fishing Rod (guessing 3%. Wiki unknown.)
         {
-            { chance = 3, itemId =   483 }, -- Broken Mithran Fishing Rod (guessing 3%. Wiki unknown.)
-            { chance = 3, itemId = 17380 }, -- Mithran Fishing Rod (guessing 3%. Wiki unknown.)
+            chance = 3,
+            itemId = 17380
+        } -- Mithran Fishing Rod (guessing 3%. Wiki unknown.)
         }
     },
 
     [5468] = -- Matsya
     {
         gil = 12592,
-        items =
-        {
-            { chance = 1.2, itemId = 11009 }, -- Shaper's Shawl
+        items = {{
+            chance = 1.2,
+            itemId = 11009
+        } -- Shaper's Shawl
         }
     },
 
     [5470] = -- Pirarucu
     {
         gil = 516,
-        items =
+        items = {{
+            chance = 5,
+            itemId = 1122
+        }, -- Wyvern Skin (guessing 5%. Wiki unknown.)
         {
-            { chance =   5, itemId = 1122 }, -- Wyvern Skin (guessing 5%. Wiki unknown.)
-            { chance = 2.5, itemId = 2523 }, -- Peiste Skin (guessing 2.5%. Wiki unknown.)
+            chance = 2.5,
+            itemId = 2523
+        } -- Peiste Skin (guessing 2.5%. Wiki unknown.)
         }
     },
 
     [5471] = -- Gerrothorax
     {
         gil = 423,
-        items =
-        {
-            { chance = 1.2, itemId = 11492 }, -- Risky Patch
+        items = {{
+            chance = 1.2,
+            itemId = 11492
+        } -- Risky Patch
         }
     },
 
     [5475] = -- Gigant Octopus
     {
         gil = 119,
-        items =
-        {
-            { chance = 10, itemId = 929, min = 1, max = 6 }, -- Jar of Black Ink (guessing 10%. Wiki unknown.)
+        items = {{
+            chance = 10,
+            itemId = 929,
+            min = 1,
+            max = 6
+        } -- Jar of Black Ink (guessing 10%. Wiki unknown.)
         }
     },
 
     [5476] = -- Abaia
     {
         gil = 690,
-        items =
+        items = {{
+            chance = 1.5,
+            itemId = 5818,
+            min = 1,
+            max = 1
+        }, -- Aurora Bass x3
         {
-            { chance =  1.5, itemId = 5818, min = 1, max = 1 }, -- Aurora Bass x3
-            { chance =  7.8, itemId = 5818, min = 2, max = 2 }, -- Aurora Bass x2
-            { chance = 12.5, itemId = 5818, min = 3, max = 3 }, -- Aurora Bass x1
-            { chance =  0.7, itemId = 10372 }, -- Plumb Boots
+            chance = 7.8,
+            itemId = 5818,
+            min = 2,
+            max = 2
+        }, -- Aurora Bass x2
+        {
+            chance = 12.5,
+            itemId = 5818,
+            min = 3,
+            max = 3
+        }, -- Aurora Bass x1
+        {
+            chance = 0.7,
+            itemId = 10372
+        } -- Plumb Boots
         }
     },
     [5537] = -- Soryu
     {
         gil = 1512,
-        items =
-        {
-            { chance = 46.8, itemId = 9099 }, -- Soryu's Liver
+        items = {{
+            chance = 46.8,
+            itemId = 9099
+        } -- Soryu's Liver
         }
     },
 
     [5538] = -- Sekiryu
     {
         gil = 1512,
-        items =
-        {
-            { chance = 48.1, itemId = 9100 }, -- Sekiryu's Liver (guessing 48.1%. Wiki unknown.)
+        items = {{
+            chance = 48.1,
+            itemId = 9100
+        } -- Sekiryu's Liver (guessing 48.1%. Wiki unknown.)
         }
     },
 
     [5539] = -- Hakuryu
     {
         gil = 1512,
-        items =
-        {
-            { chance = 48.1, itemId = 9101 }, -- Hakuryu's Liver
+        items = {{
+            chance = 48.1,
+            itemId = 9101
+        } -- Hakuryu's Liver
         }
     },
 
@@ -459,47 +561,54 @@ local fishRewards =
     {
         gil = 50,
         title = xi.title.CORDON_BLEU_FISHER,
-        items =
-        {
-            { chance = 6.2, itemId = 17076 }, -- Earth Wand
+        items = {{
+            chance = 6.2,
+            itemId = 17076
+        } -- Earth Wand
         }
     },
 
     [5813] = -- Dorado Gar
     {
         gil = 568,
-        items =
-        {
-            { chance = 5, itemId = 745, min = 1, max = 4 }, -- Gold Ingot (guessing 5%. Wiki unknown.)
+        items = {{
+            chance = 5,
+            itemId = 745,
+            min = 1,
+            max = 4
+        } -- Gold Ingot (guessing 5%. Wiki unknown.)
         }
     },
 
     [5814] = -- Crocodilos
     {
         gil = 1763,
-        items =
-        {
-            { chance = 2.3, itemId = 11654 }, -- Puffin Ring
+        items = {{
+            chance = 2.3,
+            itemId = 11654
+        } -- Puffin Ring
         }
     },
 
     [5815] = -- Pelazoea
     {
         gil = 360,
-        items =
-        {
-            { chance = 1.8, itemId = 11655 }, -- Noddy Ring
+        items = {{
+            chance = 1.8,
+            itemId = 11655
+        } -- Noddy Ring
         }
     },
 
     [6489] = -- Far East Puffer
     {
         gil = 735,
-        items =
-        {
-            { chance = 5, itemId = 25864 }, -- Stinky Subligar (guessing 5%. Wiki unknown.)
+        items = {{
+            chance = 5,
+            itemId = 25864
+        } -- Stinky Subligar (guessing 5%. Wiki unknown.)
         }
-    },
+    }
 }
 
 local function tradeFish(player, fishId)
@@ -507,8 +616,8 @@ local function tradeFish(player, fishId)
     player:setCharVar("insideBellyItemIdx", 0)
 
     local rewards = fishRewards[fishId].items
-    local roll    = math.random(1, 1000) / 10
-    local sum     = 0
+    local roll = math.random(1, 1000) / 10
+    local sum = 0
     local item = nil
 
     for i = 1, #rewards do
@@ -535,7 +644,7 @@ end
 
 local function giveReward(player, csid)
     if csid == 166 or csid == 167 then
-        local fishId  = player:getCharVar("insideBellyFishId")
+        local fishId = player:getCharVar("insideBellyFishId")
         local itemIdx = player:getCharVar("insideBellyItemIdx")
         local reward = fishRewards[fishId]
 
@@ -552,8 +661,8 @@ local function giveReward(player, csid)
         player:addGil(xi.settings.main.GIL_RATE * reward.gil)
         player:messageSpecial(ID.text.GIL_OBTAINED, xi.settings.main.GIL_RATE * reward.gil)
 
-        --If successful (other than gil) give the item
-        if itemIdx > 0 then     -- Successful reward (other than gil)
+        -- If successful (other than gil) give the item
+        if itemIdx > 0 then -- Successful reward (other than gil)
             local r = reward.items[itemIdx]
             itemId = r.itemId
             itemQt = 1
@@ -566,7 +675,8 @@ local function giveReward(player, csid)
             npcUtil.giveItem(player, {rewardSet})
 
             -- If the player has received a reward, mark the quest log as complete if it's accepted
-            if player:getQuestStatus(xi.quest.log_id.OTHER_AREAS, xi.quest.id.otherAreas.INSIDE_THE_BELLY) == QUEST_ACCEPTED then
+            if player:getQuestStatus(xi.quest.log_id.OTHER_AREAS, xi.quest.id.otherAreas.INSIDE_THE_BELLY) ==
+                QUEST_ACCEPTED then
                 player:completeQuest(xi.quest.log_id.OTHER_AREAS, xi.quest.id.otherAreas.INSIDE_THE_BELLY)
             end
 
@@ -581,13 +691,10 @@ entity.onTrade = function(player, npc, trade)
     local insideTheBelly = player:getQuestStatus(xi.quest.log_id.OTHER_AREAS, xi.quest.id.otherAreas.INSIDE_THE_BELLY)
 
     -- A BOY'S DREAM
-    if
-        player:getCharVar("aBoysDreamCS") >= 4 and
-        npcUtil.tradeHasExactly(trade, xi.items.ODONTOTYRANNUS)
-    then
+    if player:getCharVar("aBoysDreamCS") >= 4 and npcUtil.tradeHasExactly(trade, xi.items.ODONTOTYRANNUS) then
         player:startEvent(85)
 
-    -- INSIDE THE BELLY
+        -- INSIDE THE BELLY
     elseif insideTheBelly == QUEST_ACCEPTED or insideTheBelly == QUEST_COMPLETED then
         for fish, v in pairs(fishRewards) do
             if npcUtil.tradeHas(trade, fish) then
@@ -601,7 +708,7 @@ end
 entity.onTrigger = function(player, npc, trade)
     -- TODO: once fishing skill is implemented, replace all these mLvl checks with player:getSkillLevel(xi.skill.FISHING)
 
-    local theRealGift    = player:getQuestStatus(xi.quest.log_id.OTHER_AREAS, xi.quest.id.otherAreas.THE_REAL_GIFT)
+    local theRealGift = player:getQuestStatus(xi.quest.log_id.OTHER_AREAS, xi.quest.id.otherAreas.THE_REAL_GIFT)
     local insideTheBelly = player:getQuestStatus(xi.quest.log_id.OTHER_AREAS, xi.quest.id.otherAreas.INSIDE_THE_BELLY)
     -- local mLvl           = player:getMainLvl()
     local fishingSkill = player:getSkillLevel(xi.skill.FISHING)
@@ -609,14 +716,10 @@ entity.onTrigger = function(player, npc, trade)
     local realSkill = (fishingSkill - fishingRank) / 32
 
     -- INSIDE THE BELLY
-    if
-        -- mLvl >= 30 and
-        realSkill >= 30 and
-        theRealGift == QUEST_COMPLETED and
-        insideTheBelly == QUEST_AVAILABLE
-    then
+    if -- mLvl >= 30 and
+    realSkill >= 30 and theRealGift == QUEST_COMPLETED and insideTheBelly == QUEST_AVAILABLE then
         player:startEvent(161)
-    --[[elseif
+        --[[elseif
         mLvl >= 30 and
         mLvl < 39 and
         (insideTheBelly == QUEST_ACCEPTED or insideTheBelly == QUEST_COMPLETED)
@@ -640,30 +743,18 @@ entity.onTrigger = function(player, npc, trade)
     then
         player:startEvent(165, 4451, 4477, 5803, 4307, 4478, 5467, 4304, 4474)
 --]]
-    elseif
-        realSkill >= 30 and 
-        realSkill < 39 and 
-        (insideTheBelly == QUEST_ACCEPTED or insideTheBelly == QUEST_COMPLETED) 
-    then
+    elseif realSkill >= 30 and realSkill < 39 and
+        (insideTheBelly == QUEST_ACCEPTED or insideTheBelly == QUEST_COMPLETED) then
         player:startEvent(162, 4428, 4469, 4481, 5141)
-    elseif
-        realSkill >= 40 and 
-        realSkill < 49 and 
-        (insideTheBelly == QUEST_ACCEPTED or insideTheBelly == QUEST_COMPLETED) 
-    then
+    elseif realSkill >= 40 and realSkill < 49 and
+        (insideTheBelly == QUEST_ACCEPTED or insideTheBelly == QUEST_COMPLETED) then
         player:startEvent(163, 4385, 4306, 4479, 4471, 4451)
-    elseif
-        realSkill >= 50 and
-        realSkill <= 74 and
-        (insideTheBelly == QUEST_ACCEPTED or insideTheBelly == QUEST_COMPLETED)
-    then
+    elseif realSkill >= 50 and realSkill <= 74 and
+        (insideTheBelly == QUEST_ACCEPTED or insideTheBelly == QUEST_COMPLETED) then
         player:startEvent(164, 4307, 4477, 5470, 4454, 5467, 5462)
-    elseif
-        realSkill >= 75 and
-        (insideTheBelly == QUEST_ACCEPTED or insideTheBelly == QUEST_COMPLETED)
-    then
+    elseif realSkill >= 75 and (insideTheBelly == QUEST_ACCEPTED or insideTheBelly == QUEST_COMPLETED) then
         player:startEvent(165, 5133, 5140, 4463, 4475, 4476, 5137, 4309, 4319)
-    -- STANDARD DIALOG
+        -- STANDARD DIALOG
     else
         player:startEvent(150)
     end
@@ -682,18 +773,20 @@ entity.onEventFinish = function(player, csid, option, npc)
     elseif csid == 36 then
         player:confirmTrade()
 
-    -- A BOY'S DREAM
-    if csid == 85 then
-        npcUtil.giveKeyItem(player, xi.ki.KNIGHTS_BOOTS)
-        player:setCharVar("aBoysDreamCS", 6)
-        player:confirmTrade()
+        -- A BOY'S DREAM
+        if csid == 85 then
+            npcUtil.giveKeyItem(player, xi.ki.KNIGHTS_BOOTS)
+            player:setCharVar("aBoysDreamCS", 6)
+            player:confirmTrade()
 
-    -- INSIDE THE BELLY
-    elseif csid == 161 then
-        player:addQuest(xi.quest.log_id.OTHER_AREAS, xi.quest.id.otherAreas.INSIDE_THE_BELLY)
-    elseif csid == 166 or csid == 167 then
-        giveReward(player, csid)
+            -- INSIDE THE BELLY
+        elseif csid == 161 then
+            player:addQuest(xi.quest.log_id.OTHER_AREAS, xi.quest.id.otherAreas.INSIDE_THE_BELLY)
+        elseif csid == 166 or csid == 167 then
+            giveReward(player, csid)
+        end
     end
-end
 
-return entity
+    return entity
+
+end
