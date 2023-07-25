@@ -18,9 +18,9 @@ end
 
 
 mobskillObject.onMobWeaponSkill = function(target, mob, skill)
-    local numhits = 3
+    local numhits = math.random(2, 3)
     local accmod  = 2
-    local dmgmod  = math.random(4, 6)
+    local dmgmod  = 0.80
 
     local info           = xi.mobskills.mobPhysicalMove(mob, target, skill, numhits, accmod, dmgmod, xi.mobskills.physicalTpBonus.DMG_VARIES, 2, 3, 4)
     local dmg            = xi.mobskills.mobFinalAdjustments(info.dmg, mob, skill, target, xi.attackType.PHYSICAL, xi.damageType.BLUNT, xi.mobskills.shadowBehavior.NUMSHADOWS_3)

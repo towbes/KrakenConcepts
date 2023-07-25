@@ -31,7 +31,7 @@ entity.onMobSpawn = function(mob)
     mob:setLocalVar("[rage]timer", 5400)                 -- 90 minutes
     mob:setLocalVar("Phase", 1)  
     mob:setLocalVar("Changed",0)
-    mob:setMobMod(xi.mobMod.SKILL_LIST, 5305)                     
+    mob:setMobMod(xi.mobMod.SKILL_LIST, 5305) 
 end   
 
 entity.onMobFight = function(mob, target)

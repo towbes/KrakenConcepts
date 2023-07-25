@@ -3902,6 +3902,7 @@ INSERT INTO `mob_skill_lists` VALUES('Nuhn', 5305, 1695); -- hypnic lamp
 INSERT INTO `mob_skill_lists` VALUES('Nuhntwo', 5306, 1697); -- SeaSpray
 INSERT INTO `mob_skill_lists` VALUES('Nuhntwo', 5306, 1694); -- Vile Belch
 INSERT INTO `mob_skill_lists` VALUES('Nuhntwo', 5306, 1696); -- Seismic Tail
+INSERT INTO `mob_skill_lists` VALUES('Nuhntwo', 5306, 1698); -- Leeching Current
 -- Scylla exclusive lists/skills
 INSERT INTO `mob_skill_lists` VALUES('Scylla_IG', 2440, 2440);
 INSERT INTO `mob_skill_lists` VALUES('Scylla_AC', 2441, 2441);
