@@ -72,6 +72,8 @@ UPDATE npc_list SET status = 2 WHERE npcid = "17780876" AND polutils_name = "Hom
 UPDATE npc_list SET status = 2 WHERE npcid = "17780876" AND polutils_name = "Home Point #5";
 
 -- Mhaura
+UPDATE npc_list SET status = 2 WHERE npcid = "17797162" AND polutils_name = "Home Point #2";
+UPDATE npc_list SET status = 2 WHERE npcid = "17797163" AND polutils_name = "Home Point #3";
 UPDATE npc_list SET status = 2 WHERE npcid = "17797164" AND polutils_name = "Home Point #4";
 UPDATE npc_list SET status = 2 WHERE npcid = "17797165" AND polutils_name = "Home Point #5";
 
@@ -84,6 +86,12 @@ UPDATE npc_list SET status = 2 WHERE npcid = "16880014" AND polutils_name = "Hom
 
 -- Mount Zhayolm
 UPDATE npc_list SET status = 2 WHERE npcid = "17027627" AND polutils_name = "Home Point #1";
+
+-- Nashmau
+UPDATE npc_list SET status = 2 WHERE npcid = "16994333" AND polutils_name = "Home Point #2";
+UPDATE npc_list SET status = 2 WHERE npcid = "16994334" AND polutils_name = "Home Point #3";
+UPDATE npc_list SET status = 2 WHERE npcid = "16994335" AND polutils_name = "Home Point #4";
+UPDATE npc_list SET status = 2 WHERE npcid = "16994336" AND polutils_name = "Home Point #5";
 
 -- Newton Movalpolos
 UPDATE npc_list SET status = 2 WHERE npcid = "16826628" AND polutils_name = "Home Point #1";
