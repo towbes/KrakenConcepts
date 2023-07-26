@@ -13,14 +13,7 @@ entity.onTrade = function(player, npc, trade)
 end
 
 entity.onTrigger = function(player, npc)
-    if
-        player:getCurrentMission(xi.mission.log_id.COP) == xi.mission.id.cop.ONE_TO_BE_FEARED or
-        player:getCurrentMission(xi.mission.log_id.COP) == xi.mission.id.cop.THE_WARRIORS_PATH
-    then
-        xi.bcnm.onTrigger(player, npc)
-    else
-        player:messageSpecial(ID.text.IRON_GATE_LOCKED)
-    end
+    xi.bcnm.onTrigger(player, npc)
 end
 
 entity.onEventUpdate = function(player, csid, option, extras)

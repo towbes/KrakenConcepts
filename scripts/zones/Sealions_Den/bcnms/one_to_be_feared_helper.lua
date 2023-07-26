@@ -14,12 +14,6 @@ local function healCharacter(player)
     player:setHP(player:getMaxHP())
     player:setMP(player:getMaxMP())
     player:setTP(0)
-    if player:getPet() ~= nil then
-        local pet = player:getPet()
-        pet:setHP(pet:getMaxHP())
-        pet:setMP(pet:getMaxMP())
-        pet:setTP(0)
-    end
 end
 
 local function returnToAirship(player)
@@ -53,13 +47,13 @@ oneToBeFeared.handleMammetDeath = function(mob, player, optParams)
         end
     end
 
-    if mammetDeathCount == 5 then
-        for _, member in pairs(battlefield:getPlayers()) do
-            if member:getLocalVar("[OTBF]MammetCS") == 0 then
-                member:setLocalVar("[OTBF]MammetCS", 1) -- Safety check to not trigger CS more than once when killing multile Mammets at the same time.
-                member:startEvent(10)
-            end
-        end
+    if
+        mammetDeathCount == 5 and
+        player:hasStatusEffect(xi.effect.BATTLEFIELD) and
+        player:getLocalVar("[OTBF]MammetCS") == 0
+    then
+        player:setLocalVar("[OTBF]MammetCS", 1) -- Safety check to not trigger CS more than once when killing multile Mammets at the same time.
+        player:startEvent(10)
     end
 end
 
@@ -79,10 +73,8 @@ end
 -- Battle 2: Omega
 -----------------------------------
 oneToBeFeared.handleOmegaDeath = function(mob, player, optParams)
-    local battlefield = mob:getBattlefield()
-
-    for _, member in pairs(battlefield:getPlayers()) do
-        member:startEvent(11)
+    if player:hasStatusEffect(xi.effect.BATTLEFIELD) then
+        player:startEvent(11)
     end
 end
 
@@ -102,7 +94,6 @@ end
 -- Battle 3: Ultima
 -----------------------------------
 oneToBeFeared.handleUltimaDeath = function(mob, player, optParams)
-    mob:getBattlefield():win()
     player:addTitle(xi.title.ULTIMA_UNDERTAKER)
     player:setLocalVar("[OTBF]battleCompleted", 0)
 end
