@@ -45,7 +45,8 @@ entity.onMobInitialize = function(mob)
 end
 
 entity.onMobSpawn = function(mob)
-    mob:setSpeed(2)
+    --mob:setSpeed(2)
+    mob:setSpeed(-3) -- Accounting for increased mob speed on the live server.
     mob:setMod(xi.mod.REGEN, 3)
     mob:setLocalVar('mobElement', math.random(1, 8))
     mob:addMod(mevaList[mob:getLocalVar('mobElement')][1], -250)

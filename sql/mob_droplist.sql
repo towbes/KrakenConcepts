@@ -26769,8 +26769,8 @@ INSERT INTO `mob_droplist` VALUES (3814,0,0,1000,2843,@RARE); -- Square of Linde
 INSERT INTO `mob_droplist` VALUES (3815,0,0,1000,15054,@RARE); -- Beacon Cuffs (Rare, 5%)
 
 -- ZoneID: Padfoot
-INSERT INTO `mob_droplist` VALUES (3816,1,1,1000,14676,730); -- Assailants Ring (Group 1 - 73.0%)
-INSERT INTO `mob_droplist` VALUES (3816,1,1,1000,14782,270); -- Astral Earring (Group 1 - 27.0%)
+-- INSERT INTO `mob_droplist` VALUES (3816,1,1,1000,14676,730); -- Assailants Ring (Group 1 - 73.0%)
+-- INSERT INTO `mob_droplist` VALUES (3816,1,1,1000,14782,270); -- Astral Earring (Group 1 - 27.0%)
 
 -- ZoneID: 126 - Atkorkamuy
 INSERT INTO `mob_droplist` VALUES (3817,0,0,1000,2813,@UNCOMMON); -- Aptant of Durus (Uncommon, 10%)
