@@ -7,13 +7,9 @@ local zoneObject = {}
 
 zoneObject.onInitialize = function(zone)
     xi.voidwalker.zoneOnInit(zone)
-    local ScyllaRespawn = GetServerVariable("ScyllaRespawn")
-    if os.time() < ScyllaRespawn then
-        GetMobByID(ID.mob.SCYLLA):setRespawnTime(ScyllaRespawn - os.time())
-    else
-        SpawnMob(ID.mob.SCYLLA)
-    end
-end
+
+    --NM Persistence
+    xi.mob.nmTODPersistCache(zone, ID.mob.SCYLLA)
 
 zoneObject.onZoneIn = function(player, prevZone)
     local cs = -1
