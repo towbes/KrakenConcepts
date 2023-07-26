@@ -35,3 +35,5 @@ zoneObject.onEventFinish = function(player, csid, option, npc)
 end
 
 return zoneObject
+
+end
