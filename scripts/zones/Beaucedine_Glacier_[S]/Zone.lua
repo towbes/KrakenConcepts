@@ -10,6 +10,7 @@ zoneObject.onInitialize = function(zone)
 
     --NM Persistence
     xi.mob.nmTODPersistCache(zone, ID.mob.SCYLLA)
+end
 
 zoneObject.onZoneIn = function(player, prevZone)
     local cs = -1
@@ -35,5 +36,3 @@ zoneObject.onEventFinish = function(player, csid, option, npc)
 end
 
 return zoneObject
-
-end
