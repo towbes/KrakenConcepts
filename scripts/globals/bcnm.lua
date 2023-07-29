@@ -1249,12 +1249,12 @@ local function checkReqs(player, npc, bfid, registrant)
         end,
 
         [1024] = function() -- PM8-3: When Angels Fall
-            return player:hasCompletedMission(xi.mission.log_id.COP, mi.cop.WHEN_ANGELS_FALL) or
+            return player:hasCompletedMission(xi.mission.log_id.COP, xi.mission.id.cop.WHEN_ANGELS_FALL) or
             player:getCharVar('Mission[6][828]Status') >= 4
         end,
 
         [1056] = function()-- PM8-4: Dawn
-            return player:hasCompletedMission(xi.mission.log_id.COP, mi.cop.DAWN) or
+            return player:hasCompletedMission(xi.mission.log_id.COP, xi.mission.id.cop.DAWN) or
             player:getCharVar('Mission[6][840]Status') >= 2
         end,
 
@@ -1644,7 +1644,7 @@ local function checkSkip(player, bfid)
             return player:hasCompletedMission(xi.mission.log_id.COP, xi.mission.id.cop.WHEN_ANGELS_FALL) or
                 (
                     promathiaMission == xi.mission.id.cop.WHEN_ANGELS_FALL or
-                    player:getCharVar('Mission[6][828]Status') >= 4
+                    player:getCharVar('Mission[6][828]Status') > 4
                 )
         end,
 
