@@ -1248,16 +1248,6 @@ local function checkReqs(player, npc, bfid, registrant)
             return promathiaMission >= xi.mission.id.cop.ONE_TO_BE_FEARED
         end,
 
-        [1024] = function() -- PM8-3: When Angels Fall
-            return player:hasCompletedMission(xi.mission.log_id.COP, mi.cop.WHEN_ANGELS_FALL) or
-            player:getCharVar('Mission[6][828]Status') >= 4
-        end,
-
-        [1056] = function()-- PM8-4: Dawn
-            return player:hasCompletedMission(xi.mission.log_id.COP, mi.cop.DAWN) or
-            player:getCharVar('Mission[6][840]Status') >= 2
-        end,
-
         [1057] = function() -- Quest: Apocalypse Nigh
             return player:hasCompletedQuest(xi.quest.log_id.JEUNO, xi.quest.id.jeuno.APOCALYPSE_NIGH) or
                 (
