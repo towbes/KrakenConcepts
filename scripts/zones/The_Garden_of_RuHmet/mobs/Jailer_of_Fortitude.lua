@@ -46,7 +46,7 @@ entity.onMobFight = function(mob, target)
         -- check for kf'ghrah
         if spell > 0 and not mob:hasStatusEffect(xi.effect.SILENCE) then
             if delay >= 3 then
-                mob:castSpell(spell)
+                mob:castSpell(spell, target)
                 mob:setLocalVar("COPY_SPELL", 0)
                 mob:setLocalVar("delay", 0)
             else
