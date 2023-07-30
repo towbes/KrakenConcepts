@@ -20,7 +20,6 @@ along with this program.  If not, see http://www.gnu.org/licenses/
 */
 
 #include "pet_controller.h"
-
 #include "../../../common/utils.h"
 #include "../../entities/petentity.h"
 #include "../../status_effect_container.h"
@@ -73,7 +72,7 @@ void CPetController::DoRoamTick(time_point tick)
 
     if (currentDistance > PetRoamDistance)
     {
-        if (currentDistance < 35.0f && PPet->PAI->PathFind->PathAround(PPet->PMaster->loc.p, 2.0f, PATHFLAG_RUN))
+        if (currentDistance < 35.0f && PPet->PAI->PathFind->PathAround(PPet->PMaster->loc.p, 2.0f, PATHFLAG_RUN | PATHFLAG_WALLHACK))
         {
             PPet->PAI->PathFind->FollowPath(m_Tick);
         }
@@ -83,6 +82,7 @@ void CPetController::DoRoamTick(time_point tick)
         }
     }
 }
+
 
 bool CPetController::PetIsHealing()
 {

@@ -257,7 +257,7 @@ bool CMobController::CanDetectTarget(CBattleEntity* PTarget, bool forceSight, bo
         return false;
     }
 
-        float verticalDistance = abs(PMob->loc.p.y - PTarget->loc.p.y);
+    float verticalDistance = abs(PMob->loc.p.y - PTarget->loc.p.y);
 
     if ((PMob->m_Family != 6 || PMob->getMobMod(MOBMOD_LEDGE_AGGRO) != 0) && verticalDistance > 8.0f)
     {
@@ -798,6 +798,24 @@ void CMobController::Move()
                     PMob->PAI->PathFind->PathInRange(PTarget->loc.p, closeDistance, PATHFLAG_RUN);
                 }
                 PMob->PAI->PathFind->FollowPath(m_Tick);
+
+                // Only check if stuck every 2s, this prevents overlap or interference with
+                // PathFind following path if the mob's move speed is slow.
+                if (m_Tick - m_StuckTick >= 2s)
+                {
+                    m_StuckTick = m_Tick;
+                    // Keep a record of the last known position to check if we need
+                    // to manually intervene to move the mob.
+                    UpdateLastKnownPosition();
+                    // Check if the mob is stuck, if stuck, directly intervene
+                    // by stepping to the player. This fixes people being able to hold mobs
+                    // because they can't find a path around to the player's position.
+                    if (IsStuck() && PTarget != nullptr)
+                    {
+                        //PMob->PAI->PathFind->StepTo(PTarget->loc.p, false);
+                        PMob->PAI->PathFind->PathInRange(PTarget->loc.p, closeDistance, PATHFLAG_WALLHACK);
+                    }
+                }
 
                 if (!PMob->PAI->PathFind->IsFollowingPath())
                 {
