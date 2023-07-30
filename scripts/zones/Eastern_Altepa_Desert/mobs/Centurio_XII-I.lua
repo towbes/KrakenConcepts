@@ -2,6 +2,9 @@
 -- Area: Eastern Altepa Desert (114)
 --   NM: Centurio XII-I
 -----------------------------------
+local ID = require("scripts/zones/Eastern_Altepa_Desert/IDs")
+mixins = { require("scripts/mixins/job_special") }
+-----------------------------------
 local entity = {}
 
 entity.onMobSpawn = function(mob)
