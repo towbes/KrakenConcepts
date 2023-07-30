@@ -15,7 +15,7 @@ spellObject.onSpellCast = function(caster, target, spell)
         local dmg = ((100 + caster:getMod(xi.mod.MATT)) / (100 + target:getMod(xi.mod.MDEF))) * (caster:getStat(xi.mod.INT) + (caster:getMaxSkillLevel(caster:getMainLvl(), xi.job.BLM, xi.skill.ELEMENTAL_MAGIC)) / 6) * 5
 
         --add in target adjustment
-        dmg = xi.magic.adjustForTarget(target, dmg, spell:getElement())
+        dmg = xi.magic.adjustForTarget(target, dmg, ele)
         --add in final adjustments
         dmg = xi.magic.finalMagicAdjustments(caster, target, spell, dmg)
         return dmg
