@@ -38,11 +38,13 @@ local checkAdditionalCS = function(player)
             csCount = csCount + 1
         end
     end
+
     if csCount == 5 then
         for _, cs in pairs(additionalCS) do
             mission:setVar(player, cs, 0)
         end
     end
+
     return csCount
 end
 
@@ -59,6 +61,7 @@ local ringCheck = function(player)
             return true
         end
     end
+
     return false
 end
 
@@ -142,7 +145,9 @@ mission.sections =
                 end,
 
                 [3] = function(player, csid, option)
-                    mission:setVar(player, 'Status', 4)
+                    if mission:getVar(player, 'Status') < 4 then
+                        mission:setVar(player, 'Status', 4)
+                    end
                 end,
 
                 [6] = function(player, csid, option)
@@ -151,10 +156,12 @@ mission.sections =
                     if not player:hasKeyItem(xi.ki.TEAR_OF_ALTANA) then
                         npcUtil.giveKeyItem(player, xi.ki.TEAR_OF_ALTANA)
                     end
+
                     if mission:getVar(player, 'Status') < 3 then
-                        mission:setVar(player, 'Wait', getVanaMidnight())
+                        mission:setVar(player, 'Wait', getMidnight())
                         mission:setVar(player, 'Status', 3)
                     end
+
                     return mission:progressEvent(3)
                 end,
             },
@@ -166,9 +173,10 @@ mission.sections =
             ['Cid'] =
             {
                 onTrigger = function(player, npc)
-                    if mission:getVar(player, 'Status') == 4 and
-                       mission:getVar(player, 'Wait') < VanadielUniqueDay() and
-                       mission:getVar(player, 'TenzenCS') < 1
+                    if
+                        mission:getVar(player, 'Status') == 4 and
+                        mission:getVar(player, 'Wait') < os.time() and
+                        mission:getVar(player, 'TenzenCS') < 1
                     then
                         return mission:progressEvent(897)
                     end
@@ -190,7 +198,7 @@ mission.sections =
                 function(player, prevZone)
                     if
                         mission:getVar(player, 'Status') == 4 and
-                        mission:getVar(player, 'Wait') < VanadielUniqueDay() and
+                        mission:getVar(player, 'Wait') < os.time() and
                         mission:getVar(player, 'JabbosCS') < 1
                     then
                         return 57
@@ -235,21 +243,23 @@ mission.sections =
             ['Hinaree'] =
             {
                 onTrigger = function(player, npc)
-                    if mission:getVar(player, 'Status') == 4 and
-                       mission:getVar(player, 'Wait') < VanadielUniqueDay() and
-                       mission:getVar(player, 'LouveranceCS') < 1
+                    if
+                        mission:getVar(player, 'Status') == 4 and
+                        mission:getVar(player, 'Wait') < os.time() and
+                        mission:getVar(player, 'LouveranceCS') < 1
                     then
                         return mission:progressEvent(757)
                     end
                 end,
             },
 
-            onTriggerAreaEnter  =
+            onTriggerAreaEnter =
             {
                 [1] = function(player, triggerArea)
-                    if mission:getVar(player, 'Status') == 4 and
-                       mission:getVar(player, 'Wait') < VanadielUniqueDay() and
-                       mission:getVar(player, 'LouveranceCS') == 2
+                    if
+                        mission:getVar(player, 'Status') == 4 and
+                        mission:getVar(player, 'Wait') < os.time() and
+                        mission:getVar(player, 'LouveranceCS') == 2
                     then
                         return mission:progressEvent(758)
                     end
@@ -274,8 +284,9 @@ mission.sections =
             onZoneIn =
             {
                 function(player, prevZone)
-                    if mission:getVar(player, 'Status') == 4 and
-                        mission:getVar(player, 'Wait') < VanadielUniqueDay() and
+                    if
+                        mission:getVar(player, 'Status') == 4 and
+                        mission:getVar(player, 'Wait') < os.time() and
                         mission:getVar(player, 'LouveranceCS') == 3
                     then
                         return 17
@@ -296,9 +307,10 @@ mission.sections =
             ['Chipmy-Popmy'] =
             {
                 onTrigger = function(player, npc)
-                    if mission:getVar(player, 'Status') == 4 and
-                       mission:getVar(player, 'Wait') < VanadielUniqueDay() and
-                       mission:getVar(player, 'ChebukkisCS') < 1
+                    if
+                        mission:getVar(player, 'Status') == 4 and
+                        mission:getVar(player, 'Wait') < os.time() and
+                        mission:getVar(player, 'ChebukkisCS') < 1
                     then
                         return mission:progressEvent(619)
                     end
@@ -319,19 +331,22 @@ mission.sections =
             {
                 onTrigger = function(player, npc)
                     local coloredDrop = 4258 + math.random(0, 7)
-                    if mission:getVar(player, 'Status') == 4 and
-                       mission:getVar(player, 'Wait') < VanadielUniqueDay() and
-                       mission:getVar(player, 'ChebukkisCS') == 2
+                    if
+                        mission:getVar(player, 'Status') == 4 and
+                        mission:getVar(player, 'Wait') < os.time() and
+                        mission:getVar(player, 'ChebukkisCS') == 2
                     then
                         if player:getFreeSlotsCount() == 0 then
                             if mission:getVar(player, 'ColoredDrop') < 4258 then
                                 mission:setVar(player, 'ColoredDrop', coloredDrop)
                             end
+
                             return mission:messageSpecial(zones[npc:getZoneID()].text.ITEM_CANNOT_BE_OBTAINED, coloredDrop)
                         else
                             if mission:getVar(player, 'ColoredDrop') < 4258 then
                                 mission:setVar(player, 'ColoredDrop', coloredDrop)
                             end
+
                             return mission:progressEvent(43)
                         end
                     end
@@ -352,7 +367,7 @@ mission.sections =
 
         [xi.zone.RULUDE_GARDENS] =
         {
-            onTriggerAreaEnter  =
+            onTriggerAreaEnter =
             {
                 [1] = function(player, triggerArea)
                     if mission:getVar(player, 'Status') == 4 and checkAdditionalCS(player) == 5 then
@@ -430,7 +445,7 @@ mission.sections =
 
         [xi.zone.LUFAISE_MEADOWS] =
         {
-            onTriggerAreaEnter  =
+            onTriggerAreaEnter =
             {
                 [1] = function(player, triggerArea)
                     if mission:getVar(player, 'Status') == 7 then
