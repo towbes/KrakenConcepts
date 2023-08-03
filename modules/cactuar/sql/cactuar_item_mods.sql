@@ -359,6 +359,11 @@ REPLACE INTO `item_latents` (`itemId`, `modId`, `value`, `latentId`, `latentPara
 (17927,129,1,40,0), -- MAINHAND: Smithing +1
 
 -- Sunlight Pole
-(17529,370,5,52,1); -- Rain Weather: Regen +5
+(17529,370,5,52,1), -- Rain Weather: Regen +5
+
+(11576,30,1,16,3), -- MACC +1~4,party size 3+. Effect strengthens with more members
+(11576,30,1,16,4), -- MACC +1~4,party size 3+. Effect strengthens with more members
+(11576,30,1,16,5), -- MACC +1~4,party size 3+. Effect strengthens with more members
+(11576,30,1,16,6); -- MACC +1~4,party size 3+. Effect strengthens with more members
 
 UNLOCK TABLES;
