@@ -566,20 +566,20 @@ local function calculateZeniBonus(plateData)
 
     if (GetServerVariable("[ZNM]SubjectsOfInterest") == subOfInterestMatch) then
         isCurrentSubjectsOfInterest = true
-        zeni = zeni + 50
-        percBonus = percBonus + 35
+        zeni = zeni + 100 -- 50
+        percBonus = percBonus + 45 -- 35
     end
 
     if (GetServerVariable("[ZNM]Ecosystem") == ecosystem) then
         isCurrentEcoSytem = true
-        zeni = zeni + 25
-        percBonus = percBonus + 25
+        zeni = zeni + 50 -- 25
+        percBonus = percBonus + 35 -- 25
     end
 
     if (GetServerVariable("[ZNM]Fauna") == faunaMatch) then
         isCurrentFauna = true
-        zeni = zeni + 50
-        percBonus = percBonus + 50
+        zeni = zeni + 100 -- 50
+        percBonus = percBonus + 60 -- 50
     end
 
     -- Add a little randomness
