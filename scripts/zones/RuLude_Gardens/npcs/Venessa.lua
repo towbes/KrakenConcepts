@@ -66,9 +66,108 @@ entity.onTrigger = function(player, npc)
 end
 
 entity.onEventUpdate = function(player, csid, option, npc)
+    local abandonmentTimer = player:getCharVar("[ENM]abandonmentTimer")
+    local antipathyTimer = player:getCharVar("[ENM]antipathyTimer")
+    local animusTimer = player:getCharVar("[ENM]animusTimer")
+    local acrimonyTimer = player:getCharVar("[ENM]acrimonyTimer")
+    if
+        csid == 10064 or
+        csid == 10065
+    then
+        -- Spit out time remaining on KI if on cooldown
+        -- Spire of Holla ENM
+        if
+            option == 1 and VanadielTime() < abandonmentTimer and
+            not player:hasKeyItem(xi.ki.CENSER_OF_ABANDONMENT)
+        then
+            player:updateEvent(1, 0, 0, 0, abandonmentTimer, 1, 0, 0)
+        -- Spire of Dem ENM
+        elseif
+            option == 2 and VanadielTime() < antipathyTimer and
+            not player:hasKeyItem(xi.ki.CENSER_OF_ANTIPATHY)
+        then
+            player:updateEvent(2, 0, 0, 0, antipathyTimer, 1, 0, 0)
+        -- Spire of Mea ENM
+        elseif
+            option == 3 and VanadielTime() < animusTimer and
+            not player:hasKeyItem(xi.ki.CENSER_OF_ANIMUS)
+        then
+            player:updateEvent(3, 0, 0, 0, animusTimer, 1, 0, 0)
+        -- Spire of Vahzl ENM
+        elseif
+            option == 4 and VanadielTime() < acrimonyTimer and
+            not player:hasKeyItem(xi.ki.CENSER_OF_ACRIMONY)
+        then
+            player:updateEvent(4, 0, 0, 0, acrimonyTimer, 1, 0, 0)
+        end
+        -- Cooldown is up, give player the KI
+        -- Spire of Holla ENM
+        if option == 1 and VanadielTime() >= abandonmentTimer then
+            player:updateEvent(1, 0, 0, 1)
+        -- Spire of Dem ENM
+        elseif option == 2 and VanadielTime() >= antipathyTimer then
+            player:updateEvent(2, 0, 0, 1)
+        -- Spire of Mea ENM
+        elseif option == 3 and VanadielTime() >= animusTimer then
+            player:updateEvent(3, 0, 0, 1)
+        -- Spire of Vahzl ENM
+        elseif
+            option == 4 and VanadielTime() >= acrimonyTimer and
+            player:getCurrentMission(xi.mission.log_id.COP) > xi.mission.id.cop.SLANDEROUS_UTTERINGS
+        then
+            player:updateEvent(4, 0, 0, 1)
+        end
+    end
 end
-
 entity.onEventFinish = function(player, csid, option, npc)
+    -- Give player reward
+    local objectTrade = player:getCharVar("veneReward")
+    if csid == 10066 then
+        if player:getFreeSlotsCount() == 0 then
+            player:messageSpecial(ID.text.ITEM_CANNOT_BE_OBTAINED, objectTrade)
+        else
+            player:tradeComplete()
+            player:addItem(objectTrade)
+            player:messageSpecial(ID.text.ITEM_OBTAINED, objectTrade)
+            player:setCharVar("veneReward", 0)
+        end
+    end
+    local abandonmentTimer = player:getCharVar("[ENM]abandonmentTimer")
+    local antipathyTimer = player:getCharVar("[ENM]antipathyTimer")
+    local animusTimer = player:getCharVar("[ENM]animusTimer")
+    local acrimonyTimer = player:getCharVar("[ENM]acrimonyTimer")
+    -- Give player KI
+    if csid == 10065 or csid == 10064 then
+        -- Spire of Holla ENM
+        if
+            option == 1 and os.time() >= abandonmentTimer and
+            not player:hasKeyItem(xi.ki.CENSER_OF_ABANDONMENT)
+        then
+            npcUtil.giveKeyItem(player, xi.keyItem.CENSER_OF_ABANDONMENT)
+            player:setCharVar("[ENM]abandonmentTimer", VanadielTime() + (xi.settings.main.ENM_COOLDOWN * 3600)) -- Current time + (ENM_COOLDOWN*1hr in seconds)
+        -- Spire of Dem ENM
+        elseif
+            option == 2 and os.time() >= antipathyTimer and
+            not player:hasKeyItem(xi.ki.CENSER_OF_ANTIPATHY)
+        then
+            npcUtil.giveKeyItem(player, xi.keyItem.CENSER_OF_ANTIPATHY)
+            player:setCharVar("[ENM]antipathyTimer", VanadielTime() + (xi.settings.main.ENM_COOLDOWN * 3600)) -- Current time + (ENM_COOLDOWN*1hr in seconds)
+        -- Spire of Mea ENM
+        elseif
+            option == 3 and os.time() >= animusTimer and
+            not player:hasKeyItem(xi.ki.CENSER_OF_ANIMUS)
+        then
+            npcUtil.giveKeyItem(player, xi.keyItem.CENSER_OF_ANIMUS)
+            player:setCharVar("[ENM]animusTimer", VanadielTime() + (xi.settings.main.ENM_COOLDOWN * 3600)) -- Current time + (ENM_COOLDOWN*1hr in seconds)
+        -- Spire of Vahzl ENM
+        elseif
+            option == 4 and os.time() >= acrimonyTimer and
+            not player:hasKeyItem(xi.ki.CENSER_OF_ACRIMONY)
+        then
+            npcUtil.giveKeyItem(player, xi.keyItem.CENSER_OF_ACRIMONY)
+            player:setCharVar("[ENM]acrimonyTimer", VanadielTime() + (xi.settings.main.ENM_COOLDOWN * 3600)) -- Current time + (ENM_COOLDOWN*1hr in seconds)
+        end
+    end
 end
 
 return entity
