@@ -65,6 +65,11 @@ bool CLuaMobSkill::isAoE()
     return m_PLuaMobSkill->isAoE();
 }
 
+void CLuaMobSkill::setAoE(uint8 aoe)
+{
+    m_PLuaMobSkill->setAoe(aoe);
+}
+
 bool CLuaMobSkill::isConal()
 {
     return m_PLuaMobSkill->isConal();
@@ -116,6 +121,7 @@ void CLuaMobSkill::Register()
     SOL_REGISTER("getMsg", CLuaMobSkill::getMsg);
     SOL_REGISTER("hasMissMsg", CLuaMobSkill::hasMissMsg);
     SOL_REGISTER("isAoE", CLuaMobSkill::isAoE);
+    SOL_REGISTER("setAoE", CLuaMobSkill::setAoE);
     SOL_REGISTER("isConal", CLuaMobSkill::isConal);
     SOL_REGISTER("isSingle", CLuaMobSkill::isSingle);
     SOL_REGISTER("getParam", CLuaMobSkill::getParam);
