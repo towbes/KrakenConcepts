@@ -20,6 +20,11 @@ entity.onMobInitialize = function(mob)
     end)
 end
 
+entity.onMobSpawn = function(mob)
+    mob:setMobMod(xi.mobMod.SKILL_LIST, 135)
+    mob:setMobMod(xi.mobMod.SPELL_LIST, 0)
+end
+
 entity.onMobDespawn = function(mob)
     mob:removeListener("ULLI_WEAPONSKILL_USE")
 end
