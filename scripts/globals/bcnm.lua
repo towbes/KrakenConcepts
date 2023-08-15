@@ -1031,8 +1031,8 @@ local function checkReqs(player, npc, bfid, registrant)
         end,
 
         [896] = function() -- Quest: Storms of Fate
-            return player:getQuestStatus(xi.quest.log_id.JEUNO, xi.quest.id.jeuno.STORMS_OF_FATE) == QUEST_COMPLETED or
-                player:getCharVar("Quest[3][86]Status") > 2
+            return player:getQuestStatus(xi.quest.log_id.JEUNO, xi.quest.id.jeuno.STORMS_OF_FATE) == QUEST_ACCEPTED and
+                player:getCharVar("Quest[3][86]Status") == 2
         end,
 
         [897] = function() -- Quest: The Wyrmking Descends
