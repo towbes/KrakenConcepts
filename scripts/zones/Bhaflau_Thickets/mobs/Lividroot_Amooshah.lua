@@ -20,7 +20,7 @@ local function phaseChange(mob)
     mob:setMobAbilityEnabled(false)
 
     mob:timer(1000, function(mob)
-        mob:setStatus(xi.status.MOB)
+        mob:setStatus(xi.status.UPDATE)
         mob:setAutoAttackEnabled(true)
         mob:setMagicCastingEnabled(true)
         mob:setMobAbilityEnabled(true)
