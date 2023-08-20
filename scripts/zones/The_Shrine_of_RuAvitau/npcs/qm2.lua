@@ -9,12 +9,8 @@ require("scripts/globals/npc_util")
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)
-    if
-        npc:getStatus() == xi.status.NORMAL and
-        npcUtil.tradeHas(trade, { 1404, 1405, 1406, 1407 })
-    then
+    if npcUtil.tradeHas(trade, { 1404, 1405, 1406, 1407 }) then
         player:startEvent(101)
-        player:confirmTrade()
     end
 end
 
@@ -25,7 +21,13 @@ end
 entity.onEventUpdate = function(player, csid, option, npc)
 end
 
-entity.onEventFinish = function(player, csid, option, npc)
+entity.onEventFinish = function(player, csid, option)
+    if
+        csid == 101 and
+        npcUtil.popFromQM(player, GetNPCByID(ID.npc.KIRIN_QM), ID.mob.KIRIN, { claim = true })
+    then
+        player:confirmTrade()
+    end
 end
 
 return entity
