@@ -787,6 +787,5 @@ entity.onEventFinish = function(player, csid, option, npc)
         end
     end
 
-    return entity
-
 end
+return entity
