@@ -247,7 +247,7 @@ xi.summon.avatarPhysicalMove = function(avatar, target, skill, numberofhits, acc
 
         numHitsProcessed = 0
 
-        local critAttackBonus = 1 + ((avatar:getMod(xi.mod.CRIT_DMG_INCREASE) - target:getMod(xi.mod.CRIT_DEF_BONUS)) / 100)
+        local critAttackBonus = 1 + ((avatar:getMod(xi.mod.CRIT_DMG_INCREASE) - target:getMod(xi.mod.CRIT_DEF_BONUS) + target:getMod(xi.mod.ENEMYCRITDMG)) / 100)
 
         if firstHitLanded then
             local wRatio = cRatio

@@ -1030,6 +1030,7 @@ enum class Mod
     DMGMAGIC_CAP             = 2028,
     DMGBREATH_CAP            = 2029,
     DMGRANGE_CAP             = 2030,
+    ENEMYCRITDMG             = 2031,
 
 
     // IF YOU ADD ANY NEW MODIFIER HERE, ADD IT IN scripts/enum/mod.lua ASWELL!

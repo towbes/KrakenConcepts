@@ -66,7 +66,7 @@ local function getRangedCRatio(attacker, defender, params, ignoredDef)
     pdifmin = pdifmin * 1.25
     pdifmax = pdifmax * 1.25
 
-    local critbonus = attacker:getMod(xi.mod.CRIT_DMG_INCREASE) - defender:getMod(xi.mod.CRIT_DEF_BONUS)
+    local critbonus = attacker:getMod(xi.mod.CRIT_DMG_INCREASE) - defender:getMod(xi.mod.CRIT_DEF_BONUS) + defender:getMod(xi.mod.ENEMYCRITDMG)
     critbonus = utils.clamp(critbonus, 0, 100)
     pdifcrit[1] = pdifmin * (100 + critbonus) / 100
     pdifcrit[2] = pdifmax * (100 + critbonus) / 100
