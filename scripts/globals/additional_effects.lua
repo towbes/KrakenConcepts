@@ -157,6 +157,7 @@ xi.additionalEffect.attack = function(attacker, defender, baseAttackDamage, item
         GOD_WIND        = 17,
         VS_ECOSYSTEM    = 18,
         DAMAGE_HP_PERC  = 19,
+        POISON_PARALYZE_BIND  = 20,
 
     }
 
@@ -228,6 +229,27 @@ xi.additionalEffect.attack = function(attacker, defender, baseAttackDamage, item
             defender:addStatusEffect(addStatus, power, tick, duration)
             msgParam = addStatus
         end
+
+        --------------------------------------
+        -- Inflicts negative effects vs target (Metasoma Katars)
+        --------------------------------------
+
+    elseif addType == procType.POISON_PARALYZE_BIND then
+        statusRoll = math.random(1, 3)
+        if (statusRoll == 1) then
+            addStatus = xi.effect.POISON
+            power = 10
+        elseif (statusRoll == 2) then
+            addStatus = xi.effect.PARALYSIS
+            power = 35
+        elseif (statusRoll == 3) then
+            addStatus = xi.effect.BIND
+            power = 30
+        end
+        local tick = xi.additionalEffect.statusAttack(addStatus, defender)
+        msgID = xi.msg.basic.ADD_EFFECT_STATUS
+        defender:addStatusEffect(addStatus, power, tick, duration)
+        msgParam = addStatus
 
         --------------------------------------
         -- Recovers user's HP
