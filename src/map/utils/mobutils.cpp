@@ -299,11 +299,11 @@ namespace mobutils
                     mobHP *= 0.30f; // Retail captures have all pets at 30% of the mobs family of the same level
                 }
 
-                PMob->health.maxhp = (int16)(mobHP);
+                PMob->health.maxhp = (int16)(mobHP) * (1.f + PMob->getMobMod(MOBMOD_HP_SCALE) / 100.f);
             }
             else
             {
-                PMob->health.maxhp = PMob->HPmodifier;
+                PMob->health.maxhp = PMob->HPmodifier * (1.f + PMob->getMobMod(MOBMOD_HP_SCALE) / 100.f);
             }
 
             if (isNM)
@@ -703,7 +703,11 @@ namespace mobutils
                 {
                     PMob->defaultMobMod(MOBMOD_SPECIAL_SKILL, 1388);
                 }
-                else if (PMob->m_Family == 246)
+                else if (PMob->m_Family == 337) // Dyna-Quadav
+                {
+                    PMob->defaultMobMod(MOBMOD_SPECIAL_SKILL, 1123);
+                }
+                else if (PMob->m_Family == 246) // Trolls
                 {
                     // Trolls love cannons, but they take a second to shoot
                     PMob->defaultMobMod(MOBMOD_SPECIAL_SKILL, 1747);
@@ -726,6 +730,14 @@ namespace mobutils
                     // aern
                     PMob->defaultMobMod(MOBMOD_SPECIAL_SKILL, 1388);
                     PMob->defaultMobMod(MOBMOD_SPECIAL_COOL, 12);
+                }
+                else if (PMob->m_Family == 337) // Dyna-Quadav
+                {
+                    PMob->defaultMobMod(MOBMOD_SPECIAL_SKILL, 1123);
+                }
+                else if (PMob->m_Family == 358) // Dyna-Kindred
+                {
+                    PMob->defaultMobMod(MOBMOD_SPECIAL_SKILL, 1146);
                 }
                 else if (PMob->m_Family != 335) // exclude NIN Maat
                 {
