@@ -893,6 +893,11 @@ namespace battleutils
                 spikesDamage %= 2;
             }
 
+            if (damage > PDefender->getMod(Mod::DMGMAGIC_CAP) && PDefender->getMod(Mod::DMGMAGIC_CAP) > 0)
+            {
+                damage = PDefender->getMod(Mod::DMGMAGIC_CAP);
+            }
+
             if (PDefender->objtype != TYPE_MOB || ((CMobEntity*)PDefender)->getMobMod(MOBMOD_AUTO_SPIKES) == 0)
             {
                 switch (static_cast<SPIKES>(Action->spikesEffect))
@@ -1045,6 +1050,11 @@ namespace battleutils
                 spikesDamage %= 2;
             }
 
+            if (damage > PDefender->getMod(Mod::DMGMAGIC_CAP) && PDefender->getMod(Mod::DMGMAGIC_CAP) > 0)
+            {
+                damage = PDefender->getMod(Mod::DMGMAGIC_CAP);
+            }
+
             PAttacker->takeDamage(spikesDamage, PDefender, ATTACK_TYPE::MAGICAL, GetSpikesDamageType(Action->spikesEffect));
 
             battleutils::DirtyExp(PAttacker, PDefender);
@@ -1095,6 +1105,11 @@ namespace battleutils
                 if (PDefender->GetLocalVar("DAMAGE_NULL") != 0)
                 {
                     spikesDamage %= 2;
+                }
+
+                if (damage > PDefender->getMod(Mod::DMGMAGIC_CAP) && PDefender->getMod(Mod::DMGMAGIC_CAP) > 0)
+                {
+                    damage = PDefender->getMod(Mod::DMGMAGIC_CAP);
                 }
 
                 PAttacker->takeDamage(spikesDamage, PDefender, ATTACK_TYPE::MAGICAL, GetSpikesDamageType(spikesType));
@@ -5517,6 +5532,11 @@ namespace battleutils
             damage %= 2;
         }
 
+        if (damage > PDefender->getMod(Mod::DMGPHYS_CAP) && PDefender->getMod(Mod::DMGPHYS_CAP) > 0)
+        {
+            damage = PDefender->getMod(Mod::DMGPHYS_CAP);
+        }
+
         return damage;
     }
 
@@ -5562,6 +5582,11 @@ namespace battleutils
         {
             damage = PDefender->GetLocalVar("DAMAGE_DEALT");
             damage %= 2;
+        }
+
+        if (damage > PDefender->getMod(Mod::DMGRANGE_CAP) && PDefender->getMod(Mod::DMGRANGE_CAP) > 0)
+        {
+            damage = PDefender->getMod(Mod::DMGRANGE_CAP);
         }
 
         return damage;

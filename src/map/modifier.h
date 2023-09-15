@@ -1026,6 +1026,10 @@ enum class Mod
     PET_DEF_LATENT  = 2025,  // Pet DEF bonus used for latents
 
     WYRMAL_ABJ_KILLER_EFFECT = 2026,   // Wyrmal Abjuration(Crimson / Blood) which makes players susceptible to Dragon Killer effects
+    DMGPHYS_CAP              = 2027,   // Caps damage received. Damage not not exceed this amount.
+    DMGMAGIC_CAP             = 2028,
+    DMGBREATH_CAP            = 2029,
+    DMGRANGE_CAP             = 2030,
 
 
     // IF YOU ADD ANY NEW MODIFIER HERE, ADD IT IN scripts/enum/mod.lua ASWELL!

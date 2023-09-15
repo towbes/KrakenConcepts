@@ -951,7 +951,11 @@ xi.mod =
     PET_MATT_LATENT = 2023,  -- Pet Magic Attack bonus used for latents
     PET_MACC_LATENT = 2024,  -- Pet Magic Acc bonus used for latents
     PET_DEF_LATENT  = 2025,  -- Pet DEF bonus used for latents
-
+    WYRMAL_ABJ_KILLER_EFFECT = 2026,
+    DMGPHYS_CAP                  = 2027, -- Caps damage received to this number. Damage can not exceed this amount.
+    DMGMAGIC_CAP                 = 2028,
+    DMGBREATH_CAP                = 2029,
+    DMGRANGE_CAP                 = 2030,
     -- IF YOU ADD ANY NEW MODIFIER HERE, ADD IT IN src/map/modifier.h ASWELL!
 
     -- The spares take care of finding the next ID to use so long as we don't forget to list IDs that have been freed up by refactoring.

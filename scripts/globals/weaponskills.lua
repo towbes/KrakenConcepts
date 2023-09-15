@@ -794,6 +794,7 @@ function doPhysicalWeaponskill(attacker, target, wsID, wsParams, tp, action, pri
 
     finaldmg = finaldmg * xi.settings.main.WEAPON_SKILL_POWER -- Add server bonus
     calcParams.finalDmg = finaldmg
+
     finaldmg = takeWeaponskillDamage(target, attacker, wsParams, primaryMsg, attack, calcParams, action)
 
     return finaldmg, calcParams.criticalHit, calcParams.tpHitsLanded, calcParams.extraHitsLanded, calcParams.shadowsAbsorbed
@@ -868,6 +869,9 @@ function doRangedWeaponskill(attacker, target, wsID, wsParams, tp, action, prima
     finaldmg = finaldmg * target:getMod(xi.mod.PIERCE_SDT) / 1000
 
     finaldmg = finaldmg * xi.settings.main.WEAPON_SKILL_POWER -- Add server bonus
+    if target:getMod(xi.mod.DMGRANGE_CAP) > 0 and finaldmg > target:getMod(xi.mod.DMGRANGE_CAP) then
+        finaldmg = target:getMod(xi.mod.DMGRANGE_CAP)
+    end
     calcParams.finalDmg = finaldmg
 
     finaldmg = takeWeaponskillDamage(target, attacker, wsParams, primaryMsg, attack, calcParams, action)
@@ -986,6 +990,9 @@ function doMagicWeaponskill(attacker, target, wsID, wsParams, tp, action, primar
                     attacker:delStatusEffect(xi.effect.DIVINE_SEAL)
                 end
 
+    if target:getMod(xi.mod.DMGMAGIC_CAP) > 0 and dmg > target:getMod(xi.mod.DMGMAGIC_CAP) then
+        dmg = target:getMod(xi.mod.DMGMAGIC_CAP)
+    end
 
     calcParams.finalDmg = dmg
 
@@ -1048,6 +1055,7 @@ function takeWeaponskillDamage(defender, attacker, wsParams, primaryMsg, attack,
     end
 
     finaldmg = defender:takeWeaponskillDamage(attacker, finaldmg, attack.type, attack.damageType, attack.slot, primaryMsg, wsResults.tpHitsLanded * attackerTPMult, (wsResults.extraHitsLanded * 10) + wsResults.bonusTP, targetTPMult)
+
     if wsResults.tpHitsLanded + wsResults.extraHitsLanded > 0 then
         if finaldmg >= 0 then
             action:param(defender:getID(), math.abs(finaldmg))

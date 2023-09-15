@@ -894,13 +894,13 @@ xi.spells.damage.useDamageSpell = function(caster, target, spell)
     if finalDamage < 0 then
         finalDamage = target:addHP(-finalDamage)
         spell:setMsg(xi.msg.basic.MAGIC_RECOVERS_HP)
+    end
+
+    if target:getMod(xi.mod.DMGMAGIC_CAP) > 0 and finalDamage > target:getMod(xi.mod.DMGMAGIC_CAP) then
+        finalDamage = target:getMod(xi.mod.DMGMAGIC_CAP)
 
     -- Handle final adjustments. Most are located in core. TODO: Decide if we want core handling this.
     else
-        -- Modifier that causes mob to take either 0 or 1 damage.
-        if target:getLocalVar("DAMAGE_NULL") == 1 then
-            finalDamage = finalDamage % 2
-        end
 
         -- Handle Bind break and TP?
         target:takeSpellDamage(caster, spell, finalDamage, xi.attackType.MAGICAL, xi.damageType.ELEMENTAL + spellElement)

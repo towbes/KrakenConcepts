@@ -246,6 +246,10 @@ xi.spells.blue.usePhysicalSpell = function(caster, target, spell, params)
         end
 
         hitsdone = hitsdone + 1
+
+        if target:getMod(xi.mod.DMGPHYS_CAP) > 0 and finaldmg > target:getMod(xi.mod.DMGPHYS_CAP) then
+            finaldmg = target:getMod(xi.mod.DMGPHYS_CAP) * hitslanded
+        end
     end
 
     return xi.spells.blue.applySpellDamage(caster, target, spell, finaldmg, params)
@@ -292,6 +296,10 @@ xi.spells.blue.useMagicalSpell = function(caster, target, spell, params)
 
     -- MAB/MDB/weather/day/affinity/burst effect on damage
     finaldmg = math.floor(addBonuses(caster, spell, target, finaldmg))
+
+    if target:getMod(xi.mod.DMGMAGIC_CAP) > 0 and finaldmg > target:getMod(xi.mod.DMGMAGIC_CAP) then
+        finaldmg = target:getMod(xi.mod.DMGMAGIC_CAP)
+    end
 
     return xi.spells.blue.applySpellDamage(caster, target, spell, finaldmg, params)
 end
@@ -368,6 +376,10 @@ xi.spells.blue.useBreathSpell = function(caster, target, spell, params, isConal)
 
     -- Final damage
     dmg = target:breathDmgTaken(dmg)
+
+    if target:getMod(xi.mod.DMGBREATH_CAP) > 0 and dmg > target:getMod(xi.mod.DMGBREATH_CAP) then
+        dmg = target:getMod(xi.mod.DMGBREATH_CAP)
+    end
 
     results[1] = xi.spells.blue.applySpellDamage(caster, target, spell, dmg, params)
     results[2] = resistance

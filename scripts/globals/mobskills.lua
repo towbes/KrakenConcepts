@@ -125,7 +125,162 @@ end
 
 xi.mobskills.mobRangedMove = function(mob, target, skill, numberofhits, accmod, dmgmod, tpeffect)
     -- this will eventually contian ranged attack code
-    return xi.mobskills.mobPhysicalMove(mob, target, skill, numberofhits, accmod, dmgmod, xi.mobskills.magicalTpBonus.RANGED)
+    -- return xi.mobskills.mobPhysicalMove(mob, target, skill, numberofhits, accmod, dmgmod, xi.mobskills.magicalTpBonus.RANGED)
+    local returninfo = {}
+
+    --get dstr (bias to monsters, so no fSTR)
+    local dstr = mob:getStat(xi.mod.STR) - target:getStat(xi.mod.VIT)
+    if dstr < -10 then
+        dstr = -10
+    end
+
+    if dstr > 10 then
+        dstr = 10
+    end
+
+    local lvluser = mob:getMainLvl()
+    local lvltarget = target:getMainLvl()
+    local acc = mob:getACC()
+    local eva = target:getEVA() + target:getMod(xi.mod.SPECIAL_ATTACK_EVASION)
+
+    if target:hasStatusEffect(xi.effect.YONIN) and mob:isFacing(target, 23) then -- Yonin evasion boost if mob is facing target
+        eva = eva + target:getStatusEffect(xi.effect.YONIN):getPower()
+    end
+
+    --apply WSC
+    local base = mob:getWeaponDmg() + dstr --todo: change to include WSC
+
+    if mob:getLocalVar("[ranged_attack]weaponDmg") > 0 then
+        base = mob:getLocalVar("[ranged_attack]weaponDmg") + dstr
+    end
+    
+    if base < 1 then
+        base = 1
+    end
+
+    --work out and cap ratio
+    if offcratiomod == nil then -- default to attack. Pretty much every physical mobskill will use this, Cannonball being the exception.
+        offcratiomod = mob:getStat(xi.mod.ATT)
+    end
+
+    local ratio = offcratiomod / target:getStat(xi.mod.DEF)
+    local lvldiff = lvluser - lvltarget
+    if lvldiff < 0 then
+        lvldiff = 0
+    end
+
+    ratio = ratio + lvldiff * 0.05
+    ratio = utils.clamp(ratio, 0, 4)
+
+    --work out hit rate for mobs
+    local hitrate = ((acc * accmod) - eva) / 2 + (lvldiff * 2) + 75
+
+    hitrate = utils.clamp(hitrate, 20, 95)
+
+    --work out the base damage for a single hit
+    local hitdamage = base + lvldiff
+    if hitdamage < 1 then
+        hitdamage = 1
+    end
+
+    hitdamage = hitdamage * dmgmod
+
+    if tpeffect == xi.mobskills.physicalTpBonus.DMG_VARIES then
+        hitdamage = hitdamage * MobTPMod(skill:getTP() / 10)
+    end
+
+    --work out min and max cRatio
+    local maxRatio = 1
+    local minRatio = 0
+
+    if ratio < 0.5 then
+        maxRatio = ratio + 0.5
+    elseif ratio <= 0.7 then
+        maxRatio = 1
+    elseif ratio <= 1.2 then
+        maxRatio = ratio + 0.3
+    elseif ratio <= 1.5 then
+        maxRatio = (ratio * 0.25) + ratio
+    elseif ratio <= 2.625 then
+        maxRatio = ratio + 0.375
+    elseif ratio <= 3.25 then
+        maxRatio = 3
+    else
+        maxRatio = ratio
+    end
+
+    if ratio < 0.38 then
+        minRatio =  0
+    elseif ratio <= 1.25 then
+        minRatio = ratio * (1176 / 1024) - (448 / 1024)
+    elseif ratio <= 1.51 then
+        minRatio = 1
+    elseif ratio <= 2.44 then
+        minRatio = ratio * (1176 / 1024) - (775 / 1024)
+    else
+        minRatio = ratio - 0.375
+    end
+
+    --apply ftp (assumes 1~3 scalar linear mod)
+    if tpeffect == xi.mobskills.magicalTpBonus.DMG_BONUS then
+        hitdamage = hitdamage * fTP(skill:getTP(), mtp000, mtp150, mtp300)
+    end
+
+    --Applying pDIF
+    local pdif = 0
+
+    -- start the hits
+    local finaldmg = 0
+    local hitsdone = 1
+    local hitslanded = 0
+
+    local chance = math.random()
+
+    -- first hit has a higher chance to land
+    local firstHitChance = hitrate * 1.5
+
+    if tpeffect == xi.mobskills.magicalTpBonus.RANGED then
+        firstHitChance = hitrate * 1.2
+    end
+
+    firstHitChance = utils.clamp(firstHitChance, 35, 95)
+
+    if (chance * 100) <= firstHitChance then
+        pdif = math.random((minRatio * 1000), (maxRatio * 1000)) --generate random PDIF
+        pdif = pdif / 1000 --multiplier set.
+        finaldmg = finaldmg + hitdamage * pdif
+        hitslanded = hitslanded + 1
+    end
+
+    while hitsdone < numberofhits do
+        chance = math.random()
+
+        if (chance * 100) <= hitrate then --it hit
+            pdif = math.random(minRatio * 1000, maxRatio * 1000) --generate random PDIF
+            pdif = pdif / 1000 --multiplier set.
+            finaldmg = finaldmg + hitdamage * pdif
+            hitslanded = hitslanded + 1
+        end
+
+        hitsdone = hitsdone + 1
+    end
+
+    -- if an attack landed it must do at least 1 damage
+    if hitslanded >= 1 and finaldmg < 1 then
+        finaldmg = 1
+    end
+
+    -- all hits missed
+    if hitslanded == 0 or finaldmg == 0 then
+        finaldmg = 0
+        hitslanded = 0
+        skill:setMsg(xi.msg.basic.SKILL_MISS)
+    end
+
+    returninfo.dmg = finaldmg
+    returninfo.hitslanded = hitslanded
+
+    return returninfo
 end
 
 -- PHYSICAL MOVE FUNCTION
@@ -275,6 +430,11 @@ xi.mobskills.mobPhysicalMove = function(mob, target, skill, numberofhits, accmod
         end
 
         hitsdone = hitsdone + 1
+    end
+
+    -- Handle Phalanx "Phalanx now applies per hit - Umeboshi"
+    if finaldmg > 0 then
+        finaldmg = utils.clamp(finaldmg - (target:getMod(xi.mod.PHALANX) * hitslanded), 0, 99999)
     end
 
     -- if an attack landed it must do at least 1 damage
@@ -477,8 +637,8 @@ end
 -- Equation: (HP * percent) + (LVL / base)
 -- cap is optional, defines a maximum damage
 xi.mobskills.mobBreathMove = function(mob, target, percent, base, element, cap)
-    -- local damage = (mob:getHP() * percent) + (mob:getMainLvl() / base)
-    local damage = mob:getHP() * percent
+    local damage = (mob:getHP() * percent) + (mob:getMainLvl() / base)
+    --local damage = mob:getHP() * percent
 
 
     if cap == nil then
@@ -490,6 +650,8 @@ xi.mobskills.mobBreathMove = function(mob, target, percent, base, element, cap)
     local systemBonus = utils.getEcosystemStrengthBonus(mob:getEcosystem(), target:getEcosystem())
     damage = damage + damage * (systemBonus * 0.25)
 
+    damage = utils.clamp(damage, 1, cap)
+
     -- elemental resistence
     if element ~= nil and element > 0 then
         -- no skill available, pass nil
@@ -500,8 +662,6 @@ xi.mobskills.mobBreathMove = function(mob, target, percent, base, element, cap)
 
         damage = damage * resist * defense
     end
-
-    damage = utils.clamp(damage, 1, cap)
 
     local liement = target:checkLiementAbsorb(xi.damageType.ELEMENTAL + element) -- check for Liement.
     if liement < 0 then -- skip BDT/DT etc for Liement if we absorb.
@@ -540,7 +700,10 @@ xi.mobskills.mobBreathMove = function(mob, target, percent, base, element, cap)
             damage = 0
         end
     end
-
+    if mob:getMobMod(xi.mobMod.BREATH_ATTACK_LINEAR) == 1 then
+    local mobScalingHP = mob:getMaxHP() / mob:getHP()
+    damage = (damage / mobScalingHP)
+    end
 
     return damage
 end
