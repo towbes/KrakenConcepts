@@ -330,13 +330,15 @@ xi.additionalEffect.attack = function(attacker, defender, baseAttackDamage, item
         --------------------------------------
     elseif addType == procType.ABSORB_STATUS then
         -- Ripping off Aura Steal here
-        local resist = applyResistanceAddEffect(attacker, defender, element, 0)
-        if resist > 0.0625 then
-            local stolen = attacker:stealStatusEffect(defender)
-            msgID = xi.msg.basic.STEAL_EFFECT
-            msgParam = stolen
-        else
-            return 0, 0, 0 -- Conditions not hit
+            local resist = applyResistanceAddEffect(attacker, defender, element, 0)
+            if resist > 0.0625 then
+                local stolen = attacker:stealStatusEffect(defender)
+                if stolen ~= 0 then
+                msgID = xi.msg.basic.ADD_EFFECT_SELFBUFF
+                msgParam = stolen
+            else
+                return 0, 0, 0 -- Conditions not hit
+            end
         end
 
         --------------------------------------
