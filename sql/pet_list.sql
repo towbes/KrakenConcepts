@@ -89,7 +89,7 @@ INSERT INTO `pet_list` VALUES (60, 'Presto Julio', 4632, 83, 93, 7200, 0);
 INSERT INTO `pet_list` VALUES (61, 'Bugeyed Broncha', 4633, 90, 99, 7200, 0);
 INSERT INTO `pet_list` VALUES (62, 'Gooey Gerard', 4634, 95, 99, 5400, 0);
 INSERT INTO `pet_list` VALUES (63, 'Gorefang Hobs', 4635, 93, 99, 7200, 0);
-INSERT INTO `pet_list` VALUES (64, 'Faithful Falcor', 4636, 86, 99, 5400, 0);
+INSERT INTO `pet_list` VALUES (64, 'Faithful Falcor', 4636, 75, 85, 5400, 0);
 INSERT INTO `pet_list` VALUES (65, 'Crude Raphie', 4637, 96, 99, 5400, 0);
 INSERT INTO `pet_list` VALUES (66, 'Dapper Mac', 4638, 76, 99, 7200, 0);
 INSERT INTO `pet_list` VALUES (67, 'Slippery Silas', 4639, 23, 99, 1800, 0);
