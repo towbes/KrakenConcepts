@@ -1,0 +1,31 @@
+-----------------------------------
+-- ID: 5899
+-- Item: Shadescale Femur
+-- Item Effect: Removes Apocalyptic Beast's Body Slam & Heavy Stomp
+-----------------------------------
+require("scripts/globals/status")
+require("scripts/globals/msg")
+-----------------------------------
+local itemObject = {}
+
+itemObject.onItemCheck = function(target, player)
+    local result = 0
+    if target:checkDistance(player) > 10 then
+        result = xi.msg.basic.TOO_FAR_AWAY
+    elseif target:getName() == "Apocalyptic_Beast" or target:getName() == "Arch_Apocalyptic_Beast" then
+        return 0
+    else
+        result = xi.msg.basic.ITEM_UNABLE_TO_USE
+    end
+
+    return result
+end
+
+itemObject.onItemUse = function(target, player)
+    if target:getLocalVar("debuff_Femur") == 0 then
+        target:setLocalVar("debuff_Femur", 1)
+        target:updateClaim(player)
+    end
+end
+
+return itemObject
