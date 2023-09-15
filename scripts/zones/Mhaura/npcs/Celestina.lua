@@ -27,17 +27,6 @@ entity.onEventUpdate = function(player, csid, option, npc)
 end
 
 entity.onEventFinish = function(player, csid, option, npc)
-    if csid == 126 and option == 70 then
-        player:setCharVar("theSandCharmVar", 4)
-    elseif csid == 127 then
-        player:confirmTrade()
-        npcUtil.completeQuest(player, xi.quest.log_id.OTHER_AREAS, xi.quest.id.otherAreas.THE_SAND_CHARM, {
-            ki = xi.ki.MAP_OF_BOSTAUNIEUX_OUBLIETTE,
-            fameArea = xi.quest.fame_area.WINDURST,
-            var = "theSandCharmVar"
-        })
-        player:setCharVar("SmallDialogByBlandine", 1)
-    end
 end
 
 return entity
