@@ -1031,6 +1031,7 @@ enum class Mod
     DMGBREATH_CAP            = 2029,
     DMGRANGE_CAP             = 2030,
     ENEMYCRITDMG             = 2031,
+    NINJUTSU_RECAST_DELAY    = 2032,
 
 
     // IF YOU ADD ANY NEW MODIFIER HERE, ADD IT IN scripts/enum/mod.lua ASWELL!

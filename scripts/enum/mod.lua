@@ -956,6 +956,8 @@ xi.mod =
     DMGMAGIC_CAP                 = 2028,
     DMGBREATH_CAP                = 2029,
     DMGRANGE_CAP                 = 2030,
+    ENEMYCRITDMG                 = 2031,
+    NINJUTSU_RECAST_DELAY        = 2032, -- In seconds
     -- IF YOU ADD ANY NEW MODIFIER HERE, ADD IT IN src/map/modifier.h ASWELL!
 
     -- The spares take care of finding the next ID to use so long as we don't forget to list IDs that have been freed up by refactoring.

@@ -6838,6 +6838,11 @@ namespace battleutils
         int32 haste = PEntity->getMod(Mod::HASTE_MAGIC) + PEntity->getMod(Mod::HASTE_GEAR);
         recast      = static_cast<int32>(recast * ((10000.0f - haste) / 10000.0f));
 
+        if (PSpell->getSpellGroup() == SPELLGROUP_NINJUTSU)
+        {
+            recast -= PEntity->getMod(Mod::NINJUTSU_RECAST_DELAY);
+        }
+
         if (PSpell->getSpellGroup() == SPELLGROUP_SONG)
         {
             if (PEntity->StatusEffectContainer->HasStatusEffect(EFFECT_NIGHTINGALE))
