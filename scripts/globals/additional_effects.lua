@@ -158,6 +158,7 @@ xi.additionalEffect.attack = function(attacker, defender, baseAttackDamage, item
         VS_ECOSYSTEM    = 18,
         DAMAGE_HP_PERC  = 19,
         POISON_PARALYZE_BIND  = 20,
+        DAMAGE_MP_PERC  = 21,
 
     }
 
@@ -213,6 +214,18 @@ xi.additionalEffect.attack = function(attacker, defender, baseAttackDamage, item
         -- damage = xi.additionalEffect.calcDamagePhys(attacker, element, defender, damage)
         msgID = xi.msg.basic.ADD_EFFECT_DMG
 
+        if damage < 0 then
+            msgID = xi.msg.basic.ADD_EFFECT_HEAL
+        end
+
+        msgParam = damage
+
+    elseif addType == procType.DAMAGE_MP_PERC then
+        local currentMP = attacker.getMP(attacker)
+        damage = math.floor(attacker.getMP(attacker) * 0.10)
+        damage = xi.additionalEffect.calcDamage(attacker, element, defender, damage)
+        msgID = xi.msg.basic.ADD_EFFECT_DMG
+        attacker:addMP(-(currentMP * 0.10))
         if damage < 0 then
             msgID = xi.msg.basic.ADD_EFFECT_HEAL
         end
@@ -286,7 +299,7 @@ xi.additionalEffect.attack = function(attacker, defender, baseAttackDamage, item
             damage = defender:getHP()
         end
 
-        local drainMod = 1 + attacker:getMod(xi.mod.ENH_DRAIN_ASPIR) / 100
+        local drainMod = 1 + attacker:getMod(xi.mod.ENH_DRAIN_ASPIR) + attacker:getMod(xi.mod.ENH_DRAIN) / 100
         damage = damage * drainMod
 
 
@@ -307,7 +320,7 @@ xi.additionalEffect.attack = function(attacker, defender, baseAttackDamage, item
             return 0, 0, 0 -- Conditions not hit
         end
 
-        local drainMod = 1 + attacker:getMod(xi.mod.ENH_DRAIN_ASPIR) / 100
+        local drainMod = 1 + attacker:getMod(xi.mod.ENH_DRAIN_ASPIR) + attacker:getMod(xi.mod.ENH_ASPIR) / 100
         damage = damage * drainMod
 
         msgID = xi.msg.basic.ADD_EFFECT_MP_DRAIN

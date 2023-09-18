@@ -958,6 +958,14 @@ xi.mod =
     DMGRANGE_CAP                 = 2030,
     ENEMYCRITDMG                 = 2031,
     NINJUTSU_RECAST_DELAY        = 2032, -- In seconds
+
+    SEVERE_MAGIC_DMG_NULL    = 2033,  -- Nullifies damage that would otherwise kill you.
+    SEVERE_PHYS_DMG_NULL     = 2034,
+    SEVERE_RANGE_DMG_NULL    = 2035,
+    SEVERE_BREATH_DMG_NULL   = 2036,
+    SEVERE_DMG_NULL          = 2037,
+    ENH_ASPIR                = 2038, -- % damage boost to Aspir
+    ENH_DRAIN                = 2039, -- % damage boost to DRAIN
     -- IF YOU ADD ANY NEW MODIFIER HERE, ADD IT IN src/map/modifier.h ASWELL!
 
     -- The spares take care of finding the next ID to use so long as we don't forget to list IDs that have been freed up by refactoring.
