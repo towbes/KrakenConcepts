@@ -232,7 +232,7 @@ local battlefields =
         {  6,    6, 1429 },   -- Shattering Stars (BLM LB5)
         {  7,    7, 1436 },   -- Shattering Stars (RNG LB5)
         {  8,    8, 1552 },   -- Carapace Combatants (BS30)
-        {  9,    9, 1551 },   -- Shooting Fish (BS20) -- TODO: mobs use ranged attacks with knockback
+        {  9,    9, 1551 },   -- Shooting Fish (BS20)
         { 10,   10, 1552 },   -- Dropping Like Flies (BS30)
         { 11,   11, 1553 },   -- Horns of War (KS99)
         { 12,   12, 1131 },   -- Under Observation (BS40)
@@ -312,7 +312,7 @@ local battlefields =
         { 11,  107, 1553 },   -- Early Bird Catches the Wyrm (KS99)
         { 12,  108, 1131 },   -- Royal Succession (BS40)
         { 13,  109, 1177 },   -- Rapid Raptors (BS50)
-        { 14,  110, 1130 },   -- Wild Wild Whiskers (BS60) -- TODO: should use petrifactive breath more often than other mobskill. Message before spellcasting.
+        { 14,  110, 1130 },   -- Wild Wild Whiskers (BS60)
         { 15,  111, 1175 },   -- Seasons Greetings (KS30)
         { 16,  112, 1178 },   -- Royale Ramble (KS30)
         { 17,  113, 1180 },   -- Moa Constrictors (KS30)
@@ -476,7 +476,7 @@ local battlefields =
         { 12,  524, 1131 },   -- Undying Promise (BS40) -- TODO: model size increases with each reraise
         { 13,  525, 1131 },   -- Factory Rejects (BS40)
         { 14,  526, 1177 },   -- Idol Thoughts (BS50)
-        { 15,  527, 1177 },   -- An Awful Autopsy (BS50) -- TODO: mobskill Infernal Pestilence
+        { 15,  527, 1177 },   -- An Awful Autopsy (BS50)
         { 16,  528, 1130 },   -- Celery (BS60)
     --  { 17,  529,    0 },   -- Mirror Images (Quest)
         { 18,  530, 2556 },   -- A Furious Finale (DNC LB5)
@@ -543,7 +543,6 @@ local function checkReqs(player, npc, bfid, registrant)
 
     local nationStatus    = player:getMissionStatus(player:getNation())
     local zilartStatus    = player:getMissionStatus(xi.mission.log_id.ZILART)
-    local promathiaStatus = player:getCharVar("PromathiaStatus")
     local toauStatus      = player:getMissionStatus(xi.mission.log_id.TOAU)
 
     local function getEntranceOffset(offset)
@@ -597,7 +596,7 @@ local function checkReqs(player, npc, bfid, registrant)
         end,
 
         [37] = function() -- Quest: Mirror Mirror
-            return player:getQuestStatus(xi.quest.log_id.JEUNO, xi.quest.id.jeuno.MIRROR_MIRROR) == QUEST_ACCEPTED and player:getCharVar("[Quest]Mirror_Mirror") == 2 
+            return player:getQuestStatus(xi.quest.log_id.JEUNO, xi.quest.id.jeuno.MIRROR_MIRROR) == QUEST_ACCEPTED and player:getCharVar("[Quest]Mirror_Mirror") == 2
         end, 
 
         [64] = function() -- Mission 2-3
@@ -690,11 +689,6 @@ local function checkReqs(player, npc, bfid, registrant)
                 nationStatus == 2
         end,
 
-        [256] = function() -- ZM8: Return to Delkfutt's Tower
-            return zilartMission == xi.mission.id.zilart.RETURN_TO_DELKFUTTS_TOWER and
-                zilartStatus == 2
-        end,
-
         [226] = function() -- Quest: Waking the Beast (Fullmoon Fountain)
             return player:hasKeyItem(xi.ki.EYE_OF_GALES) and 
                 player:hasKeyItem(xi.ki.EYE_OF_FLAMES) and 
@@ -702,6 +696,11 @@ local function checkReqs(player, npc, bfid, registrant)
                 player:hasKeyItem(xi.ki.EYE_OF_STORMS) and 
                 player:hasKeyItem(xi.ki.EYE_OF_TIDES) and
                 player:hasKeyItem(xi.ki.EYE_OF_TREMORS)
+        end,
+
+        [256] = function() -- ZM8: Return to Delkfutt's Tower
+            return zilartMission == xi.mission.id.zilart.RETURN_TO_DELKFUTTS_TOWER and
+                zilartStatus == 2
         end,
 
         [288] = function() -- ZM14: Ark Angels (Hume)
@@ -762,7 +761,7 @@ local function checkReqs(player, npc, bfid, registrant)
 
         [419] = function() -- Quest: Waking the Beast (Cloister of Gales)
             return player:hasKeyItem(xi.ki.RAINBOW_RESONATOR) and
-            not player:hasKeyItem(xi.ki.EYE_OF_GALES)
+                not player:hasKeyItem(xi.ki.EYE_OF_GALES)
         end,
 
         [420] = function() -- ASA4: Sugar-coated Directive
@@ -784,7 +783,7 @@ local function checkReqs(player, npc, bfid, registrant)
 
         [451] = function() -- Quest: Waking the Beast (Cloister of Storms)
             return player:hasKeyItem(xi.ki.RAINBOW_RESONATOR) and
-            not player:hasKeyItem(xi.ki.EYE_OF_STORMS)
+                not player:hasKeyItem(xi.ki.EYE_OF_STORMS)
         end,
 
         [452] = function() -- ASA4: Sugar-coated Directive
@@ -806,7 +805,7 @@ local function checkReqs(player, npc, bfid, registrant)
 
         [483] = function() -- Quest: Waking the Beast (Cloister of Frost)
             return player:hasKeyItem(xi.ki.RAINBOW_RESONATOR) and
-            not player:hasKeyItem(xi.ki.EYE_OF_FROST)
+                not player:hasKeyItem(xi.ki.EYE_OF_FROST)
         end,
 
         [484] = function() -- ASA4: Sugar-coated Directive
@@ -860,7 +859,7 @@ local function checkReqs(player, npc, bfid, registrant)
 
         [546] = function() -- Quest: Waking the Beast (Cloister of Flames)
             return player:hasKeyItem(xi.ki.RAINBOW_RESONATOR) and
-            not player:hasKeyItem(xi.ki.EYE_OF_FLAMES)
+                not player:hasKeyItem(xi.ki.EYE_OF_FLAMES)
         end,
 
         [547] = function() -- ASA4: Sugar-coated Directive
@@ -882,7 +881,7 @@ local function checkReqs(player, npc, bfid, registrant)
 
         [579] = function() -- Quest: Waking the Beast (Cloister of Tremors)
             return player:hasKeyItem(xi.ki.RAINBOW_RESONATOR) and
-            not player:hasKeyItem(xi.ki.EYE_OF_TREMORS)
+                not player:hasKeyItem(xi.ki.EYE_OF_TREMORS)
         end,
 
         [580] = function() -- ASA4: Sugar-coated Directive
@@ -900,7 +899,7 @@ local function checkReqs(player, npc, bfid, registrant)
 
         [610] = function() -- Quest: Waking the Beast (Cloister of Tides)
             return player:hasKeyItem(xi.ki.RAINBOW_RESONATOR) and
-            not player:hasKeyItem(xi.ki.EYE_OF_TIDES)
+                not player:hasKeyItem(xi.ki.EYE_OF_TIDES)
         end,
 
         [611] = function() -- ASA4: Sugar-coated Directive
@@ -932,7 +931,7 @@ local function checkReqs(player, npc, bfid, registrant)
 
         [672] = function() -- PM5-3 U2: Head Wind
             return promathiaMission == xi.mission.id.cop.THREE_PATHS and
-                player:getMissionStatus(xi.mission.log_id.COP, xi.mission.status.COP.ULMIA) >= 7
+                player:getMissionStatus(xi.mission.log_id.COP, xi.mission.status.COP.ULMIA) == 7
         end,
 
         [673] = function() -- ENM: Like the Wind
@@ -952,12 +951,12 @@ local function checkReqs(player, npc, bfid, registrant)
         end,
 
         [677] = function() -- Quest: Tango with a Tracker
-            return player:hasKeyItem(xi.ki.LETTER_FROM_SHIKAREE_X) or player:hasKeyItem(xi.ki.LETTER_FROM_THE_MITHRAN_TRACKERS)   
+            return player:hasKeyItem(xi.ki.LETTER_FROM_SHIKAREE_X)   
         end,
 
         [678] = function() -- Quest: Requiem of Sin
             return player:hasKeyItem(xi.ki.LETTER_FROM_SHIKAREE_Y) or
-            player:hasKeyItem(xi.ki.LETTER_FROM_THE_MITHRAN_TRACKERS)
+                player:hasKeyItem(xi.ki.LETTER_FROM_THE_MITHRAN_TRACKERS)
         end,
 
         [704] = function() -- PM3-5: Darkness Named
@@ -975,7 +974,7 @@ local function checkReqs(player, npc, bfid, registrant)
 
         [736] = function() -- PM5-3 L3: A Century of Hardship
             return promathiaMission == xi.mission.id.cop.THREE_PATHS and
-                player:getMissionStatus(xi.mission.log_id.COP, xi.mission.status.COP.LOUVERANCE) >= 8
+                player:getMissionStatus(xi.mission.log_id.COP, xi.mission.status.COP.LOUVERANCE) == 8
         end,
 
         [737] = function() -- Quest: Return to the Depths
@@ -1036,7 +1035,7 @@ local function checkReqs(player, npc, bfid, registrant)
         end,
 
         [897] = function() -- Quest: The Wyrmking Descends
-             return player:hasKeyItem(xi.ki.WHISPER_OF_THE_WYRMKING) 
+             return player:hasKeyItem(xi.ki.WHISPER_OF_THE_WYRMKING)
         end,
 
         [960] = function() -- PM2-5: Ancient Vows
@@ -1067,7 +1066,7 @@ local function checkReqs(player, npc, bfid, registrant)
             return player:hasKeyItem(xi.ki.MONARCH_BEARD)
         end,
 
-        [966] = function() -- ENM: Uninvited Guest
+        [966] = function() -- Quest: Uninvited Guests
             return player:hasKeyItem(xi.ki.MONARCH_LINN_PATROL_PERMIT)
         end,
 
@@ -1078,12 +1077,11 @@ local function checkReqs(player, npc, bfid, registrant)
 
         [993] = function() -- PM7-5: The Warrior's Path
             return promathiaMission == xi.mission.id.cop.THE_WARRIORS_PATH and
-                player:getCharVar('Mission[6][748]Status') >= 1
+                player:getCharVar('Mission[6][748]Status') >= 0
         end,
 
         [1024] = function() -- PM8-3: When Angels Fall
-            return promathiaMission == xi.mission.id.cop.WHEN_ANGELS_FALL and
-                player:getCharVar('Mission[6][828]Status') == 4
+            return player:getCharVar('Mission[6][828]Status') == 4
         end,
 
         [1056] = function() -- PM8-4: Dawn
@@ -1137,10 +1135,75 @@ local function checkReqs(player, npc, bfid, registrant)
     -- Requirements to enter a battlefield already registered by a party member
     local enterReqs =
     {
+        [37] = function() -- Quest: Mirror Mirror
+            return player:getQuestStatus(xi.quest.log_id.JEUNO, xi.quest.id.jeuno.MIRROR_MIRROR) == QUEST_ACCEPTED and player:getCharVar("[Quest]Mirror_Mirror") == 2
+        end,
+
+        [226] = function() -- Quest: Waking the Beast (Fullmoon Fountain)
+            return player:hasKeyItem(xi.ki.EYE_OF_FLAMES) and
+                player:hasKeyItem(xi.ki.EYE_OF_TREMORS) and
+                player:hasKeyItem(xi.ki.EYE_OF_STORMS) and
+                player:hasKeyItem(xi.ki.EYE_OF_FROST) and
+                player:hasKeyItem(xi.ki.EYE_OF_GALES) and
+                player:hasKeyItem(xi.ki.EYE_OF_TIDES)
+        end,
+
+        [224] = function() -- Quest: The Moonlit Path
+            return player:hasKeyItem(xi.ki.MOON_BAUBLE)
+        end,
+
+        [416] = function() -- Trial by Wind
+            return player:hasKeyItem(xi.ki.TUNING_FORK_OF_WIND)
+        end,
+
+        [419] = function() -- Quest: Waking the Beast (Cloister of Gales)
+            return player:hasKeyItem(xi.ki.RAINBOW_RESONATOR)
+        end,
+
+        [448] = function() -- Trial by Lightning
+            return player:hasKeyItem(xi.ki.TUNING_FORK_OF_LIGHTNING)
+        end,
+
+        [451] = function() -- Quest: Waking the Beast (Cloister of Storms)
+            return player:hasKeyItem(xi.ki.RAINBOW_RESONATOR)
+        end,
+
+        [480] = function() -- Trial by Ice
+            return player:hasKeyItem(xi.ki.TUNING_FORK_OF_ICE)
+        end,
+
+        [483] = function() -- Quest: Waking the Beast (Cloister of Frost)
+            return player:hasKeyItem(xi.ki.RAINBOW_RESONATOR)
+        end,
+
+        [544] = function() -- Trial by Fire
+            return player:hasKeyItem(xi.ki.TUNING_FORK_OF_FIRE)
+        end,
+
+        [546] = function() -- Quest: Waking the Beast (Cloister of Flames)
+            return player:hasKeyItem(xi.ki.RAINBOW_RESONATOR)
+        end,
+
+        [576] = function() -- Trial by Earth
+            return player:hasKeyItem(xi.ki.TUNING_FORK_OF_EARTH)
+        end,
+
+        [579] = function() -- Quest: Waking the Beast (Cloister of Tremors)
+            return player:hasKeyItem(xi.ki.RAINBOW_RESONATOR)
+        end,
+
+        [608] = function() -- Trial by Water
+            return player:hasKeyItem(xi.ki.TUNING_FORK_OF_WATER)
+        end,
+
+        [610] = function() -- Quest: Waking the Beast (Cloister of Tides)
+            return player:hasKeyItem(xi.ki.RAINBOW_RESONATOR)
+        end,
+        
         [640] = function() -- PM5-3 U3: Flames for the Dead
-            return player:hasCompletedMission(xi.mission.log_id.COP, xi.mission.id.cop.THREE_PATHS) or
-            (player:getMissionStatus(xi.mission.log_id.COP, xi.mission.status.COP.ULMIA) == 8)
-            and npcId == getEntranceOffset(0)
+            return (player:hasCompletedMission(xi.mission.log_id.COP, xi.mission.id.cop.THREE_PATHS) or
+            player:getMissionStatus(xi.mission.log_id.COP, xi.mission.status.COP.ULMIA) >= 8) and
+            npcId == getEntranceOffset(0)
         end,
 
         [641] = function() -- ENM: Follow the White Rabbit
@@ -1159,6 +1222,11 @@ local function checkReqs(player, npc, bfid, registrant)
             return player:hasKeyItem(xi.ki.ZEPHYR_FAN) and npcId == getEntranceOffset(8)
         end,
 
+        [672] = function() -- PM5-3 U2: Head Wind
+            return player:hasCompletedMission(xi.mission.log_id.COP, xi.mission.id.cop.THREE_PATHS) or
+                player:getMissionStatus(xi.mission.log_id.COP, xi.mission.status.COP.ULMIA) >= 7
+        end,
+
         [673] = function() -- ENM: Like the Wind
             return player:hasKeyItem(xi.ki.MIASMA_FILTER)
         end,
@@ -1175,13 +1243,27 @@ local function checkReqs(player, npc, bfid, registrant)
             return player:hasKeyItem(xi.ki.MIASMA_FILTER)
         end,
 
+        [677] = function() -- Quest: Tango with a Tracker
+            return player:hasKeyItem(xi.ki.LETTER_FROM_SHIKAREE_X) or
+                player:hasCompletedQuest(xi.quest.log_id.OTHER_AREAS, xi.quest.id.otherAreas.TANGO_WITH_A_TRACKER)
+        end,
+        [678] = function() -- Quest: Requiem of Sin
+            return player:hasKeyItem(xi.ki.LETTER_FROM_SHIKAREE_Y) or
+                player:hasKeyItem(xi.ki.LETTER_FROM_THE_MITHRAN_TRACKERS)
+        end,
+
         [705] = function() -- ENM: Test Your Mite
             return player:hasKeyItem(xi.ki.ASTRAL_COVENANT)
         end,
 
+        [736] = function() -- PM5-3 L3: A Century of Hardship
+            return player:hasCompletedMission(xi.mission.log_id.COP, xi.mission.id.cop.THREE_PATHS) or
+                player:getMissionStatus(xi.mission.log_id.COP, xi.mission.status.COP.LOUVERANCE) >= 8
+        end,
+
         [737] = function() -- Quest: Return to the Depths
             return player:getCharVar("Quest[1][78]prog") >= 9 or
-            player:hasCompletedQuest(xi.quest.log_id.BASTOK, xi.quest.id.bastok.RETURN_TO_THE_DEPTHS)
+                player:hasCompletedQuest(xi.quest.log_id.BASTOK, xi.quest.id.bastok.RETURN_TO_THE_DEPTHS)
         end,
 
         [738] = function() -- ENM: Bionic Bug
@@ -1210,6 +1292,11 @@ local function checkReqs(player, npc, bfid, registrant)
 
         [865] = function() -- ENM: Pulling the Plug
             return player:hasKeyItem(xi.ki.CENSER_OF_ACRIMONY)
+        end,
+
+        [896] = function() -- Quest: Storms of Fate
+            return player:getQuestStatus(xi.quest.log_id.JEUNO, xi.quest.id.jeuno.STORMS_OF_FATE) == QUEST_COMPLETED or
+                player:getCharVar("Quest[3][86]Status") > 2
         end,
 
         [897] = function() -- Quest: The Wyrmking Descends
@@ -1364,9 +1451,7 @@ local function checkSkip(player, bfid)
     local bastokMission    = player:getCurrentMission(xi.mission.log_id.BASTOK)
     local windurstMission  = player:getCurrentMission(xi.mission.log_id.WINDURST)
     local promathiaMission = player:getCurrentMission(xi.mission.log_id.COP)
-
-    local nationStatus    = player:getMissionStatus(player:getNation())
-    local promathiaStatus = player:getCharVar("PromathiaStatus")
+    local nationStatus     = player:getMissionStatus(player:getNation())
 
     -- Requirements to skip a battlefield
     local skipReqs =
@@ -1399,10 +1484,6 @@ local function checkSkip(player, bfid)
 
         [33] = function() -- Quest: The Holy Crest
             return player:hasCompletedQuest(xi.quest.log_id.SANDORIA, xi.quest.id.sandoria.THE_HOLY_CREST)
-        end,
-
-        [37] = function() -- Quest: Mirror Mirror
-            return player:getQuestStatus(xi.quest.log_id.JEUNO, xi.quest.id.jeuno.MIRROR_MIRROR) == QUEST_ACCEPTED and player:getCharVar("[Quest]Mirror_Mirror") == 2 
         end,
 
         [64] = function() -- Mission 2-3
@@ -1464,6 +1545,34 @@ local function checkSkip(player, bfid)
                     windurstMission == xi.mission.id.windurst.MOON_READING and
                     nationStatus > 4
                 )
+        end,
+
+        [226] = function() -- Quest: Waking the Beast (Fullmoon Fountain)
+            return player:hasCompletedQuest(xi.quest.log_id.OTHER_AREAS, xi.quest.id.otherAreas.WAKING_THE_BEAST)
+        end,
+
+        [419] = function() -- Quest: Waking the Beast (Cloister of Gales)
+            return player:hasCompletedQuest(xi.quest.log_id.OTHER_AREAS, xi.quest.id.otherAreas.WAKING_THE_BEAST)
+        end,
+
+        [451] = function() -- Quest: Waking the Beast (Cloister of Storms)
+            return player:hasCompletedQuest(xi.quest.log_id.OTHER_AREAS, xi.quest.id.otherAreas.WAKING_THE_BEAST)
+        end,
+
+        [483] = function() -- Quest: Waking the Beast (Cloister of Frost)
+            return player:hasCompletedQuest(xi.quest.log_id.OTHER_AREAS, xi.quest.id.otherAreas.WAKING_THE_BEAST)
+        end,
+
+        [546] = function() -- Quest: Waking the Beast (Cloister of Flames)
+            return player:hasCompletedQuest(xi.quest.log_id.OTHER_AREAS, xi.quest.id.otherAreas.WAKING_THE_BEAST)
+        end,
+
+        [579] = function() -- Quest: Waking the Beast (Cloister of Tremors)
+            return player:hasCompletedQuest(xi.quest.log_id.OTHER_AREAS, xi.quest.id.otherAreas.WAKING_THE_BEAST)
+        end,
+
+        [610] = function() -- Quest: Waking the Beast (Cloister of Tides)
+            return player:hasCompletedQuest(xi.quest.log_id.OTHER_AREAS, xi.quest.id.otherAreas.WAKING_THE_BEAST)
         end,
 
         [256] = function() -- ZM8: Return to Delkfutt's Tower
@@ -1540,7 +1649,6 @@ local function checkSkip(player, bfid)
                 player:hasKeyItem(xi.ki.WHISPER_OF_TIDES)
         end,
 
-        
         [640] = function() -- PM5-3 U3: Flames for the Dead
             return player:hasCompletedMission(xi.mission.log_id.COP, xi.mission.id.cop.THREE_PATHS) or
                 (
@@ -1557,7 +1665,7 @@ local function checkSkip(player, bfid)
                 )
         end,
 
-        [677] = function()  -- Quest: Tango with a Tracker
+        [677] = function() -- Quest: Tango with a Tracker
             return player:hasCompletedQuest(xi.quest.log_id.OTHER_AREAS, xi.quest.id.otherAreas.TANGO_WITH_A_TRACKER)
         end,
 
@@ -1633,7 +1741,7 @@ local function checkSkip(player, bfid)
         [1024] = function() -- PM8-3: When Angels Fall
             return player:hasCompletedMission(xi.mission.log_id.COP, xi.mission.id.cop.WHEN_ANGELS_FALL) or
                 (
-                    promathiaMission == xi.mission.id.cop.WHEN_ANGELS_FALL or
+                    promathiaMission == xi.mission.id.cop.WHEN_ANGELS_FALL and
                     player:getCharVar('Mission[6][828]Status') > 4
                 )
         end,
@@ -1641,8 +1749,8 @@ local function checkSkip(player, bfid)
         [1056] = function() -- PM8-4: Dawn
             return player:hasCompletedMission(xi.mission.log_id.COP, xi.mission.id.cop.DAWN) or
                 (
-                    promathiaMission == xi.mission.id.cop.DAWN or
-                    player:getCharVar('Mission[6][840]Status') >= 2
+                    promathiaMission == xi.mission.id.cop.DAWN and
+                    player:getCharVar('Mission[6][840]Status') > 2
                 )
         end,
 

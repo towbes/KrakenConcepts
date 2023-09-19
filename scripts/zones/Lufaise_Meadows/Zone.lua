@@ -63,10 +63,6 @@ zoneObject.onEventUpdate = function(player, csid, option, npc)
 end
 
 zoneObject.onEventFinish = function(player, csid, option, npc)
-    if csid == 116 then
-        player:setCharVar("PromathiaStatus", 7)
-        player:addTitle(xi.title.BANISHER_OF_EMPTINESS)
-    end
 end
 
 return zoneObject

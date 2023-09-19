@@ -15,9 +15,6 @@ entity.onEventUpdate = function(player, csid, option, npc)
 end
 
 entity.onEventFinish = function(player, csid, option, npc)
-    if csid == 2 then
-        player:setCharVar("PromathiaStatus", 1)
-    end
 end
 
 return entity

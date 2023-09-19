@@ -43,9 +43,6 @@ zoneObject.onEventUpdate = function(player, csid, option, npc)
 end
 
 zoneObject.onEventFinish = function(player, csid, option, npc)
-    if csid == 57 then
-        player:setCharVar("COP_jabbos_story", 1)
-    end
 end
 
 return zoneObject

@@ -3,7 +3,6 @@
 --  NPC: particle gate
 -----------------------------------
 local ID = require("scripts/zones/The_Garden_of_RuHmet/IDs")
-require("scripts/globals/keyitems")
 -----------------------------------
 local entity = {}
 
@@ -17,10 +16,6 @@ entity.onEventUpdate = function(player, csid, option, npc)
 end
 
 entity.onEventFinish = function(player, csid, option, npc)
-    if csid == 110 and option == 1 then
-        player:messageSpecial(ID.text.KEYITEM_OBTAINED, xi.ki.BRAND_OF_DAWN)
-        player:addKeyItem(xi.ki.BRAND_OF_DAWN)
-    end
 end
 
 return entity

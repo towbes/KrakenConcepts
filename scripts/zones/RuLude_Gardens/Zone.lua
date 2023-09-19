@@ -70,14 +70,7 @@ zoneObject.onEventUpdate = function(player, csid, option, npc)
 end
 
 zoneObject.onEventFinish = function(player, csid, option, npc)
-    if csid == 122 then
-        player:setCharVar("PromathiaStatus", 4)
-        player:setCharVar("COP_3-taru_story", 0)
-        player:setCharVar("COP_shikarees_story", 0)
-        player:setCharVar("COP_louverance_story", 0)
-        player:setCharVar("COP_tenzen_story", 0)
-        player:setCharVar("COP_jabbos_story", 0)
-    elseif csid == 142 then
+    if csid == 142 then
         player:addQuest(xi.quest.log_id.JEUNO, xi.quest.id.jeuno.STORMS_OF_FATE)
     elseif csid == 143 then
         player:completeQuest(xi.quest.log_id.JEUNO, xi.quest.id.jeuno.STORMS_OF_FATE)

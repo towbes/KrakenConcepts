@@ -16,7 +16,8 @@ local battlefieldObject = {}
 battlefieldObject.onBattlefieldInitialise = function(battlefield)
     battlefield:setLocalVar("phaseChange", 1)
     battlefield:setLocalVar("instantKick", 1)
-    local baseID = ID.mob.PROMATHIA_OFFSET + battlefield:getArea()
+    -- Need to multiply getArea by 2 due to the two Promathia versions
+    local baseID = ID.mob.PROMATHIA_OFFSET + (battlefield:getArea() * 2)
     local pos = GetMobByID(baseID):getSpawnPos()
 
     local prishe = battlefield:insertEntity(11, true, true)
@@ -28,8 +29,8 @@ battlefieldObject.onBattlefieldInitialise = function(battlefield)
     local selhteus = battlefield:insertEntity(12, true, true)
     selhteus:setSpawn(pos.x + 10, pos.y, pos.z - 17.5, 172)
     selhteus:spawn()
-    prishe:setAllegiance(xi.allegiance.PLAYER)
-    prishe:setStatus(xi.status.NORMAL)
+    selhteus:setAllegiance(xi.allegiance.PLAYER)
+    selhteus:setStatus(xi.status.NORMAL)
 end
 
 battlefieldObject.onBattlefieldTick = function(battlefield, tick)
@@ -37,8 +38,6 @@ battlefieldObject.onBattlefieldTick = function(battlefield, tick)
 end
 
 battlefieldObject.onBattlefieldRegister = function(player, battlefield)
-    local promathia = GetMobByID(ID.mob.PROMATHIA_OFFSET + battlefield:getArea())
-    promathia:setLocalVar("spawner", player:getID())
 end
 
 battlefieldObject.onBattlefieldEnter = function(player, battlefield)
@@ -60,20 +59,6 @@ battlefieldObject.onEventUpdate = function(player, csid, option, npc)
 end
 
 battlefieldObject.onEventFinish = function(player, csid, option, npc)
-    if csid == 6 then
-        player:setPos(539, 0, -593, 192)
-        player:addTitle(xi.title.AVERTER_OF_THE_APOCALYPSE)
-        player:startEvent(3)
-        if
-            player:getCurrentMission(xi.mission.log_id.COP) == xi.mission.id.cop.DAWN and
-            player:getCharVar("PromathiaStatus") == 2
-        then
-            player:addKeyItem(xi.ki.TEAR_OF_ALTANA)
-            player:messageSpecial(ID.text.KEYITEM_OBTAINED, xi.ki.TEAR_OF_ALTANA)
-            player:setCharVar("Promathia_kill_day", getMidnight())
-            player:setCharVar("PromathiaStatus", 3)
-        end
-    end
 end
 
 return battlefieldObject

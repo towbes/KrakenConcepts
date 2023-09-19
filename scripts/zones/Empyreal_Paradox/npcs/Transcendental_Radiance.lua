@@ -4,7 +4,6 @@
 -- !pos 540 0 -594 36
 -----------------------------------
 require("scripts/globals/missions")
-require("scripts/globals/keyitems")
 require("scripts/globals/quests")
 require("scripts/globals/bcnm")
 -----------------------------------
@@ -30,9 +29,7 @@ entity.onEventUpdate = function(player, csid, option, extras)
 end
 
 entity.onEventFinish = function(player, csid, option, npc)
-    if csid == 2 then
-        player:setCharVar("PromathiaStatus", 2)
-    elseif csid == 4 then
+    if csid == 4 then
         player:setCharVar("ApocalypseNigh", 4)
     else
         xi.bcnm.onEventFinish(player, csid, option, npc)

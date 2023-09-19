@@ -2,7 +2,6 @@
 -- Zone: AlTaieu (33)
 -----------------------------------
 local ID = require('scripts/zones/AlTaieu/IDs')
-require('scripts/globals/keyitems')
 require('scripts/globals/missions')
 require('scripts/globals/exp_controller')
 -----------------------------------
@@ -34,11 +33,6 @@ zoneObject.onEventUpdate = function(player, csid, option, npc)
 end
 
 zoneObject.onEventFinish = function(player, csid, option, npc)
-    if csid == 167 then
-        player:setCharVar("PromathiaStatus", 1)
-        player:delKeyItem(xi.ki.MYSTERIOUS_AMULET_PRISHE)
-        player:messageSpecial(ID.text.RETURN_AMULET_TO_PRISHE, xi.ki.MYSTERIOUS_AMULET)
-    end
 end
 
 zoneObject.afterZoneIn = function(player)

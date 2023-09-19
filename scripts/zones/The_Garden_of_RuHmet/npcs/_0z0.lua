@@ -3,7 +3,6 @@
 --  NPC: _0z0
 -----------------------------------
 require("scripts/globals/missions")
-require("scripts/globals/keyitems")
 require("scripts/globals/bcnm")
 -----------------------------------
 local entity = {}
@@ -21,11 +20,7 @@ entity.onEventUpdate = function(player, csid, option, extras)
 end
 
 entity.onEventFinish = function(player, csid, option, npc)
-    if csid == 203 then
-        player:setCharVar("PromathiaStatus", 4)
-    else
-        xi.bcnm.onEventFinish(player, csid, option, npc)
-    end
+    xi.bcnm.onEventFinish(player, csid, option, npc)
 end
 
 return entity

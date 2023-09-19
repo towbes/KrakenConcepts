@@ -11,7 +11,6 @@ require('scripts/globals/npc_util')
 require("scripts/globals/teleports")
 require('scripts/globals/titles')
 require('scripts/globals/utils')
-require('scripts/globals/keyitems')
 require('scripts/globals/zone')
 -----------------------------------
 
@@ -19,15 +18,15 @@ local mission = Mission:new(xi.mission.log_id.COP, xi.mission.id.cop.WHEN_ANGELS
 
 local ebonData =
 {
-    -- [race] = {xPos1, xPos2, EventID, KI},
-    [xi.race.HUME_F] = {421, 423, 120, xi.ki.LIGHT_OF_VAHZL},
-    [xi.race.HUME_M] = {421, 423, 120, xi.ki.LIGHT_OF_VAHZL},
-    [xi.race.ELVAAN_F] = {739, 741, 121, xi.ki.LIGHT_OF_MEA},
-    [xi.race.ELVAAN_M] = {739, 741, 121, xi.ki.LIGHT_OF_MEA},
-    [xi.race.GALKA] = {576, 578, 122, xi.ki.LIGHT_OF_ALTAIEU},
-    [xi.race.TARU_F] = {256, 258, 123, xi.ki.LIGHT_OF_HOLLA},
-    [xi.race.TARU_M] = {256, 258, 123, xi.ki.LIGHT_OF_HOLLA},
-    [xi.race.MITHRA] = {99, 101, 124, xi.ki.LIGHT_OF_DEM},
+    -- [race] = { xPos1, xPos2, EventID, KI },
+    [xi.race.HUME_F] = { 421, 423, 120, xi.ki.LIGHT_OF_VAHZL },
+    [xi.race.HUME_M] = { 421, 423, 120, xi.ki.LIGHT_OF_VAHZL },
+    [xi.race.ELVAAN_F] = { 739, 741, 121, xi.ki.LIGHT_OF_MEA },
+    [xi.race.ELVAAN_M] = { 739, 741, 121, xi.ki.LIGHT_OF_MEA },
+    [xi.race.GALKA] = { 576, 578, 122, xi.ki.LIGHT_OF_ALTAIEU },
+    [xi.race.TARU_F] = { 256, 258, 123, xi.ki.LIGHT_OF_HOLLA },
+    [xi.race.TARU_M] = { 256, 258, 123, xi.ki.LIGHT_OF_HOLLA },
+    [xi.race.MITHRA] = { 99, 101, 124, xi.ki.LIGHT_OF_DEM },
 }
 
 local ebonOnTrigger = function(player, npc)
@@ -41,6 +40,7 @@ local ebonOnTrigger = function(player, npc)
                 return mission:progressEvent(120)
             end
         end
+
         return mission:messageSpecial(zones[npc:getZoneID()].text.NO_NEED_INVESTIGATE)
     else
         return mission:messageSpecial(zones[npc:getZoneID()].text.NO_NEED_INVESTIGATE)
@@ -113,7 +113,11 @@ mission.sections =
             ['_0zv'] = -- Particle Gate (Brand of Twilight)
             {
                 onTrigger = function(player, npc)
-                    if not player:hasKeyItem(xi.ki.BRAND_OF_TWILIGHT) and mission:getVar(player, 'Status') >= 3 and mission:getVar(player, 'Status') <= 4 then
+                    if
+                        not player:hasKeyItem(xi.ki.BRAND_OF_TWILIGHT) and
+                        mission:getVar(player, 'Status') >= 3 and
+                        mission:getVar(player, 'Status') <= 4
+                    then
                         return mission:progressEvent(111)
                     else
                         return mission:messageSpecial(zones[npc:getZoneID()].text.NO_NEED_INVESTIGATE)
@@ -124,7 +128,11 @@ mission.sections =
             ['_0zu'] = -- Particle Gate (Brand of Dawn)
             {
                 onTrigger = function(player, npc)
-                    if not player:hasKeyItem(xi.ki.BRAND_OF_DAWN) and mission:getVar(player, 'Status') >= 3 and mission:getVar(player, 'Status') <= 4 then
+                    if
+                        not player:hasKeyItem(xi.ki.BRAND_OF_DAWN) and
+                        mission:getVar(player, 'Status') >= 3 and
+                        mission:getVar(player, 'Status') <= 4
+                    then
                         return mission:progressEvent(110)
                     else
                         return mission:messageSpecial(zones[npc:getZoneID()].text.NO_NEED_INVESTIGATE)
@@ -276,6 +284,7 @@ mission.sections =
                         return mission:messageSpecial(zones[player:getZoneID()].text.KEYITEM_OBTAINED, xi.ki.BRAND_OF_TWILIGHT)
                     end
                 end,
+
                 [110] = function(player, csid, option)
                     if option == 1 then
                         player:addKeyItem(xi.ki.BRAND_OF_DAWN)
