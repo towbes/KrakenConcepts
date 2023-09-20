@@ -21,13 +21,13 @@ entity.onTrigger = function(player, npc)
     if
         player:getCharVar("KnightStalker_Progress") == 4 and
         player:getCharVar("KnightStalker_Kill") == 0 and
-        player:getMainJob() == xi.job.DRG or
-        player:getSubJob() == xi.job.DRG and --Umeboshi
-        pet and
-        pet:getPetID() == xi.pet.id.WYVERN and
-        npcUtil.popFromQM(player, npc, { ID.mob.CLEUVARION_M_RESOAIX, ID.mob.ROMPAULION_S_CITALLE }, { hide = 0, claim = false })
+        (player:getMainJob() == xi.job.DRG or
+        player:getSubJob() == xi.job.DRG) and --Umeboshi
+        pet ~= nil and
+        pet:getPetID() == xi.pet.id.WYVERN
     then
         player:messageSpecial(ID.text.SOME_SORT_OF_CEREMONY + 1) -- Your wyvern reacts violently to this spot!
+        npcUtil.popFromQM(player, npc, { ID.mob.CLEUVARION_M_RESOAIX, ID.mob.ROMPAULION_S_CITALLE }, { hide = 0, claim = false })
     elseif player:getCharVar("KnightStalker_Kill") == 1 then
         player:startEvent(67)
     else
