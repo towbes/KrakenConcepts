@@ -1035,7 +1035,7 @@ local function checkReqs(player, npc, bfid, registrant)
         end,
 
         [897] = function() -- Quest: The Wyrmking Descends
-             return player:hasKeyItem(xi.ki.WHISPER_OF_THE_WYRMKING)
+            return player:hasKeyItem(xi.ki.WHISPER_OF_THE_WYRMKING)
         end,
 
         [960] = function() -- PM2-5: Ancient Vows
@@ -1090,7 +1090,7 @@ local function checkReqs(player, npc, bfid, registrant)
         end,
 
         [1057] = function() -- Apocalypse Nigh
-            return player:getCharVar('ApocalypseNigh') >= 3
+            return player:getCharVar("Quest[3][89]Status") == 3
         end,
 
         [1090] = function() -- Quest: Puppetmaster Blues
@@ -1337,10 +1337,7 @@ local function checkReqs(player, npc, bfid, registrant)
 
         [1057] = function() -- Quest: Apocalypse Nigh
             return player:hasCompletedQuest(xi.quest.log_id.JEUNO, xi.quest.id.jeuno.APOCALYPSE_NIGH) or
-                (
-                    player:getQuestStatus(xi.quest.log_id.JEUNO, xi.quest.id.jeuno.APOCALYPSE_NIGH) == QUEST_ACCEPTED and
-                    player:getCharVar('ApocalypseNigh') == 4
-                )
+                player:getCharVar("Quest[3][89]Status") >= 3
         end,
 
         [1290] = function() -- NW Apollyon
@@ -1754,8 +1751,12 @@ local function checkSkip(player, bfid)
                 )
         end,
 
-        [1057] = function() -- Apocalypse Nigh
-            return player:hasCompletedQuest(xi.quest.log_id.JEUNO, xi.quest.id.jeuno.APOCALYPSE_NIGH)
+        [1057] = function() -- Quest: Apocalypse Nigh
+            return player:hasCompletedQuest(xi.quest.log_id.JEUNO, xi.quest.id.jeuno.APOCALYPSE_NIGH) or
+                (
+                    player:getQuestStatus(xi.quest.log_id.JEUNO, xi.quest.id.jeuno.APOCALYPSE_NIGH) == QUEST_ACCEPTED and
+                    player:getCharVar("Quest[3][89]Status") > 3
+                )
         end,
 
         [2721] = function() -- WOTG07: Purple, The New Black

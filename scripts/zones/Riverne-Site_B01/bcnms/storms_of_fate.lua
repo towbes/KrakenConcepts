@@ -5,7 +5,6 @@
 -----------------------------------
 local ID = require("scripts/zones/Riverne-Site_B01/IDs")
 require("scripts/globals/battlefield")
-require("scripts/globals/keyitems")
 require("scripts/globals/quests")
 require("scripts/globals/titles")
 -----------------------------------
@@ -19,6 +18,8 @@ battlefieldObject.onBattlefieldRegister = function(player, battlefield)
 end
 
 battlefieldObject.onBattlefieldEnter = function(player, battlefield)
+    player:delStatusEffect(xi.effect.LEVEL_RESTRICTION) -- can't be capped at 50 for this fight !
+    player:timer (1000, function(playerArg) playerArg:setHP(playerArg:getMaxHP()) playerArg:setMP(playerArg:getMaxMP()) end)
 end
 
 battlefieldObject.onBattlefieldLeave = function(player, battlefield, leavecode)
