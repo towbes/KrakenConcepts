@@ -74,10 +74,10 @@ quest.sections =
             return status == QUEST_AVAILABLE and
                 not quest:getMustZone(player) and
                 player:hasCompletedQuest(xi.quest.log_id.WINDURST, xi.quest.id.windurst.AS_THICK_AS_THIEVES) and
-                player:getMainJob() == xi.job.THF and
-                player:getMainLvl() >= xi.settings.main.AF3_QUEST_LEVEL or
-                player:getSubJob() == xi.job.THF and
-                player:getSubLvl() >= xi.settings.main.AF3_QUEST_LEVEL
+                ((player:getMainJob() == xi.job.THF and
+                player:getMainLvl() >= xi.settings.main.AF3_QUEST_LEVEL) or
+                (player:getSubJob() == xi.job.THF and
+                player:getSubLvl() >= xi.settings.main.AF3_QUEST_LEVEL))
         end,
 
         [xi.zone.WINDURST_WOODS] =

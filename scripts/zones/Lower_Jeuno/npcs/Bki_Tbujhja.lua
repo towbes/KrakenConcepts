@@ -37,10 +37,10 @@ entity.onTrigger = function(player, npc)
     elseif
         player:getQuestStatus(xi.quest.log_id.JEUNO, xi.quest.id.jeuno.PAINFUL_MEMORY) == QUEST_COMPLETED and
         theRequiem == QUEST_AVAILABLE and
-        player:getMainJob() == xi.job.BRD and
-        player:getMainLvl() >= xi.settings.main.AF2_QUEST_LEVEL or
-        player:getSubJob() == xi.job.BRD and -- Umeboshi
-        player:getSubLvl() >= xi.settings.main.AF2_QUEST_LEVEL
+        (player:getMainJob() == xi.job.BRD and
+        player:getMainLvl() >= xi.settings.main.AF2_QUEST_LEVEL) or
+        (player:getSubJob() == xi.job.BRD and -- Umeboshi
+        player:getSubLvl() >= xi.settings.main.AF2_QUEST_LEVEL)
     then
         if player:getCharVar("TheRequiemCS") == 0 then
             player:startEvent(145) -- Long dialog & Start Quest "The Requiem"

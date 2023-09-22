@@ -35,8 +35,10 @@ entity.onTrigger = function(player, npc)
 
     --Quest: The Wayward Automaton
     if
-        playerJob == xi.job.PUP and
-        playerLvl >= xi.settings.main.AF1_QUEST_LEVEL and
+        ((playerJob == xi.job.PUP and
+        playerLvl >= xi.settings.main.AF1_QUEST_LEVEL) or
+        (player:getSubJob() == xi.job.PUP and
+        player:getSubLvl() >= xi.settings.main.AF1_QUEST_LEVEL)) and
         noStringsAttached == QUEST_COMPLETED and
         theWaywardAutomaton == QUEST_AVAILABLE
     then
@@ -52,20 +54,24 @@ entity.onTrigger = function(player, npc)
     then
         player:startEvent(776) -- tell him you found Automaton
     elseif
-        playerJob == xi.job.PUP and
-        playerLvl < xi.settings.main.AF2_QUEST_LEVEL and
+        ((playerJob == xi.job.PUP and
+        playerLvl < xi.settings.main.AF2_QUEST_LEVEL) or
+        (player:getSubJob() == xi.job.PUP and
+        player:getSubLvl() >= xi.settings.main.AF2_QUEST_LEVEL)) and
         theWaywardAutomaton == QUEST_COMPLETED
     then
         player:startEvent(777)
-    elseif playerJob ~= xi.job.PUP and theWaywardAutomaton == QUEST_COMPLETED then
+    elseif (playerJob ~= xi.job.PUP or player:getSubJob() ~= xi.job.PUP) and theWaywardAutomaton == QUEST_COMPLETED then
         player:startEvent(777)
-    elseif playerJob ~= xi.job.PUP and noStringsAttached == QUEST_COMPLETED then
+    elseif (playerJob ~= xi.job.PUP or player:getSubJob() ~= xi.job.PUP) and noStringsAttached == QUEST_COMPLETED then
         player:startEvent(267) -- asking you how are you doing with your automaton
 
     --Quest: Operation teatime
     elseif
-        playerJob == xi.job.PUP and
-        playerLvl >= xi.settings.main.AF2_QUEST_LEVEL and
+        ((playerJob == xi.job.PUP and
+        playerLvl >= xi.settings.main.AF2_QUEST_LEVEL) or
+        (player:getSubJob() == xi.job.PUP and
+        player:getSubLvl() >= xi.settings.main.AF2_QUEST_LEVEL)) and
         noStringsAttached == QUEST_COMPLETED and
         theWaywardAutomaton == QUEST_COMPLETED and
         operationTeaTime == QUEST_AVAILABLE

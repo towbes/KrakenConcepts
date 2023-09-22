@@ -26,10 +26,10 @@ entity.onTrigger = function(player, npc)
     if
         efao == QUEST_COMPLETED and
         ntus == QUEST_AVAILABLE and
-        mJob == xi.job.COR and
-        mLvl >= xi.settings.main.AF2_QUEST_LEVEL or
-        sJob == xi.job.COR and --Umeboshi
-        sLvl >= xi.settings.main.AF2_QUEST_LEVEL --Umeboshi
+        ((mJob == xi.job.COR and
+        mLvl >= xi.settings.main.AF2_QUEST_LEVEL) or
+        (sJob == xi.job.COR and --Umeboshi
+        sLvl >= xi.settings.main.AF2_QUEST_LEVEL)) --Umeboshi
     then
         player:startEvent(232)
     elseif player:getCharVar("NavigatingtheUnfriendlySeas") == 4 then

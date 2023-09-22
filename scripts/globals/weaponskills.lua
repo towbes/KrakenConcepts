@@ -84,7 +84,7 @@ local function souleaterBonus(attacker, wsParams)
         if bonusDamage >= 1 then
             attacker:delHP(utils.stoneskin(attacker, bonusDamage * stalwartSoulBonus))
 
-            if attacker:getMainJob() == xi.job.DRK or attacker:getSubJob() == xi.job.DRK then
+            if (attacker:getMainJob() == xi.job.DRK or attacker:getSubJob() == xi.job.DRK) then
                 return bonusDamage / 2
             end
 
@@ -620,7 +620,7 @@ function calculateRawWSDmg(attacker, target, wsID, tp, action, wsParams, calcPar
     finaldmg = finaldmg + hitdmg
 
     -- Have to calculate added bonus for SA/TA here since it is done outside of the fTP multiplier
-    if attacker:getMainJob() == xi.job.THF or attacker:getSubJob() == xi.job.THF then
+    if (attacker:getMainJob() == xi.job.THF or attacker:getSubJob() == xi.job.THF) then
         -- Add DEX/AGI bonus to first hit if THF main and valid Sneak/Trick Attack
         if calcParams.sneakApplicable then
             finaldmg = finaldmg +

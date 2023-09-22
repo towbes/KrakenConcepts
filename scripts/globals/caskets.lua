@@ -747,8 +747,8 @@ xi.caskets.onTrade = function(player, npc, trade)
 
     if locked == 1 then
         if
-            player:getMainJob() == xi.job.THF or
-            player:getSubJob() == xi.job.THF and
+            (player:getMainJob() == xi.job.THF or
+            player:getSubJob() == xi.job.THF) and
             npcUtil.tradeHasExactly(trade, 1022)
         then
             local splitNumbers = {}

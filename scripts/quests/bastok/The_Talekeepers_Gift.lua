@@ -32,7 +32,8 @@ quest.sections =
         check = function(player, status, vars)
             return status == QUEST_AVAILABLE and
                 player:hasCompletedQuest(xi.quest.log_id.BASTOK, xi.quest.id.bastok.THE_TALEKEEPERS_TRUTH) and
-                player:getMainJob() == xi.job.WAR and
+                (player:getMainJob() == xi.job.WAR or
+                player:getSubJob() == xi.job.WAR) and
                 quest:getVar(player, 'Timer') <= VanadielUniqueDay() and
                 not quest:getMustZone(player)
         end,

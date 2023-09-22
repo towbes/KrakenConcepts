@@ -28,8 +28,10 @@ quest.sections =
     {
         check = function(player, status, vars)
             return status == QUEST_AVAILABLE and
-                player:getMainJob() == xi.job.COR and
-                player:getMainLvl() >= xi.settings.main.AF1_QUEST_LEVEL
+                ((player:getMainJob() == xi.job.COR and
+                player:getMainLvl() >= xi.settings.main.AF1_QUEST_LEVEL) or
+                player:getSubJob() == xi.job.COR and
+                player:getSubLvl() >= xi.settings.main.AF1_QUEST_LEVEL)
         end,
 
         [xi.zone.ARRAPAGO_REEF] =

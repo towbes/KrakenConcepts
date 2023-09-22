@@ -35,10 +35,10 @@ entity.onTrigger = function(player, npc)
     elseif
         thePuppetMaster == QUEST_COMPLETED and
         classReunion == QUEST_AVAILABLE and
-        player:getMainLvl() >= xi.settings.main.AF2_QUEST_LEVEL and
-        player:getMainJob() == xi.job.SMN or 
-        player:getSubLvl() >= xi.settings.main.AF2_QUEST_LEVEL and --Umeboshi
-        player:getSubJob() == xi.job.SMN and
+        ((player:getMainLvl() >= xi.settings.main.AF2_QUEST_LEVEL and
+        player:getMainJob() == xi.job.SMN) or 
+        (player:getSubLvl() >= xi.settings.main.AF2_QUEST_LEVEL and --Umeboshi
+        player:getSubJob() == xi.job.SMN)) and
         not player:needToZone()
     then
         player:startEvent(413)

@@ -1515,7 +1515,7 @@ end
 local function getKeyTraded(player, trade, chestInfo)
     if npcUtil.tradeHasExactly(trade, chestInfo.key) then
         return keyType.ZONE_KEY
-    elseif player:getMainJob() == xi.job.THF or player:getSubJob() == xi.job.THF then -- Umeboshi "Thf Sub"
+    elseif (player:getMainJob() == xi.job.THF or player:getSubJob() == xi.job.THF) then -- Umeboshi "Thf Sub"
         for keyValue, keyData in pairs(thiefKeyInfo) do
             if npcUtil.tradeHasExactly(trade, keyData[1]) then
                 return keyValue

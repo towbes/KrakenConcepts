@@ -13,7 +13,8 @@ entity.onTrade = function(player, npc, trade)
 end
 
 entity.onTrigger = function(player, npc)
-    if player:getMainJob() ~= xi.job.DRG then
+    if (player:getMainJob() ~= xi.job.DRG or
+        player:getSubJob() ~= xi.job.DRG) then
         player:showText(npc, ID.text.FOUIVA_DIALOG) -- Oi 'av naw business wi' de likes av you.
     elseif player:getGil() < 9800 then
         player:showText(npc, ID.text.FOUIVA_DIALOG + 9) -- You don't 'av enough gil.  Come back when you do.

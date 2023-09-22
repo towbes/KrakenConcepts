@@ -32,6 +32,10 @@ entity.onTrade = function(player, npc, trade)
                 player:startEvent(12)
             end
         end
+    elseif player:getQuestStatus(xi.quest.log_id.CRYSTAL_WAR, xi.quest.id.crystalWar.SEEING_BLOOD_RED) == QUEST_ACCEPTED and player:getCharVar("SeeingBloodRed") == 3 and not player:hasKeyItem(xi.ki.PORTING_MAGIC_TRANSCRIPT) then
+        if trade:hasItemQty(2550, 1) and trade:getGil() == 0 and trade:getItemCount() == 1 then
+            player:startEvent(38)
+        end
     end
 end
 
@@ -40,9 +44,12 @@ entity.onTrigger = function(player, npc)
     local aLittleKnowledgeProgress = player:getCharVar("ALittleKnowledge")
     local mLvl = player:getMainLvl()
     local mJob = player:getMainJob()
+    local sJob = player:getSubJob()
     local onSabbatical = player:getQuestStatus(xi.quest.log_id.CRYSTAL_WAR, xi.quest.id.crystalWar.ON_SABBATICAL)
     local onSabbaticalProgress = player:getCharVar("OnSabbatical")
     local downwardHelix = player:getQuestStatus(xi.quest.log_id.CRYSTAL_WAR, xi.quest.id.crystalWar.DOWNWARD_HELIX)
+    local seeingBloodRed = player:getQuestStatus(xi.quest.log_id.CRYSTAL_WAR, xi.quest.id.crystalWar.SEEING_BLOOD_RED)
+    local seeingBloodRedProgress = player:getCharVar("SeeingBloodRed")
 
     if aLittleKnowledge == QUEST_AVAILABLE then
         if mLvl >= xi.settings.main.ADVANCED_JOB_LEVEL then
@@ -65,14 +72,16 @@ entity.onTrigger = function(player, npc)
         end
     elseif
         aLittleKnowledge == QUEST_COMPLETED and
-        mJob == xi.job.SCH and
+        (mJob == xi.job.SCH or
+        sJob == xi.job.SCH) and
         mLvl >= 5 and
         not (player:hasSpell(478) and player:hasSpell(502))
     then
         player:startEvent(47)
     elseif
         onSabbatical == QUEST_AVAILABLE and
-        mJob == xi.job.SCH and
+        (mJob == xi.job.SCH or
+        sJob == xi.job.SCH) and
         mLvl >= xi.settings.main.AF1_QUEST_LEVEL
     then
         player:startEvent(18)
@@ -85,20 +94,40 @@ entity.onTrigger = function(player, npc)
     elseif
         onSabbatical == QUEST_COMPLETED and
         player:getCharVar("Erlene_Sabbatical_Timer") ~= VanadielDayOfTheYear() and
-        mJob == xi.job.SCH and
+        (mJob == xi.job.SCH or
+        sJob == xi.job.SCH) and
         mLvl >= xi.settings.main.AF2_QUEST_LEVEL and
         downwardHelix == QUEST_AVAILABLE
     then
-        player:startEvent(23)
+        player:startEvent(player:needToZone() and 15 or 23)
     elseif downwardHelix == QUEST_ACCEPTED then
-        if player:getCharVar("DownwardHelix") == 0 then
+        local downwardHelixProgress = player:getCharVar("DownwardHelix")
+        if (downwardHelixProgress == 0) then
             player:startEvent(24)
-        elseif player:getCharVar("DownwardHelix") == 1 then
+        elseif (downwardHelixProgress == 1) then
             player:startEvent(25)
-        elseif player:getCharVar("DownwardHelix") < 4 then
+        elseif (downwardHelixProgress < 4) then
             player:startEvent(26)
-        else
+        elseif (downwardHelixProgress == 4) then
             player:startEvent(27)
+        end
+    elseif (downwardHelix == QUEST_COMPLETED and (player:getCharVar("Erlene_DownwardHelix_Timer")==VanadielDayOfTheYear())) then
+        player:startEvent(28)
+    elseif (seeingBloodRed == QUEST_AVAILABLE and downwardHelix == QUEST_COMPLETED and mJob == xi.job.SCH and mLvl >= AF3_QUEST_LEVEL and player:getCharVar("Erlene_DownwardHelix_Timer")~=VanadielDayOfTheYear()) then
+        player:startEvent(player:needToZone() and 28 or 29)
+    elseif (seeingBloodRed == QUEST_ACCEPTED) then
+        if (seeingBloodRedProgress == 0) then
+            player:startEvent(30)
+        elseif (seeingBloodRedProgress == 1 and not player:seenKeyItem(xi.ki.UNADDRESSED_SEALED_LETTER)) then
+            player:startEvent(31)
+        elseif (seeingBloodRedProgress == 1) then
+            player:startEvent(32)
+        elseif (seeingBloodRedProgress >= 2 and player:hasKeyItem(xi.ki.PORTING_MAGIC_TRANSCRIPT)) then --
+            player:startEvent(33)
+        elseif (seeingBloodRedProgress == 3 and not player:hasKeyItem(xi.ki.PORTING_MAGIC_TRANSCRIPT)) then
+            player:startEvent(37)
+        elseif (seeingBloodRedProgress == 4) then
+            player:startEvent(34)
         end
     else
         player:startEvent(15)
@@ -109,7 +138,21 @@ entity.onEventUpdate = function(player, csid, option, npc)
 end
 
 entity.onEventFinish = function(player, csid, option, npc)
-    if csid == 47 then
+    if (csid == 10 and option == 0) then
+        player:addQuest(xi.quest.log_id.CRYSTAL_WAR, xi.quest.id.crystalWar.A_LITTLE_KNOWLEDGE)
+        player:setCharVar("ALittleKnowledge", 1)
+    elseif (csid == 12) then
+        player:tradeComplete()
+        player:setCharVar("ALittleKnowledge", 2)
+    elseif (csid == 14) then
+        player:addKeyItem(xi.ki.GRIMOIRE)
+        player:unlockJob(xi.job.SCH)
+        player:addTitle(xi.title.SCHULTZ_SCHOLAR)
+        player:setCharVar("ALittleKnowledge", 0)
+        player:setCharVar("SheetsofVellum", 0)
+        player:messageSpecial(ID.text.YOU_CAN_NOW_BECOME_A_SCHOLAR)
+        player:completeQuest(xi.quest.log_id.CRYSTAL_WAR, xi.quest.id.crystalWar.A_LITTLE_KNOWLEDGE)
+    elseif csid == 47 then
         if
             player:canLearnSpell(xi.magic.spell.EMBRAVA) and
             player:canLearnSpell(xi.magic.spell.KAUSTRA)
@@ -136,6 +179,7 @@ entity.onEventFinish = function(player, csid, option, npc)
             player:setCharVar("Erlene_Sabbatical_Timer", VanadielDayOfTheYear())
         end
     elseif csid == 23 then
+        -- TODO: Option to cancel quest
         player:setCharVar("Erlene_Sabbatical_Timer", 0)
         player:addQuest(xi.quest.log_id.CRYSTAL_WAR, xi.quest.id.crystalWar.DOWNWARD_HELIX)
     elseif csid == 25 then
@@ -144,11 +188,36 @@ entity.onEventFinish = function(player, csid, option, npc)
         if player:getFreeSlotsCount() == 0 then
             player:messageSpecial(ID.text.ITEM_CANNOT_BE_OBTAINED)
         else
+            player:delKeyItem(xi.ki.ULBRECHTS_MORTARBOARD)
             player:completeQuest(xi.quest.log_id.CRYSTAL_WAR, xi.quest.id.crystalWar.DOWNWARD_HELIX)
             player:addItem(15004) -- Schlar's Bracers
             player:messageSpecial(ID.text.ITEM_OBTAINED, 15004)
             player:setCharVar("DownwardHelix", 0)
+            player:setCharVar("Erlene_DownwardHelix_Timer", VanadielDayOfTheYear())
         end
+    elseif (csid == 29) then
+        player:setCharVar("Erlene_DownwardHelix_Timer", 0)
+        player:addQuest(xi.quest.log_id.CRYSTAL_WAR, xi.quest.id.crystalWar.SEEING_BLOOD_RED)
+    --elseif (csid == 31) then
+        -- Tells you to check the letter
+    elseif (csid == 32) then
+        player:delKeyItem(xi.ki.UNADDRESSED_SEALED_LETTER)
+        player:addKeyItem(xi.ki.PORTING_MAGIC_TRANSCRIPT)
+        player:messageSpecial(ID.text.KEYITEM_OBTAINED, xi.ki.PORTING_MAGIC_TRANSCRIPT)
+        player:setCharVar("SeeingBloodRed", 2)
+    elseif (csid == 34) then
+        if (player:getFreeSlotsCount() == 0) then
+            player:messageSpecial(ID.text.ITEM_CANNOT_BE_OBTAINED)
+        else
+            player:completeQuest(xi.quest.log_id.CRYSTAL_WAR, xi.quest.id.crystalWar.SEEING_BLOOD_RED)
+            player:addItem(16140) -- Schlar's Mortarboard
+            player:messageSpecial(ID.text.ITEM_OBTAINED, 16140)
+            player:setCharVar("SeeingBloodRed", 0)
+        end
+    elseif (csid == 38) then
+        player:tradeComplete()
+        player:addKeyItem(xi.ki.PORTING_MAGIC_TRANSCRIPT)
+        player:messageSpecial(ID.text.KEYITEM_OBTAINED, xi.ki.PORTING_MAGIC_TRANSCRIPT)
     end
 end
 

@@ -29,12 +29,16 @@ entity.onTrigger = function(player, npc)
     local circleOfTime   = player:getQuestStatus(xi.quest.log_id.JEUNO, xi.quest.id.jeuno.THE_CIRCLE_OF_TIME)
     local job            = player:getMainJob()
     local level          = player:getMainLvl()
+    local sjob           = player:getSubJob()
+    local slevel         = player:getSubLvl()
 
     -- PAINFUL MEMORY (Bard AF1)
     if
         painfulMemory == QUEST_AVAILABLE and
-        job == xi.job.BRD and
-        level >= xi.settings.main.AF1_QUEST_LEVEL
+        ((job == xi.job.BRD and
+        level >= xi.settings.main.AF1_QUEST_LEVEL) or
+        (sjob == xi.job.BRD and
+        slevel >= xi.settings.main.AF1_QUEST_LEVEL))
     then
         if player:getCharVar("PainfulMemoryCS") == 0 then
             player:startEvent(138) -- Long dialog for "Painful Memory"
@@ -49,8 +53,10 @@ entity.onTrigger = function(player, npc)
     elseif
         player:getQuestStatus(xi.quest.log_id.JEUNO, xi.quest.id.jeuno.THE_REQUIEM) == QUEST_COMPLETED and
         circleOfTime == QUEST_AVAILABLE and
-        job == xi.job.BRD and
-        level >= xi.settings.main.AF3_QUEST_LEVEL
+        ((job == xi.job.BRD and
+        level >= xi.settings.main.AF1_QUEST_LEVEL) or
+        (sjob == xi.job.BRD and
+        slevel >= xi.settings.main.AF1_QUEST_LEVEL))
     then
         player:startEvent(139) -- Start "The Circle of Time"
 

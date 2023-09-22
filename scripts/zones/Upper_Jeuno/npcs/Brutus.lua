@@ -30,10 +30,10 @@ entity.onTrigger = function(player, npc)
     if
         pathOfTheBeastmaster == QUEST_COMPLETED and
         wingsOfGold == QUEST_AVAILABLE and
-        mJob == xi.job.BST and
-        mLvl >= xi.settings.main.AF1_QUEST_LEVEL or
-        sJob == xi.job.BST and
-        sLvl >= xi.settings.main.AF1_QUEST_LEVEL
+        ((mJob == xi.job.BST and
+        mLvl >= xi.settings.main.AF1_QUEST_LEVEL) or
+        (sJob == xi.job.BST and
+        sLvl >= xi.settings.main.AF1_QUEST_LEVEL))
     then
         if player:getCharVar("wingsOfGold_shortCS") == 1 then
             player:startEvent(137) -- Start Quest "Wings of gold" (Short dialog)
@@ -52,10 +52,10 @@ entity.onTrigger = function(player, npc)
     elseif
         wingsOfGold == QUEST_COMPLETED and
         scatteredIntoShadow == QUEST_AVAILABLE and
-        mJob == xi.job.BST and
-        mLvl >= xi.settings.main.AF2_QUEST_LEVEL or
-        sJob == xi.job.BST and -- Umeboshi
-        sLvl >= xi.settings.main.AF2_QUEST_LEVEL
+        ((mJob == xi.job.BST and
+        mLvl >= xi.settings.main.AF2_QUEST_LEVEL) or
+        (sJob == xi.job.BST and -- Umeboshi
+        sLvl >= xi.settings.main.AF2_QUEST_LEVEL))
     then
         if player:getCharVar("scatIntoShadow_shortCS") == 1 then
             player:startEvent(143)

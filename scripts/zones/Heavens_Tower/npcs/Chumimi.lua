@@ -46,10 +46,10 @@ entity.onTrigger = function(player, npc)
 
     if
         theThreeMagi == QUEST_AVAILABLE and
-        mJob == xi.job.BLM and
-        mLvl >= xi.settings.main.AF1_QUEST_LEVEL or
-        sJob == xi.job.BLM and
-        sLvl >= xi.settings.main.AF1_QUEST_LEVEL
+        ((mJob == xi.job.BLM and
+        mLvl >= xi.settings.main.AF1_QUEST_LEVEL) or
+        (sJob == xi.job.BLM and
+        sLvl >= xi.settings.main.AF1_QUEST_LEVEL))
     then
         player:startEvent(260, 0, 613, 0, 0, 582, 1104) -- Start Quest "The Three Magi"
     elseif theThreeMagi == QUEST_ACCEPTED then
@@ -57,16 +57,16 @@ entity.onTrigger = function(player, npc)
     elseif
         theThreeMagi == QUEST_COMPLETED and
         recollections == QUEST_AVAILABLE and
-        (mJob == xi.job.BLM and mLvl < xi.settings.main.AF2_QUEST_LEVEL or mJob ~= xi.job.BLM) or
-        (sJob == xi.job.BLM and sLvl < xi.settings.main.AF2_QUEST_LEVEL or sJob ~= xi.job.BLM) -- Umeboshi
+        ((mJob == xi.job.BLM and mLvl < xi.settings.main.AF2_QUEST_LEVEL or mJob ~= xi.job.BLM) or
+        (sJob == xi.job.BLM and sLvl < xi.settings.main.AF2_QUEST_LEVEL or sJob ~= xi.job.BLM)) -- Umeboshi
     then
         player:startEvent(268) -- New standard dialog after "The Three Magi"
     elseif
         theThreeMagi == QUEST_COMPLETED and
-        mJob == xi.job.BLM and
-        mLvl >= xi.settings.main.AF2_QUEST_LEVEL or
-        sJob == xi.job.BLM and
-        sLvl >= xi.settings.main.AF2_QUEST_LEVEL and
+        ((mJob == xi.job.BLM and
+        mLvl >= xi.settings.main.AF2_QUEST_LEVEL) or
+        (sJob == xi.job.BLM and
+        sLvl >= xi.settings.main.AF2_QUEST_LEVEL)) and
         not player:needToZone() and
         recollections == QUEST_AVAILABLE
     then
@@ -79,10 +79,10 @@ entity.onTrigger = function(player, npc)
     elseif
         recollections == QUEST_COMPLETED and
         rootProblem == QUEST_AVAILABLE and
-        mJob == xi.job.BLM and
-        mLvl >= 50 or 
-        sJob == xi.job.BLM and
-        sLvl >= 50 and
+        ((mJob == xi.job.BLM and
+        mLvl >= 50) or 
+        (sJob == xi.job.BLM and
+        sLvl >= 50)) and
         not player:needToZone()
     then
         player:startEvent(276, 0, 829) -- Start Quest "The Root of The problem"

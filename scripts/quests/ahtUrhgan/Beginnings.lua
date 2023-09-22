@@ -51,8 +51,10 @@ quest.sections =
             return status == QUEST_AVAILABLE and
                 player:hasCompletedMission(xi.mission.log_id.TOAU, xi.mission.id.toau.IMMORTAL_SENTRIES) and
                 player:hasCompletedQuest(xi.quest.log_id.AHT_URHGAN, xi.quest.id.ahtUrhgan.AN_EMPTY_VESSEL) and
-                player:getMainJob() == xi.job.BLU and
-                player:getMainLvl() >= xi.settings.main.AF1_QUEST_LEVEL and
+                ((player:getMainJob() == xi.job.BLU and
+                player:getMainLvl() >= xi.settings.main.AF1_QUEST_LEVEL) or
+                (player:getSubJob() == xi.job.BLU and
+                player:getSubLvl() >= xi.settings.main.AF1_QUEST_LEVEL)) and
                 xi.quest.getVar(player, xi.quest.log_id.AHT_URHGAN, xi.quest.id.ahtUrhgan.AN_EMPTY_VESSEL, 'completeEvent') == 0
         end,
 
@@ -88,7 +90,8 @@ quest.sections =
     {
         check = function(player, status, vars)
             return status == QUEST_ACCEPTED and
-                player:getMainJob() == xi.job.BLU
+                (player:getMainJob() == xi.job.BLU or
+                player:getSubJob() == xi.job.BLU)
         end,
 
         [xi.zone.AHT_URHGAN_WHITEGATE] =

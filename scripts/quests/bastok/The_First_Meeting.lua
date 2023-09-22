@@ -32,8 +32,10 @@ quest.sections =
             return status == QUEST_AVAILABLE and
                 not quest:getMustZone(player) and
                 player:hasCompletedQuest(xi.quest.log_id.BASTOK, xi.quest.id.bastok.GHOSTS_OF_THE_PAST) and
-                player:getMainJob() == xi.job.MNK and
-                player:getMainLvl() >= 50
+                ((player:getMainJob() == xi.job.MNK and
+                player:getMainLvl() >= 50) or
+                (player:getSubJob() == xi.job.MNK and
+                player:getSubLvl() >= 50))
         end,
 
         [xi.zone.PORT_BASTOK] =

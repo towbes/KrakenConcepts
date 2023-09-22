@@ -19,6 +19,8 @@ end
 entity.onTrigger = function(player, npc)
     local mLvl          = player:getMainLvl()
     local mJob          = player:getMainJob()
+    local sLvl          = player:getSubLvl()
+    local sJob          = player:getSubJob()
     local downwardHelix = player:getQuestStatus(xi.quest.log_id.CRYSTAL_WAR, xi.quest.id.crystalWar.DOWNWARD_HELIX)
 
     -- Controls the progress of each step. Everything will start at 1 and end at 4 (complete).
@@ -61,8 +63,10 @@ entity.onTrigger = function(player, npc)
         -- Nothing in progress and meet the starting requirements.
         elseif
             downwardHelix == QUEST_COMPLETED and
-            mJob == xi.job.SCH and
-            mLvl >= xi.settings.main.AF2_QUEST_LEVEL
+            ((mJob == xi.job.SCH and
+            mLvl >= xi.settings.main.AF2_QUEST_LEVEL) or
+            (sJob == xi.job.SCH and
+            sLvl >= xi.settings.main.AF2_QUEST_LEVEL))
         then
             -- If a player has completed any of the paths, it will be a different cutscene.
             local counter = 0

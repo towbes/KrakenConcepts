@@ -13,7 +13,8 @@ entity.onTrade = function(player, npc, trade)
     if
         trade:hasItemQty(1548, 1) and
         player:getQuestStatus(xi.quest.log_id.OTHER_AREAS, xi.quest.id.otherAreas.TRIAL_SIZE_TRIAL_BY_LIGHTNING) == QUEST_ACCEPTED and
-        player:getMainJob() == xi.job.SMN
+        (player:getMainJob() == xi.job.SMN or
+        player:getSubJob() == xi.job.SMN)
     then
         player:startEvent(10026, 0, 1548, 5, 20)
     end

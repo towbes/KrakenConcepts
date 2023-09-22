@@ -34,10 +34,10 @@ quest.sections =
         check = function(player, status, vars)
             return status == QUEST_AVAILABLE and
                 player:hasCompletedQuest(xi.quest.log_id.OUTLANDS, xi.quest.id.outlands.THE_SACRED_KATANA) and
-                player:getMainJob() == xi.job.SAM and
-                player:getMainLvl() >= xi.settings.main.AF2_QUEST_LEVEL or
-                player:getSubJob() == xi.job.SAM and
-                player:getSubLvl() >= xi.settings.main.AF2_QUEST_LEVEL
+                ((player:getMainJob() == xi.job.SAM and
+                player:getMainLvl() >= xi.settings.main.AF2_QUEST_LEVEL) or
+                (player:getSubJob() == xi.job.SAM and
+                player:getSubLvl() >= xi.settings.main.AF2_QUEST_LEVEL))
         end,
 
         [xi.zone.NORG] =

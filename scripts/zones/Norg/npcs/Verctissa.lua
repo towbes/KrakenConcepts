@@ -24,8 +24,10 @@ entity.onTrigger = function(player, npc)
     local trialSizeWater = player:getQuestStatus(xi.quest.log_id.OUTLANDS, xi.quest.id.outlands.TRIAL_SIZE_TRIAL_BY_WATER)
 
     if
-        player:getMainLvl() >= 20 and
-        player:getMainJob() == xi.job.SMN and
+        ((player:getMainLvl() >= 20 and
+        player:getMainJob() == xi.job.SMN) or
+        (player:getSubLvl() >= 20 and
+        player:getSubJob() == xi.job.SMN)) and
         trialSizeWater == QUEST_AVAILABLE and
         player:getFameLevel(xi.quest.fame_area.NORG) >= 2
     then

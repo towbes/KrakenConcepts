@@ -43,10 +43,10 @@ entity.onTrigger = function(player, npc)
 
     if
         messengerFromBeyond == QUEST_AVAILABLE and
-        mJob == xi.job.WHM and
-        mLvl >= xi.settings.main.AF1_QUEST_LEVEL or
-        sJob == xi.job.WHM and
-        sLvl >= xi.settings.main.AF1_QUEST_LEVEL --Umeboshi
+        ((mJob == xi.job.WHM and
+        mLvl >= xi.settings.main.AF1_QUEST_LEVEL) or
+        (sJob == xi.job.WHM and
+        sLvl >= xi.settings.main.AF1_QUEST_LEVEL)) --Umeboshi
     then
         player:startEvent(689) -- Start quest "Messenger from Beyond"
     else

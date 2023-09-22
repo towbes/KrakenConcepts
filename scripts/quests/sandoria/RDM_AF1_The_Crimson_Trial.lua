@@ -30,10 +30,10 @@ quest.sections =
     {
         check = function(player, status, vars)
             return status == QUEST_AVAILABLE and
-                player:getMainJob() == xi.job.RDM and
-                player:getMainLvl() >= 40 or
-                player:getSubJob() == xi.job.RDM and --Umeboshi
-                player:getSubLvl() >= 40
+                ((player:getMainJob() == xi.job.RDM and
+                player:getMainLvl() >= 40) or
+                (player:getSubJob() == xi.job.RDM and --Umeboshi
+                player:getSubLvl() >= 40))
         end,
 
         [xi.zone.SOUTHERN_SAN_DORIA] =

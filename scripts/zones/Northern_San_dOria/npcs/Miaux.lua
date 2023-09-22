@@ -18,8 +18,10 @@ entity.onTrigger = function(player, npc)
     local quotasStatus    = player:getCharVar("ChasingQuotas_Progress")
 
     if
-        player:getMainJob() == xi.job.DRG and
-        player:getMainLvl() >= xi.settings.main.AF1_QUEST_LEVEL and
+        ((player:getMainJob() == xi.job.DRG and
+        player:getMainLvl() >= xi.settings.main.AF1_QUEST_LEVEL) or
+        (player:getMainJob() == xi.job.DRG and
+        player:getMainLvl() >= xi.settings.main.AF1_QUEST_LEVEL)) and
         aCraftsmansWork == QUEST_AVAILABLE
     then
         if player:getCharVar("has_seen_drgaf1_quest_already") == 0 then
