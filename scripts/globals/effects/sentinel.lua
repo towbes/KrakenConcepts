@@ -6,9 +6,9 @@ local effectObject = {}
 effectObject.onEffectGain = function(target, effect)
     local enmityBonus = 100
 
-    if target:getMainJob() ~= xi.job.PLD then
-        enmityBonus = 50
-    end
+    -- if target:getMainJob() ~= xi.job.PLD then
+    --    enmityBonus = 50
+    -- end
 
     target:addMod(xi.mod.UDMGPHYS, -effect:getPower())
     target:addMod(xi.mod.ENMITY, enmityBonus)
@@ -37,9 +37,9 @@ end
 effectObject.onEffectLose = function(target, effect)
     local enmityBonus = 100
 
-    if target:getMainJob() ~= xi.job.PLD then
-        enmityBonus = 50
-    end
+    -- if target:getMainJob() ~= xi.job.PLD then
+    --    enmityBonus = 50
+    -- end
 
     target:delMod(xi.mod.UDMGPHYS, -effect:getPower())
     target:delMod(xi.mod.ENMITY, enmityBonus)
