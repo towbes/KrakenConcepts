@@ -694,7 +694,7 @@ end
 xi.spells.damage.calculateNinSkillBonus = function(caster, spellId, skillType)
     local ninSkillBonus = 1
 
-    if skillType == xi.skill.NINJUTSU and caster:getMainJob() == xi.job.NIN then
+    if skillType == xi.skill.NINJUTSU and (caster:getMainJob() == xi.job.NIN or caster:getSubJob() == xi.job.NIN) then
         if spellId % 3 == 2 then     -- Ichi nuke spell ids are 320, 323, 326, 329, 332, and 335
             ninSkillBonus = 100 + math.floor((caster:getSkillLevel(xi.skill.NINJUTSU) - 50) / 2)
         elseif spellId % 3 == 0 then -- Ni nuke spell ids are 1 more than their corresponding Ichi spell
