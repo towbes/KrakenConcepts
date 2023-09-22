@@ -67,7 +67,10 @@ effectObject.onEffectTick = function(target, effect)
         local mpNotice      = target:getLocalVar("mpNotice")
         local mpp           = target:getMP() / target:getMaxMP() * 100
         local mpSignals     = false
-            if bit.band(optionsMask, bit.lshift(1,2)) == 4 then mpSignals = true end
+        
+        if bit.band(optionsMask, bit.lshift(1, 2)) == 4 then
+            mpSignals = true
+        end
 
         if mpp >= 67 and mpNotice == 1 and mpSignals == true then
             master:showText(target, ID.text.FELLOW_MESSAGE_OFFSET + 45 + personality)
@@ -90,6 +93,8 @@ effectObject.onEffectTick = function(target, effect)
                 target:hasStatusEffect(xi.effect.SIGNET)
             then
                 healHP = 10 + (3 * math.floor(target:getMainLvl() / 10)) + (healtime - 2) * (1 + math.floor(target:getMaxHP() / 300)) + target:getMod(xi.mod.HPHEAL)
+            elseif target:getMaster() ~= nil then -- Beastmaster's Stay ability
+                healHP = 10 + (3 * math.floor(target:getMainLvl() / 10)) + (healtime - 2) * (2.5 + math.floor(target:getMaxHP() / 100)) + target:getMod(xi.mod.HPHEAL)
             else
                 target:addTP(xi.settings.main.HEALING_TP_CHANGE)
                 healHP = 10 + (healtime - 2) + target:getMod(xi.mod.HPHEAL)
