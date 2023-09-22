@@ -976,21 +976,23 @@ function doMagicWeaponskill(attacker, target, wsID, wsParams, tp, action, primar
     end
 
     --Divine/Elemental Seal Bonus
-    if wsParams.ele ~= nil and wsParams.ele ~= xi.magic.ele.LIGHT and (attacker:hasStatusEffect(xi.effect.ELEMENTAL_SEAL)) then
+    if 
+        wsParams.ele ~= nil and
+        (wsParams.ele ~= xi.magic.ele.LIGHT or (wsParams.ele == xi.magic.ele.LIGHT and wsParams.skill == xi.skill.STAFF)) and -- Check for Dark element or Light for Sunburst/Starburst
+        (attacker:hasStatusEffect(xi.effect.ELEMENTAL_SEAL))
+    then
         dmg = math.floor(math.random(210,235)/100*dmg)
-            if wsParams.ele == xi.magic.ele.LIGHT and wsParams.skill == xi.skill.STAFF then -- Sunburst
-                   dmg = dmg * 1.52 + math.random(1,5)
-                    end
-            attacker:delStatusEffect(xi.effect.ELEMENTAL_SEAL)
-                elseif wsParams.ele ~= nil and wsParams.ele == xi.magic.ele.LIGHT and (attacker:hasStatusEffect(xi.effect.DIVINE_SEAL)) then
-                    dmg = math.floor(math.random(225,245)/100*dmg)
-                    if wsParams.ele == xi.magic.ele.DARK and wsParams.skill == xi.skill.STAFF then -- Sunburst
-                        dmg = dmg * 1.52 + math.random(1,5)
-                         end
-                    attacker:delStatusEffect(xi.effect.DIVINE_SEAL)
-                end
+        attacker:delStatusEffect(xi.effect.ELEMENTAL_SEAL)
+    elseif
+        wsParams.ele ~= nil and
+        (wsParams.ele == xi.magic.ele.LIGHT or (wsParams.ele == xi.magic.ele.DARK and wsParams.skill == xi.skill.STAFF)) and -- Check for light element or Dark for Sunburst/Starburst
+        (attacker:hasStatusEffect(xi.effect.DIVINE_SEAL))
+    then
+        dmg = math.floor(math.random(225,245)/100*dmg)
+        attacker:delStatusEffect(xi.effect.DIVINE_SEAL)
+    end
 
-    if target:getMod(xi.mod.DMGMAGIC_CAP) > 0 and dmg > target:getMod(xi.mod.DMGMAGIC_CAP) then
+    if target:getMod(xi.mod.DMGMAGIC_CAP) > 0 and dmg > target:getMod(xi.mod.DMGMAGIC_CAP) then -- If mob has this mod, damage can not exceed mod value.
         dmg = target:getMod(xi.mod.DMGMAGIC_CAP)
     end
 
