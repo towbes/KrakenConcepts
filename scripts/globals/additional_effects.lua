@@ -222,10 +222,10 @@ xi.additionalEffect.attack = function(attacker, defender, baseAttackDamage, item
 
     elseif addType == procType.DAMAGE_MP_PERC then
         local currentMP = attacker.getMP(attacker)
-        damage = math.floor(attacker.getMP(attacker) * 0.10)
+        damage = math.floor(attacker.getMP(attacker) * 0.15) -- Deals 10% of current MP as damage.
         damage = xi.additionalEffect.calcDamage(attacker, element, defender, damage)
         msgID = xi.msg.basic.ADD_EFFECT_DMG
-        attacker:addMP(-(currentMP * 0.10))
+        attacker:addMP(-(currentMP * 0.05)) -- Drains 5% of current MP on proc.
         if damage < 0 then
             msgID = xi.msg.basic.ADD_EFFECT_HEAL
         end
