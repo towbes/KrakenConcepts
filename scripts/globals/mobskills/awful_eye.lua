@@ -11,8 +11,10 @@ mobskillObject.onMobSkillCheck = function(target, mob, skill)
 end
 
 mobskillObject.onMobWeaponSkill = function(target, mob, skill)
+    if mob:getName() == "Nightmare_Bugard" then
+    skill:setMsg(xi.mobskills.mobGazeMove(mob, target, xi.effect.PETRIFICATION, 1, 0, 20))
+    end
     skill:setMsg(xi.mobskills.mobGazeMove(mob, target, xi.effect.STR_DOWN, 33, 3, 120))
-
     return xi.effect.STR_DOWN
 end
 

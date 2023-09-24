@@ -12,7 +12,13 @@ require("scripts/globals/mobskills")
 local mobskillObject = {}
 
 mobskillObject.onMobSkillCheck = function(target, mob, skill)
-    return 0
+    if
+        mob:getLocalVar("debuff_Femur") == 1
+    then
+        return 1
+    else
+        return 0
+    end
 end
 
 mobskillObject.onMobWeaponSkill = function(target, mob, skill)

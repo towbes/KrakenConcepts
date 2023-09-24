@@ -16,6 +16,10 @@ mobskillObject.onMobWeaponSkill = function(target, mob, skill)
 
     local typeEffect = xi.effect.PROTECT
 
+    if mob:getName() == "Lost_Suttung" then
+        local power = 100
+    end
+
     skill:setMsg(xi.mobskills.mobBuffMove(mob, typeEffect, power, 0, duration))
 
     return typeEffect

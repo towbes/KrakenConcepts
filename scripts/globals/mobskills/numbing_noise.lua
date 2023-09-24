@@ -10,6 +10,9 @@ require("scripts/globals/mobskills")
 local mobskillObject = {}
 
 mobskillObject.onMobSkillCheck = function(target, mob, skill)
+    if mob:getZone():getType() == xi.zoneType.DYNAMIS then
+        skill:setAoE(1)
+    end
     return 0
 end
 

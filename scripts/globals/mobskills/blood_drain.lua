@@ -12,6 +12,9 @@ end
 
 mobskillObject.onMobWeaponSkill = function(target, mob, skill)
     local dmgmod = 1
+    if mob:getID() == 16945421 then -- Lost Stringes
+        dmgmod = 4.5
+    end
     local info = xi.mobskills.mobMagicalMove(mob, target, skill, mob:getWeaponDmg() * 2, xi.magic.ele.DARK, dmgmod, xi.mobskills.magicalTpBonus.MAB_BONUS, 1)
     local shadow = xi.mobskills.shadowBehavior.NUMSHADOWS_1
 

@@ -15,6 +15,9 @@ local avatarOffsets =
     [17453085] = 3, -- Duke Dantalian
     [17453092] = 3, -- Duke Dantalian
     [17506670] = 5, -- Kirin
+    [17543464] = 1, -- Xuu Bhoqa the Enigma
+    [17330189] = 1, -- Count Haagenti
+    [17539308] = 1, -- Ra'Gho Darkfount
 }
 
 mobskillObject.onMobSkillCheck = function(target, mob, skill)

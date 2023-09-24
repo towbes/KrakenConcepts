@@ -26,6 +26,12 @@ mobskillObject.onMobWeaponSkill = function(target, mob, skill)
     xi.mobskills.mobPhysicalStatusEffectMove(mob, target, skill, typeEffect, 15, 0, 120)
 
     target:takeDamage(dmg, mob, xi.attackType.PHYSICAL, xi.damageType.PIERCING)
+
+    if skill:getID() == 296 then
+        -- does not display the regular message (mimics auto attack)
+        skill:setMsg(xi.msg.basic.HIT_DMG)
+    end
+
     return dmg
 end
 
