@@ -8,11 +8,11 @@ require("scripts/globals/dynamis")
 local entity = {}
 
 entity.onMobInitialize = function(mob)
-    mob:setMobMod(xi.mobMod.HP_SCALE, 300)
+    mob:setMobMod(xi.mobMod.HP_SCALE, 400)
 end
 
 entity.onMobSpawn = function(mob)
-    mob:setAutoAttackEnabled(false)
+    mob:setAutoAttackEnabled(true)
     mob:setLocalVar("itemDebuff_Fungus", 1) -- Miasmic Breath
     mob:setLocalVar("itemDebuff_Root", 1)   -- Vampiric Lash & Putrid Breath
     mob:setLocalVar("itemDebuff_Moss", 1)   -- Fragrant Breath
@@ -24,6 +24,13 @@ end
 
 entity.onMobFight = function(mob)
     mob:setMod(xi.mod.REGAIN, 500)
+
+    for _, member in pairs(target:getParty()) do
+        if member:getObjType() == xi.objType.PC then
+        member:changeMusic(2, 88)
+        member:changeMusic(3, 88)
+        end
+    end
 end
 
 entity.onMobWeaponSkillPrepare = function(mob, target)
@@ -73,7 +80,12 @@ end
 
 entity.onMobDeath = function(mob, player, optParams)
     mob:resetLocalVars()
-    xi.dynamis.megaBossOnDeath(mob, player, optParams)
+    for _, member in pairs(player:getParty()) do
+        if member:getObjType() == xi.objType.PC then
+        member:changeMusic(2, 121)
+        member:changeMusic(3, 121)
+        end
+    end
 end
 
 return entity
