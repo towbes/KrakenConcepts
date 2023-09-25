@@ -99,7 +99,21 @@ zones[xi.zone.DYNAMIS_XARCABARD] =
             },
         },
 
-        DYNAMIS_LORD         = 17330177,
+        DYNAMIS_LORD              = 17330177,
+        ARCH_DYNAMIS_LORD         = 17330191,
+        DYNAMIS_LORD_CLONE_OFFSET = 17330192,
+        DYNAMIS_LORD_CLONES       =
+        {
+            {
+                17330192,
+                17330193,
+                17330194,
+                17330195,
+                17330196,
+                17330197,
+                17330198,
+            }
+        },
         YING                 = 17330183,
         YANG                 = 17330184,
         COUNT_ZAEBOS_PH      = { [17330376] = 17330377 }, -- Kindred_Warrior
