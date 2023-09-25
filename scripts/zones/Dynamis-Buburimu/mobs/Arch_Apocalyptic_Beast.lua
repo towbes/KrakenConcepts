@@ -1,13 +1,9 @@
 -----------------------------------
 -- Area: Dynamis - Buburimu
---  Mob: Apocalyptic Beast
+--  Mob: Arch Apocalyptic Beast
 -- Note: Mega Boss
 -----------------------------------
 require("scripts/globals/dynamis")
-mixins =
-{
-    require("scripts/mixins/job_special")
-}
 -----------------------------------
 local entity = {}
 
@@ -24,7 +20,7 @@ entity.onMobSpawn = function(mob)
     mob:setMod(xi.mod.SLOWRES, 50)
     mob:setMod(xi.mod.SLEEPRES, 100)
     mob:setMod(xi.mod.LULLABYRES, 100)
-    mob:setMobMod(xi.mobMod.HP_SCALE, 300)
+    mob:setMobMod(xi.mobMod.HP_SCALE, 400)
     
     -- for spells to land/do non-trivial damage
     mob:setMod(xi.mod.MATT, 100)
@@ -42,6 +38,13 @@ entity.onMobSpawn = function(mob)
 end
 
 entity.onMobFight = function(mob, target)
+
+    for _, member in pairs(target:getParty()) do
+        if member:getObjType() == xi.objType.PC then
+        member:changeMusic(2, 88)
+        member:changeMusic(3, 88)
+        end
+    end
 
     local abilities2hr =
     {
@@ -111,7 +114,6 @@ entity.onMobFight = function(mob, target)
 
     if mob:hasStatusEffect(xi.effect.MANAFONT) then
         -- ensure only spells
-        mob:setTP(0)
         if mob:getCurrentAction() <= 1 then
             local spell = manafontspells[math.random(#manafontspells)]
             mob:castSpell(spell, target)
@@ -121,7 +123,6 @@ entity.onMobFight = function(mob, target)
     -- take care not to spam castSpell, as the spell queuing system will stack them alllll up
     if mob:hasStatusEffect(xi.effect.CHAINSPELL) then
         -- ensure only spells
-        mob:setTP(0)
         if mob:getCurrentAction() <= 1 then
             local spell = chainspellspells[math.random(#chainspellspells)]
             mob:castSpell(spell, target)
@@ -130,7 +131,6 @@ entity.onMobFight = function(mob, target)
 
     if mob:hasStatusEffect(xi.effect.SOUL_VOICE) then
         -- ensure only spells
-        mob:setTP(0)
         if mob:getCurrentAction() <= 1 then
             local song = soulvoicesongs[math.random(#soulvoicesongs)]
             mob:castSpell(song, target)
@@ -144,7 +144,12 @@ entity.onMobEngaged = function(mob, target)
 end
 
 entity.onMobDeath = function(mob, player, optParams)
-    xi.dynamis.megaBossOnDeath(mob, player, optParams)
+    for _, member in pairs(player:getParty()) do
+        if member:getObjType() == xi.objType.PC then
+        member:changeMusic(2, 121)
+        member:changeMusic(3, 121)
+        end
+    end
     mob:resetLocalVars()
 end
 
