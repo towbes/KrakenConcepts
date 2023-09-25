@@ -280,8 +280,11 @@ g_mixins.job_special = function(jobSpecialMob)
     jobSpecialMob:addListener("SPAWN", "JOB_SPECIAL_SPAWN", function(mob)
         local ability = nil
         local mJob = mob:getMainJob()
+        local sJob = mob:getSubJob()
 
         if mJob == xi.job.RNG then
+            ability = familyEES[mob:getFamily()]
+        elseif sJob == xi.job.RNG then
             ability = familyEES[mob:getFamily()]
         elseif mJob == xi.job.SMN and mob:isInDynamis() then
             ability = xi.jsa.ASTRAL_FLOW_MAAT
