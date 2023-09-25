@@ -1360,7 +1360,7 @@ INSERT INTO `mob_droplist` VALUES (145,2,0,1000,5448,0);   -- Kalamar (Steal)
 
 -- ZoneID:  40 - Apocalyptic Beast
 INSERT INTO `mob_droplist` VALUES (146,0,0,1000,3474,@ALWAYS); -- Fiendish Tome Ii Chapter 5 (Always, 100%)
-INSERT INTO `mob_droplist` VALUES (146,0,0,1000,3497,15);      -- Forgotten Step (1.5%)
+-- INSERT INTO `mob_droplist` VALUES (146,0,0,1000,3497,15);      -- Forgotten Step (1.5%)
 INSERT INTO `mob_droplist` VALUES (146,0,0,1000,1450,@VRARE);  -- Lungo-Nango Jadeshell (Very Rare, 1%)
 INSERT INTO `mob_droplist` VALUES (146,0,0,1000,1453,@VRARE);  -- Montiont Silverpiece (Very Rare, 1%)
 INSERT INTO `mob_droplist` VALUES (146,0,0,1000,1456,@VRARE);  -- One Hundred Byne Bill (Very Rare, 1%)
@@ -6060,7 +6060,7 @@ INSERT INTO `mob_droplist` VALUES (730,0,0,1000,1450,350);    -- Lungo-Nango Jad
 INSERT INTO `mob_droplist` VALUES (730,0,0,1000,14646,210);   -- Shadow Ring (21.0%)
 INSERT INTO `mob_droplist` VALUES (730,0,0,1000,1453,180);    -- Montiont Silverpiece (18.0%)
 INSERT INTO `mob_droplist` VALUES (730,0,0,1000,1456,130);    -- One Hundred Byne Bill (13.0%)
-INSERT INTO `mob_droplist` VALUES (730,0,0,1000,3429,@VRARE); -- Fiendish Tome Chapter 26 (Very Rare, 1%)
+INSERT INTO `mob_droplist` VALUES (730,0,0,1000,3429,@ALWAYS); -- Fiendish Tome 26
 
 -- ZoneID: 216 - Dynamo Cluster
 INSERT INTO `mob_droplist` VALUES (731,0,0,1000,1667,@ALWAYS); -- Cluster Core (Always, 100%)
@@ -7714,6 +7714,7 @@ INSERT INTO `mob_droplist` VALUES (941,0,0,1000,1061,30); -- Sacrarium Chest Key
 -- ZoneID: 195 - Gazer
 INSERT INTO `mob_droplist` VALUES (942,0,0,1000,914,770); -- Vial Of Mercury (77.0%)
 INSERT INTO `mob_droplist` VALUES (942,0,0,1000,939,660); -- Hecteyes Eye (66.0%)
+INSERT INTO `mob_droplist` VALUES (942,0,0,1000,1289,70); -- Burning Hakutaku Eye (7.0%)
 
 -- ZoneID: 149 - Geezard
 INSERT INTO `mob_droplist` VALUES (943,0,0,1000,926,@ALWAYS); -- Lizard Tail (Always, 100%)
@@ -8901,7 +8902,7 @@ INSERT INTO `mob_droplist` VALUES (1085,0,0,1000,749,@VRARE);  -- Mythril Beastc
 INSERT INTO `mob_droplist` VALUES (1085,0,0,1000,1450,@VRARE); -- Lungo-Nango Jadeshell (Very Rare, 1%)
 INSERT INTO `mob_droplist` VALUES (1085,0,0,1000,1452,@VRARE); -- Ordelle Bronzepiece (Very Rare, 1%)
 INSERT INTO `mob_droplist` VALUES (1085,0,0,1000,1456,@VRARE); -- One Hundred Byne Bill (Very Rare, 1%)
-INSERT INTO `mob_droplist` VALUES (1085,0,0,1000,3419,@VRARE); -- Fiendish Tome Chapter 16 (Very Rare, 1%)
+INSERT INTO `mob_droplist` VALUES (1085,0,0,1000,3419,@ALWAYS); -- Fiendish Tome Chapter 16
 
 -- ZoneID:  83 - Goblin Grenadier
 -- ZoneID:  90 - Goblin Grenadier
@@ -14491,34 +14492,12 @@ INSERT INTO `mob_droplist` VALUES (1801,0,0,1000,642,@VRARE);      -- Chunk Of Z
 
 -- ZoneID:  40 - Lost Aitvaras
 INSERT INTO `mob_droplist` VALUES (1802,0,0,1000,3478,@ALWAYS); -- Fiendish Tome Ii Chapter 9 (Always, 100%)
-INSERT INTO `mob_droplist` VALUES (1802,0,0,1000,1449,500);     -- Tukuku Whiteshell (50.0%)
-INSERT INTO `mob_droplist` VALUES (1802,0,0,1000,1452,500);     -- Ordelle Bronzepiece (50.0%)
-INSERT INTO `mob_droplist` VALUES (1802,0,0,1000,1455,500);     -- One Byne Bill (50.0%)
 INSERT INTO `mob_droplist` VALUES (1802,0,0,1000,18541,400);    -- Tjukurrpa Axe (40.0%)
-INSERT INTO `mob_droplist` VALUES (1802,0,0,1000,3497,15);      -- Forgotten Step (1.5%)
-INSERT INTO `mob_droplist` VALUES (1802,0,0,1000,1450,@VRARE);  -- Lungo-Nango Jadeshell (Very Rare, 1%)
-INSERT INTO `mob_droplist` VALUES (1802,0,0,1000,1453,@VRARE);  -- Montiont Silverpiece (Very Rare, 1%)
-INSERT INTO `mob_droplist` VALUES (1802,0,0,1000,1456,@VRARE);  -- One Hundred Byne Bill (Very Rare, 1%)
-INSERT INTO `mob_droplist` VALUES (1802,0,0,1000,2035,@VRARE);  -- Warriors Mufflers -1 (Very Rare, 1%)
-INSERT INTO `mob_droplist` VALUES (1802,0,0,1000,2040,@VRARE);  -- Melee Gloves -1 (Very Rare, 1%)
-INSERT INTO `mob_droplist` VALUES (1802,0,0,1000,2045,@VRARE);  -- Clerics Mitts -1 (Very Rare, 1%)
-INSERT INTO `mob_droplist` VALUES (1802,0,0,1000,2050,@VRARE);  -- Sorcerers Gloves -1 (Very Rare, 1%)
-INSERT INTO `mob_droplist` VALUES (1802,0,0,1000,2055,@VRARE);  -- Duelists Gloves -1 (Very Rare, 1%)
-INSERT INTO `mob_droplist` VALUES (1802,0,0,1000,2060,@VRARE);  -- Assassins Armlets -1 (Very Rare, 1%)
-INSERT INTO `mob_droplist` VALUES (1802,0,0,1000,2065,@VRARE);  -- Valor Gauntlets -1 (Very Rare, 1%)
-INSERT INTO `mob_droplist` VALUES (1802,0,0,1000,2070,@VRARE);  -- Abyss Gauntlets -1 (Very Rare, 1%)
-INSERT INTO `mob_droplist` VALUES (1802,0,0,1000,2075,@VRARE);  -- Monster Gloves -1 (Very Rare, 1%)
-INSERT INTO `mob_droplist` VALUES (1802,0,0,1000,2080,@VRARE);  -- Bards Cuffs -1 (Very Rare, 1%)
-INSERT INTO `mob_droplist` VALUES (1802,0,0,1000,2085,@VRARE);  -- Scouts Bracers -1 (Very Rare, 1%)
-INSERT INTO `mob_droplist` VALUES (1802,0,0,1000,2090,@VRARE);  -- Saotome Kote -1 (Very Rare, 1%)
-INSERT INTO `mob_droplist` VALUES (1802,0,0,1000,2095,@VRARE);  -- Koga Tekko -1 (Very Rare, 1%)
-INSERT INTO `mob_droplist` VALUES (1802,0,0,1000,2100,@VRARE);  -- Wyrm Finger Gauntlets -1 (Very Rare, 1%)
-INSERT INTO `mob_droplist` VALUES (1802,0,0,1000,2105,@VRARE);  -- Summoners Bracers -1 (Very Rare, 1%)
-INSERT INTO `mob_droplist` VALUES (1802,0,0,1000,2664,@VRARE);  -- Mirage Bazubands -1 (Very Rare, 1%)
-INSERT INTO `mob_droplist` VALUES (1802,0,0,1000,2669,@VRARE);  -- Commodore Gants -1 (Very Rare, 1%)
-INSERT INTO `mob_droplist` VALUES (1802,0,0,1000,2674,@VRARE);  -- Pantin Dastanas -1 (Very Rare, 1%)
-INSERT INTO `mob_droplist` VALUES (1802,0,0,1000,2720,@VRARE);  -- Etoile Bangles -1 (Very Rare, 1%)
-INSERT INTO `mob_droplist` VALUES (1802,0,0,1000,2725,@VRARE);  -- Argute Bracers -1 (Very Rare, 1%)
+-- INSERT INTO `mob_droplist` VALUES (1802,0,0,1000,3497,15);      -- Forgotten Step (1.5%)
+INSERT INTO `mob_droplist` VALUES (1802,1,1,1000,1450,@RARE);  -- Lungo-Nango Jadeshell (Very Rare, 1%)
+INSERT INTO `mob_droplist` VALUES (1802,1,1,1000,1453,@RARE);  -- Montiont Silverpiece (Very Rare, 1%)
+INSERT INTO `mob_droplist` VALUES (1802,1,1,1000,1456,@RARE);  -- One Hundred Byne Bill (Very Rare, 1%)
+
 
 -- ZoneID:  41 - Nightmare Weapon
 -- ZoneID:  41 - Nightmare Stirge
@@ -14584,34 +14563,11 @@ INSERT INTO `mob_droplist` VALUES (1804,2,0,1000,1452,0);      -- Ordelle Bronze
 
 -- ZoneID:  40 - Lost Alklha
 INSERT INTO `mob_droplist` VALUES (1805,0,0,1000,3477,@ALWAYS); -- Fiendish Tome Ii Chapter 8 (Always, 100%)
-INSERT INTO `mob_droplist` VALUES (1805,0,0,1000,1449,500);     -- Tukuku Whiteshell (50.0%)
-INSERT INTO `mob_droplist` VALUES (1805,0,0,1000,1452,500);     -- Ordelle Bronzepiece (50.0%)
-INSERT INTO `mob_droplist` VALUES (1805,0,0,1000,1455,500);     -- One Byne Bill (50.0%)
 INSERT INTO `mob_droplist` VALUES (1805,0,0,1000,11923,400);    -- Tjukurrpa Gauntlets (40.0%)
-INSERT INTO `mob_droplist` VALUES (1805,0,0,1000,3497,15);      -- Forgotten Step (1.5%)
-INSERT INTO `mob_droplist` VALUES (1805,0,0,1000,1450,@VRARE);  -- Lungo-Nango Jadeshell (Very Rare, 1%)
-INSERT INTO `mob_droplist` VALUES (1805,0,0,1000,1453,@VRARE);  -- Montiont Silverpiece (Very Rare, 1%)
-INSERT INTO `mob_droplist` VALUES (1805,0,0,1000,1456,@VRARE);  -- One Hundred Byne Bill (Very Rare, 1%)
-INSERT INTO `mob_droplist` VALUES (1805,0,0,1000,2035,@VRARE);  -- Warriors Mufflers -1 (Very Rare, 1%)
-INSERT INTO `mob_droplist` VALUES (1805,0,0,1000,2040,@VRARE);  -- Melee Gloves -1 (Very Rare, 1%)
-INSERT INTO `mob_droplist` VALUES (1805,0,0,1000,2045,@VRARE);  -- Clerics Mitts -1 (Very Rare, 1%)
-INSERT INTO `mob_droplist` VALUES (1805,0,0,1000,2050,@VRARE);  -- Sorcerers Gloves -1 (Very Rare, 1%)
-INSERT INTO `mob_droplist` VALUES (1805,0,0,1000,2055,@VRARE);  -- Duelists Gloves -1 (Very Rare, 1%)
-INSERT INTO `mob_droplist` VALUES (1805,0,0,1000,2060,@VRARE);  -- Assassins Armlets -1 (Very Rare, 1%)
-INSERT INTO `mob_droplist` VALUES (1805,0,0,1000,2065,@VRARE);  -- Valor Gauntlets -1 (Very Rare, 1%)
-INSERT INTO `mob_droplist` VALUES (1805,0,0,1000,2070,@VRARE);  -- Abyss Gauntlets -1 (Very Rare, 1%)
-INSERT INTO `mob_droplist` VALUES (1805,0,0,1000,2075,@VRARE);  -- Monster Gloves -1 (Very Rare, 1%)
-INSERT INTO `mob_droplist` VALUES (1805,0,0,1000,2080,@VRARE);  -- Bards Cuffs -1 (Very Rare, 1%)
-INSERT INTO `mob_droplist` VALUES (1805,0,0,1000,2085,@VRARE);  -- Scouts Bracers -1 (Very Rare, 1%)
-INSERT INTO `mob_droplist` VALUES (1805,0,0,1000,2090,@VRARE);  -- Saotome Kote -1 (Very Rare, 1%)
-INSERT INTO `mob_droplist` VALUES (1805,0,0,1000,2095,@VRARE);  -- Koga Tekko -1 (Very Rare, 1%)
-INSERT INTO `mob_droplist` VALUES (1805,0,0,1000,2100,@VRARE);  -- Wyrm Finger Gauntlets -1 (Very Rare, 1%)
-INSERT INTO `mob_droplist` VALUES (1805,0,0,1000,2105,@VRARE);  -- Summoners Bracers -1 (Very Rare, 1%)
-INSERT INTO `mob_droplist` VALUES (1805,0,0,1000,2664,@VRARE);  -- Mirage Bazubands -1 (Very Rare, 1%)
-INSERT INTO `mob_droplist` VALUES (1805,0,0,1000,2669,@VRARE);  -- Commodore Gants -1 (Very Rare, 1%)
-INSERT INTO `mob_droplist` VALUES (1805,0,0,1000,2674,@VRARE);  -- Pantin Dastanas -1 (Very Rare, 1%)
-INSERT INTO `mob_droplist` VALUES (1805,0,0,1000,2720,@VRARE);  -- Etoile Bangles -1 (Very Rare, 1%)
-INSERT INTO `mob_droplist` VALUES (1805,0,0,1000,2725,@VRARE);  -- Argute Bracers -1 (Very Rare, 1%)
+-- INSERT INTO `mob_droplist` VALUES (1805,0,0,1000,3497,15);      -- Forgotten Step (1.5%)
+INSERT INTO `mob_droplist` VALUES (1805,1,1,1000,1450,@RARE);  -- Lungo-Nango Jadeshell (Very Rare, 1%)
+INSERT INTO `mob_droplist` VALUES (1805,1,1,1000,1453,@RARE);  -- Montiont Silverpiece (Very Rare, 1%)
+INSERT INTO `mob_droplist` VALUES (1805,1,1,1000,1456,@RARE);  -- One Hundred Byne Bill (Very Rare, 1%)
 
 -- ZoneID: 122 - Nightmare Vase
 INSERT INTO `mob_droplist` VALUES (1806,0,0,1000,954,140);         -- Magic Pot Shard (14.0%)
@@ -15911,11 +15867,12 @@ INSERT INTO `mob_droplist` VALUES (1966,1,1,1000,17649,810);      -- Nightmare S
 INSERT INTO `mob_droplist` VALUES (1966,1,1,1000,12362,190);      -- Highlanders Targe (Group 1 - 19.0%)
 
 -- ZoneID: 185 - Overlords Tombstone
-INSERT INTO `mob_droplist` VALUES (1967,0,0,1000,749,90);     -- Mythril Beastcoin (9.0%)
-INSERT INTO `mob_droplist` VALUES (1967,0,0,1000,1453,60);    -- Montiont Silverpiece (6.0%)
-INSERT INTO `mob_droplist` VALUES (1967,0,0,1000,1470,@RARE); -- Sparkling Stone (Rare, 5%)
-INSERT INTO `mob_droplist` VALUES (1967,0,0,1000,1474,@RARE); -- Infinity Core (Rare, 5%)
-INSERT INTO `mob_droplist` VALUES (1967,0,0,1000,748,40);     -- Gold Beastcoin (4.0%)
+INSERT INTO `mob_droplist` VALUES (1967,0,0,1000,749,90);       -- Mythril Beastcoin (9.0%)
+INSERT INTO `mob_droplist` VALUES (1967,0,0,1000,1453,60);      -- Montiont Silverpiece (6.0%)
+INSERT INTO `mob_droplist` VALUES (1967,0,0,1000,1470,@RARE);   -- Sparkling Stone (Rare, 5%)
+INSERT INTO `mob_droplist` VALUES (1967,0,0,1000,1474,@RARE);   -- Infinity Core (Rare, 5%)
+INSERT INTO `mob_droplist` VALUES (1967,0,0,1000,748,40);       -- Gold Beastcoin (4.0%)
+INSERT INTO `mob_droplist` VALUES (1967,0,0,1000,3404,@ALWAYS); -- Fiendish Tome Chapter 1
 
 -- ZoneID: 200 - Over Weapon
 INSERT INTO `mob_droplist` VALUES (1968,0,0,1000,1047,130); -- Garlaige Coffer Key (13.0%)
@@ -19787,7 +19744,8 @@ INSERT INTO `mob_droplist` VALUES (2509,0,0,1000,896,@ALWAYS);   -- Scorpion She
 INSERT INTO `mob_droplist` VALUES (2509,0,0,1000,901,@VRARE);    -- Venomous Claw (Very Rare, 1%)
 
 -- ZoneID: 187 - Tzee Xicu Idol
-INSERT INTO `mob_droplist` VALUES (2510,0,0,1000,1450,60); -- Lungo-Nango Jadeshell (6.0%)
+INSERT INTO `mob_droplist` VALUES (2510,0,0,1000,1450,60);      -- Lungo-Nango Jadeshell (6.0%)
+INSERT INTO `mob_droplist` VALUES (2510,0,0,1000,3414,@ALWAYS); -- Fiendish Tome Chapter 11
 
 -- ZoneID: 151 - Tzee Xicu The Manifest
 INSERT INTO `mob_droplist` VALUES (2511,0,0,1000,751,@ALWAYS);     -- Platinum Beastcoin (Always, 100%)
@@ -23038,74 +22996,28 @@ INSERT INTO `mob_droplist` VALUES (2794,0,0,1000,19108,170);    -- Zareehkl Jamb
 
 -- ZoneID:  40 - Lost Barong
 INSERT INTO `mob_droplist` VALUES (2795,0,0,1000,3476,@ALWAYS); -- Fiendish Tome Ii Chapter 7 (Always, 100%)
-INSERT INTO `mob_droplist` VALUES (2795,0,0,1000,1449,500);     -- Tukuku Whiteshell (50.0%)
-INSERT INTO `mob_droplist` VALUES (2795,0,0,1000,1452,500);     -- Ordelle Bronzepiece (50.0%)
-INSERT INTO `mob_droplist` VALUES (2795,0,0,1000,1455,500);     -- One Byne Bill (50.0%)
 INSERT INTO `mob_droplist` VALUES (2795,0,0,1000,10984,400);    -- Tjukurrpa Mantle (40.0%)
-INSERT INTO `mob_droplist` VALUES (2795,0,0,1000,3497,15);      -- Forgotten Step (1.5%)
-INSERT INTO `mob_droplist` VALUES (2795,0,0,1000,1450,@VRARE);  -- Lungo-Nango Jadeshell (Very Rare, 1%)
-INSERT INTO `mob_droplist` VALUES (2795,0,0,1000,1453,@VRARE);  -- Montiont Silverpiece (Very Rare, 1%)
-INSERT INTO `mob_droplist` VALUES (2795,0,0,1000,1456,@VRARE);  -- One Hundred Byne Bill (Very Rare, 1%)
-INSERT INTO `mob_droplist` VALUES (2795,0,0,1000,2035,@VRARE);  -- Warriors Mufflers -1 (Very Rare, 1%)
-INSERT INTO `mob_droplist` VALUES (2795,0,0,1000,2040,@VRARE);  -- Melee Gloves -1 (Very Rare, 1%)
-INSERT INTO `mob_droplist` VALUES (2795,0,0,1000,2045,@VRARE);  -- Clerics Mitts -1 (Very Rare, 1%)
-INSERT INTO `mob_droplist` VALUES (2795,0,0,1000,2050,@VRARE);  -- Sorcerers Gloves -1 (Very Rare, 1%)
-INSERT INTO `mob_droplist` VALUES (2795,0,0,1000,2055,@VRARE);  -- Duelists Gloves -1 (Very Rare, 1%)
-INSERT INTO `mob_droplist` VALUES (2795,0,0,1000,2060,@VRARE);  -- Assassins Armlets -1 (Very Rare, 1%)
-INSERT INTO `mob_droplist` VALUES (2795,0,0,1000,2065,@VRARE);  -- Valor Gauntlets -1 (Very Rare, 1%)
-INSERT INTO `mob_droplist` VALUES (2795,0,0,1000,2070,@VRARE);  -- Abyss Gauntlets -1 (Very Rare, 1%)
-INSERT INTO `mob_droplist` VALUES (2795,0,0,1000,2075,@VRARE);  -- Monster Gloves -1 (Very Rare, 1%)
-INSERT INTO `mob_droplist` VALUES (2795,0,0,1000,2080,@VRARE);  -- Bards Cuffs -1 (Very Rare, 1%)
-INSERT INTO `mob_droplist` VALUES (2795,0,0,1000,2085,@VRARE);  -- Scouts Bracers -1 (Very Rare, 1%)
-INSERT INTO `mob_droplist` VALUES (2795,0,0,1000,2090,@VRARE);  -- Saotome Kote -1 (Very Rare, 1%)
-INSERT INTO `mob_droplist` VALUES (2795,0,0,1000,2095,@VRARE);  -- Koga Tekko -1 (Very Rare, 1%)
-INSERT INTO `mob_droplist` VALUES (2795,0,0,1000,2100,@VRARE);  -- Wyrm Finger Gauntlets -1 (Very Rare, 1%)
-INSERT INTO `mob_droplist` VALUES (2795,0,0,1000,2105,@VRARE);  -- Summoners Bracers -1 (Very Rare, 1%)
-INSERT INTO `mob_droplist` VALUES (2795,0,0,1000,2664,@VRARE);  -- Mirage Bazubands -1 (Very Rare, 1%)
-INSERT INTO `mob_droplist` VALUES (2795,0,0,1000,2669,@VRARE);  -- Commodore Gants -1 (Very Rare, 1%)
-INSERT INTO `mob_droplist` VALUES (2795,0,0,1000,2674,@VRARE);  -- Pantin Dastanas -1 (Very Rare, 1%)
-INSERT INTO `mob_droplist` VALUES (2795,0,0,1000,2720,@VRARE);  -- Etoile Bangles -1 (Very Rare, 1%)
-INSERT INTO `mob_droplist` VALUES (2795,0,0,1000,2725,@VRARE);  -- Argute Bracers -1 (Very Rare, 1%)
+-- INSERT INTO `mob_droplist` VALUES (2795,0,0,1000,3497,15);      -- Forgotten Step (1.5%)
+INSERT INTO `mob_droplist` VALUES (2795,1,1,1000,1450,@RARE);  -- Lungo-Nango Jadeshell (Very Rare, 1%)
+INSERT INTO `mob_droplist` VALUES (2795,1,1,1000,1453,@RARE);  -- Montiont Silverpiece (Very Rare, 1%)
+INSERT INTO `mob_droplist` VALUES (2795,1,1,1000,1456,@RARE);  -- One Hundred Byne Bill (Very Rare, 1%)
 
 -- ZoneID:  40 - Lost Stihi
 INSERT INTO `mob_droplist` VALUES (2796,0,0,1000,3475,@ALWAYS); -- Fiendish Tome Ii Chapter 6 (Always, 100%)
-INSERT INTO `mob_droplist` VALUES (2796,0,0,1000,1449,500);     -- Tukuku Whiteshell (50.0%)
-INSERT INTO `mob_droplist` VALUES (2796,0,0,1000,1452,500);     -- Ordelle Bronzepiece (50.0%)
-INSERT INTO `mob_droplist` VALUES (2796,0,0,1000,1455,500);     -- One Byne Bill (50.0%)
 INSERT INTO `mob_droplist` VALUES (2796,0,0,1000,10941,400);    -- Tjukurrpa Medal (40.0%)
-INSERT INTO `mob_droplist` VALUES (2796,0,0,1000,3497,15);      -- Forgotten Step (1.5%)
-INSERT INTO `mob_droplist` VALUES (2796,0,0,1000,1450,@VRARE);  -- Lungo-Nango Jadeshell (Very Rare, 1%)
-INSERT INTO `mob_droplist` VALUES (2796,0,0,1000,1453,@VRARE);  -- Montiont Silverpiece (Very Rare, 1%)
-INSERT INTO `mob_droplist` VALUES (2796,0,0,1000,1456,@VRARE);  -- One Hundred Byne Bill (Very Rare, 1%)
-INSERT INTO `mob_droplist` VALUES (2796,0,0,1000,2035,@VRARE);  -- Warriors Mufflers -1 (Very Rare, 1%)
-INSERT INTO `mob_droplist` VALUES (2796,0,0,1000,2040,@VRARE);  -- Melee Gloves -1 (Very Rare, 1%)
-INSERT INTO `mob_droplist` VALUES (2796,0,0,1000,2045,@VRARE);  -- Clerics Mitts -1 (Very Rare, 1%)
-INSERT INTO `mob_droplist` VALUES (2796,0,0,1000,2050,@VRARE);  -- Sorcerers Gloves -1 (Very Rare, 1%)
-INSERT INTO `mob_droplist` VALUES (2796,0,0,1000,2055,@VRARE);  -- Duelists Gloves -1 (Very Rare, 1%)
-INSERT INTO `mob_droplist` VALUES (2796,0,0,1000,2060,@VRARE);  -- Assassins Armlets -1 (Very Rare, 1%)
-INSERT INTO `mob_droplist` VALUES (2796,0,0,1000,2065,@VRARE);  -- Valor Gauntlets -1 (Very Rare, 1%)
-INSERT INTO `mob_droplist` VALUES (2796,0,0,1000,2070,@VRARE);  -- Abyss Gauntlets -1 (Very Rare, 1%)
-INSERT INTO `mob_droplist` VALUES (2796,0,0,1000,2075,@VRARE);  -- Monster Gloves -1 (Very Rare, 1%)
-INSERT INTO `mob_droplist` VALUES (2796,0,0,1000,2080,@VRARE);  -- Bards Cuffs -1 (Very Rare, 1%)
-INSERT INTO `mob_droplist` VALUES (2796,0,0,1000,2085,@VRARE);  -- Scouts Bracers -1 (Very Rare, 1%)
-INSERT INTO `mob_droplist` VALUES (2796,0,0,1000,2090,@VRARE);  -- Saotome Kote -1 (Very Rare, 1%)
-INSERT INTO `mob_droplist` VALUES (2796,0,0,1000,2095,@VRARE);  -- Koga Tekko -1 (Very Rare, 1%)
-INSERT INTO `mob_droplist` VALUES (2796,0,0,1000,2100,@VRARE);  -- Wyrm Finger Gauntlets -1 (Very Rare, 1%)
-INSERT INTO `mob_droplist` VALUES (2796,0,0,1000,2105,@VRARE);  -- Summoners Bracers -1 (Very Rare, 1%)
-INSERT INTO `mob_droplist` VALUES (2796,0,0,1000,2664,@VRARE);  -- Mirage Bazubands -1 (Very Rare, 1%)
-INSERT INTO `mob_droplist` VALUES (2796,0,0,1000,2669,@VRARE);  -- Commodore Gants -1 (Very Rare, 1%)
-INSERT INTO `mob_droplist` VALUES (2796,0,0,1000,2674,@VRARE);  -- Pantin Dastanas -1 (Very Rare, 1%)
-INSERT INTO `mob_droplist` VALUES (2796,0,0,1000,2720,@VRARE);  -- Etoile Bangles -1 (Very Rare, 1%)
-INSERT INTO `mob_droplist` VALUES (2796,0,0,1000,2725,@VRARE);  -- Argute Bracers -1 (Very Rare, 1%)
+-- INSERT INTO `mob_droplist` VALUES (2796,0,0,1000,3497,15);      -- Forgotten Step (1.5%)
+INSERT INTO `mob_droplist` VALUES (2796,1,1,1000,1450,@RARE);  -- Lungo-Nango Jadeshell (Very Rare, 1%)
+INSERT INTO `mob_droplist` VALUES (2796,1,1,1000,1453,@RARE);  -- Montiont Silverpiece (Very Rare, 1%)
+INSERT INTO `mob_droplist` VALUES (2796,1,1,1000,1456,@RARE);  -- One Hundred Byne Bill (Very Rare, 1%)
 
 -- ZoneID:  40 - Arch Apocalyptic Beast
 INSERT INTO `mob_droplist` VALUES (2797,0,0,1000,10818,400);       -- Tjukurrpa Belt (40.0%)
 INSERT INTO `mob_droplist` VALUES (2797,0,0,1000,10756,300);       -- Tjukurrpa Ring (30.0%)
-INSERT INTO `mob_droplist` VALUES (2797,0,0,1000,3497,@COMMON);    -- Forgotten Step (Common, 15%)
+-- INSERT INTO `mob_droplist` VALUES (2797,0,0,1000,3497,@COMMON);    -- Forgotten Step (Common, 15%)
 INSERT INTO `mob_droplist` VALUES (2797,0,0,1000,10757,@UNCOMMON); -- Tjukurrpa Annulet (Uncommon, 10%)
-INSERT INTO `mob_droplist` VALUES (2797,0,0,1000,1450,@VRARE);     -- Lungo-Nango Jadeshell (Very Rare, 1%)
-INSERT INTO `mob_droplist` VALUES (2797,0,0,1000,1453,@VRARE);     -- Montiont Silverpiece (Very Rare, 1%)
-INSERT INTO `mob_droplist` VALUES (2797,0,0,1000,1456,@VRARE);     -- One Hundred Byne Bill (Very Rare, 1%)
+INSERT INTO `mob_droplist` VALUES (2797,1,1,1000,1450,@ALWAYS);     -- Lungo-Nango Jadeshell (Very Rare, 1%)
+INSERT INTO `mob_droplist` VALUES (2797,1,1,1000,1453,@ALWAYS);     -- Montiont Silverpiece (Very Rare, 1%)
+INSERT INTO `mob_droplist` VALUES (2797,1,1,1000,1456,@ALWAYS);     -- One Hundred Byne Bill (Very Rare, 1%)
 
 -- ZoneID:  41 - Nightmare Roc
 -- ZoneID:  41 - Nightmare Gaylas
@@ -24149,7 +24061,7 @@ INSERT INTO `mob_droplist` VALUES (2935,0,0,1000,853,55);  -- Raptor Skin (5.5%)
 INSERT INTO `mob_droplist` VALUES (2936,0,0,1000,19123,200); -- Cinquedea (20.0%)
 
 -- ZoneID: 111 - Calcabrina
-INSERT INTO `mob_droplist` VALUES (2937,0,0,1000,2853,26); -- Malebolge Mandrel (2.6%)
+INSERT INTO `mob_droplist` VALUES (2937,0,0,1000,2853,200); -- Malebolge Mandrel (20%)
 
 -- ZoneID: 106 - Bedrock Barry
 INSERT INTO `mob_droplist` VALUES (2938,0,0,1000,2842,222); -- Flawed Garnet (22.2%)
@@ -24977,111 +24889,45 @@ INSERT INTO `mob_droplist` VALUES (3124,2,0,1000,1449,0);      -- Tukuku Whitesh
 
 -- ZoneID:  39 - Lost Fairy Ring
 INSERT INTO `mob_droplist` VALUES (3125,0,0,1000,3472,@ALWAYS); -- Fiendish Tome Ii Chapter 3 (Always, 100%)
-INSERT INTO `mob_droplist` VALUES (3125,0,0,1000,1449,250);     -- Tukuku Whiteshell (25.0%)
-INSERT INTO `mob_droplist` VALUES (3125,0,0,1000,1452,250);     -- Ordelle Bronzepiece (25.0%)
-INSERT INTO `mob_droplist` VALUES (3125,0,0,1000,1455,250);     -- One Byne Bill (25.0%)
-INSERT INTO `mob_droplist` VALUES (3125,0,0,1000,3495,15);      -- Forgotten Touch (1.5%)
-INSERT INTO `mob_droplist` VALUES (3125,0,0,1000,1450,@VRARE);  -- Lungo-Nango Jadeshell (Very Rare, 1%)
-INSERT INTO `mob_droplist` VALUES (3125,0,0,1000,1453,@VRARE);  -- Montiont Silverpiece (Very Rare, 1%)
-INSERT INTO `mob_droplist` VALUES (3125,0,0,1000,1456,@VRARE);  -- One Hundred Byne Bill (Very Rare, 1%)
-INSERT INTO `mob_droplist` VALUES (3125,0,0,1000,2033,@VRARE);  -- Warriors Mask -1 (Very Rare, 1%)
-INSERT INTO `mob_droplist` VALUES (3125,0,0,1000,2038,@VRARE);  -- Melee Crown -1 (Very Rare, 1%)
-INSERT INTO `mob_droplist` VALUES (3125,0,0,1000,2043,@VRARE);  -- Clerics Cap -1 (Very Rare, 1%)
-INSERT INTO `mob_droplist` VALUES (3125,0,0,1000,2048,@VRARE);  -- Sorcerers Petasos -1 (Very Rare, 1%)
-INSERT INTO `mob_droplist` VALUES (3125,0,0,1000,2053,@VRARE);  -- Duelists Chapeau -1 (Very Rare, 1%)
-INSERT INTO `mob_droplist` VALUES (3125,0,0,1000,2058,@VRARE);  -- Assassins Bonnet -1 (Very Rare, 1%)
-INSERT INTO `mob_droplist` VALUES (3125,0,0,1000,2063,@VRARE);  -- Valor Coronet -1 (Very Rare, 1%)
-INSERT INTO `mob_droplist` VALUES (3125,0,0,1000,2068,@VRARE);  -- Abyss Burgeonet -1 (Very Rare, 1%)
-INSERT INTO `mob_droplist` VALUES (3125,0,0,1000,2073,@VRARE);  -- Monster Helm -1 (Very Rare, 1%)
-INSERT INTO `mob_droplist` VALUES (3125,0,0,1000,2078,@VRARE);  -- Bards Roundlet -1 (Very Rare, 1%)
-INSERT INTO `mob_droplist` VALUES (3125,0,0,1000,2083,@VRARE);  -- Scouts Beret -1 (Very Rare, 1%)
-INSERT INTO `mob_droplist` VALUES (3125,0,0,1000,2088,@VRARE);  -- Saotome Kabuto -1 (Very Rare, 1%)
-INSERT INTO `mob_droplist` VALUES (3125,0,0,1000,2093,@VRARE);  -- Koga Hatsuburi -1 (Very Rare, 1%)
-INSERT INTO `mob_droplist` VALUES (3125,0,0,1000,2098,@VRARE);  -- Wyrm Armet -1 (Very Rare, 1%)
-INSERT INTO `mob_droplist` VALUES (3125,0,0,1000,2103,@VRARE);  -- Summoners Horn -1 (Very Rare, 1%)
-INSERT INTO `mob_droplist` VALUES (3125,0,0,1000,2662,@VRARE);  -- Mirage Keffiyeh -1 (Very Rare, 1%)
-INSERT INTO `mob_droplist` VALUES (3125,0,0,1000,2667,@VRARE);  -- Commodore Tricorne -1 (Very Rare, 1%)
-INSERT INTO `mob_droplist` VALUES (3125,0,0,1000,2672,@VRARE);  -- Pantin Taj -1 (Very Rare, 1%)
-INSERT INTO `mob_droplist` VALUES (3125,0,0,1000,2718,@VRARE);  -- Etoile Tiara -1 (Very Rare, 1%)
-INSERT INTO `mob_droplist` VALUES (3125,0,0,1000,2723,@VRARE);  -- Argute Mortarboard -1 (Very Rare, 1%)
+INSERT INTO `mob_droplist` VALUES (3125,0,0,1000,10817,300);    -- Moepapa Stone (30.0%)
+-- INSERT INTO `mob_droplist` VALUES (3125,0,0,1000,3495,15);   -- Forgotten Touch (1.5%)
+INSERT INTO `mob_droplist` VALUES (3125,1,1,1000,1450,@RARE);   -- Lungo-Nango Jadeshell (Very Rare, 1%)
+INSERT INTO `mob_droplist` VALUES (3125,1,1,1000,1453,@RARE);   -- Montiont Silverpiece (Very Rare, 1%)
+INSERT INTO `mob_droplist` VALUES (3125,1,1,1000,1456,@RARE);   -- One Hundred Byne Bill (Very Rare, 1%)
 INSERT INTO `mob_droplist` VALUES (3125,2,0,1000,1449,0);       -- Tukuku Whiteshell (Steal)
 INSERT INTO `mob_droplist` VALUES (3125,2,0,1000,1452,0);       -- Ordelle Bronzepiece (Steal)
 INSERT INTO `mob_droplist` VALUES (3125,2,0,1000,1455,0);       -- One Byne Bill (Steal)
 
 -- ZoneID:  39 - Lost Stcemqestcint
-INSERT INTO `mob_droplist` VALUES (3126,0,0,1000,3473,850);    -- Fiendish Tome Ii Chapter 4 (85.0%)
-INSERT INTO `mob_droplist` VALUES (3126,0,0,1000,1449,250);    -- Tukuku Whiteshell (25.0%)
-INSERT INTO `mob_droplist` VALUES (3126,0,0,1000,1452,250);    -- Ordelle Bronzepiece (25.0%)
-INSERT INTO `mob_droplist` VALUES (3126,0,0,1000,1455,250);    -- One Byne Bill (25.0%)
-INSERT INTO `mob_droplist` VALUES (3126,0,0,1000,3495,15);     -- Forgotten Touch (1.5%)
-INSERT INTO `mob_droplist` VALUES (3126,0,0,1000,1450,@VRARE); -- Lungo-Nango Jadeshell (Very Rare, 1%)
-INSERT INTO `mob_droplist` VALUES (3126,0,0,1000,1453,@VRARE); -- Montiont Silverpiece (Very Rare, 1%)
-INSERT INTO `mob_droplist` VALUES (3126,0,0,1000,1456,@VRARE); -- One Hundred Byne Bill (Very Rare, 1%)
-INSERT INTO `mob_droplist` VALUES (3126,0,0,1000,2033,@VRARE); -- Warriors Mask -1 (Very Rare, 1%)
-INSERT INTO `mob_droplist` VALUES (3126,0,0,1000,2038,@VRARE); -- Melee Crown -1 (Very Rare, 1%)
-INSERT INTO `mob_droplist` VALUES (3126,0,0,1000,2043,@VRARE); -- Clerics Cap -1 (Very Rare, 1%)
-INSERT INTO `mob_droplist` VALUES (3126,0,0,1000,2048,@VRARE); -- Sorcerers Petasos -1 (Very Rare, 1%)
-INSERT INTO `mob_droplist` VALUES (3126,0,0,1000,2053,@VRARE); -- Duelists Chapeau -1 (Very Rare, 1%)
-INSERT INTO `mob_droplist` VALUES (3126,0,0,1000,2058,@VRARE); -- Assassins Bonnet -1 (Very Rare, 1%)
-INSERT INTO `mob_droplist` VALUES (3126,0,0,1000,2063,@VRARE); -- Valor Coronet -1 (Very Rare, 1%)
-INSERT INTO `mob_droplist` VALUES (3126,0,0,1000,2068,@VRARE); -- Abyss Burgeonet -1 (Very Rare, 1%)
-INSERT INTO `mob_droplist` VALUES (3126,0,0,1000,2073,@VRARE); -- Monster Helm -1 (Very Rare, 1%)
-INSERT INTO `mob_droplist` VALUES (3126,0,0,1000,2078,@VRARE); -- Bards Roundlet -1 (Very Rare, 1%)
-INSERT INTO `mob_droplist` VALUES (3126,0,0,1000,2083,@VRARE); -- Scouts Beret -1 (Very Rare, 1%)
-INSERT INTO `mob_droplist` VALUES (3126,0,0,1000,2088,@VRARE); -- Saotome Kabuto -1 (Very Rare, 1%)
-INSERT INTO `mob_droplist` VALUES (3126,0,0,1000,2093,@VRARE); -- Koga Hatsuburi -1 (Very Rare, 1%)
-INSERT INTO `mob_droplist` VALUES (3126,0,0,1000,2098,@VRARE); -- Wyrm Armet -1 (Very Rare, 1%)
-INSERT INTO `mob_droplist` VALUES (3126,0,0,1000,2103,@VRARE); -- Summoners Horn -1 (Very Rare, 1%)
-INSERT INTO `mob_droplist` VALUES (3126,0,0,1000,2662,@VRARE); -- Mirage Keffiyeh -1 (Very Rare, 1%)
-INSERT INTO `mob_droplist` VALUES (3126,0,0,1000,2667,@VRARE); -- Commodore Tricorne -1 (Very Rare, 1%)
-INSERT INTO `mob_droplist` VALUES (3126,0,0,1000,2672,@VRARE); -- Pantin Taj -1 (Very Rare, 1%)
-INSERT INTO `mob_droplist` VALUES (3126,0,0,1000,2718,@VRARE); -- Etoile Tiara -1 (Very Rare, 1%)
-INSERT INTO `mob_droplist` VALUES (3126,0,0,1000,2723,@VRARE); -- Argute Mortarboard -1 (Very Rare, 1%)
-INSERT INTO `mob_droplist` VALUES (3126,2,0,1000,1449,0);      -- Tukuku Whiteshell (Steal)
-INSERT INTO `mob_droplist` VALUES (3126,2,0,1000,1452,0);      -- Ordelle Bronzepiece (Steal)
-INSERT INTO `mob_droplist` VALUES (3126,2,0,1000,1455,0);      -- One Byne Bill (Steal)
+INSERT INTO `mob_droplist` VALUES (3126,0,0,1000,3473,850);   -- Fiendish Tome Ii Chapter 4 (85.0%)
+INSERT INTO `mob_droplist` VALUES (3126,0,0,1000,17069,300);  -- Moepapa Mace (30.0%)
+-- INSERT INTO `mob_droplist` VALUES (3126,0,0,1000,3495,15); -- Forgotten Touch (1.5%)
+INSERT INTO `mob_droplist` VALUES (3126,1,1,1000,1450,@RARE); -- Lungo-Nango Jadeshell (Very Rare, 1%)
+INSERT INTO `mob_droplist` VALUES (3126,1,1,1000,1453,@RARE); -- Montiont Silverpiece (Very Rare, 1%)
+INSERT INTO `mob_droplist` VALUES (3126,1,1,1000,1456,@RARE); -- One Hundred Byne Bill (Very Rare, 1%)
+INSERT INTO `mob_droplist` VALUES (3126,2,0,1000,1449,0);     -- Tukuku Whiteshell (Steal)
+INSERT INTO `mob_droplist` VALUES (3126,2,0,1000,1452,0);     -- Ordelle Bronzepiece (Steal)
+INSERT INTO `mob_droplist` VALUES (3126,2,0,1000,1455,0);     -- One Byne Bill (Steal)
 
 -- ZoneID:  39 - Lost Nantina
 INSERT INTO `mob_droplist` VALUES (3127,0,0,1000,3471,850);    -- Fiendish Tome Ii Chapter 2 (85.0%)
-INSERT INTO `mob_droplist` VALUES (3127,0,0,1000,1449,250);    -- Tukuku Whiteshell (25.0%)
-INSERT INTO `mob_droplist` VALUES (3127,0,0,1000,1452,250);    -- Ordelle Bronzepiece (25.0%)
-INSERT INTO `mob_droplist` VALUES (3127,0,0,1000,1455,250);    -- One Byne Bill (25.0%)
-INSERT INTO `mob_droplist` VALUES (3127,0,0,1000,3495,15);     -- Forgotten Touch (1.5%)
-INSERT INTO `mob_droplist` VALUES (3127,0,0,1000,1450,@VRARE); -- Lungo-Nango Jadeshell (Very Rare, 1%)
-INSERT INTO `mob_droplist` VALUES (3127,0,0,1000,1453,@VRARE); -- Montiont Silverpiece (Very Rare, 1%)
-INSERT INTO `mob_droplist` VALUES (3127,0,0,1000,1456,@VRARE); -- One Hundred Byne Bill (Very Rare, 1%)
-INSERT INTO `mob_droplist` VALUES (3127,0,0,1000,2033,@VRARE); -- Warriors Mask -1 (Very Rare, 1%)
-INSERT INTO `mob_droplist` VALUES (3127,0,0,1000,2038,@VRARE); -- Melee Crown -1 (Very Rare, 1%)
-INSERT INTO `mob_droplist` VALUES (3127,0,0,1000,2043,@VRARE); -- Clerics Cap -1 (Very Rare, 1%)
-INSERT INTO `mob_droplist` VALUES (3127,0,0,1000,2048,@VRARE); -- Sorcerers Petasos -1 (Very Rare, 1%)
-INSERT INTO `mob_droplist` VALUES (3127,0,0,1000,2053,@VRARE); -- Duelists Chapeau -1 (Very Rare, 1%)
-INSERT INTO `mob_droplist` VALUES (3127,0,0,1000,2058,@VRARE); -- Assassins Bonnet -1 (Very Rare, 1%)
-INSERT INTO `mob_droplist` VALUES (3127,0,0,1000,2063,@VRARE); -- Valor Coronet -1 (Very Rare, 1%)
-INSERT INTO `mob_droplist` VALUES (3127,0,0,1000,2068,@VRARE); -- Abyss Burgeonet -1 (Very Rare, 1%)
-INSERT INTO `mob_droplist` VALUES (3127,0,0,1000,2073,@VRARE); -- Monster Helm -1 (Very Rare, 1%)
-INSERT INTO `mob_droplist` VALUES (3127,0,0,1000,2078,@VRARE); -- Bards Roundlet -1 (Very Rare, 1%)
-INSERT INTO `mob_droplist` VALUES (3127,0,0,1000,2083,@VRARE); -- Scouts Beret -1 (Very Rare, 1%)
-INSERT INTO `mob_droplist` VALUES (3127,0,0,1000,2088,@VRARE); -- Saotome Kabuto -1 (Very Rare, 1%)
-INSERT INTO `mob_droplist` VALUES (3127,0,0,1000,2093,@VRARE); -- Koga Hatsuburi -1 (Very Rare, 1%)
-INSERT INTO `mob_droplist` VALUES (3127,0,0,1000,2098,@VRARE); -- Wyrm Armet -1 (Very Rare, 1%)
-INSERT INTO `mob_droplist` VALUES (3127,0,0,1000,2103,@VRARE); -- Summoners Horn -1 (Very Rare, 1%)
-INSERT INTO `mob_droplist` VALUES (3127,0,0,1000,2662,@VRARE); -- Mirage Keffiyeh -1 (Very Rare, 1%)
-INSERT INTO `mob_droplist` VALUES (3127,0,0,1000,2667,@VRARE); -- Commodore Tricorne -1 (Very Rare, 1%)
-INSERT INTO `mob_droplist` VALUES (3127,0,0,1000,2672,@VRARE); -- Pantin Taj -1 (Very Rare, 1%)
-INSERT INTO `mob_droplist` VALUES (3127,0,0,1000,2718,@VRARE); -- Etoile Tiara -1 (Very Rare, 1%)
-INSERT INTO `mob_droplist` VALUES (3127,0,0,1000,2723,@VRARE); -- Argute Mortarboard -1 (Very Rare, 1%)
+INSERT INTO `mob_droplist` VALUES (3127,0,0,1000,10943,300);   -- Moepapa Medal (30.0%)
+-- INSERT INTO `mob_droplist` VALUES (3127,0,0,1000,3495,15);  -- Forgotten Touch (1.5%)
+INSERT INTO `mob_droplist` VALUES (3127,1,1,1000,1450,@RARE);  -- Lungo-Nango Jadeshell (Very Rare, 1%)
+INSERT INTO `mob_droplist` VALUES (3127,1,1,1000,1453,@RARE);  -- Montiont Silverpiece (Very Rare, 1%)
+INSERT INTO `mob_droplist` VALUES (3127,1,1,1000,1456,@RARE);  -- One Hundred Byne Bill (Very Rare, 1%)
 INSERT INTO `mob_droplist` VALUES (3127,2,0,1000,1449,0);      -- Tukuku Whiteshell (Steal)
 INSERT INTO `mob_droplist` VALUES (3127,2,0,1000,1452,0);      -- Ordelle Bronzepiece (Steal)
 INSERT INTO `mob_droplist` VALUES (3127,2,0,1000,1455,0);      -- One Byne Bill (Steal)
 
 -- ZoneID:  39 - Arch Christelle
-INSERT INTO `mob_droplist` VALUES (3128,0,0,1000,3495,@COMMON);  -- Forgotten Touch (Common, 15%)
+-- INSERT INTO `mob_droplist` VALUES (3128,0,0,1000,3495,@COMMON);  -- Forgotten Touch (Common, 15%)
 INSERT INTO `mob_droplist` VALUES (3128,0,0,1000,10754,@COMMON); -- Moepapa Ring (Common, 15%)
 INSERT INTO `mob_droplist` VALUES (3128,0,0,1000,10755,@COMMON); -- Moepapa Annulet (Common, 15%)
 INSERT INTO `mob_droplist` VALUES (3128,0,0,1000,10940,@COMMON); -- Moepapa Pendant (Common, 15%)
-INSERT INTO `mob_droplist` VALUES (3128,0,0,1000,1450,@VRARE);   -- Lungo-Nango Jadeshell (Very Rare, 1%)
-INSERT INTO `mob_droplist` VALUES (3128,0,0,1000,1453,@VRARE);   -- Montiont Silverpiece (Very Rare, 1%)
-INSERT INTO `mob_droplist` VALUES (3128,0,0,1000,1456,@VRARE);   -- One Hundred Byne Bill (Very Rare, 1%)
+INSERT INTO `mob_droplist` VALUES (3128,1,1,1000,1450,@ALWAYS);  -- Lungo-Nango Jadeshell (Very Rare, 1%)
+INSERT INTO `mob_droplist` VALUES (3128,1,1,1000,1453,@ALWAYS);  -- Montiont Silverpiece (Very Rare, 1%)
+INSERT INTO `mob_droplist` VALUES (3128,1,1,1000,1456,@ALWAYS);  -- One Hundred Byne Bill (Very Rare, 1%)
 
 -- ZoneID:   5 - Frost Flambeau
 INSERT INTO `mob_droplist` VALUES (3129,0,0,1000,2819,400); -- Aptant Of Fyrst (40.0%)
@@ -25091,10 +24937,10 @@ INSERT INTO `mob_droplist` VALUES (3129,0,0,1000,2820,200); -- Aptant Of Geoc (2
 INSERT INTO `mob_droplist` VALUES (3130,0,0,1000,11461,400);    -- Aifes Pumps (40.0%)
 INSERT INTO `mob_droplist` VALUES (3130,0,0,1000,10758,300);    -- Aifes Ring (30.0%)
 INSERT INTO `mob_droplist` VALUES (3130,0,0,1000,10759,200);    -- Aifes Annulet (20.0%)
-INSERT INTO `mob_droplist` VALUES (3130,0,0,1000,3496,@COMMON); -- Forgotten Journey (Common, 15%)
-INSERT INTO `mob_droplist` VALUES (3130,0,0,1000,1450,@VRARE);  -- Lungo-Nango Jadeshell (Very Rare, 1%)
-INSERT INTO `mob_droplist` VALUES (3130,0,0,1000,1453,@VRARE);  -- Montiont Silverpiece (Very Rare, 1%)
-INSERT INTO `mob_droplist` VALUES (3130,0,0,1000,1456,@VRARE);  -- One Hundred Byne Bill (Very Rare, 1%)
+-- INSERT INTO `mob_droplist` VALUES (3130,1,1,1000,3496,@COMMON); -- Forgotten Journey (Common, 15%)
+INSERT INTO `mob_droplist` VALUES (3130,1,1,1000,1450,@ALWAYS); -- Lungo-Nango Jadeshell (Very Rare, 1%)
+INSERT INTO `mob_droplist` VALUES (3130,1,1,1000,1453,@ALWAYS); -- Montiont Silverpiece (Very Rare, 1%)
+INSERT INTO `mob_droplist` VALUES (3130,1,1,1000,1456,@ALWAYS); -- One Hundred Byne Bill (Very Rare, 1%)
 
 -- ZoneID:  41 - Scolopendra
 INSERT INTO `mob_droplist` VALUES (3131,0,0,1000,5903,850);     -- Vial Of Sea Monk Venom (85.0%)
@@ -25198,33 +25044,10 @@ INSERT INTO `mob_droplist` VALUES (3133,2,0,1000,1455,0);       -- One Byne Bill
 -- ZoneID:  41 - Lost Scolopendra
 INSERT INTO `mob_droplist` VALUES (3134,0,0,1000,3481,@ALWAYS); -- Fiendish Tome Ii Chapter 12 (Always, 100%)
 INSERT INTO `mob_droplist` VALUES (3134,0,0,1000,10983,300);    -- Aifes Mantle (30.0%)
-INSERT INTO `mob_droplist` VALUES (3134,0,0,1000,1449,250);     -- Tukuku Whiteshell (25.0%)
-INSERT INTO `mob_droplist` VALUES (3134,0,0,1000,1452,250);     -- Ordelle Bronzepiece (25.0%)
-INSERT INTO `mob_droplist` VALUES (3134,0,0,1000,1455,250);     -- One Byne Bill (25.0%)
-INSERT INTO `mob_droplist` VALUES (3134,0,0,1000,3496,@COMMON); -- Forgotten Journey (Common, 15%)
-INSERT INTO `mob_droplist` VALUES (3134,0,0,1000,1450,@VRARE);  -- Lungo-Nango Jadeshell (Very Rare, 1%)
-INSERT INTO `mob_droplist` VALUES (3134,0,0,1000,1453,@VRARE);  -- Montiont Silverpiece (Very Rare, 1%)
-INSERT INTO `mob_droplist` VALUES (3134,0,0,1000,1456,@VRARE);  -- One Hundred Byne Bill (Very Rare, 1%)
-INSERT INTO `mob_droplist` VALUES (3134,0,0,1000,2037,@VRARE);  -- Warriors Calligae -1 (Very Rare, 1%)
-INSERT INTO `mob_droplist` VALUES (3134,0,0,1000,2042,@VRARE);  -- Melee Gaiters -1 (Very Rare, 1%)
-INSERT INTO `mob_droplist` VALUES (3134,0,0,1000,2047,@VRARE);  -- Clerics Duckbills -1 (Very Rare, 1%)
-INSERT INTO `mob_droplist` VALUES (3134,0,0,1000,2052,@VRARE);  -- Sorcerers Sabots -1 (Very Rare, 1%)
-INSERT INTO `mob_droplist` VALUES (3134,0,0,1000,2057,@VRARE);  -- Duelists Boots -1 (Very Rare, 1%)
-INSERT INTO `mob_droplist` VALUES (3134,0,0,1000,2062,@VRARE);  -- Assassins Poulaines -1 (Very Rare, 1%)
-INSERT INTO `mob_droplist` VALUES (3134,0,0,1000,2067,@VRARE);  -- Valor Leggings -1 (Very Rare, 1%)
-INSERT INTO `mob_droplist` VALUES (3134,0,0,1000,2072,@VRARE);  -- Abyss Sollerets -1 (Very Rare, 1%)
-INSERT INTO `mob_droplist` VALUES (3134,0,0,1000,2077,@VRARE);  -- Monster Gaiters -1 (Very Rare, 1%)
-INSERT INTO `mob_droplist` VALUES (3134,0,0,1000,2082,@VRARE);  -- Bards Slippers -1 (Very Rare, 1%)
-INSERT INTO `mob_droplist` VALUES (3134,0,0,1000,2087,@VRARE);  -- Scouts Socks -1 (Very Rare, 1%)
-INSERT INTO `mob_droplist` VALUES (3134,0,0,1000,2092,@VRARE);  -- Saotome Sune-Ate -1 (Very Rare, 1%)
-INSERT INTO `mob_droplist` VALUES (3134,0,0,1000,2097,@VRARE);  -- Koga Kyahan -1 (Very Rare, 1%)
-INSERT INTO `mob_droplist` VALUES (3134,0,0,1000,2102,@VRARE);  -- Wyrm Greaves -1 (Very Rare, 1%)
-INSERT INTO `mob_droplist` VALUES (3134,0,0,1000,2107,@VRARE);  -- Summoners Pigaches -1 (Very Rare, 1%)
-INSERT INTO `mob_droplist` VALUES (3134,0,0,1000,2666,@VRARE);  -- Mirage Charuqs -1 (Very Rare, 1%)
-INSERT INTO `mob_droplist` VALUES (3134,0,0,1000,2671,@VRARE);  -- Commodore Bottes -1 (Very Rare, 1%)
-INSERT INTO `mob_droplist` VALUES (3134,0,0,1000,2676,@VRARE);  -- Pantin Babouches -1 (Very Rare, 1%)
-INSERT INTO `mob_droplist` VALUES (3134,0,0,1000,2722,@VRARE);  -- Etoile Toe Shoes -1 (Very Rare, 1%)
-INSERT INTO `mob_droplist` VALUES (3134,0,0,1000,2727,@VRARE);  -- Argute Loafers -1 (Very Rare, 1%)
+-- INSERT INTO `mob_droplist` VALUES (3134,0,0,1000,3496,@COMMON); -- Forgotten Journey (Common, 15%)
+INSERT INTO `mob_droplist` VALUES (3134,1,1,1000,1450,@RARE);  -- Lungo-Nango Jadeshell (Very Rare, 1%)
+INSERT INTO `mob_droplist` VALUES (3134,1,1,1000,1453,@RARE);  -- Montiont Silverpiece (Very Rare, 1%)
+INSERT INTO `mob_droplist` VALUES (3134,1,1,1000,1456,@RARE);  -- One Hundred Byne Bill (Very Rare, 1%)
 INSERT INTO `mob_droplist` VALUES (3134,2,0,1000,1449,0);       -- Tukuku Whiteshell (Steal)
 INSERT INTO `mob_droplist` VALUES (3134,2,0,1000,1452,0);       -- Ordelle Bronzepiece (Steal)
 INSERT INTO `mob_droplist` VALUES (3134,2,0,1000,1455,0);       -- One Byne Bill (Steal)
@@ -25232,33 +25055,10 @@ INSERT INTO `mob_droplist` VALUES (3134,2,0,1000,1455,0);       -- One Byne Bill
 -- ZoneID:  41 - Lost Stringes
 INSERT INTO `mob_droplist` VALUES (3135,0,0,1000,3480,@ALWAYS); -- Fiendish Tome Ii Chapter 11 (Always, 100%)
 INSERT INTO `mob_droplist` VALUES (3135,0,0,1000,10942,300);    -- Aifes Medal (30.0%)
-INSERT INTO `mob_droplist` VALUES (3135,0,0,1000,1449,250);     -- Tukuku Whiteshell (25.0%)
-INSERT INTO `mob_droplist` VALUES (3135,0,0,1000,1452,250);     -- Ordelle Bronzepiece (25.0%)
-INSERT INTO `mob_droplist` VALUES (3135,0,0,1000,1455,250);     -- One Byne Bill (25.0%)
-INSERT INTO `mob_droplist` VALUES (3135,0,0,1000,3496,@COMMON); -- Forgotten Journey (Common, 15%)
-INSERT INTO `mob_droplist` VALUES (3135,0,0,1000,1450,@VRARE);  -- Lungo-Nango Jadeshell (Very Rare, 1%)
-INSERT INTO `mob_droplist` VALUES (3135,0,0,1000,1453,@VRARE);  -- Montiont Silverpiece (Very Rare, 1%)
-INSERT INTO `mob_droplist` VALUES (3135,0,0,1000,1456,@VRARE);  -- One Hundred Byne Bill (Very Rare, 1%)
-INSERT INTO `mob_droplist` VALUES (3135,0,0,1000,2037,@VRARE);  -- Warriors Calligae -1 (Very Rare, 1%)
-INSERT INTO `mob_droplist` VALUES (3135,0,0,1000,2042,@VRARE);  -- Melee Gaiters -1 (Very Rare, 1%)
-INSERT INTO `mob_droplist` VALUES (3135,0,0,1000,2047,@VRARE);  -- Clerics Duckbills -1 (Very Rare, 1%)
-INSERT INTO `mob_droplist` VALUES (3135,0,0,1000,2052,@VRARE);  -- Sorcerers Sabots -1 (Very Rare, 1%)
-INSERT INTO `mob_droplist` VALUES (3135,0,0,1000,2057,@VRARE);  -- Duelists Boots -1 (Very Rare, 1%)
-INSERT INTO `mob_droplist` VALUES (3135,0,0,1000,2062,@VRARE);  -- Assassins Poulaines -1 (Very Rare, 1%)
-INSERT INTO `mob_droplist` VALUES (3135,0,0,1000,2067,@VRARE);  -- Valor Leggings -1 (Very Rare, 1%)
-INSERT INTO `mob_droplist` VALUES (3135,0,0,1000,2072,@VRARE);  -- Abyss Sollerets -1 (Very Rare, 1%)
-INSERT INTO `mob_droplist` VALUES (3135,0,0,1000,2077,@VRARE);  -- Monster Gaiters -1 (Very Rare, 1%)
-INSERT INTO `mob_droplist` VALUES (3135,0,0,1000,2082,@VRARE);  -- Bards Slippers -1 (Very Rare, 1%)
-INSERT INTO `mob_droplist` VALUES (3135,0,0,1000,2087,@VRARE);  -- Scouts Socks -1 (Very Rare, 1%)
-INSERT INTO `mob_droplist` VALUES (3135,0,0,1000,2092,@VRARE);  -- Saotome Sune-Ate -1 (Very Rare, 1%)
-INSERT INTO `mob_droplist` VALUES (3135,0,0,1000,2097,@VRARE);  -- Koga Kyahan -1 (Very Rare, 1%)
-INSERT INTO `mob_droplist` VALUES (3135,0,0,1000,2102,@VRARE);  -- Wyrm Greaves -1 (Very Rare, 1%)
-INSERT INTO `mob_droplist` VALUES (3135,0,0,1000,2107,@VRARE);  -- Summoners Pigaches -1 (Very Rare, 1%)
-INSERT INTO `mob_droplist` VALUES (3135,0,0,1000,2666,@VRARE);  -- Mirage Charuqs -1 (Very Rare, 1%)
-INSERT INTO `mob_droplist` VALUES (3135,0,0,1000,2671,@VRARE);  -- Commodore Bottes -1 (Very Rare, 1%)
-INSERT INTO `mob_droplist` VALUES (3135,0,0,1000,2676,@VRARE);  -- Pantin Babouches -1 (Very Rare, 1%)
-INSERT INTO `mob_droplist` VALUES (3135,0,0,1000,2722,@VRARE);  -- Etoile Toe Shoes -1 (Very Rare, 1%)
-INSERT INTO `mob_droplist` VALUES (3135,0,0,1000,2727,@VRARE);  -- Argute Loafers -1 (Very Rare, 1%)
+-- INSERT INTO `mob_droplist` VALUES (3135,0,0,1000,3496,@COMMON); -- Forgotten Journey (Common, 15%)
+INSERT INTO `mob_droplist` VALUES (3135,1,1,1000,1450,@RARE);  -- Lungo-Nango Jadeshell (Very Rare, 1%)
+INSERT INTO `mob_droplist` VALUES (3135,1,1,1000,1453,@RARE);  -- Montiont Silverpiece (Very Rare, 1%)
+INSERT INTO `mob_droplist` VALUES (3135,1,1,1000,1456,@RARE);  -- One Hundred Byne Bill (Very Rare, 1%)
 INSERT INTO `mob_droplist` VALUES (3135,2,0,1000,1449,0);       -- Tukuku Whiteshell (Steal)
 INSERT INTO `mob_droplist` VALUES (3135,2,0,1000,1452,0);       -- Ordelle Bronzepiece (Steal)
 INSERT INTO `mob_droplist` VALUES (3135,2,0,1000,1455,0);       -- One Byne Bill (Steal)
@@ -25266,33 +25066,10 @@ INSERT INTO `mob_droplist` VALUES (3135,2,0,1000,1455,0);       -- One Byne Bill
 -- ZoneID:  41 - Lost Suttung
 INSERT INTO `mob_droplist` VALUES (3136,0,0,1000,3482,@ALWAYS); -- Fiendish Tome Ii Chapter 13 (Always, 100%)
 INSERT INTO `mob_droplist` VALUES (3136,0,0,1000,19738,300);    -- Aifes Bow (30.0%)
-INSERT INTO `mob_droplist` VALUES (3136,0,0,1000,1449,250);     -- Tukuku Whiteshell (25.0%)
-INSERT INTO `mob_droplist` VALUES (3136,0,0,1000,1452,250);     -- Ordelle Bronzepiece (25.0%)
-INSERT INTO `mob_droplist` VALUES (3136,0,0,1000,1455,250);     -- One Byne Bill (25.0%)
-INSERT INTO `mob_droplist` VALUES (3136,0,0,1000,3496,@COMMON); -- Forgotten Journey (Common, 15%)
-INSERT INTO `mob_droplist` VALUES (3136,0,0,1000,1450,@VRARE);  -- Lungo-Nango Jadeshell (Very Rare, 1%)
-INSERT INTO `mob_droplist` VALUES (3136,0,0,1000,1453,@VRARE);  -- Montiont Silverpiece (Very Rare, 1%)
-INSERT INTO `mob_droplist` VALUES (3136,0,0,1000,1456,@VRARE);  -- One Hundred Byne Bill (Very Rare, 1%)
-INSERT INTO `mob_droplist` VALUES (3136,0,0,1000,2037,@VRARE);  -- Warriors Calligae -1 (Very Rare, 1%)
-INSERT INTO `mob_droplist` VALUES (3136,0,0,1000,2042,@VRARE);  -- Melee Gaiters -1 (Very Rare, 1%)
-INSERT INTO `mob_droplist` VALUES (3136,0,0,1000,2047,@VRARE);  -- Clerics Duckbills -1 (Very Rare, 1%)
-INSERT INTO `mob_droplist` VALUES (3136,0,0,1000,2052,@VRARE);  -- Sorcerers Sabots -1 (Very Rare, 1%)
-INSERT INTO `mob_droplist` VALUES (3136,0,0,1000,2057,@VRARE);  -- Duelists Boots -1 (Very Rare, 1%)
-INSERT INTO `mob_droplist` VALUES (3136,0,0,1000,2062,@VRARE);  -- Assassins Poulaines -1 (Very Rare, 1%)
-INSERT INTO `mob_droplist` VALUES (3136,0,0,1000,2067,@VRARE);  -- Valor Leggings -1 (Very Rare, 1%)
-INSERT INTO `mob_droplist` VALUES (3136,0,0,1000,2072,@VRARE);  -- Abyss Sollerets -1 (Very Rare, 1%)
-INSERT INTO `mob_droplist` VALUES (3136,0,0,1000,2077,@VRARE);  -- Monster Gaiters -1 (Very Rare, 1%)
-INSERT INTO `mob_droplist` VALUES (3136,0,0,1000,2082,@VRARE);  -- Bards Slippers -1 (Very Rare, 1%)
-INSERT INTO `mob_droplist` VALUES (3136,0,0,1000,2087,@VRARE);  -- Scouts Socks -1 (Very Rare, 1%)
-INSERT INTO `mob_droplist` VALUES (3136,0,0,1000,2092,@VRARE);  -- Saotome Sune-Ate -1 (Very Rare, 1%)
-INSERT INTO `mob_droplist` VALUES (3136,0,0,1000,2097,@VRARE);  -- Koga Kyahan -1 (Very Rare, 1%)
-INSERT INTO `mob_droplist` VALUES (3136,0,0,1000,2102,@VRARE);  -- Wyrm Greaves -1 (Very Rare, 1%)
-INSERT INTO `mob_droplist` VALUES (3136,0,0,1000,2107,@VRARE);  -- Summoners Pigaches -1 (Very Rare, 1%)
-INSERT INTO `mob_droplist` VALUES (3136,0,0,1000,2666,@VRARE);  -- Mirage Charuqs -1 (Very Rare, 1%)
-INSERT INTO `mob_droplist` VALUES (3136,0,0,1000,2671,@VRARE);  -- Commodore Bottes -1 (Very Rare, 1%)
-INSERT INTO `mob_droplist` VALUES (3136,0,0,1000,2676,@VRARE);  -- Pantin Babouches -1 (Very Rare, 1%)
-INSERT INTO `mob_droplist` VALUES (3136,0,0,1000,2722,@VRARE);  -- Etoile Toe Shoes -1 (Very Rare, 1%)
-INSERT INTO `mob_droplist` VALUES (3136,0,0,1000,2727,@VRARE);  -- Argute Loafers -1 (Very Rare, 1%)
+-- INSERT INTO `mob_droplist` VALUES (3136,0,0,1000,3496,@COMMON); -- Forgotten Journey (Common, 15%)
+INSERT INTO `mob_droplist` VALUES (3136,1,1,1000,1450,@RARE);  -- Lungo-Nango Jadeshell (Very Rare, 1%)
+INSERT INTO `mob_droplist` VALUES (3136,1,1,1000,1453,@RARE);  -- Montiont Silverpiece (Very Rare, 1%)
+INSERT INTO `mob_droplist` VALUES (3136,1,1,1000,1456,@RARE);  -- One Hundred Byne Bill (Very Rare, 1%)
 INSERT INTO `mob_droplist` VALUES (3136,2,0,1000,1449,0);       -- Tukuku Whiteshell (Steal)
 INSERT INTO `mob_droplist` VALUES (3136,2,0,1000,1452,0);       -- Ordelle Bronzepiece (Steal)
 INSERT INTO `mob_droplist` VALUES (3136,2,0,1000,1455,0);       -- One Byne Bill (Steal)
@@ -25305,11 +25082,11 @@ INSERT INTO `mob_droplist` VALUES (3137,0,0,1000,10944,300);      -- Portus Coll
 INSERT INTO `mob_droplist` VALUES (3137,0,0,1000,11924,300);      -- Alucinor Mitts (30.0%)
 INSERT INTO `mob_droplist` VALUES (3137,0,0,1000,10761,@COMMON);  -- Portus Annulet (Common, 15%)
 INSERT INTO `mob_droplist` VALUES (3137,0,0,1000,10760,125);      -- Portus Ring (12.5%)
-INSERT INTO `mob_droplist` VALUES (3137,0,0,1000,3493,@UNCOMMON); -- Forgotten Thought (Uncommon, 10%)
-INSERT INTO `mob_droplist` VALUES (3137,0,0,1000,3494,@UNCOMMON); -- Forgotten Hope (Uncommon, 10%)
-INSERT INTO `mob_droplist` VALUES (3137,0,0,1000,1450,20);        -- Lungo-Nango Jadeshell (2.0%)
-INSERT INTO `mob_droplist` VALUES (3137,0,0,1000,1453,20);        -- Montiont Silverpiece (2.0%)
-INSERT INTO `mob_droplist` VALUES (3137,0,0,1000,1456,20);        -- One Hundred Byne Bill (2.0%)
+-- INSERT INTO `mob_droplist` VALUES (3137,0,0,1000,3493,@UNCOMMON); -- Forgotten Thought (Uncommon, 10%)
+-- INSERT INTO `mob_droplist` VALUES (3137,0,0,1000,3494,@UNCOMMON); -- Forgotten Hope (Uncommon, 10%)
+INSERT INTO `mob_droplist` VALUES (3137,0,0,1000,1450,@ALWAYS);        -- Lungo-Nango Jadeshell (100.0%)
+INSERT INTO `mob_droplist` VALUES (3137,0,0,1000,1453,@ALWAYS);        -- Montiont Silverpiece (100.0%)
+INSERT INTO `mob_droplist` VALUES (3137,0,0,1000,1456,@ALWAYS);        -- One Hundred Byne Bill (100.0%)
 
 -- ZoneID:  38 - Nergal
 -- ZoneID:  38 - Bata
@@ -26095,7 +25872,7 @@ INSERT INTO `mob_droplist` VALUES (3206,0,0,1000,2166,@SRARE);  -- Lock Of Marid
 
 -- ZoneID: 134 - Angra Mainyu
 INSERT INTO `mob_droplist` VALUES (3207,0,0,1000,3424,@ALWAYS); -- Fiendish Tome Chapter 21 (Always, 100%)
-INSERT INTO `mob_droplist` VALUES (3207,0,0,1000,3493,@RARE);   -- Forgotten Thought (Rare, 5%)
+-- INSERT INTO `mob_droplist` VALUES (3207,0,0,1000,3493,@RARE);   -- Forgotten Thought (Rare, 5%)
 INSERT INTO `mob_droplist` VALUES (3207,0,0,1000,1450,@SRARE);  -- Lungo-Nango Jadeshell (Super Rare, 0.5%)
 INSERT INTO `mob_droplist` VALUES (3207,0,0,1000,1453,@SRARE);  -- Montiont Silverpiece (Super Rare, 0.5%)
 INSERT INTO `mob_droplist` VALUES (3207,0,0,1000,1456,@SRARE);  -- One Hundred Byne Bill (Super Rare, 0.5%)
@@ -26115,69 +25892,25 @@ INSERT INTO `mob_droplist` VALUES (3209,0,0,1000,1592,@VCOMMON); -- Cactuar Root
 
 -- ZoneID: 134 - Hitaume
 INSERT INTO `mob_droplist` VALUES (3210,0,0,1000,11918,@VCOMMON); -- Khthonios Gloves (Very Common, 24%)
-INSERT INTO `mob_droplist` VALUES (3210,0,0,1000,1449,@UNCOMMON); -- Tukuku Whiteshell (Uncommon, 10%)
-INSERT INTO `mob_droplist` VALUES (3210,0,0,1000,1452,@UNCOMMON); -- Ordelle Bronzepiece (Uncommon, 10%)
-INSERT INTO `mob_droplist` VALUES (3210,0,0,1000,1455,@UNCOMMON); -- One Byne Bill (Uncommon, 10%)
-INSERT INTO `mob_droplist` VALUES (3210,0,0,1000,3493,@RARE);     -- Forgotten Thought (Rare, 5%)
+-- INSERT INTO `mob_droplist` VALUES (3210,0,0,1000,3493,@RARE);     -- Forgotten Thought (Rare, 5%)
 INSERT INTO `mob_droplist` VALUES (3210,0,0,1000,1450,@VRARE);    -- Lungo-Nango Jadeshell (Very Rare, 1%)
 INSERT INTO `mob_droplist` VALUES (3210,0,0,1000,1453,@VRARE);    -- Montiont Silverpiece (Very Rare, 1%)
 INSERT INTO `mob_droplist` VALUES (3210,0,0,1000,1456,@VRARE);    -- One Hundred Byne Bill (Very Rare, 1%)
-INSERT INTO `mob_droplist` VALUES (3210,0,0,1000,11292,@VRARE);   -- Mirage Jubbah (Very Rare, 1%)
-INSERT INTO `mob_droplist` VALUES (3210,0,0,1000,11295,@VRARE);   -- Commodore Frac (Very Rare, 1%)
-INSERT INTO `mob_droplist` VALUES (3210,0,0,1000,11298,@VRARE);   -- Pantin Tobe (Very Rare, 1%)
-INSERT INTO `mob_droplist` VALUES (3210,0,0,1000,11307,@VRARE);   -- Argute Gown (Very Rare, 1%)
-INSERT INTO `mob_droplist` VALUES (3210,0,0,1000,15088,@VRARE);   -- Melee Cyclas (Very Rare, 1%)
-INSERT INTO `mob_droplist` VALUES (3210,0,0,1000,15089,@VRARE);   -- Clerics Briault (Very Rare, 1%)
-INSERT INTO `mob_droplist` VALUES (3210,0,0,1000,15090,@VRARE);   -- Sorcerers Coat (Very Rare, 1%)
-INSERT INTO `mob_droplist` VALUES (3210,0,0,1000,15091,@VRARE);   -- Duelists Tabard (Very Rare, 1%)
-INSERT INTO `mob_droplist` VALUES (3210,0,0,1000,15094,@VRARE);   -- Abyss Cuirass (Very Rare, 1%)
-INSERT INTO `mob_droplist` VALUES (3210,0,0,1000,15096,@VRARE);   -- Bards Justaucorps (Very Rare, 1%)
-INSERT INTO `mob_droplist` VALUES (3210,0,0,1000,15098,@VRARE);   -- Saotome Domaru (Very Rare, 1%)
-INSERT INTO `mob_droplist` VALUES (3210,0,0,1000,15099,@VRARE);   -- Koga Chainmail (Very Rare, 1%)
-INSERT INTO `mob_droplist` VALUES (3210,0,0,1000,15100,@VRARE);   -- Wyrm Mail (Very Rare, 1%)
-INSERT INTO `mob_droplist` VALUES (3210,0,0,1000,15101,@VRARE);   -- Summoners Doublet (Very Rare, 1%)
-INSERT INTO `mob_droplist` VALUES (3210,0,0,1000,15117,@VRARE);   -- Warriors Cuisses (Very Rare, 1%)
-INSERT INTO `mob_droplist` VALUES (3210,0,0,1000,15122,@VRARE);   -- Assassins Culottes (Very Rare, 1%)
-INSERT INTO `mob_droplist` VALUES (3210,0,0,1000,15123,@VRARE);   -- Valor Breeches (Very Rare, 1%)
-INSERT INTO `mob_droplist` VALUES (3210,0,0,1000,15140,@VRARE);   -- Monster Gaiters (Very Rare, 1%)
-INSERT INTO `mob_droplist` VALUES (3210,0,0,1000,15142,@VRARE);   -- Scouts Socks (Very Rare, 1%)
-INSERT INTO `mob_droplist` VALUES (3210,0,0,1000,16360,@VRARE);   -- Etoile Tights (Very Rare, 1%)
 INSERT INTO `mob_droplist` VALUES (3210,2,0,1000,1449,0);         -- Tukuku Whiteshell (Steal)
 INSERT INTO `mob_droplist` VALUES (3210,2,0,1000,1452,0);         -- Ordelle Bronzepiece (Steal)
 INSERT INTO `mob_droplist` VALUES (3210,2,0,1000,1455,0);         -- One Byne Bill (Steal)
+INSERT INTO `mob_droplist` VALUES (3210,0,0,1000,3427,@ALWAYS);   -- Fiendish Tome Chapter 24
 
 -- ZoneID: 134 - Cavanneche
 INSERT INTO `mob_droplist` VALUES (3211,0,0,1000,11821,@VCOMMON); -- Khthonios Helm (Very Common, 24%)
-INSERT INTO `mob_droplist` VALUES (3211,0,0,1000,1449,@UNCOMMON); -- Tukuku Whiteshell (Uncommon, 10%)
-INSERT INTO `mob_droplist` VALUES (3211,0,0,1000,1452,@UNCOMMON); -- Ordelle Bronzepiece (Uncommon, 10%)
-INSERT INTO `mob_droplist` VALUES (3211,0,0,1000,1455,@UNCOMMON); -- One Byne Bill (Uncommon, 10%)
-INSERT INTO `mob_droplist` VALUES (3211,0,0,1000,3493,@RARE);     -- Forgotten Thought (Rare, 5%)
+-- INSERT INTO `mob_droplist` VALUES (3211,0,0,1000,3493,@RARE);     -- Forgotten Thought (Rare, 5%)
 INSERT INTO `mob_droplist` VALUES (3211,0,0,1000,1450,@VRARE);    -- Lungo-Nango Jadeshell (Very Rare, 1%)
 INSERT INTO `mob_droplist` VALUES (3211,0,0,1000,1453,@VRARE);    -- Montiont Silverpiece (Very Rare, 1%)
 INSERT INTO `mob_droplist` VALUES (3211,0,0,1000,1456,@VRARE);    -- One Hundred Byne Bill (Very Rare, 1%)
-INSERT INTO `mob_droplist` VALUES (3211,0,0,1000,11292,@VRARE);   -- Mirage Jubbah (Very Rare, 1%)
-INSERT INTO `mob_droplist` VALUES (3211,0,0,1000,11295,@VRARE);   -- Commodore Frac (Very Rare, 1%)
-INSERT INTO `mob_droplist` VALUES (3211,0,0,1000,11298,@VRARE);   -- Pantin Tobe (Very Rare, 1%)
-INSERT INTO `mob_droplist` VALUES (3211,0,0,1000,11307,@VRARE);   -- Argute Gown (Very Rare, 1%)
-INSERT INTO `mob_droplist` VALUES (3211,0,0,1000,15088,@VRARE);   -- Melee Cyclas (Very Rare, 1%)
-INSERT INTO `mob_droplist` VALUES (3211,0,0,1000,15089,@VRARE);   -- Clerics Briault (Very Rare, 1%)
-INSERT INTO `mob_droplist` VALUES (3211,0,0,1000,15090,@VRARE);   -- Sorcerers Coat (Very Rare, 1%)
-INSERT INTO `mob_droplist` VALUES (3211,0,0,1000,15091,@VRARE);   -- Duelists Tabard (Very Rare, 1%)
-INSERT INTO `mob_droplist` VALUES (3211,0,0,1000,15094,@VRARE);   -- Abyss Cuirass (Very Rare, 1%)
-INSERT INTO `mob_droplist` VALUES (3211,0,0,1000,15096,@VRARE);   -- Bards Justaucorps (Very Rare, 1%)
-INSERT INTO `mob_droplist` VALUES (3211,0,0,1000,15098,@VRARE);   -- Saotome Domaru (Very Rare, 1%)
-INSERT INTO `mob_droplist` VALUES (3211,0,0,1000,15099,@VRARE);   -- Koga Chainmail (Very Rare, 1%)
-INSERT INTO `mob_droplist` VALUES (3211,0,0,1000,15100,@VRARE);   -- Wyrm Mail (Very Rare, 1%)
-INSERT INTO `mob_droplist` VALUES (3211,0,0,1000,15101,@VRARE);   -- Summoners Doublet (Very Rare, 1%)
-INSERT INTO `mob_droplist` VALUES (3211,0,0,1000,15117,@VRARE);   -- Warriors Cuisses (Very Rare, 1%)
-INSERT INTO `mob_droplist` VALUES (3211,0,0,1000,15122,@VRARE);   -- Assassins Culottes (Very Rare, 1%)
-INSERT INTO `mob_droplist` VALUES (3211,0,0,1000,15123,@VRARE);   -- Valor Breeches (Very Rare, 1%)
-INSERT INTO `mob_droplist` VALUES (3211,0,0,1000,15140,@VRARE);   -- Monster Gaiters (Very Rare, 1%)
-INSERT INTO `mob_droplist` VALUES (3211,0,0,1000,15142,@VRARE);   -- Scouts Socks (Very Rare, 1%)
-INSERT INTO `mob_droplist` VALUES (3211,0,0,1000,16360,@VRARE);   -- Etoile Tights (Very Rare, 1%)
 INSERT INTO `mob_droplist` VALUES (3211,2,0,1000,1449,0);         -- Tukuku Whiteshell (Steal)
 INSERT INTO `mob_droplist` VALUES (3211,2,0,1000,1452,0);         -- Ordelle Bronzepiece (Steal)
 INSERT INTO `mob_droplist` VALUES (3211,2,0,1000,1455,0);         -- One Byne Bill (Steal)
+INSERT INTO `mob_droplist` VALUES (3211,0,0,1000,3427,@ALWAYS);   -- Fiendish Tome Chapter 24
 
 -- ZoneID: 134 - Arch Angra Mainyu
 INSERT INTO `mob_droplist` VALUES (3212,0,0,1000,3493,@VCOMMON);  -- Forgotten Thought (Very Common, 24%)
@@ -26416,69 +26149,27 @@ INSERT INTO `mob_droplist` VALUES (3220,2,0,1000,1455,0);         -- One Byne Bi
 
 -- ZoneID: 134 - Taquede
 INSERT INTO `mob_droplist` VALUES (3221,0,0,1000,11456,@VCOMMON); -- Ryuga Sune-Ate (Very Common, 24%)
-INSERT INTO `mob_droplist` VALUES (3221,0,0,1000,1449,@UNCOMMON); -- Tukuku Whiteshell (Uncommon, 10%)
-INSERT INTO `mob_droplist` VALUES (3221,0,0,1000,1452,@UNCOMMON); -- Ordelle Bronzepiece (Uncommon, 10%)
-INSERT INTO `mob_droplist` VALUES (3221,0,0,1000,1455,@UNCOMMON); -- One Byne Bill (Uncommon, 10%)
-INSERT INTO `mob_droplist` VALUES (3221,0,0,1000,3493,@RARE);     -- Forgotten Thought (Rare, 5%)
+-- INSERT INTO `mob_droplist` VALUES (3221,0,0,1000,3493,@RARE);     -- Forgotten Thought (Rare, 5%)
 INSERT INTO `mob_droplist` VALUES (3221,0,0,1000,1450,@VRARE);    -- Lungo-Nango Jadeshell (Very Rare, 1%)
 INSERT INTO `mob_droplist` VALUES (3221,0,0,1000,1453,@VRARE);    -- Montiont Silverpiece (Very Rare, 1%)
 INSERT INTO `mob_droplist` VALUES (3221,0,0,1000,1456,@VRARE);    -- One Hundred Byne Bill (Very Rare, 1%)
-INSERT INTO `mob_droplist` VALUES (3221,0,0,1000,11292,@VRARE);   -- Mirage Jubbah (Very Rare, 1%)
-INSERT INTO `mob_droplist` VALUES (3221,0,0,1000,11295,@VRARE);   -- Commodore Frac (Very Rare, 1%)
-INSERT INTO `mob_droplist` VALUES (3221,0,0,1000,11298,@VRARE);   -- Pantin Tobe (Very Rare, 1%)
-INSERT INTO `mob_droplist` VALUES (3221,0,0,1000,11307,@VRARE);   -- Argute Gown (Very Rare, 1%)
-INSERT INTO `mob_droplist` VALUES (3221,0,0,1000,15088,@VRARE);   -- Melee Cyclas (Very Rare, 1%)
-INSERT INTO `mob_droplist` VALUES (3221,0,0,1000,15089,@VRARE);   -- Clerics Briault (Very Rare, 1%)
-INSERT INTO `mob_droplist` VALUES (3221,0,0,1000,15090,@VRARE);   -- Sorcerers Coat (Very Rare, 1%)
-INSERT INTO `mob_droplist` VALUES (3221,0,0,1000,15091,@VRARE);   -- Duelists Tabard (Very Rare, 1%)
-INSERT INTO `mob_droplist` VALUES (3221,0,0,1000,15094,@VRARE);   -- Abyss Cuirass (Very Rare, 1%)
-INSERT INTO `mob_droplist` VALUES (3221,0,0,1000,15096,@VRARE);   -- Bards Justaucorps (Very Rare, 1%)
-INSERT INTO `mob_droplist` VALUES (3221,0,0,1000,15098,@VRARE);   -- Saotome Domaru (Very Rare, 1%)
-INSERT INTO `mob_droplist` VALUES (3221,0,0,1000,15099,@VRARE);   -- Koga Chainmail (Very Rare, 1%)
-INSERT INTO `mob_droplist` VALUES (3221,0,0,1000,15100,@VRARE);   -- Wyrm Mail (Very Rare, 1%)
-INSERT INTO `mob_droplist` VALUES (3221,0,0,1000,15101,@VRARE);   -- Summoners Doublet (Very Rare, 1%)
-INSERT INTO `mob_droplist` VALUES (3221,0,0,1000,15117,@VRARE);   -- Warriors Cuisses (Very Rare, 1%)
-INSERT INTO `mob_droplist` VALUES (3221,0,0,1000,15122,@VRARE);   -- Assassins Culottes (Very Rare, 1%)
-INSERT INTO `mob_droplist` VALUES (3221,0,0,1000,15123,@VRARE);   -- Valor Breeches (Very Rare, 1%)
-INSERT INTO `mob_droplist` VALUES (3221,0,0,1000,15140,@VRARE);   -- Monster Gaiters (Very Rare, 1%)
-INSERT INTO `mob_droplist` VALUES (3221,0,0,1000,15142,@VRARE);   -- Scouts Socks (Very Rare, 1%)
-INSERT INTO `mob_droplist` VALUES (3221,0,0,1000,16360,@VRARE);   -- Etoile Tights (Very Rare, 1%)
 INSERT INTO `mob_droplist` VALUES (3221,2,0,1000,1449,0);         -- Tukuku Whiteshell (Steal)
 INSERT INTO `mob_droplist` VALUES (3221,2,0,1000,1452,0);         -- Ordelle Bronzepiece (Steal)
 INSERT INTO `mob_droplist` VALUES (3221,2,0,1000,1455,0);         -- One Byne Bill (Steal)
+INSERT INTO `mob_droplist` VALUES (3221,0,0,1000,3425,@ALWAYS);   -- Fiendish Tome Chapter 22
+
 
 -- ZoneID: 134 - Pignonpausard
 INSERT INTO `mob_droplist` VALUES (3222,0,0,1000,11820,@VCOMMON); -- Khthonios Mask (Very Common, 24%)
-INSERT INTO `mob_droplist` VALUES (3222,0,0,1000,1449,@UNCOMMON); -- Tukuku Whiteshell (Uncommon, 10%)
-INSERT INTO `mob_droplist` VALUES (3222,0,0,1000,1452,@UNCOMMON); -- Ordelle Bronzepiece (Uncommon, 10%)
-INSERT INTO `mob_droplist` VALUES (3222,0,0,1000,1455,@UNCOMMON); -- One Byne Bill (Uncommon, 10%)
-INSERT INTO `mob_droplist` VALUES (3222,0,0,1000,3493,@RARE);     -- Forgotten Thought (Rare, 5%)
+-- INSERT INTO `mob_droplist` VALUES (3222,0,0,1000,3493,@RARE);     -- Forgotten Thought (Rare, 5%)
 INSERT INTO `mob_droplist` VALUES (3222,0,0,1000,1450,@VRARE);    -- Lungo-Nango Jadeshell (Very Rare, 1%)
 INSERT INTO `mob_droplist` VALUES (3222,0,0,1000,1453,@VRARE);    -- Montiont Silverpiece (Very Rare, 1%)
 INSERT INTO `mob_droplist` VALUES (3222,0,0,1000,1456,@VRARE);    -- One Hundred Byne Bill (Very Rare, 1%)
-INSERT INTO `mob_droplist` VALUES (3222,0,0,1000,11292,@VRARE);   -- Mirage Jubbah (Very Rare, 1%)
-INSERT INTO `mob_droplist` VALUES (3222,0,0,1000,11295,@VRARE);   -- Commodore Frac (Very Rare, 1%)
-INSERT INTO `mob_droplist` VALUES (3222,0,0,1000,11298,@VRARE);   -- Pantin Tobe (Very Rare, 1%)
-INSERT INTO `mob_droplist` VALUES (3222,0,0,1000,11307,@VRARE);   -- Argute Gown (Very Rare, 1%)
-INSERT INTO `mob_droplist` VALUES (3222,0,0,1000,15088,@VRARE);   -- Melee Cyclas (Very Rare, 1%)
-INSERT INTO `mob_droplist` VALUES (3222,0,0,1000,15089,@VRARE);   -- Clerics Briault (Very Rare, 1%)
-INSERT INTO `mob_droplist` VALUES (3222,0,0,1000,15090,@VRARE);   -- Sorcerers Coat (Very Rare, 1%)
-INSERT INTO `mob_droplist` VALUES (3222,0,0,1000,15091,@VRARE);   -- Duelists Tabard (Very Rare, 1%)
-INSERT INTO `mob_droplist` VALUES (3222,0,0,1000,15094,@VRARE);   -- Abyss Cuirass (Very Rare, 1%)
-INSERT INTO `mob_droplist` VALUES (3222,0,0,1000,15096,@VRARE);   -- Bards Justaucorps (Very Rare, 1%)
-INSERT INTO `mob_droplist` VALUES (3222,0,0,1000,15098,@VRARE);   -- Saotome Domaru (Very Rare, 1%)
-INSERT INTO `mob_droplist` VALUES (3222,0,0,1000,15099,@VRARE);   -- Koga Chainmail (Very Rare, 1%)
-INSERT INTO `mob_droplist` VALUES (3222,0,0,1000,15100,@VRARE);   -- Wyrm Mail (Very Rare, 1%)
-INSERT INTO `mob_droplist` VALUES (3222,0,0,1000,15101,@VRARE);   -- Summoners Doublet (Very Rare, 1%)
-INSERT INTO `mob_droplist` VALUES (3222,0,0,1000,15117,@VRARE);   -- Warriors Cuisses (Very Rare, 1%)
-INSERT INTO `mob_droplist` VALUES (3222,0,0,1000,15122,@VRARE);   -- Assassins Culottes (Very Rare, 1%)
-INSERT INTO `mob_droplist` VALUES (3222,0,0,1000,15123,@VRARE);   -- Valor Breeches (Very Rare, 1%)
-INSERT INTO `mob_droplist` VALUES (3222,0,0,1000,15140,@VRARE);   -- Monster Gaiters (Very Rare, 1%)
-INSERT INTO `mob_droplist` VALUES (3222,0,0,1000,15142,@VRARE);   -- Scouts Socks (Very Rare, 1%)
-INSERT INTO `mob_droplist` VALUES (3222,0,0,1000,16360,@VRARE);   -- Etoile Tights (Very Rare, 1%)
 INSERT INTO `mob_droplist` VALUES (3222,2,0,1000,1449,0);         -- Tukuku Whiteshell (Steal)
 INSERT INTO `mob_droplist` VALUES (3222,2,0,1000,1452,0);         -- Ordelle Bronzepiece (Steal)
 INSERT INTO `mob_droplist` VALUES (3222,2,0,1000,1455,0);         -- One Byne Bill (Steal)
+INSERT INTO `mob_droplist` VALUES (3222,0,0,1000,3426,@ALWAYS);   -- Fiendish Tome Chapter 23
+
 
 -- ZoneID: 193 - Bombast
 INSERT INTO `mob_droplist` VALUES (3223,0,0,1000,16017,@COMMON);  -- Ardent Earring (Common, 15%)
@@ -26918,6 +26609,100 @@ INSERT INTO `mob_droplist` VALUES (3283,0,0,1000,11637,@VCOMMON); -- Meridian ri
 INSERT INTO `mob_droplist` VALUES (3283,0,0,1000,3222,@VCOMMON);  -- Balance Stone (Very common, 24%)
 INSERT INTO `mob_droplist` VALUES (3283,0,0,1000,3225,@VCOMMON);  -- Balance Card (Very common, 24%)
 INSERT INTO `mob_droplist` VALUES (3283,0,0,1000,13791,@RARE);    -- Timarli jawshan (Rare, 5%)
+
+-- ZoneID: 187 - Xuu Bhoqa the Enigma
+INSERT INTO `mob_droplist` VALUES (4000,0,0,1000,11671,@COMMON);  -- Oneiros Ring (15.0%)
+INSERT INTO `mob_droplist` VALUES (4000,0,0,1000,3415,@ALWAYS);   -- Fiendish Tome Chapter 12
+
+-- ZoneID: 187 -  Fuu Tzapo the Blessed
+INSERT INTO `mob_droplist` VALUES (4001,0,0,1000,11030,@COMMON);  -- Oneiros Earring (15.0%)
+INSERT INTO `mob_droplist` VALUES (4001,0,0,1000,3416,@ALWAYS);   -- Fiendish Tome Chapter 13
+
+-- ZoneID: 187 - Naa Yixo the Stillrage
+INSERT INTO `mob_droplist` VALUES (4002,0,0,1000,11672,@COMMON);  -- Mujin Band (15.0%)
+INSERT INTO `mob_droplist` VALUES (4002,0,0,1000,3417,@ALWAYS);   -- Fiendish Tome Chapter 14
+
+-- ZoneID: 187 - Tee Zaksa the Ceaseless
+INSERT INTO `mob_droplist` VALUES (4003,0,0,1000,11672,@COMMON);  -- Oneiros Torque (15.0%)
+INSERT INTO `mob_droplist` VALUES (4003,0,0,1000,3418,@ALWAYS);   -- Fiendish Tome Chapter 15
+
+-- ZoneID: 187 - Arch Tzee Xicu Idol
+INSERT INTO `mob_droplist` VALUES (4004,0,0,1000,19295,@COMMON);  -- Mujin Tanto (15.0%)
+INSERT INTO `mob_droplist` VALUES (4004,0,0,1000,10933,@COMMON);  -- Mujin Necklace (15.0%)
+INSERT INTO `mob_droplist` VALUES (4004,0,0,1000,11818,@COMMON);  -- Oneiros Headgear (15.0%)
+
+-- ZoneID: 186 - Zo'Pha Forgesoul
+INSERT INTO `mob_droplist` VALUES (4005,0,0,1000,11775,@COMMON);  -- Oneiros Rope (15.0%)
+INSERT INTO `mob_droplist` VALUES (4005,0,0,1000,3410,@ALWAYS);   -- Fiendish Tome Chapter 7
+
+-- ZoneID: 186 - Ra'Gho Darkfount
+INSERT INTO `mob_droplist` VALUES (4006,0,0,1000,11775,@COMMON);  -- Mujin Obi (15.0%)
+INSERT INTO `mob_droplist` VALUES (4006,0,0,1000,3411,@ALWAYS);   -- Fiendish Tome Chapter 8
+
+-- ZoneID: 186 - Va'Zhe Pummelsong
+INSERT INTO `mob_droplist` VALUES (4007,0,0,1000,17358,@COMMON);  -- Oneiros Harp (15.0%)
+INSERT INTO `mob_droplist` VALUES (4007,0,0,1000,3412,@ALWAYS);   -- Fiendish Tome Chapter 9
+
+-- ZoneID: 186 - Bu'Bho Truesteel
+INSERT INTO `mob_droplist` VALUES (4008,0,0,1000,19767,@COMMON);  -- Oneiros Pebble (15.0%)
+INSERT INTO `mob_droplist` VALUES (4008,0,0,1000,3413,@ALWAYS);   -- Fiendish Tome Chapter 10
+
+-- ZoneID: 186 - Arch Gu'Dha Effigy
+INSERT INTO `mob_droplist` VALUES (4009,0,0,1000,18519,@COMMON);  -- Oneiros Axe (15.0%)
+INSERT INTO `mob_droplist` VALUES (4009,0,0,1000,11670,@COMMON);  -- Oneiros Annulet (15.0%)
+INSERT INTO `mob_droplist` VALUES (4009,0,0,1000,11817,@COMMON);  -- Oneiros Barbut (15.0%)
+
+-- ZoneID: 188 - Quicktrix Hexhands
+INSERT INTO `mob_droplist` VALUES (4010,0,0,1000,10974,@COMMON);  -- Mujin Mantle (15.0%)
+INSERT INTO `mob_droplist` VALUES (4010,0,0,1000,3420,@ALWAYS);   -- Fiendish Tome Chapter 17
+
+-- ZoneID: 188 - Feralox Honeylips
+INSERT INTO `mob_droplist` VALUES (4011,0,0,1000,19762,@COMMON);  -- Oneiros Tathlum (15.0%)
+INSERT INTO `mob_droplist` VALUES (4011,0,0,1000,3421,@ALWAYS);   -- Fiendish Tome Chapter 18
+
+-- ZoneID: 188 - Scourquix Scaleskin
+INSERT INTO `mob_droplist` VALUES (4012,0,0,1000,11031,@COMMON);  -- Oneiros Pearl (15.0%)
+INSERT INTO `mob_droplist` VALUES (4012,0,0,1000,3422,@ALWAYS);   -- Fiendish Tome Chapter 19
+
+-- ZoneID: 188 - Wilywox Tenderpalm
+INSERT INTO `mob_droplist` VALUES (4013,0,0,1000,11032,@COMMON);  -- Mujin Stud (15.0%)
+INSERT INTO `mob_droplist` VALUES (4013,0,0,1000,3423,@ALWAYS);   -- Fiendish Tome Chapter 20
+
+-- ZoneID: 188 - Arch Goblin Golem
+INSERT INTO `mob_droplist` VALUES (4014,0,0,1000,19141,@COMMON);  -- Oneiros Knife (15.0%)
+INSERT INTO `mob_droplist` VALUES (4014,0,0,1000,18811,@COMMON);  -- Oneiros Grip (15.0%)
+INSERT INTO `mob_droplist` VALUES (4014,0,0,1000,11819,@COMMON);  -- Oneiros Coif (15.0%)
+
+-- ZoneID: 135 - Duke Haures
+INSERT INTO `mob_droplist` VALUES (4015,0,0,1000,11777,@COMMON);  -- Demonry Sash (15.0%)
+INSERT INTO `mob_droplist` VALUES (4015,0,0,1000,3430,@ALWAYS);   -- Fiendish Tome Chapter 27
+
+-- ZoneID: 135 - Marquis Caim
+INSERT INTO `mob_droplist` VALUES (4016,0,0,1000,19764,@COMMON);  -- Demonry Core (15.0%)
+INSERT INTO `mob_droplist` VALUES (4016,0,0,1000,3431,@ALWAYS);   -- Fiendish Tome Chapter 28
+
+-- ZoneID: 135 - Baron Avnas
+INSERT INTO `mob_droplist` VALUES (4017,0,0,1000,11673,@COMMON);  -- Demonry Ring (15.0%)
+INSERT INTO `mob_droplist` VALUES (4017,0,0,1000,3432,@ALWAYS);   -- Fiendish Tome Chapter 29
+
+-- ZoneID: 135 - Count Haagenti
+INSERT INTO `mob_droplist` VALUES (4018,0,0,1000,19765,@COMMON);  -- Demonry Ring (15.0%)
+INSERT INTO `mob_droplist` VALUES (4018,0,0,1000,3433,@ALWAYS);   -- Fiendish Tome Chapter 30
+
+-- ZoneID: 188 - Arch Dynamis Lord
+INSERT INTO `mob_droplist` VALUES (4019,0,0,1000,17669,@COMMON);  -- Sagasinger (15.0%)
+INSERT INTO `mob_droplist` VALUES (4019,0,0,1000,10975,@COMMON);  -- Archon Cape (15.0%)
+INSERT INTO `mob_droplist` VALUES (4019,0,0,1000,11674,@COMMON);  -- Archon Ring (15.0%)
+
+
+
+
+
+
+
+
+
+
 
 /*!40000 ALTER TABLE `mob_droplist` ENABLE KEYS */;
 UNLOCK TABLES;

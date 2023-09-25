@@ -408,10 +408,10 @@ INSERT INTO `mob_skill_lists` VALUES ('DynamisStatue-Goblin',92,1114);
 INSERT INTO `mob_skill_lists` VALUES ('DynamisStatue-Goblin',92,1115);
 INSERT INTO `mob_skill_lists` VALUES ('DynamisStatue-Orc',93,1110);
 INSERT INTO `mob_skill_lists` VALUES ('DynamisStatue-Orc',93,1111);
-INSERT INTO `mob_skill_lists` VALUES ('DynamisStatue-Quadav',94,1112);
-INSERT INTO `mob_skill_lists` VALUES ('DynamisStatue-Quadav',94,1113);
-INSERT INTO `mob_skill_lists` VALUES ('DynamisStatue-Yagudo',95,1116);
-INSERT INTO `mob_skill_lists` VALUES ('DynamisStatue-Yagudo',95,1117);
+INSERT INTO `mob_skill_lists` VALUES ('DynamisStatue-Quadav',94,1116);
+INSERT INTO `mob_skill_lists` VALUES ('DynamisStatue-Quadav',94,1117);
+INSERT INTO `mob_skill_lists` VALUES ('DynamisStatue-Yagudo',95,1112);
+INSERT INTO `mob_skill_lists` VALUES ('DynamisStatue-Yagudo',95,1113);
 INSERT INTO `mob_skill_lists` VALUES ('Nandi',96,287);
 INSERT INTO `mob_skill_lists` VALUES ('IceLizard',97,366);
 INSERT INTO `mob_skill_lists` VALUES ('IceLizard',97,368);
@@ -4097,6 +4097,206 @@ INSERT INTO `mob_skill_lists` VALUES ('Bullheaded_Grosvez', 5365, 790); -- shoul
 
 INSERT INTO `mob_skill_lists` VALUES ('Wreaker',5366,1248); -- Trinary Absorption
 INSERT INTO `mob_skill_lists` VALUES ('Wreaker',5366,1252); -- Shadow Spread
+
+INSERT INTO `mob_skill_lists` VALUES ('Nightmare_Tiger',5367,270); -- Roar
+INSERT INTO `mob_skill_lists` VALUES ('Nightmare_Tiger',5367,271); -- Razor Fang
+INSERT INTO `mob_skill_lists` VALUES ('Nightmare_Tiger',5367,1340); -- Crossthrash
+INSERT INTO `mob_skill_lists` VALUES ('Nightmare_Tiger',5367,1680); -- Predatory_Glare
+
+INSERT INTO `mob_skill_lists` VALUES ('Fairy_Ring',5368,3874); -- Dark Spore 
+INSERT INTO `mob_skill_lists` VALUES ('Stcemqestcint',5369,296); -- Drill Branch
+INSERT INTO `mob_skill_lists` VALUES ('Nantina',5370,581); -- Blow
+
+INSERT INTO `mob_skill_lists` VALUES ('Aitvaras',5371,649);
+INSERT INTO `mob_skill_lists` VALUES ('Aitvaras',5371,650);
+INSERT INTO `mob_skill_lists` VALUES ('Aitvaras',5371,651);
+
+INSERT INTO `mob_skill_lists` VALUES ('Alklha',5372,647); -- Chaos Blade
+INSERT INTO `mob_skill_lists` VALUES ('Alklha',5372,648); -- Petro Eyes
+
+INSERT INTO `mob_skill_lists` VALUES ('Barong',5373,645); -- Body Slam
+INSERT INTO `mob_skill_lists` VALUES ('Barong',5373,646); -- Heavy Stomp
+
+INSERT INTO `mob_skill_lists` VALUES ('Stihi',5374,642); -- Flame Breath
+INSERT INTO `mob_skill_lists` VALUES ('Stihi',5374,643); -- Poison Breath
+INSERT INTO `mob_skill_lists` VALUES ('Stihi',5374,644); -- Wind Breath
+
+INSERT INTO `mob_skill_lists` VALUES ('Fomor_Club',5375,246);
+INSERT INTO `mob_skill_lists` VALUES ('Fomor_Club',5375,247);
+INSERT INTO `mob_skill_lists` VALUES ('Fomor_Club',5375,248);
+INSERT INTO `mob_skill_lists` VALUES ('Fomor_Club',5375,249);
+INSERT INTO `mob_skill_lists` VALUES ('Fomor_Club',5375,250);
+INSERT INTO `mob_skill_lists` VALUES ('Fomor_Club',5375,251);
+INSERT INTO `mob_skill_lists` VALUES ('Fomor_Club',5375,252);
+INSERT INTO `mob_skill_lists` VALUES ('Fomor_Club',5375,253);
+INSERT INTO `mob_skill_lists` VALUES ('Fomor_Club',5375,161); -- Seraph Strike
+INSERT INTO `mob_skill_lists` VALUES ('Fomor_Club',5375,162); -- Brainshaker
+INSERT INTO `mob_skill_lists` VALUES ('Fomor_Club',5375,165); -- Skullbreaker
+INSERT INTO `mob_skill_lists` VALUES ('Fomor_Club',5375,166); -- True Strike
+INSERT INTO `mob_skill_lists` VALUES ('Fomor_Club',5375,167); -- Judgement
+INSERT INTO `mob_skill_lists` VALUES ('Fomor_Club',5375,168); -- Hexa Strike
+INSERT INTO `mob_skill_lists` VALUES ('Fomor_Club',5375,169); -- Black Halo
+
+INSERT INTO `mob_skill_lists` VALUES ('Fomor_Bow',5376,246);
+INSERT INTO `mob_skill_lists` VALUES ('Fomor_Bow',5376,247);
+INSERT INTO `mob_skill_lists` VALUES ('Fomor_Bow',5376,248);
+INSERT INTO `mob_skill_lists` VALUES ('Fomor_Bow',5376,249);
+INSERT INTO `mob_skill_lists` VALUES ('Fomor_Bow',5376,250);
+INSERT INTO `mob_skill_lists` VALUES ('Fomor_Bow',5376,251);
+INSERT INTO `mob_skill_lists` VALUES ('Fomor_Bow',5376,252);
+INSERT INTO `mob_skill_lists` VALUES ('Fomor_Bow',5376,253);
+INSERT INTO `mob_skill_lists` VALUES ('Fomor_Bow',5376,192); -- Flaming Arrow
+INSERT INTO `mob_skill_lists` VALUES ('Fomor_Bow',5376,193); -- Piercing Arrow
+INSERT INTO `mob_skill_lists` VALUES ('Fomor_Bow',5376,194); -- Dulling Arrow
+INSERT INTO `mob_skill_lists` VALUES ('Fomor_Bow',5376,196); -- Sidewinder
+INSERT INTO `mob_skill_lists` VALUES ('Fomor_Bow',5376,197); -- Blast Arrow
+INSERT INTO `mob_skill_lists` VALUES ('Fomor_Bow',5376,198); -- Arching Arrow
+
+INSERT INTO `mob_skill_lists` VALUES ('Fomor_Scythe',5377,246);
+INSERT INTO `mob_skill_lists` VALUES ('Fomor_Scythe',5377,247);
+INSERT INTO `mob_skill_lists` VALUES ('Fomor_Scythe',5377,248);
+INSERT INTO `mob_skill_lists` VALUES ('Fomor_Scythe',5377,249);
+INSERT INTO `mob_skill_lists` VALUES ('Fomor_Scythe',5377,250);
+INSERT INTO `mob_skill_lists` VALUES ('Fomor_Scythe',5377,251);
+INSERT INTO `mob_skill_lists` VALUES ('Fomor_Scythe',5377,252);
+INSERT INTO `mob_skill_lists` VALUES ('Fomor_Scythe',5377,253);
+INSERT INTO `mob_skill_lists` VALUES ('Fomor_Scythe',5377,96); -- Slice
+INSERT INTO `mob_skill_lists` VALUES ('Fomor_Scythe',5377,97); -- Dark Harvest
+INSERT INTO `mob_skill_lists` VALUES ('Fomor_Scythe',5377,98); -- Shadow Of Death
+INSERT INTO `mob_skill_lists` VALUES ('Fomor_Scythe',5377,99); -- Nightmare Scythe
+INSERT INTO `mob_skill_lists` VALUES ('Fomor_Scythe',5377,100); -- Spinning Scythe
+INSERT INTO `mob_skill_lists` VALUES ('Fomor_Scythe',5377,101); -- Vorpal Scythe
+INSERT INTO `mob_skill_lists` VALUES ('Fomor_Scythe',5377,102); -- Guillotine
+INSERT INTO `mob_skill_lists` VALUES ('Fomor_Scythe',5377,103); -- Cross Reaper
+INSERT INTO `mob_skill_lists` VALUES ('Fomor_Scythe',5377,104); -- Spiral Hell
+
+INSERT INTO `mob_skill_lists` VALUES ('Fomor_H2H',5378,246);
+INSERT INTO `mob_skill_lists` VALUES ('Fomor_H2H',5378,247);
+INSERT INTO `mob_skill_lists` VALUES ('Fomor_H2H',5378,248);
+INSERT INTO `mob_skill_lists` VALUES ('Fomor_H2H',5378,249);
+INSERT INTO `mob_skill_lists` VALUES ('Fomor_H2H',5378,250);
+INSERT INTO `mob_skill_lists` VALUES ('Fomor_H2H',5378,251);
+INSERT INTO `mob_skill_lists` VALUES ('Fomor_H2H',5378,252);
+INSERT INTO `mob_skill_lists` VALUES ('Fomor_H2H',5378,253);
+INSERT INTO `mob_skill_lists` VALUES ('Fomor_H2H',5378,1); -- Combo
+INSERT INTO `mob_skill_lists` VALUES ('Fomor_H2H',5378,2); -- Shoulder Tackle
+INSERT INTO `mob_skill_lists` VALUES ('Fomor_H2H',5378,3); -- One Inch Punch
+INSERT INTO `mob_skill_lists` VALUES ('Fomor_H2H',5378,4); -- Backhand Blow
+INSERT INTO `mob_skill_lists` VALUES ('Fomor_H2H',5378,5); -- Raging Fists
+INSERT INTO `mob_skill_lists` VALUES ('Fomor_H2H',5378,6); -- Spinning Attack
+INSERT INTO `mob_skill_lists` VALUES ('Fomor_H2H',5378,7); -- Howling Fist
+INSERT INTO `mob_skill_lists` VALUES ('Fomor_H2H',5378,8); -- Dragon Kick
+INSERT INTO `mob_skill_lists` VALUES ('Fomor_H2H',5378,9); -- Asuran Fists
+
+INSERT INTO `mob_skill_lists` VALUES('Ulbrecht', 5379, 16);
+INSERT INTO `mob_skill_lists` VALUES('Ulbrecht', 5379, 17);
+INSERT INTO `mob_skill_lists` VALUES('Ulbrecht', 5379, 18);
+INSERT INTO `mob_skill_lists` VALUES('Ulbrecht', 5379, 2314);
+INSERT INTO `mob_skill_lists` VALUES('Ulbrecht', 5379, 2315);
+INSERT INTO `mob_skill_lists` VALUES('Ulbrecht', 5379, 2316);
+INSERT INTO `mob_skill_lists` VALUES('Ulbrecht', 5379, 2317);
+
+INSERT INTO `mob_skill_lists` VALUES ('Diabolos_Heart',5380,1905); -- noctoshield
+INSERT INTO `mob_skill_lists` VALUES ('Diabolos_Heart',5380,1906); -- ultimate terror
+INSERT INTO `mob_skill_lists` VALUES ('Diabolos_Heart',5380,1907); -- dream shroud
+INSERT INTO `mob_skill_lists` VALUES ('Diabolos_Heart',5380,1912); -- hypnogenesis
+
+--INSERT INTO `mob_skill_lists` VALUES ('Diabolos_Diamond',5381,1919); -- daydream
+--INSERT INTO `mob_skill_lists` VALUES ('Diabolos_Diamond',5381,1908); -- nightmare
+INSERT INTO `mob_skill_lists` VALUES ('Diabolos_Diamond',5381,1909); -- cacodemonia
+INSERT INTO `mob_skill_lists` VALUES ('Diabolos_Diamond',5381,1912); -- hypnogenesis
+-- INSERT INTO `mob_skill_lists` VALUES ('Diabolos_Diamond',5381,1911); -- ruinous omen
+
+INSERT INTO `mob_skill_lists` VALUES ('Diabolos_Spade',5382,1905); -- noctoshield
+INSERT INTO `mob_skill_lists` VALUES ('Diabolos_Spade',5382,1917); -- sweeping somnolence
+INSERT INTO `mob_skill_lists` VALUES ('Diabolos_Spade',5382,1918); -- nether tempest
+-- INSERT INTO `mob_skill_lists` VALUES ('Diabolos_Spade',5382,1911); -- ruinous omen
+INSERT INTO `mob_skill_lists` VALUES ('Diabolos_Spade',5382,1903); -- camisado
+
+INSERT INTO `mob_skill_lists` VALUES ('Diabolos_Club',5383,1903); -- camisado
+INSERT INTO `mob_skill_lists` VALUES ('Diabolos_Club',5383,1904); -- somnolence
+INSERT INTO `mob_skill_lists` VALUES ('Diabolos_Club',5383,1905); -- noctoshield
+INSERT INTO `mob_skill_lists` VALUES ('Diabolos_Club',5383,1906); -- ultimate terror
+INSERT INTO `mob_skill_lists` VALUES ('Diabolos_Club',5383,1907); -- dream shroud
+--INSERT INTO `mob_skill_lists` VALUES ('Diabolos_Club',5383,1908); -- nightmare
+INSERT INTO `mob_skill_lists` VALUES ('Diabolos_Club',5383,1909); -- cacodemonia
+INSERT INTO `mob_skill_lists` VALUES ('Diabolos_Club',5383,1910); -- nether blast
+-- INSERT INTO `mob_skill_lists` VALUES ('Diabolos_Club',5383,1911); -- ruinous omen
+
+INSERT INTO `mob_skill_lists` VALUES ('Nightmare_Fly',5384,318);
+INSERT INTO `mob_skill_lists` VALUES ('Nightmare_Fly',5384,659);
+INSERT INTO `mob_skill_lists` VALUES ('Nightmare_Fly',5384,660);
+INSERT INTO `mob_skill_lists` VALUES ('Nightmare_Fly',5384,1324);
+
+INSERT INTO `mob_skill_lists` VALUES ('Nightmare_Worm',5385,424);
+INSERT INTO `mob_skill_lists` VALUES ('Nightmare_Worm',5385,425);
+INSERT INTO `mob_skill_lists` VALUES ('Nightmare_Worm',5385,426);
+INSERT INTO `mob_skill_lists` VALUES ('Nightmare_Worm',5385,427);
+INSERT INTO `mob_skill_lists` VALUES ('Nightmare_Worm',5385,428);
+INSERT INTO `mob_skill_lists` VALUES ('Nightmare_Worm',5385,429);
+INSERT INTO `mob_skill_lists` VALUES ('Nightmare_Worm',5385,1889);
+
+INSERT INTO `mob_skill_lists` VALUES ('Nightmare_Hornet',5386,334);
+INSERT INTO `mob_skill_lists` VALUES ('Nightmare_Hornet',5386,335);
+INSERT INTO `mob_skill_lists` VALUES ('Nightmare_Hornet',5386,336);
+INSERT INTO `mob_skill_lists` VALUES ('Nightmare_Hornet',5386,1847);
+
+INSERT INTO `mob_skill_lists` VALUES ('Nightmare_Sheep',5387,260);
+INSERT INTO `mob_skill_lists` VALUES ('Nightmare_Sheep',5387,261);
+INSERT INTO `mob_skill_lists` VALUES ('Nightmare_Sheep',5387,262);
+INSERT INTO `mob_skill_lists` VALUES ('Nightmare_Sheep',5387,263);
+INSERT INTO `mob_skill_lists` VALUES ('Nightmare_Sheep',5387,264);
+
+INSERT INTO `mob_skill_lists` VALUES ('Broadside_Bird',5388,622);
+INSERT INTO `mob_skill_lists` VALUES ('Broadside_Bird',5388,623);
+INSERT INTO `mob_skill_lists` VALUES ('Broadside_Bird',5388,1159);
+INSERT INTO `mob_skill_lists` VALUES ('Broadside_Bird',5388,1160);
+
+INSERT INTO `mob_skill_lists` VALUES ('Broadside_Bird_NM',5389,622);
+INSERT INTO `mob_skill_lists` VALUES ('Broadside_Bird_NM',5389,623);
+INSERT INTO `mob_skill_lists` VALUES ('Broadside_Bird_NM',5389,1159);
+INSERT INTO `mob_skill_lists` VALUES ('Broadside_Bird_NM',5389,1160);
+INSERT INTO `mob_skill_lists` VALUES ('Broadside_Bird_NM',5389,1161); -- Damnation Dive
+
+INSERT INTO `mob_skill_lists` VALUES ('Diaboloss_Vestige',5390,1903); -- camisado
+INSERT INTO `mob_skill_lists` VALUES ('Diaboloss_Vestige',5390,1904); -- somnolence
+INSERT INTO `mob_skill_lists` VALUES ('Diaboloss_Vestige',5390,1906); -- ultimate terror
+-- INSERT INTO `mob_skill_lists` VALUES ('Diaboloss_Vestige',5390,1909); -- cacodemonia
+INSERT INTO `mob_skill_lists` VALUES ('Diaboloss_Vestige',5390,1910); -- nether blast
+
+INSERT INTO `mob_skill_lists` VALUES ('Diabolos_Nox',5391,1905); -- noctoshield
+INSERT INTO `mob_skill_lists` VALUES ('Diabolos_Nox',5391,1906); -- ultimate terror
+INSERT INTO `mob_skill_lists` VALUES ('Diabolos_Nox',5391,1907); -- dream shroud
+INSERT INTO `mob_skill_lists` VALUES ('Diabolos_Nox',5391,1912); -- hypnogenesis
+
+INSERT INTO `mob_skill_lists` VALUES ('Diabolos_Somnus',5392,1905); -- noctoshield
+INSERT INTO `mob_skill_lists` VALUES ('Diabolos_Somnus',5392,1917); -- sweeping somnolence
+INSERT INTO `mob_skill_lists` VALUES ('Diabolos_Somnus',5392,1918); -- nether tempest
+-- INSERT INTO `mob_skill_lists` VALUES ('Diabolos_Somnus',5392,1911); -- ruinous omen
+INSERT INTO `mob_skill_lists` VALUES ('Diabolos_Somnus',5392,1903); -- camisado
+
+INSERT INTO `mob_skill_lists` VALUES ('Diabolos_Diamond_2',5393,1919); -- daydream
+--INSERT INTO `mob_skill_lists` VALUES ('Diabolos_Diamond_2',5393,1908); -- nightmare
+INSERT INTO `mob_skill_lists` VALUES ('Diabolos_Diamond_2',5393,1909); -- cacodemonia
+INSERT INTO `mob_skill_lists` VALUES ('Diabolos_Diamond_2',5393,1912); -- hypnogenesis
+-- INSERT INTO `mob_skill_lists` VALUES ('Diabolos_Diamond_2',5393,1911); -- ruinous omen
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
