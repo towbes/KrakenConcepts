@@ -13,7 +13,7 @@ local entity = {}
 
 entity.onMobInitialize = function(mob)
     mob:setMobMod(xi.mobMod.SPECIAL_SKILL, 1636)
-    mob:setMobMod(xi.mobMod.HP_SCALE, 300)
+    mob:setMobMod(xi.mobMod.HP_SCALE, 400)
 end
 
 entity.onMobSpawn = function(mob)
@@ -23,10 +23,11 @@ entity.onMobSpawn = function(mob)
             { id = xi.jsa.EES_GIGA, hpp = 50 },
         },
     })
-    mob:setMobLevel(88)
 
     -- Set Removable Mods
     mob:setMod(xi.mod.REGEN, 1000)
+    mob:setMod(xi.mod.DOUBLE_ATTACK, 0)
+
     mob:setLocalVar("AntaeusRegen", 1)
 
     mob:setMod(xi.mod.CRITHITRATE, 100)
@@ -47,16 +48,27 @@ entity.onMobSpawn = function(mob)
     -- Adding Normal Dynamis Boss Resistances and Regain
     mob:setMod(xi.mod.GRAVITYRES, 40)
     mob:setMod(xi.mod.BINDRES, 40)
-    mob:setMod(xi.mod.REGAIN, 50)
-    mob:setMod(xi.mod.STUNRES, 99)
+    mob:setMod(xi.mod.REGAIN, 150)
+    mob:setMod(xi.mod.STUNRES, 50)
 end
 
-entity.onMobFight = function(mob)
+entity.onMobFight = function(mob, target)
+    for _, member in pairs(target:getParty()) do
+        if member:getObjType() == xi.objType.PC then
+        member:changeMusic(2, 88)
+        member:changeMusic(3, 88)
+        end
+    end
 end
 
 entity.onMobDeath = function(mob, player, optParams)
     mob:resetLocalVars()
-    xi.dynamis.megaBossOnDeath(mob, player, optParams)
+    for _, member in pairs(player:getParty()) do
+        if member:getObjType() == xi.objType.PC then
+        member:changeMusic(2, 121)
+        member:changeMusic(3, 121)
+        end
+    end
 end
 
 return entity
