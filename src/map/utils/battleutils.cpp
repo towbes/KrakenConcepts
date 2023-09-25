@@ -5429,6 +5429,12 @@ namespace battleutils
         {
             damage = -damage;
         }
+
+        if (xirand::GetRandomNumber(100) < PDefender->getMod(Mod::SEVERE_BREATH_DMG_NULL) && damage >= PDefender->health.hp)
+        {
+            damage = PDefender->health.hp - 1;
+        }
+
         else
         {
             damage = HandleSevereDamage(PDefender, damage, false);
@@ -5479,6 +5485,12 @@ namespace battleutils
         {
             damage = 0;
         }
+
+        else if (xirand::GetRandomNumber(100) < PDefender->getMod(Mod::SEVERE_MAGIC_DMG_NULL) && damage >= PDefender->health.hp)
+        {
+            damage = PDefender->health.hp - 1;
+        }
+
         else
         {
             damage = HandleSevereDamage(PDefender, damage, false);
@@ -5515,6 +5527,10 @@ namespace battleutils
         else if (xirand::GetRandomNumber(100) < PDefender->getMod(Mod::NULL_PHYSICAL_DAMAGE))
         {
             damage = 0;
+        }
+        else if (xirand::GetRandomNumber(100) < PDefender->getMod(Mod::SEVERE_PHYS_DMG_NULL) && damage >= PDefender->health.hp)
+        {
+            damage = PDefender->health.hp - 1;
         }
         else
         {
@@ -5567,6 +5583,10 @@ namespace battleutils
         else if (xirand::GetRandomNumber(100) < PDefender->getMod(Mod::NULL_RANGED_DAMAGE))
         {
             damage = 0;
+        }
+        else if (xirand::GetRandomNumber(100) < PDefender->getMod(Mod::SEVERE_RANGE_DMG_NULL) && damage >= PDefender->health.hp)
+        {
+            damage = PDefender->health.hp - 1;
         }
         else
         {
@@ -5778,6 +5798,11 @@ namespace battleutils
         {
             damage = PDefender->health.hp - 1;
             ((CPetEntity*)PDefender)->PMaster->StatusEffectContainer->DelStatusEffectSilent(EFFECT_EARTH_MANEUVER);
+        }
+
+        if (xirand::GetRandomNumber(100) < PDefender->getMod(Mod::SEVERE_DMG_NULL) && damage >= PDefender->health.hp)
+        {
+            damage = PDefender->health.hp - 1;
         }
 
         return damage;
