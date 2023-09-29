@@ -1227,9 +1227,6 @@ xi.regime.bookOnEventFinish = function(player, option, regimeType)
             ['REGEN'] = function()
                 local mLvl = player:getMainLvl()
                 local power = 0
-
-                local mLvl = player:getMainLvl()
-                local power = 0
     
                 if mLvl >= 1 and mLvl <= 20 then
                     power = 3
