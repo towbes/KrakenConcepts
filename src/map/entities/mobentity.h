@@ -41,7 +41,7 @@ enum SPAWNTYPE
     SPAWNTYPE_LOTTERY   = 0x20,
     SPAWNTYPE_WINDOWED  = 0x40,
     SPAWNTYPE_SCRIPTED  = 0x80, // scripted spawn
-    SPAWNTYPE_PIXIE     = 0x100, // according to server amity
+    SPAWNTYPE_PIXIE     = 0x100 // according to server amity
 };
 
 enum SPECIALFLAG

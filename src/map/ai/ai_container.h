@@ -133,12 +133,21 @@ public:
 
 //protected: Umeboshi "Commenting this out to move below for pixie commit"
     // input controller
-//    std::unique_ptr<CController> Controller;
+    // std::unique_ptr<CController> Controller;
     // current synchronized server time (before AI loop execution)
-//    time_point m_Tick;
-//    time_point m_PrevTick;
+    // time_point m_Tick;
+    // time_point m_PrevTick;
     // entity who holds this AI
-//    CBaseEntity* PEntity;
+    // CBaseEntity* PEntity;
+
+        protected:
+    // input controller
+    std::unique_ptr<CController> Controller;
+    // current synchronized server time (before AI loop execution)
+    time_point m_Tick;
+    time_point m_PrevTick;
+    // entity who holds this AI
+    CBaseEntity* PEntity;
 
     void CheckCompletedStates();
     template <typename T, typename... Args>
@@ -186,15 +195,6 @@ public:
         }
         return false;
     }
-
-    protected:
-    // input controller
-    std::unique_ptr<CController> Controller;
-    // current synchronized server time (before AI loop execution)
-    time_point m_Tick;
-    time_point m_PrevTick;
-    // entity who holds this AI
-    CBaseEntity* PEntity;
 
 private:
     std::stack<std::unique_ptr<CState>> m_stateStack;

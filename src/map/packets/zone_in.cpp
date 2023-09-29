@@ -29,6 +29,7 @@
 
 #include "instance.h"
 #include "status_effect_container.h"
+#include "zone.h"
 
 // Returns the Model ID of the mog house to be used
 // This is not the same as the actual Zone ID!

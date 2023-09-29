@@ -84,13 +84,6 @@ CCharStatsPacket::CCharStatsPacket(CCharEntity* PChar, bool resetflips)
             ref<uint8>(0x0E) = (JOBTYPE)JOB_NIN;
             ref<uint8>(0x0F) = 1;
         }
-
-        else if (flipstate == 4) // 99 flip
-        {
-            ref<uint8>(0x0C) = PChar->GetMJob();
-            ref<uint8>(0x0D) = 99;
-            ref<uint8>(0x0F) = 99;
-        }
     }
 
 

@@ -521,12 +521,7 @@ int32 CMeritPoints::GetMeritValue(MERIT_TYPE merit, CCharEntity* PChar)
             meritValue = merit == MERIT_MAX_MERIT ? PMerit->count : std::min(PMerit->count, cap[PChar->GetMLevel()]);
         }
 
-        if (PMerit->catid < 5 || (PMerit->jobs & (1 << (PChar->GetSJob() - 1)) && PChar->GetSLevel() >= 75))
-        {
-            meritValue = merit == MERIT_MAX_MERIT ? PMerit->count : std::min(PMerit->count, cap[PChar->GetSLevel()]);
-        }
-
-        if (PMerit->catid == 25 && PChar->GetMLevel() == 75) //Umeboshi "We are lowering this to 75"
+        if (PMerit->catid == 25 && PChar->GetMLevel() == 96) //Umeboshi "We are lowering this to 75"
         { // categoryID 25 is for merit weaponskills, which only apply if the player is lv 96+
             meritValue = 0;
         }
