@@ -15,6 +15,7 @@ require("scripts/globals/spell_data")
 require("scripts/globals/zone")
 require("scripts/missions/amk/helpers")
 require("scripts/missions/wotg/helpers")
+require("scripts/globals/msg")
 -----------------------------------
 
 xi = xi or {}
@@ -33,7 +34,7 @@ xi.helm.type =
 -- (R) for retail-verified coordinates
 -----------------------------------
 
-local helmInfo =
+xi.helm.helmInfo =
 {
     [xi.helm.type.HARVESTING] =
     {
@@ -368,7 +369,7 @@ local helmInfo =
                     { 1220, 17396 }, -- Little Worm
                     {  720,   897 }, -- Scorpion Claw
                     {  720,   896 }, -- Scorpion Shell
-                    {  420,  2503 }, -- Antlion Jaw
+                    {  420,  1616 }, -- Antlion Jaw
                     {  420,  1236 }, -- Cactus Stems
                     {  420,  1473 }, -- High Quality Scorpion Shell
                     {  420,   769 }, -- Colored Rock
@@ -1601,7 +1602,7 @@ local function doMove(npc, x, y, z)
     end
 end
 
-local function movePoint(player, npc, zoneId, info)
+local function movePoint(npc, zoneId, info)
     local points = info.zone[zoneId].points
     local point  = points[math.random(1, #points)]
 
@@ -1701,20 +1702,20 @@ end
 
 xi.helm.initZone = function(zone, helmType)
     local zoneId = zone:getID()
-    local info   = helmInfo[helmType]
+    local info   = xi.helm.helmInfo[helmType]
     local npcs   = zones[zoneId].npc[info.id]
 
     for _, npcId in ipairs(npcs) do
         local npc = GetNPCByID(npcId)
         if npc then
             npc:setStatus(xi.status.NORMAL)
-            movePoint(nil, npc, zoneId, info)
+            movePoint(npc, zoneId, info)
         end
     end
 end
 
 xi.helm.onTrade = function(player, npc, trade, helmType, csid, func)
-    local info   = helmInfo[helmType]
+    local info   = xi.helm.helmInfo[helmType]
     local zoneId = player:getZoneID()
 
     -- HELM should remove invisible
@@ -1749,7 +1750,7 @@ xi.helm.onTrade = function(player, npc, trade, helmType, csid, func)
             npc:setLocalVar("uses", uses)
 
             if uses == 0 then
-                movePoint(player, npc, zoneId, info)
+                movePoint(npc, zoneId, info)
             end
 
             player:triggerRoeEvent(xi.roe.triggers.helmSuccess, { ["skillType"] = helmType })
@@ -1781,6 +1782,19 @@ end
 
 xi.helm.onTrigger = function(player, helmType)
     local zoneId = player:getZoneID()
-    local info = helmInfo[helmType]
+    local info = xi.helm.helmInfo[helmType]
     player:messageSpecial(zones[zoneId].text[info.message], info.tool)
+end
+
+xi.helm.movePoint = function(target, zoneId, helmType)
+    local info = xi.helm.helmInfo[helmType]
+    movePoint(target, zoneId, info)
+end
+xi.helm.doesToolBreak = function(player, helmType)
+    local info = xi.helm.helmInfo[helmType]
+    return doesToolBreak(player, info) and 1 or 0
+end
+xi.helm.pickItem = function(player, helmType)
+    local info = xi.helm.helmInfo[helmType]
+    return pickItem(player, info)
 end
