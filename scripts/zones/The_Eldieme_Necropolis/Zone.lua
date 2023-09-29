@@ -9,6 +9,7 @@ local zoneObject = {}
 
 zoneObject.onInitialize = function(zone)
     xi.treasure.initZone(zone)
+    xi.mob.nmTODPersistCache(zone, ID.mob.ANEMONE)
 end
 
 zoneObject.onZoneIn = function(player, prevZone)
