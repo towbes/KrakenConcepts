@@ -10898,7 +10898,8 @@ INSERT INTO `mob_droplist` VALUES (1342,2,0,1000,1455,0);       -- One Byne Bill
 -- ZoneID: 134 - Hydra Warrior
 -- ZoneID: 134 - Hydra Warrior
 INSERT INTO `mob_droplist` VALUES (1343,0,0,1000,3359,@UNCOMMON); -- Despots Fortune Parchment (Uncommon, 10%)
-INSERT INTO `mob_droplist` VALUES (1343,0,0,1000,3493,@RARE);     -- Forgotten Thought (Rare, 5%)
+INSERT INTO `mob_droplist` VALUES (1343,0,0,1000,3398,@RARE);     -- Odious Root (Rare, 5%)
+-- INSERT INTO `mob_droplist` VALUES (1343,0,0,1000,3493,@RARE);     -- Forgotten Thought (Rare, 5%)
 INSERT INTO `mob_droplist` VALUES (1343,0,0,1000,11292,@VRARE);   -- Mirage Jubbah (Very Rare, 1%)
 INSERT INTO `mob_droplist` VALUES (1343,0,0,1000,11295,@VRARE);   -- Commodore Frac (Very Rare, 1%)
 INSERT INTO `mob_droplist` VALUES (1343,0,0,1000,11298,@VRARE);   -- Pantin Tobe (Very Rare, 1%)
@@ -10926,7 +10927,10 @@ INSERT INTO `mob_droplist` VALUES (1343,2,0,1000,1455,0);         -- One Byne Bi
 -- ZoneID: 134 - Hydra Bard
 -- ZoneID: 134 - Hydra Bard
 INSERT INTO `mob_droplist` VALUES (1344,0,0,1000,3360,@UNCOMMON); -- Sadists Fortune Parchment (Uncommon, 10%)
-INSERT INTO `mob_droplist` VALUES (1344,0,0,1000,3493,@RARE);     -- Forgotten Thought (Rare, 5%)
+INSERT INTO `mob_droplist` VALUES (1344,0,0,1000,3396,@RARE);     -- Odious Talisman (Uncommon, 5%)
+INSERT INTO `mob_droplist` VALUES (1344,0,0,1000,3398,@RARE);     -- Odious Root (Rare, 5%)
+INSERT INTO `mob_droplist` VALUES (1344,0,0,1000,3399,@RARE);     -- Odious Mirror (Rare, 5%)
+-- INSERT INTO `mob_droplist` VALUES (1344,0,0,1000,3493,@RARE);     -- Forgotten Thought (Rare, 5%)
 INSERT INTO `mob_droplist` VALUES (1344,0,0,1000,11292,@VRARE);   -- Mirage Jubbah (Very Rare, 1%)
 INSERT INTO `mob_droplist` VALUES (1344,0,0,1000,11295,@VRARE);   -- Commodore Frac (Very Rare, 1%)
 INSERT INTO `mob_droplist` VALUES (1344,0,0,1000,11298,@VRARE);   -- Pantin Tobe (Very Rare, 1%)
@@ -10956,7 +10960,9 @@ INSERT INTO `mob_droplist` VALUES (1344,2,0,1000,1455,0);         -- One Byne Bi
 -- ZoneID: 134 - Hydra Monk
 -- ZoneID: 134 - Hydra Ninja
 INSERT INTO `mob_droplist` VALUES (1345,0,0,1000,3361,@UNCOMMON); -- Villains Fortune Parchment (Uncommon, 10%)
-INSERT INTO `mob_droplist` VALUES (1345,0,0,1000,3493,@RARE);     -- Forgotten Thought (Rare, 5%)
+INSERT INTO `mob_droplist` VALUES (1345,0,0,1000,3398,@RARE);     -- Odious Root (Rare, 5%)
+INSERT INTO `mob_droplist` VALUES (1345,0,0,1000,3399,@RARE);     -- Odious Mirror (Rare, 5%)
+-- INSERT INTO `mob_droplist` VALUES (1345,0,0,1000,3493,@RARE);     -- Forgotten Thought (Rare, 5%)
 INSERT INTO `mob_droplist` VALUES (1345,0,0,1000,11292,@VRARE);   -- Mirage Jubbah (Very Rare, 1%)
 INSERT INTO `mob_droplist` VALUES (1345,0,0,1000,11295,@VRARE);   -- Commodore Frac (Very Rare, 1%)
 INSERT INTO `mob_droplist` VALUES (1345,0,0,1000,11298,@VRARE);   -- Pantin Tobe (Very Rare, 1%)
@@ -11788,6 +11794,10 @@ INSERT INTO `mob_droplist` VALUES (1441,2,0,1000,1455,0);       -- One Byne Bill
 -- ZoneID: 135 - Kindred Ninja
 -- ZoneID: 135 - Kindred Dragoon
 -- ZoneID: 135 - Kindred Summoner
+INSERT INTO `mob_droplist` VALUES (1442,0,0,1000,3400,@VRARE);  -- Odious Skull (Very Rare, 1%)
+INSERT INTO `mob_droplist` VALUES (1442,0,0,1000,3401,@VRARE);  -- Odious Horn (Very Rare, 1%)
+INSERT INTO `mob_droplist` VALUES (1442,0,0,1000,3402,@VRARE);  -- Odious Skull (Very Rare, 1%)
+INSERT INTO `mob_droplist` VALUES (1442,0,0,1000,3403,@VRARE);  -- Odious Pen (Very Rare, 1%)
 INSERT INTO `mob_droplist` VALUES (1442,0,0,1000,11305,@VRARE); -- Etoile Casaque (Very Rare, 1%)
 INSERT INTO `mob_droplist` VALUES (1442,0,0,1000,11465,@VRARE); -- Mirage Keffiyeh (Very Rare, 1%)
 INSERT INTO `mob_droplist` VALUES (1442,0,0,1000,11468,@VRARE); -- Commodore Tricorne (Very Rare, 1%)
@@ -20226,6 +20236,10 @@ INSERT INTO `mob_droplist` VALUES (2543,0,0,1000,15144,20);     -- Koga Kyahan (
 INSERT INTO `mob_droplist` VALUES (2543,0,0,1000,18326,20);     -- Relic Staff (2.0%)
 INSERT INTO `mob_droplist` VALUES (2543,0,0,1000,18338,20);     -- Relic Horn (2.0%)
 INSERT INTO `mob_droplist` VALUES (2543,0,0,1000,18344,20);     -- Relic Bow (2.0%)
+INSERT INTO `mob_droplist` VALUES (2543,0,0,1000,3392,@VRARE);  -- Odious Cup (Very Rare, 1%)
+INSERT INTO `mob_droplist` VALUES (2543,0,0,1000,3393,@VRARE);  -- Odious Die (Very Rare, 1%)
+INSERT INTO `mob_droplist` VALUES (2543,0,0,1000,3394,@VRARE);  -- Odious Mask (Very Rare, 1%)
+INSERT INTO `mob_droplist` VALUES (2543,0,0,1000,3395,@VRARE);  -- Odious Grenade (Very Rare, 1%)
 INSERT INTO `mob_droplist` VALUES (2543,0,0,1000,11396,@VRARE); -- Etoile Toe Shoes (Very Rare, 1%)
 INSERT INTO `mob_droplist` VALUES (2543,0,0,1000,15082,@VRARE); -- Scouts Beret (Very Rare, 1%)
 INSERT INTO `mob_droplist` VALUES (2543,0,0,1000,15103,@VRARE); -- Melee Gloves (Very Rare, 1%)
@@ -20708,6 +20722,11 @@ INSERT INTO `mob_droplist` VALUES (2553,0,0,1000,18260,20);     -- Relic Knuckle
 INSERT INTO `mob_droplist` VALUES (2553,0,0,1000,18266,20);     -- Relic Dagger (2.0%)
 INSERT INTO `mob_droplist` VALUES (2553,0,0,1000,18272,20);     -- Relic Sword (2.0%)
 INSERT INTO `mob_droplist` VALUES (2553,0,0,1000,18320,20);     -- Relic Maul (2.0%)
+INSERT INTO `mob_droplist` VALUES (2553,0,0,1000,3388,@VRARE);  -- Odious Necklace (Very Rare, 1%)
+INSERT INTO `mob_droplist` VALUES (2553,0,0,1000,3389,@VRARE);  -- Odious Feather (Very Rare, 1%)
+INSERT INTO `mob_droplist` VALUES (2553,0,0,1000,3390,@VRARE);  -- Odious Holy Water (Very Rare, 1%)
+INSERT INTO `mob_droplist` VALUES (2553,0,0,1000,3389,@VRARE);  -- Odious Feather (Very Rare, 1%)
+INSERT INTO `mob_droplist` VALUES (2553,0,0,1000,3390,@VRARE);  -- Odious Quipu (Very Rare, 1%)
 INSERT INTO `mob_droplist` VALUES (2553,0,0,1000,11382,@VRARE); -- Mirage Charuqs (Very Rare, 1%)
 INSERT INTO `mob_droplist` VALUES (2553,0,0,1000,11398,@VRARE); -- Argute Loafers (Very Rare, 1%)
 INSERT INTO `mob_droplist` VALUES (2553,0,0,1000,15031,@VRARE); -- Pantin Dastanas (Very Rare, 1%)
@@ -20964,6 +20983,10 @@ INSERT INTO `mob_droplist` VALUES (2558,0,0,1000,18278,20);     -- Relic Blade (
 INSERT INTO `mob_droplist` VALUES (2558,0,0,1000,18284,20);     -- Relic Axe (2.0%)
 INSERT INTO `mob_droplist` VALUES (2558,0,0,1000,18302,20);     -- Relic Scythe (2.0%)
 INSERT INTO `mob_droplist` VALUES (2558,0,0,1000,18314,20);     -- Ito (2.0%)
+INSERT INTO `mob_droplist` VALUES (2558,0,0,1000,3385,@VRARE);  -- Odious Backscale (Very Rare, 1%)
+INSERT INTO `mob_droplist` VALUES (2558,0,0,1000,3384,@VRARE);  -- Odious Charm (Very Rare, 1%)
+INSERT INTO `mob_droplist` VALUES (2558,0,0,1000,3386,@VRARE);  -- Odious Engraving (Very Rare, 1%)
+INSERT INTO `mob_droplist` VALUES (2558,0,0,1000,3387,@VRARE);  -- Odious Letterbox (Very Rare, 1%)
 INSERT INTO `mob_droplist` VALUES (2558,0,0,1000,11385,@VRARE); -- Commodore Bottes (Very Rare, 1%)
 INSERT INTO `mob_droplist` VALUES (2558,0,0,1000,11478,@VRARE); -- Etoile Tiara (Very Rare, 1%)
 INSERT INTO `mob_droplist` VALUES (2558,0,0,1000,15078,@VRARE); -- Valor Coronet (Very Rare, 1%)
@@ -25132,6 +25155,8 @@ INSERT INTO `mob_droplist` VALUES (3144,0,0,1000,3543,@RARE);  -- Fossilized Fan
 -- ZoneID: 134 - Hydra Ranger
 -- ZoneID: 134 - Hydra Ranger
 INSERT INTO `mob_droplist` VALUES (3145,0,0,1000,3362,@UNCOMMON); -- Deluders Fortune Parchment (Uncommon, 10%)
+INSERT INTO `mob_droplist` VALUES (3145,0,0,1000,3396,@RARE);     -- Odious Talisman (Uncommon, 5%)
+INSERT INTO `mob_droplist` VALUES (3145,0,0,1000,3397,@RARE);     -- Odious Bell (Rare, 5%)
 INSERT INTO `mob_droplist` VALUES (3145,0,0,1000,3493,@RARE);     -- Forgotten Thought (Rare, 5%)
 INSERT INTO `mob_droplist` VALUES (3145,0,0,1000,11292,@VRARE);   -- Mirage Jubbah (Very Rare, 1%)
 INSERT INTO `mob_droplist` VALUES (3145,0,0,1000,11295,@VRARE);   -- Commodore Frac (Very Rare, 1%)
@@ -25924,6 +25949,7 @@ INSERT INTO `mob_droplist` VALUES (3212,0,0,1000,1456,@COMMON);   -- One Hundred
 -- ZoneID: 134 - Hydra Paladin
 -- ZoneID: 134 - Hydra Paladin
 INSERT INTO `mob_droplist` VALUES (3213,0,0,1000,3359,@UNCOMMON); -- Despots Fortune Parchment (Uncommon, 10%)
+INSERT INTO `mob_droplist` VALUES (3213,0,0,1000,3396,@RARE);     -- Odious Talisman (Uncommon, 5%)
 INSERT INTO `mob_droplist` VALUES (3213,0,0,1000,3493,@RARE);     -- Forgotten Thought (Rare, 5%)
 INSERT INTO `mob_droplist` VALUES (3213,0,0,1000,11292,@VRARE);   -- Mirage Jubbah (Very Rare, 1%)
 INSERT INTO `mob_droplist` VALUES (3213,0,0,1000,11295,@VRARE);   -- Commodore Frac (Very Rare, 1%)
@@ -25952,6 +25978,8 @@ INSERT INTO `mob_droplist` VALUES (3213,2,0,1000,1455,0);         -- One Byne Bi
 -- ZoneID: 134 - Hydra Red Mage
 -- ZoneID: 134 - Hydra Red Mage
 INSERT INTO `mob_droplist` VALUES (3214,0,0,1000,3359,@UNCOMMON); -- Despots Fortune Parchment (Uncommon, 10%)
+INSERT INTO `mob_droplist` VALUES (3214,0,0,1000,3396,@RARE);     -- Odious Talisman (Uncommon, 5%)
+INSERT INTO `mob_droplist` VALUES (3214,0,0,1000,3397,@RARE);     -- Odious Bell (Rare, 5%)
 INSERT INTO `mob_droplist` VALUES (3214,0,0,1000,3493,@RARE);     -- Forgotten Thought (Rare, 5%)
 INSERT INTO `mob_droplist` VALUES (3214,0,0,1000,11292,@VRARE);   -- Mirage Jubbah (Very Rare, 1%)
 INSERT INTO `mob_droplist` VALUES (3214,0,0,1000,11295,@VRARE);   -- Commodore Frac (Very Rare, 1%)
@@ -26094,6 +26122,7 @@ INSERT INTO `mob_droplist` VALUES (3218,2,0,1000,1455,0);         -- One Byne Bi
 -- ZoneID: 134 - Hydra Beastmaster
 -- ZoneID: 134 - Hydra Beastmaster
 INSERT INTO `mob_droplist` VALUES (3219,0,0,1000,3363,@UNCOMMON); -- Traitors Fortune Parchment (Uncommon, 10%)
+INSERT INTO `mob_droplist` VALUES (3219,0,0,1000,3397,@RARE);     -- Odious Bell (Rare, 5%)
 INSERT INTO `mob_droplist` VALUES (3219,0,0,1000,3493,@RARE);     -- Forgotten Thought (Rare, 5%)
 INSERT INTO `mob_droplist` VALUES (3219,0,0,1000,11292,@VRARE);   -- Mirage Jubbah (Very Rare, 1%)
 INSERT INTO `mob_droplist` VALUES (3219,0,0,1000,11295,@VRARE);   -- Commodore Frac (Very Rare, 1%)
