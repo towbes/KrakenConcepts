@@ -613,16 +613,16 @@ INSERT INTO `traits` VALUES (109,'occult acumen',20,25,1,902,25,NULL,0); -- SCH 
 INSERT INTO `traits` VALUES (109,'occult acumen',20,45,2,902,50,NULL,0); -- SCH Level 45 Mod:50
 INSERT INTO `traits` VALUES (109,'occult acumen',20,65,3,902,75,NULL,0); -- SCH Level 65 Mod:75
 
-INSERT INTO `traits` VALUES (109,'occult acumen',4,85,1,902,25,'ABYSSEA',0);
-INSERT INTO `traits` VALUES (109,'occult acumen',4,95,2,902,50,'ABYSSEA',0);
-INSERT INTO `traits` VALUES (109,'occult acumen',8,45,1,902,25,'ABYSSEA',0);
-INSERT INTO `traits` VALUES (109,'occult acumen',8,58,2,902,50,'ABYSSEA',0);
-INSERT INTO `traits` VALUES (109,'occult acumen',8,71,3,902,75,'ABYSSEA',0);
-INSERT INTO `traits` VALUES (109,'occult acumen',8,84,4,902,100,'ABYSSEA',0);
-INSERT INTO `traits` VALUES (109,'occult acumen',8,97,5,902,125,'ABYSSEA',0);
-INSERT INTO `traits` VALUES (109,'occult acumen',20,78,1,902,25,'ABYSSEA',0);
-INSERT INTO `traits` VALUES (109,'occult acumen',20,88,2,902,50,'ABYSSEA',0);
-INSERT INTO `traits` VALUES (109,'occult acumen',20,98,3,902,75,'ABYSSEA',0);
+-- INSERT INTO `traits` VALUES (109,'occult acumen',4,85,1,902,25,'ABYSSEA',0);
+-- INSERT INTO `traits` VALUES (109,'occult acumen',4,95,2,902,50,'ABYSSEA',0);
+-- INSERT INTO `traits` VALUES (109,'occult acumen',8,45,1,902,25,'ABYSSEA',0);
+-- INSERT INTO `traits` VALUES (109,'occult acumen',8,58,2,902,50,'ABYSSEA',0);
+-- INSERT INTO `traits` VALUES (109,'occult acumen',8,71,3,902,75,'ABYSSEA',0);
+-- INSERT INTO `traits` VALUES (109,'occult acumen',8,84,4,902,100,'ABYSSEA',0);
+-- INSERT INTO `traits` VALUES (109,'occult acumen',8,97,5,902,125,'ABYSSEA',0);
+-- INSERT INTO `traits` VALUES (109,'occult acumen',20,78,1,902,25,'ABYSSEA',0);
+-- INSERT INTO `traits` VALUES (109,'occult acumen',20,88,2,902,50,'ABYSSEA',0);
+-- INSERT INTO `traits` VALUES (109,'occult acumen',20,98,3,902,75,'ABYSSEA',0);
 INSERT INTO `traits` VALUES (110,'mag. burst bonus',4,45,1,487,5,'ABYSSEA',0);
 INSERT INTO `traits` VALUES (110,'mag. burst bonus',4,58,2,487,7,'ABYSSEA',0);
 INSERT INTO `traits` VALUES (110,'mag. burst bonus',4,71,3,487,9,'ABYSSEA',0);
