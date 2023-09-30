@@ -22,10 +22,14 @@ entity.onTrade = function(player, npc, trade)
             trade:getItemCount() == 12
         then
             if
-                player:getMainJob() == xi.job.BLM or
+                (player:getMainJob() == xi.job.BLM or
                 player:getMainJob() == xi.job.RDM or
                 player:getMainJob() == xi.job.SMN or
-                player:getMainJob() == xi.job.BLU
+                player:getMainJob() == xi.job.BLU) or
+                (player:getSubJob() == xi.job.BLM or
+                player:getSubJob() == xi.job.RDM or
+                player:getSubJob() == xi.job.SMN or
+                player:getSubJob() == xi.job.BLU)
             then
                 player:startEvent(12, 1)
             else
