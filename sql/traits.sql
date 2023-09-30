@@ -599,9 +599,20 @@ INSERT INTO `traits` VALUES (108,'conserve tp',14,97,5,944,26,'ABYSSEA',0); -- C
 INSERT INTO `traits` VALUES (108,'conserve tp',19,77,1,944,15,'ABYSSEA',0); -- Conserve TP I, DNC77, 15%
 INSERT INTO `traits` VALUES (108,'conserve tp',19,87,2,944,18,'ABYSSEA',0); -- Conserve TP II, DNC87, 18%
 INSERT INTO `traits` VALUES (108,'conserve tp',19,97,3,944,21,'ABYSSEA',0); -- Conserve TP III, DNC97, 21%
-INSERT INTO `traits` VALUES (109,'occult acumen',4,75,1,902,10,NULL,0);
-INSERT INTO `traits` VALUES (109,'occult acumen',15,75,1,902,10,NULL,0);
-INSERT INTO `traits` VALUES (109,'occult acumen',20,75,1,902,10,NULL,0);
+
+-- INSERT INTO `traits` VALUES (109,'occult acumen',4,75,1,902,10,NULL,0);
+-- INSERT INTO `traits` VALUES (109,'occult acumen',15,75,1,902,10,NULL,0);
+-- INSERT INTO `traits` VALUES (109,'occult acumen',20,75,1,902,10,NULL,0);
+
+INSERT INTO `traits` VALUES (109,'occult acumen',4,25,1,902,25,NULL,0); -- BLM Level 25 Mod:25
+INSERT INTO `traits` VALUES (109,'occult acumen',4,50,2,902,50,NULL,0); -- BLM Level 45 Mod:50
+INSERT INTO `traits` VALUES (109,'occult acumen',8,30,1,902,25,NULL,0); -- DRK Level 30 Mod:25
+INSERT INTO `traits` VALUES (109,'occult acumen',8,55,2,902,50,NULL,0); -- DRK Level 55 Mod:50
+INSERT INTO `traits` VALUES (109,'occult acumen',8,71,3,902,75,NULL,0); -- DRK Level 71 Mod:75
+INSERT INTO `traits` VALUES (109,'occult acumen',20,25,1,902,25,NULL,0); -- SCH Level 25 Mod:25
+INSERT INTO `traits` VALUES (109,'occult acumen',20,45,2,902,50,NULL,0); -- SCH Level 45 Mod:50
+INSERT INTO `traits` VALUES (109,'occult acumen',20,65,3,902,75,NULL,0); -- SCH Level 65 Mod:75
+
 INSERT INTO `traits` VALUES (109,'occult acumen',4,85,1,902,25,'ABYSSEA',0);
 INSERT INTO `traits` VALUES (109,'occult acumen',4,95,2,902,50,'ABYSSEA',0);
 INSERT INTO `traits` VALUES (109,'occult acumen',8,45,1,902,25,'ABYSSEA',0);
