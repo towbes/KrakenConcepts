@@ -25935,7 +25935,7 @@ INSERT INTO `mob_droplist` VALUES (3211,0,0,1000,1456,@VRARE);    -- One Hundred
 INSERT INTO `mob_droplist` VALUES (3211,2,0,1000,1449,0);         -- Tukuku Whiteshell (Steal)
 INSERT INTO `mob_droplist` VALUES (3211,2,0,1000,1452,0);         -- Ordelle Bronzepiece (Steal)
 INSERT INTO `mob_droplist` VALUES (3211,2,0,1000,1455,0);         -- One Byne Bill (Steal)
-INSERT INTO `mob_droplist` VALUES (3211,0,0,1000,3427,@ALWAYS);   -- Fiendish Tome Chapter 24
+INSERT INTO `mob_droplist` VALUES (3211,0,0,1000,3428,@ALWAYS);   -- Fiendish Tome Chapter 25
 
 -- ZoneID: 134 - Arch Angra Mainyu
 INSERT INTO `mob_droplist` VALUES (3212,0,0,1000,3493,@VCOMMON);  -- Forgotten Thought (Very Common, 24%)
