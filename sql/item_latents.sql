@@ -2951,6 +2951,18 @@ INSERT INTO `item_latents` VALUES  (18491,287,5,6,1000);  -- DMG+5 while TP <100
 
 INSERT INTO `item_latents` VALUES  (18497,8,8,6,500);     -- Foolkiller TODO
 
+-- -------------------------------------------------------
+-- Wootz Amood
+-- -------------------------------------------------------
+INSERT INTO `item_latents` VALUES  (18495,865,50,37,2);   -- First Quarter Moon: Occ Attacks Twice
+INSERT INTO `item_latents` VALUES  (18495,287,-33,37,2);   -- First Quarter Moon: DMG 57
+
+-- -------------------------------------------------------
+-- Wootz Amood +1
+-- -------------------------------------------------------
+INSERT INTO `item_latents` VALUES  (18496,865,50,37,2);   -- First Quarter Moon: Occ Attacks Twice
+INSERT INTO `item_latents` VALUES  (18496,287,-33,37,2);   -- First Quarter Moon: DMG 57
+
 INSERT INTO `item_latents` VALUES  (18504,165,7,59,17);   -- Eventreuse - Vs. plantoid: Critical hit rate +7%
 
 -- -------------------------------------------------------
