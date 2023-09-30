@@ -2,7 +2,7 @@
 -- Stringing Pummel
 -- Sword weapon skill
 -- Skill Level: N/A
--- Delivers a sixfold attack. Damage varies with TP.  Kenkonken: Aftermath effect varies with TP.
+-- Delivers a sixfold attack. Chance of crit varies with TP.  Kenkonken: Aftermath effect varies with TP.
 -- Available only after completing the Unlocking a Myth (Puppetmaster) quest.
 -- Aligned with the Shadow Gorget, Soil Gorget & Flame Gorget.
 -- Aligned with the Shadow Belt, Soil Belt & Flame Belt.
@@ -21,7 +21,7 @@ weaponskillObject.onUseWeaponSkill = function(player, target, wsID, tp, primary,
     params.numHits = 5
     -- This is a 6 hit ws but H2H ws are done in a different way, the off hand hit is been taking into account in another place
     params.ftp100 = 0.75 params.ftp200 = 0.75 params.ftp300 = 0.75
-    params.str_wsc = 0.32 params.dex_wsc = 0.0 params.vit_wsc = 0.32 params.agi_wsc = 0.0 params.int_wsc = 0.0
+    params.str_wsc = 0.32 params.dex_wsc = 0.0 params.vit_wsc = 0.50 params.agi_wsc = 0.0 params.int_wsc = 0.0
     params.mnd_wsc = 0.0 params.chr_wsc = 0.0
     params.crit100 = 0.2 params.crit200 = 0.375 params.crit300 = 0.6
     params.canCrit = true
@@ -30,7 +30,7 @@ weaponskillObject.onUseWeaponSkill = function(player, target, wsID, tp, primary,
 
     if xi.settings.main.USE_ADOULIN_WEAPON_SKILL_CHANGES then
         params.multiHitfTP = true
-        params.ftp100 = 1 params.ftp200 = 1 params.ftp300 = 1
+        params.ftp100 = 1.15 params.ftp200 = 1.15 params.ftp300 = 1.15
         -- http://wiki.ffo.jp/html/15882.html
     end
 

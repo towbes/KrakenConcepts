@@ -20,7 +20,7 @@ weaponskillObject.onUseWeaponSkill = function(player, target, wsID, tp, primary,
     local params = {}
     params.numHits = 1
     -- This is a 2 hit ws but H2H ws are done in a different way, the off hand hit is been taking into account in another place
-    params.ftp100 = 1 params.ftp200 = 1 params.ftp300 = 1
+    params.ftp100 = 1.1 params.ftp200 = 1.1 params.ftp300 = 1.1
     params.str_wsc = 0.5 params.dex_wsc = 0.0 params.vit_wsc = 0.5 params.agi_wsc = 0.0 params.int_wsc = 0.0
     params.mnd_wsc = 0.0 params.chr_wsc = 0.0
     params.crit100 = 0.1 params.crit200 = 0.2 params.crit300 = 0.4
@@ -30,8 +30,8 @@ weaponskillObject.onUseWeaponSkill = function(player, target, wsID, tp, primary,
 
     if xi.settings.main.USE_ADOULIN_WEAPON_SKILL_CHANGES then
         params.multiHitfTP = true -- http://wiki.ffo.jp/html/15880.html
-        params.crit100 = 0.2 params.crit200 = 0.3 params.crit300 = 0.5
-        params.atk100 = 2.0 params.atk200 = 2.0 params.atk300 = 2.0
+        params.crit100 = 0.2 params.crit200 = 0.4 params.crit300 = 0.6
+        params.atk100 = 2.5 params.atk200 = 2.5 params.atk300 = 2.5
     end
 
     -- Apply aftermath
