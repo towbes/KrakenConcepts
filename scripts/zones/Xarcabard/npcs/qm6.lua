@@ -4,17 +4,13 @@
 -- Involved in Quests: RNG AF3 - Unbridled Passion
 -- !pos -254.883 -17.003 -150.818 112
 -----------------------------------
-local ID = require("scripts/zones/Xarcabard/IDs")
-require("scripts/globals/items")
-require("scripts/globals/npc_util")
------------------------------------
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)
 end
 
 entity.onTrigger = function(player, npc)
-    local unbridledPassionCS = player:getCharVar("unbridledPassion")
+    local unbridledPassionCS = player:getCharVar('unbridledPassion')
 
     if unbridledPassionCS == 5 then
         player:startEvent(6, 0, 13360)

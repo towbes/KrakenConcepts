@@ -2,11 +2,7 @@
 -- Area: Lufaise Meadows
 --   NM: Yal-un Eke
 -----------------------------------
-require("scripts/globals/hunts")
-require("scripts/enum/weather")
-require("scripts/globals/mobs")
-local ID = require("scripts/zones/Lufaise_Meadows/IDs")
------------------------------------
+local ID = zones[xi.zone.LUFAISE_MEADOWS]
 local entity = {}
 
 entity.onMobSpawn = function(mob)

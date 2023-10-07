@@ -3,7 +3,7 @@
 --  Mob: Fomor Ninja
 -----------------------------------
 mixins = { require("scripts/mixins/fomor_hate") }
-local ID = require('scripts/zones/Phomiuna_Aqueducts/IDs')
+local ID = zones[xi.zone.PHOMIUNA_AQUEDUCTS]
 -----------------------------------
 local entity = {}
 

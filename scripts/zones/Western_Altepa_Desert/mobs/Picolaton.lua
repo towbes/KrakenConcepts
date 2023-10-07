@@ -2,8 +2,6 @@
 -- Area: Western Altepa Desert
 --   NM: Picolaton
 -----------------------------------
-require("scripts/globals/hunts")
------------------------------------
 local entity = {}
 
 entity.onMobInitialize = function(mob)

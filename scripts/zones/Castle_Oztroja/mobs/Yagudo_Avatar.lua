@@ -4,8 +4,8 @@
 -- Note: PH for Tzee Xicu the Manifest
 -- TODO: messages should be zone-wide
 -----------------------------------
-mixins = { require("scripts/mixins/job_special") }
-local ID = require("scripts/zones/Castle_Oztroja/IDs")
+mixins = { require('scripts/mixins/job_special') }
+local ID = zones[xi.zone.CASTLE_OZTROJA]
 -----------------------------------
 local entity = {}
 

@@ -4,10 +4,6 @@
 -- Type: Mission Giver
 -- !pos -358 -10 -168 235
 -----------------------------------
-require("scripts/globals/keyitems")
-require("scripts/globals/missions")
-local ID = require("scripts/zones/Bastok_Markets/IDs")
------------------------------------
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)

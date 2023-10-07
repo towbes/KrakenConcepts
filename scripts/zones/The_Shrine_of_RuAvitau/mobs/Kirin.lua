@@ -2,10 +2,8 @@
 -- Area: The Shrine of Ru'Avitau
 --   NM: Kirin
 -----------------------------------
-local ID = require("scripts/zones/The_Shrine_of_RuAvitau/IDs")
-mixins = { require("scripts/mixins/job_special") }
-require("scripts/globals/titles")
-require("scripts/globals/mobs")
+local ID = zones[xi.zone.THE_SHRINE_OF_RUAVITAU]
+mixins = { require('scripts/mixins/job_special') }
 -----------------------------------
 local entity = {}
 
@@ -38,11 +36,11 @@ end
 
 entity.onMobFight = function(mob, target)
     -- spawn gods
-    local numAdds = mob:getLocalVar("numAdds")
+    local numAdds = mob:getLocalVar('numAdds')
     if mob:getBattleTime() / 180 == numAdds then
         local godsRemaining = {}
         for i = 1, 4 do
-            if mob:getLocalVar("add"..i) == 0 then
+            if mob:getLocalVar('add'..i) == 0 then
                 table.insert(godsRemaining, i)
             end
         end

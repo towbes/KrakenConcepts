@@ -2,7 +2,7 @@
 -- Area: Misareaux Coast
 --   NM: Gration
 -----------------------------------
-local ID = require("scripts/zones/Misareaux_Coast/IDs")
+local ID = zones[xi.zone.MISAREAUX_COAST]
 mixins = { require("scripts/mixins/fomor_hate") }
 -----------------------------------
 local entity = {}

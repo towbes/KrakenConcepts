@@ -4,9 +4,6 @@
 -- Unlocks: Geo-AGI
 -- !pos -210.032 -16.000 95.255 151
 -----------------------------------
-require("scripts/globals/geomantic_reservoir")
-require("scripts/globals/spell_data")
------------------------------------
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)

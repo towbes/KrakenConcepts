@@ -4,9 +4,6 @@
 -- Type: Cruor NPC
 -- !pos 132.000 -75.856 -822.000 15
 -----------------------------------
-require("scripts/globals/abyssea")
-require("scripts/globals/keyitems")
------------------------------------
 local entity = {}
 
 local itemType = xi.abyssea.itemType

@@ -2,8 +2,6 @@
 -- Area: Crawlers' Nest (197)
 --  Mob: Demonic Tiphia
 -----------------------------------
-require("scripts/globals/hunts")
------------------------------------
 local entity = {}
 
 entity.onMobFight = function(mob, target)

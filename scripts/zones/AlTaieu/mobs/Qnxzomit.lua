@@ -3,7 +3,8 @@
 --  Mob: Qn'xzomit
 -- Note: Pet for JOJ
 -----------------------------------
-local ID = require("scripts/zones/AlTaieu/IDs")
+-- mixins = { require('scripts/mixins/job_special') }
+local ID = zones[xi.zone.ALTAIEU]
 -----------------------------------
 local entity = {}
 

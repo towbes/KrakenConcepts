@@ -4,9 +4,10 @@
 -----------------------------------
 mixins =
 {
-    require("scripts/mixins/dynamis_beastmen"),
-    require("scripts/mixins/job_special")
+    require('scripts/mixins/dynamis_beastmen'),
+    require('scripts/mixins/job_special')
 }
+local ID = zones[xi.zone.DYNAMIS_BEAUCEDINE]
 -----------------------------------
 local entity = {}
 

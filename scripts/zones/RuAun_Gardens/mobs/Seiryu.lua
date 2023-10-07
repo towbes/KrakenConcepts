@@ -3,9 +3,8 @@
 -- NM: Seiryu
 -- ID: 17309981
 -----------------------------------
-local ID = require("scripts/zones/RuAun_Gardens/IDs")
-mixins = { require("scripts/mixins/job_special") }
-require("scripts/globals/mobs")
+local ID = zones[xi.zone.RUAUN_GARDENS]
+mixins = { require('scripts/mixins/job_special') }
 -----------------------------------
 local entity = {}
 

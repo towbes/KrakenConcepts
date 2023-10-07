@@ -4,7 +4,7 @@
 -- TODO: Looked like pets had an additional effect: stun with an unknown proc rate
 -- TODO: "Links with Slave Globes, and Slave Globes link with Defenders. Defenders do not link with Slave Globes or Mother Globe."
 -----------------------------------
-local ID = require("scripts/zones/The_Shrine_of_RuAvitau/IDs")
+local ID = zones[xi.zone.THE_SHRINE_OF_RUAVITAU]
 -----------------------------------
 local entity = {}
 
@@ -127,19 +127,19 @@ end
 -- zero helps to prevent insta spawning next slaves while
 -- in combat if at the start it had all 6 out already
 local setNextSpawnSlaveGlobe = function(mg, spawnCount, nowTime)
-    local nextSpawnTime = 35 -- 30 + 5 seconds for "cast time"
+    local nextSpawnTime = 35 -- 30 + 5 seconds for 'cast time'
 
     if spawnCount < #slaveGlobes then
-        mg:setLocalVar("nextSlaveSpawnTime", nowTime + nextSpawnTime)
+        mg:setLocalVar('nextSlaveSpawnTime', nowTime + nextSpawnTime)
     else
-        -- setting to zero prevents "insta" spawn on the 6th slaves death because slaveGlobePos
+        -- setting to zero prevents 'insta' spawn on the 6th slaves death because slaveGlobePos
         -- on death will check and set the next respawn time
-        mg:setLocalVar("nextSlaveSpawnTime", 0)
+        mg:setLocalVar('nextSlaveSpawnTime', 0)
     end
 end
 
 local trySpawnSlaveGlobe = function(mg, nowTime, spawnedSlaves, notSpawnedSlaves, validSlavePositions)
-    local nextSlaveSpawnTime = mg:getLocalVar("nextSlaveSpawnTime")
+    local nextSlaveSpawnTime = mg:getLocalVar('nextSlaveSpawnTime')
     local shouldSummonSlaveGlobe = nowTime > nextSlaveSpawnTime and #notSpawnedSlaves > 0
     local inCombat = mg:isEngaged()
     local combatHasNotRecentlyStarted = mg:getBattleTime() > 3

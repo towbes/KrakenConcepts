@@ -3,9 +3,6 @@
 --  NPC: Curio Vendor Moogle
 --  Shop NPC
 -----------------------------------
-require("scripts/globals/keyitems")
-require("scripts/globals/shop")
------------------------------------
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)

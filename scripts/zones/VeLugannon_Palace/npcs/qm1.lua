@@ -3,8 +3,7 @@
 --  NPC: ??? (qm1)
 -- !pos -370.039 16.014 -274.378 177
 -----------------------------------
-local ID = require("scripts/zones/VeLugannon_Palace/IDs")
-require('scripts/globals/npc_util')
+local ID = zones[xi.zone.VELUGANNON_PALACE]
 -----------------------------------
 local entity = {}
 
@@ -12,7 +11,7 @@ entity.onTrade = function(player, npc, trade)
 end
 
 entity.onTrigger = function(player, npc)
-    local hideTime = 0
+    local hideTime = 1
 
     if not player:hasItem(xi.items.CURTANA) then
         npcUtil.giveItem(player, xi.items.CURTANA)
@@ -20,10 +19,7 @@ entity.onTrigger = function(player, npc)
         -- ??? dissapears for 3 hours and reappears on new position
         hideTime = 10800
     else
-        player:messageSpecial(ID.text.ITEM_CANNOT_BE_OBTAINED, 16575) -- Curtana
-
-        -- ??? just change position
-        hideTime = 1
+        player:messageSpecial(ID.text.ITEM_CANNOT_BE_OBTAINED, xi.item.CURTANA) -- Curtana
     end
 
     local curtanaPos =

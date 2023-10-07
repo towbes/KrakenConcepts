@@ -1,9 +1,6 @@
 -----------------------------------
 -- Area: Beaucedine_Glacier_[S]
 -----------------------------------
-require("scripts/globals/zone")
------------------------------------
-
 zones = zones or {}
 
 zones[xi.zone.BEAUCEDINE_GLACIER_S] =
@@ -43,7 +40,7 @@ zones[xi.zone.BEAUCEDINE_GLACIER_S] =
 
     mob =
     {
-        ORCISH_BLOODLETTER = GetFirstID("Orcish_Bloodletter"),
+        ORCISH_BLOODLETTER = GetFirstID('Orcish_Bloodletter'),
 
         GRANDGOULE_PH =
         {

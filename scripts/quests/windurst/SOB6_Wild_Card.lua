@@ -3,12 +3,6 @@
 --
 -- Honoi-Gumoi: !pos -195 -11 -120 238
 -----------------------------------
-require('scripts/globals/items')
-require("scripts/globals/keyitems")
-require('scripts/globals/npc_util')
-require('scripts/globals/quests')
-require('scripts/globals/titles')
-require('scripts/globals/interaction/quest')
 
 local quest = Quest:new(xi.quest.log_id.WINDURST, xi.quest.id.windurst.WILD_CARD)
 
@@ -149,7 +143,7 @@ quest.sections =
             ['Apururu'] =
             {
                 onTrigger = function(player, npc)
-                    if quest:getVar(player, 'Prog') == 4 then
+                    if quest:getVar(player, 'Prog') == 3 then
                         return quest:progressEvent(600) -- 2nd meeting with Apururu after meeting him in Hero's hause.
                     end
                 end,

@@ -3,13 +3,6 @@
 --  NPC: Hut Door
 -- !pos -165.357 -11.672 77.771 140
 -----------------------------------
-local ID = require("scripts/zones/Ghelsba_Outpost/IDs")
-require("scripts/globals/bcnm")
-require("scripts/globals/titles")
-require("scripts/globals/keyitems")
-require("scripts/globals/quests")
-require("scripts/globals/missions")
------------------------------------
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)

@@ -4,8 +4,7 @@
 -- !pos 460 0 540 34
 -- !pos 380 0 540 34
 -----------------------------------
-local ID = require("scripts/zones/Grand_Palace_of_HuXzoi/IDs")
-require("scripts/globals/npc_util")
+local ID = zones[xi.zone.GRAND_PALACE_OF_HUXZOI]
 -----------------------------------
 local entity = {}
 

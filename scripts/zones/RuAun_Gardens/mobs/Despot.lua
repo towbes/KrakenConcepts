@@ -11,7 +11,7 @@ entity.onMobSpawn = function(mob)
     if ph then
         local pos = ph:getPos()
         mob:setPos(pos.x, pos.y, pos.z, pos.r)
-        local killerId = ph:getLocalVar("killer")
+        local killerId = ph:getLocalVar('killer')
         if killerId ~= 0 then
             local killer = GetPlayerByID(killerId)
             if not killer:isEngaged() and killer:checkDistance(mob) <= 50 then

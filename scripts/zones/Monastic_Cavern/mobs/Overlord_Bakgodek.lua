@@ -3,9 +3,8 @@
 --  Mob: Overlord Bakgodek
 -- TODO: messages should be zone-wide
 -----------------------------------
-local ID = require("scripts/zones/Monastic_Cavern/IDs")
-mixins = { require("scripts/mixins/job_special") }
-require("scripts/globals/titles")
+local ID = zones[xi.zone.MONASTIC_CAVERN]
+mixins = { require('scripts/mixins/job_special') }
 -----------------------------------
 local entity = {}
 

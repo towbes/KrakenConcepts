@@ -2,8 +2,7 @@
 -- Lovers in the Dusk
 -----------------------------------
 -- Log ID: 1, Quest ID: 63
--- Carmelo : !gotoid 17743884
--- QM4 : !gotoid 17273396
+-- Carmelo : !pos -146.476 -7.48 -10.889 236
 -----------------------------------
 require('scripts/globals/items')
 require('scripts/globals/keyitems')
@@ -19,7 +18,7 @@ quest.reward =
 {
     fame     = 120,
     fameArea = xi.quest.fame_area.BASTOK,
-    item     = xi.items.SIREN_FLUTE,
+    item     = xi.item.SIREN_FLUTE,
 }
 
 quest.sections =
@@ -28,7 +27,8 @@ quest.sections =
         check = function(player, status, vars)
             return status == QUEST_AVAILABLE and
                 player:hasCompletedQuest(xi.quest.log_id.BASTOK, xi.quest.id.bastok.A_TEST_OF_TRUE_LOVE) and
-                not player:needToZone() -- need to zone from previous quest Love and Ice
+                player:getFameLevel(xi.quest.fame_area.BASTOK) >= 6 and
+                not quest:getMustZone(player)
         end,
 
         [xi.zone.PORT_BASTOK] =
@@ -40,7 +40,7 @@ quest.sections =
                 [275] = function(player, csid, option, npc)
                     quest:begin(player)
                     npcUtil.giveKeyItem(player, xi.ki.CHANSON_DE_LIBERTE)
-                    quest:setVar(player, 'Prog', 1)
+                    quest:begin(player)
                 end,
             },
         },
@@ -53,15 +53,7 @@ quest.sections =
 
         [xi.zone.PORT_BASTOK] =
         {
-            ['Carmelo'] =
-            {
-                onTrigger = function(player, npc)
-                    if quest:getVar(player, 'Prog') == 1 then
-                        return quest:event(276)
-                    end
-                end,
-            },
-
+            ['Carmelo'] = quest:event(276),
         },
 
         [xi.zone.THE_SANCTUARY_OF_ZITAH] =
@@ -69,11 +61,7 @@ quest.sections =
             ['qm4'] =
             {
                 onTrigger = function(player, npc)
-                    if
-                        quest:getVar(player, 'Prog') == 1 and
-                        VanadielHour() >= 16 and
-                        VanadielHour() <= 18
-                        then
+                    if VanadielTOTD() == xi.time.DUSK then
                         return quest:progressEvent(204)
                     end
                 end,

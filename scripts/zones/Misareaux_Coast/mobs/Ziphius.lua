@@ -2,8 +2,7 @@
 -- Area: Misareaux Coast
 --   NM: Ziphius
 -----------------------------------
-require("scripts/globals/hunts")
-local ID = require("scripts/zones/Misareaux_Coast/IDs")
+local ID = zones[xi.zone.MISAREAUX_COAST]
 -----------------------------------
 local entity = {}
 

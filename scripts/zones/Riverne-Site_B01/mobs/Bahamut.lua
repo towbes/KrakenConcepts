@@ -2,8 +2,7 @@
 -- Area: Riverne - Site B01 (BCNM)
 --   NM: Bahamut
 -----------------------------------
-local ID = require("scripts/zones/Riverne-Site_B01/IDs")
-require("scripts/globals/quests")
+local ID = zones[xi.zone.RIVERNE_SITE_B01]
 -----------------------------------
 local entity = {}
 
@@ -74,8 +73,8 @@ entity.onMobFight = function(mob, target)
     -- if Megaflare hasn't been set to be used this many times, increase the queue of Megaflares. This will allow it to use multiple Megaflares in a row if the HP is decreased quickly enough.
     for trigger, hpp in ipairs(megaflareHPP) do
         if mobHPP < hpp and megaFlareTrigger < trigger then
-            mob:setLocalVar("MegaFlareTrigger", trigger)
-            mob:setLocalVar("MegaFlareQueue", megaFlareQueue + 1)
+            mob:setLocalVar('MegaFlareTrigger', trigger)
+            mob:setLocalVar('MegaFlareQueue', megaFlareQueue + 1)
             break
         end
     end

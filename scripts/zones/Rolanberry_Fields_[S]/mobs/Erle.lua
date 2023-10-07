@@ -2,9 +2,6 @@
 -- Area: Rolanberry Fields [S]
 --   NM: Erle
 -----------------------------------
-require("scripts/globals/hunts")
-require("scripts/globals/mobs")
------------------------------------
 local entity = {}
 entity.onMobInitialize = function(mob)
     mob:setMobMod(xi.mobMod.ADD_EFFECT, 1)

@@ -2,17 +2,15 @@
 -- Area: The Shrine of Ru'Avitau
 --  Mob: Defender
 -----------------------------------
-require("scripts/globals/regimes")
------------------------------------
 local entity = {}
 
 entity.onMobSpawn = function(mob)
-    mob:setLocalVar("petCount", 1)
+    mob:setLocalVar('petCount', 1)
 end
 
 entity.onMobFight = function(mob, target)
     local auraGear = GetMobByID(mob:getID() + 1)
-    local petCount = mob:getLocalVar("petCount")
+    local petCount = mob:getLocalVar('petCount')
 
     -- Summons an Aura Gear every 15 seconds.
     -- Defenders can also still spawn the Aura Gears while sleeping, etc.

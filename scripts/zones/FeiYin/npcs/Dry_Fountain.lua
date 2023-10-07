@@ -4,8 +4,7 @@
 -- Involved In Quest: Peace for the Spirit
 -- !pos -17 -16 71 204
 -----------------------------------
-require("scripts/globals/quests")
-local ID = require("scripts/zones/FeiYin/IDs")
+local ID = zones[xi.zone.FEIYIN]
 -----------------------------------
 local entity = {}
 
@@ -19,10 +18,6 @@ entity.onEventUpdate = function(player, csid, option, npc)
 end
 
 entity.onEventFinish = function(player, csid, option, npc)
-    if csid == 17 then
-        player:tradeComplete()
-        player:setCharVar("peaceForTheSpiritCS", 2)
-    end
 end
 
 return entity

@@ -2,8 +2,6 @@
 -- Area: Crawlers' Nest (197)
 --   NM: Dynast Beetle
 -----------------------------------
-require("scripts/globals/hunts")
------------------------------------
 local entity = {}
 
 entity.onMobInitialize = function(mob)

@@ -2,7 +2,6 @@
 -- Area: Lufaise Meadows
 --   NM: Flockbock
 -----------------------------------
-require("scripts/globals/hunts")
 mixins = {require("scripts/mixins/rage")}
 -----------------------------------
 local entity = {}

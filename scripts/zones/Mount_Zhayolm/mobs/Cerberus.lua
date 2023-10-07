@@ -2,8 +2,7 @@
 -- Area: Mount Zhayolm
 --   NM: Cerberus
 -----------------------------------
-require("scripts/globals/titles")
-local ID = require("scripts/zones/Mount_Zhayolm/IDs")
+local ID = zones[xi.zone.MOUNT_ZHAYOLM]
 -----------------------------------
 local entity = {}
 

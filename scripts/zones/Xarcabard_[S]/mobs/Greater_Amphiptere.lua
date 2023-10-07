@@ -2,8 +2,7 @@
 -- Area: Xarcabard [S]
 --  Mob: Greater Amphiptere
 -----------------------------------
-mixins = { require("scripts/mixins/families/amphiptere") }
-require("scripts/globals/pathfind")
+mixins = { require('scripts/mixins/families/amphiptere') }
 -----------------------------------
 local entity = {}
 

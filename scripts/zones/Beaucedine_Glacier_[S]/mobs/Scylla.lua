@@ -3,15 +3,12 @@
 -- NM: Scylla
 -- ID: 17334336
 -----------------------------------
-local ID = require("scripts/zones/Beaucedine_Glacier_[S]/IDs")
+local ID = zones[xi.zone.BEAUCEDINE_GLACIER_S]
+
 mixins = {
     require("scripts/mixins/families/ruszor"),
     require("scripts/mixins/rage"),
-}
-require("scripts/globals/hunts")
-require("scripts/globals/msg")
-require("scripts/globals/status")
-require("scripts/globals/titles")
+         }
 -----------------------------------
 local entity = {}
 

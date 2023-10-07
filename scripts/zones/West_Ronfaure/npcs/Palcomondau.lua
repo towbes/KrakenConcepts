@@ -4,8 +4,7 @@
 -- Type: Patrol
 -- !pos -178.395 -61.500 382.350 100
 -----------------------------------
-local ID = require("scripts/zones/West_Ronfaure/IDs")
-require("scripts/globals/pathfind")
+local ID = zones[xi.zone.WEST_RONFAURE]
 -----------------------------------
 local entity = {}
 

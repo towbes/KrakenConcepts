@@ -2,19 +2,17 @@
 -- Area: Al'Taieu
 --   NM: Jailer of Justice
 -----------------------------------
-local ID = require("scripts/zones/AlTaieu/IDs")
-require("scripts/globals/magic")
------------------------------------
+local ID = zones[xi.zone.ALTAIEU]
 local entity = {}
 
 local spawnXzomit = function(mob, xzomit)
-    mob:entityAnimationPacket("casm")
+    mob:entityAnimationPacket('casm')
     mob:setAutoAttackEnabled(false)
     mob:setMobAbilityEnabled(false)
     local pos = mob:getPos()
     mob:timer(3000, function(mobArg)
         if mob:isAlive() then
-            mobArg:entityAnimationPacket("shsm")
+            mobArg:entityAnimationPacket('shsm')
             mobArg:setAutoAttackEnabled(true)
             mobArg:setMobAbilityEnabled(true)
             GetMobByID(xzomit):setSpawn(pos.x + math.random(1, 2), pos.y, pos.z + math.random(1, 2))
@@ -24,20 +22,20 @@ local spawnXzomit = function(mob, xzomit)
 end
 
 entity.onMobSpawn = function(mob)
-    mob:setLocalVar("familiarTrigger", math.random(40, 60))
-    mob:setLocalVar("canCharm", os.time() + 240)
+    mob:setLocalVar('familiarTrigger', math.random(40, 60))
+    mob:setLocalVar('canCharm', os.time() + 240)
     mob:setAutoAttackEnabled(true)
     mob:setMobAbilityEnabled(true)
 end
 
 entity.onMobFight = function(mob, target)
-    if mob:getHPP() < mob:getLocalVar("familiarTrigger") and mob:getLocalVar("familiar") == 0 then
-        mob:setLocalVar("twohour_tp", mob:getTP())
+    if mob:getHPP() < mob:getLocalVar('familiarTrigger') and mob:getLocalVar('familiar') == 0 then
+        mob:setLocalVar('twohour_tp', mob:getTP())
         mob:useMobAbility(740)
-        mob:setLocalVar("familiar", 1)
+        mob:setLocalVar('familiar', 1)
     end
 
-    local popTime = mob:getLocalVar("lastPetPop")
+    local popTime = mob:getLocalVar('lastPetPop')
     -- ffxiclopedia says 30 sec, bgwiki says 1-2 min..
     -- confirmed retail capture spawns xzomits every 30 seconds..
     if os.time() - popTime > 30 then
@@ -50,7 +48,7 @@ entity.onMobFight = function(mob, target)
                     not GetMobByID(xzomit):isSpawned() and
                     mob:canUseAbilities() == true
                 then
-                    mob:setLocalVar("lastPetPop", os.time())
+                    mob:setLocalVar('lastPetPop', os.time())
                     alreadyPopped = true
                     spawnXzomit(mob, xzomit)
                 end
@@ -58,20 +56,20 @@ entity.onMobFight = function(mob, target)
         end
     end
 
-    if os.time() > mob:getLocalVar("canCharm") then
-        mob:setLocalVar("canCharm", os.time() + 240)
-        mob:setLocalVar("twohour_tp", mob:getTP())
+    if os.time() > mob:getLocalVar('canCharm') then
+        mob:setLocalVar('canCharm', os.time() + 240)
+        mob:setLocalVar('twohour_tp', mob:getTP())
         mob:useMobAbility(710)
     end
 end
 
 entity.onMobWeaponSkill = function(target, mob, skill)
     if skill:getID() == 740 then
-        mob:addTP(mob:getLocalVar("twohour_tp"))
-        mob:setLocalVar("twohour_tp", 0)
+        mob:addTP(mob:getLocalVar('twohour_tp'))
+        mob:setLocalVar('twohour_tp', 0)
     elseif skill:getID() == 710 then
-        mob:addTP(mob:getLocalVar("twohour_tp"))
-        mob:setLocalVar("twohour_tp", 0)
+        mob:addTP(mob:getLocalVar('twohour_tp'))
+        mob:setLocalVar('twohour_tp', 0)
     end
 end
 

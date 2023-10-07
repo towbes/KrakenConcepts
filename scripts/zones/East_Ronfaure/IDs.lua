@@ -1,10 +1,6 @@
 -----------------------------------
 -- Area: East_Ronfaure
 -----------------------------------
-require("scripts/globals/zone")
-require("scripts/globals/keyitems")
------------------------------------
-
 zones = zones or {}
 
 zones[xi.zone.EAST_RONFAURE] =
@@ -111,15 +107,7 @@ zones[xi.zone.EAST_RONFAURE] =
 
     npc =
     {
-        LOGGING =
-        {
-            17191530,
-            17191531,
-            17191532,
-            17191533,
-            17191534,
-            17191535,
-        },
+        LOGGING = GetTableOfIDs('Logging_Point'),
     },
 }
 

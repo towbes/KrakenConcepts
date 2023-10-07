@@ -3,9 +3,7 @@
 --  Mob: Promathia
 -- Note: Phase 2
 -----------------------------------
-local ID = require("scripts/zones/Empyreal_Paradox/IDs")
-require("scripts/globals/titles")
-require("scripts/globals/magic")
+local ID = zones[xi.zone.EMPYREAL_PARADOX]
 -----------------------------------
 local entity = {}
 
@@ -28,11 +26,11 @@ end
 entity.onMobEngaged = function(mob, target)
     local bcnmAllies = mob:getBattlefield():getAllies()
     for i, v in pairs(bcnmAllies) do
-        if v:getName() == "Prishe" then
+        if v:getName() == 'Prishe' then
             if not v:getTarget() then
-                v:entityAnimationPacket("prov")
+                v:entityAnimationPacket('prov')
                 v:showText(v, ID.text.PRISHE_TEXT + 1)
-                v:setLocalVar("ready", mob:getID())
+                v:setLocalVar('ready', mob:getID())
             end
         else
             v:addEnmity(mob, 0, 1)

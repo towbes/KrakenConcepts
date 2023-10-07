@@ -2,9 +2,8 @@
 -- Area: Valley of Sorrows
 --  HNM: Adamantoise
 -----------------------------------
-local ID = require("scripts/zones/Valley_of_Sorrows/IDs")
-mixins = { require("scripts/mixins/rage") }
-require("scripts/globals/titles")
+local ID = zones[xi.zone.VALLEY_OF_SORROWS]
+mixins = { require('scripts/mixins/rage') }
 -----------------------------------
 local entity = {}
 

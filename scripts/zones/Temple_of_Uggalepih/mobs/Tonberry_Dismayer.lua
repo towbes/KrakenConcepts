@@ -3,11 +3,9 @@
 --  Mob: Tonberry Dismayer
 -- Note: PH for Tonberry Kinq
 -----------------------------------
-local ID = require("scripts/zones/Temple_of_Uggalepih/IDs")
+local ID = zones[xi.zone.TEMPLE_OF_UGGALEPIH]
 mixins = { require("scripts/mixins/families/tonberry"),
     require("scripts/mixins/prelate_door"), }
-require("scripts/globals/regimes")
-require("scripts/globals/mobs")
 -----------------------------------
 local entity = {}
 

@@ -3,17 +3,15 @@
 --  NPC: ??? (Spawn Claret(ZNM T1))
 -- !pos 497 -9 52 61
 -----------------------------------
-local ID = require("scripts/zones/Mount_Zhayolm/IDs")
-require("scripts/globals/npc_util")
+local ID = zones[xi.zone.MOUNT_ZHAYOLM]
 -----------------------------------
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)
     if
-        npcUtil.tradeHas(trade, 2591) and
+        npcUtil.tradeHas(trade, xi.item.BEAKER_OF_PECTIN) and
         npcUtil.popFromQM(player, npc, ID.mob.CLARET)
     then
-        -- Trade Pectin
         player:confirmTrade()
         player:messageSpecial(ID.text.DRAWS_NEAR)
     end

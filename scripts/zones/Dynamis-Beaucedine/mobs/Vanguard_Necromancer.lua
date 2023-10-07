@@ -4,9 +4,10 @@
 -----------------------------------
 mixins =
 {
-    require("scripts/mixins/dynamis_beastmen"),
-    require("scripts/mixins/job_special")
+    require('scripts/mixins/dynamis_beastmen'),
+    require('scripts/mixins/job_special')
 }
+local ID = zones[xi.zone.DYNAMIS_BEAUCEDINE]
 -----------------------------------
 local entity = {}
 
@@ -66,6 +67,10 @@ entity.onMobFight = function(mob, target)
             xi.follow.follow(avatarMob, mob)
         end)
     end
+end
+
+entity.onMobDespawn = function(mob)
+    xi.mob.phOnDespawn(mob, ID.mob.MORBLOX_CHUBBYCHIN_PH, 10, 1200) -- 20 minutes
 end
 
 entity.onMobDeath = function(mob, player, optParams)

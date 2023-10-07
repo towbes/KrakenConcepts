@@ -2,7 +2,6 @@
 -- Area: Pashhow Marshlands [S]
 --   NM: Nommo
 -----------------------------------
-require("scripts/globals/hunts")
 mixins = {require("scripts/mixins/families/slug")}
 -----------------------------------
 local entity = {}

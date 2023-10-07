@@ -4,10 +4,9 @@
 -- What is known is that they roughly follow player Weaponskill calculations (pDIF, dMOD, ratio, etc) so this is what
 -- this set of functions emulates.
 -----------------------------------
-require("scripts/globals/magicburst")
-require("scripts/globals/magic")
-require("scripts/globals/utils")
-require("scripts/globals/msg")
+require('scripts/globals/magicburst')
+require('scripts/globals/magic')
+require('scripts/globals/utils')
 -----------------------------------
 xi = xi or {}
 xi.mobskills = xi.mobskills or {}
@@ -73,7 +72,7 @@ end
 
 local function calculateMobMagicBurst(caster, ele, target)
     local burst = 1.0
-    local skillchainTier, skillchainCount = MobFormMagicBurst(ele, target)
+    local skillchainTier, skillchainCount = xi.magicburst.formMagicBurst(ele, target)
 
     if skillchainTier > 0 then
         if skillchainCount == 1 then
@@ -357,8 +356,8 @@ xi.mobskills.mobPhysicalMove = function(mob, target, skill, numberofhits, accmod
     end
 
     --work out min and max cRatio
-    local maxRatio = 1
-    local minRatio = 0
+    local maxRatio = ratio
+    local minRatio = ratio - 0.375
 
     if ratio < 0.5 then
         maxRatio = ratio + 0.5
@@ -372,8 +371,6 @@ xi.mobskills.mobPhysicalMove = function(mob, target, skill, numberofhits, accmod
         maxRatio = ratio + 0.375
     elseif ratio <= 3.25 then
         maxRatio = 3
-    else
-        maxRatio = ratio
     end
 
     if ratio < 0.38 then
@@ -384,17 +381,12 @@ xi.mobskills.mobPhysicalMove = function(mob, target, skill, numberofhits, accmod
         minRatio = 1
     elseif ratio <= 2.44 then
         minRatio = ratio * (1176 / 1024) - (775 / 1024)
-    else
-        minRatio = ratio - 0.375
     end
 
     --apply ftp (assumes 1~3 scalar linear mod)
     if tpeffect == xi.mobskills.magicalTpBonus.DMG_BONUS then
         hitdamage = hitdamage * fTP(skill:getTP(), mtp000, mtp150, mtp300)
     end
-
-    --Applying pDIF
-    local pdif = 0
 
     -- start the hits
     local finaldmg = 0
@@ -412,6 +404,8 @@ xi.mobskills.mobPhysicalMove = function(mob, target, skill, numberofhits, accmod
 
     firstHitChance = utils.clamp(firstHitChance, 35, 95)
 
+    --Applying pDIF
+    local pdif
     if (chance * 100) <= firstHitChance then
         pdif = math.random((minRatio * 1000), (maxRatio * 1000)) --generate random PDIF
         pdif = pdif / 1000 --multiplier set.
@@ -478,13 +472,11 @@ end
 
 xi.mobskills.mobMagicalMove = function(mob, target, skill, damage, element, dmgmod, tpeffect, tpvalue)
     local returninfo = {}
-    --get all the stuff we need
-    local resist = 1
 
     local mdefBarBonus = 0
     if
-        element >= xi.magic.element.FIRE and
-        element <= xi.magic.element.WATER and
+        element >= xi.element.FIRE and
+        element <= xi.element.WATER and
         target:hasStatusEffect(xi.magic.barSpell[element])
     then -- bar- spell magic defense bonus
         mdefBarBonus = target:getStatusEffect(xi.magic.barSpell[element]):getSubPower()
@@ -517,8 +509,7 @@ xi.mobskills.mobMagicalMove = function(mob, target, skill, damage, element, dmgm
         end
     end
 
-    resist = xi.mobskills.applyPlayerResistance(mob, nil, target, mob:getStat(xi.mod.INT)-target:getStat(xi.mod.INT), avatarAccBonus, element)
-
+    local resist       = xi.mobskills.applyPlayerResistance(mob, nil, target, mob:getStat(xi.mod.INT)-target:getStat(xi.mod.INT), avatarAccBonus, element)
     local magicDefense = getElementalDamageReduction(target, element)
 
     finaldmg = finaldmg * resist * magicDefense
@@ -536,6 +527,7 @@ xi.mobskills.mobMagicalMove = function(mob, target, skill, damage, element, dmgm
     end
 
 
+    finaldmg       = finaldmg * resist * magicDefense
     returninfo.dmg = finaldmg
 
     return returninfo
@@ -612,8 +604,8 @@ xi.mobskills.mobAddBonuses = function(caster, target, dmg, ele) -- used for SMN 
 
     local mdefBarBonus = 0
     if
-        ele >= xi.magic.element.FIRE and
-        ele <= xi.magic.element.WATER and
+        ele >= xi.element.FIRE and
+        ele <= xi.element.WATER and
         target:hasStatusEffect(xi.magic.barSpell[ele])
     then -- bar- spell magic defense bonus
         mdefBarBonus = target:getStatusEffect(xi.magic.barSpell[ele]):getSubPower()
@@ -675,7 +667,7 @@ xi.mobskills.mobBreathMove = function(mob, target, percent, base, element, cap)
 
     local globalDamageTaken   = target:getMod(xi.mod.DMG) / 10000          -- Mod is base 10000
     local breathDamageTaken   = target:getMod(xi.mod.DMGBREATH) / 10000    -- Mod is base 10000
-    local combinedDamageTaken = 1.0 +  utils.clamp(breathDamageTaken + globalDamageTaken, -0.5, 0.5) -- The combination of regular "Damage Taken" and "Breath Damage Taken" caps at 50%. There is no BDTII known as of yet.
+    local combinedDamageTaken = 1.0 + utils.clamp(breathDamageTaken + globalDamageTaken, -0.5, 0.5) -- The combination of regular "Damage Taken" and "Breath Damage Taken" caps at 50%. There is no BDTII known as of yet.
 
     damage = math.floor(damage * combinedDamageTaken)
 
@@ -774,8 +766,8 @@ xi.mobskills.mobFinalAdjustments = function(dmg, mob, skill, target, attackType,
 
     -- Handle Automaton Analyzer which decreases damage from successive special attacks
     if target:getMod(xi.mod.AUTO_ANALYZER) > 0 then
-        local analyzerSkill = target:getLocalVar("analyzer_skill")
-        local analyzerHits = target:getLocalVar("analyzer_hits")
+        local analyzerSkill = target:getLocalVar('analyzer_skill')
+        local analyzerHits = target:getLocalVar('analyzer_hits')
         if
             analyzerSkill == skill:getID() and
             target:getMod(xi.mod.AUTO_ANALYZER) > analyzerHits
@@ -784,11 +776,11 @@ xi.mobskills.mobFinalAdjustments = function(dmg, mob, skill, target, attackType,
             dmg = dmg * 0.6
             analyzerHits = analyzerHits + 1
         else
-            target:setLocalVar("analyzer_skill", skill:getID())
+            target:setLocalVar('analyzer_skill', skill:getID())
             analyzerHits = 0
         end
 
-        target:setLocalVar("analyzer_hits", analyzerHits)
+        target:setLocalVar('analyzer_hits', analyzerHits)
     end
 
     if attackType == xi.attackType.PHYSICAL then

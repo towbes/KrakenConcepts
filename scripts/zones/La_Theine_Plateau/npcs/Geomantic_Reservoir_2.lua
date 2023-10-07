@@ -4,9 +4,6 @@
 -- Unlocks: Geo-Regen
 -- !pos -5.052 54.625 -405.673 102
 -----------------------------------
-require("scripts/globals/geomantic_reservoir")
-require("scripts/globals/spell_data")
------------------------------------
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)

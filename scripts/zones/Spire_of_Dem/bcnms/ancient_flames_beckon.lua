@@ -2,11 +2,6 @@
 -- Ancient Flames Beckon
 -- Spire of Dem mission battlefield
 -----------------------------------
-local ID = require("scripts/zones/Spire_of_Dem/IDs")
-require("scripts/globals/battlefield")
-require("scripts/globals/teleports")
-require("scripts/globals/keyitems")
-require("scripts/globals/missions")
 require('scripts/missions/cop/helpers')
 -----------------------------------
 local battlefieldObject = {}
@@ -37,7 +32,7 @@ battlefieldObject.onBattlefieldLeave = function(player, battlefield, leavecode)
             player:setLocalVar('newPromy', 1)
         end
 
-        player:startEvent(32001, battlefield:getArea(), clearTime, partySize, battlefield:getTimeInside(), 0, battlefield:getLocalVar("[cs]bit"), 0, arg8)
+        player:startEvent(32001, battlefield:getArea(), clearTime, partySize, battlefield:getTimeInside(), 0, battlefield:getLocalVar('[cs]bit'), 0, arg8)
     elseif leavecode == xi.battlefield.leaveCode.LOST then
         player:startEvent(32002)
     end

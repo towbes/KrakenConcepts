@@ -1,10 +1,6 @@
 -----------------------------------
 -- Area: Abyssea-La_Theine
 -----------------------------------
-require("scripts/globals/keyitems")
-require("scripts/globals/zone")
------------------------------------
-
 zones = zones or {}
 
 zones[xi.zone.ABYSSEA_LA_THEINE] =

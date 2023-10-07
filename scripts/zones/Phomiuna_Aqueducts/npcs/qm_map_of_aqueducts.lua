@@ -7,9 +7,6 @@
 -- !pos ? ? ? 27
 -- !pos ? ? ? 27
 -----------------------------------
-require("scripts/globals/keyitems")
-require("scripts/globals/npc_util")
------------------------------------
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)

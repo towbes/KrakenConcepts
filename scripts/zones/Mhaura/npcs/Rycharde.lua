@@ -9,11 +9,6 @@
 -- Used in: scripts/quests/otherAreas/The_Clue.lua
 -- Used in: scripts/quests/otherAreas/The_Basics.lua
 -----------------------------------
-local ID = require("scripts/zones/Mhaura/IDs")
-require('scripts/globals/items')
-require("scripts/globals/quests")
-require("scripts/globals/keyitems")
------------------------------------
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)

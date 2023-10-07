@@ -99,10 +99,10 @@ namespace daily
 
     void LoadDailyItems()
     {
-        int32  ret = sql->Query("SELECT itemid, aH, flags FROM item_basic WHERE flags & 4 > 0");
-        uint16 itemid;
-        uint16 aH;
-        uint16 flags;
+        int32  ret    = sql->Query("SELECT itemid, aH, flags FROM item_basic WHERE flags & 4 > 0");
+        uint16 itemid = 0;
+        uint16 aH     = 0;
+        uint16 flags  = 0;
 
         if (ret != SQL_ERROR && sql->NumRows() != 0)
         {
@@ -111,7 +111,7 @@ namespace daily
                 itemid = sql->GetUIntData(0);
                 aH     = sql->GetUIntData(1);
                 flags  = sql->GetUIntData(2);
-                specialDialItems.push_back(itemid);
+                specialDialItems.emplace_back(itemid);
                 switch (aH)
                 {
                     /* Dial 1 (Materials) */
@@ -124,7 +124,7 @@ namespace daily
                     case 44: // Alchemy
                     case 50: // Beast-Made
                     {
-                        materialsDialItems.push_back(itemid);
+                        materialsDialItems.emplace_back(itemid);
                         break;
                     }
                     /* Dial 2 (Food) */
@@ -136,13 +136,13 @@ namespace daily
                     case 57: // Sweets
                     case 58: // Drinks
                     {
-                        foodDialItems.push_back(itemid);
+                        foodDialItems.emplace_back(itemid);
                         break;
                     }
                     /* Dial 3 (Medicine) */
                     case 33: // Medicine
                     {
-                        medicineDialItems.push_back(itemid);
+                        medicineDialItems.emplace_back(itemid);
                         break;
                     }
                     /* Dial 4 (Sundries 1) */
@@ -152,7 +152,7 @@ namespace daily
                     {
                         if ((flags & ITEM_FLAG_CANUSE) > 0) // only usable (pouch, case, quiver, etc)
                         {
-                            sundries1DialItems.push_back(itemid);
+                            sundries1DialItems.emplace_back(itemid);
                         }
                         break;
                     }
@@ -164,7 +164,7 @@ namespace daily
                         {
                             break;
                         }
-                        sundries2DialItems.push_back(itemid);
+                        sundries2DialItems.emplace_back(itemid);
                         break;
                     }
                     default:
@@ -179,7 +179,7 @@ namespace daily
                             case 15453: // lugworm belt
                             case 15454: // little worm belt
                             {
-                                sundries2DialItems.push_back(itemid);
+                                sundries2DialItems.emplace_back(itemid);
                                 break;
                             }
                         }

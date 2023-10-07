@@ -1,10 +1,8 @@
 -----------------------------------
 -- Zone: Misareaux_Coast (25)
 -----------------------------------
-require('scripts/globals/conquest')
-require('scripts/globals/helm')
 require('scripts/globals/exp_controller')
-local ID = require('scripts/zones/Misareaux_Coast/IDs')
+local ID = zones[xi.zone.MISAREAUX_COAST]
 local misareauxGlobal = require('scripts/zones/Misareaux_Coast/globals')
 -----------------------------------
 local zoneObject = {}

@@ -2,8 +2,6 @@
 -- Area: Attohwa Chasm
 --  Mob: Tiamat
 -----------------------------------
-require("scripts/globals/titles")
------------------------------------
 local entity = {}
 
 -- TODO: Draw in should draw in to slightly in front of where Tiamat is facing

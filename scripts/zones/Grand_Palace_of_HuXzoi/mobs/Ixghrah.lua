@@ -2,8 +2,6 @@
 -- Area: Grand Palace of HuXzoi
 --  Mob: Ix'ghrah
 -----------------------------------
-require("scripts/globals/missions")
------------------------------------
 local entity = {}
 
 local spellTable =
@@ -150,35 +148,35 @@ entity.onMobFight = function(mob, target)
     end
 
     if
-        mob:getLocalVar("canTwoHour") == 0 and
+        mob:getLocalVar('canTwoHour') == 0 and
         mob:getHPP() < twoHourPer
     then
-        if mob:getLocalVar("state") == 1 then
+        if mob:getLocalVar('state') == 1 then
             mob:useMobAbility(694) --invincible
-        elseif mob:getLocalVar("state") == 2 then
+        elseif mob:getLocalVar('state') == 2 then
             mob:useMobAbility(688) -- mighty strikes
-        elseif mob:getLocalVar("state") == 0 then
+        elseif mob:getLocalVar('state') == 0 then
             mob:useMobAbility(691) -- manafont
-            local skin = mob:getLocalVar("skin")
+            local skin = mob:getLocalVar('skin')
             mob:setSpellList(spellTable[skin][1])
-            mob:setLocalVar("delay", mob:getBattleTime())
+            mob:setLocalVar('delay', mob:getBattleTime())
             mob:setMobMod(xi.mobMod.MAGIC_COOL, 0)
-        elseif mob:getLocalVar("state") == 3 then
+        elseif mob:getLocalVar('state') == 3 then
             mob:useMobAbility(693) -- perfect dodge
         end
 
-        mob:setLocalVar("canTwoHour", 1)
+        mob:setLocalVar('canTwoHour', 1)
     end
 
     if
         not mob:hasStatusEffect(xi.effect.MANAFONT) and --Changing spell list back after manafont is over
-        mob:getLocalVar("canTwoHour") == 1 and
-        mob:getBattleTime() - mob:getLocalVar("delay") > 15 and
-        mob:getLocalVar("state2") == 0
+        mob:getLocalVar('canTwoHour') == 1 and
+        mob:getBattleTime() - mob:getLocalVar('delay') > 15 and
+        mob:getLocalVar('state2') == 0
     then
-        local skin = mob:getLocalVar("skin")
+        local skin = mob:getLocalVar('skin')
         mob:setSpellList(spellTable[skin][2])
-        mob:setLocalVar("state2", 1)
+        mob:setLocalVar('state2', 1)
         mob:setMobMod(xi.mobMod.MAGIC_COOL, 30)
     end
 end

@@ -4,10 +4,9 @@
 -----------------------------------
 mixins =
 {
-    require("scripts/mixins/job_special"),
-    require("scripts/mixins/rage")
+    require('scripts/mixins/job_special'),
+    require('scripts/mixins/rage')
 }
-require("scripts/globals/mobs")
 -----------------------------------
 local entity = {}
 

@@ -4,7 +4,7 @@
 -- Notes: Spawns Gargoyle when triggered
 -- !pos 250.000 -1.925 -58.399 9
 -----------------------------------
-local psoXjaGlobal = require("scripts/zones/PsoXja/globals")
+local psoXjaGlobal = require('scripts/zones/PsoXja/globals')
 -----------------------------------
 local entity = {}
 
@@ -13,7 +13,11 @@ entity.onTrade = function(player, npc, trade)
         (player:getMainJob() == xi.job.THF or
         player:getSubJob() == xi.job.THF) and
         trade:getItemCount() == 1 and
-        (trade:hasItemQty(1115, 1) or trade:hasItemQty(1023, 1) or trade:hasItemQty(1022, 1))
+        (
+            trade:hasItemQty(xi.item.SKELETON_KEY, 1) or
+            trade:hasItemQty(xi.item.LIVING_KEY, 1) or
+            trade:hasItemQty(xi.item.SET_OF_THIEFS_TOOLS, 1)
+        )
     then
         psoXjaGlobal.attemptPickLock(player, npc, player:getZPos() <= -59)
     end

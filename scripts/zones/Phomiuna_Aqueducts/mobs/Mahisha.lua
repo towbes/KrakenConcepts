@@ -3,12 +3,12 @@
 --   NM: Mahisha
 -----------------------------------
 mixins = { require("scripts/mixins/fomor_hate") }
-local ID = require("scripts/zones/Phomiuna_Aqueducts/IDs")
+local ID = zones[xi.zone.PHOMIUNA_AQUEDUCTS]
 -----------------------------------
 local entity = {}
 
 entity.onMobSpawn = function(mob)
-    mob:setLocalVar("fomorHateAdj", -1)
+    mob:setLocalVar('fomorHateAdj', -1)
 end
 
 entity.onMobDeath = function(mob, player, optParams)

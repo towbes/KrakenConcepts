@@ -22,8 +22,8 @@
 #ifndef _STATUSEFFECT_H
 #define _STATUSEFFECT_H
 
-#include "../common/cbasetypes.h"
-#include "../common/mmo.h"
+#include "common/cbasetypes.h"
+#include "common/mmo.h"
 
 #include <vector>
 
@@ -780,10 +780,13 @@ public:
     uint16 GetPower() const;
     uint16 GetSubPower() const;
     uint16 GetTier() const;
-    uint32 GetFlag() const;
-    uint16 GetType() const;
-    uint8  GetSlot() const;
-    uint16 GetItemSourceID() const;
+    uint32 GetEffectFlags() const;
+    uint16 GetEffectType() const;
+    uint8  GetEffectSlot() const;
+    // uint32 GetFlag() const;
+    // uint16 GetType() const;
+    // uint8  GetSlot() const;
+    // uint16 GetItemSourceID() const;
 
     uint32         GetTickTime() const;
     uint32         GetDuration() const;
@@ -791,10 +794,12 @@ public:
     time_point     GetStartTime();
     CBattleEntity* GetOwner();
 
-    void SetFlag(uint32 Flag);
-    void UnsetFlag(uint32 Flag);
-    void SetType(uint16 Type);
-    void SetSlot(uint8 Slot);
+    void SetEffectFlags(uint32 Flags);
+    void AddEffectFlag(uint32 Flag);
+    void DelEffectFlag(uint32 Flag);
+    bool HasEffectFlag(uint32 Flag);
+    void SetEffectType(uint16 Type);
+    void SetEffectSlot(uint8 Slot);
     void SetIcon(uint16 Icon);
     void SetPower(uint16 Power);
     void SetSubPower(uint16 subPower);
@@ -809,7 +814,7 @@ public:
 
     void addMod(Mod modType, int16 amount);
 
-    void SetName(std::string name);
+    void SetEffectName(std::string name);
 
     const std::string& GetName();
 
@@ -829,7 +834,7 @@ private:
     uint16 m_Power{ 0 };              // сила эффекта
     uint16 m_SubPower{ 0 };           // Secondary power of the effect
     uint16 m_Tier{ 0 };               // Tier of the effect
-    uint32 m_Flag{ 0 };               // флаг эффекта (условия его исчезновения)
+    uint32 m_Flags{ 0 };              // флаг эффекта (условия его исчезновения)
     uint16 m_Type{ 0 };               // used to enforce only one
     uint8  m_Slot{ 0 };               // used to determine slot order for songs/rolls
     uint16 m_ItemSourceID{ 0 };       // used for status effects granted by items to note source item ID

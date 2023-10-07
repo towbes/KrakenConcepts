@@ -1,11 +1,6 @@
 -----------------------------------
 -- Zone: Heavens_Tower
 -----------------------------------
-local ID = require('scripts/zones/Heavens_Tower/IDs')
-require('scripts/globals/conquest')
-require('scripts/globals/missions')
-require('scripts/globals/zone')
------------------------------------
 local zoneObject = {}
 
 zoneObject.onInitialize = function(zone)

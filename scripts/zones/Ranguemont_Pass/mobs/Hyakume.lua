@@ -2,8 +2,6 @@
 -- Area: Ranguemont Pass
 --   NM: Hyakume
 -----------------------------------
-require("scripts/globals/hunts")
------------------------------------
 local entity = {}
 
 entity.onMobInitialize = function(mob)
@@ -19,6 +17,7 @@ end
 
 entity.onMobDeath = function(mob, player, isKiller)
     xi.hunts.checkHunt(mob, player, 344)
+    xi.magian.onMobDeath(mob, player, optParams, set{ 778 })
 end
 
 return entity

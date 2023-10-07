@@ -1,9 +1,3 @@
-require("scripts/zones/Promyvion-Dem/IDs")
-require("scripts/zones/Promyvion-Holla/IDs")
-require("scripts/zones/Promyvion-Mea/IDs")
-require("scripts/zones/Promyvion-Vahzl/IDs")
------------------------------------
-
 xi = xi or {}
 xi.promyvion = xi.promyvion or {}
 
@@ -95,7 +89,7 @@ xi.promyvion.strayOnSpawn = function(mob)
 end
 
 xi.promyvion.receptacleOnFight = function(mob, target)
-    if os.time() > mob:getLocalVar("[promy]nextStray") then
+    if os.time() > mob:getLocalVar('[promy]nextStray') then
         local ID = zones[mob:getZoneID()]
         local mobId = mob:getID()
         local numStrays = ID.mob.MEMORY_RECEPTACLES[mobId].strays
@@ -225,7 +219,7 @@ xi.promyvion.onTriggerAreaEnter = function(player, triggerArea)
         else
             local stream = GetNPCByID(triggerAreaID)
             if stream ~= nil and stream:getAnimation() == xi.anim.OPEN_DOOR then
-                event = stream:getLocalVar("[promy]destination")
+                event = stream:getLocalVar('[promy]destination')
             end
         end
 

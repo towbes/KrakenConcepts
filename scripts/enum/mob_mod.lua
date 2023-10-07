@@ -84,6 +84,7 @@ xi.mobMod =
     ONE_WAY_LINKING        = 74, -- Will link with other mobs in its party (typically the same mob family) while roaming, but will not let others link with it once engaged
     CAN_PARRY              = 75, -- Check if a mob is allowed to have parry rank (Rank Value 1-5)
     NO_WIDESCAN            = 76, -- Disables widescan for a specific mob
+    TRUST_DISTANCE         = 77, -- TRUSTS ONLY: Set movement type/distance. See trust.lua for details.
     ENCROACH_TARGET        = 200, -- How close a mob will encroach on it's target, attempting to make model to model contact. Encroach distance * 10
     PIXIE                  = 201, -- Pixie (heals players)
     BREATH_ATTACK_LINEAR   = 202, -- Mob Breath Attacks will now scale linearly from %100-0 HP after the damage is capped if applied(If a cap is set). (1 = true, 0 = false/off)

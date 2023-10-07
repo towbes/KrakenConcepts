@@ -6,9 +6,7 @@
 -- Wiki: http://ffxiclopedia.wikia.com/wiki/Sarameya
 -- TODO: PostAIRewrite: Code the Howl effect and gradual resists.
 -----------------------------------
-mixins = { require("scripts/mixins/rage") }
-require("scripts/globals/magic")
-require("scripts/globals/msg")
+mixins = { require('scripts/mixins/rage') }
 -----------------------------------
 local entity = {}
 

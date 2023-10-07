@@ -2,11 +2,7 @@
 -- Area: Misareaux Coast
 --   NM: Odqan
 -----------------------------------
-require("scripts/globals/hunts")
------------------------------------
-require("scripts/enum/weather")
-require("scripts/globals/mobs")
-local ID = require("scripts/zones/Misareaux_Coast/IDs")
+local ID = zones[xi.zone.MISAREAUX_COAST]
 ------------------------------
 local entity = {}
 

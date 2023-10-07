@@ -23,9 +23,9 @@
 
 #include "char_sync.h"
 
-#include "../entities/charentity.h"
-#include "../entities/fellowentity.h"
-#include "../status_effect_container.h"
+#include "entities/charentity.h"
+#include "entities/fellowentity.h"
+#include "status_effect_container.h"
 
 CCharSyncPacket::CCharSyncPacket(CCharEntity* PChar)
 {

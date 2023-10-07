@@ -2,7 +2,7 @@
 -- Area: Grand Palace of HuXzoi
 --  Mob: Ix'aern MNK
 -----------------------------------
-local ID = require("scripts/zones/Grand_Palace_of_HuXzoi/IDs")
+local ID = zones[xi.zone.GRAND_PALACE_OF_HUXZOI]
 -----------------------------------
 local entity = {}
 
@@ -37,12 +37,12 @@ local bracerMode = function(mob, qnAern1, qnAern2)
 end
 
 entity.onMobInitialize = function(mob)
-    mob:addListener("ITEM_DROPS", "ITEM_DROPS_IXAERN_MNK", function(mobArg, loot)
-        local rate = mob:getLocalVar("[SEA]IxAern_DropRate")
+    mob:addListener('ITEM_DROPS', 'ITEM_DROPS_IXAERN_MNK', function(mobArg, loot)
+        local rate = mob:getLocalVar('[SEA]IxAern_DropRate')
         loot:addGroupFixed(rate,
         {
-            { item = xi.items.DEED_OF_PLACIDITY, weight = 750 },
-            { item = xi.items.VICE_OF_ANTIPATHY, weight = 250 },
+            { item = xi.item.DEED_OF_PLACIDITY, weight = 750 },
+            { item = xi.item.VICE_OF_ANTIPATHY, weight = 250 },
         })
     end)
 end

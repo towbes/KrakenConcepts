@@ -3,10 +3,6 @@
 -- Riverne Site A, Cloud Evokers
 -- !pos 184 0 344 30
 -----------------------------------
-require("scripts/globals/titles")
-require("scripts/globals/status")
-require("scripts/globals/magic")
------------------------------------
 local entity = {}
 
 entity.onMobSpawn = function(mob)

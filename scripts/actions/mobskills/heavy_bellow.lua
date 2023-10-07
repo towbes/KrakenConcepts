@@ -1,0 +1,23 @@
+-----------------------------------
+-- Heavy Bellow
+-- Description: Additional effect: "Stun."
+-- Type: Physical (Blunt)
+-----------------------------------
+local mobskillObject = {}
+
+mobskillObject.onMobSkillCheck = function(target, mob, skill)
+    if mob:getZone():getType() == xi.zoneType.DYNAMIS then
+        skill:setAoE(4)
+    end
+    return 0
+end
+
+mobskillObject.onMobWeaponSkill = function(target, mob, skill)
+    local typeEffect = xi.effect.STUN
+
+    skill:setMsg(xi.mobskills.mobStatusEffectMove(mob, target, typeEffect, 1, 0, 6))
+
+    return typeEffect
+end
+
+return mobskillObject

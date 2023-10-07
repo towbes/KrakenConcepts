@@ -3,6 +3,8 @@
 --  Mob: Nephiyl Moatfiller
 -- BCNM: Demolition Squad
 -----------------------------------
+mixins = { require('scripts/mixins/job_special') }
+-----------------------------------
 local entity = {}
 
 entity.onMobFight = function(mob, target)

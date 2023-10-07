@@ -4,12 +4,7 @@
 -- Involved in Mission 1-3, Mission 7-2
 -- !pos 13 -9 -197 238
 -----------------------------------
-require("scripts/globals/missions")
-require("scripts/globals/keyitems")
-require("scripts/globals/npc_util")
-require("scripts/globals/quests")
-require("scripts/globals/titles")
-local ID = require("scripts/zones/Windurst_Waters/IDs")
+local ID = zones[xi.zone.WINDURST_WATERS]
 -----------------------------------
 local entity = {}
 
@@ -56,7 +51,7 @@ local function getFenrirRewardMask(player)
         rewardMask = rewardMask + 16
     end -- Ancient's Key
 
-    if player:hasSpell(297) then
+    if player:hasSpell(xi.magic.spell.FENRIR) then
         rewardMask = rewardMask + 64
     end  -- Pact
 
@@ -99,7 +94,7 @@ entity.onTrigger = function(player, npc)
 
     elseif
         tuningOut == QUEST_ACCEPTED and
-        player:getCharVar("TuningOut_Progress") == 8
+        player:getCharVar('TuningOut_Progress') == 8
     then
         player:startEvent(897) -- Finishing dialogue
 
@@ -190,7 +185,7 @@ entity.onEventFinish = function(player, csid, option, npc)
         elseif option == 6 then
             npcUtil.giveCurrency(player, 'gil', 15000)
         elseif option == 7 then
-            player:addSpell(297) -- Pact
+            player:addSpell(xi.magic.spell.FENRIR) -- Pact
         elseif option == 8 then
             player:addKeyItem(xi.ki.FENRIR_WHISTLE)
             player:messageSpecial(ID.text.KEYITEM_OBTAINED, xi.ki.FENRIR_WHISTLE)
@@ -201,7 +196,7 @@ entity.onEventFinish = function(player, csid, option, npc)
         -- if the player chooses an item, and they don't have space in their inventory.
         player:addTitle(xi.title.HEIR_OF_THE_NEW_MOON)
         player:delKeyItem(xi.ki.WHISPER_OF_THE_MOON)
-        player:setCharVar("MoonlitPath_date", getMidnight())
+        player:setCharVar('MoonlitPath_date', getMidnight())
         player:addFame(xi.quest.fame_area.WINDURST, 30)
 
         if player:getQuestStatus(xi.quest.log_id.WINDURST, xi.quest.id.windurst.THE_MOONLIT_PATH) == QUEST_ACCEPTED then
@@ -237,7 +232,7 @@ entity.onEventFinish = function(player, csid, option, npc)
 
     -- Tuning Out
     elseif csid == 888 then
-        player:setCharVar("TuningOut_Progress", 1)
+        player:setCharVar('TuningOut_Progress', 1)
         player:addQuest(xi.quest.log_id.WINDURST, xi.quest.id.windurst.TUNING_OUT)
 
     elseif
@@ -247,7 +242,7 @@ entity.onEventFinish = function(player, csid, option, npc)
             title = xi.title.FRIEND_OF_THE_HELMED,
         })
     then
-        player:setCharVar("TuningOut_Progress", 0) -- zero when quest is done
+        player:setCharVar('TuningOut_Progress', 0) -- zero when quest is done
     end
 end
 

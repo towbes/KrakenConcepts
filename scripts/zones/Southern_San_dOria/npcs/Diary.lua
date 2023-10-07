@@ -4,8 +4,6 @@
 -- Involved in Quest: To Cure a Cough, Over The Hills And Far Away
 -- !pos -75 -12 65 230
 -----------------------------------
-require("scripts/globals/quests")
------------------------------------
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)
@@ -48,15 +46,15 @@ entity.onEventFinish = function(player, csid, option, npc)
 
     if option >= diaryPage then
         if csid == 639 and option == 0 then
-            player:setCharVar("DiaryPage", 1)    -- has read page 1
+            player:setCharVar('DiaryPage', 1)    -- has read page 1
         elseif csid == 640 and option == 2 then
-            player:setCharVar("DiaryPage", 2)    -- has read page 2
+            player:setCharVar('DiaryPage', 2)    -- has read page 2
         elseif csid == 641 and option == 3 then
-            player:setCharVar("DiaryPage", 3)    -- has read page 3
+            player:setCharVar('DiaryPage', 3)    -- has read page 3
         elseif csid == 722 and option == 4 then
-            player:setCharVar("DiaryPage", 4)    -- has read page 4
+            player:setCharVar('DiaryPage', 4)    -- has read page 4
         --elseif csid == 723 and option == 5 then
-        --    player:setCharVar("DiaryPage", 5)    -- has read the last page
+        --    player:setCharVar('DiaryPage', 5)    -- has read the last page
         end
     end
 end

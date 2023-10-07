@@ -2,11 +2,6 @@
 -- Area: Rolanberry Fields [S]
 --   NM: Dyinyinga
 -----------------------------------
-require("scripts/globals/hunts")
-require("scripts/globals/mobskills")
-require("scripts/globals/mobs")
--- mixins = {require("scripts/mixins/families/slug")}
------------------------------------
 local entity = {}
 
 local updateRegen = function(mob)

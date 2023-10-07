@@ -2,8 +2,7 @@
 -- Area: VeLugannon Palace
 --   NM: Brigandish Blade
 -----------------------------------
-local ID = require("scripts/zones/VeLugannon_Palace/IDs")
-require("scripts/globals/mobs")
+local ID = zones[xi.zone.VELUGANNON_PALACE]
 -----------------------------------
 local entity = {}
 
@@ -29,7 +28,7 @@ entity.onMobFight = function(mob, target)
 end
 
 entity.onMobDeath = function(mob, player, optParams)
-    GetNPCByID(ID.npc.QM3):setLocalVar("PillarCharged", 1)
+    GetNPCByID(ID.npc.QM3):setLocalVar('PillarCharged', 1)
 end
 
 return entity

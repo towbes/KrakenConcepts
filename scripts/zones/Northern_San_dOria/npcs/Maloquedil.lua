@@ -4,12 +4,6 @@
 -- Involved in Quest : Warding Vampires, Riding on the Clouds, Lure of the Wildcat (San d'Oria)
 -- !pos 35 0.1 60 231
 -----------------------------------
-local ID = require("scripts/zones/Northern_San_dOria/IDs")
-require("scripts/globals/keyitems")
-require("scripts/globals/quests")
-require("scripts/globals/titles")
-require("scripts/globals/utils")
------------------------------------
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)
@@ -43,7 +37,7 @@ entity.onEventFinish = function(player, csid, option, npc)
             player:addFame(xi.quest.fame_area.SANDORIA, 5)
         end
     elseif csid == 807 then
-        player:setCharVar("WildcatSandy", utils.mask.setBit(player:getCharVar("WildcatSandy"), 7, true))
+        player:setCharVar('WildcatSandy', utils.mask.setBit(player:getCharVar('WildcatSandy'), 7, true))
     end
 end
 

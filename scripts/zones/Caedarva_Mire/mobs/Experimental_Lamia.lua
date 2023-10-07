@@ -3,11 +3,13 @@
 --  ZNM: Experimental Lamia
 -- !pos -773.369 -11.824 322.298 79
 -----------------------------------
+local ID = zones[xi.zone.CAEDARVA_MIRE]
+-----------------------------------
 local entity = {}
 local ID = require("scripts/zones/Caedarva_Mire/IDs")
 
 local function spawnMinions(mob, target)
-    mob:setLocalVar("spawnedMinions", 1)
+    mob:setLocalVar('spawnedMinions', 1)
 
     local x = mob:getXPos()
     local y = mob:getYPos()
@@ -39,7 +41,7 @@ end
 
 
 entity.onMobFight = function(mob, target)
-    if mob:getHPP() < 75 and mob:getLocalVar("spawnedMinions") == 0 then
+    if mob:getHPP() < 75 and mob:getLocalVar('spawnedMinions') == 0 then
         spawnMinions(mob, target)
     end
 
@@ -62,7 +64,7 @@ entity.onMobFight = function(mob, target)
 end
 
 entity.onMobWeaponSkill = function(target, mob, skill)
-    if mob:getLocalVar("spawnedMinions") == 0 then
+    if mob:getLocalVar('spawnedMinions') == 0 then
         spawnMinions(mob, target)
     end
 

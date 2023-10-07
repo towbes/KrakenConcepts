@@ -19,7 +19,7 @@ end
 entity.onMobSpawn = function(GhulIBeabanMob)
     GhulIBeabanMob:addListener("DEATH", "GHUL_DEATH", function(mob)
         local mobId = mob:getID()
-        local reraises = mob:getLocalVar("RERAISES") + 1
+        local reraises = mob:getLocalVar('RERAISES') + 1
         local target = mob:getTarget()
 
         -- spawn second form (BLM)
@@ -42,8 +42,8 @@ entity.onMobSpawn = function(GhulIBeabanMob)
 end
 
 entity.onMobDeath = function(mob, player, optParams)
-    if mob:getLocalVar("RERAISES") == 4 then
-        mob:getBattlefield():setLocalVar("lootSpawned", 0)
+    if mob:getLocalVar('RERAISES') == 4 then
+        mob:getBattlefield():setLocalVar('lootSpawned', 0)
     end
 end
 

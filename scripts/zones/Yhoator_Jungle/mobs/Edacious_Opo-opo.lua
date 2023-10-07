@@ -2,8 +2,7 @@
 -- Area: Yhoator Jungle
 --   NM: Edacious Opo-opo
 -----------------------------------
-require("scripts/globals/hunts")
-local ID = require("scripts/zones/Yhoator_Jungle/IDs")
+local ID = zones[xi.zone.YHOATOR_JUNGLE]
 -----------------------------------
 local entity = {}
 

@@ -3,9 +3,7 @@
 --  NPC: ??? (Uggalepih Offering ITEM)
 -- !pos 388 0 269 159
 -----------------------------------
-local ID = require("scripts/zones/Temple_of_Uggalepih/IDs")
-require("scripts/globals/items")
-require("scripts/globals/npc_util")
+local ID = zones[xi.zone.TEMPLE_OF_UGGALEPIH]
 -----------------------------------
 local entity = {}
 

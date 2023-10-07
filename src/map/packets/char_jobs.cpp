@@ -23,9 +23,9 @@
 
 #include <cstring>
 
-#include "../entities/charentity.h"
 #include "char_jobs.h"
-#include "../utils/charutils.h"
+#include "utils/charutils.h"
+#include "entities/charentity.h"
 
 CCharJobsPacket::CCharJobsPacket(CCharEntity* PChar, bool resetflips)
 {

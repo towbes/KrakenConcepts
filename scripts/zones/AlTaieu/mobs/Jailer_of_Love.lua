@@ -3,7 +3,7 @@
 --   NM: Jailer of Love
 -- !pos 431.522 -0.912 -603.503 33
 -----------------------------------
-local ID = require("scripts/zones/AlTaieu/IDs")
+local ID = zones[xi.zone.ALTAIEU]
 -----------------------------------
 local entity = {}
 
@@ -57,13 +57,13 @@ local astralFlowPets = function()
 end
 
 local spawnPets = function(mob, minionOffset)
-    mob:entityAnimationPacket("casm")
+    mob:entityAnimationPacket('casm')
     mob:setAutoAttackEnabled(false)
     mob:setMagicCastingEnabled(false)
     mob:setMobAbilityEnabled(false)
     mob:timer(3000, function(mobArg)
         if mobArg:isAlive() then
-            mobArg:entityAnimationPacket("shsm")
+            mobArg:entityAnimationPacket('shsm')
             mobArg:setAutoAttackEnabled(true)
             mobArg:setMagicCastingEnabled(true)
             mobArg:setMobAbilityEnabled(true)
@@ -154,9 +154,9 @@ entity.onMobEngaged = function(mob, target)
     mob:hideName(false)
     mob:setUntargetable(false)
     mob:setAnimationSub(2)
-    mob:setLocalVar("elementAbsorb", os.time() + 120)
-    mob:setLocalVar("pop_pets", os.time() + 150) -- wait 2.5 minutes until spawning initial mobs
-    mob:setLocalVar("currentAbsorb", math.random(#eleAbsorbModID)) -- pick a random element to absorb after engaging
+    mob:setLocalVar('elementAbsorb', os.time() + 120)
+    mob:setLocalVar('pop_pets', os.time() + 150) -- wait 2.5 minutes until spawning initial mobs
+    mob:setLocalVar('currentAbsorb', math.random(#eleAbsorbModID)) -- pick a random element to absorb after engaging
     mob:setSpellList(spellLists[mob:getLocalVar('currentAbsorb')])
     mob:setMod(eleAbsorbModID[mob:getLocalVar('currentAbsorb')], 100)
 end
@@ -164,21 +164,21 @@ end
 entity.onMobFight = function(mob, target)
     -- reduce regen after nine Xzomits and Hpemdes (total of both) groups are killed
     if
-        mob:getLocalVar("JoL_Regen_Reduction") == 0 and
-        mob:getLocalVar("JoL_Qn_xzomit_Killed") >= 9 and
-        mob:getLocalVar("JoL_Qn_hpemde_Killed") >= 9
+        mob:getLocalVar('JoL_Regen_Reduction') == 0 and
+        mob:getLocalVar('JoL_Qn_xzomit_Killed') >= 9 and
+        mob:getLocalVar('JoL_Qn_hpemde_Killed') >= 9
     then
-        mob:setLocalVar("JoL_Regen_Reduction", 1)
+        mob:setLocalVar('JoL_Regen_Reduction', 1)
         mob:delMod(xi.mod.REGEN, 260)
         mob:setMod(xi.mod.DMGMAGIC, -2500) -- magic damage taken reduced from 50% to 25% after killing nine xzomits and hpemdes
     end
 
     -- every 2 minutes JoL will change the element it absorbs/casts spells this change happens after a two hour animation
-    if os.time() > mob:getLocalVar("elementAbsorb") then
+    if os.time() > mob:getLocalVar('elementAbsorb') then
 
-        local previousAbsorb = mob:getLocalVar("currentAbsorb")
-        mob:setLocalVar("elementAbsorb", os.time() + 120)
-        mob:setLocalVar("twohour_tp", mob:getTP())
+        local previousAbsorb = mob:getLocalVar('currentAbsorb')
+        mob:setLocalVar('elementAbsorb', os.time() + 120)
+        mob:setLocalVar('twohour_tp', mob:getTP())
 
         -- remove previous absorb mod, if set
         if previousAbsorb > 0 then
@@ -187,36 +187,36 @@ entity.onMobFight = function(mob, target)
 
         -- add new absorb mod
         local currentAbsorb = math.random(#eleAbsorbModID)
-        mob:setLocalVar("currentAbsorb", currentAbsorb)
+        mob:setLocalVar('currentAbsorb', currentAbsorb)
 
         -- Inject 2hr animation based on element, this shows in the captures.
         mob:injectActionPacket(mob:getID(), 11, eleAbsorbAnimations[currentAbsorb], 0x18, 0, 0, eleAbsorbActionID[currentAbsorb], 0)
         mob:setSpellList(spellLists[mob:getLocalVar('currentAbsorb')])
 
         mob:setMod(eleAbsorbModID[currentAbsorb], 100)
-        mob:addTP(mob:getLocalVar("twohour_tp"))
-        mob:setLocalVar("twohour_tp", 0)
+        mob:addTP(mob:getLocalVar('twohour_tp'))
+        mob:setLocalVar('twohour_tp', 0)
     end
 
     -- spawn minions in 2.5 minute intervals
     if
-        os.time() > mob:getLocalVar("pop_pets") and
+        os.time() > mob:getLocalVar('pop_pets') and
         mob:canUseAbilities()
     then
-        mob:setLocalVar("pop_pets", os.time() + 150)
+        mob:setLocalVar('pop_pets', os.time() + 150)
 
-        local spawns = mob:getLocalVar("SPAWNS")
+        local spawns = mob:getLocalVar('SPAWNS')
         if spawns < 8 then
             local minionOffset = ID.mob.JAILER_OF_LOVE + minionGroup[spawns]
             spawnPets(mob, minionOffset)
         elseif spawns > 8 then
-            mob:entityAnimationPacket("casm")
+            mob:entityAnimationPacket('casm')
             mob:setAutoAttackEnabled(false)
             mob:setMagicCastingEnabled(false)
             mob:setMobAbilityEnabled(false)
             mob:timer(3000, function(mobArg)
                 if mobArg:isAlive() then
-                    mobArg:entityAnimationPacket("shsm")
+                    mobArg:entityAnimationPacket('shsm')
                     mobArg:setAutoAttackEnabled(true)
                     mobArg:setMagicCastingEnabled(true)
                     mobArg:setMobAbilityEnabled(true)
@@ -224,7 +224,7 @@ entity.onMobFight = function(mob, target)
                 end
             end)
         end
-        mob:setLocalVar("SPAWNS", spawns + 1)
+        mob:setLocalVar('SPAWNS', spawns + 1)
     end
         -- empty table
     for key in pairs (entity.lastEnmityList) do
@@ -235,13 +235,13 @@ entity.onMobFight = function(mob, target)
     for index in ipairs(enmityList) do
 
         entity.lastEnmityList[index] = {}
-        local tempEntity = enmityList[index]["entity"]
-        local ce         = enmityList[index]["ce"]
-        local ve         = enmityList[index]["ve"]
+        local tempEntity = enmityList[index]['entity']
+        local ce         = enmityList[index]['ce']
+        local ve         = enmityList[index]['ve']
 
-        entity.lastEnmityList[index]["id"] = tempEntity:getID()
-        entity.lastEnmityList[index]["ce"] = ce
-        entity.lastEnmityList[index]["ve"] = ve
+        entity.lastEnmityList[index]['id'] = tempEntity:getID()
+        entity.lastEnmityList[index]['ce'] = ce
+        entity.lastEnmityList[index]['ve'] = ve
     end
 end
 
@@ -268,9 +268,9 @@ entity.onMobDespawn = function(mob)
         local highestEnmity = -1
 
         for index in ipairs(entity.lastEnmityList) do
-            local id = entity.lastEnmityList[index]["id"]
-            local ce = entity.lastEnmityList[index]["ce"]
-            local ve = entity.lastEnmityList[index]["ve"]
+            local id = entity.lastEnmityList[index]['id']
+            local ce = entity.lastEnmityList[index]['ce']
+            local ve = entity.lastEnmityList[index]['ve']
 
             local target = GetPlayerByID(id)
             if target == nil then

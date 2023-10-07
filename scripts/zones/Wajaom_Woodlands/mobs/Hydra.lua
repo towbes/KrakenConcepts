@@ -3,8 +3,6 @@
 --  Mob: Hydra
 -- !pos -282 -24 -1 51
 -----------------------------------
-require("scripts/globals/titles")
------------------------------------
 local entity = {}
 
 local drawInPos =
@@ -42,7 +40,7 @@ end
 
 entity.onMobFight = function(mob, target)
     local battletime = mob:getBattleTime()
-    local headgrow = mob:getLocalVar("headgrow")
+    local headgrow = mob:getLocalVar('headgrow')
     local broken = mob:getAnimationSub()
     local headthreshold = mob:getLocalVar("headthreshold")
 
@@ -101,7 +99,7 @@ end
 entity.onCriticalHit = function(mob)
     local rand = math.random()
     local battletime = mob:getBattleTime()
-    local headbreak = mob:getLocalVar("headbreak")
+    local headbreak = mob:getLocalVar('headbreak')
     local broken = mob:getAnimationSub()
 
     if mob:getHPP() > 75 then

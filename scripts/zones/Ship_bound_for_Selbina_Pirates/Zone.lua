@@ -1,8 +1,7 @@
 -----------------------------------
 -- Zone: Ship bound for Selbina Pirates (227)
 -----------------------------------
-local ID = require('scripts/zones/Ship_bound_for_Selbina_Pirates/IDs')
-require('scripts/globals/zone')
+local ID = zones[xi.zone.SHIP_BOUND_FOR_SELBINA_PIRATES]
 require('scripts/globals/pirates')
 require('scripts/globals/sea_creatures')
 -----------------------------------

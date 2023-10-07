@@ -2,8 +2,7 @@
 -- Area: Carpenters' Landing
 --   NM: Tempest Tigon
 -----------------------------------
-require("scripts/globals/hunts")
-local ID = require("scripts/zones/Carpenters_Landing/IDs")
+local ID = zones[xi.zone.CARPENTERS_LANDING]
 -----------------------------------
 local entity = {}
 

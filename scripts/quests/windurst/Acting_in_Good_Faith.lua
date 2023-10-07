@@ -2,22 +2,21 @@
 -- Acting in Good Faith
 -----------------------------------
 -- !addquest 2 64
--- Gantineaux : !pos
+-- Gantineux : !pos -83 -9 3 238
+-- qm1       : !pos -17 0 59 195 (I-10)
+-- Eperdur   : !pos 129 -6 96 231
 -----------------------------------
-require('scripts/globals/interaction/quest')
-require('scripts/globals/npc_util')
-require('scripts/globals/quests')
-require('scripts/globals/zone')
-local ID = require("scripts/zones/The_Eldieme_Necropolis/IDs")
+local eldiemeID = zones[xi.zone.THE_ELDIEME_NECROPOLIS]
 -----------------------------------
 
 local quest = Quest:new(xi.quest.log_id.WINDURST, xi.quest.id.windurst.ACTING_IN_GOOD_FAITH)
 
 quest.reward =
 {
-    item = xi.items.SCROLL_OF_TELEPORT_MEA,
-    fame = 30,
+    fame     = 30,
     fameArea = xi.quest.fame_area.WINDURST,
+    item     = xi.item.SCROLL_OF_TELEPORT_MEA,
+    title    = xi.title.PILGRIM_TO_MEA,
 }
 
 quest.sections =
@@ -36,7 +35,9 @@ quest.sections =
             onEventFinish =
             {
                 [10019] = function(player, csid, option, npc)
-                    quest:begin(player)
+                    if option == 0 then
+                        npcUtil.giveKeyItem(player, xi.ki.SPIRIT_INCENSE)
+                        quest:begin(player)
                     npcUtil.giveKeyItem(player, xi.ki.SPIRIT_INCENSE)
                 end,
             },
@@ -108,6 +109,17 @@ quest.sections =
                     player:delKeyItem(xi.ki.SPIRIT_INCENSE)
                 end,
             },
+        },
+    },
+
+    {
+        check = function(player, status, vars)
+            return status == QUEST_COMPLETED
+        end,
+
+        [xi.zone.WINDURST_WATERS] =
+        {
+            ['Gantineux'] = quest:event(10023):replaceDefault(),
         },
     },
 }

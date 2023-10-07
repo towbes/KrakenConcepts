@@ -10,9 +10,7 @@
 --   would need a DAT edit to prolong it.
 --   The fixes made are largely temporary
 -----------------------------------
-local ID = require("scripts/zones/Sacrarium/IDs")
-require("scripts/globals/keyitems")
-require("scripts/globals/npc_util")
+local ID = zones[xi.zone.SACRARIUM]
 -----------------------------------
 local entity = {}
 

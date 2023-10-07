@@ -11,7 +11,7 @@ mixins =
     require("scripts/mixins/families/gears"),
     require("scripts/mixins/rage")
 }
-local ID = require("scripts/zones/Alzadaal_Undersea_Ruins/IDs")
+local ID = zones[xi.zone.ALZADAAL_UNDERSEA_RUINS]
 
 -----------------------------------
 local entity = {}

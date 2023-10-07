@@ -4,14 +4,16 @@
 -- Type: Goldsmithing Normal/Adv. Image Support
 -- !pos 49.9 0.1 -45.2 48
 -----------------------------------
-require("scripts/globals/crafting")
-local ID = require("scripts/zones/Al_Zahbi/IDs")
+local ID = zones[xi.zone.AL_ZAHBI]
 -----------------------------------
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)
     if xi.crafting.hasJoinedGuild(player, xi.crafting.guild.GOLDSMITHING) then
-        if trade:hasItemQty(2184, 1) and trade:getItemCount() == 1 then
+        if
+            trade:hasItemQty(xi.item.IMPERIAL_BRONZE_PIECE, 1) and
+            trade:getItemCount() == 1
+        then
             if not player:hasStatusEffect(xi.effect.GOLDSMITHING_IMAGERY) then
                 player:tradeComplete()
                 player:startEvent(231, 8, 0, 0, 0, 188, 0, 3, 0)
@@ -27,9 +29,9 @@ entity.onTrigger = function(player, npc)
 
     if xi.crafting.hasJoinedGuild(player, xi.crafting.guild.GOLDSMITHING) then
         if not player:hasStatusEffect(xi.effect.GOLDSMITHING_IMAGERY) then
-            player:startEvent(230, 8, skillLevel, 0, 511, 188, 0, 3, 2184)
+            player:startEvent(230, 8, skillLevel, 0, 511, 188, 0, 3, xi.item.IMPERIAL_BRONZE_PIECE)
         else
-            player:startEvent(230, 8, skillLevel, 0, 511, 188, 7101, 3, 2184)
+            player:startEvent(230, 8, skillLevel, 0, 511, 188, 7101, 3, xi.item.IMPERIAL_BRONZE_PIECE)
         end
     else
         player:startEvent(230, 0, 0, 0, 0, 0, 0, 3, 0) -- Standard Dialogue

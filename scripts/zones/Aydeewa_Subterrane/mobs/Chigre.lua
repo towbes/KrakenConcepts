@@ -2,8 +2,7 @@
 -- Area: Aydeewa Subterrane
 --  ZNM: Chigre
 -----------------------------------
-mixins = { require("scripts/mixins/rage") }
-require("scripts/globals/mobs")
+mixins = { require('scripts/mixins/rage') }
 -----------------------------------
 local entity = {}
 -- Todo: add enailments, Drain samba on target if all ailments on, very fast enmity decay, capture speed

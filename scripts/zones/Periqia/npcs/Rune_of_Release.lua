@@ -3,10 +3,6 @@
 --  NPC: Rune of Release
 -- !pos 412 -9 54 55
 -----------------------------------
-local ID = require("scripts/zones/Periqia/IDs")
-require("scripts/globals/assault")
-require("scripts/globals/zone")
------------------------------------
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)

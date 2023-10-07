@@ -4,11 +4,10 @@
 -----------------------------------
 mixins =
 {
-    require("scripts/mixins/families/tonberry"),
-    require("scripts/mixins/job_special")
+    require('scripts/mixins/families/tonberry'),
+    require('scripts/mixins/job_special')
 }
-local ID = require("scripts/zones/Yhoator_Jungle/IDs")
-require("scripts/globals/regimes")
+local ID = zones[xi.zone.YHOATOR_JUNGLE]
 -----------------------------------
 local entity = {}
 

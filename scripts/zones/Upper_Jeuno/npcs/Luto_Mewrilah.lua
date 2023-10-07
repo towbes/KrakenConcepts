@@ -3,14 +3,7 @@
 --  NPC: Luto Mewrilah
 -- !pos -53 0 45 244
 -----------------------------------
-local ID = require("scripts/zones/Upper_Jeuno/IDs")
-require("scripts/globals/pets/fellow")
-require("scripts/globals/fellow_utils")
-require("scripts/globals/npc_util")
-require("scripts/globals/quests")
-require("scripts/globals/pets")
-require("scripts/globals/settings")
-require("scripts/globals/utils")
+local ID = zones[xi.zone.UPPER_JEUNO]
 -----------------------------------
 local entity = {}
 
@@ -162,7 +155,6 @@ entity.onTrade = function(player, npc, trade)
 end
 
 entity.onTrigger = function(player, npc)
-    local wildcatJeuno = player:getCharVar("WildcatJeuno")
     local UnlistedQualities = player:getQuestStatus(xi.quest.log_id.JEUNO,xi.quest.id.jeuno.UNLISTED_QUALITIES)
     local UnlistedQualitiesProgress = player:getCharVar("[Quest]Unlisted_Qualities")
     local LookingGlass = player:getQuestStatus(xi.quest.log_id.JEUNO,xi.quest.id.jeuno.GIRL_IN_THE_LOOKING_GLASS)

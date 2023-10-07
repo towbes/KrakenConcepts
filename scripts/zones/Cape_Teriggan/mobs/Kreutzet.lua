@@ -15,11 +15,11 @@ end
 
 entity.onMobWeaponSkill = function(target, mob, skill)
     if skill:getID() == 926 then
-        local stormwindCounter = mob:getLocalVar("stormwindCounter")
+        local stormwindCounter = mob:getLocalVar('stormwindCounter')
 
         stormwindCounter = stormwindCounter + 1
-        mob:setLocalVar("stormwindCounter", stormwindCounter)
-        mob:setLocalVar("stormwindDamage", stormwindCounter) -- extra var for dmg calculation (in stormwind.lua)
+        mob:setLocalVar('stormwindCounter', stormwindCounter)
+        mob:setLocalVar('stormwindDamage', stormwindCounter) -- extra var for dmg calculation (in stormwind.lua)
 
         if stormwindCounter > 2 then
             mob:setLocalVar("stormwindCounter", 0)

@@ -5,12 +5,7 @@
 -- Involved in Quest: The Holy Crest, Trouble at the Sluice
 -- !pos 70 -24 21 167
 -----------------------------------
-local ID = require("scripts/zones/Bostaunieux_Oubliette/IDs")
-require("scripts/globals/keyitems")
-require("scripts/globals/npc_util")
-require("scripts/globals/pathfind")
-require("scripts/globals/quests")
------------------------------------
+local ID = zones[xi.zone.BOSTAUNIEUX_OUBLIETTE]
 local entity = {}
 
 local pathNodes =
@@ -41,7 +36,7 @@ entity.onTrigger = function(player, npc)
         player:startEvent(6)
     elseif
         theHolyCrestStat == 2 and
-        player:getCharVar("theHolyCrestCheck") == 0
+        player:getCharVar('theHolyCrestCheck') == 0
     then
         player:startEvent(7)
     end
@@ -49,7 +44,7 @@ end
 
 entity.onEventFinish = function(player, csid, option, npc)
     if csid == 6 then
-        player:setCharVar("TheHolyCrest_Event", 2)
+        player:setCharVar('TheHolyCrest_Event', 2)
     elseif csid == 7 then
         player:setCharVar("theHolyCrestCheck", 1)
     end

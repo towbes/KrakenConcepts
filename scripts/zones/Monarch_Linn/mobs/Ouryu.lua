@@ -2,9 +2,6 @@
 -- Area: Monarch Linn
 --  Mob: Ouryu
 -----------------------------------
-require("scripts/globals/titles")
-require("scripts/globals/status")
------------------------------------
 local entity = {}
 
 entity.onMobInitialize = function(mob)
@@ -53,7 +50,7 @@ entity.onMobFight = function(mob, target)
             mob:addStatusEffectEx(xi.effect.ALL_MISS, 0, 1, 0, 0)
             mob:setMobSkillAttack(731)
             --and record the time this phase was started
-            mob:setLocalVar("changeTime", mob:getBattleTime())
+            mob:setLocalVar('changeTime', mob:getBattleTime())
         -- subanimation 1 is flight, so check if he should land
         elseif mob:getAnimationSub() == 1 and mob:getBattleTime() - changeTime > 120 then
             -- touchdown ability changes the animation sub, miss status, and mob skill attack
@@ -63,7 +60,7 @@ entity.onMobFight = function(mob, target)
             mob:setAnimationSub(1)
             mob:addStatusEffectEx(xi.effect.ALL_MISS, 0, 1, 0, 0)
             mob:setMobSkillAttack(731)
-            mob:setLocalVar("changeTime", mob:getBattleTime())
+            mob:setLocalVar('changeTime', mob:getBattleTime())
         end
     end
 

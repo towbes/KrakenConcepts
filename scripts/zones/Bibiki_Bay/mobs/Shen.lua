@@ -2,8 +2,6 @@
 -- Area: Bibiki Bay
 --  Mob: Shen
 -----------------------------------
-require('scripts/globals/magic')
------------------------------------
 local entity = {}
 
 -- TODO: Going into shell mechanic isn't 100% precise, could use more research
@@ -41,7 +39,7 @@ entity.onMobSpawn = function(mob)
     mob:setLocalVar("petCooldown", os.time() + 20)
     exitShell(mob)
 
-    mob:addListener("MAGIC_STATE_EXIT", "SHEN_MAGIC_EXIT", function(shen, spell)
+    mob:addListener('MAGIC_STATE_EXIT', 'SHEN_MAGIC_EXIT', function(shen, spell)
         if spell:getID() == xi.magic.spell.FLOOD then
             mob:setMagicCastingEnabled(true)
         end
@@ -82,11 +80,11 @@ entity.onMobFight = function(mob, target)
         mob:setMagicCastingEnabled(false)
         mob:addStatusEffect(xi.effect.CHAINSPELL, 1, 0, 2)
         mob:castSpell(xi.magic.spell.FLOOD, target)
-        mob:setLocalVar("petCooldown", os.time() + 20)
+        mob:setLocalVar('petCooldown', os.time() + 20)
     end
 
     -- Shen exits shell if a pet dies so that it can respawn it
-    local petDeath = mob:getLocalVar("filtrateDeath")
+    local petDeath = mob:getLocalVar('filtrateDeath')
     if petDeath == 1 then
         -- if in shell exit and reset timer for entering shell
         if mob:getLocalVar("inShell") == 1 and mob:getAnimationSub() == 1 then

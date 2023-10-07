@@ -12,14 +12,8 @@
 -- Fossil Rocks      : !pos 17 18 184 198
 -- Mahogany Door     : !pos -11 0 20 192
 -- House of the Hero : !pos -26 -13 260 239
-require('scripts/globals/items')
-require('scripts/globals/missions')
-require('scripts/globals/npc_util')
-require('scripts/globals/keyitems')
-require('scripts/globals/interaction/mission')
-require('scripts/globals/zone')
 -----------------------------------
-local mazeID = require("scripts/zones/Maze_of_Shakhrami/IDs")
+local mazeID = zones[xi.zone.MAZE_OF_SHAKHRAMI]
 -----------------------------------
 
 local mission = Mission:new(xi.mission.log_id.WINDURST, xi.mission.id.windurst.LOST_FOR_WORDS)
@@ -238,7 +232,7 @@ mission.sections =
                 [169] = function(player, csid, option, npc)
                     player:delKeyItem(xi.ki.LAPIS_CORAL)
                     player:delKeyItem(xi.ki.LAPIS_MONOCLE)
-                    mission:setVar(player, "Rock", 0)
+                    mission:setVar(player, 'Rock', 0)
                     npcUtil.giveKeyItem(player, xi.ki.HIDEOUT_KEY)
                     player:setMissionStatus(mission.areaId, 5)
                 end,

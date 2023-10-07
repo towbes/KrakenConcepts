@@ -1,4 +1,4 @@
-------------------------------------------------------------------------------
+-----------------------------------
 -- This global is intended to handle additional effects from item sources of:
 -- melee attacks, ranged attacks, auto-spikes
 -- Notes:
@@ -10,12 +10,11 @@
 -- In testing my fire sword had the same damage ranges no matter my level vs same mob.
 -- Weakness/resistance to element would swing damage range a lot
 -- For status effects is it possible to land on highly resistant mobs because of flooring.
-------------------------------------------------------------------------------
-require("scripts/globals/teleports") -- For warp weapon proc.
-require("scripts/globals/magic") -- For resist functions
-require("scripts/globals/utils") -- For clamping function
-require("scripts/globals/msg")
---------------------------------------
+-----------------------------------
+require('scripts/globals/teleports') -- For warp weapon proc.
+require('scripts/globals/magic') -- For resist functions
+require('scripts/globals/utils') -- For clamping function
+-----------------------------------
 xi = xi or {}
 xi.additionalEffect = xi.additionalEffect or {}
 
@@ -25,10 +24,10 @@ xi.additionalEffect.isRanged = function(item)
 end
 
 xi.additionalEffect.calcRangeBonus = function(attacker, defender, element, damage)
-    -- Copied from existing scripts.
+    -- Copied from existing scripts. Todo: rework into additional modifier for dStat?
     local bonus = 0
 
-    if element == xi.magic.ele.LIGHT then
+    if element == xi.element.LIGHT then
         bonus = attacker:getStat(xi.mod.MND) - defender:getStat(xi.mod.MND)
         if bonus > 40 then
             bonus = bonus + (bonus - 40) / 2
@@ -123,17 +122,18 @@ end
 --   e.g. [procType.DAMAGE] = { code }
 -- - replace each handler (elseif addType == procType.DEBUFF then) with a function
 xi.additionalEffect.attack = function(attacker, defender, baseAttackDamage, item)
-    local addType =   item:getMod(xi.mod.ITEM_ADDEFFECT_TYPE)
+    local addType   = item:getMod(xi.mod.ITEM_ADDEFFECT_TYPE)
     local subEffect = item:getMod(xi.mod.ITEM_SUBEFFECT)
-    local damage =    item:getMod(xi.mod.ITEM_ADDEFFECT_DMG)
-    local chance =    item:getMod(xi.mod.ITEM_ADDEFFECT_CHANCE)
-    local element =   item:getMod(xi.mod.ITEM_ADDEFFECT_ELEMENT)
+    local damage    = item:getMod(xi.mod.ITEM_ADDEFFECT_DMG)
+    local chance    = item:getMod(xi.mod.ITEM_ADDEFFECT_CHANCE)
+    local element   = item:getMod(xi.mod.ITEM_ADDEFFECT_ELEMENT)
     local addStatus = item:getMod(xi.mod.ITEM_ADDEFFECT_STATUS)
-    local power =     item:getMod(xi.mod.ITEM_ADDEFFECT_POWER)
-    local duration =  item:getMod(xi.mod.ITEM_ADDEFFECT_DURATION)
-    local option =    item:getMod(xi.mod.ITEM_ADDEFFECT_OPTION)
-    local msgID = 0
-    local msgParam = 0
+    local power     = item:getMod(xi.mod.ITEM_ADDEFFECT_POWER)
+    local duration  = item:getMod(xi.mod.ITEM_ADDEFFECT_DURATION)
+    local option    = item:getMod(xi.mod.ITEM_ADDEFFECT_OPTION)
+    local drainRoll = math.random(1, 3) -- Temp, being refactored out
+    local msgID     = 0
+    local msgParam  = 0
 
     local procType =
     {
@@ -160,6 +160,7 @@ xi.additionalEffect.attack = function(attacker, defender, baseAttackDamage, item
         POISON_PARALYZE_BIND  = 20,
         DAMAGE_MP_PERC  = 21,
 
+        HPMP_DRAIN    = 22, -- ToDo Shift our enum up to avoid conflicts - Umeboshi
     }
 
     -- If player is level synced below the level of the item, do no proc
@@ -172,7 +173,6 @@ xi.additionalEffect.attack = function(attacker, defender, baseAttackDamage, item
         return 0, 0, 0
     end
 
-    --------------------------------------
     -- Modifications for proc's sourced from ranged attacks. See notes at top of script.
     --------------------------------------
     if xi.additionalEffect.isRanged(item) then
@@ -305,7 +305,6 @@ xi.additionalEffect.attack = function(attacker, defender, baseAttackDamage, item
 
         msgID = xi.msg.basic.ADD_EFFECT_HP_DRAIN
         msgParam = damage
-        defender:addHP(-damage)
         attacker:addHP(damage)
 
         --------------------------------------
@@ -399,8 +398,7 @@ xi.additionalEffect.attack = function(attacker, defender, baseAttackDamage, item
             msgID = xi.msg.basic.ADD_EFFECT_SELFBUFF
             msgParam = xi.effect.HASTE
         else
-            print("scripts/globals/additional_effects.lua : unhandled additional effect selfbuff! Effect ID: " ..
-                      addStatus)
+            print('scripts/globals/additional_effects.lua : unhandled additional effect selfbuff! Effect ID: '..addStatus)
         end
 
         --------------------------------------
@@ -584,11 +582,11 @@ xi.additionalEffect.attack = function(attacker, defender, baseAttackDamage, item
 
     --[[
     if msgID == nil then
-        print("Additional effect has a nil msgID !!")
+        print('Additional effect has a nil msgID !!')
     elseif msgParam == nil then
-        print("Additional effect has a nil msgParam !!")
+        print('Additional effect has a nil msgParam !!')
     end
-    print("subEffect: "..subEffect.." msgID: "..msgID.." msgParam: "..msgParam)
+    print('subEffect: '..subEffect..' msgID: '..msgID..' msgParam: '..msgParam)
     ]]
     return subEffect, msgID, msgParam
 end

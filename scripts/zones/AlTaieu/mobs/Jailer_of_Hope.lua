@@ -2,8 +2,7 @@
 -- Area: Al'Taieu
 --   NM: Jailer of Hope
 -----------------------------------
-mixins = { require("scripts/mixins/job_special") }
-require("scripts/globals/mobs")
+mixins = { require('scripts/mixins/job_special') }
 -----------------------------------
 local entity = {}
 
@@ -33,7 +32,7 @@ entity.onMobEngaged = function(mob, target) -- Coming out of water animation
     mob:hideName(false)
     mob:setUntargetable(false)
     mob:setAnimationSub(6)
-    mob:setLocalVar("spellTime", 0)
+    mob:setLocalVar('spellTime', 0)
 end
 
 entity.onSpellPrecast = function(mob, spell)
@@ -58,26 +57,26 @@ end
 entity.onMobWeaponSkill = function(target, mob, skill)
     if skill:getID() == 1358 then -- Set spell list for Burst2/Thundaga3 upon using Plasma Charge. Allow for 60 seconds.
         mob:setSpellList(140)
-        mob:setLocalVar("spellTime", os.time() + 60)
+        mob:setLocalVar('spellTime', os.time() + 60)
     end
 
-    local aerialCollisionCounter = mob:getLocalVar("aerialCollisionCounter")
-    local aerialCollisionMax = mob:getLocalVar("aerialCollisionMax")
+    local aerialCollisionCounter = mob:getLocalVar('aerialCollisionCounter')
+    local aerialCollisionMax = mob:getLocalVar('aerialCollisionMax')
     if skill:getID() == 1353 then  -- mob uses arial collision back to back
         if
             aerialCollisionCounter == 0 and
             aerialCollisionMax == 0
         then
             aerialCollisionMax = 1
-            mob:setLocalVar("aerialCollisionMax", aerialCollisionMax)
+            mob:setLocalVar('aerialCollisionMax', aerialCollisionMax)
         end
 
         aerialCollisionCounter = aerialCollisionCounter + 1
-        mob:setLocalVar("aerialCollisionCounter", aerialCollisionCounter)
+        mob:setLocalVar('aerialCollisionCounter', aerialCollisionCounter)
 
         if aerialCollisionCounter > aerialCollisionMax then
-            mob:setLocalVar("aerialCollisionCounter", 0)
-            mob:setLocalVar("aerialCollisionMax", 0)
+            mob:setLocalVar('aerialCollisionCounter', 0)
+            mob:setLocalVar('aerialCollisionMax', 0)
         else
             mob:timer(3000, function(mobArg)
                 mobArg:useMobAbility(1353)
@@ -88,11 +87,11 @@ end
 
 entity.onMobFight = function(mob, target)
     if
-        mob:getLocalVar("spellTime") < os.time() and
-        mob:getLocalVar("spellTime") ~= 0
+        mob:getLocalVar('spellTime') < os.time() and
+        mob:getLocalVar('spellTime') ~= 0
     then -- Checks for it being 0 because it gets set to 0 to avoid setting the spell list repeatedly
         mob:setSpellList(0)
-        mob:setLocalVar("spellTime", 0)
+        mob:setLocalVar('spellTime', 0)
     end
 end
 

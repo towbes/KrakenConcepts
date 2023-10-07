@@ -3,10 +3,7 @@
 --  NPC: Jar
 -- Involved in Quest: Test my Mettle
 -- Notes: Used to obtain Power Sandals
--- !pos 183, 0, -190 149
------------------------------------
-local ID = require("scripts/zones/Davoi/IDs")
-require("scripts/globals/npc_util")
+-- !pos <randomized>
 -----------------------------------
 local entity = {}
 
@@ -34,36 +31,12 @@ entity.onTrade = function(player, npc, trade)
 end
 
 entity.onTrigger = function(player, npc)
-    local testMyMettle = player:getQuestStatus(xi.quest.log_id.OTHER_AREAS, xi.quest.id.otherAreas.TEST_MY_METTLE)
-
-    if
-        testMyMettle ~= QUEST_ACCEPTED or
-        player:hasItem(xi.items.POWER_SANDALS)
-    then
-        player:messageSpecial(ID.text.NOTHING_OUT_OF_ORDINARY)
-        return
-    end
-
-    if player:getFreeSlotsCount() == 0 then
-        player:messageSpecial(ID.text.ITEM_CANNOT_BE_OBTAINED, xi.items.POWER_SANDALS)
-    else
-        player:addItem(xi.items.POWER_SANDALS)
-        player:messageSpecial(ID.text.ITEM_OBTAINED, xi.items.POWER_SANDALS)
-        move(npc)
-    end
 end
 
 entity.onEventUpdate = function(player, csid, option, npc)
 end
 
 entity.onEventFinish = function(player, csid, option, npc)
-end
-
-entity.onTimeTrigger = function(npc, triggerID)
-    if os.time() > npc:getLocalVar('MoveTime') then
-        move(npc)
-        npc:setLocalVar('MoveTime', os.time() + math.random(300, 10800))
-    end
 end
 
 return entity

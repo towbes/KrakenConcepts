@@ -72,6 +72,7 @@ entity.onMobWeaponSkillPrepare = function(mob, target)
 end
 
 entity.onMobDeath = function(mob, player, optParams)
+    xi.magian.onMobDeath(mob, player, optParams, set{ 2672, 2678, 2686 })
     DespawnMob(17326091)
     DespawnMob(17326092)
 end

@@ -2,12 +2,7 @@
 -- Helper file for "One to be Feared" Battlefield
 -- Helper file for "One to be Feared" Battlefield
 -----------------------------------
------------------------------------
-local ID = require("scripts/zones/Sealions_Den/IDs")
-local ID = require("scripts/zones/Sealions_Den/IDs")
-require("scripts/globals/status")
-require("scripts/globals/titles")
-require("scripts/globals/titles")
+local ID = zones[xi.zone.SEALIONS_DEN]
 -----------------------------------
 -----------------------------------
 local oneToBeFeared = {}
@@ -111,13 +106,13 @@ end
 oneToBeFeared.handleUltimaDeath = function(mob, player, optParams)
     mob:getBattlefield():win()
     player:addTitle(xi.title.ULTIMA_UNDERTAKER)
-    player:setLocalVar("[OTBF]battleCompleted", 0)
+    player:setLocalVar('[OTBF]battleCompleted', 0)
 end
 -----------------------------------
 -- While on Airship
 -----------------------------------
 oneToBeFeared.handleAirshipDoorTrigger = function(player, npc)
-    player:startEvent(32003, npc:getID() - ID.npc.AIRSHIP_DOOR_OFFSET + 1, player:getLocalVar("[OTBF]battleCompleted") * 2)
+    player:startEvent(32003, npc:getID() - ID.npc.AIRSHIP_DOOR_OFFSET + 1, player:getLocalVar('[OTBF]battleCompleted') * 2)
 end
 oneToBeFeared.handleOnEventUpdate = function(player, csid, option, npc)
     local battlefield = player:getBattlefield()
@@ -132,7 +127,7 @@ oneToBeFeared.handleOnEventUpdate = function(player, csid, option, npc)
         local ultimaId = ID.mob.ONE_TO_BE_FEARED_OFFSET + (7 * (battlefield:getArea() - 1)) + 6
         if not GetMobByID(ultimaId):isSpawned() then
             SpawnMob(ultimaId)
-            battlefield:setLocalVar("phaseChange", 0)
+            battlefield:setLocalVar('phaseChange', 0)
         end
     end
 end
@@ -143,18 +138,18 @@ oneToBeFeared.handleOnEventFinish = function(player, csid, option, npc)
             if party ~= nil then
                 for _, v in pairs(party) do
                     if v:hasStatusEffect(xi.effect.BATTLEFIELD) then
-                        v:startEvent(v:getLocalVar("[OTBF]battleCompleted"), option - 99)
+                        v:startEvent(v:getLocalVar('[OTBF]battleCompleted'), option - 99)
                     end
                 end
             else
-                player:startEvent(player:getLocalVar("[OTBF]battleCompleted"), option - 99)
+                player:startEvent(player:getLocalVar('[OTBF]battleCompleted'), option - 99)
             end
         -- Leave battlefield.
         elseif option == 4 then
             if player:getBattlefield() then
                 player:leaveBattlefield(1)
-                player:setLocalVar("[OTBF]battleCompleted", 0)
-                player:setLocalVar("[OTBF]MammetCS", 0)
+                player:setLocalVar('[OTBF]battleCompleted', 0)
+                player:setLocalVar('[OTBF]MammetCS', 0)
             end
         end
     end

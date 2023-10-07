@@ -243,6 +243,8 @@ xi.mod =
     HUMANOID_KILLER                 = 236,
     LUMINIAN_KILLER                 = 237,
     LUMINION_KILLER                 = 238,
+
+    -- Status effect Job trait resistance modifiers.
     SLEEPRES                        = 240,
     POISONRES                       = 241,
     PARALYZERES                     = 242,
@@ -260,6 +262,8 @@ xi.mod =
     LULLABYRES                      = 254,
     DEATHRES                        = 255,
     STATUSRES                       = 958, -- "Resistance to All Status Ailments"
+
+    -- Status effect Magic Evasion modifiers.
     SLEEP_MEVA                      = 200,
     POISON_MEVA                     = 201,
     PARALYZE_MEVA                   = 202,
@@ -277,6 +281,19 @@ xi.mod =
     LULLABY_MEVA                    = 214,
     DEATH_MEVA                      = 215,
     STATUS_MEVA                     = 216,
+
+    -- Status effect magic Evasion modifiers.
+    SLEEP_IMMUNOBREAK               = 261,
+    POISON_IMMUNOBREAK              = 262,
+    PARALYZE_IMMUNOBREAK            = 263,
+    BLIND_IMMUNOBREAK               = 264,
+    SILENCE_IMMUNOBREAK             = 265,
+    PETRIFY_IMMUNOBREAK             = 266,
+    BIND_IMMUNOBREAK                = 267,
+    GRAVITY_IMMUNOBREAK             = 268,
+    SLOW_IMMUNOBREAK                = 269,
+    ADDLE_IMMUNOBREAK               = 270,
+
     AFTERMATH                       = 256,
     PARALYZE                        = 257,
     MIJIN_RERAISE                   = 258,
@@ -655,8 +672,10 @@ xi.mod =
     MYTHIC_OCC_ATT_TWICE            = 865, -- Proc rate for "Occasionally attacks twice"
     MYTHIC_OCC_ATT_THRICE           = 866, -- Proc rate for "Occasionally attacks thrice"
 
-    EAT_RAW_FISH                    = 412, --
-    EAT_RAW_MEAT                    = 413, --
+    APPRECIATE_GYSAHL_GREENS        = 156, -- Enhances food effect of Gysahl Greens
+
+    EAT_RAW_FISH                    = 412, -- Without this, only Mithra can eat raw fish.
+    EAT_RAW_MEAT                    = 413, -- Without this, only Galka can eat raw meat.
 
     ENHANCES_CURSNA_RCVD            = 67,   -- Potency of "Cursna" effects received
     ENHANCES_CURSNA                 = 310,  -- Raises success rate of Cursna when removing effect (like Doom) that are not 100% chance to remove
@@ -690,6 +709,7 @@ xi.mod =
     ROLL_RANGE                      = 528, -- Additional range for COR roll abilities.
     PHANTOM_ROLL                    = 881, -- Phantom Roll+ Effect from SOA Rings.
     PHANTOM_DURATION                = 882, -- Phantom Roll Duration +.
+    PHANTOM_RECAST                  = 1076, -- Phantom Roll Recast -.
 
     ENHANCES_REFRESH                = 529, -- "Enhances Refresh" adds +1 per modifier to spell's tick result.
     NO_SPELL_MP_DEPLETION           = 530, -- % to not deplete MP on spellcast.
@@ -885,6 +905,8 @@ xi.mod =
 
     DIG_BYPASS_FATIGUE      = 1074, -- Chocobo digging modifier found in "Blue Race Silks". Modifier works as a direct percent.
     BREATH_DMG_DEALT        = 1075, -- Breath damage dealt
+
+    STEP_TP_CONSUMED        = 1077, -- Modifies the amount of TP consumed by dancer steps
 
         -- Permenant Resistance Build Modifiers
     --SLEEPRESBUILD                 = 1138, -- Used to create a resbuild for the appropriate effect. Will decrease overall duration of effect. (Out of 1000)

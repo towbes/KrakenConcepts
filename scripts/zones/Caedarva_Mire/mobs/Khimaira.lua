@@ -2,9 +2,8 @@
 -- Area: Caedarva Mire
 --   NM: Khimaira
 -----------------------------------
-require("scripts/globals/titles")
 require("scripts/globals/toau")
-local ID = require("scripts/zones/Caedarva_Mire/IDs")
+local ID = zones[xi.zone.CAEDARVA_MIRE]
 -----------------------------------
 local entity = {}
 

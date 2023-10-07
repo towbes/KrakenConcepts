@@ -2,11 +2,7 @@
 -- Area: Attohwa Chasm
 --  Mob: Xolotl
 -----------------------------------
-require("scripts/globals/titles")
-require("scripts/globals/follow")
------------------------------------
-local ID = require("scripts/zones/Attohwa_Chasm/IDs")
------------------------------------
+local ID = zones[xi.zone.ATTOHWA_CHASM]
 local entity = {}
 
 entity.onMobSpawn = function(mob)

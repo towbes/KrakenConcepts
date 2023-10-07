@@ -4,11 +4,7 @@
 -- Type: Assault Mission Giver
 -- !pos 134.096 0.161 -30.401 50
 -----------------------------------
-require("scripts/globals/keyitems")
-local ID = require("scripts/zones/Aht_Urhgan_Whitegate/IDs")
-require("scripts/globals/assault")
-require("scripts/globals/besieged")
-require("scripts/globals/missions")
+local ID = zones[xi.zone.AHT_URHGAN_WHITEGATE]
 -----------------------------------
 local entity = {}
 
@@ -81,17 +77,17 @@ entity.onEventUpdate = function(player, csid, option, npc)
             -- low grade item
             local item = bit.rshift(option, 16) / 4
             vendingBoxPreferences = bit.bxor(vendingBoxPreferences, bit.lshift(1, lowGradeItems[item].BitPosition))
-            player:setCharVar("Nyzul_VendingBoxPref", vendingBoxPreferences)
+            player:setCharVar('Nyzul_VendingBoxPref', vendingBoxPreferences)
         elseif categorytype == 4 then
             -- medium grade item
             local item = bit.rshift(option, 16) / 4
             vendingBoxPreferences = bit.bxor(vendingBoxPreferences, bit.lshift(1, mediumGradeItems[item].BitPosition))
-            player:setCharVar("Nyzul_VendingBoxPref", vendingBoxPreferences)
+            player:setCharVar('Nyzul_VendingBoxPref', vendingBoxPreferences)
         elseif categorytype == 5 then
             -- high grade item
             local item = bit.rshift(option, 16) / 4
             vendingBoxPreferences = bit.bxor(vendingBoxPreferences, bit.lshift(1, highGradeItems[item].BitPosition))
-            player:setCharVar("Nyzul_VendingBoxPref", vendingBoxPreferences)
+            player:setCharVar('Nyzul_VendingBoxPref', vendingBoxPreferences)
         end
 
         player:updateEvent(rank, haveimperialIDtag, assaultPoints, player:getCurrentAssault(), floorProgress, unchartedFloorProgress, vendingBoxPreferences, 0)

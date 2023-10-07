@@ -5,19 +5,13 @@
 -- https://ffxiclopedia.wikia.com/wiki/Logging
 -- https://ffxiclopedia.wikia.com/wiki/Mining
 -----------------------------------
-require("scripts/globals/items")
-require("scripts/globals/keyitems")
-require("scripts/globals/missions")
-require("scripts/globals/npc_util")
-require("scripts/globals/quests")
-require("scripts/globals/roe")
-require("scripts/globals/spell_data")
-require("scripts/globals/zone")
-require("scripts/missions/amk/helpers")
-require("scripts/missions/wotg/helpers")
-require("scripts/globals/msg")
+require('scripts/globals/missions')
+require('scripts/globals/npc_util')
+require('scripts/globals/quests')
+require('scripts/globals/roe')
+require('scripts/missions/amk/helpers')
+require('scripts/missions/wotg/helpers')
 -----------------------------------
-
 xi = xi or {}
 xi.helm = xi.helm or {}
 
@@ -38,12 +32,12 @@ xi.helm.helmInfo =
 {
     [xi.helm.type.HARVESTING] =
     {
-        id           = "HARVESTING",
+        id           = 'HARVESTING',
         animation    = xi.emote.HARVESTING,
         mod          = xi.mod.HARVESTING_RESULT,
         settingRate  = xi.settings.main.HARVESTING_RATE,
         settingBreak = xi.settings.main.HARVESTING_BREAK_CHANCE,
-        message      = "HARVESTING_IS_POSSIBLE_HERE",
+        message      = 'HARVESTING_IS_POSSIBLE_HERE',
         tool         = 1020,
 
         zone =
@@ -349,12 +343,12 @@ xi.helm.helmInfo =
 
     [xi.helm.type.EXCAVATION] =
     {
-        id           = "EXCAVATION",
+        id           = 'EXCAVATION',
         animation    = xi.emote.EXCAVATION,
         mod          = nil,
         settingRate  = xi.settings.main.EXCAVATION_RATE,
         settingBreak = xi.settings.main.EXCAVATION_BREAK_CHANCE,
-        message      = "MINING_IS_POSSIBLE_HERE",
+        message      = 'MINING_IS_POSSIBLE_HERE',
         tool         = 605,
 
         zone =
@@ -363,22 +357,21 @@ xi.helm.helmInfo =
             {
                 drops =
                 {
-                    { 2220,   880 }, -- Bone Chip
-                    { 2220,   898 }, -- Chicken Bone
-                    { 1220,   891 }, -- Bat Fang
-                    { 1220, 17396 }, -- Little Worm
-                    {  720,   897 }, -- Scorpion Claw
-                    {  720,   896 }, -- Scorpion Shell
-                    {  420,  1616 }, -- Antlion Jaw
-                    {  420,  1236 }, -- Cactus Stems
-                    {  420,  1473 }, -- High Quality Scorpion Shell
-                    {  420,   769 }, -- Colored Rock
+                    { 2220, xi.item.BONE_CHIP                   },
+                    { 2220, xi.item.CHICKEN_BONE                },
+                    { 1220, xi.item.BAT_FANG                    },
+                    { 1220, xi.item.LITTLE_WORM                 },
+                    {  720, xi.item.SCORPION_CLAW               },
+                    {  720, xi.item.SCORPION_SHELL              },
+                    {  420, xi.item.ANTLION_JAW                 },
+                    {  420, xi.item.BAG_OF_CACTUS_STEMS         },
+                    {  420, xi.item.HIGH_QUALITY_SCORPION_SHELL },
+                    {  420, xi.item.RED_ROCK                    },
                     {   30,  1771 }, -- Dragon Bone +
                     {   10,   883 }, -- Behemoth Horn +
                     {    5,  1458 }, -- Mammoth Tusk +
                     {    6,  1518 }, -- Collosal Skull +
-                    {    4,  1463 }, -- Chronss Tooth +
-
+                    {    4,  1463 }, -- Chronss Tooth + TODO: Convert to item list
                 },
 
                 points =
@@ -395,21 +388,20 @@ xi.helm.helmInfo =
             {
                 drops =
                 {
-                    { 2690,   880 }, -- Bone Chip
-                    { 1830,   898 }, -- Chicken Bone
-                    { 1300,   891 }, -- Bat Fang
-                    { 1440,   893 }, -- Giant Femur
-                    { 1250, 17396 }, -- Little Worm
-                    {   50,   897 }, -- Scorpion Claw
-                    {  290,   896 }, -- Scorpion Shell
-                    {  240,   885 }, -- Turtle Shell
-                    {  190,  1888 }, -- Silica
+                    { 2690, xi.item.BONE_CHIP      },
+                    { 1830, xi.item.CHICKEN_BONE   },
+                    { 1300, xi.item.BAT_FANG       },
+                    { 1440, xi.item.GIANT_FEMUR    },
+                    { 1250, xi.item.LITTLE_WORM    },
+                    {   50, xi.item.SCORPION_CLAW  },
+                    {  290, xi.item.SCORPION_SHELL },
+                    {  240, xi.item.TURTLE_SHELL   },
+                    {  190, xi.item.SACK_OF_SILICA },
                     {   10,  1771 }, -- Dragon Bone +
                     {   7,    883 }, -- Behemoth Horn +
                     {   5,   1458 }, -- Mammoth Tusk +
                     {   6,   1518 }, -- Collosal Skull +
                     {   4,   1463 }, -- Chronss Tooth +
-
                 },
 
                 points =
@@ -437,23 +429,21 @@ xi.helm.helmInfo =
             {
                 drops =
                 {
-                    { 2130,   936 }, -- Rock Salt
-                    { 1700,   888 }, -- Seashell
-                    {  430,   881 }, -- Crab Shell
-                    { 1490,   864 }, -- Fish Scales
-                    { 2130, 17395 }, -- Lugworm
-                    { 1060, 17397 }, -- Shell Bug
-                    {  100,   887 }, -- Coral Fragment
-                    {  100,   573 }, -- Vegetable Seeds
-                    {  430,   885 }, -- Turtle Shell
-                    {  100,   575 }, -- Grain Seeds
-                    {  640,  1985 }, -- Helmet Mole
+                    { 2130, xi.item.CHUNK_OF_ROCK_SALT     },
+                    { 1700, xi.item.SEASHELL               },
+                    {  430, xi.item.CRAB_SHELL             },
+                    { 1490, xi.item.FISH_SCALES            },
+                    { 2130, xi.item.LUGWORM                },
+                    { 1060, xi.item.SHELL_BUG              },
+                    {  100, xi.item.CORAL_FRAGMENT         },
+                    {  100, xi.item.BAG_OF_VEGETABLE_SEEDS },
+                    {  430, xi.item.TURTLE_SHELL           },
+                    {  100, xi.item.BAG_OF_GRAIN_SEEDS     },
+                    {  640, xi.item.HELMET_MOLE            },
                     {   10,  1311 }, -- oxblood +
                     {   15,  1312 }, -- angelskin +
                     {   75,  1586 }, -- titanictus shell +
                     {    6,  1521 }, -- Slime Juice
-
-
                 },
 
                 points =
@@ -474,22 +464,21 @@ xi.helm.helmInfo =
             {
                 drops =
                 {
-                    { 2560,   880 }, -- Bone Chip
-                    { 2560,   891 }, -- Bat Fang
-                    { 2330, 17396 }, -- Little Worm
-                    {  930,   893 }, -- Giant Femur
-                    {  700,   897 }, -- Scorpion Claw
-                    {  230,   896 }, -- Scorpion Shell
-                    {  230,   703 }, -- Petrified Log
-                    {  100,   769 }, -- Colored Rock
-                    {  470,  1888 }, -- Silica
+                    { 2560, xi.item.BONE_CHIP      },
+                    { 2560, xi.item.BAT_FANG       },
+                    { 2330, xi.item.LITTLE_WORM    },
+                    {  930, xi.item.GIANT_FEMUR    },
+                    {  700, xi.item.SCORPION_CLAW  },
+                    {  230, xi.item.SCORPION_SHELL },
+                    {  230, xi.item.PETRIFIED_LOG  },
+                    {  100, xi.item.RED_ROCK       },
+                    {  470, xi.item.SACK_OF_SILICA },
                     {  430,   885 }, -- Turtle Shell +
                     {  100,  1586 }, -- titanicus shell +
                     {    5,  1458 }, -- Mammoth Tusk +
                     {    6,  1518 }, -- Collosal Skull +
                     {    4,  1463 }, -- Chronss Tooth +
                     {    6,  1521 }, -- Slime Juice
-
                 },
 
                 points =
@@ -516,12 +505,12 @@ xi.helm.helmInfo =
 
     [xi.helm.type.LOGGING] =
     {
-        id = "LOGGING",
+        id = 'LOGGING',
         animation    = xi.emote.LOGGING,
         mod          = xi.mod.LOGGING_RESULT,
         settingRate  = xi.settings.main.LOGGING_RATE,
         settingBreak = xi.settings.main.LOGGING_BREAK_CHANCE,
-        message      = "LOGGING_IS_POSSIBLE_HERE",
+        message      = 'LOGGING_IS_POSSIBLE_HERE',
         tool         = 1021,
 
         zone =
@@ -998,12 +987,12 @@ xi.helm.helmInfo =
 
     [xi.helm.type.MINING] =
     {
-        id           = "MINING",
+        id           = 'MINING',
         animation    = xi.emote.EXCAVATION,
         mod          = xi.mod.MINING_RESULT,
         settingRate  = xi.settings.main.MINING_RATE,
         settingBreak = xi.settings.main.MINING_BREAK_CHANCE,
-        message      = "MINING_IS_POSSIBLE_HERE",
+        message      = 'MINING_IS_POSSIBLE_HERE',
         tool         = 605,
 
         zone =
@@ -1512,14 +1501,14 @@ xi.helm.helmInfo =
 
 local rocks =
 {
-    [xi.magic.element.FIRE   ] = xi.items.RED_ROCK,
-    [xi.magic.element.ICE    ] = xi.items.TRANSLUCENT_ROCK,
-    [xi.magic.element.WIND   ] = xi.items.GREEN_ROCK,
-    [xi.magic.element.EARTH  ] = xi.items.YELLOW_ROCK,
-    [xi.magic.element.THUNDER] = xi.items.PURPLE_ROCK,
-    [xi.magic.element.WATER  ] = xi.items.BLUE_ROCK,
-    [xi.magic.element.LIGHT  ] = xi.items.WHITE_ROCK,
-    [xi.magic.element.DARK   ] = xi.items.BLACK_ROCK,
+    [xi.element.FIRE   ] = xi.item.RED_ROCK,
+    [xi.element.ICE    ] = xi.item.TRANSLUCENT_ROCK,
+    [xi.element.WIND   ] = xi.item.GREEN_ROCK,
+    [xi.element.EARTH  ] = xi.item.YELLOW_ROCK,
+    [xi.element.THUNDER] = xi.item.PURPLE_ROCK,
+    [xi.element.WATER  ] = xi.item.BLUE_ROCK,
+    [xi.element.LIGHT  ] = xi.item.WHITE_ROCK,
+    [xi.element.DARK   ] = xi.item.BLACK_ROCK,
 }
 
 -----------------------------------
@@ -1746,14 +1735,29 @@ xi.helm.onTrade = function(player, npc, trade, helmType, csid, func)
         if item ~= 0 and full == 0 then
             player:addItem(item)
 
-            local uses = (npc:getLocalVar("uses") - 1) % 4
-            npc:setLocalVar("uses", uses)
+            local uses = (npc:getLocalVar('uses') - 1) % 4
+            npc:setLocalVar('uses', uses)
 
             if uses == 0 then
                 movePoint(npc, zoneId, info)
             end
 
-            player:triggerRoeEvent(xi.roe.triggers.helmSuccess, { ["skillType"] = helmType })
+            if
+                xi.events and
+                xi.events.eggHunt and
+                xi.events.eggHunt.enabledCheck and
+                xi.events.eggHunt.enabledCheck() and
+                player:getCharVar('[EGG_HUNT]DAILY_HELM') < VanadielUniqueDay()
+            then
+                player:timer(3000, function(playerArg)
+                    if npcUtil.giveItem(playerArg, math.random(xi.item.A_EGG, xi.item.Z_EGG)) then
+                        playerArg:setCharVar('[EGG_HUNT]DAILY_HELM', VanadielUniqueDay())
+                        return
+                    end
+                end)
+            end
+
+            player:triggerRoeEvent(xi.roeTrigger.HELM_SUCCESS, { ['skillType'] = helmType })
         end
 
         -- quest stuff
@@ -1772,7 +1776,7 @@ xi.helm.onTrade = function(player, npc, trade, helmType, csid, func)
             xi.amk.helpers.helmTrade(player, helmType, broke)
         end
 
-        if type(func) == "function" then
+        if type(func) == 'function' then
             func(player)
         end
     else

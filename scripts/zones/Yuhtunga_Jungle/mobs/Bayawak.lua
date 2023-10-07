@@ -2,8 +2,6 @@
 -- Area: Yuhtunga Jungle
 --   NM: Bayawak
 -----------------------------------
-require("scripts/globals/hunts")
------------------------------------
 local entity = {}
 
 entity.onMobRoam = function(mob)

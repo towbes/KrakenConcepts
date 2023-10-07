@@ -2,8 +2,6 @@
 -- Area: Quicksand Caves
 --   NM: Nussknacker
 -----------------------------------
-require("scripts/globals/hunts")
------------------------------------
 local entity = {}
 
 entity.onMobRoam = function(mob)

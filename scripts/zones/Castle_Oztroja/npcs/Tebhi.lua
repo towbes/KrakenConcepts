@@ -6,10 +6,13 @@
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)
-    if trade:hasItemQty(13121, 1) and trade:getItemCount() == 1 then -- Trade Beast collar
+    if
+        trade:hasItemQty(xi.item.BEAST_COLLAR, 1) and
+        trade:getItemCount() == 1
+    then
         player:tradeComplete()
-        -- Tebhi disappears for 15min -------------- NOT IMPLEMENTED
-        player:setCharVar("scatIntoShadowCS", 2)
+        -- TODO: Tebhi disappears for 15min
+        player:setCharVar('scatIntoShadowCS', 2)
     end
 end
 

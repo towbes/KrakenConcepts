@@ -4,7 +4,6 @@
 -- Involved in Quest: As Thick as Thieves 
 -----------------------------------
 mixins = {require("scripts/mixins/job_special")}
-require("scripts/globals/regimes")
 -----------------------------------
 local entity = {}
 

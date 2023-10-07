@@ -1,10 +1,6 @@
 -----------------------------------
 -- Zone: The_Shrine_of_RuAvitau (178)
 -----------------------------------
-local ID = require('scripts/zones/The_Shrine_of_RuAvitau/IDs')
-require('scripts/globals/conquest')
-require('scripts/globals/zone')
------------------------------------
 local zoneObject = {}
 
 zoneObject.onInitialize = function(zone)

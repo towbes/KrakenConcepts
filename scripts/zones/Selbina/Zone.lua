@@ -1,18 +1,12 @@
 -----------------------------------
 -- Zone: Selbina (248)
 -----------------------------------
-local ID = require('scripts/zones/Selbina/IDs')
-require('scripts/globals/conquest')
-require('scripts/globals/keyitems')
-require('scripts/globals/missions')
-require('scripts/globals/npc_util')
-require('scripts/globals/quests')
-require('scripts/globals/zone')
+local ID = zones[xi.zone.SELBINA]
 -----------------------------------
 local zoneObject = {}
 
 zoneObject.onInitialize = function(zone)
-    SetExplorerMoogles(ID.npc.EXPLORER_MOOGLE)
+    xi.server.setExplorerMoogles(ID.npc.EXPLORER_MOOGLE)
 end
 
 zoneObject.onGameHour = function(zone)
@@ -48,7 +42,7 @@ zoneObject.onZoneIn = function(player, prevZone)
 
     if
         player:hasKeyItem(xi.ki.SEANCE_STAFF) and
-        player:getCharVar("Enagakure_Killed") == 1
+        player:getCharVar('Enagakure_Killed') == 1
     then
         cs = 1101
     end
@@ -69,7 +63,7 @@ end
 
 zoneObject.onEventFinish = function(player, csid, option, npc)
     if csid == 200 then
-        if GetServerVariable("Selbina_Destination") >= 89 then
+        if GetServerVariable('Selbina_Destination') > 89 then
             player:setPos(0, 0, 0, 0, xi.zone.SHIP_BOUND_FOR_MHAURA_PIRATES)
         else
             player:setPos(0, 0, 0, 0, xi.zone.SHIP_BOUND_FOR_MHAURA)
@@ -77,7 +71,7 @@ zoneObject.onEventFinish = function(player, csid, option, npc)
 
     elseif
         csid == 1101 and
-        npcUtil.completeQuest(player, xi.quest.log_id.OUTLANDS, xi.quest.id.outlands.I_LL_TAKE_THE_BIG_BOX, { item = 14226, fameArea = xi.quest.fame_area.NORG, var = { "Enagakure_Killed", "illTakeTheBigBoxCS" } })
+        npcUtil.completeQuest(player, xi.quest.log_id.OUTLANDS, xi.quest.id.outlands.I_LL_TAKE_THE_BIG_BOX, { item = 14226, fameArea = xi.quest.fame_area.NORG, var = { 'Enagakure_Killed', 'illTakeTheBigBoxCS' } })
     then
         player:delKeyItem(xi.ki.SEANCE_STAFF)
     end

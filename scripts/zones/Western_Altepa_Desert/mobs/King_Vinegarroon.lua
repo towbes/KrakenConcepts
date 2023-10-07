@@ -2,10 +2,7 @@
 -- Area: Western Altepa Desert
 --   NM: King Vinegarroon
 -----------------------------------
-require("scripts/globals/titles")
-require("scripts/globals/mobs")
-require("scripts/globals/status")
-local ID = require("scripts/zones/Western_Altepa_Desert/IDs")
+local ID = zones[xi.zone.WESTERN_ALTEPA_DESERT]
 -----------------------------------
 local entity = {}
 

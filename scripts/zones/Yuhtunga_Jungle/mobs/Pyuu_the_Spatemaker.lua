@@ -2,9 +2,6 @@
 -- Area: Yuhtunga Jungle
 --  Mob: Pyuu the Spatemaker
 -----------------------------------
-require("scripts/globals/hunts")
-require("scripts/globals/regimes")
------------------------------------
 local entity = {}
 
 entity.onMobInitialize = function(mob)

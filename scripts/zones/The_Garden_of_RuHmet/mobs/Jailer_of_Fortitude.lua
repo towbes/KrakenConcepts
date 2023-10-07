@@ -2,10 +2,8 @@
 -- Area: The Garden of Ru'Hmet
 --   NM: Jailer of Fortitude
 -----------------------------------
-local ID = require("scripts/zones/The_Garden_of_RuHmet/IDs")
-mixins = { require("scripts/mixins/job_special") }
-require("scripts/globals/limbus")
-require("scripts/globals/magic")
+local ID = zones[xi.zone.THE_GARDEN_OF_RUHMET]
+mixins = { require('scripts/mixins/job_special') }
 -----------------------------------
 local entity = {}
 
@@ -30,13 +28,13 @@ entity.onMobEngaged = function(mob, target)
 end
 
 entity.onMobFight = function(mob, target)
-    local delay = mob:getLocalVar("delay")
-    local lastCast = mob:getLocalVar("LAST_CAST")
-    local spell = mob:getLocalVar("COPY_SPELL")
+    local delay = mob:getLocalVar('delay')
+    local lastCast = mob:getLocalVar('LAST_CAST')
+    local spell = mob:getLocalVar('COPY_SPELL')
 
     if mob:getBattleTime() - lastCast > 30 then
-        mob:setLocalVar("COPY_SPELL", 0)
-        mob:setLocalVar("delay", 0)
+        mob:setLocalVar('COPY_SPELL', 0)
+        mob:setLocalVar('delay', 0)
     end
 
     if
@@ -50,7 +48,7 @@ entity.onMobFight = function(mob, target)
                 mob:setLocalVar("COPY_SPELL", 0)
                 mob:setLocalVar("delay", 0)
             else
-                mob:setLocalVar("delay", delay + 1)
+                mob:setLocalVar('delay', delay + 1)
             end
         end
     end
@@ -82,9 +80,9 @@ entity.onMagicHit = function(caster, target, spell)
         spell:getSpellGroup() ~= xi.magic.spellGroup.BLUE
     then
         -- Handle mimicked spells
-        target:setLocalVar("COPY_SPELL", spell:getID())
-        target:setLocalVar("LAST_CAST", target:getBattleTime())
-        target:setLocalVar("reflectTime", target:getBattleTime())
+        target:setLocalVar('COPY_SPELL', spell:getID())
+        target:setLocalVar('LAST_CAST', target:getBattleTime())
+        target:setLocalVar('reflectTime', target:getBattleTime())
         target:setAnimationSub(1)
     end
 

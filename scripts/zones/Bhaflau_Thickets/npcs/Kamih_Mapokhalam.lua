@@ -3,18 +3,23 @@
 --  NPC: Kamih Mapokhalam
 -- 20 -30 597 z 52
 -----------------------------------
-require("scripts/globals/keyitems")
-local ID = require("scripts/zones/Bhaflau_Thickets/IDs")
+local ID = zones[xi.zone.BHAFLAU_THICKETS]
 -----------------------------------
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)
     local count = trade:getItemCount()
 
-    if count == 1 and trade:hasItemQty(2185, 1) then -- Silver
+    if
+        count == 1 and
+        trade:hasItemQty(xi.item.IMPERIAL_SILVER_PIECE, 1)
+    then
         player:tradeComplete()
         player:startEvent(121)
-    elseif count == 3 and trade:hasItemQty(2186, 3) then -- Mythril
+    elseif
+        count == 3 and
+        trade:hasItemQty(xi.item.IMPERIAL_MYTHRIL_PIECE, 3)
+    then
         if player:hasKeyItem(xi.ki.MAP_OF_ALZADAAL_RUINS) then
             player:startEvent(147)
         else

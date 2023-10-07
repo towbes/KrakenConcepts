@@ -1,9 +1,6 @@
 -----------------------------------
 -- Zone: San_dOria-Jeuno_Airship
 -----------------------------------
-local ID = require('scripts/zones/San_dOria-Jeuno_Airship/IDs')
-require('scripts/globals/zone')
------------------------------------
 local zoneObject = {}
 
 zoneObject.onInitialize = function(zone)

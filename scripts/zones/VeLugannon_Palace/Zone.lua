@@ -1,10 +1,6 @@
 -----------------------------------
 -- Zone: VeLugannon_Palace (177)
 -----------------------------------
-local ID = require('scripts/zones/VeLugannon_Palace/IDs')
-require('scripts/globals/conquest')
-require('scripts/globals/treasure')
------------------------------------
 local zoneObject = {}
 
 zoneObject.onInitialize = function(zone)
@@ -12,7 +8,7 @@ zoneObject.onInitialize = function(zone)
     xi.mob.nmTODPersistCache(zone, ID.mob.ZIPACNA)
 
     xi.treasure.initZone(zone)
-    SetServerVariable("[POP]SteamCleaner", 0) -- should "reset" on server repop
+    SetServerVariable('[POP]SteamCleaner', 0) -- should 'reset' on server repop
 end
 
 zoneObject.onConquestUpdate = function(zone, updatetype, influence, owner, ranking, isConquestAlliance)

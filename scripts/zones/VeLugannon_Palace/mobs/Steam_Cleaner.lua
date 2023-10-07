@@ -19,7 +19,7 @@ entity.onMobRoam = function(mob)
 end
 
 entity.onMobDespawn = function(mob)
-    SetServerVariable("[POP]SteamCleaner", os.time() + math.random(7200, 14400))
+    SetServerVariable('[POP]SteamCleaner', os.time() + math.random(7200, 14400))
 end
 
 return entity

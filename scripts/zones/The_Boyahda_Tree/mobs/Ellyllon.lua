@@ -2,8 +2,6 @@
 -- Area: The Boyahda Tree
 --   NM: Ellyllon
 -----------------------------------
-require("scripts/globals/hunts")
------------------------------------
 local entity = {}
 
 entity.onMobSpawn = function(mob)

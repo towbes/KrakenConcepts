@@ -4,9 +4,7 @@
 -- Involved In Quest: EVIL_AT_THE_INLET
 -- !pos -636 -51 -454 83
 -----------------------------------
-local ID = require("scripts/zones/Vunkerl_Inlet_[S]/IDs")
-require("scripts/globals/keyitems")
-require("scripts/globals/quests")
+local ID = zones[xi.zone.VUNKERL_INLET_S]
 -----------------------------------
 local entity = {}
 

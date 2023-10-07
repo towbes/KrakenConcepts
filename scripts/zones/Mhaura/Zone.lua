@@ -1,11 +1,7 @@
 -----------------------------------
 -- Zone: Mhaura (249)
 -----------------------------------
-local ID = require('scripts/zones/Mhaura/IDs')
-require('scripts/globals/conquest')
-require('scripts/globals/keyitems')
-require('scripts/globals/missions')
-require('scripts/globals/zone')
+local ID = zones[xi.zone.MHAURA]
 -----------------------------------
 local zoneObject = {}
 
@@ -24,7 +20,7 @@ zoneObject.onGameHour = function(zone)
 end
 
 zoneObject.onInitialize = function(zone)
-    SetExplorerMoogles(ID.npc.EXPLORER_MOOGLE)
+    xi.server.setExplorerMoogles(ID.npc.EXPLORER_MOOGLE)
 end
 
 zoneObject.onZoneIn = function(player, prevZone)

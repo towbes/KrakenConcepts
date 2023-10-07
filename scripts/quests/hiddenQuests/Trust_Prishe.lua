@@ -3,17 +3,10 @@
 -----------------------------------
 -- Walnut Door : !pos 117.029 -42.799 41.997 26
 -----------------------------------
-require('scripts/globals/items')
-require('scripts/globals/magic')
-require('scripts/globals/trust')
-require('scripts/globals/quests')
-require('scripts/globals/npc_util')
-require('scripts/globals/interaction/hidden_quest')
------------------------------------
-local tavnaziaID = require("scripts/zones/Tavnazian_Safehold/IDs")
+local tavnaziaID = zones[xi.zone.TAVNAZIAN_SAFEHOLD]
 -----------------------------------
 
-local quest = HiddenQuest:new("TrustPrishe")
+local quest = HiddenQuest:new('TrustPrishe')
 
 local trustMemory = function(player)
     local memories = 0

@@ -2,8 +2,6 @@
 -- Area: Castle Zvahl Keep (162)
 --  Mob: Baron Vapula
 -----------------------------------
-require("scripts/globals/hunts")
-require("scripts/globals/titles")
 mixins = {require("scripts/mixins/job_special")}
 -----------------------------------
 local entity = {}

@@ -1,9 +1,7 @@
 -----------------------------------
 -- Zone: Phanauet_Channel
 -----------------------------------
-local ID = require('scripts/zones/Phanauet_Channel/IDs')
-require('scripts/globals/conquest')
-require('scripts/globals/zone')
+local ID = zones[xi.zone.PHANAUET_CHANNEL]
 require('scripts/globals/barge')
 require('scripts/globals/exp_controller')
 -----------------------------------

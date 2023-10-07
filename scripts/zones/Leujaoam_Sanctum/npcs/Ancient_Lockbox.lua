@@ -2,11 +2,6 @@
 -- Area: Leujaoam Sanctum
 -- Ancient Lockbox
 -----------------------------------
-local ID = require("scripts/zones/Leujaoam_Sanctum/IDs")
-require("scripts/globals/assault")
-require("scripts/globals/items")
-require("scripts/globals/appraisal")
------------------------------------
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)
@@ -18,17 +13,17 @@ entity.onTrigger = function(player, npc)
         [xi.assault.mission.LEUJAOAM_CLEANSING] =
         {
             {
-                { itemid = xi.items.UNAPPRAISED_RING, droprate = 700 },
-                { itemid = xi.items.UNAPPRAISED_BOX,  droprate = 300 },
+                { itemid = xi.item.UNAPPRAISED_RING, droprate = 700 },
+                { itemid = xi.item.UNAPPRAISED_BOX,  droprate = 300 },
             },
         },
 
         [xi.assault.mission.ORICHALCUM_SURVEY] =
         {
             {
-                { itemid = xi.items.UNAPPRAISED_NECKLACE, droprate = 300 },
-                { itemid = xi.items.UNAPPRAISED_BOX,      droprate = 400 },
-                { itemid = xi.items.UNAPPRAISED_GLOVES,   droprate = 300 },
+                { itemid = xi.item.UNAPPRAISED_NECKLACE, droprate = 300 },
+                { itemid = xi.item.UNAPPRAISED_BOX,      droprate = 400 },
+                { itemid = xi.item.UNAPPRAISED_GLOVES,   droprate = 300 },
             },
         },
     }
@@ -47,7 +42,7 @@ entity.onTrigger = function(player, npc)
             },
 
             {
-                { itemid = xi.items.REMEDY, droprate = 530 },
+                { itemid = xi.item.REMEDY, droprate = 530 },
                 { itemid = 0,               droprate = 470 },
             },
         },
@@ -59,7 +54,7 @@ entity.onTrigger = function(player, npc)
             },
 
             {
-                { itemid = xi.items.REMEDY, droprate = 530 },
+                { itemid = xi.item.REMEDY, droprate = 530 },
                 { itemid = 0,               droprate = 470 },
             },
         },

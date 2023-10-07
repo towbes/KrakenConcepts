@@ -3,8 +3,7 @@
 --  NPC: Banishing Gate #2
 -- !pos -100 -2.949 81 200
 -----------------------------------
-require("scripts/globals/keyitems")
-local ID = require("scripts/zones/Garlaige_Citadel/IDs")
+local ID = zones[xi.zone.GARLAIGE_CITADEL]
 -----------------------------------
 local entity = {}
 

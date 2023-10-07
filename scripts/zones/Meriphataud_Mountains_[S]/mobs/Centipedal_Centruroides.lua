@@ -2,9 +2,6 @@
 -- Area: Meriphataud Mountains [S]
 --   NM: Centipedal Centruroides
 -----------------------------------
-require("scripts/globals/hunts")
-require("scripts/globals/mobs")
------------------------------------
 local entity = {}
 
 -- uses Hell Scissors (Throat Stab type move + 30tic poison)

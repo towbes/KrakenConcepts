@@ -3,8 +3,6 @@
 --  Mob: Cirrate Christelle
 -- Note: Mega Boss
 -----------------------------------
-require("scripts/globals/dynamis")
------------------------------------
 local entity = {}
 
 entity.onMobInitialize = function(mob)

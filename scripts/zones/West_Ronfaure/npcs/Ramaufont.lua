@@ -1,7 +1,6 @@
 -----------------------------------
 -- Area: West Ronfaure
 --  NPC: Ramaufont
--- Type: Standard NPC
 -- !pos -267.956 -71.999 414.399 100
 -----------------------------------
 local entity = {}

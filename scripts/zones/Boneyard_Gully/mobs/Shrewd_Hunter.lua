@@ -2,8 +2,8 @@
 -- Area: Boneyard Gully
 --  Mob: Shrewd Hunter
 -----------------------------------
-mixins = { require("scripts/mixins/families/antlion_ambush") }
-local ID = require("scripts/zones/Boneyard_Gully/IDs")
+local ID = zones[xi.zone.BONEYARD_GULLY]
+mixins = { require('scripts/mixins/families/antlion_ambush') }
 -----------------------------------
 local entity = {}
 

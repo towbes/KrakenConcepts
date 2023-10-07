@@ -4,12 +4,6 @@
 -- !pos 369 8 -227 98
 -- Teleports Players to Sauromugue_Champaign
 -----------------------------------
-local ID = require("scripts/zones/Sauromugue_Champaign_[S]/IDs")
-require("scripts/globals/maws")
-require("scripts/globals/teleports")
-require("scripts/globals/pets/fellow")
-require("scripts/globals/fellow_utils")
------------------------------------
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)
