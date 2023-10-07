@@ -94,6 +94,8 @@ public:
     bool isSubType(ITEM_SUBTYPE) const;
     bool isStorageSlip() const;
 
+    bool isRare();
+
     void setID(uint16);
     void setSubID(uint16);
     void setSubType(uint8);

@@ -511,7 +511,7 @@ xi.znm.ryo.onEventUpdate = function(player, csid, option, npc)
             player:updateEvent(GetServerVariable('[ZNM]SubjectsOfInterest'))
             -- convert real time to game days: 2.4 real minutes / vana hour
             local daysRemaining = math.floor((GetServerVariable('[ZNM]SubOfInterestTimeLimit') - os.time()) / (60 * 24 * 2.4))
-            player:PrintToPlayer(string.format('Ryo : Sanraku's interest will change in about %u days.', daysRemaining), 0xD)
+            player:PrintToPlayer(string.format('Ryo : Sanraku\'s interest will change in about %u days.', daysRemaining), 0xD)
         elseif option == 201 then
             -- Fauna
             player:updateEvent(GetServerVariable('[ZNM]Fauna'))

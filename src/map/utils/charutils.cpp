@@ -1316,7 +1316,8 @@ namespace charutils
             return 0;
         }
 
-        if (PItem->getFlag() & ITEM_FLAG_RARE)
+        // if (PItem->getFlag() & ITEM_FLAG_RARE)
+        if (PItem->isRare())
         {
             if (HasItem(PChar, PItem->getID()))
             {
@@ -1440,8 +1441,8 @@ namespace charutils
         charutils::SaveCharExp(PChar, PChar->GetMJob());
         PChar->updatemask |= UPDATE_HP;
 
-        PChar->pushPacket(new CCharJobsPacket(PChar));
-        PChar->pushPacket(new CCharStatsPacket(PChar));
+        PChar->pushPacket(new CCharJobsPacket(PChar, true));  // Umeboshi "resetflips"
+        PChar->pushPacket(new CCharStatsPacket(PChar, true)); // Umeboshi "resetflips"
         PChar->pushPacket(new CCharSkillsPacket(PChar));
         PChar->pushPacket(new CCharRecastPacket(PChar));
         PChar->pushPacket(new CCharAbilitiesPacket(PChar));
@@ -1626,7 +1627,8 @@ namespace charutils
         {
             CItem* PItem = PChar->UContainer->GetItem(slotid);
 
-            if (PItem != nullptr && PItem->getFlag() & ITEM_FLAG_RARE)
+            // if (PItem != nullptr && PItem->getFlag() & ITEM_FLAG_RARE)
+            if (PItem != nullptr && PItem->isRare())
             {
                 if (HasItem(PTarget, PItem->getID()))
                 {
@@ -1890,7 +1892,8 @@ namespace charutils
             return false;
         }
 
-        if ((PChar->m_EquipBlock & (1 << equipSlotID)) || !(PItem->getJobs() & (1 << (PChar->GetMJob() - 1))) ||
+        // if ((PChar->m_EquipBlock & (1 << equipSlotID)) || !(PItem->getJobs() & (1 << (PChar->GetMJob() - 1))) ||
+        if ((PChar->m_EquipBlock & (1 << equipSlotID)) || (!(PItem->getJobs() & (1 << (PChar->GetMJob() - 1))) && !(PItem->getJobs() & (1 << (PChar->GetSJob() - 1)))) || // Umeboshi "Allows player to equip items usable by subjob"
             (PItem->getSuperiorLevel() > PChar->getMod(Mod::SUPERIOR_LEVEL)) ||
             (PItem->getReqLvl() > (settings::get<bool>("map.DISABLE_GEAR_SCALING") ? PChar->GetMLevel() : PChar->jobs.job[PChar->GetMJob()])))
         {
@@ -2180,7 +2183,9 @@ namespace charutils
 
             if (PWeapon && AWeapon && PWeapon->getSkillType() == AWeapon->getSkillType())
             {
-                return HasItem(PChar, AItem->getID()) && canEquipItemOnAnyJob(PChar, AItem);
+                // return HasItem(PChar, AItem->getID()) && canEquipItemOnAnyJob(PChar, AItem);
+                return HasItem(PChar, AItem->getID());
+                //&& canEquipItemOnAnyJob(PChar, AItem); // Umeboshi "Style Lock"
             }
         }
         return false;
@@ -2306,10 +2311,10 @@ namespace charutils
             appearanceModel = appearance->getModelId();
         }
 
-        if (!canEquipItemOnAnyJob(PChar, appearance))
-        {
-            return;
-        }
+        // if (!canEquipItemOnAnyJob(PChar, appearance))
+        // {
+        //     return;
+        // }
 
         switch (equipSlotID)
         {
@@ -2717,7 +2722,11 @@ namespace charutils
                 }
             }
 
-            if ((PItem->getJobs() & (1 << (PChar->GetMJob() - 1))) && (PItem->getEquipSlotId() & (1 << slotID)))
+            // if ((PItem->getJobs() & (1 << (PChar->GetMJob() - 1))) && (PItem->getEquipSlotId() & (1 << slotID)))
+            // Umeboshi "This block controls equipment being equipable by subjob when using !flip"
+            if ((((PItem->getJobs() & (1 << (PChar->GetMJob() - 1))) && (PChar->GetMLevel() >= PItem->getReqLvl())) ||
+                 ((PItem->getJobs() & (1 << (PChar->GetSJob() - 1))) && (PChar->GetSLevel() >= PItem->getReqLvl()))) &&
+                (PItem->getEquipSlotId() & (1 << slotID)))
             {
                 continue;
             }
@@ -3080,6 +3089,11 @@ namespace charutils
             }
             uint16 MaxMSkill  = battleutils::GetMaxSkill((SKILLTYPE)i, PChar->GetMJob(), PChar->GetMLevel());
             uint16 MaxSSkill  = battleutils::GetMaxSkill((SKILLTYPE)i, PChar->GetSJob(), PChar->GetSLevel());
+
+            if (MaxSSkill > MaxMSkill) // Umeboshi: "If our subjob shares a combat skill with the main job and has a higher rating, the higher rating will take precedence."
+            {
+                MaxMSkill = MaxSSkill;
+            }
             uint16 skillBonus = 0;
 
             // apply arts bonuses
@@ -3221,7 +3235,8 @@ namespace charutils
         memset(&PChar->m_TraitList, 0, sizeof(PChar->m_TraitList));
 
         battleutils::AddTraits(PChar, traits::GetTraits(PChar->GetMJob()), PChar->GetMLevel());
-        battleutils::AddTraits(PChar, traits::GetTraits(PChar->GetSJob()), PChar->GetSLevel());
+        // battleutils::AddTraits(PChar, traits::GetTraits(PChar->GetSJob()), PChar->GetSLevel());
+        battleutils::AddTraitsSJ(PChar, traits::GetTraits(PChar->GetSJob()), PChar->GetSLevel(), PChar->TraitList.size());
 
         if (PChar->GetMJob() == JOB_BLU || PChar->GetSJob() == JOB_BLU)
         {
@@ -3252,34 +3267,38 @@ namespace charutils
             return;
         }
 
-        if (((PChar->WorkingSkills.rank[rawSkillID] != 0) && !(PChar->WorkingSkills.skill[rawSkillID] & 0x8000)) || useSubSkill)
+        // if (((PChar->WorkingSkills.rank[rawSkillID] != 0) && !(PChar->WorkingSkills.skill[rawSkillID] & 0x8000)) || useSubSkill)
+        if (((PChar->WorkingSkills.rank[rawSkillID] >= 0) && !(PChar->WorkingSkills.skill[rawSkillID] & 0x8000)) || useSubSkill) // Umeboshi "!=" to ">="
         {
             uint16 CurSkill     = PChar->RealSkills.skill[rawSkillID];
             uint16 MainCapSkill = battleutils::GetMaxSkill(SkillID, PChar->GetMJob(), PChar->GetMLevel());
             uint16 SubCapSkill  = battleutils::GetMaxSkill(SkillID, PChar->GetSJob(), PChar->GetSLevel());
             uint16 MainMaxSkill = battleutils::GetMaxSkill(SkillID, PChar->GetMJob(), std::min(PChar->GetMLevel(), lvl));
             uint16 SubMaxSkill  = battleutils::GetMaxSkill(SkillID, PChar->GetSJob(), std::min(PChar->GetSLevel(), lvl));
-            uint16 MaxSkill     = 0;
-            uint16 CapSkill     = 0;
+            uint16 MaxSkill     = std::max(MainMaxSkill, SubMaxSkill);
+            uint16 CapSkill     = std::max(MainCapSkill, SubCapSkill);
+            // uint16 MaxSkill     = 0;
+            // uint16 CapSkill     = 0;
 
-            if (useSubSkill)
-            {
-                if (MainCapSkill > SubCapSkill)
-                {
-                    CapSkill = MainCapSkill;
-                    MaxSkill = MainMaxSkill;
-                }
-                else
-                {
-                    CapSkill = SubCapSkill;
-                    MaxSkill = SubMaxSkill;
-                }
-            }
-            else
-            {
-                CapSkill = MainCapSkill;
-                MaxSkill = MainMaxSkill;
-            }
+            // if (useSubSkill)
+            // {
+            //     if (MainCapSkill > SubCapSkill)
+            //     {
+            //         CapSkill = MainCapSkill;
+            //         MaxSkill = MainMaxSkill;
+            //     }
+            //     else
+            //     {
+            //         CapSkill = SubCapSkill;
+            //         MaxSkill = SubMaxSkill;
+            //     }
+            // }
+            // else
+            // {
+            //     CapSkill = MainCapSkill;
+            //     MaxSkill = MainMaxSkill;
+            // }
+
             // Max skill this victim level will allow.
             // Note this is no longer retail accurate, since now 'decent challenge' mobs allow to cap any skill.
 
@@ -3644,7 +3663,7 @@ namespace charutils
     void setTitle(CCharEntity* PChar, uint16 Title)
     {
         PChar->profile.title = Title;
-        PChar->pushPacket(new CCharStatsPacket(PChar));
+        PChar->pushPacket(new CCharStatsPacket(PChar, true)); // Umeboshi "resetflips"
 
         addTitle(PChar, Title);
         SaveTitles(PChar);
@@ -4668,7 +4687,7 @@ namespace charutils
                 BuildingCharTraitsTable(PChar);
                 BuildingCharWeaponSkills(PChar);
 
-                PChar->pushPacket(new CCharJobsPacket(PChar));
+                PChar->pushPacket(new CCharJobsPacket(PChar, true)); // Umeboshi "resetflips"
                 PChar->pushPacket(new CCharUpdatePacket(PChar));
                 PChar->pushPacket(new CCharSkillsPacket(PChar));
                 PChar->pushPacket(new CCharRecastPacket(PChar));
@@ -4709,7 +4728,7 @@ namespace charutils
         }
 
         SaveCharExp(PChar, PChar->GetMJob());
-        PChar->pushPacket(new CCharStatsPacket(PChar));
+        PChar->pushPacket(new CCharStatsPacket(PChar, true)); // Umeboshi "resetflips"
     }
 
     /************************************************************************
@@ -4901,7 +4920,7 @@ namespace charutils
                 SaveCharJob(PChar, PChar->GetMJob());
                 SaveCharExp(PChar, PChar->GetMJob());
 
-                PChar->pushPacket(new CCharJobsPacket(PChar));
+                PChar->pushPacket(new CCharJobsPacket(PChar, true)); // Umeboshi "resetflips"
                 PChar->pushPacket(new CCharUpdatePacket(PChar));
                 PChar->pushPacket(new CCharSkillsPacket(PChar));
                 PChar->pushPacket(new CCharRecastPacket(PChar));
@@ -4914,7 +4933,7 @@ namespace charutils
                 PChar->pushPacket(new CCharSyncPacket(PChar));
 
                 PChar->loc.zone->PushPacket(PChar, CHAR_INRANGE_SELF, new CMessageCombatPacket(PChar, PMob, PChar->jobs.job[PChar->GetMJob()], 0, 9));
-                PChar->pushPacket(new CCharStatsPacket(PChar));
+                PChar->pushPacket(new CCharStatsPacket(PChar, true)); // Umeboshi "resetflips"
 
                 luautils::OnPlayerLevelUp(PChar);
                 roeutils::event(ROE_EVENT::ROE_LEVELUP, PChar, RoeDatagramList{});
@@ -4926,7 +4945,7 @@ namespace charutils
         SaveCharStats(PChar);
         SaveCharJob(PChar, PChar->GetMJob());
         SaveCharExp(PChar, PChar->GetMJob());
-        PChar->pushPacket(new CCharStatsPacket(PChar));
+        PChar->pushPacket(new CCharStatsPacket(PChar, true)); // Umeboshi "resetflips"
 
         if (onLimitMode)
         {
@@ -6238,7 +6257,7 @@ namespace charutils
             sql->Query(rankingQuery, evalPoints, PChar->profile.unity_leader);
             roeutils::UpdateUnityTrust(PChar, true);
 
-            PChar->pushPacket(new CCharStatsPacket(PChar));
+            PChar->pushPacket(new CCharStatsPacket(PChar, false)); // Umeboshi "resetflips"
         }
         else if (strcmp(type, "spark_of_eminence") == 0)
         {
@@ -6392,7 +6411,7 @@ namespace charutils
             {
                 // weapon is now broken
                 PChar->PLatentEffectContainer->CheckLatentsWeaponBreak(slotid);
-                PChar->pushPacket(new CCharStatsPacket(PChar));
+                PChar->pushPacket(new CCharStatsPacket(PChar, false)); // Umeboshi "resetflips"
             }
             char extra[sizeof(PWeapon->m_extra) * 2 + 1];
             sql->EscapeStringLen(extra, (const char*)PWeapon->m_extra, sizeof(PWeapon->m_extra));

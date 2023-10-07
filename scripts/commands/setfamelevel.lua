@@ -33,7 +33,7 @@ function onTrigger(player, famezone, level, target)
     -- validate famezone
     local fameAreas =
     {
-        'San d'Oria',               -- 0
+        'San d\'Oria',              -- 0
         'Bastok',                   -- 1
         'Windurst',                 -- 2
         'Jeuno',                    -- 3
@@ -77,5 +77,5 @@ function onTrigger(player, famezone, level, target)
     end
 
     targ:setFame(famezone, fameBaseValues[level] / fameMultiplier)
-    player:PrintToPlayer( string.format( 'Set %s's fame for fame area %i (%s) to %i (Level %i).', targ:getName(), famezone, fameAreas[famezone + 1], fameBaseValues[level], level))
+    player:PrintToPlayer( string.format( 'Set %s\'s fame for fame area %i (%s) to %i (Level %i).', targ:getName(), famezone, fameAreas[famezone + 1], fameBaseValues[level], level))
 end

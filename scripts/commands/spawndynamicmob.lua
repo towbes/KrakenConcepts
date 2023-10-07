@@ -12,7 +12,7 @@ cmdprops =
 
 function error(player, msg)
     player:PrintToPlayer(msg)
-    player:PrintToPlayer('!spawndynamicmob <Mob's Group ID> <Mob's Zone ID> <Number of Mobs> <Name for the Mob> {dropsEnabled (0 == False, 1 == True)}')
+    player:PrintToPlayer('!spawndynamicmob <Mob\'s Group ID> <Mob\'s Zone ID> <Number of Mobs> <Name for the Mob> {dropsEnabled (0 == False, 1 == True)}')
 end
 
 function onTrigger(player, mobGroupID, mobZoneID, numberOfMob, mobName, dropsEnabled)
@@ -29,7 +29,7 @@ function onTrigger(player, mobGroupID, mobZoneID, numberOfMob, mobName, dropsEna
     end
 
     if mobZoneID == nil then
-        error(player, 'You must provide a mob's zone ID.')
+        error(player, 'You must provide a mob\'s zone ID.')
         return
     end
 

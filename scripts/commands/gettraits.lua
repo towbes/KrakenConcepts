@@ -142,7 +142,7 @@ function onTrigger(player)
     local targetType = target:getObjType()
 
     if targetType == xi.objType.NPC then
-        player:PrintToPlayer('Target something other than an NPC..They don't have stats!')
+        player:PrintToPlayer('Target something other than an NPC..They don\'t have stats!')
         return
     end
 

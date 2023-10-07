@@ -35,7 +35,7 @@ function onTrigger(player, target, famezone)
     -- validate famezone
     local fameAreas =
     {
-        'San d'Oria',               -- 0
+        'San d\'Oria',              -- 0
         'Bastok',                   -- 1
         'Windurst',                 -- 2
         'Jeuno',                    -- 3
@@ -72,8 +72,8 @@ function onTrigger(player, target, famezone)
     local level = player:getFameLevel(famezone)
 
     if level < 9 then
-        player:PrintToPlayer( string.format( '%s's reputation in fame area %i (%s) is %i (Level %i). Next level at %i (%i points to go).', targ:getName(), famezone, fameAreas[famezone + 1], fame, level, fameBaseValues[level + 1], fameBaseValues[level + 1]-fame), xi.msg.channel.SYSTEM_3)
+        player:PrintToPlayer( string.format( '%s\'s reputation in fame area %i (%s) is %i (Level %i). Next level at %i (%i points to go).', targ:getName(), famezone, fameAreas[famezone + 1], fame, level, fameBaseValues[level + 1], fameBaseValues[level + 1]-fame), xi.msg.channel.SYSTEM_3)
     else
-        player:PrintToPlayer( string.format( '%s's reputation in fame area %i (%s) is %i (Level %i).', targ:getName(), famezone, fameAreas[famezone + 1], fame, level), xi.msg.channel.SYSTEM_3)
+        player:PrintToPlayer( string.format( '%s\'s reputation in fame area %i (%s) is %i (Level %i).', targ:getName(), famezone, fameAreas[famezone + 1], fame, level), xi.msg.channel.SYSTEM_3)
     end
 end

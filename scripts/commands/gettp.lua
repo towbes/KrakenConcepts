@@ -40,7 +40,7 @@ function onTrigger(player, tp, target)
         end
 
         if targ:getID() ~= player:getID() then
-            player:PrintToPlayer(string.format('%s's TP is %i.', targ:getName(), targ:getTP()))
+            player:PrintToPlayer(string.format('%s\'s TP is %i.', targ:getName(), targ:getTP()))
         end
     else
         player:PrintToPlayer(string.format('%s is currently dead.', targ:getName()))

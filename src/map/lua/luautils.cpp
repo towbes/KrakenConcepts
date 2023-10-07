@@ -4021,6 +4021,11 @@ namespace luautils
             {
                 charutils::TrySkillUP(PMaster, SKILL_SUMMONING_MAGIC, PMaster->GetMLevel());
             }
+
+            else if (PMaster->GetSJob() == JOB_SMN) // Umeboshi "SMN sub can get bloodpact skillups"
+            {
+                charutils::TrySkillUP(PMaster, SKILL_SUMMONING_MAGIC, PMaster->GetSLevel());
+            }
         }
 
         return result.get_type(0) == sol::type::number ? result.get<int32>(0) : 0;

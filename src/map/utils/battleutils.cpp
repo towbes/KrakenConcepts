@@ -413,7 +413,7 @@ namespace battleutils
         return ((PSkill->getSkillLevel() > 0 && PChar->GetSkill(PSkill->getType()) >= PSkill->getSkillLevel() &&
                  (PSkill->getUnlockId() == 0 || charutils::hasLearnedWeaponskill(PChar, PSkill->getUnlockId()))) ||
                 (PSkill->getSkillLevel() == 0 && (PSkill->getUnlockId() == 0 || charutils::hasLearnedWeaponskill(PChar, PSkill->getUnlockId())))) &&
-               (PSkill->getJob(PChar->GetMJob()) > 0 || (PSkill->getJob(PChar->GetSJob()) > 0 && !PSkill->mainOnly()));
+               (PSkill->getJob(PChar->GetMJob()) > 0 || (PSkill->getJob(PChar->GetSJob()) > 0 || !PSkill->mainOnly())); // Umeboshi "Subjob gains access to applicable weapon skills that are only usable by the main job."
     }
 
     /************************************************************************
@@ -2124,7 +2124,8 @@ namespace battleutils
 
                         // Shield Mastery
                         if ((std::max(damage - (PDefender->getMod(Mod::PHALANX) + PDefender->getMod(Mod::STONESKIN)), 0) > 0) &&
-                            charutils::hasTrait((CCharEntity*)PDefender, TRAIT_SHIELD_MASTERY))
+                            // charutils::hasTrait((CCharEntity*)PDefender, TRAIT_SHIELD_MASTERY))
+                            PDefender->getMod(Mod::SHIELD_MASTERY_TP) > 0) // Umeboshi "Ungated Shield Mastery Mods to not require the job trait"
                         {
                             // If the player blocked with a shield and has shield mastery, add shield mastery TP bonus
                             // unblocked damage (before block but as if affected by stoneskin/phalanx) must be greater than zero
@@ -2265,7 +2266,8 @@ namespace battleutils
             }
 
             // try to interrupt spell if not a ranged attack and not blocked by Shield Mastery
-            if ((!isRanged) && !((isBlocked) && (PDefender->objtype == TYPE_PC) && (charutils::hasTrait((CCharEntity*)PDefender, TRAIT_SHIELD_MASTERY))))
+            // if ((!isRanged) && !((isBlocked) && (PDefender->objtype == TYPE_PC) && (charutils::hasTrait((CCharEntity*)PDefender, TRAIT_SHIELD_MASTERY))))
+            if ((!isRanged) && !((isBlocked) && (PDefender->objtype == TYPE_PC) && PDefender->getMod(Mod::SHIELD_MASTERY_TP) > 0)) // Umeboshi "Ungate Shield Mastery Trait. Only checks for mod."
             {
                 PDefender->TryHitInterrupt(PAttacker);
             }
@@ -2330,6 +2332,15 @@ namespace battleutils
                     PDefender->addTP((uint16)(tpMultiplier *
                                               ((baseTp + 30) * sBlowMult *
                                                (1.0f + 0.01f * (float)PDefender->getMod(Mod::STORETP))))); // subtle blow also reduces the "+30" on mob tp gain
+                }
+
+                if (PAttacker->objtype == TYPE_PC && PAttacker->GetMJob() == JOB_NIN && PAttacker->GetMLevel() > 74)
+                {
+                    sBlowMult -= 0.01f * ((CCharEntity*)PAttacker)->PMeritPoints->GetMeritValue(MERIT_SUBTLE_BLOW_EFFECT, (CCharEntity*)PAttacker);
+                }
+                else if (PAttacker->objtype == TYPE_PC && PAttacker->GetSJob() == JOB_NIN && PAttacker->GetSLevel() > 74)
+                {
+                    sBlowMult -= 0.01f * ((CCharEntity*)PAttacker)->PMeritPoints->GetMeritValue(MERIT_SUBTLE_BLOW_EFFECT, (CCharEntity*)PAttacker);
                 }
             }
         }
@@ -2475,6 +2486,15 @@ namespace battleutils
                 PDefender->addTP((int16)(tpMultiplier * targetTPMultiplier *
                                          ((baseTp + 30) * sBlowMult *
                                           (1.0f + 0.01f * (float)PDefender->getMod(Mod::STORETP))))); // subtle blow also reduces the "+30" on mob tp gain
+            }
+
+            if (PAttacker->objtype == TYPE_PC && PAttacker->GetMJob() == JOB_NIN && PAttacker->GetMLevel() > 74)
+            {
+                sBlowMult -= 0.01f * ((CCharEntity*)PAttacker)->PMeritPoints->GetMeritValue(MERIT_SUBTLE_BLOW_EFFECT, (CCharEntity*)PAttacker);
+            }
+            else if (PAttacker->objtype == TYPE_PC && PAttacker->GetSJob() == JOB_NIN && PAttacker->GetMLevel() > 74)
+            {
+                sBlowMult -= 0.01f * ((CCharEntity*)PAttacker)->PMeritPoints->GetMeritValue(MERIT_SUBTLE_BLOW_EFFECT, (CCharEntity*)PAttacker);
             }
         }
         else if (PDefender->objtype == TYPE_MOB)
@@ -2717,8 +2737,19 @@ namespace battleutils
                 critHitRate = 100;
             }
         }
+        // else if (PAttacker->objtype == TYPE_PC && PAttacker->GetMJob() == JOB_THF && charutils::hasTrait((CCharEntity*)PAttacker, TRAIT_ASSASSIN) &&
+        //          (!ignoreSneakTrickAttack) && PAttacker->StatusEffectContainer->HasStatusEffect(EFFECT_TRICK_ATTACK))
         else if (PAttacker->objtype == TYPE_PC && PAttacker->GetMJob() == JOB_THF && charutils::hasTrait((CCharEntity*)PAttacker, TRAIT_ASSASSIN) &&
                  (!ignoreSneakTrickAttack) && PAttacker->StatusEffectContainer->HasStatusEffect(EFFECT_TRICK_ATTACK))
+        {
+            CBattleEntity* taChar = battleutils::getAvailableTrickAttackChar(PAttacker, PDefender);
+            if (taChar != nullptr)
+            {
+                critHitRate = 100;
+            }
+        }
+        else if (PAttacker->objtype == TYPE_PC && PAttacker->GetSJob() == JOB_THF && charutils::hasTrait((CCharEntity*)PAttacker, TRAIT_ASSASSIN) &&
+                 (!ignoreSneakTrickAttack) && PAttacker->StatusEffectContainer->HasStatusEffect(EFFECT_TRICK_ATTACK)) // Umeboshi "THF Sub benefits on Cactuar"
         {
             CBattleEntity* taChar = battleutils::getAvailableTrickAttackChar(PAttacker, PDefender);
             if (taChar != nullptr)
@@ -3613,6 +3644,20 @@ namespace battleutils
                 break;
         }
 
+        if (PAttacker->objtype == TYPE_PC && PAttacker->getMod(Mod::WYRMAL_ABJ_KILLER_EFFECT) > 0)
+        {
+            // take the max of humanoid or dragon killer
+            KillerEffect = std::max<int32>(KillerEffect, PDefender->getMod(Mod::DRAGON_KILLER));
+        }
+        if (PDefender->objtype == TYPE_PC && PDefender->GetMLevel() > 74 && PDefender->GetMJob() == JOB_BST)
+        {
+            KillerEffect += ((CCharEntity*)PDefender)->PMeritPoints->GetMeritValue(MERIT_KILLER_EFFECTS, ((CCharEntity*)PDefender));
+        }
+        else if (PDefender->objtype == TYPE_PC && PDefender->GetSLevel() > 74 && PDefender->GetSJob() == JOB_BST)
+        {
+            KillerEffect += ((CCharEntity*)PDefender)->PMeritPoints->GetMeritValue(MERIT_KILLER_EFFECTS, ((CCharEntity*)PDefender));
+        }
+
         // Add intimidation rate from Bully
         if (CStatusEffect* PDoubtEffect = PAttacker->StatusEffectContainer->GetStatusEffect(EFFECT_DOUBT))
         {
@@ -4174,7 +4219,8 @@ namespace battleutils
 
             if (ERROR_SLOTID == (SlotID = PChar->getStorage(LOC_INVENTORY)->SearchItem(toolID)))
             {
-                if (PChar->GetMJob() == JOB_NIN)
+                // if (PChar->GetMJob() == JOB_NIN)
+                if (PChar->GetMJob() == JOB_NIN || PChar->GetSJob() == JOB_NIN) // Umeboshi "NIN Sub can use master tools"
                 {
                     switch (toolID)
                     {
@@ -4480,14 +4526,15 @@ namespace battleutils
             {
                 m_PChar->addHP(-HandleStoneskin(m_PChar, (int32)(bonusDamage * stalwartSoulBonus)));
 
-                if (m_PChar->GetMJob() == JOB_DRK)
+                // Umeboshi "DRK Sub not penalized on cactuar."
+                // if (m_PChar->GetMJob() == JOB_DRK)
                 {
                     damage += bonusDamage;
                 }
-                else
-                {
-                    damage += bonusDamage / 2;
-                }
+                // else
+                // {
+                //     damage += bonusDamage / 2;
+                // }
             }
         }
         return damage;
@@ -4514,6 +4561,11 @@ namespace battleutils
         if (PEntity->objtype == TYPE_PC)
         {
             if (((CCharEntity*)PEntity)->GetMJob() == JOB_SAM)
+            {
+                return ((CCharEntity*)PEntity)->PMeritPoints->GetMeritValue(MERIT_STORE_TP_EFFECT, (CCharEntity*)PEntity);
+            }
+
+            else if (((CCharEntity*)PEntity)->GetSJob() == JOB_SAM) // Umeboshi "SAM sub benefits from merits"
             {
                 return ((CCharEntity*)PEntity)->PMeritPoints->GetMeritValue(MERIT_STORE_TP_EFFECT, (CCharEntity*)PEntity);
             }
@@ -4769,11 +4821,12 @@ namespace battleutils
         {
             uint16 enmityReduction = PAttacker->getMod(Mod::HIGH_JUMP_ENMITY_REDUCTION) + 50;
 
+            // Umeboshi "DRG Sub High Jump not penalized on cactuar."
             // DRG sub has only 30% enmity removed instead of 50%.
-            if (PAttacker->GetSJob() == JOB_DRG)
-            {
-                enmityReduction = PAttacker->getMod(Mod::HIGH_JUMP_ENMITY_REDUCTION) + 30;
-            }
+            // if (PAttacker->GetSJob() == JOB_DRG)
+            // {
+            //     enmityReduction = PAttacker->getMod(Mod::HIGH_JUMP_ENMITY_REDUCTION) + 30;
+            // }
 
             // cap it
             if (enmityReduction > 100)
@@ -6256,6 +6309,77 @@ namespace battleutils
         }
     }
 
+    void AddTraitsSJ(CBattleEntity* PEntity, TraitList_t* traitList, uint8 level, size_t cutoff)
+    // Cactuar Umeboshi "Handling for subjob traits stacking with main job."
+    {
+        CCharEntity* PChar = PEntity->objtype == TYPE_PC ? static_cast<CCharEntity*>(PEntity) : nullptr;
+        for (auto&& PTrait : *traitList)
+        {
+            if (level >= PTrait->getLevel() && PTrait->getLevel() > 0)
+            {
+                std::size_t cutoffActual = cutoff;
+                if (PTrait->getID() == 18) // is dual wield
+                {
+                    cutoffActual = 0; // check the entire list
+                }
+                bool add = true;
+                for (std::size_t j = cutoffActual; j < PEntity->TraitList.size(); ++j)
+                // for (uint8 j = cutoffActual; j < PEntity->TraitList.size(); ++j)
+                {
+                    CTrait* PExistingTrait = PEntity->TraitList.at(j);
+                    if (PExistingTrait->getID() == PTrait->getID())
+                    {
+                        // Check if we still have the merit required for this trait
+                        if (PChar)
+                        {
+                            if (PExistingTrait->getMeritID() > 0)
+                            {
+                                if (PChar->PMeritPoints->GetMerit((MERIT_TYPE)PExistingTrait->getMeritID())->count == 0)
+                                {
+                                    PEntity->delTrait(PExistingTrait);
+                                    break;
+                                }
+                                else if (PExistingTrait->getMeritID() == PTrait->getMeritID())
+                                {
+                                    add = false;
+                                    break;
+                                }
+                            }
+                        }
+                        if (PExistingTrait->getRank() < PTrait->getRank())
+                        {
+                            PEntity->delTrait(PExistingTrait);
+                            break;
+                        }
+                        else if (PExistingTrait->getRank() > PTrait->getRank())
+                        {
+                            add = false;
+                            break;
+                        }
+                        else if (PExistingTrait->getMod() == PTrait->getMod())
+                        {
+                            add = false;
+                            break;
+                        }
+                    }
+                }
+                // Don't add traits that aren't merited yet
+                if (PChar)
+                {
+                    if (PTrait->getMeritID() > 0 && PChar->PMeritPoints->GetMerit((MERIT_TYPE)PTrait->getMeritID())->count == 0)
+                    {
+                        add = false;
+                    }
+                }
+                if (add)
+                {
+                    PEntity->addTrait(PTrait);
+                }
+            }
+        }
+    }
+
+
     bool HasClaim(CBattleEntity* PEntity, CBattleEntity* PTarget)
     {
         if (PTarget == nullptr)
@@ -6593,10 +6717,11 @@ namespace battleutils
                 {
                     recast *= 2;
                 }
-                else
-                {
-                    recast *= 3;
-                }
+                // Umeboshi "SCH Sub not penalized on Cactuar"
+                // else
+                // {
+                //     recast *= 3;
+                // }
             }
             else if (PEntity->StatusEffectContainer->HasStatusEffect({ EFFECT_DARK_ARTS, EFFECT_ADDENDUM_BLACK }))
             {
@@ -6634,10 +6759,11 @@ namespace battleutils
                 {
                     recast *= 2;
                 }
-                else
-                {
-                    recast *= 3;
-                }
+                // Umeboshi "SCH Sub not penalized on Cactuar."
+                // else
+                // {
+                //     recast *= 3;
+                // }
             }
 
             if (PEntity->StatusEffectContainer->HasStatusEffect({ EFFECT_LIGHT_ARTS, EFFECT_ADDENDUM_WHITE }))
@@ -6683,7 +6809,8 @@ namespace battleutils
             if (PSpell->getSkillType() == SKILLTYPE::SKILL_ELEMENTAL_MAGIC || PSpell->getSkillType() == SKILLTYPE::SKILL_DARK_MAGIC)
             {
                 CCharEntity* PChar = static_cast<CCharEntity*>(PEntity);
-                if (charutils::hasTrait(PChar, TRAIT_OCCULT_ACUMEN))
+                // if (charutils::hasTrait(PChar, TRAIT_OCCULT_ACUMEN))
+                if (PChar->getMod(Mod::OCCULT_ACUMEN) > 0) // Umeboshi "Ungating Occult Acumen by removing need for job trait)
                 {
                     return static_cast<int16>(PSpell->getMPCost() * PChar->getMod(Mod::OCCULT_ACUMEN) / 100.f * (1 + (PChar->getMod(Mod::STORETP) / 100.f)));
                 }

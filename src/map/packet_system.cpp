@@ -433,7 +433,7 @@ void SmallPacket0x00C(map_session_data_t* const PSession, CCharEntity* const PCh
     TracyZoneScoped;
     PChar->pushPacket(new CInventorySizePacket(PChar));
     PChar->pushPacket(new CMenuConfigPacket(PChar));
-    PChar->pushPacket(new CCharJobsPacket(PChar));
+    PChar->pushPacket(new CCharJobsPacket(PChar, true)); // Umeboshi "resetflips"
 
     if (charutils::hasKeyItem(PChar, 2544))
     {
@@ -3260,7 +3260,7 @@ void SmallPacket0x04E(map_session_data_t* const PSession, CCharEntity* const PCh
 
                 if (PItem != nullptr)
                 {
-                    if (PItem->getFlag() & ITEM_FLAG_RARE)
+                    if (PItem->isRare())
                     {
                         for (uint8 LocID = 0; LocID < CONTAINER_ID::MAX_CONTAINER_ID; ++LocID)
                         {
@@ -4041,7 +4041,7 @@ void SmallPacket0x061(map_session_data_t* const PSession, CCharEntity* const PCh
     TracyZoneScoped;
     PChar->pushPacket(new CCharUpdatePacket(PChar));
     PChar->pushPacket(new CCharHealthPacket(PChar));
-    PChar->pushPacket(new CCharStatsPacket(PChar));
+    PChar->pushPacket(new CCharStatsPacket(PChar, false)); // Umeboshi "resetflips"
     PChar->pushPacket(new CCharSkillsPacket(PChar));
     PChar->pushPacket(new CCharRecastPacket(PChar));
     PChar->pushPacket(new CMenuMeritPacket(PChar));
@@ -5554,7 +5554,7 @@ void SmallPacket0x0BE(map_session_data_t* const PSession, CCharEntity* const PCh
                     PChar->addHP(PChar->GetMaxHP());
                     PChar->addMP(PChar->GetMaxMP());
                     PChar->pushPacket(new CCharUpdatePacket(PChar));
-                    PChar->pushPacket(new CCharStatsPacket(PChar));
+                    PChar->pushPacket(new CCharStatsPacket(PChar, true)); // Umeboshi "resetflips"
                     PChar->pushPacket(new CCharSkillsPacket(PChar));
                     PChar->pushPacket(new CCharRecastPacket(PChar));
                     PChar->pushPacket(new CCharAbilitiesPacket(PChar));
@@ -7229,9 +7229,9 @@ void SmallPacket0x100(map_session_data_t* const PSession, CCharEntity* const PCh
 
         charutils::SaveCharStats(PChar);
 
-        PChar->pushPacket(new CCharJobsPacket(PChar));
+        PChar->pushPacket(new CCharJobsPacket(PChar, true)); // Umeboshi "resetflips"
         PChar->pushPacket(new CCharUpdatePacket(PChar));
-        PChar->pushPacket(new CCharStatsPacket(PChar));
+        PChar->pushPacket(new CCharStatsPacket(PChar, true)); // Umeboshi "resetflips"
         PChar->pushPacket(new CCharSkillsPacket(PChar));
         PChar->pushPacket(new CCharRecastPacket(PChar));
         PChar->pushPacket(new CCharAbilitiesPacket(PChar));
@@ -7296,7 +7296,7 @@ void SmallPacket0x102(map_session_data_t* const PSession, CCharEntity* const PCh
             PChar->pushPacket(new CCharAbilitiesPacket(PChar));
             PChar->pushPacket(new CCharJobExtraPacket(PChar, true));
             PChar->pushPacket(new CCharJobExtraPacket(PChar, false));
-            PChar->pushPacket(new CCharStatsPacket(PChar));
+            PChar->pushPacket(new CCharStatsPacket(PChar, true)); // Umeboshi "resetflips"
             PChar->UpdateHealth();
         }
         else
@@ -7320,7 +7320,8 @@ void SmallPacket0x102(map_session_data_t* const PSession, CCharEntity* const PCh
                 if (spell != nullptr)
                 {
                     uint8 mLevel = PChar->m_LevelRestriction != 0 && PChar->m_LevelRestriction < PChar->GetMLevel() ? PChar->m_LevelRestriction : PChar->GetMLevel();
-                    uint8 sLevel = floor(mLevel / 2);
+                    // uint8 sLevel = floor(mLevel / 2);
+                    uint8 sLevel = PChar->m_LevelRestriction != 0 && PChar->m_LevelRestriction < PChar->GetSLevel() ? PChar->m_LevelRestriction : PChar->GetSLevel();
 
                     if (mLevel < spell->getJob(PChar->GetMJob()) && sLevel < spell->getJob(PChar->GetSJob()))
                     {
@@ -7333,7 +7334,7 @@ void SmallPacket0x102(map_session_data_t* const PSession, CCharEntity* const PCh
                     PChar->pushPacket(new CCharAbilitiesPacket(PChar));
                     PChar->pushPacket(new CCharJobExtraPacket(PChar, true));
                     PChar->pushPacket(new CCharJobExtraPacket(PChar, false));
-                    PChar->pushPacket(new CCharStatsPacket(PChar));
+                    PChar->pushPacket(new CCharStatsPacket(PChar, true)); // Umeboshi "resetflips"
                     PChar->UpdateHealth();
                 }
                 else

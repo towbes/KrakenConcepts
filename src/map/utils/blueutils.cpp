@@ -110,9 +110,17 @@ namespace blueutils
                 {
                     PBlueMages.emplace_back((CCharEntity*)member);
                 }
+                else if (member->GetSJob() == JOB_BLU && member->objtype == TYPE_PC) // Umeboshi "BLU sub now applies to logic."
+                {
+                    PBlueMages.emplace_back((CCharEntity*)member);
+                }
             }
         }
         else if (PChar->GetMJob() == JOB_BLU)
+        {
+            PBlueMages.emplace_back(PChar);
+        }
+        else if (PChar->GetSJob() == JOB_BLU)
         {
             PBlueMages.emplace_back(PChar);
         }
@@ -194,7 +202,7 @@ namespace blueutils
         charutils::BuildingCharTraitsTable(PChar);
         PChar->pushPacket(new CCharJobExtraPacket(PChar, true));
         PChar->pushPacket(new CCharJobExtraPacket(PChar, false));
-        PChar->pushPacket(new CCharStatsPacket(PChar));
+        PChar->pushPacket(new CCharStatsPacket(PChar, true)); // Umeboshi "resetflips"
         charutils::CalculateStats(PChar);
         PChar->UpdateHealth();
         SaveSetSpells(PChar);
@@ -459,7 +467,8 @@ namespace blueutils
                             {
                                 if (PExistingTrait->getLevel() == 0 && ((CBlueTrait*)PExistingTrait)->getCategory() == PTrait->getCategory())
                                 {
-                                    add = false;
+                                    // add = false;
+                                    add = true; // Umeboshi "Allow stacking of blue traits with native job traits"
                                     break;
                                 }
                                 if (PExistingTrait->getRank() < PTrait->getRank())
@@ -471,14 +480,14 @@ namespace blueutils
                                 }
                                 else if (PExistingTrait->getRank() > PTrait->getRank())
                                 {
-                                    add = false;
+                                    add = true; // Umeboshi "Allow stacking of blue traits with native job traits"
                                     break;
                                 }
                                 else
                                 {
                                     if (PExistingTrait->getMod() == PTrait->getMod())
                                     {
-                                        add = false;
+                                        add = true; // Umeboshi "Allow stacking of blue traits with native job traits"
                                         break;
                                     }
                                 }

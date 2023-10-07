@@ -163,6 +163,16 @@ bool CItem::isSubType(ITEM_SUBTYPE subtype) const
     return (m_subtype & subtype);
 }
 
+
+bool CItem::isRare()
+{
+    if (settings::get<bool>("map.DISABLE_RARE_ITEM_LIMIT"))
+    {
+        return false;
+    }
+    return m_flag & ITEM_FLAG_RARE ? true : false;
+}
+
 /************************************************************************
  *                                                                       *
  * Reserved number of objects in a pack                                  *
