@@ -15,13 +15,13 @@ mobskillObject.onMobWeaponSkill = function(target, mob, skill)
     xi.mobskills.mobStatusEffectMove(mob, target, typeEffect, 15, 3, 120)
 
     local dmgcap = 800
-    if mob:getName() == "Fairy_Ring" then
+    if mob:getName() == 'Fairy_Ring' then
         dmgcap = 1005
     
         local typeEffect = xi.effect.POISON
         xi.mobskills.mobStatusEffectMove(mob, target, typeEffect, 50, 3, 60) -- 50/tic Poison
     end
-    local dmgmod = xi.mobskills.mobBreathMove(mob, target, 0.25, 2, xi.magic.ele.DARK, dmgcap)
+    local dmgmod = xi.mobskills.mobBreathMove(mob, target, 0.25, 2, xi.element.DARK, dmgcap)
 
     local dmg = xi.mobskills.mobFinalAdjustments(dmgmod, mob, skill, target, xi.attackType.BREATH, xi.damageType.DARK, xi.mobskills.shadowBehavior.IGNORE_SHADOWS)
 

@@ -38,7 +38,7 @@ quest.sections =
                     if option == 0 then
                         npcUtil.giveKeyItem(player, xi.ki.SPIRIT_INCENSE)
                         quest:begin(player)
-                    npcUtil.giveKeyItem(player, xi.ki.SPIRIT_INCENSE)
+                    end
                 end,
             },
         },
@@ -55,9 +55,9 @@ quest.sections =
             {
                 onTrigger = function(player, npc)
                     if player:hasKeyItem(xi.ki.SPIRIT_INCENSE) then
-                        return quest:progressEvent(10020)
+                        return quest:event(10020)
                     elseif player:hasKeyItem(xi.ki.GANTINEUXS_LETTER) then
-                        return quest:progressEvent(10022)
+                        return quest:event(10022)
                     else
                         return quest:progressEvent(10021)
                     end
@@ -68,25 +68,6 @@ quest.sections =
             {
                 [10021] = function(player, csid, option, npc)
                     npcUtil.giveKeyItem(player, xi.ki.GANTINEUXS_LETTER)
-                end,
-            },
-        },
-
-        [xi.zone.NORTHERN_SAN_DORIA] =
-        {
-            ['Eperdur'] =
-            {
-                onTrigger = function(player, npc)
-                    if player:hasKeyItem(xi.ki.GANTINEUXS_LETTER) then
-                        return quest:progressEvent(680)
-                    end
-                end,
-            },
-
-            onEventFinish =
-            {
-                [680] = function(player, csid, option, npc)
-                    quest:complete(player)
                 end,
             },
         },
@@ -105,8 +86,29 @@ quest.sections =
             onEventFinish =
             {
                 [50] = function(player, csid, option, npc)
-                    player:messageSpecial(ID.text.SPIRIT_INCENSE_EMITS_PUTRID_ODOR, xi.ki.SPIRIT_INCENSE)
+                    player:messageSpecial(eldiemeID.text.SPIRIT_INCENSE_EMITS_PUTRID_ODOR, xi.ki.SPIRIT_INCENSE)
                     player:delKeyItem(xi.ki.SPIRIT_INCENSE)
+                end,
+            },
+        },
+
+        [xi.zone.NORTHERN_SAN_DORIA] =
+        {
+            ['Eperdur'] =
+            {
+                onTrigger = function(player, npc)
+                    if player:hasKeyItem(xi.ki.GANTINEUXS_LETTER) then
+                        return quest:progressEvent(680)
+                    end
+                end,
+            },
+
+            onEventFinish =
+            {
+                [680] = function(player, csid, option, npc)
+                    if quest:complete(player) then
+                        player:delKeyItem(xi.ki.GANTINEUXS_LETTER)
+                    end
                 end,
             },
         },

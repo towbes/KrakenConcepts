@@ -4,9 +4,9 @@
 -----------------------------------
 mixins =
 {
-    require("scripts/mixins/job_special"),
-    require("scripts/mixins/rage"),
-    require("scripts/mixins/weapon_break")
+    require('scripts/mixins/job_special'),
+    require('scripts/mixins/rage'),
+    require('scripts/mixins/weapon_break')
 }
 -----------------------------------
 -- Detailed Notes & Todos
@@ -44,15 +44,15 @@ entity.onMobInitialize = function(mob)
 end
 
 entity.onMobSpawn = function(mob)
-    mob:setLocalVar("BreakChance", 5)
+    mob:setLocalVar('BreakChance', 5)
     mob:setMobMod(xi.mobMod.MAGIC_COOL, 25)
     mob:setMod(xi.mod.FASTCAST, 25)
-    mob:setLocalVar("BLM", math.random(66,80))
-    mob:setLocalVar("BLMused", 0)
-    mob:setLocalVar("WHM", math.random(1,50))
-    mob:setLocalVar("WHMused", 0)
-    mob:setLocalVar("jobChanged", 0)
-    mob:setLocalVar("[rage]timer", 5400) -- 90 minutes
+    mob:setLocalVar('BLM', math.random(66,80))
+    mob:setLocalVar('BLMused', 0)
+    mob:setLocalVar('WHM', math.random(1,50))
+    mob:setLocalVar('WHMused', 0)
+    mob:setLocalVar('jobChanged', 0)
+    mob:setLocalVar('[rage]timer', 5400) -- 90 minutes
     mob:setSpellList(296) -- Set BLM spell list
     mob:setMobMod(xi.mobMod.NO_STANDBACK, 1)
     mob:setMod(xi.mod.SILENCERES, 100)

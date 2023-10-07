@@ -18,7 +18,7 @@ entity.onMobSpawn = function(mob)
     mob:addMod((xi.mod.FIRE_ABSORB + VanadielDayElement() - 1), 100)
     mob:addMod(xi.mod.WIND_ABSORB, 100)
     mob:setMod(xi.mod.ATT, 350) -- hits notably hard
-    mob:setLocalVar("HPP", 90)
+    mob:setLocalVar('HPP', 90)
 end
 
 entity.onMobFight = function(mob, target)

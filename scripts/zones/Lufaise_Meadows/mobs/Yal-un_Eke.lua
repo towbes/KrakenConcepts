@@ -27,8 +27,8 @@ end
 
 entity.onMobDespawn = function(mob)
     UpdateNMSpawnPoint(mob:getID())
-    mob:setLocalVar("chooseYalun", math.random(1,2)) -- Choose which PH will be Yal-un Eke next
-    mob:setLocalVar("yalunRespawn", os.time() + 3000)  -- 50 minute respawn
+    mob:setLocalVar('chooseYalun', math.random(1,2)) -- Choose which PH will be Yal-un Eke next
+    mob:setLocalVar('yalunRespawn', os.time() + 3000)  -- 50 minute respawn
     DisallowRespawn(mob:getID(), true)
 end
 

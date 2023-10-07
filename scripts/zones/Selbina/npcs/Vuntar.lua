@@ -27,11 +27,11 @@ entity.onTrigger = function(player, npc)
         player:getMainLvl() >= 20 and
         player:getQuestStatus(xi.quest.log_id.OTHER_AREAS, xi.quest.id.otherAreas.CARGO) == QUEST_AVAILABLE
     then
-        player:startEvent(50, 4365) -- Start quest "Cargo"
+        player:startEvent(50, 4365) -- Start quest 'Cargo'
     elseif player:getMainLvl() < 20 then
         player:startEvent(53) -- Dialog for low level or low fame
     else
-        player:startEvent(51, 4365) -- During & after completed quest "Cargo"
+        player:startEvent(51, 4365) -- During & after completed quest 'Cargo'
     end
 end
 

@@ -593,7 +593,7 @@ local function checkReqs(player, npc, bfid, registrant)
         end,
 
         [37] = function() -- Quest: Mirror Mirror
-            return player:getQuestStatus(xi.quest.log_id.JEUNO, xi.quest.id.jeuno.MIRROR_MIRROR) == QUEST_ACCEPTED and player:getCharVar("[Quest]Mirror_Mirror") == 2
+            return player:getQuestStatus(xi.quest.log_id.JEUNO, xi.quest.id.jeuno.MIRROR_MIRROR) == QUEST_ACCEPTED and player:getCharVar('[Quest]Mirror_Mirror') == 2
         end, 
 
         [64] = function() -- Mission 2-3
@@ -975,7 +975,7 @@ local function checkReqs(player, npc, bfid, registrant)
         end,
 
         [737] = function() -- Quest: Return to the Depths
-            return player:getCharVar("Quest[1][78]prog") >= 9 or
+            return player:getCharVar('Quest[1][78]prog') >= 9 or
                 player:hasCompletedQuest(xi.quest.log_id.BASTOK, xi.quest.id.bastok.RETURN_TO_THE_DEPTHS)
         end,
         [738] = function() -- ENM: Bionic Bug
@@ -1028,7 +1028,7 @@ local function checkReqs(player, npc, bfid, registrant)
 
         [896] = function() -- Quest: Storms of Fate
             return player:getQuestStatus(xi.quest.log_id.JEUNO, xi.quest.id.jeuno.STORMS_OF_FATE) == QUEST_ACCEPTED and
-                player:getCharVar("Quest[3][86]Status") == 2
+                player:getCharVar('Quest[3][86]Status') == 2
         end,
 
         [897] = function() -- Quest: The Wyrmking Descends
@@ -1087,7 +1087,7 @@ local function checkReqs(player, npc, bfid, registrant)
         end,
 
         [1057] = function() -- Apocalypse Nigh
-            return player:getCharVar("Quest[3][89]Status") == 3
+            return player:getCharVar('Quest[3][89]Status') == 3
         end,
 
         [1090] = function() -- Quest: Puppetmaster Blues
@@ -1133,7 +1133,7 @@ local function checkReqs(player, npc, bfid, registrant)
     local enterReqs =
     {
         [37] = function() -- Quest: Mirror Mirror
-            return player:getQuestStatus(xi.quest.log_id.JEUNO, xi.quest.id.jeuno.MIRROR_MIRROR) == QUEST_ACCEPTED and player:getCharVar("[Quest]Mirror_Mirror") == 2
+            return player:getQuestStatus(xi.quest.log_id.JEUNO, xi.quest.id.jeuno.MIRROR_MIRROR) == QUEST_ACCEPTED and player:getCharVar('[Quest]Mirror_Mirror') == 2
         end,
 
         [226] = function() -- Quest: Waking the Beast (Fullmoon Fountain)
@@ -1259,7 +1259,7 @@ local function checkReqs(player, npc, bfid, registrant)
         end,
 
         [737] = function() -- Quest: Return to the Depths
-            return player:getCharVar("Quest[1][78]prog") >= 9 or
+            return player:getCharVar('Quest[1][78]prog') >= 9 or
                 player:hasCompletedQuest(xi.quest.log_id.BASTOK, xi.quest.id.bastok.RETURN_TO_THE_DEPTHS)
         end,
 
@@ -1293,7 +1293,7 @@ local function checkReqs(player, npc, bfid, registrant)
 
         [896] = function() -- Quest: Storms of Fate
             return player:getQuestStatus(xi.quest.log_id.JEUNO, xi.quest.id.jeuno.STORMS_OF_FATE) == QUEST_COMPLETED or
-                player:getCharVar("Quest[3][86]Status") > 2
+                player:getCharVar('Quest[3][86]Status') > 2
         end,
 
         [897] = function() -- Quest: The Wyrmking Descends
@@ -1334,7 +1334,7 @@ local function checkReqs(player, npc, bfid, registrant)
 
         [1057] = function() -- Quest: Apocalypse Nigh
             return player:hasCompletedQuest(xi.quest.log_id.JEUNO, xi.quest.id.jeuno.APOCALYPSE_NIGH) or
-                player:getCharVar("Quest[3][89]Status") >= 3
+                player:getCharVar('Quest[3][89]Status') >= 3
         end,
 
         [1290] = function() -- NW Apollyon
@@ -1752,7 +1752,7 @@ local function checkSkip(player, bfid)
             return player:hasCompletedQuest(xi.quest.log_id.JEUNO, xi.quest.id.jeuno.APOCALYPSE_NIGH) or
                 (
                     player:getQuestStatus(xi.quest.log_id.JEUNO, xi.quest.id.jeuno.APOCALYPSE_NIGH) == QUEST_ACCEPTED and
-                    player:getCharVar("Quest[3][89]Status") > 3
+                    player:getCharVar('Quest[3][89]Status') > 3
                 )
         end,
 

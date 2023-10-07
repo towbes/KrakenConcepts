@@ -22,7 +22,7 @@ quest.sections =
     {
         check = function(player, status, vars)
             return status == QUEST_AVAILABLE and
-                player:getMainJob() <= 15 and -- Only the "old" jobs may start this quest.
+                player:getMainJob() <= 15 and -- Only the 'old' jobs may start this quest.
                 player:getMainLvl() >= 66 and
                 player:getLevelCap() == 70 and
                 xi.settings.main.MAX_LEVEL >= 75

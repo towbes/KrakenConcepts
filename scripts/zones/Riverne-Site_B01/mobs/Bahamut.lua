@@ -50,11 +50,11 @@ entity.onMobEngaged = function(mob, target)
 end
 
 entity.onMobFight = function(mob, target)
-    local megaFlareQueue = mob:getLocalVar("MegaFlareQueue")
-    local megaFlareTrigger = mob:getLocalVar("MegaFlareTrigger")
-    local flareWait = mob:getLocalVar("FlareWait")
-    local gigaFlare = mob:getLocalVar("GigaFlare")
-    local tauntShown = mob:getLocalVar("tauntShown")
+    local megaFlareQueue = mob:getLocalVar('MegaFlareQueue')
+    local megaFlareTrigger = mob:getLocalVar('MegaFlareTrigger')
+    local flareWait = mob:getLocalVar('FlareWait')
+    local gigaFlare = mob:getLocalVar('GigaFlare')
+    local tauntShown = mob:getLocalVar('tauntShown')
     local mobHPP = mob:getHPP()
     local isBusy = false
     local act = mob:getCurrentAction()
@@ -90,13 +90,13 @@ entity.onMobFight = function(mob, target)
             if flareWait == 0 and tauntShown == 0 then
                 target:showText(mob, ID.text.BAHAMUT_TAUNT)
                 -- Second taunt happens two seconds after the first.
-                mob:setLocalVar("FlareWait", mob:getBattleTime() + 2)
-                mob:setLocalVar("tauntShown", 1)
+                mob:setLocalVar('FlareWait', mob:getBattleTime() + 2)
+                mob:setLocalVar('tauntShown', 1)
                 -- the wait time between the first and second taunt as passed. Checks for wait to be not 0 because it's set to 0 on successful use.
             elseif flareWait < mob:getBattleTime() and flareWait ~= 0 and tauntShown >= 0 then
                 if tauntShown == 1 then
                     -- if Megaflare gets stunned it won't show the text again, until successful use.
-                    mob:setLocalVar("tauntShown", 2)
+                    mob:setLocalVar('tauntShown', 2)
                     target:showText(mob, ID.text.BAHAMUT_TAUNT + 1)
                 end
 
@@ -108,7 +108,7 @@ entity.onMobFight = function(mob, target)
                     end
 
                     mob:useMobAbility(1551)
-                    mob:setLocalVar("MegaFlareQueue", 0)
+                    mob:setLocalVar('MegaFlareQueue', 0)
                 end
             end
 
@@ -121,7 +121,7 @@ entity.onMobFight = function(mob, target)
             -- again, taunt won't show again until the move is successfully used.
             if tauntShown == 0 then
                 target:showText(mob, ID.text.BAHAMUT_TAUNT + 2)
-                mob:setLocalVar("tauntShown", 3)
+                mob:setLocalVar('tauntShown', 3)
             end
 
             -- default behaviour
@@ -130,8 +130,8 @@ entity.onMobFight = function(mob, target)
             end
 
             mob:useMobAbility(1552)
-            mob:setLocalVar("GigaFlare", 1)
-            mob:setLocalVar("MegaFlareQueue", 0)
+            mob:setLocalVar('GigaFlare', 1)
+            mob:setLocalVar('MegaFlareQueue', 0)
         end
     end
 

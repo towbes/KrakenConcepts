@@ -170,7 +170,7 @@ quest.sections =
                         end
                     elseif questProgress == 1 then
                         if not player:findItem(xi.item.PURPLE_RIBBON) then
-                            return quest:event(366, 0, xi.items.PURPLE_RIBBON)
+                            return quest:event(366, 0, xi.item.PURPLE_RIBBON)
                         else
                             return quest:event(361, 0, xi.item.PURPLE_RIBBON)
                         end

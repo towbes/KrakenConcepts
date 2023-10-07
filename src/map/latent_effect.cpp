@@ -121,34 +121,6 @@ bool CLatentEffect::ModOnItemOnly(Mod modID)
     return false;
 }
 
-
-Mod CLatentEffect::GetModForPetLatentMod(Mod petModLatent)
-{
-    Mod modifier = Mod::NONE;
-
-    switch (petModLatent)
-    {
-        case Mod::PET_ACC_LATENT:
-            modifier = Mod::ACC;
-            break;
-        case Mod::PET_ATT_LATENT:
-            modifier = Mod::ATT;
-            break;
-        case Mod::PET_MACC_LATENT:
-            modifier = Mod::MACC;
-            break;
-        case Mod::PET_MATT_LATENT:
-            modifier = Mod::MATT;
-            break;
-        case Mod::PET_DEF_LATENT:
-            modifier = Mod::DEF;
-            break;
-    }
-
-    return modifier;
-}
-
-
 bool CLatentEffect::Activate()
 {
     if (!IsActivated())
@@ -164,10 +136,6 @@ bool CLatentEffect::Activate()
                 item->addModifier(GetModValue(), GetModPower());
                 m_PItem = item;
             }
-        }
-        else if (GetModForPetLatentMod(GetModValue()) != Mod::NONE)
-        {
-            m_POwner->addPetModifier(GetModForPetLatentMod(GetModValue()), PetModType::All, GetModPower());
         }
         // Other modifiers go on the player
         else

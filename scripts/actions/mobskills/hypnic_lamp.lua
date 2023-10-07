@@ -5,9 +5,9 @@
 -- Utsusemi/Blink absorb: Ignores shadows
 -- Range: conal gaze
 ---------------------------------------------
-require("scripts/globals/mobskills")
-require("scripts/globals/settings")
-require("scripts/globals/status")
+
+
+
 -----------------------------------
 local mobskillObject = {}
 
@@ -30,8 +30,8 @@ mobskillObject.onMobWeaponSkill = function(target, mob, skill)
     skill:setMsg(xi.mobskills.mobGazeMove(mob, target, typeEffect, 1, 0, duration))
     
     if mob:getID() == 16998874 then
-        mob:setLocalVar("Phase", 2)
-        mob:setLocalVar("Changed",1)
+        mob:setLocalVar('Phase', 2)
+        mob:setLocalVar('Changed',1)
     end
 
     return typeEffect

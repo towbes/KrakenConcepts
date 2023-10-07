@@ -2,7 +2,7 @@
 -- Area: Giddeus
 --   NM: Vaa Huja the Erudite
 -----------------------------------
-mixins = { require("scripts/mixins/job_special") }
+mixins = { require('scripts/mixins/job_special') }
 -----------------------------------
 local entity = {}
 

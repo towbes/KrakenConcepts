@@ -1,6 +1,7 @@
 -----------------------------------
 -- Zone: VeLugannon_Palace (177)
 -----------------------------------
+local ID = zones[xi.zone.VELUGANNON_PALACE]
 local zoneObject = {}
 
 zoneObject.onInitialize = function(zone)

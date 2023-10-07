@@ -11,7 +11,7 @@ local entity = {}
 
 entity.onMobSpawn = function(mob)
     xi.mix.jobSpecial.config(mob, {
-        chance = 75, -- "Is possible that she will not use Eagle Eye Shot at all." (guessing 75 percent)
+        chance = 75, -- 'Is possible that she will not use Eagle Eye Shot at all.' (guessing 75 percent)
         specials =
         {
             { id = xi.jsa.EES_LAMIA, hpp = math.random(5, 99) },

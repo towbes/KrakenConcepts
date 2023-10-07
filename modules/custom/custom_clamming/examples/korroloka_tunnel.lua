@@ -1,8 +1,8 @@
 -- ---------------------------------
 -- (Clamming) Cape Teriggan
 -- ---------------------------------
-require("scripts/globals/zone")
-require("scripts/globals/items")
+
+
 local clamming = require("modules/custom/custom_clamming/custom_clamming")
 -- ---------------------------------
 local m = Module:new("clamming_korroloka_tunnel")
@@ -10,28 +10,28 @@ local m = Module:new("clamming_korroloka_tunnel")
 local weight = clamming.weight
 local rate   = clamming.rate
 
-clamming.zone[xi.zone.KORROLOKA_TUNNEL] =
+clamming.zones[xi.zone.KORROLOKA_TUNNEL] =
 {
     -- Price of Clamming Kit
     price = 2000,
 
     drops =
     {
-        { rate.VERY_COMMON, weight.LIGHT,      xi.items.SEASHELL,                "a seashell"                }, -- 24% 6pz
-        { rate.COMMON,      weight.MODERATE,   xi.items.PEBBLE,                  "a pebble"                  }, -- 15% 7pz
-        { rate.COMMON,      weight.LIGHT,      xi.items.CLUMP_OF_PAMTAM_KELP,    "a clump of pamtam kelp"    }, -- 15% 6pz
-        { rate.UNCOMMON,    weight.VERY_LIGHT, xi.items.PIECE_OF_RATTAN_LUMBER,  "a piece of rattan lumber"  }, -- 10% 3pz
-        { rate.UNCOMMON,    weight.HEAVY,      xi.items.MANTA_SKIN,              "a manta skin"              }, -- 10% 11pz
-        { rate.UNCOMMON,    weight.LIGHT,      xi.items.CRAB_SHELL,              "a crab shell"              }, -- 10% 6pz
-        { rate.RARE,        weight.LIGHT,      xi.items.NEBIMONITE,              "a nebimonite"              }, --  5% 6pz
-        { rate.RARE,        weight.LIGHT,      xi.items.ELM_LOG,                 "an elm log"                }, --  5% 6pz
-        { rate.RARE,        weight.LIGHT,      xi.items.SHALL_SHELL,             "a shall shell"             }, --  5% 6pz
-        { rate.VERY_RARE,   weight.VERY_HEAVY, xi.items.RUSTY_GREATSWORD,        "a rusty greatsword"        }, --  1% 20pz
-        { rate.VERY_RARE,   weight.VERY_LIGHT, xi.items.BROKEN_LINKPEARL,        "a broken linkpearl"        }, --  1% 3pz
-        { rate.VERY_RARE,   weight.MODERATE,   xi.items.CORAL_FRAGMENT,          "a coral fragment"          }, --  1% 7pz
-        { rate.VERY_RARE,   weight.HEAVY,      xi.items.HIGH_QUALITY_CRAB_SHELL, "a high-quality crab shell" }, --  1% 11pz
-        { rate.SUPER_RARE,  weight.LIGHT,      xi.items.PIECE_OF_OXBLOOD,        "a piece of oxblood"        }, -- .5% 6pz
-        { rate.SUPER_RARE,  weight.VERY_LIGHT, xi.items.PIECE_OF_ANGEL_SKIN,     "a piece of angel skin"     }, -- .5% 3pz
+        { rate.VERY_COMMON, weight.LIGHT,      xi.item.SEASHELL,                "a seashell"                }, -- 24% 6pz
+        { rate.COMMON,      weight.MODERATE,   xi.item.PEBBLE,                  "a pebble"                  }, -- 15% 7pz
+        { rate.COMMON,      weight.LIGHT,      xi.item.CLUMP_OF_PAMTAM_KELP,    "a clump of pamtam kelp"    }, -- 15% 6pz
+        { rate.UNCOMMON,    weight.VERY_LIGHT, xi.item.PIECE_OF_RATTAN_LUMBER,  "a piece of rattan lumber"  }, -- 10% 3pz
+        { rate.UNCOMMON,    weight.HEAVY,      xi.item.MANTA_SKIN,              "a manta skin"              }, -- 10% 11pz
+        { rate.UNCOMMON,    weight.LIGHT,      xi.item.CRAB_SHELL,              "a crab shell"              }, -- 10% 6pz
+        { rate.RARE,        weight.LIGHT,      xi.item.NEBIMONITE,              "a nebimonite"              }, --  5% 6pz
+        { rate.RARE,        weight.LIGHT,      xi.item.ELM_LOG,                 "an elm log"                }, --  5% 6pz
+        { rate.RARE,        weight.LIGHT,      xi.item.SHALL_SHELL,             "a shall shell"             }, --  5% 6pz
+        { rate.VERY_RARE,   weight.VERY_HEAVY, xi.item.RUSTY_GREATSWORD,        "a rusty greatsword"        }, --  1% 20pz
+        { rate.VERY_RARE,   weight.VERY_LIGHT, xi.item.BROKEN_LINKPEARL,        "a broken linkpearl"        }, --  1% 3pz
+        { rate.VERY_RARE,   weight.MODERATE,   xi.item.CORAL_FRAGMENT,          "a coral fragment"          }, --  1% 7pz
+        { rate.VERY_RARE,   weight.HEAVY,      xi.item.HIGH_QUALITY_CRAB_SHELL, "a high-quality crab shell" }, --  1% 11pz
+        { rate.SUPER_RARE,  weight.LIGHT,      xi.item.PIECE_OF_OXBLOOD,        "a piece of oxblood"        }, -- .5% 6pz
+        { rate.SUPER_RARE,  weight.VERY_LIGHT, xi.item.PIECE_OF_ANGEL_SKIN,     "a piece of angel skin"     }, -- .5% 3pz
     },
 
     -- Clamming Points do not move and are usable every 15 seconds
@@ -136,7 +136,7 @@ clamming.zone[xi.zone.KORROLOKA_TUNNEL] =
     },
 }
 
-m:addOverride("xi.zones.Korroloka_Tunnel.Zone.onInitialize", function(zone)
+m:addOverride("xi.zone.Korroloka_Tunnel.Zone.onInitialize", function(zone)
     super(zone)
     clamming.initZone(zone)
 end)
@@ -145,12 +145,12 @@ end)
 -- Remove/break Clamming Kit between zones
 -- ---------------------------------
 
-m:addOverride("xi.zones.Korroloka_Tunnel.Zone.onZoneIn", function(player, zonePrev)
+m:addOverride("xi.zone.Korroloka_Tunnel.Zone.onZoneIn", function(player, zonePrev)
     super(player, zonePrev)
     clamming.onZoneIn(player)
 end)
 
-m:addOverride("xi.zones.Korroloka_Tunnel.Zone.onZoneOut", function(player)
+m:addOverride("xi.zone.Korroloka_Tunnel.Zone.onZoneOut", function(player)
     super(player)
     clamming.onZoneOut(player)
 end)

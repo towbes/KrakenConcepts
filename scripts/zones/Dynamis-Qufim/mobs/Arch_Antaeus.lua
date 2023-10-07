@@ -3,10 +3,10 @@
 --  Mob: Antaeus
 -- Note: Mega Boss
 -----------------------------------
-require("scripts/globals/dynamis")
+require('scripts/globals/dynamis')
 mixins =
 {
-    require("scripts/mixins/job_special")
+    require('scripts/mixins/job_special')
 }
 -----------------------------------
 local entity = {}
@@ -28,16 +28,16 @@ entity.onMobSpawn = function(mob)
     mob:setMod(xi.mod.REGEN, 1000)
     mob:setMod(xi.mod.DOUBLE_ATTACK, 0)
 
-    mob:setLocalVar("AntaeusRegen", 1)
+    mob:setLocalVar('AntaeusRegen', 1)
 
     mob:setMod(xi.mod.CRITHITRATE, 100)
-    mob:setLocalVar("AntaeusCrit", 1)
+    mob:setLocalVar('AntaeusCrit', 1)
 
     mob:setMod(xi.mod.UDMGRANGE, -99)
     mob:setMod(xi.mod.UDMGPHYS, -99)
     mob:setMod(xi.mod.UDMGMAGIC, -99)
     mob:setMod(xi.mod.UDMGBREATH, -99)
-    mob:setLocalVar("AntaeusDMG", 1)
+    mob:setLocalVar('AntaeusDMG', 1)
     
     -- Set Non-Removable Mods
     -- Anateus should not standback and should be able to avoid most RAs via melee range. (https://ffxiclopedia.fandom.com/wiki/Antaeus)

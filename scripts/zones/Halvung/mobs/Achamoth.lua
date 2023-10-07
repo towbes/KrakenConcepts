@@ -4,12 +4,12 @@
 -- Author: Spaceballs
 -----------------------------------
 
-mixins ={require("scripts/mixins/job_special"),
-require("scripts/mixins/rage")}
-require("scripts/globals/status")
+mixins ={require('scripts/mixins/job_special'),
+require('scripts/mixins/rage')}
+
 
 local entity = {}
-local ID = require("scripts/zones/Halvung/IDs")
+local ID = zones[xi.zone.HALVUNG]
 
 entity.onMobInitialize = function(mob)
     mob:setMobMod(xi.mobMod.IDLE_DESPAWN, 300)
@@ -38,9 +38,9 @@ end
 
 
 entity.onMobSpawn = function(mob)
-    mob:setLocalVar("[rage]timer", 5400)                 -- 90 minutes
-    mob:setLocalVar("smallAdds", 0)
-    mob:setLocalVar("bigAdds", 0)      
+    mob:setLocalVar('[rage]timer', 5400)                 -- 90 minutes
+    mob:setLocalVar('smallAdds', 0)
+    mob:setLocalVar('bigAdds', 0)      
     
     xi.mix.jobSpecial.config(mob, {
         specials =
@@ -60,19 +60,19 @@ end
 
 
 entity.onMobEngaged = function(mob, target)
-    mob:setLocalVar("clock", os.time() + 120) 
+    mob:setLocalVar('clock', os.time() + 120) 
 end
 
 
 entity.onMobFight = function(mob, target)
     
     local now = os.time()
-    local popTime = mob:getLocalVar("clock")
-    local small = mob:getLocalVar("smallAdds")
-    local big = mob:getLocalVar("bigAdds")
+    local popTime = mob:getLocalVar('clock')
+    local small = mob:getLocalVar('smallAdds')
+    local big = mob:getLocalVar('bigAdds')
     
     if small+big == 2 then
-        mob:setLocalVar("clock", os.time() + math.random(30,60))
+        mob:setLocalVar('clock', os.time() + math.random(30,60))
     end
 
 
@@ -95,8 +95,8 @@ entity.onMobFight = function(mob, target)
         end
         
         -- Count the new baby and start a new clock
-        mob:setLocalVar("smallAdds", small + 1)
-        mob:setLocalVar("clock", os.time() + 60) 
+        mob:setLocalVar('smallAdds', small + 1)
+        mob:setLocalVar('clock', os.time() + 60) 
     end
 
 

@@ -27,7 +27,7 @@ end
 
 entity.onEventFinish = function(player, csid, option, npc)
     if csid == 810 then
-        player:setCharVar("WildcatSandy", utils.mask.setBit(player:getCharVar("WildcatSandy"), 0, true))
+        player:setCharVar('WildcatSandy', utils.mask.setBit(player:getCharVar('WildcatSandy'), 0, true))
     end
 end
 

@@ -3,7 +3,7 @@
 --   NM: Vodyanoi
 -- !pos -2.0 -3.0 9.6 1
 -----------------------------------
-mixins = { require("scripts/mixins/job_special") }
+mixins = { require('scripts/mixins/job_special') }
 -----------------------------------
 local entity = {}
 

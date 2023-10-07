@@ -7,7 +7,7 @@ local zoneObject = {}
 
 zoneObject.onInitialize = function(zone)
     -- NM Persistence
-    if GetServerVariable("[PH]Za_Dha_Adamantking") == 1 then
+    if GetServerVariable('[PH]Za_Dha_Adamantking') == 1 then
         xi.mob.nmTODPersistCache(zone, ID.mob.ZADHA_ADAMANTKING)
     else
         xi.mob.nmTODPersistCache(zone, ID.mob.DIAMOND_QUADAV)

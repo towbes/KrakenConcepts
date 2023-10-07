@@ -67,7 +67,7 @@ quest.sections =
             ['Wooden_Ladder'] =
             {
                 onTrigger = function(player, npc)
-                    local ladderList = player:getZone():queryEntitiesByName("Wooden_Ladder")
+                    local ladderList = player:getZone():queryEntitiesByName('Wooden_Ladder')
                     if
                         quest:getVar(player, 'Prog') == 1 and
                         npc:getID() == ladderList[4]:getID()
@@ -252,7 +252,7 @@ quest.sections =
                             [1] = xi.mannequin.getMannequins(player), -- Player Mannequin List
                             [2] = xi.mannequin.cost.PURCHASE,
                             [3] = xi.mannequin.cost.TRADE,
-                            [4] = 1, -- Leaving this out gives a "It's still in pretty good condition" message
+                            [4] = 1, -- Leaving this out gives a 'It's still in pretty good condition' message
                             })
                     end
                 end,

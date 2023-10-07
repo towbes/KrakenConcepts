@@ -1,7 +1,7 @@
 -----------------------------------
 -- ID: 14657
 -- Ducal Guard Ring
--- Enchantment: "Teleport-RuLude Gardens"
+-- Enchantment: 'Teleport-RuLude Gardens'
 -----------------------------------
 local itemObject = {}
 

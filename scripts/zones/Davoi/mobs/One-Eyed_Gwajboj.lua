@@ -3,8 +3,8 @@
 --   NM: One-Eyed Gwajboj
 -- Involved in Quest: Under Oath
 -----------------------------------
-mixins = {require("scripts/mixins/job_special")}
-require("scripts/globals/quests")
+mixins = {require('scripts/mixins/job_special')}
+require('scripts/globals/quests')
 -----------------------------------
 local entity = {}
 

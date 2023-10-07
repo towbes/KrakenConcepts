@@ -6,10 +6,10 @@
 -----------------------------------
 require('scripts/globals/interaction/quest')
 require('scripts/globals/common')
-require("scripts/globals/npc_util")
+require('scripts/globals/npc_util')
 require('scripts/globals/quests')
-require('scripts/globals/titles')
-require('scripts/globals/zone')
+
+
 -----------------------------------
 local ID = require('scripts/zones/RuLude_Gardens/IDs')
 local meaID = require('scripts/zones/Promyvion-Mea/IDs')
@@ -28,7 +28,7 @@ quest.sections =
             player:getCurrentMission(xi.mission.log_id.ZILART) == xi.mission.id.zilart.AWAKENING and
             player:getMissionStatus(xi.mission.log_id.ZILART) >= 3 and
             player:getQuestStatus(xi.quest.log_id.JEUNO, xi.quest.id.jeuno.SHADOWS_OF_THE_DEPARTED) == QUEST_AVAILABLE and
-            player:getCharVar("StormsOfFateWait") <= os.time()
+            player:getCharVar('StormsOfFateWait') <= os.time()
         end,
 
         [xi.zone.RULUDE_GARDENS] =

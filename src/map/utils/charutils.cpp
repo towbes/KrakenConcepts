@@ -99,7 +99,6 @@ along with this program.  If not, see http://www.gnu.org/licenses/
 #include "battleutils.h"
 #include "blueutils.h"
 #include "charutils.h"
-#include "fellowutils.h"
 #include "itemutils.h"
 #include "petutils.h"
 #include "puppetutils.h"
@@ -713,24 +712,6 @@ namespace charutils
             }
         }
 
-                fmtQuery = "SELECT fellowid, zone_hp, zone_mp "
-                   "FROM char_fellow WHERE charid = %u;";
-
-        ret = sql->Query(fmtQuery, PChar->id);
-
-        if (ret != SQL_ERROR && sql->NumRows() != 0 && sql->NextRow() == SQL_SUCCESS)
-        {
-            // Determine if the fellow should be respawned.
-            int16 fellowHP = sql->GetUIntData(1);
-            if (fellowHP)
-            {
-                PChar->fellowZoningInfo.fellowHP      = fellowHP;
-                PChar->fellowZoningInfo.fellowID      = sql->GetUIntData(0);
-                PChar->fellowZoningInfo.fellowMP      = sql->GetUIntData(2);
-                PChar->fellowZoningInfo.respawnFellow = true;
-            }
-        }
-
         sql->Query("UPDATE char_stats SET zoning = 0 WHERE charid = %u", PChar->id);
 
         if (zoning == 2)
@@ -899,8 +880,6 @@ namespace charutils
         PChar->animation = (HP == 0 ? ANIMATION_DEATH : ANIMATION_NONE);
 
         PChar->StatusEffectContainer->LoadStatusEffects();
-        PChar->m_pixieHate = GetCharVar(PChar, "PIXIE_HATE");
-
 
         charutils::LoadEquip(PChar);
         charutils::EmptyRecycleBin(PChar);
@@ -1337,8 +1316,7 @@ namespace charutils
             return 0;
         }
 
-        //if (PItem->getFlag() & ITEM_FLAG_RARE)
-        if (PItem->isRare())
+        if (PItem->getFlag() & ITEM_FLAG_RARE)
         {
             if (HasItem(PChar, PItem->getID()))
             {
@@ -1462,8 +1440,8 @@ namespace charutils
         charutils::SaveCharExp(PChar, PChar->GetMJob());
         PChar->updatemask |= UPDATE_HP;
 
-        PChar->pushPacket(new CCharJobsPacket(PChar, true));  //Umeboshi "resetflips"
-        PChar->pushPacket(new CCharStatsPacket(PChar, true));  //Umeboshi "resetflips"
+        PChar->pushPacket(new CCharJobsPacket(PChar));
+        PChar->pushPacket(new CCharStatsPacket(PChar));
         PChar->pushPacket(new CCharSkillsPacket(PChar));
         PChar->pushPacket(new CCharRecastPacket(PChar));
         PChar->pushPacket(new CCharAbilitiesPacket(PChar));
@@ -1648,8 +1626,7 @@ namespace charutils
         {
             CItem* PItem = PChar->UContainer->GetItem(slotid);
 
-            //if (PItem != nullptr && PItem->getFlag() & ITEM_FLAG_RARE)
-            if (PItem != nullptr && PItem->isRare())
+            if (PItem != nullptr && PItem->getFlag() & ITEM_FLAG_RARE)
             {
                 if (HasItem(PTarget, PItem->getID()))
                 {
@@ -1741,7 +1718,7 @@ namespace charutils
             }
 
             // Call the LUA event before actually "unequipping" the item so the script can do stuff with it first
-            if (((CItemEquipment*)PItem)->getScriptType() & SCRIPT_EQUIP || ((CItemEquipment*)PItem)->isType(ITEM_USABLE))
+            if (((CItemEquipment*)PItem)->getScriptType() & SCRIPT_EQUIP)
             {
                 luautils::OnItemCheck(PChar, PItem, ITEMCHECK::UNEQUIP, nullptr);
             }
@@ -1913,7 +1890,7 @@ namespace charutils
             return false;
         }
 
-       if ((PChar->m_EquipBlock & (1 << equipSlotID)) || (!(PItem->getJobs() & (1 << (PChar->GetMJob() - 1))) && !(PItem->getJobs() & (1 << (PChar->GetSJob() - 1)))) || // Umeboshi "Allows player to equip items usable by subjob"
+        if ((PChar->m_EquipBlock & (1 << equipSlotID)) || !(PItem->getJobs() & (1 << (PChar->GetMJob() - 1))) ||
             (PItem->getSuperiorLevel() > PChar->getMod(Mod::SUPERIOR_LEVEL)) ||
             (PItem->getReqLvl() > (settings::get<bool>("map.DISABLE_GEAR_SCALING") ? PChar->GetMLevel() : PChar->jobs.job[PChar->GetMJob()])))
         {
@@ -2203,8 +2180,7 @@ namespace charutils
 
             if (PWeapon && AWeapon && PWeapon->getSkillType() == AWeapon->getSkillType())
             {
-                return HasItem(PChar, AItem->getID());
-              //&& canEquipItemOnAnyJob(PChar, AItem); // Umeboshi "Style Lock"
+                return HasItem(PChar, AItem->getID()) && canEquipItemOnAnyJob(PChar, AItem);
             }
         }
         return false;
@@ -2330,10 +2306,10 @@ namespace charutils
             appearanceModel = appearance->getModelId();
         }
 
-        //if (!canEquipItemOnAnyJob(PChar, appearance))
-        //{
-        //    return;
-        //}
+        if (!canEquipItemOnAnyJob(PChar, appearance))
+        {
+            return;
+        }
 
         switch (equipSlotID)
         {
@@ -2741,10 +2717,7 @@ namespace charutils
                 }
             }
 
-            // Umeboshi "This block controls equipment being equipable by subjob when using !flip"
-            if ((((PItem->getJobs() & (1 << (PChar->GetMJob() - 1))) && (PChar->GetMLevel() >= PItem->getReqLvl())) ||
-                 ((PItem->getJobs() & (1 << (PChar->GetSJob() - 1))) && (PChar->GetSLevel() >= PItem->getReqLvl()))) &&
-                (PItem->getEquipSlotId() & (1 << slotID)))
+            if ((PItem->getJobs() & (1 << (PChar->GetMJob() - 1))) && (PItem->getEquipSlotId() & (1 << slotID)))
             {
                 continue;
             }
@@ -3107,12 +3080,6 @@ namespace charutils
             }
             uint16 MaxMSkill  = battleutils::GetMaxSkill((SKILLTYPE)i, PChar->GetMJob(), PChar->GetMLevel());
             uint16 MaxSSkill  = battleutils::GetMaxSkill((SKILLTYPE)i, PChar->GetSJob(), PChar->GetSLevel());
-
-            if (MaxSSkill > MaxMSkill) // Umeboshi: "If our subjob shares a combat skill with the main job and has a higher rating, the higher rating will take precedence."
-            {
-                MaxMSkill = MaxSSkill;
-            }
-
             uint16 skillBonus = 0;
 
             // apply arts bonuses
@@ -3254,8 +3221,7 @@ namespace charutils
         memset(&PChar->m_TraitList, 0, sizeof(PChar->m_TraitList));
 
         battleutils::AddTraits(PChar, traits::GetTraits(PChar->GetMJob()), PChar->GetMLevel());
-        battleutils::AddTraitsSJ(PChar, traits::GetTraits(PChar->GetSJob()), PChar->GetSLevel(), PChar->TraitList.size());
-        //battleutils::AddTraits(PChar, traits::GetTraits(PChar->GetSJob()), PChar->GetSLevel());
+        battleutils::AddTraits(PChar, traits::GetTraits(PChar->GetSJob()), PChar->GetSLevel());
 
         if (PChar->GetMJob() == JOB_BLU || PChar->GetSJob() == JOB_BLU)
         {
@@ -3286,36 +3252,34 @@ namespace charutils
             return;
         }
 
-        if (((PChar->WorkingSkills.rank[rawSkillID] >= 0) && !(PChar->WorkingSkills.skill[rawSkillID] & 0x8000)) || useSubSkill) //Umeboshi "!=" to ">="
+        if (((PChar->WorkingSkills.rank[rawSkillID] != 0) && !(PChar->WorkingSkills.skill[rawSkillID] & 0x8000)) || useSubSkill)
         {
             uint16 CurSkill     = PChar->RealSkills.skill[rawSkillID];
             uint16 MainCapSkill = battleutils::GetMaxSkill(SkillID, PChar->GetMJob(), PChar->GetMLevel());
             uint16 SubCapSkill  = battleutils::GetMaxSkill(SkillID, PChar->GetSJob(), PChar->GetSLevel());
             uint16 MainMaxSkill = battleutils::GetMaxSkill(SkillID, PChar->GetMJob(), std::min(PChar->GetMLevel(), lvl));
             uint16 SubMaxSkill  = battleutils::GetMaxSkill(SkillID, PChar->GetSJob(), std::min(PChar->GetSLevel(), lvl));
-            uint16 MaxSkill     = std::max(MainMaxSkill, SubMaxSkill);
-            uint16 CapSkill     = std::max(MainCapSkill, SubCapSkill);
-            //uint16 MaxSkill     = 0;
-            //uint16 CapSkill     = 0;
+            uint16 MaxSkill     = 0;
+            uint16 CapSkill     = 0;
 
-            //if (useSubSkill)
-            //{
-            //    if (MainCapSkill > SubCapSkill)
-            //    {
-            //        CapSkill = MainCapSkill;
-            //        MaxSkill = MainMaxSkill;
-            //    }
-            //    else
-            //    {
-            //        CapSkill = SubCapSkill;
-            //        MaxSkill = SubMaxSkill;
-            //    }
-            //}
-            //else
-            //{
-            //    CapSkill = MainCapSkill;
-            //    MaxSkill = MainMaxSkill;
-            //}
+            if (useSubSkill)
+            {
+                if (MainCapSkill > SubCapSkill)
+                {
+                    CapSkill = MainCapSkill;
+                    MaxSkill = MainMaxSkill;
+                }
+                else
+                {
+                    CapSkill = SubCapSkill;
+                    MaxSkill = SubMaxSkill;
+                }
+            }
+            else
+            {
+                CapSkill = MainCapSkill;
+                MaxSkill = MainMaxSkill;
+            }
             // Max skill this victim level will allow.
             // Note this is no longer retail accurate, since now 'decent challenge' mobs allow to cap any skill.
 
@@ -3680,7 +3644,7 @@ namespace charutils
     void setTitle(CCharEntity* PChar, uint16 Title)
     {
         PChar->profile.title = Title;
-        PChar->pushPacket(new CCharStatsPacket(PChar, true)); // Umeboshi "resetflips"
+        PChar->pushPacket(new CCharStatsPacket(PChar));
 
         addTitle(PChar, Title);
         SaveTitles(PChar);
@@ -3841,23 +3805,23 @@ namespace charutils
         {
             return EMobDifficulty::IncrediblyTough;
         }
-        if (baseExp >= 200) // 350
+        if (baseExp >= 350)
         {
             return EMobDifficulty::VeryTough;
         }
-        if (baseExp > 100)
+        if (baseExp >= 220)
         {
             return EMobDifficulty::Tough;
         }
-        if (baseExp == 100)
+        if (baseExp >= 200)
         {
             return EMobDifficulty::EvenMatch;
         }
-        if (baseExp >= 80)
+        if (baseExp >= 160)
         {
             return EMobDifficulty::DecentChallenge;
         }
-        if (baseExp >= 1)
+        if (baseExp >= 60)
         {
             return EMobDifficulty::EasyPrey;
         }
@@ -3948,32 +3912,14 @@ namespace charutils
             // all members might not be in range
             if (!members.empty())
             {
-                // Distribute Gil
-                int32 gilPerPerson    = static_cast<int32>(gil / members.size());
-                int16 gilFinderActive = 0;
-
-                for (auto PMember : members)
+                // distribute gil
+                int32 gilPerPerson = static_cast<int32>(gil / members.size());
+                for (auto* PMember : members)
                 {
-                    // Check for highest gilfinder tier
-                    if (PMember->getMod(Mod::GILFINDER) > gilFinderActive)
-                    {
-                        gilFinderActive = PMember->getMod(Mod::GILFINDER);
-                    }
-                }
-                for (auto PMember : members)
-                {
-                    // Distributte gilfinder gil
-                    if (gilFinderActive > 0)
-                    {
-                        int32 memberGil = gilPerPerson * (100 + gilFinderActive) / 100;
-                        UpdateItem(PMember, LOC_INVENTORY, 0, memberGil);
-                        PMember->pushPacket(new CMessageBasicPacket(PMember, PMember, memberGil, 0, 565));
-                    }
-                    else
-                    {
-                        UpdateItem(PMember, LOC_INVENTORY, 0, gilPerPerson);
-                        PMember->pushPacket(new CMessageBasicPacket(PMember, PMember, gilPerPerson, 0, 565));
-                    }
+                    // Check for gilfinder
+                    gilPerPerson += gilPerPerson * PMember->getMod(Mod::GILFINDER) / 100;
+                    UpdateItem(PMember, LOC_INVENTORY, 0, gilPerPerson);
+                    PMember->pushPacket(new CMessageBasicPacket(PMember, PMember, gilPerPerson, 0, 565));
                 }
             }
         }
@@ -4176,22 +4122,7 @@ namespace charutils
                         region >= REGION_TYPE::WEST_AHT_URHGAN &&
                         region <= REGION_TYPE::ALZADAAL;
 
-                    bool isInSigilZone =
-                        PMember->StatusEffectContainer->HasStatusEffect(EFFECT_SIGIL) &&
-                        region >= REGION_TYPE::RONFAURE_FRONT &&
-                        region <= REGION_TYPE::VALDEAUNIA_FRONT;
-
-                    exp *= GetPlayerShareMultiplier(pcinzone, isInSignetZone || isInSanctionZone || isInSigilZone);
-
-                    if (isInSigilZone)
-                    {
-                        exp *= 1.50f; // 40% XP Bonus in WOTG Areas
-                    }
-
-                    if (isInSanctionZone)
-                    {
-                        exp *= 1.40f; // 40% XP Bonus in TOAU Areas
-                    }
+                    exp *= GetPlayerShareMultiplier(pcinzone, isInSignetZone || isInSanctionZone);
 
                     if (PMob->getMobMod(MOBMOD_EXP_BONUS))
                     {
@@ -4213,7 +4144,7 @@ namespace charutils
                         exp = std::fmin(exp, 600.f);
                     }
 
-                    if (mobCheck >= EMobDifficulty::DecentChallenge)
+                    if (mobCheck > EMobDifficulty::DecentChallenge)
                     {
                         if (PMember->expChain.chainTime > gettick() || PMember->expChain.chainTime == 0)
                         {
@@ -4227,19 +4158,19 @@ namespace charutils
                                     exp *= 1.2f;
                                     break;
                                 case 2:
-                                    exp *= 1.35f;
+                                    exp *= 1.25f;
                                     break;
                                 case 3:
-                                    exp *= 1.5f;
+                                    exp *= 1.3f;
                                     break;
                                 case 4:
-                                    exp *= 1.6f;
+                                    exp *= 1.4f;
                                     break;
                                 case 5:
-                                    exp *= 1.7f;
+                                    exp *= 1.5f;
                                     break;
                                 default:
-                                    exp *= 1.75f;
+                                    exp *= 1.55f;
                                     break;
                             }
                         }
@@ -4465,10 +4396,6 @@ namespace charutils
                                     break;
                             }
                         }
-                        else if (PMember->m_PFellow != nullptr)
-                        {
-                            exp *= 0.7f;
-                        }
                     }
                     // pet or companion exp penalty needs to be added here
                     if (distance(PMember->loc.p, PMob->loc.p) > 100)
@@ -4480,15 +4407,7 @@ namespace charutils
                     exp = charutils::AddExpBonus(PMember, exp);
 
                     charutils::AddExperiencePoints(false, PMember, PMob, (uint32)exp, mobCheck, chainactive);
-                    
-                    if (PMember->m_PFellow != nullptr) // award xp to fellow for mobs that yeild xp to the player
-                        fellowutils::DistributeExperiencePoints(PMember->m_PFellow, PMob, PMember);
                 }
-            }
-                        else if (PMember->m_PFellow != nullptr) // fellows get exp according to THEIR lvl; not master lvl
-            {
-                if (PMember->getZone() == PMob->getZone() && distance(PMember->loc.p, PMob->loc.p) < 100)
-                    fellowutils::DistributeExperiencePoints(PMember->m_PFellow, PMob, PMember);
             }
         });
         // clang-format on
@@ -4519,20 +4438,20 @@ namespace charutils
                 return;
             }
 
-            if (!hasKeyItem(PMember, 2544) || PMember->GetMLevel() < 75)
+            if (!hasKeyItem(PMember, 2544) || PMember->GetMLevel() < 99)
             {
-                // Do not grant Capacity points without Job Breaker or Level 75
+                // Do not grant Capacity points without Job Breaker or Level 99
                 return;
             }
 
             bool  chainActive = false;
-            int16 levelDiff   = mobLevel - 75; // Passed previous 99 check, no need to calculate
+            int16 levelDiff   = mobLevel - 99; // Passed previous 99 check, no need to calculate
 
             // Capacity Chains are only granted for Mobs level 100+
             // Ref: https://www.bg-wiki.com/ffxi/Job_Points
             float capacityPoints = 0;
 
-            if (mobLevel > 75)
+            if (mobLevel > 99)
             {
                 // Base Capacity Point formula derived from the table located at:
                 // https://ffxiclopedia.fandom.com/wiki/Job_Points#Capacity_Points
@@ -4749,7 +4668,7 @@ namespace charutils
                 BuildingCharTraitsTable(PChar);
                 BuildingCharWeaponSkills(PChar);
 
-                PChar->pushPacket(new CCharJobsPacket(PChar, true)); // Umeboshi "resetflips"
+                PChar->pushPacket(new CCharJobsPacket(PChar));
                 PChar->pushPacket(new CCharUpdatePacket(PChar));
                 PChar->pushPacket(new CCharSkillsPacket(PChar));
                 PChar->pushPacket(new CCharRecastPacket(PChar));
@@ -4790,7 +4709,7 @@ namespace charutils
         }
 
         SaveCharExp(PChar, PChar->GetMJob());
-        PChar->pushPacket(new CCharStatsPacket(PChar, true)); // Umeboshi "resetflips"
+        PChar->pushPacket(new CCharStatsPacket(PChar));
     }
 
     /************************************************************************
@@ -4902,13 +4821,6 @@ namespace charutils
                 PChar->pushPacket(new CConquestPacket(PChar));
             }
 
-                        // Should this user be awarded imperial standing..
-            if (PChar->StatusEffectContainer->HasStatusEffect(EFFECT_SIGIL) && (region >= REGION_TYPE::RONFAURE_FRONT && region <= REGION_TYPE::VALDEAUNIA_FRONT))
-            {
-                charutils::AddPoints(PChar, "allied_notes", (int32)(exp * 0.1f));
-                PChar->pushPacket(new CConquestPacket(PChar));
-            }
-
             // Cruor Drops in Abyssea zones.
             uint16 Pzone = PChar->getZone();
             if (zoneutils::GetCurrentRegion(Pzone) == REGION_TYPE::ABYSSEA)
@@ -4989,7 +4901,7 @@ namespace charutils
                 SaveCharJob(PChar, PChar->GetMJob());
                 SaveCharExp(PChar, PChar->GetMJob());
 
-                PChar->pushPacket(new CCharJobsPacket(PChar, true)); // Umeboshi "resetflips"
+                PChar->pushPacket(new CCharJobsPacket(PChar));
                 PChar->pushPacket(new CCharUpdatePacket(PChar));
                 PChar->pushPacket(new CCharSkillsPacket(PChar));
                 PChar->pushPacket(new CCharRecastPacket(PChar));
@@ -5002,7 +4914,7 @@ namespace charutils
                 PChar->pushPacket(new CCharSyncPacket(PChar));
 
                 PChar->loc.zone->PushPacket(PChar, CHAR_INRANGE_SELF, new CMessageCombatPacket(PChar, PMob, PChar->jobs.job[PChar->GetMJob()], 0, 9));
-                PChar->pushPacket(new CCharStatsPacket(PChar, true));  //Umeboshi "resetflips"
+                PChar->pushPacket(new CCharStatsPacket(PChar));
 
                 luautils::OnPlayerLevelUp(PChar);
                 roeutils::event(ROE_EVENT::ROE_LEVELUP, PChar, RoeDatagramList{});
@@ -5014,7 +4926,7 @@ namespace charutils
         SaveCharStats(PChar);
         SaveCharJob(PChar, PChar->GetMJob());
         SaveCharExp(PChar, PChar->GetMJob());
-        PChar->pushPacket(new CCharStatsPacket(PChar, true));  //Umeboshi "resetflips"
+        PChar->pushPacket(new CCharStatsPacket(PChar));
 
         if (onLimitMode)
         {
@@ -5367,12 +5279,6 @@ namespace charutils
         // we use charvars for jug specific things
         PChar->setCharVar("jugpet-spawn-time", PChar->petZoningInfo.jugSpawnTime);
         PChar->setCharVar("jugpet-duration-seconds", PChar->petZoningInfo.jugDuration);
-
-        const char* Query2 = "UPDATE char_fellow "
-                             "SET zone_hp = %u, zone_mp = %u "
-                             "WHERE charid = %u;";
-
-        sql->Query(Query2, PChar->fellowZoningInfo.fellowHP, PChar->fellowZoningInfo.fellowMP, PChar->id);
     }
 
     /************************************************************************
@@ -5852,7 +5758,7 @@ namespace charutils
     {
         TracyZoneScoped;
         auto tstamp = static_cast<uint32>(PChar->getCharVar("mog-locker-expiry-timestamp"));
-        if (CVanaTime::getInstance()->getVanaTime() < tstamp +1) // adding 1 to overflow and keep compatibility with our lua scripts assigning -1 as the expired timestamp
+        if (CVanaTime::getInstance()->getVanaTime() < tstamp)
         {
             return true;
         }
@@ -6277,6 +6183,18 @@ namespace charutils
             }
             PChar->ReloadPartyDec();
         }
+
+        // Attempt to disband party if the last trust was just released
+        // NOTE: Trusts are not counted as party members, so the current member count will be 1
+        if (PChar->PParty && PChar->PParty->HasOnlyOneMember() && PChar->PTrusts.empty())
+        {
+            // Looks good so far, check OTHER processes to see if we should disband
+            if (PChar->PParty->GetMemberCountAcrossAllProcesses() == 1)
+            {
+                PChar->PParty->DisbandParty();
+                destroy(PChar->PParty);
+            }
+        }
     }
 
     bool IsAidBlocked(CCharEntity* PInitiator, CCharEntity* PTarget)
@@ -6320,16 +6238,11 @@ namespace charutils
             sql->Query(rankingQuery, evalPoints, PChar->profile.unity_leader);
             roeutils::UpdateUnityTrust(PChar, true);
 
-            PChar->pushPacket(new CCharStatsPacket(PChar, false)); // Umeboshi "resetflips"
+            PChar->pushPacket(new CCharStatsPacket(PChar));
         }
         else if (strcmp(type, "spark_of_eminence") == 0)
         {
             PChar->pushPacket(new CRoeSparkUpdatePacket(PChar));
-        }
-
-        if (type == charutils::GetConquestPointsName(PChar).c_str())
-        {
-            PChar->pushPacket(new CConquestPacket(PChar));
         }
     }
 
@@ -6421,29 +6334,9 @@ namespace charutils
                                 "boundary = %u "
                                 "WHERE charid = %u;";
 
-            // Fix so that pos_prevzone is correctly saved into the database
-
-            sql->Query(Query,
-                       PChar->loc.destination,
-                       (PChar->m_moghouseID || PChar->loc.destination != PChar->getZone()) ? PChar->getZone() : PChar->loc.prevzone,
-                       PChar->loc.p.rotation,
-                       PChar->loc.p.x,
-                       PChar->loc.p.y,
-                       PChar->loc.p.z,
-                       PChar->m_moghouseID,
-                       PChar->loc.boundary,
-                       PChar->id);
-
-        if (PChar->PPet != nullptr)
-        {
-            PChar->setPetZoningInfo();
-        }
-
-        if (PChar->m_PFellow != nullptr)
-        {
-            PChar->setFellowZoningInfo();
-        }
-
+            sql->Query(Query, PChar->loc.destination,
+                       (PChar->m_moghouseID || PChar->loc.destination == PChar->getZone()) ? PChar->loc.prevzone : PChar->getZone(), PChar->loc.p.rotation,
+                       PChar->loc.p.x, PChar->loc.p.y, PChar->loc.p.z, PChar->m_moghouseID, PChar->loc.boundary, PChar->id);
         }
         else
         {
@@ -6499,7 +6392,7 @@ namespace charutils
             {
                 // weapon is now broken
                 PChar->PLatentEffectContainer->CheckLatentsWeaponBreak(slotid);
-                PChar->pushPacket(new CCharStatsPacket(PChar, false)); // Umeboshi "resetflips"
+                PChar->pushPacket(new CCharStatsPacket(PChar));
             }
             char extra[sizeof(PWeapon->m_extra) * 2 + 1];
             sql->EscapeStringLen(extra, (const char*)PWeapon->m_extra, sizeof(PWeapon->m_extra));
@@ -7015,7 +6908,7 @@ namespace charutils
         {
             spawnlist = &PChar->SpawnPCList;
         }
-        else if (entity->objtype == TYPE_PET || entity->objtype == TYPE_FELLOW)
+        else if (entity->objtype == TYPE_PET)
         {
             spawnlist = &PChar->SpawnPETList;
         }

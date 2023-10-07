@@ -1,7 +1,7 @@
 -----------------------------------
 -- Area: Reisenjima (291)
 -- NPC: ???
--- Notes: Grants "Ethereal droplet" temporary item.
+-- Notes: Grants 'Ethereal droplet' temporary item.
 -----------------------------------
 local ID = zones[xi.zone.REISENJIMA]
 -----------------------------------

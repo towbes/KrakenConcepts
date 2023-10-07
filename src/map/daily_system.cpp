@@ -1,4 +1,4 @@
-﻿/*
+/*
 ===========================================================================
 
 Copyright (c) 2022 LandSandBoat Dev Teams
@@ -87,8 +87,7 @@ namespace daily
         uint16 selection = xirand::GetRandomElement(dialItems);
 
         // Check if Rare item is already owned and substitute with Goblin trash item.
-     //   if ((itemutils::GetItem(selection)->getFlag() & ITEM_FLAG_RARE) > 0 && charutils::HasItem(player, selection))
-        if ((itemutils::GetItem(selection)->isRare() && charutils::HasItem(player, selection)))
+        if ((itemutils::GetItem(selection)->getFlag() & ITEM_FLAG_RARE) > 0 && charutils::HasItem(player, selection))
         {
             dialItems = &gobbieJunk;
             selection = xirand::GetRandomElement(dialItems);

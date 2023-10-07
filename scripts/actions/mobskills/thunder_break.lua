@@ -15,7 +15,7 @@ mobskillObject.onMobWeaponSkill = function(target, mob, skill)
 
     local dmgmod = 1
 
-    if mob:getName() == "Lost_Suttung" then
+    if mob:getName() == 'Lost_Suttung' then
         dmgmod = 1.5
     end
 

@@ -3,15 +3,15 @@
 -- Area: Ghelsba Outpost
 -- Name: Mirror Mirror - Adventuring Fellow Quest
 -----------------------------------
-local ID = require("scripts/zones/Ghelsba_Outpost/IDs")
-require("scripts/globals/pets/fellow")
-require("scripts/globals/fellow_utils")
-require("scripts/globals/battlefield")
-require("scripts/globals/keyitems")
-require("scripts/globals/quests")
-require("scripts/globals/status")
-require("scripts/globals/titles")
-require("scripts/globals/pets")
+local ID = zones[xi.zone.GHELSBA_OUTPOST]
+require('scripts/globals/pets/fellow')
+require('scripts/globals/fellow_utils')
+require('scripts/globals/battlefield')
+
+require('scripts/globals/quests')
+
+
+require('scripts/globals/pets')
 -----------------------------------
 local battlefieldObject = {}
 
@@ -40,7 +40,7 @@ battlefieldObject.onBattlefieldLeave = function(player,battlefield,leavecode)
 
     if leavecode == xi.battlefield.leaveCode.WON then --play end CS. Need time and battle id for record keeping + storage
         local name, clearTime, partySize = battlefield:getRecord()
-        player:startEvent(32001, battlefield:getArea(), clearTime, partySize, battlefield:getTimeInside(), battlefield:getLocalVar("[cs]bit"), 5, 0, fellowParam)
+        player:startEvent(32001, battlefield:getArea(), clearTime, partySize, battlefield:getTimeInside(), battlefield:getLocalVar('[cs]bit'), 5, 0, fellowParam)
     elseif leavecode == xi.battlefield.leaveCode.LOST then
         player:startEvent(32002)
     end
@@ -69,12 +69,12 @@ battlefieldObject.onEventUpdate = function(player,csid,option)
 end;
 
 battlefieldObject.onEventFinish = function(player,csid,option)
-    if csid == 32001 and option ~= 0 and player:getCharVar("[Quest]Mirror_Mirror") == 2 then
-        player:setCharVar("[Quest]Mirror_Mirror", 3)
+    if csid == 32001 and option ~= 0 and player:getCharVar('[Quest]Mirror_Mirror') == 2 then
+        player:setCharVar('[Quest]Mirror_Mirror', 3)
     end
 
     if csid == 32001 or csid == 32002 then
-        SetServerVariable("[Mirror_Mirror]BCNMmobHP", 0)
+        SetServerVariable('[Mirror_Mirror]BCNMmobHP', 0)
     end
 
     if csid == 32004 then
@@ -82,12 +82,12 @@ battlefieldObject.onEventFinish = function(player,csid,option)
         SpawnMob(ID.mob.CARRION_DRAGON + 1)
         local mob = GetMobByID(ID.mob.CARRION_DRAGON + 1)
         local players = player:getBattlefield():getPlayers()
-        mob:setHP(GetServerVariable("[Mirror_Mirror]BCNMmobHP"))
+        mob:setHP(GetServerVariable('[Mirror_Mirror]BCNMmobHP'))
         mob:setPos(-189, -10, 42)
 
-        player:setLocalVar("triggerFellow", 1) -- no greeting on spawn
-        player:setLocalVar("FellowDisengage", 1) -- fellow cannot sync disengage
-        player:spawnFellow(player:getFellowValue("fellowid"))
+        player:setLocalVar('triggerFellow', 1) -- no greeting on spawn
+        player:setLocalVar('FellowDisengage', 1) -- fellow cannot sync disengage
+        player:spawnFellow(player:getFellowValue('fellowid'))
         player:getFellow():setPos(-197, -10, 40.5)
         player:timer(20000, function(player) player:fellowAttack(mob) end)
     end

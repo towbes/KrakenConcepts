@@ -745,21 +745,14 @@ enum EFFECT
     EFFECT_HYSTERIA            = 804, // Used for Hysteroanima to stop after readying a weaponskill with no msg.
     EFFECT_TOMAHAWK            = 805, // Silent status effect inflicted by a Warrior using the "Tomahawk" job ability
     EFFECT_NUKE_WALL           = 806, // Custom effect for NM type mobs only. Applied by elemental magic damage sources
-    EFFECT_FIRE_EEM_MOD        = 900,
-    EFFECT_ICE_EEM_MOD         = 901,
-    EFFECT_WIND_EEM_MOD        = 902,
-    EFFECT_EARTH_EEM_MOD       = 903,
-    EFFECT_THUNDER_EEM_MOD     = 904,
-    EFFECT_WATER_EEM_MOD       = 905,
-    EFFECT_LIGHT_EEM_MOD       = 906,
-    EFFECT_DARK_EEM_MOD        = 907,
 
     // 789
     // 807-1022
     // EFFECT_PLACEHOLDER           = 1023 // The client dat file seems to have only this many "slots", results of exceeding that are untested.
 };
 
-#define MAX_EFFECTID 1023 // 768 real + 232 custom
+#define MAX_EFFECTID 807 // 768 real + 39 custom
+
 /************************************************************************
  *                                                                       *
  *  Нерешенные задачи:                                                   *
@@ -783,10 +776,6 @@ public:
     uint32 GetEffectFlags() const;
     uint16 GetEffectType() const;
     uint8  GetEffectSlot() const;
-    // uint32 GetFlag() const;
-    // uint16 GetType() const;
-    // uint8  GetSlot() const;
-    // uint16 GetItemSourceID() const;
 
     uint32         GetTickTime() const;
     uint32         GetDuration() const;
@@ -807,7 +796,6 @@ public:
     void SetDuration(uint32 Duration);
     void SetOwner(CBattleEntity* Owner);
     void SetTickTime(uint32 tick);
-    void SetItemSourceID(uint16 ItemSourceID);
 
     void IncrementElapsedTickCount();
     void SetStartTime(time_point StartTime);
@@ -837,7 +825,6 @@ private:
     uint32 m_Flags{ 0 };              // флаг эффекта (условия его исчезновения)
     uint16 m_Type{ 0 };               // used to enforce only one
     uint8  m_Slot{ 0 };               // used to determine slot order for songs/rolls
-    uint16 m_ItemSourceID{ 0 };       // used for status effects granted by items to note source item ID
 
     uint32     m_TickTime{ 0 };  // время повторения эффекта (млс)
     uint32     m_Duration{ 0 };  // продолжительность эффекта (млс)

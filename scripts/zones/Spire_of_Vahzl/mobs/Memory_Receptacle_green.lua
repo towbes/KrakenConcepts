@@ -2,8 +2,8 @@
 -- Area: Spire of Vahzl
 --  Mob: Memory Receptacles (Green Model)
 -----------------------------------
-local ID = require("scripts/zones/Spire_of_Vahzl/IDs")
-require("scripts/globals/pathfind")
+local ID = zones[xi.zone.SPIRE_OF_VAHZL]
+require('scripts/globals/pathfind')
 -----------------------------------
 local entity = {}
 
@@ -52,7 +52,7 @@ entity.onMobSpawn = function(mob)
     -- Give orbs a random spawn location
     local battlefield = mob:getBattlefield()
     local bfID = battlefield:getArea()
-    local posNum = GetMobByID(ID.pullingThePlug[bfID].RED_ID):getLocalVar("positionNum")
+    local posNum = GetMobByID(ID.pullingThePlug[bfID].RED_ID):getLocalVar('positionNum')
     local posSet = positions[bfID]
     for k, pos in pairs(posSet) do
         if k == posNum then
@@ -65,7 +65,7 @@ end
 entity.onMobFight = function(mob, target)
     -- Orbs move every 30 seconds
     local battlefield = mob:getBattlefield()
-    local posNum = GetMobByID(ID.pullingThePlug[battlefield:getArea()].RED_ID):getLocalVar("positionNum")
+    local posNum = GetMobByID(ID.pullingThePlug[battlefield:getArea()].RED_ID):getLocalVar('positionNum')
     local posSet = positions[battlefield:getArea()]
     local moveX = 0
     local moveY = 0
@@ -83,12 +83,12 @@ entity.onMobFight = function(mob, target)
 
     local distance = mob:checkDistance(moveX, moveY, moveZ)
     if distance > 1 then
-        mob:setLocalVar("moving", 1)
+        mob:setLocalVar('moving', 1)
         mob:setMobMod(xi.mobMod.NO_MOVE, 0)
         mob:pathTo(moveX, moveY, moveZ)
     else
         mob:setMobMod(xi.mobMod.NO_MOVE, 1)
-        mob:setLocalVar("moving", 0)
+        mob:setLocalVar('moving', 0)
     end
 end
 
@@ -100,7 +100,7 @@ entity.onMobDeath = function(mob, player, isKiller)
     insurgitator:setSpawn(pos.x, pos.y, pos.z, pos.rot)
     insurgitator:spawn()
 
-    mob:getBattlefield():setLocalVar("GreenDead", 1)
+    mob:getBattlefield():setLocalVar('GreenDead', 1)
 end
 
 entity.onMobDespawn = function(mob)

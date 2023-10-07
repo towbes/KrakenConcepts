@@ -17,18 +17,18 @@ end
 
 entity.onPath = function(npc)
     if not npc:isFollowingPath() then
-        local path = npc:getLocalVar("path")
+        local path = npc:getLocalVar('path')
         local currentPath = lowerJeunoGlobal.lampPath[path]
         local newPath = lowerJeunoGlobal.lampPath[path + 1]
         if npc:atPoint(xi.path.last(currentPath)) then
             if path ~= 13 then
                 local lampId = ID.npc.STREETLAMP_OFFSET + (12 - path)
                 GetNPCByID(lampId):setAnimation(xi.anim.OPEN_DOOR)
-                npc:setLocalVar("path", path + 1)
+                npc:setLocalVar('path', path + 1)
                 npc:pathThrough(newPath, bit.bor(xi.path.flag.COORDS, xi.path.flag.WALLHACK))
             else
                 npc:clearPath()
-                npc:setLocalVar("path", 1)
+                npc:setLocalVar('path', 1)
                 npc:setStatus(2)
             end
         end

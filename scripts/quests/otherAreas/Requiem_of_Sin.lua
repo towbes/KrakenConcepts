@@ -6,15 +6,15 @@
 -- Notes:
 --   Players can receive key item, wait a conquest tally, and do this quest immmediately again
 --   Moreover players can receive an unlimited amount of key items until they win the battlefield.
---   This is handled upon loss of the battlefield. "CONQUEST_REQUIEM_OF_SIN" if reset to 0 if they lose.
+--   This is handled upon loss of the battlefield. 'CONQUEST_REQUIEM_OF_SIN' if reset to 0 if they lose.
 --   Quest is complete upon winning the battlefield.
 -----------------------------------
-require('scripts/globals/items')
-require('scripts/globals/keyitems')
+
+
 require('scripts/globals/npc_util')
 require('scripts/globals/quests')
-require('scripts/globals/titles')
-require('scripts/globals/zone')
+
+
 require('scripts/globals/interaction/quest')
 -----------------------------------
 
@@ -40,7 +40,7 @@ quest.sections =
             {
                 [579] = function(player, csid, option, npc)
                     npcUtil.giveKeyItem(player, xi.ki.LETTER_FROM_SHIKAREE_Y)
-                    quest:setVar(player, 'conquestRequiem', getConquestTally())
+                    quest:setVar(player, 'conquestRequiem', NextConquestTally())
                     quest:begin(player)
                 end,
             },
@@ -62,7 +62,7 @@ quest.sections =
             {
                 [579] = function(player, csid, option, npc)
                     npcUtil.giveKeyItem(player, xi.ki.LETTER_FROM_SHIKAREE_Y)
-                    quest:setVar(player, 'conquestRequiem', getConquestTally())
+                    quest:setVar(player, 'conquestRequiem', NextConquestTally())
                 end,
             },
         }
@@ -82,8 +82,8 @@ quest.sections =
             onEventFinish =
             {
                 [579] = function(player, csid, option, npc)
-                    -- "CONQUEST_REQUIEM" is reset if players lose battlefield
-                    quest:setVar(player, 'conquestRequiem', getConquestTally())
+                    -- 'CONQUEST_REQUIEM' is reset if players lose battlefield
+                    quest:setVar(player, 'conquestRequiem', NextConquestTally())
                     npcUtil.giveKeyItem(player, xi.ki.LETTER_FROM_THE_MITHRAN_TRACKERS)
                 end,
             },

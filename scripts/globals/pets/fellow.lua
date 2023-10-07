@@ -1,11 +1,11 @@
 -----------------------------------
 --  Adventuring Fellow
 -----------------------------------
-require("scripts/globals/status")
-require("scripts/globals/quests")
-require("scripts/globals/zone")
-require("scripts/globals/msg")
-require("scripts/globals/fellow_utils")
+
+require('scripts/globals/quests')
+
+
+require('scripts/globals/fellow_utils')
 -----------------------------------
 local entity = {}
 
@@ -39,12 +39,12 @@ local function checkProvoke(mob, target, fellowType)
             if target:isEngaged() then
                 if target:getTarget():getID() ~= mob:getID() then
                     mob:useJobAbility(35, target)
-                    mob:setLocalVar("provoke", os.time() + math.random(30, 60))
+                    mob:setLocalVar('provoke', os.time() + math.random(30, 60))
                     return true
                 end
             else -- edge case for independent fellow attacking (quest bcnms)
                 mob:useJobAbility(35, target)
-                mob:setLocalVar("provoke", os.time() + math.random(30, 60))
+                mob:setLocalVar('provoke', os.time() + math.random(30, 60))
                 return true
             end
         end
@@ -199,7 +199,7 @@ local function checkWeaponSkill(mob, target, fellowLvl)
         return false
     end
     local skill         = mob:getWeaponSkillType(xi.slot.MAIN)
-    local optionsMask   = master:getFellowValue("optionsMask")
+    local optionsMask   = master:getFellowValue('optionsMask')
     local randomWS      = {}
     local aoeEnabled    = false
         if bit.band(optionsMask, bit.lshift(1,0)) == 1 then aoeEnabled = true end
@@ -213,13 +213,13 @@ local function checkWeaponSkill(mob, target, fellowLvl)
     -- Building in a delay as on local this can be triggered fast enough that
     -- mob:actionQueueEmpty() is false for 2-3 calls in a row, letting the fellow queue up to 3 ws
     -- Also accounting for disengage/re-engage
-    local wsTime = mob:getLocalVar("wsTime")
+    local wsTime = mob:getLocalVar('wsTime')
     if (mob:getBattleTime() > wsTime + 10 or wsTime > mob:getBattleTime() + 30) then
-        mob:setLocalVar("wsTime", 0)
+        mob:setLocalVar('wsTime', 0)
     end
     
-    if mob:actionQueueEmpty() and mob:getLocalVar("wsTime") == 0 then
-        mob:setLocalVar("wsTime", mob:getBattleTime())
+    if mob:actionQueueEmpty() and mob:getLocalVar('wsTime') == 0 then
+        mob:setLocalVar('wsTime', mob:getBattleTime())
         local ws = randomWS[math.random(#randomWS)]
 
         -- Starlight and Moonlight target the fellow
@@ -228,7 +228,7 @@ local function checkWeaponSkill(mob, target, fellowLvl)
         end
         mob:useMobAbility(ws, target)
 
-        mob:setLocalVar("wsReady", 0)
+        mob:setLocalVar('wsReady', 0)
         return true
     end
 
@@ -353,7 +353,7 @@ local function checkBuff(mob, master, fellowLvl, mp, fellowType)
         [xi.effect.HASTE]     = {   57,    40,    40,  true, job = {[3] = {65, 0}, [6] = {65, 30}}},
     }
 
-    if master:getFellowValue("job") == FELLOW_TYPE_SOOTHING then
+    if master:getFellowValue('job') == FELLOW_TYPE_SOOTHING then
         switch (master:getMainJob()) : caseof
         {
             [xi.job.WHM] = function (x) buffs[xi.effect.HASTE].job[6][2] = 80 end,
@@ -455,13 +455,13 @@ end
 
 entity.onMobSpawn = function(mob)
     local master        = mob:getMaster()
-    mob:setLocalVar("masterID", master:getID())
-    mob:setLocalVar("castingCoolDown", os.time() + math.random(15,25))
-    master:setLocalVar("chatCounter", 0)
-    master:setFellowValue("spawnTime", os.time())
+    mob:setLocalVar('masterID', master:getID())
+    mob:setLocalVar('castingCoolDown', os.time() + math.random(15,25))
+    master:setLocalVar('chatCounter', 0)
+    master:setFellowValue('spawnTime', os.time())
 
-    if master:getLocalVar("FellowAttack") == 0 then
-        master:addListener("ATTACK", "FELLOW_ENGAGE", function(player, target, action)
+    if master:getLocalVar('FellowAttack') == 0 then
+        master:addListener('ATTACK', 'FELLOW_ENGAGE', function(player, target, action)
             local fellow = player:getFellow()
             if fellow ~= nil then
                 if fellow:getTarget() == nil or target:getID() ~= fellow:getTarget():getID() then
@@ -471,8 +471,8 @@ entity.onMobSpawn = function(mob)
         end)
     end
 
-    if master:getLocalVar("FellowDisengage") == 0 then
-        master:addListener("DISENGAGE", "FELLOW_DISENGAGE", function(player)
+    if master:getLocalVar('FellowDisengage') == 0 then
+        master:addListener('DISENGAGE', 'FELLOW_DISENGAGE', function(player)
             local fellow = player:getFellow()
             if fellow ~= nil then
                 player:fellowRetreat()
@@ -482,13 +482,13 @@ entity.onMobSpawn = function(mob)
 end
 
 entity.onTrigger = function(player, mob)
-    local ID            = require("scripts/zones/"..player:getZoneName().."/IDs")
+    local ID            = require('scripts/zones/'..player:getZoneName()..'/IDs')
     local personality   = xi.fellow_utils.checkPersonality(mob)
     if personality > 5 then personality = personality - 1 end
 
-    if player:getQuestStatus(xi.quest.log_id.JEUNO,xi.quest.id.jeuno.GIRL_IN_THE_LOOKING_GLASS) == QUEST_ACCEPTED and player:getCharVar("[Quest]Looking_Glass") == 3 then
-        player:setLocalVar("triggerFellow", 0)
-        player:setCharVar("[Quest]Looking_Glass", 4)
+    if player:getQuestStatus(xi.quest.log_id.JEUNO,xi.quest.id.jeuno.GIRL_IN_THE_LOOKING_GLASS) == QUEST_ACCEPTED and player:getCharVar('[Quest]Looking_Glass') == 3 then
+        player:setLocalVar('triggerFellow', 0)
+        player:setCharVar('[Quest]Looking_Glass', 4)
         
         player:showText(mob, ID.text.GIRL_BACK_TO_JEUNO + personality)
         player:timer(6000, function(player) player:despawnFellow() end)
@@ -499,15 +499,15 @@ end
 
 entity.onMobRoam = function(mob)
     local master        = mob:getMaster()
-    local ID            = require("scripts/zones/"..master:getZoneName().."/IDs")
+    local ID            = require('scripts/zones/'..master:getZoneName()..'/IDs')
     local personality   = xi.fellow_utils.checkPersonality(mob)
-    local fellowType    = master:getFellowValue("job")
-    local maxTime       = master:getFellowValue("maxTime")
-    local spawnTime     = master:getFellowValue("spawnTime")
-    local castCool      = mob:getLocalVar("castingCoolDown")
-    local timeWarning   = mob:getLocalVar("timeWarning")
+    local fellowType    = master:getFellowValue('job')
+    local maxTime       = master:getFellowValue('maxTime')
+    local spawnTime     = master:getFellowValue('spawnTime')
+    local castCool      = mob:getLocalVar('castingCoolDown')
+    local timeWarning   = mob:getLocalVar('timeWarning')
     local fellowLvl     = mob:getMainLvl()
-    local mpNotice      = mob:getLocalVar("mpNotice")
+    local mpNotice      = mob:getLocalVar('mpNotice')
     local mp            = mob:getMP()
     local mpp           = mp / mob:getMaxMP() * 100
 
@@ -519,7 +519,7 @@ entity.onMobRoam = function(mob)
             if mob:getZone():getID() == player:getZone():getID() then
                 if player:getFellow() ~= nil then
                     members = members + 2
-                    fellows[player:getID()] = player:getFellowValue("spawnTime")
+                    fellows[player:getID()] = player:getFellowValue('spawnTime')
                 else
                     members = members + 1
                 end
@@ -540,30 +540,30 @@ entity.onMobRoam = function(mob)
 
     if os.time() > spawnTime + maxTime - 300 and timeWarning == 0 then
         master:showText(mob, ID.text.FELLOW_MESSAGE_OFFSET + FELLOWMESSAGEOFFSET_FIVE_MIN_WARNING + personality)
-        mob:setLocalVar("timeWarning", 1)
+        mob:setLocalVar('timeWarning', 1)
     elseif os.time() > spawnTime + maxTime - 4 and timeWarning == 1 then
         master:showText(mob, ID.text.FELLOW_MESSAGE_OFFSET + FELLOWMESSAGEOFFSET_TIME_EXPIRED + personality)
-        mob:setLocalVar("timeWarning", 2)
+        mob:setLocalVar('timeWarning', 2)
     elseif os.time() > spawnTime + maxTime and timeWarning == 2 then
         master:showText(mob, ID.text.FELLOW_MESSAGE_OFFSET + FELLOWMESSAGEOFFSET_LEAVE + personality)
-        mob:setLocalVar("timeWarning", 3)
+        mob:setLocalVar('timeWarning', 3)
         master:despawnFellow()
     end
 
     if castCool <= os.time() then
         if (fellowType == FELLOW_TYPE_HEALER or fellowType == FELLOW_TYPE_SOOTHING) then
             if math.random(10) < fellowType+3 and checkCure(mob, master, fellowLvl, mp, fellowType) then
-                mob:setLocalVar("castingCoolDown", os.time()+math.random(15,25))
+                mob:setLocalVar('castingCoolDown', os.time()+math.random(15,25))
             elseif math.random(10) < fellowType+1 and checkAilment(mob, master, fellowLvl, mp) then
-                mob:setLocalVar("castingCoolDown", os.time()+math.random(15,25))
+                mob:setLocalVar('castingCoolDown', os.time()+math.random(15,25))
             elseif math.random(10) < fellowType-1 and checkBuff(mob, master, fellowLvl, mp, fellowType) then
-                mob:setLocalVar("castingCoolDown", os.time()+math.random(15,25))
+                mob:setLocalVar('castingCoolDown', os.time()+math.random(15,25))
             end
         end
     end
 
     if mpp < 67 and mpNotice ~= 1 then
-        mob:setLocalVar("mpNotice", 1)
+        mob:setLocalVar('mpNotice', 1)
     end
 end
 
@@ -573,21 +573,21 @@ entity.onMobFight = function(mob, target)
         return
     end
 
-    local ID            = require("scripts/zones/"..master:getZoneName().."/IDs")
+    local ID            = require('scripts/zones/'..master:getZoneName()..'/IDs')
     local personality   = xi.fellow_utils.checkPersonality(mob)
-    local fellowType    = master:getFellowValue("job")
-    local maxTime       = master:getFellowValue("maxTime")
-    local optionsMask   = master:getFellowValue("optionsMask")
-    local spawnTime     = master:getFellowValue("spawnTime")
-    local castCool      = mob:getLocalVar("castingCoolDown")
-    local provoke       = mob:getLocalVar("provoke")
-    local hpWarning     = mob:getLocalVar("hpWarning")
-    local mpWarning     = mob:getLocalVar("mpWarning")
-    local timeWarning   = mob:getLocalVar("timeWarning")
-    local wsReady       = mob:getLocalVar("wsReady")
-    local wsTime        = mob:getLocalVar("wsTime")
+    local fellowType    = master:getFellowValue('job')
+    local maxTime       = master:getFellowValue('maxTime')
+    local optionsMask   = master:getFellowValue('optionsMask')
+    local spawnTime     = master:getFellowValue('spawnTime')
+    local castCool      = mob:getLocalVar('castingCoolDown')
+    local provoke       = mob:getLocalVar('provoke')
+    local hpWarning     = mob:getLocalVar('hpWarning')
+    local mpWarning     = mob:getLocalVar('mpWarning')
+    local timeWarning   = mob:getLocalVar('timeWarning')
+    local wsReady       = mob:getLocalVar('wsReady')
+    local wsTime        = mob:getLocalVar('wsTime')
     local fellowLvl     = mob:getMainLvl()
-    local mpNotice      = mob:getLocalVar("mpNotice")
+    local mpNotice      = mob:getLocalVar('mpNotice')
     local mp            = mob:getMP()
     local mpp           = mp / mob:getMaxMP() * 100
     local hpSignals     = false
@@ -601,13 +601,13 @@ entity.onMobFight = function(mob, target)
 
     if os.time() > spawnTime + maxTime - 300 and timeWarning == 0 then
         master:showText(mob, ID.text.FELLOW_MESSAGE_OFFSET + FELLOWMESSAGEOFFSET_FIVE_MIN_WARNING + personality)
-        mob:setLocalVar("timeWarning", 1)
+        mob:setLocalVar('timeWarning', 1)
     elseif os.time() > spawnTime + maxTime - 4 and timeWarning == 1 then
         master:showText(mob, ID.text.FELLOW_MESSAGE_OFFSET + FELLOWMESSAGEOFFSET_TIME_EXPIRED + personality)
-        mob:setLocalVar("timeWarning", 2)
+        mob:setLocalVar('timeWarning', 2)
     elseif os.time() > spawnTime + maxTime and timeWarning == 2 then
         master:showText(mob, ID.text.FELLOW_MESSAGE_OFFSET + FELLOWMESSAGEOFFSET_LEAVE + personality)
-        mob:setLocalVar("timeWarning", 3)
+        mob:setLocalVar('timeWarning', 3)
         master:despawnFellow()
     end
 
@@ -624,7 +624,7 @@ entity.onMobFight = function(mob, target)
         elseif mob:getTP() > 1000 then
             if wsSignals == true and wsReady == 0 and master:getTP() < 1000 and master:getTP() > 500 then
                 master:showText(mob, ID.text.FELLOW_MESSAGE_OFFSET + FELLOWMESSAGEOFFSET_WS_READY + personality)
-                mob:setLocalVar("wsReady", 1)
+                mob:setLocalVar('wsReady', 1)
             elseif (fellowType == FELLOW_TYPE_ATTACKER and (master:getTP() > 1000 or master:getTP() < 500)) or
                 (fellowType == FELLOW_TYPE_FIERCE and master:getTP() < 500) then
                     if checkWeaponSkill(mob, target, fellowLvl) and otherSignals == true then
@@ -632,8 +632,8 @@ entity.onMobFight = function(mob, target)
                     end
             elseif fellowType == FELLOW_TYPE_FIERCE and master:getTP() > 1000 and wsReady == 0 and target:getHPP() > 15 then
                 master:showText(mob, ID.text.FELLOW_MESSAGE_OFFSET + FELLOWMESSAGEOFFSET_WEAPONSKILL2 + personality)
-                mob:setLocalVar("wsTime", os.time()+5)
-                mob:setLocalVar("wsReady", 1)
+                mob:setLocalVar('wsTime', os.time()+5)
+                mob:setLocalVar('wsReady', 1)
             elseif fellowType == FELLOW_TYPE_FIERCE and master:getTP() > 1000 and wsTime <= os.time() then
                 if checkWeaponSkill(mob, target, fellowLvl) and otherSignals == true then
                     master:showText(mob, ID.text.FELLOW_MESSAGE_OFFSET + FELLOWMESSAGEOFFSET_WEAPONSKILL + personality)
@@ -649,42 +649,42 @@ entity.onMobFight = function(mob, target)
     if castCool <= os.time() then
         if fellowType == FELLOW_TYPE_HEALER or fellowType == FELLOW_TYPE_SOOTHING then
             if math.random(10) < fellowType+4 and checkCure(mob, master, fellowLvl, mp, fellowType) then
-                mob:setLocalVar("castingCoolDown", os.time()+math.random(15,25))
+                mob:setLocalVar('castingCoolDown', os.time()+math.random(15,25))
             elseif math.random(10) < fellowType+2 and checkAilment(mob, master, fellowLvl, mp) then
-                mob:setLocalVar("castingCoolDown", os.time()+math.random(15,25))
+                mob:setLocalVar('castingCoolDown', os.time()+math.random(15,25))
             elseif math.random(10) < fellowType and checkDebuff(mob, target, master, fellowLvl, mp) then
-                mob:setLocalVar("castingCoolDown", os.time()+math.random(15,25))
+                mob:setLocalVar('castingCoolDown', os.time()+math.random(15,25))
             elseif math.random(10) < fellowType-1 and checkBuff(mob, master, fellowLvl, mp, fellowType) then
-                mob:setLocalVar("castingCoolDown", os.time()+math.random(15,25))
+                mob:setLocalVar('castingCoolDown', os.time()+math.random(15,25))
             end
         elseif fellowType == FELLOW_TYPE_STALWART then
             if checkCure(mob, master, fellowLvl, mp, fellowType) then
-                mob:setLocalVar("castingCoolDown", os.time()+math.random(15,25))
+                mob:setLocalVar('castingCoolDown', os.time()+math.random(15,25))
             end
         end
     end
 
     if mob:getHPP() <= 25 and hpWarning == 0 and hpSignals == true then
         master:showText(mob, ID.text.FELLOW_MESSAGE_OFFSET + FELLOWMESSAGEOFFSET_HP_LOW_NOTICE + personality)
-        mob:setLocalVar("hpWarning", 1)
+        mob:setLocalVar('hpWarning', 1)
     elseif mob:getHPP() > 25 and hpWarning ~= 0 then
-        mob:setLocalVar("hpWarning", 0)
+        mob:setLocalVar('hpWarning', 0)
     elseif mpp <= 25 and mpWarning == 0 and mpSignals == true then
         master:showText(mob, ID.text.FELLOW_MESSAGE_OFFSET + FELLOWMESSAGEOFFSET_MP_LOW_NOTICE + personality)
-        mob:setLocalVar("mpWarning", 1)
+        mob:setLocalVar('mpWarning', 1)
     elseif mpp > 25 and mpWarning ~= 0 then
-        mob:setLocalVar("mpWarning", 0)
+        mob:setLocalVar('mpWarning', 0)
     end
 
     if mpp < 67 and mpNotice ~= 1 then
-        mob:setLocalVar("mpNotice", 1)
+        mob:setLocalVar('mpNotice', 1)
     end
 end
 
 entity.onMobDeath = function(mob)
-    local master = GetPlayerByID(mob:getLocalVar("masterID"))
+    local master = GetPlayerByID(mob:getLocalVar('masterID'))
     if master ~= nil then
-        local ID = require("scripts/zones/"..master:getZoneName().."/IDs")
+        local ID = require('scripts/zones/'..master:getZoneName()..'/IDs')
         local bf = master:getBattlefield()
         if bf ~= nil then
             if bf:getID() == 37 then -- mirror mirror
@@ -698,29 +698,29 @@ entity.onMobDeath = function(mob)
                 end
             end
         end
-        master:removeListener("FELLOW_ENGAGE")
-        master:removeListener("FELLOW_DISENGAGE")
+        master:removeListener('FELLOW_ENGAGE')
+        master:removeListener('FELLOW_DISENGAGE')
     end
 end
 
 entity.onMobDespawn = function(mob)
-    local master = GetPlayerByID(mob:getLocalVar("masterID"))
+    local master = GetPlayerByID(mob:getLocalVar('masterID'))
     local zone = mob:getZoneID()
     if master ~= nil and mob:getCurrentRegion() < 19 then
         if zone ~= 16 and zone ~= 18 and zone ~= 20 then -- no gear adjust in promys
-            local maxKills      = mob:getLocalVar("maxKills")
-            local zoneKills     = mob:getLocalVar("zoneKills")
-            local kills         = master:getFellowValue("kills")
-            --print("master: "..mob:getLocalVar("masterID").." zoneKills: "..zoneKills.." total kills: "..kills)
-            local armorLock     = master:getFellowValue("armorLock")
+            local maxKills      = mob:getLocalVar('maxKills')
+            local zoneKills     = mob:getLocalVar('zoneKills')
+            local kills         = master:getFellowValue('kills')
+            --print('master: '..mob:getLocalVar('masterID')..' zoneKills: '..zoneKills..' total kills: '..kills)
+            local armorLock     = master:getFellowValue('armorLock')
             local regionOwner        = GetRegionOwner(mob:getCurrentRegion())
             local unlocked      = {}
             local armorTable    =
             {
-                [1] = { "body"},
-                [2] = {"hands"},
-                [3] = { "legs"},
-                [4] = { "feet"},
+                [1] = { 'body'},
+                [2] = {'hands'},
+                [3] = { 'legs'},
+                [4] = { 'feet'},
             }
             for i, v in ipairs(armorTable) do
                 if (bit.band(armorLock, bit.lshift(1,i)) == 0) then
@@ -751,8 +751,8 @@ entity.onMobDespawn = function(mob)
                 master:setFellowValue(randomArmor, armor)
             end
         end
-    master:removeListener("FELLOW_ENGAGE")
-    master:removeListener("FELLOW_DISENGAGE")
+    master:removeListener('FELLOW_ENGAGE')
+    master:removeListener('FELLOW_DISENGAGE')
     end
 end
 

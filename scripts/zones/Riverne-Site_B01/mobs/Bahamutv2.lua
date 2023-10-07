@@ -3,8 +3,8 @@
 --   NM: Bahamut v2
 -- BCNM: Wyrmking Descends
 -----------------------------------
-local ID = require("scripts/zones/Riverne-Site_B01/IDs")
-require("scripts/globals/quests")
+local ID = require('scripts/zones/Riverne-Site_B01/IDs')
+require('scripts/globals/quests')
 -----------------------------------
 local entity = {}
 
@@ -13,16 +13,16 @@ local percents = { 90, 80, 70, 60, 50, 40, 30, 20 }
 local adds     = { 80, 60, 40, 20 }
 
 local flare = function(mob, target, level)
-    local flareWait = mob:getLocalVar("FlareWait")
-    local tauntShown = mob:getLocalVar("tauntShown")
+    local flareWait = mob:getLocalVar('FlareWait')
+    local tauntShown = mob:getLocalVar('tauntShown')
 
     mob:setMobAbilityEnabled(false) -- disable all other actions until Megaflare is used successfully
     mob:setMagicCastingEnabled(false)
     mob:setAutoAttackEnabled(false)
-    mob:setLocalVar("autoOffSource", 2)
+    mob:setLocalVar('autoOffSource', 2)
 
     if flareWait == 0 and tauntShown == 0 then -- if there is a queued Megaflare and the last Megaflare has been used successfully or if the first one hasn't been used yet.
-        mob:setLocalVar("tauntShown", 1)
+        mob:setLocalVar('tauntShown', 1)
         if level == 0 then
             target:showText(mob, ID.text.BAHAMUT_TAUNT)
         elseif level == 1 then
@@ -50,10 +50,10 @@ local flare = function(mob, target, level)
             end)
         end
 
-        mob:setLocalVar("FlareWait", mob:getBattleTime() + 2) -- second taunt happens two seconds after the first.
+        mob:setLocalVar('FlareWait', mob:getBattleTime() + 2) -- second taunt happens two seconds after the first.
     elseif flareWait < mob:getBattleTime() and flareWait ~= 0 and tauntShown >= 0 then -- the wait time between the first and second taunt as passed. Checks for wait to be not 0 because it's set to 0 on successful use.
         if tauntShown == 1 and level == 0 then
-            mob:setLocalVar("tauntShown", 2) -- if Megaflare gets stunned it won't show the text again, until successful use.
+            mob:setLocalVar('tauntShown', 2) -- if Megaflare gets stunned it won't show the text again, until successful use.
         end
 
         if mob:checkDistance(target) <= 15 then -- without this check if the target is out of range it will keep attemping and failing to use Megaflare. Both Megaflare and Gigaflare have range 15.
@@ -69,7 +69,7 @@ local flare = function(mob, target, level)
                 mob:useMobAbility(1553) -- Teraflare
             end
 
-            mob:setLocalVar("flareQueued", 0)
+            mob:setLocalVar('flareQueued', 0)
         end
     end
 end
@@ -101,13 +101,13 @@ entity.onMobSpawn = function(mob)
     mob:setMobAbilityEnabled(true)
     mob:setMagicCastingEnabled(true)
     mob:setAutoAttackEnabled(true)
-    mob:setLocalVar("gigaFlareCount", 3)
+    mob:setLocalVar('gigaFlareCount', 3)
 
     local randomWyrm = utils.shuffle(wyrms)
-    mob:setLocalVar("wyrmOne", randomWyrm[1])
-    mob:setLocalVar("wyrmTwo", randomWyrm[2])
-    mob:setLocalVar("wyrmThree", randomWyrm[3])
-    mob:setLocalVar("wyrmFour", randomWyrm[4])
+    mob:setLocalVar('wyrmOne', randomWyrm[1])
+    mob:setLocalVar('wyrmTwo', randomWyrm[2])
+    mob:setLocalVar('wyrmThree', randomWyrm[3])
+    mob:setLocalVar('wyrmFour', randomWyrm[4])
 end
 
 entity.onMobEngaged = function(mob, target)
@@ -115,13 +115,13 @@ entity.onMobEngaged = function(mob, target)
 end
 
 entity.onMobFight = function(mob, target)
-    local flareTrigger = mob:getLocalVar("flareTrigger")
-    local addsSummoned = mob:getLocalVar("addsSummoned")
-    local summoning = mob:getLocalVar("summoning")
+    local flareTrigger = mob:getLocalVar('flareTrigger')
+    local addsSummoned = mob:getLocalVar('addsSummoned')
+    local summoning = mob:getLocalVar('summoning')
 
     for i = 1, #percents do
         if mob:getHPP() < percents[i] and flareTrigger < i then
-            mob:setLocalVar("flareTrigger", flareTrigger + 1)
+            mob:setLocalVar('flareTrigger', flareTrigger + 1)
         end
     end
 
@@ -129,7 +129,7 @@ entity.onMobFight = function(mob, target)
         -- Summon adds even when stunned (as the case on retail mobs as well)
         for i = 1, #adds do
             if mob:getHPP() < adds[i] and addsSummoned < i then
-                mob:setLocalVar("summoning", 1)
+                mob:setLocalVar('summoning', 1)
                 target:showText(mob, ID.text.BAHAMUT_TAUNT + 5)
 
                 -- show the wyrm call animation
@@ -146,11 +146,11 @@ entity.onMobFight = function(mob, target)
                 mob:timer(3000, function(mobArg)
                     if mobArg:isAlive() then
                         -- increment initially due to lua indexing starting from one
-                        local nextAddIndex = mob:getLocalVar("addsSummoned") + 1
-                        local wyrmOne = mob:getLocalVar("wyrmOne")
-                        local wyrmTwo = mob:getLocalVar("wyrmTwo")
-                        local wyrmThree = mob:getLocalVar("wyrmThree")
-                        local wyrmFour = mob:getLocalVar("wyrmFour")
+                        local nextAddIndex = mob:getLocalVar('addsSummoned') + 1
+                        local wyrmOne = mob:getLocalVar('wyrmOne')
+                        local wyrmTwo = mob:getLocalVar('wyrmTwo')
+                        local wyrmThree = mob:getLocalVar('wyrmThree')
+                        local wyrmFour = mob:getLocalVar('wyrmFour')
                         local wyrmOrder = { wyrmOne, wyrmTwo, wyrmThree, wyrmFour }
                         local wyrm = GetMobByID(wyrmOrder[nextAddIndex])
                         wyrm:spawn()
@@ -159,8 +159,8 @@ entity.onMobFight = function(mob, target)
                             wyrm:updateEnmity(bahaTarget)
                         end
 
-                        mobArg:setLocalVar("addsSummoned", nextAddIndex)
-                        mobArg:setLocalVar("summoning", 0)
+                        mobArg:setLocalVar('addsSummoned', nextAddIndex)
+                        mobArg:setLocalVar('summoning', 0)
                     end
                 end)
             end
@@ -170,24 +170,24 @@ entity.onMobFight = function(mob, target)
     if mob:canUseAbilities() then
         -- Megaflare
         if
-            mob:getLocalVar("megaFlareCount") < flareTrigger and
+            mob:getLocalVar('megaFlareCount') < flareTrigger and
             flareTrigger < 4
         then
             flare(mob, target, 0)
         -- Gigaflare
         elseif
-            mob:getLocalVar("gigaFlareCount") < flareTrigger and
+            mob:getLocalVar('gigaFlareCount') < flareTrigger and
             flareTrigger > 3
         then
-            mob:setLocalVar("flareQueued", 1)
+            mob:setLocalVar('flareQueued', 1)
             flare(mob, target, 1)
         -- Teraflare
         elseif
             mob:getHPP() < 10 and
-            mob:getLocalVar("TeraFlare") < 1 and
+            mob:getLocalVar('TeraFlare') < 1 and
             mob:checkDistance(target) <= 15
         then
-            mob:setLocalVar("flareQueued", 1)
+            mob:setLocalVar('flareQueued', 1)
             flare(mob, target, 2)
         end
     end
@@ -216,10 +216,10 @@ end
 entity.onMobWeaponSkill = function(target, mob, skill)
     -- pause auto attacks after tp move for about 9 sec
     mob:setAutoAttackEnabled(false)
-    mob:setLocalVar("autoOffSource", 1)
+    mob:setLocalVar('autoOffSource', 1)
     mob:timer(9000, function(mobArg)
         -- if auto attacks were turned off due to a tp move
-        if mob:getLocalVar("autoOffSource") == 1 then
+        if mob:getLocalVar('autoOffSource') == 1 then
             mob:setAutoAttackEnabled(true)
         end
     end)

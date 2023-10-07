@@ -63,7 +63,7 @@ zoneObject.onInitialize = function(zone)
 
     -- Give Ix'DRG a random placeholder by picking one of the four groups at random, then adding a random number of 0-2 for the specific mob.
     local groups = ID.mob.AWAERN_DRG_GROUPS
-    SetServerVariable("[SEA]IxAernDRG_PH", groups[math.random(1, #groups)] + math.random(0, 2))
+    SetServerVariable('[SEA]IxAernDRG_PH', groups[math.random(1, #groups)] + math.random(0, 2))
 
     xi.exp_controller.onInitialize(zone)
 
@@ -117,7 +117,7 @@ zoneObject.onZoneIn = function(player, prevZone)
     then
         player:setPos(-351.136, -2.25, -380, 253)
     end
-    player:setCharVar("Ru-Hmet-TP", 0)
+    player:setCharVar('Ru-Hmet-TP', 0)
 end
 
 local teleportEventsByArea =
@@ -202,12 +202,12 @@ end
 zoneObject.onEventFinish = function(player, csid, option, npc)
     if csid == 101 and option == 1 then
         player:setPos(540, -1, -499.900, 62, 36)
-        player:setCharVar("Ru-Hmet-TP", 0)
+        player:setCharVar('Ru-Hmet-TP', 0)
         for _, entry in pairs(player:getNotorietyList()) do
             entry:clearEnmity(player) -- reset hate on player after teleporting
         end
     elseif (csid > 149 and csid < 184) or csid == 102 or csid == 103 or csid == 101 then
-        player:setCharVar("Ru-Hmet-TP", 0)
+        player:setCharVar('Ru-Hmet-TP', 0)
         for _, entry in pairs(player:getNotorietyList()) do
             entry:clearEnmity(player) -- reset hate on player after teleporting
         end

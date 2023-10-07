@@ -5,10 +5,10 @@
 -- Valeriano's Troupe will offer their services in Jeuno
 -----------------------------------
 require("modules/module_utils")
-require("scripts/globals/zone")
+
 require("scripts/globals/shop")
-require("scripts/globals/items")
-require("scripts/globals/status")
+
+
 require("scripts/globals/npc_util")
 local customUtil = require("modules/custom/lua/custom_util")
 -----------------------------------
@@ -43,72 +43,72 @@ end
 
 local toolList =
 {
-    { xi.items.UCHITAKE,        xi.items.TOOLBAG_UCHITAKE        },
-    { xi.items.TSURARA,         xi.items.TOOLBAG_TSURARA         },
-    { xi.items.KAWAHORI_OGI,    xi.items.TOOLBAG_KAWAHORI_OGI    },
-    { xi.items.MAKIBISHI,       xi.items.TOOLBAG_MAKIBISHI       },
-    { xi.items.HIRAISHIN,       xi.items.TOOLBAG_HIRAISHIN       },
-    { xi.items.MIZU_DEPPO,      xi.items.TOOLBAG_MIZU_DEPPO      },
+    { xi.item.UCHITAKE,        xi.item.TOOLBAG_UCHITAKE        },
+    { xi.item.TSURARA,         xi.item.TOOLBAG_TSURARA         },
+    { xi.item.KAWAHORI_OGI,    xi.item.TOOLBAG_KAWAHORI_OGI    },
+    { xi.item.MAKIBISHI,       xi.item.TOOLBAG_MAKIBISHI       },
+    { xi.item.HIRAISHIN,       xi.item.TOOLBAG_HIRAISHIN       },
+    { xi.item.MIZU_DEPPO,      xi.item.TOOLBAG_MIZU_DEPPO      },
 
-    { xi.items.SHIHEI,          xi.items.TOOLBAG_SHIHEI          },
+    { xi.item.SHIHEI,          xi.item.TOOLBAG_SHIHEI          },
 
-    { xi.items.JUSATSU,         xi.items.TOOLBAG_JUSATSU         },
-    { xi.items.KAGINAWA,        xi.items.TOOLBAG_KAGINAWA        },
-    { xi.items.SAIRUI_RAN,      xi.items.TOOLBAG_SAIRUI_RAN      },
-    { xi.items.KODOKU,          xi.items.TOOLBAG_KODOKU          },
+    { xi.item.JUSATSU,         xi.item.TOOLBAG_JUSATSU         },
+    { xi.item.KAGINAWA,        xi.item.TOOLBAG_KAGINAWA        },
+    { xi.item.SAIRUI_RAN,      xi.item.TOOLBAG_SAIRUI_RAN      },
+    { xi.item.KODOKU,          xi.item.TOOLBAG_KODOKU          },
 
-    { xi.items.SHINOBI_TABI,    xi.items.TOOLBAG_SHINOBI_TABI    },
-    { xi.items.SANJAKU_TENUGUI, xi.items.TOOLBAG_SANJAKU_TENUGUI },
+    { xi.item.SHINOBI_TABI,    xi.item.TOOLBAG_SHINOBI_TABI    },
+    { xi.item.SANJAKU_TENUGUI, xi.item.TOOLBAG_SANJAKU_TENUGUI },
 }
 
 local ammoList =
 {
-    { xi.items.BEETLE_ARROW,    xi.items.BEETLE_QUIVER         },
-    { xi.items.HORN_ARROW,      xi.items.HORN_QUIVER           },
-    { xi.items.SCORPION_ARROW,  xi.items.SCORPION_QUIVER       },
-    { xi.items.DEMON_ARROW,     xi.items.DEMON_QUIVER          },
-    { xi.items.IRON_ARROW,      xi.items.IRON_QUIVER           },
-    { xi.items.SILVER_ARROW,    xi.items.SILVER_QUIVER         },
-    { xi.items.KABURA_ARROW,    xi.items.KABURA_QUIVER         },
-    { xi.items.SLEEP_ARROW,     xi.items.SLEEP_QUIVER          },
+    { xi.item.BEETLE_ARROW,    xi.item.BEETLE_QUIVER         },
+    { xi.item.HORN_ARROW,      xi.item.HORN_QUIVER           },
+    { xi.item.SCORPION_ARROW,  xi.item.SCORPION_QUIVER       },
+    { xi.item.DEMON_ARROW,     xi.item.DEMON_QUIVER          },
+    { xi.item.IRON_ARROW,      xi.item.IRON_QUIVER           },
+    { xi.item.SILVER_ARROW,    xi.item.SILVER_QUIVER         },
+    { xi.item.KABURA_ARROW,    xi.item.KABURA_QUIVER         },
+    { xi.item.SLEEP_ARROW,     xi.item.SLEEP_QUIVER          },
 
-    { xi.items.BLIND_BOLT,      xi.items.BLIND_BOLT_QUIVER     },
-    { xi.items.ACID_BOLT,       xi.items.ACID_BOLT_QUIVER      },
-    { xi.items.HOLY_BOLT,       xi.items.HOLY_BOLT_QUIVER      },
-    { xi.items.SLEEP_BOLT,      xi.items.SLEEP_BOLT_QUIVER     },
-    { xi.items.VENOM_BOLT,      xi.items.VENOM_BOLT_QUIVER     },
-    { xi.items.BLOODY_BOLT,     xi.items.BLOODY_BOLY_QUIVER    },
-    { xi.items.MYTHRIL_BOLT,    xi.items.MYTHRIL_BOLT_QUIVER   },
-    { xi.items.DARKSTEEL_BOLT,  xi.items.DARKSTEEL_BOLT_QUIVER },
+    { xi.item.BLIND_BOLT,      xi.item.BLIND_BOLT_QUIVER     },
+    { xi.item.ACID_BOLT,       xi.item.ACID_BOLT_QUIVER      },
+    { xi.item.HOLY_BOLT,       xi.item.HOLY_BOLT_QUIVER      },
+    { xi.item.SLEEP_BOLT,      xi.item.SLEEP_BOLT_QUIVER     },
+    { xi.item.VENOM_BOLT,      xi.item.VENOM_BOLT_QUIVER     },
+    { xi.item.BLOODY_BOLT,     xi.item.BLOODY_BOLY_QUIVER    },
+    { xi.item.MYTHRIL_BOLT,    xi.item.MYTHRIL_BOLT_QUIVER   },
+    { xi.item.DARKSTEEL_BOLT,  xi.item.DARKSTEEL_BOLT_QUIVER },
 
-    {  xi.items.BULLET,         xi.items.BULLET_POUCH          },
-    {  xi.items.BRONZE_BULLET,  xi.items.BRONZE_BULLET_POUCH   },
-    {  xi.items.IRON_BULLET,    xi.items.IRON_BULLET_POUCH     },
-    {  xi.items.SILVER_BULLET,  xi.items.SILVER_BULLET_POUCH   },
-    {  xi.items.STEEL_BULLET,   xi.items.STEEL_BULLET_POUCH    },
-    {  xi.items.SPARTAN_BULLET, xi.items.SPARTAN_BULLET_POUCH  },
+    {  xi.item.BULLET,         xi.item.BULLET_POUCH          },
+    {  xi.item.BRONZE_BULLET,  xi.item.BRONZE_BULLET_POUCH   },
+    {  xi.item.IRON_BULLET,    xi.item.IRON_BULLET_POUCH     },
+    {  xi.item.SILVER_BULLET,  xi.item.SILVER_BULLET_POUCH   },
+    {  xi.item.STEEL_BULLET,   xi.item.STEEL_BULLET_POUCH    },
+    {  xi.item.SPARTAN_BULLET, xi.item.SPARTAN_BULLET_POUCH  },
 
-    { xi.items.FIRE_CARD,       xi.items.FIRE_CARD_CASE        },
-    { xi.items.ICE_CARD,        xi.items.ICE_CARD_CASE         },
-    { xi.items.WIND_CARD,       xi.items.WIND_CARD_CASE        },
-    { xi.items.EARTH_CARD,      xi.items.EARTH_CARD_CASE       },
-    { xi.items.THUNDER_CARD,    xi.items.THUNDER_CARD_CASE     },
-    { xi.items.WATER_CARD,      xi.items.WATER_CARD_CASE       },
-    { xi.items.LIGHT_CARD,      xi.items.LIGHT_CARD_CASE       },
-    { xi.items.DARK_CARD,       xi.items.DARK_CARD_CASE        },
+    { xi.item.FIRE_CARD,       xi.item.FIRE_CARD_CASE        },
+    { xi.item.ICE_CARD,        xi.item.ICE_CARD_CASE         },
+    { xi.item.WIND_CARD,       xi.item.WIND_CARD_CASE        },
+    { xi.item.EARTH_CARD,      xi.item.EARTH_CARD_CASE       },
+    { xi.item.THUNDER_CARD,    xi.item.THUNDER_CARD_CASE     },
+    { xi.item.WATER_CARD,      xi.item.WATER_CARD_CASE       },
+    { xi.item.LIGHT_CARD,      xi.item.LIGHT_CARD_CASE       },
+    { xi.item.DARK_CARD,       xi.item.DARK_CARD_CASE        },
 }
 
 local valerianoShop = function(player, npc)
     local stock =
     {
-        xi.items.GINGER_COOKIE,                  10,
-        xi.items.FLUTE,                          43,
-        xi.items.PICCOLO,                       990,
-        xi.items.SCROLL_OF_SCOPS_OPERETTA,      585,
-        xi.items.SCROLL_OF_PUPPETS_OPERETTA,  16920,
-        xi.items.SCROLL_OF_FOWL_AUBADE,        2916,
-        xi.items.SCROLL_OF_ADVANCING_MARCH,    2059,
-        xi.items.SCROLL_OF_GODDESS_HYMNUS,    90000,
+        xi.item.GINGER_COOKIE,                  10,
+        xi.item.FLUTE,                          43,
+        xi.item.PICCOLO,                       990,
+        xi.item.SCROLL_OF_SCOPS_OPERETTA,      585,
+        xi.item.SCROLL_OF_PUPPETS_OPERETTA,  16920,
+        xi.item.SCROLL_OF_FOWL_AUBADE,        2916,
+        xi.item.SCROLL_OF_ADVANCING_MARCH,    2059,
+        xi.item.SCROLL_OF_GODDESS_HYMNUS,    90000,
     }
 
     xi.shop.general(player, stock, xi.quest.fame_area.JEUNO)
@@ -252,7 +252,7 @@ local troupe =
         look         = "0x0100000700100020003000400050006000700000",
         animation    = 47,
         animationSub = 0,
-        tradeItem    = xi.items.CARNATION,
+        tradeItem    = xi.item.CARNATION,
         tradeList    = ammoList,
         onTrade      = bundleTrade,
 
@@ -303,7 +303,7 @@ local troupe =
         look         = "0x0000920000000000000000000000000000000000",
         animation    = 0,
         animationSub = 2,
-        tradeItem    = xi.items.WIJNRUIT,
+        tradeItem    = xi.item.WIJNRUIT,
         tradeList    = toolList,
         onTrade      = bundleTrade,
 

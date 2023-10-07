@@ -1,7 +1,7 @@
 -----------------------------------
 -- ID: 14665
 -- Teleport ring: Yhoat
--- Enchantment: "Teleport-Yhoat"
+-- Enchantment: 'Teleport-Yhoat'
 -----------------------------------
 local itemObject = {}
 

@@ -5,12 +5,12 @@
 -- ???: !pos -179 8 254
 -----------------------------------
 require('scripts/globals/common')
-require('scripts/globals/items')
-require('scripts/globals/keyitems')
+
+
 require('scripts/globals/npc_util')
 require('scripts/globals/quests')
-require('scripts/globals/titles')
-require('scripts/globals/zone')
+
+
 require('scripts/globals/interaction/quest')
 -----------------------------------
 
@@ -18,7 +18,7 @@ local quest = Quest:new(xi.quest.log_id.OTHER_AREAS, xi.quest.id.otherAreas.WAKI
 
 quest.reward =
 {
-    item = xi.items.CARBUNCLES_POLE,
+    item = xi.item.CARBUNCLES_POLE,
 }
 
 quest.sections =
@@ -62,7 +62,7 @@ quest.sections =
             {
                 [208] = function(player, csid, option, npc)
                     if quest:complete(player) then
-                        quest:setVar(player, 'Stage', getConquestTally())
+                        quest:setVar(player, 'Stage', NextConquestTally())
                         player:delKeyItem(xi.ki.FADED_RUBY)
 
                         if quest:getVar(player, 'Option') == 0 then
@@ -79,7 +79,7 @@ quest.sections =
     {
         check = function(player, status, vars)
             return status == QUEST_COMPLETED and
-            quest:getVar(player, 'Option') < getConquestTally()
+            quest:getVar(player, 'Option') < NextConquestTally()
         end,
 
         [xi.zone.LA_THEINE_PLATEAU] =
@@ -89,7 +89,7 @@ quest.sections =
                 onTrigger = function(player, npc)
                     if player:hasKeyItem(xi.ki.FADED_RUBY) then
                         return quest:progressEvent(208)
-                    elseif quest:getVar(player, 'Option') < getConquestTally() then
+                    elseif quest:getVar(player, 'Option') < NextConquestTally() then
                         return quest:progressEvent(207)
                     end
                 end,
@@ -103,7 +103,7 @@ quest.sections =
 
                 [208] = function(player, csid, option, npc)
                     if quest:complete(player) then
-                        quest:setVar(player, 'Stage', getConquestTally())
+                        quest:setVar(player, 'Stage', NextConquestTally())
                         player:delKeyItem(xi.ki.FADED_RUBY)
 
                         if quest:getVar(player, 'Option') == 0 then

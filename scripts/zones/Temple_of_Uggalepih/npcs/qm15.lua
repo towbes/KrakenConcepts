@@ -14,8 +14,8 @@ end
 entity.onTrigger = function(player, npc)
     local pet = player:getPet()
     if
-        player:getCharVar("KnightStalker_Progress") == 4 and
-        player:getCharVar("KnightStalker_Kill") == 0 and
+        player:getCharVar('KnightStalker_Progress') == 4 and
+        player:getCharVar('KnightStalker_Kill') == 0 and
         (player:getMainJob() == xi.job.DRG or
         player:getSubJob() == xi.job.DRG) and --Umeboshi
         pet and

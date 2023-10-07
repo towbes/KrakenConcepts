@@ -16,15 +16,15 @@ end
 mobskillObject.onMobWeaponSkill = function(target, mob, skill)
     local dmgmod = 1
     
-    if mob:getLocalVar("itemDebuff_Root") == 1 then
+    if mob:getLocalVar('itemDebuff_Root') == 1 then
         dmgmod = 5
     end
 
-    if mob:getLocalVar("itemDebuff_Root") == 0 and mob:getName() == "Arch_Christelle" then
+    if mob:getLocalVar('itemDebuff_Root') == 0 and mob:getName() == 'Arch_Christelle' then
         dmgmod = 2
     end
 
-    local info = xi.mobskills.mobMagicalMove(mob, target, skill, mob:getWeaponDmg() * 3, xi.magic.ele.DARK, dmgmod, xi.mobskills.magicalTpBonus.NO_EFFECT)
+    local info = xi.mobskills.mobMagicalMove(mob, target, skill, mob:getWeaponDmg() * 3, xi.element.DARK, dmgmod, xi.mobskills.magicalTpBonus.NO_EFFECT)
     local dmg = xi.mobskills.mobFinalAdjustments(info.dmg, mob, skill, target, xi.attackType.MAGICAL, xi.damageType.DARK, xi.mobskills.shadowBehavior.NUMSHADOWS_1)
 
     skill:setMsg(xi.mobskills.mobPhysicalDrainMove(mob, target, skill, xi.mobskills.drainType.HP, dmg))

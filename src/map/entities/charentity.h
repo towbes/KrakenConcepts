@@ -50,7 +50,6 @@ along with this program.  If not, see http://www.gnu.org/licenses/
 
 class CItemWeapon;
 class CTrustEntity;
-class CFellowEntity;
 
 struct jobs_t
 {
@@ -194,14 +193,6 @@ struct PetInfo_t
     int16    petHP;
     int16    petMP;
     float    petTP;
-};
-
-struct FellowInfo_t
-{
-    bool  respawnFellow; // used for spawning fellow on zone
-    uint8 fellowID;      // id
-    int16 fellowHP;      // fellow hp
-    int16 fellowMP;      // fellow mp
 };
 
 struct AuctionHistory_t
@@ -359,12 +350,6 @@ public:
     uint32 m_claimedDeeds[5]{};
     uint32 m_uniqueEvents[5]{};
 
-    FellowInfo_t      fellowZoningInfo;                // used to repawn fellows on zone
-    void              setFellowZoningInfo();           // set fellow zoning info (when zoning and logging out)
-    void              resetFellowZoningInfo();         // reset fellow zoning info (when changing job ect)
-    time_point        m_nextDataSave;                  // Sets the next point to save to the DB.
-    CFellowEntity* m_PFellow;             // Player's Fellow
-
     UnlockedAttachments_t m_unlockedAttachments{}; // Unlocked Automaton Attachments (1 bit per attachment)
     CAutomatonEntity*     PAutomaton;              // Automaton statistics
 
@@ -494,7 +479,6 @@ public:
     bool   m_jobMasterDisplay; // Job Master Stars display
     uint32 m_moghouseID;
     uint16 m_moghancementID;
-    uint32 m_pixieHate;
 
     CharHistory_t m_charHistory;
 
@@ -540,7 +524,6 @@ public:
     bool ReloadParty() const;
     void ClearTrusts();
     void RemoveTrust(CTrustEntity*);
-    void RemoveFellow();
 
     void RequestPersist(CHAR_PERSIST toPersist);
     bool PersistData();
@@ -579,7 +562,6 @@ public:
     void UpdateMoghancement();
     bool hasMoghancement(uint16 moghancementID) const;
     void SetMoghancement(uint16 moghancementID);
-    void SetPixieHate(uint32 pixieHate);
 
     /* State callbacks */
     virtual bool           CanAttack(CBattleEntity* PTarget, std::unique_ptr<CBasicPacket>& errMsg) override;

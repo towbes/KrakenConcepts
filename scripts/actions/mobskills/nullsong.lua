@@ -7,10 +7,10 @@
 --  Range: 15' radial
 --  Notes:
 ---------------------------------------------
-require("scripts/globals/mobskills")
-require("scripts/globals/settings")
-require("scripts/globals/status")
-require("scripts/globals/msg")
+
+
+
+
 -----------------------------------
 local mobskillObject = {}
 
@@ -18,7 +18,7 @@ mobskillObject.onMobSkillCheck = function(target, mob, skill)
     if
         -- can only use if not silenced
         mob:getMainJob() == xi.job.BRD or
-        mob:getName() == "Arch_Angra_Mainyu" and
+        mob:getName() == 'Arch_Angra_Mainyu' and
         not mob:hasStatusEffect(xi.effect.SILENCE)
     then
         return 0

@@ -2,14 +2,10 @@
 -- Camisado
 -- Deals damage to a single target. Additional effect: Knockback
 -- -------------------------------------------
-require("scripts/globals/settings")
-require("scripts/globals/status")
-require("scripts/globals/mobskills")
--- -------------------------------------------
 local mobskillObject = {}
 
 mobskillObject.onMobSkillCheck = function(target, mob, skill)
-    if mob:getName() == "Diabolos_Umbra" then
+    if mob:getName() == 'Diabolos_Umbra' then
         skill:setAoE(1)
     end
     return 0
@@ -20,7 +16,7 @@ mobskillObject.onMobWeaponSkill = function(target, mob, skill)
     local accmod = 1
     local dmgmod = 1
 
-    if mob:getName() == "Diabolos_Umbra" then
+    if mob:getName() == 'Diabolos_Umbra' then
         dmgmod = 2
     end
 

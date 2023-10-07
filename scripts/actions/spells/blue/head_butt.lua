@@ -1,6 +1,6 @@
 -----------------------------------
 -- Spell: Head Butt
--- Damage varies with TP. Additional effect: "Stun"
+-- Damage varies with TP. Additional effect: 'Stun'
 -- Spell cost: 12 MP
 -- Monster Type: Beastmen
 -- Spell Type: Physical (Blunt)

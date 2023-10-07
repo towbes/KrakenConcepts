@@ -22,7 +22,7 @@ entity.onMobWeaponSkill = function(target, mob, skill)
         mob:setLocalVar('stormwindDamage', stormwindCounter) -- extra var for dmg calculation (in stormwind.lua)
 
         if stormwindCounter > 2 then
-            mob:setLocalVar("stormwindCounter", 0)
+            mob:setLocalVar('stormwindCounter', 0)
         elseif mob:checkDistance(target) < 6 then
             mob:useMobAbility(926)
         end

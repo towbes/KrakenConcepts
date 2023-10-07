@@ -10,7 +10,7 @@ entity.onTrade = function(player, npc, trade)
 end
 
 entity.onTrigger = function(player, npc)
-    local chasingQuotasStatus = player:getCharVar("ChasingQuotas_Progress")
+    local chasingQuotasStatus = player:getCharVar('ChasingQuotas_Progress')
 
     if chasingQuotasStatus == 3 then
         player:startEvent(264) -- Someone was just asking about that earring.

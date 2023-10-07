@@ -21,9 +21,9 @@ end
 
 entity.onTrigger = function(player, npc)
     if player:getQuestStatus(xi.quest.log_id.OTHER_AREAS, xi.quest.id.otherAreas.ONLY_THE_BEST) == QUEST_AVAILABLE then
-        player:startEvent(60, 4366, 629, xi.item.CLUMP_OF_BOYAHDA_MOSS) -- Start quest "Only the Best"
+        player:startEvent(60, 4366, 629, xi.item.CLUMP_OF_BOYAHDA_MOSS) -- Start quest 'Only the Best'
     else
-        player:startEvent(61, 4366, 629, xi.item.CLUMP_OF_BOYAHDA_MOSS) -- During & after completed quest "Only the Best"
+        player:startEvent(61, 4366, 629, xi.item.CLUMP_OF_BOYAHDA_MOSS) -- During & after completed quest 'Only the Best'
     end
 end
 

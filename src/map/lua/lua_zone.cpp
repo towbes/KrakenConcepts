@@ -435,6 +435,7 @@ sol::table CLuaZone::queryEntitiesByName(std::string const& name)
     return table;
 }
 
+//======================================================//
 
 void CLuaZone::Register()
 {
@@ -470,7 +471,6 @@ void CLuaZone::Register()
     SOL_REGISTER("setBackgroundMusicNight", CLuaZone::setBackgroundMusicNight);
 
     SOL_REGISTER("queryEntitiesByName", CLuaZone::queryEntitiesByName);
-
 }
 
 std::ostream& operator<<(std::ostream& os, const CLuaZone& zone)

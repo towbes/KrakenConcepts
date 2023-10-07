@@ -1,6 +1,7 @@
 -----------------------------------
 -- Zone: Giddeus (145)
 -----------------------------------
+local ID = zones[xi.zone.GIDDEUS]
 local zoneObject = {}
 
 zoneObject.onInitialize = function(zone)

@@ -489,7 +489,7 @@ function applyResistanceEffect(caster, target, spell, params)
     local effect = params.effect
     local family = spell:getSpellFamily()
 
-    if effect ~= nil then -- Dispel's script doesn't have an "effect" to send here, nor should it.
+    if effect ~= nil then -- Dispel's script doesn't have an 'effect' to send here, nor should it.
         -- If Stymie is active, as long as the mob is not immune then the effect is not resisted
         if
             skill == xi.skill.ENFEEBLING_MAGIC and
@@ -887,7 +887,7 @@ function addBonuses(caster, spell, target, dmg, params)
     local burst = calculateMagicBurst(caster, spell, target, params)
 
     if burst > 1.0 then
-        spell:setMsg(spell:getMagicBurstMessage()) -- "Magic Burst!"
+        spell:setMsg(spell:getMagicBurstMessage()) -- 'Magic Burst!'
 
         caster:triggerRoeEvent(xi.roeTrigger.MAGIC_BURST)
     end

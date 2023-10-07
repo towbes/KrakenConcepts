@@ -4,45 +4,45 @@
 -- Author: Spaceballs
 --   Note: Pet of Nosferatu
 -----------------------------------
-mixins = {require("scripts/mixins/job_special")}
-require("scripts/globals/status")
+mixins = {require('scripts/mixins/job_special')}
+
 -----------------------------------
 local entity = {}
-local ID = require("scripts/zones/Aydeewa_Subterrane/IDs")
+local ID = zones[xi.zone.AYDEEWA_SUBTERRANE]
 
 entity.onMobSpawn = function(mob)
     mob:setAutoAttackEnabled(false)
-    mob:setLocalVar("time2die", os.time() + 6 )
-    mob:setLocalVar("ws", os.time() + 2 )
-    mob:setLocalVar("hit", 0 )
+    mob:setLocalVar('time2die', os.time() + 6 )
+    mob:setLocalVar('ws', os.time() + 2 )
+    mob:setLocalVar('hit', 0 )
 end    
 
 entity.onMobFight = function(mob, target)
-    if os.time() >= mob:getLocalVar("time2die") then
+    if os.time() >= mob:getLocalVar('time2die') then
         DespawnMob(mob:getID())
     end
-    if os.time() >=mob:getLocalVar("ws") and mob:getLocalVar("hit") == 0 then
-        if mob:getLocalVar("AF") == 1 then
+    if os.time() >=mob:getLocalVar('ws') and mob:getLocalVar('hit') == 0 then
+        if mob:getLocalVar('AF') == 1 then
             mob:useMobAbility(470) -- methane breath
         else
             mob:useMobAbility(468) -- Dirty claw
         end
-        mob:setLocalVar("hit", 1 )
+        mob:setLocalVar('hit', 1 )
     end
 end
 
 -- Death stuff
 entity.onMobDeath = function(mob, player, isKiller)
-    if mob:getLocalVar("AF") == 1 then
-        GetMobByID(ID.mob.NOSFERATU):setLocalVar("AF", 3)
-        mob:setLocalVar("AF", 0) 
+    if mob:getLocalVar('AF') == 1 then
+        GetMobByID(ID.mob.NOSFERATU):setLocalVar('AF', 3)
+        mob:setLocalVar('AF', 0) 
     end
 end
 
 entity.onMobDespawn = function(mob)
-    if mob:getLocalVar("AF") == 1 then
-        GetMobByID(ID.mob.NOSFERATU):setLocalVar("AF", 3)
-        mob:setLocalVar("AF", 0) 
+    if mob:getLocalVar('AF') == 1 then
+        GetMobByID(ID.mob.NOSFERATU):setLocalVar('AF', 3)
+        mob:setLocalVar('AF', 0) 
     end
 end
 

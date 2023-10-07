@@ -1,24 +1,24 @@
 -----------------------------------
 -- Empty mob ecosystem mixin
 -----------------------------------
-require("scripts/globals/mixins")
-require("scripts/globals/status")
+require('scripts/globals/mixins')
+
 -----------------------------------
 
 g_mixins = g_mixins or {}
 
 local setModel = function(mob, skin)
     -- Strays in Vahzl can also spawn as Weeper and Seether models
-    if mob:getZone():getID() == xi.zone.PROMYVION_VAHZL and mob:getName() == "Stray" then
+    if mob:getZone():getID() == xi.zone.PROMYVION_VAHZL and mob:getName() == 'Stray' then
         local chance = math.random(1, 10)
         if chance == 1 then -- Weeper
-            mob:setLocalVar("strayType", 1)
+            mob:setLocalVar('strayType', 1)
             mob:setMobMod(xi.mobMod.SKILL_LIST, 256)
         elseif chance == 2 then -- Seether
-            mob:setLocalVar("strayType", 2)
+            mob:setLocalVar('strayType', 2)
             mob:setMobMod(xi.mobMod.SKILL_LIST, 220)
         else -- Stray
-            mob:setLocalVar("strayType", 3)
+            mob:setLocalVar('strayType', 3)
             mob:setMobMod(xi.mobMod.SKILL_LIST, 255)
         end
     end
@@ -36,14 +36,14 @@ local setModel = function(mob, skin)
     end
 
     -- Set model depending on mob family
-    if mob:getFamily() == 255 or (mob:getFamily() == 499 and mob:getLocalVar("strayType") == 3) then -- Wanderer/Stray
+    if mob:getFamily() == 255 or (mob:getFamily() == 499 and mob:getLocalVar('strayType') == 3) then -- Wanderer/Stray
         if model == 4 then
             model = model + 1
         end
         mob:setModelId(1105 + model)
-    elseif mob:getFamily() == 256 or (mob:getFamily() == 499 and mob:getLocalVar("strayType") == 1) then -- Weeper / Stray
+    elseif mob:getFamily() == 256 or (mob:getFamily() == 499 and mob:getLocalVar('strayType') == 1) then -- Weeper / Stray
         mob:setModelId(1111 + model)
-    elseif mob:getFamily() == 220 or (mob:getFamily() == 499 and mob:getLocalVar("strayType") == 2) then -- Seether / Stray
+    elseif mob:getFamily() == 220 or (mob:getFamily() == 499 and mob:getLocalVar('strayType') == 2) then -- Seether / Stray
         if model > 1 then
             model = model + 1
         end
@@ -64,10 +64,10 @@ local setModel = function(mob, skin)
 end
 
 g_mixins.families.empty = function(emptyMob)
-    emptyMob:addListener("SPAWN", "EMPTY_SPAWN", function(mob)
+    emptyMob:addListener('SPAWN', 'EMPTY_SPAWN', function(mob)
         -- Dark > Water > Lightning > Earth > Light > Fire > Ice > Wind
         local skin = math.random(1, 8)
-        mob:setLocalVar("skin", skin)
+        mob:setLocalVar('skin', skin)
 
         -- Set elemental resistances
         -- Currently bugged, mods cannot be set on spawn through a listener
@@ -122,8 +122,8 @@ g_mixins.families.empty = function(emptyMob)
         setModel(mob, skin)
     end)
 
-    emptyMob:addListener("ROAM_TICK", "EMPTY_ROAM_TICK", function(mob)
-        local skin = mob:getLocalVar("skin")
+    emptyMob:addListener('ROAM_TICK', 'EMPTY_ROAM_TICK', function(mob)
+        local skin = mob:getLocalVar('skin')
         if skin % 2 == 0 and mob:getAnimationSub() ~= 2 then
             mob:setAnimationSub(2)
         elseif skin % 2 ~= 0 and mob:getAnimationSub() ~= 1 then
@@ -131,44 +131,44 @@ g_mixins.families.empty = function(emptyMob)
         end
 
         -- Temporary solution until mods on spawn issue is corrected
-        local buffed = mob:getLocalVar("buffed")
+        local buffed = mob:getLocalVar('buffed')
         if skin == 1 and buffed == 0 then -- Dark
             mob:setMod(xi.mod.DARK_MEVA, 99)
             mob:setMod(xi.mod.SLEEPRES, 90)
             mob:setMod(xi.mod.LIGHT_MEVA, -27)
-            mob:setLocalVar("buffed", 1)
+            mob:setLocalVar('buffed', 1)
         elseif skin == 2 and buffed == 0 then -- Water
             mob:setMod(xi.mod.FIRE_MEVA, 80)
             mob:setMod(xi.mod.WATER_MEVA, 99)
             mob:setMod(xi.mod.POISONRES, 90)
             mob:setMod(xi.mod.THUNDER_MEVA, -27)
-            mob:setLocalVar("buffed", 1)
+            mob:setLocalVar('buffed', 1)
         elseif skin == 3 and buffed == 0 then -- Lightning
             mob:setMod(xi.mod.WATER_MEVA, 80)
             mob:setMod(xi.mod.POISONRES, 90)
             mob:setMod(xi.mod.THUNDER_MEVA, 99)
             mob:setMod(xi.mod.STUNRES, 90)
             mob:setMod(xi.mod.EARTH_MEVA, -27)
-            mob:setLocalVar("buffed", 1)
+            mob:setLocalVar('buffed', 1)
         elseif skin == 4 and buffed == 0 then -- Earth
             mob:setMod(xi.mod.THUNDER_MEVA, 80)
             mob:setMod(xi.mod.STUNRES, 90)
             mob:setMod(xi.mod.EARTH_MEVA, 99)
             mob:setMod(xi.mod.SLOWRES, 90)
             mob:setMod(xi.mod.WIND_MEVA, -27)
-            mob:setLocalVar("buffed", 1)
+            mob:setLocalVar('buffed', 1)
         elseif skin == 5 and buffed == 0 then -- Light
             mob:setMod(xi.mod.LIGHT_MEVA, 99)
             mob:setMod(xi.mod.LULLABYRES, 90)
             mob:setMod(xi.mod.DARK_MEVA, -27)
-            mob:setLocalVar("buffed", 1)
+            mob:setLocalVar('buffed', 1)
         elseif skin == 6 and buffed == 0 then -- Fire
             mob:setMod(xi.mod.ICE_MEVA, 80)
             mob:setMod(xi.mod.PARALYZERES, 90)
             mob:setMod(xi.mod.BINDRES, 90)
             mob:setMod(xi.mod.FIRE_MEVA, 99)
             mob:setMod(xi.mod.WATER_MEVA, -27)
-            mob:setLocalVar("buffed", 1)
+            mob:setLocalVar('buffed', 1)
         elseif skin == 7 and buffed == 0 then -- Ice
             mob:setMod(xi.mod.WIND_MEVA, 80)
             mob:setMod(xi.mod.GRAVITYRES, 90)
@@ -177,7 +177,7 @@ g_mixins.families.empty = function(emptyMob)
             mob:setMod(xi.mod.PARALYZERES, 90)
             mob:setMod(xi.mod.BINDRES, 90)
             mob:setMod(xi.mod.FIRE_MEVA, -27)
-            mob:setLocalVar("buffed", 1)
+            mob:setLocalVar('buffed', 1)
         elseif buffed == 0 then -- Wind
             mob:setMod(xi.mod.EARTH_MEVA, 80)
             mob:setMod(xi.mod.SLOWRES, 90)
@@ -185,7 +185,7 @@ g_mixins.families.empty = function(emptyMob)
             mob:setMod(xi.mod.GRAVITYRES, 90)
             mob:setMod(xi.mod.SILENCERES, 90)
             mob:setMod(xi.mod.ICE_MEVA, -27)
-            mob:setLocalVar("buffed", 1)
+            mob:setLocalVar('buffed', 1)
         end
     end)
 end

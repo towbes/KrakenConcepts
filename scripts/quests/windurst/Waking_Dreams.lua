@@ -6,12 +6,12 @@
 -- Tools:
 --  !addquest 2 93
 -----------------------------------
-local ID = require("scripts/zones/Windurst_Waters/IDs")
+local ID = zones[xi.zone.WINDURST_WATERS]
 require('scripts/globals/interaction/quest')
-require('scripts/globals/keyitems')
+
 require('scripts/globals/npc_util')
 require('scripts/globals/quests')
-require('scripts/globals/zone')
+
 -----------------------------------
 
 local quest = Quest:new(xi.quest.log_id.WINDURST, xi.quest.id.windurst.WAKING_DREAMS)
@@ -53,17 +53,17 @@ quest.sections =
                     -- TODO: Options still appear even if player has the item or spell
                     if player:hasKeyItem(xi.ki.WHISPER_OF_DREAMS) then
                         local availRewards = 0
-                            + (player:hasItem(xi.items.DIABOLOSS_POLE) and 1 or 0)    -- Diabolos's Pole
-                            + (player:hasItem(xi.items.DIABOLOSS_EARRING) and 2 or 0) -- Diabolos's Earring
-                            + (player:hasItem(xi.items.DIABOLOSS_RING) and 4 or 0)    -- Diabolos's Ring
-                            + (player:hasItem(xi.items.DIABOLOSS_TORQUE) and 8 or 0)  -- Diabolos's Torque
+                            + (player:hasItem(xi.item.DIABOLOSS_POLE) and 1 or 0)    -- Diabolos's Pole
+                            + (player:hasItem(xi.item.DIABOLOSS_EARRING) and 2 or 0) -- Diabolos's Earring
+                            + (player:hasItem(xi.item.DIABOLOSS_RING) and 4 or 0)    -- Diabolos's Ring
+                            + (player:hasItem(xi.item.DIABOLOSS_TORQUE) and 8 or 0)  -- Diabolos's Torque
                             + (player:hasSpell(304) and 32 or 16) -- Pact or gil
 
                         return quest:progressEvent(920,
-                            xi.items.DIABOLOSS_POLE,
-                            xi.items.DIABOLOSS_EARRING,
-                            xi.items.DIABOLOSS_RING,
-                            xi.items.DIABOLOSS_TORQUE,
+                            xi.item.DIABOLOSS_POLE,
+                            xi.item.DIABOLOSS_EARRING,
+                            xi.item.DIABOLOSS_RING,
+                            xi.item.DIABOLOSS_TORQUE,
                             { availRewards })
                     end
                 end,
@@ -75,17 +75,17 @@ quest.sections =
                     quest.reward.item = nil
                     quest.reward.gil = nil
                     
-                    if option == 1 and not player:hasItem(xi.items.DIABOLOSS_POLE) then
-                        quest.reward.item = xi.items.DIABOLOSS_POLE
+                    if option == 1 and not player:hasItem(xi.item.DIABOLOSS_POLE) then
+                        quest.reward.item = xi.item.DIABOLOSS_POLE
 
-                    elseif option == 2 and not player:hasItem(xi.items.DIABOLOSS_EARRING) then
-                        quest.reward.item = xi.items.DIABOLOSS_EARRING
+                    elseif option == 2 and not player:hasItem(xi.item.DIABOLOSS_EARRING) then
+                        quest.reward.item = xi.item.DIABOLOSS_EARRING
 
-                    elseif option == 3 and not player:hasItem(xi.items.DIABOLOSS_RING) then
-                        quest.reward.item = xi.items.DIABOLOSS_RING
+                    elseif option == 3 and not player:hasItem(xi.item.DIABOLOSS_RING) then
+                        quest.reward.item = xi.item.DIABOLOSS_RING
 
-                    elseif option == 4 and not player:hasItem(xi.items.DIABOLOSS_TORQUE) then
-                        quest.reward.item = xi.items.DIABOLOSS_TORQUE
+                    elseif option == 4 and not player:hasItem(xi.item.DIABOLOSS_TORQUE) then
+                        quest.reward.item = xi.item.DIABOLOSS_TORQUE
 
                     elseif option == 5 then
                         quest.reward.gil = 15000

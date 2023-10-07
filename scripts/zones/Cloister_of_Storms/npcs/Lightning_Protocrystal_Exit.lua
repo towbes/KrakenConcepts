@@ -2,7 +2,7 @@
 -- Area: Cloister of Storms
 --  NPC: Lightning Protocrystal
 -----------------------------------
-require("scripts/globals/bcnm")
+require('scripts/globals/bcnm')
 -----------------------------------
 local entity = {}
 

@@ -7,21 +7,21 @@
 -- Ondieulix   : !pos 6 -25 65
 -- ???         : !pos -210 -15 274
 -----------------------------------
-require('scripts/globals/items')
-require('scripts/globals/keyitems')
+
+
 require('scripts/globals/npc_util')
 require('scripts/globals/quests')
-require('scripts/globals/titles')
-require('scripts/globals/zone')
+
+
 require('scripts/globals/interaction/quest')
 -----------------------------------
-local ID = require("scripts/zones/Lufaise_Meadows/IDs")
+local ID = zones[xi.zone.LUFAISE_MEADOWS]
 -----------------------------------
 local quest = Quest:new(xi.quest.log_id.OTHER_AREAS, xi.quest.id.otherAreas.PETALS_FOR_PARELBRIAUX)
 
 quest.reward =
 {
-    item = xi.items.POWERFUL_ROPE,
+    item = xi.item.POWERFUL_ROPE,
     title = xi.title.PUTRID_PURVEYOR_OF_PUNGENT_PETALS,
 }
 

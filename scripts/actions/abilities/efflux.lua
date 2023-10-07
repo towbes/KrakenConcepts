@@ -1,6 +1,6 @@
 -----------------------------------
 -- Ability: Efflux
--- Description: If the next spell you cast is a "physical" Blue magic spell, a TP bonus will be granted.
+-- Description: If the next spell you cast is a 'physical' Blue magic spell, a TP bonus will be granted.
 -- Obtained: BLU Level 83
 -- Recast Time: 00:03:00
 -- Duration: 00:01:00 or first blue magic cast

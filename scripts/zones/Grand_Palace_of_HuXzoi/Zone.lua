@@ -73,7 +73,7 @@ end
 
 zoneObject.onEventFinish = function(player, csid, option, npc)
     if csid >= 150 and csid <= 159 then
-        player:setLocalVar("Hu-Xzoi-TP", 0)
+        player:setLocalVar('Hu-Xzoi-TP', 0)
         
         -- Wipe hate through teleporters
         for _, entry in pairs(player:getNotorietyList()) do

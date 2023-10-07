@@ -6,12 +6,12 @@
 cmdprops =
 {
     permission = 1,
-    parameters = "is"
+    parameters = 'is'
 }
 
 function error(player, msg)
     player:PrintToPlayer(msg)
-    player:PrintToPlayer("!gettp (player)")
+    player:PrintToPlayer('!gettp (player)')
 end
 
 function onTrigger(player, tp, target)
@@ -22,7 +22,7 @@ function onTrigger(player, tp, target)
     if target then
         targ = GetPlayerByName(target)
         if not targ then
-            error(player, string.format("Player named '%s' not found!", target))
+            error(player, string.format('Player named '%s' not found!', target))
             return
         end
     elseif cursorTarget and not cursorTarget:isNPC() then
@@ -40,9 +40,9 @@ function onTrigger(player, tp, target)
         end
 
         if targ:getID() ~= player:getID() then
-            player:PrintToPlayer(string.format("%s's TP is %i.", targ:getName(), targ:getTP()))
+            player:PrintToPlayer(string.format('%s's TP is %i.', targ:getName(), targ:getTP()))
         end
     else
-        player:PrintToPlayer(string.format("%s is currently dead.", targ:getName()))
+        player:PrintToPlayer(string.format('%s is currently dead.', targ:getName()))
     end
 end

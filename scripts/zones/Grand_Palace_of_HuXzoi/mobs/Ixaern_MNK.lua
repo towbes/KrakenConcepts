@@ -32,7 +32,7 @@ local bracerMode = function(mob, qnAern1, qnAern2)
 
     -- slightly delay adding local var to avoid adding bracers to Ix'Mnk while Hundred Fists is still active.
     mob:timer(3000, function(mobArg)
-        mobArg:setLocalVar("enableBracers", 1)
+        mobArg:setLocalVar('enableBracers', 1)
     end)
 end
 
@@ -49,7 +49,7 @@ end
 
 entity.onMobSpawn = function(mob)
     mob:setAnimationSub(1) -- Reset the subanim - otherwise it will respawn with bracers on. Note that Aerns are never actually supposed to be in subanim 0.
-    mob:setLocalVar("enableBracers", 0)
+    mob:setLocalVar('enableBracers', 0)
 end
 
 entity.onMobFight = function(mob, target)
@@ -58,13 +58,13 @@ entity.onMobFight = function(mob, target)
     local qnAern1 = GetMobByID(ID.mob.IXAERN_MNK + 1)
     local qnAern2 = GetMobByID(ID.mob.IXAERN_MNK + 2)
 
-    if mob:getLocalVar("BracerMode") == 0 then
+    if mob:getLocalVar('BracerMode') == 0 then
         if
             mob:getHPP() < 60 or
             qnAern1:isAlive() and qnAern1:getHPP() < 60 or
             qnAern2:isAlive() and qnAern2:getHPP() < 60
         then -- If any of the three mobs gets below 60% then all three gain bracelets
-            mob:setLocalVar("BracerMode", 1)
+            mob:setLocalVar('BracerMode', 1)
             bracerMode(mob, qnAern1, qnAern2)
         end
     end
@@ -72,7 +72,7 @@ entity.onMobFight = function(mob, target)
     -- Ix'Mnk will not visually add Bracers while under the effect of Hundred Fists
     if
         not mob:hasStatusEffect(xi.effect.HUNDRED_FISTS) and
-        mob:getLocalVar("enableBracers") == 1
+        mob:getLocalVar('enableBracers') == 1
     then
         mob:setAnimationSub(2) -- Bracers
     end

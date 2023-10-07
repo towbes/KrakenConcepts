@@ -1,8 +1,6 @@
 -- Soulflayer family mixin
-require("scripts/globals/mixins")
-require("scripts/globals/status")
-require("scripts/globals/world")
-require("scripts/globals/toau")
+require('scripts/globals/mixins')
+require('scripts/globals/world')
 -----------------------------------
 
 g_mixins = g_mixins or {}
@@ -17,7 +15,7 @@ end
 
 
 g_mixins.families.soulflayer = function(mob)
-    mob:addListener("TAKE_DAMAGE", "SOULFLAYER_TAKE_DAMAGE", function(mob, amount, attacker, attackType, damageType)
+    mob:addListener('TAKE_DAMAGE', 'SOULFLAYER_TAKE_DAMAGE', function(mob, amount, attacker, attackType, damageType)
         if attackType == xi.attackType.MAGICAL then
             updateShieldAnimation(mob)
         end

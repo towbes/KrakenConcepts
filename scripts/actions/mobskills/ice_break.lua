@@ -1,6 +1,6 @@
 -----------------------------------
 -- Ice Break
--- Deals ice damage to enemies within range. Additional Effect: "Bind."
+-- Deals ice damage to enemies within range. Additional Effect: 'Bind.'
 -----------------------------------
 local mobskillObject = {}
 
@@ -13,7 +13,7 @@ mobskillObject.onMobWeaponSkill = function(target, mob, skill)
 
     local dmgmod = 1
 
-    if mob:getName() == "Lost_Suttung" then
+    if mob:getName() == 'Lost_Suttung' then
         dmgmod = 3
     end
 

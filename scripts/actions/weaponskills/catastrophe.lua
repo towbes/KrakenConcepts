@@ -4,7 +4,7 @@
 -- Skill Level: N/A
 -- Drain target's HP. Bec de Faucon/Apocalypse: Additional effect: Haste
 -- This weapon skill is available with the stage 5 relic Scythe Apocalypse or within Dynamis with the stage 4 Bec de Faucon.
--- Also available without Aftermath effects with the Crisis Scythe. After 13 weapon skills have been used successfully, gives one "charge" of Catastrophe.
+-- Also available without Aftermath effects with the Crisis Scythe. After 13 weapon skills have been used successfully, gives one 'charge' of Catastrophe.
 -- Aligned with the Shadow Gorget & Soil Gorget.
 -- Aligned with the Shadow Belt & Soil Belt.
 -- Element: None

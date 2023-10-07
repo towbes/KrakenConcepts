@@ -13,7 +13,7 @@ end
 entity.onTrigger = function(player, npc)
     local kazhamPass = player:hasKeyItem(xi.ki.AIRSHIP_PASS_FOR_KAZHAM)
 
-    if player:getCharVar("Quest[0][67]Stage") > os.time() then
+    if player:getCharVar('Quest[0][67]Stage') > os.time() then
             player:startEvent(41)
     else
         if not kazhamPass then

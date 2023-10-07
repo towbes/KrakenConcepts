@@ -6,7 +6,7 @@ local ID = zones[xi.zone.ATTOHWA_CHASM]
 local entity = {}
 
 entity.onMobSpawn = function(mob)
-    mob:setLocalVar("xolotlDead", 0)
+    mob:setLocalVar('xolotlDead', 0)
 end
 
 entity.onMobFight = function(mob, target)
@@ -27,9 +27,9 @@ entity.onMobFight = function(mob, target)
             mob:setMagicCastingEnabled(false)
             mob:setAutoAttackEnabled(false)
             mob:setMobMod(xi.mobMod.NO_MOVE, 1)
-            mob:entityAnimationPacket("casm")
+            mob:entityAnimationPacket('casm')
             mob:timer(1500, function(xolotl)
-                xolotl:entityAnimationPacket("shsm")
+                xolotl:entityAnimationPacket('shsm')
                 xolotl:setMagicCastingEnabled(true)
                 mob:setAutoAttackEnabled(true)
                 mob:setMobMod(xi.mobMod.NO_MOVE, 0)
@@ -73,12 +73,12 @@ end
 entity.onMobDeath = function(mob, player, optParams)
     player:addTitle(xi.title.XOLOTL_XTRAPOLATOR)
 
-    mob:setLocalVar("xolotlDead", 1)
+    mob:setLocalVar('xolotlDead', 1)
 end
 
 entity.onMobDespawn = function(mob)
     -- Xolotl respawn timer only triggers on death, will respawn next game night if not defeated
-    local xolotlDead = mob:getLocalVar("xolotlDead")
+    local xolotlDead = mob:getLocalVar('xolotlDead')
     local cooldown = math.random(75600, 86400) -- 21h to 24h
 
     if xolotlDead == 1 then

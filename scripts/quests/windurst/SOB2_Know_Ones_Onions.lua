@@ -15,14 +15,14 @@ quest.reward =
 }
 
 -- NOTE
--- This quest has a peculiarity. You can "miss" the events of the quest by arriving "late".
+-- This quest has a peculiarity. You can 'miss' the events of the quest by arriving 'late'.
 -- You can be late/meet the cutoff mid-quest or start already late.
 -- This effectively means the quest branches off.
 
 -- The cutoff/timer/event that makes it change is currently unkonwn.
 
 -- For now, and becouse of the in-game lore, it's going to be assumed that the cutoff is based on Windurst rank.
--- There is a testimony that "supports" this theory, stating that the cutoff is based on "Old Ring" Key item obtention.
+-- There is a testimony that 'supports' this theory, stating that the cutoff is based on 'Old Ring' Key item obtention.
 -- Old Ring is a temporal KI, so checking for it wouldn't be a lasting solution.
 
 quest.sections =
@@ -104,7 +104,7 @@ quest.sections =
                 [398] = function(player, csid, option, npc)
                     player:confirmTrade()
                     quest:setVar(player, 'Prog', 2)
-                    npcUtil.giveItem(player, xi.items.SCROLL_OF_BLAZE_SPIKES)
+                    npcUtil.giveItem(player, xi.item.SCROLL_OF_BLAZE_SPIKES)
                 end,
             },
         },
@@ -215,7 +215,7 @@ quest.sections =
                 [390] = function(player, csid, option, npc)
                     if quest:complete(player) then
                         player:confirmTrade()
-                        npcUtil.giveItem(player, xi.items.SCROLL_OF_BLAZE_SPIKES)
+                        npcUtil.giveItem(player, xi.item.SCROLL_OF_BLAZE_SPIKES)
                         player:setLocalVar('[2][41]mustZone', 1)
                     end
                 end,

@@ -3,10 +3,10 @@
 --   NM: Altedour I Tavnazia
 -- Involved in Quest: Pieuje's Decision
 -----------------------------------
-mixins = {require("scripts/mixins/job_special")}
-require("scripts/globals/mobs")
-require("scripts/globals/quests")
-require("scripts/globals/utils")
+mixins = {require('scripts/mixins/job_special')}
+require('scripts/globals/mobs')
+require('scripts/globals/quests')
+require('scripts/globals/utils')
 -----------------------------------
 local entity = {}
 

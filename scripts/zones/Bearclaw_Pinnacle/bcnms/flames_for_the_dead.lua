@@ -2,9 +2,9 @@
 -- Flames for the Dead
 -- Bearclaw Pinnacle mission battlefield
 -----------------------------------
-require("scripts/globals/battlefield")
-require("scripts/globals/titles")
-require("scripts/globals/missions")
+require('scripts/globals/battlefield')
+
+require('scripts/globals/missions')
 -----------------------------------
 local battlefieldObject = {}
 
@@ -25,7 +25,7 @@ battlefieldObject.onBattlefieldLeave = function(player, battlefield, leavecode)
 
         player:setLocalVar('battlefieldWin', battlefield:getID())
 
-        player:startEvent(32001, battlefield:getArea(), clearTime, partySize, battlefield:getTimeInside(), 1, battlefield:getLocalVar("[cs]bit"), arg8)
+        player:startEvent(32001, battlefield:getArea(), clearTime, partySize, battlefield:getTimeInside(), 1, battlefield:getLocalVar('[cs]bit'), arg8)
     elseif leavecode == xi.battlefield.leaveCode.LOST then
         player:startEvent(32002)
     end

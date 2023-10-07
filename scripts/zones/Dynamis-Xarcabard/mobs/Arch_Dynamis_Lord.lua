@@ -4,14 +4,14 @@
 -- Note: Mega Boss
 -- Spawned by trading a Shrouded Bijou to the ??? in front of Castle Zvahl.
 -----------------------------------
-local ID = require("scripts/zones/Dynamis-Xarcabard/IDs")
-mixins = { require("scripts/mixins/job_special") }
-require("scripts/globals/titles")
+local ID = require('scripts/zones/Dynamis-Xarcabard/IDs')
+mixins = { require('scripts/mixins/job_special') }
+
 -----------------------------------
 local entity = {}
 
 entity.onMobInitialize = function(mob)
-    mob:addListener("ITEM_DROPS", "ITEM_DROPS_ARCH_DYNAMIS_LORD", function(mobArg, loot)
+    mob:addListener('ITEM_DROPS', 'ITEM_DROPS_ARCH_DYNAMIS_LORD', function(mobArg, loot)
         if mob:getID() == ID.mob.ARCH_DYNAMIS_LORD then
             loot:addItem(17669, xi.loot.rate.COMMON)
             loot:addItem(10975, xi.loot.rate.COMMON)
@@ -32,7 +32,7 @@ entity.onMobSpawn = function(mob)
         },
     })
     if mob:getID(ID.mob.ARCH_DYNAMIS_LORD) then
-    mob:setLocalVar("initial_Split", 0)
+    mob:setLocalVar('initial_Split', 0)
     end
 end
 
@@ -58,13 +58,13 @@ entity.onMobFight = function(mob, target)
         local master = GetMobByID(ID.mob.ARCH_DYNAMIS_LORD)
         local masterHP = master:getHP()
 
-        if battleTime % 45 == 0 and battleTime >= 45 and not pet:isSpawned() and mob:getLocalVar("initial_Split") == 0 then
+        if battleTime % 45 == 0 and battleTime >= 45 and not pet:isSpawned() and mob:getLocalVar('initial_Split') == 0 then
             local pos = mob:getPos()
             pet:setSpawn(pos.x + 1, pos.y - 0.5, pos.z - 1, pos.rot)
             pet:spawn()
             pet:setHP(masterHP)
             pet:updateEnmity(target)
-            mob:setLocalVar("initial_Split", 1)
+            mob:setLocalVar('initial_Split', 1)
         end
 
         if pet:getCurrentAction() == xi.act.ROAMING then

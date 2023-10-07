@@ -1,6 +1,6 @@
 -----------------------------------
 --  Vanity Strike
---  Description: Damage varies with TP. Additional effect: "Stun."
+--  Description: Damage varies with TP. Additional effect: 'Stun.'
 --  Type: Physical (Blunt)
 -----------------------------------
 local mobskillObject = {}

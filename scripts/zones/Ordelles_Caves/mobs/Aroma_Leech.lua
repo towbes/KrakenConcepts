@@ -2,7 +2,7 @@
 -- Area: Ordelles Caves
 --  Mob: Aroma Leech (RSE Satchets)
 -----------------------------------
-require("scripts/globals/regimes")
+require('scripts/globals/regimes')
 -----------------------------------
 local entity = {}
 

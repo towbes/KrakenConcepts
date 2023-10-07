@@ -39,7 +39,7 @@ end
 zoneObject.onZoneWeatherChange = function(weather)
     local dosetsu = GetMobByID(ID.mob.DOSETSU_TREE)
     if
-        not dosetsu:isSpawned() and os.time() > dosetsu:getLocalVar("respawn")
+        not dosetsu:isSpawned() and os.time() > dosetsu:getLocalVar('respawn')
         and (weather == xi.weather.THUNDER or weather == xi.weather.THUNDERSTORMS)
     then
         DisallowRespawn(dosetsu:getID(), false)

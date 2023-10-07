@@ -8,7 +8,7 @@ local mobskillObject = {}
 mobskillObject.onMobSkillCheck = function(target, mob, skill)
     local id = mob:getID()
 
-    for i = id + 1, id + mob:getLocalVar("maxBabies") do
+    for i = id + 1, id + mob:getLocalVar('maxBabies') do
         local baby = GetMobByID(i)
         if not baby:isSpawned() then
             return 0
@@ -32,7 +32,7 @@ mobskillObject.onMobWeaponSkill = function(target, mob, skill)
             end
         end
     else
-        for babyID = id + 1, id + mob:getLocalVar("maxBabies") do
+        for babyID = id + 1, id + mob:getLocalVar('maxBabies') do
             local baby = GetMobByID(babyID)
             if not baby:isSpawned() then
                 SpawnMob(babyID):updateEnmity(mob:getTarget())

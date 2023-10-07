@@ -4,7 +4,7 @@
 -- Balga's Dais Burning Circle
 -- !pos 299 -123 345 146
 -----------------------------------
-require("scripts/globals/bcnm")
+require('scripts/globals/bcnm')
 -----------------------------------
 local entity = {}
 

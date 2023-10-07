@@ -2,8 +2,8 @@
 -- Area: Stellar Fulcrum
 --  NPC: Qe'Lov Gate
 -----------------------------------
-require("scripts/globals/bcnm")
-require("scripts/globals/missions")
+require('scripts/globals/bcnm')
+require('scripts/globals/missions')
 -----------------------------------
 local entity = {}
 

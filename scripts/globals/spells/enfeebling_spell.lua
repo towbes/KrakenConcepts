@@ -292,7 +292,7 @@ xi.spells.enfeebling.handleEffectNullification = function(caster, target, spell,
     if target:isMob() then
         local value = pTable[spellId][10]
 
-        -- Mob is completely immune. Set "Completely resists" message and nullify effect.
+        -- Mob is completely immune. Set 'Completely resists' message and nullify effect.
         if
             value > 0 and
             target:hasImmunity(value)
@@ -314,7 +314,7 @@ xi.spells.enfeebling.handleEffectNullification = function(caster, target, spell,
             traitPower = traitPower / 2
         end
 
-        -- Trait trigers. Set "Resist!" message and nullify effect.
+        -- Trait trigers. Set 'Resist!' message and nullify effect.
         if roll <= traitPower then
             spell:setModifier(xi.msg.actionModifier.RESIST)
             spell:setMsg(xi.msg.basic.MAGIC_RESIST)
@@ -486,7 +486,7 @@ xi.spells.enfeebling.useEnfeeblingSpell = function(caster, target, spell)
             caster:delStatusEffect(xi.effect.STYMIE)
         end
 
-        -- Add "Magic Burst!" message
+        -- Add 'Magic Burst!' message
         local _, skillchainCount = xi.magicburst.formMagicBurst(spellElement, target) -- External function. Not present in magic.lua.
 
         if skillchainCount > 0 then

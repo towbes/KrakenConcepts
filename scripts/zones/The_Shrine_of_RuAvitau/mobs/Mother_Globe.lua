@@ -2,7 +2,7 @@
 -- Area: The Shrine of Ru'Avitau
 --   NM: Mother Globe
 -- TODO: Looked like pets had an additional effect: stun with an unknown proc rate
--- TODO: "Links with Slave Globes, and Slave Globes link with Defenders. Defenders do not link with Slave Globes or Mother Globe."
+-- TODO: 'Links with Slave Globes, and Slave Globes link with Defenders. Defenders do not link with Slave Globes or Mother Globe.'
 -----------------------------------
 local ID = zones[xi.zone.THE_SHRINE_OF_RUAVITAU]
 -----------------------------------
@@ -87,16 +87,16 @@ local spawnSlaveGlobe = function(mg, slaveGlobe, spawnPos)
     slaveGlobe:setSpawn(spawnPos.x, spawnPos.y, spawnPos.z, spawnPos.rot)
 
     if mg:isEngaged() then
-        mg:setLocalVar("summoning", 1)
-        mg:entityAnimationPacket("casm")
+        mg:setLocalVar('summoning', 1)
+        mg:entityAnimationPacket('casm')
         mg:setAutoAttackEnabled(false)
         mg:setMagicCastingEnabled(false)
         mg:setMobAbilityEnabled(false)
 
         mg:timer(3000, function(mob)
             if mob:isAlive() then
-                mob:entityAnimationPacket("shsm")
-                mob:setLocalVar("summoning", 0)
+                mob:entityAnimationPacket('shsm')
+                mob:setLocalVar('summoning', 0)
                 mob:setAutoAttackEnabled(true)
                 mob:setMagicCastingEnabled(true)
                 mob:setMobAbilityEnabled(true)
@@ -107,11 +107,11 @@ local spawnSlaveGlobe = function(mg, slaveGlobe, spawnPos)
             end
         end)
     else
-        mg:entityAnimationPacket("casm")
+        mg:entityAnimationPacket('casm')
         local pPet = GetMobByID(slaveGlobe:getID() - 1)
         mg:timer(3000, function(mob)
             if mob:isAlive() then
-                mob:entityAnimationPacket("shsm")
+                mob:entityAnimationPacket('shsm')
                 slaveGlobe:spawn()
                 if pPet == nil then
                     slaveGlobe:pathTo(mob:getXPos() + 0.15, mob:getYPos(), mob:getZPos() + 0.15)
@@ -172,8 +172,8 @@ entity.onMobSpawn = function(mob)
     mob:setAutoAttackEnabled(true)
     mob:setMagicCastingEnabled(true)
     mob:setMobAbilityEnabled(true)
-    mob:setLocalVar("nextSlaveSpawnTime", os.time() + 30) -- spawn first 30s from now
-    mob:setLocalVar("posNum", math.random(1, 9))
+    mob:setLocalVar('nextSlaveSpawnTime', os.time() + 30) -- spawn first 30s from now
+    mob:setLocalVar('posNum', math.random(1, 9))
     mob:setMobMod(xi.mobMod.ADD_EFFECT, 1)
     -- 60 damage spikes with duration of 1 hour (in case stolen by thf)
     mob:addStatusEffectEx(xi.effect.SHOCK_SPIKES, 0, 60, 0, 3600)
@@ -191,7 +191,7 @@ entity.onMobFight = function(mob, target)
 
     local spawnedSlaves, notSpawnedSlaves = getSlaves()
     local validSlavePositions = calculateValidSlaveGlobePositions(mob:getZone(), mob:getPos(), startingSpacingDistance)
-    if mob:getLocalVar("summoning") == 0 then
+    if mob:getLocalVar('summoning') == 0 then
         trySpawnSlaveGlobe(mob, os.time(), spawnedSlaves, notSpawnedSlaves, validSlavePositions)
     end
 
@@ -208,7 +208,7 @@ entity.onMobRoam = function(mob)
     trySpawnSlaveGlobe(mob, os.time(), spawnedSlaves, notSpawnedSlaves, validSlavePositions)
     handleSlaveGlobesRoam(mob, validSlavePositions)
 
-    local posNum = mob:getLocalVar("posNum")
+    local posNum = mob:getLocalVar('posNum')
     local moveX = 0
     local moveY = 0
     local moveZ = 0
@@ -243,7 +243,7 @@ entity.onMobRoam = function(mob)
         end
 
         mob:pathTo(moveX, moveY, moveZ)
-        mob:setLocalVar("posNum", newPos)
+        mob:setLocalVar('posNum', newPos)
     end
 
     if not mob:hasStatusEffect(xi.effect.SHOCK_SPIKES) then

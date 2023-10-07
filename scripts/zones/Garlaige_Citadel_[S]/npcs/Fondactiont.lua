@@ -18,15 +18,15 @@ entity.onTrigger = function(player, npc)
         player:hasKeyItem(xi.ki.BRONZE_RIBBON_OF_SERVICE) and
         player:getMainLvl() >= 30
     then
-        player:startEvent(26) -- Start quest "The Fumbling Friar"
+        player:startEvent(26) -- Start quest 'The Fumbling Friar'
     elseif theFumblingFriar == QUEST_ACCEPTED then
         if player:hasKeyItem(xi.ki.ORNATE_PACKAGE) then
-            player:startEvent(28) -- During quest "The Fumbling Friar" (with Ornate Package KI)
+            player:startEvent(28) -- During quest 'The Fumbling Friar' (with Ornate Package KI)
         else
-            player:startEvent(27) -- During quest "The Fumbling Friar" (before retrieving KI Ornate Package)
+            player:startEvent(27) -- During quest 'The Fumbling Friar' (before retrieving KI Ornate Package)
         end
     elseif theFumblingFriar == QUEST_COMPLETED then
-        player:startEvent(29) -- New standard dialog after "The Fumbling Friar"
+        player:startEvent(29) -- New standard dialog after 'The Fumbling Friar'
     else
         player:startEvent(25) -- Standard dialog
     end

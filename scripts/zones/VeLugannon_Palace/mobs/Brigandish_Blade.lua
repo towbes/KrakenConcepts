@@ -12,7 +12,7 @@ end
 
 entity.onMobSpawn = function(mob)
     mob:setUnkillable(true)
-    mob:setLocalVar("killable", 0)
+    mob:setLocalVar('killable', 0)
 end
 
 entity.onAdditionalEffect = function(mob, target, damage)
@@ -20,7 +20,7 @@ entity.onAdditionalEffect = function(mob, target, damage)
 end
 
 entity.onMobFight = function(mob, target)
-    local killable = mob:getLocalVar("killable")
+    local killable = mob:getLocalVar('killable')
 
     if mob:getHPP() == 1 and mob:getMod(xi.mod.DMG) == 0 and not killable then
         mob:setMod(xi.mod.DMG,-10000)

@@ -110,7 +110,7 @@ xi.treasure.treasureInfo =
                         end,
 
                         code = function(player, npc)
-                            player:setCharVar(string.format("Quest[%s][%s]Chest", xi.quest.log_id.OTHER_AREAS, xi.quest.id.otherAreas.PARADISE_SALVATION_AND_MAPS), getIndexAtPosition(npc, xi.treasure.type.CHEST, xi.zone.SACRARIUM))
+                            player:setCharVar(string.format('Quest[%s][%s]Chest', xi.quest.log_id.OTHER_AREAS, xi.quest.id.otherAreas.PARADISE_SALVATION_AND_MAPS), getIndexAtPosition(npc, xi.treasure.type.CHEST, xi.zone.SACRARIUM))
                             npcUtil.giveKeyItem(player, xi.ki.PIECE_OF_RIPPED_FLOORPLANS)
                         end,
                     },
@@ -392,7 +392,7 @@ xi.treasure.treasureInfo =
 
                         code = function(player)
                             npcUtil.giveKeyItem(player, xi.ki.UN_MOMENT)
-                            player:incrementCharVar("Quest[1][62]Prog", 1)
+                            player:incrementCharVar('Quest[1][62]Prog', 1)
                         end,
                     },
                 },
@@ -433,7 +433,7 @@ xi.treasure.treasureInfo =
 
                         code = function(player)
                             npcUtil.giveKeyItem(player, xi.ki.UN_MOMENT)
-                            player:incrementCharVar("Quest[1][62]Prog", 1)
+                            player:incrementCharVar('Quest[1][62]Prog', 1)
                         end,
                     },
                 },
@@ -461,7 +461,7 @@ xi.treasure.treasureInfo =
 
                         code = function(player)
                             npcUtil.giveKeyItem(player, xi.ki.LEPHEMERE)
-                            player:incrementCharVar("Quest[1][62]Prog", 1)
+                            player:incrementCharVar('Quest[1][62]Prog', 1)
                         end,
                     },
                 },
@@ -835,7 +835,7 @@ xi.treasure.treasureInfo =
 
                         code = function(player)
                             npcUtil.giveKeyItem(player, xi.ki.LANCIENNE)
-                            player:incrementCharVar("Quest[1][62]Prog", 1)
+                            player:incrementCharVar('Quest[1][62]Prog', 1)
                         end,
                     },
                 },
@@ -1512,7 +1512,7 @@ end
 local function getKeyTraded(player, trade, chestInfo)
     if npcUtil.tradeHasExactly(trade, chestInfo.key) then
         return keyType.ZONE_KEY
-    elseif (player:getMainJob() == xi.job.THF or player:getSubJob() == xi.job.THF) then -- Umeboshi "Thf Sub"
+    elseif (player:getMainJob() == xi.job.THF or player:getSubJob() == xi.job.THF) then -- Umeboshi 'Thf Sub'
         for keyValue, keyData in pairs(thiefKeyInfo) do
             if npcUtil.tradeHasExactly(trade, keyData[1]) then
                 return keyValue
@@ -1536,12 +1536,12 @@ end
 
 local function handleLockpickFailure(player, npc, messageOffset, failureType)
     if failureType == 1 then
-        player:messageSpecial(messageOffset + 1, player:getID()) -- "<name> fails to open the chest."
+        player:messageSpecial(messageOffset + 1, player:getID()) -- '<name> fails to open the chest.'
     elseif failureType == 2 then
-        player:messageSpecial(messageOffset + 2) -- "The chest was trapped!"
+        player:messageSpecial(messageOffset + 2) -- 'The chest was trapped!'
         player:addStatusEffect(xi.effect.WEAKNESS, 1, 0, math.random(300, 10800)) -- 5 minutes to 3 hours
     else
-        player:messageSpecial(messageOffset + 4) -- "The chest was a mimic!"
+        player:messageSpecial(messageOffset + 4) -- 'The chest was a mimic!'
         spawnMimic(player, npc)
     end
 end
@@ -1553,8 +1553,8 @@ xi.treasure.onTrade = function(player, npc, trade, chestType)
     local info = xi.treasure.treasureInfo[chestType].zone[zoneId]
     local mJob = player:getMainJob()
     local sJob = player:getSubJob()
-    local activeHands = player:getCharVar("BorghertzAlreadyActiveWithJob")
-    local illusionCooldown  = npc:getLocalVar("illusionCooldown")
+    local activeHands = player:getCharVar('BorghertzAlreadyActiveWithJob')
+    local illusionCooldown  = npc:getLocalVar('illusionCooldown')
 
     -- NOTE: The client blocks actions like this while invisible, but it's very easy to inject an action packet to get
     -- around this restriction. Strip invisible to make sure that case is covered.
@@ -1621,7 +1621,7 @@ xi.treasure.onTrade = function(player, npc, trade, chestType)
             end
         end
 
-                    -- artifact armor subjob Umeboshi "AF quests for subjobs"
+                    -- artifact armor subjob Umeboshi 'AF quests for subjobs'
         if
             info.af and
             info.af[sJob] and

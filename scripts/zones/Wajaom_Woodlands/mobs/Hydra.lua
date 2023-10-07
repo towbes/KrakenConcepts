@@ -30,7 +30,7 @@ end
 
 entity.onMobRoam = function(mob)
     local battletime = mob:getBattleTime()
-    local headgrow = mob:getLocalVar("headgrow")
+    local headgrow = mob:getLocalVar('headgrow')
     local broken = mob:getAnimationSub()
 
     if (headgrow < battletime and broken > 0) then
@@ -42,11 +42,11 @@ entity.onMobFight = function(mob, target)
     local battletime = mob:getBattleTime()
     local headgrow = mob:getLocalVar('headgrow')
     local broken = mob:getAnimationSub()
-    local headthreshold = mob:getLocalVar("headthreshold")
+    local headthreshold = mob:getLocalVar('headthreshold')
 
     if (headgrow < battletime and broken > 0) then
         mob:setAnimationSub(broken - 1)
-        mob:setLocalVar("headgrow", battletime + math.random(60, 120))
+        mob:setLocalVar('headgrow', battletime + math.random(60, 120))
         mob:setTP(3000)
     end
 
@@ -62,32 +62,32 @@ entity.onMobFight = function(mob, target)
     end
 
     if mob:getHPP() == 100 then
-        mob:setLocalVar("headthreshold", 0)
+        mob:setLocalVar('headthreshold', 0)
     elseif mob:getHPP() < 75 and headthreshold == 0 then
-        mob:setLocalVar("headgrow", headgrow - 240)
-        mob:setLocalVar("headthreshold", 1)
+        mob:setLocalVar('headgrow', headgrow - 240)
+        mob:setLocalVar('headthreshold', 1)
     elseif mob:getHPP() < 50 and headthreshold == 1 then
-        mob:setLocalVar("headgrow", headgrow - math.random(150, 180))
-        mob:setLocalVar("headthreshold", 2)
+        mob:setLocalVar('headgrow', headgrow - math.random(150, 180))
+        mob:setLocalVar('headthreshold', 2)
     elseif mob:getHPP() < 25 and headthreshold == 2 then
-        mob:setLocalVar("headgrow", headgrow - math.random(50, 90))
-        mob:setLocalVar("headthreshold", 3)
+        mob:setLocalVar('headgrow', headgrow - math.random(50, 90))
+        mob:setLocalVar('headthreshold', 3)
     end
 
-    local drawInWait = mob:getLocalVar("DrawInWait")
+    local drawInWait = mob:getLocalVar('DrawInWait')
 
     if (target:getXPos() < -295 or target:getXPos() > -260) and os.time() > drawInWait then
         local rot = target:getRotPos()
         local position = math.random(1,8)
         target:setPos(drawInPos[position][1],drawInPos[position][2],drawInPos[position][3],rot)
         mob:messageBasic(232, 0, 0, target)
-        mob:setLocalVar("DrawInWait", os.time() + 2)
+        mob:setLocalVar('DrawInWait', os.time() + 2)
     elseif (target:getZPos() < -25 or target:getZPos() > 13) and os.time() > drawInWait then
         local rot = target:getRotPos()
         local position = math.random(1,8)
         target:setPos(drawInPos[position][1],drawInPos[position][2],drawInPos[position][3],rot)
         mob:messageBasic(232, 0, 0, target)
-        mob:setLocalVar("DrawInWait", os.time() + 2)
+        mob:setLocalVar('DrawInWait', os.time() + 2)
     end
 end
 
@@ -105,22 +105,22 @@ entity.onCriticalHit = function(mob)
     if mob:getHPP() > 75 then
         if (rand <= 0.15 and broken < 2) then
             mob:setAnimationSub(broken + 1)
-            mob:setLocalVar("headgrow", battletime + math.random(480, 600))
+            mob:setLocalVar('headgrow', battletime + math.random(480, 600))
         end
     elseif mob:getHPP() > 50 then
         if (rand <= 0.1 and broken < 2) then
             mob:setAnimationSub(broken + 1)
-            mob:setLocalVar("headgrow", battletime + math.random(240, 360))
+            mob:setLocalVar('headgrow', battletime + math.random(240, 360))
         end
     elseif mob:getHPP() > 25 then
         if (rand <= 0.1 and broken < 2) then
             mob:setAnimationSub(broken + 1)
-            mob:setLocalVar("headgrow", battletime + math.random(90, 180))
+            mob:setLocalVar('headgrow', battletime + math.random(90, 180))
         end
     elseif mob:getHPP() < 25 then
         if (rand <= 0.1 and broken < 2) then
             mob:setAnimationSub(broken + 1)
-            mob:setLocalVar("headgrow", battletime + math.random(40, 90))
+            mob:setLocalVar('headgrow', battletime + math.random(40, 90))
         end
     end
 end

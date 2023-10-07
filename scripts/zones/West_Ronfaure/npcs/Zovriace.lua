@@ -69,10 +69,10 @@ end
 entity.onPath = function(npc)
     if not npc:isFollowingPath() then
         if npc:atPoint(xi.path.last(pathNodes)) then
-            npc:setLocalVar("scouted", 1)
+            npc:setLocalVar('scouted', 1)
             npc:pathThrough(pathNodes, bit.bor(xi.path.flag.COORDS, xi.path.flag.REVERSE))
         elseif npc:atPoint(xi.path.first(pathNodes)) then
-            npc:setLocalVar("scouted", 0)
+            npc:setLocalVar('scouted', 0)
             npc:showText(npc, ID.text.ZOVRIACE_REPORT)
             npc:pathThrough(pathNodes, xi.path.flag.COORDS)
         end
@@ -83,7 +83,7 @@ entity.onTrade = function(player, npc, trade)
 end
 
 entity.onTrigger = function(player, npc)
-    local scoutStatus = npc:getLocalVar("scouted")
+    local scoutStatus = npc:getLocalVar('scouted')
     if scoutStatus ~= 0 then
         player:showText(npc, ID.text.ZOVRIACE_RETURN)
     else

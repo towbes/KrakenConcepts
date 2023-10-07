@@ -370,13 +370,13 @@ entity.onTrigger = function(player, npc)
             menu = utils.mask.setBit(menu, 0, true)
         end
 
-        -- bit 1 - show "ask about ancient beastcoins" option
-        -- Is shown once the player selects "Just wanted to chat"
+        -- bit 1 - show 'ask about ancient beastcoins' option
+        -- Is shown once the player selects 'Just wanted to chat'
         if not utils.mask.getBit(playerSagheera, 1) then
             menu = utils.mask.setBit(menu, 1, true)
         end
 
-        -- bit 2 - display stored ABCs on "ask about ancient beastcoins"
+        -- bit 2 - display stored ABCs on 'ask about ancient beastcoins'
         if storedABCs > 0 then
             menu = utils.mask.setBit(menu, 2, true)
         end
@@ -391,7 +391,7 @@ entity.onTrigger = function(player, npc)
         menu = utils.mask.setBit(menu, 10, true)
         -- bit 11 - ??? (this bit was set in some captures)
         menu = utils.mask.setBit(menu, 11, true)
-        -- bit 12 - show "Retrieve ancient beastcoins" option
+        -- bit 12 - show 'Retrieve ancient beastcoins' option
         if storedABCs > 0 then
             menu = utils.mask.setBit(menu, 12, true)
         end

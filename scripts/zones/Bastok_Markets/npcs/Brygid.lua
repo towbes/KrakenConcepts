@@ -17,11 +17,11 @@ entity.onTrigger = function(player, npc)
     local legs = player:getEquipID(xi.slot.LEGS)
     local feet = player:getEquipID(xi.slot.FEET)
 
-    local getBody = player:getCharVar("BrygidGetBody")
-    local getLegs = player:getCharVar("BrygidGetLegs")
-    local wantsSubligar = player:getCharVar("BrygidWantsSubligar")
+    local getBody = player:getCharVar('BrygidGetBody')
+    local getLegs = player:getCharVar('BrygidGetLegs')
+    local wantsSubligar = player:getCharVar('BrygidWantsSubligar')
 
-    local robeEquipped = body == xi.items.ROBE and 1 or 0
+    local robeEquipped = body == xi.item.ROBE and 1 or 0
 
     if
         brygidReturns ~= QUEST_ACCEPTED and
@@ -43,8 +43,8 @@ entity.onTrigger = function(player, npc)
             getLegs = legsList[math.random(1, 16)]
         until(player:canEquipItem(getLegs, false))
 
-        player:setCharVar("BrygidGetBody", getBody)
-        player:setCharVar("BrygidGetLegs", getLegs)
+        player:setCharVar('BrygidGetBody', getBody)
+        player:setCharVar('BrygidGetLegs', getLegs)
 
         player:startEvent(380, robeEquipped, getBody, getLegs, player:getMainJob())
 
@@ -83,24 +83,26 @@ entity.onEventUpdate = function(player, csid, option, npc)
         if not player:hasItem(14400 + option) then
             hasBody = 1
         end
+    end
+end
 
 entity.onEventUpdate = function(player, csid, option, npc)
 end
 
 entity.onEventFinish = function(player, csid, option, npc)
-    local wantsSubligar = player:getCharVar("BrygidWantsSubligar")
+    local wantsSubligar = player:getCharVar('BrygidWantsSubligar')
 
     if csid == 380 then
         player:delQuest(xi.quest.log_id.BASTOK, xi.quest.id.bastok.BRYGID_THE_STYLIST_RETURNS)
         player:addQuest(xi.quest.log_id.BASTOK, xi.quest.id.bastok.BRYGID_THE_STYLIST_RETURNS)
 
     elseif csid == 382 and option ~= 99 then
-        player:setCharVar("BrygidWantsSubligar", option)
+        player:setCharVar('BrygidWantsSubligar', option)
 
     elseif csid == 383 then
-        player:setCharVar("BrygidGetBody", 0)
-        player:setCharVar("BrygidGetLegs", 0)
-        player:setCharVar("BrygidWantsSubligar", 0)
+        player:setCharVar('BrygidGetBody', 0)
+        player:setCharVar('BrygidGetLegs', 0)
+        player:setCharVar('BrygidWantsSubligar', 0)
         player:addTitle(xi.title.BASTOKS_SECOND_BEST_DRESSED)
         player:addItem(14400 + wantsSubligar)
         player:messageSpecial(ID.text.ITEM_OBTAINED, 14400 + wantsSubligar)

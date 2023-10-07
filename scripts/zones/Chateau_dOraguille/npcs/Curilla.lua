@@ -55,7 +55,7 @@ entity.onTrigger = function(player, npc)
         player:setLocalVar('TrustDialogue', 1)
         player:startEvent(573, 0, 0, 0, trustMemory(player), 0, 0, 0, rank3)
 
-    -- "Lure of the Wildcat"
+    -- 'Lure of the Wildcat'
     elseif
         player:getQuestStatus(xi.quest.log_id.SANDORIA, sandyQuests.LURE_OF_THE_WILDCAT) == QUEST_ACCEPTED and
         not utils.mask.getBit(player:getCharVar('WildcatSandy'), 15)

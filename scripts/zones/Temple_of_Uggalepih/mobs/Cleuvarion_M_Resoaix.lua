@@ -1,7 +1,7 @@
 -----------------------------------
 -- Area: Temple of Uggalepih
 --   NM: Cleuvarion M Resoaix
--- Involved with San d'Oria quest "Knight Stalker"
+-- Involved with San d'Oria quest 'Knight Stalker'
 -----------------------------------
 mixins = { require('scripts/mixins/job_special') }
 -----------------------------------

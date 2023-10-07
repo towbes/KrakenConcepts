@@ -2,8 +2,8 @@
 -- Area: Qufim Island
 --   NM: Dosetsu Tree
 -----------------------------------
-require("scripts/globals/mobs")
-require("scripts/globals/hunts")
+require('scripts/globals/mobs')
+require('scripts/globals/hunts')
 -----------------------------------
 local entity = {}
 
@@ -29,7 +29,7 @@ end
 
 entity.onMobDespawn = function(mob)
     UpdateNMSpawnPoint(mob:getID())
-    mob:setLocalVar("respawn", os.time() + 75600)
+    mob:setLocalVar('respawn', os.time() + 75600)
     DisallowRespawn(mob:getID(), true) -- prevents accidental 'pop' during no lightning weather and immediate despawn
 end
 

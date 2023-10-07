@@ -3,8 +3,8 @@
 -- Mob: Carbuncle Prime
 -- Quest: Waking the Beast
 -----------------------------------
-local ID = require("scripts/zones/Full_Moon_Fountain/IDs")
-require("scripts/globals/status")
+local ID = zones[xi.zone.FULL_MOON_FOUNTAIN]
+
 -----------------------------------
 local entity = {}
 
@@ -13,18 +13,18 @@ local entity = {}
 -- This table is aligned to the appropriate avatar in IDs
 local avatars =
 {
-    "null",
-    "ifrit",
-    "shiva",
-    "titan",
-    "ramuh",
-    "garuda",
-    "leviathan",
+    'null',
+    'ifrit',
+    'shiva',
+    'titan',
+    'ramuh',
+    'garuda',
+    'leviathan',
 }
 
 local spawnPrime = function(mob, target)
     local bf = mob:getBattlefield()
-    local phase = bf:getLocalVar("phase")
+    local phase = bf:getLocalVar('phase')
     local pos = mob:getPos()
 
     for i = 1, phase do
@@ -45,7 +45,7 @@ local spawnPrime = function(mob, target)
         end
     end
 
-    bf:setLocalVar("carbuncleHP", mob:getHP())
+    bf:setLocalVar('carbuncleHP', mob:getHP())
     mob:setHP(0)
     mob:timer(5000, function(mobArg)
         DespawnMob(mobArg:getID())
@@ -56,9 +56,9 @@ entity.onMobSpawn = function(mob)
     mob:timer(1000, function(mobArg)
         local bf = mobArg:getBattlefield()
 
-        mobArg:setHP(bf:getLocalVar("carbuncleHP"))
-        bf:setLocalVar("abilityControl", 0)
-        bf:setLocalVar("primesDead", 0)
+        mobArg:setHP(bf:getLocalVar('carbuncleHP'))
+        bf:setLocalVar('abilityControl', 0)
+        bf:setLocalVar('primesDead', 0)
     end)
 end
 
@@ -66,19 +66,19 @@ entity.onMobFight = function(mob, target)
     local hp = mob:getHPP()
     local bf = mob:getBattlefield()
 
-    if hp <= 75 and bf:getLocalVar("hpControl1") == 0 then
-        bf:setLocalVar("hpControl1", 1)
+    if hp <= 75 and bf:getLocalVar('hpControl1') == 0 then
+        bf:setLocalVar('hpControl1', 1)
         spawnPrime(mob, target)
-    elseif hp <= 50 and bf:getLocalVar("hpControl2") == 0 then
-        bf:setLocalVar("hpControl2", 1)
+    elseif hp <= 50 and bf:getLocalVar('hpControl2') == 0 then
+        bf:setLocalVar('hpControl2', 1)
         spawnPrime(mob, target)
-    elseif hp <= 25 and bf:getLocalVar("hpControl3") == 0 then
-        bf:setLocalVar("hpControl3", 1)
+    elseif hp <= 25 and bf:getLocalVar('hpControl3') == 0 then
+        bf:setLocalVar('hpControl3', 1)
         spawnPrime(mob, target)
     end
 
-    if hp < 10 and bf:getLocalVar("2hrControl") == 0 then
-        bf:setLocalVar("2hrControl", 1)
+    if hp < 10 and bf:getLocalVar('2hrControl') == 0 then
+        bf:setLocalVar('2hrControl', 1)
         for i = 0, 4 do
             local carby = GetMobByID(ID.primes[1][bf:getArea()]+i)
 

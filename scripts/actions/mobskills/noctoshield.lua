@@ -1,12 +1,12 @@
 ---------------------------------------------
 -- Noctoshield
 --
--- Description: Gives the effect of "Phalanx."
+-- Description: Gives the effect of 'Phalanx.'
 -- Type: Magical
 ---------------------------------------------
-require("scripts/globals/settings")
-require("scripts/globals/status")
-require("scripts/globals/mobskills")
+
+
+
 ---------------------------------------------
 local mobskillObject = {}
 

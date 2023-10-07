@@ -1517,14 +1517,14 @@ local rocks =
 
 local elemOres =
 {
-    [xi.magic.element.FIRE   ] = xi.items.CHUNK_OF_FIRE_ORE,
-    [xi.magic.element.ICE    ] = xi.items.CHUNK_OF_ICE_ORE,
-    [xi.magic.element.WIND   ] = xi.items.CHUNK_OF_WIND_ORE,
-    [xi.magic.element.EARTH  ] = xi.items.CHUNK_OF_EARTH_ORE,
-    [xi.magic.element.THUNDER] = xi.items.CHUNK_OF_LIGHTNING_ORE,
-    [xi.magic.element.WATER  ] = xi.items.CHUNK_OF_WATER_ORE,
-    [xi.magic.element.LIGHT  ] = xi.items.CHUNK_OF_LIGHT_ORE,
-    [xi.magic.element.DARK   ] = xi.items.CHUNK_OF_DARK_ORE,
+    [xi.element.FIRE   ] = xi.item.CHUNK_OF_FIRE_ORE,
+    [xi.element.ICE    ] = xi.item.CHUNK_OF_ICE_ORE,
+    [xi.element.WIND   ] = xi.item.CHUNK_OF_WIND_ORE,
+    [xi.element.EARTH  ] = xi.item.CHUNK_OF_EARTH_ORE,
+    [xi.element.THUNDER] = xi.item.CHUNK_OF_LIGHTNING_ORE,
+    [xi.element.WATER  ] = xi.item.CHUNK_OF_WATER_ORE,
+    [xi.element.LIGHT  ] = xi.item.CHUNK_OF_LIGHT_ORE,
+    [xi.element.DARK   ] = xi.item.CHUNK_OF_DARK_ORE,
 }
 
 -----------------------------------
@@ -1632,7 +1632,7 @@ local function tryEleOre(info, zoneId)
 		chance = 1;
 	end
 
-	if (math.random(1,1000) <= chance) then -- Each zone has "eleChance". If we roll under that number, player gets an ore. Example: eleChance 15 = 1.5%~
+	if (math.random(1,1000) <= chance) then -- Each zone has 'eleChance'. If we roll under that number, player gets an ore. Example: eleChance 15 = 1.5%~
 		return 1; -- success
 	else
 		return 0; -- failure

@@ -150,7 +150,7 @@ entity.onEventUpdate = function(player, csid, option, npc)
 end
 
 entity.onEventFinish = function(player, csid, option, npc)
-    if player:getLocalVar("Lamepaue_PlayCutscene") < 2 then
+    if player:getLocalVar('Lamepaue_PlayCutscene') < 2 then
         if option == 1 then        -- Fetichism.
             player:startEvent(1008)
         elseif option == 2 then        -- To the Forsaken Mines.

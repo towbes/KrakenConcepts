@@ -2,7 +2,7 @@
 -- Area: Dynamis - Valkurm
 --  Mob: Fairy Ring
 -----------------------------------
-mixins = { require("scripts/mixins/dynamis_dreamland") }
+mixins = { require('scripts/mixins/dynamis_dreamland') }
 -----------------------------------
 local entity = {}
 
@@ -14,13 +14,13 @@ entity.onMobSpawn = function(mob)
 end
 
 entity.onMobWeaponSkillPrepare = function(mob, target)
-    mob:setLocalVar("skill_tp", mob:getTP())
+    mob:setLocalVar('skill_tp', mob:getTP())
 end
 
 entity.onMobWeaponSkill = function(target, mob, skill)
     if skill:getID() == 3874 then
-        mob:addTP(mob:getLocalVar("skill_tp"))
-        mob:setLocalVar("skill_tp", 0)
+        mob:addTP(mob:getLocalVar('skill_tp'))
+        mob:setLocalVar('skill_tp', 0)
     end
 end
 

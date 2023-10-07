@@ -229,7 +229,16 @@ bool CItemState::CanChangeState()
 
 void CItemState::TryInterrupt(CBattleEntity* PTarget)
 {
-    UpdateTarget(m_PEntity->IsValidTarget(m_targid, m_PItem->getValidTarget(), m_errorMsg));
+    // todo: interrupt on being hit
+
+    if (PTarget)
+    {
+        UpdateTarget(m_PEntity->IsValidTarget(PTarget->targid, m_PItem->getValidTarget(), m_errorMsg));
+    }
+    else
+    {
+        UpdateTarget(m_PEntity->IsValidTarget(m_targid, m_PItem->getValidTarget(), m_errorMsg));
+    }
 
     uint16 msg = 445; // you cannot use items at this time
 

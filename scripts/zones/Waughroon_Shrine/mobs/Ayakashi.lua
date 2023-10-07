@@ -3,7 +3,7 @@
 --   NM: Ayakashi
 -- Involved in Quest: A Thief in Norg
 -----------------------------------
-mixins = {require("scripts/mixins/families/avatar")}
+mixins = {require('scripts/mixins/families/avatar')}
 -----------------------------------
 local entity = {}
 

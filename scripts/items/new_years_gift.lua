@@ -3,9 +3,9 @@
 -- New Years Gift
 -- Cactuar Custom: Mystery Gift
 -----------------------------------------
-require("scripts/globals/npc_util")
-require("scripts/globals/item_utils")
-require("scripts/globals/status")
+require('scripts/globals/npc_util')
+require('scripts/globals/item_utils')
+
 
 local itemObject = {}
 

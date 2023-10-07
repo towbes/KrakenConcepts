@@ -4,10 +4,10 @@
 -- Log ID: 4, Quest ID: 22
 -- Oswald  : !pos 47.119 -15.273 7.989 248
 -----------------------------------
-require('scripts/globals/items')
+
 require('scripts/globals/quests')
-require('scripts/globals/status')
-require('scripts/globals/zone')
+
+
 require('scripts/globals/interaction/quest')
 -----------------------------------
 
@@ -15,7 +15,7 @@ local quest = Quest:new(xi.quest.log_id.OTHER_AREAS, xi.quest.id.otherAreas.THE_
 
 quest.reward =
 {
-    item = xi.items.GLASS_FIBER_FISHING_ROD,
+    item = xi.item.GLASS_FIBER_FISHING_ROD,
     title = xi.title.THE_LOVE_DOCTOR
 }
 
@@ -30,7 +30,7 @@ quest.sections =
 
         [xi.zone.SELBINA] =
         {
-            ['Oswald'] = quest:event(73, xi.items.SHALL_SHELL),
+            ['Oswald'] = quest:event(73, xi.item.SHALL_SHELL),
 
             onEventFinish =
             {
@@ -53,13 +53,13 @@ quest.sections =
             ['Oswald'] =
             {
                 onTrade = function(player, npc, trade)
-                    if npcUtil.tradeHasExactly(trade, xi.items.SHALL_SHELL) then
+                    if npcUtil.tradeHasExactly(trade, xi.item.SHALL_SHELL) then
                         return quest:progressEvent(75)
                     end
                 end,
 
                 onTrigger = function(player, npc)
-                    return quest:event(74, xi.items.SHALL_SHELL)
+                    return quest:event(74, xi.item.SHALL_SHELL)
                 end,
             },
 

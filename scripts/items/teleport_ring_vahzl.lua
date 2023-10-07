@@ -1,7 +1,7 @@
 -----------------------------------
 -- ID: 14664
 -- Teleport ring: Vahzl
--- Enchantment: "Teleport-Vahzl"
+-- Enchantment: 'Teleport-Vahzl'
 -----------------------------------
 local itemObject = {}
 

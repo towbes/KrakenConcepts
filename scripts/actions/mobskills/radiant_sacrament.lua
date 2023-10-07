@@ -6,8 +6,8 @@
 -- Utsusemi/Blink absorb: Wipes shadows
 -- Range: 20' maximum distance, unknown smaller radial (around target)
 -- Notes: Alexander generally uses this on targets out of his melee range. Accompanied by text
--- "Offer thy worship...
--- I shall burn away...thy transgressions..."
+-- 'Offer thy worship...
+-- I shall burn away...thy transgressions...'
 -----------------------------------
 local mobskillObject = {}
 

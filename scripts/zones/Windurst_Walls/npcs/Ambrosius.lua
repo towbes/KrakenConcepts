@@ -2,7 +2,7 @@
 -- Area: Windurst Walls
 --  NPC: Ambrosius
 -----------------------------------
--- Quest NPC for "The Postman Always KOs Twice"
+-- Quest NPC for 'The Postman Always KOs Twice'
 -----------------------------------
 local entity = {}
 

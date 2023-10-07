@@ -5,7 +5,7 @@
 -- Converts damage dealt to own MP. Damage varies with TP. Yagrush: Aftermath effect varies with TP.
 -- Available only after completing the Unlocking a Myth (White Mage) quest.
 -- Damage is significantly affected by Attack. Verification Needed
--- Not aligned with any "elemental gorgets" or elemental belts due to it's absence of Skillchain properties.
+-- Not aligned with any 'elemental gorgets' or elemental belts due to it's absence of Skillchain properties.
 -- Element: None
 -- Modifiers: STR:30%  MND:70%
 -- 100%TP    200%TP    300%TP

@@ -1620,52 +1620,52 @@ local optionToAugment =
         { { augment =  29, power =  9 } }, -- Ranged Attack+10
         { { augment =  31, power =  9 } }, -- Evasion+10
         { { augment =  35, power =  3 } }, -- Magic Accuracy+4
-        { { augment = 133, power =  3 } }, -- "Magic Atk, Bonus"+4
-        { { augment = 143, power =  1 } }, -- "Double Attack"+2
+        { { augment = 133, power =  3 } }, -- 'Magic Atk, Bonus'+4
+        { { augment = 143, power =  1 } }, -- 'Double Attack'+2
         { { augment =  41, power =  2 } }, -- Critical hit rate +3
-        { { augment =  44, power =  3 } }, -- Store TP"+4 "Subtle Blow"+4
+        { { augment =  44, power =  3 } }, -- Store TP'+4 'Subtle Blow'+4
         { { augment =  39, power =  4 } }, -- Enmity+5
         { { augment =  40, power =  4 } }, -- Enmity-5
-        { { augment = 140, power =  4 } }, -- Enhances "Fast Cast" effect +5
-        { { augment = 324, power = 14 } }, -- "Call Beast" ability delay -15
-        { { augment = 211, power =  4 } }, -- "Snapshot"+5
-        { { augment = 146, power =  2 } }, -- Enhances "Dual Wield" effect +3
-        { { augment = 320, power =  3 } }, -- "Blood Pact" ability delay -4
+        { { augment = 140, power =  4 } }, -- Enhances 'Fast Cast' effect +5
+        { { augment = 324, power = 14 } }, -- 'Call Beast' ability delay -15
+        { { augment = 211, power =  4 } }, -- 'Snapshot'+5
+        { { augment = 146, power =  2 } }, -- Enhances 'Dual Wield' effect +3
+        { { augment = 320, power =  3 } }, -- 'Blood Pact' ability delay -4
         { { augment = 321, power =  1 } }, -- Avatar perpetuation cost -2
-        { { augment = 325, power =  4 } }, -- Quick Draw" ability delay -5
+        { { augment = 325, power =  4 } }, -- Quick Draw' ability delay -5
         { { augment =  96, power = 14 } }, -- Pet: Accuracy+15 Ranged Accuracy+15
         { { augment =  97, power = 14 } }, -- Pet: Attack+15 Ranged Attack+15
-        { { augment = 108, power =  6 } }, -- Pet: Magic Acc.+7 "Magic Atk. Bonus"+7
-        { { augment = 109, power =  1 } }, -- Pet: "Double Attack"+2 Crit. hit rate +2
+        { { augment = 108, power =  6 } }, -- Pet: Magic Acc.+7 'Magic Atk. Bonus'+7
+        { { augment = 109, power =  1 } }, -- Pet: 'Double Attack'+2 Crit. hit rate +2
     },
     [2] = -- AMK
     {
-        { { augment =  49, power = 2 }, { augment = 211, power =  2 } }, -- Haste+3% Enhances "Snapshot" effect (+3%)
+        { { augment =  49, power = 2 }, { augment = 211, power =  2 } }, -- Haste+3% Enhances 'Snapshot' effect (+3%)
         { { augment = 512, power = 3 }, { augment = 326, power = 14 } }, -- STR+4 Weapon Skill Accuracy +15
         { { augment = 513, power = 3 }, { augment = 328, power =  1 } }, -- DEX+4 Increases Critical Hit Damage (+2%)
         { { augment = 514, power = 3 }, { augment = 286, power =  4 } }, -- VIT+4 Shield Skill +5
         { { augment = 515, power = 3 }, { augment = 327, power =  1 } }, -- AGI+4 Increases weapon skill damage (+2%)
         { { augment = 516, power = 3 }, { augment =  35, power =  1 } }, -- INT+4 Magic Accuracy+2
-        { { augment = 517, power = 3 }, { augment = 329, power =  2 } }, -- MND+4 "Cure" potency +3%
-        { { augment = 518, power = 3 }, { augment = 331, power =  1 } }, -- CHR+4 "Waltz" ability delay -2
+        { { augment = 517, power = 3 }, { augment = 329, power =  2 } }, -- MND+4 'Cure' potency +3%
+        { { augment = 518, power = 3 }, { augment = 331, power =  1 } }, -- CHR+4 'Waltz' ability delay -2
         { { augment =  23, power = 9 }, { augment =  25, power =  4 } }, -- Accuracy+10 Attack+5
         { { augment =  27, power = 9 }, { augment =  29, power =  4 } }, -- Ranged Accuracy+10 Ranged Attack+5
         { { augment =  31, power = 9 }, { augment = 142, power =  3 } }, -- Evasion+10 Store TP +4
         { { augment =  35, power = 2 }, { augment =  52, power =  2 } }, -- Magic Accuracy+3 MP recovered while healing +3
-        { { augment = 133, power = 1 }, { augment =  51, power =  2 } }, -- "Magic Attack Bonus"+2 HP recovered while healing +3
+        { { augment = 133, power = 1 }, { augment =  51, power =  2 } }, -- 'Magic Attack Bonus'+2 HP recovered while healing +3
         { { augment =  55, power = 1 }, { augment =  39, power =  3 } }, -- Magic damage taken -2% Enmity+4
         { { augment =  57, power = 9 }, { augment =  40, power =  3 } }, -- Magic critical hit rate +10% Enmity-4
-        { { augment = 140, power = 2 }, { augment = 320, power =  2 } }, -- Enhances "Fast Cast" effect (+3%) "Blood Pact" ability delay -3
+        { { augment = 140, power = 2 }, { augment = 320, power =  2 } }, -- Enhances 'Fast Cast' effect (+3%) 'Blood Pact' ability delay -3
         { { augment = 512, power = 1 }, { augment =  49, power =  1 } }, -- STR+2 Haste +2%
         { { augment = 513, power = 1 }, { augment =  49, power =  1 } }, -- DEX+2 Haste +2%
         { { augment = 514, power = 1 }, { augment =  49, power =  1 } }, -- VIT+2 Haste +2%
         { { augment = 515, power = 1 }, { augment =  49, power =  1 } }, -- AGI+2 Haste +2%
-        { { augment = 516, power = 1 }, { augment = 140, power =  1 } }, -- INT+2 Enhances "Fast Cast" effect (+2%)
-        { { augment = 517, power = 1 }, { augment = 140, power =  1 } }, -- MND+2 Enhances "Fast Cast" effect (+2%)
-        { { augment = 518, power = 1 }, { augment = 140, power =  1 } }, -- CHR+2 Enhances "Fast Cast" effect (+2%)
+        { { augment = 516, power = 1 }, { augment = 140, power =  1 } }, -- INT+2 Enhances 'Fast Cast' effect (+2%)
+        { { augment = 517, power = 1 }, { augment = 140, power =  1 } }, -- MND+2 Enhances 'Fast Cast' effect (+2%)
+        { { augment = 518, power = 1 }, { augment = 140, power =  1 } }, -- CHR+2 Enhances 'Fast Cast' effect (+2%)
         { { augment =  23, power = 2 }, { augment = 111, power =  4 } }, -- Accuracy+3 Pet: Haste +5%
         { { augment =  23, power = 2 }, { augment = 102, power =  2 } }, -- Accuracy+3 Pet: Critical Hit Rate +3%
-        { { augment =  25, power = 2 }, { augment = 110, power =  0 } }, -- Attack+3 Pet: Adds "Regen" effect
+        { { augment =  25, power = 2 }, { augment = 110, power =  0 } }, -- Attack+3 Pet: Adds 'Regen' effect
         { { augment =  25, power = 2 }, { augment = 112, power =  9 } }, -- Attack+3 Pet: Damage taken -10%
     },
     [3] = -- ASA
@@ -1678,30 +1678,30 @@ local optionToAugment =
         { { augment =   29, power =  6 } }, -- Ranged Attack+7
         { { augment =   31, power =  6 } }, -- Evasion+7
         { { augment =   35, power =  3 } }, -- Magic Accuracy+4
-        { { augment =  133, power =  3 } }, -- "Magic Atk. Bonus" +4
+        { { augment =  133, power =  3 } }, -- 'Magic Atk. Bonus' +4
         { { augment =   49, power =  2 } }, -- Haste +3%
-        { { augment =  143, power =  1 } }, -- "Double Attack" +2%
+        { { augment =  143, power =  1 } }, -- 'Double Attack' +2%
         { { augment =  328, power =  2 } }, -- Increases Critical Hit Damage +3%
         { { augment =  332, power =  4 } }, -- Skillchain damage +5%
-        { { augment =  333, power =  4 } }, -- "Conserve TP"+5
+        { { augment =  333, power =  4 } }, -- 'Conserve TP'+5
         { { augment =   54, power =  3 } }, -- Physical damage taken -4%
         { { augment =  335, power =  9 } }, -- Magic Critical Hit damage +10%
         { { augment =  334, power =  9 } }, -- Magic Burst damage +10%
-        { { augment =  194, power =  4 } }, -- "Kick Attacks" +5
-        { { augment =  329, power =  4 } }, -- "Cure" potency +5%
-        { { augment =  336, power =  4 } }, -- "Sic" & "Ready" ability delay -5
+        { { augment =  194, power =  4 } }, -- 'Kick Attacks' +5
+        { { augment =  329, power =  4 } }, -- 'Cure' potency +5%
+        { { augment =  336, power =  4 } }, -- 'Sic' & 'Ready' ability delay -5
         { { augment =  337, power =  2 } }, -- Song Recast Delay -3
-        { { augment =  338, power =  0 } }, -- "Barrage" +1
-        { { augment =  339, power = 19 } }, -- "Elemental Siphon" +20
-        { { augment =  340, power =  4 } }, -- "Phantom Roll" ability delay -5
-        { { augment =  341, power =  9 } }, -- "Repair" potency +10%
-        { { augment =  342, power =  4 } }, -- "Waltz" TP cost -50
+        { { augment =  338, power =  0 } }, -- 'Barrage' +1
+        { { augment =  339, power = 19 } }, -- 'Elemental Siphon' +20
+        { { augment =  340, power =  4 } }, -- 'Phantom Roll' ability delay -5
+        { { augment =  341, power =  9 } }, -- 'Repair' potency +10%
+        { { augment =  342, power =  4 } }, -- 'Waltz' TP cost -50
         { { augment =   96, power =  6 } }, -- Pet: Accuracy +7 Ranged Accuracy +7
         { { augment =   97, power =  6 } }, -- Pet: Attack +7 Ranged Attack +7
-        { { augment =  115, power =  7 }, { augment = 116, power =  7 } }, -- Pet: "Store TP" +8 "Subtle Blow" +8
+        { { augment =  115, power =  7 }, { augment = 116, power =  7 } }, -- Pet: 'Store TP' +8 'Subtle Blow' +8
         { { augment =  100, power =  6 } }, -- Pet: Magic Accuracy +7
         { { augment =  913, power =  2 } }, -- Movement Speed +8%
-        { { augment =  195, power =  4 } }, -- "Subtle Blow"+5
+        { { augment =  195, power =  4 } }, -- 'Subtle Blow'+5
     },
 }
 
@@ -1876,7 +1876,7 @@ entity.onTrigger = function(player, npc)
     local receivedNexusCape = player:hasCompletedUniqueEvent(xi.uniqueEvent.RECEIVED_NEXUS_CAPE)
     local kiArgs = { 0, 0, 0, 0 }
 
-    -- Reminder that a "true" here removes the option from the player's menu
+    -- Reminder that a 'true' here removes the option from the player's menu
     for argNum = 1, 3 do
         for bitPos, keyItem in ipairs(argumentKeyItems[argNum]) do
             if not player:hasKeyItem(keyItem) then

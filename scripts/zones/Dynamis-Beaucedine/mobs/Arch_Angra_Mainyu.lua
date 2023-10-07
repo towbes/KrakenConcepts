@@ -3,8 +3,8 @@
 --  Mob: Arch Angra Mainyu
 -- Note: Mega Boss
 -----------------------------------
--- mixins = { require("scripts/mixins/job_special") }
-require("scripts/globals/dynamis")
+-- mixins = { require('scripts/mixins/job_special') }
+require('scripts/globals/dynamis')
 -----------------------------------
 local entity = {}
 
@@ -26,8 +26,8 @@ entity.onMobSpawn = function(mob)
     -- mob:hideHP(true)
 
     -- Two hours to forced depop
-    mob:setLocalVar("phase", 1)
-    mob:setLocalVar("2Hour", 0)
+    mob:setLocalVar('phase', 1)
+    mob:setLocalVar('2Hour', 0)
 end
 
 entity.onMobDisengage = function(mob)
@@ -40,14 +40,14 @@ entity.onMobDisengage = function(mob)
     -- mob:hideHP(true)
 
     -- Reset phases
-    mob:setLocalVar("phase", 1)
+    mob:setLocalVar('phase', 1)
 end
 
 
 entity.onMobFight = function(mob, target)
     -- Init Vars
     local mobHPP = mob:getHPP()
-    local phase = mob:getLocalVar("phase")
+    local phase = mob:getLocalVar('phase')
     local timeInterval = mob:getBattleTime() % 6
 
     for _, member in pairs(target:getParty()) do
@@ -73,16 +73,16 @@ entity.onMobFight = function(mob, target)
             mob:setMagicCastingEnabled(false)
             mob:setMobAbilityEnabled(false)
             mob:setMobMod(xi.mobMod.NO_MOVE, 1)
-            mob:entityAnimationPacket("casm")
+            mob:entityAnimationPacket('casm')
             mob:timer(5000, function(mobArg)
-                mobArg:entityAnimationPacket("shsm")
+                mobArg:entityAnimationPacket('shsm')
                 -- Change phase
                 mobArg:setTP(0)
                 mobArg:setModelId(mobModelID[phase])
                 mobArg:setHP(mobHP[phase])
                 mobArg:setMobMod(xi.mobMod.SKILL_LIST, skillID[phase])
                 -- Increment phase
-                mobArg:setLocalVar("phase", phase + 1)
+                mobArg:setLocalVar('phase', phase + 1)
 
                 if mobArg:getModelId() == 1056 then
                     mobArg:setAnimationSub(1)
@@ -93,10 +93,10 @@ entity.onMobFight = function(mob, target)
                 mobArg:setMobAbilityEnabled(true)
                 mobArg:setMobMod(xi.mobMod.NO_MOVE, 0)
 
-                if mob:getLocalVar("2Hour") == 0 and phase == 5 then 
+                if mob:getLocalVar('2Hour') == 0 and phase == 5 then 
                     mob:timer(2000, function(mobArg2)
                     mobArg2:useMobAbility(xi.jsa.CHAINSPELL)
-                    mobArg2:setLocalVar("2Hour", 1)
+                    mobArg2:setLocalVar('2Hour', 1)
                     end)
                 end
             end)

@@ -7,8 +7,8 @@
 -- RO by design cannot KO a target, but can significantly reduce its HP
 -- Version used by player summoners seems capped at ~2% except against Behemoths
 ---------------------------------------------------
-require("scripts/globals/mobskills")
-require("scripts/globals/utils")
+
+require('scripts/globals/utils')
 ---------------------------------------------------
 local mobskillObject = {}
 
@@ -31,8 +31,8 @@ mobskillObject.onMobWeaponSkill = function(target, mob, skill)
     hppTarget = hppTarget + (dINT / ratio)    -- A wild estimate.  Diabolos INT is 131 in Waking Dreams.
 
     -- hpp and damage do not correlate, but we can use the system to scale damage numbers
-    hppTarget = xi.mobskills.mobMagicalMove(mob, target, skill, hppTarget, xi.magic.ele.DARK, dmgmod, xi.mobskills.magicalTpBonus, 0)
-    hppTarget = xi.mobskills.mobAddBonuses(mob, target, hppTarget.dmg, xi.magic.ele.DARK)
+    hppTarget = xi.mobskills.mobMagicalMove(mob, target, skill, hppTarget, xi.element.DARK, dmgmod, xi.mobskills.magicalTpBonus, 0)
+    hppTarget = xi.mobskills.mobAddBonuses(mob, target, hppTarget.dmg, xi.element.DARK)
     hppTarget = xi.mobskills.mobFinalAdjustments(hppTarget, mob, skill, target, xi.attackType.SPECIAL, xi.damageType.DARK, xi.mobskills.shadowBehavior.IGNORE_SHADOWS)
 
     -- Clamp the HPP reduction to a 75% total cap and a 40% total Minimum

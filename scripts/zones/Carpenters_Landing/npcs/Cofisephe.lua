@@ -4,8 +4,8 @@
 -- Type: Phanauet Channel Barge Ticket Vendor
 -- !pos 210.327 -3.885 -532.511 2
 -----------------------------------
-local ID = require("scripts/zones/Carpenters_Landing/IDs")
-require("scripts/globals/barge")
+local ID = zones[xi.zone.CARPENTERS_LANDING]
+require('scripts/globals/barge')
 -----------------------------------
 local entity = {}
 local eventId = 31

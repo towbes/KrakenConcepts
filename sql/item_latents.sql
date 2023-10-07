@@ -945,8 +945,6 @@ INSERT INTO `item_latents` VALUES (14725,108,5,25,0);     -- EVA Skill +5 song/r
 
 -- Melody Earring +1
 INSERT INTO `item_latents` VALUES (14726,108,6,25,0);     -- EVA Skill +6 song/roll active
--- -------------------------------------------------------
-INSERT INTO `item_latents` VALUES  (14726,108,6,25,0);     -- EVA Skill +6 song/roll active
 
 INSERT INTO `item_latents` VALUES  (14729,9,2,8,6);
 INSERT INTO `item_latents` VALUES  (14730,1,5,8,7);
@@ -2330,7 +2328,6 @@ INSERT INTO `item_latents` VALUES (18852,978,6,38,8);    -- Occasionally attacks
 INSERT INTO `item_latents` VALUES (18859,370,3,0,50);    -- Regen+3 when HP <51%
 
 INSERT INTO `item_latents` VALUES (18865,165,7,59,20);   -- Zonure - Vs. vermin: Critical hit rate +7%
-INSERT INTO `item_latents` VALUES (18870,287,3,40,0);    -- Dweomer Maul DMG+3 in Main hand
 
 -- Hannibal's Sword
 INSERT INTO `item_latents` VALUES (18891,368,10,56,0);       -- Regain +10

@@ -16,7 +16,7 @@ entity.onMobInitialize = function(mob)
 end
 
 entity.onMobSpawn = function(mob)
-    mob:setLocalVar("[rage]timer", 3600) -- 60 minutes
+    mob:setLocalVar('[rage]timer', 3600) -- 60 minutes
     mob:setMod(xi.mod.LULLABYRES, 100)
     mob:setMod(xi.mod.SLEEPRES, 100)
 end
@@ -53,7 +53,7 @@ entity.onAdditionalEffect = function(mob, target, damage)
         table.insert(effects, xi.mob.ae.PLAGUE)
     end
     
-    --printf("effectscount %s", #effects)
+    --printf('effectscount %s', #effects)
     if #effects == 0 then
         local params = { }
         params.chance = 100

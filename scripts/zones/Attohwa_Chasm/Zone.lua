@@ -76,7 +76,7 @@ zoneObject.onConquestUpdate = function(zone, updatetype, influence, owner, ranki
 end
 
 zoneObject.onTriggerAreaEnter = function(player, triggerArea)
-    -- TODO: Gasponia's shouldn't "always" poison you. However, in retail trigger areas constantly reapply themselves without having to re-enter the trigger area.
+    -- TODO: Gasponia's shouldn't 'always' poison you. However, in retail trigger areas constantly reapply themselves without having to re-enter the trigger area.
     -- That doesn't happen currently so I'm leaving it as-is for now.
     local triggerAreaID = triggerArea:GetTriggerAreaID()
 
@@ -103,7 +103,7 @@ zoneObject.onGameHour = function(zone)
         to determine which.  for now, they're just statically set per npc_list.animation
     --]]
         -- Don't allow Citipati or Xolotl to spawn outside of night
-        local xolre = GetServerVariable(string.format("\\[SPAWN\\]"..ID.mob.XOLOTL))
+        local xolre = GetServerVariable(string.format('\\[SPAWN\\]'..ID.mob.XOLOTL))
 
     if VanadielHour() >= 4 and VanadielHour() < 20 then
         DisallowRespawn(ID.mob.CITIPATI, true)
@@ -113,7 +113,7 @@ zoneObject.onGameHour = function(zone)
         DisallowRespawn(ID.mob.XOLOTL, false)
         if os.time() > xolre and VanadielHour() == 20 then
             SpawnMob(ID.mob.XOLOTL)
-            GetMobByID(ID.mob.XOLOTL):setLocalVar("xolotlDead", 0)
+            GetMobByID(ID.mob.XOLOTL):setLocalVar('xolotlDead', 0)
         end
     end
 end

@@ -1,7 +1,7 @@
 -----------------------------------
 -- Metalid Body
 --
--- Gives the effect of "Stoneskin."
+-- Gives the effect of 'Stoneskin.'
 -- Type: Magical
 -----------------------------------
 local mobskillObject = {}

@@ -227,7 +227,7 @@ xi.spells.damage.calculateBaseDamage = function(caster, target, spellId, skillTy
             statDiffBonus = statDiffBonus + math.floor(utils.clamp(statDiff - mTable[i][1], 0, mTable[i][2]) * pTable[spellId][6 + i])
         end
 
-    -- TODO: Investigate "inflection point" (I) and its relation with the terms "soft cap" and "hard cap"
+    -- TODO: Investigate 'inflection point' (I) and its relation with the terms 'soft cap' and 'hard cap'
 
     -- Old System: Divine magic, Non-Player Elemental magic and Player elemental magic IF setting for old system is used.
     elseif
@@ -246,7 +246,7 @@ xi.spells.damage.calculateBaseDamage = function(caster, target, spellId, skillTy
             statDiffBonus = math.floor(inflexionPoint * spellMultiplier) + math.floor((statDiff - inflexionPoint) * spellMultiplier / 2)
         end
 
-    -- Old System: Ninjutsu. "I" (Infection point) isn't used due to lack of information. Values in table are currently made up and unused.
+    -- Old System: Ninjutsu. 'I' (Infection point) isn't used due to lack of information. Values in table are currently made up and unused.
     elseif skillType == xi.skill.NINJUTSU then
         statDiffBonus = math.floor(statDiff * pTable[spellId][mNPC])
     end
@@ -326,7 +326,7 @@ xi.spells.damage.calculateMagianAffinity = function()
     local magianAffinity = 1
 
     -- TODO: Code Magian Trials affinity.
-    -- TODO: ADD (because it's additive) bonuses from atmas. Also, not sure the current affinity mod is the ACTUAL "affinity" mod as understood in wikis.
+    -- TODO: ADD (because it's additive) bonuses from atmas. Also, not sure the current affinity mod is the ACTUAL 'affinity' mod as understood in wikis.
 
     return magianAffinity
 end
@@ -341,7 +341,7 @@ xi.spells.damage.calculateSDT = function(target, spellElement)
 
     -- SDT (Species/Specific Damage Taken) is a stat/mod present in mobs and players that applies a % to specific damage types.
     -- Each of the 8 elements has an SDT modifier (Modifiers 54 to 61. Check script(globals/status.lua)
-    -- Mob elemental modifiers are populated by the values set in "mob_resistances.sql" (The database). SDT columns.
+    -- Mob elemental modifiers are populated by the values set in 'mob_resistances.sql' (The database). SDT columns.
     -- The value of the modifiers are base 10000. Positive numbers mean less damage taken. Negative mean more damage taken.
     -- Examples:
     -- A value of 5000 -> 50% LESS damage taken.
@@ -353,7 +353,7 @@ xi.spells.damage.calculateSDT = function(target, spellElement)
     -- A word on SDT as understood in some wikis, even if they are refering to resistance and not actual SDT
     -- SDT under 50% applies a flat 1/2 *, which was for a long time confused with an additional resist tier, which, in reality, its an independent multiplier.
     -- This is understandable, because in a way, it is effectively a whole tier, but recent testing with skillchains/magic bursts after resist was removed from them, proved this.
-    -- SDT affects magic burst damage, but never in a "negative" way.
+    -- SDT affects magic burst damage, but never in a 'negative' way.
     -- https://www.bg-wiki.com/ffxi/Resist for some SDT info.
     -- *perhaps this simply means there is a cap/clamp limiting it there.
 
@@ -601,7 +601,7 @@ end
 
 -- Calculate: Target Magic Damage Adjustment (TMDA)
 -- SDT follow-up. This time for specific modifiers.
--- Referred to on item as "Magic Damage Taken -%", "Damage Taken -%" (Ex. Defending Ring) and "Magic Damage Taken II -%" (Aegis)
+-- Referred to on item as 'Magic Damage Taken -%', 'Damage Taken -%' (Ex. Defending Ring) and 'Magic Damage Taken II -%' (Aegis)
 xi.spells.damage.calculateTMDA = function(target, spellElement)
     local damageType                  = xi.damageType.ELEMENTAL + spellElement
     local targetMagicDamageAdjustment = target:checkLiementAbsorb(damageType) -- Check for Liement.
@@ -613,15 +613,15 @@ xi.spells.damage.calculateTMDA = function(target, spellElement)
     -- The values set for this modifiers are base 10000.
     -- -2500 in item_mods.sql means -25% damage recived.
     -- 2500 would mean 25% ADDITIONAL damage taken.
-    -- The effects of the "Shell" spells are also included in this step.
+    -- The effects of the 'Shell' spells are also included in this step.
 
     local globalDamageTaken   = target:getMod(xi.mod.DMG) / 10000         -- Mod is base 10000
     local magicDamageTaken    = target:getMod(xi.mod.DMGMAGIC) / 10000    -- Mod is base 10000
     local magicDamageTakenII  = target:getMod(xi.mod.DMGMAGIC_II) / 10000 -- Mod is base 10000
     local uMagicDamageTaken   = target:getMod(xi.mod.UDMGMAGIC) / 10000   -- Mod is base 10000.
-    local combinedDamageTaken = utils.clamp(magicDamageTaken + globalDamageTaken, -0.5, 0.5) -- The combination of regular "Damage Taken" and "Magic Damage Taken" caps at 50% both ways.
+    local combinedDamageTaken = utils.clamp(magicDamageTaken + globalDamageTaken, -0.5, 0.5) -- The combination of regular 'Damage Taken' and 'Magic Damage Taken' caps at 50% both ways.
 
-    targetMagicDamageAdjustment = utils.clamp(targetMagicDamageAdjustment + combinedDamageTaken + magicDamageTakenII, 0.125, 1.875) -- "Magic Damage Taken II" bypasses the regular cap, but combined cap is 87.5% both ways.
+    targetMagicDamageAdjustment = utils.clamp(targetMagicDamageAdjustment + combinedDamageTaken + magicDamageTakenII, 0.125, 1.875) -- 'Magic Damage Taken II' bypasses the regular cap, but combined cap is 87.5% both ways.
     targetMagicDamageAdjustment = utils.clamp(targetMagicDamageAdjustment + uMagicDamageTaken, 0, 2) -- Uncapped magic damage modifier. Cap is 100% both ways.
 
     return targetMagicDamageAdjustment
@@ -743,7 +743,7 @@ xi.spells.damage.calculateNukeAbsorbOrNullify = function(target, spellElement)
     return nukeAbsorbOrNullify
 end
 
--- Consecutive Elemental Damage Penalty. Most commonly known as "Nuke Wall".
+-- Consecutive Elemental Damage Penalty. Most commonly known as 'Nuke Wall'.
 xi.spells.damage.calculateNukeWallFactor = function(target, spellElement, finalDamage)
     local nukeWallFactor = 1
 
@@ -842,7 +842,7 @@ xi.spells.damage.useDamageSpell = function(caster, target, spell)
     finalDamage = math.floor(finalDamage * scarletDeliriumMultiplier)
     finalDamage = math.floor(finalDamage * nukeAbsorbOrNullify)
 
-    -- Handle "Nuke Wall". It must be handled after all previous calculations, but before clamp.
+    -- Handle 'Nuke Wall'. It must be handled after all previous calculations, but before clamp.
     local nukeWallFactor = xi.spells.damage.calculateNukeWallFactor(target, spellElement, finalDamage)
 
     finalDamage = math.floor(finalDamage * nukeWallFactor)
@@ -893,7 +893,7 @@ xi.spells.damage.useDamageSpell = function(caster, target, spell)
             target:addTP(100)
         end
 
-        -- Add "Magic Burst!" message
+        -- Add 'Magic Burst!' message
         if magicBurst > 1 then
             spell:setMsg(xi.msg.basic.MAGIC_BURST_DAMAGE)
             caster:triggerRoeEvent(xi.roeTrigger.MAGIC_BURST)

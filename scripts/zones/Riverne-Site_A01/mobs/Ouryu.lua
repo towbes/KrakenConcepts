@@ -34,7 +34,7 @@ entity.onMobSpawn = function(mob)
     mob:setMobMod(xi.mobMod.DRAW_IN_CUSTOM_RANGE, 15)
     mob:setMobMod(xi.mobMod.DRAW_IN_FRONT, 1)
 
-    mob:setLocalVar("twoHour", 0)
+    mob:setLocalVar('twoHour', 0)
 end
 
 entity.onMobDeath = function(mob, player, optParams)
@@ -49,10 +49,10 @@ entity.onMobFight = function(mob, target)
     -- use 2hr on 10 min cooldown
     if
         mob:getAnimationSub() == 2 and
-        mob:getBattleTime() / 15 > mob:getLocalVar("twohour")
+        mob:getBattleTime() / 15 > mob:getLocalVar('twohour')
     then
         mob:useMobAbility(694)
-        mob:setLocalVar("twohour", math.random((mob:getBattleTime() / 15) + 36, (mob:getBattleTime() / 15) + 40))
+        mob:setLocalVar('twohour', math.random((mob:getBattleTime() / 15) + 36, (mob:getBattleTime() / 15) + 40))
     end
 
     if
@@ -60,14 +60,14 @@ entity.onMobFight = function(mob, target)
         mob:actionQueueEmpty() and
         mob:canUseAbilities()
     then
-        local changeTime = mob:getLocalVar("changeTime")
+        local changeTime = mob:getLocalVar('changeTime')
 
         -- first flight
         if mob:getAnimationSub() == 0 and mob:getBattleTime() - changeTime > 60 then
             mob:setAnimationSub(1)
             mob:addStatusEffectEx(xi.effect.ALL_MISS, 0, 1, 0, 0)
             mob:setMobSkillAttack(731)
-            mob:setLocalVar("changeTime", mob:getBattleTime())
+            mob:setLocalVar('changeTime', mob:getBattleTime())
         -- land
         elseif mob:getAnimationSub() == 1 and mob:getBattleTime() - changeTime > 120 then
             mob:useMobAbility(1302)
@@ -76,7 +76,7 @@ entity.onMobFight = function(mob, target)
             mob:setAnimationSub(1)
             mob:addStatusEffectEx(xi.effect.ALL_MISS, 0, 1, 0, 0)
             mob:setMobSkillAttack(731)
-            mob:setLocalVar("changeTime", mob:getBattleTime())
+            mob:setLocalVar('changeTime', mob:getBattleTime())
         end
     end
 
@@ -90,13 +90,13 @@ entity.onMobWeaponSkill = function(target, mob, skill)
     -- only reset change time if actual perform touchdown
     -- thus keep trying until we do so
     if skill:getID() == 1302 then
-        mob:setLocalVar("changeTime", mob:getBattleTime())
+        mob:setLocalVar('changeTime', mob:getBattleTime())
     end
 end
 
 -- Prevents any stuck logic due to wipes
 entity.onMobDisengage = function(mob)
-    mob:setLocalVar("changeTime", 0)
+    mob:setLocalVar('changeTime', 0)
 end
 
 entity.onAdditionalEffect = function(mob, target, damage)

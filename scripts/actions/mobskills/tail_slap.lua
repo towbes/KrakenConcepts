@@ -1,6 +1,6 @@
 -----------------------------------
 --  Tail Slap
---  Description: Delivers an area attack. Additional effect: "Stun." Damage varies with TP.
+--  Description: Delivers an area attack. Additional effect: 'Stun.' Damage varies with TP.
 --  Type: Physical (Blunt)
 -----------------------------------
 local mobskillObject = {}

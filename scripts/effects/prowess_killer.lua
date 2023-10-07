@@ -1,6 +1,6 @@
 -----------------------------------
 -- xi.effect.PROWESS
--- "Killer" effects bonus
+-- 'Killer' effects bonus
 -----------------------------------
 local effectObject = {}
 

@@ -214,9 +214,9 @@ end
         if set, displays no messages
     fromTrade (boolean, default false)
         if set, when player has no room for items, display
-        "Try trading again after sorting your inventory"
+        'Try trading again after sorting your inventory'
         instead of
-        "Come back again after sorting your inventory"
+        'Come back again after sorting your inventory'
 --]]
 function npcUtil.giveItem(player, items, params)
     params = params or {}
@@ -296,9 +296,9 @@ end
         if set, displays no messages
     fromTrade (boolean, default false)
         if set, when player has no room for items, display
-        "Try trading again after sorting your inventory"
+        'Try trading again after sorting your inventory'
         instead of
-        "Come back again after sorting your inventory"
+        'Come back again after sorting your inventory'
 --]]
 function npcUtil.giveTempItem(player, items, params)
     params = params or {}

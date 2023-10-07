@@ -3,8 +3,8 @@
 --  NPC: Riche
 -- !pos 5.945 -3.75 13.612 1
 -----------------------------------
-local ID = require("scripts/zones/Phanauet_Channel/IDs")
-require("scripts/globals/barge")
+local ID = require('scripts/zones/Phanauet_Channel/IDs')
+require('scripts/globals/barge')
 -----------------------------------
 local entity = {}
 

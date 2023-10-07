@@ -12,7 +12,7 @@ QUEST_AVAILABLE = 0
 QUEST_ACCEPTED  = 1
 QUEST_COMPLETED = 2
 
--- Log IDs defined as "enums" here to tie into quest_rewrite
+-- Log IDs defined as 'enums' here to tie into quest_rewrite
 -- branch that will be merged in at a later date. Used
 -- as keys for the quest ID tables below.
 

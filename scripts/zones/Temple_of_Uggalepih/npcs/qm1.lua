@@ -11,8 +11,8 @@ entity.onTrade = function(player, npc, trade)
 end
 
 entity.onTrigger = function(player, npc)
-    if not player:hasItem(xi.items.TONBERRY_RATTLE) then
-        if npcUtil.giveItem(player, xi.items.TONBERRY_RATTLE) then -- Tonberry Rattle
+    if not player:hasItem(xi.item.TONBERRY_RATTLE) then
+        if npcUtil.giveItem(player, xi.item.TONBERRY_RATTLE) then -- Tonberry Rattle
             local positions =
             {
                 {126.84, 0.00,  -5.644},

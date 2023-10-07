@@ -1,7 +1,7 @@
 -----------------------------------
 -- Area: Sauromugue Champaign
 --  NPC: Stone Monument
--- Involved in quest "An Explorer's Footsteps"
+-- Involved in quest 'An Explorer's Footsteps'
 -- !pos 77.544 -2.746 -184.803 120
 -----------------------------------
 local entity = {}

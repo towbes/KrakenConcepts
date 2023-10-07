@@ -61,7 +61,7 @@ local gizmoOnTrigger = function(player, gizmoNum, placeCS, collectCS)
             return mission:event(placeCS)
         else
             -- orb has been already been placed
-            player:messageSpecial(msgBase) -- "A dark Mana Orb is already placed here."
+            player:messageSpecial(msgBase) -- 'A dark Mana Orb is already placed here.'
         end
     -- second section collecting orbs
     elseif player:getMissionStatus(mission.areaId) == 4 then
@@ -70,7 +70,7 @@ local gizmoOnTrigger = function(player, gizmoNum, placeCS, collectCS)
             return mission:event(collectCS)
         else
             --orb has already been retrieved
-            player:messageSpecial(msgBase + 3) -- "You have already retrieved a glowing Mana Orb from here."
+            player:messageSpecial(msgBase + 3) -- 'You have already retrieved a glowing Mana Orb from here.'
         end
     end
 end
@@ -82,12 +82,12 @@ local placeOrb = function(player, csid, option, npc)
 
     mission:setVarBit(player, 'GizmoUsed', gizmoNum)
     mission:setVar(player, 'OrbsPlaced', (numberPlaced + 1))
-    player:messageSpecial(msgBase + 1, 0, 0, ki) -- "The <ki> has been placed into the receptacle."
+    player:messageSpecial(msgBase + 1, 0, 0, ki) -- 'The <ki> has been placed into the receptacle.'
     player:delKeyItem(ki)
 
     -- final orb placed triggers additional message
     if mission:getVar(player, 'OrbsPlaced') == 6 then
-        player:messageSpecial(msgBase + 5) -- "You have set all of the dark Mana Orbs in place."
+        player:messageSpecial(msgBase + 5) -- 'You have set all of the dark Mana Orbs in place.'
     end
 end
 
@@ -103,7 +103,7 @@ local collectOrb = function(player, csid, option, npc)
 
     -- collected all the orbs
     if mission:getVar(player, 'OrbsCollected') == 6 then
-        player:messageSpecial(msgBase + 4) -- "You have retrieved all of the glowing Mana Orbs."
+        player:messageSpecial(msgBase + 4) -- 'You have retrieved all of the glowing Mana Orbs.'
         player:setMissionStatus(mission.areaId, 5)
         mission:setVar(player, 'OrbsCollected', 0)
         mission:setVar(player, 'GizmoEmpty', 0)
@@ -333,7 +333,7 @@ mission.sections =
         },
     },
 
-    -- Once all of the orbs have been placed, head to the crack on the east outer wall. Examine the "Gate: Magical Gizmo" door for a cutscene
+    -- Once all of the orbs have been placed, head to the crack on the east outer wall. Examine the 'Gate: Magical Gizmo' door for a cutscene
     {
         check = function(player, currentMission, missionStatus)
             return currentMission == mission.missionId and missionStatus == 3 and

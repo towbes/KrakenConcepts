@@ -228,7 +228,6 @@ namespace battleutils
 
     // returns damage taken
     int32 HandleStoneskin(CBattleEntity* PDefender, int32 damage);
-    int32 HandleMagicStoneskin(CBattleEntity* PDefender, int32 damage);
     int32 HandleOneForAll(CBattleEntity* PDefender, int32 damage);
     int32 HandleFanDance(CBattleEntity* PDefender, int32 damage);
     void  HandleScarletDelirium(CBattleEntity* PDefender, int32 damage);
@@ -248,10 +247,9 @@ namespace battleutils
     WEATHER GetWeather(CBattleEntity* PEntity, bool ignoreScholar);
     WEATHER GetWeather(CBattleEntity* PEntity, bool ignoreScholar, uint16 zoneWeather);
     bool    WeatherMatchesElement(WEATHER weather, uint8 element);
-    bool    DrawIn(CBattleEntity* PTarget, CMobEntity* PMob, float offset, uint8 drawInRange, uint16 maximumReach, bool includeParty);
+    bool    DrawIn(CBattleEntity* PEntity, CMobEntity* PMob, float offset);
     void    DoWildCardToEntity(CCharEntity* PCaster, CCharEntity* PTarget, uint8 roll);
     void    AddTraits(CBattleEntity* PEntity, TraitList_t* TraitList, uint8 level);
-    void    AddTraitsSJ(CBattleEntity* PEntity, TraitList_t* TraitList, uint8 level, size_t cutoff);
     bool    HasClaim(CBattleEntity* PEntity, CBattleEntity* PTarget);
 
     uint32 CalculateSpellCastTime(CBattleEntity*, CMagicState*);

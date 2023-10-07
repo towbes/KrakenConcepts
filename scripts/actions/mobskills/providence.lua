@@ -2,9 +2,9 @@
 -- Frog Cheer
 -- Increases magical attack and grants Elemental Seal xi.effect.
 -----------------------------------
-require("scripts/globals/mobskills")
-require("scripts/globals/settings")
-require("scripts/globals/status")
+
+
+
 -----------------------------------
 local mobskillObject = {}
 
@@ -33,11 +33,11 @@ mobskillObject.onMobWeaponSkill = function(target, mob, skill)
     end
 
     local fastCastMod = mob:getMod(xi.mod.UFASTCAST)
-    mob:setLocalVar("fastCastMod", fastCastMod)
+    mob:setLocalVar('fastCastMod', fastCastMod)
     mob:setMod(xi.mod.UFASTCAST, 150)
     mob:castSpell(spellID, mob)
     mob:timer(3000, function(mob)
-    mob:setMod(xi.mod.UFASTCAST, mob:getLocalVar("fastCastMod"))
+    mob:setMod(xi.mod.UFASTCAST, mob:getLocalVar('fastCastMod'))
     end)
     skill:setMsg(xi.msg.basic.USES)
 end

@@ -19,10 +19,10 @@ mobskillObject.onMobSkillCheck = function(target, mob, skill)
 end
 
 mobskillObject.onMobWeaponSkill = function(target, mob, skill)
-    local megaFlareCount = mob:getLocalVar("megaFlareCount")
-    mob:setLocalVar("megaFlareCount", megaFlareCount + 1)
-    mob:setLocalVar("FlareWait", 0) -- reset the variables for Megaflare.
-    mob:setLocalVar("tauntShown", 0)
+    local megaFlareCount = mob:getLocalVar('megaFlareCount')
+    mob:setLocalVar('megaFlareCount', megaFlareCount + 1)
+    mob:setLocalVar('FlareWait', 0) -- reset the variables for Megaflare.
+    mob:setLocalVar('tauntShown', 0)
     mob:setMobAbilityEnabled(true) -- re-enable the other actions on success
     mob:setMagicCastingEnabled(true)
     mob:setAutoAttackEnabled(true)
@@ -31,7 +31,7 @@ mobskillObject.onMobWeaponSkill = function(target, mob, skill)
     end
 
     local dmgmod = 1
-    local info = xi.mobskills.mobMagicalMove(mob, target, skill, 10 * mob:getMainLvl(), xi.magic.ele.FIRE, dmgmod, xi.mobskills.magicalTpBonus.NO_EFFECT)
+    local info = xi.mobskills.mobMagicalMove(mob, target, skill, 10 * mob:getMainLvl(), xi.element.FIRE, dmgmod, xi.mobskills.magicalTpBonus.NO_EFFECT)
     local dmg = xi.mobskills.mobFinalAdjustments(info.dmg, mob, skill, target, xi.attackType.MAGICAL, xi.damageType.FIRE, xi.mobskills.shadowBehavior.WIPE_SHADOWS)
     target:takeDamage(dmg, mob, xi.attackType.MAGICAL, xi.damageType.FIRE)
     return dmg

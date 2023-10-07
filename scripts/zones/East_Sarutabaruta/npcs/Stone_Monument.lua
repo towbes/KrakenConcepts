@@ -1,7 +1,7 @@
 -----------------------------------
 -- Area: East Sarutabaruta
 --  NPC: Stone Monument
---  Involved in quest "An Explorer's Footsteps"
+--  Involved in quest 'An Explorer's Footsteps'
 -- !pos 448.045 -7.808 319.980 116
 -----------------------------------
 local ID = zones[xi.zone.EAST_SARUTABARUTA]

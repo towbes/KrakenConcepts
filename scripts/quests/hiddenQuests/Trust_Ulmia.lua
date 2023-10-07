@@ -27,9 +27,9 @@ quest.sections =
         check = function(player, questVars, vars)
             return xi.trust.hasPermit(player) and
             not player:hasSpell(xi.magic.spell.ULMIA) and
-            -- On Dawn, but past "the boss"
+            -- On Dawn, but past 'the boss'
             (player:getCurrentMission(xi.mission.log_id.COP) > xi.mission.id.cop.DAWN and
-            player:getCharVar("Mission[6][840]Status") == 3)
+            player:getCharVar('Mission[6][840]Status') == 3)
             -- TODO: Additional conditions
         end,
 

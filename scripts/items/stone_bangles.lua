@@ -1,7 +1,7 @@
 -----------------------------------
 -- ID: 14988
 -- Stone Bangles
---  Enchantment: "Enstone"
+--  Enchantment: 'Enstone'
 -----------------------------------
 local itemObject = {}
 

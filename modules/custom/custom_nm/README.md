@@ -52,9 +52,9 @@ Optional parameters
     gil       = { 10000, 15000 },
     items     =
     {
-        { nm.rate.VERY_COMMON, xi.items.HIGH_QUALITY_SCORPION_CLAW }, -- 24%
-        { nm.rate.VERY_COMMON, xi.items.HIGH_QUALITY_SCORPION_CLAW }, -- 24%
-        { nm.rate.VERY_COMMON, xi.items.HIGH_QUALITY_SCORPION_CLAW }, -- 24%
+        { nm.rate.VERY_COMMON, xi.item.HIGH_QUALITY_SCORPION_CLAW }, -- 24%
+        { nm.rate.VERY_COMMON, xi.item.HIGH_QUALITY_SCORPION_CLAW }, -- 24%
+        { nm.rate.VERY_COMMON, xi.item.HIGH_QUALITY_SCORPION_CLAW }, -- 24%
     },
 
     -- See: sql/mob_skills.sql for IDs
@@ -144,7 +144,7 @@ Required parameters
     spawnWait = nm.respawn.MINUTE,            -- 1 minute
     spawnFrom = nm.spawnFrom.QM,              -- "???" (Or use a string)
     spawnArea = { -324.924, 4.287, -12.887 }, -- !pos -324.924 4.287 -12.887 191
-    spawnItem = xi.items.CHUNK_OF_ROCK_SALT,  -- Item to trade
+    spawnItem = xi.item.CHUNK_OF_ROCK_SALT,  -- Item to trade
     spawnText =
     {
         "Rock salt is scattered around the area.",

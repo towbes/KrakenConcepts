@@ -18,7 +18,7 @@ entity.onMobSpawn = function(mob)
     mob:setMobMod(xi.mobMod.DRAW_IN, 1)
     mob:setMobMod(xi.mobMod.DRAW_IN_CUSTOM_RANGE, 15)
     mob:setMobMod(xi.mobMod.WEAPON_BONUS, 125)
-    mob:setLocalVar("setTwoHourThreshold", math.random(50, 80))
+    mob:setLocalVar('setTwoHourThreshold', math.random(50, 80))
 end
 
 entity.onMobFight = function(mob, target)
@@ -31,11 +31,11 @@ entity.onMobFight = function(mob, target)
     -- only use invincible on the groud
     if
         mob:getAnimationSub() == 2 and
-        mob:getHPP() < mob:getLocalVar("setTwoHourThreshold")
+        mob:getHPP() < mob:getLocalVar('setTwoHourThreshold')
     then
         mob:useMobAbility(694)
         --make sure to use only once in case of regen back above threshold
-        mob:setLocalVar("setTwoHourThreshold", 0)
+        mob:setLocalVar('setTwoHourThreshold', 0)
     end
 
     if
@@ -43,7 +43,7 @@ entity.onMobFight = function(mob, target)
         mob:actionQueueEmpty() and
         mob:canUseAbilities()
     then
-        local changeTime = mob:getLocalVar("changeTime")
+        local changeTime = mob:getLocalVar('changeTime')
 
         if mob:getAnimationSub() == 0 and mob:getBattleTime() - changeTime > 60 then
             mob:setAnimationSub(1)
@@ -74,7 +74,7 @@ entity.onMobWeaponSkill = function(target, mob, skill)
     -- only reset change time if actual perform touchdown
     -- thus keep trying until we do so
     if skill:getID() == 1302 then
-        mob:setLocalVar("changeTime", mob:getBattleTime())
+        mob:setLocalVar('changeTime', mob:getBattleTime())
     end
 end
 

@@ -121,10 +121,10 @@ local function updateMatchingFellowWeapon(player, maxWeaponlevel, trade)
         for k,v in pairs(fellowWeapons[i]) do
             if npcUtil.tradeHasExactly(trade, v.ID) then
                 weapon = v.ID
-                if (k == "Shield") then
-                    player:setFellowValue("sub", weapon)
+                if (k == 'Shield') then
+                    player:setFellowValue('sub', weapon)
                 else
-                    player:setFellowValue("main", weapon)
+                    player:setFellowValue('main', weapon)
                 end
             end
         end
@@ -134,7 +134,7 @@ local function updateMatchingFellowWeapon(player, maxWeaponlevel, trade)
 end
 
 entity.onTrade = function(player, npc, trade)
-    if npcUtil.tradeHas(trade, 14810) and player:getLocalVar("StartOver") == 1 then
+    if npcUtil.tradeHas(trade, 14810) and player:getLocalVar('StartOver') == 1 then
         local fellowParam = getFellowParam(player)
         player:startEvent(10049,244,0,0,0,0,0,0,fellowParam)
         return
@@ -142,7 +142,7 @@ entity.onTrade = function(player, npc, trade)
 
     local UnlistedQualities = player:getQuestStatus(xi.quest.log_id.JEUNO,xi.quest.id.jeuno.UNLISTED_QUALITIES)
     if UnlistedQualities == QUEST_COMPLETED then
-        local weaponlevel = player:getFellowValue("weaponlvl")
+        local weaponlevel = player:getFellowValue('weaponlvl')
         local weapon = updateMatchingFellowWeapon(player, weaponlevel, trade)
         if (weapon == nil) then
             -- no match found
@@ -156,11 +156,11 @@ end
 
 entity.onTrigger = function(player, npc)
     local UnlistedQualities = player:getQuestStatus(xi.quest.log_id.JEUNO,xi.quest.id.jeuno.UNLISTED_QUALITIES)
-    local UnlistedQualitiesProgress = player:getCharVar("[Quest]Unlisted_Qualities")
+    local UnlistedQualitiesProgress = player:getCharVar('[Quest]Unlisted_Qualities')
     local LookingGlass = player:getQuestStatus(xi.quest.log_id.JEUNO,xi.quest.id.jeuno.GIRL_IN_THE_LOOKING_GLASS)
-    local LookingGlassProgress = player:getCharVar("[Quest]Looking_Glass")
+    local LookingGlassProgress = player:getCharVar('[Quest]Looking_Glass')
     local MirrorMirror = player:getQuestStatus(xi.quest.log_id.JEUNO,xi.quest.id.jeuno.MIRROR_MIRROR)
-    local MirrorMirrorProgress = player:getCharVar("[Quest]Mirror_Mirror")
+    local MirrorMirrorProgress = player:getCharVar('[Quest]Mirror_Mirror')
     local needToZone = player:needToZone()
     local fellowParam = 0
     local bond = 0
@@ -168,8 +168,8 @@ entity.onTrigger = function(player, npc)
 
     if UnlistedQualities == QUEST_COMPLETED then
         fellowParam = xi.fellow_utils.getFellowParam(player)
-        bond = player:getFellowValue("bond")
-        weaponlevel = player:getFellowValue("weaponlvl")
+        bond = player:getFellowValue('bond')
+        weaponlevel = player:getFellowValue('weaponlvl')
     end
 
     if
@@ -199,7 +199,7 @@ entity.onTrigger = function(player, npc)
         player:startEvent(10045)
     elseif MirrorMirror == QUEST_ACCEPTED and MirrorMirrorProgress == 3 then
         player:startEvent(10046,244,14810,0,0,0,0,0,fellowParam)
-    elseif MirrorMirror == QUEST_COMPLETED and player:getLocalVar("StartOver") == 1 then
+    elseif MirrorMirror == QUEST_COMPLETED and player:getLocalVar('StartOver') == 1 then
         player:startEvent(10053,244,14810,0,0,0,0,0,fellowParam)
     elseif MirrorMirror == QUEST_COMPLETED then
         if (player:getEquipID(xi.slot.EAR1) == 14810 or player:getEquipID(xi.slot.EAR2) == 14810) then

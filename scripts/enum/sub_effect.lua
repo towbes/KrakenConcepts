@@ -48,13 +48,13 @@ xi.subEffect =
     SHOCK_SPIKES        = 5,   -- 01-1010      22
     REPRISAL            = 6,   -- 01-0110      26
     GLINT_SPIKES        = 6,   --
-    GALE_SPIKES         = 7,   -- Used by enchantment "Cool Breeze" http://www.ffxiah.com/item/22018/
+    GALE_SPIKES         = 7,   -- Used by enchantment 'Cool Breeze' http://www.ffxiah.com/item/22018/
     CLOD_SPIKES         = 8,   --
     DELUGE_SPIKES       = 9,   --
     DEATH_SPIKES        = 10,  -- yes really: http://www.ffxiah.com/item/26944/
     COUNTER             = 63,
     -- There are no spikes effect animations beyond 63. Some effects share subeffect/animations.
-    -- "Damage Spikes" use the Blaze Spikes animation even though they are different status.
+    -- 'Damage Spikes' use the Blaze Spikes animation even though they are different status.
 
     -- SKILLCHAINS
     NONE                = 0,

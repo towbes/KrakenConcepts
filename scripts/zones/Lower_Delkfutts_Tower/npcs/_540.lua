@@ -2,7 +2,7 @@
 -- Area: Lower Delkfutt's Tower
 --  NPC: Cermet Door
 -- Cermet Door for Windy Ambassador
--- Windurst Mission 3.3 "A New Journey"
+-- Windurst Mission 3.3 'A New Journey'
 -- !pos 636 16 59 184
 -----------------------------------
 local entity = {}

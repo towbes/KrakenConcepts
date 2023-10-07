@@ -18,7 +18,7 @@ mobskillObject.onMobWeaponSkill = function(target, mob, skill)
     local numhits = 8
     local accmod  = 1
     local dmgmod  = 0.8
-    if mob:getName("Taquede") then
+    if mob:getName('Taquede') then
         dmgmod = 0.65
     end
     local info    = xi.mobskills.mobPhysicalMove(mob, target, skill, numhits, accmod, dmgmod, xi.mobskills.magicalTpBonus.NO_EFFECT)

@@ -12,8 +12,8 @@ end
 entity.onTrigger = function(player, npc)
     -- if the player has this maw teleport already, has an adventuring fellow, but does not have wotg adventuring fellow access, time to get it
     local hasMaw = player:hasTeleport(xi.teleport.type.PAST_MAW, 2)
-    local bond = player:getFellowValue("bond")
-    local wotg_unlock = player:getFellowValue("wotg_unlock")
+    local bond = player:getFellowValue('bond')
+    local wotg_unlock = player:getFellowValue('wotg_unlock')
  
     if (hasMaw == true and bond ~= nil and wotg_unlock ~= nil and wotg_unlock ~= 1) then
         local styleParam    = xi.fellow_utils.getStyleParam(player)

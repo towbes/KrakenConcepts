@@ -2,10 +2,10 @@
 -- Area: Wajaom Woodlands
 --  Mob: Ameretat
 -----------------------------------
-require("scripts/globals/mobs")
+require('scripts/globals/mobs')
 mixins = 
 { 
-require("scripts/mixins/families/ameretat"),
+require('scripts/mixins/families/ameretat'),
 }
 -----------------------------------
 local entity = {}

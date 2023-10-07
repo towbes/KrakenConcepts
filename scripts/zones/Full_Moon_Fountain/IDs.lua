@@ -30,7 +30,7 @@ zones[xi.zone.FULL_MOON_FOUNTAIN] =
     npc =
     {
     },
-    -- Prime avatars in "Waking the Beast" battlefield along with their respective 2hr ability
+    -- Prime avatars in 'Waking the Beast' battlefield along with their respective 2hr ability
     primes =
     {
         {17473558, 17473569, 17473580,   0}, -- Carbuncle (Unused)

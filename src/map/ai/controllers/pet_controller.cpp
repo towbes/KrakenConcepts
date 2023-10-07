@@ -84,7 +84,6 @@ void CPetController::DoRoamTick(time_point tick)
     }
 }
 
-
 bool CPetController::PetIsHealing()
 {
     bool isMasterHealing = (PPet->PMaster->animation == ANIMATION_HEALING);

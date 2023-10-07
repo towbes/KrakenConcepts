@@ -22,12 +22,12 @@ entity.onTrade = function(player, npc, trade)
 end
 
 entity.onTrigger = function(player, npc)
-    local FellowQuest = player:getCharVar("[Quest]Unlisted_Qualities")
+    local FellowQuest = player:getCharVar('[Quest]Unlisted_Qualities')
     if
     player:getQuestStatus(xi.quest.log_id.JEUNO,xi.quest.id.jeuno.UNLISTED_QUALITIES) == QUEST_ACCEPTED and
     utils.mask.getBit(FellowQuest,1) == false
     then
-    player:startEvent(320,0,0,0,0,0,0,0,player:getFellowValue("fellowid"))
+    player:startEvent(320,0,0,0,0,0,0,0,player:getFellowValue('fellowid'))
     end
 end
 
@@ -37,8 +37,8 @@ end
 entity.onEventFinish = function(player, csid, option, npc)
     if csid == 320 and option >= 0 and option <= 11 then
         local personality = {4,8,12,16,40,44,20,24,28,32,36,48}
-        player:setFellowValue("personality", personality[option+1])
-        player:setCharVar("[Quest]Unlisted_Qualities", utils.mask.setBit(player:getCharVar("[Quest]Unlisted_Qualities"), 1, true))
+        player:setFellowValue('personality', personality[option+1])
+        player:setCharVar('[Quest]Unlisted_Qualities', utils.mask.setBit(player:getCharVar('[Quest]Unlisted_Qualities'), 1, true))
     end
 end
 

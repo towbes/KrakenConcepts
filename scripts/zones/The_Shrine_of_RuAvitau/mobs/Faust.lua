@@ -12,7 +12,7 @@ end
 
 entity.onMobSpawn = function(mob)
     mob:setMobMod(xi.mobMod.NO_MOVE, 1)
-    mob:setLocalVar("moveTime", os.time() + 6)
+    mob:setLocalVar('moveTime', os.time() + 6)
 end
 
 entity.onMobEngaged = function(mob)
@@ -26,9 +26,9 @@ entity.onMobRoam = function(mob)
     -- Faust doesn't move from spawn point and rotates every 4-10 seconds
     if distance < 3 then
         mob:setMobMod(xi.mobMod.NO_MOVE, 1)
-        if os.time() > mob:getLocalVar("moveTime") then
+        if os.time() > mob:getLocalVar('moveTime') then
             local newTime = math.random(3, 10)
-            mob:setLocalVar("moveTime", os.time() + newTime)
+            mob:setLocalVar('moveTime', os.time() + newTime)
             if mob:getRotPos() == 255 then
                 mob:setRotation(191)
             else

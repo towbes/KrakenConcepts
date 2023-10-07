@@ -4,7 +4,7 @@
 -- Skill Level: 300
 -- Drains a percentage of damage dealt to HP varies with TP.
 -- Will not stack with Sneak Attack.
--- Not aligned with any "elemental gorgets" or "elemental belts" due to it's absence of Skillchain properties.
+-- Not aligned with any 'elemental gorgets' or 'elemental belts' due to it's absence of Skillchain properties.
 -- Element: Dark
 -- Modifiers: STR:30%  MND:50%
 -- 100%TP    200%TP    300%TP

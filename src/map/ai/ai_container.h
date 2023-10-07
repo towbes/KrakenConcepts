@@ -131,16 +131,7 @@ public:
     // pathfinder, not guaranteed to be implemented
     std::unique_ptr<CPathFind> PathFind;
 
-//protected: Umeboshi "Commenting this out to move below for pixie commit"
-    // input controller
-    // std::unique_ptr<CController> Controller;
-    // current synchronized server time (before AI loop execution)
-    // time_point m_Tick;
-    // time_point m_PrevTick;
-    // entity who holds this AI
-    // CBaseEntity* PEntity;
-
-        protected:
+protected:
     // input controller
     std::unique_ptr<CController> Controller;
     // current synchronized server time (before AI loop execution)

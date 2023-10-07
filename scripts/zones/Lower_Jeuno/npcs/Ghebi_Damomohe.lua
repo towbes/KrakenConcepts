@@ -8,10 +8,10 @@
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)
-    local astralCovenantCD = player:getCharVar("[ENM]AstralCovenant")
+    local astralCovenantCD = player:getCharVar('[ENM]AstralCovenant')
 
     if
-        npcUtil.tradeHas(trade, xi.items.FLORID_STONE) and
+        npcUtil.tradeHas(trade, xi.item.FLORID_STONE) and
         player:hasKeyItem(xi.ki.PSOXJA_PASS) and
         astralCovenantCD < os.time()
     then
@@ -27,7 +27,7 @@ entity.onTrade = function(player, npc, trade)
 end
 
 entity.onTrigger = function(player, npc)
-    local astralCovenantCD = player:getCharVar("[ENM]AstralCovenant")
+    local astralCovenantCD = player:getCharVar('[ENM]AstralCovenant')
 
     if
         player:hasKeyItem(xi.ki.PSOXJA_PASS) and
@@ -66,7 +66,7 @@ entity.onEventFinish = function(player, csid, option, npc)
         player:setTitle(xi.title.TENSHODO_MEMBER)
 
     elseif csid == 10047 then
-        player:setCharVar("[ENM]AstralCovenant", VanadielTime() + (xi.settings.main.ENM_COOLDOWN * 3600)) -- Current time + (ENM_COOLDOWN*1hr in seconds)
+        player:setCharVar('[ENM]AstralCovenant', VanadielTime() + (xi.settings.main.ENM_COOLDOWN * 3600)) -- Current time + (ENM_COOLDOWN*1hr in seconds)
         player:messageSpecial(ID.text.KEYITEM_OBTAINED, xi.ki.ASTRAL_COVENANT)
         player:addKeyItem(xi.ki.ASTRAL_COVENANT)
     end

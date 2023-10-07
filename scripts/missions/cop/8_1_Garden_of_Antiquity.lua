@@ -5,16 +5,8 @@
 -- !addmission 6 800
 -- Crystalline Field !pos .1 -10 -464 33
 -----------------------------------
-require('scripts/globals/interaction/mission')
-require('scripts/globals/missions')
-require('scripts/globals/npc_util')
-require("scripts/globals/teleports")
-require('scripts/globals/titles')
-require('scripts/globals/utils')
-require('scripts/globals/zone')
------------------------------------
-local altaieuID = require('scripts/zones/AlTaieu/IDs')
-local palaceID  = require('scripts/zones/Grand_Palace_of_HuXzoi/IDs')
+local altaieuID = zones[xi.zone.ALTAIEU]
+local palaceID  = zones[xi.zone.GRAND_PALACE_OF_HUXZOI]
 -----------------------------------
 
 local mission = Mission:new(xi.mission.log_id.COP, xi.mission.id.cop.GARDEN_OF_ANTIQUITY)
@@ -86,7 +78,7 @@ end
 
 mission.reward =
 {
-    item = xi.items.TAVNAZIAN_RING,
+    item = xi.item.TAVNAZIAN_RING,
     nextMission = { xi.mission.log_id.COP, xi.mission.id.cop.A_FATE_DECIDED },
 }
 
@@ -206,7 +198,7 @@ mission.sections =
             {
                 [1] = function(player, csid, option)
                     if player:getFreeSlotsCount() == 0 then
-                        mission:messageSpecial(palaceID.text.ITEM_CANNOT_BE_OBTAINED, xi.items.TAVNAZIAN_RING)
+                        mission:messageSpecial(palaceID.text.ITEM_CANNOT_BE_OBTAINED, xi.item.TAVNAZIAN_RING)
                     else
                         mission:complete(player)
                     end

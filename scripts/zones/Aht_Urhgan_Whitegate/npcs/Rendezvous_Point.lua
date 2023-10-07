@@ -3,11 +3,11 @@
 --  NPC: Rendezvous Point
 -- For interacting with Adventuring Fellow
 -----------------------------------
-local ID = require("scripts/zones/Aht_Urhgan_Whitegate/IDs")
-require("scripts/globals/pets/fellow")
-require("scripts/globals/fellow_utils")
-require("scripts/globals/npc_util")
-require("scripts/globals/quests")
+local ID = zones[xi.zone.AHT_URHGAN_WHITEGATE]
+require('scripts/globals/pets/fellow')
+require('scripts/globals/fellow_utils')
+require('scripts/globals/npc_util')
+require('scripts/globals/quests')
 -----------------------------------
 local entity = {}
 
@@ -16,13 +16,13 @@ end
 
 entity.onTrigger = function(player,npc)
     local zone          = player:getZoneID()
-    local optionsMask   = player:getFellowValue("optionsMask")
-    local bond          = player:getFellowValue("bond")
+    local optionsMask   = player:getFellowValue('optionsMask')
+    local bond          = player:getFellowValue('bond')
     local menuParam     = 240 -- default chat, quests, battle options
         if bond >= 30 then menuParam = menuParam - 16 end -- appearances option
         if not player:hasItem(14810) then menuParam = menuParam - 32 end -- need pearl option
     local pearl         = 0 -- able to recieve dropped pearl
-        if player:getFellowValue("pearlTime") > os.time() then pearl = 1 end -- not able
+        if player:getFellowValue('pearlTime') > os.time() then pearl = 1 end -- not able
     local styleParam    = xi.fellow_utils.getStyleParam(player)
     local lookParam     = xi.fellow_utils.getLookParam(player)
     local fellowParam   = xi.fellow_utils.getFellowParam(player)
@@ -46,28 +46,28 @@ end
 
 entity.onEventUpdate = function(player,csid,option)
     local zone          = player:getZoneID()
-    local optionsMask   = player:getFellowValue("optionsMask")
-    local job           = player:getFellowValue("job")
-    local bond          = player:getFellowValue("bond")
-    local armorLock     = player:getFellowValue("armorLock")
+    local optionsMask   = player:getFellowValue('optionsMask')
+    local job           = player:getFellowValue('job')
+    local bond          = player:getFellowValue('bond')
+    local armorLock     = player:getFellowValue('armorLock')
     local styleParam    = xi.fellow_utils.getStyleParam(player)
     local lookParam     = xi.fellow_utils.getLookParam(player)
     local fellowParam   = xi.fellow_utils.getFellowParam(player)
     local questParam    = 0 -- default quest chat
 -- TODO: Quest options as quests are implemented
         if player:getQuestStatus(xi.quest.log_id.JEUNO,xi.quest.id.jeuno.PAST_REFLECTIONS) == QUEST_ACCEPTED then
-        --    if player:getCharVar("[Quest]PastReflections") == 2 then
+        --    if player:getCharVar('[Quest]PastReflections') == 2 then
                 questParam = 1
         --    end
         end
     local tacticsParam = 0 -- tactics pearl quest
         if bond >= 35 and not player:hasKeyItem(xi.ki.EMPTINESS_INVESTIGATION_NOTE) and
-        os.time() > player:getFellowValue("tacticsTime") then -- 1 per conquest tally
+        os.time() > player:getFellowValue('tacticsTime') then -- 1 per conquest tally
             tacticsParam = 1
         end
     local battleParam = 232 -- default level, signals, weaponskills options
         if bond >= 5 then battleParam = battleParam - 8 end -- combat styles option
-    local levelParam = bit.lshift(job,8) + player:getFellowValue("level")
+    local levelParam = bit.lshift(job,8) + player:getFellowValue('level')
     local signalsParam = 244 -- low hp, low mp, other (healer, stalwart, soothing)
         switch (job) : caseof
         {
@@ -96,25 +96,25 @@ entity.onEventUpdate = function(player,csid,option)
 
     if csid == 966 and option == 0xA000000 then -- call for fellow
         player:updateEvent(zone, 0, 0, 0, 0, styleParam, lookParam, fellowParam)
-        local lastBondFromChatTime = player:getCharVar("bondFromChatTime")
+        local lastBondFromChatTime = player:getCharVar('bondFromChatTime')
         if (os.time() > lastBondFromChatTime) then
-            player:setCharVar("bondFromChatTime", JstMidnight())
-            player:setFellowValue("bond", bond + 1)
+            player:setCharVar('bondFromChatTime', JstMidnight())
+            player:setFellowValue('bond', bond + 1)
         end
     elseif csid == 966 and option == 0xA000004 then -- need signal pearl
         if npcUtil.giveItem(player,14810) then
             if bond >= 5 then
-                player:setFellowValue("bond", bond - 5)
+                player:setFellowValue('bond', bond - 5)
             else
-                player:setFellowValue("bond", 0)
+                player:setFellowValue('bond', 0)
             end
-            player:setFellowValue("pearlTime", JstMidnight()) -- 1 pearl per day
+            player:setFellowValue('pearlTime', JstMidnight()) -- 1 pearl per day
         end
     elseif csid == 966 and (option == 0xA000006 or option == 0x5000006) then -- talk about quests
         player:updateEvent(zone, 0, questParam, tacticsParam, 0, styleParam, lookParam, fellowParam)
     elseif csid == 966 and (option == 0xA00000F or option == 0x500000F) then -- tactics pearl quest
         npcUtil.giveKeyItem(player, xi.ki.EMPTINESS_INVESTIGATION_NOTE)
-        player:setFellowValue("tacticsTime", getConquestTally()) -- 1 per conquest tally
+        player:setFellowValue('tacticsTime', NextConquestTally()) -- 1 per conquest tally
     elseif csid == 966 and (option == 0xA000007 or option == 0x5000007) then -- talk about battle
         player:updateEvent(zone, 0, battleParam, 0, 0, styleParam, levelParam, fellowParam)
     elseif csid == 966 and (option == 0xA000008 or option == 0x5000008) then -- talk about appearances
@@ -122,53 +122,53 @@ entity.onEventUpdate = function(player,csid,option)
     elseif csid == 966 and (option == 0xA00000B or option == 0x500000B) then -- headwear
         player:updateEvent(zone, 0, headwearParam, 0, 0, styleParam, lookParam, fellowParam)
     elseif csid == 966 and (option == 0xA000103 or option == 0x5000103) then -- headwear option 1
-        player:setFellowValue("head", 1)
+        player:setFellowValue('head', 1)
     elseif csid == 966 and (option == 0xA000203 or option == 0x5000203) then -- headwear option 2
-        player:setFellowValue("head", 2)
+        player:setFellowValue('head', 2)
     elseif csid == 966 and (option == 0xA000303 or option == 0x5000303) then -- headwear option 3
-        player:setFellowValue("head", 3)
+        player:setFellowValue('head', 3)
     elseif csid == 966 and (option == 0xA000403 or option == 0x5000403) then -- headwear option 4
-        player:setFellowValue("head", 4)
+        player:setFellowValue('head', 4)
     elseif csid == 966 and (option == 0xA000503 or option == 0x5000503) then -- headwear option 5
-        player:setFellowValue("head", 5)
+        player:setFellowValue('head', 5)
     elseif csid == 966 and (option == 0xA000603 or option == 0x5000603) then -- headwear option 6
-        player:setFellowValue("head", 6)
+        player:setFellowValue('head', 6)
     elseif csid == 966 and (option == 0xA000703 or option == 0x5000703) then -- headwear option 7
-        player:setFellowValue("head", 7)
+        player:setFellowValue('head', 7)
     elseif csid == 966 and (option == 0xA000803 or option == 0x5000803) then -- headwear option 8
-        player:setFellowValue("head", 8)
+        player:setFellowValue('head', 8)
     elseif csid == 966 and (option == 0xA000903 or option == 0x5000903) then -- headwear option 9
-        player:setFellowValue("head", 9)
+        player:setFellowValue('head', 9)
     elseif csid == 966 and (option == 0xA001003 or option == 0x5001003) then -- headwear option 10
-        player:setFellowValue("head", 0)
+        player:setFellowValue('head', 0)
     elseif csid == 966 and (option == 0xA00000C or option == 0x500000C) then -- fashionable equipment
         player:updateEvent(zone, 0, equipmentParam, equipLocksParam, 0, styleParam, lookParam, fellowParam)
     elseif csid == 966 and (option == 0xA00010D or option == 0x500010D) then -- body
-        player:setFellowValue("armorLock", 2)
+        player:setFellowValue('armorLock', 2)
         player:updateEvent(zone, 0, 2, equipLocksParam, 0, styleParam, lookParam, fellowParam)
     elseif csid == 966 and (option == 0xA00020D or option == 0x500020D) then -- hands
-        player:setFellowValue("armorLock", 4)
+        player:setFellowValue('armorLock', 4)
         player:updateEvent(zone, 0, 4, equipLocksParam, 0, styleParam, lookParam, fellowParam)
     elseif csid == 966 and (option == 0xA00030D or option == 0x500030D) then -- legs
-        player:setFellowValue("armorLock", 8)
+        player:setFellowValue('armorLock', 8)
         player:updateEvent(zone, 0, 8, equipLocksParam, 0, styleParam, lookParam, fellowParam)
     elseif csid == 966 and (option == 0xA00040D or option == 0x500040D) then -- feet
-        player:setFellowValue("armorLock", 16)
+        player:setFellowValue('armorLock', 16)
         player:updateEvent(zone, 0, 16, equipLocksParam, 0, styleParam, lookParam, fellowParam)
     elseif csid == 966 and (option == 0xA00050D or option == 0x500050D) then -- none
-        player:setFellowValue("armorLock", 0)
+        player:setFellowValue('armorLock', 0)
         player:updateEvent(zone, 0, 0, 0, 0, styleParam, lookParam, fellowParam)
     elseif csid == 966 and (option == 0xA00010E or option == 0x500010E) then -- body 2
-        player:setFellowValue("armorLock", armorLock+2)
+        player:setFellowValue('armorLock', armorLock+2)
         player:updateEvent(zone, 0, armorLock+2, equipLocksParam, 0, styleParam, lookParam, fellowParam)
     elseif csid == 966 and (option == 0xA00020E or option == 0x500020E) then -- hands 2
-        player:setFellowValue("armorLock", armorLock+4)
+        player:setFellowValue('armorLock', armorLock+4)
         player:updateEvent(zone, 0, armorLock+4, equipLocksParam, 0, styleParam, lookParam, fellowParam)
     elseif csid == 966 and (option == 0xA00030E or option == 0x500030E) then -- legs 2
-        player:setFellowValue("armorLock", armorLock+8)
+        player:setFellowValue('armorLock', armorLock+8)
         player:updateEvent(zone, 0, armorLock+8, equipLocksParam, 0, styleParam, lookParam, fellowParam)
     elseif csid == 966 and (option == 0xA00040E or option == 0x500040E) then -- feet 2
-        player:setFellowValue("armorLock", armorLock+16)
+        player:setFellowValue('armorLock', armorLock+16)
         player:updateEvent(zone, 0, armorLock+16, equipLocksParam, 0, styleParam, lookParam, fellowParam)
     elseif csid == 966 and option == 0x1000007 then -- level and style
         player:updateEvent(zone, 0, 0, 0, 0, 0, levelParam, fellowParam)
@@ -176,73 +176,73 @@ entity.onEventUpdate = function(player,csid,option)
         player:updateEvent(zone, 0, signalsParam, 0, 0, styleParam, lookParam, fellowParam)
     elseif csid == 966 and (option == 0xA000101 or option == 0x5000101) then -- combat signals - low hp [YES]
         optionsMask = bit.bor(optionsMask, bit.lshift(1,1))
-        player:setFellowValue("optionsMask",optionsMask)
+        player:setFellowValue('optionsMask',optionsMask)
     elseif csid == 966 and (option == 0xA000201 or option == 0x5000201) then -- combat signals - low hp [NO]
         if (bit.band(optionsMask, bit.lshift(1,1)) == 2) then
             optionsMask = bit.bxor(optionsMask, bit.lshift(1,1))
-            player:setFellowValue("optionsMask",optionsMask)
+            player:setFellowValue('optionsMask',optionsMask)
         end
     elseif csid == 966 and (option == 0xA000301 or option == 0x5000301) then -- combat signals - low mp [YES]
         optionsMask = bit.bor(optionsMask, bit.lshift(1,2))
-        player:setFellowValue("optionsMask",optionsMask)
+        player:setFellowValue('optionsMask',optionsMask)
     elseif csid == 966 and (option == 0xA000401 or option == 0x5000401) then -- combat signals - low mp [NO]
         if (bit.band(optionsMask, bit.lshift(1,2)) == 4) then
             optionsMask = bit.bxor(optionsMask, bit.lshift(1,2))
-            player:setFellowValue("optionsMask",optionsMask)
+            player:setFellowValue('optionsMask',optionsMask)
         end
     elseif csid == 966 and (option == 0xA000501 or option == 0x5000501) then -- combat signals - ws use [YES]
         optionsMask = bit.bor(optionsMask, bit.lshift(1,3))
-        player:setFellowValue("optionsMask",optionsMask)
+        player:setFellowValue('optionsMask',optionsMask)
     elseif csid == 966 and (option == 0xA000601 or option == 0x5000601) then -- combat signals - ws use [NO]
         if (bit.band(optionsMask, bit.lshift(1,3)) == 8) then
             optionsMask = bit.bxor(optionsMask, bit.lshift(1,3))
-            player:setFellowValue("optionsMask",optionsMask)
+            player:setFellowValue('optionsMask',optionsMask)
         end
     elseif csid == 966 and (option == 0xA000701 or option == 0x5000701) then -- combat signals - other [YES]
         optionsMask = bit.bor(optionsMask, bit.lshift(1,4))
-        player:setFellowValue("optionsMask",optionsMask)
+        player:setFellowValue('optionsMask',optionsMask)
     elseif csid == 966 and (option == 0xA000801 or option == 0x5000801) then -- combat signals - other [NO]
         if (bit.band(optionsMask, bit.lshift(1,4)) == 16) then
             optionsMask = bit.bxor(optionsMask, bit.lshift(1,4))
-            player:setFellowValue("optionsMask",optionsMask)
+            player:setFellowValue('optionsMask',optionsMask)
         end
     elseif csid == 966 and (option == 0xA000010 or option == 0x5000010) then -- ws aoe [NO]
         if (bit.band(optionsMask, bit.lshift(1,0)) == 1) then
             optionsMask = bit.bxor(optionsMask, bit.lshift(1,0))
-            player:setFellowValue("optionsMask",optionsMask)
+            player:setFellowValue('optionsMask',optionsMask)
         end
     elseif csid == 966 and (option == 0xA000110 or option == 0x5000110) then -- ws aoe [YES]
         optionsMask = bit.bor(optionsMask, bit.lshift(1,0))
-        player:setFellowValue("optionsMask",optionsMask)
+        player:setFellowValue('optionsMask',optionsMask)
     elseif csid == 966 and (option == 0xA00000A or option == 0x500000A) then -- combat styles
         player:updateEvent(zone, 0, combatParam, 0, 0, styleParam, lookParam, fellowParam)
     elseif csid == 966 and (option == 0xA000102 or option == 0x5000102) then -- shield style
-        player:setFellowValue("job", 1)
+        player:setFellowValue('job', 1)
     elseif csid == 966 and (option == 0xA000202 or option == 0x5000202) then -- attacker style
-        player:setFellowValue("job", 2)
+        player:setFellowValue('job', 2)
     elseif csid == 966 and (option == 0xA000302 or option == 0x5000302) then -- healer style
-        player:setFellowValue("job", 3)
+        player:setFellowValue('job', 3)
     elseif csid == 966 and (option == 0xA000402 or option == 0x5000402) then -- stalwart style
-        player:setFellowValue("job", 4)
+        player:setFellowValue('job', 4)
     elseif csid == 966 and (option == 0xA000502 or option == 0x5000502) then -- fierce style
-        player:setFellowValue("job", 5)
+        player:setFellowValue('job', 5)
     elseif csid == 966 and (option == 0xA000602 or option == 0x5000602) then -- soothing style
-        player:setFellowValue("job", 6)
+        player:setFellowValue('job', 6)
     end
 end
 
 entity.onEventFinish = function(player,csid,option)
-    local optionsMask = player:getFellowValue("optionsMask")
+    local optionsMask = player:getFellowValue('optionsMask')
 
     if csid == 965 and option == 1820 then -- T.M. Fortitude
         optionsMask = bit.bor(optionsMask, bit.lshift(1,5))
-        player:setFellowValue("optionsMask",optionsMask)
+        player:setFellowValue('optionsMask',optionsMask)
     elseif csid == 965 and option == 1839 then -- T.M. Might
         optionsMask = bit.bor(optionsMask, bit.lshift(1,6))
-        player:setFellowValue("optionsMask",optionsMask)
+        player:setFellowValue('optionsMask',optionsMask)
     elseif csid == 965 and option == 1876 then -- T.M. Endurance
         optionsMask = bit.bor(optionsMask, bit.lshift(1,7))
-        player:setFellowValue("optionsMask",optionsMask)
+        player:setFellowValue('optionsMask',optionsMask)
     end
 end
 

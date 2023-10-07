@@ -12,7 +12,7 @@ end
 
 entity.onTrigger = function(player, npc)
     local MirrorMirror = player:getQuestStatus(xi.quest.log_id.JEUNO,xi.quest.id.jeuno.MIRROR_MIRROR)
-    local MirrorMirrorProgress = player:getCharVar("[Quest]Mirror_Mirror")
+    local MirrorMirrorProgress = player:getCharVar('[Quest]Mirror_Mirror')
     local fellowParam = xi.fellow_utils.getFellowParam(player)
 
     if MirrorMirror == QUEST_ACCEPTED and MirrorMirrorProgress == 1 then

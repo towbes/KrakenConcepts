@@ -69,9 +69,9 @@ xi.job_utils.summoner.canUseBloodPact = function(player, pet, target, petAbility
         -- No out of range error message is unhelpful so we are setting that message anyway.
 
         -- TODO: The hardcoded ranges of 21/22 need to take into account mob size.
-        -- TODO: add "era" setting or setting in general for this. Era used to have a smaller range for BPs.
-        -- This is a "new" change -- https://forum.square-enix.com/ffxi/threads/48564-Sep-16-2015-%28JST%29-Version-Update
-        -- TODO: verify who/what is "out of range" for out of range messages
+        -- TODO: add 'era' setting or setting in general for this. Era used to have a smaller range for BPs.
+        -- This is a 'new' change -- https://forum.square-enix.com/ffxi/threads/48564-Sep-16-2015-%28JST%29-Version-Update
+        -- TODO: verify who/what is 'out of range' for out of range messages
 
         -- check if target is too far from pet for ability
         if pet:checkDistance(target) >= petAbility:getRange() then

@@ -6,9 +6,9 @@
 --  Utsusemi/Blink absorb: Wipes Shadows
 --  Note: Used by Bahamut in The Wyrmking Descends
 ---------------------------------------------
-require("scripts/globals/settings")
-require("scripts/globals/status")
-require("scripts/globals/mobskills")
+
+
+
 ---------------------------------------------
 local mobskillObject = {}
 
@@ -23,7 +23,7 @@ end
 mobskillObject.onMobWeaponSkill = function(target, mob, skill)
     local dmgmod = 4
 
-    local info = xi.mobskills.mobMagicalMove(mob, target, skill, mob:getWeaponDmg(), xi.magic.ele.NONE, dmgmod, xi.mobskills.magicalTpBonus.TP_NO_EFFECT)
+    local info = xi.mobskills.mobMagicalMove(mob, target, skill, mob:getWeaponDmg(), xi.element.NONE, dmgmod, xi.mobskills.magicalTpBonus.TP_NO_EFFECT)
     local dmg = xi.mobskills.mobFinalAdjustments(info.dmg, mob, skill, target, xi.attackType.MAGICAL, xi.damageType.NONE, xi.mobskills.shadowBehavior.IGNORE_SHADOWS)
     target:takeDamage(dmg, mob, xi.attackType.MAGICAL, xi.damageType.ELEMENTAL)
 

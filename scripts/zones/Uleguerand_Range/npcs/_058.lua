@@ -3,8 +3,8 @@
 --  NPC: Frozen Waterfall
 --  Receive Chamnaet Ice upon trading Cotton Pouch
 -----------------------------------
-local ID = require("scripts/zones/Uleguerand_Range/IDs")
-require("scripts/globals/keyitems")
+local ID = zones[xi.zone.ULEGUERAND_RANGE]
+
 -----------------------------------
 local entity = {}
 

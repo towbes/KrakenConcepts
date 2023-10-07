@@ -7,7 +7,7 @@ local entity = {}
 entity.onMobSpawn = function(mob)
     mob:setMobMod(xi.mobMod.IDLE_DESPAWN, 60)
     mob:setMod(xi.mod.MOVE, 12)
-    local ph = GetMobByID(mob:getLocalVar("ph"))
+    local ph = GetMobByID(mob:getLocalVar('ph'))
     if ph then
         local pos = ph:getPos()
         mob:setPos(pos.x, pos.y, pos.z, pos.r)
@@ -22,32 +22,32 @@ entity.onMobSpawn = function(mob)
 end
 
 entity.onMobFight = function(mob, target)
-    local panzerfaustCounter = mob:getLocalVar("panzerfaustCounter")
-    local panzerfaustMax = mob:getLocalVar("panzerfaustMax")
+    local panzerfaustCounter = mob:getLocalVar('panzerfaustCounter')
+    local panzerfaustMax = mob:getLocalVar('panzerfaustMax')
 
     if panzerfaustCounter == panzerfaustMax and panzerfaustMax > 0 then
-        mob:setLocalVar("panzerfaustCounter", 0)
-        mob:setLocalVar("panzerfaustMax", 0)
+        mob:setLocalVar('panzerfaustCounter', 0)
+        mob:setLocalVar('panzerfaustMax', 0)
     end
 
     if panzerfaustMax > 0 and mob:canUseAbilities() and mob:checkDistance(target) < 6 then
         if panzerfaustCounter > panzerfaustMax then
-            mob:setLocalVar("panzerfaustCounter", 0)
-            mob:setLocalVar("panzerfaustMax", 0)
+            mob:setLocalVar('panzerfaustCounter', 0)
+            mob:setLocalVar('panzerfaustMax', 0)
         elseif mob:getTarget() ~= nil then
-            mob:setLocalVar("panzerfaustCounter", panzerfaustCounter + 1)
+            mob:setLocalVar('panzerfaustCounter', panzerfaustCounter + 1)
             mob:useMobAbility(536)
         end
     end
 end
 
 entity.onMobWeaponSkillPrepare = function(mob, target)
-    local panzerfaustCounter = mob:getLocalVar("panzerfaustCounter")
-    local panzerfaustMax = mob:getLocalVar("panzerfaustMax")
+    local panzerfaustCounter = mob:getLocalVar('panzerfaustCounter')
+    local panzerfaustMax = mob:getLocalVar('panzerfaustMax')
 
     if panzerfaustCounter == 0 and panzerfaustMax == 0 then
         panzerfaustMax = math.random(2, 5)
-        mob:setLocalVar("panzerfaustMax", panzerfaustMax)
+        mob:setLocalVar('panzerfaustMax', panzerfaustMax)
     end
 end
 
@@ -55,7 +55,7 @@ entity.onMobDeath = function(mob, player, optParams)
 end
 
 entity.onMobDespawn = function(mob)
-    mob:removeListener("PH_VAR")
+    mob:removeListener('PH_VAR')
     mob:resetLocalVars()
 end
 

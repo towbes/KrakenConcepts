@@ -21,7 +21,7 @@ mobskillObject.onMobWeaponSkill = function(target, mob, skill)
     -- Regular Thfs for ~150
     if (mob:getID() == NYZUL_ISLE_INVESTIGATION_QIQIRN_MINE) then
         dmgmod = 1
-        local mobVar = mob:getLocalVar("wDmgMultiplier")
+        local mobVar = mob:getLocalVar('wDmgMultiplier')
         if (mobVar > 0) then
             wDmgMultiplier = mobVar
         else
@@ -34,7 +34,7 @@ mobskillObject.onMobWeaponSkill = function(target, mob, skill)
     if (mob:getID() >= 17072173 and mob:getID() <= 17072177) then -- Cheese Hoarder Gigiroon
         dmgmod = 1
         -- Cheese's bombs do flat dmg pre-shell and barfira (500 or 100)
-        baseDmg = mob:getLocalVar("MineDamage")
+        baseDmg = mob:getLocalVar('MineDamage')
     end
 
     local info = xi.mobskills.mobMagicalMove(mob, target, skill, mob:getWeaponDmg() * 5, xi.element.FIRE, dmgmod, xi.mobskills.magicalTpBonus.NO_EFFECT)

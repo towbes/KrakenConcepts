@@ -2,38 +2,38 @@
 -- Area: Ru'Lud Gardens
 --  NPC: Venessa
 -----------------------------------
-local ID = require("scripts/zones/RuLude_Gardens/IDs")
-require("scripts/globals/npc_util")
-require("scripts/globals/keyitems")
-require("scripts/globals/items")
+local ID = zones[xi.zone.RULUDE_GARDENS]
+require('scripts/globals/npc_util')
+
+
 -----------------------------------
 local entity = {}
 
 local rewards =
 {
-    {   xi.items.BRILLIANT_VISION,  xi.items.SUMMONING_EARRING },
-    {     xi.items.PAINFUL_VISION,       xi.items.DARK_EARRING },
-    {    xi.items.TIMOROUS_VISION, xi.items.ENFEEBLING_EARRING },
-    {   xi.items.VENERABLE_VISION,     xi.items.STRING_EARRING },
-    {     xi.items.VIOLENT_VISION,    xi.items.BUCKLER_EARRING },
-    {   xi.items.AUDACIOUS_VISION,     xi.items.DIVINE_EARRING },
-    {   xi.items.ENDEARING_VISION,    xi.items.SINGING_EARRING },
-    { xi.items.PUNCTILIOUS_VISION,   xi.items.PARRYING_EARRING },
-    {      xi.items.VERNAL_VISION,    xi.items.EVASION_EARRING },
-    {       xi.items.VIVID_VISION,    xi.items.HEALING_EARRING },
-    {   xi.items.MALICIOUS_VISION,   xi.items.NINJUTSU_EARRING },
-    { xi.items.PRETENTIOUS_VISION,  xi.items.ELEMENTAL_EARRING },
-    {    xi.items.PRISTINE_VISION,       xi.items.WIND_EARRING },
-    {      xi.items.SOLEMN_VISION,   xi.items.GUARDING_EARRING },
-    {     xi.items.VALIANT_VISION, xi.items.AUGMENTING_EARRING },
-    {   xi.items.IMPETUOUS_VISION,     xi.items.TOREADERS_RING },
-    {     xi.items.TENUOUS_VISION,        xi.items.ASTRAL_ROPE },
-    {       xi.items.SNIDE_VISION,      xi.items.SAFETY_MANTLE },
-    {        xi.items.GRAVE_IMAGE,          xi.items.HABU_SKIN },
-    {     xi.items.BEATIFIC_IMAGE,          xi.items.TIGER_EYE },
-    {     xi.items.VALOROUS_IMAGE,    xi.items.RHEIYOH_LEATHER },
-    {      xi.items.ANCIENT_IMAGE,     xi.items.OVERSIZED_FANG },
-    {       xi.items.VIRGIN_IMAGE,      xi.items.SUPER_CERMENT },
+    {   xi.item.BRILLIANT_VISION,  xi.item.SUMMONING_EARRING },
+    {     xi.item.PAINFUL_VISION,       xi.item.DARK_EARRING },
+    {    xi.item.TIMOROUS_VISION, xi.item.ENFEEBLING_EARRING },
+    {   xi.item.VENERABLE_VISION,     xi.item.STRING_EARRING },
+    {     xi.item.VIOLENT_VISION,    xi.item.BUCKLER_EARRING },
+    {   xi.item.AUDACIOUS_VISION,     xi.item.DIVINE_EARRING },
+    {   xi.item.ENDEARING_VISION,    xi.item.SINGING_EARRING },
+    { xi.item.PUNCTILIOUS_VISION,   xi.item.PARRYING_EARRING },
+    {      xi.item.VERNAL_VISION,    xi.item.EVASION_EARRING },
+    {       xi.item.VIVID_VISION,    xi.item.HEALING_EARRING },
+    {   xi.item.MALICIOUS_VISION,   xi.item.NINJUTSU_EARRING },
+    { xi.item.PRETENTIOUS_VISION,  xi.item.ELEMENTAL_EARRING },
+    {    xi.item.PRISTINE_VISION,       xi.item.WIND_EARRING },
+    {      xi.item.SOLEMN_VISION,   xi.item.GUARDING_EARRING },
+    {     xi.item.VALIANT_VISION, xi.item.AUGMENTING_EARRING },
+    {   xi.item.IMPETUOUS_VISION,     xi.item.TOREADERS_RING },
+    {     xi.item.TENUOUS_VISION,        xi.item.ASTRAL_ROPE },
+    {       xi.item.SNIDE_VISION,      xi.item.SAFETY_MANTLE },
+    {        xi.item.GRAVE_IMAGE,          xi.item.HABU_SKIN },
+    {     xi.item.BEATIFIC_IMAGE,          xi.item.TIGER_EYE },
+    {     xi.item.VALOROUS_IMAGE,    xi.item.RHEIYOH_LEATHER },
+    {      xi.item.ANCIENT_IMAGE,     xi.item.OVERSIZED_FANG },
+    {       xi.item.VIRGIN_IMAGE,      xi.item.SUPER_CERMENT },
 }
 
 entity.onTrade = function(player, npc, trade)
@@ -43,7 +43,7 @@ entity.onTrade = function(player, npc, trade)
     for _, prize in pairs(rewards) do
         if npcUtil.tradeHasExactly(trade, prize[1]) then
             reward = prize[2]
-            player:setCharVar("veneReward", reward)
+            player:setCharVar('veneReward', reward)
             player:startEvent(10066, reward)
         end
     end
@@ -53,7 +53,7 @@ entity.onTrigger = function(player, npc)
     -- Player has attempted the ENM at least once
     if
         player:getCurrentMission(xi.mission.log_id.COP) > xi.mission.id.cop.THE_RITES_OF_LIFE and
-        player:getCharVar("[ENM]VenessaComplete") == 1
+        player:getCharVar('[ENM]VenessaComplete') == 1
     then
         player:startEvent(10065)
     -- Player can do ENM but hasn't done it
@@ -66,10 +66,10 @@ entity.onTrigger = function(player, npc)
 end
 
 entity.onEventUpdate = function(player, csid, option, npc)
-    local abandonmentTimer = player:getCharVar("[ENM]abandonmentTimer")
-    local antipathyTimer = player:getCharVar("[ENM]antipathyTimer")
-    local animusTimer = player:getCharVar("[ENM]animusTimer")
-    local acrimonyTimer = player:getCharVar("[ENM]acrimonyTimer")
+    local abandonmentTimer = player:getCharVar('[ENM]abandonmentTimer')
+    local antipathyTimer = player:getCharVar('[ENM]antipathyTimer')
+    local animusTimer = player:getCharVar('[ENM]animusTimer')
+    local acrimonyTimer = player:getCharVar('[ENM]acrimonyTimer')
     if
         csid == 10064 or
         csid == 10065
@@ -121,7 +121,7 @@ entity.onEventUpdate = function(player, csid, option, npc)
 end
 entity.onEventFinish = function(player, csid, option, npc)
     -- Give player reward
-    local objectTrade = player:getCharVar("veneReward")
+    local objectTrade = player:getCharVar('veneReward')
     if csid == 10066 then
         if player:getFreeSlotsCount() == 0 then
             player:messageSpecial(ID.text.ITEM_CANNOT_BE_OBTAINED, objectTrade)
@@ -129,13 +129,13 @@ entity.onEventFinish = function(player, csid, option, npc)
             player:tradeComplete()
             player:addItem(objectTrade)
             player:messageSpecial(ID.text.ITEM_OBTAINED, objectTrade)
-            player:setCharVar("veneReward", 0)
+            player:setCharVar('veneReward', 0)
         end
     end
-    local abandonmentTimer = player:getCharVar("[ENM]abandonmentTimer")
-    local antipathyTimer = player:getCharVar("[ENM]antipathyTimer")
-    local animusTimer = player:getCharVar("[ENM]animusTimer")
-    local acrimonyTimer = player:getCharVar("[ENM]acrimonyTimer")
+    local abandonmentTimer = player:getCharVar('[ENM]abandonmentTimer')
+    local antipathyTimer = player:getCharVar('[ENM]antipathyTimer')
+    local animusTimer = player:getCharVar('[ENM]animusTimer')
+    local acrimonyTimer = player:getCharVar('[ENM]acrimonyTimer')
     -- Give player KI
     if csid == 10065 or csid == 10064 then
         -- Spire of Holla ENM
@@ -144,28 +144,28 @@ entity.onEventFinish = function(player, csid, option, npc)
             not player:hasKeyItem(xi.ki.CENSER_OF_ABANDONMENT)
         then
             npcUtil.giveKeyItem(player, xi.keyItem.CENSER_OF_ABANDONMENT)
-            player:setCharVar("[ENM]abandonmentTimer", VanadielTime() + (xi.settings.main.ENM_COOLDOWN * 3600)) -- Current time + (ENM_COOLDOWN*1hr in seconds)
+            player:setCharVar('[ENM]abandonmentTimer', VanadielTime() + (xi.settings.main.ENM_COOLDOWN * 3600)) -- Current time + (ENM_COOLDOWN*1hr in seconds)
         -- Spire of Dem ENM
         elseif
             option == 2 and os.time() >= antipathyTimer and
             not player:hasKeyItem(xi.ki.CENSER_OF_ANTIPATHY)
         then
             npcUtil.giveKeyItem(player, xi.keyItem.CENSER_OF_ANTIPATHY)
-            player:setCharVar("[ENM]antipathyTimer", VanadielTime() + (xi.settings.main.ENM_COOLDOWN * 3600)) -- Current time + (ENM_COOLDOWN*1hr in seconds)
+            player:setCharVar('[ENM]antipathyTimer', VanadielTime() + (xi.settings.main.ENM_COOLDOWN * 3600)) -- Current time + (ENM_COOLDOWN*1hr in seconds)
         -- Spire of Mea ENM
         elseif
             option == 3 and os.time() >= animusTimer and
             not player:hasKeyItem(xi.ki.CENSER_OF_ANIMUS)
         then
             npcUtil.giveKeyItem(player, xi.keyItem.CENSER_OF_ANIMUS)
-            player:setCharVar("[ENM]animusTimer", VanadielTime() + (xi.settings.main.ENM_COOLDOWN * 3600)) -- Current time + (ENM_COOLDOWN*1hr in seconds)
+            player:setCharVar('[ENM]animusTimer', VanadielTime() + (xi.settings.main.ENM_COOLDOWN * 3600)) -- Current time + (ENM_COOLDOWN*1hr in seconds)
         -- Spire of Vahzl ENM
         elseif
             option == 4 and os.time() >= acrimonyTimer and
             not player:hasKeyItem(xi.ki.CENSER_OF_ACRIMONY)
         then
             npcUtil.giveKeyItem(player, xi.keyItem.CENSER_OF_ACRIMONY)
-            player:setCharVar("[ENM]acrimonyTimer", VanadielTime() + (xi.settings.main.ENM_COOLDOWN * 3600)) -- Current time + (ENM_COOLDOWN*1hr in seconds)
+            player:setCharVar('[ENM]acrimonyTimer', VanadielTime() + (xi.settings.main.ENM_COOLDOWN * 3600)) -- Current time + (ENM_COOLDOWN*1hr in seconds)
         end
     end
 end

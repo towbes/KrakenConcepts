@@ -1,6 +1,6 @@
 -----------------------------------
 -- Spell: Blitzstrahl
--- Deals lightning damage to an enemy. Additional effect: "Stun"
+-- Deals lightning damage to an enemy. Additional effect: 'Stun'
 -- Spell cost: 70 MP
 -- Monster Type: Arcana
 -- Spell Type: Magical (Lightning)

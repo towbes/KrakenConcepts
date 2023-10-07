@@ -6,11 +6,11 @@ local mobskillObject = {}
 
 mobskillObject.onMobSkillCheck = function(target, mob, skill)
     if
-        mob:getName() == "Aitvaras" or
-        mob:getName() == "Lost_Aitvaras" or
-        mob:getName() == "Apocalyptic_Beast" and
+        mob:getName() == 'Aitvaras' or
+        mob:getName() == 'Lost_Aitvaras' or
+        mob:getName() == 'Apocalyptic_Beast' and
         not mob:hasStatusEffect(xi.effect.SILENCE) and
-        mob:getLocalVar("debuff_Heart") == 0
+        mob:getLocalVar('debuff_Heart') == 0
     then
         return 0
     elseif

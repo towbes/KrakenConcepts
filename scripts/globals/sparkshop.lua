@@ -569,34 +569,34 @@ local optionToItem =
 
     [12] = -- Alter Ego Extravaganza Trusts
     {
-       --[[ [10133] = { cost =  500, id = xi.items.CIPHER_OF_F_COFFINS_ALTER_EGO }, -- F. Coffin
-        [10138] = { cost =  500, id = xi.items.CIPHER_OF_CIDS_ALTER_EGO }, -- Cid
-        [10148] = { cost =  500, id = xi.items.CIPHER_OF_GILGAMESHS_ALTER_EGO }, -- Gilgamesh
-        [10152] = { cost =  500, id = xi.items.CIPHER_OF_QULTADAS_ALTER_EGO }, -- Qultada
-        [10181] = { cost =  500, id = xi.items.CIPHER_OF_KINGS_ALTER_EGO }, -- King ]]--
+       --[[ [10133] = { cost =  500, id = xi.item.CIPHER_OF_F_COFFINS_ALTER_EGO }, -- F. Coffin
+        [10138] = { cost =  500, id = xi.item.CIPHER_OF_CIDS_ALTER_EGO }, -- Cid
+        [10148] = { cost =  500, id = xi.item.CIPHER_OF_GILGAMESHS_ALTER_EGO }, -- Gilgamesh
+        [10152] = { cost =  500, id = xi.item.CIPHER_OF_QULTADAS_ALTER_EGO }, -- Qultada
+        [10181] = { cost =  500, id = xi.item.CIPHER_OF_KINGS_ALTER_EGO }, -- King ]]--
     },
 
     [20] = -- Currency Exchange
     {
-        [ 0] = { amount = 1000, name = "spark_of_eminence"      },
-        [ 1] = { amount = 1000, name = "conquest_points"        },
-        [ 2] = { amount = 1000, name = "imperial_standing"      },
-        [ 3] = { amount = 1000, name = "allied_notes"           },
-        -- [ 4] = { amount = 1000, name = "bayld"                  },
-        [ 5] = { amount = 1000, name = "valor_point"            },
-        [ 6] = { amount = 1000, name = "leujaoam_assault_point" },
-        [ 7] = { amount = 1000, name = "mamool_assault_point"   },
-        [ 8] = { amount = 1000, name = "lebros_assault_point"   },
-        [ 9] = { amount = 1000, name = "periqia_assault_point"  },
-        [10] = { amount = 1000, name = "ilrusi_assault_point"   },
-        -- [11] = { amount = 1000, name = "cruor"                  },
-        -- [12] = { amount = 1000, name = "kinetic_unit"           },
-        -- [13] = { amount = 1000, name = "obsidian_fragment"      },
-        -- [14] = { amount = 1000, name = "mweya_plasm"            },
-        -- [15] = { amount = 1000, name = "ballista_point"         },
-        -- [16] = { amount = 1000, name = "unity_accolades"        },
-        -- [17] = { amount = 1000, name = "escha_silt"             }, -- Not Implemented
-        -- [18] = { amount = 1000, name = "resistance_credit"      },
+        [ 0] = { amount = 1000, name = 'spark_of_eminence'      },
+        [ 1] = { amount = 1000, name = 'conquest_points'        },
+        [ 2] = { amount = 1000, name = 'imperial_standing'      },
+        [ 3] = { amount = 1000, name = 'allied_notes'           },
+        -- [ 4] = { amount = 1000, name = 'bayld'                  },
+        [ 5] = { amount = 1000, name = 'valor_point'            },
+        [ 6] = { amount = 1000, name = 'leujaoam_assault_point' },
+        [ 7] = { amount = 1000, name = 'mamool_assault_point'   },
+        [ 8] = { amount = 1000, name = 'lebros_assault_point'   },
+        [ 9] = { amount = 1000, name = 'periqia_assault_point'  },
+        [10] = { amount = 1000, name = 'ilrusi_assault_point'   },
+        -- [11] = { amount = 1000, name = 'cruor'                  },
+        -- [12] = { amount = 1000, name = 'kinetic_unit'           },
+        -- [13] = { amount = 1000, name = 'obsidian_fragment'      },
+        -- [14] = { amount = 1000, name = 'mweya_plasm'            },
+        -- [15] = { amount = 1000, name = 'ballista_point'         },
+        -- [16] = { amount = 1000, name = 'unity_accolades'        },
+        -- [17] = { amount = 1000, name = 'escha_silt'             }, -- Not Implemented
+        -- [18] = { amount = 1000, name = 'resistance_credit'      },
     },
 }
 

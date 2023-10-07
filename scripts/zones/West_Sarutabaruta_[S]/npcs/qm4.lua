@@ -1,7 +1,7 @@
 -----------------------------------
 -- Area: West Sarutabaruta [S]
 --  NPC: qm4
--- Note: Involved in quest "The Tigress Stirs"
+-- Note: Involved in quest 'The Tigress Stirs'
 -- !pos 150 -39 331 95
 -----------------------------------
 local ID = zones[xi.zone.WEST_SARUTABARUTA_S]

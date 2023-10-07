@@ -48,24 +48,7 @@ CMenuMeritPacket::CMenuMeritPacket(CCharEntity* PChar)
             bluePointBonus += PChar->PMeritPoints->GetMeritValue(MERIT_ASSIMILATION, PChar);
         }
 
-        if (PChar->GetMLevel() >= 75) //Umeboshi "Lowering 99 to 75"
-        {
-            bluePointBonus += PChar->PJobPoints->GetJobPointValue(JP_BLUE_MAGIC_POINT_BONUS);
-        }
-
-        ref<uint16>(0x0A) |= bluePointBonus << 7;
-    }
-
-        if (PChar->GetSJob() == JOB_BLU) //Umeboshi "BLU sub can benefit from merits on Cactuar"
-    {
-        uint8 bluePointBonus = 0;
-
-        if (PChar->GetSLevel() >= 75)
-        {
-            bluePointBonus += PChar->PMeritPoints->GetMeritValue(MERIT_ASSIMILATION, PChar);
-        }
-
-        if (PChar->GetSLevel() >= 75) // Umeboshi "Lowering 99 to 75"
+        if (PChar->GetMLevel() >= 99)
         {
             bluePointBonus += PChar->PJobPoints->GetJobPointValue(JP_BLUE_MAGIC_POINT_BONUS);
         }

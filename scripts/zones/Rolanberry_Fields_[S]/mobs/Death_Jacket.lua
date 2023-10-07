@@ -1,9 +1,9 @@
 -----------------------------------
 -- Area: Rolanberry Fields [S]
 -----------------------------------
-local ID = require("scripts/zones/Rolanberry_Fields_[S]/IDs")
-require("scripts/globals/mobs")
-require("scripts/globals/hunts")
+local ID = require('scripts/zones/Rolanberry_Fields_[S]/IDs')
+require('scripts/globals/mobs')
+require('scripts/globals/hunts')
 -----------------------------------
 local entity = {}
 

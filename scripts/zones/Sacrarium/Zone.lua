@@ -8,7 +8,7 @@ local zoneObject = {}
 
 zoneObject.onInitialize = function(zone)
     -- randomize Old Prof. Mariselle's spawn location
-    GetNPCByID(ID.npc.QM_MARISELLE_OFFSET + math.random(0, 5)):setLocalVar("hasProfessorMariselle", 1)
+    GetNPCByID(ID.npc.QM_MARISELLE_OFFSET + math.random(0, 5)):setLocalVar('hasProfessorMariselle', 1)
     
     -- FFXI wiki claims 4hours and 10mins game time for movement in Sacrarium
     GetNPCByID(ID.npc.QM_TAVNAZIAN_COOKBOOK):addPeriodicTrigger(0, 250, 0)
@@ -71,7 +71,7 @@ end
 zoneObject.onZoneWeatherChange = function(weather)
     local elel = GetMobByID(ID.mob.ELEL)
     if
-        not elel:isSpawned() and os.time() > elel:getLocalVar("cooldown") and
+        not elel:isSpawned() and os.time() > elel:getLocalVar('cooldown') and
         (weather == xi.weather.GLOOM or weather == xi.weather.DARKNESS) and
         (VanadielHour() < 4 or VanadielHour() >= 20)
     then

@@ -410,8 +410,8 @@ xi.spells.enhancing.calculateEnhancingDuration = function(caster, target, spell,
 
         -- En-Spells
     elseif (spellEffect >= xi.effect.ENFIRE and spellEffect <= xi.effect.ENWATER) or (spellEffect >= xi.effect.ENFIRE_II and spellEffect <= xi.effect.ENWATER_II) then
-        if caster:getEquipID(xi.slot.MAIN) == xi.items.BUZZARD_TUCK or caster:getEquipID(xi.slot.SUB) == xi.items.BUZZARD_TUCK or
-           caster:getEquipID(xi.slot.MAIN) == xi.items.FENCING_DEGEN or caster:getEquipID(xi.slot.SUB) == xi.items.FENCING_DEGEN then
+        if caster:getEquipID(xi.slot.MAIN) == xi.item.BUZZARD_TUCK or caster:getEquipID(xi.slot.SUB) == xi.item.BUZZARD_TUCK or
+           caster:getEquipID(xi.slot.MAIN) == xi.item.FENCING_DEGEN or caster:getEquipID(xi.slot.SUB) == xi.item.FENCING_DEGEN then
             duration = duration + 30 -- Sword enhancement spell duration +5
         end
     end
@@ -549,7 +549,7 @@ xi.spells.enhancing.useEnhancingSpell = function(caster, target, spell)
     end
 
     ------------------------------------------------------------
-    -- Change message when higher effect or "Always overwrite".
+    -- Change message when higher effect or 'Always overwrite'.
     ------------------------------------------------------------
     if alwaysOverwrite then
         target:delStatusEffect(spellEffect)

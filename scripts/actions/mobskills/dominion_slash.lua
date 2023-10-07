@@ -4,7 +4,7 @@
 -- Type: Physical
 -- 2-3 Shadows
 -- Range: Unknown radial
--- One source also mentions that it "can dispel important buffs."
+-- One source also mentions that it 'can dispel important buffs.'
 -----------------------------------
 local mobskillObject = {}
 

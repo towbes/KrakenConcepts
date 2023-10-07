@@ -2,8 +2,8 @@
 -- Area: Spire of Vahzl
 -- NPC:  Enigmatic Sphere
 -----------------------------------
-require("scripts/globals/battlefield")
-require("scripts/globals/bcnm")
+require('scripts/globals/battlefield')
+require('scripts/globals/bcnm')
 -----------------------------------
 local entity = {}
 

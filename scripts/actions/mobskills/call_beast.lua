@@ -13,10 +13,10 @@ mobskillObject.onMobSkillCheck = function(target, mob, skill)
 end
 
 mobskillObject.onMobWeaponSkill = function(target, mob, skill)
-    mob:entityAnimationPacket("casm")
+    mob:entityAnimationPacket('casm')
     mob:timer(3000, function(mobArg)
         if mobArg:isAlive() then
-            mobArg:entityAnimationPacket("shsm")
+            mobArg:entityAnimationPacket('shsm')
             mobArg:spawnPet()
         end
     end)

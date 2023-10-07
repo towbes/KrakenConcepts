@@ -8,10 +8,10 @@
 require('scripts/globals/interaction/mission')
 require('scripts/globals/missions')
 require('scripts/globals/npc_util')
-require("scripts/globals/teleports")
-require('scripts/globals/titles')
+require('scripts/globals/teleports')
+
 require('scripts/globals/utils')
-require('scripts/globals/zone')
+
 -----------------------------------
 
 local mission = Mission:new(xi.mission.log_id.COP, xi.mission.id.cop.DAWN)
@@ -49,9 +49,9 @@ end
 
 local rings =
 {
-    xi.items.RAJAS_RING,
-    xi.items.SATTVA_RING,
-    xi.items.TAMAS_RING,
+    xi.item.RAJAS_RING,
+    xi.item.SATTVA_RING,
+    xi.item.TAMAS_RING,
 }
 
 local ringCheck = function(player)
@@ -232,7 +232,7 @@ mission.sections =
                 [322] = function(player, csid, option)
                     mission:setVar(player, 'ShikareesCS', 1)
                     -- Used for Requiem of Sin Quest
-                    player:setCharVar("Quest[4][83]conquestRequiem", getConquestTally())
+                    player:setCharVar('Quest[4][83]conquestRequiem', NextConquestTally())
                 end,
             },
         },

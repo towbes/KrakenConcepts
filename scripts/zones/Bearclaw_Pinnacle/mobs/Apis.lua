@@ -65,8 +65,8 @@ entity.onMobWeaponSkill = function(target, mob, skill)
         mob:setMod(xi.mod.UDMGRANGE, -10000)
         mob:setMod(xi.mod.UDMGMAGIC, 4000)
         mob:setMod(xi.mod.UDMGPHYS, -10000)
-        mob:addTP(mob:getLocalVar("twohour_tp"))
-        mob:setLocalVar("twohour_tp", 0)
+        mob:addTP(mob:getLocalVar('twohour_tp'))
+        mob:setLocalVar('twohour_tp', 0)
     end
 end
 

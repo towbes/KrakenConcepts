@@ -8,8 +8,8 @@
 require('scripts/globals/interaction/quest')
 require('scripts/globals/npc_util')
 require('scripts/globals/quests')
-require('scripts/globals/items')
-require('scripts/globals/zone')
+
+
 -----------------------------------
 
 local quest = Quest:new(xi.quest.log_id.SANDORIA, xi.quest.id.sandoria.THE_SETTING_SUN)
@@ -58,7 +58,7 @@ quest.sections =
                 end,
 
                 onTrade = function(player, npc, trade)
-                    if npcUtil.tradeHasExactly(trade, xi.items.ENGRAVED_KEY) then
+                    if npcUtil.tradeHasExactly(trade, xi.item.ENGRAVED_KEY) then
                         return quest:progressEvent(658)
                     end
                 end,

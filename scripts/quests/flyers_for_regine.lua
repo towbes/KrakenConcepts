@@ -59,7 +59,7 @@ end
 quests.flyers_for_regine.onTriggerAreaEnter = function(player, triggerArea)
     if
         player:getQuestStatus(xi.quest.log_id.SANDORIA, xi.quest.id.sandoria.FLYERS_FOR_REGINE) == QUEST_ACCEPTED and
-        os.time() > player:getLocalVar("regineTimer")
+        os.time() > player:getLocalVar('regineTimer')
     then
         local zoneId        = player:getZoneID()
         local triggerAreaId = triggerArea:GetTriggerAreaID()
@@ -74,7 +74,7 @@ quests.flyers_for_regine.onTriggerAreaEnter = function(player, triggerArea)
                     if not alreadyDelivered then
                         local ID = zones[zoneId]
                         player:messageSpecial(ID.text.FFR_LOOKS_CURIOUSLY_BASE + v.offset)
-                        player:setLocalVar("regineTimer", os.time() + 3)
+                        player:setLocalVar('regineTimer', os.time() + 3)
                     end
 
                     break

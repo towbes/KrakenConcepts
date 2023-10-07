@@ -1,6 +1,6 @@
 -----------------------------------
 --  Discharge
---  Description: Deals lightning damage. Additional effect: "Paralysis"
+--  Description: Deals lightning damage. Additional effect: 'Paralysis'
 --  Type: Magical (lightning)
 --  Utsusemi/Blink absorb: Wipes shadows
 --  Range: Aoe

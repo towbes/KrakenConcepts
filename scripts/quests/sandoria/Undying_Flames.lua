@@ -4,9 +4,9 @@
 -- Log ID: 0, Quest ID: 26
 -- Pagisalis: !gotoid 17723424
 -----------------------------------
-require('scripts/globals/items')
+
 require('scripts/globals/quests')
-require('scripts/globals/zone')
+
 require('scripts/globals/interaction/quest')
 
 local quest = Quest:new(xi.quest.log_id.SANDORIA, xi.quest.id.sandoria.UNDYING_FLAMES)
@@ -16,7 +16,7 @@ quest.reward =
     fame = 30,
     fameArea = xi.quest.fame_area.SANDORIA,
     title    = xi.title.FAITH_LIKE_A_CANDLE,
-    item   = xi.items.FRIARS_ROPE,
+    item   = xi.item.FRIARS_ROPE,
 
 }
 
@@ -57,7 +57,7 @@ quest.sections =
             ['Pagisalis'] =
             {
                 onTrade = function(player, npc, trade)
-                    if npcUtil.tradeHasExactly(trade, { { xi.items.LUMP_OF_BEESWAX, 2 } }) then
+                    if npcUtil.tradeHasExactly(trade, { { xi.item.LUMP_OF_BEESWAX, 2 } }) then
                         return quest:progressEvent(563)
                     else
                         return quest:event(564)

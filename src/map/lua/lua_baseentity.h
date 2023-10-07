@@ -212,7 +212,6 @@ public:
     // Items
     uint16 getEquipID(SLOTTYPE slot);
     auto   getEquippedItem(uint8 slot) -> std::optional<CLuaItem>;
-    bool   hasEquipped(uint16 equipmentID);                        // Returns true if item is equipped in any slot
     bool   hasItem(uint16 itemID, sol::object const& location);
     uint32 getItemCount(uint16 itemID);
     bool   addItem(sol::variadic_args va);
@@ -229,14 +228,14 @@ public:
     bool breakLinkshell(std::string const& lsname);
     bool addLinkpearl(std::string const& lsname, bool equip);
 
-    auto addSoulPlate(std::string const& name, uint8 fauna, uint8 subOfInterest, uint8 ecoSystem, uint8 zeni, uint16 skillIndex, uint8 fp) -> std::optional<CLuaItem>;
+    auto addSoulPlate(std::string const& name, uint16 mobFamily, uint8 zeni, uint16 skillIndex, uint8 fp) -> std::optional<CLuaItem>;
 
     // Trading
     uint8 getContainerSize(uint8 locationID);
     void  changeContainerSize(uint8 locationID, int8 newSize); // Increase/Decreases container size
     uint8 getFreeSlotsCount(sol::object const& locID);         // Gets value of free slots in Entity inventory
     void  confirmTrade();                                      // Complete trade with an npc, only removing confirmed items
-    void  tradeComplete(sol::object const& shouldTakeItems);   // Complete trade with an npc
+    void  tradeComplete();                                     // Complete trade with an npc
     auto  getTrade() -> std::optional<CLuaTradeContainer>;
 
     // Equipping
@@ -620,8 +619,7 @@ public:
     // Status Effects
     bool   addStatusEffect(sol::variadic_args va);
     bool   addStatusEffectEx(sol::variadic_args va);
-    auto   getStatusEffect(uint16 StatusID, sol::object const& SubType, sol::object const& ItemSourceID) -> std::optional<CLuaStatusEffect>;
-    //auto   getStatusEffect(uint16 StatusID, sol::object const& SubID, sol::object const& ItemSourceID)->std::optional<CLuaStatusEffect>;
+    auto   getStatusEffect(uint16 StatusID, sol::object const& SubType) -> std::optional<CLuaStatusEffect>;
     auto   getStatusEffects() -> sol::table;
     int16  getStatusEffectElement(uint16 statusId);
     bool   canGainStatusEffect(uint16 effect, sol::object const& powerObj);
@@ -629,15 +627,14 @@ public:
     uint16 hasStatusEffectByFlag(uint16 StatusID);
     uint8  countEffect(uint16 StatusID); // Gets the number of effects of a specific type on the player
 
-    bool delStatusEffect(uint16 StatusID, sol::object const& SubType, sol::object const& ItemSourceID); // Removes Status Effect
-    //bool   delStatusEffect(uint16 StatusID, sol::object const& SubID, sol::object const& ItemSourceID); // Removes Status Effect
-    void   delStatusEffectsByFlag(uint32 flag, sol::object const& silent);               // Removes Status Effects by Flag
-    bool   delStatusEffectSilent(uint16 StatusID);                                       // Removes Status Effect, suppresses message
-    uint16 eraseStatusEffect();                                                          // Used with "Erase" spell
-    uint8  eraseAllStatusEffect();                                                       // Erases all effects and returns number erased
-    int32  dispelStatusEffect(sol::object const& flagObj);                               // Used with "Dispel" spell
-    uint8  dispelAllStatusEffect(sol::object const& flagObj);                            // Dispels all effects and returns number erased
-    uint16 stealStatusEffect(CLuaBaseEntity* PTargetEntity, sol::object const& flagObj); // Used in mob skills to steal effects
+    bool   delStatusEffect(uint16 StatusID, sol::object const& SubType);
+    void   delStatusEffectsByFlag(uint32 flag, sol::object const& silent);
+    bool   delStatusEffectSilent(uint16 StatusID); // Removes Status Effect, suppresses message
+    uint16 eraseStatusEffect();
+    uint8  eraseAllStatusEffect();
+    int32  dispelStatusEffect(sol::object const& flagObj);
+    uint8  dispelAllStatusEffect(sol::object const& flagObj);
+    uint16 stealStatusEffect(CLuaBaseEntity* PTargetEntity, sol::object const& flagObj);
 
     void  addMod(uint16 type, int16 amount);
     int16 getMod(uint16 modID);
@@ -748,17 +745,6 @@ public:
     void setPetMod(uint16 modID, int16 amount);
     void delPetMod(uint16 modID, int16 amount);
 
-        // Adventuring Fellow
-    void  spawnFellow(uint8 fellowId);                            // Spawns NPC Fellow
-    void  despawnFellow();                                        // deSpawns NPC Fellow
-    auto  getFellow() -> std::optional<CLuaBaseEntity>;           // Creates an LUA reference to a fellow entity
-    void  triggerFellowChat(uint8 chatType);                      // calls the Chat system when talking to a fellow
-    void  fellowAttack(CLuaBaseEntity* PEntity);                  // Forces Fellow to attack target
-    void  fellowRetreat();                                        // Disengages Fellow
-    int32 getFellowValue(std::string const& option);              // Manipulating DB Fellow Values
-    void  setFellowValue(std::string const& option, int32 value); // Manipulating DB Fellow Values
-    void  delFellowValue();                                       // Clears Fellow from DB
-
     bool  hasAttachment(uint16 itemID);
     auto  getAutomatonName() -> std::string;
     uint8 getAutomatonFrame();
@@ -818,17 +804,14 @@ public:
     void setIsAggroable(bool isAggroable);
     bool isAggroable();
 
-    void setDelay(uint16 delay);   // sets a mobs weapon delay
-    int16 getDelay();               // return the delay value
-    void setDamage(uint16 damage); // sets a mobs weapon damage
+    void setDelay(uint16 delay);
+    void setDamage(uint16 damage);
     bool hasSpellList();
     void setSpellList(uint16 spellList);
     void setAutoAttackEnabled(bool state);   // halts/resumes auto attack of entity
     void setMagicCastingEnabled(bool state); // halt/resumes casting magic
     void setMobAbilityEnabled(bool state);   // halt/resumes mob skills
     void setMobSkillAttack(int16 listId);    // enable/disable using mobskills as regular attacks
-    bool  isMagicCastingEnabled();            // return a true/false value if mob is able to auto-cast
-    bool  isAutoAttackEnabled();              // returns true if the mob can auto-attack
 
     int16 getMobMod(uint16 mobModID);
     void  setMobMod(uint16 mobModID, int16 value);
@@ -852,7 +835,6 @@ public:
     void castSpell(sol::object const& spell, sol::object const& entity); // forces a mob to cast a spell (parameter = spell ID, otherwise picks a spell from its list)
     void useJobAbility(uint16 skillID, sol::object const& pet);          // forces a job ability use (players/pets only)
     void useMobAbility(sol::variadic_args va);                           // forces a mob to use a mobability (parameter = skill ID)
-    int32 triggerDrawIn(CLuaBaseEntity* PMobEntity, sol::object const& includePt, sol::object const& drawRange, sol::object const& maxReach, sol::object const& target); // forces a mob to draw in target
     bool hasTPMoves();
 
     void weaknessTrigger(uint8 level);
@@ -864,13 +846,12 @@ public:
     uint32 getPool(); // Returns a mobs pool ID. If entity is not a mob, returns nil.
     uint32 getDropID();
     void   setDropID(uint32 dropID);
-    void   addTreasure(uint16 itemID, sol::object const& arg1, sol::object const& arg2); // Add item to directly to treasure pool
-    uint16 getStealItem();                                                               // gets ItemID of droplist steal item from mob
-    uint16 getDespoilItem();                                                             // gets ItemID of droplist despoil item from mob (steal item if no despoil item)
-    uint16 getDespoilDebuff(uint16 itemID);                                              // gets the status effect id to apply to the mob on successful despoil
-    bool   itemStolen();                                                                 // sets mob's ItemStolen var = true
-    int32  setStealItemID(int32 itemID);                                                   // Sets a mob's item to be stolen
-    int16  getTHlevel();                                                                 // Returns the Monster's current Treasure Hunter Tier
+    void   addTreasure(uint16 itemID, sol::object const& arg1, sol::object const& arg2);
+    uint16 getStealItem();
+    uint16 getDespoilItem();                // gets ItemID of droplist despoil item from mob (steal item if no despoil item)
+    uint16 getDespoilDebuff(uint16 itemID); // gets the status effect id to apply to the mob on successful despoil
+    bool   itemStolen();                    // sets mob's ItemStolen var = true
+    int16  getTHlevel();                    // Returns the Monster's current Treasure Hunter Tier
 
     uint32 getAvailableTraverserStones();
     time_t getTraverserEpoch();
@@ -880,11 +861,6 @@ public:
     void   setClaimedTraverserStones(uint16 totalStones);
 
     uint32 getHistory(uint8 index);
-
-    void setAnimPath(uint8);
-    void setAnimStart(bool);
-    void setAnimBegin(uint32);
-    void sendUpdateToZoneCharsInRange(float);
 
     auto getChocoboRaisingInfo() -> sol::table;
     bool setChocoboRaisingInfo(sol::table const& table);

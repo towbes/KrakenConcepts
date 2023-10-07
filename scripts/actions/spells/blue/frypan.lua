@@ -1,6 +1,6 @@
 -----------------------------------
 -- Spell: Frypan
--- Delivers an area attack. Additional effect: "Stun." Accuracy varies with TP
+-- Delivers an area attack. Additional effect: 'Stun.' Accuracy varies with TP
 -- Spell cost: 65 MP
 -- Monster Type: Beastmen
 -- Spell Type: Physical (Blunt)

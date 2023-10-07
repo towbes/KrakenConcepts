@@ -1,7 +1,7 @@
 -----------------------------------
 -- Area: GM Home
 --  NPC: Janken
--- Plays "Rock, Paper, Scissors"
+-- Plays 'Rock, Paper, Scissors'
 -----------------------------------
 local entity = {}
 

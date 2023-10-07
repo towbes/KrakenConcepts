@@ -1,6 +1,6 @@
 -----------------------------------
 -- Ability: Fighter's Roll
--- Improves "Double Attack" rate for party members within area of effect
+-- Improves 'Double Attack' rate for party members within area of effect
 -- Optimal Job: Warrior
 -- Lucky Number: 5
 -- Unlucky Number: 9

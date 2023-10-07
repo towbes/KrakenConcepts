@@ -7,7 +7,7 @@ local entity = {}
 entity.onMobFight = function(mob, target)
     local keremet = mob:getID()
 
-    -- Send spawned skeleton "pets" to Keremet's target
+    -- Send spawned skeleton 'pets' to Keremet's target
     for i = keremet + 1, keremet + 12 do
         local m = GetMobByID(i)
         if m:getCurrentAction() == xi.act.ROAMING then

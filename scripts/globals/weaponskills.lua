@@ -432,13 +432,13 @@ local function getSingleHitDamage(attacker, target, dmg, wsParams, calcParams)
                                 --Divine/Elemental Seal Bonus
 
                 local magicseal = 1
-                if wsParams.ele ~= nil and wsParams.ele ~= xi.magic.ele.LIGHT and (attacker:hasStatusEffect(xi.effect.ELEMENTAL_SEAL)) then
+                if wsParams.ele ~= nil and wsParams.ele ~= xi.element.LIGHT and (attacker:hasStatusEffect(xi.effect.ELEMENTAL_SEAL)) then
                     magicseal = math.floor(math.random(210,235)/100)
                     attacker:delStatusEffect(xi.effect.ELEMENTAL_SEAL)
 
                   --target:delStatusEffect(xi.effect.ninjutsu_ele_debuff)
 
-                elseif wsParams.ele ~= nil and wsParams.ele == xi.magic.ele.LIGHT and (attacker:hasStatusEffect(xi.effect.DIVINE_SEAL)) then
+                elseif wsParams.ele ~= nil and wsParams.ele == xi.element.LIGHT and (attacker:hasStatusEffect(xi.effect.DIVINE_SEAL)) then
                     magicseal = math.floor(math.random(225,245)/80)
                     attacker:delStatusEffect(xi.effect.DIVINE_SEAL)
                 end
@@ -697,7 +697,7 @@ xi.weaponskills.calculateRawWSDmg = function(attacker, target, wsID, tp, action,
 
     calcParams.extraHitsLanded = calcParams.hitsLanded
 
-    -- Factor in "all hits" bonus damage mods
+    -- Factor in 'all hits' bonus damage mods
     local bonusdmg = attacker:getMod(xi.mod.ALL_WSDMG_ALL_HITS) -- For any WS
 
     if
@@ -708,8 +708,8 @@ xi.weaponskills.calculateRawWSDmg = function(attacker, target, wsID, tp, action,
         bonusdmg = bonusdmg + attacker:getMod(xi.mod.WEAPONSKILL_DAMAGE_BASE + wsID)
     end
 
-    finaldmg = finaldmg * ((100 + bonusdmg) / 100) -- Apply our "all hits" WS dmg bonuses
-    finaldmg = finaldmg + firstHitBonus -- Finally add in our "first hit" WS dmg bonus from before
+    finaldmg = finaldmg * ((100 + bonusdmg) / 100) -- Apply our 'all hits' WS dmg bonuses
+    finaldmg = finaldmg + firstHitBonus -- Finally add in our 'first hit' WS dmg bonus from before
 
     -- Return our raw damage to then be modified by enemy reductions based off of melee/ranged
     calcParams.finalDmg = finaldmg
@@ -939,7 +939,7 @@ xi.weaponskills.doMagicWeaponskill = function(attacker, target, wsID, wsParams, 
         -- TODO: dmg = (dmg + consumeManaBonus(attacker)) * scarletDeliriumBonus(attacker)
         dmg = dmg * scarletDeliriumBonus(attacker)
 
-        -- Factor in "all hits" bonus damage mods
+        -- Factor in 'all hits' bonus damage mods
         local bonusdmg = attacker:getMod(xi.mod.ALL_WSDMG_ALL_HITS) -- For any WS
         if
             attacker:getMod(xi.mod.WEAPONSKILL_DAMAGE_BASE + wsID) > 0 and
@@ -950,8 +950,8 @@ xi.weaponskills.doMagicWeaponskill = function(attacker, target, wsID, wsParams, 
         end
 
         -- Add in bonusdmg
-        dmg = dmg * ((100 + bonusdmg) / 100) -- Apply our "all hits" WS dmg bonuses
-        dmg = dmg + ((dmg * attacker:getMod(xi.mod.ALL_WSDMG_FIRST_HIT)) / 100) -- Add in our "first hit" WS dmg bonus
+        dmg = dmg * ((100 + bonusdmg) / 100) -- Apply our 'all hits' WS dmg bonuses
+        dmg = dmg + ((dmg * attacker:getMod(xi.mod.ALL_WSDMG_FIRST_HIT)) / 100) -- Add in our 'first hit' WS dmg bonus
 
         -- Calculate magical bonuses and reductions
         dmg = addBonusesAbility(attacker, wsParams.ele, target, dmg, wsParams)
@@ -983,14 +983,14 @@ xi.weaponskills.doMagicWeaponskill = function(attacker, target, wsID, wsParams, 
     --Divine/Elemental Seal Bonus
     if 
         wsParams.ele ~= nil and
-        (wsParams.ele ~= xi.magic.ele.LIGHT or (wsParams.ele == xi.magic.ele.LIGHT and wsParams.skill == xi.skill.STAFF)) and -- Check for Dark element or Light for Sunburst/Starburst
+        (wsParams.ele ~= xi.element.LIGHT or (wsParams.ele == xi.element.LIGHT and wsParams.skill == xi.skill.STAFF)) and -- Check for Dark element or Light for Sunburst/Starburst
         (attacker:hasStatusEffect(xi.effect.ELEMENTAL_SEAL))
     then
         dmg = math.floor(math.random(210,235)/100*dmg)
         attacker:delStatusEffect(xi.effect.ELEMENTAL_SEAL)
     elseif
         wsParams.ele ~= nil and
-        (wsParams.ele == xi.magic.ele.LIGHT or (wsParams.ele == xi.magic.ele.DARK and wsParams.skill == xi.skill.STAFF)) and -- Check for light element or Dark for Sunburst/Starburst
+        (wsParams.ele == xi.element.LIGHT or (wsParams.ele == xi.element.DARK and wsParams.skill == xi.skill.STAFF)) and -- Check for light element or Dark for Sunburst/Starburst
         (attacker:hasStatusEffect(xi.effect.DIVINE_SEAL))
     then
         dmg = math.floor(math.random(225,245)/100*dmg)

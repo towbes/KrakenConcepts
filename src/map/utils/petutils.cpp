@@ -38,7 +38,6 @@ along with this program.  If not, see http://www.gnu.org/licenses/
 #include "latent_effect_container.h"
 #include "map.h"
 #include "mob_spell_list.h"
-#include "mobutils.h"
 #include "petutils.h"
 #include "puppetutils.h"
 #include "status_effect_container.h"
@@ -248,19 +247,19 @@ namespace petutils
             switch (rank)
             {
                 case 1:
-                    return (uint16)(153 + (lvl - 50) * 5.0f); // A
+                    return (uint16)(153 + (lvl - 50) * 5.0f);
                 case 2:
-                    return (uint16)(147 + (lvl - 50) * 4.9f); // B
+                    return (uint16)(147 + (lvl - 50) * 4.9f);
                 case 3:
-                    return (uint16)(136 + (lvl - 50) * 4.8f); // C
+                    return (uint16)(136 + (lvl - 50) * 4.8f);
                 case 4:
-                    return (uint16)(126 + (lvl - 50) * 4.7f); // D
+                    return (uint16)(126 + (lvl - 50) * 4.7f);
                 case 5:
-                    return (uint16)(116 + (lvl - 50) * 4.5f); // E
+                    return (uint16)(116 + (lvl - 50) * 4.5f);
                 case 6:
-                    return (uint16)(106 + (lvl - 50) * 4.4f); // F
+                    return (uint16)(106 + (lvl - 50) * 4.4f);
                 case 7:
-                    return (uint16)(96 + (lvl - 50) * 4.3f);  // G
+                    return (uint16)(96 + (lvl - 50) * 4.3f);
             }
         }
         else
@@ -268,42 +267,41 @@ namespace petutils
             switch (rank)
             {
                 case 1:
-                    return (uint16)(6 + (lvl - 1) * 3.0f); // A
+                    return (uint16)(6 + (lvl - 1) * 3.0f);
                 case 2:
-                    return (uint16)(5 + (lvl - 1) * 2.9f); // B
+                    return (uint16)(5 + (lvl - 1) * 2.9f);
                 case 3:
-                    return (uint16)(5 + (lvl - 1) * 2.8f); // C
+                    return (uint16)(5 + (lvl - 1) * 2.8f);
                 case 4:
-                    return (uint16)(4 + (lvl - 1) * 2.7f); // D
+                    return (uint16)(4 + (lvl - 1) * 2.7f);
                 case 5:
-                    return (uint16)(4 + (lvl - 1) * 2.5f); // E
+                    return (uint16)(4 + (lvl - 1) * 2.5f);
                 case 6:
-                    return (uint16)(3 + (lvl - 1) * 2.4f); // F
+                    return (uint16)(3 + (lvl - 1) * 2.4f);
                 case 7:
-                    return (uint16)(3 + (lvl - 1) * 2.3f); // G
+                    return (uint16)(3 + (lvl - 1) * 2.3f);
             }
         }
         return 0;
-
     }
     uint16 GetBaseToRank(uint8 rank, uint16 lvl)
     {
         switch (rank)
         {
             case 1:
-                return (5 + ((lvl - 1) * 50) / 100); // A
+                return (5 + ((lvl - 1) * 50) / 100);
             case 2:
-                return (4 + ((lvl - 1) * 45) / 100); // B
+                return (4 + ((lvl - 1) * 45) / 100);
             case 3:
-                return (4 + ((lvl - 1) * 40) / 100); // C
+                return (4 + ((lvl - 1) * 40) / 100);
             case 4:
-                return (3 + ((lvl - 1) * 35) / 100); // D
+                return (3 + ((lvl - 1) * 35) / 100);
             case 5:
-                return (3 + ((lvl - 1) * 30) / 100); // E
+                return (3 + ((lvl - 1) * 30) / 100);
             case 6:
-                return (2 + ((lvl - 1) * 25) / 100); // F
+                return (2 + ((lvl - 1) * 25) / 100);
             case 7:
-                return (2 + ((lvl - 1) * 20) / 100); // G
+                return (2 + ((lvl - 1) * 20) / 100);
         }
         return 0;
     }
@@ -311,61 +309,42 @@ namespace petutils
     void LoadJugStats(CPetEntity* PMob, Pet_t* petStats)
     {
         // follows monster formulas but jugs have no subjob
-        JOBTYPE mJob   = PMob->GetMJob();
-        uint8   lvl    = PMob->GetMLevel();
-        uint8   lvlmax = petStats->maxLevel;
-        uint8   lvlmin = petStats->minLevel;
 
-        lvl = std::clamp(lvl, lvlmin, lvlmax);
+        float growth = 1.0;
+        uint8 lvl    = PMob->GetMLevel();
 
-        uint8  grade;
-        uint32 mobHP = 1; // Set mob HP
-
-        grade = grade::GetJobGrade(mJob, 0); // main jobs grade
-
-        uint8 base     = 0; // Column for base hp
-        uint8 jobScale = 1; // Column for job scaling
-        uint8 scaleX   = 2; // Column for modifier scale
-
-        uint8 BaseHP   = grade::GetMobHPScale(grade, base);     // Main job base HP
-        uint8 JobScale = grade::GetMobHPScale(grade, jobScale); // Main job scaling
-        uint8 ScaleXHP = grade::GetMobHPScale(grade, scaleX);   // Main job modifier scale
-
-        uint8 RBIgrade = std::min(lvl, (uint8)5); // RBI Grade
-        uint8 RBIbase  = 1;                       // Column for RBI base
-
-        uint8 RBI = grade::GetMobRBI(RBIgrade, RBIbase); // RBI
-
-        uint8 mLvlIf    = (PMob->GetMLevel() > 5 ? 1 : 0);
-        uint8 mLvlIf30  = (PMob->GetMLevel() > 30 ? 1 : 0);
-        uint8 raceScale = 6;
-
-        if (lvl > 0)
+        // give hp boost every 10 levels after 25
+        // special boosts at 25 and 50
+        if (lvl > 75)
         {
-            mobHP = BaseHP + (std::min(lvl, (uint8)5) - 1) * (JobScale + raceScale - 1) + RBI + mLvlIf * (std::min(lvl, (uint8)30) - 5) * (2 * (JobScale + raceScale) + std::min(lvl, (uint8)30) - 6) / 2 + mLvlIf30 * ((lvl - 30) * (63 + ScaleXHP) + (lvl - 31) * (JobScale + raceScale));
+            growth = 1.22f;
         }
-        // Mimic HP boost traits for monks
-        if (PMob->GetMJob() == JOB_MNK)
+        else if (lvl > 65)
         {
-            if (lvl >= 70)
-            {
-                mobHP += 180;
-            }
-            else if (lvl >= 55)
-            {
-                mobHP += 120;
-            }
-            else if (lvl >= 35)
-            {
-                mobHP += 60;
-            }
-            else if (lvl >= 15)
-            {
-                mobHP += 30;
-            }
+            growth = 1.20f;
+        }
+        else if (lvl > 55)
+        {
+            growth = 1.18f;
+        }
+        else if (lvl > 50)
+        {
+            growth = 1.16f;
+        }
+        else if (lvl > 45)
+        {
+            growth = 1.12f;
+        }
+        else if (lvl > 35)
+        {
+            growth = 1.09f;
+        }
+        else if (lvl > 25)
+        {
+            growth = 1.07f;
         }
 
-        PMob->health.maxhp = (int16)(mobHP * petStats->HPscale);
+        PMob->health.maxhp = (int16)(17.0 * pow(lvl, growth) * petStats->HPscale);
 
         switch (PMob->GetMJob())
         {
@@ -390,6 +369,10 @@ namespace petutils
         PMob->health.hp = PMob->GetMaxHP();
         PMob->health.mp = PMob->GetMaxMP();
 
+        PMob->setModifier(Mod::DEF, GetJugBase(PMob, petStats->defRank));
+        PMob->setModifier(Mod::EVA, GetJugBase(PMob, petStats->evaRank));
+        PMob->setModifier(Mod::ATT, GetJugBase(PMob, petStats->attRank));
+        PMob->setModifier(Mod::ACC, GetJugBase(PMob, petStats->accRank));
 
         static_cast<CItemWeapon*>(PMob->m_Weapons[SLOT_MAIN])->setDamage(GetJugWeaponDamage(PMob));
 
@@ -415,115 +398,13 @@ namespace petutils
         uint16 mMND = GetBaseToRank(grade::GetJobGrade(PMob->GetMJob(), 7), PMob->GetMLevel());
         uint16 mCHR = GetBaseToRank(grade::GetJobGrade(PMob->GetMJob(), 8), PMob->GetMLevel());
 
-        PMob->stats.STR = (uint16)(fSTR + mSTR);
-        PMob->stats.DEX = (uint16)(fDEX + mDEX);
-        PMob->stats.VIT = (uint16)(fVIT + mVIT);
-        PMob->stats.AGI = (uint16)(fAGI + mAGI);
-        PMob->stats.INT = (uint16)(fINT + mINT);
-        PMob->stats.MND = (uint16)(fMND + mMND);
-        PMob->stats.CHR = (uint16)(fCHR + mCHR);
-
-
-        uint32 id = PMob->m_PetID;
-
-        // Killer Effect and DEF/EVA/ACC/ATT
-        switch (id)
-        {
-            case 21: // SHEEP FAMILIAR
-                PMob->addModifier(Mod::LIZARD_KILLER, 10);
-                break;
-            case 22: // HARE FAMILIAR
-                PMob->addModifier(Mod::LIZARD_KILLER, 10);
-                break;
-            case 23: // CRAB FAMILIAR
-                PMob->addModifier(Mod::AMORPH_KILLER, 10);
-                break;
-            case 24: // COURIER CARRIE
-                PMob->addModifier(Mod::AMORPH_KILLER, 10);
-                break;
-            case 25: // HOMUNCULUS
-                PMob->addModifier(Mod::BEAST_KILLER, 10);
-                break;
-            case 26: // FLYTRAP FAMILIAR
-                PMob->addModifier(Mod::BEAST_KILLER, 10);
-                break;
-            case 27: // TIGER FAMILIAR
-                PMob->addModifier(Mod::LIZARD_KILLER, 10);
-                break;
-            case 28: // FLOWERPOT BILL
-                PMob->addModifier(Mod::BEAST_KILLER, 10);
-                break;
-            case 29: // EFT FAMILIAR
-                PMob->addModifier(Mod::VERMIN_KILLER, 10);
-                break;
-            case 30: // LIZARD FAMILIAR
-                PMob->addModifier(Mod::VERMIN_KILLER, 10);
-                break;
-            case 31: // MAYFLY FAMILIAR
-                PMob->addModifier(Mod::PLANTOID_KILLER, 10);
-                break;
-            case 32: // FUNGUAR FAMILIAR
-                PMob->addModifier(Mod::BEAST_KILLER, 10);
-                break;
-            case 33: // BEETLE FAMILIAR
-                PMob->addModifier(Mod::PLANTOID_KILLER, 10);
-                break;
-            case 34: // ANTLION FAMILIAR
-                PMob->addModifier(Mod::PLANTOID_KILLER, 10);
-                break;
-            case 35: // MITE FAMILIAR
-                PMob->addModifier(Mod::PLANTOID_KILLER, 10);
-                break;
-            case 36: // LULLABY MELODIA
-                PMob->addModifier(Mod::LIZARD_KILLER, 10);
-                break;
-            case 37: // KEENEARED STEFFI
-                PMob->addModifier(Mod::LIZARD_KILLER, 10);
-                break;
-            case 38: // FLOWERPOT BEN
-                PMob->addModifier(Mod::BEAST_KILLER, 10);
-                break;
-            case 39: // SABER SIRAVARDE
-                PMob->addModifier(Mod::LIZARD_KILLER, 10);
-                break;
-            case 40: // COLDBLOOD COMO
-                PMob->addModifier(Mod::VERMIN_KILLER, 10);
-                break;
-            case 41: // SHELLBUSTER OROB
-                PMob->addModifier(Mod::PLANTOID_KILLER, 10);
-                break;
-            case 42: // VORACIOUS AUDREY
-                PMob->addModifier(Mod::BEAST_KILLER, 10);
-                break;
-            case 43: // AMBUSHER ALLIE
-                PMob->addModifier(Mod::VERMIN_KILLER, 10);
-                break;
-            case 44: // LIFEDRINKER LARS
-                PMob->addModifier(Mod::PLANTOID_KILLER, 10);
-                break;
-            case 45: // PANZER GALAHAD
-                PMob->addModifier(Mod::PLANTOID_KILLER, 10);
-                break;
-            case 46: // CHOPSUEY CHUCKY
-                PMob->addModifier(Mod::PLANTOID_KILLER, 10);
-                break;
-            case 47: // AMIGO SABOTENDER
-                PMob->addModifier(Mod::BEAST_KILLER, 10);
-                break;
-            case 64: // FAITHFUL FALCORR
-                PMob->addModifier(Mod::AQUAN_KILLER, 10);
-                break;
-            case 68: // TURBID TOLOI
-                PMob->addModifier(Mod::AMORPH_KILLER, 10);
-                break;
-            default:
-                break;
-        }
-
-        PMob->setModifier(Mod::DEF, mobutils::GetDefense(PMob, PMob->defRank));
-        PMob->setModifier(Mod::EVA, mobutils::GetBase(PMob, PMob->evaRank));
-        PMob->setModifier(Mod::ATT, mobutils::GetBase(PMob, PMob->attRank));
-        PMob->setModifier(Mod::ACC, mobutils::GetBase(PMob, PMob->accRank));
+        PMob->stats.STR = (uint16)((fSTR + mSTR) * 0.9f);
+        PMob->stats.DEX = (uint16)((fDEX + mDEX) * 0.9f);
+        PMob->stats.VIT = (uint16)((fVIT + mVIT) * 0.9f);
+        PMob->stats.AGI = (uint16)((fAGI + mAGI) * 0.9f);
+        PMob->stats.INT = (uint16)((fINT + mINT) * 0.9f);
+        PMob->stats.MND = (uint16)((fMND + mMND) * 0.9f);
+        PMob->stats.CHR = (uint16)((fCHR + mCHR) * 0.9f);
     }
 
     void LoadAutomatonStats(CCharEntity* PMaster, CPetEntity* PPet, Pet_t* petStats)
@@ -708,7 +589,7 @@ namespace petutils
         }
 
         // Add Job Point Stat Bonuses
-        if (PMaster->GetMJob() == JOB_PUP || PMaster->GetSJob() == JOB_PUP)
+        if (PMaster->GetMJob() == JOB_PUP)
         {
             PPet->addModifier(Mod::ATT, PMaster->getMod(Mod::PET_ATK_DEF));
             PPet->addModifier(Mod::DEF, PMaster->getMod(Mod::PET_ATK_DEF));
@@ -1061,16 +942,16 @@ namespace petutils
         // Get the Jug pet cap level
         uint8 highestLvl = PPetData->maxLevel;
 
+        // Increase the pet's level cal by the bonus given by BEAST AFFINITY merits.
+        CCharEntity* PChar = static_cast<CCharEntity*>(PMaster);
+        highestLvl += PChar->PMeritPoints->GetMeritValue(MERIT_BEAST_AFFINITY, PChar);
+
         // And cap it to the master's level or weapon ilvl, whichever is greater
         auto capLevel = std::max(PMaster->GetMLevel(), PMaster->m_Weapons[SLOT_MAIN]->getILvl());
         if (highestLvl > capLevel)
         {
             highestLvl = capLevel;
         }
-
-        // Increase the pet's level cal by the bonus given by BEAST AFFINITY merits.
-        CCharEntity* PChar = static_cast<CCharEntity*>(PMaster);
-        highestLvl += PChar->PMeritPoints->GetMeritValue(MERIT_BEAST_AFFINITY, PChar);
 
         // Randomize: 0-2 lvls lower, less Monster Gloves(+1/+2) bonus
         highestLvl -= xirand::GetRandomNumber(3 - std::clamp<int16>(PChar->getMod(Mod::JUG_LEVEL_RANGE), 0, 2));
@@ -1684,11 +1565,6 @@ namespace petutils
             boost stats by 10%
             */
 
-        if (PPet == nullptr)
-        {
-            return;
-        }
-
         // only increase time for charmed mobs
         if (PPet->objtype == TYPE_MOB && PPet->isCharmed)
         {
@@ -1734,10 +1610,10 @@ namespace petutils
         });
         // clang-format on
 
-        //if (PMaster->GetSJob() == JOB_DRG && PetID == PETID_WYVERN) // Umeboshi
-        //{
-        //    return;
-        //}
+        if (PMaster->GetMJob() != JOB_DRG && PetID == PETID_WYVERN)
+        {
+            return;
+        }
 
         if (PMaster->objtype == TYPE_PC)
         {

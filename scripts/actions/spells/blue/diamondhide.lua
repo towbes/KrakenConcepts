@@ -1,6 +1,6 @@
 -----------------------------------
 -- Spell: Diamondhide
--- Gives party members within area of effect the effect of "Stoneskin"
+-- Gives party members within area of effect the effect of 'Stoneskin'
 -- Spell cost: 99 MP
 -- Monster Type: Beastmen
 -- Spell Type: Magical (Earth)

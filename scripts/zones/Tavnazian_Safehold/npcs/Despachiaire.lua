@@ -3,11 +3,11 @@
 --  NPC: Despachiaire
 -- !pos 108 -40 -83 26
 -- TODO:
--- Starts quests: "X Marks the Spot"
---                "Elderly Pursuits"
---                "Tango with a Tracker"
---                "Requiem of Sin"
--- Involved in:   "Secrets of Ovens Lost"
+-- Starts quests: 'X Marks the Spot'
+--                'Elderly Pursuits'
+--                'Tango with a Tracker'
+--                'Requiem of Sin'
+-- Involved in:   'Secrets of Ovens Lost'
 -----------------------------------
 local entity = {}
 

@@ -4,9 +4,9 @@
 --  Description: Damages enemies in a fan-shaped area of effect. Additional effect: Paralysis & Silence
 --  Type: Magical
 ---------------------------------------------
-require("scripts/globals/mobskills")
-require("scripts/globals/settings")
-require("scripts/globals/status")
+
+
+
 ---------------------------------------------
 local mobskillObject = {}
 
@@ -16,7 +16,7 @@ end
 
 mobskillObject.onMobWeaponSkill = function(target, mob, skill)
     local dmgmod = 1
-    local element = xi.magic.ele.WIND
+    local element = xi.element.WIND
     local typeEffectOne = xi.effect.PARALYSIS
     local typeEffectTwo = xi.effect.SILENCE
     local info = xi.mobskills.mobMagicalMove(mob, target, skill, mob:getWeaponDmg() * 2, element, dmgmod, xi.mobskills.magicalTpBonus.MAB_BONUS, 1)

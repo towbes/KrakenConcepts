@@ -22,7 +22,7 @@ effectObject.onEffectTick = function(target, effect)
 
     local store = effect:getPower() + basemp + bonus
 
-    -- The effect changes to "Sublimation: Complete" when the total MP stored is equal to 50% of your maximum HP or when the player's HP falls to orange level (<50%).
+    -- The effect changes to 'Sublimation: Complete' when the total MP stored is equal to 50% of your maximum HP or when the player's HP falls to orange level (<50%).
     local limit = math.floor((target:getBaseHP() + target:getMod(xi.mod.HP) + target:getMerit(xi.merit.MAX_HP)) / 2) +
         target:getMerit(xi.merit.MAX_SUBLIMATION) * 10 + target:getJobPointLevel(xi.jp.SUBLIMATION_EFFECT) * 3
 

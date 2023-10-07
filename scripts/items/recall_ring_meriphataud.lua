@@ -1,7 +1,7 @@
 -----------------------------------
 -- ID: 15843
 -- Recall ring: Meriphataud
--- Enchantment: "Recall-Meriphataud"
+-- Enchantment: 'Recall-Meriphataud'
 -----------------------------------
 local itemObject = {}
 

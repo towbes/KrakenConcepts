@@ -2,9 +2,9 @@
 -- Lava_Spit
 -- Deals Fire damage to enemies within an area of effect.
 -----------------------------------
-require("scripts/globals/settings")
-require("scripts/globals/status")
-require("scripts/globals/mobskills")
+
+
+
 -----------------------------------
 local mobskillObject = {}
 

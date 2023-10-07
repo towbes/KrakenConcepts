@@ -2,8 +2,8 @@
 --   Area: Mount Zhayolm
 --    Mob: Garhorlur the Brutal
 -----------------------------------
-mixins = {require("scripts/mixins/weapon_break")}
-mixins = {require("scripts/mixins/job_special")}
+mixins = {require('scripts/mixins/weapon_break')}
+mixins = {require('scripts/mixins/job_special')}
 -----------------------------------
 local entity = {}
 

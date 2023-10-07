@@ -66,7 +66,7 @@ zoneObject.onZoneWeatherChange = function(weather)
     local dahu = GetMobByID(ID.mob.DAHU)
     if
         not dahu:isSpawned() and 
-        os.time() > dahu:getLocalVar("cooldown") and
+        os.time() > dahu:getLocalVar('cooldown') and
         (weather == xi.weather.DUST_STORM or weather == xi.weather.SAND_STORM)
     then
         DisallowRespawn(dahu:getID(), false)
@@ -74,7 +74,7 @@ zoneObject.onZoneWeatherChange = function(weather)
     end
 
     local kingV = GetMobByID(ID.mob.KING_VINEGARROON)
-    local kvre = GetServerVariable("\\[SPAWN\\]17289575")
+    local kvre = GetServerVariable('\\[SPAWN\\]17289575')
     
     if not kingV:isSpawned() and os.time() > kvre and weather == xi.weather.DUST_STORM then
         -- 10% chance for KV pop at start of single earth weather

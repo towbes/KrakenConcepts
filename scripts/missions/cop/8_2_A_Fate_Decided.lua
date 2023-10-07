@@ -5,14 +5,6 @@
 -- !addmission 6 818
 -- Grand Palace of Hu'Xzoi Particle Gate (!pos 1 0.1 -320 34)
 -----------------------------------
-require('scripts/globals/interaction/mission')
-require('scripts/globals/missions')
-require('scripts/globals/npc_util')
-require("scripts/globals/teleports")
-require('scripts/globals/titles')
-require('scripts/globals/utils')
-require('scripts/globals/zone')
------------------------------------
 
 local mission = Mission:new(xi.mission.log_id.COP, xi.mission.id.cop.A_FATE_DECIDED)
 

@@ -1,6 +1,6 @@
 -----------------------------------
 -- Area: Lower Jeuno
---  NPC: Door: "Neptune's Spire"
+--  NPC: Door: 'Neptune's Spire'
 -- Starts and Finishes Quest: Beat Around the Bushin
 -- ZM 17 cutscene
 -- !pos 35 0 -15 245
@@ -37,14 +37,14 @@ entity.onTrade = function(player, npc, trade)
             trade:getItemCount() == 1 and
             player:getCharVar('BeatAroundTheBushin') == 7
         then
-            player:startEvent(159) -- After trade Brown Belt, Finish Quest "Beat around the Bushin"
+            player:startEvent(159) -- After trade Brown Belt, Finish Quest 'Beat around the Bushin'
         end
     end
 end
 
 entity.onTrigger = function(player, npc)
     if player:getCharVar('BeatAroundTheBushin') == 1 then
-        player:startEvent(155) -- Start Quest "Beat around the Bushin"
+        player:startEvent(155) -- Start Quest 'Beat around the Bushin'
 
     elseif player:hasKeyItem(xi.ki.TENSHODO_MEMBERS_CARD) then
         player:startEvent(105) -- Open the door

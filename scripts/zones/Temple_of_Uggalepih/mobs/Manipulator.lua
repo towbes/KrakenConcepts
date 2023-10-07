@@ -64,7 +64,7 @@ local pathNodes =
 
 entity.onMobSpawn = function(mob)
     mob:pathThrough(pathNodes, xi.path.flag.PATROL)
-    mob:addListener("ITEM_STOLEN", "MANIPULATOR_ITEM_STOLEN", function(mobArg, player, itemId)
+    mob:addListener('ITEM_STOLEN', 'MANIPULATOR_ITEM_STOLEN', function(mobArg, player, itemId)
         mob:delMod(xi.mod.DELAY, 400)
     end)
 end

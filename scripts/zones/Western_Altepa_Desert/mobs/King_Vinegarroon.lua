@@ -41,7 +41,7 @@ entity.onMobDeath = function(mob, player, optParams)
 end
 
 entity.onMobWeaponSkill = function(target, mob, skill)
-    local nextDrawIn = mob:getLocalVar("[Draw-In]WaitTime")
+    local nextDrawIn = mob:getLocalVar('[Draw-In]WaitTime')
 
     -- Every time KV performs a TP move, he will draw in either his target or the entire alliance randomly
     if (skill:getID() == 354 or skill:getID() == 355 or skill:getID() == 722 or skill:getID() == 723) and os.time() > nextDrawIn then
@@ -54,7 +54,7 @@ entity.onMobWeaponSkill = function(target, mob, skill)
 
         -- KV always does an AOE TP move followed by a single target TP move
         mob:useMobAbility(({ 353, 350, 720 })[math.random(1, 3)])
-        mob:setLocalVar("[Draw-In]WaitTime", os.time() + 1)
+        mob:setLocalVar('[Draw-In]WaitTime', os.time() + 1)
     end
 end
 

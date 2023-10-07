@@ -124,39 +124,39 @@ xi.moghouse.onMoghouseZoneIn = function(player, prevZone)
     -- 0x0080: This bit and the next track which 2F decoration style is being used (0: SANDORIA, 1: BASTOK, 2: WINDURST, 3: PATIO)
     -- 0x0100: ^ As above
 
-    --if not player:getCharVar("mhflagCheck", 1) then
-    --    player:setCharVar("mhflagCheck", 0)
+    --if not player:getCharVar('mhflagCheck', 1) then
+    --    player:setCharVar('mhflagCheck', 0)
     --end
 
-    if player:getCharVar("mhflagCheck") == 0 then
+    if player:getCharVar('mhflagCheck') == 0 then
             player:setMoghouseFlag(0x0000)
     end
     
-    if player:getCharVar("mhflagCheck") == 0 then
+    if player:getCharVar('mhflagCheck') == 0 then
         if player:getQuestStatus(xi.quest.log_id.SANDORIA, xi.quest.id.sandoria.GROWING_FLOWERS) == QUEST_COMPLETED then
             local mhflag = player:getMoghouseFlag()
-            player:setCharVar("mhflagCheck", 1)
+            player:setCharVar('mhflagCheck', 1)
             player:setMoghouseFlag(mhflag + 0x0001)
         end
         if player:getQuestStatus(xi.quest.log_id.BASTOK, xi.quest.id.bastok.A_LADYS_HEART) == QUEST_COMPLETED then
             local mhflag = player:getMoghouseFlag()
             player:setMoghouseFlag(mhflag + 0x0002)
-            player:setCharVar("mhflagCheck", 1)
+            player:setCharVar('mhflagCheck', 1)
         end
         if player:getQuestStatus(xi.quest.log_id.WINDURST, xi.quest.id.windurst.FLOWER_CHILD) == QUEST_COMPLETED then
             local mhflag = player:getMoghouseFlag()
             player:setMoghouseFlag(mhflag + 0x0004)
-            player:setCharVar("mhflagCheck", 1)
+            player:setCharVar('mhflagCheck', 1)
         end
         if player:getQuestStatus(xi.quest.log_id.JEUNO, xi.quest.id.jeuno.PRETTY_LITTLE_THINGS) == QUEST_COMPLETED then
             local mhflag = player:getMoghouseFlag()
             player:setMoghouseFlag(mhflag + 0x0008)
-            player:setCharVar("mhflagCheck", 1)
+            player:setCharVar('mhflagCheck', 1)
         end
         if player:getQuestStatus(xi.quest.log_id.AHT_URHGAN, xi.quest.id.ahtUrhgan.KEEPING_NOTES) == QUEST_COMPLETED then
             local mhflag = player:getMoghouseFlag()
             player:setMoghouseFlag(mhflag + 0x0010)
-            player:setCharVar("mhflagCheck", 1)
+            player:setCharVar('mhflagCheck', 1)
         end
     end
 

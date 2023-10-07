@@ -46,7 +46,6 @@ public:
     bool TrySpecialSkill();
 
     bool         CanAggroTarget(CBattleEntity*);
-    bool         CanDetectTarget(CBattleEntity* PTarget, bool forceSight = false, bool detectDead = false);
     void         TapDeaggroTime();
     void         TapDeclaimTime();
     virtual bool Cast(uint16 targid, SpellID spellid) override;
@@ -55,17 +54,14 @@ protected:
     virtual bool TryDeaggro();
 
     virtual void TryLink();
-    //bool         CanDetectTarget(CBattleEntity* PTarget, bool forceSight = false);
-    int32        GetPixieHate(CBattleEntity* PTarget);
+    bool         CanDetectTarget(CBattleEntity* PTarget, bool forceSight = false);
     bool         CanPursueTarget(CBattleEntity* PTarget);
     bool         CheckHide(CBattleEntity* PTarget);
     bool         CheckLock(CBattleEntity* PTarget);
     bool         CheckDetection(CBattleEntity* PTarget);
     virtual bool CanCastSpells();
     void         CastSpell(SpellID spellid);
-    bool         IsStuck();
     virtual void Move();
-    virtual void UpdateLastKnownPosition();
 
     virtual void DoCombatTick(time_point tick);
     void         FaceTarget(uint16 targid = 0);
@@ -83,10 +79,6 @@ protected:
 private:
     CMobEntity* const PMob;
 
-    bool       m_Stuck = false;
-    position_t m_LastPos;
-    position_t m_LastTargetPos;
-
     time_point m_LastActionTime;
     time_point m_LastMagicTime;
     time_point m_LastMobSkillTime;
@@ -95,7 +87,6 @@ private:
     time_point m_DeclaimTime;
     time_point m_NeutralTime;
     time_point m_WaitTime;
-    time_point m_StuckTick;
 
     bool       m_firstSpell{ true };
     time_point m_LastRoamScript{ time_point::min() };

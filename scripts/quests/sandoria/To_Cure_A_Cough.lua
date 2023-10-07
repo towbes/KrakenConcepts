@@ -8,11 +8,11 @@
 -- Signpost: !gotoid 17191510
 -----------------------------------
 require('scripts/globals/npc_util')
-require('scripts/globals/items')
-require('scripts/globals/keyitems')
+
+
 require('scripts/globals/quests')
-require('scripts/globals/titles')
-require('scripts/globals/zone')
+
+
 require('scripts/globals/interaction/quest')
 -----------------------------------
 
@@ -56,7 +56,7 @@ quest.sections =
                 onTrigger = function(player, npc)
                     if
                         quest:getVar(player, 'Prog') == 1 and
-                        player:getCharVar("DiaryPage") >= 3
+                        player:getCharVar('DiaryPage') >= 3
                     then
                         return quest:progressEvent(636)
                     end

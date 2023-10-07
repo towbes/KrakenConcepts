@@ -60,7 +60,6 @@ along with this program.  If not, see http://www.gnu.org/licenses/
 #include "packets/chat_message.h"
 #include "utils/battleutils.h"
 #include "utils/charutils.h"
-#include "utils/fellowutils.h"
 #include "utils/fishingutils.h"
 #include "utils/gardenutils.h"
 #include "utils/guildutils.h"
@@ -253,7 +252,6 @@ int32 do_init(int32 argc, char** argv)
     battleutils::LoadPetSkillsList();
     battleutils::LoadSkillChainDamageModifiers();
     petutils::LoadPetList();
-    fellowutils::LoadFellowList();
     trustutils::LoadTrustList();
     mobutils::LoadSqlModifiers();
     jobpointutils::LoadGifts();
@@ -273,7 +271,6 @@ int32 do_init(int32 argc, char** argv)
     ShowInfo("do_init: loading zones");
     zoneutils::LoadZoneList();
 
-    fellowutils::LoadFellowMessages();
     fishingutils::InitializeFishingSystem();
     instanceutils::LoadInstanceList();
 
@@ -1041,7 +1038,7 @@ int32 map_close_session(time_point tick, map_session_data_t* map_session_data)
         uint64 ipp    = map_session_data->client_addr;
         ipp |= port64 << 32;
 
-        map_session_data->PChar->StatusEffectContainer->SaveStatusEffects(map_session_data->shuttingDown == 1, false);
+        map_session_data->PChar->StatusEffectContainer->SaveStatusEffects(map_session_data->shuttingDown == 1);
 
         destroy_arr(map_session_data->server_packet_data);
         destroy(map_session_data->PChar);
@@ -1142,8 +1139,8 @@ int32 map_cleanup(time_point tick, CTaskMgr::CTask* PTask)
                                 petutils::DespawnPet(PChar);
                             }
 
-                        PChar->StatusEffectContainer->SaveStatusEffects(true, false);
-                        charutils::SaveCharPosition(PChar);
+                            PChar->StatusEffectContainer->SaveStatusEffects(true);
+                            charutils::SaveCharPosition(PChar);
 
                             ShowDebug("map_cleanup: %s timed out, closing session", PChar->GetName());
 
@@ -1173,7 +1170,7 @@ int32 map_cleanup(time_point tick, CTaskMgr::CTask* PTask)
                         if (!otherMap)
                         {
                             // Player session is attached to this map process and has stopped responding.
-                            map_session_data->PChar->StatusEffectContainer->SaveStatusEffects(true, false);
+                            map_session_data->PChar->StatusEffectContainer->SaveStatusEffects(true);
                             sql->Query("DELETE FROM accounts_sessions WHERE charid = %u;", map_session_data->PChar->id);
                         }
 

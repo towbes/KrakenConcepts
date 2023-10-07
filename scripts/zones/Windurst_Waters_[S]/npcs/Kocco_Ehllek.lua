@@ -14,16 +14,16 @@ entity.onTrigger = function(player, npc)
     local rocksProg = player:getCharVar('RedeemingRocksProg')
 
     if redeemingRocks == QUEST_AVAILABLE then
-        player:startEvent(108) -- Start quest "Redeeming Rocks"
+        player:startEvent(108) -- Start quest 'Redeeming Rocks'
     elseif redeemingRocks == QUEST_ACCEPTED and rocksProg == 2 then
-        player:startEvent(109) -- 3rd CS quest "Redeeming Rocks"
+        player:startEvent(109) -- 3rd CS quest 'Redeeming Rocks'
     elseif redeemingRocks == QUEST_ACCEPTED and rocksProg == 4 then
-        player:startEvent(110) -- 4th CS quest "Redeeming Rocks"
+        player:startEvent(110) -- 4th CS quest 'Redeeming Rocks'
     elseif
         redeemingRocks == QUEST_ACCEPTED and
         player:getCharVar('RedeemingDay') ~= VanadielDayOfTheYear()
     then
-        player:startEvent(111) -- Last CS quest "Redeeming Rocks"
+        player:startEvent(111) -- Last CS quest 'Redeeming Rocks'
     else
         player:startEvent(140) -- Standard text
     end
@@ -33,7 +33,7 @@ entity.onEventUpdate = function(player, csid, option, npc)
 end
 
 entity.onEventFinish = function(player, csid, option, npc)
-    if csid == 108 then -- Finish "Redeeming Rocks" opening CS
+    if csid == 108 then -- Finish 'Redeeming Rocks' opening CS
         player:addQuest(xi.quest.log_id.CRYSTAL_WAR, xi.quest.id.crystalWar.REDEEMING_ROCKS)
         player:setCharVar('RedeemingRocksProg', 1)
     elseif csid == 109 then -- Finish 'Redeeming Rocks' third CS

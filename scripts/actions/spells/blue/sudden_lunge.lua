@@ -1,6 +1,6 @@
 -----------------------------------
 -- Spell: Sudden Lunge
--- Damage varies with TP. Additional effect: "Stun."
+-- Damage varies with TP. Additional effect: 'Stun.'
 -- Spell cost: 18 MP
 -- Monster Type: Vermin
 -- Spell Type: Physical (Slashing)

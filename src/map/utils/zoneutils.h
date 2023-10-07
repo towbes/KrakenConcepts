@@ -59,7 +59,6 @@ namespace zoneutils
     void         ForEachZone(const std::function<void(CZone*)>& func);
     uint64       GetZoneIPP(uint16 zoneid);       // returns IPP for zone ID
     bool         IsResidentialArea(CCharEntity*); // returns whether or not the area is a residential zone
-    uint8        GetFameAreaFromZone(uint16 ZoneID); // returns fame from zone
 
     void AfterZoneIn(CBaseEntity* PEntity); // triggers after a player has finished zoning in
 

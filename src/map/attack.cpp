@@ -99,12 +99,12 @@ void CAttack::SetCritical(bool value)
     }
     else
     {
-        float attBonus = 1.f;
+        float attBonus = 0.f;
         if (m_attackType == PHYSICAL_ATTACK_TYPE::KICK)
         {
             if (CStatusEffect* footworkEffect = m_attacker->StatusEffectContainer->GetStatusEffect(EFFECT_FOOTWORK))
             {
-                attBonus = 1.0 + footworkEffect->GetSubPower() / 256.f; // Mod is out of 256
+                attBonus = footworkEffect->GetSubPower() / 256.f; // Mod is out of 256
             }
         }
 
@@ -174,22 +174,13 @@ bool CAttack::IsBlocked() const
     return m_isBlocked;
 }
 
-/************************************************************************
- *                                                                      *
- *  Gets the Parried flag if set, else calculates a new one and returns.*
- *                                                                      *
- ************************************************************************/
 bool CAttack::IsParried()
 {
-    if (m_isParried.has_value())
-    {
-        return m_isParried.value();
-    }
     if (m_attackType != PHYSICAL_ATTACK_TYPE::DAKEN)
     {
-        m_isParried.emplace(attackutils::IsParried(m_attacker, m_victim));
+        return attackutils::IsParried(m_attacker, m_victim);
     }
-    return m_isParried.value_or(false);
+    return false;
 }
 
 bool CAttack::IsAnticipated() const
@@ -356,44 +347,47 @@ bool CAttack::CheckAnticipated()
     // power stores how many times this effect has anticipated
     auto pastAnticipations = effect->GetPower();
 
-    if (pastAnticipations >= 6)
+    if (pastAnticipations > 7)
     {
         // max 7 anticipates!
         m_victim->StatusEffectContainer->DelStatusEffect(EFFECT_THIRD_EYE);
-        m_anticipated = true;
-        return true;
+        return false;
     }
 
     bool hasSeigan = m_victim->StatusEffectContainer->HasStatusEffect(EFFECT_SEIGAN, 0);
 
-    if (!hasSeigan)
+    if (!hasSeigan && pastAnticipations == 0)
     {
         m_victim->StatusEffectContainer->DelStatusEffect(EFFECT_THIRD_EYE);
         m_anticipated = true;
         return true;
     }
+    else if (!hasSeigan)
+    {
+        m_victim->StatusEffectContainer->DelStatusEffect(EFFECT_THIRD_EYE);
+        return false;
+    }
     else
     { // do have seigan, decay anticipations correctly (guesstimated)
         // 5-6 anticipates is a 'lucky' streak, going to assume 15% decay per proc, with a 100% base w/ Seigan
-        if (xirand::GetRandomNumber(100) >= (100 - ((pastAnticipations + 1) * 15) + m_victim->getMod(Mod::THIRD_EYE_ANTICIPATE_RATE)))
+        if (xirand::GetRandomNumber(100) < (100 - (pastAnticipations * 15) + m_victim->getMod(Mod::THIRD_EYE_ANTICIPATE_RATE)))
         {
-            m_victim->StatusEffectContainer->DelStatusEffect(EFFECT_THIRD_EYE);
-        }
-
-        // increment power and don't remove
-        effect->SetPower(effect->GetPower() + 1);
-        // chance to counter - 25% base
-        if (xirand::GetRandomNumber(100) < 25 + m_victim->getMod(Mod::THIRD_EYE_COUNTER_RATE))
-        {
-            if (m_victim->PAI->IsEngaged() && facing(m_victim->loc.p, m_attacker->loc.p, 40) && !m_victim->StatusEffectContainer->HasStatusEffect(EFFECT_SLEEP) && !m_victim->StatusEffectContainer->HasStatusEffect(EFFECT_LULLABY) &&
-                !m_victim->StatusEffectContainer->HasStatusEffect(EFFECT_PETRIFICATION) && !m_victim->StatusEffectContainer->HasStatusEffect(EFFECT_TERROR))
+            // increment power and don't remove
+            effect->SetPower(effect->GetPower() + 1);
+            // chance to counter - 25% base
+            if (xirand::GetRandomNumber(100) < 25 + m_victim->getMod(Mod::THIRD_EYE_COUNTER_RATE))
             {
-                m_isCountered = true;
-                m_isCritical  = (xirand::GetRandomNumber(100) < battleutils::GetCritHitRate(m_victim, m_attacker, false));
+                if (m_victim->PAI->IsEngaged())
+                {
+                    m_isCountered = true;
+                    m_isCritical  = (xirand::GetRandomNumber(100) < battleutils::GetCritHitRate(m_victim, m_attacker, false));
+                }
             }
+            m_anticipated = true;
+            return true;
         }
-        m_anticipated = true;
-        return true;
+        m_victim->StatusEffectContainer->DelStatusEffect(EFFECT_THIRD_EYE);
+        return false;
     }
 }
 
@@ -419,11 +413,6 @@ bool CAttack::CheckCounter()
     if (m_victim->objtype == TYPE_PC && charutils::hasTrait((CCharEntity*)m_victim, TRAIT_COUNTER))
     {
         if (m_victim->GetMJob() == JOB_MNK || m_victim->GetMJob() == JOB_PUP)
-        {
-            meritCounter = ((CCharEntity*)m_victim)->PMeritPoints->GetMeritValue(MERIT_COUNTER_RATE, (CCharEntity*)m_victim);
-        }
-
-        if (m_victim->GetSJob() == JOB_MNK || m_victim->GetSJob() == JOB_PUP) //Umeboshi "Merits for subjob"
         {
             meritCounter = ((CCharEntity*)m_victim)->PMeritPoints->GetMeritValue(MERIT_COUNTER_RATE, (CCharEntity*)m_victim);
         }
@@ -486,17 +475,7 @@ void CAttack::ProcessDamage()
 {
     // Sneak attack.
     if (m_attacker->GetMJob() == JOB_THF && m_isFirstSwing && m_attacker->StatusEffectContainer->HasStatusEffect(EFFECT_SNEAK_ATTACK) &&
-        //((abs(m_victim->loc.p.rotation - m_attacker->loc.p.rotation) < 23) || m_attacker->StatusEffectContainer->HasStatusEffect(EFFECT_HIDE) ||
-        (behind(m_attacker->loc.p, m_victim->loc.p, 64) || m_attacker->StatusEffectContainer->HasStatusEffect(EFFECT_HIDE) ||
-         m_victim->StatusEffectContainer->HasStatusEffect(EFFECT_DOUBT)))
-    {
-        m_trickAttackDamage += m_attacker->DEX() * (1 + m_attacker->getMod(Mod::SNEAK_ATK_DEX) / 100);
-    }
-
-    // Sneak attack.
-    else if (m_attacker->GetSJob() == JOB_THF && m_isFirstSwing && m_attacker->StatusEffectContainer->HasStatusEffect(EFFECT_SNEAK_ATTACK) &&
-         //((abs(m_victim->loc.p.rotation - m_attacker->loc.p.rotation) < 23) || m_attacker->StatusEffectContainer->HasStatusEffect(EFFECT_HIDE) ||
-         (behind(m_attacker->loc.p, m_victim->loc.p, 64) || m_attacker->StatusEffectContainer->HasStatusEffect(EFFECT_HIDE) ||
+        ((abs(m_victim->loc.p.rotation - m_attacker->loc.p.rotation) < 23) || m_attacker->StatusEffectContainer->HasStatusEffect(EFFECT_HIDE) ||
          m_victim->StatusEffectContainer->HasStatusEffect(EFFECT_DOUBT)))
     {
         m_trickAttackDamage += m_attacker->DEX() * (1 + m_attacker->getMod(Mod::SNEAK_ATK_DEX) / 100);
@@ -504,12 +483,6 @@ void CAttack::ProcessDamage()
 
     // Trick attack.
     if (m_attacker->GetMJob() == JOB_THF && m_isFirstSwing && m_attackRound->GetTAEntity() != nullptr)
-    {
-        m_trickAttackDamage += m_attacker->AGI() * (1 + m_attacker->getMod(Mod::TRICK_ATK_AGI) / 100);
-    }
-
-    // Trick attack.
-    else if (m_attacker->GetSJob() == JOB_THF && m_isFirstSwing && m_attackRound->GetTAEntity() != nullptr)
     {
         m_trickAttackDamage += m_attacker->AGI() * (1 + m_attacker->getMod(Mod::TRICK_ATK_AGI) / 100);
     }
@@ -572,11 +545,6 @@ void CAttack::ProcessDamage()
         SetAttackType(PHYSICAL_ATTACK_TYPE::SAMBA);
     }
 
-   // if (m_attacker->objtype == TYPE_PET && m_attacker->GetBattleTarget() != nullptr && m_attacker->GetBattleTarget()->getMod(Mod::PET_DMG_TAKEN_PHYSICAL) != 0)
-   // {
-   //     m_damage *= m_attacker->GetBattleTarget()->getMod(Mod::PET_DMG_TAKEN_PHYSICAL) / 100;
-   // }
-
     // Get damage multipliers.
     m_damage =
         attackutils::CheckForDamageMultiplier((CCharEntity*)m_attacker, dynamic_cast<CItemWeapon*>(m_attacker->m_Weapons[slot]), m_damage, m_attackType, slot);
@@ -592,61 +560,6 @@ void CAttack::ProcessDamage()
     {
         m_damage += (int32)(m_damage * ((100 + (m_attacker->getMod(Mod::AUGMENTS_TA))) / 100.0f));
     }
-
-        // Circle Effects
-    if (m_victim->objtype == TYPE_MOB && m_damage > 0)
-    {
-        uint16 circlemult = 100;
-
-        switch (m_victim->m_EcoSystem)
-        {
-            case ECOSYSTEM::AMORPH:
-                circlemult += m_attacker->getMod(Mod::AMORPH_CIRCLE);
-                break;
-            case ECOSYSTEM::AQUAN:
-                circlemult += m_attacker->getMod(Mod::AQUAN_CIRCLE);
-                break;
-            case ECOSYSTEM::ARCANA:
-                circlemult += m_attacker->getMod(Mod::ARCANA_CIRCLE);
-                break;
-            case ECOSYSTEM::BEAST:
-                circlemult += m_attacker->getMod(Mod::BEAST_CIRCLE);
-                break;
-            case ECOSYSTEM::BIRD:
-                circlemult += m_attacker->getMod(Mod::BIRD_CIRCLE);
-                break;
-            case ECOSYSTEM::DEMON:
-                circlemult += m_attacker->getMod(Mod::DEMON_CIRCLE);
-                break;
-            case ECOSYSTEM::DRAGON:
-                circlemult += m_attacker->getMod(Mod::DRAGON_CIRCLE);
-                break;
-            case ECOSYSTEM::LIZARD:
-                circlemult += m_attacker->getMod(Mod::LIZARD_CIRCLE);
-                break;
-            case ECOSYSTEM::LUMINION:
-                circlemult += m_attacker->getMod(Mod::LUMINION_CIRCLE);
-                break;
-            case ECOSYSTEM::LUMINIAN:
-                circlemult += m_attacker->getMod(Mod::LUMINIAN_CIRCLE);
-                break;
-            case ECOSYSTEM::PLANTOID:
-                circlemult += m_attacker->getMod(Mod::PLANTOID_CIRCLE);
-                break;
-            case ECOSYSTEM::UNDEAD:
-                circlemult += m_attacker->getMod(Mod::UNDEAD_CIRCLE);
-                break;
-            case ECOSYSTEM::VERMIN:
-                circlemult += m_attacker->getMod(Mod::VERMIN_CIRCLE);
-                break;
-            default:
-                break;
-        }
-        m_damage = m_damage * circlemult / 100;
-    }
-
-
-
 
     // Try skill up.
     if (m_damage > 0)

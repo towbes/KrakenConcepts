@@ -2,10 +2,10 @@
 -- Area: Aydeewwa Subterrane
 --  Mob: Great Ameretat
 -----------------------------------
-require("scripts/globals/mobs")
+require('scripts/globals/mobs')
 mixins = 
 { 
-require("scripts/mixins/families/ameretat"),
+require('scripts/mixins/families/ameretat'),
 }
 -----------------------------------
 local entity = {}

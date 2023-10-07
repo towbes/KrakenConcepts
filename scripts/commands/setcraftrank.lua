@@ -54,7 +54,7 @@ commandObj.onTrigger = function(player, craftName, tier, target)
     else
         targ = GetPlayerByName(target)
         if targ == nil then
-            player:PrintToPlayer(string.format('Player named "%s" not found!', target))
+            player:PrintToPlayer(string.format('Player named '%s' not found!', target))
             return
         end
     end

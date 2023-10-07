@@ -1,7 +1,7 @@
 -----------------------------------
 -- ID: 18614
 -- Cobra Staff
--- Enchantment: "Retrace" (Windurst Waters[S])
+-- Enchantment: 'Retrace' (Windurst Waters[S])
 -----------------------------------
 local itemObject = {}
 

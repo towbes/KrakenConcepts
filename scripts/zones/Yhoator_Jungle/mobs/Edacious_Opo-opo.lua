@@ -8,7 +8,7 @@ local entity = {}
 
 
 entity.onMobDespawn = function(mob)
-    GetNPCByID(ID.npc.EDACIOUS_QM):setLocalVar("despawned", os.time() + 900)
+    GetNPCByID(ID.npc.EDACIOUS_QM):setLocalVar('despawned', os.time() + 900)
 end
 
 entity.onMobDeath = function(mob, player, optParams)

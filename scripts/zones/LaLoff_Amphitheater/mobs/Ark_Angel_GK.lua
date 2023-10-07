@@ -13,14 +13,14 @@ entity.onMobSpawn = function(mob)
     xi.mix.jobSpecial.config(mob, {
         specials =
         {
-            -- "Call Wyvern is used at the time of monster engage. Call Wyvern is used ~1 minute subsequent to Wyvern's death."
+            -- 'Call Wyvern is used at the time of monster engage. Call Wyvern is used ~1 minute subsequent to Wyvern's death.'
             {
                 id       = xi.jsa.CALL_WYVERN,
                 hpp      = 100,
                 cooldown = 60,
             },
 
-            -- "Meikyo Shisui is used very frequently."
+            -- 'Meikyo Shisui is used very frequently.'
             {
                 id       = xi.jsa.MEIKYO_SHISUI,
                 hpp      = math.random(90, 95),

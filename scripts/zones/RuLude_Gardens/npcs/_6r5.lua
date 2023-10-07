@@ -1,7 +1,7 @@
 -----------------------------------
 -- Area: Ru'Lude Gardens
 -- Door: San d'Orian Emb.
--- San d'Oria Missions 3.3 "Appointment to Jeuno" and 4.1 "Magicite"
+-- San d'Oria Missions 3.3 'Appointment to Jeuno' and 4.1 'Magicite'
 -----------------------------------
 local ID = zones[xi.zone.RULUDE_GARDENS]
 -----------------------------------

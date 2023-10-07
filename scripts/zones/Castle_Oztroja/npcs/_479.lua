@@ -1,7 +1,7 @@
 -----------------------------------
 -- Area: Castle Oztroja
 --  NPC: _479 (Brass Door)
--- Involved in Mission "Saintly Invitation"
+-- Involved in Mission 'Saintly Invitation'
 -- !pos -99 -59 84 151
 -----------------------------------
 local ID = zones[xi.zone.CASTLE_OZTROJA]

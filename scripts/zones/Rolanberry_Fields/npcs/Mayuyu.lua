@@ -22,7 +22,7 @@ entity.onEventUpdate = function(player, csid, option, npc)
 end
 
 entity.onEventFinish = function(player, csid, option, npc)
-    -- Event needs work, also the Legion Pass item is "tagged" via fields not yet implemented in core.
+    -- Event needs work, also the Legion Pass item is 'tagged' via fields not yet implemented in core.
 end
 
 return entity

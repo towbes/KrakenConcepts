@@ -1,7 +1,7 @@
 -----------------------------------
 -- ID: 5880
 -- Item: Poison Screen
--- Effect: 2 Mins of immunity to "Poison" effects.
+-- Effect: 2 Mins of immunity to 'Poison' effects.
 -----------------------------------
 local itemObject = {}
 

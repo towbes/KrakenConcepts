@@ -9,7 +9,7 @@ entity.onTrade = function(player, npc, trade)
 end
 
 entity.onTrigger = function(player, npc)
-    if player:getCharVar("Quest[0][67]Stage") > os.time() then
+    if player:getCharVar('Quest[0][67]Stage') > os.time() then
         player:startEvent(43)
     else
         if

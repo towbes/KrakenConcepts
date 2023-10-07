@@ -192,7 +192,7 @@ void CJobPoints::SetCapacityPoints(uint16 amount)
 
 uint8 CJobPoints::GetJobPointValue(JOBPOINT_TYPE jpType)
 {
-    if (IsJobPointExist(jpType) && m_PChar->GetMLevel() >= 75 && m_PChar->GetMJob() == JobPointsCategoryIndexByJpType(jpType))
+    if (IsJobPointExist(jpType) && m_PChar->GetMLevel() >= 99 && m_PChar->GetMJob() == JobPointsCategoryIndexByJpType(jpType))
     {
         return GetJobPointType(jpType)->value;
     }
@@ -236,7 +236,7 @@ namespace jobpointutils
 
         for (auto&& gift : jpGifts[jobId])
         {
-            if (gift.jpRequired > totalJpSpent || PChar->GetMLevel() < 75)
+            if (gift.jpRequired > totalJpSpent || PChar->GetMLevel() < 99)
             {
                 break;
             }

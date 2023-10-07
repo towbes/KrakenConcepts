@@ -8,39 +8,39 @@ local abilityObject = {}
 
 function convertJobToJobName(jobid)
 	local jobname = {}
-	jobname[0] = "NON"
-	jobname[1] = "WAR"
-	jobname[2] = "MNK"
-	jobname[3] = "WHM"
-	jobname[4] = "BLM"
-	jobname[5] = "RDM"
-	jobname[6] = "THF"
-	jobname[7] = "PLD"
-	jobname[8] = "DRK"
-	jobname[9] = "BST"
-	jobname[10] = "BRD"
-	jobname[11] = "RNG"
-	jobname[12] = "SAM"
-	jobname[13] = "NIN"
-	jobname[14] = "DRG"
-	jobname[15] = "SMN"
-	jobname[16] = "BLU"
-	jobname[17] = "COR"
-	jobname[18] = "PUP"
-	jobname[19] = "DNC"
-	jobname[20] = "SCH"
-	jobname[21] = "GEO"
-	jobname[22] = "RUN"
+	jobname[0] = 'NON'
+	jobname[1] = 'WAR'
+	jobname[2] = 'MNK'
+	jobname[3] = 'WHM'
+	jobname[4] = 'BLM'
+	jobname[5] = 'RDM'
+	jobname[6] = 'THF'
+	jobname[7] = 'PLD'
+	jobname[8] = 'DRK'
+	jobname[9] = 'BST'
+	jobname[10] = 'BRD'
+	jobname[11] = 'RNG'
+	jobname[12] = 'SAM'
+	jobname[13] = 'NIN'
+	jobname[14] = 'DRG'
+	jobname[15] = 'SMN'
+	jobname[16] = 'BLU'
+	jobname[17] = 'COR'
+	jobname[18] = 'PUP'
+	jobname[19] = 'DNC'
+	jobname[20] = 'SCH'
+	jobname[21] = 'GEO'
+	jobname[22] = 'RUN'
 	return jobname[jobid]
 end
 
 function rmvUs(name)
-	return string.gsub(name, "_", " ")
+	return string.gsub(name, '_', ' ')
 end
 
 function printLines(player,ln)
 	local lncounter = 1
-	while ln[lncounter] ~= nil and ln[lncounter] ~= "empty" do
+	while ln[lncounter] ~= nil and ln[lncounter] ~= 'empty' do
 		player:PrintToPlayer(ln[lncounter],13)
 		lncounter = lncounter + 1
 	end
@@ -56,21 +56,21 @@ abilityObject.onUseAbility = function(player, target, ability)
     local ln = {}
 	lncounter = 1
 	
-	ln[1] = "empty"
-	ln[2] = "empty"
-	ln[3] = "empty"
-	ln[4] = "empty"
-	ln[5] = "empty"
-	ln[6] = "empty"
-	ln[7] = "empty"
-	ln[8] = "empty"
-	ln[9] = "empty"
-	ln[10] = "empty"
-	ln[11] = "empty"
-	ln[12] = "empty"
-	ln[13] = "empty"
-	ln[14] = "empty"
-	ln[15] = "empty"
+	ln[1] = 'empty'
+	ln[2] = 'empty'
+	ln[3] = 'empty'
+	ln[4] = 'empty'
+	ln[5] = 'empty'
+	ln[6] = 'empty'
+	ln[7] = 'empty'
+	ln[8] = 'empty'
+	ln[9] = 'empty'
+	ln[10] = 'empty'
+	ln[11] = 'empty'
+	ln[12] = 'empty'
+	ln[13] = 'empty'
+	ln[14] = 'empty'
+	ln[15] = 'empty'
 	
 	local schlvl = 0
 	if player:getMainJob() == xi.job.SCH then
@@ -80,12 +80,12 @@ abilityObject.onUseAbility = function(player, target, ability)
 	end
 	
 	if (target:isPC()) or (target:getMainLvl() > schlvl + 20) then -- or (target:isNM() and target:getMainLvl() > schlvl)
-		ln[lncounter] = string.format("  The %s is too strong to gauge its weaknesses!",rmvUs(target:getName()))
+		ln[lncounter] = string.format('  The %s is too strong to gauge its weaknesses!',rmvUs(target:getName()))
 		printLines(player,ln)
 		return 0
 	end
 	
-	ln[lncounter] = string.format("  %s (%s%i/%s%i)",rmvUs(target:getName()),convertJobToJobName(target:getMainJob()),math.max(target:getMainLvl(),1),convertJobToJobName(target:getSubJob()),math.max(target:getSubLvl(),1))
+	ln[lncounter] = string.format('  %s (%s%i/%s%i)',rmvUs(target:getName()),convertJobToJobName(target:getMainJob()),math.max(target:getMainLvl(),1),convertJobToJobName(target:getSubJob()),math.max(target:getSubLvl(),1))
 	lncounter = lncounter + 1
 	
 	if math.random(1,100) < 60 + player:getStat(xi.mod.INT) - target:getStat(xi.mod.INT) then
@@ -97,35 +97,35 @@ abilityObject.onUseAbility = function(player, target, ability)
 		if math.random(0,1) == 1 then
 			inaccuracy = 1/inaccuracy
 		end
-		print(string.format("inacc = %f",inaccuracy))
+		print(string.format('inacc = %f',inaccuracy))
 		if math.random() < 0.12 then
-			ln[lncounter] = string.format("  Its HP is about %i.",math.floor(target:getHP()*inaccuracy))
+			ln[lncounter] = string.format('  Its HP is about %i.',math.floor(target:getHP()*inaccuracy))
 			lncounter = lncounter + 1
 		elseif math.random() < 0.12 then
-			ln[lncounter] = string.format("  Its MP is about %i.",math.floor(target:getMP()*inaccuracy))
+			ln[lncounter] = string.format('  Its MP is about %i.',math.floor(target:getMP()*inaccuracy))
 			lncounter = lncounter + 1
 		else
 			local stat = math.random(8,14)
 			if stat == 8 then
-				ln[lncounter] = string.format("  Its STR is about %i.",math.floor(target:getStat(stat)*inaccuracy)+math.random(0,1))
+				ln[lncounter] = string.format('  Its STR is about %i.',math.floor(target:getStat(stat)*inaccuracy)+math.random(0,1))
 				lncounter = lncounter + 1
 			elseif stat == 9 then
-				ln[lncounter] = string.format("  Its DEX is about %i.",math.floor(target:getStat(stat)*inaccuracy)+math.random(0,1))
+				ln[lncounter] = string.format('  Its DEX is about %i.',math.floor(target:getStat(stat)*inaccuracy)+math.random(0,1))
 				lncounter = lncounter + 1
 			elseif stat == 10 then
-				ln[lncounter] = string.format("  Its VIT is about %i.",math.floor(target:getStat(stat)*inaccuracy)+math.random(0,1))
+				ln[lncounter] = string.format('  Its VIT is about %i.',math.floor(target:getStat(stat)*inaccuracy)+math.random(0,1))
 				lncounter = lncounter + 1
 			elseif stat == 11 then
-				ln[lncounter] = string.format("  Its AGI is about %i.",math.floor(target:getStat(stat)*inaccuracy)+math.random(0,1))
+				ln[lncounter] = string.format('  Its AGI is about %i.',math.floor(target:getStat(stat)*inaccuracy)+math.random(0,1))
 				lncounter = lncounter + 1
 			elseif stat == 12 then
-				ln[lncounter] = string.format("  Its INT is about %i.",math.floor(target:getStat(stat)*inaccuracy)+math.random(0,1))
+				ln[lncounter] = string.format('  Its INT is about %i.',math.floor(target:getStat(stat)*inaccuracy)+math.random(0,1))
 				lncounter = lncounter + 1
 			elseif stat == 13 then
-				ln[lncounter] = string.format("  Its MND is about %i.",math.floor(target:getStat(stat)*inaccuracy)+math.random(0,1))
+				ln[lncounter] = string.format('  Its MND is about %i.',math.floor(target:getStat(stat)*inaccuracy)+math.random(0,1))
 				lncounter = lncounter + 1
 			elseif stat == 14 then
-				ln[lncounter] = string.format("  Its CHR is about %i.",math.floor(target:getStat(stat)*inaccuracy)+math.random(0,1))
+				ln[lncounter] = string.format('  Its CHR is about %i.',math.floor(target:getStat(stat)*inaccuracy)+math.random(0,1))
 				lncounter = lncounter + 1
 			end
 		end
@@ -164,7 +164,7 @@ abilityObject.onUseAbility = function(player, target, ability)
 	mobresist[59] == mobresist[60] and
 	mobresist[60] == mobresist[61] and 
 	mobresist[54] > 0 then -- strong to all magic
-		ln[lncounter] = "  It seems strong against all magic."
+		ln[lncounter] = '  It seems strong against all magic.'
 		lncounter = lncounter + 1
 	elseif mobresist[54] == mobresist[55] and
 	mobresist[55] == mobresist[56] and
@@ -174,7 +174,7 @@ abilityObject.onUseAbility = function(player, target, ability)
 	mobresist[59] == mobresist[60] and
 	mobresist[60] == mobresist[61] and 
 	mobresist[54] < 0 then -- weak to all magic
-		ln[lncounter] = "  It seems weak to all magic."
+		ln[lncounter] = '  It seems weak to all magic.'
 		lncounter = lncounter + 1
 	elseif mobresist[54] == mobresist[55] and
 	mobresist[55] == mobresist[56] and
@@ -186,134 +186,134 @@ abilityObject.onUseAbility = function(player, target, ability)
 	mobresist[54] == 0 then -- none
 		-- do nothing
     elseif target:getMod(xi.mod.UDMGMAGIC) <= -9500 then
-        ln[lncounter] = "  It currently seems immune to magical attacks."
+        ln[lncounter] = '  It currently seems immune to magical attacks.'
         lncounter = lncounter + 1
     elseif target:getMod(xi.mod.UDMGMAGIC) <= -5000 then
-        ln[lncounter] = "  It currently seems very strong against magical attacks."
+        ln[lncounter] = '  It currently seems very strong against magical attacks.'
         lncounter = lncounter + 1
     elseif target:getMod(xi.mod.UDMGMAGIC) >= 5000 then
-        ln[lncounter] = "  It currently seems very weak against magical attacks."
+        ln[lncounter] = '  It currently seems very weak against magical attacks.'
         lncounter = lncounter + 1
     elseif target:getMod(xi.mod.UDMGMAGIC) <= -2500 then
-        ln[lncounter] = "  It currently seems strong against magical attacks."
+        ln[lncounter] = '  It currently seems strong against magical attacks.'
         lncounter = lncounter + 1
     elseif target:getMod(xi.mod.UDMGMAGIC) >= 2500 then
-        ln[lncounter] = "  It currently seems weak against magical attacks."
+        ln[lncounter] = '  It currently seems weak against magical attacks.'
         lncounter = lncounter + 1 
 	else
 		
 		if mobresist[54] > 0 then
-			ln[lncounter] = "  It seems strong against fire."
+			ln[lncounter] = '  It seems strong against fire.'
 			lncounter = lncounter + 1
 		elseif mobresist[54] < 0 then
-			ln[lncounter] = "  It seems weak to fire."
+			ln[lncounter] = '  It seems weak to fire.'
 			lncounter = lncounter + 1
 		end
 		
 		if mobresist[55] > 0 then
-			ln[lncounter] = "  It seems strong against ice."
+			ln[lncounter] = '  It seems strong against ice.'
 			lncounter = lncounter + 1
 		elseif mobresist[55] < 0 then
-			ln[lncounter] = "  It seems weak to ice."
+			ln[lncounter] = '  It seems weak to ice.'
 			lncounter = lncounter + 1
 		end
 		
 		if mobresist[56] > 0 then
-			ln[lncounter] = "  It seems strong against wind."
+			ln[lncounter] = '  It seems strong against wind.'
 			lncounter = lncounter + 1
 		elseif mobresist[56] < 0 then
-			ln[lncounter] = "  It seems weak to wind."
+			ln[lncounter] = '  It seems weak to wind.'
 			lncounter = lncounter + 1
 		end
 		
 		if mobresist[57] > 0 then
-			ln[lncounter] = "  It seems strong against earth."
+			ln[lncounter] = '  It seems strong against earth.'
 			lncounter = lncounter + 1
 		elseif mobresist[57] < 0 then
-			ln[lncounter] = "  It seems weak to earth."
+			ln[lncounter] = '  It seems weak to earth.'
 			lncounter = lncounter + 1
 		end
 		
 		if mobresist[58] > 0 then
-			ln[lncounter] = "  It seems strong against lightning."
+			ln[lncounter] = '  It seems strong against lightning.'
 			lncounter = lncounter + 1
 		elseif mobresist[58] < 0 then
-			ln[lncounter] = "  It seems weak to lightning."
+			ln[lncounter] = '  It seems weak to lightning.'
 			lncounter = lncounter + 1
 		end
 		
 		if mobresist[59] > 0 then
-			ln[lncounter] = "  It seems strong against water."
+			ln[lncounter] = '  It seems strong against water.'
 			lncounter = lncounter + 1
 		elseif mobresist[59] < 0 then
-			ln[lncounter] = "  It seems weak to water."
+			ln[lncounter] = '  It seems weak to water.'
 			lncounter = lncounter + 1
 		end
 		
 		if mobresist[60] > 0 then
-			ln[lncounter] = "  It seems strong against light."
+			ln[lncounter] = '  It seems strong against light.'
 			lncounter = lncounter + 1
 		elseif mobresist[60] < 0 then
-			ln[lncounter] = "  It seems weak to light."
+			ln[lncounter] = '  It seems weak to light.'
 			lncounter = lncounter + 1
 		end
 		
 		if mobresist[61] > 0 then
-			ln[lncounter] = "  It seems strong against dark."
+			ln[lncounter] = '  It seems strong against dark.'
 			lncounter = lncounter + 1
 		elseif mobresist[61] < 0 then
-			ln[lncounter] = "  It seems weak to dark."
+			ln[lncounter] = '  It seems weak to dark.'
 			lncounter = lncounter + 1
 		end
 		
 	end
 	
 	if mobresist[49] == mobresist[50] and mobresist[50] == mobresist[51] and mobresist[49] < 1000 then
-		ln[lncounter] = "  It seems strong against physical attacks."
+		ln[lncounter] = '  It seems strong against physical attacks.'
 		lncounter = lncounter + 1
 	elseif mobresist[49] == mobresist[50] and mobresist[50] == mobresist[51] and mobresist[49] > 1000 then
-		ln[lncounter] = "  It seems weak to physical attacks."
+		ln[lncounter] = '  It seems weak to physical attacks.'
 		lncounter = lncounter + 1
 	else
 	
 		if mobresist[49] < 1000 then
-			ln[lncounter] = "  It seems strong against slashing attacks."
+			ln[lncounter] = '  It seems strong against slashing attacks.'
 			lncounter = lncounter + 1
 		elseif mobresist[49] > 1000 then
-			ln[lncounter] = "  It seems weak to slashing attacks."
+			ln[lncounter] = '  It seems weak to slashing attacks.'
 			lncounter = lncounter + 1
 		end
 		
 		if mobresist[50] < 1000 then
-			ln[lncounter] = "  It seems strong against piercing attacks."
+			ln[lncounter] = '  It seems strong against piercing attacks.'
 			lncounter = lncounter + 1
 		elseif mobresist[50] > 1000 then
-			ln[lncounter] = "  It seems weak to piercing attacks."
+			ln[lncounter] = '  It seems weak to piercing attacks.'
 			lncounter = lncounter + 1
 		end
 		
 		if mobresist[51] < 1000 then
-			ln[lncounter] = "  It seems strong against blunt attacks."
+			ln[lncounter] = '  It seems strong against blunt attacks.'
 			lncounter = lncounter + 1
 		elseif mobresist[51] > 1000 then
-			ln[lncounter] = "  It seems weak to blunt attacks."
+			ln[lncounter] = '  It seems weak to blunt attacks.'
 			lncounter = lncounter + 1
 		end
         
         if target:getMod(xi.mod.UDMGPHYS) <= -9500 then
-            ln[lncounter] = "  It currently seems immune to physical attacks."
+            ln[lncounter] = '  It currently seems immune to physical attacks.'
             lncounter = lncounter + 1
         elseif target:getMod(xi.mod.UDMGPHYS) <= -5000 then
-            ln[lncounter] = "  It currently seems very strong against physical attacks."
+            ln[lncounter] = '  It currently seems very strong against physical attacks.'
             lncounter = lncounter + 1
         elseif target:getMod(xi.mod.UDMGPHYS) >= 5000 then
-            ln[lncounter] = "  It currently seems very weak against physical attacks."
+            ln[lncounter] = '  It currently seems very weak against physical attacks.'
             lncounter = lncounter + 1
         elseif target:getMod(xi.mod.UDMGPHYS) <= -2500 then
-            ln[lncounter] = "  It currently seems strong against physical attacks."
+            ln[lncounter] = '  It currently seems strong against physical attacks.'
             lncounter = lncounter + 1
         elseif target:getMod(xi.mod.UDMGPHYS) >= 2500 then
-            ln[lncounter] = "  It currently seems weak against physical attacks."
+            ln[lncounter] = '  It currently seems weak against physical attacks.'
             lncounter = lncounter + 1
         end
 	end
@@ -328,44 +328,44 @@ abilityObject.onUseAbility = function(player, target, ability)
 			local blood = target:getMobMod(xi.detects.LOWHP)
 			local magic = target:getMobMod(xi.detects.MAGIC)
 
-			local str1 = " "
-			local str2 = " "
+			local str1 = ' '
+			local str2 = ' '
 			
 			--[[if aggro and not link then
-				str1 = "  It appears aggressive, "
+				str1 = '  It appears aggressive, '
 			elseif not aggro and link then
-				str1 = "  It appears alert, "
+				str1 = '  It appears alert, '
 			elseif aggro and link then
-				str1 = "  It appears aggressive and alert, "
+				str1 = '  It appears aggressive and alert, '
 			end
 			
 			if xi.detects.HEARING then
 				if not blood and not magic then
-					str2 = "detecting by sound."
+					str2 = 'detecting by sound.'
 				elseif blood and not magic then
-					str2 = "detecting by sound and blood."
+					str2 = 'detecting by sound and blood.'
 				elseif not blood and magic then
-					str2 = "detecting by sound and magic."
+					str2 = 'detecting by sound and magic.'
 				elseif blood and magic then
-					str2 = "detecting by sound, blood and magic."
+					str2 = 'detecting by sound, blood and magic.'
 				end
 			elseif sight then
 				if not blood and not magic then
-					str2 = "detecting by sight."
+					str2 = 'detecting by sight.'
 				elseif blood and not magic then
-					str2 = "detecting by sight and blood."
+					str2 = 'detecting by sight and blood.'
 				elseif not blood and magic then
-					str2 = "detecting by sight and magic."
+					str2 = 'detecting by sight and magic.'
 				elseif blood and magic then
-					str2 = "detecting by sight, blood and magic."
+					str2 = 'detecting by sight, blood and magic.'
 				end
 			else
 				if blood and not magic then
-					str2 = "detecting by blood."
+					str2 = 'detecting by blood.'
 				elseif not blood and magic then
-					str2 = "detecting by magic."
+					str2 = 'detecting by magic.'
 				elseif blood and magic then
-					str2 = "detecting by blood and magic."
+					str2 = 'detecting by blood and magic.'
 				end
 			end
 			
@@ -376,9 +376,9 @@ abilityObject.onUseAbility = function(player, target, ability)
 		
 		if target:isEngaged() then
 		
-		local name1 = "empty"
+		local name1 = 'empty'
 		local enmityamt1 = 0
-		local name2 = "empty"
+		local name2 = 'empty'
 		local enmityamt2 = 0
 		
 		local playercount = 0
@@ -403,10 +403,10 @@ abilityObject.onUseAbility = function(player, target, ability)
 		end
 		
 		if enmityamt1 ~= 0 and enmityamt2 ~= 0 then
-			ln[lncounter] = string.format("  It is currently attacking %s and may attack %s next.",name1,name2)
+			ln[lncounter] = string.format('  It is currently attacking %s and may attack %s next.',name1,name2)
 			lncounter = lncounter + 1
 		elseif enmityamt1 ~= 0 then
-			ln[lncounter] = string.format("  It is currently attacking %s.",name1)
+			ln[lncounter] = string.format('  It is currently attacking %s.',name1)
 			lncounter = lncounter + 1
 		end
 		

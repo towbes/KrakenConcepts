@@ -31,7 +31,7 @@ class CCharEntity;
 class CCharStatsPacket : public CBasicPacket
 {
 public:
-    CCharStatsPacket(CCharEntity* PChar, bool resetflips);
+    CCharStatsPacket(CCharEntity* PChar);
 };
 
 #endif

@@ -50,10 +50,6 @@ CBaseEntity::CBaseEntity()
 , PInstance(nullptr)
 , m_nextUpdateTimer(std::chrono::steady_clock::now())
 {
-    animStart    = false;
-    animPath     = 0;
-    animBegin    = 0;
-    manualConfig = false;
 }
 
 CBaseEntity::~CBaseEntity()

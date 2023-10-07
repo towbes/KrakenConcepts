@@ -4,7 +4,7 @@
 -- Type: ENM Quest Timer
 -- !pos 116.294 -6 -98.164 241
 -----------------------------------
-require("scripts/globals/enm")
+require('scripts/globals/enm')
 -----------------------------------
 local entity = {}
 

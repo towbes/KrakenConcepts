@@ -36,30 +36,32 @@
 #
 # Live example:
 
-cactuar/commands/
-cactuar/cpp/
-cactuar/lua/
-cactuar/sql/
+#cactuar/commands/
+#cactuar/cpp/
+#cactuar/lua/
+#cactuar/sql/
 
-custom/lua/custom_HNM_system.lua
-custom/lua/custom_util.lua
-custom/custom_helm/self_emote.cpp
-custom/custom_helm/custom_helm.lua
-custom/custom_helm/examples/
-custom/custom_helm/commands/helmnext.lua
-custom/custom_helm/commands/helmlist.lua
+#custom/lua/custom_HNM_system.lua
+#custom/lua/custom_util.lua
+#custom/custom_helm/self_emote.cpp
+#custom/custom_helm/custom_helm.lua
+#custom/custom_helm/examples/
+#custom/custom_helm/commands/helmnext.lua
+#custom/custom_helm/commands/helmlist.lua
+#custom/custom_helm/self_emote.cpp
+#custom/custom_helm/custom_helm.lua
+#custom/custom_helm/examples/
+#custom/custom_helm/commands/helmnext.lua
+#custom/custom_helm/commands/helmlist.lua
+#custom/jeuno_valeriano/jeuno_valeriano.lua
+#custom/oztroja_escape
+#custom/custom_clamming/custom_clamming.lua
+#custom/custom_clamming/examples/
+
+
 #custom/custom_chest/custom_chest.lua
 #custom/custom_chest/examples/
-custom/custom_helm/self_emote.cpp
-custom/custom_helm/custom_helm.lua
-custom/custom_helm/examples/
-custom/custom_helm/commands/helmnext.lua
-custom/custom_helm/commands/helmlist.lua
 #custom/custom_nm/custom_nm.lua
 #custom/custom_nm/commands/
 #custom/custom_nm/examples/
-custom/jeuno_valeriano/jeuno_valeriano.lua
-custom/oztroja_escape
-custom/custom_clamming/custom_clamming.lua
-custom/custom_clamming/examples/
 

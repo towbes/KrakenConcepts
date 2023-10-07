@@ -10,8 +10,8 @@ local ID = zones[xi.zone.EMPYREAL_PARADOX]
 local battlefieldObject = {}
 
 battlefieldObject.onBattlefieldInitialise = function(battlefield)
-    battlefield:setLocalVar("phaseChange", 1)
-    battlefield:setLocalVar("instantKick", 1)
+    battlefield:setLocalVar('phaseChange', 1)
+    battlefield:setLocalVar('instantKick', 1)
     -- Need to multiply getArea by 2 due to the two Promathia versions
     local baseID = ID.mob.PROMATHIA_OFFSET + (battlefield:getArea() * 2)
     local pos = GetMobByID(baseID):getSpawnPos()

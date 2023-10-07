@@ -19,7 +19,7 @@ entity.onTrigger = function(player, npc)
         (trialByFire == QUEST_AVAILABLE and player:getFameLevel(xi.quest.fame_area.WINDURST) >= 6) or
         (trialByFire == QUEST_COMPLETED and os.time() > player:getCharVar('TrialByFire_date'))
     then
-        player:startEvent(270, 0, xi.ki.TUNING_FORK_OF_FIRE) -- Start and restart quest "Trial by Fire"
+        player:startEvent(270, 0, xi.ki.TUNING_FORK_OF_FIRE) -- Start and restart quest 'Trial by Fire'
     elseif
         trialByFire == QUEST_ACCEPTED and
         not player:hasKeyItem(xi.ki.TUNING_FORK_OF_FIRE) and

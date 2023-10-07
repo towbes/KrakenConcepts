@@ -154,7 +154,7 @@ bool CAIContainer::Trigger(CCharEntity* player)
     if (CanChangeState())
     {
         auto ret = ChangeState<CTriggerState>(PEntity, player->targid, isDoor);
-        if (PathFind && PEntity->GetLocalVar("keepPathingOnTrigger") != 0)
+        if (PathFind)
         {
             PEntity->SetLocalVar("pauseNPCPathing", 1);
         }
@@ -484,21 +484,11 @@ bool CAIContainer::IsSpawned()
 
 bool CAIContainer::IsRoaming()
 {
-    if (PEntity == nullptr)
-    {
-        return false;
-    }
-
     return PEntity->animation == ANIMATION_NONE;
 }
 
 bool CAIContainer::IsEngaged()
 {
-    if (PEntity == nullptr)
-    {
-        return false;
-    }
-
     return PEntity->animation == ANIMATION_ATTACK;
 }
 

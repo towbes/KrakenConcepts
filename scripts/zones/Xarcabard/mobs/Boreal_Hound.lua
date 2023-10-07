@@ -4,7 +4,7 @@
 -- Involved in Quests: Atop the Highest Mountains
 -- !pos -21 -25 -490 112
 -----------------------------------
-mixins = { require("scripts/mixins/job_special") }
+mixins = { require('scripts/mixins/job_special') }
 local ID = zones[xi.zone.XARCABARD]
 -----------------------------------
 local entity = {}

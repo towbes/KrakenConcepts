@@ -2,16 +2,16 @@
 -- Viscid Secretion
 -- Inflicts slow and Gravity in a conal area
 -----------------------------------
-require("scripts/globals/mobskills")
-require("scripts/globals/settings")
-require("scripts/globals/status")
+
+
+
 -----------------------------------
 local mobskillObject = {}
 
 mobskillObject.onMobSkillCheck = function(target, mob, skill)
     if
-        mob:getName() == "Pasuk" or
-        mob:getName() == "Gnyan"
+        mob:getName() == 'Pasuk' or
+        mob:getName() == 'Gnyan'
     then
         return 0
     end

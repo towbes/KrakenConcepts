@@ -1,7 +1,7 @@
 -----------------------------------
 -- ID: 11363
 -- Equip: Twilight Cloak
--- Able to cast "Impact"
+-- Able to cast 'Impact'
 -----------------------------------
 local itemObject = {}
 

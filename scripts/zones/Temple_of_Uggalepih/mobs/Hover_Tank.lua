@@ -2,7 +2,7 @@
 -- Area: Temple of Uggalepih
 --  Mob: Hover Tank
 -----------------------------------
-mixins = { require("scripts/mixins/prelate_door") }
+mixins = { require('scripts/mixins/prelate_door') }
 -----------------------------------
 local entity = {}
 

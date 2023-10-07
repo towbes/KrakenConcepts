@@ -1,7 +1,7 @@
 -----------------------------------
 -- ID: 15541
 -- Teleport Homing Ring
--- Enchantment: "Outpost Warp"
+-- Enchantment: 'Outpost Warp'
 -----------------------------------
 local itemObject = {}
 

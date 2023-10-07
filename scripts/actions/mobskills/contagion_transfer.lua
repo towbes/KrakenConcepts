@@ -11,10 +11,10 @@
 --  Checks should be based off what positive effects a mob can have on themselves
 --  and work around those effects.
 -----------------------------------
-require("scripts/globals/settings")
-require("scripts/globals/status")
-require("scripts/globals/mobskills")
-require("scripts/globals/msg")
+
+
+
+
 -----------------------------------
 local badEffects =
 {

@@ -9,18 +9,18 @@ local entity = {}
 
 entity.onTrade = function(player, npc, trade)
     local shieldChance = 0
-    if npcUtil.tradeHasExactly(trade, xi.items.HICKORY_SHIELD) then
+    if npcUtil.tradeHasExactly(trade, xi.item.HICKORY_SHIELD) then
         shieldChance = 500
-        npc:setLocalVar("shield", 1)
-    elseif npcUtil.tradeHasExactly(trade, xi.items.PICAROONS_SHIELD) then
+        npc:setLocalVar('shield', 1)
+    elseif npcUtil.tradeHasExactly(trade, xi.item.PICAROONS_SHIELD) then
         shieldChance = 1000
-        npc:setLocalVar("shield", 2)
+        npc:setLocalVar('shield', 2)
     end
 
     if shieldChance > 0 and npcUtil.popFromQM(player, npc, ID.mob.GRATION) then
         player:confirmTrade()
         SetDropRate(1218, 12360, shieldChance)
-        if npc:getLocalVar("shield") == 1 then
+        if npc:getLocalVar('shield') == 1 then
             player:messageSpecial(ID.text.SNATCHED_AWAY, 12359)
         else
             player:messageSpecial(ID.text.SNATCHED_AWAY, 12370)

@@ -7,10 +7,10 @@
 -- Jimaida : !pos -17.342 -2.597 -18.766 248
 -- Zaldon  : !pos -11.810 -7.287 -6.742
 -----------------------------------
-require('scripts/globals/items')
+
 require('scripts/globals/quests')
-require('scripts/globals/status')
-require('scripts/globals/zone')
+
+
 require('scripts/globals/interaction/quest')
 -----------------------------------
 
@@ -18,7 +18,7 @@ local quest = Quest:new(xi.quest.log_id.OTHER_AREAS, xi.quest.id.otherAreas.UNDE
 
 quest.reward =
 {
-    item = xi.items.AMBER_EARRING,
+    item = xi.item.AMBER_EARRING,
     title = xi.title.LIL_CUPID
 }
 
@@ -58,7 +58,7 @@ quest.sections =
                 onTrigger = function(player, npc)
                     if player:hasKeyItem(xi.ki.ETCHED_RING) then
                         return quest:event(37)
-                    elseif quest:getVar(player, "status") == 0 then
+                    elseif quest:getVar(player, 'status') == 0 then
                         return quest:event(32)
                     end
                 end,
@@ -66,7 +66,7 @@ quest.sections =
             ['Jimaida'] =
             {
                 onTrigger = function(player, npc)
-                    if quest:getVar(player, "status") == 1 then
+                    if quest:getVar(player, 'status') == 1 then
                         return quest:event(33)
                     end
                 end,
@@ -75,7 +75,7 @@ quest.sections =
             {
                 onTrade = function(player, npc, trade)
                     if not player:hasKeyItem(xi.ki.ETCHED_RING) and
-                    npcUtil.tradeHas(trade, xi.items.FAT_GREEDIE) and
+                    npcUtil.tradeHas(trade, xi.item.FAT_GREEDIE) and
                     quest:getVar(player, 'status') == 3 then
                         if math.random(100) <= 20 then
                             player:startEvent(35) -- Ring found!
@@ -87,7 +87,7 @@ quest.sections =
 
                 onTrigger = function(player, npc)
                     if quest:getVar(player, 'status') == 2 then
-                        return quest:event(34, xi.items.FAT_GREEDIE)
+                        return quest:event(34, xi.item.FAT_GREEDIE)
                     end
                 end,
             },
@@ -95,15 +95,15 @@ quest.sections =
             onEventFinish =
             {
                 [32] = function(player, csid, option, npc)
-                    quest:incrementVar(player, "status", 1)
+                    quest:incrementVar(player, 'status', 1)
                 end,
 
                 [33] = function(player, csid, option, npc)
-                    quest:incrementVar(player, "status", 1)
+                    quest:incrementVar(player, 'status', 1)
                 end,
 
                 [34] = function(player, csid, option, npc)
-                    quest:incrementVar(player, "status", 1)
+                    quest:incrementVar(player, 'status', 1)
                 end,
 
                 [35] = function(player, csid, option, npc)

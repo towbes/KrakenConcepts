@@ -3,7 +3,7 @@
 --  Mob: Arch Apocalyptic Beast
 -- Note: Mega Boss
 -----------------------------------
-require("scripts/globals/dynamis")
+require('scripts/globals/dynamis')
 -----------------------------------
 local entity = {}
 
@@ -29,12 +29,12 @@ entity.onMobSpawn = function(mob)
     mob:setMod(xi.mod.SINGING, 200)
 
     -- Set Vars
-    mob:setLocalVar("debuff_Blood", 0) -- Cageblood used, 2 hours locked.
-    mob:setLocalVar("debuff_Heart", 0) -- Mobskill 'Songs' locked.
-    mob:setLocalVar("debuff_Skull", 0) -- Mobskill Breath attacks locked.
-    mob:setLocalVar("debuff_Talon", 0) -- Petroeyes/Chaos Blade locked.
-    mob:setLocalVar("debuff_Femur", 0) -- Body Slam/Heavy Stomp locked.
-    mob:setLocalVar("next2hr", 1) -- 2hr rotation not reset by a wipe
+    mob:setLocalVar('debuff_Blood', 0) -- Cageblood used, 2 hours locked.
+    mob:setLocalVar('debuff_Heart', 0) -- Mobskill 'Songs' locked.
+    mob:setLocalVar('debuff_Skull', 0) -- Mobskill Breath attacks locked.
+    mob:setLocalVar('debuff_Talon', 0) -- Petroeyes/Chaos Blade locked.
+    mob:setLocalVar('debuff_Femur', 0) -- Body Slam/Heavy Stomp locked.
+    mob:setLocalVar('next2hr', 1) -- 2hr rotation not reset by a wipe
 end
 
 entity.onMobFight = function(mob, target)
@@ -96,10 +96,10 @@ entity.onMobFight = function(mob, target)
         463, -- Foe Lullaby
     }
     
-    if mob:getCurrentAction() <= 1 and mob:getLocalVar("debuff_Blood") == 0 then  -- Do not use 2hrs if item was used on mob
-        while os.time() >= (mob:getLocalVar("next2hrtime")) do
-            i = mob:getLocalVar("next2hr")
-                mob:setLocalVar("next2hrtime", os.time() + math.random(45,75)) -- 45s-75s after previous usage
+    if mob:getCurrentAction() <= 1 and mob:getLocalVar('debuff_Blood') == 0 then  -- Do not use 2hrs if item was used on mob
+        while os.time() >= (mob:getLocalVar('next2hrtime')) do
+            i = mob:getLocalVar('next2hr')
+                mob:setLocalVar('next2hrtime', os.time() + math.random(45,75)) -- 45s-75s after previous usage
                 if abilities2hr[i] == xi.jsa.FAMILIAR then
                     -- charm
                     mob:useMobAbility(710)
@@ -107,7 +107,7 @@ entity.onMobFight = function(mob, target)
                     mob:useMobAbility(abilities2hr[i])
                 end
             -- After going through all two-hour abilities, it will start over again
-            mob:setLocalVar("next2hr", (i % #abilities2hr) + 1)
+            mob:setLocalVar('next2hr', (i % #abilities2hr) + 1)
         end
     end
 
@@ -140,7 +140,7 @@ end
 
 entity.onMobEngaged = function(mob, target)
     mob:setTP(0)
-    mob:setLocalVar("next2hrtime", os.time() + 5) -- 5s after aggro
+    mob:setLocalVar('next2hrtime', os.time() + 5) -- 5s after aggro
 end
 
 entity.onMobDeath = function(mob, player, optParams)

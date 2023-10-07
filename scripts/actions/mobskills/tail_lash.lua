@@ -2,9 +2,9 @@
 -- Tail Lash
 -- Deals backwards arc damage to targets behind Amphiptere.
 ---------------------------------------------------
-require("scripts/globals/settings")
-require("scripts/globals/status")
-require("scripts/globals/mobskills")
+
+
+
 -----------------------------------
 local mobskillObject = {}
 

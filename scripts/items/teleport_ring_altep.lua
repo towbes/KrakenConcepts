@@ -1,7 +1,7 @@
 -----------------------------------
 -- ID: 14666
 -- Teleport ring: Altep
--- Enchantment: "Teleport-Altep"
+-- Enchantment: 'Teleport-Altep'
 -----------------------------------
 local itemObject = {}
 

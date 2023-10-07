@@ -49,7 +49,7 @@ entity.onEventUpdate = function(player, csid, option, npc)
 end
 
 entity.onEventFinish = function(player, csid, option, npc)
-    if player:getLocalVar("Durogg_PlayCutscene") < 2 then
+    if player:getLocalVar('Durogg_PlayCutscene') < 2 then
         if option == 1 then        -- Drenched! It Began with a Raindrop
             player:startEvent(30025, 0, 0, 0, 0, 0, 0, 231)
 --        elseif option == 2 then        -- Hasten! In a Jam in Jeuno?

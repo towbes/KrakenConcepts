@@ -25,8 +25,8 @@ entity.onMobSpawn = function(mob)
             { id = xi.jsa.INVINCIBLE, cooldown = 120, hpp = 100 },
         },
     })
-    mob:setLocalVar("[ranged_attack]weaponDmg", 25)
-    mob:setLocalVar("[ranged_attack]dmgmod", 0)
+    mob:setLocalVar('[ranged_attack]weaponDmg', 25)
+    mob:setLocalVar('[ranged_attack]dmgmod', 0)
 end
 
 entity.onMobFight = function(mob, target)

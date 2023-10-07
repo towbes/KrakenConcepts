@@ -6,7 +6,7 @@
 local ID = zones[xi.zone.WAJAOM_WOODLANDS]
 mixins = 
 { 
-require("scripts/mixins/families/ameretat"),
+require('scripts/mixins/families/ameretat'),
 }
 -----------------------------------
 local entity = {}

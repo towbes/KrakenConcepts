@@ -56,14 +56,14 @@ entity.onTrigger = function(player, npc)
         (sjob == xi.job.BRD and
         slevel >= xi.settings.main.AF1_QUEST_LEVEL))
     then
-        player:startEvent(139) -- Start "The Circle of Time"
+        player:startEvent(139) -- Start 'The Circle of Time'
 
     elseif circleOfTime == QUEST_ACCEPTED then
         player:messageSpecial(ID.text.MERTAIRE_RING)
 
     -- DEFAULT DIALOG
     elseif painfulMemory == QUEST_COMPLETED then
-        player:startEvent(135) -- Standard dialog after completed "Painful Memory"
+        player:startEvent(135) -- Standard dialog after completed 'Painful Memory'
 
     else
         player:messageSpecial(ID.text.MERTAIRE_DEFAULT)

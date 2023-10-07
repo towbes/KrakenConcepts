@@ -1,7 +1,7 @@
 -----------------------------------
 -- Area: Gustav Tunnel
 --   NM: Gigaplasm
--- Note: Part of mission "The Salt of the Earth"
+-- Note: Part of mission 'The Salt of the Earth'
 -----------------------------------
 local entity = {}
 

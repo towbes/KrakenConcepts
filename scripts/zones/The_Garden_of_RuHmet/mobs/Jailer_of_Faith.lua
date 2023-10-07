@@ -9,10 +9,10 @@ local entity = {}
 
 -- Jailer of Faith takes double damage when flower is open
 local openFlower = function(mob)
-    mob:setLocalVar("PhysicalDamage", 0)
-    mob:setLocalVar("MagicalDamage", 0)
-    mob:setLocalVar("RangedDamage", 0)
-    mob:setLocalVar("BreathDamage", 0)
+    mob:setLocalVar('PhysicalDamage', 0)
+    mob:setLocalVar('MagicalDamage', 0)
+    mob:setLocalVar('RangedDamage', 0)
+    mob:setLocalVar('BreathDamage', 0)
     mob:delMod(xi.mod.ATTP, 10)
     mob:setMod(xi.mod.DMGPHYS, 10000)
     mob:setMod(xi.mod.DMGMAGIC, 10000)
@@ -23,29 +23,29 @@ end
 
 -- Jailer of Faith takes normal damage while flower is closed
 local closeFlower = function(mob)
-    mob:setLocalVar("PhysicalDamage", 0)
-    mob:setLocalVar("MagicalDamage", 0)
-    mob:setLocalVar("RangedDamage", 0)
-    mob:setLocalVar("BreathDamage", 0)
+    mob:setLocalVar('PhysicalDamage', 0)
+    mob:setLocalVar('MagicalDamage', 0)
+    mob:setLocalVar('RangedDamage', 0)
+    mob:setLocalVar('BreathDamage', 0)
     mob:addMod(xi.mod.ATTP, 10) -- hits harder while flower is closed
     mob:setMod(xi.mod.DMGPHYS, 0)
     mob:setMod(xi.mod.DMGMAGIC, 0)
     mob:setMod(xi.mod.DMGRANGE, 0)
     mob:setMod(xi.mod.DMGBREATH, 0)
-    mob:setLocalVar("[faith]changeTime", mob:getBattleTime() + math.random(20, 40))
+    mob:setLocalVar('[faith]changeTime', mob:getBattleTime() + math.random(20, 40))
     mob:setAnimationSub(1)
 end
 
 entity.onMobInitialize = function(mob)
-    mob:addListener("TAKE_DAMAGE", "FAITH_TAKE_DAMAGE", function(mobArg, amount, attacker, attackType, damageType)
+    mob:addListener('TAKE_DAMAGE', 'FAITH_TAKE_DAMAGE', function(mobArg, amount, attacker, attackType, damageType)
         if attackType == xi.attackType.PHYSICAL then
-            mobArg:setLocalVar("PhysicalDamage", mobArg:getLocalVar("PhysicalDamage") + amount)
+            mobArg:setLocalVar('PhysicalDamage', mobArg:getLocalVar('PhysicalDamage') + amount)
         elseif attackType == xi.attackType.MAGICAL then
-            mobArg:setLocalVar("MagicalDamage", mobArg:getLocalVar("MagicalDamage") + amount)
+            mobArg:setLocalVar('MagicalDamage', mobArg:getLocalVar('MagicalDamage') + amount)
         elseif attackType == xi.attackType.RANGED then
-            mobArg:setLocalVar("RangedDamage", mobArg:getLocalVar("RangedDamage") + amount)
+            mobArg:setLocalVar('RangedDamage', mobArg:getLocalVar('RangedDamage') + amount)
         elseif attackType == xi.attackType.BREATH then
-            mobArg:setLocalVar("BreathDamage", mobArg:getLocalVar("BreathDamage") + amount)
+            mobArg:setLocalVar('BreathDamage', mobArg:getLocalVar('BreathDamage') + amount)
         else
             -- ignore Untyped Damage
         end
@@ -91,11 +91,11 @@ entity.onMobSpawn = function(mob)
 end
 
 entity.onMobFight = function(mob)
-    mob:addListener("COMBAT_TICK", "FAITH_CTICK", function(mobArg)
-        local sum = mobArg:getLocalVar("PhysicalDamage") + mobArg:getLocalVar("MagicalDamage") + mobArg:getLocalVar("RangedDamage") + mobArg:getLocalVar("BreathDamage")
+    mob:addListener('COMBAT_TICK', 'FAITH_CTICK', function(mobArg)
+        local sum = mobArg:getLocalVar('PhysicalDamage') + mobArg:getLocalVar('MagicalDamage') + mobArg:getLocalVar('RangedDamage') + mobArg:getLocalVar('BreathDamage')
         if mobArg:getAnimationSub() == 2 and sum > 1500 then -- Faith will close flower upon taking 1500 damage combined.
             closeFlower(mobArg)
-        elseif mobArg:getAnimationSub() <= 1 and mobArg:getBattleTime() > mobArg:getLocalVar("[faith]changeTime") then
+        elseif mobArg:getAnimationSub() <= 1 and mobArg:getBattleTime() > mobArg:getLocalVar('[faith]changeTime') then
             openFlower(mobArg)
         else
             -- if no dmg taken - dont trigger a change
@@ -110,7 +110,7 @@ entity.onMobMagicPrepare = function(mob, target, spell)
 end
 
 entity.onMobEngaged = function(mob, target)
-    mob:setLocalVar("[faith]changeTime", 0)
+    mob:setLocalVar('[faith]changeTime', 0)
 end
 
 entity.onMobDeath = function(mob)

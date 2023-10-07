@@ -5,7 +5,7 @@
 --  Type: Physical
 --  Utsusemi/Blink absorb: 6 shadows
 --  Range: Unknown cone
---  Notes: Only used in "ball" form.
+--  Notes: Only used in 'ball' form.
 -----------------------------------
 local mobskillObject = {}
 

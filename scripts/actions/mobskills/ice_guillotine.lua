@@ -7,9 +7,9 @@
 --  Range: Front conal (7 yalms)
 --  Notes: Scylla exclusive, this skill is not used on its own and will always come after Frozen Mist.
 -----------------------------------
-require("scripts/globals/settings")
-require("scripts/globals/status")
-require("scripts/globals/mobskills")
+
+
+
 -----------------------------------
 local mobskillObject = {}
 

@@ -4,7 +4,7 @@
 -- Skill Level: 215
 -- Converts damage dealt to own MP. Damage varies with TP.
 -- Will stack with Sneak Attack.
--- Not aligned with any "elemental gorgets" or "elemental belts" due to it's absence of Skillchain properties.
+-- Not aligned with any 'elemental gorgets' or 'elemental belts' due to it's absence of Skillchain properties.
 -- It is a physical weapon skill, and is affected by the user's params.accuracy and the enemy's evasion. It may miss completely.
 -- Element: None
 -- Modifiers: INT:50%  MND:50%

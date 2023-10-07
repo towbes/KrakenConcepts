@@ -22,7 +22,7 @@ instanceObject.onInstanceCreated = function(instance)
     end
 
     -- TODO: Fill in skillchain information for new mob moves
-    -- TODO: Do the enemies send "Readies WS..." message?
+    -- TODO: Do the enemies send 'Readies WS...' message?
 
     -- TODO: BG-WIKI:
     -- You fight alongside Arciela!

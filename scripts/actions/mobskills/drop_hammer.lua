@@ -5,7 +5,7 @@
 --  Type: Physical
 --  Utsusemi/Blink absorb: 2-3 shadows?
 --  Range: Melee
---  Notes: Only used by "destroyers" (carrying massive warhammers).
+--  Notes: Only used by 'destroyers' (carrying massive warhammers).
 -----------------------------------
 local mobskillObject = {}
 

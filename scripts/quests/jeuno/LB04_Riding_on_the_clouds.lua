@@ -110,7 +110,7 @@ quest.sections =
                         player:hasKeyItem(xi.ki.SOMBER_STONE) and
                         player:hasKeyItem(xi.ki.SPIRITED_STONE)
                     then
-                        return quest:progressEvent(90) -- Finish Quest "Riding on the Clouds"
+                        return quest:progressEvent(90) -- Finish Quest 'Riding on the Clouds'
                     else
                         return quest:event(89,
                             quest:getVar(player, 'npcSandoria'),

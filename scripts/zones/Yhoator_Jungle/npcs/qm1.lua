@@ -15,7 +15,7 @@ entity.onTrade = function(player, npc, trade)
         spawnChance = 50
     end
 
-    local cooldown = npc:getLocalVar("despawned")
+    local cooldown = npc:getLocalVar('despawned')
     if spawnChance > 0 and os.time() > cooldown then
         player:confirmTrade()
         if

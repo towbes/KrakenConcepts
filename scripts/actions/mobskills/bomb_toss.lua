@@ -24,11 +24,11 @@ mobskillObject.onMobWeaponSkill = function(target, mob, skill)
     local info = xi.mobskills.mobMagicalMove(mob, target, skill, mob:getWeaponDmg() * 3, xi.element.FIRE, dmgmod, xi.mobskills.magicalTpBonus.MAB_BONUS, 1)
     local dmg = xi.mobskills.mobFinalAdjustments(info.dmg, mob, skill, target, xi.attackType.MAGICAL, xi.damageType.FIRE, xi.mobskills.shadowBehavior.IGNORE_SHADOWS)
     
-    if mob:getName() == "Wilywox_Tenderpalm" then
+    if mob:getName() == 'Wilywox_Tenderpalm' then
         local bombTossHPP = 1 + (mob:getMaxHP() / mob:getHP()) / 100 * 1.25 -- Bomb Toss power increases at lower HP
         local power = math.random(5, 7)
          dmgmod = 1
-         info = xi.mobskills.mobMagicalMove(mob, target, skill, mob:getWeaponDmg() * bombTossHPP * power, xi.magic.ele.FIRE, dmgmod, xi.mobskills.magicalTpBonus.MAB_BONUS, 1)
+         info = xi.mobskills.mobMagicalMove(mob, target, skill, mob:getWeaponDmg() * bombTossHPP * power, xi.element.FIRE, dmgmod, xi.mobskills.magicalTpBonus.MAB_BONUS, 1)
          dmg = xi.mobskills.mobFinalAdjustments(info.dmg, mob, skill, target, xi.attackType.MAGICAL, xi.damageType.FIRE, xi.mobskills.shadowBehavior.IGNORE_SHADOWS)
     end
     

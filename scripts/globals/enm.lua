@@ -5,36 +5,31 @@
 --  Istvan (Windurst Woods)
 --  Moritz (Upper Jeuno)
 ------------------------------------------
-require("scripts/globals/keyitems")
-require("scripts/globals/missions")
-require("scripts/globals/npc_util")
-require("scripts/globals/settings")
-require("scripts/globals/status")
-require("scripts/globals/zone")
+require('scripts/globals/npc_util')
 -----------------------------------
 xi = xi or {}
 xi.enm = xi.enm or {}
 
 local cutscenes =
 {
-    ["Moritz"]  = { introduction = 10028, recurring = 10029, default = 10027 },
-    ["Ophelia"] = { introduction = 752,   recurring = 753,   default = 751 },
-    ["Gregory"] = { introduction = 257,   recurring = 258,   default = 256 },
-    ["Istvan"]  = { introduction = 693,   recurring = 694,   default = 692 },
+    ['Moritz']  = { introduction = 10028, recurring = 10029, default = 10027 },
+    ['Ophelia'] = { introduction = 752,   recurring = 753,   default = 751 },
+    ['Gregory'] = { introduction = 257,   recurring = 258,   default = 256 },
+    ['Istvan']  = { introduction = 693,   recurring = 694,   default = 692 },
 }
 
 local enmOptionToEnablementCriteria =
 {
-    [1]   = { missionReq = xi.mission.id.cop.THE_RITES_OF_LIFE,    cooldownPlayerVar = "[ENM]abandonmentTimer" }, --Spire Of Holla
-    [2]   = { missionReq = xi.mission.id.cop.THE_RITES_OF_LIFE,    cooldownPlayerVar = "[ENM]antipathyTimer" },   --Spire Of Dem
-    [3]   = { missionReq = xi.mission.id.cop.THE_RITES_OF_LIFE,    cooldownPlayerVar = "[ENM]animusTimer" },      --Spire Of Mea
-    [4]   = { missionReq = xi.mission.id.cop.SLANDEROUS_UTTERINGS, cooldownPlayerVar = "[ENM]acrimonyTimer" },    --Spire Of Vahzl
-    [5]   = { missionReq = xi.mission.id.cop.AN_ETERNAL_MELODY,    cooldownPlayerVar = "[ENM]MonarchBeard" },     --Monarch Linn
-    [6]   = { missionReq = xi.ki.PSOXJA_PASS,                      cooldownPlayerVar = "[ENM]AstralCovenant" },   --The Shrouded Maw
-    [7]   = { missionReq = nil,                                    cooldownPlayerVar = "[ENM]OperatingLever" },   --Mine Shaft 2716 Lever
-    [8]   = { missionReq = nil,                                    cooldownPlayerVar = "[ENM]ZephyrFan" },        --Bearclaw Pinnacle
-    [9]   = { missionReq = nil,                                    cooldownPlayerVar = "[ENM]MiasmaFilter" },     --Boneyard Gully
-    [100] = { missionReq = nil,                                    cooldownPlayerVar = "[ENM]GateDial" },         --Mine Shaft 2716 Dial
+    [1]   = { missionReq = xi.mission.id.cop.THE_RITES_OF_LIFE,    cooldownPlayerVar = '[ENM]abandonmentTimer' }, --Spire Of Holla
+    [2]   = { missionReq = xi.mission.id.cop.THE_RITES_OF_LIFE,    cooldownPlayerVar = '[ENM]antipathyTimer' },   --Spire Of Dem
+    [3]   = { missionReq = xi.mission.id.cop.THE_RITES_OF_LIFE,    cooldownPlayerVar = '[ENM]animusTimer' },      --Spire Of Mea
+    [4]   = { missionReq = xi.mission.id.cop.SLANDEROUS_UTTERINGS, cooldownPlayerVar = '[ENM]acrimonyTimer' },    --Spire Of Vahzl
+    [5]   = { missionReq = xi.mission.id.cop.AN_ETERNAL_MELODY,    cooldownPlayerVar = '[ENM]MonarchBeard' },     --Monarch Linn
+    [6]   = { missionReq = xi.ki.PSOXJA_PASS,                      cooldownPlayerVar = '[ENM]AstralCovenant' },   --The Shrouded Maw
+    [7]   = { missionReq = nil,                                    cooldownPlayerVar = '[ENM]OperatingLever' },   --Mine Shaft 2716 Lever
+    [8]   = { missionReq = nil,                                    cooldownPlayerVar = '[ENM]ZephyrFan' },        --Bearclaw Pinnacle
+    [9]   = { missionReq = nil,                                    cooldownPlayerVar = '[ENM]MiasmaFilter' },     --Boneyard Gully
+    [100] = { missionReq = nil,                                    cooldownPlayerVar = '[ENM]GateDial' },         --Mine Shaft 2716 Dial
 }
 
 local function hasPlayerTriggeredEnmCoolDown(player)
@@ -69,7 +64,7 @@ local function getBitmaskForAvailableENMs(player)
 end
 
 xi.enm.timerNpcOnTrigger = function(player, npc)
-    local hasPlayerAckdIntro = player:getCharVar(string.format("[ENM]" ..npc:getName().. "IntroCS")) == 1
+    local hasPlayerAckdIntro = player:getCharVar(string.format('[ENM]' ..npc:getName().. 'IntroCS')) == 1
     -- reusing hasPlayerAckdIntro to prevent querying multiple player vars (enm timers) each interaction
     if hasPlayerAckdIntro or hasPlayerTriggeredEnmCoolDown(player) then
         if not hasPlayerAckdIntro then
@@ -104,6 +99,6 @@ xi.enm.timerNpcOnEventFinish = function(player, csid, option)
         csid == cutscenes[npc:getName()].introduction and option >= 0 and
         option <= 100
     then
-        player:setCharVar(string.format("[ENM]" ..npc:getName().. "IntroCS"), 1)
+        player:setCharVar(string.format('[ENM]' ..npc:getName().. 'IntroCS'), 1)
     end
 end

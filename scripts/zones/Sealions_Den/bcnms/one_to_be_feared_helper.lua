@@ -1,6 +1,6 @@
 -----------------------------------
--- Helper file for "One to be Feared" Battlefield
--- Helper file for "One to be Feared" Battlefield
+-- Helper file for 'One to be Feared' Battlefield
+-- Helper file for 'One to be Feared' Battlefield
 -----------------------------------
 local ID = zones[xi.zone.SEALIONS_DEN]
 -----------------------------------
@@ -9,8 +9,8 @@ local oneToBeFeared = {}
 local oneToBeFeared = {}
 -- Note:
 -- Note:
--- This battlefield uses the old BCNM "instance" system.
--- This battlefield uses the old BCNM "instance" system.
+-- This battlefield uses the old BCNM 'instance' system.
+-- This battlefield uses the old BCNM 'instance' system.
 -- That means there are several copies of the area and we are placed randomly in one.
 -- That means there are several copies of the area and we are placed randomly in one.
 -- Not to be confused with an actual instance.
@@ -58,8 +58,8 @@ oneToBeFeared.handleMammetDeath = function(mob, player, optParams)
     end
     if mammetDeathCount == 5 then
         for _, member in pairs(battlefield:getPlayers()) do
-            if member:getLocalVar("[OTBF]MammetCS") == 0 then
-                member:setLocalVar("[OTBF]MammetCS", 1) -- Safety check to not trigger CS more than once when killing multile Mammets at the same time.
+            if member:getLocalVar('[OTBF]MammetCS') == 0 then
+                member:setLocalVar('[OTBF]MammetCS', 1) -- Safety check to not trigger CS more than once when killing multile Mammets at the same time.
                 member:startEvent(10)
             end
         end
@@ -68,12 +68,12 @@ end
 oneToBeFeared.handleMammetBattleEnding = function(player, csid, option, npc)
     local battlefield = player:getBattlefield()
     for _, member in pairs(battlefield:getPlayers()) do
-        if csid == 10 and member:getLocalVar("[OTBF]battleCompleted") == 0 then
+        if csid == 10 and member:getLocalVar('[OTBF]battleCompleted') == 0 then
             -- Players are healed in between fights, but their TP is set to 0
             member:addTitle(xi.title.BRANDED_BY_LIGHTNING)
             healCharacter(member)
             -- Move player to instance start. End battle 1.
-            member:setLocalVar("[OTBF]battleCompleted", 1)
+            member:setLocalVar('[OTBF]battleCompleted', 1)
             returnToAirship(member)
         end
     end
@@ -90,12 +90,12 @@ end
 oneToBeFeared.handleOmegaBattleEnding = function(player, csid, option)
     local battlefield = player:getBattlefield()
     for _, member in pairs(battlefield:getPlayers()) do
-        if csid == 11 and member:getLocalVar("[OTBF]battleCompleted") == 1 then
+        if csid == 11 and member:getLocalVar('[OTBF]battleCompleted') == 1 then
             -- Players are healed in between fights, but their TP is set to 0.
             member:addTitle(xi.title.OMEGA_OSTRACIZER)
             healCharacter(member)
             -- Move player to instance start. End battle 2.
-            member:setLocalVar("[OTBF]battleCompleted", 2)
+            member:setLocalVar('[OTBF]battleCompleted', 2)
             returnToAirship(member)
         end
     end

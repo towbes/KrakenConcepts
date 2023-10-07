@@ -2,7 +2,7 @@
 -- Area: Jugner Forest [S]
 --  Mob: Ignis Djinn
 -----------------------------------
-mixins = { require("scripts/mixins/families/djinn") }
+mixins = { require('scripts/mixins/families/djinn') }
 -----------------------------------
 local entity = {}
 

@@ -9,17 +9,17 @@ local mobskillObject = {}
 
 mobskillObject.onMobSkillCheck = function(target, mob, skill)
     if
-        mob:getName() == "Aitvaras" or
-        mob:getName() == "Lost_Aitvaras" or
-        mob:getName() == "Apocalyptic_Beast" and
+        mob:getName() == 'Aitvaras' or
+        mob:getName() == 'Lost_Aitvaras' or
+        mob:getName() == 'Apocalyptic_Beast' and
         not mob:hasStatusEffect(xi.effect.SILENCE) and
-        mob:getLocalVar("debuff_Heart") == 0
+        mob:getLocalVar('debuff_Heart') == 0
     then
         return 0
     elseif
         -- can only use if not silenced
         mob:getMainJob() == xi.job.BRD or
-        mob:getName() == "Arch_Angra_Mainyu" and
+        mob:getName() == 'Arch_Angra_Mainyu' and
         not mob:hasStatusEffect(xi.effect.SILENCE)
     then
         return 0

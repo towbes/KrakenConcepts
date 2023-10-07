@@ -36,7 +36,7 @@ local function persistLotteryPrimed(phList)
     for k, v in pairs(phList) do
         nm = GetMobByID(v)
         local zone = nm:getZone()
-        local respawnPersist = zone:getLocalVar(string.format("\\[SPAWN\\]%s", nm:getID()))
+        local respawnPersist = zone:getLocalVar(string.format('\\[SPAWN\\]%s', nm:getID()))
 
         if respawnPersist == 0 then
             return false
@@ -55,8 +55,8 @@ end
 -- Needs to be added to the NM's onDespawn() function.
 xi.mob.nmTODPersist = function(mob, cooldown)
     if xi.settings.main.NM_PERSISTENCE == 1 then
-        SetServerVariable(string.format("[SPAWN]%s", mob:getID()), cooldown + os.time())
-        mob:getZone():setLocalVar(string.format("[SPAWN]%s", mob:getID()), cooldown + os.time())
+        SetServerVariable(string.format('[SPAWN]%s', mob:getID()), cooldown + os.time())
+        mob:getZone():setLocalVar(string.format('[SPAWN]%s', mob:getID()), cooldown + os.time())
     end
 
     UpdateNMSpawnPoint(mob:getID())
@@ -72,8 +72,8 @@ xi.mob.nmTODPersistCache = function(zone, mobId)
             return
         end
 
-        local respawn = GetServerVariable(string.format("\\[SPAWN\\]%s", mobId))
-        zone:setLocalVar(string.format("[SPAWN]%s", mobId), respawn)
+        local respawn = GetServerVariable(string.format('\\[SPAWN\\]%s', mobId))
+        zone:setLocalVar(string.format('[SPAWN]%s', mobId), respawn)
         if
             mob ~= nil and
             mob:isSpawned() and
@@ -97,15 +97,15 @@ end
 
 -- Needs to be added to the NM's onDespawn() function.
 xi.mob.lotteryPersist = function(mob, cooldown)
-    SetServerVariable(string.format("[SPAWN]%s", mob:getID()), cooldown + os.time())
-    mob:getZone():setLocalVar(string.format("[SPAWN]%s", mob:getID()), cooldown + os.time())
+    SetServerVariable(string.format('[SPAWN]%s', mob:getID()), cooldown + os.time())
+    mob:getZone():setLocalVar(string.format('[SPAWN]%s', mob:getID()), cooldown + os.time())
 end
 
 -- Needs to be added to the NM's zone onInit() function.
 xi.mob.lotteryPersistCache = function(zone, mobId)
     local mob = GetMobByID(mobId)
-    local respawn = GetServerVariable(string.format("\\[SPAWN\\]%s", mob:getID()))
-    zone:setLocalVar(string.format("[SPAWN]%s", mob:getID()), respawn)
+    local respawn = GetServerVariable(string.format('\\[SPAWN\\]%s', mob:getID()))
+    zone:setLocalVar(string.format('[SPAWN]%s', mob:getID()), respawn)
 end
 
 -- potential lottery placeholder was killed
@@ -115,7 +115,7 @@ xi.mob.phOnDespawn = function(ph, phList, chance, cooldown, immediate)
         return
     end
 
-    if type(immediate) ~= "boolean" then
+    if type(immediate) ~= 'boolean' then
         immediate = false
     end
 
@@ -503,7 +503,7 @@ local additionalEffects =
     [xi.mob.ae.DISPEL] =
     {
         chance = 20,
-        ele = xi.magic.ele.DARK,
+        ele = xi.element.DARK,
         sub = xi.subEffect.DISPEL,
         msg = xi.msg.basic.ADD_EFFECT_DISPEL,
         mod = xi.mod.INT,
@@ -513,7 +513,7 @@ local additionalEffects =
     [xi.mob.ae.SLEEP] =
     {
         chance = 25,
-        ele = xi.magic.ele.DARK,
+        ele = xi.element.DARK,
         sub = xi.subEffect.SLEEP,
         msg = xi.msg.basic.ADD_EFFECT_STATUS,
         applyEffect = true,

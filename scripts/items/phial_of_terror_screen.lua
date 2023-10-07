@@ -1,7 +1,7 @@
 -----------------------------------
 -- ID: 5877
 -- Item: Terror Screen
--- Effect: 2 Mins of immunity to "Terror" effects.
+-- Effect: 2 Mins of immunity to 'Terror' effects.
 -----------------------------------
 local itemObject = {}
 

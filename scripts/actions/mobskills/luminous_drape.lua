@@ -22,7 +22,7 @@ mobskillObject.onMobWeaponSkill = function(target, mob, skill)
     end
 
     local charmDuration = 60
-    if mob:getName() == "Jailer_of_Love" then
+    if mob:getName() == 'Jailer_of_Love' then
         charmDuration = 10
     end
 

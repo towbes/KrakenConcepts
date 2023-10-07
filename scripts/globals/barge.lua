@@ -4,10 +4,8 @@
 ------------------------------------
 -- Cut Scenes
 ------------------------------------
-require('scripts/globals/keyitems')
-require('scripts/globals/zone')
+local ID = zones[xi.zone.CARPENTERS_LANDING]
 require('scripts/globals/npc_util')
-local ID = require('scripts/zones/Carpenters_Landing/IDs')
 ------------------------------------
 xi = xi or {}
 xi.barge = xi.barge or {}
@@ -109,7 +107,7 @@ xi.barge.timekeeperOnTrigger = function(player, location, eventId)
             player:startEvent(eventId, earthSecs, nextEvent.act, 0, nextEvent.dest)
         end
     else
-        printf("[warning] bad location %i in xi.barge.timekeeperOnTrigger", location)
+        printf('[warning] bad location %i in xi.barge.timekeeperOnTrigger', location)
     end
 end
 
@@ -117,15 +115,15 @@ end
 
 xi.barge.aboard = function(player, triggerArea, isAboard)
     if verbose then
-        printf("INFO: player aboard set [%s] [%i] [%s] in xi.barge.aboard", player:getName(), triggerArea, tostring(isAboard))
+        printf('INFO: player aboard set [%s] [%i] [%s] in xi.barge.aboard', player:getName(), triggerArea, tostring(isAboard))
     end
 
-    player:setCharVar("[barge]aboard", isAboard and triggerArea or 0)
+    player:setCharVar('[barge]aboard', isAboard and triggerArea or 0)
 end
 
 xi.barge.onZoneIn = function(player)
-    local zoneId = player:getZoneID()
-    print("ON ZONE IN ")
+    local zoneId = zones[player:getZoneID()]
+    print('ON ZONE IN ')
 
     -- Zoning onto barge. set [barge]arrivalEventId based on schedule.
     if zoneId == xi.zone.PHANAUET_CHANNEL then
@@ -145,25 +143,25 @@ xi.barge.onZoneIn = function(player)
             -- Arrival CS - 11 fly in to dock, no boat
             -- North landing departure CS - 16 on boat
             -- North landing CS 17 - player on dock - 13?
-            player:setCharVar("[barge]arrivalEventId", 11)
+            player:setCharVar('[barge]arrivalEventId', 11)
         elseif nextEvent.route == dest.CENTRAL_LANDING or nextEvent.route == dest.CENTRAL_LANDING_EMFEA then
             -- CS38 dock fly in
             -- Central landing CS 39 - player on dock
             -- CS40 Central landing departure on boat
             -- CS41 Central landing on dock
-            player:setCharVar("[barge]arrivalEventId", 38)
+            player:setCharVar('[barge]arrivalEventId', 38)
         elseif nextEvent.route == dest.SOUTH_LANDING then
             -- Arrival CS - 10 parked boat
             -- Arrival CS - 11 fly in to dock, no boat
             -- South landing departure CS - 14 on boat
             -- South landing CS 15 - player on dock - 12?
-            player:setCharVar("[barge]arrivalEventId", 10)
+            player:setCharVar('[barge]arrivalEventId', 10)
         end
 
     -- zoning into carpenters landing. play the eventId stored in [barge]arrivalEventId.
     elseif zoneId == xi.zone.CARPENTERS_LANDING then
-        local eventId = player:getCharVar("[barge]arrivalEventId")
-        -- player:setCharVar("[barge]arrivalEventId", 0)
+        local eventId = player:getCharVar('[barge]arrivalEventId')
+        -- player:setCharVar('[barge]arrivalEventId', 0)
 
         if eventId > 0 then
             return eventId
@@ -172,11 +170,11 @@ xi.barge.onZoneIn = function(player)
             return -1
         end
 
-        player:setCharVar("[barge]arrivalEventId", 0)
+        player:setCharVar('[barge]arrivalEventId', 0)
     end
 
     if verbose then
-        printf("INFO: [%s] [%i] [%s] in xi.barge.onZoneIn", player:getName(), zoneId, player:getCharVar("[barge]arrivalEventId"))
+        printf('INFO: [%s] [%i] [%s] in xi.barge.onZoneIn', player:getName(), zoneId, player:getCharVar('[barge]arrivalEventId'))
     end
 end
 
@@ -184,12 +182,12 @@ xi.barge.onTransportEvent = function(player, transport)
     local bargeTable =
     {
         -- [xi.ki.ticketki] = {ticketVar, locationVar, north1, south2, central3, northNoticket1, southNoticket2, centralNoticket3}
-        [xi.ki.BARGE_MULTI_TICKET] = { "Barge_Ticket", "[barge]aboard", 16, 14, 40, 34, 33, 42 },
-        [xi.ki.BARGE_TICKET] =       { "Barge_Ticket", "[barge]aboard", 16, 14, 40, 34, 33, 42 },
+        [xi.ki.BARGE_MULTI_TICKET] = { 'Barge_Ticket', '[barge]aboard', 16, 14, 40, 34, 33, 42 },
+        [xi.ki.BARGE_TICKET] =       { 'Barge_Ticket', '[barge]aboard', 16, 14, 40, 34, 33, 42 },
     }
 
-    local zoneID = zones[player:getZoneID()]
-    local aboard = player:getCharVar("[barge]aboard") -- returns triggerRegion
+    local zoneID = player:getZoneID()
+    local aboard = player:getCharVar('[barge]aboard') -- returns triggerRegion
     local canride = 0
 
     if aboard > 0 then
@@ -221,25 +219,25 @@ end
 
 -- Ticket Shops
 xi.barge.ticketshopOnTrigger = function(player, eventId)
-    player:setCharVar("currentticket", 0) -- Set ticket to 0 in case something breaks
+    player:setCharVar('currentticket', 0) -- Set ticket to 0 in case something breaks
 
     if (player:hasKeyItem(xi.ki.BARGE_TICKET)) and (player:hasKeyItem(xi.ki.BARGE_MULTI_TICKET)) then
-        player:setCharVar("currentticket", 3)
+        player:setCharVar('currentticket', 3)
     elseif  (player:hasKeyItem(xi.ki.BARGE_MULTI_TICKET)) then
-        player:setCharVar("currentticket", 2)
+        player:setCharVar('currentticket', 2)
     elseif (player:hasKeyItem(xi.ki.BARGE_TICKET)) then
-        player:setCharVar("currentticket", 1)
+        player:setCharVar('currentticket', 1)
     else
-        player:setCharVar("currentticket", 0)
+        player:setCharVar('currentticket', 0)
     end
 
     -- Params (KI1, KI2, Price of KI1, Price of KI2, Multiticket #s left, Which tickets does player have)
-    player:startEvent(eventId, xi.ki.BARGE_TICKET, xi.ki.BARGE_MULTI_TICKET , 50, 300, player:getCharVar("Barge_Ticket"), player:getCharVar("currentticket"), 0, 4095) -- Start event
+    player:startEvent(eventId, xi.ki.BARGE_TICKET, xi.ki.BARGE_MULTI_TICKET , 50, 300, player:getCharVar('Barge_Ticket'), player:getCharVar('currentticket'), 0, 4095) -- Start event
 end
 
 xi.barge.ticketshopOnEventFinish = function(player, csid, option)
-    local currentticket = player:getCharVar("currentticket")
-    local numberticket = player:getCharVar("Barge_Ticket")
+    local currentticket = player:getCharVar('currentticket')
+    local numberticket = player:getCharVar('Barge_Ticket')
 
     -- Option 1: BARGE_TICKET
     -- Option 2: MULTI_TICKET
@@ -253,12 +251,12 @@ xi.barge.ticketshopOnEventFinish = function(player, csid, option)
         elseif option == 2 and (currentticket == 2 or currentticket == 3) and numberticket <= 9 then -- If you have multi ticket with less than 9
             player:delGil(300)
             player:messageSpecial(ID.text.MTICKET_ADDED, xi.ki.BARGE_MULTI_TICKET, 10)
-            player:setCharVar("Barge_Ticket", 10)
+            player:setCharVar('Barge_Ticket', 10)
         elseif option == 2 and player:getGil() >= 300 then
             player:delGil(300)
             player:addKeyItem(xi.ki.BARGE_MULTI_TICKET)
             player:messageSpecial(ID.text.KEYITEM_OBTAINED, xi.ki.BARGE_MULTI_TICKET)
-            player:setCharVar("Barge_Ticket", 10)
+            player:setCharVar('Barge_Ticket', 10)
         else
             -- Event auto plays the correct message
         end
@@ -268,7 +266,7 @@ end
 xi.barge.onRouteStart = function(transportZone)
     -- set stage with relevant npc's for the route and questlines
     if verbose then
-        printf("INFO: [%s] [%i] in xi.barge.onRouteStart", transportZone,VanadielHour() * 60 + VanadielMinute())
+        printf('INFO: [%s] [%i] in xi.barge.onRouteStart', transportZone,VanadielHour() * 60 + VanadielMinute())
     end
 end
 
@@ -276,7 +274,7 @@ xi.barge.onRouteEnd = function(transportZone)
     -- clean stage of relevant npc's for the route and questlines
     -- clean up any mobs
     if verbose then
-        printf("INFO: [%s] [%i] in xi.barge.onRouteEnd", transportZone,VanadielHour() * 60 + VanadielMinute())
+        printf('INFO: [%s] [%i] in xi.barge.onRouteEnd', transportZone,VanadielHour() * 60 + VanadielMinute())
     end
 end
 
@@ -285,6 +283,6 @@ xi.barge.onRouteUpdate = function(transportZone, tripTime)
     -- setup for pop window (ie. Stubborn Dredvodd)
     -- TODO: find the cut scene id for the Dredvodd pop
     if verbose then
-        printf("INFO: [%s] [%i] [%i] in xi.barge.onRouteUpdate", transportZone,VanadielHour() * 60 + VanadielMinute(), tripTime)
+        printf('INFO: [%s] [%i] [%i] in xi.barge.onRouteUpdate', transportZone,VanadielHour() * 60 + VanadielMinute(), tripTime)
     end
 end

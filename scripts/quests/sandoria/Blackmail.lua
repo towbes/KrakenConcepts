@@ -5,10 +5,10 @@
 -- Dauperiat !gotoid 17723525
 -- Halver !gotoid 17731591
 -----------------------------------
-require('scripts/globals/items')
+
 require('scripts/globals/npc_util')
 require('scripts/globals/quests')
-require('scripts/globals/zone')
+
 require('scripts/globals/interaction/quest')
 -----------------------------------
 
@@ -56,7 +56,7 @@ quest.sections =
             {
                 onTrade = function(player, npc, trade)
                     if
-                        npcUtil.tradeHasExactly(trade, { { xi.items.CASTLE_FLOOR_PLANS, 1 } }) and
+                        npcUtil.tradeHasExactly(trade, { { xi.item.CASTLE_FLOOR_PLANS, 1 } }) and
                         quest:getVar(player, 'Prog') == 2
                         then
                             return quest:progressEvent(648, 0, 530)
@@ -90,7 +90,7 @@ quest.sections =
                             quest:complete(player)
                         else
                             player:addFame(xi.quest.fame_area.SANDORIA, 5)
-                            npcUtil.giveCurrency(player, "gil", xi.settings.main.GIL_RATE * 900)
+                            npcUtil.giveCurrency(player, 'gil', xi.settings.main.GIL_RATE * 900)
                             quest:setVar(player, 'Prog', 0)
                         end
                 end,

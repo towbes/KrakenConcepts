@@ -1,6 +1,7 @@
 -----------------------------------
 -- Zone: Fort_Ghelsba (141)
 -----------------------------------
+local ID = zones[xi.zone.FORT_GHELSBA]
 local zoneObject = {}
 
 zoneObject.onInitialize = function(zone)

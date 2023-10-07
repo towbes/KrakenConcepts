@@ -15,7 +15,7 @@ mobskillObject.onMobWeaponSkill = function(target, mob, skill)
     local typeEffect = xi.effect.ATTACK_DOWN
 
     local power = 0
-    if mob:getName() == "Nightmare_Worm" then
+    if mob:getName() == 'Nightmare_Worm' then
         power = 90
     else
         power = 50

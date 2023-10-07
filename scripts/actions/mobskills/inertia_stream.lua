@@ -1,6 +1,6 @@
 -----------------------------------
 -- Inertia Stream
--- Deals light ele damage to enemies within range. Additional Effect: "Bind."
+-- Deals light ele damage to enemies within range. Additional Effect: 'Bind.'
 -----------------------------------
 local mobskillObject = {}
 

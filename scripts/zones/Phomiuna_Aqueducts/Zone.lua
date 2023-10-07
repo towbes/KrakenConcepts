@@ -11,7 +11,7 @@ zoneObject.onInitialize = function(zone)
     -- NM Persistence
     xi.mob.nmTODPersistCache(zone, ID.mob.TRES_DUENDES)
     -- Mahisha and Eba share a respawn, random to see who spawns
-    if GetServerVariable("EBA_MAHISHA") == 1 then
+    if GetServerVariable('EBA_MAHISHA') == 1 then
         xi.mob.nmTODPersistCache(zone, ID.mob.MAHISHA)
     else
         xi.mob.nmTODPersistCache(zone, ID.mob.EBA)

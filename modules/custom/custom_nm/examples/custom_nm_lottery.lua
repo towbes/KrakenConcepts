@@ -2,8 +2,8 @@
 -- Custom NM Example (Lottery)
 -----------------------------------
 require("modules/module_utils")
-require("scripts/globals/zone")
-require("scripts/globals/items")
+
+
 local nm = require("modules/custom/custom_nm/custom_nm")
 -----------------------------------
 local m = Module:new("custom_nm_lottery")
@@ -22,8 +22,8 @@ table.insert(nm.zone[id],
 
     items     =
     {
-        { nm.rate.VERY_COMMON, xi.items.LIZARD_TAIL }, -- 24%
-        { nm.rate.COMMON,      xi.items.LIZARD_EGG  }, -- 15%
+        { nm.rate.VERY_COMMON, xi.item.LIZARD_TAIL }, -- 24%
+        { nm.rate.COMMON,      xi.item.LIZARD_EGG  }, -- 15%
     },
 
     -- Optional

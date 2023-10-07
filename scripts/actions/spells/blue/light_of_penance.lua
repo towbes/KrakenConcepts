@@ -1,6 +1,6 @@
 -----------------------------------
 -- Spell: Light of Penance
--- Reduces an enemy's TP. Additional effect: Blindness and "Bind"
+-- Reduces an enemy's TP. Additional effect: Blindness and 'Bind'
 -- Spell cost: 53 MP
 -- Monster Type: Beastmen
 -- Spell Type: Magical (Light)

@@ -5,20 +5,20 @@
 -- Stray Cloud : !pos 49 -6 15 252
 -- qm5         : !gotoid 17498653
 -----------------------------------
-require('scripts/globals/items')
-require('scripts/globals/keyitems')
+
+
 require('scripts/globals/npc_util')
 require('scripts/globals/quests')
-require('scripts/globals/zone')
+
 require('scripts/globals/interaction/quest')
 -----------------------------------
-local ID = require("scripts/zones/Sea_Serpent_Grotto/IDs")
+local ID = zones[xi.zone.SEA_SERPENT_GROTTO]
 
 local quest = Quest:new(xi.quest.log_id.OUTLANDS, xi.quest.id.outlands.AN_UNDYING_PLEDGE)
 
 quest.reward =
 {
-    item = xi.items.LIGHT_BUCKLER,
+    item = xi.item.LIGHT_BUCKLER,
     fameArea = xi.quest.fame_area.NORG,
     fame = 50,
 }

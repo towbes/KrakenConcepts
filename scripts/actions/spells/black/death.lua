@@ -7,7 +7,7 @@ local spellObject = {}
 
 spellObject.onMagicCastingCheck = function(caster, target, spell)
     spell:setFlag(xi.magic.spellFlag.IGNORE_SHADOWS)
-    if caster:getName() == "Arch_Overlord_Tombstone" then
+    if caster:getName() == 'Arch_Overlord_Tombstone' then
         spell:setCastTime(5000)
     end
     return 0

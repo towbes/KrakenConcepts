@@ -33,8 +33,8 @@ entity.onMobDespawn = function(mob)
     if nqID == ID.mob.DIAMOND_QUADAV then
         local hqID = ID.mob.ZADHA_ADAMANTKING
         local hqMob = GetMobByID(hqID)
-        local timeOfDeath = GetServerVariable("[POP]Za_Dha_Adamantking")
-        local kills = GetServerVariable("[PH]Za_Dha_Adamantking")
+        local timeOfDeath = GetServerVariable('[POP]Za_Dha_Adamantking')
+        local kills = GetServerVariable('[PH]Za_Dha_Adamantking')
         local popNow = (math.random(1, 5) == 3 or kills > 6)
 
         if os.time() > timeOfDeath and popNow then
@@ -43,7 +43,7 @@ entity.onMobDespawn = function(mob)
             xi.mob.nmTODPersist(hqMob, math.random(75600, 86400)) -- 21 to 24 hours
         else
             xi.mob.nmTODPersist(mob, math.random(75600, 86400)) -- 21 to 24 hours
-            SetServerVariable("[PH]Za_Dha_Adamantking", kills + 1)
+            SetServerVariable('[PH]Za_Dha_Adamantking', kills + 1)
         end
     end
 end

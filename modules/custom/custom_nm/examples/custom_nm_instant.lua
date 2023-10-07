@@ -2,8 +2,8 @@
 -- Custom NM Example (Instant)
 -----------------------------------
 require("modules/module_utils")
-require("scripts/globals/zone")
-require("scripts/globals/items")
+
+
 local nm = require("modules/custom/custom_nm/custom_nm")
 -----------------------------------
 local m = Module:new("custom_nm_instant")
@@ -21,9 +21,9 @@ table.insert(nm.zone[id],
 
     items     =
     {
-        { nm.rate.VERY_COMMON, xi.items.VIAL_OF_SLIME_OIL }, -- 24%
-        { nm.rate.VERY_COMMON, xi.items.VIAL_OF_SLIME_OIL }, -- 24%
-        { nm.rate.VERY_COMMON, xi.items.VIAL_OF_SLIME_OIL }, -- 24%
+        { nm.rate.VERY_COMMON, xi.item.VIAL_OF_SLIME_OIL }, -- 24%
+        { nm.rate.VERY_COMMON, xi.item.VIAL_OF_SLIME_OIL }, -- 24%
+        { nm.rate.VERY_COMMON, xi.item.VIAL_OF_SLIME_OIL }, -- 24%
     },
 
     -- Optional

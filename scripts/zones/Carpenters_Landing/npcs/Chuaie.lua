@@ -4,7 +4,7 @@
 -- Type: Adventurer's Assistant
 -- !pos 231.384 -3 -531.830 2
 -----------------------------------
-require("scripts/globals/barge")
+require('scripts/globals/barge')
 -----------------------------------
 
 local entity = {}

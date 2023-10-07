@@ -1,6 +1,6 @@
 -----------------------------------
 -- Spell: Tail Slap
--- Delivers an area attack. Additional effect: "Stun." Damage varies with TP
+-- Delivers an area attack. Additional effect: 'Stun.' Damage varies with TP
 -- Spell cost: 77 MP
 -- Monster Type: Beastmen
 -- Spell Type: Physical (Blunt)

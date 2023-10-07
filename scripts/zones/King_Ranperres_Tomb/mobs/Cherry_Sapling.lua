@@ -10,10 +10,10 @@ local entity = {}
 entity.onMobDespawn = function(mob)
     local cemCherry = GetMobByID(ID.mob.CEMETERY_CHERRY)
 
-    cemCherry:setLocalVar("[POP]Cemetery_Cherry", cemCherry:getLocalVar("[POP]Cemetery_Cherry") + 1)
+    cemCherry:setLocalVar('[POP]Cemetery_Cherry', cemCherry:getLocalVar('[POP]Cemetery_Cherry') + 1)
     DisallowRespawn(mob:getID(), true)
-    if cemCherry:getLocalVar("[POP]Cemetery_Cherry") == 8 then
-        cemCherry:setLocalVar("[POP]Cemetery_Cherry", 0)
+    if cemCherry:getLocalVar('[POP]Cemetery_Cherry') == 8 then
+        cemCherry:setLocalVar('[POP]Cemetery_Cherry', 0)
         SpawnMob(ID.mob.CEMETERY_CHERRY) -- Pop Cemetery Cherry !
     end
 end

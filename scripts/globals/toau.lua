@@ -4,12 +4,12 @@ xi.toau = xi.toau or {}
 
 xi.toau.mobSpecialHook = function (prefix, mob, chance, callback)
 
-    mob:addListener("CRITICAL_TAKE", prefix .. "CRITICAL_TAKE", function(mob)
+    mob:addListener('CRITICAL_TAKE', prefix .. 'CRITICAL_TAKE', function(mob)
         if math.random(100) <= chance then
             callback(mob)
         end
      end)
-     mob:addListener("ABILITY_TAKE", prefix .. "ABILITY_TAKE", function(mob, attacker, ability, action)
+     mob:addListener('ABILITY_TAKE', prefix .. 'ABILITY_TAKE', function(mob, attacker, ability, action)
         local abilityID = ability:getID()
         if abilityID == 150      -- tomahawk
         or abilityID == 46       -- shield bash
@@ -24,7 +24,7 @@ xi.toau.mobSpecialHook = function (prefix, mob, chance, callback)
             end
         end
      end)
-     mob:addListener("WEAPONSKILL_TAKE", prefix .. "WEAPONSKILL_TAKE", function(mob, attacker, skillId, tp, action)
+     mob:addListener('WEAPONSKILL_TAKE', prefix .. 'WEAPONSKILL_TAKE', function(mob, attacker, skillId, tp, action)
         if math.random(100) <= chance then
             callback(mob)
         end

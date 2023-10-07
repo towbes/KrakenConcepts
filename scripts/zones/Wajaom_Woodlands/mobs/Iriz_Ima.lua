@@ -13,8 +13,8 @@ entity.onMobInitialize = function(mob)
 end
 
 entity.onMobSpawn = function(mob)
-    mob:setLocalVar("[rage]timer", 3600) -- 60 minutes
-    mob:setLocalVar("BreakChance", 5)
+    mob:setLocalVar('[rage]timer', 3600) -- 60 minutes
+    mob:setLocalVar('BreakChance', 5)
     mob:setMod(xi.mod.MOVE, -15)
 end
 
@@ -24,20 +24,20 @@ entity.onMobWeaponSkill = function(target, mob, skill)
     end
 
     if skill:getID() == 1704 then
-        local OnrushCounter = mob:getLocalVar("OnrushCounter")
-        local OnrushMax = mob:getLocalVar("OnrushMax")
+        local OnrushCounter = mob:getLocalVar('OnrushCounter')
+        local OnrushMax = mob:getLocalVar('OnrushMax')
 
         if OnrushCounter == 0 and OnrushMax == 0 then
             OnrushMax = math.random(3, 5)
-            mob:setLocalVar("OnrushMax", OnrushMax)
+            mob:setLocalVar('OnrushMax', OnrushMax)
         end
 
         OnrushCounter = OnrushCounter + 1
-        mob:setLocalVar("OnrushCounter", OnrushCounter)
+        mob:setLocalVar('OnrushCounter', OnrushCounter)
 
         if OnrushCounter > OnrushMax then
-            mob:setLocalVar("OnrushCounter", 0)
-            mob:setLocalVar("OnrushMax", 0)
+            mob:setLocalVar('OnrushCounter', 0)
+            mob:setLocalVar('OnrushMax', 0)
         else
             mob:useMobAbility(1704)
         end

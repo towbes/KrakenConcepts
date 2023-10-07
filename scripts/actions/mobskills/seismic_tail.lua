@@ -2,9 +2,9 @@
 -- Seismic Tail
 -- Deals extreme damage to targets behind the user.
 ---------------------------------------------------
-require("scripts/globals/settings")
-require("scripts/globals/status")
-require("scripts/globals/mobskills")
+
+
+
 -----------------------------------
 local mobskillObject = {}
 
@@ -27,8 +27,8 @@ mobskillObject.onMobWeaponSkill = function(target, mob, skill)
     target:takeDamage(dmg, mob, xi.attackType.PHYSICAL, xi.damageType.BLUNT)
     
     if mob:getID() == 16998874 then
-        mob:setLocalVar("Phase", 1)
-        mob:setLocalVar("Changed",1)
+        mob:setLocalVar('Phase', 1)
+        mob:setLocalVar('Changed',1)
     end
 
     return dmg

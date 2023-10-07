@@ -18,15 +18,15 @@ entity.onTrigger = function(player, npc)
         player:hasKeyItem(xi.ki.BRONZE_RIBBON_OF_SERVICE) and
         player:getMainLvl() >= 30
     then
-        player:startEvent(105) -- Start quest "Requiem for the Departed"
+        player:startEvent(105) -- Start quest 'Requiem for the Departed'
     elseif rftd == QUEST_ACCEPTED then
         if player:hasKeyItem(xi.ki.SHEAF_OF_HANDMADE_INCENSE) then
-            player:startEvent(107) -- During quest "Requiem for the Departed" (with Handmade Incense KI)
+            player:startEvent(107) -- During quest 'Requiem for the Departed' (with Handmade Incense KI)
         else
-            player:startEvent(106) -- During quest "Requiem for the Departed" (before retrieving KI Handmade Incense)
+            player:startEvent(106) -- During quest 'Requiem for the Departed' (before retrieving KI Handmade Incense)
         end
     elseif rftd == QUEST_COMPLETED then
-        player:startEvent(108) -- New standard dialog after "Requiem for the Departed"
+        player:startEvent(108) -- New standard dialog after 'Requiem for the Departed'
     else
         player:startEvent(104) -- Standard dialog
     end

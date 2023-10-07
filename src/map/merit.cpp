@@ -49,17 +49,17 @@ static uint8 upgrade[10][45] = {
 // TODO: Transfer all this to the database
 
 static uint8 cap[100] = {
-    0, 0, 0, 0, 0, 0, 0, 0, 0, 0,           // 00-09 0
-    1, 1, 1, 1, 1, 1, 1, 1, 1, 1,           // 10-19 1
-    2, 2, 2, 2, 2, 2, 2, 2, 2, 2,           // 20-29 2
-    3, 3, 3, 3, 3, 3, 3, 3, 3, 3,           // 30-39 3
-    4, 4, 4, 4, 4, 4, 4, 4, 4, 4,           // 40-49 4
-    5, 5, 5, 5, 5,                          // 50-54 5
-    6, 6, 6, 6, 6,                          // 55-59 6
-    7, 7, 7, 7, 7,                          // 60-64 7
-    8, 8, 8, 8, 8,                          // 65-69 8
-    9, 9, 9, 9, 9,                          // 70-74 9
-    15, 15, 15, 15, 15,                     // 75-79 10 //Umeboshi "We use 15 as a 75 cap"
+    0, 0, 0, 0, 0, 0, 0, 0, 0, 0,           // 00-09  0
+    1, 1, 1, 1, 1, 1, 1, 1, 1, 1,           // 10-19  1
+    2, 2, 2, 2, 2, 2, 2, 2, 2, 2,           // 20-29  2
+    3, 3, 3, 3, 3, 3, 3, 3, 3, 3,           // 30-39  3
+    4, 4, 4, 4, 4, 4, 4, 4, 4, 4,           // 40-49  4
+    5, 5, 5, 5, 5,                          // 50-54  5
+    6, 6, 6, 6, 6,                          // 55-59  6
+    7, 7, 7, 7, 7,                          // 60-64  7
+    8, 8, 8, 8, 8,                          // 65-69  8
+    9, 9, 9, 9, 9,                          // 70-74  9
+    10, 10, 10, 10, 10,                     // 75-79 10
     15, 15, 15, 15, 15, 15, 15, 15, 15, 15, // 80-89 15
     15, 15, 15, 15, 15, 15, 15, 15, 15, 15, // 90-99 15
 };
@@ -411,12 +411,7 @@ int32 CMeritPoints::GetMeritValue(MERIT_TYPE merit, CCharEntity* PChar)
             meritValue = merit == MERIT_MAX_MERIT ? PMerit->count : std::min(PMerit->count, cap[PChar->GetMLevel()]);
         }
 
-        if (PMerit->catid < 5 || (PMerit->jobs & (1 << (PChar->GetSJob() - 1)) && PChar->GetSLevel() >= 75))
-        {
-            meritValue = merit == MERIT_MAX_MERIT ? PMerit->count : std::min(PMerit->count, cap[PChar->GetSLevel()]);
-        }
-
-        if (PMerit->catid == 25 && PChar->GetMLevel() == 96) //Umeboshi "We are lowering this to 75"
+        if (PMerit->catid == 25 && PChar->GetMLevel() < 96)
         { // categoryID 25 is for merit weaponskills, which only apply if the player is lv 96+
             meritValue = 0;
         }

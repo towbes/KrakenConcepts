@@ -4,10 +4,10 @@
 require('scripts/globals/interaction/quest')
 require('scripts/globals/npc_util')
 require('scripts/globals/quests')
-require('scripts/globals/titles')
-require('scripts/globals/items')
+
+
 ----------------------------------
-local ID = require("scripts/zones/Port_San_dOria/IDs")
+local ID = zones[xi.zone.PORT_SAN_DORIA]
 ----------------------------------
 local quest = Quest:new(xi.quest.log_id.SANDORIA, xi.quest.id.sandoria.A_JOB_FOR_THE_CONSORTIUM)
 

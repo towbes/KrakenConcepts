@@ -3,7 +3,7 @@
 -- Description: Stun
 -- Type: Physical (Blunt)
 -----------------------------------
-require("scripts/globals/mobskills")
+
 -----------------------------------
 local mobskillObject = {}
 

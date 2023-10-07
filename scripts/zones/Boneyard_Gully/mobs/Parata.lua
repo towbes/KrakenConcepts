@@ -4,7 +4,7 @@
 --  ENM: Shell We Dance?
 -----------------------------------
 local ID = zones[xi.zone.BONEYARD_GULLY]
-mixins = {require("scripts/mixins/families/uragnite")}
+mixins = {require('scripts/mixins/families/uragnite')}
 -----------------------------------
 local entity = {}
 
@@ -46,17 +46,17 @@ entity.onMobFight = function(mob, target)
         pet:setPos(pos.x, pos.y, pos.z, pos.rot)
     end
 
-    if mob:getHPP() < 10 and mob:getLocalVar("lastBreath") == 0 then
+    if mob:getHPP() < 10 and mob:getLocalVar('lastBreath') == 0 then
         mob:useMobAbility(603)
-        mob:setLocalVar("lastBreath", 1)
+        mob:setLocalVar('lastBreath', 1)
     end
 end
 
 entity.onMobWeaponSkill = function(target, mob, skill)
     -- Under 10%, Parata will 2hr dust cloud and chain Suctorial Tentacle > Painful Whip
-    if skill:getID() == 603 and mob:getLocalVar("lastBreath") == 0 then
+    if skill:getID() == 603 and mob:getLocalVar('lastBreath') == 0 then
         mob:queue(10, function(mobArg) mobArg:useMobAbility(508) end)
-    elseif skill:getID() == 508 and mob:getLocalVar("lastBreath") == 0 then
+    elseif skill:getID() == 508 and mob:getLocalVar('lastBreath') == 0 then
         mob:queue(10, function(mobArg) mobArg:useMobAbility(507) end)
     end
 end

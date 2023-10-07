@@ -86,7 +86,7 @@ xi.spells.enhancing.useEnhancingNinjutsu = function(caster, target, spell)
     end
 
     ------------------------------------------------------------
-    -- Change message when higher effect or "Always overwrite".
+    -- Change message when higher effect or 'Always overwrite'.
     ------------------------------------------------------------
     if alwaysOverwrite then
         target:delStatusEffect(spellEffect)

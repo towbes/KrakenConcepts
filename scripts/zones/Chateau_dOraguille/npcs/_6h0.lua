@@ -47,7 +47,7 @@ entity.onTrigger = function(player, npc)
     local aBoysDream = player:getQuestStatus(xi.quest.log_id.SANDORIA, xi.quest.id.sandoria.A_BOY_S_DREAM)
     local underOath = player:getQuestStatus(xi.quest.log_id.SANDORIA, xi.quest.id.sandoria.UNDER_OATH)
 
-    -- "Under Oath" (PLD AF Body)
+    -- 'Under Oath' (PLD AF Body)
     if player:getCharVar('UnderOathCS') == 8 then
         player:startEvent(89)
     elseif
@@ -65,7 +65,7 @@ entity.onTrigger = function(player, npc)
     then
         player:startEvent(574, 0, 0, 0, TrustMemory(player))
 
-    -- "A Boy's Dream" (PLD AF Feet)
+    -- 'A Boy's Dream' (PLD AF Feet)
     elseif player:getCharVar('aBoysDreamCS') == 8 then
         player:startEvent(88)
 

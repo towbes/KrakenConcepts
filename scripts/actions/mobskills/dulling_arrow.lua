@@ -6,8 +6,8 @@
 -- Utsusemi/Blink absorb: 1 Shadow
 -- Range: Melee
 -----------------------------------
-require("scripts/globals/mobskills")
-require("scripts/globals/msg")
+
+
 -----------------------------------
 local mobskillObject = {}
 

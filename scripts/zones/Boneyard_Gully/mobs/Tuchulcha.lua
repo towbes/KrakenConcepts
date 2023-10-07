@@ -13,7 +13,7 @@ entity.onMobSpawn = function(mob)
     mob:setMobMod(xi.mobMod.SUPERLINK, 0)
 
     -- Used with HPP to keep track of the number of Sandpits
-    mob:setLocalVar("Sandpits", 0)
+    mob:setLocalVar('Sandpits', 0)
     mob:setRoamFlags(xi.roamFlag.SCRIPTED)
 end
 
@@ -23,12 +23,12 @@ entity.onMobEngaged = function(mob, target)
         mob:setMobMod(xi.mobMod.NO_MOVE, 0)
         mob:setMobMod(xi.mobMod.NO_REST, 0)
     end
-    local engaged = mob:getLocalVar("engaged")
+    local engaged = mob:getLocalVar('engaged')
     if engaged == 0 then
         for _, v in pairs(mob:getBattlefield():getPlayers()) do
             v:messageSpecial(ID.text.GIANT_ANTLION)
         end
-        mob:setLocalVar("engaged", 1)
+        mob:setLocalVar('engaged', 1)
     else
         for _, v in pairs(mob:getBattlefield():getPlayers()) do
             v:messageSpecial(ID.text.ANTLION_ESCAPED)

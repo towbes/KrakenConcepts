@@ -3,7 +3,7 @@
 --  NPC: Zvahl Portcullis
 -- !pos 223 -13 -254 137
 -----------------------------------
-require("scripts/globals/zone")
+
 -----------------------------------
 local entity = {}
 

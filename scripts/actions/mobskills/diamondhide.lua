@@ -1,7 +1,7 @@
 -----------------------------------
 -- Diamondhide
 --
--- Description: Gives the effect of "Stoneskin."
+-- Description: Gives the effect of 'Stoneskin.'
 -- Type: Magical
 -----------------------------------
 local mobskillObject = {}

@@ -26,7 +26,7 @@ mission.sections =
         -- and activate Ever Forward.  The latter is what this script covers.
 
         -- For the scenario of obtaining a Boarding Permit, this mission is completed in the quest
-        -- script for "The Road to Aht Urhgan"
+        -- script for 'The Road to Aht Urhgan'
 
         [xi.zone.AHT_URHGAN_WHITEGATE] =
         {

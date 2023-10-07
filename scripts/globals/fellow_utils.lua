@@ -1,19 +1,19 @@
 -----------------------------------
 -- Fellow Utils (Used by fellows and scripts who trigger fellow related CSs)
 -----------------------------------
-require("scripts/globals/status")
-require("scripts/globals/msg")
-require("scripts/globals/utils")
+
+
+require('scripts/globals/utils')
 -----------------------------------
 xi = xi or {}
 xi.fellow_utils = {}
 
 
 xi.fellow_utils.getStyleParam = function(player)
-    local body          = player:getFellowValue("body")
-    local hands         = player:getFellowValue("hands")
-    local legs          = player:getFellowValue("legs")
-    local feet          = player:getFellowValue("feet")
+    local body          = player:getFellowValue('body')
+    local hands         = player:getFellowValue('hands')
+    local legs          = player:getFellowValue('legs')
+    local feet          = player:getFellowValue('feet')
     local styleParam    = bit.lshift(math.floor(feet/100),12) +
                           bit.lshift(math.floor(legs/100)*4,8) +
                           bit.lshift(math.floor(hands/100),8) +
@@ -22,22 +22,22 @@ xi.fellow_utils.getStyleParam = function(player)
 end
 
 xi.fellow_utils.getLookParam = function(player)
-    local body          = player:getFellowValue("body")
-    local hands         = player:getFellowValue("hands")
-    local legs          = player:getFellowValue("legs")
-    local feet          = player:getFellowValue("feet")
+    local body          = player:getFellowValue('body')
+    local hands         = player:getFellowValue('hands')
+    local legs          = player:getFellowValue('legs')
+    local feet          = player:getFellowValue('feet')
     local lookParam     = bit.lshift(feet % 100,16) +
                           bit.lshift(legs % 100,12) +
                           bit.lshift(hands % 100,8) +
-                          bit.lshift(body % 100,4) + player:getFellowValue("head")
+                          bit.lshift(body % 100,4) + player:getFellowValue('head')
     return lookParam
 end
 
 xi.fellow_utils.getFellowParam = function(player)
-    local fellowParam   = bit.lshift(player:getFellowValue("face"),20) +
-                          bit.lshift(player:getFellowValue("size"),16) +
-                          bit.lshift(player:getFellowValue("personality"),8) +
-                          player:getFellowValue("fellowid")
+    local fellowParam   = bit.lshift(player:getFellowValue('face'),20) +
+                          bit.lshift(player:getFellowValue('size'),16) +
+                          bit.lshift(player:getFellowValue('personality'),8) +
+                          player:getFellowValue('fellowid')
     return fellowParam
 end
 
@@ -47,7 +47,7 @@ xi.fellow_utils.checkPersonality = function(mob)
         return
     end
 
-    local personality   = master:getFellowValue("personality")
+    local personality   = master:getFellowValue('personality')
     
     switch (personality) : caseof
     {

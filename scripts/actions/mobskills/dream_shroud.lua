@@ -2,7 +2,7 @@
 -- Memento Mori
 -- Enhances Magic Attack.
 -----------------------------------
-require("scripts/globals/mobskills")
+
 -----------------------------------
 local mobskillObject = {}
 

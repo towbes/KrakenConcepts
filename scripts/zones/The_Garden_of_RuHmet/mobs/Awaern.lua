@@ -4,7 +4,7 @@
 -- Note: PH for Ix'Aern DRK and DRG
 -----------------------------------
 local ID = zones[xi.zone.THE_GARDEN_OF_RUHMET]
-mixins = {require("scripts/mixins/families/aern")}
+mixins = {require('scripts/mixins/families/aern')}
 -----------------------------------
 local entity = {}
 

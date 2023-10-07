@@ -5,8 +5,8 @@
 -----------------------------------
 mixins = 
 { 
-require("scripts/mixins/behavior_spawn_chigoe"),
-require("scripts/mixins/families/marid"),
+require('scripts/mixins/behavior_spawn_chigoe'),
+require('scripts/mixins/families/marid'),
 }
 local ID = zones[xi.zone.BHAFLAU_THICKETS]
 -----------------------------------

@@ -418,9 +418,9 @@ xi.additionalEffect.attack = function(attacker, defender, baseAttackDamage, item
         -- Special case for Bucc. knife
         --------------------------------------
     elseif addType == procType.BRIGAND then
-        if defender:getPool() == 531 and attacker:getEquipID(xi.slot.MAIN) == xi.items.BUCCANEERS_KNIFE then
+        if defender:getPool() == 531 and attacker:getEquipID(xi.slot.MAIN) == xi.item.BUCCANEERS_KNIFE then
             defender:setMod(xi.mod.DMG, 0)
-            defender:setLocalVar("killable", 1)
+            defender:setLocalVar('killable', 1)
             defender:setUnkillable(false)
             damage = xi.additionalEffect.calcDamage(attacker, element, defender, damage)
             msgID = xi.msg.basic.ADD_EFFECT_DMG
@@ -567,7 +567,7 @@ xi.additionalEffect.attack = function(attacker, defender, baseAttackDamage, item
             else
                 damage = xi.additionalEffect.calcDamage(attacker, element, defender, damage)
                 msgID = xi.msg.basic.ADD_EFFECT_DMG
-                --print("VS ECOSYSTEM DMG PASSED")
+                --print('VS ECOSYSTEM DMG PASSED')
                 if damage < 0 then
                     msgID = xi.msg.basic.ADD_EFFECT_HEAL
                 end
@@ -575,7 +575,7 @@ xi.additionalEffect.attack = function(attacker, defender, baseAttackDamage, item
                 msgParam = damage
             end
         else
-            --print("Vs Ecosystem condition Not passed, bailing")
+            --print('Vs Ecosystem condition Not passed, bailing')
             return 0, 0, 0 -- Conditions not hit
         end
     end

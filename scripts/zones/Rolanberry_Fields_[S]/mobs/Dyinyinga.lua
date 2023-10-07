@@ -15,7 +15,7 @@ end
 entity.onMobInitialize = function(mob)
     mob:setMod(xi.mod.DMGMAGIC, 25)
     mob:setMobMod(xi.mobMod.ADD_EFFECT, 1)
-    mob:addListener("EFFECT_LOSE", "DYINYINGA_EFFECT_LOSE", function(owner, effect)
+    mob:addListener('EFFECT_LOSE', 'DYINYINGA_EFFECT_LOSE', function(owner, effect)
         local effectType = effect:getType()
         if effectType == xi.effect.WEIGHT then
             owner:addMod(xi.mod.GRAVITYRES, 10)

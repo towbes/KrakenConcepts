@@ -24,47 +24,17 @@
 #include <cstring>
 
 #include "char_jobs.h"
-#include "utils/charutils.h"
 #include "entities/charentity.h"
 
-CCharJobsPacket::CCharJobsPacket(CCharEntity* PChar, bool resetflips)
+CCharJobsPacket::CCharJobsPacket(CCharEntity* PChar)
 {
     this->setType(0x1B);
     this->setSize(0x84);
 
     ref<uint8>(0x04) = PChar->look.race;
 
-        {
-        if (resetflips)
-        {
-            charutils::SetCharVar(PChar, "JobFlipState", 0);
-
-            ref<uint8>(0x08) = PChar->GetMJob(); // Highlight the main job in Yellow
-            ref<uint8>(0x0B) = PChar->GetSJob(); // Highlight the sub job in Blue
-        }
-        else
-        {
-            uint8 flipstate = (uint8)charutils::GetCharVar(PChar, "JobFlipState");
-
-            if (flipstate == 0) // not flipped
-            {
-                ref<uint8>(0x08) = PChar->GetMJob();
-                ref<uint8>(0x0B) = PChar->GetSJob();
-            }
-
-            else if (flipstate == 1) // flipped
-            {
-                ref<uint8>(0x08) = PChar->GetSJob();
-                ref<uint8>(0x0B) = PChar->GetMJob();
-            }
-
-            else if (flipstate == 2) // dw workaround
-            {
-                ref<uint8>(0x08) = PChar->GetMJob();
-                ref<uint8>(0x0B) = (JOBTYPE)6; // thf
-            }
-        }
-    }
+    ref<uint8>(0x08) = PChar->GetMJob(); // Highlight the main job in Yellow
+    ref<uint8>(0x0B) = PChar->GetSJob(); // Highlight the sub job in Blue
 
     memcpy(data + (0x0C), &PChar->jobs, 22);
 

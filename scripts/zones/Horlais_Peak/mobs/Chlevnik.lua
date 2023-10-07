@@ -3,7 +3,7 @@
 -- Mob: Chlevnik
 -- KSNM99
 -----------------------------------
-require("scripts/globals/status")
+
 -----------------------------------
 local entity = {}
 
@@ -20,20 +20,20 @@ entity.onMobSpawn = function(mob)
     mob:setMobMod(xi.mobMod.NO_MOVE, 0)
     mob:setMobMod(xi.mobMod.ADD_EFFECT, 1)
     mob:setTP(3000) -- opens fight with a skill
-    mob:addListener("TAKE_DAMAGE", "CHLEVNIK_TAKE_DAMAGE", function(mobArg, amount, attacker, attackType, damageType)
-        if amount >= mobArg:getHP() and mob:getLocalVar("control") == 0 then
-            mob:setLocalVar("control", 1) -- Prevents multiple uses of meteor
+    mob:addListener('TAKE_DAMAGE', 'CHLEVNIK_TAKE_DAMAGE', function(mobArg, amount, attacker, attackType, damageType)
+        if amount >= mobArg:getHP() and mob:getLocalVar('control') == 0 then
+            mob:setLocalVar('control', 1) -- Prevents multiple uses of meteor
             mob:setUnkillable(true)
             mob:setAutoAttackEnabled(false)
             mob:setMagicCastingEnabled(false)
             mob:setMobAbilityEnabled(false)
-            mob:setLocalVar("Meteor", 1)
+            mob:setLocalVar('Meteor', 1)
         end
     end)
 end
 
 entity.onMobEngaged = function(mob, target)
-    mob:setLocalVar("delay", os.time() + 30)
+    mob:setLocalVar('delay', os.time() + 30)
 end
 
 entity.onMobFight = function(mob, target)
@@ -43,17 +43,17 @@ entity.onMobFight = function(mob, target)
         mob:setMod(xi.mod.REGAIN, 50)
     end
 
-    local delay = mob:getLocalVar("delay")
+    local delay = mob:getLocalVar('delay')
     if os.time() > delay then -- Use Meteor every 30s, based on capture
         mob:castSpell(218, target) -- meteor
-        mob:setLocalVar("delay", os.time() + 30)
+        mob:setLocalVar('delay', os.time() + 30)
     end
 
-    if mob:getLocalVar("Meteor") == 1 then
+    if mob:getLocalVar('Meteor') == 1 then
         if mob:checkDistance(target) > 40 then
             mob:resetEnmity(target)
         else
-            mob:setLocalVar("Meteor", 0)
+            mob:setLocalVar('Meteor', 0)
             mob:useMobAbility(634) -- Final Meteor
         end
     end
@@ -88,7 +88,7 @@ entity.onSpellPrecast = function(mob, spell)
 end
 
 entity.onMobDeath = function(mob, player, optParams)
-    mob:removeListener("CHLEVNIK_TAKE_DAMAGE")
+    mob:removeListener('CHLEVNIK_TAKE_DAMAGE')
 end
 
 return entity

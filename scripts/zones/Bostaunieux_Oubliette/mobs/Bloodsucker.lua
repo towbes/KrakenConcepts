@@ -10,7 +10,7 @@ local entity = {}
 
 entity.onMobInitialize = function(mob)
     if mob:getID() == ID.mob.BLOODSUCKER then
-        mob:setMobMod(xi.mobMod.ADD_EFFECT, 1) -- "Has an Additional Effect of Drain on normal attacks"
+        mob:setMobMod(xi.mobMod.ADD_EFFECT, 1) -- 'Has an Additional Effect of Drain on normal attacks'
     end
 end
 

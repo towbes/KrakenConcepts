@@ -13,13 +13,13 @@ entity.onMobInitialize = function(mob)
 end
 
 entity.onMobSpawn = function(mob)
-    mob:setLocalVar("[rage]timer", 3600) -- 60 minutes
+    mob:setLocalVar('[rage]timer', 3600) -- 60 minutes
     mob:setMod(xi.mod.MDEF, 20)
     mob:addMod(xi.mod.ATT, 150)
     mob:addMod(xi.mod.DEF, 200)
     mob:addMod(xi.mod.EVA, 110)
     mob:setMod(xi.mod.TRIPLE_ATTACK, 5)
-    mob:setLocalVar("delay", os.time())
+    mob:setLocalVar('delay', os.time())
 
     -- Despawn the ???
     GetNPCByID(ID.npc.BEHEMOTH_QM):setStatus(xi.status.DISAPPEAR)
@@ -52,24 +52,24 @@ entity.onMobFight = function(mob, target)
         mob:setMod(xi.mod.REGAIN, 80)
     end
 
-    local delay = mob:getLocalVar("delay")
+    local delay = mob:getLocalVar('delay')
     if os.time() > delay then -- Use Meteor every 40s, based on capture
         mob:castSpell(218, target) -- meteor
-        mob:setLocalVar("delay", os.time() + 40)
+        mob:setLocalVar('delay', os.time() + 40)
     end
 
-    local drawInWait = mob:getLocalVar("DrawInWait")
+    local drawInWait = mob:getLocalVar('DrawInWait')
 
     if (target:getXPos() > -180 and target:getZPos() > 53) and os.time() > drawInWait then -- North Tunnel Draw In
         local rot = target:getRotPos()
         target:setPos(-182.19,-19.83,58.34,rot)
         mob:messageBasic(232, 0, 0, target)
-        mob:setLocalVar("DrawInWait", os.time() + 2)
+        mob:setLocalVar('DrawInWait', os.time() + 2)
     elseif (target:getXPos() > -230 and target:getZPos() < 5) and os.time() > drawInWait then  -- South Tunnel Draw In
         local rot = target:getRotPos()
         target:setPos(-235.35,-20.01,-4.47,rot)
         mob:messageBasic(232, 0, 0, target)
-        mob:setLocalVar("DrawInWait", os.time() + 2)
+        mob:setLocalVar('DrawInWait', os.time() + 2)
     end
 end
 

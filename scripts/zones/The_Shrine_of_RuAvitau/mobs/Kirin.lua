@@ -21,7 +21,7 @@ entity.onMobSpawn = function(mob)
     mob:setMod(xi.mod.STUNRES, 35)
     mob:setMod(xi.mod.BINDRES, 35)
     mob:setMod(xi.mod.GRAVITYRES, 35)
-    mob:setLocalVar("numAdds", 1)
+    mob:setLocalVar('numAdds', 1)
     mob:setAutoAttackEnabled(true)
     mob:setMobAbilityEnabled(true)
     mob:setMagicCastingEnabled(false)
@@ -45,11 +45,11 @@ entity.onMobFight = function(mob, target)
             end
         end
 
-        if #godsRemaining > 0 and mob:getLocalVar("summoning") == 0 then
+        if #godsRemaining > 0 and mob:getLocalVar('summoning') == 0 then
             local g = godsRemaining[math.random(#godsRemaining)]
             local god = GetMobByID(ID.mob.KIRIN + g)
-            mob:setLocalVar("summoning", 1)
-            mob:entityAnimationPacket("casm")
+            mob:setLocalVar('summoning', 1)
+            mob:entityAnimationPacket('casm')
             mob:setMobMod(xi.mobMod.NO_MOVE, 1)
             mob:setAutoAttackEnabled(false)
             mob:setMagicCastingEnabled(false)
@@ -57,7 +57,7 @@ entity.onMobFight = function(mob, target)
 
             mob:timer(5000, function(mobArg)
                 if mobArg:isAlive() then
-                    mobArg:entityAnimationPacket("shsm")
+                    mobArg:entityAnimationPacket('shsm')
                     god:setSpawn(mob:getXPos() + 1, mob:getYPos(), mob:getZPos() + 1)
                     god:spawn()
 
@@ -65,9 +65,9 @@ entity.onMobFight = function(mob, target)
                         god:updateEnmity(target)
                     end
 
-                    mobArg:setLocalVar("add"..g, 1)
-                    mobArg:setLocalVar("numAdds", numAdds + 1)
-                    mobArg:setLocalVar("summoning", 0)
+                    mobArg:setLocalVar('add'..g, 1)
+                    mobArg:setLocalVar('numAdds', numAdds + 1)
+                    mobArg:setLocalVar('summoning', 0)
                     mob:setMobMod(xi.mobMod.NO_MOVE, 0)
                     mobArg:setAutoAttackEnabled(true)
                     mobArg:setMagicCastingEnabled(true)

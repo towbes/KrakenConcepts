@@ -8,10 +8,10 @@
 -- Version used by player summoners seems capped at ~2% except against Behemoths
 -- https://www.bluegartr.com/threads/108197-Random-Facts-Thread-Abilities?p=6003851&viewfull=1#post6003851
 ---------------------------------------------
-require("scripts/globals/settings")
-require("scripts/globals/status")
-require("scripts/globals/mobskills")
-require("scripts/globals/summon")
+
+
+require('scripts/globals/mobskills')
+require('scripts/globals/summon')
 ---------------------------------------------
 local abilityObject = {}
 
@@ -56,8 +56,8 @@ abilityObject.onPetAbility = function(target, pet, skill)
     damage = damage * (1 + ((dINT / ratio) / 100))  -- A wild estimate appears!  It's super ineffective!
 
     -- hpp and damage do not correlate, but we can use the system to scale damage numbers
-    -- damage = xi.mobskills.mobMagicalMove(pet, target, skill, damage, xi.magic.ele.DARK, dmgmod, xi.mobskills.magicalTpBonus, 0)
-    -- damage = xi.mobskills.mobAddBonuses(pet, target, damage.dmg, xi.magic.ele.DARK)
+    -- damage = xi.mobskills.mobMagicalMove(pet, target, skill, damage, xi.element.DARK, dmgmod, xi.mobskills.magicalTpBonus, 0)
+    -- damage = xi.mobskills.mobAddBonuses(pet, target, damage.dmg, xi.element.DARK)
     -- damage = xi.summon.avatarFinalAdjustments(damage, pet, skill, target, xi.attackType.MAGICAL, xi.damageType.DARK, xi.mobskills.magicalTpBonus.NO_EFFECT)
 
     -- Clamp the HPP reduction to the min/max HP values

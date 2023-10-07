@@ -2,7 +2,7 @@
 -- Nightmare
 -- AOE Sleep with Bio dot
 ---------------------------------------------
-require("scripts/globals/mobskills")
+
 ---------------------------------------------
 local mobskillObject = {}
 

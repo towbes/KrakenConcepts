@@ -1,8 +1,8 @@
 -----------------------------------
 -- Area: Foret de Hennetiel
 -----------------------------------
-require("scripts/globals/hunts")
-mixins = {require("scripts/mixins/families/slug")}
+require('scripts/globals/hunts')
+mixins = {require('scripts/mixins/families/slug')}
 -----------------------------------
 local entity = {}
 

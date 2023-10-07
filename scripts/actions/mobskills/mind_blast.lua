@@ -1,6 +1,6 @@
 -----------------------------------
 --  Mind Blast
---  Description: Deals lightning damage to an enemy. Additional effect: "Paralysis"
+--  Description: Deals lightning damage to an enemy. Additional effect: 'Paralysis'
 --  Type: Magical (lightning)
 --  Utsusemi/Blink absorb: Wipes shadows
 --  Range: Cone

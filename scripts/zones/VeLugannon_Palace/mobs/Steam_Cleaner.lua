@@ -12,7 +12,7 @@ entity.onMobDeath = function(mob, player, optParams)
 end
 
 entity.onMobRoam = function(mob)
-    local spawner = GetMobByID(mob:getLocalVar("spawner"))
+    local spawner = GetMobByID(mob:getLocalVar('spawner'))
     if spawner:isAlive() then
         mob:pathTo(spawner:getXPos() + 1, spawner:getYPos() + 3, spawner:getZPos() + 0.15)
     end

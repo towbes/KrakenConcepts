@@ -4,14 +4,14 @@
 -- Author: Spaceballs
 --   Note: Pet of Khromasoul Bhurborlor
 -----------------------------------
-mixins = {require("scripts/mixins/job_special")}
-require("scripts/globals/status")
+mixins = {require('scripts/mixins/job_special')}
+
 -----------------------------------
 local entity = {}
 
 
 entity.onMobSpawn = function(mob)
-    mob:setLocalVar("clock", os.time() + math.random(10,30))
+    mob:setLocalVar('clock', os.time() + math.random(10,30))
     mob:setMobMod(xi.mobMod.ADD_EFFECT, 1)
     mob:setMod(xi.mod.LULLABYRES, 100)
     mob:setMod(xi.mod.SLEEPRES, 100)
@@ -29,16 +29,16 @@ entity.onAdditionalEffect = function(mob, target, damage)
             mob:setHP(mob:getHP() - hpToDmg)
         end
         hpToDmg = math.max(hpToDmg, 20) -- Due to resistance checking, best to floor this at 20, and double it went sending dmg
-        -- printf("dmg %u", hpToDmg)
+        -- printf('dmg %u', hpToDmg)
         return xi.mob.onAddEffect(mob, target, 2 * hpToDmg, xi.mob.ae.ENDARK)
     end
 end
 
 
 entity.onMobFight = function(mob, target)
-    if os.time() >= mob:getLocalVar("clock") then
+    if os.time() >= mob:getLocalVar('clock') then
         mob:useMobAbility(709)
-        mob:setLocalVar("clock", os.time() + math.random(65,85))
+        mob:setLocalVar('clock', os.time() + math.random(65,85))
     end
 end
 
@@ -49,7 +49,7 @@ entity.onMobDeath = function(mob, player, isKiller)
 end
 
 entity.onMobRoam = function(mob)
-    local ID = require("scripts/zones/Mount_Zhayolm/IDs")
+    local ID = zones[xi.zone.MOUNT_ZHAYOLM]
     local mother = GetMobByID(ID.mob.KHROMASOUL_BHURBORLOR)
     if mother:isSpawned() and mother:getCurrentAction() == xi.act.ATTACK then
         mob:updateEnmity(mother:getTarget())

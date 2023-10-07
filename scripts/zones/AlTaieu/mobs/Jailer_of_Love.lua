@@ -34,7 +34,7 @@ local spellLists =
 }
 
 -- Animations, action IDs and elemental absorb mods are directly mapped to eachother per retail caps
--- in the "standard" order, Fire Ice Wind Earth Thunder Water Holy Dark
+-- in the 'standard' order, Fire Ice Wind Earth Thunder Water Holy Dark
 local eleAbsorbModID      = { 459, 460, 461, 462, 463, 464, 465, 466 }
 local eleAbsorbActionID   = { 603, 604, 624, 404, 625, 626, 627, 307 }
 local eleAbsorbAnimations = { 432, 433, 434, 435, 436, 437, 438, 439 }

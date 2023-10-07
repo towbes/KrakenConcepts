@@ -1,7 +1,7 @@
 -----------------------------------
 -- ID: 18612
 -- Ram Staff
--- Enchantment: "Retrace" (Southern San d'Oria[S])
+-- Enchantment: 'Retrace' (Southern San d'Oria[S])
 -----------------------------------
 local itemObject = {}
 

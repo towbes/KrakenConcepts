@@ -17,7 +17,7 @@ end
 
 entity.onEventFinish = function(player, csid, option, npc)
     if csid == 4 then
-        player:setCharVar("DownwardHelix", 4)
+        player:setCharVar('DownwardHelix', 4)
     end
 end
 

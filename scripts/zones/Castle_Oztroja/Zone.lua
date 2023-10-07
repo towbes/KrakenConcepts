@@ -8,7 +8,7 @@ local zoneObject = {}
 
 zoneObject.onInitialize = function(zone)
     -- NM Persistence
-    if GetServerVariable("[PH]Tzee_Xicu_the_Manifest") == 1 then
+    if GetServerVariable('[PH]Tzee_Xicu_the_Manifest') == 1 then
         xi.mob.nmTODPersistCache(zone, ID.mob.TZEE_XICU_THE_MANIFEST)
     else
         xi.mob.nmTODPersistCache(zone, ID.mob.YAGUDO_AVATAR)

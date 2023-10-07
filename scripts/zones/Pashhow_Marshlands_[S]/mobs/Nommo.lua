@@ -2,7 +2,7 @@
 -- Area: Pashhow Marshlands [S]
 --   NM: Nommo
 -----------------------------------
-mixins = {require("scripts/mixins/families/slug")}
+mixins = {require('scripts/mixins/families/slug')}
 -----------------------------------
 local entity = {}
 

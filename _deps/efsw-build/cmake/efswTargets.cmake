@@ -51,7 +51,7 @@ add_library(efsw::efsw STATIC IMPORTED)
 
 set_target_properties(efsw::efsw PROPERTIES
   INTERFACE_INCLUDE_DIRECTORIES "C:/Users/Chris/Desktop/CactuarLSB/server/_deps/efsw-src/include;C:/Users/Chris/Desktop/CactuarLSB/server/_deps/efsw-src/src"
-  INTERFACE_LINK_LIBRARIES "WS2_32;dbghelp;Shlwapi;C:/Users/Chris/Desktop/CactuarLSB/server/ext/zmq/lib64/libzmq_64.lib;C:/Users/Chris/Desktop/CactuarLSB/server/ext/luajit/lib64/libluajit_64.lib"
+  INTERFACE_LINK_LIBRARIES "WS2_32;dbghelp;Shlwapi;C:/Users/Chris/Desktop/CactuarLSB/server/ext/zmq/lib64/libzmq_64.lib;C:/Users/Chris/Desktop/CactuarLSB/server/ext/luajit/lib64/libluajit_64.lib;C:/Users/Chris/Desktop/CactuarLSB/server/ext/openssl/lib64/libcrypto.lib;C:/Users/Chris/Desktop/CactuarLSB/server/ext/openssl/lib64/libssl.lib"
 )
 
 # Import target "efsw::efsw" for configuration "Debug"

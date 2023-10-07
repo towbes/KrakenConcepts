@@ -1,6 +1,6 @@
 -----------------------------------
 -- Heavy Bellow
--- Description: Additional effect: "Stun."
+-- Description: Additional effect: 'Stun.'
 -- Type: Physical (Blunt)
 -----------------------------------
 local mobskillObject = {}

@@ -2,7 +2,7 @@
 -- Fire Arrow
 -- Deals Fire damage.
 -----------------------------------
-require("scripts/globals/mobskills")
+
 -----------------------------------
 local mobskillObject = {}
 

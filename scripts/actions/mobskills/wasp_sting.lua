@@ -3,9 +3,9 @@
 -- Description: Poisons target
 -- Type: Poison
 -----------------------------------
-require("scripts/globals/settings")
-require("scripts/globals/status")
-require("scripts/globals/mobskills")
+
+
+
 -----------------------------------
 local mobskillObject = {}
 

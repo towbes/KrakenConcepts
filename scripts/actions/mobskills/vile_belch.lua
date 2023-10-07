@@ -5,8 +5,8 @@
 --  Type: Magical (Water/Breath)
 --  Range:
 ---------------------------------------------
-require("scripts/globals/mobskills")
-require("scripts/globals/status")
+
+
 -----------------------------------
 local mobskillObject = {}
 

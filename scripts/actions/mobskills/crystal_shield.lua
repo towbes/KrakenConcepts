@@ -14,7 +14,7 @@ mobskillObject.onMobWeaponSkill = function(target, mob, skill)
 
     local typeEffect = xi.effect.PROTECT
 
-    if mob:getName() == "Lost_Suttung" then
+    if mob:getName() == 'Lost_Suttung' then
         local power = 100
     end
 

@@ -12,8 +12,8 @@ end
 entity.onTrigger = function(player, npc)
     local aSquiresTestII = player:getQuestStatus(xi.quest.log_id.SANDORIA, xi.quest.id.sandoria.A_SQUIRES_TEST_II)
     local medicineWoman = player:getQuestStatus(xi.quest.log_id.SANDORIA, xi.quest.id.sandoria.THE_MEDICINE_WOMAN)
-    local toCureaCough = player:getCharVar("Quest[0][20]Prog")
-    local diaryPage = player:getCharVar("DiaryPage")
+    local toCureaCough = player:getCharVar('Quest[0][20]Prog')
+    local diaryPage = player:getCharVar('DiaryPage')
 
     if diaryPage == 0 then
         player:startEvent(639)          -- see diary, option to read (reads page 1)
@@ -42,7 +42,7 @@ entity.onEventUpdate = function(player, csid, option, npc)
 end
 
 entity.onEventFinish = function(player, csid, option, npc)
-    local diaryPage = player:getCharVar("DiaryPage")
+    local diaryPage = player:getCharVar('DiaryPage')
 
     if option >= diaryPage then
         if csid == 639 and option == 0 then

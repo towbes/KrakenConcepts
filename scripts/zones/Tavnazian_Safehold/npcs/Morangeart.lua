@@ -4,8 +4,8 @@
 -- Type: ENM Quest Activator
 -- !pos -74.308 -24.782 -28.475 26
 -----------------------------------
-local ID = require("scripts/zones/Tavnazian_Safehold/IDs")
-require("scripts/globals/keyitems")
+local ID = zones[xi.zone.TAVNAZIAN_SAFEHOLD]
+
 -----------------------------------
 local entity = {}
 
@@ -13,7 +13,7 @@ entity.onTrade = function(player, npc, trade)
 end
 
 entity.onTrigger = function(player, npc)
-    local cd = player:getCharVar("[ENM]MonarchBeard")
+    local cd = player:getCharVar('[ENM]MonarchBeard')
 
     if
         player:getCurrentMission(xi.mission.log_id.COP) > xi.mission.id.cop.AN_ETERNAL_MELODY and

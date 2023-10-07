@@ -22,7 +22,7 @@ mobskillObject.onMobWeaponSkill = function(target, mob, skill)
 
     -- Platoon Scorpion
     if mob:getPool() == 3157 then
-        local ragePower = mob:getLocalVar("wildRagePower")
+        local ragePower = mob:getLocalVar('wildRagePower')
         info.dmg = info.dmg * (1 + 0.3 * ragePower)
     end
 

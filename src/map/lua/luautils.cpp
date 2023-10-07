@@ -469,15 +469,6 @@ namespace luautils
                 return cached_func;
             }
         }
-
-        else if (PEntity->objtype == TYPE_FELLOW)
-        {
-            if (auto cached_func = lua["xi"]["globals"]["pets"]["fellow"][funcName]; cached_func.valid())
-            {
-                return cached_func;
-            }
-        }
-
         else if (PEntity->objtype == TYPE_TRUST)
         {
             std::string mob_name = PEntity->GetName();
@@ -824,10 +815,6 @@ namespace luautils
             std::string mob_name = static_cast<CPetEntity*>(PEntity)->GetScriptName();
             filename             = fmt::format("./scripts/globals/pets/{}.lua", static_cast<CPetEntity*>(PEntity)->GetScriptName());
         }
-        else if (PEntity->objtype == TYPE_FELLOW)
-        {
-            filename = fmt::format("./scripts/globals/pets/fellow.lua");
-        }
         else if (PEntity->objtype == TYPE_TRUST)
         {
             std::string mob_name = PEntity->GetName();
@@ -1087,11 +1074,11 @@ namespace luautils
         CBaseEntity* PNpc{ nullptr };
         if (PInstance)
         {
-            PNpc = PInstance->GetEntity(npcid & 0xFFF, TYPE_NPC | TYPE_SHIP);
+            PNpc = PInstance->GetEntity(npcid & 0xFFF, TYPE_NPC);
         }
         else
         {
-            PNpc = zoneutils::GetEntity(npcid, TYPE_NPC | TYPE_SHIP);
+            PNpc = zoneutils::GetEntity(npcid, TYPE_NPC);
         }
 
         if (!PNpc)
@@ -1997,9 +1984,6 @@ namespace luautils
         {
             case TYPE_NPC:
                 pathFormat = "./scripts/zones/{}/npcs/{}.lua";
-                break;
-            case TYPE_FELLOW:
-                pathFormat = "./scripts/globals/pets/fellow.lua";
                 break;
             case TYPE_MOB:
                 pathFormat = "./scripts/zones/{}/mobs/{}.lua";
@@ -3491,7 +3475,7 @@ namespace luautils
     {
         TracyZoneScoped;
 
-        if (PMob == nullptr || PMob->objtype != TYPE_MOB || PMob->objtype != TYPE_FELLOW)
+        if (PMob == nullptr || PMob->objtype != TYPE_MOB)
         {
             return -1;
         }
@@ -3598,7 +3582,7 @@ namespace luautils
             return -1;
         }
 
-        auto result = onGameDay(CLuaZone(PZone));
+        auto result = onGameDay();
         if (!result.valid())
         {
             sol::error err = result;
@@ -4003,10 +3987,6 @@ namespace luautils
                 if (PMaster->GetMJob() == JOB_SMN)
                 {
                     charutils::TrySkillUP(PMaster, SKILL_SUMMONING_MAGIC, PMaster->GetMLevel());
-                }
-                if (PMaster->GetSJob() == JOB_SMN) // Umeboshi "SMN sub can get bloodpact skillups"
-                {
-                    charutils::TrySkillUP(PMaster, SKILL_SUMMONING_MAGIC, PMaster->GetSLevel());
                 }
             }
         }
@@ -4849,36 +4829,6 @@ namespace luautils
         else
         {
             ShowDebug("UpdateNMSpawnPoint: mob <%u> not found", mobid);
-        }
-    }
-
-     /************************************************************************
-     *                                                                       *
-     * Update the NM spawn point to a new point, retrieved from the database *
-     *                                                                       *
-     ************************************************************************/
-
-    bool CheckNMSpawnPoint(uint32 mobid)
-    {
-        TracyZoneScoped;
-
-        CMobEntity* PMob = (CMobEntity*)zoneutils::GetEntity(mobid, TYPE_MOB);
-        if (PMob != nullptr)
-        {
-            int32 ret = sql->Query("SELECT count(mobid) FROM `nm_spawn_points` where mobid=%u", mobid);
-            if (ret != SQL_ERROR && sql->NumRows() != 0 && sql->NextRow() == SQL_SUCCESS && sql->GetUIntData(0) > 0)
-            {
-                return true;
-            }
-            else
-            {
-                return false;
-            }
-        }
-        else
-        {
-            ShowDebug("UpdateNMSpawnPoint: mob <%u> not found", mobid);
-            return false;
         }
     }
 

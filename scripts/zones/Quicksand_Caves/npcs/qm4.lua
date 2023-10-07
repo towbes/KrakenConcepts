@@ -1,7 +1,7 @@
 -----------------------------------
 -- Area: Quicksand Caves
 --  NPC: ??? (qm4)
--- Involved in Mission: Bastok 8.1 "The Chains That Bind Us"
+-- Involved in Mission: Bastok 8.1 'The Chains That Bind Us'
 -- !pos
 -----------------------------------
 local entity = {}

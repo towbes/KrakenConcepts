@@ -3,7 +3,7 @@
 -- Mob: Bugboy
 -- ENM: Bionic Bug
 -----------------------------------
-require("scripts/globals/status")
+
 -----------------------------------
 local entity = {}
 
@@ -19,14 +19,14 @@ entity.onMobWeaponSkill = function(target, mob, skill)
 end
 
 entity.onMobFight = function(mob, target)
-    if mob:getHPP() < 75 and mob:getLocalVar("first2hr") == 0 then
-        mob:setLocalVar("first2hr", 1)
+    if mob:getHPP() < 75 and mob:getLocalVar('first2hr') == 0 then
+        mob:setLocalVar('first2hr', 1)
         mob:useMobAbility(688)
-    elseif mob:getHPP() < 50 and mob:getLocalVar("second2hr") == 0 then
-        mob:setLocalVar("second2hr", 1)
+    elseif mob:getHPP() < 50 and mob:getLocalVar('second2hr') == 0 then
+        mob:setLocalVar('second2hr', 1)
         mob:useMobAbility(688)
-    elseif mob:getHPP() < 25 and mob:getLocalVar("third2hr") == 0 then
-        mob:setLocalVar("third2hr", 1)
+    elseif mob:getHPP() < 25 and mob:getLocalVar('third2hr') == 0 then
+        mob:setLocalVar('third2hr', 1)
         mob:useMobAbility(688)
     end
 end

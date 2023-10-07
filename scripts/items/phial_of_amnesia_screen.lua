@@ -1,7 +1,7 @@
 -----------------------------------
 -- ID: 5878
 -- Item: Amnesia Screen
--- Effect: 2 Mins of immunity to "Amnesia" effects.
+-- Effect: 2 Mins of immunity to 'Amnesia' effects.
 -----------------------------------
 local itemObject = {}
 

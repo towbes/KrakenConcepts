@@ -2,15 +2,15 @@
 -- Area: The Shrine of Ru'Avitau
 --  Mob: Ullikummi
 -----------------------------------
-local ID = require("scripts/zones/The_Shrine_of_RuAvitau/IDs")
-require("scripts/globals/mobs")
+local ID = zones[xi.zone.THE_SHRINE_OF_RUAVITAU]
+require('scripts/globals/mobs')
 -----------------------------------
 local entity = {}
 
 -- TODO: Heavy Strike should ALWAYS knockback its target regardless of if it hits or does damage.
 
 entity.onMobInitialize = function(mob)
-    mob:addListener("WEAPONSKILL_USE", "ULLI_WEAPONSKILL_USE", function(mobArg, target, wsid, tp, action)
+    mob:addListener('WEAPONSKILL_USE', 'ULLI_WEAPONSKILL_USE', function(mobArg, target, wsid, tp, action)
         if action:getParam(target:getID()) > 1 then
             mobArg:resetEnmity(target)
         end
@@ -24,7 +24,7 @@ entity.onMobSpawn = function(mob)
 end
 
 entity.onMobDespawn = function(mob)
-    mob:removeListener("ULLI_WEAPONSKILL_USE")
+    mob:removeListener('ULLI_WEAPONSKILL_USE')
 end
 
 return entity

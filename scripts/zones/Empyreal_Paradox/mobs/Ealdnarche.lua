@@ -38,16 +38,16 @@ entity.onMobSpawn = function(mob)
 end
 
 entity.onMobFight = function(mob, target)
-    if os.time() > mob:getLocalVar("[EALD]teleportTime") then
-        mob:setLocalVar("[EALD]TP", mob:getTP())
+    if os.time() > mob:getLocalVar('[EALD]teleportTime') then
+        mob:setLocalVar('[EALD]TP', mob:getTP())
         mob:useMobAbility(989) -- Warp Out
-        mob:setLocalVar("[EALD]teleportTime", os.time() + 30)
+        mob:setLocalVar('[EALD]teleportTime', os.time() + 30)
     end
 
     if mob:checkDistance(target) >= 3 then -- Based on captures and videos Eald'narche casts immediately after teleport if out of melee range.
-        if os.time() > mob:getLocalVar("[EALD]nextCast") then -- Should only cast once then go back to melee.
+        if os.time() > mob:getLocalVar('[EALD]nextCast') then -- Should only cast once then go back to melee.
             local selectedSpell = math.random(1, #spellList)
-            mob:setLocalVar("[EALD]nextCast", os.time() + 20) -- 20s generally is enough time to cast the spell and start closing the range.
+            mob:setLocalVar('[EALD]nextCast', os.time() + 20) -- 20s generally is enough time to cast the spell and start closing the range.
             mob:castSpell(spellList[selectedSpell], target)
         end
     end
@@ -55,7 +55,7 @@ end
 
 entity.onMobWeaponSkill = function(target, mob, skill)
     if skill:getID() == 988 or skill:getID() == 989 then
-        mob:setTP(mob:getLocalVar("[EALD]TP"))
+        mob:setTP(mob:getLocalVar('[EALD]TP'))
     end
 end
 

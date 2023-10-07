@@ -118,7 +118,7 @@ xi.pets.wyvern.onMobSpawn = function(mob)
     end
 
     if master:getMod(xi.mod.WYVERN_SUBJOB_TRAITS) > 0 and master:getMainJob() ~= xi.job.DRG then
-        mob:addJobTraits(master:getMainJob(), master:getMainLvl()) -- Umeboshi "If DRG is subbed, we apply main job traits instead"
+        mob:addJobTraits(master:getMainJob(), master:getMainLvl()) -- Umeboshi 'If DRG is subbed, we apply main job traits instead'
     end
 
     local wyvernType = wyvernTypes[master:getSubJob()]
@@ -127,7 +127,7 @@ xi.pets.wyvern.onMobSpawn = function(mob)
 		wyvernType = wyvernTypes[master:getSubJob()]
     end
     
-    if (master:getSubJob() == xi.job.DRG) then -- Umeboshi "If DRG is a subjob, We use the main job to determine what type(Offense, Defense, Multi) of Wyvern is spawned"
+    if (master:getSubJob() == xi.job.DRG) then -- Umeboshi 'If DRG is a subjob, We use the main job to determine what type(Offense, Defense, Multi) of Wyvern is spawned'
 		wyvernType = wyvernTypes[master:getMainJob()]
 	end
     

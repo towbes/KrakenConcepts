@@ -8,7 +8,7 @@ mixins = { require('scripts/mixins/rage') }
 local entity = {}
 
 local intoShell = function(mob)
-    mob:setLocalVar("changeTime", os.time() + 90)
+    mob:setLocalVar('changeTime', os.time() + 90)
     mob:setAnimationSub(1)
     mob:setMobAbilityEnabled(false)
     mob:setAutoAttackEnabled(false)
@@ -40,7 +40,7 @@ entity.onMobSpawn = function(mob)
         questionMarks:setStatus(xi.status.DISAPPEAR)
     end
 
-    mob:setLocalVar("[rage]timer", 3600) -- 60 minutes
+    mob:setLocalVar('[rage]timer', 3600) -- 60 minutes
     mob:setMobAbilityEnabled(true)
     mob:setAutoAttackEnabled(true)
     mob:setMagicCastingEnabled(false) -- will not cast until it goes into shell
@@ -63,27 +63,27 @@ entity.onMobSpawn = function(mob)
     mob:setMod(xi.mod.STUNRES, 50)
     mob:setMod(xi.mod.SILENCERES, 30)
 
-    mob:setLocalVar("dmgToChange", mob:getHP() - 1000)
+    mob:setLocalVar('dmgToChange', mob:getHP() - 1000)
     mob:setAnimationSub(2)
 end
 
 entity.onMobFight = function(mob, target)
-    local changeHP = mob:getLocalVar("dmgToChange")
+    local changeHP = mob:getLocalVar('dmgToChange')
 
     if -- In shell
         mob:getAnimationSub() == 1 and
-        (os.time() > mob:getLocalVar("changeTime") or mob:getHPP() == 100)
+        (os.time() > mob:getLocalVar('changeTime') or mob:getHPP() == 100)
     then
         outOfShell(mob)
     end
 
     if mob:getHP() <= changeHP then
         if mob:getAnimationSub() == 1 then -- In shell
-            mob:setLocalVar("dmgToChange", mob:getHP() - 1000)
+            mob:setLocalVar('dmgToChange', mob:getHP() - 1000)
             outOfShell(mob)
         elseif mob:getAnimationSub() == 2 then -- Out of shell
             intoShell(mob)
-            mob:setLocalVar("dmgToChange", mob:getHP() - 1000)
+            mob:setLocalVar('dmgToChange', mob:getHP() - 1000)
         end
     end
 end

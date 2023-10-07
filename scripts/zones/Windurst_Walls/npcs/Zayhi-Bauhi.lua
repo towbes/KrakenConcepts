@@ -55,7 +55,7 @@ end
 --        Event ID List for NPC
 --      player:startEvent(299) -- Normal speach
 --      player:startEvent(61) -- Normal speach
---      player:startEvent(64) -- Start quest "Too Bee or Not Too Be" (Speech given with lots of coughing)
+--      player:startEvent(64) -- Start quest 'Too Bee or Not Too Be' (Speech given with lots of coughing)
 --      player:startEvent(69) -- After Honey#1: Clearing throat
 --      player:startEvent(70) -- After Honey#2: Tries to speak again... coughs
 --      player:startEvent(73) -- After Honey#3: Tries to speak again... coughs..asked for more Honey

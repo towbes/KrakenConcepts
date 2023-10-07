@@ -2,7 +2,7 @@
 -- Area: Cloister of Flames
 --  NPC: Fire Protocrystal
 -----------------------------------
-require("scripts/globals/bcnm")
+require('scripts/globals/bcnm')
 -----------------------------------
 local entity = {}
 

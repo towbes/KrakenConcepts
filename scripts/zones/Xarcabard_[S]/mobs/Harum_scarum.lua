@@ -2,7 +2,7 @@
 -- Area: Xarcabard [S]
 --  Mob: Harum Scarum
 -----------------------------------
-mixins = { require("scripts/mixins/families/djinn") }
+mixins = { require('scripts/mixins/families/djinn') }
 -----------------------------------
 local entity = {}
 

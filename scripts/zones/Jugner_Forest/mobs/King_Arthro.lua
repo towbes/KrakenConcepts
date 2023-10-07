@@ -39,7 +39,7 @@ entity.onMobDespawn = function(mob)
     local kingArthroID = mob:getID()
 
     UpdateNMSpawnPoint(mob:getID())
-    GetMobByID(kingArthroID):setLocalVar("[POP]King_Arthro", 0)
+    GetMobByID(kingArthroID):setLocalVar('[POP]King_Arthro', 0)
 
     -- Set respawn persistence of knight crabs
     local respawnTime = 75900 + math.random(0, 6) * 1800 -- 21:05 to 24:05 respawn timer in 30 minute intervals

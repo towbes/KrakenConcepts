@@ -26,15 +26,15 @@ entity.onMobWeaponSkill = function(target, mob, skill)
     local hour = VanadielHour()
     local chance = math.random(1, 10)
     if hour < 4 or hour >= 18 and skill:getID() == 1401 then
-        local tpCount = mob:getLocalVar("tpCount")
+        local tpCount = mob:getLocalVar('tpCount')
 
         tpCount = tpCount +1
-        mob:setLocalVar("tpCount", tpCount)
+        mob:setLocalVar('tpCount', tpCount)
 
         if tpCount > 1 and chance >= 5 then
-            mob:setLocalVar("tpCount", 0)
+            mob:setLocalVar('tpCount', 0)
         elseif tpCount > 2 and chance >= 9 then
-            mob:setLocalVar("tpCount", 0)
+            mob:setLocalVar('tpCount', 0)
         else
             mob:useMobAbility(skill:getID())
         end

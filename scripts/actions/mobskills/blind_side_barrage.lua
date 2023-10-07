@@ -5,8 +5,6 @@
 --  Type: Physical (Blunt)
 --  Reduces STR and VIT
 -----------------------------------
-require("scripts/globals/mobskills")
------------------------------------
 local mobskillObject = {}
 
 mobskillObject.onMobSkillCheck = function(target, mob, skill)

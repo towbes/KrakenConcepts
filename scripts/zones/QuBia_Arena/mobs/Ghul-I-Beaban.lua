@@ -6,7 +6,7 @@
 local entity = {}
 
 local function reraiseGhul(mob, reraises, target)
-    mob:setLocalVar("RERAISES", reraises)
+    mob:setLocalVar('RERAISES', reraises)
     mob:setHP(mob:getMaxHP() * (1 - (0.10 * reraises)))
     mob:setMod(xi.mod.ATT, 25 * reraises)
     mob:resetAI()
@@ -17,7 +17,7 @@ local function reraiseGhul(mob, reraises, target)
 end
 
 entity.onMobSpawn = function(GhulIBeabanMob)
-    GhulIBeabanMob:addListener("DEATH", "GHUL_DEATH", function(mob)
+    GhulIBeabanMob:addListener('DEATH', 'GHUL_DEATH', function(mob)
         local mobId = mob:getID()
         local reraises = mob:getLocalVar('RERAISES') + 1
         local target = mob:getTarget()

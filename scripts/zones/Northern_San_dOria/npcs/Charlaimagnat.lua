@@ -26,8 +26,8 @@ entity.onTrigger = function(player, npc)
         player:startEvent(704) -- didn't wait a day yet
     elseif
         theMissingPiece == QUEST_ACCEPTED and
-        os.time() >= player:getCharVar("TheMissingPiece_date") and
-        player:getCharVar("TheMissingPiece_date") > 0
+        os.time() >= player:getCharVar('TheMissingPiece_date') and
+        player:getCharVar('TheMissingPiece_date') > 0
     then
         player:startEvent(705) -- Quest Completed
     end

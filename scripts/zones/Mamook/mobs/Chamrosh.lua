@@ -21,16 +21,16 @@ entity.onMobSpawn = function(mob)
 end
 
 entity.onMobFight = function(mob, target)
-    local delay = mob:getLocalVar("delay")
-    local lastCast = mob:getLocalVar("LAST_CAST")
-    local spell = mob:getLocalVar("COPY_SPELL")
-    local changeTime = mob:getLocalVar("changeTime")
+    local delay = mob:getLocalVar('delay')
+    local lastCast = mob:getLocalVar('LAST_CAST')
+    local spell = mob:getLocalVar('COPY_SPELL')
+    local changeTime = mob:getLocalVar('changeTime')
 
     if spell > 0 and not mob:hasStatusEffect(xi.effect.SILENCE) then
         if delay >= 3 then
             mob:castSpell(spell, target)
-            mob:setLocalVar("COPY_SPELL", 0)
-            mob:setLocalVar("delay", 0)
+            mob:setLocalVar('COPY_SPELL', 0)
+            mob:setLocalVar('delay', 0)
         else
             mob:setLocalVar('delay', delay + 1)
         end
@@ -157,8 +157,8 @@ entity.onMagicHit = function(caster, target, spell)
         (caster:isPC() or caster:isPet()) and
         (spellID ~= 533)
     then
-        target:setLocalVar("COPY_SPELL", determineSpellUpgrade(spellID))
-        target:setLocalVar("LAST_CAST", target:getBattleTime())
+        target:setLocalVar('COPY_SPELL', determineSpellUpgrade(spellID))
+        target:setLocalVar('LAST_CAST', target:getBattleTime())
     end
 end
 

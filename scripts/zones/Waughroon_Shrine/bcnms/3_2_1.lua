@@ -6,8 +6,8 @@
 local battlefieldObject = {}
 
 battlefieldObject.onBattlefieldInitialise = function(battlefield)
-    battlefield:setLocalVar("loot", 1)
-    battlefield:setLocalVar("lootSpawned", 1)
+    battlefield:setLocalVar('loot', 1)
+    battlefield:setLocalVar('lootSpawned', 1)
 end
 
 battlefieldObject.onBattlefieldTick = function(battlefield, tick)

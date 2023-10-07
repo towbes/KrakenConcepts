@@ -191,14 +191,7 @@ void CBattleEntity::UpdateHealth()
 
 uint8 CBattleEntity::GetHPP() const
 {
-    uint8 hpp = (uint8)floor(((float)health.hp / (float)GetMaxHP()) * 100);
-    // handle the edge case where a floor would show a mob with 1/1000 hp as 0
-    if (hpp == 0 && health.hp > 0)
-    {
-        hpp = 1;
-    }
-
-    return hpp;
+    return (uint8)ceil(((float)health.hp / (float)GetMaxHP()) * 100);
 }
 
 int32 CBattleEntity::GetMaxHP() const
@@ -561,11 +554,6 @@ int32 CBattleEntity::addMP(int32 mp)
 int32 CBattleEntity::takeDamage(int32 amount, CBattleEntity* attacker /* = nullptr*/, ATTACK_TYPE attackType /* = ATTACK_NONE*/,
                                 DAMAGE_TYPE damageType /* = DAMAGE_NONE*/, bool isSkillchainDamage /* = false */)
 {
-    if (this->GetLocalVar("DAMAGE_NULL") == 1)
-    {
-        amount %= 2;
-        this->SetLocalVar("DAMAGE_DEALT", amount);
-    }
     TracyZoneScoped;
     PLastAttacker                             = attacker;
     this->BattleHistory.lastHitTaken_atkType  = attackType;
@@ -863,10 +851,6 @@ uint8 CBattleEntity::GetMLevel() const
 
 JOBTYPE CBattleEntity::GetSJob()
 {
-    if (StatusEffectContainer->HasStatusEffect({ EFFECT_OBLIVISCENCE, EFFECT_SJ_RESTRICTION }))
-    {
-        return JOB_NON;
-    }
     return m_sjob;
 }
 
@@ -938,22 +922,6 @@ void CBattleEntity::SetSLevel(uint8 slvl)
             case 3: // equal (75/75, 99/99)
                 m_slvl = (slvl > m_mlvl ? (m_mlvl == 1 ? 1 : m_mlvl) : slvl);
                 break;
-            case 4: // equal (75/75, 99/99) //Umeboshi "Hijacking this for Cactuar's Subjob System. Subjob automatically doubles it true level to ease subjob leveling grind"
-            {
-                m_slvl = slvl * 2;
-
-                if (m_slvl >= 74) // 37 subjob "clicks" to 75
-                {
-                    m_slvl++;
-                }
-
-                if (m_slvl > m_mlvl)
-                {
-                    m_slvl = m_mlvl;
-                }
-            }
-                break;
-                // m_slvl = (slvl > m_mlvl ? (m_mlvl == 1 ? 1 : m_mlvl) : slvl);
             default: // Error
                 ShowError("Error setting subjob level: Invalid ratio '%s' check your settings file!", ratio);
                 break;
@@ -1661,7 +1629,6 @@ void CBattleEntity::OnCastInterrupted(CMagicState& state, action_t& action, MSGB
         {
             actionTarget.reaction = REACTION::HIT;
             // For some reason, despite the system supporting interrupted message in the action packet (like auto attacks, JA), an 0x029 message is sent for spells.
-            this->PAI->EventHandler.triggerListener("MAGIC_INTERRUPTED", CLuaBaseEntity(this));
             loc.zone->PushPacket(this, CHAR_INRANGE_SELF, new CMessageBasicPacket(this, state.GetTarget() ? state.GetTarget() : this, 0, 0, msg));
         }
     }
@@ -1843,7 +1810,7 @@ bool CBattleEntity::OnAttack(CAttackState& state, action_t& action)
                         // Calculate attack bonus for Counterstance Effect Job Points
                         // Needs verification, as there appears to be conflicting information regarding an attack bonus based on DEX
                         // vs a base damage increase.
-                        float csJpAtkBonus = 1;
+                        float csJpAtkBonus = 0;
                         if (PTarget->objtype == TYPE_PC && PTarget->GetMJob() == JOB_MNK && PTarget->StatusEffectContainer->HasStatusEffect(EFFECT_COUNTERSTANCE))
                         {
                             auto*  PChar        = static_cast<CCharEntity*>(PTarget);
@@ -1879,18 +1846,6 @@ bool CBattleEntity::OnAttack(CAttackState& state, action_t& action)
                 attack.SetCritical(xirand::GetRandomNumber(100) < battleutils::GetCritHitRate(this, PTarget, !attack.IsFirstSwing()));
 
                 actionTarget.reaction = REACTION::HIT;
-
-                if (this->objtype == TYPE_PC && ((CCharEntity*)this)->getCharVar("TREDECIM_COUNTER") > 12)
-                {
-                    // Check for Tredecim
-                    auto* equippedWeapon = dynamic_cast<CItemWeapon*>(this->m_Weapons[SLOT_MAIN]);
-                    if (equippedWeapon->getID() == 18052)
-                    {
-                        // Ensure critical is only set to main weapon slot
-                        attack.SetCritical(true);
-                        ((CCharEntity*)this)->setCharVar("TREDECIM_COUNTER", -1);
-                    }
-                }
 
                 // Critical hit.
                 if (attack.IsCritical())

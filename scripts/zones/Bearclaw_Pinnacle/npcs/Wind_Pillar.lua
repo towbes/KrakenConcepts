@@ -2,7 +2,7 @@
 -- Area: Bearclaw Pinnacle
 --  NPC: Wind Pillar
 -----------------------------------
-require("scripts/globals/bcnm")
+require('scripts/globals/bcnm')
 -----------------------------------
 local entity = {}
 

@@ -60,8 +60,8 @@ entity.onEventUpdate = function(player, csid, option, npc)
 end
 
 entity.onEventFinish = function(player, csid, option, npc)
-    if csid == 586 and option == player:getLocalVar("meretReward") then
-        player:setLocalVar("meretReward", 0)
+    if csid == 586 and option == player:getLocalVar('meretReward') then
+        player:setLocalVar('meretReward', 0)
 
         if npcUtil.giveItem(player, option) then
             player:confirmTrade()

@@ -40,8 +40,7 @@ enum SPAWNTYPE
     SPAWNTYPE_MOONPHASE = 0x10,
     SPAWNTYPE_LOTTERY   = 0x20,
     SPAWNTYPE_WINDOWED  = 0x40,
-    SPAWNTYPE_SCRIPTED  = 0x80, // scripted spawn
-    SPAWNTYPE_PIXIE     = 0x100 // according to server amity
+    SPAWNTYPE_SCRIPTED  = 0x80 // scripted spawn
 };
 
 enum SPECIALFLAG
@@ -173,7 +172,6 @@ public:
 
     virtual void Spawn() override;
     virtual void FadeOut() override;
-    virtual bool CanMove();
     virtual bool isWideScannable() override;
 
     bool   m_AllowRespawn; // if true, allow respawn
@@ -233,7 +231,6 @@ public:
     uint8  m_HiPartySize; // Largest party size that hit the Monster
     int16  m_THLvl;       // Highest Level of Treasure Hunter that apply to drops
     bool   m_ItemStolen;  // if true, mob has already been robbed. reset on respawn. also used for thf maat fight
-    uint16 m_StealItemID; // Specify what item will be stolen
     uint16 m_Family;
     uint16 m_SuperFamily;
     uint16 m_MobSkillList; // Mob skill list defined from mob_pools
@@ -249,8 +246,6 @@ public:
     uint8 m_unk1; // (entity_update 0x25)
     uint8 m_unk2; // (entity_update 0x26)
 
-    uint16 m_pathFindDisengage;
-
     bool m_CallForHelpBlocked;
 
     CEnmityContainer* PEnmityContainer;
@@ -258,11 +253,6 @@ public:
     CMobSpellContainer* SpellContainer;
 
     bool m_IsClaimable;
-
-    time_t m_pixieLastCast;
-    void   PixieTryHealPlayer(CCharEntity* PChar); // Pixies only - attempt to cast a cure or a raise on a player
-    bool   PixieShouldSpawn();                     // Calculate whether pixie should spawn according to amity
-
 
     static constexpr float sound_range{ 8.f };
     static constexpr float sight_range{ 15.f };

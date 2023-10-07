@@ -3,7 +3,7 @@
 --  Mob: Anansi
 -- BCNM: Come into my Parlor
 -----------------------------------
-require("scripts/globals/status")
+
 -----------------------------------
 local entity = {}
 
@@ -27,7 +27,7 @@ entity.onMobSpawn = function(mob)
     mob:addMod(xi.mod.SLEEPRES, 100)
     mob:setBehaviour(bit.bor(mob:getBehaviour(), xi.behavior.NO_DESPAWN))
 
-    mob:addListener("TAKE_DAMAGE", "ANANSI_TAKE_DAMAGE", function(mobArg, amount, attacker, attackType, damageType)
+    mob:addListener('TAKE_DAMAGE', 'ANANSI_TAKE_DAMAGE', function(mobArg, amount, attacker, attackType, damageType)
         if amount > mobArg:getHP() then
             if attacker:isPet() then
                 attacker = attacker:getMaster()

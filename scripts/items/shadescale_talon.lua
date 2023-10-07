@@ -3,8 +3,8 @@
 -- Item: Shadescale Talon
 -- Item Effect: Removes Apocalyptic Beast's PetroEyes & Chaos Blade
 -----------------------------------
-require("scripts/globals/status")
-require("scripts/globals/msg")
+
+
 -----------------------------------
 local itemObject = {}
 
@@ -12,7 +12,7 @@ itemObject.onItemCheck = function(target, player)
     local result = 0
     if target:checkDistance(player) > 10 then
         result = xi.msg.basic.TOO_FAR_AWAY
-    elseif target:getName() == "Apocalyptic_Beast" or target:getName() == "Arch_Apocalyptic_Beast" then
+    elseif target:getName() == 'Apocalyptic_Beast' or target:getName() == 'Arch_Apocalyptic_Beast' then
         return 0
     else
         result = xi.msg.basic.ITEM_UNABLE_TO_USE
@@ -22,8 +22,8 @@ itemObject.onItemCheck = function(target, player)
 end
 
 itemObject.onItemUse = function(target, player)
-    if target:getLocalVar("debuff_Talon") == 0 then
-        target:setLocalVar("debuff_Talon", 1)
+    if target:getLocalVar('debuff_Talon') == 0 then
+        target:setLocalVar('debuff_Talon', 1)
         target:updateClaim(player)
     end
 end

@@ -13,8 +13,8 @@ mobskillObject.onMobWeaponSkill = function(target, mob, skill)
     local accmod = 1
     local dmgmod = 1.5
 
-    if mob:getLocalVar("[ranged_attack]dmgmod") > 0 then
-       dmgmod = mob:getLocalVar("[ranged_attack]dmgmod")
+    if mob:getLocalVar('[ranged_attack]dmgmod') > 0 then
+       dmgmod = mob:getLocalVar('[ranged_attack]dmgmod')
     end
 
     local info = xi.mobskills.mobRangedMove(mob, target, skill, numhits, accmod, dmgmod, xi.mobskills.magicalTpBonus.NO_EFFECT)

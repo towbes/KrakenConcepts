@@ -13,8 +13,8 @@ end
 
 entity.onTrigger = function(player, npc)
     local fangedOne = player:getQuestStatus(xi.quest.log_id.WINDURST, xi.quest.id.windurst.THE_FANGED_ONE)
-    local fangedOneCS = player:getCharVar("TheFangedOneCS")
-    local timer = player:getCharVar("TheFangedOneTimer")
+    local fangedOneCS = player:getCharVar('TheFangedOneCS')
+    local timer = player:getCharVar('TheFangedOneTimer')
 
     -- THE FANGED ONE
     local tiger = GetMobByID(ID.mob.OLD_SABERTOOTH)

@@ -5,7 +5,7 @@
 -----------------------------------
 mixins =
 {
-    require("scripts/mixins/families/empty_terroanima"),
+    require('scripts/mixins/families/empty_terroanima'),
 }
 -----------------------------------
 local entity = {}
@@ -19,13 +19,13 @@ entity.onAdditionalEffect = function(mob, target, damage)
 end
 
 entity.onMobWeaponSkillPrepare = function(mob, target)
-    mob:setLocalVar("skill_tp", mob:getTP())
+    mob:setLocalVar('skill_tp', mob:getTP())
 end
 
 entity.onMobWeaponSkill = function(target, mob, skill)
     if skill:getID() == 755 then
-        mob:addTP(mob:getLocalVar("skill_tp"))
-        mob:setLocalVar("skill_tp", 0)
+        mob:addTP(mob:getLocalVar('skill_tp'))
+        mob:setLocalVar('skill_tp', 0)
     end
 end
 
@@ -34,14 +34,14 @@ entity.onMobFight = function(mob, target)
 
     for i = 1, 4 do
         if not GetMobByID(id+i):isSpawned() then
-            mob:setLocalVar("spawnHP", (i * 20))
+            mob:setLocalVar('spawnHP', (i * 20))
         end
     end
 
-    local spawnHP = mob:getLocalVar("spawnHP")
+    local spawnHP = mob:getLocalVar('spawnHP')
 
-    if mob:getLocalVar("timer") < os.time() and mob:getHPP() <= spawnHP then
-        mob:setLocalVar("timer", os.time() + 50)
+    if mob:getLocalVar('timer') < os.time() and mob:getHPP() <= spawnHP then
+        mob:setLocalVar('timer', os.time() + 50)
         mob:useMobAbility(755)
     end
 end

@@ -1,7 +1,7 @@
 -----------------------------------
 -- Area: Batallia Downs
 --  NPC: Stone Monument
---  Involved in quest "An Explorer's Footsteps"
+--  Involved in quest 'An Explorer's Footsteps'
 -- !pos 185.669 9.049 -614.025 105
 -----------------------------------
 local ID = zones[xi.zone.BATALLIA_DOWNS]

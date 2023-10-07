@@ -70,7 +70,6 @@
 #include "items/item_weapon.h"
 #include "job_points.h"
 #include "latent_effect_container.h"
-#include "fellowentity.h"
 #include "mobskill.h"
 #include "modifier.h"
 #include "packets/char_job_extra.h"
@@ -162,7 +161,7 @@ CCharEntity::CCharEntity()
 
     m_missionLog[4].current = 0;   // MISSION_TOAU
     m_missionLog[5].current = 0;   // MISSION_WOTG
-    m_missionLog[6].current = 0; // MISSION_COP
+    m_missionLog[6].current = 101; // MISSION_COP
     for (auto& i : m_missionLog)
     {
         i.statusUpper = 0;
@@ -223,13 +222,6 @@ CCharEntity::CCharEntity()
     resetPetZoningInfo();
     petZoningInfo.petID = 0;
 
-    fellowZoningInfo.respawnFellow = false;
-    fellowZoningInfo.fellowID      = 0;
-    fellowZoningInfo.fellowHP      = 0;
-    fellowZoningInfo.fellowMP      = 0;
-
-    m_PFellow = nullptr;
-
     m_PlayTime    = 0;
     m_SaveTime    = 0;
     m_reloadParty = false;
@@ -261,8 +253,6 @@ CCharEntity::CCharEntity()
     m_mentorUnlocked   = false;
     m_jobMasterDisplay = false;
     m_EffectsChanged   = false;
-
-    m_nextDataSave = std::chrono::system_clock::now() + std::chrono::seconds(settings::get<uint16>("main.PLAYER_DATA_SAVE") > 0 ? settings::get<uint16>("main.PLAYER_DATA_SAVE") : 120);
 }
 
 CCharEntity::~CCharEntity()
@@ -506,19 +496,6 @@ bool CCharEntity::shouldPetPersistThroughZoning()
            (petType == PET_TYPE::JUG_PET && settings::get<bool>("map.KEEP_JUGPET_THROUGH_ZONING"));
 }
 
-void CCharEntity::setFellowZoningInfo()
-{
-    fellowZoningInfo.fellowHP = m_PFellow->health.hp;
-    fellowZoningInfo.fellowMP = m_PFellow->health.mp;
-}
-
-void CCharEntity::resetFellowZoningInfo()
-{
-    fellowZoningInfo.fellowHP      = 0;
-    fellowZoningInfo.fellowMP      = 0;
-    fellowZoningInfo.respawnFellow = false;
-}
-
 /************************************************************************
  *
  * Return the container with the specified ID.If the ID goes beyond, then *
@@ -731,16 +708,6 @@ void CCharEntity::ClearTrusts()
     ReloadPartyInc();
 }
 
-void CCharEntity::RemoveFellow()
-{
-    if (m_PFellow == nullptr || !m_PFellow->PAI->IsSpawned())
-        return;
-
-    m_PFellow->PAI->Despawn();
-    m_PFellow = nullptr;
-    pushPacket(new CCharUpdatePacket(this));
-}
-
 void CCharEntity::RequestPersist(CHAR_PERSIST toPersist)
 {
     dataToPersist |= toPersist;
@@ -783,7 +750,7 @@ bool CCharEntity::PersistData()
 
     if (dataToPersist & CHAR_PERSIST::EFFECTS)
     {
-        StatusEffectContainer->SaveStatusEffects(true, false);
+        StatusEffectContainer->SaveStatusEffects(true);
     }
 
     /* TODO
@@ -991,20 +958,12 @@ bool CCharEntity::CanAttack(CBattleEntity* PTarget, std::unique_ptr<CBasicPacket
 {
     TracyZoneScoped;
 
-    auto modelRadius = PTarget->m_ModelRadius;
-
     if (PTarget->PAI->IsUntargetable())
     {
         return false;
     }
 
-    if (auto PMob = dynamic_cast<CMobEntity*>(PTarget))
-    {
-        modelRadius = PMob->m_Type & MOBTYPE_NORMAL ? modelRadius - 1 : modelRadius;
-    }
-
-    float dist    = distance(loc.p, PTarget->loc.p);
-    float distNoY = distance(loc.p, PTarget->loc.p, true);
+    float dist = distance(loc.p, PTarget->loc.p);
 
     if (!IsMobOwner(PTarget))
     {
@@ -1024,7 +983,7 @@ bool CCharEntity::CanAttack(CBattleEntity* PTarget, std::unique_ptr<CBasicPacket
         errMsg = std::make_unique<CMessageBasicPacket>(this, PTarget, 0, 0, MSGBASIC_UNABLE_TO_SEE_TARG);
         return false;
     }
-    else if (distNoY - modelRadius > GetMeleeRange() || abs(loc.p.y - PTarget->loc.p.y) > 3)
+    else if ((dist - PTarget->m_ModelRadius) > GetMeleeRange())
     {
         errMsg = std::make_unique<CMessageBasicPacket>(this, PTarget, 0, 0, MSGBASIC_TARG_OUT_OF_RANGE);
         return false;
@@ -1425,7 +1384,7 @@ void CCharEntity::OnAbility(CAbilityState& state, action_t& action)
         }
 
         // remove invisible if aggressive
-        if (PAbility->getID() != ABILITY_TAME && PAbility->getID() != ABILITY_FIGHT && PAbility->getID() != ABILITY_DEPLOY && PAbility->getID() != ABILITY_GAUGE)
+        if (PAbility->getID() != ABILITY_TAME && PAbility->getID() != ABILITY_FIGHT)
         {
             if (PAbility->getValidTarget() & TARGET_ENEMY)
             {
@@ -1543,7 +1502,6 @@ void CCharEntity::OnAbility(CAbilityState& state, action_t& action)
                 }
                 PPet->PAI->MobSkill(PPetTarget, PAbility->getMobSkillID());
             }
-            state.ApplyEnmity();
         }
         // #TODO: make this generic enough to not require an if
         else if ((PAbility->isAoE() || (PAbility->getID() == ABILITY_LIEMENT && getMod(Mod::LIEMENT_EXTENDS_TO_AREA) > 0)) && this->PParty != nullptr)
@@ -1637,14 +1595,7 @@ void CCharEntity::OnAbility(CAbilityState& state, action_t& action)
         }
         else
         {
-            if (this->StatusEffectContainer->HasStatusEffect(EFFECT_SEIGAN) && PAbility->getID() == 62)
-            {
-                PRecastContainer->Add(RECAST_ABILITY, PAbility->getRecastId(), action.recast / 2);
-            }
-            else
-            {
-                PRecastContainer->Add(RECAST_ABILITY, PAbility->getRecastId(), action.recast);
-            }
+            PRecastContainer->Add(RECAST_ABILITY, PAbility->getRecastId(), action.recast);
         }
 
         uint16 recastID = PAbility->getRecastId();
@@ -1756,7 +1707,14 @@ void CCharEntity::OnRangedAttack(CRangeState& state, action_t& action)
     // loop for barrage hits, if a miss occurs, the loop will end
     for (uint8 i = 1; i <= hitCount; ++i)
     {
-        if (xirand::GetRandomNumber(100) < battleutils::GetRangedHitRate(this, PTarget, isBarrage)) // hit!
+        if (PTarget->StatusEffectContainer->HasStatusEffect(EFFECT_PERFECT_DODGE, 0))
+        {
+            actionTarget.messageID  = 32;
+            actionTarget.reaction   = REACTION::EVADE;
+            actionTarget.speceffect = SPECEFFECT::NONE;
+            hitCount                = i; // end barrage, shot missed
+        }
+        else if (xirand::GetRandomNumber(100) < battleutils::GetRangedHitRate(this, PTarget, isBarrage)) // hit!
         {
             // absorbed by shadow
             if (battleutils::IsAbsorbByShadow(PTarget))
@@ -1891,12 +1849,6 @@ void CCharEntity::OnRangedAttack(CRangeState& state, action_t& action)
         actionTarget.param     = shadowsTaken;
     }
 
-    // No hit, but unlimited shot is up, so don't consume ammo
-    else if (!hitOccured && this->StatusEffectContainer->HasStatusEffect(EFFECT_UNLIMITED_SHOT))
-    {
-        ammoConsumed = 0;
-    }
-
     if (actionTarget.speceffect == SPECEFFECT::HIT && actionTarget.param > 0)
     {
         actionTarget.speceffect = SPECEFFECT::RECOIL;
@@ -1921,39 +1873,8 @@ void CCharEntity::OnRangedAttack(CRangeState& state, action_t& action)
     }
     battleutils::ClaimMob(PTarget, this);
     battleutils::RemoveAmmo(this, ammoConsumed);
-
-    // Handle Camouflage effects
-    if (this->StatusEffectContainer->HasStatusEffect(EFFECT_CAMOUFLAGE, 0))
-    {
-        int16 retainChance = 40; // Estimate base ~30% chance to keep Camouflage on a ranged attack
-        uint8 rotAllowance = 25; // Allow for some slight variance in direction faced to be "behind" the mob
-
-        retainChance += (1.6 * distance(this->loc.p, PTarget->loc.p)); // Further distance from target = less chance of detection
-
-        if (behind(this->loc.p, PTarget->loc.p, rotAllowance))
-        {
-            // We're behind the mob, so it's guaranteed to stay up.
-            retainChance = 100;
-        }
-
-        if (xirand::GetRandomNumber(100) > retainChance)
-        {
-            // Camouflage was up, but is lost, so now all detectable effects must be dropped
-            StatusEffectContainer->DelStatusEffectsByFlag(EFFECTFLAG_DETECTABLE);
-        }
-        else
-        {
-            // Camouflage up, and retained, but all other effects must be dropped
-            StatusEffectContainer->DelStatusEffect(EFFECT_SNEAK);
-            StatusEffectContainer->DelStatusEffect(EFFECT_INVISIBLE);
-            StatusEffectContainer->DelStatusEffect(EFFECT_DEODORIZE);
-        }
-    }
-    else
-    {
-        // Camouflage not up, so remove all detectable status effects
-        StatusEffectContainer->DelStatusEffectsByFlag(EFFECTFLAG_DETECTABLE);
-    }
+    // only remove detectables
+    StatusEffectContainer->DelStatusEffectsByFlag(EFFECTFLAG_DETECTABLE);
 }
 
 bool CCharEntity::IsMobOwner(CBattleEntity* PBattleTarget)
@@ -2110,21 +2031,13 @@ void CCharEntity::OnItemFinish(CItemState& state, action_t& action)
     if (PItem->getAoE())
     {
         // clang-format off
-        if (PTarget->PParty)
+        PTarget->ForParty([this, PItem, PTarget](CBattleEntity* PMember)
         {
-            for (CBattleEntity* PMember : PTarget->PParty->members)
+            if (!PMember->isDead() && distance(PTarget->loc.p, PMember->loc.p) <= 10)
             {
-                // Trigger for the item user last to prevent any teleportation miscues (Tidal Talisman)
-                if (this->id == PMember->id)
-                    continue;
-                if (!PMember->isDead() && distanceSquared(PTarget->loc.p, PMember->loc.p) < 10.0f * 10.0f)
-                {
-                    luautils::OnItemUse(this, PTarget, PItem);
-                }
-            };
-        }
-        // Triggering for item user
-        luautils::OnItemUse(this, PTarget, PItem);
+                luautils::OnItemUse(this, PMember, PItem);
+            }
+        });
         // clang-format on
     }
     else
@@ -2225,14 +2138,7 @@ void CCharEntity::Die()
 
     if (this->PPet)
     {
-        if (PPet->StatusEffectContainer->HasStatusEffect(EFFECT_CHARM))
-        {
-            petutils::DetachPet(this);
-        }
-        else
-        {
-            petutils::DespawnPet(this);
-        }
+        petutils::DespawnPet(this);
     }
 
     Die(death_duration);
@@ -2693,16 +2599,6 @@ void CCharEntity::changeMoghancement(uint16 moghancementID, bool isAdding)
         default:
             break;
     }
-}
-
-void CCharEntity::SetPixieHate(uint32 pixieHate)
-{
-    if (pixieHate > 60)
-    {
-        pixieHate = 60;
-    }
-    m_pixieHate = pixieHate;
-    charutils::SetCharVar(this, "PIXIE_HATE", pixieHate);
 }
 
 void CCharEntity::TrackArrowUsageForScavenge(CItemWeapon* PAmmo)

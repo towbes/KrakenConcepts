@@ -2,9 +2,9 @@
 -- Area: Ceizak Battlegrounds
 -- NPC: Root
 -----------------------------------
-require("scripts/globals/status")
-require("scripts/globals/utils")
-require("scripts/globals/zone")
+
+require('scripts/globals/utils')
+
 local entity = {}
 local resultTable = {}
 

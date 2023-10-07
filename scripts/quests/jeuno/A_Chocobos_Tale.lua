@@ -128,7 +128,7 @@ quest.sections =
             {
                 onTrigger = function(player, npc)
                     if quest:getVar(player, 'Prog') == 1 then
-                        return quest:progressEvent(21, { [1] = xi.items.BOTTLE_OF_WARDING_OIL })
+                        return quest:progressEvent(21, { [1] = xi.item.BOTTLE_OF_WARDING_OIL })
                     end
                 end,
 

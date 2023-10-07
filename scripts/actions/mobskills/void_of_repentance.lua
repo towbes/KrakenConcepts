@@ -7,9 +7,9 @@
 -- Utsusemi/Blink absorb: Ignores shadows?
 -- Range: Unknown
 -- Notes: Accompanied by text
--- "Repent thy irreverence...
+-- 'Repent thy irreverence...
 -- The gate to salvation...lies before thee...
--- Revelation...is within thy reach..."
+-- Revelation...is within thy reach...'
 -----------------------------------
 local mobskillObject = {}
 

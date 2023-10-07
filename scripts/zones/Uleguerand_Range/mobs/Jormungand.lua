@@ -34,12 +34,12 @@ entity.onMobSpawn = function(mob)
     mob:setMobMod(xi.mobMod.MAGIC_COOL, 20)
     mob:setBehaviour(bit.bor(mob:getBehaviour(), xi.behavior.NO_TURN))
 
-    mob:addListener("TAKE_DAMAGE", "JORM_TAKE_DAMAGE", function(defender, amount, attacker, attackType, damageType)
-        local damageTaken = defender:getLocalVar("damageTaken") + amount
+    mob:addListener('TAKE_DAMAGE', 'JORM_TAKE_DAMAGE', function(defender, amount, attacker, attackType, damageType)
+        local damageTaken = defender:getLocalVar('damageTaken') + amount
         if damageTaken > 10000 then
             if defender:getAnimationSub() == 1 and defender:canUseAbilities() then
                 defender:useMobAbility(1292)
-                defender:setLocalVar("damageTaken", 0)
+                defender:setLocalVar('damageTaken', 0)
             elseif
                 defender:getAnimationSub() == 2 and
                 not defender:hasStatusEffect(xi.effect.BLOOD_WEAPON) and
@@ -48,23 +48,23 @@ entity.onMobSpawn = function(mob)
                 defender:setAnimationSub(1)
                 defender:addStatusEffectEx(xi.effect.ALL_MISS, 0, 1, 0, 0)
                 defender:setMobSkillAttack(732)
-                defender:setLocalVar("damageTaken", 0)
+                defender:setLocalVar('damageTaken', 0)
             end
 
-            defender:setLocalVar("changeHP", defender:getHP() / 1000)
+            defender:setLocalVar('changeHP', defender:getHP() / 1000)
         end
     end)
 end
 
 entity.onMobEngaged = function(mob, target)
-    mob:setLocalVar("twohourTime", os.time() + 30)
-    mob:setLocalVar("changeTime", os.time() + 30)
+    mob:setLocalVar('twohourTime', os.time() + 30)
+    mob:setLocalVar('changeTime', os.time() + 30)
 end
 
 entity.land = function(mob)
     mob:useMobAbility(1282)
     mob:setBehaviour(bit.bor(mob:getBehaviour(), xi.behavior.NO_TURN))
-    mob:setLocalVar("changeTime", os.time() + 60)
+    mob:setLocalVar('changeTime', os.time() + 60)
 end
 
 entity.flight = function(mob)
@@ -72,7 +72,7 @@ entity.flight = function(mob)
     mob:addStatusEffectEx(xi.effect.ALL_MISS, 0, 1, 0, 0)
     mob:setBehaviour(0)
     mob:setMobSkillAttack(732)
-    mob:setLocalVar("changeTime", os.time() + 30)
+    mob:setLocalVar('changeTime', os.time() + 30)
 end
 
 entity.onMobFight = function(mob, target)
@@ -89,8 +89,8 @@ entity.onMobFight = function(mob, target)
         not mob:hasStatusEffect(xi.effect.BLOOD_WEAPON) and
         mob:actionQueueEmpty()
     then
-        local changeTime = mob:getLocalVar("changeTime")
-        local twohourTime = mob:getLocalVar("twohourTime")
+        local changeTime = mob:getLocalVar('changeTime')
+        local twohourTime = mob:getLocalVar('twohourTime')
 
         if -- If mob uses its 2hr
             mob:getAnimationSub() == 2 and
@@ -99,7 +99,7 @@ entity.onMobFight = function(mob, target)
         then
             mob:useMobAbility(695)
             twohourTime = os.time() + 300
-            mob:setLocalVar("twohourTime", twohourTime)
+            mob:setLocalVar('twohourTime', twohourTime)
         elseif -- subanimation 2 is grounded mode, so check if she should take off
             (mob:getAnimationSub() == 0 or mob:getAnimationSub() == 2) and
             os.time() > changeTime
@@ -144,7 +144,7 @@ end
 
 entity.onMobWeaponSkillPrepare = function(mob, target)
     if mob:getAnimationSub() == 1 then
-        mob:setLocalVar("skill_tp", mob:getTP())
+        mob:setLocalVar('skill_tp', mob:getTP())
     end
 end
 
@@ -152,14 +152,14 @@ entity.onMobWeaponSkill = function(target, mob, skill)
     -- Don't lose TP from autos during flight
     if skill:getID() == 1288 then
         mob:addTP(65) -- Needs to gain TP from flight auto attacks
-        mob:setLocalVar("skill_tp", 0)
+        mob:setLocalVar('skill_tp', 0)
     elseif skill:getID() == 1292 then
-        mob:addTP(mob:getLocalVar("skill_tp"))
-        mob:setLocalVar("skill_tp", 0)
+        mob:addTP(mob:getLocalVar('skill_tp'))
+        mob:setLocalVar('skill_tp', 0)
     end
 
     -- Below 25% Jorm can Horrid Roar 3x
-    local roarCount = mob:getLocalVar("roarCount")
+    local roarCount = mob:getLocalVar('roarCount')
 
     if
         mob:getHPP() <= 25 and
@@ -173,9 +173,9 @@ entity.onMobWeaponSkill = function(target, mob, skill)
                 mob:useMobAbility(1290) -- Use Spike Flail
             end
 
-            mob:setLocalVar("roarCount", roarCount + 1)
+            mob:setLocalVar('roarCount', roarCount + 1)
         else
-            mob:setLocalVar("roarCount", 0) -- Need to reset once 3x roars are done
+            mob:setLocalVar('roarCount', 0) -- Need to reset once 3x roars are done
         end
     end
 end

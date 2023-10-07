@@ -13,7 +13,7 @@ entity.onMobDeath = function(mob, player)
 end
 
 entity.onMobDespawn = function(mob, player)
-    mob:setLocalVar("respawnTime", os.time() + 60)
+    mob:setLocalVar('respawnTime', os.time() + 60)
 end
 
 return entity

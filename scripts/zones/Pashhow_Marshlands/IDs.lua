@@ -68,7 +68,7 @@ zones[xi.zone.PASHHOW_MARSHLANDS] =
         BOWHO_WARMONGER = 17224104,
         BOWHO_GUARD1    = 17224105,
         BOWHO_GUARD2    = 17224106,
-        TOXIC_TAMLYN = GetFirstID("Toxic_Tamlyn"),
+        TOXIC_TAMLYN = GetFirstID('Toxic_Tamlyn'),
 
         VOIDWALKER  =
         {

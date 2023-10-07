@@ -10,7 +10,7 @@ end
 
 mobskillObject.onMobWeaponSkill = function(target, mob, skill)
     local power = 0
-    if mob:getName() == "Nightmare_Leech" then
+    if mob:getName() == 'Nightmare_Leech' then
         power = 999
     else
         power = 50

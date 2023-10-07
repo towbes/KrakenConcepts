@@ -11,7 +11,7 @@
 -- - The Quadav are in three groups of three Sapphirine Quadav with the Sapphire Quadav slowly roaming between the three groups.
 -- - The Sapphire Quadav has about 2000 HP and can use Benediction.
 -- - Killing the Sapphire Quadav will cause the Sapphirine Quadav to scatter, making it easier to pick them off one by one.
--- - They will still be aggressive as usual after scattering, but only after they stop "fleeing".
+-- - They will still be aggressive as usual after scattering, but only after they stop 'fleeing'.
 -- - It is possible to kill them one by one, as long as the Quadav of choice is a good distance from the other two in the group.
 -- - They all have fairly low HP and Defense but are highly resistant or immune to Gravity and Bind.
 -- - They have True Hearing.

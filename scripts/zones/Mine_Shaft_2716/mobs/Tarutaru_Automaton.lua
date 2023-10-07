@@ -3,7 +3,7 @@
 -- Mob: Tarutaru Automaton
 -- ENM: Automaton Assault
 -----------------------------------
-require("scripts/globals/status")
+
 -----------------------------------
 local entity = {}
 

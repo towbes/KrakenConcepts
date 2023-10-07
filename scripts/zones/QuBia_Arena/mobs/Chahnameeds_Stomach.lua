@@ -31,12 +31,12 @@ entity.onMobFight = function(mob, target)
 
     if
         mob:getHPP() <= 20 and
-        mob:getLocalVar("spawnedChahnameed") == 0 and
+        mob:getLocalVar('spawnedChahnameed') == 0 and
         not GetMobByID(mobId + 3):isSpawned()
     then
         GetMobByID(mobId + 3):setSpawn(pos.x, pos.y, pos.z)
         SpawnMob(mobId + 3):updateEnmity(target)
-        mob:setLocalVar("spawnedChahnameed", 1)
+        mob:setLocalVar('spawnedChahnameed', 1)
     end
 end
 

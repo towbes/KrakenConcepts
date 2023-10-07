@@ -2,7 +2,7 @@
 -- Area: Riverne Site B01
 -- Note: Weaker version of Tiamat summoned by Bahamut during The Wyrmking Descends
 -----------------------------------
-require("scripts/globals/quests")
+require('scripts/globals/quests')
 -----------------------------------
 local entity = {}
 
@@ -10,8 +10,8 @@ entity.land = function(mob)
     -- need to deal with case of stun of touchdown
     mob:useMobAbility(1282)
     mob:setBehaviour(bit.bor(mob:getBehaviour(), xi.behavior.NO_TURN))
-    mob:setLocalVar("changeTime", mob:getBattleTime() + 120)
-    mob:setLocalVar("damageTaken", 0)
+    mob:setLocalVar('changeTime', mob:getBattleTime() + 120)
+    mob:setLocalVar('damageTaken', 0)
 end
 
 entity.flight = function(mob)
@@ -19,8 +19,8 @@ entity.flight = function(mob)
     mob:addStatusEffectEx(xi.effect.ALL_MISS, 0, 1, 0, 0)
     mob:setBehaviour(0)
     mob:setMobSkillAttack(730)
-    mob:setLocalVar("changeTime", mob:getBattleTime() + 120)
-    mob:setLocalVar("damageTaken", 0)
+    mob:setLocalVar('changeTime', mob:getBattleTime() + 120)
+    mob:setLocalVar('damageTaken', 0)
 end
 
 entity.onMobSpawn = function(mob)
@@ -53,9 +53,9 @@ entity.onMobSpawn = function(mob)
     mob:setMod(xi.mod.REFRESH, 200)
     mob:setBehaviour(bit.bor(mob:getBehaviour(), xi.behavior.NO_TURN))
 
-    mob:addListener("TAKE_DAMAGE", "TIAMAT_TAKE_DAMAGE", function(defender, amount, attacker, attackType, damageType)
-        local damageTaken = defender:getLocalVar("damageTaken") + amount
-        defender:setLocalVar("damageTaken", damageTaken)
+    mob:addListener('TAKE_DAMAGE', 'TIAMAT_TAKE_DAMAGE', function(defender, amount, attacker, attackType, damageType)
+        local damageTaken = defender:getLocalVar('damageTaken') + amount
+        defender:setLocalVar('damageTaken', damageTaken)
         local willKillMob = (defender:getHP() - amount) <= 0
         if damageTaken > 2500 and not willKillMob then
             if
@@ -76,8 +76,8 @@ entity.onMobSpawn = function(mob)
 end
 
 entity.onMobEngaged = function(mob, target)
-    mob:setLocalVar("twohourTime", mob:getBattleTime() + 15)
-    mob:setLocalVar("changeTime", mob:getBattleTime() + 120)
+    mob:setLocalVar('twohourTime', mob:getBattleTime() + 15)
+    mob:setLocalVar('changeTime', mob:getBattleTime() + 120)
 end
 
 entity.onMobFight = function(mob, target)
@@ -98,8 +98,8 @@ entity.onMobFight = function(mob, target)
         not mob:hasStatusEffect(xi.effect.MIGHTY_STRIKES) and
         mob:actionQueueEmpty()
     then
-        local changeTime = mob:getLocalVar("changeTime")
-        local twohourTime = mob:getLocalVar("twohourTime")
+        local changeTime = mob:getLocalVar('changeTime')
+        local twohourTime = mob:getLocalVar('twohourTime')
 
         if -- If mob uses its 2hr
             mob:getAnimationSub() == 2 and
@@ -108,7 +108,7 @@ entity.onMobFight = function(mob, target)
         then
             mob:useMobAbility(688)
             twohourTime = mob:getBattleTime() + math.random(180, 300)
-            mob:setLocalVar("twohourTime", twohourTime)
+            mob:setLocalVar('twohourTime', twohourTime)
         elseif -- subanimation 2 is grounded mode, so check if she should take off
             (mob:getAnimationSub() == 0 or mob:getAnimationSub() == 2) and
             mob:getBattleTime() > changeTime
@@ -143,7 +143,7 @@ end
 
 entity.onMobWeaponSkillPrepare = function(mob, target)
     if mob:getAnimationSub() == 1 then
-        mob:setLocalVar("skill_tp", mob:getTP())
+        mob:setLocalVar('skill_tp', mob:getTP())
     end
 end
 
@@ -151,18 +151,18 @@ entity.onMobWeaponSkill = function(target, mob, skill)
     -- Don't lose TP from autos during flight
     if skill:getID() == 1278 then
         mob:addTP(65) -- Needs to gain TP from flight auto attacks
-        mob:setLocalVar("skill_tp", 0)
+        mob:setLocalVar('skill_tp', 0)
     elseif skill:getID() == 1282 then
-        mob:addTP(mob:getLocalVar("skill_tp"))
-        mob:setLocalVar("skill_tp", 0)
+        mob:addTP(mob:getLocalVar('skill_tp'))
+        mob:setLocalVar('skill_tp', 0)
     end
 end
 
 entity.onMobDisengage = function(mob)
     -- reset on wipe
-    mob:setLocalVar("changeTime", 0)
-    mob:setLocalVar("twohourTime", 0)
-    mob:setLocalVar("damageTaken", 0)
+    mob:setLocalVar('changeTime', 0)
+    mob:setLocalVar('twohourTime', 0)
+    mob:setLocalVar('damageTaken', 0)
     if mob:getAnimationSub() == 1 then
         mob:setAnimationSub(0)
         mob:delStatusEffect(xi.effect.ALL_MISS)

@@ -27,10 +27,10 @@ entity.onMobDespawn = function(mob)
     local respawnTime = 86400 -- If something breaks default to 24 hours
 
     UpdateNMSpawnPoint(mob:getID())
-    GetMobByID(cemCherry):setLocalVar("[POP]Cemetery_Cherry", 0)
+    GetMobByID(cemCherry):setLocalVar('[POP]Cemetery_Cherry', 0)
 
     -- Set respawn persistence of cherry saplings
-    if mob:getLocalVar("wasKilled") == 1 then
+    if mob:getLocalVar('wasKilled') == 1 then
         respawnTime = math.random(75600, 86400) -- 21 to 24 hours
     else
         respawnTime = math.random(1800, 3600) -- 30 to 60 minutes if despawned

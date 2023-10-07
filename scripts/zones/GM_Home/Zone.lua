@@ -5,10 +5,10 @@
 -- 0 = Abyssea Debug
 -- 1 = Mogsack Debug
 -- ...
--- 139 = Janken challenges player to "Rock, Paper, Scissors"
+-- 139 = Janken challenges player to 'Rock, Paper, Scissors'
 -- ...
 -- 140 = Camera test.
--- 141 = "Press confirm button to proceed" nonworking test.
+-- 141 = 'Press confirm button to proceed' nonworking test.
 -----------------------------------
 local zoneObject = {}
 

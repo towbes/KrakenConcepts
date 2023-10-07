@@ -3,9 +3,9 @@
 -- Single target Drain (100+ damage)
 -- Used by Tres Duendes
 -----------------------------------
-require("scripts/globals/mobskills")
-require("scripts/globals/settings")
-require("scripts/globals/status")
+
+
+
 -----------------------------------
 local mobskillObject = {}
 
@@ -15,7 +15,7 @@ end
 
 mobskillObject.onMobWeaponSkill = function(target, mob, skill)
     local dmgmod = 1
-    local info = xi.mobskills.mobMagicalMove(mob, target, skill, mob:getWeaponDmg() * 3, xi.magic.ele.DARK, dmgmod, xi.mobskills.magicalTpBonus.MAB_BONUS, 1)
+    local info = xi.mobskills.mobMagicalMove(mob, target, skill, mob:getWeaponDmg() * 3, xi.element.DARK, dmgmod, xi.mobskills.magicalTpBonus.MAB_BONUS, 1)
     local shadow = xi.mobskills.shadowBehavior.NUMSHADOWS_3
 
     local dmg = xi.mobskills.mobFinalAdjustments(info.dmg, mob, skill, target, xi.attackType.MAGICAL, xi.damageType.DARK, shadow)

@@ -1,7 +1,7 @@
 -----------------------------------
 -- Area: Gustav tunnel
 --  NPC: qm2 (???)
--- Note: Part of mission "The Salt of the Earth"
+-- Note: Part of mission 'The Salt of the Earth'
 -- !pos -130 1.256 252.696 212
 -----------------------------------
 local entity = {}

@@ -1,7 +1,7 @@
 -----------------------------------
 -- Attachment: Barrier Module II
 -----------------------------------
-require("scripts/globals/automaton")
+require('scripts/globals/automaton')
 -----------------------------------
 local attachmentObject = {}
 

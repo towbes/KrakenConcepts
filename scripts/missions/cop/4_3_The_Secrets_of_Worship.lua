@@ -21,7 +21,7 @@ local profQmOnTrigger = function(player, npc)
     if
         missionStatus == 3 and
         not player:hasKeyItem(xi.ki.RELIQUIARIUM_KEY) and
-        mission:getVar(player, "hasKilled") == 0 and
+        mission:getVar(player, 'hasKilled') == 0 and
         isSpawnPoint
     then
         GetMobByID(sacrariumID.mob.OLD_PROFESSOR_MARISELLE):setSpawn(npc:getXPos(), npc:getYPos(), npc:getZPos(), 0)

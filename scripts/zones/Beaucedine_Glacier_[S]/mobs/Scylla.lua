@@ -6,8 +6,8 @@
 local ID = zones[xi.zone.BEAUCEDINE_GLACIER_S]
 
 mixins = {
-    require("scripts/mixins/families/ruszor"),
-    require("scripts/mixins/rage"),
+    require('scripts/mixins/families/ruszor'),
+    require('scripts/mixins/rage'),
          }
 -----------------------------------
 local entity = {}
@@ -22,9 +22,9 @@ entity.onMobInitialize = function(mob)
 end
 
 entity.onMobSpawn = function(mob)
-    mob:setLocalVar("[rage]timer", 3600)
-    mob:setLocalVar("fuAmount", 0)
-    mob:setLocalVar("omfCooldown", 0)
+    mob:setLocalVar('[rage]timer', 3600)
+    mob:setLocalVar('fuAmount', 0)
+    mob:setLocalVar('omfCooldown', 0)
 
     mob:setAnimationSub(0)
     mob:setAutoAttackEnabled(true)
@@ -38,18 +38,18 @@ end
 
 entity.onMobFight = function(mob, target)
     mob:setMagicCastingEnabled(true)
-        if mob:getLocalVar("omfCooldown") < os.time() then
+        if mob:getLocalVar('omfCooldown') < os.time() then
             -- run these checks once per second
-            mob:setLocalVar("omfCooldown", os.time())
+            mob:setLocalVar('omfCooldown', os.time())
     
             -- Scylla has a 10 yalms Silence and Paralyze aura under certain conditions
             local animSub = mob:getAnimationSub()
             local typeEffect = 0
             if animSub == 1 then
-                -- "Frosty" state gives a Paralyze aura
+                -- 'Frosty' state gives a Paralyze aura
                 typeEffect = xi.effect.PARALYSIS
             elseif animSub == 2 then
-                -- "Bubbly" state gives a Silence aura
+                -- 'Bubbly' state gives a Silence aura
                 typeEffect = xi.effect.SILENCE
             end
     
@@ -78,7 +78,7 @@ entity.onMobFight = function(mob, target)
     end
 
 entity.onMobWeaponSkillPrepare = function (mob, target)
-    local fuAmount = mob:getLocalVar("fuAmount")
+    local fuAmount = mob:getLocalVar('fuAmount')
     if fuAmount == 0 then
         -- will prioritize Aqua Wave and Frozen Mist more as hp goes down (up to 80%)
         local chances = math.min(100 - mob:getHPP(), 50) + 30
@@ -97,7 +97,7 @@ entity.onMobWeaponSkill = function(target, mob, skill)
     if skillID == 2438 or skillID == 2439 then
         -- Frozen Mist (2438) will be followed by multiple Ice Guillotine (2440)
         -- Aqua Wave (2439) will be followed by multiple Aqua Cannon (2441)
-        mob:setLocalVar("fuAmount", math.random(6, 10))
+        mob:setLocalVar('fuAmount', math.random(6, 10))
         mob:setAutoAttackEnabled(true)
         mob:setMagicCastingEnabled(false)
         mob:setMobAbilityEnabled(false)
@@ -105,8 +105,8 @@ entity.onMobWeaponSkill = function(target, mob, skill)
         mob:setMod(xi.mod.DELAY, 1800)
 
     elseif skillID == 2440 or skillID == 2441 then
-        local fuAmount = math.max(0, mob:getLocalVar("fuAmount") - 1)
-        mob:setLocalVar("fuAmount",  fuAmount)
+        local fuAmount = math.max(0, mob:getLocalVar('fuAmount') - 1)
+        mob:setLocalVar('fuAmount',  fuAmount)
 
         -- back to regular auto attacks when we're done
         if fuAmount < 1 then
@@ -130,7 +130,7 @@ entity.onMobMagicPrepare = function(mob, target, spellId)
 end
 
 entity.onMobDisengage = function(mob)
-    mob:setLocalVar("fuAmount", 0)
+    mob:setLocalVar('fuAmount', 0)
     mob:setAutoAttackEnabled(true)
     mob:setMagicCastingEnabled(false)
     mob:setMobAbilityEnabled(true)

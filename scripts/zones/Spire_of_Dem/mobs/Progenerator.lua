@@ -14,7 +14,7 @@ entity.onMobInitialize = function(mob)
 end
 
 entity.onMobSpawn = function(mob)
-    mob:setLocalVar("maxBabies", 4)
+    mob:setLocalVar('maxBabies', 4)
 end
 
 entity.onMobWeaponSkillPrepare = function(mob, target)

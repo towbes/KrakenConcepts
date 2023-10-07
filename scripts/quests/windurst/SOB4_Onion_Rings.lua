@@ -93,7 +93,7 @@ quest.sections =
         },
     },
 
-    -- Section: Quest accepeted. You didn't start with the "Old Ring" Key Item.
+    -- Section: Quest accepeted. You didn't start with the 'Old Ring' Key Item.
     {
         check = function(player, status, vars)
             return status == QUEST_ACCEPTED and vars.Prog == 1

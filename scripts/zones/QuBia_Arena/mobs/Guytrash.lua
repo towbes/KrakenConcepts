@@ -3,7 +3,7 @@
 --  Mob: Guytrash
 -- BCNM: Let Sleeping Dogs Die
 -----------------------------------
-local ID = require("scripts/zones/QuBia_Arena/IDs")
+local ID = zones[xi.zone.QUBIA_ARENA]
 -----------------------------------
 local entity = {}
 
@@ -19,7 +19,7 @@ end
 entity.onMobSpawn = function(houndMob)
     houndMob:setBehaviour(bit.bor(houndMob:getBehaviour(), xi.behavior.NO_DESPAWN))
 
-    houndMob:addListener("DEATH", "GUYTRASH_DEATH", function(mob, killer)
+    houndMob:addListener('DEATH', 'GUYTRASH_DEATH', function(mob, killer)
         if checkHounds(mob) then
             mob:timer(35000, function(mobArg)
                 mobArg:setHP(mobArg:getMaxHP())

@@ -4,7 +4,7 @@
 -----------------------------------
 mixins = 
 { 
-require("scripts/mixins/families/orobon"),
+require('scripts/mixins/families/orobon'),
 }
 -----------------------------------
 local entity = {}

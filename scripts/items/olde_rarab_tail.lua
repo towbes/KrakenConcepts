@@ -1,7 +1,7 @@
 -----------------------------------
 -- ID: 5911
 -- Item: Olde Rarab Tail
--- Effect: 90 Seconds of "Terror" effect.
+-- Effect: 90 Seconds of 'Terror' effect.
 -----------------------------------
 local itemObject = {}
 

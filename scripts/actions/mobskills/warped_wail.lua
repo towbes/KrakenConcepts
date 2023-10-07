@@ -6,9 +6,9 @@
 -- Range: 20' radial
 -- Notes: 12% reduction - Best guess based on captures
 ---------------------------------------------
-require("scripts/globals/mobskills")
-require("scripts/globals/settings")
-require("scripts/globals/status")
+
+
+
 -----------------------------------
 local mobskillObject = {}
 

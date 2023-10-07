@@ -1,7 +1,7 @@
 -----------------------------------
 -- ID: 15542
 -- Teleport Return Ring
--- Enchantment: "Outpost Warp"
+-- Enchantment: 'Outpost Warp'
 -----------------------------------
 local itemObject = {}
 

@@ -8,9 +8,9 @@
 require('scripts/globals/interaction/quest')
 require('scripts/globals/npc_util')
 require('scripts/globals/quests')
-require('scripts/globals/zone')
-local ID = require("scripts/zones/Northern_San_dOria/IDs")
-local laTheineID = require("scripts/zones/La_Theine_Plateau/IDs")
+
+local ID = zones[xi.zone.NORTHERN_SAN_DORIA]
+local laTheineID = require('scripts/zones/La_Theine_Plateau/IDs')
 -----------------------------------
 
 local quest = Quest:new(xi.quest.log_id.SANDORIA, xi.quest.id.sandoria.GATES_TO_PARADISE)
@@ -19,7 +19,7 @@ quest.reward =
 {
     fame = 30,
     fameArea = xi.quest.fame_area.SANDORIA,
-    item = xi.items.COTTON_CAPE,
+    item = xi.item.COTTON_CAPE,
     title = xi.title.THE_PIOUS_ONE,
 }
 

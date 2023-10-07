@@ -12,7 +12,7 @@ entity.onMobSpawn = function(mob)
     mob:setMod(xi.mod.BINDRES, 70)
 
     mob:timer(3000, function(mobArg)
-        if mobArg:getBattlefield():getLocalVar("undeadControl") == 0 then
+        if mobArg:getBattlefield():getLocalVar('undeadControl') == 0 then
             mobArg:setHP(0)
         end
     end)

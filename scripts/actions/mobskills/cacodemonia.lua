@@ -7,10 +7,6 @@
 --  Range: Unknown Radial (Using 15' as an estimate)
 --  Notes: Used by some versions of Diabolos, but not all.
 ---------------------------------------------
-require("scripts/globals/settings")
-require("scripts/globals/status")
-require("scripts/globals/mobskills")
----------------------------------------------
 local mobskillObject = {}
 
 mobskillObject.onMobSkillCheck = function(target, mob, skill)

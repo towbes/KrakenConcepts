@@ -4,10 +4,10 @@
 --  Used by Dextrose ZNM
 --  Description: Absorbs HP from any nearby flans, should not kill the target.
 ---------------------------------------------
-require("scripts/globals/mobskills")
-require("scripts/globals/settings")
-require("scripts/globals/status")
-require("scripts/globals/msg")
+
+
+
+
 ---------------------------------------------
 local mobskillObject = {}
 

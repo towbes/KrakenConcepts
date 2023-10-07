@@ -59,7 +59,7 @@ xi.mod =
     ENMITY_LOSS_REDUCTION           = 427,
     MATT                            = 28,
     MDEF                            = 29,
-    MACC                            = 30, -- This is NOT item level "magic accuracy skill" ! That happens in item_weapon.sql instead
+    MACC                            = 30, -- This is NOT item level 'magic accuracy skill' ! That happens in item_weapon.sql instead
     MEVA                            = 31,
     FIREATT                         = 32,
     ICEATT                          = 33,
@@ -102,7 +102,7 @@ xi.mod =
     HPHEAL                          = 72,
     STORETP                         = 73,
 
-    -- These are NOT item Level skill, they are skill in your status menu. iLvl "skill" happens in item_weapon.sql
+    -- These are NOT item Level skill, they are skill in your status menu. iLvl 'skill' happens in item_weapon.sql
     HTH                             = 80,
     DAGGER                          = 81,
     SWORD                           = 82,
@@ -127,7 +127,7 @@ xi.mod =
     BOOST_EFFECT                    = 97,  -- Boost power in tenths
     CAMOUFLAGE_DURATION             = 98,  -- Camouflage duration in percents
 
-    -- These are NOT item Level skill, they are skill in your status menu. iLvl "skill" happens in item_weapon.sql
+    -- These are NOT item Level skill, they are skill in your status menu. iLvl 'skill' happens in item_weapon.sql
     AUTO_MELEE_SKILL                = 101,
     AUTO_RANGED_SKILL               = 102,
     AUTO_MAGIC_SKILL                = 103,
@@ -157,7 +157,7 @@ xi.mod =
 
     CHAKRA_MULT                     = 1026, -- Chakra multiplier increase
     CHAKRA_REMOVAL                  = 1027, -- Extra statuses removed by Chakra
-    SUPPRESS_OVERLOAD               = 125, -- Kenkonken "Suppresses Overload" mod. Unclear how this works exactly. Requires testing on retail.
+    SUPPRESS_OVERLOAD               = 125, -- Kenkonken 'Suppresses Overload' mod. Unclear how this works exactly. Requires testing on retail.
     BP_DAMAGE                       = 126, -- Blood Pact: Rage Damage increase percentage
     FISH                            = 127,
     WOOD                            = 128,
@@ -261,7 +261,7 @@ xi.mod =
     AMNESIARES                      = 253,
     LULLABYRES                      = 254,
     DEATHRES                        = 255,
-    STATUSRES                       = 958, -- "Resistance to All Status Ailments"
+    STATUSRES                       = 958, -- 'Resistance to All Status Ailments'
 
     -- Status effect Magic Evasion modifiers.
     SLEEP_MEVA                      = 200,
@@ -299,7 +299,7 @@ xi.mod =
     MIJIN_RERAISE                   = 258,
     DUAL_WIELD                      = 259,
     DOUBLE_ATTACK                   = 288,
-    DOUBLE_ATTACK_DMG               = 1038, -- Increases "Double Attack" damage/"Double Attack" damage + (in percents, e.g. +20 = +20% damage)
+    DOUBLE_ATTACK_DMG               = 1038, -- Increases 'Double Attack' damage/'Double Attack' damage + (in percents, e.g. +20 = +20% damage)
     SUBTLE_BLOW                     = 289,
     SUBTLE_BLOW_II                  = 973, -- Subtle Blow II Effect (Cap 50%) Total Effect (SB + SB_II cap 75%)
     ENF_MAG_POTENCY                 = 290, -- Increases Enfeebling magic potency %
@@ -317,7 +317,7 @@ xi.mod =
     STONESKIN                       = 300,
     PHALANX                         = 301,
     TRIPLE_ATTACK                   = 302,
-    TRIPLE_ATTACK_DMG               = 1039, -- Increases "Triple Attack" damage/"Triple Attack" damage + (in percents, e.g. +20 = +20% damage)
+    TRIPLE_ATTACK_DMG               = 1039, -- Increases 'Triple Attack' damage/'Triple Attack' damage + (in percents, e.g. +20 = +20% damage)
     TREASURE_HUNTER                 = 303,
     TREASURE_HUNTER_PROC            = 1048, -- TODO: Increases Treasure Hunter proc rate (percent)
     TREASURE_HUNTER_CAP             = 1049, -- TODO: Increases the Treasure Hunter Cap (e.g. THF JP Gift)
@@ -378,29 +378,29 @@ xi.mod =
     PERPETUATION_REDUCTION          = 346,
 
     -- Warrior
-    BERSERK_POTENCY                 = 948,  -- Augments "Berserk"/Enhances "Berserk" effect (Conqueror)
+    BERSERK_POTENCY                 = 948,  -- Augments 'Berserk'/Enhances 'Berserk' effect (Conqueror)
     BERSERK_DURATION                = 954,  -- Berserk Duration
     AGGRESSOR_DURATION              = 955,  -- Aggressor Duration
     DEFENDER_DURATION               = 956,  -- Defender Duration
-    ENHANCES_RESTRAINT              = 1045, -- Enhances "Restraint" effect/"Restraint" + (Increases the damage bonus of Restraint by XXX%)
-    ENHANCES_BLOOD_RAGE             = 1046, -- Enhances "Blood Rage" effect/"Blood Rage" duration +
+    ENHANCES_RESTRAINT              = 1045, -- Enhances 'Restraint' effect/'Restraint' + (Increases the damage bonus of Restraint by XXX%)
+    ENHANCES_BLOOD_RAGE             = 1046, -- Enhances 'Blood Rage' effect/'Blood Rage' duration +
 
     -- Paladin
-    ENHANCES_CHIVALRY               = 1061, -- Enhances "Chivalry" effect (increases the base TP modifier by the provided value / 100, e.g. mod value 5 = +0.05)
-    ENHANCES_DIVINE_EMBLEM          = 1062, -- Enhances "Divine Emblem" effect/"Divine Emblem" + (increases the ability's special enmity bonus by the provided value)
-    ENHANCES_FEALTY                 = 1063, -- Enhances "Fealty" effect (increases Fealty's duration by 4 seconds per Fealty merit)
-    ENHANCES_IRON_WILL              = 1064, -- Enhances "Iron Will" effect (adds +3% Fast Cast per Iron Will merit to Rampart)
-    ENHANCES_GUARDIAN               = 1065, -- Enhances "Guardian" effect (increases Sentinel's duration by 2 seconds per Guardian merit)
+    ENHANCES_CHIVALRY               = 1061, -- Enhances 'Chivalry' effect (increases the base TP modifier by the provided value / 100, e.g. mod value 5 = +0.05)
+    ENHANCES_DIVINE_EMBLEM          = 1062, -- Enhances 'Divine Emblem' effect/'Divine Emblem' + (increases the ability's special enmity bonus by the provided value)
+    ENHANCES_FEALTY                 = 1063, -- Enhances 'Fealty' effect (increases Fealty's duration by 4 seconds per Fealty merit)
+    ENHANCES_IRON_WILL              = 1064, -- Enhances 'Iron Will' effect (adds +3% Fast Cast per Iron Will merit to Rampart)
+    ENHANCES_GUARDIAN               = 1065, -- Enhances 'Guardian' effect (increases Sentinel's duration by 2 seconds per Guardian merit)
     PALISADE_BLOCK_BONUS            = 1066, -- Increases base block rate while under the effects of Palisade (additive, not multiplicative)
     REPRISAL_BLOCK_BONUS            = 1067, -- Increases block rate while under the effects of Reprisal (multiplicative, not additive)
     REPRISAL_SPIKES_BONUS           = 1068, -- Increases Reprisal spikes damage by percentage (e.g. mod value of 50 will increase spikes damage by 50%)
 
     -- Dark Knight
     ARCANE_CIRCLE_POTENCY           = 1069, -- Increases the potency of the Arcane Circle effect (e.g. mod value 2 = +2% Arcana Killer)
-    ENHANCES_BLOOD_WEAPON           = 1070, -- Enhances "Blood Weapon" effect (increases Blood Weapon's duration in seconds)
+    ENHANCES_BLOOD_WEAPON           = 1070, -- Enhances 'Blood Weapon' effect (increases Blood Weapon's duration in seconds)
     DARK_MAGIC_CAST                 = 1071, -- Reduces Dark Magic Casting Time by percentage (e.g. mod value -10 = -10% cast time)
     DARK_MAGIC_DURATION             = 1072, -- Increases Dark Magic spell durations by percentage (e.g. mod value 10 = +10% duration)
-    ENHANCES_DARK_SEAL              = 1073, -- Enhances "Dark Seal" effect (Increases Dark Magic spell durations by 10% per Dark Seal merit while Dark Seal active)
+    ENHANCES_DARK_SEAL              = 1073, -- Enhances 'Dark Seal' effect (Increases Dark Magic spell durations by 10% per Dark Seal merit while Dark Seal active)
 
     -- Dragoon
     WYVERN_LVL_BONUS                = 1043, -- Wyvern: Lv.+ (Increases wyvern's base level above 99)
@@ -441,7 +441,7 @@ xi.mod =
     INSPIRATION_FAST_CAST       = 1021, -- Inspiration's fast cast, additive with normal fast cast for a cap beyond 80%
     PARRY_SPIKES                = 1022, -- Battuta parry spikes rate
     PARRY_SPIKES_DMG            = 1023, -- Battuta parry spikes damage
-    SPECIAL_ATTACK_EVASION      = 1024, -- Foil "Special Attack" evasion
+    SPECIAL_ATTACK_EVASION      = 1024, -- Foil 'Special Attack' evasion
 
     FIRE_AFFINITY_DMG               = 347,
     ICE_AFFINITY_DMG                = 348,
@@ -532,7 +532,7 @@ xi.mod =
     HELIX_DURATION                  = 477,
     STORMSURGE_EFFECT               = 400,
     SUBLIMATION_BONUS               = 401,
-    GRIMOIRE_SPELLCASTING           = 489, -- "Grimoire: Reduces spellcasting time" bonus
+    GRIMOIRE_SPELLCASTING           = 489, -- 'Grimoire: Reduces spellcasting time' bonus
     WYVERN_BREATH                   = 402,
     UNCAPPED_WYVERN_BREATH          = 284, -- Uncapped wyvern breath boost. Used on retail for augments, normal gear should use WYVERN_BREATH.
     REGEN_DOWN                      = 404, -- poison
@@ -661,25 +661,25 @@ xi.mod =
     REPAIR_POTENCY                  = 854, -- Note: Only affects amount regenerated by a %, not the instant restore!
     PREVENT_OVERLOAD                = 855, -- Overloading erases a water maneuver (except on water overloads) instead, if there is one
     EXTRA_DMG_CHANCE                = 506, -- Proc rate of OCC_DO_EXTRA_DMG. 111 would be 11.1%
-    OCC_DO_EXTRA_DMG                = 507, -- Multiplier for "Occasionally do x times normal damage". 250 would be 2.5 times damage.
+    OCC_DO_EXTRA_DMG                = 507, -- Multiplier for 'Occasionally do x times normal damage'. 250 would be 2.5 times damage.
 
-    REM_OCC_DO_DOUBLE_DMG           = 863, -- Proc rate for REM Aftermaths that apply "Occasionally do double damage"
-    REM_OCC_DO_TRIPLE_DMG           = 864, -- Proc rate for REM Aftermaths that apply "Occasionally do triple damage"
+    REM_OCC_DO_DOUBLE_DMG           = 863, -- Proc rate for REM Aftermaths that apply 'Occasionally do double damage'
+    REM_OCC_DO_TRIPLE_DMG           = 864, -- Proc rate for REM Aftermaths that apply 'Occasionally do triple damage'
 
     REM_OCC_DO_DOUBLE_DMG_RANGED    = 867, -- Ranged attack specific
     REM_OCC_DO_TRIPLE_DMG_RANGED    = 868, -- Ranged attack specific
 
-    MYTHIC_OCC_ATT_TWICE            = 865, -- Proc rate for "Occasionally attacks twice"
-    MYTHIC_OCC_ATT_THRICE           = 866, -- Proc rate for "Occasionally attacks thrice"
+    MYTHIC_OCC_ATT_TWICE            = 865, -- Proc rate for 'Occasionally attacks twice'
+    MYTHIC_OCC_ATT_THRICE           = 866, -- Proc rate for 'Occasionally attacks thrice'
 
     APPRECIATE_GYSAHL_GREENS        = 156, -- Enhances food effect of Gysahl Greens
 
     EAT_RAW_FISH                    = 412, -- Without this, only Mithra can eat raw fish.
     EAT_RAW_MEAT                    = 413, -- Without this, only Galka can eat raw meat.
 
-    ENHANCES_CURSNA_RCVD            = 67,   -- Potency of "Cursna" effects received
+    ENHANCES_CURSNA_RCVD            = 67,   -- Potency of 'Cursna' effects received
     ENHANCES_CURSNA                 = 310,  -- Raises success rate of Cursna when removing effect (like Doom) that are not 100% chance to remove
-    ENHANCES_HOLYWATER              = 495,  -- Used by gear with the "Enhances Holy Water" or "Holy Water+" attribute
+    ENHANCES_HOLYWATER              = 495,  -- Used by gear with the 'Enhances Holy Water' or 'Holy Water+' attribute
     ENHANCES_PROT_SHELL_RCVD        = 977,  -- Enhances Protect and Shell Effects Received (Binary MOD)
     ENHANCES_PROT_RCVD              = 1050, -- TODO: Enhances Protect Received (Percent)
 
@@ -711,7 +711,7 @@ xi.mod =
     PHANTOM_DURATION                = 882, -- Phantom Roll Duration +.
     PHANTOM_RECAST                  = 1076, -- Phantom Roll Recast -.
 
-    ENHANCES_REFRESH                = 529, -- "Enhances Refresh" adds +1 per modifier to spell's tick result.
+    ENHANCES_REFRESH                = 529, -- 'Enhances Refresh' adds +1 per modifier to spell's tick result.
     NO_SPELL_MP_DEPLETION           = 530, -- % to not deplete MP on spellcast.
     FORCE_FIRE_DWBONUS              = 531, -- Set to 1 to force fire day/weather spell bonus/penalty. Do not have it total more than 1.
     FORCE_ICE_DWBONUS               = 532, -- Set to 1 to force ice day/weather spell bonus/penalty. Do not have it total more than 1.
@@ -721,11 +721,11 @@ xi.mod =
     FORCE_WATER_DWBONUS             = 536, -- Set to 1 to force water day/weather spell bonus/penalty. Do not have it total more than 1.
     FORCE_LIGHT_DWBONUS             = 537, -- Set to 1 to force light day/weather spell bonus/penalty. Do not have it total more than 1.
     FORCE_DARK_DWBONUS              = 538, -- Set to 1 to force dark day/weather spell bonus/penalty. Do not have it total more than 1.
-    STONESKIN_BONUS_HP              = 539, -- Bonus "HP" granted to Stoneskin spell.
+    STONESKIN_BONUS_HP              = 539, -- Bonus 'HP' granted to Stoneskin spell.
     ENHANCES_ELEMENTAL_SIPHON       = 540, -- Bonus Base MP added to Elemental Siphon skill.
     BP_DELAY_II                     = 541, -- Blood Pact Delay Reduction II
     JOB_BONUS_CHANCE                = 542, -- Chance to apply job bonus to COR roll without having the job in the party.
-    DAY_NUKE_BONUS                  = 565, -- Bonus damage from "Elemental magic affected by day" (Sorc. Tonban)
+    DAY_NUKE_BONUS                  = 565, -- Bonus damage from 'Elemental magic affected by day' (Sorc. Tonban)
     IRIDESCENCE                     = 566, -- Iridescence trait (additional weather damage/penalty)
     BARSPELL_AMOUNT                 = 567, -- Additional elemental resistance granted by bar- spells
     BARSPELL_MDEF_BONUS             = 827, -- Extra magic defense bonus granted to the bar- spell effect
@@ -828,7 +828,7 @@ xi.mod =
     ANCIENT_CIRCLE_DURATION         = 859,
 
     -- Other
-    CURE2MP_PERCENT                 = 860, -- Converts % of "Cure" amount to MP
+    CURE2MP_PERCENT                 = 860, -- Converts % of 'Cure' amount to MP
     DIVINE_BENISON                  = 910, -- Adds fast cast and enmity reduction to -Na spells (includes Erase). Enmity reduction is half of the fast cast amount
     SAVETP                          = 880, -- SAVETP Effect for Miser's Roll / ATMA / Hagakure.
     SMITE                           = 898, -- Att increase with H2H or 2H weapons
@@ -842,7 +842,7 @@ xi.mod =
     INVISIBLE_DURATION              = 947, -- Additional duration in seconds
     CARDINAL_CHANT                  = 959,
     INDI_DURATION                   = 960,
-    GEOMANCY_BONUS                  = 961, -- Used to increase potency of "Geomancy +" items (only the highest value is counted)
+    GEOMANCY_BONUS                  = 961, -- Used to increase potency of 'Geomancy +' items (only the highest value is counted)
     WIDENED_COMPASS                 = 962,
     MENDING_HALATION                = 968, -- This mod should never exceed 1 as the multiplier is the merit, this is basicaly just a bool mod
     RADIAL_ARCANA                   = 969,
@@ -903,7 +903,7 @@ xi.mod =
     BLUE_MAGIC_EFFECT       = 1059, -- TODO: Bonus to Attribute Value of spell (percent)
     QUICK_DRAW_RECAST       = 1060, -- TODO: Quick Draw Charge Reduction (seconds)
 
-    DIG_BYPASS_FATIGUE      = 1074, -- Chocobo digging modifier found in "Blue Race Silks". Modifier works as a direct percent.
+    DIG_BYPASS_FATIGUE      = 1074, -- Chocobo digging modifier found in 'Blue Race Silks'. Modifier works as a direct percent.
     BREATH_DMG_DEALT        = 1075, -- Breath damage dealt
 
     STEP_TP_CONSUMED        = 1077, -- Modifies the amount of TP consumed by dancer steps
@@ -943,7 +943,7 @@ xi.mod =
     --UDMG                          = 1170, -- Uncapped dmg taken (all types)
 
     MAGIC_STONESKIN              = 2000, -- Magic Stoneskin. Primary used for mobskill Immortal Shield.
-    --FIRE_BURDEN_DECAY            = 2001, -- Era works for Fire, Abyssia onwards uses "BURDEN_DECAY = 847"
+    --FIRE_BURDEN_DECAY            = 2001, -- Era works for Fire, Abyssia onwards uses 'BURDEN_DECAY = 847'
     --BURDEN_DECAY_IGNORE_CHANCE   = 2002, -- Era Tactical Processor used this to increase tendancy to overload. 
     FIRE_BURDEN_PERC_EXTRA       = 2003, -- Increases fire burden when Flame Holder attatchment is used.
 

@@ -16,7 +16,7 @@ local skillToAbsorb =
 }
 
 entity.onMobSpawn = function(mob)
-    -- Add Gravity resist based off of https://www.bg-wiki.com/ffxi/Kam%27lanaut "Gravity is difficult to land without Elemental Seal".
+    -- Add Gravity resist based off of https://www.bg-wiki.com/ffxi/Kam%27lanaut 'Gravity is difficult to land without Elemental Seal'.
     mob:setMod(xi.mod.GRAVITYRES, 70)
 end
 

@@ -2,8 +2,8 @@
 -- ID: 5904
 -- Item: Redolent Root
 -----------------------------------
-require("scripts/globals/status")
-require("scripts/globals/msg")
+
+
 -----------------------------------
 local itemObject = {}
 
@@ -11,7 +11,7 @@ itemObject.onItemCheck = function(target, player)
     local result = 0
     if target:checkDistance(player) > 10 then
         result = xi.msg.basic.TOO_FAR_AWAY
-    elseif target:getName() == "Cirrate_Christelle" or target:getName() == "Arch_Christelle" then
+    elseif target:getName() == 'Cirrate_Christelle' or target:getName() == 'Arch_Christelle' then
         return 0
     else
         result = xi.msg.basic.ITEM_UNABLE_TO_USE
@@ -21,8 +21,8 @@ itemObject.onItemCheck = function(target, player)
 end
 
 itemObject.onItemUse = function(target, player)
-    if target:getLocalVar("itemDebuff_Root") == 1 then
-        target:setLocalVar("itemDebuff_Root", 0)
+    if target:getLocalVar('itemDebuff_Root') == 1 then
+        target:setLocalVar('itemDebuff_Root', 0)
         target:updateClaim(player)
     end
 end

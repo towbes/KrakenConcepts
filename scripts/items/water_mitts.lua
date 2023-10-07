@@ -1,7 +1,7 @@
 -----------------------------------
 -- ID: 14992
 -- Water Mitts
---  Enchantment: "Enwater"
+--  Enchantment: 'Enwater'
 -----------------------------------
 local itemObject = {}
 
@@ -22,7 +22,7 @@ itemObject.onItemUse = function(target)
 
     potency = utils.clamp(potency, 3, 25)
 
-    target:addStatusEffect(effect, potency, 0, 180, 0, 0, 0, xi.items.WATER_MITTS)
+    target:addStatusEffect(effect, potency, 0, 180, 0, 0, 0, xi.item.WATER_MITTS)
 end
 
 return itemObject

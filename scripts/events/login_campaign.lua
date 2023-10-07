@@ -10,10 +10,10 @@ xi.events = xi.events or {}
 xi.events.loginCampaign = xi.events.loginCampaign or {}
 
 -- NOTE: the year and month values are used in the Moogle's Event!
-local loginCampaignMonth = GetServerVariable("LoginCampaignMonth")
-local loginCampaignDay = GetServerVariable("LoginCampaignDay")
-local loginCampaignYear = GetServerVariable("LoginCampaignYear")
-local loginCampaignDuration = GetServerVariable("LoginCampaignDuration")
+local loginCampaignMonth = GetServerVariable('LoginCampaignMonth')
+local loginCampaignDay = GetServerVariable('LoginCampaignDay')
+local loginCampaignYear = GetServerVariable('LoginCampaignYear')
+local loginCampaignDuration = GetServerVariable('LoginCampaignDuration')
 
 -- Checks if a Login Campaign is active.
 xi.events.loginCampaign.isCampaignActive = function()
@@ -29,7 +29,7 @@ xi.events.loginCampaign.isCampaignActive = function()
             sec = 0
         }) + localUtcOffset + jstUtcOffset
         local campaignEndDate = campaignStartDate + loginCampaignDuration * 24 * 60 * 60
-        EndDate = os.date("%B %d, %Y %I:%M %p", campaignEndDate)
+        EndDate = os.date('%B %d, %Y %I:%M %p', campaignEndDate)
 
         if os.time() < campaignEndDate and os.time() > campaignStartDate then
             return true
@@ -66,7 +66,7 @@ xi.events.loginCampaign.onGameIn = function(player)
         loginCount = 0
     end
 
-    player:PrintToPlayer("The current Login Campaign will run until " .. EndDate, 0xD)
+    player:PrintToPlayer('The current Login Campaign will run until ' .. EndDate, 0xD)
 
     if nextMidnight ~= getMidnight() then
         if loginCount == 0 then
@@ -94,8 +94,8 @@ end
 -- Handles showing the correct list of prices and hiding the options that are not available
 xi.events.loginCampaign.onTrigger = function(player, csid)
     if not xi.events.loginCampaign.isCampaignActive() then
-        player:PrintToPlayer("Greeter Moogle : Unfortunately, the Login Campaign is not currently underway, kupo.", 0xD)
-        player:PrintToPlayer("Please come back another time to see all the exciting prizes we have in store for you, kupo!", 0xD)
+        player:PrintToPlayer('Greeter Moogle : Unfortunately, the Login Campaign is not currently underway, kupo.', 0xD)
+        player:PrintToPlayer('Please come back another time to see all the exciting prizes we have in store for you, kupo!', 0xD)
         return
     end
 

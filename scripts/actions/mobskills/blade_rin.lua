@@ -1,11 +1,6 @@
 -----------------------------------
 -- Blade: Jin
 -----------------------------------
-require("scripts/globals/mobskills")
-require("scripts/globals/status")
-require("scripts/globals/msg")
-require("scripts/globals/settings")
------------------------------------
 local mobskillObject = {}
 
 mobskillObject.onMobSkillCheck = function(target, mob, skill)

@@ -4,7 +4,7 @@
 -- Note: PH for Big Bang
 -----------------------------------
 local ID = zones[xi.zone.VUNKERL_INLET_S]
-mixins = { require("scripts/mixins/families/djinn") }
+mixins = { require('scripts/mixins/families/djinn') }
 -----------------------------------
 local entity = {}
 

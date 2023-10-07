@@ -3,7 +3,7 @@
 --  Mob: Lou Carcolh
 -- Note: PH for Nommo
 -----------------------------------
-mixins = {require("scripts/mixins/families/slug")}
+mixins = {require('scripts/mixins/families/slug')}
 local ID = zones[xi.zone.PASHHOW_MARSHLANDS_S]
 -----------------------------------
 local entity = {}

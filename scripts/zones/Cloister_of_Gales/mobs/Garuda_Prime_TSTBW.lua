@@ -3,7 +3,7 @@
 --  Mob: Garuda Prime
 -- Involved in Quest: Trial Size Trial by Wind
 -----------------------------------
-mixins = { require("scripts/mixins/job_special") }
+mixins = { require('scripts/mixins/job_special') }
 -----------------------------------
 local entity = {}
 

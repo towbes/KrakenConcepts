@@ -33,7 +33,7 @@ entity.onMobDespawn = function(mob)
         -- Lumber Jack died, Set Weeping Willow's proper respawn
         xi.mob.nmTODPersist(GetMobByID(ID.mob.WEEPING_WILLOW), math.random(75600, 86400)) -- 21 to 24 hours
         DisallowRespawn(ID.mob.WEEPING_WILLOW, false)
-        mob:setLocalVar("death", 0)
+        mob:setLocalVar('death', 0)
     else
         -- Lumber Jack idle despawned, set Weeping Willow quicker respawn
         xi.mob.nmTODPersist(ID.mob.WEEPING_WILLOW, 1800) -- 30 minutes

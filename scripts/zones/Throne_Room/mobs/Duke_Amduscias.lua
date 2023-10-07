@@ -3,7 +3,7 @@
 --  Mob: Duke Amduscias
 -- BCNM: Kindred Spirits
 -----------------------------------
-mixins = { require("scripts/mixins/job_special") }
+mixins = { require('scripts/mixins/job_special') }
 -----------------------------------
 local entity = {}
 

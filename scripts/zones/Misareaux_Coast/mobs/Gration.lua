@@ -3,18 +3,18 @@
 --   NM: Gration
 -----------------------------------
 local ID = zones[xi.zone.MISAREAUX_COAST]
-mixins = { require("scripts/mixins/fomor_hate") }
+mixins = { require('scripts/mixins/fomor_hate') }
 -----------------------------------
 local entity = {}
 
 entity.onMobSpawn = function(mob)
-    local shield = GetNPCByID(ID.npc.GRATION_QM):getLocalVar("shield")
+    local shield = GetNPCByID(ID.npc.GRATION_QM):getLocalVar('shield')
     if shield == 2 then
         mob:setMobMod(xi.mobMod.MAGIC_COOL, 20)
     end
     mob:setMobMod(xi.mobMod.NO_STANDBACK, 1)
     mob:setMod(xi.mod.FASTCAST, 25)
-    mob:setLocalVar("fomorHateAdj", 2)
+    mob:setLocalVar('fomorHateAdj', 2)
     mob:setMod(xi.mod.MATT, 125)
     mob:setMod(xi.mod.ATT, 550)
 end
@@ -42,17 +42,17 @@ entity.onMobWeaponSkillPrepare = function(mob, target)
 end
 
 entity.onMobWeaponSkill = function(target, mob, skill)
-    local shield = GetNPCByID(ID.npc.GRATION_QM):getLocalVar("shield")
+    local shield = GetNPCByID(ID.npc.GRATION_QM):getLocalVar('shield')
     if skill:getID() == 667 then
-        local powerattackCounter = mob:getLocalVar("powerattackCounter")
+        local powerattackCounter = mob:getLocalVar('powerattackCounter')
 
         powerattackCounter = powerattackCounter +1
-        mob:setLocalVar("powerattackCounter", powerattackCounter)
+        mob:setLocalVar('powerattackCounter', powerattackCounter)
 
         if powerattackCounter > 1 and shield == 1 then
-            mob:setLocalVar("powerattackCounter", 0)
+            mob:setLocalVar('powerattackCounter', 0)
         elseif powerattackCounter > 2 and shield == 2 then
-            mob:setLocalVar("powerattackCounter", 0)
+            mob:setLocalVar('powerattackCounter', 0)
         else
             mob:useMobAbility(667)
         end

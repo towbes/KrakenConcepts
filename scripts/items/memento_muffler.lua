@@ -4,14 +4,14 @@
 -- Item Effect: VIT +7
 -- Duration: 3 minutes
 -----------------------------------
-require("scripts/globals/status")
-require("scripts/globals/msg")
+
+
 -----------------------------------
 local itemObject = {}
 
 itemObject.onItemCheck = function(target)
     local effect = target:getStatusEffect(xi.effect.VIT_BOOST)
-    if effect ~= nil and effect:getItemSourceID() == xi.items.MEMENTO_MUFFLER then
+    if effect ~= nil and effect:getItemSourceID() == xi.item.MEMENTO_MUFFLER then
         target:delStatusEffect(xi.effect.VIT_BOOST)
     end
 
@@ -19,8 +19,8 @@ itemObject.onItemCheck = function(target)
 end
 
 itemObject.onItemUse = function(target)
-    if target:hasEquipped(xi.items.MEMENTO_MUFFLER) then
-        target:addStatusEffect(xi.effect.VIT_BOOST, 7, 0, 300, 0, 0, 0, xi.items.MEMENTO_MUFFLER)
+    if target:hasEquipped(xi.item.MEMENTO_MUFFLER) then
+        target:addStatusEffect(xi.effect.VIT_BOOST, 7, 0, 300, 0, 0, 0, xi.item.MEMENTO_MUFFLER)
     end
 end
 

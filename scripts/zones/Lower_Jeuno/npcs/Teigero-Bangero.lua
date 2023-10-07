@@ -23,14 +23,14 @@ entity.onTrigger = function(player, npc)
         end
     elseif player:getQuestStatus(xi.quest.log_id.JEUNO, xi.quest.id.jeuno.THE_LOST_CARDIAN) == QUEST_AVAILABLE then
         if player:getCharVar('theLostCardianVar') == 0 then
-            player:startEvent(29) -- First dialog for "The lost cardian" quest
+            player:startEvent(29) -- First dialog for 'The lost cardian' quest
         else
             player:startEvent(66)
         end
     elseif theKindCardian == QUEST_ACCEPTED then
-        player:startEvent(66) -- During quest "The kind cardien"
+        player:startEvent(66) -- During quest 'The kind cardien'
     elseif theKindCardian == QUEST_COMPLETED then
-        player:startEvent(67) -- New standard dialog after "The kind cardian"
+        player:startEvent(67) -- New standard dialog after 'The kind cardian'
     end
 end
 

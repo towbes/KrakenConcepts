@@ -2,8 +2,8 @@
 -- Area: Alzadaal Undersea Ruins
 --  ZNM: Wulgaru
 -----------------------------------
-mixins = {require("scripts/mixins/rage")}
-require("scripts/globals/status")
+mixins = {require('scripts/mixins/rage')}
+
 -----------------------------------
 local entity = {}
 
@@ -23,7 +23,7 @@ local PathingPoints = {
 local function RunForYourLife(mob)
     -- pick random new destination
     local destId = math.random(1, #PathingPoints)
-    mob:setLocalVar("RunDestination", destId)
+    mob:setLocalVar('RunDestination', destId)
 
     -- lame forrest gump comment
     local destination = PathingPoints[destId]
@@ -38,7 +38,7 @@ entity.onMobInitialize = function(mob)
 end
 
 entity.onMobSpawn = function(mob)
-    mob:setLocalVar("[rage]timer", 4500)
+    mob:setLocalVar('[rage]timer', 4500)
     mob:setAutoAttackEnabled(false)
     mob:setMobAbilityEnabled(true)
     mob:setMod(xi.mod.DMGPHYS, 50)
@@ -48,23 +48,23 @@ entity.onMobSpawn = function(mob)
     mob:setAnimationSub(0)
     
     -- phases variables
-    mob:setLocalVar("phase", 1)
-    mob:setLocalVar("hppAmputation", math.random(70, 80))
+    mob:setLocalVar('phase', 1)
+    mob:setLocalVar('hppAmputation', math.random(70, 80))
 
     -- shirtless phase might just not happen
     if math.random() > 0.5 then
-        mob:setLocalVar("hppShirtless", math.random(5, 50))
+        mob:setLocalVar('hppShirtless', math.random(5, 50))
     end
 end
 
 entity.onMobFight = function(mob, target)
     local hpp = mob:getHPP()
-    local hppAmputation = mob:getLocalVar("hppAmputation")
-    local hppShirtless = mob:getLocalVar("hppShirtless")
-    local phase = mob:getLocalVar("phase")
+    local hppAmputation = mob:getLocalVar('hppAmputation')
+    local hppShirtless = mob:getLocalVar('hppShirtless')
+    local phase = mob:getLocalVar('phase')
 
     if phase == 1 and hpp <= hppAmputation then
-        mob:setLocalVar("phase", 2)
+        mob:setLocalVar('phase', 2)
 
         -- remove regain and enable auto attacks for phase 2
         mob:setAutoAttackEnabled(true)
@@ -79,10 +79,10 @@ entity.onMobFight = function(mob, target)
         mob:useMobAbility(2074)
 
     elseif phase == 3 and hpp <= hppShirtless then
-        mob:setLocalVar("phase", 4)
+        mob:setLocalVar('phase', 4)
         mob:timer(3000, function(mob)
             if mob:isAlive() then
-                mob:setLocalVar("phase", 5)
+                mob:setLocalVar('phase', 5)
             end
         end)
 
@@ -95,7 +95,7 @@ entity.onMobFight = function(mob, target)
         mob:setMod(xi.mod.MOVE, 15)
 
     elseif phase == 5 then
-        local destId = mob:getLocalVar("RunDestination")
+        local destId = mob:getLocalVar('RunDestination')
         if destId < 1 or mob:checkDistance(PathingPoints[destId]) < 2 then
             -- pick a new destination
             RunForYourLife(mob)
@@ -105,7 +105,7 @@ end
 
 entity.onMobWeaponSkillPrepare = function(mob)
     -- will only use dire_straight on phase 1
-    if mob:getLocalVar("phase") == 1 then
+    if mob:getLocalVar('phase') == 1 then
         return 2071
     end
 end
@@ -113,7 +113,7 @@ end
 entity.onMobWeaponSkill = function(target, mob, skill)
     -- if skill is detonating_grip, go to phase 3
     if skill:getID() == 2074 then
-        mob:setLocalVar("phase", 3)
+        mob:setLocalVar('phase', 3)
     end
 end
 

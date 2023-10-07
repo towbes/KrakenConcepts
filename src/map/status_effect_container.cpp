@@ -704,19 +704,6 @@ bool CStatusEffectContainer::DelStatusEffect(EFFECT StatusID, uint16 SubID)
     return false;
 }
 
-bool CStatusEffectContainer::DelStatusEffectByItemSource(EFFECT StatusID, uint16 ItemSourceID)
-{
-    for (CStatusEffect* PStatusEffect : m_StatusEffectSet)
-    {
-        if (PStatusEffect->GetStatusID() == StatusID && PStatusEffect->GetItemSourceID() == ItemSourceID && !PStatusEffect->deleted)
-        {
-            RemoveStatusEffect(PStatusEffect);
-            return true;
-        }
-    }
-    return false;
-}
-
 bool CStatusEffectContainer::DelStatusEffectByTier(EFFECT StatusID, uint16 tier)
 {
     for (CStatusEffect* PStatusEffect : m_StatusEffectSet)
@@ -841,9 +828,6 @@ void CStatusEffectContainer::DelStatusEffectsByFlag(uint32 flag, bool silent)
     {
         if (PStatusEffect->HasEffectFlag(flag))
         {
-            // If this is a Nightmare effect flag, it needs to be removed explictly by a cure
-
-            if (!(flag & EFFECTFLAG_DAMAGE && PStatusEffect->GetStatusID() == EFFECT_SLEEP && PStatusEffect->GetSubID() == (uint32)EFFECT_BIO))
             RemoveStatusEffect(PStatusEffect, silent);
         }
     }
@@ -1339,18 +1323,6 @@ CStatusEffect* CStatusEffectContainer::GetStatusEffect(EFFECT StatusID, uint32 S
     return nullptr;
 }
 
-CStatusEffect* CStatusEffectContainer::GetStatusEffectByItemSource(EFFECT StatusID, uint16 ItemSourceID)
-{
-    for (CStatusEffect* PStatusEffect : m_StatusEffectSet)
-    {
-        if (PStatusEffect->GetStatusID() == StatusID && PStatusEffect->GetItemSourceID() == ItemSourceID && !PStatusEffect->deleted)
-        {
-            return PStatusEffect;
-        }
-    }
-    return nullptr;
-}
-
 /************************************************************************
  * Dispels one effect and returns it.
  * Used in mob abilities
@@ -1556,31 +1528,6 @@ void CStatusEffectContainer::SetEffectParams(CStatusEffect* StatusEffect)
     std::string name;
     EFFECT      effect = StatusEffect->GetStatusID();
 
-        // check if status effect is special case from a usable item that grants enchantment
-    bool effectFromItemEnchant = false;
-    // if status effect has item source id
-    if (StatusEffect->GetItemSourceID() > 0)
-    {
-        auto PItem = itemutils::GetItemPointer(StatusEffect->GetItemSourceID());
-        if (PItem != nullptr)
-        {
-            // get the item lua script and check if it has valid functions
-            auto itemName     = "globals/items/" + PItem->getName();
-            auto itemFullName = fmt::format("./scripts/{}.lua", itemName);
-            auto cacheEntry   = luautils::GetCacheEntryFromFilename(itemFullName);
-            auto onEffectGain = cacheEntry["onEffectGain"].get<sol::function>();
-            auto onEffectLose = cacheEntry["onEffectLose"].get<sol::function>();
-
-            effectFromItemEnchant = onEffectGain.valid() && onEffectLose.valid();
-
-            // if it does have valid functions then set the status effect name as the script (similar to actual status effects)
-            if (effectFromItemEnchant)
-            {
-                name = itemName;
-            }
-        }
-    }
-
     // Determine if this is a BRD Song or COR Effect.
     if (subType == 0 ||
         subType > 20000 ||
@@ -1596,16 +1543,7 @@ void CStatusEffectContainer::SetEffectParams(CStatusEffect* StatusEffect)
         name.insert(0, "effects/");
         name.insert(name.size(), effects::EffectsParams[effect].Name);
     }
-
-    // Determine if this is a Nightmare effect -- Sleep with a Bio sub id
-    else if ((effect == EFFECT_SLEEP && (StatusEffect->GetSubID() == (uint32)EFFECT_BIO)))
-    {
-        name.insert(0, "globals/effects/");
-        name.insert(name.size(), effects::EffectsParams[effect].Name);
-    }
-
-    // Food still uses this condition so keep for now!
-    else if (!effectFromItemEnchant)
+    else
     {
         CItem* Ptem = itemutils::GetItemPointer(subType);
         if (Ptem != nullptr && subType > 0)
@@ -1714,7 +1652,7 @@ void CStatusEffectContainer::LoadStatusEffects()
  *                                                                       *
  ************************************************************************/
 
-void CStatusEffectContainer::SaveStatusEffects(bool logout, bool skipRemove)
+void CStatusEffectContainer::SaveStatusEffects(bool logout)
 {
     // Print entity name and bail out if entity isn't a player.
     if (m_POwner->objtype != TYPE_PC)
@@ -1728,8 +1666,7 @@ void CStatusEffectContainer::SaveStatusEffects(bool logout, bool skipRemove)
 
     for (CStatusEffect* PStatusEffect : m_StatusEffectSet)
     {
-        // if ((logout && PStatusEffect->HasEffectFlag(EFFECTFLAG_LOGOUT)) || (!logout && PStatusEffect->HasEffectFlag(EFFECTFLAG_ON_ZONE)))
-        if (!skipRemove && ((logout && PStatusEffect->GetFlag() & EFFECTFLAG_LOGOUT) || (!logout && PStatusEffect->GetFlag() & EFFECTFLAG_ON_ZONE)))
+        if ((logout && PStatusEffect->HasEffectFlag(EFFECTFLAG_LOGOUT)) || (!logout && PStatusEffect->HasEffectFlag(EFFECTFLAG_ON_ZONE)))
         {
             RemoveStatusEffect(PStatusEffect, true);
             continue;
@@ -1789,10 +1726,7 @@ void CStatusEffectContainer::SaveStatusEffects(bool logout, bool skipRemove)
                        std::chrono::duration_cast<std::chrono::seconds>(PStatusEffect->GetStartTime().time_since_epoch()).count());
         }
     }
-    if (!skipRemove)
-    {
-        DeleteStatusEffects();
-    }
+    DeleteStatusEffects();
 }
 
 /************************************************************************
@@ -1903,21 +1837,6 @@ void CStatusEffectContainer::HandleAura(CStatusEffect* PStatusEffect)
             });
             // clang-format on
         }
-        
-             // Apply the aura's buff to the owner of the buff's fellow
-        CBattleEntity* PFellow = (CBattleEntity*)((CCharEntity*)PEntity)->m_PFellow;
-        if (PFellow != nullptr && PEntity->loc.zone->GetID() == PFellow->loc.zone->GetID() &&
-            distanceSquared(m_POwner->loc.p, PFellow->loc.p) < aura_range * aura_range && !PFellow->isDead())
-        {
-            CStatusEffect* PEffect = new CStatusEffect(
-                (EFFECT)PStatusEffect->GetSubID(),    // Effect ID
-                (uint16)PStatusEffect->GetSubID(),    // Effect Icon (Associated with ID)
-                (uint16)PStatusEffect->GetSubPower(), // Power
-                3,                                    // Tick
-                4);                                   // Duration
-            PEffect->SetFlag(EFFECTFLAG_NO_LOSS_MESSAGE);
-            PFellow->StatusEffectContainer->AddStatusEffect(PEffect, true);
-        }
         else if (auraTarget == AURA_TARGET::ENEMIES)
         {
             auto* PMob       = static_cast<CMobEntity*>(PEntity);
@@ -2016,8 +1935,7 @@ void CStatusEffectContainer::TickRegen(time_point tick)
             {
                 DelStatusEffectSilent(EFFECT_HEALING);
                 m_POwner->takeDamage(damage);
-                if (!(m_POwner->StatusEffectContainer->GetStatusEffect(EFFECT_SLEEP) && m_POwner->StatusEffectContainer->GetStatusEffect(EFFECT_SLEEP)->GetSubID() == (uint32)EFFECT_BIO))
-                    WakeUp(); // dots dont wake up from nightmare
+                WakeUp();
             }
         }
 

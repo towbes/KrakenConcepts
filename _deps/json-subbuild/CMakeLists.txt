@@ -21,7 +21,7 @@ set_property(GLOBAL PROPERTY _CMAKE_FindGit_GIT_EXECUTABLE_VERSION
 
 include(ExternalProject)
 ExternalProject_Add(json-populate
-                     "UPDATE_DISCONNECTED" "False" "GIT_REPOSITORY" "https://github.com/nlohmann/json.git" "GIT_TAG" "v3.11.2"
+                     "UPDATE_DISCONNECTED" "False" "GIT_REPOSITORY" "https://github.com/nlohmann/json.git" "GIT_TAG" "254395e5f7731b5595e7c11ac4b929c923582114"
                     SOURCE_DIR          "C:/Users/Chris/Desktop/CactuarLSB/server/_deps/json-src"
                     BINARY_DIR          "C:/Users/Chris/Desktop/CactuarLSB/server/_deps/json-build"
                     CONFIGURE_COMMAND   ""

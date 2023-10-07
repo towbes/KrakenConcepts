@@ -56,9 +56,6 @@
 
 #include <cstring>
 
-int32  g_pixieAmity            = 0;
-time_t g_pixieLastAmityRefresh = 0;
-
 CMobEntity::CMobEntity()
 : m_AllowRespawn(false)
 , m_RespawnTime(300)
@@ -123,8 +120,6 @@ CMobEntity::CMobEntity()
     m_SpellListContainer = nullptr;
     PEnmityContainer     = new CEnmityContainer(this);
     SpellContainer       = new CMobSpellContainer(this);
-
-    m_pixieLastCast = 0;
 
     PAI = std::make_unique<CAIContainer>(this, std::make_unique<CPathFind>(this), std::make_unique<CMobController>(this), std::make_unique<CTargetFind>(this));
 }
@@ -290,16 +285,6 @@ void CMobEntity::TapDeaggroTime()
 bool CMobEntity::CanLink(position_t* pos, int16 superLink)
 {
     TracyZoneScoped;
-
-    if (loc.zone->HasReducedVerticalAggro())
-    {
-        float verticalDistance = abs(loc.p.y - (*pos).y);
-        if (verticalDistance > 3.5f)
-        {
-            return false;
-        }
-    }
-
     // handle super linking
     if (superLink && getMobMod(MOBMOD_SUPERLINK) == superLink)
     {
@@ -371,7 +356,7 @@ uint16 CMobEntity::TPUseChance()
         return 0;
     }
 
-    if (health.tp == 3000 || (GetHPP() <= 50 && health.tp >= 2000) || (GetHPP() <= 25 && health.tp >= 1000))
+    if (health.tp == 3000 || (GetHPP() <= 25 && health.tp >= 1000))
     {
         return 10000;
     }
@@ -547,9 +532,7 @@ void CMobEntity::Spawn()
     m_HiPartySize  = 0;
     m_THLvl        = 0;
     m_ItemStolen   = false;
-    m_StealItemID  = 0;
     m_DropItemTime = 1000;
-    m_pathFindDisengage = 0;
     animationsub   = (uint8)getMobMod(MOBMOD_SPAWN_ANIMATIONSUB);
     SetCallForHelpFlag(false);
 
@@ -590,14 +573,7 @@ void CMobEntity::Spawn()
         }
     }
 
-    if (getMobMod(MOBMOD_IDLE_DESPAWN))
-    {
-        this->SetDespawnTime(std::chrono::seconds(getMobMod(MOBMOD_IDLE_DESPAWN)));
-    }
-    else
-    {
-        m_DespawnTimer = time_point::min();
-    }
+    m_DespawnTimer = time_point::min();
     luautils::OnMobSpawn(this);
 }
 
@@ -661,7 +637,7 @@ void CMobEntity::OnMobSkillFinished(CMobSkillState& state, action_t& action)
     }
     action.actionid = PSkill->getID();
 
-    if (PAI->TargetFind->isWithinRange(&PTarget->loc.p, distance) && !this->StatusEffectContainer->HasStatusEffect(EFFECT_HYSTERIA))
+    if (PAI->TargetFind->isWithinRange(&PTarget->loc.p, distance))
     {
         if (PSkill->isAoE())
         {
@@ -1297,11 +1273,6 @@ void CMobEntity::DropItems(CCharEntity* PChar)
     }
 }
 
-bool CMobEntity::CanMove()
-{
-    return !StatusEffectContainer->IsAsleep() && !StatusEffectContainer->HasStatusEffect({EFFECT_BIND, EFFECT_PETRIFICATION, EFFECT_TERROR, EFFECT_STUN});
-}
-
 bool CMobEntity::CanAttack(CBattleEntity* PTarget, std::unique_ptr<CBasicPacket>& errMsg)
 {
     TracyZoneScoped;
@@ -1474,132 +1445,7 @@ bool CMobEntity::OnAttack(CAttackState& state, action_t& action)
     }
 }
 
-void CMobEntity::PixieTryHealPlayer(CCharEntity * PChar)
-    {
-        time_t  now   = time(NULL);
-        SpellID spell = SpellID::NULLSPELL;
-        if (!PAI)
-        {
-            return;
-        }
-        CMobController* controller = static_cast<CMobController*>(PAI->GetController());
-        if (!controller)
-        {
-            return;
-        }
-        if (getMobMod(MOBMOD_PIXIE) <= 0)
-        {
-            return;
-        }
-        if (m_pixieLastCast + 30 >= now)
-        {
-            // Must rest between casts (TODO: Check real value)
-            return;
-        }
-        if (PChar->m_pixieHate >= 20)
-        {
-            // TODO: Find real values
-            // You killed my relatives so I don't care if you die
-            return;
-        }
-        if (!controller->CanDetectTarget(PChar, false, true))
-        {
-            // Must be able to detect the player to cast
-            return;
-        }
-        if (PChar->isDead())
-        {
-            spell = SpellID::Raise_III;
-        }
-        else if (PChar->GetHPP() <= 90)
-        {
-            // TODO: Check what's the cure threshold on retail
-            int32 max_hp     = PChar->GetMaxHP();
-            int32 current_hp = PChar->health.hp;
-            int32 to_cure    = max_hp - current_hp;
-            if (to_cure < 0)
-            {
-                to_cure = 0;
-            }
-            if (to_cure > 0)
-            {
-                // Set according to the soft cap of each cure
-                if (to_cure <= 30)
-                {
-                    spell = SpellID::Cure;
-                }
-                else if (to_cure <= 90)
-                {
-                    spell = SpellID::Cure_II;
-                }
-                else if (to_cure <= 190)
-                {
-                    spell = SpellID::Cure_III;
-                }
-                else if (to_cure <= 380)
-                {
-                    spell = SpellID::Cure_IV;
-                }
-                else
-                {
-                    spell = SpellID::Cure_V;
-                }
-            }
-        }
-        if (spell != SpellID::NULLSPELL)
-        {
-            if (controller->Cast(PChar->targid, spell))
-            {
-                m_pixieLastCast = now;
-            }
-        }
-    }
-
-    bool CMobEntity::PixieShouldSpawn()
-    {
-        int32 amity = 0;
-        // Prevent spamming the DB with calls
-        time_t now = time(NULL);
-        if (g_pixieLastAmityRefresh + 60 < now)
-        {
-            int32 ret = sql->Query("SELECT value FROM server_variables WHERE name = 'PixieAmity';");
-            if (ret != SQL_ERROR && sql->NumRows() != 0 && (sql->NextRow() == SQL_SUCCESS))
-            {
-                amity = sql->GetUIntData(0);
-            }
-            g_pixieAmity            = amity;
-            g_pixieLastAmityRefresh = now;
-        }
-        else
-        {
-            amity = g_pixieAmity;
-        }
-        if (amity < -255)
-        {
-            amity = -255;
-        }
-        if (amity > 255)
-        {
-            amity = 255;
-        }
-        if (loc.zone->GetRegionID() < REGION_TYPE::RONFAURE_FRONT || loc.zone->GetRegionID() > REGION_TYPE::VALDEAUNIA_FRONT)
-        {
-            // Pixies in the present require higher amity
-            amity -= 300;
-        }
-        if (amity >= -50)
-        {
-            return true;
-        }
-        if (amity <= -150)
-        {
-            return false;
-        }
-        int32 chance = amity + 150;
-        return (xirand::GetRandomNumber(100) < chance);
-    }
-
-    bool CMobEntity::isWideScannable()
-    {
-        return CBaseEntity::isWideScannable() && !getMobMod(MOBMOD_NO_WIDESCAN);
-    }
+bool CMobEntity::isWideScannable()
+{
+    return CBaseEntity::isWideScannable() && !getMobMod(MOBMOD_NO_WIDESCAN);
+}

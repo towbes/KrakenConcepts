@@ -2,11 +2,11 @@
 -- Khimaira Howl
 -- Description: Animation Only, used when Khim Roams or Tyger's Special Abilities
 ---------------------------------------------
-require("scripts/globals/mobskills")
-require("scripts/globals/settings")
-require("scripts/globals/status")
-require("scripts/globals/zone")
-require("scripts/globals/msg")
+
+
+
+
+
 -----------------------------------
 local mobskillObject = {}
 

@@ -2,7 +2,7 @@
 -- Area: Heaven's Tower
 --  NPC: Jatata
 -----------------------------------
-require("scripts/globals/zone")
+
 -----------------------------------
 local entity = {}
 

@@ -4,7 +4,7 @@
 --  ENM: Shell We Dance?
 -----------------------------------
 local ID = zones[xi.zone.BONEYARD_GULLY]
-mixins = {require("scripts/mixins/families/uragnite")}
+mixins = {require('scripts/mixins/families/uragnite')}
 -----------------------------------
 local entity = {}
 

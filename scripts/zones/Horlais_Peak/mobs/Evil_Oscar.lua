@@ -55,7 +55,7 @@ evilOscarFillsHisLungs = function(mob)
             mob:setLocalVar('EBB_BREATH_COUNTER', ebbBreathCounter + 1)
         else -- On the third breath, fire straight away!
             sendMessage(players)
-            mob:setLocalVar("EBB_BREATH_COUNTER", 0)
+            mob:setLocalVar('EBB_BREATH_COUNTER', 0)
             mob:useMobAbility(1332)
         end
 

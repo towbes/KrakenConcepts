@@ -26,7 +26,7 @@ entity.onTrigger = function(player, npc)
         player:startEvent(86) -- get the wind pendulum, lets go to Cloister of Gales
     elseif carbuncleDebacle == QUEST_ACCEPTED and carbuncleDebacleProgress == 6 then
         if not player:hasItem(xi.item.WIND_PENDULUM) then
-            player:startEvent(87, 0, xi.item.WIND_PENDULUM, 0, 0, 0, 0, 0, 0) -- "lost the pendulum?" This one too~???
+            player:startEvent(87, 0, xi.item.WIND_PENDULUM, 0, 0, 0, 0, 0, 0) -- 'lost the pendulum?' This one too~???
         else
             player:startEvent(88) -- reminder to go to Cloister of Gales
         end

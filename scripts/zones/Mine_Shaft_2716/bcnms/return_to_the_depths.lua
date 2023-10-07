@@ -2,9 +2,9 @@
 -- Quest BCNM: Return to the Depths
 -- Zone: Mine Shaft #2716
 -----------------------------------
-local ID = require("scripts/zones/Mine_Shaft_2716/IDs")
-require("scripts/globals/battlefield")
-require("scripts/globals/quests")
+local ID = zones[xi.zone.MINE_SHAFT_2716]
+require('scripts/globals/battlefield')
+require('scripts/globals/quests')
 -----------------------------------
 local battlefieldObject = {}
 
@@ -21,7 +21,7 @@ end
 battlefieldObject.onBattlefieldLeave = function(player, battlefield, leavecode)
     if leavecode == xi.battlefield.leaveCode.WON then
         local _, clearTime, partySize = battlefield:getRecord()
-        player:startEvent(32001, battlefield:getArea(), clearTime, partySize, battlefield:getTimeInside(), 1, battlefield:getLocalVar("[cs]bit"), 0)
+        player:startEvent(32001, battlefield:getArea(), clearTime, partySize, battlefield:getTimeInside(), 1, battlefield:getLocalVar('[cs]bit'), 0)
     elseif leavecode == xi.battlefield.leaveCode.LOST then
         player:startEvent(32002)
     end
@@ -32,8 +32,8 @@ end
 
 battlefieldObject.onEventFinish = function(player, csid, option)
     if csid == 32001 then
-        if player:getCharVar("Quest[1][78]prog") == 9 then
-            player:setCharVar("Quest[1][78]prog", 10)
+        if player:getCharVar('Quest[1][78]prog') == 9 then
+            player:setCharVar('Quest[1][78]prog', 10)
         end
 
         player:addGil(10000)

@@ -8,8 +8,8 @@ mixins = { require('scripts/mixins/job_special') }
 local entity = {}
 
 entity.onMobFight = function(mob, target)
-    if mob:getHPP() < 80 and mob:getLocalVar("control") < 0 then
-        mob:setLocalVar("control", 1)
+    if mob:getHPP() < 80 and mob:getLocalVar('control') < 0 then
+        mob:setLocalVar('control', 1)
         mob:useMobAbility(710)
     end
 end

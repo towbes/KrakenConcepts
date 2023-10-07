@@ -1,7 +1,7 @@
 -----------------------------------
 --  Foxfire
 --
---  Description: Damage varies with TP. Additional effect: "Stun."
+--  Description: Damage varies with TP. Additional effect: 'Stun.'
 --  Type: Physical (Blunt)
 -- RDM, THF, PLD, BST, BRD, RNG, NIN, and COR fomors).
 -----------------------------------

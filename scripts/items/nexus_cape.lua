@@ -1,7 +1,7 @@
 -----------------------------------
 -- ID: 11538
 -- Item: Nexus Cape
--- Enchantment: "Teleport" (Party Leader)
+-- Enchantment: 'Teleport' (Party Leader)
 -----------------------------------
 local itemObject = {}
 
@@ -15,7 +15,7 @@ itemObject.onItemCheck = function(target)
         if target:getID() ~= leader:getID() then
             local leaderZone = leader:getZoneID()
 
-            -- Locations with "**" in comment:
+            -- Locations with '**' in comment:
             -- ** If the party leader is located in a battlefield or other special location,
             -- players will be forced to travel to a specific location.
             --

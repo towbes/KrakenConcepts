@@ -11,7 +11,7 @@ local quest = HiddenQuest:new('TrustPrishe')
 local trustMemory = function(player)
     local memories = 0
 
-    -- Now that I think about it, I remember a time when some old jeweler over in Jeuno was going on and on about what "love" really is.
+    -- Now that I think about it, I remember a time when some old jeweler over in Jeuno was going on and on about what 'love' really is.
     -- You know what I learned from him? That love ain't something you know about until it hits you. So that means I don't know what love is?
     if player:hasCompletedQuest(xi.quest.log_id.JEUNO, xi.quest.id.jeuno.IN_THE_MOOD_FOR_LOVE) then
         memories = memories + 2
@@ -50,9 +50,9 @@ quest.sections =
         check = function(player, questVars, vars)
             return  xi.trust.hasPermit(player) and
                 not player:hasSpell(xi.magic.spell.PRISHE) and
-                -- On Dawn, but past "the boss"
+                -- On Dawn, but past 'the boss'
                 (player:getCurrentMission(xi.mission.log_id.COP) > xi.mission.id.cop.DAWN and
-                player:getCharVar("Mission[6][840]Status") == 3)
+                player:getCharVar('Mission[6][840]Status') == 3)
                 -- TODO: Additional conditions
         end,
 

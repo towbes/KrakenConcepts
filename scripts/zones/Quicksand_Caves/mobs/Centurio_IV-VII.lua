@@ -1,7 +1,7 @@
 -----------------------------------
 -- Area: Quicksand Caves
 --   NM: Centurio IV-VII
--- Pops in Bastok mission 8-1 "The Chains that Bind Us"
+-- Pops in Bastok mission 8-1 'The Chains that Bind Us'
 -----------------------------------
 mixins = { require('scripts/mixins/job_special') }
 -----------------------------------

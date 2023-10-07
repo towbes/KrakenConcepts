@@ -1,7 +1,7 @@
 -----------------------------------
 -- Area: Gustav Tunnel
 --   NM: Microplasm
--- Note: Part of mission "The Salt of the Earth"
+-- Note: Part of mission 'The Salt of the Earth'
 -----------------------------------
 local ID = zones[xi.zone.GUSTAV_TUNNEL]
 -----------------------------------

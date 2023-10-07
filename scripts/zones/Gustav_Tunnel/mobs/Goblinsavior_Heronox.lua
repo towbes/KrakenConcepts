@@ -2,7 +2,7 @@
 -- Area: Gustav Tunnel
 --   NM: Goblinsavior Heronox
 -----------------------------------
-mixins = {require("scripts/mixins/job_special")}
+mixins = {require('scripts/mixins/job_special')}
 -----------------------------------
 local entity = {}
 

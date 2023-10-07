@@ -2,7 +2,7 @@
 -- Area: Cloister of Tremors
 --  NPC: Earth Protocrystal
 -----------------------------------
-require("scripts/globals/bcnm")
+require('scripts/globals/bcnm')
 -----------------------------------
 local entity = {}
 

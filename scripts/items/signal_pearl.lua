@@ -3,8 +3,8 @@
 -- Item: Signal Pearl
 -- Calls forth an adventuring fellow
 -----------------------------------------
-require("scripts/globals/status")
-require("scripts/globals/msg")
+
+
 -----------------------------------------
 local itemObject = {}
 
@@ -19,7 +19,7 @@ itemObject.onItemCheck = function(target)
         return xi.msg.basic.ITEM_UNABLE_TO_USE
     end
     
-    local wotg_unlock = target:getFellowValue("wotg_unlock")
+    local wotg_unlock = target:getFellowValue('wotg_unlock')
     
     if (target:getContinentID()==3 and wotg_unlock == 0) then
         return xi.msg.basic.ITEM_UNABLE_TO_USE
@@ -28,8 +28,8 @@ itemObject.onItemCheck = function(target)
 end
 
 itemObject.onItemUse = function(target)
-    target:spawnFellow(target:getFellowValue("fellowid"))
-    target:setFellowValue("bond", target:getFellowValue("bond")+1)
+    target:spawnFellow(target:getFellowValue('fellowid'))
+    target:setFellowValue('bond', target:getFellowValue('bond')+1)
 end
 
 return itemObject

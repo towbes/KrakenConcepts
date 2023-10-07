@@ -2,8 +2,8 @@
 -- Area: Riverne Site #A01
 --  NPC: ??? (Gives Shield Bug)
 -----------------------------------
-local ID = require("scripts/zones/Riverne-Site_A01/IDs")
-require("scripts/globals/npc_util")
+local ID = require('scripts/zones/Riverne-Site_A01/IDs')
+require('scripts/globals/npc_util')
 -----------------------------------
 local entity = {}
 
@@ -22,7 +22,7 @@ entity.onTrade = function(player, npc, trade)
 end
 
 entity.onTrigger = function(player, npc)
-    npcUtil.giveItem(player, xi.items.SHIELD_BUG)
+    npcUtil.giveItem(player, xi.item.SHIELD_BUG)
 end
 
 entity.onEventUpdate = function(player, csid, option)
@@ -32,7 +32,7 @@ entity.onEventFinish = function(player, csid, option)
 end
 
 local function moveQM(npc)
-    local currentPoint = npc:getLocalVar("currentPoint")
+    local currentPoint = npc:getLocalVar('currentPoint')
     local nextPoint = math.random(1, 17)
 
     if nextPoint == currentPoint then
@@ -43,15 +43,15 @@ local function moveQM(npc)
     end
 
     local nextPointLoc = points[nextPoint]
-    npc:setLocalVar("currentPoint", nextPoint)
+    npc:setLocalVar('currentPoint', nextPoint)
     npc:setStatus(xi.status.NORMAL)
     npcUtil.queueMove(npc, nextPointLoc, 10000)
 end
 
 entity.onTimeTrigger = function(npc, triggerID)
-    if os.time() > npc:getLocalVar("moveTime") then
+    if os.time() > npc:getLocalVar('moveTime') then
         moveQM(npc)
-        npc:setLocalVar("moveTime", os.time()+7200)
+        npc:setLocalVar('moveTime', os.time()+7200)
     end
 end
 

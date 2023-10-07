@@ -3,15 +3,15 @@
 --  ZNM: Lividroot Amooshah
 
 -----------------------------------
-require("scripts/globals/hunts")
+require('scripts/globals/hunts')
 -----------------------------------
 local entity = {}
 
 local function phaseChange(mob)
     -- shouldn't happen, but let's make sure we do not exceed phase 4
-    local phase = mob:getLocalVar("phase") + 1
-    mob:setLocalVar("phase", phase)
-    mob:setLocalVar("phaseChange", 0)
+    local phase = mob:getLocalVar('phase') + 1
+    mob:setLocalVar('phase', phase)
+    mob:setLocalVar('phaseChange', 0)
 
     -- disable and disappear for a second
     mob:setStatus(xi.status.INVISIBLE)
@@ -56,16 +56,16 @@ entity.onMobInitialize = function(mob)
 end
 
 entity.onMobSpawn = function(mob)
-    mob:setLocalVar("[rage]timer", 4500)
-    mob:setLocalVar("phase", 1)
+    mob:setLocalVar('[rage]timer', 4500)
+    mob:setLocalVar('phase', 1)
     mob:setUnkillable(true)
 end
 
 entity.onMobFight = function(mob, target)
-    if mob:getHP() <= 100 and mob:getLocalVar("phase") < 4 and mob:getLocalVar("phaseChange") == 0 then
+    if mob:getHP() <= 100 and mob:getLocalVar('phase') < 4 and mob:getLocalVar('phaseChange') == 0 then
         -- trigger the phase change
-        mob:setLocalVar("phaseChange", 1)
-        if mob:getLocalVar("phase") < 4 then
+        mob:setLocalVar('phaseChange', 1)
+        if mob:getLocalVar('phase') < 4 then
             mob:timer(4000, function(mobArg)
                 phaseChange(mobArg)
             end)

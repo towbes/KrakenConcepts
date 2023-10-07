@@ -1,6 +1,7 @@
 -----------------------------------
 -- Zone: Palborough Mines (143)
 -----------------------------------
+local ID = zones[xi.zone.PALBOROUGH_MINES]
 local zoneObject = {}
 
 zoneObject.onInitialize = function(zone)

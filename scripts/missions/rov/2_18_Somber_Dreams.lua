@@ -106,7 +106,7 @@ mission.sections =
                     if option == 1 then
                         local wotgProgress = player:hasCompletedMission(xi.mission.log_id.WOTG, xi.mission.id.wotg.MAIDEN_OF_THE_DUSK) and 3 or 0
 
-                        -- NOTE: There are two impacted lines that depend on the below update parameter.  First is "Come off it!" where if parameter
+                        -- NOTE: There are two impacted lines that depend on the below update parameter.  First is 'Come off it!' where if parameter
                         -- is 0, it will not display Cait Sith's name, and if non-zero it will.  The last change is if 3, Lilisette disappears back
                         -- to her new realm (post-Maiden of the Dusk), as opposed to running off.
 

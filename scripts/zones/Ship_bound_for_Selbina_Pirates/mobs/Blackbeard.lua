@@ -2,7 +2,7 @@
 -- Area: Ship bound for Mhaura (Pirates)
 --  Mob: Blackbeard
 -----------------------------------
-local ID = require("scripts/zones/Ship_bound_for_Mhaura_Pirates/IDs")
+local ID = zones[xi.zone.SHIP_BOUND_FOR_SELBINA_PIRATES]
 -----------------------------------
 
 local entity = {}
@@ -18,8 +18,8 @@ entity.onMobDeath = function(mob, player)
 end
 
 entity.onMobDespawn = function(mob, player)
-    mob:setLocalVar("respawnTime", os.time() + 60)
-    mob:setLocalVar("killed", 1)
+    mob:setLocalVar('respawnTime', os.time() + 60)
+    mob:setLocalVar('killed', 1)
 end
 
 return entity

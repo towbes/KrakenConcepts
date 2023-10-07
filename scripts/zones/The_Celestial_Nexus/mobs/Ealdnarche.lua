@@ -57,7 +57,7 @@ entity.onEventFinish = function(player, csid, option, npc)
         DespawnMob(npc:getID())
         local mob = SpawnMob(npc:getID() + 2)
         mob:updateEnmity(player)
-        --the "30 seconds of rest" you get before he attacks you, and making sure he teleports first in range
+        --the '30 seconds of rest' you get before he attacks you, and making sure he teleports first in range
         mob:addStatusEffectEx(xi.effect.BIND, 0, 1, 0, 30)
         mob:addStatusEffectEx(xi.effect.SILENCE, 0, 1, 0, 40)
     end

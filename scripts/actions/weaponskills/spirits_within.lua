@@ -5,7 +5,7 @@
 -- TrolandAdded by Troland
 -- Skill Level: 175
 -- Delivers an unavoidable attack. Damage varies with HP and TP.
--- Not aligned with any "elemental gorgets" or "elemental belts" due to it's absence of Skillchain properties.
+-- Not aligned with any 'elemental gorgets' or 'elemental belts' due to it's absence of Skillchain properties.
 -- Element: None
 -- Modifiers: HP:
 -- 100%TP    200%TP    300%TP

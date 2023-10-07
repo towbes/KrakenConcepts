@@ -1,7 +1,7 @@
 -----------------------------------
 -- Area: West Ronfaure
 --  NPC: Esca
--- Involved in Quest "The Pickpocket"
+-- Involved in Quest 'The Pickpocket'
 -- !pos -624.231 -51.499 278.369 100
 -----------------------------------
 local entity = {}

@@ -8,10 +8,10 @@
 require('scripts/globals/interaction/mission')
 require('scripts/globals/missions')
 require('scripts/globals/npc_util')
-require("scripts/globals/teleports")
-require('scripts/globals/titles')
+require('scripts/globals/teleports')
+
 require('scripts/globals/utils')
-require('scripts/globals/zone')
+
 -----------------------------------
 
 local mission = Mission:new(xi.mission.log_id.COP, xi.mission.id.cop.WHEN_ANGELS_FALL)
@@ -190,7 +190,7 @@ mission.sections =
                 [201] = function(player, csid, option)
                     mission:setVar(player, 'Status', 1)
                     player:addKeyItem(xi.ki.MYSTERIOUS_AMULET)
-                    player:setCharVar("Ru-Hmet-TP", 0)
+                    player:setCharVar('Ru-Hmet-TP', 0)
                     return mission:messageSpecial(zones[player:getZoneID()].text.KEYITEM_OBTAINED, xi.ki.MYSTERIOUS_AMULET)
                 end,
 

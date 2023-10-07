@@ -22,7 +22,7 @@ commandObj.onTrigger = function(player, target, selectedNum, eventNum)
 
     local targ = GetPlayerByName(target)
     if targ == nil then
-        player:PrintToPlayer(string.format('Player named "%s" not found!', target))
+        player:PrintToPlayer(string.format('Player named '%s' not found!', target))
         return
     end
 

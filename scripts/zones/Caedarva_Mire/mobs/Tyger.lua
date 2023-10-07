@@ -17,7 +17,7 @@ entity.onMobSpawn = function(mob)
     mob:setMod(xi.mod.ATTP, 30)
     mob:setMod(xi.mod.MAIN_DMG_RATING, 50)
     mob:setMobMod(xi.mobMod.IDLE_DESPAWN, 300)
-    mob:setLocalVar("[rage]timer", 3600) -- 60 minutes
+    mob:setLocalVar('[rage]timer', 3600) -- 60 minutes
     mob:setBehaviour(bit.bor(mob:getBehaviour(), xi.behavior.NO_TURN))
 end
 

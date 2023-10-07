@@ -9,7 +9,7 @@ local mobskillObject = {}
 
 mobskillObject.onMobSkillCheck = function(target, mob, skill)
     if
-        mob:getLocalVar("debuff_Talon") == 1
+        mob:getLocalVar('debuff_Talon') == 1
     then
         return 1
     else

@@ -4,13 +4,13 @@
 -- Log ID: 0, Quest ID: 77
 -- Legata : !pos 82 0 116 230
 -----------------------------------
-require('scripts/globals/items')
+
 require('scripts/globals/npc_util')
 require('scripts/globals/quests')
-require('scripts/globals/zone')
+
 require('scripts/globals/interaction/quest')
 -----------------------------------
-local ID = require("scripts/zones/Southern_San_dOria/IDs")
+local ID = zones[xi.zone.SOUTHERN_SAN_DORIA]
 -----------------------------------
 
 local quest = Quest:new(xi.quest.log_id.SANDORIA, xi.quest.id.sandoria.STARTING_A_FLAME)
@@ -56,7 +56,7 @@ quest.sections =
             ['Legata'] =
             {
                 onTrade = function(player, npc, trade)
-                    if npcUtil.tradeHasExactly(trade, { { xi.items.FLINT_STONE, 4 } }) then
+                    if npcUtil.tradeHasExactly(trade, { { xi.item.FLINT_STONE, 4 } }) then
                         return quest:progressEvent(36)
                     end
                 end,
@@ -74,7 +74,7 @@ quest.sections =
                         quest:complete(player)
                     else
                         player:addFame(xi.quest.fame_area.SANDORIA, 5)
-                        npcUtil.giveCurrency(player, "gil", xi.settings.main.GIL_RATE * 100)
+                        npcUtil.giveCurrency(player, 'gil', xi.settings.main.GIL_RATE * 100)
                     end
                 end,
             },

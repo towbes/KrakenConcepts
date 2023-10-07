@@ -78,8 +78,8 @@ g_mixins.families.ghrah = function(ghrahMob)
         -- end
     end)
 
-    ghrahMob:addListener("ROAM_TICK", "GHRAH_TICK", function(mob)
-        local roamTime = mob:getLocalVar("roamTime")
+    ghrahMob:addListener('ROAM_TICK', 'GHRAH_TICK', function(mob)
+        local roamTime = mob:getLocalVar('roamTime')
         if
             mob:getAnimationSub() == 0 and
             os.time() - roamTime > 60

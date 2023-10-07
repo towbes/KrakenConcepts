@@ -3,12 +3,12 @@
 --  MOB: Grand Marid
 -- Note: 30 minute lottery
 -----------------------------------
-local ID = require("scripts/zones/Wajaom_Woodlands/IDs")
-require("scripts/globals/mobs")
+local ID = zones[xi.zone.WAJAOM_WOODLANDS]
+require('scripts/globals/mobs')
 mixins = 
 { 
-require("scripts/mixins/behavior_spawn_chigoe"),
-require("scripts/mixins/families/marid"),
+require('scripts/mixins/behavior_spawn_chigoe'),
+require('scripts/mixins/families/marid'),
 }
 -----------------------------------
 local entity = {}

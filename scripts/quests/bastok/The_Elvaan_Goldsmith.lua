@@ -62,7 +62,7 @@ quest.sections =
                         player:needToZone(true)
                     else
                         player:addFame(xi.quest.fame_area.BASTOK, 5)
-                        npcUtil.giveCurrency(player, "gil", xi.settings.main.GIL_RATE * 180)
+                        npcUtil.giveCurrency(player, 'gil', xi.settings.main.GIL_RATE * 180)
                         player:needToZone(true)
                     end
                 end,

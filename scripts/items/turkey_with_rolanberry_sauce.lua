@@ -6,8 +6,8 @@
 -- STR +10
 -- Attack +20% (Max. 120)
 -- Ranged Attack +20% (Max. 120)
--- "Counter" +10
--- "Resist Amnesia" +10
+-- 'Counter' +10
+-- 'Resist Amnesia' +10
 -- https://www.bg-wiki.com/ffxi/Rol._Turkey
 -----------------------------------
 local itemObject = {}

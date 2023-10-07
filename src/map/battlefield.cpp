@@ -275,24 +275,6 @@ void CBattlefield::ApplyLevelRestrictions(CCharEntity* PChar) const
         }
 
         PChar->StatusEffectContainer->DelStatusEffectsByFlag(EFFECTFLAG_DISPELABLE, true);
-        PChar->StatusEffectContainer->DelStatusEffectsByFlag(EFFECTFLAG_ERASABLE, true);
-        PChar->StatusEffectContainer->DelStatusEffectsByFlag(EFFECTFLAG_ATTACK, true);
-        PChar->StatusEffectContainer->DelStatusEffectsByFlag(EFFECTFLAG_ON_ZONE, true);
-        PChar->StatusEffectContainer->DelStatusEffectsByFlag(EFFECTFLAG_SONG, true);
-        PChar->StatusEffectContainer->DelStatusEffectsByFlag(EFFECTFLAG_ROLL, true);
-        PChar->StatusEffectContainer->DelStatusEffectsByFlag(EFFECTFLAG_SYNTH_SUPPORT, true);
-        PChar->StatusEffectContainer->DelStatusEffectsByFlag(EFFECTFLAG_BLOODPACT, true);
-
-        if (PChar->StatusEffectContainer->HasStatusEffect(EFFECT_LEVEL_SYNC))
-        {
-            PChar->StatusEffectContainer->DelStatusEffect(EFFECT_LEVEL_SYNC);
-            PChar->m_LevelRestriction = 0;
-        }
-
-        if (PChar->StatusEffectContainer->HasStatusEffect(EFFECT_LEVEL_RESTRICTION))
-        {
-            PChar->StatusEffectContainer->DelStatusEffect(EFFECT_LEVEL_RESTRICTION);
-        }
         PChar->StatusEffectContainer->AddStatusEffect(new CStatusEffect(EFFECT_LEVEL_RESTRICTION, EFFECT_LEVEL_RESTRICTION, cap, 0, 0));
     }
     else
@@ -646,10 +628,7 @@ bool CBattlefield::RemoveEntity(CBaseEntity* PEntity, uint8 leavecode)
                 {
                     if (std::find(m_AllyList.begin(), m_AllyList.end(), PMobEntity) != m_AllyList.end())
                     {
-                        // if (PMobEntity->isAlive() && PMobEntity->PAI->IsSpawned())
-                        // We should not put an isAlive check here because some ally can be dead at cleanup
-                        // but not despawned (for example Prise in Dawn fight)
-                        if (PMobEntity->PAI->IsSpawned())
+                        if (PMobEntity->isAlive() && PMobEntity->PAI->IsSpawned())
                         {
                             PEntity->status = STATUS_TYPE::DISAPPEAR;
                             PEntity->loc.zone->UpdateEntityPacket(PEntity, ENTITY_DESPAWN, UPDATE_NONE);

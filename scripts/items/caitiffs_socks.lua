@@ -11,7 +11,7 @@ itemObject.onItemDrop = function(player, item)
 end
 
 itemObject.onItemEquip = function(player, item)
-    player:addListener("ATTACKED", "CAITIFF_SOCKS_FLEE", function(playerArg, mob)
+    player:addListener('ATTACKED', 'CAITIFF_SOCKS_FLEE', function(playerArg, mob)
         if
             playerArg:getHPP() < 25 and
             playerArg:getTP() < 1000 and
@@ -25,7 +25,7 @@ itemObject.onItemEquip = function(player, item)
 end
 
 itemObject.onItemUnequip = function(player, item)
-    player:removeListener("CAITIFF_SOCKS_FLEE")
+    player:removeListener('CAITIFF_SOCKS_FLEE')
 end
 
 return itemObject

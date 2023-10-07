@@ -4,7 +4,7 @@
 -- Type: Standard NPC
 -- !pos -148.3136 -2.9521 46.4020 128
 -----------------------------------
-require("scripts/globals/barge")
+require('scripts/globals/barge')
 -----------------------------------
 local entity = {}
 

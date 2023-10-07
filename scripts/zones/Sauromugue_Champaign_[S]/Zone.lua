@@ -33,7 +33,7 @@ end
 
 zoneObject.onEventFinish = function(player, csid, option, npc)
     if csid == 3 then
-        player:setCharVar("DownwardHelix", 3)
+        player:setCharVar('DownwardHelix', 3)
     end
 end
 

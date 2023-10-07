@@ -9,7 +9,7 @@ local ID = zones[xi.zone.LOWER_JEUNO]
 quest = quest or {}
 quest.unlockingMyth = quest.unlockingMyth or {}
 
--- There are several "Unlocking a Myth" quests. 1 per job, except GEO and RUN.
+-- There are several 'Unlocking a Myth' quests. 1 per job, except GEO and RUN.
 -- Possible TODO: This was not made with GEO and RUN in mind. Clamp may be needed.
 function quest.unlockingMyth.getQuestId(mainJobId)
     return (xi.quest.id.jeuno.UNLOCKING_A_MYTH_WARRIOR - 1 + mainJobId)

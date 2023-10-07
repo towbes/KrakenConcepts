@@ -24,12 +24,12 @@ end
 
 entity.onTrade = function(player, npc, trade)
     if npcUtil.tradeHas(trade, 1659) then
-        if npc:getLocalVar("canTradeSecondKey") == 0 then
-            npc:setLocalVar("canTradeSecondKey", 1)
+        if npc:getLocalVar('canTradeSecondKey') == 0 then
+            npc:setLocalVar('canTradeSecondKey', 1)
             -- Opens lock visually to indicate to other players when to trade next key
             GetNPCByID(ID.npc.SMALL_KEYHOLE - 2):openDoor(18)
-            npc:setLocalVar("speed", player:getSpeed())
-            npc:setLocalVar("playerID", player:getID())
+            npc:setLocalVar('speed', player:getSpeed())
+            npc:setLocalVar('playerID', player:getID())
             -- Lock player from moving
             player:setSpeed(0)
             --player:startEvent(100)
@@ -40,9 +40,9 @@ entity.onTrade = function(player, npc, trade)
                     playerArg1:messageSpecial(ID.text.HAND_GROWN_NUMB)
 
                     playerArg1:timer(5000, function(playerArg2)
-                        playerArg2:messageSpecial(ID.text.CORAL_KEY_BREAKS, 0, xi.items.CORAL_CREST_KEY)
-                        npc:setLocalVar("canTradeSecondKey", 0)
-                        player:setSpeed(npc:getLocalVar("speed"))
+                        playerArg2:messageSpecial(ID.text.CORAL_KEY_BREAKS, 0, xi.item.CORAL_CREST_KEY)
+                        npc:setLocalVar('canTradeSecondKey', 0)
+                        player:setSpeed(npc:getLocalVar('speed'))
                         playerArg2:confirmTrade()
                     end)
                 end)
@@ -58,8 +58,8 @@ end
 
 entity.onEventFinish = function(player, csid, option, npc)
     if csid == 100 then
-        GetNPCByID(ID.npc.SMALL_KEYHOLE):setLocalVar("canTradeSecondKey", 0)
-        player:messageSpecial(ID.text.CORAL_KEY_BREAKS, 0, xi.items.CORAL_CREST_KEY)
+        GetNPCByID(ID.npc.SMALL_KEYHOLE):setLocalVar('canTradeSecondKey', 0)
+        player:messageSpecial(ID.text.CORAL_KEY_BREAKS, 0, xi.item.CORAL_CREST_KEY)
         player:confirmTrade()
     end
 end

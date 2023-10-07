@@ -2,8 +2,8 @@
 -- Area: East Ronfaure [S]
 --  Mob: Djinn
 -----------------------------------
-require("scripts/globals/mobs")
-mixins = { require("scripts/mixins/families/djinn") }
+require('scripts/globals/mobs')
+mixins = { require('scripts/mixins/families/djinn') }
 -----------------------------------
 local entity = {}
 

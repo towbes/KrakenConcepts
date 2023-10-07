@@ -3,9 +3,9 @@
 --  Mob: Onryo
 -- Involved in Quest: Yomi Okuri
 -----------------------------------
-require("scripts/globals/mobs")
-require("scripts/globals/quests")
-require("scripts/globals/status")
+require('scripts/globals/mobs')
+require('scripts/globals/quests')
+
 -----------------------------------
 local entity = {}
 

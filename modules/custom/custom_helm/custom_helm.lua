@@ -3,8 +3,8 @@
 -----------------------------------
 require("modules/module_utils")
 require("scripts/globals/helm")
-require("scripts/globals/zone")
-require("scripts/globals/items")
+
+
 local customUtil = require("modules/custom/lua/custom_util")
 -----------------------------------
 local m = Module:new("custom_helm")
@@ -76,26 +76,26 @@ local settings =
 
 local rocks =
 {
-    [xi.magic.element.FIRE   ] = { xi.items.RED_ROCK,         "a red rock",         },
-    [xi.magic.element.ICE    ] = { xi.items.TRANSLUCENT_ROCK, "a translucent rock", },
-    [xi.magic.element.WIND   ] = { xi.items.GREEN_ROCK,       "a green rock",       },
-    [xi.magic.element.EARTH  ] = { xi.items.YELLOW_ROCK,      "a yellow rock",      },
-    [xi.magic.element.THUNDER] = { xi.items.PURPLE_ROCK,      "a purple rock",      },
-    [xi.magic.element.WATER  ] = { xi.items.BLUE_ROCK,        "a blue rock",        },
-    [xi.magic.element.LIGHT  ] = { xi.items.WHITE_ROCK,       "a white rock",       },
-    [xi.magic.element.DARK   ] = { xi.items.BLACK_ROCK,       "a black rock",       },
+    [xi.element.FIRE   ] = { xi.item.RED_ROCK,         "a red rock",         },
+    [xi.element.ICE    ] = { xi.item.TRANSLUCENT_ROCK, "a translucent rock", },
+    [xi.element.WIND   ] = { xi.item.GREEN_ROCK,       "a green rock",       },
+    [xi.element.EARTH  ] = { xi.item.YELLOW_ROCK,      "a yellow rock",      },
+    [xi.element.THUNDER] = { xi.item.PURPLE_ROCK,      "a purple rock",      },
+    [xi.element.WATER  ] = { xi.item.BLUE_ROCK,        "a blue rock",        },
+    [xi.element.LIGHT  ] = { xi.item.WHITE_ROCK,       "a white rock",       },
+    [xi.element.DARK   ] = { xi.item.BLACK_ROCK,       "a black rock",       },
 }
 
 local clusters =
 {
-    [xi.magic.element.FIRE   ] = { xi.items.FIRE_CLUSTER,      "a fire cluster",      },
-    [xi.magic.element.ICE    ] = { xi.items.ICE_CLUSTER,       "an ice cluster",      },
-    [xi.magic.element.WIND   ] = { xi.items.WIND_CLUSTER,      "a wind cluster",      },
-    [xi.magic.element.EARTH  ] = { xi.items.EARTH_CLUSTER,     "an earth cluster",    },
-    [xi.magic.element.THUNDER] = { xi.items.LIGHTNING_CLUSTER, "a lightning cluster", },
-    [xi.magic.element.WATER  ] = { xi.items.WATER_CLUSTER,     "a water cluster",     },
-    [xi.magic.element.LIGHT  ] = { xi.items.LIGHT_CLUSTER,     "a light cluster",     },
-    [xi.magic.element.DARK   ] = { xi.items.DARK_CLUSTER,      "a dark cluster",      },
+    [xi.element.FIRE   ] = { xi.item.FIRE_CLUSTER,      "a fire cluster",      },
+    [xi.element.ICE    ] = { xi.item.ICE_CLUSTER,       "an ice cluster",      },
+    [xi.element.WIND   ] = { xi.item.WIND_CLUSTER,      "a wind cluster",      },
+    [xi.element.EARTH  ] = { xi.item.EARTH_CLUSTER,     "an earth cluster",    },
+    [xi.element.THUNDER] = { xi.item.LIGHTNING_CLUSTER, "a lightning cluster", },
+    [xi.element.WATER  ] = { xi.item.WATER_CLUSTER,     "a water cluster",     },
+    [xi.element.LIGHT  ] = { xi.item.LIGHT_CLUSTER,     "a light cluster",     },
+    [xi.element.DARK   ] = { xi.item.DARK_CLUSTER,      "a dark cluster",      },
 }
 
 m.pickItem = function(player, info)
@@ -110,12 +110,12 @@ m.pickItem = function(player, info)
     local result = customUtil.pickItem(player, drops)
 
     -- if we picked a colored rock, change it to the day's element
-    if result[1] == xi.items.RED_ROCK then
+    if result[1] == xi.item.RED_ROCK then
         result = rocks[VanadielDayElement()]
     end
 
     -- if we picked a cluster, change it to the day's element
-    if result[1] == xi.items.FIRE_CLUSTER then
+    if result[1] == xi.item.FIRE_CLUSTER then
         result = clusters[VanadielDayElement()]
     end
 

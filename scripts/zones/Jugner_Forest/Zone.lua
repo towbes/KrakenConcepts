@@ -12,7 +12,7 @@ zoneObject.onChocoboDig = function(player, precheck)
 end
 
 zoneObject.onInitialize = function(zone)
-    zone:registerTriggerArea(1, -484, 10, 292, 0, 0, 0) -- Sets Mark for "Under Oath" Quest cutscene.
+    zone:registerTriggerArea(1, -484, 10, 292, 0, 0, 0) -- Sets Mark for 'Under Oath' Quest cutscene.
 
     -- NM Persistence
     xi.mob.nmTODPersistCache(zone, ID.mob.METEORMAULER)

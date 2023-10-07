@@ -2,7 +2,7 @@
 -- ID: 6147
 -- Item: Mikhe's Memo
 -- A memo scrawled by Mikhe Aryohcha that matter-of-factly states,
--- "Just throw your fist at your opponent and it'll all work out."
+-- 'Just throw your fist at your opponent and it'll all work out.'
 -- Adventurers say that their hand-to-hand skill increases after reading this note.
 -----------------------------------
 local itemObject = {}

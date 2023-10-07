@@ -2,7 +2,7 @@
 -- Area: North Gustaberg [S]
 --   NM: Gloomanita
 -----------------------------------
-mixins = {require("scripts/mixins/families/funguar_s")}
+mixins = {require('scripts/mixins/families/funguar_s')}
 -----------------------------------
 local entity = {}
 

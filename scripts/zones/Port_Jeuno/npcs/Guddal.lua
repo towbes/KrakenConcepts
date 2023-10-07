@@ -17,7 +17,7 @@ entity.onTrade = function(player, npc, trade)
             trade:getGil() == 0 and
             trade:getItemCount() == 3
         then
-            player:startEvent(301) -- Ending quest "Kazham Airship Pass"
+            player:startEvent(301) -- Ending quest 'Kazham Airship Pass'
         else
             player:startEvent(302)
         end

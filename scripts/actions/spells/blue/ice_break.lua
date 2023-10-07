@@ -1,6 +1,6 @@
 -----------------------------------
 -- Spell: Ice Break
--- Deals ice damage to enemies within range. Additional Effect: "Bind"
+-- Deals ice damage to enemies within range. Additional Effect: 'Bind'
 -- Spell cost: 142 MP
 -- Monster Type: Arcana
 -- Spell Type: Magical (Ice)

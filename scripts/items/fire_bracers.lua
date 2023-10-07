@@ -1,7 +1,7 @@
 -----------------------------------
 -- ID: 14991
 -- Fire Bracers
---  Enchantment: "Enfire"
+--  Enchantment: 'Enfire'
 -----------------------------------
 local itemObject = {}
 

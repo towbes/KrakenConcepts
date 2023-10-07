@@ -14,12 +14,12 @@ entity.onTrade = function(player, npc, trade)
             npcUtil.tradeHasExactly(trade, xi.item.GIANT_SHELL_BUG) and
             player:getCharVar('aBoysDreamCS') == 3
         then
-            player:startEvent(15) -- During Quest "A Boy's Dream" (trading bug) madame ?
+            player:startEvent(15) -- During Quest 'A Boy's Dream' (trading bug) madame ?
         elseif
             npcUtil.tradeHasExactly(trade, xi.item.ODONTOTYRANNUS) and
             player:getCharVar('aBoysDreamCS') == 4
         then
-            player:startEvent(47) -- During Quest "A Boy's Dream" (trading odontotyrannus)
+            player:startEvent(47) -- During Quest 'A Boy's Dream' (trading odontotyrannus)
         end
     end
 end
@@ -34,7 +34,7 @@ entity.onTrigger = function(player, npc)
     local mJob = player:getMainJob()
     local sLvl = player:getSubLvl() -- Umeboshi
     local sJob = player:getSubJob()
-    -- Check if they have key item "Ordelle whetStone"
+    -- Check if they have key item 'Ordelle whetStone'
     local hasOrdelleWhetstone = player:hasKeyItem(xi.ki.ORDELLE_WHETSTONE)
     local sharpeningTheSwordCS = player:getCharVar('sharpeningTheSwordCS')
     local aBoysDreamCS = player:getCharVar('aBoysDreamCS')
@@ -46,24 +46,24 @@ entity.onTrigger = function(player, npc)
         fatherAndSon == QUEST_COMPLETED and
         player:getCharVar('Quest[0][4]Prog') == 0
     then
-    -- "Sharpening the Sword" Quest Dialogs
+    -- 'Sharpening the Sword' Quest Dialogs
         if ((mJob == xi.job.PLD and mLvl >= 40) or
             (msob == xi.job.PLD and sLvl >= 40)) and
             sharpeningTheSwordCS == 0 
         then
-            player:startEvent(45) -- Start Quest "Sharpening the Sword" with thank you for the rod
+            player:startEvent(45) -- Start Quest 'Sharpening the Sword' with thank you for the rod
         elseif
             ((mJob == xi.job.PLD and mLvl >= 40) or
             (msob == xi.job.PLD and sLvl >= 40)) and
             sharpeningTheSwordCS == 1
         then
-            player:startEvent(43) -- Start Quest "Sharpening the Sword"
+            player:startEvent(43) -- Start Quest 'Sharpening the Sword'
         end
     elseif sharpeningTheSword == QUEST_ACCEPTED and not hasOrdelleWhetstone then
         player:startEvent(42) -- During Quest 'Sharpening the Sword'
     elseif sharpeningTheSword == QUEST_ACCEPTED and hasOrdelleWhetstone then
-        player:startEvent(44) -- Finish Quest "Sharpening the Sword"
-    -- "A Boy's Dream" Quest Dialogs
+        player:startEvent(44) -- Finish Quest 'Sharpening the Sword'
+    -- 'A Boy's Dream' Quest Dialogs
     elseif 
         aBoysDream == QUEST_AVAILABLE and
         ((mJob == xi.job.PLD and mLvl >= 50) or
@@ -100,7 +100,7 @@ entity.onEventUpdate = function(player, csid, option, npc)
 end
 
 entity.onEventFinish = function(player, csid, option, npc)
-    -- "Sharpening the Sword"
+    -- 'Sharpening the Sword'
     if (csid == 45 or csid == 43) and option == 1 then
         player:addQuest(xi.quest.log_id.SANDORIA, xi.quest.id.sandoria.SHARPENING_THE_SWORD)
         player:setCharVar('sharpeningTheSwordCS', 2)
@@ -118,7 +118,7 @@ entity.onEventFinish = function(player, csid, option, npc)
             player:addFame(xi.quest.fame_area.SANDORIA, 30)
             player:completeQuest(xi.quest.log_id.SANDORIA, xi.quest.id.sandoria.SHARPENING_THE_SWORD)
         end
-    -- "A Boy's Dream"
+    -- 'A Boy's Dream'
     elseif (csid == 41 or csid == 40) and option == 1 then
         player:addQuest(xi.quest.log_id.SANDORIA, xi.quest.id.sandoria.A_BOY_S_DREAM)
         player:setCharVar('aBoysDreamCS', 2)

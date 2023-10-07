@@ -1,6 +1,6 @@
 -----------------------------------
 -- Ability: Snarl
--- Transfers hate to your pet. Only works on pets invoked with the "Call Beast" ability.
+-- Transfers hate to your pet. Only works on pets invoked with the 'Call Beast' ability.
 -- Obtained: Beastmaster Level 45
 -- Recast Time: 30 seconds
 -- Duration: N/A

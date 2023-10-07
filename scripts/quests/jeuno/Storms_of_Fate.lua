@@ -6,7 +6,7 @@
 -----------------------------------
 require('scripts/globals/npc_util')
 require('scripts/globals/quests')
-require('scripts/globals/zone')
+
 require('scripts/globals/interaction/quest')
 -----------------------------------
 
@@ -18,7 +18,7 @@ quest.sections =
         check = function(player, status, vars)
             return status == QUEST_AVAILABLE and
             player:getCurrentMission(xi.mission.log_id.COP) >= xi.mission.id.cop.DAWN and
-            player:getCharVar("Mission[6][840]Status") >= 8
+            player:getCharVar('Mission[6][840]Status') >= 8
         end,
 
         [xi.zone.RULUDE_GARDENS] =
@@ -26,7 +26,7 @@ quest.sections =
             onTriggerAreaEnter =
             {
                 [1] = function(player, region)
-                    if player:getCharVar("Mission[6][840]Status") == 8 then
+                    if player:getCharVar('Mission[6][840]Status') == 8 then
                         return quest:progressEvent(142)
                     end
                 end,
@@ -99,7 +99,7 @@ quest.sections =
             {
                 [143] = function(player, csid, option, npc)
                     quest:complete(player)
-                    player:setCharVar("StormsOfFateWait", getConquestTally())
+                    player:setCharVar('StormsOfFateWait', NextConquestTally())
                 end,
             },
         },

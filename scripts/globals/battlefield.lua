@@ -1507,7 +1507,7 @@ function xi.battlefield.HandleLootRolls(battlefield, lootTable, players, npc)
     then
         if npc then
             --npc:setAnimation(90)
-            npc:entityAnimationPacket("open")
+            npc:entityAnimationPacket('open')
         end
 
         for i = 1, #lootTable, 1 do

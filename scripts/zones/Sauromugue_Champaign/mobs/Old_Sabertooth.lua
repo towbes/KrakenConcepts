@@ -13,9 +13,9 @@ entity.onMobSpawn = function(mob)
     mob:setAutoAttackEnabled(false)
     mob:setRoamFlags(256, 512)
 
-    mob:addListener("TAKE_DAMAGE", "PRIME_TAKE_DAMAGE", function(tiger, amount, attacker)
+    mob:addListener('TAKE_DAMAGE', 'PRIME_TAKE_DAMAGE', function(tiger, amount, attacker)
         if attacker then
-            tiger:setLocalVar("tookDamage", 1)
+            tiger:setLocalVar('tookDamage', 1)
             tiger:setMobAbilityEnabled(true)
             tiger:setAutoAttackEnabled(true)
             tiger:setBehaviour(0)
@@ -24,12 +24,12 @@ entity.onMobSpawn = function(mob)
 end
 
 entity.onMobFight = function(mob)
-    if mob:getLocalVar("control") == 0 and mob:getLocalVar("tookDamage") == 0 then
-        mob:setLocalVar("control", 1)
+    if mob:getLocalVar('control') == 0 and mob:getLocalVar('tookDamage') == 0 then
+        mob:setLocalVar('control', 1)
         mob:timer(15000, function(mobArg)
             local pos = mob:getPos()
             mob:pathTo(pos.x + math.random(-2, 2), pos.y, pos.z + math.random(-2, 2), 9)
-            mobArg:setLocalVar("control", 0)
+            mobArg:setLocalVar('control', 0)
         end)
     end
 end
@@ -37,15 +37,15 @@ end
 entity.onMobDeath = function(mob, player, optParams)
     local players = mob:getZone():getPlayers()
 
-    for i, person in pairs(players) do -- can't use the variable name "player" because it's already being used
+    for i, person in pairs(players) do -- can't use the variable name 'player' because it's already being used
         if
             person:getQuestStatus(xi.quest.log_id.WINDURST, xi.quest.id.windurst.THE_FANGED_ONE) == QUEST_ACCEPTED and
             person:checkDistance(mob) < 32
         then
-            if mob:getLocalVar("tookDamage") == 0 then
-                person:setCharVar("TheFangedOneCS", 2)
+            if mob:getLocalVar('tookDamage') == 0 then
+                person:setCharVar('TheFangedOneCS', 2)
             else
-                person:setCharVar("TheFangedOneTimer", os.time() + 300)
+                person:setCharVar('TheFangedOneTimer', os.time() + 300)
             end
         end
     end

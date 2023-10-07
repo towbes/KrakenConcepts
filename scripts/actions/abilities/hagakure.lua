@@ -1,6 +1,6 @@
 -----------------------------------
 -- Ability: Hagakure
--- Grants "Save TP" effect and a TP bonus to your next weapon skill.
+-- Grants 'Save TP' effect and a TP bonus to your next weapon skill.
 -- Obtained: Samurai Level 95
 -- Recast Time: 3:00
 -- Duration: 1:00 or Next Weaponskill

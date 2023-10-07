@@ -1,6 +1,6 @@
 -----------------------------------
 -- Light of Penance
--- Description: Reduces an enemy's TP. Additional effect: Blindness and "Bind".
+-- Description: Reduces an enemy's TP. Additional effect: Blindness and 'Bind'.
 -- Type: Magical (Light)
 -----------------------------------
 local mobskillObject = {}

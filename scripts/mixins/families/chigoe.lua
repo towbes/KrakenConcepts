@@ -1,7 +1,6 @@
 -- Chigoe family mixin
 
-require("scripts/globals/mixins")
-require("scripts/globals/toau")
+require('scripts/globals/mixins')
 
 g_mixins = g_mixins or {}
 g_mixins.families = g_mixins.families or {}
@@ -21,12 +20,32 @@ g_mixins.families.chigoe = function(chigoeMob)
         mob:hideName(true)
         mob:setUntargetable(true)
     end)
+
+    chigoeMob:addListener('ABILITY_TAKE', 'CHIGOE_ABILITY_TAKE', function(target, user, ability, action)
+        local abilityID = ability:getID()
+        if 
+        abilityID == 150 or     -- tomahawk
+        abilityID == 46 or      -- shield bash
+        abilityID == 77 or      -- weapon bash
+        abilityID == 66 or      -- jump
+        abilityID == 67 or      -- high jump
+        abilityID == 68 or      -- super jump
+        abilityID == 202 or     -- box step
+        abilityID == 170 
+        then -- angon
+            if target:getHP() > 0 and not target:isNM() then
+                target:setMobMod(xi.mobMod.EXP_BONUS, -100)
+                target:setMobMod(xi.mobMod.NO_DROPS, 1)
+                target:setHP(0)
+            end
+        end
+    end)
     
-    xi.toau.mobSpecialHook("CHIGOE", mob, 100, function(mob)
-        if mob:getHP() > 0 and not mob:isNM()then
-            mob:setMobMod(xi.mobMod.EXP_BONUS, -100)
-            mob:setMobMod(xi.mobMod.NO_DROPS, 1)
-            mob:setHP(0)
+    chigoeMob:addListener('WEAPONSKILL_TAKE', 'CHIGOE_WEAPONSKILL_TAKE', function(target, user, wsid)
+        if target:getHP() > 0 and not target:isNM() then
+            target:setMobMod(xi.mobMod.EXP_BONUS, -100)
+            target:setMobMod(xi.mobMod.NO_DROPS, 1)
+            target:setHP(0)
         end
     end)
 end

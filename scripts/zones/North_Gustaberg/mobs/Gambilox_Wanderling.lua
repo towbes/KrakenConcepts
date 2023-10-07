@@ -1,9 +1,9 @@
 -----------------------------------
 -- Area: North Gustaberg
 --  Mob: Gambilox Wanderling
--- Quest NM - "As Thick as Thieves"
+-- Quest NM - 'As Thick as Thieves'
 -----------------------------------
-mixins = {require("scripts/mixins/job_special")}
+mixins = {require('scripts/mixins/job_special')}
 -----------------------------------
 local entity = {}
 

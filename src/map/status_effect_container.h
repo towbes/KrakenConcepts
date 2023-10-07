@@ -49,7 +49,6 @@ public:
     bool DelStatusEffect(EFFECT StatusID);
     bool DelStatusEffectSilent(EFFECT StatusID);
     bool DelStatusEffect(EFFECT StatusID, uint16 SubID);
-    bool DelStatusEffectByItemSource(EFFECT StatusID, uint16 ItemSourceID);
     void DelStatusEffectsByFlag(uint32 flag, bool silent = false); // Remove all the status effects with the specified type
     void DelStatusEffectsByIcon(uint16 IconID);                    // Remove all effects with the specified icon
     void DelStatusEffectsByType(uint16 Type);
@@ -71,7 +70,6 @@ public:
 
     CStatusEffect* GetStatusEffect(EFFECT StatusID);
     CStatusEffect* GetStatusEffect(EFFECT StatusID, uint32 SubID);
-    CStatusEffect* GetStatusEffectByItemSource(EFFECT StatusID, uint16 ItemSourceID);
 
     std::vector<EFFECT> GetStatusEffectsInIDRange(EFFECT start, EFFECT end);
 
@@ -86,8 +84,8 @@ public:
     void TickEffects(time_point tick);
     void TickRegen(time_point tick);
 
-    void LoadStatusEffects();                                             // We load the character effects
-    void SaveStatusEffects(bool logout = false, bool skipRemove = false); // We keep the character effects
+    void LoadStatusEffects();                    // We load the character effects
+    void SaveStatusEffects(bool logout = false); // We keep the character effects
 
     uint8 GetEffectsCount(EFFECT ID); // We get the number of effects with the specified ID
     uint8 GetLowestFreeSlot();        // returns the lowest free slot for songs/rolls

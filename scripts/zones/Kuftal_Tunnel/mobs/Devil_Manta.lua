@@ -5,7 +5,7 @@
 local entity = {}
 
 entity.onMobDeath = function(mob, player, optParams)
-    mob:setLocalVar("lastTOD", os.time())
+    mob:setLocalVar('lastTOD', os.time())
 end
 
 return entity

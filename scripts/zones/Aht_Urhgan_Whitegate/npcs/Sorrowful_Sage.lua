@@ -51,10 +51,10 @@ entity.onTrigger = function(player, npc)
     local haveimperialIDtag
     
     local assaultPoints = player:getAssaultPoint(xi.assault.assaultArea.NYZUL_ISLE)
-    local floorProgress = player:getCharVar("NyzulFloorProgress")
+    local floorProgress = player:getCharVar('NyzulFloorProgress')
     local unchartedFloorProgress = 0
 
-    local vendingBoxPreferences = player:getCharVar("Nyzul_VendingBoxPref")
+    local vendingBoxPreferences = player:getCharVar('Nyzul_VendingBoxPref')
 
     if player:hasKeyItem(xi.ki.IMPERIAL_ARMY_ID_TAG) then
         haveimperialIDtag = 1

@@ -40,7 +40,7 @@ battlefieldObject.onEventFinish = function(player, csid, option, npc)
         then
             player:addKeyItem(xi.ki.WHISPER_OF_THE_WYRMKING)
             player:messageSpecial(ID.text.KEYITEM_OBTAINED, xi.ki.WHISPER_OF_THE_WYRMKING)
-            player:setCharVar("Quest[3][86]Status", 3)
+            player:setCharVar('Quest[3][86]Status', 3)
             player:addTitle(xi.title.CONQUEROR_OF_FATE)
         end
         if xi.settings.main.ENABLE_COP_ZONE_CAP == 1 then

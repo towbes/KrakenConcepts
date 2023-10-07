@@ -1,7 +1,7 @@
 -----------------------------------
 -- Area: South Gustaberg
 --  NPC: Stone Monument
--- Involved in quest "An Explorer's Footsteps"
+-- Involved in quest 'An Explorer's Footsteps'
 -- !pos 520.064 -5.881 -738.356 107
 -----------------------------------
 local entity = {}

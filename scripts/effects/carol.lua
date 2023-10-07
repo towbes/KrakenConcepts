@@ -25,7 +25,7 @@ effectObject.onEffectGain = function(target, effect)
 
     target:addMod(xi.magic.resistMod[subPower], effect:getPower())
 
-    if buff > 0 then -- xi.magic.element ids and MODS ids unfortnately don't match
+    if buff > 0 then -- xi.element ids and MODS ids unfortnately don't match
         if subPower == 1 then -- fire add STR
             target:addMod(xi.mod.STR, buff)
         elseif subPower == 2 then -- ice add INT
@@ -71,7 +71,7 @@ effectObject.onEffectLose = function(target, effect)
 
     target:delMod(xi.magic.resistMod[subPower], effect:getPower())
 
-    if buff > 0 then -- xi.magic.element and MODS unfortnately don't match
+    if buff > 0 then -- xi.element and MODS unfortnately don't match
         if subPower == 1 then -- fire add STR
             target:delMod(xi.mod.STR, buff)
         elseif subPower == 2 then -- ice add INT

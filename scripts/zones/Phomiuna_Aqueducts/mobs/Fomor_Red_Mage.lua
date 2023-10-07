@@ -2,7 +2,7 @@
 -- Area: Phomiuna_Aqueducts
 --  Mob: Fomor Red Mage
 -----------------------------------
-mixins = { require("scripts/mixins/fomor_hate") }
+mixins = { require('scripts/mixins/fomor_hate') }
 local ID = zones[xi.zone.PHOMIUNA_AQUEDUCTS]
 -----------------------------------
 local entity = {}

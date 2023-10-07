@@ -1,29 +1,29 @@
 -----------------------------------
 -- (Harvesting) Rolanberry Fields
 -----------------------------------
-require("scripts/globals/zone")
-require("scripts/globals/items")
+
+
 local customHelm = require("modules/custom/custom_helm/custom_helm")
 -----------------------------------
 local m = Module:new("harvesting_rolanberry")
 
-xi.helm.helmInfo[xi.helm.type.HARVESTING].zone[xi.zone.ROLANBERRY_FIELDS] =
+xi.helm.helmInfo[xi.helm.type.HARVESTING].zones[xi.zone.ROLANBERRY_FIELDS] =
 {
     dynamic = true,
 
     drops =
     {
-        { customHelm.rate.VERY_COMMON, xi.items.INSECT_WING,                "an insect wing"                 }, -- Insect Wing     (24%)
-        { customHelm.rate.COMMON,      xi.items.FLAX_FLOWER,                "a flax flower"                  }, -- Flax Flower     (15%)
-        { customHelm.rate.COMMON,      xi.items.TREANT_BULB,                "a treant bulb"                  }, -- Treant Bulb     (15%)
-        { customHelm.rate.COMMON,      xi.items.PIECE_OF_CRAWLER_COCOON,    "a piece of crawler cocoon"      }, -- Crawler Cocoon  (15%)
-        { customHelm.rate.COMMON,      xi.items.BUNCH_OF_SAN_DORIAN_GRAPES, "a bunch of San D'orian grapes " }, -- SanDorian Grape (15%)
-        { customHelm.rate.COMMON,      xi.items.ROLANBERRY,                 "a rolanberry"                   }, -- Rolanberry      (15%)
-        { customHelm.rate.UNCOMMON,    xi.items.DAHLIA,                     "a dahlia"                       }, -- Dahlia          (10%)
-        { customHelm.rate.UNCOMMON,    xi.items.WIJNRUIT,                   "a wijnruit"                     }, -- Wijnruit        (10%)
-        { customHelm.rate.RARE,        xi.items.BUNCH_OF_ROYAL_GRAPES,      "a bunch of royal grapes "       }, -- Royal Grapes    ( 5%)
-        { customHelm.rate.RARE,        xi.items.JUG_OF_HUMUS,               "a jug of humus"                 }, -- Humus           ( 5%)
-        { customHelm.rate.VERY_RARE,   xi.items.BAG_OF_FRUIT_SEEDS,         "a bag of fruit seeds"           }, -- Fruit Seeds     ( 1%)
+        { customHelm.rate.VERY_COMMON, xi.item.INSECT_WING,                "an insect wing"                 }, -- Insect Wing     (24%)
+        { customHelm.rate.COMMON,      xi.item.FLAX_FLOWER,                "a flax flower"                  }, -- Flax Flower     (15%)
+        { customHelm.rate.COMMON,      xi.item.TREANT_BULB,                "a treant bulb"                  }, -- Treant Bulb     (15%)
+        { customHelm.rate.COMMON,      xi.item.PIECE_OF_CRAWLER_COCOON,    "a piece of crawler cocoon"      }, -- Crawler Cocoon  (15%)
+        { customHelm.rate.COMMON,      xi.item.BUNCH_OF_SAN_DORIAN_GRAPES, "a bunch of San D'orian grapes " }, -- SanDorian Grape (15%)
+        { customHelm.rate.COMMON,      xi.item.ROLANBERRY,                 "a rolanberry"                   }, -- Rolanberry      (15%)
+        { customHelm.rate.UNCOMMON,    xi.item.DAHLIA,                     "a dahlia"                       }, -- Dahlia          (10%)
+        { customHelm.rate.UNCOMMON,    xi.item.WIJNRUIT,                   "a wijnruit"                     }, -- Wijnruit        (10%)
+        { customHelm.rate.RARE,        xi.item.BUNCH_OF_ROYAL_GRAPES,      "a bunch of royal grapes "       }, -- Royal Grapes    ( 5%)
+        { customHelm.rate.RARE,        xi.item.JUG_OF_HUMUS,               "a jug of humus"                 }, -- Humus           ( 5%)
+        { customHelm.rate.VERY_RARE,   xi.item.BAG_OF_FRUIT_SEEDS,         "a bag of fruit seeds"           }, -- Fruit Seeds     ( 1%)
     },
 
     points =
@@ -57,12 +57,12 @@ xi.helm.helmInfo[xi.helm.type.HARVESTING].zone[xi.zone.ROLANBERRY_FIELDS] =
     }
 }
 
-m:addOverride("xi.zones.Rolanberry_Fields.Zone.onInitialize", function(zone)
+m:addOverride("xi.zone.Rolanberry_Fields.Zone.onInitialize", function(zone)
     super(zone)
     xi.helm.initZone(zone, xi.helm.type.HARVESTING)
 end)
 
-m:addOverride("xi.zones.Rolanberry Fields.Zone.onZoneWeatherChange", function(weatherType)
+m:addOverride("xi.zone.Rolanberry Fields.Zone.onZoneWeatherChange", function(weatherType)
     super(onZoneWeatherChange)
 
     local drops = xi.helm.helmInfo[xi.helm.type.HARVESTING].zone[xi.zone.ROLANBERRY_FIELDS].drops
@@ -70,9 +70,9 @@ m:addOverride("xi.zones.Rolanberry Fields.Zone.onZoneWeatherChange", function(we
     -- loop through table and delete all matches
     for k, item in pairs(drops) do
         if
-            item[2] == xi.items.RUSTY_PICK or
-            item[2] == xi.items.BROKEN_HALCYON_FISHING_ROD or
-            item[2] == xi.items.BROKEN_HUME_FISHING_ROD
+            item[2] == xi.item.RUSTY_PICK or
+            item[2] == xi.item.BROKEN_HALCYON_FISHING_ROD or
+            item[2] == xi.item.BROKEN_HUME_FISHING_ROD
         then
             table.remove(drops, k)
         end
@@ -80,13 +80,13 @@ m:addOverride("xi.zones.Rolanberry Fields.Zone.onZoneWeatherChange", function(we
 
     -- if raining, add it back in
     if weatherType == xi.weather.RAIN or weatherType == xi.weather.SQUALL then
-        table.insert(drops, { customHelm.rate.RARE,      xi.items.RUSTY_PICK,                 "a rusty pick"                 }) ---Rusty Pick         (5%)
-        table.insert(drops, { customHelm.rate.VERY_RARE, xi.items.BROKEN_HALCYON_FISHING_ROD, "a broken halcyon fishing rod" }) -- Broken Halcyon Rod (1%)
+        table.insert(drops, { customHelm.rate.RARE,      xi.item.RUSTY_PICK,                 "a rusty pick"                 }) ---Rusty Pick         (5%)
+        table.insert(drops, { customHelm.rate.VERY_RARE, xi.item.BROKEN_HALCYON_FISHING_ROD, "a broken halcyon fishing rod" }) -- Broken Halcyon Rod (1%)
     end
 end)
 
 
-m:addOverride("xi.zones.Pashhow_Marshlands.Zone.onGameDay", function()
+m:addOverride("xi.zone.Pashhow_Marshlands.Zone.onGameDay", function()
     super()
 
     local drops = xi.helm.helmInfo[xi.helm.type.HARVESTING].zone[xi.zone.ROLANBERRY_FIELDS].drops
@@ -94,8 +94,8 @@ m:addOverride("xi.zones.Pashhow_Marshlands.Zone.onGameDay", function()
     -- loop through table and delete all matches
     for k, item in pairs(drops) do
         if
-            item[2] == xi.items.WATER_CLUSTER or
-            item[2] == xi.items.AQUAMARINE
+            item[2] == xi.item.WATER_CLUSTER or
+            item[2] == xi.item.AQUAMARINE
         then
             table.remove(drops, k)
         end
@@ -103,12 +103,12 @@ m:addOverride("xi.zones.Pashhow_Marshlands.Zone.onGameDay", function()
 
     -- Only available on Watersday
     if VanadielDayOfTheWeek() == xi.day.WATERSDAY then
-        table.insert(drops, { customHelm.rate.RARE, xi.items.WATER_CLUSTER, "a water cluster" }) -- Water Cluster (5%)
+        table.insert(drops, { customHelm.rate.RARE, xi.item.WATER_CLUSTER, "a water cluster" }) -- Water Cluster (5%)
     end
 
     -- Only available on New Moon
     if IsMoonNew() then
-        table.insert(drops, { customHelm.rate.SUPER_RARE, xi.items.AQUAMARINE, "an aquamarine" }) -- Aquamarine (0.5%)
+        table.insert(drops, { customHelm.rate.SUPER_RARE, xi.item.AQUAMARINE, "an aquamarine" }) -- Aquamarine (0.5%)
     end
 end)
 

@@ -3931,7 +3931,7 @@ xi.magian.trials =
             itemAugments =
             {
                 [1] = { 746, 6 }, -- DMG:+7 (Ranged)
-                [2] = { 142, 7 }, -- "Store TP"+8
+                [2] = { 142, 7 }, -- 'Store TP'+8
             },
         },
     },
@@ -4745,7 +4745,7 @@ xi.magian.trials =
             itemAugments =
             {
                 [1] = { 746, 6 }, -- DMG:+7 (Ranged)
-                [2] = { 142, 7 }, -- "Store TP"+8
+                [2] = { 142, 7 }, -- 'Store TP'+8
             },
         },
 
@@ -4776,7 +4776,7 @@ xi.magian.trials =
             itemId       = xi.item.ANARCHY_P1,
             itemAugments =
             {
-                [1] = { 142, 12 }, -- "Store TP"+13
+                [1] = { 142, 12 }, -- 'Store TP'+13
             },
         },
     },

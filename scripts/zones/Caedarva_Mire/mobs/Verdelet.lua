@@ -22,7 +22,7 @@ entity.onMobSpawn = function(mob)
     mob:setMobMod(xi.mobMod.GA_CHANCE, 80)
     mob:setMobMod(xi.mobMod.MAGIC_COOL, 12) -- Sets recast time in line with capture.
 
-    mob:setLocalVar("horn", 0)
+    mob:setLocalVar('horn', 0)
 end
 
 entity.onMobFight = function(mob)

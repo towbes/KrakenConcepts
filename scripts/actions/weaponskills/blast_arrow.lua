@@ -19,7 +19,7 @@ weaponskillObject.onUseWeaponSkill = function(player, target, wsID, tp, primary,
     params.str_wsc = 0.16 params.dex_wsc = 0.0 params.vit_wsc = 0.0 params.agi_wsc = 0.25 params.int_wsc = 0.0 params.mnd_wsc = 0.0 params.chr_wsc = 0.0
     params.crit100 = 0.0 params.crit200 = 0.0 params.crit300 = 0.0
     params.canCrit = true
-    params.acc100 = 0.8 params.acc200 = 0.9 params.acc300 = 1 -- TODO: verify -- "Accuracy varies with TP" in retail. All current evidence points to that this modifier is static values, not percentages.
+    params.acc100 = 0.8 params.acc200 = 0.9 params.acc300 = 1 -- TODO: verify -- 'Accuracy varies with TP' in retail. All current evidence points to that this modifier is static values, not percentages.
     params.atk100 = 1 params.atk200 = 1 params.atk300 = 1
 
     if xi.settings.main.USE_ADOULIN_WEAPON_SKILL_CHANGES then
@@ -51,9 +51,9 @@ weaponskillObject.onUseWeaponSkill = function(player, target, wsID, tp, primary,
 
     local damage, criticalHit, tpHits, extraHits = xi.weaponskills.doRangedWeaponskill(player, target, wsID, params, tp, action, primary)
 
-    local chance = (tp-1000) * applyResistanceAddEffect(player, target, xi.element.LIGHTNING, 0) > math.random() * 150
+    local chance = (tp-1000) * applyResistanceAddEffect(player, target, xi.element.THUNDER, 0) > math.random() * 150
     if damage > 0 and not target:hasStatusEffect(xi.effect.STUN) and chance then
-        local duration = 2 * applyResistanceAddEffect(player, target, xi.element.LIGHTNING, 0)
+        local duration = 2 * applyResistanceAddEffect(player, target, xi.element.THUNDER, 0)
         target:addStatusEffect(xi.effect.STUN, 1, 0, duration)
     end
 

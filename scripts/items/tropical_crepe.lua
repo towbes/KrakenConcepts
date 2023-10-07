@@ -6,7 +6,7 @@
 -- INT +2
 -- MND +2
 -- Magic Accuracy +20% (Max. 90)
--- "Magic Def. Bonus" +1
+-- 'Magic Def. Bonus' +1
 -----------------------------------
 local itemObject = {}
 

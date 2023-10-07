@@ -389,7 +389,7 @@ function utils.magicstoneskin(target, dmg)
 end
 
 
--- returns reduced magic damage from RUN buff, "One for All"
+-- returns reduced magic damage from RUN buff, 'One for All'
 function utils.oneforall(target, dmg)
     if dmg > 0 then
         local oneForAllEffect = target:getStatusEffect(xi.effect.ONE_FOR_ALL)
@@ -588,7 +588,7 @@ local function getSkillLevelIndex(level, rank)
         rangeId = 80
     elseif level <= 99 then
         rangeId = 90
-     elseif level > 99 then -- Umeboshi: "I threw in an arbitrary number and it resolved the error. I do not know what the value should be for retail accuracy."
+     elseif level > 99 then -- Umeboshi: 'I threw in an arbitrary number and it resolved the error. I do not know what the value should be for retail accuracy.'
         rangeId = 90
     end
 
@@ -1057,7 +1057,7 @@ end
 
 
 function utils.arenaDrawIn(mob, target, table)
-    local nextDrawIn = target:getLocalVar("[Draw-In]WaitTime")
+    local nextDrawIn = target:getLocalVar('[Draw-In]WaitTime')
     local condition1 = utils.ternary(table.condition1 ~= nil, table.condition1, false)
     local condition2 = utils.ternary(table.condition2 ~= nil, table.condition2, false)
     local condition3 = utils.ternary(table.condition3 ~= nil, table.condition3, false)
@@ -1070,7 +1070,7 @@ function utils.arenaDrawIn(mob, target, table)
     then
         target:setPos(position[1], position[2], position[3], utils.ternary(position[4] ~= nil, position[4], 0))
         mob:messageBasic(232, 0, 0, target)
-        target:setLocalVar("[Draw-In]WaitTime", os.time() + 1)
+        target:setLocalVar('[Draw-In]WaitTime', os.time() + 1)
     end
 end
 

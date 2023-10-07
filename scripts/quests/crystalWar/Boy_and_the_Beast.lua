@@ -96,7 +96,7 @@ quest.sections =
                             return quest:progressEvent(109)
                         end
                     else
-                        -- NOTE: The below two events are "Nothing out of the Ordinary" events; however, Event 110
+                        -- NOTE: The below two events are 'Nothing out of the Ordinary' events; however, Event 110
                         -- is only displayed the first time in this state.  Unknown use at this time, but implemented
                         -- for accuracy.  This Option var is actually reset every time a different event from this
                         -- point fires.

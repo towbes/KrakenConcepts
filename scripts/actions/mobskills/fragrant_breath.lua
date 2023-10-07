@@ -1,8 +1,8 @@
 -----------------------------------
 -- Charm
 -----------------------------------
-require("scripts/globals/mobskills")
-require("scripts/globals/msg")
+
+
 -----------------------------------
 local mobskillObject = {}
 
@@ -15,7 +15,7 @@ mobskillObject.onMobWeaponSkill = function(target, mob, skill)
     local power = 0
     local duration = 60
     
-    if mob:getLocalVar("itemDebuff_Moss") == 0 then
+    if mob:getLocalVar('itemDebuff_Moss') == 0 then
         duration = 30
     end
 

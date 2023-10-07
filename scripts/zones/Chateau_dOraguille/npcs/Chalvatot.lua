@@ -1,7 +1,7 @@
 -----------------------------------
 -- Area: Chateau d'Oraguille
 --  NPC: Chalvatot
--- Finish Mission "The Crystal Spring"
+-- Finish Mission 'The Crystal Spring'
 -- Start & Finishes Quests: Her Majesty's Garden
 -- Involved in Quest: Lure of the Wildcat (San d'Oria)
 -- !pos -105 0.1 72 233
@@ -17,7 +17,7 @@ entity.onTrigger = function(player, npc)
     local circleOfTime = player:getQuestStatus(xi.quest.log_id.JEUNO, xi.quest.id.jeuno.THE_CIRCLE_OF_TIME)
     local circleProgress = player:getCharVar('circleTime')
     local lureOfTheWildcat = player:getQuestStatus(xi.quest.log_id.SANDORIA, xi.quest.id.sandoria.LURE_OF_THE_WILDCAT)
-    local wildcatSandy = player:getCharVar("WildcatSandy")
+    local wildcatSandy = player:getCharVar('WildcatSandy')
 
     -- CIRCLE OF TIME (Bard AF3)
     if circleOfTime == QUEST_ACCEPTED then
@@ -64,7 +64,7 @@ entity.onEventFinish = function(player, csid, option, npc)
 
     -- LURE OF THE WILDCAT
     elseif csid == 561 then
-        player:setCharVar("WildcatSandy", utils.mask.setBit(player:getCharVar("WildcatSandy"), 19, true))
+        player:setCharVar('WildcatSandy', utils.mask.setBit(player:getCharVar('WildcatSandy'), 19, true))
     end
 end
 

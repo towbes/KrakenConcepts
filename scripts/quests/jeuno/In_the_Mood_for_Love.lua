@@ -5,11 +5,11 @@
 -- Odasel  !pos -58 -6 -111
 -- Matoaka !pos -37 -6 -122
 -----------------------------------
-require('scripts/globals/items')
+
 require('scripts/globals/quests')
-require('scripts/globals/status')
-require("scripts/globals/missions")
-require('scripts/globals/zone')
+
+require('scripts/globals/missions')
+
 require('scripts/globals/interaction/quest')
 -----------------------------------
 local quest = Quest:new(xi.quest.log_id.JEUNO, xi.quest.id.jeuno.IN_THE_MOOD_FOR_LOVE)
@@ -32,7 +32,7 @@ quest.sections =
 
         [xi.zone.LOWER_JEUNO] =
         {
-            ['Odasel'] = quest:progressEvent(10035, { [1] = xi.items.CHAMELEON_DIAMOND }),
+            ['Odasel'] = quest:progressEvent(10035, { [1] = xi.item.CHAMELEON_DIAMOND }),
 
             onEventFinish =
             {
@@ -53,12 +53,12 @@ quest.sections =
             ['Odasel'] =
             {
                 onTrigger = function(player, npc)
-                    return quest:event(10037, { [1] = xi.items.CHAMELEON_DIAMOND })
+                    return quest:event(10037, { [1] = xi.item.CHAMELEON_DIAMOND })
                 end,
 
                 onTrade = function(player, npc, trade)
-                    if npcUtil.tradeHasExactly(trade, xi.items.CHAMELEON_DIAMOND) then
-                        return quest:progressEvent(10036, { [1] = xi.items.CHAMELEON_DIAMOND })
+                    if npcUtil.tradeHasExactly(trade, xi.item.CHAMELEON_DIAMOND) then
+                        return quest:progressEvent(10036, { [1] = xi.item.CHAMELEON_DIAMOND })
                     end
                 end,
             },

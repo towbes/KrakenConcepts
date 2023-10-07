@@ -3,7 +3,7 @@
 --  Mob: Diabolos's Vestige
 -- Note: Mega Boss
 -----------------------------------
-require("scripts/globals/dynamis")
+require('scripts/globals/dynamis')
 -----------------------------------
 local entity = {}
 
