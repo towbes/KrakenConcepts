@@ -862,6 +862,11 @@ public:
 
     uint32 getHistory(uint8 index);
 
+    void setAnimPath(uint8);
+    void setAnimStart(bool);
+    void setAnimBegin(uint32);
+    void sendUpdateToZoneCharsInRange(float);
+
     auto getChocoboRaisingInfo() -> sol::table;
     bool setChocoboRaisingInfo(sol::table const& table);
     bool deleteRaisedChocobo();
