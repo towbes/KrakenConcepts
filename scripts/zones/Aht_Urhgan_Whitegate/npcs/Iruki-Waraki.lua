@@ -61,9 +61,9 @@ entity.onTrigger = function(player, npc)
         theWaywardAutomaton == QUEST_COMPLETED
     then
         player:startEvent(777)
-    elseif (playerJob ~= xi.job.PUP or player:getSubJob() ~= xi.job.PUP) and theWaywardAutomaton == QUEST_COMPLETED then
+    elseif (playerJob ~= xi.job.PUP and player:getSubJob() ~= xi.job.PUP) and theWaywardAutomaton == QUEST_COMPLETED then
         player:startEvent(777)
-    elseif (playerJob ~= xi.job.PUP or player:getSubJob() ~= xi.job.PUP) and noStringsAttached == QUEST_COMPLETED then
+    elseif (playerJob ~= xi.job.PUP and player:getSubJob() ~= xi.job.PUP) and noStringsAttached == QUEST_COMPLETED then
         player:startEvent(267) -- asking you how are you doing with your automaton
 
     --Quest: Operation teatime
@@ -72,6 +72,7 @@ entity.onTrigger = function(player, npc)
         playerLvl >= xi.settings.main.AF2_QUEST_LEVEL) or
         (player:getSubJob() == xi.job.PUP and
         player:getSubLvl() >= xi.settings.main.AF2_QUEST_LEVEL)) and
+        
         noStringsAttached == QUEST_COMPLETED and
         theWaywardAutomaton == QUEST_COMPLETED and
         operationTeaTime == QUEST_AVAILABLE
