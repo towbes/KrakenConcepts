@@ -745,6 +745,20 @@ namespace battleutils
         {
             damage = std::max(damage - PDefender->getMod(Mod::PHALANX), 0);
             damage = HandleOneForAll(PDefender, damage);
+            int16 magicSS = PDefender->getMod(Mod::MAGIC_STONESKIN);
+            if (magicSS)
+            {
+                if (damage >= magicSS)
+                {
+                    PDefender->setModifier(Mod::MAGIC_STONESKIN, 0);
+                    damage = damage - magicSS;
+                }
+                else
+                {
+                    PDefender->setModifier(Mod::MAGIC_STONESKIN, magicSS - damage);
+                    damage = 0;
+                }
+            }
             damage = HandleStoneskin(PDefender, damage);
         }
 
@@ -848,6 +862,20 @@ namespace battleutils
             {
                 spikesDamage = std::max(spikesDamage - PAttacker->getMod(Mod::PHALANX), 0);
                 spikesDamage = HandleOneForAll(PAttacker, spikesDamage);
+                int16 magicSS = PAttacker->getMod(Mod::MAGIC_STONESKIN);
+                if (magicSS)
+                {
+                    if (Action->spikesParam >= magicSS)
+                    {
+                        PAttacker->setModifier(Mod::MAGIC_STONESKIN, 0);
+                        Action->spikesParam = Action->spikesParam - magicSS;
+                    }
+                    else
+                    {
+                        PAttacker->setModifier(Mod::MAGIC_STONESKIN, magicSS - Action->spikesParam);
+                        Action->spikesParam = 0;
+                    }
+                }
                 spikesDamage = HandleStoneskin(PAttacker, spikesDamage);
             }
 
@@ -858,6 +886,11 @@ namespace battleutils
             else
             {
                 Action->spikesParam = static_cast<uint16>(spikesDamage);
+            }
+
+            if (damage > PDefender->getMod(Mod::DMGMAGIC_CAP) && PDefender->getMod(Mod::DMGMAGIC_CAP) > 0)
+            {
+                damage = PDefender->getMod(Mod::DMGMAGIC_CAP);
             }
 
             if (PDefender->objtype != TYPE_MOB || ((CMobEntity*)PDefender)->getMobMod(MOBMOD_AUTO_SPIKES) == 0)
@@ -1006,6 +1039,11 @@ namespace battleutils
                 Action->spikesParam = static_cast<uint16>(spikesDamage);
             }
 
+            if (damage > PDefender->getMod(Mod::DMGMAGIC_CAP) && PDefender->getMod(Mod::DMGMAGIC_CAP) > 0)
+            {
+                damage = PDefender->getMod(Mod::DMGMAGIC_CAP);
+            }
+
             PAttacker->takeDamage(spikesDamage, PDefender, ATTACK_TYPE::MAGICAL, GetSpikesDamageType(Action->spikesEffect));
 
             battleutils::DirtyExp(PAttacker, PDefender);
@@ -1050,6 +1088,11 @@ namespace battleutils
                 else
                 {
                     Action->spikesParam = static_cast<uint16>(spikesDamage);
+                }
+
+                if (damage > PDefender->getMod(Mod::DMGMAGIC_CAP) && PDefender->getMod(Mod::DMGMAGIC_CAP) > 0)
+                {
+                    damage = PDefender->getMod(Mod::DMGMAGIC_CAP);
                 }
 
                 PAttacker->takeDamage(spikesDamage, PDefender, ATTACK_TYPE::MAGICAL, GetSpikesDamageType(spikesType));
@@ -1644,7 +1687,7 @@ namespace battleutils
         {
             pdif *= 1.25;
             int16 criticaldamage =
-                PAttacker->getMod(Mod::CRIT_DMG_INCREASE) + PAttacker->getMod(Mod::RANGED_CRIT_DMG_INCREASE) - PDefender->getMod(Mod::CRIT_DEF_BONUS);
+            PAttacker->getMod(Mod::CRIT_DMG_INCREASE) + PAttacker->getMod(Mod::RANGED_CRIT_DMG_INCREASE) - PDefender->getMod(Mod::CRIT_DEF_BONUS) + PDefender->getMod(Mod::ENEMYCRITDMG);
             criticaldamage = std::clamp<int16>(criticaldamage, 0, 100);
             pdif *= ((100 + criticaldamage) / 100.0f);
         }
@@ -2319,6 +2362,15 @@ namespace battleutils
                 float sBlow2    = std::clamp((float)PAttacker->getMod(Mod::SUBTLE_BLOW_II), -50.0f, 50.0f);
                 float sBlowMult = ((100.0f - std::clamp(sBlow1 + sBlow2, -75.0f, 75.0f)) / 100.0f);
 
+                if (PAttacker->objtype == TYPE_PC && PAttacker->GetMJob() == JOB_NIN && PAttacker->GetMLevel() > 74)
+                {
+                    sBlowMult -= 0.01f * ((CCharEntity*)PAttacker)->PMeritPoints->GetMeritValue(MERIT_SUBTLE_BLOW_EFFECT, (CCharEntity*)PAttacker);
+                }
+                else if (PAttacker->objtype == TYPE_PC && PAttacker->GetSJob() == JOB_NIN && PAttacker->GetSLevel() > 74)
+                {
+                    sBlowMult -= 0.01f * ((CCharEntity*)PAttacker)->PMeritPoints->GetMeritValue(MERIT_SUBTLE_BLOW_EFFECT, (CCharEntity*)PAttacker);
+                }
+
                 // mobs hit get basetp+30 whereas pcs hit get basetp/3
                 if (PDefender->objtype == TYPE_PC || (PDefender->objtype == TYPE_PET && PDefender->PMaster && PDefender->PMaster->objtype == TYPE_PC))
                 {
@@ -2332,15 +2384,6 @@ namespace battleutils
                     PDefender->addTP((uint16)(tpMultiplier *
                                               ((baseTp + 30) * sBlowMult *
                                                (1.0f + 0.01f * (float)PDefender->getMod(Mod::STORETP))))); // subtle blow also reduces the "+30" on mob tp gain
-                }
-
-                if (PAttacker->objtype == TYPE_PC && PAttacker->GetMJob() == JOB_NIN && PAttacker->GetMLevel() > 74)
-                {
-                    sBlowMult -= 0.01f * ((CCharEntity*)PAttacker)->PMeritPoints->GetMeritValue(MERIT_SUBTLE_BLOW_EFFECT, (CCharEntity*)PAttacker);
-                }
-                else if (PAttacker->objtype == TYPE_PC && PAttacker->GetSJob() == JOB_NIN && PAttacker->GetSLevel() > 74)
-                {
-                    sBlowMult -= 0.01f * ((CCharEntity*)PAttacker)->PMeritPoints->GetMeritValue(MERIT_SUBTLE_BLOW_EFFECT, (CCharEntity*)PAttacker);
                 }
             }
         }
@@ -2473,6 +2516,15 @@ namespace battleutils
             float sBlow2    = std::clamp((float)PAttacker->getMod(Mod::SUBTLE_BLOW_II), -50.0f, 50.0f);
             float sBlowMult = (100.0f - std::clamp(sBlow1 + sBlow2, -75.0f, 75.0f)) / 100.0f;
 
+            if (PAttacker->objtype == TYPE_PC && PAttacker->GetMJob() == JOB_NIN && PAttacker->GetMLevel() > 74)
+            {
+                sBlowMult -= 0.01f * ((CCharEntity*)PAttacker)->PMeritPoints->GetMeritValue(MERIT_SUBTLE_BLOW_EFFECT, (CCharEntity*)PAttacker);
+            }
+            else if (PAttacker->objtype == TYPE_PC && PAttacker->GetSJob() == JOB_NIN && PAttacker->GetMLevel() > 74)
+            {
+                sBlowMult -= 0.01f * ((CCharEntity*)PAttacker)->PMeritPoints->GetMeritValue(MERIT_SUBTLE_BLOW_EFFECT, (CCharEntity*)PAttacker);
+            }
+
             // mobs hit get basetp+30 whereas pcs hit get basetp/3
             if (PDefender->objtype == TYPE_PC)
             {
@@ -2486,15 +2538,6 @@ namespace battleutils
                 PDefender->addTP((int16)(tpMultiplier * targetTPMultiplier *
                                          ((baseTp + 30) * sBlowMult *
                                           (1.0f + 0.01f * (float)PDefender->getMod(Mod::STORETP))))); // subtle blow also reduces the "+30" on mob tp gain
-            }
-
-            if (PAttacker->objtype == TYPE_PC && PAttacker->GetMJob() == JOB_NIN && PAttacker->GetMLevel() > 74)
-            {
-                sBlowMult -= 0.01f * ((CCharEntity*)PAttacker)->PMeritPoints->GetMeritValue(MERIT_SUBTLE_BLOW_EFFECT, (CCharEntity*)PAttacker);
-            }
-            else if (PAttacker->objtype == TYPE_PC && PAttacker->GetSJob() == JOB_NIN && PAttacker->GetMLevel() > 74)
-            {
-                sBlowMult -= 0.01f * ((CCharEntity*)PAttacker)->PMeritPoints->GetMeritValue(MERIT_SUBTLE_BLOW_EFFECT, (CCharEntity*)PAttacker);
             }
         }
         else if (PDefender->objtype == TYPE_MOB)
@@ -5320,6 +5363,10 @@ namespace battleutils
         {
             damage = -damage;
         }
+        else if (xirand::GetRandomNumber(100) < PDefender->getMod(Mod::SEVERE_BREATH_DMG_NULL) && damage >= PDefender->health.hp)
+        {
+            damage = PDefender->health.hp - 1;
+        }
         else
         {
             damage = HandleSevereDamage(PDefender, damage, false);
@@ -5370,6 +5417,10 @@ namespace battleutils
         {
             damage = 0;
         }
+        else if (xirand::GetRandomNumber(100) < PDefender->getMod(Mod::SEVERE_MAGIC_DMG_NULL) && damage >= PDefender->health.hp)
+        {
+            damage = PDefender->health.hp - 1;
+        }
         else
         {
             damage = HandleSevereDamage(PDefender, damage, false);
@@ -5407,6 +5458,10 @@ namespace battleutils
         {
             damage = 0;
         }
+        else if (xirand::GetRandomNumber(100) < PDefender->getMod(Mod::SEVERE_PHYS_DMG_NULL) && damage >= PDefender->health.hp)
+        {
+            damage = PDefender->health.hp - 1;
+        }
         else
         {
             damage = HandleSevereDamage(PDefender, damage, true);
@@ -5414,6 +5469,11 @@ namespace battleutils
             ConvertDmgToMP(PDefender, damage, IsCovered);
 
             damage = HandleFanDance(PDefender, damage);
+        }
+
+        if (damage > PDefender->getMod(Mod::DMGPHYS_CAP) && PDefender->getMod(Mod::DMGPHYS_CAP) > 0)
+        {
+            damage = PDefender->getMod(Mod::DMGPHYS_CAP);
         }
 
         return damage;
@@ -5447,6 +5507,10 @@ namespace battleutils
         {
             damage = 0;
         }
+        else if (xirand::GetRandomNumber(100) < PDefender->getMod(Mod::SEVERE_RANGE_DMG_NULL) && damage >= PDefender->health.hp)
+        {
+            damage = PDefender->health.hp - 1;
+        }
         else
         {
             damage = HandleSevereDamage(PDefender, damage, true);
@@ -5454,6 +5518,11 @@ namespace battleutils
             ConvertDmgToMP(PDefender, damage, IsCovered);
 
             damage = HandleFanDance(PDefender, damage);
+        }
+
+        if (damage > PDefender->getMod(Mod::DMGRANGE_CAP) && PDefender->getMod(Mod::DMGRANGE_CAP) > 0)
+        {
+            damage = PDefender->getMod(Mod::DMGRANGE_CAP);
         }
 
         return damage;
@@ -5616,6 +5685,25 @@ namespace battleutils
         return damage;
     }
 
+    int32 HandleMagicStoneskin(CBattleEntity* PDefender, int32 damage)
+    {
+        int16 magicSS = PDefender->getMod(Mod::MAGIC_STONESKIN);
+        if (magicSS)
+        {
+            if (damage >= magicSS)
+            {
+                PDefender->setModifier(Mod::MAGIC_STONESKIN, 0);
+                damage = damage - magicSS;
+            }
+            else
+            {
+                PDefender->setModifier(Mod::MAGIC_STONESKIN, magicSS - damage);
+                damage = 0;
+            }
+        }
+        return damage;
+    }
+
     int32 HandleSevereDamage(CBattleEntity* PDefender, int32 damage, bool isPhysical)
     {
         damage = HandleSevereDamageEffect(PDefender, EFFECT_MIGAWARI, damage, true);
@@ -5626,6 +5714,11 @@ namespace battleutils
         {
             damage = PDefender->health.hp - 1;
             ((CPetEntity*)PDefender)->PMaster->StatusEffectContainer->DelStatusEffectSilent(EFFECT_EARTH_MANEUVER);
+        }
+
+        if (xirand::GetRandomNumber(100) < PDefender->getMod(Mod::SEVERE_DMG_NULL) && damage >= PDefender->health.hp)
+        {
+            damage = PDefender->health.hp - 1;
         }
 
         return damage;
@@ -6647,6 +6740,8 @@ namespace battleutils
         {
             cost = 0;
         }
+        cost = (int16)((float)cost * ((float)(PEntity->getMod(Mod::AUTOMATON_MAGIC_COST)) + 100.0f) / 100.0f); // Lowers spell cost for automatons.
+
         return std::clamp<int16>(cost, 0, 9999);
     }
 
@@ -6671,6 +6766,11 @@ namespace battleutils
         // Apply Haste (Magic and Gear)
         int32 haste = PEntity->getMod(Mod::HASTE_MAGIC) + PEntity->getMod(Mod::HASTE_GEAR);
         recast      = static_cast<int32>(recast * ((10000.0f - haste) / 10000.0f));
+
+        if (PSpell->getSpellGroup() == SPELLGROUP_NINJUTSU)
+        {
+            recast -= PEntity->getMod(Mod::NINJUTSU_RECAST_DELAY);
+        }
 
         if (PSpell->getSpellGroup() == SPELLGROUP_SONG)
         {

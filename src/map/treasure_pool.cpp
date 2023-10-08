@@ -505,10 +505,10 @@ void CTreasurePool::CheckTreasureItem(time_point tick, uint8 SlotID)
             std::vector<CCharEntity*> candidates;
             for (auto& member : members)
             {
-                if (charutils::HasItem(member, m_PoolItems[SlotID].ID) && itemutils::GetItem(m_PoolItems[SlotID].ID)->getFlag() & ITEM_FLAG_RARE)
-                {
-                    continue;
-                }
+                // if (charutils::HasItem(member, m_PoolItems[SlotID].ID) && itemutils::GetItem(m_PoolItems[SlotID].ID)->getFlag() & ITEM_FLAG_RARE)
+                // {
+                //     continue;
+                // }
 
                 if (member->getStorage(LOC_INVENTORY)->GetFreeSlotsCount() != 0 && !HasPassedItem(member, SlotID))
                 {

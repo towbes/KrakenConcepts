@@ -569,6 +569,7 @@ void CZoneEntities::SpawnMOBs(CCharEntity* PChar)
             if (validAggro && PController->CanAggroTarget(PChar))
             {
                 PCurrentMob->PEnmityContainer->AddBaseEnmity(PChar);
+                PCurrentMob->PAI->EventHandler.triggerListener("ON_AGGRO_PLAYER", PCurrentMob, PChar); // Umeboshi
             }
         }
         else if (MOB != PChar->SpawnMOBList.end())

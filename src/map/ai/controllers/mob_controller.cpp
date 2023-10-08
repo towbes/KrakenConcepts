@@ -121,6 +121,10 @@ bool CMobController::CheckHide(CBattleEntity* PTarget)
     {
         return !CanPursueTarget(PTarget) && !PMob->m_TrueDetection;
     }
+    else if (PTarget && PTarget->GetSJob() == JOB_THF && PTarget->StatusEffectContainer->HasStatusEffect(EFFECT_HIDE))
+    {
+        return !CanPursueTarget(PTarget) && !PMob->m_TrueDetection;
+    }
     return false;
 }
 
