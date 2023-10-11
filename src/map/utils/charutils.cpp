@@ -99,6 +99,7 @@ along with this program.  If not, see http://www.gnu.org/licenses/
 #include "battleutils.h"
 #include "blueutils.h"
 #include "charutils.h"
+#include "fellowutils.h"
 #include "itemutils.h"
 #include "petutils.h"
 #include "puppetutils.h"
@@ -709,6 +710,25 @@ namespace charutils
 
                 // clear the charvars used for jug state
                 PChar->clearCharVarsWithPrefix("jugpet-");
+            }
+        }
+
+        
+        fmtQuery = "SELECT fellowid, zone_hp, zone_mp "
+                   "FROM char_fellow WHERE charid = %u;";
+
+        ret = sql->Query(fmtQuery, PChar->id);
+
+        if (ret != SQL_ERROR && sql->NumRows() != 0 && sql->NextRow() == SQL_SUCCESS)
+        {
+            // Determine if the fellow should be respawned.
+            int16 fellowHP = sql->GetUIntData(1);
+            if (fellowHP)
+            {
+                PChar->fellowZoningInfo.fellowHP      = fellowHP;
+                PChar->fellowZoningInfo.fellowID      = sql->GetUIntData(0);
+                PChar->fellowZoningInfo.fellowMP      = sql->GetUIntData(2);
+                PChar->fellowZoningInfo.respawnFellow = true;
             }
         }
 
@@ -4426,7 +4446,14 @@ namespace charutils
                     exp = charutils::AddExpBonus(PMember, exp);
 
                     charutils::AddExperiencePoints(false, PMember, PMob, (uint32)exp, mobCheck, chainactive);
+                    if (PMember->m_PFellow != nullptr) // award xp to fellow for mobs that yeild xp to the player
+                        fellowutils::DistributeExperiencePoints(PMember->m_PFellow, PMob, PMember);
                 }
+            }
+            else if (PMember->m_PFellow != nullptr) // fellows get exp according to THEIR lvl; not master lvl
+            {
+                if (PMember->getZone() == PMob->getZone() && distance(PMember->loc.p, PMob->loc.p) < 100)
+                    fellowutils::DistributeExperiencePoints(PMember->m_PFellow, PMob, PMember);
             }
         });
         // clang-format on
@@ -5298,6 +5325,12 @@ namespace charutils
         // we use charvars for jug specific things
         PChar->setCharVar("jugpet-spawn-time", PChar->petZoningInfo.jugSpawnTime);
         PChar->setCharVar("jugpet-duration-seconds", PChar->petZoningInfo.jugDuration);
+
+        const char* Query2 = "UPDATE char_fellow "
+                             "SET zone_hp = %u, zone_mp = %u "
+                             "WHERE charid = %u;";
+
+        sql->Query(Query2, PChar->fellowZoningInfo.fellowHP, PChar->fellowZoningInfo.fellowMP, PChar->id);
     }
 
     /************************************************************************
@@ -6356,6 +6389,16 @@ namespace charutils
             sql->Query(Query, PChar->loc.destination,
                        (PChar->m_moghouseID || PChar->loc.destination == PChar->getZone()) ? PChar->loc.prevzone : PChar->getZone(), PChar->loc.p.rotation,
                        PChar->loc.p.x, PChar->loc.p.y, PChar->loc.p.z, PChar->m_moghouseID, PChar->loc.boundary, PChar->id);
+
+            if (PChar->PPet != nullptr)
+            {
+                PChar->setPetZoningInfo();
+            }
+
+            if (PChar->m_PFellow != nullptr)
+            {
+                PChar->setFellowZoningInfo();
+            }
         }
         else
         {
@@ -6927,7 +6970,7 @@ namespace charutils
         {
             spawnlist = &PChar->SpawnPCList;
         }
-        else if (entity->objtype == TYPE_PET)
+        else if (entity->objtype == TYPE_PET || entity->objtype == TYPE_FELLOW)
         {
             spawnlist = &PChar->SpawnPETList;
         }

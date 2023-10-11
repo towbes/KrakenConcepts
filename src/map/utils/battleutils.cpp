@@ -50,6 +50,7 @@
 #include "charutils.h"
 #include "enmity_container.h"
 #include "entities/battleentity.h"
+#include "entities/fellowentity.h"
 #include "entities/mobentity.h"
 #include "entities/petentity.h"
 #include "entities/trustentity.h"
@@ -4428,12 +4429,11 @@ namespace battleutils
         }
 
         // Check TA user's fellow
-        /*
         if (auto* PChar = dynamic_cast<CCharEntity*>(taUser))
         {
-            if (PChar->PFellow)
+            if (PChar->m_PFellow)
             {
-                if (auto* fellow = dynamic_cast<CBattleEntity*>(PChar->PFellow))
+                if (auto* fellow = dynamic_cast<CBattleEntity*>(PChar->m_PFellow))
                 {
                     float distTAtarget = distance(fellow->loc.p, PMob->loc.p);
                     // require closer target not be closer than .5 yalms (.5*.5=.25 distsquared) to mob
@@ -4444,7 +4444,6 @@ namespace battleutils
                 }
             }
         }
-        */
 
         if (!taTargetList.empty())
         {
