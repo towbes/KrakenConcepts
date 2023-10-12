@@ -1013,6 +1013,11 @@ void CZone::ForEachNpc(std::function<void(CNpcEntity*)> const& func)
     }
 }
 
+bool CZone::HasReducedVerticalAggro()
+{
+    return std::find(std::begin(ReducedVerticalAggroZones), std::end(ReducedVerticalAggroZones), this->m_zoneID) != std::end(ReducedVerticalAggroZones);
+}
+
 void CZone::createZoneTimers()
 {
     TracyZoneScoped;

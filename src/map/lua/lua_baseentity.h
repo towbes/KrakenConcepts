@@ -612,6 +612,7 @@ public:
     void  updateClaim(sol::object const& entity);
     bool  hasEnmity();
     auto  getNotorietyList() -> sol::table;
+    void  clearEnmity(CLuaBaseEntity* PEntity); // clears player enmity from notoriety list
     void  setClaimable(bool claimable);
     bool  getClaimable();
     void  clearEnmityForEntity(CLuaBaseEntity* PEntity);

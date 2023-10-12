@@ -12036,6 +12036,26 @@ sol::table CLuaBaseEntity::getNotorietyList()
 }
 
 /************************************************************************
+ *  Function: clearEnmity()
+ *  Purpose : Clears all enmity towards target
+ *  Example : mob:clearEnmity(target)
+ *  Notes   :
+ ************************************************************************/
+void CLuaBaseEntity::clearEnmity(CLuaBaseEntity* PEntity)
+{
+    auto* PMob = static_cast<CMobEntity*>(m_PBaseEntity);
+
+    if (PEntity != nullptr && PEntity->GetBaseEntity()->objtype != TYPE_NPC)
+    {
+        auto* PBattleEntity = static_cast<CBattleEntity*>(PEntity->m_PBaseEntity);
+        PMob->PEnmityContainer->Clear(PBattleEntity->id);
+        auto* PTarget = PMob->PEnmityContainer->GetHighestEnmity();
+        PMob->SetBattleTargetID(PTarget ? PTarget->targid : 0);
+    }
+}
+
+
+/************************************************************************
  *  Function: setClaimable(...)
  *  Purpose : sets m_IsClaimable for a mob
  *  Example : mob:setClaimable(false)

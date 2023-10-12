@@ -679,6 +679,8 @@ private:
 
     CTreasurePool* m_TreasurePool;
 
+    static const uint16 ReducedVerticalAggroZones[];
+
     time_point m_timeZoneEmpty; // The time_point when the last player left the zone
     
     uint8  m_ZoneDirection;     // which direction for transport to travel (0 or 4)
