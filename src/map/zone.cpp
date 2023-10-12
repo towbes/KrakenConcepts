@@ -925,7 +925,7 @@ void CZone::ZoneServer(time_point tick)
         m_BattlefieldHandler->HandleBattlefields(tick);
     }
 
-    if (ZoneTimer && m_zoneEntities->CharListEmpty() && m_timeZoneEmpty + 5s < server_clock::now())
+    if (ZoneTimer && m_zoneEntities->CharListEmpty() && m_timeZoneEmpty + 300s < server_clock::now())
     {
         ZoneTimer->m_type = CTaskMgr::TASK_REMOVE;
         ZoneTimer         = nullptr;
