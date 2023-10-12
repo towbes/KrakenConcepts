@@ -224,6 +224,7 @@ bool CMagicState::Update(time_point tick)
         if (m_interrupted)
         {
             m_PEntity->OnCastInterrupted(*this, action, msg, false);
+            m_PEntity->PAI->EventHandler.triggerListener("MAGIC_INTERRUPTED", CLuaBaseEntity(m_PEntity), CLuaBaseEntity(PTarget), CLuaSpell(m_PSpell.get()), &action);
         }
         else
         {
