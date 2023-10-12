@@ -243,6 +243,23 @@ uint16 CMobSkill::getPetAnimationID() const
     }
     //  return 147; pet animationID 147 is an unused Diabolos aoe move encircling him in red rings/script
 
+    if (m_AnimID == 1125) // Diabolos Ruinous Omen
+    {
+        return 149;
+    }
+    if (m_AnimID == 1126) // Diabolos Somnolence
+    {
+        return 142;
+    }
+    if (m_AnimID == 1127) // Diabolos Dream Shroud
+    {
+        return 145;
+    }
+    if (m_AnimID == 1129) // Diabolos Nether Blast
+    {
+        return 148;
+    }
+
 
     return m_AnimID;
 }
