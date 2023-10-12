@@ -622,6 +622,8 @@ public:
     virtual void ForEachTrustInstance(CBaseEntity* PEntity, std::function<void(CTrustEntity*)> const& func);
     virtual void ForEachNpc(std::function<void(CNpcEntity*)> const& func);
 
+    bool HasReducedVerticalAggro();
+
     CZone(ZONEID ZoneID, REGION_TYPE RegionID, CONTINENT_TYPE ContinentID, uint8 levelRestriction);
     virtual ~CZone();
 
