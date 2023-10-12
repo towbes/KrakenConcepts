@@ -330,6 +330,7 @@ public:
     void  setLevelCap(uint8 cap);
     uint8 levelRestriction(sol::object const& level); // Establish/return current level restriction
     void  addJobTraits(uint8 jobID, uint8 level);
+    auto  getTraits() -> sol::table;
 
     // Player Titles and Fame
     uint16 getTitle();
