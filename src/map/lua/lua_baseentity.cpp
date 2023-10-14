@@ -4460,7 +4460,7 @@ void CLuaBaseEntity::confirmTrade()
  *  Example : player:tradeComplete()
  ************************************************************************/
 
-void CLuaBaseEntity::tradeComplete()
+void CLuaBaseEntity::tradeComplete(sol::object const& shouldTakeItems)
 {
     if (m_PBaseEntity->objtype != TYPE_PC)
     {
@@ -4468,7 +4468,8 @@ void CLuaBaseEntity::tradeComplete()
         return;
     }
 
-    auto* PChar = static_cast<CCharEntity*>(m_PBaseEntity);
+    bool  takeItems = (shouldTakeItems != sol::lua_nil) ? shouldTakeItems.as<bool>() : true;
+    auto* PChar     = static_cast<CCharEntity*>(m_PBaseEntity);
 
     for (uint8 slotID = 0; slotID < TRADE_CONTAINER_SIZE; ++slotID)
     {
@@ -4480,7 +4481,10 @@ void CLuaBaseEntity::tradeComplete()
             if (PItem)
             {
                 PItem->setReserve(0);
-                charutils::UpdateItem(PChar, LOC_INVENTORY, invSlotID, -quantity);
+                if (takeItems)
+                {
+                    charutils::UpdateItem(PChar, LOC_INVENTORY, invSlotID, -quantity);
+                }
             }
         }
     }
