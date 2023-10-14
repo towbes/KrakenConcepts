@@ -84,18 +84,20 @@ CMobSkill* CMobSkillState::GetSkill()
 
 void CMobSkillState::SpendCost()
 {
-    if (!m_PSkill->isTpFreeSkill())
+    if (m_PEntity->StatusEffectContainer->HasStatusEffect(EFFECT_SEKKANOKI))
     {
-        if (m_PEntity->StatusEffectContainer->HasStatusEffect(EFFECT_SEKKANOKI))
-        {
-            m_spentTP = m_PEntity->addTP(-1000);
-            m_PEntity->StatusEffectContainer->DelStatusEffect(EFFECT_SEKKANOKI);
-        }
-        else
-        {
-            m_spentTP            = m_PEntity->health.tp;
-            m_PEntity->health.tp = 0;
-        }
+        m_spentTP = m_PEntity->addTP(-1000);
+        m_PEntity->StatusEffectContainer->DelStatusEffect(EFFECT_SEKKANOKI);
+    }
+    else if (m_PEntity->StatusEffectContainer->HasStatusEffect({ EFFECT_MEIKYO_SHISUI }))
+    {
+        m_spentTP            = 1000;
+        m_PEntity->health.tp = (m_PEntity->health.tp > 1000 ? m_PEntity->health.tp - 1000 : 0);
+    }
+    else if (!m_PSkill->isTpFreeSkill())
+    {
+        m_spentTP            = m_PEntity->health.tp;
+        m_PEntity->health.tp = 0;
     }
 }
 
