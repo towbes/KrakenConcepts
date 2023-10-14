@@ -3844,23 +3844,23 @@ namespace charutils
         {
             return EMobDifficulty::IncrediblyTough;
         }
-        if (baseExp >= 350)
+        if (baseExp >= 200) // 350
         {
             return EMobDifficulty::VeryTough;
         }
-        if (baseExp >= 220)
+        if (baseExp > 100)
         {
             return EMobDifficulty::Tough;
         }
-        if (baseExp >= 200)
+        if (baseExp == 100)
         {
             return EMobDifficulty::EvenMatch;
         }
-        if (baseExp >= 160)
+        if (baseExp >= 80)
         {
             return EMobDifficulty::DecentChallenge;
         }
-        if (baseExp >= 60)
+        if (baseExp >= 1)
         {
             return EMobDifficulty::EasyPrey;
         }
@@ -3870,7 +3870,6 @@ namespace charutils
         }
 
         return EMobDifficulty::TooWeak;
-    }
 
     /************************************************************************
      *                                                                       *
@@ -4214,19 +4213,19 @@ namespace charutils
                                     exp *= 1.2f;
                                     break;
                                 case 2:
-                                    exp *= 1.25f;
+                                    exp *= 1.35f;
                                     break;
                                 case 3:
-                                    exp *= 1.3f;
-                                    break;
-                                case 4:
-                                    exp *= 1.4f;
-                                    break;
-                                case 5:
                                     exp *= 1.5f;
                                     break;
+                                case 4:
+                                    exp *= 1.6f;
+                                    break;
+                                case 5:
+                                    exp *= 1.7f;
+                                    break;
                                 default:
-                                    exp *= 1.55f;
+                                    exp *= 1.75f;
                                     break;
                             }
                         }
