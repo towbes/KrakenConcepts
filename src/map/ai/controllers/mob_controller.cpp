@@ -566,7 +566,7 @@ void CMobController::CastSpell(SpellID spellid)
                 // if any mobs are flagged with MOBMOD_ASSIST, override the target randomizer and assist them
                 for (auto* PAssistTarget : PMob->PAI->TargetFind->m_targets)
                 {
-                    if (static_cast<CMobEntity*>(PAssistTarget)->getMobMod(MOBMOD_ASSIST))
+                    if (PAssistTarget->objtype == TYPE_MOB && static_cast<CMobEntity*>(PAssistTarget)->getMobMod(MOBMOD_ASSIST))
                     {
                         PCastTarget = PAssistTarget;
                     }
