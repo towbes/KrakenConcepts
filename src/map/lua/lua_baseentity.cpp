@@ -4311,7 +4311,7 @@ bool CLuaBaseEntity::addLinkpearl(std::string const& lsname, bool equip)
     return false;
 }
 
-auto CLuaBaseEntity::addSoulPlate(std::string const& name, uint16 mobFamily, uint8 zeni, uint16 skillIndex, uint8 fp) -> std::optional<CLuaItem>
+auto CLuaBaseEntity::addSoulPlate(std::string const& name, uint8 fauna, uint8 subOfInterest, uint8 ecoSystem, uint8 zeni, uint16 skillIndex, uint8 fp) -> std::optional<CLuaItem>
 {
     if (m_PBaseEntity->objtype != TYPE_PC)
     {
@@ -12093,6 +12093,10 @@ void CLuaBaseEntity::clearEnmity(CLuaBaseEntity* PEntity)
     {
         auto* PBattleEntity = static_cast<CBattleEntity*>(PEntity->m_PBaseEntity);
         PMob->PEnmityContainer->Clear(PBattleEntity->id);
+        if (PEntity->getPet().has_value())
+        {
+            PMob->PEnmityContainer->Clear(PEntity->getPet().value().getID());
+        }
         auto* PTarget = PMob->PEnmityContainer->GetHighestEnmity();
         PMob->SetBattleTargetID(PTarget ? PTarget->targid : 0);
     }

@@ -82,7 +82,7 @@ public:
 
     bool isInstalled();
 
-    void setSoulPlateData(std::string const& name, uint16 mobFamily, uint8 zeni, uint16 skillIndex, uint8 fp);
+    void setSoulPlateData(std::string const& name, uint8 fauna, uint8 subOfInterest, uint8 ecoSystem, uint8 zeni, uint16 skillIndex, uint8 fp);
     auto getSoulPlateData() -> sol::table;
 
     auto getExData() -> sol::table;            // NOTE: This is 0-indexed, to be in line with the underlying C++ data
