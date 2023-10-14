@@ -11550,7 +11550,15 @@ bool CLuaBaseEntity::checkImbuedItems()
 bool CLuaBaseEntity::isDualWielding()
 {
     CBattleEntity* PBattleEntity = dynamic_cast<CBattleEntity*>(m_PBaseEntity);
-    if (PBattleEntity)
+    if (m_PBaseEntity->objtype == TYPE_PC)
+    {
+        CCharEntity* PChar = dynamic_cast<CCharEntity*>(m_PBaseEntity);
+        if (PChar->getEquip(SLOT_SUB) && !PChar->getEquip(SLOT_SUB)->IsShield())
+        {
+            return PBattleEntity->m_dualWield;
+        }
+    }
+    else if (PBattleEntity)
     {
         return PBattleEntity->m_dualWield;
     }
@@ -15817,8 +15825,6 @@ void CLuaBaseEntity::setDelay(uint16 delay)
 
 int16 CLuaBaseEntity::getDelay()
 {
-    XI_DEBUG_BREAK_IF(m_PBaseEntity->objtype != TYPE_MOB);
-
     auto* PMobEntity = static_cast<CMobEntity*>(m_PBaseEntity);
     auto* PItem      = static_cast<CItemWeapon*>(PMobEntity->m_Weapons[SLOT_MAIN]);
 
