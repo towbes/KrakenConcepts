@@ -46,6 +46,7 @@ public:
     uint16 getID();
     int16  getParam();
     bool   isAoE();
+    void   setAoE(uint8 aoe);
     bool   isConal();
     bool   isSingle();
     bool   hasMissMsg();
