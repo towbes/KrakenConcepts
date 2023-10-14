@@ -310,6 +310,8 @@ namespace luautils
     uint32 GetMobRespawnTime(uint32 mobid);
     void   DisallowRespawn(uint32 mobid, bool allowRespawn);
     void   UpdateNMSpawnPoint(uint32 mobid);
+    bool   CheckNMSpawnPoint(uint32 mobid); // Check to see if NM has extra spawn points
+
 
     std::string GetServerMessage(uint8 language); // Get the message to be delivered to player on first zone in of a session
 
