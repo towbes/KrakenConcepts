@@ -23,6 +23,7 @@ weaponskillObject.onUseWeaponSkill = function(player, target, wsID, tp, primary,
     }
     local calcParams =
     {
+        wsID = wsID, -- need 'calcParams.wsID' passed to global
         criticalHit = false,
         tpHitsLanded = 0,
         extraHitsLanded = 0,
@@ -70,6 +71,7 @@ weaponskillObject.onUseWeaponSkill = function(player, target, wsID, tp, primary,
     damage = damage * xi.settings.main.WEAPON_SKILL_POWER
     calcParams.finalDmg = damage
 
+    -- Todo: xi.weaponskills.doBreathWeaponskill() instead of all this.
     damage = xi.weaponskills.takeWeaponskillDamage(target, player, {}, primary, attack, calcParams, action)
 
     return calcParams.tpHitsLanded, calcParams.extraHitsLanded, calcParams.criticalHit, damage

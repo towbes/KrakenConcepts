@@ -1020,7 +1020,11 @@ INSERT INTO `item_latents` VALUES (14901,302,2,49,5929); -- triple attack 2% Ojo
 INSERT INTO `item_latents` VALUES (14921,8,13,26,2);     -- Dusk - Dawn: STR +13
 INSERT INTO `item_latents` VALUES (14921,384,400,26,2);  -- Dusk - Dawn: Haste +4%
 
-INSERT INTO `item_latents` VALUES  (14937,71,3,58,0);     -- storm gages hmp +3
+-- Carbuncles Cuffs
+INSERT INTO `item_latents` VALUES (14931,370,5,13,154);  -- Shining Ruby: Regen +5HP/tick
+
+-- Storm Gages
+INSERT INTO `item_latents` VALUES (14937,71,3,58,0);     -- storm gages hmp +3
 
 -- Deadeye Gloves
 INSERT INTO `item_latents` VALUES (14944,26,10,13,4);    -- Paralysis: Ranged Accuracy+10
@@ -2724,6 +2728,9 @@ INSERT INTO `item_latents` VALUES (23096,291,16,13,354); -- Kasuga Kabuto +2: EF
 INSERT INTO `item_latents` VALUES (23097,288,11,13,421); -- Hattori Zukin +2: EFFECT_INNIN: DOUBLE_ATTACK: 11
 
 INSERT INTO `item_latents` VALUES (23100,311,26,13,164); -- Hashishin Kavuk +2: EFFECT_CHAIN_AFFINITY: MAGIC_DAMAGE: 26
+
+INSERT INTO `item_latents` VALUES (23103,165,1,13,443);  -- Maculele Tiara +2: EFFECT_CLIMACTIC_FLOURISH: CRITHITRATE: 1
+INSERT INTO `item_latents` VALUES (23103,421,28,13,443); -- Maculele Tiara +2: EFFECT_CLIMACTIC_FLOURISH: CRIT_DMG_INCREASE: 28%
 
 INSERT INTO `item_latents` VALUES (23197,518,10,13,57);  -- WAR AF2 119 +2 Hands Defender Shield Rate +10
 
