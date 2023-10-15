@@ -6,14 +6,14 @@
 -- Map of the Northlands
 -----------------------------------
 require('scripts/globals/npc_util')
-require('scripts/globals/items')
-require('scripts/globals/keyitems')
+
+
 require('scripts/globals/quests')
-require('scripts/globals/status')
-require('scripts/globals/zone')
+
+
 require('scripts/globals/interaction/quest')
 -----------------------------------
-local ID = require("scripts/zones/Chateau_dOraguille/IDs")
+local ID = zones[xi.zone.CHATEAU_DORAGUILLE]
 
 -----------------------------------
 
@@ -81,7 +81,7 @@ quest.sections =
                 end,
 
                 onTrade = function(player, npc, trade)
-                    if npcUtil.tradeHasExactly(trade, { xi.items.CHUNK_OF_DERFLAND_HUMUS }) then
+                    if npcUtil.tradeHasExactly(trade, { xi.item.CHUNK_OF_DERFLAND_HUMUS }) then
                         return quest:progressEvent(83)
                     end
                 end,

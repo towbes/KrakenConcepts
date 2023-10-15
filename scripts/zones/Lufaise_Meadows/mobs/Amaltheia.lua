@@ -20,11 +20,11 @@ local dots =
 }
 
 entity.onMobSpawn = function(mob)
-    mob:setLocalVar("holyTimer", os.time() + 30)
+    mob:setLocalVar('holyTimer', os.time() + 30)
     mob:setMobMod(xi.mobMod.IDLE_DESPAWN, 300)
 
     -- Dots placed on Amaltheia will immediately fall off
-    mob:addListener("MAGIC_TAKE", "AMALTHEIA_MAGIC_TAKE", function(mobArg, caster, spell)
+    mob:addListener('MAGIC_TAKE', 'AMALTHEIA_MAGIC_TAKE', function(mobArg, caster, spell)
         for _,v in pairs(dots) do
             if mob:hasStatusEffect(v) then
                 mob:delStatusEffect(v)
@@ -43,10 +43,10 @@ entity.onMobFight = function(mob, target)
     end
 
     -- Cast Holy on a random target in range
-    if os.time() > mob:getLocalVar("holyTimer") and mob:canUseAbilities() then
-        mob:setLocalVar("holyTimer", os.time() + 30)
+    if os.time() > mob:getLocalVar('holyTimer') and mob:canUseAbilities() then
+        mob:setLocalVar('holyTimer', os.time() + 30)
         local enmityList = mob:getEnmityList()
-        local victim = utils.randomEntry(enmityList)["entity"]
+        local victim = utils.randomEntry(enmityList)['entity']
         mob:castSpell(21, victim)
     end
 end

@@ -1,0 +1,43 @@
+-----------------------------------
+--  Typhoon Wing
+--
+--  Description: Deals darkness damage to enemies within a very wide area of effect. Additional effect: Blind
+--  Type: Magical
+--  Utsusemi/Blink absorb: Wipes shadows
+--  Range: 30' radial.
+--  Notes: Used only by Ouryu and Dragua. The blinding effect does not last long
+--                but is very harsh. The attack is wide enough to generally hit an entire alliance.
+-----------------------------------
+local mobskillObject = {}
+
+mobskillObject.onMobSkillCheck = function(target, mob, skill)
+    if target:isBehind(mob, 48) then
+        return 1
+    elseif mob:getAnimationSub() ~= 0 then
+        return 1
+    end
+
+    return 0
+end
+
+mobskillObject.onMobWeaponSkill = function(target, mob, skill)
+    local typeEffect = xi.effect.BLINDNESS
+
+    xi.mobskills.mobStatusEffectMove(mob, target, typeEffect, 60, 0, 30)
+
+    local dmgmod = 1
+    local dmgBoost = 0
+
+    if mob:getPool() == 3070 then -- CoP 4-2 The Savage Ouryu
+        dmgBoost = 2.5
+    else
+        dmgBoost = 5
+    end
+
+    local info = xi.mobskills.mobMagicalMove(mob, target, skill, mob:getWeaponDmg() * dmgBoost, xi.element.WIND, dmgmod, xi.mobskills.magicalTpBonus.NO_EFFECT)
+    local dmg = xi.mobskills.mobFinalAdjustments(info.dmg, mob, skill, target, xi.attackType.MAGICAL, xi.damageType.DARK, xi.mobskills.shadowBehavior.WIPE_SHADOWS)
+    target:takeDamage(dmg, mob, xi.attackType.MAGICAL, xi.damageType.DARK)
+    return dmg
+end
+
+return mobskillObject

@@ -1,14 +1,13 @@
 -----------------------------------
 -- Zone: Qulun_Dome (148)
 -----------------------------------
-local ID = require('scripts/zones/Qulun_Dome/IDs')
-require('scripts/globals/conquest')
+local ID = zones[xi.zone.QULUN_DOME]
 -----------------------------------
 local zoneObject = {}
 
 zoneObject.onInitialize = function(zone)
     -- NM Persistence
-    if GetServerVariable("[PH]Za_Dha_Adamantking") == 1 then
+    if GetServerVariable('[PH]Za_Dha_Adamantking') == 1 then
         xi.mob.nmTODPersistCache(zone, ID.mob.ZADHA_ADAMANTKING)
     else
         xi.mob.nmTODPersistCache(zone, ID.mob.DIAMOND_QUADAV)

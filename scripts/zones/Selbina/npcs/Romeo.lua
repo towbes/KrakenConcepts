@@ -4,10 +4,6 @@
 -- Starts and Finishes Quest: Donate to Recycling
 -- !pos -11 -11 -6 248
 -----------------------------------
-require("scripts/globals/npc_util")
-require("scripts/globals/quests")
-require("scripts/globals/titles")
------------------------------------
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)
@@ -21,7 +17,7 @@ entity.onTrade = function(player, npc, trade)
             npcUtil.tradeHas(trade, { { 17104, 5 } })
         )
     then
-        player:startEvent(21) -- Finish quest "Donate to Recycling"
+        player:startEvent(21) -- Finish quest 'Donate to Recycling'
     end
 end
 
@@ -29,9 +25,9 @@ entity.onTrigger = function(player, npc)
     local donateToRecycling = player:getQuestStatus(xi.quest.log_id.OTHER_AREAS, xi.quest.id.otherAreas.DONATE_TO_RECYCLING)
 
     if donateToRecycling == QUEST_AVAILABLE then
-        player:startEvent(20) -- Start quest "Donate to Recycling"
+        player:startEvent(20) -- Start quest 'Donate to Recycling'
     elseif donateToRecycling == QUEST_ACCEPTED then
-        player:startEvent(22) -- During quest "Donate to Recycling"
+        player:startEvent(22) -- During quest 'Donate to Recycling'
     else
         player:startEvent(23) -- Standard dialog
     end

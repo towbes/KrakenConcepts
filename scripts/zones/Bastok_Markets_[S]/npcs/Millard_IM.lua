@@ -4,10 +4,7 @@
 -- Type: Sigil NPC
 -- !pos -248.5 0 81.2 87
 -----------------------------------
-local ID = require("scripts/zones/Bastok_Markets_[S]/IDs")
-require("scripts/globals/campaign")
-require("scripts/globals/utils")
-require("scripts/globals/extravaganza")
+local ID = zones[xi.zone.BASTOK_MARKETS_S]
 -----------------------------------
 local entity = {}
 
@@ -15,7 +12,7 @@ entity.onTrade = function(player, npc, trade)
 end
 
 entity.onTrigger = function(player, npc)
-    local notes = player:getCurrency("allied_notes")
+    local notes = player:getCurrency('allied_notes')
     local freelances = 99 -- Faking it for now
     local cipher = xi.extravaganza.campaignActive() * 4
     -- 0 for not displaying ciphers
@@ -67,7 +64,7 @@ entity.onEventFinish = function(player, csid, option, npc)
             end
 
             if player:getFreeSlotsCount() >= 1 then
-                player:delCurrency("allied_notes", price)
+                player:delCurrency('allied_notes', price)
                 player:addItem(item)
                 player:messageSpecial(ID.text.ITEM_OBTAINED, item)
             else
@@ -110,7 +107,7 @@ entity.onEventFinish = function(player, csid, option, npc)
             player:messageSpecial(ID.text.ALLIED_SIGIL)
 
             if cost > 0 then
-                player:delCurrency("allied_notes", cost)
+                player:delCurrency('allied_notes', cost)
             end
         end
     end

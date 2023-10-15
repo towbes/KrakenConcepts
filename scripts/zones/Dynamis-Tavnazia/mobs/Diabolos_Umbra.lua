@@ -3,8 +3,8 @@
 --  Mob: Diabolos Umbra
 -- Note: Mega Boss
 -----------------------------------
-require("scripts/globals/dynamis")
-mixins = { require("scripts/mixins/job_special") }
+require('scripts/globals/dynamis')
+mixins = { require('scripts/mixins/job_special') }
 -----------------------------------
 local entity = {}
 
@@ -20,13 +20,13 @@ entity.onMobSpawn = function(mob)
         {
             { id = 1911, hpp = 80, 
             begCode = function(mob)
-                mob:setLocalVar("omenUsed", 1)  
+                mob:setLocalVar('omenUsed', 1)  
                 end,
             endCode = function(mob)
             end,},
             { id = 1908, hpp = math.random(40, 50), 
             begCode = function(mob)
-                mob:setLocalVar("nightmareUsed", 1)  
+                mob:setLocalVar('nightmareUsed', 1)  
                 end,
             endCode = function(mob)
             end,},
@@ -56,12 +56,12 @@ entity.onMobWeaponSkill = function(target, mob, skill)
     local y = mob:getYPos()
     local z = mob:getZPos()
     
-    if mob:getLocalVar("omenUsed") == 1 then
+    if mob:getLocalVar('omenUsed') == 1 then
         Vestige1:setSpawn(x + math.random(-4, 4), y, z + math.random(-4, 4))
         Vestige1:spawn()
         Vestige1:updateEnmity(target)
     end
-    if mob:getLocalVar("nightmareUsed") == 1 then
+    if mob:getLocalVar('nightmareUsed') == 1 then
         Vestige2:setSpawn(x + math.random(-4, 4), y, z + math.random(-4, 4))
         Vestige2:spawn()
         Vestige2:updateEnmity(target)

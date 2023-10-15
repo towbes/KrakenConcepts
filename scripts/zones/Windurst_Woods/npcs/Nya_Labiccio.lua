@@ -4,9 +4,7 @@
 -- Only sells when Windurst controlls Gustaberg Region
 -- Confirmed shop stock, August 2013
 -----------------------------------
-local ID = require("scripts/zones/Windurst_Woods/IDs")
-require("scripts/globals/shop")
-require("scripts/globals/zone")
+local ID = zones[xi.zone.WINDURST_WOODS]
 -----------------------------------
 local entity = {}
 

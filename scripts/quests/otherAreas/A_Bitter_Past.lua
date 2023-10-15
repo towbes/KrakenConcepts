@@ -7,21 +7,21 @@
 -- Equette    : !pos 3 -22 -17
 -- ???        : !pos 58 -7 27
 -----------------------------------
-require('scripts/globals/items')
-require('scripts/globals/keyitems')
+
+
 require('scripts/globals/npc_util')
 require('scripts/globals/quests')
-require('scripts/globals/titles')
-require('scripts/globals/zone')
+
+
 require('scripts/globals/interaction/quest')
 -----------------------------------
-local ID = require("scripts/zones/Lufaise_Meadows/IDs")
+local ID = zones[xi.zone.LUFAISE_MEADOWS]
 -----------------------------------
 local quest = Quest:new(xi.quest.log_id.OTHER_AREAS, xi.quest.id.otherAreas.A_BITTER_PAST)
 
 quest.reward =
 {
-    item = xi.items.YINYANG_LORGNETTE,
+    item = xi.item.YINYANG_LORGNETTE,
 }
 
 quest.sections =

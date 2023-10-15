@@ -76,9 +76,9 @@ typedef std::pair<float, CCharEntity*> CharScorePair;
 CZoneEntities::CZoneEntities(CZone* zone)
 : m_zone(zone)
 , m_Transport(nullptr)
+, lastCharComputeTargId(0)
 , lastCharPersistTargId(0)
 {
-    lastCharComputeTargId = 0;
 }
 
 CZoneEntities::~CZoneEntities() = default;
@@ -231,10 +231,10 @@ void CZoneEntities::FindPartyForMob(CBaseEntity* PEntity)
     CMobEntity* PMob = (CMobEntity*)PEntity;
 
     // force all mobs in a burning circle to link
-    ZONE_TYPE zonetype  = m_zone->GetType();
-    bool      forceLink = zonetype == ZONE_TYPE::DYNAMIS || zonetype == ZONE_TYPE::BATTLEFIELD || PMob->getMobMod(MOBMOD_SUPERLINK);
+    ZONE_TYPE zonetype  = m_zone->GetTypeMask();
+    bool      forceLink = zonetype & ZONE_TYPE::DYNAMIS || PMob->getMobMod(MOBMOD_SUPERLINK);
 
-    if ((forceLink || PMob->m_Link) && PMob->PParty == nullptr)
+    if ((forceLink || PMob->m_Link || PMob->m_Type & MOBTYPE_BATTLEFIELD) && PMob->PParty == nullptr)
     {
         for (EntityList_t::const_iterator it = m_mobList.begin(); it != m_mobList.end(); ++it)
         {
@@ -248,7 +248,7 @@ void CZoneEntities::FindPartyForMob(CBaseEntity* PEntity)
             int16 sublink = PMob->getMobMod(MOBMOD_SUBLINK);
 
             if (PCurrentMob->allegiance == PMob->allegiance &&
-                (forceLink || PCurrentMob->m_SuperFamily == PMob->m_SuperFamily || PCurrentMob->m_Family == PMob->m_Family || (sublink && sublink == PCurrentMob->getMobMod(MOBMOD_SUBLINK))))
+                (forceLink || PCurrentMob->m_Family == PMob->m_Family || (sublink && sublink == PCurrentMob->getMobMod(MOBMOD_SUBLINK))))
             {
                 if (PCurrentMob->PMaster == nullptr || PCurrentMob->PMaster->objtype == TYPE_MOB)
                 {
@@ -413,8 +413,7 @@ void CZoneEntities::DecreaseZoneCounter(CCharEntity* PChar)
         }
     }
 
-    
-    // remove fellow
+        // remove fellow
     if (PChar->m_PFellow != nullptr)
     {
         PChar->m_PFellow->status = STATUS_TYPE::DISAPPEAR;
@@ -579,14 +578,6 @@ void CZoneEntities::SpawnMOBs(CCharEntity* PChar)
                 PChar->updateEntityPacket(PCurrentMob, ENTITY_SPAWN, UPDATE_ALL_MOB);
             }
 
-            if (PCurrentMob->getMobMod(MOBMOD_PIXIE) > 0)
-            {
-                PCurrentMob->PixieTryHealPlayer(PChar);
-                // Pixies never aggro
-                continue;
-            }
-
-
             // Check to skip aggro routine
             if (PChar->isDead() || PChar->nameflags.flags & FLAG_GM || PCurrentMob->PMaster)
             {
@@ -603,7 +594,7 @@ void CZoneEntities::SpawnMOBs(CCharEntity* PChar)
             if (validAggro && PController->CanAggroTarget(PChar))
             {
                 PCurrentMob->PEnmityContainer->AddBaseEnmity(PChar);
-                PCurrentMob->PAI->EventHandler.triggerListener("ON_AGGRO_PLAYER", PCurrentMob, PChar); //Umeboshi
+                PCurrentMob->PAI->EventHandler.triggerListener("ON_AGGRO_PLAYER", PCurrentMob, PChar); // Umeboshi
             }
         }
         else if (MOB != PChar->SpawnMOBList.end())
@@ -771,7 +762,7 @@ void CZoneEntities::SpawnPCs(CCharEntity* PChar)
         // Despawn character if it's a hidden GM, is in a different mog house, or if player is in a conflict while other is not, or too far up/down
         if (pc->m_isGMHidden || PChar->m_moghouseID != pc->m_moghouseID)
         {
-            toRemove.push_back(pc);
+            toRemove.emplace_back(pc);
             continue;
         }
 
@@ -779,7 +770,7 @@ void CZoneEntities::SpawnPCs(CCharEntity* PChar)
         float charDistance = distance(PChar->loc.p, pc->loc.p);
         if (charDistance >= CHARACTER_DESPAWN_DISTANCE)
         {
-            toRemove.push_back(pc);
+            toRemove.emplace_back(pc);
             continue;
         }
 
@@ -858,7 +849,7 @@ void CZoneEntities::SpawnPCs(CCharEntity* PChar)
         std::vector<CharScorePair> candidates;
         while (!candidateCharacters.empty())
         {
-            candidates.push_back(candidateCharacters.top());
+            candidates.emplace_back(candidateCharacters.top());
             candidateCharacters.pop();
         }
         std::reverse(candidates.begin(), candidates.end());
@@ -1204,12 +1195,11 @@ void CZoneEntities::UpdateEntityPacket(CBaseEntity* PEntity, ENTITYUPDATE type, 
 
     for (EntityList_t::const_iterator it = m_charList.begin(); it != m_charList.end(); ++it)
     {
-        if (CCharEntity* PCurrentChar = dynamic_cast<CCharEntity*>(it->second))
+        CCharEntity* PCurrentChar = (CCharEntity*)it->second;
+
+        if (alwaysInclude || type == ENTITY_SPAWN || type == ENTITY_DESPAWN || charutils::hasEntitySpawned(PCurrentChar, PEntity))
         {
-            if (alwaysInclude || type == ENTITY_SPAWN || type == ENTITY_DESPAWN || charutils::hasEntitySpawned(PCurrentChar, PEntity))
-            {
-                PCurrentChar->updateEntityPacket(PEntity, type, updatemask);
-            }
+            PCurrentChar->updateEntityPacket(PEntity, type, updatemask);
         }
     }
 }
@@ -1417,9 +1407,19 @@ void CZoneEntities::ZoneServer(time_point tick)
 
         if (PMob->status == STATUS_TYPE::DISAPPEAR && PMob->m_bReleaseTargIDOnDisappear)
         {
+            if (PMob->PPet != nullptr)
+            {
+                PMob->PPet->PMaster = nullptr;
+            }
+
+            if (PMob->PMaster != nullptr)
+            {
+                PMob->PMaster->PPet = nullptr;
+            }
+
             for (auto PMobIt : m_mobList)
             {
-                CMobEntity* PCurrentMob = (CMobEntity*)PMobIt.second;
+                CMobEntity* PCurrentMob = static_cast<CMobEntity*>(PMobIt.second);
                 PCurrentMob->PEnmityContainer->Clear(PMob->id);
             }
 
@@ -1430,7 +1430,18 @@ void CZoneEntities::ZoneServer(time_point tick)
 
             for (EntityList_t::const_iterator it = m_charList.begin(); it != m_charList.end(); ++it)
             {
-                CCharEntity* PChar = (CCharEntity*)it->second;
+                CCharEntity* PChar = static_cast<CCharEntity*>(it->second);
+
+                if (PChar->PClaimedMob == PMob)
+                {
+                    PChar->PClaimedMob = nullptr;
+                }
+
+                if (PChar->currentEvent && PChar->currentEvent->targetEntity == PMob)
+                {
+                    PChar->currentEvent->targetEntity = nullptr;
+                }
+
                 if (distance(PChar->loc.p, PMob->loc.p) < 50)
                 {
                     PChar->SpawnMOBList.erase(PMob->id);
@@ -1439,14 +1450,14 @@ void CZoneEntities::ZoneServer(time_point tick)
 
             it->second = nullptr;
             m_mobList.erase(it++);
-            dynamicTargIdsToDelete.push_back(std::make_pair(PMob->targid, server_clock::now()));
+            dynamicTargIdsToDelete.emplace_back(std::make_pair(PMob->targid, server_clock::now()));
             destroy(PMob);
             continue;
         }
 
         if (PMob->allegiance == ALLEGIANCE_TYPE::PLAYER && PMob->m_isAggroable)
         {
-            aggroableMobs.push_back(PMob);
+            aggroableMobs.emplace_back(PMob);
         }
 
         it++;
@@ -1488,7 +1499,7 @@ void CZoneEntities::ZoneServer(time_point tick)
             }
 
             destroy(it->second);
-            dynamicTargIdsToDelete.push_back({ it->first, server_clock::now() });
+            dynamicTargIdsToDelete.emplace_back(std::make_pair(it->first, server_clock::now()));
 
             m_npcList.erase(it++);
             continue;
@@ -1521,7 +1532,7 @@ void CZoneEntities::ZoneServer(time_point tick)
                     destroy(it->second);
                 }
 
-                dynamicTargIdsToDelete.push_back(std::make_pair(it->first, server_clock::now()));
+                dynamicTargIdsToDelete.emplace_back(std::make_pair(it->first, server_clock::now()));
 
                 m_petList.erase(it++);
                 continue;
@@ -1575,7 +1586,7 @@ void CZoneEntities::ZoneServer(time_point tick)
                 }
 
                 destroy(it->second);
-                dynamicTargIdsToDelete.push_back(std::make_pair(it->first, server_clock::now()));
+                dynamicTargIdsToDelete.emplace_back(std::make_pair(it->first, server_clock::now()));
 
                 m_trustList.erase(it++);
                 continue;

@@ -7,20 +7,20 @@
 -- Anteurephiaux !pos 74 -24 5
 -- ???           !pos
 -----------------------------------
-require('scripts/globals/items')
+
 require('scripts/globals/moghouse')
 require('scripts/globals/quests')
-require('scripts/globals/status')
-require('scripts/globals/zone')
+
+
 require('scripts/globals/interaction/quest')
 -----------------------------------
-local ID = require("scripts/zones/Misareaux_Coast/IDs")
+local ID = zones[xi.zone.MISAREAUX_COAST]
 -----------------------------------
 local quest = Quest:new(xi.quest.log_id.OTHER_AREAS, xi.quest.id.otherAreas.THE_CALL_OF_THE_SEA)
 
 quest.reward =
 {
-    item = xi.items.MEMENTO_MUFFLER,
+    item = xi.item.MEMENTO_MUFFLER,
 }
 
 quest.sections =

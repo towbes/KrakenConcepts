@@ -3,9 +3,9 @@
 --   NM: Odontotyrannus
 -- Involved in Quest: A Boy's Dream
 -----------------------------------
-mixins = {require("scripts/mixins/job_special")}
-require("scripts/globals/quests")
-require("scripts/globals/status")
+mixins = {require('scripts/mixins/job_special')}
+require('scripts/globals/quests')
+
 -----------------------------------
 local entity = {}
 

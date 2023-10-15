@@ -4,8 +4,8 @@
 -----------------------------------
 mixins =
 {
-    require("scripts/mixins/dynamis_beastmen"),
-    require("scripts/mixins/job_special")
+    require('scripts/mixins/dynamis_beastmen'),
+    require('scripts/mixins/job_special')
 }
 -----------------------------------
 local entity = {}
@@ -48,9 +48,9 @@ entity.onMobFight = function(mob, target)
         then
             mob:setAutoAttackEnabled(false)
             mob:setMobMod(xi.mobMod.NO_MOVE, 1)
-            mob:entityAnimationPacket("casm")
+            mob:entityAnimationPacket('casm')
             mob:timer(4000, function(dagourmarche)
-                dagourmarche:entityAnimationPacket("shsm")
+                dagourmarche:entityAnimationPacket('shsm')
                 mob:setAutoAttackEnabled(true)
                 mob:setMobMod(xi.mobMod.NO_MOVE, 0)
                 local pos = dagourmarche:getPos()
@@ -72,6 +72,7 @@ entity.onMobWeaponSkillPrepare = function(mob, target)
 end
 
 entity.onMobDeath = function(mob, player, optParams)
+    xi.magian.onMobDeath(mob, player, optParams, set{ 2672, 2678, 2686 })
     DespawnMob(17326091)
     DespawnMob(17326092)
 end

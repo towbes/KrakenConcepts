@@ -2,8 +2,6 @@
 -- Area: Kuftal Tunnel
 --   NM: Sabotender Mariachi
 -----------------------------------
-require("scripts/globals/hunts")
------------------------------------
 local entity = {}
 
 local updateRegen = function(mob)

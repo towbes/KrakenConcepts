@@ -1,8 +1,8 @@
 -----------------------------------
 -- Area: Selbina
 --  NPC: Devean
--- Involved in Quest: Test My Mettle
--- !pos 39.858 -14.558 40.009 248
+-- Test My Mettle
+-- !pos 39.858 -14.558 40.009
 -----------------------------------
 local entity = {}
 

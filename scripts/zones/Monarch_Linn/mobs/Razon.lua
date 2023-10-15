@@ -3,7 +3,7 @@
 -- Mob: Razon
 -- ENM: Fire in the Sky
 -----------------------------------
-require("scripts/globals/status")
+
 -----------------------------------
 local entity = {}
 
@@ -28,12 +28,12 @@ end
 entity.onMobSpawn = function(mob)
     mob:addStatusEffect(xi.effect.STONESKIN, 150, 0, 300)
 
-    mob:setLocalVar("triggerElement1", elements[math.random(1,8)])
-    mob:setLocalVar("triggerElement2", elements[math.random(1,8)])
+    mob:setLocalVar('triggerElement1', elements[math.random(1,8)])
+    mob:setLocalVar('triggerElement2', elements[math.random(1,8)])
 
-    mob:addListener("TAKE_DAMAGE", "RAZON_TAKE_DAMAGE", function(mobArg, amount, attacker, attackType, damageType)
+    mob:addListener('TAKE_DAMAGE', 'RAZON_TAKE_DAMAGE', function(mobArg, amount, attacker, attackType, damageType)
         if attackType == xi.attackType.MAGICAL and
-            (damageType == mob:getLocalVar("triggerElement1") or damageType == mob:getLocalVar("triggerElement2"))
+            (damageType == mob:getLocalVar('triggerElement1') or damageType == mob:getLocalVar('triggerElement2'))
         then
             local tp = mobArg:getTP()
             mobArg:useMobAbility(626) -- dust cloud

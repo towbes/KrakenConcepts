@@ -3,15 +3,13 @@
 --  NPC: Omiro-Zamiro
 -- !pos 3 7 -54 246
 -----------------------------------
-require("scripts/globals/keyitems")
------------------------------------
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)
 end
 
 entity.onTrigger = function(player, npc)
-    if player:getCharVar("Quest[0][67]Stage") > os.time() then
+    if player:getCharVar('Quest[0][67]Stage') > os.time() then
         player:startEvent(43)
     else
         if

@@ -8,8 +8,8 @@
 require('scripts/globals/interaction/quest')
 require('scripts/globals/npc_util')
 require('scripts/globals/quests')
-require('scripts/globals/zone')
-local ID = require("scripts/zones/Southern_San_dOria/IDs")
+
+local ID = zones[xi.zone.SOUTHERN_SAN_DORIA]
 -----------------------------------
 
 local quest = Quest:new(xi.quest.log_id.SANDORIA, xi.quest.id.sandoria.DISTANT_LOYALTIES)
@@ -18,7 +18,7 @@ quest.reward =
 {
     fame = 30,
     fameArea = xi.quest.fame_area.SANDORIA,
-    item = xi.items.WHITE_CAPE,
+    item = xi.item.WHITE_CAPE,
 }
 
 quest.sections =
@@ -86,7 +86,7 @@ quest.sections =
             {
                 onTrade = function(player, npc, trade)
                     if
-                        npcUtil.tradeHasExactly(trade, { { xi.items.MYTHRIL_INGOT, 1 } }) and
+                        npcUtil.tradeHasExactly(trade, { { xi.item.MYTHRIL_INGOT, 1 } }) and
                         quest:getVar(player, 'Prog') == 2
                     then
                         return quest:progressEvent(317)

@@ -2,10 +2,9 @@
 -- Area: Sauromugue Champaign
 --  NPC: qm1 (???)
 -- !pos 203.939 0.000 -238.811 120
--- Notes: Spawns Dribblix Greasemaw for ACP mission "Gatherer of Light (I)"
+-- Notes: Spawns Dribblix Greasemaw for ACP mission 'Gatherer of Light (I)'
 -----------------------------------
-local ID = require("scripts/zones/Sauromugue_Champaign/IDs")
-require("scripts/globals/keyitems")
+local ID = zones[xi.zone.SAUROMUGUE_CHAMPAIGN]
 -----------------------------------
 local entity = {}
 

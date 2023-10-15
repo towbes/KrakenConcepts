@@ -4,15 +4,7 @@
 -- Log ID: 3, Quest ID: 137
 -- Nomad Moogle : !pos 10.012 1.453 121.883 243
 -----------------------------------
-require('scripts/globals/items')
-require('scripts/globals/keyitems')
-require('scripts/globals/npc_util')
-require('scripts/globals/quests')
-require('scripts/globals/titles')
-require('scripts/globals/zone')
-require('scripts/globals/interaction/quest')
------------------------------------
-local ruludeID = require('scripts/zones/RuLude_Gardens/IDs')
+local ruludeID = zones[xi.zone.RULUDE_GARDENS]
 -----------------------------------
 
 local quest = Quest:new(xi.quest.log_id.JEUNO, xi.quest.id.jeuno.BEYOND_INFINITY)
@@ -58,7 +50,7 @@ quest.sections =
                         quest:begin(player)
                     end
 
-                    -- This options also warp you to a BCNM. Note that the quest "Beyond Infinity" is already activated.
+                    -- This options also warp you to a BCNM. Note that the quest 'Beyond Infinity' is already activated.
                     if option == 14 then
                         player:setPos(-511.459, 159.004, -210.543, 10, xi.zone.HORLAIS_PEAK)
                     elseif option == 19 then
@@ -134,7 +126,7 @@ quest.sections =
                 end,
 
                 onTrade = function(player, npc, trade)
-                    if npcUtil.tradeHasExactly(trade, { { xi.items.HIGH_KINDREDS_CREST, 5 } }) then
+                    if npcUtil.tradeHasExactly(trade, { { xi.item.HIGH_KINDREDS_CREST, 5 } }) then
                         return quest:progressEvent(10195, 1)
                     end
                 end,

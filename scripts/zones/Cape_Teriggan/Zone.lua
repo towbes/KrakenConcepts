@@ -1,11 +1,9 @@
 -----------------------------------
 -- Zone: Cape_Teriggan (113)
 -----------------------------------
-local ID = require('scripts/zones/Cape_Teriggan/IDs')
+local ID = zones[xi.zone.CAPE_TERIGGAN]
 -----------------------------------
 require('scripts/quests/i_can_hear_a_rainbow')
-require('scripts/globals/conquest')
-require('scripts/globals/zone')
 -----------------------------------
 local zoneObject = {}
 
@@ -55,7 +53,7 @@ zoneObject.onZoneWeatherChange = function(weather)
 
     if
         not kreutzet:isSpawned() and
-        os.time() > GetServerVariable("\\[SPAWN\\]"..ID.mob.KREUTZET) and
+        os.time() > GetServerVariable('\\[SPAWN\\]'..ID.mob.KREUTZET) and
         (weather == xi.weather.WIND or weather == xi.weather.GALES)
     then
         DisallowRespawn(kreutzet:getID(), false)

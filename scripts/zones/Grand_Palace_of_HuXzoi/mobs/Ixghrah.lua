@@ -2,8 +2,6 @@
 -- Area: Grand Palace of HuXzoi
 --  Mob: Ix'ghrah
 -----------------------------------
-require("scripts/globals/missions")
------------------------------------
 local entity = {}
 
 local spellTable =
@@ -35,14 +33,14 @@ entity.onMobSpawn = function(mob)
     mob:setMobMod(xi.mobMod.MAGIC_COOL, 30)
     mob:setMobMod(xi.mobMod.NO_STANDBACK, 1)
     mob:setMod(xi.mod.REGEN, 20)
-    mob:setLocalVar("twoHourPer", 50)
-    mob:setLocalVar("canTwoHour", 0)
-    mob:setLocalVar("roamTime", os.time())
+    mob:setLocalVar('twoHourPer', 50)
+    mob:setLocalVar('canTwoHour', 0)
+    mob:setLocalVar('roamTime', os.time())
     mob:setAnimationSub(0)
     mob:setAggressive(false)
 
     local skin = dayToSkin[VanadielDayOfTheWeek()][1]
-    mob:setLocalVar("skin", skin)
+    mob:setLocalVar('skin', skin)
     if skin == 1161 then -- Fire
         mob:setSpellList(spellTable[skin][2])
         mob:setMod(xi.mod.ICE_MEVA, 80)
@@ -103,9 +101,9 @@ entity.onMobSpawn = function(mob)
 end
 
 entity.onMobFight = function(mob, target)
-    local state = mob:getLocalVar("state")
-    local twoHourPer = mob:getLocalVar("twoHourPer")
-    local change = mob:getLocalVar("change")
+    local state = mob:getLocalVar('state')
+    local twoHourPer = mob:getLocalVar('twoHourPer')
+    local change = mob:getLocalVar('change')
     if change == 1 and mob:canUseAbilities() then
         state = math.random(0, 3)
         while state == mob:getAnimationSub() do
@@ -144,41 +142,41 @@ entity.onMobFight = function(mob, target)
             mob:setDamage(79)
         end
 
-        mob:setLocalVar("state", state)
+        mob:setLocalVar('state', state)
         mob:setAnimationSub(state)
-        mob:setLocalVar("change", 0)
+        mob:setLocalVar('change', 0)
     end
 
     if
-        mob:getLocalVar("canTwoHour") == 0 and
+        mob:getLocalVar('canTwoHour') == 0 and
         mob:getHPP() < twoHourPer
     then
-        if mob:getLocalVar("state") == 1 then
+        if mob:getLocalVar('state') == 1 then
             mob:useMobAbility(694) --invincible
-        elseif mob:getLocalVar("state") == 2 then
+        elseif mob:getLocalVar('state') == 2 then
             mob:useMobAbility(688) -- mighty strikes
-        elseif mob:getLocalVar("state") == 0 then
+        elseif mob:getLocalVar('state') == 0 then
             mob:useMobAbility(691) -- manafont
-            local skin = mob:getLocalVar("skin")
+            local skin = mob:getLocalVar('skin')
             mob:setSpellList(spellTable[skin][1])
-            mob:setLocalVar("delay", mob:getBattleTime())
+            mob:setLocalVar('delay', mob:getBattleTime())
             mob:setMobMod(xi.mobMod.MAGIC_COOL, 0)
-        elseif mob:getLocalVar("state") == 3 then
+        elseif mob:getLocalVar('state') == 3 then
             mob:useMobAbility(693) -- perfect dodge
         end
 
-        mob:setLocalVar("canTwoHour", 1)
+        mob:setLocalVar('canTwoHour', 1)
     end
 
     if
         not mob:hasStatusEffect(xi.effect.MANAFONT) and --Changing spell list back after manafont is over
-        mob:getLocalVar("canTwoHour") == 1 and
-        mob:getBattleTime() - mob:getLocalVar("delay") > 15 and
-        mob:getLocalVar("state2") == 0
+        mob:getLocalVar('canTwoHour') == 1 and
+        mob:getBattleTime() - mob:getLocalVar('delay') > 15 and
+        mob:getLocalVar('state2') == 0
     then
-        local skin = mob:getLocalVar("skin")
+        local skin = mob:getLocalVar('skin')
         mob:setSpellList(spellTable[skin][2])
-        mob:setLocalVar("state2", 1)
+        mob:setLocalVar('state2', 1)
         mob:setMobMod(xi.mobMod.MAGIC_COOL, 30)
     end
 end
@@ -186,18 +184,18 @@ end
 entity.onMobWeaponSkill = function(target, mob, skill)
     local form = mob:getAnimationSub()
     if form == 0 and skill:getID() == 1443 then -- In ball form and used hexidiscs
-        mob:setLocalVar("change", 1)
+        mob:setLocalVar('change', 1)
     elseif form == 1 and skill:getID() == 1444 then -- In human form and used vorpal blade
-        mob:setLocalVar("change", 1)
+        mob:setLocalVar('change', 1)
     elseif form == 2 and skill:getID() == 1446 then -- In spider form and used sickle slash
-        mob:setLocalVar("change", 1)
+        mob:setLocalVar('change', 1)
     elseif form == 3 and skill:getID() == 1445 then -- In bird form and used damnation dive
-        mob:setLocalVar("change", 1)
+        mob:setLocalVar('change', 1)
     end
 end
 
 entity.onMobDeath  = function(mob, player, optParams)
-    local missionVar = string.format("Mission[%d][%d]Status", xi.mission.log_id.COP, xi.mission.id.cop.A_FATE_DECIDED)
+    local missionVar = string.format('Mission[%d][%d]Status', xi.mission.log_id.COP, xi.mission.id.cop.A_FATE_DECIDED)
     if player:getCharVar(missionVar) == 1 then
         player:setCharVar(missionVar, 2)
     end

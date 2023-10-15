@@ -5,15 +5,13 @@
 -- CS/Event ID's:
 -- 324 = on zoning in
 -- 325 = 1st chat, get 1st stone,
--- completes "A Journey Begins"
+-- completes 'A Journey Begins'
 -- 326 = Limited Menu
--- 327 = CS after "The Truth Beckons" completed.
+-- 327 = CS after 'The Truth Beckons' completed.
 -- 328 = Full Menu
--- 331 = CS after "Dawn of Death" completed.
+-- 331 = CS after 'Dawn of Death' completed.
 -- 332 = ???
 -----------------------------------
-require("scripts/globals/abyssea")
-----------------------------------
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)

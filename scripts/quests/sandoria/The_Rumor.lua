@@ -7,8 +7,8 @@
 require('scripts/globals/interaction/quest')
 require('scripts/globals/npc_util')
 require('scripts/globals/quests')
-require('scripts/globals/zone')
-local ID = require("scripts/zones/Bostaunieux_Oubliette/IDs")
+
+local ID = zones[xi.zone.BOSTAUNIEUX_OUBLIETTE]
 -----------------------------------
 
 local quest = Quest:new(xi.quest.log_id.SANDORIA, xi.quest.id.sandoria.THE_RUMOR)
@@ -17,7 +17,7 @@ quest.reward =
 {
     fame = 30,
     fameArea = xi.quest.fame_area.SANDORIA,
-    item = xi.items.SCROLL_OF_DRAIN,
+    item = xi.item.SCROLL_OF_DRAIN,
 }
 
 quest.sections =
@@ -63,7 +63,7 @@ quest.sections =
             ['Novalmauge'] =
             {
                 onTrade = function(player, npc, trade)
-                    if npcUtil.tradeHasExactly(trade, xi.items.VIAL_OF_BEASTMAN_BLOOD) then
+                    if npcUtil.tradeHasExactly(trade, xi.item.VIAL_OF_BEASTMAN_BLOOD) then
                         return quest:progressEvent(12)
                     end
                 end,

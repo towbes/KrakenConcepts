@@ -2,10 +2,9 @@
 -- Area: Crawlers Nest [S]
 --  NPC: Kalsu-Kalasu
 -- !pos 304.768 -33.519 -19.168 171
--- Notes: Gives Green Letter required to start "Snake on the plains"
+-- Notes: Gives Green Letter required to start 'Snake on the plains'
 -----------------------------------
-require("scripts/globals/keyitems")
-local ID = require("scripts/zones/Crawlers_Nest_[S]/IDs")
+local ID = zones[xi.zone.CRAWLERS_NEST_S]
 -----------------------------------
 local entity = {}
 

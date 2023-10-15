@@ -3,8 +3,7 @@
 --   NM: Climbpix Highrise
 -- Involved in Quest: As Thick as Thieves 
 -----------------------------------
-mixins = {require("scripts/mixins/job_special")}
-require("scripts/globals/regimes")
+mixins = {require('scripts/mixins/job_special')}
 -----------------------------------
 local entity = {}
 

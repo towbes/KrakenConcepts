@@ -4,12 +4,6 @@
 -- Log ID: 1, Quest ID: 13
 -- Michea : !pos -298 -16 -157 235
 -----------------------------------
-require('scripts/globals/items')
-require('scripts/globals/npc_util')
-require('scripts/globals/quests')
-require('scripts/globals/zone')
-require('scripts/globals/interaction/quest')
------------------------------------
 
 local quest = Quest:new(xi.quest.log_id.BASTOK, xi.quest.id.bastok.THE_ELVAAN_GOLDSMITH)
 
@@ -53,10 +47,7 @@ quest.sections =
             ['Michea'] =
             {
                 onTrade = function(player, npc, trade)
-                    if
-                        npcUtil.tradeHasExactly(trade, { { xi.items.COPPER_INGOT, 1 } }) and
-                        not player:needToZone()
-                    then
+                    if npcUtil.tradeHasExactly(trade, xi.item.COPPER_INGOT) then
                         return quest:progressEvent(216)
                     end
                 end,
@@ -71,7 +62,7 @@ quest.sections =
                         player:needToZone(true)
                     else
                         player:addFame(xi.quest.fame_area.BASTOK, 5)
-                        npcUtil.giveCurrency(player, "gil", xi.settings.main.GIL_RATE * 180)
+                        npcUtil.giveCurrency(player, 'gil', xi.settings.main.GIL_RATE * 180)
                         player:needToZone(true)
                     end
                 end,

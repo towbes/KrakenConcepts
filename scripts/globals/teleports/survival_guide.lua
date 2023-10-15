@@ -1,10 +1,10 @@
 -----------------------------------
 -- Survival guides global file
 -----------------------------------
-require("scripts/globals/teleports")
-require("scripts/globals/utils")
+require('scripts/globals/teleports')
+require('scripts/globals/utils')
 -----------------------------------
-local survival = require("scripts/globals/teleports/survival_guide_map")
+local survival = require('scripts/globals/teleports/survival_guide_map')
 -----------------------------------
 xi = xi or {}
 xi.survivalGuide = xi.survivalGuide or {}
@@ -53,7 +53,7 @@ xi.survivalGuide.onTrigger = function(player)
         local foundRegisteredGuide = checkForRegisteredSurvivalGuide(player, guide)
 
         if foundRegisteredGuide then
-            local param = bit.bor(tableIndex, bit.lshift(player:getCurrency("valor_point"), 16))
+            local param = bit.bor(tableIndex, bit.lshift(player:getCurrency('valor_point'), 16))
 
             -- Get the teleport menu option.
             -- Menu options can be organized by Region or Content.
@@ -65,7 +65,7 @@ xi.survivalGuide.onTrigger = function(player)
             end
 
             if player:hasKeyItem(xi.ki.RHAPSODY_IN_WHITE) then
-                -- "Rhapsody in White" key item reduces teleport fee by 80%
+                -- 'Rhapsody in White' key item reduces teleport fee by 80%
                 param = bit.bor(param, 0x2000)
             end
 
@@ -98,10 +98,8 @@ xi.survivalGuide.onEventUpdate = function(player, csid, option, npc)
 
         if choice ~= optionMap.TELEPORT_MENU then
             if choice == optionMap.ADD_FAVORITE then
-                local temp = 0
-
                 for x = 1, 9 do
-                    temp = favorites[x]
+                    local temp = favorites[x]
                     favorites[x] = index
                     index = temp
                 end
@@ -156,7 +154,7 @@ xi.survivalGuide.onEventFinish = function(player, eventId, option)
                 local teleportCostTabs = 50
                 local canTeleport      = false
 
-                -- If the player has the "Rhapsody in White" KI, the cost is 10% of original gil or 20% of original tabs.
+                -- If the player has the 'Rhapsody in White' KI, the cost is 10% of original gil or 20% of original tabs.
                 -- GIL: 1000 -> 100
                 -- TABS: 50 -> 10
                 if player:hasKeyItem(xi.ki.RHAPSODY_IN_WHITE) then

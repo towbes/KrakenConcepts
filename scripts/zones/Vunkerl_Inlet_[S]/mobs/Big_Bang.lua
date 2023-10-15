@@ -2,8 +2,7 @@
 -- Area: Vunkerl Inlet [S]
 --   NM: Big Bang
 -----------------------------------
-require("scripts/globals/hunts")
-mixins = { require("scripts/mixins/families/djinn") }
+mixins = { require('scripts/mixins/families/djinn') }
 -----------------------------------
 local entity = {}
 

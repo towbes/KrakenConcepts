@@ -7,7 +7,7 @@
 require('scripts/globals/interaction/quest')
 require('scripts/globals/npc_util')
 require('scripts/globals/quests')
-require('scripts/globals/zone')
+
 -----------------------------------
 
 local quest = Quest:new(xi.quest.log_id.WINDURST, xi.quest.id.windurst.IN_A_PICKLE)
@@ -28,7 +28,7 @@ quest.sections =
 
         [xi.zone.WINDURST_WATERS] =
         {
-            ['Chamama'] = quest:progressEvent(654, 0, xi.items.RARAB_TAIL),
+            ['Chamama'] = quest:progressEvent(654, 0, xi.item.RARAB_TAIL),
 
             onEventFinish =
             {
@@ -51,7 +51,7 @@ quest.sections =
             ['Chamama'] =
             {
                 onTrade = function(player, npc, trade)
-                    if npcUtil.tradeHasExactly(trade, xi.items.SMOOTH_STONE) then
+                    if npcUtil.tradeHasExactly(trade, xi.item.SMOOTH_STONE) then
                         local rand = math.random(1, 4)
                         if rand <= 2 then
                             return quest:progressEvent(659)
@@ -66,7 +66,7 @@ quest.sections =
                 end,
 
                 onTrigger = function(player, npc)
-                    return quest:progressEvent(655, 0, xi.items.RARAB_TAIL) -- IN A PICKLE + RARAB TAIL: Quest Objective Reminder
+                    return quest:progressEvent(655, 0, xi.item.RARAB_TAIL) -- IN A PICKLE + RARAB TAIL: Quest Objective Reminder
                 end,
             },
 
@@ -76,7 +76,7 @@ quest.sections =
                     if quest:complete(player) then
                         player:confirmTrade()
                         player:needToZone(true)
-                        npcUtil.giveItem(player, xi.items.BONE_HAIRPIN)
+                        npcUtil.giveItem(player, xi.item.BONE_HAIRPIN)
                         player:addFame(xi.quest.fame_area.WINDURST, 75)
                     end
                 end,
@@ -94,7 +94,7 @@ quest.sections =
             ['Chamama'] =
             {
                 onTrade = function(player, npc, trade)
-                    if npcUtil.tradeHasExactly(trade, xi.items.SMOOTH_STONE) then
+                    if npcUtil.tradeHasExactly(trade, xi.item.SMOOTH_STONE) then
                         local rand = math.random(1, 4)
                         if rand <= 2 then
                             return quest:progressEvent(662, 200)

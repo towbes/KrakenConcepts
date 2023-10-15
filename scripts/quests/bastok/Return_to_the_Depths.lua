@@ -4,12 +4,12 @@
 -- Log ID = 1
 -- Quest ID = 78
 -----------------------------------
-require('scripts/globals/items')
+
 require('scripts/globals/quests')
 require('scripts/globals/interaction/quest')
 require('scripts/globals/npc_util')
-require("scripts/globals/status")
-require('scripts/globals/titles')
+
+
 -----------------------------------
 
 local quest = Quest:new(xi.quest.log_id.BASTOK, xi.quest.id.bastok.RETURN_TO_THE_DEPTHS)
@@ -18,7 +18,7 @@ quest.reward =
 {
     fame     = 60,
     fameArea = xi.quest.fame_area.BASTOK,
-    item     = xi.items.BOWYER_RING,
+    item     = xi.item.BOWYER_RING,
     title    = xi.title.GOBLIN_IN_DISGUISE,
 }
 
@@ -76,14 +76,14 @@ quest.sections =
             {
                 onTrigger = function(player, npc)
                     if quest:getVar(player, 'prog') == 6 then
-                        return quest:progressEvent(42, 0, 0, 0, 0, xi.items.BULB_OF_MISAREAUX_GARLIC)
+                        return quest:progressEvent(42, 0, 0, 0, 0, xi.item.BULB_OF_MISAREAUX_GARLIC)
                     elseif quest:getVar(player, 'prog') == 7 then
                         return quest:progressEvent(43)
                     end
                 end,
 
                 onTrade = function(player, npc, trade)
-                    if npcUtil.tradeHasExactly(trade, xi.items.BOTTLE_OF_AHRIMAN_TEARS) and
+                    if npcUtil.tradeHasExactly(trade, xi.item.BOTTLE_OF_AHRIMAN_TEARS) and
                     quest:getVar(player, 'prog') == 7 then
                         return quest:progressEvent(44)
                     end
@@ -94,7 +94,7 @@ quest.sections =
             {
                 function(player, prevZone)
                     if quest:getVar(player, 'prog') == 0 then
-                        return quest:progressEvent(40, 0, xi.items.SPRIG_OF_FRESH_MUGWORT, xi.items.MOORISH_IDOL, xi.items.PIECE_OF_ANGEL_SKIN, xi.items.BULB_OF_MISAREAUX_GARLIC)
+                        return quest:progressEvent(40, 0, xi.item.SPRIG_OF_FRESH_MUGWORT, xi.item.MOORISH_IDOL, xi.item.PIECE_OF_ANGEL_SKIN, xi.item.BULB_OF_MISAREAUX_GARLIC)
                     elseif quest:getVar(player, 'prog') == 5 then
                         return quest:progressEvent(41)
                     end
@@ -130,9 +130,9 @@ quest.sections =
             ['Muckvix'] =
             {
                 onTrade = function(player, npc, trade)
-                    if npcUtil.tradeHasExactly(trade, xi.items.BULB_OF_MISAREAUX_GARLIC) and
+                    if npcUtil.tradeHasExactly(trade, xi.item.BULB_OF_MISAREAUX_GARLIC) and
                     quest:getVar(player, 'prog') == 1 then
-                        return quest:progressEvent(99, 0, 0, 0, 0, xi.items.BULB_OF_MISAREAUX_GARLIC)
+                        return quest:progressEvent(99, 0, 0, 0, 0, xi.item.BULB_OF_MISAREAUX_GARLIC)
                     end
                 end,
 
@@ -150,7 +150,7 @@ quest.sections =
                 [99] = function(player, csid, option, npc)
                     player:tradeComplete()
                     npcUtil.giveKeyItem(player, xi.ki.LETTER_FROM_MUCKVIX)
-                    npcUtil.giveCurrency(player, "gil", 2000)
+                    npcUtil.giveCurrency(player, 'gil', 2000)
                     quest:setVar(player, 'prog', 2)
                 end,
 
@@ -178,7 +178,7 @@ quest.sections =
                 end,
 
                 onTrade = function(player, npc, trade)
-                    if npcUtil.tradeHasExactly(trade, { { "gil", 10000 } } ) and
+                    if npcUtil.tradeHasExactly(trade, { { 'gil', 10000 } } ) and
                     quest:getVar(player, 'prog') == 3 then
                         return quest:progressEvent(301, 0, xi.ki.PROVIDENCE_POT, 10000)
                     end
@@ -205,7 +205,7 @@ quest.sections =
             {
                 onTrigger = function(player, npc)
                     if quest:getVar(player, 'prog') == 8 then
-                        return quest:progressEvent(5, 0, 0, 0, 0, xi.items.BULB_OF_MISAREAUX_GARLIC)
+                        return quest:progressEvent(5, 0, 0, 0, 0, xi.item.BULB_OF_MISAREAUX_GARLIC)
                     end
                 end,
             },
@@ -244,7 +244,7 @@ quest.sections =
                     if option == 1 then
                         player:delKeyItem(xi.ki.PUNGENT_PROVIDENCE_POT)
                         player:messageSpecial(zones[player:getZoneID()].text.KEYITEM_LOST, xi.ki.PUNGENT_PROVIDENCE_POT)
-                        npcUtil.giveCurrency(player, "gil", 1000)
+                        npcUtil.giveCurrency(player, 'gil', 1000)
                     end
                 end,
             },
@@ -259,7 +259,7 @@ quest.sections =
                 end,
 
                 onTrade = function(player, npc, trade)
-                    if npcUtil.tradeHasExactly(trade, xi.items.BOTTLE_OF_AHRIMAN_TEARS) then
+                    if npcUtil.tradeHasExactly(trade, xi.item.BOTTLE_OF_AHRIMAN_TEARS) then
                         return quest:progressEvent(44)
                     end
                 end,

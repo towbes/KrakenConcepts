@@ -2,7 +2,7 @@
 -- Area: Riverne-Site_A01
 -- Notes: Assists Ouryu in Ouryu Cometh
 -----------------------------------
-require("scripts/globals/mobs")
+require('scripts/globals/mobs')
 -----------------------------------
 local entity = {}
 

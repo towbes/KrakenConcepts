@@ -2,8 +2,7 @@
 -- Area: Abyssea - Konschtat (15)
 --   NM: Turul
 -----------------------------------
-mixins = { require("scripts/mixins/families/amphiptere") }
-require("scripts/globals/titles")
+mixins = { require('scripts/mixins/families/amphiptere') }
 -----------------------------------
 local entity = {}
 
@@ -22,9 +21,9 @@ end
 entity.onSpellPrecast = function(mob, spell)
     --[[
     Todo:
-    "Turul will often cast Thunder based spells on itself to recover HP."
+    'Turul will often cast Thunder based spells on itself to recover HP.'
     One way of handling this would be treating ele nuke heals like we do melee special (use its own list)
-    and setting absorb element 100% chance. This would let us use the AI's already existing "heal chance"
+    and setting absorb element 100% chance. This would let us use the AI's already existing 'heal chance'
     ]]
 end
 

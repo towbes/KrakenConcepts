@@ -3,12 +3,10 @@
 -- http://ffxiclopedia.wikia.com/wiki/Chocobo_Digging
 -- https://www.bg-wiki.com/bg/Category:Chocobo_Digging
 -----------------------------------
-require("scripts/globals/roe")
-require("scripts/globals/utils")
-require("scripts/globals/zone")
-require("scripts/missions/amk/helpers")
+require('scripts/globals/roe')
+require('scripts/globals/utils')
+require('scripts/missions/amk/helpers')
 -----------------------------------
-
 xi = xi or {}
 xi.chocoboDig = xi.chocoboDig or {}
 
@@ -883,11 +881,11 @@ local function calculateSkillUp(player)
 
         -- WINGSCUSTOM show when digging skillup happens. The skillID is not recognized by the client, so we just have to create a custom message
         -- player:messageBasic(38, xi.skill.DIG, 1)
-        player:PrintToPlayer(string.format("%s's digging skill rises 0.1 points.", player:getName()), 0x1F)
+        player:PrintToPlayer(string.format('%s\'s digging skill rises 0.1 points.', player:getName()), 0x1F)
         if math.floor((realSkill + 1) / 10) ~= math.floor(realSkill / 10) then
             -- full skillup
             -- player:messageBasic(53, tpz.skill.DIG, math.floor((realSkill + 1) / 10))
-            player:PrintToPlayer(string.format("%s's digging skill reaches level %u.", player:getName(), math.floor((realSkill + 1) / 10)), 0x1F)
+            player:PrintToPlayer(string.format('%s\'s digging skill reaches level %u.', player:getName(), math.floor((realSkill + 1) / 10)), 0x1F)
         end
 
 
@@ -895,7 +893,7 @@ local function calculateSkillUp(player)
             -- Digging does not have test items, so increment rank once player hits 10.0, 20.0, .. 100.0
             if (realSkill + increment) >= (skillRank * 100) + 100 then
                 player:setSkillRank(xi.skill.DIG, skillRank + 1)
-                player:PrintToPlayer(string.format("%s's chocobo digging skill increased.", player:getName()), 0x1F)
+                player:PrintToPlayer(string.format('%s\'s chocobo digging skill increased.', player:getName()), 0x1F)
             end
         end
     end
@@ -1009,7 +1007,7 @@ xi.chocoboDig.start = function(player, precheck)
                     player:messageSpecial(text.DIG_THROW_AWAY, itemId)
                 end
 
-                player:triggerRoeEvent(xi.roe.triggers.chocoboDigSuccess)
+                player:triggerRoeEvent(xi.roeTrigger.CHOCOBO_DIG_SUCCESS)
 
             -- got a crystal ore, but lacked weather or skill to dig it up
             else

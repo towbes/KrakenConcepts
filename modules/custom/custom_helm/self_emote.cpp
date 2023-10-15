@@ -22,7 +22,7 @@ class SelfEmoteModule : public CPPModule
 
             CBaseEntity* PEntity = PLuaBaseEntity->GetBaseEntity();
 
-            XI_DEBUG_BREAK_IF(PEntity->objtype != TYPE_PC)
+            // XI_DEBUG_BREAK_IF(PEntity->objtype != TYPE_PC)
 
             if (target)
             {

@@ -3,7 +3,7 @@
 --  Mob: Funnel Bats
 --  Quest: Peace for the Spirit
 -----------------------------------
-require("scripts/globals/regimes")
+require('scripts/globals/regimes')
 -----------------------------------
 local entity = {}
 

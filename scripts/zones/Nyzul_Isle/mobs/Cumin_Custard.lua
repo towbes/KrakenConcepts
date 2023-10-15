@@ -4,7 +4,6 @@
 -- Info: Enemy Leader, Absorbs wind elemental damage
 -----------------------------------
 mixins = { require('scripts/mixins/families/flan') }
-require('scripts/globals/nyzul')
 -----------------------------------
 local entity = {}
 
@@ -13,8 +12,8 @@ entity.onMobInitialize = function(mob)
 end
 
 entity.onSpellPrecast = function(mob, spell)
-    if (mob:getLocalVar("Xenoglossia") > 0) then
-        mob:setLocalVar("Xenoglossia", 0)
+    if (mob:getLocalVar('Xenoglossia') > 0) then
+        mob:setLocalVar('Xenoglossia', 0)
         spell:castTime(1)
     end
 end

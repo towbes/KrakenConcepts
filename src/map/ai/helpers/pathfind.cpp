@@ -25,9 +25,10 @@ along with this program.  If not, see http://www.gnu.org/licenses/
 #include "common/utils.h"
 #include "entities/baseentity.h"
 #include "entities/mobentity.h"
-#include "../../mob_modifier.h"
 #include "lua/luautils.h"
 #include "zone.h"
+
+#include <cfloat>
 
 namespace
 {
@@ -39,8 +40,15 @@ namespace
 
 CPathFind::CPathFind(CBaseEntity* PTarget)
 : m_POwner(PTarget)
+, m_distanceFromPoint(0.0f)
 , m_pathFlags(0)
 , m_patrolFlags(0)
+, m_roamFlags(0)
+, m_onPoint(false)
+, m_currentPoint(0)
+, m_currentTurn(0)
+, m_distanceMoved(0.0f)
+, m_maxDistance(0.0f)
 , m_carefulPathing(false)
 {
     m_originalPoint.x        = 0.f;
@@ -86,7 +94,7 @@ bool CPathFind::RoamAround(const position_t& point, float maxRadius, uint8 maxTu
             return false;
         }
 
-        m_points.push_back({ { point.x - 1 + rand() % 2, point.y, point.z - 1 + rand() % 2, 0, 0 }, 0 });
+        m_points.emplace_back(pathpoint_t{ { point.x - 1 + rand() % 2, point.y, point.z - 1 + rand() % 2, 0, 0 }, 0, false });
     }
 
     return true;
@@ -135,7 +143,7 @@ bool CPathFind::PathTo(const position_t& point, uint8 pathFlags, bool clear)
             Clear();
         }
 
-        m_points.push_back({ point, 0 });
+        m_points.emplace_back(pathpoint_t{ point, 0, false });
     }
 
     return true;
@@ -152,59 +160,6 @@ bool CPathFind::PathInRange(const position_t& point, float range, uint8 pathFlag
     m_distanceFromPoint = range;
 
     bool result = PathTo(point, pathFlags, false);
-
-        if (point.y - m_POwner->loc.p.y > 4) // Target is too low.
-    {
-        result = false;
-    }
-
-    if (m_POwner->objtype == TYPE_MOB) // Target is too high.
-    {
-        auto PMob = static_cast<CMobEntity*>(m_POwner);
-        if (point.y - m_POwner->loc.p.y < -4)
-        {
-            auto disengageMod = PMob->getMobMod(MOBMOD_DISENGAGE_NO_PATH);
-
-            if (PMob->isInDynamis() && PMob->m_pathFindDisengage >= 1)
-            {
-                result = false;
-            }
-            else if (PMob->m_pathFindDisengage >= (disengageMod > 0 ? disengageMod : 2)) // This is just to stop players from abusing the disengage. Adjustable via mobmod.
-            {
-                result = false; // Make me go up.
-            }
-            else if (PMob->PAI->IsEngaged())
-            {
-                PMob->m_pathFindDisengage += 1;
-                PMob->PAI->Disengage();
-            }
-            else
-            {
-                return false;
-            }
-        }
-        else if (point.y - m_POwner->loc.p.y > 4) // 4 Is generally a decent sized ledge.
-        {
-            if (PMob->isInDynamis() && PMob->PAI->IsEngaged()) // Ignore wallhack for dynamis.
-            {
-                PMob->PAI->Disengage();
-            }
-            else
-            {
-                result = false; // Make me fall down.
-            }
-        }
-        else if (point.y - m_POwner->loc.p.y > 1) // I'm probably stuck on a rock or something dumb.
-        {
-            result = false; // Make me go down.
-        }
-    }
-
-    if (!result) // If I failed to path successfully, then I should wallhack to reach my destination.
-    {
-        pathFlags |= PATHFLAG_WALLHACK;
-        PathTo(point, pathFlags, false);
-    }
 
     PrunePathWithin(range);
     return result;
@@ -544,7 +499,7 @@ bool CPathFind::FindRandomPath(const position_t& start, float maxRadius, uint8 m
         // only add the roam point if it's _actually_ within range of the spawn point...
         if (distSq < maxRadius * maxRadius)
         {
-            m_turnPoints.push_back(status.second);
+            m_turnPoints.emplace_back(status.second);
         }
         // else
         // {
@@ -578,13 +533,13 @@ bool CPathFind::FindClosestPath(const position_t& start, const position_t& end)
 
     m_points       = m_POwner->loc.zone->m_navMesh->findPath(start, end);
     m_currentPoint = 0;
-    m_points.push_back({ end, 0 }); // this prevents exploits with navmesh / impassible terrain
+    m_points.emplace_back(pathpoint_t{ end, 0, false }); // this prevents exploits with navmesh / impassible terrain
 
     /* this check requirement is never met as intended since m_points are never empty when mob has a path
     if (m_points.empty())
     {
         // this is a trick to make mobs go up / down impassible terrain
-        m_points.push_back(end);
+        m_points.emplace_back(end);
     }
 */
 

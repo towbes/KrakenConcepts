@@ -11,15 +11,13 @@
 -- - The Quadav are in three groups of three Sapphirine Quadav with the Sapphire Quadav slowly roaming between the three groups.
 -- - The Sapphire Quadav has about 2000 HP and can use Benediction.
 -- - Killing the Sapphire Quadav will cause the Sapphirine Quadav to scatter, making it easier to pick them off one by one.
--- - They will still be aggressive as usual after scattering, but only after they stop "fleeing".
+-- - They will still be aggressive as usual after scattering, but only after they stop 'fleeing'.
 -- - It is possible to kill them one by one, as long as the Quadav of choice is a good distance from the other two in the group.
 -- - They all have fairly low HP and Defense but are highly resistant or immune to Gravity and Bind.
 -- - They have True Hearing.
 -- - Trusts are allowed.
 -----------------------------------
-require("scripts/globals/instance")
-require("scripts/globals/keyitems")
-local ID = require("scripts/zones/Ruhotz_Silvermines/IDs")
+local ID = zones[xi.zone.RUHOTZ_SILVERMINES]
 -----------------------------------
 local instanceObject = {}
 
@@ -45,7 +43,7 @@ instanceObject.afterInstanceRegister = function(player)
     player:delKeyItem(xi.ki.MINE_SHAFT_KEY)
 
     local questStatus = player:getQuestStatus(xi.quest.log_id.CRYSTAL_WAR, xi.quest.id.crystalWar.LIGHT_IN_THE_DARKNESS)
-    local questProgVar = player:getCharVar("Quest[7][19]Prog")
+    local questProgVar = player:getCharVar('Quest[7][19]Prog')
     if
         questStatus == QUEST_ACCEPTED and
         (questProgVar == 4 or questProgVar == 7)
@@ -72,9 +70,9 @@ end
 instanceObject.onInstanceFailure = function(instance)
     local chars = instance:getChars()
     for _, v in ipairs(chars) do
-        local questProgVar = v:getCharVar("Quest[7][19]Prog")
+        local questProgVar = v:getCharVar('Quest[7][19]Prog')
         if questProgVar == 4 then
-            v:setCharVar("Quest[7][19]Prog", 7)
+            v:setCharVar('Quest[7][19]Prog', 7)
         end
 
         v:setPos(-385.602, 21.970, 456.359, 0, 90)
@@ -87,9 +85,9 @@ end
 instanceObject.onInstanceComplete = function(instance)
     local chars = instance:getChars()
     for _, v in ipairs(chars) do
-        local questProgVar = v:getCharVar("Quest[7][19]Prog")
+        local questProgVar = v:getCharVar('Quest[7][19]Prog')
         if questProgVar == 4 or questProgVar == 7 then
-            v:setCharVar("Quest[7][19]Prog", 5)
+            v:setCharVar('Quest[7][19]Prog', 5)
         end
 
         v:startEvent(10000)

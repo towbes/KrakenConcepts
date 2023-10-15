@@ -4,8 +4,8 @@
 -----------------------------------
 mixins =
 {
-    require("scripts/mixins/dynamis_beastmen"),
-    require("scripts/mixins/job_special")
+    require('scripts/mixins/dynamis_beastmen'),
+    require('scripts/mixins/job_special')
 }
 -----------------------------------
 local entity = {}
@@ -31,6 +31,7 @@ entity.onMobSpawn = function(mob)
 end
 
 entity.onMobDeath = function(mob, player, optParams)
+    xi.magian.onMobDeath(mob, player, optParams, set{ 2676, 2682, 2690 })
 end
 
 return entity

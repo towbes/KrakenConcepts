@@ -13,14 +13,6 @@
 -- Magicite (Opistone)   : !pos -160 -8 8 150
 -- Magicite (Aurastone)  : !pos 11 25 -81 148
 -----------------------------------
-require('scripts/globals/items')
-require('scripts/globals/keyitems')
-require('scripts/globals/missions')
-require('scripts/globals/npc_util')
-require('scripts/globals/titles')
-require('scripts/globals/interaction/mission')
-require('scripts/globals/zone')
------------------------------------
 
 local mission = Mission:new(xi.mission.log_id.SANDORIA, xi.mission.id.sandoria.MAGICITE)
 
@@ -308,7 +300,7 @@ mission.sections =
             onEventFinish =
             {
                 [80] = function(player, csid, option, npc)
-                    mission:setVar(player, 'Option', 1) -- "Yagudo Torch" CS
+                    mission:setVar(player, 'Option', 1) -- 'Yagudo Torch' CS
                 end,
             },
         },

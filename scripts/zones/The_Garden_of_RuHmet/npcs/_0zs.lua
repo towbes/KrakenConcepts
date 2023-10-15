@@ -4,8 +4,8 @@
 -----------------------------------
 local entity = {}
 
-require("scripts/globals/missions")
-require("scripts/globals/bcnm")
+require('scripts/globals/missions')
+require('scripts/globals/bcnm')
 
 entity.onTrade = function(player, npc, trade)
     xi.bcnm.onTrade(player, npc, trade)

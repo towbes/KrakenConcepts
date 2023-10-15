@@ -1,7 +1,7 @@
 -----------------------------------
 -- Area: Grauberg [S]
 --   NM: Migratory Hippogryph
--- Note: Spawned for quest "The Unfinished Waltz"
+-- Note: Spawned for quest 'The Unfinished Waltz'
 -----------------------------------
 local entity = {}
 

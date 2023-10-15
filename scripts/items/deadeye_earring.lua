@@ -1,0 +1,31 @@
+-----------------------------------
+-- ID: 14787
+-- Item: Deadeye Earring
+-- Item Effect: Ranged Attack 20
+-- Duration: 3 Minutes
+-----------------------------------
+local itemObject = {}
+
+itemObject.onItemCheck = function(target)
+    if target:getStatusEffect(xi.effect.ENCHANTMENT, nil, xi.item.DEADEYE_EARRING) ~= nil then
+        target:delStatusEffect(xi.effect.ENCHANTMENT, nil, xi.item.DEADEYE_EARRING)
+    end
+
+    return 0
+end
+
+itemObject.onItemUse = function(target)
+    if target:hasEquipped(xi.item.DEADEYE_EARRING) then
+        target:addStatusEffect(xi.effect.ENCHANTMENT, 0, 0, 180, 0, 0, 0, xi.item.DEADEYE_EARRING)
+    end
+end
+
+itemObject.onEffectGain = function(target, effect)
+    target:addMod(xi.mod.RATT, 20)
+end
+
+itemObject.onEffectLose = function(target, effect)
+    target:delMod(xi.mod.RATT, 20)
+end
+
+return itemObject

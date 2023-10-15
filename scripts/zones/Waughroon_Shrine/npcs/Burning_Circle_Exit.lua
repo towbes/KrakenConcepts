@@ -2,9 +2,9 @@
 -- Area: Waughroon Shrine
 --  NPC: Burning Circle Exit
 -----------------------------------
-require("scripts/globals/bcnm")
-require("scripts/globals/missions")
-require("scripts/globals/keyitems")
+require('scripts/globals/bcnm')
+require('scripts/globals/missions')
+
 -----------------------------------
 local entity = {}
 

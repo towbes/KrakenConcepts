@@ -2,10 +2,9 @@
 -- Area: Wajaom Woodlands
 --  Mob: Jaded Jody
 -----------------------------------
-require("scripts/globals/hunts")
 mixins = 
 { 
-require("scripts/mixins/families/ameretat"),
+require('scripts/mixins/families/ameretat'),
 }
 -----------------------------------
 local entity = {}

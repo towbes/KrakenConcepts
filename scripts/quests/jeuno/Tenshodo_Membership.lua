@@ -3,11 +3,11 @@
 -----------------------------------
 -- Log ID: 3, Quest ID: 17
 -----------------------------------
-require('scripts/globals/items')
-require('scripts/globals/keyitems')
+
+
 require('scripts/globals/npc_util')
 require('scripts/globals/quests')
-require('scripts/globals/zone')
+
 require('scripts/globals/interaction/quest')
 -----------------------------------
 
@@ -15,7 +15,7 @@ local quest = Quest:new(xi.quest.log_id.JEUNO, xi.quest.id.jeuno.TENSHODO_MEMBER
 
 quest.reward =
 {
-    item = xi.items.TENSHODO_INVITE,
+    item = xi.item.TENSHODO_INVITE,
     keyItem = xi.ki.TENSHODO_MEMBERS_CARD,
 }
 
@@ -32,7 +32,7 @@ quest.sections =
             ['Ghebi_Damomohe'] =
             {
                 onTrigger = function(player, npc)
-                    print("blah")
+                    print('blah')
                     return quest:progressEvent(106)
                 end,
             },
@@ -91,7 +91,7 @@ quest.sections =
             {
                 onTrade = function(player, npc, trade)
                     if
-                        npcUtil.tradeHasExactly(trade, { xi.items.TENSHODO_INVITE })
+                        npcUtil.tradeHasExactly(trade, { xi.item.TENSHODO_INVITE })
                     then
                         return quest:progressEvent(108)
                     end

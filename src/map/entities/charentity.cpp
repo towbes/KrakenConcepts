@@ -64,13 +64,13 @@
 #include "char_recast_container.h"
 #include "charentity.h"
 #include "conquest_system.h"
+#include "fellowentity.h"
 #include "item_container.h"
 #include "items/item_furnishing.h"
 #include "items/item_usable.h"
 #include "items/item_weapon.h"
 #include "job_points.h"
 #include "latent_effect_container.h"
-#include "fellowentity.h"
 #include "mobskill.h"
 #include "modifier.h"
 #include "packets/char_job_extra.h"
@@ -162,6 +162,7 @@ CCharEntity::CCharEntity()
 
     m_missionLog[4].current = 0;   // MISSION_TOAU
     m_missionLog[5].current = 0;   // MISSION_WOTG
+    // m_missionLog[6].current = 101; // MISSION_COP
     m_missionLog[6].current = 0; // MISSION_COP
     for (auto& i : m_missionLog)
     {
@@ -222,7 +223,7 @@ CCharEntity::CCharEntity()
 
     resetPetZoningInfo();
     petZoningInfo.petID = 0;
-
+    
     fellowZoningInfo.respawnFellow = false;
     fellowZoningInfo.fellowID      = 0;
     fellowZoningInfo.fellowHP      = 0;
@@ -261,8 +262,6 @@ CCharEntity::CCharEntity()
     m_mentorUnlocked   = false;
     m_jobMasterDisplay = false;
     m_EffectsChanged   = false;
-
-    m_nextDataSave = std::chrono::system_clock::now() + std::chrono::seconds(settings::get<uint16>("main.PLAYER_DATA_SAVE") > 0 ? settings::get<uint16>("main.PLAYER_DATA_SAVE") : 120);
 }
 
 CCharEntity::~CCharEntity()
@@ -333,12 +332,12 @@ void CCharEntity::pushPacket(CBasicPacket* packet)
         else
         {
             PendingPositionPacket = packet;
-            PacketList.push_back(packet);
+            PacketList.emplace_back(packet);
         }
     }
     else
     {
-        PacketList.push_back(packet);
+        PacketList.emplace_back(packet);
     }
 }
 
@@ -354,7 +353,7 @@ void CCharEntity::updateCharPacket(CCharEntity* PChar, ENTITYUPDATE type, uint8 
     {
         // No existing packet update for the given char, so we push new packet
         CCharPacket* packet = new CCharPacket(PChar, type, updatemask);
-        PacketList.push_back(packet);
+        PacketList.emplace_back(packet);
         PendingCharPackets.emplace(PChar->id, packet);
     }
     else
@@ -371,7 +370,7 @@ void CCharEntity::updateEntityPacket(CBaseEntity* PEntity, ENTITYUPDATE type, ui
     {
         // No existing packet update for the given entity, so we push new packet
         CEntityUpdatePacket* packet = new CEntityUpdatePacket(PEntity, type, updatemask);
-        PacketList.push_back(packet);
+        PacketList.emplace_back(packet);
         PendingEntityPackets.emplace(PEntity->id, packet);
     }
     else
@@ -483,7 +482,7 @@ void CCharEntity::resetPetZoningInfo()
 
 bool CCharEntity::shouldPetPersistThroughZoning()
 {
-    PET_TYPE petType;
+    PET_TYPE petType{};
     auto     PPetEntity = dynamic_cast<CPetEntity*>(PPet);
 
     if (PPetEntity == nullptr && !petZoningInfo.respawnPet)
@@ -754,7 +753,7 @@ bool CCharEntity::PersistData()
     {
         for (auto&& charVarName : charVarChanges)
         {
-            charutils::PersistCharVar(this->id, charVarName.c_str(), charVarCache[charVarName]);
+            charutils::PersistCharVar(this->id, charVarName.c_str(), charVarCache[charVarName].first, charVarCache[charVarName].second);
         }
 
         charVarChanges.clear();
@@ -783,7 +782,7 @@ bool CCharEntity::PersistData()
 
     if (dataToPersist & CHAR_PERSIST::EFFECTS)
     {
-        StatusEffectContainer->SaveStatusEffects(true, false);
+        StatusEffectContainer->SaveStatusEffects(true);
     }
 
     /* TODO
@@ -998,7 +997,7 @@ bool CCharEntity::CanAttack(CBattleEntity* PTarget, std::unique_ptr<CBasicPacket
         return false;
     }
 
-    if (auto PMob = dynamic_cast<CMobEntity*>(PTarget))
+        if (auto PMob = dynamic_cast<CMobEntity*>(PTarget))
     {
         modelRadius = PMob->m_Type & MOBTYPE_NORMAL ? modelRadius - 1 : modelRadius;
     }
@@ -1024,6 +1023,7 @@ bool CCharEntity::CanAttack(CBattleEntity* PTarget, std::unique_ptr<CBasicPacket
         errMsg = std::make_unique<CMessageBasicPacket>(this, PTarget, 0, 0, MSGBASIC_UNABLE_TO_SEE_TARG);
         return false;
     }
+    // else if ((dist - PTarget->m_ModelRadius) > GetMeleeRange())
     else if (distNoY - modelRadius > GetMeleeRange() || abs(loc.p.y - PTarget->loc.p.y) > 3)
     {
         errMsg = std::make_unique<CMessageBasicPacket>(this, PTarget, 0, 0, MSGBASIC_TARG_OUT_OF_RANGE);
@@ -1189,10 +1189,10 @@ void CCharEntity::OnWeaponSkillFinished(CWeaponSkillState& state, action_t& acti
 
             actionTarget_t& actionTarget = actionList.getNewActionTarget();
 
-            uint16         tpHitsLanded;
-            uint16         extraHitsLanded;
-            int32          damage;
-            CBattleEntity* taChar = battleutils::getAvailableTrickAttackChar(this, PTarget);
+            uint16         tpHitsLanded    = 0;
+            uint16         extraHitsLanded = 0;
+            int32          damage          = 0;
+            CBattleEntity* taChar          = battleutils::getAvailableTrickAttackChar(this, PTarget);
 
             actionTarget.reaction                           = REACTION::NONE;
             actionTarget.speceffect                         = SPECEFFECT::NONE;
@@ -1425,7 +1425,7 @@ void CCharEntity::OnAbility(CAbilityState& state, action_t& action)
         }
 
         // remove invisible if aggressive
-        if (PAbility->getID() != ABILITY_TAME && PAbility->getID() != ABILITY_FIGHT && PAbility->getID() != ABILITY_DEPLOY && PAbility->getID() != ABILITY_GAUGE)
+        if (PAbility->getID() != ABILITY_TAME && PAbility->getID() != ABILITY_FIGHT)
         {
             if (PAbility->getValidTarget() & TARGET_ENEMY)
             {
@@ -1543,7 +1543,6 @@ void CCharEntity::OnAbility(CAbilityState& state, action_t& action)
                 }
                 PPet->PAI->MobSkill(PPetTarget, PAbility->getMobSkillID());
             }
-            state.ApplyEnmity();
         }
         // #TODO: make this generic enough to not require an if
         else if ((PAbility->isAoE() || (PAbility->getID() == ABILITY_LIEMENT && getMod(Mod::LIEMENT_EXTENDS_TO_AREA) > 0)) && this->PParty != nullptr)
@@ -1637,14 +1636,7 @@ void CCharEntity::OnAbility(CAbilityState& state, action_t& action)
         }
         else
         {
-            if (this->StatusEffectContainer->HasStatusEffect(EFFECT_SEIGAN) && PAbility->getID() == 62)
-            {
-                PRecastContainer->Add(RECAST_ABILITY, PAbility->getRecastId(), action.recast / 2);
-            }
-            else
-            {
-                PRecastContainer->Add(RECAST_ABILITY, PAbility->getRecastId(), action.recast);
-            }
+            PRecastContainer->Add(RECAST_ABILITY, PAbility->getRecastId(), action.recast);
         }
 
         uint16 recastID = PAbility->getRecastId();
@@ -1756,7 +1748,14 @@ void CCharEntity::OnRangedAttack(CRangeState& state, action_t& action)
     // loop for barrage hits, if a miss occurs, the loop will end
     for (uint8 i = 1; i <= hitCount; ++i)
     {
-        if (xirand::GetRandomNumber(100) < battleutils::GetRangedHitRate(this, PTarget, isBarrage)) // hit!
+        if (PTarget->StatusEffectContainer->HasStatusEffect(EFFECT_PERFECT_DODGE, 0))
+        {
+            actionTarget.messageID  = 32;
+            actionTarget.reaction   = REACTION::EVADE;
+            actionTarget.speceffect = SPECEFFECT::NONE;
+            hitCount                = i; // end barrage, shot missed
+        }
+        else if (xirand::GetRandomNumber(100) < battleutils::GetRangedHitRate(this, PTarget, isBarrage)) // hit!
         {
             // absorbed by shadow
             if (battleutils::IsAbsorbByShadow(PTarget))
@@ -1891,12 +1890,6 @@ void CCharEntity::OnRangedAttack(CRangeState& state, action_t& action)
         actionTarget.param     = shadowsTaken;
     }
 
-    // No hit, but unlimited shot is up, so don't consume ammo
-    else if (!hitOccured && this->StatusEffectContainer->HasStatusEffect(EFFECT_UNLIMITED_SHOT))
-    {
-        ammoConsumed = 0;
-    }
-
     if (actionTarget.speceffect == SPECEFFECT::HIT && actionTarget.param > 0)
     {
         actionTarget.speceffect = SPECEFFECT::RECOIL;
@@ -1921,39 +1914,8 @@ void CCharEntity::OnRangedAttack(CRangeState& state, action_t& action)
     }
     battleutils::ClaimMob(PTarget, this);
     battleutils::RemoveAmmo(this, ammoConsumed);
-
-    // Handle Camouflage effects
-    if (this->StatusEffectContainer->HasStatusEffect(EFFECT_CAMOUFLAGE, 0))
-    {
-        int16 retainChance = 40; // Estimate base ~30% chance to keep Camouflage on a ranged attack
-        uint8 rotAllowance = 25; // Allow for some slight variance in direction faced to be "behind" the mob
-
-        retainChance += (1.6 * distance(this->loc.p, PTarget->loc.p)); // Further distance from target = less chance of detection
-
-        if (behind(this->loc.p, PTarget->loc.p, rotAllowance))
-        {
-            // We're behind the mob, so it's guaranteed to stay up.
-            retainChance = 100;
-        }
-
-        if (xirand::GetRandomNumber(100) > retainChance)
-        {
-            // Camouflage was up, but is lost, so now all detectable effects must be dropped
-            StatusEffectContainer->DelStatusEffectsByFlag(EFFECTFLAG_DETECTABLE);
-        }
-        else
-        {
-            // Camouflage up, and retained, but all other effects must be dropped
-            StatusEffectContainer->DelStatusEffect(EFFECT_SNEAK);
-            StatusEffectContainer->DelStatusEffect(EFFECT_INVISIBLE);
-            StatusEffectContainer->DelStatusEffect(EFFECT_DEODORIZE);
-        }
-    }
-    else
-    {
-        // Camouflage not up, so remove all detectable status effects
-        StatusEffectContainer->DelStatusEffectsByFlag(EFFECTFLAG_DETECTABLE);
-    }
+    // only remove detectables
+    StatusEffectContainer->DelStatusEffectsByFlag(EFFECTFLAG_DETECTABLE);
 }
 
 bool CCharEntity::IsMobOwner(CBattleEntity* PBattleTarget)
@@ -1998,6 +1960,7 @@ void CCharEntity::HandleErrorMessage(std::unique_ptr<CBasicPacket>& msg)
 void CCharEntity::OnDeathTimer()
 {
     TracyZoneScoped;
+    charutils::SetCharVar(this, "expLost", 0);
     charutils::HomePoint(this);
 }
 
@@ -2075,26 +2038,15 @@ void CCharEntity::OnRaise()
 
         loc.zone->PushPacket(this, CHAR_INRANGE_SELF, new CActionPacket(action));
 
-        uint8 mLevel = charutils::GetCharVar(this, "DeathLevel");
+        // Do not return EXP to the player if they do not have experienceLost variable.
+        uint16 expLost = charutils::GetCharVar(this, "expLost");
 
-        // Do not return EXP to the player if they do not have a level at death set
-        if (mLevel != 0)
+        if (expLost != 0)
         {
-            uint16 expLost = mLevel <= 67 ? (charutils::GetExpNEXTLevel(mLevel) * 8) / 100 : 2400;
-
-            uint16 xpNeededToLevel = charutils::GetExpNEXTLevel(jobs.job[GetMJob()]) - jobs.exp[GetMJob()];
-
-            // Exp is enough to level you and (you're not under a level restriction, or the level restriction is higher than your current main level).
-            if (xpNeededToLevel < expLost && (m_LevelRestriction == 0 || GetMLevel() < m_LevelRestriction))
-            {
-                // Player probably leveled down when they died.  Give they xp for the next level.
-                expLost = GetMLevel() <= 67 ? (charutils::GetExpNEXTLevel(jobs.job[GetMJob()] + 1) * 8) / 100 : 2400;
-            }
-
             uint16 xpReturned = (uint16)(ceil(expLost * ratioReturned));
             charutils::AddExperiencePoints(true, this, this, xpReturned);
 
-            charutils::SetCharVar(this, "DeathLevel", 0);
+            charutils::SetCharVar(this, "expLost", 0);
         }
 
         // If Arise was used then apply a reraise 3 effect on the target
@@ -2120,21 +2072,13 @@ void CCharEntity::OnItemFinish(CItemState& state, action_t& action)
     if (PItem->getAoE())
     {
         // clang-format off
-        if (PTarget->PParty)
+        PTarget->ForParty([this, PItem, PTarget](CBattleEntity* PMember)
         {
-            for (CBattleEntity* PMember : PTarget->PParty->members)
+            if (!PMember->isDead() && distance(PTarget->loc.p, PMember->loc.p) <= 10)
             {
-                // Trigger for the item user last to prevent any teleportation miscues (Tidal Talisman)
-                if (this->id == PMember->id)
-                    continue;
-                if (!PMember->isDead() && distanceSquared(PTarget->loc.p, PMember->loc.p) < 10.0f * 10.0f)
-                {
-                    luautils::OnItemUse(this, PTarget, PItem);
-                }
-            };
-        }
-        // Triggering for item user
-        luautils::OnItemUse(this, PTarget, PItem);
+                luautils::OnItemUse(this, PMember, PItem);
+            }
+        });
         // clang-format on
     }
     else
@@ -2175,7 +2119,7 @@ void CCharEntity::OnItemFinish(CItemState& state, action_t& action)
                                         PItem->getReuseTime() / 1000); // add recast timer to Recast List from any bag
         }
     }
-    else // разблокируем все предметы, кроме экипирвоки
+    else // unlock all items except equipment
     {
         PItem->setSubType(ITEM_UNLOCKED);
 
@@ -2235,14 +2179,7 @@ void CCharEntity::Die()
 
     if (this->PPet)
     {
-        if (PPet->StatusEffectContainer->HasStatusEffect(EFFECT_CHARM))
-        {
-            petutils::DetachPet(this);
-        }
-        else
-        {
-            petutils::DespawnPet(this);
-        }
+        petutils::DespawnPet(this);
     }
 
     Die(death_duration);
@@ -2257,10 +2194,6 @@ void CCharEntity::Die()
         (PBattlefield == nullptr || (PBattlefield->GetRuleMask() & RULES_LOSE_EXP) == RULES_LOSE_EXP) &&
         GetMLevel() >= settings::get<uint8>("map.EXP_LOSS_LEVEL"))
     {
-        // Track what level the player died at to properly give EXP back on raise
-        int32 level = (m_LevelRestriction > 0 && m_LevelRestriction < GetMLevel()) ? m_LevelRestriction : GetMLevel();
-        charutils::SetCharVar(this, "DeathLevel", level);
-
         float retainPercent = std::clamp(settings::get<uint8>("map.EXP_RETAIN") + getMod(Mod::EXPERIENCE_RETAINED) / 100.0f, 0.0f, 1.0f);
         charutils::DelExperiencePoints(this, retainPercent, 0);
     }
@@ -2709,16 +2642,6 @@ void CCharEntity::changeMoghancement(uint16 moghancementID, bool isAdding)
     }
 }
 
-void CCharEntity::SetPixieHate(uint32 pixieHate)
-{
-    if (pixieHate > 60)
-    {
-        pixieHate = 60;
-    }
-    m_pixieHate = pixieHate;
-    charutils::SetCharVar(this, "PIXIE_HATE", pixieHate);
-}
-
 void CCharEntity::TrackArrowUsageForScavenge(CItemWeapon* PAmmo)
 {
     TracyZoneScoped;
@@ -2781,15 +2704,7 @@ void CCharEntity::endCurrentEvent()
 
 void CCharEntity::queueEvent(EventInfo* eventToQueue)
 {
-    for (auto& eventElement : eventQueue)
-    {
-        if (eventElement->eventId == eventToQueue->eventId)
-        {
-            ShowError("CCharEntity::queueEvent: Character attempted to start multiple of the same event.");
-            return;
-        }
-    }
-    eventQueue.push_back(eventToQueue);
+    eventQueue.emplace_back(eventToQueue);
     tryStartNextEvent();
 }
 
@@ -2875,30 +2790,38 @@ int32 CCharEntity::getCharVar(std::string const& charVarName)
 {
     if (auto charVar = charVarCache.find(charVarName); charVar != charVarCache.end())
     {
-        return charVar->second;
+        std::pair cachedVarData    = charVar->second;
+        uint32    currentTimestamp = CVanaTime::getInstance()->getSysTime();
+
+        // If the cached variable is not expired, return it.  Else, fall through so that the
+        // database can be cleaned up.
+        if (cachedVarData.second == 0 || cachedVarData.second > currentTimestamp)
+        {
+            return cachedVarData.first;
+        }
     }
 
     auto value = charutils::FetchCharVar(this->id, charVarName);
 
     charVarCache[charVarName] = value;
-    return value;
+    return value.first;
 }
 
-void CCharEntity::setCharVar(std::string const& charVarName, int32 value)
+void CCharEntity::setCharVar(std::string const& charVarName, int32 value, uint32 expiry /* = 0 */)
 {
-    charVarCache[charVarName] = value;
-    charutils::PersistCharVar(this->id, charVarName, value);
+    charVarCache[charVarName] = { value, expiry };
+    charutils::PersistCharVar(this->id, charVarName, value, expiry);
 }
 
-void CCharEntity::setVolatileCharVar(std::string const& charVarName, int32 value)
+void CCharEntity::setVolatileCharVar(std::string const& charVarName, int32 value, uint32 expiry /* = 0 */)
 {
-    charVarCache[charVarName] = value;
+    charVarCache[charVarName] = { value, expiry };
     charVarChanges.insert(charVarName);
 }
 
-void CCharEntity::updateCharVarCache(std::string const& charVarName, int32 value)
+void CCharEntity::updateCharVarCache(std::string const& charVarName, int32 value, uint32 expiry /* = 0 */)
 {
-    charVarCache[charVarName] = value;
+    charVarCache[charVarName] = { value, expiry };
 }
 
 void CCharEntity::removeFromCharVarCache(std::string const& varName)
@@ -2919,7 +2842,7 @@ void CCharEntity::clearCharVarsWithPrefix(std::string const& prefix)
     {
         if (iter->first.rfind(prefix, 0) == 0)
         {
-            iter->second = 0;
+            iter->second = { 0, 0 };
         }
         ++iter;
     }

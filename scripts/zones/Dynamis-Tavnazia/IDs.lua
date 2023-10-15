@@ -1,11 +1,6 @@
 -----------------------------------
 -- Area: Dynamis-Tavnazia
 -----------------------------------
-require("scripts/globals/keyitems")
-require("scripts/globals/dynamis")
-require("scripts/globals/zone")
------------------------------------
-
 zones = zones or {}
 
 zones[xi.zone.DYNAMIS_TAVNAZIA] =

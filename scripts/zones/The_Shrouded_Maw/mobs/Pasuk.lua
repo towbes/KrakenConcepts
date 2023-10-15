@@ -14,28 +14,28 @@ entity.onAdditionalEffect = function(mob, target, damage)
 end
 
 entity.onMobSpawn = function(mob)
-    mob:setLocalVar("timer", os.time() + 30)
+    mob:setLocalVar('timer', os.time() + 30)
     mob:setSpeed(30)
 end
 
 entity.onMobWeaponSkill = function(target, mob, skill)
     if skill:getID() == 1361 then
-        if mob:getLocalVar("hateWipe") == 1 then
-            mob:setLocalVar("hateWipe", 0)
+        if mob:getLocalVar('hateWipe') == 1 then
+            mob:setLocalVar('hateWipe', 0)
             mob:resetEnmity(target)
         else
-            mob:setLocalVar("hateWipe", 1)
+            mob:setLocalVar('hateWipe', 1)
         end
     end
 end
 
 entity.onMobFight = function(mob, target)
-    if mob:getLocalVar("timer") < os.time() then
+    if mob:getLocalVar('timer') < os.time() then
         if mob:checkDistance(target) > 14 then
             mob:timer(2000, function(mobArg)
                 local pos = target:getPos()
                 mobArg:setPos(pos.x + 1, pos.y, pos.z + 1)
-                mobArg:setLocalVar("timer", os.time() + 30)
+                mobArg:setLocalVar('timer', os.time() + 30)
             end)
         end
     end

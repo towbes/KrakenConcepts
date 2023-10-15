@@ -4,7 +4,7 @@
 -- Type: Barge Timekeeper
 -- !pos 4.066 -4.5 -10.450 1
 -----------------------------------
-require("scripts/globals/barge")
+require('scripts/globals/barge')
 -----------------------------------
 local entity = {}
 

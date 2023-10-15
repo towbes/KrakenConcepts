@@ -3,9 +3,8 @@
 --  Mob: Coppercap
 -- Note: PH for Gloomanita
 -----------------------------------
-local ID = require("scripts/zones/North_Gustaberg_[S]/IDs")
-require("scripts/globals/mobs")
-mixins = {require("scripts/mixins/families/funguar_s")}
+mixins = {require('scripts/mixins/families/funguar_s')}
+local ID = zones[xi.zone.NORTH_GUSTABERG_S]
 -----------------------------------
 local entity = {}
 

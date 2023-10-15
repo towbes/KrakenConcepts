@@ -1,10 +1,10 @@
 -----------------------------------
 -- Area: Xarcabard [S]
 -----------------------------------
-local ID = require("scripts/zones/Beaucedine_Glacier_[S]/IDs")
+local ID = require('scripts/zones/Beaucedine_Glacier_[S]/IDs')
 mixins = 
 {
-    require("scripts/mixins/families/ruszor"),
+    require('scripts/mixins/families/ruszor'),
 }
 -----------------------------------
 local entity = {}

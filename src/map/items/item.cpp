@@ -163,6 +163,7 @@ bool CItem::isSubType(ITEM_SUBTYPE subtype) const
     return (m_subtype & subtype);
 }
 
+
 bool CItem::isRare()
 {
     if (settings::get<bool>("map.DISABLE_RARE_ITEM_LIMIT"))
@@ -266,7 +267,7 @@ const std::string& CItem::getName()
     return m_name;
 }
 
-void CItem::setName(std::string name)
+void CItem::setName(std::string const& name)
 {
     m_name = name;
 }
@@ -282,7 +283,7 @@ const std::string& CItem::getSender()
     return m_send;
 }
 
-void CItem::setSender(std::string sender)
+void CItem::setSender(std::string const& sender)
 {
     m_send = sender;
 }
@@ -298,7 +299,7 @@ const std::string& CItem::getReceiver()
     return m_recv;
 }
 
-void CItem::setReceiver(std::string receiver)
+void CItem::setReceiver(std::string const& receiver)
 {
     m_recv = receiver;
 }
@@ -317,7 +318,7 @@ const std::string CItem::getSignature()
     return signature; // return string copy
 }
 
-void CItem::setSignature(std::string signature)
+void CItem::setSignature(std::string const& signature)
 {
     memset(m_extra + 0x0C, 0, sizeof(m_extra) - 0x0C);
     memcpy(m_extra + 0x0C, signature.c_str(), signature.size());
@@ -392,14 +393,10 @@ void CItem::setSoulPlateData(std::string const& name, uint8 fauna, uint8 subOfIn
     PackSoultrapperName(name, m_extra);
 
     // Hack: Artificially chop off extremely long names, so we can pack the mobFamily info into m_extra
-
     m_extra[15] = 0;
     m_extra[16] = fauna;
     m_extra[17] = subOfInterest;
     m_extra[18] = ecoSystem;
-
-   // m_extra[17] = (mobFamily & 0xFF00) >> 8;
-   // m_extra[18] = mobFamily & 0x00FF;
 
     m_extra[19] = zeni;
 

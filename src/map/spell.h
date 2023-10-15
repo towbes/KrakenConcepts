@@ -22,8 +22,8 @@
 #ifndef _CSPELL_H
 #define _CSPELL_H
 
-#include "../common/cbasetypes.h"
-#include "../common/mmo.h"
+#include "common/cbasetypes.h"
+#include "common/mmo.h"
 
 #include "entities/battleentity.h"
 #include "entities/charentity.h"
@@ -236,7 +236,6 @@ enum SPELLFLAG
 // clang-format off
 enum class SpellID : uint16
 {
-    NULLSPELL            = 0,
     Cure                 = 1,
     Cure_II              = 2,
     Cure_III             = 3,

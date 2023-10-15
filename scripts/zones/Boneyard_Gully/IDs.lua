@@ -1,9 +1,6 @@
 -----------------------------------
 -- Area: Boneyard_Gully
 -----------------------------------
-require("scripts/globals/zone")
------------------------------------
-
 zones = zones or {}
 
 zones[xi.zone.BONEYARD_GULLY] =
@@ -44,7 +41,7 @@ zones[xi.zone.BONEYARD_GULLY] =
         SCENT_OF_BLOOD                = 7808, -- Ah, the scent of frrrresh blood!
         AT_MY_BEST                    = 7810, -- Even at my best...
         END_THE_HUNT                  = 7811, -- Time to end the hunt! Go for the jugular!
-        ADVENTURER_STEAK              = 7812, -- Dinner time! Tonight we're having "Adventurer Steak"!
+        ADVENTURER_STEAK              = 7812, -- Dinner time! Tonight we're having 'Adventurer Steak'!
     },
     mob =
     {

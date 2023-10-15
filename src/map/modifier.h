@@ -17,7 +17,7 @@
 #ifndef _CMODIFIER_H
 #define _CMODIFIER_H
 
-#include "../common/cbasetypes.h"
+#include "common/cbasetypes.h"
 
 enum class Mod
 {
@@ -328,6 +328,18 @@ enum class Mod
     DEATH_MEVA    = 215,
     STATUS_MEVA   = 216,
 
+    // Status effect Immunobreak modifiers.
+    SLEEP_IMMUNOBREAK    = 261,
+    POISON_IMMUNOBREAK   = 262,
+    PARALYZE_IMMUNOBREAK = 263,
+    BLIND_IMMUNOBREAK    = 264,
+    SILENCE_IMMUNOBREAK  = 265,
+    PETRIFY_IMMUNOBREAK  = 266,
+    BIND_IMMUNOBREAK     = 267,
+    GRAVITY_IMMUNOBREAK  = 268,
+    SLOW_IMMUNOBREAK     = 269,
+    ADDLE_IMMUNOBREAK    = 270,
+
     PARALYZE      = 257, // Paralyze -- percent chance to proc
     MIJIN_RERAISE = 258, // Augments Mijin Gakure
     DUAL_WIELD    = 259, // Percent reduction in dual wield delay.
@@ -546,39 +558,40 @@ enum class Mod
     TRIPLE_SHOT_RATE  = 999,  // Percent increase to Triple Shot Rate
     QUICK_DRAW_RECAST = 1060, // TODO: Quick Draw Charge Reduction (seconds)
 
-    DMG_REFLECT            = 316, // Tracks totals
-    ROLL_ROGUES            = 317, // Tracks totals
-    ROLL_GALLANTS          = 318, // Tracks totals
-    ROLL_CHAOS             = 319, // Tracks totals
-    ROLL_BEAST             = 320, // Tracks totals
-    ROLL_CHORAL            = 321, // Tracks totals
-    ROLL_HUNTERS           = 322, // Tracks totals
-    ROLL_SAMURAI           = 323, // Tracks totals
-    ROLL_NINJA             = 324, // Tracks totals
-    ROLL_DRACHEN           = 325, // Tracks totals
-    ROLL_EVOKERS           = 326, // Tracks totals
-    ROLL_MAGUS             = 327, // Tracks totals
-    ROLL_CORSAIRS          = 328, // Tracks totals
-    ROLL_PUPPET            = 329, // Tracks totals
-    ROLL_DANCERS           = 330, // Tracks totals
-    ROLL_SCHOLARS          = 331, // Tracks totals
-    ROLL_BOLTERS           = 869, // Tracks totals
-    ROLL_CASTERS           = 870, // Tracks totals
-    ROLL_COURSERS          = 871, // Tracks totals
-    ROLL_BLITZERS          = 872, // Tracks totals
-    ROLL_TACTICIANS        = 873, // Tracks totals
-    ROLL_ALLIES            = 874, // Tracks totals
-    ROLL_MISERS            = 875, // Tracks totals
-    ROLL_COMPANIONS        = 876, // Tracks totals
-    ROLL_AVENGERS          = 877, // Tracks totals
-    ROLL_NATURALISTS       = 878, // Tracks totals
-    ROLL_RUNEISTS          = 879, // Tracks totals
-    BUST                   = 332, // # of busts
-    QUICK_DRAW_DMG         = 411, // Flat damage increase to base QD damage
-    QUICK_DRAW_DMG_PERCENT = 834, // Percentage increase to QD damage
-    QUICK_DRAW_MACC        = 191, // Quick draw magic accuracy
-    PHANTOM_ROLL           = 881, // Phantom Roll+ Effect from SOA Rings.
-    PHANTOM_DURATION       = 882, // Phantom Roll Duration +.
+    DMG_REFLECT            = 316,  // Tracks totals
+    ROLL_ROGUES            = 317,  // Tracks totals
+    ROLL_GALLANTS          = 318,  // Tracks totals
+    ROLL_CHAOS             = 319,  // Tracks totals
+    ROLL_BEAST             = 320,  // Tracks totals
+    ROLL_CHORAL            = 321,  // Tracks totals
+    ROLL_HUNTERS           = 322,  // Tracks totals
+    ROLL_SAMURAI           = 323,  // Tracks totals
+    ROLL_NINJA             = 324,  // Tracks totals
+    ROLL_DRACHEN           = 325,  // Tracks totals
+    ROLL_EVOKERS           = 326,  // Tracks totals
+    ROLL_MAGUS             = 327,  // Tracks totals
+    ROLL_CORSAIRS          = 328,  // Tracks totals
+    ROLL_PUPPET            = 329,  // Tracks totals
+    ROLL_DANCERS           = 330,  // Tracks totals
+    ROLL_SCHOLARS          = 331,  // Tracks totals
+    ROLL_BOLTERS           = 869,  // Tracks totals
+    ROLL_CASTERS           = 870,  // Tracks totals
+    ROLL_COURSERS          = 871,  // Tracks totals
+    ROLL_BLITZERS          = 872,  // Tracks totals
+    ROLL_TACTICIANS        = 873,  // Tracks totals
+    ROLL_ALLIES            = 874,  // Tracks totals
+    ROLL_MISERS            = 875,  // Tracks totals
+    ROLL_COMPANIONS        = 876,  // Tracks totals
+    ROLL_AVENGERS          = 877,  // Tracks totals
+    ROLL_NATURALISTS       = 878,  // Tracks totals
+    ROLL_RUNEISTS          = 879,  // Tracks totals
+    BUST                   = 332,  // # of busts
+    QUICK_DRAW_DMG         = 411,  // Flat damage increase to base QD damage
+    QUICK_DRAW_DMG_PERCENT = 834,  // Percentage increase to QD damage
+    QUICK_DRAW_MACC        = 191,  // Quick draw magic accuracy
+    PHANTOM_ROLL           = 881,  // Phantom Roll+ Effect from SOA Rings.
+    PHANTOM_DURATION       = 882,  // Phantom Roll Duration +.
+    PHANTOM_RECAST         = 1076, // Phantom Roll Recast -.
 
     // Puppetmaster
     MANEUVER_BONUS              = 504,  // Maneuver Stat Bonus
@@ -608,17 +621,18 @@ enum class Mod
     AUTOMATON_LVL_BONUS         = 1044, // Automaton: Lv. (Increases automaton's base level above 99)
 
     // Dancer
-    FINISHING_MOVES          = 333, // Tracks # of finishing moves
-    SAMBA_DURATION           = 490, // Samba duration bonus
-    WALTZ_POTENCY            = 491, // Waltz Potency Bonus
-    JIG_DURATION             = 492, // Jig duration bonus in percents
-    VFLOURISH_MACC           = 493, // Violent Flourish accuracy bonus
-    STEP_FINISH              = 494, // Bonus finishing moves from steps
-    STEP_ACCURACY            = 403, // Bonus accuracy for Dancer's steps
-    WALTZ_DELAY              = 497, // Waltz Ability Delay modifier (-1 mod is -1 second)
-    SAMBA_PDURATION          = 498, // Samba percent duration bonus
-    REVERSE_FLOURISH_EFFECT  = 836, // Reverse Flourish effect in tenths of squared term multiplier
-    MAX_FINISHING_MOVE_BONUS = 988, // Increases the maximum number of finishing moves that may be stored
+    FINISHING_MOVES          = 333,  // Tracks # of finishing moves
+    SAMBA_DURATION           = 490,  // Samba duration bonus
+    WALTZ_POTENCY            = 491,  // Waltz Potency Bonus
+    JIG_DURATION             = 492,  // Jig duration bonus in percents
+    VFLOURISH_MACC           = 493,  // Violent Flourish accuracy bonus
+    STEP_FINISH              = 494,  // Bonus finishing moves from steps
+    STEP_ACCURACY            = 403,  // Bonus accuracy for Dancer's steps
+    WALTZ_DELAY              = 497,  // Waltz Ability Delay modifier (-1 mod is -1 second)
+    SAMBA_PDURATION          = 498,  // Samba percent duration bonus
+    REVERSE_FLOURISH_EFFECT  = 836,  // Reverse Flourish effect in tenths of squared term multiplier
+    MAX_FINISHING_MOVE_BONUS = 988,  // Increases the maximum number of finishing moves that may be stored
+    STEP_TP_CONSUMED         = 1077, // Modifies the amount of TP consumed when using steps
 
     // Scholar
     BLACK_MAGIC_COST         = 393, // MP cost for black magic (light/dark arts)
@@ -806,7 +820,6 @@ enum class Mod
     ITEM_ADDEFFECT_STATUS   = 951, // Status Effect ID to try to apply via Additional Effect or Spikes
     ITEM_ADDEFFECT_POWER    = 952, // Base Power for effect in MOD_ITEM_ADDEFFECT_STATUS
     ITEM_ADDEFFECT_DURATION = 953, // Base Duration for effect in MOD_ITEM_ADDEFFECT_STATUS
-    ITEM_ADDEFFECT_OPTION   = 1178, // Additional parameters for more specific latents required to proc
 
     GOV_CLEARS = 496, // 4% bonus per Grounds of Valor Page clear
 
@@ -824,8 +837,10 @@ enum class Mod
     MYTHIC_OCC_ATT_TWICE  = 865, // Proc rate for "Occasionally attacks twice"
     MYTHIC_OCC_ATT_THRICE = 866, // Proc rate for "Occasionally attacks thrice"
 
-    EAT_RAW_FISH = 412, //
-    EAT_RAW_MEAT = 413, //
+    APPRECIATE_GYSAHL_GREENS = 156, // Enhances food effect of Gysahl Greens
+
+    EAT_RAW_FISH = 412, // Without this, only Mithra can eat raw fish.
+    EAT_RAW_MEAT = 413, // Without this, only Galka can eat raw meat.
 
     ENHANCES_CURSNA_RCVD     = 67,   // Potency of "Cursna" effects received
     ENHANCES_CURSNA          = 310,  // Used by gear with the "Enhances Cursna" or "Cursna+" attribute
@@ -956,91 +971,91 @@ enum class Mod
     AUGMENT_BLOOD_BOON     = 1035, // Percent chance to deal extra damage based on Blood Boon Amount (SMN AF3 Sets)
     AUGMENT_BLU_MAGIC      = 1036, // Percent chance for BLU magic to receive 3x WSC value for spell (BLU AF3 Sets)
     GEOMANCY_MP_NO_DEPLETE = 1037, // Percent chance for Geomancy to cost 0 MP (GEO AF3 Sets)
-    DIG_BYPASS_FATIGUE     = 1074, // Chocobo digging modifier found in "Blue Race Silks". Modifier works as a direct percent.
-    BREATH_DMG_DEALT       = 1075, // Breath damage dealt
 
-    // Permenant Resistance Build Modifiers
-    SLEEPRESBUILD    = 1138, // Used to create a resbuild for the appropriate effect. Will decrease overall duration of effect. (Out of 1000)
-    POISONRESBUILD   = 1139, // Used to create a resbuild for the appropriate effect. Will decrease overall duration of effect. (Out of 1000)
-    PARALYZERESBUILD = 1140, // Used to create a resbuild for the appropriate effect. Will decrease overall duration of effect. (Out of 1000)
-    BLINDRESBUILD    = 1141, // Used to create a resbuild for the appropriate effect. Will decrease overall duration of effect. (Out of 1000)
-    SILENCERESBUILD  = 1142, // Used to create a resbuild for the appropriate effect. Will decrease overall duration of effect. (Out of 1000)
-    VIRUSRESBUILD    = 1143, // Used to create a resbuild for the appropriate effect. Will decrease overall duration of effect. (Out of 1000)
-    PETRIFYRESBUILD  = 1144, // Used to create a resbuild for the appropriate effect. Will decrease overall duration of effect. (Out of 1000)
-    BINDRESBUILD     = 1145, // Used to create a resbuild for the appropriate effect. Will decrease overall duration of effect. (Out of 1000)
-    CURSERESBUILD    = 1146, // Used to create a resbuild for the appropriate effect. Will decrease overall duration of effect. (Out of 1000)
-    GRAVITYRESBUILD  = 1147, // Used to create a resbuild for the appropriate effect. Will decrease overall duration of effect. (Out of 1000)
-    SLOWRESBUILD     = 1148, // Used to create a resbuild for the appropriate effect. Will decrease overall duration of effect. (Out of 1000)
-    STUNRESBUILD     = 1149, // Used to create a resbuild for the appropriate effect. Will decrease overall duration of effect. (Out of 1000)
-    CHARMRESBUILD    = 1150, // Used to create a resbuild for the appropriate effect. Will decrease overall duration of effect. (Out of 1000)
-    AMNESIARESBUILD  = 1151, // Used to create a resbuild for the appropriate effect. Will decrease overall duration of effect. (Out of 1000)
-    LULLABYRESBUILD  = 1152, // Used to create a resbuild for the appropriate effect. Will decrease overall duration of effect. (Out of 1000)
-    DEATHRESBUILD    = 1153, // Used to create a resbuild for the appropriate effect. Will decrease overall duration of effect. (Out of 1000)
-    PET_DMG_TAKEN_PHYSICAL = 1154, // Percent increase/decrease in pet physical damage taken for the target.
-    PET_DMG_TAKEN_MAGICAL  = 1155, // Percent increase/decrease in pet physical damage taken for the target.
-    PET_DMG_TAKEN_BREATH   = 1156, // Percent increase/decrease in pet physical damage taken for the target.
-    FIRE_EEM             = 1158, // Elemental Evasion Multiplier (Known as SDT in common magic accuracy formulas) (out of 100)
-    ICE_EEM              = 1159, // Elemental Evasion Multiplier (Known as SDT in common magic accuracy formulas) (out of 100)
-    WIND_EEM             = 1160, // Elemental Evasion Multiplier (Known as SDT in common magic accuracy formulas) (out of 100)
-    EARTH_EEM            = 1161, // Elemental Evasion Multiplier (Known as SDT in common magic accuracy formulas) (out of 100)
-    THUNDER_EEM          = 1162, // Elemental Evasion Multiplier (Known as SDT in common magic accuracy formulas) (out of 100)
-    WATER_EEM            = 1163, // Elemental Evasion Multiplier (Known as SDT in common magic accuracy formulas) (out of 100)
-    LIGHT_EEM            = 1164, // Elemental Evasion Multiplier (Known as SDT in common magic accuracy formulas) (out of 100)
-    DARK_EEM             = 1165, // Elemental Evasion Multiplier (Known as SDT in common magic accuracy formulas) (out of 100)
-    TAME_SUCCESS_RATE    = 1166, // Tame Success Rate +
-    RAMPART_MAGIC_SHIELD = 1167, // Rampart Magic Shield
-    CRITHITRATE_SLOT     = 1168, // CRITHITRATE for slot
-    ATT_SLOT             = 1169, // ATT for slot
-    UDMG                 = 1170, // Uncapped dmg taken (all types)
-    MAGIC_STONESKIN      = 2000,
-    FIRE_BURDEN_DECAY            = 2001,
-    BURDEN_DECAY_IGNORE_CHANCE   = 2002,
-    FIRE_BURDEN_PERC_EXTRA       = 2003,
+    DIG_BYPASS_FATIGUE = 1074, // Chocobo digging modifier found in "Blue Race Silks". Modifier works as a direct percent.
+    BREATH_DMG_DEALT   = 1075, // Breath damage dealt
+
+            // Permenant Resistance Build Modifiers
+    SLEEPRESBUILD              = 1138, // Used to create a resbuild for the appropriate effect. Will decrease overall duration of effect. (Out of 1000)
+    POISONRESBUILD             = 1139, // Used to create a resbuild for the appropriate effect. Will decrease overall duration of effect. (Out of 1000)
+    PARALYZERESBUILD           = 1140, // Used to create a resbuild for the appropriate effect. Will decrease overall duration of effect. (Out of 1000)
+    BLINDRESBUILD              = 1141, // Used to create a resbuild for the appropriate effect. Will decrease overall duration of effect. (Out of 1000)
+    SILENCERESBUILD            = 1142, // Used to create a resbuild for the appropriate effect. Will decrease overall duration of effect. (Out of 1000)
+    VIRUSRESBUILD              = 1143, // Used to create a resbuild for the appropriate effect. Will decrease overall duration of effect. (Out of 1000)
+    PETRIFYRESBUILD            = 1144, // Used to create a resbuild for the appropriate effect. Will decrease overall duration of effect. (Out of 1000)
+    BINDRESBUILD               = 1145, // Used to create a resbuild for the appropriate effect. Will decrease overall duration of effect. (Out of 1000)
+    CURSERESBUILD              = 1146, // Used to create a resbuild for the appropriate effect. Will decrease overall duration of effect. (Out of 1000)
+    GRAVITYRESBUILD            = 1147, // Used to create a resbuild for the appropriate effect. Will decrease overall duration of effect. (Out of 1000)
+    SLOWRESBUILD               = 1148, // Used to create a resbuild for the appropriate effect. Will decrease overall duration of effect. (Out of 1000)
+    STUNRESBUILD               = 1149, // Used to create a resbuild for the appropriate effect. Will decrease overall duration of effect. (Out of 1000)
+    CHARMRESBUILD              = 1150, // Used to create a resbuild for the appropriate effect. Will decrease overall duration of effect. (Out of 1000)
+    AMNESIARESBUILD            = 1151, // Used to create a resbuild for the appropriate effect. Will decrease overall duration of effect. (Out of 1000)
+    LULLABYRESBUILD            = 1152, // Used to create a resbuild for the appropriate effect. Will decrease overall duration of effect. (Out of 1000)
+    DEATHRESBUILD              = 1153, // Used to create a resbuild for the appropriate effect. Will decrease overall duration of effect. (Out of 1000)
+    PET_DMG_TAKEN_PHYSICAL     = 1154, // Percent increase/decrease in pet physical damage taken for the target.
+    PET_DMG_TAKEN_MAGICAL      = 1155, // Percent increase/decrease in pet physical damage taken for the target.
+    PET_DMG_TAKEN_BREATH       = 1156, // Percent increase/decrease in pet physical damage taken for the target.
+    FIRE_EEM                   = 1158, // Elemental Evasion Multiplier (Known as SDT in common magic accuracy formulas) (out of 100)
+    ICE_EEM                    = 1159, // Elemental Evasion Multiplier (Known as SDT in common magic accuracy formulas) (out of 100)
+    WIND_EEM                   = 1160, // Elemental Evasion Multiplier (Known as SDT in common magic accuracy formulas) (out of 100)
+    EARTH_EEM                  = 1161, // Elemental Evasion Multiplier (Known as SDT in common magic accuracy formulas) (out of 100)
+    THUNDER_EEM                = 1162, // Elemental Evasion Multiplier (Known as SDT in common magic accuracy formulas) (out of 100)
+    WATER_EEM                  = 1163, // Elemental Evasion Multiplier (Known as SDT in common magic accuracy formulas) (out of 100)
+    LIGHT_EEM                  = 1164, // Elemental Evasion Multiplier (Known as SDT in common magic accuracy formulas) (out of 100)
+    DARK_EEM                   = 1165, // Elemental Evasion Multiplier (Known as SDT in common magic accuracy formulas) (out of 100)
+    TAME_SUCCESS_RATE          = 1166, // Tame Success Rate +
+    RAMPART_MAGIC_SHIELD       = 1167, // Rampart Magic Shield
+    CRITHITRATE_SLOT           = 1168, // CRITHITRATE for slot
+    ATT_SLOT                   = 1169, // ATT for slot
+    UDMG                       = 1170, // Uncapped dmg taken (all types)
+    MAGIC_STONESKIN            = 2000,
+    FIRE_BURDEN_DECAY          = 2001,
+    BURDEN_DECAY_IGNORE_CHANCE = 2002,
+    FIRE_BURDEN_PERC_EXTRA     = 2003,
 
     // Damage mods/reductions for circle effects.
-    VERMIN_CIRCLE         = 2004,
-    BIRD_CIRCLE           = 2005,
-    AMORPH_CIRCLE         = 2006,
-    LIZARD_CIRCLE         = 2007,
-    AQUAN_CIRCLE          = 2007,
-    PLANTOID_CIRCLE       = 2009,
-    BEAST_CIRCLE          = 2010,
-    UNDEAD_CIRCLE         = 2011,
-    ARCANA_CIRCLE         = 2012,
-    DRAGON_CIRCLE         = 2013,
-    DEMON_CIRCLE          = 2014,
-    EMPTY_CIRCLE          = 2015,
-    HUMANOID_CIRCLE       = 2016,
-    LUMINIAN_CIRCLE       = 2017, // Should actually be LUMORIAN when have time to refactor.
-    LUMINION_CIRCLE       = 2018,
+    VERMIN_CIRCLE   = 2004,
+    BIRD_CIRCLE     = 2005,
+    AMORPH_CIRCLE   = 2006,
+    LIZARD_CIRCLE   = 2007,
+    AQUAN_CIRCLE    = 2007,
+    PLANTOID_CIRCLE = 2009,
+    BEAST_CIRCLE    = 2010,
+    UNDEAD_CIRCLE   = 2011,
+    ARCANA_CIRCLE   = 2012,
+    DRAGON_CIRCLE   = 2013,
+    DEMON_CIRCLE    = 2014,
+    EMPTY_CIRCLE    = 2015,
+    HUMANOID_CIRCLE = 2016,
+    LUMINIAN_CIRCLE = 2017, // Should actually be LUMORIAN when have time to refactor.
+    LUMINION_CIRCLE = 2018,
 
     AUTOMATON_MAGIC_COST  = 2019,
     AUTOMATON_CAN_BARRAGE = 2020,
 
     // These mods should not be directly set.  These are used to apply pet mods via latent effects
     // These mods should not be directly set (use item_mods_pets instead).  These are used to apply pet mods via latent effects
-    PET_ATT_LATENT  = 2021,  // Pet Attack bonus used for latents
-    PET_ACC_LATENT  = 2022,  // Pet Acc bonus used for latents
-    PET_MATT_LATENT = 2023,  // Pet Magic Attack bonus used for latents
-    PET_MACC_LATENT = 2024,  // Pet Magic Acc bonus used for latents
-    PET_DEF_LATENT  = 2025,  // Pet DEF bonus used for latents
+    PET_ATT_LATENT  = 2021, // Pet Attack bonus used for latents
+    PET_ACC_LATENT  = 2022, // Pet Acc bonus used for latents
+    PET_MATT_LATENT = 2023, // Pet Magic Attack bonus used for latents
+    PET_MACC_LATENT = 2024, // Pet Magic Acc bonus used for latents
+    PET_DEF_LATENT  = 2025, // Pet DEF bonus used for latents
 
-    WYRMAL_ABJ_KILLER_EFFECT = 2026,   // Wyrmal Abjuration(Crimson / Blood) which makes players susceptible to Dragon Killer effects
-    DMGPHYS_CAP              = 2027,   // Caps damage received. Damage not not exceed this amount.
+    WYRMAL_ABJ_KILLER_EFFECT = 2026, // Wyrmal Abjuration(Crimson / Blood) which makes players susceptible to Dragon Killer effects
+    DMGPHYS_CAP              = 2027, // Caps damage received. Damage not not exceed this amount.
     DMGMAGIC_CAP             = 2028,
     DMGBREATH_CAP            = 2029,
     DMGRANGE_CAP             = 2030,
     ENEMYCRITDMG             = 2031,
     NINJUTSU_RECAST_DELAY    = 2032,
 
-    SEVERE_MAGIC_DMG_NULL    = 2033,  // Nullifies damage that would otherwise kill you.
-    SEVERE_PHYS_DMG_NULL     = 2034,
-    SEVERE_RANGE_DMG_NULL    = 2035,
-    SEVERE_BREATH_DMG_NULL   = 2036,
-    SEVERE_DMG_NULL          = 2037,
-    ENH_ASPIR                = 2038, // % damage boost to Aspir
-    ENH_DRAIN                = 2039, // % damage boost to DRAIN
-
+    SEVERE_MAGIC_DMG_NULL  = 2033, // Nullifies damage that would otherwise kill you.
+    SEVERE_PHYS_DMG_NULL   = 2034,
+    SEVERE_RANGE_DMG_NULL  = 2035,
+    SEVERE_BREATH_DMG_NULL = 2036,
+    SEVERE_DMG_NULL        = 2037,
+    ENH_ASPIR              = 2038, // % damage boost to Aspir
+    ENH_DRAIN              = 2039, // % damage boost to DRAIN
 
     // IF YOU ADD ANY NEW MODIFIER HERE, ADD IT IN scripts/enum/mod.lua ASWELL!
 
@@ -1050,12 +1065,11 @@ enum class Mod
     // SPARE IDs:
     // 75 to 79
     // 138 to 143
-    // 156 to 159
+    // 157 to 159
     // 217 to 223
-    // 261 to 280
+    // 271 to 280
     //
-    // SPARE = 1076 and onward
-        //2000+ using for Cactuar to avoid conflicts. - Umeboshi
+    // SPARE = 1078 and onward
 };
 
 // temporary workaround for using enum class as unordered_map key until compilers support it

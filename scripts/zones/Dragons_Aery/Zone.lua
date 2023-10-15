@@ -1,10 +1,6 @@
 -----------------------------------
 -- Zone: Dragons_Aery (154)
 -----------------------------------
-local ID = require('scripts/zones/Dragons_Aery/IDs')
-require('scripts/globals/conquest')
-require('scripts/globals/zone')
------------------------------------
 local zoneObject = {}
 
 zoneObject.onInitialize = function(zone)

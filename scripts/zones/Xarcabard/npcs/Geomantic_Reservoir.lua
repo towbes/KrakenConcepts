@@ -4,9 +4,6 @@
 -- Unlocks: Geo-Torpor
 -- !pos -141.138 -34.642 127.197 112
 -----------------------------------
-require("scripts/globals/geomantic_reservoir")
-require("scripts/globals/spell_data")
------------------------------------
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)

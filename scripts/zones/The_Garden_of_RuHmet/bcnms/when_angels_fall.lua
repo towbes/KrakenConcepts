@@ -2,9 +2,6 @@
 -- Area: The_Garden_of_RuHmet
 -- Name: When Angels Fall
 -----------------------------------
-require("scripts/globals/battlefield")
-require("scripts/globals/missions")
------------------------------------
 local battlefieldObject = {}
 
 battlefieldObject.onBattlefieldTick = function(battlefield, tick)
@@ -21,7 +18,7 @@ battlefieldObject.onBattlefieldLeave = function(player, battlefield, leavecode)
     if leavecode == xi.battlefield.leaveCode.WON then
         local _, clearTime, partySize = battlefield:getRecord()
         local arg8 = (player:getCurrentMission(xi.mission.log_id.COP) ~= xi.mission.id.cop.WHEN_ANGELS_FALL) and 1 or 0
-        player:startEvent(32001, battlefield:getArea(), clearTime, partySize, battlefield:getTimeInside(), 0, battlefield:getLocalVar("[cs]bit"), arg8)
+        player:startEvent(32001, battlefield:getArea(), clearTime, partySize, battlefield:getTimeInside(), 0, battlefield:getLocalVar('[cs]bit'), arg8)
     elseif leavecode == xi.battlefield.leaveCode.LOST then
         player:startEvent(32002)
     end

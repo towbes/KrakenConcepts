@@ -3,8 +3,8 @@
 -----------------------------------
 require("modules/module_utils")
 require("scripts/globals/npc_util")
-require("scripts/globals/status")
-require("scripts/globals/zone")
+
+
 require("scripts/globals/utils")
 local customUtil = require("modules/custom/lua/custom_util")
 -----------------------------------

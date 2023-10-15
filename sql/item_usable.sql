@@ -1777,6 +1777,7 @@ INSERT INTO `item_usable` VALUES (5989,'scroll_of_instant_shell',1,7,32,0,0,0,0,
 INSERT INTO `item_usable` VALUES (5990,'scroll_of_instant_stoneskin',1,7,8,0,0,0,0,0);
 INSERT INTO `item_usable` VALUES (5998,'bowl_of_adoulinian_soup',1,1,26,0,0,0,0,0);
 INSERT INTO `item_usable` VALUES (5999,'bowl_of_adoulinian_soup_+1',1,1,26,0,0,0,0,0);
+INSERT INTO `item_usable` VALUES (6008,'piece_of_copse_candy',1,1,0,0,0,0,0,0);
 INSERT INTO `item_usable` VALUES (6009,'bowl_of_mog_pudding',1,1,26,0,0,0,0,0);
 INSERT INTO `item_usable` VALUES (6010,'sakura_biscuit',1,1,28,0,0,0,0,0);
 INSERT INTO `item_usable` VALUES (6041,'pyrohelix_schema',1,1,12,5,0,0,0,0);
@@ -1869,6 +1870,9 @@ INSERT INTO `item_usable` VALUES (6177,'copy_of_life-form_study',1,1,117,0,0,0,0
 INSERT INTO `item_usable` VALUES (6178,'copy_of_hrohjs_record',1,1,117,0,0,0,0,0);
 INSERT INTO `item_usable` VALUES (6179,'copy_of_the_bell_tolls',1,1,117,0,0,0,0,0);
 INSERT INTO `item_usable` VALUES (6181,'beitetsu_parcel',1,1,24,0,0,0,0,0);
+INSERT INTO `item_usable` VALUES (6183,'pluton_box',1,1,24,0,0,0,0,0);
+INSERT INTO `item_usable` VALUES (6184,'beitetsu_box',1,1,24,0,0,0,0,0);
+INSERT INTO `item_usable` VALUES (6185,'boulder_box',1,1,24,0,0,0,0,0);
 INSERT INTO `item_usable` VALUES (6186,'slime_rocket',1,1,115,0,0,0,0,0);
 INSERT INTO `item_usable` VALUES (6190,'spriggan_spark',1,1,114,0,0,0,0,0);
 INSERT INTO `item_usable` VALUES (6211,'slice_of_marinara_pizza',1,1,28,0,0,0,0,0);
@@ -1957,6 +1961,7 @@ INSERT INTO `item_usable` VALUES (6538,'altanas_repast',1,1,28,0,0,0,0,1);
 INSERT INTO `item_usable` VALUES (6539,'altanas_repast_+1',1,1,28,0,0,0,0,1);
 INSERT INTO `item_usable` VALUES (6540,'altanas_repast_+2',1,1,28,0,0,0,0,1);
 INSERT INTO `item_usable` VALUES (6565,'per._snow_cone',1,1,28,1,0,0,0,0);
+INSERT INTO `item_usable` VALUES (6566,'bonanza_biscuit',1,1,28,0,0,0,0,0);
 INSERT INTO `item_usable` VALUES (6567,'tropical_crepe',1,1,28,1,0,0,0,0);
 INSERT INTO `item_usable` VALUES (6568,'crepe_des_rois',1,1,28,1,0,0,0,0);
 INSERT INTO `item_usable` VALUES (6569,'scroll_of_slow_ii',1,1,11,5,0,0,0,0);
@@ -2377,6 +2382,8 @@ INSERT INTO `item_usable` VALUES (28562,'duodecennial_ring',1,3,76,0,12,15,3600,
 INSERT INTO `item_usable` VALUES (28563,'vocation_ring',1,3,76,0,12,15,3600,0);
 INSERT INTO `item_usable` VALUES (28568,'resolution_ring',1,3,76,0,5,5,900,0);
 INSERT INTO `item_usable` VALUES (28569,'expertise_ring',1,3,76,0,10,5,900,0);
+INSERT INTO `item_usable` VALUES (28652,'hatchling_shield',1,1,55,8,1,30,86400,0);
+INSERT INTO `item_usable` VALUES (26788,'rabbit_cap',1,1,55,8,1,30,86400,0);
 /*!40000 ALTER TABLE `item_usable` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;

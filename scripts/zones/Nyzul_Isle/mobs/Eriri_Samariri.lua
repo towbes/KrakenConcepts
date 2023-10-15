@@ -3,8 +3,6 @@
 -- Area: Nyzul Isle
 -- Info: Enemy Leader, Spams Frog Song
 -----------------------------------
-require('scripts/globals/nyzul')
------------------------------------
 local entity = {}
 
 entity.onMobWeaponSkillPrepare = function(mob, target)

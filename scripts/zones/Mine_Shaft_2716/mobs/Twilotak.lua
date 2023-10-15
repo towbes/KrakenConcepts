@@ -3,9 +3,9 @@
 -- Quest: Return to the Depths
 -- NM: Twilotak
 -----------------------------------
-local ID = require("scripts/zones/Mine_Shaft_2716/IDs")
-require("scripts/globals/status")
-mixins = { require("scripts/mixins/job_special") }
+local ID = zones[xi.zone.MINE_SHAFT_2716]
+
+mixins = { require('scripts/mixins/job_special') }
 -----------------------------------
 local entity = {}
 
@@ -33,7 +33,7 @@ end
 
 local function aliveHelpers(mob)
     -- Returns a table the IDs of each remaining helper alive
-    if mob:getName() ~= "Twilotak" then
+    if mob:getName() ~= 'Twilotak' then
         return 0
     end
 
@@ -51,7 +51,7 @@ end
 
 local function castingHelpers(mob)
     -- Returns a table the IDs of each living mob with the casting flag up
-    if mob:getName() ~= "Twilotak" then
+    if mob:getName() ~= 'Twilotak' then
         return 0
     end
 
@@ -60,7 +60,7 @@ local function castingHelpers(mob)
 
     if #helpers > 0 then
         for i = 1, #helpers do
-            if GetMobByID(helpers[i]):getLocalVar("[depths]castActivate") ~= 0 then
+            if GetMobByID(helpers[i]):getLocalVar('[depths]castActivate') ~= 0 then
                 table.insert(results, helpers[i])
             end
         end
@@ -70,7 +70,7 @@ local function castingHelpers(mob)
 end
 
 local function animateHelpers(mob, ability)
-    if mob:getName() ~= "Twilotak" then
+    if mob:getName() ~= 'Twilotak' then
         return 0
     end
 
@@ -97,13 +97,13 @@ entity.onMobSpawn = function(mob)
     mob:addMobMod(xi.mobMod.ASSIST, 1)
 
     -- Start with Blood Weapon deactivated
-    mob:setLocalVar("[depths]bloodweapon", 0)
+    mob:setLocalVar('[depths]bloodweapon', 0)
 
     -- Add a listener / controller for when mob casts spells
-    mob:setLocalVar("[depths]animateHelpers", 0)
-    mob:addListener("MAGIC_STATE_EXIT", "TWILOTAK_MAGIC_EXIT", function(twilotak, spell)
-        if mob:getLocalVar("[depths]animateHelpers") == 0 then
-            mob:setLocalVar("[depths]animateHelpers", 1344)
+    mob:setLocalVar('[depths]animateHelpers', 0)
+    mob:addListener('MAGIC_STATE_EXIT', 'TWILOTAK_MAGIC_EXIT', function(twilotak, spell)
+        if mob:getLocalVar('[depths]animateHelpers') == 0 then
+            mob:setLocalVar('[depths]animateHelpers', 1344)
             mob:useMobAbility(1345)
         end
     end)
@@ -118,37 +118,37 @@ entity.onMobFight = function(mob, target)
     local dist = target:checkDistance(center[area])
     local hmob
 
-    if dist > 12 and target:getCharVar("[depths]Moved") ~= 1 then
+    if dist > 12 and target:getCharVar('[depths]Moved') ~= 1 then
         local newPos = randomSpotNearCenter(center[area], 10)
         target:setPos(newPos.x, newPos.y, newPos.z)
-        target:setCharVar("[depths]Moved", 1)
+        target:setCharVar('[depths]Moved', 1)
     else
-        target:setCharVar("[depths]Moved", 0)
+        target:setCharVar('[depths]Moved', 0)
     end
 
     -- Set mob mods on and off for Blood Weapon
-    local weaponOn = mob:getLocalVar("[depths]bloodweapon")
+    local weaponOn = mob:getLocalVar('[depths]bloodweapon')
     if mob:hasStatusEffect(xi.effect.BLOOD_WEAPON) and weaponOn == 0 then
         mob:addMod(xi.mod.DELAY, 2200)
-        mob:setLocalVar("[depths]bloodweapon", 1)
+        mob:setLocalVar('[depths]bloodweapon', 1)
     elseif not mob:hasStatusEffect(xi.effect.BLOOD_WEAPON) and weaponOn == 1 then
         mob:delMod(xi.mod.DELAY, 2200)
-        mob:setLocalVar("[depths]bloodweapon", 0)
+        mob:setLocalVar('[depths]bloodweapon', 0)
     end
 
     -- See if something has triggered the helpers to animate them
-    local helperAnim = mob:getLocalVar("[depths]animateHelpers")
+    local helperAnim = mob:getLocalVar('[depths]animateHelpers')
     if helperAnim > 0 then
         animateHelpers(mob, helperAnim)
-        mob:setLocalVar("[depths]animateHelpers", 0)
+        mob:setLocalVar('[depths]animateHelpers', 0)
     end
 
     -- Update the spellcasting of the helpers
     local alive = aliveHelpers(mob)
     if #alive > 0 and #castingHelpers(mob) < 2 then
         local a = math.random(1, #alive)
-        if GetMobByID(alive[a]):getLocalVar("[depths]castActivate") == 0 then
-            GetMobByID(alive[a]):setLocalVar("[depths]castActivate", 1)
+        if GetMobByID(alive[a]):getLocalVar('[depths]castActivate') == 0 then
+            GetMobByID(alive[a]):setLocalVar('[depths]castActivate', 1)
             GetMobByID(alive[a]):timer(math.random(20000, 60000), function(m)
                 m:setMagicCastingEnabled(true)
             end)
@@ -158,19 +158,19 @@ entity.onMobFight = function(mob, target)
     -- Do any helper animations queued and set casting flags for each alive mob
     for _, h in pairs(alive)  do
         hmob = GetMobByID(h)
-        if hmob:getLocalVar("[depths]doAnimation") ~= 0 then
-            hmob:useMobAbility(hmob:getLocalVar("[depths]doAnimation"))
-            hmob:setLocalVar("[depths]doAnimation", 0)
+        if hmob:getLocalVar('[depths]doAnimation') ~= 0 then
+            hmob:useMobAbility(hmob:getLocalVar('[depths]doAnimation'))
+            hmob:setLocalVar('[depths]doAnimation', 0)
         end
-        if hmob:getLocalVar("[depths]castActivate") == 0 then
+        if hmob:getLocalVar('[depths]castActivate') == 0 then
             hmob:setMagicCastingEnabled(false)
         end
     end
 
     -- Check for any animations that Twilotak needs to do
-    if mob:getLocalVar("[depths]doAnimation") ~= 0 then
-        mob:useMobAbility(mob:getLocalVar("[depths]doAnimation"))
-        mob:setLocalVar("[depths]doAnimation", 0)
+    if mob:getLocalVar('[depths]doAnimation') ~= 0 then
+        mob:useMobAbility(mob:getLocalVar('[depths]doAnimation'))
+        mob:setLocalVar('[depths]doAnimation', 0)
     end
 end
 
@@ -183,7 +183,7 @@ entity.onMobWeaponSkill = function(target, mob, skill)
     else
         mob:timer(2500, function(t)
             t:useMobAbility(1345)
-            t:setLocalVar("[depths]animateHelpers", 1344)
+            t:setLocalVar('[depths]animateHelpers', 1344)
         end)
     end
 end

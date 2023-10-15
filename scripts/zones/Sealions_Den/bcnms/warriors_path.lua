@@ -2,14 +2,10 @@
 -- Area: Sealion's Den
 -- Name: The Warrior's Path
 -----------------------------------
-require("scripts/globals/battlefield")
-require("scripts/globals/missions")
-require("scripts/globals/titles")
------------------------------------
 local battlefieldObject = {}
 
 battlefieldObject.onBattlefieldTick = function(battlefield, tick)
-    if battlefield:getLocalVar("gameover") - battlefield:getRemainingTime() >= 10 then -- loss condition with enough delay that the full cosmic elucidation animation can go off
+    if battlefield:getLocalVar('gameover') - battlefield:getRemainingTime() >= 10 then -- loss condition with enough delay that the full cosmic elucidation animation can go off
         battlefield:lose()
         return
     end
@@ -21,7 +17,7 @@ battlefieldObject.onBattlefieldRegister = function(player, battlefield)
 end
 
 battlefieldObject.onBattlefieldEnter = function(player, battlefield)
-    player:setCharVar("Mission[6][748]Status", 1)
+    player:setCharVar('Mission[6][748]Status', 1)
     player:startEvent(32)
 end
 
@@ -32,7 +28,7 @@ battlefieldObject.onBattlefieldLeave = function(player, battlefield, leavecode)
 
         player:setLocalVar('battlefieldWin', battlefield:getID())
 
-        player:startEvent(32001, battlefield:getArea(), clearTime, partySize, battlefield:getTimeInside(), 1, battlefield:getLocalVar("[cs]bit"), arg8)
+        player:startEvent(32001, battlefield:getArea(), clearTime, partySize, battlefield:getTimeInside(), 1, battlefield:getLocalVar('[cs]bit'), arg8)
     elseif leavecode == xi.battlefield.leaveCode.LOST then
         player:startEvent(32002)
     end

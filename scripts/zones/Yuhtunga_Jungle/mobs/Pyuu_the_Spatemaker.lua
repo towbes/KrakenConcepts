@@ -2,9 +2,6 @@
 -- Area: Yuhtunga Jungle
 --  Mob: Pyuu the Spatemaker
 -----------------------------------
-require("scripts/globals/hunts")
-require("scripts/globals/regimes")
------------------------------------
 local entity = {}
 
 entity.onMobInitialize = function(mob)
@@ -18,7 +15,7 @@ end
 
 entity.onMobSpawn = function(mob)
     -- Uses Jumping Thrust following a cast of Waterga III
-    mob:addListener("MAGIC_STATE_EXIT", "PYUU_MAGIC_EXIT", function(mobArg, spell)
+    mob:addListener('MAGIC_STATE_EXIT', 'PYUU_MAGIC_EXIT', function(mobArg, spell)
         if spell:getID() == 201 then
             mob:useMobAbility(770)
         end

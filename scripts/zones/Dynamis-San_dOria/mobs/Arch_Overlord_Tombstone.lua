@@ -3,10 +3,10 @@
 --  Mob: Overlord's Tombstone
 -- Note: Mega Boss
 -----------------------------------
-require("scripts/globals/dynamis")
+require('scripts/globals/dynamis')
 mixins =
 {
-    require("scripts/mixins/job_special")
+    require('scripts/mixins/job_special')
 }
 -----------------------------------
 local entity = {}
@@ -52,13 +52,13 @@ end
 
 entity.onMobWeaponSkill = function(target, mob, skill)
     if skill:getID() == 1110 then
-        local stompCounter = mob:getLocalVar("stompCounter")
+        local stompCounter = mob:getLocalVar('stompCounter')
 
         stompCounter = stompCounter + 1
-        mob:setLocalVar("stompCounter", stompCounter)
+        mob:setLocalVar('stompCounter', stompCounter)
 
         if stompCounter > 1 then
-            mob:setLocalVar("stompCounter", 0)
+            mob:setLocalVar('stompCounter', 0)
         elseif mob:checkDistance(target) < 6 then
             mob:useMobAbility(1110)
             mob:resetEnmity(target)

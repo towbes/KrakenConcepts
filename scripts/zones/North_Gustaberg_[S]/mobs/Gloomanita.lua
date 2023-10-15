@@ -2,9 +2,7 @@
 -- Area: North Gustaberg [S]
 --   NM: Gloomanita
 -----------------------------------
-require("scripts/globals/hunts")
-require("scripts/globals/mobs")
-mixins = {require("scripts/mixins/families/funguar_s")}
+mixins = {require('scripts/mixins/families/funguar_s')}
 -----------------------------------
 local entity = {}
 
@@ -24,6 +22,7 @@ end
 
 entity.onMobDeath = function(mob, player, optParams)
     xi.hunts.checkHunt(mob, player, 498)
+    xi.magian.onMobDeath(mob, player, optParams, set{ 779 })
 end
 
 return entity

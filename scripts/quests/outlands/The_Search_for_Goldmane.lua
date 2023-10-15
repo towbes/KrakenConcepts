@@ -3,14 +3,14 @@
 -----------------------------------
 -- Log ID: 5, Quest ID: 200
 -----------------------------------
-require('scripts/globals/items')
+
 require('scripts/globals/npc_util')
 require('scripts/globals/quests')
-require('scripts/globals/titles')
-require('scripts/globals/zone')
+
+
 require('scripts/globals/interaction/quest')
 -----------------------------------
-local ID = require("scripts/zones/Bibiki_Bay/IDs")
+local ID = zones[xi.zone.BIBIKI_BAY]
 -----------------------------------
 
 local quest = Quest:new(xi.quest.log_id.OUTLANDS, xi.quest.id.outlands.THE_SEARCH_FOR_GOLDMANE)
@@ -90,7 +90,7 @@ quest.sections =
             {
                 onTrade = function(player, npc, trade)
                     if
-                        npcUtil.tradeHasExactly(trade, xi.items.COPPER_KEY) and
+                        npcUtil.tradeHasExactly(trade, xi.item.COPPER_KEY) and
                         quest:getVar(player, 'Prog') == 2
                     then
                         return quest:progressEvent(41)
@@ -166,7 +166,7 @@ quest.sections =
                 end,
 
                 [37] = function(player, csid, option, npc)
-                    npcUtil.giveItem(player, xi.items.DELUXE_CARBINE)
+                    npcUtil.giveItem(player, xi.item.DELUXE_CARBINE)
                     quest:setVar(player, 'Prog', 6)
                 end,
             },

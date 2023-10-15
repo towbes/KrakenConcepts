@@ -3,7 +3,7 @@
 --  ZNM: Verdelet
 -- !pos 417 -19.3 -70 79
 -----------------------------------
-mixins = { require("scripts/mixins/families/imp") }
+mixins = { require('scripts/mixins/families/imp') }
 -----------------------------------
 local entity = {}
 
@@ -22,7 +22,7 @@ entity.onMobSpawn = function(mob)
     mob:setMobMod(xi.mobMod.GA_CHANCE, 80)
     mob:setMobMod(xi.mobMod.MAGIC_COOL, 12) -- Sets recast time in line with capture.
 
-    mob:setLocalVar("horn", 0)
+    mob:setLocalVar('horn', 0)
 end
 
 entity.onMobFight = function(mob)

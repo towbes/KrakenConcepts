@@ -159,7 +159,6 @@ void CLatentEffectContainer::CheckLatentsMP()
         switch (latentEffect.GetConditionsID())
         {
             case LATENT::MP_UNDER_PERCENT:
-            case LATENT::MP_OVER_PERCENT:
             case LATENT::MP_UNDER:
             case LATENT::MP_OVER:
             case LATENT::WEAPON_DRAWN_MP_OVER:
@@ -663,32 +662,23 @@ bool CLatentEffectContainer::ProcessLatentEffect(CLatentEffect& latentEffect)
     auto expression  = false;
     auto latentFound = true;
 
-    if (m_POwner == nullptr)
-    {
-        ShowWarning("m_POwner was a nullptr, stopping case steps");
-        return false;
-    }
-
     // find the latent type from the enum and find the expression to tests againts
     switch (latentEffect.GetConditionsID())
     {
         case LATENT::HP_UNDER_PERCENT:
-            expression = m_POwner->GetHPP() <= latentEffect.GetConditionsValue();
+            expression = ((float)m_POwner->health.hp / m_POwner->health.maxhp) * 100 <= latentEffect.GetConditionsValue();
             break;
         case LATENT::HP_OVER_PERCENT:
-            expression = m_POwner->GetHPP() >= latentEffect.GetConditionsValue();
+            expression = ((float)m_POwner->health.hp / m_POwner->health.maxhp) * 100 >= latentEffect.GetConditionsValue();
             break;
         case LATENT::HP_UNDER_TP_UNDER_100:
-            expression = m_POwner->GetHPP() <= latentEffect.GetConditionsValue() && m_POwner->health.tp < 1000;
+            expression = ((float)m_POwner->health.hp / m_POwner->health.maxhp) * 100 <= latentEffect.GetConditionsValue() && m_POwner->health.tp < 1000;
             break;
         case LATENT::HP_OVER_TP_UNDER_100:
-            expression = m_POwner->GetHPP() >= latentEffect.GetConditionsValue() && m_POwner->health.tp < 1000;
+            expression = ((float)m_POwner->health.hp / m_POwner->health.maxhp) * 100 >= latentEffect.GetConditionsValue() && m_POwner->health.tp < 1000;
             break;
         case LATENT::MP_UNDER_PERCENT:
-            expression = m_POwner->health.maxmp && m_POwner->GetMPP() <= latentEffect.GetConditionsValue();
-            break;
-        case LATENT::MP_OVER_PERCENT:
-            expression = m_POwner->health.maxmp && m_POwner->GetMPP() >= latentEffect.GetConditionsValue();
+            expression = m_POwner->health.maxmp && ((float)m_POwner->health.mp / m_POwner->health.maxmp) * 100 <= latentEffect.GetConditionsValue();
             break;
         case LATENT::MP_UNDER:
             expression = m_POwner->health.mp <= latentEffect.GetConditionsValue();
@@ -721,21 +711,21 @@ bool CLatentEffectContainer::ProcessLatentEffect(CLatentEffect& latentEffect)
         }
         case LATENT::SANCTION_REGEN_BONUS:
             expression = m_POwner->loc.zone->GetRegionID() >= REGION_TYPE::WEST_AHT_URHGAN && m_POwner->loc.zone->GetRegionID() <= REGION_TYPE::ALZADAAL &&
-                         m_POwner->GetHPP() < latentEffect.GetConditionsValue();
+                         ((float)m_POwner->health.hp / m_POwner->health.maxhp) * 100 < latentEffect.GetConditionsValue();
             break;
         case LATENT::SANCTION_REFRESH_BONUS:
             expression = m_POwner->loc.zone->GetRegionID() >= REGION_TYPE::WEST_AHT_URHGAN && m_POwner->loc.zone->GetRegionID() <= REGION_TYPE::ALZADAAL &&
-                         m_POwner->GetMPP() < latentEffect.GetConditionsValue();
+                         ((float)m_POwner->health.mp / m_POwner->health.maxmp) * 100 < latentEffect.GetConditionsValue();
             break;
         case LATENT::SIGIL_REGEN_BONUS:
             expression = m_POwner->loc.zone->GetRegionID() >= REGION_TYPE::RONFAURE_FRONT &&
                          m_POwner->loc.zone->GetRegionID() <= REGION_TYPE::VALDEAUNIA_FRONT &&
-                         m_POwner->GetHPP() < latentEffect.GetConditionsValue();
+                         ((float)m_POwner->health.hp / m_POwner->health.maxhp) * 100 < latentEffect.GetConditionsValue();
             break;
         case LATENT::SIGIL_REFRESH_BONUS:
             expression = m_POwner->loc.zone->GetRegionID() >= REGION_TYPE::RONFAURE_FRONT &&
                          m_POwner->loc.zone->GetRegionID() <= REGION_TYPE::VALDEAUNIA_FRONT &&
-                         m_POwner->GetMPP() < latentEffect.GetConditionsValue();
+                         ((float)m_POwner->health.mp / m_POwner->health.maxmp) * 100 < latentEffect.GetConditionsValue();
             break;
         case LATENT::STATUS_EFFECT_ACTIVE:
             expression = m_POwner->StatusEffectContainer->HasStatusEffect((EFFECT)latentEffect.GetConditionsValue());
@@ -770,9 +760,7 @@ bool CLatentEffectContainer::ProcessLatentEffect(CLatentEffect& latentEffect)
                     if (member->PPet != nullptr)
                     {
                         auto* PPet = (CPetEntity*)member->PPet;
-                        //if (PPet->m_PetID == latentEffect.GetConditionsValue() && PPet->PAI->IsSpawned())
-                          if (PPet->PAI->IsSpawned() &&  PPet->m_PetID < 21 && // is an avatar
-                             (PPet->m_PetID == latentEffect.GetConditionsValue() || latentEffect.GetConditionsValue() == 21)) // avatar id matches or latent condition == 21 to match any avatar
+                        if (PPet->m_PetID == latentEffect.GetConditionsValue() && PPet->PAI->IsSpawned())
                         {
                             expression = true;
                             break;
@@ -783,9 +771,7 @@ bool CLatentEffectContainer::ProcessLatentEffect(CLatentEffect& latentEffect)
             else if (m_POwner->PParty == nullptr && m_POwner->PPet != nullptr)
             {
                 auto* PPet = (CPetEntity*)m_POwner->PPet;
-                //if (PPet->m_PetID == latentEffect.GetConditionsValue() && !PPet->isDead())
-                  if (!PPet->isDead() && PPet->m_PetID < 21 && // is an avatar
-                     (PPet->m_PetID == latentEffect.GetConditionsValue() || latentEffect.GetConditionsValue() == 21)) // avatar id matches or latent condition == 21 to match any avatar
+                if (PPet->m_PetID == latentEffect.GetConditionsValue() && !PPet->isDead())
                 {
                     expression = true;
                 }
@@ -1143,9 +1129,6 @@ bool CLatentEffectContainer::ProcessLatentEffect(CLatentEffect& latentEffect)
             break;
         case LATENT::EQUIPPED_IN_SLOT:
             expression = latentEffect.GetSlot() == latentEffect.GetConditionsValue();
-            break;
-        case LATENT::CITIZEN_OF_NATION:
-            expression = m_POwner->profile.nation == latentEffect.GetConditionsValue();
             break;
         default:
             latentFound = false;

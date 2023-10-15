@@ -3,7 +3,7 @@
 --  NPC: Shimmering Circle
 -- !pos -220 0 12 168
 -----------------------------------
-require("scripts/globals/bcnm")
+require('scripts/globals/bcnm')
 -----------------------------------
 local entity = {}
 

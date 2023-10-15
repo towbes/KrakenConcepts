@@ -4,9 +4,6 @@
 -- Unlocks: Geo-DEX
 -- !pos -232.162 -20.199 4.927 127
 -----------------------------------
-require("scripts/globals/geomantic_reservoir")
-require("scripts/globals/spell_data")
------------------------------------
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)

@@ -5,12 +5,12 @@
 -- Helbort: !gotoid 17719353
 -- Alexius: !gotoid 17203813
 -----------------------------------
-require('scripts/globals/items')
+
 require('scripts/globals/quests')
-require('scripts/globals/zone')
+
 require('scripts/globals/interaction/quest')
-local ID = require("scripts/zones/Southern_San_dOria/IDs")
-local jugnerID = require("scripts/zones/Jugner_Forest/IDs")
+local ID = zones[xi.zone.SOUTHERN_SAN_DORIA]
+local jugnerID = require('scripts/zones/Jugner_Forest/IDs')
 
 local quest = Quest:new(xi.quest.log_id.SANDORIA, xi.quest.id.sandoria.A_PURCHASE_OF_ARMS)
 
@@ -19,7 +19,7 @@ quest.reward =
     fame = 30,
     fameArea = xi.quest.fame_area.SANDORIA,
     title    = xi.title.ARMS_TRADER,
-    item     = xi.items.ELM_STAFF,
+    item     = xi.item.ELM_STAFF,
 
 }
 

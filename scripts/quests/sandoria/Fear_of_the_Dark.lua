@@ -7,7 +7,7 @@
 require('scripts/globals/interaction/quest')
 require('scripts/globals/npc_util')
 require('scripts/globals/quests')
-require('scripts/globals/zone')
+
 
 local quest = Quest:new(xi.quest.log_id.SANDORIA, xi.quest.id.sandoria.FEAR_OF_THE_DARK)
 
@@ -55,7 +55,7 @@ quest.sections =
             ['Secodiand'] =
             {
                 onTrade = function(player, npc, trade)
-                    if npcUtil.tradeHasExactly(trade, { { xi.items.BAT_WING, 2 } }) then
+                    if npcUtil.tradeHasExactly(trade, { { xi.item.BAT_WING, 2 } }) then
                         return quest:progressEvent(18)
                     end
                 end,

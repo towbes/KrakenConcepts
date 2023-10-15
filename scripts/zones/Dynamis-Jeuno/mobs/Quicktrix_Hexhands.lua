@@ -4,8 +4,8 @@
 -----------------------------------
 mixins =
 {
-    require("scripts/mixins/dynamis_beastmen"),
-    require("scripts/mixins/job_special")
+    require('scripts/mixins/dynamis_beastmen'),
+    require('scripts/mixins/job_special')
 }
 -----------------------------------
 local entity = {}
@@ -24,8 +24,8 @@ entity.onMobSpawn = function(mob)
             { id = xi.jsa.CHAINSPELL, cooldown = 120, hpp = 100 },
         },
     })
-    mob:setLocalVar("[ranged_attack]weaponDmg", 25)
-    mob:setLocalVar("[ranged_attack]dmgmod", 0)
+    mob:setLocalVar('[ranged_attack]weaponDmg', 25)
+    mob:setLocalVar('[ranged_attack]dmgmod', 0)
     mob:setMod(xi.mod.REFRESH, 10)
 end
 

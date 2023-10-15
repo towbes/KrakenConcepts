@@ -1,4 +1,4 @@
-local ID = require("scripts/zones/Inner_Horutoto_Ruins/IDs")
+local ID = zones[xi.zone.INNER_HORUTOTO_RUINS]
 
 return {
     ['_5ca'] = { messageSpecial = ID.text.DOOR_FIRMLY_CLOSED },

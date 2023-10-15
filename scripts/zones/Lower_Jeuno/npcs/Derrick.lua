@@ -4,8 +4,7 @@
 -- Involved in Quests and finish : Save the Clock Tower
 -- !pos -32 -1 -7 245
 -----------------------------------
-local ID = require("scripts/zones/Lower_Jeuno/IDs")
-require("scripts/globals/keyitems")
+local ID = zones[xi.zone.LOWER_JEUNO]
 -----------------------------------
 local entity = {}
 

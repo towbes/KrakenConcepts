@@ -1,10 +1,6 @@
 -----------------------------------
 -- Zone: Metalworks (237)
 -----------------------------------
-local ID = require('scripts/zones/Metalworks/IDs')
-require('scripts/globals/conquest')
-require('scripts/globals/keyitems')
------------------------------------
 local zoneObject = {}
 
 zoneObject.onInitialize = function(zone)

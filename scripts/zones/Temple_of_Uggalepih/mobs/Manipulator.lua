@@ -3,8 +3,6 @@
 --   NM: Manipulator
 -- Note: Paths around the 2 staircases
 -----------------------------------
-require("scripts/globals/hunts")
------------------------------------
 local entity = {}
 
 local pathNodes =
@@ -66,7 +64,7 @@ local pathNodes =
 
 entity.onMobSpawn = function(mob)
     mob:pathThrough(pathNodes, xi.path.flag.PATROL)
-    mob:addListener("ITEM_STOLEN", "MANIPULATOR_ITEM_STOLEN", function(mobArg, player, itemId)
+    mob:addListener('ITEM_STOLEN', 'MANIPULATOR_ITEM_STOLEN', function(mobArg, player, itemId)
         mob:delMod(xi.mod.DELAY, 400)
     end)
 end

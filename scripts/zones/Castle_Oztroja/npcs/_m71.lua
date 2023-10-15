@@ -4,8 +4,7 @@
 -- Involved in Mission: Magicite
 -- !pos -99 24 -105 151
 -----------------------------------
-local ID = require("scripts/zones/Castle_Oztroja/IDs")
-require("scripts/globals/keyitems")
+local ID = zones[xi.zone.CASTLE_OZTROJA]
 -----------------------------------
 local entity = {}
 

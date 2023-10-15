@@ -3,16 +3,15 @@
 --   NM: Jailer of Prudence
 -- AnimationSubs: 0 - Normal, 3 - Mouth Open
 -----------------------------------
-local ID = require("scripts/zones/AlTaieu/IDs")
-mixins = { require("scripts/mixins/job_special") }
-require("scripts/globals/roe")
+local ID = zones[xi.zone.ALTAIEU]
+mixins = { require('scripts/mixins/job_special') }
 -----------------------------------
 local entity = {}
 
 entity.onMobInitialize = function(mob)
     mob:setMobMod(xi.mobMod.NO_DROPS, 1)
     mob:setMobMod(xi.mobMod.ALLI_HATE, 30)
-    mob:addListener("WEAPONSKILL_STATE_ENTER", "PRUDENCE_MIMIC_START", function(mobArg, skillID)
+    mob:addListener('WEAPONSKILL_STATE_ENTER', 'PRUDENCE_MIMIC_START', function(mobArg, skillID)
         local prudenceIDs = { ID.mob.JAILER_OF_PRUDENCE_1, ID.mob.JAILER_OF_PRUDENCE_2 }
         if mobArg:getLocalVar('[JoP]mimic') ~= 1 and mobArg:isAlive() then
             for _, jailer in ipairs(prudenceIDs) do
@@ -33,7 +32,7 @@ entity.onMobInitialize = function(mob)
         end
     end)
 
-    mob:addListener("WEAPONSKILL_STATE_EXIT", "PRUDENCE_MIMIC_STOP", function(mobArg, skillID)
+    mob:addListener('WEAPONSKILL_STATE_EXIT', 'PRUDENCE_MIMIC_STOP', function(mobArg, skillID)
         mobArg:setLocalVar('[JoP]mimic', 0)
     end)
 end
@@ -62,13 +61,13 @@ entity.onMobFight = function(mob)
         95, 85, 75, 65, 55, 45, 35, 25, 15, 5,
     }
 
-    local perfectDodgeTrigger = mob:getLocalVar("perfectDodgeTrigger")
-    local perfectDodgeQueue = mob:getLocalVar("perfectDodgeQueue")
+    local perfectDodgeTrigger = mob:getLocalVar('perfectDodgeTrigger')
+    local perfectDodgeQueue = mob:getLocalVar('perfectDodgeQueue')
     local mobHPP = mob:getHPP()
     for trigger, hpp in ipairs(perfectDodgeHPP) do
         if mobHPP < hpp and perfectDodgeTrigger < trigger then
-            mob:setLocalVar("perfectDodgeTrigger", trigger)
-            mob:setLocalVar("perfectDodgeQueue", perfectDodgeQueue + 1)
+            mob:setLocalVar('perfectDodgeTrigger', trigger)
+            mob:setLocalVar('perfectDodgeQueue', perfectDodgeQueue + 1)
             break
         end
     end
@@ -77,13 +76,13 @@ entity.onMobFight = function(mob)
         mob:actionQueueEmpty() and
         mob:canUseAbilities()
     then
-        perfectDodgeQueue = mob:getLocalVar("perfectDodgeQueue")
+        perfectDodgeQueue = mob:getLocalVar('perfectDodgeQueue')
         if perfectDodgeQueue > 0 then
-            perfectDodgeQueue = mob:getLocalVar("perfectDodgeQueue") - 1
+            perfectDodgeQueue = mob:getLocalVar('perfectDodgeQueue') - 1
             if not mob:hasStatusEffect(xi.effect.PERFECT_DODGE) and mob:isAlive() then
                 mob:useMobAbility(693)
                 mob:addStatusEffectEx(xi.effect.FLEE, 0, 100, 0, 30)
-                mob:setLocalVar("perfectDodgeQueue", perfectDodgeQueue)
+                mob:setLocalVar('perfectDodgeQueue', perfectDodgeQueue)
             end
         end
     end
@@ -95,15 +94,15 @@ end
 entity.onMobDeath = function(mob, player, optParams)
     local firstPrudence  = GetMobByID(ID.mob.JAILER_OF_PRUDENCE_1)
     local secondPrudence = GetMobByID(ID.mob.JAILER_OF_PRUDENCE_2)
-    local count          = player:getLocalVar("prudenceCount")
+    local count          = player:getLocalVar('prudenceCount')
 
     if firstPrudence or secondPrudence then
-        player:setLocalVar("prudenceCount", count + 1)
+        player:setLocalVar('prudenceCount', count + 1)
     end
 
     if count >= 2 and player:hasEminenceRecord(770) then
         xi.roe.onRecordTrigger(player, 770)
-        player:setLocalVar("prudenceCount", 0)
+        player:setLocalVar('prudenceCount', 0)
     end
 end
 

@@ -7,11 +7,11 @@
 --  Phillone !pos -208 -2 67
 --       ??? !pos -310 0 407
 -----------------------------------
-require('scripts/globals/items')
+
 require('scripts/globals/npc_util')
 require('scripts/globals/quests')
-require('scripts/globals/titles')
-require('scripts/globals/zone')
+
+
 require('scripts/globals/interaction/quest')
 -----------------------------------
 local ID = require('scripts/zones/Jugner_Forest/IDs')
@@ -21,7 +21,7 @@ local quest = Quest:new(xi.quest.log_id.SANDORIA, xi.quest.id.sandoria.A_TIMELY_
 
 quest.reward =
 {
-    item = xi.items.MEDIEVAL_COLLAR,
+    item = xi.item.MEDIEVAL_COLLAR,
     fame = 60,
     fameArea = xi.quest.fame_area.SANDORIA,
     title = xi.title.OBSIDIAN_STORM,

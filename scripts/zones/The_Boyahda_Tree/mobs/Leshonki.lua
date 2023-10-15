@@ -2,8 +2,6 @@
 -- Area: The Boyahda Tree
 --   NM: Leshonki
 -----------------------------------
-require("scripts/globals/hunts")
------------------------------------
 local entity = {}
 
 local updateRegen = function(mob)

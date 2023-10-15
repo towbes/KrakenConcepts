@@ -1,9 +1,7 @@
 -----------------------------------
 -- Zone: Phanauet_Channel
 -----------------------------------
-local ID = require('scripts/zones/Phanauet_Channel/IDs')
-require('scripts/globals/conquest')
-require('scripts/globals/zone')
+local ID = zones[xi.zone.PHANAUET_CHANNEL]
 require('scripts/globals/barge')
 require('scripts/globals/exp_controller')
 -----------------------------------
@@ -34,7 +32,7 @@ end
 
 zoneObject.onGameHour = function(zone)
     local vHour = VanadielHour()
-    local death = GetServerVariable("\\[SPAWN\\]16781327")
+    local death = GetServerVariable('\\[SPAWN\\]16781327')
     if vHour == 11 then
         GetMobByID(ID.mob.STUBBORN_DREDVODD):setRespawnTime(30)
     end

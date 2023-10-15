@@ -5,12 +5,12 @@
 -----------------------------------
 mixins =
     {
-        require("scripts/mixins/job_special"),
-        require("scripts/mixins/weapon_break")
+        require('scripts/mixins/job_special'),
+        require('scripts/mixins/weapon_break')
     }
 -----------------------------------
 local entity = {}
-local ID = require("scripts/zones/Caedarva_Mire/IDs")
+local ID = zones[xi.zone.CAEDARVA_MIRE]
 
 entity.onMobInitialize = function(mob)
     mob:setMobMod(xi.mobMod.ALLI_HATE, 30)
@@ -18,8 +18,8 @@ end
 
 entity.onMobDeath = function(mob, player, optParams)
     local mother = GetMobByID(ID.mob.EXPERIMENTAL_LAMIA)
-    local dance = mother:getLocalVar("dances")  
-    mother:setLocalVar("dances", dance + 1)
+    local dance = mother:getLocalVar('dances')  
+    mother:setLocalVar('dances', dance + 1)
 end
 
 entity.onMobRoam = function(mob)

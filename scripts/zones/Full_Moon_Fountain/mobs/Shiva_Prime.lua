@@ -3,7 +3,7 @@
 -- Mob: Shiva Prime
 -- Quest: Waking the Beast
 -----------------------------------
-mixins = { require("scripts/mixins/wtb_prime") }
+mixins = { require('scripts/mixins/wtb_prime') }
 -----------------------------------
 local entity = {}
 

@@ -4,31 +4,28 @@
 -- Starts and Finishes Quest: The Three Magi, Recollections
 -- !pos 0.1 30 21 242
 -----------------------------------
-local ID = require("scripts/zones/Heavens_Tower/IDs")
-require("scripts/globals/keyitems")
-require("scripts/globals/quests")
-require("scripts/globals/titles")
+local ID = zones[xi.zone.HEAVENS_TOWER]
 -----------------------------------
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)
     if
         player:getQuestStatus(xi.quest.log_id.WINDURST, xi.quest.id.windurst.THE_THREE_MAGI) == QUEST_ACCEPTED and
-        trade:hasItemQty(1104, 1) and
+        trade:hasItemQty(xi.item.GLOWSTONE, 1) and
         trade:getItemCount() == 1
     then
-        player:startEvent(269) -- Finish Quest "The Three Magi"
+        player:startEvent(269) -- Finish Quest 'The Three Magi'
     elseif
         player:getQuestStatus(xi.quest.log_id.WINDURST, xi.quest.id.windurst.RECOLLECTIONS) == QUEST_ACCEPTED and
-        player:getCharVar("recollectionsQuest") < 2 and
-        trade:hasItemQty(1105, 1) and
+        player:getCharVar('recollectionsQuest') < 2 and
+        trade:hasItemQty(xi.item.BAG_OF_SEEDS, 1) and
         trade:getItemCount() == 1
     then
         player:startEvent(271, 0, 520)
     elseif
         player:getQuestStatus(xi.quest.log_id.WINDURST, xi.quest.id.windurst.THE_ROOT_OF_THE_PROBLEM) == QUEST_ACCEPTED and
-        player:getCharVar("rootProblem") == 1 and
-        trade:hasItemQty(829, 1) and
+        player:getCharVar('rootProblem') == 1 and
+        trade:hasItemQty(xi.item.SQUARE_OF_SILK_CLOTH, 1) and
         trade:getItemCount() == 1
     then
         player:startEvent(278)
@@ -51,16 +48,16 @@ entity.onTrigger = function(player, npc)
         (sJob == xi.job.BLM and
         sLvl >= xi.settings.main.AF1_QUEST_LEVEL))
     then
-        player:startEvent(260, 0, 613, 0, 0, 582, 1104) -- Start Quest "The Three Magi"
+        player:startEvent(260, 0, 613, 0, 0, 582, 1104) -- Start Quest 'The Three Magi'
     elseif theThreeMagi == QUEST_ACCEPTED then
-        player:startEvent(261, 0, 0, 0, 0, 0, 1104) -- During Quest "The Three Magi"
+        player:startEvent(261, 0, 0, 0, 0, 0, xi.item.GLOWSTONE) -- During Quest 'The Three Magi'
     elseif
         theThreeMagi == QUEST_COMPLETED and
         recollections == QUEST_AVAILABLE and
         ((mJob == xi.job.BLM and mLvl < xi.settings.main.AF2_QUEST_LEVEL or mJob ~= xi.job.BLM) or
         (sJob == xi.job.BLM and sLvl < xi.settings.main.AF2_QUEST_LEVEL or sJob ~= xi.job.BLM)) -- Umeboshi
     then
-        player:startEvent(268) -- New standard dialog after "The Three Magi"
+        player:startEvent(268) -- New standard dialog after 'The Three Magi'
     elseif
         theThreeMagi == QUEST_COMPLETED and
         ((mJob == xi.job.BLM and
@@ -70,12 +67,12 @@ entity.onTrigger = function(player, npc)
         not player:needToZone() and
         recollections == QUEST_AVAILABLE
     then
-        player:startEvent(270, 0, 1105) -- Start Quest "Recollections"
+        player:startEvent(270, 0, xi.item.BAG_OF_SEEDS) -- Start Quest 'Recollections'
     elseif
         recollections == QUEST_ACCEPTED and
         player:hasKeyItem(xi.ki.FOE_FINDER_MK_I)
     then
-        player:startEvent(275) -- Finish Quest "Recollections"
+        player:startEvent(275) -- Finish Quest 'Recollections'
     elseif
         recollections == QUEST_COMPLETED and
         rootProblem == QUEST_AVAILABLE and
@@ -85,13 +82,13 @@ entity.onTrigger = function(player, npc)
         sLvl >= 50)) and
         not player:needToZone()
     then
-        player:startEvent(276, 0, 829) -- Start Quest "The Root of The problem"
+        player:startEvent(276, 0, xi.item.SQUARE_OF_SILK_CLOTH) -- Start Quest 'The Root of The problem'
     elseif rootProblem == QUEST_ACCEPTED then
-        local rootProblemCS = player:getCharVar("rootProblem")
+        local rootProblemCS = player:getCharVar('rootProblem')
 
         if rootProblemCS == 1 then
-            player:startEvent(277, 0, 829)
-        elseif rootProblemCS == 2 and not player:hasKeyItem(xi.ki.SLUICE_SURVEYOR_MK_I) then
+            player:startEvent(277, 0, xi.item.SQUARE_OF_SILK_CLOTH)
+        elseif rootProblemCS == 2 then
             player:startEvent(279)
         elseif rootProblemCS == 3 then
             player:startEvent(281, 0, 182)
@@ -108,12 +105,12 @@ entity.onEventFinish = function(player, csid, option, npc)
     if csid == 260 then
         -- option 3: Koru-Moru -- option 2: Shantotto -- option 1: Yoran-Oran
         player:addQuest(xi.quest.log_id.WINDURST, xi.quest.id.windurst.THE_THREE_MAGI)
-        player:setCharVar("theThreeMagiSupport", option)
+        player:setCharVar('theThreeMagiSupport', option)
     elseif csid == 269 then
         if player:getFreeSlotsCount() == 0 then
-            player:messageSpecial(ID.text.ITEM_CANNOT_BE_OBTAINED, 17423) -- Casting Wand
+            player:messageSpecial(ID.text.ITEM_CANNOT_BE_OBTAINED, xi.item.CASTING_WAND) -- Casting Wand
         else
-            local choosetitle = player:getCharVar("theThreeMagiSupport")
+            local choosetitle = player:getCharVar('theThreeMagiSupport')
 
             if choosetitle == 3 then
                 player:addTitle(xi.title.PROFESSOR_KORU_MORU_SUPPORTER)
@@ -124,10 +121,10 @@ entity.onEventFinish = function(player, csid, option, npc)
             end
 
             player:tradeComplete()
-            player:addItem(17423)
-            player:messageSpecial(ID.text.ITEM_OBTAINED, 17423) -- Casting Wand
+            player:addItem(xi.item.CASTING_WAND)
+            player:messageSpecial(ID.text.ITEM_OBTAINED, xi.item.CASTING_WAND) -- Casting Wand
             player:needToZone(true)
-            player:setCharVar("theThreeMagiSupport", 0)
+            player:setCharVar('theThreeMagiSupport', 0)
             player:addFame(xi.quest.fame_area.WINDURST, 20)
             player:completeQuest(xi.quest.log_id.WINDURST, xi.quest.id.windurst.THE_THREE_MAGI)
         end
@@ -135,21 +132,21 @@ entity.onEventFinish = function(player, csid, option, npc)
         player:addQuest(xi.quest.log_id.WINDURST, xi.quest.id.windurst.RECOLLECTIONS)
     elseif csid == 271 then
         player:tradeComplete()
-        player:setCharVar("recollectionsQuest", 2)
+        player:setCharVar('recollectionsQuest', 2)
     elseif csid == 275 then
         if player:getFreeSlotsCount() == 0 then
-            player:messageSpecial(ID.text.ITEM_CANNOT_BE_OBTAINED, 14092) -- wizards sabots
+            player:messageSpecial(ID.text.ITEM_CANNOT_BE_OBTAINED, xi.item.WIZARDS_SABOTS) -- wizards sabots
         else
-            player:setCharVar("recollectionsQuest", 0)
+            player:setCharVar('recollectionsQuest', 0)
             player:delKeyItem(xi.ki.FOE_FINDER_MK_I)
-            player:addItem(14092)
-            player:messageSpecial(ID.text.ITEM_OBTAINED, 14092) -- wizards sabots
+            player:addItem(xi.item.WIZARDS_SABOTS)
+            player:messageSpecial(ID.text.ITEM_OBTAINED, xi.item.WIZARDS_SABOTS) -- wizards sabots
             player:addFame(xi.quest.fame_area.WINDURST, 40)
             player:completeQuest(xi.quest.log_id.WINDURST, xi.quest.id.windurst.RECOLLECTIONS)
         end
     elseif csid == 276 then
         player:addQuest(xi.quest.log_id.WINDURST, xi.quest.id.windurst.THE_ROOT_OF_THE_PROBLEM)
-        player:setCharVar("rootProblem", 1)
+        player:setCharVar('rootProblem', 1)
     elseif csid == 279 then
         player:addKeyItem(xi.ki.SLUICE_SURVEYOR_MK_I)
         player:messageSpecial(ID.text.KEYITEM_OBTAINED, xi.ki.SLUICE_SURVEYOR_MK_I)
@@ -158,8 +155,8 @@ entity.onEventFinish = function(player, csid, option, npc)
             player:messageSpecial(ID.text.ITEM_CANNOT_BE_OBTAINED)
         else
             player:completeQuest(xi.quest.log_id.WINDURST, xi.quest.id.windurst.THE_ROOT_OF_THE_PROBLEM)
-            player:addItem(13856)
-            player:messageSpecial(ID.text.ITEM_OBTAINED, 13856)
+            player:addItem(xi.item.WIZARDS_PETASOS)
+            player:messageSpecial(ID.text.ITEM_OBTAINED, xi.item.WIZARDS_PETASOS)
             player:addTitle(xi.title.PARAGON_OF_BLACK_MAGE_EXCELLENCE)
             player:delKeyItem(xi.ki.SLUICE_SURVEYOR_MK_I)
         end

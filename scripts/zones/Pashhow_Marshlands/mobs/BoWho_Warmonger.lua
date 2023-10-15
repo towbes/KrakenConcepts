@@ -2,9 +2,8 @@
 -- Area: Pashhow Marshlands
 --   NM: Bo'Who Warmonger
 -----------------------------------
-require("scripts/globals/regimes")
-mixins = {require("scripts/mixins/job_special")}
-local ID = require("scripts/zones/Pashhow_Marshlands/IDs")
+mixins = {require('scripts/mixins/job_special')}
+local ID = zones[xi.zone.PASHHOW_MARSHLANDS]
 -----------------------------------
 local entity = {}
 

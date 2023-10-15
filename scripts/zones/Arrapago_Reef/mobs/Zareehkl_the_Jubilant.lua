@@ -3,8 +3,8 @@
 --   NM: Zareehkl the Jubilant
 -----------------------------------
 mixins = { 
-require("scripts/mixins/families/qutrub"),
-require("scripts/mixins/job_special")
+require('scripts/mixins/families/qutrub'),
+require('scripts/mixins/job_special')
 }
 
 -----------------------------------
@@ -24,9 +24,9 @@ entity.onMobInitialize = function(mob)
 end
 
 entity.onMobSpawn = function(mob)
-    mob:setLocalVar("[rage]timer", 4500)
+    mob:setLocalVar('[rage]timer', 4500)
     -- prevent weapon breaking and start w/o sword
-    mob:setLocalVar("qutrubBreakChance", 0)
+    mob:setLocalVar('qutrubBreakChance', 0)
 
     -- starts w/o weapon
     mob:setAnimationSub(1)
@@ -36,7 +36,7 @@ entity.onMobSpawn = function(mob)
     mob:setMobSkillAttack(0)
     mob:setMod(xi.mod.DELAY, 0)
     mob:setMobMod(xi.mobMod.SKILL_LIST, 303)
-    mob:setLocalVar("cleaves", 0)
+    mob:setLocalVar('cleaves', 0)
 
     -- last phase/blood weapon mechanic
     xi.mix.jobSpecial.config(mob, {
@@ -56,25 +56,25 @@ entity.onMobSpawn = function(mob)
                     mob:setMobSkillAttack(0)
 
                     -- will just spam leaping cleave and unblest jambiya until death after BW is over
-                    mob:addListener("EFFECT_LOSE", "BLOOD_WEAPON", function(mob, effect)
+                    mob:addListener('EFFECT_LOSE', 'BLOOD_WEAPON', function(mob, effect)
                         if effect:getType() == xi.effect.BLOOD_WEAPON then
-                            mob:removeListener("BLOOD_WEAPON")
+                            mob:removeListener('BLOOD_WEAPON')
                             mob:setMobAbilityEnabled(true)
                             mob:setMobSkillAttack(5303)
                             mob:setMod(xi.mod.DELAY, 2750)
                             mob:setMobMod(xi.mobMod.SKILL_LIST, 0)
                             -- gets really angry at everyone attacking
-                            mob:addListener("TAKE_DAMAGE", "DMG_TAKE", function(mob, _, attacker, attackType)
+                            mob:addListener('TAKE_DAMAGE', 'DMG_TAKE', function(mob, _, attacker, attackType)
                                 if attackType == xi.attackType.PHYSICAL and ( attacker:isPC() or attacker:isPet() ) then
                                     mob:addEnmity(attacker, 1, 3000)
                                 end
                             end)
-                            mob:addListener("MAGIC_TAKE", "MDMG_TAKE", function(target, caster)
+                            mob:addListener('MAGIC_TAKE', 'MDMG_TAKE', function(target, caster)
                                 if caster:isPC() or caster:isPet() then
                                     target:addEnmity(caster, 1, 3000)
                                 end
                             end)
-                            mob:addListener("WEAPONSKILL_TAKE", "WSDMG_TAKE", function(target, attacker)
+                            mob:addListener('WEAPONSKILL_TAKE', 'WSDMG_TAKE', function(target, attacker)
                                 if attacker:isPC() or caster:isPet() then
                                     target:addEnmity(attacker, 1, 3000)
                                 end
@@ -89,7 +89,7 @@ end
 
 entity.onMobWeaponSkillPrepare = function(mob, target)
     if mob:getMobMod(xi.mobMod.SKILL_LIST) == 0 then
-        local cleaves = mob:getLocalVar("cleaves")
+        local cleaves = mob:getLocalVar('cleaves')
         if cleaves >= math.random(8, 16) then
             mob:useMobAbility(1784)
         end
@@ -100,10 +100,10 @@ entity.onMobWeaponSkill = function(target, mob, skill)
     local skillID = skill:getID()
     if skillID == 1784 then
         -- reset cleaves after unblest jambiya
-        mob:setLocalVar("cleaves", 0)
+        mob:setLocalVar('cleaves', 0)
     elseif skillID == 2363 then
         -- keep track of every cleaves to trigger jambiya every once in a while
-        mob:setLocalVar("cleaves", mob:getLocalVar("cleaves") + 1)
+        mob:setLocalVar('cleaves', mob:getLocalVar('cleaves') + 1)
     end
 end
 
@@ -112,7 +112,7 @@ end
 
 entity.onMobDespawn = function(mob)
     -- remove every listeners
-    local listeners = { "BLOOD_WEAPON", "DMG_TAKE", "MDMG_TAKE", "WSDMG_TAKE", }
+    local listeners = { 'BLOOD_WEAPON', 'DMG_TAKE', 'MDMG_TAKE', 'WSDMG_TAKE', }
     for _, v in ipairs(listeners) do
         mob:removeListener(v)
     end

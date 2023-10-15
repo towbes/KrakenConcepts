@@ -3,7 +3,7 @@
 --  NPC: Cell Door
 -- !pos -19.000 -17.899 20.000 167
 -----------------------------------
-local ID = require("scripts/zones/Bostaunieux_Oubliette/IDs")
+local ID = zones[xi.zone.BOSTAUNIEUX_OUBLIETTE]
 -----------------------------------
 local entity = {}
 

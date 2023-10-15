@@ -1,7 +1,7 @@
 -----------------------------------
 -- Exp Controller Global
 -----------------------------------
-require("scripts/globals/utils")
+require('scripts/globals/utils')
 -----------------------------------
 xi = xi or {}
 xi.exp_controller = xi.exp_controller or {}

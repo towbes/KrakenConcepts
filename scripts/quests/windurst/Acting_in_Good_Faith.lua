@@ -2,22 +2,21 @@
 -- Acting in Good Faith
 -----------------------------------
 -- !addquest 2 64
--- Gantineaux : !pos
+-- Gantineux : !pos -83 -9 3 238
+-- qm1       : !pos -17 0 59 195 (I-10)
+-- Eperdur   : !pos 129 -6 96 231
 -----------------------------------
-require('scripts/globals/interaction/quest')
-require('scripts/globals/npc_util')
-require('scripts/globals/quests')
-require('scripts/globals/zone')
-local ID = require("scripts/zones/The_Eldieme_Necropolis/IDs")
+local eldiemeID = zones[xi.zone.THE_ELDIEME_NECROPOLIS]
 -----------------------------------
 
 local quest = Quest:new(xi.quest.log_id.WINDURST, xi.quest.id.windurst.ACTING_IN_GOOD_FAITH)
 
 quest.reward =
 {
-    item = xi.items.SCROLL_OF_TELEPORT_MEA,
-    fame = 30,
+    fame     = 30,
     fameArea = xi.quest.fame_area.WINDURST,
+    item     = xi.item.SCROLL_OF_TELEPORT_MEA,
+    title    = xi.title.PILGRIM_TO_MEA,
 }
 
 quest.sections =
@@ -36,8 +35,10 @@ quest.sections =
             onEventFinish =
             {
                 [10019] = function(player, csid, option, npc)
-                    quest:begin(player)
-                    npcUtil.giveKeyItem(player, xi.ki.SPIRIT_INCENSE)
+                    if option == 0 then
+                        npcUtil.giveKeyItem(player, xi.ki.SPIRIT_INCENSE)
+                        quest:begin(player)
+                    end
                 end,
             },
         },
@@ -54,9 +55,9 @@ quest.sections =
             {
                 onTrigger = function(player, npc)
                     if player:hasKeyItem(xi.ki.SPIRIT_INCENSE) then
-                        return quest:progressEvent(10020)
+                        return quest:event(10020)
                     elseif player:hasKeyItem(xi.ki.GANTINEUXS_LETTER) then
-                        return quest:progressEvent(10022)
+                        return quest:event(10022)
                     else
                         return quest:progressEvent(10021)
                     end
@@ -67,25 +68,6 @@ quest.sections =
             {
                 [10021] = function(player, csid, option, npc)
                     npcUtil.giveKeyItem(player, xi.ki.GANTINEUXS_LETTER)
-                end,
-            },
-        },
-
-        [xi.zone.NORTHERN_SAN_DORIA] =
-        {
-            ['Eperdur'] =
-            {
-                onTrigger = function(player, npc)
-                    if player:hasKeyItem(xi.ki.GANTINEUXS_LETTER) then
-                        return quest:progressEvent(680)
-                    end
-                end,
-            },
-
-            onEventFinish =
-            {
-                [680] = function(player, csid, option, npc)
-                    quest:complete(player)
                 end,
             },
         },
@@ -104,10 +86,42 @@ quest.sections =
             onEventFinish =
             {
                 [50] = function(player, csid, option, npc)
-                    player:messageSpecial(ID.text.SPIRIT_INCENSE_EMITS_PUTRID_ODOR, xi.ki.SPIRIT_INCENSE)
+                    player:messageSpecial(eldiemeID.text.SPIRIT_INCENSE_EMITS_PUTRID_ODOR, xi.ki.SPIRIT_INCENSE)
                     player:delKeyItem(xi.ki.SPIRIT_INCENSE)
                 end,
             },
+        },
+
+        [xi.zone.NORTHERN_SAN_DORIA] =
+        {
+            ['Eperdur'] =
+            {
+                onTrigger = function(player, npc)
+                    if player:hasKeyItem(xi.ki.GANTINEUXS_LETTER) then
+                        return quest:progressEvent(680)
+                    end
+                end,
+            },
+
+            onEventFinish =
+            {
+                [680] = function(player, csid, option, npc)
+                    if quest:complete(player) then
+                        player:delKeyItem(xi.ki.GANTINEUXS_LETTER)
+                    end
+                end,
+            },
+        },
+    },
+
+    {
+        check = function(player, status, vars)
+            return status == QUEST_COMPLETED
+        end,
+
+        [xi.zone.WINDURST_WATERS] =
+        {
+            ['Gantineux'] = quest:event(10023):replaceDefault(),
         },
     },
 }

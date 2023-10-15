@@ -3,7 +3,7 @@
 --  NPC: Miageau
 -- Type: Quest Giver NPC
 -- !pos 115 0 108 231
--- Starts and Finishes: "Waters of the Cheval"
+-- Starts and Finishes: 'Waters of the Cheval'
 -----------------------------------
 local entity = {}
 

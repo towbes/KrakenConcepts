@@ -2,7 +2,7 @@
 -- Area: Balga's Dais
 --  Mob: Yagudo's Avatar (Saintly Invitation 6-2)
 -----------------------------------
-mixins = { require("scripts/mixins/families/avatar") }
+mixins = { require('scripts/mixins/families/avatar') }
 -----------------------------------
 local entity = {}
 

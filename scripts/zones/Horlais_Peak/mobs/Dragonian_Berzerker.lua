@@ -5,12 +5,12 @@
 -- TODO: Chaos Blade effect gets stronger after they use their respective 2-hour.
 --       50% HP/MP reduction pre-2 hour and 75% HP/MP reduction post-2 hour.
 -----------------------------------
-mixins = { require("scripts/mixins/job_special") }
+mixins = { require('scripts/mixins/job_special') }
 -----------------------------------
 local entity = {}
 
 entity.onMobSpawn = function(mob)
-    mob:setLocalVar("chaosBladeLevel", 50)
+    mob:setLocalVar('chaosBladeLevel', 50)
 
     xi.mix.jobSpecial.config(mob, {
         specials =
@@ -19,7 +19,7 @@ entity.onMobSpawn = function(mob)
                 id = xi.jsa.MIGHTY_STRIKES,
                 endCode = function(mobArg)
                     mobArg:addMod(xi.mod.ATT, 200)
-                    mobArg:setLocalVar("chaosBladeLevel", 75)
+                    mobArg:setLocalVar('chaosBladeLevel', 75)
                 end,
             },
         },

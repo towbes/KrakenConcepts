@@ -1,12 +1,7 @@
 -----------------------------------
 -- Zone: Qufim_Island (126)
 -----------------------------------
-local ID = require("scripts/zones/Qufim_Island/IDs")
-require("scripts/globals/conquest")
-require("scripts/globals/npc_util")
-require("scripts/globals/quests")
-require("scripts/globals/titles")
-require("scripts/globals/zone")
+local ID = zones[xi.zone.QUFIM_ISLAND]
 -----------------------------------
 local zoneObject = {}
 
@@ -44,7 +39,7 @@ end
 zoneObject.onZoneWeatherChange = function(weather)
     local dosetsu = GetMobByID(ID.mob.DOSETSU_TREE)
     if
-        not dosetsu:isSpawned() and os.time() > dosetsu:getLocalVar("respawn")
+        not dosetsu:isSpawned() and os.time() > dosetsu:getLocalVar('respawn')
         and (weather == xi.weather.THUNDER or weather == xi.weather.THUNDERSTORMS)
     then
         DisallowRespawn(dosetsu:getID(), false)

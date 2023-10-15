@@ -1,7 +1,7 @@
 -- Zone: Castle Oztroja (151)
 -- Desc: this file contains functions that are shared by multiple luas in this zone's directory
 -----------------------------------
-local ID = require("scripts/zones/Castle_Oztroja/IDs")
+local ID = zones[xi.zone.CASTLE_OZTROJA]
 -----------------------------------
 
 local oztrojaGlobal =
@@ -10,12 +10,12 @@ local oztrojaGlobal =
         pick a new handle combination for the brass door on floor 2
         ..............................................................................................]]
     pickNewCombo = function()
-        local numOpen = 0
+        local numOpen
         local combo = {}
 
         -- https://ffxiclopedia.wikia.com/wiki/Talk:Castle_Oztroja
-        -- "the combination seems to always be two levers up and two levers down."
-        -- "False. I just had a combo that was [Up, Up, Down, Up]. It isn't always 2 up and 2 down."
+        -- 'the combination seems to always be two levers up and two levers down.'
+        -- 'False. I just had a combo that was [Up, Up, Down, Up]. It isn't always 2 up and 2 down.'
         -- Let's interpret this to mean a valid combination has at least two levers up (open)
 
         repeat
@@ -42,7 +42,7 @@ local oztrojaGlobal =
         pick a new password for the trap door on floor 4
         ..............................................................................................]]
     pickNewPassword = function()
-        GetNPCByID(ID.npc.TRAP_DOOR_FLOOR_4):setLocalVar("password", math.random(0, 8))
+        GetNPCByID(ID.npc.TRAP_DOOR_FLOOR_4):setLocalVar('password', math.random(0, 8))
     end,
 
     --[[..............................................................................................

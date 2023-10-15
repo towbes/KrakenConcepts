@@ -3,11 +3,13 @@
 --  ZNM: Experimental Lamia
 -- !pos -773.369 -11.824 322.298 79
 -----------------------------------
+local ID = zones[xi.zone.CAEDARVA_MIRE]
+-----------------------------------
 local entity = {}
-local ID = require("scripts/zones/Caedarva_Mire/IDs")
+local ID = zones[xi.zone.CAEDARVA_MIRE]
 
 local function spawnMinions(mob, target)
-    mob:setLocalVar("spawnedMinions", 1)
+    mob:setLocalVar('spawnedMinions', 1)
 
     local x = mob:getXPos()
     local y = mob:getYPos()
@@ -29,17 +31,17 @@ entity.onMobInitialize = function(mob)
 end
 
 entity.onMobSpawn = function(mob)
-    mob:setLocalVar("[rage]timer", 5400)                 -- 90 minutes
-    mob:setLocalVar("adds", 0)   
-    mob:setLocalVar("dances", 0)
-    mob:setLocalVar("tailSlap", 0)   
+    mob:setLocalVar('[rage]timer', 5400)                 -- 90 minutes
+    mob:setLocalVar('adds', 0)   
+    mob:setLocalVar('dances', 0)
+    mob:setLocalVar('tailSlap', 0)   
     mob:setMod(xi.mod.GRAVITYRES, 100)
     mob:setAnimationSub(0)       
 end   
 
 
 entity.onMobFight = function(mob, target)
-    if mob:getHPP() < 75 and mob:getLocalVar("spawnedMinions") == 0 then
+    if mob:getHPP() < 75 and mob:getLocalVar('spawnedMinions') == 0 then
         spawnMinions(mob, target)
     end
 
@@ -51,23 +53,23 @@ entity.onMobFight = function(mob, target)
         end
     end
 
-    if mob:getLocalVar("dances") > 0 then
-        mob:setLocalVar("dances", mob:getLocalVar("dances") - 1)
+    if mob:getLocalVar('dances') > 0 then
+        mob:setLocalVar('dances', mob:getLocalVar('dances') - 1)
         mob:useMobAbility(1762)
-    elseif mob:getLocalVar("tailSlap") == 1 then
+    elseif mob:getLocalVar('tailSlap') == 1 then
         -- use arrow_deluge after tail_slap, after belly dances
-        mob:setLocalVar("tailSlap", 0)
+        mob:setLocalVar('tailSlap', 0)
         mob:useMobAbility(1761)
     end
 end
 
 entity.onMobWeaponSkill = function(target, mob, skill)
-    if mob:getLocalVar("spawnedMinions") == 0 then
+    if mob:getLocalVar('spawnedMinions') == 0 then
         spawnMinions(mob, target)
     end
 
     if skill:getID() == 1758 then -- Tail Slap
-        mob:setLocalVar("tailSlap", 1)
+        mob:setLocalVar('tailSlap', 1)
     end
 end
 

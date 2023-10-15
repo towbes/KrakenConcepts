@@ -5,13 +5,13 @@
 -----------------------------------
 mixins =
 {
-    require("scripts/mixins/families/empty_terroanima"),
+    require('scripts/mixins/families/empty_terroanima'),
 }
 -----------------------------------
 local entity = {}
 
 entity.onMobEngaged = function(mob)
-    mob:setLocalVar("timer", os.time() + math.random(20, 90))
+    mob:setLocalVar('timer', os.time() + math.random(20, 90))
 end
 
 entity.onMobWeaponSkill = function(target, mob, skill)
@@ -26,12 +26,12 @@ entity.onMobFight = function(mob, target)
     local id = mob:getID()
     local pos = mob:getPos()
 
-    if mob:getLocalVar("timer") < os.time() and mob:getHPP() <= 55 then
+    if mob:getLocalVar('timer') < os.time() and mob:getHPP() <= 55 then
         for i = 1, 3 do
             if not GetMobByID(id+i):isSpawned() then
                 GetMobByID(id+i):setSpawn(pos.x, pos.y, pos.z)
                 SpawnMob(id+i):updateEnmity(mob:getTarget())
-                mob:setLocalVar("timer", os.time() + math.random(20,130))
+                mob:setLocalVar('timer', os.time() + math.random(20,130))
                 break
             end
         end

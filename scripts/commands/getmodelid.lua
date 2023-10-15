@@ -6,12 +6,12 @@
 cmdprops =
 {
     permission = 1,
-    parameters = "s"
+    parameters = 's'
 }
 
 function error(player, msg)
     player:PrintToPlayer(msg)
-    player:PrintToPlayer("!getmodel <target>")
+    player:PrintToPlayer('!getmodel <target>')
 end
 
 function onTrigger(player)
@@ -19,7 +19,7 @@ function onTrigger(player)
 
     if target ~= nil and target:isMob() or target:isNPC() then
         player:PrintToPlayer(string.format(
-            "%s (%d): model %d, animation %d, animationSub %d",
+            '%s (%d): model %d, animation %d, animationSub %d',
             target:getName(),
             target:getID(),
             target:getModelId(),
@@ -27,6 +27,6 @@ function onTrigger(player)
             target:getAnimationSub()
         ))
     else
-        error(player, string.format("Target is not a mob or NPC"))
+        error(player, string.format('Target is not a mob or NPC'))
     end
 end

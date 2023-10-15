@@ -2,7 +2,7 @@
 -- Area: Arrapago Reef
 --  ZNM T1: Lil Apkallu
 -----------------------------------
-mixins = { require("scripts/mixins/rage") }
+mixins = { require('scripts/mixins/rage') }
 -----------------------------------
 local entity = {}
 
@@ -18,11 +18,11 @@ local runningPoints = {
 -- Todo: Apkallu hate, no hate generation during panic runs
 
 local function runForIt(mob)
-    local destination = mob:getLocalVar("RunDestination")
+    local destination = mob:getLocalVar('RunDestination')
     mob:pathTo(runningPoints[destination].x, runningPoints[destination].y, runningPoints[destination].z, 9)
 
     if (mob:checkDistance(runningPoints[destination]) <= 2) then
-        mob:setLocalVar("RunDestination", math.random(#runningPoints))
+        mob:setLocalVar('RunDestination', math.random(#runningPoints))
     end
 
 end
@@ -35,31 +35,31 @@ entity.onMobInitialize = function(mob)
 end
 
 entity.onMobSpawn = function(mob)
-    mob:setLocalVar("[rage]timer", 3600) -- 60 minutes
+    mob:setLocalVar('[rage]timer', 3600) -- 60 minutes
     mob:setAutoAttackEnabled(true)
     mob:setMod(xi.mod.SLOWRES, 100)
 end
 
 entity.onMobEngaged = function(mob, target)
-    mob:setLocalVar("TimeToRun", os.time() + math.random(60, 90)) -- Runs at timed intervals, not HPP based
+    mob:setLocalVar('TimeToRun', os.time() + math.random(60, 90)) -- Runs at timed intervals, not HPP based
 end
 
 entity.onMobFight = function(mob, target)
     local now = os.time()
 
-    if (mob:getLocalVar("Mid100Fist") == 0 and mob:hasStatusEffect(xi.effect.HUNDRED_FISTS)) then
-        mob:setLocalVar("Mid100Fist", 1)
+    if (mob:getLocalVar('Mid100Fist') == 0 and mob:hasStatusEffect(xi.effect.HUNDRED_FISTS)) then
+        mob:setLocalVar('Mid100Fist', 1)
     end
-    if (mob:getLocalVar("Mid100Fist") == 1 and not mob:hasStatusEffect(xi.effect.HUNDRED_FISTS)) then
+    if (mob:getLocalVar('Mid100Fist') == 1 and not mob:hasStatusEffect(xi.effect.HUNDRED_FISTS)) then
         -- 100 fists wore off
-        mob:setLocalVar("Mid100Fist", 0)
+        mob:setLocalVar('Mid100Fist', 0)
         for i = 1, math.random(1,3) do
             mob:useMobAbility(1717)
         end
     end
 
-    if (mob:getLocalVar("QueueAction") == 1 and mob:checkDistance(target) < 5) then
-        mob:setLocalVar("QueueAction", 0)
+    if (mob:getLocalVar('QueueAction') == 1 and mob:checkDistance(target) < 5) then
+        mob:setLocalVar('QueueAction', 0)
         if(mob:getHPP() <= 35) then
             mob:useMobAbility(690)
         else
@@ -67,22 +67,22 @@ entity.onMobFight = function(mob, target)
         end
     end
 
-    if (mob:getLocalVar("Running") == 0) then -- not running
-        if (now > mob:getLocalVar("TimeToRun")) then
+    if (mob:getLocalVar('Running') == 0) then -- not running
+        if (now > mob:getLocalVar('TimeToRun')) then
             mob:useMobAbility(1713) -- Yawn then Run
-            mob:setLocalVar("Running", 1)
+            mob:setLocalVar('Running', 1)
             mob:setAutoAttackEnabled(false)
-            mob:setLocalVar("RunDestination", math.random(#runningPoints))
-            mob:setLocalVar("TimeToStop", now + math.random(25, 60))
+            mob:setLocalVar('RunDestination', math.random(#runningPoints))
+            mob:setLocalVar('TimeToStop', now + math.random(25, 60))
         end
      else -- running
-        if (now > mob:getLocalVar("TimeToStop")) then
+        if (now > mob:getLocalVar('TimeToStop')) then
             -- done running for now
             --mob:pathTo(target:getPos().x, target:getPos().y, target:getPos().z, 9)
-            mob:setLocalVar("Running", 0)
+            mob:setLocalVar('Running', 0)
             mob:setAutoAttackEnabled(true)
-            mob:setLocalVar("TimeToRun", now + math.random(75,95))
-            mob:setLocalVar("QueueAction", 1)
+            mob:setLocalVar('TimeToRun', now + math.random(75,95))
+            mob:setLocalVar('QueueAction', 1)
         else
             runForIt(mob)
         end

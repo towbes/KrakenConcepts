@@ -2,8 +2,6 @@
 -- Area: Ranguemont Pass
 --   NM: Mucoid Mass
 -----------------------------------
-require("scripts/globals/hunts")
------------------------------------
 local entity = {}
 
 entity.onMobInitialize = function(mob)

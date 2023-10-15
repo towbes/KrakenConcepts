@@ -51,7 +51,7 @@ add_library(RecastNavigation::DebugUtils STATIC IMPORTED)
 
 set_target_properties(RecastNavigation::DebugUtils PROPERTIES
   INTERFACE_INCLUDE_DIRECTORIES "C:/Users/Chris/Desktop/CactuarLSB/server/_deps/recastnavigation-src/DebugUtils/Include"
-  INTERFACE_LINK_LIBRARIES "WS2_32;dbghelp;Shlwapi;C:/Users/Chris/Desktop/CactuarLSB/server/ext/zmq/lib64/libzmq_64.lib;C:/Users/Chris/Desktop/CactuarLSB/server/ext/luajit/lib64/libluajit_64.lib;RecastNavigation::Recast;RecastNavigation::Detour;RecastNavigation::DetourTileCache"
+  INTERFACE_LINK_LIBRARIES "WS2_32;dbghelp;Shlwapi;C:/Users/Chris/Desktop/CactuarLSB/server/ext/zmq/lib64/libzmq_64.lib;C:/Users/Chris/Desktop/CactuarLSB/server/ext/luajit/lib64/libluajit_64.lib;C:/Users/Chris/Desktop/CactuarLSB/server/ext/openssl/lib64/libcrypto.lib;C:/Users/Chris/Desktop/CactuarLSB/server/ext/openssl/lib64/libssl.lib;RecastNavigation::Recast;RecastNavigation::Detour;RecastNavigation::DetourTileCache"
 )
 
 # Create imported target RecastNavigation::Detour
@@ -59,7 +59,7 @@ add_library(RecastNavigation::Detour STATIC IMPORTED)
 
 set_target_properties(RecastNavigation::Detour PROPERTIES
   INTERFACE_INCLUDE_DIRECTORIES "C:/Users/Chris/Desktop/CactuarLSB/server/_deps/recastnavigation-src/Detour/Include"
-  INTERFACE_LINK_LIBRARIES "WS2_32;dbghelp;Shlwapi;C:/Users/Chris/Desktop/CactuarLSB/server/ext/zmq/lib64/libzmq_64.lib;C:/Users/Chris/Desktop/CactuarLSB/server/ext/luajit/lib64/libluajit_64.lib"
+  INTERFACE_LINK_LIBRARIES "WS2_32;dbghelp;Shlwapi;C:/Users/Chris/Desktop/CactuarLSB/server/ext/zmq/lib64/libzmq_64.lib;C:/Users/Chris/Desktop/CactuarLSB/server/ext/luajit/lib64/libluajit_64.lib;C:/Users/Chris/Desktop/CactuarLSB/server/ext/openssl/lib64/libcrypto.lib;C:/Users/Chris/Desktop/CactuarLSB/server/ext/openssl/lib64/libssl.lib"
 )
 
 # Create imported target RecastNavigation::DetourCrowd
@@ -67,7 +67,7 @@ add_library(RecastNavigation::DetourCrowd STATIC IMPORTED)
 
 set_target_properties(RecastNavigation::DetourCrowd PROPERTIES
   INTERFACE_INCLUDE_DIRECTORIES "C:/Users/Chris/Desktop/CactuarLSB/server/_deps/recastnavigation-src/DetourCrowd/Include"
-  INTERFACE_LINK_LIBRARIES "WS2_32;dbghelp;Shlwapi;C:/Users/Chris/Desktop/CactuarLSB/server/ext/zmq/lib64/libzmq_64.lib;C:/Users/Chris/Desktop/CactuarLSB/server/ext/luajit/lib64/libluajit_64.lib;RecastNavigation::Detour"
+  INTERFACE_LINK_LIBRARIES "WS2_32;dbghelp;Shlwapi;C:/Users/Chris/Desktop/CactuarLSB/server/ext/zmq/lib64/libzmq_64.lib;C:/Users/Chris/Desktop/CactuarLSB/server/ext/luajit/lib64/libluajit_64.lib;C:/Users/Chris/Desktop/CactuarLSB/server/ext/openssl/lib64/libcrypto.lib;C:/Users/Chris/Desktop/CactuarLSB/server/ext/openssl/lib64/libssl.lib;RecastNavigation::Detour"
 )
 
 # Create imported target RecastNavigation::DetourTileCache
@@ -75,7 +75,7 @@ add_library(RecastNavigation::DetourTileCache STATIC IMPORTED)
 
 set_target_properties(RecastNavigation::DetourTileCache PROPERTIES
   INTERFACE_INCLUDE_DIRECTORIES "C:/Users/Chris/Desktop/CactuarLSB/server/_deps/recastnavigation-src/DetourTileCache/Include"
-  INTERFACE_LINK_LIBRARIES "WS2_32;dbghelp;Shlwapi;C:/Users/Chris/Desktop/CactuarLSB/server/ext/zmq/lib64/libzmq_64.lib;C:/Users/Chris/Desktop/CactuarLSB/server/ext/luajit/lib64/libluajit_64.lib;RecastNavigation::Detour"
+  INTERFACE_LINK_LIBRARIES "WS2_32;dbghelp;Shlwapi;C:/Users/Chris/Desktop/CactuarLSB/server/ext/zmq/lib64/libzmq_64.lib;C:/Users/Chris/Desktop/CactuarLSB/server/ext/luajit/lib64/libluajit_64.lib;C:/Users/Chris/Desktop/CactuarLSB/server/ext/openssl/lib64/libcrypto.lib;C:/Users/Chris/Desktop/CactuarLSB/server/ext/openssl/lib64/libssl.lib;RecastNavigation::Detour"
 )
 
 # Create imported target RecastNavigation::Recast
@@ -83,7 +83,7 @@ add_library(RecastNavigation::Recast STATIC IMPORTED)
 
 set_target_properties(RecastNavigation::Recast PROPERTIES
   INTERFACE_INCLUDE_DIRECTORIES "C:/Users/Chris/Desktop/CactuarLSB/server/_deps/recastnavigation-src/Recast/Include"
-  INTERFACE_LINK_LIBRARIES "WS2_32;dbghelp;Shlwapi;C:/Users/Chris/Desktop/CactuarLSB/server/ext/zmq/lib64/libzmq_64.lib;C:/Users/Chris/Desktop/CactuarLSB/server/ext/luajit/lib64/libluajit_64.lib"
+  INTERFACE_LINK_LIBRARIES "WS2_32;dbghelp;Shlwapi;C:/Users/Chris/Desktop/CactuarLSB/server/ext/zmq/lib64/libzmq_64.lib;C:/Users/Chris/Desktop/CactuarLSB/server/ext/luajit/lib64/libluajit_64.lib;C:/Users/Chris/Desktop/CactuarLSB/server/ext/openssl/lib64/libcrypto.lib;C:/Users/Chris/Desktop/CactuarLSB/server/ext/openssl/lib64/libssl.lib"
 )
 
 # Import target "RecastNavigation::DebugUtils" for configuration "Debug"

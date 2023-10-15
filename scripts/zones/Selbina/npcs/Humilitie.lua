@@ -4,8 +4,7 @@
 -- Reports the time remaining before boat arrival.
 -- !pos 17.979 -2.39 -58.800 248
 -----------------------------------
-local ID = require("scripts/zones/Selbina/IDs")
-require("scripts/globals/transport")
+local ID = zones[xi.zone.SELBINA]
 -----------------------------------
 local entity = {}
 
@@ -39,7 +38,7 @@ entity.onTrigger = function(player, npc)
     local waiting = 216 -- Offset for Mhaura
 
     if timer <= waiting then
-        direction = 1 -- Ship arrived, switch dialog from "arrive" to "depart"
+        direction = 1 -- Ship arrived, switch dialog from 'arrive' to 'depart'
     else
         timer = timer - waiting -- Ship hasn't arrived, subtract waiting time to get time to arrival
     end

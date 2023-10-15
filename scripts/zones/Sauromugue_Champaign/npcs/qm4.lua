@@ -1,7 +1,7 @@
 -----------------------------------
 -- Area: Sauromugue Champaign
 --  NPC: qm4 (???) (Tower 4)
--- Involved in Quest: THF AF "As Thick As Thieves"
+-- Involved in Quest: THF AF 'As Thick As Thieves'
 -- !pos 129.587 -0.600 -235.525 120
 -----------------------------------
 local entity = {}

@@ -4,9 +4,6 @@
 -- Involved in Mission: San d'Oria 3-3, 4-1
 -- !pos -32 9 -49 243
 -----------------------------------
-require("scripts/globals/keyitems")
-require("scripts/globals/zone")
------------------------------------
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)

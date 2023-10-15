@@ -191,7 +191,7 @@ void CAttackRound::AddAttackSwing(PHYSICAL_ATTACK_TYPE type, PHYSICAL_ATTACK_DIR
         for (uint8 i = 0; i < count; ++i)
         {
             CAttack attack(m_attacker, m_defender, type, direction, this);
-            m_attackSwings.push_back(attack);
+            m_attackSwings.emplace_back(attack);
 
             if (m_attackSwings.size() == MAX_ATTACKS)
             {
@@ -410,25 +410,10 @@ void CAttackRound::CreateKickAttacks()
 {
     if (m_attacker->objtype == TYPE_PC)
     {
-
-        if (m_attacker->objtype == TYPE_MOB)
-        {
-            // Only allow kick attacks for Sabotender Bailarina
-            if (((CMobEntity*)m_attacker)->id != 17629587) // ToDo: If any other mobs ever require kick attacks - change id to a list and store in db
-            {
-                return;
-            }
-        }
-
         // kick attack mod (All jobs)
         uint16 kickAttack = m_attacker->getMod(Mod::KICK_ATTACK_RATE);
 
         if (m_attacker->GetMJob() == JOB_MNK) // MNK (Main job)
-        {
-            kickAttack += ((CCharEntity*)m_attacker)->PMeritPoints->GetMeritValue(MERIT_KICK_ATTACK_RATE, (CCharEntity*)m_attacker);
-        }
-
-        if (m_attacker->GetSJob() == JOB_MNK) // Umeboshi "Mnk Subjob Merits"
         {
             kickAttack += ((CCharEntity*)m_attacker)->PMeritPoints->GetMeritValue(MERIT_KICK_ATTACK_RATE, (CCharEntity*)m_attacker);
         }

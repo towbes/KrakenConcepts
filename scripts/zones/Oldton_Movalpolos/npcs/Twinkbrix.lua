@@ -4,34 +4,29 @@
 -- Type: Warp NPC
 -- !pos -292.779 6.999 -263.153 11
 -----------------------------------
-local ID = require("scripts/zones/Oldton_Movalpolos/IDs")
-require("scripts/globals/teleports")
-require("scripts/globals/keyitems")
-require("scripts/globals/npc_util")
------------------------------------
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)
-    local operatingLeverCD = player:getCharVar("[ENM]OperatingLever")
-    local gateDialCD = player:getCharVar("[ENM]GateDial")
+    local operatingLeverCD = player:getCharVar('[ENM]OperatingLever')
+    local gateDialCD = player:getCharVar('[ENM]GateDial')
     local mineShaftWarpCost = 2000
     local tradeGil = trade:getGil()
 
     if
         player:hasKeyItem(xi.ki.SHAFT_2716_OPERATING_LEVER) and
-        npcUtil.tradeHasExactly(trade, { { "gil", mineShaftWarpCost } })
+        npcUtil.tradeHasExactly(trade, { { 'gil', mineShaftWarpCost } })
     then
         player:startEvent(56, 1781, 23, 1757, 177552692, 8, 17407, 15, 0)
 
     elseif
         player:hasKeyItem(xi.ki.SHAFT_GATE_OPERATING_DIAL) and
-        npcUtil.tradeHasExactly(trade, { { "gil", mineShaftWarpCost } })
+        npcUtil.tradeHasExactly(trade, { { 'gil', mineShaftWarpCost } })
     then
         player:startEvent(56)
     elseif
         not player:hasKeyItem(xi.ki.SHAFT_GATE_OPERATING_DIAL) and
         tradeGil > 0 and tradeGil <= 10000 and
-        npcUtil.tradeHasExactly(trade, { { "gil", tradeGil } }) and
+        npcUtil.tradeHasExactly(trade, { { 'gil', tradeGil } }) and
         gateDialCD < VanadielTime()
     then
         local maxRoll = tradeGil / 200
@@ -49,8 +44,8 @@ entity.onTrade = function(player, npc, trade)
 end
 
 entity.onTrigger = function(player, npc)
-    local operatingLeverCD = player:getCharVar("[ENM]OperatingLever")
-    local gateDialCD = player:getCharVar("[ENM]GateDial")
+    local operatingLeverCD = player:getCharVar('[ENM]OperatingLever')
+    local gateDialCD = player:getCharVar('[ENM]GateDial')
 
     if 
         player:hasKeyItem(xi.ki.SHAFT_GATE_OPERATING_DIAL) or 

@@ -22,13 +22,13 @@ entity.onMobFight = function(mob, target)
     end
     
     -- Resets threat on every auto attack
-    mob:addListener("ATTACK", "BARONG_ATTACK", function(barong)
+    mob:addListener('ATTACK', 'BARONG_ATTACK', function(barong)
         barong:resetEnmity(target)
     end)
 end
 
 entity.onMobDeath = function(mob, player, optParams)
-    mob:removeListener("BARONG_ATTACK")
+    mob:removeListener('BARONG_ATTACK')
     for _, member in pairs(player:getParty()) do
         if member:getObjType() == xi.objType.PC then
         member:changeMusic(2, 121)

@@ -1,0 +1,46 @@
+Things to look out for:
+
+"" converted to ' '
+
+xi.magic.ele. changed to xi.element. 
+
+damagetype lightning changed to damagetype thunder
+
+local ID = require("scripts/zones/Empyreal_Paradox/IDs") to local ID = zones[xi.zone.EMPYREAL_PARADOX]
+
+tyrranic blare
+syphon discharge check
+
+Go through item.lua, find renamed items and fix their references to the updated name.
+
+xi.items. to xi.item.
+
+local ID = Conversion
+local ID = require("scripts/zones/Aht_Urhgan_Whitegate/IDs")
+local ID = zones[xi.zone.AHT_URHGAN_WHITEGATE]
+local ID = zones[xi.zone.ALTAIEU]
+local ID = zones[xi.zone.GRAND_PALACE_OF_HUXZOI]
+require('scripts/globals/exp_controller')
+
+Antlion QM ID
+
+getConquestTally changed to NextConquestTally  https://github.com/LandSandBoat/server/pull/4570/files
+
+delete left over SCH quests, converted to IF
+
+Adjust BCNM Crustation connundrum to use new modifiers
+
+Avatars are going through dmgcap mods
+
+_DEFAULT to _DIALOG
+
+Might need to check Nation Equipment in item latents.
+
+require("scripts/globals/status")
+require("scripts/globals/items")
+
+local ID = require("scripts/zones/MANACLIPPER/IDs")
+local ID = zones[xi.zone.GRAND_PALACE_OF_HUXZOI]
+local ID = zones[xi.zone.SHIP_BOUND_FOR_SELBINA_PIRATES]
+
+DRAWIN Mechanics, Battleutils

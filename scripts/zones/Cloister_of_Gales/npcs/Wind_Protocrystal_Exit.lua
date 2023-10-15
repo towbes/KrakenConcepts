@@ -2,7 +2,7 @@
 -- Area: Cloister of Gales
 --  NPC: Wind Protocrystal Exit
 -----------------------------------
-require("scripts/globals/bcnm")
+require('scripts/globals/bcnm')
 -----------------------------------
 local entity = {}
 

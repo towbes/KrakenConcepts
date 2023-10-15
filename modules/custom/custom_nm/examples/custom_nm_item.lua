@@ -2,8 +2,8 @@
 -- Custom NM Example (Item)
 -----------------------------------
 require("modules/module_utils")
-require("scripts/globals/zone")
-require("scripts/globals/items")
+
+
 local nm = require("modules/custom/custom_nm/custom_nm")
 -----------------------------------
 local m = Module:new("custom_nm_item")
@@ -21,10 +21,10 @@ table.insert(nm.zone[id],
 
     items     =
     {
-        { nm.rate.VERY_COMMON, xi.items.CHUNK_OF_ROCK_SALT }, -- 24%
-        { nm.rate.VERY_COMMON, xi.items.CHUNK_OF_ROCK_SALT }, -- 24%
-        { nm.rate.VERY_COMMON, xi.items.CHUNK_OF_ROCK_SALT }, -- 24%
-        { nm.rate.VERY_COMMON, xi.items.CHUNK_OF_ROCK_SALT }, -- 24%
+        { nm.rate.VERY_COMMON, xi.item.CHUNK_OF_ROCK_SALT }, -- 24%
+        { nm.rate.VERY_COMMON, xi.item.CHUNK_OF_ROCK_SALT }, -- 24%
+        { nm.rate.VERY_COMMON, xi.item.CHUNK_OF_ROCK_SALT }, -- 24%
+        { nm.rate.VERY_COMMON, xi.item.CHUNK_OF_ROCK_SALT }, -- 24%
     },
 
     -- Optional
@@ -35,7 +35,7 @@ table.insert(nm.zone[id],
     spawnFrom = nm.spawnFrom.QM,              -- "???" (Or use a string)
     spawnLook = 2424,                         -- (Optional) Model for ???
     spawnArea = { -324.924, 4.287, -12.887 }, -- !pos -324.924 4.287 -12.887 191
-    spawnItem = xi.items.CHUNK_OF_ROCK_SALT,  -- Item to trade
+    spawnItem = xi.item.CHUNK_OF_ROCK_SALT,  -- Item to trade
     spawnText =
     {
         "Rock salt is scattered around the area.",

@@ -2,8 +2,8 @@
 -- Area: Spire of Holla
 -- NPC: Enigmatic Sphere
 -----------------------------------
-require("scripts/globals/battlefield")
-require("scripts/globals/bcnm")
+require('scripts/globals/battlefield')
+require('scripts/globals/bcnm')
 -----------------------------------
 local entity = {}
 

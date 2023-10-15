@@ -3,18 +3,18 @@
 -- Boneyard Gully Quest Battlefield, KI: Letter from Shikaree Y / Letter from Mithran Trackers
 -- !addkeyitem LETTER_FROM_SHIKAREE_Y / LETTER_FROM_MITHRAN_TRACKERS
 -----------------------------------
-require('scripts/globals/items')
-require('scripts/globals/keyitems')
+
+
 require('scripts/globals/npc_util')
 require('scripts/globals/quests')
-require('scripts/globals/titles')
-require('scripts/globals/zone')
+
+
 require('scripts/globals/interaction/quest')
 -----------------------------------
 local battlefield_object = {}
 
 battlefield_object.onBattlefieldInitialise = function(battlefield)
-    battlefield:setLocalVar("loot", 1)
+    battlefield:setLocalVar('loot', 1)
 end
 
 battlefield_object.onBattlefieldTick = function(battlefield, tick)
@@ -35,7 +35,7 @@ end
 battlefield_object.onBattlefieldLeave = function(player, battlefield, leavecode)
     if leavecode == xi.battlefield.leaveCode.WON then
         local _, clearTime, partySize = battlefield:getRecord()
-        player:startEvent(32001, battlefield:getArea(), clearTime, partySize, battlefield:getTimeInside(), 1, battlefield:getLocalVar("[cs]bit"), 0)
+        player:startEvent(32001, battlefield:getArea(), clearTime, partySize, battlefield:getTimeInside(), 1, battlefield:getLocalVar('[cs]bit'), 0)
     elseif leavecode == xi.battlefield.leaveCode.LOST then
         player:startEvent(32002)
     end
@@ -50,7 +50,7 @@ battlefield_object.onEventFinish = function(player, csid, option)
         player:completeQuest(xi.quest.log_id.OTHER_AREAS, xi.quest.id.otherAreas.REQUIEM_OF_SIN)
     elseif csid == 32002 then
         -- Allow player to get new key item
-        player:setCharVar("CONQUEST_REQUIEM_OF_SIN", 0)
+        player:setCharVar('CONQUEST_REQUIEM_OF_SIN', 0)
     end
 end
 

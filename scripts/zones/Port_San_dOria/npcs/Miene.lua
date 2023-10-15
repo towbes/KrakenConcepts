@@ -1,10 +1,10 @@
 -----------------------------------
 -- Area: Port San d'Oria
 --  NPC: Miene
--- NPC for Quest "The Pickpocket"
+-- NPC for Quest 'The Pickpocket'
 -- !pos 0.750 -4.000 -81.438 232
 -----------------------------------
-require("scripts/quests/flyers_for_regine")
+require('scripts/quests/flyers_for_regine')
 -----------------------------------
 local entity = {}
 

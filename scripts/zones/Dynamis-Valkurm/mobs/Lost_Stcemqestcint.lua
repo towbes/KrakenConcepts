@@ -2,7 +2,7 @@
 -- Area: Dynamis - Valkurm
 --  Mob: Lost Stcemqestcint
 -----------------------------------
-mixins = { require("scripts/mixins/dynamis_dreamland") }
+mixins = { require('scripts/mixins/dynamis_dreamland') }
 -----------------------------------
 local entity = {}
 
@@ -26,13 +26,13 @@ entity.onMobFight = function(mob, target)
 end
 
 entity.onMobWeaponSkillPrepare = function(mob, target)
-    mob:setLocalVar("skill_tp", mob:getTP())
+    mob:setLocalVar('skill_tp', mob:getTP())
 end
 
 entity.onMobWeaponSkill = function(target, mob, skill)
     if skill:getID() == 296 then
-        mob:addTP(mob:getLocalVar("skill_tp"))
-        mob:setLocalVar("skill_tp", 0)
+        mob:addTP(mob:getLocalVar('skill_tp'))
+        mob:setLocalVar('skill_tp', 0)
     end
 end
 

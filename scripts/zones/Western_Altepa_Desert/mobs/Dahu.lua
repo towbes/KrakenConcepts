@@ -2,8 +2,6 @@
 -- Area: Western Altepa Desert
 --   NM: Dahu
 -----------------------------------
-require("scripts/globals/hunts")
------------------------------------
 local entity = {}
 
 entity.onMobInitialize = function(mob)
@@ -31,7 +29,7 @@ entity.onMobDeath = function(mob, player, optParams)
     xi.hunts.checkHunt(mob, player, 413)
         UpdateNMSpawnPoint(mob:getID())
         mob:setRespawnTime(3600)
-        mob:setLocalVar("cooldown", os.time() + 3600)
+        mob:setLocalVar('cooldown', os.time() + 3600)
         DisallowRespawn(mob:getID(), true) -- prevents accidental 'pop' during no earth weather and immediate despawn
 end
 

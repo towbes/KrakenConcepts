@@ -4,13 +4,12 @@
 -- Note: Used to spawn Habetrot
 -- !pos -57.434 -8.484 55.317 159
 -----------------------------------
-local ID = require("scripts/zones/Temple_of_Uggalepih/IDs")
-require("scripts/globals/npc_util")
+local ID = zones[xi.zone.TEMPLE_OF_UGGALEPIH]
 -----------------------------------
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)
-    if npcUtil.tradeHas(trade, {{ xi.items.LA_THEINE_CABBAGE, 12 }}) and
+    if npcUtil.tradeHas(trade, {{ xi.item.LA_THEINE_CABBAGE, 12 }}) and
         not GetMobByID(ID.mob.HABETROT):isSpawned() and
         not GetMobByID(ID.mob.HABETROT + 1):isSpawned()
     then

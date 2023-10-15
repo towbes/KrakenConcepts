@@ -2,7 +2,7 @@
 -- Area: 
 --  Mob: Pixie
 -----------------------------------
-mixins = {require("scripts/mixins/pixie_hate")}
+mixins = {require('scripts/mixins/pixie_hate')}
 -----------------------------------
 local entity = {}
 

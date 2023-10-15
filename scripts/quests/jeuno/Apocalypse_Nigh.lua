@@ -6,10 +6,10 @@
 -----------------------------------
 require('scripts/globals/interaction/quest')
 require('scripts/globals/common')
-require("scripts/globals/npc_util")
+require('scripts/globals/npc_util')
 require('scripts/globals/quests')
-require('scripts/globals/titles')
-require('scripts/globals/zone')
+
+
 -----------------------------------
 
 local quest = Quest:new(xi.quest.log_id.JEUNO, xi.quest.id.jeuno.APOCALYPSE_NIGH)
@@ -21,10 +21,10 @@ quest.reward =
 
 quest.possibleItems =
 {
-    xi.items.STATIC_EARRING,
-    xi.items.MAGNETIC_EARRING,
-    xi.items.HOLLOW_EARRING,
-    xi.items.ETHEREAL_EARRING,
+    xi.item.STATIC_EARRING,
+    xi.item.MAGNETIC_EARRING,
+    xi.item.HOLLOW_EARRING,
+    xi.item.ETHEREAL_EARRING,
 }
 
 local function finishProgress(player, option)

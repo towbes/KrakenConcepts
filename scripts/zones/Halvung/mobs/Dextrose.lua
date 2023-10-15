@@ -2,9 +2,9 @@
 -- Area: Halvung
 --  ZNM: Dextrose
 -----------------------------------
-mixins = {require("scripts/mixins/rage")}
-require("scripts/globals/status")
-require("scripts/globals/pathfind")
+mixins = {require('scripts/mixins/rage')}
+
+require('scripts/globals/pathfind')
 -----------------------------------
 local entity = {}
 
@@ -44,7 +44,7 @@ local function PickupMeal(mob, mealID)
     mob:clearPath()
 
     -- keep track of our meal
-    mob:setLocalVar("MealID", mealID)
+    mob:setLocalVar('MealID', mealID)
 
     if mealID > 0 then
         -- disable any actions
@@ -87,13 +87,13 @@ entity.onMobInitialize = function(mob)
 end
 
 entity.onMobSpawn = function(mob)
-    mob:setLocalVar("[rage]timer", 4500)
-    mob:setLocalVar("LastSynergism", 100)
-    mob:setLocalVar("MealID", 0)
-    mob:setLocalVar("NextAttempt", math.random(70, 79))
+    mob:setLocalVar('[rage]timer', 4500)
+    mob:setLocalVar('LastSynergism', 100)
+    mob:setLocalVar('MealID', 0)
+    mob:setLocalVar('NextAttempt', math.random(70, 79))
 
     -- will counter attack weapon skills
-    mob:addListener("WEAPONSKILL_TAKE", "DEXTROSE_COUNTERATTACK", function(target, attacker, skillid, tp, action)
+    mob:addListener('WEAPONSKILL_TAKE', 'DEXTROSE_COUNTERATTACK', function(target, attacker, skillid, tp, action)
         -- counters with Amorphic Spikes, targeting the user of the weaponskill regardless of who has hate
         if attacker:isPC() or attacker:isPet() then
             target:useMobAbility(1824, attacker)
@@ -103,13 +103,13 @@ end
 
 entity.onMobFight = function(mob, target)
     -- are we going for meal
-    local mealID = mob:getLocalVar("MealID")
+    local mealID = mob:getLocalVar('MealID')
     if mealID > 0 then
         local meal = GetMobByID(mealID)
         if meal:isAlive() and meal:getHPP() > 5 then
             if mob:checkDistance(meal) < 5 then
                 -- tonight we feast!
-                mob:setLocalVar("LastSynergism", mob:getHPP())
+                mob:setLocalVar('LastSynergism', mob:getHPP())
                 mob:useMobAbility(1826, meal)
 
                 -- make sure the leftover is able to move again and links to target
@@ -118,7 +118,7 @@ entity.onMobFight = function(mob, target)
                 meal:updateEnmity(target)
 
                 -- unset mealID to prevent further abuse
-                mob:setLocalVar("MealID", 0)
+                mob:setLocalVar('MealID', 0)
                 mob:clearPath()
             end
         else
@@ -129,14 +129,14 @@ entity.onMobFight = function(mob, target)
     else
         -- figure out if its time for a snack
         local hpp = mob:getHPP()
-        local nextAttempt = mob:getLocalVar("NextAttempt")
+        local nextAttempt = mob:getLocalVar('NextAttempt')
 
         if hpp <= nextAttempt then
             -- will not try again for another 5%
-            mob:setLocalVar("NextAttempt", math.max(0, hpp - 5))
+            mob:setLocalVar('NextAttempt', math.max(0, hpp - 5))
 
             -- calculate up to 80% chances at +10% per 5% hp lost since last successful synergism
-            local chances = 1 + math.floor((mob:getLocalVar("LastSynergism") - hpp) / 5)
+            local chances = 1 + math.floor((mob:getLocalVar('LastSynergism') - hpp) / 5)
             if math.min(8, chances) >= math.random(1, 10) then
                 -- trigger the synergism process
                 PickupMeal(mob, FindMeal(mob))
@@ -158,10 +158,10 @@ entity.onMobDeath = function(mob, player, optParams)
 end
 
 entity.onMobDespawn = function(mob)
-    mob:removeListener("DEXTROSE_COUNTERATTACK")
+    mob:removeListener('DEXTROSE_COUNTERATTACK')
 
     -- remove lingering movement restrictions
-    local mealID = mob:getLocalVar("MealID")
+    local mealID = mob:getLocalVar('MealID')
     if mealID > 0 then
         local meal = GetMobByID(mealID)
         meal:setMobMod(xi.mobMod.NO_MOVE, 0)

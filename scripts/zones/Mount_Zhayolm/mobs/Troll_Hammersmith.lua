@@ -4,8 +4,8 @@
 -- Author: Spaceballs
 --   Note: Pet of Khromasoul Bhurborlor
 -----------------------------------
-mixins = {require("scripts/mixins/job_special")}
-require("scripts/globals/status")
+mixins = {require('scripts/mixins/job_special')}
+
 -----------------------------------
 local entity = {}
 
@@ -28,7 +28,7 @@ entity.onMobDeath = function(mob, player, isKiller)
 end
 
 entity.onMobRoam = function(mob)
-    local ID = require("scripts/zones/Mount_Zhayolm/IDs")
+    local ID = zones[xi.zone.MOUNT_ZHAYOLM]
     local mother = GetMobByID(ID.mob.KHROMASOUL_BHURBORLOR)
     if mother:isSpawned() and mother:getCurrentAction() == xi.act.ATTACK then
         mob:updateEnmity(mother:getTarget())

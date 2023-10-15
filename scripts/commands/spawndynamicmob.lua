@@ -7,34 +7,34 @@
 cmdprops =
 {
     permission = 2,
-    parameters = "iiisi"
+    parameters = 'iiisi'
 }
 
 function error(player, msg)
     player:PrintToPlayer(msg)
-    player:PrintToPlayer("!spawndynamicmob <Mob's Group ID> <Mob's Zone ID> <Number of Mobs> <Name for the Mob> {dropsEnabled (0 == False, 1 == True)}")
+    player:PrintToPlayer('!spawndynamicmob <Mob\'s Group ID> <Mob\'s Zone ID> <Number of Mobs> <Name for the Mob> {dropsEnabled (0 == False, 1 == True)}')
 end
 
 function onTrigger(player, mobGroupID, mobZoneID, numberOfMob, mobName, dropsEnabled)
     local i = 1
 
     if mobName == nil then
-        error(player, "You must provide a name for the mob.")
+        error(player, 'You must provide a name for the mob.')
         return
     end
 
     if numberOfMob == nil then
-        error(player, "You must provide the number of mobs you want to spawn.")
+        error(player, 'You must provide the number of mobs you want to spawn.')
         return
     end
 
     if mobZoneID == nil then
-        error(player, "You must provide a mob's zone ID.")
+        error(player, 'You must provide a mob\'s zone ID.')
         return
     end
 
     if mobGroupID == nil then
-        error(player, "You must provide a group ID.")
+        error(player, 'You must provide a group ID.')
         return
     end
 
@@ -64,7 +64,7 @@ function onTrigger(player, mobGroupID, mobZoneID, numberOfMob, mobName, dropsEna
 
         mob:spawn()
 
-        player:PrintToPlayer("Spawning: ".. mobName ..", Mob ID: ".. mob:getID() ..", Mob Main Level: ".. mob:getMainLvl())
+        player:PrintToPlayer('Spawning: '.. mobName ..', Mob ID: '.. mob:getID() ..', Mob Main Level: '.. mob:getMainLvl())
         i = i + 1
     end
 end

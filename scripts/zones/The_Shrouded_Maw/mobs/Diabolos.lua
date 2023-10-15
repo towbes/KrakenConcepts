@@ -2,8 +2,8 @@
 -- Area: The Shrouded Maw
 --  Mob: Diabolos
 -----------------------------------
-local ID = require("scripts/zones/The_Shrouded_Maw/IDs")
-mixins = { require("scripts/mixins/job_special") }
+local ID = zones[xi.zone.THE_SHROUDED_MAW]
+mixins = { require('scripts/mixins/job_special') }
 -----------------------------------
 local entity = {}
 
@@ -57,16 +57,16 @@ entity.onMobSpawn = function(mob)
     -- Tile Drop Trigger:  Max HPP = 76%, Min HPP = 20%, Gap = 56%, Half = 28%
     local triggerVal = math.random(1, 28) + math.random(1, 28) + 18
 
-    -- If this is prime, adjust the "base" to be the prime set
-    -- Prime "block" of mobs is offset 27 from CoP mobs
+    -- If this is prime, adjust the 'base' to be the prime set
+    -- Prime 'block' of mobs is offset 27 from CoP mobs
     if mob:getID() >= dPrimeBase then
         dBase = dPrimeBase
     end
 
     local area = utils.clamp((mob:getID() - dBase) / 7 + 1, 1, 3)
 
-    mob:setLocalVar("TileTriggerHPP", triggerVal) -- Starting point for tile drops
-    mob:setLocalVar("Area", area)
+    mob:setLocalVar('TileTriggerHPP', triggerVal) -- Starting point for tile drops
+    mob:setLocalVar('Area', area)
     mob:setMobMod(xi.mobMod.DRAW_IN, 1)
     mob:setMobMod(xi.mobMod.DRAW_IN_INCLUDE_PARTY, 1)
     mob:setMod(xi.mod.UDMGPHYS, -5000)
@@ -74,34 +74,34 @@ entity.onMobSpawn = function(mob)
 end
 
 entity.onMobFight = function(mob, target)
-    local area = mob:getLocalVar("Area") - 1
-    local trigger = mob:getLocalVar("TileTriggerHPP")
+    local area = mob:getLocalVar('Area') - 1
+    local trigger = mob:getLocalVar('TileTriggerHPP')
 
     local tileDrops =
         {   -- { Animation Area 1, Animation Area 2, Animation Area 3 }
-            { "byc8", "bya8", "byb8" },
-            { "byc7", "bya7", "byb7" },
-            { "byc6", "bya6", "byb6" },
-            { "byc5", "bya5", "byb5" },
-            { "byc4", "bya4", "byb4" },
-            { "byc3", "bya3", "byb3" },
-            { "byc2", "bya2", "byb2" },
-            { "byc1", "bya1", "byb1" },
+            { 'byc8', 'bya8', 'byb8' },
+            { 'byc7', 'bya7', 'byb7' },
+            { 'byc6', 'bya6', 'byb6' },
+            { 'byc5', 'bya5', 'byb5' },
+            { 'byc4', 'bya4', 'byb4' },
+            { 'byc3', 'bya3', 'byb3' },
+            { 'byc2', 'bya2', 'byb2' },
+            { 'byc1', 'bya1', 'byb1' },
         }
 
     local hpp = math.floor(mob:getHP() * 100 / mob:getMaxHP())
     if hpp < trigger then   -- Trigger the tile drop events
-        mob:setLocalVar("TileTriggerHPP", -1)            -- Prevent tiles from being dropped twice
+        mob:setLocalVar('TileTriggerHPP', -1)            -- Prevent tiles from being dropped twice
         local tileBase = ID.npc.DARKNESS_NAMED_TILE_OFFSET + (area) * 8
 
         for offset, animationSet in ipairs(tileDrops) do
             local tileId = tileBase + offset - 1
             local tile = GetNPCByID(tileId)
 
-            if tile:getLocalVar("Dropped") ~= xi.anim.OPEN_DOOR then
-                tile:setLocalVar("Dropped", xi.anim.OPEN_DOOR)
+            if tile:getLocalVar('Dropped') ~= xi.anim.OPEN_DOOR then
+                tile:setLocalVar('Dropped', xi.anim.OPEN_DOOR)
                 SendEntityVisualPacket(tileId, animationSet[area + 1], 4)     -- Animation for floor dropping
-                SendEntityVisualPacket(tileId, "s123", 4)          -- Tile dropping sound
+                SendEntityVisualPacket(tileId, 's123', 4)          -- Tile dropping sound
 
                 tile:timer(3100, function(t)                 -- 3.1s second delay (ish)
                     t:updateToEntireZone(xi.status.NORMAL, xi.anim.OPEN_DOOR)       -- Floor opens

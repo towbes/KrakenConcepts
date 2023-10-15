@@ -4,13 +4,13 @@
 -- Log ID: 0, Quest ID: 69
 -- Parvipon : !pos -169 -1 13 230
 -----------------------------------
-require('scripts/globals/items')
+
 require('scripts/globals/npc_util')
 require('scripts/globals/quests')
-require('scripts/globals/zone')
+
 require('scripts/globals/interaction/quest')
 -----------------------------------
-local ID = require("scripts/zones/Southern_San_dOria/IDs")
+local ID = zones[xi.zone.SOUTHERN_SAN_DORIA]
 -----------------------------------
 
 local quest = Quest:new(xi.quest.log_id.SANDORIA, xi.quest.id.sandoria.THE_MERCHANT_S_BIDDING)
@@ -72,7 +72,7 @@ quest.sections =
             ['Parvipon'] =
             {
                 onTrade = function(player, npc, trade)
-                    if npcUtil.tradeHasExactly(trade, { { xi.items.RABBIT_HIDE, 3 } }) then
+                    if npcUtil.tradeHasExactly(trade, { { xi.item.RABBIT_HIDE, 3 } }) then
                         return quest:progressEvent(89)
                     end
                 end,
@@ -86,7 +86,7 @@ quest.sections =
                             quest:complete(player)
                         else
                             player:addFame(xi.quest.fame_area.SANDORIA, 5)
-                            npcUtil.giveCurrency(player, "gil", xi.settings.main.GIL_RATE * 120)
+                            npcUtil.giveCurrency(player, 'gil', xi.settings.main.GIL_RATE * 120)
                         end
                 end,
             },

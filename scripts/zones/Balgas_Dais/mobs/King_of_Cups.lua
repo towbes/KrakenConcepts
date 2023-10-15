@@ -3,8 +3,8 @@
 -- NM: King of Cups
 -- KSNM: Royale Ramble
 -----------------------------------
-mixins = { require("scripts/mixins/job_special") }
-require("scripts/globals/status")
+mixins = { require('scripts/mixins/job_special') }
+
 -----------------------------------
 local entity = {}
 

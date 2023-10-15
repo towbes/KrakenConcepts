@@ -3,13 +3,13 @@
 -- Taillegeas - !pos 31 1.996 57.971
 -- Log ID [3] - Quest ID [68]
 -----------------------------------
-require('scripts/globals/items')
-require('scripts/globals/keyitems')
+
+
 require('scripts/globals/npc_util')
 require('scripts/globals/quests')
-require('scripts/globals/status')
+
 require('scripts/globals/utils')
-require('scripts/globals/zone')
+
 require('scripts/globals/interaction/quest')
 -----------------------------------
 local quest = Quest:new(xi.quest.log_id.JEUNO, xi.quest.id.jeuno.DUCAL_HOSPITALITY)
@@ -20,11 +20,11 @@ local questItemSets =
     {
         items =
         {
-            xi.items.HANDFUL_OF_COUNTERFEIT_GIL,
-            xi.items.LOAF_OF_GOBLIN_BREAD,
-            xi.items.GOBLIN_DOLL,
-            xi.items.GOBLIN_MUSHPOT,
-            xi.items.GOBLIN_PIE,
+            xi.item.HANDFUL_OF_COUNTERFEIT_GIL,
+            xi.item.LOAF_OF_GOBLIN_BREAD,
+            xi.item.GOBLIN_DOLL,
+            xi.item.GOBLIN_MUSHPOT,
+            xi.item.GOBLIN_PIE,
         },
         textOption = 0,
     },
@@ -33,9 +33,9 @@ local questItemSets =
     {
         items =
         {
-            xi.items.PILE_OF_CHOCOBO_BEDDING,
-            xi.items.SET_OF_KAISERIN_COSMETICS,
-            xi.items.MY_FIRST_MAGIC_KIT,
+            xi.item.PILE_OF_CHOCOBO_BEDDING,
+            xi.item.SET_OF_KAISERIN_COSMETICS,
+            xi.item.MY_FIRST_MAGIC_KIT,
         },
         textOption = 1,
     },
@@ -44,10 +44,10 @@ local questItemSets =
     {
         items =
         {
-            xi.items.PIECE_OF_EASTERN_PAPER,
-            xi.items.SHURIKEN,
-            xi.items.SILVER_OBI,
-            xi.items.TONOSAMA_RICE_BALL,
+            xi.item.PIECE_OF_EASTERN_PAPER,
+            xi.item.SHURIKEN,
+            xi.item.SILVER_OBI,
+            xi.item.TONOSAMA_RICE_BALL,
         },
         textOption = 4,
     },
@@ -56,10 +56,10 @@ local questItemSets =
     {
         items =
         {
-            xi.items.DART,
-            xi.items.KONGOU_INAHO,
-            xi.items.NYUMOMO_DOLL,
-            xi.items.CONE_OF_SNOLL_GELATO,
+            xi.item.DART,
+            xi.item.KONGOU_INAHO,
+            xi.item.NYUMOMO_DOLL,
+            xi.item.CONE_OF_SNOLL_GELATO,
         },
         textOption = 4,
     },
@@ -68,10 +68,10 @@ local questItemSets =
     {
         items =
         {
-            xi.items.COPY_OF_FERNANS_DIARIES,
-            xi.items.NAPHILLE_POCHETTE,
-            xi.items.SPHENE_EARRING,
-            xi.items.TURQUOISE_RING,
+            xi.item.COPY_OF_FERNANS_DIARIES,
+            xi.item.NAPHILLE_POCHETTE,
+            xi.item.SPHENE_EARRING,
+            xi.item.TURQUOISE_RING,
         },
         textOption = 4,
     }
@@ -101,7 +101,7 @@ quest.sections =
             {
                 onTrigger = function (player, npc)
                     local questItemSet = math.random(#questItemSets)
-                    quest:setVar(player, "ItemSet", questItemSet)
+                    quest:setVar(player, 'ItemSet', questItemSet)
                     return quest:progressEvent(10057, { [0] = utils.ternary(player:hasCompletedMission(xi.mission.log_id.COP, xi.mission.id.cop.THE_WARRIORS_PATH), 1, 0),
                                                         [1] = questItemSets[questItemSet].items[1],
                                                         [2] = questItemSets[questItemSet].items[2],
@@ -137,7 +137,7 @@ quest.sections =
             ['Taillegeas'] =
             {
                 onTrigger = function (player, npc)
-                    local questItemSet = quest:getVar(player, "ItemSet")
+                    local questItemSet = quest:getVar(player, 'ItemSet')
                     return quest:progressEvent(10059, { [0] = utils.ternary(player:hasCompletedMission(xi.mission.log_id.COP, xi.mission.id.cop.THE_WARRIORS_PATH), 1, 0),
                                                         [1] = questItemSets[questItemSet].items[1],
                                                         [2] = questItemSets[questItemSet].items[2],
@@ -149,7 +149,7 @@ quest.sections =
                 end,
 
                 onTrade = function (player, npc, trade)
-                    local questItemSet = quest:getVar(player, "ItemSet")
+                    local questItemSet = quest:getVar(player, 'ItemSet')
                     if
                         questItemSet > 0 and
                         npcUtil.tradeHasExactly(trade, questItemSets[questItemSet].items)
@@ -186,7 +186,7 @@ quest.sections =
             ['Taillegeas'] =
             {
                 onTrigger = function (player, npc)
-                    local questItemSet = quest:getVar(player, "ItemSet")
+                    local questItemSet = quest:getVar(player, 'ItemSet')
 
                     if questItemSet > 0 then
                         -- Quest has been re-started and an item-set was assigned to the player
@@ -204,7 +204,7 @@ quest.sections =
                     else
                         -- Player has the quest active and needs the item list again
                         questItemSet = math.random(#questItemSets)
-                        quest:setVar(player, "ItemSet", questItemSet)
+                        quest:setVar(player, 'ItemSet', questItemSet)
                         return quest:progressEvent(10057, { [0] = utils.ternary(player:hasCompletedMission(xi.mission.log_id.COP, xi.mission.id.cop.THE_WARRIORS_PATH), 1, 0),
                                                             [1] = questItemSets[questItemSet].items[1],
                                                             [2] = questItemSets[questItemSet].items[2],
@@ -217,7 +217,7 @@ quest.sections =
                 end,
 
                 onTrade = function (player, npc, trade)
-                    local questItemSet = quest:getVar(player, "ItemSet")
+                    local questItemSet = quest:getVar(player, 'ItemSet')
                     if
                         questItemSet > 0 and
                         npcUtil.tradeHasExactly(trade, questItemSets[questItemSet].items)
@@ -233,15 +233,15 @@ quest.sections =
             {
                 [10057] = function(player, csid, option, npc)
                     if option == 10 then
-                        quest:setVar(player, "ItemSet", 0)
+                        quest:setVar(player, 'ItemSet', 0)
                     end
                 end,
 
                 [10058] = function(player, csid, option, npc)
                     player:confirmTrade()
                     quest:setMustZone(player)
-                    quest:setVar(player, "ItemSet", 0)
-                    npcUtil.giveCurrency(player, "gil", 4000)
+                    quest:setVar(player, 'ItemSet', 0)
+                    npcUtil.giveCurrency(player, 'gil', 4000)
                     player:addFame(xi.quest.fame_area.JEUNO, 50)
                 end,
             },

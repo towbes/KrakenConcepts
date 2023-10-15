@@ -3,9 +3,9 @@
 --   NM: Miser Murphy
 -- Involved in Quest: Peace for the Spirit
 -----------------------------------
-require("scripts/globals/mobs")
-require("scripts/globals/quests")
-require("scripts/globals/status")
+require('scripts/globals/mobs')
+require('scripts/globals/quests')
+
 -----------------------------------
 local entity = {}
 

@@ -1,12 +1,9 @@
 -----------------------------------
 -- BCNM Functions
 -----------------------------------
--- require("scripts/globals/battlefield")
-require("scripts/globals/keyitems")
-require("scripts/globals/missions")
-require("scripts/globals/quests")
-require("scripts/globals/zone")
-require("scripts/globals/msg")
+require('scripts/globals/battlefield')
+require('scripts/globals/missions')
+require('scripts/globals/quests')
 -----------------------------------
 xi = xi or {}
 xi.bcnm = xi.bcnm or {}
@@ -596,7 +593,7 @@ local function checkReqs(player, npc, bfid, registrant)
         end,
 
         [37] = function() -- Quest: Mirror Mirror
-            return player:getQuestStatus(xi.quest.log_id.JEUNO, xi.quest.id.jeuno.MIRROR_MIRROR) == QUEST_ACCEPTED and player:getCharVar("[Quest]Mirror_Mirror") == 2
+            return player:getQuestStatus(xi.quest.log_id.JEUNO, xi.quest.id.jeuno.MIRROR_MIRROR) == QUEST_ACCEPTED and player:getCharVar('[Quest]Mirror_Mirror') == 2
         end, 
 
         [64] = function() -- Mission 2-3
@@ -612,7 +609,7 @@ local function checkReqs(player, npc, bfid, registrant)
         end,
 
         [68] = function() -- Quest: A Thief in Norg!?
-            return player:getCharVar("Quest[5][142]Prog") == 6
+            return player:getCharVar('Quest[5][142]Prog') == 6
         end,
 
         [70] = function() -- Quest: Shattering Stars (RDM LB5)
@@ -752,7 +749,7 @@ local function checkReqs(player, npc, bfid, registrant)
         end,
 
         [417] = function() -- Quest: Carbuncle Debacle
-            return player:getCharVar("CarbuncleDebacleProgress") == 6
+            return player:getCharVar('CarbuncleDebacleProgress') == 6
         end,
 
         [418] = function() -- Quest: Trial-size Trial by Wind
@@ -774,7 +771,7 @@ local function checkReqs(player, npc, bfid, registrant)
         end,
 
         [449] = function() -- Quest: Carbuncle Debacle
-            return player:getCharVar("CarbuncleDebacleProgress") == 3
+            return player:getCharVar('CarbuncleDebacleProgress') == 3
         end,
 
         [450] = function() -- Quest: Trial-size Trial by Lightning
@@ -796,7 +793,7 @@ local function checkReqs(player, npc, bfid, registrant)
         end,
 
         [481] = function() -- Quest: Class Reunion
-            return player:getCharVar("ClassReunionProgress") == 5
+            return player:getCharVar('ClassReunionProgress') == 5
         end,
 
         [482] = function() -- Quest: Trial-size Trial by Ice
@@ -872,7 +869,7 @@ local function checkReqs(player, npc, bfid, registrant)
         end,
 
         [577] = function() -- Quest: The Puppet Master
-            return player:getCharVar("Quest[2][81]Prog") == 1
+            return player:getCharVar('Quest[2][81]Prog') == 1
         end,
 
         [578] = function() -- Quest: Trial-size Trial by Earth
@@ -978,7 +975,7 @@ local function checkReqs(player, npc, bfid, registrant)
         end,
 
         [737] = function() -- Quest: Return to the Depths
-            return player:getCharVar("Quest[1][78]prog") >= 9 or
+            return player:getCharVar('Quest[1][78]prog') >= 9 or
                 player:hasCompletedQuest(xi.quest.log_id.BASTOK, xi.quest.id.bastok.RETURN_TO_THE_DEPTHS)
         end,
         [738] = function() -- ENM: Bionic Bug
@@ -1031,7 +1028,7 @@ local function checkReqs(player, npc, bfid, registrant)
 
         [896] = function() -- Quest: Storms of Fate
             return player:getQuestStatus(xi.quest.log_id.JEUNO, xi.quest.id.jeuno.STORMS_OF_FATE) == QUEST_ACCEPTED and
-                player:getCharVar("Quest[3][86]Status") == 2
+                player:getCharVar('Quest[3][86]Status') == 2
         end,
 
         [897] = function() -- Quest: The Wyrmking Descends
@@ -1090,7 +1087,7 @@ local function checkReqs(player, npc, bfid, registrant)
         end,
 
         [1057] = function() -- Apocalypse Nigh
-            return player:getCharVar("Quest[3][89]Status") == 3
+            return player:getCharVar('Quest[3][89]Status') == 3
         end,
 
         [1090] = function() -- Quest: Puppetmaster Blues
@@ -1136,7 +1133,7 @@ local function checkReqs(player, npc, bfid, registrant)
     local enterReqs =
     {
         [37] = function() -- Quest: Mirror Mirror
-            return player:getQuestStatus(xi.quest.log_id.JEUNO, xi.quest.id.jeuno.MIRROR_MIRROR) == QUEST_ACCEPTED and player:getCharVar("[Quest]Mirror_Mirror") == 2
+            return player:getQuestStatus(xi.quest.log_id.JEUNO, xi.quest.id.jeuno.MIRROR_MIRROR) == QUEST_ACCEPTED and player:getCharVar('[Quest]Mirror_Mirror') == 2
         end,
 
         [226] = function() -- Quest: Waking the Beast (Fullmoon Fountain)
@@ -1262,7 +1259,7 @@ local function checkReqs(player, npc, bfid, registrant)
         end,
 
         [737] = function() -- Quest: Return to the Depths
-            return player:getCharVar("Quest[1][78]prog") >= 9 or
+            return player:getCharVar('Quest[1][78]prog') >= 9 or
                 player:hasCompletedQuest(xi.quest.log_id.BASTOK, xi.quest.id.bastok.RETURN_TO_THE_DEPTHS)
         end,
 
@@ -1296,7 +1293,7 @@ local function checkReqs(player, npc, bfid, registrant)
 
         [896] = function() -- Quest: Storms of Fate
             return player:getQuestStatus(xi.quest.log_id.JEUNO, xi.quest.id.jeuno.STORMS_OF_FATE) == QUEST_COMPLETED or
-                player:getCharVar("Quest[3][86]Status") > 2
+                player:getCharVar('Quest[3][86]Status') > 2
         end,
 
         [897] = function() -- Quest: The Wyrmking Descends
@@ -1337,7 +1334,7 @@ local function checkReqs(player, npc, bfid, registrant)
 
         [1057] = function() -- Quest: Apocalypse Nigh
             return player:hasCompletedQuest(xi.quest.log_id.JEUNO, xi.quest.id.jeuno.APOCALYPSE_NIGH) or
-                player:getCharVar("Quest[3][89]Status") >= 3
+                player:getCharVar('Quest[3][89]Status') >= 3
         end,
 
         [1290] = function() -- NW Apollyon
@@ -1716,7 +1713,7 @@ local function checkSkip(player, bfid)
 
         [896] = function() -- Quest: Storms of Fate
             return player:getQuestStatus(xi.quest.log_id.JEUNO, xi.quest.id.jeuno.STORMS_OF_FATE) == QUEST_COMPLETED or
-                player:getCharVar("Quest[3][86]Status") > 2
+                player:getCharVar('Quest[3][86]Status') > 2
         end,
 
         [960] = function() -- PM2-5: Ancient Vows
@@ -1755,7 +1752,7 @@ local function checkSkip(player, bfid)
             return player:hasCompletedQuest(xi.quest.log_id.JEUNO, xi.quest.id.jeuno.APOCALYPSE_NIGH) or
                 (
                     player:getQuestStatus(xi.quest.log_id.JEUNO, xi.quest.id.jeuno.APOCALYPSE_NIGH) == QUEST_ACCEPTED and
-                    player:getCharVar("Quest[3][89]Status") > 3
+                    player:getCharVar('Quest[3][89]Status') > 3
                 )
         end,
 
@@ -1869,22 +1866,11 @@ xi.bcnm.onTrade = function(player, npc, trade, onUpdate)
         return false
 
     -- Chips for limbus
-    elseif
-        trade:getItemCount() == 3 and
-        trade:hasItemQty(1907, 1) and
-        trade:hasItemQty(1908, 1) and
-        trade:hasItemQty(1986, 1)
-    then
+    elseif npcUtil.tradeHasExactly(trade, { xi.item.SILVER_CHIP, xi.item.CERULEAN_CHIP, xi.item.ORCHID_CHIP }) then
         itemId = -1
 
     -- Chips for limbus
-    elseif
-        trade:getItemCount() == 4 and
-        trade:hasItemQty(1909, 1) and
-        trade:hasItemQty(1910, 1) and
-        trade:hasItemQty(1987, 1) and
-        trade:hasItemQty(1988, 1)
-    then
+    elseif npcUtil.tradeHasExactly(trade, { xi.item.SMALT_CHIP, xi.item.SMOKY_CHIP, xi.item.CHARCOAL_CHIP, xi.item.MAGENTA_CHIP }) then
         itemId = -2
 
     -- Orbs / Testimonies
@@ -2002,7 +1988,7 @@ end
 -- onEventUpdate
 -----------------------------------
 xi.bcnm.onEventUpdate = function(player, csid, option, extras)
-    -- player:PrintToPlayer(string.format("EventUpdateBCNM csid=%i option=%i extras=%i", csid, option, extras))
+    -- player:PrintToPlayer(string.format('EventUpdateBCNM csid=%i option=%i extras=%i', csid, option, extras))
 
     -- Requesting a battlefield
     if csid == 32000 then
@@ -2014,7 +2000,7 @@ xi.bcnm.onEventUpdate = function(player, csid, option, extras)
             return 0
         end
 
-        local area = player:getLocalVar("[battlefield]area")
+        local area = player:getLocalVar('[battlefield]area')
         area       = area + 1
 
         local battlefieldIndex = bit.rshift(option, 4)
@@ -2023,7 +2009,7 @@ xi.bcnm.onEventUpdate = function(player, csid, option, extras)
         local skip             = checkSkip(player, id)
 
         local clearTime = 1
-        local name      = "Meme"
+        local name      = 'Meme'
         local partySize = 1
 
         local result = xi.battlefield.returnCode.REQS_NOT_MET
@@ -2033,7 +2019,7 @@ xi.bcnm.onEventUpdate = function(player, csid, option, extras)
         if result ~= xi.battlefield.returnCode.CUTSCENE then
             if result == xi.battlefield.returnCode.INCREMENT_REQUEST then
                 if area < 3 then
-                    player:setLocalVar("[battlefield]area", area)
+                    player:setLocalVar('[battlefield]area', area)
                 else
                     result = xi.battlefield.returnCode.WAIT
                     player:updateEvent(result)
@@ -2054,11 +2040,11 @@ xi.bcnm.onEventUpdate = function(player, csid, option, extras)
 
             -- Handle record
             local initiatorId   = 0
-            local initiatorName = ""
+            local initiatorName = ''
             local battlefield   = player:getBattlefield()
 
             if battlefield then
-                battlefield:setLocalVar("[cs]bit", battlefieldIndex)
+                battlefield:setLocalVar('[cs]bit', battlefieldIndex)
                 name, clearTime, partySize = battlefield:getRecord()
                 initiatorId, initiatorName = battlefield:getInitiator()
             end
@@ -2117,8 +2103,8 @@ end
 -----------------------------------
 
 xi.bcnm.onEventFinish = function(player, csid, option, npc)
-    -- player:PrintToPlayer(string.format("EventFinishBCNM csid=%i option=%i", csid, option))
-    player:setLocalVar("[battlefield]area", 0)
+    -- player:PrintToPlayer(string.format('EventFinishBCNM csid=%i option=%i', csid, option))
+    player:setLocalVar('[battlefield]area', 0)
 
     if player:hasStatusEffect(xi.effect.BATTLEFIELD) then
         if csid == 32003 and option == 4 then

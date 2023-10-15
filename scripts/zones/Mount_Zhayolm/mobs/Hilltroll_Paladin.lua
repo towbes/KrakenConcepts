@@ -2,7 +2,7 @@
 --   Area: Mount Zhayolm
 --    Mob: HillTroll Paladin
 -----------------------------------
-mixins = {require("scripts/mixins/weapon_break")}
+mixins = {require('scripts/mixins/weapon_break')}
 -----------------------------------
 local entity = {}
 

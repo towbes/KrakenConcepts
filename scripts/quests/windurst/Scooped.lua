@@ -7,7 +7,7 @@
 require('scripts/globals/interaction/quest')
 require('scripts/globals/npc_util')
 require('scripts/globals/quests')
-require('scripts/globals/zone')
+
 -----------------------------------
 
 local quest = Quest:new(xi.quest.log_id.WINDURST, xi.quest.id.windurst.SCOOPED)
@@ -49,7 +49,7 @@ quest.sections =
             ['Naiko-Paneiko'] =
             {
                 onTrade = function(player, npc, trade)
-                    if npcUtil.tradeHasExactly(trade, xi.items.BRONZE_BOX) then
+                    if npcUtil.tradeHasExactly(trade, xi.item.BRONZE_BOX) then
                         return quest:progressEvent(680)
                     end
                 end,

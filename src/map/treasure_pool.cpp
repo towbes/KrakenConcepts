@@ -19,8 +19,8 @@
 ===========================================================================
 */
 
-#include "../common/logging.h"
-#include "../common/timer.h"
+#include "common/logging.h"
+#include "common/timer.h"
 #include "roe.h"
 
 #include "packets/treasure_find_item.h"
@@ -42,10 +42,9 @@ static constexpr duration treasure_livetime  = 5min;
  ************************************************************************/
 
 CTreasurePool::CTreasurePool(TREASUREPOOLTYPE PoolType)
+: m_count(0)
+, m_TreasurePoolType(PoolType)
 {
-    m_count            = 0;
-    m_TreasurePoolType = PoolType;
-
     for (uint8 i = 0; i < TREASUREPOOL_SIZE; ++i)
     {
         m_PoolItems[i].ID     = 0;
@@ -85,7 +84,7 @@ void CTreasurePool::AddMember(CCharEntity* PChar)
         return;
     }
 
-    members.push_back(PChar);
+    members.emplace_back(PChar);
 
     if (m_TreasurePoolType == TREASUREPOOL_SOLO && members.size() > 1)
     {
@@ -163,7 +162,7 @@ void CTreasurePool::DelMember(CCharEntity* PChar)
 
 uint8 CTreasurePool::AddItem(uint16 ItemID, CBaseEntity* PEntity)
 {
-    uint8      SlotID;
+    uint8      SlotID     = 0;
     uint8      FreeSlotID = -1;
     time_point oldest     = time_point::max();
 
@@ -195,8 +194,8 @@ uint8 CTreasurePool::AddItem(uint16 ItemID, CBaseEntity* PEntity)
         {
             CItem* PItem = itemutils::GetItemPointer(m_PoolItems[SlotID].ID);
             // if (PItem != nullptr && !(PItem->getFlag() & (ITEM_FLAG_RARE | ITEM_FLAG_EX)) && m_PoolItems[SlotID].TimeStamp < oldest)
-            // if (PItem != nullptr && !(PItem->getFlag() & (ITEM_FLAG_EX)) && (PItem->isRare() == false) && m_PoolItems[SlotID].TimeStamp < oldest)
-            if (PItem != nullptr && !(PItem->getFlag() & (ITEM_FLAG_EX)) && m_PoolItems[SlotID].TimeStamp < oldest)
+            if (PItem != nullptr && !(PItem->getFlag() & (ITEM_FLAG_EX)) && (PItem->isRare() == false) && m_PoolItems[SlotID].TimeStamp < oldest)
+            // if (PItem != nullptr && !(PItem->getFlag() & (ITEM_FLAG_EX)) && m_PoolItems[SlotID].TimeStamp < oldest)
             {
                 FreeSlotID = SlotID;
                 oldest     = m_PoolItems[SlotID].TimeStamp;
@@ -303,7 +302,7 @@ void CTreasurePool::LotItem(CCharEntity* PChar, uint8 SlotID, uint16 Lot)
     li.lot    = Lot;
     li.member = PChar;
 
-    m_PoolItems[SlotID].Lotters.push_back(li);
+    m_PoolItems[SlotID].Lotters.emplace_back(li);
 
     // Find the highest lotter
     CCharEntity* highestLotter = nullptr;
@@ -361,7 +360,7 @@ void CTreasurePool::PassItem(CCharEntity* PChar, uint8 SlotID)
 
     if (!hasLottedBefore)
     {
-        m_PoolItems[SlotID].Lotters.push_back(li);
+        m_PoolItems[SlotID].Lotters.emplace_back(li);
     }
 
     // Find the highest lotter
@@ -506,15 +505,14 @@ void CTreasurePool::CheckTreasureItem(time_point tick, uint8 SlotID)
             std::vector<CCharEntity*> candidates;
             for (auto& member : members)
             {
-                //if (charutils::HasItem(member, m_PoolItems[SlotID].ID) && itemutils::GetItem(m_PoolItems[SlotID].ID)->getFlag() & ITEM_FLAG_RARE) //Default LSB
-                //if (charutils::HasItem(member, m_PoolItems[SlotID].ID) && itemutils::GetItem(m_PoolItems[SlotID].ID)->isRare())
-                //{
-                //    continue;
-                //}
+                // if (charutils::HasItem(member, m_PoolItems[SlotID].ID) && itemutils::GetItem(m_PoolItems[SlotID].ID)->getFlag() & ITEM_FLAG_RARE)
+                // {
+                //     continue;
+                // }
 
                 if (member->getStorage(LOC_INVENTORY)->GetFreeSlotsCount() != 0 && !HasPassedItem(member, SlotID))
                 {
-                    candidates.push_back(member);
+                    candidates.emplace_back(member);
                 }
             }
 

@@ -2,14 +2,14 @@
 -- Area: Dynamis - Valkurm
 --  Mob: Stcemqestcint
 -----------------------------------
-mixins = { require("scripts/mixins/dynamis_dreamland") }
+mixins = { require('scripts/mixins/dynamis_dreamland') }
 -----------------------------------
 local entity = {}
 
 entity.onMobSpawn = function(mob)
     mob:setAutoAttackEnabled(false)
     mob:setMobMod(xi.mobMod.SKILL_LIST, 5370)
-    mob:setLocalVar("skillOrder", 0) -- 3 Blow, into 3 Uppercut, into 1 Attractant.
+    mob:setLocalVar('skillOrder', 0) -- 3 Blow, into 3 Uppercut, into 1 Attractant.
 end
 
 entity.onMobFight = function(mob)
@@ -17,26 +17,26 @@ entity.onMobFight = function(mob)
 end
 
 entity.onMobWeaponSkillPrepare = function(mob, target)
-    if mob:getLocalVar("skillOrder") == 0 and mob:getTarget() ~= nil and mob:canUseAbilities() and mob:checkDistance(target) < 6 and mob:getCurrentAction() <= 1 then
-        mob:setLocalVar("skillOrder", 1)
+    if mob:getLocalVar('skillOrder') == 0 and mob:getTarget() ~= nil and mob:canUseAbilities() and mob:checkDistance(target) < 6 and mob:getCurrentAction() <= 1 then
+        mob:setLocalVar('skillOrder', 1)
         return 581
-    elseif mob:getLocalVar("skillOrder") == 1 and mob:getTarget() ~= nil and mob:canUseAbilities() and mob:checkDistance(target) < 6 and mob:getCurrentAction() <= 1 then
-        mob:setLocalVar("skillOrder", 2)
+    elseif mob:getLocalVar('skillOrder') == 1 and mob:getTarget() ~= nil and mob:canUseAbilities() and mob:checkDistance(target) < 6 and mob:getCurrentAction() <= 1 then
+        mob:setLocalVar('skillOrder', 2)
         return 581
-    elseif mob:getLocalVar("skillOrder") == 2 and mob:getTarget() ~= nil and mob:canUseAbilities() and mob:checkDistance(target) < 6 and mob:getCurrentAction() <= 1 then
-        mob:setLocalVar("skillOrder", 3)
+    elseif mob:getLocalVar('skillOrder') == 2 and mob:getTarget() ~= nil and mob:canUseAbilities() and mob:checkDistance(target) < 6 and mob:getCurrentAction() <= 1 then
+        mob:setLocalVar('skillOrder', 3)
         return 581
-    elseif mob:getLocalVar("skillOrder") == 3 and mob:getTarget() ~= nil and mob:canUseAbilities() and mob:checkDistance(target) < 6 and mob:getCurrentAction() <= 1 then
-        mob:setLocalVar("skillOrder", 4)
+    elseif mob:getLocalVar('skillOrder') == 3 and mob:getTarget() ~= nil and mob:canUseAbilities() and mob:checkDistance(target) < 6 and mob:getCurrentAction() <= 1 then
+        mob:setLocalVar('skillOrder', 4)
         return 584
-    elseif mob:getLocalVar("skillOrder") == 4 and mob:getTarget() ~= nil and mob:canUseAbilities() and mob:checkDistance(target) < 6 and mob:getCurrentAction() <= 1 then
-        mob:setLocalVar("skillOrder", 5)
+    elseif mob:getLocalVar('skillOrder') == 4 and mob:getTarget() ~= nil and mob:canUseAbilities() and mob:checkDistance(target) < 6 and mob:getCurrentAction() <= 1 then
+        mob:setLocalVar('skillOrder', 5)
         return 584
-    elseif mob:getLocalVar("skillOrder") == 5 and mob:getTarget() ~= nil and mob:canUseAbilities() and mob:checkDistance(target) < 6 and mob:getCurrentAction() <= 1 then
-        mob:setLocalVar("skillOrder", 6)
+    elseif mob:getLocalVar('skillOrder') == 5 and mob:getTarget() ~= nil and mob:canUseAbilities() and mob:checkDistance(target) < 6 and mob:getCurrentAction() <= 1 then
+        mob:setLocalVar('skillOrder', 6)
         return 584
-    elseif mob:getLocalVar("skillOrder") == 6 and mob:getTarget() ~= nil and mob:canUseAbilities() and mob:checkDistance(target) < 6 and mob:getCurrentAction() <= 1 then
-        mob:setLocalVar("skillOrder", 0)
+    elseif mob:getLocalVar('skillOrder') == 6 and mob:getTarget() ~= nil and mob:canUseAbilities() and mob:checkDistance(target) < 6 and mob:getCurrentAction() <= 1 then
+        mob:setLocalVar('skillOrder', 0)
         return 1619
     end
 end

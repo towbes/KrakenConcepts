@@ -3,7 +3,7 @@
 --  Mob: Diabolos Nox
 -- Note: Mega Boss
 -----------------------------------
-require("scripts/globals/dynamis")
+require('scripts/globals/dynamis')
 -----------------------------------
 local entity = {}
 

@@ -4,9 +4,6 @@
 -- Unlocks: Geo-Focus
 -- !pos -20.869 -59.736 -180.233 196
 -----------------------------------
-require("scripts/globals/geomantic_reservoir")
-require("scripts/globals/spell_data")
------------------------------------
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)

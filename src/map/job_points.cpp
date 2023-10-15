@@ -31,7 +31,6 @@ CJobPoints::CJobPoints(CCharEntity* PChar)
 
 void CJobPoints::LoadJobPoints()
 {
-    memset(m_jobPoints, 0, sizeof(m_jobPoints));
     if (
         sql->Query("SELECT charid, jobid, capacity_points, job_points, job_points_spent, "
                    "jptype0, jptype1, jptype2, jptype3, jptype4, jptype5, jptype6, jptype7, jptype8, jptype9 "
@@ -193,7 +192,7 @@ void CJobPoints::SetCapacityPoints(uint16 amount)
 
 uint8 CJobPoints::GetJobPointValue(JOBPOINT_TYPE jpType)
 {
-    if (IsJobPointExist(jpType) && m_PChar->GetMLevel() >= 75 && m_PChar->GetMJob() == JobPointsCategoryIndexByJpType(jpType))
+    if (IsJobPointExist(jpType) && m_PChar->GetMLevel() >= 99 && m_PChar->GetMJob() == JobPointsCategoryIndexByJpType(jpType))
     {
         return GetJobPointType(jpType)->value;
     }
@@ -218,7 +217,7 @@ namespace jobpointutils
                 gift.modId      = sql->GetUIntData(2);
                 gift.value      = sql->GetUIntData(3);
 
-                jpGifts[jobId].push_back(gift);
+                jpGifts[jobId].emplace_back(gift);
             }
         }
     }
@@ -237,12 +236,12 @@ namespace jobpointutils
 
         for (auto&& gift : jpGifts[jobId])
         {
-            if (gift.jpRequired > totalJpSpent || PChar->GetMLevel() < 75)
+            if (gift.jpRequired > totalJpSpent || PChar->GetMLevel() < 99)
             {
                 break;
             }
 
-            currentGifts->push_back(CModifier(static_cast<Mod>(gift.modId), gift.value));
+            currentGifts->emplace_back(CModifier(static_cast<Mod>(gift.modId), gift.value));
         }
 
         PChar->addModifiers(currentGifts);

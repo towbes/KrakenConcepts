@@ -7,13 +7,10 @@
 -- Soul Plate          : !additem 2477
 -- Sanraku & Ryo       : !pos -127.0 0.9 22.6 50
 -----------------------------------
-require("scripts/globals/items")
-require("scripts/globals/keyitems")
-require("scripts/globals/magic")
-require("scripts/globals/msg")
-require("scripts/globals/npc_util")
-require("scripts/globals/pankration")
-require("scripts/globals/utils")
+require('scripts/globals/magic')
+require('scripts/globals/npc_util')
+require('scripts/globals/pankration')
+require('scripts/globals/utils')
 -----------------------------------
 
 ---------------------------------------------------------------------------------
@@ -57,14 +54,14 @@ xi = xi or {}
 xi.znm = xi.znm or {}
 
 xi.items = xi.items or {}
-xi.items["BLANK_SOUL_PLATE"] = 18722
-xi.items["BLANK_HIGH_SPEED_SOUL_PLATE"] = 18725
-xi.items["SOUL_PLATE"] = 2477
+xi.items['BLANK_SOUL_PLATE'] = 18722
+xi.items['BLANK_HIGH_SPEED_SOUL_PLATE'] = 18725
+xi.items['SOUL_PLATE'] = 2477
 
 
 xi.znm.updatePopItemCosts = function()
     for k,item in pairs(lures) do
-        local itemVarName = string.format("[ZNM]PopItemCost" ..item.. "")
+        local itemVarName = string.format('[ZNM]PopItemCost' ..item.. '')
         local currentUpcharge = GetServerVariable(itemVarName)
         if (currentUpcharge > 0) then
             SetServerVariable(itemVarName, currentUpcharge - 100)
@@ -157,9 +154,9 @@ xi.znm.subjectsOfInterest[61] = {233, 311} -- soulflayer
 
 xi.znm.changeSubjectsOfInterest = function()
     local subjectsOfInterestKey = math.random(#xi.znm.subjectsOfInterest)
-    SetServerVariable("[ZNM]SubjectsOfInterest", subjectsOfInterestKey)
-    SetServerVariable("[ZNM]SubOfInterestLimit", SUBJECT_OF_INTEREST_LIMIT)
-    SetServerVariable("[ZNM]SubOfInterestTimeLimit", os.time() + 24 * 60 * 60) -- 24 hours from first turnin of new SoI
+    SetServerVariable('[ZNM]SubjectsOfInterest', subjectsOfInterestKey)
+    SetServerVariable('[ZNM]SubOfInterestLimit', SUBJECT_OF_INTEREST_LIMIT)
+    SetServerVariable('[ZNM]SubOfInterestTimeLimit', os.time() + 24 * 60 * 60) -- 24 hours from first turnin of new SoI
 
     local ecosystem = xi.ecosystem.ERROR
     if (subjectsOfInterestKey >= 0 and subjectsOfInterestKey <= 3) then
@@ -190,15 +187,15 @@ xi.znm.changeSubjectsOfInterest = function()
         ecosystem = xi.ecosystem.BEASTMEN
     end
 
-    SetServerVariable("[ZNM]Ecosystem", ecosystem)
+    SetServerVariable('[ZNM]Ecosystem', ecosystem)
 end
 
 local function updateSubOfInterestLimit(zeni)
-    local remainingLimit = GetServerVariable("[ZNM]SubOfInterestLimit")
-    local timeLimit = GetServerVariable("[ZNM]SubOfInterestTimeLimit")
+    local remainingLimit = GetServerVariable('[ZNM]SubOfInterestLimit')
+    local timeLimit = GetServerVariable('[ZNM]SubOfInterestTimeLimit')
     remainingLimit = remainingLimit - zeni
     if (remainingLimit > 0 or timeLimit < os.time()) then
-        SetServerVariable("[ZNM]SubOfInterestLimit", remainingLimit)
+        SetServerVariable('[ZNM]SubOfInterestLimit', remainingLimit)
     else
         xi.znm.changeSubjectsOfInterest()
     end
@@ -294,15 +291,15 @@ xi.znm.fauna[54] = {16998862} -- the bewitching beauty of a general of the Undea
 
 xi.znm.changeFauna = function()
     local faunaKey = math.random(#xi.znm.faunaKeys)
-    SetServerVariable("[ZNM]Fauna", faunaKey)
-    SetServerVariable("[ZNM]FaunaLimit", FAUNA_LIMIT)
+    SetServerVariable('[ZNM]Fauna', faunaKey)
+    SetServerVariable('[ZNM]FaunaLimit', FAUNA_LIMIT)
 end
 
 local function updateFaunaLimit(zeni)
-    local remainingLimit = GetServerVariable("[ZNM]FaunaLimit")
+    local remainingLimit = GetServerVariable('[ZNM]FaunaLimit')
     remainingLimit = remainingLimit - zeni
     if (remainingLimit > 0) then
-        SetServerVariable("[ZNM]FaunaLimit", remainingLimit)
+        SetServerVariable('[ZNM]FaunaLimit', remainingLimit)
     else
         xi.znm.changeFauna()
     end
@@ -354,8 +351,8 @@ xi.znm.soultrapper.onItemCheck = function(target, user)
     -- Equipment checks.
     local id = user:getEquipID(xi.slot.AMMO)
     if
-        id ~= xi.items.BLANK_SOUL_PLATE and
-        id ~= xi.items.BLANK_HIGH_SPEED_SOUL_PLATE
+        id ~= xi.item.BLANK_SOUL_PLATE and
+        id ~= xi.item.BLANK_HIGH_SPEED_SOUL_PLATE
     then
         return xi.msg.basic.ITEM_UNABLE_TO_USE
     end
@@ -432,9 +429,14 @@ xi.znm.soultrapper.getZeniValue = function(target, user, item)
             zeni = zeni * 0.75
         end
 
+        -- Bonus for HS Soul Plate
+        if user:getEquipID(xi.slot.AMMO) == xi.item.BLANK_HIGH_SPEED_SOUL_PLATE then
+        zeni = zeni * 1.5
+        end
+
         -- per bgwiki - https://www.bg-wiki.com/ffxi/Category:Pankration#Purchasing_Items
         -- HS Soul Plate should allow for faster activation - not a bonus on points
-        --[[if user:getEquipID(xi.slot.AMMO) == xi.items.BLANK_HIGH_SPEED_SOUL_PLATE then
+        --[[if user:getEquipID(xi.slot.AMMO) == xi.item.BLANK_HIGH_SPEED_SOUL_PLATE then
             zeni = zeni * 1.5
         end]]
 
@@ -448,8 +450,8 @@ xi.znm.soultrapper.getZeniValue = function(target, user, item)
     end
     
     if (showDebugMessage) then
-        user:PrintToPlayer(string.format( "Zeni for Mob %s is %d!", target:getName(), zeni))
-        user:PrintToPlayer(string.format( "MobSize [%d] HPP: [%d] isFacing: [%s] LevelOffset: [%d] Distance: [%d] isNM: [%s] hasClaim: [%s] isBeingIrresponsible: [%s]",
+        user:PrintToPlayer(string.format( 'Zeni for Mob %s is %d!', target:getName(), zeni))
+        user:PrintToPlayer(string.format( 'MobSize [%d] HPP: [%d] isFacing: [%s] LevelOffset: [%d] Distance: [%d] isNM: [%s] hasClaim: [%s] isBeingIrresponsible: [%s]',
                                            modelSize, hpp, isFacing, (targetLevel - 75), distance, isNM, not (not user:isMobOwner(target) or hpp == 100), isBeingIrresponsible ))
     end
 
@@ -477,11 +479,11 @@ end
 xi.znm.ryo = xi.znm.ryo or {}
 
 xi.znm.ryo.onTrade = function(player, npc, trade)
-    if npcUtil.tradeHasExactly(trade, xi.items.SOUL_PLATE) then
+    if npcUtil.tradeHasExactly(trade, xi.item.SOUL_PLATE) then
         -- Cache the soulplate value on the player
         local item = trade:getItem(0)
         local plateData = item:getSoulPlateData()
-        player:setLocalVar("[ZNM][Ryo]SoulPlateValue", plateData.zeni)
+        player:setLocalVar('[ZNM][Ryo]SoulPlateValue', plateData.zeni)
         player:startEvent(914)
     end
 end
@@ -492,30 +494,30 @@ end
 
 xi.znm.ryo.onEventUpdate = function(player, csid, option, npc)
     if csid == 914 then
-        local zeniValue = player:getLocalVar("[ZNM][Ryo]SoulPlateValue")
-        player:setLocalVar("[ZNM][Ryo]SoulPlateValue", 0)
+        local zeniValue = player:getLocalVar('[ZNM][Ryo]SoulPlateValue')
+        player:setLocalVar('[ZNM][Ryo]SoulPlateValue', 0)
         player:updateEvent(zeniValue)
     elseif csid == 913 then
         if option == 300 then
-            player:updateEvent(player:getCurrency("zeni_point"))
+            player:updateEvent(player:getCurrency('zeni_point'))
         elseif option == 200 then
             -- confirm sanity of expiration of current subject of interest
-            if GetServerVariable("[ZNM]SubOfInterestTimeLimit") == 0 then
-                SetServerVariable("[ZNM]SubOfInterestTimeLimit", os.time() + 24 * 60 * 60)
-            elseif GetServerVariable("[ZNM]SubOfInterestTimeLimit") < os.time()  then
+            if GetServerVariable('[ZNM]SubOfInterestTimeLimit') == 0 then
+                SetServerVariable('[ZNM]SubOfInterestTimeLimit', os.time() + 24 * 60 * 60)
+            elseif GetServerVariable('[ZNM]SubOfInterestTimeLimit') < os.time()  then
                 xi.znm.changeSubjectsOfInterest()
             end
             -- SubjectsOfInterest
-            player:updateEvent(GetServerVariable("[ZNM]SubjectsOfInterest"))
+            player:updateEvent(GetServerVariable('[ZNM]SubjectsOfInterest'))
             -- convert real time to game days: 2.4 real minutes / vana hour
-            local daysRemaining = math.floor((GetServerVariable("[ZNM]SubOfInterestTimeLimit") - os.time()) / (60 * 24 * 2.4))
-            player:PrintToPlayer(string.format("Ryo : Sanraku's interest will change in about %u days.", daysRemaining), 0xD)
+            local daysRemaining = math.floor((GetServerVariable('[ZNM]SubOfInterestTimeLimit') - os.time()) / (60 * 24 * 2.4))
+            player:PrintToPlayer(string.format('Ryo : Sanraku\'s interest will change in about %u days.', daysRemaining), 0xD)
         elseif option == 201 then
             -- Fauna
-            player:updateEvent(GetServerVariable("[ZNM]Fauna"))
+            player:updateEvent(GetServerVariable('[ZNM]Fauna'))
         elseif option == 402 then
             -- Islets dialog
-             player:setCharVar("[ZNM][Ryo]IsletDiscussion", 1)
+             player:setCharVar('[ZNM][Ryo]IsletDiscussion', 1)
         elseif option == 404 then
             -- this is where we can remove elements of Ryo's dialogue - like perhaps the islet discussion once it happens once.
             -- normal bitmask operation, 1-512
@@ -534,15 +536,15 @@ xi.znm.sanraku = xi.znm.sanraku or {}
 
 local platesTradedToday = function(player)
     local currentDay = VanadielUniqueDay()
-    local storedDay = player:getCharVar("[ZNM][Sanraku]TradingDay")
+    local storedDay = player:getCharVar('[ZNM][Sanraku]TradingDay')
 
     if currentDay ~= storedDay then
-        player:setCharVar("[ZNM][Sanraku]TradingDay", 0)
-        player:setCharVar("[ZNM][Sanraku]TradedPlates", 0)
+        player:setCharVar('[ZNM][Sanraku]TradingDay', 0)
+        player:setCharVar('[ZNM][Sanraku]TradedPlates', 0)
         return 0
     end
 
-    return player:getCharVar("[ZNM][Sanraku]TradedPlates")
+    return player:getCharVar('[ZNM][Sanraku]TradedPlates')
 end
 
 local function calculateZeniBonus(plateData)
@@ -551,8 +553,8 @@ local function calculateZeniBonus(plateData)
     local subOfInterestMatch = plateData.subOfInterest
     local ecosystem = plateData.ecoSystem
 
-    local faunaKey = GetServerVariable("[ZNM]SubjectsOfInterest")
-    local subjectsOfInterestKey = GetServerVariable("[ZNM]Fauna")
+    local faunaKey = GetServerVariable('[ZNM]SubjectsOfInterest')
+    local subjectsOfInterestKey = GetServerVariable('[ZNM]Fauna')
 
     local percBonus = 0
 
@@ -564,19 +566,19 @@ local function calculateZeniBonus(plateData)
     local isCurrentSubjectsOfInterest = false
     local isCurrentEcoSytem = false
 
-    if (GetServerVariable("[ZNM]SubjectsOfInterest") == subOfInterestMatch) then
+    if (GetServerVariable('[ZNM]SubjectsOfInterest') == subOfInterestMatch) then
         isCurrentSubjectsOfInterest = true
         zeni = zeni + 100 -- 50
         percBonus = percBonus + 45 -- 35
     end
 
-    if (GetServerVariable("[ZNM]Ecosystem") == ecosystem) then
+    if (GetServerVariable('[ZNM]Ecosystem') == ecosystem) then
         isCurrentEcoSytem = true
         zeni = zeni + 50 -- 25
         percBonus = percBonus + 35 -- 25
     end
 
-    if (GetServerVariable("[ZNM]Fauna") == faunaMatch) then
+    if (GetServerVariable('[ZNM]Fauna') == faunaMatch) then
         isCurrentFauna = true
         zeni = zeni + 100 -- 50
         percBonus = percBonus + 60 -- 50
@@ -601,17 +603,17 @@ xi.znm.sanraku.onTrade = function(player, npc, trade)
             return
         end
     else -- If you have the KI, clear out the tracking vars!
-        player:setCharVar("[ZNM][Sanraku]TradingDay", 0)
-        player:setCharVar("[ZNM][Sanraku]TradedPlates", 0)
+        player:setCharVar('[ZNM][Sanraku]TradingDay', 0)
+        player:setCharVar('[ZNM][Sanraku]TradedPlates', 0)
     end
 
-    if npcUtil.tradeHasExactly(trade, xi.items.SOUL_PLATE) then
+    if npcUtil.tradeHasExactly(trade, xi.item.SOUL_PLATE) then
         -- Cache the soulplate value on the player
         local item = trade:getItem(0)
         local plateData = item:getSoulPlateData()
         local zeni, isCurrentSubjectsOfInterest, isCurrentFauna, isCurrentEcoSytem = calculateZeniBonus(plateData)
-        local timeLimit = GetServerVariable("[ZNM]SubOfInterestTimeLimit")
-        player:setLocalVar("[ZNM][Sanraku]SoulPlateValue", zeni)
+        local timeLimit = GetServerVariable('[ZNM]SubOfInterestTimeLimit')
+        player:setLocalVar('[ZNM][Sanraku]SoulPlateValue', zeni)
 
         if (isCurrentSubjectsOfInterest or isCurrentEcoSytem or timeLimit < os.time()) then
             updateSubOfInterestLimit(zeni)
@@ -693,7 +695,7 @@ local function getAllowedZNMs(player)
 end
 
 xi.znm.sanraku.onTrigger = function(player, npc)
-    if (player:getCharVar("[ZNM]SanrakuIntro") == 0) then
+    if (player:getCharVar('[ZNM]SanrakuIntro') == 0) then
         -- 908: First time introduction
         player:startEvent(908)
     else
@@ -706,7 +708,7 @@ end
 xi.znm.sanraku.onEventUpdate = function(player, csid, option, npc)
     -- taken from sanraku.lua
     if csid == 909 then
-        local zeni = player:getCurrency("zeni_point")
+        local zeni = player:getCurrency('zeni_point')
     
         if option >= 300 and option <= 302 then
             if option == 300 then
@@ -723,7 +725,7 @@ xi.znm.sanraku.onEventUpdate = function(player, csid, option, npc)
             else
                 player:updateEvent(1,500,0,salt)
                 player:addKeyItem(salt)
-                player:delCurrency("zeni_point", 500)
+                player:delCurrency('zeni_point', 500)
             end
         else -- player is interested in buying a pop item.
             n = option % 10
@@ -744,7 +746,7 @@ xi.znm.sanraku.onEventUpdate = function(player, csid, option, npc)
 
             if option >= 100 and option <= 130 then
                 item = lures[option-99]
-                local itemVarName = string.format("[ZNM]PopItemCost" ..item.. "")
+                local itemVarName = string.format('[ZNM]PopItemCost' ..item.. '')
                 cost = tier * 1000 +  GetServerVariable(itemVarName)
                 player:updateEvent(0,0,0,0,0,0,cost)
 
@@ -781,8 +783,8 @@ xi.znm.sanraku.onEventUpdate = function(player, csid, option, npc)
                     end
 
                     player:updateEvent(1, cost, item, keyitem1,keyitem2,keyitem3)
-                    player:delCurrency("zeni_point", cost)
-                    local itemVarName = string.format("[ZNM]PopItemCost" ..item.. "")
+                    player:delCurrency('zeni_point', cost)
+                    local itemVarName = string.format('[ZNM]PopItemCost' ..item.. '')
                     local currentUpcharge = GetServerVariable(itemVarName)
                     SetServerVariable(itemVarName, currentUpcharge + 100)
                 else
@@ -791,7 +793,7 @@ xi.znm.sanraku.onEventUpdate = function(player, csid, option, npc)
             elseif option == 500 or option == 1 then -- player has declined to buy a pop item
                 local allowIslet = 0
                     -- dont allow players to buy the salts to teleport to Tier4 NMs unless Tier4 NMs are enabled
-                    allowIslet = player:getCharVar("[ZNM][Ryo]IsletDiscussion") 
+                    allowIslet = player:getCharVar('[ZNM][Ryo]IsletDiscussion') 
                 player:updateEvent(allowIslet)
             end
         end
@@ -801,15 +803,15 @@ end
 xi.znm.sanraku.onEventFinish = function(player, csid, option, npc)
     if csid == 910 then
         player:confirmTrade()
-        player:setCharVar("[ZNM][Sanraku]TradingDay", VanadielUniqueDay())
-        player:incrementCharVar("[ZNM][Sanraku]TradedPlates", 1)
+        player:setCharVar('[ZNM][Sanraku]TradingDay', VanadielUniqueDay())
+        player:incrementCharVar('[ZNM][Sanraku]TradedPlates', 1)
 
-        local zeniValue = player:getLocalVar("[ZNM][Sanraku]SoulPlateValue")
-        player:setLocalVar("[ZNM][Sanraku]SoulPlateValue", 0)
+        local zeniValue = player:getLocalVar('[ZNM][Sanraku]SoulPlateValue')
+        player:setLocalVar('[ZNM][Sanraku]SoulPlateValue', 0)
 
-        player:addCurrency("zeni_point", zeniValue)
+        player:addCurrency('zeni_point', zeniValue)
         -- zeni_fest.onSanrakuPlateTradeComplete(player, zeniValue) Need to port from Wings
     elseif csid == 908 then
-        player:setCharVar("[ZNM]SanrakuIntro", 1)
+        player:setCharVar('[ZNM]SanrakuIntro', 1)
     end
 end

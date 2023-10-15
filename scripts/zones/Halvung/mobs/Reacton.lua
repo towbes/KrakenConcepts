@@ -2,9 +2,9 @@
 -- Area: Halvung
 --  ZNM: Reacton
 -----------------------------------
-mixins = {require("scripts/mixins/rage")}
-require("scripts/globals/status")
-require("scripts/globals/utils")
+mixins = {require('scripts/mixins/rage')}
+
+require('scripts/globals/utils')
 -----------------------------------
 local entity = {}
 
@@ -21,8 +21,8 @@ local function getSwole(mob)
     end)
 
     -- increase size
-    local size = mob:getLocalVar("currentSize") + 1
-    mob:setLocalVar("currentSize", size)
+    local size = mob:getLocalVar('currentSize') + 1
+    mob:setLocalVar('currentSize', size)
 
     -- animate and apply attack boost
     mob:setAnimationSub(size)
@@ -66,30 +66,30 @@ end
 
 entity.onMobSpawn = function(mob)
     -- setting enrage timer anyways, in case of continuous wipes
-    mob:setLocalVar("[rage]timer", 4500)
+    mob:setLocalVar('[rage]timer', 4500)
 
     -- phase change mechanics
     mob:setAnimationSub(0)
-    mob:setLocalVar("currentSize", 0)
-    mob:setLocalVar("nextChange", 0)
+    mob:setLocalVar('currentSize', 0)
+    mob:setLocalVar('nextChange', 0)
     mob:setSpellList(0)
 end
 
 entity.onMobEngaged = function(mob, target)
     -- starting the phase change timer
-    mob:setLocalVar("nextChange", os.time() + 45)
+    mob:setLocalVar('nextChange', os.time() + 45)
 end
 
 entity.onMobFight = function(mob, target)
     -- phase changes
     if utils.canUseAbility(mob) == true then
-        local next = mob:getLocalVar("nextChange")
+        local next = mob:getLocalVar('nextChange')
         if next > 0 and next < os.time() and mob:actionQueueEmpty() then
             if getSwole(mob) < 3 then
-                mob:setLocalVar("nextChange", os.time() + 45)
+                mob:setLocalVar('nextChange', os.time() + 45)
             else
                 -- time to go! self-destruct
-                mob:setLocalVar("nextChange", 0)
+                mob:setLocalVar('nextChange', 0)
                 mob:useMobAbility(597)
             end
         end
@@ -98,7 +98,7 @@ end
 
 entity.onMobDisengage = function(mob)
     -- pause phase changes
-    mob:setLocalVar("nextChange", 0)
+    mob:setLocalVar('nextChange', 0)
 end
 
 entity.onMobDeath = function(mob, player, isKiller)

@@ -3,8 +3,6 @@
 --  Mob: Race Runner
 --  ENM: Like the Wind
 -----------------------------------
-require("scripts/globals/pathfind")
------------------------------------
 local entity = {}
 
 local pathNodes =
@@ -43,7 +41,7 @@ local pathNodes =
 
 entity.onMobSpawn = function(mob)
     mob:setBehaviour(bit.bor(mob:getBehaviour(), xi.behavior.STANDBACK))
-    mob:setLocalVar("hitsRequired", math.random(1, 10))
+    mob:setLocalVar('hitsRequired', math.random(1, 10))
     mob:setMod(xi.mod.TRIPLE_ATTACK, 20)
     mob:setMod(xi.mod.UDMGMAGIC, -4000)
     mob:setMod(xi.mod.REGAIN, 1000)
@@ -51,15 +49,15 @@ entity.onMobSpawn = function(mob)
     mob:setMagicCastingEnabled(true)
     mob:setMobAbilityEnabled(true)
 
-    mob:addListener("TAKE_DAMAGE", "RUNNER_TAKE_DAMAGE", function(mobArg, amount, attacker, attackType, damageType)
+    mob:addListener('TAKE_DAMAGE', 'RUNNER_TAKE_DAMAGE', function(mobArg, amount, attacker, attackType, damageType)
         if amount > 0 and not attacker:isPet() then
-            mobArg:setLocalVar("currHits", mobArg:getLocalVar("currHits") + 1)
+            mobArg:setLocalVar('currHits', mobArg:getLocalVar('currHits') + 1)
         end
 
-        if mob:getLocalVar("currHits") >= mobArg:getLocalVar("hitsRequired") then
-            mob:setLocalVar("hitsRequired", math.random(1, 10))
-            mob:setLocalVar("runControl", 1)
-            mob:setLocalVar("currHits", 0)
+        if mob:getLocalVar('currHits') >= mobArg:getLocalVar('hitsRequired') then
+            mob:setLocalVar('hitsRequired', math.random(1, 10))
+            mob:setLocalVar('runControl', 1)
+            mob:setLocalVar('currHits', 0)
             mob:setMagicCastingEnabled(false)
             mob:setMobAbilityEnabled(false)
         end
@@ -94,9 +92,9 @@ entity.onMobFight = function(mob, target)
         target = target:getMaster()
     end
 
-    if mob:getLocalVar("runControl") == 1 then
+    if mob:getLocalVar('runControl') == 1 then
         local point = math.random(1, 8)
-        mob:setLocalVar("runControl", 0)
+        mob:setLocalVar('runControl', 0)
 
         mob:pathTo(pathNodes[bfNum][point][1], pathNodes[bfNum][point][2], pathNodes[bfNum][point][3], xi.path.flag.SCRIPT)
 

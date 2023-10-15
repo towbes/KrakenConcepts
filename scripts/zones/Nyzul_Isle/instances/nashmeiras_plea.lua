@@ -2,9 +2,7 @@
 -- TOAU-44: Nashmeira's Plea
 -- !instance 7701
 -----------------------------------
-local ID = require("scripts/zones/Nyzul_Isle/IDs")
-require("scripts/globals/instance")
-require("scripts/globals/keyitems")
+local ID = zones[xi.zone.NYZUL_ISLE]
 -----------------------------------
 local instanceObject = {}
 

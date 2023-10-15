@@ -2,8 +2,6 @@
 -- Area: King Ranperre's Tomb
 --   NM: Vrtra
 -----------------------------------
-require("scripts/globals/titles")
------------------------------------
 local entity = {}
 
 local offsets = { 1, 3, 5, 2, 4, 6 }
@@ -29,12 +27,12 @@ entity.onMobSpawn = function(mob)
 end
 
 entity.onMobEngaged = function(mob, target)
-    mob:setLocalVar("spawnTime", os.time() + 45)
+    mob:setLocalVar('spawnTime', os.time() + 45)
 end
 
 entity.onMobFight = function(mob, target)
-    local spawnTime = mob:getLocalVar("spawnTime")
-    local twohourTime = mob:getLocalVar("twohourTime")
+    local spawnTime = mob:getLocalVar('spawnTime')
+    local twohourTime = mob:getLocalVar('twohourTime')
     local fifteenBlock = mob:getBattleTime() / 15
     local drawInTableRoom =
     {
@@ -44,12 +42,12 @@ entity.onMobFight = function(mob, target)
 
     if twohourTime == 0 then
         twohourTime = math.random(4, 6)
-        mob:setLocalVar("twohourTime", twohourTime)
+        mob:setLocalVar('twohourTime', twohourTime)
     end
 
     if spawnTime == 0 then
         spawnTime = math.random(3, 5)
-        mob:setLocalVar("spawnTime", spawnTime)
+        mob:setLocalVar('spawnTime', spawnTime)
     end
 
     if
@@ -57,9 +55,9 @@ entity.onMobFight = function(mob, target)
         mob:getHPP() <= 90 and
         mob:canUseAbilities()
     then
-        mob:setLocalVar("skill_tp", mob:getTP())
+        mob:setLocalVar('skill_tp', mob:getTP())
         mob:useMobAbility(710)
-        mob:setLocalVar("twohourTime", fifteenBlock + math.random(4, 6))
+        mob:setLocalVar('twohourTime', fifteenBlock + math.random(4, 6))
     end
 
     if os.time() > spawnTime and mob:canUseAbilities() then
@@ -69,14 +67,14 @@ entity.onMobFight = function(mob, target)
             local pet = GetMobByID(mobId + offset)
 
             if not pet:isSpawned() then
-                mob:entityAnimationPacket("casm")
+                mob:entityAnimationPacket('casm')
                 mob:setAutoAttackEnabled(false)
                 mob:setMagicCastingEnabled(false)
                 mob:setMobAbilityEnabled(false)
 
                 mob:timer(3000, function(mobArg)
                     if mobArg:isAlive() then
-                        mobArg:entityAnimationPacket("shsm")
+                        mobArg:entityAnimationPacket('shsm')
                         mobArg:setAutoAttackEnabled(true)
                         mobArg:setMagicCastingEnabled(true)
                         mobArg:setMobAbilityEnabled(true)
@@ -94,7 +92,7 @@ entity.onMobFight = function(mob, target)
         end
 
         local random = math.random(40, 45)
-        mob:setLocalVar("spawnTime", os.time() + random)
+        mob:setLocalVar('spawnTime', os.time() + random)
     end
 
     -- Vrtra draws in if you attempt to leave the room
@@ -110,8 +108,8 @@ end
 entity.onMobWeaponSkill = function(target, mob, skill)
     -- Don't lose TP from charm 2hr
     if skill:getID() == 710 then
-        mob:addTP(mob:getLocalVar("skill_tp"))
-        mob:setLocalVar("skill_tp", 0)
+        mob:addTP(mob:getLocalVar('skill_tp'))
+        mob:setLocalVar('skill_tp', 0)
     end
 end
 

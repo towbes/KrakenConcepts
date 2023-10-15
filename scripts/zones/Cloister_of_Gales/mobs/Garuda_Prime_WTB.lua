@@ -3,8 +3,8 @@
 -- Mob: Garuda Prime
 -- Quest: Waking the Beast
 -----------------------------------
-require("scripts/globals/status")
-require("scripts/globals/spell_data")
+
+
 -----------------------------------
 local entity = {}
 
@@ -15,7 +15,7 @@ entity.onMobInitialize = function(mob)
 end
 
 entity.onMobSpawn = function(mob)
-    mob:setLocalVar("HPThreshold", math.random(10, 90))
+    mob:setLocalVar('HPThreshold', math.random(10, 90))
     mob:setMod(xi.mod.WIND_ABSORB, 1000)
 end
 
@@ -40,35 +40,35 @@ entity.onMobWeaponSkill = function(target, mob, skill)
 end
 
 entity.onMobEngaged = function(mob, target)
-    mob:setLocalVar("timer", os.time() + math.random(30,60))
-    mob:setLocalVar("hateTimer", os.time() + math.random(10,20))
+    mob:setLocalVar('timer', os.time() + math.random(30,60))
+    mob:setLocalVar('hateTimer', os.time() + math.random(10,20))
 end
 
 entity.onMobFight = function(mob, target)
-    if mob:getLocalVar("control") == 0 and mob:getHPP() < mob:getLocalVar("HPThreshold") then
-        mob:setLocalVar("control", 1)
+    if mob:getLocalVar('control') == 0 and mob:getHPP() < mob:getLocalVar('HPThreshold') then
+        mob:setLocalVar('control', 1)
         mob:useMobAbility(875)
     end
 
-    if mob:getLocalVar("timer") < os.time() then
+    if mob:getLocalVar('timer') < os.time() then
         for i = 1, 4 do
             local elemental = GetMobByID(mob:getID()+i)
 
             if elemental:isAlive() then
                 elemental:castSpell(xi.magic.spell.AERO_IV, mob)
-                mob:setLocalVar("timer", os.time() + math.random(30,60))
+                mob:setLocalVar('timer', os.time() + math.random(30,60))
                 break
             end
         end
     end
 
-    if mob:getLocalVar("hateTimer") < os.time() then
+    if mob:getLocalVar('hateTimer') < os.time() then
         for i = 1, 4 do
             local elemental = GetMobByID(mob:getID()+i)
 
             if elemental:isAlive() then
                 elemental:updateEnmity(target)
-                mob:setLocalVar("hateTimer", os.time() + math.random(10,20))
+                mob:setLocalVar('hateTimer', os.time() + math.random(10,20))
             end
         end
     end

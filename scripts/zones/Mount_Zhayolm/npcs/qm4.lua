@@ -3,17 +3,15 @@
 --  NPC: ??? (Spawn Khromasoul Bhurborlor(ZNM T3))
 -- !pos 88 -22 70 61
 -----------------------------------
-local ID = require("scripts/zones/Mount_Zhayolm/IDs")
-require("scripts/globals/npc_util")
+local ID = zones[xi.zone.MOUNT_ZHAYOLM]
 -----------------------------------
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)
     if
-        npcUtil.tradeHas(trade, 2585) and
+        npcUtil.tradeHas(trade, xi.item.VINEGAR_PIE) and
         npcUtil.popFromQM(player, npc, ID.mob.KHROMASOUL_BHURBORLOR, { hide = 0 })
     then
-        -- Trade Vinegar Pie
         player:confirmTrade()
         player:messageSpecial(ID.text.DRAWS_NEAR)
     end

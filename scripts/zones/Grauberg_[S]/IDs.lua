@@ -1,9 +1,6 @@
 -----------------------------------
 -- Area: Grauberg_[S]
 -----------------------------------
-require("scripts/globals/zone")
------------------------------------
-
 zones = zones or {}
 
 zones[xi.zone.GRAUBERG_S] =
@@ -27,7 +24,7 @@ zones[xi.zone.GRAUBERG_S] =
         HARVESTING_IS_POSSIBLE_HERE   = 7698, -- Harvesting is possible here if you have <item>.
         SUITABLE_PLACE_TO_SOAK        = 8270, -- This seems to be a suitable place to soak <item>.
         MYSTERIOUS_COLUMN_ROTATES     = 8373, -- A mysterious column of floating stones rotates hypnotically before you.
-        YOU_HAVE_RETRACED_RIVER       = 8398, -- You have retraced the river of memories back to the mission "Maiden of the Dusk".
+        YOU_HAVE_RETRACED_RIVER       = 8398, -- You have retraced the river of memories back to the mission 'Maiden of the Dusk'.
         AIR_WARPED_AND_DISTORTED      = 8399, -- The air before you appears warped and distorted...
         COMMON_SENSE_SURVIVAL         = 9303, -- It appears that you have arrived at a new survival guide provided by the Servicemen's Mutual Aid Network. Common sense dictates that you should now be able to teleport here from similar tomes throughout the world.
     },
@@ -54,15 +51,7 @@ zones[xi.zone.GRAUBERG_S] =
     },
     npc =
     {
-        HARVESTING =
-        {
-            17142545,
-            17142546,
-            17142547,
-            17142548,
-            17142549,
-            17142550,
-        },
+        HARVESTING          = GetTableOfIDs('Harvesting_Point'),
         INDESCRIPT_MARKINGS = 17142586,
     },
 }

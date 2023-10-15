@@ -2,8 +2,8 @@
 -- Area: Spire of Mea
 -- NPC: Enigmatic Sphere
 -----------------------------------
-require("scripts/globals/battlefield")
-require("scripts/globals/bcnm")
+require('scripts/globals/battlefield')
+require('scripts/globals/bcnm')
 -----------------------------------
 local entity = {}
 

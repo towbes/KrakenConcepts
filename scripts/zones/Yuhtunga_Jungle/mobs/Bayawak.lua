@@ -2,8 +2,6 @@
 -- Area: Yuhtunga Jungle
 --   NM: Bayawak
 -----------------------------------
-require("scripts/globals/hunts")
------------------------------------
 local entity = {}
 
 entity.onMobRoam = function(mob)
@@ -25,7 +23,7 @@ end
 entity.onMobDespawn = function(mob, player, optParams)
     local respawn = math.random(5400, 7200)
     xi.mob.nmTODPersist(mob, respawn)
-    SetServerVariable("BAYAWAK_RESPAWN", os.time() + respawn)
+    SetServerVariable('BAYAWAK_RESPAWN', os.time() + respawn)
     DisallowRespawn(mob:getID(), true) -- prevents accidental 'pop' during no fire weather and immediate despawn
 end
 

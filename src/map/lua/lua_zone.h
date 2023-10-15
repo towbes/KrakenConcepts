@@ -52,7 +52,7 @@ public:
     ZONEID             getID();
     const std::string& getName();
     REGION_TYPE        getRegionID();
-    ZONE_TYPE          getType();
+    ZONE_TYPE          getTypeMask();
     auto               getBattlefieldByInitiator(uint32 charID) -> std::optional<CLuaBattlefield>;
     bool               battlefieldsFull(int battlefieldId);
     WEATHER            getWeather();
@@ -69,13 +69,13 @@ public:
     void setPartyBattleMusic(uint8 musicId);
     void setBackgroundMusicDay(uint8 musicId);
     void setBackgroundMusicNight(uint8 musicId);
-    
-    void setZoneDirection(uint8 direction);
-    void setZoneAnimation(uint8 animation);
-    void setZoneAnimStartTime(uint32 startTime);
-    void setZoneAnimLength(uint16 length);
 
     sol::table queryEntitiesByName(std::string const& name);
+
+    bool operator==(const CLuaZone& other) const
+    {
+        return this->m_pLuaZone == other.m_pLuaZone;
+    }
 
     static void Register();
 };

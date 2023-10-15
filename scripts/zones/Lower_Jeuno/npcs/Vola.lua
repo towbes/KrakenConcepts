@@ -5,21 +5,19 @@
 -- Involved in Quests: Beat Around the Bushin (before the quest)
 -- !pos 43 3 -45 245
 -----------------------------------
-local ID = require("scripts/zones/Lower_Jeuno/IDs")
-require("scripts/globals/quests")
-require("scripts/globals/titles")
+local ID = zones[xi.zone.LOWER_JEUNO]
 -----------------------------------
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)
     if
         player:getQuestStatus(xi.quest.log_id.JEUNO, xi.quest.id.jeuno.FISTFUL_OF_FURY) == QUEST_ACCEPTED and
-        trade:hasItemQty(1012, 1) and
-        trade:hasItemQty(1013, 1) and
-        trade:hasItemQty(1014, 1) and
+        trade:hasItemQty(xi.item.NUE_FANG, 1) and
+        trade:hasItemQty(xi.item.MORBOLGER_VINE, 1) and
+        trade:hasItemQty(xi.item.DODO_SKIN, 1) and
         trade:getItemCount() == 3
     then
-        player:startEvent(213) -- Finish Quest "Fistful of Fury"
+        player:startEvent(213) -- Finish Quest 'Fistful of Fury'
     end
 end
 
@@ -32,10 +30,10 @@ entity.onTrigger = function(player, npc)
         fistfulOfFury == QUEST_AVAILABLE and
         player:getQuestStatus(xi.quest.log_id.BASTOK, xi.quest.id.bastok.SILENCE_OF_THE_RAMS) == QUEST_COMPLETED
     then
-        player:startEvent(216) -- Start Quest "Fistful of Fury"
+        player:startEvent(216) -- Start Quest 'Fistful of Fury'
 
     elseif fistfulOfFury == QUEST_ACCEPTED then
-        player:startEvent(215) -- During Quest "Fistful of Fury"
+        player:startEvent(215) -- During Quest 'Fistful of Fury'
 
     elseif
         beatAroundTheBushin == QUEST_AVAILABLE and
@@ -45,10 +43,10 @@ entity.onTrigger = function(player, npc)
         player:getSubLvl() >= 71 and
         player:getFameLevel(xi.quest.fame_area.NORG) >= 6
     then
-        player:startEvent(160) -- Start Quest "Beat Around the Bushin"
+        player:startEvent(160) -- Start Quest 'Beat Around the Bushin'
 
     elseif beatAroundTheBushin ~= QUEST_AVAILABLE then
-        player:startEvent(214) -- During & After Quest "Beat Around the Bushin"
+        player:startEvent(214) -- During & After Quest 'Beat Around the Bushin'
 
     else
         player:startEvent(212) -- Standard dialog
@@ -64,11 +62,11 @@ entity.onEventFinish = function(player, csid, option, npc)
 
     elseif csid == 213 then
         if player:getFreeSlotsCount() == 0 then
-            player:messageSpecial(ID.text.ITEM_CANNOT_BE_OBTAINED, 13202)
+            player:messageSpecial(ID.text.ITEM_CANNOT_BE_OBTAINED, xi.item.BROWN_BELT)
         else
             player:addTitle(xi.title.BROWN_BELT)
-            player:addItem(13202)
-            player:messageSpecial(ID.text.ITEM_OBTAINED, 13202)
+            player:addItem(xi.item.BROWN_BELT)
+            player:messageSpecial(ID.text.ITEM_OBTAINED, xi.item.BROWN_BELT)
             player:addFame(xi.quest.fame_area.NORG, 125)
             player:tradeComplete()
             player:completeQuest(xi.quest.log_id.JEUNO, xi.quest.id.jeuno.FISTFUL_OF_FURY)
@@ -78,7 +76,7 @@ entity.onEventFinish = function(player, csid, option, npc)
         csid == 160 and
         player:getQuestStatus(xi.quest.log_id.JEUNO, xi.quest.id.jeuno.BEAT_AROUND_THE_BUSHIN) == QUEST_AVAILABLE
     then
-        player:setCharVar("BeatAroundTheBushin", 1) -- For the next quest "Beat around the Bushin"
+        player:setCharVar('BeatAroundTheBushin', 1) -- For the next quest 'Beat around the Bushin'
     end
 end
 

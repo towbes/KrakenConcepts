@@ -3,7 +3,7 @@
 --   NM: Scythe Victim BLM & WAR
 -- Involved In Quest: Blade of Evil
 -----------------------------------
-mixins = { require("scripts/mixins/job_special") }
+mixins = { require('scripts/mixins/job_special') }
 -----------------------------------
 local entity = {}
 

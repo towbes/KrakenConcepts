@@ -5,22 +5,14 @@
 -- Laila : !pos -54.045 -1 100.996 244
 -- qm1   : !pos -157.16 -8 596.9 89
 -----------------------------------
-require('scripts/globals/interaction/quest')
-require('scripts/globals/items')
-require('scripts/globals/keyitems')
-require('scripts/globals/npc_util')
-require('scripts/globals/quests')
-require('scripts/globals/titles')
-require('scripts/globals/zone')
------------------------------------
-local graubergID = require("scripts/zones/Grauberg_[S]/IDs")
+local graubergID = zones[xi.zone.GRAUBERG_S]
 -----------------------------------
 
 local quest = Quest:new(xi.quest.log_id.JEUNO, xi.quest.id.jeuno.THE_UNFINISHED_WALTZ)
 
 quest.reward =
 {
-    item  = xi.items.WAR_HOOP,
+    item  = xi.item.WAR_HOOP,
     title = xi.title.PROMISING_DANCER,
 }
 
@@ -85,7 +77,7 @@ quest.sections =
 
                 [10133] = function(player, csid, option, npc)
                     if quest:complete(player) then
-                        -- Set mustZone and Timer for "The Road to Divadom" Quest
+                        -- Set mustZone and Timer for 'The Road to Divadom' Quest
 
                         player:setCharVar('Quest[3][97]Timer', VanadielUniqueDay() + 1)
                         player:setLocalVar('Quest[3][97]mustZone', 1)

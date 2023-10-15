@@ -5,11 +5,6 @@
 -- !addmission 12 112
 -- Levil : !pos -87.204 3.350 12.655 256
 -----------------------------------
-require('scripts/globals/keyitems')
-require('scripts/globals/missions')
-require('scripts/globals/interaction/mission')
-require('scripts/globals/zone')
------------------------------------
 
 local mission = Mission:new(xi.mission.log_id.SOA, xi.mission.id.soa.YGGDRASIL_BECKONS)
 
@@ -80,7 +75,7 @@ mission.sections =
                 -- sent once the battlefield has been cleared.  This needs to be verified upon
                 -- implementation of the instance.
 
-                -- If instance does not handle, add "Vanquisher of Dhokmak" Title here.
+                -- If instance does not handle, add 'Vanquisher of Dhokmak' Title here.
 
                 [1000] = function(player, csid, option, npc)
                     mission:setVarBit(player, 'Status', 3)
@@ -139,7 +134,7 @@ mission.sections =
                 -- sent once the battlefield has been cleared.  This needs to be verified upon
                 -- implementation of the instance.
 
-                -- If instance does not handle, add "Vanquisher of Ashrakk" Title here.
+                -- If instance does not handle, add 'Vanquisher of Ashrakk' Title here.
 
                 [1000] = function(player, csid, option, npc)
                     mission:setVarBit(player, 'Status', 1)

@@ -4,9 +4,9 @@
 -----------------------------------
 mixins =
 {
-    require("scripts/mixins/dynamis_beastmen"),
-    require("scripts/mixins/job_special"),
-    require("scripts/mixins/remove_doom")
+    require('scripts/mixins/dynamis_beastmen'),
+    require('scripts/mixins/job_special'),
+    require('scripts/mixins/remove_doom')
 }
 -----------------------------------
 local entity = {}
@@ -58,9 +58,9 @@ entity.onMobFight = function(mob, target)
     then
         mob:setAutoAttackEnabled(false)
         mob:setMobMod(xi.mobMod.NO_MOVE, 1)
-        mob:entityAnimationPacket("casm")
+        mob:entityAnimationPacket('casm')
         mob:timer(5000, function(master)
-            master:entityAnimationPacket("shsm")
+            master:entityAnimationPacket('shsm')
             mob:setAutoAttackEnabled(true)
             mob:setMobMod(xi.mobMod.NO_MOVE, 0)
             local pos = master:getPos()

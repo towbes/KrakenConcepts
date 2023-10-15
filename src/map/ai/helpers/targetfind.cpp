@@ -28,8 +28,8 @@ along with this program.  If not, see http://www.gnu.org/licenses/
 #include "common/utils.h"
 #include "enmity_container.h"
 #include "entities/charentity.h"
-#include "entities/mobentity.h"
 #include "entities/fellowentity.h"
+#include "entities/mobentity.h"
 #include "entities/trustentity.h"
 #include "packets/action.h"
 #include "status_effect_container.h"
@@ -38,22 +38,21 @@ along with this program.  If not, see http://www.gnu.org/licenses/
 #include <cmath>
 
 CTargetFind::CTargetFind(CBattleEntity* PBattleEntity)
+: isPlayer(false)
+, m_radius(0.0f)
+, m_PRadiusAround(nullptr)
+, m_PBattleEntity(PBattleEntity)
+, m_PMasterTarget(nullptr)
+, m_PTarget(nullptr)
+, m_zone(0)
+, m_findType{}
+, m_findFlags(0)
+, m_conal(false)
+, m_scalar(0.0f)
+, m_APoint(nullptr)
+, m_BPoint{}
+, m_CPoint{}
 {
-    isPlayer          = false;
-    m_scalar          = 0.f;
-    m_BPoint.x        = 0.f;
-    m_BPoint.y        = 0.f;
-    m_BPoint.z        = 0.f;
-    m_BPoint.moving   = 0;
-    m_BPoint.rotation = 0;
-    m_CPoint.x        = 0.f;
-    m_CPoint.y        = 0.f;
-    m_CPoint.z        = 0.f;
-    m_CPoint.moving   = 0;
-    m_CPoint.rotation = 0;
-
-    m_PBattleEntity = PBattleEntity;
-
     reset();
 }
 
@@ -98,15 +97,6 @@ void CTargetFind::findWithinArea(CBattleEntity* PTarget, AOE_RADIUS radiusType, 
         // radius around target
         m_PRadiusAround = &PTarget->loc.p;
     }
-
-    // if (PTarget->loc.zone->HasReducedVerticalAggro())
-    // {
-    //     m_PRadiusAround->y = 3.5;
-    // }
-    // else
-    // {
-    //     m_PRadiusAround->y = 8;
-    // }
 
     // get master to properly handle loops
     m_PMasterTarget = findMaster(PTarget);
@@ -355,7 +345,7 @@ void CTargetFind::addAllInRange(CBattleEntity* PTarget, float radius, ALLEGIANCE
                     if (PBattleEntity && isWithinArea(&(PBattleEntity->loc.p)) && !PBattleEntity->isDead() &&
                         PBattleEntity->allegiance == ALLEGIANCE_TYPE::PLAYER)
                     {
-                        m_targets.push_back(PBattleEntity);
+                        m_targets.emplace_back(PBattleEntity);
                     }
                 }
             }
@@ -367,7 +357,7 @@ void CTargetFind::addAllInRange(CBattleEntity* PTarget, float radius, ALLEGIANCE
             {
                 if (PChar && isWithinArea(&(PChar->loc.p)) && !PChar->isDead())
                 {
-                    m_targets.push_back(PChar);
+                    m_targets.emplace_back(PChar);
                 }
             });
             // clang-format on
@@ -379,13 +369,13 @@ void CTargetFind::addEntity(CBattleEntity* PTarget, bool withPet)
 {
     if (validEntity(PTarget))
     {
-        m_targets.push_back(PTarget);
+        m_targets.emplace_back(PTarget);
     }
 
     // add my pet too, if its allowed
     if (withPet && PTarget->PPet != nullptr && validEntity(PTarget->PPet))
     {
-        m_targets.push_back(PTarget->PPet);
+        m_targets.emplace_back(PTarget->PPet);
     }
 }
 
@@ -579,6 +569,7 @@ bool CTargetFind::isWithinRange(position_t* pos, float range)
 CBattleEntity* CTargetFind::getValidTarget(uint16 actionTargetID, uint16 validTargetFlags)
 {
     CBattleEntity* PTarget = (CBattleEntity*)m_PBattleEntity->GetEntity(actionTargetID, TYPE_MOB | TYPE_PC | TYPE_PET | TYPE_TRUST | TYPE_FELLOW);
+
     if (PTarget == nullptr)
     {
         return nullptr;

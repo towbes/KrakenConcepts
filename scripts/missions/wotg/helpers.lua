@@ -1,13 +1,6 @@
 -----------------------------------
 -- Wings of the Goddess Helpers
 -----------------------------------
-require('scripts/globals/keyitems')
-require('scripts/globals/missions')
-require('scripts/globals/npc_util')
-require('scripts/globals/quests')
-require('scripts/globals/zone')
------------------------------------
-
 xi = xi or {}
 xi.wotg = xi.wotg or {}
 xi.wotg.helpers = xi.wotg.helpers or {}
@@ -20,7 +13,7 @@ local memoryFragments =
     xi.ki.LARGE_MEMORY_FRAGMENT4,
 }
 
--- NOTE: The naming convention here is: "meets requirements to complete mission X".
+-- NOTE: The naming convention here is: 'meets requirements to complete mission X'.
 --       meetsMission3Reqs = This function goes in Mission 3.
 --       I have completeted BURDEN_OF_SUSPICION or WRATH_OF_THE_GRIFFON
 --       or A_MANIFEST_PROBLEM, and can now complete WOTG3, progressing on to WOTG4.

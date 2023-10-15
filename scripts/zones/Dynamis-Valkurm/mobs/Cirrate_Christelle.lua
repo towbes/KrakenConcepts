@@ -3,8 +3,6 @@
 --  Mob: Cirrate Christelle
 -- Note: Mega Boss
 -----------------------------------
-require("scripts/globals/dynamis")
------------------------------------
 local entity = {}
 
 entity.onMobInitialize = function(mob)
@@ -13,9 +11,9 @@ end
 
 entity.onMobSpawn = function(mob)
     mob:setAutoAttackEnabled(false)
-    mob:setLocalVar("itemDebuff_Fungus", 1) -- Miasmic Breath
-    mob:setLocalVar("itemDebuff_Root", 1)   -- Vampiric Lash & Putrid Breath
-    mob:setLocalVar("itemDebuff_Moss", 1)   -- Fragrant Breath
+    mob:setLocalVar('itemDebuff_Fungus', 1) -- Miasmic Breath
+    mob:setLocalVar('itemDebuff_Root', 1)   -- Vampiric Lash & Putrid Breath
+    mob:setLocalVar('itemDebuff_Moss', 1)   -- Fragrant Breath
 end
 
 entity.onMobRoam = function(mob)
@@ -41,17 +39,17 @@ entity.onMobWeaponSkillPrepare = function(mob, target)
     -- Moss reduces chance of fragrant breath
     -- Fungus reduces chance of miasmic breath
     -- Root reduce chance of extremely bad breath (by doubling chance of all the others)
-    if mob:getLocalVar("itemDebuff_Moss") == 0 then
+    if mob:getLocalVar('itemDebuff_Moss') == 0 then
         fragrantbreath = baseTPMoveChance / 2
         vampiriclash = baseTPMoveChance * 2
     end
-    if mob:getLocalVar("itemDebuff_Fungus") == 0 then
+    if mob:getLocalVar('itemDebuff_Fungus') == 0 then
         miasmicbreath = baseTPMoveChance / 2
         vampiriclash = baseTPMoveChance * 2
     end
 
     local totalchance = fragrantbreath + miasmicbreath + putridbreath + vampiriclash
-    if  mob:getLocalVar("itemDebuff_Root") == 0  then
+    if  mob:getLocalVar('itemDebuff_Root') == 0  then
         -- reduces chance of extremely bad breath
         totalchance = totalchance * 2
     end

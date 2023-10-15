@@ -3,8 +3,8 @@
 -- Mob: Orcish Onager
 -- BCNM Fight: Dismemberment Brigade
 -----------------------------------
-require("scripts/globals/pathfind")
-require("scripts/globals/status")
+require('scripts/globals/pathfind')
+
 -----------------------------------
 local entity = {}
 
@@ -43,24 +43,24 @@ entity.onMobFight = function(mob)
     local party = mob:getBattlefield():getPlayers()
     local bfNum = mob:getBattlefield():getArea()
 
-    if mob:getLocalVar("fleeTimer") < os.time() then
+    if mob:getLocalVar('fleeTimer') < os.time() then
         for _, member in pairs(party) do
             if mob:checkDistance(member) < 7.0 then
                 local dest = math.random(1,5)
 
                 mob:castSpell(362, member)
                 mob:pathTo(points[bfNum][dest][1], points[bfNum][dest][2], points[bfNum][dest][3], xi.path.flag.SCRIPT)
-                mob:setLocalVar("fleeTimer", os.time() + 20)
+                mob:setLocalVar('fleeTimer', os.time() + 20)
             end
         end
     end
 
-    if mob:getHPP() <= 50 and mob:getLocalVar("hpControl2") == 0 then
-        mob:setLocalVar("hpControl2", 1)
+    if mob:getHPP() <= 50 and mob:getLocalVar('hpControl2') == 0 then
+        mob:setLocalVar('hpControl2', 1)
         mob:setMod(xi.mod.REGAIN, 667)
 
-    elseif mob:getHPP() <= 25 and mob:getLocalVar("hpControl3") == 0 then
-        mob:setLocalVar("hpControl3", 1)
+    elseif mob:getHPP() <= 25 and mob:getLocalVar('hpControl3') == 0 then
+        mob:setLocalVar('hpControl3', 1)
         mob:setMod(xi.mod.REGAIN, 334)
     end
 end

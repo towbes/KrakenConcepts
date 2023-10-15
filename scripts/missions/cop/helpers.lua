@@ -1,11 +1,8 @@
 -----------------------------------
 -- Chains of Promathia Helpers
 -----------------------------------
-require('scripts/globals/missions')
+local hallID = zones[xi.zone.HALL_OF_TRANSFERENCE]
 -----------------------------------
-local hallID = require('scripts/zones/Hall_of_Transference/IDs')
------------------------------------
-
 xi = xi or {}
 xi.cop = xi.cop or {}
 xi.cop.helpers = xi.cop.helpers or {}
@@ -136,7 +133,7 @@ xi.cop.helpers.largeApparatusOnTrigger = function(mission, player, npc)
         local cragLocation = math.ceil(tonumber(string.sub(npc:getName(), -1)) / 3)
 
         -- TODO: Assumption is that previously-completed promyvions do not require sealing of memories
-        -- for "The Mothercrystals."
+        -- for 'The Mothercrystals.'
         if
             currentMemory == cragLocation and
             not player:hasKeyItem(xi.ki.LIGHT_OF_HOLLA + cragLocation - 1)

@@ -2,8 +2,6 @@
 -- Area: Gustav Tunnel
 --   NM: Amikiri
 -----------------------------------
-require("scripts/globals/hunts")
------------------------------------
 local entity = {}
 
 entity.onMobInitialize = function(mob)

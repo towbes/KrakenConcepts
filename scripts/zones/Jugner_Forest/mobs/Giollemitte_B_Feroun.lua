@@ -3,7 +3,7 @@
 --  NM: Fraelissa
 --  Quest: A timely visit
 -----------------------------------
-mixins = { require("scripts/mixins/job_special") }
+mixins = { require('scripts/mixins/job_special') }
 -----------------------------------
 local entity = {}
 

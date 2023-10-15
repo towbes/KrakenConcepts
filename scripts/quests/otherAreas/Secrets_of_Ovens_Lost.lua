@@ -6,11 +6,11 @@
 -- Sacrarium qm_tavnazian_cookbook: !pos varies   ID: 16892184
 -----------------------------------
 require('scripts/globals/interaction/quest')
-require('scripts/globals/keyitems')
+
 require('scripts/globals/npc_util')
 require('scripts/globals/quests')
-require('scripts/globals/status')
-require('scripts/globals/items')
+
+
 -----------------------------------
 local ID = require('scripts/zones/Sacrarium/IDs')
 -----------------------------------
@@ -19,7 +19,7 @@ local quest = Quest:new(xi.quest.log_id.OTHER_AREAS, xi.quest.id.otherAreas.SECR
 
 quest.reward =
 {
-    item = xi.items.MIRATETES_MEMOIRS,
+    item = xi.item.MIRATETES_MEMOIRS,
 }
 
 quest.sections =
@@ -87,7 +87,7 @@ quest.sections =
                 [508] = function(player, csid, option, npc)
                     if quest:complete(player) then
                         player:delKeyItem(xi.ki.TAVNAZIAN_COOKBOOK)
-                        quest:setVar(player, 'Option', getConquestTally())
+                        quest:setVar(player, 'Option', NextConquestTally())
                     end
                 end,
             },
@@ -123,7 +123,7 @@ quest.sections =
         check = function(player, status, vars)
             return
                 status == QUEST_COMPLETED and
-                quest:getVar(player, 'Option') < getConquestTally()
+                quest:getVar(player, 'Option') < NextConquestTally()
         end,
 
         [xi.zone.TAVNAZIAN_SAFEHOLD] =

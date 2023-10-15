@@ -28,53 +28,53 @@
 #include <cstring>
 #include <unordered_map>
 
-#include "../packets/char.h"
-#include "../packets/char_health.h"
-#include "../packets/char_update.h"
-#include "../packets/entity_update.h"
-#include "../packets/inventory_finish.h"
-#include "../packets/message_basic.h"
+#include "packets/char.h"
+#include "packets/char_health.h"
+#include "packets/char_update.h"
+#include "packets/entity_update.h"
+#include "packets/inventory_finish.h"
+#include "packets/message_basic.h"
 
-#include "../lua/luautils.h"
+#include "lua/luautils.h"
 
-#include "../ability.h"
-#include "../ai/ai_container.h"
-#include "../ai/controllers/pet_controller.h"
-#include "../ai/controllers/player_charm_controller.h"
-#include "../ai/controllers/player_controller.h"
-#include "../ai/states/magic_state.h"
-#include "../alliance.h"
-#include "../attack.h"
-#include "../enmity_container.h"
-#include "../entities/battleentity.h"
-#include "../entities/fellowentity.h"
-#include "../entities/mobentity.h"
-#include "../entities/petentity.h"
-#include "../entities/trustentity.h"
-#include "../item_container.h"
-#include "../items.h"
-#include "../items/item_weapon.h"
-#include "../job_points.h"
-#include "../map.h"
-#include "../mob_modifier.h"
-#include "../mobskill.h"
-#include "../modifier.h"
-#include "../notoriety_container.h"
-#include "../packets/char_sync.h"
-#include "../packets/lock_on.h"
-#include "../packets/pet_sync.h"
-#include "../packets/position.h"
-#include "../party.h"
-#include "../petskill.h"
-#include "../recast_container.h"
-#include "../spell.h"
-#include "../status_effect_container.h"
-#include "../trait.h"
-#include "../utils/petutils.h"
-#include "../weapon_skill.h"
+#include "ability.h"
+#include "ai/ai_container.h"
+#include "ai/controllers/pet_controller.h"
+#include "ai/controllers/player_charm_controller.h"
+#include "ai/controllers/player_controller.h"
+#include "ai/states/magic_state.h"
+#include "alliance.h"
+#include "attack.h"
 #include "attackutils.h"
 #include "battleutils.h"
 #include "charutils.h"
+#include "enmity_container.h"
+#include "entities/battleentity.h"
+#include "entities/fellowentity.h"
+#include "entities/mobentity.h"
+#include "entities/petentity.h"
+#include "entities/trustentity.h"
+#include "item_container.h"
+#include "items.h"
+#include "items/item_weapon.h"
+#include "job_points.h"
+#include "map.h"
+#include "mob_modifier.h"
+#include "mobskill.h"
+#include "modifier.h"
+#include "notoriety_container.h"
+#include "packets/char_sync.h"
+#include "packets/lock_on.h"
+#include "packets/pet_sync.h"
+#include "packets/position.h"
+#include "party.h"
+#include "petskill.h"
+#include "recast_container.h"
+#include "spell.h"
+#include "status_effect_container.h"
+#include "trait.h"
+#include "utils/petutils.h"
+#include "weapon_skill.h"
 #include "zoneutils.h"
 
 /************************************************************************
@@ -103,6 +103,9 @@ namespace battleutils
      *                                                                       *
      *                                                                       *
      ************************************************************************/
+
+    const float worldAngleMinDistance = 0.5f;
+    const uint8 worldAngleMaxDeviance = 4;
 
     void LoadSkillTable()
     {
@@ -180,9 +183,9 @@ namespace battleutils
                 PWeaponSkill->setUnlockId(sql->GetIntData(14));
 
                 g_PWeaponSkillList[PWeaponSkill->getID()] = PWeaponSkill;
-                g_PWeaponSkillsList[PWeaponSkill->getType()].push_back(PWeaponSkill);
+                g_PWeaponSkillsList[PWeaponSkill->getType()].emplace_back(PWeaponSkill);
 
-                auto filename = fmt::format("./scripts/globals/weaponskills/{}.lua", PWeaponSkill->getName());
+                auto filename = fmt::format("./scripts/actions/weaponskills/{}.lua", PWeaponSkill->getName());
                 luautils::CacheLuaObjectFromFile(filename);
             }
         }
@@ -225,7 +228,7 @@ namespace battleutils
                 PMobSkill->setMsg(185); // standard damage message. Scripters will change this.
                 g_PMobSkillList[PMobSkill->getID()] = PMobSkill;
 
-                auto filename = fmt::format("./scripts/globals/mobskills/{}.lua", PMobSkill->getName());
+                auto filename = fmt::format("./scripts/actions/mobskills/{}.lua", PMobSkill->getName());
                 luautils::CacheLuaObjectFromFile(filename);
             }
         }
@@ -243,7 +246,7 @@ namespace battleutils
 
                 uint16 skillId = sql->GetIntData(1);
 
-                g_PMobSkillLists[skillListId].push_back(skillId);
+                g_PMobSkillLists[skillListId].emplace_back(skillId);
             }
         }
     }
@@ -286,7 +289,7 @@ namespace battleutils
                 PPetSkill->setTertiarySkillchain(sql->GetUIntData(15));
                 g_PPetSkillList[PPetSkill->getID()] = PPetSkill;
 
-                auto filename = fmt::format("./scripts/globals/abilities/pet/{}.lua", PPetSkill->getName());
+                auto filename = fmt::format("./scripts/actions/abilities/pet/{}.lua", PPetSkill->getName());
                 luautils::CacheLuaObjectFromFile(filename);
             }
         }
@@ -302,7 +305,7 @@ namespace battleutils
 
         if (ret != SQL_ERROR && sql->NumRows() != 0)
         {
-            for (uint32 x = 0; sql->NextRow() == SQL_SUCCESS; ++x)
+            while (sql->NextRow() == SQL_SUCCESS)
             {
                 uint16 level                              = (uint16)sql->GetIntData(0);
                 uint16 count                              = (uint16)sql->GetIntData(1);
@@ -409,9 +412,9 @@ namespace battleutils
     bool CanUseWeaponskill(CCharEntity* PChar, CWeaponSkill* PSkill)
     {
         return ((PSkill->getSkillLevel() > 0 && PChar->GetSkill(PSkill->getType()) >= PSkill->getSkillLevel() &&
-                (PSkill->getUnlockId() == 0 || charutils::hasLearnedWeaponskill(PChar, PSkill->getUnlockId()))) ||
+                 (PSkill->getUnlockId() == 0 || charutils::hasLearnedWeaponskill(PChar, PSkill->getUnlockId()))) ||
                 (PSkill->getSkillLevel() == 0 && (PSkill->getUnlockId() == 0 || charutils::hasLearnedWeaponskill(PChar, PSkill->getUnlockId())))) &&
-                (PSkill->getJob(PChar->GetMJob()) > 0 || (PSkill->getJob(PChar->GetSJob()) > 0 || !PSkill->mainOnly())); // Umeboshi "Subjob gains access to applicable weapon skills that are only usable by the main job."
+               (PSkill->getJob(PChar->GetMJob()) > 0 || (PSkill->getJob(PChar->GetSJob()) > 0 || !PSkill->mainOnly())); // Umeboshi "Subjob gains access to applicable weapon skills that are only usable by the main job."
     }
 
     /************************************************************************
@@ -741,6 +744,8 @@ namespace battleutils
 
         if (damage > 0)
         {
+            damage = std::max(damage - PDefender->getMod(Mod::PHALANX), 0);
+            damage = HandleOneForAll(PDefender, damage);
             int16 magicSS = PDefender->getMod(Mod::MAGIC_STONESKIN);
             if (magicSS)
             {
@@ -755,8 +760,6 @@ namespace battleutils
                     damage = 0;
                 }
             }
-            damage = std::max(damage - PDefender->getMod(Mod::PHALANX), 0);
-            damage = HandleOneForAll(PDefender, damage);
             damage = HandleStoneskin(PDefender, damage);
         }
 
@@ -830,7 +833,7 @@ namespace battleutils
                 bool crit = battleutils::GetCritHitRate(PDefender, PAttacker, true) > xirand::GetRandomNumber(100);
 
                 // Dmg math.
-                float  DamageRatio = GetDamageRatio(PDefender, PAttacker, crit, 1.f);
+                float  DamageRatio = GetDamageRatio(PDefender, PAttacker, crit, 0.f);
                 uint16 dmg         = (uint32)((PDefender->GetMainWeaponDmg() + battleutils::GetFSTR(PDefender, PAttacker, SLOT_MAIN)) * DamageRatio);
                 dmg                = attackutils::CheckForDamageMultiplier(((CCharEntity*)PDefender), dynamic_cast<CItemWeapon*>(PDefender->m_Weapons[SLOT_MAIN]), dmg,
                                                                            PHYSICAL_ATTACK_TYPE::NORMAL, SLOT_MAIN);
@@ -860,7 +863,7 @@ namespace battleutils
             {
                 spikesDamage = std::max(spikesDamage - PAttacker->getMod(Mod::PHALANX), 0);
                 spikesDamage = HandleOneForAll(PAttacker, spikesDamage);
-                int16 magicSS  = PAttacker->getMod(Mod::MAGIC_STONESKIN);
+                int16 magicSS = PAttacker->getMod(Mod::MAGIC_STONESKIN);
                 if (magicSS)
                 {
                     if (Action->spikesParam >= magicSS)
@@ -874,7 +877,6 @@ namespace battleutils
                         Action->spikesParam = 0;
                     }
                 }
-
                 spikesDamage = HandleStoneskin(PAttacker, spikesDamage);
             }
 
@@ -885,12 +887,6 @@ namespace battleutils
             else
             {
                 Action->spikesParam = static_cast<uint16>(spikesDamage);
-            }
-
-            // When set mob will only take 0 or 1 damage
-            if (PDefender->GetLocalVar("DAMAGE_NULL") != 0)
-            {
-                spikesDamage %= 2;
             }
 
             if (damage > PDefender->getMod(Mod::DMGMAGIC_CAP) && PDefender->getMod(Mod::DMGMAGIC_CAP) > 0)
@@ -985,7 +981,7 @@ namespace battleutils
                     CItemEquipment* PItem = PCharDef->getEquip(slot);
                     if (PItem && !PItem->isType(ITEM_WEAPON))
                     {
-                        uint8 chance;
+                        uint8 chance = 0;
 
                         Action->spikesEffect = (SUBEFFECT)0;
                         auto spikes_type     = battleutils::GetScaledItemModifier(PDefender, PItem, Mod::ITEM_SUBEFFECT);
@@ -1044,12 +1040,6 @@ namespace battleutils
                 Action->spikesParam = static_cast<uint16>(spikesDamage);
             }
 
-            // When set mob will only take 0 or 1 damage
-            if (PDefender->GetLocalVar("DAMAGE_NULL") != 0)
-            {
-                spikesDamage %= 2;
-            }
-
             if (damage > PDefender->getMod(Mod::DMGMAGIC_CAP) && PDefender->getMod(Mod::DMGMAGIC_CAP) > 0)
             {
                 damage = PDefender->getMod(Mod::DMGMAGIC_CAP);
@@ -1099,12 +1089,6 @@ namespace battleutils
                 else
                 {
                     Action->spikesParam = static_cast<uint16>(spikesDamage);
-                }
-
-                // When set mob will only take 0 or 1 damage
-                if (PDefender->GetLocalVar("DAMAGE_NULL") != 0)
-                {
-                    spikesDamage %= 2;
                 }
 
                 if (damage > PDefender->getMod(Mod::DMGMAGIC_CAP) && PDefender->getMod(Mod::DMGMAGIC_CAP) > 0)
@@ -1563,6 +1547,12 @@ namespace battleutils
         int acc     = 0;
         int hitrate = 75;
 
+        // Check to see if distance is greater than 25 and force hitrate to be 0
+        if (distance(PAttacker->loc.p, PDefender->loc.p) > 25)
+        {
+            return 0;
+        }
+
         if (PAttacker->objtype == TYPE_PC)
         {
             CCharEntity* PChar = (CCharEntity*)PAttacker;
@@ -1697,7 +1687,7 @@ namespace battleutils
         if (isCritical)
         {
             pdif *= 1.25;
-            int16 criticaldamage =
+            int16 criticaldamage =d
                 PAttacker->getMod(Mod::CRIT_DMG_INCREASE) + PAttacker->getMod(Mod::RANGED_CRIT_DMG_INCREASE) - PDefender->getMod(Mod::CRIT_DEF_BONUS) + PDefender->getMod(Mod::ENEMYCRITDMG);
             criticaldamage = std::clamp<int16>(criticaldamage, 0, 100);
             pdif *= ((100 + criticaldamage) / 100.0f);
@@ -2178,6 +2168,7 @@ namespace battleutils
 
                         // Shield Mastery
                         if ((std::max(damage - (PDefender->getMod(Mod::PHALANX) + PDefender->getMod(Mod::STONESKIN)), 0) > 0) &&
+                            // charutils::hasTrait((CCharEntity*)PDefender, TRAIT_SHIELD_MASTERY))
                             PDefender->getMod(Mod::SHIELD_MASTERY_TP) > 0) // Umeboshi "Ungated Shield Mastery Mods to not require the job trait"
                         {
                             // If the player blocked with a shield and has shield mastery, add shield mastery TP bonus
@@ -2319,7 +2310,8 @@ namespace battleutils
             }
 
             // try to interrupt spell if not a ranged attack and not blocked by Shield Mastery
-            if ((!isRanged) && !((isBlocked) && (PDefender->objtype == TYPE_PC) && PDefender->getMod(Mod::SHIELD_MASTERY_TP) > 0))
+            // if ((!isRanged) && !((isBlocked) && (PDefender->objtype == TYPE_PC) && (charutils::hasTrait((CCharEntity*)PDefender, TRAIT_SHIELD_MASTERY))))
+            if ((!isRanged) && !((isBlocked) && (PDefender->objtype == TYPE_PC) && PDefender->getMod(Mod::SHIELD_MASTERY_TP) > 0)) // Umeboshi "Ungate Shield Mastery Trait. Only checks for mod."
             {
                 PDefender->TryHitInterrupt(PAttacker);
             }
@@ -2375,8 +2367,7 @@ namespace battleutils
                 {
                     sBlowMult -= 0.01f * ((CCharEntity*)PAttacker)->PMeritPoints->GetMeritValue(MERIT_SUBTLE_BLOW_EFFECT, (CCharEntity*)PAttacker);
                 }
-
-                if (PAttacker->objtype == TYPE_PC && PAttacker->GetSJob() == JOB_NIN && PAttacker->GetSLevel() > 74)
+                else if (PAttacker->objtype == TYPE_PC && PAttacker->GetSJob() == JOB_NIN && PAttacker->GetSLevel() > 74)
                 {
                     sBlowMult -= 0.01f * ((CCharEntity*)PAttacker)->PMeritPoints->GetMeritValue(MERIT_SUBTLE_BLOW_EFFECT, (CCharEntity*)PAttacker);
                 }
@@ -2530,8 +2521,7 @@ namespace battleutils
             {
                 sBlowMult -= 0.01f * ((CCharEntity*)PAttacker)->PMeritPoints->GetMeritValue(MERIT_SUBTLE_BLOW_EFFECT, (CCharEntity*)PAttacker);
             }
-
-            if (PAttacker->objtype == TYPE_PC && PAttacker->GetSJob() == JOB_NIN && PAttacker->GetMLevel() > 74)
+            else if (PAttacker->objtype == TYPE_PC && PAttacker->GetSJob() == JOB_NIN && PAttacker->GetMLevel() > 74)
             {
                 sBlowMult -= 0.01f * ((CCharEntity*)PAttacker)->PMeritPoints->GetMeritValue(MERIT_SUBTLE_BLOW_EFFECT, (CCharEntity*)PAttacker);
             }
@@ -2570,12 +2560,6 @@ namespace battleutils
             PAttacker->StatusEffectContainer->DelStatusEffect(EFFECT_HAGAKURE);
         }
 
-        // When set mob will only take 0 or 1 damage
-        if (PDefender->GetLocalVar("DAMAGE_NULL") != 0)
-        {
-            damage %= 2;
-        }
-
         return damage;
     }
 
@@ -2587,14 +2571,6 @@ namespace battleutils
 
     int32 TakeSpellDamage(CBattleEntity* PDefender, CCharEntity* PAttacker, CSpell* PSpell, int32 damage, ATTACK_TYPE attackType, DAMAGE_TYPE damageType)
     {
-
-        // When set mob will only take 0 or 1 damage
-        if (PDefender->GetLocalVar("DAMAGE_NULL") != 0)
-        {
-            damage = PDefender->GetLocalVar("DAMAGE_DEALT");
-            damage %= 2;
-        }
-
         // Scarlet Delirium: Updates status effect power with damage bonus
         battleutils::HandleScarletDelirium(PDefender, damage);
 
@@ -2604,12 +2580,17 @@ namespace battleutils
         if (PSpell->canTargetEnemy() && damage > 0 && PSpell->dealsDamage())
         {
             PDefender->StatusEffectContainer->DelStatusEffectsByFlag(EFFECTFLAG_DAMAGE);
+
             // Check for bind breaking
             BindBreakCheck(PAttacker, PDefender);
 
-            // Do we get TP for damaging spells?
+            // Add TP for damaging spells (Only player chars who have the Occult Accumen trait)
             int16 tp = battleutils::CalculateSpellTP(PAttacker, PSpell);
             PAttacker->addTP(tp);
+
+            // Targets of damaging spells gain 50 tp + store tp bonus
+            float storeTPMultiplier = 1.0f + 0.01f * static_cast<float>(PDefender->getMod(Mod::STORETP) + getStoreTPbonusFromMerit(PDefender));
+            PDefender->addTP(static_cast<int16>(50 * storeTPMultiplier));
         }
 
         return damage;
@@ -2697,12 +2678,6 @@ namespace battleutils
             // https://www.bluegartr.com/threads/68786-Dexterity-s-impact-on-critical-hits?p=3209015&viewfull=1#post3209015
 
             uint16 attackerAcc = PAttacker->ACC(attackNumber, offsetAccuracy);
-
-            // Enlight gives an ACC bonus not a hit rate bonus, ACC bonus is equal to damage dealt
-            if (PAttacker->StatusEffectContainer->HasStatusEffect(EFFECT_ENLIGHT))
-            {
-                attackerAcc += PAttacker->getMod(Mod::ENSPELL_DMG);
-            }
 
             hitrate += static_cast<int32>(std::floor((attackerAcc - PDefender->EVA()) / 2));
 
@@ -2806,8 +2781,10 @@ namespace battleutils
                 critHitRate = 100;
             }
         }
+        // else if (PAttacker->objtype == TYPE_PC && PAttacker->GetMJob() == JOB_THF && charutils::hasTrait((CCharEntity*)PAttacker, TRAIT_ASSASSIN) &&
+        //          (!ignoreSneakTrickAttack) && PAttacker->StatusEffectContainer->HasStatusEffect(EFFECT_TRICK_ATTACK))
         else if (PAttacker->objtype == TYPE_PC && PAttacker->GetMJob() == JOB_THF && charutils::hasTrait((CCharEntity*)PAttacker, TRAIT_ASSASSIN) &&
-                (!ignoreSneakTrickAttack) && PAttacker->StatusEffectContainer->HasStatusEffect(EFFECT_TRICK_ATTACK)) 
+                 (!ignoreSneakTrickAttack) && PAttacker->StatusEffectContainer->HasStatusEffect(EFFECT_TRICK_ATTACK))
         {
             CBattleEntity* taChar = battleutils::getAvailableTrickAttackChar(PAttacker, PDefender);
             if (taChar != nullptr)
@@ -2984,7 +2961,11 @@ namespace battleutils
     float GetDamageRatio(CBattleEntity* PAttacker, CBattleEntity* PDefender, bool isCritical, float bonusAttPercent)
     {
         uint16 attack = PAttacker->ATT();
-        attack        = static_cast<uint16>(attack * bonusAttPercent);
+        // Bonus attack currently only from footwork
+        if (bonusAttPercent >= 1)
+        {
+            attack = static_cast<uint16>(attack * bonusAttPercent);
+        }
 
         // Wholly possible for DEF to be near 0 with the amount of debuffs/effects now.
         uint16 defense = PDefender->DEF();
@@ -3712,13 +3693,11 @@ namespace battleutils
             // take the max of humanoid or dragon killer
             KillerEffect = std::max<int32>(KillerEffect, PDefender->getMod(Mod::DRAGON_KILLER));
         }
-
         if (PDefender->objtype == TYPE_PC && PDefender->GetMLevel() > 74 && PDefender->GetMJob() == JOB_BST)
         {
             KillerEffect += ((CCharEntity*)PDefender)->PMeritPoints->GetMeritValue(MERIT_KILLER_EFFECTS, ((CCharEntity*)PDefender));
         }
-
-        if (PDefender->objtype == TYPE_PC && PDefender->GetSLevel() > 74 && PDefender->GetSJob() == JOB_BST)
+        else if (PDefender->objtype == TYPE_PC && PDefender->GetSLevel() > 74 && PDefender->GetSJob() == JOB_BST)
         {
             KillerEffect += ((CCharEntity*)PDefender)->PMeritPoints->GetMeritValue(MERIT_KILLER_EFFECTS, ((CCharEntity*)PDefender));
         }
@@ -3874,8 +3853,6 @@ namespace battleutils
 
     SUBEFFECT GetSkillChainEffect(CBattleEntity* PDefender, uint8 primary, uint8 secondary, uint8 tertiary)
     {
-        const std::lock_guard<std::mutex> lock(PDefender->scMutex);
-
         CStatusEffect*     PSCEffect           = PDefender->StatusEffectContainer->GetStatusEffect(EFFECT_SKILLCHAIN, 0);
         CStatusEffect*     PCBEffect           = PDefender->StatusEffectContainer->GetStatusEffect(EFFECT_CHAINBOUND, 0);
         SKILLCHAIN_ELEMENT skillchain          = SC_NONE;
@@ -3895,23 +3872,23 @@ namespace battleutils
             // Chainbound active on target
             if (PCBEffect)
             {
-                if (PCBEffect->GetStartTime() + 2s < server_clock::now())
+                if (PCBEffect->GetStartTime() + 3s < server_clock::now())
                 {
                     // Konzen-Ittai
                     if (PCBEffect->GetPower() > 1)
                     {
-                        resonanceProperties.push_back(SC_LIGHT);
-                        resonanceProperties.push_back(SC_DARKNESS);
-                        resonanceProperties.push_back(SC_GRAVITATION);
-                        resonanceProperties.push_back(SC_FRAGMENTATION);
-                        resonanceProperties.push_back(SC_DISTORTION);
-                        resonanceProperties.push_back(SC_FUSION);
+                        resonanceProperties.emplace_back(SC_LIGHT);
+                        resonanceProperties.emplace_back(SC_DARKNESS);
+                        resonanceProperties.emplace_back(SC_GRAVITATION);
+                        resonanceProperties.emplace_back(SC_FRAGMENTATION);
+                        resonanceProperties.emplace_back(SC_DISTORTION);
+                        resonanceProperties.emplace_back(SC_FUSION);
                     }
-                    resonanceProperties.push_back(SC_LIQUEFACTION);
-                    resonanceProperties.push_back(SC_INDURATION);
-                    resonanceProperties.push_back(SC_REVERBERATION);
-                    resonanceProperties.push_back(SC_IMPACTION);
-                    resonanceProperties.push_back(SC_COMPRESSION);
+                    resonanceProperties.emplace_back(SC_LIQUEFACTION);
+                    resonanceProperties.emplace_back(SC_INDURATION);
+                    resonanceProperties.emplace_back(SC_REVERBERATION);
+                    resonanceProperties.emplace_back(SC_IMPACTION);
+                    resonanceProperties.emplace_back(SC_COMPRESSION);
 
                     skillchain = FormSkillchain(resonanceProperties, skillProperties);
                 }
@@ -3920,7 +3897,7 @@ namespace battleutils
                 PSCEffect = PDefender->StatusEffectContainer->GetStatusEffect(EFFECT_SKILLCHAIN, 0);
             }
             // Previous effect exists
-            if (PSCEffect->GetStartTime() + std::chrono::seconds(3) < server_clock::now())
+            else if (PSCEffect && PSCEffect->GetStartTime() + 3s < server_clock::now())
             {
                 if (PSCEffect->GetTier() == 0)
                 {
@@ -3934,20 +3911,17 @@ namespace battleutils
                     // actually the ID of the opening weaponskill.  We need all 3
                     // of the possible skillchain properties on the initial link.
                     auto properties = PSCEffect->GetPower();
-                    resonanceProperties.push_back((SKILLCHAIN_ELEMENT)(properties & 0b1111));
-                    resonanceProperties.push_back((SKILLCHAIN_ELEMENT)((properties >> 4) & 0b1111));
-                    resonanceProperties.push_back((SKILLCHAIN_ELEMENT)((properties >> 8) & 0b1111));
+                    resonanceProperties.emplace_back((SKILLCHAIN_ELEMENT)(properties & 0b1111));
+                    resonanceProperties.emplace_back((SKILLCHAIN_ELEMENT)((properties >> 4) & 0b1111));
+                    resonanceProperties.emplace_back((SKILLCHAIN_ELEMENT)((properties >> 8) & 0b1111));
                     skillchain = FormSkillchain(resonanceProperties, skillProperties);
                 }
                 else
                 {
                     // Previous effect is not an opening effect, meaning the power is
                     // The skill chain ID resonating.
-                    if (PSCEffect->GetStartTime() + std::chrono::seconds(3) < server_clock::now())
-                    {
-                        resonanceProperties.push_back((SKILLCHAIN_ELEMENT)PSCEffect->GetPower());
-                        skillchain = FormSkillchain(resonanceProperties, skillProperties);
-                    }
+                    resonanceProperties.emplace_back((SKILLCHAIN_ELEMENT)PSCEffect->GetPower());
+                    skillchain = FormSkillchain(resonanceProperties, skillProperties);
                 }
             }
 
@@ -4174,7 +4148,7 @@ namespace battleutils
 
         uint16 elementOffset = static_cast<uint16>(DAMAGE_TYPE::ELEMENTAL) + static_cast<uint16>(appliedEle);
         PDefender->takeDamage(damage, PAttacker, ATTACK_TYPE::SPECIAL,
-                              appliedEle == ELEMENT_NONE ? DAMAGE_TYPE::NONE : static_cast<DAMAGE_TYPE>(elementOffset));
+                              appliedEle == ELEMENT_NONE ? DAMAGE_TYPE::NONE : static_cast<DAMAGE_TYPE>(elementOffset), true);
 
         battleutils::ClaimMob(PDefender, PAttacker);
         PDefender->updatemask |= UPDATE_STATUS;
@@ -4289,6 +4263,7 @@ namespace battleutils
 
             if (ERROR_SLOTID == (SlotID = PChar->getStorage(LOC_INVENTORY)->SearchItem(toolID)))
             {
+                // if (PChar->GetMJob() == JOB_NIN)
                 if (PChar->GetMJob() == JOB_NIN || PChar->GetSJob() == JOB_NIN) // Umeboshi "NIN Sub can use master tools"
                 {
                     switch (toolID)
@@ -4374,162 +4349,117 @@ namespace battleutils
     }
 
     /*
-     * Find if any party members are in position for trick attack.  Do this by making a narrow triangle:
-     *  one endpoint at the mob, and the other two endpoints being equidistant from the TA user, perpendicular to
-     *  the line between the mob and the TA user.  Find the slope of the line between the TA user and the mob, and
-     *  decide whether to use x or z as the dependent variable (to avoid big numbers and divide by 0 errors on
-     *  vertical slopes).  Using this slope, we can find the angle of the perpendicular line to the x or z line
-     *  (depending on what the dependent var is), and using that angle, the disassembled x and z components to that
-     *  line.  Divide those by 2 for a half yalm length line for each side of the base of the triangle, and we get
-     *  the min and max values for x/z around the TA user.  Now it's simply a matter of first: making sure the
-     *  TA target is closer than the TA user, and that the TA targets x and z coordinates fall within the triangle
-     *  we made.  Using the min/max points and the mobs coordinate, we can construct min and max slopes, check that
-     *  the x or z coordinates are between the mob and player, and finally calculate where the z coordinate should
-     *  be based on the users x coordinate (or the other way around in a z dependent scenario) and check if the
-     *  actual z coordinate is between those two values.
+        pass result of worldAngle(anchorEntity, firstEntity) instead of calculating everytime to allow TA to be more efficient
+        Note the order of worldAngle calls, the anchor must be first in all comparisons
+        Calculates world angle between other entity and anchor entity,
+        then determines if the difference of those angles is within acceptable range for moves that require the three to be "in a straight line"
+        Used for Trick Attack and Cover: separate checks for distance/party membership must be done to confirm eligability
+    */
+    inline bool areInLine(uint8 firstEntityWorldAngle, CBattleEntity* anchorEntity, CBattleEntity* otherEntity)
+    {
+        // X-degree angle threshold, centered on the firstPlayer's world angle
+        // X = 10 => 10/2 * 255 / 360 ~ 3.5 rotation diff, rounded to 4 which really gives X~11.3
+        int16 angleDiff = angleDifference(firstEntityWorldAngle, worldAngle(anchorEntity->loc.p, otherEntity->loc.p));
+
+        // Useful for debugging if trick attack/cover aren't reliably calculating eligability, but chatty otherwise
+        // ShowDebug("InLine check angleDiff: %d\n", angleDiff);
+
+        return std::abs(angleDiff) <= worldAngleMaxDeviance;
+    }
+
+    /*
+     *  Find if any party members are in position for trick attack.  Do this by comparing the world angle between:
+     *  1. the TA user and the TA target
+     *  2. the TA user and the Mob
+     *  First, build a list of players that are closer to the mob than the TA user,
+     *   then sort by distance and choose the first that succeeds in meeting the criteria of areInline function
      */
 
     CBattleEntity* getAvailableTrickAttackChar(CBattleEntity* taUser, CBattleEntity* PMob)
     {
+        TracyZoneScoped;
         if (!taUser->StatusEffectContainer->HasStatusEffect(EFFECT_TRICK_ATTACK))
         {
             return nullptr;
         }
 
-        float taUserX = taUser->loc.p.x;
-        float taUserZ = taUser->loc.p.z;
-        float mobX    = PMob->loc.p.x;
-        float mobZ    = PMob->loc.p.z;
-
-        float xdif       = taUserX - mobX;
-        float zdif       = taUserZ - mobZ;
-        float slope      = 0;
-        float maxSlope   = 0;
-        float minSlope   = 0;
-        bool  zDependent = true; // using a slope where z is dependent var
-
-        if (abs(xdif) <= abs(zdif))
-        {
-            slope = xdif / zdif;
-
-            float angle = (float)atan((double)1) * 2 - atan(slope);
-
-            float zoffset   = cos(angle) / 2;
-            float xoffset   = sin(angle) / 2;
-            float maxXpoint = taUserX + xoffset;
-            float maxZpoint = taUserZ - zoffset;
-            float minXpoint = taUserX - xoffset;
-            float minZpoint = taUserZ + zoffset;
-            maxSlope        = ((maxXpoint - mobX) / (maxZpoint - mobZ));
-            minSlope        = ((minXpoint - mobX) / (minZpoint - mobZ));
-            zDependent      = false;
-        }
-        else
-        {
-            slope = zdif / xdif;
-
-            float angle = (float)atan((double)1) * 2 - atan(slope);
-
-            float xoffset   = cos(angle) / 2;
-            float zoffset   = sin(angle) / 2;
-            float maxXpoint = taUserX - xoffset;
-            float maxZpoint = taUserZ + zoffset;
-            float minXpoint = taUserX + xoffset;
-            float minZpoint = taUserZ - zoffset;
-            maxSlope        = (maxZpoint - mobZ) / (maxXpoint - mobX);
-            minSlope        = (minZpoint - mobZ) / (minXpoint - mobX);
-        }
-
-        auto checkPosition = [&](CBattleEntity* PEntity) -> bool
-        {
-            if (taUser->id != PEntity->id && distance(PEntity->loc.p, PMob->loc.p) <= distance(taUser->loc.p, PMob->loc.p))
-            {
-                float memberXdif = PEntity->loc.p.x - mobX;
-                float memberZdif = PEntity->loc.p.z - mobZ;
-                if (zDependent)
-                {
-                    if ((memberZdif <= memberXdif * maxSlope) && (memberZdif >= memberXdif * minSlope))
-                    {
-                        // finally found a TA partner
-                        return true;
-                    }
-                }
-                else
-                {
-                    if ((memberXdif <= memberZdif * maxSlope) && (memberXdif >= memberZdif * minSlope))
-                    {
-                        // finally found a TA partner
-                        return true;
-                    }
-                }
-            }
-
-            return false;
-        };
-
-        auto checkTrusts = [&](CBattleEntity* PEntity) -> CBattleEntity*
-        {
-            if (auto* PChar = dynamic_cast<CCharEntity*>(PEntity))
-            {
-                for (auto* PTrust : PChar->PTrusts)
-                {
-                    if (checkPosition(PTrust))
-                    {
-                        return PTrust;
-                    }
-                }
-            }
-
-            return nullptr;
-        };
+        // angle and distance between mob and TA user
+        uint8                                         angleTAmob = worldAngle(PMob->loc.p, taUser->loc.p);
+        auto                                          distTAmob  = distance(taUser->loc.p, PMob->loc.p);
+        std::vector<std::pair<float, CBattleEntity*>> taTargetList;
 
         if (taUser->PParty != nullptr)
         {
+            std::vector<CParty*> taPartyList;
             if (taUser->PParty->m_PAlliance != nullptr)
             {
-                for (auto& a : taUser->PParty->m_PAlliance->partyList)
-                {
-                    for (std::size_t i = 0; i < a->members.size(); ++i)
-                    {
-                        CBattleEntity* member = a->members.at(i);
-                        if (checkPosition(member))
-                        {
-                            return member;
-                        }
-
-                        if (auto* potentialTrust = checkTrusts(member))
-                        {
-                            return potentialTrust;
-                        }
-                    }
-                }
+                taPartyList = taUser->PParty->m_PAlliance->partyList;
             }
             else
-            { // No alliance
-                for (auto member : taUser->PParty->members)
+            {
+                taPartyList.emplace_back(taUser->PParty);
+            }
+
+            // Collect all potential TA targets who are closer to the mob than the TA user
+            for (auto&& party : taPartyList)
+            {
+                for (auto&& member : party->members)
                 {
-                    if (checkPosition(member))
+                    float distTAtarget = distance(member->loc.p, PMob->loc.p);
+                    // require closer target not be closer than .5 yalms (.5*.5=.25 distsquared) to mob
+                    if (distTAtarget >= worldAngleMinDistance && distTAtarget < distTAmob)
                     {
-                        return member;
+                        taTargetList.emplace_back(distTAtarget, member);
                     }
 
-                    if (auto* potentialTrust = checkTrusts(member))
+                    if (auto* PChar = dynamic_cast<CCharEntity*>(member))
                     {
-                        return potentialTrust;
+                        for (auto* PTrust : PChar->PTrusts)
+                        {
+                            float distTAtarget = distance(PTrust->loc.p, PMob->loc.p);
+                            // require closer target not be closer than .5 yalms (.5*.5=.25 distsquared) to mob
+                            if (distTAtarget >= worldAngleMinDistance && distTAtarget < distTAmob)
+                            {
+                                taTargetList.emplace_back(distTAtarget, PTrust);
+                            }
+                        }
                     }
                 }
             }
         }
 
-                // Check fellow for TA target
+        // Check TA user's fellow
         if (auto* PChar = dynamic_cast<CCharEntity*>(taUser))
         {
             if (PChar->m_PFellow)
             {
                 if (auto* fellow = dynamic_cast<CBattleEntity*>(PChar->m_PFellow))
                 {
-                    if (checkPosition(fellow))
-                        return fellow;
+                    float distTAtarget = distance(fellow->loc.p, PMob->loc.p);
+                    // require closer target not be closer than .5 yalms (.5*.5=.25 distsquared) to mob
+                    if (distTAtarget >= worldAngleMinDistance && distTAtarget < distTAmob)
+                    {
+                        taTargetList.emplace_back(distTAtarget, fellow);
+                    }
+                }
+            }
+        }
+
+        if (!taTargetList.empty())
+        {
+            // sorts by distance then by pointer id (only if floats are equal)
+            std::sort(taTargetList.begin(), taTargetList.end());
+            for (auto const& [dist, potentialTAtarget] : taTargetList)
+            {
+                if (taUser->id == potentialTAtarget->id || // can't TA self
+                    potentialTAtarget->isDead())           // Dead entity should not be TA-able
+                {
+                    continue;
+                }
+
+                if (areInLine(angleTAmob, PMob, potentialTAtarget))
+                {
+                    return potentialTAtarget;
                 }
             }
         }
@@ -4638,6 +4568,7 @@ namespace battleutils
             {
                 m_PChar->addHP(-HandleStoneskin(m_PChar, (int32)(bonusDamage * stalwartSoulBonus)));
 
+                // Umeboshi "DRK Sub not penalized on cactuar."
                 // if (m_PChar->GetMJob() == JOB_DRK)
                 {
                     damage += bonusDamage;
@@ -4675,7 +4606,8 @@ namespace battleutils
             {
                 return ((CCharEntity*)PEntity)->PMeritPoints->GetMeritValue(MERIT_STORE_TP_EFFECT, (CCharEntity*)PEntity);
             }
-            if (((CCharEntity*)PEntity)->GetSJob() == JOB_SAM) // Umeboshi "SAM sub benefits from merits"
+
+            else if (((CCharEntity*)PEntity)->GetSJob() == JOB_SAM) // Umeboshi "SAM sub benefits from merits"
             {
                 return ((CCharEntity*)PEntity)->PMeritPoints->GetMeritValue(MERIT_STORE_TP_EFFECT, (CCharEntity*)PEntity);
             }
@@ -4875,12 +4807,12 @@ namespace battleutils
                 if (!battleutils::IsAbsorbByShadow(PVictim))
                 {
                     // successful hit, add damage
-                    float AttMultiplerPercent = 1.f;
+                    float AttMultiplerPercent = 0.f;
 
                     // get jump attack bonus from gear
                     if (PAttacker->objtype == TYPE_PC)
                     {
-                        AttMultiplerPercent = 1.f + PAttacker->getMod(Mod::JUMP_ATT_BONUS) / 100.f;
+                        AttMultiplerPercent = PAttacker->getMod(Mod::JUMP_ATT_BONUS) / 100.f;
                     }
 
                     float DamageRatio = battleutils::GetDamageRatio(PAttacker, PVictim, false, AttMultiplerPercent);
@@ -4931,11 +4863,12 @@ namespace battleutils
         {
             uint16 enmityReduction = PAttacker->getMod(Mod::HIGH_JUMP_ENMITY_REDUCTION) + 50;
 
-            //DRG sub has only 30% enmity removed instead of 50%. 
-            if (PAttacker->GetSJob() == JOB_DRG)
-            {
-                enmityReduction = PAttacker->getMod(Mod::HIGH_JUMP_ENMITY_REDUCTION) + 50;
-            }
+            // Umeboshi "DRG Sub High Jump not penalized on cactuar."
+            // DRG sub has only 30% enmity removed instead of 50%.
+            // if (PAttacker->GetSJob() == JOB_DRG)
+            // {
+            //     enmityReduction = PAttacker->getMod(Mod::HIGH_JUMP_ENMITY_REDUCTION) + 30;
+            // }
 
             // cap it
             if (enmityReduction > 100)
@@ -5429,12 +5362,14 @@ namespace battleutils
         {
             damage = -damage;
         }
-
+        else if (xirand::GetRandomNumber(100) < PDefender->getMod(Mod::SEVERE_BREATH_DMG_NULL) && damage >= PDefender->health.hp)
+        {
+            damage = PDefender->health.hp - 1;
+        }
         if (xirand::GetRandomNumber(100) < PDefender->getMod(Mod::SEVERE_BREATH_DMG_NULL) && damage >= PDefender->health.hp)
         {
             damage = PDefender->health.hp - 1;
         }
-
         else
         {
             damage = HandleSevereDamage(PDefender, damage, false);
@@ -5485,12 +5420,10 @@ namespace battleutils
         {
             damage = 0;
         }
-
         else if (xirand::GetRandomNumber(100) < PDefender->getMod(Mod::SEVERE_MAGIC_DMG_NULL) && damage >= PDefender->health.hp)
         {
             damage = PDefender->health.hp - 1;
         }
-
         else
         {
             damage = HandleSevereDamage(PDefender, damage, false);
@@ -5541,13 +5474,6 @@ namespace battleutils
             damage = HandleFanDance(PDefender, damage);
         }
 
-        // When set mob will only take 0 or 1 damage
-        if (PDefender->GetLocalVar("DAMAGE_NULL") != 0)
-        {
-            damage = PDefender->GetLocalVar("DAMAGE_DEALT");
-            damage %= 2;
-        }
-
         if (damage > PDefender->getMod(Mod::DMGPHYS_CAP) && PDefender->getMod(Mod::DMGPHYS_CAP) > 0)
         {
             damage = PDefender->getMod(Mod::DMGPHYS_CAP);
@@ -5595,13 +5521,6 @@ namespace battleutils
             ConvertDmgToMP(PDefender, damage, IsCovered);
 
             damage = HandleFanDance(PDefender, damage);
-        }
-
-        // When set mob will only take 0 or 1 damage
-        if (PDefender->GetLocalVar("DAMAGE_NULL") != 0)
-        {
-            damage = PDefender->GetLocalVar("DAMAGE_DEALT");
-            damage %= 2;
         }
 
         if (damage > PDefender->getMod(Mod::DMGRANGE_CAP) && PDefender->getMod(Mod::DMGRANGE_CAP) > 0)
@@ -6160,13 +6079,8 @@ namespace battleutils
         }
     }
 
-    bool DrawIn(CBattleEntity* PTarget, CMobEntity* PMob, float offset, uint8 drawInRange, uint16 maximumReach, bool includeParty)
+    bool DrawIn(CBattleEntity* PTarget, CMobEntity* PMob, float offset)
     {
-        if (std::chrono::time_point_cast<std::chrono::seconds>(server_clock::now()).time_since_epoch().count() - PMob->GetLocalVar("DrawInTime") < 2)
-        {
-            return false;
-        }
-
         position_t& pos        = PMob->loc.p;
         position_t  nearEntity = nearPosition(pos, offset, (float)0);
 
@@ -6192,53 +6106,52 @@ namespace battleutils
         // Move the target a little higher, just in case
         nearEntity.y -= 1.0f;
 
-        bool success = false;
-        // float drawInDistance = (float)(PMob->getMobMod(MOBMOD_DRAW_IN) > 1 ? PMob->getMobMod(MOBMOD_DRAW_IN) : PMob->GetMeleeRange() * 2);
+        bool  success        = false;
+        float drawInDistance = (float)(PMob->getMobMod(MOBMOD_DRAW_IN) > 1 ? PMob->getMobMod(MOBMOD_DRAW_IN) : PMob->GetMeleeRange() * 2);
 
-        // if (std::chrono::time_point_cast<std::chrono::seconds>(server_clock::now()).time_since_epoch().count() - PMob->GetLocalVar("DrawInTime") < 2)
-        // {
-        //     return false;
-        // }
+        if (std::chrono::time_point_cast<std::chrono::seconds>(server_clock::now()).time_since_epoch().count() - PMob->GetLocalVar("DrawInTime") < 2)
+        {
+            return false;
+        }
 
-        std::function<void(CBattleEntity*)> drawInFunc = [PMob, drawInRange, maximumReach, &nearEntity, &success](CBattleEntity* PMember)
+        std::function<void(CBattleEntity*)> drawInFunc = [PMob, drawInDistance, &nearEntity, &success](CBattleEntity* PMember)
         {
             float pDistance = distance(PMob->loc.p, PMember->loc.p);
 
-            if (PMob->loc.zone == PMember->loc.zone && pDistance > drawInRange && pDistance < maximumReach &&
-                PMember->status != STATUS_TYPE::CUTSCENE_ONLY && !PMember->isDead() && !PMember->isMounted())
-            // if (PMob->loc.zone == PMember->loc.zone && dist > drawInRange && dist < maximumReach &&
-            //     PMember->status != STATUS_TYPE::STATUS_CUTSCENE_ONLY && !PMember->isDead() && !PMember->isMounted())
+            if (PMob->loc.zone == PMember->loc.zone && pDistance > drawInDistance && PMember->status != STATUS_TYPE::CUTSCENE_ONLY)
             {
-                // draw in!
-                if (PMob->getMobMod(MOBMOD_DRAW_IN_FRONT))
+                // don't draw in dead players for now!
+                // see tractor
+                if (PMember->isDead() || PMember->isMounted())
                 {
+                    // don't do anything
+                }
+                else
+                {
+                    // draw in!
                     PMember->loc.p.x = nearEntity.x;
                     PMember->loc.p.y = nearEntity.y;
                     PMember->loc.p.z = nearEntity.z;
+
+                    if (PMember->objtype == TYPE_PC)
+                    {
+                        CCharEntity* PChar = static_cast<CCharEntity*>(PMember);
+                        PChar->pushPacket(new CPositionPacket(PChar));
+                    }
+                    else
+                    {
+                        PMember->loc.zone->UpdateEntityPacket(PMember, ENTITY_UPDATE, UPDATE_POS);
+                    }
+
+                    luautils::OnMobDrawIn(PMob, PMember);
+                    PMob->loc.zone->PushPacket(PMob, CHAR_INRANGE, new CMessageBasicPacket(PMember, PMember, 0, 0, 232));
+                    success = true;
                 }
-                else
-                {
-                    PMember->loc.p.x = PMob->loc.p.x;
-                    PMember->loc.p.y = nearEntity.y;
-                    PMember->loc.p.z = PMob->loc.p.z;
-                }
-                if (PMember->objtype == TYPE_PC)
-                {
-                    CCharEntity* PChar = static_cast<CCharEntity*>(PMember);
-                    PChar->pushPacket(new CPositionPacket(PChar));
-                }
-                else
-                {
-                    PMember->loc.zone->UpdateEntityPacket(PMember, ENTITY_UPDATE, UPDATE_POS);
-                }
-                luautils::OnMobDrawIn(PMob, PMember);
-                PMob->loc.zone->PushPacket(PMob, CHAR_INRANGE, new CMessageBasicPacket(PMember, PMember, 0, 0, 232));
-                success = true;
             }
         };
 
         // check if i should draw-in party/alliance
-        if (includeParty)
+        if (PMob->getMobMod(MOBMOD_DRAW_IN) > 1)
         {
             PTarget->ForAlliance(drawInFunc);
         }
@@ -6255,7 +6168,6 @@ namespace battleutils
 
         return success;
     }
-
 
     /************************************************************************
      *                                                                       *
@@ -6493,11 +6405,10 @@ namespace battleutils
         }
     }
 
-            void AddTraitsSJ(CBattleEntity* PEntity, TraitList_t* traitList, uint8 level, size_t cutoff)
+    void AddTraitsSJ(CBattleEntity* PEntity, TraitList_t* traitList, uint8 level, size_t cutoff)
     // Cactuar Umeboshi "Handling for subjob traits stacking with main job."
     {
         CCharEntity* PChar = PEntity->objtype == TYPE_PC ? static_cast<CCharEntity*>(PEntity) : nullptr;
-
         for (auto&& PTrait : *traitList)
         {
             if (level >= PTrait->getLevel() && PTrait->getLevel() > 0)
@@ -6507,14 +6418,11 @@ namespace battleutils
                 {
                     cutoffActual = 0; // check the entire list
                 }
-
                 bool add = true;
                 for (std::size_t j = cutoffActual; j < PEntity->TraitList.size(); ++j)
-
                 // for (uint8 j = cutoffActual; j < PEntity->TraitList.size(); ++j)
                 {
                     CTrait* PExistingTrait = PEntity->TraitList.at(j);
-
                     if (PExistingTrait->getID() == PTrait->getID())
                     {
                         // Check if we still have the merit required for this trait
@@ -6534,7 +6442,6 @@ namespace battleutils
                                 }
                             }
                         }
-
                         if (PExistingTrait->getRank() < PTrait->getRank())
                         {
                             PEntity->delTrait(PExistingTrait);
@@ -6552,7 +6459,6 @@ namespace battleutils
                         }
                     }
                 }
-
                 // Don't add traits that aren't merited yet
                 if (PChar)
                 {
@@ -6561,7 +6467,6 @@ namespace battleutils
                         add = false;
                     }
                 }
-
                 if (add)
                 {
                     PEntity->addTrait(PTrait);
@@ -6569,6 +6474,7 @@ namespace battleutils
             }
         }
     }
+
 
     bool HasClaim(CBattleEntity* PEntity, CBattleEntity* PTarget)
     {
@@ -6780,7 +6686,7 @@ namespace battleutils
     {
         if (PSpell == nullptr)
         {
-            ShowWarning("battleutils::CalculateMPCost Spell is NULL");
+            ShowWarning("battleutils::CalculateMPCost Spell is nullptr");
             return 0;
         }
 
@@ -6838,6 +6744,7 @@ namespace battleutils
             cost = 0;
         }
         cost = (int16)((float)cost * ((float)(PEntity->getMod(Mod::AUTOMATON_MAGIC_COST)) + 100.0f) / 100.0f); // Lowers spell cost for automatons.
+
         return std::clamp<int16>(cost, 0, 9999);
     }
 
@@ -6909,14 +6816,15 @@ namespace battleutils
         {
             if (PSpell->getAOE() == SPELLAOE_RADIAL_MANI && PEntity->StatusEffectContainer->HasStatusEffect(EFFECT_MANIFESTATION))
             {
-                //if (PEntity->GetMJob() == JOB_SCH)
-                //{
+                if (PEntity->GetMJob() == JOB_SCH)
+                {
                     recast *= 2;
-                //}
-                //else
-                //{
-                //    recast *= 2;
-                //}
+                }
+                // Umeboshi "SCH Sub not penalized on Cactuar"
+                // else
+                // {
+                //     recast *= 3;
+                // }
             }
             else if (PEntity->StatusEffectContainer->HasStatusEffect({ EFFECT_DARK_ARTS, EFFECT_ADDENDUM_BLACK }))
             {
@@ -6950,14 +6858,15 @@ namespace battleutils
         {
             if (PSpell->getAOE() == SPELLAOE_RADIAL_ACCE && PEntity->StatusEffectContainer->HasStatusEffect(EFFECT_ACCESSION))
             {
-                //if (PEntity->GetMJob() == JOB_SCH)
-                //{
+                if (PEntity->GetMJob() == JOB_SCH)
+                {
                     recast *= 2;
-                //}
-                //else
-                //{
-                //    recast *= 2;
-                //}
+                }
+                // Umeboshi "SCH Sub not penalized on Cactuar."
+                // else
+                // {
+                //     recast *= 3;
+                // }
             }
 
             if (PEntity->StatusEffectContainer->HasStatusEffect({ EFFECT_LIGHT_ARTS, EFFECT_ADDENDUM_WHITE }))
@@ -6997,13 +6906,14 @@ namespace battleutils
     // Calculate TP generated by spell for Occult Acumen trait
     int16 CalculateSpellTP(CBattleEntity* PEntity, CSpell* PSpell)
     {
-        // Players onry
+        // Players only
         if (PEntity->objtype == TYPE_PC)
         {
             if (PSpell->getSkillType() == SKILLTYPE::SKILL_ELEMENTAL_MAGIC || PSpell->getSkillType() == SKILLTYPE::SKILL_DARK_MAGIC)
             {
                 CCharEntity* PChar = static_cast<CCharEntity*>(PEntity);
-                if (PChar->getMod(Mod::OCCULT_ACUMEN) > 0) //Umeboshi "Ungating Occult Acumen by removing need for job trait)
+                // if (charutils::hasTrait(PChar, TRAIT_OCCULT_ACUMEN))
+                if (PChar->getMod(Mod::OCCULT_ACUMEN) > 0) // Umeboshi "Ungating Occult Acumen by removing need for job trait)
                 {
                     return static_cast<int16>(PSpell->getMPCost() * PChar->getMod(Mod::OCCULT_ACUMEN) / 100.f * (1 + (PChar->getMod(Mod::STORETP) / 100.f)));
                 }
@@ -7282,73 +7192,17 @@ namespace battleutils
 
             if (PCoverAbilityUser != nullptr)
             {
-                float coverAbilityTargetX = PCoverAbilityTarget->loc.p.x;
-                float coverAbilityTargetZ = PCoverAbilityTarget->loc.p.z;
-                float mobX                = PMob->loc.p.x;
-                float mobZ                = PMob->loc.p.z;
+                // using same variable names as trick attack function, for consistent understanding
+                uint8 angleTAmob = worldAngle(PMob->loc.p, PCoverAbilityUser->loc.p);
+                float distTAmob  = distance(PCoverAbilityUser->loc.p, PMob->loc.p);
 
-                float xdif       = coverAbilityTargetX - mobX;
-                float zdif       = coverAbilityTargetZ - mobZ;
-                float slope      = 0;
-                float maxSlope   = 0;
-                float minSlope   = 0;
-                bool  zDependent = true; // using a slope where z is dependent var
-
-                if (abs(xdif) <= abs(zdif))
+                // check if cover user is within melee range and that cover target is in-line behind
+                if (distTAmob <= static_cast<float>(PMob->GetMeleeRange()) &&        // make sure cover user is within melee range
+                    distTAmob >= worldAngleMinDistance &&                            // require closer target not be closer than .5 yalms (.5*.5=.25 distsquared) to mob
+                    distTAmob < distance(PCoverAbilityTarget->loc.p, PMob->loc.p) && // make sure cover user is closer to the mob than cover target
+                    areInLine(angleTAmob, PMob, PCoverAbilityTarget))
                 {
-                    slope = xdif / zdif;
-
-                    float angle = (float)atan((double)1) * 2 - atan(slope);
-
-                    float zoffset   = cos(angle) / 2;
-                    float xoffset   = sin(angle) / 2;
-                    float maxXpoint = mobX + xoffset;
-                    float maxZpoint = mobZ - zoffset;
-                    float minXpoint = mobX - xoffset;
-                    float minZpoint = mobZ + zoffset;
-
-                    maxSlope = ((maxXpoint - coverAbilityTargetX) / (maxZpoint - coverAbilityTargetZ));
-                    minSlope = ((minXpoint - coverAbilityTargetX) / (minZpoint - coverAbilityTargetZ));
-
-                    zDependent = false;
-                }
-                else
-                {
-                    slope = zdif / xdif;
-
-                    float angle = (float)atan((double)1) * 2 - atan(slope);
-
-                    float xoffset   = cos(angle) / 2;
-                    float zoffset   = sin(angle) / 2;
-                    float maxXpoint = mobX - xoffset;
-                    float maxZpoint = mobZ + zoffset;
-                    float minXpoint = mobX + xoffset;
-                    float minZpoint = mobZ - zoffset;
-
-                    maxSlope = (maxZpoint - coverAbilityTargetZ) / (maxXpoint - coverAbilityTargetX);
-                    minSlope = (minZpoint - coverAbilityTargetZ) / (minXpoint - coverAbilityTargetX);
-                }
-
-                if (distance(PCoverAbilityUser->loc.p, PMob->loc.p) <= (float)PMob->GetMeleeRange() && // make sure cover user is within melee range
-                    distance(PCoverAbilityUser->loc.p, PMob->loc.p) <=
-                        distance(PCoverAbilityTarget->loc.p, PMob->loc.p)) // make sure cover user is closer to the mob than cover target
-                {
-                    float coverAbilityUserXdif = PCoverAbilityUser->loc.p.x - coverAbilityTargetX;
-                    float coverAbilityUserZdif = PCoverAbilityUser->loc.p.z - coverAbilityTargetZ;
-                    if (zDependent)
-                    {
-                        if ((coverAbilityUserZdif <= coverAbilityUserXdif * maxSlope) && (coverAbilityUserZdif >= coverAbilityUserXdif * minSlope))
-                        {
-                            return PCoverAbilityUser;
-                        }
-                    }
-                    else
-                    {
-                        if ((coverAbilityUserXdif <= coverAbilityUserZdif * maxSlope) && (coverAbilityUserXdif >= coverAbilityUserZdif * minSlope))
-                        {
-                            return PCoverAbilityUser;
-                        }
-                    }
+                    return PCoverAbilityUser;
                 }
             }
         }

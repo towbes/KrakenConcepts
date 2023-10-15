@@ -2,8 +2,6 @@
 -- Area: Den of Rancor
 --   NM: Ogama
 -----------------------------------
-require("scripts/globals/hunts")
------------------------------------
 local entity = {}
 
 entity.onMobFight = function(mob, target)

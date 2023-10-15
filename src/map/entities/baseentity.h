@@ -316,7 +316,6 @@ public:
     uint8  animPath;  // Which animation Path
     bool   animStart; // Is this starting an animation?
 
-
     bool manualConfig; // Is this entity configured with script
 
     bool isRenamed; // tracks if the entity's name has been overidden. Defaults to false.

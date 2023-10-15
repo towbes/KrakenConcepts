@@ -5,19 +5,18 @@
 -- Involved in Quests: Cook's Pride
 -- !pos -105 -2 69 238
 -----------------------------------
-local ID = require("scripts/zones/Windurst_Waters/IDs")
-require("scripts/globals/quests")
+local ID = zones[xi.zone.WINDURST_WATERS]
 -----------------------------------
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)
     if player:getQuestStatus(xi.quest.log_id.WINDURST, xi.quest.id.windurst.HOIST_THE_JELLY_ROGER) == QUEST_ACCEPTED then
         if
-            trade:hasItemQty(4508, 1) and
+            trade:hasItemQty(xi.item.SERVING_OF_ROYAL_JELLY, 1) and
             trade:getGil() == 0 and
             trade:getItemCount() == 1
         then
-            player:startEvent(10001) -- Finish quest "Hoist the Jelly, Roger"
+            player:startEvent(10001) -- Finish quest 'Hoist the Jelly, Roger'
         end
     end
 end
@@ -27,7 +26,7 @@ entity.onTrigger = function(player, npc)
     local hoistTheJelly = player:getQuestStatus(xi.quest.log_id.WINDURST, xi.quest.id.windurst.HOIST_THE_JELLY_ROGER)
 
     if cooksPride == QUEST_ACCEPTED and hoistTheJelly == QUEST_AVAILABLE then
-        player:startEvent(10000) -- Start quest "Hoist the Jelly, Roger"
+        player:startEvent(10000) -- Start quest 'Hoist the Jelly, Roger'
     else
         player:startEvent(266) -- Standard dialog
     end

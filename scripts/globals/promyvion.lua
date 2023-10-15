@@ -1,9 +1,3 @@
-require("scripts/zones/Promyvion-Dem/IDs")
-require("scripts/zones/Promyvion-Holla/IDs")
-require("scripts/zones/Promyvion-Mea/IDs")
-require("scripts/zones/Promyvion-Vahzl/IDs")
------------------------------------
-
 xi = xi or {}
 xi.promyvion = xi.promyvion or {}
 
@@ -95,7 +89,7 @@ xi.promyvion.strayOnSpawn = function(mob)
 end
 
 xi.promyvion.receptacleOnFight = function(mob, target)
-    if os.time() > mob:getLocalVar("[promy]nextStray") then
+    if os.time() > mob:getLocalVar('[promy]nextStray') then
         local ID = zones[mob:getZoneID()]
         local mobId = mob:getID()
         local numStrays = ID.mob.MEMORY_RECEPTACLES[mobId].strays
@@ -115,7 +109,7 @@ xi.promyvion.receptacleOnFight = function(mob, target)
         end
 
         if count < numStrays then
-            mob:setLocalVar("[promy]nextStray", os.time() + 20)
+            mob:setLocalVar('[promy]nextStray', os.time() + 20)
             for i = mobId + 1, mobId + numStrays do
                 local stray = GetMobByID(i)
                 if not stray:isSpawned() then
@@ -130,7 +124,7 @@ xi.promyvion.receptacleOnFight = function(mob, target)
 end
 
 xi.promyvion.receptacleIdle = function(mob)
-    if os.time() > mob:getLocalVar("[promy]nextStray") then
+    if os.time() > mob:getLocalVar('[promy]nextStray') then
         local mobId = mob:getID()
         local numStrays = zones[mob:getZoneID()].mob.MEMORY_RECEPTACLES[mobId].strays
         local count = 0
@@ -143,7 +137,7 @@ xi.promyvion.receptacleIdle = function(mob)
         end
 
         if count < numStrays then
-            mob:setLocalVar("[promy]nextStray", os.time() + 300)
+            mob:setLocalVar('[promy]nextStray', os.time() + 300)
             for i = mobId + 1, mobId + numStrays do
                 local stray = GetMobByID(i)
                 if
@@ -164,7 +158,7 @@ xi.promyvion.receptacleIdle = function(mob)
 end
 
 xi.promyvion.receptacleOnDeath = function(mob, optParams)
-    if mob:getLocalVar("deathLogic") == 0 then
+    if mob:getLocalVar('deathLogic') == 0 then
         local mobId             = mob:getID()
         local zoneReceptacles   = zones[mob:getZoneID()].mob.MEMORY_RECEPTACLES
         local floor             = zoneReceptacles[mobId].group
@@ -182,18 +176,18 @@ xi.promyvion.receptacleOnDeath = function(mob, optParams)
 
         if math.random() < portalChance then
             local zone   = mob:getZone()
-            if zone:getLocalVar(string.format("[MR][%s]", floor)) ~= 1 then
+            if zone:getLocalVar(string.format('[MR][%s]', floor)) ~= 1 then
                 -- Only open the portal if no other portals in this group are open
                 local events = receptacleStreams.destinations
                 local event  = events[math.random(#events)]
-                zone:setLocalVar(string.format("[MR][%s]", floor), 1)
+                zone:setLocalVar(string.format('[MR][%s]', floor), 1)
 
-                stream:setLocalVar("[promy]destination", event)
-                stream:setLocalVar("zoneportal", floor)
+                stream:setLocalVar('[promy]destination', event)
+                stream:setLocalVar('zoneportal', floor)
                 stream:openDoor(180)
                 stream:timer(179000, function(s)
-                    local mobFloor = s:getLocalVar("zoneportal")
-                    s:getZone():setLocalVar(string.format("[MR][%s]", mobFloor), 0)
+                    local mobFloor = s:getLocalVar('zoneportal')
+                    s:getZone():setLocalVar(string.format('[MR][%s]', mobFloor), 0)
                 end)
             end
         end
@@ -210,7 +204,7 @@ xi.promyvion.receptacleOnDeath = function(mob, optParams)
             end
         end
 
-        mob:setLocalVar("deathLogic", 1)
+        mob:setLocalVar('deathLogic', 1)
     end
 end
 
@@ -225,7 +219,7 @@ xi.promyvion.onTriggerAreaEnter = function(player, triggerArea)
         else
             local stream = GetNPCByID(triggerAreaID)
             if stream ~= nil and stream:getAnimation() == xi.anim.OPEN_DOOR then
-                event = stream:getLocalVar("[promy]destination")
+                event = stream:getLocalVar('[promy]destination')
             end
         end
 

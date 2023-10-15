@@ -2,8 +2,7 @@
 -- Area: Lufaise Meadows
 --   NM: Flockbock
 -----------------------------------
-require("scripts/globals/hunts")
-mixins = {require("scripts/mixins/rage")}
+mixins = {require('scripts/mixins/rage')}
 -----------------------------------
 local entity = {}
 
@@ -14,7 +13,7 @@ entity.onMobInitialize = function(mob)
 end
 
 entity.onMobSpawn = function(mob)
-    mob:setLocalVar("[rage]timer", 3600) -- 1 hour rage
+    mob:setLocalVar('[rage]timer', 3600) -- 1 hour rage
 end
 
 entity.onMobDeath = function(mob, player, optParams)

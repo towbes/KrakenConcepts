@@ -5,13 +5,7 @@
 -- !addmission 13 86
 -- qm_cetus : !pos -127.055 -7.849 600.22 89
 -----------------------------------
-require('scripts/globals/missions')
-require('scripts/globals/rhapsodies')
-require('scripts/globals/titles')
-require('scripts/globals/zone')
-require('scripts/globals/interaction/mission')
------------------------------------
-local graubergID = require('scripts/zones/Grauberg_[S]/IDs')
+local graubergID = zones[xi.zone.GRAUBERG_S]
 -----------------------------------
 
 local mission = Mission:new(xi.mission.log_id.ROV, xi.mission.id.rov.SOMBER_DREAMS)
@@ -112,7 +106,7 @@ mission.sections =
                     if option == 1 then
                         local wotgProgress = player:hasCompletedMission(xi.mission.log_id.WOTG, xi.mission.id.wotg.MAIDEN_OF_THE_DUSK) and 3 or 0
 
-                        -- NOTE: There are two impacted lines that depend on the below update parameter.  First is "Come off it!" where if parameter
+                        -- NOTE: There are two impacted lines that depend on the below update parameter.  First is 'Come off it!' where if parameter
                         -- is 0, it will not display Cait Sith's name, and if non-zero it will.  The last change is if 3, Lilisette disappears back
                         -- to her new realm (post-Maiden of the Dusk), as opposed to running off.
 

@@ -3,9 +3,6 @@
 --  Door: Priming Gate
 --  Involved in quest: Toraimarai Turmoil
 -----------------------------------
-require("scripts/globals/quests")
-require("scripts/globals/keyitems")
------------------------------------
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)

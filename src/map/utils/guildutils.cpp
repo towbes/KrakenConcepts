@@ -56,7 +56,7 @@ namespace guildutils
 
             while (sql->NextRow() == SQL_SUCCESS)
             {
-                g_PGuildList.push_back(new CGuild(sql->GetIntData(0), sql->GetStringData(1)));
+                g_PGuildList.emplace_back(new CGuild(sql->GetIntData(0), sql->GetStringData(1)));
             }
         }
 
@@ -74,7 +74,7 @@ namespace guildutils
 
             while (sql->NextRow() == SQL_SUCCESS)
             {
-                g_PGuildShopList.push_back(new CItemContainer(sql->GetIntData(0)));
+                g_PGuildShopList.emplace_back(new CItemContainer(sql->GetIntData(0)));
             }
         }
         for (auto* PGuildShop : g_PGuildShopList)
@@ -142,6 +142,7 @@ namespace guildutils
         // bool doUpdate = static_cast<uint32>(serverutils::GetServerVar("[GUILD]pattern_update")) != CVanaTime::getInstance()->getSysYearDay();
         bool doUpdate = static_cast<uint32>(serverutils::GetServerVar("[GUILD]pattern_update")) != CVanaTime::getInstance()->getJstYearDay();
 
+
         uint8 pattern = xirand::GetRandomNumber(8);
         if (doUpdate)
         {
@@ -155,6 +156,7 @@ namespace guildutils
         {
             // load the pattern in case it was set by another server (and this server did not set it)
             pattern = serverutils::GetServerVar("[GUILD]pattern");
+
             charutils::ClearCharVarFromAll("[GUILD]daily_points", true);
         }
 

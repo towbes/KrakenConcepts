@@ -9,14 +9,14 @@ entity.onTrade = function(player, npc, trade)
 end
 
 entity.onTimeTrigger = function(npc, triggerID)
-    local timer = npc:getLocalVar("timer")
+    local timer = npc:getLocalVar('timer')
 
     if npc:getAnimation() == 8 and os.time() >= timer then
         npc:setAnimation(9)
-        npc:setLocalVar("timer", os.time() + 10)
+        npc:setLocalVar('timer', os.time() + 10)
     elseif os.time() >= timer then
         npc:setAnimation(8)
-        npc:setLocalVar("timer", os.time() + 10)
+        npc:setLocalVar('timer', os.time() + 10)
     end
 end
 

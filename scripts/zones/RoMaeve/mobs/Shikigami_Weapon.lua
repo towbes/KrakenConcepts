@@ -2,9 +2,6 @@
 -- Area: RoMaeve
 --   NM: Shikigami Weapon
 -----------------------------------
-require("scripts/globals/pathfind")
-require("scripts/globals/regimes")
------------------------------------
 local entity = {}
 
 local pathNodes =
@@ -43,7 +40,7 @@ local pathNodes =
 }
 
 entity.onMobInitialize = function(mob)
-    mob:setMod(xi.mod.REGEN, 5) -- "Has a minor Auto Regen effect"
+    mob:setMod(xi.mod.REGEN, 5) -- 'Has a minor Auto Regen effect'
 end
 
 entity.onMobSpawn = function(mob)

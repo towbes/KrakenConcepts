@@ -2,11 +2,6 @@
 -- Custom Clamming
 -----------------------------------
 require("modules/module_utils")
-require("scripts/globals/helm")
-require("scripts/globals/zone")
-require("scripts/globals/items")
-require("scripts/globals/status")
-require("scripts/globals/keyitems")
 require("scripts/globals/npc_util")
 local customUtil = require("modules/custom/lua/custom_util")
 -----------------------------------

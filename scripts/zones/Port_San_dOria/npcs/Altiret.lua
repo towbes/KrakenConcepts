@@ -1,7 +1,7 @@
 -----------------------------------
 -- Area: Port San d'Oria
 --  NPC: Altiret
--- NPC for Quest "The Pickpocket"
+-- NPC for Quest 'The Pickpocket'
 -- !pos 21.263 -3.999 -65.776 232
 -----------------------------------
 local entity = {}

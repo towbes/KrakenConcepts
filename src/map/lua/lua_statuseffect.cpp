@@ -22,8 +22,8 @@
 #include "common/logging.h"
 #include "common/timer.h"
 
-#include "../status_effect.h"
 #include "lua_statuseffect.h"
+#include "status_effect.h"
 
 //======================================================//
 
@@ -38,7 +38,7 @@ CLuaStatusEffect::CLuaStatusEffect(CStatusEffect* StatusEffect)
 
 //======================================================//
 
-uint32 CLuaStatusEffect::getType()
+uint32 CLuaStatusEffect::getEffectType()
 {
     return m_PLuaStatusEffect->GetStatusID();
 }
@@ -159,13 +159,6 @@ void CLuaStatusEffect::setTier(uint16 tier)
     m_PLuaStatusEffect->SetTier(tier);
 }
 
-void CLuaStatusEffect::setItemSourceID(uint16 itemSourceID)
-{
-    m_PLuaStatusEffect->SetItemSourceID(itemSourceID);
-}
-
-
-
 //======================================================//
 
 void CLuaStatusEffect::setDuration(uint32 duration)
@@ -203,19 +196,29 @@ void CLuaStatusEffect::addMod(uint16 mod, int16 amount)
 
 //======================================================//
 
-uint32 CLuaStatusEffect::getFlag()
+uint32 CLuaStatusEffect::getEffectFlags()
 {
-    return m_PLuaStatusEffect->GetFlag();
+    return m_PLuaStatusEffect->GetEffectFlags();
 }
 
-void CLuaStatusEffect::setFlag(uint32 flag)
+void CLuaStatusEffect::setEffectFlags(uint32 flags)
 {
-    m_PLuaStatusEffect->SetFlag(flag);
+    m_PLuaStatusEffect->SetEffectFlags(flags);
 }
 
-void CLuaStatusEffect::unsetFlag(uint32 flag)
+void CLuaStatusEffect::addEffectFlag(uint32 flag)
 {
-    m_PLuaStatusEffect->UnsetFlag(flag);
+    m_PLuaStatusEffect->AddEffectFlag(flag);
+}
+
+void CLuaStatusEffect::delEffectFlag(uint32 flag)
+{
+    m_PLuaStatusEffect->DelEffectFlag(flag);
+}
+
+bool CLuaStatusEffect::hasEffectFlag(uint32 flag)
+{
+    return m_PLuaStatusEffect->HasEffectFlag(flag);
 }
 
 uint16 CLuaStatusEffect::getIcon()
@@ -223,17 +226,12 @@ uint16 CLuaStatusEffect::getIcon()
     return m_PLuaStatusEffect->GetIcon();
 }
 
-uint16 CLuaStatusEffect::getItemSourceID()
-{
-    return m_PLuaStatusEffect->GetItemSourceID();
-}
-
 //======================================================//
 
 void CLuaStatusEffect::Register()
 {
     SOL_USERTYPE("CStatusEffect", CLuaStatusEffect);
-    SOL_REGISTER("getType", CLuaStatusEffect::getType);
+    SOL_REGISTER("getEffectType", CLuaStatusEffect::getEffectType);
     SOL_REGISTER("getSubType", CLuaStatusEffect::getSubType);
     SOL_REGISTER("setIcon", CLuaStatusEffect::setIcon);
     SOL_REGISTER("getPower", CLuaStatusEffect::getPower);
@@ -252,12 +250,12 @@ void CLuaStatusEffect::Register()
     SOL_REGISTER("setTier", CLuaStatusEffect::setTier);
     SOL_REGISTER("getTick", CLuaStatusEffect::getTick);
     SOL_REGISTER("setTick", CLuaStatusEffect::setTick);
-    SOL_REGISTER("getItemSourceID", CLuaStatusEffect::getItemSourceID);
-    SOL_REGISTER("setItemSourceID", CLuaStatusEffect::setItemSourceID);
     SOL_REGISTER("setStartTime", CLuaStatusEffect::setStartTime);
-    SOL_REGISTER("getFlag", CLuaStatusEffect::getFlag);
-    SOL_REGISTER("setFlag", CLuaStatusEffect::setFlag);
-    SOL_REGISTER("unsetFlag", CLuaStatusEffect::unsetFlag);
+    SOL_REGISTER("getEffectFlags", CLuaStatusEffect::getEffectFlags);
+    SOL_REGISTER("setEffectFlags", CLuaStatusEffect::setEffectFlags);
+    SOL_REGISTER("addEffectFlag", CLuaStatusEffect::addEffectFlag);
+    SOL_REGISTER("delEffectFlag", CLuaStatusEffect::delEffectFlag);
+    SOL_REGISTER("hasEffectFlag", CLuaStatusEffect::hasEffectFlag);
     SOL_REGISTER("getIcon", CLuaStatusEffect::getIcon);
 }
 

@@ -2,7 +2,7 @@
 -- Area: Halvung
 --  Mob: Troll Scrimer
 -----------------------------------
-mixins = {require("scripts/mixins/weapon_break")}
+mixins = {require('scripts/mixins/weapon_break')}
 -----------------------------------
 
 local entity = {}

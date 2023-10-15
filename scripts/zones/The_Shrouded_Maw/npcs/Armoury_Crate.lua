@@ -2,7 +2,7 @@
 -- Area: The Shrouded Maw
 --  NPC: Armoury Crate
 -----------------------------------
-require("scripts/globals/battlefield")
+require('scripts/globals/battlefield')
 -----------------------------------
 local entity = {}
 

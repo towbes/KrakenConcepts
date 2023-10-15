@@ -2,8 +2,8 @@
 -- Area: Riverne Site B01
 -- Note: Weaker version of Vrtra summoned by Bahamut during The Wyrmking Descends
 -----------------------------------
-require("scripts/globals/quests")
-require("scripts/globals/follow")
+require('scripts/globals/quests')
+require('scripts/globals/follow')
 -----------------------------------
 local entity = {}
 
@@ -37,18 +37,18 @@ entity.onMobEngaged = function(mob, target)
 end
 
 entity.onMobFight = function(mob, target)
-    local spawnTime = mob:getLocalVar("spawnTime")
-    local twohourTime = mob:getLocalVar("twohourTime")
+    local spawnTime = mob:getLocalVar('spawnTime')
+    local twohourTime = mob:getLocalVar('twohourTime')
     local threeSecTick = mob:getBattleTime() / 3
 
     if twohourTime == 0 then
         twohourTime = math.random(1, 2)
-        mob:setLocalVar("twohourTime", twohourTime)
+        mob:setLocalVar('twohourTime', twohourTime)
     end
 
     if spawnTime == 0 then
         spawnTime = math.random(3, 5)
-        mob:setLocalVar("spawnTime", spawnTime)
+        mob:setLocalVar('spawnTime', spawnTime)
     end
 
     if
@@ -56,9 +56,9 @@ entity.onMobFight = function(mob, target)
         mob:checkDistance(target) < 17 and
         mob:canUseAbilities()
     then -- Spams Charm in bv2 version every 5s
-        mob:setLocalVar("skill_tp", mob:getTP())
+        mob:setLocalVar('skill_tp', mob:getTP())
         mob:useMobAbility(710)
-        mob:setLocalVar("twohourTime", threeSecTick + math.random(1, 2))
+        mob:setLocalVar('twohourTime', threeSecTick + math.random(1, 2))
     elseif threeSecTick > spawnTime + 10 then
         local mobId = mob:getID()
 
@@ -66,14 +66,14 @@ entity.onMobFight = function(mob, target)
             local pet = GetMobByID(mobId + offset)
 
             if not pet:isSpawned() then
-                mob:entityAnimationPacket("casm")
+                mob:entityAnimationPacket('casm')
                 mob:setAutoAttackEnabled(false)
                 mob:setMagicCastingEnabled(false)
                 mob:setMobAbilityEnabled(false)
 
                 mob:timer(3000, function(mobArg)
                     if mobArg:isAlive() then
-                        mobArg:entityAnimationPacket("shsm")
+                        mobArg:entityAnimationPacket('shsm')
                         mobArg:setAutoAttackEnabled(true)
                         mobArg:setMagicCastingEnabled(true)
                         mobArg:setMobAbilityEnabled(true)
@@ -92,7 +92,7 @@ entity.onMobFight = function(mob, target)
             end
         end
 
-        mob:setLocalVar("spawnTime", threeSecTick + 4)
+        mob:setLocalVar('spawnTime', threeSecTick + 4)
     end
 end
 
@@ -103,13 +103,13 @@ end
 entity.onMobWeaponSkill = function(target, mob, skill, action)
     local skillID = skill:getID()
     if skillID == 710 then
-        mob:addTP(mob:getLocalVar("skill_tp"))
-        mob:setLocalVar("skill_tp", 0)
+        mob:addTP(mob:getLocalVar('skill_tp'))
+        mob:setLocalVar('skill_tp', 0)
     end
 end
 
 entity.onMobDeath = function(mob, player, optParams)
-    if mob:getLocalVar("deathTrigger") == 0 then
+    if mob:getLocalVar('deathTrigger') == 0 then
         -- if vrtra dies then kill all pets
         local mobId = mob:getID()
         for i, offset in ipairs(offsets) do
@@ -119,7 +119,7 @@ entity.onMobDeath = function(mob, player, optParams)
             end
         end
 
-        mob:setLocalVar("deathTrigger", 1)
+        mob:setLocalVar('deathTrigger', 1)
     end
 end
 

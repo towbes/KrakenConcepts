@@ -3,17 +3,10 @@
 -----------------------------------
 -- Perih Vashai !gotoid 17764470 / !pos 117.5 -3.7 90.453 241
 -----------------------------------
-require('scripts/globals/magic')
-require('scripts/globals/trust')
-require('scripts/globals/quests')
-require('scripts/globals/keyitems')
-require('scripts/globals/missions')
-require('scripts/globals/interaction/hidden_quest')
------------------------------------
-local woodsID = require('scripts/zones/Windurst_Woods/IDs')
+local woodsID = zones[xi.zone.WINDURST_WOODS]
 -----------------------------------
 
-local quest = HiddenQuest:new("TrustShikareeZ")
+local quest = HiddenQuest:new('TrustShikareeZ')
 
 quest.sections =
 {
@@ -21,7 +14,7 @@ quest.sections =
         check = function(player, questVars, vars)
             return not player:hasSpell(xi.magic.spell.SHIKAREE_Z) and
                 player:hasCompletedMission(xi.mission.log_id.COP, xi.mission.id.cop.THREE_PATHS) and
-                -- TODO BG WIKI States acquisition can be blocked while Shikaree Z is "out of town".
+                -- TODO BG WIKI States acquisition can be blocked while Shikaree Z is 'out of town'.
                 --      Verify which Missions this comment refers to, though likely the following:
                 --      FLAMES_IN_THE_DARKNESS, FIRE_IN_THE_EYES_OF_MEN, A_FATE_DECIDED
                 --      https://www.bg-wiki.com/ffxi/Promathia_Mission_5-3

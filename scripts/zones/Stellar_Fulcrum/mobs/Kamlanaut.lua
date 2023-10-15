@@ -3,8 +3,6 @@
 --  Mob: Kam'lanaut
 -- Zilart Mission 8 BCNM Fight
 -----------------------------------
-require("scripts/globals/titles")
------------------------------------
 local entity = {}
 
 local skillToAbsorb =
@@ -18,20 +16,20 @@ local skillToAbsorb =
 }
 
 entity.onMobSpawn = function(mob)
-    -- Add Gravity resist based off of https://www.bg-wiki.com/ffxi/Kam%27lanaut "Gravity is difficult to land without Elemental Seal".
+    -- Add Gravity resist based off of https://www.bg-wiki.com/ffxi/Kam%27lanaut 'Gravity is difficult to land without Elemental Seal'.
     mob:setMod(xi.mod.GRAVITYRES, 70)
 end
 
 entity.onMobEngaged = function(mob, target)
-    mob:setLocalVar("nextEnSkill", os.time() + 10)
+    mob:setLocalVar('nextEnSkill', os.time() + 10)
 end
 
 entity.onMobFight = function(mob, target)
-    if os.time() > mob:getLocalVar("nextEnSkill") then
+    if os.time() > mob:getLocalVar('nextEnSkill') then
         local skill = math.random(823, 828)
-        mob:setLocalVar("currentTP", mob:getTP())
+        mob:setLocalVar('currentTP', mob:getTP())
         mob:useMobAbility(skill)
-        mob:setLocalVar("nextEnSkill", os.time() + 20)
+        mob:setLocalVar('nextEnSkill', os.time() + 20)
     end
 end
 
@@ -45,18 +43,18 @@ entity.onMobWeaponSkill = function(target, mob, skill)
         -- ----------------------------------------------------------------------
 
         -- remove previous absorb mod, if set
-        local previousAbsorb = mob:getLocalVar("currentAbsorb")
+        local previousAbsorb = mob:getLocalVar('currentAbsorb')
 
         if previousAbsorb > 0 then
             mob:setMod(previousAbsorb, 0)
         end
 
         -- add new absorb mod
-        mob:setLocalVar("currentAbsorb", absorbId)
+        mob:setLocalVar('currentAbsorb', absorbId)
         mob:setMod(absorbId, 100)
 
         -- return TP
-        mob:setTP(mob:getLocalVar("currentTP"))
+        mob:setTP(mob:getLocalVar('currentTP'))
     end
 end
 

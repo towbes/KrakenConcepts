@@ -5,7 +5,7 @@
 -- TODO: Players should not be expelled from the battlefield
 -- if the bomb self-destructs.
 -----------------------------------
-local ID = require("scripts/zones/Waughroon_Shrine/IDs")
+local ID = zones[xi.zone.WAUGHROON_SHRINE]
 -----------------------------------
 
 local entity = {}
@@ -27,32 +27,32 @@ entity.onMobSpawn = function(mob)
 end
 
 entity.onMobEngaged = function(mob, target)
-    mob:setLocalVar("selfDestruct", os.time() + 60)
-    mob:setLocalVar("warning", 8)
+    mob:setLocalVar('selfDestruct', os.time() + 60)
+    mob:setLocalVar('warning', 8)
     mob:messageText(target, ID.text.BOMB_TIMER_60, false)
     mob:setAutoAttackEnabled(false)
     mob:setMobAbilityEnabled(false)
 end
 
 entity.onMobFight = function(mob, target)
-    local warning = mob:getLocalVar("warning")
+    local warning = mob:getLocalVar('warning')
 
     for k, v in pairs(timeTable) do
         if warning >= k and mob:getBattleTime() == v[1] then
             mob:messageText(target, v[2], false)
-            mob:setLocalVar("warning", warning - 1)
+            mob:setLocalVar('warning', warning - 1)
         end
     end
 
-    if os.time() > mob:getLocalVar("selfDestruct") and mob:getBattlefield():getLocalVar("control") == 0 then
-        mob:getBattlefield():setLocalVar("control", 1)
+    if os.time() > mob:getLocalVar('selfDestruct') and mob:getBattlefield():getLocalVar('control') == 0 then
+        mob:getBattlefield():setLocalVar('control', 1)
         mob:useMobAbility(256)
     end
 end
 
 entity.onMobDeath = function(mob, player, isKiller)
-    if player:getBattlefield():getLocalVar("control") == 0 then
-        player:getBattlefield():setLocalVar("lootSpawned", 0)
+    if player:getBattlefield():getLocalVar('control') == 0 then
+        player:getBattlefield():setLocalVar('lootSpawned', 0)
     end
 end
 

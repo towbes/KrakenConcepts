@@ -2,8 +2,8 @@
 -- Custom NM Example (Timed)
 -----------------------------------
 require("modules/module_utils")
-require("scripts/globals/zone")
-require("scripts/globals/items")
+
+
 local nm = require("modules/custom/custom_nm/custom_nm")
 -----------------------------------
 local m = Module:new("custom_nm_timed")
@@ -22,7 +22,7 @@ table.insert(nm.zone[id],
 
     items     =
     {
-        { nm.rate.VERY_COMMON, xi.items.HIGH_QUALITY_SCORPION_CLAW }, -- 24%
+        { nm.rate.VERY_COMMON, xi.item.HIGH_QUALITY_SCORPION_CLAW }, -- 24%
     },
 
     -- Optional

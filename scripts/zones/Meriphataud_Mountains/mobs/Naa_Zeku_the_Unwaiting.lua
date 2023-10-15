@@ -2,8 +2,6 @@
 -- Area: Meriphataud Mountains
 --   NM: Naa Zeku the Unwaiting
 -----------------------------------
-require("scripts/globals/hunts")
------------------------------------
 local entity = {}
 
 entity.onMobInitialize = function(mob)

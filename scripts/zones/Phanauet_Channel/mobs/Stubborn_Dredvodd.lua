@@ -2,7 +2,7 @@
 -- Area: Phanauet Channel (1)
 --  NM: Stubborn Dredvodd
 -----------------------------------
-mixins = { require("scripts/mixins/job_special") }
+mixins = { require('scripts/mixins/job_special') }
 -----------------------------------
 local entity = {}
 

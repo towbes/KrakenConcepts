@@ -2,18 +2,18 @@
 -- Area: The Garden of Ru'Hmet
 --  Mob: Ix'aern DRG's Wynav
 -----------------------------------
-local ID = require("scripts/zones/The_Garden_of_RuHmet/IDs")
+local ID = zones[xi.zone.THE_GARDEN_OF_RUHMET]
 -----------------------------------
 local entity = {}
 
 entity.onMobSpawn = function(mob)
-    mob:setLocalVar("hpTrigger", math.random(10, 75))
+    mob:setLocalVar('hpTrigger', math.random(10, 75))
 end
 
 entity.onMobFight = function(mob, target)
-    local hpTrigger = mob:getLocalVar("hpTrigger")
-    if mob:getLocalVar("SoulVoice") == 0 and mob:getHPP() <= hpTrigger then
-        mob:setLocalVar("SoulVoice", 1)
+    local hpTrigger = mob:getLocalVar('hpTrigger')
+    if mob:getLocalVar('SoulVoice') == 0 and mob:getHPP() <= hpTrigger then
+        mob:setLocalVar('SoulVoice', 1)
         mob:useMobAbility(696) -- Soul Voice
     end
 end
@@ -56,7 +56,7 @@ entity.onMobDeath = function(mob, player, optParams)
 end
 
 entity.onMobDespawn = function(mob)
-    mob:setLocalVar("repop", mob:getBattleTime()) -- This get erased on respawn automatic.
+    mob:setLocalVar('repop', mob:getBattleTime()) -- This get erased on respawn automatic.
 end
 
 return entity

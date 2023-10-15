@@ -2,8 +2,7 @@
 -- Area: VeLugannon Palace
 --   NM: Brigandish Blade
 -----------------------------------
-local ID = require("scripts/zones/VeLugannon_Palace/IDs")
-require("scripts/globals/mobs")
+local ID = zones[xi.zone.VELUGANNON_PALACE]
 -----------------------------------
 local entity = {}
 
@@ -13,7 +12,7 @@ end
 
 entity.onMobSpawn = function(mob)
     mob:setUnkillable(true)
-    mob:setLocalVar("killable", 0)
+    mob:setLocalVar('killable', 0)
 end
 
 entity.onAdditionalEffect = function(mob, target, damage)
@@ -21,7 +20,7 @@ entity.onAdditionalEffect = function(mob, target, damage)
 end
 
 entity.onMobFight = function(mob, target)
-    local killable = mob:getLocalVar("killable")
+    local killable = mob:getLocalVar('killable')
 
     if mob:getHPP() == 1 and mob:getMod(xi.mod.DMG) == 0 and not killable then
         mob:setMod(xi.mod.DMG,-10000)
@@ -29,7 +28,7 @@ entity.onMobFight = function(mob, target)
 end
 
 entity.onMobDeath = function(mob, player, optParams)
-    GetNPCByID(ID.npc.QM3):setLocalVar("PillarCharged", 1)
+    GetNPCByID(ID.npc.QM3):setLocalVar('PillarCharged', 1)
 end
 
 return entity

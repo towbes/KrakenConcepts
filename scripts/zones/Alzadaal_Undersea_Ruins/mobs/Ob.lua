@@ -2,7 +2,7 @@
 -- Area: Alzadaal Undersea Ruins
 --  Mob: Ob
 -----------------------------------
-mixins = { require("scripts/mixins/rage") }
+mixins = { require('scripts/mixins/rage') }
 -----------------------------------
 local entity = {}
 
@@ -13,7 +13,7 @@ local stormwalkerFrameModelId = 1994
 
 local function overloadRageDisengage(mob)
     -- Dont allow an un-rage from actual rage
-    if mob:getLocalVar("[rage]started") == 0 then
+    if mob:getLocalVar('[rage]started') == 0 then
         -- Pulled from Rage.lua - may need tweaking
         mob:delMod(xi.mod.DELAY, 2600)
         mob:delMod(xi.mod.ATTP, 60)
@@ -47,11 +47,11 @@ local function overloadRageEngage(mob)
 end
 
 local function changeToValoredge(mob, percent)
-    if(mob:getLocalVar("CurrentFrame") == valoredgeFrameModelId) then
+    if(mob:getLocalVar('CurrentFrame') == valoredgeFrameModelId) then
         return
     end
 
-    mob:setLocalVar("CurrentFrame", valoredgeFrameModelId)
+    mob:setLocalVar('CurrentFrame', valoredgeFrameModelId)
     mob:setMod(xi.mod.UDMGPHYS, -75)
     mob:setMod(xi.mod.UDMGRANGE, -75)
     mob:setMod(xi.mod.UDMGMAGIC, -50)
@@ -67,11 +67,11 @@ local function changeToValoredge(mob, percent)
 end
 
 local function changeToStormwaker(mob)
-    if(mob:getLocalVar("CurrentFrame") == stormwalkerFrameModelId) then
+    if(mob:getLocalVar('CurrentFrame') == stormwalkerFrameModelId) then
         return
     end
 
-    mob:setLocalVar("CurrentFrame", stormwalkerFrameModelId)
+    mob:setLocalVar('CurrentFrame', stormwalkerFrameModelId)
     mob:setMod(xi.mod.UDMGPHYS, 50)
     mob:setMod(xi.mod.UDMGRANGE, 50)
     mob:setMod(xi.mod.UDMGMAGIC, -75)
@@ -89,11 +89,11 @@ local function changeToStormwaker(mob)
 end
 
 local function changeToSharpshot(mob)
-    if(mob:getLocalVar("CurrentFrame") == sharpshotFrameModelId) then
+    if(mob:getLocalVar('CurrentFrame') == sharpshotFrameModelId) then
         return
     end
 
-    mob:setLocalVar("CurrentFrame", sharpshotFrameModelId)
+    mob:setLocalVar('CurrentFrame', sharpshotFrameModelId)
     mob:setMod(xi.mod.UDMGPHYS, 0)
     mob:setMod(xi.mod.UDMGRANGE, 0)
     mob:setMod(xi.mod.UDMGMAGIC, 50)
@@ -109,8 +109,8 @@ local function changeToSharpshot(mob)
 end
 
 local function setupHarlequin(mob)
-    mob:setLocalVar("CurrentFrame", harlequinFrameModelId)
-    mob:setModelId(mob:getLocalVar("CurrentFrame"))
+    mob:setLocalVar('CurrentFrame', harlequinFrameModelId)
+    mob:setModelId(mob:getLocalVar('CurrentFrame'))
     mob:setMagicCastingEnabled(true)
     mob:setMod(xi.mod.UDMGPHYS, -50)
     mob:setMod(xi.mod.UDMGRANGE, -50)
@@ -131,7 +131,7 @@ local function scanForManeuvers(mob, target, member)
     local sharpshotCount = 0
     local valoredgeCount = 0
     local stormwalkerCount = 0
-    local currentFrame = mob:getLocalVar("CurrentFrame")
+    local currentFrame = mob:getLocalVar('CurrentFrame')
 
     local overloadCount = 0
     local largestOverloadDuration = 0
@@ -148,7 +148,7 @@ local function scanForManeuvers(mob, target, member)
                     maneuversRequired = 2
                 end
 
-                -- Determine the player's "vote"
+                -- Determine the player's 'vote'
                 if (member:countEffect(xi.effect.WIND_MANEUVER) + member:countEffect(xi.effect.THUNDER_MANEUVER)) >= maneuversRequired then
                     sharpshotCount = sharpshotCount + 1
                 elseif (member:countEffect(xi.effect.FIRE_MANEUVER) + member:countEffect(xi.effect.EARTH_MANEUVER) + member:countEffect(xi.effect.LIGHT_MANEUVER)) >= maneuversRequired then
@@ -171,9 +171,9 @@ local function scanForManeuvers(mob, target, member)
     end
 
     -- [rage]started is from rage.lua - we dont need to overload rage when actually raging
-    if (overloadCount > 0 and mob:getLocalVar("OverloadRage") == 0 and mob:getLocalVar("[rage]started") == 0) then
+    if (overloadCount > 0 and mob:getLocalVar('OverloadRage') == 0 and mob:getLocalVar('[rage]started') == 0) then
          -- ya done goofed
-        mob:setLocalVar("OverloadRage", os.time() + largestOverloadDuration) -- per capture, appears to match overload time on puppetmaster.
+        mob:setLocalVar('OverloadRage', os.time() + largestOverloadDuration) -- per capture, appears to match overload time on puppetmaster.
         mob:useMobAbility(627) -- per capture
         overloadRageEngage(mob)
     end
@@ -200,7 +200,7 @@ entity.onMobInitialize = function(mob)
 end
 
 entity.onMobSpawn = function(mob)
-    mob:setLocalVar("[rage]timer", 3600) -- 60 minutes
+    mob:setLocalVar('[rage]timer', 3600) -- 60 minutes
     setupHarlequin(mob)
 end
 

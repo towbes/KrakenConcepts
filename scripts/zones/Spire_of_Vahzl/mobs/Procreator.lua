@@ -3,12 +3,12 @@
 --  Mob: Procreator
 -- TODO: Verify cmbDelay
 -----------------------------------
-mixins = { require("scripts/mixins/families/empty_terroanima") }
+mixins = { require('scripts/mixins/families/empty_terroanima') }
 -----------------------------------
 local entity = {}
 
 entity.onMobSpawn = function(mob)
-    mob:setLocalVar("maxBabies", 4)
+    mob:setLocalVar('maxBabies', 4)
     mob:setMobMod(xi.mobMod.NO_LINK, 1)
     mob:setMod(xi.mod.TRIPLE_ATTACK, 10)
     mob:setMod(xi.mod.STORETP, 100)
@@ -37,7 +37,7 @@ end
 
 entity.onMobDeath = function(mob, player, optParams)
     local momma = mob:getID()
-    for i = momma + 1, momma + mob:getLocalVar("maxBabies") do
+    for i = momma + 1, momma + mob:getLocalVar('maxBabies') do
         local baby = GetMobByID(i)
         if baby:isSpawned() then
             baby:setHP(0)

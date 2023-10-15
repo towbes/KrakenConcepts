@@ -1,13 +1,10 @@
 -----------------------------------
 -- Area: The Eldieme Necropolis [S]
 --  NPC: Turbulent Storm
--- Note: Starts Quest "The Fighting Fourth"
+-- Note: Starts Quest 'The Fighting Fourth'
 -- !pos 422.461 -48.000 175
 -----------------------------------
-local ID = require("scripts/zones/The_Eldieme_Necropolis_[S]/IDs")
-require("scripts/globals/keyitems")
-require("scripts/globals/quests")
-require("scripts/globals/missions")
+local ID = zones[xi.zone.THE_ELDIEME_NECROPOLIS_S]
 -----------------------------------
 local entity = {}
 

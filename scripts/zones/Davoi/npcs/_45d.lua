@@ -4,8 +4,7 @@
 -- Used In Quest: Whence Blows the Wind
 -- !pos 181 0.1 -218 149
 -----------------------------------
-require("scripts/globals/keyitems")
-local ID = require("scripts/zones/Davoi/IDs")
+local ID = zones[xi.zone.DAVOI]
 -----------------------------------
 local entity = {}
 

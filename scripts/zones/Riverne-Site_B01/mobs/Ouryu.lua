@@ -2,7 +2,7 @@
 -- Area: Riverne Site B01
 -- Note: Weaker version of Ouryu summoned by Bahamut during The Wyrmking Descends
 -----------------------------------
-require("scripts/globals/quests")
+require('scripts/globals/quests')
 -----------------------------------
 local entity = {}
 
@@ -12,8 +12,8 @@ entity.land = function(mob)
     -- need to deal with case of stun of touchdown
     mob:useMobAbility(1302)
     mob:setBehaviour(bit.bor(mob:getBehaviour(), xi.behavior.NO_TURN))
-    mob:setLocalVar("changeTime", mob:getBattleTime() + 120)
-    mob:setLocalVar("damageTaken", 0)
+    mob:setLocalVar('changeTime', mob:getBattleTime() + 120)
+    mob:setLocalVar('damageTaken', 0)
 end
 
 entity.flight = function(mob)
@@ -21,8 +21,8 @@ entity.flight = function(mob)
     mob:addStatusEffectEx(xi.effect.ALL_MISS, 0, 1, 0, 0)
     mob:setBehaviour(0)
     mob:setMobSkillAttack(731)
-    mob:setLocalVar("changeTime", mob:getBattleTime() + 90)
-    mob:setLocalVar("damageTaken", 0)
+    mob:setLocalVar('changeTime', mob:getBattleTime() + 90)
+    mob:setLocalVar('damageTaken', 0)
 end
 
 entity.onMobSpawn = function(mob)
@@ -58,11 +58,11 @@ entity.onMobSpawn = function(mob)
         SpawnMob(mob:getID() + i)
     end
 
-    mob:setLocalVar("twoHour", 0)
+    mob:setLocalVar('twoHour', 0)
 
-    mob:addListener("TAKE_DAMAGE", "OURYU_TAKE_DAMAGE", function(defender, amount, attacker, attackType, damageType)
-        local damageTaken = defender:getLocalVar("damageTaken") + amount
-        defender:setLocalVar("damageTaken", damageTaken)
+    mob:addListener('TAKE_DAMAGE', 'OURYU_TAKE_DAMAGE', function(defender, amount, attacker, attackType, damageType)
+        local damageTaken = defender:getLocalVar('damageTaken') + amount
+        defender:setLocalVar('damageTaken', damageTaken)
         local willKillMob = (defender:getHP() - amount) <= 0
         if damageTaken > 2500 and not willKillMob then
             if
@@ -82,14 +82,14 @@ entity.onMobSpawn = function(mob)
 end
 
 entity.onMobEngaged = function(mob, target)
-    mob:setLocalVar("twohourTime", mob:getBattleTime() + 15)
-    mob:setLocalVar("changeTime", mob:getBattleTime() + 120)
+    mob:setLocalVar('twohourTime', mob:getBattleTime() + 15)
+    mob:setLocalVar('changeTime', mob:getBattleTime() + 120)
 end
 
 entity.onMobFight = function(mob, target)
     if mob:actionQueueEmpty() then
-        local changeTime = mob:getLocalVar("changeTime")
-        local twohourTime = mob:getLocalVar("twohourTime")
+        local changeTime = mob:getLocalVar('changeTime')
+        local twohourTime = mob:getLocalVar('twohourTime')
 
         if
             mob:getBattleTime() > twohourTime and
@@ -97,7 +97,7 @@ entity.onMobFight = function(mob, target)
         then
             mob:useMobAbility(694)
             twohourTime = mob:getBattleTime() + math.random(180, 300)
-            mob:setLocalVar("twohourTime", twohourTime)
+            mob:setLocalVar('twohourTime', twohourTime)
         elseif -- subanimation 2 is grounded mode, so check if she should take off
             (mob:getAnimationSub() == 0 or mob:getAnimationSub() == 2) and
             mob:getBattleTime() > changeTime
@@ -111,9 +111,9 @@ entity.onMobFight = function(mob, target)
         end
     end
 
-    local delay = mob:getLocalVar("delay")
+    local delay = mob:getLocalVar('delay')
     if delay > 120 then -- Summon Ziryu every 60s, this is a guess until we get a capture
-        mob:setLocalVar("delay", 0)
+        mob:setLocalVar('delay', 0)
 
         local mobId = mob:getID()
         for i, offset in ipairs(offsets) do
@@ -128,7 +128,7 @@ entity.onMobFight = function(mob, target)
             end
         end
     else
-        mob:setLocalVar("delay", delay + 1)
+        mob:setLocalVar('delay', delay + 1)
     end
 
     -- Wakeup from sleep immediately if flying
@@ -146,7 +146,7 @@ end
 
 entity.onMobWeaponSkillPrepare = function(mob, target)
     if mob:getAnimationSub() == 1 then
-        mob:setLocalVar("skill_tp", mob:getTP())
+        mob:setLocalVar('skill_tp', mob:getTP())
     end
 end
 
@@ -154,18 +154,18 @@ entity.onMobWeaponSkill = function(target, mob, skill)
     -- Don't lose TP from autos during flight
     if skill:getID() == 1298 then
         mob:addTP(65) -- Needs to gain TP from flight auto attacks
-        mob:setLocalVar("skill_tp", 0)
+        mob:setLocalVar('skill_tp', 0)
     elseif skill:getID() == 1302 then
-        mob:addTP(mob:getLocalVar("skill_tp"))
-        mob:setLocalVar("skill_tp", 0)
+        mob:addTP(mob:getLocalVar('skill_tp'))
+        mob:setLocalVar('skill_tp', 0)
     end
 end
 
 entity.onMobDisengage = function(mob)
     -- reset on wipe
-    mob:setLocalVar("changeTime", 0)
-    mob:setLocalVar("twohourTime", 0)
-    mob:setLocalVar("damageTaken", 0)
+    mob:setLocalVar('changeTime', 0)
+    mob:setLocalVar('twohourTime', 0)
+    mob:setLocalVar('damageTaken', 0)
     if mob:getAnimationSub() == 1 then
         mob:setAnimationSub(0)
         mob:delStatusEffect(xi.effect.ALL_MISS)
@@ -175,7 +175,7 @@ entity.onMobDisengage = function(mob)
 end
 
 entity.onMobDeath = function(mob, player, optParams)
-    if mob:getLocalVar("deathTrigger") == 0 then
+    if mob:getLocalVar('deathTrigger') == 0 then
         -- if ouryu dies then kill all pets
         local mobId = mob:getID()
         for i, offset in ipairs(offsets) do
@@ -185,7 +185,7 @@ entity.onMobDeath = function(mob, player, optParams)
             end
         end
 
-        mob:setLocalVar("deathTrigger", 1)
+        mob:setLocalVar('deathTrigger', 1)
     end
 end
 

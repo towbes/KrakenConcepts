@@ -4,10 +4,9 @@
 --  Log ID: 3, Quest ID: 27
 --  NPC: Bluffnix:  !pos -43 6 -115 245
 -----------------------------------
-require('scripts/globals/items')
 require('scripts/quests/jeuno/helpers')
 -----------------------------------
-local lowerJeunoID = require('scripts/zones/Lower_Jeuno/IDs')
+local lowerJeunoID = zones[xi.zone.LOWER_JEUNO]
 -----------------------------------
 
 local params =
@@ -16,15 +15,15 @@ local params =
     prerequisite       = xi.quest.id.jeuno.THE_GOBBIEBAG_PART_V,
     message            = lowerJeunoID.text.INVENTORY_INCREASED,
     startInventorySize = 55,
-    fame               = 6,
-    tradeStew          = xi.items.BOWL_OF_GOBLIN_STEW_880,
+    fame               = 3,
+    tradeStew          = xi.item.BOWL_OF_GOBLIN_STEW_880,
 
     tradeItems =
     {
-        xi.items.SHAKUDO_INGOT,
-        xi.items.SQUARE_OF_BALLON_CLOTH,
-        xi.items.IOLITE,
-        xi.items.HIGH_QUALITY_EFT_SKIN,
+        xi.item.SHAKUDO_INGOT,
+        xi.item.SQUARE_OF_BALLON_CLOTH,
+        xi.item.IOLITE,
+        xi.item.HIGH_QUALITY_EFT_SKIN,
     },
 
     reward =

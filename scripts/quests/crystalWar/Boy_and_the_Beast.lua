@@ -6,18 +6,12 @@
 -- qm7         : !pos -26 -31 364
 -- Leafy Patch : !pos -418 -33 576
 -----------------------------------
-require('scripts/globals/items')
-require('scripts/globals/npc_util')
-require('scripts/globals/quests')
-require('scripts/globals/zone')
-require('scripts/globals/interaction/quest')
------------------------------------
 
 local quest = Quest:new(xi.quest.log_id.CRYSTAL_WAR, xi.quest.id.crystalWar.BOY_AND_THE_BEAST)
 
 quest.reward =
 {
-    item = xi.items.CARBON_FISHING_ROD,
+    item = xi.item.CARBON_FISHING_ROD,
 }
 
 quest.sections =
@@ -102,7 +96,7 @@ quest.sections =
                             return quest:progressEvent(109)
                         end
                     else
-                        -- NOTE: The below two events are "Nothing out of the Ordinary" events; however, Event 110
+                        -- NOTE: The below two events are 'Nothing out of the Ordinary' events; however, Event 110
                         -- is only displayed the first time in this state.  Unknown use at this time, but implemented
                         -- for accuracy.  This Option var is actually reset every time a different event from this
                         -- point fires.

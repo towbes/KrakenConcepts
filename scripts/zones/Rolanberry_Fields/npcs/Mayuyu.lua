@@ -4,9 +4,6 @@
 -- Legion NPC
 -- !pos 240 24.399 468
 -----------------------------------
-require("scripts/globals/keyitems")
-require("scripts/globals/titles")
------------------------------------
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)
@@ -25,7 +22,7 @@ entity.onEventUpdate = function(player, csid, option, npc)
 end
 
 entity.onEventFinish = function(player, csid, option, npc)
-    -- Event needs work, also the Legion Pass item is "tagged" via fields not yet implemented in core.
+    -- Event needs work, also the Legion Pass item is 'tagged' via fields not yet implemented in core.
 end
 
 return entity

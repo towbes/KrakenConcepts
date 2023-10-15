@@ -2,8 +2,8 @@
 -- Area: Riverne-Site_A01
 -- Notes: Assists Ouryu in Ouryu Cometh
 -----------------------------------
-local ID = require("scripts/zones/Riverne-Site_A01/IDs")
-require("scripts/globals/mobs")
+local ID = require('scripts/zones/Riverne-Site_A01/IDs')
+require('scripts/globals/mobs')
 -----------------------------------
 local entity = {}
 

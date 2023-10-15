@@ -24,7 +24,7 @@ entity.onTrigger = function(player, npc)
 
     -- Logic to manipulate cutscene results.
     if timer <= waiting then
-        direction = 1 -- Ship arrived, switch dialog from "arrive" to "depart"
+        direction = 1 -- Ship arrived, switch dialog from 'arrive' to 'depart'
     else
         timer = timer - waiting -- Ship hasn't arrived, subtract waiting time to get time to arrival
     end

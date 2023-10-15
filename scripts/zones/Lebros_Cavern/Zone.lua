@@ -1,9 +1,6 @@
 -----------------------------------
 -- Zone: Lebros_Cavern
 -----------------------------------
-require('scripts/zones/Lebros_Cavern/IDs')
-require('scripts/globals/zone')
------------------------------------
 local zoneObject = {}
 
 zoneObject.onInitialize = function(zone)

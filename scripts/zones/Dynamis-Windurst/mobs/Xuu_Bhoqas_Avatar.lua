@@ -4,7 +4,7 @@
 -----------------------------------
 mixins =
 {
-    -- mixins = { require("scripts/mixins/families/avatar") }
+    -- mixins = { require('scripts/mixins/families/avatar') }
 }
 -----------------------------------
 local entity = {}

@@ -1,15 +1,10 @@
 -----------------------------------
 -- Trust: Ingrid
 -----------------------------------
-require('scripts/globals/missions')
-require('scripts/globals/spell_data')
-require('scripts/globals/zone')
-require('scripts/globals/interaction/hidden_quest')
------------------------------------
-local easternAdoulinID = require('scripts/zones/Eastern_Adoulin/IDs')
+local easternAdoulinID = zones[xi.zone.EASTERN_ADOULIN]
 -----------------------------------
 
-local quest = HiddenQuest:new("TrustIngrid")
+local quest = HiddenQuest:new('TrustIngrid')
 
 quest.sections =
 {
@@ -25,7 +20,7 @@ quest.sections =
             {
                 onTrigger = function(player, npc)
                     -- TODO: These parameters may have no impact on the event, and were captured
-                    -- immediately after completing "The Merciless One" and receiving eternal flame
+                    -- immediately after completing 'The Merciless One' and receiving eternal flame
                     -- keyitem.
 
                     return quest:event(5062, 257, 0, 0, 255, 255, 4352, 1)

@@ -3,8 +3,8 @@
 --  NPC: Rendezvous Point
 -- For interacting with Adventuring Fellow
 -----------------------------------
-local ID = require("scripts/zones/RuLude_Gardens/IDs")
-require("scripts/globals/rendezvous_points")
+local ID = zones[xi.zone.RULUDE_GARDENS]
+require('scripts/globals/rendezvous_points')
 -----------------------------------
 local entity = {}
 

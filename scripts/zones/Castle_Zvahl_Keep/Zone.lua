@@ -1,10 +1,6 @@
 -----------------------------------
 -- Zone: Castle_Zvahl_Keep (162)
 -----------------------------------
-local ID = require('scripts/zones/Castle_Zvahl_Keep/IDs')
-require('scripts/globals/conquest')
-require('scripts/globals/treasure')
------------------------------------
 local zoneObject = {}
 
 zoneObject.onInitialize = function(zone)
@@ -45,7 +41,7 @@ local teleportEventsByArea =
     [3] = 1, -- Teleports player to far SE corner
     [4] = 1, -- Teleports player to far SE corner
     [5] = 5, -- Teleports player to H-7 on map 4 (south or north part, randomly)
-    [6] = 6, -- Teleports player to position "A" on map 2
+    [6] = 6, -- Teleports player to position 'A' on map 2
     [7] = 7, -- Teleports player to position G-8 on map 2
 }
 

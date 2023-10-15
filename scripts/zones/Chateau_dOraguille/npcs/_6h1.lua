@@ -4,8 +4,6 @@
 -- Starts and Finishes Quest: Prelude of Black and White (Start), Pieuje's Decision (Start)
 -- !pos -37 -3 31 233
 -----------------------------------
-require("scripts/globals/quests")
------------------------------------
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)
@@ -25,9 +23,9 @@ entity.onTrigger = function(player, npc)
         player:getSubLvl() >= xi.settings.main.AF2_QUEST_LEVEL))
     then
         if whmAf1 == QUEST_COMPLETED and whmAf2 == QUEST_AVAILABLE then
-            player:startEvent(551) -- Start Quest "Prelude of Black and White"
+            player:startEvent(551) -- Start Quest 'Prelude of Black and White'
         elseif whmAf2 == QUEST_COMPLETED and whmAf3 == QUEST_AVAILABLE then
-            player:startEvent(552) -- Start Quest "Pieuje's Decision"
+            player:startEvent(552) -- Start Quest 'Pieuje's Decision'
         end
 
     -- San d'Oria Rank 10 (new default)

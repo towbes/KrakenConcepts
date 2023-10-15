@@ -2,9 +2,8 @@
 -- Area: Caedarva Mire
 --   NM: Khimaira
 -----------------------------------
-require("scripts/globals/titles")
-require("scripts/globals/toau")
-local ID = require("scripts/zones/Caedarva_Mire/IDs")
+require('scripts/globals/toau')
+local ID = zones[xi.zone.CAEDARVA_MIRE]
 -----------------------------------
 local entity = {}
 
@@ -21,13 +20,13 @@ local drawInPos =
 }
 
 entity.onMobInitialize = function(mob)
-    xi.toau.mobSpecialHook("KHIMAIRA", mob, 1, function(mob)
+    xi.toau.mobSpecialHook('KHIMAIRA', mob, 1, function(mob)
         if mob:getAnimationSub() == 0 then
             mob:setAnimationSub(1)
         end
     end)
 
-    mob:addListener("EFFECT_LOSE", "KHIMAIRA_EFFECT_LOSE", function(owner, effect)
+    mob:addListener('EFFECT_LOSE', 'KHIMAIRA_EFFECT_LOSE', function(owner, effect)
         local effectType = effect:getType()
         if effectType == xi.effect.STUN then
             owner:addMod(xi.mod.STUNRES, 5)
@@ -45,20 +44,20 @@ entity.onMobSpawn = function(mob)
 end
 
 entity.onMobFight = function(mob, target)
-    local drawInWait = mob:getLocalVar("DrawInWait")
+    local drawInWait = mob:getLocalVar('DrawInWait')
 
     if (target:getXPos() < 814 or target:getXPos() > 865) and os.time() > drawInWait then
         local rot = target:getRotPos()
         local position = math.random(1,8)
         target:setPos(drawInPos[position][1],drawInPos[position][2],drawInPos[position][3],rot)
         mob:messageBasic(232, 0, 0, target)
-        mob:setLocalVar("DrawInWait", os.time() + 2)
+        mob:setLocalVar('DrawInWait', os.time() + 2)
     elseif (target:getZPos() < 345 or target:getZPos() > 377) and os.time() > drawInWait then
         local rot = target:getRotPos()
         local position = math.random(1,8)
         target:setPos(drawInPos[position][1],drawInPos[position][2],drawInPos[position][3],rot)
         mob:messageBasic(232, 0, 0, target)
-        mob:setLocalVar("DrawInWait", os.time() + 2)
+        mob:setLocalVar('DrawInWait', os.time() + 2)
     end
 end
 
@@ -77,7 +76,7 @@ entity.onMobDespawn = function(mob)
     local respawn = math.random(48,72)*3600 -- 48 to 72 hours in 60min windows
     --UpdateNMSpawnPoint(mob:getID())
     mob:setRespawnTime(respawn)
-	--SetServerVariable("KhimairaRespawn",(os.time() + respawn))
+	--SetServerVariable('KhimairaRespawn',(os.time() + respawn))
 end
 
 return entity

@@ -3,9 +3,9 @@
 --  Mob: Wanzo-Unzozo
 -- Type: Quest mob (Escort for Hire - Windurst)
 -----------------------------------
-require("scripts/globals/keyitems")
-require("scripts/globals/pathfind")
-require("scripts/globals/quests")
+
+require('scripts/globals/pathfind')
+require('scripts/globals/quests')
 -----------------------------------
 ID = require('scripts/zones/Garlaige_Citadel/IDs')
 -----------------------------------
@@ -77,35 +77,35 @@ end
 
 entity.onMobTrigger = function(player, mob)
     -- Begin, Wazon!
-    if player:getCharVar("quest[2][88]Prog") == 1 then
+    if player:getCharVar('quest[2][88]Prog') == 1 then
         local party = player:getParty()
 
         for _, v in ipairs(party) do
             if v:getZone() == player:getZone() then
-                v:setCharVar("quest[2][88]Prog", 2)
+                v:setCharVar('quest[2][88]Prog', 2)
             end
         end
         mob:messageText(mob, ID.text.TIME_LIMIT, 30)
-        mob:setLocalVar("run", 1)
+        mob:setLocalVar('run', 1)
     end
 
-    if player:getCharVar("quest[2][88]Prog") == 2 then
+    if player:getCharVar('quest[2][88]Prog') == 2 then
         -- Stop, Wazon!
-        if mob:getLocalVar("run") == 1 then
-            mob:setLocalVar("run", 0)
+        if mob:getLocalVar('run') == 1 then
+            mob:setLocalVar('run', 0)
             mob:messageText(mob, ID.text.WHATS_WRONG)
 
         -- Run, Wazon!
-        elseif mob:getLocalVar("run") == 0 then
-            mob:setLocalVar("run", 1)
+        elseif mob:getLocalVar('run') == 0 then
+            mob:setLocalVar('run', 1)
             mob:messageText(mob, ID.text.LETS_GO)
 
         -- We won, Wazon!
-        elseif mob:getLocalVar("win") == 1 then
+        elseif mob:getLocalVar('win') == 1 then
             mob:messageText(mob, ID.text.I_THANK_YOU)
             if not player:hasKeyItem(xi.ki.COMPLETION_CERTIFICATE) then
                 -- Setting var to 3 disallows player from interacting with this quest any further
-                player:setCharVar("quest[2][88]Prog", 3)
+                player:setCharVar('quest[2][88]Prog', 3)
                 player:giveKeyItem(player, xi.ki.COMPLETION_CERTIFICATE)
             end
         end
@@ -113,24 +113,24 @@ entity.onMobTrigger = function(player, mob)
 end
 
 entity.onMobFight = function(mob, target)
-    mob:setLocalVar("run", 0)
+    mob:setLocalVar('run', 0)
 end
 
 entity.onMobRoam = function(mob)
-    if mob:atPoint(xi.path.last(route)) and mob:getLocalVar("win") == 0 then
-        mob:setLocalVar("run", 3)
-        mob:setLocalVar("win", 1)
+    if mob:atPoint(xi.path.last(route)) and mob:getLocalVar('win') == 0 then
+        mob:setLocalVar('run', 3)
+        mob:setLocalVar('win', 1)
         mob:timer(30000, function(mobArg)
             mob:messageText(mob, ID.text.BYE_BYE)
             resetWazon(mob)
         end)
 
         -- Time up case
-        elseif mob:getZone():getLocalVar("timer") < os.time() then
+        elseif mob:getZone():getLocalVar('timer') < os.time() then
             -- resetWazon(mob)
 
         -- Run case
-        elseif mob:getLocalVar("run") == 1 then
+        elseif mob:getLocalVar('run') == 1 then
             mob:pathThrough(route, xi.path.flag.PATROL)
         end
 end

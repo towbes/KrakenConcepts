@@ -4,7 +4,7 @@
 -- Type: ENM
 -- !pos 51.530 -1 -83.940 234
 -----------------------------------
-require("scripts/globals/enm")
+require('scripts/globals/enm')
 -----------------------------------
 local entity = {}
 

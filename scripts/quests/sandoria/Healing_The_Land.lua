@@ -7,9 +7,9 @@
 require('scripts/globals/interaction/quest')
 require('scripts/globals/npc_util')
 require('scripts/globals/quests')
-require('scripts/globals/zone')
-local ID = require("scripts/zones/Northern_San_dOria/IDs")
-local ID2 = require("scripts/zones/Gusgen_Mines/IDs")
+
+local ID = zones[xi.zone.NORTHERN_SAN_DORIA]
+local ID2 = require('scripts/zones/Gusgen_Mines/IDs')
 -----------------------------------
 
 local quest = Quest:new(xi.quest.log_id.SANDORIA, xi.quest.id.sandoria.HEALING_THE_LAND)
@@ -18,7 +18,7 @@ quest.reward =
 {
     fame = 30,
     fameArea = xi.quest.fame_area.SANDORIA,
-    item = xi.items.SCROLL_OF_TELEPORT_HOLLA,
+    item = xi.item.SCROLL_OF_TELEPORT_HOLLA,
     title = xi.title.PILGRIM_TO_HOLLA,
 }
 

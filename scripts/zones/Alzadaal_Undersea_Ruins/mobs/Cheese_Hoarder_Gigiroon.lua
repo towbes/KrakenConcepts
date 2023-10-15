@@ -3,7 +3,7 @@
 --  ZNM: Cheese Hoarder Gigiroon
 -- TODO: Running around mechanic and dropping bombs
 -----------------------------------
-mixins = { require("scripts/mixins/rage") }
+mixins = { require('scripts/mixins/rage') }
 -----------------------------------
 local entity = {}
 local PathingPoints = {
@@ -30,11 +30,11 @@ local function pickStartingRunPoint(mob)
     -- this position based choice route allows him to get back on track for most cases
     local mobPos = mob:getPos()
     if (mobPos.x > -120 and mobPos.x < -72 and mobPos.z <= 20 and mobPos.z > -29) then
-        mob:setLocalVar("RunDestination", 15)
+        mob:setLocalVar('RunDestination', 15)
     elseif (mobPos.x > -120 and mobPos.x < -72 and mobPos.z <= 68 and mobPos.z > 20) then
-        mob:setLocalVar("RunDestination", 16)
+        mob:setLocalVar('RunDestination', 16)
     else
-        mob:setLocalVar("RunDestination", math.random(1,14))
+        mob:setLocalVar('RunDestination', math.random(1,14))
     end
 end
 
@@ -66,37 +66,37 @@ local function spawnMine(cheese)
     SpawnMob(mine:getID())
 
     -- Cheese has 2 run modes
-    if (cheese:getLocalVar("RunType") == 1) then
+    if (cheese:getLocalVar('RunType') == 1) then
         -- shorter run with 500 dmg mines being planted
-        mine:setLocalVar("MineDamage", 500)
+        mine:setLocalVar('MineDamage', 500)
     else
         -- longer run with faster dropping of 100 dmg mines
-        mine:setLocalVar("MineDamage", 100)
+        mine:setLocalVar('MineDamage', 100)
     end
 
     
 end
 
 local function runForIt(mob)
-    local destination = mob:getLocalVar("RunDestination")
+    local destination = mob:getLocalVar('RunDestination')
     mob:pathTo(PathingPoints[destination].x, PathingPoints[destination].y, PathingPoints[destination].z, 9)
 
     -- captures show him alternating north/south via offsets in the middle hallway
     if (mob:checkDistance(PathingPoints[destination]) <= 2) then
         if (destination == 7 or destination == 8) then
-            if (mob:getLocalVar("PrevRunDest") < 7) then
-                mob:setLocalVar("RunDestination", math.random(9, 14))
+            if (mob:getLocalVar('PrevRunDest') < 7) then
+                mob:setLocalVar('RunDestination', math.random(9, 14))
             else
-                mob:setLocalVar("RunDestination", math.random(1, 6))
+                mob:setLocalVar('RunDestination', math.random(1, 6))
             end
         elseif (destination == 15) then
-            mob:setLocalVar("RunDestination", math.random(9, 14))
+            mob:setLocalVar('RunDestination', math.random(9, 14))
         elseif (destination == 16) then
-            mob:setLocalVar("RunDestination", math.random(1, 6))
+            mob:setLocalVar('RunDestination', math.random(1, 6))
         else 
-            mob:setLocalVar("RunDestination", math.random(7, 8))
+            mob:setLocalVar('RunDestination', math.random(7, 8))
         end
-        mob:setLocalVar("PrevRunDest", destination)
+        mob:setLocalVar('PrevRunDest', destination)
     end
 
 end
@@ -110,44 +110,44 @@ entity.onMobInitialize = function(mob)
 end
 
 entity.onMobEngaged = function(mob, target)
-    mob:setLocalVar("TimeToRun", os.time() + 10) -- Cheese runs 3 mins after engaging.  Not hp% based (capture has him in the single digits before running)
+    mob:setLocalVar('TimeToRun', os.time() + 10) -- Cheese runs 3 mins after engaging.  Not hp% based (capture has him in the single digits before running)
 end
 
 entity.onMobSpawn = function(mob)
-    mob:setLocalVar("[rage]timer", 3600) -- 60 minutes
+    mob:setLocalVar('[rage]timer', 3600) -- 60 minutes
     mob:setMod(xi.mod.ATT, 400)
 end
 
 entity.onMobFight = function(mob, target)
     local now = os.time()
-    if (mob:getLocalVar("RunType") == 0) then -- not running
-        if (now > mob:getLocalVar("TimeToRun")) then
+    if (mob:getLocalVar('RunType') == 0) then -- not running
+        if (now > mob:getLocalVar('TimeToRun')) then
             -- initiate a run
             local runType = math.random(1,2)
-            mob:setLocalVar("RunType", runType)
-            mob:setLocalVar("MineTime", now)
+            mob:setLocalVar('RunType', runType)
+            mob:setLocalVar('MineTime', now)
             mob:setMod(xi.mod.MOVE, 40)
 
             pickStartingRunPoint(mob)
 
             if (runType == 1) then
-                mob:setLocalVar("MineDelay", 12)
-                mob:setLocalVar("TimeToStop", now + math.random(45, 60))
+                mob:setLocalVar('MineDelay', 12)
+                mob:setLocalVar('TimeToStop', now + math.random(45, 60))
             else
-                mob:setLocalVar("MineDelay", 1)
-                mob:setLocalVar("TimeToStop", now + math.random(105, 120))
+                mob:setLocalVar('MineDelay', 1)
+                mob:setLocalVar('TimeToStop', now + math.random(105, 120))
             end
         end
     else -- running
-        if (now > mob:getLocalVar("TimeToStop")) then
+        if (now > mob:getLocalVar('TimeToStop')) then
             -- done running for now
-            mob:setLocalVar("RunType", 0)
-            mob:setLocalVar("TimeToRun", now + math.random(90,120))
+            mob:setLocalVar('RunType', 0)
+            mob:setLocalVar('TimeToRun', now + math.random(90,120))
             mob:setMod(xi.mod.MOVE, 1)
         else
-            if (now > mob:getLocalVar("MineTime")) then
+            if (now > mob:getLocalVar('MineTime')) then
                 spawnMine(mob)
-                mob:setLocalVar("MineTime", now + mob:getLocalVar("MineDelay"))
+                mob:setLocalVar('MineTime', now + mob:getLocalVar('MineDelay'))
             end
             runForIt(mob)
         end

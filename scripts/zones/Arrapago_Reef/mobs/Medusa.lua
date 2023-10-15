@@ -4,15 +4,14 @@
 -- !pos -458 -20 458
 -- TODO: resists, attack/def boosts
 -----------------------------------
-local ID = require("scripts/zones/Arrapago_Reef/IDs")
-mixins = { require("scripts/mixins/job_special") }
-require("scripts/globals/titles")
+local ID = zones[xi.zone.ARRAPAGO_REEF]
+mixins = { require('scripts/mixins/job_special') }
 -----------------------------------
 local entity = {}
 
 entity.onMobSpawn = function(mob)
     xi.mix.jobSpecial.config(mob, {
-        chance = 75, -- "Is possible that she will not use Eagle Eye Shot at all." (guessing 75 percent)
+        chance = 75, -- 'Is possible that she will not use Eagle Eye Shot at all.' (guessing 75 percent)
         specials =
         {
             { id = xi.jsa.EES_LAMIA, hpp = math.random(5, 99) },

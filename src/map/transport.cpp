@@ -21,7 +21,7 @@
 
 #include "transport.h"
 
-#include "../common/timer.h"
+#include "common/timer.h"
 #include "common/vana_time.h"
 
 #include <cstdlib>
@@ -32,7 +32,6 @@
 #include "packets/event.h"
 #include "utils/zoneutils.h"
 #include "zone.h"
-
 
 std::unique_ptr<CTransportHandler> CTransportHandler::_instance;
 
@@ -82,7 +81,7 @@ void Transport_Ship::setName(uint32 value) const
 
 void TransportZone_Town::updateShip() const
 {
-    this->ship.dock.zone->UpdateEntityPacket(this->ship.npc, ENTITY_UPDATE, UPDATE_POS, true);
+    this->ship.dock.zone->UpdateEntityPacket(this->ship.npc, ENTITY_UPDATE, UPDATE_COMBAT, true);
 }
 
 void TransportZone_Town::openDoor(bool sendPacket) const
@@ -184,9 +183,8 @@ void CTransportHandler::InitializeTransport()
             zoneTown.ship.timeVoyageStart = zoneTown.ship.timeDepartDock + (uint16)sql->GetIntData(15) - 1;
 
             zoneTown.ship.npc->animPath = (uint8)sql->GetIntData(16);
-
-            zoneTown.ship.origin.p = zoneTown.ship.npc->loc.p;
-            zoneTown.ship.state    = STATE_TRANSPORT_INIT;
+            zoneTown.ship.origin.p      = zoneTown.ship.npc->loc.p;
+            zoneTown.ship.state         = STATE_TRANSPORT_INIT;
             zoneTown.ship.setVisible(false);
             zoneTown.closeDoor(false);
 
@@ -201,7 +199,7 @@ void CTransportHandler::InitializeTransport()
                 continue;
             }
 
-            townZoneList.push_back(zoneTown);
+            townZoneList.emplace_back(zoneTown);
         }
     }
 
@@ -216,7 +214,7 @@ void CTransportHandler::InitializeTransport()
     {
         while (sql->NextRow() == SQL_SUCCESS)
         {
-            TransportZone_Voyage voyageZone;
+            TransportZone_Voyage voyageZone{};
 
             voyageZone.voyageZone = nullptr;
             voyageZone.voyageZone = zoneutils::GetZone((uint8)sql->GetUIntData(0));
@@ -232,7 +230,7 @@ void CTransportHandler::InitializeTransport()
 
                 voyageZone.state = STATE_TRANSPORTZONE_INIT;
 
-                voyageZoneList.push_back(voyageZone);
+                voyageZoneList.emplace_back(voyageZone);
             }
             else
             {
@@ -307,7 +305,6 @@ void CTransportHandler::TransportTimer()
                 townZone->ship.state    = STATE_TRANSPORT_AWAY;
                 townZone->ship.npc->loc = townZone->ship.origin;
                 townZone->ship.setVisible(false);
-
                 townZone->updateShip();
             }
         }
@@ -361,7 +358,6 @@ void CTransportHandler::TransportTimer()
         {
             int    zoneOffset = 3;
             ZONEID zoneId     = zoneIterator->voyageZone->GetID();
-
             if (zoneId == ZONE_BASTOK_JEUNO_AIRSHIP ||
                 zoneId == ZONE_WINDURST_JEUNO_AIRSHIP ||
                 zoneId == ZONE_SAN_DORIA_JEUNO_AIRSHIP ||
@@ -369,7 +365,6 @@ void CTransportHandler::TransportTimer()
             {
                 zoneOffset = -3;
             }
-
             if (shipTimerOffset < zoneIterator->timeVoyageStart && shipTimerOffset > zoneIterator->timeArriveDock - zoneOffset)
             {
                 zoneIterator->state = STATE_TRANSPORTZONE_EVICT;
@@ -391,9 +386,7 @@ void CTransportHandler::TransportTimer()
                 zoneIterator->state = STATE_TRANSPORTZONE_DOCKED;
                 // set zone animation parameters
                 ZONEID zoneId = zoneIterator->voyageZone->GetID();
-
                 zoneIterator->voyageZone->SetZoneAnimStartTime(CVanaTime::getInstance()->getVanaTime());
-
                 if (zoneId == ZONE_SHIP_BOUND_FOR_MHAURA ||
                     zoneId == ZONE_SHIP_BOUND_FOR_MHAURA_PIRATES ||
                     zoneId == ZONE_SHIP_BOUND_FOR_SELBINA ||
@@ -408,7 +401,6 @@ void CTransportHandler::TransportTimer()
                 {
                     uint32 hour = CVanaTime::getInstance()->getHour();
                     zoneIterator->voyageZone->SetZoneAnimLength(310);
-
                     if (zoneId == ZONE_BASTOK_JEUNO_AIRSHIP && (hour == 1 || hour == 7 || hour == 13 || hour == 19))
                     {
                         zoneIterator->voyageZone->SetZoneDirection(4);
@@ -613,7 +605,7 @@ void CTransportHandler::insertElevator(Elevator_t elevator)
     elevator.LowerDoor->animation = (elevator.state == STATE_ELEVATOR_TOP) ? ANIMATION_CLOSE_DOOR : ANIMATION_OPEN_DOOR;
     elevator.UpperDoor->animation = (elevator.state == STATE_ELEVATOR_TOP) ? ANIMATION_OPEN_DOOR : ANIMATION_CLOSE_DOOR;
 
-    ElevatorList.push_back(elevator);
+    ElevatorList.emplace_back(elevator);
 }
 
 /************************************************************************

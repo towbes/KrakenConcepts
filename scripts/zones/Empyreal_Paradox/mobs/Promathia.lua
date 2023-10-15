@@ -3,8 +3,7 @@
 --  Mob: Promathia
 -- Note: Phase 1
 -----------------------------------
-local ID = require("scripts/zones/Empyreal_Paradox/IDs")
-require("scripts/globals/titles")
+local ID = zones[xi.zone.EMPYREAL_PARADOX]
 -----------------------------------
 local entity = {}
 
@@ -33,18 +32,18 @@ end
 entity.onMobEngaged = function(mob, target)
     local bcnmAllies = mob:getBattlefield():getAllies()
     for i, v in pairs(bcnmAllies) do
-        if v:getName() == "Prishe" then
+        if v:getName() == 'Prishe' then
             if not v:getTarget() then
-                v:entityAnimationPacket("prov")
+                v:entityAnimationPacket('prov')
                 v:showText(v, ID.text.PRISHE_TEXT)
-                v:setLocalVar("ready", mob:getID())
+                v:setLocalVar('ready', mob:getID())
             end
         else
             v:addEnmity(mob, 0, 1)
         end
     end
 
-    mob:setLocalVar("spellWait", os.time() + 50)
+    mob:setLocalVar('spellWait', os.time() + 50)
 end
 
 entity.onMobFight = function(mob, target)
@@ -62,11 +61,11 @@ entity.onMobFight = function(mob, target)
     end
 
     -- Uses a Chains TP move every 10% health
-    local chainsTrigger = mob:getLocalVar("chainsTrigger")
-    local chainsUsed = mob:getLocalVar("chainsUsed")
+    local chainsTrigger = mob:getLocalVar('chainsTrigger')
+    local chainsUsed = mob:getLocalVar('chainsUsed')
     for i = 1, #percents do
         if mob:getHPP() < percents[i] and chainsTrigger < i then
-            mob:setLocalVar("chainsTrigger", chainsTrigger + 1)
+            mob:setLocalVar('chainsTrigger', chainsTrigger + 1)
         end
     end
 
@@ -90,17 +89,17 @@ entity.onMobFight = function(mob, target)
         end
 
         local move = math.random(1, #chains)
-        mob:setLocalVar("mobTP", mob:getTP())
-        mob:setLocalVar("tpMessage", 0)
+        mob:setLocalVar('mobTP', mob:getTP())
+        mob:setLocalVar('tpMessage', 0)
         mob:useMobAbility(chains[move][1])
-        mob:setLocalVar("chainsUsed", chainsUsed + 1)
+        mob:setLocalVar('chainsUsed', chainsUsed + 1)
     end
 
     -- Uses Comet every minute
-    local spellWait = mob:getLocalVar("spellWait")
+    local spellWait = mob:getLocalVar('spellWait')
     if os.time() > spellWait and mob:canUseAbilities() then
         mob:castSpell(219, target)
-        mob:setLocalVar("spellWait", os.time() + 66)
+        mob:setLocalVar('spellWait', os.time() + 66)
     end
 end
 
@@ -111,8 +110,8 @@ entity.onSpellPrecast = function(mob, spell)
 end
 
 entity.onMobWeaponSkill = function(target, mob, skill)
-    local mobTP = mob:getLocalVar("mobTP")
-    local tpMessage = mob:getLocalVar("tpMessage")
+    local mobTP = mob:getLocalVar('mobTP')
+    local tpMessage = mob:getLocalVar('tpMessage')
     local tpMoves =
     {
         { 1491, 0 },
@@ -126,7 +125,7 @@ entity.onMobWeaponSkill = function(target, mob, skill)
         if skill:getID() == tp[1] then
             if tpMessage == 0 then
                 mob:showText(mob, ID.text.PROMATHIA_TEXT + tp[2])
-                mob:setLocalVar("tpMessage", 1)
+                mob:setLocalVar('tpMessage', 1)
             end
 
             mob:setTP(mobTP)

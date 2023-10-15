@@ -1,9 +1,9 @@
 -----------------------------------
 -- Area: Caedarva Mire
 --   NM: Moshdahn
--- Note: Spawned during quest: "Not Meant to Be"
+-- Note: Spawned during quest: 'Not Meant to Be'
 -----------------------------------
-mixins = { require("scripts/mixins/families/qutrub") }
+mixins = { require('scripts/mixins/families/qutrub') }
 -----------------------------------
 local entity = {}
 

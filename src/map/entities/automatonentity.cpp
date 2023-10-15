@@ -20,20 +20,20 @@
 */
 
 #include "automatonentity.h"
-#include "../ai/ai_container.h"
-#include "../ai/controllers/automaton_controller.h"
-#include "../ai/states/magic_state.h"
-#include "../ai/states/mobskill_state.h"
-#include "../mob_modifier.h"
-#include "../packets/action.h"
-#include "../packets/char_job_extra.h"
-#include "../packets/entity_update.h"
-#include "../packets/pet_sync.h"
-#include "../recast_container.h"
-#include "../status_effect_container.h"
-#include "../utils/mobutils.h"
-#include "../utils/puppetutils.h"
+#include "ai/ai_container.h"
+#include "ai/controllers/automaton_controller.h"
+#include "ai/states/magic_state.h"
+#include "ai/states/mobskill_state.h"
 #include "common/utils.h"
+#include "mob_modifier.h"
+#include "packets/action.h"
+#include "packets/char_job_extra.h"
+#include "packets/entity_update.h"
+#include "packets/pet_sync.h"
+#include "recast_container.h"
+#include "status_effect_container.h"
+#include "utils/mobutils.h"
+#include "utils/puppetutils.h"
 
 CAutomatonEntity::CAutomatonEntity()
 : CPetEntity(PET_TYPE::AUTOMATON)
@@ -154,9 +154,6 @@ void CAutomatonEntity::setBurdenArray(std::array<uint8, 8> burdenArray)
 
 uint8 CAutomatonEntity::addBurden(uint8 element, int8 burden)
 {
-    if (!element) // fire
-        burden = (int8)((int16)burden * (100 + this->getMod(Mod::FIRE_BURDEN_PERC_EXTRA)) / 100);
-
     // Handle Kenkonken Suppress Overload
     if (PMaster->getMod(Mod::SUPPRESS_OVERLOAD) > 0)
     {
@@ -197,6 +194,7 @@ void CAutomatonEntity::PostTick()
     {
         if (PMaster && PMaster->objtype == TYPE_PC)
         {
+            // ((CCharEntity*)PMaster)->pushPacket(new CCharJobExtraPacket((CCharEntity*)PMaster, PMaster->GetMJob() == JOB_PUP));
             ((CCharEntity*)PMaster)->pushPacket(new CCharJobExtraPacket((CCharEntity*)PMaster, PMaster->GetMJob() == JOB_PUP || PMaster->GetSJob() == JOB_PUP));
         }
     }

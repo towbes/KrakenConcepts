@@ -6,13 +6,13 @@
 -- Pradiulot !pos -20.814 -22 8.399 26
 -- ???       !pos 110.714 -40.856 -53.154 26
 -----------------------------------
-require('scripts/globals/keyitems')
+
 require('scripts/globals/npc_util')
 require('scripts/globals/quests')
-require('scripts/globals/zone')
+
 require('scripts/globals/interaction/quest')
 -----------------------------------
-local ID = require("scripts/zones/Tavnazian_Safehold/IDs")
+local ID = zones[xi.zone.TAVNAZIAN_SAFEHOLD]
 -----------------------------------
 local quest = Quest:new(xi.quest.log_id.OTHER_AREAS, xi.quest.id.otherAreas.UNFORGIVEN)
 

@@ -1,11 +1,7 @@
 -----------------------------------
 -- Zone: Mhaura (249)
 -----------------------------------
-local ID = require('scripts/zones/Mhaura/IDs')
-require('scripts/globals/conquest')
-require('scripts/globals/keyitems')
-require('scripts/globals/missions')
-require('scripts/globals/zone')
+local ID = zones[xi.zone.MHAURA]
 -----------------------------------
 local zoneObject = {}
 
@@ -20,11 +16,11 @@ zoneObject.onGameHour = function(zone)
         GetNPCByID(ID.npc.LAUGHING_BISON):setAnimationSub(0)
     end
 
-    SetServerVariable("Mhaura_Destination", math.random(0, 100))
+    SetServerVariable('Mhaura_Destination', math.random(0, 100))
 end
 
 zoneObject.onInitialize = function(zone)
-    SetExplorerMoogles(ID.npc.EXPLORER_MOOGLE)
+    xi.server.setExplorerMoogles(ID.npc.EXPLORER_MOOGLE)
 end
 
 zoneObject.onZoneIn = function(player, prevZone)
@@ -85,7 +81,7 @@ zoneObject.onEventFinish = function(player, csid, option, npc)
         local DepartureTime = VanadielHour()
 
         if DepartureTime % 8 == 0 then
-            if GetServerVariable("Mhaura_Destination") >= 89 then
+            if GetServerVariable('Mhaura_Destination') >= 89 then
                 player:setPos(0, 0, 0, 0, xi.zone.SHIP_BOUND_FOR_SELBINA_PIRATES)
             else
                 player:setPos(0, 0, 0, 0, xi.zone.SHIP_BOUND_FOR_SELBINA)

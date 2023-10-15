@@ -2,7 +2,7 @@
 -- Area: Full Moon Fountain
 --  NPC: Moon Spiral
 -----------------------------------
-require("scripts/globals/bcnm")
+require('scripts/globals/bcnm')
 -----------------------------------
 local entity = {}
 

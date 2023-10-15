@@ -3,11 +3,11 @@
 -- Mob: Princess Jelly
 -- Author: Setzor (ported to LSB by dallano)
 -----------------------------------
-local ID = require("scripts/zones/Waughroon_Shrine/IDs")
-require("scripts/globals/pathfind")
-require("scripts/globals/utils")
-require("scripts/globals/spell_data")
-require("scripts/globals/settings")
+local ID = zones[xi.zone.WAUGHROON_SHRINE]
+require('scripts/globals/pathfind')
+require('scripts/globals/utils')
+
+
 -----------------------------------
 local elementalSpells =
 {

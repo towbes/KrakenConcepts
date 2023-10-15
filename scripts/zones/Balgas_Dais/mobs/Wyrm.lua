@@ -20,7 +20,7 @@ entity.onMobSpawn = function(mob)
     mob:SetMobSkillAttack(0) -- resetting so it doesn't respawn in flight mode.
     mob:setAnimationSub(0) -- subanim 0 is only used when it spawns until first flight.
     mob:setTP(3000) -- opens fight with a skill
-    mob:setLocalVar("state", 0)
+    mob:setLocalVar('state', 0)
     grounded(mob)
 end
 
@@ -30,7 +30,7 @@ entity.onMobEngaged = function(mob, target)
 end
 
 entity.onMobFight = function(mob, target)
-    local state = mob:getLocalVar("state")
+    local state = mob:getLocalVar('state')
 
     if state == 1 then -- Path to center of arena and fly
         local spawn = mob:getSpawnPos()
@@ -41,7 +41,7 @@ entity.onMobFight = function(mob, target)
 
         local distance = math.sqrt(math.pow(diffX, 2) + math.pow(diffY, 2) + math.pow(diffZ, 2))
         if distance < 3 then
-            mob:setLocalVar("state", 2) -- fly state
+            mob:setLocalVar('state', 2) -- fly state
             mob:setBehaviour(0)
             mob:setAnimationSub(1)
             mob:setMobMod(xi.mobMod.NO_MOVE, 1)
@@ -59,10 +59,10 @@ entity.onMobFight = function(mob, target)
         if mob:getAnimationSub() == 0 and mob:getHPP() <= 66 and state == 0 then
             local spawn = mob:getSpawnPos()
             mob:pathTo(spawn.x , spawn.y, spawn.z)
-            mob:setLocalVar("state", 1) -- moving to spawn
+            mob:setLocalVar('state', 1) -- moving to spawn
         -- Land @ 33%
         elseif mob:getAnimationSub() == 1 and mob:getHPP() <= 33 and state == 2 then
-            mob:setLocalVar("state", 3) -- final state
+            mob:setLocalVar('state', 3) -- final state
             mob:useMobAbility(954)
             grounded(mob)
             mob:addStatusEffect(xi.effect.EVASION_BOOST, 50, 0, 0)

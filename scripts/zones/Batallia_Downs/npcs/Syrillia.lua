@@ -1,10 +1,8 @@
 -----------------------------------
 -- Area: Batallia Downs
 --  NPC: Syrillia
--- Involved in quest "Full Speed Ahead"
+-- Involved in quest 'Full Speed Ahead'
 -- !pos -512.4 -16 207.160 105
------------------------------------
-local ID = require("scripts/zones/Batallia_Downs/IDs")
 -----------------------------------
 local entity = {}
 

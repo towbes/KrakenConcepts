@@ -2,9 +2,8 @@
 -- Area: Batallia Downs (105)
 --   NM: Lumber Jack
 -----------------------------------
-mixins = { require("scripts/mixins/job_special") }
-local ID = require('scripts/zones/Batallia_Downs/IDs')
-require("scripts/globals/mobs")
+mixins = { require('scripts/mixins/job_special') }
+local ID = zones[xi.zone.BATALLIA_DOWNS]
 -----------------------------------
 local entity = {}
 
@@ -24,17 +23,17 @@ entity.onAdditionalEffect = function(mob, target, damage)
 end
 
 entity.onMobDeath = function(mob, player, optParams)
-    mob:setLocalVar("death", 1)
+    mob:setLocalVar('death', 1)
 end
 
 entity.onMobDespawn = function(mob)
-    local lumberDeath = mob:getLocalVar("death")
+    local lumberDeath = mob:getLocalVar('death')
 
     if lumberDeath == 1 then
         -- Lumber Jack died, Set Weeping Willow's proper respawn
         xi.mob.nmTODPersist(GetMobByID(ID.mob.WEEPING_WILLOW), math.random(75600, 86400)) -- 21 to 24 hours
         DisallowRespawn(ID.mob.WEEPING_WILLOW, false)
-        mob:setLocalVar("death", 0)
+        mob:setLocalVar('death', 0)
     else
         -- Lumber Jack idle despawned, set Weeping Willow quicker respawn
         xi.mob.nmTODPersist(ID.mob.WEEPING_WILLOW, 1800) -- 30 minutes

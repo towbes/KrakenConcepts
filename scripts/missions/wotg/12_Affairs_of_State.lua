@@ -6,11 +6,6 @@
 -- Velda-Galda : !pos 138.631 -2.112 61.658 94
 -- Radford     : !pos -205.303 -8.000 26.874 87
 -----------------------------------
-require('scripts/globals/keyitems')
-require('scripts/globals/missions')
-require('scripts/globals/interaction/mission')
-require('scripts/globals/zone')
------------------------------------
 
 local mission = Mission:new(xi.mission.log_id.WOTG, xi.mission.id.wotg.AFFAIRS_OF_STATE)
 
@@ -90,7 +85,7 @@ mission.sections =
                         return mission:progressEvent(180, 94, 7)
                     else
                         -- Progress
-                        -- NOTE: Args trigger the "handing over the letter" end part of the CS
+                        -- NOTE: Args trigger the 'handing over the letter' end part of the CS
                         -- Observed : 1, 0, 1, 324953715, 58062326, 21829264, 4095, 196678
                         return mission:progressEvent(179, player:getCampaignAllegiance(), 0, 1)
                     end
@@ -116,7 +111,7 @@ mission.sections =
                         return mission:progressEvent(177, 87, 55, 0, 0, 0, 0, 1, 4095)
                     else
                         -- Progress
-                        -- NOTE: Args trigger the "handing over the letter" end part of the CS
+                        -- NOTE: Args trigger the 'handing over the letter' end part of the CS
                         return mission:progressEvent(176, 3, 75, 1, 0, 0, 0, 4095, 0)
                     end
                 end,

@@ -3,7 +3,7 @@
 --   NM: Gerwitz's Sword
 -- !pos -51 0.1 3 193
 -----------------------------------
-mixins = { require("scripts/mixins/job_special") }
+mixins = { require('scripts/mixins/job_special') }
 -----------------------------------
 local entity = {}
 

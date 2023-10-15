@@ -9,8 +9,8 @@ entity.onMobSpawn = function(mob)
 end
 
 entity.onMobEngaged = function(mob)
-    mob:setLocalVar("timer", os.time() + math.random(15, 30))
-    mob:getBattlefield():setLocalVar("undeadControl", 1)
+    mob:setLocalVar('timer', os.time() + math.random(15, 30))
+    mob:getBattlefield():setLocalVar('undeadControl', 1)
 end
 
 entity.onMobWeaponSkillPrepare = function(mob, target)
@@ -43,9 +43,9 @@ entity.onMobMagicPrepare = function(mob, target, spell)
 end
 
 entity.onMobFight = function(mob, target)
-    if mob:getLocalVar("timer") < os.time() then
-        mob:setLocalVar("timer", os.time() + math.random(15, 30))
-        mob:setLocalVar("addControl", 0)
+    if mob:getLocalVar('timer') < os.time() then
+        mob:setLocalVar('timer', os.time() + math.random(15, 30))
+        mob:setLocalVar('addControl', 0)
         local control = false
 
         for i = 1, 9 do

@@ -2,7 +2,7 @@
 -- Area: Port San d'Oria
 --  NPC: Portaure
 -----------------------------------
-require("scripts/quests/flyers_for_regine")
+require('scripts/quests/flyers_for_regine')
 -----------------------------------
 local entity = {}
 
@@ -11,12 +11,17 @@ entity.onTrade = function(player, npc, trade)
 end
 
 entity.onTrigger = function(player, npc)
-    local MirrorMirror = player:getQuestStatus(xi.quest.log_id.JEUNO,xi.quest.id.jeuno.MIRROR_MIRROR)
-    local MirrorMirrorProgress = player:getCharVar("[Quest]Mirror_Mirror")
+    local mirrorMirror = player:getQuestStatus(xi.quest.log_id.JEUNO, xi.quest.id.jeuno.MIRROR_MIRROR)
+    local mirrorMirrorProgress = player:getCharVar('[Quest]Mirror_Mirror')
     local fellowParam = xi.fellow_utils.getFellowParam(player)
 
-    if MirrorMirror == QUEST_ACCEPTED and MirrorMirrorProgress == 1 then
-        player:startEvent(745,0,0,0,0,0,0,0,fellowParam)
+    if
+        mirrorMirror == QUEST_ACCEPTED and
+        mirrorMirrorProgress == 1
+    then
+        player:startEvent(745, 0, 0, 0, 0, 0, 0, 0, fellowParam)
+    else
+        player:startEvent(650)
     end
 end
 
@@ -24,6 +29,9 @@ entity.onEventUpdate = function(player, csid, option, npc)
 end
 
 entity.onEventFinish = function(player, csid, option, npc)
+    if csid == 745 then
+        player:setCharVar('[Quest]Mirror_Mirror', 2)
+    end
 end
 
 return entity

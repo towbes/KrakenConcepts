@@ -1,18 +1,18 @@
-------------------------------------------------
+-----------------------------------
 --  Effect from the item Bottle of Terroanima --
-------------------------------------------------
+-----------------------------------
 
-require("scripts/globals/mixins")
+require('scripts/globals/mixins')
 
 g_mixins = g_mixins or {}
 g_mixins.families = g_mixins.families or {}
 
 local function doTerrorRun(mob)
-    local terrorStart = mob:getLocalVar("EmptyTerror")
-    local terrorDuration = mob:getLocalVar("EmptyTerrorDuration")
+    local terrorStart = mob:getLocalVar('EmptyTerror')
+    local terrorDuration = mob:getLocalVar('EmptyTerrorDuration')
     if terrorStart ~= 0 then
         if terrorStart + terrorDuration < os.time() then
-            mob:setLocalVar("EmptyTerror", 0)
+            mob:setLocalVar('EmptyTerror', 0)
             mob:setAutoAttackEnabled(true)
             mob:setMobAbilityEnabled(true)
             mob:setMagicCastingEnabled(true)
@@ -23,7 +23,7 @@ local function doTerrorRun(mob)
                 mob:setAutoAttackEnabled(false)
                 mob:setMobAbilityEnabled(false)
                 mob:setMagicCastingEnabled(false)
-                local pos = GetPlayerByID(mob:getLocalVar("EmptyTerrorUser")):getPos()
+                local pos = GetPlayerByID(mob:getLocalVar('EmptyTerrorUser')):getPos()
                 mob:pathTo(pos.x + math.random(-5, 5), pos.y, pos.z + math.random(-5, 5), 9) -- Pathflags = 9 (xi.pathflag.run, xi.pathflag.scripted)
             end
         end
@@ -31,7 +31,7 @@ local function doTerrorRun(mob)
 end
 
 g_mixins.families.empty_terroanima = function(emptyMob)
-    emptyMob:addListener("SPAWN", "EMPTY_TERROANIMA_SPAWN", function(mob)
+    emptyMob:addListener('SPAWN', 'EMPTY_TERROANIMA_SPAWN', function(mob)
         -- Prevent mob from entering a state where they can't attack
         -- if killed during the time an anima is applied to them.
         mob:setAutoAttackEnabled(true)
@@ -39,15 +39,15 @@ g_mixins.families.empty_terroanima = function(emptyMob)
         mob:setMagicCastingEnabled(true)
     end)
 
-    emptyMob:addListener("ROAM_TICK", "EMPTY_TERROANIMA_RTICK", function(mob)
+    emptyMob:addListener('ROAM_TICK', 'EMPTY_TERROANIMA_RTICK', function(mob)
         doTerrorRun(mob)
     end)
 
-    emptyMob:addListener("COMBAT_TICK", "EMPTY_TERROANIMA_CTICK", function(mob)
+    emptyMob:addListener('COMBAT_TICK', 'EMPTY_TERROANIMA_CTICK', function(mob)
         doTerrorRun(mob)
     end)
 
-    emptyMob:addListener("DEATH", "EMPTY_TERROANIMA_DEATH", function(mob)
+    emptyMob:addListener('DEATH', 'EMPTY_TERROANIMA_DEATH', function(mob)
         mob:setRoamFlags(0)
     end)
 end

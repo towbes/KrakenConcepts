@@ -5,11 +5,11 @@
 -- Belgidiveau: !pos -98 0 69 231
 -- Novalmauge : !pos 70 -24 21 167
 -----------------------------------
-require('scripts/globals/items')
-require("scripts/globals/keyitems")
+
+
 require('scripts/globals/npc_util')
 require('scripts/globals/quests')
-require("scripts/globals/status")
+
 require('scripts/globals/interaction/quest')
 -----------------------------------
 
@@ -19,7 +19,7 @@ quest.reward =
 {
     fame = 30,
     fameArea = xi.quest.fame_area.SANDORIA,
-    item = xi.items.HEAVY_AXE,
+    item = xi.item.HEAVY_AXE,
 }
 
 quest.sections =
@@ -84,7 +84,7 @@ quest.sections =
                 onTrade = function(player, npc, trade)
                     if
                         quest:getVar(player, 'Prog') == 2 and
-                        npcUtil.tradeHasExactly(trade, xi.items.DAHLIA)
+                        npcUtil.tradeHasExactly(trade, xi.item.DAHLIA)
                     then
                         return quest:progressEvent(17)
                     end

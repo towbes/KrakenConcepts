@@ -3,19 +3,19 @@
 --  NPC: ??? Used to spawn Edacious Opo-opo
 -- !pos 545.7346 0.1819 -433.2258
 -----------------------------------
-local ID = require("scripts/zones/Yhoator_Jungle/IDs")
+local ID = zones[xi.zone.YHOATOR_JUNGLE]
 -----------------------------------
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)
     local spawnChance = 0
-    if npcUtil.tradeHas(trade, 4468) then -- pamamas
+    if npcUtil.tradeHas(trade, xi.item.BUNCH_OF_PAMAMAS) then
         spawnChance = 5
-    elseif npcUtil.tradeHas(trade, 4596) then -- wild pamamas
+    elseif npcUtil.tradeHas(trade, xi.item.BUNCH_OF_WILD_PAMAMAS) then
         spawnChance = 50
     end
 
-    local cooldown = npc:getLocalVar("despawned")
+    local cooldown = npc:getLocalVar('despawned')
     if spawnChance > 0 and os.time() > cooldown then
         player:confirmTrade()
         if

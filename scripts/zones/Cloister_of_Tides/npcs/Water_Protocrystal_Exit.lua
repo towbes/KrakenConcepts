@@ -2,7 +2,7 @@
 -- Area: Cloister of Tides
 --  NPC: Water Protocrystal
 -----------------------------------
-require("scripts/globals/bcnm")
+require('scripts/globals/bcnm')
 -----------------------------------
 local entity = {}
 

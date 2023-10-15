@@ -3,8 +3,6 @@
 --  Mob: Diabolos Heart
 -- Note: Mega Boss
 -----------------------------------
-require("scripts/globals/dynamis")
------------------------------------
 local entity = {}
 entity.onMobSpawn = function(mob)
 mob:setMod(xi.mod.DMGPHYS, 5000)

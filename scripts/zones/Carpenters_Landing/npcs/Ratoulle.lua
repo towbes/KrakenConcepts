@@ -4,7 +4,7 @@
 -- Type: Phanauet Channel Barge Timekeeper
 -- !pos -133.959 -3 60.839 2
 -----------------------------------
-require("scripts/globals/barge")
+require('scripts/globals/barge')
 -----------------------------------
 local entity = {}
 local eventId = 19

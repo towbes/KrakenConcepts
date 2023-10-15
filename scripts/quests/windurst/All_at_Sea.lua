@@ -6,17 +6,17 @@
 -- Ipupu        : !pos 251.745 -5.5 35.539 115
 -----------------------------------
 require('scripts/globals/interaction/quest')
-require('scripts/globals/keyitems')
+
 require('scripts/globals/npc_util')
 require('scripts/globals/quests')
-require('scripts/globals/zone')
+
 -----------------------------------
 
 local quest = Quest:new(xi.quest.log_id.WINDURST, xi.quest.id.windurst.GLYPH_HANGER)
 
 quest.reward =
 {
-    item = xi.items.LEATHER_RING,
+    item = xi.item.LEATHER_RING,
     fame = 25,
     fameArea = xi.quest.fame_area.WINDURST,
     keyItem = xi.ki.MAP_OF_THE_HORUTOTO_RUINS,
@@ -54,11 +54,11 @@ quest.sections =
             {
                 onTrade = function(player, npc, trade)
                     if quest:getVar(player, 'Prog') == 0 then
-                        if trade:hasItemQty(xi.items.RIPPED_CAP, 1) and trade:getItemCount() == 1 then
+                        if trade:hasItemQty(xi.item.RIPPED_CAP, 1) and trade:getItemCount() == 1 then
                             return quest:progressEvent(0)
                         end
                     elseif quest:getVar(player, 'Prog') == 1 then
-                        if trade:hasItemQty(xi.items.DHALMEL_HIDE, 4) and trade:getItemCount() == 1 then
+                        if trade:hasItemQty(xi.item.DHALMEL_HIDE, 4) and trade:getItemCount() == 1 then
                             return quest:progressEvent(0)
                         end
                     end
@@ -74,7 +74,7 @@ quest.sections =
 
                 [1] = function(player, csid, option, npc)
                     player:tradeComplete()
-                    npcUtil.addItem(player, xi.items.DHALMEL_MANTLE)
+                    npcUtil.addItem(player, xi.item.DHALMEL_MANTLE)
                     quest:setVar(player, 'Prog', 2)
                 end,
             },
@@ -85,7 +85,7 @@ quest.sections =
             ['Paytah'] =
             {
                 onTrade = function(player, npc, trade)
-                    if trade:hasItemQty(xi.items.SAILORS_CAP, 1) and trade:getItemCount() == 1 then
+                    if trade:hasItemQty(xi.item.SAILORS_CAP, 1) and trade:getItemCount() == 1 then
                         return quest:progressEvent(0)
                     end
                 end,

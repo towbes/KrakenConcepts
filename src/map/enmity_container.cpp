@@ -19,8 +19,8 @@ along with this program.  If not, see http://www.gnu.org/licenses/
 ===========================================================================
 */
 
-#include "../common/logging.h"
-#include "../common/utils.h"
+#include "common/logging.h"
+#include "common/utils.h"
 
 #include "ai/ai_container.h"
 #include "alliance.h"
@@ -204,7 +204,6 @@ void CEnmityContainer::UpdateEnmity(CBattleEntity* PEntity, int32 CE, int32 VE, 
         if (initial)
         {
             CE += 200;
-            VE += 900;
         }
 
         float bonus = CalculateEnmityBonus(PEntity);
@@ -256,14 +255,6 @@ void CEnmityContainer::UpdateEnmityFromCure(CBattleEntity* PEntity, uint8 level,
     {
         return;
     }
-
-    if ((PEntity->objtype == TYPE_MOB) && (PEntity->m_OwnerID.id == 0))
-    {
-        // Don't get hate when mobs cast cures on players
-        // e.g. pixies, colibri mimics
-        return;
-    }
-
 
     int32 CE                     = 0;
     int32 VE                     = 0;

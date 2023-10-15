@@ -2,37 +2,45 @@
 -- Test My Mettle
 -----------------------------------
 -- Log ID: 4, Quest ID: 25
--- Devean        : !pos 39.858 -14.558 40.009 248
--- power_sandals : !additem 13012
+-- Devean : !pos -58 -10 6 248
+-- Jar    : !gotoname Jar
 -----------------------------------
-require('scripts/globals/items')
-require('scripts/globals/npc_util')
-require('scripts/globals/quests')
-require('scripts/globals/zone')
-require('scripts/globals/interaction/quest')
+require('scripts/quests/otherAreas/helpers')
+-----------------------------------
+local selbinaID = zones[xi.zone.SELBINA]
 -----------------------------------
 
 local quest = Quest:new(xi.quest.log_id.OTHER_AREAS, xi.quest.id.otherAreas.TEST_MY_METTLE)
 
-local function calculateHoursRemaining(player)
-    local daysPassed     = VanadielDayOfTheYear() - quest:getVar(player, 'DayStarted')
-    local hoursRemaining = quest:getVar(player, 'HoursSelected') - (VanadielHour() + daysPassed * 24) + quest:getVar(player, 'HourStarted')
+quest.reward =
+{
+    fame     = 30,
+    fameArea = xi.quest.fame_area.SELBINA_RABAO,
+}
 
-    return hoursRemaining
-end
+local betAmounts =
+{
+    [1] = 1000,
+    [2] = 500,
+    [3] = 250,
+    [4] = 100,
+}
 
-local function finishQuest(player, success)
-    -- Set quest cooldown
-    quest:setMustZone(player)
-    quest:setVar(player, 'Wait', getMidnight())
+local rewardMultiplier =
+{
+    [24] = 3.0,
+    [36] = 2.5,
+    [48] = 2.0,
+    [60] = 1.5,
+    [72] = 1.2,
+}
 
-    if success then
-        -- Gil payout and quest completed
-        npcUtil.giveCurrency(player, 'gil', quest:getVar(player, 'GilPayout'))
-        quest:complete(player)
-    else
-        -- Remove quest from player's log
-        player:delQuest(xi.quest.log_id.OTHER_AREAS, xi.quest.id.otherAreas.TEST_MY_METTLE)
+-- Event option return is the sum of bet amount and timeframe chosen.
+local function getSelectedOption(option)
+    for selectedBet = 1, 4 do
+        if option > betAmounts[selectedBet] then
+            return betAmounts[selectedBet], option - betAmounts[selectedBet]
+        end
     end
 end
 
@@ -40,59 +48,36 @@ quest.sections =
 {
     {
         check = function(player, status, vars)
-            return (status == QUEST_AVAILABLE or status == QUEST_COMPLETED) and
-                vars.Wait <= os.time() and
-                not quest:getMustZone(player) and
-                player:getMainLvl() >= 10
+            return status ~= QUEST_ACCEPTED and
+                player:getMainLvl() >= 10 and
+                player:getRank(player:getNation()) >= 2 and
+                player:getFameLevel(xi.quest.fame_area.SELBINA_RABAO) >= 2 and
+                quest:getVar(player, 'Repeat') <= os.time()
         end,
 
         [xi.zone.SELBINA] =
         {
-            ['Devean'] = quest:progressEvent(120, xi.items.POWER_SANDALS, xi.items.POWER_SANDALS, 0, 0, xi.items.FLINT_STONE, xi.items.FLINT_STONE),
+            ['Devean'] = quest:progressEvent(120, 0, xi.item.POWER_SANDALS, 0, 0, 0, xi.item.FLINT_STONE),
 
             onEventFinish =
             {
                 [120] = function(player, csid, option, npc)
-                    -- Option returns the sum of the gil option selected
-                    -- and the hour option selected, anything other than
-                    -- these combinations is invalid
-                    local possibleOptions =
-                    {
-                        124, 136, 148, 160, 172,
-                        274, 286, 298, 310, 322,
-                        524, 536, 548, 560, 572,
-                        1024, 1036, 1048, 1060, 1072,
-                    }
-                    local found = false
-                    for _, possibleOption in ipairs(possibleOptions) do
-                        if option == possibleOption then
-                            found = true
-                            break
+                    local eventCancelled = bit.rshift(option, 31) == 1 and true or false
+
+                    if not eventCancelled then
+                        local betAmount, vanaHoursRemaining = getSelectedOption(option)
+
+                        if player:getGil() >= betAmount then
+                            player:delGil(betAmount)
+
+                            -- One Vana'diel Hour is equal to 2m24s (144s)
+                            quest:setVar(player, 'Timer', os.time() + vanaHoursRemaining * 144)
+                            quest:setVar(player, 'Reward', betAmount * rewardMultiplier[vanaHoursRemaining])
+                            quest:begin(player)
+                        else
+                            return quest:messageSpecial(selbinaID.text.DONT_HAVE_ENOUGH_GIL)
                         end
                     end
-                    -- Rejected the quest at some point in the dialogue
-                    if found == false then
-                        return
-                    end
-
-                    -- Determine gil and hour options selected
-                    local gilOptions = { [1] = 100, [2] = 250, [5] = 500, [10] = 1000 }
-                    local gil = gilOptions[math.floor(option / 100)]
-                    local hours = option - gil
-
-                    -- Calculate potential payout
-                    local payoutRatios = { [24] = 3, [36] = 2.5, [48] = 2, [60] = 1.5, [72] = 1.2 }
-                    local gilPayout = payoutRatios[hours] * gil
-
-                    quest:setVar(player, 'GilPayout', gilPayout)
-                    quest:setVar(player, 'HoursSelected', hours)
-                    quest:setVar(player, 'HourStarted', VanadielHour())
-                    quest:setVar(player, 'DayStarted', VanadielDayOfTheYear())
-                    -- Remove quest from player's log if already completed
-                    if player:getQuestStatus(xi.quest.log_id.OTHER_AREAS, xi.quest.id.otherAreas.TEST_MY_METTLE) == QUEST_COMPLETED then
-                        player:delQuest(xi.quest.log_id.OTHER_AREAS, xi.quest.id.otherAreas.TEST_MY_METTLE)
-                    end
-                    quest:begin(player)
                 end,
             },
         },
@@ -108,12 +93,10 @@ quest.sections =
             ['Devean'] =
             {
                 onTrade = function(player, npc, trade)
-                    if npcUtil.tradeHasExactly(trade, xi.items.POWER_SANDALS) then
-                        player:tradeComplete()
-                        local hoursRemaining = calculateHoursRemaining(player)
+                    if npcUtil.tradeHasExactly(trade, xi.item.POWER_SANDALS) then
+                        local timeRemaining = quest:getVar(player, 'Timer') - os.time()
 
-                        if hoursRemaining > 0 then
-                            -- Quest succeeded
+                        if timeRemaining > 0 then
                             return quest:progressEvent(122)
                         else
                             -- Quest failed
@@ -123,34 +106,66 @@ quest.sections =
                 end,
 
                 onTrigger = function(player, npc)
-                    local hoursRemaining = calculateHoursRemaining(player)
+                    local timeRemaining = quest:getVar(player, 'Timer') - os.time()
 
-                    if hoursRemaining > 0 then
-                        -- Remind player how much time is remaining
-                        return quest:event(121, xi.items.POWER_SANDALS, hoursRemaining)
+                    if timeRemaining > 0 then
+                        local hoursRemaining = math.floor(timeRemaining / 144)
+
+                        return quest:event(121, xi.item.POWER_SANDALS, hoursRemaining)
+                    else
+                        if
+                            player:hasItem(xi.item.POWER_SANDALS) and
+                            quest:getVar(player, 'Option') == 0
+                        then
+                            return quest:progressEvent(125)
+                        else
+                            return quest:progressEvent(123)
+                        end
                     end
-
-                    if player:hasItem(xi.items.POWER_SANDALS) then
-                        -- Get rid of Power Sandals before reattempting
-                        return quest:event(125, xi.items.POWER_SANDALS)
-                    end
-
-                    -- Quest failed
-                    return quest:progressEvent(123)
                 end,
             },
 
             onEventFinish =
             {
                 [122] = function(player, csid, option, npc)
-                    finishQuest(player, true)
+                    local rewardedGil = quest:getVar(player, 'Reward')
+
+                    if quest:complete(player) then
+                        player:confirmTrade()
+                        npcUtil.giveCurrency(player, 'gil', rewardedGil)
+                        quest:setVar(player, 'Repeat', JstMidnight())
+                    end
                 end,
 
                 [123] = function(player, csid, option, npc)
-                    finishQuest(player, false)
-                end
-            }
-        }
+                    player:confirmTrade()
+                    player:delCurrentQuest(quest.areaId, quest.questId)
+                    quest:setVar(player, 'Repeat', JstMidnight())
+                end,
+
+                [125] = function(player, csid, option, npc)
+                    quest:setVar(player, 'Option', 1)
+                end,
+            },
+        },
+
+        [xi.zone.DAVOI] =
+        {
+            ['Jar'] =
+            {
+                onTrigger = function(player, npc)
+                    -- TODO: Find the Jar's default action
+
+                    if not player:hasItem(xi.item.POWER_SANDALS) then
+                        if npcUtil.giveItem(player, xi.item.POWER_SANDALS) then
+                            xi.otherAreas.helpers.TestMyMettle.moveJar(npc)
+                        end
+
+                        return quest:noAction()
+                    end
+                end,
+            },
+        },
     },
 }
 

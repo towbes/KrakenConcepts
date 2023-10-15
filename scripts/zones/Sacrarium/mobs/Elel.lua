@@ -2,7 +2,7 @@
 -- Area: Sacrarium
 --   NM: Balor
 -----------------------------------
-mixins = {require("scripts/mixins/job_special")}
+mixins = {require('scripts/mixins/job_special')}
 -----------------------------------
 local entity = {}
 
@@ -24,7 +24,7 @@ end
 entity.onMobDespawn = function(mob)
     UpdateNMSpawnPoint(mob:getID())
     mob:setRespawnTime(7200)
-    mob:setLocalVar("cooldown", os.time() + 7200)
+    mob:setLocalVar('cooldown', os.time() + 7200)
     DisallowRespawn(mob:getID(), true) -- prevents accidental 'pop' during no dark weather and immediate despawn
 end
 

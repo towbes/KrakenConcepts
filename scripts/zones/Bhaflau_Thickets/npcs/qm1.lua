@@ -2,17 +2,15 @@
 --  NPC: ??? (Spawn Lividroot Amooshah(ZNM T2))
 -- !pos 334 -10 184 52
 -----------------------------------
-local ID = require("scripts/zones/Bhaflau_Thickets/IDs")
-require("scripts/globals/npc_util")
+local ID = zones[xi.zone.BHAFLAU_THICKETS]
 -----------------------------------
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)
     if
-        npcUtil.tradeHas(trade, 2578) and
+        npcUtil.tradeHas(trade, xi.item.JAR_OF_OILY_BLOOD) and
         npcUtil.popFromQM(player, npc, ID.mob.LIVIDROOT_AMOOSHAH)
     then
-        -- Trade Oily Blood
         player:confirmTrade()
         player:messageSpecial(ID.text.DRAWS_NEAR)
     end

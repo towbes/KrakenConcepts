@@ -2,8 +2,6 @@
 -- Area: Pashhow Marshlands
 --   NM: Toxic Tamlyn
 -----------------------------------
-require("scripts/globals/hunts")
------------------------------------
 local entity = {}
 
 
@@ -29,7 +27,7 @@ end
 
 entity.onMobDespawn = function(mob)
     DisallowRespawn(mob:getID(), true)
-    SetServerVariable("TamlynRespawn", (os.time() + 3600))
+    SetServerVariable('TamlynRespawn', (os.time() + 3600))
     mob:setRespawnTime(3600)
 end
 

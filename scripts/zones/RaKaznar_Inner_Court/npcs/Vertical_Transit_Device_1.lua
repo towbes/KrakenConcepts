@@ -3,7 +3,7 @@
 --  NPC: Vertical Transit Device (1)
 -- !pos 747 119 20 276
 -----------------------------------
-require("scripts/globals/zone")
+
 -----------------------------------
 local entity = {}
 

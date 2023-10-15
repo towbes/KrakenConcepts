@@ -6,12 +6,12 @@
 -- Fyi_Chalmwoh    : !pos -39.273 -16.000 70.126 249
 -- Red Oil KI      : 704
 -----------------------------------
-require('scripts/globals/items')
-require('scripts/globals/keyitems')
+
+
 require('scripts/globals/npc_util')
 require('scripts/globals/quests')
-require('scripts/globals/titles')
-require('scripts/globals/zone')
+
+
 require('scripts/globals/interaction/quest')
 -----------------------------------
 local landingID = require('scripts/zones/Carpenters_Landing/IDs')
@@ -21,7 +21,7 @@ local quest = Quest:new(xi.quest.log_id.OTHER_AREAS, xi.quest.id.otherAreas.BEHI
 
 quest.reward =
 {
-    item = xi.items.MANNEQUIN_PUMPS,
+    item = xi.item.MANNEQUIN_PUMPS,
 }
 
 quest.sections =

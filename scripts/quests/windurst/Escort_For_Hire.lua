@@ -9,7 +9,7 @@
 require('scripts/globals/interaction/quest')
 require('scripts/globals/npc_util')
 require('scripts/globals/quests')
-require('scripts/globals/zone')
+
 -----------------------------------
 ID = require('scripts/zones/Garlaige_Citadel/IDs')
 -----------------------------------
@@ -21,7 +21,7 @@ quest.reward =
     gil = 10000,
     fame = 100,
     fameArea = xi.quest.fame_area.WINDURST,
-    item = xi.items.MIRATETES_MEMOIRS,
+    item = xi.item.MIRATETES_MEMOIRS,
 }
 
 quest.sections =
@@ -32,7 +32,7 @@ quest.sections =
             player:getQuestStatus(xi.quest.log_id.BASTOK, xi.quest.id.windurst.ESCORT_FOR_HIRE) ~= QUEST_ACCEPTED and
             player:getQuestStatus(xi.quest.log_id.SANDORIA, xi.quest.id.windurst.ESCORT_FOR_HIRE) ~= QUEST_ACCEPTED and
             player:getFameLevel(xi.quest.fame_area.WINDURST) >= 6 and
-            player:getCharVar("ESCORT_CONQUEST") < getConquestTally() and false -- Disables the quest
+            player:getCharVar('ESCORT_CONQUEST') < NextConquestTally() and false -- Disables the quest
         end,
 
         [xi.zone.PORT_WINDURST] =
@@ -81,7 +81,7 @@ quest.sections =
             {
                 [60] = function(player, csid, option, npc)
                     SpawnMob(17596834)
-                    player:getZone():setLocalVar("timer", os.time() + 1800)
+                    player:getZone():setLocalVar('timer', os.time() + 1800)
                 end,
             },
         },
@@ -102,7 +102,7 @@ quest.sections =
             onEventFinish =
             {
                 [10016] = function(player, csid, option, npc)
-                    player:setCharVar("ESCORT_CONQUEST", getConquestTally())
+                    player:setCharVar('ESCORT_CONQUEST', NextConquestTally())
                     player:delKeyItem(xi.ki.COMPLETION_CERTIFICATE)
                     quest:complete(player)
                 end,
@@ -127,9 +127,9 @@ quest.sections =
             ['Dehn_Harzhapan'] =
             {
                 onTrigger = function(player, npc)
-                    if player:getCharVar("ESCORT_CONQUEST") < getConquestTally() then
+                    if player:getCharVar('ESCORT_CONQUEST') < NextConquestTally() then
                         return quest:progressEvent(10014)
-                    elseif player:getCharVar("ESCORT_CONQUEST") > getConquestTally() then
+                    elseif player:getCharVar('ESCORT_CONQUEST') > NextConquestTally() then
                         return quest:progressEvent(10017)
                     end
                 end,

@@ -4,14 +4,14 @@
 -- Log ID: 0, Quest ID: 79
 -- Maloquedil : !pos 35 0.1 60 231
 -----------------------------------
-require('scripts/globals/items')
+
 require('scripts/globals/npc_util')
 require('scripts/globals/quests')
-require('scripts/globals/titles')
-require('scripts/globals/zone')
+
+
 require('scripts/globals/interaction/quest')
 -----------------------------------
-local ID = require("scripts/zones/Northern_San_dOria/IDs")
+local ID = zones[xi.zone.NORTHERN_SAN_DORIA]
 -----------------------------------
 
 local quest = Quest:new(xi.quest.log_id.SANDORIA, xi.quest.id.sandoria.WARDING_VAMPIRES)
@@ -59,7 +59,7 @@ quest.sections =
             ['Maloquedil'] =
             {
                 onTrade = function(player, npc, trade)
-                    if npcUtil.tradeHasExactly(trade, { { xi.items.BULB_OF_SHAMAN_GARLIC, 2 } }) then
+                    if npcUtil.tradeHasExactly(trade, { { xi.item.BULB_OF_SHAMAN_GARLIC, 2 } }) then
                         return quest:progressEvent(23)
                     end
                 end,
@@ -77,7 +77,7 @@ quest.sections =
                         quest:complete(player)
                     else
                         player:addFame(xi.quest.fame_area.SANDORIA, 5)
-                        npcUtil.giveCurrency(player, "gil", xi.settings.main.GIL_RATE * 900)
+                        npcUtil.giveCurrency(player, 'gil', xi.settings.main.GIL_RATE * 900)
                     end
                 end,
             },

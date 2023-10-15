@@ -1,9 +1,7 @@
 -----------------------------------
 -- Zone: Mount_Zhayolm (61)
 -----------------------------------
-local ID = require('scripts/zones/Mount_Zhayolm/IDs')
-require('scripts/globals/helm')
-require('scripts/globals/zone')
+local ID = zones[xi.zone.MOUNT_ZHAYOLM]
 -----------------------------------
 local zoneObject = {}
 
@@ -30,8 +28,8 @@ zoneObject.onZoneIn = function(player, prevZone)
 end
 
 zoneObject.afterZoneIn = function(player)
-    player:entityVisualPacket("1pb1")
-    player:entityVisualPacket("2pb1")
+    player:entityVisualPacket('1pb1')
+    player:entityVisualPacket('2pb1')
 end
 
 zoneObject.onTriggerAreaEnter = function(player, triggerArea)

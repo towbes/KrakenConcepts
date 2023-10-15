@@ -4,7 +4,7 @@
 -- of Beastmen from shared spawn locations.
 -----------------------------------
 require("modules/module_utils")
-require("scripts/globals/zone")
+
 -----------------------------------
 
 local m = Module:new("beastmen_multigroup_spawn_fix")

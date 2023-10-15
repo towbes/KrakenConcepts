@@ -1,9 +1,6 @@
 -----------------------------------
 -- Enhancing Spell Utilities
 -----------------------------------
-require("scripts/globals/spell_data")
-require("scripts/globals/msg")
------------------------------------
 xi = xi or {}
 xi.spells = xi.spells or {}
 xi.spells.enhancing = xi.spells.enhancing or {}
@@ -89,7 +86,7 @@ xi.spells.enhancing.useEnhancingNinjutsu = function(caster, target, spell)
     end
 
     ------------------------------------------------------------
-    -- Change message when higher effect or "Always overwrite".
+    -- Change message when higher effect or 'Always overwrite'.
     ------------------------------------------------------------
     if alwaysOverwrite then
         target:delStatusEffect(spellEffect)

@@ -1,10 +1,7 @@
 -----------------------------------
 -- Teleport Spell Utilities
 -----------------------------------
-require("scripts/globals/spell_data")
-require("scripts/globals/teleports")
-require("scripts/globals/keyitems")
-require("scripts/globals/msg")
+require('scripts/globals/teleports')
 -----------------------------------
 xi = xi or {}
 xi.spells = xi.spells or {}
@@ -29,7 +26,7 @@ local pTable =
     [xi.magic.spell.WARP_II       ] = { xi.teleport.id.WARP,    0,                              3.4, false },
 }
 
--- Check for "Retrace" Spell.
+-- Check for 'Retrace' Spell.
 xi.spells.enhancing.checkTeleportSpell = function(caster, target, spell)
     if target:getCampaignAllegiance() > 0 then
         return 0

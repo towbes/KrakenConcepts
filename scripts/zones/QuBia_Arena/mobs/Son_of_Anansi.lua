@@ -3,7 +3,7 @@
 --  Mob: Son of Anansi
 -- BCNM: Come into my Parlor
 -----------------------------------
-require("scripts/globals/status")
+
 -----------------------------------
 local entity = {}
 

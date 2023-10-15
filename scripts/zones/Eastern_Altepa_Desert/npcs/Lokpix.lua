@@ -1,7 +1,7 @@
 -----------------------------------
 -- Area: Eastern Altepa Desert
 --  NPC: Lokpix
--- Starts Quest "Open Sesame"
+-- Starts Quest 'Open Sesame'
 -----------------------------------
 local entity = {}
 

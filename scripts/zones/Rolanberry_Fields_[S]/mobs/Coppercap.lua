@@ -3,8 +3,8 @@
 --  Mob: Coppercap
 -- Note: Items stolen removes caps from head
 -----------------------------------
-require("scripts/globals/mobs")
-mixins = {require("scripts/mixins/families/funguar_s")}
+require('scripts/globals/mobs')
+mixins = {require('scripts/mixins/families/funguar_s')}
 -----------------------------------
 local entity = {}
 

@@ -1,14 +1,12 @@
 -----------------------------------
 -- Area: Xarcabard
 --   NM: Barbaric Weapon
--- TODO: "Gains a Dread Spikes effect whenever Whirl of Rage is used."
------------------------------------
-require("scripts/globals/hunts")
+-- TODO: 'Gains a Dread Spikes effect whenever Whirl of Rage is used.'
 -----------------------------------
 local entity = {}
 
 entity.onMobInitialize = function(mob)
-    mob:setMod(xi.mod.STORETP, 50) -- "Possesses extremely high Store TP."
+    mob:setMod(xi.mod.STORETP, 50) -- 'Possesses extremely high Store TP.'
 end
 
 entity.onMobWeaponSkill = function(target, mob, skill)

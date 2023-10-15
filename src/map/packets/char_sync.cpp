@@ -23,9 +23,9 @@
 
 #include "char_sync.h"
 
-#include "../entities/charentity.h"
-#include "../entities/fellowentity.h"
-#include "../status_effect_container.h"
+#include "entities/charentity.h"
+#include "entities/fellowentity.h"
+#include "status_effect_container.h"
 
 CCharSyncPacket::CCharSyncPacket(CCharEntity* PChar)
 {
@@ -38,6 +38,7 @@ CCharSyncPacket::CCharSyncPacket(CCharEntity* PChar)
     ref<uint32>(0x08) = PChar->id;
     if (PChar->m_PFellow != nullptr)
         ref<uint16>(0x0C) = PChar->m_PFellow->targid;
+
     ref<uint8>(0x10) = PChar->StatusEffectContainer->HasStatusEffect(EFFECT_ALLIED_TAGS) ? 2 : 0; // 0x02 - Campaign Battle, 0x04 - Level Sync
 
     if (PChar->m_LevelRestriction && PChar->StatusEffectContainer->HasStatusEffect(EFFECT_LEVEL_SYNC))

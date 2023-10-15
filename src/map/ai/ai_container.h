@@ -25,13 +25,13 @@ along with this program.  If not, see http://www.gnu.org/licenses/
 #include <memory>
 #include <stack>
 
-#include "../entities/baseentity.h"
-#include "../packets/message_basic.h"
-#include "controllers/controller.h"
+#include "ai/controllers/controller.h"
+#include "entities/baseentity.h"
 #include "helpers/action_queue.h"
 #include "helpers/event_handler.h"
 #include "helpers/pathfind.h"
 #include "helpers/targetfind.h"
+#include "packets/message_basic.h"
 #include "states/state.h"
 
 class CBaseEntity;
@@ -131,16 +131,7 @@ public:
     // pathfinder, not guaranteed to be implemented
     std::unique_ptr<CPathFind> PathFind;
 
-//protected: Umeboshi "Commenting this out to move below for pixie commit"
-    // input controller
-    // std::unique_ptr<CController> Controller;
-    // current synchronized server time (before AI loop execution)
-    // time_point m_Tick;
-    // time_point m_PrevTick;
-    // entity who holds this AI
-    // CBaseEntity* PEntity;
-
-        protected:
+protected:
     // input controller
     std::unique_ptr<CController> Controller;
     // current synchronized server time (before AI loop execution)

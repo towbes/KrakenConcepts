@@ -3,12 +3,12 @@
 --  Mob: Diabolos Nox
 -- Note: Mega Boss
 -----------------------------------
-require("scripts/globals/dynamis")
+require('scripts/globals/dynamis')
 -----------------------------------
 local entity = {}
 
 entity.onMobInitialize = function(mob)
-    mob:addListener("TAKE_DAMAGE", "SOMNUS_TAKE_DAMAGE", function(mob, amount, attacker, attackType, damageType)
+    mob:addListener('TAKE_DAMAGE', 'SOMNUS_TAKE_DAMAGE', function(mob, amount, attacker, attackType, damageType)
 
         if attackType == xi.attackType.MAGICAL and amount > 0 then
             mob:addMod(xi.mod.UDMGPHYS, 25)

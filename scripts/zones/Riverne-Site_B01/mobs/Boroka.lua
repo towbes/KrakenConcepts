@@ -3,8 +3,7 @@
 --   NM: Boroka
 -- !pos -365.921 -31.255 486.367 29
 -----------------------------------
-mixins = { require("scripts/mixins/job_special") }
-require("scripts/globals/titles")
+mixins = { require('scripts/mixins/job_special') }
 -----------------------------------
 local entity = {}
 

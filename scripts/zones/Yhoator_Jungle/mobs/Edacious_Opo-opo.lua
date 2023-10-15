@@ -2,14 +2,13 @@
 -- Area: Yhoator Jungle
 --   NM: Edacious Opo-opo
 -----------------------------------
-require("scripts/globals/hunts")
-local ID = require("scripts/zones/Yhoator_Jungle/IDs")
+local ID = zones[xi.zone.YHOATOR_JUNGLE]
 -----------------------------------
 local entity = {}
 
 
 entity.onMobDespawn = function(mob)
-    GetNPCByID(ID.npc.EDACIOUS_QM):setLocalVar("despawned", os.time() + 900)
+    GetNPCByID(ID.npc.EDACIOUS_QM):setLocalVar('despawned', os.time() + 900)
 end
 
 entity.onMobDeath = function(mob, player, optParams)

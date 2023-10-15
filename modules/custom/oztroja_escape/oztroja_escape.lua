@@ -52,7 +52,7 @@ local escapeMenu =
     },
 }
 
-m:addOverride("xi.zones.Castle_Oztroja.Zone.onInitialize", function(zone)
+m:addOverride("xi.zone.Castle_Oztroja.Zone.onInitialize", function(zone)
     super(zone)
 
     zone:insertDynamicEntity({

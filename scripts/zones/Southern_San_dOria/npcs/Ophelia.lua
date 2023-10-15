@@ -3,7 +3,7 @@
 --  NPC: Ophelia
 -- Type: ENM Quest Timer
 -----------------------------------
-require("scripts/globals/enm")
+require('scripts/globals/enm')
 -----------------------------------
 local entity = {}
 

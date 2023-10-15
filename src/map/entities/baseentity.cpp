@@ -43,6 +43,7 @@ CBaseEntity::CBaseEntity()
 , allegiance(ALLEGIANCE_TYPE::MOB)
 , updatemask(0)
 , isRenamed(false)
+, manualConfig(false)
 , m_bReleaseTargIDOnDisappear(false)
 , spawnAnimation(SPAWN_ANIMATION::NORMAL)
 , PAI(nullptr)
@@ -50,10 +51,6 @@ CBaseEntity::CBaseEntity()
 , PInstance(nullptr)
 , m_nextUpdateTimer(std::chrono::steady_clock::now())
 {
-    animStart    = false;
-    animPath     = 0;
-    animBegin    = 0;
-    manualConfig = false;
 }
 
 CBaseEntity::~CBaseEntity()

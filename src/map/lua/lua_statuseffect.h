@@ -40,7 +40,7 @@ public:
 
     friend std::ostream& operator<<(std::ostream& out, const CStatusEffect& effect);
 
-    uint32 getType();
+    uint32 getEffectType();
     uint32 getSubType();
     uint16 getPower();
     uint16 getSubPower();
@@ -52,7 +52,6 @@ public:
     uint32 getTickCount();
     uint32 getTick();
     uint16 getIcon();
-    uint16 getItemSourceID();
 
     void setIcon(uint16 icon);
     void setPower(uint16 power);
@@ -60,15 +59,21 @@ public:
     void setTier(uint16 tier);
     void setDuration(uint32 duration);
     void setTick(uint32 tick);
-    void setItemSourceID(uint16 itemSourceID);
 
     void setStartTime(uint32 time);
     void resetStartTime();
 
     void   addMod(uint16 mod, int16 amount);
-    uint32 getFlag();
-    void   setFlag(uint32 flag);
-    void   unsetFlag(uint32 flag);
+    uint32 getEffectFlags();
+    void   setEffectFlags(uint32 flags);
+    void   addEffectFlag(uint32 flag);
+    void   delEffectFlag(uint32 flag);
+    bool   hasEffectFlag(uint32 flag);
+
+    bool operator==(const CLuaStatusEffect& other) const
+    {
+        return this->m_PLuaStatusEffect == other.m_PLuaStatusEffect;
+    }
 
     static void Register();
 };

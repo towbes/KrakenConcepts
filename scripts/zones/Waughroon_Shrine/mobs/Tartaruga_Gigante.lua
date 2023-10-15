@@ -2,10 +2,10 @@
 -- Area: Waughroon Shrine
 --  Mob: Tartaruga Gigante
 -----------------------------------
-local ID = require("scripts/zones/Waughroon_Shrine/IDs")
-require("scripts/globals/status")
-require("scripts/globals/magic")
-require("scripts/globals/utils")
+local ID = zones[xi.zone.WAUGHROON_SHRINE]
+
+require('scripts/globals/magic')
+require('scripts/globals/utils')
 -----------------------------------
 local entity = {}
 
@@ -46,7 +46,7 @@ local outOfShell = function(mob)
     mob:setMod(xi.mod.UDMGPHYS, 0)
     mob:setBehaviour(bit.band(mob:getBehaviour(), bit.bnot(xi.behavior.STANDBACK)))
     mob:setBehaviour(bit.band(mob:getBehaviour(), bit.bnot(xi.behavior.NO_TURN)))
-    mob:setLocalVar("DamageTaken", 0)
+    mob:setLocalVar('DamageTaken', 0)
 end
 
 entity.onMobSpawn = function(mob)
@@ -62,51 +62,51 @@ entity.onMobSpawn = function(mob)
     mob:setMod(xi.mod.DMGMAGIC, -3000)
     mob:setMod(xi.mod.CURSERES, 100)
     local changeHP = mob:getHP() - 2000 -- 5% of Max HP
-    mob:setLocalVar("changeHP", changeHP)
-    mob:setLocalVar("DamageTaken", 0)
+    mob:setLocalVar('changeHP', changeHP)
+    mob:setLocalVar('DamageTaken', 0)
 
     -- Forced out of shell after taking 4000 total damage
-    mob:addListener("TAKE_DAMAGE", "TARTARUGA_TAKE_DAMAGE", function(mobArg, amount, attacker, attackType, damageType)
-        local damageTaken = mobArg:getLocalVar("DamageTaken")
-        local waitTime = mobArg:getLocalVar("waitTime")
+    mob:addListener('TAKE_DAMAGE', 'TARTARUGA_TAKE_DAMAGE', function(mobArg, amount, attacker, attackType, damageType)
+        local damageTaken = mobArg:getLocalVar('DamageTaken')
+        local waitTime = mobArg:getLocalVar('waitTime')
         damageTaken = damageTaken + amount
 
         if damageTaken > 4000 then
             if mobArg:getAnimationSub() == 1 and os.time() > waitTime then
                 mobArg:setAnimationSub(2)
                 local changeDamage = (mobArg:getHP() - amount) - 2000
-                mobArg:setLocalVar("changeHP", changeDamage)
-                mobArg:setLocalVar("waitTime", os.time() + 2)
+                mobArg:setLocalVar('changeHP', changeDamage)
+                mobArg:setLocalVar('waitTime', os.time() + 2)
                 outOfShell(mobArg)
             end
         elseif os.time() > waitTime then
-            mobArg:setLocalVar("DamageTaken", damageTaken)
+            mobArg:setLocalVar('DamageTaken', damageTaken)
         end
     end)
 end
 
 entity.onMobFight = function(mob, target)
-    local changeHP = mob:getLocalVar("changeHP")
-    local waitTime = mob:getLocalVar("waitTime")
+    local changeHP = mob:getLocalVar('changeHP')
+    local waitTime = mob:getLocalVar('waitTime')
 
     if mob:getHP() <= changeHP and (mob:getAnimationSub() == 2 or mob:getAnimationSub() == 0) and os.time() > waitTime then
-        mob:setLocalVar("DamageTaken", 0)
+        mob:setLocalVar('DamageTaken', 0)
         mob:setAnimationSub(1)
-        mob:setLocalVar("waitTime", os.time() + 2)
+        mob:setLocalVar('waitTime', os.time() + 2)
         intoShell(mob)
     elseif mob:getHPP() == 100 and mob:getAnimationSub() == 1 and os.time() > waitTime then
-        mob:setLocalVar("DamageTaken", 0)
+        mob:setLocalVar('DamageTaken', 0)
         mob:setAnimationSub(2)
         changeHP = mob:getHP() - 2000
-        mob:setLocalVar("changeHP", changeHP)
-        mob:setLocalVar("waitTime", os.time() + 2)
+        mob:setLocalVar('changeHP', changeHP)
+        mob:setLocalVar('waitTime', os.time() + 2)
         outOfShell(mob)
     end
 end
 
 entity.onMobDespawn = function(mob)
     mob:resetLocalVars()
-    mob:removeListener("TARTARUGA_TAKE_DAMAGE")
+    mob:removeListener('TARTARUGA_TAKE_DAMAGE')
 end
 
 entity.onMobDeath = function(mob, player, optParams)

@@ -2,8 +2,7 @@
 -- Area: Ranguemont Pass
 --  Mob: Hecteyes
 -----------------------------------
-require("scripts/globals/regimes")
-local ID = require("scripts/zones/Ranguemont_Pass/IDs")
+local ID = zones[xi.zone.RANGUEMONT_PASS]
 -----------------------------------
 local entity = {}
 

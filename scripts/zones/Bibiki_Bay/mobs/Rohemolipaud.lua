@@ -1,9 +1,9 @@
 -----------------------------------
 -- Area: Bibiki Bay
 --  Mob: Rohemolipaud
--- Note: NM for quest: "The Search for Goldmane"
+-- Note: NM for quest: 'The Search for Goldmane'
 -----------------------------------
-mixins = { require("scripts/mixins/job_special") }
+mixins = { require('scripts/mixins/job_special') }
 -----------------------------------
 local entity = {}
 

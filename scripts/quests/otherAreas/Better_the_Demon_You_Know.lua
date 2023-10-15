@@ -4,11 +4,11 @@
 -- Log ID: 4, Quest ID: 105
 -- Koblakiq !pos -64 21 -117
 -----------------------------------
-require('scripts/globals/items')
-require('scripts/globals/keyitems')
+
+
 require('scripts/globals/npc_util')
 require('scripts/globals/quests')
-require('scripts/globals/zone')
+
 require('scripts/globals/interaction/quest')
 -----------------------------------
 local ID = require('scripts/zones/Castle_Zvahl_Baileys/IDs')
@@ -17,7 +17,7 @@ local quest = Quest:new(xi.quest.log_id.OTHER_AREAS, xi.quest.id.otherAreas.BETT
 
 quest.reward =
 {
-    item = xi.items.GOBLIN_GRENADE,
+    item = xi.item.GOBLIN_GRENADE,
     title = xi.title.APOSTATE_FOR_HIRE
 }
 
@@ -32,7 +32,7 @@ quest.sections =
 
         [xi.zone.OLDTON_MOVALPOLOS] =
         {
-            ['Koblakiq'] = quest:progressEvent(20, { [1] = xi.items.DEMON_PEN }),
+            ['Koblakiq'] = quest:progressEvent(20, { [1] = xi.item.DEMON_PEN }),
 
             onEventFinish =
             {
@@ -55,7 +55,7 @@ quest.sections =
                     local prog = quest:getVar(player, 'Prog')
 
                     if prog == 0 then
-                        return quest:event(21, { [1] = xi.items.DEMON_PEN }) -- Additional Dialogue
+                        return quest:event(21, { [1] = xi.item.DEMON_PEN }) -- Additional Dialogue
 
                     elseif prog == 1 and quest:getVar(player, 'Stage') < os.time() then
                         return quest:progressEvent(24)
@@ -72,7 +72,7 @@ quest.sections =
                 end,
 
                 onTrade = function(player, npc, trade)
-                    if quest:getVar(player, 'Prog') == 0 and npcUtil.tradeHasExactly(trade, { xi.items.DEMON_PEN }) then
+                    if quest:getVar(player, 'Prog') == 0 and npcUtil.tradeHasExactly(trade, { xi.item.DEMON_PEN }) then
                         return quest:progressEvent(22)
                     end
                 end,

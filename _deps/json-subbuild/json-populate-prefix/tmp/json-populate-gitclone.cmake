@@ -41,12 +41,12 @@ endif()
 
 execute_process(
   COMMAND "C:/Users/Chris/AppData/Local/Atlassian/SourceTree/git_local/bin/git.exe" 
-          checkout "v3.11.2" --
+          checkout "254395e5f7731b5595e7c11ac4b929c923582114" --
   WORKING_DIRECTORY "C:/Users/Chris/Desktop/CactuarLSB/server/_deps/json-src"
   RESULT_VARIABLE error_code
 )
 if(error_code)
-  message(FATAL_ERROR "Failed to checkout tag: 'v3.11.2'")
+  message(FATAL_ERROR "Failed to checkout tag: '254395e5f7731b5595e7c11ac4b929c923582114'")
 endif()
 
 set(init_submodules TRUE)

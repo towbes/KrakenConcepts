@@ -1,13 +1,9 @@
 -----------------------------------
 -- Mog House related functions
 -----------------------------------
-require('scripts/globals/items')
-require("scripts/globals/npc_util")
-require("scripts/globals/quests")
-require("scripts/globals/titles")
-require("scripts/globals/zone")
+require('scripts/globals/npc_util')
+require('scripts/globals/quests')
 -----------------------------------
-
 xi = xi or {}
 xi.moghouse = xi.moghouse or {}
 
@@ -15,11 +11,11 @@ xi.moghouse = xi.moghouse or {}
 -- Mog Locker constants
 -----------------------------------
 local mogLockerStartTimestamp   = 1009810800 -- unix timestamp for 2001/12/31 15:00
-local mogLockerTimestampVarName = "mog-locker-expiry-timestamp"
+local mogLockerTimestampVarName = 'mog-locker-expiry-timestamp'
 
 xi.moghouse.MOGLOCKER_ALZAHBI_VALID_DAYS    = 7
 xi.moghouse.MOGLOCKER_ALLAREAS_VALID_DAYS   = 5
-xi.moghouse.MOGLOCKER_PLAYERVAR_ACCESS_TYPE = "mog-locker-access-type"
+xi.moghouse.MOGLOCKER_PLAYERVAR_ACCESS_TYPE = 'mog-locker-access-type'
 
 xi.moghouse.lockerAccessType =
 {
@@ -128,39 +124,39 @@ xi.moghouse.onMoghouseZoneIn = function(player, prevZone)
     -- 0x0080: This bit and the next track which 2F decoration style is being used (0: SANDORIA, 1: BASTOK, 2: WINDURST, 3: PATIO)
     -- 0x0100: ^ As above
 
-    --if not player:getCharVar("mhflagCheck", 1) then
-    --    player:setCharVar("mhflagCheck", 0)
+    --if not player:getCharVar('mhflagCheck', 1) then
+    --    player:setCharVar('mhflagCheck', 0)
     --end
 
-    if player:getCharVar("mhflagCheck") == 0 then
+    if player:getCharVar('mhflagCheck') == 0 then
             player:setMoghouseFlag(0x0000)
     end
     
-    if player:getCharVar("mhflagCheck") == 0 then
+    if player:getCharVar('mhflagCheck') == 0 then
         if player:getQuestStatus(xi.quest.log_id.SANDORIA, xi.quest.id.sandoria.GROWING_FLOWERS) == QUEST_COMPLETED then
             local mhflag = player:getMoghouseFlag()
-            player:setCharVar("mhflagCheck", 1)
+            player:setCharVar('mhflagCheck', 1)
             player:setMoghouseFlag(mhflag + 0x0001)
         end
         if player:getQuestStatus(xi.quest.log_id.BASTOK, xi.quest.id.bastok.A_LADYS_HEART) == QUEST_COMPLETED then
             local mhflag = player:getMoghouseFlag()
             player:setMoghouseFlag(mhflag + 0x0002)
-            player:setCharVar("mhflagCheck", 1)
+            player:setCharVar('mhflagCheck', 1)
         end
         if player:getQuestStatus(xi.quest.log_id.WINDURST, xi.quest.id.windurst.FLOWER_CHILD) == QUEST_COMPLETED then
             local mhflag = player:getMoghouseFlag()
             player:setMoghouseFlag(mhflag + 0x0004)
-            player:setCharVar("mhflagCheck", 1)
+            player:setCharVar('mhflagCheck', 1)
         end
         if player:getQuestStatus(xi.quest.log_id.JEUNO, xi.quest.id.jeuno.PRETTY_LITTLE_THINGS) == QUEST_COMPLETED then
             local mhflag = player:getMoghouseFlag()
             player:setMoghouseFlag(mhflag + 0x0008)
-            player:setCharVar("mhflagCheck", 1)
+            player:setCharVar('mhflagCheck', 1)
         end
         if player:getQuestStatus(xi.quest.log_id.AHT_URHGAN, xi.quest.id.ahtUrhgan.KEEPING_NOTES) == QUEST_COMPLETED then
             local mhflag = player:getMoghouseFlag()
             player:setMoghouseFlag(mhflag + 0x0010)
-            player:setCharVar("mhflagCheck", 1)
+            player:setCharVar('mhflagCheck', 1)
         end
     end
 
@@ -197,12 +193,31 @@ end
 
 xi.moghouse.moogleTrade = function(player, npc, trade)
     if player:isInMogHouse() then
-        local numBronze = trade:getItemQty(xi.items.IMPERIAL_BRONZE_PIECE)
+        local numBronze = trade:getItemQty(xi.item.IMPERIAL_BRONZE_PIECE)
 
         if numBronze > 0 then
             if xi.moghouse.addMogLockerExpiryTime(player, numBronze) then
                 player:tradeComplete()
                 player:messageSpecial(zones[player:getZoneID()].text.MOG_LOCKER_OFFSET + 2, xi.moghouse.getMogLockerExpiryTimestamp(player))
+            end
+        end
+
+        local eggComponents =
+        {
+            xi.item.EGG_LOCKER,
+            xi.item.EGG_TABLE,
+            xi.item.EGG_STOOL,
+            xi.item.EGG_LANTERN,
+        }
+
+        if npcUtil.tradeHasExactly(trade, eggComponents) then
+            if npcUtil.giveItem(player, xi.item.EGG_BUFFET) then
+                player:confirmTrade()
+            end
+
+        elseif npcUtil.tradeHasExactly(trade, xi.item.EGG_BUFFET) then
+            if npcUtil.giveItem(player, eggComponents) then
+                player:confirmTrade()
             end
         end
     end
@@ -214,7 +229,7 @@ xi.moghouse.moogleTrigger = function(player, npc)
 
         if lockerTs ~= nil then
             if lockerTs == -1 then -- Expired
-                player:messageSpecial(zones[player:getZoneID()].text.MOG_LOCKER_OFFSET + 1, xi.items.IMPERIAL_BRONZE_PIECE)
+                player:messageSpecial(zones[player:getZoneID()].text.MOG_LOCKER_OFFSET + 1, xi.item.IMPERIAL_BRONZE_PIECE)
             else
                 player:messageSpecial(zones[player:getZoneID()].text.MOG_LOCKER_OFFSET, lockerTs)
             end

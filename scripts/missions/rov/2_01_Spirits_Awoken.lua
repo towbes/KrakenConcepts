@@ -4,10 +4,6 @@
 -----------------------------------
 -- !addmission 13 44
 -----------------------------------
-require('scripts/globals/missions')
-require('scripts/globals/interaction/mission')
-require('scripts/globals/zone')
------------------------------------
 
 local mission = Mission:new(xi.mission.log_id.ROV, xi.mission.id.rov.SPIRITS_AWOKEN)
 
@@ -38,7 +34,7 @@ mission.sections =
             {
                 [51] = function(player, csid, option, npc)
                     if option == 1 then
-                        -- Note: The below variable has a value of 2 in caps where the player is on "The Road Forks"; however,
+                        -- Note: The below variable has a value of 2 in caps where the player is on 'The Road Forks'; however,
                         -- the same version of the event is played.  This is the blocking event for progress in the next mission,
                         -- but will complete successfully here.
                         local completedVessel = player:getCurrentMission(xi.mission.log_id.COP) >= xi.mission.id.cop.THE_ROAD_FORKS and 1 or 0

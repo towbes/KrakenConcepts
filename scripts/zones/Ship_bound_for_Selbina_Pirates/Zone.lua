@@ -1,8 +1,7 @@
 -----------------------------------
 -- Zone: Ship bound for Selbina Pirates (227)
 -----------------------------------
-local ID = require('scripts/zones/Ship_bound_for_Selbina_Pirates/IDs')
-require('scripts/globals/zone')
+local ID = zones[xi.zone.SHIP_BOUND_FOR_SELBINA_PIRATES]
 require('scripts/globals/pirates')
 require('scripts/globals/sea_creatures')
 -----------------------------------
@@ -46,7 +45,7 @@ zoneObject.onGameHour = function(zone)
         local players = zone:getPlayers()
         for _, player in pairs(players) do
             if player:hasKeyItem(xi.ki.SEANCE_STAFF)
-                and player:getVar("Enagakure_Killed") == 0
+                and player:getVar('Enagakure_Killed') == 0
                 and not GetMobByID(ID.mob.ENAGAKURE):isSpawned()
             then
                 GetMobByID(ID.mob.ENAGAKURE):spawn()

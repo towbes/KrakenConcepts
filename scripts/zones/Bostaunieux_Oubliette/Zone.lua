@@ -1,10 +1,7 @@
 -----------------------------------
 -- Zone: Bostaunieux_Oubliette (167)
 -----------------------------------
-local ID = require('scripts/zones/Bostaunieux_Oubliette/IDs')
-require('scripts/globals/conquest')
-require("scripts/globals/zone")
-
+local ID = zones[xi.zone.BOSTAUNIEUX_OUBLIETTE]
 -----------------------------------
 local zoneObject = {}
 

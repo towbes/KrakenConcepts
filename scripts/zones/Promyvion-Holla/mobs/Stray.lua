@@ -2,10 +2,10 @@
 -- Area: Promyvion-Holla
 --   NM: Stray
 -----------------------------------
-require("scripts/globals/promyvion")
+require('scripts/globals/promyvion')
 mixins =
 {
-    require("scripts/mixins/families/empty")
+    require('scripts/mixins/families/empty')
 }
 -----------------------------------
 local entity = {}

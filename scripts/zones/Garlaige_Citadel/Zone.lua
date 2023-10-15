@@ -1,9 +1,7 @@
 -----------------------------------
 -- Zone: Garlaige_Citadel (200)
 -----------------------------------
-local ID = require('scripts/zones/Garlaige_Citadel/IDs')
-require('scripts/globals/conquest')
-require('scripts/globals/treasure')
+local ID = zones[xi.zone.GARLAIGE_CITADEL]
 -----------------------------------
 local zoneObject = {}
 
@@ -72,10 +70,10 @@ zoneObject.onTriggerAreaEnter = function(player, triggerArea)
         GetNPCByID(gateId + 3):getAnimation() == xi.anim.OPEN_DOOR and
         GetNPCByID(gateId + 4):getAnimation() == xi.anim.OPEN_DOOR
     then
-        if gate:getLocalVar("isOpen") == 0 then
+        if gate:getLocalVar('isOpen') == 0 then
 
             -- set gate opened var to prevent 'opening' an already open gate.
-            gate:setLocalVar("isOpen", 1)
+            gate:setLocalVar('isOpen', 1)
 
             -- I think different gates might have different durations.
             local time = 60
@@ -93,7 +91,7 @@ zoneObject.onTriggerAreaEnter = function(player, triggerArea)
 
             gate:timer(1000 * time, function(gateArg)
                 -- set gate closed var to allow this gate to be opened again.
-                gateArg:setLocalVar("isOpen", 0)
+                gateArg:setLocalVar('isOpen', 0)
             end)
         end
     end

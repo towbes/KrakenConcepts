@@ -2,10 +2,10 @@
 -- Area: Ceizak Battlegrounds
 -- NPC: Root
 -----------------------------------
--- require("scripts/globals/colonization_reives")
-require("scripts/globals/status")
-require("scripts/globals/utils")
-require("scripts/globals/zone")
+-- require('scripts/globals/colonization_reives')
+
+require('scripts/globals/utils')
+
 local ID = require('scripts/zones/Ceizak_Battlegrounds/IDs')
 local entity = {}
 

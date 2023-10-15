@@ -21,49 +21,49 @@ This file is part of DarkStar-server source code.
 ===========================================================================
 */
 
-#include "../../common/timer.h"
-#include "../../common/utils.h"
+#include "common/timer.h"
+#include "common/utils.h"
 
 #include <algorithm>
 #include <math.h>
 #include <string.h>
 #include <vector>
 
-#include "../ability.h"
-#include "../enmity_container.h"
-#include "../entities/fellowentity.h"
-#include "../entities/mobentity.h"
-#include "../grades.h"
-#include "../items/item_weapon.h"
-#include "../latent_effect_container.h"
-#include "../map.h"
-#include "../mob_spell_list.h"
-#include "../status_effect_container.h"
-#include "../zone_instance.h"
+#include "ability.h"
+#include "enmity_container.h"
+#include "entities/fellowentity.h"
+#include "entities/mobentity.h"
+#include "grades.h"
+#include "items/item_weapon.h"
+#include "latent_effect_container.h"
+#include "map.h"
+#include "mob_spell_list.h"
+#include "status_effect_container.h"
+#include "zone_instance.h"
 #include "battleutils.h"
 #include "charutils.h"
 #include "fellowutils.h"
 #include "zoneutils.h"
 
-#include "../ai/ai_container.h"
-#include "../ai/controllers/fellow_controller.h"
-#include "../ai/controllers/mob_controller.h"
-#include "../ai/states/ability_state.h"
+#include "ai/ai_container.h"
+#include "ai/controllers/fellow_controller.h"
+#include "ai/controllers/mob_controller.h"
+#include "ai/states/ability_state.h"
 
-#include "../packets/char_abilities.h"
-#include "../packets/char_sync.h"
-#include "../packets/char_update.h"
-#include "../packets/entity_update.h"
-#include "../packets/fellow_despawn.h"
-#include "../packets/message_combat.h"
-#include "../packets/message_special.h"
-#include "../packets/message_text.h"
+#include "packets/char_abilities.h"
+#include "packets/char_sync.h"
+#include "packets/char_update.h"
+#include "packets/entity_update.h"
+#include "packets/fellow_despawn.h"
+#include "packets/message_combat.h"
+#include "packets/message_special.h"
+#include "packets/message_text.h"
 
 struct Fellow_t
 {
-    look_t      look;        // appearance
-    std::string name;        // name
-    ECOSYSTEM   EcoSystem;   // ecosystem
+    look_t      look;      // appearance
+    std::string name;      // name
+    ECOSYSTEM   EcoSystem; // ecosystem
 
     uint8  zoneKills;
     uint8  name_prefix;
@@ -189,7 +189,9 @@ namespace fellowutils
                 Fellow->name.insert(0, (const char*)sql->GetData(1));
 
                 Fellow->m_Family = (uint16)sql->GetIntData(2);
-                memcpy(&Fellow->look, sql->GetData(3), 20);
+                uint16 sqlModelID[10];
+                memcpy(&sqlModelID, sql->GetData(3), 20);
+                Fellow->look      = look_t(sqlModelID);
                 Fellow->size      = 0;
                 Fellow->EcoSystem = (ECOSYSTEM)sql->GetIntData(4);
                 Fellow->m_Element = 0;
@@ -471,15 +473,15 @@ namespace fellowutils
 
             PMaster->loc.zone->InsertPET(PFellow);
             PMaster->m_PFellow = PFellow;
-            ((CCharEntity*)PMaster)->pushPacket(new CCharUpdatePacket((CCharEntity*)PMaster));
-            ((CCharEntity*)PMaster)->pushPacket(new CCharSyncPacket((CCharEntity*)PMaster));
+            PMaster->pushPacket(new CCharUpdatePacket(PMaster));
+            PMaster->pushPacket(new CCharSyncPacket(PMaster));
             luautils::OnMobSpawn(PFellow);
 
             // apply stats from previous zone if this fellow is being transfered
             if (spawningFromZone == true)
             {
-                PFellow->health.hp = ((CCharEntity*)PMaster)->fellowZoningInfo.fellowHP;
-                PFellow->health.mp = ((CCharEntity*)PMaster)->fellowZoningInfo.fellowMP;
+                PFellow->health.hp = PMaster->fellowZoningInfo.fellowHP;
+                PFellow->health.mp = PMaster->fellowZoningInfo.fellowMP;
             }
             else if (spawningFromZone == false)
             {
@@ -491,7 +493,7 @@ namespace fellowutils
         }
         else
         {
-            static_cast<CCharEntity*>(PMaster)->resetFellowZoningInfo();
+            PMaster->resetFellowZoningInfo();
         }
     }
 
@@ -528,12 +530,12 @@ namespace fellowutils
     {
         CFellowEntity* PFellow    = new CFellowEntity(PMaster);
         PFellow->loc              = PMaster->loc;
+        PFellow->loc.p            = PMaster->loc.p;
         PFellow->m_OwnerID.id     = PMaster->id;
         PFellow->m_OwnerID.targid = PMaster->targid;
+        Fellow_t* fellow          = g_PFellowList[FellowID];
 
-        PFellow->loc.p                                     = PMaster->loc.p;
-        Fellow_t* fellow                                   = g_PFellowList[FellowID];
-        ((CCharEntity*)PMaster)->fellowZoningInfo.fellowID = FellowID;
+        PMaster->fellowZoningInfo.fellowID = FellowID;
 
         PFellow->look = fellow->look;
         uint8 type    = 0;
@@ -558,8 +560,8 @@ namespace fellowutils
         {
             PFellow->look.sub = (uint16)sql->GetIntData(0) + 0x7000;
         }
-        
-        if (((uint16)sql->GetIntData(1) == SKILL_HAND_TO_HAND || (((uint16)sql->GetIntData(1) == SKILL_KATANA)) && settings::get<bool>("main.ALLOW_ADVENTURING_FELLOW_KATANA_DW")))
+
+        if ((uint16)sql->GetIntData(1) == SKILL_HAND_TO_HAND || (((uint16)sql->GetIntData(1) == SKILL_KATANA) && settings::get<bool>("main.ALLOW_ADVENTURING_FELLOW_KATANA_DW")))
         {
             PFellow->look.sub = PFellow->look.main + 0x1000;
         }
@@ -620,7 +622,6 @@ namespace fellowutils
         {
             PFellow->name.clear();
             PFellow->name.insert(0, (const char*)sql->GetData(1));
-            //ShowDebug("PMaster: %u Fellow name = %s ID = %u\n", PMaster->id, PFellow->name, FellowID);
             PFellow->packetName.insert(0, (const char*)sql->GetData(1));
 
             uint8 mlvl = (uint8)sql->GetIntData(2); // pull lvl from db
@@ -1008,8 +1009,7 @@ namespace fellowutils
                 exp = 300;
         }
         // ShowDebug("fellowutils::Distribute... exp is: %u\n", exp);
-        fellowutils::AddExperiencePoints(PFellow, PMob, (uint32)exp, PChar);
-        // Add fellow_points here
+        fellowutils::AddExperiencePoints(PFellow, PMob, exp, PChar);
         fellowutils::AddKillCount(PChar);
     }
 
@@ -1032,12 +1032,10 @@ namespace fellowutils
             uint8  currentCap = (uint8)sql->GetIntData(0);
             uint8  currentLvl = (uint8)sql->GetIntData(1);
             uint32 currentExp = (uint32)sql->GetIntData(2);
-            //ShowDebug("fellowutils:: Cap: %u Lvl: %u Exp: %u\n", currentCap, currentLvl, currentExp);
 
             if (exp != 0)
                 currentExp += exp; // add normal exp
 
-            //ShowDebug("fellowutils::GetExpNEXTLevel is: %u\n", GetExpNEXTLevel(currentLvl));
             if (GetExpNEXTLevel(currentLvl) != 0)
             {
                 if (currentExp >= GetExpNEXTLevel(currentLvl))
@@ -1066,7 +1064,7 @@ namespace fellowutils
                     }
                 }
             }
-            //ShowDebug("fellowutils:: FINAL currentExp: %u currentLvl: %u\n", currentExp, currentLvl);
+
             SaveFellowExp(PMaster, currentLvl, currentExp);
             charutils::AddPoints(PMaster, "fellow_point", exp / 2);
         }
@@ -1103,7 +1101,7 @@ namespace fellowutils
                 maxKills = 25;
             else if (fellowBond >= 30)
                 maxKills = 20;
-            //ShowDebug("fellowutils:: kills: %u maxKills: %u\n", kills, maxKills);
+
             PMaster->m_PFellow->SetLocalVar("maxKills", maxKills);
             PMaster->m_PFellow->SetLocalVar("zoneKills", PMaster->m_PFellow->zoneKills);
 
@@ -1173,18 +1171,16 @@ namespace fellowutils
     {
         uint16 message       = 0;
         uint16 MessageOffset = GetMessageOffset(PChar->getZone());
-        //ShowDebug("fellowutils:: MessageOffset: %u Zone: %u\n", MessageOffset, PChar->getZone());
-        uint8  currentCap  = 0;
-        uint8  currentLvl  = 0;
-        uint32 currentExp  = 0;
-        uint16 expPercent  = 0;
-        uint32 expNEXTLvl  = 0;
-        uint8  type        = 0;
-        uint16 param       = 0;
-        uint16 kills       = 0;
-        uint8  chatCounter = PChar->GetLocalVar("chatCounter");
-        uint8  roll        = xirand::GetRandomNumber(3);
-        //ShowDebug("fellowutils:: chatConter: %u roll: %u option: %u\n", chatCounter, roll, option);
+        uint8  currentCap    = 0;
+        uint8  currentLvl    = 0;
+        uint32 currentExp    = 0;
+        uint16 expPercent    = 0;
+        uint32 expNEXTLvl    = 0;
+        uint8  type          = 0;
+        uint16 param         = 0;
+        uint16 kills         = 0;
+        uint8  chatCounter   = PChar->GetLocalVar("chatCounter");
+        uint8  roll          = xirand::GetRandomNumber(3);
 
         const char* fmtQuery = "SELECT\
                 char_fellow.lvlcap,\
@@ -1298,7 +1294,7 @@ namespace fellowutils
 
     void AttackTarget(CBattleEntity* PMaster, CBattleEntity* PTarget)
     {
-        XI_DEBUG_BREAK_IF(((CCharEntity*)PMaster)->m_PFellow == nullptr);
+        // XI_DEBUG_BREAK_IF(((CCharEntity*)PMaster)->m_PFellow == nullptr);
 
         CBattleEntity* PFellow = ((CCharEntity*)PMaster)->m_PFellow;
         if (!PFellow->StatusEffectContainer->HasPreventActionEffect())
@@ -1309,7 +1305,7 @@ namespace fellowutils
 
     void RetreatToMaster(CBattleEntity* PMaster)
     {
-        XI_DEBUG_BREAK_IF(((CCharEntity*)PMaster)->m_PFellow == nullptr);
+        // XI_DEBUG_BREAK_IF(((CCharEntity*)PMaster)->m_PFellow == nullptr);
 
         CBattleEntity* PFellow = ((CCharEntity*)PMaster)->m_PFellow;
         if (!PFellow->StatusEffectContainer->HasPreventActionEffect())
@@ -1329,9 +1325,6 @@ namespace fellowutils
                 break;
             case SKILL_DAGGER:
                 damage = floor(level * 0.4 + 2.3);
-                break;
-            case SKILL_SWORD:
-                damage = floor((level * 0.5) + 5);
                 break;
             case SKILL_GREAT_SWORD:
                 damage = floor((level * 1.05) + 12.5);
@@ -1360,6 +1353,10 @@ namespace fellowutils
             case SKILL_STAFF: // Pole class
                 damage = floor((level * 0.71) + 8.39);
                 break;
+            case SKILL_SWORD:
+            default:
+                damage = floor((level * 0.5) + 5);
+                break;
         }
         return damage;
     }
@@ -1373,9 +1370,6 @@ namespace fellowutils
                 break;
             case SKILL_DAGGER:
                 delay = 195;
-                break;
-            case SKILL_SWORD:
-                delay = 236;
                 break;
             case SKILL_GREAT_SWORD:
                 delay = 444;
@@ -1403,6 +1397,10 @@ namespace fellowutils
                 break;
             case SKILL_STAFF: // Pole class
                 delay = 402;
+                break;
+            case SKILL_SWORD:
+            default:
+                delay = 236;
                 break;
         }
         return (delay * 1000) / 60;

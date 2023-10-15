@@ -2,9 +2,7 @@
 -- Area: VeLugannon Palace
 --  Mob: Detector
 -----------------------------------
-local ID = require("scripts/zones/VeLugannon_Palace/IDs")
-require("scripts/globals/pathfind")
-require("scripts/globals/regimes")
+local ID = zones[xi.zone.VELUGANNON_PALACE]
 -----------------------------------
 local entity = {}
 
@@ -293,25 +291,25 @@ local canDetectorSummonSC = function(mob)
 end
 
 local spawnCaretaker = function(detector)
-    detector:setLocalVar("summoning", 1)
-    detector:entityAnimationPacket("casm")
+    detector:setLocalVar('summoning', 1)
+    detector:entityAnimationPacket('casm')
     detector:setAutoAttackEnabled(false)
     detector:setMobAbilityEnabled(false)
 
     detector:timer(5000, function(mob)
         if mob:isAlive() then
             local caretaker = GetMobByID(mob:getID() + 1)
-            local petCount = mob:getLocalVar("petCount")
+            local petCount = mob:getLocalVar('petCount')
             caretaker:setSpawn(mob:getXPos() + 1, mob:getYPos(), mob:getZPos() + 1)
-            mob:entityAnimationPacket("shsm")
+            mob:entityAnimationPacket('shsm')
             caretaker:spawn()
             if mob:getTarget() ~= nil then
                 caretaker:updateEnmity(mob:getTarget())
             else
                 DespawnMob(caretaker)
             end
-            mob:setLocalVar("petCount", petCount + 1)
-            mob:setLocalVar("summoning", 0)
+            mob:setLocalVar('petCount', petCount + 1)
+            mob:setLocalVar('summoning', 0)
             mob:setAutoAttackEnabled(true)
             mob:setMobAbilityEnabled(true)
         end
@@ -320,26 +318,26 @@ end
 
 local spawnSteamCleaner = function(mob)
     local sc = GetMobByID(ID.mob.STEAM_CLEANER)
-    if os.time() >= GetServerVariable("[POP]SteamCleaner") and math.random(100) < 20 then
+    if os.time() >= GetServerVariable('[POP]SteamCleaner') and math.random(100) < 20 then
         if not sc:isSpawned() then
-            mob:setLocalVar("summoning", 1)
-            mob:entityAnimationPacket("casm")
+            mob:setLocalVar('summoning', 1)
+            mob:entityAnimationPacket('casm')
             mob:setAutoAttackEnabled(false)
             mob:setMobAbilityEnabled(false)
 
             mob:timer(5000, function(mobArg)
                 if mobArg:isAlive() then
-                    local petCount = mobArg:getLocalVar("petCount")
-                    mobArg:entityAnimationPacket("shsm")
+                    local petCount = mobArg:getLocalVar('petCount')
+                    mobArg:entityAnimationPacket('shsm')
                     sc:setSpawn(mobArg:getXPos() + 1, mobArg:getYPos(), mobArg:getZPos() + 1)
                     sc:spawn()
-                    sc:setLocalVar("spawner", mobArg:getID())
+                    sc:setLocalVar('spawner', mobArg:getID())
                     if mobArg:getTarget() ~= nil then
                         sc:updateEnmity(mobArg:getTarget())
                     end
-                    mobArg:setLocalVar("iSpawnedSC", 1)
-                    mobArg:setLocalVar("petCount", petCount + 1)
-                    mobArg:setLocalVar("summoning", 0)
+                    mobArg:setLocalVar('iSpawnedSC', 1)
+                    mobArg:setLocalVar('petCount', petCount + 1)
+                    mobArg:setLocalVar('summoning', 0)
                     mobArg:setAutoAttackEnabled(true)
                     mobArg:setMobAbilityEnabled(true)
                 end
@@ -361,10 +359,10 @@ end
 
 entity.onMobFight = function(mob, target)
     local caretaker = GetMobByID(mob:getID() + 1)
-    local petCount = mob:getLocalVar("petCount")
+    local petCount = mob:getLocalVar('petCount')
     local sc = GetMobByID(ID.mob.STEAM_CLEANER)
 
-    if mob:getLocalVar("summoning") == 0 then
+    if mob:getLocalVar('summoning') == 0 then
         if
             petCount <= 5 and
             mob:getBattleTime() % 15 < 3 and
@@ -374,7 +372,7 @@ entity.onMobFight = function(mob, target)
         then
             if spawnSteamCleaner(mob) then
                 return
-            elseif mob:getLocalVar("iSpawnedSC") and not sc:isSpawned() then -- If this specific detector spawned SC - dont spawn caretakers until SC is dead
+            elseif mob:getLocalVar('iSpawnedSC') and not sc:isSpawned() then -- If this specific detector spawned SC - dont spawn caretakers until SC is dead
                 spawnCaretaker(mob)
             end
         elseif

@@ -34,6 +34,7 @@
 #include <cstring>
 
 #include "battlefield.h"
+#include "common/vana_time.h"
 #include "enmity_container.h"
 #include "latent_effect_container.h"
 #include "linkshell.h"
@@ -121,10 +122,11 @@ const uint16 CZone::ReducedVerticalAggroZones[] = {
 
 CZone::CZone(ZONEID ZoneID, REGION_TYPE RegionID, CONTINENT_TYPE ContinentID, uint8 levelRestriction)
 : m_zoneID(ZoneID)
-, m_zoneType(ZONE_TYPE::NONE)
+, m_zoneType(ZONE_TYPE::UNKNOWN)
 , m_regionID(RegionID)
 , m_continentID(ContinentID)
 , m_levelRestriction(levelRestriction)
+, m_WeatherChangeTime(0)
 {
     TracyZoneScoped;
 
@@ -137,12 +139,10 @@ CZone::CZone(ZONEID ZoneID, REGION_TYPE RegionID, CONTINENT_TYPE ContinentID, ui
     m_TreasurePool       = nullptr;
     m_BattlefieldHandler = nullptr;
     m_Weather            = WEATHER_NONE;
-    m_WeatherChangeTime  = 0;
     m_navMesh            = nullptr;
     m_zoneEntities       = new CZoneEntities(this);
     m_CampaignHandler    = new CCampaignHandler(this);
 
-    
     m_ZoneDirection     = 0;
     m_ZoneAnimation     = 0;
     m_ZoneAnimStartTime = 0;
@@ -169,7 +169,7 @@ ZONEID CZone::GetID()
     return m_zoneID;
 }
 
-ZONE_TYPE CZone::GetType()
+ZONE_TYPE CZone::GetTypeMask()
 {
     return m_zoneType;
 }
@@ -285,7 +285,7 @@ QueryByNameResult_t const& CZone::queryEntitiesByName(std::string const& pattern
     {
         if (matches(PNpc->GetName(), pattern))
         {
-            entities.push_back(PNpc);
+            entities.emplace_back(PNpc);
         }
     });
 
@@ -293,7 +293,7 @@ QueryByNameResult_t const& CZone::queryEntitiesByName(std::string const& pattern
     {
         if (matches(PMob->GetName(), pattern))
         {
-            entities.push_back(PMob);
+            entities.emplace_back(PMob);
         }
      });
     // clang-format on
@@ -359,7 +359,7 @@ void CZone::LoadZoneLines()
             zl->m_toPos.z        = sql->GetFloatData(4);
             zl->m_toPos.rotation = (uint8)sql->GetIntData(5);
 
-            m_zoneLineList.push_back(zl);
+            m_zoneLineList.emplace_back(zl);
         }
     }
 }
@@ -481,7 +481,7 @@ void CZone::LoadNavMesh()
 
 void CZone::LoadZoneLos()
 {
-    if (GetType() == ZONE_TYPE::CITY || (m_miscMask & MISC_LOS_OFF))
+    if (GetTypeMask() & ZONE_TYPE::CITY || (m_miscMask & MISC_LOS_OFF))
     {
         // Skip cities and zones with line of sight turned off
         return;
@@ -685,8 +685,12 @@ void CZone::UpdateWeather()
         Weather = weatherType.normal;
     }
 
-    // Fog in the morning between the hours of 2 and 7 if there is not a specific elemental weather to override it
-    if ((CurrentVanaDate >= StartFogVanaDate) && (CurrentVanaDate < EndFogVanaDate) && (Weather < WEATHER_HOT_SPELL) && (GetType() > ZONE_TYPE::CITY))
+    // This check is incorrect, fog is not simply a time of day, though it may consistently happen in SOME zones
+    // (Al'Taieu likely has it every morning, while Atohwa Chasm can have it at random any time of day)
+    if ((CurrentVanaDate >= StartFogVanaDate) &&
+        (CurrentVanaDate < EndFogVanaDate) &&
+        (Weather < WEATHER_HOT_SPELL) &&
+        !(GetTypeMask() & ZONE_TYPE::CITY))
     {
         Weather = WEATHER_FOG;
         // Force the weather to change by 7 am
@@ -871,7 +875,7 @@ void CZone::SavePlayTime()
     m_zoneEntities->SavePlayTime();
 }
 
-CCharEntity* CZone::GetCharByName(std::string name)
+CCharEntity* CZone::GetCharByName(std::string const& name)
 {
     return m_zoneEntities->GetCharByName(name);
 }
@@ -946,7 +950,7 @@ void CZone::ZoneServer(time_point tick)
     }
 }
 
-void CZone::ForEachChar(std::function<void(CCharEntity*)> func)
+void CZone::ForEachChar(std::function<void(CCharEntity*)> const& func)
 {
     TracyZoneScoped;
     for (auto PChar : m_zoneEntities->GetCharList())
@@ -955,7 +959,7 @@ void CZone::ForEachChar(std::function<void(CCharEntity*)> func)
     }
 }
 
-void CZone::ForEachCharInstance(CBaseEntity* PEntity, std::function<void(CCharEntity*)> func)
+void CZone::ForEachCharInstance(CBaseEntity* PEntity, std::function<void(CCharEntity*)> const& func)
 {
     TracyZoneScoped;
     for (auto PChar : m_zoneEntities->GetCharList())
@@ -964,7 +968,7 @@ void CZone::ForEachCharInstance(CBaseEntity* PEntity, std::function<void(CCharEn
     }
 }
 
-void CZone::ForEachMob(std::function<void(CMobEntity*)> func)
+void CZone::ForEachMob(std::function<void(CMobEntity*)> const& func)
 {
     TracyZoneScoped;
     for (auto PMob : m_zoneEntities->m_mobList)
@@ -973,7 +977,7 @@ void CZone::ForEachMob(std::function<void(CMobEntity*)> func)
     }
 }
 
-void CZone::ForEachMobInstance(CBaseEntity* PEntity, std::function<void(CMobEntity*)> func)
+void CZone::ForEachMobInstance(CBaseEntity* PEntity, std::function<void(CMobEntity*)> const& func)
 {
     TracyZoneScoped;
     for (auto PMob : m_zoneEntities->m_mobList)
@@ -982,7 +986,7 @@ void CZone::ForEachMobInstance(CBaseEntity* PEntity, std::function<void(CMobEnti
     }
 }
 
-void CZone::ForEachTrust(std::function<void(CTrustEntity*)> func)
+void CZone::ForEachTrust(std::function<void(CTrustEntity*)> const& func)
 {
     TracyZoneScoped;
     for (auto PTrust : m_zoneEntities->m_trustList)
@@ -991,7 +995,7 @@ void CZone::ForEachTrust(std::function<void(CTrustEntity*)> func)
     }
 }
 
-void CZone::ForEachTrustInstance(CBaseEntity* PEntity, std::function<void(CTrustEntity*)> func)
+void CZone::ForEachTrustInstance(CBaseEntity* PEntity, std::function<void(CTrustEntity*)> const& func)
 {
     TracyZoneScoped;
     for (auto PTrust : m_zoneEntities->m_trustList)
@@ -1000,7 +1004,7 @@ void CZone::ForEachTrustInstance(CBaseEntity* PEntity, std::function<void(CTrust
     }
 }
 
-void CZone::ForEachNpc(std::function<void(CNpcEntity*)> func)
+void CZone::ForEachNpc(std::function<void(CNpcEntity*)> const& func)
 {
     TracyZoneScoped;
     for (auto PNpc : m_zoneEntities->m_npcList)
@@ -1068,7 +1072,7 @@ void CZone::CharZoneIn(CCharEntity* PChar)
         PChar->PTreasurePool->AddMember(PChar);
     }
 
-    if (m_zoneType != ZONE_TYPE::DUNGEON_INSTANCED)
+    if (!(m_zoneType & ZONE_TYPE::INSTANCED))
     {
         charutils::ClearTempItems(PChar);
         PChar->PInstance = nullptr;
@@ -1109,16 +1113,6 @@ void CZone::CharZoneIn(CCharEntity* PChar)
         if (PChar->PPet)
         {
             PChar->PPet->StatusEffectContainer->DelStatusEffectsByFlag(EFFECTFLAG_CONFRONTATION, true);
-        }
-    }
-
-        else if (PChar->StatusEffectContainer->HasStatusEffect(EFFECT_LEVEL_SYNC))
-    {
-        // Logging in with no party and a level sync status = bad.
-        if (!PChar->PParty)
-        {
-            PChar->StatusEffectContainer->DelStatusEffectSilent(EFFECT_LEVEL_SYNC);
-            PChar->StatusEffectContainer->DelStatusEffectSilent(EFFECT_LEVEL_RESTRICTION);
         }
     }
 
@@ -1219,8 +1213,17 @@ void CZone::CharZoneOut(CCharEntity* PChar)
     if (PChar->PParty && PChar->loc.destination != 0 && PChar->m_moghouseID == 0)
     {
         uint8 data[4]{};
-        ref<uint32>(data, 0) = PChar->PParty->GetPartyID();
-        message::send(MSG_PT_RELOAD, data, sizeof data, nullptr);
+
+        if (PChar->PParty->m_PAlliance)
+        {
+            ref<uint32>(data, 0) = PChar->PParty->m_PAlliance->m_AllianceID;
+            message::send(MSG_ALLIANCE_RELOAD, data, sizeof data, nullptr);
+        }
+        else
+        {
+            ref<uint32>(data, 0) = PChar->PParty->GetPartyID();
+            message::send(MSG_PT_RELOAD, data, sizeof data, nullptr);
+        }
     }
 
     if (PChar->PParty)
@@ -1283,41 +1286,39 @@ void CZone::CheckTriggerAreas()
     }
 }
 
-    //==========================================================
+void CZone::SetZoneDirection(uint8 direction)
+{
+    m_ZoneDirection = direction;
+}
+void CZone::SetZoneAnimation(uint8 animation)
+{
+    m_ZoneAnimation = animation;
+}
+void CZone::SetZoneAnimStartTime(uint32 startTime)
+{
+    m_ZoneAnimStartTime = startTime;
+}
+void CZone::SetZoneAnimLength(uint16 length)
+{
+    m_ZoneAnimLength = length;
+}
 
-    void CZone::SetZoneDirection(uint8 direction)
-    {
-        m_ZoneDirection = direction;
-    }
-    void CZone::SetZoneAnimation(uint8 animation)
-    {
-        m_ZoneAnimation = animation;
-    }
-    void CZone::SetZoneAnimStartTime(uint32 startTime)
-    {
-        m_ZoneAnimStartTime = startTime;
-    }
-    void CZone::SetZoneAnimLength(uint16 length)
-    {
-        m_ZoneAnimLength = length;
-    }
+uint8 CZone::GetZoneDirection()
+{
+    return m_ZoneDirection;
+}
 
-    uint8 CZone::GetZoneDirection()
-    {
-        return m_ZoneDirection;
-    }
+uint8 CZone::GetZoneAnimation()
+{
+    return m_ZoneAnimation;
+}
 
-    uint8 CZone::GetZoneAnimation()
-    {
-        return m_ZoneAnimation;
-    }
+uint32 CZone::GetZoneAnimStartTime()
+{
+    return m_ZoneAnimStartTime;
+}
 
-    uint32 CZone::GetZoneAnimStartTime()
-    {
-        return m_ZoneAnimStartTime;
-    }
-
-    uint16 CZone::GetZoneAnimLength()
-    {
-        return m_ZoneAnimLength;
-    }
+uint16 CZone::GetZoneAnimLength()
+{
+    return m_ZoneAnimLength;
+}

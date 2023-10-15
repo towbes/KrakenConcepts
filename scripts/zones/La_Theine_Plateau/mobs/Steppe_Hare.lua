@@ -2,8 +2,8 @@
 -- Area: La Theine Plateau
 --  Mob: Steppe Hare
 -----------------------------------
-require("scripts/globals/regimes")
-require("scripts/quests/tutorial")
+require('scripts/globals/regimes')
+require('scripts/quests/tutorial')
 -----------------------------------
 local entity = {}
 

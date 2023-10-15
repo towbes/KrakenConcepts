@@ -2,17 +2,14 @@
 -- Area: Ranguemont Pass
 --   NM: Gloom Eye
 -----------------------------------
-require("scripts/globals/hunts")
-require("scripts/globals/utils")
------------------------------------
 local entity = {}
 
 entity.onMobFight = function(mob, target)
     --[[
     https://ffxiclopedia.fandom.com/wiki/Gloom_Eye
 
-    "Possesses a potent Store TP effect that increases as HP declines.
-    Below 25%, 1 swing from a 2-handed Weapon is estimated to give it approximately 50% TP."
+    'Possesses a potent Store TP effect that increases as HP declines.
+    Below 25%, 1 swing from a 2-handed Weapon is estimated to give it approximately 50% TP.'
 
     Using formula below, mob will have:
     at 100% HP, 20 storeTP

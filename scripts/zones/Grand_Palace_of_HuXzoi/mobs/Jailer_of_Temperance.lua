@@ -2,9 +2,8 @@
 -- Area: Grand Palace of Hu'Xzoi
 --   NM: Jailer of Temperance
 -----------------------------------
-local huxzoiGlobal = require("scripts/zones/Grand_Palace_of_HuXzoi/globals")
-mixins = { require("scripts/mixins/job_special") }
-require("scripts/globals/magic")
+local huxzoiGlobal = require('scripts/zones/Grand_Palace_of_HuXzoi/globals')
+mixins = { require('scripts/mixins/job_special') }
 -----------------------------------
 local entity = {}
 
@@ -22,7 +21,7 @@ local chargeOptic = function(mob)
     -- after the second Optic Induration (even if it fails and thus onMobWeaponSkill not called)
     mob:timer(6500, function(mobArg)
         if mobArg:isAlive() then
-            mobArg:setLocalVar("opticCounter", 0)
+            mobArg:setLocalVar('opticCounter', 0)
             mobArg:setAutoAttackEnabled(true)
             mobArg:setMobAbilityEnabled(true)
         end
@@ -34,7 +33,7 @@ local changeToPot = function(mob)
             mob:setMod(xi.mod.SLASH_SDT, 0)
             mob:setMod(xi.mod.PIERCE_SDT, 0)
             mob:setMod(xi.mod.IMPACT_SDT, 1000)
-            mob:setLocalVar("changeTime", mob:getBattleTime())
+            mob:setLocalVar('changeTime', mob:getBattleTime())
 end
 
 local changeToPole = function(mob)
@@ -42,7 +41,7 @@ local changeToPole = function(mob)
             mob:setMod(xi.mod.SLASH_SDT, 0)
             mob:setMod(xi.mod.PIERCE_SDT, 1000)
             mob:setMod(xi.mod.IMPACT_SDT, 0)
-            mob:setLocalVar("changeTime", mob:getBattleTime())
+            mob:setLocalVar('changeTime', mob:getBattleTime())
 end
 
 local changeToRings = function(mob)
@@ -50,7 +49,7 @@ local changeToRings = function(mob)
             mob:setMod(xi.mod.SLASH_SDT, 1000)
             mob:setMod(xi.mod.PIERCE_SDT, 0)
             mob:setMod(xi.mod.IMPACT_SDT, 0)
-            mob:setLocalVar("changeTime", mob:getBattleTime())
+            mob:setLocalVar('changeTime', mob:getBattleTime())
 end
 
 entity.onMobSpawn = function(mob)
@@ -63,7 +62,7 @@ entity.onMobSpawn = function(mob)
                 id = xi.jsa.MEIKYO_SHISUI,
                 hpp = math.random(65, 75),
                 endCode = function(mobArg)
-                    mobArg:setLocalVar("twoHour", 1)
+                    mobArg:setLocalVar('twoHour', 1)
                 end
             },
         },
@@ -89,13 +88,13 @@ entity.onMobSpawn = function(mob)
 end
 
 entity.onMobEngaged = function(mob, target)
-    mob:setLocalVar("changeTime", 0)
+    mob:setLocalVar('changeTime', 0)
 end
 
 entity.onMobFight = function(mob)
     -- Forms: 0 = Pot  1 = Pot  2 = Poles  3 = Rings
     local randomTime = math.random(30, 180)
-    local changeTime = mob:getLocalVar("changeTime")
+    local changeTime = mob:getLocalVar('changeTime')
     local isBusy = false
 
     -- If we're in a pot form, but going to change to either Rings/Poles
@@ -111,7 +110,7 @@ entity.onMobFight = function(mob)
             act == xi.act.MOBABILITY_START or
             act == xi.act.MOBABILITY_USING or
             act == xi.act.MOBABILITY_FINISH or
-            mob:getLocalVar("opticCounter") == 1
+            mob:getLocalVar('opticCounter') == 1
         then
             isBusy = true -- we don't want to change forms while charging optic induration
         end
@@ -158,17 +157,17 @@ entity.onMobFight = function(mob)
         end
     end
 
-    if mob:getHPP() < 40 and mob:getLocalVar("twoHour") == 1 then -- Jailer of Temperance uses second two hour around 40%
+    if mob:getHPP() < 40 and mob:getLocalVar('twoHour') == 1 then -- Jailer of Temperance uses second two hour around 40%
         mob:useMobAbility(730)
-        mob:setLocalVar("twoHour", 2)
+        mob:setLocalVar('twoHour', 2)
     end
 end
 
 entity.onMobWeaponSkill = function(target, mob, skill)
     local skillID = skill:getID()
     if skillID == 1465 then -- On Optic Induration Do this
-        if mob:getLocalVar("opticCounter") == 0 then
-            mob:setLocalVar("opticCounter", 1)
+        if mob:getLocalVar('opticCounter') == 0 then
+            mob:setLocalVar('opticCounter', 1)
             chargeOptic(mob)
         end
     end
@@ -178,11 +177,11 @@ entity.onMobDeath = function(mob, player, optParams)
 end
 
 entity.onMobDespawn = function(mob)
-    local ph = mob:getLocalVar("ph")
+    local ph = mob:getLocalVar('ph')
     DisallowRespawn(mob:getID(), true)
     DisallowRespawn(ph, false)
     GetMobByID(ph):setRespawnTime(GetMobRespawnTime(ph))
-    mob:setLocalVar("pop", os.time() + 900) -- 15 mins
+    mob:setLocalVar('pop', os.time() + 900) -- 15 mins
     huxzoiGlobal.pickTemperancePH()
 end
 

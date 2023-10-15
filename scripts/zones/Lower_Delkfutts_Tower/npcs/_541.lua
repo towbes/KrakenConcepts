@@ -2,13 +2,8 @@
 -- Area: Lower Delkfutt's Tower
 --  NPC: Cermet Door
 -- Cermet Door for Sandy Ambassador
--- San d'Orian Mission 3.3 "Appointment to Jeuno"
+-- San d'Orian Mission 3.3 'Appointment to Jeuno'
 -- !pos 636 16 20 184
------------------------------------
-local ID = require("scripts/zones/Lower_Delkfutts_Tower/IDs")
-require("scripts/globals/keyitems")
-require("scripts/globals/missions")
-require("scripts/globals/npc_util")
 -----------------------------------
 local entity = {}
 

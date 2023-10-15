@@ -1,12 +1,8 @@
 -----------------------------------
 -- Zone: Western_Altepa_Desert (125)
 -----------------------------------
-local ID = require('scripts/zones/Western_Altepa_Desert/IDs')
+local ID = zones[xi.zone.WESTERN_ALTEPA_DESERT]
 require('scripts/quests/i_can_hear_a_rainbow')
-require('scripts/globals/chocobo_digging')
-require('scripts/globals/conquest')
-require('scripts/globals/zone')
-require('scripts/globals/beastmentreasure')
 require('scripts/missions/amk/helpers')
 -----------------------------------
 local zoneObject = {}
@@ -70,7 +66,7 @@ zoneObject.onZoneWeatherChange = function(weather)
     local dahu = GetMobByID(ID.mob.DAHU)
     if
         not dahu:isSpawned() and 
-        os.time() > dahu:getLocalVar("cooldown") and
+        os.time() > dahu:getLocalVar('cooldown') and
         (weather == xi.weather.DUST_STORM or weather == xi.weather.SAND_STORM)
     then
         DisallowRespawn(dahu:getID(), false)
@@ -78,7 +74,7 @@ zoneObject.onZoneWeatherChange = function(weather)
     end
 
     local kingV = GetMobByID(ID.mob.KING_VINEGARROON)
-    local kvre = GetServerVariable("\\[SPAWN\\]17289575")
+    local kvre = GetServerVariable('\\[SPAWN\\]17289575')
     
     if not kingV:isSpawned() and os.time() > kvre and weather == xi.weather.DUST_STORM then
         -- 10% chance for KV pop at start of single earth weather

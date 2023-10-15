@@ -2,9 +2,9 @@
 -- Area: Kuftal Tunnel
 --   NM: Phantom Worm
 -----------------------------------
-local kuftalGlobal = require("scripts/zones/Kuftal_Tunnel/globals")
-local ID = require("scripts/zones/Kuftal_Tunnel/IDs")
-require("scripts/globals/status")
+local kuftalGlobal = require('scripts/zones/Kuftal_Tunnel/globals')
+local ID = zones[xi.zone.KUFTAL_TUNNEL]
+
 -----------------------------------
 local entity = {}
 

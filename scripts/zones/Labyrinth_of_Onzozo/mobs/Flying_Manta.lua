@@ -3,16 +3,14 @@
 --  Mob: Flying Manta
 -- Note: PH for Lord of Onzozo and Peg Powler
 -----------------------------------
-local ID = require("scripts/zones/Labyrinth_of_Onzozo/IDs")
-require("scripts/globals/regimes")
-require("scripts/globals/mobs")
-mixins = {require("scripts/mixins/rage")}
+local ID = zones[xi.zone.LABYRINTH_OF_ONZOZO]
+mixins = {require('scripts/mixins/rage')}
 -----------------------------------
 local entity = {}
 
 entity.onMobSpawn = function(mob)
     if mob:getID() == ID.mob.ONZOZO_PH then
-        mob:setLocalVar("[rage]timer", 600) -- 10 minutes
+        mob:setLocalVar('[rage]timer', 600) -- 10 minutes
     end
 end
 

@@ -3,13 +3,13 @@
 --  Mob: Diabolos Letum
 -- Note: Mega Boss
 -----------------------------------
-require("scripts/globals/dynamis")
+require('scripts/globals/dynamis')
 -----------------------------------
 local entity = {}
 
 entity.onMobInitialize = function(mob)
     mob:setAutoAttackEnabled(false)
-    mob:addListener("MAGIC_USE", "LETUM_MAGIC_USE", function(mobArg, target, spell, action)
+    mob:addListener('MAGIC_USE', 'LETUM_MAGIC_USE', function(mobArg, target, spell, action)
         if spell:tookEffect() then
             mobArg:useMobAbility(1908)
         end

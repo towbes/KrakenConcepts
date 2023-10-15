@@ -2,7 +2,7 @@
 -- Area: The Garden of Ru'Hmet
 --  Mob: Aw'euvhi
 -----------------------------------
-mixins = { require("scripts/mixins/families/euvhi") }
+mixins = { require('scripts/mixins/families/euvhi') }
 -----------------------------------
 local entity = {}
 
@@ -16,7 +16,7 @@ entity.onMobFight = function(mob)
     -- According to http://wiki.ffxiclopedia.org/wiki/Category:Euvhi
     -- ..when attacked will change states every minute or so..
     local randomTime = math.random(50, 75)
-    local changeTime = mob:getLocalVar("changeTime")
+    local changeTime = mob:getLocalVar('changeTime')
 
     if mob:getBattleTime() - changeTime > randomTime then
         if mob:getAnimationSub() == 2 then
@@ -25,7 +25,7 @@ entity.onMobFight = function(mob)
             mob:setAnimationSub(2)
         end
 
-        mob:setLocalVar("changeTime", mob:getBattleTime())
+        mob:setLocalVar('changeTime', mob:getBattleTime())
 
         -- According to http://wiki.ffxiclopedia.org/wiki/Category:Euvhi
         -- When in an open state, damage taken by the Euvhi is doubled. Inflicting a large amount of damage to an Euvhi in an open state will cause it to close.

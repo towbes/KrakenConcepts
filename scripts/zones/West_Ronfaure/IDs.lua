@@ -1,9 +1,6 @@
 -----------------------------------
 -- Area: West_Ronfaure
 -----------------------------------
-require("scripts/globals/zone")
------------------------------------
-
 zones = zones or {}
 
 zones[xi.zone.WEST_RONFAURE] =
@@ -24,6 +21,7 @@ zones[xi.zone.WEST_RONFAURE] =
         FISHING_MESSAGE_OFFSET        = 7241,  -- You can't fish here.
         DIG_THROW_AWAY                = 7254,  -- You dig up <item>, but your inventory is full. You regretfully throw the <item> away.
         FIND_NOTHING                  = 7256,  -- You dig and you dig, but find nothing.
+        RAMAUFONT_DIALOG              = 7341,  -- Nothing to report.
         GACHEMAGE_DIALOG              = 7342,  -- Orcish scouts lurk in the shadows. Consider yourself warned!
         ADALEFONT_DIALOG              = 7343,  -- If you sense danger, just flee into the city. I'll not endanger myself on your account!
         LAILLERA_DIALOG               = 7344,  -- I mustn't chat while on duty. Sorry.
@@ -41,6 +39,9 @@ zones[xi.zone.WEST_RONFAURE] =
         ZOVRIACE_RETURN               = 7393,  -- Let me be! I return to Southgate with word on La Theine.
         PICKPOCKET_PALCOMONDAU        = 7394,  -- A pickpocket? No, I haven't seen anyone matching that description. I've only seen Aaveleon, and a rather brusque woman.
         PICKPOCKET_ZOVRIACE           = 7395,  -- A pickpocket, out here? Can't say I've seen anyone like that. I'll keep my eyes peeled.
+        DIADONOUR_DIALOG              = 7396,  -- Our people often fall prey to roving Orcs nearby. Take care out there!
+        LAETTE_DIALOG                 = 7401,  -- This watchtower was built to strengthen Ranperre Gate. You can look around, but stay out of our way.
+        CHATARRE_DIALOG               = 7402,  -- Ghelsba and its Orcish camps lie at the foot of mountains yonder. We must be vigilant! They could attack at any time.
         DISMAYED_CUSTOMER             = 7419,  -- You find some worthless scraps of paper.
         CONQUEST                      = 7541,  -- You've earned conquest points!
         SOMETHING_IS_AMISS            = 7892,  -- Something is amiss.
@@ -52,12 +53,8 @@ zones[xi.zone.WEST_RONFAURE] =
         NO_COMBINATION                = 8066,  -- You were unable to enter a combination.
         REGIME_REGISTERED             = 10432, -- New training regime registered!
         COMMON_SENSE_SURVIVAL         = 12433, -- It appears that you have arrived at a new survival guide provided by the Adventurers' Mutual Aid Network. Common sense dictates that you should now be able to teleport here from similar tomes throughout the world.
-        AAVELEON_DEFAULT              = 7351,  -- Many orcs are nearby. They prey upon the weak, so do not venture far...unless you can handle them.
-        COLMAIE_DEFAULT               = 7342,  -- Orcish scouts lurk in the shadows. Consider yourself warned!
-        DIADONOUR_DEFAULT             = 7396,  -- Our people often fall prey to roving Orcs nearby. Take care out there!
-        RAMAUFONT_DEFAULT             = 7399,  -- Nothing to report.
-        LAETTE_DEFAULT                = 7401,  -- This watchtower was built to strengthen Ranperre Gate. You can look around, but stay out of our way.
-        CHATARRE_DEFAULT              = 7402,  -- Ghelsba and its Orcish camps lie at the foot of mountains yonder. We must be vigilant! They could attack at any time.
+        AAVELEON_DIALOG              = 7351,  -- Many orcs are nearby. They prey upon the weak, so do not venture far...unless you can handle them.
+        COLMAIE_DIALOG               = 7342,  -- Orcish scouts lurk in the shadows. Consider yourself warned!
     },
     mob =
     {

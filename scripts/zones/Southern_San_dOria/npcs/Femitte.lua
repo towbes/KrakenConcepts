@@ -4,10 +4,7 @@
 -- Involved in Quest: Lure of the Wildcat (San d'Oria), Distant Loyalties
 -- !pos -17 2 10 230
 -----------------------------------
-local ID = require("scripts/zones/Southern_San_dOria/IDs")
-require("scripts/globals/keyitems")
-require("scripts/globals/quests")
-require("scripts/globals/utils")
+local ID = zones[xi.zone.SOUTHERN_SAN_DORIA]
 -----------------------------------
 local entity = {}
 
@@ -15,7 +12,7 @@ entity.onTrade = function(player, npc, trade)
 end
 
 entity.onTrigger = function(player, npc)
-    local wildcatSandy = player:getCharVar("WildcatSandy")
+    local wildcatSandy = player:getCharVar('WildcatSandy')
 
     if
         player:getQuestStatus(xi.quest.log_id.SANDORIA, xi.quest.id.sandoria.LURE_OF_THE_WILDCAT) == QUEST_ACCEPTED and
@@ -30,7 +27,7 @@ end
 
 entity.onEventFinish = function(player, csid, option, npc)
     if csid == 807 then
-        player:setCharVar("WildcatSandy", utils.mask.setBit(player:getCharVar("WildcatSandy"), 3, true))
+        player:setCharVar('WildcatSandy', utils.mask.setBit(player:getCharVar('WildcatSandy'), 3, true))
     end
 end
 

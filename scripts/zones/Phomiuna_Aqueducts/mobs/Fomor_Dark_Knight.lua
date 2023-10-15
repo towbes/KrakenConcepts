@@ -2,8 +2,8 @@
 -- Area: Phomiuna_Aqueducts
 --  Mob: Fomor Dark Knight
 -----------------------------------
-mixins = { require("scripts/mixins/fomor_hate") }
-local ID = require('scripts/zones/Phomiuna_Aqueducts/IDs')
+mixins = { require('scripts/mixins/fomor_hate') }
+local ID = zones[xi.zone.PHOMIUNA_AQUEDUCTS]
 -----------------------------------
 local entity = {}
 

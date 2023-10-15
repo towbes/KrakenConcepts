@@ -1,8 +1,7 @@
 -----------------------------------
 -- Zone: AlTaieu (33)
 -----------------------------------
-local ID = require('scripts/zones/AlTaieu/IDs')
-require('scripts/globals/missions')
+local ID = zones[xi.zone.ALTAIEU]
 require('scripts/globals/exp_controller')
 -----------------------------------
 local zoneObject = {}
@@ -36,7 +35,7 @@ zoneObject.onEventFinish = function(player, csid, option, npc)
 end
 
 zoneObject.afterZoneIn = function(player)
-    player:entityVisualPacket("on00", player) -- Fog effect on zone in
+    player:entityVisualPacket('on00', player) -- Fog effect on zone in
 end
 
 return zoneObject

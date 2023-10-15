@@ -5,10 +5,7 @@
 -- Involved in Quests: The Lost Cardian
 -- !pos -61 0 -140 245
 -----------------------------------
-local ID = require("scripts/zones/Lower_Jeuno/IDs")
-require("scripts/globals/titles")
-require("scripts/globals/keyitems")
-require("scripts/globals/quests")
+local ID = zones[xi.zone.LOWER_JEUNO]
 -----------------------------------
 local entity = {}
 
@@ -24,16 +21,16 @@ entity.onTrigger = function(player, npc)
         player:getFameLevel(xi.quest.fame_area.JEUNO) >= 4 and
         theWonderMagicSet == QUEST_AVAILABLE
     then
-        player:startEvent(77) -- Start quest "The wonder magic set"
+        player:startEvent(77) -- Start quest 'The wonder magic set'
 
     elseif
         theWonderMagicSet == QUEST_ACCEPTED and
         not hasWonderMagicSet
     then
-        player:startEvent(55) -- During quest "The wonder magic set"
+        player:startEvent(55) -- During quest 'The wonder magic set'
 
     elseif hasWonderMagicSet then
-        player:startEvent(33) -- Finish quest "The wonder magic set"
+        player:startEvent(33) -- Finish quest 'The wonder magic set'
 
     elseif
         theWonderMagicSet == QUEST_COMPLETED and
@@ -45,20 +42,20 @@ entity.onTrigger = function(player, npc)
         theWonderMagicSet == QUEST_COMPLETED and
         player:getQuestStatus(xi.quest.log_id.JEUNO, xi.quest.id.jeuno.THE_LOST_CARDIAN) == QUEST_AVAILABLE
     then
-        if player:getCharVar("theLostCardianVar") >= 1 then
-            player:startEvent(30) -- Second dialog for "The lost cardien" quest
+        if player:getCharVar('theLostCardianVar') >= 1 then
+            player:startEvent(30) -- Second dialog for 'The lost cardien' quest
         else
             player:startEvent(40) -- Standard dialog
         end
 
     elseif
         theKindCardian == QUEST_ACCEPTED and
-        player:getCharVar("theKindCardianVar") == 2
+        player:getCharVar('theKindCardianVar') == 2
     then
-        player:startEvent(35) -- Finish quest "The kind cardien"
+        player:startEvent(35) -- Finish quest 'The kind cardien'
 
     elseif theKindCardian == QUEST_COMPLETED then
-        player:startEvent(76) -- New standard dialog after "The kind cardien"
+        player:startEvent(76) -- New standard dialog after 'The kind cardien'
 
     else
         player:startEvent(78) -- Base standard dialog
@@ -73,27 +70,27 @@ entity.onEventFinish = function(player, csid, option, npc)
         player:addQuest(xi.quest.log_id.JEUNO, xi.quest.id.jeuno.THE_WONDER_MAGIC_SET)
     elseif csid == 33 then
         if player:getFreeSlotsCount() == 0 then
-            player:messageSpecial(ID.text.ITEM_CANNOT_BE_OBTAINED, 13328)
+            player:messageSpecial(ID.text.ITEM_CANNOT_BE_OBTAINED, xi.item.MYTHRIL_EARRING)
         else
             player:addTitle(xi.title.FOOLS_ERRAND_RUNNER)
             player:delKeyItem(xi.ki.WONDER_MAGIC_SET)
-            player:addItem(13328)
-            player:messageSpecial(ID.text.ITEM_OBTAINED, 13328)
+            player:addItem(xi.item.MYTHRIL_EARRING)
+            player:messageSpecial(ID.text.ITEM_OBTAINED, xi.item.MYTHRIL_EARRING)
             player:addFame(xi.quest.fame_area.JEUNO, 30)
             player:needToZone(true)
             player:completeQuest(xi.quest.log_id.JEUNO, xi.quest.id.jeuno.THE_WONDER_MAGIC_SET)
         end
     elseif csid == 30 then
-        player:setCharVar("theLostCardianVar", 2)
+        player:setCharVar('theLostCardianVar', 2)
     elseif csid == 35 then
         if player:getFreeSlotsCount() == 0 then
-            player:messageSpecial(ID.text.ITEM_CANNOT_BE_OBTAINED, 13596)
+            player:messageSpecial(ID.text.ITEM_CANNOT_BE_OBTAINED, xi.item.GREEN_CAPE)
         else
             player:addTitle(xi.title.BRINGER_OF_BLISS)
             player:delKeyItem(xi.ki.TWO_OF_SWORDS)
-            player:setCharVar("theKindCardianVar", 0)
-            player:addItem(13596)
-            player:messageSpecial(ID.text.ITEM_OBTAINED, 13596) -- Green Cape
+            player:setCharVar('theKindCardianVar', 0)
+            player:addItem(xi.item.GREEN_CAPE)
+            player:messageSpecial(ID.text.ITEM_OBTAINED, xi.item.GREEN_CAPE) -- Green Cape
             player:addFame(xi.quest.fame_area.JEUNO, 30)
             player:completeQuest(xi.quest.log_id.JEUNO, xi.quest.id.jeuno.THE_KIND_CARDIAN)
         end

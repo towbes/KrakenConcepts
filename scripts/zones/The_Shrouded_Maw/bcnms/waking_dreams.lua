@@ -3,11 +3,7 @@
 -- The Shrouded Maw avatar battlefield
 -- !addkeyitem VIAL_OF_DREAM_INCENSE
 -----------------------------------
-local ID = require("scripts/zones/The_Shrouded_Maw/IDs")
-require("scripts/globals/battlefield")
-require("scripts/globals/npc_util")
-require("scripts/globals/keyitems")
-require("scripts/globals/titles")
+local ID = zones[xi.zone.THE_SHROUDED_MAW]
 -----------------------------------
 local battlefieldObject = {}
 
@@ -20,7 +16,7 @@ battlefieldObject.onBattlefieldInitialise = function(battlefield)
     local tile = ID.npc.DARKNESS_NAMED_TILE_OFFSET + (inst - 1) * 8
     for i = tile, tile + 7 do
         GetNPCByID(i):setAnimation(xi.anim.CLOSE_DOOR)
-        GetNPCByID(i):setLocalVar("Dropped", xi.anim.CLOSE_DOOR)
+        GetNPCByID(i):setLocalVar('Dropped', xi.anim.CLOSE_DOOR)
     end
 end
 
@@ -30,7 +26,7 @@ end
 battlefieldObject.onBattlefieldLeave = function(player, battlefield, leavecode)
     if leavecode == xi.battlefield.leaveCode.WON then
         local _, clearTime, partySize = battlefield:getRecord()
-        player:startEvent(32001, battlefield:getArea(), clearTime, partySize, battlefield:getTimeInside(), 1, battlefield:getLocalVar("[cs]bit"), 0)
+        player:startEvent(32001, battlefield:getArea(), clearTime, partySize, battlefield:getTimeInside(), 1, battlefield:getLocalVar('[cs]bit'), 0)
     elseif leavecode == xi.battlefield.leaveCode.LOST then
         player:startEvent(32002)
     end

@@ -2,9 +2,6 @@
 -- Area: Monarch Linn
 --  Mob: Ouryu
 -----------------------------------
-require("scripts/globals/titles")
-require("scripts/globals/status")
------------------------------------
 local entity = {}
 
 entity.onMobInitialize = function(mob)
@@ -21,7 +18,7 @@ entity.onMobSpawn = function(mob)
     mob:setMobMod(xi.mobMod.DRAW_IN, 1)
     mob:setMobMod(xi.mobMod.DRAW_IN_CUSTOM_RANGE, 15)
     mob:setMobMod(xi.mobMod.WEAPON_BONUS, 125)
-    mob:setLocalVar("setTwoHourThreshold", math.random(50, 80))
+    mob:setLocalVar('setTwoHourThreshold', math.random(50, 80))
 end
 
 entity.onMobFight = function(mob, target)
@@ -34,11 +31,11 @@ entity.onMobFight = function(mob, target)
     -- only use invincible on the groud
     if
         mob:getAnimationSub() == 2 and
-        mob:getHPP() < mob:getLocalVar("setTwoHourThreshold")
+        mob:getHPP() < mob:getLocalVar('setTwoHourThreshold')
     then
         mob:useMobAbility(694)
         --make sure to use only once in case of regen back above threshold
-        mob:setLocalVar("setTwoHourThreshold", 0)
+        mob:setLocalVar('setTwoHourThreshold', 0)
     end
 
     if
@@ -46,14 +43,14 @@ entity.onMobFight = function(mob, target)
         mob:actionQueueEmpty() and
         mob:canUseAbilities()
     then
-        local changeTime = mob:getLocalVar("changeTime")
+        local changeTime = mob:getLocalVar('changeTime')
 
         if mob:getAnimationSub() == 0 and mob:getBattleTime() - changeTime > 60 then
             mob:setAnimationSub(1)
             mob:addStatusEffectEx(xi.effect.ALL_MISS, 0, 1, 0, 0)
             mob:setMobSkillAttack(731)
             --and record the time this phase was started
-            mob:setLocalVar("changeTime", mob:getBattleTime())
+            mob:setLocalVar('changeTime', mob:getBattleTime())
         -- subanimation 1 is flight, so check if he should land
         elseif mob:getAnimationSub() == 1 and mob:getBattleTime() - changeTime > 120 then
             -- touchdown ability changes the animation sub, miss status, and mob skill attack
@@ -63,7 +60,7 @@ entity.onMobFight = function(mob, target)
             mob:setAnimationSub(1)
             mob:addStatusEffectEx(xi.effect.ALL_MISS, 0, 1, 0, 0)
             mob:setMobSkillAttack(731)
-            mob:setLocalVar("changeTime", mob:getBattleTime())
+            mob:setLocalVar('changeTime', mob:getBattleTime())
         end
     end
 
@@ -77,7 +74,7 @@ entity.onMobWeaponSkill = function(target, mob, skill)
     -- only reset change time if actual perform touchdown
     -- thus keep trying until we do so
     if skill:getID() == 1302 then
-        mob:setLocalVar("changeTime", mob:getBattleTime())
+        mob:setLocalVar('changeTime', mob:getBattleTime())
     end
 end
 

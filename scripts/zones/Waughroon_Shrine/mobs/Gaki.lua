@@ -3,7 +3,7 @@
 --   NM: Gaki
 -- Involved in Quest: A Thief in Norg
 -----------------------------------
-mixins = {require("scripts/mixins/job_special")}
+mixins = {require('scripts/mixins/job_special')}
 -----------------------------------
 local entity = {}
 

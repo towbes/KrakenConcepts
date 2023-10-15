@@ -23,24 +23,24 @@
 #include <cstring>
 
 CMobSkill::CMobSkill(uint16 id)
+: m_ID(id)
+, m_TotalTargets(1)
+, m_Param(0)
+, m_AnimID(0)
+, m_Aoe(0)
+, m_Distance(0)
+, m_Flag(0)
+, m_ValidTarget(0)
+, m_AnimationTime(0)
+, m_ActivationTime(0)
+, m_Message(0)
+, m_TP(0)
+, m_HPP(0)
+, m_knockback(0)
+, m_primarySkillchain(0)
+, m_secondarySkillchain(0)
+, m_tertiarySkillchain(0)
 {
-    m_ID                  = id;
-    m_AnimID              = 0;
-    m_Aoe                 = 0;
-    m_Distance            = 0;
-    m_TotalTargets        = 1;
-    m_Flag                = 0;
-    m_ValidTarget         = 0;
-    m_AnimationTime       = 0;
-    m_ActivationTime      = 0;
-    m_Message             = 0;
-    m_Param               = 0;
-    m_primarySkillchain   = 0;
-    m_secondarySkillchain = 0;
-    m_tertiarySkillchain  = 0;
-    m_TP                  = 0;
-    m_HPP                 = 0;
-    m_knockback           = 0;
 }
 
 bool CMobSkill::hasMissMsg() const
@@ -222,7 +222,8 @@ uint16 CMobSkill::getPetAnimationID() const
     {
         return m_AnimID - 493;
     }
-    // Diabolos pet animation range 141 to 149.
+
+        // Diabolos pet animation range 141 to 149.
     // Pet animations 142, 145, 148, 149 are directly referenced in sql
     if (m_AnimID == 915) // Diabolos Camisado
     {
@@ -240,6 +241,8 @@ uint16 CMobSkill::getPetAnimationID() const
     {
         return 146;
     }
+    //  return 147; pet animationID 147 is an unused Diabolos aoe move encircling him in red rings/script
+
     if (m_AnimID == 1125) // Diabolos Ruinous Omen
     {
         return 149;
@@ -256,7 +259,7 @@ uint16 CMobSkill::getPetAnimationID() const
     {
         return 148;
     }
-    //  return 147; pet animationID 147 is an unused Diabolos aoe move encircling him in red rings/script
+
 
     return m_AnimID;
 }

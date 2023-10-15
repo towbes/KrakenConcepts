@@ -6,14 +6,6 @@
 -- Rhea Myuliah : !pos -56.220 -1 101.805 244
 -- Harmodios    : !pos -79.928 -4.824 -135.114 235
 -----------------------------------
-require('scripts/globals/interaction/quest')
-require('scripts/globals/items')
-require('scripts/globals/keyitems')
-require('scripts/globals/npc_util')
-require('scripts/globals/quests')
-require('scripts/globals/titles')
-require('scripts/globals/zone')
------------------------------------
 
 local quest = Quest:new(xi.quest.log_id.JEUNO, xi.quest.id.jeuno.COMEBACK_QUEEN)
 
@@ -157,7 +149,7 @@ quest.sections =
                 end,
 
                 [10154] = function(player, csid, option, npc)
-                    local dancersCasaque = xi.items.DANCERS_CASAQUE_F - player:getGender()
+                    local dancersCasaque = xi.item.DANCERS_CASAQUE_F - player:getGender()
 
                     if npcUtil.giveItem(player, dancersCasaque) then
                         quest:complete(player)
@@ -180,7 +172,7 @@ quest.sections =
                 end,
 
                 [10211] = function(player, csid, option, npc)
-                    local dancersCasaque = xi.items.DANCERS_CASAQUE_F - player:getGender()
+                    local dancersCasaque = xi.item.DANCERS_CASAQUE_F - player:getGender()
 
                     if npcUtil.giveItem(player, dancersCasaque) then
                         quest:complete(player)

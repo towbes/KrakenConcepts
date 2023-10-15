@@ -3,7 +3,7 @@
 --  NPC: Ice Protocrystal
 -- Involved in Quests: Trial by Ice, Trial Size Trial by Ice
 -----------------------------------
-require("scripts/globals/bcnm")
+require('scripts/globals/bcnm')
 -----------------------------------
 local entity = {}
 

@@ -56,95 +56,70 @@
 
 #include <cstring>
 
-int32  g_pixieAmity            = 0;
-time_t g_pixieLastAmityRefresh = 0;
-
 CMobEntity::CMobEntity()
+: m_AllowRespawn(false)
+, m_RespawnTime(300)
+, m_DropItemTime(0)
+, m_DropID(0)
+, m_minLevel(1)
+, m_maxLevel(1)
+, HPmodifier(0)
+, MPmodifier(0)
+, HPscale(1.0)
+, MPscale(1.0)
+, m_roamFlags(ROAMFLAG_NONE)
+, m_specialFlags(SPECIALFLAG_NONE)
+, m_StatPoppedMobs(false)
+, strRank(3)
+, dexRank(3)
+, vitRank(3)
+, agiRank(3)
+, intRank(3)
+, mndRank(3)
+, chrRank(3)
+, attRank(3)
+, defRank(3)
+, accRank(3)
+, evaRank(3)
+, m_dmgMult(100)
+, m_disableScent(false)
+, m_maxRoamDistance(50.0f)
+, m_Type(MOBTYPE_NORMAL)
+, m_Aggro(false)
+, m_TrueDetection(false)
+, m_Link(0)
+, m_isAggroable(false)
+, m_Behaviour(BEHAVIOUR_NONE)
+, m_SpawnType(SPAWNTYPE_NORMAL)
+, m_battlefieldID(0)
+, m_bcnmID(0)
+, m_giveExp(false)
+, m_neutral(false)
+, m_Element(0)
+, m_HiPCLvl(0)
+, m_HiPartySize(0)
+, m_THLvl(0)
+, m_ItemStolen(false)
+, m_Family(0)
+, m_SuperFamily(0)
+, m_MobSkillList(0)
+, m_Pool(0)
+, m_flags(0)
+, m_name_prefix(0)
+, m_unk0(0)
+, m_unk1(8)
+, m_unk2(0)
+, m_CallForHelpBlocked(false)
+, m_IsClaimable(true)
 {
     TracyZoneScoped;
-    objtype = TYPE_MOB;
-
-    m_DropID = 0;
-
-    m_minLevel = 1;
-    m_maxLevel = 1;
-
-    HPscale = 1.0;
-    MPscale = 1.0;
-    m_flags = 0;
-
-    m_unk0 = 0;
-    m_unk1 = 8;
-    m_unk2 = 0;
-
-    m_CallForHelpBlocked = false;
-
-    allegiance = ALLEGIANCE_TYPE::MOB;
-
-    // default to normal roaming
-    m_roamFlags    = ROAMFLAG_NONE;
-    m_specialFlags = SPECIALFLAG_NONE;
-    m_name_prefix  = 0;
-    m_MobSkillList = 0;
-
-    m_AllowRespawn = false;
-    m_DropItemTime = 0;
-    m_Family       = 0;
-    m_SuperFamily  = 0;
-    m_Type         = MOBTYPE_NORMAL;
-    m_Behaviour    = BEHAVIOUR_NONE;
-    m_SpawnType    = SPAWNTYPE_NORMAL;
-    m_EcoSystem    = ECOSYSTEM::UNCLASSIFIED;
-    m_Element      = 0;
-    m_HiPCLvl      = 0;
-    m_HiPartySize  = 0;
-    m_THLvl        = 0;
-    m_ItemStolen   = false;
-    m_StealItemID  = 0;
-
-    HPmodifier = 0;
-    MPmodifier = 0;
-
-    strRank = 3;
-    vitRank = 3;
-    dexRank = 3;
-    agiRank = 3;
-    intRank = 3;
-    mndRank = 3;
-    chrRank = 3;
-    attRank = 3;
-    defRank = 3;
-    accRank = 3;
-    evaRank = 3;
-
-    m_dmgMult = 100;
-
-    m_giveExp       = false;
-    m_neutral       = false;
-    m_Aggro         = false;
-    m_TrueDetection = false;
-    m_Link          = 0;
-    m_isAggroable   = false;
-    m_battlefieldID = 0;
-    m_bcnmID        = 0;
-
-    m_maxRoamDistance = 50.0f;
-    m_disableScent    = false;
-
-    m_Pool        = 0;
-    m_RespawnTime = 300;
+    objtype     = ENTITYTYPE::TYPE_MOB;
+    allegiance  = ALLEGIANCE_TYPE::MOB;
+    m_EcoSystem = ECOSYSTEM::UNCLASSIFIED;
 
     m_SpellListContainer = nullptr;
     PEnmityContainer     = new CEnmityContainer(this);
     SpellContainer       = new CMobSpellContainer(this);
-
-    m_pixieLastCast = 0;
-
-
-    // For Dyna Stats
-    m_StatPoppedMobs = false;
-
-    m_IsClaimable = true;
 
     PAI = std::make_unique<CAIContainer>(this, std::make_unique<CPathFind>(this), std::make_unique<CMobController>(this), std::make_unique<CTargetFind>(this));
 }
@@ -167,7 +142,7 @@ CMobEntity::~CMobEntity()
 
 /************************************************************************
  *                                                                       *
- *  Время исчезновения монстра в секундах                                *
+ *  Monster disappear time (in seconds)                                  *
  *                                                                       *
  ************************************************************************/
 
@@ -204,7 +179,7 @@ uint32 CMobEntity::GetRandomGil()
         if (max - min < 2)
         {
             max = min + 2;
-            ShowWarning("CMobEntity::GetRandomGil Max value is set too low, defauting");
+            ShowWarning("CMobEntity::GetRandomGil Max value is set too low, defaulting");
         }
 
         return xirand::GetRandomNumber(min, max);
@@ -310,7 +285,6 @@ void CMobEntity::TapDeaggroTime()
 bool CMobEntity::CanLink(position_t* pos, int16 superLink)
 {
     TracyZoneScoped;
-
     if (loc.zone->HasReducedVerticalAggro())
     {
         float verticalDistance = abs(loc.p.y - (*pos).y);
@@ -319,7 +293,6 @@ bool CMobEntity::CanLink(position_t* pos, int16 superLink)
             return false;
         }
     }
-
     // handle super linking
     if (superLink && getMobMod(MOBMOD_SUPERLINK) == superLink)
     {
@@ -366,12 +339,6 @@ bool CMobEntity::CanLink(position_t* pos, int16 superLink)
     }
     return true;
 }
-
-/************************************************************************
- *                                                                       *
- *                                                                       *
- *                                                                       *
- ************************************************************************/
 
 bool CMobEntity::CanDeaggro() const
 {
@@ -573,9 +540,7 @@ void CMobEntity::Spawn()
     m_HiPartySize  = 0;
     m_THLvl        = 0;
     m_ItemStolen   = false;
-    m_StealItemID  = 0;
     m_DropItemTime = 1000;
-    m_pathFindDisengage = 0;
     animationsub   = (uint8)getMobMod(MOBMOD_SPAWN_ANIMATIONSUB);
     SetCallForHelpFlag(false);
 
@@ -616,14 +581,7 @@ void CMobEntity::Spawn()
         }
     }
 
-    if (getMobMod(MOBMOD_IDLE_DESPAWN))
-    {
-        this->SetDespawnTime(std::chrono::seconds(getMobMod(MOBMOD_IDLE_DESPAWN)));
-    }
-    else
-    {
-        m_DespawnTimer = time_point::min();
-    }
+    m_DespawnTimer = time_point::min();
     luautils::OnMobSpawn(this);
 }
 
@@ -790,7 +748,7 @@ void CMobEntity::OnMobSkillFinished(CMobSkillState& state, action_t& action)
         else
         {
             damage = luautils::OnMobWeaponSkill(PTargetFound, this, PSkill, &action);
-            this->PAI->EventHandler.triggerListener("WEAPONSKILL_USE", CLuaBaseEntity(this), CLuaBaseEntity(PTargetFound), PSkill->getID(), state.GetSpentTP(), CLuaAction(&action));
+            this->PAI->EventHandler.triggerListener("WEAPONSKILL_USE", CLuaBaseEntity(this), CLuaBaseEntity(PTargetFound), PSkill->getID(), state.GetSpentTP(), CLuaAction(&action), damage);
             PTarget->PAI->EventHandler.triggerListener("WEAPONSKILL_TAKE", CLuaBaseEntity(PTargetFound), CLuaBaseEntity(this), PSkill->getID(), state.GetSpentTP(), CLuaAction(&action));
         }
 
@@ -908,8 +866,8 @@ void CMobEntity::DistributeRewards()
                 if (PMember->getZone() == PChar->getZone())
                 {
                     RoeDatagramList datagrams;
-                    datagrams.push_back(RoeDatagram("mob", this));
-                    datagrams.push_back(RoeDatagram("atkType", static_cast<uint8>(this->BattleHistory.lastHitTaken_atkType)));
+                    datagrams.emplace_back(RoeDatagram("mob", this));
+                    datagrams.emplace_back(RoeDatagram("atkType", static_cast<uint8>(this->BattleHistory.lastHitTaken_atkType)));
                     roeutils::event(ROE_MOBKILL, (CCharEntity*)PMember, datagrams);
                 }
             });
@@ -1021,8 +979,8 @@ void CMobEntity::DropItems(CCharEntity* PChar)
         // clang-format on
     }
 
-    ZONE_TYPE zoneType  = zoneutils::GetZone(PChar->getZone())->GetType();
-    bool      validZone = zoneType != ZONE_TYPE::BATTLEFIELD && zoneType != ZONE_TYPE::DYNAMIS;
+    ZONE_TYPE zoneType  = zoneutils::GetZone(PChar->getZone())->GetTypeMask();
+    bool      validZone = !(this->m_Type & MOBTYPE_BATTLEFIELD) && !(zoneType & ZONE_TYPE::DYNAMIS);
 
     // Check if mob can drop seals -- mobmod to disable drops, zone type isnt battlefield/dynamis, mob is stronger than Too Weak, or mobmod for EXP bonus is -100 or lower (-100% exp)
     if (!getMobMod(MOBMOD_NO_DROPS) && validZone && charutils::CheckMob(m_HiPCLvl, GetMLevel()) > EMobDifficulty::TooWeak && getMobMod(MOBMOD_EXP_BONUS) > -100)
@@ -1311,7 +1269,7 @@ void CMobEntity::DropItems(CCharEntity* PChar)
                     break;
             }
         });
-        // clang-forman on
+        // clang-format on
 
         for (uint8 i = 0; i < crystalRolls; i++)
         {
@@ -1321,11 +1279,6 @@ void CMobEntity::DropItems(CCharEntity* PChar)
             }
         }
     }
-}
-
-bool CMobEntity::CanMove()
-{
-    return !StatusEffectContainer->IsAsleep() && !StatusEffectContainer->HasStatusEffect({EFFECT_BIND, EFFECT_PETRIFICATION, EFFECT_TERROR, EFFECT_STUN});
 }
 
 bool CMobEntity::CanAttack(CBattleEntity* PTarget, std::unique_ptr<CBasicPacket>& errMsg)
@@ -1500,132 +1453,7 @@ bool CMobEntity::OnAttack(CAttackState& state, action_t& action)
     }
 }
 
-void CMobEntity::PixieTryHealPlayer(CCharEntity * PChar)
-    {
-        time_t  now   = time(NULL);
-        SpellID spell = SpellID::NULLSPELL;
-        if (!PAI)
-        {
-            return;
-        }
-        CMobController* controller = static_cast<CMobController*>(PAI->GetController());
-        if (!controller)
-        {
-            return;
-        }
-        if (getMobMod(MOBMOD_PIXIE) <= 0)
-        {
-            return;
-        }
-        if (m_pixieLastCast + 30 >= now)
-        {
-            // Must rest between casts (TODO: Check real value)
-            return;
-        }
-        if (PChar->m_pixieHate >= 20)
-        {
-            // TODO: Find real values
-            // You killed my relatives so I don't care if you die
-            return;
-        }
-        if (!controller->CanDetectTarget(PChar, false, true))
-        {
-            // Must be able to detect the player to cast
-            return;
-        }
-        if (PChar->isDead())
-        {
-            spell = SpellID::Raise_III;
-        }
-        else if (PChar->GetHPP() <= 90)
-        {
-            // TODO: Check what's the cure threshold on retail
-            int32 max_hp     = PChar->GetMaxHP();
-            int32 current_hp = PChar->health.hp;
-            int32 to_cure    = max_hp - current_hp;
-            if (to_cure < 0)
-            {
-                to_cure = 0;
-            }
-            if (to_cure > 0)
-            {
-                // Set according to the soft cap of each cure
-                if (to_cure <= 30)
-                {
-                    spell = SpellID::Cure;
-                }
-                else if (to_cure <= 90)
-                {
-                    spell = SpellID::Cure_II;
-                }
-                else if (to_cure <= 190)
-                {
-                    spell = SpellID::Cure_III;
-                }
-                else if (to_cure <= 380)
-                {
-                    spell = SpellID::Cure_IV;
-                }
-                else
-                {
-                    spell = SpellID::Cure_V;
-                }
-            }
-        }
-        if (spell != SpellID::NULLSPELL)
-        {
-            if (controller->Cast(PChar->targid, spell))
-            {
-                m_pixieLastCast = now;
-            }
-        }
-    }
-
-    bool CMobEntity::PixieShouldSpawn()
-    {
-        int32 amity = 0;
-        // Prevent spamming the DB with calls
-        time_t now = time(NULL);
-        if (g_pixieLastAmityRefresh + 60 < now)
-        {
-            int32 ret = sql->Query("SELECT value FROM server_variables WHERE name = 'PixieAmity';");
-            if (ret != SQL_ERROR && sql->NumRows() != 0 && (sql->NextRow() == SQL_SUCCESS))
-            {
-                amity = sql->GetUIntData(0);
-            }
-            g_pixieAmity            = amity;
-            g_pixieLastAmityRefresh = now;
-        }
-        else
-        {
-            amity = g_pixieAmity;
-        }
-        if (amity < -255)
-        {
-            amity = -255;
-        }
-        if (amity > 255)
-        {
-            amity = 255;
-        }
-        if (loc.zone->GetRegionID() < REGION_TYPE::RONFAURE_FRONT || loc.zone->GetRegionID() > REGION_TYPE::VALDEAUNIA_FRONT)
-        {
-            // Pixies in the present require higher amity
-            amity -= 300;
-        }
-        if (amity >= -50)
-        {
-            return true;
-        }
-        if (amity <= -150)
-        {
-            return false;
-        }
-        int32 chance = amity + 150;
-        return (xirand::GetRandomNumber(100) < chance);
-    }
-
-    bool CMobEntity::isWideScannable()
-    {
-        return CBaseEntity::isWideScannable() && !getMobMod(MOBMOD_NO_WIDESCAN);
-    }
+bool CMobEntity::isWideScannable()
+{
+    return CBaseEntity::isWideScannable() && !getMobMod(MOBMOD_NO_WIDESCAN);
+}

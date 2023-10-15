@@ -24,12 +24,12 @@
 
 #include <vector>
 
-#include "../common/cbasetypes.h"
-#include "../common/mmo.h"
+#include "common/cbasetypes.h"
+#include "common/mmo.h"
 
 #include "spell.h"
 
-#define MAX_MOBSPELLLIST_ID 10000
+#define MAX_MOBSPELLLIST_ID 10000 // Umeboshi: "LSB 5000"
 
 typedef struct
 {
@@ -50,12 +50,6 @@ public:
 
 private:
 };
-
-/************************************************************************
- *                                                                       *
- *  namespase для работы с заклинаниями                                  *
- *                                                                       *
- ************************************************************************/
 
 namespace mobSpellList
 {

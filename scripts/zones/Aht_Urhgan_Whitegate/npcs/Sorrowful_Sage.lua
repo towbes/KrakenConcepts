@@ -4,11 +4,7 @@
 -- Type: Assault Mission Giver
 -- !pos 134.096 0.161 -30.401 50
 -----------------------------------
-require("scripts/globals/keyitems")
-local ID = require("scripts/zones/Aht_Urhgan_Whitegate/IDs")
-require("scripts/globals/assault")
-require("scripts/globals/besieged")
-require("scripts/globals/missions")
+local ID = zones[xi.zone.AHT_URHGAN_WHITEGATE]
 -----------------------------------
 local entity = {}
 
@@ -55,10 +51,10 @@ entity.onTrigger = function(player, npc)
     local haveimperialIDtag
     
     local assaultPoints = player:getAssaultPoint(xi.assault.assaultArea.NYZUL_ISLE)
-    local floorProgress = player:getCharVar("NyzulFloorProgress")
+    local floorProgress = player:getCharVar('NyzulFloorProgress')
     local unchartedFloorProgress = 0
 
-    local vendingBoxPreferences = player:getCharVar("Nyzul_VendingBoxPref")
+    local vendingBoxPreferences = player:getCharVar('Nyzul_VendingBoxPref')
 
     if player:hasKeyItem(xi.ki.IMPERIAL_ARMY_ID_TAG) then
         haveimperialIDtag = 1
@@ -81,17 +77,17 @@ entity.onEventUpdate = function(player, csid, option, npc)
             -- low grade item
             local item = bit.rshift(option, 16) / 4
             vendingBoxPreferences = bit.bxor(vendingBoxPreferences, bit.lshift(1, lowGradeItems[item].BitPosition))
-            player:setCharVar("Nyzul_VendingBoxPref", vendingBoxPreferences)
+            player:setCharVar('Nyzul_VendingBoxPref', vendingBoxPreferences)
         elseif categorytype == 4 then
             -- medium grade item
             local item = bit.rshift(option, 16) / 4
             vendingBoxPreferences = bit.bxor(vendingBoxPreferences, bit.lshift(1, mediumGradeItems[item].BitPosition))
-            player:setCharVar("Nyzul_VendingBoxPref", vendingBoxPreferences)
+            player:setCharVar('Nyzul_VendingBoxPref', vendingBoxPreferences)
         elseif categorytype == 5 then
             -- high grade item
             local item = bit.rshift(option, 16) / 4
             vendingBoxPreferences = bit.bxor(vendingBoxPreferences, bit.lshift(1, highGradeItems[item].BitPosition))
-            player:setCharVar("Nyzul_VendingBoxPref", vendingBoxPreferences)
+            player:setCharVar('Nyzul_VendingBoxPref', vendingBoxPreferences)
         end
 
         player:updateEvent(rank, haveimperialIDtag, assaultPoints, player:getCurrentAssault(), floorProgress, unchartedFloorProgress, vendingBoxPreferences, 0)

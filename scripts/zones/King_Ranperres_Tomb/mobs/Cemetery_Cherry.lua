@@ -3,9 +3,8 @@
 --   NM: Cemetery Cherry
 -- !pos 33.000 0.500 -287.000 190
 -----------------------------------
-local ID = require("scripts/zones/King_Ranperres_Tomb/IDs")
-mixins = { require("scripts/mixins/job_special") }
-require("scripts/globals/titles")
+local ID = zones[xi.zone.KING_RANPERRES_TOMB]
+mixins = { require('scripts/mixins/job_special') }
 -----------------------------------
 local entity = {}
 
@@ -15,11 +14,11 @@ entity.onMobInitialize = function(mob)
 end
 
 entity.onMobSpawn = function(mob)
-    mob:setLocalVar("wasKilled", 0)
+    mob:setLocalVar('wasKilled', 0)
 end
 
 entity.onMobDeath = function(mob, player, optParams)
-    mob:setLocalVar("wasKilled", 1)
+    mob:setLocalVar('wasKilled', 1)
     player:addTitle(xi.title.MON_CHERRY)
 end
 
@@ -28,10 +27,10 @@ entity.onMobDespawn = function(mob)
     local respawnTime = 86400 -- If something breaks default to 24 hours
 
     UpdateNMSpawnPoint(mob:getID())
-    GetMobByID(cemCherry):setLocalVar("[POP]Cemetery_Cherry", 0)
+    GetMobByID(cemCherry):setLocalVar('[POP]Cemetery_Cherry', 0)
 
     -- Set respawn persistence of cherry saplings
-    if mob:getLocalVar("wasKilled") == 1 then
+    if mob:getLocalVar('wasKilled') == 1 then
         respawnTime = math.random(75600, 86400) -- 21 to 24 hours
     else
         respawnTime = math.random(1800, 3600) -- 30 to 60 minutes if despawned

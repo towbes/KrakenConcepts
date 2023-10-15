@@ -4,7 +4,7 @@
 -- the onSpawn() function.
 ----------------------------------------------------------------
 
-require("scripts/globals/mixins")
+require('scripts/globals/mixins')
 
 g_mixins = g_mixins or {}
 
@@ -12,7 +12,7 @@ local claimshieldTime = 7500
 
 g_mixins.claim_shield = function(claimshieldMob)
 
-    claimshieldMob:addListener("SPAWN", "CS_SPAWN", function(mob)
+    claimshieldMob:addListener('SPAWN', 'CS_SPAWN', function(mob)
         mob:setClaimable(false)
         mob:setUnkillable(true)
         mob:setCallForHelpBlocked(true)
@@ -34,7 +34,7 @@ g_mixins.claim_shield = function(claimshieldMob)
             mobArg:delStatusEffectSilent(xi.effect.ARROW_SHIELD)
             mobArg:setHP(mobArg:getMaxHP())
 
-            local winner = utils.randomEntry(enmityList)["entity"]
+            local winner = utils.randomEntry(enmityList)['entity']
             if winner then
                 mobArg:updateClaim(winner)
             end

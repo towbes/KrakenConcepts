@@ -3,8 +3,8 @@
 --  Mob: Soulflayer
 -- Note: PH for Vidhuwa the Wrathborn
 -----------------------------------
-local ID = require("scripts/zones/Caedarva_Mire/IDs")
-require("scripts/globals/mobs")
+local ID = zones[xi.zone.CAEDARVA_MIRE]
+require('scripts/globals/mobs')
 -----------------------------------
 local entity = {}
 

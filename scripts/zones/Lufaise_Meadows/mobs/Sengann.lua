@@ -2,8 +2,7 @@
 -- Area: Lufaise Meadows
 --  Mob: Sengann
 -----------------------------------
-require("scripts/globals/hunts")
-mixins = { require("scripts/mixins/fomor_hate") }
+mixins = { require('scripts/mixins/fomor_hate') }
 -----------------------------------
 local entity = {}
 
@@ -34,7 +33,7 @@ entity.onMobDeath = function(mob, player, optParams)
 end
 
 entity.onMobDespawn = function(mob)
-    mob:setLocalVar("cooldown", os.time() + 3000)
+    mob:setLocalVar('cooldown', os.time() + 3000)
 end
 
 return entity

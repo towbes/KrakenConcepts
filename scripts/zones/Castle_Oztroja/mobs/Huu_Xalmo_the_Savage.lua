@@ -2,9 +2,7 @@
 -- Area: Castle Oztroja (151)
 --   NM: Huu Xalmo the Savage
 -----------------------------------
-mixins = { require("scripts/mixins/job_special") }
-require("scripts/globals/quests")
-require("scripts/globals/status")
+mixins = { require('scripts/mixins/job_special') }
 -----------------------------------
 local entity = {}
 

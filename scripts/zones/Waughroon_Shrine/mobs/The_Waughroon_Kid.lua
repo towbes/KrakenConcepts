@@ -14,12 +14,12 @@ entity.onMobSpawn = function(mob)
 end
 
 entity.onMobWeaponSkill = function(target, mob, skill)
-    if skill:getID() == 581 and mob:getLocalVar("doubleBlow") == 0 then
-        mob:setLocalVar("doubleBlow", 1)
+    if skill:getID() == 581 and mob:getLocalVar('doubleBlow') == 0 then
+        mob:setLocalVar('doubleBlow', 1)
         mob:useMobAbility(581)
 
         mob:timer(5000, function(mobArg)
-            mobArg:setLocalVar("doubleBlow", 0)
+            mobArg:setLocalVar('doubleBlow', 0)
         end)
     end
 end
@@ -29,9 +29,9 @@ entity.onAdditionalEffect = function(mob, target, damage)
 end
 
 entity.onMobFight = function(mob, target)
-    if mob:getHPP() < 40 and mob:getLocalVar("counterstance") == 0 then
+    if mob:getHPP() < 40 and mob:getLocalVar('counterstance') == 0 then
         mob:useMobAbility(1331)
-        mob:setLocalVar("counterstance", 1)
+        mob:setLocalVar('counterstance', 1)
     end
 end
 

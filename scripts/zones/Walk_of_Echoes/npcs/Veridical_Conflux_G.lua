@@ -3,7 +3,7 @@
 --  NPC: Veridical Conflux (Grauberg S Exit)
 -- !pos -699 0 -442 182
 -----------------------------------
-require("scripts/globals/zone")
+
 -----------------------------------
 local entity = {}
 

@@ -2,9 +2,9 @@
 -- Area: Phomiuna Aqueducts
 --  NPC: ??? for Tavnazian Cookbook
 -----------------------------------
-require("scripts/globals/status")
-require("scripts/globals/npc_util")
-local ID = require("scripts/zones/Phomiuna_Aqueducts/IDs")
+
+require('scripts/globals/npc_util')
+local ID = zones[xi.zone.PHOMIUNA_AQUEDUCTS]
 -----------------------------------
 local entity = {}
 
@@ -21,7 +21,7 @@ entity.onTrigger = function(player, npc)
 end
 
 entity.onTimeTrigger = function(npc, triggerID)
-    local currentPoint = npc:getLocalVar("currentPoint")
+    local currentPoint = npc:getLocalVar('currentPoint')
     local nextPoint = currentPoint + 1
 
     if nextPoint > 4 then
@@ -29,12 +29,12 @@ entity.onTimeTrigger = function(npc, triggerID)
     end
 
     local nextPointLoc = points[nextPoint]
-    npc:setLocalVar("currentPoint", nextPoint)
+    npc:setLocalVar('currentPoint', nextPoint)
     npcUtil.queueMove(npc, nextPointLoc, 1000)
 end
 
 entity.onSpawn = function(npc)
-    npc:setLocalVar("currentPoint", 1)
+    npc:setLocalVar('currentPoint', 1)
 end
 
 return entity

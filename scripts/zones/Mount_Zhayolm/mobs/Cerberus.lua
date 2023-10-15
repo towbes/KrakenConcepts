@@ -2,8 +2,7 @@
 -- Area: Mount Zhayolm
 --   NM: Cerberus
 -----------------------------------
-require("scripts/globals/titles")
-local ID = require("scripts/zones/Mount_Zhayolm/IDs")
+local ID = zones[xi.zone.MOUNT_ZHAYOLM]
 -----------------------------------
 local entity = {}
 
@@ -47,20 +46,20 @@ entity.onMobFight = function(mob, target)
         mob:setMod(xi.mod.REGAIN, 80)
     end
 
-    local drawInWait = mob:getLocalVar("DrawInWait")
+    local drawInWait = mob:getLocalVar('DrawInWait')
 
     if (target:getXPos() < 300 or target:getXPos() > 340) and os.time() > drawInWait then
         local rot = target:getRotPos()
         local position = math.random(1,8)
         target:setPos(drawInPos[position][1],drawInPos[position][2],drawInPos[position][3],rot)
         mob:messageBasic(232, 0, 0, target)
-        mob:setLocalVar("DrawInWait", os.time() + 2)
+        mob:setLocalVar('DrawInWait', os.time() + 2)
     elseif (target:getZPos() < -95 or target:getZPos() > -67) and os.time() > drawInWait then
         local rot = target:getRotPos()
         local position = math.random(1,8)
         target:setPos(drawInPos[position][1],drawInPos[position][2],drawInPos[position][3],rot)
         mob:messageBasic(232, 0, 0, target)
-        mob:setLocalVar("DrawInWait", os.time() + 2)
+        mob:setLocalVar('DrawInWait', os.time() + 2)
     end
 end
 

@@ -58,8 +58,8 @@ CRangeState::CRangeState(CBattleEntity* PEntity, uint16 targid)
     // TODO: Allow trusts to use this
     if (auto* PChar = dynamic_cast<CCharEntity*>(m_PEntity))
     {
-        //if (charutils::hasTrait(PChar, TRAIT_RAPID_SHOT)) //Umeboshi "Ungating this for gear"
-        //{
+        if (charutils::hasTrait(PChar, TRAIT_RAPID_SHOT))
+        {
             auto chance{ PChar->getMod(Mod::RAPID_SHOT) + PChar->PMeritPoints->GetMeritValue(MERIT_RAPID_SHOT_RATE, PChar) };
             if (xirand::GetRandomNumber(100) < chance)
             {
@@ -67,7 +67,7 @@ CRangeState::CRangeState(CBattleEntity* PEntity, uint16 targid)
                 delay       = (int16)(delay * (10 - xirand::GetRandomNumber(1, 6)) / 10.f);
                 m_rapidShot = true;
             }
-        //}
+        }
     }
 
     m_aimTime  = std::chrono::milliseconds(delay);
@@ -99,7 +99,7 @@ bool CRangeState::CanChangeState()
 
 bool CRangeState::Update(time_point tick)
 {
-    if (tick > GetEntryTime() + m_aimTime && !IsCompleted())
+    if (m_PEntity && m_PEntity->isAlive() && (tick > GetEntryTime() + m_aimTime && !IsCompleted()))
     {
         auto* PTarget = m_PEntity->IsValidTarget(m_targid, TARGET_ENEMY, m_errorMsg);
 
@@ -199,12 +199,6 @@ bool CRangeState::CanUseRangedAttack(CBattleEntity* PTarget, bool isEndOfAttack)
     if (!facing(m_PEntity->loc.p, PTarget->loc.p, 64))
     {
         m_errorMsg = std::make_unique<CMessageBasicPacket>(m_PEntity, PTarget, 0, 0, MSGBASIC_CANNOT_SEE);
-        return false;
-    }
-
-    if (!isEndOfAttack && distance(m_PEntity->loc.p, PTarget->loc.p) > 25)
-    {
-        m_errorMsg = std::make_unique<CMessageBasicPacket>(m_PEntity, PTarget, 0, 0, MSGBASIC_TOO_FAR_AWAY);
         return false;
     }
 

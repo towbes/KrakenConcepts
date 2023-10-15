@@ -19,12 +19,12 @@
 ===========================================================================
 */
 
-#include "common/socket.h"
 #include "zone_in.h"
 
 #include "common/vana_time.h"
-#include "map/zone.h"
+
 #include "entities/charentity.h"
+#include "map/zone.h"
 #include "utils/zoneutils.h"
 
 #include "instance.h"
@@ -52,7 +52,7 @@ uint16 GetMogHouseModelID(CCharEntity* PChar)
         case REGION_TYPE::WEST_AHT_URHGAN:
             return 214;
         case REGION_TYPE::RONFAURE_FRONT:
-            return 189;
+            return 745;
         case REGION_TYPE::GUSTABERG_FRONT:
             return 199;
         case REGION_TYPE::SARUTA_FRONT:
@@ -150,7 +150,8 @@ CZoneInPacket::CZoneInPacket(CCharEntity* PChar, const EventInfo* currentEvent)
 
     ref<uint8>(0x21) = PChar->GetGender() * 128 + (1 << PChar->look.size);
 
-        // Zone Animation for Transports
+    
+    // Zone Animation for Transports
     ref<uint8>(0x27)  = PChar->loc.zone->GetZoneDirection();
     ref<uint8>(0x2A)  = PChar->loc.zone->GetZoneAnimation();
     ref<uint32>(0x78) = PChar->loc.zone->GetZoneAnimStartTime();

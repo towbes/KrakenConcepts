@@ -1,9 +1,6 @@
 -----------------------------------
 -- Area: Carpenters_Landing
 -----------------------------------
-require("scripts/globals/zone")
------------------------------------
-
 zones = zones or {}
 
 zones[xi.zone.CARPENTERS_LANDING] =
@@ -31,7 +28,7 @@ zones[xi.zone.CARPENTERS_LANDING] =
         FISHING_MESSAGE_OFFSET        = 7281, -- You can't fish here.
         LOGGING_IS_POSSIBLE_HERE      = 7398, -- Logging is possible here if you have <item>.
         BEUGUNGEL_SHOP_DIALOG         = 7430, -- Hello, [sir/ma'am]! I'm selling goods direct from the Carpenters' Guild.
-        MTICKET_ADDED                 = 7451, -- 10 tickets were added to your "barge multi-ticket"
+        MTICKET_ADDED                 = 7451, -- 10 tickets were added to your 'barge multi-ticket'
         STENCH_OF_DECAY               = 7480, -- You are overwhelmed by the putrid stench of decay!
         CRYPTONBERRY_EXECUTOR_DIE     = 7482, -- ...Cleave our foesss with barren hate.
         CRYPTONBERRY_ASSASSIN_2HR     = 7483, -- ..Take up thy lanternsss. The truth we shall illuminate.
@@ -46,7 +43,7 @@ zones[xi.zone.CARPENTERS_LANDING] =
         HAVE_BILLET                   = 7445, -- You cannot buy more than one <ticket>. Use the one you currently have to ride the next ship.
         LEFT_BILLET                   = 7449, -- You use your <item>. (<number> trip[/s] remaining)
         END_BILLET                    = 7450, -- You use up your <item>.
-        MTICKET_ADDED                 = 7451, -- 10 tickets were added to your "barge multi-ticket"
+        MTICKET_ADDED                 = 7451, -- 10 tickets were added to your 'barge multi-ticket'
     },
     mob =
     {
@@ -72,13 +69,8 @@ zones[xi.zone.CARPENTERS_LANDING] =
             16785734,
             16785735,
         },
-        LOGGING =
-        {
-            16785773,
-            16785774,
-            16785775,
-            16785776,
-        },
+
+        LOGGING = GetTableOfIDs('Logging_Point'),
     },
 }
 

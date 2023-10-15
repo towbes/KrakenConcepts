@@ -2,7 +2,7 @@
 -- Area: Halvung
 --  Mob: Troll Cuirasser
 -----------------------------------
-mixins = {require("scripts/mixins/weapon_break")}
+mixins = {require('scripts/mixins/weapon_break')}
 -----------------------------------
 
 local entity = {}
