@@ -828,6 +828,9 @@ void CStatusEffectContainer::DelStatusEffectsByFlag(uint32 flag, bool silent)
     {
         if (PStatusEffect->HasEffectFlag(flag))
         {
+            // If this is a Nightmare effect flag, it needs to be removed explictly by a cure
+
+            if (!(flag & EFFECTFLAG_DAMAGE && PStatusEffect->GetStatusID() == EFFECT_SLEEP && PStatusEffect->GetSubID() == (uint32)EFFECT_BIO))
             RemoveStatusEffect(PStatusEffect, silent);
         }
     }

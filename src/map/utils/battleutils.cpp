@@ -5366,6 +5366,10 @@ namespace battleutils
         {
             damage = PDefender->health.hp - 1;
         }
+        if (xirand::GetRandomNumber(100) < PDefender->getMod(Mod::SEVERE_BREATH_DMG_NULL) && damage >= PDefender->health.hp)
+        {
+            damage = PDefender->health.hp - 1;
+        }
         else
         {
             damage = HandleSevereDamage(PDefender, damage, false);
