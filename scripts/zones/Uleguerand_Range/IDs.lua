@@ -22,11 +22,11 @@ zones[xi.zone.ULEGUERAND_RANGE] =
         SOMETHING_GLITTERING          = 7344, -- You see something glittering beneath the surface of the ice.
         WHAT_LIES_BENEATH             = 7345, -- There are many cold <item> scattered around the area. Could someone be trying to melt the ice to retrieve what lies beneath?
         SOMETHING_GLITTERING_BUT      = 7346, -- You see something glittering below the surface here, but the ice encases it completely.
-        FLUTTERING_CLOTH              = 7395, -- A scrap of cloth flutters wildly in the wind...<
-        SPAWN_GEUSH                   = 7396, -- A huge beast is charging towards the <item>!
-        GEUSH_COUNTER                 = 7398, -- Geush Urvan uses Counterstance!
-        GEUSH_COUNTER_OFF             = 7399, -- Geush Urvan's Counterstance effect wears off.
-        RABBIT_TRACKS                 = 7400, -- There are fresh rabbit tracks here. The creature must still be in the vicinity.
+        FLUTTERING_CLOTH              = 7398, -- A scrap of cloth flutters wildly in the wind...<
+        SPAWN_GEUSH                   = 7399, -- A huge beast is charging towards the <item>!
+        GEUSH_COUNTER                 = 7401, -- Geush Urvan uses Counterstance!
+        GEUSH_COUNTER_OFF             = 7402, -- Geush Urvan's Counterstance effect wears off.
+        RABBIT_TRACKS                 = 7403, -- There are fresh rabbit tracks here. The creature must still be in the vicinity.
         HOMEPOINT_SET                 = 8338, -- Home point set!
         UNITY_WANTED_BATTLE_INTERACT  = 8396, -- Those who have accepted % must pay # Unity accolades to participate. The content for this Wanted battle is #. [Ready to begin?/You do not have the appropriate object set, so your rewards will be limited.]
     },

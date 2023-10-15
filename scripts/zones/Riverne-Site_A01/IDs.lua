@@ -24,8 +24,8 @@ zones[xi.zone.RIVERNE_SITE_A01] =
         SD_HAS_GROWN                  = 7601, -- The spatial displacement has grown.
         SPACE_SEEMS_DISTORTED         = 7602, -- The space around you seems oddly distorted and disrupted.
         MONUMENT                      = 7609, -- Something has been engraved on this stone, but the message is too difficult to make out.
-        TRUNK                         = 7655, -- Closely examining the trunk reveals a tiny keyhole. You would need a tiny key to open it.
-        INSECT_WINGS                  = 7728, -- There are tiny insect wings scattered all around here.
+        TRUNK                         = 7667, -- Closely examining the trunk reveals a tiny keyhole. You would need a tiny key to open it.
+        INSECT_WINGS                  = 7733, -- There are tiny insect wings scattered all around here.
         HOMEPOINT_SET                 = 7737, -- Home point set!
         UNITY_WANTED_BATTLE_INTERACT  = 7795, -- Those who have accepted % must pay # Unity accolades to participate. The content for this Wanted battle is #. [Ready to begin?/You do not have the appropriate object set, so your rewards will be limited.]
     },

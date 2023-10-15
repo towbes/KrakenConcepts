@@ -34,7 +34,7 @@ zones[xi.zone.SACRARIUM] =
         START_GET_GOOSEBUMPS          = 7371, -- You start to get goosebumps.
         HEART_RACING                  = 7372, -- Your heart is racing.
         LEAVE_QUICKLY_AS_POSSIBLE     = 7373, -- Your common sense tells you to leave as quickly as possible.
-        PRESENCE_FILLS                = 7375, -- An evil presence fills the room!
+        PRESENCE_FILLS                = 7378, -- An evil presence fills the room!
         NOTHING_HAPPENS               = 7376, -- Nothing happens.
         COMMON_SENSE_SURVIVAL         = 7380, -- It appears that you have arrived at a new survival guide provided by the Adventurers' Mutual Aid Network. Common sense dictates that you should now be able to teleport here from similar tomes throughout the world.
     },
