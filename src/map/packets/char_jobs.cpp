@@ -26,6 +26,7 @@
 #include "char_jobs.h"
 #include "utils/charutils.h"
 #include "entities/charentity.h"
+#include "monstrosity.h"
 
 CCharJobsPacket::CCharJobsPacket(CCharEntity* PChar, bool resetflips)
 {
@@ -82,4 +83,14 @@ CCharJobsPacket::CCharJobsPacket(CCharEntity* PChar, bool resetflips)
 
     ref<uint8>(0x68) = 0; // Is job mastered, and has Master Breaker KI
     ref<uint8>(0x6D) = 0; // Master Level
+
+    if (PChar->m_PMonstrosity != nullptr)
+    {
+        ref<uint8>(0x08) = static_cast<uint8>(JOB_MON);
+        ref<uint8>(0x0B) = static_cast<uint8>(JOB_MON);
+
+        // ref<uint8>(0x10) = 0x01; // ?
+
+        // ref<uint8>(0x5F) = 0x10; // MON level ?
+    }
 }

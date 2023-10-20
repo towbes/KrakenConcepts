@@ -404,62 +404,62 @@ local loot =
         },
     },
 
-        -- BCNM Royal Jelly
+    -- BCNM Royal Jelly
     [77] =
     {
         {
-            { itemid = 637, droprate = 1000 }, -- Slime oil
+            { itemid = xi.item.VIAL_OF_SLIME_OIL,     droprate = 1000 },
         },
         {
-            { itemid = 637, droprate = 1000 }, -- Slime oil
+            { itemid = xi.item.VIAL_OF_SLIME_OIL,     droprate = 1000 },
         },
         {
-            { itemid = 13514, droprate = 91 }, -- Archer's Ring
+            { itemid = xi.item.ARCHERS_RING,          droprate =  91 },
         },
         {
-            { itemid = 14651, droprate = 469 }, -- Mana ring
-            { itemid = 17693, droprate = 152 }, -- Grude Sword
-            { itemid = 17936, droprate = 120 }, -- De Saintre's Axe
-            { itemid = 17696, droprate = 118 }, -- Buzard Tuck
-            { itemid = 4947, droprate  = 106 },  -- Utsusemi: Ni
+            { itemid = xi.item.MANA_RING,             droprate = 469 },
+            { itemid = xi.item.GRUDGE_SWORD0,         droprate = 152 },
+            { itemid = xi.item.DE_SANTRES_AXE,        droprate = 120 },
+            { itemid = xi.item.BUZZARD_TUCK,          droprate = 118 },
+            { itemid = xi.item.SCROLL_OF_UTSUSEMI_NI, droprate = 106 },
         },
         {
-            { itemid = 14650, droprate = 258 }, -- Marksman's Ring
-            { itemid = 17572, droprate = 152 }, -- Dusky Staff
-            { itemid = 17573, droprate = 101 }, -- Himmel Stock
-            { itemid = 17463, droprate  = 98 },  -- Sealed Mace
-            { itemid = 17203, droprate  = 98 },  -- Shikar Bow
+            { itemid = xi.item.MARKSMANS_RING,        droprate = 258 },
+            { itemid = xi.item.DUSKY_STAFF,           droprate = 152 },
+            { itemid = xi.item.HIMMEL_STOCK,          droprate = 101 },
+            { itemid = xi.item.SEALED_MACE,           droprate  = 98 },
+            { itemid = xi.item.SHIKAR_BOW,            droprate  = 98 },
         },
         {
-            { itemid = 4874, droprate = 123 }, -- Absorb-STR
-            { itemid = 4751, droprate = 165 }, -- Erase
-            { itemid = 4714, droprate = 140 }, -- Phalanx
-            { itemid = 4896, droprate = 145 }, -- Fire Spirit
-            { itemid = 666,  droprate = 229 },  -- Steel Sheet
-            { itemid = 652,  droprate = 238 },  -- Steel Ingot
+            { itemid = xi.item.SCROLL_OF_ABSORB_STR, droprate = 123 },
+            { itemid = xi.item.SCROLL_OF_ERASE,      droprate = 165 },
+            { itemid = xi.item.SCROLL_OF_PHALANX,    droprate = 140 },
+            { itemid = xi.item.FIRE_SPIRIT_PACT,     droprate = 145 },
+            { itemid = xi.item.STEEL_SHEET,          droprate = 229 },
+            { itemid = xi.item.STEEL_INGOT,          droprate = 238 },
         },
         {
-            { itemid = 4717, droprate = 263 }, -- Refresh
-            { itemid = 4858, droprate = 246 }, -- Ice Spikies
-            { itemid = 4947, droprate = 177 }, -- Utsusemi: Ni
-            { itemid = 748,  droprate = 182 },  -- Gold Beastcoin
-            { itemid = 749,  droprate = 133 },  -- Mythril Beastcoin
-            { itemid = 788,  droprate =  27 },   -- Peridot
-            { itemid = 798,  droprate =  20 },   -- Turqoise
-            { itemid = 793,  droprate =  15 },   -- Black Pearl
-            { itemid = 808,  droprate =  15 },   -- Goshenite
-            { itemid = 815,  droprate =  15 },   -- Sphene
-            { itemid = 811,  droprate =  10 },   -- Ametrine
-            { itemid = 790,  droprate =   7 },    -- Garnet
-            { itemid = 775,  droprate =  12 },   -- Black Rock
-            { itemid = 772,  droprate =   7 },    -- Green Rock
-            { itemid = 776,  droprate =   7 },    -- White Rock
-            { itemid = 770,  droprate =   2 },    -- Blue Rock
-            { itemid = 773,  droprate =   2 },    -- Transluescent Rock
-            { itemid = 699,  droprate =   5 },    -- Oak Log
-            { itemid = 701,  droprate =   5 },    -- Rosewood Log
-            { itemid = 4174, droprate =  10 },  -- Vile Elixer
-            { itemid = 4172, droprate =   2 },   -- Reraiser
+            { itemid = xi.item.SCROLL_OF_REFRESH,     droprate = 263 },
+            { itemid = xi.item.SCROLL_OF_ICE_SPIKES,  droprate = 246 },
+            { itemid = xi.item.SCROLL_OF_UTSUSEMI_NI, droprate = 177 },
+            { itemid = xi.item.GOLD_BEASTCOIN,        droprate = 182 },
+            { itemid = xi.item.MYTHRIL_BEASTCOIN,     droprate = 133 },
+            { itemid = xi.item.PERIDOT,               droprate =  27 },
+            { itemid = xi.item.TURQUOISE,             droprate =  20 },
+            { itemid = xi.item.BLACK_PEARL,           droprate =  15 },
+            { itemid = xi.item.GOSHENITE,             droprate =  15 },
+            { itemid = xi.item.SPHENE,                droprate =  15 },
+            { itemid = xi.item.AMETRINE,              droprate =  10 },
+            { itemid = xi.item.GARNET,                droprate =   7 },
+            { itemid = xi.item.BLACK_ROCK,            droprate =  12 },
+            { itemid = xi.item.GREEN_ROCK,            droprate =   7 },
+            { itemid = xi.item.WHITE_ROCK,            droprate =   7 },
+            { itemid = xi.item.BLUE_ROCK,             droprate =   2 },
+            { itemid = xi.item.TRANSLUCENT_ROCK,      droprate =   2 },
+            { itemid = xi.item.OAK_LOG,               droprate =   5 },
+            { itemid = xi.item.ROSEWOOD_LOG,          droprate =   5 },
+            { itemid = xi.item.VILE_ELIXIR,           droprate =  10 },
+            { itemid = xi.item.RERAISER,              droprate =   2 },
         },
     },
 

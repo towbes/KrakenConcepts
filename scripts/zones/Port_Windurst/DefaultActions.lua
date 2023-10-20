@@ -1,4 +1,4 @@
--- local ID = zones[xi.zone.PORT_WINDURST]
+local ID = zones[xi.zone.PORT_WINDURST]
 
 return {
     ['Ada']             = { event = 44 },
@@ -10,10 +10,12 @@ return {
     ['Kohlo-Lakolo']    = { event = 361 },
     ['Laughing_Lizard'] = { event = 618 },
     ['Melek']           = { event = 42 },
+    ['Odyssean_Passage']    = { messageSpecial = ID.text.NOTHING_HAPPENS },
     ['Papo-Hopo']       = { event = 362 },
     ['Pichichi']        = { event = 364 },
     ['Pyo_Nzon']        = { event = 366 },
     ['Shanruru']        = { event = 367 },
+    ['Suspicious_Tarutaru'] = { event = 879 },
     ['Tokaka']          = { event = 207 },
     ['Yafa_Yaa']        = { event = 365 },
 }

@@ -28,6 +28,7 @@ return {
     ['Morjean']       = { event = 601 },
     ['Nouveil']       = { event = 574 },
     ['Olbergieut']    = { event = 612 },
+    ['Odyssean_Passage']  = { messageSpecial = ID.text.NOTHING_HAPPENS },
     ['Pellimie']      = { text = ID.text.PELLIMIE_DIALOG },
     ['Pepigort']      = { text = ID.text.PEPIGORT_DIALOG },
     ['Phaviane']      = { text = ID.text.PHAVIANE_DIALOG },
@@ -35,4 +36,5 @@ return {
     ['Rodaillece']    = { text = ID.text.RODAILLECE_DIALOG },
     ['Sochiene']      = { text = ID.text.SOCHIENE_DIALOG },
     ['Vamorcote']     = { event = 651 },
+    ['Suspicious_Elvaan'] = { event = 881 },
 }
