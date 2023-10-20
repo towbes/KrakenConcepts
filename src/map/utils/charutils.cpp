@@ -3870,6 +3870,7 @@ namespace charutils
         }
 
         return EMobDifficulty::TooWeak;
+    }
 
     /************************************************************************
      *                                                                       *

@@ -56,7 +56,20 @@ CMenuMeritPacket::CMenuMeritPacket(CCharEntity* PChar)
         ref<uint16>(0x0A) |= bluePointBonus << 7;
     }
 
-    bool canUseMeritMode = PChar->jobs.job[PChar->GetMJob()] >= 75 && charutils::hasKeyItem(PChar, 606);
+    else if (PChar->GetSJob() == JOB_BLU)
+    {
+            uint8 bluePointBonus = 0;
+
+            if (PChar->GetSLevel() >= 75)
+            {
+                bluePointBonus += PChar->PMeritPoints->GetMeritValue(MERIT_ASSIMILATION, PChar);
+            }
+
+            ref<uint16>(0x0A) |= bluePointBonus << 7;
+    }
+
+
+    bool canUseMeritMode = PChar->jobs.job[PChar->GetMJob()] >= 75 && charutils::hasKeyItem(PChar, 606) || PChar->jobs.job[PChar->GetSJob()] >= 75 && charutils::hasKeyItem(PChar, 606);
 
     ref<uint16>(0x0A) |= canUseMeritMode << 13; // Level >= 75 and has Limit Break KI
 
