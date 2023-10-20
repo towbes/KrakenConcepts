@@ -1,14 +1,14 @@
 -----------------------------------
 -- Custom NM System
 -----------------------------------
-require("modules/module_utils")
-require("scripts/globals/npc_util")
+require('modules/module_utils')
+require('scripts/globals/npc_util')
 
 
-require("scripts/globals/utils")
-local customUtil = require("modules/custom/lua/custom_util")
+require('scripts/globals/utils')
+local customUtil = require('modules/custom/lua/custom_util')
 -----------------------------------
-local m = Module:new("custom_nm")
+local m = Module:new('custom_nm')
 
 m.zone = {}
 
@@ -29,7 +29,7 @@ m.spawnType =
 
 m.spawnFrom =
 {
-    QM        = "???"
+    QM        = '???'
 }
 
 m.respawn =
@@ -72,7 +72,7 @@ local onMobDeath = function(mob, playerArg, optParams, tblNM)
     end
 
     if tblNM.spawnType == m.spawnType.ITEM then
-        local qm  = mob:getLocalVar("QM")
+        local qm  = mob:getLocalVar('QM')
         local npc = GetNPCByID(qm)
         if npc then
             npc:timer(tblNM.spawnWait * 1000, function(npcArg)
@@ -219,7 +219,7 @@ local lotterySpawn = function(zone, zoneId, tblNM, instant)
     local zoneName = zone:getName()
     local mobName  = tblNM.spawnFrom
 
-    customUtil.duplicateOverride(xi.zones[zoneName].mobs[mobName], "onMobDespawn", function(mob)
+    customUtil.duplicateOverride(xi.zones[zoneName].mobs[mobName], 'onMobDespawn', function(mob)
         super(mob)
 
         if checkPH(tblNM, mob) then
@@ -251,7 +251,7 @@ local instantSpawn = function(zone, zoneId, tblNM)
     local zoneName = zone:getName()
     local mobName  = tblNM.spawnFrom
 
-    customUtil.duplicateOverride(xi.zones[zoneName].mobs[mobName], "onMobDeath", function(mob, player, optParams)
+    customUtil.duplicateOverride(xi.zones[zoneName].mobs[mobName], 'onMobDeath', function(mob, player, optParams)
         super(mob, player, optParams)
 
         if checkPH(tblNM, mob) then
@@ -277,7 +277,7 @@ local itemSpawnHandler = function(zone, player, npc, tblNM)
     tblNM.mob:spawn()
 
     tblNM.mob:updateClaim(player)
-    tblNM.mob:setLocalVar("QM", npc:getID())
+    tblNM.mob:setLocalVar('QM', npc:getID())
     tblNM.mob:lookAt(player:getPos())
 
     npc:setStatus(xi.status.INVISIBLE)
@@ -310,7 +310,7 @@ local itemSpawn = function(zone, zoneId, tblNM)
             then
                 itemSpawnHandler(zone, player, npc, tblNM)
             else
-                player:PrintToPlayer("Nothing happens.", xi.msg.channel.NS_SAY)
+                player:PrintToPlayer('Nothing happens.', xi.msg.channel.NS_SAY)
             end
         end,
     })
@@ -353,7 +353,7 @@ end
 -----------------------------------
 
 local loadTable = function(zone, tblNM)
-    tblNM.varName = "\\[CUSTOM_NM\\]" .. string.gsub(tblNM.name, "%s+", "_")
+    tblNM.varName = '\\[CUSTOM_NM\\]' .. string.gsub(tblNM.name, '%s+', '_')
 
     -- Respawn time persistence
     if tblNM.spawnNext == nil then
@@ -365,7 +365,7 @@ local loadTable = function(zone, tblNM)
         tblNM.mob = createEntity(zone, tblNM)
     end
     if not tblNM.mob then
-        print(string.format("[CUSTOM_NM] Entity improperly initialized for: %s", tblNM.name))
+        print(string.format('[CUSTOM_NM] Entity improperly initialized for: %s', tblNM.name))
         return false
     end
 

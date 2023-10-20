@@ -2,12 +2,14 @@
 -- func: helmnext
 -- desc: Move to the next HELM point in the list
 -----------------------------------
-require("scripts/globals/helm")
+require('scripts/globals/helm')
 -----------------------------------
-cmdprops =
+local commandObj = {}
+
+commandObj.cmdprops =
 {
     permission = 1,
-    parameters = "i"
+    parameters = 'i'
 }
 
 local getHelmType = function(zoneID)
@@ -20,8 +22,8 @@ local getHelmType = function(zoneID)
     return 0
 end
 
-function onTrigger(player, dir)
-    local var      = "[HELM]AT_POINT"
+commandObj.onTrigger = function(player, dir)
+    local var      = '[HELM]AT_POINT'
     local zoneID   = player:getZoneID()
     local point    = player:getLocalVar(var)
     local helmType = getHelmType(zoneID)
@@ -49,7 +51,7 @@ function onTrigger(player, dir)
     local nextPoint = points[point]
 
     player:PrintToPlayer(string.format(
-        "Moving to point %d/%d @ %.3f, %.3f, %.3f",
+        'Moving to point %d/%d @ %.3f, %.3f, %.3f',
         point,
         #points,
         nextPoint[1],
@@ -60,3 +62,5 @@ function onTrigger(player, dir)
     player:setPos(unpack(nextPoint))
     player:setLocalVar(var, point)
 end
+
+return commandObj

@@ -4,21 +4,21 @@
 -- In the case of a conquest tie for first place
 -- Valeriano's Troupe will offer their services in Jeuno
 -----------------------------------
-require("modules/module_utils")
+require('modules/module_utils')
 
-require("scripts/globals/shop")
+require('scripts/globals/shop')
 
 
-require("scripts/globals/npc_util")
-local customUtil = require("modules/custom/lua/custom_util")
+require('scripts/globals/npc_util')
+local customUtil = require('modules/custom/lua/custom_util')
 -----------------------------------
-local m = Module:new("jeuno_valeriano")
+local m = Module:new('jeuno_valeriano')
 
 -- Default settings
 local settings =
 {
     ALWAYS         = false,            -- Spawn regardless of conquest
-    ZONE           = "RuLude_Gardens", -- Set this to any area
+    ZONE           = 'RuLude_Gardens', -- Set this to any area
     VALERIANO      = { -21.534,  0.002, -55.108, 130 },
     NALTA          = { -23.046,  0.002, -47.096, 130 },
     CHEH_RAIHAH    = { -23.196,  0.002, -52.912, 130 },
@@ -172,15 +172,15 @@ local troupe =
 {
     VALERIANO =
     {
-        name = "Valeriano",
+        name = 'Valeriano',
         pos = settings.VALERIANO,
-        look = "0x01000D0100100820193018401950006000700000",
+        look = '0x01000D0100100820193018401950006000700000',
         animation = 0,
         animationSub = 1,
         dialog =
         {
-            "Halfling philosophers and heroine beauties, welcome to the " ..
-            "Troupe Valeriano show! And how gorgeous and green this fair town is!"
+            'Halfling philosophers and heroine beauties, welcome to the \' ..
+            'Troupe Valeriano show! And how gorgeous and green this fair town is!'
         },
 
         onTrigger = function(player, npc, tblNPC)
@@ -191,65 +191,65 @@ local troupe =
 
     NALTA =
     {
-        name = "Nalta",
+        name = 'Nalta',
         pos = settings.NALTA,
-        look = "0x0000CD0000000000000000000000000000000000",
+        look = '0x0000CD0000000000000000000000000000000000',
         animation = 0,
         animationSub = 3,
         dialog =
         {
-            "I believe...it is the blood of knights..." ..
-            "running in Elvaan veins...that gives them victory..."
+            'I believe...it is the blood of knights...\' ..
+            'running in Elvaan veins...that gives them victory...'
         },
     },
 
     CHEH_RAIHAH =
     {
-        name = "Cheh Raihah",
+        name = 'Cheh Raihah',
         pos = settings.CHEH_RAIHAH,
-        look = "0x0000DC0000000000000000000000000000000000",
+        look = '0x0000DC0000000000000000000000000000000000',
         animation = 0,
         animationSub = 3,
         dialog =
         {
-            "Want to see my new knife trrrick? But keep your distance, " ..
-            "if you value your ears and moustaches as they arrre!"
+            'Want to see my new knife trrrick? But keep your distance, \' ..
+            'if you value your ears and moustaches as they arrre!'
         },
     },
 
     MOKOP_SANKOP =
     {
-        name = "Mokop-Sankop",
+        name = 'Mokop-Sankop',
         pos = settings.MOKOP_SANKOP,
-        look = "0x0000470300000000000000000000000000000000",
+        look = '0x0000470300000000000000000000000000000000',
         animation = 0,
         animationSub = 1,
         dialog =
         {
-            "I'm not too fond of the folksy-wolksy in these parts. All the important" ..
-            " with their noses in the air and their tails a-waving, but cheap as can be." ..
-            " You folk from other countries need to get cracking!"
+            'I\'m not too fond of the folksy-wolksy in these parts. All the important\' ..
+            ' with their noses in the air and their tails a-waving, but cheap as can be.\' ..
+            ' You folk from other countries need to get cracking!'
         },
     },
 
     DAHJAL =
     {
-        name = "Dahjal",
+        name = 'Dahjal',
         pos = settings.DAHJAL,
-        look = "0x0000D80000000000000000000000000000000000",
+        look = '0x0000D80000000000000000000000000000000000',
         animation = 0,
         animationSub = 3,
         dialog =
         {
-            "......"
+            '......'
         },
     },
 
     NOKKHI_JINJAHL =
     {
-        name         = "Nokkhi Jinjahl",
+        name         = 'Nokkhi Jinjahl',
         pos          = settings.NOKKHI_JINJAHL,
-        look         = "0x0100000700100020003000400050006000700000",
+        look         = '0x0100000700100020003000400050006000700000',
         animation    = 47,
         animationSub = 0,
         tradeItem    = xi.item.CARNATION,
@@ -258,49 +258,49 @@ local troupe =
 
         dialog =
         {
-            "People call me \"Nokky the Tree-shaker\"! While the other guys " ..
-            "are doing their thing, I work on the sidelines as a quiver-maker.",
-            " Basically, I can make it easier for you to lug around those bundles " ..
-            "of ninety-nine arrows or bolts or whatever.",
-            "I've been doing this for a while now, so I've learned to bundle all " ..
-            "sorts of stuff...",
-            "This ain't no charity, though. I'm not really interested in gil, but...",
-            " Let's see here... Flowers...? Yeah, you can bring me a carnation for ",
-            " every ninety-nine arrows, bolts, or whatever you want organized " ..
-            "and we got a deal.",
-            "I can make a quiver or pouch for up to seven sets of the same kind " ..
-            "of ammunition.",
-            "So you could bring me, say, one hundred ninety-eight " ..
-            "silver arrows and two of those carnations for example.",
-            " I like to do things real efficient-like, you see, so make sure they're " ..
-            "in multiplies of ninety-nine.",
+            'People call me \'Nokky the Tree-shaker\'! While the other guys \' ..
+            'are doing their thing, I work on the sidelines as a quiver-maker.',
+            ' Basically, I can make it easier for you to lug around those bundles \' ..
+            'of ninety-nine arrows or bolts or whatever.',
+            'I\'ve been doing this for a while now, so I\'ve learned to bundle all \' ..
+            'sorts of stuff...',
+            'This ain\'t no charity, though. I\'m not really interested in gil, but...',
+            ' Let\'s see here... Flowers...? Yeah, you can bring me a carnation for ',
+            ' every ninety-nine arrows, bolts, or whatever you want organized \' ..
+            'and we got a deal.',
+            'I can make a quiver or pouch for up to seven sets of the same kind \' ..
+            'of ammunition.',
+            'So you could bring me, say, one hundred ninety-eight \' ..
+            'silver arrows and two of those carnations for example.',
+            ' I like to do things real efficient-like, you see, so make sure they\'re \' ..
+            'in multiplies of ninety-nine.',
         },
 
         message =
         {
             COUNT =
             {
-                "What kind of smart-alecky baloney is this!? I told you " ..
-                "to bring me the same kinda ammunition in complete sets. ",
-                " And don't forget the flowers, neither.",
+                'What kind of smart-alecky baloney is this!? I told you \' ..
+                'to bring me the same kinda ammunition in complete sets. ',
+                ' And don\'t forget the flowers, neither.',
             },
             WRONG =
             {
-                "I'm real sorry, but there's nothing I can do with those.",
+                'I\'m real sorry, but there\'s nothing I can do with those.',
             },
 
             SUCCESS =
             {
-                "And here you go! Come back soon, and bring your friends!",
+                'And here you go! Come back soon, and bring your friends!',
             },
         },
     },
 
     OMINOUS_CLOUD =
     {
-        name         = "Ominous Cloud",
+        name         = 'Ominous Cloud',
         pos          = settings.OMINOUS_CLOUD,
-        look         = "0x0000920000000000000000000000000000000000",
+        look         = '0x0000920000000000000000000000000000000000',
         animation    = 0,
         animationSub = 2,
         tradeItem    = xi.item.WIJNRUIT,
@@ -309,41 +309,41 @@ local troupe =
 
         dialog =
         {
-            "...",
-            "...Outta my face.",
-            "I told you to scram! Or would you like a piece of me, huh?",
-            " If I didn't have to waste time bundlin' together ninja tools " ..
-            "for adventurers like you,",
-            " I'd fill your ugly mug with bloody bolts faster than you could " ..
-            "say Galkan sausage.",
-            "Eh? You're here to get your ninja tools bundled?",
-            " Curse Altana! And people ask me why I hate this stinkin' job!",
-            "Well, don't just stand there like an idiot! I can't do any " ..
-            "bundlin' until you fork over a set of 99 tools and a wijnruit!",
-            " And I ain't doin' more than seven sets at one time, so " ..
-            "don't even try it!",
+            '...',
+            '...Outta my face.',
+            'I told you to scram! Or would you like a piece of me, huh?',
+            ' If I didn\'t have to waste time bundlin\' together ninja tools \' ..
+            'for adventurers like you,',
+            ' I\'d fill your ugly mug with bloody bolts faster than you could \' ..
+            'say Galkan sausage.',
+            'Eh? You\'re here to get your ninja tools bundled?',
+            ' Curse Altana! And people ask me why I hate this stinkin\' job!',
+            'Well, don\'t just stand there like an idiot! I can\'t do any \' ..
+            'bundlin\' until you fork over a set of 99 tools and a wijnruit!',
+            ' And I ain\'t doin\' more than seven sets at one time, so \' ..
+            'don\'t even try it!',
         },
 
         message =
         {
             COUNT =
             {
-                "Well, don't just stand there like an idiot! I can't do any " ..
-                "bundlin' until you fork over a set of 99 tools and a wijnruit!",
-                " And I ain't doin' more than seven sets at one time, so " ..
-                "don't even try it!"
+                'Well, don\'t just stand there like an idiot! I can\'t do any \' ..
+                'bundlin\' until you fork over a set of 99 tools and a wijnruit!',
+                ' And I ain\'t doin\' more than seven sets at one time, so \' ..
+                'don\'t even try it!'
             },
 
             WRONG =
             {
-               "What the hell is this junk!? Why don't you try bringin' what " ..
-               "I asked for before I shove one of my sandals up your...nose!",
+               'What the hell is this junk!? Why don\'t you try bringin\' what \' ..
+               'I asked for before I shove one of my sandals up your...nose!',
             },
 
             SUCCESS =
             {
-                "Here, take 'em and scram.",
-                " And don't say I ain't never did nothin' for you!",
+                'Here, take \'em and scram.',
+                ' And don\'t say I ain\'t never did nothin\' for you!',
             },
         }
     },
@@ -421,15 +421,15 @@ local checkConquest = function(zone)
     end
 
     if first > 1 then
-        print("Conquest tied, Valeriano's Troupe is spawning in Jeuno.")
+        print('Conquest tied, Valeriano\'s Troupe is spawning in Jeuno.')
         spawnTroupe(zone)
     else
-        print("Conquest not tied, Valeriano's Troupe is despawned from Jeuno.")
+        print('Conquest not tied, Valeriano\'s Troupe is despawned from Jeuno.')
         despawnTroupe(zone)
     end
 end
 
-m:addOverride(string.format("xi.zones.%s.Zone.onInitialize", settings.ZONE), function(zone)
+m:addOverride(string.format('xi.zones.%s.Zone.onInitialize', settings.ZONE), function(zone)
     super(zone)
 
     if settings.ALWAYS then
@@ -439,7 +439,7 @@ m:addOverride(string.format("xi.zones.%s.Zone.onInitialize", settings.ZONE), fun
     end
 end)
 
-m:addOverride(string.format("xi.zones.%s.Zone.onConquestUpdate", settings.ZONE), function(zone, updateType)
+m:addOverride(string.format('xi.zones.%s.Zone.onConquestUpdate', settings.ZONE), function(zone, updateType)
     super(zone, updateType)
 
     -- Conquest end

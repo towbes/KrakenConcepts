@@ -1,12 +1,12 @@
 -----------------------------------
 -- Custom NM Example (Timed)
 -----------------------------------
-require("modules/module_utils")
+require('modules/module_utils')
 
 
-local nm = require("modules/custom/custom_nm/custom_nm")
+local nm = require('modules/custom/custom_nm/custom_nm')
 -----------------------------------
-local m = Module:new("custom_nm_timed")
+local m = Module:new('custom_nm_timed')
 local id = xi.zone.LABYRINTH_OF_ONZOZO
 
 nm.zone[id] = nm.zone[id] or {}
@@ -14,8 +14,8 @@ nm.zone[id] = nm.zone[id] or {}
 table.insert(nm.zone[id],
 {
     level     = 83,
-    name      = "Deathstalker",
-    zone      = "Labyrinth_of_Onzozo",
+    name      = 'Deathstalker',
+    zone      = 'Labyrinth_of_Onzozo',
     base      = { zoneId = 212, groupId = 33 }, -- Gustav Tunnel / Amikiri
     look      = 2243,                           -- Hedetet
     flags     = 159,                            -- Make huge
@@ -56,7 +56,7 @@ table.insert(nm.zone[id],
 
     -- Repeat Death Scissors 3x
     onMobWeaponSkill = function(target, mob, skill)
-        local skillVar = "DeathScissors3x"
+        local skillVar = 'DeathScissors3x'
 
         if skill:getID() == 353 then
             local skillCounter = mob:getLocalVar(skillVar)
@@ -81,7 +81,7 @@ table.insert(nm.zone[id],
     end,
 })
 
-m:addOverride("xi.zones.Labyrinth_of_Onzozo.Zone.onInitialize", function(zone)
+m:addOverride('xi.zones.Labyrinth_of_Onzozo.Zone.onInitialize', function(zone)
     super(zone)
     nm.initZone(zone)
 end)

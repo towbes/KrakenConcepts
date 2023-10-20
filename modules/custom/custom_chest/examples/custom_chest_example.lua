@@ -1,17 +1,17 @@
 -----------------------------------
 -- Custom Treasure Chest (Example)
 -----------------------------------
-require("modules/module_utils")
+require('modules/module_utils')
 
-local chest = require("modules/custom/custom_chest/custom_chest")
+local chest = require('modules/custom/custom_chest/custom_chest')
 -----------------------------------
-local m = Module:new("custom_chest_example")
+local m = Module:new('custom_chest_example')
 
 chest.zone[xi.zone.QUFIM_ISLAND] =
 {
-    name    = "Treasure Chest",          -- Target name
+    name    = 'Treasure Chest',          -- Target name
     look    = chest.look.TREASURE_CHEST, -- Chest model
-    key     = "a Qufim Chest Key",       -- Description when clicked
+    key     = 'a Qufim Chest Key',       -- Description when clicked
     id      = 12345,                     -- eg. Qufim Chest Key (DAT mod)
     respawn = chest.respawn.MODERATE,    -- 25-30 minutes
 
@@ -40,12 +40,12 @@ chest.zone[xi.zone.QUFIM_ISLAND] =
 
     mobs =
     {
-        { "Dancing_Weapon", chest.rate.RARE }, -- 5%
-        { "Acrophies",      chest.rate.RARE }, -- 5%
+        { 'Dancing_Weapon', chest.rate.RARE }, -- 5%
+        { 'Acrophies',      chest.rate.RARE }, -- 5%
     },
 }
 
-m:addOverride("xi.zones.Qufim_Island.Zone.onInitialize", function(zone)
+m:addOverride('xi.zones.Qufim_Island.Zone.onInitialize', function(zone)
     super(zone)
     chest.initZone(zone)
 end)

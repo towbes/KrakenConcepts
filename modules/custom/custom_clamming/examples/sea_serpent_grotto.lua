@@ -3,38 +3,38 @@
 -- ---------------------------------
 
 
-local clamming = require("modules/custom/custom_clamming/custom_clamming")
+local clamming = require('modules/custom/custom_clamming/custom_clamming')
 -- ---------------------------------
-local m = Module:new("clamming_sea_serpent_grotto")
+local m = Module:new('clamming_sea_serpent_grotto')
 
 local weight = clamming.weight
 local rate   = clamming.rate
 
-clamming.zones[xi.zone.SEA_SERPENT_GROTTO] =
+clamming.zone[xi.zone.SEA_SERPENT_GROTTO] =
 {
     -- Price of Clamming Kit
-    price = 2000,
+    price = 750,
 
     drops =
     {
-        { rate.VERY_COMMON, weight.LIGHT,      xi.item.SEASHELL,                "a seashell"                }, -- 24% 6pz
-        { rate.COMMON,      weight.MODERATE,   xi.item.PEBBLE,                  "a pebble"                  }, -- 15% 7pz
-        { rate.COMMON,      weight.LIGHT,      xi.item.CLUMP_OF_PAMTAM_KELP,    "a clump of pamtam kelp"    }, -- 15% 6pz
-        { rate.UNCOMMON,    weight.VERY_LIGHT, xi.item.PIECE_OF_RATTAN_LUMBER,  "a piece of rattan lumber"  }, -- 10% 3pz
-        { rate.UNCOMMON,    weight.HEAVY,      xi.item.MANTA_SKIN,              "a manta skin"              }, -- 10% 11pz
-        { rate.UNCOMMON,    weight.LIGHT,      xi.item.SILVER_BEASTCOIN,        "a silver beastcoin"        }, -- 10% 6pz
-        { rate.UNCOMMON,    weight.LIGHT,      xi.item.CRAB_SHELL,              "a crab shell"              }, -- 10% 6pz
-        { rate.RARE,        weight.LIGHT,      xi.item.NEBIMONITE,              "a nebimonite"              }, --  5% 6pz
-        { rate.RARE,        weight.LIGHT,      xi.item.ELM_LOG,                 "an elm log"                }, --  5% 6pz
-        { rate.RARE,        weight.LIGHT,      xi.item.EASTERN_GEM,             "an eastern gem"            }, --  5% 6pz
-        { rate.RARE,        weight.LIGHT,      xi.item.SHALL_SHELL,             "a shall shell"             }, --  5% 6pz
-        { rate.VERY_RARE,   weight.VERY_HEAVY, xi.item.RUSTY_GREATSWORD,        "a rusty greatsword"        }, --  1% 20pz
-        { rate.VERY_RARE,   weight.MODERATE,   xi.item.GOLD_BEASTCOIN,          "a gold beastcoin"          }, --  1% 7pz
-        { rate.VERY_RARE,   weight.VERY_LIGHT, xi.item.BROKEN_LINKPEARL,        "a broken linkpearl"        }, --  1% 3pz
-        { rate.VERY_RARE,   weight.LIGHT,      xi.item.PIECE_OF_OXBLOOD,        "a piece of oxblood"        }, --  1% 6pz
-        { rate.VERY_RARE,   weight.HEAVY,      xi.item.HIGH_QUALITY_CRAB_SHELL, "a high-quality crab shell" }, --  1% 11pz
-        { rate.SUPER_RARE,  weight.VERY_LIGHT, xi.item.PIECE_OF_ANGEL_SKIN,     "a piece of angel skin"     }, -- .5% 3pz
-        { rate.SUPER_RARE,  weight.LIGHT,      xi.item.ELSHIMO_COCONUT,         "an elshimo coconut"        }, -- .5% 6pz
+        { rate.VERY_COMMON, weight.LIGHT,      xi.item.SEASHELL,                'a seashell'                }, -- 24% 6pz
+        { rate.COMMON,      weight.MODERATE,   xi.item.PEBBLE,                  'a pebble'                  }, -- 15% 7pz
+        { rate.COMMON,      weight.LIGHT,      xi.item.CLUMP_OF_PAMTAM_KELP,    'a clump of pamtam kelp'    }, -- 15% 6pz
+        { rate.UNCOMMON,    weight.VERY_LIGHT, xi.item.PIECE_OF_RATTAN_LUMBER,  'a piece of rattan lumber'  }, -- 10% 3pz
+        { rate.UNCOMMON,    weight.HEAVY,      xi.item.MANTA_SKIN,              'a manta skin'              }, -- 10% 11pz
+        { rate.UNCOMMON,    weight.LIGHT,      xi.item.SILVER_BEASTCOIN,        'a silver beastcoin'        }, -- 10% 6pz
+        { rate.UNCOMMON,    weight.LIGHT,      xi.item.CRAB_SHELL,              'a crab shell'              }, -- 10% 6pz
+        { rate.RARE,        weight.LIGHT,      xi.item.NEBIMONITE,              'a nebimonite'              }, --  5% 6pz
+        { rate.RARE,        weight.LIGHT,      xi.item.ELM_LOG,                 'an elm log'                }, --  5% 6pz
+        { rate.RARE,        weight.LIGHT,      xi.item.EASTERN_GEM,             'an eastern gem'            }, --  5% 6pz
+        { rate.RARE,        weight.LIGHT,      xi.item.SHALL_SHELL,             'a shall shell'             }, --  5% 6pz
+        { rate.VERY_RARE,   weight.VERY_HEAVY, xi.item.RUSTY_GREATSWORD,        'a rusty greatsword'        }, --  1% 20pz
+        { rate.VERY_RARE,   weight.MODERATE,   xi.item.GOLD_BEASTCOIN,          'a gold beastcoin'          }, --  1% 7pz
+        { rate.VERY_RARE,   weight.VERY_LIGHT, xi.item.BROKEN_LINKPEARL,        'a broken linkpearl'        }, --  1% 3pz
+        { rate.VERY_RARE,   weight.LIGHT,      xi.item.PIECE_OF_OXBLOOD,        'a piece of oxblood'        }, --  1% 6pz
+        { rate.VERY_RARE,   weight.HEAVY,      xi.item.HIGH_QUALITY_CRAB_SHELL, 'a high-quality crab shell' }, --  1% 11pz
+        { rate.SUPER_RARE,  weight.VERY_LIGHT, xi.item.PIECE_OF_ANGEL_SKIN,     'a piece of angel skin'     }, -- .5% 3pz
+        { rate.SUPER_RARE,  weight.LIGHT,      xi.item.ELSHIMO_COCONUT,         'an elshimo coconut'        }, -- .5% 6pz
     },
 
     -- Clamming Points do not move and are usable every 15 seconds
@@ -57,7 +57,7 @@ clamming.zones[xi.zone.SEA_SERPENT_GROTTO] =
     -- One NPC per zone to sell Clamming Kit and trade in for items
     npc =
     {
-        name  = "Sneaky Sahagin", -- !pos -105.021 8.992 -311.431 176
+        name  = 'Sneaky Sahagin', -- !pos -105.021 8.992 -311.431 176
         x     =         -105.021,
         y     =            8.992,
         z     =         -311.431,
@@ -75,12 +75,12 @@ clamming.zones[xi.zone.SEA_SERPENT_GROTTO] =
 
     -- Require var value to access clamming
     -- requirement = {
-        -- var   = "[CUSTOMQUEST]SSG_CLAMMING",
+        -- var   = '[CUSTOMQUEST]SSG_CLAMMING',
         -- value = 2 -- QUEST_COMPLETED
     -- },
 }
 
-m:addOverride("xi.zone.Sea_Serpent_Grotto.Zone.onInitialize", function(zone)
+m:addOverride('xi.zones.Sea_Serpent_Grotto.Zone.onInitialize', function(zone)
     super(zone)
     clamming.initZone(zone)
 end)
@@ -89,12 +89,12 @@ end)
 -- Remove/break Clamming Kit between zones
 -- ---------------------------------
 
-m:addOverride("xi.zone.Sea_Serpent_Grotto.Zone.onZoneIn", function(player, zonePrev)
+m:addOverride('xi.zones.Sea_Serpent_Grotto.Zone.onZoneIn', function(player, zonePrev)
     super(player, zonePrev)
     clamming.onZoneIn(player)
 end)
 
-m:addOverride("xi.zone.Sea_Serpent_Grotto.Zone.onZoneOut", function(player)
+m:addOverride('xi.zones.Sea_Serpent_Grotto.Zone.onZoneOut', function(player)
     super(player)
     clamming.onZoneOut(player)
 end)

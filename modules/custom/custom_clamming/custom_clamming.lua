@@ -1,11 +1,11 @@
 -----------------------------------
 -- Custom Clamming
 -----------------------------------
-require("modules/module_utils")
-require("scripts/globals/npc_util")
-local customUtil = require("modules/custom/lua/custom_util")
+require('modules/module_utils')
+require('scripts/globals/npc_util')
+local customUtil = require('modules/custom/lua/custom_util')
 -----------------------------------
-local m = Module:new("custom_clamming")
+local m = Module:new('custom_clamming')
 
 
 -----------------------------------
@@ -59,40 +59,40 @@ local settings =
 
 local vars =
 {
-    ITEM   = "[CLAMMING]Item_",
-    WEIGHT = "[CLAMMING]Weight",
-    SIZE   = "[CLAMMING]Size",
-    BROKEN = "[CLAMMING]Broken",
-    NEXT   = "[CLAMMING]Next",
-    TARGET = "[CLAMMING]Target",
+    ITEM   = '[CLAMMING]Item_',
+    WEIGHT = '[CLAMMING]Weight',
+    SIZE   = '[CLAMMING]Size',
+    BROKEN = '[CLAMMING]Broken',
+    NEXT   = '[CLAMMING]Next',
+    TARGET = '[CLAMMING]Target',
 }
 
 local msg =
 {
-    POOR   = "You do not have enough gil.",
-    RETURN = "You return the clamming kit.",
-    READY  = "The area is littered with pieces of broken seashells.",
-    DELAY  = "It looks like someone has been digging here.",
-    FIND   = "You find %s and toss it into your bucket.",
-    BROKEN = "You cannot collect any clams with a broken bucket!",
-    REMOVE = "Lost key item: Clamming kit.",
+    POOR   = 'You do not have enough gil.',
+    RETURN = 'You return the clamming kit.',
+    READY  = 'The area is littered with pieces of broken seashells.',
+    DELAY  = 'It looks like someone has been digging here.',
+    FIND   = 'You find %s and toss it into your bucket.',
+    BROKEN = 'You cannot collect any clams with a broken bucket!',
+    REMOVE = 'Lost key item: Clamming kit.',
 
     BREAK  =
     {
-        "You find %s and toss it into your bucket...",
-        "But the weight is too much for the bucket and its bottom breaks!",
-        " All your shellfish are washed away...",
+        'You find %s and toss it into your bucket...',
+        'But the weight is too much for the bucket and its bottom breaks!',
+        ' All your shellfish are washed away...',
     },
 
     INCIDENT =
     {
-        "Something jumps into your bucket and breaks through the bottom!",
-        " All your shellfish are washed away...",I
+        'Something jumps into your bucket and breaks through the bottom!',
+        ' All your shellfish are washed away...',I
     },
 
     UPGRADE = {
-        "Your clamming capacity has increased to %d ponzes!",
-        "Now you may be able to dig a...",
+        'Your clamming capacity has increased to %d ponzes!',
+        'Now you may be able to dig a...',
     },
 }
 
@@ -100,86 +100,86 @@ local menu =
 {
     DIG =
     {
-        TITLE   = "Dig here?",
-        AGREE   = "Yep.",
-        DECLINE = "Nope.",
+        TITLE   = 'Dig here?',
+        AGREE   = 'Yep.',
+        DECLINE = 'Nope.',
     },
 
     UPGRADE =
     {
-        TITLE   = "Move your catch to a new bucket?",
-        AGREE   = "Yes.",
-        DECLINE = "No.",
+        TITLE   = 'Move your catch to a new bucket?',
+        AGREE   = 'Yes.',
+        DECLINE = 'No.',
     },
 
     READY =
     {
-        TITLE   = "Begin clamming?", -- Ready to get clammin'?
-        ACCEPT  = "Yes.",            -- I was born to clam.
-        DECLINE = "No.",             -- Clamming's for wimps!
-        EXPLAIN = "Please explain.", -- What is all this clamming?
+        TITLE   = 'Begin clamming?', -- Ready to get clammin'?
+        ACCEPT  = 'Yes.',            -- I was born to clam.
+        DECLINE = 'No.',             -- Clamming's for wimps!
+        EXPLAIN = 'Please explain.', -- What is all this clamming?
     },
 
     UPDATE =
     {
-        TITLE   = "Quit clamming?", -- Quit yer clammin'?
-        ACCEPT  = "I'm done.",      -- I'm all clammed out.
-        DECLINE = "Keep going.",    -- I've still got a few more clams in me.
-        EXPLAIN = "Explain again.", -- Clammin' confuses me...
+        TITLE   = 'Quit clamming?', -- Quit yer clammin'?
+        ACCEPT  = 'I\'m done.',      -- I'm all clammed out.
+        DECLINE = 'Keep going.',    -- I've still got a few more clams in me.
+        EXPLAIN = 'Explain again.', -- Clammin' confuses me...
     },
 }
 
 local defaultDialog = {
     BROKEN =
     {
-        "You broke the bucket! It's over.",
-        " That clamming kit is going to need repairs. I'll take it off your hands for now.",
+        'You broke the bucket! It\'s over.',
+        ' That clamming kit is going to need repairs. I\'ll take it off your hands for now.',
     },
 
     READY =
     {
-        "Would you like to try clamming?",
-        " It'll cost you %d gil.",
+        'Would you like to try clamming?',
+        ' It\'ll cost you %d gil.',
     },
 
-    DECLINE       = { "I understand. Clamming isn't for everyone.", },
-    UPDATE        = { "Had enough clamming for today?", },
-    EXPLAIN_SHORT = { "Try looking for seashells by the water.", },
-    FULL          = { "You can't carry anymore.", },
-    INELIGIBLE    = { "I have nothing to say to you.", },
+    DECLINE       = { 'I understand. Clamming isn\'t for everyone.', },
+    UPDATE        = { 'Had enough clamming for today?', },
+    EXPLAIN_SHORT = { 'Try looking for seashells by the water.', },
+    FULL          = { 'You can\'t carry anymore.', },
+    INELIGIBLE    = { 'I have nothing to say to you.', },
 
-    NOTHING = { "There's nothing in your bucket yet.", },
+    NOTHING = { 'There\'s nothing in your bucket yet.', },
     WEIGHT  =
     {
-        "Hmm... This weighs around %d ponzes.",
-        " Be careful to not add too much, or you'll break the bucket!",
+        'Hmm... This weighs around %d ponzes.',
+        ' Be careful to not add too much, or you\'ll break the bucket!',
     },
 
     EXPLAIN_LONG =
     {
-        "What's clamming? Nearby are prime locations for digging up shellfish and an assortment of other items.",
-        "You'll need a clamming kit to dig. Collect your finds in the bucket which comes with the kit.",
-        "The starter bucket stores up to 50 ponzes. Be careful to not overfill it.",
-        "When you're done, bring everything back here and I'll wrap up your findings to take home.",
+        'What\'s clamming? Nearby are prime locations for digging up shellfish and an assortment of other items.',
+        'You\'ll need a clamming kit to dig. Collect your finds in the bucket which comes with the kit.',
+        'The starter bucket stores up to 50 ponzes. Be careful to not overfill it.',
+        'When you\'re done, bring everything back here and I\'ll wrap up your findings to take home.',
     },
 
     UPGRADE =
     {
-        "Wow, you filled the entire bucket!",
-        "Now you've proven yourself, how about an upgrade? This new bucket can hold up to %d ponzes!",
+        'Wow, you filled the entire bucket!',
+        'Now you\'ve proven yourself, how about an upgrade? This new bucket can hold up to %d ponzes!',
     },
 
     UPGRADE_AFTER =
     {
-        "Here's your upgraded bucket.",
-        " See what else you can find!",
+        'Here\'s your upgraded bucket.',
+        ' See what else you can find!',
     },
 
     FINISH =
     {
-        "All right, let's get these wrapped up.",
-        "...",
-        "Here you go! You're welcome back any time.",
+        'All right, let\'s get these wrapped up.',
+        '...',
+        'Here you go! You\'re welcome back any time.',
     },
 }
 
@@ -188,7 +188,7 @@ local defaultDialog = {
 -----------------------------------
 
 local printTbl = function(player, tbl, param1, param2, param3, param4)
-    customUtil.dialogTable(player, tbl, "", { param1, param2, param3, param4 })
+    customUtil.dialogTable(player, tbl, '', { param1, param2, param3, param4 })
 end
 
 local printNpc = function(player, tbl, param1, param2, param3, param4)
@@ -395,7 +395,7 @@ m.getResult = function(player)
     player:incrementCharVar(vars.ITEM .. result[3], 1)
     player:incrementCharVar(vars.WEIGHT, result[2])
 
-    debugMsg(player, "Added: %d pz, Total: %d pz", result[2], player:getVar(vars.WEIGHT))
+    debugMsg(player, 'Added: %d pz, Total: %d pz', result[2], player:getVar(vars.WEIGHT))
 
     -- Bucket breaks due to weight
     if player:getVar(vars.WEIGHT) > player:getCharVar(vars.SIZE) then
@@ -561,7 +561,7 @@ m.initZone = function(zone)
 
     for i = 1, #m.zone[zoneId].points do
         local dynamicPoint = zone:insertDynamicEntity({
-            name      = "Clamming Point",
+            name      = 'Clamming Point',
             objtype   = xi.objType.NPC,
             look      = settings.MODEL,
             x         = m.zone[zoneId].points[i][1],

@@ -27,7 +27,7 @@ hnmSystem:setEnabled(false)
 -----------------------------------
 -- Dragon's Aery: Fafnir, Nidhogg
 -----------------------------------
-hnmSystem:addOverride('xi.zone.Dragons_Aery.Zone.onInitialize', function(zone)
+hnmSystem:addOverride('xi.zones.Dragons_Aery.Zone.onInitialize', function(zone)
     super(zone)
 
     local hnmPopTime  = GetServerVariable('[HNM]Fafnir')   -- Time the NM will spawn at.
@@ -50,7 +50,7 @@ hnmSystem:addOverride('xi.zone.Dragons_Aery.Zone.onInitialize', function(zone)
     end
 end)
 
-hnmSystem:addOverride('xi.zone.Dragons_Aery.mobs.Fafnir.onMobDespawn', function(mob)
+hnmSystem:addOverride('xi.zones.Dragons_Aery.mobs.Fafnir.onMobDespawn', function(mob)
     super(mob)
 
     -- Server Variable work.
@@ -63,7 +63,7 @@ hnmSystem:addOverride('xi.zone.Dragons_Aery.mobs.Fafnir.onMobDespawn', function(
     UpdateNMSpawnPoint(dragonsAeryID.mob.FAFNIR)
 end)
 
-hnmSystem:addOverride('xi.zone.Dragons_Aery.npcs.qm0.onTrade', function(player, npc, trade)
+hnmSystem:addOverride('xi.zones.Dragons_Aery.npcs.qm0.onTrade', function(player, npc, trade)
     if
         not GetMobByID(dragonsAeryID.mob.FAFNIR):isSpawned() and
         not GetMobByID(dragonsAeryID.mob.NIDHOGG):isSpawned() and
@@ -77,7 +77,7 @@ end)
 -----------------------------------
 -- Valley of Sorrows: Adamantoise, Aspidochelone
 -----------------------------------
-hnmSystem:addOverride('xi.zone.Valley_of_Sorrows.Zone.onInitialize', function(zone)
+hnmSystem:addOverride('xi.zones.Valley_of_Sorrows.Zone.onInitialize', function(zone)
     super(zone)
 
     local hnmPopTime  = GetServerVariable('[HNM]Adamantoise')   -- Time the NM will spawn at.
@@ -100,7 +100,7 @@ hnmSystem:addOverride('xi.zone.Valley_of_Sorrows.Zone.onInitialize', function(zo
     end
 end)
 
-hnmSystem:addOverride('xi.zone.Valley_of_Sorrows.mobs.Adamantoise.onMobDespawn', function(mob)
+hnmSystem:addOverride('xi.zones.Valley_of_Sorrows.mobs.Adamantoise.onMobDespawn', function(mob)
     super(mob)
 
     -- Server Variable work.
@@ -113,7 +113,7 @@ hnmSystem:addOverride('xi.zone.Valley_of_Sorrows.mobs.Adamantoise.onMobDespawn',
     UpdateNMSpawnPoint(valleySorrowsID.mob.ADAMANTOISE)
 end)
 
-hnmSystem:addOverride('xi.zone.Valley_of_Sorrows.npcs.qm1.onTrade', function(player, npc, trade)
+hnmSystem:addOverride('xi.zones.Valley_of_Sorrows.npcs.qm1.onTrade', function(player, npc, trade)
     if
         not GetMobByID(valleySorrowsID.mob.ADAMANTOISE):isSpawned() and
         not GetMobByID(valleySorrowsID.mob.ASPIDOCHELONE):isSpawned() and
@@ -127,7 +127,7 @@ end)
 -----------------------------------
 -- Behemoth's Dominion: Behemoth, King Behemoth
 -----------------------------------
-hnmSystem:addOverride('xi.zone.Behemoths_Dominion.Zone.onInitialize', function(zone)
+hnmSystem:addOverride('xi.zones.Behemoths_Dominion.Zone.onInitialize', function(zone)
     super(zone)
 
     local hnmPopTime  = GetServerVariable('[HNM]Behemoth')   -- Time the NM will spawn at.
@@ -150,7 +150,7 @@ hnmSystem:addOverride('xi.zone.Behemoths_Dominion.Zone.onInitialize', function(z
     end
 end)
 
-hnmSystem:addOverride('xi.zone.Behemoths_Dominion.mobs.Behemoth.onMobDespawn', function(mob)
+hnmSystem:addOverride('xi.zones.Behemoths_Dominion.mobs.Behemoth.onMobDespawn', function(mob)
     super(mob)
 
     -- Server Variable work.
@@ -163,7 +163,7 @@ hnmSystem:addOverride('xi.zone.Behemoths_Dominion.mobs.Behemoth.onMobDespawn', f
     UpdateNMSpawnPoint(behemothDomID.mob.BEHEMOTH)
 end)
 
-hnmSystem:addOverride('xi.zone.Behemoths_Dominion.npcs.qm2.onTrade', function(player, npc, trade)
+hnmSystem:addOverride('xi.zones.Behemoths_Dominion.npcs.qm2.onTrade', function(player, npc, trade)
     if
         not GetMobByID(behemothDomID.mob.BEHEMOTH):isSpawned() and
         not GetMobByID(behemothDomID.mob.KING_BEHEMOTH):isSpawned() and

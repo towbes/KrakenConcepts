@@ -1,12 +1,12 @@
 -----------------------------------
 -- Custom Treasure Chest System
 -----------------------------------
-require("modules/module_utils")
+require('modules/module_utils')
 
-require("scripts/globals/npc_util")
-local customUtil = require("modules/custom/lua/custom_util")
+require('scripts/globals/npc_util')
+local customUtil = require('modules/custom/lua/custom_util')
 -----------------------------------
-local m = Module:new("custom_chest")
+local m = Module:new('custom_chest')
 
 m.zone = {}
 
@@ -29,7 +29,7 @@ local moveChest = function(npc)
     local nextPos = m.zone[zoneId].points[math.random(1, #m.zone[zoneId].points)]
 
     -- Fixed respawn or random range
-    if type(respawn) == "table" then
+    if type(respawn) == 'table' then
         respawn = math.random(respawn[1], respawn[2])
     end
 
@@ -44,12 +44,12 @@ local onTrigger = function(player, npc)
     local keyName = m.zone[zoneId].key
 
     if m.zone[zoneId].dialog then
-        customUtil.dialogTable(player, m.zone[zoneId].dialog, "", { keyName })
+        customUtil.dialogTable(player, m.zone[zoneId].dialog, '', { keyName })
     else
         customUtil.dialogTable(player, {
-            "The chest appears to be locked.",
-            " If only you had %s, perhaps you could open it...",
-        }, "", { keyName })
+            'The chest appears to be locked.',
+            ' If only you had %s, perhaps you could open it...',
+        }, '', { keyName })
     end
 end
 
@@ -99,7 +99,7 @@ local onTrade = function(player, npc, trade)
             end)
         end)
     else
-        player:PrintToPlayer("Nothing happens.", xi.msg.channel.NS_SAY)
+        player:PrintToPlayer('Nothing happens.', xi.msg.channel.NS_SAY)
     end
 end
 
@@ -111,7 +111,7 @@ m.initZone = function(zone)
         local mobName = v[1]
         local rate    = v[2]
 
-        customUtil.duplicateOverride(xi.zones[zoneName].mobs[mobName], "onMobDeath", function(mob, player, optParams)
+        customUtil.duplicateOverride(xi.zones[zoneName].mobs[mobName], 'onMobDeath', function(mob, player, optParams)
             super(mob, player, optParams)
             player:addTreasure(m.zone[zoneId].id, mob, rate)
         end)

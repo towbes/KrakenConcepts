@@ -2,19 +2,20 @@
 -- func: spawncnm
 -- desc: Spawn custom NM in current zone
 -----------------------------------
-local nm = require("modules/custom/custom_nm/custom_nm")
+local nm = require('modules/custom/custom_nm/custom_nm')
 -----------------------------------
+local commandObj = {}
 
-cmdprops =
+commandObj.cmdprops =
 {
     permission = 1,
-    parameters = "s"
+    parameters = 's'
 }
 
-function onTrigger(player, name)
+commandObj.onTrigger = function(player, name)
     local zone = player:getZone()
     local zoneID = zone:getID()
-    local nmName = string.gsub(name, "_", " ")
+    local nmName = string.gsub(name, '_', ' ')
 
     for _, v in pairs(nm.zone[zoneID]) do
         if v.name == nmName then
@@ -26,11 +27,13 @@ function onTrigger(player, name)
 
             v.mob:setSpawn(pos.x, pos.y, pos.z, pos.rot)
             v.mob:spawn()
-            player:PrintToPlayer(string.format("Spawning: %s", nmName), xi.msg.channel.SYSTEM_3, "")
+            player:PrintToPlayer(string.format('Spawning: %s', nmName), xi.msg.channel.SYSTEM_3, '')
 
             return
         end
     end
 
-    player:PrintToPlayer(string.format("Unable to spawn: %s", nmName), xi.msg.channel.SYSTEM_3, "")
+    player:PrintToPlayer(string.format('Unable to spawn: %s', nmName), xi.msg.channel.SYSTEM_3, '')
 end
+
+return commandObj

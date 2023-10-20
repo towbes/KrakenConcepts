@@ -1,11 +1,11 @@
 -----------------------------------
 -- custom_util
 -----------------------------------
-require("modules/module_utils")
+require('modules/module_utils')
 
-require("scripts/globals/npc_util")
+require('scripts/globals/npc_util')
 -----------------------------------
-local m = Module:new("custom_util")
+local m = Module:new('custom_util')
 
 m.rate =
 {
@@ -53,10 +53,10 @@ m.pickItem = function(player, items, mod)
 end
 
 m.dialogTable = function(player, tbl, npcName, param)
-    local prefix = ""
+    local prefix = ''
 
     if npcName and string.len(npcName) > 0 then
-        prefix = string.format("%s : ", npcName)
+        prefix = string.format('%s : ', npcName)
     end
 
     if #tbl == 1 then
@@ -76,7 +76,7 @@ m.dialogTable = function(player, tbl, npcName, param)
             result = string.format(tbl[i], param[1], param[2], param[3], param[4])
         end
 
-        if tbl[i]:sub(1, 1) == " " then
+        if tbl[i]:sub(1, 1) == ' ' then
             -- Paragraph continue
             player:timer(delay, function(playerArg)
                 playerArg:PrintToPlayer(result, xi.msg.channel.NS_SAY)
@@ -95,7 +95,7 @@ m.duplicateOverride = function(entity, event, func)
         return
     end
 
-    local origEvent = event .. "Orig"
+    local origEvent = event .. 'Orig'
 
     if entity[origEvent] == nil then
         if entity[event] then

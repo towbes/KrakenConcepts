@@ -3,28 +3,28 @@
 -----------------------------------
 
 
-local customHelm = require("modules/custom/custom_helm/custom_helm")
+local customHelm = require('modules/custom/custom_helm/custom_helm')
 -----------------------------------
-local m = Module:new("harvesting_pashhow")
+local m = Module:new('harvesting_pashhow')
 
-xi.helm.helmInfo[xi.helm.type.HARVESTING].zones[xi.zone.PASHHOW_MARSHLANDS] =
+xi.helm.helmInfo[xi.helm.type.HARVESTING].zone[xi.zone.PASHHOW_MARSHLANDS] =
 {
     dynamic = true,
 
     drops =
     {
-        { customHelm.rate.VERY_COMMON, xi.item.INSECT_WING,             "an insect wing"            }, -- Insect Wing    (24%)
-        { customHelm.rate.COMMON,      xi.item.FLAX_FLOWER,             "a flax flower"             }, -- Flax Flower    (15%)
-        { customHelm.rate.COMMON,      xi.item.TREANT_BULB,             "a treant bulb"             }, -- Treant Bulb    (15%)
-        { customHelm.rate.COMMON,      xi.item.PIECE_OF_CRAWLER_COCOON, "a piece of crawler cocoon" }, -- Crawler Cocoon (15%)
-        { customHelm.rate.UNCOMMON,    xi.item.DAHLIA,                  "a dahlia"                  }, -- Dahlia         (10%)
-        { customHelm.rate.UNCOMMON,    xi.item.WIJNRUIT,                "a wijnruit"                }, -- Wijnruit       (10%)
-        { customHelm.rate.UNCOMMON,    xi.item.CLUMP_OF_BOYAHDA_MOSS,   "a clump of boyahda moss"   }, -- Boyahda Moss   (10%)
-        { customHelm.rate.RARE,        xi.item.RAIN_LILY,               "a rain lily"               }, -- Rain Lily      ( 5%)
-        { customHelm.rate.RARE,        xi.item.JUG_OF_HUMUS,            "a jug of humus"            }, -- Humus          ( 5%)
-        { customHelm.rate.RARE,        xi.item.BAG_OF_TREE_CUTTINGS,    "a bag of tree cuttings"    }, -- Tree Cuttings  ( 5%)
-        { customHelm.rate.VERY_RARE,   xi.item.COPPER_FROG,             "a copper frog"             }, -- Copper Frog    ( 1%)
-        { customHelm.rate.VERY_RARE,   xi.item.BAG_OF_GRAIN_SEEDS,      "a bag of grain seeds"      }, -- Grain Seeds    ( 1%)
+        { customHelm.rate.VERY_COMMON, xi.item.INSECT_WING,             'an insect wing'            }, -- Insect Wing    (24%)
+        { customHelm.rate.COMMON,      xi.item.FLAX_FLOWER,             'a flax flower'             }, -- Flax Flower    (15%)
+        { customHelm.rate.COMMON,      xi.item.TREANT_BULB,             'a treant bulb'             }, -- Treant Bulb    (15%)
+        { customHelm.rate.COMMON,      xi.item.PIECE_OF_CRAWLER_COCOON, 'a piece of crawler cocoon' }, -- Crawler Cocoon (15%)
+        { customHelm.rate.UNCOMMON,    xi.item.DAHLIA,                  'a dahlia'                  }, -- Dahlia         (10%)
+        { customHelm.rate.UNCOMMON,    xi.item.WIJNRUIT,                'a wijnruit'                }, -- Wijnruit       (10%)
+        { customHelm.rate.UNCOMMON,    xi.item.CLUMP_OF_BOYAHDA_MOSS,   'a clump of boyahda moss'   }, -- Boyahda Moss   (10%)
+        { customHelm.rate.RARE,        xi.item.RAIN_LILY,               'a rain lily'               }, -- Rain Lily      ( 5%)
+        { customHelm.rate.RARE,        xi.item.JUG_OF_HUMUS,            'a jug of humus'            }, -- Humus          ( 5%)
+        { customHelm.rate.RARE,        xi.item.BAG_OF_TREE_CUTTINGS,    'a bag of tree cuttings'    }, -- Tree Cuttings  ( 5%)
+        { customHelm.rate.VERY_RARE,   xi.item.COPPER_FROG,             'a copper frog'             }, -- Copper Frog    ( 1%)
+        { customHelm.rate.VERY_RARE,   xi.item.BAG_OF_GRAIN_SEEDS,      'a bag of grain seeds'      }, -- Grain Seeds    ( 1%)
     },
 
     points =
@@ -49,12 +49,12 @@ xi.helm.helmInfo[xi.helm.type.HARVESTING].zones[xi.zone.PASHHOW_MARSHLANDS] =
     }
 }
 
-m:addOverride("xi..Pashhow_Marshlands.Zone.onInitialize", function(zone)
+m:addOverride('xi.zones.Pashhow_Marshlands.Zone.onInitialize', function(zone)
     super(zone)
     xi.helm.initZone(zone, xi.helm.type.HARVESTING)
 end)
 
-m:addOverride("xi.zone.Pashhow_Marshlands.Zone.onZoneWeatherChange", function(weatherType)
+m:addOverride('xi.zones.Pashhow_Marshlands.Zone.onZoneWeatherChange', function(weatherType)
     super(onZoneWeatherChange)
 
     local drops = xi.helm.helmInfo[xi.helm.type.HARVESTING].zone[xi.zone.PASHHOW_MARSHLANDS].drops
@@ -72,13 +72,13 @@ m:addOverride("xi.zone.Pashhow_Marshlands.Zone.onZoneWeatherChange", function(we
 
     -- if raining, add it back in
     if weatherType == xi.weather.RAIN or weatherType == xi.weather.SQUALL then
-        table.insert(drops, { customHelm.rate.RARE,      xi.item.RUSTY_PICK,                 "a rusty pick"                 }) ---Rusty Pick         (5%)
-        table.insert(drops, { customHelm.rate.VERY_RARE, xi.item.BROKEN_HALCYON_FISHING_ROD, "a broken halcyon fishing rod" }) -- Broken Halcyon Rod (1%)
+        table.insert(drops, { customHelm.rate.RARE,      xi.item.RUSTY_PICK,                 'a rusty pick'                 }) ---Rusty Pick         (5%)
+        table.insert(drops, { customHelm.rate.VERY_RARE, xi.item.BROKEN_HALCYON_FISHING_ROD, 'a broken halcyon fishing rod' }) -- Broken Halcyon Rod (1%)
     end
 end)
 
 
-m:addOverride("xi.zone.Pashhow_Marshlands.Zone.onGameDay", function()
+m:addOverride('xi.zones.Pashhow_Marshlands.Zone.onGameDay', function()
     super()
 
     local drops = xi.helm.helmInfo[xi.helm.type.HARVESTING].zone[xi.zone.PASHHOW_MARSHLANDS].drops
@@ -95,12 +95,12 @@ m:addOverride("xi.zone.Pashhow_Marshlands.Zone.onGameDay", function()
 
     -- Only available on Watersday
     if VanadielDayOfTheWeek() == xi.day.WATERSDAY then
-        table.insert(drops, { customHelm.rate.RARE, xi.item.WATER_CLUSTER, "a water cluster" }) -- Water Cluster (5%)
+        table.insert(drops, { customHelm.rate.RARE, xi.item.WATER_CLUSTER, 'a water cluster' }) -- Water Cluster (5%)
     end
 
     -- Only available on New Moon
     if IsMoonNew() then
-        table.insert(drops, { customHelm.rate.SUPER_RARE, xi.item.AQUAMARINE, "an aquamarine" }) -- Aquamarine (0.5%)
+        table.insert(drops, { customHelm.rate.SUPER_RARE, xi.item.AQUAMARINE, 'an aquamarine' }) -- Aquamarine (0.5%)
     end
 end)
 

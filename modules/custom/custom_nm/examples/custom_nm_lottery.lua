@@ -1,12 +1,12 @@
 -----------------------------------
 -- Custom NM Example (Lottery)
 -----------------------------------
-require("modules/module_utils")
+require('modules/module_utils')
 
 
-local nm = require("modules/custom/custom_nm/custom_nm")
+local nm = require('modules/custom/custom_nm/custom_nm')
 -----------------------------------
-local m = Module:new("custom_nm_lottery")
+local m = Module:new('custom_nm_lottery')
 local id = xi.zone.CRAWLERS_NEST
 
 nm.zone[id] = nm.zone[id] or {}
@@ -14,8 +14,8 @@ nm.zone[id] = nm.zone[id] or {}
 table.insert(nm.zone[id],
 {
     level     = 60,
-    name      = "Leaping Larry",
-    zone      = "Crawlers_Nest",
+    name      = 'Leaping Larry',
+    zone      = 'Crawlers_Nest',
     base      = { zoneId = 197, groupId = 27 }, -- Base mob, see sql/mob_groups.sql
     look      = 328,                            -- Override model, find these with !getmodelid
     flags     = 1153,                           -- Make small
@@ -29,7 +29,7 @@ table.insert(nm.zone[id],
     -- Optional
     gil       = { 3500, 5000 },
 
-    spawnFrom = "Labyrinth_Lizard",    -- !pos 45.531 -0.205 200.777 197
+    spawnFrom = 'Labyrinth_Lizard',    -- !pos 45.531 -0.205 200.777 197
     spawnType = nm.spawnType.LOTTERY,  -- LOTTERY, INSTANT, TIMED, ITEM
     spawnRate = nm.rate.RARE,          -- 5%
     spawnWait = nm.respawn.LONG,       -- 2 hours
@@ -44,7 +44,7 @@ table.insert(nm.zone[id],
     },
 })
 
-m:addOverride("xi.zones.Crawlers_Nest.Zone.onInitialize", function(zone)
+m:addOverride('xi.zones.Crawlers_Nest.Zone.onInitialize', function(zone)
     super(zone)
     nm.initZone(zone)
 end)

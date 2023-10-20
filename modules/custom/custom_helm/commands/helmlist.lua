@@ -2,13 +2,15 @@
 -- func: helmlist
 -- desc: Parse a HELM drop list to test and hand out each item
 -----------------------------------
-require("scripts/globals/helm")
-require("scripts/globals/npc_util")
+require('scripts/globals/helm')
+require('scripts/globals/npc_util')
 -----------------------------------
-cmdprops =
+local commandObj = {}
+
+commandObj.cmdprops =
 {
     permission = 1,
-    parameters = ""
+    parameters = ''
 }
 
 local getHelmType = function(zoneID)
@@ -21,7 +23,7 @@ local getHelmType = function(zoneID)
     return 0
 end
 
-function onTrigger(player, dir)
+commandObj.onTrigger = function(player, dir)
     local zoneID   = player:getZoneID()
     local helmType = getHelmType(zoneID)
 
@@ -33,7 +35,7 @@ function onTrigger(player, dir)
     local items = {}
 
     player:PrintToPlayer(string.format(
-        "Parse HELM drop list for %s",
+        'Parse HELM drop list for %s',
         player:getZoneName()),
         xi.msg.channel.SYSTEM_3
     )
@@ -41,7 +43,7 @@ function onTrigger(player, dir)
     for _, v in pairs(drops) do
         print(v)
         player:PrintToPlayer(string.format(
-            "(%d) %s: %.2f%%",
+            '(%d) %s: %.2f%%',
             v[2], v[3], v[1] / 10),
             xi.msg.channel.NS_SAY
         )
@@ -50,3 +52,5 @@ function onTrigger(player, dir)
 
     npcUtil.giveItem(player, items)
 end
+
+return commandObj

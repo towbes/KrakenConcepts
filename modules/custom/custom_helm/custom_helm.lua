@@ -1,13 +1,13 @@
 -----------------------------------
 -- Custom HELM
 -----------------------------------
-require("modules/module_utils")
-require("scripts/globals/helm")
+require('modules/module_utils')
+require('scripts/globals/helm')
 
 
-local customUtil = require("modules/custom/lua/custom_util")
+local customUtil = require('modules/custom/lua/custom_util')
 -----------------------------------
-local m = Module:new("custom_helm")
+local m = Module:new('custom_helm')
 
 m.rate = customUtil.rate
 
@@ -15,87 +15,87 @@ local settings =
 {
     dialog =
     {
-        check = "%s is possible here if you have a %s.",
-        full  = "You cannot carry any more items. Your inventory is full.",
+        check = '%s is possible here if you have a %s.',
+        full  = 'You cannot carry any more items. Your inventory is full.',
     },
 
     vars =
     {
-        LAST_TRADE = "[HELM]Last_Trade",
-        LOCAL_USES = "uses",
+        LAST_TRADE = '[HELM]Last_Trade',
+        LOCAL_USES = 'uses',
     },
 
     [xi.helm.type.HARVESTING] =
     {
-        name    = "Harvesting Point",
-        type    = "Harvesting",
-        tool    = "sickle",
+        name    = 'Harvesting Point',
+        type    = 'Harvesting',
+        tool    = 'sickle',
         look    = 2422,
-        unable  = "You are unable to harvest anything.",
-        success = "You succesfully harvest %s!",
-        process = "You harvest %s, but your %s breaks.", -- Intentional
-        breaks  = "Your %s breaks!",
+        unable  = 'You are unable to harvest anything.',
+        success = 'You succesfully harvest %s!',
+        process = 'You harvest %s, but your %s breaks.', -- Intentional
+        breaks  = 'Your %s breaks!',
     },
 
     [xi.helm.type.EXCAVATION] =
     {
-        name    = "Excavation Point",
-        type    = "Excavation",
-        tool    = "pickaxe",
+        name    = 'Excavation Point',
+        type    = 'Excavation',
+        tool    = 'pickaxe',
         look    = 2424,
-        unable  = "You are unable to mine anything.",
-        success = "You successfully dig up %s!",
-        process = "You dig up %s, but your %s breaks in the process.",
-        breaks  = "Your %s breaks!",
+        unable  = 'You are unable to mine anything.',
+        success = 'You successfully dig up %s!',
+        process = 'You dig up %s, but your %s breaks in the process.',
+        breaks  = 'Your %s breaks!',
     },
 
     [xi.helm.type.LOGGING] =
     {
-        name    = "Logging Point",
-        type    = "Logging",
-        tool    = "hatchet",
+        name    = 'Logging Point',
+        type    = 'Logging',
+        tool    = 'hatchet',
         look    = 2423,
-        unable  = "You are unable to log anything.",
-        success = "You successfully cut off %s!",
-        process = "You cut off %s, but your %s breaks in the process.",
-        breaks  = "Your %s breaks!",
+        unable  = 'You are unable to log anything.',
+        success = 'You successfully cut off %s!',
+        process = 'You cut off %s, but your %s breaks in the process.',
+        breaks  = 'Your %s breaks!',
     },
 
     [xi.helm.type.MINING] =
     {
-        name    = "Mining Point",
-        type    = "Mining",
-        tool    = "pickaxe",
+        name    = 'Mining Point',
+        type    = 'Mining',
+        tool    = 'pickaxe',
         look    = 2424,
-        unable  = "You are unable to mine anything.",
-        success = "You successfully dig up %s!",
-        process = "You dig up %s, but your %s breaks in the process.",
-        breaks  = "Your %s breaks!",
+        unable  = 'You are unable to mine anything.',
+        success = 'You successfully dig up %s!',
+        process = 'You dig up %s, but your %s breaks in the process.',
+        breaks  = 'Your %s breaks!',
     },
 }
 
 local rocks =
 {
-    [xi.element.FIRE   ] = { xi.item.RED_ROCK,         "a red rock",         },
-    [xi.element.ICE    ] = { xi.item.TRANSLUCENT_ROCK, "a translucent rock", },
-    [xi.element.WIND   ] = { xi.item.GREEN_ROCK,       "a green rock",       },
-    [xi.element.EARTH  ] = { xi.item.YELLOW_ROCK,      "a yellow rock",      },
-    [xi.element.THUNDER] = { xi.item.PURPLE_ROCK,      "a purple rock",      },
-    [xi.element.WATER  ] = { xi.item.BLUE_ROCK,        "a blue rock",        },
-    [xi.element.LIGHT  ] = { xi.item.WHITE_ROCK,       "a white rock",       },
-    [xi.element.DARK   ] = { xi.item.BLACK_ROCK,       "a black rock",       },
+    [xi.element.FIRE   ] = { xi.item.RED_ROCK,         'a red rock',         },
+    [xi.element.ICE    ] = { xi.item.TRANSLUCENT_ROCK, 'a translucent rock', },
+    [xi.element.WIND   ] = { xi.item.GREEN_ROCK,       'a green rock',       },
+    [xi.element.EARTH  ] = { xi.item.YELLOW_ROCK,      'a yellow rock',      },
+    [xi.element.THUNDER] = { xi.item.PURPLE_ROCK,      'a purple rock',      },
+    [xi.element.WATER  ] = { xi.item.BLUE_ROCK,        'a blue rock',        },
+    [xi.element.LIGHT  ] = { xi.item.WHITE_ROCK,       'a white rock',       },
+    [xi.element.DARK   ] = { xi.item.BLACK_ROCK,       'a black rock',       },
 }
 
 local clusters =
 {
-    [xi.element.FIRE   ] = { xi.item.FIRE_CLUSTER,      "a fire cluster",      },
-    [xi.element.ICE    ] = { xi.item.ICE_CLUSTER,       "an ice cluster",      },
-    [xi.element.WIND   ] = { xi.item.WIND_CLUSTER,      "a wind cluster",      },
-    [xi.element.EARTH  ] = { xi.item.EARTH_CLUSTER,     "an earth cluster",    },
-    [xi.element.THUNDER] = { xi.item.LIGHTNING_CLUSTER, "a lightning cluster", },
-    [xi.element.WATER  ] = { xi.item.WATER_CLUSTER,     "a water cluster",     },
-    [xi.element.LIGHT  ] = { xi.item.LIGHT_CLUSTER,     "a light cluster",     },
-    [xi.element.DARK   ] = { xi.item.DARK_CLUSTER,      "a dark cluster",      },
+    [xi.element.FIRE   ] = { xi.item.FIRE_CLUSTER,      'a fire cluster',      },
+    [xi.element.ICE    ] = { xi.item.ICE_CLUSTER,       'an ice cluster',      },
+    [xi.element.WIND   ] = { xi.item.WIND_CLUSTER,      'a wind cluster',      },
+    [xi.element.EARTH  ] = { xi.item.EARTH_CLUSTER,     'an earth cluster',    },
+    [xi.element.THUNDER] = { xi.item.LIGHTNING_CLUSTER, 'a lightning cluster', },
+    [xi.element.WATER  ] = { xi.item.WATER_CLUSTER,     'a water cluster',     },
+    [xi.element.LIGHT  ] = { xi.item.LIGHT_CLUSTER,     'a light cluster',     },
+    [xi.element.DARK   ] = { xi.item.DARK_CLUSTER,      'a dark cluster',      },
 }
 
 m.pickItem = function(player, info)
@@ -104,7 +104,7 @@ m.pickItem = function(player, info)
 
     -- found nothing
     if math.random(100) > info.settingRate then
-        return { 0, 0, "" }
+        return { 0, 0, '' }
     end
 
     local result = customUtil.pickItem(player, drops)
@@ -195,7 +195,7 @@ m.onTrade = function(player, npc, trade, helmType)
                         xi.helm.movePoint(npc, zoneId, helmType)
                     end
 
-                    player:triggerRoeEvent(xi.roe.triggers.helmSuccess, { ["skillType"] = helmType })
+                    player:triggerRoeEvent(xi.roeTrigger.HELM_SUCCESS, { ['skillType'] = helmType })
                 end
             end)
 
@@ -208,7 +208,7 @@ m.onTrade = function(player, npc, trade, helmType)
     end
 end
 
-m:addOverride("xi.helm.initZone", function(zone, helmType)
+m:addOverride('xi.helm.initZone', function(zone, helmType)
     local zoneId = zone:getID()
 
     if not (xi.helm.helmInfo[helmType] and
