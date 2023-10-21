@@ -179,7 +179,7 @@ local troupe =
         animationSub = 1,
         dialog =
         {
-            'Halfling philosophers and heroine beauties, welcome to the \' ..
+            'Halfling philosophers and heroine beauties, welcome to the ' ..
             'Troupe Valeriano show! And how gorgeous and green this fair town is!'
         },
 
@@ -198,7 +198,7 @@ local troupe =
         animationSub = 3,
         dialog =
         {
-            'I believe...it is the blood of knights...\' ..
+            'I believe...it is the blood of knights...' ..
             'running in Elvaan veins...that gives them victory...'
         },
     },
@@ -212,7 +212,7 @@ local troupe =
         animationSub = 3,
         dialog =
         {
-            'Want to see my new knife trrrick? But keep your distance, \' ..
+            'Want to see my new knife trrrick? But keep your distance, ' ..
             'if you value your ears and moustaches as they arrre!'
         },
     },
@@ -226,8 +226,8 @@ local troupe =
         animationSub = 1,
         dialog =
         {
-            'I\'m not too fond of the folksy-wolksy in these parts. All the important\' ..
-            ' with their noses in the air and their tails a-waving, but cheap as can be.\' ..
+            'I\'m not too fond of the folksy-wolksy in these parts. All the important' ..
+            ' with their noses in the air and their tails a-waving, but cheap as can be.' ..
             ' You folk from other countries need to get cracking!'
         },
     },
@@ -258,21 +258,21 @@ local troupe =
 
         dialog =
         {
-            'People call me \'Nokky the Tree-shaker\'! While the other guys \' ..
+            'People call me \'Nokky the Tree-shaker\'! While the other guys ' ..
             'are doing their thing, I work on the sidelines as a quiver-maker.',
-            ' Basically, I can make it easier for you to lug around those bundles \' ..
+            ' Basically, I can make it easier for you to lug around those bundles ' ..
             'of ninety-nine arrows or bolts or whatever.',
-            'I\'ve been doing this for a while now, so I\'ve learned to bundle all \' ..
+            'I\'ve been doing this for a while now, so I\'ve learned to bundle all ' ..
             'sorts of stuff...',
             'This ain\'t no charity, though. I\'m not really interested in gil, but...',
             ' Let\'s see here... Flowers...? Yeah, you can bring me a carnation for ',
-            ' every ninety-nine arrows, bolts, or whatever you want organized \' ..
+            ' every ninety-nine arrows, bolts, or whatever you want organized ' ..
             'and we got a deal.',
-            'I can make a quiver or pouch for up to seven sets of the same kind \' ..
+            'I can make a quiver or pouch for up to seven sets of the same kind ' ..
             'of ammunition.',
-            'So you could bring me, say, one hundred ninety-eight \' ..
+            'So you could bring me, say, one hundred ninety-eight ' ..
             'silver arrows and two of those carnations for example.',
-            ' I like to do things real efficient-like, you see, so make sure they\'re \' ..
+            ' I like to do things real efficient-like, you see, so make sure they\'re ' ..
             'in multiplies of ninety-nine.',
         },
 
@@ -280,7 +280,7 @@ local troupe =
         {
             COUNT =
             {
-                'What kind of smart-alecky baloney is this!? I told you \' ..
+                'What kind of smart-alecky baloney is this!? I told you ' ..
                 'to bring me the same kinda ammunition in complete sets. ',
                 ' And don\'t forget the flowers, neither.',
             },
@@ -312,15 +312,15 @@ local troupe =
             '...',
             '...Outta my face.',
             'I told you to scram! Or would you like a piece of me, huh?',
-            ' If I didn\'t have to waste time bundlin\' together ninja tools \' ..
+            ' If I didn\'t have to waste time bundlin\' together ninja tools ' ..
             'for adventurers like you,',
-            ' I\'d fill your ugly mug with bloody bolts faster than you could \' ..
+            ' I\'d fill your ugly mug with bloody bolts faster than you could ' ..
             'say Galkan sausage.',
             'Eh? You\'re here to get your ninja tools bundled?',
             ' Curse Altana! And people ask me why I hate this stinkin\' job!',
-            'Well, don\'t just stand there like an idiot! I can\'t do any \' ..
+            'Well, don\'t just stand there like an idiot! I can\'t do any ' ..
             'bundlin\' until you fork over a set of 99 tools and a wijnruit!',
-            ' And I ain\'t doin\' more than seven sets at one time, so \' ..
+            ' And I ain\'t doin\' more than seven sets at one time, so ' ..
             'don\'t even try it!',
         },
 
@@ -328,15 +328,15 @@ local troupe =
         {
             COUNT =
             {
-                'Well, don\'t just stand there like an idiot! I can\'t do any \' ..
+                'Well, don\'t just stand there like an idiot! I can\'t do any ' ..
                 'bundlin\' until you fork over a set of 99 tools and a wijnruit!',
-                ' And I ain\'t doin\' more than seven sets at one time, so \' ..
+                ' And I ain\'t doin\' more than seven sets at one time, so ' ..
                 'don\'t even try it!'
             },
 
             WRONG =
             {
-               'What the hell is this junk!? Why don\'t you try bringin\' what \' ..
+               'What the hell is this junk!? Why don\'t you try bringin\' what ' ..
                'I asked for before I shove one of my sandals up your...nose!',
             },
 

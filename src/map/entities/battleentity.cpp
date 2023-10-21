@@ -923,6 +923,22 @@ void CBattleEntity::SetSLevel(uint8 slvl)
             case 3: // equal (75/75, 99/99)
                 m_slvl = (slvl > m_mlvl ? (m_mlvl == 1 ? 1 : m_mlvl) : slvl);
                 break;
+            case 4: // equal (75/75, 99/99) //Umeboshi "Hijacking this for Cactuar's Subjob System. Subjob automatically doubles it true level to ease subjob leveling grind"
+            {
+                m_slvl = slvl * 2;
+
+                if (m_slvl >= 74) // 37 subjob "clicks" to 75
+                {
+                    m_slvl++;
+                }
+
+                if (m_slvl > m_mlvl)
+                {
+                    m_slvl = m_mlvl;
+                }
+            }
+            break;
+                // m_slvl = (slvl > m_mlvl ? (m_mlvl == 1 ? 1 : m_mlvl) : slvl);
             default: // Error
                 ShowError("Error setting subjob level: Invalid ratio '%s' check your settings file!", ratio);
                 break;
