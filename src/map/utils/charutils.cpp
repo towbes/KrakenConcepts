@@ -4208,8 +4208,6 @@ namespace charutils
                         exp *= 1.50f; // 50% XP Bonus in TOAU Areas
                     }
 
-                    exp *= GetPlayerShareMultiplier(pcinzone, isInSignetZone || isInSanctionZone);
-
                     if (PMob->getMobMod(MOBMOD_EXP_BONUS))
                     {
                         const float monsterbonus = 1.f + PMob->getMobMod(MOBMOD_EXP_BONUS) / 100.f;
