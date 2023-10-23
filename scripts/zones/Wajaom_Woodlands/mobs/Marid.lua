@@ -4,10 +4,9 @@
 -- Note: 30 minute lottery
 -----------------------------------
 local ID = zones[xi.zone.WAJAOM_WOODLANDS]
-require('scripts/globals/mobs')
 mixins = 
 { 
-require('scripts/mixins/behavior_spawn_chigoe'),
+require('scripts/mixins/families/chigoe_pet'),
 require('scripts/mixins/families/marid'),
 }
 -----------------------------------

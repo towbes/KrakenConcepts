@@ -5,6 +5,20 @@ require('scripts/globals/mixins')
 g_mixins = g_mixins or {}
 g_mixins.families = g_mixins.families or {}
 
+local jobAbilities = set{
+    xi.jobAbility.SHIELD_BASH,
+    xi.jobAbility.JUMP,
+    xi.jobAbility.HIGH_JUMP,
+    xi.jobAbility.WEAPON_BASH,
+    xi.jobAbility.CHI_BLAST,
+    xi.jobAbility.TOMAHAWK,
+    xi.jobAbility.ANGON,
+    xi.jobAbility.QUICKSTEP,
+    xi.jobAbility.BOXSTEP,
+    xi.jobAbility.STUTTER_STEP,
+    xi.jobAbility.FEATHER_STEP,
+}
+
 g_mixins.families.chigoe = function(chigoeMob)
     chigoeMob:addListener('SPAWN', 'CHIGOE_SPAWN', function(mob)
         mob:hideName(true)
@@ -21,31 +35,22 @@ g_mixins.families.chigoe = function(chigoeMob)
         mob:setUntargetable(true)
     end)
 
-    chigoeMob:addListener('ABILITY_TAKE', 'CHIGOE_ABILITY_TAKE', function(target, user, ability, action)
-        local abilityID = ability:getID()
-        if 
-        abilityID == 150 or     -- tomahawk
-        abilityID == 46 or      -- shield bash
-        abilityID == 77 or      -- weapon bash
-        abilityID == 66 or      -- jump
-        abilityID == 67 or      -- high jump
-        abilityID == 68 or      -- super jump
-        abilityID == 202 or     -- box step
-        abilityID == 170 
-        then -- angon
-            if target:getHP() > 0 and not target:isNM() then
-                target:setMobMod(xi.mobMod.EXP_BONUS, -100)
-                target:setMobMod(xi.mobMod.NO_DROPS, 1)
-                target:setHP(0)
-            end
+    chigoeMob:addListener('CRITICAL_TAKE', 'CHIGOE_CRITICAL_TAKE', function(mob)
+        mob:setMobMod(xi.mobMod.EXP_BONUS, -100)
+        mob:setHP(0)
+    end)
+
+    chigoeMob:addListener('WEAPONSKILL_TAKE', 'CHIGOE_WEAPONSKILL_TAKE', function(mob, wsid)
+        if wsid then
+            mob:setMobMod(xi.mobMod.EXP_BONUS, -100)
+            mob:setHP(0)
         end
     end)
-    
-    chigoeMob:addListener('WEAPONSKILL_TAKE', 'CHIGOE_WEAPONSKILL_TAKE', function(target, user, wsid)
-        if target:getHP() > 0 and not target:isNM() then
-            target:setMobMod(xi.mobMod.EXP_BONUS, -100)
-            target:setMobMod(xi.mobMod.NO_DROPS, 1)
-            target:setHP(0)
+
+    chigoeMob:addListener('ABILITY_TAKE', 'CHIGOE_ABILITY_TAKE', function(mob, user, ability)
+        if jobAbilities[ability:getID()] then
+            mob:setMobMod(xi.mobMod.EXP_BONUS, -100)
+            mob:setHP(0)
         end
     end)
 end
