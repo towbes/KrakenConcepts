@@ -28,7 +28,7 @@ end
 
 mobskillObject.onMobWeaponSkill = function(target, mob, skill)
     local amount = 1
-    if mob:getZone():getType() == xi.zoneType.DYNAMIS then
+    if mob:getZone():getTypeMask() == xi.zoneType.DYNAMIS then
         amount = 2
     end
     local count = 0

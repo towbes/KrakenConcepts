@@ -8,7 +8,7 @@
 local mobskillObject = {}
 
 mobskillObject.onMobSkillCheck = function(target, mob, skill)
-    if mob:getZone():getType() == xi.zoneType.DYNAMIS then
+    if mob:getZone():getTypeMask() == xi.zoneType.DYNAMIS then
         skill:setAoE(4)
     end
     return 0

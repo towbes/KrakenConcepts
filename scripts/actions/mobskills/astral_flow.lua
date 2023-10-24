@@ -30,7 +30,7 @@ mobskillObject.onMobWeaponSkill = function(target, mob, skill)
 
     if avatarOffsets[mobID] then
         avatar = mobID + avatarOffsets[mobID]
-    elseif mob:getZone():getType() == xi.zoneType.DYNAMIS then
+    elseif mob:getZone():getTypeMask() == xi.zoneType.DYNAMIS then
         avatar = mobID + 1
     else
         avatar = mobID + 2 -- default offset

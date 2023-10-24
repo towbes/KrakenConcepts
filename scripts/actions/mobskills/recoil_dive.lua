@@ -4,7 +4,7 @@
 local mobskillObject = {}
 
 mobskillObject.onMobSkillCheck = function(target, mob, skill)
-    if mob:getZone():getType() == xi.zoneType.DYNAMIS then
+    if mob:getZone():getTypeMask() == xi.zoneType.DYNAMIS then
         skill:setAoE(4)
     end
     return 0
@@ -15,7 +15,7 @@ mobskillObject.onMobWeaponSkill = function(target, mob, skill)
     local accmod = 1
     local dmgmod = 3.5
     local shadowsTaken = xi.mobskills.shadowBehavior.NUMSHADOWS_1
-    if mob:getZone():getType() == xi.zoneType.DYNAMIS then
+    if mob:getZone():getTypeMask() == xi.zoneType.DYNAMIS then
         shadowsTaken = xi.mobskills.shadowBehavior.NUMSHADOWS_2
     end
     local info = xi.mobskills.mobPhysicalMove(mob, target, skill, numhits, accmod, dmgmod, xi.mobskills.physicalTpBonus.CRIT_VARIES, 1, 2, 3)

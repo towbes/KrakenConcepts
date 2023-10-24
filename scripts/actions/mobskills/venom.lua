@@ -17,7 +17,7 @@ mobskillObject.onMobWeaponSkill = function(target, mob, skill)
     local typeEffect = xi.effect.POISON
     local power = mob:getMainLvl() / 6 + 1
 
-    if mob:getZone():getType() == xi.zoneType.DYNAMIS then
+    if mob:getZone():getTypeMask() == xi.zoneType.DYNAMIS then
         power = 50
     end
 

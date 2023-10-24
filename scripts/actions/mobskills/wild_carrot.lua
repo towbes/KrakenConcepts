@@ -18,7 +18,7 @@ mobskillObject.onMobWeaponSkill = function(target, mob, skill)
     potency = potency - math.random(0, potency / 4)
     skill:setMsg(xi.msg.basic.SELF_HEAL)
 
-    if mob:getZone():getType() == xi.zoneType.DYNAMIS then
+    if mob:getZone():getTypeMask() == xi.zoneType.DYNAMIS then
     local erase = target:eraseStatusEffect()
 
         if erase == xi.effect.NONE then

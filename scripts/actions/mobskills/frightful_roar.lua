@@ -13,7 +13,7 @@ end
 mobskillObject.onMobWeaponSkill = function(target, mob, skill)
     local typeEffect = xi.effect.DEFENSE_DOWN
     local power      = 10
-    if mob:getZone():getType() == xi.zoneType.DYNAMIS then
+    if mob:getZone():getTypeMask() == xi.zoneType.DYNAMIS then
         power = 50
     end
     skill:setMsg(xi.mobskills.mobStatusEffectMove(mob, target, typeEffect, power, 0, 180))

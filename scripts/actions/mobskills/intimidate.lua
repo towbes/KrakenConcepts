@@ -11,7 +11,7 @@ end
 mobskillObject.onMobWeaponSkill = function(target, mob, skill)
     local typeEffect = xi.effect.SLOW
     local power      = 1250
-    if mob:getZone():getType() == xi.zoneType.DYNAMIS then
+    if mob:getZone():getTypeMask() == xi.zoneType.DYNAMIS then
         power = 1600
     end
     skill:setMsg(xi.mobskills.mobGazeMove(mob, target, typeEffect, 1250, 0, 120))

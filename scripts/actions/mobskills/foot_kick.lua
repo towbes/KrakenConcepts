@@ -14,7 +14,7 @@ mobskillObject.onMobWeaponSkill = function(target, mob, skill)
     local accmod = 1
     local dmgmod = 2.6
     local shadowsTaken = xi.mobskills.shadowBehavior.NUMSHADOWS_1
-    if mob:getZone():getType() == xi.zoneType.DYNAMIS then
+    if mob:getZone():getTypeMask() == xi.zoneType.DYNAMIS then
         shadowsTaken = xi.mobskills.shadowBehavior.IGNORE_SHADOWS
     end
     

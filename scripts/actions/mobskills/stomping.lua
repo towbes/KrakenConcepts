@@ -15,7 +15,7 @@ mobskillObject.onMobWeaponSkill = function(target, mob, skill)
 
     local typeEffect = xi.effect.STUN
     local duration = math.random(3, 10)
-    if mob:getZone():getType() == xi.zoneType.DYNAMIS then
+    if mob:getZone():getTypeMask() == xi.zoneType.DYNAMIS then
         xi.mobskills.mobStatusEffectMove(mob, target, typeEffect, 1, 0, duration)
     end
 

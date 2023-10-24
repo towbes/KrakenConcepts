@@ -22,7 +22,7 @@ mobskillObject.onMobWeaponSkill = function(target, mob, skill)
         skill:setMsg(xi.msg.basic.SKILL_NO_EFFECT) -- no effect
     end
 
-    if mob:getZone():getType() == xi.zoneType.DYNAMIS then -- Nightmare Efts can dispel up to 2 additional effects.
+    if mob:getZone():getTypeMask() == xi.zoneType.DYNAMIS then -- Nightmare Efts can dispel up to 2 additional effects.
         local dispel2 = target:dispelStatusEffect()
         local dispel3 = target:dispelStatusEffect()
 
