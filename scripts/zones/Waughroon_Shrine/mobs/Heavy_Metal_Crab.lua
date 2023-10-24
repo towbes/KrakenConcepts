@@ -25,7 +25,10 @@ entity.onMobSpawn = function(mob)
     if VanadielDayOfTheWeek() == xi.day.WATERSDAY then
         mob:setMod(xi.mod.REGEN, 6, 3, 0)
     end
-    mob:setLocalVar('DAMAGE_NULL', 1)
+    mob:setMod(xi.mod.DMGMAGIC_CAP, 1)
+    mob:setMod(xi.mod.DMGPHYS_CAP, 1)
+    mob:setMod(xi.mod.DMGRANGE_CAP, 1)
+    mob:setMod(xi.mod.DMGBREATH_CAP, 1)
 end
 
 entity.onAdditionalEffect = function(mob, target, damage)
