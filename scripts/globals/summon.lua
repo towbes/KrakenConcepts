@@ -340,6 +340,31 @@ xi.summon.avatarFinalAdjustments = function(dmg, mob, skill, target, skilltype, 
     -- Calculate Blood Pact Damage before stoneskin
     dmg = dmg + dmg * mob:getMod(xi.mod.BP_DAMAGE) / 100
 
+    -- Calculate DMG Cap Mods
+    if skilltype == xi.attackType.MAGICAL then
+        if target:getMod(xi.mod.DMGMAGIC_CAP) > 0 and dmg > target:getMod(xi.mod.DMGMAGIC_CAP) then -- If mob has this mod, damage can not exceed mod value.
+            dmg = target:getMod(xi.mod.DMGMAGIC_CAP)
+        end
+    end
+
+    if skilltype == xi.attackType.PHYSICAL then
+        if target:getMod(xi.mod.DMGPHYS_CAP) > 0 and dmg > target:getMod(xi.mod.DMGPHYS_CAP) then -- If mob has this mod, damage can not exceed mod value.
+            dmg = target:getMod(xi.mod.DMGPHYS_CAP)
+        end
+    end
+
+    if skilltype == xi.attackType.RANGED then
+        if target:getMod(xi.mod.DMGRANGE_CAP) > 0 and dmg > target:getMod(xi.mod.DMGRANGE_CAP) then -- If mob has this mod, damage can not exceed mod value.
+            dmg = target:getMod(xi.mod.DMGRANGE_CAP)
+        end
+    end
+
+    if skilltype == xi.attackType.BREATH then
+        if target:getMod(xi.mod.DMGBREATH_CAP) > 0 and dmg > target:getMod(xi.mod.DMGBREATH_CAP) then -- If mob has this mod, damage can not exceed mod value.
+            dmg = target:getMod(xi.mod.DMGBREATH_CAP)
+        end
+    end
+
     -- handle One For All, Liement
     if skilltype == xi.attackType.MAGICAL then
         local targetMagicDamageAdjustment = xi.spells.damage.calculateTMDA(target, damagetype) -- Apply checks for Liement, MDT/MDTII/DT
