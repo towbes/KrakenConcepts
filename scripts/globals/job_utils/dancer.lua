@@ -177,7 +177,10 @@ xi.job_utils.dancer.checkFlourishAbility = function(player, target, ability, com
 
     -- Finishing Move check.
         local numFinishingMoves = player:getStatusEffect(xi.effect.FINISHING_MOVE_1)
-        if numFinishingMoves and numFinishingMoves:getPower() >= minimumCost then
+        if 
+            numFinishingMoves and
+            numFinishingMoves:getPower() >= minimumCost
+        then
             return 0, 0
         else
             return xi.msg.basic.NO_FINISHINGMOVES, 0
