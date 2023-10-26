@@ -25,6 +25,9 @@ commandObj.onTrigger = function(player)
         return
     end
 
+    player:PrintToPlayer("=========================================", xi.msg.channel.SYSTEM_3)
+    player:PrintToPlayer(string.format("Entity Name %s", target:getName()), xi.msg.channel.SYSTEM_3)
+
     player:PrintToPlayer(string.format('MainJob(jID: %s) LV: %i / SubJob(jID: %s) LV: %i ',
         target:getMainJob(), target:getMainLvl(), target:getSubJob(), target:getSubLvl()), xi.msg.channel.SYSTEM_3)
 

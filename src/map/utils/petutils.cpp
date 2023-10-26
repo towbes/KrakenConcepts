@@ -38,6 +38,7 @@ along with this program.  If not, see http://www.gnu.org/licenses/
 #include "latent_effect_container.h"
 #include "map.h"
 #include "mob_spell_list.h"
+#include "mobutils.h"
 #include "petutils.h"
 #include "puppetutils.h"
 #include "status_effect_container.h"
@@ -295,45 +296,159 @@ namespace petutils
         return 0;
     }
 
+    
+    uint16 GetJugHP(CPetEntity* PMob)
+    {
+        int level        = PMob->GetMLevel();
+        int calculatedHp = 500;
+
+        // All forumlas derived using linear or cubic line fits and known era appropriate values
+        // Guardrails put into place for any scenarios where mobs sync down to level 20.
+        switch (PMob->m_PetID)
+        {
+            case 23: // CRAB FAMILIAR
+            case 24: // COURIER CARRIE
+            case 33: // BEETLE FAMILIAR
+            case 45: // PANZER GALAHAD
+                calculatedHp = 48.133 * level - 460;
+                break;
+            case 25: // HOMUNCULUS
+            case 28: // FLOWERPOT BILL
+            case 38: // FLOWERPOT BEN
+                calculatedHp = 61.7471 * level - 1260.99;
+                break;
+            case 34: // ANTLION FAMILIAR
+            case 46: // CHOPSUEY CHUCKY
+            case 47: // AMIGO SABOTENDER
+                calculatedHp = 60.24 * level - 1246;
+                break;
+            case 35: // MITE FAMILIAR
+            case 44: // LIFEDRINKER LARS
+                calculatedHp = 57.7 * level - 1203.5;
+                break;
+            case 21: // SHEEP FAMILIAR
+            case 22: // HARE FAMILIAR
+            case 26: // FLYTRAP FAMILIAR
+            case 27: // TIGER FAMILIAR
+            case 29: // EFT FAMILIAR
+            case 30: // LIZARD FAMILIAR
+            case 31: // MAYFLY FAMILIAR
+            case 32: // FUNGUAR FAMILIAR
+            case 36: // LULLABY MELODIA
+            case 37: // KEENEARED STEFFI
+            case 39: // SABER SIRAVARDE
+            case 40: // COLDBLOOD COMO
+            case 41: // SHELLBUSTER OROB
+            case 42: // VORACIOUS AUDREY
+            case 43: // AMBUSHER ALLIE
+            default:
+                calculatedHp = -0.0207189 * pow(level, 3) + 3.05448 * pow(level, 2) - 86.9204 * level + 1061.84;
+                break;
+        }
+        return std::max(calculatedHp, 500);
+    }
+
+    /// <summary>
+    /// Function used to true up Jug Pet Stats.
+    /// Era source values pulled from https://www.ffxiah.com/node/371
+    /// These defense boosts are calculated from working backwards between current calculations and target values
+    /// Does currently consider that pets have traits (attack and defense bonus)
+    /// </summary>
+    /// <param name="PMob">Jug Pet to have corrections applied</param>
+    void ApplyJugStatCorrections(CPetEntity* PMob)
+    {
+        switch (PMob->m_PetID)
+        {
+            case 23: // CRAB FAMILIAR
+            case 24: // COURIER CARRIE
+                PMob->addModifier(Mod::DEFP, 22);
+                break;
+            case 33: // BEETLE FAMILIAR
+            case 45: // PANZER GALAHAD
+            case 32: // FUNGUAR FAMILIAR
+            case 27: // TIGER FAMILIAR
+            case 39: // SABER SIRAVARDE
+            case 26: // FLYTRAP FAMILIAR
+            case 42: // VORACIOUS AUDREY
+            case 30: // LIZARD FAMILIAR
+            case 40: // COLDBLOOD COMO
+            case 31: // MAYFLY FAMILIAR
+            case 41: // SHELLBUSTER OROB
+                PMob->addModifier(Mod::DEFP, 20);
+                break;
+            case 25: // HOMUNCULUS
+            case 28: // FLOWERPOT BILL
+            case 38: // FLOWERPOT BEN
+                PMob->addModifier(Mod::DEFP, 24);
+                break;
+            case 34: // ANTLION FAMILIAR
+            case 46: // CHOPSUEY CHUCKY
+                // 52% defense boost seems quite large however
+                // base calcs are off for most pets in the 20% range
+                // Antlion Family has a 30% def boost per the page referenced above
+                PMob->addModifier(Mod::DEFP, 52);
+                break;
+            case 47: // AMIGO SABOTENDER
+                PMob->addModifier(Mod::DEFP, 19);
+                break;
+            case 35: // MITE FAMILIAR
+            case 44: // LIFEDRINKER LARS
+                PMob->addModifier(Mod::DEFP, 18);
+                PMob->addModifier(Mod::ATTP, 30);
+                break;
+            case 21: // SHEEP FAMILIAR
+            case 22: // HARE FAMILIAR
+            case 29: // EFT FAMILIAR
+            case 36: // LULLABY MELODIA
+            case 37: // KEENEARED STEFFI
+            case 43: // AMBUSHER ALLIE
+            default:
+                PMob->addModifier(Mod::DEFP, 10);
+                break;
+        }
+    }
+
+    /// <summary>
+    /// Gets the evasion rank for a jug pet.  Based on information found in https://www.ffxiah.com/node/371
+    /// </summary>
+    /// <param name="PMob">Jug Pet to get evasion rank for</param>
+    /// <returns>Evasion Rank, overriding normal mob family ratings</returns>
+    int GetJugEvasionRank(CPetEntity* PMob)
+    {
+        int evasionRank = 3;
+
+        switch (PMob->m_PetID)
+        {
+            case 23: // CRAB FAMILIAR
+            case 24: // COURIER CARRIE
+            case 33: // BEETLE FAMILIAR
+            case 45: // PANZER GALAHAD
+            case 25: // HOMUNCULUS
+            case 34: // ANTLION FAMILIAR
+            case 46: // CHOPSUEY CHUCKY
+            case 47: // AMIGO SABOTENDER
+            case 35: // MITE FAMILIAR
+            case 44: // LIFEDRINKER LARS
+                evasionRank = 1;
+                break;
+            default:
+                evasionRank = 2;
+                break;
+        }
+
+        return evasionRank;
+    }
+
     void LoadJugStats(CPetEntity* PMob, Pet_t* petStats)
     {
         // follows monster formulas but jugs have no subjob
-
-        float growth = 1.0;
         uint8 lvl    = PMob->GetMLevel();
+        uint8 lvlmax = petStats->maxLevel;
+        uint8 lvlmin = petStats->minLevel;
 
-        // give hp boost every 10 levels after 25
-        // special boosts at 25 and 50
-        if (lvl > 75)
-        {
-            growth = 1.22f;
-        }
-        else if (lvl > 65)
-        {
-            growth = 1.20f;
-        }
-        else if (lvl > 55)
-        {
-            growth = 1.18f;
-        }
-        else if (lvl > 50)
-        {
-            growth = 1.16f;
-        }
-        else if (lvl > 45)
-        {
-            growth = 1.12f;
-        }
-        else if (lvl > 35)
-        {
-            growth = 1.09f;
-        }
-        else if (lvl > 25)
-        {
-            growth = 1.07f;
-        }
+        lvl = std::clamp(lvl, lvlmin, lvlmax);
 
-        PMob->health.maxhp = (int16)(17.0 * pow(lvl, growth) * petStats->HPscale);
+        PMob->health.maxhp = GetJugHP(PMob);
 
         switch (PMob->GetMJob())
         {
@@ -357,11 +472,6 @@ namespace petutils
         PMob->health.tp = 0;
         PMob->health.hp = PMob->GetMaxHP();
         PMob->health.mp = PMob->GetMaxMP();
-
-        PMob->setModifier(Mod::DEF, GetJugBase(PMob, petStats->defRank));
-        PMob->setModifier(Mod::EVA, GetJugBase(PMob, petStats->evaRank));
-        PMob->setModifier(Mod::ATT, GetJugBase(PMob, petStats->attRank));
-        PMob->setModifier(Mod::ACC, GetJugBase(PMob, petStats->accRank));
 
         static_cast<CItemWeapon*>(PMob->m_Weapons[SLOT_MAIN])->setDamage(GetJugWeaponDamage(PMob));
 
@@ -387,13 +497,118 @@ namespace petutils
         uint16 mMND = GetBaseToRank(grade::GetJobGrade(PMob->GetMJob(), 7), PMob->GetMLevel());
         uint16 mCHR = GetBaseToRank(grade::GetJobGrade(PMob->GetMJob(), 8), PMob->GetMLevel());
 
-        PMob->stats.STR = (uint16)((fSTR + mSTR) * 0.9f);
-        PMob->stats.DEX = (uint16)((fDEX + mDEX) * 0.9f);
-        PMob->stats.VIT = (uint16)((fVIT + mVIT) * 0.9f);
-        PMob->stats.AGI = (uint16)((fAGI + mAGI) * 0.9f);
-        PMob->stats.INT = (uint16)((fINT + mINT) * 0.9f);
-        PMob->stats.MND = (uint16)((fMND + mMND) * 0.9f);
-        PMob->stats.CHR = (uint16)((fCHR + mCHR) * 0.9f);
+        PMob->stats.STR = (uint16)(fSTR + mSTR);
+        PMob->stats.DEX = (uint16)(fDEX + mDEX);
+        PMob->stats.VIT = (uint16)(fVIT + mVIT);
+        PMob->stats.AGI = (uint16)(fAGI + mAGI);
+        PMob->stats.INT = (uint16)(fINT + mINT);
+        PMob->stats.MND = (uint16)(fMND + mMND);
+        PMob->stats.CHR = (uint16)(fCHR + mCHR);
+
+        uint32 id       = PMob->m_PetID;
+
+        // Killer Effect and DEF/EVA/ACC/ATT
+        switch (id)
+        {
+            case 21: // SHEEP FAMILIAR
+                PMob->addModifier(Mod::LIZARD_KILLER, 10);
+                break;
+            case 22: // HARE FAMILIAR
+                PMob->addModifier(Mod::LIZARD_KILLER, 10);
+                break;
+            case 23: // CRAB FAMILIAR
+                PMob->addModifier(Mod::AMORPH_KILLER, 10);
+                break;
+            case 24: // COURIER CARRIE
+                PMob->addModifier(Mod::AMORPH_KILLER, 10);
+                break;
+            case 25: // HOMUNCULUS
+                PMob->addModifier(Mod::BEAST_KILLER, 10);
+                break;
+            case 26: // FLYTRAP FAMILIAR
+                PMob->addModifier(Mod::BEAST_KILLER, 10);
+                break;
+            case 27: // TIGER FAMILIAR
+                PMob->addModifier(Mod::LIZARD_KILLER, 10);
+                break;
+            case 28: // FLOWERPOT BILL
+                PMob->addModifier(Mod::BEAST_KILLER, 10);
+                break;
+            case 29: // EFT FAMILIAR
+                PMob->addModifier(Mod::VERMIN_KILLER, 10);
+                break;
+            case 30: // LIZARD FAMILIAR
+                PMob->addModifier(Mod::VERMIN_KILLER, 10);
+                break;
+            case 31: // MAYFLY FAMILIAR
+                PMob->addModifier(Mod::PLANTOID_KILLER, 10);
+                break;
+            case 32: // FUNGUAR FAMILIAR
+                PMob->addModifier(Mod::BEAST_KILLER, 10);
+                break;
+            case 33: // BEETLE FAMILIAR
+                PMob->addModifier(Mod::PLANTOID_KILLER, 10);
+                break;
+            case 34: // ANTLION FAMILIAR
+                PMob->addModifier(Mod::PLANTOID_KILLER, 10);
+                break;
+            case 35: // MITE FAMILIAR
+                PMob->addModifier(Mod::PLANTOID_KILLER, 10);
+                break;
+            case 36: // LULLABY MELODIA
+                PMob->addModifier(Mod::LIZARD_KILLER, 10);
+                break;
+            case 37: // KEENEARED STEFFI
+                PMob->addModifier(Mod::LIZARD_KILLER, 10);
+                break;
+            case 38: // FLOWERPOT BEN
+                PMob->addModifier(Mod::BEAST_KILLER, 10);
+                break;
+            case 39: // SABER SIRAVARDE
+                PMob->addModifier(Mod::LIZARD_KILLER, 10);
+                break;
+            case 40: // COLDBLOOD COMO
+                PMob->addModifier(Mod::VERMIN_KILLER, 10);
+                break;
+            case 41: // SHELLBUSTER OROB
+                PMob->addModifier(Mod::PLANTOID_KILLER, 10);
+                break;
+            case 42: // VORACIOUS AUDREY
+                PMob->addModifier(Mod::BEAST_KILLER, 10);
+                break;
+            case 43: // AMBUSHER ALLIE
+                PMob->addModifier(Mod::VERMIN_KILLER, 10);
+                break;
+            case 44: // LIFEDRINKER LARS
+                PMob->addModifier(Mod::PLANTOID_KILLER, 10);
+                break;
+            case 45: // PANZER GALAHAD
+                PMob->addModifier(Mod::PLANTOID_KILLER, 10);
+                break;
+            case 46: // CHOPSUEY CHUCKY
+                PMob->addModifier(Mod::PLANTOID_KILLER, 10);
+                break;
+            case 47: // AMIGO SABOTENDER
+                PMob->addModifier(Mod::BEAST_KILLER, 10);
+                break;
+            case 64: // FAITHFUL FALCORR
+                PMob->addModifier(Mod::AQUAN_KILLER, 10);
+                break;
+            case 68: // TURBID TOLOI
+                PMob->addModifier(Mod::AMORPH_KILLER, 10);
+                break;
+            default:
+                break;
+        }
+
+        // It appears that Rabbit and Eft have lower stats (acc atk) than their counterparts
+        // Require some more data points to see if we should special case those to rank 3 instead of rank 1
+        PMob->setModifier(Mod::DEF, mobutils::GetDefense(PMob, PMob->defRank));
+        PMob->setModifier(Mod::EVA, mobutils::GetBase(PMob, GetJugEvasionRank(PMob)));
+        PMob->setModifier(Mod::ATT, mobutils::GetBase(PMob, PMob->attRank));
+        PMob->setModifier(Mod::ACC, mobutils::GetBase(PMob, PMob->accRank));
+
+        ApplyJugStatCorrections(PMob);
     }
 
     void LoadAutomatonStats(CCharEntity* PMaster, CPetEntity* PPet, Pet_t* petStats)
