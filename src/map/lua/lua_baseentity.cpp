@@ -16568,6 +16568,54 @@ void CLuaBaseEntity::useMobAbility(sol::variadic_args va)
 }
 
 /************************************************************************
+ *  Function: triggerDrawIn()
+ *  Purpose : Forces a mob to use DrawIn on the mob's current target
+ *  Example : mob:triggerDrawIn(bool includeParty, CLuaBaseEntity* PEntity)
+ *  Note    : Params can assume a default value by passing nil
+ *          : e.g. triggerDrawIn(true) to pull in a party/alliance
+ ************************************************************************/
+inline int32 CLuaBaseEntity::triggerDrawIn(CLuaBaseEntity* PMobEntity, sol::object const& includePt, sol::object const& drawRange, sol::object const& maxReach, sol::object const& target)
+{
+    auto*          PMob    = static_cast<CMobEntity*>(PMobEntity->m_PBaseEntity);
+    CBattleEntity* PTarget = PMob->GetBattleTarget();
+
+    // Default values
+    uint8  drawInRange  = PMob->GetMeleeRange() * 2;
+    uint16 maximumReach = 0xFFFF;
+    bool   includeParty = false;
+    float  offset       = PMob->GetMeleeRange() - 0.2f;
+
+    if ((drawRange != sol::lua_nil) && drawRange.is<uint8>())
+    {
+        drawInRange = drawRange.as<uint8>();
+    }
+
+    if ((maxReach != sol::lua_nil) && maxReach.is<uint16>())
+    {
+        maximumReach = maxReach.as<uint16>();
+    }
+
+    if ((target != sol::lua_nil) && target.is<CLuaBaseEntity*>())
+    {
+        CLuaBaseEntity* PTargetEntity = target.as<CLuaBaseEntity*>();
+        PTarget                       = dynamic_cast<CBattleEntity*>(PTargetEntity->m_PBaseEntity);
+    }
+
+    if (includePt != sol::lua_nil)
+    {
+        includeParty = includePt.as<bool>();
+    }
+
+    if (PTarget)
+    {
+        // Draw in requires a target
+        battleutils::DrawIn(PTarget, PMob, offset, drawInRange, maximumReach, includeParty);
+    }
+
+    return 0;
+}
+
+/************************************************************************
  *  Function: hasTPMoves()
  *  Purpose : Returns true if a Mob has TP moves in its skill list
  *  Example : if mob:hasTPMoves() then
