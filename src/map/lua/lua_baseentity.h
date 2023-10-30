@@ -212,6 +212,7 @@ public:
     // Items
     uint16 getEquipID(SLOTTYPE slot);
     auto   getEquippedItem(uint8 slot) -> std::optional<CLuaItem>;
+    bool   hasEquipped(uint16 equipmentID); // Returns true if item is equipped in any slot
     bool   hasItem(uint16 itemID, sol::object const& location);
     uint32 getItemCount(uint16 itemID);
     bool   addItem(sol::variadic_args va);
@@ -629,7 +630,7 @@ public:
     // Status Effects
     bool   addStatusEffect(sol::variadic_args va);
     bool   addStatusEffectEx(sol::variadic_args va);
-    auto   getStatusEffect(uint16 StatusID, sol::object const& SubType) -> std::optional<CLuaStatusEffect>;
+    auto   getStatusEffect(uint16 StatusID, sol::object const& SubType, sol::object const& ItemSourceID) -> std::optional<CLuaStatusEffect>;
     auto   getStatusEffects() -> sol::table;
     int16  getStatusEffectElement(uint16 statusId);
     bool   canGainStatusEffect(uint16 effect, sol::object const& powerObj);
@@ -637,14 +638,14 @@ public:
     uint16 hasStatusEffectByFlag(uint16 StatusID);
     uint8  countEffect(uint16 StatusID); // Gets the number of effects of a specific type on the player
 
-    bool   delStatusEffect(uint16 StatusID, sol::object const& SubType);
-    void   delStatusEffectsByFlag(uint32 flag, sol::object const& silent);
-    bool   delStatusEffectSilent(uint16 StatusID); // Removes Status Effect, suppresses message
-    uint16 eraseStatusEffect();
-    uint8  eraseAllStatusEffect();
-    int32  dispelStatusEffect(sol::object const& flagObj);
-    uint8  dispelAllStatusEffect(sol::object const& flagObj);
-    uint16 stealStatusEffect(CLuaBaseEntity* PTargetEntity, sol::object const& flagObj);
+    bool   delStatusEffect(uint16 StatusID, sol::object const& SubType, sol::object const& ItemSourceID); // Removes Status Effect
+    void   delStatusEffectsByFlag(uint32 flag, sol::object const& silent);                              // Removes Status Effects by Flag
+    bool   delStatusEffectSilent(uint16 StatusID);                                                      // Removes Status Effect, suppresses message
+    uint16 eraseStatusEffect();                                                                         // Used with "Erase" spell
+    uint8  eraseAllStatusEffect();                                                                      // Erases all effects and returns number erased
+    int32  dispelStatusEffect(sol::object const& flagObj);                                              // Used with "Dispel" spell
+    uint8  dispelAllStatusEffect(sol::object const& flagObj);                                           // Dispels all effects and returns number erased
+    uint16 stealStatusEffect(CLuaBaseEntity* PTargetEntity, sol::object const& flagObj);                // Used in mob skills to steal effects
 
     void  addMod(uint16 type, int16 amount);
     int16 getMod(uint16 modID);
@@ -895,6 +896,8 @@ public:
     auto getChocoboRaisingInfo() -> sol::table;
     bool setChocoboRaisingInfo(sol::table const& table);
     bool deleteRaisedChocobo();
+    void clearActionQueue();
+    void clearTimerQueue();
 
     void  setMannequinPose(uint16 itemID, uint8 race, uint8 pose);
     uint8 getMannequinPose(uint16 itemID);

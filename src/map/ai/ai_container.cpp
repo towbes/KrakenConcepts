@@ -529,6 +529,16 @@ bool CAIContainer::QueueEmpty()
     return ActionQueue.isEmpty();
 }
 
+void CAIContainer::ClearActionQueue()
+{
+    ActionQueue.clearActionQueue();
+}
+
+void CAIContainer::ClearTimerQueue()
+{
+    ActionQueue.clearTimerQueue();
+}
+
 void CAIContainer::checkQueueImmediately()
 {
     ActionQueue.checkAction(server_clock::now());

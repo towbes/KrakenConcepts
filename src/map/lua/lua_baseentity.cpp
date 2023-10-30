@@ -3633,10 +3633,32 @@ std::optional<CLuaItem> CLuaBaseEntity::getEquippedItem(uint8 slot)
 }
 
 /************************************************************************
+ *  Function: hasEquipped(equipmentID)
+ *  Purpose : Returns true if the player has the item equipped in any slot
+ *  Example : player:hasEquipped(xi.items.BREATH_MANTLE)
+ *  Notes   :
+ ************************************************************************/
+
+bool CLuaBaseEntity::hasEquipped(uint16 equipmentID)
+{
+    if (m_PBaseEntity->objtype == TYPE_PC)
+    {
+        for (uint8 equipmentSlot = 0; equipmentSlot <= 15; equipmentSlot++)
+        {
+            if (getEquipID((SLOTTYPE)equipmentSlot) == equipmentID)
+            {
+                return true;
+            }
+        }
+    }
+    return false;
+}
+
+/************************************************************************
  *  Function: hasItem()
  *  Purpose : Returns true if a player possesses an item
  *  Example : if player:hasItem(500) then -- Second var optional
- *  Notes   : Send with an L2 value to specify container
+ *  Notes   : Can specify Power of the Effect as an option or the Item Source (will use power if both specified)
  ************************************************************************/
 
 bool CLuaBaseEntity::hasItem(uint16 itemID, sol::object const& location)
@@ -12323,9 +12345,10 @@ bool CLuaBaseEntity::addStatusEffect(sol::variadic_args va)
         auto duration   = static_cast<uint32>(va[3].as<double>());
 
         // Optional
-        auto subType  = va[4].is<uint32>() ? va[4].as<uint32>() : 0;
-        auto subPower = va[5].is<uint16>() ? va[5].as<uint16>() : 0;
-        auto tier     = va[6].is<uint16>() ? va[6].as<uint16>() : 0;
+        auto subType      = va[4].is<uint32>() ? va[4].as<uint32>() : 0;
+        auto subPower     = va[5].is<uint16>() ? va[5].as<uint16>() : 0;
+        auto tier         = va[6].is<uint16>() ? va[6].as<uint16>() : 0;
+        auto itemSourceID = va[7].is<uint16>() ? va[7].as<uint16>() : 0;
 
         CStatusEffect* PEffect = new CStatusEffect(effectID,
                                                    effectIcon,
@@ -12335,6 +12358,11 @@ bool CLuaBaseEntity::addStatusEffect(sol::variadic_args va)
                                                    subType,
                                                    subPower,
                                                    tier);
+
+        if (itemSourceID > 0)
+        {
+            PEffect->SetItemSourceID(itemSourceID);
+        }
 
         if (PEffect->GetStatusID() == EFFECT_FOOD)
         {
@@ -12409,7 +12437,7 @@ bool CLuaBaseEntity::addStatusEffectEx(sol::variadic_args va)
  *  Notes   :
  ************************************************************************/
 
-std::optional<CLuaStatusEffect> CLuaBaseEntity::getStatusEffect(uint16 StatusID, sol::object const& SubType)
+std::optional<CLuaStatusEffect> CLuaBaseEntity::getStatusEffect(uint16 StatusID, sol::object const& SubType, sol::object const& ItemSourceID)
 {
     if (m_PBaseEntity->objtype == TYPE_NPC)
     {
@@ -12617,7 +12645,7 @@ uint8 CLuaBaseEntity::countEffect(uint16 StatusID)
  *  Notes   : Can specify Power of the Effect as an option
  ************************************************************************/
 
-bool CLuaBaseEntity::delStatusEffect(uint16 StatusID, sol::object const& SubType)
+bool CLuaBaseEntity::delStatusEffect(uint16 StatusID, sol::object const& SubType, sol::object const& ItemSourceID)
 {
     if (m_PBaseEntity->objtype == TYPE_NPC)
     {
@@ -17337,6 +17365,31 @@ bool CLuaBaseEntity::deleteRaisedChocobo()
     return true;
 }
 
+void CLuaBaseEntity::clearActionQueue()
+{
+    if (m_PBaseEntity == nullptr || m_PBaseEntity->objtype != TYPE_MOB)
+    {
+        return;
+    }
+    auto* PMob = static_cast<CMobEntity*>(m_PBaseEntity);
+    if (PMob)
+    {
+        PMob->PAI->ClearActionQueue();
+    }
+}
+
+void CLuaBaseEntity::clearTimerQueue()
+{
+    if (m_PBaseEntity == nullptr)
+    {
+        return;
+    }
+
+    m_PBaseEntity->PAI->ClearTimerQueue();
+}
+
+
+
 void CLuaBaseEntity::setMannequinPose(uint16 itemID, uint8 race, uint8 pose)
 {
     TracyZoneScoped;
@@ -17578,6 +17631,7 @@ void CLuaBaseEntity::Register()
     // Items
     SOL_REGISTER("getEquipID", CLuaBaseEntity::getEquipID);
     SOL_REGISTER("getEquippedItem", CLuaBaseEntity::getEquippedItem);
+    SOL_REGISTER("hasEquipped", CLuaBaseEntity::hasEquipped);
     SOL_REGISTER("hasItem", CLuaBaseEntity::hasItem);
     SOL_REGISTER("getItemCount", CLuaBaseEntity::getItemCount);
     SOL_REGISTER("addItem", CLuaBaseEntity::addItem);
@@ -18262,6 +18316,9 @@ void CLuaBaseEntity::Register()
 
     SOL_REGISTER("addPacketMod", CLuaBaseEntity::addPacketMod);
     SOL_REGISTER("clearPacketMods", CLuaBaseEntity::clearPacketMods);
+
+    SOL_REGISTER("clearActionQueue", CLuaBaseEntity::clearActionQueue);
+    SOL_REGISTER("clearTimerQueue", CLuaBaseEntity::clearTimerQueue);
 }
 
 std::ostream& operator<<(std::ostream& os, const CLuaBaseEntity& entity)

@@ -679,6 +679,19 @@ bool CStatusEffectContainer::DelStatusEffect(EFFECT StatusID, uint16 SubID)
     return false;
 }
 
+bool CStatusEffectContainer::DelStatusEffectByItemSource(EFFECT StatusID, uint16 ItemSourceID)
+{
+    for (CStatusEffect* PStatusEffect : m_StatusEffectSet)
+    {
+        if (PStatusEffect->GetStatusID() == StatusID && PStatusEffect->GetItemSourceID() == ItemSourceID && !PStatusEffect->deleted)
+        {
+            RemoveStatusEffect(PStatusEffect);
+            return true;
+        }
+    }
+    return false;
+}
+
 bool CStatusEffectContainer::DelStatusEffectByTier(EFFECT StatusID, uint16 tier)
 {
     for (CStatusEffect* PStatusEffect : m_StatusEffectSet)
@@ -1285,6 +1298,18 @@ CStatusEffect* CStatusEffectContainer::GetStatusEffect(EFFECT StatusID, uint32 S
     return nullptr;
 }
 
+CStatusEffect* CStatusEffectContainer::GetStatusEffectByItemSource(EFFECT StatusID, uint16 ItemSourceID)
+{
+    for (CStatusEffect* PStatusEffect : m_StatusEffectSet)
+    {
+        if (PStatusEffect->GetStatusID() == StatusID && PStatusEffect->GetItemSourceID() == ItemSourceID && !PStatusEffect->deleted)
+        {
+            return PStatusEffect;
+        }
+    }
+    return nullptr;
+}
+
 /************************************************************************
  *                                                                       *
  * Dispels one effect and returns it (used in mob abilities)             *
@@ -1491,8 +1516,33 @@ void CStatusEffectContainer::SetEffectParams(CStatusEffect* StatusEffect)
     std::string name;
     EFFECT      effect = StatusEffect->GetStatusID();
 
+    // check if status effect is special case from a usable item that grants enchantment
+    bool effectFromItemEnchant = false;
+    // if status effect has item source id
+    if (StatusEffect->GetItemSourceID() > 0)
+    {
+        auto PItem = itemutils::GetItemPointer(StatusEffect->GetItemSourceID());
+        if (PItem != nullptr)
+        {
+            // get the item lua script and check if it has valid functions
+            auto itemName     = "enum/item/" + PItem->getName();
+            auto itemFullName = fmt::format("./scripts/{}.lua", itemName);
+            auto cacheEntry   = luautils::GetCacheEntryFromFilename(itemFullName);
+            auto onEffectGain = cacheEntry["onEffectGain"].get<sol::function>();
+            auto onEffectLose = cacheEntry["onEffectLose"].get<sol::function>();
+
+            effectFromItemEnchant = onEffectGain.valid() && onEffectLose.valid();
+
+            // if it does have valid functions then set the status effect name as the script (similar to actual status effects)
+            if (effectFromItemEnchant)
+            {
+                name = itemName;
+            }
+        }
+    }
+
     // Determine if this is a BRD Song or COR Effect.
-    if (subType == 0 ||
+    if ((subType == 0 ||
         subType > 20000 ||
         (effect >= EFFECT_REQUIEM && effect <= EFFECT_NOCTURNE) ||
         (effect >= EFFECT_DOUBLE_UP_CHANCE && effect <= EFFECT_NATURALISTS_ROLL) ||
@@ -1501,12 +1551,13 @@ void CStatusEffectContainer::SetEffectParams(CStatusEffect* StatusEffect)
         effect == EFFECT_ASPIR_DAZE ||
         effect == EFFECT_HASTE_DAZE ||
         effect == EFFECT_ATMA ||
-        effect == EFFECT_BATTLEFIELD)
+        effect == EFFECT_BATTLEFIELD) && !effectFromItemEnchant)
     {
         name.insert(0, "effects/");
         name.insert(name.size(), effects::EffectsParams[effect].Name);
     }
-    else
+    // Food still uses this condition so keep for now!
+    else if (!effectFromItemEnchant)
     {
         CItem* Ptem = itemutils::GetItemPointer(subType);
         if (Ptem != nullptr && subType > 0)
