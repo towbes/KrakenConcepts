@@ -12,11 +12,11 @@ local function getDistBetween(pos1, pos2)
 end
 
 g_mixins.families.ameretat = function(mob)
-    -- set default to 17 HP Drain per hit, and a 50 HP Regen per tick.
+    -- set default to 25 HP Drain per hit, and a 150 HP Regen per tick.
     -- this can be overridden in onMobSpawn()
     mob:addListener('SPAWN', 'AMERETAT_SPAWN', function(mob)
-        mob:setLocalVar('HPDrainPotency', 17)
-        mob:setLocalVar('RegenPotency', 50)
+        mob:setLocalVar('HPDrainPotency', 25)
+        mob:setLocalVar('RegenPotency', 150)
     end)
 
     mob:addListener('ENGAGE', 'AMERETAT_ENGAGE', function(mob)

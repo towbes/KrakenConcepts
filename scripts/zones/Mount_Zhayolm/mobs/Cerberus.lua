@@ -9,24 +9,31 @@ local entity = {}
 
 local drawInPos =
 {
-    {330.00, -23.91, -89.09},
-    {330.15, -24.00, -80.97},
-    {323.57, -24.00, -80.17},
-    {325.03, -24.00, -84.18},
-    {321.71, -23.99, -87.13},
-    {315.91, -24.14, -87.18},
-    {315.18, -23.96, -80.03},
-    {317.55, -23.95, -83.00},
+    { x = 330.00, y = -23.91, z = -89.09 },
+    { x = 330.15, y = -24.00, z = -80.97 },
+    { x = 323.57, y = -24.00, z = -80.17 },
+    { x = 325.03, y = -24.00, z = -84.18 },
+    { x = 321.71, y = -23.99, z = -87.13 },
+    { x = 315.91, y = -24.14, z = -87.18 },
+    { x = 315.18, y = -23.96, z = -80.03 },
+    { x = 317.55, y = -23.95, z = -83.00 },
+}
+
+local mobSkills =
+{
+    1785,
+    1786,
+    1787,
+    1788,
+    1789,
 }
 
 entity.onMobSpawn = function(mob)
-    mob:setMobMod(xi.mobMod.DRAW_IN, 1)
-    mob:setMobMod(xi.mobMod.DRAW_IN_CUSTOM_RANGE, 15)
-    mob:setMobMod(xi.mobMod.DRAW_IN_FRONT, 1)
-    mob:setMod(xi.mod.STUNRES, -100) -- Need to adjust stunres so it's stunnable
-    mob:setMod(xi.mod.MEVA, 350)
-    mob:setMod(xi.mod.ICE_SDT, 200)
-    mob:setMod(xi.mod.FIRE_SDT, 200)
+    mob:setMod(xi.mod.DEF, 486) -- 486 + 50 gives 536 DEF
+    mob:setMod(xi.mod.EVA, 355)
+    mob:setMod(xi.mod.ATT, 804) -- 804 + 66 gives 870 ATT
+    mob:setMod(xi.mod.UDMGMAGIC, -5000)
+    mob:addMod(xi.mod.MDEF, 12) -- 100 + 12 gives 112 MDEF
     mob:useMobAbility(1892)
 end
 
@@ -46,30 +53,28 @@ entity.onMobFight = function(mob, target)
         mob:setMod(xi.mod.REGAIN, 80)
     end
 
-    local drawInWait = mob:getLocalVar('DrawInWait')
+    if
+        (target:getXPos() < 305 or target:getXPos() > 340 or
+        target:getZPos() < -100 or target:getZPos() > -70) and
+        os.time() > mob:getLocalVar("DrawInWait")
+    then
+        local pos = math.random(1, 8)
 
-    if (target:getXPos() < 300 or target:getXPos() > 340) and os.time() > drawInWait then
-        local rot = target:getRotPos()
-        local position = math.random(1,8)
-        target:setPos(drawInPos[position][1],drawInPos[position][2],drawInPos[position][3],rot)
+        target:setPos(drawInPos[pos])
         mob:messageBasic(232, 0, 0, target)
-        mob:setLocalVar('DrawInWait', os.time() + 2)
-    elseif (target:getZPos() < -95 or target:getZPos() > -67) and os.time() > drawInWait then
-        local rot = target:getRotPos()
-        local position = math.random(1,8)
-        target:setPos(drawInPos[position][1],drawInPos[position][2],drawInPos[position][3],rot)
-        mob:messageBasic(232, 0, 0, target)
-        mob:setLocalVar('DrawInWait', os.time() + 2)
+        mob:setLocalVar("DrawInWait", os.time() + 2)
     end
 end
 
 entity.onMobWeaponSkillPrepare = function(mob, target)
-    if mob:getHPP() <= 25 and math.random() <= 0.6 then   -- Weighted to favor GoH under 25%
-        return 1790
+    if
+        mob:getHPP() <= 25 and
+        math.random() < 0.50
+    then
+        return 1790 -- Gates of Hell
     else
-        return 0
+        return mobSkills[math.random(#mobSkills)]
     end
-
 end
 
 entity.onMobDisengage = function(mob)

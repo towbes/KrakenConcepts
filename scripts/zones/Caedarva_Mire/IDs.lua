@@ -26,6 +26,7 @@ zones[xi.zone.CAEDARVA_MIRE] =
         CANNOT_LEAVE                  = 7328, -- You cannot leave this area while in the possession of <keyitem>.
         RESPONSE                      = 7337, -- There is no response...
         LOGGING_IS_POSSIBLE_HERE      = 7351, -- Logging is possible here if you have <item>.
+        LEG_STUCK                     = 7358, -- Your leg is stuck in the swampy ground!
         HAND_OVER_TO_IMMORTAL         = 7432, -- You hand over the % to the Immortal.
         YOUR_IMPERIAL_STANDING        = 7433, -- Your Imperial Standing has increased!
         CANNOT_ENTER                  = 7471, -- You cannot enter at this time. Please wait a while before trying again.

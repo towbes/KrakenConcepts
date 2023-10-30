@@ -2666,9 +2666,9 @@ INSERT INTO `mob_skill_lists` VALUES ('Alkonost',786,1330); -- hoof volley
 INSERT INTO `mob_skill_lists` VALUES ('Alkonost',786,2828); -- jettatura
 -- 787: free
 -- 788: free
-INSERT INTO `mob_skill_lists` VALUES ('Bakka',789,1711); -- frentic rip
-INSERT INTO `mob_skill_lists` VALUES ('Bakka',789,2003); -- grating tantra
-INSERT INTO `mob_skill_lists` VALUES ('Bakka',789,2004); -- stifling tantra
+INSERT INTO `mob_skill_lists` VALUES ('Imp_NM_Special',789,1711); -- frentic rip
+INSERT INTO `mob_skill_lists` VALUES ('Imp_NM_Special',789,2003); -- grating tantra
+INSERT INTO `mob_skill_lists` VALUES ('Imp_NM_Special',789,2004); -- stifling tantra
 INSERT INTO `mob_skill_lists` VALUES ('Balaur_Pre_50',790,819); -- blizzard breath
 INSERT INTO `mob_skill_lists` VALUES ('Balaur_Pre_50',790,820); -- thunder breath
 INSERT INTO `mob_skill_lists` VALUES ('Balaur_Post_50',791,819); -- blizzard breath -- chance of ice spikes effect
@@ -4282,6 +4282,22 @@ INSERT INTO `mob_skill_lists` VALUES ('Diabolos_Diamond_2',5393,1919); -- daydre
 INSERT INTO `mob_skill_lists` VALUES ('Diabolos_Diamond_2',5393,1909); -- cacodemonia
 INSERT INTO `mob_skill_lists` VALUES ('Diabolos_Diamond_2',5393,1912); -- hypnogenesis
 -- INSERT INTO `mob_skill_lists` VALUES ('Diabolos_Diamond_2',5393,1911); -- ruinous omen
+
+-- Orobon NM
+INSERT INTO `mob_skill_lists` VALUES ('NM_Orobon',5394,1693); -- Gnash
+INSERT INTO `mob_skill_lists` VALUES ('NM_Orobon',5394,1694); -- Vile Belch
+INSERT INTO `mob_skill_lists` VALUES ('NM_Orobon',5394,1695); -- Hypnic Lamp
+INSERT INTO `mob_skill_lists` VALUES ('NM_Orobon',5394,1696); -- Seismic Tail
+INSERT INTO `mob_skill_lists` VALUES ('NM_Orobon',5394,1697); -- Seaspray
+INSERT INTO `mob_skill_lists` VALUES ('NM_Orobon',5394,1698); -- Leeching Current
+
+INSERT INTO `mob_skill_lists` VALUES ('Jaded_Jody',5395,316);  -- Impale
+INSERT INTO `mob_skill_lists` VALUES ('Jaded_Jody',5395,317);  -- Vampiric Lash
+INSERT INTO `mob_skill_lists` VALUES ('Jaded_Jody',5395,1793); -- Vampiric Root
+INSERT INTO `mob_skill_lists` VALUES ('Jaded_Jody',5395,319);  -- Bad Breath
+INSERT INTO `mob_skill_lists` VALUES ('Jaded_Jody',5395,320);  -- Sweet Breath
+
+
 
 
 

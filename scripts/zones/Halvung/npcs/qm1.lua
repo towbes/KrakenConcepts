@@ -9,15 +9,15 @@ local entity = {}
 
 entity.onTrade = function(player, npc, trade)
     if
-        npcUtil.tradeHas(trade, xi.item.SMOKE_FILLED_FLASK) and
-        npcUtil.popFromQM(player, npc, ID.mob.BIG_BOMB)
+        npcUtil.tradeHas(trade, xi.items.SMOKE_FILLED_GLASS) and
+        npcUtil.popFromQM(player, npc, zones[npc:getZoneID()].mob.BIG_BOMB, { claim = true })
     then
         player:confirmTrade()
     end
 end
 
 entity.onTrigger = function(player, npc)
-    player:messageSpecial(ID.text.BLUE_FLAMES)
+    player:messageSpecial(zones[npc:getZoneID()].text.BLUE_FLAMES)
 end
 
 entity.onEventUpdate = function(player, csid, option, npc)
