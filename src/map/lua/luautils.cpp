@@ -2745,6 +2745,33 @@ namespace luautils
         return 0;
     }
 
+    int32 OnCastStarting(CBattleEntity* PCaster, CSpell* PSpell)
+    {
+        TracyZoneScoped;
+
+        if (PCaster->objtype != TYPE_MOB)
+        {
+            return -1;
+        }
+
+        sol::function onCastStarting = getEntityCachedFunction(PCaster, "onCastStarting");
+        if (!onCastStarting.valid())
+        {
+            return 0;
+        }
+
+        auto result = onCastStarting(CLuaBaseEntity(PCaster), CLuaSpell(PSpell));
+        if (!result.valid())
+        {
+            sol::error err = result;
+            ShowError("luautils::onCastStarting: %s", err.what());
+            ReportErrorToPlayer(PCaster, err.what());
+            return 0;
+        }
+
+        return 0;
+    }
+
     std::optional<SpellID> OnMobMagicPrepare(CBattleEntity* PCaster, CBattleEntity* PTarget, std::optional<SpellID> startingSpellId)
     {
         TracyZoneScoped;

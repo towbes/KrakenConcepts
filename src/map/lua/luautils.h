@@ -238,6 +238,7 @@ namespace luautils
     int32 OnItemUnequip(CBaseEntity* PUser, CItem* PItem);
     int32 CheckForGearSet(CBaseEntity* PTarget);
 
+    int32 OnCastStarting(CBattleEntity* PCaster, CSpell* PSpell); // triggered just before starting to cast a spell (modify cast time etc.) 
     int32 OnMagicCastingCheck(CBaseEntity* PChar, CBaseEntity* PTarget, CSpell* PSpell);
     int32 OnSpellCast(CBattleEntity* PCaster, CBattleEntity* PTarget, CSpell* PSpell);
     int32 OnSpellPrecast(CBattleEntity* PCaster, CSpell* PSpell);

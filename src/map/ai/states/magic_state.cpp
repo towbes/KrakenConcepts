@@ -67,6 +67,8 @@ CMagicState::CMagicState(CBattleEntity* PEntity, uint16 targid, SpellID spellid,
                                                                         errorMsg == 1 ? MSGBASIC_CANNOT_CAST_SPELL : errorMsg));
     }
 
+    m_PEntity->OnCastStarting(*this);
+
     m_castTime = std::chrono::milliseconds(battleutils::CalculateSpellCastTime(m_PEntity, this));
     m_startPos = m_PEntity->loc.p;
 
