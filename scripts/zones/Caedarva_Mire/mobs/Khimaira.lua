@@ -27,7 +27,7 @@ entity.onMobInitialize = function(mob)
     end)
 
     mob:addListener('EFFECT_LOSE', 'KHIMAIRA_EFFECT_LOSE', function(owner, effect)
-        local effectType = effect:getType()
+        local effectType = effect:getTypeMask()
         if effectType == xi.effect.STUN then
             owner:addMod(xi.mod.STUNRES, 5)
         end

@@ -43,14 +43,14 @@ end
 
 entity.onMobDisengage = function(mob)
     -- When it becomes unclaimed, it will immediately regen to 100%.
-    mob:setHPP(100)
+    mob:setHP(mob:getMaxHP())
 end
 
 entity.onMobDeath = function(mob, player, optParams)
 end
 
 entity.onMobDespawn = function(mob)
-    mob:setRespawnTime(math.random(75600, 86400)) -- 21 to 24 hr
+    mob:setRespawnTime(math.random(75600, 86400)) -- 21 to 24 hours
 end
 
 return entity

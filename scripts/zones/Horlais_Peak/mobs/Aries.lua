@@ -38,7 +38,7 @@ entity.onMobFight = function(mob, target)
     end
 
     mob:addListener('EFFECT_LOSE', 'SLEEP_EFFECT_LOSE', function(mobArg, effect)
-        if effect:getType() == xi.effect.SLEEP_I or effect:getType() == xi.effect.SLEEP_II or effect:getType() == xi.effect.LULLABY then
+        if effect:getTypeMask() == xi.effect.SLEEP_I or effect:getTypeMask() == xi.effect.SLEEP_II or effect:getTypeMask() == xi.effect.LULLABY then
             mobArg:setLocalVar('sleepyTime', 0)
             mobArg:setLocalVar('Wakey', mobArg:getBattleTime() + 5)
             mobArg:setMod(xi.mod.REGEN, 0)

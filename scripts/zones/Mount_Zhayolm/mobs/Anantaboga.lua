@@ -22,14 +22,14 @@ entity.onMobSpawn = function(mob)
 
     -- event listeners for when silence is applied/wears off
     mob:addListener('EFFECT_GAIN', 'SILENCE_IS_HERE', function(mob, effect)
-        if effect:getType() == xi.effect.SILENCE then
+        if effect:getTypeMask() == xi.effect.SILENCE then
             mob:setMobMod(xi.mobMod.SKILL_LIST, 5298)
             mob:setMod(xi.mod.REGAIN, 200)
         end
     end)
 
     mob:addListener('EFFECT_LOSE', 'SILENCE_WAS_HERE', function(mob, effect)
-        if effect:getType() == xi.effect.SILENCE then
+        if effect:getTypeMask() == xi.effect.SILENCE then
             mob:setMobMod(xi.mobMod.SKILL_LIST, 298)
             mob:setMod(xi.mod.REGAIN, 0)
         end

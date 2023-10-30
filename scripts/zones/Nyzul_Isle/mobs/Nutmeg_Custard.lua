@@ -12,10 +12,10 @@ entity.onMobSpawn = function(mob)
     mob:setMod(xi.mod.REGAIN, 100)
 end
 
-entity.onSpellPrecast = function(mob, spell)
+entity.onCastStarting = function(mob, spell)
     if (mob:getLocalVar('Xenoglossia') > 0) then
         mob:setLocalVar('Xenoglossia', 0)
-        spell:castTime(1)
+        spell:setCastTime(1)
     end
 end
 

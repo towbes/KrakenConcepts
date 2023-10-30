@@ -57,7 +57,7 @@ entity.onMobSpawn = function(mob)
 
                     -- will just spam leaping cleave and unblest jambiya until death after BW is over
                     mob:addListener('EFFECT_LOSE', 'BLOOD_WEAPON', function(mob, effect)
-                        if effect:getType() == xi.effect.BLOOD_WEAPON then
+                        if effect:getTypeMask() == xi.effect.BLOOD_WEAPON then
                             mob:removeListener('BLOOD_WEAPON')
                             mob:setMobAbilityEnabled(true)
                             mob:setMobSkillAttack(5303)

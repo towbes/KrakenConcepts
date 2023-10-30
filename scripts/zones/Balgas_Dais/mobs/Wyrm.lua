@@ -17,7 +17,7 @@ entity.onMobSpawn = function(mob)
     mob:setMobMod(xi.mobMod.DRAW_IN, 1)
     mob:setMobMod(xi.mobMod.DRAW_IN_INCLUDE_PARTY, 1)
     mob:setMobMod(xi.mobMod.DRAW_IN_IGNORE_STATIONARY, 1)
-    mob:SetMobSkillAttack(0) -- resetting so it doesn't respawn in flight mode.
+    mob:setMobSkillAttack(0) -- resetting so it doesn't respawn in flight mode.
     mob:setAnimationSub(0) -- subanim 0 is only used when it spawns until first flight.
     mob:setTP(3000) -- opens fight with a skill
     mob:setLocalVar('state', 0)
