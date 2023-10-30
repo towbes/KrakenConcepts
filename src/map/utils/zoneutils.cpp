@@ -663,8 +663,15 @@ namespace zoneutils
             // Spawn mobs after they've all been initialized. Spawning some mobs will spawn other mobs that may not yet be initialized.
             PZone->ForEachMob([](CMobEntity* PMob)
             {
-                PMob->m_AllowRespawn = PMob->m_SpawnType == SPAWNTYPE_NORMAL;
-                if (PMob->m_AllowRespawn)
+                PMob->m_AllowRespawn = PMob->m_SpawnType == SPAWNTYPE_NORMAL || PMob->m_SpawnType == SPAWNTYPE_PIXIE;
+            bool shouldSpawn = PMob->m_AllowRespawn;
+            //if (PMob->m_SpawnType == SPAWNTYPE_PIXIE)
+            //{
+            //    shouldSpawn = PMob->PixieShouldSpawn();
+            //}
+
+                //if (PMob->m_AllowRespawn)
+                if (shouldSpawn)
                 {
                     PMob->Spawn();
                 }

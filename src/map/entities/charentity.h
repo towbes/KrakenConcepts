@@ -495,6 +495,7 @@ public:
     bool   m_jobMasterDisplay; // Job Master Stars display
     uint32 m_moghouseID;
     uint16 m_moghancementID;
+    uint32 m_pixieHate;
 
     CharHistory_t m_charHistory;
 
@@ -579,6 +580,7 @@ public:
     void UpdateMoghancement();
     bool hasMoghancement(uint16 moghancementID) const;
     void SetMoghancement(uint16 moghancementID);
+    void SetPixieHate(uint32 pixieHate);
 
     /* State callbacks */
     virtual bool           CanAttack(CBattleEntity* PTarget, std::unique_ptr<CBasicPacket>& errMsg) override;

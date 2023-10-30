@@ -2658,6 +2658,16 @@ void CCharEntity::changeMoghancement(uint16 moghancementID, bool isAdding)
     }
 }
 
+void CCharEntity::SetPixieHate(uint32 pixieHate)
+{
+    if (pixieHate > 60)
+    {
+        pixieHate = 60;
+    }
+    m_pixieHate = pixieHate;
+    charutils::SetCharVar(this, "PIXIE_HATE", pixieHate);
+}
+
 void CCharEntity::TrackArrowUsageForScavenge(CItemWeapon* PAmmo)
 {
     TracyZoneScoped;
