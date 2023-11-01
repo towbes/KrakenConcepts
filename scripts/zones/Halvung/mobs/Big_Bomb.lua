@@ -17,7 +17,7 @@ entity.onMobSpawn = function(mob)
 
     -- Unclear what happens to Big Bomb's stats or behavior when he increases in size.
     -- For now it is purely visual until further evidence produces itself
-    mob:addListener("TAKE_DAMAGE", "TAKE_DAMAGE_BIG_BOMB", function(mobArg, amount, attacker, attackType, damageType)
+    mob:addListener('TAKE_DAMAGE', 'TAKE_DAMAGE_BIG_BOMB', function(mobArg, amount, attacker, attackType, damageType)
         local anim = mobArg:getAnimationSub()
         if
             amount >= 500 and

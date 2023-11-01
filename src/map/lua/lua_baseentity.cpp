@@ -6574,6 +6574,12 @@ void CLuaBaseEntity::setMonstrosityEntryData(float x, float y, float z, uint8 ro
 
 sol::table CLuaBaseEntity::getTraits()
 {
+    if (m_PBaseEntity->objtype == TYPE_NPC)
+    {
+        ShowWarning("Invalid Entity (NPC: %s) calling function.", m_PBaseEntity->GetName());
+        return 0;
+    }
+
     CBattleEntity* PEntity = static_cast<CBattleEntity*>(m_PBaseEntity);
 
     if (PEntity != nullptr)
@@ -6594,9 +6600,6 @@ sol::table CLuaBaseEntity::getTraits()
 
     return {};
 }
-
-
-
 
 /************************************************************************
  *  Function: getTitle()
@@ -16317,6 +16320,39 @@ void CLuaBaseEntity::setRoamFlags(uint16 newRoamFlags)
 }
 
 /************************************************************************
+ *  Function: getPixieHate()
+ *  Purpose : Returns the current pixie hate of the player
+ *  Example : local status = player:getFomorHate()
+ ************************************************************************/
+
+uint32 CLuaBaseEntity::getPixieHate()
+{
+    if (m_PBaseEntity->objtype != TYPE_PC)
+    {
+        return 0;
+    }
+
+    return static_cast<CCharEntity*>(m_PBaseEntity)->m_pixieHate;
+}
+
+/************************************************************************
+ *  Function: setPixieHate()
+ *  Purpose : Returns the current pixie hate of the player
+ *  Example : local status = player:getFomorHate()
+ ************************************************************************/
+
+void CLuaBaseEntity::setPixieHate(uint32 pixieHate)
+{
+    if (m_PBaseEntity->objtype != TYPE_PC)
+    {
+        return;
+    }
+
+    auto* PChar = static_cast<CCharEntity*>(m_PBaseEntity);
+    PChar->SetPixieHate(pixieHate);
+}
+
+/************************************************************************
  *  Function: getTarget()
  *  Purpose : Return Battle Target entity
  *  Example : mob:getTarget(); pet:getTarget(); if not v:getTarget() then
@@ -16602,16 +16638,17 @@ void CLuaBaseEntity::useMobAbility(sol::variadic_args va)
  *  Note    : Params can assume a default value by passing nil
  *          : e.g. triggerDrawIn(true) to pull in a party/alliance
  ************************************************************************/
-inline int32 CLuaBaseEntity::triggerDrawIn(CLuaBaseEntity* PMobEntity, sol::object const& includePt, sol::object const& drawRange, sol::object const& maxReach, sol::object const& target)
+inline int32 CLuaBaseEntity::triggerDrawIn(CLuaBaseEntity* PMobEntity, sol::object const& includePt, sol::object const& drawRange, sol::object const& maxReach, sol::object const& target, sol::object const& incDeadAndMount)
 {
     auto*          PMob    = static_cast<CMobEntity*>(PMobEntity->m_PBaseEntity);
     CBattleEntity* PTarget = PMob->GetBattleTarget();
 
     // Default values
-    uint8  drawInRange  = PMob->GetMeleeRange() * 2;
-    uint16 maximumReach = 0xFFFF;
-    bool   includeParty = false;
-    float  offset       = PMob->GetMeleeRange() - 0.2f;
+    uint8  drawInRange         = PMob->GetMeleeRange() * 2;
+    uint16 maximumReach        = 0xFFFF;
+    bool   includeParty        = false;
+    float  offset              = PMob->GetMeleeRange() - 0.2f;
+    bool   includeDeadAndMount = false;
 
     if ((drawRange != sol::lua_nil) && drawRange.is<uint8>())
     {
@@ -16634,10 +16671,15 @@ inline int32 CLuaBaseEntity::triggerDrawIn(CLuaBaseEntity* PMobEntity, sol::obje
         includeParty = includePt.as<bool>();
     }
 
+    if (incDeadAndMount != sol::lua_nil)
+    {
+        includeDeadAndMount = incDeadAndMount.as<bool>();
+    }
+
     if (PTarget)
     {
         // Draw in requires a target
-        battleutils::DrawIn(PTarget, PMob, offset, drawInRange, maximumReach, includeParty);
+        battleutils::DrawIn(PTarget, PMob, offset, drawInRange, maximumReach, includeParty, includeDeadAndMount);
     }
 
     return 0;
@@ -18258,6 +18300,8 @@ void CLuaBaseEntity::Register()
     SOL_REGISTER("setBehaviour", CLuaBaseEntity::setBehaviour);
     SOL_REGISTER("getRoamFlags", CLuaBaseEntity::getRoamFlags);
     SOL_REGISTER("setRoamFlags", CLuaBaseEntity::setRoamFlags);
+    SOL_REGISTER("getPixieHate", CLuaBaseEntity::getPixieHate);
+    SOL_REGISTER("setPixieHate", CLuaBaseEntity::setPixieHate);
 
     SOL_REGISTER("getTarget", CLuaBaseEntity::getTarget);
     SOL_REGISTER("updateTarget", CLuaBaseEntity::updateTarget);
@@ -18319,6 +18363,7 @@ void CLuaBaseEntity::Register()
 
     SOL_REGISTER("clearActionQueue", CLuaBaseEntity::clearActionQueue);
     SOL_REGISTER("clearTimerQueue", CLuaBaseEntity::clearTimerQueue);
+    SOL_REGISTER("getTraits", CLuaBaseEntity::getTraits);
 }
 
 std::ostream& operator<<(std::ostream& os, const CLuaBaseEntity& entity)

@@ -14,7 +14,6 @@ zoneObject.onInitialize = function(zone)
 
     xi.helm.initZone(zone, xi.helm.type.LOGGING)
 
-    
     -- Swamp trigger areas (Map 1)
     zone:registerTriggerArea(1, 305, 2.5, -380, 0, 0, 0) -- South swamp (J-8)
     zone:registerTriggerArea(2, 300, 2.5, -370, 0, 0, 0) -- South swamp (J-8)
@@ -90,7 +89,7 @@ zoneObject.onTriggerAreaEnter = function(player, triggerArea)
 
         if
             math.random(1, 20) == 1 and
-            player:getLocalVar("ZikkoCooldown") < os.time() and
+            player:getLocalVar('ZikkoCooldown') < os.time() and
             zikko:getRespawnTime() < os.time()
         then
             zikko:setSpawn(spawn.x, spawn.y, spawn.z)
@@ -98,7 +97,7 @@ zoneObject.onTriggerAreaEnter = function(player, triggerArea)
             SpawnMob(zikko:getID()):updateClaim(player)
         end
 
-        player:setLocalVar("ZikkoCooldown", os.time() + 300)
+        player:setLocalVar('ZikkoCooldown', os.time() + 300)
     end
 end
 

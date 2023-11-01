@@ -3,7 +3,7 @@
 --   NM: Gugru Orobon
 -- Note: Fished up
 -----------------------------------
-mixins = { require("scripts/mixins/families/orobon") }
+mixins = { require('scripts/mixins/families/orobon') }
 -----------------------------------
 local entity = {}
 

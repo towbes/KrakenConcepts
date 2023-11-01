@@ -2,7 +2,7 @@
 -- Area: Arrapago Reef
 --   NM: Bloody Bones
 -----------------------------------
-mixins = { require("scripts/mixins/job_special") }
+mixins = { require('scripts/mixins/job_special') }
 -----------------------------------
 local entity = {}
 

@@ -2,8 +2,8 @@
 -- Area: Wajaom Woodlands
 --  Mob: Jaded Jody
 -----------------------------------
-mixins = 
-{ 
+mixins =
+{
 require('scripts/mixins/families/ameretat'),
 }
 -----------------------------------
@@ -15,7 +15,7 @@ entity.onMobSpawn = function(mob)
 end
 
 entity.onAdditionalEffect = function(mob, target, damage)
-    return xi.mob.onAddEffect(mob, target, damage, xi.mob.ae.HP_DRAIN, { chance = 100, power = 17})
+    return xi.mob.onAddEffect(mob, target, damage, xi.mob.ae.HP_DRAIN, { chance = 100, power = 17 })
 end
 
 entity.onMobDeath = function(mob, player, optParams)

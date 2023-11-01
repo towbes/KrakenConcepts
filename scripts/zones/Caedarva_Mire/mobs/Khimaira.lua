@@ -3,7 +3,6 @@
 --   NM: Khimaira
 -----------------------------------
 require('scripts/globals/toau')
-local ID = zones[xi.zone.CAEDARVA_MIRE]
 -----------------------------------
 local entity = {}
 
@@ -26,7 +25,7 @@ entity.onMobInitialize = function(mob)
         end
     end)
 
-    mob:addListener('EFFECT_LOSE', 'KHIMAIRA_EFFECT_LOSE', function(owner, effect)
+    khimairaMob:addListener('EFFECT_LOSE', 'KHIMAIRA_EFFECT_LOSE', function(owner, effect)
         local effectType = effect:getTypeMask()
         if effectType == xi.effect.STUN then
             owner:addMod(xi.mod.STUNRES, 5)
@@ -47,7 +46,7 @@ entity.onMobFight = function(mob, target)
     if
         (target:getXPos() < 814 or target:getXPos() > 865 or
         target:getZPos() < 345 or target:getZPos() > 377) and
-        os.time() > mob:getLocalVar("DrawInWait")
+        os.time() > mob:getLocalVar('DrawInWait')
     then
         local pos = math.random(1, 8)
         target:setPos(drawInPos[pos])
@@ -62,16 +61,13 @@ entity.onMobEngaged = function (mob, target)
     end
 end
 
-
 entity.onMobDeath = function(mob, player, optParams)
     player:addTitle(xi.title.KHIMAIRA_CARVER)
 end
 
 entity.onMobDespawn = function(mob)
-    local respawn = math.random(48,72)*3600 -- 48 to 72 hours in 60min windows
-    --UpdateNMSpawnPoint(mob:getID())
+    local respawn = math.random(48, 72) * 3600 -- 48 to 72 hours in 60min windows
     mob:setRespawnTime(respawn)
-	--SetServerVariable('KhimairaRespawn',(os.time() + respawn))
 end
 
 return entity

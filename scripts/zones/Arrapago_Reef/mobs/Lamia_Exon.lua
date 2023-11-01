@@ -4,7 +4,7 @@
 -- Note: When this mob dies, it updates a timer to be respawned
 --       by Medusa.
 -----------------------------------
-mixins = { require("scripts/mixins/weapon_break") }
+mixins = { require('scripts/mixins/weapon_break') }
 -----------------------------------
 local entity = {}
 
@@ -24,7 +24,7 @@ entity.onMobDeath = function(mob, player, optParams)
 end
 
 entity.onMobDespawn = function(mob)
-    GetMobByID(zones[mob:getZoneID()].mob.MEDUSA):setLocalVar("[MEDUSA]respawnAdd" .. mob:getID(), os.time() + 30)
+    GetMobByID(zones[mob:getZoneID()].mob.MEDUSA):setLocalVar('[MEDUSA]respawnAdd' .. mob:getID(), os.time() + 30)
 end
 
 return entity

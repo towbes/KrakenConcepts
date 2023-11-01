@@ -9,7 +9,7 @@
 --  Gulool's draw in mechancss appear to take effect whenever the target leaves
 --  a certain distance from the centre of the arena.
 -----------------------------------
-mixins = { require("scripts/mixins/job_special") }
+mixins = { require('scripts/mixins/job_special') }
 -----------------------------------
 local entity = {}
 
@@ -52,7 +52,7 @@ entity.onMobFight = function(mob, target)
         local pet = GetMobByID(id)
         if
             not pet:isSpawned() and
-            mob:getLocalVar("[GULOOL]respawnAdd" .. id) < os.time()
+            mob:getLocalVar('[GULOOL]respawnAdd' .. id) < os.time()
         then
             SpawnMob(id)
         end

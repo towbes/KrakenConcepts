@@ -6,7 +6,6 @@ local ID = zones[xi.zone.MOUNT_ZHAYOLM]
 -----------------------------------
 local entity = {}
 
-
 local drawInPos =
 {
     { x = 330.00, y = -23.91, z = -89.09 },
@@ -38,8 +37,8 @@ entity.onMobSpawn = function(mob)
 end
 
 entity.onMobRoam = function(mob)
-    howl = math.random()
-    if howl > .95 then
+    local howl = math.random(1, 100)
+    if howl > 90 then
         mob:useMobAbility(1892)
     end
 end
@@ -56,13 +55,13 @@ entity.onMobFight = function(mob, target)
     if
         (target:getXPos() < 305 or target:getXPos() > 340 or
         target:getZPos() < -100 or target:getZPos() > -70) and
-        os.time() > mob:getLocalVar("DrawInWait")
+        os.time() > mob:getLocalVar('DrawInWait')
     then
         local pos = math.random(1, 8)
 
         target:setPos(drawInPos[pos])
-        mob:messageBasic(232, 0, 0, target)
-        mob:setLocalVar("DrawInWait", os.time() + 2)
+        mob:messageBasic(xi.msg.basic.DRAWN_IN, 0, 0, target)
+        mob:setLocalVar('DrawInWait', os.time() + 2)
     end
 end
 

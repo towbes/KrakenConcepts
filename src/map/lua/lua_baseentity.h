@@ -849,6 +849,9 @@ public:
     void   setBehaviour(uint16 behavior);
     uint16 getRoamFlags();
     void   setRoamFlags(uint16 newRoamFlags);
+    uint32 getPixieHate();
+    void   setPixieHate(uint32 pixieHate);
+
 
     auto getTarget() -> std::optional<CLuaBaseEntity>;
     void updateTarget(); // Force mob to update target from enmity container (ie after updateEnmity)
@@ -860,7 +863,7 @@ public:
     void castSpell(sol::object const& spell, sol::object const& entity); // forces a mob to cast a spell (parameter = spell ID, otherwise picks a spell from its list)
     void useJobAbility(uint16 skillID, sol::object const& pet);          // forces a job ability use (players/pets only)
     void useMobAbility(sol::variadic_args va);                           // forces a mob to use a mobability (parameter = skill ID)
-    int32 triggerDrawIn(CLuaBaseEntity* PMobEntity, sol::object const& includePt, sol::object const& drawRange, sol::object const& maxReach, sol::object const& target); // forces a mob to draw in target
+    int32 triggerDrawIn(CLuaBaseEntity* PMobEntity, sol::object const& includePt, sol::object const& drawRange, sol::object const& maxReach, sol::object const& target, sol::object const& incDeadAndMount); // forces a mob to draw in target
     bool hasTPMoves();
 
     void weaknessTrigger(uint8 level);

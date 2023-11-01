@@ -4,7 +4,7 @@
 -- Note: Fished up
 --       Need capture for proper model ID
 -----------------------------------
-mixins = { require("scripts/mixins/families/orobon") }
+mixins = { require('scripts/mixins/families/orobon') }
 -----------------------------------
 local entity = {}
 

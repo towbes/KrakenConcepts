@@ -4299,30 +4299,6 @@ INSERT INTO `mob_skill_lists` VALUES ('Jaded_Jody',5395,1793); -- Vampiric Root
 INSERT INTO `mob_skill_lists` VALUES ('Jaded_Jody',5395,319);  -- Bad Breath
 INSERT INTO `mob_skill_lists` VALUES ('Jaded_Jody',5395,320);  -- Sweet Breath
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 -- ------------------------------------------------------------
 -- Start of Ambuscade section
 -- NOTE: The mobs are changed every update in the DATs, so using out-of-date

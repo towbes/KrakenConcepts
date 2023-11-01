@@ -8,7 +8,8 @@
 --  Medusa's draw in mechancss appear to take effect whenever the target leaves
 --  a certain distance from the centre of the arena.
 -----------------------------------
-mixins = { require("scripts/mixins/job_special") }
+local ID = zones[xi.zone.ARRAPAGO_REEF]
+mixins = { require('scripts/mixins/job_special') }
 -----------------------------------
 local entity = {}
 
@@ -52,7 +53,7 @@ entity.onMobFight = function(mob, target)
 
         if
             not pet:isSpawned() and
-            mob:getLocalVar("[MEDUSA]respawnAdd" .. id) < os.time()
+            mob:getLocalVar('[MEDUSA]respawnAdd' .. id) < os.time()
         then
             SpawnMob(id)
         end

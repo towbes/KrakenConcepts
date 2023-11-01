@@ -3,8 +3,8 @@
 --  Mob: Marid
 -- Note: Place holder Mahishasura
 -----------------------------------
-mixins = 
-{ 
+mixins =
+{
     require('scripts/mixins/families/chigoe_pet'),
     require('scripts/mixins/families/marid'),
 }
@@ -21,7 +21,6 @@ entity.onMobDespawn = function(mob)
     else
         xi.mob.phOnDespawn(mob, ID.mob.GRAND_MARID2_PH, 5, 1800)
     end
-
 end
 
 return entity

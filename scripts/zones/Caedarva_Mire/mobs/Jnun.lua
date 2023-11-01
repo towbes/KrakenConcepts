@@ -2,7 +2,7 @@
 -- Area: Caedarva Mire
 --  Mob: Jnun
 -----------------------------------
-mixins = { require("scripts/mixins/families/jnun") }
+mixins = { require('scripts/mixins/families/jnun') }
 -----------------------------------
 local entity = {}
 

@@ -3,13 +3,11 @@
 --  NPC: ??? (Spawn Big Bomb)
 -- !pos -233.830 13.613 286.714 62
 -----------------------------------
-local ID = zones[xi.zone.HALVUNG]
------------------------------------
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)
     if
-        npcUtil.tradeHas(trade, xi.items.SMOKE_FILLED_GLASS) and
+        npcUtil.tradeHas(trade, xi.item.SMOKE_FILLED_GLASS) and
         npcUtil.popFromQM(player, npc, zones[npc:getZoneID()].mob.BIG_BOMB, { claim = true })
     then
         player:confirmTrade()

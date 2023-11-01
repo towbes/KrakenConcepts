@@ -3,13 +3,10 @@
 -- Door: Tidal Gate (Medusa Arena)
 -- !pos -397 -15 420
 -----------------------------------
-local ID = require("scripts/zones/Arrapago_Reef/IDs")
-require("scripts/globals/npc_util")
------------------------------------
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)
-    local item = xi.items.LAMIAN_CLAW_KEY
+    local item = xi.item.LAMIAN_CLAW_KEY
 
     if
         player:getXPos() >= -405 and

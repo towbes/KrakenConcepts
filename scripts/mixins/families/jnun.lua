@@ -14,7 +14,7 @@ According to the suggested behavior, Jnun only agro players while the player is 
 testing on retail, it appears that Jnun simply have a short agro range, and give off the illusion that
 they will only agro players in their designated swamp.
 --]]
-require("scripts/globals/mixins")
+require('scripts/globals/mixins')
 -----------------------------------
 
 xi = xi or {}
@@ -29,7 +29,7 @@ local function bedTime(mob)
     mob:setMobMod(xi.mobMod.NO_MOVE, 1)
     mob:setMobMod(xi.mobMod.NO_AGGRO, 1)
     mob:setMobMod(xi.mobMod.NO_LINK, 1)
-    mob:setLocalVar("ResleepTime", 0)
+    mob:setLocalVar('ResleepTime', 0)
 end
 
 local function wakeUp(mob)
@@ -37,32 +37,32 @@ local function wakeUp(mob)
     mob:setMobMod(xi.mobMod.NO_MOVE, 0)
     mob:setMobMod(xi.mobMod.NO_AGGRO, 0)
     mob:setMobMod(xi.mobMod.NO_LINK, 0)
-    mob:setLocalVar("ResleepTime", 0)
+    mob:setLocalVar('ResleepTime', 0)
 end
 
 xi.mix.jnun.config = function(mob, params)
-    if params.sleepHour and type(params.sleepHour) == "number" then
-        mob:setLocalVar("[jnun]sleepHour", params.sleepHour)
+    if params.sleepHour and type(params.sleepHour) == 'number' then
+        mob:setLocalVar('[jnun]sleepHour', params.sleepHour)
     end
 
-    if params.wakeHour and type(params.wakeHour) == "number" then
-        mob:setLocalVar("[jnun]wakeHour", params.wakeHour)
+    if params.wakeHour and type(params.wakeHour) == 'number' then
+        mob:setLocalVar('[jnun]wakeHour', params.wakeHour)
     end
 end
 
 g_mixins.families.jnun = function(jnunMob)
-    jnunMob:addListener("SPAWN", "JNUN_SPAWN", function(mob)
-        mob:setLocalVar("[jnun]sleepHour", 6)
-        mob:setLocalVar("[jnun]wakeHour", 18)
+    jnunMob:addListener('SPAWN', 'JNUN_SPAWN', function(mob)
+        mob:setLocalVar('[jnun]sleepHour', 6)
+        mob:setLocalVar('[jnun]wakeHour', 18)
 
         mob:setMobMod(xi.mobMod.ROAM_DISTANCE, 10) -- Do not wander far from their spawn (swamp)
         mob:setMobMod(xi.mobMod.SOUND_RANGE, 7)    -- Very short sound range agro
     end)
 
-    jnunMob:addListener("ROAM_TICK", "JNUN_ROAM_TICK", function(mob)
+    jnunMob:addListener('ROAM_TICK', 'JNUN_ROAM_TICK', function(mob)
         local currentHour  = VanadielHour()
-        local sleepHour    = mob:getLocalVar("[jnun]sleepHour")
-        local wakeHour     = mob:getLocalVar("[jnun]wakeHour")
+        local sleepHour    = mob:getLocalVar('[jnun]sleepHour')
+        local wakeHour     = mob:getLocalVar('[jnun]wakeHour')
         local subAnimation = mob:getAnimationSub()
 
         -- Sleeps during the day
@@ -72,7 +72,7 @@ g_mixins.families.jnun = function(jnunMob)
             currentHour >= sleepHour and
             currentHour < wakeHour
         then
-            local resleepTime = mob:getLocalVar("ResleepTime")
+            local resleepTime = mob:getLocalVar('ResleepTime')
             local spawn       = mob:getSpawnPos()
 
             -- Reset sleep timer until Jnun is near spawn point
@@ -80,7 +80,7 @@ g_mixins.families.jnun = function(jnunMob)
                 resleepTime ~= 0 and
                 mob:checkDistance(spawn.x, spawn.y, spawn.z) > 10
             then
-                mob:setLocalVar("ResleepTime", os.time() + 120)
+                mob:setLocalVar('ResleepTime', os.time() + 120)
 
             elseif resleepTime <= os.time() then
                 bedTime(mob)
@@ -97,14 +97,14 @@ g_mixins.families.jnun = function(jnunMob)
         end
     end)
 
-    jnunMob:addListener("ENGAGE", "JNUN_ENGAGE", function(mob, target)
+    jnunMob:addListener('ENGAGE', 'JNUN_ENGAGE', function(mob, target)
         if mob:getAnimationSub() == 1 then
             wakeUp(mob)
         end
     end)
 
-    jnunMob:addListener("DISENGAGE", "JNUN_DISENGAGE", function(mob)
-        mob:setLocalVar("ResleepTime", os.time() + 120)
+    jnunMob:addListener('DISENGAGE', 'JNUN_DISENGAGE', function(mob)
+        mob:setLocalVar('ResleepTime', os.time() + 120)
     end)
 end
 

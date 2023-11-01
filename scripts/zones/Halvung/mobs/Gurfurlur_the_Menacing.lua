@@ -3,7 +3,7 @@
 --  Mob: Gurfurlur the Menacing
 -- !pos -59.000 -23.000 3.000 62
 -----------------------------------
-mixins = { require("scripts/mixins/job_special") }
+mixins = { require('scripts/mixins/job_special') }
 -----------------------------------
 local entity = {}
 
@@ -39,7 +39,7 @@ entity.onMobFight = function(mob, target)
         local pet = GetMobByID(id)
         if
             not pet:isSpawned() and
-            mob:getLocalVar("[GURFURLUR]respawnAdd" .. id) < os.time()
+            mob:getLocalVar('[GURFURLUR]respawnAdd' .. id) < os.time()
         then
             SpawnMob(id)
         end

@@ -20,7 +20,7 @@ AnimationSubs:
 1: Broken Lure
 Else: ???
 --]]
-require("scripts/globals/mixins")
+require('scripts/globals/mixins')
 -----------------------------------
 xi = xi or {}
 xi.mix = xi.mix or {}
@@ -32,43 +32,43 @@ g_mixins.families = g_mixins.families or {}
 local tryBreakLure = function(mob)
     -- Default odds require validation. Very little information exists.
     if
-        math.random(1, 100) < mob:getLocalVar("[OROBON]breakChance") and
-        mob:getLocalVar("[OROBON]canBreakLure") >= 1 and
+        math.random(1, 100) < mob:getLocalVar('[OROBON]breakChance') and
+        mob:getLocalVar('[OROBON]canBreakLure') >= 1 and
         mob:getAnimationSub() ~= 1
     then
         mob:setAnimationSub(1)
 
-        mob:addListener("ITEM_DROPS", "ITEM_DROPS_OROBON", function(mobArg, loot)
-            loot:addItem(xi.items.OROBON_LURE, xi.drop_rate.ALWAYS)
+        mob:addListener('ITEM_DROPS', 'ITEM_DROPS_OROBON', function(mobArg, loot)
+            loot:addItem(xi.item.OROBON_LURE, xi.drop_rate.ALWAYS)
         end)
     end
 end
 
 xi.mix.orobon.config = function(mob, params)
-    if type(params.lureBreak) == "boolean" and not params.lureBreak then
-        mob:setLocalVar("[OROBON]canBreakLure", 0)
+    if type(params.lureBreak) == 'boolean' and not params.lureBreak then
+        mob:setLocalVar('[OROBON]canBreakLure', 0)
     end
 
-    if params.chance and type(params.chance) == "number" then
-        mob:setLocalVar("[OROBON]breakChance", params.chance)
+    if params.chance and type(params.chance) == 'number' then
+        mob:setLocalVar('[OROBON]breakChance', params.chance)
     end
 end
 
 g_mixins.families.orobon = function(orobonMob)
-    orobonMob:addListener("SPAWN", "OROBON_SPAWN", function(mob)
-        mob:setLocalVar("[OROBON]canBreakLure", 1)
-        mob:setLocalVar("[OROBON]breakChance", 10)
+    orobonMob:addListener('SPAWN', 'OROBON_SPAWN', function(mob)
+        mob:setLocalVar('[OROBON]canBreakLure', 1)
+        mob:setLocalVar('[OROBON]breakChance', 10)
     end)
 
-    orobonMob:addListener("CRITICAL_TAKE", "CRITIAL_TAKE_OROBON", function(mob)
+    orobonMob:addListener('CRITICAL_TAKE', 'CRITIAL_TAKE_OROBON', function(mob)
         tryBreakLure(mob)
     end)
 
-    orobonMob:addListener("WEAPONSKILL_TAKE", "WEAPON_SKILL_TAKE_OROBON", function(mob)
+    orobonMob:addListener('WEAPONSKILL_TAKE', 'WEAPON_SKILL_TAKE_OROBON', function(mob)
         tryBreakLure(mob)
     end)
 
-    orobonMob:addListener("ABILITY_TAKE", "ABILITY_TAKE_OROBON", function(mob, target, ability, action)
+    orobonMob:addListener('ABILITY_TAKE', 'ABILITY_TAKE_OROBON', function(mob, target, ability, action)
         local id = ability:getID()
         if
             id == xi.jobAbility.SHIELD_BASH or
