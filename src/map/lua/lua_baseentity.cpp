@@ -14739,8 +14739,8 @@ int32 CLuaBaseEntity::getFellowValue(std::string const& option)
 
 void CLuaBaseEntity::setFellowValue(std::string const& option, int32 value)
 {
-    //XI_DEBUG_BREAK_IF(m_PBaseEntity == nullptr);
-    //XI_DEBUG_BREAK_IF(m_PBaseEntity->objtype != TYPE_PC);
+    // XI_DEBUG_BREAK_IF(m_PBaseEntity == nullptr);
+    // XI_DEBUG_BREAK_IF(m_PBaseEntity->objtype != TYPE_PC);
 
     if (strcmp(option.c_str(), "bond") == 0)
     {
@@ -14767,8 +14767,8 @@ void CLuaBaseEntity::setFellowValue(std::string const& option, int32 value)
 
 void CLuaBaseEntity::delFellowValue()
 {
-    //XI_DEBUG_BREAK_IF(m_PBaseEntity == nullptr);
-    //XI_DEBUG_BREAK_IF(m_PBaseEntity->objtype != TYPE_PC);
+    // XI_DEBUG_BREAK_IF(m_PBaseEntity == nullptr);
+    // XI_DEBUG_BREAK_IF(m_PBaseEntity->objtype != TYPE_PC);
 
     const char* Query = "DELETE FROM char_fellow WHERE charId = %u LIMIT 1";
     sql->Query(Query, "DELETE FROM char_fellow WHERE charId = %u LIMIT 1", m_PBaseEntity->id);
@@ -17517,6 +17517,109 @@ void CLuaBaseEntity::clearPacketMods()
     }
 }
 
+/************************************************************************
+*  Function: sendNpcEmote()
+*  Purpose : Makes an NPC entity emit an emote.
+*  Example : taru:sendEmote(target, tpz.emote.PANIC, tpz.emoteMode.MOTION)
+*  Notes   : Originally added for Pirate / Brigand chart events
+             target parameter can be nil
+************************************************************************/
+
+void CLuaBaseEntity::sendNpcEmote(CLuaBaseEntity* PBaseEntity, sol::object const& p0, sol::object const& p1, sol::object const& p2)
+{
+    // XI_DEBUG_BREAK_IF(m_PBaseEntity == nullptr);
+    // XI_DEBUG_BREAK_IF(m_PBaseEntity->objtype != TYPE_NPC);
+
+    // 1st parameter is optional
+    // XI_DEBUG_BREAK_IF(p0 == sol::lua_nil);
+    // XI_DEBUG_BREAK_IF(p1 == sol::lua_nil);
+    // 4th parameter is optional
+
+    CNpcEntity* PNpc        = dynamic_cast<CNpcEntity*>(m_PBaseEntity);
+    uint32      EntityId    = 0;
+    uint16      EntityIndex = 0;
+
+    if (PBaseEntity != nullptr)
+    {
+        EntityId    = PBaseEntity->getID();
+        EntityIndex = PBaseEntity->getTargID();
+    }
+
+    uint16 emoteId     = (p0 != sol::lua_nil) ? p0.as<uint16>() : 0;
+    uint16 emoteModeId = (p1 != sol::lua_nil) ? p1.as<uint16>() : 0;
+    uint16 extra       = (p2 != sol::lua_nil) ? p2.as<uint32>() : 0;
+
+    if (PNpc)
+    {
+        const Emote     emoteID   = static_cast<Emote>(emoteId);
+        const EmoteMode emoteMode = static_cast<EmoteMode>(emoteModeId);
+
+        PNpc->loc.zone->PushPacket(PNpc, CHAR_INRANGE,
+                                   new CCharEmotionPacket(PNpc, EntityId, EntityIndex, emoteID, emoteMode, extra));
+    }
+}
+
+/************************************************************************
+*  Function: sendMobEmote()
+*  Purpose : Makes a mob entity emit an emote.
+*  Example : mob:sendMobEmote(target, xi.emote.PANIC, xi.emoteMode.MOTION)
+*  Notes   : Intended only for humanoid mobs that have the
+             same skeletal meshes for animations as players; such as fomor
+************************************************************************/
+
+void CLuaBaseEntity::sendMobEmote(CLuaBaseEntity* PBaseEntity, sol::object const& p0, sol::object const& p1, sol::object const& p2)
+{
+    // XI_DEBUG_BREAK_IF(m_PBaseEntity == nullptr);
+    // XI_DEBUG_BREAK_IF(m_PBaseEntity->objtype != TYPE_MOB);
+
+    // 1st parameter is optional
+    // XI_DEBUG_BREAK_IF(p0 == sol::lua_nil);
+    // XI_DEBUG_BREAK_IF(p1 == sol::lua_nil);
+    // 4th parameter is optional
+
+    CMobEntity* PMob        = dynamic_cast<CMobEntity*>(m_PBaseEntity);
+    uint32      EntityId    = 0;
+    uint16      EntityIndex = 0;
+
+    if (PBaseEntity != nullptr)
+    {
+        EntityId    = PBaseEntity->getID();
+        EntityIndex = PBaseEntity->getTargID();
+    }
+
+    uint16 emoteId     = (p0 != sol::lua_nil) ? p0.as<uint16>() : 0;
+    uint16 emoteModeId = (p1 != sol::lua_nil) ? p1.as<uint16>() : 0;
+    uint16 extra       = (p2 != sol::lua_nil) ? p2.as<uint32>() : 0;
+
+    if (PMob)
+    {
+        const Emote     emoteID   = static_cast<Emote>(emoteId);
+        const EmoteMode emoteMode = static_cast<EmoteMode>(emoteModeId);
+
+        PMob->loc.zone->PushPacket(PMob, CHAR_INRANGE,
+                                   new CCharEmotionPacket(PMob, EntityId, EntityIndex, emoteID, emoteMode, extra));
+    }
+}
+
+/************************************************************************
+ *  Function: clearSession()
+ *  Purpose : Delete player's account session
+ *  Example : player:clearSession()
+ ************************************************************************/
+
+bool CLuaBaseEntity::clearSession(std::string const& playerName)
+{
+    const char* charName = playerName.c_str();
+    const char* Query    = "DELETE FROM accounts_sessions WHERE charid IN (SELECT charid from chars where charname = '%s')";
+
+    if (sql->Query(Query, charName) == SQL_SUCCESS && sql->AffectedRows() > 0)
+    {
+        return true;
+    }
+
+    return false;
+}
+
 //==========================================================//
 
 void CLuaBaseEntity::Register()
@@ -18364,6 +18467,9 @@ void CLuaBaseEntity::Register()
     SOL_REGISTER("clearActionQueue", CLuaBaseEntity::clearActionQueue);
     SOL_REGISTER("clearTimerQueue", CLuaBaseEntity::clearTimerQueue);
     SOL_REGISTER("getTraits", CLuaBaseEntity::getTraits);
+    SOL_REGISTER("sendNpcEmote", CLuaBaseEntity::sendNpcEmote);
+    SOL_REGISTER("sendMobEmote", CLuaBaseEntity::sendMobEmote);
+    SOL_REGISTER("clearSession", CLuaBaseEntity::clearSession);
 }
 
 std::ostream& operator<<(std::ostream& os, const CLuaBaseEntity& entity)

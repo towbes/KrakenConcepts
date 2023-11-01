@@ -1,22 +1,22 @@
 -- func: getfame
 -- desc: Gets fame level of a target player
 -----------------------------------
+local commandObj = {}
 
-
-cmdprops =
+commandObj.cmdprops =
 {
     permission = 3,
     parameters = 'si'
 }
 
-function error(player, msg)
+commandObj.error = function(player, msg)
     if msg == nil then
         msg = '!getfame [player] <fame_zone 0-15>'
     end
     player:PrintToPlayer(msg)
 end
 
-function onTrigger(player, target, famezone)
+commandObj.onTrigger = function(player, target, famezone)
 
     -- validate target
     local targ
@@ -77,3 +77,5 @@ function onTrigger(player, target, famezone)
         player:PrintToPlayer( string.format( '%s\'s reputation in fame area %i (%s) is %i (Level %i).', targ:getName(), famezone, fameAreas[famezone + 1], fame, level), xi.msg.channel.SYSTEM_3)
     end
 end
+
+return commandObj

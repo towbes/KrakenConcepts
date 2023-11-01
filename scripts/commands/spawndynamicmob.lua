@@ -3,19 +3,20 @@
 -- desc: Spawn a dynamic mob exactly matching that of a normal mob.
 -- note:
 -----------------------------------
+local commandObj = {}
 
-cmdprops =
+commandObj.cmdprops =
 {
     permission = 2,
     parameters = 'iiisi'
 }
 
-function error(player, msg)
+commandObj.error = function(player, msg)
     player:PrintToPlayer(msg)
     player:PrintToPlayer('!spawndynamicmob <Mob\'s Group ID> <Mob\'s Zone ID> <Number of Mobs> <Name for the Mob> {dropsEnabled (0 == False, 1 == True)}')
 end
 
-function onTrigger(player, mobGroupID, mobZoneID, numberOfMob, mobName, dropsEnabled)
+commandObj.onTrigger = function(player, mobGroupID, mobZoneID, numberOfMob, mobName, dropsEnabled)
     local i = 1
 
     if mobName == nil then
@@ -68,3 +69,5 @@ function onTrigger(player, mobGroupID, mobZoneID, numberOfMob, mobName, dropsEna
         i = i + 1
     end
 end
+
+return commandObj

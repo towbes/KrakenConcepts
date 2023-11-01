@@ -3,21 +3,20 @@
 -- desc: Spawns a player's Adventuring Fellow if they have one.
 --       Primarily used for testing to bypass pearl cooldowns.
 -----------------------------------
+local commandObj = {}
 
------------------------------------
-
-cmdprops =
+commandObj.cmdprops =
 {
     permission = 1,
     parameters = ''
 }
 
-function error(player, msg)
+commandObj.error = function(player, msg)
     player:PrintToPlayer(msg)
     player:PrintToPlayer('!spawnFellow - no params, works on self only')
 end
 
-function onTrigger(player)
+commandObj.onTrigger = function(player)
     if player:getFellow() ~= nil then
         error(player, 'Player already has a fellow.')
         return
@@ -47,3 +46,5 @@ function onTrigger(player)
     player:PrintToPlayer('Spawned Adventuring Fellow')
     
 end
+
+return commandObj

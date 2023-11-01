@@ -2,17 +2,16 @@
 -- func: gettraits
 -- desc: prints list of all traits
 ---------------------------------------------------------------------------------------------------
+local commandObj = {}
 
-
-
-cmdprops =
+commandObj.cmdprops =
 {
     permission = 3,
     parameters = ''
 }
 
 -- function onTrigger(player, extendedMode)
-function onTrigger(player)
+commandObj.onTrigger = function(player)
     local traitNames = {}
 
     traitNames =
@@ -156,5 +155,6 @@ function onTrigger(player)
     else
         player:PrintToPlayer('No active traits found!')
     end
-
 end
+
+return commandObj

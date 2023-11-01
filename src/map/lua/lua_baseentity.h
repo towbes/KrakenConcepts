@@ -639,13 +639,13 @@ public:
     uint8  countEffect(uint16 StatusID); // Gets the number of effects of a specific type on the player
 
     bool   delStatusEffect(uint16 StatusID, sol::object const& SubType, sol::object const& ItemSourceID); // Removes Status Effect
-    void   delStatusEffectsByFlag(uint32 flag, sol::object const& silent);                              // Removes Status Effects by Flag
-    bool   delStatusEffectSilent(uint16 StatusID);                                                      // Removes Status Effect, suppresses message
-    uint16 eraseStatusEffect();                                                                         // Used with "Erase" spell
-    uint8  eraseAllStatusEffect();                                                                      // Erases all effects and returns number erased
-    int32  dispelStatusEffect(sol::object const& flagObj);                                              // Used with "Dispel" spell
-    uint8  dispelAllStatusEffect(sol::object const& flagObj);                                           // Dispels all effects and returns number erased
-    uint16 stealStatusEffect(CLuaBaseEntity* PTargetEntity, sol::object const& flagObj);                // Used in mob skills to steal effects
+    void   delStatusEffectsByFlag(uint32 flag, sol::object const& silent);                                // Removes Status Effects by Flag
+    bool   delStatusEffectSilent(uint16 StatusID);                                                        // Removes Status Effect, suppresses message
+    uint16 eraseStatusEffect();                                                                           // Used with "Erase" spell
+    uint8  eraseAllStatusEffect();                                                                        // Erases all effects and returns number erased
+    int32  dispelStatusEffect(sol::object const& flagObj);                                                // Used with "Dispel" spell
+    uint8  dispelAllStatusEffect(sol::object const& flagObj);                                             // Dispels all effects and returns number erased
+    uint16 stealStatusEffect(CLuaBaseEntity* PTargetEntity, sol::object const& flagObj);                  // Used in mob skills to steal effects
 
     void  addMod(uint16 type, int16 amount);
     int16 getMod(uint16 modID);
@@ -765,7 +765,7 @@ public:
     void  fellowRetreat();                                        // Disengages Fellow
     int32 getFellowValue(std::string const& option);              // Manipulating DB Fellow Values
     void  setFellowValue(std::string const& option, int32 value); // Manipulating DB Fellow Values
-    void  delFellowValue();     
+    void  delFellowValue();
 
     bool  hasAttachment(uint16 itemID);
     auto  getAutomatonName() -> std::string;
@@ -826,17 +826,17 @@ public:
     void setIsAggroable(bool isAggroable);
     bool isAggroable();
 
-    void setDelay(uint16 delay);
+    void  setDelay(uint16 delay);
     int16 getDelay(); // return the delay value
-    void setDamage(uint16 damage);
-    bool hasSpellList();
-    void setSpellList(uint16 spellList);
-    void setAutoAttackEnabled(bool state);   // halts/resumes auto attack of entity
-    void setMagicCastingEnabled(bool state); // halt/resumes casting magic
-    void setMobAbilityEnabled(bool state);   // halt/resumes mob skills
-    void setMobSkillAttack(int16 listId);    // enable/disable using mobskills as regular attacks
+    void  setDamage(uint16 damage);
+    bool  hasSpellList();
+    void  setSpellList(uint16 spellList);
+    void  setAutoAttackEnabled(bool state);   // halts/resumes auto attack of entity
+    void  setMagicCastingEnabled(bool state); // halt/resumes casting magic
+    void  setMobAbilityEnabled(bool state);   // halt/resumes mob skills
+    void  setMobSkillAttack(int16 listId);    // enable/disable using mobskills as regular attacks
     bool  isMagicCastingEnabled();            // return a true/false value if mob is able to auto-cast
-    bool  isAutoAttackEnabled();    
+    bool  isAutoAttackEnabled();
 
     int16 getMobMod(uint16 mobModID);
     void  setMobMod(uint16 mobModID, int16 value);
@@ -907,6 +907,10 @@ public:
 
     void addPacketMod(uint16 packetId, uint16 offset, uint8 value);
     void clearPacketMods();
+
+    void sendNpcEmote(CLuaBaseEntity* PBaseEntity, sol::object const& p0, sol::object const& p1, sol::object const& p2);
+    void sendMobEmote(CLuaBaseEntity* PBaseEntity, sol::object const& p0, sol::object const& p1, sol::object const& p2);
+    bool clearSession(std::string const& playerName);
 
     bool operator==(const CLuaBaseEntity& other) const
     {

@@ -1,21 +1,22 @@
 -- func: setfamelevel
 -- desc: Sets fame level on a target player
 -----------------------------------
+local commandObj = {}
 
-cmdprops =
+commandObj.cmdprops =
 {
     permission = 3,
     parameters = 'iis'
 }
 
-function error(player, msg)
+commandObj.error = function(player, msg)
     if msg == nil then
         msg = '!setfamelevel <fame_zone 0-15> <level 1-9> <player> (Omit level and target to show zone numbers)'
     end
     player:PrintToPlayer(msg)
 end
 
-function onTrigger(player, famezone, level, target)
+commandObj.onTrigger = function(player, famezone, level, target)
 
     -- validate target
     local targ
@@ -79,3 +80,5 @@ function onTrigger(player, famezone, level, target)
     targ:setFame(famezone, fameBaseValues[level] / fameMultiplier)
     player:PrintToPlayer( string.format( 'Set %s\'s fame for fame area %i (%s) to %i (Level %i).', targ:getName(), famezone, fameAreas[famezone + 1], fameBaseValues[level], level))
 end
+
+return commandObj

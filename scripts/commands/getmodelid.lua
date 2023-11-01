@@ -2,19 +2,20 @@
 -- func: !getmodel
 -- desc: Prints the target modelID, animationID and animationSubID
 -----------------------------------
+local commandObj = {}
 
-cmdprops =
+commandObj.cmdprops =
 {
     permission = 1,
     parameters = 's'
 }
 
-function error(player, msg)
+commandObj.error = function(player, msg)
     player:PrintToPlayer(msg)
     player:PrintToPlayer('!getmodel <target>')
 end
 
-function onTrigger(player)
+commandObj.onTrigger = function(player)
     local target = player:getCursorTarget()
 
     if target ~= nil and target:isMob() or target:isNPC() then
@@ -30,3 +31,5 @@ function onTrigger(player)
         error(player, string.format('Target is not a mob or NPC'))
     end
 end
+
+return commandObj
