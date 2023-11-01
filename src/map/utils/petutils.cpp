@@ -961,6 +961,8 @@ namespace petutils
         });
         // clang-format on
 
+        CCharEntity* PChar = static_cast<CCharEntity*>(PMaster);
+
         uint8 mLvl = PMaster->GetMLevel();
 
         if (PMaster->GetMJob() == JOB_SMN)
@@ -980,6 +982,11 @@ namespace petutils
         else if (PMaster->GetSJob() == JOB_SMN)
         {
             PPet->SetMLevel(PMaster->GetSLevel());
+        }
+        else if ((charutils::HasItem(PChar, 14656) == true) && (petID == PETID_WATERSPIRIT)) // Check if Player has Poseidon Ring & PetID == Water Spirit
+        {
+            PPet->SetMLevel(mLvl);
+            PPet->SetSLevel(mLvl);
         }
         else
         { // should never happen
