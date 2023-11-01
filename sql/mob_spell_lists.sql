@@ -6365,6 +6365,18 @@ INSERT INTO `mob_spell_lists` VALUES ('Diabolos_Letum',5092,245,1,255); -- drain
 INSERT INTO `mob_spell_lists` VALUES ('Diabolos_Letum',5092,246,1,255); -- drain ii (12~255)
 INSERT INTO `mob_spell_lists` VALUES ('Diabolos_Letum',5092,247,1,255); -- aspir (1~255)
 
+-- Bukki (5076 The Die is Cast NM)
+INSERT INTO `mob_spell_lists` VALUES ('Bukki',5093,146,62,72);  -- fire_iii (62~72)
+INSERT INTO `mob_spell_lists` VALUES ('Bukki',5093,156,59,71);  -- aero_iii (59~71)
+INSERT INTO `mob_spell_lists` VALUES ('Bukki',5093,166,66,74);  -- thunder_iii (66~74)
+INSERT INTO `mob_spell_lists` VALUES ('Bukki',5093,171,55,66);  -- water_iii (55~66)
+INSERT INTO `mob_spell_lists` VALUES ('Bukki',5093,245,12,255); -- drain (12~255)
+INSERT INTO `mob_spell_lists` VALUES ('Bukki',5093,247,25,255); -- aspir (25~255)
+INSERT INTO `mob_spell_lists` VALUES ('Bukki',5093,249,10,255); -- blaze_spikes (10~255)
+INSERT INTO `mob_spell_lists` VALUES ('Bukki',5093,252,45,255); -- stun (45~255)
+INSERT INTO `mob_spell_lists` VALUES ('Bukki',5093,254,4,255);  -- blind (4~255)
+INSERT INTO `mob_spell_lists` VALUES ('Bukki',5093,258,7,255);  -- bind (7~255)
+
 
 /*!40000 ALTER TABLE `mob_spell_lists` ENABLE KEYS */;
 UNLOCK TABLES;
