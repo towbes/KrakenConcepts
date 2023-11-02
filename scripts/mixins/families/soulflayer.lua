@@ -7,7 +7,7 @@ g_mixins.families = g_mixins.families or {}
 
 local function updateShieldAnimation(mob)
     -- MAGICAL dmg was taken - therefore the shield is down
-    if (mob:getAnimationSub() > 0) then
+    if mob:getAnimationSub() > 0 then
         mob:setAnimationSub(0)
     end
 end

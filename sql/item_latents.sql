@@ -1840,8 +1840,6 @@ INSERT INTO `item_latents` VALUES (17741,287,6,6,1000);  -- DMG+6 while TP <100%
 -- Sylphid Epee
 INSERT INTO `item_latents` VALUES (17754,23,10,31,0); -- Windsday: Attack +10
 
-
-
 INSERT INTO `item_latents` VALUES  (17759,165,7,59,20);   -- Koggelmander - Vs. vermin: Critical hit rate +7%
 
 INSERT INTO `item_latents` VALUES  (17761,287,6,40,0);    -- Oberon's Rapier DMG+6 in Main hand
@@ -2237,7 +2235,6 @@ INSERT INTO `item_latents` VALUES (18497,8,8,6,500);     -- Foolkiller
 INSERT INTO `item_latents` VALUES (18495,865,50,37,2);   -- First Quarter Moon: Occ Attacks Twice
 INSERT INTO `item_latents` VALUES (18495,287,-33,37,2);   -- First Quarter Moon: DMG 57
 
-
 -- Wootz Amood +1
 INSERT INTO `item_latents` VALUES (18496,865,50,37,2);   -- First Quarter Moon: Occ Attacks Twice
 INSERT INTO `item_latents` VALUES (18496,287,-33,37,2);   -- First Quarter Moon: DMG 57
@@ -2276,7 +2273,6 @@ INSERT INTO `item_latents` VALUES  (18683,287,2,58,0);    -- Imperial Bow DMG+2 
 
 INSERT INTO `item_latents` VALUES  (18684,24,10,58,0);    -- Storm Zamburak Ranged Attack +10 in Assault
 INSERT INTO `item_latents` VALUES  (18684,287,2,58,0);    -- Storm Zamburak DMG+2 in Assault
-
 
 INSERT INTO `item_latents` VALUES (18708,8,5,13,3); -- Snakeye and Snakeeye +1
 INSERT INTO `item_latents` VALUES (18708,404,20,13,3);
@@ -2412,7 +2408,6 @@ INSERT INTO `item_latents` VALUES (19108,287,5,0,75);    -- DNG:36 when HP <=75%
 
 -- Trilling Dagger 
 INSERT INTO `item_latents` VALUES (19109,23,10,13,6);    -- +10 attack when silenced
-
 
 INSERT INTO `item_latents` VALUES  (19110,132,1,24,40);   -- Trainee's Needle - : +1 Leather craft (Under Level 40)
 INSERT INTO `item_latents` VALUES  (19113,165,7,59,14);   -- Ermine's Tail - Vs. lizards: Critical hit rate +7%

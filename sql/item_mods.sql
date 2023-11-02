@@ -20939,7 +20939,6 @@ INSERT INTO `item_mods` VALUES (14280,22,20);  -- DARK_RES: 20
 INSERT INTO `item_mods` VALUES (14280,169,12); -- MOVE: 12
 INSERT INTO `item_mods` VALUES (14280,2026,1); -- DRAGON AFFINITY: 1
 
-
 -- Blood Cuisses
 INSERT INTO `item_mods` VALUES (14281,1,44);   -- DEF: 44
 INSERT INTO `item_mods` VALUES (14281,2,27);   -- HP: 27
@@ -20950,7 +20949,6 @@ INSERT INTO `item_mods` VALUES (14281,20,21);  -- WATER_RES: 21
 INSERT INTO `item_mods` VALUES (14281,22,21);  -- DARK_RES: 21
 INSERT INTO `item_mods` VALUES (14281,169,12); -- MOVE: 12
 INSERT INTO `item_mods` VALUES (14281,2026,1); -- DRAGON AFFINITY: 1
-
 
 -- Arcane Slops
 INSERT INTO `item_mods` VALUES (14282,1,42); -- DEF: 42
@@ -26663,7 +26661,6 @@ INSERT INTO `item_mods` VALUES (15340,8,4);     -- STR: 4
 INSERT INTO `item_mods` VALUES (15340,23,10);   -- ATT: 10
 INSERT INTO `item_mods` VALUES (15340,160,900); -- DMG: 900
 INSERT INTO `item_mods` VALUES (15340,521,10);  -- Onyx Sollerets AUGMENTS_ABSORB: 10
-
 
 -- Alumine Sollerets
 INSERT INTO `item_mods` VALUES (15341,1,8); -- DEF: 8

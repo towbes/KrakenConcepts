@@ -611,7 +611,6 @@ REPLACE INTO `item_mods` (`itemid`, `modid`, `value`) VALUES
 (18903,501,50),  -- ITEM_ADDEFFECT_CHANCE: 50
 (18903,950,7),   -- ITEM_ADDEFFECT_ELEMENT: 8
 
-
 -- Moepapa Stone
 (10817,1,5),     -- DEF: 5
 (10817,14,3),    -- CHR: 3
