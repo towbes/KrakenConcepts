@@ -6,8 +6,8 @@ require('scripts/globals/mixins')
 g_mixins = g_mixins or {}
 g_mixins.families = g_mixins.families or {}
 
-g_mixins.families.khimaira = function(mob)
-    khimaira:addListener('CRITICAL_TAKE', 'KHIMARIA_CRITICAL_TAKE', function(mob)
+g_mixins.families.khimaira = function(khimairaMob)
+    khimairaMob:addListener('CRITICAL_TAKE', 'KHIMARIA_CRITICAL_TAKE', function(mob)
         local random = math.random(1, 100)
         local chance = 1
         if random <= chance then
@@ -17,7 +17,7 @@ g_mixins.families.khimaira = function(mob)
         end
      end)
 
-    khimaira:addListener('ABILITY_TAKE', 'KHIMARIA_ABILITY_TAKE', function(mob, attacker, ability, action)
+    khimairaMob:addListener('ABILITY_TAKE', 'KHIMARIA_ABILITY_TAKE', function(mob, attacker, ability, action)
         local abilityID = ability:getID()
         local random = math.random(1, 100)
         local chance = 1
@@ -39,7 +39,7 @@ g_mixins.families.khimaira = function(mob)
         end
     end)
 
-    khimaira:addListener('WEAPONSKILL_TAKE', 'KHIMARIA_WEAPONSKILL_TAKE', function(mob, attacker, skillId, tp, action)
+    khimairaMob:addListener('WEAPONSKILL_TAKE', 'KHIMARIA_WEAPONSKILL_TAKE', function(mob, attacker, skillId, tp, action)
         local random = math.random(1, 100)
         local chance = 1
         if random <= chance then
