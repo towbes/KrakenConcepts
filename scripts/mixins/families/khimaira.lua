@@ -21,7 +21,7 @@ g_mixins.families.khimaira = function(khimairaMob)
         local abilityID = ability:getID()
         local random = math.random(1, 100)
         local chance = 1
-        if 
+        if
             abilityID == 150 or  -- tomahawk
             abilityID == 46 or   -- shield bash
             abilityID == 77 or   -- weapon bash

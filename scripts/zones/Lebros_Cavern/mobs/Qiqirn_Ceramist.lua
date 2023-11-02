@@ -2,8 +2,6 @@
 -- Area: Lebros Cavern (Excavation Duty)
 --  Mob: Qiqirn Ceramist
 -----------------------------------
-local ID = zones[xi.zone.LEBROS_CAVERN]
------------------------------------
 local entity = {}
 
 entity.onMobSpawn = function(mob)
