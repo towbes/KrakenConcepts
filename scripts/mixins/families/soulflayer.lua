@@ -1,6 +1,5 @@
 -- Soulflayer family mixin
 require('scripts/globals/mixins')
-require('scripts/globals/world')
 -----------------------------------
 
 g_mixins = g_mixins or {}
