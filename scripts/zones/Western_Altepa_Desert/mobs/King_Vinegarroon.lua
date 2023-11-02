@@ -2,8 +2,6 @@
 -- Area: Western Altepa Desert
 --   NM: King Vinegarroon
 -----------------------------------
-local ID = zones[xi.zone.WESTERN_ALTEPA_DESERT]
------------------------------------
 local entity = {}
 
 local updateRegen = function(mob)
@@ -31,7 +29,10 @@ entity.onAdditionalEffect = function(mob, target, damage)
 end
 
 entity.onMobDisengage = function(mob, weather)
-    if not (mob:getWeather() == xi.weather.DUST_STORM or mob:getWeather() == xi.weather.SAND_STORM) then
+    if
+        not (mob:getWeather() == xi.weather.DUST_STORM or
+        mob:getWeather() == xi.weather.SAND_STORM)
+    then
         DespawnMob(mob:getID())
     end
 end
@@ -44,7 +45,10 @@ entity.onMobWeaponSkill = function(target, mob, skill)
     local nextDrawIn = mob:getLocalVar('[Draw-In]WaitTime')
 
     -- Every time KV performs a TP move, he will draw in either his target or the entire alliance randomly
-    if (skill:getID() == 354 or skill:getID() == 355 or skill:getID() == 722 or skill:getID() == 723) and os.time() > nextDrawIn then
+    if
+        (skill:getID() == 354 or skill:getID() == 355 or skill:getID() == 722 or skill:getID() == 723) and
+        os.time() > nextDrawIn
+    then
         local chance = math.random(1, 2)
         if chance == 1 then
             mob:triggerDrawIn(mob, true, 1, 35, target, true)
@@ -82,10 +86,12 @@ end
 
 entity.onMobRoam = function(mob)
     updateRegen(mob)
-
-    if not (mob:getWeather() == xi.weather.DUST_STORM or mob:getWeather() == xi.weather.SAND_STORM) then
+    if
+        not (mob:getWeather() == xi.weather.DUST_STORM or
+        mob:getWeather() == xi.weather.SAND_STORM)
+    then
         DespawnMob(mob:getID())
-     end
+    end
 end
 
 return entity

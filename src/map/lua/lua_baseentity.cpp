@@ -12261,7 +12261,6 @@ void CLuaBaseEntity::clearEnmity(CLuaBaseEntity* PEntity)
     }
 }
 
-
 /************************************************************************
  *  Function: setClaimable(...)
  *  Purpose : sets m_IsClaimable for a mob
@@ -14716,8 +14715,8 @@ void CLuaBaseEntity::fellowRetreat()
 
 int32 CLuaBaseEntity::getFellowValue(std::string const& option)
 {
-    //XI_DEBUG_BREAK_IF(m_PBaseEntity == nullptr);
-    //XI_DEBUG_BREAK_IF(m_PBaseEntity->objtype != TYPE_PC);
+    // XI_DEBUG_BREAK_IF(m_PBaseEntity == nullptr);
+    // XI_DEBUG_BREAK_IF(m_PBaseEntity->objtype != TYPE_PC);
 
     const char* Query = "SELECT %s FROM char_fellow WHERE charid = %u;";
     int32       ret   = sql->Query(Query, option, m_PBaseEntity->id);
@@ -16158,7 +16157,6 @@ bool CLuaBaseEntity::isAutoAttackEnabled()
     return m_PBaseEntity->PAI->GetController()->IsAutoAttackEnabled();
 }
 
-
 /************************************************************************
  *  Function: getMobMod()
  *  Purpose : Returns the power value of a Mob Mod in effect
@@ -17430,8 +17428,6 @@ void CLuaBaseEntity::clearTimerQueue()
     m_PBaseEntity->PAI->ClearTimerQueue();
 }
 
-
-
 void CLuaBaseEntity::setMannequinPose(uint16 itemID, uint8 race, uint8 pose)
 {
     TracyZoneScoped;
@@ -18438,7 +18434,6 @@ void CLuaBaseEntity::Register()
     SOL_REGISTER("updateToEntireZone", CLuaBaseEntity::updateToEntireZone);
     SOL_REGISTER("sendEntityUpdateToPlayer", CLuaBaseEntity::sendEntityUpdateToPlayer);
 
-    
     SOL_REGISTER("setAnimPath", CLuaBaseEntity::setAnimPath);
     SOL_REGISTER("setAnimStart", CLuaBaseEntity::setAnimStart);
     SOL_REGISTER("setAnimBegin", CLuaBaseEntity::setAnimBegin);

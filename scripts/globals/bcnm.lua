@@ -1247,7 +1247,7 @@ local function checkReqs(player, npc, bfid, registrant)
             return player:hasKeyItem(xi.ki.LETTER_FROM_SHIKAREE_X) or
                 player:hasCompletedQuest(xi.quest.log_id.OTHER_AREAS, xi.quest.id.otherAreas.TANGO_WITH_A_TRACKER)
         end,
-        
+
         [678] = function() -- Quest: Requiem of Sin
             return player:hasKeyItem(xi.ki.LETTER_FROM_SHIKAREE_Y) or
                 player:hasKeyItem(xi.ki.LETTER_FROM_THE_MITHRAN_TRACKERS)

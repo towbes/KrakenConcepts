@@ -3,9 +3,6 @@
 -- Mob: Ramuh Prime
 -- Quest: Waking the Beast
 -----------------------------------
-
-
------------------------------------
 local entity = {}
 
 entity.onMobInitialize = function(mob)
@@ -68,7 +65,7 @@ entity.onMobFight = function(mob, target)
 
             if elemental:isAlive() then
                 elemental:updateEnmity(target)
-                mob:setLocalVar('hateTimer', os.time() + math.random(10,20))
+                mob:setLocalVar('hateTimer', os.time() + math.random(10, 20))
             end
         end
     end

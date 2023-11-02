@@ -852,7 +852,6 @@ public:
     uint32 getPixieHate();
     void   setPixieHate(uint32 pixieHate);
 
-
     auto getTarget() -> std::optional<CLuaBaseEntity>;
     void updateTarget(); // Force mob to update target from enmity container (ie after updateEnmity)
     auto getEnmityList() -> sol::table;

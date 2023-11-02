@@ -48,10 +48,10 @@ commandObj.onTrigger = function(player, mobGroupID, mobZoneID, numberOfMob, mobN
             y = player:getYPos(),
             z = player:getZPos(),
             rotation = player:getRotPos(),
-    
+
             groupId = mobGroupID,
             groupZoneId = mobZoneID,
-    
+
             onMobDeath = function(mob, playerArg, isKiller)
             end,
         })

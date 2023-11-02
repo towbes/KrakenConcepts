@@ -55,7 +55,7 @@ entity.onMobFight = function(mob, target)
     end
 end
 
-entity.onMobEngaged = function (mob, target)
+entity.onMobEngaged = function(mob, target)
     if mob:getHPP() == 100 then
         mob:setMod(xi.mod.STUNRES, -75)
     end

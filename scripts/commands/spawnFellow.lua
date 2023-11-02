@@ -22,16 +22,22 @@ commandObj.onTrigger = function(player)
         return
     end
 
-    if player:hasStatusEffect(xi.effect.LEVEL_RESTRICTION) or player:hasStatusEffect(xi.effect.LEVEL_SYNC) then
+    if
+        player:hasStatusEffect(xi.effect.LEVEL_RESTRICTION) or
+        player:hasStatusEffect(xi.effect.LEVEL_SYNC) 
+    then
         error(player, 'Player is under Level Sync or Level Restriction.')
         return
     end
 
-    if xi.settings.main.ENABLE_ADVENTURING_FELLOWS == nil or xi.settings.main.ENABLE_ADVENTURING_FELLOWS == false then
+    if
+        xi.settings.main.ENABLE_ADVENTURING_FELLOWS == nil or
+        xi.settings.main.ENABLE_ADVENTURING_FELLOWS == false
+    then
         error(player, 'Fellows are disabled via server settings.')
         return
     end
-    
+
     if not player:canUseMisc(xi.zoneMisc.FELLOW) then
         error(player, 'Fellows are not allowed in this zone via zone settings misc.')
         return
@@ -44,7 +50,6 @@ commandObj.onTrigger = function(player)
 
     player:spawnFellow(player:getFellowValue('fellowid'))
     player:PrintToPlayer('Spawned Adventuring Fellow')
-    
 end
 
 return commandObj

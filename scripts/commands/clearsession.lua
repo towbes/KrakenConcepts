@@ -1,7 +1,7 @@
----------------------------------------------------------------------------------------------------
+-----------------------------------
 -- func: clearsession
 -- desc: Clears a target's account session allowing them to log back in if hung
----------------------------------------------------------------------------------------------------
+-----------------------------------
 local commandObj = {}
 
 commandObj.cmdprops =
@@ -17,11 +17,11 @@ end
 
 commandObj.onTrigger = function(player, targName)
     -- validate target
-    if (targName == nil) then
+    if targName == nil then
         return error(player, 'You must supply the name of an offline player.')
     end
 
-    if player:clearSession(targName) == true then
+    if player:clearSession() == targName then
         return player:PrintToPlayer(string.format('Cleared %s\'s session.', targName))
     end
 
