@@ -1,8 +1,8 @@
 
-----------------------------------------
+-----------------------------------
 -- Area: Mamool Ja Training Grounds (Breaking Morale)
 --  Npc: Quhaaja
-----------------------------------------
+-----------------------------------
 local ID = zones[xi.zone.MAMOOL_JA_TRAINING_GROUNDS]
 local entity = {}
 

@@ -1,9 +1,8 @@
 
-----------------------------------------
+-----------------------------------
 -- Area: Mamool Ja Training Grounds (Breaking Morale)
 --  Npc: Supplies Crate
-----------------------------------------
-local ID = zones[xi.zone.MAMOOL_JA_TRAINING_GROUNDS]
+-----------------------------------
 local entity = {}
 
 local lootTable =

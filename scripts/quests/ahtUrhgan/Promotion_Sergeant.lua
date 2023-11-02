@@ -23,7 +23,7 @@ quest.sections =
     {
         check = function(player, status, vars)
             return status == QUEST_AVAILABLE and
-            player:getCharVar("AssaultPromotion") >= 25 and
+            player:getCharVar('AssaultPromotion') >= 25 and
             player:getQuestStatus(xi.quest.log_id.AHT_URHGAN, xi.quest.id.ahtUrhgan.PROMOTION_CORPORAL) == QUEST_COMPLETED
         end,
 
@@ -77,7 +77,7 @@ quest.sections =
                     if quest:complete(player) then
                         player:messageSpecial(ahtUrhganID.text.S_PROMOTION)
                         player:delKeyItem(xi.ki.C_WILDCAT_BADGE)
-                        player:setCharVar("AssaultPromotion", 0)
+                        player:setCharVar('AssaultPromotion', 0)
                     end
                 end,
             },

@@ -28,7 +28,7 @@ entity.onMobWeaponSkill = function(target, mob, skill)
         local pos = target:getPos()
 
         for i = 1, 4 do
-            local elemental = GetMobByID(mob:getID()+i)
+            local elemental = GetMobByID(mob:getID() + i)
 
             if not elemental:isSpawned() then
                 SpawnMob(elemental:getID()):updateEnmity(target)
@@ -40,8 +40,8 @@ entity.onMobWeaponSkill = function(target, mob, skill)
 end
 
 entity.onMobEngaged = function(mob, target)
-    mob:setLocalVar('timer', os.time() + math.random(30,60))
-    mob:setLocalVar('hateTimer', os.time() + math.random(10,20))
+    mob:setLocalVar('timer', os.time() + math.random(30, 60))
+    mob:setLocalVar('hateTimer', os.time() + math.random(10, 20))
 end
 
 entity.onMobFight = function(mob, target)
@@ -52,11 +52,11 @@ entity.onMobFight = function(mob, target)
 
     if mob:getLocalVar('timer') < os.time() then
         for i = 1, 4 do
-            local elemental = GetMobByID(mob:getID()+i)
+            local elemental = GetMobByID(mob:getID() + i)
 
             if elemental:isAlive() then
                 elemental:castSpell(xi.magic.spell.THUNDER_IV, mob)
-                mob:setLocalVar('timer', os.time() + math.random(30,60))
+                mob:setLocalVar('timer', os.time() + math.random(30, 60))
                 break
             end
         end
@@ -77,8 +77,8 @@ end
 entity.onMobDeath = function(mob, player, optParams)
     if optParams.isKiller then
         for i = 1, 4 do
-            if GetMobByID(mob:getID()+i):isAlive() then
-                GetMobByID(mob:getID()+i):setHP(0)
+            if GetMobByID(mob:getID() + i):isAlive() then
+                GetMobByID(mob:getID() + i):setHP(0)
             end
         end
     end

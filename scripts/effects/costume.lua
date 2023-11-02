@@ -5,7 +5,7 @@ local effectObject = {}
 
 effectObject.onEffectGain = function(target, effect)
     target:setCostume(effect:getPower())
-    
+
     -- Special case for assault: "Breaking Morale"
     if effect:getPower() == 1602 then
         target:addMod(xi.mod.REGEN_DOWN, 33)

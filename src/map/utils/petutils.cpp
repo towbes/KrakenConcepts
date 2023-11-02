@@ -296,7 +296,6 @@ namespace petutils
         return 0;
     }
 
-    
     uint16 GetJugHP(CPetEntity* PMob)
     {
         int level        = PMob->GetMLevel();
@@ -505,7 +504,7 @@ namespace petutils
         PMob->stats.MND = (uint16)(fMND + mMND);
         PMob->stats.CHR = (uint16)(fCHR + mCHR);
 
-        uint32 id       = PMob->m_PetID;
+        uint32 id = PMob->m_PetID;
 
         // Killer Effect and DEF/EVA/ACC/ATT
         switch (id)

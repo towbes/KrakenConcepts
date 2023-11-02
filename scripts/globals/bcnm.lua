@@ -594,7 +594,7 @@ local function checkReqs(player, npc, bfid, registrant)
 
         [37] = function() -- Quest: Mirror Mirror
             return player:getQuestStatus(xi.quest.log_id.JEUNO, xi.quest.id.jeuno.MIRROR_MIRROR) == QUEST_ACCEPTED and player:getCharVar('[Quest]Mirror_Mirror') == 2
-        end, 
+        end,
 
         [64] = function() -- Mission 2-3
             return nationStatus == 10 and
@@ -687,10 +687,10 @@ local function checkReqs(player, npc, bfid, registrant)
         end,
 
         [226] = function() -- Quest: Waking the Beast (Fullmoon Fountain)
-            return player:hasKeyItem(xi.ki.EYE_OF_GALES) and 
-                player:hasKeyItem(xi.ki.EYE_OF_FLAMES) and 
+            return player:hasKeyItem(xi.ki.EYE_OF_GALES) and
+                player:hasKeyItem(xi.ki.EYE_OF_FLAMES) and
                 player:hasKeyItem(xi.ki.EYE_OF_FROST) and
-                player:hasKeyItem(xi.ki.EYE_OF_STORMS) and 
+                player:hasKeyItem(xi.ki.EYE_OF_STORMS) and
                 player:hasKeyItem(xi.ki.EYE_OF_TIDES) and
                 player:hasKeyItem(xi.ki.EYE_OF_TREMORS)
         end,
@@ -948,7 +948,7 @@ local function checkReqs(player, npc, bfid, registrant)
         end,
 
         [677] = function() -- Quest: Tango with a Tracker
-            return player:hasKeyItem(xi.ki.LETTER_FROM_SHIKAREE_X)   
+            return player:hasKeyItem(xi.ki.LETTER_FROM_SHIKAREE_X)
         end,
 
         [678] = function() -- Quest: Requiem of Sin
@@ -978,6 +978,7 @@ local function checkReqs(player, npc, bfid, registrant)
             return player:getCharVar('Quest[1][78]prog') >= 9 or
                 player:hasCompletedQuest(xi.quest.log_id.BASTOK, xi.quest.id.bastok.RETURN_TO_THE_DEPTHS)
         end,
+
         [738] = function() -- ENM: Bionic Bug
             return player:hasKeyItem(xi.ki.SHAFT_2716_OPERATING_LEVER)
         end,
@@ -1198,7 +1199,7 @@ local function checkReqs(player, npc, bfid, registrant)
         [610] = function() -- Quest: Waking the Beast (Cloister of Tides)
             return player:hasKeyItem(xi.ki.RAINBOW_RESONATOR)
         end,
-        
+
         [640] = function() -- PM5-3 U3: Flames for the Dead
             return (player:hasCompletedMission(xi.mission.log_id.COP, xi.mission.id.cop.THREE_PATHS) or
             player:getMissionStatus(xi.mission.log_id.COP, xi.mission.status.COP.ULMIA) >= 8) and
@@ -1246,6 +1247,7 @@ local function checkReqs(player, npc, bfid, registrant)
             return player:hasKeyItem(xi.ki.LETTER_FROM_SHIKAREE_X) or
                 player:hasCompletedQuest(xi.quest.log_id.OTHER_AREAS, xi.quest.id.otherAreas.TANGO_WITH_A_TRACKER)
         end,
+        
         [678] = function() -- Quest: Requiem of Sin
             return player:hasKeyItem(xi.ki.LETTER_FROM_SHIKAREE_Y) or
                 player:hasKeyItem(xi.ki.LETTER_FROM_THE_MITHRAN_TRACKERS)

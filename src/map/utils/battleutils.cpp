@@ -728,8 +728,8 @@ namespace battleutils
 
         if (damage > 0)
         {
-            damage = std::max(damage - PDefender->getMod(Mod::PHALANX), 0);
-            damage = HandleOneForAll(PDefender, damage);
+            damage        = std::max(damage - PDefender->getMod(Mod::PHALANX), 0);
+            damage        = HandleOneForAll(PDefender, damage);
             int16 magicSS = PDefender->getMod(Mod::MAGIC_STONESKIN);
             if (magicSS)
             {
@@ -845,8 +845,8 @@ namespace battleutils
             int32 spikesDamage = CalculateSpikeDamage(PAttacker, PDefender, Action, (uint16)(abs(damage)));
             if (spikesDamage > 0)
             {
-                spikesDamage = std::max(spikesDamage - PAttacker->getMod(Mod::PHALANX), 0);
-                spikesDamage = HandleOneForAll(PAttacker, spikesDamage);
+                spikesDamage  = std::max(spikesDamage - PAttacker->getMod(Mod::PHALANX), 0);
+                spikesDamage  = HandleOneForAll(PAttacker, spikesDamage);
                 int16 magicSS = PAttacker->getMod(Mod::MAGIC_STONESKIN);
                 if (magicSS)
                 {
@@ -6078,7 +6078,6 @@ namespace battleutils
 
     bool DrawIn(CBattleEntity* PTarget, CMobEntity* PMob, float offset, uint8 drawInRange, uint16 maximumReach, bool includeParty, bool includeDeadAndMount)
     {
-
         if (std::chrono::time_point_cast<std::chrono::seconds>(server_clock::now()).time_since_epoch().count() - PMob->GetLocalVar("DrawInTime") < 2)
         {
             return false;
@@ -6483,7 +6482,6 @@ namespace battleutils
             }
         }
     }
-
 
     bool HasClaim(CBattleEntity* PEntity, CBattleEntity* PTarget)
     {

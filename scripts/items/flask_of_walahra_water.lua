@@ -1,8 +1,8 @@
------------------------------------------
+-----------------------------------
 -- ID: 5354
 -- Item: Walahra Water
 -- Item Effect: heals 5% mp and hp
------------------------------------------
+-----------------------------------
 local itemObject = {}
 
 itemObject.onItemCheck = function(target)

@@ -12,7 +12,7 @@ entity.onMobInitialize = function(mob)
 end
 
 entity.onCastStarting = function(mob, spell)
-    if (mob:getLocalVar('Xenoglossia') > 0) then
+    if mob:getLocalVar('Xenoglossia') > 0 then
         mob:setLocalVar('Xenoglossia', 0)
         spell:setCastTime(1)
     end

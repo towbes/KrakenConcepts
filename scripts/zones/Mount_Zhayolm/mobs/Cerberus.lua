@@ -2,8 +2,6 @@
 -- Area: Mount Zhayolm
 --   NM: Cerberus
 -----------------------------------
-local ID = zones[xi.zone.MOUNT_ZHAYOLM]
------------------------------------
 local entity = {}
 
 local drawInPos =

@@ -47,9 +47,9 @@ entity.onMobWeaponSkill = function(target, mob, skill)
     if (skill:getID() == 354 or skill:getID() == 355 or skill:getID() == 722 or skill:getID() == 723) and os.time() > nextDrawIn then
         local chance = math.random(1, 2)
         if chance == 1 then
-            mob:triggerDrawIn(mob, true, 1, 35, target)
+            mob:triggerDrawIn(mob, true, 1, 35, target, true)
         else
-            mob:triggerDrawIn(mob, false, 1, 35, target)
+            mob:triggerDrawIn(mob, false, 1, 35, target, true)
         end
 
         -- KV always does an AOE TP move followed by a single target TP move

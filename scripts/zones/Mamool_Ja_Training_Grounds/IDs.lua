@@ -54,7 +54,7 @@ zones[xi.zone.MAMOOL_JA_TRAINING_GROUNDS] =
                 17047580, 17047581, 17047582, 17047583, 17047584, 17047585, 17047586, 17047587, 17047588, 17047589,
             },
         },
-        
+
         [xi.assault.mission.BREAKING_MORALE] =
         {
             MOBS_START =

@@ -1,8 +1,8 @@
------------------------------------------
+-----------------------------------
 -- ID: 13182
 -- Item: Oscar Scarf
 -- Item Effect: Enchantment Slighly Bad Breath (inflicts Bind, Paralyze, and Silence on an enemy)
------------------------------------------
+-----------------------------------
 local itemObject = {}
 
 itemObject.onItemCheck = function(target, player)

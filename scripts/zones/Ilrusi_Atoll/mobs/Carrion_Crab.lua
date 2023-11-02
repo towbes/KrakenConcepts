@@ -11,6 +11,9 @@ entity.onMobSpawn = function(mob)
 end
 
 entity.onMobDeath = function(mob, player, optParams)
+    if optParams.isKiller then
+        local instance = mob:getInstance()
+        local id = mob:getID()
         -- Spawn NM if placeholder
         -- Otherwise progress instance
         if
