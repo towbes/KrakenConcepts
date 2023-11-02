@@ -159,7 +159,7 @@ public:
     bool sendGuild(uint16 guildID, uint8 open, uint8 close, uint8 holiday); // Sends guild shop menu
     void openSendBox();                                                     // Opens send box (to deliver items)
     void leaveGame();
-    void sendEmote(CLuaBaseEntity* target, uint8 emID, uint8 emMode);
+    void sendEmote(CLuaBaseEntity* target, uint8 emID, uint8 emMode, bool self);
 
     // Location and Positioning
     int16 getWorldAngle(sol::variadic_args va);                                 // return angle (rot) between two points (vector from a to b), aligned to absolute cardinal degree

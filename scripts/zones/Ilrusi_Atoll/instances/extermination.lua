@@ -67,21 +67,11 @@ instanceObject.onInstanceProgressUpdate = function(instance, progress)
 end
 
 instanceObject.onInstanceComplete = function(instance)
-    local chars = instance:getChars()
-
-    for i, v in pairs(chars) do
-        v:messageSpecial(ID.text.RUNE_UNLOCKED_POS, 8, 8)
-    end
-
-    GetNPCByID(ID.npc.RUNE_OF_RELEASE, instance):setStatus(xi.status.NORMAL)
-    GetNPCByID(ID.npc.ANCIENT_LOCKBOX, instance):setStatus(xi.status.NORMAL)
-end
-
-instanceObject.onEventUpdate = function(player, csid, option, npc)
     xi.assault.onInstanceComplete(instance, 6, 8) -- (H-8)
 end
 
-instanceObject.onEventFinish = function(player, csid, option, npc)
+instanceObject.onEventFinish = function(player, csid, option)
+    xi.assault.instanceOnEventFinish(player, csid, xi.zone.BHAFLAU_THICKETS)
 end
 
 return instanceObject

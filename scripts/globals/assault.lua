@@ -196,3 +196,38 @@ xi.assault.adjustMobLevel = function(mob)
         entity:setMobLevel(entity:getMainLvl() - reducedLevel)
     end
 end
+
+xi.assault.addTempItem = function(mob, player, item, chance)
+    if mob:getLocalVar('dead') == 0 then
+        mob:setLocalVar('dead', 1)
+        if math.random(0, 100) <= chance then
+            npcUtil.giveTempItem(player, item)
+        end
+    end
+end
+
+xi.assault.delTempItem = function(player, item, amount)
+    if amount == nil then
+        amount = 1
+    end
+
+    if player:hasItem(item, xi.inventoryLocation.TEMPITEMS) then
+        player:delItem(item, amount, xi.inventoryLocation.TEMPITEMS)
+    end
+end
+
+xi.assault.hasTempItem = function(player, item)
+    return player:hasItem(item, xi.inventoryLocation.TEMPITEMS)
+end
+
+xi.assault.progressInstance = function(mob, amount)
+    local instance = mob:getInstance()
+
+    if instance then
+        if amount == nil then
+            amount = 1
+        end
+
+        instance:setProgress(instance:getProgress() + amount)
+    end
+end

@@ -15,7 +15,7 @@ g_mixins.families.khimaira = function(khimairaMob)
                 mob:setAnimationSub(1)
             end
         end
-     end)
+    end)
 
     khimairaMob:addListener('ABILITY_TAKE', 'KHIMARIA_ABILITY_TAKE', function(mob, attacker, ability, action)
         local abilityID = ability:getID()

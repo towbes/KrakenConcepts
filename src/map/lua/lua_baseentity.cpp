@@ -2386,7 +2386,7 @@ void CLuaBaseEntity::leaveGame()
  *  Notes   : Currently only used for HELM animations.
  ************************************************************************/
 
-void CLuaBaseEntity::sendEmote(CLuaBaseEntity* target, uint8 emID, uint8 emMode)
+void CLuaBaseEntity::sendEmote(CLuaBaseEntity* target, uint8 emID, uint8 emMode, bool self)
 {
     if (m_PBaseEntity->objtype != TYPE_PC)
     {
@@ -2406,6 +2406,10 @@ void CLuaBaseEntity::sendEmote(CLuaBaseEntity* target, uint8 emID, uint8 emMode)
 
             PChar->loc.zone->PushPacket(PChar, CHAR_INRANGE,
                                         new CCharEmotionPacket(PChar, PTarget->id, PTarget->targid, emoteID, emoteMode, 0));
+            if (self)
+            {
+                PChar->pushPacket(new CCharEmotionPacket(PChar, PTarget->id, PTarget->targid, emoteID, emoteMode, 0));
+            }
         }
     }
 }
@@ -14383,7 +14387,7 @@ bool CLuaBaseEntity::isAutomaton()
     if (m_PBaseEntity->objtype == TYPE_PET)
     {
         uint32 petID = static_cast<CPetEntity*>(m_PBaseEntity)->m_PetID;
-        if (petID >= PETID_HARLEQUINFRAME and petID <= PETID_STORMWAKERFRAME)
+        if (petID >= PETID_HARLEQUINFRAME && petID <= PETID_STORMWAKERFRAME)
         {
             return true;
         }
