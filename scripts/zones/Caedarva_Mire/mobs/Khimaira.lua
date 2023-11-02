@@ -2,7 +2,10 @@
 -- Area: Caedarva Mire
 --   NM: Khimaira
 -----------------------------------
-require('scripts/globals/toau')
+mixins =
+{
+    require('scripts/mixins/families/khimaira'),
+}
 -----------------------------------
 local entity = {}
 
@@ -19,12 +22,6 @@ local drawInPos =
 }
 
 entity.onMobInitialize = function(mob)
-    xi.toau.mobSpecialHook('KHIMAIRA', mob, 1, function(mob)
-        if mob:getAnimationSub() == 0 then
-            mob:setAnimationSub(1)
-        end
-    end)
-
     mob:addListener('EFFECT_LOSE', 'KHIMAIRA_EFFECT_LOSE', function(owner, effect)
         local effectType = effect:getTypeMask()
         if effectType == xi.effect.STUN then

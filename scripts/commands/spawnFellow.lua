@@ -24,7 +24,7 @@ commandObj.onTrigger = function(player)
 
     if
         player:hasStatusEffect(xi.effect.LEVEL_RESTRICTION) or
-        player:hasStatusEffect(xi.effect.LEVEL_SYNC) 
+        player:hasStatusEffect(xi.effect.LEVEL_SYNC)
     then
         error(player, 'Player is under Level Sync or Level Restriction.')
         return
@@ -32,7 +32,7 @@ commandObj.onTrigger = function(player)
 
     if
         xi.settings.main.ENABLE_ADVENTURING_FELLOWS == nil or
-        xi.settings.main.ENABLE_ADVENTURING_FELLOWS == false
+        not xi.settings.main.ENABLE_ADVENTURING_FELLOWS
     then
         error(player, 'Fellows are disabled via server settings.')
         return

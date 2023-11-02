@@ -24,9 +24,9 @@ commandObj.onTrigger = function(player, famezone, level, target)
     if target == nil then
         targ = player
     else
-        targ = GetPlayerByName( target )
+        targ = GetPlayerByName(target)
         if targ == nil then
-            error(player, string.format( 'Player named '%s' not found or not a valid player!', target ) )
+            error(player, string.format('Player named %s not found or not a valid player!', target))
             return
         end
     end
@@ -64,7 +64,7 @@ commandObj.onTrigger = function(player, famezone, level, target)
     if level == nil then
         player:PrintToPlayer(string.format('Fame Zone %s: %s - No other parameters requested.', famezone, fameAreas[famezone + 1]))
         return
-    elseif (level < 0 or level > 9) then
+    elseif level < 0 or level > 9 then
         error(player, 'You must provide a fame level from 1 to 9.')
         return
     end

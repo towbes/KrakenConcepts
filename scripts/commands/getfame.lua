@@ -27,7 +27,7 @@ commandObj.onTrigger = function(player, target, famezone)
     else
         targ = GetPlayerByName(target)
         if targ == nil then
-            error(player, string.format('Player named '%s' not found or not a valid player!', target))
+            error(player, string.format('Player named %s not found or not a valid player!', target))
             return
         end
     end

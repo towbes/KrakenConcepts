@@ -61,7 +61,7 @@ entity.onMobFight = function(mob, target)
 
     if mob:getLocalVar('hateTimer') < os.time() then
         for i = 1, 4 do
-            local elemental = GetMobByID(mob:getID()+i)
+            local elemental = GetMobByID(mob:getID() + i)
 
             if elemental:isAlive() then
                 elemental:updateEnmity(target)
