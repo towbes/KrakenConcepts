@@ -12,14 +12,14 @@ local function updateShieldAnimation(mob)
     end
 end
 
-
-g_mixins.families.soulflayer = function(mob)
-    mob:addListener('TAKE_DAMAGE', 'SOULFLAYER_TAKE_DAMAGE', function(mob, amount, attacker, attackType, damageType)
+g_mixins.families.soulflayer = function(soulflayerMob)
+    soulflayerMob:addListener('TAKE_DAMAGE', 'SOULFLAYER_TAKE_DAMAGE', function(mob, amount, attacker, attackType, damageType)
         if attackType == xi.attackType.MAGICAL then
             updateShieldAnimation(mob)
         end
+
         -- about to die
-        if (amount > mob:getHP()) then
+        if amount > mob:getHP() then
             mob:setAnimationSub(0)
         end
     end)

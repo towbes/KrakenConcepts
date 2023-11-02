@@ -867,6 +867,20 @@ REPLACE INTO `item_latents` (`itemId`, `modId`, `value`, `latentId`, `latentPara
 (19161,24,1,16,3),
 (19161,24,1,16,4),
 (19161,24,1,16,5),
-(19161,24,1,16,6);
+(19161,24,1,16,6),
+
+-- Shigeto Bow
+(18142,26,7,8,12), -- RACC +7 for Samurai Sub job
+
+-- Shigeto Bow +1
+(18143,26,8,8,12), -- RACC +8 for Samurai Sub job
+
+-- Ritter Shield
+(12309,1,2,62,12), -- DEF +2 for PLD Main job
+(12309,1,2,8,12), -- DEF +2 for PLD Sub job
+
+-- Ritter Shield +1
+(12358,1,2,62,12), -- DEF +2 for PLD Main job
+(12358,1,2,8,12); -- DEF +2 for PLD Sub job
 
 UNLOCK TABLES;
