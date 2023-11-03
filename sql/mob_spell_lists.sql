@@ -6377,6 +6377,13 @@ INSERT INTO `mob_spell_lists` VALUES ('Bukki',5093,252,45,255); -- stun (45~255)
 INSERT INTO `mob_spell_lists` VALUES ('Bukki',5093,254,4,255);  -- blind (4~255)
 INSERT INTO `mob_spell_lists` VALUES ('Bukki',5093,258,7,255);  -- bind (7~255)
 
+-- Darting Kachaal Ja (Flee Mode)
+INSERT INTO `mob_spell_lists` VALUES ('Darting_Kachaal_Ja_Flee',5094,252,1,255);  -- stun (1~255)
+INSERT INTO `mob_spell_lists` VALUES ('Darting_Kachaal_Ja_Flee',5094,274,1,255);  -- sleepga_ii (1~255)
+INSERT INTO `mob_spell_lists` VALUES ('Darting_Kachaal_Ja_Flee',5094,362,1,255);  -- bindga (1~255)
+
+-- Darting Kachaal Ja (Aggressive Mode)
+INSERT INTO `mob_spell_lists` VALUES ('Darting_Kachaal_Ja_Aggressive',5095,186,1,255);  -- aeroga_iii (1~255)
 
 /*!40000 ALTER TABLE `mob_spell_lists` ENABLE KEYS */;
 UNLOCK TABLES;
