@@ -12,8 +12,8 @@ spellObject.onMagicCastingCheck = function(caster, target, spell)
     end
 
     -- Per wiki, Virelai wipes all shadows even if it resists or the target is immune to charm
-    -- This can't be done in the onSpellCast function (that runs after it 'hits')
-    spell:addEffectFlag(xi.magic.spellFlag.WIPE_SHADOWS)
+    -- This can't be done in the onSpellCast function (that runs after it "hits")
+    spell:setFlag(xi.magic.spellFlag.WIPE_SHADOWS)
 
     return 0
 end
