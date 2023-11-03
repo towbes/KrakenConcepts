@@ -29,6 +29,7 @@ entity.onTrigger = function(player, npc)
         xi.item.TOOLBAG_SHIKANOFUDA,     20800, 3,
         xi.item.TOOLBAG_CHONOFUDA,       20800, 3,
         xi.item.PICKAXE,                   208, 3,
+        xi.item.WHITE_BELT,               2110, 3,
     }
 
     player:showText(npc, ID.text.NUMA_SHOP_DIALOG)
