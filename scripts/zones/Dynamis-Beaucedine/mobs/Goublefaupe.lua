@@ -12,7 +12,7 @@ local entity = {}
 
 entity.onMobInitialize = function(mob)
     mob:setMobMod(xi.mobMod.HP_SCALE, 300)
-    mob:setMobMod(xi.mobMod.SPELL_LIST, 5075)
+    mob:setSpellList(5075)
     mob:setMobMod(xi.mobMod.CAN_SHIELD_BLOCK, 1)
 end
 

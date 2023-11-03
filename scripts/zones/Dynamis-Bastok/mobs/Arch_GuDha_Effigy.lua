@@ -16,7 +16,7 @@ entity.onMobInitialize = function(mob)
 end
 
 entity.onMobSpawn = function(mob)
-    mob:setMobMod(xi.mobMod.SPELL_LIST, 5082)
+    mob:setSpellList(5082)
     mob:setMod(xi.mod.REFRESH, 25)
     xi.mix.jobSpecial.config(mob, {
         between = 180,

@@ -19,7 +19,7 @@ entity.onMobInitialize = function(mob)
             { id = xi.jsa.MANAFONT, cooldown = 0, hpp = 100 },
         },
     })
-    mob:setMobMod(xi.mobMod.SPELL_LIST, 2)
+    mob:setSpellList(2)
     mob:setMobMod(xi.mobMod.HP_SCALE, 1500)
     mob:setMod(xi.mod.DOUBLE_ATTACK, 50)
 end

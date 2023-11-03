@@ -12,7 +12,7 @@ local entity = {}
 
 entity.onMobInitialize = function(mob)
     mob:setMobMod(xi.mobMod.HP_SCALE, 200)
-    mob:setMobMod(xi.mobMod.SPELL_LIST, 5076)
+    mob:setSpellList(5076)
 end
 
 entity.onMobSpawn = function(mob)

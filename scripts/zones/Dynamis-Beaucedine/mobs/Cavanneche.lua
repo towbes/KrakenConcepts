@@ -33,6 +33,12 @@ entity.onMobFight = function(mob, target)
         member:changeMusic(3, 88)
         end
     end
+
+    if mob:hasStatusEffect(xi.effect.MANAFONT) then
+        mob:setSpellList(2)
+    else
+        mob:setSpellList(5)
+    end
 end
 
 

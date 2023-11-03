@@ -15,7 +15,7 @@ entity.onMobInitialize = function(mob)
     --mob:setMobMod(xi.mobMod.SPECIAL_SKILL, 272)
     --mob:setMobMod(xi.mobMod.SPECIAL_COOL, 20)
     mob:setMobMod(xi.mobMod.NO_STANDBACK, 1)
-    mob:setMobMod(xi.mobMod.SPELL_LIST, 5)
+    mob:setSpellList(5)
 end
 
 entity.onMobSpawn = function(mob)

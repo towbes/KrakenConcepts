@@ -47,9 +47,9 @@ entity.onMobFight = function(mob, target)
     end
 
     if mob:getHP() < 40000 then
-        mob:setMobMod(xi.mobMod.SPELL_LIST, 5086)
+        mob:setSpellList(5086)
     else
-        mob:setMobMod(xi.mobMod.SPELL_LIST, 5085)
+        mob:setSpellList(5085)
     end
 
     for i = 0, 1 do

@@ -16,7 +16,7 @@ entity.onMobInitialize = function(mob)
 end
 
 entity.onMobSpawn = function(mob)
-    mob:setMobMod(xi.mobMod.SPELL_LIST, 5079)
+    mob:setSpellList(5079)
     mob:setMod(xi.mod.REFRESH, 25)
     xi.mix.jobSpecial.config(mob, {
         between = 180,
@@ -41,9 +41,9 @@ entity.onMobFight = function(mob, target)
     end
 
     if mob:hasStatusEffect(xi.effect.MANAFONT) then
-        mob:setMobMod(xi.mobMod.SPELL_LIST, 50)
+        mob:setSpellList(50)
     else
-        mob:setMobMod(xi.mobMod.SPELL_LIST, 5079)
+        mob:setSpellList(5079)
     end
 end
 

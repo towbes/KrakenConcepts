@@ -19,7 +19,7 @@ end
 
 entity.onMobSpawn = function(mob)
     mob:setMobMod(xi.mobMod.SKILL_LIST, 135)
-    mob:setMobMod(xi.mobMod.SPELL_LIST, 0)
+    mob:setSpellList(0)
     mob:setMod(xi.mod.REGAIN, 1000)
 end
 

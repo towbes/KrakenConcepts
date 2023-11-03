@@ -11,7 +11,7 @@ mixins =
 local entity = {}
 
 entity.onMobInitialize = function(mob)
-    mob:setMobMod(xi.mobMod.SPELL_LIST, 5077)
+    mob:setSpellList(5077)
     mob:setMobMod(xi.mobMod.HP_SCALE, 1500)
 end
 
