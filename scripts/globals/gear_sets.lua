@@ -819,7 +819,7 @@ local gearSets =
             xi.item.VIRTUE_STONE,
             xi.item.HOPE_STAFF,
         },
-        minEquipped = 1,
+        minEquipped = 2,
         mods =
         {
             { xi.mod.AMMO_SWING, 50 },
@@ -833,7 +833,7 @@ local gearSets =
             xi.item.VIRTUE_STONE,
             xi.item.JUSTICE_SWORD,
         },
-        minEquipped = 1,
+        minEquipped = 2,
         mods =
         {
             { xi.mod.AMMO_SWING, 50 },
@@ -847,7 +847,7 @@ local gearSets =
             xi.item.VIRTUE_STONE,
             xi.item.TEMPERANCE_AXE,
         },
-        minEquipped = 1,
+        minEquipped = 2,
         mods =
         {
             { xi.mod.AMMO_SWING, 50 },
@@ -861,7 +861,7 @@ local gearSets =
             xi.item.VIRTUE_STONE,
             xi.item.LOVE_HALBERD,
         },
-        minEquipped = 1,
+        minEquipped = 2,
         mods =
         {
             { xi.mod.AMMO_SWING, 50 },
@@ -875,7 +875,7 @@ local gearSets =
             xi.item.VIRTUE_STONE,
             xi.item.FORTITUDE_AXE,
         },
-        minEquipped = 1,
+        minEquipped = 2,
         mods =
         {
             { xi.mod.AMMO_SWING, 50 },
@@ -889,7 +889,7 @@ local gearSets =
             xi.item.VIRTUE_STONE,
             xi.item.FAITH_BAGHNAKHS,
         },
-        minEquipped = 1,
+        minEquipped = 2,
         mods =
         {
             { xi.mod.AMMO_SWING, 50 },
@@ -903,7 +903,7 @@ local gearSets =
             xi.item.VIRTUE_STONE,
             xi.item.PRUDENCE_ROD,
         },
-        minEquipped = 1,
+        minEquipped = 2,
         mods =
         {
             { xi.mod.AMMO_SWING, 50 },
@@ -2579,11 +2579,7 @@ xi.gear_sets.checkForGearSet = function(player)
             local modTierIndex = math.min(setCount, maxEquippedReq) - minEquippedReq
 
             for _, modData in ipairs(gearSets[setId].mods) do
-                if (setId >= 47 and setId <= 53 and player:getEquipID(xi.slot.AMMO) == xi.item.VIRTUE_STONE) then
-                    player:addGearSetMod(setId, modData[1], modData[modTierIndex + 2])
-                elseif setId < 47 or setId > 53 then
-                    player:addGearSetMod(setId, modData[1], modData[modTierIndex + 2])
-                end
+                player:addGearSetMod(setId, modData[1], modData[modTierIndex + 2])
             end
         end
     end

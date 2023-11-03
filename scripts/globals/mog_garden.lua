@@ -17,7 +17,7 @@ xi.mog_garden.onInitialize = function(zone)
 
         -- Un-hide default NPCS
         GetNPCByID(ID.npc.GREEN_THUMB_MOOGLE):setStatus(xi.status.NORMAL)
-        GetNPCByID(ID.npc.MOG_DINGHY):setStatus(xi.status.NORMAL)
+        -- GetNPCByID(ID.npc.MOG_DINGHY):setStatus(xi.status.NORMAL)
         GetNPCByID(ID.npc.PORTER_MOOGLE):setStatus(xi.status.NORMAL)
     end
 end
