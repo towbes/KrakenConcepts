@@ -6,7 +6,7 @@
 --  However, Radol Ja appears to have approx 20k HP.
 --  Fight with cures + benediction Radol Ja went through 80k HP in total
 -----------------------------------
-mixins = { require("scripts/mixins/job_special") }
+mixins = { require('scripts/mixins/job_special') }
 -----------------------------------
 local entity = {}
 

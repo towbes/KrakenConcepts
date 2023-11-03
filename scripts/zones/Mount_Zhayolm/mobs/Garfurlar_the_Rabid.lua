@@ -1,13 +1,15 @@
 -----------------------------------
---   Area: Mount Zhayolm
---    Mob: Garfurlar the Rabid
+-- Area: Mount Zhayolm
+--   NM: Garfurlar the Rabid (Follower of Unruly)
 -----------------------------------
-mixins = {require('scripts/mixins/weapon_break')}
-mixins = {require('scripts/mixins/job_special')}
+mixins = { require('scripts/mixins/job_special') }
 -----------------------------------
 local entity = {}
 
-entity.onMobDeath = function(mob, player, isKiller)
+entity.onMobSpawn = function(mob)
+end
+
+entity.onMobDeath = function(mob, player, optParams)
 end
 
 return entity

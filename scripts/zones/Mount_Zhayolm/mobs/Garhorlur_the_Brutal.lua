@@ -1,13 +1,14 @@
+-- Area: Mount Zhayolm
+--   NM: Garhorlur the Brutal (Follower of Unruly)
 -----------------------------------
---   Area: Mount Zhayolm
---    Mob: Garhorlur the Brutal
------------------------------------
-mixins = {require('scripts/mixins/weapon_break')}
-mixins = {require('scripts/mixins/job_special')}
+mixins = { require('scripts/mixins/job_special') }
 -----------------------------------
 local entity = {}
 
-entity.onMobDeath = function(mob, player, isKiller)
+entity.onMobSpawn = function(mob)
+end
+
+entity.onMobDeath = function(mob, player, optParams)
 end
 
 return entity

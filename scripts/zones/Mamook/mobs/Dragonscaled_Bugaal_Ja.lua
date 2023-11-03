@@ -4,27 +4,27 @@
 -- Note: True behavior of bugard respawn unfconfirmed, and assumed to be
 --  similar to that of wikipedia entries
 -----------------------------------
-mixins = { require("scripts/mixins/job_special") }
+mixins = { require('scripts/mixins/job_special') }
 -----------------------------------
 local entity = {}
 
 local function respawnBugards(mob)
-    if mob:getLocalVar("respawnTime") < os.time() then
-        mob:setLocalVar("respawnTime", os.time() + 120)
+    if mob:getLocalVar('respawnTime') < os.time() then
+        mob:setLocalVar('respawnTime', os.time() + 120)
         local pos = mob:getPos()
 
         for i = 1, 3 do
             local bugard = GetMobByID(mob:getID() + i)
 
             if not bugard:isAlive() then
-                mob:entityAnimationPacket("casm")
+                mob:entityAnimationPacket('casm')
                 mob:setMobMod(xi.mobMod.NO_MOVE, 1)
                 mob:setAutoAttackEnabled(false)
                 mob:setMagicCastingEnabled(false)
                 mob:setMobAbilityEnabled(false)
 
                 mob:timer(1500, function(mobArg)
-                    mobArg:entityAnimationPacket("shsm")
+                    mobArg:entityAnimationPacket('shsm')
                     bugard:setSpawn(pos.x + math.random(-5, 5), pos.y, pos.z + math.random(-5, 5))
                     bugard:spawn()
                     xi.follow.follow(bugard, mob)
