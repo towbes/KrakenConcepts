@@ -5650,6 +5650,7 @@ xi.item =
     BONE_AXE                            = 16642,
     BATTLEAXE                           = 16643,
     MYTHRIL_PICK                        = 16651,
+    RUSTY_PICK                          = 16655,
     ORCISH_AXE                          = 16656,
     TABAR                               = 16657,
     DOOM_TABAR                          = 16660,
