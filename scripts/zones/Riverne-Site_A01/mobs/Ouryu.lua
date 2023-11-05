@@ -86,6 +86,10 @@ entity.onMobFight = function(mob, target)
         (mob:hasStatusEffect(xi.effect.SLEEP_I) or
         mob:hasStatusEffect(xi.effect.SLEEP_II) or
         mob:hasStatusEffect(xi.effect.LULLABY))
+    then
+        mob:delStatusEffect(xi.effect.SLEEP_I)
+        mob:delStatusEffect(xi.effect.SLEEP_II)
+        mob:delStatusEffect(xi.effect.LULLABY)
     end
 end
 
