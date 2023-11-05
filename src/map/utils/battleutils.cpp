@@ -763,6 +763,11 @@ namespace battleutils
         ELEMENT spikeElement = (ELEMENT)((uint8)GetSpikesDamageType(Action->spikesEffect) - (uint8)DAMAGE_TYPE::ELEMENTAL);
         int32   damage       = Action->spikesParam;
 
+        if (PDefender->getMod(Mod::SPIKES_DMG_BONUS) > 0)
+        {
+            damage *= 1 + (PDefender->getMod(Mod::SPIKES_DMG_BONUS) / 100.f);
+        }
+
         if (static_cast<SPIKES>(Action->spikesEffect) == SPIKES::SPIKE_DREAD)
         {
             // drain same as damage taken
@@ -5057,10 +5062,6 @@ namespace battleutils
             if (PEntity->PAI->IsEngaged())
             {
                 PEntity->PAI->Disengage();
-            }
-            if (PEntity->isDead())
-            {
-                PEntity->Die();
             }
             PEntity->updatemask |= UPDATE_ALL_CHAR;
         }

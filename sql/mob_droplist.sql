@@ -11460,6 +11460,7 @@ INSERT INTO `mob_droplist` VALUES (1409,0,0,1000,1237,@RARE);  -- Bag Of Tree Cu
 INSERT INTO `mob_droplist` VALUES (1410,0,0,1000,647,@ALWAYS); -- Chunk Of Molybdenum Ore (Always, 100%)
 INSERT INTO `mob_droplist` VALUES (1410,0,0,1000,1313,670);    -- Lock Of Sirens Hair (67.0%)
 INSERT INTO `mob_droplist` VALUES (1410,0,0,1000,860,380);     -- Behemoth Hide (38.0%)
+INSERT INTO `mob_droplist` VALUES (1410,0,0,1000,2359,400);    -- Star Sapphire (40.0%)
 INSERT INTO `mob_droplist` VALUES (1410,0,0,1000,17586,250);   -- Mercurial Pole (25.0%)
 INSERT INTO `mob_droplist` VALUES (1410,0,0,1000,1816,80);     -- Wyrm Horn (8.0%)
 INSERT INTO `mob_droplist` VALUES (1410,0,0,1000,836,70);      -- Square Of Damascene Cloth (7.0%)

@@ -20,15 +20,15 @@ entity.onMobSpawn = function(mob)
     mob:addImmunity(xi.immunity.SILENCE)
     mob:addImmunity(xi.immunity.TERROR)
     mob:setMobMod(xi.mobMod.ADD_EFFECT, 1)
-    mob:setMod(xi.mod.UFASTCAST, 90)
-    mob:setMod(xi.mod.UDMGMAGIC, -5000)
-    mob:setMod(xi.mod.UDMGRANGE, -5000)
-    mob:setMod(xi.mod.UDMGBREATH, -5000)
+    mob:setMod(xi.mod.UFASTCAST, 50)
+    mob:setMod(xi.mod.UDMGMAGIC, -4000)
+    mob:setMod(xi.mod.UDMGRANGE, -4000)
+    mob:setMod(xi.mod.UDMGBREATH, -4000)
     mob:setMod(xi.mod.ATT, 398)
     mob:setMod(xi.mod.DEF, 475)
     mob:setMod(xi.mod.EVA, 434)
     mob:setMod(xi.mod.MATT, 0) -- Despite being /BLM it has 0 MATT
-    mob:setMod(xi.mod.REGEN, 22)
+    mob:setMod(xi.mod.REGEN, 20)
     mob:setMod(xi.mod.REFRESH, 200)
     mob:setMod(xi.mod.DARK_MEVA, 70)
     mob:setMobMod(xi.mobMod.MAGIC_COOL, 20)
@@ -78,8 +78,10 @@ end
 entity.onMobFight = function(mob, target)
     -- Wyrms automatically wake from sleep in the air
     if
-        hasSleepEffects(mob) and
-        mob:getAnimationSub() == 1
+    mob:getAnimationSub() == 1 and
+    (mob:hasStatusEffect(xi.effect.SLEEP_I) or
+    mob:hasStatusEffect(xi.effect.SLEEP_II) or
+    mob:hasStatusEffect(xi.effect.LULLABY))
     then
         mob:wakeUp()
     end
@@ -95,7 +97,7 @@ entity.onMobFight = function(mob, target)
         if -- If mob uses its 2hr
             mob:getAnimationSub() == 2 and
             os.time() > twohourTime and
-            mob:getHP() <= 85
+            mob:getHPP() <= 85
         then
             mob:useMobAbility(695)
             twohourTime = os.time() + 300

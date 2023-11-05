@@ -81,8 +81,10 @@ end
 entity.onMobFight = function(mob, target)
     -- Wyrms automatically wake from sleep in the air
     if
-        hasSleepEffects(mob) and
-        mob:getAnimationSub() == 1
+        mob:getAnimationSub() == 1 and
+        (mob:hasStatusEffect(xi.effect.SLEEP_I) or
+        mob:hasStatusEffect(xi.effect.SLEEP_II) or
+        mob:hasStatusEffect(xi.effect.LULLABY))
     then
         mob:wakeUp()
     end

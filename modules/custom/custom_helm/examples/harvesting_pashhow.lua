@@ -80,7 +80,7 @@ end)
 
 
 m:addOverride('xi.zones.Pashhow_Marshlands.Zone.onGameDay', function()
-    super()
+    super(onGameDay)
 
     local drops = xi.helm.helmInfo[xi.helm.type.HARVESTING].zone[xi.zone.PASHHOW_MARSHLANDS].drops
 
