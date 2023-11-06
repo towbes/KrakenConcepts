@@ -8,7 +8,7 @@ mobskillObject.onMobSkillCheck = function(target, mob, skill)
 end
 
 mobskillObject.onMobWeaponSkill = function(target, mob, skill)
-    local dmgmod = 3
+    local dmgmod = 6
     local power    = 33
     local duration = 120
     local info = xi.mobskills.mobMagicalMove(mob, target, skill, mob:getWeaponDmg(), xi.element.EARTH, dmgmod, xi.mobskills.magicalTpBonus.NO_EFFECT, 1)

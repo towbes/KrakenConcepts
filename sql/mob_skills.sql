@@ -2978,7 +2978,7 @@ INSERT INTO `mob_skills` VALUES (2960,2183,'viscid_spindrift',1,18.0,2000,2000,4
 INSERT INTO `mob_skills` VALUES (2961,2184,'riptide_eupnea',1,18.0,2000,2000,4,0,0,0,0,0,0);
 INSERT INTO `mob_skills` VALUES (2962,2121,'matamata_auto_01',0,7.0,2000,0,4,4,0,0,0,0,0); -- Matamata Auto Attacks
 INSERT INTO `mob_skills` VALUES (2963,2122,'matamata_auto_02',4,7.0,2000,0,4,4,0,0,0,0,0);
-INSERT INTO `mob_skills` VALUES (2964,2123,'matamata_auto_03',1,10.0,2000,0,4,4,0,2,0,0,0);
+INSERT INTO `mob_skills` VALUES (2964,2123,'matamata_auto_03',1,7.0,2000,0,4,4,0,2,0,0,0);
 INSERT INTO `mob_skills` VALUES (2965,2124,'cranial_thrust',4,18.0,2000,2000,4,0,0,0,0,0,0);
 INSERT INTO `mob_skills` VALUES (2966,2125,'tail_thwack',1,18.0,2000,2000,4,0,0,2,0,0,0);
 INSERT INTO `mob_skills` VALUES (2967,2126,'embalming_earth',1,18.0,2000,2000,4,0,0,0,0,0,0);
