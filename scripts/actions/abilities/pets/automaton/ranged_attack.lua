@@ -38,7 +38,7 @@ abilityObject.onAutomatonAbility = function(target, automaton, skill, master, ac
         end
     end
 
-    local damage = doAutoRangedWeaponskill(automaton, target, 0, params, 1000, true, skill, action)
+    local damage = xi.autows.doAutoRangedWeaponskill(automaton, target, 0, params, 1000, true, skill, action)
 
     return damage
 end

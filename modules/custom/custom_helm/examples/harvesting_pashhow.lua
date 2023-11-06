@@ -74,12 +74,13 @@ m:addOverride('xi.zones.Pashhow_Marshlands.Zone.onZoneWeatherChange', function(w
     if weatherType == xi.weather.RAIN or weatherType == xi.weather.SQUALL then
         table.insert(drops, { customHelm.rate.RARE,      xi.item.RUSTY_PICK,                 'a rusty pick'                 }) ---Rusty Pick         (5%)
         table.insert(drops, { customHelm.rate.VERY_RARE, xi.item.BROKEN_HALCYON_FISHING_ROD, 'a broken halcyon fishing rod' }) -- Broken Halcyon Rod (1%)
+        table.insert(drops, { customHelm.rate.VERY_RARE, xi.item.BROKEN_HUME_FISHING_ROD, 'a broken halcyon fishing rod'    }) -- Broken Halcyon Rod (1%)
     end
 end)
 
 
 m:addOverride('xi.zones.Pashhow_Marshlands.Zone.onGameDay', function()
-    super()
+    super(onGameDay)
 
     local drops = xi.helm.helmInfo[xi.helm.type.HARVESTING].zone[xi.zone.PASHHOW_MARSHLANDS].drops
 
