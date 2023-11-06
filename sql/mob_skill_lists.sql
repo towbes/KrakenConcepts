@@ -4301,6 +4301,26 @@ INSERT INTO `mob_skill_lists` VALUES ('Jaded_Jody',5395,320);  -- Sweet Breath
 
 INSERT INTO `mob_skill_lists` VALUES ('AnimatedWeapon-Shield',5396,1461);
 
+INSERT INTO `mob_skill_lists` VALUES ('Craklaw_Auto_Attacks',5397,2954);
+INSERT INTO `mob_skill_lists` VALUES ('Craklaw_Auto_Attacks',5397,2955);
+INSERT INTO `mob_skill_lists` VALUES ('Craklaw_Auto_Attacks',5397,2956);
+
+INSERT INTO `mob_skill_lists` VALUES ('Craklaw_Mobskills',5398,2957);
+INSERT INTO `mob_skill_lists` VALUES ('Craklaw_Mobskills',5398,2958);
+INSERT INTO `mob_skill_lists` VALUES ('Craklaw_Mobskills',5398,2959);
+INSERT INTO `mob_skill_lists` VALUES ('Craklaw_Mobskills',5398,2960);
+INSERT INTO `mob_skill_lists` VALUES ('Craklaw_Mobskills',5398,2961);
+
+INSERT INTO `mob_skill_lists` VALUES ('Matamata_Auto_Attacks',5399,2962);
+INSERT INTO `mob_skill_lists` VALUES ('Matamata_Auto_Attacks',5399,2963);
+INSERT INTO `mob_skill_lists` VALUES ('Matamata_Auto_Attacks',5399,2964);
+
+INSERT INTO `mob_skill_lists` VALUES ('Matamata_Mobskills',5400,2965);
+INSERT INTO `mob_skill_lists` VALUES ('Matamata_Mobskills',5400,2966);
+INSERT INTO `mob_skill_lists` VALUES ('Matamata_Mobskills',5400,2967);
+INSERT INTO `mob_skill_lists` VALUES ('Matamata_Mobskills',5400,2968);
+INSERT INTO `mob_skill_lists` VALUES ('Matamata_Mobskills',5400,2969);
+
 -- ------------------------------------------------------------
 -- Start of Ambuscade section
 -- NOTE: The mobs are changed every update in the DATs, so using out-of-date

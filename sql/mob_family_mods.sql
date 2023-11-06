@@ -977,7 +977,14 @@ INSERT INTO `mob_family_mods` VALUES (495,56,-1,1); -- HP_STANDBACK: -1
 INSERT INTO `mob_family_mods` VALUES (512,1,-10,0); -- DEF: -10
 INSERT INTO `mob_family_mods` VALUES (512,29,-1,0); -- MDEF: -10
 
+-- Pixie (Player Friendly)
 INSERT INTO `mob_family_mods` VALUES (195,201,1,1); -- I am a Pixie
+
+-- Craklaw
+-- INSERT INTO `mob_family_mods` VALUES (344,63,5397,1); -- Skill Attacks
+
+-- Matamata
+-- INSERT INTO `mob_family_mods` VALUES (275,63,5397,1); -- Skill Attacks
 
 /*!40000 ALTER TABLE `mob_family_mods` ENABLE KEYS */;
 UNLOCK TABLES;
