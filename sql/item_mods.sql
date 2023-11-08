@@ -40156,6 +40156,9 @@ INSERT INTO `item_mods` VALUES (19107,68,4); -- EVA: 4
 -- Zareehkl Jambiya
 INSERT INTO `item_mods` VALUES (19108,68,5); -- EVA: 5
 
+-- Trilling Dagger
+INSERT INTO `item_mods` VALUES (19109,353,2);  -- LIGHT_AFFINITY_DMG: 2 (+10%)
+
 -- Silktone
 INSERT INTO `item_mods` VALUES (19111,14,4);  -- CHR: 4
 INSERT INTO `item_mods` VALUES (19111,119,2); -- SINGING: 2
