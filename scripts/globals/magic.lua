@@ -897,14 +897,14 @@ function addBonuses(caster, spell, target, dmg, params)
     local spellId = spell:getID()
 
     if spellId >= 245 and spellId <= 248 then -- Drain/Aspir (II)
-        mabbonus = 1 + caster:getMod(xi.mod.ENH_DRAIN_ASPIR) / 100
+        mabbonus = 1 + (caster:getMod(xi.mod.ENH_DRAIN_ASPIR) / 100)
 
         if spellId == 247 or spellId == 248 then
-            mabbonus = mabbonus + caster:getMerit(xi.merit.ASPIR_ABSORPTION_AMOUNT) + caster:getMod(xi.mod.ENH_ASPIR) / 100
+            mabbonus = mabbonus + caster:getMerit(xi.merit.ASPIR_ABSORPTION_AMOUNT) + (caster:getMod(xi.mod.ENH_ASPIR) / 100)
         end
 
         if spellId == 245 or spellId == 246 then
-            mabbonus = mabbonus + caster:getMod(xi.mod.ENH_DRAIN) / 100
+            mabbonus = mabbonus + (caster:getMod(xi.mod.ENH_DRAIN) / 100)
         end
     else
         local mab = caster:getMod(xi.mod.MATT) + params.bonusmab
