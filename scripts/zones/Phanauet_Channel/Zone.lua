@@ -36,7 +36,7 @@ end
 
 zoneObject.onGameHour = function(zone)
     local vHour = VanadielHour()
-    local death = GetServerVariable("\\[SPAWN\\]16781327")
+    local death = GetServerVariable('\\[SPAWN\\]16781327')
     if vHour == 11 and os.time() > death then
         GetMobByID(ID.mob.STUBBORN_DREDVODD):setRespawnTime(30)
     end
