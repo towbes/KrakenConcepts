@@ -2964,10 +2964,10 @@ INSERT INTO `mob_skills` VALUES (2946,2168,'sensilla_blades',1,18.0,2000,1000,4,
 INSERT INTO `mob_skills` VALUES (2947,2169,'tegmina_buffet',1,18.0,2000,1000,4,0,0,0,0,0,0);
 INSERT INTO `mob_skills` VALUES (2948,2170,'sanguinary_slash',1,18.0,2000,1000,4,0,0,1,0,0,0);
 INSERT INTO `mob_skills` VALUES (2949,2171,'orthopterror',1,18.0,2000,1000,4,0,0,0,0,0,0);
-INSERT INTO `mob_skills` VALUES (2950,2129,'tempestuous_upheaval',1,18.0,2000,1000,4,0,0,0,0,0,0);
-INSERT INTO `mob_skills` VALUES (2951,2130,'slice_n_dice',0,25.0,2000,1000,4,0,0,0,0,0,0);
-INSERT INTO `mob_skills` VALUES (2952,2131,'blackout',1,18.0,2000,1000,4,0,0,0,0,0,0);
--- INSERT INTO `mob_skills` VALUES (2953,2132,'smouldering_swarm',0,7.0,2000,1500,4,0,0,0,0,0,0);
+INSERT INTO `mob_skills` VALUES (2950,2129,'tempestuous_upheaval',1,18.0,2000,2000,4,0,0,4,0,0,0);
+INSERT INTO `mob_skills` VALUES (2951,2130,'slice_n_dice',0,25.0,2000,2000,4,0,0,0,0,0,0);
+INSERT INTO `mob_skills` VALUES (2952,2131,'blackout',1,18.0,2000,3000,4,0,0,0,0,0,0);
+INSERT INTO `mob_skills` VALUES (2953,2132,'smouldering_swarm',1,18.0,2000,2000,4,0,0,4,0,0,0);
 INSERT INTO `mob_skills` VALUES (2954,2177,'craklaw_auto_01',0,7.0,2000,0,4,4,0,0,0,0,0); -- Crakclaw Auto Attacks
 INSERT INTO `mob_skills` VALUES (2955,2178,'craklaw_auto_02',4,7.0,2000,0,4,4,0,0,0,0,0);
 INSERT INTO `mob_skills` VALUES (2956,2179,'craklaw_auto_03',1,7.0,2000,0,4,4,0,0,0,0,0);

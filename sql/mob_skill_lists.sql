@@ -1537,6 +1537,7 @@ INSERT INTO `mob_skill_lists` VALUES ('QuadavNM',337,762);
 INSERT INTO `mob_skill_lists` VALUES ('Twitherym',338,2950);
 INSERT INTO `mob_skill_lists` VALUES ('Twitherym',338,2951);
 INSERT INTO `mob_skill_lists` VALUES ('Twitherym',338,2952);
+INSERT INTO `mob_skill_lists` VALUES ('Twitherym',338,2953); -- Smouldering_Swarm
 INSERT INTO `mob_skill_lists` VALUES ('Chapuli',339,2945);
 INSERT INTO `mob_skill_lists` VALUES ('Chapuli',339,2946);
 INSERT INTO `mob_skill_lists` VALUES ('Chapuli',339,2947);
