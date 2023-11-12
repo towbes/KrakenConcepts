@@ -18,6 +18,12 @@ spellObject.onSpellCast = function(caster, target, spell)
     local final = 0
 
     local minCure = 600
+
+    if target:hasStatusEffect(xi.effect.CURSE_II) then
+        spell:setMsg(xi.msg.basic.MAGIC_NO_EFFECT) -- no effect
+        return 1
+    end
+    
     power = getCurePower(caster)
     if power < 210 then
         divisor = 1.5

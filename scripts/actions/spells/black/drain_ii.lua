@@ -59,8 +59,14 @@ spellObject.onSpellCast = function(caster, target, spell)
         caster:addStatusEffect(xi.effect.MAX_HP_BOOST, (leftOver / caster:getMaxHP()) * 100, 0, 180)
     end
 
-    caster:addHP(dmg)
-    spell:setMsg(xi.msg.basic.MAGIC_DRAIN_HP) --change msg to 'xxx hp drained from the yyyy.'
+    if caster:hasStatusEffect(xi.effect.CURSE_II) then
+        caster:addHP(0)
+        spell:setMsg(xi.msg.basic.MAGIC_DMG)
+    else
+        caster:addHP(dmg)
+        spell:setMsg(xi.msg.basic.MAGIC_DRAIN_HP) --change msg to 'xxx hp drained from the yyyy.'
+    end
+    
     return dmg
 end
 

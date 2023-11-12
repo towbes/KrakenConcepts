@@ -9,6 +9,10 @@ spellObject.onMagicCastingCheck = function(caster, target, spell)
 end
 
 spellObject.onSpellCast = function(caster, target, spell)
+    if caster:hasStatusEffect(xi.effect.CURSE_II) then
+        spell:setMsg(xi.msg.basic.MAGIC_NO_EFFECT) -- no effect
+        return 1
+    end
     local dmg = 10 + 0.575 * caster:getSkillLevel(xi.skill.DARK_MAGIC)
     --get resist multiplier (1x if no resist)
     local params = {}

@@ -430,8 +430,11 @@ xi.job_utils.dragoon.useSpiritLink = function(player, target, ability)
     if player:getEquipID(xi.slot.HEAD) == xi.item.DRACHEN_ARMET_P1 then
         healPet = healPet + 15
     end
-
-    return wyvern:addHP(healPet) -- add the hp to wyvern
+    if target:hasStatusEffect(xi.effect.CURSE_II) then
+        target:messageBasic(xi.msg.basic.NO_EFFECT)
+    else
+        return wyvern:addHP(healPet) -- add the hp to wyvern
+    end
 end
 
 xi.job_utils.dragoon.useHighJump = function(player, target, ability, action)
@@ -624,6 +627,10 @@ end
 
 -- Breath Formula: https://www.bg-wiki.com/ffxi/Wyvern_(Dragoon_Pet)#Healing_Breath
 xi.job_utils.dragoon.useHealingBreath = function(wyvern, target, skill, action)
+    if target:hasStatusEffect(xi.effect.CURSE_II) then
+        skill:setMsg(xi.msg.basic.NO_EFFECT) -- no effect
+        return 1
+    end
     local healingBreathTable =
     {
         --                                   { base, multiplier }

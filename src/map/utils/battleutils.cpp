@@ -894,7 +894,7 @@ namespace battleutils
                         break;
 
                     case SPIKE_DREAD:
-                        if (PAttacker->m_EcoSystem == ECOSYSTEM::UNDEAD)
+                        if (PAttacker->m_EcoSystem == ECOSYSTEM::UNDEAD || PDefender->StatusEffectContainer->HasStatusEffect(EFFECT_CURSE_II))
                         {
                             // is undead no effect
                             Action->spikesEffect = (SUBEFFECT)0;
@@ -1158,12 +1158,12 @@ namespace battleutils
         EFFECT previous_daze       = EFFECT_NONE;
         uint16 previous_daze_power = 0;
 
-        if (PAttacker->StatusEffectContainer->HasStatusEffect(EFFECT_DRAIN_SAMBA) && PDefender->m_EcoSystem != ECOSYSTEM::UNDEAD)
+        if (PAttacker->StatusEffectContainer->HasStatusEffect(EFFECT_DRAIN_SAMBA) && PDefender->m_EcoSystem != ECOSYSTEM::UNDEAD && !PAttacker->StatusEffectContainer->HasStatusEffect(EFFECT_CURSE_II))
         {
             previous_daze       = EFFECT_DRAIN_DAZE;
             previous_daze_power = PAttacker->StatusEffectContainer->GetStatusEffect(EFFECT_DRAIN_SAMBA)->GetPower();
         }
-        else if (PAttacker->StatusEffectContainer->HasStatusEffect(EFFECT_ASPIR_SAMBA))
+        else if (PAttacker->StatusEffectContainer->HasStatusEffect(EFFECT_ASPIR_SAMBA) && PDefender->m_EcoSystem != ECOSYSTEM::UNDEAD && !PAttacker->StatusEffectContainer->HasStatusEffect(EFFECT_CURSE_II))
         {
             previous_daze       = EFFECT_ASPIR_DAZE;
             previous_daze_power = PAttacker->StatusEffectContainer->GetStatusEffect(EFFECT_ASPIR_SAMBA)->GetPower();
@@ -1469,7 +1469,14 @@ namespace battleutils
                     Action->addEffectMessage = 161;
                     Action->addEffectParam   = Samba;
 
-                    PAttacker->addHP(Samba); // does not do any additional drain to targets HP, only a portion of it
+                    if (PAttacker->StatusEffectContainer->HasStatusEffect(EFFECT_CURSE_II))
+                    {
+                        PAttacker->addHP(0); // If attacker has Curse II, they can not recover HP.
+                    }
+                    else
+                    {
+                        PAttacker->addHP(Samba); // does not do any additional drain to targets HP, only a portion of it
+                    }
 
                     if (PChar != nullptr)
                     {
@@ -1501,7 +1508,14 @@ namespace battleutils
 
                     int16 mpDrained = PDefender->addMP(-Samba);
 
-                    PAttacker->addMP(mpDrained);
+                    if (PAttacker->StatusEffectContainer->HasStatusEffect(EFFECT_CURSE_II))
+                    {
+                        PAttacker->addMP(0); // If attacker has Curse II, they can not recover MP.
+                    }
+                    else
+                    {
+                        PAttacker->addMP(mpDrained);
+                    }
                     Action->addEffectParam = mpDrained;
 
                     if (PChar != nullptr)

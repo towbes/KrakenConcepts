@@ -8,6 +8,10 @@ abilityObject.onAbilityCheck = function(player, target, ability)
 end
 
 abilityObject.onPetAbility = function(target, pet, skill)
+    if target:hasStatusEffect(xi.effect.CURSE_II) then
+        skill:setMsg(xi.msg.basic.SKILL_NO_EFFECT) -- no effect
+        return 1
+    end
     local base = 28 + pet:getMainLvl() * 4
 
     if target:getHP() + base > target:getMaxHP() then

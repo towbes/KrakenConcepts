@@ -317,7 +317,7 @@ xi.spells.blue.useDrainSpell = function(caster, target, spell, params, softCap, 
     dmg = adjustForTarget(target, dmg, spell:getElement())
 
     -- limit damage
-    if target:isUndead() then
+    if target:isUndead() or attacker:hasStatusEffect(xi.effect.CURSE_II) then
         spell:setMsg(xi.msg.basic.MAGIC_NO_EFFECT)
     else
         -- only drain what the mob has
@@ -476,6 +476,10 @@ end
 
 -- Perform a curative Blue Magic spell
 xi.spells.blue.useCuringSpell = function(caster, target, spell, params)
+    if target:hasStatusEffect(xi.effect.CURSE_II) then
+        spell:setMsg(xi.msg.basic.MAGIC_NO_EFFECT) -- no effect
+        return 1
+    end
     local power = getCurePowerOld(caster)
     local divisor = params.divisor0
     local constant = params.constant0

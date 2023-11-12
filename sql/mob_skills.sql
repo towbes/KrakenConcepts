@@ -2984,10 +2984,10 @@ INSERT INTO `mob_skills` VALUES (2966,2125,'tail_thwack',1,18.0,2000,2000,4,0,0,
 INSERT INTO `mob_skills` VALUES (2967,2126,'embalming_earth',1,18.0,2000,2000,4,0,0,0,0,0,0);
 INSERT INTO `mob_skills` VALUES (2968,2127,'scalding_breath',4,18.0,2000,2000,4,0,0,2,0,0,0);
 INSERT INTO `mob_skills` VALUES (2969,2128,'debilitating_spout',4,18.0,2000,2000,4,0,0,0,0,0,0);
-INSERT INTO `mob_skills` VALUES (2970,137,'paralyzing_triad',0,7.0,2000,1000,4,0,0,0,0,0,0);
-INSERT INTO `mob_skills` VALUES (2971,138,'crepuscular_grasp',1,18.0,2000,1000,4,0,0,0,0,0,0);
-INSERT INTO `mob_skills` VALUES (2972,139,'necrotic_brume',4,15.0,2000,1000,4,0,0,0,0,0,0);
--- INSERT INTO `mob_skills` VALUES (2973,2717,'terminal_bloom',0,7.0,2000,1500,4,0,0,0,0,0,0);
+INSERT INTO `mob_skills` VALUES (2970,2185,'paralyzing_triad',4,7.0,2000,2000,4,0,0,0,0,0,0);
+INSERT INTO `mob_skills` VALUES (2971,2186,'crepuscular_grasp',1,18.0,2000,2000,4,0,0,0,0,0,0);
+INSERT INTO `mob_skills` VALUES (2972,2187,'necrotic_brume',1,15.0,2000,2000,4,0,0,0,0,0,0);
+INSERT INTO `mob_skills` VALUES (2973,2188,'terminal_bloom',1,7.0,2000,3000,4,0,0,0,0,0,0);
 INSERT INTO `mob_skills` VALUES (2974,141,'foul_waters',1,18.0,2000,1000,4,0,0,0,0,0,0);
 INSERT INTO `mob_skills` VALUES (2975,142,'pestilent_plume',1,18.0,2000,1000,4,0,0,0,0,0,0);
 INSERT INTO `mob_skills` VALUES (2976,143,'deadening_haze',1,18.0,2000,1000,4,0,0,0,0,0,0);

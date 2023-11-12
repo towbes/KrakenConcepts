@@ -8,6 +8,11 @@ abilityObject.onAbilityCheck = function(player, target, ability)
 end
 
 abilityObject.onPetAbility = function(target, pet, skill)
+    if target:hasStatusEffect(xi.effect.CURSE_II) then
+        skill:setMsg(xi.msg.basic.SKILL_NO_EFFECT) -- no effect
+        return 1
+    end
+    
     local base = 47 + pet:getMainLvl() * 3
     local tp   = pet:getTP()
 

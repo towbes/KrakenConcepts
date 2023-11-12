@@ -267,7 +267,7 @@ xi.additionalEffect.attack = function(attacker, defender, baseAttackDamage, item
         --------------------------------------
         -- Recovers user's HP
         --------------------------------------
-    elseif addType == procType.HP_HEAL then -- Its not a drain and works vs undead. https://www.bg-wiki.com/bg/Dominion_Mace
+    elseif addType == procType.HP_HEAL and not attacker:hasStatusEffect(xi.effect.CURSE_II) then -- Its not a drain and works vs undead. https://www.bg-wiki.com/bg/Dominion_Mace
         local hitPoints = damage -- Note: not actually damage, if you wanted damage see HP_DRAIN instead
         -- Unknown what modifies the HP, using power directly for now
         msgID = xi.msg.basic.ADD_EFFECT_HP_HEAL
@@ -277,7 +277,7 @@ xi.additionalEffect.attack = function(attacker, defender, baseAttackDamage, item
         --------------------------------------
         -- Recovers user's MP
         --------------------------------------
-    elseif addType == procType.MP_HEAL then -- Mjollnir does this, it is not Aspir.
+    elseif addType == procType.MP_HEAL and not attacker:hasStatusEffect(xi.effect.CURSE_II) then -- Mjollnir does this, it is not Aspir.
         local magicPoints = damage
         -- Unknown what modifies this, using power directly for now
         msgID = xi.msg.basic.ADD_EFFECT_MP_HEAL
@@ -287,7 +287,7 @@ xi.additionalEffect.attack = function(attacker, defender, baseAttackDamage, item
         --------------------------------------
         -- Drains HP from target
         --------------------------------------
-    elseif addType == procType.HP_DRAIN or (addType == procType.HPMPTP_DRAIN and math.random(1, 3) == 1) then
+    elseif (addType == procType.HP_DRAIN or (addType == procType.HPMPTP_DRAIN and math.random(1, 3) == 1)) and not attacker:hasStatusEffect(xi.effect.CURSE_II) then
         damage = xi.additionalEffect.calcDamage(attacker, element, defender, damage)
 
         -- Upyri: ID 4105
@@ -310,7 +310,7 @@ xi.additionalEffect.attack = function(attacker, defender, baseAttackDamage, item
         --------------------------------------
         -- Drains MP from target
         --------------------------------------
-    elseif addType == procType.MP_DRAIN or (addType == procType.HPMPTP_DRAIN and math.random(1, 3) == 2) then
+    elseif (addType == procType.MP_DRAIN or (addType == procType.HPMPTP_DRAIN and math.random(1, 3) == 2)) and not attacker:hasStatusEffect(xi.effect.CURSE_II) then
         damage = xi.additionalEffect.calcDamage(attacker, element, defender, damage)
 
         if damage > defender:getMP() then
@@ -441,7 +441,7 @@ xi.additionalEffect.attack = function(attacker, defender, baseAttackDamage, item
     elseif addType == procType.VS_FAMILY then
         if defender:getSuperFamily() == option then
             -- If Drain effect:
-            if subEffect == xi.subEffect.HP_DRAIN then
+            if subEffect == xi.subEffect.HP_DRAIN and not attacker:hasStatusEffect(xi.effect.CURSE_II) then
                 damage = xi.additionalEffect.calcDamage(attacker, element, defender, damage)
 
                 if damage > defender:getHP() then
@@ -543,7 +543,7 @@ xi.additionalEffect.attack = function(attacker, defender, baseAttackDamage, item
     elseif addType == procType.VS_ECOSYSTEM then
         if defender:getEcosystem() == option then
             -- If Drain effect:
-            if subEffect == xi.subEffect.HP_DRAIN then
+            if subEffect == xi.subEffect.HP_DRAIN and not attacker:hasStatusEffect(xi.effect.CURSE_II) then
                 damage = xi.additionalEffect.calcDamage(attacker, element, defender, damage)
 
                 if damage > defender:getHP() then

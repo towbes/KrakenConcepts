@@ -53,7 +53,14 @@ spellObject.onSpellCast = function(caster, target, spell)
 
     dmg = finalMagicAdjustments(caster, target, spell, dmg)
 
-    caster:addHP(dmg)
+    if caster:hasStatusEffect(xi.effect.CURSE_II) then
+        caster:addHP(0)
+        spell:setMsg(xi.msg.basic.MAGIC_DMG)
+    else
+        caster:addHP(dmg)
+        spell:setMsg(xi.msg.basic.MAGIC_DRAIN_HP) --change msg to 'xxx hp drained from the yyyy.'
+    end
+    
     return dmg
 end
 
