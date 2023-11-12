@@ -960,6 +960,9 @@ INSERT INTO `mob_family_mods` VALUES (404,36,35,1); -- ROAM_COOL: 35
 INSERT INTO `mob_family_mods` VALUES (404,51,3,1);  -- ROAM_TURNS: 3
 INSERT INTO `mob_family_mods` VALUES (404,52,30,1); -- ROAM_RATE: 30
 
+-- Umbril
+INSERT INTO `mob_family_mods` VALUES (468,3,50,1); -- MP_BASE: 50
+
 -- Lamiae-Medusa
 INSERT INTO `mob_family_mods` VALUES (469,10,10,1); -- SUBLINK: 10
 
