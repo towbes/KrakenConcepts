@@ -317,7 +317,7 @@ xi.spells.blue.useDrainSpell = function(caster, target, spell, params, softCap, 
     dmg = adjustForTarget(target, dmg, spell:getElement())
 
     -- limit damage
-    if target:isUndead() or attacker:hasStatusEffect(xi.effect.CURSE_II) then
+    if target:isUndead() or caster:hasStatusEffect(xi.effect.CURSE_II) then
         spell:setMsg(xi.msg.basic.MAGIC_NO_EFFECT)
     else
         -- only drain what the mob has
