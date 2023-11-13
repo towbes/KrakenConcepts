@@ -2988,10 +2988,10 @@ INSERT INTO `mob_skills` VALUES (2970,2185,'paralyzing_triad',4,7.0,2000,2000,4,
 INSERT INTO `mob_skills` VALUES (2971,2186,'crepuscular_grasp',1,18.0,2000,2000,4,0,0,0,0,0,0);
 INSERT INTO `mob_skills` VALUES (2972,2187,'necrotic_brume',1,15.0,2000,2000,4,0,0,0,0,0,0);
 INSERT INTO `mob_skills` VALUES (2973,2188,'terminal_bloom',1,7.0,2000,3000,4,0,0,0,0,0,0);
-INSERT INTO `mob_skills` VALUES (2974,141,'foul_waters',1,18.0,2000,1000,4,0,0,0,0,0,0);
-INSERT INTO `mob_skills` VALUES (2975,142,'pestilent_plume',1,18.0,2000,1000,4,0,0,0,0,0,0);
-INSERT INTO `mob_skills` VALUES (2976,143,'deadening_haze',1,18.0,2000,1000,4,0,0,0,0,0,0);
--- INSERT INTO `mob_skills` VALUES (2977,2721,'venomous_vapor',0,7.0,2000,1500,4,0,0,0,0,0,0);
+INSERT INTO `mob_skills` VALUES (2974,2189,'foul_waters',4,18.0,2000,2000,4,0,0,0,0,0,0);
+INSERT INTO `mob_skills` VALUES (2975,2190,'pestilent_plume',4,18.0,2000,2000,4,0,0,0,0,0,0);
+INSERT INTO `mob_skills` VALUES (2976,2191,'deadening_haze',1,18.0,2000,2000,4,0,0,0,0,0,0);
+INSERT INTO `mob_skills` VALUES (2977,2192,'venomous_vapor',1,18.0,2000,3000,4,0,0,0,0,0,0);
 INSERT INTO `mob_skills` VALUES (2978,2162,'consecration',1,18.0,2000,1000,4,0,0,0,0,0,0);
 INSERT INTO `mob_skills` VALUES (2979,2163,'sacred_caper',1,18.0,2000,1000,4,0,0,0,0,0,0);
 INSERT INTO `mob_skills` VALUES (2980,2164,'phototrophic_blessing',0,7.0,2000,1000,1,0,0,0,0,0,0);
