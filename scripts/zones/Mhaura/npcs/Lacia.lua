@@ -22,8 +22,10 @@ entity.onTrigger = function(player, npc)
     local trialSizeLightning = player:getQuestStatus(xi.quest.log_id.OTHER_AREAS, xi.quest.id.otherAreas.TRIAL_SIZE_TRIAL_BY_LIGHTNING)
 
     if
-        player:getMainLvl() >= 20 and
-        player:getMainJob() == xi.job.SMN and
+        ((player:getMainLvl() >= 20 and
+        player:getMainJob() == xi.job.SMN) or
+        (player:getSubLvl() >= 20 and
+        player:getSubJob() == xi.job.SMN)) and
         trialSizeLightning == QUEST_AVAILABLE and
         player:getFameLevel(xi.quest.fame_area.WINDURST) >= 2
     then

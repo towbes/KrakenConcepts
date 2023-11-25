@@ -21,8 +21,10 @@ quest.sections =
     {
         check = function(player, status, vars)
             return status == QUEST_AVAILABLE and
-                player:getMainLvl() >= 20 and
-                player:getMainJob() == xi.job.SMN and
+            ((player:getMainLvl() >= 20 and
+            player:getMainJob() == xi.job.SMN) or
+            (player:getSubLvl() >= 20 and
+            player:getSubJob() == xi.job.SMN)) and
                 player:getFameLevel(xi.quest.fame_area.BASTOK) >= 2
         end,
 
