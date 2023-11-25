@@ -561,7 +561,7 @@ enum EFFECT
     EFFECT_ASYLUM                = 492,
     EFFECT_SUBTLE_SORCERY        = 493,
     EFFECT_STYMIE                = 494,
-    // EFFECT_NONE                     = 495,
+    EFFECT_HYSTERIA              = 495,
     EFFECT_INTERVENE        = 496,
     EFFECT_SOUL_ENSLAVEMENT = 497,
     EFFECT_UNLEASH          = 498,

@@ -26,7 +26,19 @@ entity.onMobSpawn = function(mob)
         {
             { id = xi.jsa.ASTRAL_FLOW, cooldown = 300, hpp = 50,
             begCode = function(mob)
-                avatar:useMobAbility(919)
+                if avatar:getModelId() == 19 then
+                    avatar:useMobAbility(857) -- Titan
+                elseif avatar:getModelId() == 18 then
+                    avatar:useMobAbility(848) -- Ifrit
+                elseif avatar:getModelId() == 20 then
+                    avatar:useMobAbility(866) -- Leviathan
+                elseif avatar:getModelId() == 23 then
+                    avatar:useMobAbility(893) -- Ramuh
+                elseif avatar:getModelId() == 21 then
+                    avatar:useMobAbility(875) -- Garuda
+                elseif avatar:getModelId() == 22 then
+                    avatar:useMobAbility(884) -- Shiva
+                end
             end, },
             { id = xi.jsa.PERFECT_DODGE, cooldown = 120, hpp = 100 },
         },

@@ -992,6 +992,7 @@ xi.chocoboDig.start = function(player, precheck)
 
         -- dig chance failure
         if roll > xi.settings.main.DIGGING_RATE then
+            printf('INFO: player [%s] [%i] Dug and found nothing.', player:getName(), player:getZoneID()) -- Adding this print to find a nil error in logs.
             player:messageText(player, text.FIND_NOTHING)
 
         -- dig chance success

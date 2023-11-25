@@ -24,7 +24,8 @@ itemObject.onItemUse = function(target)
 
     if roll >= 0 and roll <= 79 then
         quantity = 12
-        lottery_items = {
+        lottery_items = 
+        {
             -- Smithing --
             {20, 648},  -- Copper Ingot
             {15, 651},  -- Iron Ingot
@@ -76,7 +77,8 @@ itemObject.onItemUse = function(target)
         }
     elseif roll >= 80 and roll <= 94 then
         quantity = 2
-        lottery_items = {
+        lottery_items = 
+        {
             {20, 1464}, -- Lancewood Log
             {20, 1466}, -- Relic Iron
             {20, 1469}, -- Wootz Ore
@@ -97,7 +99,8 @@ itemObject.onItemUse = function(target)
         }
     elseif roll >= 95 and roll <= 100 then
         quantity = 1
-        lottery_items = {
+        lottery_items = 
+        {
             {10, 655}, -- Damascus Ingot
             {10, 658}, -- Adaman Ingot 
             {10, 836}, -- Damascene Cloth 
@@ -111,7 +114,7 @@ itemObject.onItemUse = function(target)
         }
     end
 
-    npcUtil.giveItem(target, { {xi.item_utils.pickItemRandom(target, lottery_items), quantity } })
+    npcUtil.giveItem(target, { {xi.itemUtils.pickItemRandom(target, lottery_items), quantity } })
 end
 
 return itemObject
