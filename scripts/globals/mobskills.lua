@@ -477,7 +477,6 @@ xi.mobskills.mobMagicalMove = function(mob, target, skill, damage, element, dmgm
         ignoreresist = false
     end
 
-    local ignoreres = ignoreresist or false
 
     local mdefBarBonus = 0
     if
@@ -518,7 +517,9 @@ xi.mobskills.mobMagicalMove = function(mob, target, skill, damage, element, dmgm
     local resist       = xi.mobskills.applyPlayerResistance(mob, nil, target, mob:getStat(xi.mod.INT)-target:getStat(xi.mod.INT), avatarAccBonus, element)
     local magicDefense = getElementalDamageReduction(target, element)
 
-    if not ignoreres then
+    if ignoreresist == true then
+        finaldmg = finaldmg
+    else
         finaldmg = finaldmg * resist * magicDefense
     end
 
@@ -534,8 +535,6 @@ xi.mobskills.mobMagicalMove = function(mob, target, skill, damage, element, dmgm
         end
     end
 
-
-    finaldmg       = finaldmg * resist * magicDefense
     returninfo.dmg = finaldmg
 
     return returninfo
@@ -567,9 +566,18 @@ xi.mobskills.applyPlayerResistance = function(mob, effect, target, diff, bonus, 
     return getMagicResist(p)
 end
 
-xi.mobskills.mobAddBonuses = function(caster, target, dmg, ele) -- used for SMN magical bloodpacts, despite the name.
+xi.mobskills.mobAddBonuses = function(caster, target, dmg, ele, ignoreresist) -- used for SMN magical bloodpacts, despite the name.
+    if ignoreresist == 0 then
+        ignoreresist = false
+    end
+
     local magicDefense = getElementalDamageReduction(target, ele)
-    dmg = math.floor(dmg * magicDefense)
+
+    if ignoreresist == true then
+        dmg = math.floor(dmg)
+    else
+        dmg = math.floor(dmg * magicDefense)
+    end
 
     local dayWeatherBonus = 1.00
 

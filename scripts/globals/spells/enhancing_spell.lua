@@ -229,15 +229,25 @@ xi.spells.enhancing.calculateEnhancingBasePower = function(caster, target, spell
             basePower = math.max(math.floor(math.sqrt(skillLevel)) - 1, 0)
         end
 
-    if
-        (spellEffect >= xi.effect.ENFIRE_II and spellEffect <= xi.effect.ENWATER_II)
-    then
-        if target:hasStatusEffect(xi.effect.COMPOSURE) then
-            basePower = basePower * 1.50
-        else
-            basePower = basePower * 1.25
+        if
+            (spellEffect >= xi.effect.ENFIRE_II and spellEffect <= xi.effect.ENWATER_II)
+        then
+            if target:hasStatusEffect(xi.effect.COMPOSURE) then
+                basePower = basePower * 1.50
+            else
+                basePower = basePower * 1.25
+            end
         end
-    end
+
+        if
+            caster:getAllegiance() == 2 or
+            caster:getAllegiance() == 3 or
+            caster:getAllegiance() == 4 or
+            caster:getAllegiance() == 5 or
+            caster:getAllegiance() == 6
+        then
+            basePower = basePower * 0.50
+        end
           
     -- Phalanx
     elseif spellEffect == xi.effect.PHALANX then

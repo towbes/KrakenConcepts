@@ -2022,13 +2022,20 @@ void CCharEntity::OnRaise()
             {
                 weaknessTime = 180;
             }
-
-            CStatusEffect* PWeaknessEffect = new CStatusEffect(EFFECT_WEAKNESS, EFFECT_WEAKNESS, m_weaknessLvl, 0, weaknessTime);
-            StatusEffectContainer->AddStatusEffect(PWeaknessEffect);
+            if (GetLocalVar("PVPMODE") > 0)
+            {
+                // Do not give weakness to players who die in PVP
+            }
+            else
+            {
+                CStatusEffect* PWeaknessEffect = new CStatusEffect(EFFECT_WEAKNESS, EFFECT_WEAKNESS, m_weaknessLvl, 0, weaknessTime);
+                StatusEffectContainer->AddStatusEffect(PWeaknessEffect);
+            }
         }
 
         double ratioReturned = 0.0f;
         uint16 hpReturned    = 1;
+        uint16 mpReturned    = 0;
 
         action_t action;
         action.id          = id;
@@ -2042,6 +2049,12 @@ void CCharEntity::OnRaise()
         {
             actionTarget.animation = 511;
             hpReturned             = (uint16)(GetMaxHP());
+        }
+        else if (GetLocalVar("PVPMODE") != 0)
+        {
+            actionTarget.animation = 496;
+            hpReturned             = (uint16)(GetMaxHP());
+            mpReturned             = (uint16)(GetMaxMP());
         }
         else if (m_hasRaise == 1)
         {
@@ -2069,6 +2082,7 @@ void CCharEntity::OnRaise()
         }
 
         addHP(((hpReturned < 1) ? 1 : hpReturned));
+        addMP(mpReturned);
         updatemask |= UPDATE_HP;
         actionTarget.speceffect = SPECEFFECT::RAISE;
 
@@ -2093,6 +2107,7 @@ void CCharEntity::OnRaise()
         }
 
         SetLocalVar("MijinGakure", 0);
+        SetLocalVar("PVPMODE", 0);
         m_hasArise = false;
         m_hasRaise = 0;
     }

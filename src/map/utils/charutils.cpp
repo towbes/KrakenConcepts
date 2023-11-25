@@ -4723,6 +4723,12 @@ namespace charutils
             return;
         }
 
+        // Do lose EXP in PvP
+        if (PChar->GetLocalVar("PVPMODE") > 0)
+        {
+            return;
+        }
+
         uint8  mLevel  = (PChar->m_LevelRestriction != 0 && PChar->m_LevelRestriction < PChar->GetMLevel()) ? PChar->m_LevelRestriction : PChar->GetMLevel();
         uint16 exploss = mLevel <= 67 ? (GetExpNEXTLevel(mLevel) * 8) / 100 : 2400;
 
