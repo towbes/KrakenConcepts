@@ -6,7 +6,7 @@ local entity = {}
 
 entity.onMobInitialize = function(mob)
     mob:setMobMod(xi.mobMod.ADD_EFFECT, 1)
-    mob:setMod(xi.mod.MOVE, 12)
+    mob:setSpeed((50 + xi.settings.map.MOB_SPEED_MOD) + 12)
 end
 
 entity.onAdditionalEffect = function(mob, target, damage)
