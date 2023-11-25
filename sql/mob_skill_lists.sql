@@ -1548,7 +1548,7 @@ INSERT INTO `mob_skill_lists` VALUES ('Mantis',340,2752);
 INSERT INTO `mob_skill_lists` VALUES ('Mantis',340,2753);
 INSERT INTO `mob_skill_lists` VALUES ('Mantis',340,2754);
 INSERT INTO `mob_skill_lists` VALUES ('Mantis',340,2755);
-INSERT INTO `mob_skill_lists` VALUES ('Mantis',340,2756);
+-- INSERT INTO `mob_skill_lists` VALUES ('Mantis',340,2756); -- NM ONLY
 -- 341: Numbing_Blossom
 INSERT INTO `mob_skill_lists` VALUES ('Velkk',342,2988);
 INSERT INTO `mob_skill_lists` VALUES ('Velkk',342,2989);
@@ -4321,6 +4321,10 @@ INSERT INTO `mob_skill_lists` VALUES ('Matamata_Mobskills',5400,2966);
 INSERT INTO `mob_skill_lists` VALUES ('Matamata_Mobskills',5400,2967);
 INSERT INTO `mob_skill_lists` VALUES ('Matamata_Mobskills',5400,2968);
 INSERT INTO `mob_skill_lists` VALUES ('Matamata_Mobskills',5400,2969);
+
+INSERT INTO `mob_skill_lists` VALUES ('Mantid_Auto_Attacks',5401,2748);
+INSERT INTO `mob_skill_lists` VALUES ('Mantid_Auto_Attacks',5401,2749);
+INSERT INTO `mob_skill_lists` VALUES ('Mantid_Auto_Attacks',5401,2750);
 
 -- ------------------------------------------------------------
 -- Start of Ambuscade section
