@@ -23,7 +23,7 @@ local drawInPos =
 
 entity.onMobInitialize = function(mob)
     mob:addListener('EFFECT_LOSE', 'KHIMAIRA_EFFECT_LOSE', function(owner, effect)
-        local effectType = effect:getTypeMask()
+        local effectType = effect:getEffectType()
         if effectType == xi.effect.STUN then
             owner:addMod(xi.mod.STUNRES, 5)
         end
