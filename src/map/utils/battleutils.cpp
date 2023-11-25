@@ -518,7 +518,15 @@ namespace battleutils
         // Tier 1 enspells have their damaged pre-calculated AT CAST TIME and is stored in Mod::ENSPELL_DMG
         if (Tier == 1)
         {
-            damage      = PAttacker->getMod(Mod::ENSPELL_DMG) + PAttacker->getMod(Mod::ENSPELL_DMG_BONUS);
+            if (PAttacker->StatusEffectContainer->HasStatusEffect(EFFECT_COMPOSURE))
+            {
+                damage = (PAttacker->getMod(Mod::ENSPELL_DMG) * 2) + PAttacker->getMod(Mod::ENSPELL_DMG_BONUS);
+            }
+            else
+            {
+                damage = (PAttacker->getMod(Mod::ENSPELL_DMG) + PAttacker->getMod(Mod::ENSPELL_DMG_BONUS));
+            }
+
             auto* PChar = dynamic_cast<CCharEntity*>(PAttacker);
             if (PChar)
             {
@@ -534,7 +542,15 @@ namespace battleutils
             {
                 cap = 5 + ((5 * skill) / 100);
             }
-            cap *= 2;
+
+            if (PAttacker->StatusEffectContainer->HasStatusEffect(EFFECT_COMPOSURE))
+            {
+                cap *= 3;
+            }
+            else
+            {
+                cap *= 2;
+            }
 
             if (PAttacker->getMod(Mod::ENSPELL_DMG) > cap)
             {
@@ -4670,12 +4686,12 @@ namespace battleutils
         */
 
         // only archery + marksmanship can use barrage
-        CItemWeapon* PItem = (CItemWeapon*)PChar->getEquip(SLOT_RANGED);
+        // CItemWeapon* PItem = (CItemWeapon*)PChar->getEquip(SLOT_RANGED);
 
-        if (PItem && PItem->getSkillType() != 25 && PItem->getSkillType() != 26)
-        {
-            return 0;
-        }
+        // if (PItem && PItem->getSkillType() != 25 && PItem->getSkillType() != 26)
+        // {
+        //     return 0;
+        // }
 
         uint8 lvl       = PChar->jobs.job[JOB_RNG]; // Get Ranger level of char
         uint8 shotCount = 0;                        // the total number of extra hits

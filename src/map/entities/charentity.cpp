@@ -1751,11 +1751,13 @@ void CCharEntity::OnRangedAttack(CRangeState& state, action_t& action)
     bool  isBarrage    = StatusEffectContainer->HasStatusEffect(EFFECT_BARRAGE, 0);
 
     // if barrage is detected, getBarrageShotCount also checks for ammo count
-    if (!ammoThrowing && !rangedThrowing && isBarrage)
+    // if (!ammoThrowing && !rangedThrowing && isBarrage)
+    if (!rangedThrowing && isBarrage)
     {
         hitCount += battleutils::getBarrageShotCount(this);
     }
-    else if (ammoThrowing && this->StatusEffectContainer->HasStatusEffect(EFFECT_SANGE))
+    // else if (ammoThrowing && this->StatusEffectContainer->HasStatusEffect(EFFECT_SANGE))
+    else if (!rangedThrowing && this->StatusEffectContainer->HasStatusEffect(EFFECT_SANGE))
     {
         isSange = true;
         hitCount += getMod(Mod::UTSUSEMI);
@@ -1934,7 +1936,7 @@ void CCharEntity::OnRangedAttack(CRangeState& state, action_t& action)
             ;
         }
 
-        StatusEffectContainer->DelStatusEffect(EFFECT_SANGE);
+        // StatusEffectContainer->DelStatusEffect(EFFECT_SANGE);
     }
     battleutils::ClaimMob(PTarget, this);
     battleutils::RemoveAmmo(this, ammoConsumed);

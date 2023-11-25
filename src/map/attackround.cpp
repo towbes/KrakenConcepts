@@ -446,10 +446,31 @@ void CAttackRound::CreateDakenAttack()
         auto* PAmmo = static_cast<CItemWeapon*>(m_attacker->m_Weapons[SLOT_AMMO]);
         if (PAmmo && PAmmo->isShuriken())
         {
+            // Check for ammo
+            CCharEntity*    PChar     = (CCharEntity*)m_attacker;
+            CItemEquipment* PAmmo     = PChar->getEquip(SLOT_AMMO);
+            uint8           slot      = PChar->equip[SLOT_AMMO];
+            uint8           loc       = PChar->equipLoc[SLOT_AMMO];
+            uint8           ammoCount = 0;
             uint16 daken = m_attacker->getMod(Mod::DAKEN);
             if (xirand::GetRandomNumber(100) < daken)
             {
                 AddAttackSwing(PHYSICAL_ATTACK_TYPE::DAKEN, RIGHTATTACK, 1);
+                if (m_attacker->StatusEffectContainer->HasStatusEffect(EFFECT_SANGE))
+                {
+                    ammoCount += 1;
+                    // Deduct ammo
+                    if (PAmmo != nullptr)
+                    {
+                        if (PAmmo->getQuantity() == ammoCount)
+                        {
+                            charutils::UnequipItem(PChar, SLOT_AMMO);
+                            charutils::SaveCharEquip(PChar);
+                        }
+                        charutils::UpdateItem(PChar, loc, slot, -ammoCount);
+                        PChar->pushPacket(new CInventoryFinishPacket());
+                    }
+                }
             }
         }
     }

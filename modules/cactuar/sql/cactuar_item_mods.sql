@@ -738,7 +738,10 @@ REPLACE INTO `item_mods` (`itemid`, `modid`, `value`) VALUES
 (11924,5,35),    -- MP: 35
 (11924,9,4),     -- DEX: 4
 (11924,22,25),   -- DARK_RES: 25
-(11924,384,400); -- HASTE_GEAR: 400
+(11924,384,400), -- HASTE_GEAR: 400
+
+-- Kraken Club
+(17440,343,-8); -- ENSPELL_DMG: -8
 
 REPLACE INTO `item_mods_pet` (`itemId`, `modId`, `value`, `petType`) VALUES
 
