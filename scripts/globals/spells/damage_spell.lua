@@ -842,6 +842,16 @@ xi.spells.damage.useDamageSpell = function(caster, target, spell)
     finalDamage = math.floor(finalDamage * scarletDeliriumMultiplier)
     finalDamage = math.floor(finalDamage * nukeAbsorbOrNullify)
 
+    if 
+        target:getAllegiance() == 2 or
+        target:getAllegiance() == 3 or
+        target:getAllegiance() == 4 or
+        target:getAllegiance() == 5 or
+        target:getAllegiance() == 6
+    then
+        finalDamage = math.floor(finalDamage * 0.45)
+    end
+
     -- Handle 'Nuke Wall'. It must be handled after all previous calculations, but before clamp.
     local nukeWallFactor = xi.spells.damage.calculateNukeWallFactor(target, spellElement, finalDamage)
 

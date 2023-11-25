@@ -470,8 +470,14 @@ end
 -- xi.mobskills.magicalTpBonus.DMG_BONUS and TP = 100, tpvalue = 2, assume V=150  --> damage is now 150*(TP*2) / 100 = 300
 -- xi.mobskills.magicalTpBonus.DMG_BONUS and TP = 200, tpvalue = 2, assume V=150  --> damage is now 150*(TP*2) / 100 = 600
 
-xi.mobskills.mobMagicalMove = function(mob, target, skill, damage, element, dmgmod, tpeffect, tpvalue)
+xi.mobskills.mobMagicalMove = function(mob, target, skill, damage, element, dmgmod, tpeffect, tpvalue, ignoreresist)
     local returninfo = {}
+
+    if ignoreresist == 0 then
+        ignoreresist = false
+    end
+
+    local ignoreres = ignoreresist or false
 
     local mdefBarBonus = 0
     if
@@ -512,7 +518,9 @@ xi.mobskills.mobMagicalMove = function(mob, target, skill, damage, element, dmgm
     local resist       = xi.mobskills.applyPlayerResistance(mob, nil, target, mob:getStat(xi.mod.INT)-target:getStat(xi.mod.INT), avatarAccBonus, element)
     local magicDefense = getElementalDamageReduction(target, element)
 
-    finaldmg = finaldmg * resist * magicDefense
+    if not ignoreres then
+        finaldmg = finaldmg * resist * magicDefense
+    end
 
     --Handle Magic Stoneskin - Umeboshi
     local magicSS = target:getMod(xi.mod.MAGIC_STONESKIN)

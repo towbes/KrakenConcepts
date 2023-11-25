@@ -21,8 +21,8 @@ entity.onMobSpawn = function(mob)
         delay = 15,
         specials =
         {
-            { id = xi.jsa.BENEDICTION, cooldown = 300, hpp = 100 },
-            { id = xi.jsa.MIGHTY_STRIKES, cooldown = 120, hpp = 100 },
+            { id = xi.jsa.BENEDICTION, cooldown = 300, hpp = 50 },
+            { id = xi.jsa.MIGHTY_STRIKES, cooldown = 100, hpp = 100 },
         },
     })
 end

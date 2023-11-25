@@ -66,7 +66,7 @@ entity.onMobWeaponSkill = function(target, mob, skill)
         stompCounter = stompCounter + 1
         mob:setLocalVar('stompCounter', stompCounter)
 
-        if stompCounter > 1 then
+        if stompCounter > 2 then
             mob:setLocalVar('stompCounter', 0)
         elseif mob:checkDistance(target) < 6 then
             mob:useMobAbility(1112)

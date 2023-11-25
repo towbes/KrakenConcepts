@@ -439,7 +439,7 @@ REPLACE INTO `item_mods` (`itemid`, `modid`, `value`) VALUES
 (11030,375,4), -- CURE_POTENCY_RCVD: 4
 
 -- Mujin Band
-(11672,175,3), -- SKILLCHAINDMG: 3
+(11672,174,3), -- SKILLCHAINBONUS: 3
 (11672,487,4), -- MAG_BURST_BONUS: 4
 
 -- Oneiros Torque

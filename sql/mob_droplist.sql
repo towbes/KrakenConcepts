@@ -20721,8 +20721,7 @@ INSERT INTO `mob_droplist` VALUES (2553,0,0,1000,18320,20);     -- Relic Maul (2
 INSERT INTO `mob_droplist` VALUES (2553,0,0,1000,3388,@VRARE);  -- Odious Necklace (Very Rare, 1%)
 INSERT INTO `mob_droplist` VALUES (2553,0,0,1000,3389,@VRARE);  -- Odious Feather (Very Rare, 1%)
 INSERT INTO `mob_droplist` VALUES (2553,0,0,1000,3390,@VRARE);  -- Odious Holy Water (Very Rare, 1%)
-INSERT INTO `mob_droplist` VALUES (2553,0,0,1000,3389,@VRARE);  -- Odious Feather (Very Rare, 1%)
-INSERT INTO `mob_droplist` VALUES (2553,0,0,1000,3390,@VRARE);  -- Odious Quipu (Very Rare, 1%)
+INSERT INTO `mob_droplist` VALUES (2553,0,0,1000,3391,@VRARE);  -- Odious Quipu (Very Rare, 1%)
 INSERT INTO `mob_droplist` VALUES (2553,0,0,1000,11382,@VRARE); -- Mirage Charuqs (Very Rare, 1%)
 INSERT INTO `mob_droplist` VALUES (2553,0,0,1000,11398,@VRARE); -- Argute Loafers (Very Rare, 1%)
 INSERT INTO `mob_droplist` VALUES (2553,0,0,1000,15031,@VRARE); -- Pantin Dastanas (Very Rare, 1%)
@@ -26675,7 +26674,7 @@ INSERT INTO `mob_droplist` VALUES (4002,0,0,1000,11672,@COMMON);  -- Mujin Band 
 INSERT INTO `mob_droplist` VALUES (4002,0,0,1000,3417,@ALWAYS);   -- Fiendish Tome Chapter 14
 
 -- ZoneID: 187 - Tee Zaksa the Ceaseless
-INSERT INTO `mob_droplist` VALUES (4003,0,0,1000,11672,@COMMON);  -- Oneiros Torque (15.0%)
+INSERT INTO `mob_droplist` VALUES (4003,0,0,1000,10932,@COMMON);  -- Oneiros Torque (15.0%)
 INSERT INTO `mob_droplist` VALUES (4003,0,0,1000,3418,@ALWAYS);   -- Fiendish Tome Chapter 15
 
 -- ZoneID: 187 - Arch Tzee Xicu Idol

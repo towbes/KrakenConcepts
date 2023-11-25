@@ -797,6 +797,15 @@ xi.weaponskills.doPhysicalWeaponskill = function(attacker, target, wsID, wsParam
             finaldmg = finaldmg + wsParams.meleedmg
     end
 
+    if 
+        target:getAllegiance() == 2 or
+        target:getAllegiance() == 3 or
+        target:getAllegiance() == 4 or
+        target:getAllegiance() == 5 or
+        target:getAllegiance() == 6
+    then
+        finaldmg = finaldmg * 0.45
+    end
 
     finaldmg = finaldmg * xi.settings.main.WEAPON_SKILL_POWER -- Add server bonus
     calcParams.finalDmg = finaldmg
@@ -872,6 +881,16 @@ xi.weaponskills.doRangedWeaponskill = function(attacker, target, wsID, wsParams,
     -- Calculate reductions
     finaldmg = target:rangedDmgTaken(finaldmg)
     finaldmg = finaldmg * target:getMod(xi.mod.PIERCE_SDT) / 1000
+
+    if 
+        target:getAllegiance() == 2 or
+        target:getAllegiance() == 3 or
+        target:getAllegiance() == 4 or
+        target:getAllegiance() == 5 or
+        target:getAllegiance() == 6
+    then
+        finaldmg = finaldmg * 0.45
+    end
 
     finaldmg = finaldmg * xi.settings.main.WEAPON_SKILL_POWER -- Add server bonus
     if target:getMod(xi.mod.DMGRANGE_CAP) > 0 and finaldmg > target:getMod(xi.mod.DMGRANGE_CAP) then
@@ -966,6 +985,16 @@ xi.weaponskills.doMagicWeaponskill = function(attacker, target, wsID, wsParams, 
         end
 
         dmg = adjustForTarget(target, dmg, wsParams.ele)
+
+        if 
+            target:getAllegiance() == 2 or
+            target:getAllegiance() == 3 or
+            target:getAllegiance() == 4 or
+            target:getAllegiance() == 5 or
+            target:getAllegiance() == 6
+        then
+            dmg = dmg * 0.45
+        end
 
         if dmg > 0 then
             dmg = dmg - target:getMod(xi.mod.PHALANX)
