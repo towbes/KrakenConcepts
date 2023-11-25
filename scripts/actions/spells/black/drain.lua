@@ -31,6 +31,7 @@ spellObject.onSpellCast = function(caster, target, spell)
     --add in target adjustment
     dmg = adjustForTarget(target, dmg, spell:getElement())
     --add in final adjustments
+    dmg = finalMagicAdjustments(caster, target, spell, dmg)
 
     if dmg < 0 then
         dmg = 0
@@ -45,13 +46,6 @@ spellObject.onSpellCast = function(caster, target, spell)
         spell:setMsg(xi.msg.basic.MAGIC_NO_EFFECT) -- No effect
         return 0
     end
-
-    -- Don't drain more HP than the target has left
-    if target:getHP() < dmg then
-        dmg = target:getHP()
-    end
-
-    dmg = finalMagicAdjustments(caster, target, spell, dmg)
 
     caster:addHP(dmg)
     return dmg

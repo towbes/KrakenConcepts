@@ -26652,6 +26652,16 @@ INSERT INTO `mob_droplist` VALUES (3287,0,0,1000,2818,@COMMON);   -- Aptant of i
 -- ZoneID: 24 - Flockbock
 INSERT INTO `mob_droplist` VALUES (3288,0,0,1000,2836,@UNCOMMON); -- Woolly Pelage (Uncommon, 10%)
 
+-- ZoneID: 113 - Zmey Gorynych
+INSERT INTO `mob_droplist` VALUES (3289,0,0,1000,2811,@COMMON); -- Aptant of primus (Common, 15%)
+INSERT INTO `mob_droplist` VALUES (3289,0,0,1000,2813,@COMMON); -- Aptant of durus (Common, 15%)
+
+INSERT INTO `mob_droplist` VALUES (3290,0,0,1000,19107,@VCOMMON); -- Dark Ixion: Azoth
+INSERT INTO `mob_droplist` VALUES (3290,0,0,1000,11289,@COMMON);  -- Dark Ixion: Ixion Cloak
+INSERT INTO `mob_droplist` VALUES (3290,0,0,1000,16242,@VCOMMON); -- Dark Ixion: Ixion Cape
+INSERT INTO `mob_droplist` VALUES (3290,0,0,1000,2654,@ALWAYS);   -- Dark Ixion: Horn
+INSERT INTO `mob_droplist` VALUES (3290,0,0,1000,2655,@ALWAYS);   -- Dark Ixion: Tail
+
 -- ZoneID: 187 - Xuu Bhoqa the Enigma
 INSERT INTO `mob_droplist` VALUES (4000,0,0,1000,11671,@COMMON);  -- Oneiros Ring (15.0%)
 INSERT INTO `mob_droplist` VALUES (4000,0,0,1000,3415,@ALWAYS);   -- Fiendish Tome Chapter 12
@@ -26735,15 +26745,6 @@ INSERT INTO `mob_droplist` VALUES (4018,0,0,1000,3433,@ALWAYS);   -- Fiendish To
 INSERT INTO `mob_droplist` VALUES (4019,0,0,1000,17669,@COMMON);  -- Sagasinger (15.0%)
 INSERT INTO `mob_droplist` VALUES (4019,0,0,1000,10975,@COMMON);  -- Archon Cape (15.0%)
 INSERT INTO `mob_droplist` VALUES (4019,0,0,1000,11674,@COMMON);  -- Archon Ring (15.0%)
-
-
-
-
-
-
-
-
-
 
 
 /*!40000 ALTER TABLE `mob_droplist` ENABLE KEYS */;

@@ -8,6 +8,8 @@ require('scripts/quests/i_can_hear_a_rainbow')
 local zoneObject = {}
 
 zoneObject.onInitialize = function(zone)
+    local zmeyGorynych = GetMobByID(ID.mob.ZMEY_GORYNYCH)
+    zmeyGorynych:setRespawnTime(3600, 7200) -- 1 to 2 hours
     -- NM Persistence
     xi.mob.nmTODPersistCache(zone, ID.mob.KREUTZET)
 

@@ -10,31 +10,31 @@ local loot =
     [673] =
     {
         {
-            { itemid =    0, droprate = 140 }, -- nothing
-            { itemid = 1763, droprate = 310 }, -- Viridian Urushi
-            { itemid = 1769, droprate = 241 }, -- Square of Galateia
-            { itemid = 1764, droprate = 310 }, -- Kejusu Satin
+            { itemid = xi.item.NONE,                   droprate = 140 }, -- nothing
+            { itemid = xi.item.POT_OF_VIRIDIAN_URUSHI, droprate = 310 }, -- Viridian Urushi
+            { itemid = xi.item.SQUARE_OF_GALATEIA,     droprate = 241 }, -- Square of Galateia
+            { itemid = xi.item.SQUARE_OF_KEJUSU_SATIN, droprate = 310 }, -- Kejusu Satin
         },
 
         {
-            { itemid =    0, droprate = 862 }, -- nothing
-            { itemid = 1842, droprate = 138 }, -- Cloud Evoker
+            { itemid = xi.item.NONE,         droprate = 862 }, -- nothing
+            { itemid = xi.item.CLOUD_EVOKER, droprate = 138 }, -- Cloud Evoker
         },
 
         {
-            { itemid =     0, droprate = 380 }, -- nothing
-            { itemid = 17946, droprate = 138 }, -- Maneater
-            { itemid = 18358, droprate = 172 }, -- Wagh Baghnakhs
-            { itemid = 16976, droprate = 138 }, -- Onimaru
-            { itemid =  4990, droprate = 172 }, -- Army's Paeon V
+            { itemid = xi.item.NONE,                    droprate = 380 }, -- nothing
+            { itemid = xi.item.MANEATER,                droprate = 138 }, -- Maneater
+            { itemid = xi.item.WAGH_BAGHNAKHS,          droprate = 172 }, -- Wagh Baghnakhs
+            { itemid = xi.item.ONIMARU,                 droprate = 138 }, -- Onimaru
+            { itemid = xi.item.SCROLL_OF_ARMYS_PAEON_V, droprate = 172 }, -- Army's Paeon V
         },
 
         {
-            { itemid =     0, droprate = 380 }, -- nothing
-            { itemid = 17946, droprate = 138 }, -- Maneater
-            { itemid = 18358, droprate = 172 }, -- Wagh Baghnakhs
-            { itemid = 16976, droprate = 138 }, -- Onimaru
-            { itemid =  4990, droprate = 172 }, -- Army's Paeon V
+            { itemid = xi.item.NONE,                    droprate = 380 }, -- nothing
+            { itemid = xi.item.MANEATER,                droprate = 138 }, -- Maneater
+            { itemid = xi.item.WAGH_BAGHNAKHS,          droprate = 172 }, -- Wagh Baghnakhs
+            { itemid = xi.item.ONIMARU,                 droprate = 138 }, -- Onimaru
+            { itemid = xi.item.SCROLL_OF_ARMYS_PAEON_V, droprate = 172 }, -- Army's Paeon V
         },
     },
 

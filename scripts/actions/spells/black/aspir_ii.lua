@@ -25,11 +25,11 @@ spellObject.onSpellCast = function(caster, target, spell)
     dmg = adjustForTarget(target, dmg, spell:getElement())
     --add in final adjustments
 
+    dmg = dmg * xi.settings.main.DARK_POWER
+
     if dmg < 0 then
         dmg = 0
     end
-
-    dmg = dmg * xi.settings.main.DARK_POWER
 
     -- Upyri: ID 4105
     if target:isMob() and (target:isUndead() or target:getPool() == 4105) then
