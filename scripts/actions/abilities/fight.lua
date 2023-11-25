@@ -11,6 +11,14 @@ abilityObject.onAbilityCheck = function(player, target, ability)
     if player:getPet() == nil then
         return xi.msg.basic.REQUIRES_A_PET, 0
     elseif
+        target:getAllegiance() == 2 or
+        target:getAllegiance() == 3 or
+        target:getAllegiance() == 4 or
+        target:getAllegiance() == 5 or
+        target:getAllegiance() == 6
+    then
+        return 0
+    elseif
         target:getID() == player:getPet():getID() or
         (target:getMaster() ~= nil and target:getMaster():isPC())
     then

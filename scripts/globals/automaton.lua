@@ -123,7 +123,7 @@ local attachmentModifiers =
                                 { xi.mod.REFRESH,                     {   nil,   nil,   nil,   nil }, true  }, },
     ['optic_fiber']         = { { xi.mod.AUTO_PERFORMANCE_BOOST,      {    10,    20,    25,    30 }, false }, },
     ['optic_fiber_ii']      = { { xi.mod.AUTO_PERFORMANCE_BOOST,      {    15,    30,    37,    45 }, false }, },
-    ['percolator']          = { { xi.mod.COMBAT_SKILLUP_RATE,         {     5,    10,    15,    20 }, true  }, },
+    ['percolator']          = { { xi.mod.COMBAT_SKILLUP_RATE,         {    10,    20,    30,    40 }, true  }, },
     ['repeater']            = { { xi.mod.DOUBLE_SHOT_RATE,            {    10,    15,    35,    65 }, true  }, },
     ['resister']            = { { xi.mod.STATUSRES,                   {     5,    10,    20,    30 }, true  }, },
     ['resister_ii']         = { { xi.mod.STATUSRES,                   {    10,    20,    40,    60 }, true  }, },
