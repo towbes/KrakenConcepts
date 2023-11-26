@@ -428,7 +428,14 @@ xi.spells.damage.calculateIfMagicBurstBonus = function(caster, target, spellId, 
 
         caster:delStatusEffectSilent(xi.effect.BURST_AFFINITY)
     end
-
+    
+    if spellGroup == xi.magic.spellGroup.BLACK then
+        if
+            not caster:hasStatusEffect(xi.effect.IMMANENCE)
+        then
+            return magicBurstBonus
+        end
+    end
     -- Obtain multiplier from gear, atma and job traits -- Job traits should be done separately
     modBurst = modBurst + (caster:getMod(xi.mod.MAG_BURST_BONUS) / 100) + ancientMagicBurstBonus
 
@@ -828,8 +835,11 @@ xi.spells.damage.useDamageSpell = function(caster, target, spell)
     finalDamage = math.floor(finalDamage * magianAffinity)
     finalDamage = math.floor(finalDamage * sdt)
     finalDamage = math.floor(finalDamage * resist)
+
+    if not caster:hasStatusEffect(xi.effect.IMMANENCE) then
     finalDamage = math.floor(finalDamage * magicBurst)
     finalDamage = math.floor(finalDamage * magicBurstBonus)
+    end
     finalDamage = math.floor(finalDamage * dayAndWeather)
     finalDamage = math.floor(finalDamage * magicBonusDiff)
     finalDamage = math.floor(finalDamage * targetMagicDamageAdjustment)
@@ -904,9 +914,10 @@ xi.spells.damage.useDamageSpell = function(caster, target, spell)
         end
 
         -- Add 'Magic Burst!' message
-        if magicBurst > 1 then
+        if magicBurst > 1 and not caster:hasStatusEffect(xi.effect.IMMANENCE) then
             spell:setMsg(xi.msg.basic.MAGIC_BURST_DAMAGE)
             caster:triggerRoeEvent(xi.roeTrigger.MAGIC_BURST)
+
         end
     end
 

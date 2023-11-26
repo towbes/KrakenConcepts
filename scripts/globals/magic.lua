@@ -262,6 +262,18 @@ local function calculateMagicBurst(caster, spell, target, params)
         caster:delStatusEffectSilent(xi.effect.BURST_AFFINITY)
     end
 
+    if
+        spell and
+        spell:getSpellGroup() == xi.magic.spellGroup.BLACK
+    then
+        if
+            not caster:hasStatusEffect(xi.effect.IMMANENCE)
+        then
+            return burst
+        end
+        caster:delStatusEffectSilent(xi.effect.IMMANENCE)
+    end
+
     -- Obtain first multiplier from gear, atma and job traits
     modburst = modburst + (caster:getMod(xi.mod.MAG_BURST_BONUS) / 100) + params.AMIIburstBonus
 
@@ -886,13 +898,18 @@ function addBonuses(caster, spell, target, dmg, params)
 
     local burst = calculateMagicBurst(caster, spell, target, params)
 
-    if burst > 1.0 then
+    if burst > 1.0 and not caster:hasStatusEffect(xi.effect.IMMANENCE) then
         spell:setMsg(spell:getMagicBurstMessage()) -- 'Magic Burst!'
 
         caster:triggerRoeEvent(xi.roeTrigger.MAGIC_BURST)
     end
 
-    dmg = math.floor(dmg * burst)
+    if not caster:hasStatusEffect(xi.effect.IMMANENCE) then
+        dmg = math.floor(dmg * burst)
+    else
+        dmg = math.floor(dmg)
+    end
+
     local mabbonus
     local spellId = spell:getID()
 

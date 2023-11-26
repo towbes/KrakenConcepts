@@ -1104,6 +1104,59 @@ void CCharEntity::OnCastFinished(CMagicState& state, action_t& action)
 
                 StatusEffectContainer->DelStatusEffectSilent(EFFECT_CHAIN_AFFINITY);
             }
+
+            if (actionTarget.param > 0 && PSpell->dealsDamage() && PSpell->getSpellGroup() == SPELLGROUP_BLACK &&
+                (StatusEffectContainer->HasStatusEffect(EFFECT_IMMANENCE)) &&
+                static_cast<CSpell*>(PSpell)->getElement() != 0)
+            {
+                auto* PSkillChainSpell    = static_cast<CSpell*>(PSpell);
+                auto  spell_Element       = PSkillChainSpell->getElement();
+                auto  skill_chain_Element = 0;
+                if (spell_Element == 1)
+                {
+                    skill_chain_Element = 3;
+                }
+                else if (spell_Element == 2)
+                {
+                    skill_chain_Element = 7;
+                }
+                else if (spell_Element == 3)
+                {
+                    skill_chain_Element = 6;
+                }
+                else if (spell_Element == 4)
+                {
+                    skill_chain_Element = 4;
+                }
+                else if (spell_Element == 5)
+                {
+                    skill_chain_Element = 8;
+                }
+                else if (spell_Element == 6)
+                {
+                    skill_chain_Element = 5;
+                }
+                else if (spell_Element == 7)
+                {
+                    skill_chain_Element = 1;
+                }
+                else if (spell_Element == 8)
+                {
+                    skill_chain_Element = 2;
+                }
+
+                SUBEFFECT effect = battleutils::GetSkillChainEffect(PTarget, skill_chain_Element, 0, 0);
+                if (effect != SUBEFFECT_NONE)
+                {
+                    uint16 skillChainDamage = battleutils::TakeSkillchainDamage(static_cast<CBattleEntity*>(this), PTarget, actionTarget.param, nullptr);
+
+                    actionTarget.addEffectParam   = skillChainDamage;
+                    actionTarget.addEffectMessage = 287 + effect;
+                    actionTarget.additionalEffect = effect;
+                }
+
+                StatusEffectContainer->DelStatusEffectSilent(EFFECT_IMMANENCE);
+            }
         }
     }
     charutils::RemoveStratagems(this, PSpell);
