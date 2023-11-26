@@ -15,7 +15,7 @@ end
 
 itemObject.onItemUse = function(target)
     target:addMP(45 * xi.settings.main.ITEM_POWER)
-    target:addStatusEffect(xi.effect.MEDICINE, 0, 0, 300)
+    target:addStatusEffect(xi.effect.MEDICINE, 0, 0, 60)
 end
 
 return itemObject
