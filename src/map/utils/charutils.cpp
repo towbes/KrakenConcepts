@@ -126,10 +126,11 @@ namespace charutils
 
     void CalculateStats(CCharEntity* PChar)
     {
-        float raceStat  = 0; // The final HP number for a race-based level.
-        float jobStat   = 0; // Estimate HP level for the level based on the primary profession.
-        float sJobStat  = 0; // HP final number for a level based on a secondary profession.
-        int32 bonusStat = 0; // HP bonus number that is added subject to some conditions.
+        float raceStat     = 0; // The final HP number for a race-based level.
+        float jobStat      = 0; // Estimate HP level for the level based on the primary profession.
+        float sJobStat     = 0; // HP final number for a level based on a secondary profession.
+        float combinedStat = 0; // Combined jobStat + sJobStat
+        int32 bonusStat    = 0; // HP bonus number that is added subject to some conditions.
 
         int32 baseValueColumn   = 0; // Column number with base number HP
         int32 scaleTo60Column   = 1; // Column number with modifier up to 60 levels
@@ -201,6 +202,8 @@ namespace charutils
 
         int32 subLevelOver10 = std::clamp(slvl - 10, 0, 20); // + 1HP for each level after 10 (/ 2)
         int32 subLevelOver30 = (slvl < 30 ? 0 : slvl - 30);  // + 1HP for each level after 30
+        int32 subLevelUpTo60 = (slvl < 60 ? slvl - 1 : 59);  // The first time spent up to level 60 (is also used for MP)
+        int32 subLevelOver60 = (slvl < 60 ? 0 : slvl - 60);
 
         // Calculate Racestat Jobstat Bonusstat Sjobstat
         // Calculation of race
@@ -228,17 +231,18 @@ namespace charutils
 
             sJobStat = grade::GetHPScale(grade, baseValueColumn) + (grade::GetHPScale(grade, scaleTo60Column) * (slvl - 1)) +
                        (grade::GetHPScale(grade, scaleOver30Column) * subLevelOver30) + subLevelOver30 + subLevelOver10;
-            sJobStat = sJobStat / 2;
+            // sJobStat = sJobStat / 2;
         }
 
         uint16 MeritBonus   = PChar->PMeritPoints->GetMeritValue(MERIT_MAX_HP, PChar);
-        PChar->health.maxhp = (int16)(settings::get<float>("map.PLAYER_HP_MULTIPLIER") * (raceStat + jobStat + bonusStat + sJobStat) + MeritBonus);
+        PChar->health.maxhp = (int16)(settings::get<float>("map.PLAYER_HP_MULTIPLIER") * (raceStat + bonusStat + ((jobStat + sJobStat) * 0.75)) + MeritBonus);
 
         // The beginning of the MP
 
-        raceStat = 0;
-        jobStat  = 0;
-        sJobStat = 0;
+        raceStat     = 0;
+        jobStat      = 0;
+        sJobStat     = 0;
+        combinedStat = 0;
 
         // Calculation of the MP race.
         grade = grade::GetRaceGrades(race, 1);
@@ -315,18 +319,33 @@ namespace charutils
             if (slvl > 0)
             {
                 grade    = grade::GetJobGrade(sjob, StatIndex);
-                sJobStat = (grade::GetStatScale(grade, 0) + grade::GetStatScale(grade, scaleTo60Column) * (slvl - 1)) / 2;
+                // sJobStat = (grade::GetStatScale(grade, 0) + grade::GetStatScale(grade, scaleTo60Column) * (slvl - 1)) / 2;
+                sJobStat = grade::GetStatScale(grade, 0) + grade::GetStatScale(grade, scaleTo60Column) * subLevelUpTo60;
+                if (subLevelOver60 > 0)
+                {
+                    jobStat += grade::GetStatScale(grade, scaleOver60) * subLevelOver60;
+                }
             }
             else
             {
                 sJobStat = 0;
             }
 
+            // combinedStat = jobStat + sJobStat;
+            if (sjob > 0)
+            {
+                combinedStat = ((uint16)(settings::get<float>("map.PLAYER_BASE_STAT_MULTIPLIER") * (jobStat + sJobStat))); // Average out the stats of the main/sub job.
+            }
+            else
+            {
+                combinedStat = (jobStat * 1.3); // If the player has no sub, simply use the main job's stats plus bonus.
+            }
+
             // get each merit bonus stat, str,dex,vit and so on...
             MeritBonus = PChar->PMeritPoints->GetMeritValue(statMerit[StatIndex - 2], PChar);
 
             // Value output
-            ref<uint16>(&PChar->stats, counter) = (uint16)(settings::get<float>("map.PLAYER_STAT_MULTIPLIER") * (raceStat + jobStat + sJobStat) + MeritBonus);
+            ref<uint16>(&PChar->stats, counter) = (uint16)(settings::get<float>("map.PLAYER_STAT_MULTIPLIER") * (raceStat + combinedStat + MeritBonus));
             counter += 2;
         }
     }
