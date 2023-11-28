@@ -16,6 +16,16 @@ zoneObject.onInitialize = function(zone)
     zone:registerTriggerArea(8,   10,  2.0,  -96,   14,  2.0,  -92) -- Sets Mark for 'Led Astry' Quest cutscene.
     zone:registerTriggerArea(9, -103,  0.0,  -16, -100,  0.0,  -12) -- Sets Mark for 'Striking a Balance' Quest cutscene.
     zone:registerTriggerArea(12, -77,   10,   0,     0,    0,    0) -- Promotion Sergeant (Balrahn Way).
+
+    -- If server vars are set to the basic install values - trigger a change
+    if (GetServerVariable("[ZNM]SubjectsOfInterest") == 55) then
+        xi.znm.changeSubjectsOfInterest()
+    end
+
+    if (GetServerVariable("[ZNM]Fauna") == 62) then
+        xi.znm.changeFauna()
+    end
+
 end
 
 zoneObject.onZoneIn = function(player, prevZone)
@@ -113,5 +123,14 @@ zoneObject.onEventFinish = function(player, csid, option, npc)
         player:setCharVar('AgainstAllOddsTimer', getMidnight())
     end
 end
+
+zoneObject.onGameDay = function()
+    -- every other day, prices reduce for zeni pops down to their base.
+    -- might even be based on the exact time the pop was bought according to some forum posts
+    if (VanadielDayOfTheWeek() % 2) == 0 then
+        xi.znm.updatePopItemCosts()
+    end
+end
+
 
 return zoneObject
