@@ -32,24 +32,9 @@ mobskillObject.onMobSkillCheck = function(target, mob, skill)
 end
 
 mobskillObject.onMobWeaponSkill = function(target, mob, skill)
-
-    local cursePower = 50
-    local poisonPower = 20
-    local dmgmod = 1
-
-    if (mob:getID() == 17093003) then -- Nyzul Isle Hydra
-        cursePower = 30
-        poisonPower = 15
-        dmgmod = 1
-    end
-
-    local info = xi.mobskills.mobMagicalMove(mob, target, skill, mob:getWeaponDmg() * 5, xi.element.NONE, dmgmod, xi.mobskills.magicalTpBonus.NO_EFFECT)
-    local dmg = xi.mobskills.mobFinalAdjustments(info.dmg, mob, skill, target, xi.attackType.MAGICAL, xi.damageType.NONE, xi.mobskills.shadowBehavior.WIPE_SHADOWS)
-    target:takeDamage(dmg, mob, xi.attackType.MAGICAL, xi.damageType.NONE)
-
-    skill:setMsg(xi.mobskills.mobStatusEffectMove(mob, target, xi.effect.CURSE_I, cursepower, 0, 420))
-    xi.mobskills.mobStatusEffectMove(mob, target, xi.effect.POISON, poisonpower, 3, 60)
-    return dmg
+    skill:setMsg(xi.mobskills.mobStatusEffectMove(mob, target, xi.effect.CURSE_I, 50, 0, 420))
+    xi.mobskills.mobStatusEffectMove(mob, target, xi.effect.POISON, 20, 3, 60)
+    return xi.effect.CURSE_I
 end
 
 return mobskillObject
