@@ -32,18 +32,22 @@ weaponskillObject.onUseWeaponSkill = function(player, target, wsID, tp, primary,
         local duration = (tp / 1000 * 30) + 60
         if not target:hasStatusEffect(xi.effect.DEFENSE_DOWN) then
             target:addStatusEffect(xi.effect.DEFENSE_DOWN, 12.5, 0, duration * applyResistanceAddEffect(player, target, xi.element.WIND, 0))
+            player:messagePublic(xi.msg.basic.SKILL_ENFEEB, target, wsID, xi.effect.DEFENSE_DOWN)
         end
 
         if not target:hasStatusEffect(xi.effect.ATTACK_DOWN) then
             target:addStatusEffect(xi.effect.ATTACK_DOWN, 12.5, 0, duration * applyResistanceAddEffect(player, target, xi.element.WATER, 0))
+            player:messagePublic(xi.msg.basic.SKILL_ENFEEB, target, wsID, xi.effect.ATTACK_DOWN)
         end
 
         if not target:hasStatusEffect(xi.effect.EVASION_DOWN) then
             target:addStatusEffect(xi.effect.EVASION_DOWN, 20, 0, duration * applyResistanceAddEffect(player, target, xi.element.ICE, 0))
+            player:messagePublic(xi.msg.basic.SKILL_ENFEEB, target, wsID, xi.effect.EVASION_DOWN)
         end
 
         if not target:hasStatusEffect(xi.effect.ACCURACY_DOWN) then
             target:addStatusEffect(xi.effect.ACCURACY_DOWN, 20, 0, duration * applyResistanceAddEffect(player, target, xi.element.EARTH, 0))
+            player:messagePublic(xi.msg.basic.SKILL_ENFEEB, target, wsID, xi.effect.ACCURACY_DOWN)
         end
     end
 

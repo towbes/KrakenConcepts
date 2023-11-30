@@ -30,6 +30,7 @@ weaponskillObject.onUseWeaponSkill = function(player, target, wsID, tp, primary,
 
     if damage > 0 and not target:hasStatusEffect(xi.effect.INT_DOWN) then
         target:addStatusEffect(xi.effect.INT_DOWN, 20, 0, 140)
+        player:messagePublic(xi.msg.basic.SKILL_ENFEEB, target, wsID, xi.effect.INT_DOWN)
     end
 
     return tpHits, extraHits, criticalHit, damage

@@ -35,10 +35,11 @@ weaponskillObject.onUseWeaponSkill = function(player, target, wsID, tp, primary,
 
     local damage, criticalHit, tpHits, extraHits = xi.weaponskills.doPhysicalWeaponskill(player, target, wsID, params, tp, action, primary, taChar)
 
-    if damage > 0 and not target:hasStatusEffect(xi.effect.WEIGHT) then
+    if damage > 0 and not target:hasStatusEffect(xi.effect.WEIGHT) and not target:hasImmunity(xi.immunity.GRAVITY) then
         if not target:hasStatusEffect(xi.effect.WEIGHT) then
             if tp - 1000 > math.random() * 150 then
                 target:addStatusEffect(xi.effect.WEIGHT, 50, 0, 60)
+                player:messagePublic(xi.msg.basic.SKILL_ENFEEB, target, wsID, xi.effect.WEIGHT)
             end
         end
     end

@@ -36,8 +36,15 @@ weaponskillObject.onUseWeaponSkill = function(player, target, wsID, tp, primary,
     if not target:isUndead() then
         local drain = math.floor(damage * (math.random(55,75)/100))
         local drainMod = 1 + player:getMod(xi.mod.ENH_DRAIN_ASPIR) / 100
+        local diff = (player:getMaxHP() - player:getHP())
+        if drain > diff then
+            drain = diff
+        end
         drain = drain * drainMod
         player:addHP(drain)
+        player:timer(3500, function(playerArg)
+            playerArg:messagePublic(xi.msg.basic.RECOVERS_HP, player, 0, drain)
+        end)
     end
 
     return tpHits, extraHits, criticalHit, damage

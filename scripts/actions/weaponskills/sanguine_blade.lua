@@ -56,7 +56,7 @@ weaponskillObject.onUseWeaponSkill = function(player, target, wsID, tp, primary,
         end
         player:addHP(HPDrained)
         player:timer(3500, function(playerArg)
-            playerArg:messageBasic(xi.msg.basic.RECOVERS_HP, 0, HPDrained)
+            playerArg:messagePublic(xi.msg.basic.RECOVERS_HP, player, 0, HPDrained)
         end)
     end
     return tpHits, extraHits, criticalHit, damage

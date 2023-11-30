@@ -40,6 +40,7 @@ weaponskillObject.onUseWeaponSkill = function(player, target, wsID, tp, primary,
     if damage > 0 then
         local duration = tp / 1000 * 20 * applyResistanceAddEffect(player, target, xi.element.WIND, 0)
         target:addStatusEffect(xi.effect.DEFENSE_DOWN, 19, 0, duration)
+        player:messagePublic(xi.msg.basic.SKILL_ENFEEB, target, wsID, xi.effect.DEFENSE_DOWN)
     end
 
     return tpHits, extraHits, criticalHit, damage

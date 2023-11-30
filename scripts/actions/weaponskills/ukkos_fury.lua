@@ -38,9 +38,10 @@ weaponskillObject.onUseWeaponSkill = function(player, target, wsID, tp, primary,
     xi.aftermath.addStatusEffect(player, tp, xi.slot.MAIN, xi.aftermath.type.EMPYREAN)
 
     if damage > 0 then
-        if not target:hasStatusEffect(xi.effect.SLOW) then
+        if not target:hasStatusEffect(xi.effect.SLOW) and not target:hasImmunity(xi.immunity.SLOW) then
             local duration = 60 * applyResistanceAddEffect(player, target, xi.element.EARTH, 0)
             target:addStatusEffect(xi.effect.SLOW, 1500, 0, duration)
+            player:messagePublic(xi.msg.basic.SKILL_ENFEEB, target, wsID, xi.effect.SLOW)
         end
     end
 

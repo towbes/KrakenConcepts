@@ -32,6 +32,13 @@ weaponskillObject.onUseWeaponSkill = function(player, target, wsID, tp, primary,
     end
 
     local damage, criticalHit, tpHits, extraHits = xi.weaponskills.doPhysicalWeaponskill(player, target, wsID, params, tp, action, primary, taChar)
+
+    local duration = 5 * applyResistanceAddEffect(player, target, xi.element.LIGHT, 0)
+    if damage > 0 then
+        target:addStatusEffect(xi.effect.FLASH, 20, 0, duration)
+        player:messagePublic(xi.msg.basic.SKILL_ENFEEB, target, wsID, xi.effect.FLASH)
+    end
+
     return tpHits, extraHits, criticalHit, damage
 end
 
