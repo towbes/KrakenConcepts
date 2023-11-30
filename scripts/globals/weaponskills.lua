@@ -388,6 +388,7 @@ local function getSingleHitDamage(attacker, target, dmg, wsParams, calcParams)
             if criticalHit then
                 calcParams.criticalHit = true
                 calcParams.pdif = xi.weaponskills.generatePdif(calcParams.ccritratio[1], calcParams.ccritratio[2], true)
+                attacker:PrintToArea(string.format('%s\'s weapon skill scores a critical hit!', attacker:getName()), xi.msg.channel.SYSTEM_3, 1)
             else
                 calcParams.pdif = xi.weaponskills.generatePdif(calcParams.cratio[1], calcParams.cratio[2], true)
             end
