@@ -173,8 +173,8 @@ local pTable =
     [xi.magic.spell.BANISHGA_II ] = { xi.mod.MND,    0,  180,    1,  180, 133 },
     [xi.magic.spell.BANISHGA_III] = { xi.mod.MND,    0,  480,  1.5,  480, 450 }, -- Enemy only. Stats unknown.
     [xi.magic.spell.BANISHGA_IV ] = { xi.mod.MND,    0,  600,  1.5,  600, 600 }, -- Enemy only. Stats unknown.
-    [xi.magic.spell.HOLY        ] = { xi.mod.MND,    0,  125,    1,  125, 150 },
-    [xi.magic.spell.HOLY_II     ] = { xi.mod.MND,    0,  250,    2,  250, 300 },
+    [xi.magic.spell.HOLY        ] = { xi.mod.MND,    0,  250,    1,  250, 300 },
+    [xi.magic.spell.HOLY_II     ] = { xi.mod.MND,    0,  350,    2,  350, 400 },
 
 -- TODO: Healing Spells when used against undead/zombie
 }
