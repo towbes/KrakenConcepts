@@ -417,6 +417,10 @@ void CAttackRound::CreateKickAttacks()
         {
             kickAttack += ((CCharEntity*)m_attacker)->PMeritPoints->GetMeritValue(MERIT_KICK_ATTACK_RATE, (CCharEntity*)m_attacker);
         }
+        else if (m_attacker->GetSJob() == JOB_MNK) // MNK (Main Sub)
+        {
+            kickAttack += ((CCharEntity*)m_attacker)->PMeritPoints->GetMeritValue(MERIT_KICK_ATTACK_RATE, (CCharEntity*)m_attacker);
+        }
 
         kickAttack = std::clamp<uint16>(kickAttack, 0, 100);
 
