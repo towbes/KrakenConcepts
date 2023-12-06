@@ -23,7 +23,7 @@ weaponskillObject.onUseWeaponSkill = function(player, target, wsID, tp, primary,
     -- https://www.bg-wiki.com/ffxi/Blade:_Rin
     params.canCrit = true
     params.acc100 = 0.0 params.acc200 = 0.0 params.acc300 = 0.0
-    params.atk100 = 1 params.atk200 = 1 params.atk300 = 1
+    params.atk100 = 1.15 params.atk200 = 1.15 params.atk300 = 1.15
 
     if xi.settings.main.USE_ADOULIN_WEAPON_SKILL_CHANGES then
         params.str_wsc = 0.6 params.dex_wsc = 0.6

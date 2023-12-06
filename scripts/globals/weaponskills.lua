@@ -103,7 +103,7 @@ local function souleaterBonus(attacker, wsParams)
     return 0
 end
 
-local scarletDeliriumBonus = function(attacker)
+xi.weaponskills.scarletDeliriumBonus = function(attacker)
     local bonus = 1
 
     if attacker:hasStatusEffect(xi.effect.SCARLET_DELIRIUM_1) then
@@ -113,6 +113,67 @@ local scarletDeliriumBonus = function(attacker)
     end
 
     return bonus
+end
+
+xi.weaponskills.consumeManaBonusPhysical = function(attacker, wsParams) -- For Physical Weaponskills.
+    local bonus = 1
+
+    if attacker:hasStatusEffect(xi.effect.CONSUME_MANA) then
+        if bonus >= 1 then
+            local MPConsumption = attacker:getMP() * 0.05 -- MP Consumed.
+            local weaponDamage  = attacker:getWeaponDmg() -- Get damage of weapon in main slot.
+            local power = ((100 + (MPConsumption)) / 100) -- Damage Modifier based on MP consumed.
+            attacker:delMP(MPConsumption)                 -- Delete MP from player
+            bonus = weaponDamage * power                  -- Weapon Damage * Modifier
+            attacker:PrintToPlayer(string.format('Weapon Damage: %s', bonus), xi.msg.channel.SYSTEM_3) -- Debug to see modifier of each hit in a weapon skill.
+        return bonus
+        end
+    end
+
+    return 0
+end
+
+xi.weaponskills.consumeManaBonusWeaponDamage = function(attacker, wsParams) -- For modifying a weapon's base damage. Used for Physical Weaponskills.
+    local bonus = 1
+
+    if attacker:hasStatusEffect(xi.effect.CONSUME_MANA) then
+        if bonus >= 1 then
+            local MPConsumption = attacker:getMP() * 0.05 -- MP Consumed.
+            local power = ((100 + (MPConsumption)) / 100) -- Damage Modifier based on MP consumed.
+            bonus = power                  -- Weapon Damage * Modifier
+             -- attacker:PrintToPlayer(string.format('Weapon Damage: %s', bonus), xi.msg.channel.SYSTEM_3) -- Debug to see modifier of each hit in a weapon skill.
+        return bonus
+        end
+    end
+
+    return 0
+end
+
+xi.weaponskills.consumeManaBonusMPConsumption = function(attacker, wsParams) -- Procs MP Consumption for Physical Weaponskills.
+    if attacker:hasStatusEffect(xi.effect.CONSUME_MANA) then
+            local MPConsumption = attacker:getMP() * 0.25 -- MP Consumed.
+            attacker:delMP(MPConsumption)                 -- Delete MP from player
+            attacker:delStatusEffect(xi.effect.CONSUME_MANA)
+        return MPConsumption
+    end
+
+    return 0
+end
+
+xi.weaponskills.consumeManaBonusMagical = function(attacker, wsParams) -- For Magic Weaponskills.
+    local bonus = 1
+
+    if attacker:hasStatusEffect(xi.effect.CONSUME_MANA) then
+        if bonus >= 1 then
+            local MPConsumption = attacker:getMP() * 0.25 -- MP Consumed.
+            local power = ((100 + (MPConsumption)) / 100) -- Damage Modifier based on MP consumed.
+            attacker:delMP(MPConsumption)                 -- Delete MP from player
+            bonus = power                                 -- Final power to apply to weaponskill.
+        return bonus
+        end
+    end
+
+    return 0
 end
 
 local function fencerBonus(attacker)
@@ -421,6 +482,13 @@ local function getSingleHitDamage(attacker, target, dmg, wsParams, calcParams)
                 elseif params == nil or (params ~= nil and params.includemab == true) then
                     mab2 = (100 + attacker:getMod(xi.mod.MATT)) / (100 + target:getMod(xi.mod.MDEF))
                 end
+
+                -- Apply Consume Mana
+                if attacker:hasStatusEffect(xi.effect.CONSUME_MANA) then
+                    magicdmg = (magicdmg * (xi.weaponskills.consumeManaBonusMagical(attacker, wsParams)))
+                    attacker:delMP(attacker:getMP() * 0.25)
+                    attacker:delStatusEffect(xi.effect.CONSUME_MANA)
+                end
             
 
                 	--Ninjutsu spell debuff  --(To do) -Umeboshi
@@ -430,21 +498,21 @@ local function getSingleHitDamage(attacker, target, dmg, wsParams, calcParams)
 			--target:setNinDebuff(205)
 		--end
 	--end
-                                --Divine/Elemental Seal Bonus
+                --Divine/Elemental Seal Bonus
 
                 local magicseal = 1
                 if wsParams.ele ~= nil and wsParams.ele ~= xi.element.LIGHT and (attacker:hasStatusEffect(xi.effect.ELEMENTAL_SEAL)) then
-                    magicseal = math.floor(math.random(210,235)/100)
+                    magicseal = math.floor(math.random(195,220)/100)
                     attacker:delStatusEffect(xi.effect.ELEMENTAL_SEAL)
 
                   --target:delStatusEffect(xi.effect.ninjutsu_ele_debuff)
 
                 elseif wsParams.ele ~= nil and wsParams.ele == xi.element.LIGHT and (attacker:hasStatusEffect(xi.effect.DIVINE_SEAL)) then
-                    magicseal = math.floor(math.random(225,245)/80)
+                    magicseal = math.floor(math.random(250,275)/100)
                     attacker:delStatusEffect(xi.effect.DIVINE_SEAL)
                 end
 
-                finaldmg = (finaldmg + (magicdmg * (mab2 * 1.5 * magicseal)))
+                finaldmg = (finaldmg + (magicdmg * magicseal * (mab2 * 1.5)))
             end   
 
             calcParams.hitsLanded = calcParams.hitsLanded + 1
@@ -478,10 +546,13 @@ local function modifyMeleeHitDamage(attacker, target, attackTbl, wsParams, rawDa
     end
 
     -- Scarlet Delirium
-    adjustedDamage = adjustedDamage * scarletDeliriumBonus(attacker)
+    adjustedDamage = adjustedDamage * xi.weaponskills.scarletDeliriumBonus(attacker)
 
     -- Souleater
     adjustedDamage = adjustedDamage + souleaterBonus(attacker, wsParams)
+
+    -- Handle Consume Mana MP Consumption. Applies to every hit landed.
+    xi.weaponskills.consumeManaBonusMPConsumption(attacker, wsParams)
 
     if adjustedDamage > 0 then
         adjustedDamage = adjustedDamage - target:getMod(xi.mod.PHALANX)
@@ -837,31 +908,37 @@ xi.weaponskills.doRangedWeaponskill = function(attacker, target, wsID, wsParams,
         ['damageType'] = attacker:getWeaponDamageType(xi.slot.RANGED)
     }
 
-    local calcParams =
-    {
-        wsID = wsID,
-        weaponDamage = { attacker:getRangedDmg() },
-        skillType = attacker:getWeaponSkillType(xi.slot.RANGED),
-        fSTR = xi.weaponskills.fSTR2(attacker:getStat(xi.mod.STR), target:getStat(xi.mod.VIT), attacker:getRangedDmgRank()),
-        cratio = cratio,
-        ccritratio = ccritratio,
-        accStat = attacker:getRACC(),
-        melee = false,
-        mustMiss = false,
-        sneakApplicable = false,
-        trickApplicable = false,
-        assassinApplicable = false,
-        mightyStrikesApplicable = false,
-        forcedFirstCrit = false,
-        extraOffhandHit = false,
-        flourishEffect = false,
-        fencerBonus = fencerBonus(attacker),
-        bonusTP = wsParams.bonusTP or 0,
-        bonusfTP = gorgetBeltFTP or 0,
-        bonusAcc = (gorgetBeltAcc or 0) + attacker:getMod(xi.mod.WSACC),
-        bonusWSmods = wsParams.bonusWSmods or 0
-    }
-    calcParams.hitRate = getRangedHitRate(attacker, target, false, calcParams.bonusAcc)
+    local calcParams = {}
+        calcParams.wsID = wsID
+
+        if attacker:hasStatusEffect(xi.effect.CONSUME_MANA) then
+            calcParams.weaponDamage = { attacker:getRangedDmg() * xi.weaponskills.consumeManaBonusWeaponDamage(attacker, wsParams) }
+            attacker:delMP(attacker:getMP() * 0.25)
+            attacker:delStatusEffect(xi.effect.CONSUME_MANA)
+        else
+            calcParams.weaponDamage = { attacker:getRangedDmg() }
+        end
+        calcParams.skillType = attacker:getWeaponSkillType(xi.slot.RANGED)
+        calcParams.fSTR = xi.weaponskills.fSTR2(attacker:getStat(xi.mod.STR), target:getStat(xi.mod.VIT), attacker:getRangedDmgRank())
+        calcParams.cratio = cratio
+        calcParams.ccritratio = ccritratio
+        calcParams.accStat = attacker:getRACC()
+        calcParams.melee = false
+        calcParams.mustMiss = false
+        calcParams.sneakApplicable = false
+        calcParams.trickApplicable = false
+        calcParams.assassinApplicable = false
+        calcParams.mightyStrikesApplicable = false
+        calcParams.forcedFirstCrit = false
+        calcParams.extraOffhandHit = false
+        calcParams.flourishEffect = false
+        calcParams.hybridHit = wsParams.hybridWS
+        calcParams.fencerBonus = fencerBonus(attacker)
+        calcParams.bonusTP = wsParams.bonusTP or 0
+        calcParams.bonusfTP = gorgetBeltFTP or 0
+        calcParams.bonusAcc = (gorgetBeltAcc or 0) + attacker:getMod(xi.mod.WSACC)
+        calcParams.bonusWSmods = wsParams.bonusWSmods or 0
+        calcParams.hitRate = getRangedHitRate(attacker, target, false, calcParams.bonusAcc)
 
     -- Send our params off to calculate our raw WS damage, hits landed, and shadows absorbed
     calcParams = xi.weaponskills.calculateRawWSDmg(attacker, target, wsID, tp, action, wsParams, calcParams)
@@ -923,13 +1000,31 @@ xi.weaponskills.doMagicWeaponskill = function(attacker, target, wsID, wsParams, 
         ['tpHitsLanded']    = 1,
         ['extraHitsLanded'] = 0,
         ['bonusTP']         = wsParams.bonusTP or 0,
-        ['wsID']            = wsID
+        ['wsID']            = wsID,
     }
 
     local bonusfTP, bonusacc = xi.weaponskills.handleWSGorgetBelt(attacker)
     bonusacc = bonusacc + attacker:getMod(xi.mod.WSACC)
 
-    local fint = utils.clamp(8 + (attacker:getStat(xi.mod.INT) - target:getStat(xi.mod.INT)), -32, 32)
+    -- local fint = utils.clamp(8 + (attacker:getStat(xi.mod.INT) - target:getStat(xi.mod.INT)), -32, 32)
+    local dStat = 0 -- Not all weaponskills use INT as a comparison. Set special use cases in the weaponskill's lua. Else use old INT-INT function.
+    if
+        wsParams.useStatCoefficient == true and
+        wsParams.dStat1 and
+        wsParams.dStat2 and
+        wsParams.dStatMultiplier
+    then
+        dStat = utils.clamp(8 + ((attacker:getStat(wsParams.dStat1) - target:getStat(wsParams.dStat2)) * wsParams.dStatMultiplier) / 2, -32, 32)
+         attacker:PrintToPlayer(string.format('dStat: %s', dStat), xi.msg.channel.SYSTEM_3) -- Debug to see modifier
+    elseif wsParams.useStatCoefficient == false then
+        dStat = 0
+        attacker:PrintToPlayer(string.format('dStat: %s', dStat), xi.msg.channel.SYSTEM_3) -- Debug to see modifier
+    else
+        dStat = math.floor(8 + (attacker:getStat(xi.mod.INT) - target:getStat(xi.mod.INT)) / 2)
+        dStat = utils.clamp(dStat, -32, 32)
+        attacker:PrintToPlayer(string.format('dStat: %s', dStat), xi.msg.channel.SYSTEM_3) -- Debug to see modifier
+    end
+
     local dmg = 0
 
     -- Magic-based WSes never miss, so we don't need to worry about calculating a miss, only if a shadow absorbed it.
@@ -945,19 +1040,24 @@ xi.weaponskills.doMagicWeaponskill = function(attacker, target, wsID, wsParams, 
             end
         end
 
-        dmg = attacker:getMainLvl() + 2 + (attacker:getStat(xi.mod.STR) * wsParams.str_wsc + attacker:getStat(xi.mod.DEX) * wsParams.dex_wsc +
+        dmg = (1.5 * (attacker:getMainLvl() + 1) + 2) + (attacker:getStat(xi.mod.STR) * wsParams.str_wsc + attacker:getStat(xi.mod.DEX) * wsParams.dex_wsc +
             attacker:getStat(xi.mod.VIT) * wsParams.vit_wsc + attacker:getStat(xi.mod.AGI) * wsParams.agi_wsc +
             attacker:getStat(xi.mod.INT) * wsParams.int_wsc + attacker:getStat(xi.mod.MND) * wsParams.mnd_wsc +
-            attacker:getStat(xi.mod.CHR) * wsParams.chr_wsc) + fint
+            attacker:getStat(xi.mod.CHR) * wsParams.chr_wsc) + dStat + attacker:getMod(xi.mod.MAGIC_DAMAGE)
 
         -- Applying fTP multiplier
         local ftp = xi.weaponskills.fTP(tp, wsParams.ftp100, wsParams.ftp200, wsParams.ftp300) + bonusfTP
 
         dmg = dmg * ftp
 
-        -- Apply Consume Mana and Scarlet Delirium
-        -- TODO: dmg = (dmg + consumeManaBonus(attacker)) * scarletDeliriumBonus(attacker)
-        dmg = dmg * scarletDeliriumBonus(attacker)
+        -- Apply Scarlet Delirium
+        dmg = (dmg * xi.weaponskills.scarletDeliriumBonus(attacker))
+
+        -- Apply Consume Mana
+        if attacker:hasStatusEffect(xi.effect.CONSUME_MANA) then
+            dmg = (dmg * xi.weaponskills.consumeManaBonusMagical(attacker, wsParams))
+            attacker:delStatusEffect(xi.effect.CONSUME_MANA)
+        end
 
         -- Factor in 'all hits' bonus damage mods
         local bonusdmg = attacker:getMod(xi.mod.ALL_WSDMG_ALL_HITS) -- For any WS
@@ -1120,7 +1220,15 @@ end
 -- Helper function to get Main damage depending on weapon type
 xi.weaponskills.getMeleeDmg = function(attacker, weaponType, kick)
     local mainhandDamage = attacker:getWeaponDmg()
+    attacker:PrintToPlayer(string.format('Main Weapon Damage: %s', mainhandDamage), xi.msg.channel.SYSTEM_3) -- Debug to see modifier of each hit in a weapon skill.
     local offhandDamage = attacker:getOffhandDmg()
+
+    if attacker:hasStatusEffect(xi.effect.CONSUME_MANA) then
+        mainhandDamage = mainhandDamage * xi.weaponskills.consumeManaBonusWeaponDamage(attacker, wsParams)
+        attacker:PrintToPlayer(string.format('Main Weapon Damage: %s', mainhandDamage), xi.msg.channel.SYSTEM_3) -- Debug to see modifier of each hit in a weapon skill.
+        offhandDamage  = offhandDamage * xi.weaponskills.consumeManaBonusWeaponDamage(attacker, wsParams)
+        attacker:PrintToPlayer(string.format('Sub Weapon Damage: %s', offhandDamage), xi.msg.channel.SYSTEM_3) -- Debug to see modifier of each hit in a weapon skill.
+    end
 
     if weaponType == xi.skill.HAND_TO_HAND or weaponType == xi.skill.NONE then
         local h2hSkill = attacker:getSkillLevel(xi.skill.HAND_TO_HAND) * 0.11 + 3

@@ -4600,9 +4600,11 @@ namespace battleutils
     {
         if (m_PChar->StatusEffectContainer->HasStatusEffect(EFFECT_CONSUME_MANA))
         {
-            damage += (uint32)(floor(m_PChar->health.mp / 10));
-            m_PChar->health.mp = 0;
-            m_PChar->StatusEffectContainer->DelStatusEffect(EFFECT_CONSUME_MANA);
+            // damage += (uint32)(floor(m_PChar->health.mp / 20));
+            // m_PChar->SetLocalVar("damageTrack", damage);
+            damage *= ((m_PChar->health.mp / 10) + 100) / 100;
+            m_PChar->addMP(-(m_PChar->health.mp * 0.05));
+            // m_PChar->StatusEffectContainer->DelStatusEffect(EFFECT_CONSUME_MANA);
         }
         return damage;
     }
@@ -4860,6 +4862,12 @@ namespace battleutils
         {
             totalDamage = battleutils::doSoulEaterEffect((CCharEntity*)PAttacker, totalDamage);
         }
+
+        // check for consume mana
+        // if (PAttacker->objtype == TYPE_PC)
+        // {
+        //    totalDamage = battleutils::doConsumeManaEffect((CCharEntity*)PAttacker, totalDamage);
+        // }
 
         // bonus jump tp is added even if damage is 0, will not add if jump misses
         if (PAttacker->objtype == TYPE_PC && hitTarget)

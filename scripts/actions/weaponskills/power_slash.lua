@@ -13,19 +13,19 @@ weaponskillObject.onUseWeaponSkill = function(player, target, wsID, tp, primary,
     local params = {}
     params.numHits = 1
     -- ftp damage mods (for Damage Varies with TP lines are calculated in the function
-    params.ftp100 = 1.5 params.ftp200 = 1.5 params.ftp300 = 1.5
+    params.ftp100 = 2 params.ftp200 = 2 params.ftp300 = 2
     -- wscs are in % so 0.2=20%
     params.str_wsc = 0.2 params.dex_wsc = 0.0 params.vit_wsc = 0.2 params.agi_wsc = 0.0 params.int_wsc = 0.0 params.mnd_wsc = 0.0 params.chr_wsc = 0.0
     -- critical mods, again in % (ONLY USE FOR CRITICAL HIT VARIES WITH TP)
-    params.crit100 = 0.2 params.crit200 = 0.4 params.crit300 = 0.6
+    params.crit100 = 0.25 params.crit200 = 0.5 params.crit300 = 0.8
     params.canCrit = true
     -- accuracy mods (ONLY USE FOR ACCURACY VARIES WITH TP) , should be the acc at those %s NOT the penalty values. Leave 0 if acc doesnt vary with tp.
     params.acc100 = 0 params.acc200 = 0 params.acc300 = 0
     -- attack multiplier (only some WSes use this, this varies the actual ratio value, see Tachi: Kasha) 1 is default.
-    params.atk100 = 1 params.atk200 = 1 params.atk300 = 1
+    params.atk100 = 1.15 params.atk200 = 1.15 params.atk300 = 1.25
 
     if xi.settings.main.USE_ADOULIN_WEAPON_SKILL_CHANGES then
-        params.str_wsc = 0.6 params.vit_wsc = 0.6
+        params.str_wsc = 0.6 params.vit_wsc = 0.8
     end
 
     local damage, criticalHit, tpHits, extraHits = xi.weaponskills.doPhysicalWeaponskill(player, target, wsID, params, tp, action, primary, taChar)

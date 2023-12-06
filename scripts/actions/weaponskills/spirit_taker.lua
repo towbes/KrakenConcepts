@@ -51,7 +51,7 @@ weaponskillObject.onUseWeaponSkill = function(player, target, wsID, tp, primary,
             wsc = math.floor(playerMP * (math.floor(0.08 * tp) - 96) / 256)
         elseif tp >= 1000 then
             -- wsc = math.floor(playerHP * .125)
-            wsc = math.floor(playerMP * (math.floor(0.02 * tp) + 16) / 256)
+            wsc = math.floor(playerMP * (math.floor(0.03 * tp) + 16) / 256)
         end
     end
 
@@ -71,6 +71,7 @@ weaponskillObject.onUseWeaponSkill = function(player, target, wsID, tp, primary,
     damage = xi.weaponskills.takeWeaponskillDamage(target, player, {}, primary, attack, calcParams, action)
 
     player:addMP(damage)
+    player:messagePublic(xi.msg.basic.RECOVERS_MP, player, 0, damage)
     local leftOver = (player:getMP() + damage) - player:getMaxMP()
 
     if leftOver > 0 then

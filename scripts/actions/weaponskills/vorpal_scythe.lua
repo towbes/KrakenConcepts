@@ -22,13 +22,25 @@ weaponskillObject.onUseWeaponSkill = function(player, target, wsID, tp, primary,
     -- accuracy mods (ONLY USE FOR accURACY VARIES WITH TP) , should be the acc at those %s NOT the penalty values. Leave 0 if acc doesnt vary with tp.
     params.acc100 = 0 params.acc200 = 0 params.acc300 = 0
     -- attack multiplier (only some WSes use this, this varies the actual ratio value, see Tachi: Kasha) 1 is default.
-    params.atk100 = 1 params.atk200 = 1 params.atk300 = 1
+    params.atk100 = 1 params.atk200 = 1.15 params.atk300 = 1.25
 
     if xi.settings.main.USE_ADOULIN_WEAPON_SKILL_CHANGES then
         params.str_wsc = 1.0
     end
 
     local damage, criticalHit, tpHits, extraHits = xi.weaponskills.doPhysicalWeaponskill(player, target, wsID, params, tp, action, primary, taChar)
+
+    if damage > 0 and criticalHit == true then
+        player:addMod(xi.mod.CRITHITRATE, 10)
+        player:addMod(xi.mod.CRIT_DMG_INCREASE, 10)
+        player:addMod(xi.mod.RANGED_CRIT_DMG_INCREASE, 10)
+        player:timer(30000, function(playerArg)
+            playerArg:delMod(xi.mod.CRITHITRATE, 10)
+            playerArg:delMod(xi.mod.CRIT_DMG_INCREASE, 10)
+            playerArg:delMod(xi.mod.RANGED_CRIT_DMG_INCREASE, 10)
+        end)
+    end
+
     return tpHits, extraHits, criticalHit, damage
 end
 

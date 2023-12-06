@@ -19,9 +19,11 @@ weaponskillObject.onUseWeaponSkill = function(player, target, wsID, tp, primary,
     params.ele = xi.element.LIGHT
     params.skill = xi.skill.CLUB
     params.includemab = true
+    
+    params.useStatCoefficient = false
 
     if xi.settings.main.USE_ADOULIN_WEAPON_SKILL_CHANGES then
-        params.ftp100 = 1.25 params.ftp200 = 3 params.ftp300 = 4.5
+        params.ftp100 = 1.35 params.ftp200 = 3.1 params.ftp300 = 4.65
         params.str_wsc = 0.4 params.mnd_wsc = 0.4
     end
 

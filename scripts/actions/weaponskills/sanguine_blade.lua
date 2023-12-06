@@ -27,27 +27,31 @@ weaponskillObject.onUseWeaponSkill = function(player, target, wsID, tp, primary,
     end
 
     local params = {}
-    params.ftp100 = 1.75 params.ftp200 = 1.75 params.ftp300 = 1.75
+    params.ftp100 = 2.5 params.ftp200 = 2.5 params.ftp300 = 2.5
     params.str_wsc = 0.3 params.dex_wsc = 0.0 params.vit_wsc = 0.0 params.agi_wsc = 0.0 params.int_wsc = 0.0 params.mnd_wsc = 0.5 params.chr_wsc = 0.0
     params.ele = xi.element.DARK
     params.skill = xi.skill.SWORD
     params.includemab = true
 
+    params.useStatCoefficient = true
+    params.dStat1             = xi.mod.INT
+    params.dStat2             = xi.mod.INT
+    params.dStatMultiplier    = 2
+
     if xi.settings.main.USE_ADOULIN_WEAPON_SKILL_CHANGES then
         if tp >= 1000 and tp <= 1999 then
-            drain = 75
+            drain = (80 + (tp - 1000) * (120 - 80) / (1999 - 1000)) / 100
         elseif (tp >= 2000 and tp <= 2999) then
-            drain = 100
+            drain = (125 + (tp - 1000) * (140 - 125) / (1999 - 1000)) / 100
         elseif (tp == 3000) then
-            drain = 160
+            drain = 150 / 100
         end
     end
 
-    local drainMod = 1 + player:getMod(xi.mod.ENH_DRAIN_ASPIR) / 100
-    drain = drain * drainMod
+    local drainMod = 1 + (player:getMod(xi.mod.ENH_DRAIN_ASPIR) / 100)
     local damage, criticalHit, tpHits, extraHits = xi.weaponskills.doMagicWeaponskill(player, target, wsID, params, tp, action, primary)
 
-    local HPDrained = (damage / 100) * drain
+    local HPDrained = (damage * drain) * drainMod
 
     if not target:isUndead() then
         local diff = (player:getMaxHP() - player:getHP())
