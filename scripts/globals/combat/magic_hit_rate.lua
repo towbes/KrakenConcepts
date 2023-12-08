@@ -115,6 +115,12 @@ local function magicAccuracyFromStatusEffects(actor, spellGroup, skillType, spel
         magicAcc = magicAcc + 256
     end
 
+    -- Apply bonus macc from TandemStrike
+    local tandemBonus = xi.magic.handleTandemStrikeBonus(actor)
+    if tandemBonus > 0 then
+        magicAcc = magicAcc + tandemBonus
+    end
+
     return magicAcc
 end
 

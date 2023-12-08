@@ -609,6 +609,12 @@ function getMagicHitRate(caster, target, skillType, element, percentBonus, bonus
     -- Base magic evasion (base magic evasion plus resistances(players), plus elemental defense(mobs)
     local magiceva = target:getMod(xi.mod.MEVA) + resMod
 
+    -- Apply bonus macc from TandemStrike
+    local tandemBonus = xi.magic.handleTandemStrikeBonus(caster)
+    if tandemBonus > 0 then
+        magicacc = magicacc + tandemBonus
+    end
+
     magicacc = magicacc + bonusAcc
 
     -- Add macc% from food
@@ -1191,6 +1197,23 @@ function calculateDuration(duration, magicSkill, spellGroup, caster, target, use
     end
 
     return math.floor(duration)
+end
+
+xi.magic.handleTandemStrikeBonus = function(caster)
+    if
+        caster:getMod(xi.mod.TANDEM_STRIKE) > 0 and
+        caster:isTandemValid()
+    then
+        return caster:getMod(xi.mod.TANDEM_STRIKE)
+    elseif
+        (caster:getMaster() ~= nil and
+        caster:getMaster():getMod(xi.mod.TANDEM_STRIKE) > 0) and
+        caster:isTandemValid()
+    then
+        return caster:getMaster():getMod(xi.mod.TANDEM_STRIKE)
+    end
+
+    return 0
 end
 
 xi.ma = xi.magic

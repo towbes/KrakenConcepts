@@ -669,6 +669,7 @@ public:
 
     void charm(CLuaBaseEntity const* target);
     void uncharm();
+    bool isTandemValid(); // verifies that the entity satifies all tandem conditions for tandem blow and tandem strike
 
     uint8 addBurden(uint8 element, uint8 burden);
     uint8 getOverloadChance(uint8 element);

@@ -1069,6 +1069,8 @@ enum class Mod
     SEVERE_DMG_NULL        = 2037,
     ENH_ASPIR              = 2038, // % damage boost to Aspir
     ENH_DRAIN              = 2039, // % damage boost to DRAIN
+    TANDEM_STRIKE          = 2040, // Beastmaster trait - provides acc/macc to master and pet when both engage the same target
+    TANDEM_BLOW            = 2041, // Beastmaster trait - provides subtle blow to master and pet when both engage the same target
 
     // IF YOU ADD ANY NEW MODIFIER HERE, ADD IT IN scripts/enum/mod.lua ASWELL!
 
