@@ -125,7 +125,7 @@ xi.weaponskills.consumeManaBonusPhysical = function(attacker, wsParams) -- For P
             local power = ((100 + (MPConsumption)) / 100) -- Damage Modifier based on MP consumed.
             attacker:delMP(MPConsumption)                 -- Delete MP from player
             bonus = weaponDamage * power                  -- Weapon Damage * Modifier
-            attacker:PrintToPlayer(string.format('Weapon Damage: %s', bonus), xi.msg.channel.SYSTEM_3) -- Debug to see modifier of each hit in a weapon skill.
+            -- attacker:PrintToPlayer(string.format('Weapon Damage: %s', bonus), xi.msg.channel.SYSTEM_3) -- Debug to see modifier of each hit in a weapon skill.
         return bonus
         end
     end
@@ -1015,14 +1015,14 @@ xi.weaponskills.doMagicWeaponskill = function(attacker, target, wsID, wsParams, 
         wsParams.dStatMultiplier
     then
         dStat = utils.clamp(8 + ((attacker:getStat(wsParams.dStat1) - target:getStat(wsParams.dStat2)) * wsParams.dStatMultiplier) / 2, -32, 32)
-         attacker:PrintToPlayer(string.format('dStat: %s', dStat), xi.msg.channel.SYSTEM_3) -- Debug to see modifier
+         -- attacker:PrintToPlayer(string.format('dStat: %s', dStat), xi.msg.channel.SYSTEM_3) -- Debug to see modifier
     elseif wsParams.useStatCoefficient == false then
         dStat = 0
-        attacker:PrintToPlayer(string.format('dStat: %s', dStat), xi.msg.channel.SYSTEM_3) -- Debug to see modifier
+        -- attacker:PrintToPlayer(string.format('dStat: %s', dStat), xi.msg.channel.SYSTEM_3) -- Debug to see modifier
     else
         dStat = math.floor(8 + (attacker:getStat(xi.mod.INT) - target:getStat(xi.mod.INT)) / 2)
         dStat = utils.clamp(dStat, -32, 32)
-        attacker:PrintToPlayer(string.format('dStat: %s', dStat), xi.msg.channel.SYSTEM_3) -- Debug to see modifier
+        -- attacker:PrintToPlayer(string.format('dStat: %s', dStat), xi.msg.channel.SYSTEM_3) -- Debug to see modifier
     end
 
     local dmg = 0
@@ -1220,14 +1220,14 @@ end
 -- Helper function to get Main damage depending on weapon type
 xi.weaponskills.getMeleeDmg = function(attacker, weaponType, kick)
     local mainhandDamage = attacker:getWeaponDmg()
-    attacker:PrintToPlayer(string.format('Main Weapon Damage: %s', mainhandDamage), xi.msg.channel.SYSTEM_3) -- Debug to see modifier of each hit in a weapon skill.
+    -- attacker:PrintToPlayer(string.format('Main Weapon Damage: %s', mainhandDamage), xi.msg.channel.SYSTEM_3) -- Debug to see modifier of each hit in a weapon skill.
     local offhandDamage = attacker:getOffhandDmg()
 
     if attacker:hasStatusEffect(xi.effect.CONSUME_MANA) then
         mainhandDamage = mainhandDamage * xi.weaponskills.consumeManaBonusWeaponDamage(attacker, wsParams)
-        attacker:PrintToPlayer(string.format('Main Weapon Damage: %s', mainhandDamage), xi.msg.channel.SYSTEM_3) -- Debug to see modifier of each hit in a weapon skill.
+        -- attacker:PrintToPlayer(string.format('Main Weapon Damage: %s', mainhandDamage), xi.msg.channel.SYSTEM_3) -- Debug to see modifier of each hit in a weapon skill.
         offhandDamage  = offhandDamage * xi.weaponskills.consumeManaBonusWeaponDamage(attacker, wsParams)
-        attacker:PrintToPlayer(string.format('Sub Weapon Damage: %s', offhandDamage), xi.msg.channel.SYSTEM_3) -- Debug to see modifier of each hit in a weapon skill.
+        -- attacker:PrintToPlayer(string.format('Sub Weapon Damage: %s', offhandDamage), xi.msg.channel.SYSTEM_3) -- Debug to see modifier of each hit in a weapon skill.
     end
 
     if weaponType == xi.skill.HAND_TO_HAND or weaponType == xi.skill.NONE then
