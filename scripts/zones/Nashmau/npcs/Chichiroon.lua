@@ -13,7 +13,7 @@ end
 entity.onTrigger = function(player, npc)
     local stock =
     {
-        -- 5497,  99224,    -- Bolter's Die
+        5497,  99224,    -- Bolter's Die
         -- 5498,  85500,    -- Caster's Die
         -- 5499,  97350,    -- Courser's Die
         -- 5500, 100650,    -- Blitzer's Die
@@ -22,8 +22,8 @@ entity.onTrigger = function(player, npc)
         -- 5503,  96250,    -- Miser's Die
         -- 5504,  95800,    -- Companion's Die
         -- 5505, 123744,    -- Avenger's Die
-        -- 6368,  69288,    -- Geomancer Die
-        -- 6369,  73920,    -- Rune Fencer Die
+        6368,  69288,    -- Geomancer Die
+        6369,  73920,    -- Rune Fencer Die
         2184, 1082,      --Imp. Bronze Piece 
         2185, 5279,      --Imp. Silver Piece
         2186, 10248,     --Imp. Mythril Piece
