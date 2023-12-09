@@ -2270,10 +2270,22 @@ namespace battleutils
 
             // Check for bind breaking
             BindBreakCheck(PAttacker, PDefender);
+            int32 enmity = damage;
 
             switch (PDefender->objtype)
             {
                 case TYPE_MOB:
+                    if (PAttacker->objtype == TYPE_PC && PAttacker->StatusEffectContainer->HasStatusEffect(EFFECT_FLASHY_SHOT) && isRanged)
+                    {
+                        enmity = enmity * 140 / 100;
+                        PAttacker->StatusEffectContainer->DelStatusEffect(EFFECT_FLASHY_SHOT);
+                    }
+                    else if (PAttacker->objtype == TYPE_PC && PAttacker->StatusEffectContainer->HasStatusEffect(EFFECT_STEALTH_SHOT) && isRanged)
+                    {
+                        enmity = (int32)((float)enmity * (1.0f - (float)(((CCharEntity*)PAttacker)->PMeritPoints->GetMeritValue(MERIT_STEALTH_SHOT, (CCharEntity*)PAttacker)) / 100.0f));
+                        PAttacker->StatusEffectContainer->DelStatusEffect(EFFECT_STEALTH_SHOT);
+                    }
+
                     if (taChar == nullptr)
                     {
                         ((CMobEntity*)PDefender)->PEnmityContainer->UpdateEnmityFromDamage(PAttacker, damage);

@@ -316,6 +316,10 @@ local function cRangedRatio(attacker, defender, params, ignoredDef, tp)
         levelCorrection = 0.025 * (defender:getMainLvl() - attacker:getMainLvl())
     end
 
+    if attacker:hasStatusEffect(xi.effect.FLASHY_SHOT) then
+        levelCorrection = 0
+    end
+
     cratio = cratio - levelCorrection
     cratio = cratio * atkmulti
     -- adding cap check base on weapon https://www.bg-wiki.com/ffxi/PDIF info
@@ -1086,6 +1090,10 @@ xi.weaponskills.doRangedWeaponskill = function(attacker, target, wsID, wsParams,
 
     finaldmg = xi.weaponskills.takeWeaponskillDamage(target, attacker, wsParams, primaryMsg, attack, calcParams, action)
 
+    attacker:delStatusEffect(xi.effect.FLASHY_SHOT)
+    attacker:delStatusEffect(xi.effect.STEALTH_SHOT)
+
+
     return finaldmg, calcParams.criticalHit, calcParams.tpHitsLanded, calcParams.extraHitsLanded, calcParams.shadowsAbsorbed
 end
 
@@ -1314,6 +1322,11 @@ xi.weaponskills.takeWeaponskillDamage = function(defender, attacker, wsParams, p
         defender:addEnmity(enmityEntity, wsParams.overrideCE, wsParams.overrideVE)
     else
         local enmityMult = wsParams.enmityMult or 1
+        if attacker:hasStatusEffect(xi.effect.FLASHY_SHOT) and not wsResults.melee then
+            enmityMult = enmityMult * 1.4
+        elseif attacker:hasStatusEffect(xi.effect.STEALTH_SHOT) and not wsResults.melee then
+            enmityMult = enmityMult * (1 - attacker:getMerit(xi.merit.STEALTH_SHOT) / 100)
+        end
         defender:updateEnmityFromDamage(enmityEntity, finaldmg * enmityMult)
     end
 
