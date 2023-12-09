@@ -20,7 +20,7 @@ quest.sections =
     {
         check = function(player, status, vars)
             return status == QUEST_AVAILABLE and
-                player:canEquipItem(xi.item.DAGGER_OF_TRIALS, true) and
+                -- player:canEquipItem(xi.item.DAGGER_OF_TRIALS, true) and
                 player:getCharSkillLevel(xi.skill.DAGGER) / 10 >= 230 and
                 not player:hasKeyItem(xi.keyItem.WEAPON_TRAINING_GUIDE)
         end,
