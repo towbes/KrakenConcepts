@@ -549,10 +549,10 @@ REPLACE INTO `item_mods` (`itemid`, `modid`, `value`) VALUES
 (11819,27,3),   -- ENMITY: 3
 
 -- Ryuga Sune-Ate
-(11456,1,17),    -- DEF: 17
-(11456,10,5),    -- VIT: 5
-(11456,25,6),    -- ACC: 6
-(11456,384,200), -- HASTE_GEAR: 200
+(11456,1,19),    -- DEF: 19
+(11456,10,4),    -- VIT: 4
+(11456,25,4),    -- ACC: 4
+(11456,384,300), -- HASTE_GEAR: 300
 
 -- Khthonios Mask
 (11820,1,24),    -- DEF: 24
