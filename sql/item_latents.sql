@@ -1590,7 +1590,12 @@ INSERT INTO `item_latents` VALUES (16883,25,10,52,6);    -- Spear: Accuracy +10 
 INSERT INTO `item_latents` VALUES (16892,2,-20,47,0);
 INSERT INTO `item_latents` VALUES (16892,20,-10,47,0);
 INSERT INTO `item_latents` VALUES (16892,22,-10,47,0);
-INSERT INTO `item_latents` VALUES (16899,110,5,25,0);    -- Hototogisu,parry skill +5 song/roll active
+
+-- Reserve Captain's lance
+INSERT INTO `item_latents` VALUES (16893,1,10,44,0);  -- Citizens of San d'Oria: Defense +10
+
+-- Hototogisu
+INSERT INTO `item_latents` VALUES (16899,110,5,25,0); -- parry skill +5 song/roll active
 
 -- Amanojaku
 INSERT INTO `item_latents` VALUES (16911,287,1,0,1);     -- DMG 29~40, increases as HP% decreases
@@ -1611,12 +1616,15 @@ INSERT INTO `item_latents` VALUES  (16912,165,5,59,17);   -- Kitsutsuki - Vs. pl
 INSERT INTO `item_latents` VALUES (16948,10,2,53,1);     -- VIT +2 in areas outside own nation's control
 INSERT INTO `item_latents` VALUES (16949,10,3,53,1);     -- VIT +3 in areas outside own nation's control
 
-INSERT INTO `item_latents` VALUES  (16952,2,-20,47,0);
-INSERT INTO `item_latents` VALUES  (16952,16,-10,47,0);
-INSERT INTO `item_latents` VALUES  (16952,18,-10,47,0);
-INSERT INTO `item_latents` VALUES  (16953,25,7,70,0);     -- Reserve Captains Greatsword
-INSERT INTO `item_latents` VALUES  (16968,165,7,59,3);    -- Kamewari - Vs. arcana: Critical hit rate +7%
-INSERT INTO `item_latents` VALUES  (16969,165,5,59,9);    -- Onikiri - Vs. demons: Critical hit rate +5%
+INSERT INTO `item_latents` VALUES (16952,2,-20,47,0);
+INSERT INTO `item_latents` VALUES (16952,16,-10,47,0);
+INSERT INTO `item_latents` VALUES (16952,18,-10,47,0);
+
+-- Reserve Captain's greatsword
+INSERT INTO `item_latents` VALUES (16953,25,7,44,0);  -- Citizens of San d'Oria:  Accuracy +7
+
+INSERT INTO `item_latents` VALUES (16968,165,7,59,3);    -- Kamewari - Vs. arcana: Critical hit rate +7%
+INSERT INTO `item_latents` VALUES (16969,165,5,59,9);    -- Onikiri - Vs. demons: Critical hit rate +5%
 
 -- Onimaru
 INSERT INTO `item_latents` VALUES (16976,23,18,6,1000);  -- Attack+18 while TP <100%
@@ -1664,12 +1672,6 @@ INSERT INTO `item_latents` VALUES (17212,26,20,37,3);
 INSERT INTO `item_latents` VALUES (17212,26,20,37,5);
 INSERT INTO `item_latents` VALUES (17212,26,25,37,4);
 
--- Shigeto Bow
-INSERT INTO `item_latents` VALUES (18142,26,7,62,12);     -- RACC +7 for Samurai main job
-
--- Shigeto Bow +1
-INSERT INTO `item_latents` VALUES (18143,26,8,62,12);     -- RACC +8 for Samurai main job
-
 -- Musketeer Gun +1/+2
 INSERT INTO `item_latents` VALUES (17269,24,8,53,1);     -- RATT +8 in areas outside own nation's control
 INSERT INTO `item_latents` VALUES (17270,24,9,53,1);     -- RATT +9 in areas outside own nation's control
@@ -1689,20 +1691,25 @@ INSERT INTO `item_latents` VALUES (17447,5,20,53,1);     -- MP +20 in areas outs
 INSERT INTO `item_latents` VALUES (17448,13,1,53,1);     -- MND +1 in areas outside own nation's control
 INSERT INTO `item_latents` VALUES (17449,13,2,53,1);     -- MND +2 in areas outside own nation's control
 
-INSERT INTO `item_latents` VALUES  (17451,165,6,47,0);    -- Morgenstern Crit Rate +6% when broken (500 WS points)
-INSERT INTO `item_latents` VALUES  (17451,287,13,47,0);   -- Morgenstern DMG+13 when broken (500 WS points)
-INSERT INTO `item_latents` VALUES  (17456,2,-10,47,0);
-INSERT INTO `item_latents` VALUES  (17456,5,-10,47,0);
-INSERT INTO `item_latents` VALUES  (17456,18,-10,47,0);
-INSERT INTO `item_latents` VALUES  (17456,20,-10,47,0);
+INSERT INTO `item_latents` VALUES (17451,165,6,47,0);    -- Morgenstern Crit Rate +6% when broken (500 WS points)
+INSERT INTO `item_latents` VALUES (17451,287,13,47,0);   -- Morgenstern DMG+13 when broken (500 WS points)
+INSERT INTO `item_latents` VALUES (17456,2,-10,47,0);
+INSERT INTO `item_latents` VALUES (17456,5,-10,47,0);
+INSERT INTO `item_latents` VALUES (17456,18,-10,47,0);
+INSERT INTO `item_latents` VALUES (17456,20,-10,47,0);
+
+-- Reserve Captain's mace
+INSERT INTO `item_latents` VALUES (17458,71,7,44,0);  -- Citizens of San d'Oria: MP recovered while healing +7
+
+-- Senior Musketeer Rod
 INSERT INTO `item_latents` VALUES  (17457,71,7,70,1);     -- Senior Musketeer Rod
-INSERT INTO `item_latents` VALUES  (17458,71,7,70,0);    -- Reserve Captains Mace
-INSERT INTO `item_latents` VALUES  (17461,23,10,56,0);    -- Rune Rod +10 Atk.
-INSERT INTO `item_latents` VALUES  (17461,112,6,56,0);    -- Rune Rod +6 Healing Magic Skill
-INSERT INTO `item_latents` VALUES  (17461,369,-4,56,0);   -- Rune Rod -4MP/tic
-INSERT INTO `item_latents` VALUES  (17465,12,9,28,0);     -- Mighty Cudgel INT+9 on Firesday (has 1 base INT to total +9)
-INSERT INTO `item_latents` VALUES  (17465,13,9,28,0);     -- Mighty Cudgel MND+9 on Firesday (has 1 base MND to total +9)
-INSERT INTO `item_latents` VALUES  (17465,15,15,28,0);    -- [Element: Fire]+15
+
+INSERT INTO `item_latents` VALUES (17461,23,10,56,0);    -- Rune Rod +10 Atk.
+INSERT INTO `item_latents` VALUES (17461,112,6,56,0);    -- Rune Rod +6 Healing Magic Skill
+INSERT INTO `item_latents` VALUES (17461,369,-4,56,0);   -- Rune Rod -4MP/tic
+INSERT INTO `item_latents` VALUES (17465,12,9,28,0);     -- Mighty Cudgel INT+9 on Firesday (has 1 base INT to total +9)
+INSERT INTO `item_latents` VALUES (17465,13,9,28,0);     -- Mighty Cudgel MND+9 on Firesday (has 1 base MND to total +9)
+INSERT INTO `item_latents` VALUES (17465,15,15,28,0);    -- [Element: Fire]+15
 
 -- Horrent Mace
 INSERT INTO `item_latents` VALUES (17471,23,10,0,25);    -- Attack+10 when HP <=25% while weapon drawn
@@ -1884,12 +1891,17 @@ INSERT INTO `item_latents` VALUES  (17851,442,1,58,0);    -- storm fife
 INSERT INTO `item_latents` VALUES (17931,9,2,53,1);      -- DEX +2 in areas outside own nation's control
 INSERT INTO `item_latents` VALUES (17932,9,3,53,1);      -- DEX +3 in areas outside own nation's control
 
-INSERT INTO `item_latents` VALUES  (17933,2,-20,47,0);
-INSERT INTO `item_latents` VALUES  (17933,17,-10,47,0);
-INSERT INTO `item_latents` VALUES  (17933,19,-10,47,0);
+INSERT INTO `item_latents` VALUES (17933,2,-20,47,0);
+INSERT INTO `item_latents` VALUES (17933,17,-10,47,0);
+INSERT INTO `item_latents` VALUES (17933,19,-10,47,0);
 
--- Reserve Captains Pick
-INSERT INTO `item_latents` VALUES (17934,24,10,70,0);
+-- Reserve Captain's Pick
+INSERT INTO `item_latents` VALUES (17934,23,10,44,0); -- Citizens of San d'Oria: Attack +10
+
+INSERT INTO `item_latents` VALUES (17941,17,15,31,0);    -- Mighty Pick [Element: Wind]+15 on Windsday
+INSERT INTO `item_latents` VALUES (17941,287,5,31,0);    -- Mighty Pick DMG+5 on Windsday
+INSERT INTO `item_latents` VALUES (17944,165,6,47,0);    -- Retributor Crit Rate +6% when broken (500 WS points)
+INSERT INTO `item_latents` VALUES (17944,287,13,47,0);   -- Retributor DMG+13 when broken (500 WS points)
 
 -- Maneater
 INSERT INTO `item_latents` VALUES (17946,23,18,6,1000);  -- Attack+18 while TP <100%
@@ -2017,13 +2029,21 @@ INSERT INTO `item_latents` VALUES (18133,26,5,53,1);     -- RACC +5 in areas out
 INSERT INTO `item_latents` VALUES (18134,8,2,53,1);      -- STR +2 in areas outside own nation's control
 INSERT INTO `item_latents` VALUES (18135,8,3,53,1);      -- STR +3 in areas outside own nation's control
 
-INSERT INTO `item_latents` VALUES  (18144,2,-20,47,0);
-INSERT INTO `item_latents` VALUES  (18144,17,-10,47,0);
-INSERT INTO `item_latents` VALUES  (18144,19,-10,47,0);
-INSERT INTO `item_latents` VALUES  (18145,26,7,70,2);     -- Master Casters Bow
-INSERT INTO `item_latents` VALUES  (18146,2,-20,47,0);
-INSERT INTO `item_latents` VALUES  (18146,18,-10,47,0);
-INSERT INTO `item_latents` VALUES  (18146,20,-10,47,0);
+-- Shigeto Bow
+INSERT INTO `item_latents` VALUES (18142,26,7,62,12);     -- RACC +7 for Samurai main job
+
+-- Shigeto Bow +1
+INSERT INTO `item_latents` VALUES (18143,26,8,62,12);     -- RACC +8 for Samurai main job
+
+INSERT INTO `item_latents` VALUES (18144,2,-20,47,0);
+INSERT INTO `item_latents` VALUES (18144,17,-10,47,0);
+INSERT INTO `item_latents` VALUES (18144,19,-10,47,0);
+
+INSERT INTO `item_latents` VALUES (18145,26,7,70,2);     -- Master Casters Bow
+
+INSERT INTO `item_latents` VALUES (18146,2,-20,47,0);
+INSERT INTO `item_latents` VALUES (18146,18,-10,47,0);
+INSERT INTO `item_latents` VALUES (18146,20,-10,47,0);
 
 -- Fenrir's Stone
 INSERT INTO `item_latents` VALUES (18165,2,30,26,0);     -- Daytime: HP+30

@@ -9,6 +9,11 @@ spellObject.onMagicCastingCheck = function(caster, target, spell)
 end
 
 spellObject.onSpellCast = function(caster, target, spell)
+    if target:isUndead() then
+        spell:setMsg(xi.msg.basic.MAGIC_NO_EFFECT) -- No effect
+        return 0
+    end
+
     --calculate raw damage (unknown function  -> only dark skill though) - using http://www.bluegartr.com/threads/44518-Drain-Calculations
     -- also have small constant to account for 0 dark skill
     local dmg = 5 + 0.375 * caster:getSkillLevel(xi.skill.DARK_MAGIC)

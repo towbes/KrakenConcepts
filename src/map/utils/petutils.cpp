@@ -696,10 +696,10 @@ namespace petutils
 
         // It appears that Rabbit and Eft have lower stats (acc atk) than their counterparts
         // Require some more data points to see if we should special case those to rank 3 instead of rank 1
-        PMob->setModifier(Mod::DEF, mobutils::GetDefense(PMob, PMob->defRank));
-        PMob->setModifier(Mod::EVA, mobutils::GetBase(PMob, GetJugEvasionRank(PMob)));
-        PMob->setModifier(Mod::ATT, mobutils::GetBase(PMob, PMob->attRank));
-        PMob->setModifier(Mod::ACC, mobutils::GetBase(PMob, PMob->accRank));
+        PMob->setModifier(Mod::DEF, mobutils::GetBaseDefEva(PMob, PMob->defRank));
+        PMob->setModifier(Mod::EVA, mobutils::GetBaseDefEva(PMob, GetJugEvasionRank(PMob)));
+        PMob->setModifier(Mod::ATT, mobutils::GetBaseSkill(PMob, PMob->attRank));
+        PMob->setModifier(Mod::ACC, mobutils::GetBaseSkill(PMob, PMob->accRank));
 
         ApplyJugStatCorrections(PMob);
     }
