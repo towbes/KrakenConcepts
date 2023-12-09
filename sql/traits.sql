@@ -346,7 +346,7 @@ INSERT INTO `traits` VALUES (36,'bird killer',9,79,2,225,10,NULL,0);
 INSERT INTO `traits` VALUES (37,'amorph killer',9,30,1,226,8,NULL,0);
 INSERT INTO `traits` VALUES (37,'amorph killer',9,82,2,226,10,NULL,0);
 INSERT INTO `traits` VALUES (38,'aquan killer',9,50,1,228,8,NULL,0);
-INSERT INTO `traits` VALUES (38,'aquan killer',9,88,2,228,10,NULL,0)
+INSERT INTO `traits` VALUES (38,'aquan killer',9,88,2,228,10,NULL,0);
 INSERT INTO `traits` VALUES (59,'resist slow',9,15,1,250,10,NULL,0);
 INSERT INTO `traits` VALUES (59,'resist slow',9,35,2,250,15,NULL,0);
 INSERT INTO `traits` VALUES (59,'resist slow',9,55,3,250,20,NULL,0);
