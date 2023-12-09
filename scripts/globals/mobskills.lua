@@ -70,7 +70,7 @@ local function MobTPMod(tp)
     return 1
 end
 
-local function calculateMobMagicBurst(caster, ele, target)
+xi.mobskills.calculateMobMagicBurst = function(caster, ele, target)
     local burst = 1.0
     local skillchainTier, skillchainCount = xi.magicburst.formMagicBurst(ele, target)
 
@@ -615,7 +615,7 @@ xi.mobskills.mobAddBonuses = function(caster, target, dmg, ele, ignoreresist) --
 
     dmg = math.floor(dmg * dayWeatherBonus)
 
-    local burst = calculateMobMagicBurst(caster, ele, target)
+    local burst = xi.mobskills.calculateMobMagicBurst(caster, ele, target)
     dmg = math.floor(dmg * burst)
 
     local mdefBarBonus = 0

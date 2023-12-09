@@ -18,6 +18,14 @@ abilityObject.onPetAbility = function(target, pet, skill)
     target:takeDamage(damage, pet, xi.attackType.BREATH, xi.damageType.DARK)
     target:updateEnmityFromDamage(pet, damage)
 
+    local ele = xi.element.DARK
+    local magicBurst = xi.mobskills.calculateMobMagicBurst(pet, ele, target)
+    if (magicBurst > 1) and target:hasStatusEffect(xi.effect.SKILLCHAIN) then -- Gated as this is run per target.
+        skill:setMsg(xi.msg.basic.JA_MAGIC_BURST)
+    else
+        skill:setMsg(xi.msg.basic.DAMAGE)
+    end
+
     return damage
 end
 

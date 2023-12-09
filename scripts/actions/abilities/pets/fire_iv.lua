@@ -11,6 +11,8 @@ abilityObject.onPetAbility = function(target, pet, skill)
     local dINT = math.floor(pet:getStat(xi.mod.INT) - target:getStat(xi.mod.INT))
     local tp   = pet:getTP()
 
+    -- params.element = xi.element.FIRE
+
     local damage = math.floor(325 + 0.025 * tp)
     damage = damage + (dINT * 1.5)
     damage = xi.mobskills.mobMagicalMove(pet, target, skill, damage, xi.element.FIRE, 1, xi.mobskills.magicalTpBonus.NO_EFFECT, 0)
@@ -19,6 +21,14 @@ abilityObject.onPetAbility = function(target, pet, skill)
 
     target:takeDamage(damage, pet, xi.attackType.MAGICAL, xi.damageType.FIRE)
     target:updateEnmityFromDamage(pet, damage)
+
+    local ele = xi.element.FIRE
+    local magicBurst = xi.mobskills.calculateMobMagicBurst(pet, ele, target)
+    if (magicBurst > 1) and target:hasStatusEffect(xi.effect.SKILLCHAIN) then -- Gated as this is run per target.
+        skill:setMsg(xi.msg.basic.JA_MAGIC_BURST)
+    else
+        skill:setMsg(xi.msg.basic.DAMAGE)
+    end
 
     return damage
 end
