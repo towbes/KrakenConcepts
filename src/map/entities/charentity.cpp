@@ -1467,6 +1467,14 @@ void CCharEntity::OnAbility(CAbilityState& state, action_t& action)
             action.recast = PAbility->getRecastTime() - meritRecastReduction;
         }
 
+        if (PAbility->getID() == ABILITY_THIRD_EYE)
+        {
+            if (this->StatusEffectContainer->HasStatusEffect(EFFECT_SEIGAN))
+            {
+                action.recast = (PAbility->getRecastTime() - PMeritPoints->GetMeritValue(MERIT_THIRD_EYE_RECAST, this)) / 2;
+            }
+        }
+
         if (PAbility->getID() == ABILITY_LIGHT_ARTS || PAbility->getID() == ABILITY_DARK_ARTS || PAbility->getRecastId() == 231) // stratagems
         {
             if (this->StatusEffectContainer->HasStatusEffect(EFFECT_TABULA_RASA))
