@@ -24,12 +24,12 @@ entity.onTrigger = function(player, npc)
         6098, 94185,  -- Scroll of Indi-Languor
         6100, 103040, -- Scroll of Indi-Paralysis
         6097, 504000, -- Scroll of Indi-Vex
-        6092, 537030, -- Scroll of Indi-Frailty
-        6091, 576300, -- Scroll of Indi-Wilt
-        6094, 617100, -- Scroll of Indi-Malaise
-        6101, 617100, -- Scroll of Indi-Gravity
-        6093, 703800, -- Scroll of Indi-Fade
-        6131, 709716, -- Scroll of Indi-Haste
+        -- 6092, 537030, -- Scroll of Indi-Frailty
+        -- 6091, 576300, -- Scroll of Indi-Wilt
+        -- 6094, 617100, -- Scroll of Indi-Malaise
+        -- 6101, 617100, -- Scroll of Indi-Gravity
+        -- 6093, 703800, -- Scroll of Indi-Fade
+        -- 6131, 709716, -- Scroll of Indi-Haste
     }
     xi.shop.general(player, stock)
 end
