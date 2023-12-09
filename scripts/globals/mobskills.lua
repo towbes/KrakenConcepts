@@ -97,7 +97,7 @@ end
 local function MobTakeAoEShadow(mob, target, max)
     -- this should be using actual nin skill
     -- TODO fix this
-    if target:getMainJob() == xi.job.NIN and math.random() < 0.6 then
+    if (target:getMainJob() == xi.job.NIN or target:getSubJob() == xi.job.NIN) and math.random() < 0.6 then
         max = max - 1
         if max < 1 then
             max = 1

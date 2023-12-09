@@ -95,6 +95,7 @@ local function getSpellBonusAcc(caster, target, spell, params)
     local spellGroup     = spell:getSpellGroup()
     local element        = spell:getElement()
     local casterJob      = caster:getMainJob()
+    local casterSubJob   = caster:getSubJob()
 
     if
         caster:hasStatusEffect(xi.effect.ALTRUISM) and
@@ -148,77 +149,77 @@ local function getSpellBonusAcc(caster, target, spell, params)
         end
     end
 
-    switch(casterJob): caseof
-    {
-        [xi.job.WHM] = function()
-            magicAccBonus = magicAccBonus + caster:getJobPointLevel(xi.jp.WHM_MAGIC_ACC_BONUS)
-        end,
+    if casterJob == xi.job.WHM then
+        magicAccBonus = magicAccBonus + caster:getJobPointLevel(xi.jp.WHM_MAGIC_ACC_BONUS)
+    end
 
-        [xi.job.BLM] = function()
-            -- Add MACC for BLM Elemental Magic Merits
-            if skill == xi.skill.ELEMENTAL_MAGIC then
-                magicAccBonus = magicAccBonus + caster:getMerit(xi.merit.ELEMENTAL_MAGIC_ACCURACY)
-            end
+    if casterJob == xi.job.BLM or casterSubJob == xi.job.BLM then
+        -- Add MACC for BLM Elemental Magic Merits
+        if skill == xi.skill.ELEMENTAL_MAGIC then
+            magicAccBonus = magicAccBonus + caster:getMerit(xi.merit.ELEMENTAL_MAGIC_ACCURACY)
+        end
+        
+        if casterJob == xi.job.BLM then
+        -- BLM Job Point: MACC Bonus +1
+        magicAccBonus = magicAccBonus + caster:getJobPointLevel(xi.jp.BLM_MAGIC_ACC_BONUS)
+        end
+    end
 
-            -- BLM Job Point: MACC Bonus +1
-            magicAccBonus = magicAccBonus + caster:getJobPointLevel(xi.jp.BLM_MAGIC_ACC_BONUS)
-        end,
+    if casterJob == xi.job.DRK or casterSubJob == xi.job.DRK then
+        -- Add MACC for Dark Seal
+        if
+            skill == xi.skill.DARK_MAGIC and
+            caster:hasStatusEffect(xi.effect.DARK_SEAL)
+        then
+            magicAccBonus = magicAccBonus + 256
+        end
+    end
 
-        [xi.job.DRK] = function()
-            -- Add MACC for Dark Seal
-            if
-                skill == xi.skill.DARK_MAGIC and
-                caster:hasStatusEffect(xi.effect.DARK_SEAL)
-            then
-                magicAccBonus = magicAccBonus + 256
-            end
-        end,
+    if casterJob == xi.job.RDM or casterSubJob == xi.job.RDM then
+        -- Add MACC for RDM group 1 merits
+        if element >= xi.element.FIRE and element <= xi.element.WATER then
+            magicAccBonus = magicAccBonus + caster:getMerit(rdmMerit[element])
+        end
+        -- RDM Job Point: During saboteur, Enfeebling MACC +2
+        if
+            skill == xi.skill.ENFEEBLING_MAGIC and
+            caster:hasStatusEffect(xi.effect.SABOTEUR) and
+            casterJob == xi.job.RDM
+        then
+            local jpValue = caster:getJobPointLevel(xi.jp.SABOTEUR_EFFECT)
 
-        [xi.job.RDM] = function()
-            -- Add MACC for RDM group 1 merits
-            if element >= xi.element.FIRE and element <= xi.element.WATER then
-                magicAccBonus = magicAccBonus + caster:getMerit(rdmMerit[element])
-            end
+            magicAccBonus = magicAccBonus + (jpValue * 2)
+        end
+        if casterJob == xi.job.RDM then
+        -- RDM Job Point: Magic Accuracy Bonus, All MACC + 1
+        magicAccBonus = magicAccBonus + caster:getJobPointLevel(xi.jp.RDM_MAGIC_ACC_BONUS)
+        end
+    end
 
-            -- RDM Job Point: During saboteur, Enfeebling MACC +2
-            if
-                skill == xi.skill.ENFEEBLING_MAGIC and
-                caster:hasStatusEffect(xi.effect.SABOTEUR)
-            then
-                local jpValue = caster:getJobPointLevel(xi.jp.SABOTEUR_EFFECT)
+    if casterJob == xi.job.NIN then
+        -- NIN Job Point: Ninjitsu Accuracy Bonus
+        if skill == xi.skill.NINJUTSU then
+            magicAccBonus = magicAccBonus + caster:getJobPointLevel(xi.jp.NINJITSU_ACC_BONUS)
+        end
+    end
 
-                magicAccBonus = magicAccBonus + (jpValue * 2)
-            end
+    if casterJob == xi.job.BLU or casterSubJob == xi.job.BLU then
+        -- BLU MACC merits - nuke acc is handled in bluemagic.lua
+        if skill == xi.skill.BLUE_MAGIC then
+            magicAccBonus = magicAccBonus + caster:getMerit(xi.merit.MAGICAL_ACCURACY)
+        end
+    end
 
-            -- RDM Job Point: Magic Accuracy Bonus, All MACC + 1
-            magicAccBonus = magicAccBonus + caster:getJobPointLevel(xi.jp.RDM_MAGIC_ACC_BONUS)
-        end,
+    if casterJob == xi.job.SCH then
+        if
+            (spellGroup == xi.magic.spellGroup.WHITE and caster:hasStatusEffect(xi.effect.PARSIMONY)) or
+            (spellGroup == xi.magic.spellGroup.BLACK and caster:hasStatusEffect(xi.effect.PENURY))
+        then
+            local jpValue = caster:getJobPointLevel(xi.jp.STRATEGEM_EFFECT_I)
 
-        [xi.job.NIN] = function()
-            -- NIN Job Point: Ninjitsu Accuracy Bonus
-            if skill == xi.skill.NINJUTSU then
-                magicAccBonus = magicAccBonus + caster:getJobPointLevel(xi.jp.NINJITSU_ACC_BONUS)
-            end
-        end,
-
-        [xi.job.BLU] = function()
-            -- BLU MACC merits - nuke acc is handled in bluemagic.lua
-            if skill == xi.skill.BLUE_MAGIC then
-                magicAccBonus = magicAccBonus + caster:getMerit(xi.merit.MAGICAL_ACCURACY)
-            end
-        end,
-
-        [xi.job.SCH] = function()
-            if
-                (spellGroup == xi.magic.spellGroup.WHITE and caster:hasStatusEffect(xi.effect.PARSIMONY)) or
-                (spellGroup == xi.magic.spellGroup.BLACK and caster:hasStatusEffect(xi.effect.PENURY))
-            then
-                local jpValue = caster:getJobPointLevel(xi.jp.STRATEGEM_EFFECT_I)
-
-                magicAccBonus = magicAccBonus + jpValue
-            end
-        end,
-    }
+            magicAccBonus = magicAccBonus + jpValue
+        end
+    end
 
     return magicAccBonus
 end
@@ -856,6 +857,8 @@ function addBonuses(caster, spell, target, dmg, params)
     local dayWeatherBonus = 1.00
     local weather = caster:getWeather()
     local casterJob = caster:getMainJob()
+    local casterSubJob = caster:getSubJob()
+
 
     params = params or {}
     params.bonusmab = params.bonusmab or 0
@@ -1141,14 +1144,18 @@ end
 
 function calculateDuration(duration, magicSkill, spellGroup, caster, target, useComposure)
     local casterJob = caster:getMainJob()
+    local casterSubJob = caster:getSubJob()
 
     if magicSkill == xi.skill.ENHANCING_MAGIC then -- Enhancing Magic
         -- Gear mods
         duration = duration + duration * caster:getMod(xi.mod.ENH_MAGIC_DURATION) / 100
 
         -- prior according to bg-wiki
-        if casterJob == xi.job.RDM then
-            duration = duration + caster:getMerit(xi.merit.ENHANCING_MAGIC_DURATION) + caster:getJobPointLevel(xi.jp.ENHANCING_DURATION)
+        if casterJob == xi.job.RDM or casterSubJob == xi.job.RDM then
+            duration = duration + caster:getMerit(xi.merit.ENHANCING_MAGIC_DURATION)
+            if casterJob == xi.job.RDM then
+                duration = duration + caster:getJobPointLevel(xi.jp.ENHANCING_DURATION)
+            end
         end
 
         -- Default is true
@@ -1180,15 +1187,17 @@ function calculateDuration(duration, magicSkill, spellGroup, caster, target, use
         end
 
         -- After Saboteur according to bg-wiki
-        if casterJob == xi.job.RDM then
+        if casterJob == xi.job.RDM or casterSubJob == xi.job.RDM then
             -- RDM Merit: Enfeebling Magic Duration
             duration = duration + caster:getMerit(xi.merit.ENFEEBLING_MAGIC_DURATION)
 
+            if casterJob == xi.job.RDM then
             -- RDM Job Point: Enfeebling Magic Duration
             duration = duration + caster:getJobPointLevel(xi.jp.ENFEEBLE_DURATION)
+            end
 
             -- RDM Job Point: Stymie effect
-            if caster:hasStatusEffect(xi.effect.STYMIE) then
+            if caster:hasStatusEffect(xi.effect.STYMIE) and casterJob == xi.job.RDM then
                 duration = duration + caster:getJobPointLevel(xi.jp.STYMIE_EFFECT)
             end
         end

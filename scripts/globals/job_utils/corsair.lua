@@ -134,8 +134,8 @@ end
 
 local function atMaxCorsairBusts(caster)
     local numBusts = caster:numBustEffects()
-    return (numBusts >= 2 and caster:getMainJob() == xi.job.COR) or
-        (numBusts >= 1 and caster:getMainJob() ~= xi.job.COR)
+    return (numBusts >= 2 and (caster:getMainJob() == xi.job.COR or caster:getSubJob() == xi.job.COR))
+        -- (numBusts >= 1 and caster:getMainJob() ~= xi.job.COR)
 end
 
 local function corsairSetup(caster, ability, action, effect, job)

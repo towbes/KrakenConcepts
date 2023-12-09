@@ -408,8 +408,11 @@ xi.spells.enhancing.calculateEnhancingDuration = function(caster, target, spell,
     ------------------------------
     -- Merits and Job Points. (Applicable to all enhancing spells. Prior to multipliers, according to bg-wiki.)
     ------------------------------
-    if caster:getMainJob() == xi.job.RDM then
-        duration = duration + caster:getMerit(xi.merit.ENHANCING_MAGIC_DURATION) + caster:getJobPointLevel(xi.jp.ENHANCING_DURATION)
+    if caster:getMainJob() == xi.job.RDM or caster:getSubJob() == xi.job.RDM then
+        duration = duration + caster:getMerit(xi.merit.ENHANCING_MAGIC_DURATION)
+        if caster:getMainJob() == xi.job.RDM then
+            duration = duration + caster:getJobPointLevel(xi.jp.ENHANCING_DURATION)
+        end
     end
 
     --------------------------------------------------

@@ -1525,7 +1525,7 @@ end
 
 local function getLockpickSuccessRate(player, keyTraded, chestInfo)
     if
-        player:getMainJob() == xi.job.THF or player:getSubJob() == xi.job.THF and --Umeboshi 
+        (player:getMainJob() == xi.job.THF or player:getSubJob() == xi.job.THF) and --Umeboshi 
         player:getMainLvl() >= chestInfo.treasureLvl - 10
     then
         return (player:getMainLvl() / chestInfo.treasureLvl) - 0.50 + thiefKeyInfo[keyTraded][2]

@@ -269,14 +269,17 @@ xi.spells.enfeebling.calculateDuration = function(caster, target, spellId, spell
 
     -- After Saboteur according to bg-wiki
     if
-        caster:getMainJob() == xi.job.RDM and
+        caster:getMainJob() == xi.job.RDM or
+        caster:getSubJob() == xi.job.RDM and
         skillType == xi.skill.ENFEEBLING_MAGIC
     then
         -- RDM Merit: Enfeebling Magic Duration
         duration = duration + caster:getMerit(xi.merit.ENFEEBLING_MAGIC_DURATION)
-
-        -- RDM Job Point: Enfeebling Magic Duration
-        duration = duration + caster:getJobPointLevel(xi.jp.ENFEEBLE_DURATION)
+        
+        if caster:getMainJob() == xi.job.RDM then
+            -- RDM Job Point: Enfeebling Magic Duration
+            duration = duration + caster:getJobPointLevel(xi.jp.ENFEEBLE_DURATION)
+        end
 
         -- RDM Job Point: Stymie effect
         if caster:hasStatusEffect(xi.effect.STYMIE) then
