@@ -4218,12 +4218,12 @@ namespace charutils
 
                     if (isInSigilZone)
                     {
-                        exp *= 1.50f; // 50% XP Bonus in WOTG Areas
+                        exp *= 1.75f; // 50% XP Bonus in WOTG Areas
                     }
 
                     if (isInSanctionZone)
                     {
-                        exp *= 1.50f; // 50% XP Bonus in TOAU Areas
+                        exp *= 1.75f; // 50% XP Bonus in TOAU Areas
                     }
 
                     if (PMob->getMobMod(MOBMOD_EXP_BONUS))
@@ -4257,22 +4257,37 @@ namespace charutils
                                     exp *= 1.0f;
                                     break;
                                 case 1:
-                                    exp *= 1.2f;
+                                    exp *= 1.25f;
                                     break;
                                 case 2:
-                                    exp *= 1.35f;
+                                    exp *= 1.30f;
                                     break;
                                 case 3:
-                                    exp *= 1.5f;
+                                    exp *= 1.37f;
                                     break;
                                 case 4:
-                                    exp *= 1.6f;
+                                    exp *= 1.44f;
                                     break;
                                 case 5:
-                                    exp *= 1.7f;
+                                    exp *= 1.55f;
+                                    break;
+                                case 6:
+                                    exp *= 1.65f;
+                                    break;
+                                case 7:
+                                    exp *= 1.75f;
+                                    break;
+                                case 8:
+                                    exp *= 1.85f;
+                                    break;
+                                case 9:
+                                    exp *= 1.95f;
+                                    break;
+                                case 10:
+                                    exp *= 2.15f;
                                     break;
                                 default:
-                                    exp *= 1.75f;
+                                    exp *= 2.25f;
                                     break;
                             }
                         }
