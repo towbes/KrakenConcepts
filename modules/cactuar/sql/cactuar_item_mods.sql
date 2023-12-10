@@ -763,7 +763,42 @@ REPLACE INTO `item_mods` (`itemid`, `modid`, `value`) VALUES
 (11924,384,400), -- HASTE_GEAR: 400
 
 -- Kraken Club
-(17440,343,-8); -- ENSPELL_DMG: -8
+(17440,343,-8), -- ENSPELL_DMG: -8
+
+-- Claustrum
+(18330,25,20),   -- ACC: 20
+(18330,256,12),  -- AFTERMATH: 12
+(18330,355,185), -- ADDS_WEAPONSKILL: 185
+(18330,431,10),  -- ITEM_ADDEFFECT_TYPE: 10
+(18330,499,8),   -- ITEM_SUBEFFECT: 8
+(18330,501,15),  -- ITEM_ADDEFFECT_CHANCE: 15
+(18330,506,50),  -- EXTRA_DMG_CHANCE: 50
+(18330,507,250), -- OCC_DO_EXTRA_DMG: 250
+(18330,566,1),   -- IRIDESCENCE: 1
+(18330,347,2),   -- FIRE_AFFINITY_DMG: 2
+(18330,348,2),   -- ICE_AFFINITY_DMG: 2
+(18330,349,2),   -- WIND_AFFINITY_DMG: 2
+(18330,350,2),   -- EARTH_AFFINITY_DMG: 2
+(18330,351,2),   -- THUNDER_AFFINITY_DMG: 2
+(18330,352,2),   -- WATER_AFFINITY_DMG: 2
+(18330,353,2),   -- LIGHT_AFFINITY_DMG: 2
+(18330,354,2),   -- DARK_AFFINITY_DMG: 2
+(18330,544,2),   -- FIRE_AFFINITY_ACC: 2
+(18330,545,2),   -- ICE_AFFINITY_ACC: 2
+(18330,546,2),   -- WIND_AFFINITY_ACC: 2
+(18330,547,2),   -- EARTH_AFFINITY_ACC: 2
+(18330,548,2),   -- THUNDER_AFFINITY_ACC: 2
+(18330,549,2),   -- WATER_AFFINITY_ACC: 2
+(18330,550,2),   -- LIGHT_AFFINITY_ACC: 2
+(18330,551,2),   -- DARK_AFFINITY_ACC: 2
+(18330,553,2),   -- FIRE_AFFINITY_PERP: 2
+(18330,554,2),   -- ICE_AFFINITY_PERP: 2
+(18330,555,2),   -- WIND_AFFINITY_PERP: 2
+(18330,556,2),   -- EARTH_AFFINITY_PERP: 2
+(18330,557,2),   -- THUNDER_AFFINITY_PERP: 2
+(18330,558,2),   -- WATER_AFFINITY_PERP: 2
+(18330,559,2),   -- LIGHT_AFFINITY_PERP: 2
+(18330,560,2);   -- DARK_AFFINITY_PERP: 2
 
 REPLACE INTO `item_mods_pet` (`itemId`, `modId`, `value`, `petType`) VALUES
 
@@ -804,7 +839,8 @@ REPLACE INTO `item_weapon` (`itemId`, `name`, `skill`, `subskill`, `ilvl_skill`,
 (19738,'aifes_bow',25,0,0,0,0,1,1,540,84,0),
 (18903,'talekeeper',3,0,0,0,0,1,1,224,40,0),
 (17669,'sagasinger',3,0,0,0,0,1,1,218,42,0),
-(19141,'oneiros_knife',2,0,0,0,0,1,1,150,27,0);
+(19141,'oneiros_knife',2,0,0,0,0,1,1,150,27,0),
+(17207,'expunger',25,0,0,0,0,1,1,500,50,500);
 
 REPLACE INTO `item_latents` (`itemId`, `modId`, `value`, `latentId`, `latentParam`) VALUES
 -- Cocoon Band
@@ -905,6 +941,11 @@ REPLACE INTO `item_latents` (`itemId`, `modId`, `value`, `latentId`, `latentPara
 
 -- Ritter Shield +1
 (12358,1,2,62,12), -- DEF +2 for PLD Main job
-(12358,1,2,8,12); -- DEF +2 for PLD Sub job
+(12358,1,2,8,12), -- DEF +2 for PLD Sub job
+
+-- Expunger
+(17207,287,25,47,0),   -- Expunger DMG+25 when broken (500 WS points)
+(17207,165,2,47,0),    -- Expunger Crit Rate +2% when broken (500 WS points)
+(17207,964,10,47,0);   -- Expunger RANGED_CRIT_DMG_INCREASE + 10 when broken (500 WS points)
 
 UNLOCK TABLES;
