@@ -5832,7 +5832,7 @@ namespace battleutils
         CStatusEffect* effectScarDel = PDefender->StatusEffectContainer->GetStatusEffect(EFFECT_SCARLET_DELIRIUM);
 
         // Damage bonus calculation, update Effect Power
-        if (effectScarDel && effectScarDel->GetPower() == 0)
+        if (PDefender->StatusEffectContainer->HasStatusEffect(EFFECT_SCARLET_DELIRIUM) && effectScarDel->GetPower() == 0)
         {
             // Damage to Max HP Ratio
             int8   bonus    = std::floor(((damage * 100) / PDefender->GetMaxHP()) / 2);

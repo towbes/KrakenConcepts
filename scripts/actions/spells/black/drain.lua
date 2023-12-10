@@ -55,6 +55,7 @@ spellObject.onSpellCast = function(caster, target, spell)
     end
 
     caster:addHP(dmg)
+    caster:delStatusEffect(xi.effect.NETHER_VOID)
     return dmg
 end
 

@@ -61,6 +61,7 @@ spellObject.onSpellCast = function(caster, target, spell)
     end
 
     caster:addHP(dmg)
+    caster:delStatusEffect(xi.effect.NETHER_VOID)
     spell:setMsg(xi.msg.basic.MAGIC_DRAIN_HP) --change msg to 'xxx hp drained from the yyyy.'
     return dmg
 end
