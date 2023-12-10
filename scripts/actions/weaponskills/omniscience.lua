@@ -22,8 +22,14 @@ weaponskillObject.onUseWeaponSkill = function(player, target, wsID, tp, primary,
     params.ele = xi.element.DARK
     params.skill = xi.skill.STAFF
     params.includemab = true
+    
+    params.useStatCoefficient = true
+    params.dStat1          = xi.mod.MND
+    params.dStat2          = xi.mod.MND
+    params.dStatMultiplier = 2
 
     if xi.settings.main.USE_ADOULIN_WEAPON_SKILL_CHANGES then
+        params.ftp100 = 3 params.ftp200 = 3 params.ftp300 = 3
         params.mnd_wsc = 0.8
     end
 
@@ -36,6 +42,7 @@ weaponskillObject.onUseWeaponSkill = function(player, target, wsID, tp, primary,
         if not target:hasStatusEffect(xi.effect.MAGIC_ATK_DOWN) then
             local duration = tp / 1000 * 60
             target:addStatusEffect(xi.effect.MAGIC_ATK_DOWN, 10, 0, duration)
+            player:messagePublic(xi.msg.basic.SKILL_ENFEEB, target, wsID, xi.effect.MAGIC_ATK_DOWN)
         end
     end
 

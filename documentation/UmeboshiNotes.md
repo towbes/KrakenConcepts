@@ -12,12 +12,14 @@ Custume ID - Mob Family Name
     - 2169 Tegmina Buffet
     - 2170 Sanguinary Slash
     - 2171 Orthopterror
+
 2535 - Trytherim
     - 2129 Tempestuous Upheaval
     - 2130 Slice n Dice
     - 2131 Black Out
     - 2132 Smouldering Swarm
-2555 - Crakclaw
+
+2555 - Crakclaw DONE
     - 2177 Triple claw attack AA
     - 2178 Claw grab/hug AA
     - 2179 Spin attack AA
@@ -26,13 +28,16 @@ Custume ID - Mob Family Name
     - 2182 Water Claw Attack (Sundering Snip)
     - 2183 Water Breath Attack (Viscid Spindrift?)
     - 2184 Jump Water Attack (Riptide Eupnea?)
+
 2104 - Mantis (Green, Non NM)
     - Animations correct
-2565 - Umbril
+
+2565 - Umbril DONE
     - 2185 Paralyzing Triad
     - 2186 Necrotic Brume
     - 2187 Crepuscular Grasp
     - 2188 Terminal Bloom
+
 2515 - Gabbrath
     2142 - 4 Hit Attack AA
     2143 - Charge Attack AA
@@ -44,6 +49,7 @@ Custume ID - Mob Family Name
     2149 - Batholithic Shell
     2150 - Pyroclastic Surge
     2151 - Incinerating Lahar
+
 2500 - Bztavian
     2133 - bztavian_melee_bite
     2134 - bztavian_melee_slash
@@ -54,7 +60,8 @@ Custume ID - Mob Family Name
     2139 - Flies in circle
     2140 - Powerful Stinger attack
     2141 - Empowered Stinger Attack (Purple)
-2560 - Matamata
+
+2560 - Matamata (Almost DONE) (Need to script Debilitating Spout)
     2121 - AA
     2122 - AA
     2123 - AA
@@ -63,18 +70,23 @@ Custume ID - Mob Family Name
     2126 - Embalming Earth
     2127 - Scalding Breath
     2128 - Debilitating Spout?
+
 2110 - Harpeia
     - Current Animations Seem Correct
+
 2530 - Leafkin
     - Current Animations Seem Correct
+
 2550 - Snap Weed
     - 2172 (Tickling Tendrils)
     - 2173 (Stink Bomb)
     - 2174 (Nectarous Deluge)
     - 2175 (Nepenthic Plunge)
     - 2176 (Infaunal Flop)
+
 2595 - Tulfaire
     - Animations Seem Correct
+
 2195 - Yztarg
     - 2091 AA (Single Hit)
     - 2092 AA (Overhead Pound)
@@ -84,6 +96,7 @@ Custume ID - Mob Family Name
     - 2096 Divesting Stampede
     - 2097 Bonebreaking Barrage
     - 2098 Beastruction
+
 2919 - Mosquito
 
 2091 - Belladona
@@ -94,6 +107,7 @@ Custume ID - Mob Family Name
     - 2100 Sylvan Slumber
     - 2101 Crushing Gaze
     - 2102 Vaskania
+
 2510 - Yggtreant
     2202-2204 - AA
     2205 Root of the problem
@@ -102,12 +116,16 @@ Custume ID - Mob Family Name
     2208 Canopierce
     2209 Firefly Fandango
     2210 Tiiimbeeer
+
 2092 - Pteraketos
     Animations seem correct
+
 2505 - Rockfin
     Animations seem correct
+
 2289 - Fluturini
     Animations seem correct
+
 516 - Giant Gnat
     - 2103-2105 AA
     - 2106 Flesh Syphon
@@ -116,13 +134,15 @@ Custume ID - Mob Family Name
     - 2109 Abdominal Assault
     - 2110 Umbral Expunction
 
-2570 - Acuex
+2570 - Acuex DONE
     - 2189 Pestilent Plume
     - 2190 Foul Waters
     - 2191 Deadening Haze
     - 2192 Venemous Vaper
+
 2060 - Botuli
     - Animations seem correct
+
 2580 - Waktza
     - 2214 - 2216 AAs
     - 2223 - 2224 Melee Specials?
@@ -139,21 +159,26 @@ Custume ID - Mob Family Name
     - 2301 Infernal Bulwark
     - 2302 Atramentous Libations
     - 2303 Noahionto
+
 2946 - Naraka
     - Animations seem correct
     - 1931 Sakra Storm
+
 2882 - FFXIV Spriggan
     - 2270 ?
     - 2271 Jittering Jig
     - 2272 Romp
     - 2273 Frenetic Flurry
+
 1359 - Gallu
     - Animations seem correct
+
 2601 - Raaz
     - 2274 Barreling Smash
     - 2275 Sweeping Gouge
     - 2276 Zealous Snort
     - 2277 Terrifying Snap
+
 1940 - Marolith
     - 2086 Metamorphic Blast
     - 2087 Enervating Grasp
@@ -161,6 +186,11 @@ Custume ID - Mob Family Name
     - 2089 Subduction
     - 2090 Tetonic Shift
 
+
+Unknown mob skills:
+
+2153: Enviroment Toxic Shroom
+2154: Enviroment Steam spout
 
 
 

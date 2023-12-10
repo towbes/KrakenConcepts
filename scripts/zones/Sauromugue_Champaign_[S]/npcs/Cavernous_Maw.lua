@@ -4,6 +4,8 @@
 -- !pos 369 8 -227 98
 -- Teleports Players to Sauromugue_Champaign
 -----------------------------------
+local ID = zones[xi.zone.SAUROMUGUE_CHAMPAIGN_S]
+-----------------------------------
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)

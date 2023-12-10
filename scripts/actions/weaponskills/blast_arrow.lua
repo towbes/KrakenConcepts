@@ -52,9 +52,10 @@ weaponskillObject.onUseWeaponSkill = function(player, target, wsID, tp, primary,
     local damage, criticalHit, tpHits, extraHits = xi.weaponskills.doRangedWeaponskill(player, target, wsID, params, tp, action, primary)
 
     local chance = (tp-1000) * applyResistanceAddEffect(player, target, xi.element.THUNDER, 0) > math.random() * 150
-    if damage > 0 and not target:hasStatusEffect(xi.effect.STUN) and chance then
-        local duration = 2 * applyResistanceAddEffect(player, target, xi.element.THUNDER, 0)
+    if damage > 0 and not target:hasStatusEffect(xi.effect.STUN) and chance and not target:hasImmunity(xi.immunity.STUN) then
+        local duration = 6 * applyResistanceAddEffect(player, target, xi.element.THUNDER, 0)
         target:addStatusEffect(xi.effect.STUN, 1, 0, duration)
+        player:messagePublic(xi.msg.basic.SKILL_ENFEEB, target, wsID, xi.effect.STUN)
     end
 
     return tpHits, extraHits, criticalHit, damage

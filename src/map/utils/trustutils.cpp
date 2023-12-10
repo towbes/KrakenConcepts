@@ -341,12 +341,17 @@ namespace trustutils
 
     CTrustEntity* SpawnTrust(CCharEntity* PMaster, uint32 TrustID)
     {
+        CTrustEntity* PTrust = LoadTrust(PMaster, TrustID);
+        if (PTrust == nullptr)
+        {
+            return nullptr;
+        }
+
         if (PMaster->PParty == nullptr)
         {
             PMaster->PParty = new CParty(PMaster);
         }
 
-        CTrustEntity* PTrust = LoadTrust(PMaster, TrustID);
         PMaster->PTrusts.insert(PMaster->PTrusts.end(), PTrust);
         PMaster->StatusEffectContainer->CopyConfrontationEffect(PTrust);
         PTrust->setBattleID(PMaster->getBattleID());
@@ -374,11 +379,19 @@ namespace trustutils
         auto* PTrust = new CTrustEntity(PMaster);
 
         // clang-format off
-        auto* trustData = *std::find_if(g_PTrustList.begin(), g_PTrustList.end(), [TrustID](Trust_t* t)
+        auto maybeTrustData = std::find_if(g_PTrustList.begin(), g_PTrustList.end(), [TrustID](Trust_t* t)
         {
             return t->trustID == TrustID;
         });
         // clang-format on
+
+        if (maybeTrustData == g_PTrustList.end())
+        {
+            ShowError(fmt::format("Could not look up trust data for id: {}", TrustID));
+            return PTrust;
+        }
+
+        auto* trustData = *maybeTrustData;
 
         PTrust->loc              = PMaster->loc;
         PTrust->m_OwnerID.id     = PMaster->id;
@@ -691,13 +704,13 @@ namespace trustutils
             }
         }
 
-        PTrust->addModifier(Mod::DEF, mobutils::GetBase(PTrust, PTrust->defRank));
-        PTrust->addModifier(Mod::EVA, mobutils::GetBase(PTrust, PTrust->evaRank));
-        PTrust->addModifier(Mod::ATT, mobutils::GetBase(PTrust, PTrust->attRank));
-        PTrust->addModifier(Mod::ACC, mobutils::GetBase(PTrust, PTrust->accRank));
+        PTrust->addModifier(Mod::DEF, mobutils::GetBaseSkill(PTrust, PTrust->defRank));
+        PTrust->addModifier(Mod::EVA, mobutils::GetBaseSkill(PTrust, PTrust->evaRank));
+        PTrust->addModifier(Mod::ATT, mobutils::GetBaseSkill(PTrust, PTrust->attRank));
+        PTrust->addModifier(Mod::ACC, mobutils::GetBaseSkill(PTrust, PTrust->accRank));
 
-        PTrust->addModifier(Mod::RATT, mobutils::GetBase(PTrust, PTrust->attRank));
-        PTrust->addModifier(Mod::RACC, mobutils::GetBase(PTrust, PTrust->accRank));
+        PTrust->addModifier(Mod::RATT, mobutils::GetBaseSkill(PTrust, PTrust->attRank));
+        PTrust->addModifier(Mod::RACC, mobutils::GetBaseSkill(PTrust, PTrust->accRank));
 
         // Natural magic evasion
         PTrust->addModifier(Mod::MEVA, mobutils::GetMagicEvasion(PTrust));

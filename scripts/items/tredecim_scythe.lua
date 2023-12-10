@@ -4,19 +4,26 @@
 -----------------------------------
 local itemObject = {}
 
-itemObject.onItemDrop = function(player, item)
-    player:setCharVar('TREDECIM_COUNTER', 0)
-end
+itemObject.onItemEquip = function(target, item)
+    target:addListener('MELEE_SWING_HIT', 'TREDECIM_MELEE_SWING_HIT', function(playerArg, targetArg, attackArg)
+        local mainWeapon = playerArg:getEquippedItem(xi.slot.MAIN)
+        if mainWeapon and mainWeapon:getID() == xi.item.TREDECIM_SCYTHE then
+            local exData = mainWeapon:getExData()
+            local count  = exData[0]
 
-itemObject.onItemEquip = function(player, item)
-    player:addListener('ATTACK', 'TREDECIM_ATTACK', function(playerArg, mob)
-        -- Setting of critical attack is handled in battleentity.cpp
-        playerArg:setCharVar('TREDECIM_COUNTER', playerArg:getCharVar('TREDECIM_COUNTER') + 1)
+            if count % 13 == 12 then
+                attackArg:setCritical(true)
+            end
+
+            exData[0] = (count + 1) % 13
+
+            mainWeapon:setExData(exData)
+        end
     end)
 end
 
-itemObject.onItemUnequip = function(player, item)
-    player:removeListener('TREDECIM_ATTACK')
+itemObject.onItemUnequip = function(target, item)
+    target:removeListener('TREDECIM_MELEE_SWING_HIT')
 end
 
 return itemObject

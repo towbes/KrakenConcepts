@@ -11,14 +11,14 @@ local entity = {}
      [641] =
      {
          {
-             { itemid =    0, droprate =  50 }, -- nothing
-             { itemid = 1769, droprate = 450 }, -- Square of Galateia
-             { itemid = 1764, droprate =  50 }, -- Kejusu Satin
-             { itemid = 1763, droprate = 450 }, -- Viridian Urushi
+             { itemid = xi.item.NONE, droprate =  50 }, -- nothing
+             { itemid = xi.item.SQUARE_OF_GALATEIA, droprate = 450 }, -- Square of Galateia
+             { itemid = xi.item.SQUARE_OF_KEJUSU_SATIN, droprate =  50 }, -- Kejusu Satin
+             { itemid = xi.item.POT_OF_VIRIDIAN_URUSHI, droprate = 450 }, -- Viridian Urushi
          },
 
          {
-             { itemid =    0, droprate = 950 }, -- nothing
+             { itemid = xi.item.NONE, droprate = 950 }, -- nothing
              { itemid = 1842, droprate =  50 }, -- Cloud Evoker
          },
 

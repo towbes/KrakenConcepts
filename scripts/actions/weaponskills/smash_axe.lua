@@ -29,9 +29,10 @@ weaponskillObject.onUseWeaponSkill = function(player, target, wsID, tp, primary,
 
     local damage, criticalHit, tpHits, extraHits = xi.weaponskills.doPhysicalWeaponskill(player, target, wsID, params, tp, action, primary, taChar)
 
-    if damage > 0 and not target:hasStatusEffect(xi.effect.STUN) then
+    if damage > 0 and not target:hasStatusEffect(xi.effect.STUN) and not target:hasImmunity(xi.immunity.STUN) then
         local duration = (tp / 500) * applyResistanceAddEffect(player, target, xi.element.THUNDER, 0)
         target:addStatusEffect(xi.effect.STUN, 1, 0, duration)
+        player:messagePublic(xi.msg.basic.SKILL_ENFEEB, target, wsID, xi.effect.STUN)
     end
 
     return tpHits, extraHits, criticalHit, damage

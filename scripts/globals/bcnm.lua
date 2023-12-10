@@ -528,6 +528,8 @@ local function checkReqs(player, npc, bfid, registrant)
     local npcId     = npc:getID()
     local mainJob   = player:getMainJob()
     local mainLevel = player:getMainLvl()
+    local subJob   = player:getSubJob()
+    local subLevel = player:getSubLvl()
 
     local sandoriaMission  = player:getCurrentMission(xi.mission.log_id.SANDORIA)
     local bastokMission    = player:getCurrentMission(xi.mission.log_id.BASTOK)
@@ -753,7 +755,7 @@ local function checkReqs(player, npc, bfid, registrant)
         end,
 
         [418] = function() -- Quest: Trial-size Trial by Wind
-            return mainJob == xi.job.SMN and mainLevel >= 20
+            return ((mainJob == xi.job.SMN or subJob == xi.job.SMN) and mainLevel >= 20)
         end,
 
         [419] = function() -- Quest: Waking the Beast (Cloister of Gales)
@@ -775,7 +777,7 @@ local function checkReqs(player, npc, bfid, registrant)
         end,
 
         [450] = function() -- Quest: Trial-size Trial by Lightning
-            return mainJob == xi.job.SMN and mainLevel >= 20
+            return ((mainJob == xi.job.SMN or subJob == xi.job.SMN) and mainLevel >= 20)
         end,
 
         [451] = function() -- Quest: Waking the Beast (Cloister of Storms)
@@ -797,7 +799,7 @@ local function checkReqs(player, npc, bfid, registrant)
         end,
 
         [482] = function() -- Quest: Trial-size Trial by Ice
-            return mainJob == xi.job.SMN and mainLevel >= 20
+            return ((mainJob == xi.job.SMN or subJob == xi.job.SMN) and mainLevel >= 20)
         end,
 
         [483] = function() -- Quest: Waking the Beast (Cloister of Frost)
@@ -851,7 +853,7 @@ local function checkReqs(player, npc, bfid, registrant)
         end,
 
         [545] = function() -- Quest: Trial-size Trial by Fire
-            return mainJob == xi.job.SMN and mainLevel >= 20
+            return ((mainJob == xi.job.SMN or subJob == xi.job.SMN) and mainLevel >= 20)
         end,
 
         [546] = function() -- Quest: Waking the Beast (Cloister of Flames)
@@ -873,7 +875,7 @@ local function checkReqs(player, npc, bfid, registrant)
         end,
 
         [578] = function() -- Quest: Trial-size Trial by Earth
-            return mainJob == xi.job.SMN and mainLevel >= 20
+            return ((mainJob == xi.job.SMN or subJob == xi.job.SMN) and mainLevel >= 20)
         end,
 
         [579] = function() -- Quest: Waking the Beast (Cloister of Tremors)
@@ -891,7 +893,7 @@ local function checkReqs(player, npc, bfid, registrant)
         end,
 
         [609] = function() -- Quest: Trial-size Trial by Water
-            return mainJob == xi.job.SMN and mainLevel >= 20
+            return ((mainJob == xi.job.SMN or subJob == xi.job.SMN) and mainLevel >= 20)
         end,
 
         [610] = function() -- Quest: Waking the Beast (Cloister of Tides)

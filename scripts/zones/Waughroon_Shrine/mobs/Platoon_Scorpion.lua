@@ -42,7 +42,7 @@ entity.onMobSpawn = function(mob)
 
         -- Scorpions can still move around, but will not auto attack
         elseif math.random() <= 0.25 and skillID == 354 then
-            mobArg:showText(mob, ID.text.SCORPION_NO_ENERGY)
+            mobArg:showText(mob, ID.text.SCORPION_IS_STUNNED)
             mobArg:setAutoAttackEnabled(false)
             mobArg:timer(1000 * math.random(25, 30), function(mobArg1)
                 mobArg1:setAutoAttackEnabled(true)
@@ -63,8 +63,8 @@ entity.onMobDeath = function(mob, player, optParams)
 
                 if allyID ~= mob:getID() and scorpion:isAlive() then
                     scorpion:setLocalVar('wildRagePower', GetMobByID(allyID):getLocalVar('wildRagePower') + 1)
-                    scorpion:addMod(xi.mod.SLEEPRESBUILD, 200)
-                    scorpion:addMod(xi.mod.LULLABYRESBUILD, 200)
+                    scorpion:addMod(xi.mod.SLEEPRES, 10)
+                    scorpion:addMod(xi.mod.LULLABYRES, 10)
                 end
             end
         end

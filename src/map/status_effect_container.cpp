@@ -1795,13 +1795,23 @@ void CStatusEffectContainer::HandleAura(CStatusEffect* PStatusEffect)
                     distance(m_POwner->loc.p, PMember->loc.p) <= aura_range &&
                     !PMember->isDead())
                 {
-                    CStatusEffect* PEffect = new CStatusEffect((EFFECT)PStatusEffect->GetSubID(), // Effect ID
-                                                               PStatusEffect->GetSubID(),         // Effect Icon (Associated with ID)
-                                                               PStatusEffect->GetSubPower(),      // Power
-                                                               3,                                 // Tick
-                                                               4);                                // Duration
-                    PEffect->AddEffectFlag(EFFECTFLAG_NO_LOSS_MESSAGE);
-                    PMember->StatusEffectContainer->AddStatusEffect(PEffect, true);
+                    CStatusEffect* PEffect = PMember->StatusEffectContainer->GetStatusEffect(static_cast<EFFECT>(PStatusEffect->GetSubID()));
+
+                    if (PEffect && (PEffect->GetEffectFlags() & EFFECTFLAG_ALWAYS_EXPIRING) != 0)
+                    {
+                        PEffect->SetStartTime(server_clock::now());
+                    }
+                    else
+                    {
+                        PEffect = new CStatusEffect(static_cast<EFFECT>(PStatusEffect->GetSubID()), // Effect ID
+                                                    PStatusEffect->GetSubID(),                      // Effect Icon (Associated with ID)
+                                                    PStatusEffect->GetSubPower(),                   // Power
+                                                    3,                                              // Tick
+                                                    4);                                             // Duration
+                        PEffect->AddEffectFlag(EFFECTFLAG_NO_LOSS_MESSAGE);
+                        PEffect->AddEffectFlag(EFFECTFLAG_ALWAYS_EXPIRING);
+                        PMember->StatusEffectContainer->AddStatusEffect(PEffect, true);
+                    }
                 }
             });
             // clang-format on
@@ -1828,13 +1838,23 @@ void CStatusEffectContainer::HandleAura(CStatusEffect* PStatusEffect)
                 if (PTarget != nullptr && PTarget->objtype != TYPE_TRUST && PEntity->loc.zone->GetID() == PTarget->loc.zone->GetID() && distance(m_POwner->loc.p, PTarget->loc.p) <= aura_range &&
                     !PTarget->isDead())
                 {
-                    CStatusEffect* PEffect = new CStatusEffect((EFFECT)PStatusEffect->GetSubID(), // Effect ID
-                                                               PStatusEffect->GetSubID(),         // Effect Icon (Associated with ID)
-                                                               PStatusEffect->GetSubPower(),      // Power
-                                                               3,                                 // Tick
-                                                               4);                                // Duration
-                    PEffect->AddEffectFlag(EFFECTFLAG_NO_LOSS_MESSAGE);
-                    PTarget->StatusEffectContainer->AddStatusEffect(PEffect, true);
+                    CStatusEffect* PEffect = PTarget->StatusEffectContainer->GetStatusEffect(static_cast<EFFECT>(PStatusEffect->GetSubID()));
+
+                    if (PEffect && (PEffect->GetEffectFlags() & EFFECTFLAG_ALWAYS_EXPIRING) != 0)
+                    {
+                        PEffect->SetStartTime(server_clock::now());
+                    }
+                    else
+                    {
+                        PEffect = new CStatusEffect(static_cast<EFFECT>(PStatusEffect->GetSubID()), // Effect ID
+                                                    PStatusEffect->GetSubID(),                      // Effect Icon (Associated with ID)
+                                                    PStatusEffect->GetSubPower(),                   // Power
+                                                    3,                                              // Tick
+                                                    4);                                             // Duration
+                        PEffect->AddEffectFlag(EFFECTFLAG_NO_LOSS_MESSAGE);
+                        PEffect->AddEffectFlag(EFFECTFLAG_ALWAYS_EXPIRING);
+                        PTarget->StatusEffectContainer->AddStatusEffect(PEffect, true);
+                    }
                 }
             }
         }
@@ -1849,13 +1869,23 @@ void CStatusEffectContainer::HandleAura(CStatusEffect* PStatusEffect)
                 if (PMember != nullptr && PEntity->loc.zone->GetID() == PMember->loc.zone->GetID() && distance(m_POwner->loc.p, PMember->loc.p) <= aura_range &&
                     !PMember->isDead())
                 {
-                    CStatusEffect* PEffect = new CStatusEffect((EFFECT)PStatusEffect->GetSubID(), // Effect ID
-                                                               PStatusEffect->GetSubID(),         // Effect Icon (Associated with ID)
-                                                               PStatusEffect->GetSubPower(),      // Power
-                                                               3,                                 // Tick
-                                                               4);                                // Duration
-                    PEffect->AddEffectFlag(EFFECTFLAG_NO_LOSS_MESSAGE);
-                    PMember->StatusEffectContainer->AddStatusEffect(PEffect, true);
+                    CStatusEffect* PEffect = PMember->StatusEffectContainer->GetStatusEffect(static_cast<EFFECT>(PStatusEffect->GetSubID()));
+
+                    if (PEffect && (PEffect->GetEffectFlags() & EFFECTFLAG_ALWAYS_EXPIRING) != 0)
+                    {
+                        PEffect->SetStartTime(server_clock::now());
+                    }
+                    else
+                    {
+                        PEffect = new CStatusEffect(static_cast<EFFECT>(PStatusEffect->GetSubID()), // Effect ID
+                                                    PStatusEffect->GetSubID(),                      // Effect Icon (Associated with ID)
+                                                    PStatusEffect->GetSubPower(),                   // Power
+                                                    3,                                              // Tick
+                                                    4);                                             // Duration
+                        PEffect->AddEffectFlag(EFFECTFLAG_NO_LOSS_MESSAGE);
+                        PEffect->AddEffectFlag(EFFECTFLAG_ALWAYS_EXPIRING);
+                        PMember->StatusEffectContainer->AddStatusEffect(PEffect, true);
+                    }
                 }
             });
             // clang-format on
@@ -1870,13 +1900,23 @@ void CStatusEffectContainer::HandleAura(CStatusEffect* PStatusEffect)
                 if (PTarget != nullptr && PEntity->loc.zone->GetID() == PTarget->loc.zone->GetID() && distance(m_POwner->loc.p, PTarget->loc.p) <= aura_range &&
                     !PTarget->isDead())
                 {
-                    CStatusEffect* PEffect = new CStatusEffect((EFFECT)PStatusEffect->GetSubID(), // Effect ID
-                                                               PStatusEffect->GetSubID(),         // Effect Icon (Associated with ID)
-                                                               PStatusEffect->GetSubPower(),      // Power
-                                                               3,                                 // Tick
-                                                               4);                                // Duration
-                    PEffect->AddEffectFlag(EFFECTFLAG_NO_LOSS_MESSAGE);
-                    PTarget->StatusEffectContainer->AddStatusEffect(PEffect, true);
+                    CStatusEffect* PEffect = PTarget->StatusEffectContainer->GetStatusEffect(static_cast<EFFECT>(PStatusEffect->GetSubID()));
+
+                    if (PEffect && (PEffect->GetEffectFlags() & EFFECTFLAG_ALWAYS_EXPIRING) != 0)
+                    {
+                        PEffect->SetStartTime(server_clock::now());
+                    }
+                    else
+                    {
+                        PEffect = new CStatusEffect(static_cast<EFFECT>(PStatusEffect->GetSubID()), // Effect ID
+                                                    PStatusEffect->GetSubID(),                      // Effect Icon (Associated with ID)
+                                                    PStatusEffect->GetSubPower(),                   // Power
+                                                    3,                                              // Tick
+                                                    4);                                             // Duration
+                        PEffect->AddEffectFlag(EFFECTFLAG_NO_LOSS_MESSAGE);
+                        PEffect->AddEffectFlag(EFFECTFLAG_ALWAYS_EXPIRING);
+                        PTarget->StatusEffectContainer->AddStatusEffect(PEffect, true);
+                    }
                 }
             }
         }

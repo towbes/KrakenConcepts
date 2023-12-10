@@ -4604,8 +4604,7 @@ void CLuaBaseEntity::equipItem(uint16 itemID, sol::object const& container)
         if (auto* PItem = dynamic_cast<CItemEquipment*>(PChar->getStorage(containerID)->GetItem(slotId)))
         {
             charutils::EquipItem(PChar, slotId, PItem->getSlotType(), containerID);
-            charutils::SaveCharEquip(PChar);
-            charutils::SaveCharLook(PChar);
+            PChar->RequestPersist(CHAR_PERSIST::EQUIP);
         }
     }
 }
@@ -6156,6 +6155,7 @@ void CLuaBaseEntity::setLevel(uint8 level)
         jobpointutils::RefreshGiftMods(PChar);
         charutils::BuildingCharSkillsTable(PChar);
         charutils::BuildingCharAbilityTable(PChar);
+        charutils::BuildingCharWeaponSkills(PChar);
         charutils::BuildingCharTraitsTable(PChar);
 
         PChar->UpdateHealth();
@@ -11778,6 +11778,35 @@ bool CLuaBaseEntity::isUsingH2H()
 }
 
 /************************************************************************
+ *  Function: getBaseWeaponDelay(bool offhand)
+ *  Purpose : Returns the unmodified base delay of an PCs's melee attack without any form of delay reduction
+ *  Example : local delay = player:getBaseWeaponDelay(false)
+ *  Notes   :
+ ************************************************************************/
+
+uint16 CLuaBaseEntity::getBaseWeaponDelay(uint16 slot)
+{
+    if (m_PBaseEntity->objtype != TYPE_PC)
+    {
+        ShowWarning("Invalid entity type calling function (%s).", m_PBaseEntity->GetName());
+        return false;
+    }
+    CCharEntity* PCharEntity = dynamic_cast<CCharEntity*>(m_PBaseEntity);
+
+    if (PCharEntity)
+    {
+        CItemWeapon* PWeapon = dynamic_cast<CItemWeapon*>(PCharEntity->getEquip(static_cast<SLOTTYPE>(slot)));
+
+        if (PWeapon)
+        {
+            return PWeapon->getBaseDelay();
+        }
+    }
+
+    return 0;
+}
+
+/************************************************************************
  *  Function: getBaseDelay()
  *  Purpose : Returns the unmodified base delay of an entity's melee attack without any form of delay reduction
  *  Example : local delay = player:getBaseDelay()
@@ -13002,28 +13031,14 @@ bool CLuaBaseEntity::delLatent(uint16 condID, uint16 conditionValue, uint16 mID,
 
 int16 CLuaBaseEntity::getMaxGearMod(Mod modId)
 {
-    CCharEntity* PChar       = dynamic_cast<CCharEntity*>(m_PBaseEntity);
-    uint16       maxModValue = 0;
-
-    if (!PChar)
+    if (m_PBaseEntity->objtype != TYPE_PC)
     {
-        ShowWarning("CLuaBaseEntity::getMaxGearMod() - m_PBaseEntity is not a player.");
+        ShowWarning("Invalid Entity (Non-PC: %s) calling function.", m_PBaseEntity->GetName());
+
         return 0;
     }
 
-    for (uint8 i = 0; i < SLOT_BACK; ++i)
-    {
-        auto* PItem = PChar->getEquip((SLOTTYPE)i);
-        if (PItem && (PItem->isType(ITEM_EQUIPMENT) || PItem->isType(ITEM_WEAPON)))
-        {
-            uint16 modValue = PItem->getModifier(modId);
-            if (modValue > maxModValue)
-            {
-                maxModValue = modValue;
-            }
-        }
-    }
-    return maxModValue;
+    return static_cast<CCharEntity*>(m_PBaseEntity)->getMaxGearMod(static_cast<Mod>(modId));
 }
 
 /************************************************************************
@@ -13223,6 +13238,18 @@ void CLuaBaseEntity::charm(CLuaBaseEntity const* target)
 void CLuaBaseEntity::uncharm()
 {
     battleutils::unCharm(static_cast<CBattleEntity*>(m_PBaseEntity));
+}
+
+/************************************************************************
+ *  Function: isTandemValid()
+ *  Purpose : checks if the entity satifies all conditions of tandem
+ *  Example : player:isTandemValid()
+ *  Notes   : for tandem strike and tandem blow
+ ************************************************************************/
+
+bool CLuaBaseEntity::isTandemValid()
+{
+    return battleutils::IsTandemValid(static_cast<CBattleEntity*>(m_PBaseEntity));
 }
 
 /************************************************************************
@@ -13775,6 +13802,38 @@ uint16 CLuaBaseEntity::getAmmoDmg()
 }
 
 /************************************************************************
+ *  Function: getWeaponHitCount(false)
+ *  Purpose : Gets the number of hits from a weapon
+ *  Example : local numMainHandHits = player:getWeaponHitCount(false)
+ ************************************************************************/
+
+uint16 CLuaBaseEntity::getWeaponHitCount(bool offhand)
+{
+    if (m_PBaseEntity->objtype != TYPE_PC)
+    {
+        ShowWarning("Invalid entity type calling function (%s).", m_PBaseEntity->GetName());
+        return 0;
+    }
+
+    if (CCharEntity* PChar = dynamic_cast<CCharEntity*>(m_PBaseEntity))
+    {
+        CItemWeapon* PMain = dynamic_cast<CItemWeapon*>(PChar->getEquip(SLOT_MAIN));
+        CItemWeapon* PSub  = dynamic_cast<CItemWeapon*>(PChar->getEquip(SLOT_SUB));
+
+        if (offhand && PSub)
+        {
+            return PSub->getHitCount();
+        }
+        else if (PMain)
+        {
+            return PMain->getHitCount();
+        }
+    }
+
+    return 0;
+}
+
+/************************************************************************
  *  Function: removeAmmo()
  *  Purpose : Expends one item in the ammo slot (arrow,bullet, etc)
  *  Example : player:removeAmmo()
@@ -14016,6 +14075,7 @@ void CLuaBaseEntity::spawnPet(sol::object const& arg0)
 
     if (m_PBaseEntity->objtype == TYPE_PC)
     {
+        auto* PChar = static_cast<CCharEntity*>(m_PBaseEntity);
         if ((arg0 != sol::lua_nil) && arg0.is<int>())
         {
             uint32 petId = arg0.as<uint32>();
@@ -14023,7 +14083,7 @@ void CLuaBaseEntity::spawnPet(sol::object const& arg0)
             {
                 if (((CCharEntity*)m_PBaseEntity)->PAutomaton)
                 {
-                    petId = PETID_HARLEQUINFRAME + static_cast<CCharEntity*>(m_PBaseEntity)->PAutomaton->getFrame() - 0x20;
+                    petId = static_cast<uint32>(PETID_HARLEQUINFRAME) + static_cast<uint32>(PChar->PAutomaton->getFrame()) - 0x20;
                 }
                 else
                 {
@@ -18156,6 +18216,7 @@ void CLuaBaseEntity::Register()
 
     SOL_REGISTER("isDualWielding", CLuaBaseEntity::isDualWielding);
     SOL_REGISTER("isUsingH2H", CLuaBaseEntity::isUsingH2H);
+    SOL_REGISTER("getBaseWeaponDelay", CLuaBaseEntity::getBaseWeaponDelay);
     SOL_REGISTER("getBaseDelay", CLuaBaseEntity::getBaseDelay);
     SOL_REGISTER("getBaseRangedDelay", CLuaBaseEntity::getBaseRangedDelay);
 
@@ -18222,6 +18283,7 @@ void CLuaBaseEntity::Register()
     // BST
     SOL_REGISTER("charm", CLuaBaseEntity::charm);
     SOL_REGISTER("uncharm", CLuaBaseEntity::uncharm);
+    SOL_REGISTER("isTandemValid", CLuaBaseEntity::isTandemValid);
 
     // PUP
     SOL_REGISTER("addBurden", CLuaBaseEntity::addBurden);
@@ -18255,6 +18317,7 @@ void CLuaBaseEntity::Register()
     SOL_REGISTER("getRangedDmg", CLuaBaseEntity::getRangedDmg);
     SOL_REGISTER("getRangedDmgRank", CLuaBaseEntity::getRangedDmgRank);
     SOL_REGISTER("getAmmoDmg", CLuaBaseEntity::getAmmoDmg);
+    SOL_REGISTER("getWeaponHitCount", CLuaBaseEntity::getWeaponHitCount);
 
     SOL_REGISTER("removeAmmo", CLuaBaseEntity::removeAmmo);
 

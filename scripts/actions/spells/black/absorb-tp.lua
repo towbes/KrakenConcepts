@@ -48,7 +48,7 @@ spellObject.onSpellCast = function(caster, target, spell)
         caster:addTP(dmg)
         target:addTP(-dmg)
     end
-
+    caster:delStatusEffect(xi.effect.NETHER_VOID)
     return dmg
 end
 

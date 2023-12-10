@@ -42,6 +42,7 @@ weaponskillObject.onUseWeaponSkill = function(player, target, wsID, tp, primary,
         local duration = tp / 1000 * 20 - 5
         if not target:hasStatusEffect(xi.effect.MAGIC_EVASION_DOWN) then
             target:addStatusEffect(xi.effect.MAGIC_EVASION_DOWN, 10, 0, duration)
+            player:messagePublic(xi.msg.basic.SKILL_ENFEEB, target, wsID, xi.effect.MAGIC_EVASION_DOWN)
         end
     end
 

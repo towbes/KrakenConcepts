@@ -126,10 +126,11 @@ namespace charutils
 
     void CalculateStats(CCharEntity* PChar)
     {
-        float raceStat  = 0; // The final HP number for a race-based level.
-        float jobStat   = 0; // Estimate HP level for the level based on the primary profession.
-        float sJobStat  = 0; // HP final number for a level based on a secondary profession.
-        int32 bonusStat = 0; // HP bonus number that is added subject to some conditions.
+        float raceStat     = 0; // The final HP number for a race-based level.
+        float jobStat      = 0; // Estimate HP level for the level based on the primary profession.
+        float sJobStat     = 0; // HP final number for a level based on a secondary profession.
+        float combinedStat = 0; // Combined jobStat + sJobStat
+        int32 bonusStat    = 0; // HP bonus number that is added subject to some conditions.
 
         int32 baseValueColumn   = 0; // Column number with base number HP
         int32 scaleTo60Column   = 1; // Column number with modifier up to 60 levels
@@ -201,6 +202,8 @@ namespace charutils
 
         int32 subLevelOver10 = std::clamp(slvl - 10, 0, 20); // + 1HP for each level after 10 (/ 2)
         int32 subLevelOver30 = (slvl < 30 ? 0 : slvl - 30);  // + 1HP for each level after 30
+        int32 subLevelUpTo60 = (slvl < 60 ? slvl - 1 : 59);  // The first time spent up to level 60 (is also used for MP)
+        int32 subLevelOver60 = (slvl < 60 ? 0 : slvl - 60);
 
         // Calculate Racestat Jobstat Bonusstat Sjobstat
         // Calculation of race
@@ -228,17 +231,18 @@ namespace charutils
 
             sJobStat = grade::GetHPScale(grade, baseValueColumn) + (grade::GetHPScale(grade, scaleTo60Column) * (slvl - 1)) +
                        (grade::GetHPScale(grade, scaleOver30Column) * subLevelOver30) + subLevelOver30 + subLevelOver10;
-            sJobStat = sJobStat / 2;
+            // sJobStat = sJobStat / 2;
         }
 
         uint16 MeritBonus   = PChar->PMeritPoints->GetMeritValue(MERIT_MAX_HP, PChar);
-        PChar->health.maxhp = (int16)(settings::get<float>("map.PLAYER_HP_MULTIPLIER") * (raceStat + jobStat + bonusStat + sJobStat) + MeritBonus);
+        PChar->health.maxhp = (int16)(settings::get<float>("map.PLAYER_HP_MULTIPLIER") * (raceStat + bonusStat + ((jobStat + sJobStat) * 0.75)) + MeritBonus);
 
         // The beginning of the MP
 
-        raceStat = 0;
-        jobStat  = 0;
-        sJobStat = 0;
+        raceStat     = 0;
+        jobStat      = 0;
+        sJobStat     = 0;
+        combinedStat = 0;
 
         // Calculation of the MP race.
         grade = grade::GetRaceGrades(race, 1);
@@ -315,18 +319,33 @@ namespace charutils
             if (slvl > 0)
             {
                 grade    = grade::GetJobGrade(sjob, StatIndex);
-                sJobStat = (grade::GetStatScale(grade, 0) + grade::GetStatScale(grade, scaleTo60Column) * (slvl - 1)) / 2;
+                // sJobStat = (grade::GetStatScale(grade, 0) + grade::GetStatScale(grade, scaleTo60Column) * (slvl - 1)) / 2;
+                sJobStat = grade::GetStatScale(grade, 0) + grade::GetStatScale(grade, scaleTo60Column) * subLevelUpTo60;
+                if (subLevelOver60 > 0)
+                {
+                    jobStat += grade::GetStatScale(grade, scaleOver60) * subLevelOver60;
+                }
             }
             else
             {
                 sJobStat = 0;
             }
 
+            // combinedStat = jobStat + sJobStat;
+            if (sjob > 0)
+            {
+                combinedStat = ((uint16)(settings::get<float>("map.PLAYER_BASE_STAT_MULTIPLIER") * (jobStat + sJobStat))); // Average out the stats of the main/sub job.
+            }
+            else
+            {
+                combinedStat = (jobStat * 1.3); // If the player has no sub, simply use the main job's stats plus bonus.
+            }
+
             // get each merit bonus stat, str,dex,vit and so on...
             MeritBonus = PChar->PMeritPoints->GetMeritValue(statMerit[StatIndex - 2], PChar);
 
             // Value output
-            ref<uint16>(&PChar->stats, counter) = (uint16)(settings::get<float>("map.PLAYER_STAT_MULTIPLIER") * (raceStat + jobStat + sJobStat) + MeritBonus);
+            ref<uint16>(&PChar->stats, counter) = (uint16)(settings::get<float>("map.PLAYER_STAT_MULTIPLIER") * (raceStat + combinedStat + MeritBonus));
             counter += 2;
         }
     }
@@ -2783,8 +2802,7 @@ namespace charutils
         PChar->pushPacket(new CCharAppearancePacket(PChar));
 
         BuildingCharWeaponSkills(PChar);
-        SaveCharEquip(PChar);
-        SaveCharLook(PChar);
+        PChar->RequestPersist(CHAR_PERSIST::EQUIP);
     }
 
     void RemoveAllEquipment(CCharEntity* PChar)
@@ -2804,8 +2822,7 @@ namespace charutils
         CheckUnarmedWeapon(PChar);
 
         BuildingCharWeaponSkills(PChar);
-        SaveCharEquip(PChar);
-        SaveCharLook(PChar);
+        PChar->RequestPersist(CHAR_PERSIST::EQUIP);
     }
 
     /************************************************************************
@@ -2945,7 +2962,7 @@ namespace charutils
                     }
                     else if (PetID == PETID_CAIT_SITH)
                     {
-                        if (PAbility->getID() > ABILITY_SOOTHING_RUBY && PAbility->getID() <= ABILITY_MOONLIT_CHARGE)
+                        if (PAbility->getID() > ABILITY_SOOTHING_RUBY && PAbility->getID() < ABILITY_MOONLIT_CHARGE)
                         {
                             addPetAbility(PChar, PAbility->getID() - ABILITY_HEALING_RUBY);
                         }
@@ -4201,12 +4218,12 @@ namespace charutils
 
                     if (isInSigilZone)
                     {
-                        exp *= 1.50f; // 50% XP Bonus in WOTG Areas
+                        exp *= 1.75f; // 50% XP Bonus in WOTG Areas
                     }
 
                     if (isInSanctionZone)
                     {
-                        exp *= 1.50f; // 50% XP Bonus in TOAU Areas
+                        exp *= 1.75f; // 50% XP Bonus in TOAU Areas
                     }
 
                     if (PMob->getMobMod(MOBMOD_EXP_BONUS))
@@ -4240,22 +4257,37 @@ namespace charutils
                                     exp *= 1.0f;
                                     break;
                                 case 1:
-                                    exp *= 1.2f;
+                                    exp *= 1.25f;
                                     break;
                                 case 2:
-                                    exp *= 1.35f;
+                                    exp *= 1.30f;
                                     break;
                                 case 3:
-                                    exp *= 1.5f;
+                                    exp *= 1.37f;
                                     break;
                                 case 4:
-                                    exp *= 1.6f;
+                                    exp *= 1.44f;
                                     break;
                                 case 5:
-                                    exp *= 1.7f;
+                                    exp *= 1.55f;
+                                    break;
+                                case 6:
+                                    exp *= 1.65f;
+                                    break;
+                                case 7:
+                                    exp *= 1.75f;
+                                    break;
+                                case 8:
+                                    exp *= 1.85f;
+                                    break;
+                                case 9:
+                                    exp *= 1.95f;
+                                    break;
+                                case 10:
+                                    exp *= 2.15f;
                                     break;
                                 default:
-                                    exp *= 1.75f;
+                                    exp *= 2.25f;
                                     break;
                             }
                         }
@@ -4719,6 +4751,12 @@ namespace charutils
 
         // MONs don't lose exp on death
         if (PChar->m_PMonstrosity != nullptr)
+        {
+            return;
+        }
+
+        // Do lose EXP in PvP
+        if (PChar->GetLocalVar("PVPMODE") > 0)
         {
             return;
         }

@@ -198,7 +198,12 @@ xi.mod =
     MAGIC_CRIT_DMG_INCREASE         = 563,
     HASTE_MAGIC                     = 167,
     SPELLINTERRUPT                  = 168,
-    MOVE                            = 169, -- % Movement Speed
+    MOVE_SPEED_OVERIDE              = 169, -- Modifier used to overide regular speed caps. (GM speed and Feast of Swords)
+    MOVE_SPEED_STACKABLE            =  75, -- Gear movement speed penalties, flee bonus, etc.
+    MOVE_SPEED_GEAR_BONUS           =  76, -- Gear movement speed bonuses. DOES NOT STACK with each other, only highest applies.
+    MOVE_SPEED_WEIGHT_PENALTY       =  77, -- For Gravity and curse.
+    MOVE_SPEED_QUICKENING           =  78, -- Jig, spreinter shoes, etc. Only highest of Mazurka OR quickening will take effect.
+    MOVE_SPEED_MAZURKA              =  79, -- Song movement speed. Only highest of Mazurka OR quickening will take effect.
     MOUNT_MOVE                      = 972, -- % Mount Movement Speed
     FASTCAST                        = 170,
     UFASTCAST                       = 407,
@@ -993,6 +998,8 @@ xi.mod =
     SEVERE_DMG_NULL          = 2037,
     ENH_ASPIR                = 2038, -- % damage boost to Aspir
     ENH_DRAIN                = 2039, -- % damage boost to DRAIN
+    TANDEM_STRIKE            = 2040, -- Beastmaster trait - provides acc/macc to master and pet when both engage the same target
+    TANDEM_BLOW              = 2041, -- Beastmaster trait - provides subtle blow to master and pet when both engage the same target
     -- IF YOU ADD ANY NEW MODIFIER HERE, ADD IT IN src/map/modifier.h ASWELL!
 
     -- The spares take care of finding the next ID to use so long as we don't forget to list IDs that have been freed up by refactoring.

@@ -1250,7 +1250,7 @@ void CZoneEntities::PushPacket(CBaseEntity* PEntity, GLOBAL_MESSAGE_TYPE message
         // clang-format off
         switch (message_type)
         {
-            case CHAR_INRANGE_SELF:
+            case CHAR_INRANGE_SELF: // NOTE!!!: This falls through to CHAR_INRANGE so both self and the local area get the packet
             {
                 TracyZoneCString("CHAR_INRANGE_SELF");
                 if (PEntity->objtype == TYPE_PC)
@@ -1409,6 +1409,8 @@ void CZoneEntities::ZoneServer(time_point tick)
             continue;
         }
 
+        ShowTrace(fmt::format("CZoneEntities::ZoneServer: Mob: {} ({})", PMob->GetName(), PMob->id).c_str());
+
         if (PMob->PBattlefield && PMob->PBattlefield->CanCleanup())
         {
             it++;
@@ -1504,6 +1506,9 @@ void CZoneEntities::ZoneServer(time_point tick)
     while (it != m_npcList.end())
     {
         CNpcEntity* PNpc = (CNpcEntity*)it->second;
+
+        ShowTrace(fmt::format("CZoneEntities::ZoneServer: NPC: {} ({})", PNpc->GetName(), PNpc->id).c_str());
+
         PNpc->PAI->Tick(tick);
 
         // This is only valid for dynamic entities
@@ -1534,6 +1539,8 @@ void CZoneEntities::ZoneServer(time_point tick)
         //     : this way, but we need to do this to keep allies working (for now).
         if (auto* PPet = static_cast<CPetEntity*>(it->second))
         {
+            ShowTrace(fmt::format("CZoneEntities::ZoneServer: Pet: {} ({})", PPet->GetName(), PPet->id).c_str());
+
             /*
              * Pets specifically need to be removed prior to evaluating their AI Tick
              * to prevent a number of issues which can result as a Pet having a
@@ -1575,6 +1582,8 @@ void CZoneEntities::ZoneServer(time_point tick)
     {
         if (CTrustEntity* PTrust = dynamic_cast<CTrustEntity*>(it->second))
         {
+            ShowTrace(fmt::format("CZoneEntities::ZoneServer: Trust: {} ({})", PTrust->GetName(), PTrust->id).c_str());
+
             PTrust->PRecastContainer->Check();
             PTrust->StatusEffectContainer->CheckEffectsExpiry(tick);
             if (tick > m_EffectCheckTime)
@@ -1618,6 +1627,8 @@ void CZoneEntities::ZoneServer(time_point tick)
     for (EntityList_t::const_iterator it = m_charList.begin(); it != m_charList.end(); ++it)
     {
         CCharEntity* PChar = (CCharEntity*)it->second;
+
+        ShowTrace(fmt::format("CZoneEntities::ZoneServer: Char: {} ({})", PChar->GetName(), PChar->id).c_str());
 
         if (PChar->status != STATUS_TYPE::SHUTDOWN)
         {

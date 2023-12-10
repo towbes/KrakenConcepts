@@ -34,8 +34,9 @@ weaponskillObject.onUseWeaponSkill = function(player, target, wsID, tp, primary,
 
     -- xi.effect.WEIGHT power value is equal to lead breath as per bg-wiki: http://www.bg-wiki.com/bg/Rudra%27s_Storm
     if damage > 0 then
-        if not target:hasStatusEffect(xi.effect.WEIGHT) then
+        if not target:hasStatusEffect(xi.effect.WEIGHT) and not target:hasImmunity(xi.immunity.GRAVITY) then
             target:addStatusEffect(xi.effect.WEIGHT, 50, 0, 60)
+            player:messagePublic(xi.msg.basic.SKILL_ENFEEB, target, wsID, xi.effect.WEIGHT)
         end
     end
 

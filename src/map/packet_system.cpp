@@ -918,6 +918,19 @@ void SmallPacket0x01A(map_session_data_t* const PSession, CCharEntity* const PCh
     ShowTrace(actionStr);
     DebugActions(actionStr);
 
+    // Retrigger latents if the previous packet parse in this chunk included equip/equipset
+    if (PChar->retriggerLatents)
+    {
+        for (uint8 equipSlotID = 0; equipSlotID < 16; ++equipSlotID)
+        {
+            if (PChar->equip[equipSlotID] != 0)
+            {
+                PChar->PLatentEffectContainer->CheckLatentsEquip(equipSlotID);
+            }
+        }
+        PChar->retriggerLatents = false; // reset as we have retriggered the latents somewhere
+    }
+
     switch (action)
     {
         case 0x00: // trigger
@@ -2604,7 +2617,7 @@ void SmallPacket0x04D(map_session_data_t* const PSession, CCharEntity* const PCh
 
             if (quantity > 0 && PItem && PItem->getQuantity() >= quantity && PChar->UContainer->IsSlotEmpty(slotID))
             {
-                int32 ret = sql->Query("SELECT charid, accid FROM chars WHERE charname = '%s' LIMIT 1;", data[0x10]);
+                int32 ret = sql->Query("SELECT charid, accid FROM chars WHERE charname = '%s' LIMIT 1;", str(data[0x10]));
                 if (ret != SQL_ERROR && sql->NumRows() > 0 && sql->NextRow() == SQL_SUCCESS)
                 {
                     uint32 charid = sql->GetUIntData(0);
@@ -2647,7 +2660,7 @@ void SmallPacket0x04D(map_session_data_t* const PSession, CCharEntity* const PCh
                     ret = sql->Query(
                         "INSERT INTO delivery_box(charid, charname, box, slot, itemid, itemsubid, quantity, extra, senderid, sender) VALUES(%u, "
                         "'%s', 2, %u, %u, %u, %u, '%s', %u, '%s'); ",
-                        PChar->id, PChar->GetName(), slotID, PItem->getID(), PItem->getSubID(), quantity, extra, charid, data[0x10]);
+                        PChar->id, PChar->GetName(), slotID, PItem->getID(), PItem->getSubID(), quantity, extra, charid, str(data[0x10]));
 
                     if (ret != SQL_ERROR && sql->AffectedRows() == 1 && charutils::UpdateItem(PChar, LOC_INVENTORY, invslot, -(int32)quantity))
                     {
@@ -3170,7 +3183,7 @@ void SmallPacket0x04D(map_session_data_t* const PSession, CCharEntity* const PCh
                 return;
             }
 
-            int32 ret = sql->Query("SELECT accid FROM chars WHERE charname = '%s' LIMIT 1", data[0x10]);
+            int32 ret = sql->Query("SELECT accid FROM chars WHERE charname = '%s' LIMIT 1", str(data[0x10]));
 
             if (ret != SQL_ERROR && sql->NumRows() > 0 && sql->NextRow() == SQL_SUCCESS)
             {
@@ -3547,11 +3560,10 @@ void SmallPacket0x050(map_session_data_t* const PSession, CCharEntity* const PCh
     }
 
     charutils::EquipItem(PChar, slotID, equipSlotID, containerID); // current
-    charutils::SaveCharEquip(PChar);
-    charutils::SaveCharLook(PChar);
+    PChar->RequestPersist(CHAR_PERSIST::EQUIP);
     luautils::CheckForGearSet(PChar); // check for gear set on gear change
     PChar->UpdateHealth();
-    PChar->retriggerLatentsAfterPacketParsing = true; // retrigger all latents after all equip packets are parsed
+    PChar->retriggerLatents = true; // retrigger all latents later because our gear has changed
 }
 
 /************************************************************************
@@ -3580,10 +3592,10 @@ void SmallPacket0x051(map_session_data_t* const PSession, CCharEntity* const PCh
             charutils::EquipItem(PChar, slotID, equipSlotID, containerID);
         }
     }
-    charutils::SaveCharEquip(PChar);
-    charutils::SaveCharLook(PChar);
+    PChar->RequestPersist(CHAR_PERSIST::EQUIP);
     luautils::CheckForGearSet(PChar); // check for gear set on gear change
     PChar->UpdateHealth();
+    PChar->retriggerLatents = true; // retrigger all latents later because our gear has changed
 }
 
 /************************************************************************
@@ -3620,7 +3632,7 @@ void SmallPacket0x053(map_session_data_t* const PSession, CCharEntity* const PCh
     if (type == 0 && PChar->getStyleLocked())
     {
         charutils::SetStyleLock(PChar, false);
-        charutils::SaveCharLook(PChar);
+        PChar->RequestPersist(CHAR_PERSIST::EQUIP);
     }
     else if (type == 1)
     {
@@ -3702,13 +3714,13 @@ void SmallPacket0x053(map_session_data_t* const PSession, CCharEntity* const PCh
             }
         }
         charutils::UpdateRemovedSlots(PChar);
-        charutils::SaveCharLook(PChar);
+        PChar->RequestPersist(CHAR_PERSIST::EQUIP);
     }
     else if (type == 4)
     {
         charutils::SetStyleLock(PChar, true);
         charutils::UpdateRemovedSlots(PChar);
-        charutils::SaveCharLook(PChar);
+        PChar->RequestPersist(CHAR_PERSIST::EQUIP);
     }
 
     if (type != 1 && type != 2)
@@ -4632,7 +4644,7 @@ void SmallPacket0x071(map_session_data_t* const PSession, CCharEntity* const PCh
                         if (sql->Query("DELETE FROM accounts_parties WHERE partyid = %u AND charid = %u;", PChar->id, id) == SQL_SUCCESS &&
                             sql->AffectedRows())
                         {
-                            ShowDebug("%s has removed %s from party", PChar->GetName(), data[0x0C]);
+                            ShowDebug("%s has removed %s from party", PChar->GetName(), str(data[0x0C]));
 
                             uint8 reloadData[4]{};
                             if (PChar->PParty && PChar->PParty->m_PAlliance)
@@ -4736,7 +4748,7 @@ void SmallPacket0x071(map_session_data_t* const PSession, CCharEntity* const PCh
                                            PARTY_SECOND | PARTY_THIRD, partyid) == SQL_SUCCESS &&
                                 sql->AffectedRows())
                             {
-                                ShowDebug("%s has removed %s party from alliance", PChar->GetName(), data[0x0C]);
+                                ShowDebug("%s has removed %s party from alliance", PChar->GetName(), str(data[0x0C]));
                                 // notify party they were removed
                                 uint8 removeData[4]{};
                                 ref<uint32>(removeData, 0) = partyid;
@@ -4912,7 +4924,7 @@ void SmallPacket0x077(map_session_data_t* const PSession, CCharEntity* const PCh
                 char memberName[PacketNameLength] = {};
                 memcpy(&memberName, data[0x04], PacketNameLength - 1);
 
-                ShowDebug(fmt::format("(Party)Altering permissions of {} to {}", memberName, data[0x15]));
+                ShowDebug(fmt::format("(Party)Altering permissions of {} to {}", str(memberName), str(data[0x15])));
                 PChar->PParty->AssignPartyRole(memberName, data.ref<uint8>(0x15));
             }
         }
@@ -4951,8 +4963,8 @@ void SmallPacket0x077(map_session_data_t* const PSession, CCharEntity* const PCh
                 char memberName[PacketNameLength] = {};
                 memcpy(&memberName, data[0x04], PacketNameLength - 1);
 
-                ShowDebug(fmt::format("(Alliance)Changing leader to {}", memberName));
-                PChar->PParty->m_PAlliance->assignAllianceLeader((const char*)data[0x04]);
+                ShowDebug(fmt::format("(Alliance)Changing leader to {}", str(memberName)));
+                PChar->PParty->m_PAlliance->assignAllianceLeader(str(data[0x04]).c_str());
 
                 uint8 allianceData[4]{};
                 ref<uint32>(allianceData, 0) = PChar->PParty->m_PAlliance->m_AllianceID;
@@ -5321,6 +5333,167 @@ void SmallPacket0x096(map_session_data_t* const PSession, CCharEntity* const PCh
     }
 
     synthutils::startSynth(PChar);
+}
+
+/************************************************************************
+ *                                                                        *
+ *  Chocobo Race Data Request                                             *
+ *                                                                        *
+ ************************************************************************/
+
+void SmallPacket0x09B(map_session_data_t* const PSession, CCharEntity* const PChar, CBasicPacket& data)
+{
+    // ShowInfo("SmallPacket0x09B");
+
+    // NOTE: Can trigger with !cs 335 from Chocobo Circuit
+
+    // 9B 06 96 04 03 00 00 00 02 00 00 00
+    // auto data0 = data.ref<uint8>(0x03);
+    // auto data1 = data.ref<uint8>(0x04);
+    auto data2 = data.ref<uint8>(0x08);
+
+    if (data2 == 0x01) // Check the tote board
+    {
+        auto packet = std::make_unique<CBasicPacket>();
+        packet->setType(0x73);
+        packet->setSize(0x48);
+
+        packet->ref<uint8>(0x04) = 0x01;
+
+        // Lots of look data, maybe?
+        packet->ref<uint32>(0x08) = 0x003B4879;
+        packet->ref<uint32>(0x10) = 0x00B1C350;
+        // etc.
+
+        PChar->pushPacket(std::move(packet));
+    }
+    else if (data2 == 0x02) // Talk to race official for racing data?
+    {
+        // Send Chocobo Race Data (4x 0x074)
+        for (int idx = 0x01; idx <= 0x04; ++idx)
+        {
+            auto packet = std::make_unique<CBasicPacket>();
+            packet->setType(0x74);
+            packet->setSize(0xB3);
+
+            packet->ref<uint8>(0x03) = 0x04;
+            packet->ref<uint8>(0x04) = 0x03;
+
+            packet->ref<uint8>(0x10) = idx;
+
+            switch (idx)
+            {
+                /*
+                [2023-11-13 12:33:14] Incoming packet 0x074:
+                        |  0  1  2  3  4  5  6  7  8  9  A  B  C  D  E  F      | 0123456789ABCDEF
+                    -----------------------------------------------------  ----------------------
+                    0 | 74 5A 98 04 03 00 00 00 00 00 00 00 00 00 00 00    0 | tZ..............
+                    1 | 01 00 08 00 28 00 00 00 03 00 00 C0 00 00 00 00    1 | ....(...........
+                    2 | 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00    2 | ................
+                    3 | 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00    3 | ................
+                    4 | 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00    4 | ................
+                    5 | 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00    5 | ................
+                    6 | 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00    6 | ................
+                    7 | 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00    7 | ................
+                    8 | 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00    8 | ................
+                    9 | 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00    9 | ................
+                    A | 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00    A | ................
+                    B | 00 00 00 00 -- -- -- -- -- -- -- -- -- -- -- --    B | ....------------
+                */
+                case 0x01:
+                {
+                    packet->ref<uint8>(0x12) = 0x08;
+                    packet->ref<uint8>(0x14) = 0x28; // Seen also as 0xC8
+                    packet->ref<uint8>(0x18) = 0x03; // Seen also as 0x01
+                    packet->ref<uint8>(0x1B) = 0xC0;
+                    break;
+                }
+                /*
+                [2023-11-13 12:33:14] Incoming packet 0x074:
+                        |  0  1  2  3  4  5  6  7  8  9  A  B  C  D  E  F      | 0123456789ABCDEF
+                    -----------------------------------------------------  ----------------------
+                    0 | 74 5A 98 04 03 00 00 00 00 00 00 00 00 00 00 00    0 | tZ..............
+                    1 | 02 00 60 00 30 00 00 00 FF FF 00 00 00 02 24 13    1 | ..`.0.........$.
+                    2 | 62 00 00 00 FF FF 40 40 00 82 02 15 41 00 00 00    2 | b.....@@....A...
+                    3 | E0 C0 60 80 00 02 20 26 21 00 00 00 C0 80 C0 80    3 | ..`... &!.......
+                    4 | 00 00 24 10 12 00 00 00 FF FF 80 00 00 02 40 10    4 | ..$...........@.
+                    5 | 51 00 00 00 80 60 E0 C0 00 08 08 10 30 00 00 00    5 | Q....`......0...
+                    6 | FF FF 00 00 00 0C 02 11 62 00 00 00 FF FF 40 40    6 | ........b.....@@
+                    7 | 00 C6 20 22 00 00 00 00 00 00 00 00 00 00 00 00    7 | .. "............
+                    8 | 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00    8 | ................
+                    9 | 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00    9 | ................
+                    A | 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00    A | ................
+                    B | 00 00 00 00 -- -- -- -- -- -- -- -- -- -- -- --    B | ....------------
+                */
+                case 0x02:
+                {
+                    // Stat and other data starting at 0x12
+                    packet->ref<uint8>(0x04) = 0x01;
+                    packet->ref<uint8>(0x14) = 0x12;
+
+                    packet->ref<uint32>(0x18) = 0x0080FFFF;
+                    packet->ref<uint32>(0x1C) = 0x13000A00;
+
+                    break;
+                }
+                /*
+                [2023-11-13 12:33:14] Incoming packet 0x074:
+                        |  0  1  2  3  4  5  6  7  8  9  A  B  C  D  E  F      | 0123456789ABCDEF
+                    -----------------------------------------------------  ----------------------
+                    0 | 74 5A 98 04 03 00 00 00 00 00 00 00 00 00 00 00    0 | tZ..............
+                    1 | 03 00 A0 00 00 00 00 00 49 72 69 73 00 00 00 00    1 | ........Iris....
+                    2 | 00 00 00 00 00 00 00 00 00 00 00 00 53 61 64 64    2 | ............Sadd
+                    3 | 6C 65 00 00 00 00 00 00 00 00 00 00 00 00 00 00    3 | le..............
+                    4 | 43 79 63 6C 6F 6E 65 00 00 00 00 00 00 00 00 00    4 | Cyclone.........
+                    5 | 00 00 00 00 50 72 69 6E 74 65 6D 70 73 00 00 00    5 | ....Printemps...
+                    6 | 00 00 00 00 00 00 00 00 54 72 69 73 74 61 6E 00    6 | ........Tristan.
+                    7 | 00 00 00 00 00 00 00 00 00 00 00 00 4F 75 74 6C    7 | ............Outl
+                    8 | 61 77 00 00 00 00 00 00 00 00 00 00 00 00 00 00    8 | aw..............
+                    9 | 48 75 72 72 69 63 61 6E 65 00 00 00 00 00 00 00    9 | Hurricane.......
+                    A | 00 00 00 00 52 61 67 69 6E 67 00 00 00 00 00 00    A | ....Raging......
+                    B | 00 00 00 00 -- -- -- -- -- -- -- -- -- -- -- --    B | ....------------
+                */
+                case 0x03:
+                {
+                    // Name Data starting at 0x18
+                    break;
+                }
+                /*
+                [2023-11-13 12:33:15] Incoming packet 0x074:
+                        |  0  1  2  3  4  5  6  7  8  9  A  B  C  D  E  F      | 0123456789ABCDEF
+                    -----------------------------------------------------  ----------------------
+                    0 | 74 5A 99 04 03 00 00 00 00 00 00 00 00 00 00 00    0 | tZ..............
+                    1 | 04 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00    1 | ................
+                    2 | 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00    2 | ................
+                    3 | 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00    3 | ................
+                    4 | 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00    4 | ................
+                    5 | 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00    5 | ................
+                    6 | 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00    6 | ................
+                    7 | 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00    7 | ................
+                    8 | 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00    8 | ................
+                    9 | 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00    9 | ................
+                    A | 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00    A | ................
+                    B | 00 00 00 00 -- -- -- -- -- -- -- -- -- -- -- --    B | ....------------
+                */
+                case 0x04:
+                {
+                    packet->ref<uint8>(0x04) = 0x9B;
+                    packet->ref<uint8>(0x05) = 0x60;
+                    packet->ref<uint8>(0x06) = 0x04;
+                    packet->ref<uint8>(0x07) = 0x01;
+                    packet->ref<uint8>(0x08) = 0x9B;
+                    packet->ref<uint8>(0x30) = 0x01;
+                    break;
+                }
+                default:
+                {
+                    break;
+                }
+            }
+
+            PChar->pushPacket(std::move(packet));
+        }
+    }
 }
 
 /************************************************************************
@@ -7506,8 +7679,7 @@ void SmallPacket0x100(map_session_data_t* const PSession, CCharEntity* const PCh
         charutils::BuildingCharAbilityTable(PChar);
         charutils::BuildingCharWeaponSkills(PChar);
         charutils::LoadJobChangeGear(PChar);
-        charutils::SaveCharEquip(PChar);
-        charutils::SaveCharLook(PChar);
+        PChar->RequestPersist(CHAR_PERSIST::EQUIP);
 
         PChar->StatusEffectContainer->DelStatusEffectsByFlag(EFFECTFLAG_DISPELABLE | EFFECTFLAG_ROLL | EFFECTFLAG_ON_JOBCHANGE);
 
@@ -8322,6 +8494,7 @@ void PacketParserInitialize()
     PacketSize[0x084] = 0x06; PacketParser[0x084] = &SmallPacket0x084;
     PacketSize[0x085] = 0x04; PacketParser[0x085] = &SmallPacket0x085;
     PacketSize[0x096] = 0x12; PacketParser[0x096] = &SmallPacket0x096;
+    PacketSize[0x09B] = 0x00; PacketParser[0x09B] = &SmallPacket0x09B;
     PacketSize[0x0A0] = 0x00; PacketParser[0x0A0] = &SmallPacket0xFFF;    // not implemented
     PacketSize[0x0A1] = 0x00; PacketParser[0x0A1] = &SmallPacket0xFFF;    // not implemented
     PacketSize[0x0A2] = 0x00; PacketParser[0x0A2] = &SmallPacket0x0A2;

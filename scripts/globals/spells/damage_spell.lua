@@ -173,8 +173,8 @@ local pTable =
     [xi.magic.spell.BANISHGA_II ] = { xi.mod.MND,    0,  180,    1,  180, 133 },
     [xi.magic.spell.BANISHGA_III] = { xi.mod.MND,    0,  480,  1.5,  480, 450 }, -- Enemy only. Stats unknown.
     [xi.magic.spell.BANISHGA_IV ] = { xi.mod.MND,    0,  600,  1.5,  600, 600 }, -- Enemy only. Stats unknown.
-    [xi.magic.spell.HOLY        ] = { xi.mod.MND,    0,  125,    1,  125, 150 },
-    [xi.magic.spell.HOLY_II     ] = { xi.mod.MND,    0,  250,    2,  250, 300 },
+    [xi.magic.spell.HOLY        ] = { xi.mod.MND,    0,  250,    1,  250, 300 },
+    [xi.magic.spell.HOLY_II     ] = { xi.mod.MND,    0,  350,    2,  350, 400 },
 
 -- TODO: Healing Spells when used against undead/zombie
 }
@@ -279,6 +279,11 @@ xi.spells.damage.calculateBaseDamage = function(caster, target, spellId, skillTy
 
     -- Bonus to spell base damage from gear.
     baseSpellDamageBonus = baseSpellDamageBonus + caster:getMod(xi.mod.MAGIC_DAMAGE)
+
+    if caster:hasStatusEffect(xi.effect.CASCADE) then
+        caster:delStatusEffectSilent(xi.effect.CASCADE)
+        caster:setTP(0)
+    end
 
     -----------------------------------
     -- STEP 4: Spell Damage
@@ -428,7 +433,14 @@ xi.spells.damage.calculateIfMagicBurstBonus = function(caster, target, spellId, 
 
         caster:delStatusEffectSilent(xi.effect.BURST_AFFINITY)
     end
-
+    
+    if spellGroup == xi.magic.spellGroup.BLACK then
+        if
+            not caster:hasStatusEffect(xi.effect.IMMANENCE)
+        then
+            return magicBurstBonus
+        end
+    end
     -- Obtain multiplier from gear, atma and job traits -- Job traits should be done separately
     modBurst = modBurst + (caster:getMod(xi.mod.MAG_BURST_BONUS) / 100) + ancientMagicBurstBonus
 
@@ -716,8 +728,8 @@ xi.spells.damage.calculateScarletDeliriumMultiplier = function(caster)
     -- Scarlet delirium are 2 different status effects. SCARLET_DELIRIUM_1 is the one that boosts power.
     if caster:hasStatusEffect(xi.effect.SCARLET_DELIRIUM_1) then
         local power = caster:getStatusEffect(xi.effect.SCARLET_DELIRIUM_1):getPower()
-
         scarletDeliriumMultiplier = 1 + power / 100
+        -- caster:PrintToPlayer(string.format('SD Multiplier: %s', scarletDeliriumMultiplier), xi.msg.channel.SYSTEM_3) -- Debug to see modifier of each hit in a weapon skill.
     end
 
     return scarletDeliriumMultiplier
@@ -828,8 +840,11 @@ xi.spells.damage.useDamageSpell = function(caster, target, spell)
     finalDamage = math.floor(finalDamage * magianAffinity)
     finalDamage = math.floor(finalDamage * sdt)
     finalDamage = math.floor(finalDamage * resist)
+
+    if not caster:hasStatusEffect(xi.effect.IMMANENCE) then
     finalDamage = math.floor(finalDamage * magicBurst)
     finalDamage = math.floor(finalDamage * magicBurstBonus)
+    end
     finalDamage = math.floor(finalDamage * dayAndWeather)
     finalDamage = math.floor(finalDamage * magicBonusDiff)
     finalDamage = math.floor(finalDamage * targetMagicDamageAdjustment)
@@ -904,9 +919,10 @@ xi.spells.damage.useDamageSpell = function(caster, target, spell)
         end
 
         -- Add 'Magic Burst!' message
-        if magicBurst > 1 then
+        if magicBurst > 1 and not caster:hasStatusEffect(xi.effect.IMMANENCE) then
             spell:setMsg(xi.msg.basic.MAGIC_BURST_DAMAGE)
             caster:triggerRoeEvent(xi.roeTrigger.MAGIC_BURST)
+
         end
     end
 

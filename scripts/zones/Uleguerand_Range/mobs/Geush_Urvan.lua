@@ -10,7 +10,7 @@ entity.onMobInitialize = function(mob)
     mob:setMobSkillAttack(5330) -- replace melee attack with special auto attack
     mob:setMobMod(xi.mobMod.NO_STANDBACK, 1)
     mob:setMod(xi.mod.REGAIN, 400)
-    mob:setMod(xi.mod.MOVE, 12)
+    mob:setSpeed((50 + xi.settings.map.MOB_SPEED_MOD) + 12)
     mob:setMobMod(xi.mobMod.MAGIC_COOL, 20)
 end
 

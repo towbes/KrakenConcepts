@@ -221,7 +221,7 @@ CCharEntity::CCharEntity()
     PRecastContainer       = std::make_unique<CCharRecastContainer>(this);
     PLatentEffectContainer = new CLatentEffectContainer(this);
 
-    retriggerLatentsAfterPacketParsing = false;
+    retriggerLatents = false;
 
     resetPetZoningInfo();
     petZoningInfo.petID = 0;
@@ -936,8 +936,18 @@ bool CCharEntity::ValidTarget(CBattleEntity* PInitiator, uint16 targetFlags)
     bool targetsAlliance  = targetFlags & TARGET_PLAYER_ALLIANCE;
     bool hasPianissimo    = (targetFlags & TARGET_PLAYER_PARTY_PIANISSIMO) && PInitiator->StatusEffectContainer->HasStatusEffect(EFFECT_PIANISSIMO);
     bool isDifferentChar  = PInitiator != this;
-    if ((targetsParty || targetsAlliance || hasPianissimo) &&
-        (isSameParty || isSameAlliance || isPartyPetMaster || isSoloPetMaster) &&
+
+    // Alliance member valid target.
+    if (targetsAlliance &&
+        isSameAlliance &&
+        isDifferentChar)
+    {
+        return true;
+    }
+
+    // Party member valid targeting.
+    if ((targetsParty || hasPianissimo) &&
+        (isSameParty || isPartyPetMaster || isSoloPetMaster) &&
         isDifferentChar)
     {
         return true;
@@ -1093,6 +1103,59 @@ void CCharEntity::OnCastFinished(CMagicState& state, action_t& action)
                 }
 
                 StatusEffectContainer->DelStatusEffectSilent(EFFECT_CHAIN_AFFINITY);
+            }
+
+            if (actionTarget.param > 0 && PSpell->dealsDamage() && PSpell->getSpellGroup() == SPELLGROUP_BLACK &&
+                (StatusEffectContainer->HasStatusEffect(EFFECT_IMMANENCE)) &&
+                static_cast<CSpell*>(PSpell)->getElement() != 0)
+            {
+                auto* PSkillChainSpell    = static_cast<CSpell*>(PSpell);
+                auto  spell_Element       = PSkillChainSpell->getElement();
+                auto  skill_chain_Element = 0;
+                if (spell_Element == 1)
+                {
+                    skill_chain_Element = 3;
+                }
+                else if (spell_Element == 2)
+                {
+                    skill_chain_Element = 7;
+                }
+                else if (spell_Element == 3)
+                {
+                    skill_chain_Element = 6;
+                }
+                else if (spell_Element == 4)
+                {
+                    skill_chain_Element = 4;
+                }
+                else if (spell_Element == 5)
+                {
+                    skill_chain_Element = 8;
+                }
+                else if (spell_Element == 6)
+                {
+                    skill_chain_Element = 5;
+                }
+                else if (spell_Element == 7)
+                {
+                    skill_chain_Element = 1;
+                }
+                else if (spell_Element == 8)
+                {
+                    skill_chain_Element = 2;
+                }
+
+                SUBEFFECT effect = battleutils::GetSkillChainEffect(PTarget, skill_chain_Element, 0, 0);
+                if (effect != SUBEFFECT_NONE)
+                {
+                    uint16 skillChainDamage = battleutils::TakeSkillchainDamage(static_cast<CBattleEntity*>(this), PTarget, actionTarget.param, nullptr);
+
+                    actionTarget.addEffectParam   = skillChainDamage;
+                    actionTarget.addEffectMessage = 287 + effect;
+                    actionTarget.additionalEffect = effect;
+                }
+
+                StatusEffectContainer->DelStatusEffectSilent(EFFECT_IMMANENCE);
             }
         }
     }
@@ -1402,6 +1465,14 @@ void CCharEntity::OnAbility(CAbilityState& state, action_t& action)
         else
         {
             action.recast = PAbility->getRecastTime() - meritRecastReduction;
+        }
+
+        if (PAbility->getID() == ABILITY_THIRD_EYE)
+        {
+            if (this->StatusEffectContainer->HasStatusEffect(EFFECT_SEIGAN))
+            {
+                action.recast = (PAbility->getRecastTime() - PMeritPoints->GetMeritValue(MERIT_THIRD_EYE_RECAST, this)) / 2;
+            }
         }
 
         if (PAbility->getID() == ABILITY_LIGHT_ARTS || PAbility->getID() == ABILITY_DARK_ARTS || PAbility->getRecastId() == 231) // stratagems
@@ -1751,11 +1822,13 @@ void CCharEntity::OnRangedAttack(CRangeState& state, action_t& action)
     bool  isBarrage    = StatusEffectContainer->HasStatusEffect(EFFECT_BARRAGE, 0);
 
     // if barrage is detected, getBarrageShotCount also checks for ammo count
-    if (!ammoThrowing && !rangedThrowing && isBarrage)
+    // if (!ammoThrowing && !rangedThrowing && isBarrage)
+    if (!rangedThrowing && isBarrage)
     {
         hitCount += battleutils::getBarrageShotCount(this);
     }
-    else if (ammoThrowing && this->StatusEffectContainer->HasStatusEffect(EFFECT_SANGE))
+    // else if (ammoThrowing && this->StatusEffectContainer->HasStatusEffect(EFFECT_SANGE))
+    else if (!rangedThrowing && this->StatusEffectContainer->HasStatusEffect(EFFECT_SANGE))
     {
         isSange = true;
         hitCount += getMod(Mod::UTSUSEMI);
@@ -1934,7 +2007,7 @@ void CCharEntity::OnRangedAttack(CRangeState& state, action_t& action)
             ;
         }
 
-        StatusEffectContainer->DelStatusEffect(EFFECT_SANGE);
+        // StatusEffectContainer->DelStatusEffect(EFFECT_SANGE);
     }
     battleutils::ClaimMob(PTarget, this);
     battleutils::RemoveAmmo(this, ammoConsumed);
@@ -2010,13 +2083,20 @@ void CCharEntity::OnRaise()
             {
                 weaknessTime = 180;
             }
-
-            CStatusEffect* PWeaknessEffect = new CStatusEffect(EFFECT_WEAKNESS, EFFECT_WEAKNESS, m_weaknessLvl, 0, weaknessTime);
-            StatusEffectContainer->AddStatusEffect(PWeaknessEffect);
+            if (GetLocalVar("PVPMODE") > 0)
+            {
+                // Do not give weakness to players who die in PVP
+            }
+            else
+            {
+                CStatusEffect* PWeaknessEffect = new CStatusEffect(EFFECT_WEAKNESS, EFFECT_WEAKNESS, m_weaknessLvl, 0, weaknessTime);
+                StatusEffectContainer->AddStatusEffect(PWeaknessEffect);
+            }
         }
 
         double ratioReturned = 0.0f;
         uint16 hpReturned    = 1;
+        uint16 mpReturned    = 0;
 
         action_t action;
         action.id          = id;
@@ -2030,6 +2110,12 @@ void CCharEntity::OnRaise()
         {
             actionTarget.animation = 511;
             hpReturned             = (uint16)(GetMaxHP());
+        }
+        else if (GetLocalVar("PVPMODE") != 0)
+        {
+            actionTarget.animation = 496;
+            hpReturned             = (uint16)(GetMaxHP());
+            mpReturned             = (uint16)(GetMaxMP());
         }
         else if (m_hasRaise == 1)
         {
@@ -2057,6 +2143,7 @@ void CCharEntity::OnRaise()
         }
 
         addHP(((hpReturned < 1) ? 1 : hpReturned));
+        addMP(mpReturned);
         updatemask |= UPDATE_HP;
         actionTarget.speceffect = SPECEFFECT::RAISE;
 
@@ -2081,6 +2168,7 @@ void CCharEntity::OnRaise()
         }
 
         SetLocalVar("MijinGakure", 0);
+        SetLocalVar("PVPMODE", 0);
         m_hasArise = false;
         m_hasRaise = 0;
     }

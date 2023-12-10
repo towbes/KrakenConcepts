@@ -787,8 +787,35 @@ INSERT INTO `item_mods_pet` VALUES (23138,288,3,0);   -- Pet: DOUBLE_ATTACK: 3
 INSERT INTO `item_mods_pet` VALUES (23138,384,600,0); -- Pet: HASTE_GEAR: 6%
 
 -- Glyphic Doublet +2
-INSERT INTO `item_mods_pet` VALUES (23144,165,16,1); -- Avatar: CRITHITRATE: 16%
+INSERT INTO `item_mods_pet` VALUES (23144,165,16,1); -- Avatar: CRITHITRATE: 16
 INSERT INTO `item_mods_pet` VALUES (23144,288,10,1); -- Avatar: DOUBLE_ATTACK: 10
+
+-- Pitre Tobe +2
+INSERT INTO `item_mods_pet` VALUES (23147,23,50,3); -- Automaton: ATT: 50
+INSERT INTO `item_mods_pet` VALUES (23147,24,50,3); -- Automaton: RATT: 50
+INSERT INTO `item_mods_pet` VALUES (23147,25,40,3); -- Automaton: ACC: 40
+INSERT INTO `item_mods_pet` VALUES (23147,26,40,3); -- Automaton: RACC: 40
+INSERT INTO `item_mods_pet` VALUES (23147,73,14,3); -- Automaton: STORETP: 14
+
+-- Nukumi Gausape +2
+INSERT INTO `item_mods_pet` VALUES (23160,25,54,0); -- Pet: ACC: 54
+INSERT INTO `item_mods_pet` VALUES (23160,26,54,0); -- Pet: RACC: 54
+INSERT INTO `item_mods_pet` VALUES (23160,30,54,0); -- Pet: MACC: 54
+
+-- Peltast's plackart +2
+INSERT INTO `item_mods_pet` VALUES (23165,25,54,2); -- Wyvern: ACC: 54
+INSERT INTO `item_mods_pet` VALUES (23165,30,54,2); -- Wyvern: MACC: 54
+-- TODO: Wyvern: Grants food effect
+
+-- Beckoner's Doublet +2
+INSERT INTO `item_mods_pet` VALUES (23166,25,54,1); -- Avatar: ACC: 54
+INSERT INTO `item_mods_pet` VALUES (23166,26,54,1); -- Avatar: RACC: 54
+INSERT INTO `item_mods_pet` VALUES (23166,30,54,1); -- Avatar: MACC: 54
+
+-- Karagoz Farsetto +2
+INSERT INTO `item_mods_pet` VALUES (23169,25,54,3);   -- Automaton: ACC: 54
+INSERT INTO `item_mods_pet` VALUES (23169,26,54,3);   -- Automaton: RACC: 54
+INSERT INTO `item_mods_pet` VALUES (23169,30,54,3);   -- Automaton: MACC: 54
 
 -- Foire Dastanas +2
 INSERT INTO `item_mods_pet` VALUES (23191,25,32,3);   -- Automaton - ACC: 32
@@ -796,6 +823,20 @@ INSERT INTO `item_mods_pet` VALUES (23191,384,500,3); -- Automaton - HASTE_GEAR:
 
 -- Geomancy Mitaines +2
 INSERT INTO `item_mods_pet` VALUES (23195,160,-1200,8); -- Luopan - DMG: -1200
+
+-- Ankusa Gloves +2
+INSERT INTO `item_mods_pet` VALUES (23205,161,-500,0); -- Pet: DMGPHYS: -5%
+
+-- Pteroslaver finger gauntlets +2
+INSERT INTO `item_mods_pet` VALUES (23210,163,-1000,2); -- Wyvern: DMGMAGIC: -10%
+
+-- Glyphic Bracers +2
+INSERT INTO `item_mods_pet` VALUES (23211,25,42,1);   -- Avatar: ACC: 42
+INSERT INTO `item_mods_pet` VALUES (23211,384,600,1); -- Avatar: HASTE_GEAR: 6%
+
+-- Pitre Dastanas +2
+INSERT INTO `item_mods_pet` VALUES (23214,289,10,3);  -- Automaton: SUBTLE_BLOW: 10
+INSERT INTO `item_mods_pet` VALUES (23214,384,600,3); -- Automaton: HASTE_GEAR: 6%
 
 -- Beckoner's Bracers +2
 INSERT INTO `item_mods_pet` VALUES (23233,126,8,1); -- Avatar - BP_DAMAGE: 8

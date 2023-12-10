@@ -397,7 +397,8 @@ namespace battleutils
     {
         return ((PSkill->getSkillLevel() > 0 && PChar->GetSkill(PSkill->getType()) >= PSkill->getSkillLevel() &&
                  (PSkill->getUnlockId() == 0 || charutils::hasLearnedWeaponskill(PChar, PSkill->getUnlockId()))) ||
-                (PSkill->getSkillLevel() == 0 && (PSkill->getUnlockId() == 0 || charutils::hasLearnedWeaponskill(PChar, PSkill->getUnlockId())))) &&
+                (PSkill->getSkillLevel() == 0 && (PSkill->getUnlockId() == 0 ||
+                                                  (charutils::hasLearnedWeaponskill(PChar, PSkill->getUnlockId()) && PChar->GetMLevel() >= 75)))) &&
                (PSkill->getJob(PChar->GetMJob()) > 0 || (PSkill->getJob(PChar->GetSJob()) > 0 || !PSkill->mainOnly())); // Umeboshi "Subjob gains access to applicable weapon skills that are only usable by the main job."
     }
 
@@ -518,7 +519,15 @@ namespace battleutils
         // Tier 1 enspells have their damaged pre-calculated AT CAST TIME and is stored in Mod::ENSPELL_DMG
         if (Tier == 1)
         {
-            damage      = PAttacker->getMod(Mod::ENSPELL_DMG) + PAttacker->getMod(Mod::ENSPELL_DMG_BONUS);
+            if (PAttacker->StatusEffectContainer->HasStatusEffect(EFFECT_COMPOSURE))
+            {
+                damage = (PAttacker->getMod(Mod::ENSPELL_DMG) * 2) + PAttacker->getMod(Mod::ENSPELL_DMG_BONUS);
+            }
+            else
+            {
+                damage = (PAttacker->getMod(Mod::ENSPELL_DMG) + PAttacker->getMod(Mod::ENSPELL_DMG_BONUS));
+            }
+
             auto* PChar = dynamic_cast<CCharEntity*>(PAttacker);
             if (PChar)
             {
@@ -534,7 +543,15 @@ namespace battleutils
             {
                 cap = 5 + ((5 * skill) / 100);
             }
-            cap *= 2;
+
+            if (PAttacker->StatusEffectContainer->HasStatusEffect(EFFECT_COMPOSURE))
+            {
+                cap *= 3;
+            }
+            else
+            {
+                cap *= 2;
+            }
 
             if (PAttacker->getMod(Mod::ENSPELL_DMG) > cap)
             {
@@ -1055,7 +1072,7 @@ namespace battleutils
             // spikes landed
             if (spikesType == SUBEFFECT_CURSE_SPIKES)
             {
-                Action->spikesMessage = 0; // log says nothing? // TODO: find "Additional Effect: Curse" message
+                Action->spikesMessage = MSGBASIC_SPIKES_ARMOR_SUBEFFECT;
                 Action->spikesParam   = EFFECT_CURSE;
             }
             else
@@ -2149,11 +2166,12 @@ namespace battleutils
             if (isBlocked)
             {
                 uint8 absorb = 100;
-                if (PDefender->m_Weapons[SLOT_SUB]->IsShield())
+                if (const auto PChar = dynamic_cast<CCharEntity*>(PDefender))
                 {
-                    if (PDefender->objtype == TYPE_PC)
+                    CItemEquipment* slotSub = PChar->getEquip(SLOT_SUB);
+                    if (slotSub && slotSub->IsShield())
                     {
-                        absorb = std::clamp(100 - PDefender->m_Weapons[SLOT_SUB]->getShieldAbsorption(), 0, 100);
+                        absorb = std::clamp(100 - slotSub->getShieldAbsorption(), 0, 100);
                         absorb -= PDefender->getMod(Mod::SHIELD_DEF_BONUS); // Include Shield Defense Bonus in absorb amount
 
                         // Shield Mastery
@@ -2252,10 +2270,22 @@ namespace battleutils
 
             // Check for bind breaking
             BindBreakCheck(PAttacker, PDefender);
+            int32 enmity = damage;
 
             switch (PDefender->objtype)
             {
                 case TYPE_MOB:
+                    if (PAttacker->objtype == TYPE_PC && PAttacker->StatusEffectContainer->HasStatusEffect(EFFECT_FLASHY_SHOT) && isRanged)
+                    {
+                        enmity = enmity * 140 / 100;
+                        PAttacker->StatusEffectContainer->DelStatusEffect(EFFECT_FLASHY_SHOT);
+                    }
+                    else if (PAttacker->objtype == TYPE_PC && PAttacker->StatusEffectContainer->HasStatusEffect(EFFECT_STEALTH_SHOT) && isRanged)
+                    {
+                        enmity = (int32)((float)enmity * (1.0f - (float)(((CCharEntity*)PAttacker)->PMeritPoints->GetMeritValue(MERIT_STEALTH_SHOT, (CCharEntity*)PAttacker)) / 100.0f));
+                        PAttacker->StatusEffectContainer->DelStatusEffect(EFFECT_STEALTH_SHOT);
+                    }
+
                     if (taChar == nullptr)
                     {
                         ((CMobEntity*)PDefender)->PEnmityContainer->UpdateEnmityFromDamage(PAttacker, damage);
@@ -2658,6 +2688,16 @@ namespace battleutils
             {
                 offsetAccuracy -= PDefender->StatusEffectContainer->GetStatusEffect(EFFECT_YONIN)->GetPower();
             }
+            // Check for Tandem Strike accuracy bonus via mod
+            if (PAttacker->getMod(Mod::TANDEM_STRIKE) > 0 && IsTandemValid(PAttacker))
+            {
+                offsetAccuracy += PAttacker->getMod(Mod::TANDEM_STRIKE);
+            }
+            // Check for Tandem Strike accuracy bonus via master's mod
+            else if ((PAttacker->PMaster && PAttacker->PMaster->getMod(Mod::TANDEM_STRIKE) > 0) && IsTandemValid(PAttacker))
+            {
+                offsetAccuracy += PAttacker->PMaster->getMod(Mod::TANDEM_STRIKE);
+            }
 
             // Hit Rate (%) = 75 + floor( (Accuracy - Evasion)/2 ) + 2*(dLVL)
             // For Avatars negative penalties for level correction seem to be ignored for attack and likely for accuracy,
@@ -2800,10 +2840,12 @@ namespace battleutils
                 critHitRate += PCharAttacker->PMeritPoints->GetMeritValue(MERIT_CRIT_HIT_RATE, PCharAttacker);
 
                 // Add Fencer crit hit rate
-                CItemWeapon* PMain = dynamic_cast<CItemWeapon*>(PCharAttacker->m_Weapons[SLOT_MAIN]);
-                CItemWeapon* PSub  = dynamic_cast<CItemWeapon*>(PCharAttacker->m_Weapons[SLOT_SUB]);
+                CItemWeapon*    PMain      = dynamic_cast<CItemWeapon*>(PCharAttacker->m_Weapons[SLOT_MAIN]);
+                CItemEquipment* PSub       = PCharAttacker->getEquip(SLOT_SUB);
+                CItemWeapon*    PSubWeapon = dynamic_cast<CItemWeapon*>(PCharAttacker->m_Weapons[SLOT_SUB]);
+
                 if (PMain && !PMain->isTwoHanded() && !PMain->isHandToHand() &&
-                    (!PSub || PSub->getSkillType() == SKILL_NONE || PCharAttacker->m_Weapons[SLOT_SUB]->IsShield()))
+                    (!PSub || (PSubWeapon && PSubWeapon->getSkillType() == SKILL_NONE) || PSub->IsShield()))
                 {
                     critHitRate += PCharAttacker->getMod(Mod::FENCER_CRITHITRATE);
                 }
@@ -3710,6 +3752,43 @@ namespace battleutils
         return (xirand::GetRandomNumber(100) < KillerEffect);
     }
 
+        /************************************************************************
+     *                                                                       *
+     *  Checks if the tandem case is valid                                   *
+     *  Used for Tandem Strike and tbd for Tandem Blow                       *
+     *                                                                       *
+     ************************************************************************/
+
+    bool IsTandemValid(CBattleEntity* PAttacker)
+    {
+        CBattleEntity* tandemPartner;
+        // Tandem is valid only if both the master and the pet are engaged with the same target
+        if (PAttacker->objtype == TYPE_PC)
+        {
+            // No Pet - No Tandem
+            if (PAttacker->PPet == nullptr)
+                return false;
+
+            tandemPartner = PAttacker->PPet;
+        }
+        else
+        {
+            // No Master - No Tandem
+            if (PAttacker->PMaster == nullptr || PAttacker->PMaster->objtype != TYPE_PC)
+                return false;
+
+            tandemPartner = PAttacker->PMaster;
+        }
+
+        // Partner is engaged.  Partner has a target. Partner's target matches the attacker's target.
+        if (tandemPartner->PAI->IsEngaged() && tandemPartner->GetBattleTarget() != nullptr && tandemPartner->GetBattleTargetID() == PAttacker->GetBattleTargetID())
+        {
+            return true;
+        }
+
+        return false;
+    }
+
     /************************************************************************
      *                                                                       *
      *  Get SkillChain Effect                                                *
@@ -4553,9 +4632,9 @@ namespace battleutils
     {
         if (m_PChar->StatusEffectContainer->HasStatusEffect(EFFECT_SOULEATER))
         {
-            // at most 2% bonus from gear
-            float souleaterBonus    = std::min(0.2, m_PChar->getMod(Mod::SOULEATER_EFFECT) * 0.01);
-            float souleaterBonusII  = m_PChar->getMod(Mod::SOULEATER_EFFECT_II) * 0.01; // No known cap to this bonus. Used on Agwu's scythe
+            // Souleater's HP consumed is 10% (base) + x% from gear (ONLY HIGHEST) + x% from gear augments.
+            float souleaterBonus    = m_PChar->getMaxGearMod(Mod::SOULEATER_EFFECT) * 0.01;
+            float souleaterBonusII  = m_PChar->getMod(Mod::SOULEATER_EFFECT_II) * 0.01;
             float stalwartSoulBonus = 1 - static_cast<float>(m_PChar->getMod(Mod::STALWART_SOUL)) / 100;
             float bonusDamage       = m_PChar->health.hp * (0.1f + souleaterBonus + souleaterBonusII);
 
@@ -4581,9 +4660,11 @@ namespace battleutils
     {
         if (m_PChar->StatusEffectContainer->HasStatusEffect(EFFECT_CONSUME_MANA))
         {
-            damage += (uint32)(floor(m_PChar->health.mp / 10));
-            m_PChar->health.mp = 0;
-            m_PChar->StatusEffectContainer->DelStatusEffect(EFFECT_CONSUME_MANA);
+            // damage += (uint32)(floor(m_PChar->health.mp / 20));
+            // m_PChar->SetLocalVar("damageTrack", damage);
+            damage *= ((m_PChar->health.mp / 10) + 100) / 100;
+            m_PChar->addMP(-(m_PChar->health.mp * 0.05));
+            // m_PChar->StatusEffectContainer->DelStatusEffect(EFFECT_CONSUME_MANA);
         }
         return damage;
     }
@@ -4670,12 +4751,12 @@ namespace battleutils
         */
 
         // only archery + marksmanship can use barrage
-        CItemWeapon* PItem = (CItemWeapon*)PChar->getEquip(SLOT_RANGED);
+        // CItemWeapon* PItem = (CItemWeapon*)PChar->getEquip(SLOT_RANGED);
 
-        if (PItem && PItem->getSkillType() != 25 && PItem->getSkillType() != 26)
-        {
-            return 0;
-        }
+        // if (PItem && PItem->getSkillType() != 25 && PItem->getSkillType() != 26)
+        // {
+        //     return 0;
+        // }
 
         uint8 lvl       = PChar->jobs.job[JOB_RNG]; // Get Ranger level of char
         uint8 shotCount = 0;                        // the total number of extra hits
@@ -4841,6 +4922,12 @@ namespace battleutils
         {
             totalDamage = battleutils::doSoulEaterEffect((CCharEntity*)PAttacker, totalDamage);
         }
+
+        // check for consume mana
+        // if (PAttacker->objtype == TYPE_PC)
+        // {
+        //    totalDamage = battleutils::doConsumeManaEffect((CCharEntity*)PAttacker, totalDamage);
+        // }
 
         // bonus jump tp is added even if damage is 0, will not add if jump misses
         if (PAttacker->objtype == TYPE_PC && hitTarget)
@@ -5745,7 +5832,7 @@ namespace battleutils
         CStatusEffect* effectScarDel = PDefender->StatusEffectContainer->GetStatusEffect(EFFECT_SCARLET_DELIRIUM);
 
         // Damage bonus calculation, update Effect Power
-        if (effectScarDel && effectScarDel->GetPower() == 0)
+        if (PDefender->StatusEffectContainer->HasStatusEffect(EFFECT_SCARLET_DELIRIUM) && effectScarDel->GetPower() == 0)
         {
             // Damage to Max HP Ratio
             int8   bonus    = std::floor(((damage * 100) / PDefender->GetMaxHP()) / 2);
@@ -6976,10 +7063,12 @@ namespace battleutils
                 }
 
                 // Add Fencer TP Bonus
-                CItemWeapon* PMain = dynamic_cast<CItemWeapon*>(PEntity->m_Weapons[SLOT_MAIN]);
-                CItemWeapon* PSub  = dynamic_cast<CItemWeapon*>(PEntity->m_Weapons[SLOT_SUB]);
+                CItemWeapon*    PMain      = dynamic_cast<CItemWeapon*>(PChar->m_Weapons[SLOT_MAIN]);
+                CItemEquipment* PSub       = PChar->getEquip(SLOT_SUB);
+                CItemWeapon*    PSubWeapon = dynamic_cast<CItemWeapon*>(PChar->m_Weapons[SLOT_SUB]);
+
                 if (PMain && !PMain->isTwoHanded() && !PMain->isHandToHand() &&
-                    (!PSub || PSub->getSkillType() == SKILL_NONE || PEntity->m_Weapons[SLOT_SUB]->IsShield()))
+                    (!PSub || (PSubWeapon && PSubWeapon->getSkillType() == SKILL_NONE) || PSub->IsShield()))
                 {
                     tp += PEntity->getMod(Mod::FENCER_TP_BONUS);
                 }
@@ -7000,7 +7089,7 @@ namespace battleutils
                 uint8 slot = PChar->equip[SLOT_AMMO];
                 uint8 loc  = PChar->equipLoc[SLOT_AMMO];
                 charutils::UnequipItem(PChar, SLOT_AMMO);
-                charutils::SaveCharEquip(PChar);
+                PChar->RequestPersist(CHAR_PERSIST::EQUIP);
                 charutils::UpdateItem(PChar, loc, slot, -quantity);
                 PChar->pushPacket(new CInventoryFinishPacket());
                 return true;

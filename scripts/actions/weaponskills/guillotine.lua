@@ -19,6 +19,7 @@ weaponskillObject.onUseWeaponSkill = function(player, target, wsID, tp, primary,
     -- critical mods, again in % (ONLY USE FOR critICAL HIT VARIES WITH TP)
     params.crit100 = 0.0 params.crit200 = 0.0 params.crit300 = 0.0
     params.canCrit = false
+    params.melee = true
     -- accuracy mods (ONLY USE FOR accURACY VARIES WITH TP) , should be the params.acc at those %s NOT the penalty values. Leave 0 if acc doesnt vary with tp.
     params.acc100 = 0 params.acc200 = 0 params.acc300 = 0
     -- attack multiplier (only some WSes use this, this varies the actual ratio value, see Tachi: Kasha) 1 is default.
@@ -30,9 +31,10 @@ weaponskillObject.onUseWeaponSkill = function(player, target, wsID, tp, primary,
 
     local damage, criticalHit, tpHits, extraHits = xi.weaponskills.doPhysicalWeaponskill(player, target, wsID, params, tp, action, primary, taChar)
 
-    if damage > 0 and not target:hasStatusEffect(xi.effect.SILENCE) then
+    if damage > 0 and not target:hasStatusEffect(xi.effect.SILENCE) and not target:hasImmunity(xi.immunity.SILENCE) then
         local duration = (30 + (tp / 1000 * 30)) * applyResistanceAddEffect(player, target, xi.element.WIND, 0)
         target:addStatusEffect(xi.effect.SILENCE, 1, 0, duration)
+        player:messagePublic(xi.msg.basic.SKILL_ENFEEB, target, wsID, xi.effect.SILENCE)
     end
 
     return tpHits, extraHits, criticalHit, damage

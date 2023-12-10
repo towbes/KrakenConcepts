@@ -22,6 +22,11 @@ weaponskillObject.onUseWeaponSkill = function(player, target, wsID, tp, primary,
     params.ele = xi.element.LIGHT
     params.skill = xi.skill.STAFF
     params.includemab = true
+    
+    params.useStatCoefficient = true
+    params.dStat1          = xi.mod.MND
+    params.dStat2          = xi.mod.MND
+    params.dStatMultiplier = 2
 
     if xi.settings.main.USE_ADOULIN_WEAPON_SKILL_CHANGES then
         params.ftp100 = 3 params.ftp200 = 3 params.ftp300 = 3

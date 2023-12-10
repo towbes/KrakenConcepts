@@ -41,12 +41,12 @@ endif()
 
 execute_process(
   COMMAND "C:/Users/Chris/AppData/Local/Atlassian/SourceTree/git_local/bin/git.exe" 
-          checkout "v1.9.2" --
+          checkout "v1.12.0" --
   WORKING_DIRECTORY "C:/Users/Chris/Desktop/CactuarLSB/server/_deps/spdlog-src"
   RESULT_VARIABLE error_code
 )
 if(error_code)
-  message(FATAL_ERROR "Failed to checkout tag: 'v1.9.2'")
+  message(FATAL_ERROR "Failed to checkout tag: 'v1.12.0'")
 endif()
 
 set(init_submodules TRUE)

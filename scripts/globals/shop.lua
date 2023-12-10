@@ -114,6 +114,7 @@ xi.shop =
             5868, 23450, -- Toolbag (Shika)
             5869, 24100, -- Toolbag (Cho)
             5870, 13250, -- Trump Card Case
+            4153, 3000,  -- Antacid
         }
         xi.shop.general(player, stock)
     end,

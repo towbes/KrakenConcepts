@@ -23,7 +23,7 @@ weaponskillObject.onUseWeaponSkill = function(player, target, wsID, tp, primary,
     params.atk100 = 1 params.atk200 = 1 params.atk300 = 1
 
     if xi.settings.main.USE_ADOULIN_WEAPON_SKILL_CHANGES then
-        params.agi_wsc = 0.8
+        params.agi_wsc = 0.7
     end
 
     params.meleedmg = 0
@@ -49,9 +49,10 @@ weaponskillObject.onUseWeaponSkill = function(player, target, wsID, tp, primary,
 
     local damage, criticalHit, tpHits, extraHits = xi.weaponskills.doRangedWeaponskill(player, target, wsID, params, tp, action, primary)
 
-    if damage > 0 and not target:hasStatusEffect(xi.effect.PARALYSIS) then
+    if damage > 0 and not target:hasStatusEffect(xi.effect.PARALYSIS) and not target:hasImmunity(xi.immunity.PARALYZE) then
         local duration = (tp / 1000 * 60) * applyResistanceAddEffect(player, target, xi.element.ICE, 0)
         target:addStatusEffect(xi.effect.PARALYSIS, 30, 0, duration)
+        player:messagePublic(xi.msg.basic.SKILL_ENFEEB, target, wsID, xi.effect.PARALYSIS)
     end
 
     return tpHits, extraHits, criticalHit, damage

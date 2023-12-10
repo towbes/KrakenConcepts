@@ -238,6 +238,9 @@ xi.player.onGameIn = function(player, firstLogin, zoning)
 end
 
 xi.player.onPlayerDeath = function(player)
+    if player:getLocalVar('PVPMODE') == 1 then
+        player:sendRaise(3)
+    end
 end
 
 xi.player.onPlayerLevelUp = function(player)

@@ -24,7 +24,7 @@ entity.onTrigger = function(player, npc)
 
     if
         ((player:getMainLvl() >= 20 and
-        player:getMainJob() == xi.job.SMN) and
+        player:getMainJob() == xi.job.SMN) or
         (player:getSubLvl() >= 20 and
         player:getSubJob() == xi.job.SMN)) and
         trialSizeFire == QUEST_AVAILABLE and

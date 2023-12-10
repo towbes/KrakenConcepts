@@ -378,6 +378,10 @@ int32 do_init(int32 argc, char** argv)
     });
     // clang-format on
 
+#ifdef TRACY_ENABLE
+    ShowInfo("*** TRACY IS ENABLED ***");
+#endif // TRACY_ENABLE
+
     gProcessLoaded = true;
 
     return 0;
@@ -799,6 +803,7 @@ int32 parse(int8* buff, size_t* buffsize, sockaddr_in* from, map_session_data_t*
                 // CBasicPacket is incredibly light when constructed from a pointer like we're doing here.
                 // It is just a bag of offsets to the data in SmallPD_ptr so its safe to construct.
                 auto basicPacket = CBasicPacket(reinterpret_cast<uint8*>(SmallPD_ptr));
+                ShowTrace(fmt::format("map::parse: Char: {} ({}): 0x{:03X}", PChar->GetName(), PChar->id, basicPacket.getType()).c_str());
                 PacketParser[SmallPD_Type](map_session_data, PChar, basicPacket);
             }
         }
@@ -809,7 +814,7 @@ int32 parse(int8* buff, size_t* buffsize, sockaddr_in* from, map_session_data_t*
         }
     }
 
-    if (PChar->retriggerLatentsAfterPacketParsing)
+    if (PChar->retriggerLatents)
     {
         for (uint8 equipSlotID = 0; equipSlotID < 16; ++equipSlotID)
         {
@@ -818,7 +823,7 @@ int32 parse(int8* buff, size_t* buffsize, sockaddr_in* from, map_session_data_t*
                 PChar->PLatentEffectContainer->CheckLatentsEquip(equipSlotID);
             }
         }
-        PChar->retriggerLatentsAfterPacketParsing = false; // reset for next packet parse
+        PChar->retriggerLatents = false; // reset as we have retriggered the latents somewhere
     }
 
     map_session_data->client_packet_id = SmallPD_Code;

@@ -17,8 +17,8 @@ entity.onTrigger = function(player, npc)
         4716,  4147,    -- Scroll of Regen
         4718,  7516,    -- Scroll of Regen II
         4881, 10752,    -- Scroll of Sleepga
-        4690, 29030,    -- Scroll of Baramnesia
-        4691, 29030,    -- Scroll of Baramnesra
+        -- 4690, 29030,    -- Scroll of Baramnesia
+        -- 4691, 29030,    -- Scroll of Baramnesra
         4744,  5523,    -- Scroll of Invisible
         4745,  2400,    -- Scroll of Sneak
         4746,  1243,    -- Scroll of Deodorize

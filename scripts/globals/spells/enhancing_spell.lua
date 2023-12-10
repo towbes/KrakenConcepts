@@ -228,6 +228,26 @@ xi.spells.enhancing.calculateEnhancingBasePower = function(caster, target, spell
         else
             basePower = math.max(math.floor(math.sqrt(skillLevel)) - 1, 0)
         end
+
+        if
+            (spellEffect >= xi.effect.ENFIRE_II and spellEffect <= xi.effect.ENWATER_II)
+        then
+            if target:hasStatusEffect(xi.effect.COMPOSURE) then
+                basePower = basePower * 1.50
+            else
+                basePower = basePower * 1.25
+            end
+        end
+
+        if
+            caster:getAllegiance() == 2 or
+            caster:getAllegiance() == 3 or
+            caster:getAllegiance() == 4 or
+            caster:getAllegiance() == 5 or
+            caster:getAllegiance() == 6
+        then
+            basePower = basePower * 0.50
+        end
           
     -- Phalanx
     elseif spellEffect == xi.effect.PHALANX then
@@ -388,8 +408,11 @@ xi.spells.enhancing.calculateEnhancingDuration = function(caster, target, spell,
     ------------------------------
     -- Merits and Job Points. (Applicable to all enhancing spells. Prior to multipliers, according to bg-wiki.)
     ------------------------------
-    if caster:getMainJob() == xi.job.RDM then
-        duration = duration + caster:getMerit(xi.merit.ENHANCING_MAGIC_DURATION) + caster:getJobPointLevel(xi.jp.ENHANCING_DURATION)
+    if caster:getMainJob() == xi.job.RDM or caster:getSubJob() == xi.job.RDM then
+        duration = duration + caster:getMerit(xi.merit.ENHANCING_MAGIC_DURATION)
+        if caster:getMainJob() == xi.job.RDM then
+            duration = duration + caster:getJobPointLevel(xi.jp.ENHANCING_DURATION)
+        end
     end
 
     --------------------------------------------------

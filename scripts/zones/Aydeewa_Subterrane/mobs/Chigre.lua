@@ -10,7 +10,7 @@ local entity = {}
 entity.onMobInitialize = function(mob)
     mob:setMobMod(xi.mobMod.IDLE_DESPAWN, 300)
     mob:setMobMod(xi.mobMod.ADD_EFFECT, 1)
-    mob:setMod(xi.mod.MOVE, 12)
+    mob:setSpeed((50 + xi.settings.map.MOB_SPEED_MOD) + 12)
     mob:setMobMod(xi.mobMod.GIL_MIN, 3000)
     mob:setMobMod(xi.mobMod.GIL_MAX, 5000)
 end

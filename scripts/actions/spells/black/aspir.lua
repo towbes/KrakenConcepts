@@ -9,6 +9,11 @@ spellObject.onMagicCastingCheck = function(caster, target, spell)
 end
 
 spellObject.onSpellCast = function(caster, target, spell)
+    if target:isUndead() then
+        spell:setMsg(xi.msg.basic.MAGIC_NO_EFFECT) -- No effect
+        return 0
+    end
+
     --calculate raw damage (unknown function  -> only dark skill though) - using http://www.bluegartr.com/threads/44518-Drain-Calculations
     -- also have small constant to account for 0 dark skill
     local dmg = 5 + 0.375 * caster:getSkillLevel(xi.skill.DARK_MAGIC)
@@ -27,11 +32,11 @@ spellObject.onSpellCast = function(caster, target, spell)
     dmg = adjustForTarget(target, dmg, spell:getElement())
     --add in final adjustments
 
+    dmg = dmg * xi.settings.main.DARK_POWER
+
     if dmg < 0 then
         dmg = 0
     end
-
-    dmg = dmg * xi.settings.main.DARK_POWER
 
     -- Upyri: ID 4105
     if target:isMob() and (target:isUndead() or target:getPool() == 4105) then
@@ -47,7 +52,7 @@ spellObject.onSpellCast = function(caster, target, spell)
         caster:addMP(dmg)
         target:delMP(dmg)
     end
-
+    caster:delStatusEffect(xi.effect.NETHER_VOID)
     return dmg
 end
 

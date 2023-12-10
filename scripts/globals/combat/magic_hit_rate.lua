@@ -61,6 +61,7 @@ end
 local function magicAccuracyFromStatusEffects(actor, spellGroup, skillType, spellElement)
     local magicAcc     = 0
     local actorJob     = actor:getMainJob()
+    local actorSubJob  = actor:getSubJob()
     local actorWeather = actor:getWeather()
 
     -- Altruism
@@ -91,7 +92,8 @@ local function magicAccuracyFromStatusEffects(actor, spellGroup, skillType, spel
     -- Apply Divine Emblem to Banish and Holy families
     if
         actor:hasStatusEffect(xi.effect.DIVINE_EMBLEM) and
-        actorJob == xi.job.PLD and
+        (actorJob == xi.job.PLD or
+        actorSubJob == xi.job.PLD) and
         skillType == xi.skill.DIVINE_MAGIC
     then
         magicAcc = magicAcc + 256
@@ -115,23 +117,28 @@ local function magicAccuracyFromStatusEffects(actor, spellGroup, skillType, spel
         magicAcc = magicAcc + 256
     end
 
+    -- Apply bonus macc from TandemStrike
+    local tandemBonus = xi.magic.handleTandemStrikeBonus(actor)
+    if tandemBonus > 0 then
+        magicAcc = magicAcc + tandemBonus
+    end
+
     return magicAcc
 end
 
 -- Magic Accuracy from Merits.
 local function magicAccuracyFromMerits(actor, skillType, spellElement)
-    local magicAcc = 0
-    local actorJob = actor:getMainJob()
+    local magicAcc    = 0
+    local actorJob    = actor:getMainJob()
+    local actorSubJob = actor:getSubJob()
 
-    switch (actorJob) : caseof
-    {
-        [xi.job.BLM] = function()
+        if actorJob == xi.job.BLM or actorSubJob == xi.job.BLM then
             if skillType == xi.skill.ELEMENTAL_MAGIC then
                 magicAcc = actor:getMerit(xi.merit.ELEMENTAL_MAGIC_ACCURACY)
             end
-        end,
+        end
 
-        [xi.job.RDM] = function()
+        if actorJob == xi.job.RDM or actorSubJob == xi.job.RDM then
             -- Category 1
             if
                 spellElement >= xi.element.FIRE and
@@ -142,20 +149,19 @@ local function magicAccuracyFromMerits(actor, skillType, spellElement)
 
             -- Category 2
             magicAcc = magicAcc + actor:getMerit(xi.merit.MAGIC_ACCURACY)
-        end,
+        end
 
-        [xi.job.NIN] = function()
+        if actorJob == xi.job.NIN or actorSubJob == xi.job.NIN then
             if skillType == xi.skill.NINJUTSU then
                 magicAcc = actor:getMerit(xi.merit.NIN_MAGIC_ACCURACY)
             end
-        end,
+        end
 
-        [xi.job.BLU] = function()
+        if actorJob == xi.job.BLU or actorSubJob == xi.job.BLU then
             if skillType == xi.skill.BLUE_MAGIC then
                 magicAcc = actor:getMerit(xi.merit.MAGICAL_ACCURACY)
             end
-        end,
-    }
+        end
 
     return magicAcc
 end

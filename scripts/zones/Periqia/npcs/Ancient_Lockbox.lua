@@ -34,13 +34,13 @@ entity.onTrigger = function(player, npc)
         {
             {
                 { itemid = xi.item.HI_RERAISER, droprate = 700 },
-                { itemid = 0,                    droprate = 300 },
+                { itemid = 0,                   droprate = 300 },
             },
 
             {
                 { itemid = xi.item.HI_POTION_TANK, droprate = 100 },
                 { itemid = xi.item.HI_ETHER_TANK,  droprate = 100 },
-                { itemid = 0,                       droprate = 800 },
+                { itemid = 0,                      droprate = 800 },
             },
 
             {

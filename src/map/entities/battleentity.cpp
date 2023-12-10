@@ -226,15 +226,54 @@ int32 CBattleEntity::GetMaxMP() const
 
 uint8 CBattleEntity::GetSpeed()
 {
-    // Note: retail treats mounted speed as double what it actually is! 40 is in fact retail accurate!
-    int16 startingSpeed = isMounted() ? 40 + settings::get<int8>("map.MOUNT_SPEED_MOD") : speed;
-    // Mod::MOVE (169)
-    // Mod::MOUNT_MOVE (972)
-    Mod mod = isMounted() ? Mod::MOUNT_MOVE : Mod::MOVE;
+    uint8 baseSpeed   = speed;
+    uint8 outputSpeed = 0;
 
-    float modAmount     = (100.0f + static_cast<float>(getMod(mod))) / 100.0f;
-    float modifiedSpeed = static_cast<float>(startingSpeed) * modAmount;
-    uint8 outputSpeed   = static_cast<uint8>(modifiedSpeed);
+    // Mount speed. Independent from regular speed and unaffected by most things.
+    // Note: retail treats mounted speed as double what it actually is! 40 is in fact retail accurate!
+    if (isMounted())
+    {
+        baseSpeed   = 40 + settings::get<int8>("map.MOUNT_SPEED_MOD");
+        outputSpeed = baseSpeed * (100 + getMod(Mod::MOUNT_MOVE)) / 100;
+
+        return std::clamp<uint8>(outputSpeed, std::numeric_limits<uint8>::min(), std::numeric_limits<uint8>::max());
+    }
+
+    // Flee, KIs, Gear penalties, Bolters Roll.
+    float additiveMods = static_cast<float>(getMod(Mod::MOVE_SPEED_STACKABLE)) / 100.0f;
+
+    // Quickening and Mazurka. Only highest applies.
+    Mod modToUse = getMod(Mod::MOVE_SPEED_QUICKENING) > getMod(Mod::MOVE_SPEED_MAZURKA) ? Mod::MOVE_SPEED_QUICKENING : Mod::MOVE_SPEED_MAZURKA;
+
+    float effectBonus = static_cast<float>(getMod(modToUse)) / 100.0f;
+
+    // Positive movement speed from gear. Only highest applies.
+    float gearBonus = 0.0f;
+
+    if (objtype == TYPE_PC)
+    {
+        gearBonus = static_cast<float>(getMaxGearMod(Mod::MOVE_SPEED_GEAR_BONUS)) / 100.0f;
+    }
+
+    // Gravity and Curse. They seem additive to each other and the sum seems to be multiplicative.
+    float weightPenalties = static_cast<float>(getMod(Mod::MOVE_SPEED_WEIGHT_PENALTY)) / 100.0f;
+
+    // We have all the modifiers needed. Calculate final speed.
+    float modifiedSpeed = static_cast<float>(baseSpeed) * std::clamp<float>(1.0f + additiveMods + effectBonus, 0.1f, 1.6f) * (1.0f + gearBonus) * std::clamp<float>(1.0f - weightPenalties, 0.1f, 1.0f);
+
+    outputSpeed = static_cast<uint8>(modifiedSpeed);
+
+    // Set cap.
+    outputSpeed = std::clamp<uint8>(outputSpeed, 0, 80 + settings::get<int8>("map.SPEED_MOD"));
+
+    // Speed cap can be bypassed. Ex. Feast of swords. GM speed.
+    // TODO: Find exceptions. Add them here.
+
+    // GM speed bypass.
+    if (getMod(Mod::MOVE_SPEED_OVERIDE) > 0)
+    {
+        outputSpeed = getMod(Mod::MOVE_SPEED_OVERIDE);
+    }
 
     return std::clamp<uint8>(outputSpeed, std::numeric_limits<uint8>::min(), std::numeric_limits<uint8>::max());
 }
@@ -636,6 +675,7 @@ uint16 CBattleEntity::ATT()
     TracyZoneScoped;
     // TODO: consider which weapon!
     int32 ATT    = 8 + m_modStat[Mod::ATT];
+    auto  ATTP   = m_modStat[Mod::ATTP];
     auto* weapon = dynamic_cast<CItemWeapon*>(m_Weapons[SLOT_MAIN]);
     if (weapon && weapon->isTwoHanded())
     {
@@ -661,10 +701,10 @@ uint16 CBattleEntity::ATT()
         {
             ATT += GetSkill(weapon->getSkillType()) + weapon->getILvlSkill();
 
-            // Smite applies when using 2H or H2H weapons
+            // Smite applies (bonus ATTP) when using 2H or H2H weapons
             if (weapon->isTwoHanded() || weapon->isHandToHand())
             {
-                ATT += static_cast<int32>(ATT * this->getMod(Mod::SMITE) / 256.f); // Divide Smite value by 256
+                ATTP += static_cast<int32>(this->getMod(Mod::SMITE) / 256.f * 100); // Divide Smite value by 256
             }
         }
     }
@@ -672,7 +712,7 @@ uint16 CBattleEntity::ATT()
     {
         ATT += this->GetSkill(SKILL_AUTOMATON_MELEE);
     }
-    return ATT + (ATT * m_modStat[Mod::ATTP] / 100) + std::min<int16>((ATT * m_modStat[Mod::FOOD_ATTP] / 100), m_modStat[Mod::FOOD_ATT_CAP]);
+    return ATT + (ATT * ATTP / 100) + std::min<int16>((ATT * m_modStat[Mod::FOOD_ATTP] / 100), m_modStat[Mod::FOOD_ATT_CAP]);
 }
 
 uint16 CBattleEntity::RATT(uint8 skill, uint16 bonusSkill)
@@ -827,17 +867,17 @@ uint16 CBattleEntity::EVA()
     else // If it is a player then evasion = SKILL_EVASION
     {
         evasion = GetSkill(SKILL_EVASION);
-    }
 
-    // Both mobs and players follow the same formula for over 200 evasion
-    if (evasion > 200)
-    {
-        evasion = 200 + (evasion - 200) * 0.9;
+        // Player only evasion calculation
+        if (evasion > 200)
+        {
+            evasion = 200 + (evasion - 200) * 0.9;
+        }
     }
 
     evasion += AGI() / 2;
 
-    return std::max(0, evasion + (this->objtype == TYPE_MOB || this->objtype == TYPE_PET ? 0 : m_modStat[Mod::EVA])); // The mod for a pet or mob is already calclated in the above so return 0
+    return std::max(1, evasion + (this->objtype == TYPE_MOB || this->objtype == TYPE_PET ? 0 : m_modStat[Mod::EVA])); // The mod for a pet or mob is already calclated in the above so return 0
 }
 
 JOBTYPE CBattleEntity::GetMJob()
@@ -1203,6 +1243,41 @@ int16 CBattleEntity::getMod(Mod modID)
 {
     TracyZoneScoped;
     return m_modStat[modID];
+}
+
+/************************************************************************
+ *                                                                      *
+ *  Get the highest value of the specified modifier across all gear     *
+ *                                                                      *
+ ************************************************************************/
+int16 CBattleEntity::getMaxGearMod(Mod modID)
+{
+    TracyZoneScoped;
+    CCharEntity* PChar       = dynamic_cast<CCharEntity*>(this);
+    uint16       maxModValue = 0;
+
+    if (!PChar)
+    {
+        ShowWarning("CBattleEntity::getMaxGearMod() - Entity is not a player.");
+
+        return 0;
+    }
+
+    for (uint8 i = 0; i < SLOT_BACK; ++i)
+    {
+        auto* PItem = PChar->getEquip((SLOTTYPE)i);
+        if (PItem && (PItem->isType(ITEM_EQUIPMENT) || PItem->isType(ITEM_WEAPON)))
+        {
+            uint16 modValue = PItem->getModifier(modID);
+
+            if (modValue > maxModValue)
+            {
+                maxModValue = modValue;
+            }
+        }
+    }
+
+    return maxModValue;
 }
 
 void CBattleEntity::addPetModifier(Mod type, PetModType petmod, int16 amount)
@@ -2116,6 +2191,8 @@ bool CBattleEntity::OnAttack(CAttackState& state, action_t& action)
             {
                 // Set this attack's critical flag.
                 attack.SetCritical(xirand::GetRandomNumber(100) < battleutils::GetCritHitRate(this, PTarget, !attack.IsFirstSwing()));
+
+                this->PAI->EventHandler.triggerListener("MELEE_SWING_HIT", CLuaBaseEntity(this), CLuaBaseEntity(PTarget), CLuaAttack(&attack));
 
                 actionTarget.reaction = REACTION::HIT;
 
