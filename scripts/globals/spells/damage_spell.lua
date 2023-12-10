@@ -280,6 +280,11 @@ xi.spells.damage.calculateBaseDamage = function(caster, target, spellId, skillTy
     -- Bonus to spell base damage from gear.
     baseSpellDamageBonus = baseSpellDamageBonus + caster:getMod(xi.mod.MAGIC_DAMAGE)
 
+    if caster:hasStatusEffect(xi.effect.CASCADE) then
+        caster:delStatusEffectSilent(xi.effect.CASCADE)
+        caster:setTP(0)
+    end
+
     -----------------------------------
     -- STEP 4: Spell Damage
     -----------------------------------
@@ -723,8 +728,8 @@ xi.spells.damage.calculateScarletDeliriumMultiplier = function(caster)
     -- Scarlet delirium are 2 different status effects. SCARLET_DELIRIUM_1 is the one that boosts power.
     if caster:hasStatusEffect(xi.effect.SCARLET_DELIRIUM_1) then
         local power = caster:getStatusEffect(xi.effect.SCARLET_DELIRIUM_1):getPower()
-
         scarletDeliriumMultiplier = 1 + power / 100
+        -- caster:PrintToPlayer(string.format('SD Multiplier: %s', scarletDeliriumMultiplier), xi.msg.channel.SYSTEM_3) -- Debug to see modifier of each hit in a weapon skill.
     end
 
     return scarletDeliriumMultiplier
