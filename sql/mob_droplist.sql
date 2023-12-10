@@ -21338,6 +21338,9 @@ INSERT INTO `mob_droplist` VALUES (2592,0,0,1000,658,40);          -- Damascus I
 INSERT INTO `mob_droplist` VALUES (2592,0,0,1000,4272,30);         -- Slice Of Dragon Meat (3.0%)
 INSERT INTO `mob_droplist` VALUES (2592,0,0,1000,903,20);          -- Dragon Talon (2.0%)
 INSERT INTO `mob_droplist` VALUES (2592,0,0,1000,1133,@VRARE);     -- Vial Of Dragon Blood (Very Rare, 1%)
+INSERT INTO `mob_droplist` VALUES (2592,0,0,1000,18020,200);       -- Mercurial Kris (20%)
+INSERT INTO `mob_droplist` VALUES (2592,0,0,1000,17719,200);       -- Mensur Epee (25%)
+INSERT INTO `mob_droplist` VALUES (2592,0,0,1000,18841,200);       -- Templar Mace (20%)
 
 -- ZoneID:  82 - Vulkodlac
 INSERT INTO `mob_droplist` VALUES (2593,0,0,1000,15915,@UNCOMMON); -- Sothic Rope (Uncommon, 10%)
