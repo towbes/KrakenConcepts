@@ -89,10 +89,11 @@ entity.onTrigger = function(player, npc)
             player:startEvent(192) -- During Quest 'Mama Mia'
         end
 
-    elseif mamaMia == QUEST_COMPLETED and evokersRing then
-        player:startEvent(198) -- New standard dialog after 'Mama Mia' is complete
+    -- elseif mamaMia == QUEST_COMPLETED and evokersRing then
+    --    player:startEvent(198) -- New standard dialog after 'Mama Mia' is complete
 
-    elseif mamaMia == QUEST_COMPLETED and not evokersRing then
+    -- elseif mamaMia == QUEST_COMPLETED and not evokersRing then
+    elseif mamaMia == QUEST_COMPLETED then -- Let players do the quest again
         player:startEvent(243) -- Quest completed, but dropped ring
 
     else
