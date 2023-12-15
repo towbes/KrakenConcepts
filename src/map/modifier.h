@@ -1071,6 +1071,7 @@ enum class Mod
     ENH_DRAIN              = 2039, // % damage boost to DRAIN
     TANDEM_STRIKE          = 2040, // Beastmaster trait - provides acc/macc to master and pet when both engage the same target
     TANDEM_BLOW            = 2041, // Beastmaster trait - provides subtle blow to master and pet when both engage the same target
+    RANDOM_DEAL_BONUS      = 2042, // % chance to reset 2 abilities
 
     // IF YOU ADD ANY NEW MODIFIER HERE, ADD IT IN scripts/enum/mod.lua ASWELL!
 

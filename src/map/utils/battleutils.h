@@ -251,6 +251,7 @@ namespace battleutils
     bool    WeatherMatchesElement(WEATHER weather, uint8 element);
     bool    DrawIn(CBattleEntity* PTarget, CMobEntity* PMob, float offset, uint8 drawInRange, uint16 maximumReach, bool includeParty, bool includeDeadAndMount = false);
     void    DoWildCardToEntity(CCharEntity* PCaster, CCharEntity* PTarget, uint8 roll);
+    bool    DoRandomDealToEntity(CCharEntity* PChar, CCharEntity* PTarget);
     void    AddTraits(CBattleEntity* PEntity, TraitList_t* TraitList, uint8 level);
     void    AddTraitsSJ(CBattleEntity* PEntity, TraitList_t* TraitList, uint8 level, size_t cutoff);
     bool    HasClaim(CBattleEntity* PEntity, CBattleEntity* PTarget);
