@@ -17,8 +17,12 @@ end
 
 commandObj.onTrigger = function(player, team)
 	local teamno = 0
-	
+
     local zone = player:getZone()
+    if zone:getTypeMask() ~= xi.zoneType.CITY then
+        player:PrintToPlayer('PVP can currently only be used in City Zones')
+        return 1
+    end
     if zone:getTypeMask() == xi.zoneType.CITY then
 	    if team == 'blue' then
 	    	teamno = 5
@@ -27,8 +31,6 @@ commandObj.onTrigger = function(player, team)
 	    elseif team == 'off' then
 	    	teamno = 1 -- Off/Back to Default
 	    end
-    else
-        player:PrintToPlayer('PVP can currently only be used in City Zones')
     end
 	
 	player:setAllegiance(teamno)

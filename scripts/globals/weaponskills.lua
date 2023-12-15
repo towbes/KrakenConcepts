@@ -258,9 +258,10 @@ local function accVariesWithTP(hitrate, acc, tp, a1, a2, a3)
     return hrate
 end
 
-local function getMultiAttacks(attacker, target, wsParams, firstHit, offHand)
-    local numHits      = 0
+local function getMultiAttacks(attacker, target, wsParams)
+    local numHits      = wsParams.numHits
     local bonusHits    = 0
+    local multiChances = 1
     local doubleRate   = attacker:getMod(xi.mod.DOUBLE_ATTACK) + attacker:getMerit(xi.merit.DOUBLE_ATTACK_RATE)
     local tripleRate   = attacker:getMod(xi.mod.TRIPLE_ATTACK) + attacker:getMerit(xi.merit.TRIPLE_ATTACK_RATE)
     local quadRate     = attacker:getMod(xi.mod.QUAD_ATTACK)
@@ -276,35 +277,51 @@ local function getMultiAttacks(attacker, target, wsParams, firstHit, offHand)
     -- The logic here wasnt actually checking for the augment.
     -- Also, it was in a completely different scale, making triple attack trigger always.
 
-    if math.random(1, 100) <= quadRate then
-        bonusHits = bonusHits + 3
-    elseif math.random(1, 100) <= tripleRate then
-        bonusHits = bonusHits + 2
-    elseif math.random(1, 100) <= doubleRate then
-        bonusHits = bonusHits + 1
-    elseif firstHit and math.random(1, 100) <= oaThriceRate then -- Can only proc on first hit
-        bonusHits = bonusHits + 2
-    elseif firstHit and math.random(1, 100) <= oaTwiceRate then -- Can only proc on first hit
-        bonusHits = bonusHits + 1
+    -- QA/TA/DA can only proc on the first hit of each weapon or each fist
+    if
+        attacker:getOffhandDmg() > 0 or
+        attacker:getWeaponSkillType(xi.slot.MAIN) == xi.skill.HAND_TO_HAND
+    then
+        multiChances = 2
     end
 
-    attacker:delStatusEffect(xi.effect.ASSASSINS_CHARGE)
-    attacker:delStatusEffect(xi.effect.WARRIORS_CHARGE)
+    for i = 1, multiChances, 1 do
+        if math.random(1, 100) <= quadRate then
+            bonusHits = bonusHits + 3
+        elseif math.random(1, 100) <= tripleRate then
+            bonusHits = bonusHits + 2
+        elseif math.random(1, 100) <= doubleRate then
+            bonusHits = bonusHits + 1
+        elseif i == 1 and math.random(1, 100) <= oaThriceRate then -- Can only proc on first hit
+            bonusHits = bonusHits + 2
+        elseif i == 1 and math.random(1, 100) <= oaTwiceRate then -- Can only proc on first hit
+            bonusHits = bonusHits + 1
+        end
 
-    -- Try OaX for Jumps
-    -- ... What's the correct dual wield interaction?
-    if isJump and bonusHits == 0 and attacker:isPC() then
-        -- getWeaponHitCount will always return 1 if there's a weapon in the slot, which is already accounted for.
-        if offHand then
-            bonusHits = attacker:getWeaponHitCount(true) - 1
-        else
-            bonusHits = attacker:getWeaponHitCount(false) - 1
+        if i == 1 then
+            attacker:delStatusEffect(xi.effect.ASSASSINS_CHARGE)
+            attacker:delStatusEffect(xi.effect.WARRIORS_CHARGE)
+
+            -- recalculate DA/TA/QA rate
+            doubleRate = attacker:getMod(xi.mod.DOUBLE_ATTACK) + attacker:getMerit(xi.merit.DOUBLE_ATTACK_RATE)
+            tripleRate = attacker:getMod(xi.mod.TRIPLE_ATTACK) + attacker:getMerit(xi.merit.TRIPLE_ATTACK_RATE)
+            quadRate   = attacker:getMod(xi.mod.QUAD_ATTACK)
         end
     end
 
+    -- Only get an additional offHand hit with H2H if the wsParams.numHits == 1
+    -- "Note that Hand-to-Hand weaponskills' listed hits do include the offhand hit. However, if a weaponskill does not list multiple hits, it still has an additional offhand hit."
+    -- see "hits" column: https://wiki-ffo-jp.translate.goog/html/19049.html?_x_tr_sch=http&_x_tr_sl=auto&_x_tr_tl=en&_x_tr_hl=it&_x_tr_pto=wapp
+    -- basically h2h always gets 2 "initial" hits, but `numHits` is hard respected for the extra hits
+    -- whereas dual wiedling gets 2 "initial" hits, but `numHits` for e.g. dancing edge is respected as though only one "initial" was performed
+    -- tl;dr: DW gives an extra WS hit everytime, H2H simply ensures every WS gets at least 2 hits (yes backhand blow and dragon kick are both 2-hit ws...)
     numHits = numHits + bonusHits
+    if attacker:getOffhandDmg() > 0 then
+        numHits = numHits + 1
+    end
 
-    return numHits
+    -- cap total hits at 8
+    return utils.clamp(numHits, 1, 8)
 end
 
 local function cRangedRatio(attacker, defender, params, ignoredDef, tp)
@@ -653,7 +670,6 @@ xi.weaponskills.calculateRawWSDmg = function(attacker, target, wsID, tp, action,
     -- Calculate critrates
     local critrate = calculateDEXvsAGICritRate(attacker, target)
 
-    -- TODO: calc per-hit with weapon crit+% on each hand (if dual wielding)
     if wsParams.canCrit then -- Work out critical hit ratios
         local nativecrit = 0
         critrate = xi.weaponskills.fTP(tp, wsParams.crit100, wsParams.crit200, wsParams.crit300)
@@ -680,17 +696,11 @@ xi.weaponskills.calculateRawWSDmg = function(attacker, target, wsID, tp, action,
     calcParams.critRate = critrate
 
     -- Start the WS
-    local hitsDone                = 1
-    local hitdmg                  = 0
-    local finaldmg                = 0
-    local mainhandTPGain          = xi.combat.tp.getSingleWeaponTPReturn(attacker, xi.slot.MAIN)
-    local subTPGain               = xi.combat.tp.getSingleWeaponTPReturn(attacker, xi.slot.SUB)
-    local isJump                  = wsParams.isJump or false
-    local attackerTPMult          = wsParams.attackerTPMult or 1
-    calcParams.hitsLanded         = 0
-    calcParams.shadowsAbsorbed    = 0
-    calcParams.mainhandHitsLanded = 0
-    calcParams.offhandHitsLanded  = 0
+    local hitsDone = 1
+    local hitdmg = 0
+    local finaldmg = 0
+    calcParams.hitsLanded = 0
+    calcParams.shadowsAbsorbed = 0
 
     -- Calculate the damage from the first hit
     local dmg = mainBase * ftp
@@ -709,14 +719,6 @@ xi.weaponskills.calculateRawWSDmg = function(attacker, target, wsID, tp, action,
     end
 
     finaldmg = finaldmg + hitdmg
-
-    calcParams.tpHitsLanded   = calcParams.hitsLanded -- Store number of TP hits that have landed thus far
-    calcParams.mainHitsLanded = calcParams.tpHitsLanded
-    -- Finish first/mainhand hit
-
-    local numMainHandMultis = getMultiAttacks(attacker, target, wsParams, true, false)
-    local numOffhandMultis  = 0
-    local numMultiProcs     = numMainHandMultis > 0 and 1 or 0
 
     -- Have to calculate added bonus for SA/TA here since it is done outside of the fTP multiplier
     if (attacker:getMainJob() == xi.job.THF or attacker:getSubJob() == xi.job.THF) then
@@ -756,9 +758,35 @@ xi.weaponskills.calculateRawWSDmg = function(attacker, target, wsID, tp, action,
 
     -- Do the extra hit for our offhand if applicable
     if calcParams.extraOffhandHit and finaldmg < targetHp then
-        calcParams.hitsLanded = 0
-        local offhandDmg      = (calcParams.weaponDamage[2] + wsMods) * ftp
-        hitdmg, calcParams    = getSingleHitDamage(attacker, target, offhandDmg, wsParams, calcParams)
+        hitsDone = hitsDone + 1
+        local offhandDmg = (calcParams.weaponDamage[2] + wsMods) * ftp
+        hitdmg, calcParams = getSingleHitDamage(attacker, target, offhandDmg, wsParams, calcParams)
+
+        if calcParams.melee then
+            hitdmg = modifyMeleeHitDamage(attacker, target, calcParams.attackInfo, wsParams, hitdmg)
+        end
+
+        if hitdmg > 0 then
+            attacker:trySkillUp(offhandSkill, targetLvl)
+
+            if isJump then
+                attacker:addTP(subTPGain * attackerTPMult)
+            end
+        end
+
+        finaldmg = finaldmg + hitdmg
+    end
+
+    calcParams.guaranteedHit = false -- Accuracy bonus from SA/TA applies only to first main and offhand hit
+    calcParams.tpHitsLanded = calcParams.hitsLanded -- Store number of TP hits that have landed thus far
+    calcParams.hitsLanded = 0 -- Reset counter to start tracking additional hits (from WS or Multi-Attacks)
+
+    -- Calculate additional hits if a multiHit WS (or we're supposed to get a DA/TA/QA proc from main hit)
+    dmg = mainBase * ftp
+    local numHits = getMultiAttacks(attacker, target, wsParams)
+
+    while hitsDone < numHits and finaldmg < targetHp do -- numHits is hits in the base WS _and_ DA/TA/QA procs during those hits
+        hitdmg, calcParams = getSingleHitDamage(attacker, target, dmg, wsParams, calcParams)
 
         if calcParams.melee then
             hitdmg = modifyMeleeHitDamage(attacker, target, calcParams.attackInfo, wsParams, hitdmg)
@@ -774,114 +802,12 @@ xi.weaponskills.calculateRawWSDmg = function(attacker, target, wsID, tp, action,
 
         finaldmg = finaldmg + hitdmg
         hitsDone = hitsDone + 1
-
-        calcParams.offhandHitsLanded = calcParams.hitsLanded
-
-        numOffhandMultis = getMultiAttacks(attacker, target, wsParams, false, true)
-        numMultiProcs = numOffhandMultis > 0 and numMultiProcs + 1 or numMultiProcs
     end
 
-    calcParams.guaranteedHit = false -- Accuracy bonus from SA/TA applies only to first main and offhand hit
-
-    dmg = mainBase * ftp
-
-    -- First mainhand hit is already accounted for
-    local mainhandHits     = wsParams.numHits - 1
-    local mainhandHitsDone = 0
-
-    -- Use up any remaining hits in the WS's numhits
-    while hitsDone < 8 and mainhandHitsDone < mainhandHits and finaldmg < targetHp do
-        calcParams.hitsLanded = 0
-        hitdmg, calcParams    = getSingleHitDamage(attacker, target, dmg, wsParams, calcParams)
-
-        if calcParams.melee then
-            hitdmg = modifyMeleeHitDamage(attacker, target, calcParams.attackInfo, wsParams, hitdmg)
-        end
-
-        if hitdmg > 0 then
-            attacker:trySkillUp(calcParams.skillType, targetLvl)
-
-            if isJump then
-                attacker:addTP(mainhandTPGain * attackerTPMult)
-            end
-        end
-
-        finaldmg                  = finaldmg + hitdmg
-        hitsDone                  = hitsDone + 1
-        mainhandHitsDone          = mainhandHitsDone + 1
-        calcParams.mainHitsLanded = calcParams.mainHitsLanded + calcParams.hitsLanded
-
-        -- Check each hit for multis, but stop after we get 2 multi procs
-        if numMultiProcs < 2 then
-            local extraMultis = getMultiAttacks(attacker, target, wsParams, false, false)
-
-            numMainHandMultis = numMainHandMultis + extraMultis
-            numMultiProcs  = extraMultis > 0 and numMultiProcs + 1 or numMultiProcs
-        end
-    end
-
-    -- Proc any mainhand multi attacks.
-    local mainhandMultiHitsDone = 0
-    while hitsDone < 8 and mainhandMultiHitsDone < numMainHandMultis and finaldmg < targetHp do
-        calcParams.hitsLanded = 0
-        hitdmg, calcParams    = getSingleHitDamage(attacker, target, dmg, wsParams, calcParams)
-
-        if calcParams.melee then
-            hitdmg = modifyMeleeHitDamage(attacker, target, calcParams.attackInfo, wsParams, hitdmg)
-        end
-
-        if hitdmg > 0 then
-            attacker:trySkillUp(calcParams.skillType, targetLvl)
-
-            if isJump then
-                attacker:addTP(mainhandTPGain * attackerTPMult)
-            end
-        end
-
-        finaldmg                  = finaldmg + hitdmg
-        hitsDone                  = hitsDone + 1
-        mainhandMultiHitsDone     = mainhandMultiHitsDone + 1
-        calcParams.mainHitsLanded = calcParams.mainHitsLanded + calcParams.hitsLanded
-    end
-
-    -- Proc any offhand multi attacks.
-    local offhandMultiHitsDone = 0
-    while hitsDone < 8 and offhandMultiHitsDone < numOffhandMultis and finaldmg < targetHp do
-        local offhandDmg      = (calcParams.weaponDamage[2] + wsMods) * ftp
-        calcParams.hitsLanded = 0
-        hitdmg, calcParams    = getSingleHitDamage(attacker, target, offhandDmg, wsParams, calcParams)
-
-        if calcParams.melee then
-            hitdmg = modifyMeleeHitDamage(attacker, target, calcParams.attackInfo, wsParams, hitdmg)
-        end
-
-        if hitdmg > 0 then
-            attacker:trySkillUp(offhandSkill, targetLvl)
-
-            if isJump then
-                attacker:addTP(subTPGain * attackerTPMult)
-            end
-        end
-
-        finaldmg                     = finaldmg + hitdmg
-        hitsDone                     = hitsDone + 1
-        offhandMultiHitsDone         = offhandMultiHitsDone + 1
-        calcParams.offhandHitsLanded = calcParams.offhandHitsLanded + calcParams.hitsLanded
-    end
-
-    calcParams.extraHitsLanded = calcParams.hitsLanded + calcParams.offhandHitsLanded
-
-    -- Remove the TP hit landed from the count if it did -- otherwise we would gain extra TP
-    if calcParams.tpHitsLanded > 1 then
-        calcParams.extraHitsLanded = calcParams.extraHitsLanded - 1
-    end
+    calcParams.extraHitsLanded = calcParams.hitsLanded
 
     -- Factor in "all hits" bonus damage mods
-    -- TODO: does this apply to every hit of a multi hit WS as it's coming in to account for potentially excess damage here?
-    local bonusdmg = 0
-
-    if not isJump then
-        bonusdmg = attacker:getMod(xi.mod.ALL_WSDMG_ALL_HITS) -- For any WS
+    local bonusdmg = attacker:getMod(xi.mod.ALL_WSDMG_ALL_HITS) -- For any WS
 
         if
             attacker:getMod(xi.mod.WEAPONSKILL_DAMAGE_BASE + wsID) > 0 and
@@ -893,7 +819,6 @@ xi.weaponskills.calculateRawWSDmg = function(attacker, target, wsID, tp, action,
 
         finaldmg = finaldmg * ((100 + bonusdmg) / 100) -- Apply our "all hits" WS dmg bonuses
         finaldmg = finaldmg + firstHitBonus -- Finally add in our "first hit" WS dmg bonus from before
-    end
 
     -- Return our raw damage to then be modified by enemy reductions based off of melee/ranged
     calcParams.finalDmg = finaldmg
@@ -1303,8 +1228,7 @@ xi.weaponskills.takeWeaponskillDamage = function(defender, attacker, wsParams, p
 
     -- DA/TA/QA/OaT/Oa2-3 etc give full TP return per hit on Jumps
     if isJump then
-        -- Don't feed TP and don't gain TP from takeWeaponskillDamage
-        attackerTPMult            = 0
+        attackerTPMult = attackerTPMult * (wsResults.tpHitsLanded + wsResults.extraHitsLanded)
         wsResults.extraHitsLanded = 0
     end
 

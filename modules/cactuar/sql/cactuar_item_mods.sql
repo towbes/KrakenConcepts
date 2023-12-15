@@ -884,7 +884,7 @@ REPLACE INTO `item_latents` (`itemId`, `modId`, `value`, `latentId`, `latentPara
 
 (15198,64,7,50,31),      -- Sprout Beret Combat Skill Gain +7 under 31
 (15198,65,7,50,31),      -- Sprout Beret Magic Skill Gain +7 under 31
-(15198,169,7,50,31),     -- Sprout Beret MovementSpeed +7 under 31
+(15198,76,7,50,31),      -- Sprout Beret MovementSpeed +7 under 31
 (15198,382,100,50,31),   -- Sprout Beret EXP + 100% under 31
 
 -- Sacrifice Torque

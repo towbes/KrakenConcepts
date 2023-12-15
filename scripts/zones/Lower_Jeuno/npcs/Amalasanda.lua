@@ -71,6 +71,13 @@ entity.onTrigger = function(player, npc)
             4882, 271272, -- Sleepga II
             4946, 52532, -- Utsusemi: Ichi
             4994, 47320, -- Mage's Ballad
+            4164, 6100,  -- Prism Powder
+            4165, 5232,  -- Silent Oil
+            5867, 15000, -- Toolbag (Ino)
+            5868, 17000, -- Toolbag (Shika)
+            5869, 18000, -- Toolbag (Cho)
+            5870, 11000, -- Trump Card Case
+            4153, 3000,  -- Antacid
         }
 
         player:showText(npc, ID.text.AMALASANDA_SHOP_DIALOG)
