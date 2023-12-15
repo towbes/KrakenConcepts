@@ -5,7 +5,7 @@
 local entity = {}
 
 entity.onMobSpawn = function(mob)
-    mob:setMod(xi.mod.MOVE, 12)
+    mob:setMod(xi.move.MOVE_SPEED_STACKABLE, 12)
     mob:setMobMod(xi.mobMod.NO_STANDBACK, 1)
 end
 

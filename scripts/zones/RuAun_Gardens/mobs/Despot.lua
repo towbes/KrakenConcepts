@@ -6,7 +6,7 @@ local entity = {}
 
 entity.onMobSpawn = function(mob)
     mob:setMobMod(xi.mobMod.IDLE_DESPAWN, 60)
-    mob:setMod(xi.mod.MOVE, 12)
+    mob:setMod(xi.move.MOVE_SPEED_STACKABLE, 12)
     local ph = GetMobByID(mob:getLocalVar('ph'))
     if ph then
         local pos = ph:getPos()

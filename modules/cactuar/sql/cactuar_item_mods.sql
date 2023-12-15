@@ -504,7 +504,7 @@ REPLACE INTO `item_mods` (`itemid`, `modid`, `value`) VALUES
 
 -- Oneiros Axe
 (18519,73,-15),  -- STORETP: -15
-(18519,169,-12), -- MOVE: -12
+(18519,77,-12), -- MOVE: -12
 
 -- Oneiros Annulet
 (11670,11,-6), -- AGI: -6
@@ -515,7 +515,7 @@ REPLACE INTO `item_mods` (`itemid`, `modid`, `value`) VALUES
 (11817,10,8),     -- VIT: 8
 (11817,68,-14),   -- EVA: -14
 (11817,161,-400), -- DMGPHYS: -400
-(11817,169,-10),  -- MOVE: -10
+(11817,77,-10),  -- MOVE: -10
 
 -- Mujin Mantle
 (10974,1,9),  -- DEF: 9
