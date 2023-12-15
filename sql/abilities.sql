@@ -134,7 +134,7 @@ INSERT INTO `abilities` VALUES (114,'corsairs_roll',17,5,1,60,193,420,0,114,2000
 INSERT INTO `abilities` VALUES (115,'puppet_roll',17,52,1,60,193,420,0,115,2000,0,6,8.0,1,1,80,0,8,'TOAU');
 INSERT INTO `abilities` VALUES (116,'dancers_roll',17,61,1,60,193,420,0,116,2000,0,6,8.0,1,1,80,0,8,'WOTG');
 INSERT INTO `abilities` VALUES (117,'scholars_roll',17,64,1,60,193,420,0,117,2000,0,6,8.0,1,1,80,0,8,'WOTG');
-INSERT INTO `abilities` VALUES (118,'bolters_roll',17,70,1,60,193,420,0,118,2000,0,6,8.0,1,1,80,0,8,'ABYSSEA');
+INSERT INTO `abilities` VALUES (118,'bolters_roll',17,70,1,60,193,420,0,118,2000,0,6,8.0,1,1,80,0,8,NULL);
 INSERT INTO `abilities` VALUES (119,'casters_roll',17,69,1,60,193,420,0,119,2000,0,6,8.0,1,1,80,0,8,'ABYSSEA');
 INSERT INTO `abilities` VALUES (120,'coursers_roll',17,72,1,60,193,420,0,120,2000,0,6,8.0,1,1,80,0,8,'ABYSSEA');
 INSERT INTO `abilities` VALUES (121,'blitzers_roll',17,73,1,60,193,420,0,121,2000,0,6,8.0,1,1,80,0,8,'ABYSSEA');
@@ -394,8 +394,8 @@ INSERT INTO `abilities` VALUES (386,'entrust',21,75,1,600,93,100,0,332,2000,0,6,
 INSERT INTO `abilities` VALUES (387,'bestial_loyalty',9,23,1,1200,94,100,0,83,2000,0,6,18.0,0,1,0,900,0,'SOA');
 INSERT INTO `abilities` VALUES (388,'cascade',4,50,1,60,12,100,0,333,2000,0,6,0.0,0,0,0,0,0,NULL); -- check animation
 INSERT INTO `abilities` VALUES (389,'consume_mana',8,55,1,60,95,0,0,337,2000,0,6,0.0,0,1,1300,0,0,'SOA');
-INSERT INTO `abilities` VALUES (390,'naturalists_roll',17,67,1,60,193,420,0,328,2000,0,6,8.0,1,1,80,0,8,'SOA'); -- No Enhancing Magic Duration MOD, Empty PH effect exists
-INSERT INTO `abilities` VALUES (391,'runeists_roll',17,70,1,60,193,420,0,329,2000,0,6,8.0,1,1,80,0,8,'SOA');
+INSERT INTO `abilities` VALUES (390,'naturalists_roll',17,67,1,60,193,420,0,328,2000,0,6,8.0,1,1,80,0,8,NULL); -- No Enhancing Magic Duration MOD, Empty PH effect exists
+INSERT INTO `abilities` VALUES (391,'runeists_roll',17,70,1,60,193,420,0,329,2000,0,6,8.0,1,1,80,0,8,NULL);
 INSERT INTO `abilities` VALUES (392,'crooked_cards',17,95,1,600,96,100,0,335,2000,0,6,0.0,0,0,0,0,0,NULL);
 INSERT INTO `abilities` VALUES (393,'spirit_bond',14,65,257,60,149,100,0,86,2000,0,6,18.0,0,0,0,0,0,NULL);
 INSERT INTO `abilities` VALUES (394,'majesty',7,70,1,60,150,100,0,338,2000,0,6,0.0,0,0,340,0,0,NULL);

@@ -4183,6 +4183,11 @@ namespace charutils
             EMobDifficulty mobCheck = CheckMob(maxlevel, moblevel);
             float          exp      = (float)GetBaseExp(maxlevel, moblevel);
 
+            if (maxlevel > 75 && memberlevel > 75) // Jug pet Beast Affinity guard.
+            {
+                maxlevel = 75;
+            }
+
             if (mobCheck > EMobDifficulty::TooWeak)
             {
                 if (PMember->getZone() == PMob->getZone())
