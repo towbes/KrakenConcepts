@@ -19,6 +19,15 @@ local pTable =
 --                                     1     2            3            4           5              6          7                 8
 -- Structure:            [spellId] = { Tier, Main_Effect, Spell_Level, Base_Power, Base_Duration, Composure, Always_Overwrite, Tick_Seconds },
 
+    -- Adloquium
+    [xi.magic.spell.ADLOQUIUM    ] = { 1, xi.effect.REGAIN,        75,   2,  180, true,  false, 0 },
+
+    -- Animus Augeo
+    [xi.magic.spell.ANIMUS_AUGEO ] = { 1, xi.effect.ENMITY_BOOST,  88,   10,  180, true,  false, 0 },
+
+    -- Animus Minuo
+    [xi.magic.spell.ANIMUS_MINUO ] = { 1, xi.effect.PAX,           88,   10,  180, true,  false, 0 },
+
     -- Aquaveil
     [xi.magic.spell.AQUAVEIL     ] = { 1, xi.effect.AQUAVEIL,       1,    1,  600, true,  true,  0 },
 
@@ -70,7 +79,7 @@ local pTable =
     [xi.magic.spell.BOOST_CHR    ] = { 1, xi.effect.CHR_BOOST,      1,    5,  300, true,  false, 0 },
 
     -- Crusade
-    [xi.magic.spell.CRUSADE      ] = { 1, xi.effect.ENMITY_BOOST,  88,   30,  300, true,  false, 0 },
+    [xi.magic.spell.CRUSADE      ] = { 1, xi.effect.ENMITY_BOOST,  88,   15,  300, true,  false, 0 }, -- Default Power: 30
 
     -- Deodorize / Invisible / Sneak
     [xi.magic.spell.DEODORIZE    ] = { 1, xi.effect.DEODORIZE,     15,    0,  420, true,  false, 10 },
