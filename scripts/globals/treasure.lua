@@ -1001,7 +1001,7 @@ xi.treasure.treasureInfo =
                 },
                 gil = { 0.652, 7320, 18000 },
                 gem = { 0.044, 791, 801, 810, 784, 802, 797, 803, 805 },
-                item = { 0.304, 14670 },
+                item = { 0.304, 14670, xi.item.ASTRAL_RING },
             },
 
             [xi.zone.THE_BOYAHDA_TREE] = -- 153
