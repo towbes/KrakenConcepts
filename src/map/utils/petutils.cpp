@@ -336,12 +336,12 @@ namespace petutils
             case 45: // PANZER GALAHAD
                 calculatedHp = 48.133 * level - 460;
                 break;
-            default:
-                calculatedHp = -0.0207189 * pow(level, 3) + 3.05448 * pow(level, 2) - 86.9204 * level + 1061.84;
-                break;
             case 46: // CHOPSUEY CHUCKY
             case 47: // AMIGO SABOTENDER
                 calculatedHp = 60.24 * level - 1246;
+                break;
+            default:
+                calculatedHp = -0.0207189 * pow(level, 3) + 3.05448 * pow(level, 2) - 86.9204 * level + 1061.84;
                 break;
         }
         return std::max(calculatedHp, 500);
