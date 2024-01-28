@@ -13084,7 +13084,7 @@ inline int32 CLuaBaseEntity::doRandomDeal(CLuaBaseEntity* PEntity)
     if (m_PBaseEntity->objtype != TYPE_PC)
     {
          ShowWarning("Invalid entity type calling function (%s).", m_PBaseEntity->GetName());
-         return;
+         return false;
     }
 
     return battleutils::DoRandomDealToEntity(static_cast<CCharEntity*>(m_PBaseEntity), static_cast<CCharEntity*>(PEntity->m_PBaseEntity));
