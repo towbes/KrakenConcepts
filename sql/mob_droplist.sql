@@ -26690,7 +26690,7 @@ INSERT INTO `mob_droplist` VALUES (4005,0,0,1000,11775,@COMMON);  -- Oneiros Rop
 INSERT INTO `mob_droplist` VALUES (4005,0,0,1000,3410,@ALWAYS);   -- Fiendish Tome Chapter 7
 
 -- ZoneID: 186 - Ra'Gho Darkfount
-INSERT INTO `mob_droplist` VALUES (4006,0,0,1000,11775,@COMMON);  -- Mujin Obi (15.0%)
+INSERT INTO `mob_droplist` VALUES (4006,0,0,1000,11776,@COMMON);  -- Mujin Obi (15.0%)
 INSERT INTO `mob_droplist` VALUES (4006,0,0,1000,3411,@ALWAYS);   -- Fiendish Tome Chapter 8
 
 -- ZoneID: 186 - Va'Zhe Pummelsong
