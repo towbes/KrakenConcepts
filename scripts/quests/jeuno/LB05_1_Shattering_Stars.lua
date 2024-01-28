@@ -22,9 +22,10 @@ quest.sections =
     {
         check = function(player, status, vars)
             return status == QUEST_AVAILABLE and
+                player:getQuestStatus(xi.quest.log_id.JEUNO, xi.quest.id.jeuno.SHATTERING_STARS) ~= QUEST_COMPLETED and
                 player:getMainJob() <= 15 and -- Only the 'old' jobs may start this quest.
                 player:getMainLvl() >= 66 and
-                player:getLevelCap() == 70 and
+                -- player:getLevelCap() == 70 and
                 xi.settings.main.MAX_LEVEL >= 75
         end,
 
