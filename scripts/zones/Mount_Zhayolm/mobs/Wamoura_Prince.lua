@@ -25,7 +25,7 @@ entity.onMobSpawn = function(mob)
     if canEvolve(mob) then
         mob:hideName(false)
         mob:setUntargetable(false)
-        mob:setLocalVar("evolveTime", os.time() + math.random(10, 11)) -- Evolves in approx 1 Vana'diel day
+        mob:setLocalVar("evolveTime", os.time() + math.random(3500, 3600)) -- Evolves in approx 1 Vana'diel day
     end
 end
 
