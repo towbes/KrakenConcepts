@@ -35,6 +35,7 @@ xi.settings.main =
     ENABLE_SOA       = 1,
     ENABLE_ROV       = 1,
     ENABLE_VOIDWATCH = 1, -- Not an expansion, but has its own storyline. (Not Implemented)
+    ENABLE_CACTUAR   = 1,
 
     -- FIELDS OF VALOR/Grounds of Valor settings
     ENABLE_FIELD_MANUALS  = 1, -- Enables Fields of Valor
