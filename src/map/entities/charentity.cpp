@@ -1105,7 +1105,7 @@ void CCharEntity::OnCastFinished(CMagicState& state, action_t& action)
                 StatusEffectContainer->DelStatusEffectSilent(EFFECT_CHAIN_AFFINITY);
             }
 
-            if (actionTarget.param > 0 && PSpell->dealsDamage() && PSpell->getSpellGroup() == SPELLGROUP_BLACK &&
+            if (actionTarget.param > 0 && PSpell->dealsDamage() && (PSpell->getSpellGroup() == SPELLGROUP_BLACK || (PSpell->getSpellFamily() >= SPELLFAMILY_ANEMOHELIX && PSpell->getSpellFamily() <= SPELLFAMILY_LUMINOHELIX)) &&
                 (StatusEffectContainer->HasStatusEffect(EFFECT_IMMANENCE)) &&
                 static_cast<CSpell*>(PSpell)->getElement() != 0)
             {
