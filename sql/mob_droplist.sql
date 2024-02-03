@@ -15847,6 +15847,7 @@ INSERT INTO `mob_droplist` VALUES (1966,0,0,1000,1432,@ALWAYS);   -- Paladins Te
 INSERT INTO `mob_droplist` VALUES (1966,0,0,1000,844,@VCOMMON);   -- Phoenix Feather (Very Common, 24%)
 INSERT INTO `mob_droplist` VALUES (1966,0,0,1000,942,@VCOMMON);   -- Philosophers Stone (Very Common, 24%)
 INSERT INTO `mob_droplist` VALUES (1966,0,0,1000,17928,@VCOMMON); -- Juggernaut (Very Common, 24%)
+INSERT INTO `mob_droplist` VALUES (1966,0,0,1000,4706,500);       -- Scroll Of Enlight (50%)
 INSERT INTO `mob_droplist` VALUES (1966,0,0,1000,1132,@UNCOMMON); -- Square Of Raxa (Uncommon, 10%)
 INSERT INTO `mob_droplist` VALUES (1966,0,0,1000,1132,@UNCOMMON); -- Square Of Raxa (Uncommon, 10%)
 INSERT INTO `mob_droplist` VALUES (1966,0,0,1000,703,@UNCOMMON);  -- Petrified Log (Uncommon, 10%)
