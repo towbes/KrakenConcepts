@@ -521,17 +521,24 @@ namespace battleutils
         {
             if (PAttacker->StatusEffectContainer->HasStatusEffect(EFFECT_COMPOSURE))
             {
-                damage = (PAttacker->getMod(Mod::ENSPELL_DMG) * 2) + PAttacker->getMod(Mod::ENSPELL_DMG_BONUS);
+                damage = (PAttacker->getMod(Mod::ENSPELL_DMG) * 2);
             }
             else
             {
-                damage = (PAttacker->getMod(Mod::ENSPELL_DMG) + PAttacker->getMod(Mod::ENSPELL_DMG_BONUS));
+                damage = (PAttacker->getMod(Mod::ENSPELL_DMG));
             }
 
             auto* PChar = dynamic_cast<CCharEntity*>(PAttacker);
             if (PChar)
             {
                 damage += PChar->PMeritPoints->GetMeritValue(MERIT_ENSPELL_DAMAGE, PChar);
+            }
+
+            damage += PAttacker->getMod(Mod::ENSPELL_DMG_BONUS);
+
+            if (damage < 0)
+            {
+                damage = 1;
             }
         }
         else if (Tier == 2)
@@ -569,6 +576,11 @@ namespace battleutils
             }
             damage += PAttacker->getMod(Mod::ENSPELL_DMG_BONUS);
 
+            if (damage < 0)
+            {
+                damage = 1;
+            }
+
             auto* PChar = dynamic_cast<CCharEntity*>(PAttacker);
             if (PChar)
             {
@@ -577,7 +589,14 @@ namespace battleutils
         }
         else if (Tier == 3) // enlight or endark
         {
-            damage = PAttacker->getMod(Mod::ENSPELL_DMG);
+            if (PAttacker->StatusEffectContainer->HasStatusEffect(EFFECT_COMPOSURE))
+            {
+                damage = (PAttacker->getMod(Mod::ENSPELL_DMG) * 2);
+            }
+            else
+            {
+                damage = (PAttacker->getMod(Mod::ENSPELL_DMG));
+            }
 
             if (damage > 1)
             {
@@ -594,8 +613,11 @@ namespace battleutils
                     PAttacker->StatusEffectContainer->DelStatusEffect(EFFECT_ENLIGHT);
                 }
             }
-
             damage += PAttacker->getMod(Mod::ENSPELL_DMG_BONUS);
+            if (damage < 0)
+            {
+                damage = 1;
+            }
         }
         else if (Tier == 4) // Rune Enhancement
         {

@@ -763,7 +763,7 @@ REPLACE INTO `item_mods` (`itemid`, `modid`, `value`) VALUES
 (11924,384,400), -- HASTE_GEAR: 400
 
 -- Kraken Club
-(17440,343,-8), -- ENSPELL_DMG: -8
+(17440,432,-8), -- ENSPELL_DMG: -8 343
 
 -- Claustrum
 (18330,25,20),   -- ACC: 20
