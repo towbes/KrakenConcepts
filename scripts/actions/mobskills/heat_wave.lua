@@ -28,6 +28,8 @@ mobskillObject.onMobWeaponSkill = function(target, mob, skill)
     -- Reacton does a 40dmg per tick
     if mob:getID() == 17031599 then
         power = 40
+    else
+        power = 10
     end
 
     xi.mobskills.mobStatusEffectMove(mob, target, typeEffect, power, 0, 120)
