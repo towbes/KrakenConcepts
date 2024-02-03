@@ -104,7 +104,7 @@ local pTable =
     [xi.magic.spell.ENWATER_II   ] = { 2, xi.effect.ENWATER_II,    60,    0,  180, true,  false, 0 },
 
     -- Flurry
-    [xi.magic.spell.FLURRY       ] = { 1, xi.effect.FLURRY,        48,   15,  180, true,  false, 0 },
+    [xi.magic.spell.FLURRY       ] = { 1, xi.effect.FLURRY_II,     48,   15,  180, true,  false, 0 },
     [xi.magic.spell.FLURRY_II    ] = { 2, xi.effect.FLURRY_II,     96,   30,  180, true,  false, 0 },
     -- Foil
     [xi.magic.spell.FOIL         ] = { 1, xi.effect.FOIL,          58,  150,   30, true,  false, 3 },
@@ -297,8 +297,11 @@ xi.spells.enhancing.calculateEnhancingBasePower = function(caster, target, spell
 
     -- Temper
     elseif spellEffect == xi.effect.MULTI_STRIKES then
-        if skillLevel >= 360 then
+        --[[ if skillLevel >= 360 then
             basePower = math.floor((skillLevel - 300) / 10)
+        end]]
+        if skillLevel >= 260 then
+            basePower = math.floor((skillLevel - 200) / 10)
         end
     end
 
