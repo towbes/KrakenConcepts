@@ -6153,16 +6153,18 @@ INSERT INTO `item_mods` VALUES (11294,24,5);  -- RATT: 5
 INSERT INTO `item_mods` VALUES (11294,26,10); -- RACC: 10
 
 -- Commodore Frac
-INSERT INTO `item_mods` VALUES (11295,1,45); -- DEF: 45
-INSERT INTO `item_mods` VALUES (11295,8,3);  -- STR: 3
-INSERT INTO `item_mods` VALUES (11295,24,8); -- RATT: 8
-INSERT INTO `item_mods` VALUES (11295,25,8); -- ACC: 8
+INSERT INTO `item_mods` VALUES (11295,1,45);   -- DEF: 45
+INSERT INTO `item_mods` VALUES (11295,8,3);    -- STR: 3
+INSERT INTO `item_mods` VALUES (11295,24,8);   -- RATT: 8
+INSERT INTO `item_mods` VALUES (11295,25,8);   -- ACC: 8
+INSERT INTO `item_mods` VALUES (11295,2042,5); -- RANDOM_DEAL_BONUS: 5
 
 -- Commodore Frac +1
 INSERT INTO `item_mods` VALUES (11296,1,46);  -- DEF: 46
 INSERT INTO `item_mods` VALUES (11296,8,3);   -- STR: 3
 INSERT INTO `item_mods` VALUES (11296,24,10); -- RATT: 10
 INSERT INTO `item_mods` VALUES (11296,25,10); -- ACC: 10
+INSERT INTO `item_mods` VALUES (11296,2042,5); -- RANDOM_DEAL_BONUS: 5
 
 -- Puppetry Tobe +1
 INSERT INTO `item_mods` VALUES (11297,1,37); -- DEF: 37
