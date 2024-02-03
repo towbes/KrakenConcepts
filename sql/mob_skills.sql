@@ -2126,7 +2126,7 @@ INSERT INTO `mob_skills` VALUES (2106,1449,'bloodrake',0,7.0,2000,1000,4,0,0,0,0
 INSERT INTO `mob_skills` VALUES (2107,1450,'decollation',0,7.0,2000,1000,4,0,0,0,0,0,0);
 INSERT INTO `mob_skills` VALUES (2108,1451,'nosferatus_kiss',1,20.0,2000,1000,4,0,0,0,0,0,0);
 INSERT INTO `mob_skills` VALUES (2109,1452,'heliovoid',1,20.0,2000,1500,4,0,0,0,0,0,0);
-INSERT INTO `mob_skills` VALUES (2110,1454,'wings_of_gehenna',1,20.0,2000,1000,4,0,0,0,0,0,0);
+INSERT INTO `mob_skills` VALUES (2110,1454,'wings_of_gehenna',1,20.0,2000,1000,4,0,0,1,0,0,0);
 INSERT INTO `mob_skills` VALUES (2111,1453,'eternal_damnation',4,15.0,2000,1000,4,0,0,0,0,0,0);
 INSERT INTO `mob_skills` VALUES (2112,1455,'nocturnal_servitude',4,7.0,2000,1500,4,0,0,0,0,0,0);
 INSERT INTO `mob_skills` VALUES (2113,1456,'hellsnap',1,30.0,2000,1000,4,0,0,0,0,0,0);

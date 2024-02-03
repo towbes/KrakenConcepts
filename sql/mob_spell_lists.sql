@@ -257,6 +257,7 @@ INSERT INTO `mob_spell_lists` VALUES ('Beastmen_PLD',4,49,40,59);   -- shell_ii 
 INSERT INTO `mob_spell_lists` VALUES ('Beastmen_PLD',4,50,60,79);   -- shell_iii (60~79)
 INSERT INTO `mob_spell_lists` VALUES ('Beastmen_PLD',4,51,80,255);  -- shell_iv (80~255)
 INSERT INTO `mob_spell_lists` VALUES ('Beastmen_PLD',4,112,37,255); -- flash (37~255)
+INSERT INTO `mob_spell_lists` VALUES ('Beastmen_PLD',4,310,80,255); -- enlight (80~255)
 
 -- Beastmen_DRK (5)
 INSERT INTO `mob_spell_lists` VALUES ('Beastmen_DRK',5,144,23,34);  -- fire (23~34)
@@ -298,6 +299,7 @@ INSERT INTO `mob_spell_lists` VALUES ('Beastmen_DRK',5,270,39,255); -- absorb-in
 INSERT INTO `mob_spell_lists` VALUES ('Beastmen_DRK',5,271,31,255); -- absorb-mnd (31~255)
 INSERT INTO `mob_spell_lists` VALUES ('Beastmen_DRK',5,272,33,255); -- absorb-chr (33~255)
 INSERT INTO `mob_spell_lists` VALUES ('Beastmen_DRK',5,275,45,255); -- absorb-tp (45~255)
+INSERT INTO `mob_spell_lists` VALUES ('Beastmen_DRK',5,311,80,255); -- endark (45~255)
 
 -- Beastmen_BRD (6)
 INSERT INTO `mob_spell_lists` VALUES ('Beastmen_BRD',6,368,7,16);   -- foe_requiem (7~16)
@@ -6384,6 +6386,15 @@ INSERT INTO `mob_spell_lists` VALUES ('Darting_Kachaal_Ja_Flee',5094,362,1,255);
 
 -- Darting Kachaal Ja (Aggressive Mode)
 INSERT INTO `mob_spell_lists` VALUES ('Darting_Kachaal_Ja_Aggressive',5095,186,1,255);  -- aeroga_iii (1~255)
+
+INSERT INTO `mob_spell_lists` VALUES ('Custom_Lord_Verdilak',5096,311,1,255); -- endark (1~255)
+INSERT INTO `mob_spell_lists` VALUES ('Custom_Lord_Verdilak',5096,361,1,255); -- blindga (1~255)
+INSERT INTO `mob_spell_lists` VALUES ('Custom_Lord_Verdilak',5096,360,1,255); -- dispelga (1~255)
+INSERT INTO `mob_spell_lists` VALUES ('Custom_Lord_Verdilak',5096,245,1,255); -- drain (12~255)
+INSERT INTO `mob_spell_lists` VALUES ('Custom_Lord_Verdilak',5096,246,1,255); -- drain ii (12~255)
+INSERT INTO `mob_spell_lists` VALUES ('Custom_Lord_Verdilak',5096,247,1,255); -- aspir (1~255)
+INSERT INTO `mob_spell_lists` VALUES ('Custom_Lord_Verdilak',5096,277,1,255); -- dread_spikes (1~255)
+INSERT INTO `mob_spell_lists` VALUES ('Custom_Lord_Verdilak',5096,234,1,255); -- bio_v (1~255)
 
 /*!40000 ALTER TABLE `mob_spell_lists` ENABLE KEYS */;
 UNLOCK TABLES;
