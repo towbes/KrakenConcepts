@@ -811,6 +811,10 @@ namespace battleutils
         {
             // drain same as damage taken
             damage = damageTaken;
+            if (PDefender->getMod(Mod::SPIKES_DMG_BONUS) > 0)
+            {
+                damage *= 1 + (PDefender->getMod(Mod::SPIKES_DMG_BONUS) / 100.f);
+            }
         }
 
         damage = MagicDmgTaken(PAttacker, damage, spikeElement); // apply MDT/MDT2/DT, liement to whoever is taking damage
