@@ -23,6 +23,7 @@ local prizes =
             4108, -- Lightning Cluster
             4110, -- Light Cluster
             4111, -- Dark Cluster
+            4177, -- Buff Token (Self)
             -- 2955, -- Kindred's Crest
             -- 2956, -- High Kindred's Crest
             -- 2957, -- Sacred Kindred's Crest
@@ -35,6 +36,7 @@ local prizes =
         ['items'] =
         {
             4176, -- Mysterious Gift
+            4178, -- Buff Token (Party)
             1456, -- 100 Byne Bill
             1453, -- M. Silverpiece
             1450, -- L. Jadeshell
@@ -145,41 +147,41 @@ local prizes =
         ['price'] = 4000,
         ['items'] =
         {
-        -- 11538, -- Nexus Cape
-        -- 15554, -- Pelican Ring
-        -- 26166, -- Invisible Ring
-        -- 26167, -- Sneak Ring
-        -- 26169, -- Reraise Ring
-        -- 10924, -- Chocobo Torque
-        -- 10925, -- Fisher's Torque
-        -- 10926, -- Field Torque 
-        -- 10948, -- Carver's Torque
-        -- 10949, -- Smith's Torque
-        -- 10950, -- Goldsm. Torque
-        -- 10951, -- Weaver's Torque
-        -- 10952, -- Taner's Torque 
-        -- 10953, -- Bone Torque 
-        -- 10954, -- Alchemist Torque 
-        -- 10955, -- Culin. Torque 
-			10050, -- ♪Tiger
-			10051, -- ♪Crab
-			10052, -- ♪Red Crab
-			10053, -- ♪Bomb
-			10054, -- ♪Sheep
-			10055, -- ♪Morbol
-			10056, -- ♪Crawler
-			10058, -- ♪Beetle
-			10059, -- ♪Moogle
-			10061, -- ♪Tulfaire
-			10062, -- ♪Warmachine
-			10063, -- ♪Xzmoit
-			10064, -- ♪Hippogryph
-			10065, -- ♪Spectral Chair
-			10066, -- ♪Spheroid
-			10068, -- ♪Coeurl
-			10071, -- ♪Levitus
-			10069, -- ♪Goobbue
-			10070, -- ♪Raaz
+            11538, -- Nexus Cape
+            15554, -- Pelican Ring
+            26166, -- Invisible Ring
+            26167, -- Sneak Ring
+            26169, -- Reraise Ring
+            10924, -- Chocobo Torque
+            10925, -- Fisher's Torque
+            10926, -- Field Torque 
+            10948, -- Carver's Torque
+            10949, -- Smith's Torque
+            10950, -- Goldsm. Torque
+            10951, -- Weaver's Torque
+            10952, -- Taner's Torque 
+            10953, -- Bone Torque 
+            10954, -- Alchemist Torque 
+            10955, -- Culin. Torque 
+		--	10050, -- ♪Tiger
+		--	10051, -- ♪Crab
+		--	10052, -- ♪Red Crab
+		--	10053, -- ♪Bomb
+		--	10054, -- ♪Sheep
+		--	10055, -- ♪Morbol
+		--	10056, -- ♪Crawler
+		--	10058, -- ♪Beetle
+		--	10059, -- ♪Moogle
+		--	10061, -- ♪Tulfaire
+		--	10062, -- ♪Warmachine
+		--	10063, -- ♪Xzmoit
+		--	10064, -- ♪Hippogryph
+		--	10065, -- ♪Spectral Chair
+		--	10066, -- ♪Spheroid
+		--	10068, -- ♪Coeurl
+		--	10071, -- ♪Levitus
+		--	10069, -- ♪Goobbue
+		--	10070, -- ♪Raaz
         },
     },
 
