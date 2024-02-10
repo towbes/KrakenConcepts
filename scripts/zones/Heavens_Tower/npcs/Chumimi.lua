@@ -54,8 +54,8 @@ entity.onTrigger = function(player, npc)
     elseif
         theThreeMagi == QUEST_COMPLETED and
         recollections == QUEST_AVAILABLE and
-        ((mJob == xi.job.BLM and mLvl < xi.settings.main.AF2_QUEST_LEVEL or mJob ~= xi.job.BLM) or
-        (sJob == xi.job.BLM and sLvl < xi.settings.main.AF2_QUEST_LEVEL or sJob ~= xi.job.BLM)) -- Umeboshi
+        ((mJob == xi.job.BLM and mLvl < xi.settings.main.AF2_QUEST_LEVEL) or
+        (sJob == xi.job.BLM and sLvl < xi.settings.main.AF2_QUEST_LEVEL)) -- Umeboshi
     then
         player:startEvent(268) -- New standard dialog after 'The Three Magi'
     elseif
