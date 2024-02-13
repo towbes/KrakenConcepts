@@ -6671,7 +6671,7 @@ INSERT INTO `mob_droplist` VALUES (805,0,0,1000,4486,@VCOMMON);   -- Dragon Hear
 INSERT INTO `mob_droplist` VALUES (805,0,0,1000,16942,@UNCOMMON); -- Balmung (Uncommon, 10%)
 INSERT INTO `mob_droplist` VALUES (805,0,0,1000,17653,@UNCOMMON); -- Hrotti (Uncommon, 10%)
 INSERT INTO `mob_droplist` VALUES (805,0,0,1000,3340,@RARE);      -- Cup Of Sweet Tea (Rare, 5%)
-INSERT INTO `mob_droplist` VALUES (805,0,0,1000,16555,@VRARE);    -- Ridill (Very Rare, 1%)
+INSERT INTO `mob_droplist` VALUES (805,0,0,1000,16555,@RARE);     -- Ridill (Rare, 5%)
 INSERT INTO `mob_droplist` VALUES (805,1,1,@ALWAYS,1321,250);     -- Earthen Abjuration Hands (Group 1 - 25%)
 INSERT INTO `mob_droplist` VALUES (805,1,1,@ALWAYS,1328,250);     -- Aquarian Abjuration Feet (Group 1 - 25%)
 INSERT INTO `mob_droplist` VALUES (805,1,1,@ALWAYS,1326,250);     -- Aquarian Abjuration Hands (Group 1 - 25%)
@@ -11876,8 +11876,8 @@ INSERT INTO `mob_droplist` VALUES (1450,1,2,@VCOMMON,1334,250); -- Wyrmal Abjura
 INSERT INTO `mob_droplist` VALUES (1450,1,2,@VCOMMON,1322,250); -- Earthen Abjuration Legs (Group 2 - 25%)
 INSERT INTO `mob_droplist` VALUES (1450,1,2,@VCOMMON,1332,250); -- Martial Abjuration Legs (Group 2 - 25%)
 INSERT INTO `mob_droplist` VALUES (1450,1,2,@VCOMMON,1328,250); -- Aquarian Abjuration Feet (Group 2 - 25%)
-INSERT INTO `mob_droplist` VALUES (1450,1,3,1000,13415,990);    -- Pixie Earring (Group 3 - 99.0%)
-INSERT INTO `mob_droplist` VALUES (1450,1,3,1000,13566,@VRARE); -- Defending Ring (Group 3 - Very Rare, 1%)
+INSERT INTO `mob_droplist` VALUES (1450,1,3,1000,13415,950);    -- Pixie Earring (Group 3 - 95.0%)
+INSERT INTO `mob_droplist` VALUES (1450,1,3,1000,13566,@RARE); -- Defending Ring (Group 3 - Rare, 5%)
 
 -- ZoneID: 125 - King Vinegarroon
 INSERT INTO `mob_droplist` VALUES (1451,0,0,1000,15223,430); -- Aces Helm (43.0%)
