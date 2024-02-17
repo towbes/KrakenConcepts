@@ -6396,6 +6396,9 @@ INSERT INTO `mob_spell_lists` VALUES ('Custom_Lord_Verdilak',5096,247,1,255); --
 INSERT INTO `mob_spell_lists` VALUES ('Custom_Lord_Verdilak',5096,277,1,255); -- dread_spikes (1~255)
 INSERT INTO `mob_spell_lists` VALUES ('Custom_Lord_Verdilak',5096,234,1,255); -- bio_v (1~255)
 
+INSERT INTO `mob_spell_lists` VALUES('Velkeng', 5097, 23, 1, 255); -- dia
+
+
 /*!40000 ALTER TABLE `mob_spell_lists` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;

@@ -157,7 +157,7 @@ local battlefields =
     {
     --  { 0, 1088,    0 },   -- Call to Arms (ISNM)
     --  { 1, 1089,    0 },   -- Compliments to the Chef (ISNM)
-    --  { 2, 1090,    0 },   -- Puppetmaster Blues (Quest)
+        { 2, 1090,    0 },   -- Puppetmaster Blues (Quest)
         { 3, 1091, 2332 },   -- Breaking the Bonds of Fate (COR LB5)
         { 4, 1092,    0 },   -- Legacy of the Lost (TOAU35)
     --  { 5,    ?,    0 },   -- *Legacy of the Lost (HTMBF)

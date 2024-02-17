@@ -1772,6 +1772,9 @@ INSERT INTO `bcnm_battlefield` VALUES (1057,2,16924681,3); -- Apoc Nigh
 INSERT INTO `bcnm_battlefield` VALUES (1057,2,16924682,3);
 INSERT INTO `bcnm_battlefield` VALUES (1057,3,16924683,3); -- Apoc Nigh
 INSERT INTO `bcnm_battlefield` VALUES (1057,3,16924684,3);
+INSERT INTO `bcnm_battlefield` VALUES (1090,1,17010719,3); -- puppetmaster blues
+INSERT INTO `bcnm_battlefield` VALUES (1090,2,17010720,3);
+INSERT INTO `bcnm_battlefield` VALUES (1090,3,17010721,3);
 INSERT INTO `bcnm_battlefield` VALUES (1092,1,17010725,3); -- legacy_of_the_lost
 INSERT INTO `bcnm_battlefield` VALUES (1092,1,17010726,0);
 INSERT INTO `bcnm_battlefield` VALUES (1092,1,17010727,0);
