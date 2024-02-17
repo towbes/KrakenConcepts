@@ -25,5 +25,8 @@ VALUES (0, 0, 0, 100, 0, 0, 0, 0, 0, 0, 4099, 4241, 15495, 15496, 15497, 15498, 
 INSERT INTO `synth_recipes` (`Desynth`, `KeyItem`, `Wood`, `Smith`, `Gold`, `Cloth`, `Leather`, `Bone`, `Alchemy`, `Cook`, `Crystal`, `HQCrystal`, `Ingredient1`, `Ingredient2`, `Ingredient3`, `Ingredient4`, `Ingredient5`, `Ingredient6`, `Ingredient7`, `Ingredient8`, `Result`, `ResultHQ1`, `ResultHQ2`, `ResultHQ3`, `ResultQty`, `ResultHQ1Qty`, `ResultHQ2Qty`, `ResultHQ3Qty`, `ResultName`)
 VALUES (0, 0, 0, 0, 0, 100, 0, 0, 0, 0, 4099, 4241, 15435, 15436, 15437, 15438, 15439, 15440, 15441, 15442, 28419, 28419, 28419, 28419, 1, 1, 1, 1, 'Hachirin-no-Obi');
 
+INSERT INTO `synth_recipes` (`Desynth`, `KeyItem`, `Wood`, `Smith`, `Gold`, `Cloth`, `Leather`, `Bone`, `Alchemy`, `Cook`, `Crystal`, `HQCrystal`, `Ingredient1`, `Ingredient2`, `Ingredient3`, `Ingredient4`, `Ingredient5`, `Ingredient6`, `Ingredient7`, `Ingredient8`, `Result`, `ResultHQ1`, `ResultHQ2`, `ResultHQ3`, `ResultQty`, `ResultHQ1Qty`, `ResultHQ2Qty`, `ResultHQ3Qty`, `ResultName`)
+VALUES (0, 0, 0, 88, 40, 0, 0, 0, 0, 0, 4098, 4240, 657, 664, 745, 914, 0, 0, 0, 0, 18712, 18712, 18712, 18712, 33, 66, 99, 99, 'Koga Shuriken');
+
 
 UNLOCK TABLES;
