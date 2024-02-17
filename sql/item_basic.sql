@@ -3943,8 +3943,8 @@ INSERT INTO `item_basic` VALUES (4173,0,'hi-reraiser','hi-reraiser',1,38404,33,1
 INSERT INTO `item_basic` VALUES (4174,0,'vile_elixir','vile_elixir',1,38404,33,1,0);
 INSERT INTO `item_basic` VALUES (4175,0,'vile_elixir_+1','vile_elixir_+1',1,38404,33,1,0);
 INSERT INTO `item_basic` VALUES (4176,0,'mystery_gift','mystery_gift',1,63056,0,1,0);
-INSERT INTO `item_basic` VALUES (4177,0,'buff_token_self','buff_token_self',1,63056,0,1,0);
-INSERT INTO `item_basic` VALUES (4178,0,'buff_token_party','buff_token_party',1,63056,0,1,1);
+INSERT INTO `item_basic` VALUES (4177,0,'buff_token_self','buff_token_self',99,63056,0,1,0);
+INSERT INTO `item_basic` VALUES (4178,0,'buff_token_party','buff_token_party',99,63056,0,1,1);
 INSERT INTO `item_basic` VALUES (4179,0,'new_years_gift','new_years_gift',1,63056,0,1,0);
 INSERT INTO `item_basic` VALUES (4180,0,'new_years_gift','new_years_gift',1,63056,0,1,0);
 INSERT INTO `item_basic` VALUES (4181,0,'scroll_of_instant_warp','instant_warp',1,63068,0,1,0);

@@ -12,7 +12,7 @@ itemObject.onItemUse = function(target, effect)
         {effect = xi.effect.REFRESH, power = 0, duration = 3600},
         {effect = xi.effect.PROTECT, power = 220, tier = 5, duration = 3600},
         {effect = xi.effect.SHELL, power = 2930, tier = 5, duration = 3600},
-        {effect = xi.effect.HASTE, power = 1000, duration = 3600},
+        {effect = xi.effect.HASTE, power = 100, duration = 3600},
     }
 
     for _, v in ipairs(buffs) do
