@@ -25,7 +25,7 @@ quest.sections =
             player:getMainJob() == xi.job.SMN) or
             (player:getSubLvl() >= 20 and
             player:getSubJob() == xi.job.SMN)) and
-                player:getFameLevel(xi.quest.fame_area.BASTOK) >= 2
+            player:getFameLevel(xi.quest.fame_area.BASTOK) >= 2
         end,
 
         [xi.zone.PORT_BASTOK] =
@@ -60,7 +60,8 @@ quest.sections =
             {
                 onTrade = function(player, npc, trade)
                     if
-                        player:getMainJob() == xi.job.SMN and
+                        (player:getMainJob() == xi.job.SMN or
+                        player:getSubJob() == xi.job.SMN) and
                         trade:hasItemQty(xi.item.MINI_TUNING_FORK_OF_EARTH, 1)
                     then
                         return quest:progressEvent(298, 0, xi.item.MINI_TUNING_FORK_OF_EARTH, 1, 20)
