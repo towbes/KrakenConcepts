@@ -233,7 +233,7 @@ INSERT INTO `mob_droplist` VALUES (21,0,0,1000,646,@VCOMMON);    -- Chunk Of Ada
 INSERT INTO `mob_droplist` VALUES (21,0,0,1000,646,@VCOMMON);    -- Chunk Of Adaman Ore (Very Common, 24%)
 INSERT INTO `mob_droplist` VALUES (21,0,0,1000,12361,@COMMON);   -- Sipar (Common, 15%)
 INSERT INTO `mob_droplist` VALUES (21,0,0,1000,13794,@UNCOMMON); -- Heavy Cuirass (Uncommon, 10%)
-INSERT INTO `mob_droplist` VALUES (183,0,0,1000,1525,@UNCOMMON); -- Adamantoise Egg (Uncommon, 10%)
+INSERT INTO `mob_droplist` VALUES (183,0,0,1000,1525,@ALWAYS);   -- Adamantoise Egg (Always, 100%)
 INSERT INTO `mob_droplist` VALUES (21,0,0,1000,3344,@RARE);      -- Clump Of Red Pondweed (Rare, 5%)
 
 -- ZoneID:  92 - Adaman Quadav
@@ -11877,7 +11877,7 @@ INSERT INTO `mob_droplist` VALUES (1450,1,2,@VCOMMON,1322,250); -- Earthen Abjur
 INSERT INTO `mob_droplist` VALUES (1450,1,2,@VCOMMON,1332,250); -- Martial Abjuration Legs (Group 2 - 25%)
 INSERT INTO `mob_droplist` VALUES (1450,1,2,@VCOMMON,1328,250); -- Aquarian Abjuration Feet (Group 2 - 25%)
 INSERT INTO `mob_droplist` VALUES (1450,1,3,1000,13415,950);    -- Pixie Earring (Group 3 - 95.0%)
-INSERT INTO `mob_droplist` VALUES (1450,1,3,1000,13566,@RARE); -- Defending Ring (Group 3 - Rare, 5%)
+INSERT INTO `mob_droplist` VALUES (1450,1,3,1000,13566,@RARE);  -- Defending Ring (Group 3 - Rare, 5%)
 
 -- ZoneID: 125 - King Vinegarroon
 INSERT INTO `mob_droplist` VALUES (1451,0,0,1000,15223,430); -- Aces Helm (43.0%)
@@ -13977,6 +13977,7 @@ INSERT INTO `mob_droplist` VALUES (1781,0,0,1000,1133,@COMMON); -- Vial Of Drago
 INSERT INTO `mob_droplist` VALUES (1781,0,0,1000,865,@VCOMMON); -- Handful Of Nidhoggs Scales (Very Common, 24%)
 INSERT INTO `mob_droplist` VALUES (1781,0,0,1000,865,@COMMON);  -- Handful Of Nidhoggs Scales (Common, 15%)
 INSERT INTO `mob_droplist` VALUES (1781,0,0,1000,865,@COMMON);  -- Handful Of Nidhoggs Scales (Common, 15%)
+INSERT INTO `mob_droplist` VALUES (1781,0,0,1000,1526,@ALWAYS); -- Wyrm Beard (Always, 100.0%)
 INSERT INTO `mob_droplist` VALUES (1781,0,0,1000,4272,@RARE);   -- Slice Of Dragon Meat (Rare, 5%)
 INSERT INTO `mob_droplist` VALUES (1781,1,1,@ALWAYS,1330,250);  -- Martial Abjuration Body (Group 1 - 25%)
 INSERT INTO `mob_droplist` VALUES (1781,1,1,@ALWAYS,1320,250);  -- Earthen Abjuration Body (Group 1 - 25%)
