@@ -87,7 +87,7 @@ entity.onTrigger = function(player, npc)
         player:getSubLvl() >= xi.settings.main.AF2_QUEST_LEVEL)) and
         noStringsAttached == QUEST_COMPLETED and
         theWaywardAutomaton == QUEST_COMPLETED and
-        operationTeatime == QUEST_COMPLETED and
+        operationTeaTime == QUEST_COMPLETED and
         PuppetmasterBlues == QUEST_AVAILABLE
     then
         player:startEvent(782) -- CS, sends player to see Shamarhaan
@@ -114,7 +114,7 @@ entity.onTrigger = function(player, npc)
     elseif PuppetmasterBlues == QUEST_COMPLETED then
         player:startEvent(787) -- Recognizes the player and mentions Ellie as reference to AF3
     elseif
-        operationTeatime == QUEST_COMPLETED or
+        operationTeaTime == QUEST_COMPLETED or
         theWaywardAutomaton == QUEST_COMPLETED
     then
         player:startEvent(777) -- Only triggered if you dont meet the requirements to start the next AF Quest
