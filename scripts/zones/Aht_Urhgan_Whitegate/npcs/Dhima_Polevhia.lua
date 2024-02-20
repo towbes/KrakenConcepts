@@ -26,8 +26,8 @@ entity.onTrade = function(player, npc, trade)
     local PuppetmasterBlues = player:getQuestStatus(xi.quest.log_id.AHT_URHGAN, xi.quest.id.ahtUrhgan.PUPPETMASTER_BLUES)
 
     if PuppetmasterBlues >= QUEST_ACCEPTED then
-        if (player:getCharVar("[PUPAF]Current") > 0 and player:getCharVar("[PUPAF]TradeDone") == 0) then
-            if (npcUtil.tradeHasExactly(trade, craftingItems[player:getCharVar("[PUPAF]Current")].materials)) then
+        if (player:getCharVar('[PUPAF]Current') > 0 and player:getCharVar('[PUPAF]TradeDone') == 0) then
+            if (npcUtil.tradeHasExactly(trade, craftingItems[player:getCharVar('[PUPAF]Current')].materials)) then
                 player:startEvent(795)
             end
         end
@@ -38,11 +38,11 @@ entity.onTrigger = function(player, npc)
     local PuppetmasterBlues = player:getQuestStatus(xi.quest.log_id.AHT_URHGAN, xi.quest.id.ahtUrhgan.PUPPETMASTER_BLUES)
 
     if PuppetmasterBlues >= QUEST_ACCEPTED then
-        local remainingPUPAF = player:getCharVar("[PUPAF]Remaining") -- Bitmask of AF the player has NOT crafted
+        local remainingPUPAF = player:getCharVar('[PUPAF]Remaining') -- Bitmask of AF the player has NOT crafted
         local totalCraftedPieces = 3 - utils.mask.countBits(remainingPUPAF)
-        local currentTask = player:getCharVar("[PUPAF]Current")
-        local tradeDone = player:getCharVar("[PUPAF]TradeDone")
-        local pickupReady = VanadielUniqueDay() > player:getCharVar("[PUPAF]TradeDay")
+        local currentTask = player:getCharVar('[PUPAF]Current')
+        local tradeDone = player:getCharVar('[PUPAF]TradeDone')
+        local pickupReady = VanadielUniqueDay() > player:getCharVar('[PUPAF]TradeDay')
 
         if currentTask == 0 and totalCraftedPieces ~= 3 then
             if totalCraftedPieces == 0 then
@@ -72,22 +72,22 @@ end
 
 entity.onEventFinish = function(player, csid, option, npc)
     if csid == 789 or csid == 791 and option ~=0 then -- choosing CSs
-        player:setCharVar("[PUPAF]Current", option)
+        player:setCharVar('[PUPAF]Current', option)
     end
-    local remainingPUPAF = player:getCharVar("[PUPAF]Remaining") -- Bitmask of AF the player has NOT crafted
-    local currentTask = player:getCharVar("[PUPAF]Current")
+    local remainingPUPAF = player:getCharVar('[PUPAF]Remaining') -- Bitmask of AF the player has NOT crafted
+    local currentTask = player:getCharVar('[PUPAF]Current')
 
     if csid == 795 then -- Trade Accepted
         player:confirmTrade()
-        player:setCharVar("[PUPAF]TradeDay", VanadielUniqueDay())
-        player:setCharVar("[PUPAF]TradeDone", 1)
+        player:setCharVar('[PUPAF]TradeDay', VanadielUniqueDay())
+        player:setCharVar('[PUPAF]TradeDone', 1)
     elseif csid == 792 then --Item Complete
         if npcUtil.giveItem(player, craftingItems[currentTask].result) then
             remainingPUPAF = remainingPUPAF - math.pow(2, (currentTask - 1))
-            player:setCharVar("[PUPAF]Remaining", remainingPUPAF)
-            player:setCharVar("[PUPAF]Current", 0)
-            player:setCharVar("[PUPAF]TradeDone", 0)
-            player:setCharVar("[PUPAF]TradeDay", 0)
+            player:setCharVar('[PUPAF]Remaining', remainingPUPAF)
+            player:setCharVar('[PUPAF]Current', 0)
+            player:setCharVar('[PUPAF]TradeDone', 0)
+            player:setCharVar('[PUPAF]TradeDay', 0)
         end
     end
 end

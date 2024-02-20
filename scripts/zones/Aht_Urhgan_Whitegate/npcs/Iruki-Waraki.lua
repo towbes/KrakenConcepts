@@ -23,7 +23,7 @@ entity.onTrigger = function(player, npc)
     local operationTeaTime = player:getQuestStatus(xi.quest.log_id.AHT_URHGAN, xi.quest.id.ahtUrhgan.OPERATION_TEATIME)
     local operationTeaTimeProgress = player:getCharVar('OperationTeaTimeProgress')
     local PuppetmasterBlues = player:getQuestStatus(xi.quest.log_id.AHT_URHGAN, xi.quest.id.ahtUrhgan.PUPPETMASTER_BLUES)
-    local PuppetmasterBluesProgress = player:getCharVar("PuppetmasterBluesProgress")
+    local PuppetmasterBluesProgress = player:getCharVar('PuppetmasterBluesProgress')
     local playerLvl = player:getMainLvl()
     local playerJob = player:getMainJob()
     local Job = player:getMainJob() or player:getSubJob()
@@ -50,7 +50,7 @@ entity.onTrigger = function(player, npc)
         player:startEvent(776) -- tell him you found Automaton
     elseif
         ((playerJob == xi.job.PUP and
-        playerLvl < xi.settings.main.AF2_QUEST_LEVEL) or
+        playerLvl >= xi.settings.main.AF2_QUEST_LEVEL) or
         (player:getSubJob() == xi.job.PUP and
         player:getSubLvl() >= xi.settings.main.AF2_QUEST_LEVEL)) and
         theWaywardAutomaton == QUEST_COMPLETED
@@ -64,7 +64,7 @@ entity.onTrigger = function(player, npc)
     --Quest: Operation teatime
     elseif
         ((playerJob == xi.job.PUP and
-        playerLvl < xi.settings.main.AF2_QUEST_LEVEL) or
+        playerLvl >= xi.settings.main.AF2_QUEST_LEVEL) or
         (player:getSubJob() == xi.job.PUP and
         player:getSubLvl() >= xi.settings.main.AF2_QUEST_LEVEL)) and
         noStringsAttached == QUEST_COMPLETED and
@@ -82,7 +82,7 @@ entity.onTrigger = function(player, npc)
     --Quest: Puppetmaster Blues
     elseif 
         ((playerJob == xi.job.PUP and
-        playerLvl < xi.settings.main.AF2_QUEST_LEVEL) or
+        playerLvl >= xi.settings.main.AF2_QUEST_LEVEL) or
         (player:getSubJob() == xi.job.PUP and
         player:getSubLvl() >= xi.settings.main.AF2_QUEST_LEVEL)) and
         noStringsAttached == QUEST_COMPLETED and
@@ -91,11 +91,21 @@ entity.onTrigger = function(player, npc)
         PuppetmasterBlues == QUEST_AVAILABLE
     then
         player:startEvent(782) -- CS, sends player to see Shamarhaan
-    elseif PuppetmasterBlues == QUEST_ACCEPTED and PuppetmasterBluesProgress >= 1 and PuppetmasterBluesProgress < 4 then
+    elseif
+        PuppetmasterBlues == QUEST_ACCEPTED and
+        PuppetmasterBluesProgress >= 1 and
+        PuppetmasterBluesProgress < 4
+    then
         player:startEvent(783) -- Reminds Player to talk to Shamarhaan
-    elseif PuppetmasterBlues == QUEST_ACCEPTED and PuppetmasterBluesProgress == 4 then
+    elseif
+        PuppetmasterBlues == QUEST_ACCEPTED and
+        PuppetmasterBluesProgress == 4
+    then
         player:startEvent(784)  -- CS directing Player to Nashmau
-    elseif PuppetmasterBlues == QUEST_ACCEPTED and PuppetmasterBluesProgress == 5 then
+    elseif
+        PuppetmasterBlues == QUEST_ACCEPTED and
+        PuppetmasterBluesProgress == 5
+    then
         player:startEvent(785) -- Reminds Player to go to Nashmau
     elseif PuppetmasterBlues == QUEST_ACCEPTED and PuppetmasterBluesProgress == 6 then
         player:startEvent(786) -- End CS and reward for Puppetmaster Blues
@@ -103,9 +113,16 @@ entity.onTrigger = function(player, npc)
      -- Quests Complete
     elseif PuppetmasterBlues == QUEST_COMPLETED then
         player:startEvent(787) -- Recognizes the player and mentions Ellie as reference to AF3
-    elseif operationTeatime == QUEST_COMPLETED or theWaywardAutomaton == QUEST_COMPLETED then
+    elseif
+        operationTeatime == QUEST_COMPLETED or
+        theWaywardAutomaton == QUEST_COMPLETED
+    then
         player:startEvent(777) -- Only triggered if you dont meet the requirements to start the next AF Quest
-    elseif playerJob ~= xi.job.PUP and noStringsAttached == QUEST_COMPLETED then
+    elseif
+        (playerJob ~= xi.job.PUP or
+        player:getSubJob() ~= xi.job.PUP) and
+        noStringsAttached == QUEST_COMPLETED 
+    then
         player:startEvent(267) -- asking you how are you doing with your automaton
 
     end
@@ -127,13 +144,13 @@ entity.onEventFinish = function(player, csid, option, npc)
         player:setCharVar('OperationTeaTimeProgress', 2)
         player:confirmTrade()
     elseif csid == 782 then
-        player:setCharVar("PuppetmasterBluesProgress", 1)
+        player:setCharVar('PuppetmasterBluesProgress', 1)
         player:addQuest(xi.quest.log_id.AHT_URHGAN, xi.quest.id.ahtUrhgan.PUPPETMASTER_BLUES)
-        player:setCharVar("[PUPAF]Remaining", 7) -- Player can now craft PUP AF
+        player:setCharVar('[PUPAF]Remaining', 7) -- Player can now craft PUP AF
     elseif csid == 784 then
-        player:setCharVar("PuppetmasterBluesProgress", 5)
+        player:setCharVar('PuppetmasterBluesProgress', 5)
     elseif csid == 786 then
-        npcUtil.completeQuest(player, xi.quest.log_id.AHT_URHGAN, xi.quest.id.ahtUrhgan.PUPPETMASTER_BLUES, {item=15267, title=xi.title.PARAGON_OF_PUPPETMASTER_EXCELLENCE, var="PuppetmasterBluesProgress"})
+        npcUtil.completeQuest(player, xi.quest.log_id.AHT_URHGAN, xi.quest.id.ahtUrhgan.PUPPETMASTER_BLUES, {item=15267, title=xi.title.PARAGON_OF_PUPPETMASTER_EXCELLENCE, var='PuppetmasterBluesProgress'})
     end
 end
 
