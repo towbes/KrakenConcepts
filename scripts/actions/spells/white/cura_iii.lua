@@ -75,6 +75,8 @@ spellObject.onSpellCast = function(caster, target, spell)
 
         local misery = caster:getLocalVar('Misery_Power')
 
+        misery = misery * (1 + caster:getMerit(xi.merit.ANIMUS_MISERY) / 100)
+
         --THIS IS LARELY SEMI-EDUCATED GUESSWORK. THERE IS NOT A
         --LOT OF CONCRETE INFO OUT THERE ON CURA THAT I COULD FIND
 

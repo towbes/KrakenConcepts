@@ -548,6 +548,7 @@ xi.mod =
     REFRESH_DOWN                    = 405, -- plague, reduce mp
     REGAIN_DOWN                     = 406, -- plague, reduce tp
     MAGIC_DAMAGE                    = 311, --  Magic damage added directly to the spell's base damage
+    BANISH_POTENCY                  = 2043, -- % Increase to Banish SDT debuff effect potency. 
 
     -- Gear set modifiers
     DA_DOUBLE_DMG_RATE              = 408,  -- Double attack's double damage chance %.

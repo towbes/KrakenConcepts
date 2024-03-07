@@ -43,6 +43,7 @@ xi.magic.barSpell            = { xi.effect.BARFIRE,            xi.effect.BARBLIZ
 xi.magic.dayWeak             = { xi.day.WATERSDAY,             xi.day.FIRESDAY,             xi.day.ICEDAY,                 xi.day.WINDSDAY,               xi.day.EARTHSDAY,                  xi.day.LIGHTNINGDAY,            xi.day.DARKSDAY,            xi.day.LIGHTSDAY           }
 xi.magic.singleWeatherWeak   = { xi.weather.RAIN,              xi.weather.HOT_SPELL,        xi.weather.SNOW,               xi.weather.WIND,               xi.weather.DUST_STORM,             xi.weather.THUNDER,             xi.weather.GLOOM,           xi.weather.AURORAS         }
 xi.magic.doubleWeatherWeak   = { xi.weather.SQUALL,            xi.weather.HEAT_WAVE,        xi.weather.BLIZZARDS,          xi.weather.GALES,              xi.weather.SAND_STORM,             xi.weather.THUNDERSTORMS,       xi.weather.DARKNESS,        xi.weather.STELLAR_GLARE   }
+local spellAtt               = { xi.mod.FIREATT,               xi.mod.ICEATT,               xi.mod.WINDATT,                xi.mod.EARTHATT,               xi.mod.THUNDERATT,                 xi.mod.WATERATT,                xi.mod.LIGHTATT,            xi.mod.DARKATT }
 
 local elementDescendant =
 {
@@ -568,7 +569,7 @@ function applyResistanceAddEffect(player, target, element, bonus)
     return getMagicResist(p)
 end
 
-function getMagicHitRate(caster, target, skillType, element, percentBonus, bonusAcc)
+function getMagicHitRate(caster, target, skillType, element, percentBonus, bonusAcc) -- Called by Weaponskills & Mobskills
     -- resist everything if real magic shield is active (see effects/magic_shield)
     if target:hasStatusEffect(xi.effect.MAGIC_SHIELD) then
         local magicshieldsub = target:getStatusEffect(xi.effect.MAGIC_SHIELD)
@@ -606,6 +607,25 @@ function getMagicHitRate(caster, target, skillType, element, percentBonus, bonus
     magicacc = magicacc + caster:getMerit(xi.merit.MAGIC_ACCURACY)
 
     magicacc = magicacc + caster:getMerit(xi.merit.NIN_MAGIC_ACCURACY)
+
+
+    -- Cactuar BLM Merits
+    magicacc = magicacc + caster:getMerit(xi.merit.ELEMENTAL_MAGIC_ACCURACY)
+
+    -- Cactuar RDM Merits
+    if element == xi.element.FIRE then
+        magicacc = magicacc + caster:getMerit(xi.merit.FIRE_MAGIC_ACCURACY)
+    elseif element == xi.element.ICE then
+        magicacc = magicacc + caster:getMerit(xi.merit.ICE_MAGIC_ACCURACY)
+    elseif element == xi.element.WIND then
+        magicacc = magicacc + caster:getMerit(xi.merit.WIND_MAGIC_ACCURACY)
+    elseif element == xi.element.EARTH then
+        magicacc = magicacc + caster:getMerit(xi.merit.WIND_MAGIC_ACCURACY)
+    elseif element == xi.element.THUNDER then
+        magicacc = magicacc + caster:getMerit(xi.merit.LIGHTNING_MAGIC_ACCURACY)
+    elseif element == xi.element.WATER then
+        magicacc = magicacc + caster:getMerit(xi.merit.WATER_MAGIC_ACCURACY)
+    end
 
     -- Base magic evasion (base magic evasion plus resistances(players), plus elemental defense(mobs)
     local magiceva = target:getMod(xi.mod.MEVA) + resMod
@@ -1021,6 +1041,8 @@ function addBonusesAbility(caster, ele, target, dmg, params)
 
     local mab = 1
     local mdefBarBonus = 0
+    local eleATT = 0
+
     if
         ele >= xi.element.FIRE and
         ele <= xi.element.WATER and
@@ -1029,10 +1051,28 @@ function addBonusesAbility(caster, ele, target, dmg, params)
         mdefBarBonus = target:getStatusEffect(xi.magic.barSpell[ele]):getSubPower()
     end
 
+    if ele == xi.element.FIRE then
+        eleATT = eleATT + caster:getMod(xi.mod.FIREATT) + caster:getMerit(xi.merit.FIRE_MAGIC_POTENCY)
+    elseif ele == xi.element.ICE then
+        eleATT = eleATT + caster:getMod(xi.mod.ICEATT) + caster:getMerit(xi.merit.ICE_MAGIC_POTENCY)
+    elseif ele == xi.element.WIND then
+        eleATT = eleATT + caster:getMod(xi.mod.WINDATT) + caster:getMerit(xi.merit.WIND_MAGIC_POTENCY)
+    elseif ele == xi.element.EARTH then
+        eleATT = eleATT + caster:getMod(xi.mod.EARTHATT) + caster:getMerit(xi.merit.WIND_MAGIC_POTENCY)
+    elseif ele == xi.element.THUNDER then
+        eleATT = eleATT + caster:getMod(xi.mod.THUNDERATT) + caster:getMerit(xi.merit.LIGHTNING_MAGIC_POTENCY)
+    elseif ele == xi.element.WATER then
+        eleATT = eleATT + caster:getMod(xi.mod.WATERATT) + caster:getMerit(xi.merit.WATER_MAGIC_POTENCY)
+    elseif ele == xi.element.LIGHT then
+        eleATT = eleATT + caster:getMod(xi.mod.LIGHTATT)
+    elseif ele == xi.element.DARK then
+        eleATT = eleATT + caster:getMod(xi.mod.DARKATT)
+    end
+
     if params ~= nil and params.bonusmab ~= nil and params.includemab then
-        mab = (100 + caster:getMod(xi.mod.MATT) + params.bonusmab) / (100 + target:getMod(xi.mod.MDEF) + mdefBarBonus)
+        mab = (100 + caster:getMod(xi.mod.MATT) + params.bonusmab + eleATT) / (100 + target:getMod(xi.mod.MDEF) + mdefBarBonus)
     elseif params == nil or (params ~= nil and params.includemab) then
-        mab = (100 + caster:getMod(xi.mod.MATT)) / (100 + target:getMod(xi.mod.MDEF) + mdefBarBonus)
+        mab = (100 + caster:getMod(xi.mod.MATT) + eleATT) / (100 + target:getMod(xi.mod.MDEF) + mdefBarBonus)
     end
 
     if mab < 0 then

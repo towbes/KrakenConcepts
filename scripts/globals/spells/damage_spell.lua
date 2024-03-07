@@ -275,6 +275,14 @@ xi.spells.damage.calculateBaseDamage = function(caster, target, spellId, skillTy
         if skillType == xi.skill.NINJUTSU then
             baseSpellDamageBonus = baseSpellDamageBonus + caster:getJobPointLevel(xi.jp.ELEM_NINJITSU_EFFECT) * 2
         end
+
+        -- WHM Merit: Banish Effect
+        if
+            (spellId >= xi.magic.spell.BANISH and spellId <= xi.magic.spell.BANISH_V) or
+            (spellId >= xi.magic.spell.BANISHGA and spellId <= xi.magic.spell.BANISHGA_V)
+        then
+            baseSpellDamageBonus = baseSpellDamageBonus + (caster:getMerit(xi.merit.BANISH_EFFECT) * 2)
+        end
     end
 
     -- Bonus to spell base damage from gear.
@@ -284,6 +292,49 @@ xi.spells.damage.calculateBaseDamage = function(caster, target, spellId, skillTy
         caster:delStatusEffectSilent(xi.effect.CASCADE)
         caster:setTP(0)
     end
+
+    -- Banish: Afflatus Misery
+    if caster:hasStatusEffect(xi.effect.AFFLATUS_MISERY) and
+        (spellId >= xi.magic.spell.BANISH and spellId <= xi.magic.spell.BANISH_V) or
+        (spellId >= xi.magic.spell.BANISHGA and spellId <= xi.magic.spell.BANISHGA_V)
+    then
+        -- caster:setLocalVar('Misery_Power', caster:getMod(xi.mod.AFFLATUS_MISERY))
+        -- local misery = caster:getLocalVar('Misery_Power')
+        local misery      = caster:getMod(xi.mod.AFFLATUS_MISERY)
+        local miseryBonus = 0
+        local miseryMerit = (1 + caster:getMerit(xi.merit.ANIMUS_MISERY) / 100)
+        misery = misery * miseryMerit -- Merits increase stored damage.
+
+        if misery > 195 then
+            miseryBonus = 150
+        elseif misery > 135 then
+            local range = 195 - 135 -- Damage Taken Tiers
+            local scale = (misery - 135) / range -- Linear scaling between tiers based on misery.
+            miseryBonus = math.floor(scale * 50 + 50)
+        elseif misery > 45 then
+            local range = 135 - 45 -- Damage Taken Tiers
+            local scale = (misery - 45) / range -- Linear scaling between tiers based on misery.
+            miseryBonus = math.floor(scale * 40 + 10)
+        else
+            miseryBonus = 0
+        end
+
+        if spellId == xi.magic.spell.BANISH then
+            miseryBonus = miseryBonus
+        elseif spellId == xi.magic.spell.BANISH_II or spellId == xi.magic.spell.BANISHGA then
+            miseryBonus = miseryBonus * 1.5
+        elseif spellId == xi.magic.spell.BANISH_III  or spellId == xi.magic.spell.BANISHGA_II then
+            miseryBonus = miseryBonus * 2.0
+        elseif spellId == xi.magic.spell.BANISH_IV  or spellId == xi.magic.spell.BANISHGA_III then -- Not used by players, value unknown.
+            miseryBonus = miseryBonus * 2.5
+        end
+
+        baseSpellDamageBonus = baseSpellDamageBonus + miseryBonus
+        --Afflatus Misery Mod Gets Used Up
+        caster:setMod(xi.mod.AFFLATUS_MISERY, 0)
+    end
+
+    
 
     -----------------------------------
     -- STEP 4: Spell Damage
@@ -531,6 +582,7 @@ xi.spells.damage.calculateMagicBonusDiff = function(caster, target, spellId, ski
     local mab            = caster:getMod(xi.mod.MATT)
     local mabCrit        = caster:getMod(xi.mod.MAGIC_CRITHITRATE)
     local mDefBarBonus   = 0
+    local eleATT         = 0
 
     -- Ninja spell bonuses
     if skillType == xi.skill.NINJUTSU then
@@ -602,7 +654,25 @@ xi.spells.damage.calculateMagicBonusDiff = function(caster, target, spellId, ski
         mab = mab + caster:getMerit(xi.merit.ANCIENT_MAGIC_ATK_BONUS)
     end
 
-    magicBonusDiff = (100 + mab) / (100 + target:getMod(xi.mod.MDEF) + mDefBarBonus)
+    if spellElement == xi.element.FIRE then
+        eleATT = eleATT + caster:getMod(xi.mod.FIREATT)
+    elseif spellElement == xi.element.ICE then
+        eleATT = eleATT + caster:getMod(xi.mod.ICEATT)
+    elseif spellElement == xi.element.WIND then
+        eleATT = eleATT + caster:getMod(xi.mod.WINDATT)
+    elseif spellElement == xi.element.EARTH then
+        eleATT = eleATT + caster:getMod(xi.mod.EARTHATT)
+    elseif spellElement == xi.element.THUNDER then
+        eleATT = eleATT + caster:getMod(xi.mod.THUNDERATT)
+    elseif spellElement == xi.element.WATER then
+        eleATT = eleATT + caster:getMod(xi.mod.WATERATT)
+    elseif spellElement == xi.element.LIGHT then
+        eleATT = eleATT + caster:getMod(xi.mod.LIGHTATT)
+    elseif spellElement == xi.element.DARK then
+        eleATT = eleATT + caster:getMod(xi.mod.DARKATT)
+    end
+
+    magicBonusDiff = (100 + mab + eleATT) / (100 + target:getMod(xi.mod.MDEF) + mDefBarBonus)
 
     if magicBonusDiff < 0 then
         magicBonusDiff = 0
