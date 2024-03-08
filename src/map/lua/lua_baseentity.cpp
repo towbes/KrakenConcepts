@@ -13078,16 +13078,16 @@ void CLuaBaseEntity::doWildCard(CLuaBaseEntity* PEntity, uint8 total)
  *  Example : player:doRandomDeal(target)
  *  Notes   : Calls the DoRandomDealToEntity function of battleutils
  ************************************************************************/
-inline int32 CLuaBaseEntity::doRandomDeal(CLuaBaseEntity* PEntity)
+void CLuaBaseEntity::doRandomDeal(CLuaBaseEntity* PTarget)
 {
 
     if (m_PBaseEntity->objtype != TYPE_PC)
     {
          ShowWarning("Invalid entity type calling function (%s).", m_PBaseEntity->GetName());
-         return false;
+         return;
     }
 
-    return battleutils::DoRandomDealToEntity(static_cast<CCharEntity*>(m_PBaseEntity), static_cast<CCharEntity*>(PEntity->m_PBaseEntity));
+    battleutils::DoRandomDealToEntity(static_cast<CCharEntity*>(m_PBaseEntity), static_cast<CCharEntity*>(PTarget->m_PBaseEntity));
 }
 
 

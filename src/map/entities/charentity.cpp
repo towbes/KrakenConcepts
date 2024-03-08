@@ -1105,57 +1105,88 @@ void CCharEntity::OnCastFinished(CMagicState& state, action_t& action)
                 StatusEffectContainer->DelStatusEffectSilent(EFFECT_CHAIN_AFFINITY);
             }
 
-            if (actionTarget.param > 0 && PSpell->dealsDamage() && (PSpell->getSpellGroup() == SPELLGROUP_BLACK || (PSpell->getSpellFamily() >= SPELLFAMILY_ANEMOHELIX && PSpell->getSpellFamily() <= SPELLFAMILY_LUMINOHELIX)) &&
-                (StatusEffectContainer->HasStatusEffect(EFFECT_IMMANENCE)) &&
-                static_cast<CSpell*>(PSpell)->getElement() != 0)
+            if (actionTarget.param > 0 &&
+                PSpell->dealsDamage() &&
+                PSpell->getSpellGroup() == SPELLGROUP_BLACK &&
+                (StatusEffectContainer->HasStatusEffect(EFFECT_IMMANENCE)))
             {
-                auto* PSkillChainSpell    = static_cast<CSpell*>(PSpell);
-                auto  spell_Element       = PSkillChainSpell->getElement();
-                auto  skill_chain_Element = 0;
-                if (spell_Element == 1)
+                SUBEFFECT effect = SUBEFFECT_NONE;
+                switch (PSpell->getSpellFamily())
                 {
-                    skill_chain_Element = 3;
-                }
-                else if (spell_Element == 2)
-                {
-                    skill_chain_Element = 7;
-                }
-                else if (spell_Element == 3)
-                {
-                    skill_chain_Element = 6;
-                }
-                else if (spell_Element == 4)
-                {
-                    skill_chain_Element = 4;
-                }
-                else if (spell_Element == 5)
-                {
-                    skill_chain_Element = 8;
-                }
-                else if (spell_Element == 6)
-                {
-                    skill_chain_Element = 5;
-                }
-                else if (spell_Element == 7)
-                {
-                    skill_chain_Element = 1;
-                }
-                else if (spell_Element == 8)
-                {
-                    skill_chain_Element = 2;
+                    case SPELLFAMILY_STONE:
+                        effect = battleutils::GetSkillChainEffect(PTarget, 4, 0, 0);
+                        break;
+                    case SPELLFAMILY_GEOHELIX:
+                        effect = battleutils::GetSkillChainEffect(PTarget, 4, 0, 0);
+                        break;
+                    case SPELLFAMILY_WATER:
+                        effect = battleutils::GetSkillChainEffect(PTarget, 5, 0, 0);
+                        break;
+                    case SPELLFAMILY_HYDROHELIX:
+                        effect = battleutils::GetSkillChainEffect(PTarget, 5, 0, 0);
+                        break;
+                    case SPELLFAMILY_AERO:
+                        effect = battleutils::GetSkillChainEffect(PTarget, 6, 0, 0);
+                        break;
+                    case SPELLFAMILY_ANEMOHELIX:
+                        effect = battleutils::GetSkillChainEffect(PTarget, 6, 0, 0);
+                        break;
+                    case SPELLFAMILY_FIRE:
+                        effect = battleutils::GetSkillChainEffect(PTarget, 3, 0, 0);
+                        break;
+                    case SPELLFAMILY_PYROHELIX:
+                        effect = battleutils::GetSkillChainEffect(PTarget, 3, 0, 0);
+                        break;
+                    case SPELLFAMILY_BLIZZARD:
+                        effect = battleutils::GetSkillChainEffect(PTarget, 7, 0, 0);
+                        break;
+                    case SPELLFAMILY_CRYOHELIX:
+                        effect = battleutils::GetSkillChainEffect(PTarget, 7, 0, 0);
+                        break;
+                    case SPELLFAMILY_THUNDER:
+                        effect = battleutils::GetSkillChainEffect(PTarget, 8, 0, 0);
+                        break;
+                    case SPELLFAMILY_IONOHELIX:
+                        effect = battleutils::GetSkillChainEffect(PTarget, 8, 0, 0);
+                        break;
+                    case SPELLFAMILY_LUMINOHELIX:
+                        effect = battleutils::GetSkillChainEffect(PTarget, 1, 0, 0);
+                        break;
+                    case SPELLFAMILY_NOCTOHELIX:
+                        effect = battleutils::GetSkillChainEffect(PTarget, 2, 0, 0);
+                        break;
+                    default:
+                        break;
                 }
 
-                SUBEFFECT effect = battleutils::GetSkillChainEffect(PTarget, skill_chain_Element, 0, 0);
+                if (PSpell->getSpellFamily() >= SPELLFAMILY_FIRE &&
+                    PSpell->getSpellFamily() <= SPELLFAMILY_WATER)
+                {
+                    StatusEffectContainer->DelStatusEffectSilent(EFFECT_IMMANENCE);
+                }
+
+                if (PSpell->getSpellFamily() >= SPELLFAMILY_GEOHELIX &&
+                    PSpell->getSpellFamily() <= SPELLFAMILY_LUMINOHELIX)
+                {
+                    StatusEffectContainer->DelStatusEffectSilent(EFFECT_IMMANENCE);
+                }
+
                 if (effect != SUBEFFECT_NONE)
                 {
-                    uint16 skillChainDamage = battleutils::TakeSkillchainDamage(static_cast<CBattleEntity*>(this), PTarget, actionTarget.param, nullptr);
+                    int32 skillChainDamage = battleutils::TakeSkillchainDamage(static_cast<CBattleEntity*>(this), PTarget, actionTarget.param, nullptr);
 
-                    actionTarget.addEffectParam   = skillChainDamage;
-                    actionTarget.addEffectMessage = 287 + effect;
+                    if (skillChainDamage < 0)
+                    {
+                        actionTarget.addEffectParam   = -skillChainDamage;
+                        actionTarget.addEffectMessage = 384 + effect;
+                    }
+                    else
+                    {
+                        actionTarget.addEffectParam   = skillChainDamage;
+                        actionTarget.addEffectMessage = 287 + effect;
+                    }
                     actionTarget.additionalEffect = effect;
                 }
-
-                StatusEffectContainer->DelStatusEffectSilent(EFFECT_IMMANENCE);
             }
         }
     }

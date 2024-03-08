@@ -659,7 +659,7 @@ public:
 
     void   fold();
     void   doWildCard(CLuaBaseEntity* PEntity, uint8 total);
-    int32  doRandomDeal(CLuaBaseEntity* PEntity);
+    void   doRandomDeal(CLuaBaseEntity* PTarget);
     bool   addCorsairRoll(uint8 casterJob, uint8 bustDuration, uint16 effectID, uint16 power, uint32 tick, uint32 duration,
                           sol::object const& arg6, sol::object const& arg7, sol::object const& arg8);
     bool   hasCorsairEffect();
