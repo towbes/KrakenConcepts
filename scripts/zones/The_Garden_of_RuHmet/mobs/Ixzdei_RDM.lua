@@ -24,9 +24,7 @@ entity.onMobSpawn = function(mob)
     mob:setLocalVar('healpercent', math.random(15, 25))
 end
 
-entity.onMobEngaged = function(mob, target)
-    mob:setAnimationSub(1)
-    mob:setLocalVar('changeTime', os.time() + 15)
+entity.onMobEngage = function(mob, target)
     local mobId = mob:getID()
     -- each pot steps off the pedastal after casting initial spell and engaging target
     switch (mobId): caseof

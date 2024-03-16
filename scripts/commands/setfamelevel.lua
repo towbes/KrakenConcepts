@@ -14,7 +14,7 @@ commandObj.error = function(player, msg)
         msg = '!setfamelevel <fame_zone 0-15> <level 1-9> <player> (Omit level and target to show zone numbers)'
     end
 
-    player:PrintToPlayer(msg)
+    player:printToPlayer(msg)
 end
 
 commandObj.onTrigger = function(player, famezone, level, target)
@@ -62,7 +62,7 @@ commandObj.onTrigger = function(player, famezone, level, target)
 
     -- validate level
     if level == nil then
-        player:PrintToPlayer(string.format('Fame Zone %s: %s - No other parameters requested.', famezone, fameAreas[famezone + 1]))
+        player:printToPlayer(string.format('Fame Zone %s: %s - No other parameters requested.', famezone, fameAreas[famezone + 1]))
         return
     elseif level < 0 or level > 9 then
         error(player, 'You must provide a fame level from 1 to 9.')
@@ -78,7 +78,7 @@ commandObj.onTrigger = function(player, famezone, level, target)
     end
 
     targ:setFame(famezone, fameBaseValues[level] / fameMultiplier)
-    player:PrintToPlayer(string.format('Set %s\'s fame for fame area %i (%s) to %i (Level %i).', targ:getName(), famezone, fameAreas[famezone + 1], fameBaseValues[level], level))
+    player:printToPlayer(string.format('Set %s\'s fame for fame area %i (%s) to %i (Level %i).', targ:getName(), famezone, fameAreas[famezone + 1], fameBaseValues[level], level))
 end
 
 return commandObj

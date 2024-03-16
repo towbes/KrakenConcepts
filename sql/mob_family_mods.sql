@@ -22,7 +22,7 @@ CREATE TABLE `mob_family_mods` (
   `value` smallint(5) NOT NULL DEFAULT '0',
   `is_mob_mod` boolean NOT NULL DEFAULT '0',
   PRIMARY KEY (`familyid`,`modid`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4 AVG_ROW_LENGTH=13 PACK_KEYS=1;
+) ENGINE=Aria TRANSACTIONAL=0 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci AVG_ROW_LENGTH=13 PACK_KEYS=1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -361,6 +361,9 @@ INSERT INTO `mob_family_mods` VALUES (110,36,45,1);   -- ROAM_COOL: 45
 INSERT INTO `mob_family_mods` VALUES (110,51,3,1);    -- ROAM_TURNS: 3
 INSERT INTO `mob_family_mods` VALUES (110,52,30,1);   -- ROAM_RATE: 30
 INSERT INTO `mob_family_mods` VALUES (110,389,-13,0); -- UDMGMAGIC: -13
+
+-- Non-Beastmen regular frogs
+INSERT INTO `mob_family_mods` VALUES (111,62,1,1); -- NO_STANDBACK: 1
 
 -- Flan
 INSERT INTO `mob_family_mods` VALUES (112,51,2,1);   -- ROAM_TURNS: 2

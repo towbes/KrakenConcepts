@@ -1098,7 +1098,7 @@ xi.regime.bookOnTrigger = function(player, regimeType)
 
         player:startEvent(info.event, 0, arg2, cipher, arg4, 0, 0, player:getCurrency('valor_point'), player:getCharVar('[regime]id'))
     else
-        player:PrintToPlayer('Disabled.')
+        player:printToPlayer('Disabled.')
     end
 end
 
@@ -1504,8 +1504,8 @@ xi.regime.checkRegime = function(player, mob, regimeId, index, regimeType)
         local completions = player:getCharVar('[regime]repeatedCompletions')
         if completions > 0 then
             reward = math.ceil(reward * (.85 ^ completions))
-            player:PrintToPlayer('Field Manual : You are getting a reduced reward from completing multiple pages on the same day!', xi.msg.channel.SYSTEM_3)
-            --player:PrintToPlayer(string.format('Field Manual : You are getting a reduced reward from completing %u pages on the same day!', completions), xi.msg.channel.SYSTEM_3)
+            player:printToPlayer('Field Manual : You are getting a reduced reward from completing multiple pages on the same day!', xi.msg.channel.SYSTEM_3)
+            --player:printToPlayer(string.format('Field Manual : You are getting a reduced reward from completing %u pages on the same day!', completions), xi.msg.channel.SYSTEM_3)
         end
         player:setCharVar('[regime]repeatedCompletions', completions + 1)
     else

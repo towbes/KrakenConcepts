@@ -28,7 +28,7 @@ entity.onMobSpawn = function(mob)
     })
 end
 
-entity.onMobEngaged = function(mob, target) -- Coming out of water animation
+entity.onMobEngage = function(mob, target) -- Coming out of water animation
     mob:hideName(false)
     mob:setUntargetable(false)
     mob:setAnimationSub(6)

@@ -22,7 +22,7 @@ CREATE TABLE `mob_spawn_mods` (
   `value` smallint(5) NOT NULL DEFAULT '0',
   `is_mob_mod` boolean NOT NULL DEFAULT '0',
   PRIMARY KEY (`mobid`,`modid`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4 AVG_ROW_LENGTH=13 PACK_KEYS=1;
+) ENGINE=Aria TRANSACTIONAL=0 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci AVG_ROW_LENGTH=13 PACK_KEYS=1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -1063,10 +1063,10 @@ INSERT INTO `mob_spawn_mods` VALUES (17506669,55,180,1); -- IDLE_DESPAWN: 180
 INSERT INTO `mob_spawn_mods` VALUES (17531121,55,180,1); -- IDLE_DESPAWN: 180
 
 -- Cemetery Cherry
-INSERT INTO `mob_spawn_mods` VALUES (17555754,1,20000,1); -- GIL_MIN: 20000
-INSERT INTO `mob_spawn_mods` VALUES (17555754,2,30000,1); -- GIL_MAX: 30000
+INSERT INTO `mob_spawn_mods` VALUES (17555754,1,20000,1);  -- GIL_MIN: 20000
+INSERT INTO `mob_spawn_mods` VALUES (17555754,2,30000,1);  -- GIL_MAX: 30000
 INSERT INTO `mob_spawn_mods` VALUES (17555754,15,10000,1); -- MUG_GIL: 10000
-INSERT INTO `mob_spawn_mods` VALUES (17555754,55,600,1);  -- IDLE_DESPAWN: 600
+INSERT INTO `mob_spawn_mods` VALUES (17555754,55,600,1);   -- IDLE_DESPAWN: 600
 
 -- Fire Elemental
 INSERT INTO `mob_spawn_mods` VALUES (17559870,55,300,1); -- IDLE_DESPAWN: 300

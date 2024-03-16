@@ -10,9 +10,7 @@ mobskillObject.onMobSkillCheck = function(target, mob, skill)
 end
 
 mobskillObject.onMobWeaponSkill = function(target, mob, skill)
-    local typeEffect = xi.effect.VIT_DOWN
-
-    xi.mobskills.mobStatusEffectMove(mob, target, typeEffect, 10, 3, 120)
+    xi.mobskills.mobStatusEffectMove(mob, target, xi.effect.VIT_DOWN, 10, 3, 120)
 
     local dmgmod = 1
 

@@ -50,7 +50,7 @@ m:addOverride('xi.zones.Uleguerand_Range.Zone.onInitialize', function(zone)
 
 
         onTrigger = function(player, npc)
-            player:PrintToPlayer('The focused heat of 6 Fire Clusters may be able to melt the ice.', xi.msg.channel.NS_SAY)
+            player:printToPlayer('The focused heat of 6 Fire Clusters may be able to melt the ice.', xi.msg.channel.NS_SAY)
         end,
 
     })

@@ -9,18 +9,15 @@ mobskillObject.onMobSkillCheck = function(target, mob, skill)
 end
 
 mobskillObject.onMobWeaponSkill = function(target, mob, skill)
-    local power = 50
-    local duration = 300
-
-    local typeEffect = xi.effect.PROTECT
+    skill:setMsg(xi.mobskills.mobBuffMove(mob, xi.effect.PROTECT, 50, 0, 300))
 
     if mob:getName() == 'Lost_Suttung' then
         local power = 100
     end
 
-    skill:setMsg(xi.mobskills.mobBuffMove(mob, typeEffect, power, 0, duration))
+    skill:setMsg(xi.mobskills.mobBuffMove(mob, xi.effect.PROTECT, power, 0, duration))
 
-    return typeEffect
+    return xi.effect.PROTECT
 end
 
 return mobskillObject

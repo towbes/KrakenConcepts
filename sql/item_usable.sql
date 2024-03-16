@@ -28,7 +28,7 @@ CREATE TABLE `item_usable` (
   `reuseDelay` int(10) unsigned NOT NULL DEFAULT '0',
   `aoe` tinyint(1) unsigned NOT NULL DEFAULT '0',
   PRIMARY KEY (`itemid`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4 PACK_KEYS=1 CHECKSUM=1;
+) ENGINE=Aria TRANSACTIONAL=0 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci PACK_KEYS=1 CHECKSUM=1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -447,6 +447,7 @@ INSERT INTO `item_usable` VALUES (4505,'handful_of_sunflower_seeds',1,1,24,0,0,0
 INSERT INTO `item_usable` VALUES (4506,'mutton_tortilla',1,1,24,0,0,0,0,0);
 INSERT INTO `item_usable` VALUES (4507,'rarab_meatball',1,1,28,0,0,0,0,0);
 INSERT INTO `item_usable` VALUES (4508,'serving_of_royal_jelly',1,1,24,0,0,0,0,0);
+INSERT INTO `item_usable` VALUES (4509,'flask_of_distilled_water',1,1,26,0,0,0,0,0);
 INSERT INTO `item_usable` VALUES (4510,'acorn_cookie',1,1,29,0,0,0,0,0);
 INSERT INTO `item_usable` VALUES (4511,'bowl_of_ambrosia',1,1,10,0,0,0,0,0);
 INSERT INTO `item_usable` VALUES (4512,'bottle_of_vampire_juice',1,1,26,0,0,0,0,0);
@@ -788,6 +789,7 @@ INSERT INTO `item_usable` VALUES (4883,'scroll_of_absorb-tp',1,1,12,5,0,0,0,0);
 INSERT INTO `item_usable` VALUES (4884,'scroll_of_blind_ii',1,1,12,5,0,0,0,0);
 INSERT INTO `item_usable` VALUES (4885,'scroll_of_dread_spikes',1,1,12,5,0,0,0,0);
 INSERT INTO `item_usable` VALUES (4886,'scroll_of_absorb-acc',1,1,12,5,0,0,0,0);
+INSERT INTO `item_usable` VALUES (4887,'scroll_of_absorb-attri',1,1,12,5,0,0,0,0);
 INSERT INTO `item_usable` VALUES (4889,'scroll_of_breakga',1,1,12,5,0,0,0,0);
 INSERT INTO `item_usable` VALUES (4890,'scroll_of_firaja',1,1,12,5,0,0,0,0);
 INSERT INTO `item_usable` VALUES (4891,'scroll_of_blizzaja',1,1,12,5,0,0,0,0);
@@ -2351,6 +2353,7 @@ INSERT INTO `item_usable` VALUES (21266,'gastraphetes',1,1,55,0,1,10,3600,0);
 INSERT INTO `item_usable` VALUES (21267,'annihilator',1,1,55,0,1,10,3600,0);
 INSERT INTO `item_usable` VALUES (21268,'death_penalty',1,1,55,0,1,10,3600,0);
 INSERT INTO `item_usable` VALUES (21269,'armageddon',1,1,55,0,1,10,3600,0);
+INSERT INTO `item_usable` VALUES (21868,'sha_wujings_la._+1',1,55,0,0,1,30,72000,0); -- Dispenses: Distilled Water x 12
 -- INSERT INTO `item_usable` VALUES (22018,'seika_uchiwa_+1',1,1,55,0,1,30,300,0);  -- Enchantment: Cool Breeze
 -- INSERT INTO `item_usable` VALUES (22020,'jingly_rod_+1',1,1,55,0,1,30,3600,0);   -- Costume: lamb or Chacharoon
 INSERT INTO `item_usable` VALUES (22115,'yoichinoyumi',1,1,55,0,1,10,3600,0);

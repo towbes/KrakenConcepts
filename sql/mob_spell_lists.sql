@@ -23,7 +23,7 @@ CREATE TABLE `mob_spell_lists` (
   `min_level` tinyint(3) unsigned NOT NULL,
   `max_level` tinyint(3) unsigned NOT NULL,
   PRIMARY KEY (`spell_list_id`,`spell_id`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4;
+) ENGINE=Aria TRANSACTIONAL=0 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -4355,8 +4355,9 @@ INSERT INTO `mob_spell_lists` VALUES ('TRUST_Ygnas',411,143,32,255); -- erase (3
 INSERT INTO `mob_spell_lists` VALUES ('TRUST_Lion_II',418,338,12,255); -- utsusemi_ichi (12~255)
 INSERT INTO `mob_spell_lists` VALUES ('TRUST_Lion_II',418,339,37,255); -- utsusemi_ni (37~255)
 
--- TRUST_Zied_II (419)
-INSERT INTO `mob_spell_lists` VALUES ('TRUST_Zied_II',419,252,37,255); -- stun (37~255)
+-- TRUST_Zeid_II (419)
+INSERT INTO `mob_spell_lists` VALUES ('TRUST_Zeid_II',419,243,91,255); -- absorb-attri (91~255)
+INSERT INTO `mob_spell_lists` VALUES ('TRUST_Zeid_II',419,252,37,255); -- stun (37~255)
 
 -- TRUST_Prishe_II (420)
 INSERT INTO `mob_spell_lists` VALUES ('TRUST_Prishe_II',420,7,16,255);  -- curaga (16~255)
@@ -4370,6 +4371,8 @@ INSERT INTO `mob_spell_lists` VALUES ('TRUST_Nashmeira_II',421,1,1,255);    -- c
 INSERT INTO `mob_spell_lists` VALUES ('TRUST_Nashmeira_II',421,2,11,255);   -- cure_ii (11~255)
 INSERT INTO `mob_spell_lists` VALUES ('TRUST_Nashmeira_II',421,3,21,255);   -- cure_iii (21~255)
 INSERT INTO `mob_spell_lists` VALUES ('TRUST_Nashmeira_II',421,4,41,255);   -- cure_iv (41~255)
+INSERT INTO `mob_spell_lists` VALUES ('TRUST_Nashmeira_II',421,5,61,255);   -- cure_v (41~255)
+INSERT INTO `mob_spell_lists` VALUES ('TRUST_Nashmeira_II',421,6,80,255);   -- cure_vi (41~255)
 INSERT INTO `mob_spell_lists` VALUES ('TRUST_Nashmeira_II',421,7,16,255);   -- curaga (16~255)
 INSERT INTO `mob_spell_lists` VALUES ('TRUST_Nashmeira_II',421,8,31,255);   -- curaga_ii (31~255)
 INSERT INTO `mob_spell_lists` VALUES ('TRUST_Nashmeira_II',421,9,51,255);   -- curaga_iii (51~255)
@@ -5125,7 +5128,15 @@ INSERT INTO `mob_spell_lists` VALUES ('Silverhook',492,252,1,255); -- stun (1~25
 INSERT INTO `mob_spell_lists` VALUES ('Silverhook',492,253,1,255); -- sleep (1~255)
 INSERT INTO `mob_spell_lists` VALUES ('Silverhook',492,274,1,255); -- sleepga ii (1~255)
 
--- IDs 493-496 free for use
+-- Bastet (493)
+INSERT INTO `mob_spell_lists` VALUES ('Bastet',493,165,1,255); -- Thunder II (1~255)
+INSERT INTO `mob_spell_lists` VALUES ('Bastet',493,195,1,255); -- Thundaga II (1~255)
+INSERT INTO `mob_spell_lists` VALUES ('Bastet',493,212,1,255); -- Burst (1~255)
+INSERT INTO `mob_spell_lists` VALUES ('Bastet',493,239,1,255); -- Shock (1~255)
+INSERT INTO `mob_spell_lists` VALUES ('Bastet',493,251,1,255); -- Shock Spikes (1~255)
+INSERT INTO `mob_spell_lists` VALUES ('Bastet',493,252,1,255); -- Stun (1~255)
+
+-- IDs 494-496 free for use
 
 -- Cemetery Cherry
 INSERT INTO `mob_spell_lists` VALUES ('Cemetery_Cherry',497,274,1,255); -- Sleepga II
@@ -5140,7 +5151,10 @@ INSERT INTO `mob_spell_lists` VALUES ('Slendlix_Spindlethumb',499,33,1,255); -- 
 -- Toxic Tamlyn (500)
 INSERT INTO `mob_spell_lists` VALUES ('Toxic_Tamlyn',500,231,1,255);  -- bio_ii (1~255)
 
--- Next Available: 501
+-- Zirnitra
+INSERT INTO `mob_spell_lists` VALUES ('Zirnitra',501,359,75,255);  -- silencega (75~255)
+
+-- Next Available: 502
 
 
 -- Adding Cactuar Specifics 700+ to avoid conflicts

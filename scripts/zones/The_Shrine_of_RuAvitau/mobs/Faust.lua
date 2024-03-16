@@ -15,7 +15,7 @@ entity.onMobSpawn = function(mob)
     mob:setLocalVar('moveTime', os.time() + 6)
 end
 
-entity.onMobEngaged = function(mob)
+entity.onMobEngage = function(mob)
     mob:setMobMod(xi.mobMod.NO_MOVE, 0)
 end
 

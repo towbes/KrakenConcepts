@@ -66,7 +66,7 @@ xi.events.loginCampaign.onGameIn = function(player)
         loginCount = 0
     end
 
-    player:PrintToPlayer('The current Login Campaign will run until ' .. EndDate, 0xD)
+    player:printToPlayer('The current Login Campaign will run until ' .. EndDate, 0xD)
 
     if nextMidnight ~= getMidnight() then
         if loginCount == 0 then
@@ -94,8 +94,8 @@ end
 -- Handles showing the correct list of prices and hiding the options that are not available
 xi.events.loginCampaign.onTrigger = function(player, csid)
     if not xi.events.loginCampaign.isCampaignActive() then
-        player:PrintToPlayer('Greeter Moogle : Unfortunately, the Login Campaign is not currently underway, kupo.', 0xD)
-        player:PrintToPlayer('Please come back another time to see all the exciting prizes we have in store for you, kupo!', 0xD)
+        player:printToPlayer('Greeter Moogle : Unfortunately, the Login Campaign is not currently underway, kupo.', 0xD)
+        player:printToPlayer('Please come back another time to see all the exciting prizes we have in store for you, kupo!', 0xD)
         return
     end
 

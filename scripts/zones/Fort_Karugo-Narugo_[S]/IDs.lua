@@ -17,6 +17,7 @@ zones[xi.zone.FORT_KARUGO_NARUGO_S] =
         LOGIN_CAMPAIGN_UNDERWAY       = 7002, -- The [/January/February/March/April/May/June/July/August/September/October/November/December] <number> Login Campaign is currently underway!
         LOGIN_NUMBER                  = 7003, -- In celebration of your most recent login (login no. <number>), we have provided you with <number> points! You currently have a total of <number> points.
         MEMBERS_LEVELS_ARE_RESTRICTED = 7023, -- Your party is unable to participate because certain members' levels are restricted.
+        -- CAMPAIGN_RESULTS_TALLIED      = 7598, -- Campaign results tallied.
         SPONDULIX_SHOP_DIALOG         = 7215, -- Spondulix comes all the way from Boodlix's Emporium to help Tarutaru and Mithra. I can help you, too! You have gil, no?
         LOGGING_IS_POSSIBLE_HERE      = 7682, -- Logging is possible here if you have <item>.
         ITEM_DELIVERY_DIALOG          = 8121, -- Deliveries! We're open for business!
@@ -46,6 +47,7 @@ zones[xi.zone.FORT_KARUGO_NARUGO_S] =
     },
     npc =
     {
+        CAMPAIGN_NPC_OFFSET = GetFirstID('Caulaise_RK'), -- San, Bas, Win, Flag +4, CA
         INDESCRIPT_MARKINGS = 17171272,
         LOGGING             = GetTableOfIDs('Logging_Point'),
     },

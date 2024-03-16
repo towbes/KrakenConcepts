@@ -15,8 +15,8 @@ local weaponskillObject = {}
 
 weaponskillObject.onUseWeaponSkill = function(player, target, wsID, tp, primary, action, taChar)
     local params = {}
-    params.ftp100 = 3.9 params.ftp200 = 3.9 params.ftp300 = 3.9
-    params.str_wsc = 0.2 params.dex_wsc = 0.0 params.vit_wsc = 0.6 params.agi_wsc = 0.0 params.int_wsc = 0.0 params.mnd_wsc = 0.0 params.chr_wsc = 0.0
+    params.ftpMod = { 3.5, 3.5, 3.5 }
+    params.vit_wsc = 0.6
     params.ele = xi.element.ICE
     params.skill = xi.skill.GREAT_SWORD
     params.includemab = true
@@ -24,6 +24,8 @@ weaponskillObject.onUseWeaponSkill = function(player, target, wsID, tp, primary,
     params.useStatCoefficient = false
 
     if xi.settings.main.USE_ADOULIN_WEAPON_SKILL_CHANGES then
+        params.ftpMod = { 3.9, 3.9, 3.9 }
+        params.str_wsc = 0.2
         params.vit_wsc = 1.0
     end
 

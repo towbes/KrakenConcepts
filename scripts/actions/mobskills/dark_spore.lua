@@ -11,8 +11,7 @@ mobskillObject.onMobSkillCheck = function(target, mob, skill)
 end
 
 mobskillObject.onMobWeaponSkill = function(target, mob, skill)
-    local typeEffect = xi.effect.BLINDNESS
-    xi.mobskills.mobStatusEffectMove(mob, target, typeEffect, 15, 3, 120)
+    xi.mobskills.mobStatusEffectMove(mob, target, xi.effect.BLINDNESS, 15, 3, 120)
 
     local dmgcap = 800
     if mob:getName() == 'Fairy_Ring' then

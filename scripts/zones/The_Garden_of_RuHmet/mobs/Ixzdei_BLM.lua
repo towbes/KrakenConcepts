@@ -30,7 +30,7 @@ entity.onMobSpawn = function(mob)
     mob:setLocalVar('healpercent', math.random(15, 25))
 end
 
-entity.onMobEngaged = function(mob, target)
+entity.onMobEngage = function(mob, target)
     mob:setAnimationSub(1)
     mob:setLocalVar('changeTime', os.time() + 15)
     local mobId = mob:getID()

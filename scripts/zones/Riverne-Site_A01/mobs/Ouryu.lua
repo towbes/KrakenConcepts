@@ -41,7 +41,7 @@ entity.onMobDeath = function(mob, player, optParams)
     player:addTitle(xi.title.OURYU_OVERWHELMER)
 end
 
-entity.onMobEngaged = function(mob)
+entity.onMobEngage = function(mob)
     mob:setMobMod(xi.mobMod.NO_MOVE, 0)
 end
 

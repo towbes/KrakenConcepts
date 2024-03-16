@@ -88,7 +88,7 @@ entity.onMobFight = function(mob)
     end
 end
 
-entity.onMobDisengage = function(mob, target)
+entity.onMobDisengage = function(mob)
 end
 
 entity.onMobDeath = function(mob, player, optParams)

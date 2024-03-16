@@ -1,17 +1,8 @@
 -----------------------------------
--- Ability: Perpetuance
--- Increases the enhancement effect duration of your next white magic spell.
+-- Ability: Immanence
+-- Makes it possible for your next elemental magic spell to be used in a skillchain, but not a magic burst.
 -- Obtained: Scholar Level 87
--- Recast Time: Stratagem Charge
--- Duration: 00:01:00 or first white Enhancing Magic cast, whichever first
---
--- Level   |Charges |Recharge Time per Charge
--- -----   -------- ---------------
--- 10      |1       |4:00 minutes
--- 30      |2       |2:00 minutes
--- 50      |3       |1:20 minutes
--- 70      |4       |1:00 minute
--- 90      |5       |48 seconds
+-- Duration: 1 Black Magic Spell or 60 seconds, whichever occurs first.
 -----------------------------------
 local abilityObject = {}
 

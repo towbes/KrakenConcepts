@@ -64,7 +64,7 @@ m.dialogTable = function(player, tbl, npcName, param)
         if param then
             result = string.format(tbl[1], param[1], param[2], param[3], param[4])
         end
-            player:PrintToPlayer(prefix .. result, xi.msg.channel.NS_SAY)
+            player:printToPlayer(prefix .. result, xi.msg.channel.NS_SAY)
         return
     end
 
@@ -79,12 +79,12 @@ m.dialogTable = function(player, tbl, npcName, param)
         if tbl[i]:sub(1, 1) == ' ' then
             -- Paragraph continue
             player:timer(delay, function(playerArg)
-                playerArg:PrintToPlayer(result, xi.msg.channel.NS_SAY)
+                playerArg:printToPlayer(result, xi.msg.channel.NS_SAY)
             end)
         else
             -- New paragraph
             player:timer(delay, function(playerArg)
-                playerArg:PrintToPlayer(prefix .. result, xi.msg.channel.NS_SAY)
+                playerArg:printToPlayer(prefix .. result, xi.msg.channel.NS_SAY)
             end)
         end
     end

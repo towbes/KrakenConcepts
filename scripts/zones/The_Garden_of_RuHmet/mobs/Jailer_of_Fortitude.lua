@@ -16,7 +16,7 @@ entity.onMobSpawn = function(mob)
     mob:setMod(xi.mod.EVA, 250)
 end
 
-entity.onMobEngaged = function(mob, target)
+entity.onMobEngage = function(mob, target)
     mob:setLocalVar('delay', 0)
     mob:setLocalVar('LAST_CAST', 0)
     mob:setLocalVar('COPY_SPELL', 0)

@@ -718,25 +718,33 @@ bool CLatentEffectContainer::ProcessLatentEffect(CLatentEffect& latentEffect)
         case LATENT::SIGNET_BONUS:
         {
             CBattleEntity* PTarget = m_POwner->GetBattleTarget();
-            expression =
-                PTarget != nullptr && m_POwner->GetMLevel() >= PTarget->GetMLevel() && m_POwner->loc.zone->GetRegionID() < REGION_TYPE::WEST_AHT_URHGAN;
+            expression = PTarget != nullptr &&
+                         m_POwner->GetMLevel() >= PTarget->GetMLevel() &&
+                         m_POwner->loc.zone != nullptr &&
+                         m_POwner->loc.zone->GetRegionID() < REGION_TYPE::WEST_AHT_URHGAN;
             break;
         }
         case LATENT::SANCTION_REGEN_BONUS:
-            expression = m_POwner->loc.zone->GetRegionID() >= REGION_TYPE::WEST_AHT_URHGAN && m_POwner->loc.zone->GetRegionID() <= REGION_TYPE::ALZADAAL &&
+            expression = m_POwner->loc.zone != nullptr &&
+                         m_POwner->loc.zone->GetRegionID() >= REGION_TYPE::WEST_AHT_URHGAN &&
+                         m_POwner->loc.zone->GetRegionID() <= REGION_TYPE::ALZADAAL &&
                          ((float)m_POwner->health.hp / m_POwner->health.maxhp) * 100 < latentEffect.GetConditionsValue();
             break;
         case LATENT::SANCTION_REFRESH_BONUS:
-            expression = m_POwner->loc.zone->GetRegionID() >= REGION_TYPE::WEST_AHT_URHGAN && m_POwner->loc.zone->GetRegionID() <= REGION_TYPE::ALZADAAL &&
+            expression = m_POwner->loc.zone != nullptr &&
+                         m_POwner->loc.zone->GetRegionID() >= REGION_TYPE::WEST_AHT_URHGAN &&
+                         m_POwner->loc.zone->GetRegionID() <= REGION_TYPE::ALZADAAL &&
                          ((float)m_POwner->health.mp / m_POwner->health.maxmp) * 100 < latentEffect.GetConditionsValue();
             break;
         case LATENT::SIGIL_REGEN_BONUS:
-            expression = m_POwner->loc.zone->GetRegionID() >= REGION_TYPE::RONFAURE_FRONT &&
+            expression = m_POwner->loc.zone != nullptr &&
+                         m_POwner->loc.zone->GetRegionID() >= REGION_TYPE::RONFAURE_FRONT &&
                          m_POwner->loc.zone->GetRegionID() <= REGION_TYPE::VALDEAUNIA_FRONT &&
                          ((float)m_POwner->health.hp / m_POwner->health.maxhp) * 100 < latentEffect.GetConditionsValue();
             break;
         case LATENT::SIGIL_REFRESH_BONUS:
-            expression = m_POwner->loc.zone->GetRegionID() >= REGION_TYPE::RONFAURE_FRONT &&
+            expression = m_POwner->loc.zone != nullptr &&
+                         m_POwner->loc.zone->GetRegionID() >= REGION_TYPE::RONFAURE_FRONT &&
                          m_POwner->loc.zone->GetRegionID() <= REGION_TYPE::VALDEAUNIA_FRONT &&
                          ((float)m_POwner->health.mp / m_POwner->health.maxmp) * 100 < latentEffect.GetConditionsValue();
             break;
@@ -818,8 +826,19 @@ bool CLatentEffectContainer::ProcessLatentEffect(CLatentEffect& latentEffect)
             expression = latentEffect.GetConditionsValue() == m_POwner->getZone();
             break;
         case LATENT::SYNTH_TRAINEE:
-            // todo: figure this out
+        {
+            expression = (uint16)m_POwner->RealSkills.skill[latentEffect.GetConditionsValue()] / 10 < 40 &&
+                         !m_POwner->StatusEffectContainer->HasStatusEffect(EFFECT_FISHING_IMAGERY) &&
+                         !m_POwner->StatusEffectContainer->HasStatusEffect(EFFECT_WOODWORKING_IMAGERY) &&
+                         !m_POwner->StatusEffectContainer->HasStatusEffect(EFFECT_SMITHING_IMAGERY) &&
+                         !m_POwner->StatusEffectContainer->HasStatusEffect(EFFECT_GOLDSMITHING_IMAGERY) &&
+                         !m_POwner->StatusEffectContainer->HasStatusEffect(EFFECT_CLOTHCRAFT_IMAGERY) &&
+                         !m_POwner->StatusEffectContainer->HasStatusEffect(EFFECT_LEATHERCRAFT_IMAGERY) &&
+                         !m_POwner->StatusEffectContainer->HasStatusEffect(EFFECT_BONECRAFT_IMAGERY) &&
+                         !m_POwner->StatusEffectContainer->HasStatusEffect(EFFECT_ALCHEMY_IMAGERY) &&
+                         !m_POwner->StatusEffectContainer->HasStatusEffect(EFFECT_COOKING_IMAGERY);
             break;
+        }
         case LATENT::SONG_ROLL_ACTIVE:
             expression = m_POwner->StatusEffectContainer->HasStatusEffectByFlag(EFFECTFLAG_ROLL | EFFECTFLAG_SONG);
             break;

@@ -49,8 +49,8 @@ local loot =
         },
 
         {
-            { itemid =    0, droprate = 944 }, -- Nothing
-            { itemid = 1842, droprate =  56 }, -- Cloud Evoker (5.6% Drop Rate)
+            { itemid = xi.item.NONE,         droprate = 944 }, -- nothing
+            { itemid = xi.item.CLOUD_EVOKER, droprate =  56 }, -- Cloud Evoker
         },
 
         {
@@ -84,8 +84,8 @@ local loot =
         },
 
         {
-            { itemid =    0, droprate = 812 }, -- Nothing
-            { itemid = 1842, droprate = 188 }, -- Cloud Evoker
+            { itemid = xi.item.NONE,         droprate = 812 }, -- nothing
+            { itemid = xi.item.CLOUD_EVOKER, droprate = 188 }, -- Cloud Evoker
         },
 
         {

@@ -10,8 +10,8 @@ g_mixins.families.amphiptere = function(amphiptereMob)
         mob:hideName(true)
         mob:setUntargetable(false)
         mob:setAnimationSub(1)
-        mob:setMobMod(xi.mobMod.NO_MOVE, 0)
-        mob:setAutoAttackEnabled(true)
+        -- mob:setMobMod(xi.mobMod.NO_MOVE, 0)
+        -- mob:setAutoAttackEnabled(true)
 
     end)
 
@@ -26,34 +26,33 @@ g_mixins.families.amphiptere = function(amphiptereMob)
         mob:setUntargetable(true)
         mob:setAnimationSub(1)
     end)
-    amphiptereMob:addListener('COMBAT_TICK', 'REAVING_WIND_COMBAT_TICK', function(mob)
-        local knockback = mob:getLocalVar('knockback')
-    
-        if mob:getBattleTime() < knockback then
-            mob:setAnimationSub(2)
-            mob:setMobMod(xi.mobMod.NO_MOVE, 0)
-            mob:setAutoAttackEnabled(true)
-    
-            local enmityList = mob:getEnmityList()
-            for _,v in ipairs(enmityList) do
-                if mob:getCurrentAction() == xi.action.ATTACK then
-                        mob:useMobAbility(2434)
-                end
-            end        
-        else
-            mob:setLocalVar('knockback', 0) 
-            mob:setAnimationSub(0)
-            mob:setMobMod(xi.mobMod.NO_MOVE, 0)
-            mob:setAutoAttackEnabled(true)
+
+    amphiptereMob:addListener('WEAPONSKILL_USE', 'REAVING_WIND_AURA', function(mobArg, target, actionId, tp, action)
+        local reavingWind   = 2431
+
+        -- Amphipteres gain a temporary aura following the use of reaving wind.
+        if actionId == reavingWind then
+            mobArg:setAnimationSub(2)
+            -- Zirnitra spams a knockback while aura is active
+            mobArg:setLocalVar('auraEndTime', os.time() + 20)
         end
     end)
-    amphiptereMob:addListener('WEAPONSKILL_STATE_EXIT', 'SET_RW_DURATION', function(mob, skillID)
-        local knockback = mob:getLocalVar('knockback')
-        if skillID == 2431 then
-            mob:setLocalVar('knockback', mob:getBattleTime() + 20)
+
+    amphiptereMob:addListener('WEAPONSKILL_STATE_EXIT', 'SPAM_KNOCKBACK', function(mobArg, actionId)
+        local reavingWind   = 2431
+        local reavingWindKb = 2426
+
+        if actionId == reavingWind then
+            mobArg:useMobAbility(reavingWindKb)
+        elseif actionId == reavingWindKb then
+            if os.time() >= mobArg:getLocalVar('auraEndTime') then
+                mobArg:setLocalVar('auraEndTime', 0)
+                mobArg:setAnimationSub(0)
+            else
+                mobArg:useMobAbility(reavingWindKb)
+            end
         end
     end)
 end
-
 
 return g_mixins.families.amphiptere

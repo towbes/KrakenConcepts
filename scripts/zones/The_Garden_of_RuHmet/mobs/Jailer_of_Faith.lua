@@ -109,7 +109,7 @@ entity.onMobMagicPrepare = function(mob, target, spell)
     end
 end
 
-entity.onMobEngaged = function(mob, target)
+entity.onMobEngage = function(mob, target)
     mob:setLocalVar('[faith]changeTime', 0)
 end
 

@@ -25,7 +25,7 @@ entity.onMobSpawn = function(mob)
     mob:setMobMod(xi.mobMod.ADD_EFFECT, 1)
 end
 
-entity.onMobEngaged = function(mob, target)
+entity.onMobEngage = function(mob, target)
     mob:resetLocalVars()
     -- if engaged then send pets at target
     for i, offset in ipairs(offsets) do

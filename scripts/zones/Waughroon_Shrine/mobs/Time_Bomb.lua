@@ -26,7 +26,7 @@ entity.onMobSpawn = function(mob)
     mob:setMobMod(xi.mobMod.NO_MOVE, 1)
 end
 
-entity.onMobEngaged = function(mob, target)
+entity.onMobEngage = function(mob, target)
     mob:setLocalVar('selfDestruct', os.time() + 60)
     mob:setLocalVar('warning', 8)
     mob:messageText(target, ID.text.BOMB_TIMER_60, false)

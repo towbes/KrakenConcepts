@@ -18,6 +18,7 @@ zones[xi.zone.GRAUBERG_S] =
         LOGIN_CAMPAIGN_UNDERWAY       = 7002, -- The [/January/February/March/April/May/June/July/August/September/October/November/December] <number> Login Campaign is currently underway!
         LOGIN_NUMBER                  = 7003, -- In celebration of your most recent login (login no. <number>), we have provided you with <number> points! You currently have a total of <number> points.
         MEMBERS_LEVELS_ARE_RESTRICTED = 7023, -- Your party is unable to participate because certain members' levels are restricted.
+        -- CAMPAIGN_RESULTS_TALLIED      = 7598, -- Campaign results tallied.
         FISHING_MESSAGE_OFFSET        = 7060, -- You can't fish here.
         A_SHIVER_RUNS_DOWN            = 7430, -- A shiver runs down your spine...
         ATTEND_TO_MORE_PRESSING       = 7431, -- Perhaps you should first attend to more pressing matters...
@@ -51,6 +52,7 @@ zones[xi.zone.GRAUBERG_S] =
     },
     npc =
     {
+        CAMPAIGN_NPC_OFFSET = GetFirstID('Ulaciont_RK'), -- San, Bas, Win, Flag +4, CA
         HARVESTING          = GetTableOfIDs('Harvesting_Point'),
         INDESCRIPT_MARKINGS = 17142586,
     },

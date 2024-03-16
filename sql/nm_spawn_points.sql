@@ -23,7 +23,7 @@ CREATE TABLE `nm_spawn_points` (
   `pos_y` float(7,3) NOT NULL DEFAULT '0.000',
   `pos_z` float(7,3) NOT NULL DEFAULT '0.000',
   PRIMARY KEY (`mobid`,`pos`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4;
+) ENGINE=Aria TRANSACTIONAL=0 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -7136,6 +7136,13 @@ INSERT INTO `nm_spawn_points` VALUES (17281281,5,-428.881,17.000,-362.7055);
 INSERT INTO `nm_spawn_points` VALUES (17223982,0,-159.325,24.609,106.126);
 INSERT INTO `nm_spawn_points` VALUES (17223982,1,-197.075,25,111.792);
 INSERT INTO `nm_spawn_points` VALUES (17223982,2,-174.771,24.486,105.398);
+
+-- Atkorkamuy
+INSERT INTO `nm_spawn_points` VALUES (17293485,0,-341.691,-21.0,39.305);
+INSERT INTO `nm_spawn_points` VALUES (17293485,1,-338.898,-21.028,45.62);
+INSERT INTO `nm_spawn_points` VALUES (17293485,2,-286.022,-21.102,75.4);
+INSERT INTO `nm_spawn_points` VALUES (17293485,3,-226.756,-20.846,32.378);
+INSERT INTO `nm_spawn_points` VALUES (17293485,4,-202.11,-20.31,-10.47); -- This is the spot Atkorkamuy always spawns on server reboot even if this isn't in the db 
 
 /*!40000 ALTER TABLE `nm_spawn_points` ENABLE KEYS */;
 UNLOCK TABLES;

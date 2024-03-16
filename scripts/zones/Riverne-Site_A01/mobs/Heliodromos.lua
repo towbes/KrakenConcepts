@@ -33,7 +33,7 @@ entity.onMobRoam = function(mob)
     end
 end
 
-entity.onMobEngaged = function(mob, target)
+entity.onMobEngage = function(mob, target)
     for i = 1, 3 do
         GetMobByID(ID.mob.HELIODROMOS[i]):updateEnmity(target)
     end

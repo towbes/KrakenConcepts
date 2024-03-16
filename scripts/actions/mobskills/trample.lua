@@ -12,7 +12,6 @@ mobskillObject.onMobSkillCheck = function(target, mob, skill)
 end
 
 mobskillObject.onMobWeaponSkill = function(target, mob, skill)
-    local typeEffect = xi.effect.BIND
     local duration = 30
 
     local numhits = 1
@@ -25,7 +24,7 @@ mobskillObject.onMobWeaponSkill = function(target, mob, skill)
         target:takeDamage(dmg, mob, xi.attackType.PHYSICAL, xi.damageType.SLASHING)
     end
 
-    xi.mobskills.mobPhysicalStatusEffectMove(mob, target, skill, typeEffect, 1, 0, duration)
+    xi.mobskills.mobPhysicalStatusEffectMove(mob, target, skill, xi.effect.BIND, 1, 0, duration)
 
     return dmg
 end

@@ -5,7 +5,7 @@
 -----------------------------------
 local entity = {}
 
-entity.onMobEngaged = function(mob)
+entity.onMobEngage = function(mob)
     -- Immediately uses Bionic Boost and Heavy Whisk
     mob:useMobAbility(359)
     mob:queue(2000, function(mobArg)

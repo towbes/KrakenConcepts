@@ -24,6 +24,7 @@
 
 #include "common/cbasetypes.h"
 #include "luautils.h"
+#include "packets/message_standard.h"
 
 class CBaseEntity;
 class CCharEntity;
@@ -52,14 +53,14 @@ public:
     // Messaging System
     void showText(CLuaBaseEntity* mob, uint16 messageID, sol::object const& p0, sol::object const& p1, sol::object const& p2, sol::object const& p3);
     void messageText(CLuaBaseEntity* PLuaBaseEntity, uint16 messageID, sol::object const& arg2, sol::object const& arg3);
-    void PrintToPlayer(std::string const& message, sol::object const& messageTypeObj, sol::object const& nameObj);
-    void PrintToArea(std::string const& message, sol::object const& arg1, sol::object const& arg2, sol::object const& arg3);
+    void printToPlayer(std::string const& message, sol::object const& messageTypeObj, sol::object const& nameObj);
+    void printToArea(std::string const& message, sol::object const& arg1, sol::object const& arg2, sol::object const& arg3);
     void messageBasic(uint16 messageID, sol::object const& p0, sol::object const& p1, sol::object const& target);
     void messageName(uint16 messageID, sol::object const& entity, sol::object const& p0, sol::object const& p1,
                      sol::object const& p2, sol::object const& p3, sol::object const& chat);
     void messagePublic(uint16 messageID, CLuaBaseEntity const* PEntity, sol::object const& arg2, sol::object const& arg3);
     void messageSpecial(uint16 messageID, sol::variadic_args va);
-    void messageSystem(uint16 messageID, sol::object const& p0, sol::object const& p1);
+    void messageSystem(MsgStd messageID, sol::object const& p0, sol::object const& p1);
     void messageCombat(sol::object const& speaker, int32 p0, int32 p1, int16 message);
     void messageStandard(uint16 messageID);
 
@@ -114,6 +115,7 @@ public:
     bool  isNPC();
     bool  isMob();
     bool  isPet();
+    bool  isTrust();
     bool  isAlly();
 
     // AI and Control
@@ -182,6 +184,9 @@ public:
     void   updateToEntireZone(uint8 statusID, uint8 animation, sol::object const& matchTime); // Forces an update packet to update the NPC entity zone-wide
 
     void sendEntityUpdateToPlayer(CLuaBaseEntity* entityToUpdate, uint8 entityUpdate, uint8 updateMask);
+
+    void forceRezone();
+    void forceLogout();
 
     auto  getPos() -> sol::table;
     void  showPosition();
@@ -557,8 +562,6 @@ public:
     bool  isInDynamis();
     void  setEnteredBattlefield(bool entered);
     bool  hasEnteredBattlefield();
-    void  sendTimerPacket(uint32 seconds);
-    void  sendClearTimerPacket();
 
     // Battle Utilities
     bool isAlive();
@@ -568,10 +571,10 @@ public:
     void sendRaise(uint8 raiseLevel);
     void sendReraise(uint8 raiseLevel);
     void sendTractor(float xPos, float yPos, float zPos, uint8 rotation);
+    void allowSendRaisePrompt();
 
-    void countdown(sol::object const& secondsObj,
-                   sol::object const& bar1NameObj, sol::object const& bar1ValObj,
-                   sol::object const& bar2NameObj, sol::object const& bar2ValObj);
+    void countdown(sol::object const& secondsObj);
+    void objectiveUtility(sol::object const& obj);
     void enableEntities(sol::object const& obj);
     void independentAnimation(CLuaBaseEntity* PTarget, uint16 animId, uint8 mode);
 
@@ -618,7 +621,7 @@ public:
     void  updateEnmity(CLuaBaseEntity* PEntity);
     void  transferEnmity(CLuaBaseEntity* entity, uint8 percent, float range);
     void  updateEnmityFromDamage(CLuaBaseEntity* PEntity, int32 damage); // Adds Enmity to player for specified mob for the damage specified
-    void  updateEnmityFromCure(CLuaBaseEntity* PEntity, int32 amount);
+    void  updateEnmityFromCure(CLuaBaseEntity* PEntity, int32 amount, sol::object const& fixedCE, sol::object const& fixedVE);
     void  resetEnmity(CLuaBaseEntity* PEntity);
     void  updateClaim(sol::object const& entity);
     bool  hasEnmity();

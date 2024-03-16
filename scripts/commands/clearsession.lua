@@ -11,8 +11,8 @@ commandObj.cmdprops =
 }
 
 commandObj.error = function(player, msg)
-    player:PrintToPlayer(msg)
-    player:PrintToPlayer('!clearsession <player>')
+    player:printToPlayer(msg)
+    player:printToPlayer('!clearsession <player>')
 end
 
 commandObj.onTrigger = function(player, targName)
@@ -22,10 +22,10 @@ commandObj.onTrigger = function(player, targName)
     end
 
     if player:clearSession() == targName then
-        return player:PrintToPlayer(string.format('Cleared %s\'s session.', targName))
+        return player:printToPlayer(string.format('Cleared %s\'s session.', targName))
     end
 
-    return player:PrintToPlayer(string.format('No player named %s found.', targName))
+    return player:printToPlayer(string.format('No player named %s found.', targName))
 end
 
 return commandObj

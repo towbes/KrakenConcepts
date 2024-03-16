@@ -40,6 +40,7 @@
 #include "packets/lock_on.h"
 #include "packets/menu_raisetractor.h"
 #include "packets/message_special.h"
+#include "packets/message_standard.h"
 #include "packets/message_system.h"
 #include "packets/message_text.h"
 #include "packets/release.h"
@@ -283,6 +284,7 @@ CCharEntity::~CCharEntity()
     destroy(CraftContainer);
     destroy(PMeritPoints);
     destroy(PJobPoints);
+    destroy(PLatentEffectContainer);
 
     PGuildShop = nullptr;
 
@@ -319,10 +321,10 @@ void CCharEntity::clearPacketList()
 void CCharEntity::pushPacket(CBasicPacket* packet)
 {
     TracyZoneScoped;
-    TracyZoneString(GetName());
+    TracyZoneString(getName());
     TracyZoneHex16(packet->getType());
 
-    moduleutils::OnPushPacket(packet);
+    moduleutils::OnPushPacket(this, packet);
 
     if (packet->getType() == 0x5B)
     {
@@ -1035,7 +1037,7 @@ bool CCharEntity::CanAttack(CBattleEntity* PTarget, std::unique_ptr<CBasicPacket
         PAI->Disengage();
         return false;
     }
-    else if (dist > 30)
+    else if (!this->StatusEffectContainer->HasStatusEffect({ EFFECT_CHARM, EFFECT_CHARM_II }) && dist > 30)
     {
         errMsg = std::make_unique<CMessageBasicPacket>(this, PTarget, 0, 0, MSGBASIC_LOSE_SIGHT);
         PAI->Disengage();
@@ -1068,10 +1070,22 @@ bool CCharEntity::OnAttack(CAttackState& state, action_t& action)
 void CCharEntity::OnCastFinished(CMagicState& state, action_t& action)
 {
     TracyZoneScoped;
-    CBattleEntity::OnCastFinished(state, action);
 
     auto* PSpell  = state.GetSpell();
     auto* PTarget = static_cast<CBattleEntity*>(state.GetTarget());
+
+    // not ideal, since Trick Attack character (taChar) is also calculated on the lua side for the base spell.
+    // Only blue spells that act as a physical WS can TA.
+    CBattleEntity* taChar = nullptr;
+
+    if (StatusEffectContainer->HasStatusEffect(EFFECT_TRICK_ATTACK) &&
+        PSpell->getSpellGroup() == SPELLGROUP_BLUE &&
+        PSpell->dealsDamage())
+    {
+        taChar = battleutils::getAvailableTrickAttackChar(this, PTarget);
+    }
+
+    CBattleEntity::OnCastFinished(state, action);
 
     PRecastContainer->Add(RECAST_MAGIC, static_cast<uint16>(PSpell->getID()), action.recast);
 
@@ -1079,7 +1093,9 @@ void CCharEntity::OnCastFinished(CMagicState& state, action_t& action)
     {
         for (auto&& actionTarget : actionList.actionTargets)
         {
-            if (actionTarget.param > 0 && PSpell->dealsDamage() && PSpell->getSpellGroup() == SPELLGROUP_BLUE &&
+            if (actionTarget.param > 0 &&
+                PSpell->dealsDamage() &&
+                PSpell->getSpellGroup() == SPELLGROUP_BLUE &&
                 (StatusEffectContainer->HasStatusEffect(EFFECT_CHAIN_AFFINITY) || StatusEffectContainer->HasStatusEffect(EFFECT_AZURE_LORE)) &&
                 static_cast<CBlueSpell*>(PSpell)->getPrimarySkillchain() != 0)
             {
@@ -1087,7 +1103,7 @@ void CCharEntity::OnCastFinished(CMagicState& state, action_t& action)
                 SUBEFFECT effect     = battleutils::GetSkillChainEffect(PTarget, PBlueSpell->getPrimarySkillchain(), PBlueSpell->getSecondarySkillchain(), 0);
                 if (effect != SUBEFFECT_NONE)
                 {
-                    uint16 skillChainDamage = battleutils::TakeSkillchainDamage(static_cast<CBattleEntity*>(this), PTarget, actionTarget.param, nullptr);
+                    uint16 skillChainDamage = battleutils::TakeSkillchainDamage(static_cast<CBattleEntity*>(this), PTarget, actionTarget.param, taChar);
 
                     actionTarget.addEffectParam   = skillChainDamage;
                     actionTarget.addEffectMessage = 287 + effect;
@@ -1319,7 +1335,7 @@ void CCharEntity::OnWeaponSkillFinished(CWeaponSkillState& state, action_t& acti
                 actionTarget.messageID = primary ? 224 : 276; // restores mp msg
                 actionTarget.reaction  = REACTION::HIT;
                 damage                 = std::max(damage, 0);
-                actionTarget.param     = addMP(damage);
+                actionTarget.param     = PTarget->addMP(damage);
             }
 
             if (primary)
@@ -1886,7 +1902,7 @@ void CCharEntity::OnRangedAttack(CRangeState& state, action_t& action)
         else if (xirand::GetRandomNumber(100) < battleutils::GetRangedHitRate(this, PTarget, isBarrage)) // hit!
         {
             // absorbed by shadow
-            if (battleutils::IsAbsorbByShadow(PTarget))
+            if (battleutils::IsAbsorbByShadow(PTarget, this))
             {
                 shadowsTaken++;
             }
@@ -1933,10 +1949,12 @@ void CCharEntity::OnRangedAttack(CRangeState& state, action_t& action)
                 {
                     charutils::TrySkillUP(this, (SKILLTYPE)PAmmo->getSkillType(), PTarget->GetMLevel());
                 }
+                totalDamage += damage;
             }
         }
         else // miss
         {
+            damage                  = 0;
             actionTarget.reaction   = REACTION::EVADE;
             actionTarget.speceffect = SPECEFFECT::NONE;
             actionTarget.messageID  = 354;
@@ -1952,11 +1970,15 @@ void CCharEntity::OnRangedAttack(CRangeState& state, action_t& action)
 
         recycleChance += this->PJobPoints->GetJobPointValue(JP_AMMO_CONSUMPTION);
 
-        // Only remove unlimited shot on hit
-        if (hitOccured && this->StatusEffectContainer->HasStatusEffect(EFFECT_UNLIMITED_SHOT))
+        if (this->StatusEffectContainer->HasStatusEffect(EFFECT_UNLIMITED_SHOT))
         {
-            StatusEffectContainer->DelStatusEffect(EFFECT_UNLIMITED_SHOT);
+            // Never consume ammo with Unlimited Shot active
             recycleChance = 100;
+            // Only remove unlimited shot on hit
+            if (hitOccured)
+            {
+                StatusEffectContainer->DelStatusEffect(EFFECT_UNLIMITED_SHOT);
+            }
         }
 
         if (PAmmo != nullptr && xirand::GetRandomNumber(100) > recycleChance)
@@ -1968,7 +1990,6 @@ void CCharEntity::OnRangedAttack(CRangeState& state, action_t& action)
                 hitCount = i;
             }
         }
-        totalDamage += damage;
     }
 
     // if a hit did occur (even without barrage)
@@ -1984,12 +2005,6 @@ void CCharEntity::OnRangedAttack(CRangeState& state, action_t& action)
 
         actionTarget.param =
             battleutils::TakePhysicalDamage(this, PTarget, PHYSICAL_ATTACK_TYPE::RANGED, totalDamage, false, slot, realHits, nullptr, true, true);
-
-        // lower damage based on shadows taken
-        if (shadowsTaken)
-        {
-            actionTarget.param = (int32)(actionTarget.param * (1 - ((float)shadowsTaken / realHits)));
-        }
 
         // absorb message
         if (actionTarget.param < 0)
@@ -2033,7 +2048,7 @@ void CCharEntity::OnRangedAttack(CRangeState& state, action_t& action)
         uint16 power = StatusEffectContainer->GetStatusEffect(EFFECT_SANGE)->GetPower();
 
         // remove shadows
-        while (realHits-- && xirand::GetRandomNumber(100) <= power && battleutils::IsAbsorbByShadow(this))
+        while (realHits-- && xirand::GetRandomNumber(100) <= power && battleutils::IsAbsorbByShadow(this, this))
         {
             ;
         }
@@ -2211,6 +2226,14 @@ void CCharEntity::OnItemFinish(CItemState& state, action_t& action)
     auto* PTarget = static_cast<CBattleEntity*>(state.GetTarget());
     auto* PItem   = state.GetItem();
 
+    if (!PItem->isType(ITEM_EQUIPMENT) && (PItem->getQuantity() < 1 || PItem->getReserve() > 0))
+    {
+        ShowWarning("OnItemFinish: %s attempted to use reserved/insufficient %s (%u).", this->getName(), PItem->getName(), PItem->getID());
+        this->pushPacket(new CMessageBasicPacket(this, this, PItem->getID(), 0, MSGBASIC_ITEM_FAILS_TO_ACTIVATE));
+
+        return;
+    }
+
     // TODO: I'm sure this is supposed to be in the action packet... (animation, message)
     if (PItem->getAoE())
     {
@@ -2279,9 +2302,9 @@ CBattleEntity* CCharEntity::IsValidTarget(uint16 targid, uint16 validTargetFlags
         if (PTarget->objtype == TYPE_PC && charutils::IsAidBlocked(this, static_cast<CCharEntity*>(PTarget)))
         {
             // Target is blocking assistance
-            errMsg = std::make_unique<CMessageSystemPacket>(0, 0, 225);
+            errMsg = std::make_unique<CMessageSystemPacket>(0, 0, MsgStd::TargetIsCurrentlyBlocking);
             // Interaction was blocked
-            static_cast<CCharEntity*>(PTarget)->pushPacket(new CMessageSystemPacket(0, 0, 226));
+            static_cast<CCharEntity*>(PTarget)->pushPacket(new CMessageSystemPacket(0, 0, MsgStd::BlockedByBlockaid));
         }
         else if (IsMobOwner(PTarget))
         {
@@ -2909,7 +2932,7 @@ void CCharEntity::skipEvent()
     TracyZoneScoped;
     if (!m_Locked && !isInEvent() && (!currentEvent->cutsceneOptions.empty() || currentEvent->interruptText != 0))
     {
-        pushPacket(new CMessageSystemPacket(0, 0, 117));
+        pushPacket(new CMessageSystemPacket(0, 0, MsgStd::EventSkipped));
         pushPacket(new CReleasePacket(this, RELEASE_TYPE::SKIPPING));
         m_Substate = CHAR_SUBSTATE::SUBSTATE_NONE;
 

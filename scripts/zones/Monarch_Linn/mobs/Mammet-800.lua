@@ -50,7 +50,7 @@ entity.onMobFight = function(mob, target)
     end
 end
 
-entity.onMobEngaged = function(mob, target)
+entity.onMobEngage = function(mob, target)
     -- This is actually called each time a mob engages from a passive stance - ensure to trigger spawn behavior once and only once
     local mobID = mob:getID()
     for _, v in pairs(ID.mob.MAMMET_800) do

@@ -9,13 +9,12 @@ mobskillObject.onMobSkillCheck = function(target, mob, skill)
 end
 
 mobskillObject.onMobWeaponSkill = function(target, mob, skill)
-    local typeEffect = xi.effect.DEFENSE_BOOST
-    local power      = 100
+    local power = 100
     if mob:getZone():getTypeMask() == xi.zoneType.DYNAMIS then
         power = 200
     end
-    skill:setMsg(xi.mobskills.mobBuffMove(mob, typeEffect, power, 0, 60))
-    return typeEffect
+    skill:setMsg(xi.mobskills.mobBuffMove(mob, xi.effect.DEFENSE_BOOST, power, 0, 60))
+    return xi.effect.DEFENSE_BOOST
 end
 
 return mobskillObject

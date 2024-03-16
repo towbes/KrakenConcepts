@@ -18,15 +18,15 @@ spellObject.onSpellCast = function(caster, target, spell)
         duration = (duration-remaining)
         debuff:setDuration(duration * 1000) -- back to milliseconds
         target:addStatusEffectEx(xi.effect.NINJUTSU_ELE_DEBUFF, 0, power, 0, duration, 0, xi.mod.WIND_MEVA, 0)
-        -- caster:PrintToPlayer(string.format('Duration: %s', duration), xi.msg.channel.SYSTEM_3)
-        -- caster:PrintToPlayer(string.format('Power: %s', power), xi.msg.channel.SYSTEM_3)
+        -- caster:printToPlayer(string.format('Duration: %s', duration), xi.msg.channel.SYSTEM_3)
+        -- caster:printToPlayer(string.format('Power: %s', power), xi.msg.channel.SYSTEM_3)
     else
         if debuff ~= nil and debuff:getSubPower() ~= xi.mod.WIND_MEVA then
             target:delStatusEffect(xi.effect.NINJUTSU_ELE_DEBUFF)
         end
         target:addStatusEffectEx(xi.effect.NINJUTSU_ELE_DEBUFF, 0, 15, 0, 60, 0, xi.mod.WIND_MEVA, 0)
-        -- caster:PrintToPlayer(string.format('Duration: %s', duration), xi.msg.channel.SYSTEM_3)
-        -- caster:PrintToPlayer(string.format('Power: %s', power), xi.msg.channel.SYSTEM_3)
+        -- caster:printToPlayer(string.format('Duration: %s', duration), xi.msg.channel.SYSTEM_3)
+        -- caster:printToPlayer(string.format('Power: %s', power), xi.msg.channel.SYSTEM_3)
     end
 
     return xi.spells.damage.useDamageSpell(caster, target, spell)

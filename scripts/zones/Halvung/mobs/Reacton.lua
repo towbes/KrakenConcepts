@@ -75,7 +75,7 @@ entity.onMobSpawn = function(mob)
     mob:setSpellList(0)
 end
 
-entity.onMobEngaged = function(mob, target)
+entity.onMobEngage = function(mob, target)
     -- starting the phase change timer
     mob:setLocalVar('nextChange', os.time() + 45)
 end

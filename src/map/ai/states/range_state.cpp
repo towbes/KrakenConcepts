@@ -126,6 +126,8 @@ bool CRangeState::Update(time_point tick)
             {
                 PChar->pushPacket(m_errorMsg.release());
             }
+            // reset aim time so interrupted players only have to wait the correct 2.7s until next shot
+            m_aimTime = std::chrono::seconds(0);
             m_PEntity->loc.zone->PushPacket(m_PEntity, CHAR_INRANGE_SELF, new CActionPacket(action));
         }
         else
@@ -138,7 +140,16 @@ bool CRangeState::Update(time_point tick)
         Complete();
     }
 
-    return IsCompleted() && tick > GetEntryTime() + m_aimTime + 1.5s;
+    if (IsCompleted() && tick > GetEntryTime() + m_aimTime + m_returnWeaponDelay)
+    {
+        if (auto* PChar = dynamic_cast<CCharEntity*>(m_PEntity))
+        {
+            PChar->m_LastRangedAttackTime = GetEntryTime() + m_aimTime + m_returnWeaponDelay;
+        }
+        return true;
+    }
+
+    return false;
 }
 
 void CRangeState::Cleanup(time_point tick)
@@ -206,6 +217,16 @@ bool CRangeState::CanUseRangedAttack(CBattleEntity* PTarget, bool isEndOfAttack)
     {
         m_errorMsg = std::make_unique<CMessageBasicPacket>(m_PEntity, PTarget, 0, 0, MSGBASIC_CANNOT_PERFORM_ACTION);
         return false;
+    }
+
+    // make sure player is waiting the appropriate time between ranged attacks
+    if (auto PChar = dynamic_cast<CCharEntity*>(m_PEntity))
+    {
+        if (m_PEntity->PAI->getTick() - PChar->m_LastRangedAttackTime < m_freePhaseTime)
+        {
+            m_errorMsg = std::make_unique<CMessageBasicPacket>(m_PEntity, PTarget, 0, 0, MSGBASIC_WAIT_LONGER);
+            return false;
+        }
     }
 
     uint8 anim = m_PEntity->animation;

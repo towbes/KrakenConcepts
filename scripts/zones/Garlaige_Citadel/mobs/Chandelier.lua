@@ -13,7 +13,7 @@ entity.onMobSpawn = function(mob)
     mob:addMod(xi.mod.ATT, 175)
 end
 
-entity.onMobEngaged = function(mob, target)
+entity.onMobEngage = function(mob, target)
     local ce = mob:getCE(target)
     local ve = mob:getVE(target)
     if ce == 0 and ve == 0 then

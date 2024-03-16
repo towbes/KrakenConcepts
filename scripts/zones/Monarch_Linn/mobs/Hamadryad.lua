@@ -36,7 +36,7 @@ entity.onMobSpawn = function(mob)
     end)
 end
 
-entity.onMobEngaged = function(mob)
+entity.onMobEngage = function(mob)
     mob:setLocalVar('spikesTimer', os.time() + math.random(10, 60))
     mob:setLocalVar('enfireTimer', os.time() + math.random(10, 60))
 end

@@ -9,10 +9,7 @@
 local mobskillObject = {}
 
 mobskillObject.onMobSkillCheck = function(target, mob, skill)
-    if 
-        mob:isMobType(xi.mobskills.mobType.NOTORIOUS) or 
-        mob:isMobType(xi.mobskills.mobType.BATTLEFIELD)
-    then
+    if mob:isMobType(xi.mobType.NOTORIOUS) then
         return 0
     end
 

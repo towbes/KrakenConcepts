@@ -10,7 +10,7 @@ mixins =
 -----------------------------------
 local entity = {}
 
-entity.onMobEngaged = function(mob)
+entity.onMobEngage = function(mob)
     mob:setLocalVar('timer', os.time() + math.random(20, 90))
 end
 

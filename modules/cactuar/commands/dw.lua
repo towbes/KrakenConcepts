@@ -12,14 +12,14 @@ commandObj.cmdprops =
 };
 
 local function error(player, msg)
-    player:PrintToPlayer(msg);
-    player:PrintToPlayer('!dw');
+    player:printToPlayer(msg);
+    player:printToPlayer('!dw');
 end;
 
 commandObj.onTrigger = function(player)
 
 	--if player:isCustomizationEnabled(2) == false then
-	--	player:PrintToPlayer("Global dual wield is not enabled on this server.")
+	--	player:printToPlayer("Global dual wield is not enabled on this server.")
 	--	return
 	--end
 	

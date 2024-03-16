@@ -138,7 +138,7 @@ entity.onMobFight = function(mob, target)
     end
 end
 
-entity.onMobEngaged = function(mob, target)
+entity.onMobEngage = function(mob, target)
     mob:setTP(0)
     mob:setLocalVar('next2hrtime', os.time() + 5) -- 5s after aggro
 end

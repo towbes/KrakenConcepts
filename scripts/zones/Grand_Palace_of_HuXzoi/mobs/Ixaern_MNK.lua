@@ -78,7 +78,7 @@ entity.onMobFight = function(mob, target)
     end
 end
 
-entity.onMobEngaged = function(mob, target)
+entity.onMobEngage = function(mob, target)
     for i = 1, 2 do -- pets reaggro if attacked from completely idle
         local minion = GetMobByID(mob:getID() + i)
         minion:updateEnmity(target)

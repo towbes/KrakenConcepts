@@ -95,7 +95,7 @@ entity.onMobRoam = function(mob)
     end
 end
 
-entity.onMobEngaged = function(mob, target)
+entity.onMobEngage = function(mob, target)
     mob:setLocalVar('HowlTime', os.time() + math.random(60,180)) -- 60 180
 end
 

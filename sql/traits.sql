@@ -27,7 +27,7 @@ CREATE TABLE `traits` (
   `content_tag` varchar(7) DEFAULT NULL,
   `meritid` smallint(5) NOT NULL DEFAULT 0,
   PRIMARY KEY (`traitid`,`job`,`level`,`rank`,`modifier`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4;
+) ENGINE=Aria TRANSACTIONAL=0 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -797,6 +797,15 @@ INSERT INTO `traits` VALUES (55,'resist curse',0,0,1,248,2,NULL,0);
 INSERT INTO `traits` VALUES (56,'resist stun',0,0,1,251,2,NULL,0);
 INSERT INTO `traits` VALUES (60,'resist charm',0,0,1,252,2,NULL,0);
 
+
+INSERT INTO `traits` VALUES (137,'tandem strike',9,30,1,271,10,'ROV',0);
+INSERT INTO `traits` VALUES (137,'tandem strike',9,45,2,271,20,'ROV',0);
+INSERT INTO `traits` VALUES (137,'tandem strike',9,60,3,271,30,'ROV',0);
+INSERT INTO `traits` VALUES (137,'tandem strike',9,75,4,271,40,'ROV',0);
+INSERT INTO `traits` VALUES (137,'tandem strike',9,90,5,271,50,'ROV',0);
+INSERT INTO `traits` VALUES (138,'tandem blow',9,40,1,272,5,'ROV',0);
+INSERT INTO `traits` VALUES (138,'tandem blow',9,60,2,272,10,'ROV',0);
+INSERT INTO `traits` VALUES (138,'tandem blow',9,80,3,272,15,'ROV',0);
 
 /*!40000 ALTER TABLE `traits` ENABLE KEYS */;
 UNLOCK TABLES;

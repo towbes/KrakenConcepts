@@ -20,7 +20,7 @@ entity.onMobSpawn = function(mob)
     mob:setMod(xi.mod.GRAVITYRES, 70)
 end
 
-entity.onMobEngaged = function(mob, target)
+entity.onMobEngage = function(mob, target)
     mob:setLocalVar('nextEnSkill', os.time() + 10)
 end
 

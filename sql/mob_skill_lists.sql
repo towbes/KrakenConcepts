@@ -15,7 +15,7 @@ CREATE TABLE IF NOT EXISTS `mob_skill_lists` (
   `skill_list_id` smallint(5) unsigned NOT NULL,
   `mob_skill_id` smallint(3) unsigned NOT NULL,
   PRIMARY KEY (`skill_list_id`,`mob_skill_id`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4;
+) ENGINE=Aria TRANSACTIONAL=0 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Contenu de la table `mob_skill_lists`
@@ -3460,7 +3460,10 @@ INSERT INTO `mob_skill_lists` VALUES ('TRUST_Trion',1020,42);   -- Savage Blade
 INSERT INTO `mob_skill_lists` VALUES ('TRUST_Trion',1020,3193); -- Royal Bash
 INSERT INTO `mob_skill_lists` VALUES ('TRUST_Trion',1020,3194); -- Royal Saviour
 -- INSERT INTO `mob_skill_lists` VALUES ('TRUST_Zeid',1021,0);
--- INSERT INTO `mob_skill_lists` VALUES ('TRUST_Lion',1022,0);
+INSERT INTO `mob_skill_lists` VALUES ('TRUST_Lion',1022,3198); -- Grapeshot
+INSERT INTO `mob_skill_lists` VALUES ('TRUST_Lion',1022,3199); -- Pirate Pummel
+INSERT INTO `mob_skill_lists` VALUES ('TRUST_Lion',1022,3200); -- Powder Keg
+INSERT INTO `mob_skill_lists` VALUES ('TRUST_Lion',1022,3201); -- Walk the Plank
 INSERT INTO `mob_skill_lists` VALUES ('TRUST_Tenzen',1023,1390); -- Amatsu: Torimai
 INSERT INTO `mob_skill_lists` VALUES ('TRUST_Tenzen',1023,1391); -- Amatsu: Kazakiri
 INSERT INTO `mob_skill_lists` VALUES ('TRUST_Tenzen',1023,1392); -- Amatsu: Yukiarashi
@@ -3508,7 +3511,7 @@ INSERT INTO `mob_skill_lists` VALUES ('TRUST_Lehko_Habhoka',1037,3230); -- Inspi
 INSERT INTO `mob_skill_lists` VALUES ('TRUST_Lehko_Habhoka',1037,3231); -- Debonair Rush
 INSERT INTO `mob_skill_lists` VALUES ('TRUST_Lehko_Habhoka',1037,3232); -- Iridal Pierce
 INSERT INTO `mob_skill_lists` VALUES ('TRUST_Lehko_Habhoka',1037,3233); -- Lunar Revolution
--- INSERT INTO `mob_skill_lists` VALUES ('TRUST_Nashmeira',1038,0);
+INSERT INTO `mob_skill_lists` VALUES ('TRUST_Nashmeira',1038,3243); -- Imperial Authority
 -- INSERT INTO `mob_skill_lists` VALUES ('TRUST_Zazarg',1039,0);
 -- INSERT INTO `mob_skill_lists` VALUES ('TRUST_Ovjang',1040,0);
 -- INSERT INTO `mob_skill_lists` VALUES ('TRUST_Mnejing',1041,0);
@@ -3625,10 +3628,15 @@ INSERT INTO `mob_skill_lists` VALUES ('TRUST_AAGK',1111,3726); -- Tachi: Fudo
 -- INSERT INTO `mob_skill_lists` VALUES ('TRUST_Maat_UC',1121,0);
 -- INSERT INTO `mob_skill_lists` VALUES ('TRUST_Aldo_UC',1122,0);
 -- INSERT INTO `mob_skill_lists` VALUES ('TRUST_Naja_Salaheem_UC',1123,0);
--- INSERT INTO `mob_skill_lists` VALUES ('TRUST_Lion_II',1124,0);
-INSERT INTO `mob_skill_lists` VALUES ('TRUST_Zied_II',1125,56); -- Ground Strike
--- INSERT INTO `mob_skill_lists` VALUES ('TRUST_Prishe_II',1126,0);
--- INSERT INTO `mob_skill_lists` VALUES ('TRUST_Nashmeira_II',1127,0);
+INSERT INTO `mob_skill_lists` VALUES ('TRUST_Lion_II',1124,3491); -- Grapeshot
+INSERT INTO `mob_skill_lists` VALUES ('TRUST_Lion_II',1124,3492); -- Pirate Pummel
+INSERT INTO `mob_skill_lists` VALUES ('TRUST_Lion_II',1124,3493); -- Powder Keg
+INSERT INTO `mob_skill_lists` VALUES ('TRUST_Lion_II',1124,3494); -- Walk the Plank
+INSERT INTO `mob_skill_lists` VALUES ('TRUST_Zeid_II',1125,56); -- Ground Strike
+INSERT INTO `mob_skill_lists` VALUES ('TRUST_Prishe_II',1126,3234); -- Nullifying Dropkick
+INSERT INTO `mob_skill_lists` VALUES ('TRUST_Prishe_II',1126,3235); -- Auroral Uppercut
+INSERT INTO `mob_skill_lists` VALUES ('TRUST_Prishe_II',1126,3236); -- Knuckle Sandwich
+INSERT INTO `mob_skill_lists` VALUES ('TRUST_Nashmeira_II',1127,3243); -- Imperial Authority
 -- INSERT INTO `mob_skill_lists` VALUES ('TRUST_Lilisette_II',1128,0);
 -- INSERT INTO `mob_skill_lists` VALUES ('TRUST_Tenzen_II',1129,0);
 -- INSERT INTO `mob_skill_lists` VALUES ('TRUST_Mumor_II',1130,0);
@@ -3861,7 +3869,13 @@ INSERT INTO `mob_skill_lists` VALUES ('Flockbock',2000,269); -- petribreath
 
 INSERT INTO `mob_skill_lists` VALUES ('Zmey_Gorynych',2001,380); -- scythe_tail
 
--- Next available ID: 2002
+INSERT INTO `mob_skill_lists` VALUES ('Copper_Borer',2002,1817); -- thermal_pulse
+
+INSERT INTO `mob_skill_lists` VALUES ('Atkorkamuy',2003,463); -- whirlwind
+
+INSERT INTO `mob_skill_lists` VALUES ('Gharial',2004,2101); -- demoralizing_roar
+
+-- Next available ID: 2005
 
 INSERT INTO `mob_skill_lists` VALUES('Automaton_EmptyHanded', 2027, 1943); -- Slapstick
 INSERT INTO `mob_skill_lists` VALUES('Automaton_EmptyHanded', 2027, 2067); -- Knockout

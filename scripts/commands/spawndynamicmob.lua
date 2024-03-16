@@ -12,8 +12,8 @@ commandObj.cmdprops =
 }
 
 commandObj.error = function(player, msg)
-    player:PrintToPlayer(msg)
-    player:PrintToPlayer('!spawndynamicmob <Mob\'s Group ID> <Mob\'s Zone ID> <Number of Mobs> <Name for the Mob> {dropsEnabled (0 == False, 1 == True)}')
+    player:printToPlayer(msg)
+    player:printToPlayer('!spawndynamicmob <Mob\'s Group ID> <Mob\'s Zone ID> <Number of Mobs> <Name for the Mob> {dropsEnabled (0 == False, 1 == True)}')
 end
 
 commandObj.onTrigger = function(player, mobGroupID, mobZoneID, numberOfMob, mobName, dropsEnabled)
@@ -65,7 +65,7 @@ commandObj.onTrigger = function(player, mobGroupID, mobZoneID, numberOfMob, mobN
 
         mob:spawn()
 
-        player:PrintToPlayer('Spawning: '.. mobName ..', Mob ID: '.. mob:getID() ..', Mob Main Level: '.. mob:getMainLvl())
+        player:printToPlayer('Spawning: '.. mobName ..', Mob ID: '.. mob:getID() ..', Mob Main Level: '.. mob:getMainLvl())
         i = i + 1
     end
 end

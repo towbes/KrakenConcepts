@@ -87,7 +87,7 @@ entity.onMobSpawn = function(mob)
     mob:setMod(xi.move.MOVE_SPEED_STACKABLE, 50)
 end
 
-entity.onMobEngaged = function(mob, target)
+entity.onMobEngage = function(mob, target)
     mob:setLocalVar('changeTime', 0)
 end
 

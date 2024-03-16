@@ -15,8 +15,8 @@ local weaponskillObject = {}
 
 weaponskillObject.onUseWeaponSkill = function(player, target, wsID, tp, primary, action, taChar)
     local params = {}
-    params.ftp100 = 1 params.ftp200 = 2.5 params.ftp300 = 3
-    params.str_wsc = 0.3 params.dex_wsc = 0.0 params.vit_wsc = 0.0 params.agi_wsc = 0.0 params.int_wsc = 0.0 params.mnd_wsc = 0.3 params.chr_wsc = 0.0
+    params.ftpMod = { 1.0, 2.5, 3.0 }
+    params.str_wsc = 0.3 params.mnd_wsc = 0.3
     params.ele = xi.element.LIGHT
     params.skill = xi.skill.SWORD
     params.includemab = true
@@ -24,8 +24,11 @@ weaponskillObject.onUseWeaponSkill = function(player, target, wsID, tp, primary,
     params.useStatCoefficient = false
 
     if xi.settings.main.USE_ADOULIN_WEAPON_SKILL_CHANGES then
-        params.ftp100 = 1.25 params.ftp200 = 2.65 params.ftp300 = 4.21
-        params.str_wsc = 0.4 params.mnd_wsc = 0.6
+        params.ftpMod = { 1.25, 2.62, 4.21 }
+        -- params.ftpMod = { 1.125, 2.625, 4.125 }
+        params.str_wsc = 0.4
+        params.mnd_wsc = 0.6
+        -- params.mnd_wsc = 0.4
     end
 
     local damage, criticalHit, tpHits, extraHits = xi.weaponskills.doMagicWeaponskill(player, target, wsID, params, tp, action, primary)

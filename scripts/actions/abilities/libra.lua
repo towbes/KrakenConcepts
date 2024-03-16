@@ -41,7 +41,7 @@ end
 function printLines(player,ln)
 	local lncounter = 1
 	while ln[lncounter] ~= nil and ln[lncounter] ~= 'empty' do
-		player:PrintToPlayer(ln[lncounter],13)
+		player:printToPlayer(ln[lncounter],13)
 		lncounter = lncounter + 1
 	end
 end

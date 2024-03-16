@@ -161,8 +161,36 @@ CZone::CZone(ZONEID ZoneID, REGION_TYPE RegionID, CONTINENT_TYPE ContinentID, ui
 CZone::~CZone()
 {
     destroy(m_TreasurePool);
-    destroy(m_CampaignHandler);
     destroy(m_zoneEntities);
+    destroy(m_BattlefieldHandler);
+
+    if (m_CampaignHandler)
+    {
+        destroy(m_CampaignHandler);
+    }
+
+    if (m_navMesh)
+    {
+        destroy(m_navMesh);
+    }
+
+    if (lineOfSight)
+    {
+        destroy(lineOfSight);
+    }
+
+    // Manually delete and clear m_triggerAreaList
+    for (auto triggerArea : m_triggerAreaList)
+    {
+        destroy(triggerArea);
+    }
+    m_triggerAreaList.clear();
+
+    for (auto zoneLine : m_zoneLineList)
+    {
+        destroy(zoneLine);
+    }
+    m_zoneLineList.clear();
 }
 
 ZONEID CZone::GetID()
@@ -215,7 +243,7 @@ uint32 CZone::GetWeatherChangeTime() const
     return m_WeatherChangeTime;
 }
 
-const std::string& CZone::GetName()
+const std::string& CZone::getName()
 {
     return m_zoneName;
 }
@@ -284,7 +312,7 @@ QueryByNameResult_t const& CZone::queryEntitiesByName(std::string const& pattern
     // clang-format off
     ForEachNpc([&](CNpcEntity* PNpc)
     {
-        if (matches(PNpc->GetName(), pattern))
+        if (matches(PNpc->getName(), pattern))
         {
             entities.emplace_back(PNpc);
         }
@@ -292,7 +320,7 @@ QueryByNameResult_t const& CZone::queryEntitiesByName(std::string const& pattern
 
     ForEachMob([&](CMobEntity* PMob)
     {
-        if (matches(PMob->GetName(), pattern))
+        if (matches(PMob->getName(), pattern))
         {
             entities.emplace_back(PMob);
         }
@@ -450,9 +478,9 @@ void CZone::LoadZoneSettings()
         {
             m_TreasurePool = new CTreasurePool(TREASUREPOOL_ZONE);
         }
-        if (m_CampaignHandler->m_PZone == nullptr)
+        if (m_CampaignHandler && m_CampaignHandler->m_PZone == nullptr)
         {
-            m_CampaignHandler = nullptr;
+            destroy(m_CampaignHandler);
         }
     }
     else
@@ -471,7 +499,7 @@ void CZone::LoadNavMesh()
 
     char file[255];
     memset(file, 0, sizeof(file));
-    snprintf(file, sizeof(file), "navmeshes/%s.nav", GetName().c_str());
+    snprintf(file, sizeof(file), "navmeshes/%s.nav", getName().c_str());
 
     if (!m_navMesh->load(file))
     {
@@ -494,7 +522,7 @@ void CZone::LoadZoneLos()
         destroy(lineOfSight);
     }
 
-    lineOfSight = ZoneLos::Load((uint16)GetID(), fmt::sprintf("losmeshes/%s.obj", GetName()));
+    lineOfSight = ZoneLos::Load((uint16)GetID(), fmt::sprintf("losmeshes/%s.obj", getName()));
 }
 
 /************************************************************************

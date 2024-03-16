@@ -90,7 +90,7 @@ std::array<std::array<uint16, MAX_SKILLCHAIN_COUNT + 1>, MAX_SKILLCHAIN_LEVEL + 
 
 std::array<CWeaponSkill*, MAX_WEAPONSKILL_ID> g_PWeaponSkillList; // Holds all Weapon skills
 std::array<CMobSkill*, MAX_MOBSKILL_ID>       g_PMobSkillList;    // List of mob skills
-std::unordered_map<uint8, CPetSkill*>         g_PPetSkillList;    // List of pet skills
+std::unordered_map<uint32, CPetSkill*>        g_PPetSkillList;    // List of pet skills
 
 std::array<std::list<CWeaponSkill*>, MAX_SKILLTYPE> g_PWeaponSkillsList;
 std::unordered_map<uint16, std::vector<uint16>>     g_PMobSkillLists; // List of mob skills defined from mob_skill_lists.sql
@@ -99,7 +99,7 @@ namespace battleutils
 {
 
     const float worldAngleMinDistance = 0.5f;
-    const uint8 worldAngleMaxDeviance = 4;
+    const uint8 worldAngleMaxDeviance = 8;
 
     void LoadSkillTable()
     {
@@ -844,7 +844,7 @@ namespace battleutils
             Action->reaction     = REACTION::HIT;
             Action->spikesEffect = SUBEFFECT_COUNTER;
 
-            if (battleutils::IsAbsorbByShadow(PAttacker)) // Struck a shadow
+            if (battleutils::IsAbsorbByShadow(PAttacker, PDefender)) // Struck a shadow
             {
                 Action->spikesMessage = 535;
             }
@@ -872,7 +872,6 @@ namespace battleutils
                 uint16 bonus       = dmg * (PDefender->getMod(Mod::RETALIATION) / 100);
                 dmg                = dmg + bonus;
 
-                // FINISH HIM! dun dun dun
                 // TP and stoneskin are handled inside TakePhysicalDamage
                 Action->spikesMessage = 536;
                 Action->spikesParam =
@@ -963,6 +962,7 @@ namespace battleutils
                                         PEffect->SetSubPower(remainingDrain - abs(damage));
                                     }
                                 }
+
                                 if (spikesDamage > 0) // do not add HP if spikes damage was absorbed.
                                 {
                                     Action->spikesMessage = MSGBASIC_SPIKES_EFFECT_HP_DRAIN;
@@ -978,7 +978,6 @@ namespace battleutils
                         {
                             PAttacker->takeDamage(spikesDamage, PDefender, ATTACK_TYPE::MAGICAL, DAMAGE_TYPE::LIGHT);
                         }
-
                         else
                         {
                             // only works on shield blocks
@@ -1095,12 +1094,19 @@ namespace battleutils
 
         if (xirand::GetRandomNumber(100) < chance + lvlDiff)
         {
-            // spikes landed
             if (spikesType == SUBEFFECT_CURSE_SPIKES)
             {
-                Action->spikesMessage = MSGBASIC_SPIKES_ARMOR_SUBEFFECT;
+                Action->spikesMessage = MSGBASIC_STATUS_SPIKES;
                 Action->spikesParam   = EFFECT_CURSE;
             }
+            /* Todo: wire this up fully.
+            else if (spikesType == SUBEFFECT_DEATH_SPIKES)
+            {
+                Action->spikesMessage = MSGBASIC_STATUS_SPIKES;
+                Action->spikesParam   = EFFECT_KO;
+                PDefender->setHP(0);
+            }
+            */
             else
             {
                 auto ratio = std::clamp<uint8>(damage / 4, 1, 255);
@@ -1113,8 +1119,7 @@ namespace battleutils
                     spikesDamage = HandleOneForAll(PAttacker, spikesDamage);
                     spikesDamage = HandleStoneskin(PAttacker, spikesDamage);
                 }
-
-                if (spikesDamage < 0) // fit healed spikes into uint16
+                else if (spikesDamage < 0) // fit healed spikes into uint16
                 {
                     Action->spikesParam = static_cast<uint16>(std::clamp(spikesDamage * -1, 0, PAttacker->GetMaxHP() - PAttacker->health.hp));
                 }
@@ -1135,6 +1140,14 @@ namespace battleutils
             HandleSpikesStatusEffect(PAttacker, PDefender, Action);
 
             return true;
+        }
+        else
+        {
+            // Technically, these should be the default values and then conditional branches change them
+            // However, it wasn't worth the effort when the whole thing is going to be eventually burned down to make way for fully scripted spikes
+            Action->spikesEffect  = SUBEFFECT_NONE;
+            Action->spikesParam   = 0;
+            Action->spikesMessage = 0;
         }
 
         return false;
@@ -2331,12 +2344,23 @@ namespace battleutils
                     {
                         ((CPetEntity*)PDefender)
                             ->loc.zone->UpdateEntityPacket(PDefender, ENTITY_UPDATE, UPDATE_COMBAT);
-                    }
 
+                        if (PAttacker->objtype == TYPE_MOB)
+                        {
+                            // charmed mob should lose enmity from normal attacks
+                            ((CMobEntity*)PAttacker)->PEnmityContainer->UpdateEnmityFromAttack(PDefender, damage);
+                        }
+                    }
                     break;
 
                 case TYPE_PET:
                     ((CPetEntity*)PDefender)->loc.zone->UpdateEntityPacket(PDefender, ENTITY_UPDATE, UPDATE_COMBAT);
+
+                    if (PAttacker->objtype == TYPE_MOB)
+                    {
+                        // pets should lose enmity from normal attacks
+                        ((CMobEntity*)PAttacker)->PEnmityContainer->UpdateEnmityFromAttack(PDefender, damage);
+                    }
                     break;
                 case TYPE_PC:
                     if (PAttacker->objtype == TYPE_MOB)
@@ -2907,44 +2931,38 @@ namespace battleutils
         int32 attackerDex = PAttacker->DEX();
         int32 defenderAgi = PDefender->AGI();
         int32 dDex        = attackerDex - defenderAgi;
-        int32 dDexAbs     = std::abs(dDex);
-        int32 sign        = 1;
-
-        if (dDex < 0)
-        {
-            // Target has higher AGI so this will be a decrease to crit rate
-            sign = -1;
-        }
+        // only care for values between 0 and 50
+        int32 dDexClamp = std::clamp(dDex, 0, 50);
 
         // Default to +0 crit rate for a delta of 0-6
         int32 critRate = 0;
-        if (dDexAbs > 39)
+        if (dDexClamp > 39)
         {
             // 40-50: (dDEX-35)
-            critRate = dDexAbs - 35;
+            critRate = dDexClamp - 35;
         }
-        else if (dDexAbs > 29)
+        else if (dDexClamp > 29)
         {
             // 30-39: +4
             critRate = 4;
         }
-        else if (dDexAbs > 19)
+        else if (dDexClamp > 19)
         {
             // 20-29: +3
             critRate = 3;
         }
-        else if (dDexAbs > 13)
+        else if (dDexClamp > 13)
         {
             // 14-19: +2
             critRate = 2;
         }
-        else if (dDexAbs > 6)
+        else if (dDexClamp > 6)
         {
             critRate = 1;
         }
 
         // Crit rate delta from stats caps at +-15
-        return std::min(critRate, 15) * sign;
+        return std::min(critRate, 15);
     }
 
     /************************************************************************
@@ -2994,20 +3012,13 @@ namespace battleutils
         int32 defenderAgi = PDefender->AGI();
         int32 dAGI        = attackerAgi - defenderAgi;
         int32 dAgiAbs     = std::abs(dAGI);
-        int32 sign        = 1;
-
-        if (dAGI < 0)
-        {
-            // Target has higher AGI so this will be a decrease to crit rate
-            sign = -1;
-        }
 
         // Default to +0 crit rate
         int32 critRate = 0;
 
         critRate = dAgiAbs / 10;
 
-        return std::min(critRate, 15) * sign;
+        return std::min(critRate, 15);
     }
 
     /************************************************************************
@@ -3619,7 +3630,7 @@ namespace battleutils
      *                                                                       *
      ************************************************************************/
 
-    bool IsAbsorbByShadow(CBattleEntity* PDefender)
+    bool IsAbsorbByShadow(CBattleEntity* PDefender, CBattleEntity* PAttacker)
     {
         // utsus always overwrites blink, so if utsus>0 then we know theres no blink.
         uint16 Shadow    = PDefender->getMod(Mod::UTSUSEMI);
@@ -3670,6 +3681,11 @@ namespace battleutils
                             case 2:
                                 icon = EFFECT_COPY_IMAGE_2;
                                 break;
+                        }
+                        // player loses 25 CE if attack absorbed by utsusemi shadow
+                        if (auto* PMob = dynamic_cast<CMobEntity*>(PAttacker))
+                        {
+                            PMob->PEnmityContainer->UpdateEnmity(PDefender, -25, 0);
                         }
                         PStatusEffect->SetIcon(icon);
                         PDefender->StatusEffectContainer->UpdateStatusIcons();
@@ -4574,7 +4590,7 @@ namespace battleutils
      *                                                                       *
      ************************************************************************/
 
-    void GenerateCureEnmity(CBattleEntity* PSource, CBattleEntity* PTarget, int32 amount)
+    void GenerateCureEnmity(CBattleEntity* PSource, CBattleEntity* PTarget, int32 amount, int32 fixedCE, int32 fixedVE)
     {
         if (!PSource || !PTarget)
         {
@@ -4588,7 +4604,7 @@ namespace battleutils
             {
                 if (PCurrentMob->m_HiPCLvl > 0 && PCurrentMob->PEnmityContainer->HasID(PTarget->id))
                 {
-                    PCurrentMob->PEnmityContainer->UpdateEnmityFromCure(PSource, PTarget->GetMLevel(), amount, (amount == 65535)); // true for "cure v"
+                    PCurrentMob->PEnmityContainer->UpdateEnmityFromCure(PSource, PTarget->GetMLevel(), amount, fixedCE, fixedVE);
                 }
             }
         }
@@ -4910,7 +4926,7 @@ namespace battleutils
             if (xirand::GetRandomNumber(100) < hitrate)
             {
                 // attack hit, try to be absorbed by shadow
-                if (!battleutils::IsAbsorbByShadow(PVictim))
+                if (!battleutils::IsAbsorbByShadow(PVictim, PAttacker))
                 {
                     // successful hit, add damage
                     float AttMultiplerPercent = 0.f;
@@ -5466,15 +5482,20 @@ namespace battleutils
         resist = std::clamp(resist, 0.5f, 1.5f); // assuming if its floored at .5f its capped at 1.5f but who's stacking +dmgtaken equip anyway???
         damage = (int32)(damage * resist);
 
-        if (xirand::GetRandomNumber(100) < PDefender->getMod(Mod::ABSORB_DMG_CHANCE))
+        // TODO: Breaths can have elements. Where are those handled for absorption and nullification.
+
+        // Handle damage absorption.
+        if (xirand::GetRandomNumber(100) < PDefender->getMod(Mod::ABSORB_DMG_CHANCE)) // All damage.
         {
             damage = -damage;
         }
-        else if (xirand::GetRandomNumber(100) < PDefender->getMod(Mod::SEVERE_BREATH_DMG_NULL) && damage >= PDefender->health.hp)
+        // Handle damage nullification.
+        else if (xirand::GetRandomNumber(100) < PDefender->getMod(Mod::NULL_DAMAGE) || // All damage.
+            xirand::GetRandomNumber(100) < PDefender->getMod(Mod::NULL_BREATH_DAMAGE)) // Breath damage.
         {
-            damage = PDefender->health.hp - 1;
+            damage = 0;
         }
-        if (xirand::GetRandomNumber(100) < PDefender->getMod(Mod::SEVERE_BREATH_DMG_NULL) && damage >= PDefender->health.hp)
+        else if (xirand::GetRandomNumber(100) < PDefender->getMod(Mod::SEVERE_BREATH_DMG_NULL) && damage >= PDefender->health.hp)
         {
             damage = PDefender->health.hp - 1;
         }
@@ -5486,6 +5507,7 @@ namespace battleutils
         return damage;
     }
 
+    // TODO: Study using lua functions.
     int32 MagicDmgTaken(CBattleEntity* PDefender, int32 damage, ELEMENT element)
     {
         Mod absorb[8]    = { Mod::FIRE_ABSORB, Mod::ICE_ABSORB, Mod::WIND_ABSORB, Mod::EARTH_ABSORB,
@@ -5517,14 +5539,18 @@ namespace battleutils
             damage = HandleSteamJacket(PDefender, damage, damageType);
         }
 
-        if (xirand::GetRandomNumber(100) < PDefender->getMod(Mod::ABSORB_DMG_CHANCE) ||
-            (element && xirand::GetRandomNumber(100) < PDefender->getMod(absorb[element - 1])) ||
-            xirand::GetRandomNumber(100) < PDefender->getMod(Mod::MAGIC_ABSORB))
+        // Handle damage absorption.
+        if (xirand::GetRandomNumber(100) < PDefender->getMod(Mod::ABSORB_DMG_CHANCE) ||         // All damage.
+            xirand::GetRandomNumber(100) < PDefender->getMod(Mod::MAGIC_ABSORB) ||              // Magical damage
+            (element && xirand::GetRandomNumber(100) < PDefender->getMod(absorb[element - 1]))) // Elemental damage.
         {
             damage = -damage;
         }
-        else if ((element && xirand::GetRandomNumber(100) < PDefender->getMod(nullarray[element - 1])) ||
-                 xirand::GetRandomNumber(100) < PDefender->getMod(Mod::MAGIC_NULL))
+
+        // Handle damage nullification.
+        else if (xirand::GetRandomNumber(100) < PDefender->getMod(Mod::NULL_DAMAGE) ||                  // All damage.
+                 xirand::GetRandomNumber(100) < PDefender->getMod(Mod::NULL_MAGICAL_DAMAGE) ||          // Magical damage
+                 (element && xirand::GetRandomNumber(100) < PDefender->getMod(nullarray[element - 1]))) // Elemental damage.
         {
             damage = 0;
         }
@@ -5561,11 +5587,16 @@ namespace battleutils
             damage -= (int32)(damage / float(PDefender->GetMaxHP()) * (PDefender->getMod(Mod::AUTO_EQUALIZER) / 100.0f));
         }
 
-        if (xirand::GetRandomNumber(100) < PDefender->getMod(Mod::ABSORB_DMG_CHANCE) || xirand::GetRandomNumber(100) < PDefender->getMod(Mod::PHYS_ABSORB))
+        // Handle damage absorption.
+        if (xirand::GetRandomNumber(100) < PDefender->getMod(Mod::ABSORB_DMG_CHANCE) || // All damage.
+            xirand::GetRandomNumber(100) < PDefender->getMod(Mod::PHYS_ABSORB))         // Physical damage.
         {
             damage = -damage;
         }
-        else if (xirand::GetRandomNumber(100) < PDefender->getMod(Mod::NULL_PHYSICAL_DAMAGE))
+
+        // Handle damage nullification.
+        else if (xirand::GetRandomNumber(100) < PDefender->getMod(Mod::NULL_DAMAGE) ||        // All damage.
+                 xirand::GetRandomNumber(100) < PDefender->getMod(Mod::NULL_PHYSICAL_DAMAGE)) // Physical damage.
         {
             damage = 0;
         }
@@ -5610,11 +5641,16 @@ namespace battleutils
             damage -= (int32)(damage / float(PDefender->GetMaxHP()) * (PDefender->getMod(Mod::AUTO_EQUALIZER) / 10000.0f));
         }
 
-        if (xirand::GetRandomNumber(100) < PDefender->getMod(Mod::ABSORB_DMG_CHANCE) || xirand::GetRandomNumber(100) < PDefender->getMod(Mod::PHYS_ABSORB))
+        // Handle damage absorption.
+        if (xirand::GetRandomNumber(100) < PDefender->getMod(Mod::ABSORB_DMG_CHANCE) || // All damage.
+            xirand::GetRandomNumber(100) < PDefender->getMod(Mod::PHYS_ABSORB))         // Physical damage. TODO: Consider new modifier for ranged specific.
         {
             damage = -damage;
         }
-        else if (xirand::GetRandomNumber(100) < PDefender->getMod(Mod::NULL_RANGED_DAMAGE))
+
+        // Handle damage nullification.
+        else if (xirand::GetRandomNumber(100) < PDefender->getMod(Mod::NULL_DAMAGE) ||      // All damage.
+                 xirand::GetRandomNumber(100) < PDefender->getMod(Mod::NULL_RANGED_DAMAGE)) // Ranged damage.
         {
             damage = 0;
         }
@@ -5943,7 +5979,7 @@ namespace battleutils
         {
             if (PCaster->StatusEffectContainer->HasStatusEffect(EFFECT_ACCESSION) ||
                 (PCaster->objtype == TYPE_PC && charutils::hasTrait((CCharEntity*)PCaster, TRAIT_DIVINE_VEIL) && PSpell->isNa() &&
-                 (PCaster->StatusEffectContainer->HasStatusEffect(EFFECT_DIVINE_SEAL) || PCaster->getMod(Mod::AOE_NA) == 1)))
+                 (PCaster->StatusEffectContainer->HasStatusEffect(EFFECT_DIVINE_SEAL) || xirand::GetRandomNumber(100) < PCaster->getMod(Mod::AOE_NA))))
             {
                 return SPELLAOE_RADIAL;
             }
@@ -6757,7 +6793,7 @@ namespace battleutils
 
         if (PEntity->StatusEffectContainer->HasStatusEffect({ EFFECT_HASSO, EFFECT_SEIGAN }))
         {
-            cast = (uint32)(cast * 2.0f);
+            cast = (uint32)(cast * 1.5f);
         }
 
         if (PSpell->getSpellGroup() == SPELLGROUP_BLACK)
@@ -6840,12 +6876,21 @@ namespace battleutils
         }
         else if (PSpell->getSpellGroup() == SPELLGROUP_SUMMONING)
         {
-            cast -= 1000 * PEntity->getMod(Mod::SUMMONING_MAGIC_CAST);
+            int32 amount = 1000 * PEntity->getMod(Mod::SUMMONING_MAGIC_CAST);
 
             if (PEntity->objtype == TYPE_PC)
             {
                 auto* PChar = static_cast<CCharEntity*>(PEntity);
-                cast -= base * 0.01 * PChar->PMeritPoints->GetMeritValue(MERIT_SUMMONING_MAGIC_CAST_TIME, PChar);
+                amount += static_cast<int32>(base * 0.01 * PChar->PMeritPoints->GetMeritValue(MERIT_SUMMONING_MAGIC_CAST_TIME, PChar));
+            }
+
+            if (static_cast<int32>(cast) > amount)
+            {
+                cast -= static_cast<uint32>(std::max(amount, 0));
+            }
+            else
+            {
+                cast = 0;
             }
         }
         else if (PSpell->getSpellGroup() == SPELLGROUP_SONG)

@@ -38,7 +38,7 @@ entity.onMobWeaponSkill = function(target, mob, skill)
     mob:setLocalVar('TP', 0)
 end
 
-entity.onMobEngaged = function(mob, target)
+entity.onMobEngage = function(mob, target)
     mob:messageText(mob, ID.text.BLOOD_RACING)
 end
 

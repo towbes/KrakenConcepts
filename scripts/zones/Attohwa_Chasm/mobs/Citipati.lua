@@ -4,18 +4,11 @@
 -----------------------------------
 local entity = {}
 
-entity.onMobInitialize = function(mob)
-    mob:setMod(xi.mod.TRIPLE_ATTACK, 5)
-end
-
 entity.onMobRoam = function(mob)
-    if VanadielHour() >= 4 and VanadielHour() < 20 then -- Despawn if its day
-        DespawnMob(mob:getID())
-    end
-end
-
-entity.onMobDisengage = function(mob)
-    if VanadielHour() >= 4 and VanadielHour() < 20 then -- Despawn if its day
+    -- Since DisallowRespawn() doesn't care about SPAWNTYPE_NIGHT we have to get creative
+    local totd = VanadielTOTD()
+    if totd ~= xi.time.NIGHT and totd ~= xi.time.MIDNIGHT then
+        mob:setLocalVar('doNotInvokeCooldown', 1)
         DespawnMob(mob:getID())
     end
 end

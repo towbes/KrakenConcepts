@@ -1,14 +1,8 @@
----------------------------------------------
+-----------------------------------
 -- Warped Wail
---
--- Description: Lowers maximum HP/MP of targets in an area of effect.
--- Utsusemi/Blink absorb: Ignores shadows
--- Range: 20' radial
--- Notes: 12% reduction - Best guess based on captures
----------------------------------------------
-
-
-
+--   Mob Ability: 2430
+-- Emits a distorted scream, dealing damage and reducing max HP and MP.
+-- Notes: Wipes Shadows, used only by Zirnitra and Pteranodon
 -----------------------------------
 local mobskillObject = {}
 
@@ -17,12 +11,13 @@ mobskillObject.onMobSkillCheck = function(target, mob, skill)
 end
 
 mobskillObject.onMobWeaponSkill = function(target, mob, skill)
-    local typeEffect = xi.effect.MAX_MP_DOWN
-    local typeEffect2 = xi.effect.MAX_HP_DOWN
-    skill:setMsg(xi.mobskills.mobStatusEffectMove(mob, target, typeEffect, 12, 0, 300))
-    skill:setMsg(xi.mobskills.mobStatusEffectMove(mob, target, typeEffect2, 12, 0, 300))
-
-    return typeEffect
+    local dmgmod = 1
+    local info = xi.mobskills.mobMagicalMove(mob, target, skill, mob:getWeaponDmg() * 3, xi.element.WIND, dmgmod, xi.mobskills.magicalTpBonus.NO_EFFECT)
+    local dmg = xi.mobskills.mobFinalAdjustments(info.dmg, mob, skill, target, xi.attackType.MAGICAL, xi.damageType.WIND, xi.mobskills.shadowBehavior.WIPE_SHADOWS)
+    xi.mobskills.mobPhysicalStatusEffectMove(mob, target, skill, xi.effect.MAX_HP_DOWN, 50, 0, 60)
+    xi.mobskills.mobPhysicalStatusEffectMove(mob, target, skill, xi.effect.MAX_MP_DOWN, 50, 0, 60)
+    target:takeDamage(dmg, mob, xi.attackType.MAGICAL, xi.damageType.WIND)
+    return dmg
 end
 
 return mobskillObject

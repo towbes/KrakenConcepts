@@ -45,7 +45,7 @@ entity.onMobSpawn = function(mob)
     mob:setAutoAttackEnabled(true)
 end
 
-entity.onMobEngaged = function(mob, target)
+entity.onMobEngage = function(mob, target)
     mob:setMobMod(xi.mobMod.NO_MOVE, 0)
 end
 

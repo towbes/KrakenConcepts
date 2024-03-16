@@ -18,7 +18,7 @@ entity.onMobSpawn = function(mob)
     mob:setMobMod(xi.mobMod.SKILL_LIST, 714)
 end
 
-entity.onMobEngaged = function(mob, target)
+entity.onMobEngage = function(mob, target)
 end
 
 entity.onMobFight = function(mob, target)

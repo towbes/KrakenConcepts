@@ -10,7 +10,7 @@ local entity = {}
 --     mob:setMobMod(xi.mobMod.NO_MOVE, 1)
 -- end
 
-entity.onMobEngaged = function(mob)
+entity.onMobEngage = function(mob)
     mob:setMobMod(xi.mobMod.NO_MOVE, 0)
 end
 

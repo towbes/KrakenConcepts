@@ -450,8 +450,8 @@ xi.znm.soultrapper.getZeniValue = function(target, user, item)
     end
     
     if (showDebugMessage) then
-        user:PrintToPlayer(string.format( 'Zeni for Mob %s is %d!', target:getName(), zeni))
-        user:PrintToPlayer(string.format( 'MobSize [%d] HPP: [%d] isFacing: [%s] LevelOffset: [%d] Distance: [%d] isNM: [%s] hasClaim: [%s] isBeingIrresponsible: [%s]',
+        user:printToPlayer(string.format( 'Zeni for Mob %s is %d!', target:getName(), zeni))
+        user:printToPlayer(string.format( 'MobSize [%d] HPP: [%d] isFacing: [%s] LevelOffset: [%d] Distance: [%d] isNM: [%s] hasClaim: [%s] isBeingIrresponsible: [%s]',
                                            modelSize, hpp, isFacing, (targetLevel - 75), distance, isNM, not (not user:isMobOwner(target) or hpp == 100), isBeingIrresponsible ))
     end
 
@@ -511,7 +511,7 @@ xi.znm.ryo.onEventUpdate = function(player, csid, option, npc)
             player:updateEvent(GetServerVariable('[ZNM]SubjectsOfInterest'))
             -- convert real time to game days: 2.4 real minutes / vana hour
             local daysRemaining = math.floor((GetServerVariable('[ZNM]SubOfInterestTimeLimit') - os.time()) / (60 * 24 * 2.4))
-            player:PrintToPlayer(string.format('Ryo : Sanraku\'s interest will change in about %u days.', daysRemaining), 0xD)
+            player:printToPlayer(string.format('Ryo : Sanraku\'s interest will change in about %u days.', daysRemaining), 0xD)
         elseif option == 201 then
             -- Fauna
             player:updateEvent(GetServerVariable('[ZNM]Fauna'))

@@ -11,10 +11,9 @@ end
 
 mobskillObject.onMobWeaponSkill = function(target, mob, skill)
     mob:showText(mob, ID.text.PROMATHIA_TEXT + 6)
-    local typeEffect = xi.effect.AMNESIA
     -- Subpower 100 prevents removal by Ecphoria Ring
-    skill:setMsg(xi.mobskills.mobStatusEffectMove(mob, target, typeEffect, 30, 0, 75, 100))
-    return typeEffect
+    skill:setMsg(xi.mobskills.mobStatusEffectMove(mob, target, xi.effect.AMNESIA, 30, 0, 75, 100))
+    return xi.effect.AMNESIA
 end
 
 return mobskillObject

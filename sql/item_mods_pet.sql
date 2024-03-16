@@ -16,7 +16,7 @@ CREATE TABLE IF NOT EXISTS `item_mods_pet` (
  `value` smallint(5) NOT NULL DEFAULT '0',
  `petType` tinyint(3) unsigned NOT NULL DEFAULT '0',
  PRIMARY KEY (`itemId`,`modId`,`petType`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4 AVG_ROW_LENGTH=13 PACK_KEYS=1;
+) ENGINE=Aria TRANSACTIONAL=0 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci AVG_ROW_LENGTH=13 PACK_KEYS=1;
 
 -- (Please keep item ID sequential)
 -- Charivari Earring
@@ -720,6 +720,9 @@ INSERT INTO `item_mods_pet` VALUES (22261,12,89,3);  -- Automaton - INT: 89
 INSERT INTO `item_mods_pet` VALUES (22261,13,89,3);  -- Automaton - MND: 89
 INSERT INTO `item_mods_pet` VALUES (22261,14,89,3);  -- Automaton - CHR: 89
 
+-- Totemic Helm +2
+INSERT INTO `item_mods_pet` VALUES (23048,25,30,0); -- Pet: ACC: 30
+
 -- Foire Taj +2
 INSERT INTO `item_mods_pet` VALUES (23057,25,31,3);   -- Automaton - ACC: 31
 INSERT INTO `item_mods_pet` VALUES (23057,369,1,3);   -- Automaton - REFRESH: 1
@@ -808,9 +811,10 @@ INSERT INTO `item_mods_pet` VALUES (23165,30,54,2); -- Wyvern: MACC: 54
 -- TODO: Wyvern: Grants food effect
 
 -- Beckoner's Doublet +2
-INSERT INTO `item_mods_pet` VALUES (23166,25,54,1); -- Avatar: ACC: 54
-INSERT INTO `item_mods_pet` VALUES (23166,26,54,1); -- Avatar: RACC: 54
-INSERT INTO `item_mods_pet` VALUES (23166,30,54,1); -- Avatar: MACC: 54
+INSERT INTO `item_mods_pet` VALUES (23166,25,54,1);  -- Avatar: ACC: 54
+INSERT INTO `item_mods_pet` VALUES (23166,26,54,1);  -- Avatar: RACC: 54
+INSERT INTO `item_mods_pet` VALUES (23166,30,54,1);  -- Avatar: MACC: 54
+INSERT INTO `item_mods_pet` VALUES (23166,126,12,1); -- Avatar: BP_DAMAGE: 12
 
 -- Karagoz Farsetto +2
 INSERT INTO `item_mods_pet` VALUES (23169,25,54,3);   -- Automaton: ACC: 54
@@ -839,7 +843,30 @@ INSERT INTO `item_mods_pet` VALUES (23214,289,10,3);  -- Automaton: SUBTLE_BLOW:
 INSERT INTO `item_mods_pet` VALUES (23214,384,600,3); -- Automaton: HASTE_GEAR: 6%
 
 -- Beckoner's Bracers +2
-INSERT INTO `item_mods_pet` VALUES (23233,126,8,1); -- Avatar - BP_DAMAGE: 8
+INSERT INTO `item_mods_pet` VALUES (23227,25,52,0); -- Pet: ACC: 52
+INSERT INTO `item_mods_pet` VALUES (23227,26,52,0); -- Pet: RACC: 52
+INSERT INTO `item_mods_pet` VALUES (23227,30,52,0); -- Pet: MACC: 52
+
+-- Peltast's vambraces +2
+INSERT INTO `item_mods_pet` VALUES (23232,25,52,2); -- Wyvern: ACC: 52
+INSERT INTO `item_mods_pet` VALUES (23232,30,52,2); -- Wyvern: MACC: 52
+
+-- Beckoner's Bracers +2
+INSERT INTO `item_mods_pet` VALUES (23233,25,52,1); -- Avatar: ACC: 52
+INSERT INTO `item_mods_pet` VALUES (23233,26,52,1); -- Avatar: RACC: 52
+INSERT INTO `item_mods_pet` VALUES (23233,30,52,1); -- Avatar: MACC: 52
+INSERT INTO `item_mods_pet` VALUES (23233,126,8,1); -- Avatar: BP_DAMAGE: 8
+
+-- Karagoz Guanti +2
+INSERT INTO `item_mods_pet` VALUES (23236,8,21,3);  -- Automaton: STR: 21
+INSERT INTO `item_mods_pet` VALUES (23236,9,21,3);  -- Automaton: DEX: 21
+INSERT INTO `item_mods_pet` VALUES (23236,10,21,3); -- Automaton: AGI: 21
+INSERT INTO `item_mods_pet` VALUES (23236,25,52,3); -- Automaton: ACC: 52
+INSERT INTO `item_mods_pet` VALUES (23236,26,52,3); -- Automaton: RACC: 52
+INSERT INTO `item_mods_pet` VALUES (23236,30,52,3); -- Automaton: MACC: 52
+
+-- Totemic Trousers +2
+INSERT INTO `item_mods_pet` VALUES (23249,23,30,0); -- Pet: ATT: 30
 
 -- Vishap Brais +2
 INSERT INTO `item_mods_pet` VALUES (23254,3,25,2); -- Wyvern - HPP: 25
@@ -850,13 +877,100 @@ INSERT INTO `item_mods_pet` VALUES (23258,160,-300,3); -- Automaton - DMG: -300
 INSERT INTO `item_mods_pet` VALUES (23258,374,14,3);   -- Automaton - CURE_POTENCY: 14
 INSERT INTO `item_mods_pet` VALUES (23258,384,400,3);  -- Automaton - HASTE_GEAR: 400
 
+-- Ankusa Trousers +2
+INSERT INTO `item_mods_pet` VALUES (23272,73,4,0);    -- Pet: STORETP: 4
+INSERT INTO `item_mods_pet` VALUES (23272,384,500,0); -- Pet: HASTE_GEAR: 5%
+
+-- Pteroslaver brais +2
+INSERT INTO `item_mods_pet` VALUES (23277,161,-1000,2); -- Wyvern: DMGPHYS: -10%
+
+-- Pteroslaver brais +2
+INSERT INTO `item_mods_pet` VALUES (23278,28,44,1); -- Avatar: MATT: 44
+INSERT INTO `item_mods_pet` VALUES (23278,30,35,1); -- Avatar: MACC: 35
+
+-- Pitre Churidars +2
+INSERT INTO `item_mods_pet` VALUES (23281,28,44,3); -- Automaton: MATT: 44
+INSERT INTO `item_mods_pet` VALUES (23281,30,38,3); -- Automaton: MACC: 38
+INSERT INTO `item_mods_pet` VALUES (23281,170,9,3); -- Automaton: FASTCAST: 9
+
+-- Nukumi Quijotes +2
+INSERT INTO `item_mods_pet` VALUES (23294,25,53,0); -- Pet: ACC: 53
+INSERT INTO `item_mods_pet` VALUES (23294,26,53,0); -- Pet: RACC: 53
+INSERT INTO `item_mods_pet` VALUES (23294,30,53,0); -- Pet: MACC: 53
+
+-- Peltast's cuissots +2
+INSERT INTO `item_mods_pet` VALUES (23299,25,53,2); -- Wyvern: ACC: 53
+INSERT INTO `item_mods_pet` VALUES (23299,30,53,2); -- Wyvern: MACC: 53
+
+-- Beckoner's spats +2
+INSERT INTO `item_mods_pet` VALUES (23300,25,53,1); -- Avatar: ACC: 53
+INSERT INTO `item_mods_pet` VALUES (23300,26,53,1); -- Avatar: RACC: 53
+INSERT INTO `item_mods_pet` VALUES (23300,30,53,1); -- Avatar: MACC: 53
+
+-- Karagoz pantaloni +2
+INSERT INTO `item_mods_pet` VALUES (23303,25,53,3); -- Automaton: ACC: 53
+INSERT INTO `item_mods_pet` VALUES (23303,26,53,3); -- Automaton: RACC: 53
+INSERT INTO `item_mods_pet` VALUES (23303,30,53,3); -- Automaton: MACC: 53
+
+-- Totemic Gaiters +2
+INSERT INTO `item_mods_pet` VALUES (23316,23,20,0); -- Pet: ATT: 20
+INSERT INTO `item_mods_pet` VALUES (23316,25,20,0); -- Pet: ACC: 20
+
+-- Convokers Pigaches +2
+INSERT INTO `item_mods_pet` VALUES (23322,23,30,1); -- Avatar: ACC: 30 
+INSERT INTO `item_mods_pet` VALUES (23322,30,30,1); -- Avatar: MACC: 30
+INSERT INTO `item_mods_pet` VALUES (23322,68,30,1); -- Avatar: EVA: 30
+INSERT INTO `item_mods_pet` VALUES (23322,126,8,1); -- Avatar: BP_DAMAGE: 8 
+
 -- Foire Babouches +2
 INSERT INTO `item_mods_pet` VALUES (23325,28,20,3);   -- Automaton - MATT: 20
 INSERT INTO `item_mods_pet` VALUES (23325,30,40,3);   -- Automaton - MACC: 40
 INSERT INTO `item_mods_pet` VALUES (23325,384,400,3); -- Automaton - HASTE_GEAR: 400
 
+-- Ankusa Gaiters +2
+INSERT INTO `item_mods_pet` VALUES (23339,68,28,0);    -- Pet: EVA: 28
+INSERT INTO `item_mods_pet` VALUES (23339,161,-400,0); -- Pet: DMGPHYS: -4%
+
+-- Pteroslaver greaves +2
+INSERT INTO `item_mods_pet` VALUES (23344,2,260,2); -- Wyvern: HP: 260
+INSERT INTO `item_mods_pet` VALUES (23344,370,7,2); -- Wyvern: REGEN: 7
+
+-- Glyphic pigaches +2
+INSERT INTO `item_mods_pet` VALUES (23345,23,74,1);  -- Avatar: ATT: 74
+INSERT INTO `item_mods_pet` VALUES (23345,25,26,1);  -- Avatar: ACC: 26
+INSERT INTO `item_mods_pet` VALUES (23345,562,11,1); -- Avatar: MAGIC_CRITHITRATE: 11
+
+-- Pitre Babouches +2
+INSERT INTO `item_mods_pet` VALUES (23348,28,50,3); -- Automaton: MATT: 50
+INSERT INTO `item_mods_pet` VALUES (23348,30,33,3); -- Automaton: MACC: 33
+
 -- Bagua Sandals +2
 INSERT INTO `item_mods_pet` VALUES (23351,370,4,8); -- Luopan - REGEN: 4
+
+-- Nukumi Ocreae +2
+INSERT INTO `item_mods_pet` VALUES (23361,25,50,0); -- Pet: ACC: 50
+INSERT INTO `item_mods_pet` VALUES (23361,26,50,0); -- Pet: RACC: 50
+INSERT INTO `item_mods_pet` VALUES (23361,30,50,0); -- Pet: MACC: 50
+
+-- Peltast's schynbalds +2
+INSERT INTO `item_mods_pet` VALUES (23366,25,50,2); -- Wyvern: ACC:  50
+INSERT INTO `item_mods_pet` VALUES (23366,30,50,2); -- Wyvern: MACC: 50
+
+-- Beckoner's pigaches +2
+INSERT INTO `item_mods_pet` VALUES (23367,25,50,1); -- Avatar: ACC:  50
+INSERT INTO `item_mods_pet` VALUES (23367,26,50,1); -- Avatar: RACC: 50
+INSERT INTO `item_mods_pet` VALUES (23367,30,50,1); -- Avatar: MACC: 50
+INSERT INTO `item_mods_pet` VALUES (23367,126,8,1); -- Avatar: BP_DAMAGE: 8
+
+-- Karagoz Scarpe +2
+INSERT INTO `item_mods_pet` VALUES (23370,12,25,3); -- Automaton: INT:  25
+INSERT INTO `item_mods_pet` VALUES (23370,13,25,3); -- Automaton: MND:  25
+INSERT INTO `item_mods_pet` VALUES (23370,25,50,3); -- Automaton: ACC:  50
+INSERT INTO `item_mods_pet` VALUES (23370,26,50,3); -- Automaton: RACC: 50
+INSERT INTO `item_mods_pet` VALUES (23370,30,50,3); -- Automaton: MACC: 50
+
+-- Totemic Helm +3
+INSERT INTO `item_mods_pet` VALUES (23383,25,40,0); -- Pet: ACC: 40
 
 -- Foire Taj +3
 INSERT INTO `item_mods_pet` VALUES (23392,25,41,3);   -- Automaton - ACC: 41
@@ -886,6 +1000,9 @@ INSERT INTO `item_mods_pet` VALUES (23526,384,500,3); -- Automaton - HASTE_GEAR:
 
 -- Geomancy Mitaines +3
 INSERT INTO `item_mods_pet` VALUES (23530,160,-1300,8); -- Luopan - DMG: -1300
+
+-- Totemic Trousers +3
+INSERT INTO `item_mods_pet` VALUES (23584,23,40,0); -- Pet: ATT: 40
 
 -- Vishap Brais +3
 INSERT INTO `item_mods_pet` VALUES (23589,3,27,2); -- Wyvern - HPP: 27
@@ -1126,6 +1243,12 @@ INSERT INTO `item_mods_pet` VALUES (26241,165,3,0); -- All Pets - CRITHITRATE: 3
 -- Campestress Cape
 INSERT INTO `item_mods_pet` VALUES (26260,126,5,1); -- Avatar - BP_DAMAGE: 5
 
+-- Ankusa Helm
+INSERT INTO `item_mods_pet` VALUES (26640,384,300,0); -- Pet: HASTE_GEAR: 3%
+
+-- Ankusa Helm +1
+INSERT INTO `item_mods_pet` VALUES (26641,384,400,0); -- Pet: HASTE_GEAR: 4%
+
 -- Glyphic Horn
 INSERT INTO `item_mods_pet` VALUES (26652,28,20,1); -- Avatar - MATT: 20
 
@@ -1150,6 +1273,12 @@ INSERT INTO `item_mods_pet` VALUES (26774,345,525,3); -- Automaton - TP_BONUS: 5
 
 -- Karagoz Capello +1
 INSERT INTO `item_mods_pet` VALUES (26775,345,550,3); -- Automaton - TP_BONUS: 550
+
+-- Ankusa Jackcoat
+INSERT INTO `item_mods_pet` VALUES (26816,384,400,0); -- Pet: HASTE_GEAR: 4%
+
+-- Ankusa Jackcoat +1
+INSERT INTO `item_mods_pet` VALUES (26817,384,500,0); -- Pet: HASTE_GEAR: 5%
 
 -- Glyphic Doublet
 INSERT INTO `item_mods_pet` VALUES (26828,165,8,1); -- Avatar - CRITHITRATE: 8
@@ -1178,6 +1307,12 @@ INSERT INTO `item_mods_pet` VALUES (26926,126,10,1); -- Avatar - BP_DAMAGE: 10
 
 -- Beckoners Doublet +1
 INSERT INTO `item_mods_pet` VALUES (26927,126,11,1); -- Avatar - BP_DAMAGE: 11
+
+-- Ankusa Gloves
+INSERT INTO `item_mods_pet` VALUES (26992,161,-300,0); -- Pet: DMGPHYS: -3%
+
+-- Ankusa Gloves +1
+INSERT INTO `item_mods_pet` VALUES (26993,161,-400,0); -- Pet: DMGPHYS: -4%
 
 -- Glyphic Bracers
 INSERT INTO `item_mods_pet` VALUES (27004,25,20,1);   -- Avatar - ACC: 20
@@ -1226,6 +1361,12 @@ INSERT INTO `item_mods_pet` VALUES (27108,28,25,1); -- Avatar - MATT: 25
 -- Lamassu Mitts +1
 INSERT INTO `item_mods_pet` VALUES (27109,28,26,1); -- Avatar - MATT: 26
 
+-- Ankusa Trousers
+INSERT INTO `item_mods_pet` VALUES (27168,384,300,0); -- Pet: HASTE_GEAR: 3%
+
+-- Ankusa Trousers +1
+INSERT INTO `item_mods_pet` VALUES (27169,384,400,0); -- Pet: HASTE_GEAR: 4%
+
 -- Glyphic Spats
 INSERT INTO `item_mods_pet` VALUES (27180,30,10,1); -- Avatar - MACC: 10
 
@@ -1254,6 +1395,14 @@ INSERT INTO `item_mods_pet` VALUES (27266,345,600,1); -- Avatar - TP_BONUS: 600
 INSERT INTO `item_mods_pet` VALUES (27299,3,21,2); -- Wyvern - HPP: 21
 INSERT INTO `item_mods_pet` VALUES (27299,165,5,0); -- Wyvern - CRITHITRATE: 5
 INSERT INTO `item_mods_pet` VALUES (27299,288,5,0); -- All Pets - DOUBLE_ATTACK: 5
+
+-- Ankusa Gaiters
+INSERT INTO `item_mods_pet` VALUES (27344,68,15,0);    -- Pet: EVA: 15
+INSERT INTO `item_mods_pet` VALUES (27344,161,-300,0); -- Pet: DMGPHYS: -3%
+
+-- Ankusa Gaiters +1
+INSERT INTO `item_mods_pet` VALUES (27345,68,18,0);    -- Pet: EVA: 18
+INSERT INTO `item_mods_pet` VALUES (27345,161,-300,0); -- Pet: DMGPHYS: -3%
 
 -- Glyphic Pigaches
 INSERT INTO `item_mods_pet` VALUES (27356,23,28,1); -- Avatar - ATT: 28
@@ -1294,6 +1443,9 @@ INSERT INTO `item_mods_pet` VALUES (27446,13,20,3); -- Automaton - MND: 20
 -- Emicho Gambieras +1 (Checked)
 INSERT INTO `item_mods_pet` VALUES (27470,480,6,2); -- Wyvern - ABSORB_DMG_CHANCE: 6
 
+-- Totemic Helm
+INSERT INTO `item_mods_pet` VALUES (27671,25,20,0); -- Pet: ACC: 20
+
 -- Convokers Horn
 INSERT INTO `item_mods_pet` VALUES (27677,27,4,1); -- Avatar - ENMITY: 4
 
@@ -1301,6 +1453,9 @@ INSERT INTO `item_mods_pet` VALUES (27677,27,4,1); -- Avatar - ENMITY: 4
 INSERT INTO `item_mods_pet` VALUES (27680,71,6,3);    -- Automaton - MPHEAL: 6
 INSERT INTO `item_mods_pet` VALUES (27680,72,6,3);    -- Automaton - HPHEAL: 6
 INSERT INTO `item_mods_pet` VALUES (27680,384,500,3); -- Automaton - HASTE_GEAR: 500
+
+-- Totemic Helm +1
+INSERT INTO `item_mods_pet` VALUES (27692,25,20,0); -- Pet: ACC: 20
 
 -- Convokers Horn +1
 INSERT INTO `item_mods_pet` VALUES (27698,27,4,1); -- Avatar - ENMITY: 4
@@ -1332,11 +1487,17 @@ INSERT INTO `item_mods_pet` VALUES (27845,2,110,3);   -- Automaton - HP: 110
 INSERT INTO `item_mods_pet` VALUES (27845,5,110,3);   -- Automaton - MP: 110
 INSERT INTO `item_mods_pet` VALUES (27845,384,300,3); -- Automaton - HASTE_GEAR: 300
 
+-- Totemic Gloves
+INSERT INTO `item_mods_pet` VALUES (27951,384,300,0); -- Pet: HASTE_GEAR: 3%
+
 -- Convokers Bracers
 INSERT INTO `item_mods_pet` VALUES (27957,27,5,1); -- Avatar - ENMITY: 5
 
 -- Foire Dastanas
 INSERT INTO `item_mods_pet` VALUES (27960,384,300,3); -- Automaton - HASTE_GEAR: 300
+
+-- Totemic Gloves
+INSERT INTO `item_mods_pet` VALUES (27972,384,300,0); -- Pet: HASTE_GEAR: 3%
 
 -- Convokers Bracers +1
 INSERT INTO `item_mods_pet` VALUES (27978,27,5,1); -- Avatar - ENMITY: 5
@@ -1355,6 +1516,9 @@ INSERT INTO `item_mods_pet` VALUES (28025,384,600,0); -- All Pets - HASTE_GEAR: 
 
 -- Geomancy Mitaines
 INSERT INTO `item_mods_pet` VALUES (28066,160,-1000,8); -- Luopan - DMG: -1000
+
+-- Totemic Trousers
+INSERT INTO `item_mods_pet` VALUES (28098,23,20,0); -- Pet: ATT: 20
 
 -- Vishap Brais
 INSERT INTO `item_mods_pet` VALUES (28103,3,20,2); -- Wyvern - HPP: 20

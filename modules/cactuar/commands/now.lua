@@ -33,7 +33,7 @@ commandObj.onTrigger = function(player)
     local daySuffix = getDaySuffix(day)
     formattedTime = formattedTime .. ' ' .. day .. daySuffix .. ', ' .. year .. ' ' .. hour .. ':' .. minute .. ' ' .. period
 
-    player:PrintToPlayer(formattedTime)
+    player:printToPlayer(formattedTime)
 end
 
 return commandObj

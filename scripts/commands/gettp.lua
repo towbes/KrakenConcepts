@@ -11,14 +11,14 @@ commandObj.cmdprops =
 }
 
 commandObj.error = function(player, msg)
-    player:PrintToPlayer(msg)
-    player:PrintToPlayer('!gettp (player or mob)')
+    player:printToPlayer(msg)
+    player:printToPlayer('!gettp (player or mob)')
 end
 
 commandObj.onTrigger = function(player, tp, target)
     local targ = player:getCursorTarget()
     if targ ~= nil then
-        player:PrintToPlayer(string.format('%s\'s TP is %i.', targ:getName(), targ:getTP()))
+        player:printToPlayer(string.format('%s\'s TP is %i.', targ:getName(), targ:getTP()))
     end
 end
 

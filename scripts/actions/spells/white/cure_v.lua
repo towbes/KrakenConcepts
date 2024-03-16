@@ -102,28 +102,15 @@ spellObject.onSpellCast = function(caster, target, spell)
         target:addHP(final)
 
         target:wakeUp()
-        caster:updateEnmityFromCure(target, 65535)
+
+        -- pass in fixed enmity values of 300 CE and 600 VE
+        caster:updateEnmityFromCure(target, final, 300, 600)
+
     else
         if target:isUndead() then -- e.g. PCs healing skeles for damage (?)
             spell:setMsg(xi.msg.basic.MAGIC_DMG)
-            local params = {}
-            params.dmg = minCure
-            params.multiplier = 1
-            params.skillType = xi.skill.HEALING_MAGIC
-            params.attribute = xi.mod.MND
-            params.hasMultipleTargetReduction = false
-            params.diff = caster:getStat(xi.mod.MND)-target:getStat(xi.mod.MND)
-            params.bonus = 1.0
 
-            local dmg = calculateMagicDamage(caster, target, spell, params) * 0.5
-            local resist = applyResistance(caster, target, spell, params)
-            dmg = dmg * resist
-            dmg = addBonuses(caster, spell, target, dmg)
-            dmg = adjustForTarget(target, dmg, spell:getElement())
-            dmg = finalMagicAdjustments(caster, target, spell, dmg)
-            final = dmg
-            target:takeDamage(final, caster, xi.attackType.MAGICAL, xi.damageType.LIGHT)
-            target:updateEnmityFromDamage(caster, final)
+            final = xi.spells.damage.useDamageSpell(caster, target, spell)
         elseif caster:getObjType() == xi.objType.PC then
             spell:setMsg(xi.msg.basic.MAGIC_NO_EFFECT)
         else

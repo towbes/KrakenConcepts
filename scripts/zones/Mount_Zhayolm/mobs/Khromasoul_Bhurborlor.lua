@@ -36,7 +36,7 @@ entity.onMobSpawn = function(mob)
     end   
 end    
 
-entity.onMobEngaged = function(mob, target)
+entity.onMobEngage = function(mob, target)
     mob:setLocalVar('clock', os.time() + 10) 
 end
 

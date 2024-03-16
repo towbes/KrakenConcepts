@@ -75,7 +75,7 @@ entity.onMobSpawn = function(mob)
 
 end     
 
-entity.onMobEngaged = function(mob, target)
+entity.onMobEngage = function(mob, target)
     mob:setLocalVar('addTimer', os.time() + math.random(90, 120)) 
 end
 

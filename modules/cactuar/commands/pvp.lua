@@ -11,8 +11,8 @@ commandObj.cmdprops =
 }
 
 local function error(player, msg)
-    player:PrintToPlayer(msg)
-    player:PrintToPlayer('!pvp green or blue or off')
+    player:printToPlayer(msg)
+    player:printToPlayer('!pvp green or blue or off')
 end
 
 commandObj.onTrigger = function(player, team)
@@ -20,7 +20,7 @@ commandObj.onTrigger = function(player, team)
 
     local zone = player:getZone()
     if zone:getTypeMask() ~= xi.zoneType.CITY then
-        player:PrintToPlayer('PVP can currently only be used in City Zones')
+        player:printToPlayer('PVP can currently only be used in City Zones')
         return 1
     end
     if zone:getTypeMask() == xi.zoneType.CITY then

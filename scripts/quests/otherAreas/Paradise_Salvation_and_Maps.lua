@@ -67,7 +67,7 @@ quest.sections =
                     then
                         -- Turning in the Key Item
                         if chest == 0 then
-                            player:PrintToPlayer('WARNING: Your variables for this quest are broken. Please contact a GM.')
+                            player:printToPlayer('WARNING: Your variables for this quest are broken. Please contact a GM.')
                         else
                             return quest:progressEvent(225, { [0] = chest - 1 })
                         end

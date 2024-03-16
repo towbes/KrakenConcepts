@@ -51,7 +51,7 @@ entity.onAdditionalEffect = function(mob, target, damage)
     return xi.mob.onAddEffect(mob, target, damage, xi.mob.ae.SLOW, { chance = 100, duration = 120 })
 end
 
-entity.onMobEngaged = function (mob, target)
+entity.onMobEngage = function (mob, target)
     if mob:getHPP() == 100 then
         mob:setMod(xi.mod.BINDRES, -75)
         mob:setMod(xi.mod.GRAVITYRES, -75)

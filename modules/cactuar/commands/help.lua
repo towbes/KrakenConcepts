@@ -13,7 +13,7 @@ commandObj.cmdprops =
 commandObj.onTrigger = function(player)
 
     if player:getLocalVar('helpMenu') > 0 then
-        player:PrintToPlayer('Menu is already in use.', xi.msg.channel.NS_LINKSHELL3)
+        player:printToPlayer('Menu is already in use.', xi.msg.channel.NS_LINKSHELL3)
         return
     end
 
@@ -21,19 +21,19 @@ commandObj.onTrigger = function(player)
         title = 'Help Menu',
         onStart = function(playerArg)
             -- NOTE: This could be used to lock the player in place
-            -- playerArg:PrintToPlayer('Help Menu Opening', xi.msg.channel.NS_LINKSHELL3)
+            -- playerArg:printToPlayer('Help Menu Opening', xi.msg.channel.NS_LINKSHELL3)
             playerArg:setLocalVar('helpMenu', 1)
         end,
 
         options = {},
 
         onCancelled = function(playerArg)
-            -- playerArg:PrintToPlayer('Help Menu Cancelled', xi.msg.channel.NS_LINKSHELL3)
+            -- playerArg:printToPlayer('Help Menu Cancelled', xi.msg.channel.NS_LINKSHELL3)
         end,
 
         onEnd = function(playerArg)
             -- NOTE: This could be used to release a locked player,
-            -- playerArg:PrintToPlayer('Help Menu Closing', xi.msg.channel.NS_LINKSHELL3)
+            -- playerArg:printToPlayer('Help Menu Closing', xi.msg.channel.NS_LINKSHELL3)
             playerArg:setLocalVar('helpMenu', 0)
         end
     }
@@ -50,7 +50,7 @@ commandObj.onTrigger = function(player)
             end
             playerArg:setMerits(totalMerits)
             playerArg:setVar('refundMerits', remainder)
-                playerArg:PrintToPlayer(string.format('Merits are now set to %i with a balance of %i', totalMerits,
+                playerArg:printToPlayer(string.format('Merits are now set to %i with a balance of %i', totalMerits,
                 remainder), xi.msg.channel.SYSTEM_3)
         end})
     end
@@ -60,12 +60,12 @@ commandObj.onTrigger = function(player)
     table.insert(menu.options, {'Unstuck', function(playerArg)
         local zone = player:getZoneID()
         if (zone == nil or zone < 0 or zone > 297) then
-            playerArg:PrintToPlayer('Unstuck selected but unable to assist', xi.msg.channel.SYSTEM_3)
+            playerArg:printToPlayer('Unstuck selected but unable to assist', xi.msg.channel.SYSTEM_3)
         elseif zone == 0 then
             playerArg:warp()
         else
-            -- playerArg:PrintToPlayer('Unstuck Selected', xi.msg.channel.NS_LINKSHELL3)
-            playerArg:PrintToPlayer('Unstuck will commence in 60 seconds.', xi.msg.channel.SYSTEM_3)
+            -- playerArg:printToPlayer('Unstuck Selected', xi.msg.channel.NS_LINKSHELL3)
+            playerArg:printToPlayer('Unstuck will commence in 60 seconds.', xi.msg.channel.SYSTEM_3)
             playerArg:addStatusEffect(xi.effect.TERROR, delay, 0, delay + 1)
             uses = UnstuckUses + 1
             playerArg:setVar('UnstuckUses', uses)
@@ -78,7 +78,7 @@ commandObj.onTrigger = function(player)
     local party = player:getParty()
     if #party > 1 then
         table.insert(menu.options, {'Reset Party List', function(playerArg)
-            -- playerArg:PrintToPlayer('Reset Party Selected', xi.msg.channel.NS_LINKSHELL3)
+            -- playerArg:printToPlayer('Reset Party Selected', xi.msg.channel.NS_LINKSHELL3)
             playerArg:reloadParty()
         end})
     end
@@ -86,7 +86,7 @@ commandObj.onTrigger = function(player)
     local ID = zones[player:getZoneID()]
     local lsName = 'Cactuar'
     table.insert(menu.options, {'Add Server LS', function(playerArg)
-        -- playerArg:PrintToPlayer('Add Server Linkshell Selected', xi.msg.channel.NS_LINKSHELL3)
+        -- playerArg:printToPlayer('Add Server Linkshell Selected', xi.msg.channel.NS_LINKSHELL3)
         if playerArg:getFreeSlotsCount() == 0 then
             playerArg:messageSpecial(ID.text.ITEM_CANNOT_BE_OBTAINED, 515)
         else
@@ -98,9 +98,9 @@ commandObj.onTrigger = function(player)
     local HasAllMaps = player:getCharVar('HasAllMaps')
     if HasAllMaps ~= 1 then
         table.insert(menu.options, {'Add All Maps', function(playerArg)
-            -- playerArg:PrintToPlayer('All Maps Selected', xi.msg.channel.NS_LINKSHELL3)
+            -- playerArg:printToPlayer('All Maps Selected', xi.msg.channel.NS_LINKSHELL3)
             if ALL_MAPS == 0 then
-                playerArg:PrintToPlayer('This command is disabled on this server.', xi.msg.channel.SYSTEM_3)
+                playerArg:printToPlayer('This command is disabled on this server.', xi.msg.channel.SYSTEM_3)
                 return
             end
 
@@ -119,7 +119,7 @@ commandObj.onTrigger = function(player)
             end
 
             playerArg:setCharVar('HasAllMaps', 1)
-            playerArg:PrintToPlayer('All maps have been obtained.', xi.msg.channel.SYSTEM_3)
+            playerArg:printToPlayer('All maps have been obtained.', xi.msg.channel.SYSTEM_3)
         end})
     end
 

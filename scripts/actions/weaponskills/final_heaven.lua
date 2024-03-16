@@ -15,21 +15,12 @@ weaponskillObject.onUseWeaponSkill = function(player, target, wsID, tp, primary,
     -- number of normal hits for ws
     params.numHits = 2
     -- stat-modifiers (0.0 = 0%, 0.2 = 20%, 0.5 = 50%..etc)
-    params.str_wsc = 0.0        params.dex_wsc = 0.0
-    params.vit_wsc = 0.6        params.agi_wsc = 0.0
-    params.int_wsc = 0.0        params.mnd_wsc = 0.0
-    params.chr_wsc = 0.0
-    -- ftp damage mods (for Damage Varies with TP lines are calculated in the function params.ftp)
-    params.ftp100 = 5.0 params.ftp200 = 5.0 params.ftp300 = 5.0
-    -- critical modifiers (0.0 = 0%, 0.2 = 20%, 0.5 = 50%..etc)
-    params.crit100 = 0.0 params.crit200 = 0.0 params.crit300 = 0.0
-    params.canCrit = false
-    -- accuracy modifiers (0.0 = 0%, 0.2 = 20%, 0.5 = 50%..etc) Keep 0 if ws doesn't have accuracy modification.
-    params.acc100 = 0.0 params.acc200 = 0.0 params.acc300 = 0.0
-    -- attack multiplier (only some WSes use this, this varies the actual ratio value, see Tachi: Kasha) 1 is default.
-    params.atk100 = 1.15 params.atk200 = 1.15 params.atk300 = 1.15
+    params.vit_wsc = 0.6
+    params.ftpMod = { 3.0, 3.0, 3.0 }
 
     if xi.settings.main.USE_ADOULIN_WEAPON_SKILL_CHANGES then
+        params.ftpMod = { 5.0, 5.0, 5.0 }
+        params.atkVaries = { 1.15, 1.15, 1.15 }
         params.vit_wsc = 0.8
         -- as of 02.03.2022 the ws doesnt yet apply ftp to all stage, was delaied to be done in line with other relic ws
         -- http://wiki.ffo.jp/html/2426.html and https://forum.square-enix.com/ffxi/threads/55998-October-2019-FINAL-FANTASY-XI-Digest?highlight=2019+update
@@ -38,7 +29,6 @@ weaponskillObject.onUseWeaponSkill = function(player, target, wsID, tp, primary,
     -- Apply aftermath
     xi.aftermath.addStatusEffect(player, tp, xi.slot.MAIN, xi.aftermath.type.RELIC)
 
-    -- damage = damage * ftp(tp, ftp100, ftp200, ftp300)
     local damage, criticalHit, tpHits, extraHits = xi.weaponskills.doPhysicalWeaponskill(player, target, wsID, params, tp, action, primary, taChar)
 
     return tpHits, extraHits, criticalHit, damage

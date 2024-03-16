@@ -34,7 +34,7 @@ entity.onMobSpawn = function(mob)
     mob:setMod(xi.mod.FASTCAST, 100)
 end
 
-entity.onMobEngaged = function(mob, target)
+entity.onMobEngage = function(mob, target)
 end
 
 entity.onMobDisengaged = function(mob)

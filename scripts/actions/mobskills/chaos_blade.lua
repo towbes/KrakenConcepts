@@ -30,8 +30,7 @@ mobskillObject.onMobWeaponSkill = function(target, mob, skill)
     end
 
     -- curse LAST so you don't die
-    local typeEffect = xi.effect.CURSE_I
-    xi.mobskills.mobStatusEffectMove(mob, target, typeEffect, power, 0, 420)
+    xi.mobskills.mobStatusEffectMove(mob, target, xi.effect.CURSE_I, power, 0, 420)
 
     return dmg
 end

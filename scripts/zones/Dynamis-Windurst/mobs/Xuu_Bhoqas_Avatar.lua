@@ -35,7 +35,7 @@ entity.onMobSpawn = function(mob)
     end
 end
 
-entity.onMobEngaged = function(mob, target)
+entity.onMobEngage = function(mob, target)
 end
 
 entity.onMobFight = function(mob, target)

@@ -36,7 +36,7 @@ entity.onMobWeaponSkill = function(target, mob, skill)
     end
 end
 
-entity.onMobEngaged = function(mob, target)
+entity.onMobEngage = function(mob, target)
     mob:setLocalVar('timer', os.time() + math.random(30, 60))
     mob:setLocalVar('hateTimer', os.time() + math.random(10, 20))
 end

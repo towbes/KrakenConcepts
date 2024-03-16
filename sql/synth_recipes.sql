@@ -47,7 +47,7 @@ CREATE TABLE `synth_recipes` (
   `ResultHQ3Qty` tinyint(2) unsigned NOT NULL,
   `ResultName` tinytext NOT NULL,
   PRIMARY KEY (`ID`)
-) ENGINE=MyISAM AUTO_INCREMENT=3500 DEFAULT CHARSET=utf8mb4 AVG_ROW_LENGTH=79;
+) ENGINE=Aria TRANSACTIONAL=0 AUTO_INCREMENT=3500 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci AVG_ROW_LENGTH=79;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 DELIMITER $$
@@ -395,7 +395,7 @@ INSERT INTO `synth_recipes` VALUES (3045,0,0,69,0,0,0,0,0,0,0,4098,4240,711,719,
 INSERT INTO `synth_recipes` VALUES (3046,0,0,70,37,0,0,0,19,0,0,4098,4240,654,717,719,893,932,0,0,0,17220,17227,17227,17227,1,1,1,1,'Heavy Crossbow'); -- one source 32 WW, one ?? Bone, others agree 10/29/21
 INSERT INTO `synth_recipes` VALUES (3047,0,0,70,18,0,0,0,0,0,0,4099,4241,662,725,725,0,0,0,0,0,12359,12370,12370,12370,1,1,1,1,'Hickory Shield'); -- ??SM, 8 & 18 posted (typo?), used 18 (iron sheet caps 22)
 INSERT INTO `synth_recipes` VALUES (3048,0,0,70,0,0,0,0,45,0,0,4098,4240,720,830,2513,2747,2762,0,0,0,18736,18736,18736,18736,1,1,1,1,'Fay Gendawa'); -- ??BO, 45/53 srcs, old era talk crafted at 39 - used 45
-INSERT INTO `synth_recipes` VALUES (3049,0,0,70,0,0,0,0,0,0,0,4102,4244,489,0,0,0,0,0,0,0,17386,17386,17386,17386,1,1,1,1,'Lu Shang\'s Fishing Rod'); -- multiple source agree 10/29/21
+INSERT INTO `synth_recipes` VALUES (3049,2,0,70,0,0,0,0,0,0,0,4102,4244,489,0,0,0,0,0,0,0,17386,17386,17386,17386,1,1,1,1,'Lu Shang\'s Fishing Rod'); -- multiple source agree 10/29/21
 -- INSERT INTO `synth_recipes` VALUES (3050,0,0,70,0,255,0,0,0,0,0,4099,4241,711,711,711,711,717,717,745,0,444,444,444,444,1,1,1,1,'Luxurious Chest');
 INSERT INTO `synth_recipes` VALUES (3501,0,0,71,0,0,0,0,0,0,0,4099,4241,719,719,927,0,0,0,0,0,17357,17833,17848,17848,1,1,1,1,'Ebony Harp');
 INSERT INTO `synth_recipes` VALUES (3502,0,0,71,0,0,0,0,0,0,0,4099,4241,662,716,716,716,0,0,0,0,95,95,95,95,1,1,1,1,'Water Barrel');
@@ -2257,7 +2257,7 @@ INSERT INTO `synth_recipes` VALUES (31510,0,0,0,0,0,34,0,0,0,0,4099,4241,817,825
 -- INSERT INTO `synth_recipes` VALUES (31511,0,0,0,0,0,34,255,0,0,0,4099,4241,825,834,850,1699,1700,0,0,0,14857,14861,14861,14861,1,1,1,1,'Garish Mitts');
 INSERT INTO `synth_recipes` VALUES (31512,0,0,0,0,0,34,0,0,0,0,4098,4240,818,826,826,826,0,0,0,0,12970,13035,13035,13035,1,1,1,1,'Soil Kyahan');
 INSERT INTO `synth_recipes` VALUES (31513,0,0,0,0,0,35,0,0,0,0,4100,4242,8853,0,0,0,0,0,0,0,820,820,820,820,1,1,1,1,'Wool Thread');
-INSERT INTO `synth_recipes` VALUES (31514,1,0,0,0,0,35,0,0,0,0,4100,4242,497,0,0,0,0,0,0,0,820,820,820,820,8,8,8,8,'Gigas Socks (desynth)');
+INSERT INTO `synth_recipes` VALUES (31514,1,0,0,0,0,35,0,0,0,0,4100,4242,497,0,0,0,0,0,0,0,820,820,820,820,2,4,6,8,'Gigas Socks (desynth)');
 INSERT INTO `synth_recipes` VALUES (31515,0,0,0,0,0,35,21,0,0,0,4099,4241,826,828,828,850,1700,0,0,0,14326,14330,14330,14330,1,1,1,1,'Garish Slacks');
 -- INSERT INTO `synth_recipes` VALUES (31516,0,0,0,0,255,35,0,0,0,0,4098,4240,744,841,841,937,0,0,0,0,17308,17308,17308,17308,8,12,16,20,'Hawkeye');
 INSERT INTO `synth_recipes` VALUES (31517,0,0,0,0,0,35,0,0,0,0,4100,4242,832,832,0,0,0,0,0,0,820,820,820,820,1,1,1,1,'Wool Thread');
@@ -3508,7 +3508,7 @@ INSERT INTO `synth_recipes` VALUES (54525,0,0,0,0,0,0,0,94,0,0,4099,4241,1395,91
 INSERT INTO `synth_recipes` VALUES (54526,0,0,0,0,0,0,0,94,0,0,4098,4240,1517,0,0,0,0,0,0,0,1458,1458,1458,1458,1,1,1,1,'Mammoth Tusk');
 INSERT INTO `synth_recipes` VALUES (54527,0,0,0,0,0,0,52,94,0,0,4099,4241,866,1629,1771,0,0,0,0,0,14823,14824,14824,14824,1,1,1,1,'Dragon Mittens');
 INSERT INTO `synth_recipes` VALUES (54528,0,0,0,0,0,0,0,95,0,0,4099,4241,850,851,851,1193,1193,1193,1193,0,13789,13790,13790,13790,1,1,1,1,'Carapace Breastplate');
-INSERT INTO `synth_recipes` VALUES (54529,0,0,0,0,0,0,15,95,0,0,4099,4241,821,1586,1587,12824,0,0,0,0,12821,14313,14313,14313,1,1,1,1,'Gavial Cuisses');  -- 2021.11.10 All agree on Bonecraft 95.  FFXIclopedia shows Leathercraft 1 where BGWiki states 1-15 and JPWiki states 5.  Implimented @ 15 to err on the side of more difficult.
+INSERT INTO `synth_recipes` VALUES (54529,0,0,0,0,0,0,15,95,0,0,4099,4241,821,1586,1587,12824,0,0,0,0,12821,14313,14313,14313,1,1,1,1,'Gavial Cuisses');  -- 2021.11.10 All agree on Bonecraft 95.  FFXIclopedia shows Leathercraft 1 where BGWiki states 1-15 and JPWiki states 5.  Implemented @ 15 to err on the side of more difficult.
 INSERT INTO `synth_recipes` VALUES (54530,0,0,0,0,0,0,0,95,0,0,4099,4241,9513,0,0,0,0,0,0,0,13789,13789,13789,13789,1,1,1,1,'Carapace Breastplate');
 INSERT INTO `synth_recipes` VALUES (54531,0,0,0,0,0,0,54,95,0,0,4099,4241,823,862,866,1841,0,0,0,0,14055,14056,14056,14056,1,1,1,1,'Unicorn Mittens');
 INSERT INTO `synth_recipes` VALUES (54532,0,0,0,0,0,0,50,95,0,0,4099,4241,506,927,1622,1680,1719,0,0,0,15309,15310,15310,15310,1,1,1,1,'Igqira Huaraches');
@@ -3519,7 +3519,7 @@ INSERT INTO `synth_recipes` VALUES (54536,0,0,0,0,0,0,53,96,0,0,4099,4241,866,16
 INSERT INTO `synth_recipes` VALUES (54537,0,0,0,0,0,0,0,96,0,0,4099,4241,1473,1473,12696,12696,0,0,0,0,12751,12717,12717,12717,1,1,1,1,'Scorpion Gauntlets');
 INSERT INTO `synth_recipes` VALUES (54538,0,0,0,0,0,0,0,96,0,0,4099,4241,851,908,908,0,0,0,0,0,12385,12386,12386,12386,1,1,1,1,'Acheron Shield');
 INSERT INTO `synth_recipes` VALUES (54539,0,0,0,0,0,0,0,96,0,0,4098,4240,5466,5466,0,0,0,0,0,0,15813,15814,15814,15814,1,1,1,1,'Trumpet Ring');
-INSERT INTO `synth_recipes` VALUES (54540,0,0,0,0,0,0,15,96,0,0,4099,4241,821,1586,2172,12824,0,0,0,0,15615,15616,15616,15616,1,1,1,1,'Hydra Cuisses');  -- 2021.11.10 All agree Bonecraft 96.  BGWiki shows 1-15 Leathercraft where JPWiki shows amateur 5.  Implimented @ 15 to err on the side of more difficult.
+INSERT INTO `synth_recipes` VALUES (54540,0,0,0,0,0,0,15,96,0,0,4099,4241,821,1586,2172,12824,0,0,0,0,15615,15616,15616,15616,1,1,1,1,'Hydra Cuisses');  -- 2021.11.10 All agree Bonecraft 96.  BGWiki shows 1-15 Leathercraft where JPWiki shows amateur 5.  Implemented @ 15 to err on the side of more difficult.
 INSERT INTO `synth_recipes` VALUES (54541,0,0,0,0,0,0,0,97,0,0,4099,4241,821,1586,1587,12696,0,0,0,0,12693,14829,14829,14829,1,1,1,1,'Gavial Finger Gauntlets');
 INSERT INTO `synth_recipes` VALUES (54542,0,0,0,0,0,0,46,97,0,0,4099,4241,506,927,1117,1618,1680,1718,0,0,14321,14322,14322,14322,1,1,1,1,'Igqira Lappas');
 INSERT INTO `synth_recipes` VALUES (54543,0,0,0,0,0,0,0,97,0,0,4099,4241,1312,12452,0,0,0,0,0,0,1394,1395,1395,1395,1,1,1,1,'Cursed Cap');
@@ -3554,7 +3554,7 @@ INSERT INTO `synth_recipes` VALUES (55002,0,0,49,37,0,0,0,101,0,0,4098,4240,651,
 INSERT INTO `synth_recipes` VALUES (55003,0,0,0,0,0,0,0,102,50,0,4098,4240,1311,1715,4154,4154,5306,0,0,0,10794,10795,10795,10795,1,1,1,1,'Blenmot\'s Ring');
 -- INSERT INTO `synth_recipes` VALUES (55004,0,0,0,0,0,0,255,102,0,0,4099,4241,830,836,8708,8982,8982,8983,8983,0,26883,26884,26884,26884,1,1,1,1,'Sombra Harness');  -- 2021.11.10 All agree on Bonecraft 102 with unknown Leathercraft and Clothcraft.
 INSERT INTO `synth_recipes` VALUES (55005,0,0,0,0,0,0,60,102,0,0,4099,4241,823,855,862,1841,1841,0,0,0,14448,14449,14449,14449,1,1,1,1,'Unicorn Harness');  -- 2021.11.10 Allakhazam, JPWiki, and BGWiki agree 102/60.  Others show unknown sub level.
-INSERT INTO `synth_recipes` VALUES (55006,0,0,0,0,0,0,27,103,0,0,4099,4241,821,850,1586,1586,1587,1587,12568,0,12565,13747,13747,13747,1,1,1,1,'Gavial Mail');  -- 2021.11.10 Allakhazam and JPWiki show no subcraft.  FFXIAH and FFXIclopedia show unknown Leathercraft sub.  BGWiki shows Leathercraft 1-27.  Implimented recipe w @ level 27.
+INSERT INTO `synth_recipes` VALUES (55006,0,0,0,0,0,0,27,103,0,0,4099,4241,821,850,1586,1586,1587,1587,12568,0,12565,13747,13747,13747,1,1,1,1,'Gavial Mail');  -- 2021.11.10 Allakhazam and JPWiki show no subcraft.  FFXIAH and FFXIclopedia show unknown Leathercraft sub.  BGWiki shows Leathercraft 1-27.  Implemented recipe w @ level 27.
 INSERT INTO `synth_recipes` VALUES (55007,0,0,0,0,0,0,0,103,0,0,4099,4241,823,850,867,885,3445,3552,0,0,10346,10347,10347,10347,1,1,1,1,'Dux Cuisses');
 INSERT INTO `synth_recipes` VALUES (55008,0,0,0,0,0,0,0,104,0,0,4099,4241,821,879,1586,1586,2172,2172,12568,0,14537,14538,14538,14538,1,1,1,1,'Hydra Mail');  -- 2021.11.09 BGWiki shows Bonecraft 104 with 1-27 Leathercraft.  FFXIclopedia and JPWiki shows no sub.
 INSERT INTO `synth_recipes` VALUES (55009,0,0,0,0,0,0,0,104,0,0,4098,4240,2654,0,0,0,0,0,0,0,2735,2735,2735,2735,1,2,3,4,'Dark Ixion Ferrule');
@@ -3706,7 +3706,7 @@ INSERT INTO `synth_recipes` VALUES (60506,0,0,0,0,0,0,0,0,14,0,4101,4243,913,913
 INSERT INTO `synth_recipes` VALUES (60507,1,0,0,0,0,0,0,0,14,0,4100,4242,16572,0,0,0,0,0,0,0,649,649,913,852,3,3,2,2,'Bee Spatha (desynth)');
 INSERT INTO `synth_recipes` VALUES (60508,0,0,0,0,0,0,0,0,14,0,4098,4240,2464,4509,4509,4509,4509,0,0,0,5165,5165,5165,5165,1,2,3,4,'Movalpolos Water');
 INSERT INTO `synth_recipes` VALUES (60509,0,0,0,0,0,0,0,0,15,0,4101,4243,1683,4509,4545,0,0,0,0,0,2197,2197,2197,2197,3,6,9,12,'Chocotonic');
-INSERT INTO `synth_recipes` VALUES (60510,1,0,0,0,0,0,0,0,15,0,4096,4238,497,0,0,0,0,0,0,0,943,943,943,943,8,8,8,8,'Gigas Socks (desynth)');
+INSERT INTO `synth_recipes` VALUES (60510,1,0,0,0,0,0,0,0,15,0,4096,4238,497,0,0,0,0,0,0,0,943,943,943,943,2,4,6,8,'Gigas Socks (desynth)');
 INSERT INTO `synth_recipes` VALUES (60511,0,0,0,0,0,0,0,0,15,0,4099,4241,947,1134,1134,0,0,0,0,0,4167,4167,4167,4167,33,66,99,99,'Cracker');
 INSERT INTO `synth_recipes` VALUES (60512,0,0,0,0,0,0,0,0,15,0,4099,4241,947,1134,4545,0,0,0,0,0,2394,2394,2394,2394,3,6,9,12,'Gysahl Bomb');
 INSERT INTO `synth_recipes` VALUES (60513,0,0,0,0,0,0,0,0,15,0,4099,4241,8891,0,0,0,0,0,0,0,4167,4167,4167,4167,33,33,33,33,'Cracker');
@@ -4235,6 +4235,8 @@ INSERT INTO `synth_recipes` VALUES (69920,1,0,0,0,0,0,0,0,86,0,4100,4242,16858,0
 INSERT INTO `synth_recipes` VALUES (69921,1,0,0,0,0,0,0,0,83,0,4100,4242,16860,0,0,0,0,0,0,0,4154,715,1226,1226,1,2,10,10,'Holy Lance (desynth)');
 INSERT INTO `synth_recipes` VALUES (69922,1,0,0,0,0,0,0,0,55,0,4100,4242,17041,0,0,0,0,0,0,0,4154,716,1226,653,1,1,10,2,'Holy Mace (desynth)');
 INSERT INTO `synth_recipes` VALUES (69923,1,0,0,0,0,0,0,0,78,0,4100,4242,12434,0,0,0,0,0,0,0,850,850,850,850,1,1,1,1,'Genbu\'s Kabuto (desynth)');  -- possible HQ1=ram leather x1 HQ2=cermet chip x1.  Only JP site showed level.
+INSERT INTO `synth_recipes` VALUES (69924,1,0,8,47,0,0,0,0,0,0,4100,4242,16651,0,0,0,0,0,0,0,707,707,1226,1226,1,1,4,6,'Mythril Pick (desynth)');
+INSERT INTO `synth_recipes` VALUES (69925,1,0,8,47,0,0,0,0,0,0,4100,4242,16670,0,0,0,0,0,0,0,707,707,1226,1226,1,1,4,6,'Mythril Pick +1 (desynth)');
 INSERT INTO `synth_recipes` VALUES (70001,0,0,0,0,0,0,0,0,0,1,4101,4243,2203,2203,2343,4362,4509,0,0,0,2209,2209,2209,2209,2,4,6,8,'Worm Paste');
 INSERT INTO `synth_recipes` VALUES (70002,0,0,0,0,0,0,0,0,0,1,4103,4245,727,4378,0,0,0,0,0,0,5575,5575,5575,5575,4,6,9,12,'Yogurt');
 INSERT INTO `synth_recipes` VALUES (70003,0,0,0,0,0,0,0,0,0,2,4101,4243,5465,0,0,0,0,0,0,0,2397,2397,2397,2397,1,1,1,1,'Foulweather Frog');
@@ -4756,7 +4758,7 @@ INSERT INTO `synth_recipes` VALUES (75518,1,0,0,98,0,0,0,0,0,0,4100,4242,13941,0
 INSERT INTO `synth_recipes` VALUES (75519,1,0,0,91,0,0,0,0,0,0,4100,4242,18406,0,0,0,0,0,0,0,2302,2302,2302,2302,1,1,2,2,'Jadagna_+1_Desynth');
 INSERT INTO `synth_recipes` VALUES (75520,1,0,0,0,85,0,0,0,0,0,4100,4242,13414,0,0,0,0,0,0,0,813,813,746,746,1,1,1,2,'Heavens_Earring_Desynth');
 INSERT INTO `synth_recipes` VALUES (75521,1,0,0,0,85,0,0,0,0,0,4100,4242,14719,0,0,0,0,0,0,0,813,813,746,746,1,1,1,2,'Heavens_Earring_+1_Desynth');
-INSERT INTO `synth_recipes` VALUES (75522,0,0,70,0,0,0,0,0,0,0,4102,4244,9091,0,0,0,0,0,0,0,19320,19320,19320,19320,1,1,1,1,'Lu Shang\'s Fishing Rod +1'); -- BGWiki and JP Wiki
+INSERT INTO `synth_recipes` VALUES (75522,2,0,70,0,0,0,0,0,0,0,4102,4244,9091,0,0,0,0,0,0,0,19320,19320,19320,19320,1,1,1,1,'Lu Shang\'s Fishing Rod +1'); -- BGWiki and JP Wiki
 INSERT INTO `synth_recipes` VALUES (75523,1,0,0,0,92,0,0,0,0,0,4100,4242,13185,0,0,0,0,0,0,0,650,650,1117,745,1,1,1,1,'Muscle_Belt_Desynth'); -- ffxiclopedia
 INSERT INTO `synth_recipes` VALUES (75524,1,0,0,100,0,0,0,0,0,0,4100,4242,17252,0,0,0,0,0,0,0,1231,717,654,655,1,1,1,1,'Culverin (desynth)'); -- FFXIClopedia and JP Wiki
 INSERT INTO `synth_recipes` VALUES (75525,1,0,0,0,0,0,0,96,0,0,4100,4242,15813,0,0,0,0,0,0,0,5466,5466,5466,5466,1,1,1,1,'Trumpet ring (desynth)');

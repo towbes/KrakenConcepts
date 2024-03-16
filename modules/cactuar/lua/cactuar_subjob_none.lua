@@ -51,13 +51,13 @@ page1 =
     {   
         'Disable my Subjob? Why would I want that?',
         function(playerArg)
-                playerArg:PrintToPlayer('MogMog: You can disable your subjob but in exchange, you will get increased base attributes. Worry not kupo, you can always change it back in your mog house.', xi.msg.channel.NS_SAY)
+                playerArg:printToPlayer('MogMog: You can disable your subjob but in exchange, you will get increased base attributes. Worry not kupo, you can always change it back in your mog house.', xi.msg.channel.NS_SAY)
                 npc:lookAt(player:getPos())
                 npc:timer(10000, function(npcArg)
                     npcArg:setRotation(m.zone[zoneId].npc.r)
                 end)
                 npc:timer(1500, function(npcArg)
-                    playerArg:PrintToPlayer('MogMog: Aside from speaking to me, you may now also use the "!sjlock" command to channel your inner strength with one job.', xi.msg.channel.NS_SAY)
+                    playerArg:printToPlayer('MogMog: Aside from speaking to me, you may now also use the "!sjlock" command to channel your inner strength with one job.', xi.msg.channel.NS_SAY)
                 end)
                 if playerArg:getCharVar('MogMog_Spoken_SubJobLock') == 0 then
                     playerArg:setCharVar('MogMog_Spoken_SubJobLock', 1) -- Player has spoken to Mogmog, can now use !sjlock command.
@@ -70,7 +70,7 @@ page1 =
     {
         'Disable Subjob',
         function(playerArg)
-            playerArg:PrintToPlayer('Your subjob has been disabled. You can revert it later by speaking to your moogle to set your subjob.', xi.msg.channel.SYSTEM_3) 
+            playerArg:printToPlayer('Your subjob has been disabled. You can revert it later by speaking to your moogle to set your subjob.', xi.msg.channel.SYSTEM_3) 
             playerArg:changesJob(0)
             if playerArg:getCharVar('MogMog_Spoken_SubJobLock') == 0 then
                 playerArg:setCharVar('MogMog_Spoken_SubJobLock', 1) -- Player has spoken to Mogmog, can now use !sjlock command.

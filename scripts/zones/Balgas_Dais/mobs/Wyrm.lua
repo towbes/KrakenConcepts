@@ -24,7 +24,7 @@ entity.onMobSpawn = function(mob)
     grounded(mob)
 end
 
-entity.onMobEngaged = function(mob, target)
+entity.onMobEngage = function(mob, target)
     mob:setMod(xi.mod.REGAIN, 100) -- very close to the capture by comparing stop watch measures
     mob:setMod(xi.mod.REGEN, 50)
 end

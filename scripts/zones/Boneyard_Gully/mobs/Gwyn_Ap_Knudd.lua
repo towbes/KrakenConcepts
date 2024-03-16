@@ -8,7 +8,7 @@ local entity = {}
 entity.onMobSpawn = function(mob)
 end
 
-entity.onMobEngaged = function(mob)
+entity.onMobEngage = function(mob)
     mob:setLocalVar('timer', os.time() + math.random(15, 30))
     mob:getBattlefield():setLocalVar('undeadControl', 1)
 end

@@ -109,7 +109,7 @@ entity.onMobInitialize = function(mob)
     mob:setMobMod(xi.mobMod.GIL_MAX, 5000)
 end
 
-entity.onMobEngaged = function(mob, target)
+entity.onMobEngage = function(mob, target)
     mob:setLocalVar('TimeToRun', os.time() + 10) -- Cheese runs 3 mins after engaging.  Not hp% based (capture has him in the single digits before running)
 end
 

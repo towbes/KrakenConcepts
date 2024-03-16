@@ -40,7 +40,7 @@ entity.onMobSpawn = function(mob)
     mob:setMod(xi.mod.SLOWRES, 100)
 end
 
-entity.onMobEngaged = function(mob, target)
+entity.onMobEngage = function(mob, target)
     mob:setLocalVar('TimeToRun', os.time() + math.random(60, 90)) -- Runs at timed intervals, not HPP based
 end
 
