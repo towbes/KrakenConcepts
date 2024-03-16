@@ -367,6 +367,11 @@ xi.mobskills.mobPhysicalMove = function(mob, target, skill, numHits, accMod, dmg
         finaldmg   = 0
         hitslanded = 0
         skill:setMsg(xi.msg.basic.SKILL_MISS)
+    -- calculate tp return of mob skill
+    else
+        local tpReturn = xi.combat.tp.getSingleMeleeHitTPReturn(mob, target)
+        tpReturn = tpReturn + 10 * (hitslanded - 1) -- extra hits give 10 TP each
+        mob:addTP(tpReturn)
     end
 
     returninfo.dmg        = finaldmg
@@ -454,6 +459,12 @@ xi.mobskills.mobMagicalMove = function(mob, target, skill, damage, element, dmgm
     end
 
     returninfo.dmg = finaldmg
+
+    -- magical mob skills are single hit so provide single Melee hit TP return
+    if finaldmg > 0 then
+        local tpReturn = xi.combat.tp.getSingleMeleeHitTPReturn(mob, target)
+        mob:addTP(tpReturn)
+    end
 
     return returninfo
 end
@@ -622,6 +633,12 @@ xi.mobskills.mobBreathMove = function(mob, target, percent, base, element, cap)
     if mob:getMobMod(xi.mobMod.BREATH_ATTACK_LINEAR) == 1 then
     local mobScalingHP = mob:getMaxHP() / mob:getHP()
     damage = (damage / mobScalingHP)
+    end
+
+    -- breath mob skills are single hit so provide single Melee hit TP return
+    if damage > 0 then
+        local tpReturn = xi.combat.tp.getSingleMeleeHitTPReturn(mob, target)
+        mob:addTP(tpReturn)
     end
 
     return damage

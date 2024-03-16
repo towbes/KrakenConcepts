@@ -108,7 +108,7 @@ bool CMobController::CanPursueTarget(CBattleEntity* PTarget)
         if (!PMob->PAI->PathFind->InWater() && PTarget && !PTarget->StatusEffectContainer->HasStatusEffect(EFFECT_DEODORIZE))
         {
             // certain weather / deodorize will turn on time deaggro
-            return PMob->m_disableScent;
+            return !PMob->m_disableScent;
         }
     }
     return false;
@@ -119,7 +119,7 @@ bool CMobController::CheckHide(CBattleEntity* PTarget)
     TracyZoneScoped;
     if (PTarget && PTarget->GetMJob() == JOB_THF && PTarget->StatusEffectContainer->HasStatusEffect(EFFECT_HIDE))
     {
-        return !CanPursueTarget(PTarget) && !PMob->m_TrueDetection;
+        return !CanPursueTarget(PTarget) && !PMob->m_TrueDetection && !(PMob->getMobMod(MOBMOD_DETECTION) & DETECT_HEARING);
     }
     else if (PTarget && PTarget->GetSJob() == JOB_THF && PTarget->StatusEffectContainer->HasStatusEffect(EFFECT_HIDE))
     {
@@ -187,7 +187,18 @@ void CMobController::TryLink()
     {
         if (PTarget->PPet->objtype == TYPE_PET && ((CPetEntity*)PTarget->PPet)->getPetType() == PET_TYPE::AVATAR)
         {
-            petutils::AttackTarget(PTarget, PMob);
+            if (PTarget->objtype == TYPE_PC)
+            {
+                std::unique_ptr<CBasicPacket> errMsg;
+                if (PTarget->PPet->CanAttack(PMob, errMsg))
+                {
+                    petutils::AttackTarget(PTarget, PMob);
+                }
+            }
+            else
+            {
+                petutils::AttackTarget(PTarget, PMob);
+            }
         }
     }
 
@@ -1218,10 +1229,12 @@ bool CMobController::CanAggroTarget(CBattleEntity* PTarget)
             return false;
         }
 
-        // Don't aggro, I'm a normal CoP Fomor and you have low hate
-        if (PMob->m_Family == 115 && !(PMob->m_Type & MOBTYPE_NOTORIOUS) && (PMob->getZone() >= 24 && PMob->getZone() <= 28) && PTarget->objtype == TYPE_PC)
+        // Do not aggro if a normal CoP Fomor and the player has low enough fomor hate
+        if (PMob->m_Family == 115 && !(PMob->m_Type & MOBTYPE_NOTORIOUS) &&
+            (PMob->getZone() >= ZONE_LUFAISE_MEADOWS && PMob->getZone() <= ZONE_SACRARIUM) &&
+            PTarget->objtype == TYPE_PC)
         {
-            if (((CCharEntity*)PTarget)->getCharVar("FOMOR_HATE") < 8)
+            if (static_cast<CCharEntity*>(PTarget)->getCharVar("FOMOR_HATE") < 8)
             {
                 return false;
             }

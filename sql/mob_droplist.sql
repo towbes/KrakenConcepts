@@ -26680,8 +26680,11 @@ INSERT INTO `mob_droplist` VALUES (3294,0,0,1000,647,@ALWAYS);    -- Chunk of mo
 INSERT INTO `mob_droplist` VALUES (3294,0,0,1000,19236,@VCOMMON); -- Hightail bullet (Very common, 24%)
 
 -- ZoneID 126 - Atkorkamuy
-INSERT INTO `mob_droplist` VALUES (3295,0,0,1000,2813,@COMMON);   -- Aptant: Durus 
+INSERT INTO `mob_droplist` VALUES (3295,0,0,1000,2813,@COMMON);   -- Aptant: Durus
 INSERT INTO `mob_droplist` VALUES (3295,0,0,1000,2816,@COMMON);   -- Aptant: Tachus
+
+-- ZoneID 123 - Pyuu the Spatemaker
+INSERT INTO `mob_droplist` VALUES (3296,0,0,1000,2850,@UNCOMMON); -- Ingot of Sahagin gold (Uncommon, 10%)
 
 -- ZoneID: 187 - Xuu Bhoqa the Enigma
 INSERT INTO `mob_droplist` VALUES (4000,0,0,1000,11671,@COMMON);  -- Oneiros Ring (15.0%)

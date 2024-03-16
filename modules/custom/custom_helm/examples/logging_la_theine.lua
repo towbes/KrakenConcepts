@@ -7,7 +7,7 @@ local customHelm = require('modules/custom/custom_helm/custom_helm')
 -----------------------------------
 local m = Module:new('logging_la_theine')
 
-xi.helm.helmInfo[xi.helm.type.LOGGING].zone[xi.zone.LA_THEINE_PLATEAU] =
+xi.helm.helmInfo[xi.helmType.LOGGING].zone[xi.zone.LA_THEINE_PLATEAU] =
 {
     dynamic = true,
 
@@ -47,7 +47,7 @@ xi.helm.helmInfo[xi.helm.type.LOGGING].zone[xi.zone.LA_THEINE_PLATEAU] =
 
 m:addOverride('xi.zones.La_Theine_Plateau.Zone.onInitialize', function(zone)
     super(zone)
-    xi.helm.initZone(zone, xi.helm.type.LOGGING)
+    xi.helm.initZone(zone, xi.helmType.LOGGING)
 end)
 
 return m

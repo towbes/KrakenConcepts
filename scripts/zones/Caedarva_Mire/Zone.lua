@@ -12,7 +12,7 @@ zoneObject.onInitialize = function(zone)
     xi.mob.nmTODPersistCache(zone, ID.mob.ZIKKO)
     DisallowRespawn(ID.mob.ZIKKO, true) -- Spawn is controlled by players entering swamps
 
-    xi.helm.initZone(zone, xi.helm.type.LOGGING)
+    xi.helm.initZone(zone, xi.helmType.LOGGING)
 
     -- Swamp trigger areas (Map 1)
     zone:registerTriggerArea(1, 305, 2.5, -380, 0, 0, 0) -- South swamp (J-8)

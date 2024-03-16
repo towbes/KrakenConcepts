@@ -14,7 +14,7 @@ zoneObject.onInitialize = function(zone)
     --NM Persistence
     xi.mob.nmTODPersistCache(zone, ID.mob.THOON)
 
-    xi.helm.initZone(zone, xi.helm.type.EXCAVATION)
+    xi.helm.initZone(zone, xi.helmType.EXCAVATION)
 end
 
 zoneObject.onZoneIn = function(player, prevZone)

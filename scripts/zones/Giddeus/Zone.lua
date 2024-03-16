@@ -9,7 +9,7 @@ zoneObject.onInitialize = function(zone)
     xi.mob.nmTODPersistCache(zone, ID.mob.QUU_XIJO_THE_ILLUSORY)
     
     xi.treasure.initZone(zone)
-    xi.helm.initZone(zone, xi.helm.type.HARVESTING)
+    xi.helm.initZone(zone, xi.helmType.HARVESTING)
 end
 
 zoneObject.onZoneIn = function(player, prevZone)

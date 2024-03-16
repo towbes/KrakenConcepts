@@ -51,7 +51,7 @@ zoneObject.onInitialize = function(zone)
     xi.mob.nmTODPersistCache(zone, ID.mob.TIAMAT)
     xi.mob.nmTODPersistCache(zone, ID.mob.SEKHMET)
 
-    xi.helm.initZone(zone, xi.helm.type.EXCAVATION)
+    xi.helm.initZone(zone, xi.helmType.EXCAVATION)
 
     xi.exp_controller.onInitialize(zone)
 

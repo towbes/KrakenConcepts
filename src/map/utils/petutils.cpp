@@ -39,6 +39,7 @@ along with this program.  If not, see http://www.gnu.org/licenses/
 #include "map.h"
 #include "mob_spell_list.h"
 #include "mobutils.h"
+#include "notoriety_container.h"
 #include "petutils.h"
 #include "puppetutils.h"
 #include "status_effect_container.h"
@@ -1609,6 +1610,24 @@ namespace petutils
             PMob->PMaster    = nullptr;
 
             PMob->PAI->SetController(std::make_unique<CMobController>(PMob));
+
+            // clear all enmity towards a charmed mob when it is released
+            // use two loops to avoid modifying the container while iterating over it
+            std::list<CMobEntity*> mobsToPacify;
+
+            // first collect the mobs with hate towards the formerly charmed mob
+            for (auto* entityWithEnmity : *PMob->PNotorietyContainer)
+            {
+                if (auto* mobToPacify = dynamic_cast<CMobEntity*>(entityWithEnmity))
+                {
+                    mobsToPacify.emplace_back(mobToPacify);
+                }
+            }
+            // then remove the formerly charmed mob from those mobs enmity containers
+            for (const auto* mobToPacify : mobsToPacify)
+            {
+                mobToPacify->PEnmityContainer->Clear(PMob->id);
+            }
         }
         else if (PPet->objtype == TYPE_PET)
         {

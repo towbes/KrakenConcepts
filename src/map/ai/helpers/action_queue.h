@@ -86,6 +86,8 @@ public:
     void clearActionQueue();
     void clearTimerQueue();
 
+    void clearActionQueue();
+    void clearTimerQueue();
     bool isEmpty();
 
 private:

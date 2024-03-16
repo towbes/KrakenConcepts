@@ -893,6 +893,11 @@ void CLuaBaseEntity::StartEventHelper(int32 EventID, sol::variadic_args va, EVEN
         return;
     }
 
+    if (PChar->currentEvent->eventId == EventID)
+    {
+        ShowError("CLuaBaseEntity::StartEventHelper: Could not start event, Character Entity already triggered.");
+        return;
+    }
     PChar->StatusEffectContainer->DelStatusEffect(EFFECT_BOOST);
 
     PChar->queueEvent(ParseEvent(EventID, va, PChar->eventPreparation, eventType));
@@ -3747,14 +3752,11 @@ bool CLuaBaseEntity::addItem(sol::variadic_args va)
     CCharEntity* PChar = (CCharEntity*)m_PBaseEntity;
 
     /* FORMAT 1:
-    player:addItem({id=itemID, quantity=quantity}) -- add quantity of itemID
-
-    player:addItem({id=itemID, silent=true}) -- silently add 1 of itemID
-
-    player:addItem({id=itemID, signature="Char"}) -- add 1 signed of itemID
-    player:addItem({id=itemID, augments={[4]=5,[10]=10}}) -- add 1 of itemID with augment id 4 and 10,
-        with values of 5 and 10, respectively
-    player:addItem({ id = itemID, exdata = { [10] = 10 } }) -- add 1 item of itemID, with the exdata at index 10 (0-indexed!) set to 10
+    player:addItem({ id = itemID, quantity  = quantity               }) -- add quantity of itemID
+    player:addItem({ id = itemID, silent    = true                   }) -- silently add 1 of itemID
+    player:addItem({ id = itemID, signature = "Char"                 }) -- add 1 signed of itemID
+    player:addItem({ id = itemID, augments  = { [4] = 5, [10] = 10 } }) -- add 1 of itemID with augment id 4 and 10, with values of 5 and 10, respectively
+    player:addItem({ id = itemID, exdata    = { [10] = 10 }          }) -- add 1 item of itemID, with the exdata at index 10 (0-indexed!) set to 10
     */
 
     if (va.get_type(0) == sol::type::table)
@@ -13538,8 +13540,8 @@ uint16 CLuaBaseEntity::getEVA()
  *  Function: getRACC()
  *  Purpose : Calculates and returns the Ranged Accuracy of a Weapon euipped in the Ranged slot
  *  Example : player:getRACC()
- *  Notes   : To Do: The calculation is already a public member of battleentity, shouldn't have two calculations, just call (CBattleEntity*)m_PBaseEntity)->RACC
- *and return result
+ *  Notes   : TODO: The calculation is already a public member of battleentity, shouldn't have two calculations, just call (CBattleEntity*)m_PBaseEntity)->RACC
+ *            and return result
  ************************************************************************/
 
 int CLuaBaseEntity::getRACC()
@@ -13770,39 +13772,6 @@ bool CLuaBaseEntity::isWeaponTwoHanded()
     }
 
     return weapon->isTwoHanded();
-}
-
-/************************************************************************
- *  Function: getMeleeHitDamage()
- *  Purpose : Calculates and returns total damage for a single hit
- *  Example : getMeleeHitDamage(Attacker,Local Hit Rate)
- *  Notes   : Battleutils calculates hit rate already, so inserting hit rate
- *          : here only increases chance of missing (assuming < 100)?
- *          : Not currently used in any scripts (handled by battleutils) - Is this even needed?
- ************************************************************************/
-
-int CLuaBaseEntity::getMeleeHitDamage(CLuaBaseEntity* PLuaBaseEntity, sol::object const& arg1)
-{
-    if (m_PBaseEntity->objtype == TYPE_NPC)
-    {
-        ShowWarning("Invalid Entity (NPC: %s) calling function.", m_PBaseEntity->getName());
-        return 0;
-    }
-
-    CBattleEntity* PAttacker = static_cast<CBattleEntity*>(m_PBaseEntity);
-    CBattleEntity* PDefender = static_cast<CBattleEntity*>(PLuaBaseEntity->GetBaseEntity());
-
-    uint8 hitrate = (arg1 == sol::lua_nil) ? battleutils::GetHitRate(PAttacker, PDefender) : arg1.as<uint8>();
-
-    if (xirand::GetRandomNumber(100) < hitrate)
-    {
-        float DamageRatio = battleutils::GetDamageRatio(PAttacker, PDefender, false, 0.f);
-        int   damage      = (uint16)((PAttacker->GetMainWeaponDmg() + battleutils::GetFSTR(PAttacker, PDefender, SLOT_MAIN)) * DamageRatio);
-
-        return damage;
-    }
-
-    return -1;
 }
 
 /************************************************************************
@@ -17617,25 +17586,18 @@ bool CLuaBaseEntity::deleteRaisedChocobo()
 
 void CLuaBaseEntity::clearActionQueue()
 {
-    if (m_PBaseEntity == nullptr || m_PBaseEntity->objtype != TYPE_MOB)
+    if (m_PBaseEntity->PAI)
     {
-        return;
-    }
-    auto* PMob = static_cast<CMobEntity*>(m_PBaseEntity);
-    if (PMob)
-    {
-        PMob->PAI->ClearActionQueue();
+        m_PBaseEntity->PAI->ClearActionQueue();
     }
 }
 
 void CLuaBaseEntity::clearTimerQueue()
 {
-    if (m_PBaseEntity == nullptr)
+    if (m_PBaseEntity->PAI)
     {
-        return;
+        m_PBaseEntity->PAI->ClearTimerQueue();
     }
-
-    m_PBaseEntity->PAI->ClearTimerQueue();
 }
 
 void CLuaBaseEntity::setMannequinPose(uint16 itemID, uint8 race, uint8 pose)
@@ -18457,7 +18419,6 @@ void CLuaBaseEntity::Register()
     SOL_REGISTER("handleAfflatusMiseryDamage", CLuaBaseEntity::handleAfflatusMiseryDamage);
 
     SOL_REGISTER("isWeaponTwoHanded", CLuaBaseEntity::isWeaponTwoHanded);
-    SOL_REGISTER("getMeleeHitDamage", CLuaBaseEntity::getMeleeHitDamage);
     SOL_REGISTER("getWeaponDmg", CLuaBaseEntity::getWeaponDmg);
     SOL_REGISTER("getWeaponDmgRank", CLuaBaseEntity::getWeaponDmgRank);
     SOL_REGISTER("getOffhandDmg", CLuaBaseEntity::getOffhandDmg);
@@ -18666,6 +18627,9 @@ void CLuaBaseEntity::Register()
     SOL_REGISTER("setClaimedTraverserStones", CLuaBaseEntity::setClaimedTraverserStones);
 
     SOL_REGISTER("getHistory", CLuaBaseEntity::getHistory);
+
+    SOL_REGISTER("clearActionQueue", CLuaBaseEntity::clearActionQueue);
+    SOL_REGISTER("clearTimerQueue", CLuaBaseEntity::clearTimerQueue);
 
     SOL_REGISTER("getChocoboRaisingInfo", CLuaBaseEntity::getChocoboRaisingInfo);
     SOL_REGISTER("setChocoboRaisingInfo", CLuaBaseEntity::setChocoboRaisingInfo);

@@ -544,12 +544,13 @@ enum class Mod
     THIRD_EYE_BONUS           = 1055, // TODO: Bonus Third Eye Evasion (count)
 
     // Ninja
-    UTSUSEMI          = 307, // Everyone's favorite --tracks shadows.
-    UTSUSEMI_BONUS    = 900, // Extra shadows from gear
-    NINJA_TOOL        = 308, // Percent chance to not use a tool.
-    NIN_NUKE_BONUS    = 522, // magic attack bonus for NIN nukes
-    DAKEN             = 911, // chance to throw a shuriken without consuming it
-    NINJUTSU_DURATION = 1000,
+    UTSUSEMI             = 307, // Everyone's favorite --tracks shadows.
+    UTSUSEMI_BONUS       = 900, // Extra shadows from gear
+    NINJA_TOOL           = 308, // Percent chance to not use a tool.
+    NIN_NUKE_BONUS_INNIN = 223, // Ninjutsu damage multiplier from Innin.
+    NIN_NUKE_BONUS_GEAR  = 522, // Ninjutsu damage multiplier from gear.
+    DAKEN                = 911, // chance to throw a shuriken without consuming it
+    NINJUTSU_DURATION    = 1000,
 
     // Dragoon
     ANCIENT_CIRCLE_DURATION    = 859,  // Ancient Circle extended duration in seconds
@@ -1002,6 +1003,9 @@ enum class Mod
     DIG_BYPASS_FATIGUE = 1074, // Chocobo digging modifier found in "Blue Race Silks". Modifier works as a direct percent.
     BREATH_DMG_DEALT   = 1075, // Breath damage dealt
 
+    DAMAGE_LIMIT  = 1080, // Damage Limit increase, found on some traits. It's a flat value added to max pDIF (maxpDIF + DL/100) https://www.bg-wiki.com/ffxi/Damage_Limit%2B
+    DAMAGE_LIMITP = 1081, // Damage Limit +% increase, found on some gear. It's a multiplier added after flat Damage Limit ((maxpDIF + DL/100)*(100 + DLP/100)/100) https://www.ffxiah.com/forum/topic/56649/physical-damage-limit/
+
             // Permenant Resistance Build Modifiers
     SLEEPRESBUILD              = 1138, // Used to create a resbuild for the appropriate effect. Will decrease overall duration of effect. (Out of 1000)
     POISONRESBUILD             = 1139, // Used to create a resbuild for the appropriate effect. Will decrease overall duration of effect. (Out of 1000)
@@ -1095,10 +1099,10 @@ enum class Mod
     //
     // SPARE IDs:
     // 141
-    // 220 to 223
+    // 220 to 222
     // 273 to 276
     //
-    // SPARE = 1080 and onward
+    // SPARE = 1082 and onward
 };
 
 // temporary workaround for using enum class as unordered_map key until compilers support it

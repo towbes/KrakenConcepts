@@ -25,7 +25,7 @@ local settings =
         LOCAL_USES = 'uses',
     },
 
-    [xi.helm.type.HARVESTING] =
+    [xi.helmType.HARVESTING] =
     {
         name    = 'Harvesting Point',
         type    = 'Harvesting',
@@ -37,7 +37,7 @@ local settings =
         breaks  = 'Your %s breaks!',
     },
 
-    [xi.helm.type.EXCAVATION] =
+    [xi.helmType.EXCAVATION] =
     {
         name    = 'Excavation Point',
         type    = 'Excavation',
@@ -49,7 +49,7 @@ local settings =
         breaks  = 'Your %s breaks!',
     },
 
-    [xi.helm.type.LOGGING] =
+    [xi.helmType.LOGGING] =
     {
         name    = 'Logging Point',
         type    = 'Logging',
@@ -61,7 +61,7 @@ local settings =
         breaks  = 'Your %s breaks!',
     },
 
-    [xi.helm.type.MINING] =
+    [xi.helmType.MINING] =
     {
         name    = 'Mining Point',
         type    = 'Mining',

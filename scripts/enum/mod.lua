@@ -734,7 +734,8 @@ xi.mod =
     ENH_DRAIN_ASPIR                 = 315, -- % damage boost to Drain and Aspir
     SNEAK_ATK_DEX                   = 830, -- % DEX boost to Sneak Attack (if gear mod, needs to be equipped on hit)
     TRICK_ATK_AGI                   = 520, -- % AGI boost to Trick Attack (if gear mod, needs to be equipped on hit)
-    NIN_NUKE_BONUS                  = 522, -- magic attack bonus for NIN nukes
+    NIN_NUKE_BONUS_INNIN            = 223, -- Ninjutsu damage multiplier from Innin.
+    NIN_NUKE_BONUS_GEAR             = 522, -- Ninjutsu damage multiplier from gear. Ex: Koga Hatsuburi.
     DAKEN                           = 911, -- Chance to throw shuriken on attack
     AMMO_SWING                      = 523, -- Extra swing rate w/ ammo (ie. Jailer weapons). Use gearsets, and does nothing for non-players.
     AMMO_SWING_TYPE                 = 826, -- For the handedness of the weapon - 1h (1) vs. 2h/h2h (2). h2h can safely use the same function as 2h.
@@ -941,6 +942,9 @@ xi.mod =
     BREATH_DMG_DEALT        = 1075, -- Breath damage dealt
 
     STEP_TP_CONSUMED        = 1077, -- Modifies the amount of TP consumed by dancer steps
+
+    DAMAGE_LIMIT  = 1080, -- Damage Limit increase, found on some traits.  It's a flat value added to pDIF (maxpDIF + DL/100) https://www.bg-wiki.com/ffxi/Damage_Limit%2B
+    DAMAGE_LIMITP = 1081, -- Damage Limit +% increase, found on some gear.  It's a multiplier added after flat Damage Limit ((maxpDIF + DL/100)*(100 + DLP/100)/100) https://www.ffxiah.com/forum/topic/56649/physical-damage-limit/
 
         -- Permenant Resistance Build Modifiers
     --SLEEPRESBUILD                 = 1138, -- Used to create a resbuild for the appropriate effect. Will decrease overall duration of effect. (Out of 1000)
