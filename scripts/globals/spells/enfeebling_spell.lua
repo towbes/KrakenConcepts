@@ -42,9 +42,13 @@ local pTable =
     [xi.magic.spell.POISON        ] = { xi.effect.POISON,             xi.mod.INT, xi.mod.POISONRES,   xi.mod.POISON_MEVA,      0,   3,       90,      2,   0,      256, true,        0 },
     [xi.magic.spell.POISON_II     ] = { xi.effect.POISON,             xi.mod.INT, xi.mod.POISONRES,   xi.mod.POISON_MEVA,      0,   3,      120,      2,   0,      256, true,       30 },
     [xi.magic.spell.POISON_III    ] = { xi.effect.POISON,             xi.mod.INT, xi.mod.POISONRES,   xi.mod.POISON_MEVA,      0,   3,      150,      2,   0,      256, true,        0 },
+    [xi.magic.spell.POISON_IV     ] = { xi.effect.POISON,             xi.mod.INT, xi.mod.POISONRES,   xi.mod.POISON_MEVA,      0,   3,      175,      2,   0,      256, true,        0 },
+    [xi.magic.spell.POISON_V      ] = { xi.effect.POISON,             xi.mod.INT, xi.mod.POISONRES,   xi.mod.POISON_MEVA,      0,   3,      200,      2,   0,      256, true,        0 },
     [xi.magic.spell.POISONGA      ] = { xi.effect.POISON,             xi.mod.INT, xi.mod.POISONRES,   xi.mod.POISON_MEVA,      0,   3,       90,      2,   0,      256, true,        0 },
     [xi.magic.spell.POISONGA_II   ] = { xi.effect.POISON,             xi.mod.INT, xi.mod.POISONRES,   xi.mod.POISON_MEVA,      0,   3,      120,      2,   0,      256, true,        0 },
     [xi.magic.spell.POISONGA_III  ] = { xi.effect.POISON,             xi.mod.INT, xi.mod.POISONRES,   xi.mod.POISON_MEVA,      0,   3,      150,      2,   0,      256, true,        0 },
+    [xi.magic.spell.POISONGA_IV   ] = { xi.effect.POISON,             xi.mod.INT, xi.mod.POISONRES,   xi.mod.POISON_MEVA,      0,   3,      175,      2,   0,      256, true,        0 },
+    [xi.magic.spell.POISONGA_V    ] = { xi.effect.POISON,             xi.mod.INT, xi.mod.POISONRES,   xi.mod.POISON_MEVA,      0,   3,      200,      2,   0,      256, true,        0 },
     [xi.magic.spell.RASP          ] = { xi.effect.RASP,               xi.mod.INT, 0,                  0,                       0,   3,       90,      3,   1,        0, true,        0 },
     [xi.magic.spell.SHOCK         ] = { xi.effect.SHOCK,              xi.mod.INT, 0,                  0,                       0,   3,       90,      3,   1,        0, true,        0 },
     [xi.magic.spell.SLEEP         ] = { xi.effect.SLEEP_I,            xi.mod.INT, xi.mod.SLEEPRES,    xi.mod.SLEEP_MEVA,       1,   0,       60,      2,   0,        1, false,       0 },
@@ -200,6 +204,21 @@ xi.spells.enfeebling.calculatePotency = function(caster, target, spellId, spellE
                 if skillLevel > 400 then
                     potency = skillLevel * 49 / 183 - 55 -- No cap can be reached yet
                 end
+            elseif
+                spellId == xi.magic.spell.POISON_III or
+                spellId == xi.magic.spell.POISONGA_III
+            then
+                potency = math.max(skillLevel / 15, 4)
+            elseif
+                spellId == xi.magic.spell.POISON_IV or
+                spellId == xi.magic.spell.POISONGA_IV
+            then
+                potency = math.max(skillLevel / 10, 4)
+            elseif
+                spellId == xi.magic.spell.POISON_V or
+                spellId == xi.magic.spell.POISONGA_V
+            then
+                potency = math.max(skillLevel / 5, 4)
             else
                 potency = skillLevel / 10 + 1
             end

@@ -188,10 +188,12 @@ local pTable =
     [xi.magic.spell.BANISH_II     ] = { xi.mod.MND,    0,   85,    1,   85, 113, 0 },
     [xi.magic.spell.BANISH_III    ] = { xi.mod.MND,    0,  198,  1.5,  198, 250, 0 },
     [xi.magic.spell.BANISH_IV     ] = { xi.mod.MND,    0,  420,  1.5,  420, 400, 0 }, -- Enemy only. Stats unknown/unchecked.
+    [xi.magic.spell.BANISH_V      ] = { xi.mod.MND,    0,  650,  1.5,  650, 600, 0 }, -- Enemy only. Stats unknown/unchecked.
     [xi.magic.spell.BANISHGA      ] = { xi.mod.MND,    0,   50,    1,   50,  46, 0 },
     [xi.magic.spell.BANISHGA_II   ] = { xi.mod.MND,    0,  180,    1,  180, 133, 0 },
     [xi.magic.spell.BANISHGA_III  ] = { xi.mod.MND,    0,  480,  1.5,  480, 450, 0 }, -- Enemy only. Stats unknown.
     [xi.magic.spell.BANISHGA_IV   ] = { xi.mod.MND,    0,  600,  1.5,  600, 600, 0 }, -- Enemy only. Stats unknown.
+    [xi.magic.spell.BANISHGA_V    ] = { xi.mod.MND,    0,  750,  1.5,  750, 750, 0 }, -- Enemy only. Stats unknown.
     [xi.magic.spell.HOLY          ] = { xi.mod.MND,    0,  250,    1,  250, 300, 0 },
     [xi.magic.spell.HOLY_II       ] = { xi.mod.MND,    0,  350,    2,  350, 350, 0 },
 
