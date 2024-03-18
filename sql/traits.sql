@@ -825,13 +825,6 @@ INSERT INTO `traits` VALUES (129,'damage limit+',18,90,2,1080,20,NULL,0);
 INSERT INTO `traits` VALUES (129,'damage limit+',19,45,1,1080,10,NULL,0);
 INSERT INTO `traits` VALUES (129,'damage limit+',19,90,2,1080,20,NULL,0);
 
-INSERT INTO `traits` VALUES (134,'ws damage boost',14,45,1,840,7,'ROV',0);
-INSERT INTO `traits` VALUES (134,'ws damage boost',14,55,2,840,10,'ROV',0);
-INSERT INTO `traits` VALUES (134,'ws damage boost',14,65,3,840,13,'ROV',0);
-INSERT INTO `traits` VALUES (134,'ws damage boost',14,75,4,840,16,'ROV',0);
-INSERT INTO `traits` VALUES (134,'ws damage boost',14,85,5,840,19,'ROV',0);
-INSERT INTO `traits` VALUES (134,'ws damage boost',14,95,6,840,21,'ROV',0);
-
 INSERT INTO `traits` VALUES (137,'tandem strike',9,30,1,271,10,'ROV',0);
 INSERT INTO `traits` VALUES (137,'tandem strike',9,45,2,271,20,'ROV',0);
 INSERT INTO `traits` VALUES (137,'tandem strike',9,60,3,271,30,'ROV',0);

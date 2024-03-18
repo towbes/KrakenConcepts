@@ -1,4 +1,4 @@
-/*
+﻿/*
 ===========================================================================
   Copyright (c) 2010-2015 Darkstar Dev Teams
   This program is free software: you can redistribute it and/or modify
@@ -847,6 +847,7 @@ enum class Mod
     ITEM_ADDEFFECT_STATUS   = 951, // Status Effect ID to try to apply via Additional Effect or Spikes
     ITEM_ADDEFFECT_POWER    = 952, // Base Power for effect in MOD_ITEM_ADDEFFECT_STATUS. Must be used for debuffs/buffs.
     ITEM_ADDEFFECT_DURATION = 953, // Base Duration for effect in MOD_ITEM_ADDEFFECT_STATUS
+    ITEM_ADDEFFECT_OPTION   = 2044, // Additional parameters for more specific latents required to proc
 
     GOV_CLEARS = 496, // 4% bonus per Grounds of Valor Page clear
 
@@ -1091,6 +1092,7 @@ enum class Mod
     TANDEM_BLOW            = 2041, // Beastmaster trait - provides subtle blow to master and pet when both engage the same target
     RANDOM_DEAL_BONUS      = 2042, // % chance to reset 2 abilities
     BANISH_POTENCY         = 2043, // % Increase to Banish SDT debuff effect potency.
+    // ITEM_ADDEFFECT_OPTION   = 2044, // Additional parameters for more specific latents required to proc LOCATED ABOVE
 
     // IF YOU ADD ANY NEW MODIFIER HERE, ADD IT IN scripts/enum/mod.lua ASWELL!
 

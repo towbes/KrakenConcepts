@@ -92,7 +92,7 @@ entity.onMobFight = function(mob, target)
         mob:setAnimationSub(2)
         mob:setMod(xi.mod.DMGPHYS, -10) 
         mob:setMod(xi.mod.DMGMAGIC, -10)
-        mob:setMod(xi.move.MOVE_SPEED_STACKABLE, 15)
+        mob:setMod(xi.mod.MOVE_SPEED_STACKABLE, 15)
 
     elseif phase == 5 then
         local destId = mob:getLocalVar('RunDestination')

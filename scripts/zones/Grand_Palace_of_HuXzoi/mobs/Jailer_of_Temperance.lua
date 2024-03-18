@@ -84,7 +84,7 @@ entity.onMobSpawn = function(mob)
     mob:setMod(xi.mod.ATT, 553)
     mob:setMod(xi.mod.DEF, 514)
     mob:setMod(xi.mod.EVA, 335)
-    mob:setMod(xi.move.MOVE_SPEED_STACKABLE, 50)
+    mob:setMod(xi.mod.MOVE_SPEED_STACKABLE, 50)
 end
 
 entity.onMobEngage = function(mob, target)

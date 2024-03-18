@@ -909,9 +909,6 @@ public:
     void clearActionQueue();
     void clearTimerQueue();
 
-    void clearActionQueue();
-    void clearTimerQueue();
-
     void  setMannequinPose(uint16 itemID, uint8 race, uint8 pose);
     uint8 getMannequinPose(uint16 itemID);
 

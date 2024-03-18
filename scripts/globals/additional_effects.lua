@@ -68,27 +68,13 @@ xi.additionalEffect.levelCorrectRates = function(dLV, aLV, chance, lvCorrect)
 end
 
 xi.additionalEffect.statusAttack = function(addStatus, defender)
-    local effectList = {
-        [xi.effect.DEFENSE_DOWN] = {
-            tick = 0,
-            strip = xi.effect.DEFENSE_BOOST
-        },
-        [xi.effect.EVASION_DOWN] = {
-            tick = 0,
-            strip = xi.effect.EVASION_BOOST
-        },
-        [xi.effect.ATTACK_DOWN] = {
-            tick = 0,
-            strip = xi.effect.ATTACK_BOOST
-        },
-        [xi.effect.POISON] = {
-            tick = 3,
-            strip = nil
-        },
-        [xi.effect.CHOKE] = {
-            tick = 3,
-            strip = nil
-        }
+    local effectList =
+    {
+        [xi.effect.DEFENSE_DOWN] = { tick = 0, strip = xi.effect.DEFENSE_BOOST },
+        [xi.effect.EVASION_DOWN] = { tick = 0, strip = xi.effect.EVASION_BOOST },
+        [xi.effect.ATTACK_DOWN]  = { tick = 0, strip = xi.effect.ATTACK_BOOST },
+        [xi.effect.POISON]       = { tick = 3, strip = nil },
+        [xi.effect.CHOKE]        = { tick = 3, strip = nil },
     }
 
     local effect = effectList[addStatus]
@@ -113,9 +99,10 @@ xi.additionalEffect.calcDamage = function(attacker, element, defender, damage, a
     local params = {}
 
     params.bonusmab = 0
-    params.includemab = false
+    params.includemab = true
     damage = addBonusesAbility(attacker, element, defender, damage, params)
     damage = damage * applyResistanceAddEffect(attacker, defender, element, 0)
+    -- Todo: make sure day/weather/affinity bonuses tie in right here
     damage = adjustForTarget(defender, damage, element)
     damage = finalMagicNonSpellAdjustments(attacker, defender, element, damage)
 
@@ -147,9 +134,9 @@ xi.additionalEffect.attack = function(attacker, defender, baseAttackDamage, item
     local power     = item:getMod(xi.mod.ITEM_ADDEFFECT_POWER)
     local duration  = item:getMod(xi.mod.ITEM_ADDEFFECT_DURATION)
     local option    = item:getMod(xi.mod.ITEM_ADDEFFECT_OPTION)
-    local drainRoll = math.random(1, 3) -- Temp, being refactored out
     local msgID     = 0
     local msgParam  = 0
+    local drainRoll = math.random(1, 3) -- Temp, being refactored out
 
     local procType =
     {
@@ -194,16 +181,6 @@ xi.additionalEffect.attack = function(attacker, defender, baseAttackDamage, item
         return 0, 0, 0
     end
 
-    -- Modifications for proc's sourced from ranged attacks. See notes at top of script.
-    --------------------------------------
-    if xi.additionalEffect.isRanged(item) then
-        if element then
-            damage = xi.additionalEffect.calcRangeBonus(attacker, defender, element, damage)
-        end
-
-    chance = xi.additionalEffect.levelCorrection(defender:getMainLvl(), attacker:getMainLvl(), chance)
-    end
-
     -- Archery/marksmanship use this, most other items -usually- do not (See notes at top of script).
     if dStat > 0 then
         damage = xi.additionalEffect.dStatBonus(attacker, defender, dStat, damage)
@@ -215,7 +192,7 @@ xi.additionalEffect.attack = function(attacker, defender, baseAttackDamage, item
 
     if addType == procType.DAMAGE then
         damage = xi.additionalEffect.calcDamage(attacker, element, defender, damage)
-        msgID = xi.msg.basic.ADD_EFFECT_DMG
+        msgID  = xi.msg.basic.ADD_EFFECT_DMG
 
         if damage < 0 then
             msgID = xi.msg.basic.ADD_EFFECT_HEAL
@@ -228,9 +205,9 @@ xi.additionalEffect.attack = function(attacker, defender, baseAttackDamage, item
     --------------------------------------
 
     elseif addType == procType.DAMAGE_HP_PERC then
-        local damageType = attacker:getWeaponDamageType(xi.slot.MAIN)
-        damage = math.floor(attacker.getHP(attacker) / 4)
+        local damageType     = attacker:getWeaponDamageType(xi.slot.MAIN)
         local physicalResist = defender:getMod(xi.mod.SLASH_SDT) / 1000
+        damage = math.floor(attacker.getHP(attacker) / 4)
         damage = damage * physicalResist
         damage = damage - defender:getMod(xi.mod.PHALANX)
         damage = utils.clamp(damage, 0, 99999)
@@ -250,7 +227,7 @@ xi.additionalEffect.attack = function(attacker, defender, baseAttackDamage, item
         local currentMP = attacker.getMP(attacker)
         damage = math.floor(attacker.getMP(attacker) * 0.15) -- Deals 10% of current MP as damage.
         damage = xi.additionalEffect.calcDamage(attacker, element, defender, damage)
-        msgID = xi.msg.basic.ADD_EFFECT_DMG
+        msgID  = xi.msg.basic.ADD_EFFECT_DMG
         attacker:addMP(-(currentMP * 0.05)) -- Drains 5% of current MP on proc.
         if damage < 0 then
             msgID = xi.msg.basic.ADD_EFFECT_HEAL
@@ -327,7 +304,7 @@ xi.additionalEffect.attack = function(attacker, defender, baseAttackDamage, item
 
         local drainMod = 1 + (attacker:getMod(xi.mod.ENH_DRAIN_ASPIR) + attacker:getMod(xi.mod.ENH_DRAIN)) / 100
 
-        msgID = xi.msg.basic.ADD_EFFECT_HP_DRAIN
+        msgID    = xi.msg.basic.ADD_EFFECT_HP_DRAIN
         msgParam = damage * drainMod
         attacker:addHP(damage * drainMod)
 
@@ -345,7 +322,7 @@ xi.additionalEffect.attack = function(attacker, defender, baseAttackDamage, item
 
         local drainMod = 1 + (attacker:getMod(xi.mod.ENH_DRAIN_ASPIR) + attacker:getMod(xi.mod.ENH_ASPIR)) / 100
 
-        msgID = xi.msg.basic.ADD_EFFECT_MP_DRAIN
+        msgID    = xi.msg.basic.ADD_EFFECT_MP_DRAIN
         msgParam = damage * drainMod
         defender:addMP(-damage * drainMod)
         attacker:addMP(damage * drainMod)
@@ -362,7 +339,7 @@ xi.additionalEffect.attack = function(attacker, defender, baseAttackDamage, item
             return 0, 0, 0 -- Conditions not hit
         end
 
-        msgID = xi.msg.basic.ADD_EFFECT_TP_DRAIN
+        msgID    = xi.msg.basic.ADD_EFFECT_TP_DRAIN
         msgParam = damage
         defender:addTP(-damage)
         attacker:addTP(damage)
@@ -376,7 +353,7 @@ xi.additionalEffect.attack = function(attacker, defender, baseAttackDamage, item
         if dispel == xi.effect.NONE then
             return 0, 0, 0
         elseif not defender:hasImmunity(xi.immunity.DISPEL) then
-            msgID = xi.msg.basic.ADD_EFFECT_DISPEL
+            msgID    = xi.msg.basic.ADD_EFFECT_DISPEL
             msgParam = dispel
         else
             return 0, 0, 0
@@ -391,7 +368,7 @@ xi.additionalEffect.attack = function(attacker, defender, baseAttackDamage, item
             if resist > 0.0625 then
                 local stolen = attacker:stealStatusEffect(defender)
                 if stolen ~= 0 then
-                msgID = xi.msg.basic.ADD_EFFECT_SELFBUFF
+                msgID    = xi.msg.basic.ADD_EFFECT_SELFBUFF
                 msgParam = stolen
             else
                 return 0, 0, 0 -- Conditions not hit
@@ -404,17 +381,20 @@ xi.additionalEffect.attack = function(attacker, defender, baseAttackDamage, item
     elseif addType == procType.SELF_BUFF then
         if addStatus == xi.effect.BLINK then -- BLINK http://www.ffxiah.com/item/18830/gusterion
             -- Does not stack with or replace other shadows
-            if attacker:hasStatusEffect(xi.effect.BLINK) or attacker:hasStatusEffect(xi.effect.UTSUSEMI) then
+            if
+                attacker:hasStatusEffect(xi.effect.BLINK) or
+                attacker:hasStatusEffect(xi.effect.UTSUSEMI)
+            then
                 return 0, 0, 0
             else
                 attacker:addStatusEffect(xi.effect.BLINK, power, 0, duration)
-                msgID = xi.msg.basic.ADD_EFFECT_SELFBUFF
+                msgID    = xi.msg.basic.ADD_EFFECT_SELFBUFF
                 msgParam = xi.effect.BLINK
             end
         elseif addStatus == xi.effect.HASTE then
             attacker:addStatusEffect(xi.effect.HASTE, power, 0, duration, 0, 0)
             -- Todo: verify power/duration/tier/overwrite etc
-            msgID = xi.msg.basic.ADD_EFFECT_SELFBUFF
+            msgID    = xi.msg.basic.ADD_EFFECT_SELFBUFF
             msgParam = xi.effect.HASTE
         else
             print('scripts/globals/additional_effects.lua : unhandled additional effect selfbuff! Effect ID: '..addStatus)
@@ -429,7 +409,7 @@ xi.additionalEffect.attack = function(attacker, defender, baseAttackDamage, item
         then
             return 0, 0, 0 -- NMs immune or roll failed so return out
         else
-            msgID = xi.msg.basic.ADD_EFFECT_STATUS
+            msgID    = xi.msg.basic.ADD_EFFECT_STATUS
             msgParam = xi.effect.KO
             defender:setHP(0)
         end
@@ -442,7 +422,7 @@ xi.additionalEffect.attack = function(attacker, defender, baseAttackDamage, item
             defender:setLocalVar('killable', 1)
             defender:setUnkillable(false)
             damage = xi.additionalEffect.calcDamage(attacker, element, defender, damage)
-            msgID = xi.msg.basic.ADD_EFFECT_DMG
+            msgID  = xi.msg.basic.ADD_EFFECT_DMG
             if damage < 0 then
                 msgID = xi.msg.basic.ADD_EFFECT_HEAL
             end
@@ -469,7 +449,7 @@ xi.additionalEffect.attack = function(attacker, defender, baseAttackDamage, item
 
                 local drainMod = 1 + (attacker:getMod(xi.mod.ENH_DRAIN_ASPIR) + attacker:getMod(xi.mod.ENH_DRAIN)) / 100
 
-                msgID = xi.msg.basic.ADD_EFFECT_HP_DRAIN
+                msgID    = xi.msg.basic.ADD_EFFECT_HP_DRAIN
                 msgParam = damage * drainMod
                 defender:addHP(-damage * drainMod)
                 attacker:addHP(damage * drainMod)
@@ -482,7 +462,7 @@ xi.additionalEffect.attack = function(attacker, defender, baseAttackDamage, item
                 -- Else damaging effect
             else
                 damage = xi.additionalEffect.calcDamage(attacker, element, defender, damage)
-                msgID = xi.msg.basic.ADD_EFFECT_DMG
+                msgID  = xi.msg.basic.ADD_EFFECT_DMG
 
                 if damage < 0 then
                     msgID = xi.msg.basic.ADD_EFFECT_HEAL
@@ -511,7 +491,7 @@ xi.additionalEffect.attack = function(attacker, defender, baseAttackDamage, item
 
         if flag then
             damage = xi.additionalEffect.calcDamage(attacker, element, defender, damage)
-            msgID = xi.msg.basic.ADD_EFFECT_DMG
+            msgID  = xi.msg.basic.ADD_EFFECT_DMG
 
             if damage < 0 then
                 msgID = xi.msg.basic.ADD_EFFECT_HEAL
@@ -530,7 +510,7 @@ xi.additionalEffect.attack = function(attacker, defender, baseAttackDamage, item
 
         if time >= 20 and time <= 4 then
             damage = xi.additionalEffect.calcDamage(attacker, element, defender, damage)
-            msgID = xi.msg.basic.ADD_EFFECT_DMG
+            msgID  = xi.msg.basic.ADD_EFFECT_DMG
 
             if damage < 0 then
                 msgID = xi.msg.basic.ADD_EFFECT_HEAL
@@ -570,7 +550,7 @@ xi.additionalEffect.attack = function(attacker, defender, baseAttackDamage, item
 
                 local drainMod = 1 + (attacker:getMod(xi.mod.ENH_DRAIN_ASPIR) + attacker:getMod(xi.mod.ENH_DRAIN)) / 100
 
-                msgID = xi.msg.basic.ADD_EFFECT_HP_DRAIN
+                msgID    = xi.msg.basic.ADD_EFFECT_HP_DRAIN
                 msgParam = damage * drainMod
                 defender:addHP(-damage* drainMod)
                 attacker:addHP(damage * drainMod)
@@ -583,7 +563,7 @@ xi.additionalEffect.attack = function(attacker, defender, baseAttackDamage, item
                 -- Else damaging effect
             else
                 damage = xi.additionalEffect.calcDamage(attacker, element, defender, damage)
-                msgID = xi.msg.basic.ADD_EFFECT_DMG
+                msgID  = xi.msg.basic.ADD_EFFECT_DMG
                 --print('VS ECOSYSTEM DMG PASSED')
                 if damage < 0 then
                     msgID = xi.msg.basic.ADD_EFFECT_HEAL

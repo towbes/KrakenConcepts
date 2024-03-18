@@ -126,7 +126,7 @@ entity.onMobFight = function(mob, target)
             local runType = math.random(1,2)
             mob:setLocalVar('RunType', runType)
             mob:setLocalVar('MineTime', now)
-            mob:setMod(xi.move.MOVE_SPEED_STACKABLE, 40)
+            mob:setMod(xi.mod.MOVE_SPEED_STACKABLE, 40)
 
             pickStartingRunPoint(mob)
 
@@ -143,7 +143,7 @@ entity.onMobFight = function(mob, target)
             -- done running for now
             mob:setLocalVar('RunType', 0)
             mob:setLocalVar('TimeToRun', now + math.random(90,120))
-            mob:setMod(xi.move.MOVE_SPEED_STACKABLE, 1)
+            mob:setMod(xi.mod.MOVE_SPEED_STACKABLE, 1)
         else
             if (now > mob:getLocalVar('MineTime')) then
                 spawnMine(mob)
