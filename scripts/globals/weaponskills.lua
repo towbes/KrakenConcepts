@@ -385,6 +385,9 @@ local function getSingleHitDamage(attacker, target, dmg, wsParams, calcParams)
                 calcParams.criticalHit = true
                 -- attacker:printToArea(string.format('%s\'s weapon skill scores a critical hit!', attacker:getName()), xi.msg.channel.SYSTEM_3, 1)
                 calcParams.pdif = xi.weaponskills.generatePdif(calcParams.ccritratio[1], calcParams.ccritratio[2], true)
+                local criticalHitsLanded          = attacker:getLocalVar('[criticalHitsLanded]')
+                local criticalHitsLandedIncrement = 0
+                attacker:setLocalVar('[criticalHitsLanded]', criticalHitsLanded + 1)
             else
                 calcParams.pdif = xi.weaponskills.generatePdif(calcParams.cratio[1], calcParams.cratio[2], true)
             end
@@ -562,7 +565,7 @@ xi.weaponskills.calculateRawWSDmg = function(attacker, target, wsID, tp, action,
     -- TODO: calc per-hit with weapon crit+% on each hand (if dual wielding)
     calcParams.critRate = 0
     if wsParams.critVaries then -- Work out critical hit ratios
-        calcParams.critRate = xi.combat.physical.calculateSwingCriticalRate(attacker, target, wsParams.critVaries)
+        calcParams.critRate = xi.combat.physical.calculateSwingCriticalRate(attacker, target, tp, wsParams.critVaries)
     end
 
     -- Start the WS
@@ -886,6 +889,12 @@ xi.weaponskills.doPhysicalWeaponskill = function(attacker, target, wsID, wsParam
     calcParams.finalDmg = finaldmg
     finaldmg            = xi.weaponskills.takeWeaponskillDamage(target, attacker, wsParams, primaryMsg, attack, calcParams, action)
 
+    local criticalHitsLanded = attacker:getLocalVar('[criticalHitsLanded]')
+    if criticalHitsLanded > 0 then
+        attacker:printToPlayer(string.format('%s\'s weapon skill scores [%s ] critical hits!', attacker:getName(), criticalHitsLanded), xi.msg.channel.SYSTEM_3) -- Debug to see modifier of each hit in a weapon skill.
+        attacker:setLocalVar('[criticalHitsLanded]', 0)
+    end
+
     return finaldmg, calcParams.criticalHit, calcParams.tpHitsLanded, calcParams.extraHitsLanded, calcParams.shadowsAbsorbed
 end
 
@@ -981,6 +990,12 @@ xi.weaponskills.doRangedWeaponskill = function(attacker, target, wsID, wsParams,
     attacker:delStatusEffect(xi.effect.FLASHY_SHOT)
     attacker:delStatusEffect(xi.effect.STEALTH_SHOT)
 
+    local criticalHitsLanded = attacker:getLocalVar('[criticalHitsLanded]')
+    if criticalHitsLanded > 0 then
+        attacker:printToPlayer(string.format('%s\'s weapon skill scores [%s ] critical hits!', attacker:getName(), criticalHitsLanded), xi.msg.channel.SYSTEM_3) -- Debug to see modifier of each hit in a weapon skill.
+        attacker:setLocalVar('[criticalHitsLanded]', 0)
+    end
+
     return finaldmg, calcParams.criticalHit, calcParams.tpHitsLanded, calcParams.extraHitsLanded, calcParams.shadowsAbsorbed
 end
 
@@ -1058,7 +1073,7 @@ xi.weaponskills.doMagicWeaponskill = function(attacker, target, wsID, wsParams, 
 
         -- Apply Consume Mana and Scarlet Delirium
         -- TODO: dmg = (dmg + consumeManaBonus(attacker)) * scarletDeliriumBonus(attacker)
-        dmg = dmg * scarletDeliriumBonus(attacker)
+        dmg = dmg * xi.weaponskills.scarletDeliriumBonus(attacker)
 
         -- Factor in "all hits" bonus damage mods
         local bonusdmg = attacker:getMod(xi.mod.ALL_WSDMG_ALL_HITS) -- For any WS

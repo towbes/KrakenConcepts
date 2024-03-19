@@ -22,7 +22,7 @@ weaponskillObject.onUseWeaponSkill = function(player, target, wsID, tp, primary,
     params.atkVaries  = { 0.8125, 0.8125, 0.8125 }
 
     if xi.settings.main.USE_ADOULIN_WEAPON_SKILL_CHANGES then
-        params.critVaries = { 0.1, 0.25, 0.4 }
+        params.critVaries = { 0.3, 0.6, 0.9 }
     end
 
     -- Apply Aftermath

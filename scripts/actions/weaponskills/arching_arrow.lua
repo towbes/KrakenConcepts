@@ -21,21 +21,15 @@ weaponskillObject.onUseWeaponSkill = function(player, target, wsID, tp, primary,
 
     if xi.settings.main.USE_ADOULIN_WEAPON_SKILL_CHANGES then
         -- params.str_wsc = 0.20 params.agi_wsc = 0.50
-    params.ftpMod = { 3.75, 3.75, 3.75 }
-    params.str_wsc = 0.16 params.agi_wsc = 0.25
-    params.critVaries = { 0.25, 0.50, 1.0 }
+        params.ftpMod = { 3.75, 3.75, 3.75 }
+        params.str_wsc = 0.16 params.agi_wsc = 0.25
+        params.critVaries = { 0.25, 0.50, 1.0 }
     end
 
     local damage, criticalHit, tpHits, extraHits = xi.weaponskills.doRangedWeaponskill(player, target, wsID, params, tp, action, primary)
 
     local duration = 25 * applyResistanceAddEffect(player, target, xi.element.WIND, 0)
-    if damage > 0 and criticalHit == true and not target:hasImmunity(xi.immunity.GRAVITY) then
-        target:addStatusEffect(xi.effect.WEIGHT, 75, 0, duration)
-        player:messagePublic(xi.msg.basic.SKILL_ENFEEB, target, wsID, xi.effect.WEIGHT)
-    end
-
-    local duration = 25 * applyResistanceAddEffect(player, target, xi.element.WIND, 0)
-    if damage > 0 and criticalHit == true and not target:hasImmunity(xi.immunity.GRAVITY) then
+    if damage > 0 and criticalHit and not target:hasImmunity(xi.immunity.GRAVITY) then
         target:addStatusEffect(xi.effect.WEIGHT, 75, 0, duration)
         player:messagePublic(xi.msg.basic.SKILL_ENFEEB, target, wsID, xi.effect.WEIGHT)
     end

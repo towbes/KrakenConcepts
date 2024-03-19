@@ -29,7 +29,7 @@ weaponskillObject.onUseWeaponSkill = function(player, target, wsID, tp, primary,
 
     local damage, criticalHit, tpHits, extraHits = xi.weaponskills.doPhysicalWeaponskill(player, target, wsID, params, tp, action, primary, taChar)
 
-    if damage > 0 and criticalHit == true then
+    if damage > 0 and criticalHit then
         player:addMod(xi.mod.CRITHITRATE, 10)
         player:addMod(xi.mod.CRIT_DMG_INCREASE, 10)
         player:addMod(xi.mod.RANGED_CRIT_DMG_INCREASE, 10)
