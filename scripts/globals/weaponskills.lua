@@ -323,7 +323,7 @@ end
 
 local function getRangedHitRate(attacker, target, capHitRate, bonus)
     local acc = attacker:getRACC()
-    local eva = target:getEVA()
+    local eva = target:getEVA() + target:getMod(xi.mod.SPECIAL_ATTACK_EVASION)
 
     if bonus == nil then
         bonus = 0
@@ -1275,7 +1275,7 @@ xi.weaponskills.getHitRate = function(attacker, target, capHitRate, bonus)
     end
 
     local acc = attacker:getACC()
-    local eva = target:getEVA()
+    local eva = target:getEVA() + target:getMod(xi.mod.SPECIAL_ATTACK_EVASION)
 
     if flourishEffect ~= nil and flourishEffect:getPower() >= 1 then -- 1 or more Finishing moves used.
         attacker:delMod(xi.mod.ACC, 40 + flourishEffect:getSubPower() * 2)
