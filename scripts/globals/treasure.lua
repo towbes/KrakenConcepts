@@ -1619,10 +1619,8 @@ xi.treasure.onTrade = function(player, npc, trade, chestType)
                 player:confirmTrade()
                 moveChest(npc, zoneId, chestType)
             end
-        end
-
-                    -- artifact armor subjob Umeboshi 'AF quests for subjobs'
-        if
+        -- artifact armor subjob Umeboshi 'AF quests for subjobs'
+        elseif
             info.af and
             info.af[sJob] and
             player:getQuestStatus(xi.quest.log_id.JEUNO, info.af[sJob].quest) >= QUEST_ACCEPTED and
