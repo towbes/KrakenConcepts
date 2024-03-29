@@ -1385,7 +1385,7 @@ local function getMeleePDifRange(correctedRatio)
 end
 
 -- Given the raw ratio value (atk/def) and levels, returns the cRatio (min then max)
-xi.weaponskills.cMeleeRatio = function(attacker, defender, params, ignoredDef, tp)
+xi.weaponskills.cMeleeRatio = function(attacker, defender, params, ignoredDef, tp, ratioMod)
     local weaponType = attacker:getWeaponSkillType(xi.slot.MAIN)
     local flourishEffect = attacker:getStatusEffect(xi.effect.BUILDING_FLOURISH)
 
@@ -1395,6 +1395,11 @@ xi.weaponskills.cMeleeRatio = function(attacker, defender, params, ignoredDef, t
 
     local atkMultiplier = xi.weaponskills.fTP(tp, params.atkVaries)
     local cratio        = attacker:getStat(xi.mod.ATT) * atkMultiplier / (defender:getStat(xi.mod.DEF) - ignoredDef)
+
+    if ratioMod then
+        cratio = attacker:getStat(ratioMod) * atkMultiplier / (defender:getStat(xi.mod.DEF) - ignoredDef)
+        print(ratioMod)
+    end
 
     -- cratio = utils.clamp(cratio, 0, 2.25)
     if flourishEffect ~= nil and flourishEffect:getPower() >= 2 then -- 2 or more Finishing Moves used.
@@ -1422,6 +1427,78 @@ xi.weaponskills.cMeleeRatio = function(attacker, defender, params, ignoredDef, t
     local pdifcrit  = { unadjustedPDifCrit[1] * (100 + critbonus) / 100, unadjustedPDifCrit[2] * (100 + critbonus) / 100 }
 
     return pdif, pdifcrit
+end
+
+xi.weaponskills.handleBlock = function(attacker, target, finaldmg)
+    if
+        target:getBlockRate(attacker) >= math.random(100) and
+        target:isFacing(attacker) and
+        target:getEcosystem() == xi.eco.BEASTMEN and
+        target:getMainJob() == xi.job.PLD
+    then
+        finaldmg = math.floor(finaldmg * 0.5)
+    elseif
+        target:getBlockRate(attacker) > math.random(100) and
+        target:isFacing(attacker) and
+        target:isPC() and
+        target:getEquippedItem(xi.slot.SUB):isShield()
+    then
+        local absorb = 100
+        absorb = utils.clamp(absorb - target:getShieldAbsorptionRate(), 0, 100)
+        -- print('blocked')
+        absorb = absorb + target:getMod(xi.mod.SHIELD_DEF_BONUS)
+        finaldmg = math.floor(finaldmg * (absorb / 100))
+        target:trySkillUp(xi.skill.SHIELD, attacker:getMainLvl())
+    end
+
+    return finaldmg
+end
+
+
+xi.weaponskills.handleParry = function(attacker, target, missChance, guaranteedHit)
+    local gHit = guaranteedHit or false
+    if
+        target:isEngaged() and
+        target:isFacing(attacker) and
+        target:getParryRate(attacker, target) >= math.random(100) and
+        target:getMainJob() ~= xi.job.MNK and not gHit
+    then -- Try parry, if so miss.
+        if target:getEcosystem() == xi.eco.BEASTMEN or target:isPC() then
+            missChance = 1
+             print('parried')
+        end
+
+        if target:isPC() then
+            target:trySkillUp(xi.skill.PARRY, attacker:getMainLvl())
+        end
+    end
+
+    return missChance
+end
+
+xi.weaponskills.handleGuard = function(attacker, target, missChance, guaranteedHit)
+    local gHit = guaranteedHit or false
+    if
+        ((target:getMainJob() == xi.job.MNK or
+        target:getMainJob() == xi.job.PUP) or
+        (target:getSubJob() == xi.job.MNK or
+        target:getSubJob() == xi.job.PUP))
+    then
+        if
+            target:getGuardRate(attacker) > math.random(100) and
+            target:isFacing(attacker) and
+            target:isPC() and
+            not gHit
+        then
+            -- Per testing shown by genome mob skills register as a miss when guarded
+            -- https://genomeffxi.livejournal.com/18269.html
+            missChance = 1
+            print('guarded')
+            target:trySkillUp(xi.skill.GUARD, attacker:getMainLvl())
+        end
+    end
+
+    return missChance
 end
 
 -- Given the attacker's str and the mob's vit, fSTR is calculated (for melee WS)

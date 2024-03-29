@@ -13775,6 +13775,89 @@ bool CLuaBaseEntity::isWeaponTwoHanded()
 }
 
 /************************************************************************
+ *  Function: getGuardRate()
+ *  Purpose : Return guard rate.
+ *  Example : defender:getGuardRate(attacker)
+ *  Notes   : Battleutils calculates via GetGuardRate
+ ************************************************************************/
+
+uint8 CLuaBaseEntity::getGuardRate(CLuaBaseEntity* PLuaBaseEntity)
+{
+    if (m_PBaseEntity->objtype == TYPE_NPC)
+    {
+        ShowWarning("Invalid Entity (NPC: %s) calling function.", m_PBaseEntity->getName());
+        return false;
+    }
+
+    CBattleEntity* PDefender = static_cast<CBattleEntity*>(m_PBaseEntity);
+    CBattleEntity* PAttacker = static_cast<CBattleEntity*>(PLuaBaseEntity->GetBaseEntity());
+
+    return battleutils::GetGuardRate(PAttacker, PDefender);
+}
+
+/************************************************************************
+ *  Function: getBlockRate()
+ *  Purpose : Return block rate.
+ *  Example : defender:getBlockRate(attacker)
+ *  Notes   : Battleutils calculates via GetBlockRate
+ ************************************************************************/
+
+uint8 CLuaBaseEntity::getBlockRate(CLuaBaseEntity* PLuaBaseEntity)
+{
+    if (m_PBaseEntity->objtype == TYPE_NPC)
+    {
+        ShowWarning("Invalid Entity (NPC: %s) calling function.", m_PBaseEntity->getName());
+        return false;
+    }
+
+    CBattleEntity* PDefender = static_cast<CBattleEntity*>(m_PBaseEntity);
+    CBattleEntity* PAttacker = static_cast<CBattleEntity*>(PLuaBaseEntity->GetBaseEntity());
+
+    return battleutils::GetBlockRate(PAttacker, PDefender);
+}
+
+/************************************************************************
+ *  Function: getParryRate()
+ *  Purpose : Return block rate.
+ *  Example : defender:getParryRate(attacker)
+ *  Notes   : Battleutils calculates via GetParryRate
+ ************************************************************************/
+
+uint8 CLuaBaseEntity::getParryRate(CLuaBaseEntity* PLuaBaseEntity)
+{
+    if (m_PBaseEntity->objtype == TYPE_NPC)
+    {
+        ShowWarning("Invalid Entity (NPC: %s) calling function.", m_PBaseEntity->getName());
+        return false;
+    }
+
+    CBattleEntity* PDefender = static_cast<CBattleEntity*>(m_PBaseEntity);
+    CBattleEntity* PAttacker = static_cast<CBattleEntity*>(PLuaBaseEntity->GetBaseEntity());
+
+    return battleutils::GetParryRate(PAttacker, PDefender);
+}
+
+/************************************************************************
+ *  Function: getShieldAbsorptionRate()
+ *  Purpose : Return absorbtion rate.
+ *  Example : target:getShieldAbsorbtionRate()
+ *  Notes   : CItem calculates the amount to absorb.
+ ************************************************************************/
+
+uint8 CLuaBaseEntity::getShieldAbsorptionRate()
+{
+    if (m_PBaseEntity->objtype == TYPE_NPC)
+    {
+        ShowWarning("Invalid Entity (NPC: %s) calling function.", m_PBaseEntity->getName());
+        return false;
+    }
+
+    CBattleEntity* PDefender = static_cast<CBattleEntity*>(m_PBaseEntity);
+
+    return PDefender->m_Weapons[SLOT_SUB]->getShieldAbsorption();
+}
+
+/************************************************************************
  *  Function: getWeaponDmg()
  *  Purpose : Returns the real damage value of a Weapon in the Main slot
  *  Example : local weaponDamage = attacker:getWeaponDmg()
@@ -18427,6 +18510,10 @@ void CLuaBaseEntity::Register()
     SOL_REGISTER("getRangedDmgRank", CLuaBaseEntity::getRangedDmgRank);
     SOL_REGISTER("getAmmoDmg", CLuaBaseEntity::getAmmoDmg);
     SOL_REGISTER("getWeaponHitCount", CLuaBaseEntity::getWeaponHitCount);
+    SOL_REGISTER("getGuardRate", CLuaBaseEntity::getGuardRate);
+    SOL_REGISTER("getBlockRate", CLuaBaseEntity::getBlockRate);
+    SOL_REGISTER("getParryRate", CLuaBaseEntity::getParryRate);
+    SOL_REGISTER("getShieldAbsorptionRate", CLuaBaseEntity::getShieldAbsorptionRate);
 
     SOL_REGISTER("removeAmmo", CLuaBaseEntity::removeAmmo);
 

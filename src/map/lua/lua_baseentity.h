@@ -705,6 +705,10 @@ public:
     uint16 getRangedDmgRank();              // Get ranged weapond DMG rating used for calculating rank
     uint16 getAmmoDmg();                    // Get ammo DMG rating
     uint16 getWeaponHitCount(bool offhand); // Get PC weapon hit count (Occasionally Attacks N times weapons)
+    uint8  getGuardRate(CLuaBaseEntity* PLuaBaseEntity); // Returns the guard rate for an attack.
+    uint8  getBlockRate(CLuaBaseEntity* PLuaBaseEntity); // Returns the block rate for an attack.
+    uint8  getParryRate(CLuaBaseEntity* PLuaBaseEntity);
+    uint8  getShieldAbsorptionRate();      
 
     void removeAmmo();
 

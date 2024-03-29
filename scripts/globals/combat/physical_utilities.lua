@@ -379,7 +379,8 @@ xi.combat.physical.calculateMeleePDIF = function(actor, target, weaponType, wsAt
     end
 
     local cRatio = utils.clamp(baseRatio - levelDifFactor, 0, 10) -- Clamp for the lower limit, mainly.
-
+    -- print('cratio' ' .. cRatio .. ')
+    -- target:printToPlayer(string.format('cRatio: %s', cRatio), xi.msg.channel.SYSTEM_3) -- Debug to see modifier of each hit in a weapon skill.
     ----------------------------------------
     -- Step 3: wRatio and pDif Caps (Melee)
     ----------------------------------------
@@ -432,10 +433,9 @@ xi.combat.physical.calculateMeleePDIF = function(actor, target, weaponType, wsAt
 
     -- Crit damage bonus is a final modifier
     if isCritical then
-        local critDamageBonus = utils.clamp(actor:getMod(xi.mod.CRIT_DMG_INCREASE) - target:getMod(xi.mod.CRIT_DEF_BONUS), 0, 100)
-        pDif                  = pDif * (100 + critDamageBonus) / 100
+        local critDamageBonus = utils.clamp(actor:getMod(xi.mod.CRIT_DMG_INCREASE) - target:getMod(xi.mod.CRIT_DEF_BONUS) + target:getMod(xi.mod.ENEMYCRITDMG), 0, 100)
+        pDif                  = pDif * 1.25 * (100 + critDamageBonus) / 100
     end
-
     return pDif
 end
 
@@ -446,6 +446,9 @@ xi.combat.physical.calculateRangedPDIF = function(actor, target, weaponType, wsA
     -- Step 1: Attack / Defense Ratio
     ----------------------------------------
     local baseRatio     = 0
+    if wsAttackMod == nil then 
+        wsAttackMod = 1
+    end
     local actorAttack   = math.max(1, math.floor(actor:getStat(xi.mod.RATT) * wsAttackMod))
     local targetDefense = math.max(1, target:getStat(xi.mod.DEF))
 
