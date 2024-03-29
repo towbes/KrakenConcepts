@@ -1,7 +1,7 @@
 -----------------------------------
 -- Skill: Tornado Kick
 -- Class: H2H Weapon Skill
--- Level: 225
+-- Level: 300
 -- Mods : STR:32% VIT:32%
 -- 100%TP     200%TP     300%TP
 -- 2.25x        2.75x    3.5x
@@ -24,7 +24,7 @@ weaponskillObject.onUseWeaponSkill = function(player, target, wsID, tp, primary,
         params.ftpMod = { 2.5, 3.0, 4.0 }
         -- params.ftpMod = { 1.7, 2.8, 4.5 }
         params.str_wsc = 0.3
-        params.vit_wsc = 0.5
+        params.vit_wsc = 0.6
         -- params.vit_wsc = 0.4
         params.multiHitfTP = true -- http://wiki.ffo.jp/html/20199.html
     end
