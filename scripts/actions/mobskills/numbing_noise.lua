@@ -8,7 +8,7 @@
 local mobskillObject = {}
 
 mobskillObject.onMobSkillCheck = function(target, mob, skill)
-    if mob:getZone():getTypeMask() == xi.zoneType.DYNAMIS then
+    if mob:getZone():getTypeMask() == xi.zoneType.DYNAMIS and not mob:isPet() then
         skill:setAoE(1)
     end
     return 0

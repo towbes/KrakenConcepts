@@ -367,32 +367,72 @@ namespace petutils
                 PMob->addModifier(Mod::DEFP, 22);
                 break;
             case 25: // HOMUNCULUS
+                PMob->addModifier(Mod::DOUBLE_ATTACK, 100);
+                PMob->addModifier(Mod::DEFP, 30);
+                break;
             case 26: // FLYTRAP FAMILIAR
             case 27: // TIGER FAMILIAR
+                PMob->addModifier(Mod::ATTP, 10);
+                break;
             case 28: // FLOWERPOT BILL
+                PMob->addModifier(Mod::DOUBLE_ATTACK, 100);
+                break;
             case 29: // EFT FAMILIAR
+                PMob->addModifier(Mod::ATTP, 5);
+                break;
             case 30: // LIZARD FAMILIAR
+                PMob->addModifier(Mod::ATTP, 10);
+                break;
             case 31: // MAYFLY FAMILIAR
+                PMob->addModifier(Mod::ATTP, 5);
+                break;
             case 32: // FUNGUAR FAMILIAR
+                PMob->addModifier(Mod::DEFP, 10);
+                PMob->addModifier(Mod::WATER_SDT, 5000);
+                PMob->addModifier(Mod::DARK_SDT, 5000);
+                break;
             case 33: // BEETLE FAMILIAR
+                PMob->addModifier(Mod::DEFP, 10);
+                PMob->addModifier(Mod::ATTP, 5);
+                break;
             case 34: // ANTLION FAMILIAR
+                PMob->addModifier(Mod::ATTP, 30);
+                break;
             case 35: // MITE FAMILIAR
+                PMob->addModifier(Mod::ATTP, 10);
+                break;
             case 36: // LULLABY MELODIA
+                PMob->addModifier(Mod::ATTP, 5);
+                break;
             case 37: // KEENEARED STEFFI
+                PMob->addModifier(Mod::ATTP, 10);
+                break;
             case 38: // FLOWERPOT BEN
-                PMob->addModifier(Mod::DEFP, 24);
+                PMob->addModifier(Mod::DOUBLE_ATTACK, 100);
+                PMob->addModifier(Mod::DEFP, 20);
                 break;
             case 39: // SABER SIRAVARDE
+                PMob->addModifier(Mod::ATTP, 20);
+                break;
             case 40: // COLDBLOOD COMO
+                PMob->addModifier(Mod::ATTP, 15);
+                break;
             case 41: // SHELLBUSTER OROB
+                PMob->addModifier(Mod::ATTP, 10);
+                break;
             case 42: // VORACIOUS AUDREY
+                PMob->addModifier(Mod::ATTP, 5);
+                break;
             case 43: // AMBUSHER ALLIE
+                PMob->addModifier(Mod::ATTP, 10);
+                break;
             case 44: // LIFEDRINKER LARS
                 PMob->addModifier(Mod::DEFP, 18);
                 PMob->addModifier(Mod::ATTP, 30);
                 break;
             case 45: // PANZER GALAHAD
                 PMob->addModifier(Mod::DEFP, 20);
+                PMob->addModifier(Mod::ATTP, 5);
                 break;
             case 46: // CHOPSUEY CHUCKY
                 // 52% defense boost seems quite large however
@@ -415,8 +455,8 @@ namespace petutils
                 PMob->addModifier(Mod::DEFP, 10);
                 break;
             case 52: // FATSO FARGANN
-                PMob->addModifier(Mod::IMPACT_SDT, 5000);
-                PMob->addModifier(Mod::HTH_SDT, 5000);
+                PMob->addModifier(Mod::IMPACT_SDT, 2500);
+                PMob->addModifier(Mod::HTH_SDT, 2500);
                 break;
             case 53: // DISCREET LOUISE
                 PMob->addModifier(Mod::DEFP, 20);
@@ -453,6 +493,8 @@ namespace petutils
                 break;
             case 66: // DAPPER MAC
                 PMob->addModifier(Mod::STORETP, 20);
+                PMob->addModifier(Mod::WATER_SDT, 5000);
+                PMob->addModifier(Mod::DOUBLE_ATTACK, 100);
                 break;
             case 67: // SLIPPERY SILAS
                 PMob->addModifier(Mod::WATER_SDT, 5000);

@@ -9,9 +9,10 @@ mobskillObject.onMobSkillCheck = function(target, mob, skill)
 end
 
 mobskillObject.onMobWeaponSkill = function(target, mob, skill)
-    skill:setMsg(xi.mobskills.mobStatusEffectMove(mob, target, xi.effect.MND_DOWN, 10, 3, 120))
+    local power = target:getStat(xi.mod.MND) * 0.25
+    skill:setMsg(xi.mobskills.mobStatusEffectMove(mob, target, xi.effect.MND_DOWN, power, 10, 180))
     if mob:getZone():getTypeMask() == xi.zoneType.DYNAMIS then
-        skill:setMsg(xi.mobskills.mobStatusEffectMove(mob, target, xi.effect.TERROR, 30, 0, 10))
+        xi.mobskills.mobStatusEffectMove(mob, target, xi.effect.TERROR, 30, 0, 10)
 
         mob:timer(4000, function(mobArg)
             mob:messageBasic(xi.msg.basic.IS_EFFECT, 306, xi.effect.TERROR, target)

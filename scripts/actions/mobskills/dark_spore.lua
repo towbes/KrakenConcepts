@@ -11,7 +11,18 @@ mobskillObject.onMobSkillCheck = function(target, mob, skill)
 end
 
 mobskillObject.onMobWeaponSkill = function(target, mob, skill)
-    xi.mobskills.mobStatusEffectMove(mob, target, xi.effect.BLINDNESS, 15, 3, 120)
+    local duration = 120
+    local master = mob:getMaster()
+    local skillID = skill:getID()
+    if mob:isPet() then
+        if master and master:isJugPet() then
+            local tp = skill:getTP()
+            duration = 165
+            duration = math.max(190, duration * (tp/1000)) -- Minimum 4:40 minutes. Maximum 9 minutes.
+        end
+    end
+
+    xi.mobskills.mobStatusEffectMove(mob, target, xi.effect.BLINDNESS, 15, 3, duration)
 
     local dmgcap = 800
     if mob:getName() == 'Fairy_Ring' then

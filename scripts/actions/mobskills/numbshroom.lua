@@ -20,8 +20,19 @@ mobskillObject.onMobWeaponSkill = function(target, mob, skill)
 
     local numhits = 1
     local accmod = 1
-    local dmgmod = 2
-    local info = xi.mobskills.mobPhysicalMove(mob, target, skill, numhits, accmod, dmgmod, xi.mobskills.physicalTpBonus.DMG_VARIES, 1, 2, 3)
+    local dmgmod = 1
+    local duration = 60
+    local crit = 0.1
+    local master = mob:getMaster()
+    local skillID = skill:getID()
+    if mob:isPet() then
+        if master and master:isJugPet() then
+            local tp = skill:getTP()
+            duration = 180
+            duration = math.max(280, duration * (tp/1000)) -- Minimum 4:40 minutes. Maximum 9 minutes.
+        end
+    end
+    local info = xi.mobskills.mobPhysicalMove(mob, target, skill, numhits, accmod, dmgmod, xi.mobskills.physicalTpBonus.DMG_VARIES, 1.75, 2.25, 3.5, tpEffect2, 1.25, 2.25, 3.25, crit, attmod)
     local dmg = xi.mobskills.mobFinalAdjustments(info.dmg, mob, skill, target, xi.attackType.PHYSICAL, xi.damageType.PIERCING, info.hitslanded)
 
     xi.mobskills.mobPhysicalStatusEffectMove(mob, target, skill, xi.effect.PARALYSIS, 35, 0, 180)
