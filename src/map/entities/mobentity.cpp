@@ -132,18 +132,9 @@ CMobEntity::CMobEntity()
     PAI = std::make_unique<CAIContainer>(this, std::make_unique<CPathFind>(this), std::make_unique<CMobController>(this), std::make_unique<CTargetFind>(this));
 }
 
-uint32 CMobEntity::getEntityFlags() const
-{
-    return m_flags;
-}
-
-void CMobEntity::setEntityFlags(uint32 EntityFlags)
-{
-    m_flags = EntityFlags;
-}
-
 CMobEntity::~CMobEntity()
 {
+    TracyZoneScoped;
     destroy(m_Weapons[SLOT_MAIN]);
     destroy(m_Weapons[SLOT_SUB]);
     destroy(m_Weapons[SLOT_RANGED]);
@@ -162,6 +153,16 @@ CMobEntity::~CMobEntity()
             PParty->DelMember(this);
         }
     }
+}
+
+uint32 CMobEntity::getEntityFlags() const
+{
+    return m_flags;
+}
+
+void CMobEntity::setEntityFlags(uint32 EntityFlags)
+{
+    m_flags = EntityFlags;
 }
 
 /************************************************************************
@@ -502,6 +503,7 @@ bool CMobEntity::GetUntargetable() const
 
 void CMobEntity::PostTick()
 {
+    TracyZoneScoped;
     CBattleEntity::PostTick();
     std::chrono::steady_clock::time_point now = std::chrono::steady_clock::now();
     if (loc.zone && updatemask && now > m_nextUpdateTimer)
