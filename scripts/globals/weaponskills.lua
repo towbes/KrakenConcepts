@@ -989,6 +989,7 @@ xi.weaponskills.doRangedWeaponskill = function(attacker, target, wsID, wsParams,
     -- Delete single use effects from abilities.
     attacker:delStatusEffect(xi.effect.FLASHY_SHOT)
     attacker:delStatusEffect(xi.effect.STEALTH_SHOT)
+    attacker:delStatusEffect(xi.effect.BOOST)
 
     local criticalHitsLanded = attacker:getLocalVar('[criticalHitsLanded]')
     if criticalHitsLanded > 0 then
