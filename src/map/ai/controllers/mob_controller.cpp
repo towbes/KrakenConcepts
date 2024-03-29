@@ -189,8 +189,10 @@ void CMobController::TryLink()
         {
             if (PTarget->objtype == TYPE_PC)
             {
-                std::unique_ptr<CBasicPacket> errMsg;
-                if (PTarget->PPet->CanAttack(PMob, errMsg))
+                // std::unique_ptr<CBasicPacket> errMsg;
+                // if (PTarget->PPet->CanAttack(PMob, errMsg))
+                auto* PChar = dynamic_cast<CCharEntity*>(PTarget);
+                if (PChar && PChar->IsMobOwner(PTarget))
                 {
                     petutils::AttackTarget(PTarget, PMob);
                 }
@@ -1182,12 +1184,16 @@ bool CMobController::Engage(uint16 targid)
         {
             m_LastMagicTime = m_Tick - std::chrono::milliseconds(PMob->getBigMobMod(MOBMOD_MAGIC_COOL)) +
                               std::chrono::milliseconds(xirand::GetRandomNumber(PMob->getBigMobMod(MOBMOD_MAGIC_DELAY)));
+            //m_LastMagicTime =
+                //m_Tick - std::chrono::milliseconds(PMob->getBigMobMod(MOBMOD_MAGIC_COOL) + xirand::GetRandomNumber(PMob->getBigMobMod(MOBMOD_MAGIC_DELAY)));
         }
 
         if (PMob->getBigMobMod(MOBMOD_SPECIAL_DELAY) != 0)
         {
             m_LastSpecialTime = m_Tick - std::chrono::milliseconds(PMob->getBigMobMod(MOBMOD_SPECIAL_COOL)) +
                                 std::chrono::milliseconds(xirand::GetRandomNumber(PMob->getBigMobMod(MOBMOD_SPECIAL_DELAY)));
+            //m_LastSpecialTime = m_Tick - std::chrono::milliseconds(PMob->getBigMobMod(MOBMOD_SPECIAL_COOL) +
+                                                                   //xirand::GetRandomNumber(PMob->getBigMobMod(MOBMOD_SPECIAL_DELAY)));
         }
     }
     return ret;
@@ -1327,14 +1333,17 @@ bool CMobController::IsSpecialSkillReady(float currentDistance)
         return false;
     }
 
-    int32 bonusTime = 0;
+    int32 bonusTime     = 0;
+    int32 snapshotBonus = 0;
     if (currentDistance > 5)
     {
         // Mobs use ranged attacks quicker when standing back
         bonusTime = PMob->getBigMobMod(MOBMOD_STANDBACK_COOL);
     }
 
-    return m_Tick >= m_LastSpecialTime + std::chrono::milliseconds(PMob->getBigMobMod(MOBMOD_SPECIAL_COOL) - bonusTime);
+    snapshotBonus = (PMob->getBigMobMod(MOBMOD_SPECIAL_COOL) - bonusTime) * (PMob->getMod(Mod::SNAP_SHOT) / 100);
+
+    return m_Tick >= m_LastSpecialTime + std::chrono::milliseconds(PMob->getBigMobMod(MOBMOD_SPECIAL_COOL) - bonusTime - snapshotBonus);
 }
 
 bool CMobController::IsSpellReady(float currentDistance)

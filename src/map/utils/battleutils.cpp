@@ -1706,7 +1706,7 @@ namespace battleutils
         float maxRatio    = 3.25f;
 
         // If null ignore the checks and fallback to 1H values
-        if (targ_weapon->getSkillType() == SKILL_MARKSMANSHIP)
+        if (targ_weapon && targ_weapon->getSkillType() == SKILL_MARKSMANSHIP)
         {
             maxRatio = 3.5f;
         }
@@ -2050,13 +2050,18 @@ namespace battleutils
     uint8 GetParryRate(CBattleEntity* PAttacker, CBattleEntity* PDefender)
     {
         CItemWeapon* PWeapon = GetEntityWeapon(PDefender, SLOT_MAIN);
-        if ((PWeapon != nullptr && PWeapon->getID() != 0 && PWeapon->getID() != 65535 && PWeapon->getSkillType() != SKILL_HAND_TO_HAND) &&
+        if (((PDefender->objtype == TYPE_PC && PWeapon != nullptr && PWeapon->getID() != 0 && PWeapon->getID() != 65535 && PWeapon->getSkillType() != SKILL_HAND_TO_HAND)) ||
+            (PDefender->objtype == TYPE_MOB && PDefender->m_EcoSystem == ECOSYSTEM::BEASTMAN && (JOBS_WITH_PARRY_SKILL.count(PDefender->GetMJob()) > 0 || JOBS_WITH_PARRY_SKILL.count(PDefender->GetSJob()) > 0) && PDefender->isInDynamis()) &&
             PDefender->PAI->IsEngaged())
         {
             // http://wiki.ffxiclopedia.org/wiki/Talk:Parrying_Skill
             // {(Parry Skill x .125) + ([Player Agi - Enemy Dex] x .125)} x Diff
 
-            float skill = (float)(PDefender->GetSkill(SKILL_PARRY) + PDefender->getMod(Mod::PARRY) + PWeapon->getILvlParry());
+            float        defender_parry_skill = (float)(PDefender->GetSkill(SKILL_PARRY) + PDefender->getMod(Mod::PARRY) + PWeapon->getILvlParry());
+            CItemWeapon* weapon               = GetEntityWeapon(PAttacker, SLOT_MAIN);
+            uint16       attackSkill          = PAttacker->GetSkill((SKILLTYPE)(weapon ? weapon->getSkillType() : 0));
+
+            // float skill = (float)(PDefender->GetSkill(SKILL_PARRY) + PDefender->getMod(Mod::PARRY) + PWeapon->getILvlParry());
 
             float diff = 1.0f + (((float)PDefender->GetMLevel() - PAttacker->GetMLevel()) / 15.0f);
 
@@ -2078,7 +2083,8 @@ namespace battleutils
             float dex = PAttacker->DEX();
             float agi = PDefender->AGI();
 
-            auto parryRate = std::clamp<uint8>((uint8)((skill * 0.1f + (agi - dex) * 0.125f + 10.0f) * diff), 5, 25);
+            // auto parryRate = std::clamp<uint8>((uint8)((skill * 0.1f + (agi - dex) * 0.125f + 10.0f) * diff), 5, 25);
+            int parryRate = std::clamp<int>((int)(15.0f + (defender_parry_skill - attackSkill + (agi - dex)) / 8.0f * diff), 5, 30);
 
             // Issekigan grants parry rate bonus. From best available data, if you already capped out at 25% parry it grants another 25% bonus for ~50%
             // parry rate
@@ -2107,7 +2113,7 @@ namespace battleutils
 
         if (PDefender->objtype == TYPE_MOB || PDefender->objtype == TYPE_PET)
         {
-            validWeapon = PDefender->GetMJob() == JOB_MNK || PDefender->GetMJob() == JOB_PUP;
+            validWeapon = PDefender->GetMJob() == JOB_MNK || PDefender->GetMJob() == JOB_PUP || PDefender->GetSJob() == JOB_MNK || PDefender->GetSJob() == JOB_PUP;
         }
 
         bool hasGuardSkillRank = (GetSkillRank(SKILL_GUARD, PDefender->GetMJob()) > 0 || GetSkillRank(SKILL_GUARD, PDefender->GetSJob()) > 0);
