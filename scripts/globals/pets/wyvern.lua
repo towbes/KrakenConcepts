@@ -66,7 +66,8 @@ local function doHealingBreath(player, threshold)
         inBreathRange(player)
     then
         player:getPet():useJobAbility(healingbreath, player)
-    elseif wyvernType == wyvernCapabilities.DEFENSIVE then
+    -- elseif wyvernType == wyvernCapabilities.DEFENSIVE then
+    else
         local party = player:getPartyWithTrusts()
         for _, member in pairs(party) do
             if
