@@ -102,7 +102,8 @@ xi.job_utils.monk.useDodge = function(player, target, ability)
 end
 
 xi.job_utils.monk.useFocus = function(player, target, ability)
-    local power = 20 + player:getMod(xi.mod.FOCUS_EFFECT)
+    -- local power = 20 + player:getMod(xi.mod.FOCUS_EFFECT)
+    local power = (player:getMainLvl() + 1) + player:getMod(xi.mod.FOCUS_EFFECT)
 
     player:addStatusEffect(xi.effect.FOCUS, power, 0, 120)
 end
