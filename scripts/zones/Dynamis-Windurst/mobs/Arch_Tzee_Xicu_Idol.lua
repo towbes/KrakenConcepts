@@ -6,6 +6,7 @@
 require('scripts/globals/dynamis')
 mixins =
 {
+    require('scripts/mixins/dynamis_beastmen'),
     require('scripts/mixins/job_special')
 }
 -----------------------------------
@@ -27,6 +28,7 @@ entity.onMobSpawn = function(mob)
             { id = xi.jsa.MANAFONT, cooldown = 300, hpp = 100 },
         },
     })
+    mob:setLocalVar('[isDynamis_Arch_Megaboss]', 1)
 end
 
 entity.onMobEngage = function(mob, target)

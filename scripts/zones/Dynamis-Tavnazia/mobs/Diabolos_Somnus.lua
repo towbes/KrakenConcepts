@@ -5,6 +5,11 @@
 -----------------------------------
 require('scripts/globals/dynamis')
 -----------------------------------
+mixins =
+{
+    require('scripts/mixins/dynamis_beastmen')
+}
+-----------------------------------
 local entity = {}
 
 entity.onMobInitialize = function(mob)
@@ -20,6 +25,7 @@ entity.onMobInitialize = function(mob)
         end
     end)
     mob:setMobMod(xi.mobMod.HP_SCALE, 500)
+    mob:setLocalVar('[isDynamis_Arch_Megaboss]', 1)
 end
 
 entity.onMobSpawn = function(mob)

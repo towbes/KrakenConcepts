@@ -12,6 +12,7 @@ entity.onMobInitialize = function(mob)
     mob:setMobMod(xi.mobMod.MAGIC_DELAY, 25)
     mob:setMod(xi.mod.REGAIN, 100)
     mob:setMobMod(xi.mobMod.HP_SCALE, 500)
+    mob:setLocalVar('[isDynamis_Arch_Megaboss]', 1)
 end
 
 entity.onMobFight = function(mob, target)

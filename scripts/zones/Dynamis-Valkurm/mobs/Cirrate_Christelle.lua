@@ -3,10 +3,16 @@
 --  Mob: Cirrate Christelle
 -- Note: Mega Boss
 -----------------------------------
+mixins =
+{
+    require('scripts/mixins/dynamis_beastmen')
+}
+-----------------------------------
 local entity = {}
 
 entity.onMobInitialize = function(mob)
     mob:setMobMod(xi.mobMod.HP_SCALE, 300)
+    mob:setLocalVar('[isDynamis_Megaboss]', 1)
 end
 
 entity.onMobSpawn = function(mob)

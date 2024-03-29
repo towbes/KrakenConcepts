@@ -4,7 +4,6 @@
 -----------------------------------
 mixins =
 {
-    require('scripts/mixins/dynamis_beastmen'),
     require('scripts/mixins/job_special')
 }
 -----------------------------------
@@ -15,7 +14,6 @@ end
 
 entity.onMobSpawn = function(mob)
     mob:setMobMod(xi.mobMod.NO_STANDBACK, 325)
-
 end
 
 entity.onMobEngage = function(mob, target)

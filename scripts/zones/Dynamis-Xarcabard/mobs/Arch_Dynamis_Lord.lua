@@ -4,9 +4,12 @@
 -- Note: Mega Boss
 -- Spawned by trading a Shrouded Bijou to the ??? in front of Castle Zvahl.
 -----------------------------------
-local ID = require('scripts/zones/Dynamis-Xarcabard/IDs')
-mixins = { require('scripts/mixins/job_special') }
-
+local ID = zones[xi.zone.DYNAMIS_XARCABARD]
+mixins =
+{
+    require('scripts/mixins/dynamis_beastmen'),
+    require('scripts/mixins/job_special')
+}
 -----------------------------------
 local entity = {}
 
@@ -18,6 +21,7 @@ entity.onMobInitialize = function(mob)
             loot:addItem(11674, xi.drop_rate.COMMON)
         end
     end)
+    mob:setLocalVar('[isDynamis_Arch_Megaboss]', 1)
 end
 
 entity.onMobSpawn = function(mob)

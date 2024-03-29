@@ -6,6 +6,11 @@
 -- mixins = { require('scripts/mixins/job_special') }
 require('scripts/globals/dynamis')
 -----------------------------------
+mixins =
+{
+    require('scripts/mixins/dynamis_beastmen')
+}
+-----------------------------------
 local entity = {}
 
 -- Phase Arrays   Ahriman, Statue, Ahriman, Dragon, Ahriman
@@ -28,6 +33,7 @@ entity.onMobSpawn = function(mob)
     -- Two hours to forced depop
     mob:setLocalVar('phase', 1)
     mob:setLocalVar('2Hour', 0)
+    mob:setLocalVar('[isDynamis_Arch_Megaboss]', 1)
 end
 
 entity.onMobDisengage = function(mob)

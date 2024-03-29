@@ -2,7 +2,11 @@
 -- Area: Dynamis - Valkurm
 --  Mob: Fairy Ring
 -----------------------------------
-mixins = { require('scripts/mixins/dynamis_dreamland') }
+mixins = 
+{
+    require('scripts/mixins/dynamis_dreamland'),
+    require('scripts/mixins/dynamis_beastmen')
+}
 -----------------------------------
 local entity = {}
 

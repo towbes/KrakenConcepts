@@ -2,6 +2,11 @@
 -- Area: Dynamis - Qufim
 --  Mob: Lost Scolopendra
 -----------------------------------
+mixins =
+{
+    require('scripts/mixins/dynamis_beastmen')
+}
+-----------------------------------
 local entity = {}
 
 entity.onMobInitialize = function(mob)

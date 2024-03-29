@@ -26,6 +26,7 @@ entity.onMobSpawn = function(mob)
             { id = xi.jsa.BLOOD_WEAPON, cooldown = 300, hpp = 100 },
         },
     })
+    mob:setLocalVar('[isDynamis_Arch_Megaboss]', 1)
 end
 
 entity.onMobEngage = function(mob, target)

@@ -49,7 +49,11 @@ zoneObject.onTriggerAreaEnter = function(player, triggerArea)
     switch (triggerArea:GetTriggerAreaID()): caseof
     {
         [1] = function()  -- Red Circle
-            if player:getMainJob() == xi.job.RDM and triggerArea:AddCount(1) == 1 then
+            if
+                (player:getMainJob() == xi.job.RDM or
+                player:getSubJob() == xi.job.RDM) and
+                triggerArea:AddCount(1) == 1
+            then
                 red:setAnimation(xi.anim.OPEN_DOOR)
                 red:entityAnimationPacket(xi.animationString.OPEN_DOOR)
                 if
@@ -63,7 +67,11 @@ zoneObject.onTriggerAreaEnter = function(player, triggerArea)
         end,
 
         [2] = function()  -- White Circle
-            if player:getMainJob() == xi.job.WHM and triggerArea:AddCount(1) == 1 then
+            if
+                (player:getMainJob() == xi.job.WHM or
+                player:getSubJob() == xi.job.WHM) and
+                triggerArea:AddCount(1) == 1
+            then
                 white:setAnimation(xi.anim.OPEN_DOOR)
                 white:entityAnimationPacket(xi.animationString.OPEN_DOOR)
                 if
@@ -77,7 +85,11 @@ zoneObject.onTriggerAreaEnter = function(player, triggerArea)
         end,
 
         [3] = function()  -- Black Circle
-            if player:getMainJob() == xi.job.BLM and triggerArea:AddCount(1) == 1 then
+            if
+                (player:getMainJob() == xi.job.BLM or
+                player:getSubJob() == xi.job.BLM) and
+                triggerArea:AddCount(1) == 1
+            then
                 black:setAnimation(xi.anim.OPEN_DOOR)
                 black:entityAnimationPacket(xi.animationString.OPEN_DOOR)
                 if
@@ -105,21 +117,33 @@ zoneObject.onTriggerAreaLeave = function(player, triggerArea)
     switch (triggerArea:GetTriggerAreaID()): caseof
     {
         [1] = function()  -- Red Circle
-            if player:getMainJob() == xi.job.RDM and triggerArea:DelCount(1) == 0 then
+            if
+                (player:getMainJob() == xi.job.RDM or
+                player:getSubJob() == xi.job.RDM) and
+                triggerArea:DelCount(1) == 0
+            then
                 red:setAnimation(xi.anim.CLOSE_DOOR)
                 red:entityAnimationPacket(xi.animationString.CLOSE_DOOR)
             end
         end,
 
         [2] = function()  -- White Circle
-            if player:getMainJob() == xi.job.WHM and triggerArea:DelCount(1) == 0 then
+            if
+                (player:getMainJob() == xi.job.WHM or
+                player:getSubJob() == xi.job.WHM) and
+                triggerArea:DelCount(1) == 0
+            then
                 white:setAnimation(xi.anim.CLOSE_DOOR)
                 white:entityAnimationPacket(xi.animationString.CLOSE_DOOR)
             end
         end,
 
         [3] = function()  -- Black Circle
-            if player:getMainJob() == xi.job.BLM and triggerArea:DelCount(1) == 0 then
+            if
+                (player:getMainJob() == xi.job.BLM or
+                player:getSubJob() == xi.job.BLM) and
+                triggerArea:DelCount(1) == 0
+            then
                 black:setAnimation(xi.anim.CLOSE_DOOR)
                 black:entityAnimationPacket(xi.animationString.CLOSE_DOOR)
             end

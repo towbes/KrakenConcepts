@@ -4,7 +4,11 @@
 -- Note: Mega Boss
 -----------------------------------
 require('scripts/globals/dynamis')
-mixins = { require('scripts/mixins/job_special') }
+mixins =
+{
+    require('scripts/mixins/dynamis_beastmen'),
+    require('scripts/mixins/job_special')
+}
 -----------------------------------
 local entity = {}
 
@@ -12,6 +16,7 @@ entity.onMobInitialize = function(mob)
     mob:setMod(xi.mod.DMGPHYS, 5000)
     mob:setMod(xi.mod.MDEF, 25)
     mob:setMobMod(xi.mobMod.HP_SCALE, 500)
+    mob:setLocalVar('[isDynamis_Arch_Megaboss]', 1)
 end
 
 entity.onMobSpawn = function(mob)

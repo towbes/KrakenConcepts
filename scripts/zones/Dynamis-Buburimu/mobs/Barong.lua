@@ -2,6 +2,11 @@
 -- Area: Dynamis - Buburimu
 --  Mob: Aitvaras
 -----------------------------------
+mixins =
+{
+    require('scripts/mixins/dynamis_beastmen')
+}
+-----------------------------------
 local entity = {}
 
 entity.onMobSpawn = function(mob)

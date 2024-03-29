@@ -2,7 +2,11 @@
 -- Area: Dynamis - Valkurm
 --  Mob: Stcemqestcint
 -----------------------------------
-mixins = { require('scripts/mixins/dynamis_dreamland') }
+mixins = 
+{
+    require('scripts/mixins/dynamis_dreamland'),
+    require('scripts/mixins/dynamis_beastmen')
+}
 -----------------------------------
 local entity = {}
 
