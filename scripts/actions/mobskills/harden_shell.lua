@@ -24,7 +24,7 @@ mobskillObject.onMobWeaponSkill = function(target, mob, skill)
             duration = 180
             duration = math.max(60, duration * (tp/1000)) -- Minimum 1 minutes. Maximum 9 minutes.
             master:addStatusEffect(xi.effect.DEFENSE_BOOST, power, 0, duration)
-            mob:injectActionPacket(master:getID(), 11, 807, 0, 0, 0, 10, 1)
+            mob:injectActionPacket(master:getID(), 11, 479, 0, 0, 0, 10, 1)
             master:timer(4000, function(masterArg)
                 master:messageBasic(xi.msg.basic.GAINS_EFFECT_OF_STATUS, xi.effect.DEFENSE_BOOST)
             end)

@@ -368,6 +368,7 @@ namespace petutils
                 break;
             case 25: // HOMUNCULUS
                 PMob->addModifier(Mod::DOUBLE_ATTACK, 100);
+                PMob->addModifier(Mod::COUNTER, 25);
                 PMob->addModifier(Mod::DEFP, 30);
                 break;
             case 26: // FLYTRAP FAMILIAR
@@ -481,12 +482,12 @@ namespace petutils
                 PMob->addModifier(Mod::DEFP, -20);
                 break;
             case 64: // FAITHFUL FALCORR
-                PMob->addModifier(Mod::ATTP, 10);
+                PMob->addModifier(Mod::ATTP, 15);
                 PMob->addModifier(Mod::DEFP, -10);
                 PMob->addModifier(Mod::WIND_SDT, 5000);
                 break;
             case 65: // CRUDE RALPHIE
-                PMob->addModifier(Mod::DEFP, 30);
+                PMob->addModifier(Mod::DEFP, 50);
                 PMob->addModifier(Mod::WATER_SDT, 5000);
                 PMob->addModifier(Mod::EARTH_SDT, 5000);
                 PMob->addModifier(Mod::THUNDER_SDT, 5000);

@@ -23,7 +23,7 @@ mobskillObject.onMobWeaponSkill = function(target, mob, skill)
             duration = math.max(15, duration * (tp/1000)) -- Minimum 15 seconds. Maximum 27~ Seconds.
         end
     end
-    skill:setMsg(xi.mobskills.mobGazeMove(mob, target, xi.effect.TERROR, 1, 0, duration))
+    skill:setMsg(xi.mobskills.mobGazeMove(mob, target, xi.effect.TERROR, 30, 0, duration))
 
     return xi.effect.TERROR
 end

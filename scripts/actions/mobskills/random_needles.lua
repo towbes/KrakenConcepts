@@ -23,7 +23,7 @@ mobskillObject.onMobWeaponSkill = function(target, mob, skill)
     else
         local needles = math.random(1000, 10000) / skill:getTotalTargets()
         if target:isNM() then
-            needles = math.random(1000, 10000) / skill:getTotalTargets() * 0.75
+            needles = math.random(1000, 10000) / skill:getTotalTargets() * 0.25
         end
         
         local dmg     = xi.mobskills.mobFinalAdjustments(needles, mob, skill, target, xi.attackType.PHYSICAL, xi.damageType.PIERCING, xi.mobskills.shadowBehavior.WIPE_SHADOWS)
