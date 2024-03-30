@@ -1,9 +1,9 @@
 -----------------------------------
--- Ability: Unleash
--- Description: Increases the accuracy of Charm and reduces the recast times of Sic and Ready.
--- Obtained: BST Level 96
--- Recast Time: 01:00:00
--- Duration: 0:01:00
+-- Ability: Sic
+-- Commands the charmed Pet to make a random special attack.
+-- Obtained: Beastmaster Level 25
+-- Recast Time: 2 minutes
+-- Duration: N/A
 -----------------------------------
 local abilityObject = {}
 
@@ -15,15 +15,18 @@ abilityObject.onAbilityCheck = function(player, target, ability)
             return xi.msg.basic.UNABLE_TO_USE_JA, 0
         elseif player:getPet():getTarget() == nil then
             return xi.msg.basic.PET_CANNOT_DO_ACTION, 0
+        elseif not player:getPet():hasTPMoves() then
+            return xi.msg.basic.UNABLE_TO_USE_JA, 0
         else
-            ability:setRecast(ability:getRecast() - player:getMod(xi.mod.ONE_HOUR_RECAST))
             return 0, 0
         end
     end
 end
 
 abilityObject.onUseAbility = function(player, target, ability)
-    player:addStatusEffect(xi.effect.UNLEASH, 9, 3, 60)
+    local pet = player:getPet()
+    print('works')
+    player:addStatusEffect(xi.effect.SPUR, 1, 0, 90)
 end
 
 return abilityObject

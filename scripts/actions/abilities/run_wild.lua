@@ -1,9 +1,9 @@
 -----------------------------------
--- Ability: Unleash
--- Description: Increases the accuracy of Charm and reduces the recast times of Sic and Ready.
--- Obtained: BST Level 96
--- Recast Time: 01:00:00
--- Duration: 0:01:00
+-- Ability: Run Wild
+-- Grants a +25% bonus to Pet: Attack, Accuracy, Magic Attack Bonus, Evasion, and Defense bonus and adds a Regen effect, but the pet disappears after 5 minutes. 
+-- Obtained: Beastmaster Level 93
+-- Recast Time: 15 minutes
+-- Duration: 5 minutes
 -----------------------------------
 local abilityObject = {}
 
@@ -16,14 +16,15 @@ abilityObject.onAbilityCheck = function(player, target, ability)
         elseif player:getPet():getTarget() == nil then
             return xi.msg.basic.PET_CANNOT_DO_ACTION, 0
         else
-            ability:setRecast(ability:getRecast() - player:getMod(xi.mod.ONE_HOUR_RECAST))
             return 0, 0
         end
     end
 end
 
 abilityObject.onUseAbility = function(player, target, ability)
-    player:addStatusEffect(xi.effect.UNLEASH, 9, 3, 60)
+    local jpValue  = player:getJobPointLevel(xi.jp.RUN_WILD_DURATION * 2)
+    local duration = 300 + jpValue
+    player:addStatusEffectEx(xi.effect.RUN_WILD, 0, 0, 0, duration)
 end
 
 return abilityObject
