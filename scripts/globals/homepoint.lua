@@ -169,6 +169,13 @@ end
 
 -- Functions called by homepoint scripts.
 xi.homepoint.onTrigger = function(player, csid, index)
+    local playerzone = player:getZone()
+    if playerzone:getTypeMask() == xi.zoneType.CITY then -- If you're in a city, you can reset your pet cooldowns.5704
+        player:resetRecast(xi.recast.ABILITY, 163)
+        player:resetRecast(xi.recast.ABILITY, 205)
+        player:printToPlayer('Automaton / Wyvern cooldowns reset!')
+    end
+
     if xi.settings.main.HOMEPOINT_TELEPORT ~= 1 then -- Settings.lua Homepoints disabled
         player:startEvent(csid, 0, 0, 0, 0, 0, player:getGil(), 4095, index)
         return
