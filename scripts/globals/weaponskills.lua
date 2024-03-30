@@ -1384,6 +1384,7 @@ local function getMeleePDifRange(wRatio, pDifFinalCap)
     end
 
     return { pDifLowerCap, pDifUpperCap }
+end
 
 -- Given the raw ratio value (atk/def) and levels, returns the cRatio (min then max)
 xi.weaponskills.cMeleeRatio = function(attacker, defender, params, ignoredDef, tp, ratioMod)

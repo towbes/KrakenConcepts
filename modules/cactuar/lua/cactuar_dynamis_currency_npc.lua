@@ -57,17 +57,17 @@ m:addOverride('xi.zones.Southern_San_dOria.Zone.onInitialize', function(zone)
             
             player:confirmTrade()
 
-            player:setCharVar('Dynamis_Currency[1452]', sandoriaCurrencyTotal + bronzepieceCount + (silverpieceCount * 100) + (goldpieceCount * 1000))
-            player:setCharVar('Dynamis_Currency[1455]', bastokCurrencyTotal + onebyneCount + (onehundredbyneCount * 100) + (onethousandbyneCount * 1000))
-            player:setCharVar('Dynamis_Currency[1449]', windurstCurrencyTotal + whiteshellCount + (jadeshellCount * 100) + (stripeshellCount * 1000))
+            player:setCharVar('Dynamis_Currency[1452]', sandoriaCurrencyTotal + bronzepieceCount + (silverpieceCount * 100) + (goldpieceCount * 10000))
+            player:setCharVar('Dynamis_Currency[1455]', bastokCurrencyTotal + onebyneCount + (onehundredbyneCount * 100) + (onethousandbyneCount * 10000))
+            player:setCharVar('Dynamis_Currency[1449]', windurstCurrencyTotal + whiteshellCount + (jadeshellCount * 100) + (stripeshellCount * 10000))
 
             npc:facePlayer(player)
             player:printToPlayer('CurrencyNPC: I have tallied the currency you traded me and stored it in your bank.', xi.msg.channel.NS_SAY)
 
 
-            player:printToPlayer('You now have '.. sandoriaCurrencyTotal + bronzepieceCount + (silverpieceCount * 100) + (goldpieceCount * 1000) ..' Bronzepieces stored.', xi.msg.channel.NS_SAY)
-            player:printToPlayer('You now have '.. bastokCurrencyTotal + onebyneCount + (onehundredbyneCount * 100) + (onethousandbyneCount * 1000) ..' Bynes stored.', xi.msg.channel.NS_SAY)
-            player:printToPlayer('You now have '.. windurstCurrencyTotal + whiteshellCount + (jadeshellCount * 100) + (stripeshellCount * 1000) ..' Whiteshells stored.', xi.msg.channel.NS_SAY)
+            player:printToPlayer('You now have '.. sandoriaCurrencyTotal + bronzepieceCount + (silverpieceCount * 100) + (goldpieceCount * 10000) ..' Bronzepieces stored.', xi.msg.channel.NS_SAY)
+            player:printToPlayer('You now have '.. bastokCurrencyTotal + onebyneCount + (onehundredbyneCount * 100) + (onethousandbyneCount * 10000) ..' Bynes stored.', xi.msg.channel.NS_SAY)
+            player:printToPlayer('You now have '.. windurstCurrencyTotal + whiteshellCount + (jadeshellCount * 100) + (stripeshellCount * 10000) ..' Whiteshells stored.', xi.msg.channel.NS_SAY)
 
 
         end,
@@ -350,9 +350,9 @@ page5 =
         function(playerArg)
             quantity      = 1
             currencyTotal = playerArg:getCharVar('Dynamis_Currency[1452]')
-            newTotal      = currencyTotal - quantity * 1000
+            newTotal      = currencyTotal - quantity * 10000
             zoneID        = zones[player:getZoneID()]
-            if playerArg:getFreeSlotsCount() ~= 0 and currencyTotal >= (quantity * 1000) then
+            if playerArg:getFreeSlotsCount() ~= 0 and currencyTotal >= (quantity * 10000) then
                 playerArg:addItem(xi.item.RANPERRE_GOLDPIECE, quantity)
                 playerArg:messageSpecial(zoneID.text.YOU_OBTAIN_ITEM, xi.item.RANPERRE_GOLDPIECE, quantity)
                 playerArg:setCharVar('Dynamis_Currency[1452]', newTotal)
@@ -576,9 +576,9 @@ page9 =
         function(playerArg)
             quantity      = 1
             currencyTotal = playerArg:getCharVar('Dynamis_Currency[1452]')
-            newTotal      = currencyTotal - quantity * 1000
+            newTotal      = currencyTotal - quantity * 10000
             zoneID        = zones[player:getZoneID()]
-            if playerArg:getFreeSlotsCount() ~= 0 and currencyTotal >= (quantity * 1000) then
+            if playerArg:getFreeSlotsCount() ~= 0 and currencyTotal >= (quantity * 10000) then
                 playerArg:addItem(xi.item.TEN_THOUSAND_BYNE_BILL, quantity)
                 playerArg:messageSpecial(zoneID.text.YOU_OBTAIN_ITEM, xi.item.TEN_THOUSAND_BYNE_BILL, quantity)
                 playerArg:setCharVar('Dynamis_Currency[1452]', newTotal)
@@ -802,9 +802,9 @@ page13 =
         function(playerArg)
             quantity      = 1
             currencyTotal = playerArg:getCharVar('Dynamis_Currency[1452]')
-            newTotal      = currencyTotal - quantity * 1000
+            newTotal      = currencyTotal - quantity * 10000
             zoneID        = zones[player:getZoneID()]
-            if playerArg:getFreeSlotsCount() ~= 0 and currencyTotal >= (quantity * 1000) then
+            if playerArg:getFreeSlotsCount() ~= 0 and currencyTotal >= (quantity * 10000) then
                 playerArg:addItem(xi.item.RIMILALA_STRIPESHELL, quantity)
                 playerArg:messageSpecial(zoneID.text.YOU_OBTAIN_ITEM, xi.item.RIMILALA_STRIPESHELL, quantity)
                 playerArg:setCharVar('Dynamis_Currency[1452]', newTotal)
@@ -887,17 +887,17 @@ m:addOverride('xi.zones.Bastok_Mines.Zone.onInitialize', function(zone)
             
             player:confirmTrade()
 
-            player:setCharVar('Dynamis_Currency[1452]', sandoriaCurrencyTotal + bronzepieceCount + (silverpieceCount * 100) + (goldpieceCount * 1000))
-            player:setCharVar('Dynamis_Currency[1455]', bastokCurrencyTotal + onebyneCount + (onehundredbyneCount * 100) + (onethousandbyneCount * 1000))
-            player:setCharVar('Dynamis_Currency[1449]', windurstCurrencyTotal + whiteshellCount + (jadeshellCount * 100) + (stripeshellCount * 1000))
+            player:setCharVar('Dynamis_Currency[1452]', sandoriaCurrencyTotal + bronzepieceCount + (silverpieceCount * 100) + (goldpieceCount * 10000))
+            player:setCharVar('Dynamis_Currency[1455]', bastokCurrencyTotal + onebyneCount + (onehundredbyneCount * 100) + (onethousandbyneCount * 10000))
+            player:setCharVar('Dynamis_Currency[1449]', windurstCurrencyTotal + whiteshellCount + (jadeshellCount * 100) + (stripeshellCount * 10000))
 
             npc:facePlayer(player)
             player:printToPlayer('CurrencyNPC: I have tallied the currency you traded me and stored it in your bank.', xi.msg.channel.NS_SAY)
 
 
-            player:printToPlayer('You now have '.. sandoriaCurrencyTotal + bronzepieceCount + (silverpieceCount * 100) + (goldpieceCount * 1000) ..' Bronzepieces stored.', xi.msg.channel.NS_SAY)
-            player:printToPlayer('You now have '.. bastokCurrencyTotal + onebyneCount + (onehundredbyneCount * 100) + (onethousandbyneCount * 1000) ..' Bynes stored.', xi.msg.channel.NS_SAY)
-            player:printToPlayer('You now have '.. windurstCurrencyTotal + whiteshellCount + (jadeshellCount * 100) + (stripeshellCount * 1000) ..' Whiteshells stored.', xi.msg.channel.NS_SAY)
+            player:printToPlayer('You now have '.. sandoriaCurrencyTotal + bronzepieceCount + (silverpieceCount * 100) + (goldpieceCount * 10000) ..' Bronzepieces stored.', xi.msg.channel.NS_SAY)
+            player:printToPlayer('You now have '.. bastokCurrencyTotal + onebyneCount + (onehundredbyneCount * 100) + (onethousandbyneCount * 10000) ..' Bynes stored.', xi.msg.channel.NS_SAY)
+            player:printToPlayer('You now have '.. windurstCurrencyTotal + whiteshellCount + (jadeshellCount * 100) + (stripeshellCount * 10000) ..' Whiteshells stored.', xi.msg.channel.NS_SAY)
 
 
         end,
@@ -1180,9 +1180,9 @@ page5 =
         function(playerArg)
             quantity      = 1
             currencyTotal = playerArg:getCharVar('Dynamis_Currency[1452]')
-            newTotal      = currencyTotal - quantity * 1000
+            newTotal      = currencyTotal - quantity * 10000
             zoneID        = zones[player:getZoneID()]
-            if playerArg:getFreeSlotsCount() ~= 0 and currencyTotal >= (quantity * 1000) then
+            if playerArg:getFreeSlotsCount() ~= 0 and currencyTotal >= (quantity * 10000) then
                 playerArg:addItem(xi.item.RANPERRE_GOLDPIECE, quantity)
                 playerArg:messageSpecial(zoneID.text.YOU_OBTAIN_ITEM, xi.item.RANPERRE_GOLDPIECE, quantity)
                 playerArg:setCharVar('Dynamis_Currency[1452]', newTotal)
@@ -1406,9 +1406,9 @@ page9 =
         function(playerArg)
             quantity      = 1
             currencyTotal = playerArg:getCharVar('Dynamis_Currency[1452]')
-            newTotal      = currencyTotal - quantity * 1000
+            newTotal      = currencyTotal - quantity * 01000
             zoneID        = zones[player:getZoneID()]
-            if playerArg:getFreeSlotsCount() ~= 0 and currencyTotal >= (quantity * 1000) then
+            if playerArg:getFreeSlotsCount() ~= 0 and currencyTotal >= (quantity * 10000) then
                 playerArg:addItem(xi.item.TEN_THOUSAND_BYNE_BILL, quantity)
                 playerArg:messageSpecial(zoneID.text.YOU_OBTAIN_ITEM, xi.item.TEN_THOUSAND_BYNE_BILL, quantity)
                 playerArg:setCharVar('Dynamis_Currency[1452]', newTotal)
@@ -1632,9 +1632,9 @@ page13 =
         function(playerArg)
             quantity      = 1
             currencyTotal = playerArg:getCharVar('Dynamis_Currency[1452]')
-            newTotal      = currencyTotal - quantity * 1000
+            newTotal      = currencyTotal - quantity * 10000
             zoneID        = zones[player:getZoneID()]
-            if playerArg:getFreeSlotsCount() ~= 0 and currencyTotal >= (quantity * 1000) then
+            if playerArg:getFreeSlotsCount() ~= 0 and currencyTotal >= (quantity * 10000) then
                 playerArg:addItem(xi.item.RIMILALA_STRIPESHELL, quantity)
                 playerArg:messageSpecial(zoneID.text.YOU_OBTAIN_ITEM, xi.item.RIMILALA_STRIPESHELL, quantity)
                 playerArg:setCharVar('Dynamis_Currency[1452]', newTotal)
@@ -1717,17 +1717,17 @@ m:addOverride('xi.zones.Windurst_Walls.Zone.onInitialize', function(zone)
             
             player:confirmTrade()
 
-            player:setCharVar('Dynamis_Currency[1452]', sandoriaCurrencyTotal + bronzepieceCount + (silverpieceCount * 100) + (goldpieceCount * 1000))
-            player:setCharVar('Dynamis_Currency[1455]', bastokCurrencyTotal + onebyneCount + (onehundredbyneCount * 100) + (onethousandbyneCount * 1000))
-            player:setCharVar('Dynamis_Currency[1449]', windurstCurrencyTotal + whiteshellCount + (jadeshellCount * 100) + (stripeshellCount * 1000))
+            player:setCharVar('Dynamis_Currency[1452]', sandoriaCurrencyTotal + bronzepieceCount + (silverpieceCount * 100) + (goldpieceCount * 10000))
+            player:setCharVar('Dynamis_Currency[1455]', bastokCurrencyTotal + onebyneCount + (onehundredbyneCount * 100) + (onethousandbyneCount * 10000))
+            player:setCharVar('Dynamis_Currency[1449]', windurstCurrencyTotal + whiteshellCount + (jadeshellCount * 100) + (stripeshellCount * 10000))
 
             npc:facePlayer(player)
             player:printToPlayer('CurrencyNPC: I have tallied the currency you traded me and stored it in your bank.', xi.msg.channel.NS_SAY)
 
 
-            player:printToPlayer('You now have '.. sandoriaCurrencyTotal + bronzepieceCount + (silverpieceCount * 100) + (goldpieceCount * 1000) ..' Bronzepieces stored.', xi.msg.channel.NS_SAY)
-            player:printToPlayer('You now have '.. bastokCurrencyTotal + onebyneCount + (onehundredbyneCount * 100) + (onethousandbyneCount * 1000) ..' Bynes stored.', xi.msg.channel.NS_SAY)
-            player:printToPlayer('You now have '.. windurstCurrencyTotal + whiteshellCount + (jadeshellCount * 100) + (stripeshellCount * 1000) ..' Whiteshells stored.', xi.msg.channel.NS_SAY)
+            player:printToPlayer('You now have '.. sandoriaCurrencyTotal + bronzepieceCount + (silverpieceCount * 100) + (goldpieceCount * 10000) ..' Bronzepieces stored.', xi.msg.channel.NS_SAY)
+            player:printToPlayer('You now have '.. bastokCurrencyTotal + onebyneCount + (onehundredbyneCount * 100) + (onethousandbyneCount * 10000) ..' Bynes stored.', xi.msg.channel.NS_SAY)
+            player:printToPlayer('You now have '.. windurstCurrencyTotal + whiteshellCount + (jadeshellCount * 100) + (stripeshellCount * 10000) ..' Whiteshells stored.', xi.msg.channel.NS_SAY)
 
 
         end,
@@ -2010,9 +2010,9 @@ page5 =
         function(playerArg)
             quantity      = 1
             currencyTotal = playerArg:getCharVar('Dynamis_Currency[1452]')
-            newTotal      = currencyTotal - quantity * 1000
+            newTotal      = currencyTotal - quantity * 10000
             zoneID        = zones[player:getZoneID()]
-            if playerArg:getFreeSlotsCount() ~= 0 and currencyTotal >= (quantity * 1000) then
+            if playerArg:getFreeSlotsCount() ~= 0 and currencyTotal >= (quantity * 10000) then
                 playerArg:addItem(xi.item.RANPERRE_GOLDPIECE, quantity)
                 playerArg:messageSpecial(zoneID.text.YOU_OBTAIN_ITEM, xi.item.RANPERRE_GOLDPIECE, quantity)
                 playerArg:setCharVar('Dynamis_Currency[1452]', newTotal)
@@ -2236,9 +2236,9 @@ page9 =
         function(playerArg)
             quantity      = 1
             currencyTotal = playerArg:getCharVar('Dynamis_Currency[1452]')
-            newTotal      = currencyTotal - quantity * 1000
+            newTotal      = currencyTotal - quantity * 10000
             zoneID        = zones[player:getZoneID()]
-            if playerArg:getFreeSlotsCount() ~= 0 and currencyTotal >= (quantity * 1000) then
+            if playerArg:getFreeSlotsCount() ~= 0 and currencyTotal >= (quantity * 10000) then
                 playerArg:addItem(xi.item.TEN_THOUSAND_BYNE_BILL, quantity)
                 playerArg:messageSpecial(zoneID.text.YOU_OBTAIN_ITEM, xi.item.TEN_THOUSAND_BYNE_BILL, quantity)
                 playerArg:setCharVar('Dynamis_Currency[1452]', newTotal)
@@ -2462,9 +2462,9 @@ page13 =
         function(playerArg)
             quantity      = 1
             currencyTotal = playerArg:getCharVar('Dynamis_Currency[1452]')
-            newTotal      = currencyTotal - quantity * 1000
+            newTotal      = currencyTotal - quantity * 10000
             zoneID        = zones[player:getZoneID()]
-            if playerArg:getFreeSlotsCount() ~= 0 and currencyTotal >= (quantity * 1000) then
+            if playerArg:getFreeSlotsCount() ~= 0 and currencyTotal >= (quantity * 10000) then
                 playerArg:addItem(xi.item.RIMILALA_STRIPESHELL, quantity)
                 playerArg:messageSpecial(zoneID.text.YOU_OBTAIN_ITEM, xi.item.RIMILALA_STRIPESHELL, quantity)
                 playerArg:setCharVar('Dynamis_Currency[1452]', newTotal)
@@ -2547,17 +2547,17 @@ m:addOverride('xi.zones.RuLude_Gardens.Zone.onInitialize', function(zone)
             
             player:confirmTrade()
 
-            player:setCharVar('Dynamis_Currency[1452]', sandoriaCurrencyTotal + bronzepieceCount + (silverpieceCount * 100) + (goldpieceCount * 1000))
-            player:setCharVar('Dynamis_Currency[1455]', bastokCurrencyTotal + onebyneCount + (onehundredbyneCount * 100) + (onethousandbyneCount * 1000))
-            player:setCharVar('Dynamis_Currency[1449]', windurstCurrencyTotal + whiteshellCount + (jadeshellCount * 100) + (stripeshellCount * 1000))
+            player:setCharVar('Dynamis_Currency[1452]', sandoriaCurrencyTotal + bronzepieceCount + (silverpieceCount * 100) + (goldpieceCount * 10000))
+            player:setCharVar('Dynamis_Currency[1455]', bastokCurrencyTotal + onebyneCount + (onehundredbyneCount * 100) + (onethousandbyneCount * 10000))
+            player:setCharVar('Dynamis_Currency[1449]', windurstCurrencyTotal + whiteshellCount + (jadeshellCount * 100) + (stripeshellCount * 10000))
 
             npc:facePlayer(player)
             player:printToPlayer('CurrencyNPC: I have tallied the currency you traded me and stored it in your bank.', xi.msg.channel.NS_SAY)
 
 
-            player:printToPlayer('You now have '.. sandoriaCurrencyTotal + bronzepieceCount + (silverpieceCount * 100) + (goldpieceCount * 1000) ..' Bronzepieces stored.', xi.msg.channel.NS_SAY)
-            player:printToPlayer('You now have '.. bastokCurrencyTotal + onebyneCount + (onehundredbyneCount * 100) + (onethousandbyneCount * 1000) ..' Bynes stored.', xi.msg.channel.NS_SAY)
-            player:printToPlayer('You now have '.. windurstCurrencyTotal + whiteshellCount + (jadeshellCount * 100) + (stripeshellCount * 1000) ..' Whiteshells stored.', xi.msg.channel.NS_SAY)
+            player:printToPlayer('You now have '.. sandoriaCurrencyTotal + bronzepieceCount + (silverpieceCount * 100) + (goldpieceCount * 10000) ..' Bronzepieces stored.', xi.msg.channel.NS_SAY)
+            player:printToPlayer('You now have '.. bastokCurrencyTotal + onebyneCount + (onehundredbyneCount * 100) + (onethousandbyneCount * 10000) ..' Bynes stored.', xi.msg.channel.NS_SAY)
+            player:printToPlayer('You now have '.. windurstCurrencyTotal + whiteshellCount + (jadeshellCount * 100) + (stripeshellCount * 10000) ..' Whiteshells stored.', xi.msg.channel.NS_SAY)
 
 
         end,
@@ -2840,9 +2840,9 @@ page5 =
         function(playerArg)
             quantity      = 1
             currencyTotal = playerArg:getCharVar('Dynamis_Currency[1452]')
-            newTotal      = currencyTotal - quantity * 1000
+            newTotal      = currencyTotal - quantity * 10000
             zoneID        = zones[player:getZoneID()]
-            if playerArg:getFreeSlotsCount() ~= 0 and currencyTotal >= (quantity * 1000) then
+            if playerArg:getFreeSlotsCount() ~= 0 and currencyTotal >= (quantity * 10000) then
                 playerArg:addItem(xi.item.RANPERRE_GOLDPIECE, quantity)
                 playerArg:messageSpecial(zoneID.text.YOU_OBTAIN_ITEM, xi.item.RANPERRE_GOLDPIECE, quantity)
                 playerArg:setCharVar('Dynamis_Currency[1452]', newTotal)
@@ -3066,9 +3066,9 @@ page9 =
         function(playerArg)
             quantity      = 1
             currencyTotal = playerArg:getCharVar('Dynamis_Currency[1452]')
-            newTotal      = currencyTotal - quantity * 1000
+            newTotal      = currencyTotal - quantity * 10000
             zoneID        = zones[player:getZoneID()]
-            if playerArg:getFreeSlotsCount() ~= 0 and currencyTotal >= (quantity * 1000) then
+            if playerArg:getFreeSlotsCount() ~= 0 and currencyTotal >= (quantity * 10000) then
                 playerArg:addItem(xi.item.TEN_THOUSAND_BYNE_BILL, quantity)
                 playerArg:messageSpecial(zoneID.text.YOU_OBTAIN_ITEM, xi.item.TEN_THOUSAND_BYNE_BILL, quantity)
                 playerArg:setCharVar('Dynamis_Currency[1452]', newTotal)
@@ -3292,9 +3292,9 @@ page13 =
         function(playerArg)
             quantity      = 1
             currencyTotal = playerArg:getCharVar('Dynamis_Currency[1452]')
-            newTotal      = currencyTotal - quantity * 1000
+            newTotal      = currencyTotal - quantity * 10000
             zoneID        = zones[player:getZoneID()]
-            if playerArg:getFreeSlotsCount() ~= 0 and currencyTotal >= (quantity * 1000) then
+            if playerArg:getFreeSlotsCount() ~= 0 and currencyTotal >= (quantity * 10000) then
                 playerArg:addItem(xi.item.RIMILALA_STRIPESHELL, quantity)
                 playerArg:messageSpecial(zoneID.text.YOU_OBTAIN_ITEM, xi.item.RIMILALA_STRIPESHELL, quantity)
                 playerArg:setCharVar('Dynamis_Currency[1452]', newTotal)
