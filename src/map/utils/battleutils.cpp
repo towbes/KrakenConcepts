@@ -1319,6 +1319,26 @@ namespace battleutils
                     PChar->updatemask |= UPDATE_HP;
                 }
             }
+            else if (enspell == ENSPELL_SOUL_ENSLAVEMENT && PDefender->m_EcoSystem != ECOSYSTEM::UNDEAD)
+            {
+                Action->additionalEffect = SUBEFFECT_TP_DRAIN;
+                Action->addEffectMessage = 165;
+
+                // Increase TP Absorbed by 1% per JP
+                int32 absorbed = Action->param;
+                if (PAttacker->objtype == TYPE_PC)
+                {
+                    absorbed += (int32)floor(
+                        absorbed * 0.01f * static_cast<CCharEntity*>(PAttacker)->PJobPoints->GetJobPointValue(JP_SOUL_ENSLAVEMENT_EFFECT));
+                }
+
+                Action->addEffectParam = PAttacker->addTP(absorbed);
+                PDefender->addTP(-absorbed);
+                if (PChar != nullptr)
+                {
+                    PChar->updatemask |= UPDATE_HP;
+                }
+            }
             else if (PAttacker->StatusEffectContainer->GetActiveRuneCount() > 0) // Rune Enhancement enspell damage, takes priority over all but blood weapon.
             {
                 EFFECT highestRuneEffect = PAttacker->StatusEffectContainer->GetHighestRuneEffect();
