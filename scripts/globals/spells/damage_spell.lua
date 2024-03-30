@@ -292,7 +292,7 @@ xi.spells.damage.calculateBaseDamage = function(caster, target, spellId, spellGr
         end
 
         -- BLM Job Point: With Manawell mDMG +1
-        if caster:hasStatusEffect(xi.effect.MANAWELL) then
+        if caster:hasStatusEffect(xi.effect.MANAWELL) and spellGroup ~= xi.magic.spellGroup.NINJUTSU then
             baseSpellDamageBonus = baseSpellDamageBonus + caster:getJobPointLevel(xi.jp.MANAWELL_EFFECT)
             caster:delStatusEffectSilent(xi.effect.MANAWELL)
         end

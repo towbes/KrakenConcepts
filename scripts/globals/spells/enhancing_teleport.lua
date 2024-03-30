@@ -43,6 +43,10 @@ xi.spells.enhancing.useTeleportSpell = function(caster, target, spell)
     local duration   = pTable[spellId][3]
     local campaign   = pTable[spellId][4]
 
+    if caster:hasStatusEffect(xi.effect.MANAWELL) then
+        caster:delStatusEffectSilent(xi.effect.MANAWELL)
+    end
+
     if
         target:getObjType() == xi.objType.PC and
         (keyItem == 0 or (keyItem > 0 and target:hasKeyItem(keyItem))) and

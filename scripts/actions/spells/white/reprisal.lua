@@ -14,7 +14,8 @@ end
 spellObject.onSpellCast = function(caster, target, spell)
     local duration         = calculateDuration(60, spell:getSkillType(), spell:getSpellGroup(), caster, target)
     local reflectedPercent = 33
-
+    caster:delStatusEffectSilent(xi.effect.MANAWELL)
+    
     if target:addStatusEffect(xi.effect.REPRISAL, reflectedPercent, 0, duration) then
         spell:setMsg(xi.msg.basic.MAGIC_GAIN_EFFECT)
     else

@@ -453,6 +453,8 @@ function getCureFinal(caster, spell, basecure, minCure, isBlueMagic)
         dayWeatherBonus = 1.4
     end
 
+    caster:delStatusEffectSilent(xi.effect.MANAWELL)
+    
     local final = math.floor(math.floor(math.floor(math.floor(basecure) * potency) * dayWeatherBonus) * rapture) * dSeal
     return final
 end

@@ -51,6 +51,8 @@ spellObject.onSpellCast = function(caster, target, spell)
         target:delMP(dmg)
     end
     caster:delStatusEffect(xi.effect.NETHER_VOID)
+    caster:delStatusEffectSilent(xi.effect.MANAWELL)
+    
     return dmg
 end
 

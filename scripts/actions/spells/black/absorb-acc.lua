@@ -29,6 +29,8 @@ spellObject.onSpellCast = function(caster, target, spell)
         end
     end
     caster:delStatusEffect(xi.effect.NETHER_VOID)
+    caster:delStatusEffectSilent(xi.effect.MANAWELL)
+
     return xi.effect.ACCURACY_BOOST
 end
 

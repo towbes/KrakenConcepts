@@ -17,6 +17,7 @@ spellObject.onMagicCastingCheck = function(caster, target, spell)
 end
 
 spellObject.onSpellCast = function(caster, target, spell)
+    caster:delStatusEffectSilent(xi.effect.MANAWELL)
     if target:getObjType() == xi.objType.PC then
         target:sendTractor(caster:getXPos(), caster:getYPos(), caster:getZPos(), target:getRotPos())
         spell:setMsg(xi.msg.basic.MAGIC_CASTS_ON)

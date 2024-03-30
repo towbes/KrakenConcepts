@@ -417,6 +417,9 @@ xi.spells.enfeebling.useEnfeeblingSpell = function(caster, target, spell)
     local spellId     = spell:getID()
     local spellEffect = pTable[spellId][1]
 
+    if caster:hasStatusEffect(xi.effect.MANAWELL) and spell:getSpellGroup() ~= xi.magic.spellGroup.NINJUTSU then
+        caster:delStatusEffectSilent(xi.effect.MANAWELL)
+    end
     ------------------------------
     -- STEP 1: Check spell nullification.
     ------------------------------

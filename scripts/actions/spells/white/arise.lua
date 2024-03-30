@@ -26,6 +26,7 @@ spellObject.onSpellCast = function(caster, target, spell)
             target:addMP(target:getMaxMP())
         end
     end
+    caster:delStatusEffectSilent(xi.effect.MANAWELL)
 
     spell:setMsg(xi.msg.basic.MAGIC_CASTS_ON)
 

@@ -30,6 +30,9 @@ spellObject.onSpellCast = function(caster, target, spell)
         spell:setMsg(xi.msg.basic.MAGIC_NO_EFFECT) -- no effect
     end
 
+    caster:delStatusEffect(xi.effect.NETHER_VOID)
+    caster:delStatusEffectSilent(xi.effect.MANAWELL)
+
     return count
 end
 

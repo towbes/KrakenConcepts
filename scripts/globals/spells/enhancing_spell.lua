@@ -583,6 +583,10 @@ xi.spells.enhancing.useEnhancingSpell = function(caster, target, spell)
         target:delStatusEffectSilent(xi.effect.EMBOLDEN)
     end
 
+    if caster:hasStatusEffect(xi.effect.MANAWELL) then
+        caster:delStatusEffectSilent(xi.effect.MANAWELL)
+    end
+
     ------------------------------------------------------------
     -- Change message when higher effect or 'Always overwrite'.
     ------------------------------------------------------------

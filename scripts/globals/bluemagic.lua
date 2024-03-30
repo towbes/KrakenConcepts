@@ -289,6 +289,8 @@ xi.spells.blue.usePhysicalSpell = function(caster, target, spell, params)
         end
     end
 
+    caster:delStatusEffectSilent(xi.effect.MANAWELL)
+
     return xi.spells.blue.applySpellDamage(caster, target, spell, finaldmg, params, trickAttackTarget)
 end
 
@@ -338,6 +340,8 @@ xi.spells.blue.useMagicalSpell = function(caster, target, spell, params)
         finaldmg = target:getMod(xi.mod.DMGMAGIC_CAP)
     end
 
+    caster:delStatusEffectSilent(xi.effect.MANAWELL)
+
     return xi.spells.blue.applySpellDamage(caster, target, spell, finaldmg, params, nil)
 end
 
@@ -369,6 +373,8 @@ xi.spells.blue.useDrainSpell = function(caster, target, spell, params, softCap, 
             caster:addHP(dmg)
         end
     end
+
+    caster:delStatusEffectSilent(xi.effect.MANAWELL)
 
     return dmg
 end
@@ -417,6 +423,8 @@ xi.spells.blue.useBreathSpell = function(caster, target, spell, params, isConal)
     if target:getMod(xi.mod.DMGBREATH_CAP) > 0 and dmg > target:getMod(xi.mod.DMGBREATH_CAP) then
         dmg = target:getMod(xi.mod.DMGBREATH_CAP)
     end
+
+    caster:delStatusEffectSilent(xi.effect.MANAWELL)
 
     results[1] = xi.spells.blue.applySpellDamage(caster, target, spell, dmg, params, nil)
     results[2] = resistance
@@ -492,6 +500,8 @@ xi.spells.blue.useEnfeeblingSpell = function(caster, target, spell, params, powe
     params.diff      = caster:getStat(xi.mod.INT) - target:getStat(xi.mod.INT)
     params.skillType = xi.skill.BLUE_MAGIC
     local resist     = applyResistanceEffect(caster, target, spell, params)
+
+    caster:delStatusEffectSilent(xi.effect.MANAWELL)
 
     -- If unresisted
     if resist >= resistThreshold then

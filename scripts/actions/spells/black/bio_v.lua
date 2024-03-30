@@ -54,6 +54,8 @@ spellObject.onSpellCast = function(caster, target, spell)
         end
     end
 
+    caster:delStatusEffectSilent(xi.effect.MANAWELL)
+
     return final
 end
 
