@@ -48,14 +48,14 @@ entity.onTrigger = function(player, npc)
         theWaywardAutomatonProgress == 3
     then
         player:startEvent(776) -- tell him you found Automaton
-    elseif
+    --[[elseif
         ((playerJob == xi.job.PUP and
         playerLvl >= xi.settings.main.AF2_QUEST_LEVEL) or
         (player:getSubJob() == xi.job.PUP and
         player:getSubLvl() >= xi.settings.main.AF2_QUEST_LEVEL)) and
         theWaywardAutomaton == QUEST_COMPLETED
     then
-        player:startEvent(777)
+        player:startEvent(777)]]
     --[[ elseif (playerJob ~= xi.job.PUP and player:getSubJob() ~= xi.job.PUP) and theWaywardAutomaton == QUEST_COMPLETED then
         player:startEvent(777)
     elseif (playerJob ~= xi.job.PUP and player:getSubJob() ~= xi.job.PUP) and noStringsAttached == QUEST_COMPLETED then
