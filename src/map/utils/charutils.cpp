@@ -2111,17 +2111,20 @@ namespace charutils
                             case SKILL_KATANA:
                             case SKILL_CLUB:
                             {
-                                bool isWeapon = PItem->isType(ITEM_WEAPON);
-                                if (isWeapon && (!charutils::hasTrait(PChar, TRAIT_DUAL_WIELD) || static_cast<CItemWeapon*>(PItem)->getSkillType() == SKILL_NONE))
+                                if (PItem->isType(ITEM_WEAPON) &&
+                                    (!charutils::hasTrait(PChar, TRAIT_DUAL_WIELD) || ((CItemWeapon*)PItem)->getSkillType() == SKILL_NONE))
+                                // bool isWeapon = PItem->isType(ITEM_WEAPON);
+                                // if (isWeapon && (!charutils::hasTrait(PChar, TRAIT_DUAL_WIELD) || static_cast<CItemWeapon*>(PItem)->getSkillType() == SKILL_NONE))
                                 {
                                     return false;
                                 }
                                 PChar->m_Weapons[SLOT_SUB] = static_cast<CItemWeapon*>(PItem);
                                 // only set m_dualWield if equipping a weapon (not for example a shield)
-                                if (isWeapon)
-                                {
-                                    PChar->m_dualWield = true;
-                                }
+                                PChar->m_dualWield = true;
+                                //if (isWeapon)
+                                //{
+                                //    PChar->m_dualWield = true;
+                                //}
                             }
                             break;
                             default:
@@ -2681,10 +2684,10 @@ namespace charutils
 
             // Disallow everything but shields if you're using H2H
             // Equipping a shield will unequip the H2H weapon and you will go barefisted with a shield
-            if (PMainItem && PMainItem->getSkillType() == SKILL_HAND_TO_HAND)
-            {
-                return;
-            }
+            //if (PMainItem && PMainItem->getSkillType() == SKILL_HAND_TO_HAND)
+            //{
+            //    return;
+            //}
         }
 
         if (slotID == 0)
