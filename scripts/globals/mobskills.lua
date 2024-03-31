@@ -248,9 +248,29 @@ xi.mobskills.mobPhysicalMove = function(mob, target, skill, numHits, accMod, dmg
     local tp = skill:getTP()
 
     -- nil checks
+
+    if tpEffect1 == nil then
+        tpEffect1 = xi.mobskills.physicalTpBonus.DMG_VARIES
+        -- print('xi.mobskills.physicalTpBonus.NONE')
+    end
+
     if tpEffect2 == nil then
         tpEffect2 = xi.mobskills.physicalTpBonus.NONE
         -- print('xi.mobskills.physicalTpBonus.NONE')
+    end
+
+    if
+        tpEffect1_ftp100 == nil or
+        tpEffect1_ftp200 == nil or
+        tpEffect1_ftp300 == nil
+    then
+        -- This is what the old MobTPMod(tp) function performed. Should catch any nil references until all skills get audited.
+        tpEffect1_ftp100 = 1.0
+        -- print('tpeffect2_100 = 1')
+        tpEffect1_ftp200 = 1.5
+        -- print('tpeffect2_200 = 1')
+        tpEffect1_ftp300 = 2.0
+        -- print('tpeffect2_300 = 1')
     end
 
     if

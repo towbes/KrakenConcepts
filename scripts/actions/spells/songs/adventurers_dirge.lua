@@ -1,18 +1,14 @@
 -----------------------------------
--- Spell: Paralyze
+-- Spell: Foe Requiem
 -----------------------------------
 local spellObject = {}
 
 spellObject.onMagicCastingCheck = function(caster, target, spell)
-    if caster:isMob() and target:hasStatusEffect(xi.effect.PARALYSIS) then
-        return 1
-    else
-        return 0
-    end
+    return 0
 end
 
 spellObject.onSpellCast = function(caster, target, spell)
-    return xi.spells.enfeebling.useEnfeeblingSpell(caster, target, spell)
+    return xi.spells.enhancing.useEnhancingSong(caster, target, spell)
 end
 
 return spellObject
