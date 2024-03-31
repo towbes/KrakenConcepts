@@ -9,7 +9,7 @@ end
 
 abilityObject.onPetAbility = function(target, pet, petskill, summoner, action)
     if target:hasStatusEffect(xi.effect.CURSE_II) then
-        skill:setMsg(xi.msg.basic.SKILL_NO_EFFECT) -- no effect
+        petskill:setMsg(xi.msg.basic.SKILL_NO_EFFECT) -- no effect
         return 1
     end
     -- TODO: verify retail fomula
