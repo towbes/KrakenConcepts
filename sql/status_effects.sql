@@ -58,7 +58,7 @@ INSERT INTO `status_effects` VALUES (16,'amnesia',8388640,0,0,2,0,0,1,1,0);
 INSERT INTO `status_effects` VALUES (17,'charm',8388640,0,0,2,0,0,6,0,0);
 INSERT INTO `status_effects` VALUES (18,'gradual_petrification',8388640,7,0,2,0,0,4,1,0);
 INSERT INTO `status_effects` VALUES (19,'sleep',8388656,2,0,1,0,0,8,1,0);
-INSERT INTO `status_effects` VALUES (20,'curse',8392736,9,0,2,0,0,8,1,0);
+INSERT INTO `status_effects` VALUES (20,'curse_ii',8392736,9,0,2,0,0,8,1,0);
 INSERT INTO `status_effects` VALUES (21,'addle',8405026,0,0,2,0,0,1,1,0);
 INSERT INTO `status_effects` VALUES (22,'intimidate',32,0,0,2,0,0,0,1,0);
 INSERT INTO `status_effects` VALUES (23,'kaustra',8388640,0,228,0,0,0,0,0,0);

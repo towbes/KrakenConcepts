@@ -16,6 +16,11 @@ itemObject.onItemCheck = function(target)
 end
 
 itemObject.onItemUse = function(target)
+    if target:hasStatusEffect(xi.effect.CURSE_II) then
+        target:messageBasic(xi.msg.basic.NO_EFFECT)
+        return 1
+    end
+    
     target:messageBasic(xi.msg.basic.RECOVERS_HP, 0, target:addHP(650 * xi.settings.main.ITEM_POWER))
     target:addStatusEffect(xi.effect.MEDICINE, 0, 0, 900)
 end

@@ -66,8 +66,11 @@ xi.job_utils.paladin.useChivalry = function(player, target, ability)
     local amount = (tp * base) + (0.0015 * tp * target:getStat(xi.mod.MND)) * ((100 + merits) / 100)
 
     target:setTP(0)
-
-    return target:addMP(amount)
+    if target:hasStatusEffect(xi.effect.CURSE_II) then
+        target:messageBasic(xi.msg.basic.NO_EFFECT)
+    else
+        return target:addMP(amount)
+    end
 end
 
 xi.job_utils.paladin.useCover = function(player, target, ability)

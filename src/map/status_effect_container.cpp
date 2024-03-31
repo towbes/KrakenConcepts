@@ -1988,7 +1988,15 @@ void CStatusEffectContainer::TickRegen(time_point tick)
         int16 poison  = m_POwner->getMod(Mod::REGEN_DOWN);
         int16 refresh = m_POwner->getMod(Mod::REFRESH) - m_POwner->getMod(Mod::REFRESH_DOWN);
         int16 regain  = m_POwner->getMod(Mod::REGAIN) - m_POwner->getMod(Mod::REGAIN_DOWN);
-        m_POwner->addHP(regen);
+
+        if (m_POwner->StatusEffectContainer->HasStatusEffect(EFFECT_CURSE_II))
+        {
+            m_POwner->addHP(0);
+        }
+        else
+        {
+            m_POwner->addHP(regen);
+        }
 
         if (poison)
         {
@@ -2041,7 +2049,14 @@ void CStatusEffectContainer::TickRegen(time_point tick)
                 }
             }
 
-            m_POwner->addMP(refresh - perpetuation);
+            if (m_POwner->StatusEffectContainer->HasStatusEffect(EFFECT_CURSE_II))
+            {
+                m_POwner->addMP(-perpetuation);
+            }
+            else
+            {
+                m_POwner->addMP(refresh - perpetuation);
+            }
 
             if (m_POwner->health.mp == 0 && m_POwner->PPet != nullptr && m_POwner->PPet->objtype == TYPE_PET)
             {
@@ -2051,6 +2066,10 @@ void CStatusEffectContainer::TickRegen(time_point tick)
                     petutils::DespawnPet(m_POwner);
                 }
             }
+        }
+        else if (m_POwner->StatusEffectContainer->HasStatusEffect(EFFECT_CURSE_II))
+        {
+            m_POwner->addMP(0);
         }
         else
         {

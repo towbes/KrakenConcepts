@@ -116,9 +116,13 @@ xi.job_utils.white_mage.useDevotion = function(player, target, ability)
     healMP = utils.clamp(healMP, 0, target:getMaxMP() - target:getMP())
 
     damageHP = utils.stoneskin(player, damageHP)
-    player:delHP(damageHP)
-    target:addMP(healMP)
-
+    if target:hasStatusEffect(xi.effect.CURSE_II) then
+        target:messageBasic(xi.msg.basic.NO_EFFECT)
+    else
+        player:delHP(damageHP)
+        target:addMP(healMP)
+    end
+    
     return healMP
 end
 
