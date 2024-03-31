@@ -53,11 +53,12 @@ g_mixins.dynamis_beastmen = function(dynamisBeastmenMob)
     -- Without a proc, the coin drop rate is very low (~10%)
     local thCurrency =
     {
-        [0] = { single = 100, hundred = 15 }, -- 100, 5
-        [1] = { single = 120, hundred = 20 }, -- 115, 10
-        [2] = { single = 145, hundred = 35 }, -- 145, 20
-        [3] = { single = 190, hundred = 55 }, -- 190, 35
-        [4] = { single = 250, hundred = 75 }, -- 250, 50
+        [0] = { single = 100, hundred = 10 }, -- 100, 5
+        [1] = { single = 115, hundred = 15 }, -- 115, 10
+        [2] = { single = 145, hundred = 25 }, -- 145, 20
+        [3] = { single = 190, hundred = 35 }, -- 190, 35
+        [4] = { single = 250, hundred = 50 }, -- 250, 50
+        [5] = { single = 275, hundred = 65 }, -- 275, 60
     }
 
     dynamisBeastmenMob:addListener('MAGIC_TAKE', 'DYNAMIS_MAGIC_PROC_CHECK', function(target, caster, spell)
@@ -92,7 +93,7 @@ g_mixins.dynamis_beastmen = function(dynamisBeastmenMob)
 
     dynamisBeastmenMob:addListener('DEATH', 'DYNAMIS_ITEM_DISTRIBUTION', function(mob, killer)
         if killer then
-            local th = thCurrency[math.min(mob:getTHlevel(), 4)]
+            local th = thCurrency[math.min(mob:getTHlevel(), 5)]
             local family = mob:getFamily()
             local currency = familyCurrency[family]
             if currency == nil then
@@ -101,6 +102,11 @@ g_mixins.dynamis_beastmen = function(dynamisBeastmenMob)
 
             local singleChance = th.single
             local hundredChance = th.hundred
+
+            local partySize = killer:getPartySize()
+            local party = killer:getParty()
+            local rollBonus = 0
+
             if mob:getMainLvl() > 77 then -- 90
                 singleChance = math.floor(singleChance * 1.5)
             end
@@ -117,8 +123,7 @@ g_mixins.dynamis_beastmen = function(dynamisBeastmenMob)
 
             -- red (high) adds 100% single slot
             if mob:getLocalVar('dynamis_proc') >= 3 then
-                killer:addTreasure(currency, mob)
-                killer:addTreasure(currency, mob)
+                rollBonus = rollBonus + 2
                 killer:addTreasure(currency + 1, mob, hundredChance)
             end
 
@@ -139,26 +144,40 @@ g_mixins.dynamis_beastmen = function(dynamisBeastmenMob)
 
             -- Trash Mob
             if not mob:isNM() then
-                local currencyText = currencyName[currency] or tostring(currency) -- Used for print messaging. Converts itemID to name string.
+                local currencyText    = currencyName[currency] or tostring(currency) -- Used for print messaging. Converts itemID to name string.
+                local currencyText100 = currencyName[currency + 1] or tostring(currency + 1) -- Used for print messaging. Converts itemID to name string.
                 local totalCurrencyChange = 0 -- Variable to store the total currency change during the loop
-                
 
+                if mob:getMainLvl() > 77 then
+                    rollBonus =  rollBonus + 5 -- Higher level tier mobs give more rolls.
+                end
+
+                if partySize > 1 then
+                    rollBonus = rollBonus + (3 * partySize) -- +2 roll per party member
+                end
                 -- Creates a list of current party members and randomly distributes currency drops to them.
-                for i = 1, 10 do -- 10 loot rolls.
-                    if math.random(0, 1000) < singleChance then -- Drop rate of loot rolls.
-                        local party = killer:getParty()
-                        if killer then
-                            local partySize = #party
-                            local randomIndex = math.random(1, partySize) -- Randomly select a party member
-                            local partyMember = party[randomIndex]
-                            local partyMemberCurrency = partyMember:getCharVar('Dynamis_Currency[' .. currency .. ']')
-                            partyMemberCurrency = partyMemberCurrency + 1 -- Increment the currency for the selected party member
-                            totalCurrencyChange = totalCurrencyChange + 1 -- Update total currency change
-                            partyMember:setCharVar('Dynamis_Currency[' .. currency .. ']', partyMemberCurrency)
-                            if totalCurrencyChange > 0 then
-                                partyMember:printToPlayer(string.format('[%s] dropped. Total:%i', currencyText, partyMemberCurrency), xi.msg.channel.SYSTEM_3)
-                            end
-                        end
+                for i = 1, 9 + rollBonus do -- 8 loot rolls + Bonus
+                    local randomIndex = math.random(1, partySize) -- Randomly select a party member
+                    local partyMember = party[randomIndex]
+                    local partyMemberCurrency = partyMember:getCharVar('Dynamis_Currency[' .. currency .. ']')
+                    partyMemberCurrency = partyMemberCurrency + 1 -- Increment the currency for the selected party member
+                    totalCurrencyChange = totalCurrencyChange + 1 -- Update total currency change
+                    partyMember:setCharVar('Dynamis_Currency[' .. currency .. ']', partyMemberCurrency) -- Add the currency to the players bank.
+
+                    if totalCurrencyChange > 0 then
+                        partyMember:printToPlayer(string.format('[%s] dropped. Total:%i', currencyText, partyMemberCurrency), xi.msg.channel.SYSTEM_3)
+                    end
+                end
+
+                if math.random(0, 1000) < hundredChance then -- Drop rate of loot rolls.
+                    local randomIndex = math.random(1, partySize) -- Randomly select a party member
+                    local partyMember = party[randomIndex]
+                    local partyMemberCurrency = partyMember:getCharVar('Dynamis_Currency[' .. currency .. ']')
+                    partyMemberCurrency = partyMemberCurrency + 100 -- Increment the currency for the selected party member
+                    totalCurrencyChange = totalCurrencyChange + 100 -- Update total currency change
+                    partyMember:setCharVar('Dynamis_Currency[' .. currency .. ']', partyMemberCurrency)
+                    if totalCurrencyChange > 0 then
+                        partyMember:printToPlayer(string.format('[%s] dropped. Total:%i', currencyText100, partyMemberCurrency), xi.msg.channel.SYSTEM_3)
                     end
                 end
             end
@@ -169,7 +188,6 @@ g_mixins.dynamis_beastmen = function(dynamisBeastmenMob)
                 (mob:getLocalVar('[isDynamis_Megaboss]') ~= 1 or   -- Is not a megaboss
                 mob:getLocalVar('[isDynamis_Arch_Megaboss]') ~= 1) -- Is not an arch megaboss
             then
-                local party = killer:getParty() -- Fetch party list.
                 local currencyText = currencyName[currency + 1] or tostring(currency+ 1) -- Used for print messaging. Converts itemID to name string.
                 local totalCurrencyChange = 0 -- Variable to store the total currency change during the loop
                 if killer then
@@ -207,7 +225,6 @@ g_mixins.dynamis_beastmen = function(dynamisBeastmenMob)
                 mob:isNM() and
                 mob:getLocalVar('[isDynamis_Megaboss]') == 1 
             then
-                local party = killer:getParty() -- Fetch party list.
                 local currencyText = currencyName[currency + 1] or tostring(currency+ 1) -- Used for print messaging. Converts itemID to name string.
                 local totalCurrencyChange = 0 -- Variable to store the total currency change during the loop
                 if killer then
@@ -277,8 +294,6 @@ g_mixins.dynamis_beastmen = function(dynamisBeastmenMob)
                     end
                 end
             end
-
-            killer:addTreasure(currency, mob, singleChance) -- base single slot
         end
     end)
 end
