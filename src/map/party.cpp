@@ -82,7 +82,7 @@ CParty::CParty(CBattleEntity* PEntity)
     }
     else
     {
-        ShowWarning("CParty::CParty() - PEntity was null, or party was not null.")
+        ShowWarning("CParty::CParty() - PEntity was null, or party was not null.");
     }
 }
 
@@ -100,6 +100,16 @@ CParty::CParty(uint32 id)
     m_EffectsChanged = false;
 }
 
+// Dirty, ugly hack to prevent bad refs keeping garbage pointers in memory pointing to things that _could_ still be valid, causing mayhem
+CParty::~CParty()
+{
+    m_PLeader        = nullptr;
+    m_PartyID        = 0;
+    m_PAlliance      = nullptr;
+    m_PSyncTarget    = nullptr;
+    m_PQuarterMaster = nullptr;
+}
+
 void CParty::DisbandParty(bool playerInitiated)
 {
     if (m_PAlliance)
@@ -107,13 +117,12 @@ void CParty::DisbandParty(bool playerInitiated)
         m_PAlliance->removeParty(this);
     }
     m_PSyncTarget = nullptr;
-    SetQuarterMaster("");
-
-    m_PLeader   = nullptr;
-    m_PAlliance = nullptr;
+    m_PLeader     = nullptr;
+    m_PAlliance   = nullptr;
 
     if (m_PartyType == PARTY_PCS)
     {
+        SetQuarterMaster("");
         PushPacket(0, 0, new CPartyDefinePacket(nullptr));
 
         for (auto& member : members)
@@ -258,7 +267,7 @@ CBattleEntity* CParty::GetMemberByName(const std::string& memberName)
 
     for (auto& member : members)
     {
-        if (strcmpi(memberName.c_str(), member->GetName().c_str()) == 0)
+        if (strcmpi(memberName.c_str(), member->getName().c_str()) == 0)
         {
             return member;
         }
@@ -574,7 +583,7 @@ void CParty::AddMember(CBattleEntity* PEntity)
     {
         if (PEntity->objtype != TYPE_PC)
         {
-            ShowWarning("Non-Player passed into function (%s).", PEntity->GetName());
+            ShowWarning("Non-Player passed into function (%s).", PEntity->getName());
             return;
         }
 
@@ -992,7 +1001,7 @@ void CParty::SetLeader(const std::string& MemberName)
     {
         uint32 newId = 0;
         int    ret   = sql->Query(
-                 "SELECT chars.charid from accounts_sessions JOIN chars ON chars.charid = accounts_sessions.charid WHERE charname = ('%s')", MemberName);
+            "SELECT chars.charid from accounts_sessions JOIN chars ON chars.charid = accounts_sessions.charid WHERE charname = ('%s')", MemberName);
 
         if (ret != SQL_ERROR && sql->NumRows() != 0 && sql->NextRow() == SQL_SUCCESS)
         {
@@ -1120,6 +1129,7 @@ void CParty::SetSyncTarget(const std::string& MemberName, uint16 message)
     }
 }
 
+// FIXME: add case for "" membername
 void CParty::SetQuarterMaster(const std::string& MemberName)
 {
     CBattleEntity* PEntity = GetMemberByName(MemberName);
@@ -1237,6 +1247,7 @@ void CParty::RefreshSync()
             charutils::CalculateStats(member);
             charutils::BuildingCharTraitsTable(member);
             charutils::BuildingCharAbilityTable(member);
+            charutils::BuildingCharWeaponSkills(member);
             charutils::CheckValidEquipment(member);
             member->pushPacket(new CCharAbilitiesPacket(member));
         }

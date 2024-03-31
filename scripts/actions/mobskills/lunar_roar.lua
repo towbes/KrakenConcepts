@@ -15,7 +15,7 @@ mobskillObject.onMobWeaponSkill = function(target, mob, skill)
     for i, effect in pairs(effects) do
         -- check mask bit for xi.effectFlag.DISPELABLE
         if
-            utils.mask.getBit(effect:getFlag(), 0) and
+            utils.mask.getBit(effect:getEffectFlags(), 0) and
             effect:getEffectType() ~= xi.effect.RERAISE and
             num < 10
         then

@@ -21,7 +21,7 @@ entity.onMobRoam = function(mob)
 
 end
 
-entity.onMobEngaged = function(mob, target)
+entity.onMobEngage = function(mob, target)
     mob:useMobAbility(1838, target)
     mob:entityAnimationPacket('mai1')
         mob:timer(1100, function(mob)

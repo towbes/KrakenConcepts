@@ -39,6 +39,7 @@ along with this program.  If not, see http://www.gnu.org/licenses/
 #include "map.h"
 #include "mob_spell_list.h"
 #include "mobutils.h"
+#include "notoriety_container.h"
 #include "petutils.h"
 #include "puppetutils.h"
 #include "status_effect_container.h"
@@ -99,7 +100,7 @@ namespace petutils
                 slash_sdt, pierce_sdt, h2h_sdt, impact_sdt, \
                 magical_sdt, fire_sdt, ice_sdt, wind_sdt, earth_sdt, lightning_sdt, water_sdt, light_sdt, dark_sdt, \
                 fire_res_rank, ice_res_rank, wind_res_rank, earth_res_rank, lightning_res_rank, water_res_rank, light_res_rank, dark_res_rank, \
-                cmbDelay, name_prefix, mob_pools.skill_list_id \
+                cmbDelay, name_prefix, mob_pools.skill_list_id, damageType \
                 FROM pet_list, mob_pools, mob_resistances, mob_family_system \
                 WHERE pet_list.poolid = mob_pools.poolid AND mob_resistances.resist_id = mob_pools.resist_id AND mob_pools.familyid = mob_family_system.familyID";
 
@@ -177,6 +178,7 @@ namespace petutils
                 Pet->cmbDelay       = (uint16)sql->GetIntData(49);
                 Pet->name_prefix    = (uint8)sql->GetUIntData(50);
                 Pet->m_MobSkillList = (uint16)sql->GetUIntData(51);
+                Pet->m_dmgType      = (DAMAGE_TYPE)sql->GetUIntData(52);
 
                 g_PPetList.emplace_back(Pet);
             }
@@ -305,41 +307,41 @@ namespace petutils
         // Guardrails put into place for any scenarios where mobs sync down to level 20.
         switch (PMob->m_PetID)
         {
-            case 23: // CRAB FAMILIAR
-            case 24: // COURIER CARRIE
-            case 33: // BEETLE FAMILIAR
-            case 45: // PANZER GALAHAD
-                calculatedHp = 48.133 * level - 460;
-                break;
-            case 25: // HOMUNCULUS
-            case 28: // FLOWERPOT BILL
-            case 38: // FLOWERPOT BEN
-                calculatedHp = 61.7471 * level - 1260.99;
-                break;
-            case 34: // ANTLION FAMILIAR
-            case 46: // CHOPSUEY CHUCKY
-            case 47: // AMIGO SABOTENDER
-                calculatedHp = 60.24 * level - 1246;
-                break;
-            case 35: // MITE FAMILIAR
-            case 44: // LIFEDRINKER LARS
-                calculatedHp = 57.7 * level - 1203.5;
-                break;
             case 21: // SHEEP FAMILIAR
             case 22: // HARE FAMILIAR
+            case 23: // CRAB FAMILIAR
+            case 24: // COURIER CARRIE
+            case 25: // HOMUNCULUS
             case 26: // FLYTRAP FAMILIAR
             case 27: // TIGER FAMILIAR
+            case 28: // FLOWERPOT BILL
             case 29: // EFT FAMILIAR
             case 30: // LIZARD FAMILIAR
             case 31: // MAYFLY FAMILIAR
+            case 33: // BEETLE FAMILIAR
             case 32: // FUNGUAR FAMILIAR
+            case 34: // ANTLION FAMILIAR
+            case 35: // MITE FAMILIAR
             case 36: // LULLABY MELODIA
             case 37: // KEENEARED STEFFI
+            case 38: // FLOWERPOT BEN
+                calculatedHp = 61.7471 * level - 1260.99;
+                break;
             case 39: // SABER SIRAVARDE
             case 40: // COLDBLOOD COMO
             case 41: // SHELLBUSTER OROB
             case 42: // VORACIOUS AUDREY
             case 43: // AMBUSHER ALLIE
+            case 44: // LIFEDRINKER LARS
+                calculatedHp = 57.7 * level - 1203.5;
+                break;
+            case 45: // PANZER GALAHAD
+                calculatedHp = 48.133 * level - 460;
+                break;
+            case 46: // CHOPSUEY CHUCKY
+            case 47: // AMIGO SABOTENDER
+                calculatedHp = 60.24 * level - 1246;
+                break;
             default:
                 calculatedHp = -0.0207189 * pow(level, 3) + 3.05448 * pow(level, 2) - 86.9204 * level + 1061.84;
                 break;
@@ -358,29 +360,81 @@ namespace petutils
     {
         switch (PMob->m_PetID)
         {
+            case 21: // SHEEP FAMILIAR
+            case 22: // HARE FAMILIAR
             case 23: // CRAB FAMILIAR
             case 24: // COURIER CARRIE
                 PMob->addModifier(Mod::DEFP, 22);
                 break;
-            case 33: // BEETLE FAMILIAR
-            case 45: // PANZER GALAHAD
-            case 32: // FUNGUAR FAMILIAR
-            case 27: // TIGER FAMILIAR
-            case 39: // SABER SIRAVARDE
-            case 26: // FLYTRAP FAMILIAR
-            case 42: // VORACIOUS AUDREY
-            case 30: // LIZARD FAMILIAR
-            case 40: // COLDBLOOD COMO
-            case 31: // MAYFLY FAMILIAR
-            case 41: // SHELLBUSTER OROB
-                PMob->addModifier(Mod::DEFP, 20);
-                break;
             case 25: // HOMUNCULUS
+                PMob->addModifier(Mod::DOUBLE_ATTACK, 100);
+                PMob->addModifier(Mod::COUNTER, 25);
+                PMob->addModifier(Mod::DEFP, 30);
+                break;
+            case 26: // FLYTRAP FAMILIAR
+            case 27: // TIGER FAMILIAR
+                PMob->addModifier(Mod::ATTP, 10);
+                break;
             case 28: // FLOWERPOT BILL
-            case 38: // FLOWERPOT BEN
-                PMob->addModifier(Mod::DEFP, 24);
+                PMob->addModifier(Mod::DOUBLE_ATTACK, 100);
+                break;
+            case 29: // EFT FAMILIAR
+                PMob->addModifier(Mod::ATTP, 5);
+                break;
+            case 30: // LIZARD FAMILIAR
+                PMob->addModifier(Mod::ATTP, 10);
+                break;
+            case 31: // MAYFLY FAMILIAR
+                PMob->addModifier(Mod::ATTP, 5);
+                break;
+            case 32: // FUNGUAR FAMILIAR
+                PMob->addModifier(Mod::DEFP, 10);
+                PMob->addModifier(Mod::WATER_SDT, 5000);
+                PMob->addModifier(Mod::DARK_SDT, 5000);
+                break;
+            case 33: // BEETLE FAMILIAR
+                PMob->addModifier(Mod::DEFP, 10);
+                PMob->addModifier(Mod::ATTP, 5);
                 break;
             case 34: // ANTLION FAMILIAR
+                PMob->addModifier(Mod::ATTP, 30);
+                break;
+            case 35: // MITE FAMILIAR
+                PMob->addModifier(Mod::ATTP, 10);
+                break;
+            case 36: // LULLABY MELODIA
+                PMob->addModifier(Mod::ATTP, 5);
+                break;
+            case 37: // KEENEARED STEFFI
+                PMob->addModifier(Mod::ATTP, 10);
+                break;
+            case 38: // FLOWERPOT BEN
+                PMob->addModifier(Mod::DOUBLE_ATTACK, 100);
+                PMob->addModifier(Mod::DEFP, 20);
+                break;
+            case 39: // SABER SIRAVARDE
+                PMob->addModifier(Mod::ATTP, 20);
+                break;
+            case 40: // COLDBLOOD COMO
+                PMob->addModifier(Mod::ATTP, 15);
+                break;
+            case 41: // SHELLBUSTER OROB
+                PMob->addModifier(Mod::ATTP, 10);
+                break;
+            case 42: // VORACIOUS AUDREY
+                PMob->addModifier(Mod::ATTP, 5);
+                break;
+            case 43: // AMBUSHER ALLIE
+                PMob->addModifier(Mod::ATTP, 10);
+                break;
+            case 44: // LIFEDRINKER LARS
+                PMob->addModifier(Mod::DEFP, 18);
+                PMob->addModifier(Mod::ATTP, 30);
+                break;
+            case 45: // PANZER GALAHAD
+                PMob->addModifier(Mod::DEFP, 20);
+                PMob->addModifier(Mod::ATTP, 5);
+                break;
             case 46: // CHOPSUEY CHUCKY
                 // 52% defense boost seems quite large however
                 // base calcs are off for most pets in the 20% range
@@ -390,17 +444,69 @@ namespace petutils
             case 47: // AMIGO SABOTENDER
                 PMob->addModifier(Mod::DEFP, 19);
                 break;
-            case 35: // MITE FAMILIAR
-            case 44: // LIFEDRINKER LARS
-                PMob->addModifier(Mod::DEFP, 18);
-                PMob->addModifier(Mod::ATTP, 30);
+            case 49: // CRAFTY CLYVONNE
+                PMob->addModifier(Mod::ATTP, 20);
+                PMob->addModifier(Mod::DEFP, 20);
                 break;
-            case 21: // SHEEP FAMILIAR
-            case 22: // HARE FAMILIAR
-            case 29: // EFT FAMILIAR
-            case 36: // LULLABY MELODIA
-            case 37: // KEENEARED STEFFI
-            case 43: // AMBUSHER ALLIE
+            case 50: // BLOODCLAW SHASR
+                PMob->addModifier(Mod::ATTP, 40);
+                break;
+            case 51: // LUCKY LULUSH
+                PMob->addModifier(Mod::ATTP, 10);
+                PMob->addModifier(Mod::DEFP, 10);
+                break;
+            case 52: // FATSO FARGANN
+                PMob->addModifier(Mod::IMPACT_SDT, 2500);
+                PMob->addModifier(Mod::HTH_SDT, 2500);
+                break;
+            case 53: // DISCREET LOUISE
+                PMob->addModifier(Mod::DEFP, 20);
+                PMob->addModifier(Mod::WATER_SDT, 5000);
+                PMob->addModifier(Mod::DARK_SDT, 5000);
+                break;
+            case 54: // SWIFT SIEGHARD
+                PMob->addModifier(Mod::ATTP, 30);
+                PMob->addModifier(Mod::DEFP, -10);
+                break;
+            case 55: // DIPPER YULY
+                PMob->addModifier(Mod::ATTP, 10);
+                PMob->addModifier(Mod::WIND_SDT, 5000);
+                break;
+            case 62: // GOOEY GERALD
+                PMob->addModifier(Mod::ATTP, -20);
+                PMob->addModifier(Mod::DEFP, 30);
+                PMob->addModifier(Mod::WATER_SDT, 5000);
+                break;
+            case 63: // GOREFANG HOBS
+                PMob->addModifier(Mod::ATTP, 50);
+                PMob->addModifier(Mod::DEFP, -20);
+                break;
+            case 64: // FAITHFUL FALCORR
+                PMob->addModifier(Mod::ATTP, 15);
+                PMob->addModifier(Mod::DEFP, -10);
+                PMob->addModifier(Mod::WIND_SDT, 5000);
+                break;
+            case 65: // CRUDE RALPHIE
+                PMob->addModifier(Mod::DEFP, 50);
+                PMob->addModifier(Mod::WATER_SDT, 5000);
+                PMob->addModifier(Mod::EARTH_SDT, 5000);
+                PMob->addModifier(Mod::THUNDER_SDT, 5000);
+                break;
+            case 66: // DAPPER MAC
+                PMob->addModifier(Mod::STORETP, 20);
+                PMob->addModifier(Mod::WATER_SDT, 5000);
+                PMob->addModifier(Mod::DOUBLE_ATTACK, 100);
+                break;
+            case 67: // SLIPPERY SILAS
+                PMob->addModifier(Mod::WATER_SDT, 5000);
+                PMob->addModifier(Mod::DEFP, -30);
+                PMob->addModifier(Mod::ATTP, -30);
+                break;
+            case 68: // TURBID TOLOI
+                PMob->addModifier(Mod::WATER_SDT, 5000);
+                PMob->addModifier(Mod::ATTP, 20);
+                PMob->addModifier(Mod::DEFP, -20);
+                break;
             default:
                 PMob->addModifier(Mod::DEFP, 10);
                 break;
@@ -420,14 +526,14 @@ namespace petutils
         {
             case 23: // CRAB FAMILIAR
             case 24: // COURIER CARRIE
-            case 33: // BEETLE FAMILIAR
-            case 45: // PANZER GALAHAD
             case 25: // HOMUNCULUS
+            case 33: // BEETLE FAMILIAR
             case 34: // ANTLION FAMILIAR
-            case 46: // CHOPSUEY CHUCKY
-            case 47: // AMIGO SABOTENDER
             case 35: // MITE FAMILIAR
             case 44: // LIFEDRINKER LARS
+            case 45: // PANZER GALAHAD
+            case 46: // CHOPSUEY CHUCKY
+            case 47: // AMIGO SABOTENDER
                 evasionRank = 1;
                 break;
             default:
@@ -590,7 +696,40 @@ namespace petutils
             case 47: // AMIGO SABOTENDER
                 PMob->addModifier(Mod::BEAST_KILLER, 10);
                 break;
+            case 49: // CRAFTY CLYVONNE
+                PMob->addModifier(Mod::LIZARD_KILLER, 10);
+                break;
+            case 50: // BLOODCLAW SHASR
+                PMob->addModifier(Mod::LIZARD_KILLER, 10);
+                break;
+            case 51: // LUCKY LULUSH
+                PMob->addModifier(Mod::LIZARD_KILLER, 10);
+                break;
+            case 52: // FATSO FARGANN
+                PMob->addModifier(Mod::BIRD_KILLER, 10);
+                break;
+            case 53: // DISCREET LOUISE
+                PMob->addModifier(Mod::BEAST_KILLER, 10);
+                break;
+            case 54: // SWIFT SIEGHARD
+                PMob->addModifier(Mod::VERMIN_KILLER, 10);
+                break;
+            case 55: // DIPPER YULY
+                PMob->addModifier(Mod::PLANTOID_KILLER, 10);
+                break;
+            case 62: // GOOEY GERALD
+                PMob->addModifier(Mod::BIRD_KILLER, 10);
+                break;
+            case 63: // GOREFANG HOBS
+                PMob->addModifier(Mod::LIZARD_KILLER, 10);
+                break;
             case 64: // FAITHFUL FALCORR
+                PMob->addModifier(Mod::AQUAN_KILLER, 10);
+                break;
+            case 65: // CRUDE RALPHIE
+                PMob->addModifier(Mod::VERMIN_KILLER, 10);
+                break;
+            case 66: // DAPPER MAC
                 PMob->addModifier(Mod::AQUAN_KILLER, 10);
                 break;
             case 68: // TURBID TOLOI
@@ -602,10 +741,10 @@ namespace petutils
 
         // It appears that Rabbit and Eft have lower stats (acc atk) than their counterparts
         // Require some more data points to see if we should special case those to rank 3 instead of rank 1
-        PMob->setModifier(Mod::DEF, mobutils::GetDefense(PMob, PMob->defRank));
-        PMob->setModifier(Mod::EVA, mobutils::GetBase(PMob, GetJugEvasionRank(PMob)));
-        PMob->setModifier(Mod::ATT, mobutils::GetBase(PMob, PMob->attRank));
-        PMob->setModifier(Mod::ACC, mobutils::GetBase(PMob, PMob->accRank));
+        PMob->setModifier(Mod::DEF, mobutils::GetBaseDefEva(PMob, PMob->defRank));
+        PMob->setModifier(Mod::EVA, mobutils::GetBaseDefEva(PMob, GetJugEvasionRank(PMob)));
+        PMob->setModifier(Mod::ATT, mobutils::GetBaseSkill(PMob, PMob->attRank));
+        PMob->setModifier(Mod::ACC, mobutils::GetBaseSkill(PMob, PMob->accRank));
 
         ApplyJugStatCorrections(PMob);
     }
@@ -763,6 +902,7 @@ namespace petutils
 
         static_cast<CItemWeapon*>(PPet->m_Weapons[SLOT_RANGED])->setSkillType(SKILL_AUTOMATON_RANGED);
         static_cast<CItemWeapon*>(PPet->m_Weapons[SLOT_RANGED])->setDamage((PPet->GetSkill(SKILL_AUTOMATON_RANGED) / 9) * 2 + 3);
+        static_cast<CItemWeapon*>(PPet->m_Weapons[SLOT_RANGED])->setDmgType(DAMAGE_TYPE::PIERCING);
 
         CAutomatonEntity* PAutomaton = static_cast<CAutomatonEntity*>(PPet);
 
@@ -954,11 +1094,19 @@ namespace petutils
         uint32 petID = PPet->m_PetID;
 
         // clang-format off
-        Pet_t* PPetData = *std::find_if(g_PPetList.begin(), g_PPetList.end(), [petID](Pet_t* t)
+        auto maybePetData = std::find_if(g_PPetList.begin(), g_PPetList.end(), [petID](Pet_t* t)
         {
             return t->PetID == petID;
         });
         // clang-format on
+
+        if (maybePetData == g_PPetList.end())
+        {
+            ShowError(fmt::format("Could not look up pet data for id: {}", petID));
+            return;
+        }
+
+        auto* PPetData = *maybePetData;
 
         CCharEntity* PChar = static_cast<CCharEntity*>(PMaster);
 
@@ -989,7 +1137,7 @@ namespace petutils
         }
         else
         { // should never happen
-            ShowDebug("%s summoned an avatar but is not SMN main or SMN sub! Please report. ", PMaster->GetName());
+            ShowDebug("%s summoned an avatar but is not SMN main or SMN sub! Please report. ", PMaster->getName());
             PPet->SetMLevel(1);
         }
 
@@ -1141,11 +1289,19 @@ namespace petutils
         uint32 petID = PPet->m_PetID;
 
         // clang-format off
-        Pet_t* PPetData = *std::find_if(g_PPetList.begin(), g_PPetList.end(), [petID](Pet_t* t)
+        auto maybePetData = std::find_if(g_PPetList.begin(), g_PPetList.end(), [petID](Pet_t* t)
         {
             return t->PetID == petID;
         });
         // clang-format on
+
+        if (maybePetData == g_PPetList.end())
+        {
+            ShowError(fmt::format("Could not look up pet data for id: {}", petID));
+            return;
+        }
+
+        auto* PPetData = *maybePetData;
 
         static_cast<CItemWeapon*>(PPet->m_Weapons[SLOT_MAIN])->setDelay((uint16)(floor(1000.0f * (240.0f / 60.0f))));
         static_cast<CItemWeapon*>(PPet->m_Weapons[SLOT_MAIN])->setBaseDelay((uint16)(floor(1000.0f * (240.0f / 60.0f))));
@@ -1308,7 +1464,7 @@ namespace petutils
     {
         if (PMaster->PPet != nullptr)
         {
-            ShowWarning("Pet was not null for %s.", PMaster->GetName());
+            ShowWarning("Pet was not null for %s.", PMaster->getName());
             return;
         }
 
@@ -1439,13 +1595,13 @@ namespace petutils
 
         if (PMaster->PPet == nullptr)
         {
-            ShowWarning("Pet is null for %s.", PMaster->GetName());
+            ShowWarning("Pet is null for %s.", PMaster->getName());
             return;
         }
 
         if (PMaster->objtype != TYPE_PC)
         {
-            ShowWarning("Non-PC passed into function (%s)", PMaster->GetName());
+            ShowWarning("Non-PC passed into function (%s)", PMaster->getName());
             return;
         }
 
@@ -1464,6 +1620,8 @@ namespace petutils
                 if (PMob->PEnmityContainer->IsWithinEnmityRange(PMob->PMaster))
                 {
                     PMob->PEnmityContainer->UpdateEnmity(PChar, 0, 0);
+                    // need to set battle target to prevent mob enmity clear if in attack state when uncharming
+                    PMob->SetBattleTargetID(PChar->targid);
                 }
                 else
                 {
@@ -1495,6 +1653,24 @@ namespace petutils
             PMob->PMaster    = nullptr;
 
             PMob->PAI->SetController(std::make_unique<CMobController>(PMob));
+
+            // clear all enmity towards a charmed mob when it is released
+            // use two loops to avoid modifying the container while iterating over it
+            std::list<CMobEntity*> mobsToPacify;
+
+            // first collect the mobs with hate towards the formerly charmed mob
+            for (auto* entityWithEnmity : *PMob->PNotorietyContainer)
+            {
+                if (auto* mobToPacify = dynamic_cast<CMobEntity*>(entityWithEnmity))
+                {
+                    mobsToPacify.emplace_back(mobToPacify);
+                }
+            }
+            // then remove the formerly charmed mob from those mobs enmity containers
+            for (const auto* mobToPacify : mobsToPacify)
+            {
+                mobToPacify->PEnmityContainer->Clear(PMob->id);
+            }
         }
         else if (PPet->objtype == TYPE_PET)
         {
@@ -1547,7 +1723,7 @@ namespace petutils
 
         if (PMaster->PPet == nullptr)
         {
-            ShowWarning("Pet is null for %s.", PMaster->GetName());
+            ShowWarning("Pet is null for %s.", PMaster->getName());
             return;
         }
 
@@ -1590,7 +1766,7 @@ namespace petutils
                 cost = 7;
             }
         }
-        else if (id == PETID_CARBUNCLE)
+        else if (id == PETID_CARBUNCLE || id == PETID_CAIT_SITH)
         {
             if (level < 10)
             {
@@ -1802,11 +1978,19 @@ namespace petutils
         }
 
         // clang-format off
-        Pet_t* PPetData = *std::find_if(g_PPetList.begin(), g_PPetList.end(), [PetID](Pet_t* t)
+        auto maybePetData = std::find_if(g_PPetList.begin(), g_PPetList.end(), [PetID](Pet_t* t)
         {
             return t->PetID == PetID;
         });
         // clang-format on
+
+        if (maybePetData == g_PPetList.end())
+        {
+            ShowError(fmt::format("Could not look up pet data for id: {}", PetID));
+            return;
+        }
+
+        auto* PPetData = *maybePetData;
 
         // Umeboshi "DRG Sub can summon Wyvern"
         // if (PMaster->GetMJob() != JOB_DRG && PetID == PETID_WYVERN)
@@ -1985,6 +2169,8 @@ namespace petutils
         PPet->status        = STATUS_TYPE::NORMAL;
         PPet->m_ModelRadius = PPetData->radius;
         PPet->m_EcoSystem   = PPetData->EcoSystem;
+        // set the damage type of the pet
+        static_cast<CItemWeapon*>(PPet->m_Weapons[SLOT_MAIN])->setDmgType(PPetData->m_dmgType);
 
         PMaster->PPet = PPet;
     }

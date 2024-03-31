@@ -36,11 +36,15 @@ mobskillObject.onMobWeaponSkill = function(target, mob, skill)
         target:showText(mob, zones[xi.zone.THRONE_ROOM].text.BLADE_ANSWER)
     end
 
-    local numhits = 4
-    local accmod = 1
-    local dmgmod = 1.25
-    local info = xi.mobskills.mobPhysicalMove(mob, target, skill, numhits, accmod, dmgmod, xi.mobskills.physicalTpBonus.CRIT_VARIES, 1.1, 1.2, 1.3)
-    local dmg = xi.mobskills.mobFinalAdjustments(info.dmg, mob, skill, target, xi.attackType.PHYSICAL, xi.damageType.SLASHING, info.hitslanded)
+    local numhits        = 4
+    local accmod         = 1
+    local dmgmod         = 1.00
+    local tpEffect1      = xi.mobskills.physicalTpBonus.DMG_VARIES
+    local tpEffect2      = xi.mobskills.physicalTpBonus.CRIT_VARIES
+    local crit           = 0.25
+    local attmod         = 1
+    local info           = xi.mobskills.mobPhysicalMove(mob, target, skill, numhits, accmod, dmgmod, tpEffect1, 1.1, 1.2, 1.3, tpEffect2, 1, 2, 3, crit, attmod)
+    local dmg            = xi.mobskills.mobFinalAdjustments(info.dmg, mob, skill, target, xi.attackType.PHYSICAL, xi.damageType.SLASHING, info.hitslanded)
 
     -- AA EV: Approx 900 damage to 75 DRG/35 THF.  400 to a NIN/WAR in Arhat, but took shadows.
     target:takeDamage(dmg, mob, xi.attackType.PHYSICAL, xi.damageType.SLASHING)

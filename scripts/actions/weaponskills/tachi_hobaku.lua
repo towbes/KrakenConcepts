@@ -16,23 +16,21 @@ local weaponskillObject = {}
 weaponskillObject.onUseWeaponSkill = function(player, target, wsID, tp, primary, action, taChar)
     local params = {}
     params.numHits = 1
-    params.ftp100 = 1.5 params.ftp200 = 1.5 params.ftp300 = 1.5
-    params.str_wsc = 0.3 params.dex_wsc = 0.0 params.vit_wsc = 0.0 params.agi_wsc = 0.0 params.int_wsc = 0.0 params.mnd_wsc = 0.0 params.chr_wsc = 0.0
-    params.crit100 = 0.0 params.crit200 = 0.0 params.crit300 = 0.0
-    params.canCrit = false
-    params.acc100 = 0.0 params.acc200 = 0.0 params.acc300 = 0.0
-    params.atk100 = 1 params.atk200 = 1 params.atk300 = 1
+    params.ftpMod = { 1.0, 1.0, 1.0 }
+    params.str_wsc = 0.3
 
     if xi.settings.main.USE_ADOULIN_WEAPON_SKILL_CHANGES then
-        params.str_wsc = 0.6
+        params.ftpMod = { 1.5, 1.5, 1.5 }
+        params.str_wsc = 1.0
     end
 
     local damage, criticalHit, tpHits, extraHits = xi.weaponskills.doPhysicalWeaponskill(player, target, wsID, params, tp, action, primary, taChar)
 
     local chance = (tp - 1000) * applyResistanceAddEffect(player, target, xi.element.THUNDER, 0) > math.random() * 150
     if damage > 0 and chance then
-        if not target:hasStatusEffect(xi.effect.STUN) then
+        if not target:hasStatusEffect(xi.effect.STUN) and not target:hasImmunity(xi.immunity.STUN) then
             target:addStatusEffect(xi.effect.STUN, 1, 0, 4)
+            player:messagePublic(xi.msg.basic.SKILL_ENFEEB, target, wsID, xi.effect.STUN)
         end
     end
 

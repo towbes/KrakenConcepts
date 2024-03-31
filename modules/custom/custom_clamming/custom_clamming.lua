@@ -203,9 +203,9 @@ end
 
 local printOne = function(player, msg, channel, param1, param2, param3, param4)
     if param1 then
-        player:PrintToPlayer(string.format(msg, param1, param2, param3, param4), channel)
+        player:printToPlayer(string.format(msg, param1, param2, param3, param4), channel)
     else
-        player:PrintToPlayer(msg, channel)
+        player:printToPlayer(msg, channel)
     end
 end
 

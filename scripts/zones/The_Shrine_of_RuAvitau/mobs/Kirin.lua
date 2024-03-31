@@ -27,7 +27,7 @@ entity.onMobSpawn = function(mob)
     mob:setMagicCastingEnabled(false)
 end
 
-entity.onMobEngaged = function(mob)
+entity.onMobEngage = function(mob)
     mob:timer(2000, function(mobArg)
         mob:messageText(mob, ID.text.KIRIN_OFFSET)
         mobArg:setMagicCastingEnabled(true)

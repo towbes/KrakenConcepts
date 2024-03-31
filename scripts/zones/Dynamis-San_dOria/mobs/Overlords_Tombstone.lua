@@ -3,9 +3,18 @@
 --  Mob: Overlord's Tombstone
 -- Note: Mega Boss
 -----------------------------------
+mixins =
+{
+    require('scripts/mixins/dynamis_beastmen')
+}
+-----------------------------------
 local entity = {}
 
-entity.onMobEngaged = function(mob, target)
+entity.onMobSpawn = function(mob)
+    mob:setLocalVar('[isDynamis_Megaboss]', 1)
+end
+
+entity.onMobEngage = function(mob, target)
     local mobId = mob:getID()
     for i = mobId + 1, mobId + 2 do
         if not GetMobByID(i):isSpawned() then

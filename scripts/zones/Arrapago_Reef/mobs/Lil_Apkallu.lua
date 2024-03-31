@@ -29,7 +29,7 @@ end
 
 entity.onMobInitialize = function(mob)
     mob:setMobMod(xi.mobMod.IDLE_DESPAWN, 300)
-    mob:setMod(xi.mod.MOVE, -10)
+    mob:setSpeed((50 + xi.settings.map.MOB_SPEED_MOD) -10)
     mob:setMobMod(xi.mobMod.GIL_MIN, 3000)
     mob:setMobMod(xi.mobMod.GIL_MAX, 5000)
 end
@@ -40,7 +40,7 @@ entity.onMobSpawn = function(mob)
     mob:setMod(xi.mod.SLOWRES, 100)
 end
 
-entity.onMobEngaged = function(mob, target)
+entity.onMobEngage = function(mob, target)
     mob:setLocalVar('TimeToRun', os.time() + math.random(60, 90)) -- Runs at timed intervals, not HPP based
 end
 

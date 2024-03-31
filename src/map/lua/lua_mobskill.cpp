@@ -105,6 +105,11 @@ int16 CLuaMobSkill::getParam()
     return m_PLuaMobSkill->getParam();
 }
 
+void CLuaMobSkill::setKnockBack(uint8 knockback)
+{
+    m_PLuaMobSkill->setKnockback(knockback);
+}
+
 /*************************************************************************
 
             get the TP for calculations
@@ -132,6 +137,7 @@ void CLuaMobSkill::Register()
     SOL_REGISTER("hasMissMsg", CLuaMobSkill::hasMissMsg);
     SOL_REGISTER("isAoE", CLuaMobSkill::isAoE);
     SOL_REGISTER("setAoE", CLuaMobSkill::setAoE);
+    SOL_REGISTER("setKnockBack", CLuaMobSkill::setKnockBack);
     SOL_REGISTER("isConal", CLuaMobSkill::isConal);
     SOL_REGISTER("isSingle", CLuaMobSkill::isSingle);
     SOL_REGISTER("getParam", CLuaMobSkill::getParam);

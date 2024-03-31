@@ -21,10 +21,14 @@ mobskillObject.onMobWeaponSkill = function(target, mob, skill)
         target:showText(mob, zones[xi.zone.QUBIA_ARENA].text.FLAT_LAND)
     end
 
-    local numhits = 1
-    local accmod = 1
-    local dmgmod = 1.25
-    local info = xi.mobskills.mobPhysicalMove(mob, target, skill, numhits, accmod, dmgmod, xi.mobskills.physicalTpBonus.CRIT_VARIES, 1.1, 1.2, 1.3)
+    local numhits        = 1
+    local accmod         = 1
+    local dmgmod         = 1.25
+    local tpEffect1      = xi.mobskills.physicalTpBonus.DMG_VARIES
+    local tpEffect2      = xi.mobskills.physicalTpBonus.NONE
+    local crit           = 0.00
+    local attmod         = 1
+    local info           = xi.mobskills.mobPhysicalMove(mob, target, skill, numhits, accmod, dmgmod, tpEffect1, 1.1, 1.2, 1.3, tpEffect2, 1, 2, 3, crit, attmod)
     local dmg = xi.mobskills.mobFinalAdjustments(info.dmg, mob, skill, target, xi.attackType.PHYSICAL, xi.damageType.SLASHING, info.hitslanded)
 
     if math.random(1, 100) < skill:getTP() / 3 then

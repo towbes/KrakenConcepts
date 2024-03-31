@@ -41,12 +41,12 @@ endif()
 
 execute_process(
   COMMAND "C:/Users/Chris/AppData/Local/Atlassian/SourceTree/git_local/bin/git.exe" 
-          checkout "67c36bda750f36b2b4152db57a23170ed7a0683c" --
+          checkout "cd898904b72a300011fbb24d578620bafa08ef2c" --
   WORKING_DIRECTORY "C:/Users/Chris/Desktop/CactuarLSB/server/_deps/recastnavigation-src"
   RESULT_VARIABLE error_code
 )
 if(error_code)
-  message(FATAL_ERROR "Failed to checkout tag: '67c36bda750f36b2b4152db57a23170ed7a0683c'")
+  message(FATAL_ERROR "Failed to checkout tag: 'cd898904b72a300011fbb24d578620bafa08ef2c'")
 endif()
 
 set(init_submodules TRUE)

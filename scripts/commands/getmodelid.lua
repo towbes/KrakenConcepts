@@ -11,15 +11,15 @@ commandObj.cmdprops =
 }
 
 commandObj.error = function(player, msg)
-    player:PrintToPlayer(msg)
-    player:PrintToPlayer('!getmodel <target>')
+    player:printToPlayer(msg)
+    player:printToPlayer('!getmodel <target>')
 end
 
 commandObj.onTrigger = function(player)
     local target = player:getCursorTarget()
 
     if target ~= nil and target:isMob() or target:isNPC() then
-        player:PrintToPlayer(string.format(
+        player:printToPlayer(string.format(
             '%s (%d): model %d, animation %d, animationSub %d',
             target:getName(),
             target:getID(),

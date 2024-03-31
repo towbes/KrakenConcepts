@@ -59,7 +59,7 @@ local function despawnAdds(mob)
 end
 
 
-entity.onMobEngaged = function(mob, target)
+entity.onMobEngage = function(mob, target)
     mob:setLocalVar('clock', os.time() + 120) 
 end
 

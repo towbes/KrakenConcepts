@@ -8,7 +8,7 @@ CREATE TABLE `bcnm_battlefield` (
   `battlefieldNumber` tinyint(3) DEFAULT NULL,
   `monsterId` int(10) NOT NULL,
   `conditions` tinyint(2) NOT NULL DEFAULT '0'
-) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4 AVG_ROW_LENGTH=56;
+) ENGINE=Aria TRANSACTIONAL=0 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci AVG_ROW_LENGTH=56;
 
 --
 -- Dumping data for table `bcnm_battlefield`
@@ -486,20 +486,20 @@ INSERT INTO `bcnm_battlefield` VALUES (99,1,17375239,3); -- saintly_invitation
 INSERT INTO `bcnm_battlefield` VALUES (99,1,17375240,3);
 INSERT INTO `bcnm_battlefield` VALUES (99,1,17375241,3);
 INSERT INTO `bcnm_battlefield` VALUES (99,1,17375242,3);
-INSERT INTO `bcnm_battlefield` VALUES (99,1,17375243,1);
-INSERT INTO `bcnm_battlefield` VALUES (99,1,17375244,1);
+INSERT INTO `bcnm_battlefield` VALUES (99,1,17375243,0);
+INSERT INTO `bcnm_battlefield` VALUES (99,1,17375244,0);
 INSERT INTO `bcnm_battlefield` VALUES (99,2,17375245,3);
 INSERT INTO `bcnm_battlefield` VALUES (99,2,17375246,3);
 INSERT INTO `bcnm_battlefield` VALUES (99,2,17375247,3);
 INSERT INTO `bcnm_battlefield` VALUES (99,2,17375248,3);
-INSERT INTO `bcnm_battlefield` VALUES (99,2,17375249,3);
-INSERT INTO `bcnm_battlefield` VALUES (99,2,17375250,1);
-INSERT INTO `bcnm_battlefield` VALUES (99,2,17375251,1);
+INSERT INTO `bcnm_battlefield` VALUES (99,2,17375249,0);
+INSERT INTO `bcnm_battlefield` VALUES (99,2,17375250,0);
+INSERT INTO `bcnm_battlefield` VALUES (99,3,17375251,3);
 INSERT INTO `bcnm_battlefield` VALUES (99,3,17375252,3);
 INSERT INTO `bcnm_battlefield` VALUES (99,3,17375253,3);
 INSERT INTO `bcnm_battlefield` VALUES (99,3,17375254,3);
-INSERT INTO `bcnm_battlefield` VALUES (99,3,17375255,1);
-INSERT INTO `bcnm_battlefield` VALUES (99,3,17375256,1);
+INSERT INTO `bcnm_battlefield` VALUES (99,3,17375255,0);
+INSERT INTO `bcnm_battlefield` VALUES (99,3,17375256,0);
 INSERT INTO `bcnm_battlefield` VALUES (100,1,17375353,3); -- treasures_and_tribulations
 INSERT INTO `bcnm_battlefield` VALUES (100,1,17375354,3);
 INSERT INTO `bcnm_battlefield` VALUES (100,1,17375355,3);
@@ -1772,6 +1772,9 @@ INSERT INTO `bcnm_battlefield` VALUES (1057,2,16924681,3); -- Apoc Nigh
 INSERT INTO `bcnm_battlefield` VALUES (1057,2,16924682,3);
 INSERT INTO `bcnm_battlefield` VALUES (1057,3,16924683,3); -- Apoc Nigh
 INSERT INTO `bcnm_battlefield` VALUES (1057,3,16924684,3);
+INSERT INTO `bcnm_battlefield` VALUES (1090,1,17010719,3); -- puppetmaster blues
+INSERT INTO `bcnm_battlefield` VALUES (1090,2,17010720,3);
+INSERT INTO `bcnm_battlefield` VALUES (1090,3,17010721,3);
 INSERT INTO `bcnm_battlefield` VALUES (1092,1,17010725,3); -- legacy_of_the_lost
 INSERT INTO `bcnm_battlefield` VALUES (1092,1,17010726,0);
 INSERT INTO `bcnm_battlefield` VALUES (1092,1,17010727,0);

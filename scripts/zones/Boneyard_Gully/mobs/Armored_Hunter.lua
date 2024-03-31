@@ -13,7 +13,7 @@ entity.onMobSpawn = function(mob)
     mob:setMobMod(xi.mobMod.NO_MOVE, 1)
 end
 
-entity.onMobEngaged = function(mob, target)
+entity.onMobEngage = function(mob, target)
     mob:setMobMod(xi.mobMod.NO_MOVE, 0)
     for _, v in pairs(mob:getBattlefield():getPlayers()) do
         v:messageSpecial(ID.text.SMALL_ANTLION)

@@ -16,23 +16,20 @@ local weaponskillObject = {}
 weaponskillObject.onUseWeaponSkill = function(player, target, wsID, tp, primary, action, taChar)
     local params = {}
     params.numHits = 1
-    -- This is a 2 hit ws but H2H ws are done in a different way, the off hand hit is been taking into account in another place
-    params.ftp100 = 1.2 params.ftp200 = 1.2 params.ftp300 = 1.2
-    params.str_wsc = 0.0 params.dex_wsc = 0.0 params.vit_wsc = 0.3 params.agi_wsc = 0.0 params.int_wsc = 0.0 params.mnd_wsc = 0.0 params.chr_wsc = 0.0
-    params.crit100 = 0.0 params.crit200 = 0.0 params.crit300 = 0.0
-    params.canCrit = false
-    params.acc100 = 0.0 params.acc200 = 0.0 params.acc300 = 0.0
-    params.atk100 = 1 params.atk200 = 1 params.atk300 = 1
+    params.ftpMod = { 1.0, 1.0, 1.0 }
+    params.vit_wsc = 0.3
     local damage, criticalHit, tpHits, extraHits = xi.weaponskills.doPhysicalWeaponskill(player, target, wsID, params, tp, action, primary, taChar)
 
     if xi.settings.main.USE_ADOULIN_WEAPON_SKILL_CHANGES then
+        params.ftpMod = { 1.2, 1.2, 1.2 }
         params.multiHitfTP = true -- http://wiki.ffo.jp/html/2417.html
         params.vit_wsc = 1.0
     end
 
-    if damage > 0 and not target:hasStatusEffect(xi.effect.STUN) then
+    if damage > 0 and not target:hasStatusEffect(xi.effect.STUN) and not target:hasImmunity(xi.immunity.STUN) then
         local duration = (tp / 500) * applyResistanceAddEffect(player, target, xi.element.THUNDER, 0)
         target:addStatusEffect(xi.effect.STUN, 1, 0, duration)
+        player:messagePublic(xi.msg.basic.SKILL_ENFEEB, target, wsID, xi.effect.STUN)
     end
 
     return tpHits, extraHits, criticalHit, damage

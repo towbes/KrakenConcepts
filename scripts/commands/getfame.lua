@@ -14,7 +14,7 @@ commandObj.error = function(player, msg)
         msg = '!getfame [player] <fame_zone 0-15>'
     end
 
-    player:PrintToPlayer(msg)
+    player:printToPlayer(msg)
 end
 
 commandObj.onTrigger = function(player, target, famezone)
@@ -57,9 +57,9 @@ commandObj.onTrigger = function(player, target, famezone)
     if famezone == nil then
         -- error(player)
         -- return
-        player:PrintToPlayer(string.format('Fame Report for player: %s', targ:getName()), xi.msg.channel.SYSTEM_3)
+        player:printToPlayer(string.format('Fame Report for player: %s', targ:getName()), xi.msg.channel.SYSTEM_3)
         for i = 0, 15 do
-            player:PrintToPlayer(string.format('Area %s (%s): %s (Level: %s)', i, fameAreas[i + 1], player:getFame(i), player:getFameLevel(i)), xi.msg.channel.SYSTEM_3)
+            player:printToPlayer(string.format('Area %s (%s): %s (Level: %s)', i, fameAreas[i + 1], player:getFame(i), player:getFameLevel(i)), xi.msg.channel.SYSTEM_3)
         end
 
         return
@@ -73,9 +73,9 @@ commandObj.onTrigger = function(player, target, famezone)
     local level = player:getFameLevel(famezone)
 
     if level < 9 then
-        player:PrintToPlayer(string.format('%s\'s reputation in fame area %i (%s) is %i (Level %i). Next level at %i (%i points to go).', targ:getName(), famezone, fameAreas[famezone + 1], fame, level, fameBaseValues[level + 1], fameBaseValues[level + 1]-fame), xi.msg.channel.SYSTEM_3)
+        player:printToPlayer(string.format('%s\'s reputation in fame area %i (%s) is %i (Level %i). Next level at %i (%i points to go).', targ:getName(), famezone, fameAreas[famezone + 1], fame, level, fameBaseValues[level + 1], fameBaseValues[level + 1]-fame), xi.msg.channel.SYSTEM_3)
     else
-        player:PrintToPlayer(string.format('%s\'s reputation in fame area %i (%s) is %i (Level %i).', targ:getName(), famezone, fameAreas[famezone + 1], fame, level), xi.msg.channel.SYSTEM_3)
+        player:printToPlayer(string.format('%s\'s reputation in fame area %i (%s) is %i (Level %i).', targ:getName(), famezone, fameAreas[famezone + 1], fame, level), xi.msg.channel.SYSTEM_3)
     end
 end
 

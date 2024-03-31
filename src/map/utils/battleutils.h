@@ -64,7 +64,8 @@ enum ENSPELL
     ENSPELL_AUSPICE      = 18,
     ENSPELL_DRAIN_SAMBA  = 19,
     ENSPELL_ASPIR_SAMBA  = 20,
-    ENSPELL_HASTE_SAMBA  = 21
+    ENSPELL_HASTE_SAMBA  = 21,
+    ENSPELL_SOUL_ENSLAVEMENT = 22,
 };
 
 enum SPIKES
@@ -94,6 +95,12 @@ enum ELEMENT
     ELEMENT_WATER   = 6,
     ELEMENT_LIGHT   = 7,
     ELEMENT_DARK    = 8
+};
+
+const std::unordered_set<JOBTYPE> JOBS_WITH_PARRY_SKILL = {
+    JOB_WAR, JOB_RDM, JOB_THF, JOB_PLD, JOB_DRK, JOB_BST,
+    JOB_BRD, JOB_SAM, JOB_NIN, JOB_DRG, JOB_COR, JOB_DNC,
+    JOB_BLU, JOB_PUP, JOB_SCH, JOB_GEO, JOB_RUN
 };
 
 namespace battleutils
@@ -136,8 +143,9 @@ namespace battleutils
     std::vector<ELEMENT> GetSkillchainMagicElement(SKILLCHAIN_ELEMENT skillchain);
 
     bool IsParalyzed(CBattleEntity* PAttacker);
-    bool IsAbsorbByShadow(CBattleEntity* PDefender);
+    bool IsAbsorbByShadow(CBattleEntity* PDefender, CBattleEntity* PAttacker);
     bool IsIntimidated(CBattleEntity* PAttacker, CBattleEntity* PDefender);
+    bool IsTandemValid(CBattleEntity* PAttacker);
 
     int32 GetFSTR(CBattleEntity* PAttacker, CBattleEntity* PDefender, uint8 SlotID);
     uint8 GetHitRateEx(CBattleEntity* PAttacker, CBattleEntity* PDefender, uint8 attackNumber, int8 offsetAccuracy);
@@ -151,7 +159,7 @@ namespace battleutils
     float GetBlockRate(CBattleEntity* PAttacker, CBattleEntity* PDefender);
     uint8 GetParryRate(CBattleEntity* PAttacker, CBattleEntity* PDefender);
     uint8 GetGuardRate(CBattleEntity* PAttacker, CBattleEntity* PDefender);
-    float GetDamageRatio(CBattleEntity* PAttacker, CBattleEntity* PDefender, bool isCritical, float bonusAttPercent);
+    float GetDamageRatio(CBattleEntity* PAttacker, CBattleEntity* PDefender, bool isCritical, float bonusAttPercent, SKILLTYPE weaponType);
 
     int32 TakePhysicalDamage(CBattleEntity* PAttacker, CBattleEntity* PDefender, PHYSICAL_ATTACK_TYPE physicalAttackType, int32 damage, bool isBlocked,
                              uint8 slot, uint16 tpMultiplier, CBattleEntity* taChar, bool giveTPtoVictim, bool giveTPtoAttacker, bool isCounter = false,
@@ -180,7 +188,7 @@ namespace battleutils
     bool  isValidSelfTargetWeaponskill(int wsid);
     bool  CanUseWeaponskill(CCharEntity* PChar, CWeaponSkill* PSkill);
     int16 CalculateBaseTP(int delay);
-    void  GenerateCureEnmity(CBattleEntity* PSource, CBattleEntity* PTarget, int32 amount);
+    void  GenerateCureEnmity(CBattleEntity* PSource, CBattleEntity* PTarget, int32 amount, int32 fixedCE = 0, int32 fixedVE = 0);
     void  GenerateInRangeEnmity(CBattleEntity* PSource, int16 CE, int16 VE);
 
     CItemWeapon*    GetEntityWeapon(CBattleEntity* PEntity, SLOTTYPE Slot);
@@ -201,7 +209,6 @@ namespace battleutils
     uint16 doSoulEaterEffect(CCharEntity* m_PChar, uint32 damage);
     uint16 doConsumeManaEffect(CCharEntity* m_PChar, uint32 damage);
     int32  getOverWhelmDamageBonus(CCharEntity* m_PChar, CBattleEntity* PDefender, int32 damage);
-    uint16 jumpAbility(CBattleEntity* PAttacker, CBattleEntity* PVictim, uint8 tier);
 
     void  TransferEnmity(CBattleEntity* PHateReceiver, CBattleEntity* PHateGiver, CMobEntity* PMob, uint8 percentToTransfer);
     uint8 getBarrageShotCount(CCharEntity* PChar);
@@ -250,6 +257,7 @@ namespace battleutils
     bool    WeatherMatchesElement(WEATHER weather, uint8 element);
     bool    DrawIn(CBattleEntity* PTarget, CMobEntity* PMob, float offset, uint8 drawInRange, uint16 maximumReach, bool includeParty, bool includeDeadAndMount = false);
     void    DoWildCardToEntity(CCharEntity* PCaster, CCharEntity* PTarget, uint8 roll);
+    bool    DoRandomDealToEntity(CCharEntity* PChar, CCharEntity* PTarget);
     void    AddTraits(CBattleEntity* PEntity, TraitList_t* TraitList, uint8 level);
     void    AddTraitsSJ(CBattleEntity* PEntity, TraitList_t* TraitList, uint8 level, size_t cutoff);
     bool    HasClaim(CBattleEntity* PEntity, CBattleEntity* PTarget);

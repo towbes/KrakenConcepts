@@ -10,7 +10,17 @@ mobskillObject.onMobSkillCheck = function(target, mob, skill)
 end
 
 mobskillObject.onMobWeaponSkill = function(target, mob, skill)
-    skill:setMsg(xi.mobskills.mobStatusEffectMove(mob, target, xi.effect.SLOW, 1250, 0, 180))
+    local duration = 180
+    local master = mob:getMaster()
+    local skillID = skill:getID()
+    if mob:isPet() then
+        if master and master:isJugPet() then
+            local tp = skill:getTP()
+            duration = 180
+            duration = math.max(280, duration * (tp/1000)) -- Minimum 2:20 minutes. Maximum 4.5 minutes.
+        end
+    end
+    skill:setMsg(xi.mobskills.mobStatusEffectMove(mob, target, xi.effect.SLOW, 1250, 0, duration))
 
     return xi.effect.SLOW
 end

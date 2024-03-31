@@ -40,6 +40,7 @@
 #include "packets/lock_on.h"
 #include "packets/menu_raisetractor.h"
 #include "packets/message_special.h"
+#include "packets/message_standard.h"
 #include "packets/message_system.h"
 #include "packets/message_text.h"
 #include "packets/release.h"
@@ -221,7 +222,7 @@ CCharEntity::CCharEntity()
     PRecastContainer       = std::make_unique<CCharRecastContainer>(this);
     PLatentEffectContainer = new CLatentEffectContainer(this);
 
-    retriggerLatentsAfterPacketParsing = false;
+    retriggerLatents = false;
 
     resetPetZoningInfo();
     petZoningInfo.petID = 0;
@@ -283,6 +284,7 @@ CCharEntity::~CCharEntity()
     destroy(CraftContainer);
     destroy(PMeritPoints);
     destroy(PJobPoints);
+    destroy(PLatentEffectContainer);
 
     PGuildShop = nullptr;
 
@@ -319,10 +321,10 @@ void CCharEntity::clearPacketList()
 void CCharEntity::pushPacket(CBasicPacket* packet)
 {
     TracyZoneScoped;
-    TracyZoneString(GetName());
+    TracyZoneString(getName());
     TracyZoneHex16(packet->getType());
 
-    moduleutils::OnPushPacket(packet);
+    moduleutils::OnPushPacket(this, packet);
 
     if (packet->getType() == 0x5B)
     {
@@ -936,8 +938,18 @@ bool CCharEntity::ValidTarget(CBattleEntity* PInitiator, uint16 targetFlags)
     bool targetsAlliance  = targetFlags & TARGET_PLAYER_ALLIANCE;
     bool hasPianissimo    = (targetFlags & TARGET_PLAYER_PARTY_PIANISSIMO) && PInitiator->StatusEffectContainer->HasStatusEffect(EFFECT_PIANISSIMO);
     bool isDifferentChar  = PInitiator != this;
-    if ((targetsParty || targetsAlliance || hasPianissimo) &&
-        (isSameParty || isSameAlliance || isPartyPetMaster || isSoloPetMaster) &&
+
+    // Alliance member valid target.
+    if (targetsAlliance &&
+        isSameAlliance &&
+        isDifferentChar)
+    {
+        return true;
+    }
+
+    // Party member valid targeting.
+    if ((targetsParty || hasPianissimo) &&
+        (isSameParty || isPartyPetMaster || isSoloPetMaster) &&
         isDifferentChar)
     {
         return true;
@@ -1025,7 +1037,7 @@ bool CCharEntity::CanAttack(CBattleEntity* PTarget, std::unique_ptr<CBasicPacket
         PAI->Disengage();
         return false;
     }
-    else if (dist > 30)
+    else if (!this->StatusEffectContainer->HasStatusEffect({ EFFECT_CHARM, EFFECT_CHARM_II }) && dist > 30)
     {
         errMsg = std::make_unique<CMessageBasicPacket>(this, PTarget, 0, 0, MSGBASIC_LOSE_SIGHT);
         PAI->Disengage();
@@ -1058,10 +1070,22 @@ bool CCharEntity::OnAttack(CAttackState& state, action_t& action)
 void CCharEntity::OnCastFinished(CMagicState& state, action_t& action)
 {
     TracyZoneScoped;
-    CBattleEntity::OnCastFinished(state, action);
 
     auto* PSpell  = state.GetSpell();
     auto* PTarget = static_cast<CBattleEntity*>(state.GetTarget());
+
+    // not ideal, since Trick Attack character (taChar) is also calculated on the lua side for the base spell.
+    // Only blue spells that act as a physical WS can TA.
+    CBattleEntity* taChar = nullptr;
+
+    if (StatusEffectContainer->HasStatusEffect(EFFECT_TRICK_ATTACK) &&
+        PSpell->getSpellGroup() == SPELLGROUP_BLUE &&
+        PSpell->dealsDamage())
+    {
+        taChar = battleutils::getAvailableTrickAttackChar(this, PTarget);
+    }
+
+    CBattleEntity::OnCastFinished(state, action);
 
     PRecastContainer->Add(RECAST_MAGIC, static_cast<uint16>(PSpell->getID()), action.recast);
 
@@ -1069,7 +1093,9 @@ void CCharEntity::OnCastFinished(CMagicState& state, action_t& action)
     {
         for (auto&& actionTarget : actionList.actionTargets)
         {
-            if (actionTarget.param > 0 && PSpell->dealsDamage() && PSpell->getSpellGroup() == SPELLGROUP_BLUE &&
+            if (actionTarget.param > 0 &&
+                PSpell->dealsDamage() &&
+                PSpell->getSpellGroup() == SPELLGROUP_BLUE &&
                 (StatusEffectContainer->HasStatusEffect(EFFECT_CHAIN_AFFINITY) || StatusEffectContainer->HasStatusEffect(EFFECT_AZURE_LORE)) &&
                 static_cast<CBlueSpell*>(PSpell)->getPrimarySkillchain() != 0)
             {
@@ -1077,7 +1103,7 @@ void CCharEntity::OnCastFinished(CMagicState& state, action_t& action)
                 SUBEFFECT effect     = battleutils::GetSkillChainEffect(PTarget, PBlueSpell->getPrimarySkillchain(), PBlueSpell->getSecondarySkillchain(), 0);
                 if (effect != SUBEFFECT_NONE)
                 {
-                    uint16 skillChainDamage = battleutils::TakeSkillchainDamage(static_cast<CBattleEntity*>(this), PTarget, actionTarget.param, nullptr);
+                    uint16 skillChainDamage = battleutils::TakeSkillchainDamage(static_cast<CBattleEntity*>(this), PTarget, actionTarget.param, taChar);
 
                     actionTarget.addEffectParam   = skillChainDamage;
                     actionTarget.addEffectMessage = 287 + effect;
@@ -1093,6 +1119,90 @@ void CCharEntity::OnCastFinished(CMagicState& state, action_t& action)
                 }
 
                 StatusEffectContainer->DelStatusEffectSilent(EFFECT_CHAIN_AFFINITY);
+            }
+
+            if (actionTarget.param > 0 &&
+                PSpell->dealsDamage() &&
+                PSpell->getSpellGroup() == SPELLGROUP_BLACK &&
+                (StatusEffectContainer->HasStatusEffect(EFFECT_IMMANENCE)))
+            {
+                SUBEFFECT effect = SUBEFFECT_NONE;
+                switch (PSpell->getSpellFamily())
+                {
+                    case SPELLFAMILY_STONE:
+                        effect = battleutils::GetSkillChainEffect(PTarget, 4, 0, 0);
+                        break;
+                    case SPELLFAMILY_GEOHELIX:
+                        effect = battleutils::GetSkillChainEffect(PTarget, 4, 0, 0);
+                        break;
+                    case SPELLFAMILY_WATER:
+                        effect = battleutils::GetSkillChainEffect(PTarget, 5, 0, 0);
+                        break;
+                    case SPELLFAMILY_HYDROHELIX:
+                        effect = battleutils::GetSkillChainEffect(PTarget, 5, 0, 0);
+                        break;
+                    case SPELLFAMILY_AERO:
+                        effect = battleutils::GetSkillChainEffect(PTarget, 6, 0, 0);
+                        break;
+                    case SPELLFAMILY_ANEMOHELIX:
+                        effect = battleutils::GetSkillChainEffect(PTarget, 6, 0, 0);
+                        break;
+                    case SPELLFAMILY_FIRE:
+                        effect = battleutils::GetSkillChainEffect(PTarget, 3, 0, 0);
+                        break;
+                    case SPELLFAMILY_PYROHELIX:
+                        effect = battleutils::GetSkillChainEffect(PTarget, 3, 0, 0);
+                        break;
+                    case SPELLFAMILY_BLIZZARD:
+                        effect = battleutils::GetSkillChainEffect(PTarget, 7, 0, 0);
+                        break;
+                    case SPELLFAMILY_CRYOHELIX:
+                        effect = battleutils::GetSkillChainEffect(PTarget, 7, 0, 0);
+                        break;
+                    case SPELLFAMILY_THUNDER:
+                        effect = battleutils::GetSkillChainEffect(PTarget, 8, 0, 0);
+                        break;
+                    case SPELLFAMILY_IONOHELIX:
+                        effect = battleutils::GetSkillChainEffect(PTarget, 8, 0, 0);
+                        break;
+                    case SPELLFAMILY_LUMINOHELIX:
+                        effect = battleutils::GetSkillChainEffect(PTarget, 1, 0, 0);
+                        break;
+                    case SPELLFAMILY_NOCTOHELIX:
+                        effect = battleutils::GetSkillChainEffect(PTarget, 2, 0, 0);
+                        break;
+                    default:
+                        break;
+                }
+
+                if (PSpell->getSpellFamily() >= SPELLFAMILY_FIRE &&
+                    PSpell->getSpellFamily() <= SPELLFAMILY_WATER)
+                {
+                    StatusEffectContainer->DelStatusEffectSilent(EFFECT_IMMANENCE);
+                }
+
+                if (PSpell->getSpellFamily() >= SPELLFAMILY_GEOHELIX &&
+                    PSpell->getSpellFamily() <= SPELLFAMILY_LUMINOHELIX)
+                {
+                    StatusEffectContainer->DelStatusEffectSilent(EFFECT_IMMANENCE);
+                }
+
+                if (effect != SUBEFFECT_NONE)
+                {
+                    int32 skillChainDamage = battleutils::TakeSkillchainDamage(static_cast<CBattleEntity*>(this), PTarget, actionTarget.param, nullptr);
+
+                    if (skillChainDamage < 0)
+                    {
+                        actionTarget.addEffectParam   = -skillChainDamage;
+                        actionTarget.addEffectMessage = 384 + effect;
+                    }
+                    else
+                    {
+                        actionTarget.addEffectParam   = skillChainDamage;
+                        actionTarget.addEffectMessage = 287 + effect;
+                    }
+                    actionTarget.additionalEffect = effect;
+                }
             }
         }
     }
@@ -1225,7 +1335,7 @@ void CCharEntity::OnWeaponSkillFinished(CWeaponSkillState& state, action_t& acti
                 actionTarget.messageID = primary ? 224 : 276; // restores mp msg
                 actionTarget.reaction  = REACTION::HIT;
                 damage                 = std::max(damage, 0);
-                actionTarget.param     = addMP(damage);
+                actionTarget.param     = PTarget->addMP(damage);
             }
 
             if (primary)
@@ -1361,10 +1471,12 @@ void CCharEntity::OnAbility(CAbilityState& state, action_t& action)
     {
         if (this != PTarget && distance(this->loc.p, PTarget->loc.p) > PAbility->getRange())
         {
-            pushPacket(new CMessageBasicPacket(this, PTarget, 0, 0, MSGBASIC_TOO_FAR_AWAY));
+            setActionInterrupted(action, PTarget, MSGBASIC_TOO_FAR_AWAY, 0);
             return;
         }
-        if (PAbility->getID() >= ABILITY_HEALING_RUBY && PAbility->getID() <= ABILITY_PERFECT_DEFENSE)
+
+        // TODO: Remove me when all pet abilities are ported to PetSkill
+        if (PAbility->getID() >= ABILITY_HEALING_RUBY && PAbility->getID() <= ABILITY_PERFECT_DEFENSE && !battleutils::GetPetSkill(PAbility->getID()))
         {
             // Blood pact MP costs are stored under animation ID
             float mpCost = PAbility->getAnimationID();
@@ -1375,7 +1487,7 @@ void CCharEntity::OnAbility(CAbilityState& state, action_t& action)
 
             if (this->health.mp < mpCost)
             {
-                pushPacket(new CMessageBasicPacket(this, PTarget, 0, 0, MSGBASIC_UNABLE_TO_USE_JA));
+                setActionInterrupted(action, PTarget, MSGBASIC_UNABLE_TO_USE_JA, 0);
                 return;
             }
         }
@@ -1402,6 +1514,14 @@ void CCharEntity::OnAbility(CAbilityState& state, action_t& action)
         else
         {
             action.recast = PAbility->getRecastTime() - meritRecastReduction;
+        }
+
+        if (PAbility->getID() == ABILITY_THIRD_EYE)
+        {
+            if (this->StatusEffectContainer->HasStatusEffect(EFFECT_SEIGAN))
+            {
+                action.recast = (PAbility->getRecastTime() - PMeritPoints->GetMeritValue(MERIT_THIRD_EYE_RECAST, this)) / 2;
+            }
         }
 
         if (PAbility->getID() == ABILITY_LIGHT_ARTS || PAbility->getID() == ABILITY_DARK_ARTS || PAbility->getRecastId() == 231) // stratagems
@@ -1751,11 +1871,13 @@ void CCharEntity::OnRangedAttack(CRangeState& state, action_t& action)
     bool  isBarrage    = StatusEffectContainer->HasStatusEffect(EFFECT_BARRAGE, 0);
 
     // if barrage is detected, getBarrageShotCount also checks for ammo count
-    if (!ammoThrowing && !rangedThrowing && isBarrage)
+    // if (!ammoThrowing && !rangedThrowing && isBarrage)
+    if (!rangedThrowing && isBarrage)
     {
         hitCount += battleutils::getBarrageShotCount(this);
     }
-    else if (ammoThrowing && this->StatusEffectContainer->HasStatusEffect(EFFECT_SANGE))
+    // else if (ammoThrowing && this->StatusEffectContainer->HasStatusEffect(EFFECT_SANGE))
+    else if (!rangedThrowing && this->StatusEffectContainer->HasStatusEffect(EFFECT_SANGE))
     {
         isSange = true;
         hitCount += getMod(Mod::UTSUSEMI);
@@ -1782,7 +1904,7 @@ void CCharEntity::OnRangedAttack(CRangeState& state, action_t& action)
         else if (xirand::GetRandomNumber(100) < battleutils::GetRangedHitRate(this, PTarget, isBarrage)) // hit!
         {
             // absorbed by shadow
-            if (battleutils::IsAbsorbByShadow(PTarget))
+            if (battleutils::IsAbsorbByShadow(PTarget, this))
             {
                 shadowsTaken++;
             }
@@ -1811,15 +1933,6 @@ void CCharEntity::OnRangedAttack(CRangeState& state, action_t& action)
 
                 if (slot == SLOT_RANGED)
                 {
-                    if (state.IsRapidShot())
-                    {
-                        damage = attackutils::CheckForDamageMultiplier(this, PItem, damage, PHYSICAL_ATTACK_TYPE::RAPID_SHOT, SLOT_RANGED);
-                    }
-                    else
-                    {
-                        damage = attackutils::CheckForDamageMultiplier(this, PItem, damage, PHYSICAL_ATTACK_TYPE::RANGED, SLOT_RANGED);
-                    }
-
                     if (PItem != nullptr)
                     {
                         charutils::TrySkillUP(this, (SKILLTYPE)PItem->getSkillType(), PTarget->GetMLevel());
@@ -1829,10 +1942,12 @@ void CCharEntity::OnRangedAttack(CRangeState& state, action_t& action)
                 {
                     charutils::TrySkillUP(this, (SKILLTYPE)PAmmo->getSkillType(), PTarget->GetMLevel());
                 }
+                totalDamage += damage;
             }
         }
         else // miss
         {
+            damage                  = 0;
             actionTarget.reaction   = REACTION::EVADE;
             actionTarget.speceffect = SPECEFFECT::NONE;
             actionTarget.messageID  = 354;
@@ -1848,11 +1963,15 @@ void CCharEntity::OnRangedAttack(CRangeState& state, action_t& action)
 
         recycleChance += this->PJobPoints->GetJobPointValue(JP_AMMO_CONSUMPTION);
 
-        // Only remove unlimited shot on hit
-        if (hitOccured && this->StatusEffectContainer->HasStatusEffect(EFFECT_UNLIMITED_SHOT))
+        if (this->StatusEffectContainer->HasStatusEffect(EFFECT_UNLIMITED_SHOT))
         {
-            StatusEffectContainer->DelStatusEffect(EFFECT_UNLIMITED_SHOT);
+            // Never consume ammo with Unlimited Shot active
             recycleChance = 100;
+            // Only remove unlimited shot on hit
+            if (hitOccured)
+            {
+                StatusEffectContainer->DelStatusEffect(EFFECT_UNLIMITED_SHOT);
+            }
         }
 
         if (PAmmo != nullptr && xirand::GetRandomNumber(100) > recycleChance)
@@ -1864,7 +1983,6 @@ void CCharEntity::OnRangedAttack(CRangeState& state, action_t& action)
                 hitCount = i;
             }
         }
-        totalDamage += damage;
     }
 
     // if a hit did occur (even without barrage)
@@ -1878,14 +1996,13 @@ void CCharEntity::OnRangedAttack(CRangeState& state, action_t& action)
             actionTarget.speceffect = SPECEFFECT::CRITICAL_HIT;
         }
 
+        if (slot == SLOT_RANGED)
+        {
+            auto attackType = (state.IsRapidShot()) ? PHYSICAL_ATTACK_TYPE::RAPID_SHOT : PHYSICAL_ATTACK_TYPE::RANGED;
+            totalDamage     = attackutils::CheckForDamageMultiplier(this, PItem, totalDamage, attackType, true);
+        }
         actionTarget.param =
             battleutils::TakePhysicalDamage(this, PTarget, PHYSICAL_ATTACK_TYPE::RANGED, totalDamage, false, slot, realHits, nullptr, true, true);
-
-        // lower damage based on shadows taken
-        if (shadowsTaken)
-        {
-            actionTarget.param = (int32)(actionTarget.param * (1 - ((float)shadowsTaken / realHits)));
-        }
 
         // absorb message
         if (actionTarget.param < 0)
@@ -1929,15 +2046,16 @@ void CCharEntity::OnRangedAttack(CRangeState& state, action_t& action)
         uint16 power = StatusEffectContainer->GetStatusEffect(EFFECT_SANGE)->GetPower();
 
         // remove shadows
-        while (realHits-- && xirand::GetRandomNumber(100) <= power && battleutils::IsAbsorbByShadow(this))
+        while (realHits-- && xirand::GetRandomNumber(100) <= power && battleutils::IsAbsorbByShadow(this, this))
         {
             ;
         }
 
-        StatusEffectContainer->DelStatusEffect(EFFECT_SANGE);
+        // StatusEffectContainer->DelStatusEffect(EFFECT_SANGE);
     }
     battleutils::ClaimMob(PTarget, this);
     battleutils::RemoveAmmo(this, ammoConsumed);
+    StatusEffectContainer->DelStatusEffect(EFFECT_BOOST);
     // only remove detectables
     StatusEffectContainer->DelStatusEffectsByFlag(EFFECTFLAG_DETECTABLE);
 }
@@ -2010,13 +2128,20 @@ void CCharEntity::OnRaise()
             {
                 weaknessTime = 180;
             }
-
-            CStatusEffect* PWeaknessEffect = new CStatusEffect(EFFECT_WEAKNESS, EFFECT_WEAKNESS, m_weaknessLvl, 0, weaknessTime);
-            StatusEffectContainer->AddStatusEffect(PWeaknessEffect);
+            if (GetLocalVar("PVPMODE") > 0)
+            {
+                // Do not give weakness to players who die in PVP
+            }
+            else
+            {
+                CStatusEffect* PWeaknessEffect = new CStatusEffect(EFFECT_WEAKNESS, EFFECT_WEAKNESS, m_weaknessLvl, 0, weaknessTime);
+                StatusEffectContainer->AddStatusEffect(PWeaknessEffect);
+            }
         }
 
         double ratioReturned = 0.0f;
         uint16 hpReturned    = 1;
+        uint16 mpReturned    = 0;
 
         action_t action;
         action.id          = id;
@@ -2030,6 +2155,12 @@ void CCharEntity::OnRaise()
         {
             actionTarget.animation = 511;
             hpReturned             = (uint16)(GetMaxHP());
+        }
+        else if (GetLocalVar("PVPMODE") != 0)
+        {
+            actionTarget.animation = 496;
+            hpReturned             = (uint16)(GetMaxHP());
+            mpReturned             = (uint16)(GetMaxMP());
         }
         else if (m_hasRaise == 1)
         {
@@ -2057,6 +2188,7 @@ void CCharEntity::OnRaise()
         }
 
         addHP(((hpReturned < 1) ? 1 : hpReturned));
+        addMP(mpReturned);
         updatemask |= UPDATE_HP;
         actionTarget.speceffect = SPECEFFECT::RAISE;
 
@@ -2081,6 +2213,7 @@ void CCharEntity::OnRaise()
         }
 
         SetLocalVar("MijinGakure", 0);
+        SetLocalVar("PVPMODE", 0);
         m_hasArise = false;
         m_hasRaise = 0;
     }
@@ -2091,6 +2224,14 @@ void CCharEntity::OnItemFinish(CItemState& state, action_t& action)
     TracyZoneScoped;
     auto* PTarget = static_cast<CBattleEntity*>(state.GetTarget());
     auto* PItem   = state.GetItem();
+
+    if (!PItem->isType(ITEM_EQUIPMENT) && (PItem->getQuantity() < 1 || PItem->getReserve() > 0))
+    {
+        ShowWarning("OnItemFinish: %s attempted to use reserved/insufficient %s (%u).", this->getName(), PItem->getName(), PItem->getID());
+        this->pushPacket(new CMessageBasicPacket(this, this, PItem->getID(), 0, MSGBASIC_ITEM_FAILS_TO_ACTIVATE));
+
+        return;
+    }
 
     // TODO: I'm sure this is supposed to be in the action packet... (animation, message)
     if (PItem->getAoE())
@@ -2160,9 +2301,9 @@ CBattleEntity* CCharEntity::IsValidTarget(uint16 targid, uint16 validTargetFlags
         if (PTarget->objtype == TYPE_PC && charutils::IsAidBlocked(this, static_cast<CCharEntity*>(PTarget)))
         {
             // Target is blocking assistance
-            errMsg = std::make_unique<CMessageSystemPacket>(0, 0, 225);
+            errMsg = std::make_unique<CMessageSystemPacket>(0, 0, MsgStd::TargetIsCurrentlyBlocking);
             // Interaction was blocked
-            static_cast<CCharEntity*>(PTarget)->pushPacket(new CMessageSystemPacket(0, 0, 226));
+            static_cast<CCharEntity*>(PTarget)->pushPacket(new CMessageSystemPacket(0, 0, MsgStd::BlockedByBlockaid));
         }
         else if (IsMobOwner(PTarget))
         {
@@ -2738,6 +2879,15 @@ void CCharEntity::endCurrentEvent()
 
 void CCharEntity::queueEvent(EventInfo* eventToQueue)
 {
+    for (auto& eventElement : eventQueue)
+    {
+        if (eventElement->eventId == eventToQueue->eventId)
+        {
+            ShowError("CCharEntity::queueEvent: Character attempted to start multiple of the same event.");
+            return;
+        }
+    }
+
     eventQueue.emplace_back(eventToQueue);
     tryStartNextEvent();
 }
@@ -2790,7 +2940,7 @@ void CCharEntity::skipEvent()
     TracyZoneScoped;
     if (!m_Locked && !isInEvent() && (!currentEvent->cutsceneOptions.empty() || currentEvent->interruptText != 0))
     {
-        pushPacket(new CMessageSystemPacket(0, 0, 117));
+        pushPacket(new CMessageSystemPacket(0, 0, MsgStd::EventSkipped));
         pushPacket(new CReleasePacket(this, RELEASE_TYPE::SKIPPING));
         m_Substate = CHAR_SUBSTATE::SUBSTATE_NONE;
 

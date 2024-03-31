@@ -22,7 +22,7 @@ CREATE TABLE `mob_spawn_mods` (
   `value` smallint(5) NOT NULL DEFAULT '0',
   `is_mob_mod` boolean NOT NULL DEFAULT '0',
   PRIMARY KEY (`mobid`,`modid`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4 AVG_ROW_LENGTH=13 PACK_KEYS=1;
+) ENGINE=Aria TRANSACTIONAL=0 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci AVG_ROW_LENGTH=13 PACK_KEYS=1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -609,16 +609,13 @@ INSERT INTO `mob_spawn_mods` VALUES (17236201,55,180,1); -- IDLE_DESPAWN: 180
 -- Boreal Hound
 -- INSERT INTO `mob_spawn_mods` VALUES (17236202,12,15,1);  -- DRAW_IN: 15
 INSERT INTO `mob_spawn_mods` VALUES (17236202,160,50,0); -- DMG: 50
-INSERT INTO `mob_spawn_mods` VALUES (17236202,169,10,0); -- MOVE: 10
 
 -- Boreal Coeurl
 -- INSERT INTO `mob_spawn_mods` VALUES (17236203,12,15,1);  -- DRAW_IN: 15
 INSERT INTO `mob_spawn_mods` VALUES (17236203,23,8,1);   -- IMMUNITY: 8
-INSERT INTO `mob_spawn_mods` VALUES (17236203,169,10,0); -- MOVE: 10
 
 -- Boreal Tiger
--- INSERT INTO `mob_spawn_mods` VALUES (17236204,12,15,1);  -- DRAW_IN: 15
-INSERT INTO `mob_spawn_mods` VALUES (17236204,169,10,0); -- MOVE: 10
+INSERT INTO `mob_spawn_mods` VALUES (17236204,12,15,1);  -- DRAW_IN: 15
 
 -- Koenigstiger
 INSERT INTO `mob_spawn_mods` VALUES (17236205,55,240,1); -- IDLE_DESPAWN: 240
@@ -1066,10 +1063,10 @@ INSERT INTO `mob_spawn_mods` VALUES (17506669,55,180,1); -- IDLE_DESPAWN: 180
 INSERT INTO `mob_spawn_mods` VALUES (17531121,55,180,1); -- IDLE_DESPAWN: 180
 
 -- Cemetery Cherry
-INSERT INTO `mob_spawn_mods` VALUES (17555754,1,20000,1); -- GIL_MIN: 20000
-INSERT INTO `mob_spawn_mods` VALUES (17555754,2,30000,1); -- GIL_MAX: 30000
+INSERT INTO `mob_spawn_mods` VALUES (17555754,1,20000,1);  -- GIL_MIN: 20000
+INSERT INTO `mob_spawn_mods` VALUES (17555754,2,30000,1);  -- GIL_MAX: 30000
 INSERT INTO `mob_spawn_mods` VALUES (17555754,15,10000,1); -- MUG_GIL: 10000
-INSERT INTO `mob_spawn_mods` VALUES (17555754,55,600,1);  -- IDLE_DESPAWN: 600
+INSERT INTO `mob_spawn_mods` VALUES (17555754,55,600,1);   -- IDLE_DESPAWN: 600
 
 -- Fire Elemental
 INSERT INTO `mob_spawn_mods` VALUES (17559870,55,300,1); -- IDLE_DESPAWN: 300

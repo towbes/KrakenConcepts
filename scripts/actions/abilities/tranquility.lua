@@ -16,7 +16,11 @@
 local abilityObject = {}
 
 abilityObject.onAbilityCheck = function(player, target, ability)
-    if player:hasStatusEffect(xi.effect.TRANQUILITY) then
+    if
+        player:hasStatusEffect(xi.effect.TRANQUILITY) or
+        player:hasStatusEffect(xi.effect.PAX) or
+        player:hasStatusEffect(xi.effect.ENMITY_BOOST)
+    then
         return xi.msg.basic.EFFECT_ALREADY_ACTIVE, 0
     end
 

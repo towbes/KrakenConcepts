@@ -35,6 +35,7 @@ CInstance::CInstance(CZone* zone, uint16 instanceid)
 , m_instanceid(instanceid)
 , m_zone(zone)
 {
+    TracyZoneScoped;
     LoadInstance();
 
     m_startTime = server_clock::now();
@@ -43,22 +44,7 @@ CInstance::CInstance(CZone* zone, uint16 instanceid)
 
 CInstance::~CInstance()
 {
-    for (auto entity : m_mobList)
-    {
-        destroy(entity.second);
-    }
-    for (auto entity : m_npcList)
-    {
-        destroy(entity.second);
-    }
-    for (auto entity : m_petList)
-    {
-        destroy(entity.second);
-    }
-    for (auto entity : m_trustList)
-    {
-        destroy(entity.second);
-    }
+    TracyZoneScoped;
 }
 
 uint16 CInstance::GetID() const
@@ -118,7 +104,7 @@ void CInstance::LoadInstance()
 
         // Add to Lua cache
         // TODO: This will happen more often than needed, but not so often that it's a performance concern
-        auto zone     = m_zone->GetName();
+        auto zone     = m_zone->getName();
         auto name     = m_instanceName;
         auto filename = fmt::format("./scripts/zones/{}/instances/{}.lua", zone, name);
         luautils::CacheLuaObjectFromFile(filename);

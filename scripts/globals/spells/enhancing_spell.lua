@@ -19,6 +19,15 @@ local pTable =
 --                                     1     2            3            4           5              6          7                 8
 -- Structure:            [spellId] = { Tier, Main_Effect, Spell_Level, Base_Power, Base_Duration, Composure, Always_Overwrite, Tick_Seconds },
 
+    -- Adloquium
+    [xi.magic.spell.ADLOQUIUM    ] = { 1, xi.effect.REGAIN,        75,   2,  180, true,  false, 0 },
+
+    -- Animus Augeo
+    [xi.magic.spell.ANIMUS_AUGEO ] = { 1, xi.effect.ENMITY_BOOST,  88,   10,  180, true,  false, 0 },
+
+    -- Animus Minuo
+    [xi.magic.spell.ANIMUS_MINUO ] = { 1, xi.effect.PAX,           88,   10,  180, true,  false, 0 },
+
     -- Aquaveil
     [xi.magic.spell.AQUAVEIL     ] = { 1, xi.effect.AQUAVEIL,       1,    1,  600, true,  true,  0 },
 
@@ -70,7 +79,7 @@ local pTable =
     [xi.magic.spell.BOOST_CHR    ] = { 1, xi.effect.CHR_BOOST,      1,    5,  300, true,  false, 0 },
 
     -- Crusade
-    [xi.magic.spell.CRUSADE      ] = { 1, xi.effect.ENMITY_BOOST,  88,   30,  300, true,  false, 0 },
+    [xi.magic.spell.CRUSADE      ] = { 1, xi.effect.ENMITY_BOOST,  88,   15,  300, true,  false, 0 }, -- Default Power: 30
 
     -- Deodorize / Invisible / Sneak
     [xi.magic.spell.DEODORIZE    ] = { 1, xi.effect.DEODORIZE,     15,    0,  420, true,  false, 10 },
@@ -95,7 +104,7 @@ local pTable =
     [xi.magic.spell.ENWATER_II   ] = { 2, xi.effect.ENWATER_II,    60,    0,  180, true,  false, 0 },
 
     -- Flurry
-    [xi.magic.spell.FLURRY       ] = { 1, xi.effect.FLURRY,        48,   15,  180, true,  false, 0 },
+    [xi.magic.spell.FLURRY       ] = { 1, xi.effect.FLURRY_II,     48,   15,  180, true,  false, 0 },
     [xi.magic.spell.FLURRY_II    ] = { 2, xi.effect.FLURRY_II,     96,   30,  180, true,  false, 0 },
     -- Foil
     [xi.magic.spell.FOIL         ] = { 1, xi.effect.FOIL,          58,  150,   30, true,  false, 3 },
@@ -175,7 +184,7 @@ local pTable =
 
     -- Temper
     [xi.magic.spell.TEMPER       ] = { 1, xi.effect.MULTI_STRIKES, 95,    5,  180, true,  false, 0 },
-    -- [xi.magic.spell.TEMPER_II    ] = { 2, 0                      , 99,    5,  180, true,  false, 0 },
+    [xi.magic.spell.TEMPER_II    ] = { 2, xi.effect.MULTI_STRIKES, 99,    5,  180, true,  false, 0 },
 }
 
 -- Enhancing Spell Base Potency function.
@@ -228,6 +237,26 @@ xi.spells.enhancing.calculateEnhancingBasePower = function(caster, target, spell
         else
             basePower = math.max(math.floor(math.sqrt(skillLevel)) - 1, 0)
         end
+
+        if
+            (spellEffect >= xi.effect.ENFIRE_II and spellEffect <= xi.effect.ENWATER_II)
+        then
+            if target:hasStatusEffect(xi.effect.COMPOSURE) then
+                basePower = basePower * 1.50
+            else
+                basePower = basePower * 1.25
+            end
+        end
+
+        if
+            caster:getAllegiance() == 2 or
+            caster:getAllegiance() == 3 or
+            caster:getAllegiance() == 4 or
+            caster:getAllegiance() == 5 or
+            caster:getAllegiance() == 6
+        then
+            basePower = basePower * 0.50
+        end
           
     -- Phalanx
     elseif spellEffect == xi.effect.PHALANX then
@@ -268,8 +297,11 @@ xi.spells.enhancing.calculateEnhancingBasePower = function(caster, target, spell
 
     -- Temper
     elseif spellEffect == xi.effect.MULTI_STRIKES then
-        if skillLevel >= 360 then
+        --[[ if skillLevel >= 360 then
             basePower = math.floor((skillLevel - 300) / 10)
+        end]]
+        if skillLevel >= 260 then
+            basePower = math.floor((skillLevel - 200) / 10)
         end
     end
 
@@ -388,8 +420,11 @@ xi.spells.enhancing.calculateEnhancingDuration = function(caster, target, spell,
     ------------------------------
     -- Merits and Job Points. (Applicable to all enhancing spells. Prior to multipliers, according to bg-wiki.)
     ------------------------------
-    if caster:getMainJob() == xi.job.RDM then
-        duration = duration + caster:getMerit(xi.merit.ENHANCING_MAGIC_DURATION) + caster:getJobPointLevel(xi.jp.ENHANCING_DURATION)
+    if caster:getMainJob() == xi.job.RDM or caster:getSubJob() == xi.job.RDM then
+        duration = duration + caster:getMerit(xi.merit.ENHANCING_MAGIC_DURATION)
+        if caster:getMainJob() == xi.job.RDM then
+            duration = duration + caster:getJobPointLevel(xi.jp.ENHANCING_DURATION)
+        end
     end
 
     --------------------------------------------------
@@ -546,6 +581,10 @@ xi.spells.enhancing.useEnhancingSpell = function(caster, target, spell)
         spellGroup == xi.magic.spellGroup.WHITE
     then
         target:delStatusEffectSilent(xi.effect.EMBOLDEN)
+    end
+
+    if caster:hasStatusEffect(xi.effect.MANAWELL) then
+        caster:delStatusEffectSilent(xi.effect.MANAWELL)
     end
 
     ------------------------------------------------------------

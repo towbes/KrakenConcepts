@@ -53,8 +53,8 @@ public:
     void   setMsg(uint16 message);
     uint16 getMsg();
     uint16 getTotalTargets();
-    void   setKnockback(uint8 knockbackValue);
     void   setAnimationID(uint16 animID);
+    void   setKnockBack(uint8 knockback);
 
     bool operator==(const CLuaMobSkill& other) const
     {

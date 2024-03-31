@@ -1411,7 +1411,7 @@ xi.conquest.overseerOnEventFinish = function(player, csid, option, guardNation, 
 
             player:delCP(price)
             if stock.rank ~= nil then
-                player:setTitle(titlesGranted[guardNation][stock.rank])
+                player:setTitle(titlesGranted[pNation][stock.rank])
             end
         end
     end

@@ -11,7 +11,7 @@ entity.onMobSpawn = function(mob)
     mob:setMod(xi.mod.SLEEPRES, 80)
 end
 
-entity.onMobEngaged = function(mob, target)
+entity.onMobEngage = function(mob, target)
     mob:useMobAbility(815)
     mob:setMod(xi.mod.REGAIN, 100)
 end

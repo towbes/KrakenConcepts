@@ -14,12 +14,26 @@ mobskillObject.onMobSkillCheck = function(target, mob, skill)
 end
 
 mobskillObject.onMobWeaponSkill = function(target, mob, skill)
-    local typeEffect = xi.effect.SHELL
-    local power      = 5000
+    local duration = 180
+    local master = mob:getMaster()
+    local skillID = skill:getID()
+    if mob:isPet() then
+        -- isJugPet is really hasJugPet.  Given an entity it returns true if that entity has a pet and the pet is a jug pet
+        -- TODO - Rule of 3 counter = 1 - rename isJugPet to has, add isJugPet
+        if master and master:isJugPet() and master:checkDistance(mob) < 8.5 then
+            local tp = skill:getTP()
+            duration = 180
+            duration = math.max(180, duration * (tp/1000)) -- Minimum 3 minutes. Maximum 9 minutes.
+            master:addStatusEffect(xi.effect.SHELL, 5000, 0, duration)
+            mob:injectActionPacket(master:getID(), 11, 187, 0, 0, 0, 10, 1)
+            master:timer(4000, function(masterArg)
+                master:messageBasic(xi.msg.basic.GAINS_EFFECT_OF_STATUS, xi.effect.SHELL)
+            end)
+        end
+    end
+    skill:setMsg(xi.mobskills.mobBuffMove(mob, xi.effect.SHELL, 5000, 0, 180))
 
-    skill:setMsg(xi.mobskills.mobBuffMove(mob, typeEffect, power, 0, 180))
-
-    return typeEffect
+    return xi.effect.SHELL
 end
 
 return mobskillObject

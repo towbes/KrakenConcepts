@@ -9,6 +9,7 @@ spellObject.onMagicCastingCheck = function(caster, target, spell)
 end
 
 spellObject.onSpellCast = function(caster, target, spell)
+    caster:delStatusEffectSilent(xi.effect.MANAWELL)
     if target:delStatusEffect(xi.effect.POISON) then
         spell:setMsg(xi.msg.basic.MAGIC_REMOVE_EFFECT)
     else

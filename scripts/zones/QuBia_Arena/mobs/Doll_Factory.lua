@@ -45,7 +45,7 @@ entity.onMobSpawn = function(mob)
     mob:setLocalVar('dollAlive', 0)
 end
 
-entity.onMobEngaged = function(mob)
+entity.onMobEngage = function(mob)
     mob:setLocalVar('timer', os.time() + math.random(12, 20))
 end
 

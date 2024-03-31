@@ -104,6 +104,7 @@ local createEntity = function(zone, tblNM)
         groupZoneId = tblNM.base.zoneId,
         look        = tblNM.look,
         widescan    = 0,
+        -- releaseIdOnDisappear = tblNM.releaseIdOnDisappear, -- true/false
 
         onMobDeath  = function(mob, playerArg, optParams)
             onMobDeath(mob, playerArg, optParams, tblNM)
@@ -136,6 +137,8 @@ local createEntity = function(zone, tblNM)
         onMobDrawIn             = tblNM.onMobDrawIn,
         onAdditionalEffect      = tblNM.onAdditionalEffect,
         onMobWeaponSkill        = tblNM.onMobWeaponSkill,
+        onCriticalHit           = tblNM.onCriticalHit,
+        
 
         onMobWeaponSkillPrepare = function(mob, target)
             if tblNM.onMobWeaponSkillPrepare then
@@ -159,8 +162,9 @@ local createEntity = function(zone, tblNM)
         dynamicNM:setMobFlags(tblNM.flags)
     end
 
-    dynamicNM:setMobLevel(tblNM.level)
-
+    -- dynamicNM:setMobLevel(tblNM.level)
+    -- dynamicNM:setLevel(tblNM.level)
+    -- dynamicNM:setsLevel(tblNM.level)
     return dynamicNM
 end
 
@@ -310,7 +314,7 @@ local itemSpawn = function(zone, zoneId, tblNM)
             then
                 itemSpawnHandler(zone, player, npc, tblNM)
             else
-                player:PrintToPlayer('Nothing happens.', xi.msg.channel.NS_SAY)
+                player:printToPlayer('Nothing happens.', xi.msg.channel.NS_SAY)
             end
         end,
     })

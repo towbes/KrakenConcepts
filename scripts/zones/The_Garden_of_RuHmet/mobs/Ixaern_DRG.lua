@@ -62,7 +62,7 @@ entity.onMobFight = function(mob, target)
     end
 end
 
-entity.onMobEngaged = function(mob, target)
+entity.onMobEngage = function(mob, target)
     local mobId = mob:getID()
 
     mob:setLocalVar('changeTime', 0)

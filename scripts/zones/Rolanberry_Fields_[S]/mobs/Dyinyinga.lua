@@ -16,7 +16,7 @@ entity.onMobInitialize = function(mob)
     mob:setMod(xi.mod.DMGMAGIC, 25)
     mob:setMobMod(xi.mobMod.ADD_EFFECT, 1)
     mob:addListener('EFFECT_LOSE', 'DYINYINGA_EFFECT_LOSE', function(owner, effect)
-        local effectType = effect:getTypeMask()
+        local effectType = effect:getEffectType()
         if effectType == xi.effect.WEIGHT then
             owner:addMod(xi.mod.GRAVITYRES, 10)
         end
@@ -51,7 +51,7 @@ entity.onAdditionalEffect = function(mob, target, damage)
     return xi.mob.onAddEffect(mob, target, damage, xi.mob.ae.SLOW, { chance = 100, duration = 120 })
 end
 
-entity.onMobEngaged = function (mob, target)
+entity.onMobEngage = function (mob, target)
     if mob:getHPP() == 100 then
         mob:setMod(xi.mod.BINDRES, -75)
         mob:setMod(xi.mod.GRAVITYRES, -75)

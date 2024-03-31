@@ -8,7 +8,7 @@ local misareauxGlobal = require('scripts/zones/Misareaux_Coast/globals')
 local zoneObject = {}
 
 zoneObject.onInitialize = function(zone)
-    xi.helm.initZone(zone, xi.helm.type.LOGGING)
+    xi.helm.initZone(zone, xi.helmType.LOGGING)
     misareauxGlobal.ziphiusHandleQM()
 
     -- NM Persistence

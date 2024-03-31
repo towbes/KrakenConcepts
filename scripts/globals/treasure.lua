@@ -1001,7 +1001,7 @@ xi.treasure.treasureInfo =
                 },
                 gil = { 0.652, 7320, 18000 },
                 gem = { 0.044, 791, 801, 810, 784, 802, 797, 803, 805 },
-                item = { 0.304, 14670 },
+                item = { 0.304, 14670, xi.item.ASTRAL_RING },
             },
 
             [xi.zone.THE_BOYAHDA_TREE] = -- 153
@@ -1525,7 +1525,7 @@ end
 
 local function getLockpickSuccessRate(player, keyTraded, chestInfo)
     if
-        player:getMainJob() == xi.job.THF or player:getSubJob() == xi.job.THF and --Umeboshi 
+        (player:getMainJob() == xi.job.THF or player:getSubJob() == xi.job.THF) and --Umeboshi 
         player:getMainLvl() >= chestInfo.treasureLvl - 10
     then
         return (player:getMainLvl() / chestInfo.treasureLvl) - 0.50 + thiefKeyInfo[keyTraded][2]
@@ -1619,10 +1619,8 @@ xi.treasure.onTrade = function(player, npc, trade, chestType)
                 player:confirmTrade()
                 moveChest(npc, zoneId, chestType)
             end
-        end
-
-                    -- artifact armor subjob Umeboshi 'AF quests for subjobs'
-        if
+        -- artifact armor subjob Umeboshi 'AF quests for subjobs'
+        elseif
             info.af and
             info.af[sJob] and
             player:getQuestStatus(xi.quest.log_id.JEUNO, info.af[sJob].quest) >= QUEST_ACCEPTED and

@@ -47,8 +47,9 @@ quest.sections =
     {
         check = function(player, status, vars)
             return status == QUEST_AVAILABLE and
-            (player:getCurrentMission(xi.mission.log_id.COP) > xi.mission.id.cop.THE_MOTHERCRYSTALS or
-            xi.mission.getVar(player, xi.mission.log_id.COP, xi.mission.id.cop.THE_MOTHERCRYSTALS, 'Option') > 0)
+            (player:getCurrentMission(xi.mission.log_id.COP) >= xi.mission.id.cop.THE_MOTHERCRYSTALS or
+            player:hasCompletedMission(xi.mission.log_id.COP, xi.mission.id.cop.THE_MOTHERCRYSTALS) or
+            xi.mission.getVar(player, xi.mission.log_id.COP, xi.mission.id.cop.BELOW_THE_ARKS, 'Option') > 0)
         end,
 
         [xi.zone.RULUDE_GARDENS] =

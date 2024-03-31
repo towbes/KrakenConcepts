@@ -38,6 +38,7 @@ enum class EFFECTOVERWRITE : uint8
     IGNORE_DUPLICATE = 4, // ignore dupes
     TIER_HIGHER      = 5  // only overwrite if tier is higher (regardless of power)
 };
+DECLARE_FORMAT_AS_UNDERLYING(EFFECTOVERWRITE);
 
 enum EFFECTFLAG
 {
@@ -71,7 +72,9 @@ enum EFFECTFLAG
     EFFECTFLAG_AURA            = 0x04000000, // Is an aura type effect
     EFFECTFLAG_HIDE_TIMER      = 0x08000000, // Sends "Always" in the packet, even though timer is tracked
     EFFECTFLAG_ON_ZONE_PATHOS  = 0x10000000, // removes the effect zoning into a non instanced zone
+    EFFECTFLAG_ALWAYS_EXPIRING = 0x20000000, // Timer is always 4 seconds from now to have an illusion permanent "expiring", used for Auras
 };
+DECLARE_FORMAT_AS_UNDERLYING(EFFECTFLAG);
 
 enum EFFECT
 {
@@ -561,7 +564,7 @@ enum EFFECT
     EFFECT_ASYLUM                = 492,
     EFFECT_SUBTLE_SORCERY        = 493,
     EFFECT_STYMIE                = 494,
-    // EFFECT_NONE                     = 495,
+    // EFFECT_HYSTERIA              = 495,
     EFFECT_INTERVENE        = 496,
     EFFECT_SOUL_ENSLAVEMENT = 497,
     EFFECT_UNLEASH          = 498,
@@ -698,6 +701,8 @@ enum EFFECT
     EFFECT_MOOGLE_AMPLIFIER        = 629,
     EFFECT_TAINT                   = 630,
     EFFECT_HAUNT                   = 631,
+    EFFECT_BLACK_SANCTUS           = 632,
+    EFFECT_ANIMATED                = 633,
 
     // Effect icons in packet can go from 0-767, so no custom effects should go in that range.
 
@@ -745,13 +750,15 @@ enum EFFECT
     EFFECT_HYSTERIA            = 804, // Used for Hysteroanima to stop after readying a weaponskill with no msg.
     EFFECT_TOMAHAWK            = 805, // Silent status effect inflicted by a Warrior using the "Tomahawk" job ability
     EFFECT_NUKE_WALL           = 806, // Custom effect for NM type mobs only. Applied by elemental magic damage sources
+    EFFECT_BANISH_SDT_DEBUFF   = 807, // Handles SDT debuff on undead mobs.
+    EFFECT_RUN_WILD            = 808,
 
     // 789
     // 807-1022
     // EFFECT_PLACEHOLDER           = 1023 // The client dat file seems to have only this many "slots", results of exceeding that are untested.
 };
-
-#define MAX_EFFECTID 807 // 768 real + 39 custom
+#define MAX_EFFECTID 809 // 768 real + 39 custom
+DECLARE_FORMAT_AS_UNDERLYING(EFFECT);
 
 /************************************************************************
  *                                                                       *

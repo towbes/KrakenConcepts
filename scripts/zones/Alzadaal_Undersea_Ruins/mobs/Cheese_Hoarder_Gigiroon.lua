@@ -104,12 +104,12 @@ end
 
 entity.onMobInitialize = function(mob)
     mob:setMobMod(xi.mobMod.IDLE_DESPAWN, 300)
-    mob:setMod(xi.mod.MOVE, 1)
+    mob:setSpeed((50 + xi.settings.map.MOB_SPEED_MOD) + 1)
     mob:setMobMod(xi.mobMod.GIL_MIN, 3000)
     mob:setMobMod(xi.mobMod.GIL_MAX, 5000)
 end
 
-entity.onMobEngaged = function(mob, target)
+entity.onMobEngage = function(mob, target)
     mob:setLocalVar('TimeToRun', os.time() + 10) -- Cheese runs 3 mins after engaging.  Not hp% based (capture has him in the single digits before running)
 end
 
@@ -126,7 +126,7 @@ entity.onMobFight = function(mob, target)
             local runType = math.random(1,2)
             mob:setLocalVar('RunType', runType)
             mob:setLocalVar('MineTime', now)
-            mob:setMod(xi.mod.MOVE, 40)
+            mob:setMod(xi.mod.MOVE_SPEED_STACKABLE, 40)
 
             pickStartingRunPoint(mob)
 
@@ -143,7 +143,7 @@ entity.onMobFight = function(mob, target)
             -- done running for now
             mob:setLocalVar('RunType', 0)
             mob:setLocalVar('TimeToRun', now + math.random(90,120))
-            mob:setMod(xi.mod.MOVE, 1)
+            mob:setMod(xi.mod.MOVE_SPEED_STACKABLE, 1)
         else
             if (now > mob:getLocalVar('MineTime')) then
                 spawnMine(mob)

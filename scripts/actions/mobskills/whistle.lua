@@ -16,7 +16,6 @@ end
 mobskillObject.onMobWeaponSkill = function(target, mob, skill)
     local power = target:getMainLvl() / 10 * 3.75 + 5
     local duration = 60
-
     local typeEffect = xi.effect.AGI_BOOST
 
     if mob:getZone():getTypeMask() == xi.zoneType.DYNAMIS then

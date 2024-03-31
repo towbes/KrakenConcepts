@@ -65,7 +65,7 @@ m:addOverride('xi.zones.Castle_Oztroja.Zone.onInitialize', function(zone)
         z         = settings.npcPos[3],
         widescan  = 0,
         onTrigger = function(player, npc)
-            player:PrintToPlayer(settings.message, xi.msg.channel.NS_SAY)
+            player:printToPlayer(settings.message, xi.msg.channel.NS_SAY)
             player:customMenu(escapeMenu)
         end,
     })

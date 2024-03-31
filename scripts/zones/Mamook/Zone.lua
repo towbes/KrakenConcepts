@@ -6,7 +6,7 @@ local ID = zones[xi.zone.MAMOOK]
 local zoneObject = {}
 
 zoneObject.onInitialize = function(zone)
-    xi.helm.initZone(zone, xi.helm.type.LOGGING)
+    xi.helm.initZone(zone, xi.helmType.LOGGING)
     
     xi.mob.nmTODPersistCache(zone, ID.mob.HUNDREDFACED_HAPOOL_JA)
     xi.mob.nmTODPersistCache(zone, ID.mob.DRAGONSCALED_BUGAAL_JA)

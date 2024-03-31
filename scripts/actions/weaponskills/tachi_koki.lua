@@ -16,22 +16,26 @@ local weaponskillObject = {}
 weaponskillObject.onUseWeaponSkill = function(player, target, wsID, tp, primary, action, taChar)
     local params = {}
     params.numHits = 1
-    params.ftp100 = 0.5 params.ftp200 = 0.75 params.ftp300 = 1
-    params.str_wsc = 0.3 params.dex_wsc = 0.0 params.vit_wsc = 0.0 params.agi_wsc = 0.0 params.int_wsc = 0.0 params.mnd_wsc = 0.3 params.chr_wsc = 0.0
-    params.crit100 = 0.0 params.crit200 = 0.0 params.crit300 = 0.0
-    params.canCrit = false
-    params.acc100 = 0.0 params.acc200 = 0.0 params.acc300 = 0.0
-    params.atk100 = 1 params.atk200 = 1 params.atk300 = 1
+    params.ftpMod = { 0.5, 0.75, 1.0 }
+    params.str_wsc = 0.5 params.mnd_wsc = 0.3
     params.hybridWS = true
     params.ele = xi.element.LIGHT
     params.skill = xi.skill.GREAT_KATANA
     params.includemab = true
 
     if xi.settings.main.USE_ADOULIN_WEAPON_SKILL_CHANGES then
-        params.str_wsc = 0.3 params.mnd_wsc = 0.5
+        params.ftpMod = { 1.0, 1.25, 1.60 }
+        params.str_wsc = 0.2 params.mnd_wsc = 0.75
     end
 
     local damage, criticalHit, tpHits, extraHits = xi.weaponskills.doPhysicalWeaponskill(player, target, wsID, params, tp, action, primary, taChar)
+
+    local duration = 5 * applyResistanceAddEffect(player, target, xi.element.LIGHT, 0)
+    if damage > 0 then
+        target:addStatusEffect(xi.effect.FLASH, 20, 0, duration)
+        player:messagePublic(xi.msg.basic.SKILL_ENFEEB, target, wsID, xi.effect.FLASH)
+    end
+
     return tpHits, extraHits, criticalHit, damage
 end
 

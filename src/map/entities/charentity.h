@@ -435,7 +435,7 @@ public:
     bool           MeritMode;
 
     CLatentEffectContainer* PLatentEffectContainer;
-    bool                    retriggerLatentsAfterPacketParsing; // used to retrigger all latent effects after packet parsing is done in map.cpp
+    bool                    retriggerLatents; // used to retrigger all latent effects if some event requires them to be retriggered
 
     CItemContainer* PGuildShop;
     CItemContainer* getStorage(uint8 LocationID);
@@ -509,6 +509,7 @@ public:
     bool       m_EquipSwap; // true if equipment was recently changed
     bool       m_EffectsChanged;
     time_point m_LastSynthTime;
+    time_point m_LastRangedAttackTime;
 
     CHAR_SUBSTATE m_Substate;
 
@@ -555,6 +556,7 @@ public:
 
     virtual bool ValidTarget(CBattleEntity* PInitiator, uint16 targetFlags) override;
     virtual bool CanUseSpell(CSpell*) override;
+    bool         IsMobOwner(CBattleEntity* PTarget);
 
     virtual void Die() override;
     void         Die(duration _duration);
@@ -615,7 +617,6 @@ public:
 
 protected:
     void changeMoghancement(uint16 moghancementID, bool isAdding);
-    bool IsMobOwner(CBattleEntity* PTarget);
     void TrackArrowUsageForScavenge(CItemWeapon* PAmmo);
 
 private:

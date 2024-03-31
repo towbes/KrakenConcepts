@@ -17,7 +17,7 @@ entity.onMobSpawn = function(mob)
     mob:setMod(xi.mod.WIND_ABSORB, 100)
 end
 
-entity.onMobEngaged = function(mob, target)
+entity.onMobEngage = function(mob, target)
     target:showText(mob, zones[mob:getZoneID()].text.GURFURLUR_ENGAGE)
     mob:setMobMod(xi.mobMod.NO_MOVE, 0)
 

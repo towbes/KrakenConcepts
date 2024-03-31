@@ -144,7 +144,7 @@ xi.player.charCreate = function(player)
     player:setCharVar('spokePyropox', 1)                -- Pyropox introduction
     player:setCharVar('TutorialProgress', 1)            -- Has not started tutorial
     player:setCharVar('EinherjarIntro', 1)              -- Has not seen Einherjar intro
-    player:setNewPlayer(true)                           -- apply new player flag
+    -- player:setNewPlayer(true)                           -- apply new player flag
 end
 
 -- called by core after a player logs into the server or zones
@@ -238,6 +238,9 @@ xi.player.onGameIn = function(player, firstLogin, zoning)
 end
 
 xi.player.onPlayerDeath = function(player)
+    if player:getLocalVar('PVPMODE') == 1 then
+        player:sendRaise(3)
+    end
 end
 
 xi.player.onPlayerLevelUp = function(player)

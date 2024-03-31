@@ -4,7 +4,11 @@
 local spellObject = {}
 
 spellObject.onMagicCastingCheck = function(caster, target, spell)
-    return 0
+    if caster:isMob() and target:hasStatusEffect(xi.effect.FOIL) then
+        return 1
+    else
+        return 0
+    end
 end
 
 -- https://www.ffxiah.com/forum/topic/56696/foil-potency-and-decay-testing/#3625542

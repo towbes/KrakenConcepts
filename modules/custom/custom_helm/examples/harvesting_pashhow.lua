@@ -7,7 +7,7 @@ local customHelm = require('modules/custom/custom_helm/custom_helm')
 -----------------------------------
 local m = Module:new('harvesting_pashhow')
 
-xi.helm.helmInfo[xi.helm.type.HARVESTING].zone[xi.zone.PASHHOW_MARSHLANDS] =
+xi.helm.helmInfo[xi.helmType.HARVESTING].zone[xi.zone.PASHHOW_MARSHLANDS] =
 {
     dynamic = true,
 
@@ -51,13 +51,13 @@ xi.helm.helmInfo[xi.helm.type.HARVESTING].zone[xi.zone.PASHHOW_MARSHLANDS] =
 
 m:addOverride('xi.zones.Pashhow_Marshlands.Zone.onInitialize', function(zone)
     super(zone)
-    xi.helm.initZone(zone, xi.helm.type.HARVESTING)
+    xi.helm.initZone(zone, xi.helmType.HARVESTING)
 end)
 
 m:addOverride('xi.zones.Pashhow_Marshlands.Zone.onZoneWeatherChange', function(weatherType)
     super(onZoneWeatherChange)
 
-    local drops = xi.helm.helmInfo[xi.helm.type.HARVESTING].zone[xi.zone.PASHHOW_MARSHLANDS].drops
+    local drops = xi.helm.helmInfo[xi.helmType.HARVESTING].zone[xi.zone.PASHHOW_MARSHLANDS].drops
 
     -- loop through table and delete all matches
     for k, item in pairs(drops) do
@@ -82,7 +82,7 @@ end)
 m:addOverride('xi.zones.Pashhow_Marshlands.Zone.onGameDay', function()
     super(onGameDay)
 
-    local drops = xi.helm.helmInfo[xi.helm.type.HARVESTING].zone[xi.zone.PASHHOW_MARSHLANDS].drops
+    local drops = xi.helm.helmInfo[xi.helmType.HARVESTING].zone[xi.zone.PASHHOW_MARSHLANDS].drops
 
     -- loop through table and delete all matches
     for k, item in pairs(drops) do

@@ -14,9 +14,63 @@ xi.job_utils.summoner = xi.job_utils.summoner or {}
 local function getBaseMPCost(player, ability)
     local baseMPCostMap =
     {
+        -- Carbuncle
+        [xi.jobAbility.HEALING_RUBY]     =   6,
+        [xi.jobAbility.POISON_NAILS]     =  11,
+        [xi.jobAbility.SHINING_RUBY]     =  44,
+        [xi.jobAbility.GLITTERING_RUBY]  =  62,
+        [xi.jobAbility.SOOTHING_RUBY]    =  74,
+        [xi.jobAbility.PACIFYING_RUBY]   =  83,
+        [xi.jobAbility.METEORITE]        = 108,
+        [xi.jobAbility.HEALING_RUBY_II]  = 124,
+        [xi.jobAbility.HOLY_MIST]        = 152,
+        -- Leviathan
+        [xi.jobAbility.BARRACUDA_DIVE]   =   8,
+        [xi.jobAbility.WATER_II]         =  24,
+        [xi.jobAbility.SLOWGA]           =  48,
+        [xi.jobAbility.TAIL_WHIP]        =  49,
+        [xi.jobAbility.SOOTHING_CURRENT] =  95,
+        [xi.jobAbility.SPRING_WATER]     =  99,
+        [xi.jobAbility.WATER_IV]         = 118,
+        [xi.jobAbility.TIDAL_ROAR]       = 138,
+        [xi.jobAbility.SPINNING_DIVE]    = 164,
+        [xi.jobAbility.GRAND_FALL]       = 182,
+        -- Garuda
+        [xi.jobAbility.CLAW]             =   7,
+        [xi.jobAbility.AERO_II]          =  24,
+        [xi.jobAbility.AERIAL_ARMOR]     =  92,
+        [xi.jobAbility.FLEET_WIND]       = 114,
+        [xi.jobAbility.AERO_IV]          = 118,
+        [xi.jobAbility.WHISPERING_WIND]  = 119,
+        [xi.jobAbility.HASTEGA]          = 129,
+        [xi.jobAbility.PREDATOR_CLAWS]   = 164,
+        [xi.jobAbility.WIND_BLADE]       = 182,
+        [xi.jobAbility.HASTEGA_II]       = 248,
+        -- Titan
+        [xi.jobAbility.ROCK_THROW]       =  10,
+        [xi.jobAbility.STONE_II]         =  24,
+        [xi.jobAbility.ROCK_BUSTER]      =  39,
+        [xi.jobAbility.MEGALITH_THROW]   =  62,
+        [xi.jobAbility.EARTHEN_WARD]     =  92,
+        [xi.jobAbility.STONE_IV]         = 118,
+        [xi.jobAbility.CRAG_THROW]       = 124,
+        [xi.jobAbility.EARTHEN_ARMOR]    = 156,
+        [xi.jobAbility.MOUNTAIN_BUSTER]  = 164,
+        [xi.jobAbility.GEOCRUSH]         = 182,
+        -- Titan
+        [xi.jobAbility.PUNCH]            =   9,
+        [xi.jobAbility.FIRE_II]          =  24,
+        [xi.jobAbility.BURNING_STRIKE]   =  48,
+        [xi.jobAbility.DOUBLE_PUNCH]     =  56,
+        [xi.jobAbility.INFERNO_HOWL]     =  72,
+        [xi.jobAbility.CRIMSON_HOWL]     =  84,
+        [xi.jobAbility.FIRE_IV]          = 118,
+        [xi.jobAbility.CONFLAG_STRIKE]   = 141,
+        [xi.jobAbility.FLAMING_CRUSH]    = 164,
+        [xi.jobAbility.METEOR_STRIKE]    = 182,
         -- Siren
-        [xi.jobAbility.WELT]             = 9,
-        [xi.jobAbility.ROUNDHOUSE]       = 52,
+        [xi.jobAbility.WELT]             =   9,
+        [xi.jobAbility.ROUNDHOUSE]       =  52,
         [xi.jobAbility.SONIC_BUFFET]     = 164,
         [xi.jobAbility.TORNADO_II]       = 182,
         [xi.jobAbility.HYSTERIC_ASSAULT] = 222,
@@ -100,17 +154,19 @@ xi.job_utils.summoner.canUseBloodPact = function(player, pet, target, petAbility
     return xi.msg.basic.UNABLE_TO_USE_JA2, 0 -- TODO: verify exact message in packet.
 end
 
-xi.job_utils.summoner.onUseBloodPact = function(player, pet, target, petskill)
+xi.job_utils.summoner.onUseBloodPact = function(target, petskill, summoner, action)
     local bloodPactAbility = GetAbility(petskill:getID()) -- Player abilities and Avatar abilities are mapped 1:1
-    local baseMPCost       = getBaseMPCost(player, bloodPactAbility)
-    local mpCost           = getMPCost(baseMPCost, player, bloodPactAbility)
+    local baseMPCost       = getBaseMPCost(summoner, bloodPactAbility)
+    local mpCost           = getMPCost(baseMPCost, summoner, bloodPactAbility)
 
-    if player:hasStatusEffect(xi.effect.APOGEE) then
-        player:resetRecast(xi.recast.ABILITY, bloodPactAbility:getRecastID())
-        player:delStatusEffect(xi.effect.APOGEE)
+    if summoner:hasStatusEffect(xi.effect.APOGEE) then
+        summoner:resetRecast(xi.recast.ABILITY, bloodPactAbility:getRecastID())
+        summoner:delStatusEffect(xi.effect.APOGEE)
     end
 
-    player:delMP(mpCost)
+    if target:getID() == action:getPrimaryTargetID() then
+        summoner:delMP(mpCost)
+    end
 end
 
 -- to be removed once damage is overhauled
@@ -137,4 +193,53 @@ xi.job_utils.summoner.useManaCede = function(player, ability, action)
         avatar:setTP(avatarNewTP)
         player:delMP(100)
     end
+end
+
+xi.job_utils.summoner.useSoothingRuby = function(target, pet, petskill, summoner, action)
+    local targetEffectTable = target:getStatusEffects()
+
+    -- Generate table with erasable effects from target effect table.
+    local erasableEffectTable        = {}
+    local additionalRemovableEffects =
+    set{
+        xi.effect.POISON,
+        xi.effect.BLINDNESS,
+        xi.effect.PARALYSIS,
+        xi.effect.SILENCE,
+        xi.effect.CURSE_I,
+        xi.effect.PLAGUE,
+        xi.effect.DISEASE
+    }
+
+    for _, effect in pairs(targetEffectTable) do
+        local id = effect:getEffectType()
+        if
+            bit.band(effect:getEffectFlags(), xi.effectFlag.ERASABLE) == xi.effectFlag.ERASABLE or
+            additionalRemovableEffects[id]
+        then
+            table.insert(erasableEffectTable, id)
+        end
+    end
+
+    -- Calculate the ammount of effects this skill can potentialy erase.
+    local summoningSkillFactor = math.floor((summoner:getSkillLevel(xi.skill.SUMMONING_MAGIC) + 99) / 100)
+    local soothingRubyPower    = utils.clamp(summoningSkillFactor, 1, 6)
+
+    -- Erase effects.
+    local effectsErased = math.min(#erasableEffectTable, soothingRubyPower)
+
+    if effectsErased > 0 then
+        for i = 1, effectsErased do
+            local index = math.random(1, #erasableEffectTable)
+
+            target:delStatusEffect(erasableEffectTable[index])
+            table.remove(erasableEffectTable, index)
+        end
+
+        petskill:setMsg(xi.msg.basic.MAGIC_REMOVE_EFFECT_2)
+    else
+        petskill:setMsg(xi.msg.basic.JA_NO_EFFECT_2)
+    end
+
+    return effectsErased
 end

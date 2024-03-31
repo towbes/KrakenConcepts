@@ -23,7 +23,7 @@ CREATE TABLE `mob_spell_lists` (
   `min_level` tinyint(3) unsigned NOT NULL,
   `max_level` tinyint(3) unsigned NOT NULL,
   PRIMARY KEY (`spell_list_id`,`spell_id`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4;
+) ENGINE=Aria TRANSACTIONAL=0 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -257,6 +257,7 @@ INSERT INTO `mob_spell_lists` VALUES ('Beastmen_PLD',4,49,40,59);   -- shell_ii 
 INSERT INTO `mob_spell_lists` VALUES ('Beastmen_PLD',4,50,60,79);   -- shell_iii (60~79)
 INSERT INTO `mob_spell_lists` VALUES ('Beastmen_PLD',4,51,80,255);  -- shell_iv (80~255)
 INSERT INTO `mob_spell_lists` VALUES ('Beastmen_PLD',4,112,37,255); -- flash (37~255)
+INSERT INTO `mob_spell_lists` VALUES ('Beastmen_PLD',4,310,80,255); -- enlight (80~255)
 
 -- Beastmen_DRK (5)
 INSERT INTO `mob_spell_lists` VALUES ('Beastmen_DRK',5,144,23,34);  -- fire (23~34)
@@ -298,6 +299,7 @@ INSERT INTO `mob_spell_lists` VALUES ('Beastmen_DRK',5,270,39,255); -- absorb-in
 INSERT INTO `mob_spell_lists` VALUES ('Beastmen_DRK',5,271,31,255); -- absorb-mnd (31~255)
 INSERT INTO `mob_spell_lists` VALUES ('Beastmen_DRK',5,272,33,255); -- absorb-chr (33~255)
 INSERT INTO `mob_spell_lists` VALUES ('Beastmen_DRK',5,275,45,255); -- absorb-tp (45~255)
+INSERT INTO `mob_spell_lists` VALUES ('Beastmen_DRK',5,311,80,255); -- endark (45~255)
 
 -- Beastmen_BRD (6)
 INSERT INTO `mob_spell_lists` VALUES ('Beastmen_BRD',6,368,7,16);   -- foe_requiem (7~16)
@@ -4353,8 +4355,9 @@ INSERT INTO `mob_spell_lists` VALUES ('TRUST_Ygnas',411,143,32,255); -- erase (3
 INSERT INTO `mob_spell_lists` VALUES ('TRUST_Lion_II',418,338,12,255); -- utsusemi_ichi (12~255)
 INSERT INTO `mob_spell_lists` VALUES ('TRUST_Lion_II',418,339,37,255); -- utsusemi_ni (37~255)
 
--- TRUST_Zied_II (419)
-INSERT INTO `mob_spell_lists` VALUES ('TRUST_Zied_II',419,252,37,255); -- stun (37~255)
+-- TRUST_Zeid_II (419)
+INSERT INTO `mob_spell_lists` VALUES ('TRUST_Zeid_II',419,243,91,255); -- absorb-attri (91~255)
+INSERT INTO `mob_spell_lists` VALUES ('TRUST_Zeid_II',419,252,37,255); -- stun (37~255)
 
 -- TRUST_Prishe_II (420)
 INSERT INTO `mob_spell_lists` VALUES ('TRUST_Prishe_II',420,7,16,255);  -- curaga (16~255)
@@ -4368,6 +4371,8 @@ INSERT INTO `mob_spell_lists` VALUES ('TRUST_Nashmeira_II',421,1,1,255);    -- c
 INSERT INTO `mob_spell_lists` VALUES ('TRUST_Nashmeira_II',421,2,11,255);   -- cure_ii (11~255)
 INSERT INTO `mob_spell_lists` VALUES ('TRUST_Nashmeira_II',421,3,21,255);   -- cure_iii (21~255)
 INSERT INTO `mob_spell_lists` VALUES ('TRUST_Nashmeira_II',421,4,41,255);   -- cure_iv (41~255)
+INSERT INTO `mob_spell_lists` VALUES ('TRUST_Nashmeira_II',421,5,61,255);   -- cure_v (41~255)
+INSERT INTO `mob_spell_lists` VALUES ('TRUST_Nashmeira_II',421,6,80,255);   -- cure_vi (41~255)
 INSERT INTO `mob_spell_lists` VALUES ('TRUST_Nashmeira_II',421,7,16,255);   -- curaga (16~255)
 INSERT INTO `mob_spell_lists` VALUES ('TRUST_Nashmeira_II',421,8,31,255);   -- curaga_ii (31~255)
 INSERT INTO `mob_spell_lists` VALUES ('TRUST_Nashmeira_II',421,9,51,255);   -- curaga_iii (51~255)
@@ -5123,7 +5128,15 @@ INSERT INTO `mob_spell_lists` VALUES ('Silverhook',492,252,1,255); -- stun (1~25
 INSERT INTO `mob_spell_lists` VALUES ('Silverhook',492,253,1,255); -- sleep (1~255)
 INSERT INTO `mob_spell_lists` VALUES ('Silverhook',492,274,1,255); -- sleepga ii (1~255)
 
--- IDs 493-496 free for use
+-- Bastet (493)
+INSERT INTO `mob_spell_lists` VALUES ('Bastet',493,165,1,255); -- Thunder II (1~255)
+INSERT INTO `mob_spell_lists` VALUES ('Bastet',493,195,1,255); -- Thundaga II (1~255)
+INSERT INTO `mob_spell_lists` VALUES ('Bastet',493,212,1,255); -- Burst (1~255)
+INSERT INTO `mob_spell_lists` VALUES ('Bastet',493,239,1,255); -- Shock (1~255)
+INSERT INTO `mob_spell_lists` VALUES ('Bastet',493,251,1,255); -- Shock Spikes (1~255)
+INSERT INTO `mob_spell_lists` VALUES ('Bastet',493,252,1,255); -- Stun (1~255)
+
+-- IDs 494-496 free for use
 
 -- Cemetery Cherry
 INSERT INTO `mob_spell_lists` VALUES ('Cemetery_Cherry',497,274,1,255); -- Sleepga II
@@ -5138,7 +5151,14 @@ INSERT INTO `mob_spell_lists` VALUES ('Slendlix_Spindlethumb',499,33,1,255); -- 
 -- Toxic Tamlyn (500)
 INSERT INTO `mob_spell_lists` VALUES ('Toxic_Tamlyn',500,231,1,255);  -- bio_ii (1~255)
 
--- Next Available: 501
+-- Zirnitra
+INSERT INTO `mob_spell_lists` VALUES ('Zirnitra',501,359,75,255);  -- silencega (75~255)
+
+-- Pyuu the Spatemaker
+INSERT INTO `mob_spell_lists` VALUES ('Pyuu_the_Spatemaker',502,171,1,255); -- water_iii (1~255)
+INSERT INTO `mob_spell_lists` VALUES ('Pyuu_the_Spatemaker',502,201,1,255); -- waterga_iii (1~255)
+
+-- Next Available: 503
 
 
 -- Adding Cactuar Specifics 700+ to avoid conflicts
@@ -6384,6 +6404,138 @@ INSERT INTO `mob_spell_lists` VALUES ('Darting_Kachaal_Ja_Flee',5094,362,1,255);
 
 -- Darting Kachaal Ja (Aggressive Mode)
 INSERT INTO `mob_spell_lists` VALUES ('Darting_Kachaal_Ja_Aggressive',5095,186,1,255);  -- aeroga_iii (1~255)
+
+INSERT INTO `mob_spell_lists` VALUES ('Custom_Lord_Verdilak',5096,311,1,255); -- endark (1~255)
+INSERT INTO `mob_spell_lists` VALUES ('Custom_Lord_Verdilak',5096,361,1,255); -- blindga (1~255)
+INSERT INTO `mob_spell_lists` VALUES ('Custom_Lord_Verdilak',5096,360,1,255); -- dispelga (1~255)
+INSERT INTO `mob_spell_lists` VALUES ('Custom_Lord_Verdilak',5096,245,1,255); -- drain (12~255)
+INSERT INTO `mob_spell_lists` VALUES ('Custom_Lord_Verdilak',5096,246,1,255); -- drain ii (12~255)
+INSERT INTO `mob_spell_lists` VALUES ('Custom_Lord_Verdilak',5096,247,1,255); -- aspir (1~255)
+INSERT INTO `mob_spell_lists` VALUES ('Custom_Lord_Verdilak',5096,277,1,255); -- dread_spikes (1~255)
+INSERT INTO `mob_spell_lists` VALUES ('Custom_Lord_Verdilak',5096,234,1,255); -- bio_v (1~255)
+
+INSERT INTO `mob_spell_lists` VALUES('Velkeng', 5097, 23, 1, 255); -- dia
+
+-- FireSpirit (204)
+-- INSERT INTO `mob_spell_lists` VALUES ('FireSpirit_Avatars_Favor',5098,147,55,255); -- fire_iv (73~85)
+-- INSERT INTO `mob_spell_lists` VALUES ('FireSpirit_Avatars_Favor',5098,175,55,69);  -- firega_ii (77~255)
+-- INSERT INTO `mob_spell_lists` VALUES ('FireSpirit_Avatars_Favor',5098,176,70,255); -- firega_iii (77~255)
+-- INSERT INTO `mob_spell_lists` VALUES ('FireSpirit_Avatars_Favor',5098,148,70,255); -- fire_v (86~255)
+-- INSERT INTO `mob_spell_lists` VALUES ('FireSpirit_Avatars_Favor',5098,204,55,71);  -- flare (60~255)
+-- INSERT INTO `mob_spell_lists` VALUES ('FireSpirit_Avatars_Favor',5098,205,72,255); -- flare_ii (60~255)
+INSERT INTO `mob_spell_lists` VALUES ('FireSpirit_Avatars_Favor',5098,115,37,255); -- firestorm (37~255)
+INSERT INTO `mob_spell_lists` VALUES ('FireSpirit_Avatars_Favor',5098,281,37,255); -- pyrohelix (37~255)
+INSERT INTO `mob_spell_lists` VALUES ('FireSpirit_Avatars_Favor',5098,312,37,255); -- enfire_ii (37~255)
+-- INSERT INTO `mob_spell_lists` VALUES ('FireSpirit_Avatars_Favor',5098,249,10,255); -- blaze_spikes (10~255)
+
+-- IceSpirit (205)
+INSERT INTO `mob_spell_lists` VALUES ('IceSpirit_Avatars_Favor',5099,80,4,255);   -- paralyze ii (4~255)
+INSERT INTO `mob_spell_lists` VALUES ('IceSpirit_Avatars_Favor',5099,152,55,255); -- blizzard_iv (74~88)
+INSERT INTO `mob_spell_lists` VALUES ('IceSpirit_Avatars_Favor',5099,180,55,69);  -- blizzaga_ii (77~255)
+INSERT INTO `mob_spell_lists` VALUES ('IceSpirit_Avatars_Favor',5099,181,70,255); -- blizzaga_iii (77~255)
+INSERT INTO `mob_spell_lists` VALUES ('IceSpirit_Avatars_Favor',5099,153,70,255); -- blizzard_v (89~255)
+INSERT INTO `mob_spell_lists` VALUES ('IceSpirit_Avatars_Favor',5099,206,50,71);  -- freeze (50~255)
+INSERT INTO `mob_spell_lists` VALUES ('IceSpirit_Avatars_Favor',5099,207,72,255); -- freeze_ii (50~255)
+INSERT INTO `mob_spell_lists` VALUES ('IceSpirit_Avatars_Favor',5099,116,37,255); -- hailstorm (37~255)
+INSERT INTO `mob_spell_lists` VALUES ('IceSpirit_Avatars_Favor',5099,282,37,255); -- cryohelix (37~255)
+INSERT INTO `mob_spell_lists` VALUES ('IceSpirit_Avatars_Favor',5099,313,37,255); -- enblizzard_ii (37~255)
+INSERT INTO `mob_spell_lists` VALUES ('IceSpirit_Avatars_Favor',5099,250,10,255); -- ice_spikes (10~255)
+
+-- AirSpirit (206)
+INSERT INTO `mob_spell_lists` VALUES ('AirSpirit_Avatars_Favor',5100,157,55,255); -- aero_iv (72~82)
+INSERT INTO `mob_spell_lists` VALUES ('AirSpirit_Avatars_Favor',5100,185,55,69);  -- aeroga_ii (77~255)
+INSERT INTO `mob_spell_lists` VALUES ('AirSpirit_Avatars_Favor',5100,186,70,255); -- aeroga_iii (77~255)
+INSERT INTO `mob_spell_lists` VALUES ('AirSpirit_Avatars_Favor',5100,158,70,255); -- aero_v (83~255)
+INSERT INTO `mob_spell_lists` VALUES ('AirSpirit_Avatars_Favor',5100,210,54,71);  -- tornado (54~255)
+INSERT INTO `mob_spell_lists` VALUES ('AirSpirit_Avatars_Favor',5100,208,72,255); -- tornado_ii (56~255)
+INSERT INTO `mob_spell_lists` VALUES ('AirSpirit_Avatars_Favor',5100,216,21,255); -- gravity (21~255)
+INSERT INTO `mob_spell_lists` VALUES ('AirSpirit_Avatars_Favor',5100,280,37,255); -- anemohelix (37~255)
+INSERT INTO `mob_spell_lists` VALUES ('AirSpirit_Avatars_Favor',5100,114,37,255); -- windstorm (37~255)
+INSERT INTO `mob_spell_lists` VALUES ('AirSpirit_Avatars_Favor',5100,314,37,255); -- enaero_ii (37~255)
+
+-- EarthSpirit (207)
+INSERT INTO `mob_spell_lists` VALUES ('EarthSpirit_Avatars_Favor',5101,79,13,255);  -- slow ii(13~255)
+INSERT INTO `mob_spell_lists` VALUES ('EarthSpirit_Avatars_Favor',5101,162,55,255); -- stone_iv (68~76)
+INSERT INTO `mob_spell_lists` VALUES ('EarthSpirit_Avatars_Favor',5101,190,55,69);  -- stonega_ii (77~255)
+INSERT INTO `mob_spell_lists` VALUES ('EarthSpirit_Avatars_Favor',5101,191,70,255); -- stonega_iii (77~255)
+INSERT INTO `mob_spell_lists` VALUES ('EarthSpirit_Avatars_Favor',5101,163,70,255); -- stone_v (77~255)
+INSERT INTO `mob_spell_lists` VALUES ('EarthSpirit_Avatars_Favor',5101,210,54,71);  -- quake (54~255)
+INSERT INTO `mob_spell_lists` VALUES ('EarthSpirit_Avatars_Favor',5101,211,72,255); -- quake ii (56~255)
+INSERT INTO `mob_spell_lists` VALUES ('EarthSpirit_Avatars_Favor',5101,99,37,255);  -- sandstorm (37~255)
+INSERT INTO `mob_spell_lists` VALUES ('EarthSpirit_Avatars_Favor',5101,278,37,255); -- geohelix (37~255)
+INSERT INTO `mob_spell_lists` VALUES ('EarthSpirit_Avatars_Favor',5101,315,37,255); -- enstone_ii (37~255)
+INSERT INTO `mob_spell_lists` VALUES ('EarthSpirit_Avatars_Favor',5101,54,37,255);  -- stoneskin (37~255)
+
+
+-- ThunderSpirit (208)
+INSERT INTO `mob_spell_lists` VALUES ('ThunderSpirit_Avatars_Favor',5102,167,55,255); -- thunder_iv (66~74)
+INSERT INTO `mob_spell_lists` VALUES ('ThunderSpirit_Avatars_Favor',5102,195,55,69);  -- thunderga_ii (77~255)
+INSERT INTO `mob_spell_lists` VALUES ('ThunderSpirit_Avatars_Favor',5102,196,70,255); -- thunderga_iii (75~91)
+INSERT INTO `mob_spell_lists` VALUES ('ThunderSpirit_Avatars_Favor',5102,168,70,255); -- thunder_v (92~255)
+INSERT INTO `mob_spell_lists` VALUES ('ThunderSpirit_Avatars_Favor',5102,212,55,71);  -- burst (56~255)
+INSERT INTO `mob_spell_lists` VALUES ('ThunderSpirit_Avatars_Favor',5102,213,72,255); -- burst ii (56~255)
+INSERT INTO `mob_spell_lists` VALUES ('ThunderSpirit_Avatars_Favor',5102,239,16,50);  -- shock (16~50)
+INSERT INTO `mob_spell_lists` VALUES ('ThunderSpirit_Avatars_Favor',5102,252,37,255); -- stun (37~255)
+INSERT INTO `mob_spell_lists` VALUES ('ThunderSpirit_Avatars_Favor',5102,316,37,255); -- enthunder_ii (37~255)
+INSERT INTO `mob_spell_lists` VALUES ('ThunderSpirit_Avatars_Favor',5102,251,37,255); -- Shock Spikes (37~255)
+INSERT INTO `mob_spell_lists` VALUES ('ThunderSpirit_Avatars_Favor',5102,117,37,255); -- thunderstorm (37~255)
+INSERT INTO `mob_spell_lists` VALUES ('ThunderSpirit_Avatars_Favor',5102,283,37,255); -- ionohelix (37~255)
+
+-- WaterSpirit (209)
+INSERT INTO `mob_spell_lists` VALUES ('WaterSpirit_Avatars_Favor',5103,172,55,255); -- water_iv (55~69)
+INSERT INTO `mob_spell_lists` VALUES ('WaterSpirit_Avatars_Favor',5103,200,55,69);  -- waterga_ii (77~255)
+INSERT INTO `mob_spell_lists` VALUES ('WaterSpirit_Avatars_Favor',5103,201,70,255); -- waterga iii (55~69)
+INSERT INTO `mob_spell_lists` VALUES ('WaterSpirit_Avatars_Favor',5103,173,70,255); -- water_v (70~79)
+INSERT INTO `mob_spell_lists` VALUES ('WaterSpirit_Avatars_Favor',5103,214,55,71);  -- flood (58~255)
+INSERT INTO `mob_spell_lists` VALUES ('WaterSpirit_Avatars_Favor',5103,215,72,255); -- flood ii (58~255)
+INSERT INTO `mob_spell_lists` VALUES ('WaterSpirit_Avatars_Favor',5103,221,42,69);  -- poison_ii (42~255)
+INSERT INTO `mob_spell_lists` VALUES ('WaterSpirit_Avatars_Favor',5103,222,70,255); -- poison_iii (42~255)
+INSERT INTO `mob_spell_lists` VALUES ('WaterSpirit_Avatars_Favor',5103,317,37,255); -- enwater_ii (37~255)
+INSERT INTO `mob_spell_lists` VALUES ('WaterSpirit_Avatars_Favor',5103,279,37,255); -- hydrohelix (37~255)
+INSERT INTO `mob_spell_lists` VALUES ('WaterSpirit_Avatars_Favor',5103,113,37,255); -- rainstorm (37~255)
+
+-- LightSpirit (210)
+INSERT INTO `mob_spell_lists` VALUES ('LightSpirit_Avatars_Favor',5104,1,1,10);     -- cure (1~10)
+INSERT INTO `mob_spell_lists` VALUES ('LightSpirit_Avatars_Favor',5104,2,11,20);    -- cure_ii (11~20)
+INSERT INTO `mob_spell_lists` VALUES ('LightSpirit_Avatars_Favor',5104,3,21,40);    -- cure_iii (21~40)
+INSERT INTO `mob_spell_lists` VALUES ('LightSpirit_Avatars_Favor',5104,4,41,60);    -- cure_iv (41~60)
+INSERT INTO `mob_spell_lists` VALUES ('LightSpirit_Avatars_Favor',5104,5,61,255);   -- cure_v (61~255)
+INSERT INTO `mob_spell_lists` VALUES ('LightSpirit_Avatars_Favor',5104,7,16,30);    -- curaga (16~30)
+INSERT INTO `mob_spell_lists` VALUES ('LightSpirit_Avatars_Favor',5104,8,31,50);    -- curaga_ii (31~50)
+INSERT INTO `mob_spell_lists` VALUES ('LightSpirit_Avatars_Favor',5104,9,51,70);    -- curaga_iii (51~70)
+INSERT INTO `mob_spell_lists` VALUES ('LightSpirit_Avatars_Favor',5104,10,71,255);  -- curaga_iv (71~255)
+INSERT INTO `mob_spell_lists` VALUES ('LightSpirit_Avatars_Favor',5104,21,50,69);   -- holy (50~94)
+INSERT INTO `mob_spell_lists` VALUES ('LightSpirit_Avatars_Favor',5104,22,70,255);  -- holy_ii (95~255)
+INSERT INTO `mob_spell_lists` VALUES ('LightSpirit_Avatars_Favor',5104,23,1,64);    -- dia ii (1~30)
+INSERT INTO `mob_spell_lists` VALUES ('LightSpirit_Avatars_Favor',5104,25,65,255);  -- dia_iii (31~255)
+INSERT INTO `mob_spell_lists` VALUES ('LightSpirit_Avatars_Favor',5104,39,40,64);   -- banishga_ii (30~64)
+INSERT INTO `mob_spell_lists` VALUES ('LightSpirit_Avatars_Favor',5104,40,65,75);   -- banishga_iii (30~64)
+INSERT INTO `mob_spell_lists` VALUES ('LightSpirit_Avatars_Favor',5104,30,50,69);   -- banish_iii (65~89)
+INSERT INTO `mob_spell_lists` VALUES ('LightSpirit_Avatars_Favor',5104,31,70,255);  -- banish_iv (90~255)
+INSERT INTO `mob_spell_lists` VALUES ('LightSpirit_Avatars_Favor',5104,109,37,58);  -- refresh (21~255)
+INSERT INTO `mob_spell_lists` VALUES ('LightSpirit_Avatars_Favor',5104,110,37,55);  -- regen_ii (21~255)
+INSERT INTO `mob_spell_lists` VALUES ('LightSpirit_Avatars_Favor',5104,111,56,74);  -- regen_iii (21~255)
+INSERT INTO `mob_spell_lists` VALUES ('LightSpirit_Avatars_Favor',5104,477,75,255); -- regen_iv (21~255)
+INSERT INTO `mob_spell_lists` VALUES ('LightSpirit_Avatars_Favor',5104,112,37,255); -- flash (37~255)
+INSERT INTO `mob_spell_lists` VALUES ('LightSpirit_Avatars_Favor',5104,285,37,255); -- luminohelix (37~255)
+INSERT INTO `mob_spell_lists` VALUES ('LightSpirit_Avatars_Favor',5104,119,37,255); -- aurorastorm (37~255)
+INSERT INTO `mob_spell_lists` VALUES ('LightSpirit_Avatars_Favor',5104,310,37,255); -- enlight (37~255)
+
+-- DarkSpirit (211)
+INSERT INTO `mob_spell_lists` VALUES ('DarkSpirit_Avatars_Favor',5105,231,35,69);  -- bio_ii (10~69)
+INSERT INTO `mob_spell_lists` VALUES ('DarkSpirit_Avatars_Favor',5105,232,70,255); -- bio_iii (70~255)
+INSERT INTO `mob_spell_lists` VALUES ('DarkSpirit_Avatars_Favor',5105,245,10,61);  -- drain (10~61)
+INSERT INTO `mob_spell_lists` VALUES ('DarkSpirit_Avatars_Favor',5105,246,62,255); -- drain_ii (62~255)
+INSERT INTO `mob_spell_lists` VALUES ('DarkSpirit_Avatars_Favor',5105,247,20,255); -- aspir (20~255)
+INSERT INTO `mob_spell_lists` VALUES ('DarkSpirit_Avatars_Favor',5105,252,37,255); -- stun (37~255)
+INSERT INTO `mob_spell_lists` VALUES ('DarkSpirit_Avatars_Favor',5105,260,32,255); -- dispel (32~255)
+INSERT INTO `mob_spell_lists` VALUES ('DarkSpirit_Avatars_Favor',5105,274,56,255); -- sleepga_ii (56~255)
+INSERT INTO `mob_spell_lists` VALUES ('DarkSpirit_Avatars_Favor',5105,311,50,255); -- endark (50~255)
+INSERT INTO `mob_spell_lists` VALUES ('DarkSpirit_Avatars_Favor',5105,118,37,255); -- voidstorm (37~255)
+INSERT INTO `mob_spell_lists` VALUES ('DarkSpirit_Avatars_Favor',5105,284,37,255); -- noctohelix (37~255)
+INSERT INTO `mob_spell_lists` VALUES ('DarkSpirit_Avatars_Favor',5105,277,37,255); -- dread_spikes (37~255)
+
+
 
 /*!40000 ALTER TABLE `mob_spell_lists` ENABLE KEYS */;
 UNLOCK TABLES;

@@ -51,10 +51,21 @@ xi.settings.map =
     -- If this is the case, consider using the ah_pagination module
     AH_LIST_LIMIT = 7,
 
+    -- The total enmity cap for a given entity on the enmity table.
+    -- 30,000 is believed to be approximately current retail cap.
+    -- This directly affects a tank's ability to hold enmity over time.
+    -- The lower the value, the faster damage dealers will reach the cap and the mob will bounce.
+    ENMITY_CAP = 30000,
+
     -- Misc EXP related settings
     EXP_RATE                = 2.0,
     EXP_LOSS_RATE           = 1.0,
     EXP_PARTY_GAP_PENALTIES = true,
+
+    -- A party member's experience points are nullified if the level difference with the highest-level party member exceeds this value.
+    -- When set to 0, there is no nullification of EXP regardless of how wide the gap is between party members.
+    -- When set to 10, if you are level 65 or below in a party with a level 75, you will receive no EXP.
+    EXP_PARTY_GAP_NO_EXP = 0,
 
     -- Capacity Point Settings
     CAPACITY_RATE = 2.0,
@@ -171,10 +182,11 @@ xi.settings.map =
     INCLUDE_MOB_SJ = true,
 
     -- Adjust base stats (str/vit/etc.) for NMs, regular mobs, players, and trusts/fellows. Acts as a multiplier, so default is 1.
-    NM_STAT_MULTIPLIER        = 1.0,
-    MOB_STAT_MULTIPLIER       = 1.0,
-    PLAYER_STAT_MULTIPLIER    = 1.0,
-    ALTER_EGO_STAT_MULTIPLIER = 1.0,
+    NM_STAT_MULTIPLIER          = 1.0,
+    MOB_STAT_MULTIPLIER         = 1.0,
+    PLAYER_STAT_MULTIPLIER      = 1.0, -- All stats.
+    PLAYER_BASE_STAT_MULTIPLIER = 1.0, -- Only base stats from Jobs/Subjobs.
+    ALTER_EGO_STAT_MULTIPLIER   = 1.0,
 
     -- Adjust skill caps for trusts/fellows. Acts as a multiplier, so default is 1.
     ALTER_EGO_SKILL_MULTIPLIER = 1.0,

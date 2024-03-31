@@ -7,15 +7,27 @@
 local mobskillObject = {}
 
 mobskillObject.onMobSkillCheck = function(target, mob, skill)
-    return 0
+    if mob:hasStatusEffect(xi.effect.BLINDNESS) then
+        return 1
+    else
+        return 0
+    end
 end
 
 mobskillObject.onMobWeaponSkill = function(target, mob, skill)
-    local typeEffect = xi.effect.SILENCE
+    local duration = 120
+    local master = mob:getMaster()
+    local skillID = skill:getID()
+    if mob:isPet() then
+        if master and master:isJugPet() then
+            local tp = skill:getTP()
+            duration = 260
+            duration = math.max(110, duration * (tp/1000)) -- Minimum 1:50 minutes. Maximum 13 minutes.
+        end
+    end
+    skill:setMsg(xi.mobskills.mobGazeMove(mob, target, xi.effect.SILENCE, 1, 0, duration))
 
-    skill:setMsg(xi.mobskills.mobGazeMove(mob, target, typeEffect, 1, 0, 120))
-
-    return typeEffect
+    return xi.effect.SILENCE
 end
 
 return mobskillObject

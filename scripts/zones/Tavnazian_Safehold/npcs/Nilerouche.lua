@@ -18,8 +18,8 @@ entity.onTrigger = function(player, npc)
         688,      20,    -- Arrowwood Log
         690,    7800,    -- Elm Log
         2871,  10000,    -- Safehold Waystone
-        4913, 175827,    -- Scroll of Distract II
-        4915, 217000,    -- Scroll of Frazzle II
+        -- 4913, 175827,    -- Scroll of Distract II
+        -- 4915, 217000,    -- Scroll of Frazzle II
     }
 
     if player:getCurrentMission(xi.mission.log_id.COP) >= xi.mission.id.cop.SHELTERING_DOUBT then
@@ -31,8 +31,8 @@ entity.onTrigger = function(player, npc)
             690,    7800,    -- Elm Log
             4638,  66000,    -- Banish III
             2871,  10000,    -- Safehold Waystone
-            4913, 175827,    -- Scroll of Distract II
-            4915, 217000,    -- Scroll of Frazzle II
+            -- 4913, 175827,    -- Scroll of Distract II
+            -- 4915, 217000,    -- Scroll of Frazzle II
         }
     end
 

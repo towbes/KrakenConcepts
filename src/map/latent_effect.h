@@ -54,7 +54,7 @@ enum class LATENT : uint16
     AVATAR_IN_PARTY        = 21, // party has a specific avatar - PARAM: same as globals/pets.lua (21 for any avatar)
     JOB_IN_PARTY           = 22, // party has job - PARAM: JOBTYPE
     ZONE                   = 23, // in zone - PARAM: zoneid
-    SYNTH_TRAINEE          = 24, // synth skill under 40 + no support
+    SYNTH_TRAINEE          = 24, // synth skill under 40 + no support: PARAM: 48: FISH, 49: WOOD, 50: SMITH, 51: GOLDSMITH, 52: CLOTH, 53: LEATHER, 54: BONE, 55: ALCHEMY, 56: COOKING
     SONG_ROLL_ACTIVE       = 25, // any song or roll active
     TIME_OF_DAY            = 26, // PARAM: 0: DAYTIME 1: NIGHTTIME 2: DUSK-DAWN
     HOUR_OF_DAY            = 27, // PARAM: 1: NEW DAY, 2: DAWN, 3: DAY, 4: DUSK, 5: EVENING, 6: DEAD OF NIGHT
@@ -73,7 +73,7 @@ enum class LATENT : uint16
     // 41 free to use
     // 42 free to use
     WEAPON_DRAWN_HP_UNDER = 43, // PARAM: HP PERCENT
-    // 44 free to use
+    NATION_CITIZEN        = 44, // Triggered by player being citizen of nation matching param: 0 San d'Oria, 1 Bastok, 2 Windurst
     MP_UNDER_VISIBLE_GEAR = 45, // mp less than or equal to %, calculated using MP bonuses from visible gear only
     HP_OVER_VISIBLE_GEAR  = 46, // hp more than or equal to %, calculated using HP bonuses from visible gear only
     WEAPON_BROKEN         = 47, //

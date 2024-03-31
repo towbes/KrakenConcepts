@@ -20,7 +20,7 @@ entity.onMobSpawn = function(mob)
     mob:setAutoAttackEnabled(false)
 end
 
-entity.onMobEngaged = function(mob, target)
+entity.onMobEngage = function(mob, target)
     local battlefield = mob:getBattlefield()
     local bfID = battlefield:getArea()
     SpawnMob(ID.pullingThePlug[bfID].GREEN_ID):updateEnmity(target)

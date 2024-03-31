@@ -124,7 +124,35 @@ CMobEntity::CMobEntity()
     PEnmityContainer     = new CEnmityContainer(this);
     SpellContainer       = new CMobSpellContainer(this);
 
+    m_Weapons[SLOT_MAIN]   = new CItemWeapon(0);
+    m_Weapons[SLOT_SUB]    = new CItemWeapon(0);
+    m_Weapons[SLOT_RANGED] = new CItemWeapon(0);
+    m_Weapons[SLOT_AMMO]   = new CItemWeapon(0);
+
     PAI = std::make_unique<CAIContainer>(this, std::make_unique<CPathFind>(this), std::make_unique<CMobController>(this), std::make_unique<CTargetFind>(this));
+}
+
+CMobEntity::~CMobEntity()
+{
+    TracyZoneScoped;
+    destroy(m_Weapons[SLOT_MAIN]);
+    destroy(m_Weapons[SLOT_SUB]);
+    destroy(m_Weapons[SLOT_RANGED]);
+    destroy(m_Weapons[SLOT_AMMO]);
+    destroy(PEnmityContainer);
+    destroy(SpellContainer);
+
+    if (PParty)
+    {
+        if (PParty->HasOnlyOneMember())
+        {
+            destroy(PParty);
+        }
+        else
+        {
+            PParty->DelMember(this);
+        }
+    }
 }
 
 uint32 CMobEntity::getEntityFlags() const
@@ -135,12 +163,6 @@ uint32 CMobEntity::getEntityFlags() const
 void CMobEntity::setEntityFlags(uint32 EntityFlags)
 {
     m_flags = EntityFlags;
-}
-
-CMobEntity::~CMobEntity()
-{
-    destroy(PEnmityContainer);
-    destroy(SpellContainer);
 }
 
 /************************************************************************
@@ -372,6 +394,12 @@ uint16 CMobEntity::TPUseChance()
         return 10000;
     }
 
+    // mobs use three mob skills in a row under Meikyo Shisui
+    if (StatusEffectContainer->HasStatusEffect(EFFECT_MEIKYO_SHISUI) && GetLocalVar("[MeikyoShisui]MobSkillCount") > 0)
+    {
+        return 10000;
+    }
+
     return (uint16)getMobMod(MOBMOD_TP_USE_CHANCE);
 }
 
@@ -475,6 +503,7 @@ bool CMobEntity::GetUntargetable() const
 
 void CMobEntity::PostTick()
 {
+    TracyZoneScoped;
     CBattleEntity::PostTick();
     std::chrono::steady_clock::time_point now = std::chrono::steady_clock::now();
     if (loc.zone && updatemask && now > m_nextUpdateTimer)
@@ -1076,7 +1105,7 @@ void CMobEntity::OnEngage(CAttackState& state)
 {
     TracyZoneScoped;
     CBattleEntity::OnEngage(state);
-    luautils::OnMobEngaged(this, state.GetTarget());
+    luautils::OnMobEngage(this, state.GetTarget());
     unsigned int range = this->getMobMod(MOBMOD_ALLI_HATE);
     if (range != 0)
     {

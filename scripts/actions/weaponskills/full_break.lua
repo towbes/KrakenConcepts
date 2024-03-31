@@ -20,30 +20,34 @@ local weaponskillObject = {}
 weaponskillObject.onUseWeaponSkill = function(player, target, wsID, tp, primary, action, taChar)
     local params = {}
     params.numHits = 1
-    params.ftp100 = 1.25 params.ftp200 = 1.25 params.ftp300 = 1.25
-    params.str_wsc = 0.5 params.dex_wsc = 0.0 params.vit_wsc = 0.5 params.agi_wsc = 0.0 params.int_wsc = 0.0 params.mnd_wsc = 0.0 params.chr_wsc = 0.0
-    params.crit100 = 0.0 params.crit200 = 0.0 params.crit300 = 0.0
-    params.canCrit = false
-    params.acc100 = 0.0 params.acc200 = 0.0 params.acc300 = 0.0
-    params.atk100 = 1 params.atk200 = 1 params.atk300 = 1
+    params.ftpMod = { 1.25, 1.25, 1.25 }
+    -- params.ftpMod = { 1.0, 1.0, 1.0 }
+    params.str_wsc = 0.5 params.vit_wsc = 0.5
     local damage, criticalHit, tpHits, extraHits = xi.weaponskills.doPhysicalWeaponskill(player, target, wsID, params, tp, action, primary, taChar)
 
     if damage > 0 then
         local duration = (tp / 1000 * 30) + 60
+
+        -- TODO: Table effects, value, and element and loop
+
         if not target:hasStatusEffect(xi.effect.DEFENSE_DOWN) then
             target:addStatusEffect(xi.effect.DEFENSE_DOWN, 12.5, 0, duration * applyResistanceAddEffect(player, target, xi.element.WIND, 0))
+            player:messagePublic(xi.msg.basic.SKILL_ENFEEB, target, wsID, xi.effect.DEFENSE_DOWN)
         end
 
         if not target:hasStatusEffect(xi.effect.ATTACK_DOWN) then
             target:addStatusEffect(xi.effect.ATTACK_DOWN, 12.5, 0, duration * applyResistanceAddEffect(player, target, xi.element.WATER, 0))
+            player:messagePublic(xi.msg.basic.SKILL_ENFEEB, target, wsID, xi.effect.ATTACK_DOWN)
         end
 
         if not target:hasStatusEffect(xi.effect.EVASION_DOWN) then
             target:addStatusEffect(xi.effect.EVASION_DOWN, 20, 0, duration * applyResistanceAddEffect(player, target, xi.element.ICE, 0))
+            player:messagePublic(xi.msg.basic.SKILL_ENFEEB, target, wsID, xi.effect.EVASION_DOWN)
         end
 
         if not target:hasStatusEffect(xi.effect.ACCURACY_DOWN) then
             target:addStatusEffect(xi.effect.ACCURACY_DOWN, 20, 0, duration * applyResistanceAddEffect(player, target, xi.element.EARTH, 0))
+            player:messagePublic(xi.msg.basic.SKILL_ENFEEB, target, wsID, xi.effect.ACCURACY_DOWN)
         end
     end
 

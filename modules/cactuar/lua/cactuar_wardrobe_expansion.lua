@@ -75,7 +75,7 @@ page1 =
         function(playerArg)
             local remaining = 80 - container.wardrobe5.size
             if remaining < 5 then
-                playerArg:PrintToPlayer('Mog Wardrobe 5 is already fully expanded.', xi.msg.channel.SYSTEM_3)
+                playerArg:printToPlayer('Mog Wardrobe 5 is already fully expanded.', xi.msg.channel.SYSTEM_3)
                 menu.options = page1
                 delaySendMenu(playerArg) 
             else
@@ -90,7 +90,7 @@ page1 =
         function(playerArg)
             local remaining = 80 - container.wardrobe6.size
             if remaining < 5 then
-                playerArg:PrintToPlayer('Mog Wardrobe 6 is already fully expanded.', xi.msg.channel.SYSTEM_3) 
+                playerArg:printToPlayer('Mog Wardrobe 6 is already fully expanded.', xi.msg.channel.SYSTEM_3) 
                 menu.options = page1
                 delaySendMenu(playerArg)
             else
@@ -105,7 +105,7 @@ page1 =
         function(playerArg)
             local remaining = 80 - container.wardrobe7.size
             if remaining < 5 then
-                playerArg:PrintToPlayer('Mog Wardrobe 7 is already fully expanded', xi.msg.channel.SYSTEM_3)
+                playerArg:printToPlayer('Mog Wardrobe 7 is already fully expanded', xi.msg.channel.SYSTEM_3)
                 menu.options = page1
                 delaySendMenu(playerArg) 
             else
@@ -120,7 +120,7 @@ page1 =
         function(playerArg)
             local remaining = 80 - container.wardrobe8.size
             if remaining < 5 then
-                playerArg:PrintToPlayer('Mog Wardrobe 8 is already fully expanded', xi.msg.channel.SYSTEM_3)
+                playerArg:printToPlayer('Mog Wardrobe 8 is already fully expanded', xi.msg.channel.SYSTEM_3)
                 menu.options = page1
                 delaySendMenu(playerArg) 
             else
@@ -148,7 +148,7 @@ page2 =
             quantity = 5
             price = quantity * container.wardrobe5.price
 
-            playerArg:PrintToPlayer('Mooglin : Expand your Mog House 5 by ' .. quantity .. ' slots for ' .. StringifyPrice(price) .. ' gil?' , xi.msg.channel.NS_SAY)
+            playerArg:printToPlayer('Mooglin : Expand your Mog House 5 by ' .. quantity .. ' slots for ' .. StringifyPrice(price) .. ' gil?' , xi.msg.channel.NS_SAY)
             menu.options = page6
             delaySendMenu(playerArg)
         end,
@@ -160,7 +160,7 @@ page2 =
             quantity = 80 - container.wardrobe5.size
             price = quantity * container.wardrobe5.price
 
-            playerArg:PrintToPlayer('Mooglin : Expand your Mog House 5 by ' .. quantity .. ' slots for ' .. StringifyPrice(price) .. ' gil?' , xi.msg.channel.NS_SAY)
+            playerArg:printToPlayer('Mooglin : Expand your Mog House 5 by ' .. quantity .. ' slots for ' .. StringifyPrice(price) .. ' gil?' , xi.msg.channel.NS_SAY)
             menu.options = page6
             delaySendMenu(playerArg)
         end,
@@ -184,7 +184,7 @@ page3 =
             quantity = 5
             price = quantity * container.wardrobe6.price
 
-            playerArg:PrintToPlayer('Mooglin : Expand your Mog House 6 by ' .. quantity .. ' slots for ' .. StringifyPrice(price) .. ' gil?' , xi.msg.channel.NS_SAY)
+            playerArg:printToPlayer('Mooglin : Expand your Mog House 6 by ' .. quantity .. ' slots for ' .. StringifyPrice(price) .. ' gil?' , xi.msg.channel.NS_SAY)
             menu.options = page7
             delaySendMenu(playerArg)
         end,
@@ -196,7 +196,7 @@ page3 =
             quantity = 80 - container.wardrobe6.size
             price = quantity * container.wardrobe6.price
 
-            playerArg:PrintToPlayer('Mooglin : Expand your Mog House 6 by ' .. quantity .. ' slots for ' .. StringifyPrice(price) .. ' gil?' , xi.msg.channel.NS_SAY)
+            playerArg:printToPlayer('Mooglin : Expand your Mog House 6 by ' .. quantity .. ' slots for ' .. StringifyPrice(price) .. ' gil?' , xi.msg.channel.NS_SAY)
             menu.options = page7
             delaySendMenu(playerArg)
         end,
@@ -220,7 +220,7 @@ page4 =
             quantity = 5
             price = quantity * container.wardrobe7.price
 
-            playerArg:PrintToPlayer('Mooglin : Expand your Mog House 7 by ' .. quantity .. ' slots for ' .. StringifyPrice(price) .. ' gil?' , xi.msg.channel.NS_SAY)
+            playerArg:printToPlayer('Mooglin : Expand your Mog House 7 by ' .. quantity .. ' slots for ' .. StringifyPrice(price) .. ' gil?' , xi.msg.channel.NS_SAY)
             menu.options = page8
             delaySendMenu(playerArg)
         end,
@@ -232,7 +232,7 @@ page4 =
             quantity = 80 - container.wardrobe7.size
             price = quantity * container.wardrobe7.price
 
-            playerArg:PrintToPlayer('Mooglin : Expand your Mog House 7 by ' .. quantity .. ' slots for ' .. StringifyPrice(price) .. ' gil?' , xi.msg.channel.NS_SAY)
+            playerArg:printToPlayer('Mooglin : Expand your Mog House 7 by ' .. quantity .. ' slots for ' .. StringifyPrice(price) .. ' gil?' , xi.msg.channel.NS_SAY)
             menu.options = page8
             delaySendMenu(playerArg)
         end,
@@ -256,7 +256,7 @@ page5 =
             quantity = 5
             price = quantity * container.wardrobe8.price
 
-            playerArg:PrintToPlayer('Mooglin : Expand your Mog House 8 by ' .. quantity .. ' slots for ' .. StringifyPrice(price) .. ' gil?' , xi.msg.channel.NS_SAY)
+            playerArg:printToPlayer('Mooglin : Expand your Mog House 8 by ' .. quantity .. ' slots for ' .. StringifyPrice(price) .. ' gil?' , xi.msg.channel.NS_SAY)
             menu.options = page9
             delaySendMenu(playerArg)
         end,
@@ -268,7 +268,7 @@ page5 =
             quantity = 80 - container.wardrobe8.size
             price = quantity * container.wardrobe8.price
 
-            playerArg:PrintToPlayer('Mooglin : Expand your Mog House 8 by ' .. quantity .. ' slots for ' .. StringifyPrice(price) .. ' gil?' , xi.msg.channel.NS_SAY)
+            playerArg:printToPlayer('Mooglin : Expand your Mog House 8 by ' .. quantity .. ' slots for ' .. StringifyPrice(price) .. ' gil?' , xi.msg.channel.NS_SAY)
             menu.options = page9
             delaySendMenu(playerArg)
         end,
@@ -293,9 +293,9 @@ page6 =
             if playerArg:getGil() >= price then
                 player:delGil(price)
                 playerArg:changeContainerSize(xi.inv.WARDROBE5, quantity)
-                playerArg:PrintToPlayer('Mog Wardrobe 5 increased by ' .. quantity .. ' slots.', xi.msg.channel.SYSTEM_3)
+                playerArg:printToPlayer('Mog Wardrobe 5 increased by ' .. quantity .. ' slots.', xi.msg.channel.SYSTEM_3)
             else
-                playerArg:PrintToPlayer('You do not have enough gil. ', xi.msg.channel.SYSTEM_3)
+                playerArg:printToPlayer('You do not have enough gil. ', xi.msg.channel.SYSTEM_3)
             end
         end,
     },
@@ -316,9 +316,9 @@ page7 =
             if playerArg:getGil() >= price then
                 player:delGil(price)
                 playerArg:changeContainerSize(xi.inv.WARDROBE6, quantity)
-                playerArg:PrintToPlayer('Mog Wardrobe 6 increased by ' .. quantity .. ' slots.', xi.msg.channel.SYSTEM_3)
+                playerArg:printToPlayer('Mog Wardrobe 6 increased by ' .. quantity .. ' slots.', xi.msg.channel.SYSTEM_3)
             else
-                playerArg:PrintToPlayer('You do not have enough gil. ', xi.msg.channel.SYSTEM_3)
+                playerArg:printToPlayer('You do not have enough gil. ', xi.msg.channel.SYSTEM_3)
             end
         end,
     },
@@ -339,9 +339,9 @@ page8 =
             if playerArg:getGil() >= price then
                 player:delGil(price)
                 playerArg:changeContainerSize(xi.inv.WARDROBE7, quantity)
-                playerArg:PrintToPlayer('Mog Wardrobe 7 increased by ' .. quantity .. ' slots.', xi.msg.channel.SYSTEM_3)
+                playerArg:printToPlayer('Mog Wardrobe 7 increased by ' .. quantity .. ' slots.', xi.msg.channel.SYSTEM_3)
             else
-                playerArg:PrintToPlayer('You do not have enough gil. ', xi.msg.channel.SYSTEM_3)
+                playerArg:printToPlayer('You do not have enough gil. ', xi.msg.channel.SYSTEM_3)
             end
         end,
     },
@@ -362,9 +362,9 @@ page9 =
             if playerArg:getGil() >= price then
                 player:delGil(price)
                 playerArg:changeContainerSize(xi.inv.WARDROBE8, quantity)
-                playerArg:PrintToPlayer('Mog Wardrobe 8 increased by ' .. quantity .. ' slots.', xi.msg.channel.SYSTEM_3)
+                playerArg:printToPlayer('Mog Wardrobe 8 increased by ' .. quantity .. ' slots.', xi.msg.channel.SYSTEM_3)
             else
-                playerArg:PrintToPlayer('You do not have enough gil. ', xi.msg.channel.SYSTEM_3)
+                playerArg:printToPlayer('You do not have enough gil. ', xi.msg.channel.SYSTEM_3)
             end
         end,
     },
@@ -455,7 +455,7 @@ page1 =
         function(playerArg)
             local remaining = 80 - container.wardrobe5.size
             if remaining < 5 then
-                playerArg:PrintToPlayer('Mog Wardrobe 5 is already fully expanded.', xi.msg.channel.SYSTEM_3)
+                playerArg:printToPlayer('Mog Wardrobe 5 is already fully expanded.', xi.msg.channel.SYSTEM_3)
                 menu.options = page1
                 delaySendMenu(playerArg) 
             else
@@ -470,7 +470,7 @@ page1 =
         function(playerArg)
             local remaining = 80 - container.wardrobe6.size
             if remaining < 5 then
-                playerArg:PrintToPlayer('Mog Wardrobe 6 is already fully expanded.', xi.msg.channel.SYSTEM_3) 
+                playerArg:printToPlayer('Mog Wardrobe 6 is already fully expanded.', xi.msg.channel.SYSTEM_3) 
                 menu.options = page1
                 delaySendMenu(playerArg)
             else
@@ -485,7 +485,7 @@ page1 =
         function(playerArg)
             local remaining = 80 - container.wardrobe7.size
             if remaining < 5 then
-                playerArg:PrintToPlayer('Mog Wardrobe 7 is already fully expanded', xi.msg.channel.SYSTEM_3)
+                playerArg:printToPlayer('Mog Wardrobe 7 is already fully expanded', xi.msg.channel.SYSTEM_3)
                 menu.options = page1
                 delaySendMenu(playerArg) 
             else
@@ -500,7 +500,7 @@ page1 =
         function(playerArg)
             local remaining = 80 - container.wardrobe8.size
             if remaining < 5 then
-                playerArg:PrintToPlayer('Mog Wardrobe 8 is already fully expanded', xi.msg.channel.SYSTEM_3)
+                playerArg:printToPlayer('Mog Wardrobe 8 is already fully expanded', xi.msg.channel.SYSTEM_3)
                 menu.options = page1
                 delaySendMenu(playerArg) 
             else
@@ -528,7 +528,7 @@ page2 =
             quantity = 5
             price = quantity * container.wardrobe5.price
 
-            playerArg:PrintToPlayer('Mooglin : Expand your Mog House 5 by ' .. quantity .. ' slots for ' .. StringifyPrice(price) .. ' gil?' , xi.msg.channel.NS_SAY)
+            playerArg:printToPlayer('Mooglin : Expand your Mog House 5 by ' .. quantity .. ' slots for ' .. StringifyPrice(price) .. ' gil?' , xi.msg.channel.NS_SAY)
             menu.options = page6
             delaySendMenu(playerArg)
         end,
@@ -540,7 +540,7 @@ page2 =
             quantity = 80 - container.wardrobe5.size
             price = quantity * container.wardrobe5.price
 
-            playerArg:PrintToPlayer('Mooglin : Expand your Mog House 5 by ' .. quantity .. ' slots for ' .. StringifyPrice(price) .. ' gil?' , xi.msg.channel.NS_SAY)
+            playerArg:printToPlayer('Mooglin : Expand your Mog House 5 by ' .. quantity .. ' slots for ' .. StringifyPrice(price) .. ' gil?' , xi.msg.channel.NS_SAY)
             menu.options = page6
             delaySendMenu(playerArg)
         end,
@@ -564,7 +564,7 @@ page3 =
             quantity = 5
             price = quantity * container.wardrobe6.price
 
-            playerArg:PrintToPlayer('Mooglin : Expand your Mog House 6 by ' .. quantity .. ' slots for ' .. StringifyPrice(price) .. ' gil?' , xi.msg.channel.NS_SAY)
+            playerArg:printToPlayer('Mooglin : Expand your Mog House 6 by ' .. quantity .. ' slots for ' .. StringifyPrice(price) .. ' gil?' , xi.msg.channel.NS_SAY)
             menu.options = page7
             delaySendMenu(playerArg)
         end,
@@ -576,7 +576,7 @@ page3 =
             quantity = 80 - container.wardrobe6.size
             price = quantity * container.wardrobe6.price
 
-            playerArg:PrintToPlayer('Mooglin : Expand your Mog House 6 by ' .. quantity .. ' slots for ' .. StringifyPrice(price) .. ' gil?' , xi.msg.channel.NS_SAY)
+            playerArg:printToPlayer('Mooglin : Expand your Mog House 6 by ' .. quantity .. ' slots for ' .. StringifyPrice(price) .. ' gil?' , xi.msg.channel.NS_SAY)
             menu.options = page7
             delaySendMenu(playerArg)
         end,
@@ -600,7 +600,7 @@ page4 =
             quantity = 5
             price = quantity * container.wardrobe7.price
 
-            playerArg:PrintToPlayer('Mooglin : Expand your Mog House 7 by ' .. quantity .. ' slots for ' .. StringifyPrice(price) .. ' gil?' , xi.msg.channel.NS_SAY)
+            playerArg:printToPlayer('Mooglin : Expand your Mog House 7 by ' .. quantity .. ' slots for ' .. StringifyPrice(price) .. ' gil?' , xi.msg.channel.NS_SAY)
             menu.options = page8
             delaySendMenu(playerArg)
         end,
@@ -612,7 +612,7 @@ page4 =
             quantity = 80 - container.wardrobe7.size
             price = quantity * container.wardrobe7.price
 
-            playerArg:PrintToPlayer('Mooglin : Expand your Mog House 7 by ' .. quantity .. ' slots for ' .. StringifyPrice(price) .. ' gil?' , xi.msg.channel.NS_SAY)
+            playerArg:printToPlayer('Mooglin : Expand your Mog House 7 by ' .. quantity .. ' slots for ' .. StringifyPrice(price) .. ' gil?' , xi.msg.channel.NS_SAY)
             menu.options = page8
             delaySendMenu(playerArg)
         end,
@@ -636,7 +636,7 @@ page5 =
             quantity = 5
             price = quantity * container.wardrobe8.price
 
-            playerArg:PrintToPlayer('Mooglin : Expand your Mog House 8 by ' .. quantity .. ' slots for ' .. StringifyPrice(price) .. ' gil?' , xi.msg.channel.NS_SAY)
+            playerArg:printToPlayer('Mooglin : Expand your Mog House 8 by ' .. quantity .. ' slots for ' .. StringifyPrice(price) .. ' gil?' , xi.msg.channel.NS_SAY)
             menu.options = page9
             delaySendMenu(playerArg)
         end,
@@ -648,7 +648,7 @@ page5 =
             quantity = 80 - container.wardrobe8.size
             price = quantity * container.wardrobe8.price
 
-            playerArg:PrintToPlayer('Mooglin : Expand your Mog House 8 by ' .. quantity .. ' slots for ' .. StringifyPrice(price) .. ' gil?' , xi.msg.channel.NS_SAY)
+            playerArg:printToPlayer('Mooglin : Expand your Mog House 8 by ' .. quantity .. ' slots for ' .. StringifyPrice(price) .. ' gil?' , xi.msg.channel.NS_SAY)
             menu.options = page9
             delaySendMenu(playerArg)
         end,
@@ -673,9 +673,9 @@ page6 =
             if playerArg:getGil() >= price then
                 player:delGil(price)
                 playerArg:changeContainerSize(xi.inv.WARDROBE5, quantity)
-                playerArg:PrintToPlayer('Mog Wardrobe 5 increased by ' .. quantity .. ' slots.', xi.msg.channel.SYSTEM_3)
+                playerArg:printToPlayer('Mog Wardrobe 5 increased by ' .. quantity .. ' slots.', xi.msg.channel.SYSTEM_3)
             else
-                playerArg:PrintToPlayer('You do not have enough gil. ', xi.msg.channel.SYSTEM_3)
+                playerArg:printToPlayer('You do not have enough gil. ', xi.msg.channel.SYSTEM_3)
             end
         end,
     },
@@ -696,9 +696,9 @@ page7 =
             if playerArg:getGil() >= price then
                 player:delGil(price)
                 playerArg:changeContainerSize(xi.inv.WARDROBE6, quantity)
-                playerArg:PrintToPlayer('Mog Wardrobe 6 increased by ' .. quantity .. ' slots.', xi.msg.channel.SYSTEM_3)
+                playerArg:printToPlayer('Mog Wardrobe 6 increased by ' .. quantity .. ' slots.', xi.msg.channel.SYSTEM_3)
             else
-                playerArg:PrintToPlayer('You do not have enough gil. ', xi.msg.channel.SYSTEM_3)
+                playerArg:printToPlayer('You do not have enough gil. ', xi.msg.channel.SYSTEM_3)
             end
         end,
     },
@@ -719,9 +719,9 @@ page8 =
             if playerArg:getGil() >= price then
                 player:delGil(price)
                 playerArg:changeContainerSize(xi.inv.WARDROBE7, quantity)
-                playerArg:PrintToPlayer('Mog Wardrobe 7 increased by ' .. quantity .. ' slots.', xi.msg.channel.SYSTEM_3)
+                playerArg:printToPlayer('Mog Wardrobe 7 increased by ' .. quantity .. ' slots.', xi.msg.channel.SYSTEM_3)
             else
-                playerArg:PrintToPlayer('You do not have enough gil. ', xi.msg.channel.SYSTEM_3)
+                playerArg:printToPlayer('You do not have enough gil. ', xi.msg.channel.SYSTEM_3)
             end
         end,
     },
@@ -742,9 +742,9 @@ page9 =
             if playerArg:getGil() >= price then
                 player:delGil(price)
                 playerArg:changeContainerSize(xi.inv.WARDROBE8, quantity)
-                playerArg:PrintToPlayer('Mog Wardrobe 8 increased by ' .. quantity .. ' slots.', xi.msg.channel.SYSTEM_3)
+                playerArg:printToPlayer('Mog Wardrobe 8 increased by ' .. quantity .. ' slots.', xi.msg.channel.SYSTEM_3)
             else
-                playerArg:PrintToPlayer('You do not have enough gil. ', xi.msg.channel.SYSTEM_3)
+                playerArg:printToPlayer('You do not have enough gil. ', xi.msg.channel.SYSTEM_3)
             end
         end,
     },
@@ -835,7 +835,7 @@ page1 =
         function(playerArg)
             local remaining = 80 - container.wardrobe5.size
             if remaining < 5 then
-                playerArg:PrintToPlayer('Mog Wardrobe 5 is already fully expanded.', xi.msg.channel.SYSTEM_3)
+                playerArg:printToPlayer('Mog Wardrobe 5 is already fully expanded.', xi.msg.channel.SYSTEM_3)
                 menu.options = page1
                 delaySendMenu(playerArg) 
             else
@@ -850,7 +850,7 @@ page1 =
         function(playerArg)
             local remaining = 80 - container.wardrobe6.size
             if remaining < 5 then
-                playerArg:PrintToPlayer('Mog Wardrobe 6 is already fully expanded.', xi.msg.channel.SYSTEM_3) 
+                playerArg:printToPlayer('Mog Wardrobe 6 is already fully expanded.', xi.msg.channel.SYSTEM_3) 
                 menu.options = page1
                 delaySendMenu(playerArg)
             else
@@ -865,7 +865,7 @@ page1 =
         function(playerArg)
             local remaining = 80 - container.wardrobe7.size
             if remaining < 5 then
-                playerArg:PrintToPlayer('Mog Wardrobe 7 is already fully expanded', xi.msg.channel.SYSTEM_3)
+                playerArg:printToPlayer('Mog Wardrobe 7 is already fully expanded', xi.msg.channel.SYSTEM_3)
                 menu.options = page1
                 delaySendMenu(playerArg) 
             else
@@ -880,7 +880,7 @@ page1 =
         function(playerArg)
             local remaining = 80 - container.wardrobe8.size
             if remaining < 5 then
-                playerArg:PrintToPlayer('Mog Wardrobe 8 is already fully expanded', xi.msg.channel.SYSTEM_3)
+                playerArg:printToPlayer('Mog Wardrobe 8 is already fully expanded', xi.msg.channel.SYSTEM_3)
                 menu.options = page1
                 delaySendMenu(playerArg) 
             else
@@ -908,7 +908,7 @@ page2 =
             quantity = 5
             price = quantity * container.wardrobe5.price
 
-            playerArg:PrintToPlayer('Mooglin : Expand your Mog House 5 by ' .. quantity .. ' slots for ' .. StringifyPrice(price) .. ' gil?' , xi.msg.channel.NS_SAY)
+            playerArg:printToPlayer('Mooglin : Expand your Mog House 5 by ' .. quantity .. ' slots for ' .. StringifyPrice(price) .. ' gil?' , xi.msg.channel.NS_SAY)
             menu.options = page6
             delaySendMenu(playerArg)
         end,
@@ -920,7 +920,7 @@ page2 =
             quantity = 80 - container.wardrobe5.size
             price = quantity * container.wardrobe5.price
 
-            playerArg:PrintToPlayer('Mooglin : Expand your Mog House 5 by ' .. quantity .. ' slots for ' .. StringifyPrice(price) .. ' gil?' , xi.msg.channel.NS_SAY)
+            playerArg:printToPlayer('Mooglin : Expand your Mog House 5 by ' .. quantity .. ' slots for ' .. StringifyPrice(price) .. ' gil?' , xi.msg.channel.NS_SAY)
             menu.options = page6
             delaySendMenu(playerArg)
         end,
@@ -944,7 +944,7 @@ page3 =
             quantity = 5
             price = quantity * container.wardrobe6.price
 
-            playerArg:PrintToPlayer('Mooglin : Expand your Mog House 6 by ' .. quantity .. ' slots for ' .. StringifyPrice(price) .. ' gil?' , xi.msg.channel.NS_SAY)
+            playerArg:printToPlayer('Mooglin : Expand your Mog House 6 by ' .. quantity .. ' slots for ' .. StringifyPrice(price) .. ' gil?' , xi.msg.channel.NS_SAY)
             menu.options = page7
             delaySendMenu(playerArg)
         end,
@@ -956,7 +956,7 @@ page3 =
             quantity = 80 - container.wardrobe6.size
             price = quantity * container.wardrobe6.price
 
-            playerArg:PrintToPlayer('Mooglin : Expand your Mog House 6 by ' .. quantity .. ' slots for ' .. StringifyPrice(price) .. ' gil?' , xi.msg.channel.NS_SAY)
+            playerArg:printToPlayer('Mooglin : Expand your Mog House 6 by ' .. quantity .. ' slots for ' .. StringifyPrice(price) .. ' gil?' , xi.msg.channel.NS_SAY)
             menu.options = page7
             delaySendMenu(playerArg)
         end,
@@ -980,7 +980,7 @@ page4 =
             quantity = 5
             price = quantity * container.wardrobe7.price
 
-            playerArg:PrintToPlayer('Mooglin : Expand your Mog House 7 by ' .. quantity .. ' slots for ' .. StringifyPrice(price) .. ' gil?' , xi.msg.channel.NS_SAY)
+            playerArg:printToPlayer('Mooglin : Expand your Mog House 7 by ' .. quantity .. ' slots for ' .. StringifyPrice(price) .. ' gil?' , xi.msg.channel.NS_SAY)
             menu.options = page8
             delaySendMenu(playerArg)
         end,
@@ -992,7 +992,7 @@ page4 =
             quantity = 80 - container.wardrobe7.size
             price = quantity * container.wardrobe7.price
 
-            playerArg:PrintToPlayer('Mooglin : Expand your Mog House 7 by ' .. quantity .. ' slots for ' .. StringifyPrice(price) .. ' gil?' , xi.msg.channel.NS_SAY)
+            playerArg:printToPlayer('Mooglin : Expand your Mog House 7 by ' .. quantity .. ' slots for ' .. StringifyPrice(price) .. ' gil?' , xi.msg.channel.NS_SAY)
             menu.options = page8
             delaySendMenu(playerArg)
         end,
@@ -1016,7 +1016,7 @@ page5 =
             quantity = 5
             price = quantity * container.wardrobe8.price
 
-            playerArg:PrintToPlayer('Mooglin : Expand your Mog House 8 by ' .. quantity .. ' slots for ' .. StringifyPrice(price) .. ' gil?' , xi.msg.channel.NS_SAY)
+            playerArg:printToPlayer('Mooglin : Expand your Mog House 8 by ' .. quantity .. ' slots for ' .. StringifyPrice(price) .. ' gil?' , xi.msg.channel.NS_SAY)
             menu.options = page9
             delaySendMenu(playerArg)
         end,
@@ -1028,7 +1028,7 @@ page5 =
             quantity = 80 - container.wardrobe8.size
             price = quantity * container.wardrobe8.price
 
-            playerArg:PrintToPlayer('Mooglin : Expand your Mog House 8 by ' .. quantity .. ' slots for ' .. StringifyPrice(price) .. ' gil?' , xi.msg.channel.NS_SAY)
+            playerArg:printToPlayer('Mooglin : Expand your Mog House 8 by ' .. quantity .. ' slots for ' .. StringifyPrice(price) .. ' gil?' , xi.msg.channel.NS_SAY)
             menu.options = page9
             delaySendMenu(playerArg)
         end,
@@ -1053,9 +1053,9 @@ page6 =
             if playerArg:getGil() >= price then
                 player:delGil(price)
                 playerArg:changeContainerSize(xi.inv.WARDROBE5, quantity)
-                playerArg:PrintToPlayer('Mog Wardrobe 5 increased by ' .. quantity .. ' slots.', xi.msg.channel.SYSTEM_3)
+                playerArg:printToPlayer('Mog Wardrobe 5 increased by ' .. quantity .. ' slots.', xi.msg.channel.SYSTEM_3)
             else
-                playerArg:PrintToPlayer('You do not have enough gil. ', xi.msg.channel.SYSTEM_3)
+                playerArg:printToPlayer('You do not have enough gil. ', xi.msg.channel.SYSTEM_3)
             end
         end,
     },
@@ -1076,9 +1076,9 @@ page7 =
             if playerArg:getGil() >= price then
                 player:delGil(price)
                 playerArg:changeContainerSize(xi.inv.WARDROBE6, quantity)
-                playerArg:PrintToPlayer('Mog Wardrobe 6 increased by ' .. quantity .. ' slots.', xi.msg.channel.SYSTEM_3)
+                playerArg:printToPlayer('Mog Wardrobe 6 increased by ' .. quantity .. ' slots.', xi.msg.channel.SYSTEM_3)
             else
-                playerArg:PrintToPlayer('You do not have enough gil. ', xi.msg.channel.SYSTEM_3)
+                playerArg:printToPlayer('You do not have enough gil. ', xi.msg.channel.SYSTEM_3)
             end
         end,
     },
@@ -1099,9 +1099,9 @@ page8 =
             if playerArg:getGil() >= price then
                 player:delGil(price)
                 playerArg:changeContainerSize(xi.inv.WARDROBE7, quantity)
-                playerArg:PrintToPlayer('Mog Wardrobe 7 increased by ' .. quantity .. ' slots.', xi.msg.channel.SYSTEM_3)
+                playerArg:printToPlayer('Mog Wardrobe 7 increased by ' .. quantity .. ' slots.', xi.msg.channel.SYSTEM_3)
             else
-                playerArg:PrintToPlayer('You do not have enough gil. ', xi.msg.channel.SYSTEM_3)
+                playerArg:printToPlayer('You do not have enough gil. ', xi.msg.channel.SYSTEM_3)
             end
         end,
     },
@@ -1122,9 +1122,9 @@ page9 =
             if playerArg:getGil() >= price then
                 player:delGil(price)
                 playerArg:changeContainerSize(xi.inv.WARDROBE8, quantity)
-                playerArg:PrintToPlayer('Mog Wardrobe 8 increased by ' .. quantity .. ' slots.', xi.msg.channel.SYSTEM_3)
+                playerArg:printToPlayer('Mog Wardrobe 8 increased by ' .. quantity .. ' slots.', xi.msg.channel.SYSTEM_3)
             else
-                playerArg:PrintToPlayer('You do not have enough gil. ', xi.msg.channel.SYSTEM_3)
+                playerArg:printToPlayer('You do not have enough gil. ', xi.msg.channel.SYSTEM_3)
             end
         end,
     },

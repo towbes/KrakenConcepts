@@ -44,7 +44,7 @@ CAlliance::CAlliance(CBattleEntity* PEntity)
 {
     if (PEntity->PParty == nullptr)
     {
-        ShowError("Attempt to construct Alliance with a null Party (%s).", PEntity->GetName());
+        ShowError("Attempt to construct Alliance with a null Party (%s).", PEntity->getName());
         return;
     }
 
@@ -64,6 +64,13 @@ CAlliance::CAlliance(uint32 id)
 : m_AllianceID(id)
 , aLeader(nullptr)
 {
+}
+
+// Dirty, ugly hack to prevent bad refs keeping garbage pointers in memory pointing to things that _could_ still be valid, causing mayhem
+CAlliance::~CAlliance()
+{
+    m_AllianceID = 0;
+    aLeader      = nullptr;
 }
 
 void CAlliance::dissolveAlliance(bool playerInitiated)

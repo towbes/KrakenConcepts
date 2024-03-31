@@ -34,7 +34,7 @@ commandObj.onTrigger = function(player, dir)
     local drops = xi.helm.helmInfo[helmType].zone[zoneID].drops
     local items = {}
 
-    player:PrintToPlayer(string.format(
+    player:printToPlayer(string.format(
         'Parse HELM drop list for %s',
         player:getZoneName()),
         xi.msg.channel.SYSTEM_3
@@ -42,7 +42,7 @@ commandObj.onTrigger = function(player, dir)
 
     for _, v in pairs(drops) do
         print(v)
-        player:PrintToPlayer(string.format(
+        player:printToPlayer(string.format(
             '(%d) %s: %.2f%%',
             v[2], v[3], v[1] / 10),
             xi.msg.channel.NS_SAY

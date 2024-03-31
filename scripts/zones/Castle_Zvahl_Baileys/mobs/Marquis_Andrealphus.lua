@@ -9,7 +9,7 @@ local ID = require('scripts/zones/Castle_Zvahl_Baileys/IDs')
 -----------------------------------
 local entity = {}
 
-entity.onMobEngaged = function(mob)
+entity.onMobEngage = function(mob)
     -- Blood Weapon Timer
     mob:setLocalVar('timer', os.time() + 180)
 end

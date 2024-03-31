@@ -14,15 +14,15 @@ local weaponskillObject = {}
 
 weaponskillObject.onUseWeaponSkill = function(player, target, wsID, tp, primary, action, taChar)
     local params = {}
-    params.numHits = 2
-    params.ftp100 = 1 params.ftp200 = 1 params.ftp300 = 1
-    params.str_wsc = 0.0 params.dex_wsc = 0.0 params.vit_wsc = 0.0 params.agi_wsc = 0.3 params.int_wsc = 0.0 params.mnd_wsc = 0.0 params.chr_wsc = 0.0
-    params.crit100 = 0.0 params.crit200 = 0.0 params.crit300 = 0.0
-    params.canCrit = false
-    params.acc100 = 0.8 params.acc200 = 0.9 params.acc300 = 1 -- TODO: verify -- 'Accuracy varies with TP' in retail. All current evidence points to that this modifier is static values, not percentages.
-    params.atk100 = 1 params.atk200 = 1 params.atk300 = 1
+    params.numHits = 1
+    params.ftpMod = { 2.0, 2.0, 2.0 }
+    params.agi_wsc = 0.3
+    params.accVaries = { 0.8, 0.9, 1.0 } -- TODO: verify -- "Accuracy varies with TP" in retail. All current evidence points to that this modifier is static values, not percentages.
 
     if xi.settings.main.USE_ADOULIN_WEAPON_SKILL_CHANGES then
+        params.numHits = 2
+        params.ftpMod = { 1.0, 1.0, 1.0 }
+        params.multiHitfTP = true
         params.agi_wsc = 0.8
     end
 
@@ -50,9 +50,10 @@ weaponskillObject.onUseWeaponSkill = function(player, target, wsID, tp, primary,
     local damage, criticalHit, tpHits, extraHits = xi.weaponskills.doRangedWeaponskill(player, target, wsID, params, tp, action, primary)
 
     local chance = (tp-1000) * applyResistanceAddEffect(player, target, xi.element.THUNDER, 0) > math.random() * 150
-    if damage > 0 and not target:hasStatusEffect(xi.effect.STUN) and chance then
-        local duration = 4 * applyResistanceAddEffect(player, target, xi.element.THUNDER, 0)
+    if damage > 0 and not target:hasStatusEffect(xi.effect.STUN) and chance and not target:hasImmunity(xi.immunity.STUN) then
+        local duration = 6 * applyResistanceAddEffect(player, target, xi.element.THUNDER, 0)
         target:addStatusEffect(xi.effect.STUN, 1, 0, duration)
+        player:messagePublic(xi.msg.basic.SKILL_ENFEEB, target, wsID, xi.effect.STUN)
     end
 
     return tpHits, extraHits, criticalHit, damage

@@ -20,6 +20,7 @@ zones[xi.zone.JUGNER_FOREST_S] =
         MEMBERS_LEVELS_ARE_RESTRICTED = 7023, -- Your party is unable to participate because certain members' levels are restricted.
         LOGGING_IS_POSSIBLE_HERE      = 7080, -- Logging is possible here if you have <item>.
         YOU_FIND_NOTHING_ORDINARY     = 7120, -- You find nothing out of the ordinary.
+        -- CAMPAIGN_RESULTS_TALLIED      = 7289, -- Campaign results tallied.
         FISHING_MESSAGE_OFFSET        = 7373, -- You can't fish here.
         ALREADY_OBTAINED_TELE         = 7709, -- You already possess the gate crystal for this telepoint.
         YOU_FIND_SPARKLING_STONE      = 7727, -- You find a sparkling stone.
@@ -87,7 +88,8 @@ zones[xi.zone.JUGNER_FOREST_S] =
 
     npc =
     {
-        LOGGING = GetTableOfIDs('Logging_Point'),
+        CAMPAIGN_NPC_OFFSET = GetFirstID('Roiloux_RK'), -- San, Bas, Win, Flag +4, CA
+        LOGGING             = GetTableOfIDs('Logging_Point'),
     },
 }
 

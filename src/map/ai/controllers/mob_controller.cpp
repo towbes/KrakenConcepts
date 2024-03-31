@@ -46,7 +46,7 @@ CMobController::CMobController(CMobEntity* PEntity)
 void CMobController::Tick(time_point tick)
 {
     TracyZoneScoped;
-    TracyZoneString(PMob->GetName());
+    TracyZoneString(PMob->getName());
 
     m_Tick = tick;
 
@@ -108,7 +108,7 @@ bool CMobController::CanPursueTarget(CBattleEntity* PTarget)
         if (!PMob->PAI->PathFind->InWater() && PTarget && !PTarget->StatusEffectContainer->HasStatusEffect(EFFECT_DEODORIZE))
         {
             // certain weather / deodorize will turn on time deaggro
-            return PMob->m_disableScent;
+            return !PMob->m_disableScent;
         }
     }
     return false;
@@ -119,7 +119,7 @@ bool CMobController::CheckHide(CBattleEntity* PTarget)
     TracyZoneScoped;
     if (PTarget && PTarget->GetMJob() == JOB_THF && PTarget->StatusEffectContainer->HasStatusEffect(EFFECT_HIDE))
     {
-        return !CanPursueTarget(PTarget) && !PMob->m_TrueDetection;
+        return !CanPursueTarget(PTarget) && !PMob->m_TrueDetection && !(PMob->getMobMod(MOBMOD_DETECTION) & DETECT_HEARING);
     }
     else if (PTarget && PTarget->GetSJob() == JOB_THF && PTarget->StatusEffectContainer->HasStatusEffect(EFFECT_HIDE))
     {
@@ -187,7 +187,20 @@ void CMobController::TryLink()
     {
         if (PTarget->PPet->objtype == TYPE_PET && ((CPetEntity*)PTarget->PPet)->getPetType() == PET_TYPE::AVATAR)
         {
-            petutils::AttackTarget(PTarget, PMob);
+            if (PTarget->objtype == TYPE_PC)
+            {
+                // std::unique_ptr<CBasicPacket> errMsg;
+                // if (PTarget->PPet->CanAttack(PMob, errMsg))
+                auto* PChar = dynamic_cast<CCharEntity*>(PTarget);
+                if (PChar && PChar->IsMobOwner(PTarget))
+                {
+                    petutils::AttackTarget(PTarget, PMob);
+                }
+            }
+            else
+            {
+                petutils::AttackTarget(PTarget, PMob);
+            }
         }
     }
 
@@ -203,7 +216,9 @@ void CMobController::TryLink()
         for (auto& member : PMob->PParty->members)
         {
             CMobEntity* PPartyMember = dynamic_cast<CMobEntity*>(member);
-            if (!PPartyMember)
+            // Note if the mob to link with this one is a pet then do not link
+            // Pets only link with their masters
+            if (!PPartyMember || (PPartyMember && PPartyMember->PMaster))
             {
                 continue;
             }
@@ -215,7 +230,7 @@ void CMobController::TryLink()
                 if (PPartyMember->m_roamFlags & ROAMFLAG_IGNORE)
                 {
                     // force into attack action
-                    //#TODO
+                    // #TODO
                     PPartyMember->PAI->Engage(PTarget->targid);
                 }
             }
@@ -441,7 +456,7 @@ bool CMobController::TrySpecialSkill()
 bool CMobController::TryCastSpell()
 {
     TracyZoneScoped;
-    if (!PTarget || !CanCastSpells())
+    if (!CanCastSpells())
     {
         return false;
     }
@@ -475,7 +490,8 @@ bool CMobController::TryCastSpell()
     }
 
     // Try to get an override spell from the script (if available)
-    auto possibleOverriddenSpell = luautils::OnMobMagicPrepare(PMob, PTarget, chosenSpellId);
+    auto PSpellTarget            = PTarget ? PTarget : PMob;
+    auto possibleOverriddenSpell = luautils::OnMobMagicPrepare(PMob, PSpellTarget, chosenSpellId);
     if (possibleOverriddenSpell.has_value())
     {
         chosenSpellId = possibleOverriddenSpell;
@@ -884,7 +900,7 @@ void CMobController::DoRoamTick(time_point tick)
 
         return;
     }
-    //#TODO
+    // #TODO
     else if (PMob->GetDespawnTime() > time_point::min() && PMob->GetDespawnTime() < m_Tick)
     {
         Despawn();
@@ -895,6 +911,26 @@ void CMobController::DoRoamTick(time_point tick)
     {
         // don't claim me if I ignore
         PMob->m_OwnerID.clean();
+    }
+
+    if (m_Tick >= m_mobHealTime + 10s && PMob->getMobMod(MOBMOD_NO_REST) == 0 && PMob->CanRest())
+    {
+        // recover 10% health and lose tp
+        if (PMob->Rest(0.1f))
+        {
+            // health updated
+            PMob->updatemask |= UPDATE_HP;
+        }
+
+        if (PMob->GetHPP() == 100)
+        {
+            // at max health undirty exp
+            PMob->m_HiPCLvl     = 0;
+            PMob->m_HiPartySize = 0;
+            PMob->m_giveExp     = true;
+            PMob->m_UsedSkillIds.clear();
+        }
+        m_mobHealTime = m_Tick;
     }
 
     // skip roaming if waiting
@@ -918,26 +954,6 @@ void CMobController::DoRoamTick(time_point tick)
             if (PMob->GetCallForHelpFlag())
             {
                 PMob->SetCallForHelpFlag(false);
-            }
-
-            // can't rest with poison or disease
-            if (PMob->CanRest() && PMob->getMobMod(MOBMOD_NO_REST) == 0)
-            {
-                // recover 10% health
-                if (PMob->Rest(0.1f))
-                {
-                    // health updated
-                    PMob->updatemask |= UPDATE_HP;
-                }
-
-                if (PMob->GetHPP() == 100)
-                {
-                    // at max health undirty exp
-                    PMob->m_HiPCLvl     = 0;
-                    PMob->m_HiPartySize = 0;
-                    PMob->m_giveExp     = true;
-                    PMob->m_UsedSkillIds.clear();
-                }
             }
 
             // if I just disengaged check if I should despawn
@@ -999,7 +1015,7 @@ void CMobController::DoRoamTick(time_point tick)
                 else if (PMob->CanRoam() && PMob->PAI->PathFind->RoamAround(PMob->m_SpawnPoint, PMob->GetRoamDistance(),
                                                                             (uint8)PMob->getMobMod(MOBMOD_ROAM_TURNS), PMob->m_roamFlags))
                 {
-                    //#TODO: #AIToScript (event probably)
+                    // #TODO: #AIToScript (event probably)
                     if (PMob->m_roamFlags & ROAMFLAG_WORM)
                     {
                         // move down
@@ -1153,7 +1169,7 @@ bool CMobController::Disengage()
     PMob->animation = ANIMATION_NONE;
     // https://www.bluegartr.com/threads/108198-Random-Facts-Thread-Traits-and-Stats-(Player-and-Monster)?p=5670209&viewfull=1#post5670209
     PMob->m_THLvl = 0;
-
+    m_mobHealTime = m_Tick;
     return CController::Disengage();
 }
 
@@ -1170,12 +1186,16 @@ bool CMobController::Engage(uint16 targid)
         {
             m_LastMagicTime = m_Tick - std::chrono::milliseconds(PMob->getBigMobMod(MOBMOD_MAGIC_COOL)) +
                               std::chrono::milliseconds(xirand::GetRandomNumber(PMob->getBigMobMod(MOBMOD_MAGIC_DELAY)));
+            //m_LastMagicTime =
+                //m_Tick - std::chrono::milliseconds(PMob->getBigMobMod(MOBMOD_MAGIC_COOL) + xirand::GetRandomNumber(PMob->getBigMobMod(MOBMOD_MAGIC_DELAY)));
         }
 
         if (PMob->getBigMobMod(MOBMOD_SPECIAL_DELAY) != 0)
         {
             m_LastSpecialTime = m_Tick - std::chrono::milliseconds(PMob->getBigMobMod(MOBMOD_SPECIAL_COOL)) +
                                 std::chrono::milliseconds(xirand::GetRandomNumber(PMob->getBigMobMod(MOBMOD_SPECIAL_DELAY)));
+            //m_LastSpecialTime = m_Tick - std::chrono::milliseconds(PMob->getBigMobMod(MOBMOD_SPECIAL_COOL) +
+                                                                   //xirand::GetRandomNumber(PMob->getBigMobMod(MOBMOD_SPECIAL_DELAY)));
         }
     }
     return ret;
@@ -1195,10 +1215,10 @@ int32 CMobController::GetPixieHate(CBattleEntity* PTarget)
 bool CMobController::CanAggroTarget(CBattleEntity* PTarget)
 {
     TracyZoneScoped;
-    TracyZoneString(PMob->GetName());
+    TracyZoneString(PMob->getName());
     if (PTarget)
     {
-        TracyZoneString(PTarget->GetName());
+        TracyZoneString(PTarget->getName());
 
         if (PMob->getBattleID() != PTarget->getBattleID())
         {
@@ -1217,10 +1237,12 @@ bool CMobController::CanAggroTarget(CBattleEntity* PTarget)
             return false;
         }
 
-        // Don't aggro, I'm a normal CoP Fomor and you have low hate
-        if (PMob->m_Family == 115 && !(PMob->m_Type & MOBTYPE_NOTORIOUS) && (PMob->getZone() >= 24 && PMob->getZone() <= 28) && PTarget->objtype == TYPE_PC)
+        // Do not aggro if a normal CoP Fomor and the player has low enough fomor hate
+        if (PMob->m_Family == 115 && !(PMob->m_Type & MOBTYPE_NOTORIOUS) &&
+            (PMob->getZone() >= ZONE_LUFAISE_MEADOWS && PMob->getZone() <= ZONE_SACRARIUM) &&
+            PTarget->objtype == TYPE_PC)
         {
-            if (((CCharEntity*)PTarget)->getCharVar("FOMOR_HATE") < 8)
+            if (static_cast<CCharEntity*>(PTarget)->getCharVar("FOMOR_HATE") < 8)
             {
                 return false;
             }
@@ -1313,14 +1335,17 @@ bool CMobController::IsSpecialSkillReady(float currentDistance)
         return false;
     }
 
-    int32 bonusTime = 0;
+    int32 bonusTime     = 0;
+    int32 snapshotBonus = 0;
     if (currentDistance > 5)
     {
         // Mobs use ranged attacks quicker when standing back
         bonusTime = PMob->getBigMobMod(MOBMOD_STANDBACK_COOL);
     }
 
-    return m_Tick >= m_LastSpecialTime + std::chrono::milliseconds(PMob->getBigMobMod(MOBMOD_SPECIAL_COOL) - bonusTime);
+    snapshotBonus = (PMob->getBigMobMod(MOBMOD_SPECIAL_COOL) - bonusTime) * (PMob->getMod(Mod::SNAP_SHOT) / 100);
+
+    return m_Tick >= m_LastSpecialTime + std::chrono::milliseconds(PMob->getBigMobMod(MOBMOD_SPECIAL_COOL) - bonusTime - snapshotBonus);
 }
 
 bool CMobController::IsSpellReady(float currentDistance)

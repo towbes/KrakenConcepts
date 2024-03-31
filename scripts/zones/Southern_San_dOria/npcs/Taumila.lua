@@ -30,7 +30,7 @@ entity.onTrigger = function(player, npc)
     elseif tigersTeeth == QUEST_COMPLETED then
         player:startEvent(571)
     else
-        player:messageSpecial(ID.text.TAUMILA_DEFAULT)
+        player:messageSpecial(zones[player:getZoneID()].text.TAUMILA_DEFAULT)
     end
 end
 

@@ -11,13 +11,9 @@ end
 
 mobskillObject.onMobWeaponSkill = function(target, mob, skill)
     mob:showText(mob, ID.text.PROMATHIA_TEXT + 6)
-    local typeEffect = xi.effect.MUTE
-    local power = 30
-    local duration = 75
+    skill:setMsg(xi.mobskills.mobStatusEffectMove(mob, target, xi.effect.MUTE, 30, 0, 75))
 
-    skill:setMsg(xi.mobskills.mobStatusEffectMove(mob, target, typeEffect, power, 0, duration))
-
-    return typeEffect
+    return xi.effect.MUTE
 end
 
 return mobskillObject

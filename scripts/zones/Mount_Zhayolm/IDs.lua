@@ -32,6 +32,7 @@ zones[xi.zone.MOUNT_ZHAYOLM] =
         AREA_FULL                     = 7486, -- This area is fully occupied. You were unable to enter.
         MEMBER_NO_REQS                = 7490, -- Not all of your party members meet the requirements for this objective. Unable to enter area.
         MEMBER_TOO_FAR                = 7494, -- One or more party members are too far away from the entrance. Unable to enter area.
+        DETACHED_PART                 = 7541, -- There is a detached part here...
         SHED_LEAVES                   = 7556, -- The ground is strewn with shed leaves...
         SICKLY_SWEET                  = 7561, -- A sickly sweet fragrance pervades the air...
         ACIDIC_ODOR                   = 7562, -- An acidic odor pervades the air...
@@ -52,6 +53,17 @@ zones[xi.zone.MOUNT_ZHAYOLM] =
         {
             [17027421] = 17027423, -- -567.6 -15.35 252.201
             [17027422] = 17027423, -- -544.3 -14.8 262.992
+        },
+        EVOLVING_WAMOURA_PRINCES =
+        {
+            17027197, 
+            17027200,
+            17027341,
+            17027346,
+            17027417, 
+            17027419,
+            17027425,
+            17027428,
         },
         FAHRAFAHR_THE_BLOODIED_PH =
         {

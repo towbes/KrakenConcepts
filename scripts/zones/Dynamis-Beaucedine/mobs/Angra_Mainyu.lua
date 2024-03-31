@@ -3,11 +3,19 @@
 --  Mob: Angra Mainyu
 -- Note: Mega Boss
 -----------------------------------
-mixins = { require('scripts/mixins/job_special') }
+mixins =
+{
+    require('scripts/mixins/dynamis_beastmen'),
+    require('scripts/mixins/job_special')
+}
 -----------------------------------
 local entity = {}
 
-entity.onMobEngaged = function(mob, target)
+entity.onMobSpawn = function(mob)
+    mob:setLocalVar('[isDynamis_Megaboss]', 1)
+end
+
+entity.onMobEngage = function(mob, target)
     local mobId = mob:getID()
     for i = mobId + 1, mobId + 4 do
         if not GetMobByID(i):isSpawned() then

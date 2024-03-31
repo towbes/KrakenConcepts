@@ -12,7 +12,7 @@ entity.onMobSpawn = function(mob)
     mob:setMod(xi.mod.DOUBLE_ATTACK, 50)
 end
 
-entity.onMobEngaged = function(mob, target)
+entity.onMobEngage = function(mob, target)
     for i = 1, 3 do
         DespawnMob(mob:getID()+i)
     end

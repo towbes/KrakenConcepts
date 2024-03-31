@@ -12,8 +12,8 @@ commandObj.cmdprops =
 }
 
 commandObj.error = function(player, msg)
-    player:PrintToPlayer(msg)
-    player:PrintToPlayer('!spawnFellow - no params, works on self only')
+    player:printToPlayer(msg)
+    player:printToPlayer('!spawnFellow - no params, works on self only')
 end
 
 commandObj.onTrigger = function(player)
@@ -49,7 +49,7 @@ commandObj.onTrigger = function(player)
     end
 
     player:spawnFellow(player:getFellowValue('fellowid'))
-    player:PrintToPlayer('Spawned Adventuring Fellow')
+    player:printToPlayer('Spawned Adventuring Fellow')
 end
 
 return commandObj

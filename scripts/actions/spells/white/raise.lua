@@ -21,12 +21,12 @@ spellObject.onSpellCast = function(caster, target, spell)
         if target:getName() == 'Prishe' then
             -- CoP 8-4 Prishe
             target:setLocalVar('Raise', 1)
-            target:entityAnimationPacket('sp00')
+            target:entityAnimationPacket(xi.animationString.SPECIAL_00)
             target:addHP(target:getMaxHP())
             target:addMP(target:getMaxMP())
         end
     end
-
+    caster:delStatusEffectSilent(xi.effect.MANAWELL)
     spell:setMsg(xi.msg.basic.MAGIC_CASTS_ON)
 
     return 1

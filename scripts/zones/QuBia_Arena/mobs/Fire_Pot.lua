@@ -13,7 +13,7 @@ entity.onMobInitialize = function(mob)
     mob:setMobMod(xi.mobMod.ADD_EFFECT, 1)
 end
 
-entity.onMobEngaged = function(mob)
+entity.onMobEngage = function(mob)
     local pot = mob:getID()
     for i = 1, 5 do
         DespawnMob(pot+i)

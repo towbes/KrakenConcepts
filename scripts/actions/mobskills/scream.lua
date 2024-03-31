@@ -9,18 +9,17 @@ mobskillObject.onMobSkillCheck = function(target, mob, skill)
 end
 
 mobskillObject.onMobWeaponSkill = function(target, mob, skill)
-    local typeEffect = xi.effect.MND_DOWN
-    local typeEffect2 = xi.effect.TERROR
-    skill:setMsg(xi.mobskills.mobStatusEffectMove(mob, target, typeEffect, 10, 3, 120))
+    local power = target:getStat(xi.mod.MND) * 0.25
+    skill:setMsg(xi.mobskills.mobStatusEffectMove(mob, target, xi.effect.MND_DOWN, power, 10, 180))
     if mob:getZone():getTypeMask() == xi.zoneType.DYNAMIS then
-        skill:setMsg(xi.mobskills.mobStatusEffectMove(mob, target, typeEffect2, 30, 0, 10))
+        xi.mobskills.mobStatusEffectMove(mob, target, xi.effect.TERROR, 30, 0, 10)
 
         mob:timer(4000, function(mobArg)
-            mob:messageBasic(xi.msg.basic.IS_EFFECT, 306, typeEffect2, target)
+            mob:messageBasic(xi.msg.basic.IS_EFFECT, 306, xi.effect.TERROR, target)
         end)
     end
 
-    return typeEffect
+    return xi.effect.MND_DOWN
 end
 
 return mobskillObject

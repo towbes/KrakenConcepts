@@ -34,7 +34,7 @@ entity.onMobInitialize = function(mob)
     mob:setMobMod(xi.mobMod.IDLE_DESPAWN, 300)
     mob:setMobMod(xi.mobMod.GIL_MIN, 4500)
     mob:setMobMod(xi.mobMod.GIL_MAX, 7500)
-    mob:setMod(xi.mod.MOVE, -15)
+    mob:setSpeed((50 + xi.settings.map.MOB_SPEED_MOD) - 15)
 end
 
 entity.onMobSpawn = function(mob)
@@ -92,7 +92,7 @@ entity.onMobFight = function(mob, target)
         mob:setAnimationSub(2)
         mob:setMod(xi.mod.DMGPHYS, -10) 
         mob:setMod(xi.mod.DMGMAGIC, -10)
-        mob:setMod(xi.mod.MOVE, 15)
+        mob:setMod(xi.mod.MOVE_SPEED_STACKABLE, 15)
 
     elseif phase == 5 then
         local destId = mob:getLocalVar('RunDestination')

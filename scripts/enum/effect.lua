@@ -628,6 +628,7 @@ xi.effect =
     TAINT                    = 630,
     HAUNT                    = 631,
     BLACK_SANCTUS            = 632,
+    ANIMATED                 = 633,
 
     -- Effect icons in packet can go from 0-767, so no custom effects should go in that range.
 
@@ -675,7 +676,8 @@ xi.effect =
     HYSTERIA                 = 804, -- Used for Hysteroanima to stop after readying a weaponskill with no msg.
     TOMAHAWK                 = 805, -- Silent status effect inflicted by a Warrior using the 'Tomahawk' job ability
     NUKE_WALL                = 806, -- Custom effect for NM type mobs only.
-
+    BANISH_SDT_DEBUFF        = 807, -- Handles SDT debuff on undead mobs.
+    RUN_WILD                 = 808,
     -- 789
     -- 807-1022
     -- PLACEHOLDER           = 1023 -- The client dat file seems to have only this many 'slots', results of exceeding that are untested.

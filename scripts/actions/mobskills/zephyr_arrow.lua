@@ -12,8 +12,6 @@ mobskillObject.onMobSkillCheck = function(target, mob, skill)
 end
 
 mobskillObject.onMobWeaponSkill = function(target, mob, skill)
-    local typeEffect = xi.effect.BIND
-
     local numhits = 1
     local accmod = 4
     local dmgmod = 5
@@ -21,7 +19,7 @@ mobskillObject.onMobWeaponSkill = function(target, mob, skill)
     local dmg = xi.mobskills.mobFinalAdjustments(info.dmg, mob, skill, target, xi.attackType.RANGED, xi.damageType.PIERCING, xi.mobskills.shadowBehavior.IGNORE_SHADOWS)
     target:takeDamage(dmg, mob, xi.attackType.RANGED, xi.damageType.PIERCING)
 
-    xi.mobskills.mobStatusEffectMove(mob, target, typeEffect, 1, 0, 120)
+    xi.mobskills.mobStatusEffectMove(mob, target, xi.effect.BIND, 1, 0, 120)
     
     return dmg
 end

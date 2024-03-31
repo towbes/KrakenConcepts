@@ -16,30 +16,11 @@ local function getJumpWSParams(player, atkMultiplier, tpMultiplier, forceCrit)
     local params =
     {
         numHits = 1,
-        ftp100  = 1,
-        ftp200  = 1,
-        ftp300  = 1,
+        ftpMod  = { 1.0, 1.0, 1.0 },
 
-        str_wsc = 0.0,
-        dex_wsc = 0.0,
-        vit_wsc = 0.0,
-        agi_wsc = 0.0,
-        int_wsc = 0.0,
-        mnd_wsc = 0.0,
-        chr_wsc = 0.0,
-
-        crit100 = 0.0,
-        crit200 = 0.0,
-        crit300 = 0.0,
-        canCrit = true,
-
-        acc100 = 0.0,
-        acc200 = 0.0,
-        acc300 = 0.0,
-
-        atk100 = atkMultiplier,
-        atk200 = atkMultiplier,
-        atk300 = atkMultiplier,
+        -- NOTE: critVaries exists without values since while no modifier, it can crit.
+        critVaries = { 0.0, 0.0, 0.0 },
+        atkVaries  = { atkMultiplier, atkMultiplier, atkMultiplier },
 
         bonusTP        = 0,
         targetTPMult   = 0,
@@ -49,9 +30,7 @@ local function getJumpWSParams(player, atkMultiplier, tpMultiplier, forceCrit)
     }
 
     if player:getMod(xi.mod.FORCE_JUMP_CRIT) > 0 or forceCrit then
-        params.crit100 = 1.0
-        params.crit200 = 1.0
-        params.crit300 = 1.0
+        params.critVaries = { 1.0, 1.0, 1.0 }
     end
 
     return params
@@ -260,9 +239,7 @@ xi.job_utils.dragoon.useJump = function(player, target, ability, action)
 
     -- Only 'Jump' and not others get the fTP VIT bonus
     local ftp = 1 + (player:getStat(xi.mod.VIT) / 256)
-    params.ftp100 = ftp
-    params.ftp200 = ftp
-    params.ftp300 = ftp
+    params.ftpMod = { ftp, ftp, ftp }
 
     local damage, totalHits = performWSJump(player, target, action, params, ability:getID())
 
@@ -524,10 +501,9 @@ end
 
 -- https://www.bg-wiki.com/ffxi/Angon
 xi.job_utils.dragoon.useAngon = function(player, target, ability)
-    local typeEffect = xi.effect.DEFENSE_DOWN
     local duration   = 15 + player:getMerit(xi.merit.ANGON) -- This will return 30 sec at one investment because merit power is 15.
 
-    if not target:addStatusEffect(typeEffect, 20, 0, duration) then
+    if not target:addStatusEffect(xi.effect.DEFENSE_DOWN, 20, 0, duration) then
         ability:setMsg(xi.msg.basic.MAGIC_NO_EFFECT)
     end
 
@@ -539,7 +515,7 @@ xi.job_utils.dragoon.useAngon = function(player, target, ability)
         player:removeAmmo()
     end
     
-    return typeEffect
+    return xi.effect.DEFENSE_DOWN
 end
 
 xi.job_utils.dragoon.useDeepBreathing = function(player, target, ability)
@@ -689,16 +665,16 @@ end
 
 -- https://www.bg-wiki.com/ffxi/Wyvern_(Dragoon_Pet)#Elemental_Breath
 xi.job_utils.dragoon.useDamageBreath = function(wyvern, target, skill, action, damageType)
-    local master              = wyvern:getMaster()
-    local deepBreathingMerits = master:getMerit(xi.merit.DEEP_BREATHING)
-    local deepMult            = 0
+    local master                  = wyvern:getMaster()
+    local deepBreathingMerits     = master:getMerit(xi.merit.DEEP_BREATHING)
+    local deepBreathingMultiplier = 0
 
     if wyvern:hasStatusEffect(xi.effect.MAGIC_ATK_BOOST) then
-        deepMult = 0.75 + (0.25 * deepBreathingMerits)
+        deepBreathingMultiplier = 0.75 + (0.25 * deepBreathingMerits)
 
         -- add in augment power, +0.1 per merit level (including first)
         if master:getMod(xi.mod.ENHANCE_DEEP_BREATHING) > 0 then
-            deepMult = deepMult + deepBreathingMerits * 0.1
+            deepBreathingMultiplier = deepBreathingMultiplier + deepBreathingMerits * 0.1
         end
 
         wyvern:delStatusEffect(xi.effect.MAGIC_ATK_BOOST)
@@ -706,12 +682,12 @@ xi.job_utils.dragoon.useDamageBreath = function(wyvern, target, skill, action, d
 
     local jobPointBonus       = master:getJobPointLevel(xi.jp.WYVERN_BREATH_EFFECT) * 10
     local breathAugmentsBonus = master:getMod(xi.mod.UNCAPPED_WYVERN_BREATH) / 100
-    local gear                = master:getMod(xi.mod.WYVERN_BREATH) -- Master gear that enhances breath
+    local gearMultiplier      = master:getMod(xi.mod.WYVERN_BREATH) -- Master gear that enhances breath
 
     -- gear cap of 64/256 in multiplier
-    local multiplier = 1.0 + (math.min(gear, 64)) / 256
+    gearMultiplier = 1.0 + (math.min(gearMultiplier, 64)) / 256
 
-    local damage = math.floor(math.floor(wyvern:getHP() / 6 + 15 + jobPointBonus)) * multiplier * (1.0 + breathAugmentsBonus + deepMult)
+    local damage = math.floor(wyvern:getHP() / 6 + 15 + jobPointBonus) * gearMultiplier * (1.0 + breathAugmentsBonus + deepBreathingMultiplier)
 
     -- strafe merits are +10 per merit
     local strafeMeritPower = master:getMerit(xi.merit.STRAFE_EFFECT)
@@ -779,28 +755,31 @@ xi.job_utils.dragoon.pickAndUseDamageBreath = function(player, target)
 
     local resistances =
     {
-        target:getMod(xi.mod.FIRE_MEVA),
-        target:getMod(xi.mod.ICE_MEVA),
-        target:getMod(xi.mod.WIND_MEVA),
-        target:getMod(xi.mod.EARTH_MEVA),
-        target:getMod(xi.mod.THUNDER_MEVA),
-        target:getMod(xi.mod.WATER_MEVA),
+        xi.mod.FIRE_RES_RANK,
+        xi.mod.ICE_RES_RANK,
+        xi.mod.WIND_RES_RANK,
+        xi.mod.EARTH_RES_RANK,
+        xi.mod.THUNDER_RES_RANK,
+        xi.mod.WATER_RES_RANK,
     }
 
-    local lowest = resistances[1]
-    local breath = breathList[1]
+    local lowestModValue  = 11
+    local currentModValue = 0
+    local breathToUse     = breathList[1]
 
     -- https://www.bg-wiki.com/ffxi/Wyvern_(Dragoon_Pet)#Elemental_Breath
     -- The wyvern simply picks the lowest resistance breath and no longer relies on Drachen Armet et al
     -- if all resistances are equal, Flame Breath is picked first.
     for i, v in ipairs(breathList) do
-        if resistances[i] < lowest then
-            lowest = resistances[i]
-            breath = v
+        currentModValue = target:getMod(resistances[i])
+
+        if currentModValue < lowestModValue then
+            lowestModValue = currentModValue
+            breathToUse    = v
         end
     end
 
-    player:getPet():useJobAbility(breath, target)
+    player:getPet():useJobAbility(breathToUse, target)
 end
 
 xi.job_utils.dragoon.useRestoringBreath = function(player, ability, action)

@@ -27,13 +27,13 @@ commandObj.onTrigger = function(player, name)
 
             v.mob:setSpawn(pos.x, pos.y, pos.z, pos.rot)
             v.mob:spawn()
-            player:PrintToPlayer(string.format('Spawning: %s', nmName), xi.msg.channel.SYSTEM_3, '')
+            player:printToPlayer(string.format('Spawning: %s', nmName), xi.msg.channel.SYSTEM_3, '')
 
             return
         end
     end
 
-    player:PrintToPlayer(string.format('Unable to spawn: %s', nmName), xi.msg.channel.SYSTEM_3, '')
+    player:printToPlayer(string.format('Unable to spawn: %s', nmName), xi.msg.channel.SYSTEM_3, '')
 end
 
 return commandObj

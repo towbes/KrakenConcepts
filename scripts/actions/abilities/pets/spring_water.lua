@@ -4,17 +4,19 @@
 local abilityObject = {}
 
 abilityObject.onAbilityCheck = function(player, target, ability)
-    return 0, 0
+    return xi.job_utils.summoner.canUseBloodPact(player, player:getPet(), target, ability)
 end
 
-abilityObject.onPetAbility = function(target, pet, skill)
+abilityObject.onPetAbility = function(target, pet, petskill, summoner, action)
     if target:hasStatusEffect(xi.effect.CURSE_II) then
         skill:setMsg(xi.msg.basic.SKILL_NO_EFFECT) -- no effect
         return 1
     end
-    
+
     local base = 47 + pet:getMainLvl() * 3
     local tp   = pet:getTP()
+
+    xi.job_utils.summoner.onUseBloodPact(target, petskill, summoner, action)
 
     if tp < 1000 then
         tp = 1000
@@ -38,7 +40,12 @@ abilityObject.onPetAbility = function(target, pet, skill)
         target:delStatusEffect(xi.effect.SLOW)
     end
 
-    skill:setMsg(xi.msg.basic.SELF_HEAL)
+    if target:getID() == action:getPrimaryTargetID() then
+        petskill:setMsg(xi.msg.basic.JA_RECOVERS_HP_2)
+    else
+        petskill:setMsg(xi.msg.basic.SELF_HEAL_SECONDARY)
+    end
+
     target:addHP(base)
     pet:updateEnmityFromCure(pet, base)
     return base

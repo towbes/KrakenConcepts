@@ -450,8 +450,8 @@ xi.znm.soultrapper.getZeniValue = function(target, user, item)
     end
     
     if (showDebugMessage) then
-        user:PrintToPlayer(string.format( 'Zeni for Mob %s is %d!', target:getName(), zeni))
-        user:PrintToPlayer(string.format( 'MobSize [%d] HPP: [%d] isFacing: [%s] LevelOffset: [%d] Distance: [%d] isNM: [%s] hasClaim: [%s] isBeingIrresponsible: [%s]',
+        user:printToPlayer(string.format( 'Zeni for Mob %s is %d!', target:getName(), zeni))
+        user:printToPlayer(string.format( 'MobSize [%d] HPP: [%d] isFacing: [%s] LevelOffset: [%d] Distance: [%d] isNM: [%s] hasClaim: [%s] isBeingIrresponsible: [%s]',
                                            modelSize, hpp, isFacing, (targetLevel - 75), distance, isNM, not (not user:isMobOwner(target) or hpp == 100), isBeingIrresponsible ))
     end
 
@@ -470,7 +470,7 @@ xi.znm.soultrapper.onItemUse = function(target, user, item)
     -- Add plate
     local plate = user:addSoulPlate(target:getName(), faunaMatch, subjectsOfInterestMatch, target:getEcosystem(), zeni, skillIndex, skillEntry.fp)
     local data = plate:getSoulPlateData()
-    utils.unused(data)
+    -- utils.unused(data)
 end
 
 -----------------------------------
@@ -511,7 +511,7 @@ xi.znm.ryo.onEventUpdate = function(player, csid, option, npc)
             player:updateEvent(GetServerVariable('[ZNM]SubjectsOfInterest'))
             -- convert real time to game days: 2.4 real minutes / vana hour
             local daysRemaining = math.floor((GetServerVariable('[ZNM]SubOfInterestTimeLimit') - os.time()) / (60 * 24 * 2.4))
-            player:PrintToPlayer(string.format('Ryo : Sanraku\'s interest will change in about %u days.', daysRemaining), 0xD)
+            player:printToPlayer(string.format('Ryo : Sanraku\'s interest will change in about %u days.', daysRemaining), 0xD)
         elseif option == 201 then
             -- Fauna
             player:updateEvent(GetServerVariable('[ZNM]Fauna'))
@@ -597,17 +597,18 @@ local function calculateZeniBonus(plateData)
 end
 
 xi.znm.sanraku.onTrade = function(player, npc, trade)
-    if not player:hasKeyItem(xi.ki.RHAPSODY_IN_AZURE) then
+    -- if not player:hasKeyItem(xi.ki.RHAPSODY_IN_AZURE) then
+    if npcUtil.tradeHasExactly(trade, xi.item.SOUL_PLATE) then
         if platesTradedToday(player) >= 10 then
             -- TODO: A message here?
             return
         end
-    else -- If you have the KI, clear out the tracking vars!
+    --[[ else -- If you have the KI, clear out the tracking vars!
         player:setCharVar('[ZNM][Sanraku]TradingDay', 0)
         player:setCharVar('[ZNM][Sanraku]TradedPlates', 0)
     end
 
-    if npcUtil.tradeHasExactly(trade, xi.item.SOUL_PLATE) then
+    if npcUtil.tradeHasExactly(trade, xi.item.SOUL_PLATE) then]]
         -- Cache the soulplate value on the player
         local item = trade:getItem(0)
         local plateData = item:getSoulPlateData()

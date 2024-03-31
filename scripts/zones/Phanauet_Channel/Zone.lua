@@ -9,6 +9,10 @@ local zoneObject = {}
 
 zoneObject.onInitialize = function(zone)
     xi.exp_controller.onInitialize(zone)
+
+    if GetMobByID(ID.mob.STUBBORN_DREDVODD) then
+        xi.mob.nmTODPersistCache(zone, ID.mob.STUBBORN_DREDVODD)
+    end
 end
 
 zoneObject.onZoneIn = function(player, prevZone)
@@ -33,13 +37,17 @@ end
 zoneObject.onGameHour = function(zone)
     local vHour = VanadielHour()
     local death = GetServerVariable('\\[SPAWN\\]16781327')
-    if vHour == 11 then
+    if vHour == 11 and os.time() > death then
         GetMobByID(ID.mob.STUBBORN_DREDVODD):setRespawnTime(30)
     end
 end
 
 zoneObject.onTransportEvent = function(player, transport)
     player:startEvent(100)
+end
+
+zoneObject.onConquestUpdate = function(zone, updatetype, influence, owner, ranking, isConquestAlliance)
+    xi.conq.onConquestUpdate(zone, updatetype, influence, owner, ranking, isConquestAlliance)
 end
 
 zoneObject.onTriggerAreaEnter = function(player, triggerArea)
@@ -49,6 +57,9 @@ zoneObject.onEventUpdate = function(player, csid, option, npc)
 end
 
 zoneObject.onEventFinish = function(player, csid, option, npc)
+    if csid == 100 then
+        player:setPos(0, 0, 0, 0, xi.zone.CARPENTERS_LANDING)
+    end
 end
 
 return zoneObject

@@ -16,7 +16,7 @@ entity.onMobSpawn = function(mob)
     mob:setAnimationSub(0)
 end
 
-entity.onMobEngaged = function(mob, target)
+entity.onMobEngage = function(mob, target)
     mob:hideName(false)
     mob:setStatus(xi.status.UPDATE)
     mob:setAnimationSub(1)

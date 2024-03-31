@@ -28,6 +28,8 @@ spellObject.onSpellCast = function(caster, target, spell)
             target:addStatusEffect(xi.effect.ACCURACY_DOWN, xi.settings.main.ABSORB_SPELL_AMOUNT * resist * ((100 + (caster:getMod(xi.mod.AUGMENTS_ABSORB))) / 100), xi.settings.main.ABSORB_SPELL_TICK, xi.settings.main.ABSORB_SPELL_AMOUNT * xi.settings.main.ABSORB_SPELL_TICK)    -- target loses ACC
         end
     end
+    caster:delStatusEffect(xi.effect.NETHER_VOID)
+    caster:delStatusEffectSilent(xi.effect.MANAWELL)
 
     return xi.effect.ACCURACY_BOOST
 end

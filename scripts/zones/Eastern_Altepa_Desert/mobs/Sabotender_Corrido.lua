@@ -8,7 +8,8 @@ local entity = {}
 
 entity.onMobInitialize = function(mob)
     mob:setMobMod(xi.mobMod.ADD_EFFECT, 1)
-    mob:setMod(xi.mod.MOVE, 25)
+    mob:setMod(xi.mod.DOUBLE_ATTACK, 25)
+    mob:setMod(xi.mod.MOVE_SPEED_STACKABLE, 25)
 end
 
 entity.onMobSpawn = function(mob)

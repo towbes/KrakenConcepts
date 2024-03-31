@@ -169,30 +169,6 @@ uint16 CMobSkill::getAnimationID() const
 
 uint16 CMobSkill::getPetAnimationID() const
 {
-    // levi
-    if (m_AnimID >= 552 && m_AnimID <= 560)
-    {
-        return m_AnimID - 488;
-    }
-
-    // garuda
-    if (m_AnimID >= 565 && m_AnimID <= 573)
-    {
-        return m_AnimID - 485;
-    }
-
-    // titan
-    if (m_AnimID >= 539 && m_AnimID <= 547)
-    {
-        return m_AnimID - 491;
-    }
-
-    // ifrit
-    if (m_AnimID >= 526 && m_AnimID <= 534)
-    {
-        return m_AnimID - 494;
-    }
-
     // fenrir
     if (m_AnimID >= 513 && m_AnimID <= 521)
     {
@@ -209,12 +185,6 @@ uint16 CMobSkill::getPetAnimationID() const
     if (m_AnimID >= 591 && m_AnimID <= 599)
     {
         return m_AnimID - 479;
-    }
-
-    // carbuncle
-    if (m_AnimID >= 605 && m_AnimID <= 611)
-    {
-        return m_AnimID - 605;
     }
 
     // wyvern

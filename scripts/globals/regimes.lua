@@ -502,7 +502,7 @@ local regimeInfo =
                     { 3, 4, 0, 0, 72, 76, 1830, 723 },
                     { 4, 3, 0, 0, 72, 78, 1900, 724 },
                     { 3, 3, 0, 0, 74, 78, 1640, 725 },
-                    { 2, 2, 2, 0, 102, 105, 2040, 726 },
+                    { 2, 2, 2, 0, 75, 79, 2040, 726 },
                 },
             },
             [xi.zone.MIDDLE_DELKFUTTS_TOWER] =
@@ -565,9 +565,9 @@ local regimeInfo =
                     { 4, 2, 0, 0, 26, 30, 860, 604 },
                     { 4, 2, 0, 0, 26, 30, 860, 605 },
                     { 4, 2, 0, 0, 30, 34, 970, 606 },
-                    { 5, 2, 0, 0, 87, 92, 2260, 607 },
-                    { 3, 3, 0, 0, 88, 90, 2260, 608 },
-                    { 3, 3, 0, 0, 88, 90, 1850, 609 },
+                    { 5, 2, 0, 0, 75, 89, 2260, 607 },
+                    { 3, 3, 0, 0, 75, 89, 2260, 608 },
+                    { 3, 3, 0, 0, 75, 89, 1850, 609 },
                 },
             },
             [xi.zone.BOSTAUNIEUX_OUBLIETTE] =
@@ -579,10 +579,10 @@ local regimeInfo =
                     { 4, 2, 0, 0, 52, 59, 1320, 611 },
                     { 5, 1, 0, 0, 56, 63, 1430, 612 },
                     { 9, 0, 0, 0, 65, 68, 2050, 613 },
-                    { 6, 1, 0, 0, 94, 97, 2300, 614 },
-                    { 6, 1, 0, 0, 95, 97, 2300, 615 },
-                    { 6, 0, 0, 0, 96, 97, 1960, 616 },
-                    { 2, 5, 0, 0, 95, 99, 2480, 617 },
+                    { 6, 1, 0, 0, 75, 89, 2300, 614 },
+                    { 6, 1, 0, 0, 75, 89, 2300, 615 },
+                    { 6, 0, 0, 0, 75, 89, 1960, 616 },
+                    { 2, 5, 0, 0, 75, 89, 2480, 617 },
                 },
             },
             [xi.zone.TORAIMARAI_CANAL] =
@@ -594,10 +594,10 @@ local regimeInfo =
                     { 2, 2, 2, 0, 52, 57, 1410, 619 },
                     { 3, 3, 0, 0, 53, 57, 1500, 620 },
                     { 3, 4, 0, 0, 60, 65, 1690, 621 },
-                    { 4, 3, 0, 0, 95, 97, 2240, 622 },
-                    { 5, 2, 0, 0, 95, 98, 2170, 623 },
-                    { 5, 2, 0, 0, 96, 98, 2250, 624 },
-                    { 8, 2, 0, 0, 94, 99, 2050, 625 },
+                    { 4, 3, 0, 0, 75, 89, 2240, 622 },
+                    { 5, 2, 0, 0, 75, 89, 2170, 623 },
+                    { 5, 2, 0, 0, 75, 89, 2250, 624 },
+                    { 8, 2, 0, 0, 75, 89, 2050, 625 },
                 },
             },
             [xi.zone.ZERUHN_MINES] =
@@ -624,7 +624,7 @@ local regimeInfo =
                     { 3, 3, 0, 0, 29, 33, 930, 731 },
                     { 4, 0, 0, 0, 30, 33, 770, 732 },
                     { 6, 0, 0, 0, 35, 37, 1030, 733 },
-                    { 4, 3, 0, 0, 87, 91, 2140, 734 },
+                    { 4, 3, 0, 0, 75, 89, 2140, 734 },
                 },
             },
             [xi.zone.KUFTAL_TUNNEL] =
@@ -639,7 +639,7 @@ local regimeInfo =
                     { 3, 3, 0, 0, 63, 69, 1410, 739 },
                     { 3, 3, 0, 0, 65, 69, 1540, 740 },
                     { 3, 3, 0, 0, 77, 80, 1660, 741 },
-                    { 3, 3, 0, 0, 99, 103, 1900, 742 },
+                    { 3, 3, 0, 0, 77, 89, 1900, 742 },
                 },
             },
             [xi.zone.SEA_SERPENT_GROTTO] =
@@ -718,11 +718,11 @@ local regimeInfo =
                     { 4, 1, 0, 0,  3,  8, 280, 639 },
                     { 3, 2, 0, 0,  5,  9, 350, 640 },
                     { 3, 2, 0, 0, 11, 14, 490, 641 },
-                    { 4, 2, 0, 0, 86, 89, 1830, 642 },
-                    { 5, 2, 0, 0, 86, 90, 1650, 643 },
-                    { 5, 2, 0, 0, 86, 90, 1840, 644 },
-                    { 2, 2, 2, 0, 90, 91, 1860, 645 },
-                    { 5, 2, 0, 0, 90, 93, 2260, 646 },
+                    { 4, 2, 0, 0, 75, 89, 1830, 642 },
+                    { 5, 2, 0, 0, 75, 90, 1650, 643 },
+                    { 5, 2, 0, 0, 75, 90, 1840, 644 },
+                    { 2, 2, 2, 0, 75, 89, 1860, 645 },
+                    { 5, 2, 0, 0, 75, 89, 2260, 646 },
                 },
             },
             [xi.zone.INNER_HORUTOTO_RUINS] =
@@ -781,8 +781,8 @@ local regimeInfo =
                     { 5, 1, 0, 0, 50, 55, 1340, 674 },
                     { 3, 3, 0, 0, 53, 56, 1330, 675 },
                     { 3, 3, 0, 0, 60, 63, 1470, 676 },
-                    { 3, 3, 0, 0, 91, 95, 1890, 677 },
-                    { 3, 3, 0, 0, 91, 95, 1890, 678 },
+                    { 3, 3, 0, 0, 75, 95, 1890, 677 },
+                    { 3, 3, 0, 0, 75, 95, 1890, 678 },
                 },
             },
             [xi.zone.GUSGEN_MINES] =
@@ -796,8 +796,8 @@ local regimeInfo =
                     { 2, 2, 2, 0, 28, 31, 1050, 682 },
                     { 3, 3, 0, 0, 30, 34, 970, 683 },
                     { 3, 3, 0, 0, 32, 36, 1000, 684 },
-                    { 2, 5, 0, 0, 85, 87, 1890, 685 },
-                    { 2, 5, 0, 0, 85, 89, 2180, 686 },
+                    { 2, 5, 0, 0, 75, 87, 1890, 685 },
+                    { 2, 5, 0, 0, 75, 89, 2180, 686 },
                 },
             },
             [xi.zone.CRAWLERS_NEST] =
@@ -811,8 +811,8 @@ local regimeInfo =
                     { 4, 2, 0, 0, 50, 54, 1300, 690 },
                     { 2, 2, 2, 0, 53, 58, 1340, 691 },
                     { 3, 3, 0, 0, 59, 63, 1470, 692 },
-                    { 4, 3, 0, 0, 91, 93, 2190, 693 },
-                    { 4, 3, 0, 0, 92, 96, 2220, 694 },
+                    { 4, 3, 0, 0, 75, 93, 2190, 693 },
+                    { 4, 3, 0, 0, 75, 96, 2220, 694 },
                 },
             },
             [xi.zone.MAZE_OF_SHAKHRAMI] =
@@ -826,8 +826,8 @@ local regimeInfo =
                     { 2, 4, 0, 0, 26, 31, 920, 698 },
                     { 4, 2, 0, 0, 26, 31, 820, 699 },
                     { 5, 1, 0, 0, 27, 33, 840, 700 },
-                    { 3, 3, 0, 0, 83, 85, 1840, 701 },
-                    { 3, 3, 0, 0, 86, 88, 1830, 702 },
+                    { 3, 3, 0, 0, 75, 85, 1840, 701 },
+                    { 3, 3, 0, 0, 75, 88, 1830, 702 },
                 },
             },
             [xi.zone.GARLAIGE_CITADEL] =
@@ -841,8 +841,8 @@ local regimeInfo =
                     { 4, 2, 0, 0, 51, 55, 1310, 706 },
                     { 3, 3, 0, 0, 52, 58, 1330, 707 },
                     { 2, 2, 1, 0, 59, 62, 1270, 708 },
-                    { 5, 2, 0, 0, 91, 96, 1840, 709 },
-                    { 4, 3, 0, 0, 92, 96, 2220, 710 },
+                    { 5, 2, 0, 0, 75, 96, 1840, 709 },
+                    { 4, 3, 0, 0, 75, 96, 2220, 710 },
                 },
             },
             [xi.zone.FEIYIN] =
@@ -856,8 +856,8 @@ local regimeInfo =
                     { 4, 2, 0, 0, 50, 56, 1310, 714 },
                     { 5, 1, 0, 0, 50, 58, 1340, 715 },
                     { 3, 3, 0, 0, 59, 63, 1470, 716 },
-                    { 4, 2, 0, 0, 95, 99, 2060, 717 },
-                    { 4, 3, 0, 0, 95, 99, 2250, 718 },
+                    { 4, 2, 0, 0, 75, 99, 2060, 717 },
+                    { 4, 3, 0, 0, 75, 99, 2250, 718 },
                 },
             },
             [xi.zone.IFRITS_CAULDRON] =
@@ -902,7 +902,7 @@ local regimeInfo =
                     { 5, 1, 0, 0, 75, 78, 1700, 767 },
                     { 5, 1, 0, 0, 75, 79, 1680, 768 },
                     { 4, 2, 0, 0, 76, 80, 1710, 769 },
-                    { 5, 2, 0, 0, 100, 103, 2310, 770 },
+                    { 5, 2, 0, 0, 75, 103, 2310, 770 },
                 },
             },
             [xi.zone.LABYRINTH_OF_ONZOZO] =
@@ -915,7 +915,7 @@ local regimeInfo =
                     { 3, 2, 0, 0, 50, 54, 1140, 773 },
                     { 3, 2, 0, 0, 55, 59, 1130, 774 },
                     { 4, 1, 0, 0, 70, 74, 1350, 775 },
-                    { 4, 2, 0, 0, 95, 98, 1920, 776 },
+                    { 4, 2, 0, 0, 75, 98, 1920, 776 },
                 },
             },
         },
@@ -1098,7 +1098,7 @@ xi.regime.bookOnTrigger = function(player, regimeType)
 
         player:startEvent(info.event, 0, arg2, cipher, arg4, 0, 0, player:getCurrency('valor_point'), player:getCharVar('[regime]id'))
     else
-        player:PrintToPlayer('Disabled.')
+        player:printToPlayer('Disabled.')
     end
 end
 
@@ -1202,7 +1202,7 @@ xi.regime.bookOnEventFinish = function(player, option, regimeType)
             end,
 
             ['HOMING_INSTINCT'] = function()
-                player:addStatusEffectEx(xi.effect.TELEPORT, 0, xi.teleport.id.WARP, 0, 1)
+                player:addStatusEffectEx(xi.effect.TELEPORT, 0, xi.teleport.id.WARP, 0, 3)
             end,
 
             ['RERAISE'] = function()
@@ -1499,18 +1499,18 @@ xi.regime.checkRegime = function(player, mob, regimeId, index, regimeType)
     -- award gil and tabs once per day, or at every page completion if REGIME_WAIT is 0 in settings.lua
     local vanadielEpoch = VanadielUniqueDay()
 
-        -- WINGSCUSTOM diminishing returns on page rewards for repeated completions on same day
+        --[[WINGSCUSTOM diminishing returns on page rewards for repeated completions on same day
     if player:getCharVar('[regime]lastReward') < vanadielEpoch then
         local completions = player:getCharVar('[regime]repeatedCompletions')
         if completions > 0 then
             reward = math.ceil(reward * (.85 ^ completions))
-            player:PrintToPlayer('Field Manual : You are getting a reduced reward from completing multiple pages on the same day!', xi.msg.channel.SYSTEM_3)
-            --player:PrintToPlayer(string.format('Field Manual : You are getting a reduced reward from completing %u pages on the same day!', completions), xi.msg.channel.SYSTEM_3)
+            player:printToPlayer('Field Manual : You are getting a reduced reward from completing multiple pages on the same day!', xi.msg.channel.SYSTEM_3)
+            --player:printToPlayer(string.format('Field Manual : You are getting a reduced reward from completing %u pages on the same day!', completions), xi.msg.channel.SYSTEM_3)
         end
         player:setCharVar('[regime]repeatedCompletions', completions + 1)
     else
         player:setCharVar('[regime]repeatedCompletions', 0)
-    end    
+    end]]
     
     if
         xi.settings.main.REGIME_WAIT == 0 or

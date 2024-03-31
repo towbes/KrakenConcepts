@@ -15,19 +15,17 @@ local weaponskillObject = {}
 
 weaponskillObject.onUseWeaponSkill = function(player, target, wsID, tp, primary, action, taChar)
     local params = {}
-    params.numHits = 5
-    -- This is a 6 hit ws but H2H ws are done in a different way, the off hand hit is been taking into account in another place
-    params.ftp100 = 0.75 params.ftp200 = 0.75 params.ftp300 = 0.75
-    params.str_wsc = 0.32 params.dex_wsc = 0.0 params.vit_wsc = 0.50 params.agi_wsc = 0.0 params.int_wsc = 0.0
-    params.mnd_wsc = 0.0 params.chr_wsc = 0.0
-    params.crit100 = 0.2 params.crit200 = 0.375 params.crit300 = 0.6
-    params.canCrit = true
-    params.acc100 = 0.0 params.acc200 = 0.0 params.acc300 = 0.0
-    params.atk100 = 1 params.atk200 = 1 params.atk300 = 1
+    params.numHits = 6
+    params.ftpMod = { 0.75, 0.75, 0.75 }
+    params.str_wsc = 0.32 params.vit_wsc = 0.32
+    params.critVaries = { 0.15, 0.30, 0.45 }
 
     if xi.settings.main.USE_ADOULIN_WEAPON_SKILL_CHANGES then
+        params.ftpMod = { 1.15, 1.15, 1.15 }
+        params.critVaries = { 0.25, 0.50, 0.75 }
+        -- params.ftpMod = { 1.0, 1.0, 1.0 }
+        params.vit_wsc = 0.50
         params.multiHitfTP = true
-        params.ftp100 = 1.15 params.ftp200 = 1.15 params.ftp300 = 1.15
         -- http://wiki.ffo.jp/html/15882.html
     end
 

@@ -19,16 +19,12 @@ local weaponskillObject = {}
 weaponskillObject.onUseWeaponSkill = function(player, target, wsID, tp, primary, action, taChar)
     local params = {}
     params.numHits = 1
-    params.ftp100 = 3 params.ftp200 = 3 params.ftp300 = 3
-    params.str_wsc = 0.0 params.dex_wsc = 0.6 params.vit_wsc = 0.0 params.agi_wsc = 0.0 params.int_wsc = 0.0 params.mnd_wsc = 0.0 params.chr_wsc = 0.0
-    params.crit100 = 0.0 params.crit200 = 0.0 params.crit300 = 0.0
-    params.canCrit = false
-    params.acc100 = 0.0 params.acc200 = 0.0 params.acc300 = 0.0
-    params.atk100 = 1 params.atk200 = 1 params.atk300 = 1
+    params.ftpMod = { 3.0, 3.0, 3.0 }
+    params.dex_wsc = 0.6
 
     if xi.settings.main.USE_ADOULIN_WEAPON_SKILL_CHANGES then
-        -- Ftp was Tested
-        params.ftp100 = 4.5 params.ftp200 = 4.5 params.ftp300 = 4.5
+        params.ftpMod = { 4.5, 4.5, 4.5 }
+        -- params.ftpMod = { 5.0, 5.0, 5.0 }
         params.dex_wsc = 0.8
     end
 
@@ -37,9 +33,10 @@ weaponskillObject.onUseWeaponSkill = function(player, target, wsID, tp, primary,
 
     local damage, criticalHit, tpHits, extraHits = xi.weaponskills.doPhysicalWeaponskill(player, target, wsID, params, tp, action, primary, taChar)
     if damage > 0 then
-        if not target:hasStatusEffect(xi.effect.PARALYSIS) then
+        if not target:hasStatusEffect(xi.effect.PARALYSIS) and not target:hasImmunity(xi.immunity.PARALYZE) then
             local duration = 60 * applyResistanceAddEffect(player, target, xi.element.ICE, 0)
             target:addStatusEffect(xi.effect.PARALYSIS, 10, 0, duration)
+            player:messagePublic(xi.msg.basic.SKILL_ENFEEB, target, wsID, xi.effect.PARALYSIS)
         end
     end
 

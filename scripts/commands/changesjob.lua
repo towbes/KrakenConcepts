@@ -11,8 +11,8 @@ commandObj.cmdprops =
 }
 
 local function error(player, msg)
-    player:PrintToPlayer(msg)
-    player:PrintToPlayer('!changesjob <jobID> (level)')
+    player:printToPlayer(msg)
+    player:printToPlayer('!changesjob <jobID> (level)')
 end
 
 commandObj.onTrigger = function(player, jobId, level)
@@ -23,7 +23,7 @@ commandObj.onTrigger = function(player, jobId, level)
     end
 
     jobId = tonumber(jobId) or xi.job[string.upper(jobId)]
-    if jobId == nil or jobId <= 0 or jobId >= xi.MAX_JOB_TYPE then
+    if jobId == nil or jobId < 0 or jobId >= xi.MAX_JOB_TYPE then
         error(player, 'Invalid jobID.  Use job short name, e.g. WAR, or its equivalent numeric ID.')
         return
     end
@@ -49,7 +49,7 @@ commandObj.onTrigger = function(player, jobId, level)
     end
 
     -- output new job to player
-    player:PrintToPlayer(string.format('You are now a %s%i/%s%i.', jobNameByNum[player:getMainJob()], player:getMainLvl(), jobNameByNum[player:getSubJob()], player:getSubLvl()))
+    player:printToPlayer(string.format('You are now a %s%i/%s%i.', jobNameByNum[player:getMainJob()], player:getMainLvl(), jobNameByNum[player:getSubJob()], player:getSubLvl()))
 end
 
 return commandObj

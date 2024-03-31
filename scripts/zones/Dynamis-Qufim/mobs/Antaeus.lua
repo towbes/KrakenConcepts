@@ -6,6 +6,7 @@
 require('scripts/globals/dynamis')
 mixins =
 {
+    require('scripts/mixins/dynamis_beastmen'),
     require('scripts/mixins/job_special')
 }
 -----------------------------------
@@ -23,6 +24,7 @@ entity.onMobSpawn = function(mob)
             { id = xi.jsa.EES_GIGA, hpp = 50 },
         },
     })
+    mob:setLocalVar('[isDynamis_Megaboss]', 1)
     mob:setMobLevel(88)
 
     -- Set Removable Mods

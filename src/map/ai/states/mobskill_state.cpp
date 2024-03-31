@@ -72,7 +72,7 @@ CMobSkillState::CMobSkillState(CBattleEntity* PEntity, uint16 targid, uint16 wsi
         actionTarget.animation  = 0;
         actionTarget.param      = m_PSkill->getID();
         actionTarget.messageID  = 43;
-        m_PEntity->loc.zone->PushPacket(m_PEntity, CHAR_INRANGE, new CActionPacket(action));
+        m_PEntity->loc.zone->PushPacket(m_PEntity, CHAR_INRANGE_SELF, new CActionPacket(action));
     }
     m_PEntity->PAI->EventHandler.triggerListener("WEAPONSKILL_STATE_ENTER", CLuaBaseEntity(m_PEntity), m_PSkill->getID());
     SpendCost();
@@ -85,20 +85,25 @@ CMobSkill* CMobSkillState::GetSkill()
 
 void CMobSkillState::SpendCost()
 {
-    if (m_PEntity->StatusEffectContainer->HasStatusEffect(EFFECT_SEKKANOKI))
+    if (!m_PSkill->isTpFreeSkill())
     {
-        m_spentTP = m_PEntity->addTP(-1000);
-        m_PEntity->StatusEffectContainer->DelStatusEffect(EFFECT_SEKKANOKI);
-    }
-    else if (m_PEntity->StatusEffectContainer->HasStatusEffect({ EFFECT_MEIKYO_SHISUI }))
-    {
-        m_spentTP            = 1000;
-        m_PEntity->health.tp = (m_PEntity->health.tp > 1000 ? m_PEntity->health.tp - 1000 : 0);
-    }
-    else if (!m_PSkill->isTpFreeSkill())
-    {
-        m_spentTP            = m_PEntity->health.tp;
-        m_PEntity->health.tp = 0;
+        if (m_PEntity->StatusEffectContainer->HasStatusEffect(EFFECT_SEKKANOKI))
+        {
+            m_spentTP = m_PEntity->addTP(-1000);
+            m_PEntity->StatusEffectContainer->DelStatusEffect(EFFECT_SEKKANOKI);
+        }
+        else if (m_PEntity->StatusEffectContainer->HasStatusEffect(EFFECT_MEIKYO_SHISUI) &&
+                 m_PEntity->GetLocalVar("[MeikyoShisui]MobSkillCount") > 0)
+        {
+            auto currentCount = m_PEntity->GetLocalVar("[MeikyoShisui]MobSkillCount");
+            m_PEntity->SetLocalVar("[MeikyoShisui]MobSkillCount", currentCount - 1);
+            m_spentTP = m_PEntity->addTP(-1000);
+        }
+        else
+        {
+            m_spentTP            = m_PEntity->health.tp;
+            m_PEntity->health.tp = 0;
+        }
     }
 }
 
@@ -155,7 +160,7 @@ void CMobSkillState::Cleanup(time_point tick)
         actionTarget.animation       = 0x1FC; // Not perfectly accurate, this animation ID can change from time to time for unknown reasons.
         actionTarget.reaction        = REACTION::HIT;
 
-        m_PEntity->loc.zone->PushPacket(m_PEntity, CHAR_INRANGE, new CActionPacket(action));
+        m_PEntity->loc.zone->PushPacket(m_PEntity, CHAR_INRANGE_SELF, new CActionPacket(action));
 
         // On retail testing, mobs lose 33% of their TP at 2900 or higher TP
         // But lose 25% at < 2900 TP.

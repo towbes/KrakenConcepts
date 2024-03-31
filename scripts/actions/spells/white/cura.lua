@@ -84,6 +84,8 @@ spellObject.onSpellCast = function(caster, target, spell)
         end
 
         local misery = caster:getLocalVar('Misery_Power')
+
+        misery = misery * (1 + caster:getMerit(xi.merit.ANIMUS_MISERY) / 100)
         --THIS IS LARELY SEMI-EDUCATED GUESSWORK. THERE IS NOT A
         --LOT OF CONCRETE INFO OUT THERE ON CURA THAT I COULD FIND
 
@@ -114,7 +116,8 @@ spellObject.onSpellCast = function(caster, target, spell)
 
     target:wakeUp()
 
-    --Enmity for Cura is fixed, so its CE/VE is set in the SQL and not calculated with updateEnmityFromCure
+    -- pass in fixed enmity values of 50 CE and 50 VE
+    caster:updateEnmityFromCure(target, final, 50, 50)
 
     if target:getID() == spell:getPrimaryTargetID() then
         spell:setMsg(xi.msg.basic.MAGIC_RECOVERS_HP)

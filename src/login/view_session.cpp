@@ -58,7 +58,7 @@ void view_session::read_func()
             auto sql = std::make_unique<SqlConnection>();
 
             uint32 accountID = 0;
-            int32  ret       = sql->Query("SELECT accid FROM chars WHERE charid = %u and charname = '%s' LIMIT 1;",
+            int32  ret       = sql->Query("SELECT accid FROM chars WHERE charid = %u AND charname = '%s' LIMIT 1;",
                                           requestedCharacterID, requestedCharacter);
             if (ret != SQL_ERROR && sql->NumRows() != 0 && sql->NextRow() == SQL_SUCCESS)
             {
@@ -266,7 +266,7 @@ void view_session::read_func()
 
                 if (invalidNameReason.has_value())
                 {
-                    ShowWarning(fmt::format("new character name error <{}>: {}", CharName, (*invalidNameReason).c_str()));
+                    ShowWarning(fmt::format("new character name error <{}>: {}", str(CharName), *invalidNameReason));
 
                     // Send error code:
                     // The character name you entered is unavailable. Please choose another name.
@@ -313,7 +313,7 @@ void view_session::read_func()
 
             if (versionMismatch)
             {
-                ShowError(fmt::format("view_session: Account {} has incorrect client version: got {}, expected {}", session.accountID, client_ver_data.c_str(), expected_version.c_str()));
+                ShowError(fmt::format("view_session: Account {} has incorrect client version: got {}, expected {}", session.accountID, client_ver_data, expected_version));
 
                 switch (settings::get<uint8>("login.VER_LOCK"))
                 {

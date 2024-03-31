@@ -99,7 +99,7 @@ local onTrade = function(player, npc, trade)
             end)
         end)
     else
-        player:PrintToPlayer('Nothing happens.', xi.msg.channel.NS_SAY)
+        player:printToPlayer('Nothing happens.', xi.msg.channel.NS_SAY)
     end
 end
 

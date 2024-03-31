@@ -28,7 +28,7 @@ CREATE TABLE `item_usable` (
   `reuseDelay` int(10) unsigned NOT NULL DEFAULT '0',
   `aoe` tinyint(1) unsigned NOT NULL DEFAULT '0',
   PRIMARY KEY (`itemid`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4 PACK_KEYS=1 CHECKSUM=1;
+) ENGINE=Aria TRANSACTIONAL=0 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci PACK_KEYS=1 CHECKSUM=1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -115,9 +115,9 @@ INSERT INTO `item_usable` VALUES (4172,'reraiser',1,1,33,0,0,0,0,0);
 INSERT INTO `item_usable` VALUES (4173,'hi-reraiser',1,1,33,0,0,0,0,0);
 INSERT INTO `item_usable` VALUES (4174,'vile_elixir',1,1,34,0,0,0,0,0);
 INSERT INTO `item_usable` VALUES (4175,'vile_elixir_+1',1,1,34,0,0,0,0,0);
-INSERT INTO `item_usable` VALUES (4176,'new_years_gift',1,1,0,0,0,0,0,0);
-INSERT INTO `item_usable` VALUES (4177,'new_years_gift',1,1,0,0,0,0,0,0);
-INSERT INTO `item_usable` VALUES (4178,'new_years_gift',1,1,0,0,0,0,0,0);
+INSERT INTO `item_usable` VALUES (4176,'mystery_gift',1,1,0,0,0,0,0,0);
+INSERT INTO `item_usable` VALUES (4177,'buff_token_self',1,1,82,0,0,0,0,0);
+INSERT INTO `item_usable` VALUES (4178,'buff_token_party',1,1,82,0,0,0,0,1);
 INSERT INTO `item_usable` VALUES (4179,'new_years_gift',1,1,0,0,0,0,0,0);
 INSERT INTO `item_usable` VALUES (4180,'new_years_gift',1,1,0,0,0,0,0,0);
 INSERT INTO `item_usable` VALUES (4181,'scroll_of_instant_warp',1,10,80,3,0,0,0,0);
@@ -447,6 +447,7 @@ INSERT INTO `item_usable` VALUES (4505,'handful_of_sunflower_seeds',1,1,24,0,0,0
 INSERT INTO `item_usable` VALUES (4506,'mutton_tortilla',1,1,24,0,0,0,0,0);
 INSERT INTO `item_usable` VALUES (4507,'rarab_meatball',1,1,28,0,0,0,0,0);
 INSERT INTO `item_usable` VALUES (4508,'serving_of_royal_jelly',1,1,24,0,0,0,0,0);
+INSERT INTO `item_usable` VALUES (4509,'flask_of_distilled_water',1,1,26,0,0,0,0,0);
 INSERT INTO `item_usable` VALUES (4510,'acorn_cookie',1,1,29,0,0,0,0,0);
 INSERT INTO `item_usable` VALUES (4511,'bowl_of_ambrosia',1,1,10,0,0,0,0,0);
 INSERT INTO `item_usable` VALUES (4512,'bottle_of_vampire_juice',1,1,26,0,0,0,0,0);
@@ -788,6 +789,7 @@ INSERT INTO `item_usable` VALUES (4883,'scroll_of_absorb-tp',1,1,12,5,0,0,0,0);
 INSERT INTO `item_usable` VALUES (4884,'scroll_of_blind_ii',1,1,12,5,0,0,0,0);
 INSERT INTO `item_usable` VALUES (4885,'scroll_of_dread_spikes',1,1,12,5,0,0,0,0);
 INSERT INTO `item_usable` VALUES (4886,'scroll_of_absorb-acc',1,1,12,5,0,0,0,0);
+INSERT INTO `item_usable` VALUES (4887,'scroll_of_absorb-attri',1,1,12,5,0,0,0,0);
 INSERT INTO `item_usable` VALUES (4889,'scroll_of_breakga',1,1,12,5,0,0,0,0);
 INSERT INTO `item_usable` VALUES (4890,'scroll_of_firaja',1,1,12,5,0,0,0,0);
 INSERT INTO `item_usable` VALUES (4891,'scroll_of_blizzaja',1,1,12,5,0,0,0,0);
@@ -1886,6 +1888,8 @@ INSERT INTO `item_usable` VALUES (6218,'slice_of_anchovy_pizza_+1',1,1,28,0,0,0,
 INSERT INTO `item_usable` VALUES (6223,'cehuetzi_snow_cone',1,1,26,0,0,0,0,0);
 INSERT INTO `item_usable` VALUES (6224,'apingaut_snow_cone',1,1,26,0,0,0,0,0);
 INSERT INTO `item_usable` VALUES (6225,'cyclical_coalescence',1,1,26,0,0,0,0,0);
+INSERT INTO `item_usable` VALUES (6258,'piece_of_shiromochi',1,1,28,0,0,0,0,0);
+INSERT INTO `item_usable` VALUES (6259,'piece_of_shiromochi_+1',1,1,28,0,0,0,0,0);
 INSERT INTO `item_usable` VALUES (6260,'piece_of_akamochi',1,1,28,0,0,0,0,0);
 INSERT INTO `item_usable` VALUES (6261,'piece_of_akamochi_+1',1,1,28,0,0,0,0,0);
 INSERT INTO `item_usable` VALUES (6262,'piece_of_kusamochi',1,1,28,0,0,0,0,0);
@@ -2341,12 +2345,15 @@ INSERT INTO `item_usable` VALUES (18945,'jet_sickle',1,3,0,0,100,30,600,0);
 INSERT INTO `item_usable` VALUES (19181,'moogles_largesse',1,12,0,0,9,10,259200,0);
 INSERT INTO `item_usable` VALUES (19204,'fiendtrapper',20,0,0,0,12,10,30,0);
 INSERT INTO `item_usable` VALUES (19246,'moggiebag',1,3,0,0,8,10,259200,0);
+INSERT INTO `item_usable` VALUES (21074,'kupo_rod',1,3,55,0,1,30,72000,0);
 -- INSERT INTO `item_usable` VALUES (20533,'worm_feelers_+1',1,1,55,0,1,30,86400,0); -- item's lua still needs made
 -- INSERT INTO `item_usable` VALUES (20568,'wind_knife_+1',4,1,0,0,1,30,600,0); -- untested
+INSERT INTO `item_usable` VALUES (20953,'escritorio',1,1,55,0,1,30,86400,0); -- Dispenses: Cone Calamary
 INSERT INTO `item_usable` VALUES (21266,'gastraphetes',1,1,55,0,1,10,3600,0);
 INSERT INTO `item_usable` VALUES (21267,'annihilator',1,1,55,0,1,10,3600,0);
 INSERT INTO `item_usable` VALUES (21268,'death_penalty',1,1,55,0,1,10,3600,0);
 INSERT INTO `item_usable` VALUES (21269,'armageddon',1,1,55,0,1,10,3600,0);
+INSERT INTO `item_usable` VALUES (21868,'sha_wujings_la._+1',1,55,0,0,1,30,72000,0); -- Dispenses: Distilled Water x 12
 -- INSERT INTO `item_usable` VALUES (22018,'seika_uchiwa_+1',1,1,55,0,1,30,300,0);  -- Enchantment: Cool Breeze
 -- INSERT INTO `item_usable` VALUES (22020,'jingly_rod_+1',1,1,55,0,1,30,3600,0);   -- Costume: lamb or Chacharoon
 INSERT INTO `item_usable` VALUES (22115,'yoichinoyumi',1,1,55,0,1,10,3600,0);

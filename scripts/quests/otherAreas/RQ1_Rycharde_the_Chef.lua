@@ -97,7 +97,7 @@ quest.sections =
                     if npcUtil.tradeHasExactly(trade, { { xi.item.SLICE_OF_DHALMEL_MEAT, 2 } }) then
                         return quest:progressEvent(74) -- Quest completed dialog.
                     elseif npcUtil.tradeHasExactly(trade, { { xi.item.SLICE_OF_DHALMEL_MEAT, 1 } }) then
-                        return quest:event(73) -- 'That's not enough!' dialog.
+                        return quest:event(73) -- "That's not enough!" dialog.
                     end
                 end,
             },

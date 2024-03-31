@@ -30,7 +30,7 @@ entity.onMobSpawn = function(mob)
     mob:setMobMod(xi.mobMod.NO_MOVE, 1)
 end
 
-entity.onMobEngaged = function(mob, target)
+entity.onMobEngage = function(mob, target)
     target:showText(mob, ID.text.MEDUSA_ENGAGE)
     mob:setMobMod(xi.mobMod.NO_MOVE, 0)
 

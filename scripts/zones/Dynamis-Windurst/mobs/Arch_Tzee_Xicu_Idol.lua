@@ -6,6 +6,7 @@
 require('scripts/globals/dynamis')
 mixins =
 {
+    require('scripts/mixins/dynamis_beastmen'),
     require('scripts/mixins/job_special')
 }
 -----------------------------------
@@ -27,9 +28,10 @@ entity.onMobSpawn = function(mob)
             { id = xi.jsa.MANAFONT, cooldown = 300, hpp = 100 },
         },
     })
+    mob:setLocalVar('[isDynamis_Arch_Megaboss]', 1)
 end
 
-entity.onMobEngaged = function(mob, target)
+entity.onMobEngage = function(mob, target)
 end
 
 entity.onMobFight = function(mob, target)
@@ -66,7 +68,7 @@ entity.onMobWeaponSkill = function(target, mob, skill)
         stompCounter = stompCounter + 1
         mob:setLocalVar('stompCounter', stompCounter)
 
-        if stompCounter > 1 then
+        if stompCounter > 2 then
             mob:setLocalVar('stompCounter', 0)
         elseif mob:checkDistance(target) < 6 then
             mob:useMobAbility(1112)

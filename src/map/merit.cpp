@@ -59,7 +59,7 @@ static uint8 cap[100] = {
     7, 7, 7, 7, 7,                          // 60-64  7
     8, 8, 8, 8, 8,                          // 65-69  8
     9, 9, 9, 9, 9,                          // 70-74  9
-    10, 10, 10, 10, 10,                     // 75-79 10
+    15, 15, 15, 15, 15,                     // 75-79 10
     15, 15, 15, 15, 15, 15, 15, 15, 15, 15, // 80-89 15
     15, 15, 15, 15, 15, 15, 15, 15, 15, 15, // 90-99 15
 };
@@ -142,7 +142,7 @@ CMeritPoints::CMeritPoints(CCharEntity* PChar)
 {
     if (sizeof(merits) != sizeof(meritNameSpace::GMeritsTemplate))
     {
-        ShowWarning("Size mismatch between merits and GMeritsTemplate for %s.", PChar->GetName());
+        ShowWarning("Size mismatch between merits and GMeritsTemplate for %s.", PChar->getName());
         return;
     }
 

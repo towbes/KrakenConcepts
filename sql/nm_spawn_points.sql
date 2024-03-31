@@ -23,7 +23,7 @@ CREATE TABLE `nm_spawn_points` (
   `pos_y` float(7,3) NOT NULL DEFAULT '0.000',
   `pos_z` float(7,3) NOT NULL DEFAULT '0.000',
   PRIMARY KEY (`mobid`,`pos`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4;
+) ENGINE=Aria TRANSACTIONAL=0 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -3180,6 +3180,10 @@ INSERT INTO `nm_spawn_points` VALUES (17281061,1,-299.000,0.000,192.000);
 INSERT INTO `nm_spawn_points` VALUES (17281061,2,-334.000,3.000,182.000);
 INSERT INTO `nm_spawn_points` VALUES (17281061,3,-301.000,0.000,166.000);
 INSERT INTO `nm_spawn_points` VALUES (17281149,0,-279.575,3.317,16.011); -- Mischievous Micholas
+INSERT INTO `nm_spawn_points` VALUES (17281296,0,-20.295,8.400,-113.263);   -- Pyuu the Spatemaker (H-9)
+INSERT INTO `nm_spawn_points` VALUES (17281296,1,-632.089,0.317,35.521);    -- Pyuu the Spatemaker (E-8)
+INSERT INTO `nm_spawn_points` VALUES (17281296,2,-356.919,16.282,-500.287); -- Pyuu the Spatemaker (F-12)
+INSERT INTO `nm_spawn_points` VALUES (17281296,3,154.125,8.027,500.785);    -- Pyuu the Spatemaker (I-5)
 INSERT INTO `nm_spawn_points` VALUES (17281388,0,269.933,3.5,278.389); -- Bayawak
 INSERT INTO `nm_spawn_points` VALUES (17285220,0,190.942,0.345,94.828);
 INSERT INTO `nm_spawn_points` VALUES (17285220,1,219.102,0.430,45.071);
@@ -7111,15 +7115,6 @@ INSERT INTO `nm_spawn_points` VALUES (17203216,20,-156.151,0.633,472.790);
 INSERT INTO `nm_spawn_points` VALUES (17203216,21,-156.857,0.458,485.462);
 INSERT INTO `nm_spawn_points` VALUES (17207302,0,-670,-23,352); -- Weeping Willow
 INSERT INTO `nm_spawn_points` VALUES (17264722,0,-129,23,-188); -- Chonchon
-INSERT INTO `nm_spawn_points` VALUES (17281296,0,-379.515,16.534,-567.181);
-INSERT INTO `nm_spawn_points` VALUES (17281296,1,-385.185,16.808,-533.120);
-INSERT INTO `nm_spawn_points` VALUES (17281296,2,-528.366,15.700,-539.444);
-INSERT INTO `nm_spawn_points` VALUES (17281296,3,-542.016,19.921,-487.515);
-INSERT INTO `nm_spawn_points` VALUES (17281296,4,-653.708,12.961,58.342);
-INSERT INTO `nm_spawn_points` VALUES (17281296,5,-657.145,13.000,-53.182);
-INSERT INTO `nm_spawn_points` VALUES (17281296,6,-583.458,12.974,-28.215);
-INSERT INTO `nm_spawn_points` VALUES (17281296,7,-140.273,9.954,-99.159);
-INSERT INTO `nm_spawn_points` VALUES (17281296,8,156.887,8.300,500.176);
 INSERT INTO `nm_spawn_points` VALUES (17469747,0,169.270,8.028,-110.580);
 INSERT INTO `nm_spawn_points` VALUES (17469747,1,155.792,8.334,-124.494);
 INSERT INTO `nm_spawn_points` VALUES (17469747,2,169.525,11.964,-128.288);
@@ -7136,6 +7131,13 @@ INSERT INTO `nm_spawn_points` VALUES (17281281,5,-428.881,17.000,-362.7055);
 INSERT INTO `nm_spawn_points` VALUES (17223982,0,-159.325,24.609,106.126);
 INSERT INTO `nm_spawn_points` VALUES (17223982,1,-197.075,25,111.792);
 INSERT INTO `nm_spawn_points` VALUES (17223982,2,-174.771,24.486,105.398);
+
+-- Atkorkamuy
+INSERT INTO `nm_spawn_points` VALUES (17293485,0,-341.691,-21.0,39.305);
+INSERT INTO `nm_spawn_points` VALUES (17293485,1,-338.898,-21.028,45.62);
+INSERT INTO `nm_spawn_points` VALUES (17293485,2,-286.022,-21.102,75.4);
+INSERT INTO `nm_spawn_points` VALUES (17293485,3,-226.756,-20.846,32.378);
+INSERT INTO `nm_spawn_points` VALUES (17293485,4,-202.11,-20.31,-10.47); -- This is the spot Atkorkamuy always spawns on server reboot even if this isn't in the db 
 
 /*!40000 ALTER TABLE `nm_spawn_points` ENABLE KEYS */;
 UNLOCK TABLES;

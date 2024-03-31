@@ -11,8 +11,8 @@ commandObj.cmdprops =
 }
 
 local function error(player, msg)
-    player:PrintToPlayer(msg)
-    player:PrintToPlayer('!getdigskill (player)')
+    player:printToPlayer(msg)
+    player:printToPlayer('!getdigskill (player)')
 end
 commandObj.onTrigger = function(player, craftname, target)
 
@@ -33,12 +33,12 @@ commandObj.onTrigger = function(player, craftname, target)
     else
         targ = GetPlayerByName(target)
         if targ == nil then
-            player:PrintToPlayer(string.format('Player named %s not found!', target))
+            player:printToPlayer(string.format('Player named %s not found!', target))
             return
         end
     end
 
-    player:PrintToPlayer(string.format('%s\'s current Chocobo Dig Skill is Level: %s', targ:getName(), (targ:getCharSkillLevel(skillID) / 10)))
+    player:printToPlayer(string.format('%s\'s current Chocobo Dig Skill is Level: %s', targ:getName(), (targ:getCharSkillLevel(skillID) / 10)))
 end
 
 return commandObj

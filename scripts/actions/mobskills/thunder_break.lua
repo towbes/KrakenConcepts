@@ -9,9 +9,7 @@ mobskillObject.onMobSkillCheck = function(target, mob, skill)
 end
 
 mobskillObject.onMobWeaponSkill = function(target, mob, skill)
-    local typeEffect = xi.effect.STUN
-
-    xi.mobskills.mobStatusEffectMove(mob, target, typeEffect, 1, 0, 4)
+    xi.mobskills.mobStatusEffectMove(mob, target, xi.effect.STUN, 1, 0, 4)
 
     local dmgmod = 1
 

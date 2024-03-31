@@ -86,7 +86,12 @@ CMagicState::CMagicState(CBattleEntity* PEntity, uint16 targid, SpellID spellid,
     actionTarget.speceffect = SPECEFFECT::NONE;
     actionTarget.animation  = 0;
     actionTarget.param      = static_cast<uint16>(m_PSpell->getID());
-    actionTarget.messageID  = 327; // starts casting
+    actionTarget.messageID  = 327; // <caster> starts casting <spell> on <target>.
+
+    if (PEntity->objtype != TYPE_PC)
+    {
+        actionTarget.messageID = 3; // <caster> starts casting <spell>.
+    }
 
     // TODO: weaponskill lua object
     m_PEntity->PAI->EventHandler.triggerListener("MAGIC_START", CLuaBaseEntity(m_PEntity), CLuaSpell(m_PSpell.get()), CLuaAction(&action));
@@ -332,7 +337,41 @@ bool CMagicState::CanCastSpell(CBattleEntity* PTarget, bool isEndOfCast)
         return false;
     }
 
-    if (m_PEntity->objtype == TYPE_PC && distance(m_PEntity->loc.p, PTarget->loc.p) > m_PSpell->getRange())
+    if (m_PSpell->getSpellGroup() == SPELLGROUP_BLUE && m_PSpell->getRange() <= 5)
+    {
+        float range = 4.6f; // basic short range for physical spells
+
+        // ToDo: This is an approximation that works well enough especially for larger mob sizes like Behemoth
+        // More captures on retail on different mob sizes will help to dial this in
+        if (PTarget->m_ModelRadius == 5)
+        {
+            range = 7.1f;
+        }
+        else if (PTarget->m_ModelRadius == 4)
+        {
+            range = 6.1f;
+        }
+        else if (PTarget->m_ModelRadius == 3)
+        {
+            range = 5.1f;
+        }
+        else if (PTarget->m_ModelRadius == 2)
+        {
+            range = 5.1f;
+        }
+        else
+        {
+            range = 4.6f;
+        }
+
+        if (distance(m_PEntity->loc.p, PTarget->loc.p) > range)
+        {
+            m_errorMsg = std::make_unique<CMessageBasicPacket>(m_PEntity, PTarget, static_cast<uint16>(m_PSpell->getID()), 0, MSGBASIC_OUT_OF_RANGE_UNABLE_CAST);
+            return false;
+        }
+    }
+
+    else if (m_PEntity->objtype == TYPE_PC && distance(m_PEntity->loc.p, PTarget->loc.p) > m_PSpell->getRange())
     {
         m_errorMsg = std::make_unique<CMessageBasicPacket>(m_PEntity, PTarget, static_cast<uint16>(m_PSpell->getID()), 0, MSGBASIC_OUT_OF_RANGE_UNABLE_CAST);
         return false;

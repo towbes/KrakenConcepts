@@ -6,6 +6,7 @@
 require('scripts/globals/dynamis')
 mixins =
 {
+    require('scripts/mixins/dynamis_beastmen'),
     require('scripts/mixins/job_special')
 }
 -----------------------------------
@@ -39,6 +40,7 @@ entity.onMobSpawn = function(mob)
     mob:setLocalVar('debuff_Talon', 0) -- Petroeyes/Chaos Blade locked.
     mob:setLocalVar('debuff_Femur', 0) -- Body Slam/Heavy Stomp locked.
     mob:setLocalVar('next2hr', 1) -- 2hr rotation not reset by a wipe
+    mob:setLocalVar('[isDynamis_Megaboss]', 1)
 end
 
 entity.onMobFight = function(mob, target)
@@ -138,7 +140,7 @@ entity.onMobFight = function(mob, target)
     end
 end
 
-entity.onMobEngaged = function(mob, target)
+entity.onMobEngage = function(mob, target)
     mob:setTP(0)
     mob:setLocalVar('next2hrtime', os.time() + 5) -- 5s after aggro
 end

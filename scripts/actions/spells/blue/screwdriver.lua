@@ -21,7 +21,14 @@ end
 spellObject.onSpellCast = function(caster, target, spell)
     local params = {}
     params.ecosystem = xi.ecosystem.AQUAN
-    params.tpmod = TPMOD_CRITICAL
+    params.tpmod = xi.spells.blue.tpMod.CRITICAL
+    params.critchance = 0
+    if caster:hasStatusEffect(xi.effect.AZURE_LORE) then
+        params.critchance = 55
+    elseif caster:hasStatusEffect(xi.effect.CHAIN_AFFINITY) then
+        params.critchance = math.floor(caster:getTP() / 75)
+    end
+
     params.attackType = xi.attackType.PHYSICAL
     params.damageType = xi.damageType.PIERCING
     params.scattr = xi.skillchainType.TRANSFIXION

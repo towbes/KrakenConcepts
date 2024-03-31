@@ -69,7 +69,7 @@ end
 -----------------------------------
 -- Desc: Messages sent to all players in a party in the zone
 -----------------------------------
-xi.pyxis.messageChest = function(player, messageid, param1, param2, param3, param4)
+xi.pyxis.messageChest = function(player, messageid, param1, param2, param3, param4, npc)
     local alliance = player:getAlliance()
 
     for _, member in ipairs(alliance) do
@@ -104,7 +104,7 @@ xi.pyxis.removeChest = function(player, npc, addcruor, delay)
         npcArg:setNpcFlags(3203)
         npcArg:setLocalVar('SPAWNSTATUS', 0)
         npcArg:setStatus(xi.status.DISAPPEAR)
-        npcArg:entityAnimationPacket('kesu')
+        npcArg:entityAnimationPacket(xi.animationString.STATUS_DISAPPEAR)
         npc:setUntargetable(false)
     end)
 end

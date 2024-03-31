@@ -134,26 +134,26 @@ commandObj.onTrigger = function(player)
 
     local target = player:getCursorTarget()
     if target == nil then
-        player:PrintToPlayer('Target something first.')
+        player:printToPlayer('Target something first.')
         return
     end
 
     local targetType = target:getObjType()
 
     if targetType == xi.objType.NPC then
-        player:PrintToPlayer('Target something other than an NPC..They don\'t have stats!')
+        player:printToPlayer('Target something other than an NPC..They don\'t have stats!')
         return
     end
 
     local traits = target:getTraits()
     if traits then
-        player:PrintToPlayer(string.format('Showing Active Traits for: %s', target:getName()), xi.msg.channel.SYSTEM_3)
-        player:PrintToPlayer('(id) [Trait Name] = Value', xi.msg.channel.SYSTEM_3)
+        player:printToPlayer(string.format('Showing Active Traits for: %s', target:getName()), xi.msg.channel.SYSTEM_3)
+        player:printToPlayer('(id) [Trait Name] = Value', xi.msg.channel.SYSTEM_3)
         for _, t in pairs(traits) do
-            player:PrintToPlayer(string.format('(%-3s): %s = %s', t['id'], traitNames[t['id']], t['value']), xi.msg.channel.SYSTEM_3)
+            player:printToPlayer(string.format('(%-3s): %s = %s', t['id'], traitNames[t['id']], t['value']), xi.msg.channel.SYSTEM_3)
         end
     else
-        player:PrintToPlayer('No active traits found!')
+        player:printToPlayer('No active traits found!')
     end
 end
 

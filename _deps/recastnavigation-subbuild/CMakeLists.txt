@@ -21,7 +21,7 @@ set_property(GLOBAL PROPERTY _CMAKE_FindGit_GIT_EXECUTABLE_VERSION
 
 include(ExternalProject)
 ExternalProject_Add(recastnavigation-populate
-                     "UPDATE_DISCONNECTED" "False" "GIT_REPOSITORY" "https://github.com/recastnavigation/recastnavigation.git" "GIT_TAG" "67c36bda750f36b2b4152db57a23170ed7a0683c"
+                     "UPDATE_DISCONNECTED" "False" "GIT_REPOSITORY" "https://github.com/recastnavigation/recastnavigation.git" "GIT_TAG" "cd898904b72a300011fbb24d578620bafa08ef2c"
                     SOURCE_DIR          "C:/Users/Chris/Desktop/CactuarLSB/server/_deps/recastnavigation-src"
                     BINARY_DIR          "C:/Users/Chris/Desktop/CactuarLSB/server/_deps/recastnavigation-build"
                     CONFIGURE_COMMAND   ""

@@ -9,9 +9,15 @@ spellObject.onMagicCastingCheck = function(caster, target, spell)
 end
 
 spellObject.onSpellCast = function(caster, target, spell)
+    if target:isUndead() then
+        spell:setMsg(xi.msg.basic.MAGIC_NO_EFFECT) -- No effect
+        return 0
+    end
+
     --calculate raw damage (unknown function  -> only dark skill though) - using http://www.bluegartr.com/threads/44518-Drain-Calculations
     -- also have small constant to account for 0 dark skill
     local dmg = 10 + (1.035 * caster:getSkillLevel(xi.skill.DARK_MAGIC))
+    local targetHP = target:getHP()
 
     if dmg > (caster:getSkillLevel(xi.skill.DARK_MAGIC) + 20) then
         dmg = (caster:getSkillLevel(xi.skill.DARK_MAGIC) + 20)
@@ -30,37 +36,28 @@ spellObject.onSpellCast = function(caster, target, spell)
     dmg = addBonuses(caster, spell, target, dmg)
     --add in target adjustment
     dmg = adjustForTarget(target, dmg, spell:getElement())
-    --add in final adjustments
 
     if dmg < 0 then
         dmg = 0
     end
 
-    if target:getHP() < dmg then
-        dmg = target:getHP()
-    end
-
-    -- Upyri: ID 4105
-    if target:isMob() and (target:isUndead() or target:getPool() == 4105) then
+        -- Upyri: ID 4105
+    if target:isMob() and (target:isUndead() or target:getPool() == 4105 or target:hasStatusEffect(xi.effect.CURSE_II) then
         spell:setMsg(xi.msg.basic.MAGIC_NO_EFFECT) -- No effect
         return 0
     end
 
-    -- Don't drain more HP than the target has left
-    if target:getHP() < dmg then
-        dmg = target:getHP()
-    end
-
+    --add in final adjustments and deal damage
     dmg = finalMagicAdjustments(caster, target, spell, dmg)
 
-    if caster:hasStatusEffect(xi.effect.CURSE_II) then
-        caster:addHP(0)
-        spell:setMsg(xi.msg.basic.MAGIC_DMG)
-    else
-        caster:addHP(dmg)
-        spell:setMsg(xi.msg.basic.MAGIC_DRAIN_HP) --change msg to 'xxx hp drained from the yyyy.'
+    if targetHP < dmg then
+        dmg = targetHP
     end
-    
+
+    caster:addHP(dmg)
+    caster:delStatusEffect(xi.effect.NETHER_VOID)
+    caster:delStatusEffectSilent(xi.effect.MANAWELL)
+
     return dmg
 end
 

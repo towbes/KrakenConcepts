@@ -50,7 +50,7 @@ commandObj.onTrigger = function(player, dir)
 
     local nextPoint = points[point]
 
-    player:PrintToPlayer(string.format(
+    player:printToPlayer(string.format(
         'Moving to point %d/%d @ %.3f, %.3f, %.3f',
         point,
         #points,

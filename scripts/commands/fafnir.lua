@@ -12,9 +12,14 @@ commandObj.cmdprops =
 }
 
 commandObj.onTrigger = function(player)
-    local zone = player:getZone()
+    local zoneOrInstanceObj = player:getZone()
 
-    local mob = zone:insertDynamicEntity({
+    local instance = player:getInstance()
+    if instance then
+        zoneOrInstanceObj = instance
+    end
+
+    local mob = zoneOrInstanceObj:insertDynamicEntity({
         -- NPC or MOB
         objtype = xi.objType.MOB,
 
@@ -71,7 +76,7 @@ commandObj.onTrigger = function(player)
 
     mob:spawn()
 
-    player:PrintToPlayer(string.format('Spawning Fafnir (Lv: %i, HP: %i)\n%s', mob:getMainLvl(), mob:getMaxHP(), mob))
+    player:printToPlayer(string.format('Spawning Fafnir (Lv: %i, HP: %i)\n%s', mob:getMainLvl(), mob:getMaxHP(), mob))
 end
 
 return commandObj

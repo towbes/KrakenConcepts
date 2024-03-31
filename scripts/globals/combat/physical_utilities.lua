@@ -46,7 +46,7 @@ local wsElementalProperties =
 }
 
 -- Table with pDIF caps per weapon/skill type.
-local pDifWeaponCapTable =
+xi.combat.physical.pDifWeaponCapTable =
 {
     -- [Skill/weapon type used] = {pre-randomizer_pDIF_cap}, Values from: https://www.bg-wiki.com/ffxi/PDIF
     [xi.skill.NONE            ] = { 3    }, -- We will use this for mobs.
@@ -207,14 +207,13 @@ xi.combat.physical.calculateWSC = function(actor, wsSTRmod, wsDEXmod, wsVITmod, 
 end
 
 -- TP factor equation. Used to determine TP modifer across all cases of 'X varies with TP'
-xi.combat.physical.calculateTPfactor = function(actor, TP1000, TP2000, TP3000)
-    local tpFactor = 1
-    local actorTP  = actor:getTP()
+xi.combat.physical.calculateTPfactor = function(actorTP, tpModifierTable)
+    local tpFactor = 0
 
     if actorTP >= 2000 then
-        tpFactor = TP2000 + (actorTP - 2000) * (TP3000 - TP2000) / 1000
+        tpFactor = tpModifierTable[2] + (actorTP - 2000) * (tpModifierTable[3] - tpModifierTable[2]) / 1000
     elseif actorTP >= 1000 then
-        tpFactor = TP1000 + (actorTP - 1000) * (TP2000 - TP1000) / 1000
+        tpFactor = tpModifierTable[1] + (actorTP - 1000) * (tpModifierTable[2] - tpModifierTable[1]) / 1000
     end
 
     return tpFactor
@@ -324,22 +323,26 @@ xi.combat.physical.calculateFTP = function(actor, tpFactor)
     return fTP
 end
 
-xi.combat.physical.calculateMeleePDIF = function(actor, target, weaponType, wsAttackMod, isCritical, applyLevelCorrection, tpIgnoresDefense, tpFactor)
+-- WARNING: This function is used in src/utils/battleutils.cpp "GetDamageRatio" function.
+-- If you update this parameters, update them there aswell.
+xi.combat.physical.calculateMeleePDIF = function(actor, target, weaponType, wsAttackMod, isCritical, applyLevelCorrection, tpIgnoresDefense, tpFactor, isWeaponskill)
     local pDif = 0
 
     ----------------------------------------
     -- Step 1: Attack / Defense Ratio
     ----------------------------------------
     local baseRatio     = 0
-    local actorAttack   = math.floor(actor:getStat(xi.mod.ATT) * wsAttackMod)
-    local targetDefense = target:getStat(xi.mod.DEF)
+    local actorAttack   = math.max(1, math.floor(actor:getStat(xi.mod.ATT) * wsAttackMod))
+    local targetDefense = math.max(1, target:getStat(xi.mod.DEF))
 
-    -- Actor Attack modifiers.
-    if actor:hasStatusEffect(xi.effect.BUILDING_FLOURISH) then
-        local flourishEffect = actor:getStatusEffect(xi.effect.BUILDING_FLOURISH)
+    -- Actor Weaponskill Specific Attack modifiers.
+    if isWeaponskill then
+        if actor:hasStatusEffect(xi.effect.BUILDING_FLOURISH) then
+            local flourishEffect = actor:getStatusEffect(xi.effect.BUILDING_FLOURISH)
 
-        if flourishEffect:getPower() >= 2 then -- 2 or more Finishing Moves used.
-            actorAttack = actorAttack + 25 + flourishEffect:getSubPower()
+            if flourishEffect:getPower() >= 2 then -- 2 or more Finishing Moves used.
+                actorAttack = actorAttack + 25 + flourishEffect:getSubPower()
+            end
         end
     end
 
@@ -347,11 +350,12 @@ xi.combat.physical.calculateMeleePDIF = function(actor, target, weaponType, wsAt
     local ignoreDefenseFactor = 1
 
     if tpIgnoresDefense then
-        ignoreDefenseFactor = tpFactor
+        ignoreDefenseFactor = 1 - tpFactor
     end
 
     targetDefense = math.floor(targetDefense * ignoreDefenseFactor)
 
+    -- Actor Attack / Target Defense ratio
     baseRatio = actorAttack / targetDefense
 
     -- Apply cap to baseRatio.
@@ -375,13 +379,17 @@ xi.combat.physical.calculateMeleePDIF = function(actor, target, weaponType, wsAt
     end
 
     local cRatio = utils.clamp(baseRatio - levelDifFactor, 0, 10) -- Clamp for the lower limit, mainly.
-
+    -- print('cratio' ' .. cRatio .. ')
+    -- target:printToPlayer(string.format('cRatio: %s', cRatio), xi.msg.channel.SYSTEM_3) -- Debug to see modifier of each hit in a weapon skill.
     ----------------------------------------
     -- Step 3: wRatio and pDif Caps (Melee)
     ----------------------------------------
-    local wRatio       = cRatio + isCritical
-    local pDifUpperCap = 0
-    local pDifLowerCap = 0
+    local wRatio             = cRatio + (isCritical and 1 or 0)
+    local pDifUpperCap       = 0
+    local pDifLowerCap       = 0
+    local damageLimitPlus    = actor:getMod(xi.mod.DAMAGE_LIMIT) / 100
+    local damageLimitPercent = 1 + actor:getMod(xi.mod.DAMAGE_LIMITP) / 100
+    local pDifFinalCap       = (xi.combat.physical.pDifWeaponCapTable[weaponType][1] + damageLimitPlus) * damageLimitPercent + (isCritical and 1 or 0)
 
     -- pDIF upper cap.
     if wRatio < 0.5 then
@@ -393,7 +401,7 @@ xi.combat.physical.calculateMeleePDIF = function(actor, target, weaponType, wsAt
     elseif wRatio < 1.5 then
         pDifUpperCap = wRatio + wRatio * 0.25
     else
-        pDifUpperCap = utils.clamp(wRatio + 0.375, 1, 3)
+        pDifUpperCap = math.min(wRatio + 0.375, pDifFinalCap)
     end
 
     -- pDIF lower cap.
@@ -414,8 +422,6 @@ xi.combat.physical.calculateMeleePDIF = function(actor, target, weaponType, wsAt
     ----------------------------------------
     -- Step 4: Apply weapon type caps.
     ----------------------------------------
-    local pDifFinalCap = pDifWeaponCapTable[weaponType][1] + isCritical -- TODO: Add 'Damage Limit +' Trait here.
-
     pDif = utils.clamp(pDif, 0, pDifFinalCap)
 
     ----------------------------------------
@@ -425,25 +431,37 @@ xi.combat.physical.calculateMeleePDIF = function(actor, target, weaponType, wsAt
 
     pDif = pDif * meleeRandom
 
+    -- Crit damage bonus is a final modifier
+    if isCritical then
+        local critDamageBonus = utils.clamp(actor:getMod(xi.mod.CRIT_DMG_INCREASE) - target:getMod(xi.mod.CRIT_DEF_BONUS) + target:getMod(xi.mod.ENEMYCRITDMG), 0, 100)
+        pDif                  = pDif * 1.25 * (100 + critDamageBonus) / 100
+    end
     return pDif
 end
 
-xi.combat.physical.calculateRangedPDIF = function(actor, target, weaponType, wsAttackMod, isCritical, applyLevelCorrection, tpIgnoresDefense, tpFactor)
+xi.combat.physical.calculateRangedPDIF = function(actor, target, weaponType, wsAttackMod, isCritical, applyLevelCorrection, tpIgnoresDefense, tpFactor, isWeaponskill)
     local pDif = 0
 
     ----------------------------------------
     -- Step 1: Attack / Defense Ratio
     ----------------------------------------
     local baseRatio     = 0
-    local actorAttack   = math.floor(actor:getStat(xi.mod.RATT) * wsAttackMod)
-    local targetDefense = target:getStat(xi.mod.DEF)
+    if wsAttackMod == nil then 
+        wsAttackMod = 1
+    end
+    local actorAttack   = math.max(1, math.floor(actor:getStat(xi.mod.RATT) * wsAttackMod))
+    local targetDefense = math.max(1, target:getStat(xi.mod.DEF))
 
-    -- Actor Ranged Attack modifiers.
-    if actor:hasStatusEffect(xi.effect.BUILDING_FLOURISH) then
-        local flourishEffect = actor:getStatusEffect(xi.effect.BUILDING_FLOURISH)
+    -- Actor Weaponskill Specific Ranged Attack modifiers.
+    if isWeaponskill then
+        -- TODO: verify this actually works on ranged WS.
+        -- This is a real concern now that RNG/DNC and COR/DNC can actually get level 50 subs through master levels.
+        if actor:hasStatusEffect(xi.effect.BUILDING_FLOURISH) then
+            local flourishEffect = actor:getStatusEffect(xi.effect.BUILDING_FLOURISH)
 
-        if flourishEffect:getPower() >= 2 then -- 2 or more Finishing Moves used.
-            actorAttack = actorAttack + 25 + flourishEffect:getSubPower()
+            if flourishEffect:getPower() >= 2 then -- 2 or more Finishing Moves used.
+                actorAttack = actorAttack + 25 + flourishEffect:getSubPower()
+            end
         end
     end
 
@@ -451,7 +469,7 @@ xi.combat.physical.calculateRangedPDIF = function(actor, target, weaponType, wsA
     local ignoreDefenseFactor = 1
 
     if tpIgnoresDefense then
-        ignoreDefenseFactor = tpFactor
+        ignoreDefenseFactor = 1.0 - tpFactor
     end
 
     targetDefense = math.floor(targetDefense * ignoreDefenseFactor)
@@ -505,21 +523,133 @@ xi.combat.physical.calculateRangedPDIF = function(actor, target, weaponType, wsA
     ----------------------------------------
     -- Step 4: Apply weapon type caps.
     ----------------------------------------
-    local pDifFinalCap = pDifWeaponCapTable[weaponType][1] + isCritical -- TODO: Add 'Damage Limit +' Trait here.
+    local damageLimitPlus = actor:getMod(xi.mod.DAMAGE_LIMIT) / 100
+    local damageLimitPercent = (100 + actor:getMod(xi.mod.DAMAGE_LIMITP)) / 100
+    local pDifFinalCap = (xi.combat.physical.pDifWeaponCapTable[weaponType][1] + damageLimitPlus) * damageLimitPercent -- Added damage limit bonuses
 
     pDif = utils.clamp(pDif, 0, pDifFinalCap)
 
     ----------------------------------------
     -- Step 5: Ranged critical factor. Bypasses caps.
     ----------------------------------------
-    if isCritical == 1 then
+    if isCritical then
         pDif = pDif * 1.25
     end
 
     -- Step 6: Distance correction and True Shot.
     -- TODO: Implement distance correction and True shot...
 
+    -- Crit damage bonus is a final modifier
+    if isCritical then
+        local critDamageBonus = utils.clamp(actor:getMod(xi.mod.CRIT_DMG_INCREASE) - target:getMod(xi.mod.CRIT_DEF_BONUS), 0, 100)
+        pDif = pDif * (100 + critDamageBonus) / 100
+    end
+
     return pDif
+end
+
+-----------------------------------
+-- Critical hit rate operations
+-----------------------------------
+-- dStat: Critical hit rate bonus from DEX vs AGI difference.
+xi.combat.physical.criticalRateFromStatDiff = function(actor, target)
+    local statBonus = 0
+
+    local dDex = actor:getStat(xi.mod.DEX) - target:getStat(xi.mod.AGI)
+
+    if dDex > 50 then
+        statBonus = 0.15
+    elseif dDex >= 40 then
+        statBonus = (dDex - 35) / 100
+    elseif dDex >= 30 then
+        statBonus = 0.04
+    elseif dDex >= 20 then
+        statBonus = 0.03
+    elseif dDex >= 14 then
+        statBonus = 0.02
+    elseif dDex >= 7 then
+        statBonus = 0.01
+    end
+
+    return statBonus
+end
+
+-- Innin: Critical hit rate bonus when actor is behind target.
+xi.combat.physical.criticalRateFromInnin = function(actor, target)
+    local inninBonus = 0
+
+    if
+        actor:hasStatusEffect(xi.effect.INNIN) and
+        actor:isBehind(target, 23)
+    then
+        inninBonus = actor:getStatusEffect(xi.effect.INNIN):getPower()
+    end
+
+    return inninBonus
+end
+
+-- Fencer: Critical hit rate bonus when actor is only wielding with main hand.
+xi.combat.physical.criticalRateFromFencer = function(actor)
+    local fencerBonus = 0
+    -- TODO: do any Trusts or mobs ever get Fencer bonuses?
+
+    if actor:getObjType() == xi.objType.PC then
+        local mainEquip = actor:getStorageItem(0, 0, xi.slot.MAIN)
+        local subEquip  = actor:getStorageItem(0, 0, xi.slot.SUB)
+        if
+            mainEquip and
+            not mainEquip:isTwoHanded() and                                                      -- No 2 handed weapons.
+            not mainEquip:isHandToHand() and                                                     -- No 2 handed weapons.
+            (subEquip == nil or subEquip:getSkillType() == xi.skill.NONE or subEquip:isShield()) -- Only shields allowed in sub.
+        then
+            fencerBonus = actor:getMod(xi.mod.FENCER_CRITHITRATE) / 100
+        end
+    end
+
+    return fencerBonus
+end
+
+-- Critical rate from Building Flourish.
+-- TODO: Study case were if we can attach modifiers to the effect itself, both this and the effect may need refactoring.
+xi.combat.physical.criticalRateFromFlourish = function(actor)
+    local buildingFlourishBonus = 0
+
+    if actor:hasStatusEffect(xi.effect.BUILDING_FLOURISH) then
+        local effectPower    = actor:getStatusEffect(xi.effect.BUILDING_FLOURISH):getPower()
+        local effectSubPower = actor:getStatusEffect(xi.effect.BUILDING_FLOURISH):getSubPower()
+
+        if effectPower >= 3 then
+            buildingFlourishBonus = (10 + effectSubPower) / 100
+        end
+    end
+
+    return buildingFlourishBonus
+end
+
+-- Critical rate master function.
+xi.combat.physical.calculateSwingCriticalRate = function(actor, target, actorTP, optCritModTable)
+    -- See reference at https://www.bg-wiki.com/ffxi/Critical_Hit_Rate
+    local finalCriticalRate     = 0
+    local baseCriticalRate      = 0.05
+    local statBonus             = xi.combat.physical.criticalRateFromStatDiff(actor, target)
+    local inninBonus            = xi.combat.physical.criticalRateFromInnin(actor, target)
+    local fencerBonus           = xi.combat.physical.criticalRateFromFencer(actor)
+    local buildingFlourishBonus = xi.combat.physical.criticalRateFromFlourish(actor)
+    local modifierBonus         = actor:getMod(xi.mod.CRITHITRATE) / 100
+    local meritBonus            = actor:getMerit(xi.merit.CRIT_HIT_RATE) / 100
+    local targetModifierBonus   = target:getMod(xi.mod.ENEMYCRITRATE) / 100
+    local meritPenalty          = target:getMerit(xi.merit.ENEMY_CRIT_RATE) / 100
+    local tpFactor              = 0
+
+    -- For weaponskills.
+    if optCritModTable then
+        tpFactor = xi.combat.physical.calculateTPfactor(actorTP, optCritModTable)
+    end
+
+    -- Add all different bonuses and clamp.
+    finalCriticalRate = baseCriticalRate + statBonus + inninBonus + fencerBonus + buildingFlourishBonus + modifierBonus + meritBonus + targetModifierBonus - meritPenalty + tpFactor
+
+    return utils.clamp(finalCriticalRate, 0.05, 1) -- TODO: Need confirmation of no upper cap.
 end
 
 xi.combat.physical.calculateNumberOfHits = function(actor, additionalParamsHere)

@@ -22,6 +22,7 @@
 #include "common/socket.h"
 #include "common/timer.h"
 #include "common/utils.h"
+#include "common/vana_time.h"
 
 #include <cstring>
 
@@ -34,6 +35,25 @@
 #include "entities/petentity.h"
 #include "entities/trustentity.h"
 #include "status_effect_container.h"
+
+std::string getTransportNPCName(CBaseEntity* PEntity)
+{
+    bool isElevator = PEntity->look.size == MODEL_ELEVATOR;
+    auto strSize    = isElevator ? 10 : 8;
+
+    std::string str(strSize, '\0');
+    std::memcpy(str.data() + 0, PEntity->name.data(), PEntity->name.size());
+
+    auto timestamp = PEntity->GetLocalVar("TransportTimestamp");
+    std::memcpy(str.data() + 4, &timestamp, 4);
+
+    if (isElevator)
+    {
+        std::memset(str.data() + 8, 8, 1);
+    }
+
+    return str;
+}
 
 CEntityUpdatePacket::CEntityUpdatePacket(CBaseEntity* PEntity, ENTITYUPDATE type, uint8 updatemask)
 {
@@ -144,9 +164,15 @@ void CEntityUpdatePacket::updateWith(CBaseEntity* PEntity, ENTITYUPDATE type, ui
             // TODO: Unify name logic
             if (updatemask & UPDATE_NAME)
             {
+                auto name = PNpc->getName();
+                if (PNpc->look.size == MODEL_ELEVATOR || PNpc->look.size == MODEL_SHIP)
+                {
+                    name = getTransportNPCName(PNpc);
+                }
+
                 // depending on size of name, this can be 0x20, 0x22, or 0x24
                 this->setSize(0x48);
-                std::memcpy(data + 0x34, PEntity->GetName().c_str(), std::min<size_t>(PEntity->GetName().size(), PacketNameLength));
+                std::memcpy(data + 0x34, name.c_str(), std::min<size_t>(name.size(), PacketNameLength));
             }
         }
         break;
@@ -171,6 +197,16 @@ void CEntityUpdatePacket::updateWith(CBaseEntity* PEntity, ENTITYUPDATE type, ui
                     ref<uint8>(0x27) |= 0x08;
                 }
                 ref<uint8>(0x28) |= PMob->StatusEffectContainer->HasStatusEffect(EFFECT_TERROR) ? 0x10 : 0x00;
+
+                // Giga hack -- mobs in Pso'Xja for some reason are less "visible"
+                // Set CliPriorityFlag to force them to render on the client if they receive 0x00Es
+                // TODO: make this a MOBMOD or some other way to set this flag without hardcoding.
+                if (PMob->getZone() == ZONEID::ZONE_PSOXJA)
+                {
+                    // Enable CliPriorityFlag, see https://github.com/atom0s/XiPackets/tree/main/world/server/0x0037 (documentation for 0x00E is not on the repo yet)
+                    ref<uint8>(0x28) |= 0x20;
+                }
+
                 ref<uint8>(0x28) |= PMob->health.hp > 0 && PMob->animation == ANIMATION_DEATH ? 0x08 : 0;
                 ref<uint8>(0x28) |= PMob->status == STATUS_TYPE::NORMAL && PMob->objtype == TYPE_MOB ? 0x40 : 0; // Make the entity triggerable if a mob and normal status
                 ref<uint8>(0x29) = static_cast<uint8>(PEntity->allegiance);
@@ -198,7 +234,7 @@ void CEntityUpdatePacket::updateWith(CBaseEntity* PEntity, ENTITYUPDATE type, ui
                 this->setSize(0x48);
                 if (PMob->packetName.empty())
                 {
-                    std::memcpy(data + 0x34, PEntity->GetName().c_str(), std::min<size_t>(PEntity->GetName().size(), PacketNameLength));
+                    std::memcpy(data + 0x34, PEntity->getName().c_str(), std::min<size_t>(PEntity->getName().size(), PacketNameLength));
                 }
                 else
                 {
@@ -238,12 +274,20 @@ void CEntityUpdatePacket::updateWith(CBaseEntity* PEntity, ENTITYUPDATE type, ui
         }
         break;
         case MODEL_DOOR:
-        case MODEL_ELEVATOR:
-        case MODEL_SHIP:
         {
             this->setSize(0x48);
             ref<uint16>(0x30) = PEntity->look.size;
-            std::memcpy(data + 0x34, PEntity->GetName().c_str(), (PEntity->GetName().size() > 12 ? 12 : PEntity->GetName().size()));
+            std::memcpy(data + 0x34, PEntity->getName().c_str(), (PEntity->getName().size() > 12 ? 12 : PEntity->getName().size()));
+        }
+        break;
+        case MODEL_SHIP:
+        case MODEL_ELEVATOR:
+        {
+            this->setSize(0x48);
+            ref<uint16>(0x30) = PEntity->look.size;
+            auto name = getTransportNPCName(PEntity);
+            std::memcpy(data + 0x34, name.data(), name.size());
+            // std::memcpy(data + 0x34, PEntity->GetName().c_str(), (PEntity->GetName().size() > 12 ? 12 : PEntity->GetName().size()));
             if (PEntity->manualConfig)
             {
                 this->setSize(0x40);

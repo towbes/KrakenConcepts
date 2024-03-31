@@ -9,7 +9,7 @@ entity.onMobInitialize = function(mob)
     mob:addMod(xi.mod.REGAIN, 100)
 end
 
-entity.onMobEngaged = function(mob)
+entity.onMobEngage = function(mob)
     mob:addTP(3000)
 end
 

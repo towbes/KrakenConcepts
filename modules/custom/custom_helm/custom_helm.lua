@@ -25,7 +25,7 @@ local settings =
         LOCAL_USES = 'uses',
     },
 
-    [xi.helm.type.HARVESTING] =
+    [xi.helmType.HARVESTING] =
     {
         name    = 'Harvesting Point',
         type    = 'Harvesting',
@@ -37,7 +37,7 @@ local settings =
         breaks  = 'Your %s breaks!',
     },
 
-    [xi.helm.type.EXCAVATION] =
+    [xi.helmType.EXCAVATION] =
     {
         name    = 'Excavation Point',
         type    = 'Excavation',
@@ -49,7 +49,7 @@ local settings =
         breaks  = 'Your %s breaks!',
     },
 
-    [xi.helm.type.LOGGING] =
+    [xi.helmType.LOGGING] =
     {
         name    = 'Logging Point',
         type    = 'Logging',
@@ -61,7 +61,7 @@ local settings =
         breaks  = 'Your %s breaks!',
     },
 
-    [xi.helm.type.MINING] =
+    [xi.helmType.MINING] =
     {
         name    = 'Mining Point',
         type    = 'Mining',
@@ -124,7 +124,7 @@ end
 
 
 m.onTrigger = function(player, npc, helmType)
-    player:PrintToPlayer(string.format(
+    player:printToPlayer(string.format(
         settings.dialog.check,
         settings[helmType].type,
         settings[helmType].tool
@@ -149,7 +149,7 @@ m.onTrade = function(player, npc, trade, helmType)
             player:selfEmote(npc, xi.helm.helmInfo[helmType].animation, xi.emoteMode.MOTION)
 
             if full == 1 then
-                player:PrintToPlayer(settings.dialog.full, xi.msg.channel.NS_SAY)
+                player:printToPlayer(settings.dialog.full, xi.msg.channel.NS_SAY)
                 return
             end
 
@@ -158,7 +158,7 @@ m.onTrade = function(player, npc, trade, helmType)
                 if broke == 1 then
                     -- tool broke but found item
                     if item[2] ~= 0 then
-                        player:PrintToPlayer(string.format(
+                        player:printToPlayer(string.format(
                             settings[helmType].process,
                             item[3],
                             settings[helmType].tool
@@ -166,7 +166,7 @@ m.onTrade = function(player, npc, trade, helmType)
 
                     -- tool broke and no item
                     else
-                        player:PrintToPlayer(string.format(
+                        player:printToPlayer(string.format(
                             settings[helmType].breaks,
                             settings[helmType].tool
                         ), xi.msg.channel.NS_SAY)
@@ -174,14 +174,14 @@ m.onTrade = function(player, npc, trade, helmType)
 
                 -- found item
                 elseif item[2] ~= 0 then
-                    player:PrintToPlayer(string.format(
+                    player:printToPlayer(string.format(
                         settings[helmType].success,
                         item[3]
                     ), xi.msg.channel.NS_SAY)
 
                 -- found nothing
                 else
-                    player:PrintToPlayer(settings[helmType].unable, xi.msg.channel.NS_SAY)
+                    player:printToPlayer(settings[helmType].unable, xi.msg.channel.NS_SAY)
                 end
 
                 -- success! reward item and decrement number of remaining uses on the point

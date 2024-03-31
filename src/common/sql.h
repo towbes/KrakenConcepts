@@ -5,7 +5,6 @@
 #define _COMMON_SQL_H
 
 #include "cbasetypes.h"
-#include "sql_prepared_stmt.h"
 
 #include <thread>
 #include <unordered_map>
@@ -73,8 +72,6 @@ enum SqlDataType
     SQLDT_LASTID
 };
 
-class SqlPreparedStatement;
-
 class SqlConnection
 {
 public:
@@ -140,6 +137,18 @@ public:
     int32 Query(const char* query, Args... args)
     {
         std::string query_v = fmt::sprintf(query, args...);
+        return QueryStr(query_v.c_str());
+    }
+
+    /// Executes a query.
+    /// Any previous result is freed.
+    /// The query is constructed as if it was fmtlib.
+    ///
+    /// @return SQL_SUCCESS or SQL_ERROR
+    template <typename... Args>
+    int32 QueryFmt(const char* query, Args... args)
+    {
+        std::string query_v = fmt::format(query, args...);
         return QueryStr(query_v.c_str());
     }
 
@@ -219,8 +228,6 @@ public:
     void StartProfiling();
     void FinishProfiling();
 
-    std::shared_ptr<SqlPreparedStatement> GetPreparedStatement(std::string const& name);
-
 private:
     Sql_t*      self;
     const char* m_User;
@@ -232,10 +239,6 @@ private:
     uint32 m_PingInterval;
     uint32 m_LastPing;
     bool   m_LatencyWarning;
-
-    void InitPreparedStatements();
-
-    std::unordered_map<std::string, std::shared_ptr<SqlPreparedStatement>> m_PreparedStatements;
 
     std::thread::id m_ThreadId;
 };

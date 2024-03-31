@@ -6,7 +6,7 @@ local entity = {}
 
 entity.onMobInitialize = function(mob)
     mob:setMod(xi.mod.REGAIN, 1000)
-    mob:setMod(xi.mod.MOVE, 100)
+    mob:setSpeed(100)
     mob:setMobMod(xi.mobMod.SIGHT_RANGE, 30)
 end
 
@@ -15,7 +15,7 @@ entity.onMobSpawn = function(mob)
     mob:setLocalVar('moveTime', os.time() + 6)
 end
 
-entity.onMobEngaged = function(mob)
+entity.onMobEngage = function(mob)
     mob:setMobMod(xi.mobMod.NO_MOVE, 0)
 end
 

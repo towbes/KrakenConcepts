@@ -9,7 +9,7 @@ entity.onMobSpawn = function(mob)
     mob:setMobMod(xi.mobMod.NO_STANDBACK, 1)
 end
 
-entity.onMobEngaged = function(mob)
+entity.onMobEngage = function(mob)
     mob:setLocalVar('agroTimer', os.time() + math.random(1, 5))
     mob:setLocalVar('fly', 1)
 end

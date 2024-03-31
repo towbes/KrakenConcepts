@@ -11,8 +11,8 @@ commandObj.cmdprops =
 }
 
 local function error(player, msg)
-    player:PrintToPlayer(msg)
-    player:PrintToPlayer('!getrefundmerits (player)')
+    player:printToPlayer(msg)
+    player:printToPlayer('!getrefundmerits (player)')
 end
 
 commandObj.onTrigger = function(player, target)
@@ -29,7 +29,7 @@ commandObj.onTrigger = function(player, target)
     end
 
     local merits = targ:getCharVar('refundMerits')
-    player:PrintToPlayer(string.format('The total refunded merits for %s is %s.', targ:getName(), merits))
+    player:printToPlayer(string.format('The total refunded merits for %s is %s.', targ:getName(), merits))
 
 end
 

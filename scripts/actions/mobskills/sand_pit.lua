@@ -9,8 +9,17 @@ mobskillObject.onMobSkillCheck = function(target, mob, skill)
 end
 
 mobskillObject.onMobWeaponSkill = function(target, mob, skill)
-    local typeEffect = xi.effect.BIND
-    skill:setMsg(xi.mobskills.mobStatusEffectMove(mob, target, typeEffect, 1, 0, 30))
+    local duration = 120
+    local master = mob:getMaster()
+    local skillID = skill:getID()
+    if mob:isPet() then
+        if master and master:isJugPet() then
+            local tp = skill:getTP()
+            duration = 90
+            duration = math.max(140, duration * (tp/1000)) -- Minimum 2:20 minutes. Maximum 4:30 minutes.
+        end
+    end
+    skill:setMsg(xi.mobskills.mobStatusEffectMove(mob, target, xi.effect.BIND, 1, 0, duration))
 
     -- Different mechanics based on the antlion using it
     local poolID = mob:getPool()
@@ -51,7 +60,7 @@ mobskillObject.onMobWeaponSkill = function(target, mob, skill)
         mob:delStatusEffectsByFlag(xi.effectFlag.ERASABLE)
     end
 
-    return typeEffect
+    return xi.effect.BIND
 end
 
 return mobskillObject

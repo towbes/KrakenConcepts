@@ -17,6 +17,7 @@ zones[xi.zone.EAST_RONFAURE_S] =
         LOGIN_CAMPAIGN_UNDERWAY       = 7002, -- The [/January/February/March/April/May/June/July/August/September/October/November/December] <number> Login Campaign is currently underway!
         LOGIN_NUMBER                  = 7003, -- In celebration of your most recent login (login no. <number>), we have provided you with <number> points! You currently have a total of <number> points.
         MEMBERS_LEVELS_ARE_RESTRICTED = 7023, -- Your party is unable to participate because certain members' levels are restricted.
+        -- CAMPAIGN_RESULTS_TALLIED      = 7366, -- Campaign results tallied.
         LOGGING_IS_POSSIBLE_HERE      = 7157, -- Logging is possible here if you have <item>.
         FISHING_MESSAGE_OFFSET        = 7741, -- You can't fish here.
         VOIDWALKER_DESPAWN            = 8003, -- The monster fades before your eyes, a look of disappointment on its face.
@@ -82,7 +83,8 @@ zones[xi.zone.EAST_RONFAURE_S] =
 
     npc =
     {
-        LOGGING = GetTableOfIDs('Logging_Point'),
+        CAMPAIGN_NPC_OFFSET = GetFirstID('Arlayse_RK'), -- San, Bas, Win, Flag +4, CA
+        LOGGING             = GetTableOfIDs('Logging_Point'),
     },
 }
 

@@ -18,8 +18,8 @@ local weaponskillObject = {}
 
 weaponskillObject.onUseWeaponSkill = function(player, target, wsID, tp, primary, action, taChar)
     local params = {}
-    params.ftp100 = 3 params.ftp200 = 3 params.ftp300 = 3
-    params.str_wsc = 0.3 params.dex_wsc = 0.0 params.vit_wsc = 0.0 params.agi_wsc = 0.0 params.int_wsc = 0.0 params.mnd_wsc = 0.3 params.chr_wsc = 0.0
+    params.ftpMod = { 3.0, 3.0, 3.0 }
+    params.str_wsc = 0.3 params.mnd_wsc = 0.3
     params.ele = xi.element.LIGHT
     params.skill = xi.skill.CLUB
     params.includemab = true
@@ -29,6 +29,13 @@ weaponskillObject.onUseWeaponSkill = function(player, target, wsID, tp, primary,
     end
 
     local damage, criticalHit, tpHits, extraHits = xi.weaponskills.doMagicWeaponskill(player, target, wsID, params, tp, action, primary)
+
+    local duration = 5 * applyResistanceAddEffect(player, target, xi.element.LIGHT, 0)
+    if damage > 0 then
+        target:addStatusEffect(xi.effect.FLASH, 20, 0, duration)
+        player:messagePublic(xi.msg.basic.SKILL_ENFEEB, target, wsID, xi.effect.FLASH)
+    end
+
     return tpHits, extraHits, criticalHit, damage
 end
 
