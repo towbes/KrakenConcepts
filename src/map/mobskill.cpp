@@ -101,9 +101,9 @@ void CMobSkill::setTotalTargets(uint16 targets)
     m_TotalTargets = targets;
 }
 
-void CMobSkill::setAnimationID(uint16 animID)
+void CMobSkill::setAnimationID(uint16 aid)
 {
-    m_AnimID = animID;
+    m_AnimID = aid;
 }
 
 const std::string& CMobSkill::getName()

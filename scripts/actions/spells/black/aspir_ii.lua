@@ -9,9 +9,9 @@ spellObject.onMagicCastingCheck = function(caster, target, spell)
 end
 
 spellObject.onSpellCast = function(caster, target, spell)
-    if target:isUndead() then
-        spell:setMsg(xi.msg.basic.MAGIC_NO_EFFECT) -- No effect
-        return 0
+    if target:hasStatusEffect(xi.effect.CURSE_II) then
+        skill:setMsg(xi.msg.basic.SKILL_NO_EFFECT) -- no effect
+        return 1
     end
 
     local dmg = 10 + 0.575 * caster:getSkillLevel(xi.skill.DARK_MAGIC)

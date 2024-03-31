@@ -2018,6 +2018,11 @@ void CBattleEntity::OnMobSkillFinished(CMobSkillState& state, action_t& action)
                 msg = 282;
             }
         }
+        else if (PSkill->getMsg() == MSGBASIC_NONE)
+        {
+            target.reaction   = REACTION::NONE;
+            target.speceffect = SPECEFFECT::NONE;
+        }
         else
         {
             target.reaction   = REACTION::HIT;

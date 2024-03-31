@@ -2762,15 +2762,15 @@ INSERT INTO `mob_skills` VALUES (2744,1510,'armor_shatterer',0,7.0,2000,1,4,0,32
 INSERT INTO `mob_skills` VALUES (2745,433,'heat_capacitor',0,7.0,2000,0,16,4,0,0,0,0,0);
 INSERT INTO `mob_skills` VALUES (2746,434,'barrage_turbine',0,7.0,2000,0,16,4,0,0,0,0,0);
 INSERT INTO `mob_skills` VALUES (2747,439,'disruptor',0,7.0,2000,0,4,4,0,0,0,0,0);
--- INSERT INTO `mob_skills` VALUES (2748,1922,'mantid_melee_double',0,7.0,2000,0,4,4,0,0,0,0,0); -- kaggan melee specials
--- INSERT INTO `mob_skills` VALUES (2749,1923,'mantid_melee_slice',0,7.0,2000,0,4,4,0,0,0,0,0);  -- kaggan melee specials
--- INSERT INTO `mob_skills` VALUES (2750,1924,'mantid_melee_jump',1,7.0,2000,0,4,4,0,0,0,0,0);   -- kaggan melee specials
-INSERT INTO `mob_skills` VALUES (2751,1925,'slicing_sickle',4,12.0,2000,1000,4,0,0,0,0,0,0);
-INSERT INTO `mob_skills` VALUES (2752,1926,'raptorial_claw',1,15.0,2000,1000,4,0,0,0,0,0,0);
-INSERT INTO `mob_skills` VALUES (2753,1927,'phlegm_expulsion',1,18.0,2000,1000,4,0,0,0,0,0,0);
-INSERT INTO `mob_skills` VALUES (2754,1928,'macerating_bile',1,15.0,2000,1000,4,0,0,0,0,0,0);
-INSERT INTO `mob_skills` VALUES (2755,1929,'preying_posture',0,7.0,2000,1000,1,0,0,0,0,0,0);
-INSERT INTO `mob_skills` VALUES (2756,1930,'dead_prophet',4,10.0,2000,1000,4,0,0,0,0,0,0);
+INSERT INTO `mob_skills` VALUES (2748,1922,'mantid_melee_double',0,7.0,2000,0,4,4,0,0,0,0,0); -- kaggan melee specials
+INSERT INTO `mob_skills` VALUES (2749,1923,'mantid_melee_slice',4,50.0,2000,0,4,4,0,0,0,0,0);  -- kaggan melee specials
+INSERT INTO `mob_skills` VALUES (2750,1924,'mantid_melee_jump',1,50.0,2000,0,4,4,0,0,0,0,0);   -- kaggan melee specials
+INSERT INTO `mob_skills` VALUES (2751,1925,'slicing_sickle',4,50.0,2000,2000,4,0,0,3,0,0,0);
+INSERT INTO `mob_skills` VALUES (2752,1926,'raptorial_claw',1,50.0,2000,2000,4,0,0,0,0,0,0);
+INSERT INTO `mob_skills` VALUES (2753,1927,'phlegm_expulsion',1,50.0,2000,2000,4,0,0,0,0,0,0);
+INSERT INTO `mob_skills` VALUES (2754,1928,'macerating_bile',1,50.0,2000,2000,4,0,0,0,0,0,0);
+INSERT INTO `mob_skills` VALUES (2755,1929,'preying_posture',0,50.0,2000,1000,1,0,0,0,0,0,0);
+INSERT INTO `mob_skills` VALUES (2756,1930,'dead_prophet',4,50.0,2000,4000,4,0,0,0,0,0,0);
 -- INSERT INTO `mob_skills` VALUES (2757,1931,'sakra_storm',0,7.0,2000,1500,4,0,0,0,0,0,0);
 -- INSERT INTO `mob_skills` VALUES (2758,1932,'kaleidoscopic_fury',0,7.0,2000,1500,4,0,0,0,0,0,0);
 -- INSERT INTO `mob_skills` VALUES (2759,2503,'telsonic_tempest',0,7.0,2000,1500,4,0,0,0,0,0,0);
@@ -2823,7 +2823,7 @@ INSERT INTO `mob_skills` VALUES (2790,1962,'oblivions_mantle',1,15.0,2000,1000,4
 -- INSERT INTO `mob_skills` VALUES (2806,2550,'beleaguerment',0,7.0,2000,1500,4,0,0,0,0,0,0);
 -- INSERT INTO `mob_skills` VALUES (2807,2551,'unchivalrous_stab',0,7.0,2000,1500,4,0,0,0,0,0,0);
 -- INSERT INTO `mob_skills` VALUES (2808,2552,'discordant_gambit',0,7.0,2000,1500,4,0,0,0,0,0,0);
--- INSERT INTO `mob_skills` VALUES (2809,2553,'immolating_claw',0,7.0,2000,1500,4,0,0,0,0,0,0);
+-- INSERT INTO `mob_skills` VALUES (2809,1989,'immolating_claw',0,7.0,2000,1500,4,0,0,0,0,0,0);
 -- INSERT INTO `mob_skills` VALUES (2810,2554,'yamas_judgment',0,7.0,2000,1500,4,0,0,0,0,0,0);
 -- INSERT INTO `mob_skills` VALUES (2811,1991,'keraunos_quill',0,7.0,2000,1500,4,0,0,0,0,0,0);
 -- INSERT INTO `mob_skills` VALUES (2812,2556,'bilrost_squall',0,7.0,2000,1500,4,0,0,0,0,0,0);
@@ -2900,7 +2900,7 @@ INSERT INTO `mob_skills` VALUES (2882,2018,'frond_fatale',1,18.0,2000,1000,4,0,0
 INSERT INTO `mob_skills` VALUES (2883,2019,'full_bloom',1,18.0,2000,1000,4,0,0,0,0,0,0);
 INSERT INTO `mob_skills` VALUES (2884,2020,'deracinator',1,18.0,2000,1000,4,0,0,0,0,0,0);
 INSERT INTO `mob_skills` VALUES (2885,2021,'beautiful_death',1,18.0,2000,1000,4,0,0,0,0,0,0);
--- INSERT INTO `mob_skills` VALUES (2886,2630,'exorender',0,7.0,2000,1500,4,0,0,0,0,0,0);
+-- INSERT INTO `mob_skills` VALUES (2886,2024,'exorender',1,7.0,2000,1500,4,0,0,0,0,0,0);
 -- INSERT INTO `mob_skills` VALUES (2887,2631,'tropic_tenor',0,7.0,2000,1500,4,0,0,0,0,0,0);
 -- INSERT INTO `mob_skills` VALUES (2888,2632,'dark_recital',0,7.0,2000,1500,4,0,0,0,0,0,0);
 -- INSERT INTO `mob_skills` VALUES (2889,2633,'usurping_scepter',0,7.0,2000,1500,4,0,0,0,0,0,0);
@@ -2964,34 +2964,34 @@ INSERT INTO `mob_skills` VALUES (2946,2168,'sensilla_blades',1,18.0,2000,1000,4,
 INSERT INTO `mob_skills` VALUES (2947,2169,'tegmina_buffet',1,18.0,2000,1000,4,0,0,0,0,0,0);
 INSERT INTO `mob_skills` VALUES (2948,2170,'sanguinary_slash',1,18.0,2000,1000,4,0,0,1,0,0,0);
 INSERT INTO `mob_skills` VALUES (2949,2171,'orthopterror',1,18.0,2000,1000,4,0,0,0,0,0,0);
-INSERT INTO `mob_skills` VALUES (2950,2129,'tempestuous_upheaval',1,18.0,2000,1000,4,0,0,0,0,0,0);
-INSERT INTO `mob_skills` VALUES (2951,2130,'slice_n_dice',0,25.0,2000,1000,4,0,0,0,0,0,0);
-INSERT INTO `mob_skills` VALUES (2952,2131,'blackout',1,18.0,2000,1000,4,0,0,0,0,0,0);
--- INSERT INTO `mob_skills` VALUES (2953,2132,'smouldering_swarm',0,7.0,2000,1500,4,0,0,0,0,0,0);
--- INSERT INTO `mob_skills` VALUES (2954,2698,'.',0,7.0,2000,1500,4,0,0,0,0,0,0); -- Crakclaw Auto Attacks
--- INSERT INTO `mob_skills` VALUES (2955,2699,'.',0,7.0,2000,1500,4,0,0,0,0,0,0);
--- INSERT INTO `mob_skills` VALUES (2956,2700,'.',0,7.0,2000,1500,4,0,0,0,0,0,0);
-INSERT INTO `mob_skills` VALUES (2957,2180,'impenetrable_carapace',1,18.0,2000,1000,1,0,0,0,0,0,0);
-INSERT INTO `mob_skills` VALUES (2958,133,'rending_deluge',1,18.0,2000,1000,4,0,0,0,0,0,0);
-INSERT INTO `mob_skills` VALUES (2959,134,'sundering_snip',1,18.0,2000,1000,4,0,0,0,0,0,0);
-INSERT INTO `mob_skills` VALUES (2960,135,'viscid_spindrift',1,18.0,2000,1000,4,0,0,0,0,0,0);
-INSERT INTO `mob_skills` VALUES (2961,2184,'riptide_eupnea',1,18.0,2000,1000,4,0,0,0,0,0,0);
--- INSERT INTO `mob_skills` VALUES (2962,73,'',0,7.0,2000,1500,4,0,0,0,0,0,0); -- Matamata Auto Attacks
--- INSERT INTO `mob_skills` VALUES (2963,74,'',0,7.0,2000,1500,4,0,0,0,0,0,0);
--- INSERT INTO `mob_skills` VALUES (2964,75,'',0,7.0,2000,1500,4,0,0,0,0,0,0);
-INSERT INTO `mob_skills` VALUES (2965,76,'cranial_thrust',4,18.0,2000,1000,4,0,0,0,0,0,0);
-INSERT INTO `mob_skills` VALUES (2966,2125,'tail_thwack',1,18.0,2000,1000,4,0,0,0,0,0,0);
-INSERT INTO `mob_skills` VALUES (2967,2126,'embalming_earth',1,18.0,2000,1000,4,0,0,0,0,0,0);
-INSERT INTO `mob_skills` VALUES (2968,2127,'scalding_breath',4,18.0,2000,1000,4,0,0,0,0,0,0);
-INSERT INTO `mob_skills` VALUES (2969,2128,'debilitating_spout',1,18.0,2000,1000,4,0,0,0,0,0,0);
-INSERT INTO `mob_skills` VALUES (2970,137,'paralyzing_triad',0,7.0,2000,1000,4,0,0,0,0,0,0);
-INSERT INTO `mob_skills` VALUES (2971,138,'crepuscular_grasp',1,18.0,2000,1000,4,0,0,0,0,0,0);
-INSERT INTO `mob_skills` VALUES (2972,139,'necrotic_brume',4,15.0,2000,1000,4,0,0,0,0,0,0);
--- INSERT INTO `mob_skills` VALUES (2973,2717,'terminal_bloom',0,7.0,2000,1500,4,0,0,0,0,0,0);
-INSERT INTO `mob_skills` VALUES (2974,141,'foul_waters',1,18.0,2000,1000,4,0,0,0,0,0,0);
-INSERT INTO `mob_skills` VALUES (2975,142,'pestilent_plume',1,18.0,2000,1000,4,0,0,0,0,0,0);
-INSERT INTO `mob_skills` VALUES (2976,143,'deadening_haze',1,18.0,2000,1000,4,0,0,0,0,0,0);
--- INSERT INTO `mob_skills` VALUES (2977,2721,'venomous_vapor',0,7.0,2000,1500,4,0,0,0,0,0,0);
+INSERT INTO `mob_skills` VALUES (2950,2129,'tempestuous_upheaval',1,18.0,2000,2000,4,0,0,4,0,0,0);
+INSERT INTO `mob_skills` VALUES (2951,2130,'slice_n_dice',0,25.0,2000,2000,4,0,0,0,0,0,0);
+INSERT INTO `mob_skills` VALUES (2952,2131,'blackout',1,18.0,2000,3000,4,0,0,0,0,0,0);
+INSERT INTO `mob_skills` VALUES (2953,2132,'smouldering_swarm',1,18.0,2000,2000,4,0,0,4,0,0,0);
+INSERT INTO `mob_skills` VALUES (2954,2177,'craklaw_auto_01',0,7.0,2000,0,4,4,0,0,0,0,0); -- Crakclaw Auto Attacks
+INSERT INTO `mob_skills` VALUES (2955,2178,'craklaw_auto_02',4,7.0,2000,0,4,4,0,0,0,0,0);
+INSERT INTO `mob_skills` VALUES (2956,2179,'craklaw_auto_03',1,7.0,2000,0,4,4,0,0,0,0,0);
+INSERT INTO `mob_skills` VALUES (2957,2180,'impenetrable_carapace',0,18.0,2000,1000,1,0,0,0,0,0,0);
+INSERT INTO `mob_skills` VALUES (2958,2181,'rending_deluge',1,18.0,2000,2000,4,0,0,0,0,0,0);
+INSERT INTO `mob_skills` VALUES (2959,2182,'sundering_snip',1,18.0,2000,2000,4,0,0,0,0,0,0);
+INSERT INTO `mob_skills` VALUES (2960,2183,'viscid_spindrift',1,18.0,2000,2000,4,0,0,0,0,0,0);
+INSERT INTO `mob_skills` VALUES (2961,2184,'riptide_eupnea',1,18.0,2000,2000,4,0,0,0,0,0,0);
+INSERT INTO `mob_skills` VALUES (2962,2121,'matamata_auto_01',0,7.0,2000,0,4,4,0,0,0,0,0); -- Matamata Auto Attacks
+INSERT INTO `mob_skills` VALUES (2963,2122,'matamata_auto_02',4,7.0,2000,0,4,4,0,0,0,0,0);
+INSERT INTO `mob_skills` VALUES (2964,2123,'matamata_auto_03',1,7.0,2000,0,4,4,0,2,0,0,0);
+INSERT INTO `mob_skills` VALUES (2965,2124,'cranial_thrust',4,18.0,2000,2000,4,0,0,0,0,0,0);
+INSERT INTO `mob_skills` VALUES (2966,2125,'tail_thwack',1,18.0,2000,2000,4,0,0,2,0,0,0);
+INSERT INTO `mob_skills` VALUES (2967,2126,'embalming_earth',1,18.0,2000,2000,4,0,0,0,0,0,0);
+INSERT INTO `mob_skills` VALUES (2968,2127,'scalding_breath',4,18.0,2000,2000,4,0,0,2,0,0,0);
+INSERT INTO `mob_skills` VALUES (2969,2128,'debilitating_spout',4,18.0,2000,2000,4,0,0,0,0,0,0);
+INSERT INTO `mob_skills` VALUES (2970,2185,'paralyzing_triad',4,7.0,2000,2000,4,0,0,0,0,0,0);
+INSERT INTO `mob_skills` VALUES (2971,2186,'crepuscular_grasp',1,18.0,2000,2000,4,0,0,0,0,0,0);
+INSERT INTO `mob_skills` VALUES (2972,2187,'necrotic_brume',1,15.0,2000,2000,4,0,0,0,0,0,0);
+INSERT INTO `mob_skills` VALUES (2973,2188,'terminal_bloom',1,7.0,2000,3000,4,0,0,0,0,0,0);
+INSERT INTO `mob_skills` VALUES (2974,2189,'foul_waters',4,18.0,2000,2000,4,0,0,0,0,0,0);
+INSERT INTO `mob_skills` VALUES (2975,2190,'pestilent_plume',4,18.0,2000,2000,4,0,0,0,0,0,0);
+INSERT INTO `mob_skills` VALUES (2976,2191,'deadening_haze',1,18.0,2000,2000,4,0,0,0,0,0,0);
+INSERT INTO `mob_skills` VALUES (2977,2192,'venomous_vapor',1,18.0,2000,3000,4,0,0,0,0,0,0);
 INSERT INTO `mob_skills` VALUES (2978,2162,'consecration',1,18.0,2000,1000,4,0,0,0,0,0,0);
 INSERT INTO `mob_skills` VALUES (2979,2163,'sacred_caper',1,18.0,2000,1000,4,0,0,0,0,0,0);
 INSERT INTO `mob_skills` VALUES (2980,2164,'phototrophic_blessing',0,7.0,2000,1000,1,0,0,0,0,0,0);

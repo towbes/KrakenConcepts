@@ -495,7 +495,11 @@ xi.job_utils.dancer.useWaltzAbility = function(player, target, ability, action)
 
     amtCured = amtCured * xi.settings.main.CURE_POWER
     amtCured = math.min(amtCured, target:getMaxHP() - target:getHP())
-
+    
+    if target:hasStatusEffect(xi.effect.CURSE_II) then
+        target:messageBasic(xi.msg.basic.NO_EFFECT)
+        return 1
+    end
     target:restoreHP(amtCured)
     target:wakeUp()
     player:updateEnmityFromCure(target, amtCured)
