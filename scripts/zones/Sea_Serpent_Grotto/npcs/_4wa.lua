@@ -20,9 +20,9 @@ entity.onTrigger = function(player, npc)
     local zPos = player:getZPos()
 
     if xPos > 94 and zPos >= 40 then
-        player:messageSpecial(ID.text.SAHAGIN_DOOR_OUTSIDE) -- Give a message if standing on the "outside" of the door (closest to Norg)
+        player:messageSpecial(ID.text.SAHAGIN_DOOR_OUTSIDE) -- Give a message if standing on the 'outside' of the door (closest to Norg)
     elseif xPos < 104 and xPos >= 94 and zPos <= 40 then
-        player:messageSpecial(ID.text.SAHAGIN_DOOR_INSIDE) -- Give a message if standing on the "inside" of the door
+        player:messageSpecial(ID.text.SAHAGIN_DOOR_INSIDE) -- Give a message if standing on the 'inside' of the door
     end
 end
 

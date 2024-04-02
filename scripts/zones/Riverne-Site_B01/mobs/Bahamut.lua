@@ -6,26 +6,52 @@ local ID = zones[xi.zone.RIVERNE_SITE_B01]
 -----------------------------------
 local entity = {}
 
-entity.onMobInitialize = function(mob)
-    mob:setMobMod(xi.mobMod.HP_STANDBACK, -1)
-end
-
-entity.onMobSpawn = function(mob)
-    mob:addStatusEffect(xi.effect.PHALANX, 35, 0, 180)
-    mob:addStatusEffect(xi.effect.STONESKIN, 350, 0, 300)
-    mob:addStatusEffect(xi.effect.PROTECT, 175, 0, 1800)
-    mob:addStatusEffect(xi.effect.SHELL, 24, 0, 1800)
-end
-
 local megaflareHPP =
 {
     90, 80, 70, 60, 50, 40, 30, 20,
 }
 
+entity.onMobInitialize = function(mob)
+end
+
+entity.onMobSpawn = function(mob)
+    mob:setMobMod(xi.mobMod.NO_STANDBACK, 1)
+    mob:setMobMod(xi.mobMod.SIGHT_RANGE, 20)
+    mob:setMobMod(xi.mobMod.SOUND_RANGE, 20)
+    mob:setMobMod(xi.mobMod.NO_MOVE, 1)
+    mob:setMobMod(xi.mobMod.MAGIC_COOL, 50)
+    mob:setMobMod(xi.mobMod.STANDBACK_COOL, 10)
+    mob:setMobMod(xi.mobMod.WEAPON_BONUS, 51) -- (lvl 83 + 2) + 51 = 136
+    -- gives firaga iv a cast time of ~2 seconds as per retail
+    -- note baha has a job trait with fast cast of 15% so 75% total
+    mob:setMod(xi.mod.UFASTCAST, 60)
+    mob:setMod(xi.mod.ATT, 425)
+    mob:setMod(xi.mod.INT, 30)
+    mob:addMod(xi.mod.MATT, -28)
+    -- Bahamut should use tp move every 20 sec
+    mob:addMod(xi.mod.REGAIN, 450)
+    mob:addMod(xi.mod.REGEN, 50)
+    mob:setMod(xi.mod.MDEF, 62)
+    mob:setMobMod(xi.mobMod.NO_STANDBACK, 1)
+    mob:setMobMod(xi.mobMod.NO_MOVE, 1)
+    mob:setMobMod(xi.mobMod.SIGHT_RANGE, 20)
+    mob:setMobMod(xi.mobMod.SOUND_RANGE, 20)
+    mob:addStatusEffect(xi.effect.PHALANX, 35, 0, 180)
+    mob:addStatusEffect(xi.effect.STONESKIN, 350, 0, 300)
+    mob:addStatusEffect(xi.effect.PROTECT, 175, 0, 1800)
+    mob:addStatusEffect(xi.effect.SHELL, 24, 0, 1800)
+    mob:setMobAbilityEnabled(true)
+    mob:setMagicCastingEnabled(true)
+    mob:setAutoAttackEnabled(true)
+end
+
+entity.onMobEngage = function(mob, target)
+    mob:setMobMod(xi.mobMod.NO_MOVE, 0)
+end
+
 entity.onMobFight = function(mob, target)
     local megaFlareQueue = mob:getLocalVar('MegaFlareQueue')
     local megaFlareTrigger = mob:getLocalVar('MegaFlareTrigger')
-    -- local megaFlareUses = mob:getLocalVar('MegaFlareUses')
     local flareWait = mob:getLocalVar('FlareWait')
     local gigaFlare = mob:getLocalVar('GigaFlare')
     local tauntShown = mob:getLocalVar('tauntShown')
@@ -53,47 +79,71 @@ entity.onMobFight = function(mob, target)
         end
     end
 
-    if mob:actionQueueEmpty() and not isBusy then -- the last check prevents multiple Mega/Gigaflares from being called at the same time.
+    -- The last check prevents multiple Mega/Gigaflares from being called at the same time.
+    if mob:actionQueueEmpty() and not isBusy then
         if megaFlareQueue > 0 then
             mob:setMobAbilityEnabled(false) -- disable all other actions until Megaflare is used successfully
             mob:setMagicCastingEnabled(false)
             mob:setAutoAttackEnabled(false)
 
-            if flareWait == 0 and tauntShown == 0 then -- if there is a queued Megaflare and the last Megaflare has been used successfully or if the first one hasn't been used yet.
+            -- If there is a queued Megaflare and the last Megaflare has been used successfully or if the first one hasn't been used yet.
+            if flareWait == 0 and tauntShown == 0 then
                 target:showText(mob, ID.text.BAHAMUT_TAUNT)
-                mob:setLocalVar('FlareWait', mob:getBattleTime() + 2) -- second taunt happens two seconds after the first.
+                -- Second taunt happens two seconds after the first.
+                mob:setLocalVar('FlareWait', mob:getBattleTime() + 2)
                 mob:setLocalVar('tauntShown', 1)
-            elseif flareWait < mob:getBattleTime() and flareWait ~= 0 and tauntShown >= 0 then -- the wait time between the first and second taunt as passed. Checks for wait to be not 0 because it's set to 0 on successful use.
+                -- the wait time between the first and second taunt as passed. Checks for wait to be not 0 because it's set to 0 on successful use.
+            elseif flareWait < mob:getBattleTime() and flareWait ~= 0 and tauntShown >= 0 then
                 if tauntShown == 1 then
-                    mob:setLocalVar('tauntShown', 2) -- if Megaflare gets stunned it won't show the text again, until successful use.
+                    -- if Megaflare gets stunned it won't show the text again, until successful use.
+                    mob:setLocalVar('tauntShown', 2)
                     target:showText(mob, ID.text.BAHAMUT_TAUNT + 1)
                 end
 
-                if mob:checkDistance(target) <= 15 then -- without this check if the target is out of range it will keep attemping and failing to use Megaflare. Both Megaflare and Gigaflare have range 15.
-                    if bit.band(mob:getBehaviour(), xi.behavior.NO_TURN) > 0 then -- default behaviour
+                -- without this check if the target is out of range it will keep attemping and failing to use Megaflare. Both Megaflare and Gigaflare have range 15.
+                if mob:checkDistance(target) <= 15 then
+                    -- default behaviour
+                    if bit.band(mob:getBehaviour(), xi.behavior.NO_TURN) > 0 then
                         mob:setBehaviour(bit.band(mob:getBehaviour(), bit.bnot(xi.behavior.NO_TURN)))
                     end
 
                     mob:useMobAbility(1551)
+                    mob:setLocalVar('MegaFlareQueue', 0)
                 end
             end
+
+        -- All of the scripted Megaflares are to happen before Gigaflare.
         elseif
             megaFlareQueue == 0 and
-            mobHPP < 10 and
-            gigaFlare < 1 and
+            mobHPP < 10 and gigaFlare < 1 and
             mob:checkDistance(target) <= 15
         then
-            -- All of the scripted Megaflares are to happen before Gigaflare.
+            -- again, taunt won't show again until the move is successfully used.
             if tauntShown == 0 then
                 target:showText(mob, ID.text.BAHAMUT_TAUNT + 2)
-                mob:setLocalVar('tauntShown', 3) -- again, taunt won't show again until the move is successfully used.
+                mob:setLocalVar('tauntShown', 3)
             end
 
-            if bit.band(mob:getBehaviour(), xi.behavior.NO_TURN) > 0 then -- default behaviour
+            -- default behaviour
+            if bit.band(mob:getBehaviour(), xi.behavior.NO_TURN) > 0 then
                 mob:setBehaviour(bit.band(mob:getBehaviour(), bit.bnot(xi.behavior.NO_TURN)))
             end
 
             mob:useMobAbility(1552)
+            mob:setLocalVar('GigaFlare', 1)
+            mob:setLocalVar('MegaFlareQueue', 0)
+        end
+    end
+
+    -- Bahamut should use tp move every 20 sec
+    -- decrease regain under 25% to keep approx timing
+    if mob:getHPP() <= 25 then
+        if mob:getMod(xi.mod.REGAIN) ~= 150 then
+            mob:setMod(xi.mod.REGAIN, 150)
+        end
+    else
+        if mob:getMod(xi.mod.REGAIN) ~= 450 then
+            mob:setMod(xi.mod.REGAIN, 450)
         end
     end
 end

@@ -659,7 +659,7 @@ xi.effect =
     PROWESS_KILLER           = 788, -- *flat +4 for now
     -- End GoV Prowess fakery
 
-    MARK_OF_SEED             = 790, -- Tracks 30 min timer in ACP mission "Those Who Lurk in Shadows (II)"
+    MARK_OF_SEED             = 790, -- Tracks 30 min timer in ACP mission 'Those Who Lurk in Shadows (II)'
     ALL_MISS                 = 791, -- Indicates a target is unable to be hit by normal melee attacks (formerly TOO_HIGH)
     SUPER_BUFF               = 792,
     NINJUTSU_ELE_DEBUFF      = 793,
@@ -674,10 +674,11 @@ xi.effect =
     ELEMENTALRES_DOWN        = 802, -- Elemental resistance down
     FULL_SPEED_AHEAD         = 803, -- Helper for quest: Full Speed Ahead!
     HYSTERIA                 = 804, -- Used for Hysteroanima to stop after readying a weaponskill with no msg.
-    TOMAHAWK                 = 805, -- Silent status effect inflicted by a Warrior using the "Tomahawk" job ability
+    TOMAHAWK                 = 805, -- Silent status effect inflicted by a Warrior using the 'Tomahawk' job ability
     NUKE_WALL                = 806, -- Custom effect for NM type mobs only.
-
+    BANISH_SDT_DEBUFF        = 807, -- Handles SDT debuff on undead mobs.
+    RUN_WILD                 = 808,
     -- 789
     -- 807-1022
-    -- PLACEHOLDER           = 1023 -- The client dat file seems to have only this many "slots", results of exceeding that are untested.
+    -- PLACEHOLDER           = 1023 -- The client dat file seems to have only this many 'slots', results of exceeding that are untested.
 }

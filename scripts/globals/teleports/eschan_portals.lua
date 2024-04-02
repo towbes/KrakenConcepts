@@ -65,7 +65,7 @@ xi.escha.portals.eschanPortalOnTrigger = function(player, npc, portalGlobalNumbe
 
         -- Update Variables.
         portalBitMask = player:getTeleport(xi.teleport.type.ESCHAN_PORTAL)
-        lockValue     = lockValue + 1 -- We set it to "Locked" even if we JUST unlocked it.
+        lockValue     = lockValue + 1 -- We set it to 'Locked' even if we JUST unlocked it.
     end
 
     -- Get zone portals and count how many we have unlocked.
@@ -80,9 +80,9 @@ xi.escha.portals.eschanPortalOnTrigger = function(player, npc, portalGlobalNumbe
         if zoneId == xi.zone.ESCHA_ZITAH then
             portalBitMask = 1
         elseif zoneId == xi.zone.ESCHA_RUAUN then
-            portalBitMask = 256 -- 8 "true" bits + 1
+            portalBitMask = 256 -- 8 'true' bits + 1
         else
-            portalBitMask = 8388608 -- 23 "true" bits + 1
+            portalBitMask = 8388608 -- 23 'true' bits + 1
         end
     end
 

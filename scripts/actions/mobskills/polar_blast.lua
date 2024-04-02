@@ -19,7 +19,7 @@ mobskillObject.onMobSkillCheck = function(target, mob, skill)
         end
     end
 
-    if mob:getAnimationSub() <= 1 then
+    if mob:getAnimationSub() <= 1 and target:isInfront(mob, 128) then
         return 0
     else
         return 1

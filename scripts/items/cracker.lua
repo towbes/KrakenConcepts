@@ -1,7 +1,7 @@
 -----------------------------------
 -- ID: 4167
 -- Cracker
--- Creates a simple puff of smoke with a "crack" noise
+-- Creates a simple puff of smoke with a 'crack' noise
 -----------------------------------
 local itemObject = {}
 

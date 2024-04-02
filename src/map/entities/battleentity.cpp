@@ -1035,6 +1035,22 @@ void CBattleEntity::SetSLevel(uint8 slvl)
             case 3: // equal (75/75, 99/99)
                 m_slvl = (slvl > m_mlvl ? (m_mlvl == 1 ? 1 : m_mlvl) : slvl);
                 break;
+            case 4: // equal (75/75, 99/99) //Umeboshi "Hijacking this for Cactuar's Subjob System. Subjob automatically doubles it true level to ease subjob leveling grind"
+            {
+                m_slvl = slvl * 2;
+
+                if (m_slvl >= 74) // 37 subjob "clicks" to 75
+                {
+                    m_slvl++;
+                }
+
+                if (m_slvl > m_mlvl)
+                {
+                    m_slvl = m_mlvl;
+                }
+            }
+            break;
+                // m_slvl = (slvl > m_mlvl ? (m_mlvl == 1 ? 1 : m_mlvl) : slvl);
             default: // Error
                 ShowError("Error setting subjob level: Invalid ratio '%s' check your settings file!", ratio);
                 break;
@@ -1791,9 +1807,16 @@ void CBattleEntity::OnCastInterrupted(CMagicState& state, action_t& action, MSGB
         {
             actionTarget.reaction = REACTION::HIT;
             // For some reason, despite the system supporting interrupted message in the action packet (like auto attacks, JA), an 0x029 message is sent for spells.
+            this->PAI->EventHandler.triggerListener("MAGIC_INTERRUPTED", CLuaBaseEntity(this));
             loc.zone->PushPacket(this, CHAR_INRANGE_SELF, new CMessageBasicPacket(this, state.GetTarget() ? state.GetTarget() : this, 0, 0, msg));
         }
     }
+}
+
+void CBattleEntity::OnCastStarting(CMagicState& state)
+{
+    CSpell* PSpell = state.GetSpell();
+    luautils::OnCastStarting(this, PSpell);
 }
 
 void CBattleEntity::OnWeaponSkillFinished(CWeaponSkillState& state, action_t& action)
@@ -1994,6 +2017,11 @@ void CBattleEntity::OnMobSkillFinished(CMobSkillState& state, action_t& action)
             {
                 msg = 282;
             }
+        }
+        else if (PSkill->getMsg() == MSGBASIC_NONE)
+        {
+            target.reaction   = REACTION::NONE;
+            target.speceffect = SPECEFFECT::NONE;
         }
         else
         {
@@ -2269,6 +2297,18 @@ bool CBattleEntity::OnAttack(CAttackState& state, action_t& action)
                 this->PAI->EventHandler.triggerListener("MELEE_SWING_HIT", CLuaBaseEntity(this), CLuaBaseEntity(PTarget), CLuaAttack(&attack));
 
                 actionTarget.reaction = REACTION::HIT;
+
+                if (this->objtype == TYPE_PC && ((CCharEntity*)this)->getCharVar("TREDECIM_COUNTER") > 12)
+                {
+                    // Check for Tredecim
+                    auto* equippedWeapon = dynamic_cast<CItemWeapon*>(this->m_Weapons[SLOT_MAIN]);
+                    if (equippedWeapon->getID() == 18052)
+                    {
+                        // Ensure critical is only set to main weapon slot
+                        attack.SetCritical(true);
+                        ((CCharEntity*)this)->setCharVar("TREDECIM_COUNTER", -1);
+                    }
+                }
 
                 // Critical hit.
                 if (attack.IsCritical())

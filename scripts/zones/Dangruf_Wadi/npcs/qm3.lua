@@ -2,7 +2,7 @@
 --  NPC: ??? (QM3)
 -- Type: Saltvix (dice roll game part 1)
 -- !pos -367.367 2.999 229.020 191
--- Involved in quest "As Thick As Thieves"
+-- Involved in quest 'As Thick As Thieves'
 -----------------------------------
 local entity = {}
 

@@ -4,33 +4,35 @@
 -----------------------------------
 local entity = {}
 
-entity.onMobInitialize = function(mob)
-    mob:setMobMod(xi.mobMod.ADD_EFFECT, 1)
-    mob:setMobMod(xi.mobMod.DRAW_IN, 2)
+local updateRegen = function(mob)
+    local hour = VanadielHour()
+    local regen = mob:getMod(xi.mod.REGEN)
+
+    if hour > 3 and hour < 20 then -- daytime between 4:00 and 20:00
+        if regen ~= 125 then
+            mob:setMod(xi.mod.REGEN, 125)
+        end
+    else
+        if regen ~= 250 then
+            mob:setMod(xi.mod.REGEN, 250)
+        end
+    end
 end
 
-entity.onMobDrawIn = function(mob, target)
-    -- todo make him use AoE tp move
-    mob:addTP(3000)
+entity.onMobInitialize = function(mob)
+    mob:setMobMod(xi.mobMod.ADD_EFFECT, 1)
+    mob:addMod(xi.mod.REGAIN, 50)
 end
 
 entity.onAdditionalEffect = function(mob, target, damage)
     return xi.mob.onAddEffect(mob, target, damage, xi.mob.ae.PETRIFY, { chance = 100 })
 end
 
-entity.onMobDisengage = function(mob)
-    local weather = mob:getWeather()
-
-    if weather ~= xi.weather.DUST_STORM and weather ~= xi.weather.SAND_STORM then
-        DespawnMob(mob:getID())
-    end
-end
-
-entity.onMobRoam = function(mob)
-    local weather = mob:getWeather()
-    entity.mobRegen(mob)
-
-    if weather ~= xi.weather.DUST_STORM and weather ~= xi.weather.SAND_STORM then
+entity.onMobDisengage = function(mob, weather)
+    if
+        not (mob:getWeather() == xi.weather.DUST_STORM or
+        mob:getWeather() == xi.weather.SAND_STORM)
+    then
         DespawnMob(mob:getID())
     end
 end
@@ -39,23 +41,57 @@ entity.onMobDeath = function(mob, player, optParams)
     player:addTitle(xi.title.VINEGAR_EVAPORATOR)
 end
 
-entity.onMobDespawn = function(mob)
-    UpdateNMSpawnPoint(mob:getID())
-    mob:setRespawnTime(math.random(75600, 86400)) -- 21 to 24 hours
-end
+entity.onMobWeaponSkill = function(target, mob, skill)
+    local nextDrawIn = mob:getLocalVar('[Draw-In]WaitTime')
 
-entity.mobRegen = function(mob)
-    local hour = VanadielHour()
+    -- Every time KV performs a TP move, he will draw in either his target or the entire alliance randomly
+    if
+        (skill:getID() == 354 or skill:getID() == 355 or skill:getID() == 722 or skill:getID() == 723) and
+        os.time() > nextDrawIn
+    then
+        local chance = math.random(1, 2)
+        if chance == 1 then
+            mob:triggerDrawIn(mob, true, 1, 35, target, true)
+        else
+            mob:triggerDrawIn(mob, false, 1, 35, target, true)
+        end
 
-    if hour >= 6 and hour <= 20 then
-        mob:setMod(xi.mod.REGEN, 125)
-    else
-        mob:setMod(xi.mod.REGEN, 250)
+        -- KV always does an AOE TP move followed by a single target TP move
+        mob:useMobAbility(({ 353, 350, 720 })[math.random(1, 3)])
+        mob:setLocalVar('[Draw-In]WaitTime', os.time() + 1)
     end
 end
 
+entity.onMobDespawn = function(mob)
+    xi.mob.nmTODPersist(mob, 75600) -- 21 hours
+    DisallowRespawn(mob:getID(), true)
+end
+
 entity.onMobFight = function(mob, target)
-    entity.mobRegen(mob)
+    local drawInTableNorth =
+    {
+        condition1 = target:getZPos() > -540,
+        position   = { target:getXPos(), target:getYPos(), -542, target:getRotPos() },
+    }
+    local drawInTableSouth =
+    {
+        condition1 = target:getXPos() < -350,
+        position   = { -348, target:getYPos(), target:getZPos(), target:getRotPos() },
+    }
+
+    updateRegen(mob)
+    utils.arenaDrawIn(mob, target, drawInTableNorth)
+    utils.arenaDrawIn(mob, target, drawInTableSouth)
+end
+
+entity.onMobRoam = function(mob)
+    updateRegen(mob)
+    if
+        not (mob:getWeather() == xi.weather.DUST_STORM or
+        mob:getWeather() == xi.weather.SAND_STORM)
+    then
+        DespawnMob(mob:getID())
+    end
 end
 
 return entity

@@ -272,9 +272,9 @@ bool CLuaItem::isInstalled()
     return PFurnishing->isInstalled();
 }
 
-void CLuaItem::setSoulPlateData(std::string const& name, uint16 mobFamily, uint8 zeni, uint16 skillIndex, uint8 fp)
+void CLuaItem::setSoulPlateData(std::string const& name, uint8 fauna, uint8 subOfInterest, uint8 ecoSystem, uint8 zeni, uint16 skillIndex, uint8 fp)
 {
-    m_PLuaItem->setSoulPlateData(name, mobFamily, zeni, skillIndex, fp);
+    m_PLuaItem->setSoulPlateData(name, fauna, subOfInterest, ecoSystem, zeni, skillIndex, fp);
 }
 
 auto CLuaItem::getSoulPlateData() -> sol::table
@@ -282,11 +282,13 @@ auto CLuaItem::getSoulPlateData() -> sol::table
     auto       data  = m_PLuaItem->getSoulPlateData();
     sol::table table = lua.create_table();
 
-    table["name"]       = std::get<0>(data);
-    table["mobFamily"]  = std::get<1>(data);
-    table["zeni"]       = std::get<2>(data);
-    table["skillIndex"] = std::get<3>(data);
-    table["fp"]         = std::get<4>(data);
+    table["name"]          = std::get<0>(data);
+    table["fauna"]         = std::get<1>(data);
+    table["subOfInterest"] = std::get<2>(data);
+    table["ecoSystem"]     = std::get<3>(data);
+    table["zeni"]          = std::get<4>(data);
+    table["skillIndex"]    = std::get<5>(data);
+    table["fp"]            = std::get<6>(data);
 
     return table;
 }

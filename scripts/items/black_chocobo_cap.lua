@@ -1,7 +1,7 @@
 -----------------------------------
 -- ID: 25585
 -- Black Chocobo Cap
--- Enchantment: "Teleport" (Upper Jeuno Chocobo Stables)
+-- Enchantment: 'Teleport' (Upper Jeuno Chocobo Stables)
 -----------------------------------
 local itemObject = {}
 

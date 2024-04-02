@@ -12,8 +12,12 @@
 local mobskillObject = {}
 
 mobskillObject.onMobSkillCheck = function(target, mob, skill)
+    if not target:isBehind(mob, 48) then
+        return 1
+    end
     return 0
 end
+
 
 mobskillObject.onMobWeaponSkill = function(target, mob, skill)
     local numhits = 1  -- Hits once, despite the animation looking like it hits twice.

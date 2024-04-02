@@ -22,7 +22,8 @@ weaponskillObject.onUseWeaponSkill = function(player, target, wsID, tp, primary,
 
     if xi.settings.main.USE_ADOULIN_WEAPON_SKILL_CHANGES then
         params.multiHitfTP = true -- https://www.bg-wiki.com/ffxi/Dragon_Kick
-        params.ftpMod = { 1.7, 3.0, 5.0 }
+        params.ftpMod = { 2.0, 3.25, 4.0 }
+        -- params.ftpMod = { 1.7, 3.0, 5.0 }
     end
 
     local damage, criticalHit, tpHits, extraHits = xi.weaponskills.doPhysicalWeaponskill(player, target, wsID, params, tp, action, primary, taChar)

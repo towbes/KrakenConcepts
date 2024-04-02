@@ -16,6 +16,8 @@ spellObject.onSpellCast = function(caster, target, spell)
         spell:setMsg(xi.msg.basic.MAGIC_ERASE)
     end
 
+    caster:delStatusEffectSilent(xi.effect.MANAWELL)
+
     return effect
 end
 

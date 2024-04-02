@@ -1,4 +1,4 @@
-/*
+﻿/*
 ===========================================================================
 
   Copyright (c) 2023 LandSandBoat Dev Teams
@@ -380,11 +380,11 @@ void monstrosity::SendFullMonstrosityUpdate(CCharEntity* PChar)
 
     PChar->pushPacket(new CMonipulatorPacket1(PChar));
     PChar->pushPacket(new CMonipulatorPacket2(PChar));
-    PChar->pushPacket(new CCharJobsPacket(PChar));
+    PChar->pushPacket(new CCharJobsPacket(PChar, true));
     PChar->pushPacket(new CCharJobExtraPacket(PChar, true));
     PChar->pushPacket(new CCharJobExtraPacket(PChar, false));
     PChar->pushPacket(new CCharAppearancePacket(PChar));
-    PChar->pushPacket(new CCharStatsPacket(PChar));
+    PChar->pushPacket(new CCharStatsPacket(PChar, true));
     PChar->pushPacket(new CCharAbilitiesPacket(PChar));
 
     PChar->updatemask |= UPDATE_LOOK;

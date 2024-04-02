@@ -1,6 +1,8 @@
 -----------------------------------
 -- Zone: Qufim_Island (126)
 -----------------------------------
+local ID = zones[xi.zone.QUFIM_ISLAND]
+-----------------------------------
 local zoneObject = {}
 
 zoneObject.onInitialize = function(zone)
@@ -32,6 +34,17 @@ zoneObject.onEventUpdate = function(player, csid, option, npc)
 end
 
 zoneObject.onEventFinish = function(player, csid, option, npc)
+end
+
+zoneObject.onZoneWeatherChange = function(weather)
+    local dosetsu = GetMobByID(ID.mob.DOSETSU_TREE)
+    if
+        not dosetsu:isSpawned() and os.time() > dosetsu:getLocalVar('respawn')
+        and (weather == xi.weather.THUNDER or weather == xi.weather.THUNDERSTORMS)
+    then
+        DisallowRespawn(dosetsu:getID(), false)
+        dosetsu:setRespawnTime(math.random(30, 150)) -- pop 30-150 sec after thunder weather starts
+    end
 end
 
 return zoneObject

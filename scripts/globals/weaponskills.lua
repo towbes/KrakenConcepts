@@ -94,9 +94,9 @@ local function souleaterBonus(attacker, wsParams)
         if bonusDamage >= 1 then
             attacker:delHP(utils.stoneskin(attacker, bonusDamage * stalwartSoulBonus))
 
-            if attacker:getMainJob() ~= xi.job.DRK then
+            --[[if attacker:getMainJob() ~= xi.job.DRK then
                 return math.floor(bonusDamage / 2)
-            end
+            end]]
 
             return bonusDamage
         end
@@ -105,7 +105,7 @@ local function souleaterBonus(attacker, wsParams)
     return 0
 end
 
-local scarletDeliriumBonus = function(attacker)
+xi.weaponskills.scarletDeliriumBonus = function(attacker)
     local bonus = 1
 
     if attacker:hasStatusEffect(xi.effect.SCARLET_DELIRIUM_1) then
@@ -115,6 +115,67 @@ local scarletDeliriumBonus = function(attacker)
     end
 
     return bonus
+end
+
+xi.weaponskills.consumeManaBonusPhysical = function(attacker, wsParams) -- For Physical Weaponskills.
+    local bonus = 1
+
+    if attacker:hasStatusEffect(xi.effect.CONSUME_MANA) then
+        if bonus >= 1 then
+            local MPConsumption = attacker:getMP() * 0.05 -- MP Consumed.
+            local weaponDamage  = attacker:getWeaponDmg() -- Get damage of weapon in main slot.
+            local power = ((100 + (MPConsumption)) / 100) -- Damage Modifier based on MP consumed.
+            attacker:delMP(MPConsumption)                 -- Delete MP from player
+            bonus = weaponDamage * power                  -- Weapon Damage * Modifier
+            -- attacker:printToPlayer(string.format('Weapon Damage: %s', bonus), xi.msg.channel.SYSTEM_3) -- Debug to see modifier of each hit in a weapon skill.
+        return bonus
+        end
+    end
+
+    return 0
+end
+
+xi.weaponskills.consumeManaBonusWeaponDamage = function(attacker, wsParams) -- For modifying a weapon's base damage. Used for Physical Weaponskills.
+    local bonus = 1
+
+    if attacker:hasStatusEffect(xi.effect.CONSUME_MANA) then
+        if bonus >= 1 then
+            local MPConsumption = attacker:getMP() * 0.05 -- MP Consumed.
+            local power = ((100 + (MPConsumption)) / 100) -- Damage Modifier based on MP consumed.
+            bonus = power                  -- Weapon Damage * Modifier
+             -- attacker:printToPlayer(string.format('Weapon Damage: %s', bonus), xi.msg.channel.SYSTEM_3) -- Debug to see modifier of each hit in a weapon skill.
+        return bonus
+        end
+    end
+
+    return 0
+end
+
+xi.weaponskills.consumeManaBonusMPConsumption = function(attacker, wsParams) -- Procs MP Consumption for Physical Weaponskills.
+    if attacker:hasStatusEffect(xi.effect.CONSUME_MANA) then
+            local MPConsumption = attacker:getMP() * 0.25 -- MP Consumed.
+            attacker:delMP(MPConsumption)                 -- Delete MP from player
+            attacker:delStatusEffect(xi.effect.CONSUME_MANA)
+        return MPConsumption
+    end
+
+    return 0
+end
+
+xi.weaponskills.consumeManaBonusMagical = function(attacker, wsParams) -- For Magic Weaponskills.
+    local bonus = 1
+
+    if attacker:hasStatusEffect(xi.effect.CONSUME_MANA) then
+        if bonus >= 1 then
+            local MPConsumption = attacker:getMP() * 0.25 -- MP Consumed.
+            local power = ((100 + (MPConsumption)) / 100) -- Damage Modifier based on MP consumed.
+            attacker:delMP(MPConsumption)                 -- Delete MP from player
+            bonus = power                                 -- Final power to apply to weaponskill.
+        return bonus
+        end
+    end
+
+    return 0
 end
 
 local function shadowAbsorb(target)
@@ -214,6 +275,10 @@ local function cRangedRatio(attacker, defender, params, ignoredDef, tp)
         levelCorrection = (defender:getMainLvl() - attacker:getMainLvl()) / 40
     end
 
+    if attacker:hasStatusEffect(xi.effect.FLASHY_SHOT) then
+        levelCorrection = 0
+    end
+
     cratio = (cratio - levelCorrection) * atkMultiplier
 
     -- adding cap check base on weapon https://www.bg-wiki.com/ffxi/PDIF info
@@ -258,7 +323,7 @@ end
 
 local function getRangedHitRate(attacker, target, capHitRate, bonus)
     local acc = attacker:getRACC()
-    local eva = target:getEVA()
+    local eva = target:getEVA() + target:getMod(xi.mod.SPECIAL_ATTACK_EVASION)
 
     if bonus == nil then
         bonus = 0
@@ -318,7 +383,11 @@ local function getSingleHitDamage(attacker, target, dmg, wsParams, calcParams)
 
             if criticalHit then
                 calcParams.criticalHit = true
+                -- attacker:printToArea(string.format('%s\'s weapon skill scores a critical hit!', attacker:getName()), xi.msg.channel.SYSTEM_3, 1)
                 calcParams.pdif = xi.weaponskills.generatePdif(calcParams.ccritratio[1], calcParams.ccritratio[2], true)
+                local criticalHitsLanded          = attacker:getLocalVar('[criticalHitsLanded]')
+                local criticalHitsLandedIncrement = 0
+                attacker:setLocalVar('[criticalHitsLanded]', criticalHitsLanded + 1)
             else
                 calcParams.pdif = xi.weaponskills.generatePdif(calcParams.cratio[1], calcParams.cratio[2], true)
             end
@@ -344,7 +413,33 @@ local function getSingleHitDamage(attacker, target, dmg, wsParams, calcParams)
                     magicdmg = utils.stoneskin(target, magicdmg)
                 end
 
-                finaldmg = finaldmg + magicdmg
+                local mab2 = 1
+            
+                if params ~= nil and params.bonusmab ~= nil and params.includemab == true then
+                    mab2 = (100 + attacker:getMod(xi.mod.MATT) + params.bonusmab) / (100 + target:getMod(xi.mod.MDEF))
+                elseif params == nil or (params ~= nil and params.includemab == true) then
+                    mab2 = (100 + attacker:getMod(xi.mod.MATT)) / (100 + target:getMod(xi.mod.MDEF))
+                end
+
+                -- Apply Consume Mana
+                if attacker:hasStatusEffect(xi.effect.CONSUME_MANA) then
+                    magicdmg = (magicdmg * (xi.weaponskills.consumeManaBonusMagical(attacker, wsParams)))
+                    attacker:delMP(attacker:getMP() * 0.25)
+                    attacker:delStatusEffect(xi.effect.CONSUME_MANA)
+                end
+            
+                -- Divine/Elemental Seal Bonus
+
+                local magicseal = 1
+                if wsParams.ele ~= nil and wsParams.ele ~= xi.element.LIGHT and (attacker:hasStatusEffect(xi.effect.ELEMENTAL_SEAL)) then
+                    magicseal = math.floor(math.random(195,220)/100)
+                    attacker:delStatusEffect(xi.effect.ELEMENTAL_SEAL)
+                elseif wsParams.ele ~= nil and wsParams.ele == xi.element.LIGHT and (attacker:hasStatusEffect(xi.effect.DIVINE_SEAL)) then
+                    magicseal = math.floor(math.random(250,275)/100)
+                    attacker:delStatusEffect(xi.effect.DIVINE_SEAL)
+                end
+
+                finaldmg = finaldmg + (magicdmg * magicseal * (mab2 * 1.5))
             end
 
             calcParams.hitsLanded = calcParams.hitsLanded + 1
@@ -365,13 +460,15 @@ local function modifyMeleeHitDamage(attacker, target, attackTbl, wsParams, rawDa
         if attackTbl.weaponType == xi.skill.HAND_TO_HAND then
             adjustedDamage = adjustedDamage * target:getMod(xi.mod.HTH_SDT) / 1000
         elseif
-            attackTbl.weaponType == xi.skill.DAGGER or
-            attackTbl.weaponType == xi.skill.POLEARM
+            attackTbl.damageType == xi.damageType.PIERCING
+            -- attackTbl.weaponType == xi.skill.DAGGER or
+            -- attackTbl.weaponType == xi.skill.POLEARM
         then
             adjustedDamage = adjustedDamage * target:getMod(xi.mod.PIERCE_SDT) / 1000
         elseif
-            attackTbl.weaponType == xi.skill.CLUB or
-            attackTbl.weaponType == xi.skill.STAFF
+            attackTbl.damageType == xi.damageType.BLUNT
+            -- attackTbl.weaponType == xi.skill.CLUB or
+            -- attackTbl.weaponType == xi.skill.STAFF
         then
             adjustedDamage = adjustedDamage * target:getMod(xi.mod.IMPACT_SDT) / 1000
         else
@@ -380,10 +477,13 @@ local function modifyMeleeHitDamage(attacker, target, attackTbl, wsParams, rawDa
     end
 
     -- Scarlet Delirium
-    adjustedDamage = adjustedDamage * scarletDeliriumBonus(attacker)
+    adjustedDamage = adjustedDamage * xi.weaponskills.scarletDeliriumBonus(attacker)
 
     -- Souleater
     adjustedDamage = adjustedDamage + souleaterBonus(attacker, wsParams)
+
+    -- Handle Consume Mana MP Consumption. Applies to every hit landed.
+    xi.weaponskills.consumeManaBonusMPConsumption(attacker, wsParams)
 
     if adjustedDamage > 0 then
         adjustedDamage = adjustedDamage - target:getMod(xi.mod.PHALANX)
@@ -465,7 +565,7 @@ xi.weaponskills.calculateRawWSDmg = function(attacker, target, wsID, tp, action,
     -- TODO: calc per-hit with weapon crit+% on each hand (if dual wielding)
     calcParams.critRate = 0
     if wsParams.critVaries then -- Work out critical hit ratios
-        calcParams.critRate = xi.combat.physical.calculateSwingCriticalRate(attacker, target, wsParams.critVaries)
+        calcParams.critRate = xi.combat.physical.calculateSwingCriticalRate(attacker, target, tp, wsParams.critVaries)
     end
 
     -- Start the WS
@@ -523,7 +623,7 @@ xi.weaponskills.calculateRawWSDmg = function(attacker, target, wsID, tp, action,
     local numMultiProcs     = numMainHandMultis > 0 and 1 or 0
 
     -- Have to calculate added bonus for SA/TA here since it is done outside of the fTP multiplier
-    if attacker:getMainJob() == xi.job.THF then
+    if (attacker:getMainJob() == xi.job.THF or attacker:getSubJob() == xi.job.THF) then
         -- Add DEX/AGI bonus to first hit if THF main and valid Sneak/Trick Attack
         if calcParams.sneakApplicable then
             finaldmg = finaldmg + calcParams.pdif * attacker:getStat(xi.mod.DEX) * (1 + attacker:getMod(xi.mod.SNEAK_ATK_DEX) / 100) * (1 + attacker:getMod(xi.mod.AUGMENTS_SA) / 100)
@@ -765,9 +865,35 @@ xi.weaponskills.doPhysicalWeaponskill = function(attacker, target, wsID, wsParam
     attacker:delStatusEffect(xi.effect.SNEAK_ATTACK)
     attacker:delStatusEffectSilent(xi.effect.BUILDING_FLOURISH)
 
+    if wsParams.meleedmg ~= nil and finaldmg > 0 then
+            finaldmg = finaldmg + wsParams.meleedmg
+    end
+
+    -- Ws Specific DMG Bonus -Umeboshi
+    --[[ if (attacker:getMod(xi.mod.WEAPONSKILL_DAMAGE_BASE + wsID) > 0) then
+        bonusdmg = bonusdmg + attacker:getMod(xi.mod.WEAPONSKILL_DAMAGE_BASE + wsID)
+    end]]
+
+    -- PVP Adjustments
+    if 
+        target:getAllegiance() == 2 or
+        target:getAllegiance() == 3 or
+        target:getAllegiance() == 4 or
+        target:getAllegiance() == 5 or
+        target:getAllegiance() == 6
+    then
+        finaldmg = finaldmg * 0.45
+    end
+
     finaldmg            = finaldmg * xi.settings.main.WEAPON_SKILL_POWER -- Add server bonus
     calcParams.finalDmg = finaldmg
     finaldmg            = xi.weaponskills.takeWeaponskillDamage(target, attacker, wsParams, primaryMsg, attack, calcParams, action)
+
+    local criticalHitsLanded = attacker:getLocalVar('[criticalHitsLanded]')
+    if criticalHitsLanded > 0 then
+        attacker:printToPlayer(string.format('%s\'s weapon skill scores [%s ] critical hits!', attacker:getName(), criticalHitsLanded), xi.msg.channel.SYSTEM_3) -- Debug to see modifier of each hit in a weapon skill.
+        attacker:setLocalVar('[criticalHitsLanded]', 0)
+    end
 
     return finaldmg, calcParams.criticalHit, calcParams.tpHitsLanded, calcParams.extraHitsLanded, calcParams.shadowsAbsorbed
 end
@@ -812,6 +938,11 @@ xi.weaponskills.doRangedWeaponskill = function(attacker, target, wsID, wsParams,
         bonusAcc                = (gorgetBeltAcc or 0) + attacker:getMod(xi.mod.WSACC),
         bonusWSmods             = wsParams.bonusWSmods or 0
     }
+    if attacker:hasStatusEffect(xi.effect.CONSUME_MANA) then
+        weaponDamage = { attacker:getRangedDmg() * xi.weaponskills.consumeManaBonusWeaponDamage(attacker, wsParams) }
+        attacker:delMP(attacker:getMP() * 0.25)
+        attacker:delStatusEffect(xi.effect.CONSUME_MANA)
+    end
     calcParams.hitRate = getRangedHitRate(attacker, target, false, calcParams.bonusAcc)
 
     -- Send our params off to calculate our raw WS damage, hits landed, and shadows absorbed
@@ -821,14 +952,50 @@ xi.weaponskills.doRangedWeaponskill = function(attacker, target, wsID, wsParams,
     -- Delete statuses that may have been spent by the WS
     attacker:delStatusEffectsByFlag(xi.effectFlag.DETECTABLE)
 
+    -- Ws Specific DMG Bonus -Umeboshi
+    --[[if (attacker:getMod(xi.mod.WEAPONSKILL_DAMAGE_BASE + wsID) > 0) then
+        bonusdmg = bonusdmg + attacker:getMod(xi.mod.WEAPONSKILL_DAMAGE_BASE + wsID)
+    end]]
+        
+    if wsParams.meleedmg ~= nil and finaldmg > 0 then
+            finaldmg = finaldmg + wsParams.meleedmg
+    end
+
     -- Calculate reductions
     finaldmg = target:rangedDmgTaken(finaldmg)
     finaldmg = finaldmg * target:getMod(xi.mod.PIERCE_SDT) / 1000
 
-    finaldmg            = finaldmg * xi.settings.main.WEAPON_SKILL_POWER -- Add server bonus
+    -- PVP damage adjustments
+    if 
+        target:getAllegiance() == 2 or
+        target:getAllegiance() == 3 or
+        target:getAllegiance() == 4 or
+        target:getAllegiance() == 5 or
+        target:getAllegiance() == 6
+    then
+        finaldmg = finaldmg * 0.45
+    end
+
+    finaldmg = finaldmg * xi.settings.main.WEAPON_SKILL_POWER -- Add server bonus
+
+    -- If target has damage cap modifier, damage can not exceed value.
+    if target:getMod(xi.mod.DMGRANGE_CAP) > 0 and finaldmg > target:getMod(xi.mod.DMGRANGE_CAP) then
+        finaldmg = target:getMod(xi.mod.DMGRANGE_CAP)
+    end
+
     calcParams.finalDmg = finaldmg
 
     finaldmg = xi.weaponskills.takeWeaponskillDamage(target, attacker, wsParams, primaryMsg, attack, calcParams, action)
+    -- Delete single use effects from abilities.
+    attacker:delStatusEffect(xi.effect.FLASHY_SHOT)
+    attacker:delStatusEffect(xi.effect.STEALTH_SHOT)
+    attacker:delStatusEffect(xi.effect.BOOST)
+
+    local criticalHitsLanded = attacker:getLocalVar('[criticalHitsLanded]')
+    if criticalHitsLanded > 0 then
+        attacker:printToPlayer(string.format('%s\'s weapon skill scores [%s ] critical hits!', attacker:getName(), criticalHitsLanded), xi.msg.channel.SYSTEM_3) -- Debug to see modifier of each hit in a weapon skill.
+        attacker:setLocalVar('[criticalHitsLanded]', 0)
+    end
 
     return finaldmg, calcParams.criticalHit, calcParams.tpHitsLanded, calcParams.extraHitsLanded, calcParams.shadowsAbsorbed
 end
@@ -858,7 +1025,25 @@ xi.weaponskills.doMagicWeaponskill = function(attacker, target, wsID, wsParams, 
     local bonusfTP, bonusacc = xi.weaponskills.handleWSGorgetBelt(attacker)
     bonusacc                 = bonusacc + attacker:getMod(xi.mod.WSACC)
 
-    local fint = utils.clamp(8 + attacker:getStat(xi.mod.INT) - target:getStat(xi.mod.INT), -32, 32)
+    -- local fint = utils.clamp(8 + (attacker:getStat(xi.mod.INT) - target:getStat(xi.mod.INT)), -32, 32)
+    local dStat = 0 -- Not all weaponskills use INT as a comparison. Set special use cases in the weaponskill's lua. Else use old INT-INT function.
+    if
+        wsParams.useStatCoefficient == true and
+        wsParams.dStat1 and
+        wsParams.dStat2 and
+        wsParams.dStatMultiplier
+    then
+        dStat = utils.clamp(8 + ((attacker:getStat(wsParams.dStat1) - target:getStat(wsParams.dStat2)) * wsParams.dStatMultiplier) / 2, -32, 32)
+         -- attacker:printToPlayer(string.format('dStat: %s', dStat), xi.msg.channel.SYSTEM_3) -- Debug to see modifier
+    elseif wsParams.useStatCoefficient == false then
+        dStat = 0
+        -- attacker:printToPlayer(string.format('dStat: %s', dStat), xi.msg.channel.SYSTEM_3) -- Debug to see modifier
+    else
+        dStat = math.floor(8 + (attacker:getStat(xi.mod.INT) - target:getStat(xi.mod.INT)) / 2)
+        dStat = utils.clamp(dStat, -32, 32)
+        -- attacker:printToPlayer(string.format('dStat: %s', dStat), xi.msg.channel.SYSTEM_3) -- Debug to see modifier
+    end
+
     local dmg  = 0
 
     -- Magic-based WSes never miss, so we don't need to worry about calculating a miss, only if a shadow absorbed it.
@@ -880,7 +1065,7 @@ xi.weaponskills.doMagicWeaponskill = function(attacker, target, wsID, wsParams, 
             dmg = dmg + attacker:getStat(modList[1]) * paramValue
         end
 
-        dmg = dmg + attacker:getMainLvl() + 2 + fint
+        dmg = dmg + attacker:getMainLvl() + 2 + dStat -- fint
 
         -- Applying fTP multiplier
         local ftp = xi.weaponskills.fTP(tp, wsParams.ftpMod) + bonusfTP
@@ -889,7 +1074,7 @@ xi.weaponskills.doMagicWeaponskill = function(attacker, target, wsID, wsParams, 
 
         -- Apply Consume Mana and Scarlet Delirium
         -- TODO: dmg = (dmg + consumeManaBonus(attacker)) * scarletDeliriumBonus(attacker)
-        dmg = dmg * scarletDeliriumBonus(attacker)
+        dmg = dmg * xi.weaponskills.scarletDeliriumBonus(attacker)
 
         -- Factor in "all hits" bonus damage mods
         local bonusdmg = attacker:getMod(xi.mod.ALL_WSDMG_ALL_HITS) -- For any WS
@@ -919,6 +1104,17 @@ xi.weaponskills.doMagicWeaponskill = function(attacker, target, wsID, wsParams, 
 
         dmg = adjustForTarget(target, dmg, wsParams.ele)
 
+        -- PVP Damage Adjustments
+        if 
+            target:getAllegiance() == 2 or
+            target:getAllegiance() == 3 or
+            target:getAllegiance() == 4 or
+            target:getAllegiance() == 5 or
+            target:getAllegiance() == 6
+        then
+            dmg = dmg * 0.45
+        end
+
         if dmg > 0 then
             dmg = dmg - target:getMod(xi.mod.PHALANX)
             dmg = utils.clamp(dmg, 0, 99999)
@@ -930,6 +1126,27 @@ xi.weaponskills.doMagicWeaponskill = function(attacker, target, wsID, wsParams, 
         dmg = dmg * xi.settings.main.WEAPON_SKILL_POWER -- Add server bonus
     else
         calcParams.shadowsAbsorbed = 1
+    end
+
+    --Divine/Elemental Seal Bonus
+    if 
+        wsParams.ele ~= nil and
+        (wsParams.ele ~= xi.element.LIGHT or (wsParams.ele == xi.element.LIGHT and wsParams.skill == xi.skill.STAFF)) and -- Check for Dark element or Light for Sunburst/Starburst
+        (attacker:hasStatusEffect(xi.effect.ELEMENTAL_SEAL))
+    then
+        dmg = math.floor(math.random(210,235)/100*dmg)
+        attacker:delStatusEffect(xi.effect.ELEMENTAL_SEAL)
+    elseif
+        wsParams.ele ~= nil and
+        (wsParams.ele == xi.element.LIGHT or (wsParams.ele == xi.element.DARK and wsParams.skill == xi.skill.STAFF)) and -- Check for light element or Dark for Sunburst/Starburst
+        (attacker:hasStatusEffect(xi.effect.DIVINE_SEAL))
+    then
+        dmg = math.floor(math.random(225,245)/100*dmg)
+        attacker:delStatusEffect(xi.effect.DIVINE_SEAL)
+    end
+
+    if target:getMod(xi.mod.DMGMAGIC_CAP) > 0 and dmg > target:getMod(xi.mod.DMGMAGIC_CAP) then -- If mob has this mod, damage can not exceed mod value.
+        dmg = target:getMod(xi.mod.DMGMAGIC_CAP)
     end
 
     calcParams.finalDmg = dmg
@@ -1007,6 +1224,11 @@ xi.weaponskills.takeWeaponskillDamage = function(defender, attacker, wsParams, p
         defender:addEnmity(enmityEntity, wsParams.overrideCE, wsParams.overrideVE)
     else
         local enmityMult = wsParams.enmityMult or 1
+        if attacker:hasStatusEffect(xi.effect.FLASHY_SHOT) and not wsResults.melee then
+            enmityMult = enmityMult * 1.4
+        elseif attacker:hasStatusEffect(xi.effect.STEALTH_SHOT) and not wsResults.melee then
+            enmityMult = enmityMult * (1 - attacker:getMerit(xi.merit.STEALTH_SHOT) / 100)
+        end
         defender:updateEnmityFromDamage(enmityEntity, finaldmg * enmityMult)
     end
 
@@ -1022,7 +1244,15 @@ end
 -- Helper function to get Main damage depending on weapon type
 xi.weaponskills.getMeleeDmg = function(attacker, weaponType, kick)
     local mainhandDamage = attacker:getWeaponDmg()
-    local offhandDamage  = attacker:getOffhandDmg()
+    -- attacker:printToPlayer(string.format('Main Weapon Damage: %s', mainhandDamage), xi.msg.channel.SYSTEM_3) -- Debug to see modifier of each hit in a weapon skill.
+    local offhandDamage = attacker:getOffhandDmg()
+
+    if attacker:hasStatusEffect(xi.effect.CONSUME_MANA) then
+        mainhandDamage = mainhandDamage * xi.weaponskills.consumeManaBonusWeaponDamage(attacker, wsParams)
+        -- attacker:printToPlayer(string.format('Main Weapon Damage: %s', mainhandDamage), xi.msg.channel.SYSTEM_3) -- Debug to see modifier of each hit in a weapon skill.
+        offhandDamage = offhandDamage * xi.weaponskills.consumeManaBonusWeaponDamage(attacker, wsParams)
+        -- attacker:printToPlayer(string.format('Sub Weapon Damage: %s', offhandDamage), xi.msg.channel.SYSTEM_3) -- Debug to see modifier of each hit in a weapon skill.
+    end
 
     if weaponType == xi.skill.HAND_TO_HAND or weaponType == xi.skill.NONE then
         local h2hSkill = attacker:getSkillLevel(xi.skill.HAND_TO_HAND) * 0.11 + 3
@@ -1046,7 +1276,7 @@ xi.weaponskills.getHitRate = function(attacker, target, capHitRate, bonus)
     end
 
     local acc = attacker:getACC()
-    local eva = target:getEVA()
+    local eva = target:getEVA() + target:getMod(xi.mod.SPECIAL_ATTACK_EVASION)
 
     if flourishEffect ~= nil and flourishEffect:getPower() >= 1 then -- 1 or more Finishing moves used.
         attacker:delMod(xi.mod.ACC, 40 + flourishEffect:getSubPower() * 2)
@@ -1125,38 +1355,39 @@ xi.weaponskills.calculatedIgnoredDef = function(tp, def, ignoredDefenseTable)
     return 0
 end
 
-local function getMeleePDifRange(correctedRatio)
-    -- pDifMax
-    local pDifMax = 3
-    if correctedRatio < 0.5 then
-        pDifMax = correctedRatio + 0.5
-    elseif correctedRatio < 0.7 then
-        pDifMax = 1
-    elseif correctedRatio < 1.2 then
-        pDifMax = correctedRatio + 0.3
-    elseif correctedRatio < 1.5 then
-        pDifMax = correctedRatio * 0.25 + correctedRatio
-    elseif correctedRatio < 2.625 then
-        pDifMax = correctedRatio + 0.375
+local function getMeleePDifRange(wRatio, pDifFinalCap)
+    local pDifUpperCap       = 0
+    local pDifLowerCap       = 0
+    if wRatio < 0.5 then
+        pDifUpperCap = wRatio + 0.5
+    elseif wRatio < 0.7 then
+        pDifUpperCap = 1
+    elseif wRatio < 1.2 then
+        pDifUpperCap = wRatio + 0.3
+    elseif wRatio < 1.5 then
+        pDifUpperCap = wRatio + wRatio * 0.25
+    else
+        pDifUpperCap = math.min(wRatio + 0.375, pDifFinalCap)
     end
 
-    -- pDifMin
-    local pDifMin = correctedRatio - 0.375
-    if correctedRatio < 0.38 then
-        pDifMin = 0
-    elseif correctedRatio < 1.25 then
-        pDifMin = correctedRatio * 1176 / 1024 - 448 / 1024
-    elseif correctedRatio < 1.51 then
-        pDifMin = 1
-    elseif correctedRatio < 2.44 then
-        pDifMin = correctedRatio * 1176 / 1024 - 775 / 1024
+    -- pDIF lower cap.
+    if wRatio < 0.38 then
+        pDifLowerCap = 0
+    elseif wRatio < 1.25 then
+        pDifLowerCap = wRatio * 1176 / 1024 - 448 / 1024
+    elseif wRatio < 1.51 then
+        pDifLowerCap = 1
+    elseif wRatio < 2.44 then
+        pDifLowerCap = wRatio * 1176 / 1024 - 775 / 1024
+    else
+        pDifLowerCap = wRatio - 0.375
     end
 
-    return { pDifMin, pDifMax }
+    return { pDifLowerCap, pDifUpperCap }
 end
 
 -- Given the raw ratio value (atk/def) and levels, returns the cRatio (min then max)
-xi.weaponskills.cMeleeRatio = function(attacker, defender, params, ignoredDef, tp)
+xi.weaponskills.cMeleeRatio = function(attacker, defender, params, ignoredDef, tp, ratioMod)
     local weaponType = attacker:getWeaponSkillType(xi.slot.MAIN)
     local flourishEffect = attacker:getStatusEffect(xi.effect.BUILDING_FLOURISH)
 
@@ -1166,6 +1397,11 @@ xi.weaponskills.cMeleeRatio = function(attacker, defender, params, ignoredDef, t
 
     local atkMultiplier = xi.weaponskills.fTP(tp, params.atkVaries)
     local cratio        = attacker:getStat(xi.mod.ATT) * atkMultiplier / (defender:getStat(xi.mod.DEF) - ignoredDef)
+
+    if ratioMod then
+        cratio = attacker:getStat(ratioMod) * atkMultiplier / (defender:getStat(xi.mod.DEF) - ignoredDef)
+        print(ratioMod)
+    end
 
     -- cratio = utils.clamp(cratio, 0, 2.25)
     if flourishEffect ~= nil and flourishEffect:getPower() >= 2 then -- 2 or more Finishing Moves used.
@@ -1183,16 +1419,88 @@ xi.weaponskills.cMeleeRatio = function(attacker, defender, params, ignoredDef, t
     local cratioCap = (xi.combat.physical.pDifWeaponCapTable[weaponType][1] + damageLimitPlus) * damageLimitPercent -- Added damage limit bonuses
 
     cratio = utils.clamp(cratio, 0, cratioCap)
-    local pdif = getMeleePDifRange(cratio)
+    local pdif = getMeleePDifRange(cratio, cratioCap)
 
     cratio                   = cratio + 1
-    cratio                   = utils.clamp(cratio, 0, cratioCap)
-    local unadjustedPDifCrit = getMeleePDifRange(cratio)
+    cratio                   = utils.clamp(cratio, 0, cratioCap + 1)
+    local unadjustedPDifCrit = getMeleePDifRange(cratio, cratioCap + 1)
 
-    local critbonus = utils.clamp(attacker:getMod(xi.mod.CRIT_DMG_INCREASE) - defender:getMod(xi.mod.CRIT_DEF_BONUS), 0, 100)
+    local critbonus = utils.clamp(attacker:getMod(xi.mod.CRIT_DMG_INCREASE) - defender:getMod(xi.mod.CRIT_DEF_BONUS) + defender:getMod(xi.mod.ENEMYCRITDMG), 0, 100)
     local pdifcrit  = { unadjustedPDifCrit[1] * (100 + critbonus) / 100, unadjustedPDifCrit[2] * (100 + critbonus) / 100 }
 
     return pdif, pdifcrit
+end
+
+xi.weaponskills.handleBlock = function(attacker, target, finaldmg)
+    if
+        target:getBlockRate(attacker) >= math.random(100) and
+        target:isFacing(attacker) and
+        target:getEcosystem() == xi.eco.BEASTMEN and
+        target:getMainJob() == xi.job.PLD
+    then
+        finaldmg = math.floor(finaldmg * 0.5)
+    elseif
+        target:getBlockRate(attacker) > math.random(100) and
+        target:isFacing(attacker) and
+        target:isPC() and
+        target:getEquippedItem(xi.slot.SUB):isShield()
+    then
+        local absorb = 100
+        absorb = utils.clamp(absorb - target:getShieldAbsorptionRate(), 0, 100)
+        -- print('blocked')
+        absorb = absorb + target:getMod(xi.mod.SHIELD_DEF_BONUS)
+        finaldmg = math.floor(finaldmg * (absorb / 100))
+        target:trySkillUp(xi.skill.SHIELD, attacker:getMainLvl())
+    end
+
+    return finaldmg
+end
+
+
+xi.weaponskills.handleParry = function(attacker, target, missChance, guaranteedHit)
+    local gHit = guaranteedHit or false
+    if
+        target:isEngaged() and
+        target:isFacing(attacker) and
+        target:getParryRate(attacker, target) >= math.random(100) and
+        target:getMainJob() ~= xi.job.MNK and not gHit
+    then -- Try parry, if so miss.
+        if target:getEcosystem() == xi.eco.BEASTMEN or target:isPC() then
+            missChance = 1
+             print('parried')
+        end
+
+        if target:isPC() then
+            target:trySkillUp(xi.skill.PARRY, attacker:getMainLvl())
+        end
+    end
+
+    return missChance
+end
+
+xi.weaponskills.handleGuard = function(attacker, target, missChance, guaranteedHit)
+    local gHit = guaranteedHit or false
+    if
+        ((target:getMainJob() == xi.job.MNK or
+        target:getMainJob() == xi.job.PUP) or
+        (target:getSubJob() == xi.job.MNK or
+        target:getSubJob() == xi.job.PUP))
+    then
+        if
+            target:getGuardRate(attacker) > math.random(100) and
+            target:isFacing(attacker) and
+            target:isPC() and
+            not gHit
+        then
+            -- Per testing shown by genome mob skills register as a miss when guarded
+            -- https://genomeffxi.livejournal.com/18269.html
+            missChance = 1
+            print('guarded')
+            target:trySkillUp(xi.skill.GUARD, attacker:getMainLvl())
+        end
+    end
+
+    return missChance
 end
 
 -- Given the attacker's str and the mob's vit, fSTR is calculated (for melee WS)

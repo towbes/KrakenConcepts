@@ -11,7 +11,8 @@ entity.onTrade = function(player, npc, trade)
     if
         trade:hasItemQty(xi.item.MINI_TUNING_FORK_OF_LIGHTNING, 1) and
         player:getQuestStatus(xi.quest.log_id.OTHER_AREAS, xi.quest.id.otherAreas.TRIAL_SIZE_TRIAL_BY_LIGHTNING) == QUEST_ACCEPTED and
-        player:getMainJob() == xi.job.SMN
+        (player:getMainJob() == xi.job.SMN or
+        player:getSubJob() == xi.job.SMN)
     then
         player:startEvent(10026, 0, xi.item.MINI_TUNING_FORK_OF_LIGHTNING, 5, 20)
     end
@@ -21,8 +22,10 @@ entity.onTrigger = function(player, npc)
     local trialSizeLightning = player:getQuestStatus(xi.quest.log_id.OTHER_AREAS, xi.quest.id.otherAreas.TRIAL_SIZE_TRIAL_BY_LIGHTNING)
 
     if
-        player:getMainLvl() >= 20 and
-        player:getMainJob() == xi.job.SMN and
+        ((player:getMainLvl() >= 20 and
+        player:getMainJob() == xi.job.SMN) or
+        (player:getSubLvl() >= 20 and
+        player:getSubJob() == xi.job.SMN)) and
         trialSizeLightning == QUEST_AVAILABLE and
         player:getFameLevel(xi.quest.fame_area.WINDURST) >= 2
     then

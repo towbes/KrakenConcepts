@@ -76,10 +76,10 @@ local loot =
         },
 
         {
-            { itemid = xi.item.EBONY_LOG,     droprate = 250 }, -- ebony_log
-            { itemid = xi.item.CHRYSOBERYL,   droprate = 250 }, -- chrysoberyl
-            { itemid = xi.item.FLUORITE,      droprate = 250 }, -- fluorite
-            { itemid = xi.item.DREAM_PLATTER, droprate = 250 }, -- jadeite
+            { itemid = 702, droprate = 250 }, -- ebony_log
+            { itemid = 801, droprate = 250 }, -- chrysoberyl
+            { itemid = 810, droprate = 250 }, -- fluorite
+            { itemid = 784, droprate = 250 }, -- jadeite
         },
 
         {
@@ -586,6 +586,69 @@ local loot =
         },
     },
 
+        -- KSNM Copycat
+    [80] =
+    {
+        {
+            {itemid = xi.item.ADAMAN_INGOT, droprate = 1000},
+        },
+        {
+            {itemid = xi.item.AHRIMAN_LENS, droprate = 250},
+            {itemid = xi.item.AHRIMAN_WING, droprate = 250},
+            {itemid = xi.item.POLE_GRIP,    droprate =  50},
+            {itemid = xi.item.SWORD_STRAP,  droprate =  15},
+            {itemid = xi.item.SPEAR_STRAP,  droprate = 250},
+        },
+        {
+            {itemid = xi.item.COFFINMAKER,  droprate = 250},
+            {itemid = xi.item.DESTROYERS,   droprate = 250},
+            {itemid = xi.item.EXPUNGER,     droprate = 250},
+            {itemid = xi.item.RETRIBUTOR,   droprate = 250},
+        },
+        {
+            {itemid = xi.item.ATTILAS_EARRING, droprate = 250},
+            {itemid = xi.item.DURANDAL,        droprate = 250},
+            {itemid = xi.item.HOPLITES_HARP,   droprate = 250},
+            {itemid = xi.item.SORROWFUL_HARP,  droprate = 250},
+        },
+        {
+            {itemid = xi.item.FUMA_SUNE_ATE,       droprate = 550},
+            {itemid = xi.item.ADAMAN_INGOT,        droprate = 200},
+            {itemid = xi.item.ORICHALCUM_INGOT,    droprate = 250},
+        },
+        {
+            {itemid = xi.item.CORAL_FRAGMENT,          droprate = 50},
+            {itemid = xi.item.CHUNK_OF_DARKSTEEL_ORE,  droprate = 50},
+            {itemid = xi.item.DEMON_HORN,              droprate = 50},
+            {itemid = xi.item.EBONY_LOG,               droprate = 50},
+            {itemid = xi.item.CHUNK_OF_GOLD_ORE,       droprate = 50},
+            {itemid = xi.item.SPOOL_OF_GOLD_THREAD,    droprate = 50},
+            {itemid = xi.item.HI_RERAISER,             droprate = 50},
+            {itemid = xi.item.CHUNK_OF_PLATINUM_ORE,   droprate = 50},
+            {itemid = xi.item.MAHOGANY_LOG,            droprate = 50},
+            {itemid = xi.item.SPOOL_OF_MALBORO_FIBER,  droprate = 50},
+            {itemid = xi.item.CHUNK_OF_MYTHRIL_ORE,    droprate = 50},
+            {itemid = xi.item.PETRIFIED_LOG,           droprate = 50},
+            {itemid = xi.item.SQUARE_OF_RAINBOW_CLOTH, droprate = 50},
+            {itemid = xi.item.RAM_HORN,                droprate = 50},
+            {itemid = xi.item.SQUARE_OF_RAXA,          droprate = 50},
+            {itemid = xi.item.RERAISER,                droprate = 50},
+            {itemid = xi.item.VILE_ELIXIR,             droprate = 50},
+            {itemid = xi.item.VILE_ELIXIR_P1,          droprate = 50},
+            {itemid = xi.item.WYVERN_SCALES,           droprate = 50},
+            {itemid = xi.item.PHILOSOPHERS_STONE,      droprate = 50},
+        },
+        {
+            {itemid = xi.item.VIAL_OF_BLACK_BEETLE_BLOOD, droprate =  50},
+            {itemid = xi.item.SQUARE_OF_DAMASCENE_CLOTH,  droprate =  50},
+            {itemid = xi.item.DAMASCUS_INGOT,             droprate =  50},
+            {itemid = xi.item.SPOOL_OF_MALBORO_FIBER,     droprate =  50},
+            {itemid = xi.item.PHILOSOPHERS_STONE,         droprate = 300},
+            {itemid = xi.item.PHOENIX_FEATHER,            droprate = 300},
+            {itemid = xi.item.SQUARE_OF_RAXA,             droprate = 200},
+        },
+    },
+
     -- KSNM Operation Desert Swarm
     [81] =
     {
@@ -603,12 +666,12 @@ local loot =
         },
 
         {
-            { itemid = xi.item.ANUBISS_KNIFE,    droprate = 504 }, -- Anubiss Knife
-            { itemid = xi.item.ADAMAN_INGOT,     droprate =   4 }, -- Adaman Ingot
-            { itemid = xi.item.CLAYMORE_GRIP,    droprate =  86 }, -- Claymore Grip
-            { itemid = xi.item.ORICHALCUM_INGOT, droprate =  22 }, -- Orichalcum Ingot
-            { itemid = xi.item.POLE_GRIP,        droprate = 146 }, -- Pole Grip
-            { itemid = xi.item.SWORD_STRAP,      droprate =  22 }, -- Sword Strap
+            { itemid = 17624, droprate = 504 }, -- Anubiss Knife
+            { itemid =   655, droprate =   4 }, -- Adaman Ingot
+            { itemid = 19027, droprate =  86 }, -- Claymore Grip
+            { itemid =   747, droprate =  22 }, -- Orichalcum Ingot
+            { itemid = 19025, droprate = 146 }, -- Pole Grip
+            { itemid = 19024, droprate =  220 }, -- Sword Strap
         },
 
         {
@@ -658,56 +721,51 @@ local loot =
     [82] =
     {
         {
-            { itemid = xi.item.MICHISHIBA_NO_TSUYU, droprate = 217 }, -- Michishiba-no-tsuyu
-            { itemid = xi.item.DISSECTOR,           droprate = 174 }, -- Dissector
-            { itemid = xi.item.COFFINMAKER,         droprate = 333 }, -- Coffinmaker
-            { itemid = xi.item.GRAVEDIGGER,         droprate = 174 }, -- Gravedigger
+            {itemid = 17827, droprate = 217}, -- Michishiba-no-tsuyu
+            {itemid = 17699, droprate = 174}, -- Dissector
+            {itemid = 17275, droprate = 333}, -- Coffinmaker
+            {itemid = 18053, droprate = 174}, -- Gravedigger
         },
-
         {
-            { itemid = xi.item.CLAYMORE_GRIP,    droprate = 144 }, -- Claymore Grip
-            { itemid = xi.item.DAMASCUS_INGOT,   droprate = 275 }, -- Damascus Ingot
-            { itemid = xi.item.GIANT_BIRD_PLUME, droprate = 275 }, -- Giant Bird Plume
-            { itemid = xi.item.POLE_GRIP,        droprate = 203 }, -- Pole Grip
-            { itemid = xi.item.SPEAR_STRAP,      droprate = 116 }, -- Spear Strap
+            {itemid = 19027, droprate = 144}, -- Claymore Grip
+            {itemid = 658,   droprate = 275}, -- Damascus Ingot
+            {itemid = 843,   droprate = 275}, --- Giant Bird Plume
+            {itemid = 19025, droprate = 203}, -- Pole Grip
+            {itemid = 19026, droprate = 116}, -- Spear Strap
         },
-
         {
-            { itemid = xi.item.ADAMAN_INGOT,     droprate = 159 }, -- Adaman Ingot
-            { itemid = xi.item.ORICHALCUM_INGOT, droprate = 290 }, -- Orichalcum Ingot
-            { itemid = xi.item.TITANIS_EARRING,  droprate = 406 }, -- Titanis Earring
+            {itemid = 655,   droprate = 159}, -- Adaman Ingot
+            {itemid = 747,   droprate = 290}, -- Orichalcum Ingot
+            {itemid = 14765, droprate = 406}, -- Titanis Earring
         },
-
         {
-            { itemid = xi.item.EVOKERS_BOOTS,  droprate = 159 }, -- Evokers Boots
-            { itemid = xi.item.OSTREGER_MITTS, droprate = 217 }, -- Ostreger Mitts
-            { itemid = xi.item.PINEAL_HAT,     droprate = 145 }, -- Pineal Hat
-            { itemid = xi.item.TRACKERS_KECKS, droprate = 159 }, -- Trackers Kecks
+            {itemid = 15325, droprate = 159}, -- Evokers Boots
+            {itemid = 14872, droprate = 217}, -- Ostreger Mitts
+            {itemid = 15181, droprate = 145}, -- Pineal Hat
+            {itemid = 15387, droprate = 159}, -- Trackers Kecks
         },
-
         {
-            { itemid = xi.item.CORAL_FRAGMENT,          droprate = 101 }, -- Coral Fragment
-            { itemid = xi.item.CHUNK_OF_DARKSTEEL_ORE,  droprate =  29 }, -- Chunk Of Darksteel Ore
-            { itemid = xi.item.DEMON_HORN,              droprate =  29 }, -- Demon Horn
-            { itemid = xi.item.EBONY_LOG,               droprate =  29 }, -- Ebony Log
-            { itemid = xi.item.GOLD_INGOT,              droprate = 101 }, -- Gold Ingot
-            { itemid = xi.item.SPOOL_OF_GOLD_THREAD,    droprate =  29 }, -- Spool Of Gold Thread
-            { itemid = xi.item.CHUNK_OF_MYTHRIL_ORE,    droprate =  29 }, -- Chunk Of Mythril Ore
-            { itemid = xi.item.PETRIFIED_LOG,           droprate =  58 }, -- Petrified Log
-            { itemid = xi.item.CHUNK_OF_PLATINUM_ORE,   droprate =  14 }, -- Chunk Of Platinum Ore
-            { itemid = xi.item.SQUARE_OF_RAINBOW_CLOTH, droprate =  58 }, -- Square Of Rainbow Cloth
-            { itemid = xi.item.RAM_HORN,                droprate =  14 }, -- Ram Horn
-            { itemid = xi.item.SQUARE_OF_RAXA,          droprate = 159 }, -- Square Of Raxa
-            { itemid = xi.item.SPOOL_OF_MALBORO_FIBER,  droprate =  72 }, -- Spool Of Malboro Fiber
+            {itemid = 644,  droprate =  29}, -- Chunk Of Mythril Ore
+            {itemid = 645,  droprate =  29}, -- Chunk Of Darksteel Ore
+            {itemid = 702,  droprate =  29}, -- Ebony Log
+            {itemid = 703,  droprate =  58}, -- Petrified Log
+            {itemid = 738,  droprate =  14}, -- Chunk Of Platinum Ore
+            {itemid = 745,  droprate = 101}, -- Gold Ingot
+            {itemid = 823,  droprate =  29}, -- Spool Of Gold Thread
+            {itemid = 837,  droprate =  72}, -- Spool Of Malboro Fiber
+            {itemid = 830,  droprate =  58}, -- Square Of Rainbow Cloth
+            {itemid = 887,  droprate = 101}, -- Coral Fragment
+            {itemid = 895,  droprate =  14}, -- Ram Horn
+            {itemid = 902,  droprate =  29}, -- Demon Horn
+            {itemid = 1132, droprate = 159}, -- Square Of Raxa
         },
-
         {
-            { itemid = xi.item.VIAL_OF_BLACK_BEETLE_BLOOD, droprate =  87 }, -- Vial Of Black Beetle Blood
-            { itemid = xi.item.DAMASCUS_INGOT,             droprate =  14 }, -- Damascus Ingot
-            { itemid = xi.item.SQUARE_OF_DAMASCENE_CLOTH,  droprate =  29 }, -- Square Of Damascene Cloth
-            { itemid = xi.item.PHILOSOPHERS_STONE,         droprate = 174 }, -- Philosophers Stone
-            { itemid = xi.item.PHOENIX_FEATHER,            droprate = 246 }, -- Phoenix Feather
-            { itemid = xi.item.SQUARE_OF_RAXA,             droprate = 159 }, -- Square Of Raxa
+            {itemid = 658,  droprate =  14}, -- Damascus Ingot
+            {itemid = 836,  droprate =  29}, -- Square Of Damascene Cloth
+            {itemid = 844,  droprate = 246}, -- Phoenix Feather
+            {itemid = 942,  droprate = 174}, -- Philosophers Stone
+            {itemid = 1110, droprate =  87}, -- Vial Of Black Beetle Blood
+            {itemid = 1132, droprate = 159}, -- Square Of Raxa
         },
     },
 }

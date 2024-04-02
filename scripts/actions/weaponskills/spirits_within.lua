@@ -5,7 +5,7 @@
 -- TrolandAdded by Troland
 -- Skill Level: 175
 -- Delivers an unavoidable attack. Damage varies with HP and TP.
--- Not aligned with any "elemental gorgets" or "elemental belts" due to it's absence of Skillchain properties.
+-- Not aligned with any 'elemental gorgets' or 'elemental belts' due to it's absence of Skillchain properties.
 -- Element: None
 -- Modifiers: HP:
 -- 100%TP    200%TP    300%TP
@@ -45,11 +45,13 @@ weaponskillObject.onUseWeaponSkill = function(player, target, wsID, tp, primary,
     if xi.settings.main.USE_ADOULIN_WEAPON_SKILL_CHANGES then
         -- Damage calculations changed based on: http://www.bg-wiki.com/bg/Spirits_Within http://www.bluegartr.com/threads/121610-Rehauled-Weapon-Skills-tier-lists?p=6142188&viewfull=1#post6142188
         if tp == 3000 then
-            wsc = playerHP
+             wsc = math.floor(playerHP * 0.65)
         elseif tp >= 2000 then
-            wsc = math.floor(playerHP * .5)
+            -- wsc = math.floor(playerHP * .35)
+            wsc = math.floor(playerHP * (math.floor(0.0775 * tp) - 96) / 256)
         elseif tp >= 1000 then
-            wsc = math.floor(playerHP * .125)
+            -- wsc = math.floor(playerHP * .125)
+            wsc = math.floor(playerHP * (math.floor(0.016 * tp) + 16) / 256)
         end
     end
 

@@ -19,10 +19,14 @@ mobskillObject.onMobSkillCheck = function(target, mob, skill)
     elseif mob:getFamily() == 313 then -- Tinnin can use at will
         return 0
     else
-        if mob:getAnimationSub() == 0 then
+        if (mob:getAnimationSub() == 0 and mob:getHPP() <= 25) then -- Only used when all 3 Hydra heads alive
+            if (mob:getID() == 17093003) and (mob:getInstance():getStage() ~= 100) then -- Nyzul Isle Hydra will only use this on floor 100
+                return 1
+            end
             return 0
         else
             return 1
+
         end
     end
 end

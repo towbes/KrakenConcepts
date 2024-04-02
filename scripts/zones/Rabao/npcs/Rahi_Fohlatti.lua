@@ -12,7 +12,8 @@ entity.onTrade = function(player, npc, trade)
     if
         trade:hasItemQty(xi.item.MINI_TUNING_FORK_OF_WIND, 1) and
         player:getQuestStatus(xi.quest.log_id.OUTLANDS, xi.quest.id.outlands.TRIAL_SIZE_TRIAL_BY_WIND) == QUEST_ACCEPTED and
-        player:getMainJob() == xi.job.SMN
+        (player:getMainJob() == xi.job.SMN or
+        player:getSubJob() == xi.job.SMN)
     then
         player:startEvent(109, 0, xi.item.MINI_TUNING_FORK_OF_WIND, 3, 20)
     end
@@ -22,8 +23,10 @@ entity.onTrigger = function(player, npc)
     local trialSizeWind = player:getQuestStatus(xi.quest.log_id.OUTLANDS, xi.quest.id.outlands.TRIAL_SIZE_TRIAL_BY_WIND)
 
     if
-        player:getMainLvl() >= 20 and
-        player:getMainJob() == xi.job.SMN and
+        ((player:getMainLvl() >= 20 and
+        player:getMainJob() == xi.job.SMN) or
+        (player:getSubLvl() >= 20 and
+        player:getSubJob() == xi.job.SMN)) and
         trialSizeWind == QUEST_AVAILABLE and
         player:getFameLevel(xi.quest.fame_area.SELBINA_RABAO) >= 2
     then

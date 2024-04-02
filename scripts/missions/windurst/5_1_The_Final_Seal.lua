@@ -97,8 +97,13 @@ mission.sections =
 
             onEventFinish =
             {
-                [166] = handleAcceptMission,
-                [190] = handleAcceptMission,
+                [166] = function(player, csid, option, npc)
+                    handleAcceptMission(player, csid, option, npc)
+                end,
+
+                [190] = function(player, csid, option, npc)
+                    handleAcceptMission(player, csid, option, npc)
+                end,
             },
         },
     },

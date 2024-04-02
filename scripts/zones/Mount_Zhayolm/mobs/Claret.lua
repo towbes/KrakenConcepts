@@ -11,15 +11,19 @@ local entity = {}
 
 entity.onMobInitialize = function(mob)
     mob:setMobMod(xi.mobMod.IDLE_DESPAWN, 300)
-    mob:setMobMod(xi.mobMod.TARGET_DISTANCE_OFFSET, 50)
+    mob:setMobMod(xi.mobMod.GIL_MIN, 3000)
+    mob:setMobMod(xi.mobMod.GIL_MAX, 5000)
 end
 
 entity.onMobSpawn = function(mob)
     mob:setLocalVar('[rage]timer', 3600) -- 60 minutes
     mob:addMod(xi.mod.REGEN, math.floor(mob:getMaxHP() * 0.004))
     mob:addMod(xi.mod.BIND_MEVA, 40)
+    mob:setMobMod(xi.mobMod.TARGET_DISTANCE_OFFSET, 50)
+    mob:addMod(xi.mod.REGAIN, 100) -- can be seen TPing with little to no interaction from players
     mob:addMod(xi.mod.MOVE_SPEED_STACKABLE, 15)
     mob:setAutoAttackEnabled(false)
+    mob:setMod(xi.mod.UDMGMAGIC, 50)
 end
 
 entity.onMobFight = function(mob, target)

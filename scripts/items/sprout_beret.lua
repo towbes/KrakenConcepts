@@ -1,30 +1,25 @@
------------------------------------
+-----------------------------------------
 -- ID: 15198
--- Item: Sprout Beret
--- Experience point bonus
------------------------------------
--- Bonus: +150%
--- Duration: 720 min
--- Max bonus: 30000 exp
------------------------------------
+-- Sprout Beret
+-- Enchantment: 60Min, Costume - Mandragora (white)
+-----------------------------------------
 local itemObject = {}
 
 itemObject.onItemCheck = function(target)
-    local result = 0
-    if target:hasStatusEffect(xi.effect.DEDICATION) then
-        result = xi.msg.basic.ITEM_UNABLE_TO_USE_2
-    end
-
-    return result
 end
 
 itemObject.onItemUse = function(target)
-    local effect    = xi.effect.DEDICATION
-    local power     = 150
-    local duration  = 43200
-    local subpower  = 30000
+    local num = math.random(0,100)
 
-    xi.itemUtils.addItemExpEffect(target, effect, power, duration, subpower)
+    if num == 0  then 
+        target:addStatusEffect(xi.effect.COSTUME, 301, 0, 3600)
+    elseif num == 100 then 
+        target:addStatusEffect(xi.effect.COSTUME, 2101, 0, 3600)
+    elseif num >= 1 and num <= 49 then
+        target:addStatusEffect(xi.effect.COSTUME, 31, 0, 3600)
+    elseif num >= 50 and num <= 99 then
+        target:addStatusEffect(xi.effect.COSTUME, 2247, 0, 3600)
+    end
 end
 
 return itemObject

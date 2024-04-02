@@ -9,7 +9,7 @@
 local mobskillObject = {}
 
 mobskillObject.onMobSkillCheck = function(target, mob, skill)
-    mob:messageBasic(xi.msg.basic.READIES_WS, 0, 691 + 256)
+    -- mob:messageBasic(xi.msg.basic.READIES_WS, 0, 691 + 256)
     return 0
 end
 

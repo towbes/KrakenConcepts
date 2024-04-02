@@ -3,6 +3,8 @@
 --  NPC: Zvahl Portcullis
 -- !pos 223 -13 -254 137
 -----------------------------------
+
+-----------------------------------
 local entity = {}
 
 entity.onTrigger = function(player, npc)

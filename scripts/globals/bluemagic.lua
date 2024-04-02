@@ -205,7 +205,7 @@ xi.spells.blue.usePhysicalSpell = function(caster, target, spell, params)
     end
 
     -- Final D
-    local finalD = math.floor(initialD + fStr + wsc)
+    local finalD = math.floor((initialD + fStr + multiplier) + wsc)
 
     ----------------------------------------------
     -- Get the possible pDIF range and hit rate --
@@ -219,7 +219,7 @@ xi.spells.blue.usePhysicalSpell = function(caster, target, spell, params)
     params.bonusacc     = params.bonusacc == nil and 0 or params.bonusacc
 
     -- params.critchance will only be non-nil if base critchance is passed from spell lua
-    local nativecrit  = xi.combat.physical.calculateSwingCriticalRate(caster, target)
+    local nativecrit  = xi.combat.physical.calculateSwingCriticalRate(caster, target, 0, false)
     params.critchance = params.critchance == nil and 0 or utils.clamp(params.critchance / 100 + nativecrit, 0.05, 0.95)
 
     local cratio  = calculatecRatio(params.offcratiomod / target:getStat(xi.mod.DEF), caster:getMainLvl(), target:getMainLvl())
@@ -283,7 +283,13 @@ xi.spells.blue.usePhysicalSpell = function(caster, target, spell, params)
         end
 
         hitsdone = hitsdone + 1
+
+        if target:getMod(xi.mod.DMGPHYS_CAP) > 0 and finaldmg > target:getMod(xi.mod.DMGPHYS_CAP) then
+            finaldmg = target:getMod(xi.mod.DMGPHYS_CAP) * hitslanded
+        end
     end
+
+    caster:delStatusEffectSilent(xi.effect.MANAWELL)
 
     return xi.spells.blue.applySpellDamage(caster, target, spell, finaldmg, params, trickAttackTarget)
 end
@@ -330,6 +336,12 @@ xi.spells.blue.useMagicalSpell = function(caster, target, spell, params)
     -- MAB/MDB/weather/day/affinity/burst effect on damage
     finaldmg = math.floor(addBonuses(caster, spell, target, finaldmg))
 
+    if target:getMod(xi.mod.DMGMAGIC_CAP) > 0 and finaldmg > target:getMod(xi.mod.DMGMAGIC_CAP) then
+        finaldmg = target:getMod(xi.mod.DMGMAGIC_CAP)
+    end
+
+    caster:delStatusEffectSilent(xi.effect.MANAWELL)
+
     return xi.spells.blue.applySpellDamage(caster, target, spell, finaldmg, params, nil)
 end
 
@@ -346,7 +358,7 @@ xi.spells.blue.useDrainSpell = function(caster, target, spell, params, softCap, 
     dmg = adjustForTarget(target, dmg, spell:getElement())
 
     -- limit damage
-    if target:isUndead() then
+    if target:isUndead() or caster:hasStatusEffect(xi.effect.CURSE_II) then
         spell:setMsg(xi.msg.basic.MAGIC_NO_EFFECT)
     else
         -- only drain what the mob has
@@ -361,6 +373,8 @@ xi.spells.blue.useDrainSpell = function(caster, target, spell, params, softCap, 
             caster:addHP(dmg)
         end
     end
+
+    caster:delStatusEffectSilent(xi.effect.MANAWELL)
 
     return dmg
 end
@@ -405,6 +419,12 @@ xi.spells.blue.useBreathSpell = function(caster, target, spell, params, isConal)
 
     -- Final damage
     dmg = target:breathDmgTaken(dmg)
+
+    if target:getMod(xi.mod.DMGBREATH_CAP) > 0 and dmg > target:getMod(xi.mod.DMGBREATH_CAP) then
+        dmg = target:getMod(xi.mod.DMGBREATH_CAP)
+    end
+
+    caster:delStatusEffectSilent(xi.effect.MANAWELL)
 
     results[1] = xi.spells.blue.applySpellDamage(caster, target, spell, dmg, params, nil)
     results[2] = resistance
@@ -481,6 +501,8 @@ xi.spells.blue.useEnfeeblingSpell = function(caster, target, spell, params, powe
     params.skillType = xi.skill.BLUE_MAGIC
     local resist     = applyResistanceEffect(caster, target, spell, params)
 
+    caster:delStatusEffectSilent(xi.effect.MANAWELL)
+
     -- If unresisted
     if resist >= resistThreshold then
         spell:setMsg(xi.msg.basic.MAGIC_NO_EFFECT)
@@ -512,8 +534,14 @@ end
 
 -- Perform a curative Blue Magic spell
 xi.spells.blue.useCuringSpell = function(caster, target, spell, params)
+    if target:hasStatusEffect(xi.effect.CURSE_II) then
+        spell:setMsg(xi.msg.basic.MAGIC_NO_EFFECT) -- no effect
+        return 1
+    end
+
     local power    = getCurePowerOld(caster)
     local divisor  = params.divisor0
+
     local constant = params.constant0
 
     if power > params.powerThreshold2 then

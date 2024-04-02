@@ -12,11 +12,11 @@ local entity = {}
 entity.onTrade = function(player, npc, trade)
     if player:getQuestStatus(xi.quest.log_id.JEUNO, xi.quest.id.jeuno.COLLECT_TARUT_CARDS) == QUEST_ACCEPTED then
         if npcUtil.tradeHas(trade, { xi.item.TARUT_CARD_THE_FOOL, xi.item.TARUT_CARD_DEATH, xi.item.TARUT_CARD_THE_KING, xi.item.TARUT_CARD_THE_HERMIT }, true) then
-            player:startEvent(200) -- Finish quest "Collect Tarut Cards"
+            player:startEvent(200) -- Finish quest 'Collect Tarut Cards'
         end
     elseif player:getQuestStatus(xi.quest.log_id.JEUNO, xi.quest.id.jeuno.ALL_IN_THE_CARDS) >= QUEST_ACCEPTED then
         if npcUtil.tradeHas(trade, { xi.item.TARUT_CARD_THE_FOOL, xi.item.TARUT_CARD_DEATH, xi.item.TARUT_CARD_THE_KING, xi.item.TARUT_CARD_THE_HERMIT }, true) then
-            player:startEvent(10114) -- Finish quest "All in the Cards"
+            player:startEvent(10114) -- Finish quest 'All in the Cards'
         end
     end
 end
@@ -45,7 +45,7 @@ entity.onTrigger = function(player, npc)
         -- if prog <= 2 then
         --     player:startEvent(199) -- Required to get compatibility 3x on 3 diff game days before quest is kicked off
         -- elseif prog == 3 then
-        player:startEvent(198) -- Start quest "Rubbish Day" with option
+        player:startEvent(198) -- Start quest 'Rubbish Day' with option
         -- end
 
     elseif

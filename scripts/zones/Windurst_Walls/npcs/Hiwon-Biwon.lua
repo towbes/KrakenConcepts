@@ -28,7 +28,7 @@ entity.onTrigger = function(player, npc)
                 player:startEvent(281) -- Give scoop
             end
         else
-            player:startEvent(282) -- "Getting back to the maater at hand-wand..."
+            player:startEvent(282) -- 'Getting back to the maater at hand-wand...'
         end
 
     -- default dialog

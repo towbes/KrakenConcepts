@@ -14,6 +14,10 @@ itemObject.onItemCheck = function(target)
 end
 
 itemObject.onItemUse = function(target)
+    if target:hasStatusEffect(xi.effect.CURSE_II) then
+        target:messageBasic(xi.msg.basic.NO_EFFECT)
+        return 1
+    end
     local hpHeal = math.random(50, 75)
     local dif = target:getMaxHP() - target:getHP()
     if hpHeal > dif then

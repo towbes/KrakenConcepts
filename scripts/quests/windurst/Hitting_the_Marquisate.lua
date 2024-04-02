@@ -67,8 +67,10 @@ quest.sections =
             return status == QUEST_AVAILABLE and
                 not quest:getMustZone(player) and
                 player:hasCompletedQuest(xi.quest.log_id.WINDURST, xi.quest.id.windurst.AS_THICK_AS_THIEVES) and
-                player:getMainJob() == xi.job.THF and
-                player:getMainLvl() >= xi.settings.main.AF3_QUEST_LEVEL
+                ((player:getMainJob() == xi.job.THF and
+                player:getMainLvl() >= xi.settings.main.AF3_QUEST_LEVEL) or
+                (player:getSubJob() == xi.job.THF and
+                player:getSubLvl() >= xi.settings.main.AF3_QUEST_LEVEL))
         end,
 
         [xi.zone.WINDURST_WOODS] =
@@ -193,8 +195,10 @@ quest.sections =
             ['Yatniel'] =
             {
                 onTrade = function(player, npc, trade)
+                    local yatnielProgress = quest:getVar(player, 'yatnielProg')
                     if
-                        npcUtil.tradeHasExactly(trade, { { xi.item.QUAKE_GRENADE, 4 } })
+                    npcUtil.tradeHasExactly(trade, {{ xi.item.QUAKE_GRENADE, 4 }}) and
+                    yatnielProgress == 1
                     then
                         return quest:progressEvent(10031)
                     end

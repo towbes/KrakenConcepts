@@ -1,7 +1,7 @@
 -----------------------------------
 -- ID: 15841
 -- Recall ring: Jugner
--- Enchantment: "Recall-Jugner"
+-- Enchantment: 'Recall-Jugner'
 -----------------------------------
 local itemObject = {}
 

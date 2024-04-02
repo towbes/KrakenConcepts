@@ -2,7 +2,7 @@
 -- Area: Lower Delkfutt's Tower
 --  NPC: Cermet Door
 -- Cermet Door for Basty Ambassador
--- Bastok Mission 3.3 "Appointment to Jeuno"
+-- Bastok Mission 3.3 'Appointment to Jeuno'
 -- !pos 596 16 -19 184
 -----------------------------------
 local entity = {}

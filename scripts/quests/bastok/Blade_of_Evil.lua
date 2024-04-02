@@ -23,7 +23,8 @@ quest.sections =
         check = function(player, status, vars)
             return status == QUEST_AVAILABLE and
                 player:hasCompletedQuest(xi.quest.log_id.BASTOK, xi.quest.id.bastok.DARK_PUPPET) and
-                player:getMainJob() == xi.job.DRK
+                (player:getMainJob() == xi.job.DRK or
+                player:getSubJob() == xi.job.DRK) --Umeboshi                
         end,
 
         [xi.zone.BEADEAUX] =

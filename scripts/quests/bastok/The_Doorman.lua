@@ -24,7 +24,9 @@ quest.sections =
         check = function(player, status, vars)
             return status == QUEST_AVAILABLE and
                 player:getMainJob() == xi.job.WAR and
-                player:getMainLvl() >= 40
+                player:getMainLvl() >= 40 or
+                player:getSubJob() == xi.job.WAR and --Umeboshi
+                player:getSubLvl() >= 40
         end,
 
         [xi.zone.BASTOK_MINES] =

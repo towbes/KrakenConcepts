@@ -11,6 +11,8 @@ entity.onMobSpawn = function(mob)
     mob:setAutoAttackEnabled(true)
     mob:setMobAbilityEnabled(true)
     mob:setMobMod(xi.mobMod.DRAW_IN, 0)
+    mob:setMobMod(xi.mobMod.DRAW_IN, 1)
+    mob:setMobMod(xi.mobMod.DRAW_IN_CUSTOM_RANGE, 20)
     mob:setMobMod(xi.mobMod.SKILL_LIST, 729)
 end
 

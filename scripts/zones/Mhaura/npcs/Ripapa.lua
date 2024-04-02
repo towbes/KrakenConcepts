@@ -26,14 +26,14 @@ entity.onTrigger = function(player, npc)
         carbuncleDebacleProgress == 3 and
         not player:hasItem(xi.item.LIGHTNING_PENDULUM)
     then
-        player:startEvent(10023, 0, xi.item.LIGHTNING_PENDULUM, 0, 0, 0, 0, 0, 0) -- "lost the pendulum?"
+        player:startEvent(10023, 0, xi.item.LIGHTNING_PENDULUM, 0, 0, 0, 0, 0, 0) -- 'lost the pendulum?'
     -----------------------------------
     -- Trial by Lightning
     elseif
         (trialByLightning == QUEST_AVAILABLE and player:getFameLevel(xi.quest.fame_area.WINDURST) >= 6) or
         (trialByLightning == QUEST_COMPLETED and os.time() > player:getCharVar('TrialByLightning_date'))
     then
-        player:startEvent(10016, 0, xi.ki.TUNING_FORK_OF_LIGHTNING) -- Start and restart quest "Trial by Lightning"
+        player:startEvent(10016, 0, xi.ki.TUNING_FORK_OF_LIGHTNING) -- Start and restart quest 'Trial by Lightning'
     elseif
         trialByLightning == QUEST_ACCEPTED and
         not player:hasKeyItem(xi.ki.TUNING_FORK_OF_LIGHTNING) and

@@ -1,10 +1,14 @@
 -----------------------------------
 -- Zone: Beaucedine_Glacier_[S] (136)
 -----------------------------------
+local ID = zones[xi.zone.BEAUCEDINE_GLACIER_S]
 local zoneObject = {}
 
 zoneObject.onInitialize = function(zone)
     xi.voidwalker.zoneOnInit(zone)
+
+    --NM Persistence
+    xi.mob.nmTODPersistCache(zone, ID.mob.SCYLLA)
 end
 
 zoneObject.onZoneIn = function(player, prevZone)

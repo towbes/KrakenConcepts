@@ -3,6 +3,7 @@
 --   NM: Alastor Antlion
 -----------------------------------
 mixins = { require('scripts/mixins/families/antlion_ambush_noaggro') }
+local ID = zones[xi.zone.ATTOHWA_CHASM]
 -----------------------------------
 local entity = {}
 
@@ -20,6 +21,7 @@ entity.onAdditionalEffect = function(mob, target, damage)
 end
 
 entity.onMobDeath = function(mob, player, optParams)
+    GetNPCByID(ID.npc.ALASTOR_QM):updateNPCHideTime(xi.settings.main.FORCE_SPAWN_QM_RESET_TIME)
 end
 
 return entity

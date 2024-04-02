@@ -65,6 +65,7 @@
 #include "char_recast_container.h"
 #include "charentity.h"
 #include "conquest_system.h"
+#include "fellowentity.h"
 #include "item_container.h"
 #include "items/item_furnishing.h"
 #include "items/item_usable.h"
@@ -162,7 +163,8 @@ CCharEntity::CCharEntity()
 
     m_missionLog[4].current = 0;   // MISSION_TOAU
     m_missionLog[5].current = 0;   // MISSION_WOTG
-    m_missionLog[6].current = 101; // MISSION_COP
+    // m_missionLog[6].current = 101; // MISSION_COP
+    m_missionLog[6].current = 0; // MISSION_COP
     for (auto& i : m_missionLog)
     {
         i.statusUpper = 0;
@@ -224,6 +226,13 @@ CCharEntity::CCharEntity()
 
     resetPetZoningInfo();
     petZoningInfo.petID = 0;
+    
+    fellowZoningInfo.respawnFellow = false;
+    fellowZoningInfo.fellowID      = 0;
+    fellowZoningInfo.fellowHP      = 0;
+    fellowZoningInfo.fellowMP      = 0;
+
+    m_PFellow = nullptr;
 
     m_PlayTime    = 0;
     m_SaveTime    = 0;
@@ -500,6 +509,19 @@ bool CCharEntity::shouldPetPersistThroughZoning()
            (petType == PET_TYPE::JUG_PET && settings::get<bool>("map.KEEP_JUGPET_THROUGH_ZONING"));
 }
 
+void CCharEntity::setFellowZoningInfo()
+{
+    fellowZoningInfo.fellowHP = m_PFellow->health.hp;
+    fellowZoningInfo.fellowMP = m_PFellow->health.mp;
+}
+
+void CCharEntity::resetFellowZoningInfo()
+{
+    fellowZoningInfo.fellowHP      = 0;
+    fellowZoningInfo.fellowMP      = 0;
+    fellowZoningInfo.respawnFellow = false;
+}
+
 /************************************************************************
  *
  * Return the container with the specified ID.If the ID goes beyond, then *
@@ -710,6 +732,16 @@ void CCharEntity::ClearTrusts()
     PTrusts.clear();
 
     ReloadPartyInc();
+}
+
+void CCharEntity::RemoveFellow()
+{
+    if (m_PFellow == nullptr || !m_PFellow->PAI->IsSpawned())
+        return;
+
+    m_PFellow->PAI->Despawn();
+    m_PFellow = nullptr;
+    pushPacket(new CCharUpdatePacket(this));
 }
 
 void CCharEntity::RequestPersist(CHAR_PERSIST toPersist)
@@ -983,12 +1015,20 @@ bool CCharEntity::CanAttack(CBattleEntity* PTarget, std::unique_ptr<CBasicPacket
 {
     TracyZoneScoped;
 
+    auto modelRadius = PTarget->m_ModelRadius;
+
     if (PTarget->PAI->IsUntargetable())
     {
         return false;
     }
 
-    float dist = distance(loc.p, PTarget->loc.p);
+        if (auto PMob = dynamic_cast<CMobEntity*>(PTarget))
+    {
+        modelRadius = PMob->m_Type & MOBTYPE_NORMAL ? modelRadius - 1 : modelRadius;
+    }
+
+    float dist    = distance(loc.p, PTarget->loc.p);
+    float distNoY = distance(loc.p, PTarget->loc.p, true);
 
     if (!IsMobOwner(PTarget))
     {
@@ -1008,7 +1048,8 @@ bool CCharEntity::CanAttack(CBattleEntity* PTarget, std::unique_ptr<CBasicPacket
         errMsg = std::make_unique<CMessageBasicPacket>(this, PTarget, 0, 0, MSGBASIC_UNABLE_TO_SEE_TARG);
         return false;
     }
-    else if ((dist - PTarget->m_ModelRadius) > GetMeleeRange())
+    // else if ((dist - PTarget->m_ModelRadius) > GetMeleeRange())
+    else if (distNoY - modelRadius > GetMeleeRange() || abs(loc.p.y - PTarget->loc.p.y) > 3)
     {
         errMsg = std::make_unique<CMessageBasicPacket>(this, PTarget, 0, 0, MSGBASIC_TARG_OUT_OF_RANGE);
         return false;
@@ -1475,6 +1516,14 @@ void CCharEntity::OnAbility(CAbilityState& state, action_t& action)
             action.recast = PAbility->getRecastTime() - meritRecastReduction;
         }
 
+        if (PAbility->getID() == ABILITY_THIRD_EYE)
+        {
+            if (this->StatusEffectContainer->HasStatusEffect(EFFECT_SEIGAN))
+            {
+                action.recast = (PAbility->getRecastTime() - PMeritPoints->GetMeritValue(MERIT_THIRD_EYE_RECAST, this)) / 2;
+            }
+        }
+
         if (PAbility->getID() == ABILITY_LIGHT_ARTS || PAbility->getID() == ABILITY_DARK_ARTS || PAbility->getRecastId() == 231) // stratagems
         {
             if (this->StatusEffectContainer->HasStatusEffect(EFFECT_TABULA_RASA))
@@ -1822,11 +1871,13 @@ void CCharEntity::OnRangedAttack(CRangeState& state, action_t& action)
     bool  isBarrage    = StatusEffectContainer->HasStatusEffect(EFFECT_BARRAGE, 0);
 
     // if barrage is detected, getBarrageShotCount also checks for ammo count
-    if (!ammoThrowing && !rangedThrowing && isBarrage)
+    // if (!ammoThrowing && !rangedThrowing && isBarrage)
+    if (!rangedThrowing && isBarrage)
     {
         hitCount += battleutils::getBarrageShotCount(this);
     }
-    else if (ammoThrowing && this->StatusEffectContainer->HasStatusEffect(EFFECT_SANGE))
+    // else if (ammoThrowing && this->StatusEffectContainer->HasStatusEffect(EFFECT_SANGE))
+    else if (!rangedThrowing && this->StatusEffectContainer->HasStatusEffect(EFFECT_SANGE))
     {
         isSange = true;
         hitCount += getMod(Mod::UTSUSEMI);
@@ -2000,10 +2051,11 @@ void CCharEntity::OnRangedAttack(CRangeState& state, action_t& action)
             ;
         }
 
-        StatusEffectContainer->DelStatusEffect(EFFECT_SANGE);
+        // StatusEffectContainer->DelStatusEffect(EFFECT_SANGE);
     }
     battleutils::ClaimMob(PTarget, this);
     battleutils::RemoveAmmo(this, ammoConsumed);
+    StatusEffectContainer->DelStatusEffect(EFFECT_BOOST);
     // only remove detectables
     StatusEffectContainer->DelStatusEffectsByFlag(EFFECTFLAG_DETECTABLE);
 }
@@ -2076,13 +2128,20 @@ void CCharEntity::OnRaise()
             {
                 weaknessTime = 180;
             }
-
-            CStatusEffect* PWeaknessEffect = new CStatusEffect(EFFECT_WEAKNESS, EFFECT_WEAKNESS, m_weaknessLvl, 0, weaknessTime);
-            StatusEffectContainer->AddStatusEffect(PWeaknessEffect);
+            if (GetLocalVar("PVPMODE") > 0)
+            {
+                // Do not give weakness to players who die in PVP
+            }
+            else
+            {
+                CStatusEffect* PWeaknessEffect = new CStatusEffect(EFFECT_WEAKNESS, EFFECT_WEAKNESS, m_weaknessLvl, 0, weaknessTime);
+                StatusEffectContainer->AddStatusEffect(PWeaknessEffect);
+            }
         }
 
         double ratioReturned = 0.0f;
         uint16 hpReturned    = 1;
+        uint16 mpReturned    = 0;
 
         action_t action;
         action.id          = id;
@@ -2096,6 +2155,12 @@ void CCharEntity::OnRaise()
         {
             actionTarget.animation = 511;
             hpReturned             = (uint16)(GetMaxHP());
+        }
+        else if (GetLocalVar("PVPMODE") != 0)
+        {
+            actionTarget.animation = 496;
+            hpReturned             = (uint16)(GetMaxHP());
+            mpReturned             = (uint16)(GetMaxMP());
         }
         else if (m_hasRaise == 1)
         {
@@ -2123,6 +2188,7 @@ void CCharEntity::OnRaise()
         }
 
         addHP(((hpReturned < 1) ? 1 : hpReturned));
+        addMP(mpReturned);
         updatemask |= UPDATE_HP;
         actionTarget.speceffect = SPECEFFECT::RAISE;
 
@@ -2147,6 +2213,7 @@ void CCharEntity::OnRaise()
         }
 
         SetLocalVar("MijinGakure", 0);
+        SetLocalVar("PVPMODE", 0);
         m_hasArise = false;
         m_hasRaise = 0;
     }
@@ -2738,6 +2805,16 @@ void CCharEntity::changeMoghancement(uint16 moghancementID, bool isAdding)
         default:
             break;
     }
+}
+
+void CCharEntity::SetPixieHate(uint32 pixieHate)
+{
+    if (pixieHate > 60)
+    {
+        pixieHate = 60;
+    }
+    m_pixieHate = pixieHate;
+    charutils::SetCharVar(this, "PIXIE_HATE", pixieHate);
 }
 
 void CCharEntity::TrackArrowUsageForScavenge(CItemWeapon* PAmmo)

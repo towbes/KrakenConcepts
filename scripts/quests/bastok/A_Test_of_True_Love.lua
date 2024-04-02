@@ -5,6 +5,13 @@
 -- Carmelo : !pos -146.476 -7.48 -10.889 236
 -----------------------------------
 
+
+require('scripts/globals/npc_util')
+require('scripts/globals/quests')
+
+require('scripts/globals/interaction/quest')
+-----------------------------------
+
 local quest = Quest:new(xi.quest.log_id.BASTOK, xi.quest.id.bastok.A_TEST_OF_TRUE_LOVE)
 
 quest.reward =

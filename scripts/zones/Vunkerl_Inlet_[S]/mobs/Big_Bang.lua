@@ -2,6 +2,8 @@
 -- Area: Vunkerl Inlet [S]
 --   NM: Big Bang
 -----------------------------------
+mixins = { require('scripts/mixins/families/djinn') }
+-----------------------------------
 local entity = {}
 
 entity.onMobInitialize = function(mob)

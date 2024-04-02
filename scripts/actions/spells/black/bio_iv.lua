@@ -41,7 +41,7 @@ spellObject.onSpellCast = function(caster, target, spell)
     local dia = target:getStatusEffect(xi.effect.DIA)
 
     -- Calculate DoT effect (rough, though fairly accurate)
-    local dotdmg = 5 + math.floor(caster:getSkillLevel(xi.skill.DARK_MAGIC) / 60)
+    local dotdmg = 7 + math.floor(caster:getSkillLevel(xi.skill.DARK_MAGIC) / 60)
 
     -- Do it!
     target:addStatusEffect(xi.effect.BIO, dotdmg, 3, duration, 0, 25, 4)
@@ -53,6 +53,8 @@ spellObject.onSpellCast = function(caster, target, spell)
             target:delStatusEffect(xi.effect.DIA)
         end
     end
+
+    caster:delStatusEffectSilent(xi.effect.MANAWELL)
 
     return final
 end

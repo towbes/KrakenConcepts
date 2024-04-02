@@ -2,7 +2,7 @@
 -- Area: Windurst Walls
 --  NPC: Ambrosius
 -----------------------------------
--- Quest NPC for "The Postman Always KOs Twice"
+-- Quest NPC for 'The Postman Always KOs Twice'
 -----------------------------------
 local entity = {}
 
@@ -45,25 +45,25 @@ entity.onTrade = function(player, npc, trade)
             if reward == 1 then
                 if postman == QUEST_ACCEPTED then
                     player:startEvent(52, xi.settings.main.GIL_RATE * 50)
-                elseif postman == QUEST_COMPLETED then
+                else
                     player:startEvent(57, xi.settings.main.GIL_RATE * 50)
                 end
             elseif reward == 2 then
                 if postman == QUEST_ACCEPTED then
                     player:startEvent(53, xi.settings.main.GIL_RATE * 150, 2)
-                elseif postman == QUEST_COMPLETED then
+                else
                     player:startEvent(58, xi.settings.main.GIL_RATE * 150, 2)
                 end
             elseif reward == 3 then
                 if postman == QUEST_ACCEPTED then
                     player:startEvent(54, xi.settings.main.GIL_RATE * 250, 3)
-                elseif postman == QUEST_COMPLETED then
+                else
                     player:startEvent(59, xi.settings.main.GIL_RATE * 250, 3)
                 end
             elseif reward == 4 then
                 if postman == QUEST_ACCEPTED then
                     player:startEvent(55, xi.settings.main.GIL_RATE * 500, 4)
-                elseif postman == QUEST_COMPLETED then
+                else
                     player:startEvent(60, xi.settings.main.GIL_RATE * 500, 4)
                 end
             end

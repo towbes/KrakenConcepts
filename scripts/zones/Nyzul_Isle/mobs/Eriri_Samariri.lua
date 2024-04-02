@@ -5,10 +5,8 @@
 -----------------------------------
 local entity = {}
 
-entity.onMonsterAbilityPrepare = function(mob, skill)
-    if math.random(1, 4) > 1 then
-        return 1957
-    end
+entity.onMobWeaponSkillPrepare = function(mob, target)
+        return 1957 -- Frog Song
 end
 
 entity.onMobDeath = function(mob, player, optParams)

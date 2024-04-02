@@ -1,6 +1,7 @@
 -----------------------------------
 -- Zone: Sacrarium (28)
 -----------------------------------
+require('scripts/globals/exp_controller')
 local ID = zones[xi.zone.SACRARIUM]
 -----------------------------------
 local zoneObject = {}
@@ -8,8 +9,13 @@ local zoneObject = {}
 zoneObject.onInitialize = function(zone)
     -- randomize Old Prof. Mariselle's spawn location
     GetNPCByID(ID.npc.QM_MARISELLE_OFFSET + math.random(0, 5)):setLocalVar('hasProfessorMariselle', 1)
+    
+    -- FFXI wiki claims 4hours and 10mins game time for movement in Sacrarium
+    GetNPCByID(ID.npc.QM_TAVNAZIAN_COOKBOOK):addPeriodicTrigger(0, 250, 0)
 
     xi.treasure.initZone(zone)
+
+    xi.exp_controller.onInitialize(zone)
 end
 
 zoneObject.onZoneIn = function(player, prevZone)

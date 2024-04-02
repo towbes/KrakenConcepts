@@ -162,6 +162,37 @@ xi.pets.avatar.onMobMagicPrepare = function(pet)
         return
     end
 
+
+    -- Elemental Spirit Avatar's Favor Buffs (Cactuar)
+
+    -- Define the mapping table for spell lists
+    local spellLists = {
+        [xi.petId.FIRE_SPIRIT]    = {5098, 204},
+        [xi.petId.ICE_SPIRIT]     = {5099, 205},
+        [xi.petId.AIR_SPIRIT]     = {5100, 206},
+        [xi.petId.EARTH_SPIRIT]   = {5101, 207},
+        [xi.petId.THUNDER_SPIRIT] = {5102, 208},
+        [xi.petId.WATER_SPIRIT]   = {5103, 209},
+        [xi.petId.LIGHT_SPIRIT]   = {5104, 210},
+        [xi.petId.DARK_SPIRIT]    = {5105, 211}
+    }
+
+    -- Determine which spell list to use based on master status effect
+    --[[local spellListIndex
+    if master:hasStatusEffect(xi.effect.AVATARS_FAVOR) then
+        spellListIndex = 1 -- Enhanced Spell List
+    else
+        spellListIndex = 1 -- Default Spell List 2
+    end
+
+    -- Set the spell list based on the pet's ID and the determined spell list index
+    local petID = pet:getPetID()
+    if spellLists[petID] then
+        local spellList = spellLists[petID][spellListIndex]
+        pet:setSpellList(spellList)
+    end]]
+
+
     -- meta checks for fresh pet, etc
     pet:setLocalVar(lastCastTimeVar, 0)
     pet:setLocalVar(lastCastTimeStampVar, os.time())
@@ -183,7 +214,9 @@ xi.pets.avatar.onMobMagicPrepare = function(pet)
     -- Final items to cast the spell and ensure cast delay is proper
     local spell = GetSpell(spellID)
     if spell then
-        if spell:getSkillType() == xi.skill.ENHANCING_MAGIC then
+        if
+            spell:getSkillType() == xi.skill.ENHANCING_MAGIC
+        then
             -- half casting delay
             pet:setLocalVar(buffModeVar, 0)
         end

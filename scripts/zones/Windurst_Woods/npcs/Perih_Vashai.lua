@@ -30,7 +30,9 @@ entity.onTrigger = function(player, npc)
     local unbridledPassionCS = player:getCharVar('unbridledPassion')
     local lvl = player:getMainLvl()
     local job = player:getMainJob()
-
+    local slvl = player:getSubLvl()
+    local sjob = player:getSubJob()
+    
     -- THE FANGED ONE
     if
         theFangedOne == QUEST_AVAILABLE and
@@ -50,8 +52,10 @@ entity.onTrigger = function(player, npc)
     -- SIN HUNTING
     elseif
         sinHunting == QUEST_AVAILABLE and
-        job == xi.job.RNG and
-        lvl >= xi.settings.main.AF1_QUEST_LEVEL
+        ((job == xi.job.RNG and
+        lvl >= xi.settings.main.AF1_QUEST_LEVEL) or
+        (sjob == xi.job.RNG and
+        slvl >= xi.settings.main.AF1_QUEST_LEVEL))
     then
         player:startEvent(523) -- start RNG AF1
     elseif sinHuntingCS > 0 and sinHuntingCS < 5 then
@@ -62,8 +66,10 @@ entity.onTrigger = function(player, npc)
     -- FIRE AND BRIMSTONE
     elseif
         sinHunting == QUEST_COMPLETED and
-        job == xi.job.RNG and
-        lvl >= xi.settings.main.AF2_QUEST_LEVEL and
+        ((job == xi.job.RNG and
+        lvl >= xi.settings.main.AF2_QUEST_LEVEL) or
+        (sjob == xi.job.RNG and
+        slvl >= xi.settings.main.AF2_QUEST_LEVEL)) and
         fireAndBrimstone == QUEST_AVAILABLE
     then
         player:startEvent(531) -- start RNG AF2
@@ -77,8 +83,10 @@ entity.onTrigger = function(player, npc)
     -- UNBRIDLED PASSION
     elseif
         fireAndBrimstone == QUEST_COMPLETED and
-        job == xi.job.RNG and
-        lvl >= xi.settings.main.AF3_QUEST_LEVEL and
+        ((job == xi.job.RNG and --Umeboshi
+        lvl >= xi.settings.main.AF3_QUEST_LEVEL) or 
+        (sjob == xi.job.RNG and
+        slvl >= xi.settings.main.AF3_QUEST_LEVEL)) and
         unbridledPassion == QUEST_AVAILABLE
     then
         player:startEvent(541, 0, 13360) -- start RNG AF3

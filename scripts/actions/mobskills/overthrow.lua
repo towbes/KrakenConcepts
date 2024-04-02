@@ -5,12 +5,17 @@
 --  Type: Physical
 --  Utsusemi/Blink absorb: Ignores shadows
 --  Range: Melee
---  Notes: Moving to the side will avoid attack.
+--  Notes: Moving to the side will avoid attack. Requires No Weapon or Broken Weapon.
+
 -----------------------------------
 local mobskillObject = {}
 
 mobskillObject.onMobSkillCheck = function(target, mob, skill)
-    return 0
+    if mob:getAnimationSub() == 1 or mob:getMainJob() == xi.job.MNK or mob:getMainJob() == xi.job.PUP then
+        return 0
+    else
+        return 1
+    end
 end
 
 mobskillObject.onMobWeaponSkill = function(target, mob, skill)

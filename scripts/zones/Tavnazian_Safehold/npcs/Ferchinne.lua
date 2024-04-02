@@ -1,7 +1,7 @@
 -----------------------------------
 -- Area: Tavnazian Safehold
 --  NPC: Ferchinne
--- Note: Involved in quest: "Fly High"
+-- Note: Involved in quest: 'Fly High'
 -----------------------------------
 local entity = {}
 

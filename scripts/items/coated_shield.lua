@@ -1,5 +1,5 @@
 -----------------------------------
--- ID: 15838
+-- ID: 12406
 -- Item: Coated Shield
 -- Item Effect: Shell
 -----------------------------------
@@ -18,7 +18,9 @@ itemObject.onItemUse = function(target)
     end
 
     power = power + (bonus * tier)
-    if target:addStatusEffect(xi.effect.SHELL, power, 0, 1800, 0, 0, tier) then
+    if
+        target:addStatusEffect(xi.effect.SHELL, power, 0, 1800, 0, 0, tier, xi.item.COATED_SHIELD)
+    then
         target:messageBasic(xi.msg.basic.GAINS_EFFECT_OF_STATUS, xi.effect.SHELL)
     else
         target:messageBasic(xi.msg.basic.NO_EFFECT)

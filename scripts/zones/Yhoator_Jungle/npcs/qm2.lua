@@ -1,6 +1,6 @@
 -----------------------------------
 -- Area: Yhoator Jungle
---  NPC: ??? Used for Norg quest "Stop Your Whining"
+--  NPC: ??? Used for Norg quest 'Stop Your Whining'
 -- !pos -94.073 -0.999 22.295 124
 -----------------------------------
 local entity = {}

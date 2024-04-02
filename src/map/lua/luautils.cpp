@@ -214,6 +214,7 @@ namespace luautils
         lua.set_function("GetMobRespawnTime", &luautils::GetMobRespawnTime);
         lua.set_function("DisallowRespawn", &luautils::DisallowRespawn);
         lua.set_function("UpdateNMSpawnPoint", &luautils::UpdateNMSpawnPoint);
+        lua.set_function("CheckNMSpawnPoint", &luautils::CheckNMSpawnPoint);
         lua.set_function("NearLocation", &luautils::NearLocation);
         lua.set_function("GetFurthestValidPosition", &luautils::GetFurthestValidPosition);
         lua.set_function("Terminate", &luautils::Terminate);
@@ -472,6 +473,13 @@ namespace luautils
             std::string mob_name = static_cast<CPetEntity*>(PEntity)->GetScriptName();
 
             if (auto cached_func = lua["xi"]["pets"][mob_name][funcName]; cached_func.valid())
+            {
+                return cached_func;
+            }
+        }
+        else if (PEntity->objtype == TYPE_FELLOW)
+        {
+            if (auto cached_func = lua["xi"]["globals"]["pets"]["fellow"][funcName]; cached_func.valid())
             {
                 return cached_func;
             }
@@ -822,6 +830,10 @@ namespace luautils
             std::string mob_name = static_cast<CPetEntity*>(PEntity)->GetScriptName();
             filename             = fmt::format("./scripts/globals/pets/{}.lua", static_cast<CPetEntity*>(PEntity)->GetScriptName());
         }
+        else if (PEntity->objtype == TYPE_FELLOW)
+        {
+            filename = fmt::format("./scripts/globals/pets/fellow.lua");
+        }
         else if (PEntity->objtype == TYPE_TRUST)
         {
             std::string mob_name = PEntity->getName();
@@ -1082,11 +1094,11 @@ namespace luautils
         CBaseEntity* PNpc{ nullptr };
         if (PInstance)
         {
-            PNpc = PInstance->GetEntity(npcid & 0xFFF, TYPE_NPC);
+            PNpc = PInstance->GetEntity(npcid & 0xFFF, TYPE_NPC | TYPE_SHIP);
         }
         else
         {
-            PNpc = zoneutils::GetEntity(npcid, TYPE_NPC);
+            PNpc = zoneutils::GetEntity(npcid, TYPE_NPC | TYPE_SHIP);
         }
 
         if (!PNpc)
@@ -2003,6 +2015,9 @@ namespace luautils
             case TYPE_NPC:
                 pathFormat = "./scripts/zones/{}/npcs/{}.lua";
                 break;
+            case TYPE_FELLOW:
+                pathFormat = "./scripts/globals/pets/fellow.lua";
+                break;
             case TYPE_MOB:
                 pathFormat = "./scripts/zones/{}/mobs/{}.lua";
                 break;
@@ -2739,6 +2754,33 @@ namespace luautils
         {
             sol::error err = result;
             ShowError("luautils::onSpellPrecast: %s", err.what());
+            ReportErrorToPlayer(PCaster, err.what());
+            return 0;
+        }
+
+        return 0;
+    }
+
+    int32 OnCastStarting(CBattleEntity* PCaster, CSpell* PSpell)
+    {
+        TracyZoneScoped;
+
+        if (PCaster->objtype != TYPE_MOB)
+        {
+            return -1;
+        }
+
+        sol::function onCastStarting = getEntityCachedFunction(PCaster, "onCastStarting");
+        if (!onCastStarting.valid())
+        {
+            return 0;
+        }
+
+        auto result = onCastStarting(CLuaBaseEntity(PCaster), CLuaSpell(PSpell));
+        if (!result.valid())
+        {
+            sol::error err = result;
+            ShowError("luautils::onCastStarting: %s", err.what());
             ReportErrorToPlayer(PCaster, err.what());
             return 0;
         }
@@ -4212,6 +4254,11 @@ namespace luautils
             {
                 charutils::TrySkillUP(PMaster, SKILL_SUMMONING_MAGIC, PMaster->GetMLevel());
             }
+
+            else if (PMaster->GetSJob() == JOB_SMN) // Umeboshi "SMN sub can get bloodpact skillups"
+            {
+                charutils::TrySkillUP(PMaster, SKILL_SUMMONING_MAGIC, PMaster->GetSLevel());
+            }
         }
 
         return result.get_type(0) == sol::type::number ? result.get<int32>(0) : 0;
@@ -5020,6 +5067,36 @@ namespace luautils
         else
         {
             ShowDebug("UpdateNMSpawnPoint: mob <%u> not found", mobid);
+        }
+    }
+
+    /************************************************************************
+     *                                                                       *
+     * Update the NM spawn point to a new point, retrieved from the database *
+     *                                                                       *
+     ************************************************************************/
+
+    bool CheckNMSpawnPoint(uint32 mobid)
+    {
+        TracyZoneScoped;
+
+        CMobEntity* PMob = (CMobEntity*)zoneutils::GetEntity(mobid, TYPE_MOB);
+        if (PMob != nullptr)
+        {
+            int32 ret = sql->Query("SELECT count(mobid) FROM `nm_spawn_points` where mobid=%u", mobid);
+            if (ret != SQL_ERROR && sql->NumRows() != 0 && sql->NextRow() == SQL_SUCCESS && sql->GetUIntData(0) > 0)
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+        }
+        else
+        {
+            ShowDebug("UpdateNMSpawnPoint: mob <%u> not found", mobid);
+            return false;
         }
     }
 

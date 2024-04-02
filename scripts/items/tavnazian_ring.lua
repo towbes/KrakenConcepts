@@ -1,7 +1,7 @@
 -----------------------------------
 -- ID: 14672
 -- Tavnazian Ring
--- Enchantment: "Teleport-Tavnazia"
+-- Enchantment: 'Teleport-Tavnazia'
 -----------------------------------
 local itemObject = {}
 

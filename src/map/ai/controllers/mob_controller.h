@@ -46,6 +46,7 @@ public:
     bool TrySpecialSkill();
 
     bool         CanAggroTarget(CBattleEntity*);
+    bool         CanDetectTarget(CBattleEntity* PTarget, bool forceSight = false, bool detectDead = false);
     void         TapDeaggroTime();
     void         TapDeclaimTime();
     virtual bool Cast(uint16 targid, SpellID spellid) override;
@@ -54,7 +55,7 @@ protected:
     virtual bool TryDeaggro();
 
     virtual void TryLink();
-    bool         CanDetectTarget(CBattleEntity* PTarget, bool forceSight = false);
+    int32        GetPixieHate(CBattleEntity* PTarget);
     bool         CanPursueTarget(CBattleEntity* PTarget);
     bool         CheckHide(CBattleEntity* PTarget);
     bool         CheckLock(CBattleEntity* PTarget);

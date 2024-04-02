@@ -24,8 +24,10 @@ quest.sections =
         check = function(player, status, vars)
             return status == QUEST_AVAILABLE and
                 player:hasCompletedQuest(xi.quest.log_id.BASTOK, xi.quest.id.bastok.THE_DOORMAN) and
-                player:getMainJob() == xi.job.WAR and
-                player:getMainLvl() >= 50
+                ((player:getMainJob() == xi.job.WAR and
+                player:getMainLvl() >= 50) or
+                (player:getSubJob() == xi.job.WAR and
+                player:getSubLvl() >= 50))
         end,
 
         [xi.zone.BASTOK_MINES] =

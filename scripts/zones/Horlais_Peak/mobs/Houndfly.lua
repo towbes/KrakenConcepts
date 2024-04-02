@@ -5,7 +5,7 @@
 -----------------------------------
 local entity = {}
 
-entity.onMobSpawn = function(mob)
+entity.onMobInitialize = function(mob)
     mob:setMod(xi.mod.LULLABY_MEVA, 500)
 end
 

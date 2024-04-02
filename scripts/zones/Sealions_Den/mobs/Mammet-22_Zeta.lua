@@ -48,6 +48,7 @@ local tpMoves =
 
 entity.onMobSpawn = function(mob)
     mob:setMagicCastingEnabled(false)
+    mob:setMod(xi.mod.SLEEPRES, 50)
 end
 
 entity.onMobFight = function(mob, target)
@@ -118,7 +119,9 @@ entity.onMobWeaponSkillPrepare = function(mob, target)
 end
 
 entity.onMobDeath = function(mob, player, optParams)
-    oneToBeFeared.handleMammetDeath(mob, player, optParams)
+    if optParams.isKiller then
+        oneToBeFeared.handleMammetDeath(mob, player, optParams)
+    end
 end
 
 entity.onEventFinish = function(player, csid, option, npc)

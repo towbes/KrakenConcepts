@@ -52,6 +52,7 @@ entity.onTrade = function(player, npc, trade)
 end
 
 entity.onTrigger = function(player, npc)
+    player:messageSpecial(ID.text.RABBIT_TRACKS)
 end
 
 entity.onEventUpdate = function(player, csid, option, npc)

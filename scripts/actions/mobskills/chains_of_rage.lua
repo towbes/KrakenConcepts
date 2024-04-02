@@ -14,7 +14,6 @@ mobskillObject.onMobSkillCheck = function(target, mob, skill)
                 race == xi.race.GALKA and
                 not v.entity:hasKeyItem(xi.ki.LIGHT_OF_ALTAIEU)
             then
-                mob:showText(mob, ID.text.PROMATHIA_TEXT + 4)
                 return 0
             end
         end

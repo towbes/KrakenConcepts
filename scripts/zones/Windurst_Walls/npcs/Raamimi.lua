@@ -26,7 +26,7 @@ entity.onTrigger = function(player, npc)
         toBeeOrNotStatus == 0 and
         player:needToZone()
     then
-        player:startEvent(79) -- After Quest but before zoning "it's certainly gotten quiet around here..."
+        player:startEvent(79) -- After Quest but before zoning 'it's certainly gotten quiet around here...'
     else
         player:startEvent(296)
     end
@@ -37,7 +37,7 @@ end
 --  player:startEvent(67) -- Quest is kicked off already, he gives you honey
 -- player:startEvent(68) -- After honey is given to player...... before given to Zayhi????
 --  player:startEvent(80) -- Quest Finish - Gives Mulsum
---  player:startEvent(79) -- After Quest but before zoning: "it's certainly gotten quiet around here..."
+--  player:startEvent(79) -- After Quest but before zoning: 'it's certainly gotten quiet around here...'
 
 entity.onEventUpdate = function(player, csid, option, npc)
 end

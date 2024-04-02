@@ -5,7 +5,21 @@
 local entity = {}
 
 entity.onMobInitialize = function(mob)
+    mob:setMobMod(xi.mobMod.NO_STANDBACK, 1)
     mob:setMobMod(xi.mobMod.ADD_EFFECT, 1)
+    mob:setMod(xi.mod.SLEEPRES, 20)
+    mob:setMod(xi.mod.BINDRES, 20)
+    mob:setMod(xi.mod.GRAVITYRES, 20)
+    mob:setMod(xi.mod.SILENCERES, 100)
+end
+
+entity.onMobSpawn = function(mob)
+    -- Uses Jumping Thrust following a cast of Waterga III
+    mob:addListener('MAGIC_STATE_EXIT', 'PYUU_MAGIC_EXIT', function(mobArg, spell)
+        if spell:getID() == 201 then
+            mob:useMobAbility(770)
+        end
+    end)
 end
 
 entity.onAdditionalEffect = function(mob, target, damage)

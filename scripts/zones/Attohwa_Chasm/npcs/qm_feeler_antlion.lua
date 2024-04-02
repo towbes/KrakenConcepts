@@ -8,15 +8,11 @@ local ID = zones[xi.zone.ATTOHWA_CHASM]
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)
-    local nm = GetMobByID(ID.mob.FEELER_ANTLION)
-    if
-        not nm:isSpawned() and
-        trade:hasItemQty(xi.item.ANTLION_TRAP, 1) and
-        trade:getItemCount() == 1
+    if 
+        npcUtil.tradeHas(trade, xi.item.ANTLION_TRAP) and
+        npcUtil.popFromQM(player, npc, ID.mob.FEELER_ANTLION)
     then
-        player:tradeComplete()
-        nm:setSpawn(npc:getXPos() - 3, npc:getYPos() - 2, npc:getZPos() - 1)
-        SpawnMob(ID.mob.FEELER_ANTLION):updateClaim(player)
+        player:confirmTrade()
     end
 end
 

@@ -8,6 +8,12 @@ local ID = zones[xi.zone.ATTOHWA_CHASM]
 -----------------------------------
 local entity = {}
 
+entity.onMobInitialize = function(mob)
+    mob:setMobMod(xi.mobMod.ROAM_TURNS, 0)
+    mob:setMobMod(xi.mobMod.ROAM_RATE, 0)
+    mob:setMobMod(xi.mobMod.ROAM_DISTANCE, 0)
+end
+
 entity.onMobDeath = function(mob, player, optParams)
 end
 

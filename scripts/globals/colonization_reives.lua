@@ -30,14 +30,25 @@ xi.reives.enableReive = function(ID, reiveNum)
 
     for _, entryId in pairs(ID.reive[reiveNum].obstacles) do
         GetMobByID(entryId):setAnimation(xi.animation.CLOSE_DOOR)
+        SpawnMob(entryId)
     end
 
     for _, entryId in pairs(ID.reive[reiveNum].collision) do
-        GetNPCByID(entryId):setAnimation(xi.animation.CLOSE_DOOR)
+        --GetNPCByID(entryId):setAnimation(xi.animation.CLOSE_DOOR)
+        --GetNPCByID(entryId):closeDoor()
     end
 end
 
 xi.reives.disableReive = function(ID, reiveNum)
+    --local allMobsDead = true
+
+    --for _, entryId in pairs(ID.reive[reiveNum].obstacles) do
+    --    if not GetMobByID(entryId):isDead() then
+    --        allMobsDead = false
+    --    end
+    --end
+
+    --if allMobsDead then
     for _, entryId in pairs(ID.reive[reiveNum].mob) do
         DespawnMob(entryId)
 
@@ -45,10 +56,12 @@ xi.reives.disableReive = function(ID, reiveNum)
     end
 
     for _, entryId in pairs(ID.reive[reiveNum].obstacles) do
-        GetMobByID(entryId):setAnimation(xi.animation.OPEN_DOOR)
+        --GetMobByID(entryId):setAnimation(xi.animation.OPEN_DOOR)
     end
 
     for _, entryId in pairs(ID.reive[reiveNum].collision) do
-        GetNPCByID(entryId):setAnimation(xi.animation.OPEN_DOOR)
+        --GetNPCByID(entryId):setAnimation(xi.animation.OPEN_DOOR)
+        --GetNPCByID(entryId):openDoor(60)
+
     end
 end

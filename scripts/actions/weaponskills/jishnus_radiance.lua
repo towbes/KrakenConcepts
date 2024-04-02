@@ -31,9 +31,9 @@ weaponskillObject.onUseWeaponSkill = function(player, target, wsID, tp, primary,
     local damage, criticalHit, tpHits, extraHits, shadowsAbsorbed = xi.weaponskills.doRangedWeaponskill(player, target, wsID, params, tp, action, primary)
 
     if shadowsAbsorbed + tpHits + extraHits == 3 then
-        action:speceffect(target:getID(), bit.bor(action:speceffect(target:getID()), 8))
+        action:speceffect(target:getID(), 8)
     elseif shadowsAbsorbed + tpHits + extraHits == 2 then
-        action:speceffect(target:getID(), bit.bor(action:speceffect(target:getID()), 4))
+        action:speceffect(target:getID(), 4)
     end
 
     return tpHits, extraHits, criticalHit, damage

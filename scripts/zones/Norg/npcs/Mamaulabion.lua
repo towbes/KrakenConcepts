@@ -19,10 +19,10 @@
 --I did alot of copy/pasting, so you may notice a reduncency on comments XD
 --But it can make it easier to follow aswell.
 
---"Mamaulabion will inform you of the items delivered thus far, as of the May 2011 update."
+--'Mamaulabion will inform you of the items delivered thus far, as of the May 2011 update.'
 --i have no clue where this event is, so i have no idea how to add this (if this gets scripted, please remove this comment)
 
---"Upon completion of this quest, the above items no longer appear in the rewards list for defeating the Prime Avatars."
+--'Upon completion of this quest, the above items no longer appear in the rewards list for defeating the Prime Avatars.'
 --will require changing other avatar quests and making a variable for it all. (if this gets scripted, please remove this comment)
 
 -----------------------------------
@@ -86,13 +86,14 @@ entity.onTrigger = function(player, npc)
                 player:startEvent(197) --Reward
             end
         else
-            player:startEvent(192) -- During Quest "Mama Mia"
+            player:startEvent(192) -- During Quest 'Mama Mia'
         end
 
-    elseif mamaMia == QUEST_COMPLETED and evokersRing then
-        player:startEvent(198) -- New standard dialog after "Mama Mia" is complete
+    -- elseif mamaMia == QUEST_COMPLETED and evokersRing then
+    --    player:startEvent(198) -- New standard dialog after 'Mama Mia' is complete
 
-    elseif mamaMia == QUEST_COMPLETED and not evokersRing then
+    -- elseif mamaMia == QUEST_COMPLETED and not evokersRing then
+    elseif mamaMia == QUEST_COMPLETED then -- Let players do the quest again
         player:startEvent(243) -- Quest completed, but dropped ring
 
     else

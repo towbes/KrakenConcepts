@@ -26,7 +26,7 @@ local pTable =
     [xi.magic.spell.WARP_II       ] = { xi.teleport.id.WARP,    0,                              3, false },
 }
 
--- Check for "Retrace" Spell.
+-- Check for 'Retrace' Spell.
 xi.spells.enhancing.checkTeleportSpell = function(caster, target, spell)
     if target:getCampaignAllegiance() > 0 then
         return 0
@@ -42,6 +42,10 @@ xi.spells.enhancing.useTeleportSpell = function(caster, target, spell)
     local keyItem    = pTable[spellId][2]
     local duration   = pTable[spellId][3]
     local campaign   = pTable[spellId][4]
+
+    if caster:hasStatusEffect(xi.effect.MANAWELL) then
+        caster:delStatusEffectSilent(xi.effect.MANAWELL)
+    end
 
     if
         target:getObjType() == xi.objType.PC and

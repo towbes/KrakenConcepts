@@ -8,8 +8,8 @@
 -- Notes:
 -- Grants immunity to either physical, magical, or ranged damage.
 -- Randomly switches immunities starting at 10% health. Accompanied by text
--- "Cease thy struggles...
--- I am immutable...indestructible...impervious...immortal..."
+-- 'Cease thy struggles...
+-- I am immutable...indestructible...impervious...immortal...'
 -----------------------------------
 local mobskillObject = {}
 

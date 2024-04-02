@@ -1,6 +1,6 @@
 -----------------------------------
 -- Spell: Ice Break
--- Deals ice damage to enemies within range. Additional Effect: "Bind"
+-- Deals ice damage to enemies within range. Additional Effect: 'Bind'
 -- Spell cost: 142 MP
 -- Monster Type: Arcana
 -- Spell Type: Magical (Ice)
@@ -24,7 +24,7 @@ spellObject.onSpellCast = function(caster, target, spell)
     params.attackType = xi.attackType.MAGICAL
     params.damageType = xi.damageType.ICE
     params.attribute = xi.mod.INT
-    params.multiplier = 2.25
+    params.multiplier = 3.5 -- Default: 2.25
     params.tMultiplier = 1.0
     params.duppercap = 69
     params.str_wsc = 0.0

@@ -2,11 +2,26 @@
 -- Area: The Shrine of Ru'Avitau
 --   NM: Mother Globe
 -- TODO: Looked like pets had an additional effect: stun with an unknown proc rate
--- TODO: "Links with Slave Globes, and Slave Globes link with Defenders. Defenders do not link with Slave Globes or Mother Globe."
+-- TODO: 'Links with Slave Globes, and Slave Globes link with Defenders. Defenders do not link with Slave Globes or Mother Globe.'
 -----------------------------------
 local ID = zones[xi.zone.THE_SHRINE_OF_RUAVITAU]
 -----------------------------------
 local entity = {}
+
+-- TODO: MG Slave Gloves follow her weirdly due to a 3 second delay in onMobRoam. This needs to be cleaned up somehow.
+
+local pathNodes =
+{
+    { x = 880.16, y =  -99.81, z = -550.50 },
+    { x = 860.09, y =  -99.74, z = -551.23 },
+    { x = 834.92, y =  -99.55, z = -556.92 },
+    { x = 830.51, y =  -99.81, z = -580.15 },
+    { x = 839.36, y =  -99.47, z = -604.65 },
+    { x = 859.37, y =  -99.67, z = -607.99 },
+    { x = 859.37, y =  -99.67, z = -607.99 },
+    { x = 892.04, y = -100.03, z = -580.07 },
+    { x = 859.47, y =  -99.42, z = -579.54 }
+}
 
 local slaveGlobes =
 {
@@ -70,10 +85,41 @@ end
 -- spawn the slave and update any enmity
 local spawnSlaveGlobe = function(mg, slaveGlobe, spawnPos)
     slaveGlobe:setSpawn(spawnPos.x, spawnPos.y, spawnPos.z, spawnPos.rot)
-    slaveGlobe:spawn()
 
     if mg:isEngaged() then
-        slaveGlobe:updateEnmity(mg:getTarget())
+        mg:setLocalVar('summoning', 1)
+        mg:entityAnimationPacket('casm')
+        mg:setAutoAttackEnabled(false)
+        mg:setMagicCastingEnabled(false)
+        mg:setMobAbilityEnabled(false)
+
+        mg:timer(3000, function(mob)
+            if mob:isAlive() then
+                mob:entityAnimationPacket('shsm')
+                mob:setLocalVar('summoning', 0)
+                mob:setAutoAttackEnabled(true)
+                mob:setMagicCastingEnabled(true)
+                mob:setMobAbilityEnabled(true)
+                slaveGlobe:spawn()
+                if mob:getTarget() ~= nil then
+                    slaveGlobe:updateEnmity(mob:getTarget())
+                end
+            end
+        end)
+    else
+        mg:entityAnimationPacket('casm')
+        local pPet = GetMobByID(slaveGlobe:getID() - 1)
+        mg:timer(3000, function(mob)
+            if mob:isAlive() then
+                mob:entityAnimationPacket('shsm')
+                slaveGlobe:spawn()
+                if pPet == nil then
+                    slaveGlobe:pathTo(mob:getXPos() + 0.15, mob:getYPos(), mob:getZPos() + 0.15)
+                else
+                    slaveGlobe:pathTo(pPet:getXPos() + 0.5, pPet:getYPos(), pPet:getZPos() + 0.5)
+                end
+            end
+        end)
     end
 end
 
@@ -123,10 +169,15 @@ local handleSlaveGlobesRoam = function(mg, validSlavePositions)
 end
 
 entity.onMobSpawn = function(mob)
+    mob:setAutoAttackEnabled(true)
+    mob:setMagicCastingEnabled(true)
+    mob:setMobAbilityEnabled(true)
     mob:setLocalVar('nextSlaveSpawnTime', os.time() + 30) -- spawn first 30s from now
-    mob:addStatusEffectEx(xi.effect.SHOCK_SPIKES, 0, 60, 0, 0) -- ~60 damage
-    -- TODO: Effect can be stolen, giving a THF (Aura Steal) or BLU (Voracious Trunk) a 60 minute shock spikes effect (unknown potency).
-    -- If effect is stolen, he will recast it instantly.
+    mob:setLocalVar('posNum', math.random(1, 9))
+    mob:setMobMod(xi.mobMod.ADD_EFFECT, 1)
+    -- 60 damage spikes with duration of 1 hour (in case stolen by thf)
+    mob:addStatusEffectEx(xi.effect.SHOCK_SPIKES, 0, 60, 0, 3600)
+    mob:setSpeed(20)
 end
 
 entity.onMobFight = function(mob, target)
@@ -140,7 +191,14 @@ entity.onMobFight = function(mob, target)
 
     local spawnedSlaves, notSpawnedSlaves = getSlaves()
     local validSlavePositions = calculateValidSlaveGlobePositions(mob:getZone(), mob:getPos(), startingSpacingDistance)
-    trySpawnSlaveGlobe(mob, os.time(), spawnedSlaves, notSpawnedSlaves, validSlavePositions)
+    if mob:getLocalVar('summoning') == 0 then
+        trySpawnSlaveGlobe(mob, os.time(), spawnedSlaves, notSpawnedSlaves, validSlavePositions)
+    end
+
+    if not mob:hasStatusEffect(xi.effect.SHOCK_SPIKES) then
+        -- 60 damage spikes with duration of 1 hour (in case stolen by thf)
+        mob:addStatusEffectEx(xi.effect.SHOCK_SPIKES, 0, 60, 0, 3600)
+    end
 end
 
 entity.onMobRoam = function(mob)
@@ -149,11 +207,61 @@ entity.onMobRoam = function(mob)
 
     trySpawnSlaveGlobe(mob, os.time(), spawnedSlaves, notSpawnedSlaves, validSlavePositions)
     handleSlaveGlobesRoam(mob, validSlavePositions)
+
+    local posNum = mob:getLocalVar('posNum')
+    local moveX = 0
+    local moveY = 0
+    local moveZ = 0
+
+    -- Get new positions
+    for k, pos in pairs(pathNodes) do
+        if k == posNum then
+            moveX = pos.x
+            moveY = pos.y
+            moveZ = pos.z
+            break
+        end
+    end
+
+    local distance = mob:checkDistance(moveX, moveY, moveZ)
+
+    if distance > 4 then
+        mob:pathTo(moveX, moveY, moveZ)
+    else
+        local newPos = math.random(1, 9)
+        while newPos == posNum do
+            newPos = math.random(1, 9)
+        end
+
+        for k, pos in pairs(pathNodes) do
+            if k == newPos then
+                moveX = pos.x
+                moveY = pos.y
+                moveZ = pos.z
+                break
+            end
+        end
+
+        mob:pathTo(moveX, moveY, moveZ)
+        mob:setLocalVar('posNum', newPos)
+    end
+
+    if not mob:hasStatusEffect(xi.effect.SHOCK_SPIKES) then
+        -- 60 damage spikes with duration of 1 hour (in case stolen by thf)
+        mob:addStatusEffectEx(xi.effect.SHOCK_SPIKES, 0, 60, 0, 3600)
+    end
 end
 
 entity.onAdditionalEffect = function(mob, target, damage)
-    -- TODO: Additional Effect for ~100 damage (theme suggests enthunder)
-    -- Unknown if this can be stolen/dispelled like spikes.  Isn't mentioned, probably not.
+    return xi.mob.onAddEffect(mob, target, damage, xi.mob.ae.ENTHUNDER)
+end
+
+entity.onMobEngage = function(mob, target)
+    mob:setSpeed(40)
+end
+
+entity.onMobDisengage = function(mob)
+    mob:setSpeed(20)
 end
 
 entity.onMobDeath = function(mob, player, optParams)
@@ -168,7 +276,7 @@ entity.onMobDeath = function(mob, player, optParams)
 end
 
 entity.onMobDespawn = function(mob)
-    mob:setRespawnTime(math.random(10800, 21600)) -- 3 to 6 hours
+    xi.mob.nmTODPersist(mob, math.random(10800, 21600)) -- 3 to 6 hrs
 end
 
 return entity

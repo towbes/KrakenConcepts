@@ -13,7 +13,7 @@ entity.onTrigger = function(player, npc)
         player:getQuestStatus(xi.quest.log_id.CRYSTAL_WAR, xi.quest.id.crystalWar.REDEEMING_ROCKS) == QUEST_ACCEPTED and
         player:getCharVar('RedeemingRocksProg') == 1
     then
-        player:startEvent(114) -- 2nd CS quest "Redeeming Rocks"
+        player:startEvent(114) -- 2nd CS quest 'Redeeming Rocks'
     else
         player:startEvent(440)
     end
@@ -23,7 +23,7 @@ entity.onEventUpdate = function(player, csid, option, npc)
 end
 
 entity.onEventFinish = function(player, csid, option, npc)
-    if csid == 114 then -- Finish "Redeeming Rocks" second CS
+    if csid == 114 then -- Finish 'Redeeming Rocks' second CS
         player:setCharVar('RedeemingRocksProg', 2)
     end
 end

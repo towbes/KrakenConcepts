@@ -37,9 +37,9 @@ g_mixins.dynamis_dreamland = function(dynamisDreamlandMob)
         },
     }
 
-    -- "With Treasure Hunter on every procced monster, you can expect approximately 1.7 coins per kill on average."
-    -- "Without Treasure Hunter, you can expect about 1.25 coins per kill on average."
-    -- "Without a proc, the coin drop rate is very low (~10%)"
+    -- 'With Treasure Hunter on every procced monster, you can expect approximately 1.7 coins per kill on average.'
+    -- 'Without Treasure Hunter, you can expect about 1.25 coins per kill on average.'
+    -- 'Without a proc, the coin drop rate is very low (~10%)'
     local thCurrency =
     {
         [0] = { single = 100, hundred =  5 },

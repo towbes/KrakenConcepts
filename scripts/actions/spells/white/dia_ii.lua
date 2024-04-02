@@ -51,6 +51,8 @@ spellObject.onSpellCast = function(caster, target, spell)
         target:addStatusEffect(xi.effect.DIA, 2 + dotBonus, 3, duration, 0, 15, 2)
     end
 
+    caster:delStatusEffectSilent(xi.effect.MANAWELL)
+
     return final
 end
 

@@ -8,8 +8,8 @@ spellObject.onMagicCastingCheck = function(caster, target, spell)
 end
 
 spellObject.onSpellCast = function(caster, target, spell)
-    -- TODO: Code succesive spell use enhancement. Method still undecided.
-    return xi.spells.damage.useDamageSpell(caster, target, spell)
+        -- TODO: Code succesive spell use enhancement. Method still undecided.
+        return xi.spells.damage.useDamageSpell(caster, target, spell)
 end
 
 return spellObject

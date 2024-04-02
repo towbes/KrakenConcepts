@@ -306,6 +306,8 @@ INSERT INTO `mob_pool_mods` VALUES (2748,370,5,0); -- REGEN: 5
 INSERT INTO `mob_pool_mods` VALUES (2790,168,50,0); -- SPELLINTERRUPT: 50
 INSERT INTO `mob_pool_mods` VALUES (2790,240,7,0);  -- SLEEPRES: 7
 INSERT INTO `mob_pool_mods` VALUES (2790,244,7,0);  -- SILENCERES: 7
+INSERT INTO `mob_pool_mods` VALUES (2790,1,3000,1); -- GIL_MIN: 3000
+INSERT INTO `mob_pool_mods` VALUES (2790,2,5000,1); -- GIL_MAX: 5000 (~9000 with max gilfinder)
 
 -- Mythril Golem
 INSERT INTO `mob_pool_mods` VALUES (2793,4,4,1); -- SIGHT_RANGE: 4
@@ -375,6 +377,9 @@ INSERT INTO `mob_pool_mods` VALUES (3301,29,100,0); -- MDEF: 100
 
 -- Rock Golem
 INSERT INTO `mob_pool_mods` VALUES (3379,4,4,1); -- SIGHT_RANGE: 4
+
+-- Sabotender
+INSERT INTO `mob_pool_mods` VALUES (3426,105,1,1); -- ATTRACT_FAMILY_NM
 
 -- Seiryu
 INSERT INTO `mob_pool_mods` VALUES (3540,3,100,1); -- MP_BASE: 100
@@ -653,6 +658,9 @@ INSERT INTO `mob_pool_mods` VALUES (4361,288,55,0); -- DOUBLE_ATTACK: 55
 
 -- Zipacna
 INSERT INTO `mob_pool_mods` VALUES (4504,4,30,1); -- SIGHT_RANGE: 30
+
+-- Ziryu
+INSERT INTO `mob_pool_mods` VALUES (4507,64,1,1);
 
 -- Genbu Pet
 INSERT INTO `mob_pool_mods` VALUES (4670,3,100,1); -- MP_BASE: 100

@@ -5,7 +5,11 @@
 local spellObject = {}
 
 spellObject.onMagicCastingCheck = function(caster, target, spell)
-    return 0
+    if caster:isMob() and target:hasStatusEffect(xi.effect.REGEN) then
+        return 1
+    else
+        return 0
+    end
 end
 
 spellObject.onSpellCast = function(caster, target, spell)

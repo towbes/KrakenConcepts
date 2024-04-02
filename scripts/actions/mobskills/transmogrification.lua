@@ -14,7 +14,11 @@ mobskillObject.onMobSkillCheck = function(target, mob, skill)
 end
 
 mobskillObject.onMobWeaponSkill = function(target, mob, skill)
-    xi.mobskills.mobBuffMove(mob, xi.effect.PHYSICAL_SHIELD, 3, 0, 30)
+    mob:setMod(xi.mod.PHYS_ABSORB, 1000)
+    mob:timer(1000 * math.random(28, 32), function(mobArg)
+        mobArg:delMod(xi.mod.PHYS_ABSORB, 1000)
+    end)
+   -- xi.mobskills.mobBuffMove(mob, xi.effect.PHYSICAL_SHIELD, 2, 0, 30)
     skill:setMsg(xi.msg.basic.NONE)
 
     return 0

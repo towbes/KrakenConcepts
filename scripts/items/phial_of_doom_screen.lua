@@ -1,7 +1,7 @@
 -----------------------------------
 -- ID: 5879
 -- Item: Doom Screen
--- Effect: 2 Mins of immunity to "Doom" effects.
+-- Effect: 2 Mins of immunity to 'Doom' effects.
 -----------------------------------
 local itemObject = {}
 

@@ -7,16 +7,17 @@
 local itemObject = {}
 
 itemObject.onItemCheck = function(target)
-    local effect = target:getStatusEffect(xi.effect.ENCHANTMENT)
-    if effect ~= nil and effect:getSubType() == 14787 then
-        target:delStatusEffect(xi.effect.ENCHANTMENT)
+    if target:getStatusEffect(xi.effect.ENCHANTMENT, nil, xi.item.DEADEYE_EARRING) ~= nil then
+        target:delStatusEffect(xi.effect.ENCHANTMENT, nil, xi.item.DEADEYE_EARRING)
     end
 
     return 0
 end
 
 itemObject.onItemUse = function(target)
-    target:addStatusEffect(xi.effect.ENCHANTMENT, 0, 0, 180, 14787)
+    if target:hasEquipped(xi.item.DEADEYE_EARRING) then
+        target:addStatusEffect(xi.effect.ENCHANTMENT, 0, 0, 180, 0, 0, 0, xi.item.DEADEYE_EARRING)
+    end
 end
 
 itemObject.onEffectGain = function(target, effect)

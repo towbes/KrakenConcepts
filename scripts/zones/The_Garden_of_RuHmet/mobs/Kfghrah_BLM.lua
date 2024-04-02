@@ -13,6 +13,7 @@ entity.onMobSpawn = function(mob)
     -- Todo: confirm this is legit and move to mob_reistances table if so
     mob:addMod(xi.mod.LIGHT_MEVA, -100)
     mob:addMod(xi.mod.DARK_MEVA, 100)
+    mob:setSpellList(477)
 end
 
 entity.onMobRoam = function(mob)
@@ -41,6 +42,22 @@ entity.onMobFight = function(mob, target)
 
         mob:setAnimationSub(battleForm)
         mob:setLocalVar('changeTime', mob:getBattleTime())
+        if mob:getAnimationSub() == 0 then
+            mob:setMagicCastingEnabled(true) -- will only cast magic in ball form
+        else
+            mob:setMagicCastingEnabled(false)
+        end
+    end
+end
+
+entity.onMagicCastingCheck = function(mob, target, spell)
+    local rnd = math.random()
+    if rnd < 0.2 then
+        return xi.magic.spell.SLEEPGA_II
+    elseif rnd < 0.6 then
+        return xi.magic.spell.BLIND
+    else
+        return xi.magic.spell.BIO_III
     end
 end
 

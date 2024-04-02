@@ -15,6 +15,17 @@ zoneObject.onInitialize = function(zone)
     zone:registerTriggerArea(7,   69,  0.0,    7,   73,  0.0,   11) -- Sets Mark for 'Led Astry' Quest cutscene.
     zone:registerTriggerArea(8,   10,  2.0,  -96,   14,  2.0,  -92) -- Sets Mark for 'Led Astry' Quest cutscene.
     zone:registerTriggerArea(9, -103,  0.0,  -16, -100,  0.0,  -12) -- Sets Mark for 'Striking a Balance' Quest cutscene.
+    zone:registerTriggerArea(12, -77,   10,   0,     0,    0,    0) -- Promotion Sergeant (Balrahn Way).
+
+    -- If server vars are set to the basic install values - trigger a change
+    if (GetServerVariable("[ZNM]SubjectsOfInterest") == 55) then
+        xi.znm.changeSubjectsOfInterest()
+    end
+
+    if (GetServerVariable("[ZNM]Fauna") == 62) then
+        xi.znm.changeFauna()
+    end
+
 end
 
 zoneObject.onZoneIn = function(player, prevZone)
@@ -64,8 +75,10 @@ zoneObject.onTriggerAreaEnter = function(player, triggerArea)
             if
                 player:getQuestStatus(xi.quest.log_id.AHT_URHGAN, xi.quest.id.ahtUrhgan.NAVIGATING_THE_UNFRIENDLY_SEAS) == QUEST_COMPLETED and
                 player:getQuestStatus(xi.quest.log_id.AHT_URHGAN, xi.quest.id.ahtUrhgan.AGAINST_ALL_ODDS) == QUEST_AVAILABLE and
-                player:getMainJob() == xi.job.COR and
-                player:getMainLvl() >= xi.settings.main.AF3_QUEST_LEVEL
+                ((player:getMainJob() == xi.job.COR and
+                player:getMainLvl() >= xi.settings.main.AF3_QUEST_LEVEL) or
+                (player:getSubJob() == xi.job.COR and
+                player:getSubLvl() >= xi.settings.main.AF3_QUEST_LEVEL))
             then
                 player:startEvent(797)
             end
@@ -110,5 +123,14 @@ zoneObject.onEventFinish = function(player, csid, option, npc)
         player:setCharVar('AgainstAllOddsTimer', getMidnight())
     end
 end
+
+zoneObject.onGameDay = function()
+    -- every other day, prices reduce for zeni pops down to their base.
+    -- might even be based on the exact time the pop was bought according to some forum posts
+    if (VanadielDayOfTheWeek() % 2) == 0 then
+        xi.znm.updatePopItemCosts()
+    end
+end
+
 
 return zoneObject

@@ -5,7 +5,11 @@
 -- Spawned by trading a Shrouded Bijou to the ??? in front of Castle Zvahl.
 -----------------------------------
 local ID = zones[xi.zone.DYNAMIS_XARCABARD]
-mixins = { require('scripts/mixins/job_special') }
+mixins =
+{
+    require('scripts/mixins/dynamis_beastmen'),
+    require('scripts/mixins/job_special')
+}
 -----------------------------------
 local entity = {}
 
@@ -20,6 +24,7 @@ entity.onMobSpawn = function(mob)
             { id = xi.jsa.CHAINSPELL,     hpp = 95 },
         },
     })
+    mob:setLocalVar('[isDynamis_Megaboss]', 1)
 end
 
 entity.onMobFight = function(mob, target)

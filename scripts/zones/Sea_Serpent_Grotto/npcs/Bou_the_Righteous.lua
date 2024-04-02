@@ -1,7 +1,7 @@
 -----------------------------------
 -- Area: Sea Serpent Grotto
 --  NPC: Bou the Righteous
--- Type: Involved in the "Sahagin Key Quest"
+-- Type: Involved in the 'Sahagin Key Quest'
 -- !pos -125.029 46.568 -334.778 176
 -----------------------------------
 local entity = {}

@@ -2,6 +2,8 @@
 -- Zone: Grand_Palace_of_HuXzoi (34)
 -----------------------------------
 local huxzoiGlobal = require('scripts/zones/Grand_Palace_of_HuXzoi/globals')
+local ID = zones[xi.zone.GRAND_PALACE_OF_HUXZOI]
+require('scripts/globals/exp_controller')
 -----------------------------------
 local zoneObject = {}
 
@@ -18,6 +20,9 @@ zoneObject.onInitialize = function(zone)
     zone:registerTriggerArea(10,  97, -4, 372,  103, 4, 378)
 
     huxzoiGlobal.pickTemperancePH()
+
+    xi.exp_controller.onInitialize(zone)
+
 end
 
 zoneObject.onConquestUpdate = function(zone, updatetype, influence, owner, ranking, isConquestAlliance)
@@ -69,6 +74,11 @@ end
 zoneObject.onEventFinish = function(player, csid, option, npc)
     if csid >= 150 and csid <= 159 then
         player:setLocalVar('Hu-Xzoi-TP', 0)
+        
+        -- Wipe hate through teleporters
+        for _, entry in pairs(player:getNotorietyList()) do
+            entry:clearEnmity(player)
+        end
     end
 end
 

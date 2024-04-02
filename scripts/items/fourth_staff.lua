@@ -1,7 +1,7 @@
 -----------------------------------
 -- ID: 18613
 -- Fourth Staff
--- Enchantment: "Retrace" (Bastok Markets[S])
+-- Enchantment: 'Retrace' (Bastok Markets[S])
 -----------------------------------
 local itemObject = {}
 

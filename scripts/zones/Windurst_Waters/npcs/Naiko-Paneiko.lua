@@ -54,6 +54,7 @@ entity.onEventFinish = function(player, csid, option, npc)
         player:delKeyItem(xi.ki.WINDURST_WALLS_SCOOP)
         player:delKeyItem(xi.ki.WINDURST_WATERS_SCOOP)
         player:delKeyItem(xi.ki.PORT_WINDURST_SCOOP)
+        player:needToZone(true)
     end
 end
 

@@ -38,7 +38,7 @@ INSERT INTO `mob_family_mods` VALUES (2,63,20,0); -- DEFP: 20
 
 -- Ahriman
 INSERT INTO `mob_family_mods` VALUES (4,7,60,1);   -- GA_CHANCE: 60
-INSERT INTO `mob_family_mods` VALUES (4,29,20,0);  -- MDEF: 20
+INSERT INTO `mob_family_mods` VALUES (4,29,25,0);  -- MDEF: 25
 INSERT INTO `mob_family_mods` VALUES (4,36,40,1);  -- ROAM_COOL: 40
 INSERT INTO `mob_family_mods` VALUES (4,51,5,1);   -- ROAM_TURNS: 5
 INSERT INTO `mob_family_mods` VALUES (4,56,-1,1);  -- HP_STANDBACK: -1
@@ -170,6 +170,7 @@ INSERT INTO `mob_family_mods` VALUES (51,36,50,1); -- ROAM_COOL: 50
 
 -- Bhoot
 INSERT INTO `mob_family_mods` VALUES (52,242,20,0);  -- PARALYZERES: 20
+INSERT INTO `mob_family_mods` VALUES (52,29,20,0);   -- MDEF: 20
 
 -- Bomb
 INSERT INTO `mob_family_mods` VALUES (56,36,30,1); -- ROAM_COOL: 30
@@ -197,13 +198,13 @@ INSERT INTO `mob_family_mods` VALUES (59,36,50,1);  -- ROAM_COOL: 50
 INSERT INTO `mob_family_mods` VALUES (59,51,2,1);   -- ROAM_TURNS: 2
 INSERT INTO `mob_family_mods` VALUES (59,52,30,1);  -- ROAM_RATE: 30
 INSERT INTO `mob_family_mods` VALUES (59,63,20,0);  -- DEFP: 20
+INSERT INTO `mob_family_mods` VALUES (59,68,-10,0); -- EVA: -10
 
 -- Cardian
 INSERT INTO `mob_family_mods` VALUES (61,29,25,0);   -- MDEF: 25
 INSERT INTO `mob_family_mods` VALUES (61,36,40,1);   -- ROAM_COOL: 40
 INSERT INTO `mob_family_mods` VALUES (61,51,2,1);    -- ROAM_TURNS: 2
 INSERT INTO `mob_family_mods` VALUES (61,52,20,1);   -- ROAM_RATE: 20
-INSERT INTO `mob_family_mods` VALUES (61,389,-25,0); -- UDMGMAGIC: -25
 
 -- Cerberus
 INSERT INTO `mob_family_mods` VALUES (62,36,50,1); -- ROAM_COOL: 50
@@ -383,6 +384,7 @@ INSERT INTO `mob_family_mods` VALUES (116,52,30,1); -- ROAM_RATE: 30
 -- Ghost
 INSERT INTO `mob_family_mods` VALUES (121,36,50,1);   -- ROAM_COOL: 50
 INSERT INTO `mob_family_mods` VALUES (121,52,30,1);   -- ROAM_RATE: 30
+INSERT INTO `mob_family_mods` VALUES (121,242,20,0);  -- PARALYZERES: 20
 
 -- Ghrah
 INSERT INTO `mob_family_mods` VALUES (122,389,-13,0); -- UDMGMAGIC: -13
@@ -534,6 +536,7 @@ INSERT INTO `mob_family_mods` VALUES (169,389,-25,0); -- UDMGMAGIC: -25
 INSERT INTO `mob_family_mods` VALUES (171,10,10,1);   -- SUBLINK: 10
 INSERT INTO `mob_family_mods` VALUES (171,29,13,0);   -- MDEF: 13
 INSERT INTO `mob_family_mods` VALUES (171,389,-13,0); -- UDMGMAGIC: -13
+INSERT INTO `mob_family_mods` VALUES (171,1,25,0);    -- DEF: 25
 
 -- Leech
 INSERT INTO `mob_family_mods` VALUES (172,31,15,1); -- ROAM_DISTANCE: 15
@@ -562,13 +565,14 @@ INSERT INTO `mob_family_mods` VALUES (179,52,30,1);  -- ROAM_RATE: 30
 INSERT INTO `mob_family_mods` VALUES (179,62,10,0);  -- ATTP: 10
 
 -- Marid
-INSERT INTO `mob_family_mods` VALUES (180,36,30,1); -- ROAM_COOL: 30
-INSERT INTO `mob_family_mods` VALUES (180,51,2,1);  -- ROAM_TURNS: 2
-INSERT INTO `mob_family_mods` VALUES (180,52,30,1); -- ROAM_RATE: 30
-INSERT INTO `mob_family_mods` VALUES (180,63,20,0); -- DEFP: 20
+INSERT INTO `mob_family_mods` VALUES (180,36,30,1);  -- ROAM_COOL: 30
+INSERT INTO `mob_family_mods` VALUES (180,51,2,1);   -- ROAM_TURNS: 2
+INSERT INTO `mob_family_mods` VALUES (180,52,30,1);  -- ROAM_RATE: 30
+INSERT INTO `mob_family_mods` VALUES (180,68,-10,0); -- EVA: -10
 
 -- Merrow
 INSERT INTO `mob_family_mods` VALUES (182,10,10,1); -- SUBLINK: 10
+INSERT INTO `mob_family_mods` VALUES (182,1,25,0);  -- DEF: 25
 
 -- Moblin
 INSERT INTO `mob_family_mods` VALUES (184,10,5,1); -- SUBLINK: 5
@@ -581,6 +585,7 @@ INSERT INTO `mob_family_mods` VALUES (186,52,30,1); -- ROAM_RATE: 30
 INSERT INTO `mob_family_mods` VALUES (188,36,35,1); -- ROAM_COOL: 35
 INSERT INTO `mob_family_mods` VALUES (188,51,3,1);  -- ROAM_TURNS: 3
 INSERT INTO `mob_family_mods` VALUES (188,52,20,1); -- ROAM_RATE: 20
+INSERT INTO `mob_family_mods` VALUES (188,68,20,1); -- EVA: 20
 
 -- Orc
 INSERT INTO `mob_family_mods` VALUES (189,10,2,1); -- SUBLINK: 2
@@ -598,6 +603,15 @@ INSERT INTO `mob_family_mods` VALUES (194,3,50,1); -- MP_BASE: 50
 
 -- Qiqirn
 INSERT INTO `mob_family_mods` VALUES (199,10,12,1); -- SUBLINK: 12
+
+-- Quadav
+INSERT INTO `mob_family_mods` VALUES (200,10,15,1); -- SUBLINK: 15
+
+-- Quadav
+INSERT INTO `mob_family_mods` VALUES (201,10,15,1); -- SUBLINK: 15
+
+-- Quadav
+INSERT INTO `mob_family_mods` VALUES (202,10,15,1); -- SUBLINK: 15
 
 -- Qutrub
 INSERT INTO `mob_family_mods` VALUES (203,36,50,1);   -- ROAM_COOL: 50
@@ -641,7 +655,7 @@ INSERT INTO `mob_family_mods` VALUES (212,52,20,1); -- ROAM_RATE: 20
 
 -- Sahagin
 INSERT INTO `mob_family_mods` VALUES (213,10,8,1);   -- SUBLINK: 8
-INSERT INTO `mob_family_mods` VALUES (213,20,128,0); -- WATER_RES: 128
+INSERT INTO `mob_family_mods` VALUES (213,23,-20,0); -- ATT: -20
 
 -- Sapling
 INSERT INTO `mob_family_mods` VALUES (216,10,4,1);  -- SUBLINK: 4
@@ -663,7 +677,7 @@ INSERT INTO `mob_family_mods` VALUES (219,36,30,1); -- ROAM_COOL: 30
 INSERT INTO `mob_family_mods` VALUES (221,36,50,1);   -- ROAM_COOL: 50
 INSERT INTO `mob_family_mods` VALUES (221,51,2,1);    -- ROAM_TURNS: 2
 INSERT INTO `mob_family_mods` VALUES (221,52,30,1);   -- ROAM_RATE: 30
-
+INSERT INTO `mob_family_mods` VALUES (221,242,20,0);  -- PARALYZERES: 20
 -- Shadow
 INSERT INTO `mob_family_mods` VALUES (222,36,50,1);   -- ROAM_COOL: 50
 INSERT INTO `mob_family_mods` VALUES (222,51,2,1);    -- ROAM_TURNS: 2
@@ -694,6 +708,7 @@ INSERT INTO `mob_family_mods` VALUES (232,52,20,1); -- ROAM_RATE: 20
 INSERT INTO `mob_family_mods` VALUES (233,10,11,1); -- SUBLINK: 11
 INSERT INTO `mob_family_mods` VALUES (233,36,50,1); -- ROAM_COOL: 50
 INSERT INTO `mob_family_mods` VALUES (233,51,3,1);  -- ROAM_TURNS: 3
+INSERT INTO `mob_family_mods` VALUES (233,63,20,0); -- DEFP: 20%
 
 -- Spheroid
 INSERT INTO `mob_family_mods` VALUES (234,37,1,1); -- ALWAYS_AGGRO: 1
@@ -706,6 +721,8 @@ INSERT INTO `mob_family_mods` VALUES (240,10,1,1);   -- SUBLINK: 1
 INSERT INTO `mob_family_mods` VALUES (240,36,40,1);  -- ROAM_COOL: 40
 INSERT INTO `mob_family_mods` VALUES (240,51,3,1);   -- ROAM_TURNS: 3
 INSERT INTO `mob_family_mods` VALUES (240,52,30,1);  -- ROAM_RATE: 30
+INSERT INTO `mob_family_mods` VALUES (240,63,-20,0); -- DEFP: -20%
+INSERT INTO `mob_family_mods` VALUES (240,68,-10,0); -- EVA: -10
 
 -- Tiger
 INSERT INTO `mob_family_mods` VALUES (242,31,15,1);  -- ROAM_DISTANCE: 15
@@ -745,18 +762,23 @@ INSERT INTO `mob_family_mods` VALUES (252,52,30,1); -- ROAM_RATE: 30
 -- Wamoura
 INSERT INTO `mob_family_mods` VALUES (253,3,50,1); -- MP_BASE: 50
 INSERT INTO `mob_family_mods` VALUES (253,10,6,1); -- SUBLINK: 6
+INSERT INTO `mob_family_mods` VALUES (253,63,12,0); -- DEFP: 12
 
 -- Wamouracampa
 INSERT INTO `mob_family_mods` VALUES (254,10,6,1); -- SUBLINK: 6
 
 -- Wanderer
 INSERT INTO `mob_family_mods` VALUES (255,3,50,1); -- MP_BASE: 50
+INSERT INTO `mob_family_mods` VALUES (255,68,40,0); -- EVA: 40
+
+-- Weeper
+INSERT INTO `mob_family_mods` VALUES (256,63,10,0); -- DEFP: 10
 
 -- Wivre
 INSERT INTO `mob_family_mods` VALUES (257,36,50,1); -- ROAM_COOL: 50
 INSERT INTO `mob_family_mods` VALUES (257,52,30,1); -- ROAM_RATE: 30
 
--- Worm
+-- Worm (ToAU worms need +20 MDEF)
 INSERT INTO `mob_family_mods` VALUES (258,34,25,1); -- MAGIC_COOL: 25
 INSERT INTO `mob_family_mods` VALUES (258,36,90,1); -- ROAM_COOL: 90
 INSERT INTO `mob_family_mods` VALUES (258,52,30,1); -- ROAM_RATE: 30
@@ -794,6 +816,7 @@ INSERT INTO `mob_family_mods` VALUES (268,36,55,1);  -- ROAM_COOL: 55
 
 -- Yovra
 INSERT INTO `mob_family_mods` VALUES (271,3,50,1); -- MP_BASE: 50
+INSERT INTO `mob_family_mods` VALUES (271,363,50,0); -- DEFP: 50
 
 -- Zdei
 INSERT INTO `mob_family_mods` VALUES (272,4,10,1);    -- SIGHT_RANGE: 10
@@ -917,6 +940,9 @@ INSERT INTO `mob_family_mods` VALUES (404,36,35,1); -- ROAM_COOL: 35
 INSERT INTO `mob_family_mods` VALUES (404,51,3,1);  -- ROAM_TURNS: 3
 INSERT INTO `mob_family_mods` VALUES (404,52,30,1); -- ROAM_RATE: 30
 
+-- Umbril
+INSERT INTO `mob_family_mods` VALUES (468,3,50,1); -- MP_BASE: 50
+
 -- Lamiae-Medusa
 INSERT INTO `mob_family_mods` VALUES (469,10,10,1); -- SUBLINK: 10
 
@@ -929,6 +955,19 @@ INSERT INTO `mob_family_mods` VALUES (481,42,989,1); -- TELEPORT_END: 989
 
 -- Astral Flow Pet
 INSERT INTO `mob_family_mods` VALUES (495,56,-1,1); -- HP_STANDBACK: -1
+
+-- Cockatrice (Ziz)
+INSERT INTO `mob_family_mods` VALUES (512,1,-10,0); -- DEF: -10
+INSERT INTO `mob_family_mods` VALUES (512,29,-1,0); -- MDEF: -10
+
+-- Pixie (Player Friendly)
+INSERT INTO `mob_family_mods` VALUES (195,201,1,1); -- I am a Pixie
+
+-- Craklaw
+-- INSERT INTO `mob_family_mods` VALUES (344,63,5397,1); -- Skill Attacks
+
+-- Matamata
+-- INSERT INTO `mob_family_mods` VALUES (275,63,5397,1); -- Skill Attacks
 
 /*!40000 ALTER TABLE `mob_family_mods` ENABLE KEYS */;
 UNLOCK TABLES;

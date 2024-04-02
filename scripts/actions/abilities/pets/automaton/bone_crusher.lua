@@ -22,7 +22,7 @@ abilityObject.onAutomatonAbility = function(target, automaton, skill, master, ac
         params.ftpMod = { 2.66, 2.66, 2.66 }
 
         if target:isUndead() then
-            params.ftpMod = { 3.66, 3.66, 3.66 }
+            params.ftpMod = { 3.75, 3.75, 3.75 }
         end
     else
         if target:isUndead() then

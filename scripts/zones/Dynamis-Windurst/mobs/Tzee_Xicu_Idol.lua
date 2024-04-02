@@ -3,7 +3,16 @@
 --  Mob: Tzee Xicu Idol
 -- Note: Mega Boss
 -----------------------------------
+mixins =
+{
+    require('scripts/mixins/dynamis_beastmen')
+}
+-----------------------------------
 local entity = {}
+
+entity.onMobSpawn = function(mob)
+    mob:setLocalVar('[isDynamis_Megaboss]', 1)
+end
 
 entity.onMobEngage = function(mob, target)
     local mobId = mob:getID()

@@ -37,6 +37,14 @@ abilityObject.onPetAbility = function(target, pet, petskill, summoner, action)
         target:addStatusEffect(xi.effect.STUN, 3, 3, 3)
     end
 
+    local ele = xi.element.EARTH
+    local magicBurst = xi.mobskills.calculateMobMagicBurst(pet, ele, target)
+    if (magicBurst > 1) and target:hasStatusEffect(xi.effect.SKILLCHAIN) then -- Gated as this is run per target.
+        skill:setMsg(xi.msg.basic.JA_MAGIC_BURST)
+    else
+        skill:setMsg(xi.msg.basic.DAMAGE)
+    end
+
     return damage
 end
 

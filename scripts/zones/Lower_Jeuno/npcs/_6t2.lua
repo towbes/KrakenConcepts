@@ -13,7 +13,8 @@ entity.onTrigger = function(player, npc)
     local aNewDawn      = player:getQuestStatus(xi.quest.log_id.JEUNO, xi.quest.id.jeuno.A_NEW_DAWN)
     local aNewDawnEvent = player:getCharVar('ANewDawn_Event')
     local mLvl          = player:getMainLvl()
-
+    local sLvl          = player:getSubLvl() --Umeboshi
+    
     -- A New Dawn (BST AF3)
     if
         player:getQuestStatus(xi.quest.log_id.JEUNO, xi.quest.id.jeuno.SCATTERED_INTO_SHADOW) == QUEST_COMPLETED and
@@ -21,7 +22,9 @@ entity.onTrigger = function(player, npc)
     then
         if
             player:getMainJob() == xi.job.BST and
-            mLvl >= 50
+            mLvl >= 50 or
+            player:getSubJob() == xi.job.BST and
+            sLvl >= 50
         then
             if aNewDawnEvent == 0 then
                 player:startEvent(5)

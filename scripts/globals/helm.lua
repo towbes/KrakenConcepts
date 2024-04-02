@@ -20,7 +20,7 @@ xi.helm = xi.helm or {}
 -- (R) for retail-verified coordinates
 -----------------------------------
 
-local helmInfo =
+xi.helm.helmInfo =
 {
     [xi.helmType.HARVESTING] =
     {
@@ -362,6 +362,11 @@ local helmInfo =
                     {  420, xi.item.BAG_OF_CACTUS_STEMS         },
                     {  420, xi.item.HIGH_QUALITY_SCORPION_SHELL },
                     {  420, xi.item.RED_ROCK                    },
+                    {   30,  1771 }, -- Dragon Bone +
+                    {   10,   883 }, -- Behemoth Horn +
+                    {    5,  1458 }, -- Mammoth Tusk +
+                    {    6,  1518 }, -- Collosal Skull +
+                    {    4,  1463 }, -- Chronss Tooth + TODO: Convert to item list
                 },
 
                 points =
@@ -387,6 +392,11 @@ local helmInfo =
                     {  290, xi.item.SCORPION_SHELL },
                     {  240, xi.item.TURTLE_SHELL   },
                     {  190, xi.item.SACK_OF_SILICA },
+                    {   10,  1771 }, -- Dragon Bone +
+                    {   7,    883 }, -- Behemoth Horn +
+                    {   5,   1458 }, -- Mammoth Tusk +
+                    {   6,   1518 }, -- Collosal Skull +
+                    {   4,   1463 }, -- Chronss Tooth +
                 },
 
                 points =
@@ -425,6 +435,10 @@ local helmInfo =
                     {  430, xi.item.TURTLE_SHELL           },
                     {  100, xi.item.BAG_OF_GRAIN_SEEDS     },
                     {  640, xi.item.HELMET_MOLE            },
+                    {   10,  1311 }, -- oxblood +
+                    {   15,  1312 }, -- angelskin +
+                    {   75,  1586 }, -- titanictus shell +
+                    {    6,  1521 }, -- Slime Juice
                 },
 
                 points =
@@ -454,6 +468,12 @@ local helmInfo =
                     {  230, xi.item.PETRIFIED_LOG  },
                     {  100, xi.item.RED_ROCK       },
                     {  470, xi.item.SACK_OF_SILICA },
+                    {  430,   885 }, -- Turtle Shell +
+                    {  100,  1586 }, -- titanicus shell +
+                    {    5,  1458 }, -- Mammoth Tusk +
+                    {    6,  1518 }, -- Collosal Skull +
+                    {    4,  1463 }, -- Chronss Tooth +
+                    {    6,  1521 }, -- Slime Juice
                 },
 
                 points =
@@ -528,10 +548,16 @@ local helmInfo =
 
                 points =
                 {
-                    { -218.855, -16.142,  286.809 },
-                    { -212.218, -16.399,  316.257 },
-                    {   93.994,  -9.035,  -55.871 },
-                    {  120.026,  -8.607,   -9.430 },
+                    { -218.855, -16.142, 286.809 },
+                    {   93.994,  -9.035, -55.871 },
+                    {   82.697,  -8.610,   7.324 },
+                    {  120.026,  -8.607,  -9.430 },
+                    { -176.225, -16.288, 294.007 },
+                    { -453.739,  -7.930,  74.015 },
+                    { -408.364,  -8.010,  64.173 },
+                    { -238.046, -15.981, 257.771 },
+                    { -428.247,  -8.431,  34.783 },
+                    { -218.855, -16.142, 286.809 },
                 },
             },
 
@@ -551,9 +577,14 @@ local helmInfo =
 
                 points =
                 {
-                    { -323.737, -32.938,  203.954 },
-                    { -288.729, -32.055,  140.837 },
+                    {   29.643, -24.514,  361.756 },
+                    {  -29.950, -24.155,  495.225 },
+                    {  306.851,  23.677, -330.013 },
+                    {  -66.369, -24.960,  535.166 },
+                    {  -94.736, -24.929,  653.229 },
+                    { -170.298, -32.188,   94.226 },
                     { -260.170, -32.656,  174.636 },
+                    { -288.729, -32.055,  140.837 },
                     { -213.362, -32.315,  150.466 },
                 },
             },
@@ -572,6 +603,7 @@ local helmInfo =
                     {  500, xi.item.LAUAN_LOG            },
                     {  490, xi.item.ROSEWOOD_LOG         },
                     {  200, xi.item.BLOODWOOD_LOG        },
+                    {  200, xi.item.KITRON               }, -- +
                 },
 
                 points =
@@ -625,6 +657,8 @@ local helmInfo =
                     {   40, xi.item.JACARANDA_LOG      },
                     {  400, xi.item.OAK_LOG            },
                     {  290, xi.item.TEAK_LOG           },
+                    {  100, xi.item.KITRON             }, -- +
+                    {   30, xi.item.LANCEWOOD_LOG      }, -- +
                 },
 
                 points =
@@ -651,6 +685,7 @@ local helmInfo =
                     {  510, xi.item.ACORN         },
                     {  170, xi.item.JACARANDA_LOG },
                     {  230, xi.item.TEAK_LOG      },
+                    {  100, xi.item.LANCEWOOD_LOG }, -- +
                 },
 
                 points =
@@ -699,6 +734,7 @@ local helmInfo =
                     {  580, xi.item.BAG_OF_FRUIT_SEEDS },
                     {  910, xi.item.YEW_LOG            },
                     {  410, xi.item.RONFAURE_CHESTNUT  },
+                    {    5, xi.item.LANCEWOOD_LOG      }, -- +
                 },
 
                 points =
@@ -743,6 +779,7 @@ local helmInfo =
                     {  580, xi.item.ACORN         },
                     {  550, xi.item.DRYAD_ROOT    },
                     {   60, xi.item.OAK_LOG       },
+                    {    7, xi.item.LANCEWOOD_LOG }, -- +
                 },
 
                 points =
@@ -844,6 +881,7 @@ local helmInfo =
                     {  240, xi.item.EBONY_LOG              },
                     {  100, xi.item.HOLLY_LOG              },
                     {  100, xi.item.ROSEWOOD_LOG           },
+                    {  100, xi.item.PERSIKOS               }, -- +
                 },
 
                 points =
@@ -872,6 +910,7 @@ local helmInfo =
                     {  350, xi.item.MAHOGANY_LOG           },
                     {  170, xi.item.EBONY_LOG              },
                     {   90, xi.item.BAG_OF_TREE_CUTTINGS   },
+                    {  100, xi.item.PERSIKOS               }, -- +
                 },
 
                 points =
@@ -960,11 +999,13 @@ local helmInfo =
                     {  600, xi.item.MOBLIN_MASK            },
                     {  570, xi.item.GOBLIN_DIE             },
                     {  570, xi.item.SUIT_OF_MOBLIN_ARMOR   },
-                    {   80, xi.item.CHUNK_OF_DARKSTEEL_ORE },
-                    {   80, xi.item.CHUNK_OF_MYTHRIL_ORE   },
-                    {   70, xi.item.CHUNK_OF_GOLD_ORE      },
-                    {   70, xi.item.CHUNK_OF_PLATINUM_ORE  },
+                    {  120, xi.item.CHUNK_OF_DARKSTEEL_ORE }, -- 80
+                    {  120, xi.item.CHUNK_OF_MYTHRIL_ORE   }, -- 80
+                    {  100, xi.item.CHUNK_OF_GOLD_ORE      }, -- 70
+                    {  100, xi.item.CHUNK_OF_PLATINUM_ORE  }, -- 70
                 },
+
+
 
                 points =
                 {
@@ -982,6 +1023,10 @@ local helmInfo =
                     {  -27.353, 11.397, -141.638 }, -- (R)I-11
                     {  -26.393, 11.359, -141.096 },
                 },
+                eleChance = 5, --Default: 15
+				eleWeak1 = 5, -- lightning
+				eleWeak2 = 2, -- water
+				eleStrong = 0, -- fire
             },
 
             [xi.zone.NEWTON_MOVALPOLOS] =
@@ -1000,6 +1045,9 @@ local helmInfo =
                     {  140, xi.item.CHUNK_OF_GOLD_ORE      },
                     {  340, xi.item.CHUNK_OF_PLATINUM_ORE  },
                     {   70, xi.item.RED_ROCK               },
+                    {   50, xi.item.CHUNK_OF_WOOTZ_ORE     }, -- +
+                    {   55, xi.item.CHUNK_OF_RELIC_STEEL   }, -- +
+                    {    5, xi.item.KOH_I_NOOR             }, -- +
                 },
 
                 points =
@@ -1015,6 +1063,10 @@ local helmInfo =
                     {   69.433, 19.221,  185.247 }, -- (R)I-6
                     {  109.614, 19.689, -104.522 }, -- (R)I-10
                 },
+                eleChance = 7, --Default:15
+				eleWeak1 = 1, -- earth
+				eleWeak2 = 2, -- water
+				eleStrong = 0, -- fire
             },
 
             [xi.zone.MOUNT_ZHAYOLM] =
@@ -1034,7 +1086,9 @@ local helmInfo =
                     {  430, xi.item.MOBLIN_MASK          },
                     {  210, xi.item.DEMON_HORN           },
                     {  140, xi.item.CHUNK_OF_ADAMAN_ORE  },
-                    {   30, xi.item.CHUNK_OF_KHROMA_ORE  },
+                    {   50, xi.item.CHUNK_OF_KHROMA_ORE  }, -- 30
+                    {   70, xi.item.CHUNK_OF_WOOTZ_ORE   }, -- +
+                    {   90, xi.item.CHUNK_OF_RELIC_STEEL }, -- +
                 },
 
                 points =
@@ -1062,6 +1116,10 @@ local helmInfo =
                     { 775.692, -16.750, 163.576 },
                     { 783.844, -15.593, 172.404 },
                 },
+                eleChance = 8, --Default: 17
+				eleWeak1 = 3, -- wind
+				eleWeak2 = 6, -- light
+				eleStrong = 7, -- dark
             },
 
             [xi.zone.HALVUNG] =
@@ -1082,6 +1140,8 @@ local helmInfo =
                     { 1200, xi.item.PINCH_OF_SULFUR           },
                     {  480, xi.item.TROLL_PAULDRON            },
                     {  330, xi.item.TROLL_VAMBRACE            },
+                    {   70, xi.item.CHUNK_OF_WOOTZ_ORE        }, -- +
+                    {   75, xi.item.CHUNK_OF_RELIC_STEEL      }, -- +
                 },
 
                 points =
@@ -1107,6 +1167,10 @@ local helmInfo =
                     { 269.172,   3.433, 228.107 }, -- (R)K-6
                     { 270.880,   2.490, 226.690 },
                 },
+                eleChance = 9, --Default: 16
+				eleWeak1 = 4, -- ice
+				eleWeak2 = 2, -- water
+				eleStrong = 3, -- wind
             },
 
             [xi.zone.NORTH_GUSTABERG_S] =
@@ -1125,6 +1189,8 @@ local helmInfo =
                     {  110, xi.item.SUIT_OF_MOBLIN_MAIL   },
                     {   50, xi.item.SUIT_OF_MOBLIN_ARMOR  },
                     {  160, xi.item.CHUNK_OF_PLATINUM_ORE },
+                    {   75, xi.item.CHUNK_OF_WOOTZ_ORE    }, -- +
+                    {   50, xi.item.CHUNK_OF_RELIC_STEEL  }, -- +
                 },
 
                 points =
@@ -1159,6 +1225,10 @@ local helmInfo =
                     {  376.297, -31.999, 1100.808 },
                     {  394.958, -20.922,  458.055 },
                 },
+                eleChance = 3, --Default: 2
+				eleWeak1 = 4, -- ice
+				eleWeak2 = 2, -- water
+				eleStrong = 0, -- fire
             },
 
             [xi.zone.YUGHOTT_GROTTO] =
@@ -1214,6 +1284,10 @@ local helmInfo =
                     {  330.931, -24.900,  239.451 },
                     {  363.273, -24.758,  164.485 },
                 },
+                eleChance = 2, --Default: 14
+				eleWeak1 = 0, -- fire
+				eleWeak2 = 1, -- earth
+				eleStrong = 5, -- lightning
             },
 
             [xi.zone.PALBOROUGH_MINES] =
@@ -1254,6 +1328,10 @@ local helmInfo =
                     { 290.244, -15.718,  104.856 },
                     { 306.015, -16.275,   49.876 },
                 },
+                eleChance = 5, --Default: 16
+				eleWeak1 = 6, -- light
+				eleWeak2 = 5, -- lightning
+				eleStrong = 4, -- ice
             },
 
             [xi.zone.ZERUHN_MINES] =
@@ -1297,6 +1375,10 @@ local helmInfo =
                     { 134.829, 7.634, -131.175 },
                     { 146.979, 7.881, -209.748 },
                 },
+                eleChance = 14,
+				eleWeak1 = 6, -- light
+				eleWeak2 = 7, -- dark
+				eleStrong = 2, -- water
             },
 
             [xi.zone.GUSGEN_MINES] =
@@ -1335,6 +1417,10 @@ local helmInfo =
                     {  145.349, -40.450,   24.710 }, -- (R)I-8
                     {  155.746, -20.678,  216.857 }, -- (R)I-9
                 },
+                eleChance = 6, --Default:17
+				eleWeak1 = 7, -- dark
+				eleWeak2 = 3, -- wind
+				eleStrong = 1, -- earth
             },
 
             [xi.zone.IFRITS_CAULDRON] =
@@ -1350,8 +1436,9 @@ local helmInfo =
                     {  250, xi.item.CHUNK_OF_ADAMAN_ORE     },
                     {  600, xi.item.CHUNK_OF_DARKSTEEL_ORE  },
                     { 1520, xi.item.CHUNK_OF_ORPIMENT       },
-                    {  100, xi.item.CHUNK_OF_ORICHALCUM_ORE },
+                    {  150, xi.item.CHUNK_OF_ORICHALCUM_ORE },
                     {  220, xi.item.RED_ROCK                },
+                    {   90, xi.item.CHUNK_OF_WOOTZ_ORE      }, -- +
                 },
 
                 points =
@@ -1377,6 +1464,10 @@ local helmInfo =
                     {   96.820,  8.636,  141.280 }, -- Map 7 K-4 -- (R)K-4
                     {  139.082,  3.224,  -61.040 }, -- Map 1 G-8
                 },
+                eleChance = 8, --Default: 21
+				eleWeak1 = 4, -- ice
+				eleWeak2 = 2, -- water
+				eleStrong = 0, -- fire
             },
         },
     },
@@ -1396,6 +1487,22 @@ local rocks =
     [xi.element.WATER  ] = xi.item.BLUE_ROCK,
     [xi.element.LIGHT  ] = xi.item.WHITE_ROCK,
     [xi.element.DARK   ] = xi.item.BLACK_ROCK,
+}
+
+-----------------------------------
+-- Elemental Ores Array
+-----------------------------------
+
+local elemOres =
+{
+    [xi.element.FIRE   ] = xi.item.CHUNK_OF_FIRE_ORE,
+    [xi.element.ICE    ] = xi.item.CHUNK_OF_ICE_ORE,
+    [xi.element.WIND   ] = xi.item.CHUNK_OF_WIND_ORE,
+    [xi.element.EARTH  ] = xi.item.CHUNK_OF_EARTH_ORE,
+    [xi.element.THUNDER] = xi.item.CHUNK_OF_LIGHTNING_ORE,
+    [xi.element.WATER  ] = xi.item.CHUNK_OF_WATER_ORE,
+    [xi.element.LIGHT  ] = xi.item.CHUNK_OF_LIGHT_ORE,
+    [xi.element.DARK   ] = xi.item.CHUNK_OF_DARK_ORE,
 }
 
 -----------------------------------
@@ -1462,7 +1569,7 @@ local function doMove(npc, x, y, z)
     end
 end
 
-local function movePoint(player, npc, zoneId, info)
+local function movePoint(npc, zoneId, info)
     local points = info.zone[zoneId].points
     local point  = points[math.random(1, #points)]
 
@@ -1470,20 +1577,106 @@ local function movePoint(player, npc, zoneId, info)
     npc:queue(3000, doMove(npc, unpack(point)))
 end
 
+local function tryEleOre(info, zoneId)
+
+	-- FIRESDAY		= 0;
+	-- EARTHSDAY	= 1;
+	-- WATERSDAY	= 2;
+	-- WINDSDAY		= 3;
+	-- ICEDAY		= 4;
+	-- LIGHTNINGDAY	= 5;
+	-- LIGHTSDAY	= 6;
+	-- DARKSDAY		= 7;
+
+	--local weak1 = info.zone[zoneId].eleWeak1;
+	--local weak2 = info.zone[zoneId].eleWeak2;
+	--local strong = info.zone[zoneId].eleStrong;
+	
+	local chance = info.zone[zoneId].eleChance;
+	
+	--[[if (VanadielDayElement() == weak1 or VanadielDayElement() == weak2) then
+		chance = math.floor(chance / 2) - 1;
+	end
+	
+	if (VanadielDayElement() == strong) then
+		chance = chance + 7;
+	end
+	
+	if (VanadielDayElement() > 5) then -- darksday or lightsday
+		chance = math.floor(chance / 2);
+	end]]
+	
+	if (chance < 1) then
+		chance = 1;
+	end
+
+	if (math.random(1,1000) <= chance) then -- Each zone has 'eleChance'. If we roll under that number, player gets an ore. Example: eleChance 15 = 1.5%~
+		return 1; -- success
+	else
+		return 0; -- failure
+	end
+	
+end
+
+local function setEleOre(day)
+	
+	-- 1255	chunk_of_fire_ore
+	-- 1256	chunk_of_ice_ore
+	-- 1257	chunk_of_wind_ore
+	-- 1258	chunk_of_earth_ore
+	-- 1259	chunk_of_lightning_ore
+	-- 1260	chunk_of_water_ore
+	-- 1261	chunk_of_light_ore
+	-- 1262	chunk_of_dark_ore
+	
+	local FIRESDAY		= 0;
+	local EARTHSDAY		= 1;
+	local WATERSDAY		= 2;
+	local WINDSDAY		= 3;
+	local ICEDAY		= 4;
+	local LIGHTNINGDAY	= 5;
+	local LIGHTSDAY		= 6;
+	local DARKSDAY		= 7;
+
+	local ret = 0;
+	
+	if (day == FIRESDAY) then
+		ret = 1255;
+	elseif (day == EARTHSDAY) then
+		ret = 1258;
+	elseif (day == WATERSDAY) then
+		ret = 1260;
+	elseif (day == WINDSDAY) then
+		ret = 1257;
+	elseif (day == ICEDAY) then
+		ret = 1256;
+	elseif (day == LIGHTNINGDAY) then
+		ret = 1259;
+	elseif (day == LIGHTSDAY) then
+		ret = 1261;
+	elseif (day == DARKSDAY) then
+		ret = 1262;
+	end
+	
+	return ret;
+	
+end
+
+
 -----------------------------------
 -- public functions
 -----------------------------------
 
 xi.helm.initZone = function(zone, helmType)
     local zoneId = zone:getID()
-    local info   = helmInfo[helmType]
+    local info   = xi.helm.helmInfo[helmType]
     local npcs   = zones[zoneId].npc[info.id]
 
     for _, npcId in ipairs(npcs) do
         local npc = GetNPCByID(npcId)
         if npc then
             npc:setStatus(xi.status.NORMAL)
-            movePoint(nil, npc, zoneId, info)
+            movePoint(npc, zoneId, info)
         end
     end
 end
@@ -1520,7 +1713,7 @@ xi.helm.result = function(player, helmType, broke, itemID)
 end
 
 xi.helm.onTrade = function(player, npc, trade, helmType, csid, func)
-    local info   = helmInfo[helmType]
+    local info   = xi.helm.helmInfo[helmType]
     local zoneId = player:getZoneID()
 
     -- HELM should remove invisible
@@ -1532,11 +1725,15 @@ xi.helm.onTrade = function(player, npc, trade, helmType, csid, func)
         local broke  = doesToolBreak(player, info) and 1 or 0
         local full   = (player:getFreeSlotsCount() == 0) and 1 or 0
 
+        if (item ~= 0 and helmType == 4 and tryEleOre(info, zoneId) == 1) then -- if helmtype is mining and we succeeded at the ele ore roll
+			item = elemOres[VanadielDayElement()]
+		end
+
         if csid then
             player:startEvent(csid, itemID, broke, full)
         end
 
-        player:sendEmote(npc, info.animation, xi.emoteMode.MOTION)
+        player:sendEmote(npc, info.animation, xi.emoteMode.MOTION, false)
 
         -- WotG : The Price of Valor; Success does not award an item, but only KI.
         if xi.wotg.helpers.helmTrade(player, helmType, broke) then
@@ -1556,7 +1753,7 @@ xi.helm.onTrade = function(player, npc, trade, helmType, csid, func)
             npc:setLocalVar('uses', uses)
 
             if uses == 0 then
-                movePoint(player, npc, zoneId, info)
+                movePoint(npc, zoneId, info)
             end
         end
 
@@ -1572,6 +1769,19 @@ end
 
 xi.helm.onTrigger = function(player, helmType)
     local zoneId = player:getZoneID()
-    local info = helmInfo[helmType]
+    local info = xi.helm.helmInfo[helmType]
     player:messageSpecial(zones[zoneId].text[info.message], info.tool)
+end
+
+xi.helm.movePoint = function(target, zoneId, helmType)
+    local info = xi.helm.helmInfo[helmType]
+    movePoint(target, zoneId, info)
+end
+xi.helm.doesToolBreak = function(player, helmType)
+    local info = xi.helm.helmInfo[helmType]
+    return doesToolBreak(player, info) and 1 or 0
+end
+xi.helm.pickItem = function(player, helmType)
+    local info = xi.helm.helmInfo[helmType]
+    return pickItem(player, info)
 end

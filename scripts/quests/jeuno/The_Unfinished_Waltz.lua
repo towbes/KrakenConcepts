@@ -21,8 +21,10 @@ quest.sections =
     {
         check = function(player, status, vars)
             return status == QUEST_AVAILABLE and
-                player:getMainJob() == xi.job.DNC and
-                player:getMainLvl() >= xi.settings.main.AF1_QUEST_LEVEL
+                ((player:getMainJob() == xi.job.DNC and
+                player:getMainLvl() >= xi.settings.main.AF1_QUEST_LEVEL) or
+                (player:getSubJob() == xi.job.DNC and
+                player:getSubLvl() >= xi.settings.main.AF1_QUEST_LEVEL))
         end,
 
         [xi.zone.UPPER_JEUNO] =
@@ -75,7 +77,7 @@ quest.sections =
 
                 [10133] = function(player, csid, option, npc)
                     if quest:complete(player) then
-                        -- Set mustZone and Timer for "The Road to Divadom" Quest
+                        -- Set mustZone and Timer for 'The Road to Divadom' Quest
 
                         player:setCharVar('Quest[3][97]Timer', VanadielUniqueDay() + 1)
                         player:setLocalVar('Quest[3][97]mustZone', 1)

@@ -68,12 +68,10 @@ end
 -- Expand this function as needed.
 -- TODO: Determine if step is stacked at 10, and reduce to 1 if necessary.
 local function getStepFinishingMovesBase(player)
-    local numAwardedMoves = 1
+    local numAwardedMoves = 2
 
     if player:hasStatusEffect(xi.effect.PRESTO) then
         numAwardedMoves = 5
-    elseif player:getMainJob() == xi.job.DNC then
-        numAwardedMoves = 2
     end
 
     -- Terpsichore FM bonus. (Confirmed main-hand only)
@@ -487,9 +485,9 @@ xi.job_utils.dancer.useWaltzAbility = function(player, target, ability, action)
         end
     end
 
-    if player:getMainJob() ~= xi.job.DNC then
-        statMultiplier = statMultiplier / 2
-    end
+    --if player:getMainJob() ~= xi.job.DNC then
+    --    statMultiplier = statMultiplier / 2
+    --end
 
     amtCured = (target:getStat(xi.mod.VIT) + player:getStat(xi.mod.CHR)) * statMultiplier + waltzInfo[3]
     amtCured = math.floor(amtCured * (1.0 + (math.min(50, player:getMod(xi.mod.WALTZ_POTENCY)) / 100)))
@@ -497,7 +495,11 @@ xi.job_utils.dancer.useWaltzAbility = function(player, target, ability, action)
 
     amtCured = amtCured * xi.settings.main.CURE_POWER
     amtCured = math.min(amtCured, target:getMaxHP() - target:getHP())
-
+    
+    if target:hasStatusEffect(xi.effect.CURSE_II) then
+        target:messageBasic(xi.msg.basic.NO_EFFECT)
+        return 1
+    end
     target:restoreHP(amtCured)
     target:wakeUp()
     player:updateEnmityFromCure(target, amtCured)

@@ -1,6 +1,7 @@
 -----------------------------------
 -- Zone: East_Ronfaure (101)
 -----------------------------------
+local ID = zones[xi.zone.EAST_RONFAURE]
 require('scripts/quests/i_can_hear_a_rainbow')
 -----------------------------------
 local zoneObject = {}
@@ -11,6 +12,7 @@ end
 
 zoneObject.onInitialize = function(zone)
     xi.helm.initZone(zone, xi.helmType.LOGGING)
+    xi.mob.nmTODPersistCache(zone, ID.mob.RAMBUKK)
 end
 
 zoneObject.onZoneIn = function(player, prevZone)

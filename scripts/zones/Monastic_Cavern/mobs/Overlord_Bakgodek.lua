@@ -10,9 +10,9 @@ local entity = {}
 
 entity.onMobInitialize = function(mob)
     mob:setMobMod(xi.mobMod.ADD_EFFECT, 1)
-    mob:setMod(xi.mod.SLEEP_MEVA, 90)
-    mob:setMod(xi.mod.PARALYZE_MEVA, 75)
-    mob:setMod(xi.mod.SILENCE_MEVA, 75)
+    mob:setMod(xi.mod.SLEEPRES, 90)
+    mob:setMod(xi.mod.PARALYZERES, 75)
+    mob:setMod(xi.mod.SILENCERES, 75)
 end
 
 entity.onMobEngage = function(mob, target)
@@ -35,10 +35,10 @@ entity.onMobDespawn = function(mob)
     local nqId = mob:getID() - 1
     SetServerVariable('[POP]Overlord_Bakgodek', os.time() + 259200) -- 3 days
     SetServerVariable('[PH]Overlord_Bakgodek', 0)
+    SetServerVariable('[POPNUM]Overlord_Bakgodek', 0)
     DisallowRespawn(mob:getID(), true)
     DisallowRespawn(nqId, false)
-    UpdateNMSpawnPoint(nqId)
-    GetMobByID(nqId):setRespawnTime(math.random(75600, 86400))
+    xi.mob.nmTODPersist(GetMobByID(nqId), math.random(75600, 86400))
 end
 
 return entity

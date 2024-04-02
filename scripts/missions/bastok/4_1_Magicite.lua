@@ -256,7 +256,7 @@ mission.sections =
             onEventFinish =
             {
                 [80] = function(player, csid, option, npc)
-                    mission:setVar(player, 'Option', 1) -- "Yagudo Torch" CS
+                    mission:setVar(player, 'Option', 1) -- 'Yagudo Torch' CS
                 end,
             },
         },

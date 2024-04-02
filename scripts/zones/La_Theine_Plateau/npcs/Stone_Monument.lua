@@ -1,7 +1,7 @@
 -----------------------------------
 -- Area: La Theine Plateau
 --  NPC: Stone Monument
---  Involved in quest "An Explorer's Footsteps"
+--  Involved in quest 'An Explorer's Footsteps'
 -- !pos 334.133 50.623 141.163 102
 -----------------------------------
 local ID = zones[xi.zone.LA_THEINE_PLATEAU]

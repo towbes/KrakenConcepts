@@ -12,7 +12,7 @@ end
 entity.onTrigger = function(player, npc)
     local wildcatSandy = player:getCharVar('WildcatSandy')
 
-    -- "Lure of the Wildcat"
+    -- 'Lure of the Wildcat'
     if
         player:getQuestStatus(xi.quest.log_id.SANDORIA, xi.quest.id.sandoria.LURE_OF_THE_WILDCAT) == QUEST_ACCEPTED and
         not utils.mask.getBit(wildcatSandy, 18)

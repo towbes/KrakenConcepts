@@ -12,7 +12,8 @@ entity.onTrade = function(player, npc, trade)
     if
         trade:hasItemQty(xi.item.MINI_TUNING_FORK_OF_FIRE, 1) and
         player:getQuestStatus(xi.quest.log_id.OUTLANDS, xi.quest.id.outlands.TRIAL_SIZE_TRIAL_BY_FIRE) == QUEST_ACCEPTED and
-        player:getMainJob() == xi.job.SMN
+        (player:getMainJob() == xi.job.SMN or
+        player:getSubJob() == xi.job.SMN)
     then
         player:startEvent(287, 0, xi.item.MINI_TUNING_FORK_OF_FIRE, 0, 20)
     end
@@ -22,8 +23,10 @@ entity.onTrigger = function(player, npc)
     local trialSizeFire = player:getQuestStatus(xi.quest.log_id.OUTLANDS, xi.quest.id.outlands.TRIAL_SIZE_TRIAL_BY_FIRE)
 
     if
-        player:getMainLvl() >= 20 and
-        player:getMainJob() == xi.job.SMN and
+        ((player:getMainLvl() >= 20 and
+        player:getMainJob() == xi.job.SMN) or
+        (player:getSubLvl() >= 20 and
+        player:getSubJob() == xi.job.SMN)) and
         trialSizeFire == QUEST_AVAILABLE and
         player:getFameLevel(xi.quest.fame_area.WINDURST) >= 2
     then --Requires player to be Summoner at least lvl 20

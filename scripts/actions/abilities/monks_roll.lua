@@ -1,6 +1,6 @@
 -----------------------------------
 -- Ability: Monk's Roll
--- Enhances "Subtle Blow" effect for party members within area of effect
+-- Enhances 'Subtle Blow' effect for party members within area of effect
 -- Optimal Job: Monk
 -- Lucky Number: 3
 -- Unlucky Number: 7

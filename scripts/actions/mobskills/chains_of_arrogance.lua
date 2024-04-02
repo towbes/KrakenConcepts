@@ -14,7 +14,6 @@ mobskillObject.onMobSkillCheck = function(target, mob, skill)
                 (race == xi.race.ELVAAN_M or race == xi.race.ELVAAN_F) and
                 not v.entity:hasKeyItem(xi.ki.LIGHT_OF_MEA)
             then
-                mob:showText(mob, ID.text.PROMATHIA_TEXT + 1)
                 return 0
             end
         end

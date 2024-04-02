@@ -5,5 +5,6 @@ return {
     ['qm4']                  = { messageSpecial = ID.text.NO_GRASS_GROWING_HERE },
     ['qm_chocobotale']       = { messageSpecial = ID.text.YOU_FIND_NOTHING },
     ['qm_maw']               = { messageSpecial = ID.text.NOTHING_HAPPENS },
+    ['qm_chocobo_tale']      = { messageSpecial = ID.text.FIND_NOTHING },
     ['Weathered_Gravestone'] = { messageSpecial = ID.text.SEE_WEATHERED_GRAVESTONE },
 }

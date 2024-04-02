@@ -535,3 +535,17 @@ xi.teleport.tidalTeleport = function(player)
         player:setPos(unpack(destination))
     end
 end
+
+xi.teleport.clearEnmityList = function(player)
+    local pet = player:getPet()
+
+    for _, entry in pairs(player:getNotorietyList()) do
+        entry:clearEnmity(player) -- reset hate on player after teleporting
+    end
+
+    if pet ~= nil then
+        for _, entry in pairs(pet:getNotorietyList()) do
+            entry:clearEnmity(pet) -- reset hate on player after teleporting
+        end
+    end
+end

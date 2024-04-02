@@ -1,9 +1,13 @@
 -----------------------------------
 -- Zone: Giddeus (145)
 -----------------------------------
+local ID = zones[xi.zone.GIDDEUS]
 local zoneObject = {}
 
 zoneObject.onInitialize = function(zone)
+    -- NM Persistence
+    xi.mob.nmTODPersistCache(zone, ID.mob.QUU_XIJO_THE_ILLUSORY)
+    
     xi.treasure.initZone(zone)
     xi.helm.initZone(zone, xi.helmType.HARVESTING)
 end

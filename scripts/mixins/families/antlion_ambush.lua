@@ -16,6 +16,11 @@ g_mixins.families.antlion_ambush = function(antlionAmbushMob)
     antlionAmbushMob:addListener('ENGAGE', 'ANTLION_AMBUSH_ENGAGE', function(mob, target)
         mob:useMobAbility(278) -- Pit Ambush
         mob:setMobMod(xi.mobMod.NO_MOVE, 0)
+        mob:timer(2000, function(ant)
+            ant:hideName(false)
+            ant:setUntargetable(false)
+            ant:setAnimationSub(1)
+        end)
     end)
 
     antlionAmbushMob:addListener('DISENGAGE', 'ANTLION_AMBUSH_DISENGAGE', function(mob)
@@ -23,6 +28,10 @@ g_mixins.families.antlion_ambush = function(antlionAmbushMob)
         mob:setUntargetable(true)
         mob:setAnimationSub(0)
         mob:wait(2000)
+        mob:timer(2000, function(ant)
+            local spawn = ant:getSpawnPos()
+            ant:setPos(spawn.x, spawn.y, spawn.z, spawn.rot)
+        end)
     end)
 end
 

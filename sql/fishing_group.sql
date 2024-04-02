@@ -105,6 +105,7 @@ INSERT INTO `fishing_group` VALUES (9,4472,1000,500,15);
 INSERT INTO `fishing_group` VALUES (9,13454,800,300,9);
 INSERT INTO `fishing_group` VALUES (9,14117,500,300,9);
 INSERT INTO `fishing_group` VALUES (9,14242,500,300,9);
+
 INSERT INTO `fishing_group` VALUES (10,90,900,300,9);
 INSERT INTO `fishing_group` VALUES (10,4401,1000,1000,36);
 INSERT INTO `fishing_group` VALUES (10,4426,1000,500,15);
@@ -635,6 +636,7 @@ INSERT INTO `fishing_group` VALUES (78,13454,800,300,9);
 INSERT INTO `fishing_group` VALUES (78,13456,300,275,6);
 INSERT INTO `fishing_group` VALUES (78,14117,500,300,9);
 INSERT INTO `fishing_group` VALUES (78,14242,500,300,9);
+INSERT INTO `fishing_group` VALUES (78,16537,60,10,2);
 INSERT INTO `fishing_group` VALUES (79,4384,750,215,6);
 INSERT INTO `fishing_group` VALUES (79,4399,650,275,6);
 INSERT INTO `fishing_group` VALUES (79,4403,1000,500,15);
@@ -1106,6 +1108,151 @@ INSERT INTO `fishing_group` VALUES (139,4469,900,190,6);
 INSERT INTO `fishing_group` VALUES (139,4472,1000,500,15);
 INSERT INTO `fishing_group` VALUES (139,5125,1000,500,15);
 INSERT INTO `fishing_group` VALUES (139,5126,1000,500,15);
+
+-- UPDATE by XENTIS - 28/02/21
+-- //START
+
+-- Vunkerl Inlet [S] - Bridge
+INSERT INTO `fishing_group` VALUES(140,5466,1000,500,15);/*Trumpet Shell*/
+INSERT INTO `fishing_group` VALUES(140,4360,1000,500,15);/*Bastore Sardine*/
+INSERT INTO `fishing_group` VALUES(140, 4481, 1000,500,15);/*Ogre Eel*/
+INSERT INTO `fishing_group` VALUES(140, 4514, 1000,500,15);/*Quus*/
+INSERT INTO `fishing_group` VALUES(140, 4443, 1000,500,15);/*Cobalt Jellyfish*/
+INSERT INTO `fishing_group` VALUES(140, 5472, 1000,500,15); /*Garpike*/
+INSERT INTO `fishing_group` VALUES(140, 4461, 1000,500,15); /*Bastore Bream*/
+INSERT INTO `fishing_group` VALUES(140, 5468, 1000,100,5); /*Matsya*/
+
+INSERT INTO `fishing_group` VALUES(140, 688,500,200,6);/*Arrowwood Log*/
+INSERT INTO `fishing_group` VALUES(140, 90,900,300,9); /*Rusty Bucket*/
+INSERT INTO `fishing_group` VALUES(140, 14117,500,300,9);/*Rusty Leggings*/
+INSERT INTO `fishing_group` VALUES(140, 14242,500,300,9); /*Rusty Subligar*/
+-- Vunkerl Inlet [S] - Lake Joroia
+INSERT INTO `fishing_group` VALUES(141, 4472, 1000,500,15);/*Crayfish*/
+INSERT INTO `fishing_group` VALUES(141, 4401, 1000,500,15);/*Moat Carp*/
+INSERT INTO `fishing_group` VALUES(141, 4426, 1000,500,15);/*Tricolored Carp*/
+INSERT INTO `fishing_group` VALUES(141, 4469, 1000,500,15);/*Giant Catfish*/
+INSERT INTO `fishing_group` VALUES(141, 4428, 1000,500,15);/*Dark Bass*/
+INSERT INTO `fishing_group` VALUES(141, 5472, 1000,500,15); /*Garpike*/
+INSERT INTO `fishing_group` VALUES(141, 688,500,200,6);/*Arrowwood Log*/
+INSERT INTO `fishing_group` VALUES(141, 14117,500,300,9);/*Rusty Leggings*/
+-- Vunkerl Inlet [S] - Memjar Spring
+INSERT INTO `fishing_group` VALUES(142, 5472, 1000,500,15); /*Garpike*/
+-- Vunkerl Inlet [S] - Ludiwa Spring
+INSERT INTO `fishing_group` VALUES(143, 4401, 1000,500,15);/*Moat Carp*/
+INSERT INTO `fishing_group` VALUES(143, 4426, 1000,500,15);/*Tricolored Carp*/
+INSERT INTO `fishing_group` VALUES(143, 4428, 1000,500,15);/*Dark Bass*/
+INSERT INTO `fishing_group` VALUES(143, 4402, 1000,500,15);/*Red Terrapin*/
+INSERT INTO `fishing_group` VALUES(143, 4427, 1000,500,15);/*Gold Carp*/
+INSERT INTO `fishing_group` VALUES(143, 14117,500,300,9);/*Rusty Leggings*/
+
+-- Rolanberry Fields [S] - Small Fountain 1
+INSERT INTO `fishing_group` VALUES(144, 4472, 1000,500,15);/*Crayfish*/
+INSERT INTO `fishing_group` VALUES(144, 4401, 1000,500,15);/*Moat Carp*/
+INSERT INTO `fishing_group` VALUES(144, 4402, 1000,500,15);/*Red Terrapin*/
+-- Rolanberry Fields [S] - Fountain of Promises
+INSERT INTO `fishing_group` VALUES(145, 4402, 1000,500,15);/*Red Terrapin*/
+INSERT INTO `fishing_group` VALUES(145, 688,500,200,6);/*Arrowwood Log*/
+-- Rolanberry Fields [S] - Fountain of Partings
+INSERT INTO `fishing_group` VALUES(146, 4472, 1000,500,15);/*Crayfish*/
+INSERT INTO `fishing_group` VALUES(146, 4401, 1000,500,15);/*Moat Carp*/
+INSERT INTO `fishing_group` VALUES(146, 4469, 1000,500,15);/*Giant Catfish*/
+INSERT INTO `fishing_group` VALUES(146, 4402, 1000,500,15);/*Red Terrapin*/
+INSERT INTO `fishing_group` VALUES(146, 14117,1000,500,15);/*Rusty Leggings*/
+-- Rolanberry Fields [S] - Small Fountain 2
+INSERT INTO `fishing_group` VALUES(147, 4401, 1000,500,15);/*Moat Carp*/
+INSERT INTO `fishing_group` VALUES(147, 4402, 1000,500,15);/*Red Terrapin*/
+INSERT INTO `fishing_group` VALUES(147, 14117,500,300,9);/*Rusty Leggings*/
+-- Pashhow Marshlands [S] - Whole Zone
+INSERT INTO `fishing_group` VALUES(148, 4515, 1000,500,15);/*Copper Frog*/
+INSERT INTO `fishing_group` VALUES(148, 4469, 1000,500,15);/*Giant Catfish*/
+INSERT INTO `fishing_group` VALUES(148, 4402, 1000,500,15);/*Red Terrapin*/
+INSERT INTO `fishing_group` VALUES(148, 5471, 1000,100,5);/*Gerrothorax*/
+INSERT INTO `fishing_group` VALUES(148, 12522,200,10,1);/*Rusty Cap*/
+
+-- West Sarutabaruta [S] - Pond
+INSERT INTO `fishing_group` VALUES(149, 4401, 1000,500,15);/*Moat Carp*/
+INSERT INTO `fishing_group` VALUES(149, 4469, 1000,500,15);/*Giant Catfish*/
+INSERT INTO `fishing_group` VALUES(149, 4428, 1000,500,15);/*Dark Bass*/
+-- West Sarutabaruta [S] - Seaside
+INSERT INTO `fishing_group` VALUES(150, 4481, 1000,500,15);/*Ogre Eel*/
+INSERT INTO `fishing_group` VALUES(150, 4383, 1000,500,15);/*Gold Lobster*/
+INSERT INTO `fishing_group` VALUES(150, 4399, 1000,500,15);/*Bluetail*/
+INSERT INTO `fishing_group` VALUES(150, 4461, 1000,500,15);/*Bastore Bream*/
+INSERT INTO `fishing_group` VALUES(150, 624, 1000,500,15);/*Pamtam Kelp*/
+INSERT INTO `fishing_group` VALUES(150, 14117,500,300,9);/*Rusty Leggings*/
+INSERT INTO `fishing_group` VALUES(150, 14242,500,300,9); /*Rusty Subligar*/
+
+-- North Gustaberg [S] - Whole Zone
+INSERT INTO `fishing_group` VALUES(151, 4515, 1000,500,15);/*Copper Frog*/
+INSERT INTO `fishing_group` VALUES(151, 4426, 1000,500,15);/*Tricolored Carp*/
+INSERT INTO `fishing_group` VALUES(151, 4429, 1000,500,15);/*Black Eel*/
+INSERT INTO `fishing_group` VALUES(151, 4427, 1000,500,15);/*Gold Carp*/
+INSERT INTO `fishing_group` VALUES(151, 90,900,300,9); /*Rusty Bucket*/
+INSERT INTO `fishing_group` VALUES(151, 14117,500,300,9);/*Rusty Leggings*/
+INSERT INTO `fishing_group` VALUES(151, 14242,500,300,9); /*Rusty Subligar*/
+
+-- Grauberg [S] - All Waterside
+INSERT INTO `fishing_group` VALUES(152, 4515, 1000,500,15);/*Copper Frog*/
+INSERT INTO `fishing_group` VALUES(152, 5469, 1000,500,15);/*Brass Loach*/
+INSERT INTO `fishing_group` VALUES(152, 4429, 1000,500,15);/*Black Eel*/
+INSERT INTO `fishing_group` VALUES(152, 5474, 1000,100,5);/*Ca Cuong*/
+INSERT INTO `fishing_group` VALUES(152, 4477, 1000,500,15);/*Gavial Fish*/
+INSERT INTO `fishing_group` VALUES(152, 5470, 1000,250,15);/*Pirarucu*/
+INSERT INTO `fishing_group` VALUES(152, 14117,500,300,9);/*Rusty Leggings*/
+INSERT INTO `fishing_group` VALUES(152, 14242,500,300,9); /*Rusty Subligar*/
+-- Grauberg [S] - Waterfall
+INSERT INTO `fishing_group` VALUES(153, 4477, 1000,500,15);/*Gavial Fish*/
+
+-- La Vaule [S] - Pond
+INSERT INTO `fishing_group` VALUES(154, 4469, 1000,500,15);/*Giant Catfish*/
+INSERT INTO `fishing_group` VALUES(154, 4428, 1000,500,15);/*Dark Bass*/
+INSERT INTO `fishing_group` VALUES(154, 90,900,300,9);/*Rusty Bucket*/
+-- La Vaule [S] - Other Waterside
+INSERT INTO `fishing_group` VALUES(155, 4401, 1000,500,15);/*Moat Carp*/
+INSERT INTO `fishing_group` VALUES(155, 4426, 1000,500,15);/*Tricolored Carp*/
+INSERT INTO `fishing_group` VALUES(155, 4402, 1000,500,15);/*Red Terrapin*/
+INSERT INTO `fishing_group` VALUES(155, 4427, 1000,500,15);/*Gold Carp*/
+
+-- Jugner Forest [S] - Lake Mechieume - Mouth & Main
+INSERT INTO `fishing_group` VALUES(156, 4401, 1000,500,15);/*Moat Carp*/
+INSERT INTO `fishing_group` VALUES(156, 4469, 1000,500,15);/*Giant Catfish*/
+INSERT INTO `fishing_group` VALUES(156, 4428, 1000,500,15);/*Dark Bass*/
+INSERT INTO `fishing_group` VALUES(156, 4402, 1000,500,15);/*Red Terrapin*/
+INSERT INTO `fishing_group` VALUES(156, 4427, 1000,500,15);/*Gold Carp*/
+INSERT INTO `fishing_group` VALUES(156, 4454, 1000,500,15);/*Emperor Fish*/
+INSERT INTO `fishing_group` VALUES(156, 5476, 1000,250,15);/*Abaia*/
+--INSERT INTO `fishing_group` VALUES(156, 12522,200,10,1);/*Rusty Cap*/
+-- Jugner Forest [S] - River
+INSERT INTO `fishing_group` VALUES(157, 4472, 1000,500,15);/*Crayfish*/
+INSERT INTO `fishing_group` VALUES(157, 4401, 1000,500,15);/*Moat Carp*/
+INSERT INTO `fishing_group` VALUES(157, 4379, 1000,500,15);/*Cheval Salmon*/
+INSERT INTO `fishing_group` VALUES(157, 4426, 1000,500,15);/*Tricolored Carp*/
+INSERT INTO `fishing_group` VALUES(157, 4354, 1000,500,15);/*Shining Trout*/
+
+-- Batallia Downs [S] - South Seaside
+INSERT INTO `fishing_group` VALUES(158, 4443, 1000,500,15);/*Cobalt Jellyfish*/
+INSERT INTO `fishing_group` VALUES(158, 4360, 1000,500,15);/*Bastore Sardine*/
+INSERT INTO `fishing_group` VALUES(158, 4403, 1000,500,15);/*Yellow Globe*/
+INSERT INTO `fishing_group` VALUES(158, 4483, 1000,500,15);/*Tiger Cod*/
+INSERT INTO `fishing_group` VALUES(158, 4482, 1000,500,15);/*Nosteau Herring*/
+INSERT INTO `fishing_group` VALUES(158, 5128, 1000,500,15);/*Cone Calamary*/
+INSERT INTO `fishing_group` VALUES(158, 4399, 1000,500,15);/*Bluetail*/
+INSERT INTO `fishing_group` VALUES(158, 4451, 1000,500,15);/*Silver Shark*/
+INSERT INTO `fishing_group` VALUES(158, 5472, 1000,500,15);/*Garpike*/
+INSERT INTO `fishing_group` VALUES(158, 5467, 1000,100,15);/*Megalodon*/
+INSERT INTO `fishing_group` VALUES(158, 4384, 1000,500,15);/*Black Sole*/
+INSERT INTO `fishing_group` VALUES(158, 5473, 1000,500,15);/*Bastore Sweeper*/
+INSERT INTO `fishing_group` VALUES(158, 14242,500,300,9); /*Rusty Subligar*/
+
+-- East Ronfaure [S] - Whole Zone
+INSERT INTO `fishing_group` VALUES(159, 4472, 1000,500,15);/*Crayfish*/
+INSERT INTO `fishing_group` VALUES(159, 4379, 1000,500,15);/*Cheval Salmon*/
+INSERT INTO `fishing_group` VALUES(159, 4426, 1000,500,15);/*Tricolored Carp*/
+INSERT INTO `fishing_group` VALUES(159, 4354, 1000,500,15);/*Shining Trout*/
+INSERT INTO `fishing_group` VALUES(159, 4427, 1000,500,15);/*Gold Carp*/
+INSERT INTO `fishing_group` VALUES(159, 13454,800,300,9);/*Copper Ring*/
+
+
 /*!40000 ALTER TABLE `fishing_group` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;

@@ -34,6 +34,7 @@ along with this program.  If not, see http://www.gnu.org/licenses/
 #include "ai/ai_container.h"
 #include "ai/controllers/mob_controller.h"
 
+#include "entities/fellowentity.h"
 #include "entities/mobentity.h"
 #include "entities/npcentity.h"
 #include "entities/trustentity.h"
@@ -452,6 +453,30 @@ void CZoneEntities::DecreaseZoneCounter(CCharEntity* PChar)
         }
     }
 
+        // remove fellow
+    if (PChar->m_PFellow != nullptr)
+    {
+        PChar->m_PFellow->status = STATUS_TYPE::DISAPPEAR;
+        if (PChar->m_PFellow != nullptr)
+        {
+            PChar->m_PFellow->PAI->Disengage();
+
+            for (EntityList_t::const_iterator it = m_charList.begin(); it != m_charList.end(); ++it)
+            {
+                // inform other players of the fellows removal
+                CCharEntity*            PCurrentChar = (CCharEntity*)it->second;
+                SpawnIDList_t::iterator Fellow       = PCurrentChar->SpawnPETList.find(PChar->m_PFellow->id);
+
+                if (Fellow != PCurrentChar->SpawnPETList.end())
+                {
+                    PCurrentChar->SpawnPETList.erase(Fellow);
+                    PCurrentChar->pushPacket(new CEntityUpdatePacket(PChar->m_PFellow, ENTITY_DESPAWN, UPDATE_NONE));
+                }
+            }
+            PChar->m_PFellow = nullptr;
+        }
+    }
+
     // remove trusts
     for (auto* trust : PChar->PTrusts)
     {
@@ -616,6 +641,13 @@ void CZoneEntities::SpawnMOBs(CCharEntity* PChar)
                 PChar->updateEntityPacket(PCurrentMob, ENTITY_SPAWN, UPDATE_ALL_MOB);
             }
 
+            if (PCurrentMob->getMobMod(MOBMOD_PIXIE) > 0)
+            {
+                PCurrentMob->PixieTryHealPlayer(PChar);
+                // Pixies never aggro
+                continue;
+            }
+
             // Check to skip aggro routine
             if (PChar->isDead() || PChar->nameflags.flags & FLAG_GM || PCurrentMob->PMaster)
             {
@@ -632,6 +664,7 @@ void CZoneEntities::SpawnMOBs(CCharEntity* PChar)
             if (validAggro && PController->CanAggroTarget(PChar))
             {
                 PCurrentMob->PEnmityContainer->AddBaseEnmity(PChar);
+                PCurrentMob->PAI->EventHandler.triggerListener("ON_AGGRO_PLAYER", PCurrentMob, PChar); // Umeboshi
             }
         }
         else if (MOB != PChar->SpawnMOBList.end())
@@ -1039,7 +1072,7 @@ CBaseEntity* CZoneEntities::GetEntity(uint16 targid, uint8 filter)
     }
     else if (targid < 0x1000) // 1792 - 4096 are dynamic entities
     {
-        if (filter & TYPE_PET)
+        if (filter & TYPE_PET || filter & TYPE_FELLOW)
         {
             EntityList_t::const_iterator it = m_petList.find(targid);
             if (it != m_petList.end())
@@ -1101,6 +1134,10 @@ void CZoneEntities::TOTDChange(TIMETYPE TOTD)
                 {
                     PMob->SetDespawnTime(1ms);
                     PMob->m_AllowRespawn = false;
+                    if (PMob->PPet)
+                    {
+                        dynamic_cast<CMobEntity*>(PMob->PPet)->SetDespawnTime(1ms);
+                    }
                 }
             }
         }
@@ -1117,6 +1154,10 @@ void CZoneEntities::TOTDChange(TIMETYPE TOTD)
                 {
                     PMob->SetDespawnTime(1ms);
                     PMob->m_AllowRespawn = false;
+                    if (PMob->PPet)
+                    {
+                        dynamic_cast<CMobEntity*>(PMob->PPet)->SetDespawnTime(1ms);
+                    }
                 }
             }
         }

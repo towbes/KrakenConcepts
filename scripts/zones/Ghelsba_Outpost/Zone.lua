@@ -1,10 +1,13 @@
 -----------------------------------
 -- Zone: Ghelsba_Outpost (140)
 -----------------------------------
+local ID = zones[xi.zone.GHELSBA_OUTPOST]
 local zoneObject = {}
 
 zoneObject.onInitialize = function(zone)
     xi.helm.initZone(zone, xi.helmType.LOGGING)
+    -- NM Persistence
+    xi.mob.nmTODPersistCache(zone, ID.mob.ORCISH_BARRICADER)
 end
 
 zoneObject.onZoneIn = function(player, prevZone)

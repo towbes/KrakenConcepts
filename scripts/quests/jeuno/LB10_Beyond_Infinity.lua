@@ -50,7 +50,7 @@ quest.sections =
                         quest:begin(player)
                     end
 
-                    -- This options also warp you to a BCNM. Note that the quest "Beyond Infinity" is already activated.
+                    -- This options also warp you to a BCNM. Note that the quest 'Beyond Infinity' is already activated.
                     if option == 14 then
                         player:setPos(-511.459, 159.004, -210.543, 10, xi.zone.HORLAIS_PEAK)
                     elseif option == 19 then

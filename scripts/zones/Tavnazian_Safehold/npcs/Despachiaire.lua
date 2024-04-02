@@ -3,11 +3,11 @@
 --  NPC: Despachiaire
 -- !pos 108 -40 -83 26
 -- TODO:
--- Starts quests: "X Marks the Spot"
---                "Elderly Pursuits"
---                "Tango with a Tracker"
---                "Requiem of Sin"
--- Involved in:   "Secrets of Ovens Lost"
+-- Starts quests: 'X Marks the Spot'
+--                'Elderly Pursuits'
+--                'Tango with a Tracker'
+--                'Requiem of Sin'
+-- Involved in:   'Secrets of Ovens Lost'
 -----------------------------------
 local entity = {}
 
@@ -45,7 +45,7 @@ end
 --Despachiaire     505 CS
 --Despachiaire     517 CS (despachiaire's wife)
 --Despachiaire     518 CS (ulmia mother)
---Despachiaire     576 CS
+--Despachiaire     576 CS (tango with a tracker)
 --Despachiaire     577 chat
 --Despachiaire     578 chat
 --Despachiaire     579 chat

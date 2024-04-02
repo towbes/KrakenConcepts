@@ -1,6 +1,6 @@
 -----------------------------------
 -- Spell: Frypan
--- Delivers an area attack. Additional effect: "Stun." Accuracy varies with TP
+-- Delivers an area attack. Additional effect: 'Stun.' Accuracy varies with TP
 -- Spell cost: 65 MP
 -- Monster Type: Beastmen
 -- Spell Type: Physical (Blunt)
@@ -33,10 +33,10 @@ spellObject.onSpellCast = function(caster, target, spell)
     params.damageType = xi.damageType.BLUNT
     params.scattr = xi.skillchainType.IMPACTION
     params.numhits = 1
-    params.multiplier = 1.78
-    params.tp150 = 1.78
-    params.tp300 = 1.78
-    params.azuretp = 1.78
+    params.multiplier = 2.75 -- 1.78
+    params.tp150 = 2.75 -- 1.78
+    params.tp300 = 2.75 -- 1.78
+    params.azuretp = 3.5 -- 1.78
     params.duppercap = 75
     params.str_wsc = 0.2
     params.dex_wsc = 0.0

@@ -384,7 +384,7 @@ entity.onTrigger = function(player, npc)
                 hasCompletedExpansion = finishedASA
             end
 
-            -- Reminder that "True" here means the option should be excluded from the player's menu
+            -- Reminder that 'True' here means the option should be excluded from the player's menu
             if
                 not hasCompletedExpansion or
                 player:hasKeyItem(ki) or
@@ -470,7 +470,7 @@ entity.onEventUpdate = function(player, csid, option, npc)
                     end
                 end
 
-                -- Reminder that "True" here means the option should be excluded from the player's menu
+                -- Reminder that 'True' here means the option should be excluded from the player's menu
                 if not hasCompletedExpansion or hasAllRelevantKeyItem then
                     arg1 = utils.mask.setBit(arg1, bitPos, true)
                 end
@@ -486,7 +486,7 @@ end
 entity.onEventFinish = function(player, csid, option, npc)
     if csid == 323 then
         if option == 1 then
-            -- catchall "stop wasting my time" response, triggered via updateEvent(1)
+            -- catchall 'stop wasting my time' response, triggered via updateEvent(1)
             player:showText(player, ID.text.DRYEYES_1)
         elseif option == 100 then -- Viridian Key
             takeReqKeyItems(player, xi.ki.VIRIDIAN_KEY)

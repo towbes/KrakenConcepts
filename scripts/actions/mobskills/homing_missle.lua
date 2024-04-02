@@ -13,13 +13,14 @@ mobskillObject.onMobWeaponSkill = function(target, mob, skill)
     local hpset = targetmaxHP * 0.20
     local dmg = 0
 
-    xi.mobskills.mobStatusEffectMove(mob, target, xi.effect.BIND, 1, 0, 30)
-
     if targetcurrentHP > hpset then
         dmg = targetcurrentHP - hpset
     end
 
     target:takeDamage(dmg, mob, xi.attackType.MAGICAL, xi.damageType.ELEMENTAL)
+
+    xi.mobskills.mobStatusEffectMove(mob, target, xi.effect.BIND, 1, 0, 30)
+
     return dmg
 end
 

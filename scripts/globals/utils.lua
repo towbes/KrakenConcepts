@@ -373,6 +373,22 @@ function utils.stoneskin(target, dmg)
     return dmg
 end
 
+function utils.magicstoneskin(target, dmg)
+    -- handling magic stoneskin - Umeboshi
+    local magicSS = target:getMod(xi.mod.MAGIC_STONESKIN)
+    if magicSS > 0 then
+        if dmg >= magicSS then
+            target:setMod(xi.mod.MAGIC_STONESKIN, 0)
+            dmg = dmg - magicSS
+        else
+            target:setMod(xi.mod.MAGIC_STONESKIN, magicSS - dmg)
+            dmg = 0
+        end
+    end
+    return dmg
+end
+
+
 -- returns reduced magic damage from RUN buff, 'One for All'
 function utils.oneforall(target, dmg)
     if dmg > 0 then
@@ -493,6 +509,7 @@ function utils.thirdeye(target)
     --third eye doesnt care how many shadows, so attempt to anticipate, but reduce
     --chance of anticipate based on previous successful anticipates.
     local teye = target:getStatusEffect(xi.effect.THIRD_EYE)
+    local seigan = target:getStatusEffect(xi.effect.SEIGAN)
 
     if teye == nil then
         return false
@@ -502,11 +519,16 @@ function utils.thirdeye(target)
 
     if prevAnt == 0 or (math.random() * 100) < (80 - (prevAnt * 10)) then
         --anticipated!
-        target:delStatusEffect(xi.effect.THIRD_EYE)
+        if seigan == nil or prevAnt == 6 or math.random()*100 > 100-(prevAnt+1)*15 then
+            target:delStatusEffect(xi.effect.THIRD_EYE)
+        else
+            teye:setPower(prevAnt + 1)
+        end
+        return true
+    else
+        target:delStatusEffect(xi.effect.THIRD_EYE) -- how did we get here?  the previous clause checks for prevAnt == 6
         return true
     end
-
-    return false
 end
 
 function utils.getActiveJobLevel(actor, job)
@@ -565,6 +587,8 @@ local function getSkillLevelIndex(level, rank)
     elseif level <= 90 then
         rangeId = 80
     elseif level <= 99 then
+        rangeId = 90
+     elseif level > 99 then -- Umeboshi: 'I threw in an arbitrary number and it resolved the error. I do not know what the value should be for retail accuracy.'
         rangeId = 90
     end
 
@@ -988,6 +1012,30 @@ function utils.angleToRotation(radians)
     return radians * ffxiAngleToRotationFactor
 end
 
+-- Returns inline value  boolean      any     any
+function utils.ternary(conditional, trueVal, falseVal)
+    if conditional then
+        return trueVal
+    end
+
+    return falseVal
+end
+
+ -- checks if mob is in any stage of using a mobskill or casting a spell or under the status effects listed below
+ -- prevents multiple abilities/actions to be called at the same time
+ function utils.canUseAbility(mob)
+    local act = mob:getCurrentAction()
+    if act == xi.act.MOBABILITY_START or act == xi.act.MOBABILITY_USING or act == xi.act.MOBABILITY_FINISH
+    or act == xi.act.MAGIC_START or act == xi.act.MAGIC_CASTING or mob:getStatusEffect(xi.effect.STUN) ~= nil
+    or mob:getStatusEffect(xi.effect.PETRIFICATION) ~= nil or mob:getStatusEffect(xi.effect.TERROR) ~= nil
+    or mob:getStatusEffect(xi.effect.SLEEP_I) ~= nil or mob:getStatusEffect(xi.effect.SLEEP_II) ~= nil
+    or mob:getStatusEffect(xi.effect.AMNESIA) ~= nil or mob:getStatusEffect(xi.effect.LULLABY) ~= nil then
+        return false
+    end
+
+    return true
+end
+
 -- Returns 24h Clock Time (example: 04:30 = 430, 21:30 = 2130)
 function utils.vanadielClockTime()
     return tonumber(VanadielHour() .. string.format('%02d', VanadielMinute()))
@@ -1006,3 +1054,23 @@ function utils.intToBinary(x)
 
     return bin
 end
+
+
+function utils.arenaDrawIn(mob, target, table)
+    local nextDrawIn = target:getLocalVar('[Draw-In]WaitTime')
+    local condition1 = utils.ternary(table.condition1 ~= nil, table.condition1, false)
+    local condition2 = utils.ternary(table.condition2 ~= nil, table.condition2, false)
+    local condition3 = utils.ternary(table.condition3 ~= nil, table.condition3, false)
+    local condition4 = utils.ternary(table.condition4 ~= nil, table.condition4, false)
+    local position   = utils.ternary(table.position ~= nil, table.position, { mob:getXPos(), mob:getYPos(), mob:getZPos(), mob:getRotPos() })
+
+    if
+        (condition1 or condition2 or condition3 or condition4) and
+        (os.time() > nextDrawIn)
+    then
+        target:setPos(position[1], position[2], position[3], utils.ternary(position[4] ~= nil, position[4], 0))
+        mob:messageBasic(232, 0, 0, target)
+        target:setLocalVar('[Draw-In]WaitTime', os.time() + 1)
+    end
+end
+

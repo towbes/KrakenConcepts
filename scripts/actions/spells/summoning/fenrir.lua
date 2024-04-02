@@ -18,6 +18,7 @@ end
 
 spellObject.onSpellCast = function(caster, target, spell)
     caster:spawnPet(xi.petId.FENRIR)
+    caster:delStatusEffectSilent(xi.effect.MANAWELL)
 
     if caster:hasStatusEffect(xi.effect.AVATARS_FAVOR) then
         local effect = caster:getStatusEffect(xi.effect.AVATARS_FAVOR)

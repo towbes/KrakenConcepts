@@ -2,7 +2,8 @@
 -- Area: Temple of Uggalepih
 --  Mob: Tonberry Stabber
 -----------------------------------
-mixins = { require('scripts/mixins/families/tonberry') }
+mixins = { require('scripts/mixins/families/tonberry'),
+    require('scripts/mixins/prelate_door'), }
 -----------------------------------
 local entity = {}
 

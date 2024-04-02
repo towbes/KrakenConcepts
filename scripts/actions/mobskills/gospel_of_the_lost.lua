@@ -7,8 +7,8 @@
 -- Utsusemi/Blink absorb: N/A
 -- Range: Self
 -- Notes: Accompanied by text
--- "Bask in my glory..."
--- "Mine existence...stretches into infinity..."
+-- 'Bask in my glory...'
+-- 'Mine existence...stretches into infinity...'
 -----------------------------------
 local mobskillObject = {}
 

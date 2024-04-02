@@ -18,7 +18,7 @@ DROP TABLE IF EXISTS `automaton_abilities`;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `automaton_abilities` (
   `abilityid` smallint(4) unsigned NOT NULL,
-  `abilityname` varchar(40) CHARACTER SET latin1 NOT NULL,
+  `abilityname` varchar(40) NOT NULL,
   `reqframe` smallint(3) unsigned NOT NULL DEFAULT '0',
   `skilllevel` smallint(3) unsigned NOT NULL DEFAULT '0',
   PRIMARY KEY (`abilityid`)

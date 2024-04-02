@@ -4,11 +4,20 @@
 --  Type: Physical
 --  Utsusemi/Blink absorb: 1 shadow
 --  Range: Melee
+--  Notes: Requires Weapon
 -----------------------------------
 local mobskillObject = {}
 
 mobskillObject.onMobSkillCheck = function(target, mob, skill)
-    return 0
+    if
+        mob:getAnimationSub() == 0 and
+        mob:getMainJob() ~= xi.job.MNK and
+        mob:getMainJob() ~= xi.job.PUP
+    then
+        return 0
+    else
+        return 1
+    end
 end
 
 mobskillObject.onMobWeaponSkill = function(target, mob, skill)

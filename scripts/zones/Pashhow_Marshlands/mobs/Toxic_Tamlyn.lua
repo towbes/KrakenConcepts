@@ -4,9 +4,31 @@
 -----------------------------------
 local entity = {}
 
+
+entity.onMobSpawn = function(mob)
+    mob:setMod(xi.mod.TRIPLE_ATTACK, 20)
+end
+
+entity.onMobRoam = function(mob)
+    if not (mob:getWeather() == xi.weather.RAIN or mob:getWeather() == xi.weather.SQUALL) then
+        DespawnMob(mob:getID())
+    end
+end
+
+entity.onMobDisengage = function(mob)
+    if not (mob:getWeather() == xi.weather.RAIN or mob:getWeather() == xi.weather.SQUALL) then
+        DespawnMob(mob:getID())
+    end
+end
+
 entity.onMobDeath = function(mob, player, optParams)
     xi.hunts.checkHunt(mob, player, 213)
-    mob:setLocalVar('spawnTime', 3600 + os.time()) -- 1 hour
+end
+
+entity.onMobDespawn = function(mob)
+    DisallowRespawn(mob:getID(), true)
+    SetServerVariable('TamlynRespawn', (os.time() + 3600))
+    mob:setRespawnTime(3600)
 end
 
 return entity

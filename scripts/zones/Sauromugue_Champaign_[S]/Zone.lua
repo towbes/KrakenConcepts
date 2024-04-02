@@ -31,7 +31,10 @@ end
 zoneObject.onEventUpdate = function(player, csid, option, npc)
 end
 
-zoneObject.onEventFinish = function(player, csid, option)
+zoneObject.onEventFinish = function(player, csid, option, npc)
+    if csid == 3 then
+        player:setCharVar('DownwardHelix', 3)
+    end
 end
 
 return zoneObject

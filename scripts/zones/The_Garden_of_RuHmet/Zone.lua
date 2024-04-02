@@ -1,6 +1,7 @@
 -----------------------------------
 -- Zone: The_Garden_of_RuHmet (35)
 -----------------------------------
+require('scripts/globals/exp_controller')
 local ID = zones[xi.zone.THE_GARDEN_OF_RUHMET]
 -----------------------------------
 local zoneObject = {}
@@ -63,6 +64,9 @@ zoneObject.onInitialize = function(zone)
     -- Give Ix'DRG a random placeholder by picking one of the four groups at random, then adding a random number of 0-2 for the specific mob.
     local groups = ID.mob.AWAERN_DRG_GROUPS
     SetServerVariable('[SEA]IxAernDRG_PH', groups[math.random(1, #groups)] + math.random(0, 2))
+
+    xi.exp_controller.onInitialize(zone)
+
 end
 
 zoneObject.afterZoneIn = function(player)
@@ -106,8 +110,6 @@ zoneObject.onConquestUpdate = function(zone, updatetype, influence, owner, ranki
 end
 
 zoneObject.onZoneIn = function(player, prevZone)
-    local cs = -1
-
     if
         player:getXPos() == 0 and
         player:getYPos() == 0 and
@@ -115,16 +117,7 @@ zoneObject.onZoneIn = function(player, prevZone)
     then
         player:setPos(-351.136, -2.25, -380, 253)
     end
-
-    if
-        player:getCurrentMission(xi.mission.log_id.COP) == xi.mission.id.cop.WHEN_ANGELS_FALL and
-        player:getCharVar('PromathiaStatus') == 0
-    then
-        cs = 201
-    end
-
     player:setCharVar('Ru-Hmet-TP', 0)
-    return cs
 end
 
 local teleportEventsByArea =
@@ -210,12 +203,14 @@ zoneObject.onEventFinish = function(player, csid, option, npc)
     if csid == 101 and option == 1 then
         player:setPos(540, -1, -499.900, 62, 36)
         player:setCharVar('Ru-Hmet-TP', 0)
+        for _, entry in pairs(player:getNotorietyList()) do
+            entry:clearEnmity(player) -- reset hate on player after teleporting
+        end
     elseif (csid > 149 and csid < 184) or csid == 102 or csid == 103 or csid == 101 then
         player:setCharVar('Ru-Hmet-TP', 0)
-    elseif csid == 201 then
-        player:setCharVar('PromathiaStatus', 1)
-        player:addKeyItem(xi.ki.MYSTERIOUS_AMULET_PRISHE)
-        player:messageSpecial(ID.text.KEYITEM_OBTAINED, xi.ki.MYSTERIOUS_AMULET)
+        for _, entry in pairs(player:getNotorietyList()) do
+            entry:clearEnmity(player) -- reset hate on player after teleporting
+        end
     elseif csid == 32000 and option == 1 then
         player:setPos(420, 0, 398, 68)
     end

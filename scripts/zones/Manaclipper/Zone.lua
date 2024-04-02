@@ -2,10 +2,12 @@
 -- Zone: Manaclipper
 -----------------------------------
 local ID = zones[xi.zone.MANACLIPPER]
+require('scripts/globals/exp_controller')
 -----------------------------------
 local zoneObject = {}
 
 zoneObject.onInitialize = function(zone)
+    xi.exp_controller.onInitialize(zone)
 end
 
 zoneObject.onZoneIn = function(player, prevZone)

@@ -17,6 +17,11 @@ itemObject.onItemCheck = function(target)
 end
 
 itemObject.onItemUse = function(target)
+    if target:hasStatusEffect(xi.effect.CURSE_II) then
+        target:messageBasic(xi.msg.basic.NO_EFFECT)
+        return 1
+    end
+    
     target:addHP(target:getMaxHP() * 0.5 * xi.settings.main.ITEM_POWER)
     target:addMP(target:getMaxMP() * 0.5 * xi.settings.main.ITEM_POWER)
     target:messageBasic(xi.msg.basic.RECOVERS_HP_AND_MP)

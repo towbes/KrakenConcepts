@@ -1,7 +1,7 @@
 -----------------------------------
 -- Area: Riverne Site #A01
 --  NPC: Unstable Displacement
--- Note: entrance for "Ouryu Cometh"
+-- Note: entrance for 'Ouryu Cometh'
 -- !pos 183.390 -3.250 341.550 30
 -----------------------------------
 local ID = zones[xi.zone.RIVERNE_SITE_A01]

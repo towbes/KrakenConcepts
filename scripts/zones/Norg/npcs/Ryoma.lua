@@ -17,28 +17,34 @@ entity.onTrigger = function(player, npc)
     local trueWill = player:getQuestStatus(xi.quest.log_id.OUTLANDS, xi.quest.id.outlands.TRUE_WILL)
     local mLvl = player:getMainLvl()
     local mJob = player:getMainJob()
+    local sLvl = player:getSubLvl() -- Umeboshi
+    local sJob = player:getSubJob()
 
     if
         twentyInPirateYears == QUEST_AVAILABLE and
         mJob == xi.job.NIN and
-        mLvl >= 40
+        mLvl >= 40 or
+        sJob == xi.job.NIN and
+        sLvl >= 40 -- Umeboshi
     then
-        player:startEvent(133) -- Start Quest "20 in Pirate Years"
+        player:startEvent(133) -- Start Quest '20 in Pirate Years'
     elseif
         twentyInPirateYears == QUEST_ACCEPTED and
         player:hasKeyItem(xi.ki.TRICK_BOX)
     then
-        player:startEvent(134) -- Finish Quest "20 in Pirate Years"
+        player:startEvent(134) -- Finish Quest '20 in Pirate Years'
     elseif
         twentyInPirateYears == QUEST_COMPLETED and
         illTakeTheBigBox == QUEST_AVAILABLE and
         mJob == xi.job.NIN and
-        mLvl >= 50 and
+        mLvl >= 50 or
+        sJob == xi.job.NIN and
+        sLvl >= 50 and -- Umeboshi
         not player:needToZone()
     then
-        player:startEvent(135) -- Start Quest "I'll Take the Big Box"
+        player:startEvent(135) -- Start Quest 'I'll Take the Big Box'
     elseif illTakeTheBigBox == QUEST_COMPLETED and trueWill == QUEST_AVAILABLE then
-        player:startEvent(136) -- Start Quest "True Will"
+        player:startEvent(136) -- Start Quest 'True Will'
     elseif
         player:hasKeyItem(xi.ki.OLD_TRICK_BOX) and
         player:getCharVar('trueWillCS') == 0

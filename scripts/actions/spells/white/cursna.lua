@@ -17,10 +17,11 @@ spellObject.onSpellCast = function(caster, target, spell)
     local final  = nil
 
     -- https://www.bg-wiki.com/ffxi/Cursna, https://wiki.ffo.jp/html/1962.html
-    local power = (10 + (skill / 30)) * (1 + (bonus / 100))
+    -- local power = (10 + (skill / 30)) * (1 + (bonus / 100))
+    local power = (10 + (skill / 10)) * (1 + (bonus / 100))
 
     spell:setMsg(xi.msg.basic.MAGIC_NO_EFFECT)
-    if target:hasStatusEffect(xi.effect.DOOM) and power > math.random(1, 100) then
+    if (target:hasStatusEffect(xi.effect.DOOM) and target:getStatusEffect(xi.effect.DOOM):getPower()<=10  and power > math.random(1, 100)) then
         -- remove doom
         final = xi.effect.DOOM
         target:delStatusEffect(xi.effect.DOOM)
@@ -54,6 +55,8 @@ spellObject.onSpellCast = function(caster, target, spell)
         final = xi.effect.BANE
         spell:setMsg(xi.msg.basic.MAGIC_REMOVE_EFFECT)
     end
+
+    caster:delStatusEffectSilent(xi.effect.MANAWELL)
 
     return final
 end

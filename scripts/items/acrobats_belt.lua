@@ -4,19 +4,22 @@
 -- Item Effect: AGI +3
 -- Duration: 60 seconds
 -----------------------------------
+
+-----------------------------------
 local itemObject = {}
 
 itemObject.onItemCheck = function(target)
-    local effect = target:getStatusEffect(xi.effect.ENCHANTMENT)
-    if effect ~= nil and effect:getSubType() == 15866 then
-        target:delStatusEffect(xi.effect.ENCHANTMENT)
+    if target:getStatusEffect(xi.effect.ENCHANTMENT, nil, xi.item.ACROBATS_BELT) ~= nil then
+        target:delStatusEffect(xi.effect.ENCHANTMENT, nil, xi.item.ACROBATS_BELT)
     end
 
     return 0
 end
 
 itemObject.onItemUse = function(target)
-    target:addStatusEffect(xi.effect.ENCHANTMENT, 0, 0, 60, 15866)
+    if target:hasEquipped(xi.item.ACROBATS_BELT) then
+        target:addStatusEffect(xi.effect.ENCHANTMENT, 0, 0, 60, 0, 0, 0, xi.item.ACROBATS_BELT)
+    end
 end
 
 itemObject.onEffectGain = function(target, effect)

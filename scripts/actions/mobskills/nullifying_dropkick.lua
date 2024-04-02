@@ -10,7 +10,6 @@ mobskillObject.onMobSkillCheck = function(target, mob, skill)
         target:hasStatusEffect(xi.effect.PHYSICAL_SHIELD) or
         target:hasStatusEffect(xi.effect.MAGIC_SHIELD)
     then
-        mob:showText(mob, ID.text.PRISHE_TEXT + 5)
         return 0
     end
 
@@ -18,6 +17,7 @@ mobskillObject.onMobSkillCheck = function(target, mob, skill)
 end
 
 mobskillObject.onMobWeaponSkill = function(target, mob, skill)
+    mob:showText(mob, ID.text.PRISHE_TEXT + 5)
     local numhits = 1
     local accmod = 1
     local dmgmod = 2.0

@@ -1,7 +1,7 @@
 -----------------------------------
 -- Area: North Gustaberg
 --  NPC: qm1 (???)
--- Involved in Quest "The Siren's Tear"
+-- Involved in Quest 'The Siren's Tear'
 -----------------------------------
 local ID = zones[xi.zone.NORTH_GUSTABERG]
 -----------------------------------

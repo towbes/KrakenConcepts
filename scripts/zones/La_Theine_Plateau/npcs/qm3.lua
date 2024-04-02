@@ -1,7 +1,7 @@
 -----------------------------------
 -- Area: La Theine Plateau
 --  NPC:??? (qm3)
--- Involved in Quest: I Can Hear A Rainbow
+-- Involved in Quest: I Can Hear A Rainbow, Waking the Beast
 -----------------------------------
 local ID = zones[xi.zone.LA_THEINE_PLATEAU]
 -----------------------------------

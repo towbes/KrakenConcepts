@@ -20,7 +20,8 @@ local weaponskillObject = {}
 weaponskillObject.onUseWeaponSkill = function(player, target, wsID, tp, primary, action, taChar)
     local params = {}
     params.numHits = 1
-    params.ftpMod = { 2.75, 2.75, 2.75 }
+    params.ftpMod = { 2.8, 2.8, 2.8 }
+    -- params.ftpMod = { 2.75, 2.75, 2.75 }
     params.str_wsc = 0.4 params.mnd_wsc = 0.4
 
     local damage, criticalHit, tpHits, extraHits = xi.weaponskills.doPhysicalWeaponskill(player, target, wsID, params, tp, action, primary, taChar)
@@ -32,6 +33,7 @@ weaponskillObject.onUseWeaponSkill = function(player, target, wsID, tp, primary,
         if not target:hasStatusEffect(xi.effect.EVASION_DOWN) then
             local duration = tp / 1000 * 20 * applyResistanceAddEffect(player, target, xi.element.ICE, 0)
             target:addStatusEffect(xi.effect.EVASION_DOWN, 32, 0, duration)
+            player:messagePublic(xi.msg.basic.SKILL_ENFEEB, target, wsID, xi.effect.EVASION_DOWN)
         end
     end
 

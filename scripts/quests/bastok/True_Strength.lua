@@ -25,7 +25,9 @@ quest.sections =
             return status == QUEST_AVAILABLE and
                 player:hasCompletedQuest(xi.quest.log_id.BASTOK, xi.quest.id.bastok.THE_FIRST_MEETING) and
                 player:getMainJob() == xi.job.MNK and
-                player:getMainLvl() >= 50
+                player:getMainLvl() >= 50 or
+                player:getSubJob() == xi.job.MNK and --Umeboshi
+                player:getSubLvl() >= 50
         end,
 
         [xi.zone.METALWORKS] =

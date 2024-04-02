@@ -13,6 +13,7 @@ entity.onTrade = function(player, npc, trade)
         (npcUtil.tradeHas(trade, xi.item.QUUS) or npcUtil.tradeHas(trade, xi.item.QUUS_F2)) and
         npcUtil.popFromQM(player, npc, ID.mob.BUBBLY_BERNIE, { hide = 0 })
     then
+        npcUtil.popFromQM(player, npc, ID.mob.BUBBLY_BERNIE, { hide = 0 })
         player:confirmTrade()
     else
         player:messageSpecial(ID.text.NOTHING_OUT_OF_ORDINARY)

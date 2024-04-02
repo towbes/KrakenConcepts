@@ -5,6 +5,13 @@
 -- Carmelo : !pos -146.476 -7.48 -10.889 236
 -----------------------------------
 
+
+require('scripts/globals/npc_util')
+require('scripts/globals/quests')
+
+require('scripts/globals/interaction/quest')
+-----------------------------------
+
 local quest = Quest:new(xi.quest.log_id.BASTOK, xi.quest.id.bastok.LOVERS_IN_THE_DUSK)
 
 quest.reward =
@@ -31,6 +38,7 @@ quest.sections =
             onEventFinish =
             {
                 [275] = function(player, csid, option, npc)
+                    quest:begin(player)
                     npcUtil.giveKeyItem(player, xi.ki.CHANSON_DE_LIBERTE)
                     quest:begin(player)
                 end,

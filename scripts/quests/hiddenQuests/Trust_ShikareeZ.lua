@@ -14,7 +14,7 @@ quest.sections =
         check = function(player, questVars, vars)
             return not player:hasSpell(xi.magic.spell.SHIKAREE_Z) and
                 player:hasCompletedMission(xi.mission.log_id.COP, xi.mission.id.cop.THREE_PATHS) and
-                -- TODO BG WIKI States acquisition can be blocked while Shikaree Z is "out of town".
+                -- TODO BG WIKI States acquisition can be blocked while Shikaree Z is 'out of town'.
                 --      Verify which Missions this comment refers to, though likely the following:
                 --      FLAMES_IN_THE_DARKNESS, FIRE_IN_THE_EYES_OF_MEN, A_FATE_DECIDED
                 --      https://www.bg-wiki.com/ffxi/Promathia_Mission_5-3

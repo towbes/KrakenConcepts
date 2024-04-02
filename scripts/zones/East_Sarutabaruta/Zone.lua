@@ -11,8 +11,7 @@ zoneObject.onChocoboDig = function(player, precheck)
 end
 
 zoneObject.onInitialize = function(zone)
-    UpdateNMSpawnPoint(ID.mob.DUKE_DECAPOD)
-    GetMobByID(ID.mob.DUKE_DECAPOD):setRespawnTime(math.random(3600, 4200))
+    xi.mob.nmTODPersistCache(zone, ID.mob.DUKE_DECAPOD)
 end
 
 zoneObject.onZoneIn = function(player, prevZone)

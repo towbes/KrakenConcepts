@@ -12,7 +12,7 @@ end
 
 entity.onTrigger = function(player, npc)
     if player:hasKeyItem(xi.ki.SILVERY_PLATE) then
-        player:startEvent(45, 300, 0, 100, 0, 3, 582330, 0)
+        player:startEvent(45, 300, 0, 100, 0, 3, 582330, 0) -- 43
     else
         player:messageSpecial(ID.text.THIS_BAFFLING_GADGET, 0) -- Verify Param for Lower floor
     end

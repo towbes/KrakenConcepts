@@ -157,6 +157,7 @@ namespace guildutils
 
         bool doUpdate = static_cast<uint32>(serverutils::GetServerVar("[GUILD]pattern_update")) != CVanaTime::getInstance()->getJstYearDay();
 
+
         uint8 pattern = xirand::GetRandomNumber(8);
         if (doUpdate)
         {
@@ -169,6 +170,7 @@ namespace guildutils
         {
             // load the pattern in case it was set by another server (and this server did not set it)
             pattern = serverutils::GetServerVar("[GUILD]pattern");
+
             charutils::ClearCharVarFromAll("[GUILD]daily_points", true);
         }
 

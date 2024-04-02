@@ -79,30 +79,30 @@ INSERT INTO `instance_entities` VALUES (5501,17002744);
 
 -- Extermination
 -- mobs
-INSERT INTO `instance_entities` VALUES (5502,17002521);
-INSERT INTO `instance_entities` VALUES (5502,17002522);
-INSERT INTO `instance_entities` VALUES (5502,17002523);
-INSERT INTO `instance_entities` VALUES (5502,17002524);
-INSERT INTO `instance_entities` VALUES (5502,17002525);
-INSERT INTO `instance_entities` VALUES (5502,17002526);
-INSERT INTO `instance_entities` VALUES (5502,17002527);
-INSERT INTO `instance_entities` VALUES (5502,17002528);
-INSERT INTO `instance_entities` VALUES (5502,17002529);
-INSERT INTO `instance_entities` VALUES (5502,17002530);
-INSERT INTO `instance_entities` VALUES (5502,17002531);
-INSERT INTO `instance_entities` VALUES (5502,17002532);
-INSERT INTO `instance_entities` VALUES (5502,17002533);
-INSERT INTO `instance_entities` VALUES (5502,17002534);
-INSERT INTO `instance_entities` VALUES (5502,17002535);
-INSERT INTO `instance_entities` VALUES (5502,17002536);
-INSERT INTO `instance_entities` VALUES (5502,17002537);
-INSERT INTO `instance_entities` VALUES (5502,17002538);
-INSERT INTO `instance_entities` VALUES (5502,17002539);
-INSERT INTO `instance_entities` VALUES (5502,17002540);
-INSERT INTO `instance_entities` VALUES (5502,17002541);
-INSERT INTO `instance_entities` VALUES (5502,17002542);
-INSERT INTO `instance_entities` VALUES (5502,17002543);
-INSERT INTO `instance_entities` VALUES (5502,17002544);
+INSERT INTO `instance_entities` VALUES (5502,17002521); -- Carrion Crab
+INSERT INTO `instance_entities` VALUES (5502,17002522); -- Carrion Leech
+INSERT INTO `instance_entities` VALUES (5502,17002523); -- Carrion Crab
+INSERT INTO `instance_entities` VALUES (5502,17002524); -- Carrion Crab
+INSERT INTO `instance_entities` VALUES (5502,17002525); -- Carrion Leech
+INSERT INTO `instance_entities` VALUES (5502,17002526); -- Carrion Crab
+INSERT INTO `instance_entities` VALUES (5502,17002527); -- Carrion Crab
+INSERT INTO `instance_entities` VALUES (5502,17002528); -- Carrion Crab
+INSERT INTO `instance_entities` VALUES (5502,17002529); -- Carrion Slime
+INSERT INTO `instance_entities` VALUES (5502,17002530); -- Carrion Slime
+INSERT INTO `instance_entities` VALUES (5502,17002531); -- Carrion Slime
+INSERT INTO `instance_entities` VALUES (5502,17002532); -- Carrion Crab
+INSERT INTO `instance_entities` VALUES (5502,17002533); -- Carrion Leech
+INSERT INTO `instance_entities` VALUES (5502,17002534); -- Carrion Leech
+INSERT INTO `instance_entities` VALUES (5502,17002535); -- Carrion Leech
+INSERT INTO `instance_entities` VALUES (5502,17002536); -- Carrion Leech
+INSERT INTO `instance_entities` VALUES (5502,17002537); -- Carrion Leech
+INSERT INTO `instance_entities` VALUES (5502,17002538); -- Carrion Leech
+INSERT INTO `instance_entities` VALUES (5502,17002539); -- Carrion Toad
+INSERT INTO `instance_entities` VALUES (5502,17002540); -- Carrion Toad
+INSERT INTO `instance_entities` VALUES (5502,17002541); -- Undead Crab
+INSERT INTO `instance_entities` VALUES (5502,17002542); -- Undead Leech
+INSERT INTO `instance_entities` VALUES (5502,17002543); -- Undead Slime
+INSERT INTO `instance_entities` VALUES (5502,17002544); -- Undead Toad
 -- npcs
 INSERT INTO `instance_entities` VALUES (5502,17002654);
 INSERT INTO `instance_entities` VALUES (5502,17002655);
@@ -410,6 +410,50 @@ INSERT INTO `instance_entities` VALUES (6601,17047869);
 INSERT INTO `instance_entities` VALUES (6601,17047870);
 INSERT INTO `instance_entities` VALUES (6601,17047874);
 INSERT INTO `instance_entities` VALUES (6601,17047875);
+
+-- Breaking Morale
+-- mobs
+INSERT INTO `instance_entities` VALUES (6603, 17047610);
+INSERT INTO `instance_entities` VALUES (6603, 17047611);
+INSERT INTO `instance_entities` VALUES (6603, 17047612);
+INSERT INTO `instance_entities` VALUES (6603, 17047613);
+INSERT INTO `instance_entities` VALUES (6603, 17047614);
+INSERT INTO `instance_entities` VALUES (6603, 17047615);
+INSERT INTO `instance_entities` VALUES (6603, 17047616);
+INSERT INTO `instance_entities` VALUES (6603, 17047617);
+INSERT INTO `instance_entities` VALUES (6603, 17047618);
+INSERT INTO `instance_entities` VALUES (6603, 17047619);
+INSERT INTO `instance_entities` VALUES (6603, 17047620);
+INSERT INTO `instance_entities` VALUES (6603, 17047621);
+INSERT INTO `instance_entities` VALUES (6603, 17047622);
+INSERT INTO `instance_entities` VALUES (6603, 17047623);
+INSERT INTO `instance_entities` VALUES (6603, 17047624);
+INSERT INTO `instance_entities` VALUES (6603, 17047625);
+INSERT INTO `instance_entities` VALUES (6603, 17047626);
+INSERT INTO `instance_entities` VALUES (6603, 17047627);
+-- npcs
+INSERT INTO `instance_entities` VALUES (6603, 17047808); -- Ancient Lockbox
+INSERT INTO `instance_entities` VALUES (6603, 17047809); -- Rune of Release
+INSERT INTO `instance_entities` VALUES (6603, 17047821); -- Quhaaja
+INSERT INTO `instance_entities` VALUES (6603, 17047812); -- Viscous Liquid
+INSERT INTO `instance_entities` VALUES (6603, 17047813); -- Supplies Crate
+INSERT INTO `instance_entities` VALUES (6603, 17047814); -- Supplies Crate
+INSERT INTO `instance_entities` VALUES (6603, 17047815); -- Supplies Crate
+INSERT INTO `instance_entities` VALUES (6603, 17047816); -- Supplies Crate
+INSERT INTO `instance_entities` VALUES (6603, 17047817); -- Supplies Crate
+INSERT INTO `instance_entities` VALUES (6603, 17047818); -- Supplies Crate
+INSERT INTO `instance_entities` VALUES (6603, 17047819); -- Supplies Crate
+INSERT INTO `instance_entities` VALUES (6603, 17047820); -- Supplies Crate
+INSERT INTO `instance_entities` VALUES (6603, 17047862); -- Door
+INSERT INTO `instance_entities` VALUES (6603, 17047863); -- Door
+INSERT INTO `instance_entities` VALUES (6603, 17047865); -- Door
+INSERT INTO `instance_entities` VALUES (6603, 17047871); -- Door
+INSERT INTO `instance_entities` VALUES (6603, 17047872); -- Door
+INSERT INTO `instance_entities` VALUES (6603, 17047897); -- Door
+INSERT INTO `instance_entities` VALUES (6603, 17047908); -- Door
+INSERT INTO `instance_entities` VALUES (6603, 17047909); -- Door
+INSERT INTO `instance_entities` VALUES (6603, 17047910); -- Door
+INSERT INTO `instance_entities` VALUES (6603, 17047911); -- Door
 
 -- Leujaoam Cleansing
 -- mobs

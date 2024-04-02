@@ -16,12 +16,12 @@
 -- R. Accuracy+70
 -- R. Attack+70
 -- M. Accuracy+70
--- "M. Atk. Bonus"+10
--- "M. Def. Bonus"+3
+-- 'M. Atk. Bonus'+10
+-- 'M. Def. Bonus'+3
 -- Evasion+70
 -- DEF+70
 -- M. Evasion+70
--- "Store TP"+6
+-- 'Store TP'+6
 -----------------------------------
 local itemObject = {}
 

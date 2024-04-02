@@ -1,7 +1,7 @@
 -----------------------------------
 --  Blitzstrahl
 --
---  Description: Deals lightning damage to an enemy. Additional effect: "Stun."
+--  Description: Deals lightning damage to an enemy. Additional effect: 'Stun.'
 --  Type: Magical (Lightning)
 -----------------------------------
 local mobskillObject = {}

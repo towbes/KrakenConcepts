@@ -13,7 +13,17 @@ mobskillObject.onMobSkillCheck = function(target, mob, skill)
 end
 
 mobskillObject.onMobWeaponSkill = function(target, mob, skill)
-    skill:setMsg(xi.mobskills.mobGazeMove(mob, target, xi.effect.TERROR, 1, 0, 10))
+    local duration = 10
+    local master   = mob:getMaster()
+    local skillID  = skill:getID()
+    if mob:isPet() then
+        if master and master:isJugPet() then
+            local tp = skill:getTP()
+            duration = 9
+            duration = math.max(15, duration * (tp/1000)) -- Minimum 15 seconds. Maximum 27~ Seconds.
+        end
+    end
+    skill:setMsg(xi.mobskills.mobGazeMove(mob, target, xi.effect.TERROR, 30, 0, duration))
 
     return xi.effect.TERROR
 end

@@ -16,6 +16,7 @@ battlefieldObject.onBattlefieldInitialise = function(battlefield)
     local tile = ID.npc.DARKNESS_NAMED_TILE_OFFSET + (inst - 1) * 8
     for i = tile, tile + 7 do
         GetNPCByID(i):setAnimation(xi.anim.CLOSE_DOOR)
+        GetNPCByID(i):setLocalVar('Dropped', xi.anim.CLOSE_DOOR)
     end
 end
 
@@ -38,8 +39,7 @@ battlefieldObject.onEventFinish = function(player, csid, option, npc)
     if csid == 32001 then
         if player:hasKeyItem(xi.ki.VIAL_OF_DREAM_INCENSE) then
             player:delKeyItem(xi.ki.VIAL_OF_DREAM_INCENSE)
-            player:addKeyItem(xi.ki.WHISPER_OF_DREAMS)
-            player:messageSpecial(ID.text.KEYITEM_OBTAINED, xi.ki.WHISPER_OF_DREAMS)
+            npcUtil.giveKeyItem(player, xi.ki.WHISPER_OF_DREAMS)
         end
 
         player:addTitle(xi.title.HEIR_TO_THE_REALM_OF_DREAMS)

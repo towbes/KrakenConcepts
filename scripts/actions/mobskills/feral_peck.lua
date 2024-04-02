@@ -7,11 +7,21 @@
 --  Range: Melee
 --  Notes: Used only by Zirnitra and Turul
 -----------------------------------
+
+
+
+require('scripts/globals/magic')
+-----------------------------------
 local mobskillObject = {}
 
 mobskillObject.onMobSkillCheck = function(target, mob, skill)
+    if target:isBehind(mob, 96) then
+        return 1
+    else
     return 0
 end
+end
+
 
 mobskillObject.onMobWeaponSkill = function(target, mob, skill)
     local damage    = target:getHP()

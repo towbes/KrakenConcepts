@@ -440,6 +440,11 @@ bool CAttack::CheckCounter()
         {
             meritCounter = ((CCharEntity*)m_victim)->PMeritPoints->GetMeritValue(MERIT_COUNTER_RATE, (CCharEntity*)m_victim);
         }
+        if (m_victim->GetSJob() == JOB_MNK || m_victim->GetSJob() == JOB_PUP) // Umeboshi "Merits for subjob"
+        {
+            meritCounter = ((CCharEntity*)m_victim)->PMeritPoints->GetMeritValue(MERIT_COUNTER_RATE, (CCharEntity*)m_victim);
+        }
+
     }
 
     // counter check (rate AND your hit rate makes it land, else its just a regular hit)
@@ -504,11 +509,22 @@ void CAttack::ProcessDamage()
     {
         m_trickAttackDamage += m_attacker->DEX() * (1.0f + m_attacker->getMod(Mod::SNEAK_ATK_DEX) / 100.0f);
     }
+    else if (m_attacker->GetSJob() == JOB_THF && m_isFirstSwing && m_attacker->StatusEffectContainer->HasStatusEffect(EFFECT_SNEAK_ATTACK) &&
+           ((abs(m_victim->loc.p.rotation - m_attacker->loc.p.rotation) < 23) || m_attacker->StatusEffectContainer->HasStatusEffect(EFFECT_HIDE) ||
+            m_victim->StatusEffectContainer->HasStatusEffect(EFFECT_DOUBT)))
+    {
+        m_trickAttackDamage += m_attacker->DEX() * (1 + m_attacker->getMod(Mod::SNEAK_ATK_DEX) / 100);
+    }
 
     // Trick attack.
     if (m_attacker->GetMJob() == JOB_THF && m_isFirstSwing && m_attackRound->GetTAEntity() != nullptr)
     {
         m_trickAttackDamage += m_attacker->AGI() * (1.0f + m_attacker->getMod(Mod::TRICK_ATK_AGI) / 100.0f);
+    }
+
+    else if (m_attacker->GetMJob() == JOB_THF && m_isFirstSwing && m_attackRound->GetTAEntity() != nullptr)
+    {
+        m_trickAttackDamage += m_attacker->AGI() * (1 + m_attacker->getMod(Mod::TRICK_ATK_AGI) / 100);
     }
 
     SLOTTYPE slot = (SLOTTYPE)GetWeaponSlot();

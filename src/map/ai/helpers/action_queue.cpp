@@ -100,15 +100,11 @@ bool CAIActionQueue::isEmpty()
 void CAIActionQueue::clearActionQueue()
 {
     while (!actionQueue.empty())
-    {
         actionQueue.pop();
-    }
 }
 
 void CAIActionQueue::clearTimerQueue()
 {
     while (!timerQueue.empty())
-    {
         timerQueue.pop();
-    }
 }

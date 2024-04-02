@@ -10,12 +10,13 @@
 local mobskillObject = {}
 
 mobskillObject.onMobSkillCheck = function(target, mob, skill)
-    if mob:getAnimationSub() == 0 then
+    if mob:getAnimationSub() == 2 then
         return 0
     else
         return 1
     end
 end
+
 
 mobskillObject.onMobWeaponSkill = function(target, mob, skill)
     local dmgmod = 1.3

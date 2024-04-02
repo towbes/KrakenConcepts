@@ -32,7 +32,8 @@ entity.onTrigger = function(player, npc)
     -- Completed AF2, AF3 available, and currently on DRG.  No level check, since they cleared AF2.
     elseif
         player:getQuestStatus(xi.quest.log_id.SANDORIA, xi.quest.id.sandoria.CHASING_QUOTAS) == QUEST_COMPLETED and
-        stalkerQuest == QUEST_AVAILABLE and player:getMainJob() == xi.job.DRG
+        stalkerQuest == QUEST_AVAILABLE and
+        (player:getMainJob() == xi.job.DRG or player:getSubJob() == xi.job.DRG) --Umeboshi
     then
         if player:getCharVar('KnightStalker_Declined') == 0 then
             player:startEvent(121) -- Start AF3

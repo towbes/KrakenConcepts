@@ -631,6 +631,8 @@ public:
     virtual void ForEachTrustInstance(CBaseEntity* PEntity, std::function<void(CTrustEntity*)> const& func);
     virtual void ForEachNpc(std::function<void(CNpcEntity*)> const& func);
 
+    bool HasReducedVerticalAggro();
+
     CZone(ZONEID ZoneID, REGION_TYPE RegionID, CONTINENT_TYPE ContinentID, uint8 levelRestriction);
     virtual ~CZone();
 
@@ -642,6 +644,15 @@ public:
 
     time_point m_LoadedAt; // The time the zone was loaded
 
+    void SetZoneDirection(uint8 direction);
+    void SetZoneAnimation(uint8 animation);
+    void SetZoneAnimStartTime(uint32 startTime);
+    void SetZoneAnimLength(uint16 length);
+
+    uint8  GetZoneDirection();
+    uint8  GetZoneAnimation();
+    uint32 GetZoneAnimStartTime();
+    uint16 GetZoneAnimLength();
     void LoadNavMesh();
     void LoadZoneLos();
 
@@ -675,6 +686,13 @@ private:
     void LoadZoneWeather();
 
     CTreasurePool* m_TreasurePool;
+
+    static const uint16 ReducedVerticalAggroZones[];
+    
+    uint8  m_ZoneDirection;     // which direction for transport to travel (0 or 4)
+    uint8  m_ZoneAnimation;     // which zone animation to use (i.e. manaclipper)
+    uint32 m_ZoneAnimStartTime; // zone animation start time (i.e. boats)
+    uint16 m_ZoneAnimLength;    // zone animation length in seconds
 
     time_point m_timeZoneEmpty; // The time point when the last player left the zone
 

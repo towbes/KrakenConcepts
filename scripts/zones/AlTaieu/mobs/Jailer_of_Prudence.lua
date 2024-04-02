@@ -10,48 +10,82 @@ local entity = {}
 
 entity.onMobInitialize = function(mob)
     mob:setMobMod(xi.mobMod.NO_DROPS, 1)
-
-    mob:addListener('WEAPONSKILL_BEFORE_USE', 'JOP_WS_MIRROR', function(mobArg, skillid)
-        if mobArg:getLocalVar('mirrored_ws') == 1 then
-            mobArg:setLocalVar('mirrored_ws', 0)
-            return
+    mob:setMobMod(xi.mobMod.ALLI_HATE, 30)
+    mob:addListener('WEAPONSKILL_STATE_ENTER', 'PRUDENCE_MIMIC_START', function(mobArg, skillID)
+        local prudenceIDs = { ID.mob.JAILER_OF_PRUDENCE_1, ID.mob.JAILER_OF_PRUDENCE_2 }
+        if mobArg:getLocalVar('[JoP]mimic') ~= 1 and mobArg:isAlive() then
+            for _, jailer in ipairs(prudenceIDs) do
+                if mobArg:getID() ~= jailer then
+                    local prudenceMimic = GetMobByID(jailer)
+                    if
+                        prudenceMimic:isAlive() and
+                        mobArg:canUseAbilities() and
+                        prudenceMimic:getLocalVar('[JoP]LastAbilityMimic') + 6 < os.time() and
+                        mobArg:checkDistance(prudenceMimic) <= 10
+                    then
+                        prudenceMimic:setLocalVar('[JoP]mimic', 1)
+                        prudenceMimic:setLocalVar('[JoP]LastAbilityMimic', os.time())
+                        prudenceMimic:useMobAbility(skillID)
+                    end
+                end
+            end
         end
+    end)
 
-        local otherPrudence = mobArg:getID() == ID.mob.JAILER_OF_PRUDENCE_1 and GetMobByID(ID.mob.JAILER_OF_PRUDENCE_2) or GetMobByID(ID.mob.JAILER_OF_PRUDENCE_1)
-
-        if otherPrudence:isAlive() and otherPrudence:checkDistance(mob) <= 50 then
-            otherPrudence:setLocalVar('mirrored_ws', 1)
-            otherPrudence:useMobAbility(skillid)
-        end
+    mob:addListener('WEAPONSKILL_STATE_EXIT', 'PRUDENCE_MIMIC_STOP', function(mobArg, skillID)
+        mobArg:setLocalVar('[JoP]mimic', 0)
     end)
 end
 
 entity.onMobSpawn = function(mob)
-    xi.mix.jobSpecial.config(mob, {
-        specials =
-        {
-            {
-                id = xi.jsa.PERFECT_DODGE,
-                cooldown = 120, -- "Both can use Perfect Dodge multiple times, and will do so almost incessantly." (guessing a 2 minute cooldown)
-                hpp = 95,
-                endCode = function(mobArg)
-                    mobArg:addStatusEffectEx(xi.effect.FLEE, 0, 100, 0, 30) -- "Jailer of Prudence will however gain Flee speed during Perfect Dodge."
-                end,
-            },
-        },
-    })
-
-    mob:setAnimationSub(0) -- Mouth closed
+    mob:setAnimationSub(6) -- Mouth closed
     mob:addStatusEffectEx(xi.effect.FLEE, 0, 100, 0, 60)
     mob:setMod(xi.mod.TRIPLE_ATTACK, 20)
     mob:setMod(xi.mod.REGEN, 10)
-    mob:addMod(xi.mod.BIND_MEVA, 30)
-    mob:addMod(xi.mod.SLOW_MEVA, 10)
-    mob:addMod(xi.mod.BLIND_MEVA, 10)
-    mob:addMod(xi.mod.SLEEP_MEVA, 30)
-    mob:addMod(xi.mod.PETRIFY_MEVA, 10)
-    mob:addMod(xi.mod.GRAVITY_MEVA, 10)
-    mob:addMod(xi.mod.LULLABY_MEVA, 30)
+    mob:setMod(xi.mod.ATT, 332)
+    mob:setMod(xi.mod.DEF, 415)
+    mob:setMod(xi.mod.EVA, 413)
+end
+
+entity.onMobFight = function(mob)
+    if
+        mob:checkDistance(mob:getTarget()) >= 12 and
+        mob:canUseAbilities()
+    then
+        local target = mob:getTarget()
+        mob:teleport(target:getPos(), target)
+    end
+
+    local perfectDodgeHPP =
+    {
+        95, 85, 75, 65, 55, 45, 35, 25, 15, 5,
+    }
+
+    local perfectDodgeTrigger = mob:getLocalVar('perfectDodgeTrigger')
+    local perfectDodgeQueue = mob:getLocalVar('perfectDodgeQueue')
+    local mobHPP = mob:getHPP()
+    for trigger, hpp in ipairs(perfectDodgeHPP) do
+        if mobHPP < hpp and perfectDodgeTrigger < trigger then
+            mob:setLocalVar('perfectDodgeTrigger', trigger)
+            mob:setLocalVar('perfectDodgeQueue', perfectDodgeQueue + 1)
+            break
+        end
+    end
+
+    if
+        mob:actionQueueEmpty() and
+        mob:canUseAbilities()
+    then
+        perfectDodgeQueue = mob:getLocalVar('perfectDodgeQueue')
+        if perfectDodgeQueue > 0 then
+            perfectDodgeQueue = mob:getLocalVar('perfectDodgeQueue') - 1
+            if not mob:hasStatusEffect(xi.effect.PERFECT_DODGE) and mob:isAlive() then
+                mob:useMobAbility(693)
+                mob:addStatusEffectEx(xi.effect.FLEE, 0, 100, 0, 30)
+                mob:setLocalVar('perfectDodgeQueue', perfectDodgeQueue)
+            end
+        end
+    end
 end
 
 entity.onMobDisengage = function(mob)
@@ -79,13 +113,23 @@ entity.onMobDespawn = function(mob)
     if mob:getID() == ID.mob.JAILER_OF_PRUDENCE_1 then
         secondPrudence:setMobMod(xi.mobMod.NO_DROPS, 0)
         secondPrudence:setAnimationSub(3) -- Mouth Open
-        secondPrudence:addMod(xi.mod.ATTP, 100)
-        secondPrudence:delMod(xi.mod.DEFP, -50)
+        -- 100% triple attack
+        secondPrudence:setMod(xi.mod.TRIPLE_ATTACK, 100)
+        -- Boost all damage taken by 50%
+        secondPrudence:setMod(xi.mod.UDMGPHYS, 5000)
+        secondPrudence:setMod(xi.mod.UDMGRANGE, 5000)
+        secondPrudence:setMod(xi.mod.UDMGMAGIC, 5000)
+        secondPrudence:setMod(xi.mod.UDMGBREATH, 5000)
     else
         firstPrudence:setMobMod(xi.mobMod.NO_DROPS, 0)
         firstPrudence:setAnimationSub(3) -- Mouth Open
-        firstPrudence:addMod(xi.mod.ATTP, 100)
-        firstPrudence:delMod(xi.mod.DEFP, -50)
+        -- 100% triple attack
+        firstPrudence:setMod(xi.mod.TRIPLE_ATTACK, 100)
+        -- Boost all damage taken by 50%
+        firstPrudence:setMod(xi.mod.UDMGPHYS, 5000)
+        firstPrudence:setMod(xi.mod.UDMGRANGE, 5000)
+        firstPrudence:setMod(xi.mod.UDMGMAGIC, 5000)
+        firstPrudence:setMod(xi.mod.UDMGBREATH, 5000)
     end
 end
 

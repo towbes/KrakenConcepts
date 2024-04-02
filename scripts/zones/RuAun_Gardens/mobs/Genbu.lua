@@ -1,6 +1,7 @@
 -----------------------------------
 -- Area: Ru'Aun Gardens
---   NM: Genbu
+-- NM: Genbu
+-- ID: 17309980
 -----------------------------------
 local ID = zones[xi.zone.RUAUN_GARDENS]
 mixins = { require('scripts/mixins/job_special') }

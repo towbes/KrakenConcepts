@@ -2,7 +2,7 @@
 -- Area: Northern San d'Oria
 --  NPC: Nouveil
 -- !pos 123 0 106 231
--- Involved in Quest: "Waters of the Cheval"
+-- Involved in Quest: 'Waters of the Cheval'
 -----------------------------------
 local entity = {}
 

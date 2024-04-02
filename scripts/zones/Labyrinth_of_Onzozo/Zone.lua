@@ -6,8 +6,7 @@ local ID = zones[xi.zone.LABYRINTH_OF_ONZOZO]
 local zoneObject = {}
 
 zoneObject.onInitialize = function(zone)
-    UpdateNMSpawnPoint(ID.mob.MYSTICMAKER_PROFBLIX)
-    GetMobByID(ID.mob.MYSTICMAKER_PROFBLIX):setRespawnTime(math.random(900, 10800))
+    xi.mob.nmTODPersistCache(zone, ID.mob.MYSTICMAKER_PROFBLIX)
 
     xi.treasure.initZone(zone)
 end

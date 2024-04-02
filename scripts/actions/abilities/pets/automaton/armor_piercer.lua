@@ -12,7 +12,7 @@ abilityObject.onAutomatonAbility = function(target, automaton, skill, master, ac
     local params =
     {
         numHits = 1,
-        atkmulti = 1.5,
+        atkmulti = 1,
         accBonus = 100,
         ftpMod = { 3.0, 3.0, 3.0 },
         ignoredDefense = { 0.4, 0.5, 0.7 },

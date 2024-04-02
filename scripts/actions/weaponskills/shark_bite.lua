@@ -21,7 +21,8 @@ weaponskillObject.onUseWeaponSkill = function(player, target, wsID, tp, primary,
     params.dex_wsc = 0.5
 
     if xi.settings.main.USE_ADOULIN_WEAPON_SKILL_CHANGES then
-        params.ftpMod = { 4.5, 6.8, 8.5 }
+        params.ftpMod = { 3.0, 5.0, 8.0 }
+        -- params.ftpMod = { 4.5, 6.8, 8.5 }
         params.dex_wsc = 0.4 params.agi_wsc = 0.4
     end
 

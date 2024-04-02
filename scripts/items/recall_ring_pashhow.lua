@@ -1,7 +1,7 @@
 -----------------------------------
 -- ID: 15842
 -- Recall ring: Pashhow
--- Enchantment: "Recall-Pashhow"
+-- Enchantment: 'Recall-Pashhow'
 -----------------------------------
 local itemObject = {}
 

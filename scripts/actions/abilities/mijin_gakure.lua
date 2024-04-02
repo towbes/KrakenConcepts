@@ -21,6 +21,10 @@ abilityObject.onUseAbility = function(player, target, ability)
     dmg = dmg * resist
     dmg = utils.stoneskin(target, dmg)
 
+    if player:hasStatusEffect(xi.effect.WEAKNESS) then
+        player:delStatusEffect(xi.effect.WEAKNESS)
+    end
+
     target:takeDamage(dmg, player, xi.attackType.SPECIAL, xi.damageType.ELEMENTAL)
     player:setLocalVar('MijinGakure', 1)
     player:setHP(0)

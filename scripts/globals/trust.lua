@@ -191,7 +191,7 @@ local poolIDToMessagePageOffset =
     [6019] = 112, -- Shantotto II
 }
 
--- TODO: handle Dynamis Divergence, Omen, etc that are not "battlefields" but have a trust upper limit.
+-- TODO: handle Dynamis Divergence, Omen, etc that are not 'battlefields' but have a trust upper limit.
 xi.trust.checkBattlefieldTrustCount = function(caster)
     local battlefield = caster:getBattlefield()
     if battlefield then

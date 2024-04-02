@@ -241,6 +241,7 @@ namespace luautils
     int32 OnItemUnequip(CBaseEntity* PUser, CItem* PItem);
     int32 CheckForGearSet(CBaseEntity* PTarget);
 
+    int32 OnCastStarting(CBattleEntity* PCaster, CSpell* PSpell); // triggered just before starting to cast a spell (modify cast time etc.) 
     int32 OnMagicCastingCheck(CBaseEntity* PChar, CBaseEntity* PTarget, CSpell* PSpell);
     int32 OnSpellCast(CBattleEntity* PCaster, CBattleEntity* PTarget, CSpell* PSpell);
     int32 OnSpellPrecast(CBattleEntity* PCaster, CSpell* PSpell);
@@ -318,6 +319,8 @@ namespace luautils
     uint32 GetMobRespawnTime(uint32 mobid);
     void   DisallowRespawn(uint32 mobid, bool allowRespawn);
     void   UpdateNMSpawnPoint(uint32 mobid);
+    bool   CheckNMSpawnPoint(uint32 mobid); // Check to see if NM has extra spawn points
+
 
     std::string GetServerMessage(uint8 language); // Get the message to be delivered to player on first zone in of a session
 

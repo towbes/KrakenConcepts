@@ -14,6 +14,7 @@ entity.onMobSpawn = function(mob)
 
     -- Used with HPP to keep track of the number of Sandpits
     mob:setLocalVar('Sandpits', 0)
+    mob:setRoamFlags(xi.roamFlag.SCRIPTED)
 end
 
 -- Reset restHP when re-engaging after a sandpit
@@ -21,6 +22,17 @@ entity.onMobEngage = function(mob, target)
     if mob:getMobMod(xi.mobMod.NO_REST) == 1 then
         mob:setMobMod(xi.mobMod.NO_MOVE, 0)
         mob:setMobMod(xi.mobMod.NO_REST, 0)
+    end
+    local engaged = mob:getLocalVar('engaged')
+    if engaged == 0 then
+        for _, v in pairs(mob:getBattlefield():getPlayers()) do
+            v:messageSpecial(ID.text.GIANT_ANTLION)
+        end
+        mob:setLocalVar('engaged', 1)
+    else
+        for _, v in pairs(mob:getBattlefield():getPlayers()) do
+            v:messageSpecial(ID.text.ANTLION_ESCAPED)
+        end
     end
 end
 
@@ -40,7 +52,7 @@ entity.onMobFight = function(mob, target)
             tuchulcha:setMobMod(xi.mobMod.NO_REST, 1)
             local posIndex = tuchulcha:getLocalVar('sand_pit' .. tuchulcha:getLocalVar('Sandpits'))
             local coords   = ID.sheepInAntlionsClothing[tuchulcha:getBattlefield():getArea()].ant_positions[posIndex]
-
+            tuchulcha:setSpawn(coords[1],coords[2],coords[3],0)
             tuchulcha:setPos(coords)
             local players = tuchulcha:getBattlefield():getPlayers()
             for _, char in pairs(players) do
@@ -55,13 +67,18 @@ entity.onMobFight = function(mob, target)
 end
 
 entity.onMobDeath = function(mob, player, optParams)
-    -- Used to grab the mob IDs
     -- Despawn the hunters
     if optParams.isKiller then
         local bfID = mob:getBattlefield():getArea()
         DespawnMob(ID.sheepInAntlionsClothing[bfID].SWIFT_HUNTER_ID)
         DespawnMob(ID.sheepInAntlionsClothing[bfID].SHREWD_HUNTER_ID)
         DespawnMob(ID.sheepInAntlionsClothing[bfID].ARMORED_HUNTER_ID)
+        
+        -- Armoury Crate drops at Tuchulchua's feet
+        GetNPCByID(mob:getID()+4):setPos(mob:getXPos(), mob:getYPos(), mob:getZPos())
+        for _, v in pairs(mob:getBattlefield():getPlayers()) do
+            v:messageSpecial(ID.text.TUCHCULA_CRATE)
+        end
     end
 end
 

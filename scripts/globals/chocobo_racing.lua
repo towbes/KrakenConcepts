@@ -75,7 +75,7 @@ xi.chocoboRacing.onEventUpdate = function(player, csid, option, npc)
     end
 end
 
-xi.chocoboRacing.onEventFinish = function(player, csid, option, npc)
+xi.chocoboRacing.onEventFinish = function(player, csid, option)
     debug(player, 'finish', csid, option)
     if csid == 210 and option == 17 then
         debug(player, 'Hand out winnings')

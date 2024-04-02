@@ -32,6 +32,17 @@ itemObject.onItemUse = function(target, player)
 
     player:messageText(player, ID.text.BEGINS_TO_MELT)
 
+    target:timer(7140, function(mob)
+        if mob:isAlive() then
+            player:messageText(player, ID.text.LARGE_STEAM)
+        end
+    end)
+    target:timer(21000, function(mob)
+        if mob:isAlive() then
+            player:messageText(player, ID.text.SHOOK_SALT)
+        end
+    end)
+
     if salt == 0 then -- random time until shaken off
         target:setLocalVar('delayed', os.time() + 20)
         target:setLocalVar('cooldown', os.time() + math.random(15, 20))

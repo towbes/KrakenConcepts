@@ -14,6 +14,11 @@ mobskillObject.onMobSkillCheck = function(target, mob, skill)
 end
 
 mobskillObject.onMobWeaponSkill = function(target, mob, skill)
+    if mob:getFamily() == 271 then -- Jailer of Love, uses only animation.
+        skill:setMsg(xi.msg.NONE)
+        return 0
+    end
+    
     local numhits = 1
     local accmod = 2
     local dmgmod = 2.7

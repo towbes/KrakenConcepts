@@ -41,6 +41,12 @@ spellObject.onSpellCast = function(caster, target, spell)
         dmg = 0
     end
 
+    -- Upyri: ID 4105
+    if target:isMob() and (target:isUndead() or target:getPool() == 4105 or target:hasStatusEffect(xi.effect.CURSE_II)) then
+        spell:setMsg(xi.msg.basic.MAGIC_NO_EFFECT) -- No effect
+        return 0
+    end
+
     --add in final adjustments and deal damage
     dmg = finalMagicAdjustments(caster, target, spell, dmg)
 
@@ -55,7 +61,10 @@ spellObject.onSpellCast = function(caster, target, spell)
     end
 
     caster:addHP(dmg)
+    caster:delStatusEffect(xi.effect.NETHER_VOID)
+    caster:delStatusEffectSilent(xi.effect.MANAWELL)
     spell:setMsg(xi.msg.basic.MAGIC_DRAIN_HP) --change msg to 'xxx hp drained from the yyyy.'
+
     return dmg
 end
 

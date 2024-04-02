@@ -24,7 +24,7 @@ spellObject.onSpellCast = function(caster, target, spell)
     params.attackType = xi.attackType.MAGICAL
     params.damageType = xi.damageType.WIND
     params.attribute = xi.mod.CHR
-    params.multiplier = 2.0
+    params.multiplier = 3 -- Default: 2.5
     params.tMultiplier = 1.0
     params.duppercap = 56
     params.str_wsc = 0.0
@@ -33,7 +33,7 @@ spellObject.onSpellCast = function(caster, target, spell)
     params.agi_wsc = 0.0
     params.int_wsc = 0.0
     params.mnd_wsc = 0.0
-    params.chr_wsc = 0.3
+    params.chr_wsc = 0.5 -- 0.3
 
     params.addedEffect = xi.effect.WEIGHT
     local power = 25

@@ -46,12 +46,15 @@ public:
     uint16 getID();
     int16  getParam();
     bool   isAoE();
+    void   setAoE(uint8 aoe);
     bool   isConal();
     bool   isSingle();
     bool   hasMissMsg();
     void   setMsg(uint16 message);
     uint16 getMsg();
     uint16 getTotalTargets();
+    void   setAnimationID(uint16 animID);
+    void   setKnockBack(uint8 knockback);
 
     bool operator==(const CLuaMobSkill& other) const
     {

@@ -43,6 +43,7 @@ xi.magic.barSpell            = { xi.effect.BARFIRE,            xi.effect.BARBLIZ
 xi.magic.dayWeak             = { xi.day.WATERSDAY,             xi.day.FIRESDAY,             xi.day.ICEDAY,                 xi.day.WINDSDAY,               xi.day.EARTHSDAY,                  xi.day.LIGHTNINGDAY,            xi.day.DARKSDAY,            xi.day.LIGHTSDAY           }
 xi.magic.singleWeatherWeak   = { xi.weather.RAIN,              xi.weather.HOT_SPELL,        xi.weather.SNOW,               xi.weather.WIND,               xi.weather.DUST_STORM,             xi.weather.THUNDER,             xi.weather.GLOOM,           xi.weather.AURORAS         }
 xi.magic.doubleWeatherWeak   = { xi.weather.SQUALL,            xi.weather.HEAT_WAVE,        xi.weather.BLIZZARDS,          xi.weather.GALES,              xi.weather.SAND_STORM,             xi.weather.THUNDERSTORMS,       xi.weather.DARKNESS,        xi.weather.STELLAR_GLARE   }
+local spellAtt               = { xi.mod.FIREATT,               xi.mod.ICEATT,               xi.mod.WINDATT,                xi.mod.EARTHATT,               xi.mod.THUNDERATT,                 xi.mod.WATERATT,                xi.mod.LIGHTATT,            xi.mod.DARKATT }
 
 local elementDescendant =
 {
@@ -95,6 +96,7 @@ local function getSpellBonusAcc(caster, target, spell, params)
     local spellGroup     = spell:getSpellGroup()
     local element        = spell:getElement()
     local casterJob      = caster:getMainJob()
+    local casterSubJob   = caster:getSubJob()
 
     if
         caster:hasStatusEffect(xi.effect.ALTRUISM) and
@@ -148,77 +150,77 @@ local function getSpellBonusAcc(caster, target, spell, params)
         end
     end
 
-    switch(casterJob): caseof
-    {
-        [xi.job.WHM] = function()
-            magicAccBonus = magicAccBonus + caster:getJobPointLevel(xi.jp.WHM_MAGIC_ACC_BONUS)
-        end,
+    if casterJob == xi.job.WHM then
+        magicAccBonus = magicAccBonus + caster:getJobPointLevel(xi.jp.WHM_MAGIC_ACC_BONUS)
+    end
 
-        [xi.job.BLM] = function()
-            -- Add MACC for BLM Elemental Magic Merits
-            if skill == xi.skill.ELEMENTAL_MAGIC then
-                magicAccBonus = magicAccBonus + caster:getMerit(xi.merit.ELEMENTAL_MAGIC_ACCURACY)
-            end
+    if casterJob == xi.job.BLM or casterSubJob == xi.job.BLM then
+        -- Add MACC for BLM Elemental Magic Merits
+        if skill == xi.skill.ELEMENTAL_MAGIC then
+            magicAccBonus = magicAccBonus + caster:getMerit(xi.merit.ELEMENTAL_MAGIC_ACCURACY)
+        end
+        
+        if casterJob == xi.job.BLM then
+        -- BLM Job Point: MACC Bonus +1
+        magicAccBonus = magicAccBonus + caster:getJobPointLevel(xi.jp.BLM_MAGIC_ACC_BONUS)
+        end
+    end
 
-            -- BLM Job Point: MACC Bonus +1
-            magicAccBonus = magicAccBonus + caster:getJobPointLevel(xi.jp.BLM_MAGIC_ACC_BONUS)
-        end,
+    if casterJob == xi.job.DRK or casterSubJob == xi.job.DRK then
+        -- Add MACC for Dark Seal
+        if
+            skill == xi.skill.DARK_MAGIC and
+            caster:hasStatusEffect(xi.effect.DARK_SEAL)
+        then
+            magicAccBonus = magicAccBonus + 256
+        end
+    end
 
-        [xi.job.DRK] = function()
-            -- Add MACC for Dark Seal
-            if
-                skill == xi.skill.DARK_MAGIC and
-                caster:hasStatusEffect(xi.effect.DARK_SEAL)
-            then
-                magicAccBonus = magicAccBonus + 256
-            end
-        end,
+    if casterJob == xi.job.RDM or casterSubJob == xi.job.RDM then
+        -- Add MACC for RDM group 1 merits
+        if element >= xi.element.FIRE and element <= xi.element.WATER then
+            magicAccBonus = magicAccBonus + caster:getMerit(rdmMerit[element])
+        end
+        -- RDM Job Point: During saboteur, Enfeebling MACC +2
+        if
+            skill == xi.skill.ENFEEBLING_MAGIC and
+            caster:hasStatusEffect(xi.effect.SABOTEUR) and
+            casterJob == xi.job.RDM
+        then
+            local jpValue = caster:getJobPointLevel(xi.jp.SABOTEUR_EFFECT)
 
-        [xi.job.RDM] = function()
-            -- Add MACC for RDM group 1 merits
-            if element >= xi.element.FIRE and element <= xi.element.WATER then
-                magicAccBonus = magicAccBonus + caster:getMerit(rdmMerit[element])
-            end
+            magicAccBonus = magicAccBonus + (jpValue * 2)
+        end
+        if casterJob == xi.job.RDM then
+        -- RDM Job Point: Magic Accuracy Bonus, All MACC + 1
+        magicAccBonus = magicAccBonus + caster:getJobPointLevel(xi.jp.RDM_MAGIC_ACC_BONUS)
+        end
+    end
 
-            -- RDM Job Point: During saboteur, Enfeebling MACC +2
-            if
-                skill == xi.skill.ENFEEBLING_MAGIC and
-                caster:hasStatusEffect(xi.effect.SABOTEUR)
-            then
-                local jpValue = caster:getJobPointLevel(xi.jp.SABOTEUR_EFFECT)
+    if casterJob == xi.job.NIN then
+        -- NIN Job Point: Ninjitsu Accuracy Bonus
+        if skill == xi.skill.NINJUTSU then
+            magicAccBonus = magicAccBonus + caster:getJobPointLevel(xi.jp.NINJITSU_ACC_BONUS)
+        end
+    end
 
-                magicAccBonus = magicAccBonus + (jpValue * 2)
-            end
+    if casterJob == xi.job.BLU or casterSubJob == xi.job.BLU then
+        -- BLU MACC merits - nuke acc is handled in bluemagic.lua
+        if skill == xi.skill.BLUE_MAGIC then
+            magicAccBonus = magicAccBonus + caster:getMerit(xi.merit.MAGICAL_ACCURACY)
+        end
+    end
 
-            -- RDM Job Point: Magic Accuracy Bonus, All MACC + 1
-            magicAccBonus = magicAccBonus + caster:getJobPointLevel(xi.jp.RDM_MAGIC_ACC_BONUS)
-        end,
+    if casterJob == xi.job.SCH then
+        if
+            (spellGroup == xi.magic.spellGroup.WHITE and caster:hasStatusEffect(xi.effect.PARSIMONY)) or
+            (spellGroup == xi.magic.spellGroup.BLACK and caster:hasStatusEffect(xi.effect.PENURY))
+        then
+            local jpValue = caster:getJobPointLevel(xi.jp.STRATEGEM_EFFECT_I)
 
-        [xi.job.NIN] = function()
-            -- NIN Job Point: Ninjitsu Accuracy Bonus
-            if skill == xi.skill.NINJUTSU then
-                magicAccBonus = magicAccBonus + caster:getJobPointLevel(xi.jp.NINJITSU_ACC_BONUS)
-            end
-        end,
-
-        [xi.job.BLU] = function()
-            -- BLU MACC merits - nuke acc is handled in bluemagic.lua
-            if skill == xi.skill.BLUE_MAGIC then
-                magicAccBonus = magicAccBonus + caster:getMerit(xi.merit.MAGICAL_ACCURACY)
-            end
-        end,
-
-        [xi.job.SCH] = function()
-            if
-                (spellGroup == xi.magic.spellGroup.WHITE and caster:hasStatusEffect(xi.effect.PARSIMONY)) or
-                (spellGroup == xi.magic.spellGroup.BLACK and caster:hasStatusEffect(xi.effect.PENURY))
-            then
-                local jpValue = caster:getJobPointLevel(xi.jp.STRATEGEM_EFFECT_I)
-
-                magicAccBonus = magicAccBonus + jpValue
-            end
-        end,
-    }
+            magicAccBonus = magicAccBonus + jpValue
+        end
+    end
 
     return magicAccBonus
 end
@@ -249,6 +251,18 @@ local function calculateMagicBurst(caster, spell, target, params)
         end
 
         caster:delStatusEffectSilent(xi.effect.BURST_AFFINITY)
+    end
+
+    if
+        spell and
+        spell:getSpellGroup() == xi.magic.spellGroup.BLACK
+    then
+        if
+            not caster:hasStatusEffect(xi.effect.IMMANENCE)
+        then
+            return burst
+        end
+        caster:delStatusEffectSilent(xi.effect.IMMANENCE)
     end
 
     -- Obtain first multiplier from gear, atma and job traits
@@ -439,6 +453,8 @@ function getCureFinal(caster, spell, basecure, minCure, isBlueMagic)
         dayWeatherBonus = 1.4
     end
 
+    caster:delStatusEffectSilent(xi.effect.MANAWELL)
+    
     local final = math.floor(math.floor(math.floor(math.floor(basecure) * potency) * dayWeatherBonus) * rapture) * dSeal
     return final
 end
@@ -478,7 +494,7 @@ function applyResistanceEffect(caster, target, spell, params)
     local effect = params.effect
     local family = spell:getSpellFamily()
 
-    if effect ~= nil then -- Dispel's script doesn't have an "effect" to send here, nor should it.
+    if effect ~= nil then -- Dispel's script doesn't have an 'effect' to send here, nor should it.
         -- If Stymie is active, as long as the mob is not immune then the effect is not resisted
         if
             skill == xi.skill.ENFEEBLING_MAGIC and
@@ -544,7 +560,7 @@ function applyResistanceAddEffect(player, target, element, bonus)
     return getMagicResist(p)
 end
 
-function getMagicHitRate(caster, target, skillType, element, percentBonus, bonusAcc)
+function getMagicHitRate(caster, target, skillType, element, percentBonus, bonusAcc) -- Called by Weaponskills & Mobskills
     -- resist everything if real magic shield is active (see effects/magic_shield)
     if target:hasStatusEffect(xi.effect.MAGIC_SHIELD) then
         local magicshieldsub = target:getStatusEffect(xi.effect.MAGIC_SHIELD)
@@ -583,8 +599,33 @@ function getMagicHitRate(caster, target, skillType, element, percentBonus, bonus
 
     magicacc = magicacc + caster:getMerit(xi.merit.NIN_MAGIC_ACCURACY)
 
+
+    -- Cactuar BLM Merits
+    magicacc = magicacc + caster:getMerit(xi.merit.ELEMENTAL_MAGIC_ACCURACY)
+
+    -- Cactuar RDM Merits
+    if element == xi.element.FIRE then
+        magicacc = magicacc + caster:getMerit(xi.merit.FIRE_MAGIC_ACCURACY)
+    elseif element == xi.element.ICE then
+        magicacc = magicacc + caster:getMerit(xi.merit.ICE_MAGIC_ACCURACY)
+    elseif element == xi.element.WIND then
+        magicacc = magicacc + caster:getMerit(xi.merit.WIND_MAGIC_ACCURACY)
+    elseif element == xi.element.EARTH then
+        magicacc = magicacc + caster:getMerit(xi.merit.WIND_MAGIC_ACCURACY)
+    elseif element == xi.element.THUNDER then
+        magicacc = magicacc + caster:getMerit(xi.merit.LIGHTNING_MAGIC_ACCURACY)
+    elseif element == xi.element.WATER then
+        magicacc = magicacc + caster:getMerit(xi.merit.WATER_MAGIC_ACCURACY)
+    end
+
     -- Base magic evasion (base magic evasion plus resistances(players), plus elemental defense(mobs)
     local magiceva = target:getMod(xi.mod.MEVA) + resMod
+
+    -- Apply bonus macc from TandemStrike
+    local tandemBonus = xi.magic.handleTandemStrikeBonus(caster)
+    if tandemBonus > 0 then
+        magicacc = magicacc + tandemBonus
+    end
 
     magicacc = magicacc + bonusAcc
 
@@ -706,7 +747,19 @@ function finalMagicAdjustments(caster, target, spell, dmg)
     -- handle one for all
     dmg = utils.oneforall(target, dmg)
 
-    --handling stoneskin
+    -- handling magic stoneskin - Umeboshi
+    local magicSS = target:getMod(xi.mod.MAGIC_STONESKIN)
+    if magicSS > 0 then
+        if dmg >= magicSS then
+            target:setMod(xi.mod.MAGIC_STONESKIN, 0)
+            dmg = dmg - magicSS
+        else
+            target:setMod(xi.mod.MAGIC_STONESKIN, magicSS - dmg)
+            dmg = 0
+        end
+    end
+
+    -- handling stoneskin
     dmg = utils.stoneskin(target, dmg)
     dmg = utils.clamp(dmg, -99999, 99999)
 
@@ -738,6 +791,18 @@ function finalMagicNonSpellAdjustments(caster, target, ele, dmg)
 
     -- handle one for all
     dmg = utils.oneforall(target, dmg)
+
+    -- handling magic stoneskin - Umeboshi
+    local magicSS = target:getMod(xi.mod.MAGIC_STONESKIN)
+    if magicSS > 0 then
+        if dmg >= magicSS then
+            target:setMod(xi.mod.MAGIC_STONESKIN, 0)
+            dmg = dmg - magicSS
+        else
+            target:setMod(xi.mod.MAGIC_STONESKIN, magicSS - dmg)
+            dmg = 0
+        end
+    end
 
     -- handling stoneskin
     dmg = utils.stoneskin(target, dmg)
@@ -778,6 +843,8 @@ function addBonuses(caster, spell, target, dmg, params)
     local dayWeatherBonus = 1.00
     local weather = caster:getWeather()
     local casterJob = caster:getMainJob()
+    local casterSubJob = caster:getSubJob()
+
 
     params = params or {}
     params.bonusmab = params.bonusmab or 0
@@ -826,21 +893,30 @@ function addBonuses(caster, spell, target, dmg, params)
 
     local burst = calculateMagicBurst(caster, spell, target, params)
 
-    if burst > 1.0 then
-        spell:setMsg(spell:getMagicBurstMessage()) -- "Magic Burst!"
+    if burst > 1.0 and not caster:hasStatusEffect(xi.effect.IMMANENCE) then
+        spell:setMsg(spell:getMagicBurstMessage()) -- 'Magic Burst!'
 
         caster:triggerRoeEvent(xi.roeTrigger.MAGIC_BURST)
     end
 
-    dmg = math.floor(dmg * burst)
+    if not caster:hasStatusEffect(xi.effect.IMMANENCE) then
+        dmg = math.floor(dmg * burst)
+    else
+        dmg = math.floor(dmg)
+    end
+
     local mabbonus
     local spellId = spell:getID()
 
     if spellId >= 245 and spellId <= 248 then -- Drain/Aspir (II)
-        mabbonus = 1 + caster:getMod(xi.mod.ENH_DRAIN_ASPIR) / 100
+        mabbonus = 1 + (caster:getMod(xi.mod.ENH_DRAIN_ASPIR) / 100)
 
         if spellId == 247 or spellId == 248 then
-            mabbonus = mabbonus + caster:getMerit(xi.merit.ASPIR_ABSORPTION_AMOUNT) / 100
+            mabbonus = mabbonus + caster:getMerit(xi.merit.ASPIR_ABSORPTION_AMOUNT) + (caster:getMod(xi.mod.ENH_ASPIR) / 100)
+        end
+
+        if spellId == 245 or spellId == 246 then
+            mabbonus = mabbonus + (caster:getMod(xi.mod.ENH_DRAIN) / 100)
         end
     else
         local mab = caster:getMod(xi.mod.MATT) + params.bonusmab
@@ -931,6 +1007,8 @@ function addBonusesAbility(caster, ele, target, dmg, params)
 
     local mab = 1
     local mdefBarBonus = 0
+    local eleATT = 0
+
     if
         ele >= xi.element.FIRE and
         ele <= xi.element.WATER and
@@ -939,10 +1017,28 @@ function addBonusesAbility(caster, ele, target, dmg, params)
         mdefBarBonus = target:getStatusEffect(xi.magic.barSpell[ele]):getSubPower()
     end
 
+    if ele == xi.element.FIRE then
+        eleATT = eleATT + caster:getMod(xi.mod.FIREATT) + caster:getMerit(xi.merit.FIRE_MAGIC_POTENCY)
+    elseif ele == xi.element.ICE then
+        eleATT = eleATT + caster:getMod(xi.mod.ICEATT) + caster:getMerit(xi.merit.ICE_MAGIC_POTENCY)
+    elseif ele == xi.element.WIND then
+        eleATT = eleATT + caster:getMod(xi.mod.WINDATT) + caster:getMerit(xi.merit.WIND_MAGIC_POTENCY)
+    elseif ele == xi.element.EARTH then
+        eleATT = eleATT + caster:getMod(xi.mod.EARTHATT) + caster:getMerit(xi.merit.WIND_MAGIC_POTENCY)
+    elseif ele == xi.element.THUNDER then
+        eleATT = eleATT + caster:getMod(xi.mod.THUNDERATT) + caster:getMerit(xi.merit.LIGHTNING_MAGIC_POTENCY)
+    elseif ele == xi.element.WATER then
+        eleATT = eleATT + caster:getMod(xi.mod.WATERATT) + caster:getMerit(xi.merit.WATER_MAGIC_POTENCY)
+    elseif ele == xi.element.LIGHT then
+        eleATT = eleATT + caster:getMod(xi.mod.LIGHTATT)
+    elseif ele == xi.element.DARK then
+        eleATT = eleATT + caster:getMod(xi.mod.DARKATT)
+    end
+
     if params ~= nil and params.bonusmab ~= nil and params.includemab then
-        mab = (100 + caster:getMod(xi.mod.MATT) + params.bonusmab) / (100 + target:getMod(xi.mod.MDEF) + mdefBarBonus)
+        mab = (100 + caster:getMod(xi.mod.MATT) + params.bonusmab + eleATT) / (100 + target:getMod(xi.mod.MDEF) + mdefBarBonus)
     elseif params == nil or (params ~= nil and params.includemab) then
-        mab = (100 + caster:getMod(xi.mod.MATT)) / (100 + target:getMod(xi.mod.MDEF) + mdefBarBonus)
+        mab = (100 + caster:getMod(xi.mod.MATT) + eleATT) / (100 + target:getMod(xi.mod.MDEF) + mdefBarBonus)
     end
 
     if mab < 0 then
@@ -1026,14 +1122,18 @@ end
 
 function calculateDuration(duration, magicSkill, spellGroup, caster, target, useComposure)
     local casterJob = caster:getMainJob()
+    local casterSubJob = caster:getSubJob()
 
     if magicSkill == xi.skill.ENHANCING_MAGIC then -- Enhancing Magic
         -- Gear mods
         duration = duration + duration * caster:getMod(xi.mod.ENH_MAGIC_DURATION) / 100
 
         -- prior according to bg-wiki
-        if casterJob == xi.job.RDM then
-            duration = duration + caster:getMerit(xi.merit.ENHANCING_MAGIC_DURATION) + caster:getJobPointLevel(xi.jp.ENHANCING_DURATION)
+        if casterJob == xi.job.RDM or casterSubJob == xi.job.RDM then
+            duration = duration + caster:getMerit(xi.merit.ENHANCING_MAGIC_DURATION)
+            if casterJob == xi.job.RDM then
+                duration = duration + caster:getJobPointLevel(xi.jp.ENHANCING_DURATION)
+            end
         end
 
         -- Default is true
@@ -1065,15 +1165,17 @@ function calculateDuration(duration, magicSkill, spellGroup, caster, target, use
         end
 
         -- After Saboteur according to bg-wiki
-        if casterJob == xi.job.RDM then
+        if casterJob == xi.job.RDM or casterSubJob == xi.job.RDM then
             -- RDM Merit: Enfeebling Magic Duration
             duration = duration + caster:getMerit(xi.merit.ENFEEBLING_MAGIC_DURATION)
 
+            if casterJob == xi.job.RDM then
             -- RDM Job Point: Enfeebling Magic Duration
             duration = duration + caster:getJobPointLevel(xi.jp.ENFEEBLE_DURATION)
+            end
 
             -- RDM Job Point: Stymie effect
-            if caster:hasStatusEffect(xi.effect.STYMIE) then
+            if caster:hasStatusEffect(xi.effect.STYMIE) and casterJob == xi.job.RDM then
                 duration = duration + caster:getJobPointLevel(xi.jp.STYMIE_EFFECT)
             end
         end
@@ -1082,6 +1184,23 @@ function calculateDuration(duration, magicSkill, spellGroup, caster, target, use
     end
 
     return math.floor(duration)
+end
+
+xi.magic.handleTandemStrikeBonus = function(caster)
+    if
+        caster:getMod(xi.mod.TANDEM_STRIKE) > 0 and
+        caster:isTandemValid()
+    then
+        return caster:getMod(xi.mod.TANDEM_STRIKE)
+    elseif
+        (caster:getMaster() ~= nil and
+        caster:getMaster():getMod(xi.mod.TANDEM_STRIKE) > 0) and
+        caster:isTandemValid()
+    then
+        return caster:getMaster():getMod(xi.mod.TANDEM_STRIKE)
+    end
+
+    return 0
 end
 
 xi.ma = xi.magic

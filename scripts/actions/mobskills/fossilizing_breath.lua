@@ -17,8 +17,13 @@ mobskillObject.onMobSkillCheck = function(target, mob, skill)
             return 1
         end
     end
+    
+    if target:isBehind(mob, 48) then
+        return 1
+    else
+        return 0
+    end
 
-    return 0
 end
 
 mobskillObject.onMobWeaponSkill = function(target, mob, skill)

@@ -46,7 +46,9 @@ xi.survivalGuide.onTrigger = function(player)
     local guide         = survival.survivalGuides[tableIndex]
     local expansions    = 3 + (4 * xi.settings.main.ENABLE_COP) + (8 * xi.settings.main.ENABLE_TOAU) + (16 * xi.settings.main.ENABLE_WOTG) + (2048 * xi.settings.main.ENABLE_SOA)
 
-    if guide then
+    player:printToPlayer('Survival guides are not enabled!')
+
+--[[    if guide then
         -- If this survival guide hasn't been registered yet (saved to database) do that now.
         local foundRegisteredGuide = checkForRegisteredSurvivalGuide(player, guide)
 
@@ -63,7 +65,7 @@ xi.survivalGuide.onTrigger = function(player)
             end
 
             if player:hasKeyItem(xi.ki.RHAPSODY_IN_WHITE) then
-                -- "Rhapsody in White" key item reduces teleport fee by 80%
+                -- 'Rhapsody in White' key item reduces teleport fee by 80%
                 param = bit.bor(param, 0x2000)
             end
 
@@ -81,7 +83,7 @@ xi.survivalGuide.onTrigger = function(player)
         end
     else
         player:printToPlayer('Survival guides are not enabled!')
-    end
+    end --]]
 end
 
 xi.survivalGuide.onEventUpdate = function(player, csid, option, npc)
@@ -152,7 +154,7 @@ xi.survivalGuide.onEventFinish = function(player, eventId, option, npc)
                 local teleportCostTabs = 50
                 local canTeleport      = false
 
-                -- If the player has the "Rhapsody in White" KI, the cost is 10% of original gil or 20% of original tabs.
+                -- If the player has the 'Rhapsody in White' KI, the cost is 10% of original gil or 20% of original tabs.
                 -- GIL: 1000 -> 100
                 -- TABS: 50 -> 10
                 if player:hasKeyItem(xi.ki.RHAPSODY_IN_WHITE) then

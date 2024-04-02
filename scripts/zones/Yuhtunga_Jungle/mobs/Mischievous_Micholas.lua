@@ -4,6 +4,10 @@
 -----------------------------------
 local entity = {}
 
+entity.onMobSpawn = function(mob)
+    mob:setMod(xi.mod.DOUBLE_ATTACK, 75)
+end
+
 entity.onMobDeath = function(mob, player, optParams)
     xi.hunts.checkHunt(mob, player, 362)
     xi.regime.checkRegime(player, mob, 126, 1, xi.regime.type.FIELDS)

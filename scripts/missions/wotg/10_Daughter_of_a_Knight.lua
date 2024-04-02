@@ -88,7 +88,7 @@ mission.sections =
     },
 
     -- 2. After the cutscene, go to the Maiden's Spring at (E-6) in Jugner Forest (S),
-    -- and trade the Cernunnos Bulb to the "Humus-rich Earth." The message "You plant a Cernunnos Bulb."
+    -- and trade the Cernunnos Bulb to the 'Humus-rich Earth.' The message 'You plant a Cernunnos Bulb.'
     -- will display in the chat log.
     {
         check = function(player, currentMission, missionStatus, vars)
@@ -115,7 +115,7 @@ mission.sections =
         },
     },
 
-    -- 3. Go to present day Jugner Forest at the same spot and examine the "Humus-rich Earth" for a cutscene.
+    -- 3. Go to present day Jugner Forest at the same spot and examine the 'Humus-rich Earth' for a cutscene.
     {
         check = function(player, currentMission, missionStatus, vars)
             return currentMission == mission.missionId and missionStatus == 3
@@ -160,7 +160,7 @@ mission.sections =
     },
 
     -- 4. Examine it again to fight the Cernunnos NM.
-    --    Once Cernunnos is defeated, check the "Humus-rich Earth" again for a cutscene and Cernunnos Resin.
+    --    Once Cernunnos is defeated, check the 'Humus-rich Earth' again for a cutscene and Cernunnos Resin.
     {
         check = function(player, currentMission, missionStatus, vars)
             return currentMission == mission.missionId and missionStatus == 4

@@ -137,7 +137,7 @@ quest.sections =
     -- Section: Quest complete.
     {
         check = function(player, status, vars)
-            -- Event 552 is a one-time-only event that can occur after completing "Luck of the Draw"
+            -- Event 552 is a one-time-only event that can occur after completing 'Luck of the Draw'
             -- but before finishing Equipped for all Occasions.
             -- This charvar is cleaned up on complete of 'Equipped for all Occasions' when quest:complete() is called.
 

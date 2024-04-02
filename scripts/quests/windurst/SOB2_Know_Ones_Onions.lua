@@ -3,26 +3,26 @@
 --
 -- Kohlo-Lakolo, !pos -26.8 -6 190 240
 -----------------------------------
+local eldiemeID = zones[xi.zone.PORT_WINDURST]
 
 local quest = Quest:new(xi.quest.log_id.WINDURST, xi.quest.id.windurst.KNOW_ONES_ONIONS)
 
 quest.reward =
 {
-    fame     = 10,
+    fame     = 15,
     fameArea = xi.quest.fame_area.WINDURST,
-    item     = xi.item.SCROLL_OF_BLAZE_SPIKES,
     title    = xi.title.SOB_SUPER_HERO,
 }
 
 -- NOTE
--- This quest has a peculiarity. You can "miss" the events of the quest by arriving "late".
+-- This quest has a peculiarity. You can 'miss' the events of the quest by arriving 'late'.
 -- You can be late/meet the cutoff mid-quest or start already late.
 -- This effectively means the quest branches off.
 
 -- The cutoff/timer/event that makes it change is currently unkonwn.
 
 -- For now, and becouse of the in-game lore, it's going to be assumed that the cutoff is based on Windurst rank.
--- There is a testimony that "supports" this theory, stating that the cutoff is based on "Old Ring" Key item obtention.
+-- There is a testimony that 'supports' this theory, stating that the cutoff is based on 'Old Ring' Key item obtention.
 -- Old Ring is a temporal KI, so checking for it wouldn't be a lasting solution.
 
 quest.sections =
@@ -85,7 +85,9 @@ quest.sections =
                 end,
 
                 onTrade = function(player, npc, trade)
-                    if npcUtil.tradeHasExactly(trade, { { xi.item.WILD_ONION, 4 } }) then
+                    if player:getFreeSlotsCount() == 0 then
+                        return mission:messageSpecial(ID.text.ITEM_CANNOT_BE_OBTAINED, xi.item.SCROLL_OF_BLAZE_SPIKES)
+                    elseif npcUtil.tradeHasExactly(trade, { { xi.item.WILD_ONION, 4 } }) then
                         return quest:progressEvent(398, 0, xi.item.WILD_ONION) -- Trade in time. Quest goes on.
                     end
                 end,
@@ -102,6 +104,7 @@ quest.sections =
                 [398] = function(player, csid, option, npc)
                     player:confirmTrade()
                     quest:setVar(player, 'Prog', 2)
+                    npcUtil.giveItem(player, xi.item.SCROLL_OF_BLAZE_SPIKES)
                 end,
             },
         },
@@ -212,6 +215,7 @@ quest.sections =
                 [390] = function(player, csid, option, npc)
                     if quest:complete(player) then
                         player:confirmTrade()
+                        npcUtil.giveItem(player, xi.item.SCROLL_OF_BLAZE_SPIKES)
                         player:setLocalVar('[2][41]mustZone', 1)
                     end
                 end,

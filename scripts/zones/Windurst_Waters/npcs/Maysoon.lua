@@ -16,7 +16,7 @@ entity.onTrade = function(player, npc, trade)
             trade:getGil() == 0 and
             trade:getItemCount() == 1
         then
-            player:startEvent(10001) -- Finish quest "Hoist the Jelly, Roger"
+            player:startEvent(10001) -- Finish quest 'Hoist the Jelly, Roger'
         end
     end
 end
@@ -26,7 +26,7 @@ entity.onTrigger = function(player, npc)
     local hoistTheJelly = player:getQuestStatus(xi.quest.log_id.WINDURST, xi.quest.id.windurst.HOIST_THE_JELLY_ROGER)
 
     if cooksPride == QUEST_ACCEPTED and hoistTheJelly == QUEST_AVAILABLE then
-        player:startEvent(10000) -- Start quest "Hoist the Jelly, Roger"
+        player:startEvent(10000) -- Start quest 'Hoist the Jelly, Roger'
     else
         player:startEvent(266) -- Standard dialog
     end

@@ -11,6 +11,15 @@ abilityObject.onPetAbility = function(target, pet, petskill, summoner, action)
     local numhits = 1
     local accmod = 1
     local dmgmod = 12
+    if
+        target:getAllegiance() == 2 or
+        target:getAllegiance() == 3 or
+        target:getAllegiance() == 4 or
+        target:getAllegiance() == 5 or
+        target:getAllegiance() == 6
+    then
+        dmgmod = 6
+    end
     local dmgmodsubsequent = 0
 
     xi.job_utils.summoner.onUseBloodPact(target, petskill, summoner, action)

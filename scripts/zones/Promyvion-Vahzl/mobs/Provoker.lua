@@ -2,6 +2,8 @@
 -- Area: Promyvion - Vahzl
 --   NM: Provoker
 -----------------------------------
+mixins = {require('scripts/mixins/families/empty_terroanima')}
+-----------------------------------
 local entity = {}
 
 entity.onMobInitialize = function(mob)

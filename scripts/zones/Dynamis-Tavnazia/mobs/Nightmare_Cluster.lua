@@ -8,6 +8,7 @@ local entity = {}
 
 entity.onMobSpawn = function(mob)
     mob:setLocalVar('dynamis_currency', 1452)
+    mob:setMod(xi.mod.REGAIN, 200)
 end
 
 entity.onMobDeath = function(mob, player, optParams)

@@ -6,6 +6,7 @@ local entity = {}
 
 entity.onMobInitialize = function(mob)
     mob:setMobMod(xi.mobMod.ADD_EFFECT, 1)
+    mob:setMobMod(xi.mobMod.ALWAYS_AGGRO, 1)
 end
 
 entity.onAdditionalEffect = function(mob, target, damage)

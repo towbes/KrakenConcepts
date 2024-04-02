@@ -7,24 +7,9 @@
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)
-    if player:getQuestStatus(xi.quest.log_id.SANDORIA, xi.quest.id.sandoria.THE_MERCHANT_S_BIDDING) ~= QUEST_AVAILABLE then
-        if
-            trade:hasItemQty(xi.item.RABBIT_HIDE, 3) and
-            trade:getItemCount() == 3
-        then
-            player:startEvent(89)
-        end
-    end
 end
 
 entity.onTrigger = function(player, npc)
-    local theMerchantsBidding = player:getQuestStatus(xi.quest.log_id.SANDORIA, xi.quest.id.sandoria.THE_MERCHANT_S_BIDDING)
-
-    if theMerchantsBidding == QUEST_AVAILABLE then
-        player:startEvent(90)
-    else
-        player:startEvent(88)
-    end
 end
 
 entity.onEventUpdate = function(player, csid, option, npc)

@@ -6,8 +6,8 @@ local ID = zones[xi.zone.IFRITS_CAULDRON]
 local zoneObject = {}
 
 zoneObject.onInitialize = function(zone)
-    UpdateNMSpawnPoint(ID.mob.ASH_DRAGON)
-    GetMobByID(ID.mob.ASH_DRAGON):setRespawnTime(math.random(900, 10800))
+    -- NM Persistence
+    xi.mob.nmTODPersistCache(zone, ID.mob.ASH_DRAGON)
 
     xi.treasure.initZone(zone)
     xi.helm.initZone(zone, xi.helmType.MINING)

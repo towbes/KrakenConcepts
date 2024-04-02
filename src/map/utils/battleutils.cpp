@@ -50,6 +50,7 @@
 #include "charutils.h"
 #include "enmity_container.h"
 #include "entities/battleentity.h"
+#include "entities/fellowentity.h"
 #include "entities/mobentity.h"
 #include "entities/petentity.h"
 #include "entities/trustentity.h"
@@ -63,6 +64,7 @@
 #include "modifier.h"
 #include "notoriety_container.h"
 #include "packets/char_sync.h"
+#include "packets/char_recast.h"
 #include "packets/lock_on.h"
 #include "packets/pet_sync.h"
 #include "packets/position.h"
@@ -396,9 +398,8 @@ namespace battleutils
     {
         return ((PSkill->getSkillLevel() > 0 && PChar->GetSkill(PSkill->getType()) >= PSkill->getSkillLevel() &&
                  (PSkill->getUnlockId() == 0 || charutils::hasLearnedWeaponskill(PChar, PSkill->getUnlockId()))) ||
-                (PSkill->getSkillLevel() == 0 && (PSkill->getUnlockId() == 0 ||
-                                                  (charutils::hasLearnedWeaponskill(PChar, PSkill->getUnlockId()) && PChar->GetMLevel() >= 75)))) &&
-               (PSkill->getJob(PChar->GetMJob()) > 0 || (PSkill->getJob(PChar->GetSJob()) > 0 && !PSkill->mainOnly()));
+                (PSkill->getSkillLevel() == 0 && (PSkill->getUnlockId() == 0 || charutils::hasLearnedWeaponskill(PChar, PSkill->getUnlockId())))) &&
+               (PSkill->getJob(PChar->GetMJob()) > 0 || (PSkill->getJob(PChar->GetSJob()) > 0)); // || !PSkill->mainOnly()));
     }
 
     /************************************************************************
@@ -518,11 +519,26 @@ namespace battleutils
         // Tier 1 enspells have their damaged pre-calculated AT CAST TIME and is stored in Mod::ENSPELL_DMG
         if (Tier == 1)
         {
-            damage      = PAttacker->getMod(Mod::ENSPELL_DMG) + PAttacker->getMod(Mod::ENSPELL_DMG_BONUS);
+            if (PAttacker->StatusEffectContainer->HasStatusEffect(EFFECT_COMPOSURE))
+            {
+                damage = (PAttacker->getMod(Mod::ENSPELL_DMG) * 2);
+            }
+            else
+            {
+                damage = (PAttacker->getMod(Mod::ENSPELL_DMG));
+            }
+
             auto* PChar = dynamic_cast<CCharEntity*>(PAttacker);
             if (PChar)
             {
                 damage += PChar->PMeritPoints->GetMeritValue(MERIT_ENSPELL_DAMAGE, PChar);
+            }
+
+            damage += PAttacker->getMod(Mod::ENSPELL_DMG_BONUS);
+
+            if (damage < 0)
+            {
+                damage = 1;
             }
         }
         else if (Tier == 2)
@@ -534,7 +550,15 @@ namespace battleutils
             {
                 cap = 5 + ((5 * skill) / 100);
             }
-            cap *= 2;
+
+            if (PAttacker->StatusEffectContainer->HasStatusEffect(EFFECT_COMPOSURE))
+            {
+                cap *= 3;
+            }
+            else
+            {
+                cap *= 2;
+            }
 
             if (PAttacker->getMod(Mod::ENSPELL_DMG) > cap)
             {
@@ -552,6 +576,11 @@ namespace battleutils
             }
             damage += PAttacker->getMod(Mod::ENSPELL_DMG_BONUS);
 
+            if (damage < 0)
+            {
+                damage = 1;
+            }
+
             auto* PChar = dynamic_cast<CCharEntity*>(PAttacker);
             if (PChar)
             {
@@ -560,7 +589,14 @@ namespace battleutils
         }
         else if (Tier == 3) // enlight or endark
         {
-            damage = PAttacker->getMod(Mod::ENSPELL_DMG);
+            if (PAttacker->StatusEffectContainer->HasStatusEffect(EFFECT_COMPOSURE))
+            {
+                damage = (PAttacker->getMod(Mod::ENSPELL_DMG) * 2);
+            }
+            else
+            {
+                damage = (PAttacker->getMod(Mod::ENSPELL_DMG));
+            }
 
             if (damage > 1)
             {
@@ -577,8 +613,11 @@ namespace battleutils
                     PAttacker->StatusEffectContainer->DelStatusEffect(EFFECT_ENLIGHT);
                 }
             }
-
             damage += PAttacker->getMod(Mod::ENSPELL_DMG_BONUS);
+            if (damage < 0)
+            {
+                damage = 1;
+            }
         }
         else if (Tier == 4) // Rune Enhancement
         {
@@ -728,8 +767,22 @@ namespace battleutils
 
         if (damage > 0)
         {
-            damage = std::max(damage - PDefender->getMod(Mod::PHALANX), 0);
-            damage = HandleOneForAll(PDefender, damage);
+            damage        = std::max(damage - PDefender->getMod(Mod::PHALANX), 0);
+            damage        = HandleOneForAll(PDefender, damage);
+            int16 magicSS = PDefender->getMod(Mod::MAGIC_STONESKIN);
+            if (magicSS)
+            {
+                if (damage >= magicSS)
+                {
+                    PDefender->setModifier(Mod::MAGIC_STONESKIN, 0);
+                    damage = damage - magicSS;
+                }
+                else
+                {
+                    PDefender->setModifier(Mod::MAGIC_STONESKIN, magicSS - damage);
+                    damage = 0;
+                }
+            }
             damage = HandleStoneskin(PDefender, damage);
         }
 
@@ -758,6 +811,10 @@ namespace battleutils
         {
             // drain same as damage taken
             damage = damageTaken;
+            if (PDefender->getMod(Mod::SPIKES_DMG_BONUS) > 0)
+            {
+                damage *= 1 + (PDefender->getMod(Mod::SPIKES_DMG_BONUS) / 100.f);
+            }
         }
 
         damage = MagicDmgTaken(PAttacker, damage, spikeElement); // apply MDT/MDT2/DT, liement to whoever is taking damage
@@ -841,8 +898,22 @@ namespace battleutils
             int32 spikesDamage = CalculateSpikeDamage(PAttacker, PDefender, Action, (uint16)(abs(damage)));
             if (spikesDamage > 0)
             {
-                spikesDamage = std::max(spikesDamage - PAttacker->getMod(Mod::PHALANX), 0);
-                spikesDamage = HandleOneForAll(PAttacker, spikesDamage);
+                spikesDamage  = std::max(spikesDamage - PAttacker->getMod(Mod::PHALANX), 0);
+                spikesDamage  = HandleOneForAll(PAttacker, spikesDamage);
+                int16 magicSS = PAttacker->getMod(Mod::MAGIC_STONESKIN);
+                if (magicSS)
+                {
+                    if (Action->spikesParam >= magicSS)
+                    {
+                        PAttacker->setModifier(Mod::MAGIC_STONESKIN, 0);
+                        Action->spikesParam = Action->spikesParam - magicSS;
+                    }
+                    else
+                    {
+                        PAttacker->setModifier(Mod::MAGIC_STONESKIN, magicSS - Action->spikesParam);
+                        Action->spikesParam = 0;
+                    }
+                }
                 spikesDamage = HandleStoneskin(PAttacker, spikesDamage);
             }
 
@@ -853,6 +924,11 @@ namespace battleutils
             else
             {
                 Action->spikesParam = static_cast<uint16>(spikesDamage);
+            }
+
+            if (damage > PDefender->getMod(Mod::DMGMAGIC_CAP) && PDefender->getMod(Mod::DMGMAGIC_CAP) > 0)
+            {
+                damage = PDefender->getMod(Mod::DMGMAGIC_CAP);
             }
 
             if (PDefender->objtype != TYPE_MOB || ((CMobEntity*)PDefender)->getMobMod(MOBMOD_AUTO_SPIKES) == 0)
@@ -866,7 +942,7 @@ namespace battleutils
                         break;
 
                     case SPIKE_DREAD:
-                        if (PAttacker->m_EcoSystem == ECOSYSTEM::UNDEAD)
+                        if (PAttacker->m_EcoSystem == ECOSYSTEM::UNDEAD || PDefender->StatusEffectContainer->HasStatusEffect(EFFECT_CURSE_II))
                         {
                             // is undead no effect
                             Action->spikesEffect = (SUBEFFECT)0;
@@ -1001,6 +1077,11 @@ namespace battleutils
                 Action->spikesParam = static_cast<uint16>(spikesDamage);
             }
 
+            if (damage > PDefender->getMod(Mod::DMGMAGIC_CAP) && PDefender->getMod(Mod::DMGMAGIC_CAP) > 0)
+            {
+                damage = PDefender->getMod(Mod::DMGMAGIC_CAP);
+            }
+
             PAttacker->takeDamage(spikesDamage, PDefender, ATTACK_TYPE::MAGICAL, GetSpikesDamageType(Action->spikesEffect));
 
             battleutils::DirtyExp(PAttacker, PDefender);
@@ -1051,6 +1132,11 @@ namespace battleutils
                 else
                 {
                     Action->spikesParam = static_cast<uint16>(spikesDamage);
+                }
+
+                if (damage > PDefender->getMod(Mod::DMGMAGIC_CAP) && PDefender->getMod(Mod::DMGMAGIC_CAP) > 0)
+                {
+                    damage = PDefender->getMod(Mod::DMGMAGIC_CAP);
                 }
 
                 PAttacker->takeDamage(spikesDamage, PDefender, ATTACK_TYPE::MAGICAL, GetSpikesDamageType(spikesType));
@@ -1134,12 +1220,12 @@ namespace battleutils
         EFFECT previous_daze       = EFFECT_NONE;
         uint16 previous_daze_power = 0;
 
-        if (PAttacker->StatusEffectContainer->HasStatusEffect(EFFECT_DRAIN_SAMBA) && PDefender->m_EcoSystem != ECOSYSTEM::UNDEAD)
+        if (PAttacker->StatusEffectContainer->HasStatusEffect(EFFECT_DRAIN_SAMBA) && PDefender->m_EcoSystem != ECOSYSTEM::UNDEAD && !PAttacker->StatusEffectContainer->HasStatusEffect(EFFECT_CURSE_II))
         {
             previous_daze       = EFFECT_DRAIN_DAZE;
             previous_daze_power = PAttacker->StatusEffectContainer->GetStatusEffect(EFFECT_DRAIN_SAMBA)->GetPower();
         }
-        else if (PAttacker->StatusEffectContainer->HasStatusEffect(EFFECT_ASPIR_SAMBA))
+        else if (PAttacker->StatusEffectContainer->HasStatusEffect(EFFECT_ASPIR_SAMBA) && PDefender->m_EcoSystem != ECOSYSTEM::UNDEAD && !PAttacker->StatusEffectContainer->HasStatusEffect(EFFECT_CURSE_II))
         {
             previous_daze       = EFFECT_ASPIR_DAZE;
             previous_daze_power = PAttacker->StatusEffectContainer->GetStatusEffect(EFFECT_ASPIR_SAMBA)->GetPower();
@@ -1228,6 +1314,26 @@ namespace battleutils
 
                 Action->addEffectParam = PAttacker->addHP(absorbed);
 
+                if (PChar != nullptr)
+                {
+                    PChar->updatemask |= UPDATE_HP;
+                }
+            }
+            else if (enspell == ENSPELL_SOUL_ENSLAVEMENT && PDefender->m_EcoSystem != ECOSYSTEM::UNDEAD)
+            {
+                Action->additionalEffect = SUBEFFECT_TP_DRAIN;
+                Action->addEffectMessage = 165;
+
+                // Increase TP Absorbed by 1% per JP
+                int32 absorbed = Action->param;
+                if (PAttacker->objtype == TYPE_PC)
+                {
+                    absorbed += (int32)floor(
+                        absorbed * 0.01f * static_cast<CCharEntity*>(PAttacker)->PJobPoints->GetJobPointValue(JP_SOUL_ENSLAVEMENT_EFFECT));
+                }
+
+                Action->addEffectParam = PAttacker->addTP(absorbed);
+                PDefender->addTP(-absorbed);
                 if (PChar != nullptr)
                 {
                     PChar->updatemask |= UPDATE_HP;
@@ -1451,7 +1557,14 @@ namespace battleutils
                     Action->addEffectMessage = 161;
                     Action->addEffectParam   = Samba;
 
-                    PAttacker->addHP(Samba); // does not do any additional damage to targets HP, only heals the attacker
+                    if (PAttacker->StatusEffectContainer->HasStatusEffect(EFFECT_CURSE_II))
+                    {
+                        PAttacker->addHP(0); // If attacker has Curse II, they can not recover HP.
+                    }
+                    else
+                    {
+                        PAttacker->addHP(Samba); // does not do any additional drain to targets HP, only a portion of it
+                    }
 
                     if (PChar != nullptr)
                     {
@@ -1481,7 +1594,14 @@ namespace battleutils
 
                     int16 mpDrained = PDefender->addMP(-Samba);
 
-                    PAttacker->addMP(mpDrained);
+                    if (PAttacker->StatusEffectContainer->HasStatusEffect(EFFECT_CURSE_II))
+                    {
+                        PAttacker->addMP(0); // If attacker has Curse II, they can not recover MP.
+                    }
+                    else
+                    {
+                        PAttacker->addMP(mpDrained);
+                    }
                     Action->addEffectParam = mpDrained;
 
                     if (PChar != nullptr)
@@ -1672,7 +1792,7 @@ namespace battleutils
         {
             pdif *= 1.25;
             int16 criticaldamage =
-                PAttacker->getMod(Mod::CRIT_DMG_INCREASE) + PAttacker->getMod(Mod::RANGED_CRIT_DMG_INCREASE) - PDefender->getMod(Mod::CRIT_DEF_BONUS);
+                PAttacker->getMod(Mod::CRIT_DMG_INCREASE) + PAttacker->getMod(Mod::RANGED_CRIT_DMG_INCREASE) - PDefender->getMod(Mod::CRIT_DEF_BONUS) + PDefender->getMod(Mod::ENEMYCRITDMG);
             criticaldamage = std::clamp<int16>(criticaldamage, 0, 100);
             pdif *= ((100 + criticaldamage) / 100.0f);
         }
@@ -1970,13 +2090,18 @@ namespace battleutils
     uint8 GetParryRate(CBattleEntity* PAttacker, CBattleEntity* PDefender)
     {
         CItemWeapon* PWeapon = GetEntityWeapon(PDefender, SLOT_MAIN);
-        if ((PWeapon != nullptr && PWeapon->getID() != 0 && PWeapon->getID() != 65535 && PWeapon->getSkillType() != SKILL_HAND_TO_HAND) &&
+        if (((PDefender->objtype == TYPE_PC && PWeapon != nullptr && PWeapon->getID() != 0 && PWeapon->getID() != 65535 && PWeapon->getSkillType() != SKILL_HAND_TO_HAND)) ||
+            (PDefender->objtype == TYPE_MOB && PDefender->m_EcoSystem == ECOSYSTEM::BEASTMAN && (JOBS_WITH_PARRY_SKILL.count(PDefender->GetMJob()) > 0 || JOBS_WITH_PARRY_SKILL.count(PDefender->GetSJob()) > 0) && PDefender->isInDynamis()) &&
             PDefender->PAI->IsEngaged())
         {
             // http://wiki.ffxiclopedia.org/wiki/Talk:Parrying_Skill
             // {(Parry Skill x .125) + ([Player Agi - Enemy Dex] x .125)} x Diff
 
-            float skill = (float)(PDefender->GetSkill(SKILL_PARRY) + PDefender->getMod(Mod::PARRY) + PWeapon->getILvlParry());
+            float        defender_parry_skill = (float)(PDefender->GetSkill(SKILL_PARRY) + PDefender->getMod(Mod::PARRY) + PWeapon->getILvlParry());
+            CItemWeapon* weapon               = GetEntityWeapon(PAttacker, SLOT_MAIN);
+            uint16       attackSkill          = PAttacker->GetSkill((SKILLTYPE)(weapon ? weapon->getSkillType() : 0));
+
+            // float skill = (float)(PDefender->GetSkill(SKILL_PARRY) + PDefender->getMod(Mod::PARRY) + PWeapon->getILvlParry());
 
             float diff = 1.0f + (((float)PDefender->GetMLevel() - PAttacker->GetMLevel()) / 15.0f);
 
@@ -1998,7 +2123,8 @@ namespace battleutils
             float dex = PAttacker->DEX();
             float agi = PDefender->AGI();
 
-            auto parryRate = std::clamp<uint8>((uint8)((skill * 0.1f + (agi - dex) * 0.125f + 10.0f) * diff), 5, 25);
+            // auto parryRate = std::clamp<uint8>((uint8)((skill * 0.1f + (agi - dex) * 0.125f + 10.0f) * diff), 5, 25);
+            int parryRate = std::clamp<int>((int)(15.0f + (defender_parry_skill - attackSkill + (agi - dex)) / 8.0f * diff), 5, 30);
 
             // Issekigan grants parry rate bonus. From best available data, if you already capped out at 25% parry it grants another 25% bonus for ~50%
             // parry rate
@@ -2027,7 +2153,7 @@ namespace battleutils
 
         if (PDefender->objtype == TYPE_MOB || PDefender->objtype == TYPE_PET)
         {
-            validWeapon = PDefender->GetMJob() == JOB_MNK || PDefender->GetMJob() == JOB_PUP;
+            validWeapon = PDefender->GetMJob() == JOB_MNK || PDefender->GetMJob() == JOB_PUP || PDefender->GetSJob() == JOB_MNK || PDefender->GetSJob() == JOB_PUP;
         }
 
         bool hasGuardSkillRank = (GetSkillRank(SKILL_GUARD, PDefender->GetMJob()) > 0 || GetSkillRank(SKILL_GUARD, PDefender->GetSJob()) > 0);
@@ -2156,7 +2282,8 @@ namespace battleutils
 
                         // Shield Mastery
                         if ((std::max(damage - (PDefender->getMod(Mod::PHALANX) + PDefender->getMod(Mod::STONESKIN)), 0) > 0) &&
-                            charutils::hasTrait((CCharEntity*)PDefender, TRAIT_SHIELD_MASTERY))
+                            // charutils::hasTrait((CCharEntity*)PDefender, TRAIT_SHIELD_MASTERY))
+                            PDefender->getMod(Mod::SHIELD_MASTERY_TP) > 0) // Umeboshi "Ungated Shield Mastery Mods to not require the job trait"
                         {
                             // If the player blocked with a shield and has shield mastery, add shield mastery TP bonus
                             // unblocked damage (before block but as if affected by stoneskin/phalanx) must be greater than zero
@@ -2249,10 +2376,22 @@ namespace battleutils
 
             // Check for bind breaking
             BindBreakCheck(PAttacker, PDefender);
+            int32 enmity = damage;
 
             switch (PDefender->objtype)
             {
                 case TYPE_MOB:
+                    if (PAttacker->objtype == TYPE_PC && PAttacker->StatusEffectContainer->HasStatusEffect(EFFECT_FLASHY_SHOT) && isRanged)
+                    {
+                        enmity = enmity * 140 / 100;
+                        PAttacker->StatusEffectContainer->DelStatusEffect(EFFECT_FLASHY_SHOT);
+                    }
+                    else if (PAttacker->objtype == TYPE_PC && PAttacker->StatusEffectContainer->HasStatusEffect(EFFECT_STEALTH_SHOT) && isRanged)
+                    {
+                        enmity = (int32)((float)enmity * (1.0f - (float)(((CCharEntity*)PAttacker)->PMeritPoints->GetMeritValue(MERIT_STEALTH_SHOT, (CCharEntity*)PAttacker)) / 100.0f));
+                        PAttacker->StatusEffectContainer->DelStatusEffect(EFFECT_STEALTH_SHOT);
+                    }
+
                     if (taChar == nullptr)
                     {
                         ((CMobEntity*)PDefender)->PEnmityContainer->UpdateEnmityFromDamage(PAttacker, damage);
@@ -2308,7 +2447,8 @@ namespace battleutils
             }
 
             // try to interrupt spell if not a ranged attack and not blocked by Shield Mastery
-            if ((!isRanged) && !((isBlocked) && (PDefender->objtype == TYPE_PC) && (charutils::hasTrait((CCharEntity*)PDefender, TRAIT_SHIELD_MASTERY))))
+            // if ((!isRanged) && !((isBlocked) && (PDefender->objtype == TYPE_PC) && (charutils::hasTrait((CCharEntity*)PDefender, TRAIT_SHIELD_MASTERY))))
+            if ((!isRanged) && !((isBlocked) && (PDefender->objtype == TYPE_PC) && PDefender->getMod(Mod::SHIELD_MASTERY_TP) > 0)) // Umeboshi "Ungate Shield Mastery Trait. Only checks for mod."
             {
                 PDefender->TryHitInterrupt(PAttacker);
             }
@@ -2359,6 +2499,15 @@ namespace battleutils
                 float sBlow1    = std::clamp((float)PAttacker->getMod(Mod::SUBTLE_BLOW), -50.0f, 50.0f);
                 float sBlow2    = std::clamp((float)PAttacker->getMod(Mod::SUBTLE_BLOW_II), -50.0f, 50.0f);
                 float sBlowMult = ((100.0f - std::clamp(sBlow1 + sBlow2, -75.0f, 75.0f)) / 100.0f);
+
+                if (PAttacker->objtype == TYPE_PC && PAttacker->GetMJob() == JOB_NIN && PAttacker->GetMLevel() > 74)
+                {
+                    sBlowMult -= 0.01f * ((CCharEntity*)PAttacker)->PMeritPoints->GetMeritValue(MERIT_SUBTLE_BLOW_EFFECT, (CCharEntity*)PAttacker);
+                }
+                else if (PAttacker->objtype == TYPE_PC && PAttacker->GetSJob() == JOB_NIN && PAttacker->GetSLevel() > 74)
+                {
+                    sBlowMult -= 0.01f * ((CCharEntity*)PAttacker)->PMeritPoints->GetMeritValue(MERIT_SUBTLE_BLOW_EFFECT, (CCharEntity*)PAttacker);
+                }
 
                 // mobs hit get basetp+30 whereas pcs hit get basetp/3
                 if (PDefender->objtype == TYPE_PC || (PDefender->objtype == TYPE_PET && PDefender->PMaster && PDefender->PMaster->objtype == TYPE_PC))
@@ -2505,6 +2654,15 @@ namespace battleutils
             float sBlow2    = std::clamp((float)PAttacker->getMod(Mod::SUBTLE_BLOW_II), -50.0f, 50.0f);
             float sBlowMult = (100.0f - std::clamp(sBlow1 + sBlow2, -75.0f, 75.0f)) / 100.0f;
 
+            if (PAttacker->objtype == TYPE_PC && PAttacker->GetMJob() == JOB_NIN && PAttacker->GetMLevel() > 74)
+            {
+                sBlowMult -= 0.01f * ((CCharEntity*)PAttacker)->PMeritPoints->GetMeritValue(MERIT_SUBTLE_BLOW_EFFECT, (CCharEntity*)PAttacker);
+            }
+            else if (PAttacker->objtype == TYPE_PC && PAttacker->GetSJob() == JOB_NIN && PAttacker->GetMLevel() > 74)
+            {
+                sBlowMult -= 0.01f * ((CCharEntity*)PAttacker)->PMeritPoints->GetMeritValue(MERIT_SUBTLE_BLOW_EFFECT, (CCharEntity*)PAttacker);
+            }
+
             // mobs hit get basetp+30 whereas pcs hit get basetp/3
             if (PDefender->objtype == TYPE_PC)
             {
@@ -2647,6 +2805,16 @@ namespace battleutils
             {
                 offsetAccuracy -= PDefender->StatusEffectContainer->GetStatusEffect(EFFECT_YONIN)->GetPower();
             }
+            // Check for Tandem Strike accuracy bonus via mod
+            if (PAttacker->getMod(Mod::TANDEM_STRIKE) > 0 && IsTandemValid(PAttacker))
+            {
+                offsetAccuracy += PAttacker->getMod(Mod::TANDEM_STRIKE);
+            }
+            // Check for Tandem Strike accuracy bonus via master's mod
+            else if ((PAttacker->PMaster && PAttacker->PMaster->getMod(Mod::TANDEM_STRIKE) > 0) && IsTandemValid(PAttacker))
+            {
+                offsetAccuracy += PAttacker->PMaster->getMod(Mod::TANDEM_STRIKE);
+            }
 
             // Hit Rate (%) = 75 + floor( (Accuracy - Evasion)/2 ) + 2*(dLVL)
             // For Avatars negative penalties for level correction seem to be ignored for attack and likely for accuracy,
@@ -2760,8 +2928,19 @@ namespace battleutils
                 critHitRate = 100;
             }
         }
+        // else if (PAttacker->objtype == TYPE_PC && PAttacker->GetMJob() == JOB_THF && charutils::hasTrait((CCharEntity*)PAttacker, TRAIT_ASSASSIN) &&
+        //          (!ignoreSneakTrickAttack) && PAttacker->StatusEffectContainer->HasStatusEffect(EFFECT_TRICK_ATTACK))
         else if (PAttacker->objtype == TYPE_PC && PAttacker->GetMJob() == JOB_THF && charutils::hasTrait((CCharEntity*)PAttacker, TRAIT_ASSASSIN) &&
                  (!ignoreSneakTrickAttack) && PAttacker->StatusEffectContainer->HasStatusEffect(EFFECT_TRICK_ATTACK))
+        {
+            CBattleEntity* taChar = battleutils::getAvailableTrickAttackChar(PAttacker, PDefender);
+            if (taChar != nullptr)
+            {
+                critHitRate = 100;
+            }
+        }
+        else if (PAttacker->objtype == TYPE_PC && PAttacker->GetSJob() == JOB_THF && charutils::hasTrait((CCharEntity*)PAttacker, TRAIT_ASSASSIN) &&
+                 (!ignoreSneakTrickAttack) && PAttacker->StatusEffectContainer->HasStatusEffect(EFFECT_TRICK_ATTACK)) // Umeboshi "THF Sub benefits on Cactuar"
         {
             CBattleEntity* taChar = battleutils::getAvailableTrickAttackChar(PAttacker, PDefender);
             if (taChar != nullptr)
@@ -3486,6 +3665,20 @@ namespace battleutils
                 break;
         }
 
+        if (PAttacker->objtype == TYPE_PC && PAttacker->getMod(Mod::WYRMAL_ABJ_KILLER_EFFECT) > 0)
+        {
+            // take the max of humanoid or dragon killer
+            KillerEffect = std::max<int32>(KillerEffect, PDefender->getMod(Mod::DRAGON_KILLER));
+        }
+        if (PDefender->objtype == TYPE_PC && PDefender->GetMLevel() > 74 && PDefender->GetMJob() == JOB_BST)
+        {
+            KillerEffect += ((CCharEntity*)PDefender)->PMeritPoints->GetMeritValue(MERIT_KILLER_EFFECTS, ((CCharEntity*)PDefender));
+        }
+        else if (PDefender->objtype == TYPE_PC && PDefender->GetSLevel() > 74 && PDefender->GetSJob() == JOB_BST)
+        {
+            KillerEffect += ((CCharEntity*)PDefender)->PMeritPoints->GetMeritValue(MERIT_KILLER_EFFECTS, ((CCharEntity*)PDefender));
+        }
+
         // Add intimidation rate from Bully
         if (CStatusEffect* PDoubtEffect = PAttacker->StatusEffectContainer->GetStatusEffect(EFFECT_DOUBT))
         {
@@ -3499,6 +3692,43 @@ namespace battleutils
         }
 
         return (xirand::GetRandomNumber(100) < KillerEffect);
+    }
+
+        /************************************************************************
+     *                                                                       *
+     *  Checks if the tandem case is valid                                   *
+     *  Used for Tandem Strike and tbd for Tandem Blow                       *
+     *                                                                       *
+     ************************************************************************/
+
+    bool IsTandemValid(CBattleEntity* PAttacker)
+    {
+        CBattleEntity* tandemPartner;
+        // Tandem is valid only if both the master and the pet are engaged with the same target
+        if (PAttacker->objtype == TYPE_PC)
+        {
+            // No Pet - No Tandem
+            if (PAttacker->PPet == nullptr)
+                return false;
+
+            tandemPartner = PAttacker->PPet;
+        }
+        else
+        {
+            // No Master - No Tandem
+            if (PAttacker->PMaster == nullptr || PAttacker->PMaster->objtype != TYPE_PC)
+                return false;
+
+            tandemPartner = PAttacker->PMaster;
+        }
+
+        // Partner is engaged.  Partner has a target. Partner's target matches the attacker's target.
+        if (tandemPartner->PAI->IsEngaged() && tandemPartner->GetBattleTarget() != nullptr && tandemPartner->GetBattleTargetID() == PAttacker->GetBattleTargetID())
+        {
+            return true;
+        }
+
+        return false;
     }
 
     /************************************************************************
@@ -3656,7 +3886,7 @@ namespace battleutils
             // Chainbound active on target
             if (PCBEffect)
             {
-                if (PCBEffect->GetStartTime() + 2s < server_clock::now())
+                if (PCBEffect->GetStartTime() + 3s < server_clock::now())
                 {
                     // Konzen-Ittai
                     if (PCBEffect->GetPower() > 1)
@@ -4048,7 +4278,8 @@ namespace battleutils
 
             if (ERROR_SLOTID == (SlotID = PChar->getStorage(LOC_INVENTORY)->SearchItem(toolID)))
             {
-                if (PChar->GetMJob() == JOB_NIN)
+                // if (PChar->GetMJob() == JOB_NIN)
+                if (PChar->GetMJob() == JOB_NIN || PChar->GetSJob() == JOB_NIN) // Umeboshi "NIN Sub can use master tools"
                 {
                     switch (toolID)
                     {
@@ -4213,12 +4444,11 @@ namespace battleutils
         }
 
         // Check TA user's fellow
-        /*
         if (auto* PChar = dynamic_cast<CCharEntity*>(taUser))
         {
-            if (PChar->PFellow)
+            if (PChar->m_PFellow)
             {
-                if (auto* fellow = dynamic_cast<CBattleEntity*>(PChar->PFellow))
+                if (auto* fellow = dynamic_cast<CBattleEntity*>(PChar->m_PFellow))
                 {
                     float distTAtarget = distance(fellow->loc.p, PMob->loc.p);
                     // require closer target not be closer than .5 yalms (.5*.5=.25 distsquared) to mob
@@ -4229,7 +4459,6 @@ namespace battleutils
                 }
             }
         }
-        */
 
         if (!taTargetList.empty())
         {
@@ -4355,14 +4584,15 @@ namespace battleutils
             {
                 m_PChar->addHP(-HandleStoneskin(m_PChar, (int32)(bonusDamage * stalwartSoulBonus)));
 
-                if (m_PChar->GetMJob() == JOB_DRK)
+                // Umeboshi "DRK Sub not penalized on cactuar."
+                // if (m_PChar->GetMJob() == JOB_DRK)
                 {
                     damage += bonusDamage;
                 }
-                else
-                {
-                    damage += bonusDamage / 2;
-                }
+                // else
+                // {
+                //     damage += bonusDamage / 2;
+                // }
             }
         }
         return damage;
@@ -4372,9 +4602,11 @@ namespace battleutils
     {
         if (m_PChar->StatusEffectContainer->HasStatusEffect(EFFECT_CONSUME_MANA))
         {
-            damage += (uint32)(floor(m_PChar->health.mp / 10));
-            m_PChar->health.mp = 0;
-            m_PChar->StatusEffectContainer->DelStatusEffect(EFFECT_CONSUME_MANA);
+            // damage += (uint32)(floor(m_PChar->health.mp / 20));
+            // m_PChar->SetLocalVar("damageTrack", damage);
+            damage *= ((m_PChar->health.mp / 10) + 100) / 100;
+            m_PChar->addMP(-(m_PChar->health.mp * 0.05));
+            // m_PChar->StatusEffectContainer->DelStatusEffect(EFFECT_CONSUME_MANA);
         }
         return damage;
     }
@@ -4390,6 +4622,11 @@ namespace battleutils
         if (PEntity->objtype == TYPE_PC)
         {
             if (((CCharEntity*)PEntity)->GetMJob() == JOB_SAM)
+            {
+                return ((CCharEntity*)PEntity)->PMeritPoints->GetMeritValue(MERIT_STORE_TP_EFFECT, (CCharEntity*)PEntity);
+            }
+
+            else if (((CCharEntity*)PEntity)->GetSJob() == JOB_SAM) // Umeboshi "SAM sub benefits from merits"
             {
                 return ((CCharEntity*)PEntity)->PMeritPoints->GetMeritValue(MERIT_STORE_TP_EFFECT, (CCharEntity*)PEntity);
             }
@@ -4456,12 +4693,12 @@ namespace battleutils
         */
 
         // only archery + marksmanship can use barrage
-        CItemWeapon* PItem = (CItemWeapon*)PChar->getEquip(SLOT_RANGED);
+        // CItemWeapon* PItem = (CItemWeapon*)PChar->getEquip(SLOT_RANGED);
 
-        if (PItem && PItem->getSkillType() != 25 && PItem->getSkillType() != 26)
-        {
-            return 0;
-        }
+        // if (PItem && PItem->getSkillType() != 25 && PItem->getSkillType() != 26)
+        // {
+        //     return 0;
+        // }
 
         uint8 lvl       = PChar->jobs.job[JOB_RNG]; // Get Ranger level of char
         uint8 shotCount = 0;                        // the total number of extra hits
@@ -4982,14 +5219,16 @@ namespace battleutils
         {
             damage = -damage;
         }
-
         // Handle damage nullification.
-        else if (xirand::GetRandomNumber(100) < PDefender->getMod(Mod::NULL_DAMAGE) ||      // All damage.
-                 xirand::GetRandomNumber(100) < PDefender->getMod(Mod::NULL_BREATH_DAMAGE)) // Breath damage.
+        else if (xirand::GetRandomNumber(100) < PDefender->getMod(Mod::NULL_DAMAGE) || // All damage.
+            xirand::GetRandomNumber(100) < PDefender->getMod(Mod::NULL_BREATH_DAMAGE)) // Breath damage.
         {
             damage = 0;
         }
-
+        else if (xirand::GetRandomNumber(100) < PDefender->getMod(Mod::SEVERE_BREATH_DMG_NULL) && damage >= PDefender->health.hp)
+        {
+            damage = PDefender->health.hp - 1;
+        }
         else
         {
             damage = HandleSevereDamage(PDefender, damage, false);
@@ -5045,6 +5284,10 @@ namespace battleutils
         {
             damage = 0;
         }
+        else if (xirand::GetRandomNumber(100) < PDefender->getMod(Mod::SEVERE_MAGIC_DMG_NULL) && damage >= PDefender->health.hp)
+        {
+            damage = PDefender->health.hp - 1;
+        }
         else
         {
             damage = HandleSevereDamage(PDefender, damage, false);
@@ -5087,7 +5330,10 @@ namespace battleutils
         {
             damage = 0;
         }
-
+        else if (xirand::GetRandomNumber(100) < PDefender->getMod(Mod::SEVERE_PHYS_DMG_NULL) && damage >= PDefender->health.hp)
+        {
+            damage = PDefender->health.hp - 1;
+        }
         else
         {
             damage = HandleSevereDamage(PDefender, damage, true);
@@ -5095,6 +5341,11 @@ namespace battleutils
             ConvertDmgToMP(PDefender, damage, IsCovered);
 
             damage = HandleFanDance(PDefender, damage);
+        }
+
+        if (damage > PDefender->getMod(Mod::DMGPHYS_CAP) && PDefender->getMod(Mod::DMGPHYS_CAP) > 0)
+        {
+            damage = PDefender->getMod(Mod::DMGPHYS_CAP);
         }
 
         return damage;
@@ -5133,6 +5384,10 @@ namespace battleutils
         {
             damage = 0;
         }
+        else if (xirand::GetRandomNumber(100) < PDefender->getMod(Mod::SEVERE_RANGE_DMG_NULL) && damage >= PDefender->health.hp)
+        {
+            damage = PDefender->health.hp - 1;
+        }
         else
         {
             damage = HandleSevereDamage(PDefender, damage, true);
@@ -5140,6 +5395,11 @@ namespace battleutils
             ConvertDmgToMP(PDefender, damage, IsCovered);
 
             damage = HandleFanDance(PDefender, damage);
+        }
+
+        if (damage > PDefender->getMod(Mod::DMGRANGE_CAP) && PDefender->getMod(Mod::DMGRANGE_CAP) > 0)
+        {
+            damage = PDefender->getMod(Mod::DMGRANGE_CAP);
         }
 
         return damage;
@@ -5302,6 +5562,25 @@ namespace battleutils
         return damage;
     }
 
+    int32 HandleMagicStoneskin(CBattleEntity* PDefender, int32 damage)
+    {
+        int16 magicSS = PDefender->getMod(Mod::MAGIC_STONESKIN);
+        if (magicSS)
+        {
+            if (damage >= magicSS)
+            {
+                PDefender->setModifier(Mod::MAGIC_STONESKIN, 0);
+                damage = damage - magicSS;
+            }
+            else
+            {
+                PDefender->setModifier(Mod::MAGIC_STONESKIN, magicSS - damage);
+                damage = 0;
+            }
+        }
+        return damage;
+    }
+
     int32 HandleSevereDamage(CBattleEntity* PDefender, int32 damage, bool isPhysical)
     {
         damage = HandleSevereDamageEffect(PDefender, EFFECT_MIGAWARI, damage, true);
@@ -5312,6 +5591,11 @@ namespace battleutils
         {
             damage = PDefender->health.hp - 1;
             ((CPetEntity*)PDefender)->PMaster->StatusEffectContainer->DelStatusEffectSilent(EFFECT_EARTH_MANEUVER);
+        }
+
+        if (xirand::GetRandomNumber(100) < PDefender->getMod(Mod::SEVERE_DMG_NULL) && damage >= PDefender->health.hp)
+        {
+            damage = PDefender->health.hp - 1;
         }
 
         return damage;
@@ -5340,7 +5624,7 @@ namespace battleutils
         CStatusEffect* effectScarDel = PDefender->StatusEffectContainer->GetStatusEffect(EFFECT_SCARLET_DELIRIUM);
 
         // Damage bonus calculation, update Effect Power
-        if (effectScarDel && effectScarDel->GetPower() == 0)
+        if (PDefender->StatusEffectContainer->HasStatusEffect(EFFECT_SCARLET_DELIRIUM) && effectScarDel->GetPower() == 0)
         {
             // Damage to Max HP Ratio
             int8   bonus    = std::floor(((damage * 100) / PDefender->GetMaxHP()) / 2);
@@ -5670,8 +5954,13 @@ namespace battleutils
         }
     }
 
-    bool DrawIn(CBattleEntity* PTarget, CMobEntity* PMob, float offset)
+    bool DrawIn(CBattleEntity* PTarget, CMobEntity* PMob, float offset, uint8 drawInRange, uint16 maximumReach, bool includeParty, bool includeDeadAndMount)
     {
+        if (std::chrono::time_point_cast<std::chrono::seconds>(server_clock::now()).time_since_epoch().count() - PMob->GetLocalVar("DrawInTime") < 2)
+        {
+            return false;
+        }
+
         position_t& pos        = PMob->loc.p;
         position_t  nearEntity = nearPosition(pos, offset, (float)0);
 
@@ -5697,52 +5986,54 @@ namespace battleutils
         // Move the target a little higher, just in case
         nearEntity.y -= 1.0f;
 
-        bool  success        = false;
-        float drawInDistance = (float)(PMob->getMobMod(MOBMOD_DRAW_IN) > 1 ? PMob->getMobMod(MOBMOD_DRAW_IN) : PMob->GetMeleeRange() * 2);
+        bool success = false;
+        // float drawInDistance = (float)(PMob->getMobMod(MOBMOD_DRAW_IN) > 1 ? PMob->getMobMod(MOBMOD_DRAW_IN) : PMob->GetMeleeRange() * 2);
 
-        if (std::chrono::time_point_cast<std::chrono::seconds>(server_clock::now()).time_since_epoch().count() - PMob->GetLocalVar("DrawInTime") < 2)
-        {
-            return false;
-        }
+        // if (std::chrono::time_point_cast<std::chrono::seconds>(server_clock::now()).time_since_epoch().count() - PMob->GetLocalVar("DrawInTime") < 2)
+        // {
+        //     return false;
+        // }
 
-        std::function<void(CBattleEntity*)> drawInFunc = [PMob, drawInDistance, &nearEntity, &success](CBattleEntity* PMember)
+        std::function<void(CBattleEntity*)> drawInFunc = [PMob, drawInRange, maximumReach, includeDeadAndMount, &nearEntity, &success](CBattleEntity* PMember)
         {
             float pDistance = distance(PMob->loc.p, PMember->loc.p);
 
-            if (PMob->loc.zone == PMember->loc.zone && pDistance > drawInDistance && PMember->status != STATUS_TYPE::CUTSCENE_ONLY)
+            if (PMob->loc.zone == PMember->loc.zone && pDistance > drawInRange && pDistance < maximumReach &&
+                PMember->status != STATUS_TYPE::CUTSCENE_ONLY &&
+                (includeDeadAndMount || (!PMember->isDead() && !PMember->isMounted())))
+            // if (PMob->loc.zone == PMember->loc.zone && dist > drawInRange && dist < maximumReach &&
+            //     PMember->status != STATUS_TYPE::STATUS_CUTSCENE_ONLY && !PMember->isDead() && !PMember->isMounted())
             {
-                // don't draw in dead players for now!
-                // see tractor
-                if (PMember->isDead() || PMember->isMounted())
+                // draw in!
+                if (PMob->getMobMod(MOBMOD_DRAW_IN_FRONT))
                 {
-                    // don't do anything
-                }
-                else
-                {
-                    // draw in!
                     PMember->loc.p.x = nearEntity.x;
                     PMember->loc.p.y = nearEntity.y;
                     PMember->loc.p.z = nearEntity.z;
-
-                    if (PMember->objtype == TYPE_PC)
-                    {
-                        CCharEntity* PChar = static_cast<CCharEntity*>(PMember);
-                        PChar->pushPacket(new CPositionPacket(PChar));
-                    }
-                    else
-                    {
-                        PMember->loc.zone->UpdateEntityPacket(PMember, ENTITY_UPDATE, UPDATE_POS);
-                    }
-
-                    luautils::OnMobDrawIn(PMob, PMember);
-                    PMob->loc.zone->PushPacket(PMob, CHAR_INRANGE, new CMessageBasicPacket(PMember, PMember, 0, 0, 232));
-                    success = true;
                 }
+                else
+                {
+                    PMember->loc.p.x = PMob->loc.p.x;
+                    PMember->loc.p.y = nearEntity.y;
+                    PMember->loc.p.z = PMob->loc.p.z;
+                }
+                if (PMember->objtype == TYPE_PC)
+                {
+                    CCharEntity* PChar = static_cast<CCharEntity*>(PMember);
+                    PChar->pushPacket(new CPositionPacket(PChar));
+                }
+                else
+                {
+                    PMember->loc.zone->UpdateEntityPacket(PMember, ENTITY_UPDATE, UPDATE_POS);
+                }
+                luautils::OnMobDrawIn(PMob, PMember);
+                PMob->loc.zone->PushPacket(PMob, CHAR_INRANGE, new CMessageBasicPacket(PMember, PMember, 0, 0, 232));
+                success = true;
             }
         };
 
         // check if i should draw-in party/alliance
-        if (PMob->getMobMod(MOBMOD_DRAW_IN) > 1)
+        if (includeParty)
         {
             PTarget->ForAlliance(drawInFunc);
         }
@@ -5855,6 +6146,111 @@ namespace battleutils
                 break;
         }
     }
+
+        /************************************************************************
+     *                                                                       *
+     *   Does the random deal effect to a specific character (reset ability) *
+     *                                                                       *
+     ************************************************************************/
+    bool DoRandomDealToEntity(CCharEntity* PChar, CCharEntity* PTarget)
+    {
+        std::vector<uint16> ResetCandidateList;
+        std::vector<uint16> ActiveCooldownList;
+
+        if (PChar == nullptr || PTarget == nullptr)
+        {
+            // Invalid User or Target
+            return false;
+        }
+
+        RecastList_t* recastList = PTarget->PRecastContainer->GetRecastList(RECAST_ABILITY);
+
+        // Get position of abilites and add to the 2 lists
+        for (uint8 i = 0; i < recastList->size(); ++i)
+        {
+            Recast_t* recast = &recastList->at(i);
+
+            // Do not reset 2hrs or Random Deal
+            if (recast->ID != 0 && recast->ID != 196)
+            {
+                ResetCandidateList.push_back(i);
+                if (recast->RecastTime > 0)
+                {
+                    ActiveCooldownList.push_back(i);
+                }
+            }
+        }
+
+        if (ResetCandidateList.size() == 0)
+        {
+            // Evade because we have no abilities that can be reset
+            return false;
+        }
+
+        uint8 loadedDeck       = PChar->PMeritPoints->GetMeritValue(MERIT_LOADED_DECK, PChar);
+        uint8 loadedDeckChance = 50 + loadedDeck;
+        uint8 resetTwoChance   = std::min<int8>(PChar->getMod(Mod::RANDOM_DEAL_BONUS), 50);
+
+        // Loaded Deck Merit Version
+        if (loadedDeck && ActiveCooldownList.size() > 0)
+        {
+            if (ActiveCooldownList.size() > 1)
+            {
+                // Shuffle active cooldowns and take first (loaded deck)
+                std::shuffle(std::begin(ActiveCooldownList), std::end(ActiveCooldownList), xirand::rng());
+                loadedDeckChance = 100;
+            }
+
+            if (loadedDeckChance >= xirand::GetRandomNumber(1, 100))
+            {
+                PTarget->PRecastContainer->DeleteByIndex(RECAST_ABILITY, ActiveCooldownList.at(0));
+
+                // Reset 2 abilities by chance
+                if (ActiveCooldownList.size() > 1 && resetTwoChance >= xirand::GetRandomNumber(1, 100))
+                {
+                    PTarget->PRecastContainer->DeleteByIndex(RECAST_ABILITY, ActiveCooldownList.at(1));
+                }
+                if (PChar != PTarget)
+                {
+                    // Update target's recast state; caster's will be handled in CCharEntity::OnAbility.
+                    PTarget->pushPacket(new CCharRecastPacket(PTarget));
+                }
+                return true;
+            }
+
+            // Evade because we failed to reset with loaded deck
+            return false;
+        }
+        else // Standard Version
+        {
+            if (ResetCandidateList.size() > 1)
+            {
+                // Shuffle if more than 1 ability
+                std::shuffle(std::begin(ResetCandidateList), std::end(ResetCandidateList), xirand::rng());
+            }
+
+            // Reset first ability (shuffled or only)
+            PTarget->PRecastContainer->DeleteByIndex(RECAST_ABILITY, ResetCandidateList.at(0));
+
+            // Reset 2 abilities by chance (could be 2 abilitie that don't need resets)
+            if (ResetCandidateList.size() > 1 && ActiveCooldownList.size() > 1 && resetTwoChance >= xirand::GetRandomNumber(1, 100))
+            {
+                PTarget->PRecastContainer->DeleteByIndex(RECAST_ABILITY, ResetCandidateList.at(1));
+            }
+
+            if (PChar != PTarget)
+            {
+                // Update target's recast state; caster's will be handled in CCharEntity::OnAbility.
+                PTarget->pushPacket(new CCharRecastPacket(PTarget));
+            }
+
+            return true;
+        }
+
+        // How did you get here!?
+        return false;
+    }
+
 
     /************************************************************************
      *                                                                       *
@@ -5992,6 +6388,76 @@ namespace battleutils
                     }
                 }
 
+                if (add)
+                {
+                    PEntity->addTrait(PTrait);
+                }
+            }
+        }
+    }
+
+    void AddTraitsSJ(CBattleEntity* PEntity, TraitList_t* traitList, uint8 level, size_t cutoff)
+    // Cactuar Umeboshi "Handling for subjob traits stacking with main job."
+    {
+        CCharEntity* PChar = PEntity->objtype == TYPE_PC ? static_cast<CCharEntity*>(PEntity) : nullptr;
+        for (auto&& PTrait : *traitList)
+        {
+            if (level >= PTrait->getLevel() && PTrait->getLevel() > 0)
+            {
+                std::size_t cutoffActual = cutoff;
+                if (PTrait->getID() == 18) // is dual wield
+                {
+                    cutoffActual = 0; // check the entire list
+                }
+                bool add = true;
+                for (std::size_t j = cutoffActual; j < PEntity->TraitList.size(); ++j)
+                // for (uint8 j = cutoffActual; j < PEntity->TraitList.size(); ++j)
+                {
+                    CTrait* PExistingTrait = PEntity->TraitList.at(j);
+                    if (PExistingTrait->getID() == PTrait->getID())
+                    {
+                        // Check if we still have the merit required for this trait
+                        if (PChar)
+                        {
+                            if (PExistingTrait->getMeritID() > 0)
+                            {
+                                if (PChar->PMeritPoints->GetMerit((MERIT_TYPE)PExistingTrait->getMeritID())->count == 0)
+                                {
+                                    PEntity->delTrait(PExistingTrait);
+                                    break;
+                                }
+                                else if (PExistingTrait->getMeritID() == PTrait->getMeritID())
+                                {
+                                    add = false;
+                                    break;
+                                }
+                            }
+                        }
+                        if (PExistingTrait->getRank() < PTrait->getRank())
+                        {
+                            PEntity->delTrait(PExistingTrait);
+                            break;
+                        }
+                        else if (PExistingTrait->getRank() > PTrait->getRank())
+                        {
+                            add = false;
+                            break;
+                        }
+                        else if (PExistingTrait->getMod() == PTrait->getMod())
+                        {
+                            add = false;
+                            break;
+                        }
+                    }
+                }
+                // Don't add traits that aren't merited yet
+                if (PChar)
+                {
+                    if (PTrait->getMeritID() > 0 && PChar->PMeritPoints->GetMerit((MERIT_TYPE)PTrait->getMeritID())->count == 0)
+                    {
+                        add = false;
+                    }
+                }
                 if (add)
                 {
                     PEntity->addTrait(PTrait);
@@ -6286,6 +6752,8 @@ namespace battleutils
         {
             cost = 0;
         }
+        cost = (int16)((float)cost * ((float)(PEntity->getMod(Mod::AUTOMATON_MAGIC_COST)) + 100.0f) / 100.0f); // Lowers spell cost for automatons.
+
         return std::clamp<int16>(cost, 0, 9999);
     }
 
@@ -6310,6 +6778,11 @@ namespace battleutils
         // Apply Haste (Magic and Gear)
         int32 haste = PEntity->getMod(Mod::HASTE_MAGIC) + PEntity->getMod(Mod::HASTE_GEAR);
         recast      = static_cast<int32>(recast * ((10000.0f - haste) / 10000.0f));
+
+        if (PSpell->getSpellGroup() == SPELLGROUP_NINJUTSU)
+        {
+            recast -= PEntity->getMod(Mod::NINJUTSU_RECAST_DELAY);
+        }
 
         if (PSpell->getSpellGroup() == SPELLGROUP_SONG)
         {
@@ -6356,10 +6829,11 @@ namespace battleutils
                 {
                     recast *= 2;
                 }
-                else
-                {
-                    recast *= 3;
-                }
+                // Umeboshi "SCH Sub not penalized on Cactuar"
+                // else
+                // {
+                //     recast *= 3;
+                // }
             }
             else if (PEntity->StatusEffectContainer->HasStatusEffect({ EFFECT_DARK_ARTS, EFFECT_ADDENDUM_BLACK }))
             {
@@ -6397,10 +6871,11 @@ namespace battleutils
                 {
                     recast *= 2;
                 }
-                else
-                {
-                    recast *= 3;
-                }
+                // Umeboshi "SCH Sub not penalized on Cactuar."
+                // else
+                // {
+                //     recast *= 3;
+                // }
             }
 
             if (PEntity->StatusEffectContainer->HasStatusEffect({ EFFECT_LIGHT_ARTS, EFFECT_ADDENDUM_WHITE }))
@@ -6446,7 +6921,8 @@ namespace battleutils
             if (PSpell->getSkillType() == SKILLTYPE::SKILL_ELEMENTAL_MAGIC || PSpell->getSkillType() == SKILLTYPE::SKILL_DARK_MAGIC)
             {
                 CCharEntity* PChar = static_cast<CCharEntity*>(PEntity);
-                if (charutils::hasTrait(PChar, TRAIT_OCCULT_ACUMEN))
+                // if (charutils::hasTrait(PChar, TRAIT_OCCULT_ACUMEN))
+                if (PChar->getMod(Mod::OCCULT_ACUMEN) > 0) // Umeboshi "Ungating Occult Acumen by removing need for job trait)
                 {
                     return static_cast<int16>(PSpell->getMPCost() * PChar->getMod(Mod::OCCULT_ACUMEN) / 100.f * (1 + (PChar->getMod(Mod::STORETP) / 100.f)));
                 }

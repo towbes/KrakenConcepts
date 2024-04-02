@@ -133,7 +133,7 @@ xi.cop.helpers.largeApparatusOnTrigger = function(mission, player, npc)
         local cragLocation = math.ceil(tonumber(string.sub(npc:getName(), -1)) / 3)
 
         -- TODO: Assumption is that previously-completed promyvions do not require sealing of memories
-        -- for "The Mothercrystals."
+        -- for 'The Mothercrystals.'
         if
             currentMemory == cragLocation and
             not player:hasKeyItem(xi.ki.LIGHT_OF_HOLLA + cragLocation - 1)
@@ -177,7 +177,6 @@ xi.cop.helpers.spireEventFinish = function(mission, player, csid, option, npc)
         if numCompletedPromyvions == 3 then
             -- We need to make sure the fallthrough does not trigger an overriding
             -- teleport.
-            player:setLocalVar('toLufaise', 1)
             teleportLocation = xi.teleport.id.LUFAISE
         end
 

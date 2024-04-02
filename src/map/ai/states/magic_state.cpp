@@ -67,6 +67,8 @@ CMagicState::CMagicState(CBattleEntity* PEntity, uint16 targid, SpellID spellid,
                                                                         errorMsg == 1 ? MSGBASIC_CANNOT_CAST_SPELL : errorMsg));
     }
 
+    m_PEntity->OnCastStarting(*this);
+
     m_castTime = std::chrono::milliseconds(battleutils::CalculateSpellCastTime(m_PEntity, this));
     m_startPos = m_PEntity->loc.p;
 
@@ -107,7 +109,7 @@ bool CMagicState::Update(time_point tick)
         action_t action;
 
         if (!PTarget || m_errorMsg || !CanCastSpell(PTarget, true) ||
-            (HasMoved() && (m_PEntity->objtype != TYPE_PET || static_cast<CPetEntity*>(m_PEntity)->getPetType() != PET_TYPE::AUTOMATON)))
+            (HasMoved() && (m_PEntity->objtype != TYPE_PET || static_cast<CPetEntity*>(m_PEntity)->getPetType() != PET_TYPE::AUTOMATON) && m_PEntity->objtype != TYPE_FELLOW))
         {
             m_PEntity->OnCastInterrupted(*this, action, msg, false);
             m_PEntity->loc.zone->PushPacket(m_PEntity, CHAR_INRANGE_SELF, new CActionPacket(action));
@@ -229,6 +231,7 @@ bool CMagicState::Update(time_point tick)
         if (m_interrupted)
         {
             m_PEntity->OnCastInterrupted(*this, action, msg, false);
+            m_PEntity->PAI->EventHandler.triggerListener("MAGIC_INTERRUPTED", CLuaBaseEntity(m_PEntity), CLuaBaseEntity(PTarget), CLuaSpell(m_PSpell.get()), &action);
         }
         else
         {
@@ -290,7 +293,7 @@ bool CMagicState::CanCastSpell(CBattleEntity* PTarget, bool isEndOfCast)
         return false;
     }
 
-    if (m_PEntity->StatusEffectContainer->HasStatusEffect({ EFFECT_SILENCE, EFFECT_MUTE }))
+    if (m_PEntity->StatusEffectContainer->HasStatusEffect({ EFFECT_SILENCE, EFFECT_MUTE, EFFECT_HEALING }))
     {
         m_errorMsg = std::make_unique<CMessageBasicPacket>(m_PEntity, m_PEntity, static_cast<uint16>(m_PSpell->getID()), 0, MSGBASIC_UNABLE_TO_CAST_SPELLS);
         return false;
@@ -334,7 +337,41 @@ bool CMagicState::CanCastSpell(CBattleEntity* PTarget, bool isEndOfCast)
         return false;
     }
 
-    if (m_PEntity->objtype == TYPE_PC && distance(m_PEntity->loc.p, PTarget->loc.p) > m_PSpell->getRange())
+    if (m_PSpell->getSpellGroup() == SPELLGROUP_BLUE && m_PSpell->getRange() <= 5)
+    {
+        float range = 4.6f; // basic short range for physical spells
+
+        // ToDo: This is an approximation that works well enough especially for larger mob sizes like Behemoth
+        // More captures on retail on different mob sizes will help to dial this in
+        if (PTarget->m_ModelRadius == 5)
+        {
+            range = 7.1f;
+        }
+        else if (PTarget->m_ModelRadius == 4)
+        {
+            range = 6.1f;
+        }
+        else if (PTarget->m_ModelRadius == 3)
+        {
+            range = 5.1f;
+        }
+        else if (PTarget->m_ModelRadius == 2)
+        {
+            range = 5.1f;
+        }
+        else
+        {
+            range = 4.6f;
+        }
+
+        if (distance(m_PEntity->loc.p, PTarget->loc.p) > range)
+        {
+            m_errorMsg = std::make_unique<CMessageBasicPacket>(m_PEntity, PTarget, static_cast<uint16>(m_PSpell->getID()), 0, MSGBASIC_OUT_OF_RANGE_UNABLE_CAST);
+            return false;
+        }
+    }
+
+    else if (m_PEntity->objtype == TYPE_PC && distance(m_PEntity->loc.p, PTarget->loc.p) > m_PSpell->getRange())
     {
         m_errorMsg = std::make_unique<CMessageBasicPacket>(m_PEntity, PTarget, static_cast<uint16>(m_PSpell->getID()), 0, MSGBASIC_OUT_OF_RANGE_UNABLE_CAST);
         return false;

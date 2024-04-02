@@ -1,6 +1,7 @@
 -----------------------------------
 -- Area: Ru'Aun Gardens
---   NM: Byakko
+-- NM: Byakko
+-- ID: 17309982
 -----------------------------------
 local ID = zones[xi.zone.RUAUN_GARDENS]
 mixins = { require('scripts/mixins/job_special') }

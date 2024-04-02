@@ -1,7 +1,7 @@
 -----------------------------------
 -- Area: Garlaige Citadel
 --   NM: Chandelier
--- Note: Spawned for quest "Hitting the Marquisate"
+-- Note: Spawned for quest 'Hitting the Marquisate'
 -----------------------------------
 local ID = zones[xi.zone.GARLAIGE_CITADEL]
 -----------------------------------
@@ -9,6 +9,8 @@ local entity = {}
 
 entity.onMobSpawn = function(mob)
     GetMobByID(ID.mob.CHANDELIER):setRespawnTime(0)
+    mob:setMod(xi.mod.DOUBLE_ATTACK, 10)
+    mob:addMod(xi.mod.ATT, 175)
 end
 
 entity.onMobEngage = function(mob, target)

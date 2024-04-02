@@ -1,9 +1,17 @@
 -----------------------------------
 -- Zone: Riverne-Site_B01
 -----------------------------------
+local ID = zones[xi.zone.RIVERNE_SITE_B01]
+require('scripts/globals/exp_controller')
+-----------------------------------
 local zoneObject = {}
 
 zoneObject.onInitialize = function(zone)
+    -- NM Persistence
+    xi.mob.nmTODPersistCache(zone, ID.mob.BOROKA)
+
+    xi.exp_controller.onInitialize(zone)
+
 end
 
 zoneObject.onConquestUpdate = function(zone, updatetype, influence, owner, ranking, isConquestAlliance)

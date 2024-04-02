@@ -17,6 +17,7 @@ battlefieldObject.onBattlefieldEnter = function(player, battlefield)
 end
 
 battlefieldObject.onBattlefieldLeave = function(player, battlefield, leavecode)
+    player:setLocalVar('promyLeaveCode', leavecode)
     if leavecode == xi.battlefield.leaveCode.WON then
         local _, clearTime, partySize = battlefield:getRecord()
         local arg8 = xi.cop.helpers.numPromyvionCompleted(player, xi.cop.helpers.promyvionCrags.HOLLA) + 1
@@ -42,12 +43,15 @@ end
 
 battlefieldObject.onEventFinish = function(player, csid, option, npc)
     if
-        player:getCurrentMission(xi.mission.log_id.COP) > xi.mission.id.cop.THE_MOTHERCRYSTALS and
-        player:getLocalVar('toLufaise') ~= 1
+    player:getLocalVar('newPromy') ~= 1 and
+    player:getLocalVar('promyLeaveCode') == xi.battlefield.leaveCode.WON
     then
         player:addExp(1500)
-        xi.teleport.to(player, xi.teleport.id.EXITPROMDEM)
+        xi.teleport.to(player, xi.teleport.id.EXITPROMHOLLA)
     end
+    
+    player:setLocalVar('promyLeaveCode', 0)
+    player:setLocalVar('newPromy', 0)
 end
 
 return battlefieldObject

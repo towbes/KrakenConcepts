@@ -9,7 +9,11 @@ mobskillObject.onMobSkillCheck = function(target, mob, skill)
 end
 
 mobskillObject.onMobWeaponSkill = function(target, mob, skill)
-    skill:setMsg(xi.mobskills.mobStatusEffectMove(mob, target, xi.effect.SLOW, 1250, 0, 120))
+    local power      = 1250
+    if mob:getZone():getTypeMask() == xi.zoneType.DYNAMIS then
+        power = 1600
+    end
+    skill:setMsg(xi.mobskills.mobStatusEffectMove(mob, target, xi.effect.SLOW, power, 0, 120))
 
     return xi.effect.SLOW
 end

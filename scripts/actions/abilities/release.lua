@@ -11,7 +11,7 @@ abilityObject.onAbilityCheck = function(player, target, ability)
 end
 
 abilityObject.onUseAbility = function(player, target, ability)
-    target:despawnPet()
+    player:despawnPet()
 end
 
 return abilityObject

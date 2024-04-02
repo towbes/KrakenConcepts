@@ -18,9 +18,11 @@ quest.sections =
     {
         check = function(player, status, vars)
             return status == QUEST_AVAILABLE and
+                (player:getQuestStatus(xi.quest.log_id.CRYSTAL_WAR, xi.quest.id.crystalWar.ON_SABBATICAL) == QUEST_COMPLETED and
                 xi.quest.getVar(player, xi.quest.log_id.CRYSTAL_WAR, xi.quest.id.crystalWar.ON_SABBATICAL, 'Timer') <= VanadielUniqueDay() and
-                player:getMainJob() == xi.job.SCH and
-                player:getMainLvl() >= xi.settings.main.AF2_QUEST_LEVEL
+                (player:getMainJob() == xi.job.SCH or
+                player:getSubJob() == xi.job.SCH) and
+                player:getMainLvl() >= xi.settings.main.AF2_QUEST_LEVEL)
         end,
 
         [xi.zone.THE_ELDIEME_NECROPOLIS_S] =

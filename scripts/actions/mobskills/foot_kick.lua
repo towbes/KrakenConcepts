@@ -10,11 +10,25 @@ mobskillObject.onMobSkillCheck = function(target, mob, skill)
 end
 
 mobskillObject.onMobWeaponSkill = function(target, mob, skill)
-    local numhits = 1
-    local accmod = 1
-    local dmgmod = 2.6
-    local info = xi.mobskills.mobPhysicalMove(mob, target, skill, numhits, accmod, dmgmod, xi.mobskills.physicalTpBonus.CRIT_VARIES, 1, 2, 3)
-    local dmg = xi.mobskills.mobFinalAdjustments(info.dmg, mob, skill, target, xi.attackType.PHYSICAL, xi.damageType.SLASHING, info.hitslanded)
+    local numhits   = 1
+    local accmod    = 1
+    local dmgmod    = 1.0
+    local tpEffect1 = xi.mobskills.physicalTpBonus.DMG_VARIES
+    local tpEffect2 = xi.mobskills.physicalTpBonus.CRIT_VARIES
+    local crit = 1
+    local shadowsTaken = xi.mobskills.shadowBehavior.NUMSHADOWS_1
+    if mob:getZone():getTypeMask() == xi.zoneType.DYNAMIS and not mob:isPet() then
+        shadowsTaken = xi.mobskills.shadowBehavior.IGNORE_SHADOWS
+    end
+
+    -- Level 50+ rabbits have a different type of foot kick that has a 2.0 FTP instead of 1.0 This version also crits 100% of the time.
+    if mob:getMainLvl() >= 50 then
+        info = xi.mobskills.mobPhysicalMove(mob, target, skill, numhits, accmod, dmgmod, tpEffect1, 2.25, 3.50, 5.0, tpEffect2, 1, 2, 3, crit)
+    else
+        info = xi.mobskills.mobPhysicalMove(mob, target, skill, numhits, accmod, dmgmod, tpEffect1, 2, 3, 4, tpEffect2, 1, 2, 3, crit)
+    end
+
+    local dmg = xi.mobskills.mobFinalAdjustments(info.dmg, mob, skill, target, xi.attackType.PHYSICAL, xi.damageType.SLASHING, shadowsTaken)
     target:takeDamage(dmg, mob, xi.attackType.PHYSICAL, xi.damageType.SLASHING)
     return dmg
 end

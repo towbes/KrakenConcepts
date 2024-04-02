@@ -8,16 +8,31 @@ local ID = zones[xi.zone.MISAREAUX_COAST]
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)
+    local shieldChance = 0
+    if npcUtil.tradeHasExactly(trade, xi.item.HICKORY_SHIELD) then
+        shieldChance = 500
+        npc:setLocalVar('shield', 1)
+    elseif npcUtil.tradeHasExactly(trade, xi.item.PICAROONS_SHIELD) then
+        shieldChance = 1000
+        npc:setLocalVar('shield', 2)
+    end
+
     if
-        (npcUtil.tradeHas(trade, xi.item.PICAROONS_SHIELD) or npcUtil.tradeHas(trade, xi.item.HICKORY_SHIELD)) and
+        shieldChance > 0 and
         npcUtil.popFromQM(player, npc, ID.mob.GRATION)
     then
         player:confirmTrade()
+        GetMobByID(ID.mob.GRATION):setLocalVar("DropRate", shieldChance)
+        if npc:getLocalVar('shield') == 1 then
+            player:messageSpecial(ID.text.SNATCHED_AWAY, 12359)
+        else
+            player:messageSpecial(ID.text.SNATCHED_AWAY, 12370)
+        end
     end
 end
 
 entity.onTrigger = function(player, npc)
-    player:messageSpecial(ID.text.NOTHING_OUT_OF_ORDINARY)
+    player:messageSpecial(ID.text.SHATTERED_SHIELD)
 end
 
 entity.onEventUpdate = function(player, csid, option, npc)

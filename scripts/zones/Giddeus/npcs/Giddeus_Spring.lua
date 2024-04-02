@@ -1,7 +1,7 @@
 -----------------------------------
 -- Area: Giddeus
 --  NPC: Giddeus Spring
--- Involved in Quest "Water Way to Go"
+-- Involved in Quest 'Water Way to Go'
 -- !pos -258 -2 -249 145
 -----------------------------------
 local entity = {}

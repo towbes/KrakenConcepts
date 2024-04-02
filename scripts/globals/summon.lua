@@ -202,8 +202,9 @@ xi.summon.avatarPhysicalMove = function(avatar, target, skill, numberofhits, acc
 
         --Everything past this point is randomly computed per hit
 
-        numHitsProcessed      = 0
-        local critAttackBonus = 1 + ((avatar:getMod(xi.mod.CRIT_DMG_INCREASE) - target:getMod(xi.mod.CRIT_DEF_BONUS)) / 100)
+        numHitsProcessed = 0
+
+        local critAttackBonus = 1 + ((avatar:getMod(xi.mod.CRIT_DMG_INCREASE) - target:getMod(xi.mod.CRIT_DEF_BONUS) + target:getMod(xi.mod.ENEMYCRITDMG)) / 100)
 
         if firstHitLanded then
             local wRatio = cRatio
@@ -240,6 +241,10 @@ xi.summon.avatarPhysicalMove = function(avatar, target, skill, numberofhits, acc
             finaldmg         = finaldmg + (avatarHitDmg(weaponDmg, fSTR, pDif) * dmgmodsubsequent)
             numHitsProcessed = numHitsProcessed + 1
         end
+
+        --if target:getMod(xi.mod.PET_DMG_TAKEN_PHYSICAL) ~= 0 then
+        --    finaldmg = finaldmg * (target:getMod(xi.mod.PET_DMG_TAKEN_PHYSICAL) / 100)
+        --end    
 
         -- apply ftp bonus
         if tpeffect == xi.mobskills.magicalTpBonus.DMG_BONUS then
@@ -335,6 +340,41 @@ xi.summon.avatarFinalAdjustments = function(dmg, mob, skill, target, skilltype, 
     -- Calculate Blood Pact Damage before stoneskin
     dmg = dmg + dmg * mob:getMod(xi.mod.BP_DAMAGE) / 100
 
+    if 
+        target:getAllegiance() == 2 or
+        target:getAllegiance() == 3 or
+        target:getAllegiance() == 4 or
+        target:getAllegiance() == 5 or
+        target:getAllegiance() == 6
+    then
+        dmg = dmg * 1.0
+    end
+
+    -- Calculate DMG Cap Mods
+    if skilltype == xi.attackType.MAGICAL then
+        if target:getMod(xi.mod.DMGMAGIC_CAP) > 0 and dmg > target:getMod(xi.mod.DMGMAGIC_CAP) then -- If mob has this mod, damage can not exceed mod value.
+            dmg = target:getMod(xi.mod.DMGMAGIC_CAP)
+        end
+    end
+
+    if skilltype == xi.attackType.PHYSICAL then
+        if target:getMod(xi.mod.DMGPHYS_CAP) > 0 and dmg > target:getMod(xi.mod.DMGPHYS_CAP) then -- If mob has this mod, damage can not exceed mod value.
+            dmg = target:getMod(xi.mod.DMGPHYS_CAP)
+        end
+    end
+
+    if skilltype == xi.attackType.RANGED then
+        if target:getMod(xi.mod.DMGRANGE_CAP) > 0 and dmg > target:getMod(xi.mod.DMGRANGE_CAP) then -- If mob has this mod, damage can not exceed mod value.
+            dmg = target:getMod(xi.mod.DMGRANGE_CAP)
+        end
+    end
+
+    if skilltype == xi.attackType.BREATH then
+        if target:getMod(xi.mod.DMGBREATH_CAP) > 0 and dmg > target:getMod(xi.mod.DMGBREATH_CAP) then -- If mob has this mod, damage can not exceed mod value.
+            dmg = target:getMod(xi.mod.DMGBREATH_CAP)
+        end
+    end
+
     -- handle One For All, Liement
     if skilltype == xi.attackType.MAGICAL then
         local targetMagicDamageAdjustment = xi.spells.damage.calculateTMDA(target, damagetype) -- Apply checks for Liement, MDT/MDTII/DT
@@ -358,6 +398,11 @@ xi.summon.avatarFinalAdjustments = function(dmg, mob, skill, target, skilltype, 
 
     -- handling stoneskin
     dmg = utils.stoneskin(target, dmg)
+
+    if dmg > 0 then
+        target:updateEnmityFromDamage(mob, dmg)
+        target:handleAfflatusMiseryDamage(dmg)
+    end
 
     return dmg
 end

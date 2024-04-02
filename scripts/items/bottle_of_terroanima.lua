@@ -7,10 +7,7 @@ local itemObject = {}
 
 itemObject.onItemCheck = function(target, player)
     local result = 0
-    if
-        target:getEcosystem() ~= xi.ecosystem.EMPTY and
-        player:getZone():getRegionID() == xi.region.PROMYVION
-    then
+    if target:getEcosystem() ~= xi.ecosystem.EMPTY then
         result = xi.msg.basic.ITEM_UNABLE_TO_USE
     elseif target:checkDistance(player) > 10 then
         result = xi.msg.basic.TOO_FAR_AWAY
@@ -23,6 +20,8 @@ itemObject.onItemUse = function(target, player)
     local duration = math.random(25, 32) -- Random duration between 25s and 32s
     target:setLocalVar('EmptyTerror', os.time()) -- Sets terror start time.
     target:setLocalVar('EmptyTerrorDuration', duration) -- Sets terror duration.
+    target:setLocalVar('EmptyTerrorUser', player:getID()) -- Sets user (used to indicate who the empty should run away from).
+    target:addEnmity(player, 0, 1) -- Add player to target's enmity list to prevent exploitable behavior.
 end
 
 return itemObject

@@ -3,6 +3,7 @@
 --   NM: Mahisha
 -----------------------------------
 mixins = { require('scripts/mixins/fomor_hate') }
+local ID = zones[xi.zone.PHOMIUNA_AQUEDUCTS]
 -----------------------------------
 local entity = {}
 
@@ -14,7 +15,14 @@ entity.onMobDeath = function(mob, player, optParams)
 end
 
 entity.onMobDespawn = function(mob)
-    mob:setRespawnTime(math.random(28800, 43200)) -- 8 to 12 hours
+    -- Respawn is shared with Eba, random to see which spawns
+    if math.random(1, 2) == 1 then
+        SetServerVariable('EBA_MAHISHA', 1) -- Respawn Mahisha
+        xi.mob.nmTODPersist(mob, math.random(28800, 43200)) -- 8 to 12 hours
+    else
+        SetServerVariable('EBA_MAHISHA', 0) -- Respawn Eba
+        xi.mob.nmTODPersist(GetMobByID(ID.mob.EBA), math.random(28800, 43200)) -- 8 to 12 hours
+    end
 end
 
 return entity

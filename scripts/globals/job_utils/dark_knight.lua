@@ -56,9 +56,9 @@ xi.job_utils.dark_knight.useArcaneCircle = function(player, target, ability)
     local duration = 180 * (1 + (player:getMod(xi.mod.ARCANE_CIRCLE_DURATION) / 100))
     local power    = 15 + player:getMod(xi.mod.ARCANE_CIRCLE_POTENCY)
 
-    if player:getMainJob() ~= xi.job.DRK then
-        power = 5
-    end
+    --if player:getMainJob() ~= xi.job.DRK then
+    --    power = 5
+    --end
 
     target:addStatusEffect(xi.effect.ARCANE_CIRCLE, power, 0, duration)
 end
@@ -99,11 +99,11 @@ xi.job_utils.dark_knight.useLastResort = function(player, target, ability)
 end
 
 xi.job_utils.dark_knight.useNetherVoid = function(player, target, ability)
-    player:addStatusEffect(xi.effect.NETHER_VOID, 8, 1, 30)
+    player:addStatusEffect(xi.effect.NETHER_VOID, 50, 0, 30)
 end
 
 xi.job_utils.dark_knight.useScarletDelirium = function(player, target, ability)
-    player:addStatusEffect(xi.effect.SCARLET_DELIRIUM, 8, 1, 90)
+    player:addStatusEffect(xi.effect.SCARLET_DELIRIUM, 0, 0, 90)
 end
 
 xi.job_utils.dark_knight.useSoulEnslavement = function(player, target, ability)

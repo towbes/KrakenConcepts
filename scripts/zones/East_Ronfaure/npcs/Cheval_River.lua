@@ -2,7 +2,7 @@
 -- Area: East Ronfaure
 --  NPC: Cheval_River
 -- !pos 223 -58 426 101
--- Involved in Quest: "Waters of the Cheval"
+-- Involved in Quest: 'Waters of the Cheval'
 -----------------------------------
 local entity = {}
 

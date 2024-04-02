@@ -23,6 +23,7 @@ abilityObject.onPetAbility = function(target, pet, petskill, summoner, action)
     end
 
     target:addHP(base)
+    pet:updateEnmityFromCure(pet, base)
     return base
 end
 

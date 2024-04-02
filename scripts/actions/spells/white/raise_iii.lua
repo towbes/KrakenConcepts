@@ -16,7 +16,11 @@ end
 
 spellObject.onSpellCast = function(caster, target, spell)
     if target:isPC() then
-        target:sendRaise(3)
+        if (caster:getObjType() == xi.objType.MOB) and (caster:getMobMod(xi.mobMod.PIXIE) > 0) then
+            target:sendRaise(3)
+        else
+            target:sendRaise(3)
+        end
     else
         if target:getName() == 'Prishe' then
             -- CoP 8-4 Prishe
@@ -26,6 +30,7 @@ spellObject.onSpellCast = function(caster, target, spell)
             target:addMP(target:getMaxMP())
         end
     end
+    caster:delStatusEffectSilent(xi.effect.MANAWELL)
 
     spell:setMsg(xi.msg.basic.MAGIC_CASTS_ON)
 

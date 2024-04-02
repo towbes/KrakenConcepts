@@ -64,7 +64,8 @@ enum ENSPELL
     ENSPELL_AUSPICE      = 18,
     ENSPELL_DRAIN_SAMBA  = 19,
     ENSPELL_ASPIR_SAMBA  = 20,
-    ENSPELL_HASTE_SAMBA  = 21
+    ENSPELL_HASTE_SAMBA  = 21,
+    ENSPELL_SOUL_ENSLAVEMENT = 22,
 };
 
 enum SPIKES
@@ -94,6 +95,12 @@ enum ELEMENT
     ELEMENT_WATER   = 6,
     ELEMENT_LIGHT   = 7,
     ELEMENT_DARK    = 8
+};
+
+const std::unordered_set<JOBTYPE> JOBS_WITH_PARRY_SKILL = {
+    JOB_WAR, JOB_RDM, JOB_THF, JOB_PLD, JOB_DRK, JOB_BST,
+    JOB_BRD, JOB_SAM, JOB_NIN, JOB_DRG, JOB_COR, JOB_DNC,
+    JOB_BLU, JOB_PUP, JOB_SCH, JOB_GEO, JOB_RUN
 };
 
 namespace battleutils
@@ -138,6 +145,7 @@ namespace battleutils
     bool IsParalyzed(CBattleEntity* PAttacker);
     bool IsAbsorbByShadow(CBattleEntity* PDefender, CBattleEntity* PAttacker);
     bool IsIntimidated(CBattleEntity* PAttacker, CBattleEntity* PDefender);
+    bool IsTandemValid(CBattleEntity* PAttacker);
 
     int32 GetFSTR(CBattleEntity* PAttacker, CBattleEntity* PDefender, uint8 SlotID);
     uint8 GetHitRateEx(CBattleEntity* PAttacker, CBattleEntity* PDefender, uint8 attackNumber, int8 offsetAccuracy);
@@ -227,6 +235,7 @@ namespace battleutils
 
     // returns damage taken
     int32 HandleStoneskin(CBattleEntity* PDefender, int32 damage);
+    int32 HandleMagicStoneskin(CBattleEntity* PDefender, int32 damage);
     int32 HandleOneForAll(CBattleEntity* PDefender, int32 damage);
     int32 HandleFanDance(CBattleEntity* PDefender, int32 damage);
     void  HandleScarletDelirium(CBattleEntity* PDefender, int32 damage);
@@ -246,9 +255,11 @@ namespace battleutils
     WEATHER GetWeather(CBattleEntity* PEntity, bool ignoreScholar);
     WEATHER GetWeather(CBattleEntity* PEntity, bool ignoreScholar, uint16 zoneWeather);
     bool    WeatherMatchesElement(WEATHER weather, uint8 element);
-    bool    DrawIn(CBattleEntity* PEntity, CMobEntity* PMob, float offset);
+    bool    DrawIn(CBattleEntity* PTarget, CMobEntity* PMob, float offset, uint8 drawInRange, uint16 maximumReach, bool includeParty, bool includeDeadAndMount = false);
     void    DoWildCardToEntity(CCharEntity* PCaster, CCharEntity* PTarget, uint8 roll);
+    bool    DoRandomDealToEntity(CCharEntity* PChar, CCharEntity* PTarget);
     void    AddTraits(CBattleEntity* PEntity, TraitList_t* TraitList, uint8 level);
+    void    AddTraitsSJ(CBattleEntity* PEntity, TraitList_t* TraitList, uint8 level, size_t cutoff);
     bool    HasClaim(CBattleEntity* PEntity, CBattleEntity* PTarget);
 
     uint32 CalculateSpellCastTime(CBattleEntity*, CMagicState*);

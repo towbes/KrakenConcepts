@@ -63,6 +63,7 @@ instanceObject.onEventUpdate = function(player, csid, option, npc)
 end
 
 instanceObject.onEventFinish = function(player, csid, option, npc)
+    xi.assault.instanceOnEventFinish(player, csid, xi.zone.CAEDARVA_MIRE)
 end
 
 return instanceObject

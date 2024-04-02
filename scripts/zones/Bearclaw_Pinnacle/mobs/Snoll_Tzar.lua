@@ -16,22 +16,17 @@ end
 entity.onMobFight = function(mob, player, target)
     local changeTime = mob:getLocalVar('changeTime')
     local delay = mob:getLocalVar('delayed')
-    local cd = mob:getLocalVar('cooldown')
-    local salty = mob:getLocalVar('salty')
-    local melting = mob:getLocalVar('melt')
 
     mob:setDamage(130)
 
     -- handle salt usage
-    if melting == 1 then
+    if mob:getLocalVar('melt') == 1 then
+        player:messageText(player, ID.text.BEGINS_TO_MELT)
         mob:setLocalVar('melt', 0)
     end
 
-    -- handle salt cooldown
-    if
-        cd < os.time() and
-        salty == 1
-    then
+    -- salt cooldown time reset
+    if (mob:getLocalVar('cooldown') < os.time() and mob:getLocalVar('salty') == 1) then
         player:messageText(player, ID.text.SHOOK_SALT)
         mob:setLocalVar('salty', 0)
     end
@@ -52,7 +47,6 @@ entity.onMobFight = function(mob, player, target)
         mob:getAnimationSub() == 5 and
         mob:getBattleTime() - changeTime > 11
     then
-        player:messageText(player, ID.text.LARGE_STEAM) -- approx. midway point - give warning
         mob:setLocalVar('delayed', 0)
         mob:setAnimationSub(6)
         mob:setLocalVar('changeTime', mob:getBattleTime())

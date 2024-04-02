@@ -2,6 +2,8 @@
 -- Area: Castle Zvahl Keep (162)
 --  Mob: Count Bifrons
 -----------------------------------
+mixins = {require('scripts/mixins/job_special')}
+-----------------------------------
 local entity = {}
 
 entity.onMobDeath = function(mob, player, optParams)

@@ -6,7 +6,8 @@
 local mobskillObject = {}
 
 mobskillObject.onMobSkillCheck = function(target, mob, skill)
-    if mob:getMainJob() ~= xi.job.WAR then
+    local mobSkin = mob:getModelId() --Mobskill based on modelid, this is for all h2h models
+    if mobSkin == 271 or mobSkin == 642 or mobSkin == 643 or mobSkin == 709 or mobSkin == 711 then
         return 0
     end
 
@@ -17,6 +18,9 @@ mobskillObject.onMobWeaponSkill = function(target, mob, skill)
     local numhits = 1
     local accmod = 1
     local dmgmod = 2.8
+    if mob:getName() == 'Arch_Antaeus' then
+        dmgmod = 3.0
+    end
     local info = xi.mobskills.mobPhysicalMove(mob, target, skill, numhits, accmod, dmgmod, xi.mobskills.physicalTpBonus.DMG_VARIES, 1, 2, 3)
     local dmg = xi.mobskills.mobFinalAdjustments(info.dmg, mob, skill, target, xi.attackType.PHYSICAL, xi.damageType.H2H, info.hitslanded)
     target:takeDamage(dmg, mob, xi.attackType.PHYSICAL, xi.damageType.H2H)

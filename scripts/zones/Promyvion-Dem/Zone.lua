@@ -1,12 +1,17 @@
 -----------------------------------
 -- Zone: Promyvion-Dem (18)
 -----------------------------------
+local ID = zones[xi.zone.PROMYVION_DEM]
+require('scripts/globals/promyvion')
+require('scripts/globals/exp_controller')
+-----------------------------------
 local zoneObject = {}
 
 zoneObject.onInitialize = function(zone)
 --    UpdateNMSpawnPoint(ID.mob.SATIATOR)
 --    GetMobByID(ID.mob.SATIATOR):setRespawnTime(math.random(3600, 21600))
     xi.promyvion.initZone(zone)
+    xi.exp_controller.onInitialize(zone)
 end
 
 zoneObject.onZoneIn = function(player, prevZone)
@@ -40,6 +45,9 @@ zoneObject.onEventFinish = function(player, csid, option, npc)
     if csid == 46 and option == 1 then
         player:setPos(-226.193, -46.459, -280.046, 127, 14) -- To Hall of Transference (R)
     end
+end
+
+zoneObject.onGameDay = function(zone)
 end
 
 return zoneObject

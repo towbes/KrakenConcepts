@@ -99,6 +99,7 @@ quest.sections =
                         if timeRemaining > 0 then
                             return quest:progressEvent(122)
                         else
+                            -- Quest failed
                             return quest:progressEvent(123)
                         end
                     end

@@ -1,11 +1,16 @@
 -----------------------------------
 -- Zone: Palborough Mines (143)
 -----------------------------------
+local ID = zones[xi.zone.PALBOROUGH_MINES]
 local zoneObject = {}
 
 zoneObject.onInitialize = function(zone)
     xi.treasure.initZone(zone)
     xi.helm.initZone(zone, xi.helmType.MINING)
+
+    -- NM Persistence
+    xi.mob.nmTODPersistCache(zone, ID.mob.NOMHO_CRIMSONARMOR)
+    xi.mob.nmTODPersistCache(zone, ID.mob.QUVHO_DEATHHURLER)
 end
 
 zoneObject.onZoneIn = function(player, prevZone)

@@ -15,7 +15,7 @@ end
 
 itemObject.onItemUse = function(target)
     target:addTP(1000)
-    target:addStatusEffect(xi.effect.MEDICINE, 0, 0, 7200)
+    target:addStatusEffect(xi.effect.MEDICINE, 0, 0, 1800)
 end
 
 return itemObject

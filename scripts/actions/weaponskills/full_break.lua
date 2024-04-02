@@ -20,7 +20,8 @@ local weaponskillObject = {}
 weaponskillObject.onUseWeaponSkill = function(player, target, wsID, tp, primary, action, taChar)
     local params = {}
     params.numHits = 1
-    params.ftpMod = { 1.0, 1.0, 1.0 }
+    params.ftpMod = { 1.25, 1.25, 1.25 }
+    -- params.ftpMod = { 1.0, 1.0, 1.0 }
     params.str_wsc = 0.5 params.vit_wsc = 0.5
     local damage, criticalHit, tpHits, extraHits = xi.weaponskills.doPhysicalWeaponskill(player, target, wsID, params, tp, action, primary, taChar)
 
@@ -31,18 +32,22 @@ weaponskillObject.onUseWeaponSkill = function(player, target, wsID, tp, primary,
 
         if not target:hasStatusEffect(xi.effect.DEFENSE_DOWN) then
             target:addStatusEffect(xi.effect.DEFENSE_DOWN, 12.5, 0, duration * applyResistanceAddEffect(player, target, xi.element.WIND, 0))
+            player:messagePublic(xi.msg.basic.SKILL_ENFEEB, target, wsID, xi.effect.DEFENSE_DOWN)
         end
 
         if not target:hasStatusEffect(xi.effect.ATTACK_DOWN) then
             target:addStatusEffect(xi.effect.ATTACK_DOWN, 12.5, 0, duration * applyResistanceAddEffect(player, target, xi.element.WATER, 0))
+            player:messagePublic(xi.msg.basic.SKILL_ENFEEB, target, wsID, xi.effect.ATTACK_DOWN)
         end
 
         if not target:hasStatusEffect(xi.effect.EVASION_DOWN) then
             target:addStatusEffect(xi.effect.EVASION_DOWN, 20, 0, duration * applyResistanceAddEffect(player, target, xi.element.ICE, 0))
+            player:messagePublic(xi.msg.basic.SKILL_ENFEEB, target, wsID, xi.effect.EVASION_DOWN)
         end
 
         if not target:hasStatusEffect(xi.effect.ACCURACY_DOWN) then
             target:addStatusEffect(xi.effect.ACCURACY_DOWN, 20, 0, duration * applyResistanceAddEffect(player, target, xi.element.EARTH, 0))
+            player:messagePublic(xi.msg.basic.SKILL_ENFEEB, target, wsID, xi.effect.ACCURACY_DOWN)
         end
     end
 

@@ -6,14 +6,21 @@
 local itemObject = {}
 
 itemObject.onItemCheck = function(target)
+    local effect = target:getStatusEffect(xi.effect.REFRESH)
+    if effect ~= nil and effect:getItemSourceID() == xi.item.HYDRA_DOUBLET then
+        target:delStatusEffect(xi.effect.REFRESH)
+    end
+
     return 0
 end
 
 itemObject.onItemUse = function(target)
-    if target:hasStatusEffect(xi.effect.REFRESH) then
-        target:messageBasic(xi.msg.basic.NO_EFFECT)
-    else
-        target:addStatusEffect(xi.effect.REFRESH, 4, 3, 180)
+    if target:hasEquipped(xi.item.HYDRA_DOUBLET) then
+        if target:hasStatusEffect(xi.effect.REFRESH) then
+            target:messageBasic(xi.msg.basic.NO_EFFECT)
+        else
+            target:addStatusEffect(xi.effect.REFRESH, 4, 3, 180, 0, 0, 0, xi.item.HYDRA_DOUBLET)
+        end
     end
 end
 

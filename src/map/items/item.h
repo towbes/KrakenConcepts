@@ -94,6 +94,8 @@ public:
     bool isSubType(ITEM_SUBTYPE) const;
     bool isStorageSlip() const;
 
+    bool isRare();
+
     void setID(uint16);
     void setSubID(uint16);
     void setSubType(uint8);
@@ -122,8 +124,8 @@ public:
     virtual void              setSignature(std::string const& signature);
 
     bool isSoultrapper() const;
-    void setSoulPlateData(std::string const& name, uint16 mobFamily, uint8 zeni, uint16 skillIndex, uint8 fp);
-    auto getSoulPlateData() -> std::tuple<std::string, uint16, uint8, uint16, uint8>;
+    void setSoulPlateData(std::string const& name, uint8 fauna, uint8 subOfInterest, uint8 ecoSystem, uint8 zeni, uint16 skillIndex, uint8 fp);
+    auto getSoulPlateData() -> std::tuple<std::string, uint8, uint8, uint8, uint8, uint16, uint8>;
 
     bool isMannequin() const;
 

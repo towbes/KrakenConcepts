@@ -41,6 +41,7 @@ along with this program.  If not, see http://www.gnu.org/licenses/
 #include "conquest_system.h"
 #include "enmity_container.h"
 #include "entities/charentity.h"
+#include "entities/fellowentity.h"
 #include "entities/mobentity.h"
 #include "entities/npcentity.h"
 #include "entities/trustentity.h"
@@ -66,6 +67,7 @@ along with this program.  If not, see http://www.gnu.org/licenses/
 #include "utils/blacklistutils.h"
 #include "utils/blueutils.h"
 #include "utils/charutils.h"
+#include "utils/fellowutils.h"
 #include "utils/fishingutils.h"
 #include "utils/gardenutils.h"
 #include "utils/itemutils.h"
@@ -118,6 +120,7 @@ along with this program.  If not, see http://www.gnu.org/licenses/
 #include "packets/delivery_box.h"
 #include "packets/downloading_data.h"
 #include "packets/entity_update.h"
+#include "packets/fellow_despawn.h"
 #include "packets/furniture_interact.h"
 #include "packets/guild_menu_buy.h"
 #include "packets/guild_menu_buy_update.h"
@@ -437,7 +440,7 @@ void SmallPacket0x00C(map_session_data_t* const PSession, CCharEntity* const PCh
     TracyZoneScoped;
     PChar->pushPacket(new CInventorySizePacket(PChar));
     PChar->pushPacket(new CMenuConfigPacket(PChar));
-    PChar->pushPacket(new CCharJobsPacket(PChar));
+    PChar->pushPacket(new CCharJobsPacket(PChar, true)); // Umeboshi "resetflips"
 
     if (charutils::hasKeyItem(PChar, 2544))
     {
@@ -462,6 +465,32 @@ void SmallPacket0x00C(map_session_data_t* const PSession, CCharEntity* const PCh
 
         PChar->resetPetZoningInfo();
     }
+
+    // respawn fellow from last zone if applicable
+    if (PChar->fellowZoningInfo.respawnFellow)
+    {
+        // only repawn fellow in valid zones
+        if (PChar->loc.zone->CanUseMisc(MISC_FELLOW) && !PChar->m_moghouseID)
+        {
+            // only respawn in wotg zones if player has unlocked wotg for fellows
+            if (PChar->loc.zone->GetContinentID() == CONTINENT_TYPE::THE_SHADOWREIGN_ERA)
+            {
+                const char* Query = "SELECT wotg_unlock FROM char_fellow WHERE charid = %u;";
+                int32       ret   = sql->Query(Query, PChar->id);
+                if (ret != SQL_ERROR && sql->NumRows() != 0 && sql->NextRow() == SQL_SUCCESS)
+                {
+                    if (sql->GetIntData(0) == 0)
+                        fellowutils::SpawnFellow(PChar, PChar->fellowZoningInfo.fellowID, true);
+                }
+            }
+            else
+            {
+                fellowutils::SpawnFellow(PChar, PChar->fellowZoningInfo.fellowID, true);
+            }
+        }
+    }
+    // Reset the fellowZoning info
+    PChar->resetFellowZoningInfo();
 }
 
 /************************************************************************
@@ -541,6 +570,21 @@ void SmallPacket0x00D(map_session_data_t* const PSession, CCharEntity* const PCh
         else
         {
             PChar->resetPetZoningInfo();
+        }
+
+        if (PChar->m_PFellow != nullptr)
+        {
+            uint16      maxTime  = 0;
+            const char* QueryMax = "SELECT maxTime FROM char_fellow WHERE charid = %u";
+            if (sql->Query(QueryMax, PChar->id) != SQL_ERROR && sql->NumRows() != 0 && sql->NextRow() == SQL_SUCCESS)
+                maxTime = (uint16)sql->GetIntData(0);
+            uint32      spawnTime  = 0;
+            const char* QuerySpawn = "SELECT spawnTime FROM char_fellow WHERE charid = %u";
+            if (sql->Query(QuerySpawn, PChar->id) != SQL_ERROR && sql->NumRows() != 0 && sql->NextRow() == SQL_SUCCESS)
+                spawnTime = (uint32)sql->GetIntData(0);
+            sql->Query("UPDATE char_fellow SET maxTime = %u WHERE charid = %u",
+                       maxTime - (CVanaTime::getInstance()->getVanaTime() + 1009810800 - spawnTime), PChar->id);
+            PChar->setFellowZoningInfo();
         }
 
         PSession->shuttingDown = 1;
@@ -931,6 +975,19 @@ void SmallPacket0x01A(map_session_data_t* const PSession, CCharEntity* const PCh
                 PChar->RemoveTrust(PTrust);
             }
 
+            // Releasing an NPC Fellow
+            if (PChar->m_PFellow != nullptr && PChar->m_PFellow->targid == TargID)
+            {
+                if (data.ref<uint8>(0x0C) == 1)
+                {
+                    fellowutils::TriggerFellowChat(PChar, FELLOWCHAT_DISBAND); // Dismiss Message
+                    PChar->loc.zone->PushPacket(PChar, CHAR_INRANGE_SELF, new CFellowDespawnPacket(PChar->m_PFellow));
+                    PChar->RemoveFellow();
+                }
+                else
+                    PChar->m_PFellow->PAI->Trigger(PChar);
+            }
+
             if (!PChar->isNpcLocked())
             {
                 PChar->eventPreparation->reset();
@@ -945,7 +1002,10 @@ void SmallPacket0x01A(map_session_data_t* const PSession, CCharEntity* const PCh
                 PChar->StatusEffectContainer->DelStatusEffectSilent(EFFECT_MOUNTED);
             }
 
-            PChar->PAI->Engage(TargID);
+            if (PChar->animation != ANIMATION_HEALING)
+            {
+                PChar->PAI->Engage(TargID);
+            }
         }
         break;
         case 0x03: // spellcast
@@ -1163,10 +1223,23 @@ void SmallPacket0x01A(map_session_data_t* const PSession, CCharEntity* const PCh
                 // PChar->PBattleAI->SetCurrentAction(ACTION_RAISE_MENU_SELECTION);
                 PChar->loc.p           = PChar->m_StartActionPos;
                 PChar->loc.destination = PChar->getZone();
-                PChar->status          = STATUS_TYPE::DISAPPEAR;
                 PChar->loc.boundary    = 0;
                 PChar->clearPacketList();
-                charutils::SendToZone(PChar, 2, zoneutils::GetZoneIPP(PChar->loc.destination));
+
+                // This is a stopgap until we determine a better solution of how add the member
+                // back to the battlefield member list after the zone.
+                if (PChar->StatusEffectContainer->HasStatusEffect(EFFECT_BATTLEFIELD))
+                {
+                    PChar->status = STATUS_TYPE::INVISIBLE;
+                    PChar->loc.zone->PushPacket(PChar, CHAR_INRANGE_SELF, new CPositionPacket(PChar));
+                    PChar->updatemask |= UPDATE_POS;
+                    PChar->status = STATUS_TYPE::NORMAL;
+                }
+                else
+                {
+                    PChar->status = STATUS_TYPE::DISAPPEAR;
+                    charutils::SendToZone(PChar, 2, zoneutils::GetZoneIPP(PChar->loc.destination));
+                }
             }
 
             PChar->m_hasTractor = 0;
@@ -3365,7 +3438,7 @@ void SmallPacket0x04E(map_session_data_t* const PSession, CCharEntity* const PCh
 
                 if (PItem != nullptr)
                 {
-                    if (PItem->getFlag() & ITEM_FLAG_RARE)
+                    if (PItem->isRare())
                     {
                         for (uint8 LocID = 0; LocID < CONTAINER_ID::MAX_CONTAINER_ID; ++LocID)
                         {
@@ -3925,6 +3998,23 @@ void SmallPacket0x05E(map_session_data_t* const PSession, CCharEntity* const PCh
 {
     TracyZoneScoped;
 
+    // handle adventuring fellow on zone
+    if (PChar->m_PFellow != nullptr)
+    {
+        uint16      maxTime  = 0;
+        const char* QueryMax = "SELECT maxTime FROM char_fellow WHERE charid = %u";
+        if (sql->Query(QueryMax, PChar->id) != SQL_ERROR && sql->NumRows() != 0 && sql->NextRow() == SQL_SUCCESS)
+            maxTime = (uint16)sql->GetIntData(0);
+        uint32      spawnTime  = 0;
+        const char* QuerySpawn = "SELECT spawnTime FROM char_fellow WHERE charid = %u";
+        if (sql->Query(QuerySpawn, PChar->id) != SQL_ERROR && sql->NumRows() != 0 && sql->NextRow() == SQL_SUCCESS)
+            spawnTime = (uint32)sql->GetIntData(0);
+        sql->Query("UPDATE char_fellow SET maxTime = %u WHERE charid = %u",
+                   maxTime - (CVanaTime::getInstance()->getVanaTime() + 1009810800 - spawnTime), PChar->id);
+        PChar->setFellowZoningInfo();
+        PChar->RemoveFellow();
+    }
+
     uint32 zoneLineID    = data.ref<uint32>(0x04);
     uint8  town          = data.ref<uint8>(0x16);
     uint8  requestedZone = data.ref<uint8>(0x17);
@@ -4155,7 +4245,7 @@ void SmallPacket0x061(map_session_data_t* const PSession, CCharEntity* const PCh
     TracyZoneScoped;
     PChar->pushPacket(new CCharUpdatePacket(PChar));
     PChar->pushPacket(new CCharHealthPacket(PChar));
-    PChar->pushPacket(new CCharStatsPacket(PChar));
+    PChar->pushPacket(new CCharStatsPacket(PChar, false)); // Umeboshi "resetflips"
     PChar->pushPacket(new CCharSkillsPacket(PChar));
     PChar->pushPacket(new CCharRecastPacket(PChar));
     PChar->pushPacket(new CMenuMeritPacket(PChar));
@@ -4997,7 +5087,63 @@ void SmallPacket0x084(map_session_data_t* const PSession, CCharEntity* const PCh
             quantity = std::min(quantity, PItem->getQuantity());
             // Store item-to-sell in the last slot of the shop container
             PChar->Container->setItem(PChar->Container->getExSize(), itemID, slotID, quantity);
-            PChar->pushPacket(new CShopAppraisePacket(slotID, PItem->getBasePrice()));
+            // PChar->pushPacket(new CShopAppraisePacket(slotID, PItem->getBasePrice()));
+            uint32 basePrice = PItem->getBasePrice();
+            uint16 fame      = 0;
+            float  mult      = 1.0f;
+
+            // Start Fame calculations
+            float fameMultiplier = settings::get<bool>("map.FAME_MULTIPLIER");
+            uint8 fameArea       = zoneutils::GetFameAreaFromZone(PChar->getZone());
+
+            switch (fameArea)
+            {
+                case 0: // San d'Oria
+                case 1: // Bastok
+                case 2: // Windurst
+                    fame = (uint16)(PChar->profile.fame[fameArea] * fameMultiplier);
+                    break;
+                case 3: // Jeuno
+                    fame = (uint16)(PChar->profile.fame[4] + ((PChar->profile.fame[0] + PChar->profile.fame[1] + PChar->profile.fame[2]) * fameMultiplier / 3));
+                    break;
+                case 4: // Selbina / Rabao
+                    fame = (uint16)((PChar->profile.fame[0] + PChar->profile.fame[1]) * fameMultiplier / 2);
+                    break;
+                case 5: // Norg
+                    fame = (uint16)(PChar->profile.fame[3] * fameMultiplier);
+                    break;
+                default: // default to no fame for worst sale price
+                    fame = 0;
+                    break;
+            }
+
+            // Amalasanda
+            if (PChar->getZone() == ZONE_LOWER_JEUNO && PChar->loc.p.x > 23.0f && PChar->loc.p.x < 45.0f && PChar->loc.p.z > -62.0f && PChar->loc.p.z < -29.0f)
+                fame = (uint16)(PChar->profile.fame[3] * fameMultiplier); // use tenshodo fame
+
+            if (basePrice >= 160)
+            {
+                mult = 1.025f;
+                if (fame < 613)
+                {
+                    mult = 1.0f + 0.025f * (float)fame / 612.0f;
+                }
+            }
+
+            if (basePrice < 160)
+            {
+                mult = 1.1f;
+                if (fame < 613)
+                {
+                    mult = 1.0f + 0.1f * (float)fame / 612.0f;
+                }
+            }
+
+            if (basePrice == 1)
+                mult = 1.0f; // dont round down to 0
+            // fame end
+
+            PChar->pushPacket(new CShopAppraisePacket(slotID, basePrice * mult));
         }
         return;
     }
@@ -5044,7 +5190,64 @@ void SmallPacket0x085(map_session_data_t* const PSession, CCharEntity* const PCh
             return;
         }
 
-        charutils::UpdateItem(PChar, LOC_INVENTORY, 0, quantity * PItem->getBasePrice());
+        //charutils::UpdateItem(PChar, LOC_INVENTORY, 0, quantity * PItem->getBasePrice());
+
+        uint32 basePrice = PItem->getBasePrice();
+        uint16 fame      = 0;
+        float  mult      = 1.0f;
+
+        // Start Fame calculations
+        float fameMultiplier = settings::get<bool>("map.FAME_MULTIPLIER");
+        uint8 fameArea       = zoneutils::GetFameAreaFromZone(PChar->getZone());
+
+        switch (fameArea)
+        {
+            case 0: // San d'Oria
+            case 1: // Bastok
+            case 2: // Windurst
+                fame = (uint16)(PChar->profile.fame[fameArea] * fameMultiplier);
+                break;
+            case 3: // Jeuno
+                fame = (uint16)(PChar->profile.fame[4] + ((PChar->profile.fame[0] + PChar->profile.fame[1] + PChar->profile.fame[2]) * fameMultiplier / 3));
+                break;
+            case 4: // Selbina / Rabao
+                fame = (uint16)((PChar->profile.fame[0] + PChar->profile.fame[1]) * fameMultiplier / 2);
+                break;
+            case 5: // Norg
+                fame = (uint16)(PChar->profile.fame[3] * fameMultiplier);
+                break;
+            default: // default to no fame for worst sale price
+                fame = 0;
+                break;
+        }
+
+        // Amalasanda
+        if (PChar->getZone() == ZONE_LOWER_JEUNO && PChar->loc.p.x > 23.0f && PChar->loc.p.x < 45.0f && PChar->loc.p.z > -62.0f && PChar->loc.p.z < -29.0f)
+            fame = (uint16)(PChar->profile.fame[3] * fameMultiplier); // use tenshodo fame
+
+        if (basePrice >= 160)
+        {
+            mult = 1.025f;
+            if (fame < 613)
+            {
+                mult = 1.0f + 0.025f * (float)fame / 612.0f;
+            }
+        }
+
+        if (basePrice < 160)
+        {
+            mult = 1.1f;
+            if (fame < 613)
+            {
+                mult = 1.0f + 0.1f * (float)fame / 612.0f;
+            }
+        }
+
+        if (basePrice == 1)
+            mult = 1.0f; // dont round down to 0
+        // fame end
+
+        charutils::UpdateItem(PChar, LOC_INVENTORY, 0, quantity * (uint32)((float)basePrice * mult));
         charutils::UpdateItem(PChar, LOC_INVENTORY, slotID, -(int32)quantity);
         ShowInfo("SmallPacket0x085: Player '%s' sold %u of itemID %u [to VENDOR] ", PChar->getName(), quantity, itemID);
         PChar->pushPacket(new CMessageStandardPacket(nullptr, itemID, quantity, MsgStd::Sell));
@@ -5829,7 +6032,7 @@ void SmallPacket0x0BE(map_session_data_t* const PSession, CCharEntity* const PCh
                     PChar->addHP(PChar->GetMaxHP());
                     PChar->addMP(PChar->GetMaxMP());
                     PChar->pushPacket(new CCharUpdatePacket(PChar));
-                    PChar->pushPacket(new CCharStatsPacket(PChar));
+                    PChar->pushPacket(new CCharStatsPacket(PChar, true)); // Umeboshi "resetflips"
                     PChar->pushPacket(new CCharSkillsPacket(PChar));
                     PChar->pushPacket(new CCharRecastPacket(PChar));
                     PChar->pushPacket(new CCharAbilitiesPacket(PChar));
@@ -7486,6 +7689,7 @@ void SmallPacket0x100(map_session_data_t* const PSession, CCharEntity* const PCh
         {
             JOBTYPE prevjob = PChar->GetMJob();
             PChar->resetPetZoningInfo();
+            PChar->resetFellowZoningInfo();
 
             charutils::SaveJobChangeGear(PChar);
             charutils::RemoveAllEquipment(PChar);
@@ -7518,6 +7722,7 @@ void SmallPacket0x100(map_session_data_t* const PSession, CCharEntity* const PCh
         {
             JOBTYPE prevsjob = PChar->GetSJob();
             PChar->resetPetZoningInfo();
+            PChar->resetFellowZoningInfo();
 
             PChar->SetSJob(sjob);
             PChar->SetSLevel(PChar->jobs.job[PChar->GetSJob()]);
@@ -7575,9 +7780,9 @@ void SmallPacket0x100(map_session_data_t* const PSession, CCharEntity* const PCh
 
         charutils::SaveCharStats(PChar);
 
-        PChar->pushPacket(new CCharJobsPacket(PChar));
+        PChar->pushPacket(new CCharJobsPacket(PChar, true)); // Umeboshi "resetflips"
         PChar->pushPacket(new CCharUpdatePacket(PChar));
-        PChar->pushPacket(new CCharStatsPacket(PChar));
+        PChar->pushPacket(new CCharStatsPacket(PChar, true)); // Umeboshi "resetflips"
         PChar->pushPacket(new CCharSkillsPacket(PChar));
         PChar->pushPacket(new CCharRecastPacket(PChar));
         PChar->pushPacket(new CCharAbilitiesPacket(PChar));
@@ -7642,7 +7847,7 @@ void SmallPacket0x102(map_session_data_t* const PSession, CCharEntity* const PCh
             PChar->pushPacket(new CCharAbilitiesPacket(PChar));
             PChar->pushPacket(new CCharJobExtraPacket(PChar, true));
             PChar->pushPacket(new CCharJobExtraPacket(PChar, false));
-            PChar->pushPacket(new CCharStatsPacket(PChar));
+            PChar->pushPacket(new CCharStatsPacket(PChar, true)); // Umeboshi "resetflips"
             PChar->UpdateHealth();
         }
         else
@@ -7666,7 +7871,8 @@ void SmallPacket0x102(map_session_data_t* const PSession, CCharEntity* const PCh
                 if (spell != nullptr)
                 {
                     uint8 mLevel = PChar->m_LevelRestriction != 0 && PChar->m_LevelRestriction < PChar->GetMLevel() ? PChar->m_LevelRestriction : PChar->GetMLevel();
-                    uint8 sLevel = floor(mLevel / 2);
+                    // uint8 sLevel = floor(mLevel / 2);
+                    uint8 sLevel = PChar->m_LevelRestriction != 0 && PChar->m_LevelRestriction < PChar->GetSLevel() ? PChar->m_LevelRestriction : PChar->GetSLevel();
 
                     if (mLevel < spell->getJob(PChar->GetMJob()) && sLevel < spell->getJob(PChar->GetSJob()))
                     {
@@ -7679,7 +7885,7 @@ void SmallPacket0x102(map_session_data_t* const PSession, CCharEntity* const PCh
                     PChar->pushPacket(new CCharAbilitiesPacket(PChar));
                     PChar->pushPacket(new CCharJobExtraPacket(PChar, true));
                     PChar->pushPacket(new CCharJobExtraPacket(PChar, false));
-                    PChar->pushPacket(new CCharStatsPacket(PChar));
+                    PChar->pushPacket(new CCharStatsPacket(PChar, true)); // Umeboshi "resetflips"
                     PChar->UpdateHealth();
                 }
                 else

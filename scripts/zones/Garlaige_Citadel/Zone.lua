@@ -13,25 +13,24 @@ zoneObject.onInitialize = function(zone)
     zone:registerTriggerArea(4, -213, -1, 212, -211, 1, 215)
 
     -- Banishing Gate #2
-    zone:registerTriggerArea(10,  -51, -1,  82,  -49, 1,  84)
-    zone:registerTriggerArea(11, -151, -1,  82, -149, 1,  84)
-    zone:registerTriggerArea(12,  -51, -1, 115,  -49, 1, 117)
-    zone:registerTriggerArea(13, -151, -1, 115, -149, 1, 117)
+    zone:registerTriggerArea(10,  -51, -1,  82,  -49, 1,  84.2)
+    zone:registerTriggerArea(11, -151, -1,  82, -149, 1,  84.2)
+    zone:registerTriggerArea(12,  -51, -1, 115,  -49, 1, 117.2)
+    zone:registerTriggerArea(13, -151, -1, 115, -149, 1, 117.2)
 
     -- Banishing Gate #3
-    zone:registerTriggerArea(19, -190, -1, 355, -188, 1, 357)
-    zone:registerTriggerArea(20, -130, -1, 355, -128, 1, 357)
-    zone:registerTriggerArea(21, -190, -1, 322, -188, 1, 324)
-    zone:registerTriggerArea(22, -130, -1, 322, -128, 1, 324)
+    zone:registerTriggerArea(19, -190.2, -1, 355, -188, 1, 357.2)
+    zone:registerTriggerArea(20, -130.2, -1, 355, -128, 1, 357.2)
+    zone:registerTriggerArea(21, -190.2, -1, 322, -188, 1, 324.2)
+    zone:registerTriggerArea(22, -130.2, -1, 322, -128, 1, 324.2)
 
-    UpdateNMSpawnPoint(ID.mob.OLD_TWO_WINGS)
-    GetMobByID(ID.mob.OLD_TWO_WINGS):setRespawnTime(math.random(900, 10800))
-
+    -- NM Persistence
+    xi.mob.nmTODPersistCache(zone, ID.mob.OLD_TWO_WINGS)
+    xi.mob.nmTODPersistCache(zone, ID.mob.SKEWER_SAM)
+    xi.mob.nmTODPersistCache(zone, ID.mob.SERKET)
+    
     UpdateNMSpawnPoint(ID.mob.SKEWER_SAM)
     GetMobByID(ID.mob.SKEWER_SAM):setRespawnTime(math.random(900, 10800))
-
-    UpdateNMSpawnPoint(ID.mob.SERKET)
-    GetMobByID(ID.mob.SERKET):setRespawnTime(math.random(900, 10800))
 
     xi.treasure.initZone(zone)
 end
@@ -71,8 +70,30 @@ zoneObject.onTriggerAreaEnter = function(player, triggerArea)
         GetNPCByID(gateId + 3):getAnimation() == xi.anim.OPEN_DOOR and
         GetNPCByID(gateId + 4):getAnimation() == xi.anim.OPEN_DOOR
     then
-        player:messageSpecial(ID.text.BANISHING_GATES + leverSet)
-        GetNPCByID(gateId):openDoor(30)
+        if gate:getLocalVar('isOpen') == 0 then
+
+            -- set gate opened var to prevent 'opening' an already open gate.
+            gate:setLocalVar('isOpen', 1)
+
+            -- I think different gates might have different durations.
+            local time = 60
+            local zonePlayers = player:getZone():getPlayers()
+            gate:openDoor(time)
+            for _, zonePlayer in pairs(zonePlayers) do
+                -- send gate opening text to each player in zone
+                zonePlayer:messageSpecial(ID.text.BANISHING_GATES + leverSet)
+
+                gate:timer(1000 * time, function(gateArg)
+                    -- send gate closing text to each player in zone
+                    zonePlayer:messageSpecial(ID.text.BANISHING_GATES_CLOSING + leverSet)
+                end)
+            end
+
+            gate:timer(1000 * time, function(gateArg)
+                -- set gate closed var to allow this gate to be opened again.
+                gateArg:setLocalVar('isOpen', 0)
+            end)
+        end
     end
 end
 

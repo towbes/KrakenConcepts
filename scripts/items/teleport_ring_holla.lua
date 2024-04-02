@@ -1,7 +1,7 @@
 -----------------------------------
 -- ID: 14661
 -- Teleport ring: Holla
--- Enchantment: "Teleport-Holla"
+-- Enchantment: 'Teleport-Holla'
 -----------------------------------
 local itemObject = {}
 

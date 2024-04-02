@@ -16,7 +16,7 @@ local entity = {}
 entity.onMobInitialize = function(mob)
     mob:setMobMod(xi.mobMod.GIL_MIN, 12000)
     mob:setMobMod(xi.mobMod.GIL_MAX, 30000)
-    mob:setMobMod(xi.mobMod.MUG_GIL, 8000)
+    mob:setMobMod(xi.mobMod.MUG_GIL, 4000)
     mob:setMobMod(xi.mobMod.DRAW_IN, 1)
     mob:setMod(xi.mod.UDMGBREATH, -10000) -- immune to breath damage
     mob:setMobMod(xi.mobMod.IDLE_DESPAWN, 300)
@@ -26,7 +26,14 @@ entity.onMobSpawn = function(mob)
     mob:setLocalVar('[rage]timer', 3600) -- 60 minutes
     mob:setHP(mob:getMaxHP() / 2)
     mob:setUnkillable(true)
-    mob:setMod(xi.mod.REGEN, 50)
+    mob:setMod(xi.mod.REGEN, 51)
+    mob:setMod(xi.mod.STUNRES, 100)
+    mob:setMod(xi.mod.MAIN_DMG_RATING, 50)
+    mob:setMod(xi.mod.STR, 40)
+    mob:setMod(xi.mod.ATTP, 30)
+    mob:setMod(xi.mod.REGEN_DOWN, 1) -- so it doesn't regen during roaming
+    mob:setMobMod(xi.mobMod.NO_REST, 1) -- so it doesn't regen during roaming
+
 
     -- Regen Head every 1.5-4 minutes 90-240
     mob:setLocalVar('headTimer', os.time() + math.random(60, 190))
@@ -86,8 +93,8 @@ entity.onMobFight = function(mob, target)
         end
 
         -- These need to be listed in reverse order as forced moves are added to the top of the queue.
-        mob:useMobAbility(1830) -- Polar Blast
         mob:useMobAbility(1832) -- Barofield
+        mob:useMobAbility(1830) -- Polar Blast
 
     elseif mob:getAnimationSub() == 1 and os.time() > headTimer then
         mob:setAnimationSub(0)
@@ -108,9 +115,9 @@ entity.onMobFight = function(mob, target)
         end
 
         -- Reverse order, same deal.
-        mob:useMobAbility(1828) -- Pyric Blast
-        mob:useMobAbility(1830) -- Polar Blast
         mob:useMobAbility(1832) -- Barofield
+        mob:useMobAbility(1830) -- Polar Blast
+        mob:useMobAbility(1828) -- Pyric Blast
     end
 end
 

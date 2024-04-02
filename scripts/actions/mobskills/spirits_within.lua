@@ -21,16 +21,14 @@ mobskillObject.onMobWeaponSkill = function(target, mob, skill)
         target:showText(mob, zones[xi.zone.THRONE_ROOM].text.RETURN_TO_THE_DARKNESS)
     end
 
-    -- Should produce 1000 - 3750 @ full HP using the player formula, assuming 8k HP for AA EV.
-    -- dmg * 2.5, as wiki claims ~2500 at 100% HP, until a better formula comes along.
-    local tp  = skill:getTP()
-    local hp  = mob:getHP()
-    local dmg = math.floor(hp * (math.floor(0.016 * tp) + 16) / 256)
-    if tp > 2000 then -- 2001 - 3000
-        dmg = math.floor(hp * (math.floor(0.072 * tp) - 96) / 256)
-    end
+    local tp = skill:getTP()
+    local hp = mob:getHP()
+    local dmg = 0
 
-    dmg = dmg * 2.5
+    -- spirits within for monsters no longer takes TP into consideration - This was causing it to WILDLY do more damage than it was sopposed to
+    -- it is now more inline with retail captures also was going 2.5x damage
+
+    dmg = math.floor(hp * (math.floor(0.016 * tp) + 16) / 256)
 
     -- Believe it or not, it's been proven to be breath damage.
     dmg = target:breathDmgTaken(dmg)

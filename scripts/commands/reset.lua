@@ -24,7 +24,7 @@ commandObj.onTrigger = function(player, target)
     else
         targ = GetPlayerByName(target)
         if targ == nil then
-            error(player, string.format('Player named "%s" not found!', target))
+            error(player, string.format('Player named '%s' not found!', target))
             return
         end
     end
@@ -55,6 +55,11 @@ commandObj.onTrigger = function(player, target)
         xi.effect.CHARM_II,
         xi.effect.POISON,
         xi.effect.PETRIFICATION,
+        xi.effect.DOOM,
+        xi.effect.CURSE_I,
+        xi.effect.CURSE_II,
+        xi.effect.COSTUME,
+        xi.effect.COSTUME_II,
     }
 
     for _, v in pairs(effects) do

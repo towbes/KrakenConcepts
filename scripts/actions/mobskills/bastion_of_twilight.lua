@@ -14,11 +14,11 @@ mobskillObject.onMobSkillCheck = function(target, mob, skill)
         return 1
     end
 
-    mob:showText(mob, ID.text.PROMATHIA_TEXT + 5)
     return 0
 end
 
 mobskillObject.onMobWeaponSkill = function(target, mob, skill)
+    mob:showText(mob, ID.text.PROMATHIA_TEXT + 5)
     mob:addStatusEffect(xi.effect.MAGIC_SHIELD, 1, 0, 0)
     mob:setAnimationSub(2)
 

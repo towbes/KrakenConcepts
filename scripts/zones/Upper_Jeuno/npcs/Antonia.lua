@@ -13,7 +13,7 @@ end
 entity.onTrigger = function(player, npc)
     local stock =
     {
-        21504, 100100,    -- Arasy Sainti
+        --[[21504, 100100,    -- Arasy Sainti
         21554, 100100,    -- Arasy Knife
         21604, 100100,    -- Arasy Sword
         21654, 100100,    -- Arasy Claymore
@@ -28,7 +28,16 @@ entity.onTrigger = function(player, npc)
         22122, 100100,    -- Arasy Bow
         22135, 100100,    -- Arasy Gun
         21392, 100100,    -- Animator Z
-        21393, 100100,    -- Arasy Sachet
+        21393, 100100,    -- Arasy Sachet]]
+        17061, 6256, -- mythril rod
+        17027, 11232, -- oak cudgel
+        17036, 18048, -- mythril mace
+        17044, 6033, -- warhammer
+        17089, 37440, -- oak pole
+        16836, 44550, -- halberd
+        16774, 10596, -- scythe
+        17320, 7, -- iron arrow
+
     }
 
     player:showText(npc, ID.text.VIETTES_SHOP_DIALOG)

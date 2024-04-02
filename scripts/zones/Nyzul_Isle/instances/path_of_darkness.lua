@@ -52,7 +52,7 @@ instanceObject.afterInstanceRegister = function(player)
     player:addTempItem(xi.item.UNDERSEA_RUINS_FIREFLIES)
 end
 
--- Instance "tick"
+-- Instance 'tick'
 instanceObject.onInstanceTimeUpdate = function(instance, elapsed)
     xi.instance.updateInstanceTime(instance, elapsed, ID.text)
 end

@@ -1,6 +1,6 @@
 -----------------------------------
 -- Area: Sea Serpent Grotto
---  NPC: ??? Used for Norg quest "It's not your vault"
+--  NPC: ??? Used for Norg quest 'It's not your vault'
 -- !pos -173 26 252 176
 -----------------------------------
 local ID = zones[xi.zone.SEA_SERPENT_GROTTO]

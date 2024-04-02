@@ -1,6 +1,7 @@
 -----------------------------------
 -- Area: Ru'Aun Gardens
---   NM: Seiryu
+-- NM: Seiryu
+-- ID: 17309981
 -----------------------------------
 local ID = zones[xi.zone.RUAUN_GARDENS]
 mixins = { require('scripts/mixins/job_special') }

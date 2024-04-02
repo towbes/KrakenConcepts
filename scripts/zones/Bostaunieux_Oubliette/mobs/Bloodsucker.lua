@@ -10,7 +10,7 @@ local entity = {}
 
 entity.onMobInitialize = function(mob)
     if mob:getID() == ID.mob.BLOODSUCKER then
-        mob:setMobMod(xi.mobMod.ADD_EFFECT, 1) -- "Has an Additional Effect of Drain on normal attacks"
+        mob:setMobMod(xi.mobMod.ADD_EFFECT, 1) -- 'Has an Additional Effect of Drain on normal attacks'
     end
 end
 
@@ -24,8 +24,7 @@ end
 
 entity.onMobDespawn = function(mob)
     if mob:getID() == ID.mob.BLOODSUCKER then
-        UpdateNMSpawnPoint(ID.mob.BLOODSUCKER)
-        mob:setRespawnTime(3600)
+        xi.mob.nmTODPersist(mob, 259200) -- 72 hours
     end
 end
 

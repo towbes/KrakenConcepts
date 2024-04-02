@@ -1,3 +1,10 @@
+---------------------------------------------------
+-- Tail Lash
+-- Deals backwards arc damage to targets behind Amphiptere.
+---------------------------------------------------
+
+
+
 -----------------------------------
 --  Tail Lash
 --  Description: Deals damage in an area of effect. Additional effect: Amnesia
@@ -11,9 +18,9 @@ local mobskillObject = {}
 mobskillObject.onMobSkillCheck = function(target, mob, skill)
     if not target:isBehind(mob, 48) then
         return 1
+    else
+        return 0
     end
-
-    return 0
 end
 
 mobskillObject.onMobWeaponSkill = function(target, mob, skill)

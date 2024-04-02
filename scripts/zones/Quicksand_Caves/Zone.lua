@@ -28,6 +28,10 @@ zoneObject.onInitialize = function(zone)
     zone:registerTriggerArea(33, -297, 6, 415, -295, 8, 417)   -- E-7 (Map 6)
     zone:registerTriggerArea(34, -137, 6, -177, -135, 8, -175) -- G-7 (Map 8)
 
+    -- NM Persistence
+    xi.mob.nmTODPersistCache(zone, ID.mob.ANTICAN_CONSUL)
+    xi.mob.nmTODPersistCache(zone, ID.mob.PROCONSUL_XII)
+
     xi.treasure.initZone(zone)
 
     npcUtil.UpdateNPCSpawnPoint(ID.npc.ANTICAN_TAG_QM, 60, 120, ID.npc.ANTICAN_TAG_POSITIONS, '[POP]Antican_Tag')
@@ -145,6 +149,16 @@ zoneObject.onEventUpdate = function(player, csid, option, npc)
 end
 
 zoneObject.onEventFinish = function(player, csid, option, npc)
+end
+
+zoneObject.onZoneWeatherChange = function(weather)
+    local nuss = GetMobByID(ID.mob.NUSSKNACKER)
+    if
+        not nuss:isSpawned() and os.time() > nuss:getLocalVar('cooldown') and
+        weather == xi.weather.SAND_STORM
+    then
+        DisallowRespawn(nuss:getID(), false)
+    end
 end
 
 return zoneObject

@@ -65,7 +65,7 @@ entity.onTrigger = function(player, npc)
         local haveimperialIDtag = 0
         local tagsAvail = 0
 
-        while currentTime >= refreshTime and tagStock < 3 do
+        while currentTime >= refreshTime and tagStock < 7 do
             refreshTime = refreshTime + idTagPeriod
             tagStock = tagStock + 1
         end
@@ -121,7 +121,7 @@ entity.onEventFinish = function(player, csid, option, npc)
             idTagPeriod = 600
         end
 
-        if tagStock >= 3 then
+        if tagStock >= 7 then
             player:setCharVar('nextTagTime', os.time() + idTagPeriod)
         end
 

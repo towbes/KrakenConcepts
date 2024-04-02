@@ -8,7 +8,7 @@ local quest = Quest:new(xi.quest.log_id.WINDURST, xi.quest.id.windurst.WILD_CARD
 
 quest.reward =
 {
-    fame     = 10,
+    fame     = 100,
     fameArea = xi.quest.fame_area.WINDURST,
     title    = xi.title.DREAM_DWELLER,
 }
@@ -19,7 +19,8 @@ quest.sections =
     {
         check = function(player, status, vars)
             return status == QUEST_AVAILABLE and
-                player:hasCompletedQuest(xi.quest.log_id.WINDURST, xi.quest.id.windurst.CRYING_OVER_ONIONS)
+            player:hasCompletedQuest(xi.quest.log_id.WINDURST, xi.quest.id.windurst.CRYING_OVER_ONIONS) and
+            player:getFameLevel(xi.quest.fame_area.WINDURST) >= 6
         end,
 
         [xi.zone.WINDURST_WATERS] =

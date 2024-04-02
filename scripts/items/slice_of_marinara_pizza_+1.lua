@@ -6,7 +6,7 @@
 -- HP +25
 -- Accuracy+11% (Max. 58)
 -- Attack+21% (Max. 55)
--- "Undead Killer"+5
+-- 'Undead Killer'+5
 -----------------------------------
 local itemObject = {}
 

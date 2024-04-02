@@ -16,8 +16,8 @@ mobskillObject.onMobSkillCheck = function(target, mob, skill)
             return 1
         end
     end
-
-    if mob:getAnimationSub() == 0 then
+   --Only used when 2 or more heads alive
+    if mob:getAnimationSub() <= 1 then
         return 0
     else
         return 1
@@ -25,11 +25,13 @@ mobskillObject.onMobSkillCheck = function(target, mob, skill)
 end
 
 mobskillObject.onMobWeaponSkill = function(target, mob, skill)
-    -- addEx to pervent dispel
-    mob:addStatusEffectEx(xi.effect.MAGIC_SHIELD, 0, 1, 0, 45)
+    mob:delStatusEffectSilent(xi.effect.MAGIC_SHIELD)
+    mob:addStatusEffect(xi.effect.MAGIC_SHIELD, 1, 1, 45)
+    mob:delStatusEffectSilent(xi.effect.PHYSICAL_SHIELD)
+    mob:getStatusEffect(xi.effect.MAGIC_SHIELD):delEffectFlag(xi.effectFlag.DISPELABLE) -- Cannot be dispelled
     skill:setMsg(xi.msg.basic.SKILL_GAIN_EFFECT)
     if mob:getFamily() == 313 then -- Tinnin follows this up immediately with Nerve Gas
-        mob:useMobAbility(1580)
+        mob:useMobAbility(1836)
     end
 
     return xi.effect.MAGIC_SHIELD

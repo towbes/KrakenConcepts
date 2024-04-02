@@ -66,8 +66,11 @@ xi.job_utils.paladin.useChivalry = function(player, target, ability)
     local amount = (tp * base) + (0.0015 * tp * target:getStat(xi.mod.MND)) * ((100 + merits) / 100)
 
     target:setTP(0)
-
-    return target:addMP(amount)
+    if target:hasStatusEffect(xi.effect.CURSE_II) then
+        target:messageBasic(xi.msg.basic.NO_EFFECT)
+    else
+        return target:addMP(amount)
+    end
 end
 
 xi.job_utils.paladin.useCover = function(player, target, ability)
@@ -105,9 +108,9 @@ xi.job_utils.paladin.useHolyCircle = function(player, target, ability)
     local duration = 180 + player:getMod(xi.mod.HOLY_CIRCLE_DURATION)
     local power    = 15
 
-    if player:getMainJob() ~= xi.job.PLD then
-        power = 5
-    end
+    -- if player:getMainJob() ~= xi.job.PLD then
+    --    power = 5
+    -- end
 
     target:addStatusEffect(xi.effect.HOLY_CIRCLE, power, 0, duration)
 end
@@ -190,12 +193,12 @@ xi.job_utils.paladin.useShieldBash = function(player, target, ability)
     end
 
     -- Main job factors
-    if player:getMainJob() ~= xi.job.PLD then
-        damage = math.floor(damage / 2.5)
-        chance = 60
-    else
-        damage = math.floor(damage)
-    end
+    -- if player:getMainJob() ~= xi.job.PLD then
+    --    damage = math.floor(damage / 2.5)
+    --    chance = 60
+    --else
+    --    damage = math.floor(damage)
+    --end
 
     damage = damage + player:getMod(xi.mod.SHIELD_BASH) + (jpValue * 10)
 

@@ -4,10 +4,13 @@
 --  ENM: Shell We Dance?
 -----------------------------------
 local ID = zones[xi.zone.BONEYARD_GULLY]
+mixins = {require('scripts/mixins/families/uragnite')}
 -----------------------------------
 local entity = {}
 
 entity.onMobSpawn = function(mob)
+    mob:setMod(xi.mod.REGAIN, 100)
+    mob:setMod(xi.mod.MDEF, 50)
 end
 
 entity.onMobFight = function(mob, target)
@@ -19,7 +22,7 @@ entity.onMobFight = function(mob, target)
     -- Pet #1 spawn at 95% hp or less
     if hpp <= 95 and adds == 0 then
         mob:setLocalVar('adds', adds + 1)
-        petID = ID.shellWeDance[bfID].BLADMALL_PET_IDS[1]
+        petID = ID.shellWeDance[bfID].PARATA_PET_IDS[1]
     end
 
     -- Pet #2 spawn at 60% hp or less
@@ -41,6 +44,20 @@ entity.onMobFight = function(mob, target)
 
         local pos = mob:getPos()
         pet:setPos(pos.x, pos.y, pos.z, pos.rot)
+    end
+
+    if mob:getHPP() < 10 and mob:getLocalVar('lastBreath') == 0 then
+        mob:useMobAbility(603)
+        mob:setLocalVar('lastBreath', 1)
+    end
+end
+
+entity.onMobWeaponSkill = function(target, mob, skill)
+    -- Under 10%, Parata will 2hr dust cloud and chain Suctorial Tentacle > Painful Whip
+    if skill:getID() == 603 and mob:getLocalVar('lastBreath') == 0 then
+        mob:queue(10, function(mobArg) mobArg:useMobAbility(508) end)
+    elseif skill:getID() == 508 and mob:getLocalVar('lastBreath') == 0 then
+        mob:queue(10, function(mobArg) mobArg:useMobAbility(507) end)
     end
 end
 

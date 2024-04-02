@@ -37,6 +37,7 @@ xi.job_utils.monk.useBoost = function(player, target, ability)
         local effect = player:getStatusEffect(xi.effect.BOOST)
         effect:setPower(effect:getPower() + power)
         player:addMod(xi.mod.ATTP, power)
+        player:addMod(xi.mod.RATTP, power)
     else
         player:addStatusEffect(xi.effect.BOOST, power, 0, 180)
     end
@@ -52,10 +53,14 @@ xi.job_utils.monk.useChakra = function(player, target, ability)
     end
 
     local jpModifier        = target:getJobPointLevel(xi.jp.CHAKRA_EFFECT) -- NOTE: Level is the modified value, so 10 per point spent
-    local maxRecoveryAmount = (player:getStat(xi.mod.VIT) * (2 + player:getMod(xi.mod.CHAKRA_MULT) / 10)) + jpModifier
-    local recoveryAmount    = math.min(player:getMaxHP() - player:getHP(), maxRecoveryAmount) -- TODO: Figure out "function of level" addition (August 2017 update)
-
-    player:setHP(player:getHP() + recoveryAmount)
+    local maxRecoveryAmount = ((player:getMaxHP() * 0.2) + player:getStat(xi.mod.VIT) * (2 + player:getMod(xi.mod.CHAKRA_MULT) / 10)) + jpModifier
+    local recoveryAmount    = math.min(player:getMaxHP() - player:getHP(), maxRecoveryAmount) -- TODO: Figure out 'function of level' addition (August 2017 update)
+    
+    if target:hasStatusEffect(xi.effect.CURSE_II) then
+        skill:setMsg(xi.msg.basic.SKILL_NO_EFFECT) -- no effect
+    else
+        player:setHP(player:getHP() + recoveryAmount)
+    end
 
     local merits = player:getMerit(xi.merit.INVIGORATE)
     if merits > 0 then
@@ -73,10 +78,10 @@ xi.job_utils.monk.useChiBlast = function(player, target, ability)
     local boost = player:getStatusEffect(xi.effect.BOOST)
     local multiplier = 1.0
     if boost ~= nil then
-        multiplier = (boost:getPower() / 100) * 4 -- power is the raw % atk boost
+        multiplier = (boost:getPower() / 100) * 8 -- power is the raw % atk boost -- default: 4
     end
 
-    local dmg = math.floor(player:getStat(xi.mod.MND) * (0.5 + (math.random() / 2))) * multiplier
+    local dmg = math.floor((player:getStat(xi.mod.MND) * 2) * (1 + (math.random() / 2))) * multiplier
 
     dmg = utils.stoneskin(target, dmg)
     target:takeDamage(dmg, player, xi.attackType.SPECIAL, xi.damageType.ELEMENTAL)
@@ -95,19 +100,21 @@ xi.job_utils.monk.useCounterstance = function(player, target, ability)
 end
 
 xi.job_utils.monk.useDodge = function(player, target, ability)
-    local power = 20 + player:getMod(xi.mod.DODGE_EFFECT)
+    -- local power = 20 + player:getMod(xi.mod.DODGE_EFFECT)
+    local power = (player:getMainLvl() + 1) + player:getMod(xi.mod.DODGE_EFFECT)
 
-    player:addStatusEffect(xi.effect.DODGE, power, 0, 120)
+    player:addStatusEffect(xi.effect.DODGE, power, 0, 60)
 end
 
 xi.job_utils.monk.useFocus = function(player, target, ability)
-    local power = 20 + player:getMod(xi.mod.FOCUS_EFFECT)
+    -- local power = 20 + player:getMod(xi.mod.FOCUS_EFFECT)
+    local power = (player:getMainLvl() + 1) + player:getMod(xi.mod.FOCUS_EFFECT)
 
-    player:addStatusEffect(xi.effect.FOCUS, power, 0, 120)
+    player:addStatusEffect(xi.effect.FOCUS, power, 0, 60)
 end
 
 xi.job_utils.monk.useFootwork = function(player, target, ability)
-    local kickDmg = 20 + player:getWeaponDmg()
+    local kickDmg = 35 + player:getWeaponDmg() -- 20
     local kickAttPercent = 25 + player:getMod(xi.mod.FOOTWORK_ATT_BONUS)
 
     player:addStatusEffect(xi.effect.FOOTWORK, kickDmg, 0, 60, 0, kickAttPercent)

@@ -166,7 +166,7 @@ local gearSets =
         },
     },
 
-    [10] = -- Yigit Gomlek Set (1mp per tick) Adds "Refresh" effect
+    [10] = -- Yigit Gomlek Set (1mp per tick) Adds 'Refresh' effect
     {
         items =
         {
@@ -453,7 +453,7 @@ local gearSets =
         },
     },
 
-    [27] = -- Fazheluo Mail Set. Set Bonus: "Double Attack"+5%. Active with any 2 pieces.
+    [27] = -- Fazheluo Mail Set. Set Bonus: 'Double Attack'+5%. Active with any 2 pieces.
     {
         items =
         {
@@ -504,7 +504,7 @@ local gearSets =
         },
     },
 
-    [30] = -- Ogier's Armor Set. Set Bonus: Adds "Refresh" xi.effect. Provides 1 mp/tick for 2-3 pieces worn, 2 mp/tick for 4-5 pieces worn.
+    [30] = -- Ogier's Armor Set. Set Bonus: Adds 'Refresh' xi.effect. Provides 1 mp/tick for 2-3 pieces worn, 2 mp/tick for 4-5 pieces worn.
     {
         items =
         {
@@ -538,7 +538,7 @@ local gearSets =
         },
     },
 
-    [32] = -- Rubeus Armor Set. Set Bonus: Enhances "Fast Cast" effect. 2 or 3 pieces equipped: Fast Cast +4, 4 or 5 pieces equipped: Fast Cast +10
+    [32] = -- Rubeus Armor Set. Set Bonus: Enhances 'Fast Cast' effect. 2 or 3 pieces equipped: Fast Cast +4, 4 or 5 pieces equipped: Fast Cast +10
     {
         items =
         {
@@ -555,7 +555,7 @@ local gearSets =
         },
     },
 
-    [33] = -- Navarch's Attire +2 Set. Set Bonus: Augments "Quick Draw". Quick Draw will occasionally deal triple damage.
+    [33] = -- Navarch's Attire +2 Set. Set Bonus: Augments 'Quick Draw'. Quick Draw will occasionally deal triple damage.
     {
         items =
         {
@@ -572,7 +572,7 @@ local gearSets =
         },
     },
 
-    [34] = -- Charis Attire +2 Set. Set Bonus: Augments "Samba". Occasionally doubles damage with Samba up. Adds approximately 1-2% per piece past the first.
+    [34] = -- Charis Attire +2 Set. Set Bonus: Augments 'Samba'. Occasionally doubles damage with Samba up. Adds approximately 1-2% per piece past the first.
     {
         items =
         {
@@ -589,7 +589,7 @@ local gearSets =
         },
     },
 
-    [35] = -- Iga Garb +2 Set. Set Bonus: Augments "Dual Wield". Attacks made while dual wielding occasionally add an extra attack
+    [35] = -- Iga Garb +2 Set. Set Bonus: Augments 'Dual Wield'. Attacks made while dual wielding occasionally add an extra attack
     {
         items =
         {
@@ -606,7 +606,7 @@ local gearSets =
         }
     },
 
-    [36] = -- Sylvan Attire +2 Set. Set Bonus: Augments "Rapid Shot". Rapid Shots occasionally deal double damage.
+    [36] = -- Sylvan Attire +2 Set. Set Bonus: Augments 'Rapid Shot'. Rapid Shots occasionally deal double damage.
     {
         items =
         {
@@ -640,7 +640,7 @@ local gearSets =
         },
     },
 
-    [38] = -- Unkai Domaru +2 Set. Set Bonus: Augments "Zanshin". Zanshin attacks will occasionally deal double damage.
+    [38] = -- Unkai Domaru +2 Set. Set Bonus: Augments 'Zanshin'. Zanshin attacks will occasionally deal double damage.
     {
         items =
         {
@@ -657,7 +657,7 @@ local gearSets =
         },
     },
 
-    [39] = -- Tantra Attire +2 Set. Set Bonus: Augments "Kick Attacks". Occasionally allows a second Kick Attack during an attack round without the use of Footwork.
+    [39] = -- Tantra Attire +2 Set. Set Bonus: Augments 'Kick Attacks'. Occasionally allows a second Kick Attack during an attack round without the use of Footwork.
     {
         items =
         {
@@ -674,7 +674,7 @@ local gearSets =
         },
     },
 
-    [40] = -- Raider's Attire +2 Set. Set Bonus: Augments "Triple Attack". Occasionally causes the second and third hits of a Triple Attack to deal triple damage.Verification Needed Requires a minimum of two pieces.
+    [40] = -- Raider's Attire +2 Set. Set Bonus: Augments 'Triple Attack'. Occasionally causes the second and third hits of a Triple Attack to deal triple damage.Verification Needed Requires a minimum of two pieces.
     {
         items =
         {
@@ -750,7 +750,7 @@ local gearSets =
         },
     },
 
-    [44] = -- Supremacy Earring Sets. Set Bonus: STR+6, Attack+4, Ranged Attack+4, "Magic Atk. Bonus"+2. Active with any 2 items(Earring+Weapon)
+    [44] = -- Supremacy Earring Sets. Set Bonus: STR+6, Attack+4, Ranged Attack+4, 'Magic Atk. Bonus'+2. Active with any 2 items(Earring+Weapon)
     {
         items =
         {

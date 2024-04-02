@@ -56,8 +56,29 @@ end
 effectObject.onEffectTick = function(target, effect)
     local healtime = effect:getTickCount()
 
+    if target:getObjType() == xi.objType.FELLOW then
+        local master        = target:getMaster()
+        local ID            = require('scripts/zones/'..master:getZoneName()..'/IDs')
+        local optionsMask   = master:getFellowValue('optionsMask')
+        local personality   = target:getLocalVar('personality')
+        local mpNotice      = target:getLocalVar('mpNotice')
+        local mpp           = target:getMP() / target:getMaxMP() * 100
+        local mpSignals     = false
+        
+        if bit.band(optionsMask, bit.lshift(1, 2)) == 4 then
+            mpSignals = true
+        end
+
+        if mpp >= 67 and mpNotice == 1 and mpSignals == true then
+            master:showText(target, ID.text.FELLOW_MESSAGE_OFFSET + 45 + personality)
+            target:setLocalVar('mpNotice', 0)
+        elseif mpp < 67 and mpNotice ~= 1 then
+            target:setLocalVar('mpNotice', 1)
+        end
+    end
+
     if healtime > 2 then
-        -- curse II also known as "zombie"
+        -- curse II also known as 'zombie'
         if
             not target:hasStatusEffect(xi.effect.DISEASE) and
             not target:hasStatusEffect(xi.effect.PLAGUE) and
@@ -69,6 +90,8 @@ effectObject.onEffectTick = function(target, effect)
                 target:hasStatusEffect(xi.effect.SIGNET)
             then
                 healHP = 10 + (3 * math.floor(target:getMainLvl() / 10)) + (healtime - 2) * (1 + math.floor(target:getMaxHP() / 300)) + target:getMod(xi.mod.HPHEAL)
+            elseif target:getMaster() ~= nil then -- Beastmaster's Stay ability
+                healHP = 10 + (3 * math.floor(target:getMainLvl() / 10)) + (healtime - 2) * (2.5 + math.floor(target:getMaxHP() / 100)) + target:getMod(xi.mod.HPHEAL)
             else
                 target:addTP(xi.settings.main.HEALING_TP_CHANGE)
                 healHP = 10 + (healtime - 2) + target:getMod(xi.mod.HPHEAL)
@@ -85,7 +108,9 @@ effectObject.onEffectTick = function(target, effect)
             end
 
             target:addHPLeaveSleeping(healHP)
-            target:updateEnmityFromCure(target, healHP)
+            if target:getHPP() < 100 then
+                target:updateEnmityFromCure(target, healHP)
+            end
             target:addMP(12 + ((healtime - 2) * (1 + target:getMod(xi.mod.CLEAR_MIND))) + target:getMod(xi.mod.MPHEAL))
         end
     end

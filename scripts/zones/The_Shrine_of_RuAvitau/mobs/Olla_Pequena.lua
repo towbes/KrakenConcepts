@@ -6,8 +6,18 @@ local ID = zones[xi.zone.THE_SHRINE_OF_RUAVITAU]
 -----------------------------------
 local entity = {}
 
+entity.onMobInitialize = function(mob)
+    mob:setMobMod(xi.mobMod.ADD_EFFECT, 1)
+end
+
+entity.onAdditionalEffect = function(mob, target, damage)
+    return xi.mob.onAddEffect(mob, target, damage, xi.mob.ae.DISPEL)
+end
+
 entity.onMobDeath = function(mob, player, optParams)
     if optParams.isKiller then
+        local pos = mob:getPos()
+        GetMobByID(mob:getID() + 1):setSpawn(pos.x, pos.y, pos.z)
         SpawnMob(mob:getID() + 1):updateClaim(player)
     end
 end

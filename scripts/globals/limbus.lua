@@ -83,7 +83,7 @@ end
 function Limbus:register()
     Battlefield.register(self)
 
-    -- Add recover crates that are technically "mobs"
+    -- Add recover crates that are technically 'mobs'
     table.insert(self.groups, { mobIds = self.ID.npc.RECOVER_CRATES })
 
     return self

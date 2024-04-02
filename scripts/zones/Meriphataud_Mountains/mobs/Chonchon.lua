@@ -6,7 +6,7 @@ local entity = {}
 
 entity.onMobInitialize = function(mob)
     mob:setMobMod(xi.mobMod.ADD_EFFECT, 1)
-    mob:setMod(xi.mod.DOUBLE_ATTACK, 20) -- "Double Attack: Frequent and accurate"
+    mob:setMod(xi.mod.DOUBLE_ATTACK, 20) -- 'Double Attack: Frequent and accurate'
 end
 
 entity.onAdditionalEffect = function(mob, target, damage)
@@ -18,7 +18,7 @@ entity.onMobDeath = function(mob, player, optParams)
 end
 
 entity.onMobDespawn = function(mob)
-    mob:setRespawnTime(math.random(3600, 5400)) -- 60 to 90 minutes
+    xi.mob.nmTODPersist(mob, math.random(3600, 5400)) -- 60 to 90 minutes
 end
 
 return entity

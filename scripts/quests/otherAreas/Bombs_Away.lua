@@ -16,7 +16,8 @@ quest.sections =
 {
     {
         check = function(player, status, vars)
-            return status == QUEST_AVAILABLE
+            return status == QUEST_AVAILABLE and
+            player:getCurrentMission(xi.mission.log_id.COP) >= xi.mission.id.cop.THREE_PATHS
         end,
 
         [xi.zone.ULEGUERAND_RANGE] =
@@ -26,14 +27,13 @@ quest.sections =
             onEventFinish =
             {
                 [6] = function(player, csid, option, npc)
-                    if option == 1 then -- You climb mountain.
+                    if option == 1 then
                         quest:begin(player)
                     end
                 end,
             },
         },
     },
-
     {
         check = function(player, status, vars)
             return status ~= QUEST_AVAILABLE
@@ -48,18 +48,17 @@ quest.sections =
                 end,
 
                 onTrade = function(player, npc, trade)
-                    if npcUtil.tradeHasExactly(trade, { { xi.item.CLUSTER_CORE, 2 } }) then
-                        return quest:progressEvent(8) -- Quest completed dialog.
+                    if npcUtil.tradeHasExactly(trade, { { xi.items.CLUSTER_CORE, 2 } }) then
+                        return quest:progressEvent(8)
                     end
                 end,
-
             },
 
             onEventFinish =
             {
                 [8] = function(player, csid, option, npc)
                     if quest:complete(player) then
-                        player:tradeComplete()
+                        player:confirmTrade()
                     end
                 end,
             },

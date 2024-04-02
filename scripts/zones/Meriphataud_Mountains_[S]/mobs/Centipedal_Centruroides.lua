@@ -4,6 +4,8 @@
 -----------------------------------
 local entity = {}
 
+-- uses Hell Scissors (Throat Stab type move + 30tic poison)
+
 entity.onMobInitialize = function(mob)
     mob:setMobMod(xi.mobMod.ADD_EFFECT, 1)
     mob:setMod(xi.mod.DOUBLE_ATTACK, 100)

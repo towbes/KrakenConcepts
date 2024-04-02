@@ -4,13 +4,12 @@
 local mobskillObject = {}
 
 mobskillObject.onMobSkillCheck = function(target, mob, skill)
-    local mobSkin = mob:getModelId()
-
-    if mobSkin == 281 then
-        return 0
-    else
+    local mobID = mob:getID()
+    -- if mob is Reacton, he is not allowed to use this skill before phase 3
+    if mobID == 17031599 and mob:getAnimationSub() < 2 then
         return 1
     end
+        return 0
 end
 
 mobskillObject.onMobWeaponSkill = function(target, mob, skill)

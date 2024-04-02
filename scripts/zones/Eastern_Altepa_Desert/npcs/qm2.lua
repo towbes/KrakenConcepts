@@ -21,9 +21,17 @@ entity.onTrigger = function(player, npc)
         not GetMobByID(ID.mob.TSUCHIGUMO_OFFSET):isSpawned() and
         not GetMobByID(ID.mob.TSUCHIGUMO_OFFSET + 1):isSpawned()
     then
-        player:messageSpecial(ID.text.SENSE_OF_FOREBODING)
-        SpawnMob(ID.mob.TSUCHIGUMO_OFFSET):updateClaim(player)
-        SpawnMob(ID.mob.TSUCHIGUMO_OFFSET + 1):updateClaim(player)
+        if 
+        player:hasStatusEffect(xi.effect.SNEAK) == true 
+        then
+            player:messageSpecial(ID.text.SENSE_OF_FOREBODING)
+            SpawnMob(ID.mob.TSUCHIGUMO_OFFSET)
+            SpawnMob(ID.mob.TSUCHIGUMO_OFFSET + 1)
+        else
+            player:messageSpecial(ID.text.SENSE_OF_FOREBODING)
+            SpawnMob(ID.mob.TSUCHIGUMO_OFFSET):updateClaim(player)
+            SpawnMob(ID.mob.TSUCHIGUMO_OFFSET + 1):updateClaim(player)
+        end 
     elseif twentyInPirateYearsCS == 3 and tsuchigumoKilled >= 2 then
         player:addKeyItem(xi.ki.TRICK_BOX)
         player:messageSpecial(ID.text.KEYITEM_OBTAINED, xi.ki.TRICK_BOX)

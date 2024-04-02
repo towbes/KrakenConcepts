@@ -9,9 +9,13 @@ mobskillObject.onMobSkillCheck = function(target, mob, skill)
 end
 
 mobskillObject.onMobWeaponSkill = function(target, mob, skill)
-    local amount = 9999 * skill:getTotalTargets()
-    local dmg = xi.mobskills.mobFinalAdjustments(amount, mob, skill, target, xi.attackType.PHYSICAL, xi.damageType.FIRE, xi.mobskills.shadowBehavior.WIPE_SHADOWS)
-    target:takeDamage(dmg, mob, xi.attackType.PHYSICAL, xi.damageType.FIRE)
+    local amount = 9999
+
+    local info = xi.mobskills.mobMagicalMove(mob, target, skill, amount, xi.element.FIRE, 2.1, xi.mobskills.magicalTpBonus.MAB_BONUS, 1)
+    local dmg = xi.mobskills.mobFinalAdjustments(info.dmg, mob, skill, target, xi.attackType.MAGICAL, xi.damageType.FIRE, xi.mobskills.shadowBehavior.IGNORE_SHADOWS)
+
+    mob:setHP(0)
+    target:takeDamage(dmg, mob, xi.attackType.MAGICAL, xi.damageType.FIRE)
     return dmg
 end
 

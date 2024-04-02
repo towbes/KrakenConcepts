@@ -6,7 +6,8 @@
 local mobskillObject = {}
 
 mobskillObject.onMobSkillCheck = function(target, mob, skill)
-    if mob:getAnimationSub() == 0 then
+        -- if AnimationSub is 0 or if used by Iriz Ima : AnimationSub(2)
+    if mob:getAnimationSub() == 0 or (mob:getID() == 16986429 and mob:getAnimationSub() ~= 2) then
         return 0
     else
         return 1

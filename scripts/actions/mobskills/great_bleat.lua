@@ -12,7 +12,11 @@ mobskillObject.onMobSkillCheck = function(target, mob, skill)
 end
 
 mobskillObject.onMobWeaponSkill = function(target, mob, skill)
-    skill:setMsg(xi.mobskills.mobStatusEffectMove(mob, target, xi.effect.MAX_HP_DOWN, 30, 0, 60))
+    if mob:getPool() == 230 then -- Aries
+        skill:setMsg(xi.mobskills.mobStatusEffectMove(mob, target, xi.effect.MAX_HP_DOWN, 75, 0, 90)) -- 75% HP Reduction for 90s
+    else
+        skill:setMsg(xi.mobskills.mobStatusEffectMove(mob, target, xi.effect.MAX_HP_DOWN, 30, 0, 60))
+    end
 
     return xi.effect.MAX_HP_DOWN
 end

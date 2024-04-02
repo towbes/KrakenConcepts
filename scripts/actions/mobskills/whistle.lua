@@ -16,10 +16,15 @@ end
 mobskillObject.onMobWeaponSkill = function(target, mob, skill)
     local power = target:getMainLvl() / 10 * 3.75 + 5
     local duration = 60
+    local typeEffect = xi.effect.AGI_BOOST
 
-    skill:setMsg(xi.mobskills.mobBuffMove(target, xi.effect.AGI_BOOST, power, 3, duration))
+    if mob:getZone():getTypeMask() == xi.zoneType.DYNAMIS then
+        typeEffect = xi.effect.EVASION_BOOST
+    end
 
-    return xi.effect.AGI_BOOST
+    skill:setMsg(xi.mobskills.mobBuffMove(target, typeEffect, power, 3, duration))
+
+    return typeEffect
 end
 
 return mobskillObject

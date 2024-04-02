@@ -1,6 +1,10 @@
 -----------------------------------
 -- Zone: Bibiki_Bay (4)
 -----------------------------------
+local ID = zones[xi.zone.BIBIKI_BAY]
+require('scripts/globals/manaclipper')
+require('scripts/globals/exp_controller')
+-----------------------------------
 local zoneObject = {}
 
 zoneObject.onChocoboDig = function(player, precheck)
@@ -10,6 +14,8 @@ end
 zoneObject.onInitialize = function(zone)
     zone:registerTriggerArea(1,  474, -10,  667,  511, 10,  708) -- Manaclipper while docked at Sunset Docks
     zone:registerTriggerArea(2, -410, -10, -385, -371, 10, -343) -- Manaclipper while docked at Purgonorgo Isle
+    xi.exp_controller.onInitialize(zone)
+
 end
 
 zoneObject.onZoneIn = function(player, prevZone)

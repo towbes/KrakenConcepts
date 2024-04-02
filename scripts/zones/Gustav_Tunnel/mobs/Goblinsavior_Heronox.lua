@@ -2,6 +2,8 @@
 -- Area: Gustav Tunnel
 --   NM: Goblinsavior Heronox
 -----------------------------------
+mixins = {require('scripts/mixins/job_special')}
+-----------------------------------
 local entity = {}
 
 entity.onMobDeath = function(mob, player, optParams)

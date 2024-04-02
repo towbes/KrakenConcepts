@@ -19,6 +19,8 @@ end
 
 spellObject.onSpellCast = function(caster, target, spell)
     xi.pet.spawnPet(caster, xi.petId.LIGHT_SPIRIT)
+    caster:delStatusEffectSilent(xi.effect.MANAWELL)
+    
     return 0
 end
 

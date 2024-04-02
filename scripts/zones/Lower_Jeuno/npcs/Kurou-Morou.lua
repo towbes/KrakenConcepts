@@ -23,7 +23,7 @@ entity.onTrade = function(player, npc, trade)
         trade:hasItemQty(xi.item.HORN_HAIRPIN, 1) and
         trade:getItemCount() == 1
     then
-        player:startEvent(203) -- Finish "Never to return" quest
+        player:startEvent(203) -- Finish 'Never to return' quest
     end
 end
 

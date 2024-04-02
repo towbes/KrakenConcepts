@@ -1,7 +1,7 @@
 -----------------------------------
 -- ID: 5876
 -- Item: Petrify Screen
--- Effect: 2 Mins of immunity to "Petrify" effects.
+-- Effect: 2 Mins of immunity to 'Petrify' effects.
 -----------------------------------
 local itemObject = {}
 

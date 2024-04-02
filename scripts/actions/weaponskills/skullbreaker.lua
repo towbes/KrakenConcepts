@@ -21,11 +21,13 @@ weaponskillObject.onUseWeaponSkill = function(player, target, wsID, tp, primary,
     local damage, criticalHit, tpHits, extraHits = xi.weaponskills.doPhysicalWeaponskill(player, target, wsID, params, tp, action, primary, taChar)
 
     if xi.settings.main.USE_ADOULIN_WEAPON_SKILL_CHANGES then
+        params.ftpMod = { 1.2, 1.2, 1.2 }
         params.str_wsc = 1.0
     end
 
     if damage > 0 and not target:hasStatusEffect(xi.effect.INT_DOWN) then
-        target:addStatusEffect(xi.effect.INT_DOWN, 10, 0, 140)
+        target:addStatusEffect(xi.effect.INT_DOWN, 20, 0, 140)
+        player:messagePublic(xi.msg.basic.SKILL_ENFEEB, target, wsID, xi.effect.INT_DOWN)
     end
 
     return tpHits, extraHits, criticalHit, damage

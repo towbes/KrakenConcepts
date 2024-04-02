@@ -1,9 +1,26 @@
 -----------------------------------
 -- Zone: Phomiuna_Aqueducts (27)
 -----------------------------------
+local ID = zones[xi.zone.PHOMIUNA_AQUEDUCTS]
+require('scripts/globals/exp_controller')
+-----------------------------------
 local zoneObject = {}
 
 zoneObject.onInitialize = function(zone)
+
+    -- NM Persistence
+    xi.mob.nmTODPersistCache(zone, ID.mob.TRES_DUENDES)
+    -- Mahisha and Eba share a respawn, random to see who spawns
+    if GetServerVariable('EBA_MAHISHA') == 1 then
+        xi.mob.nmTODPersistCache(zone, ID.mob.MAHISHA)
+    else
+        xi.mob.nmTODPersistCache(zone, ID.mob.EBA)
+    end
+    -- FFXI wiki has some info stating ~10mins realtime for Phomiuna Aqueducts
+    GetNPCByID(ID.npc.QM_TAVNAZIAN_COOKBOOK):addPeriodicTrigger(0, 250, 0)
+
+    xi.exp_controller.onInitialize(zone)
+
 end
 
 zoneObject.onConquestUpdate = function(zone, updatetype, influence, owner, ranking, isConquestAlliance)

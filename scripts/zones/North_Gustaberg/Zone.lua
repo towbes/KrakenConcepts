@@ -1,6 +1,7 @@
 -----------------------------------
 -- Zone: North_Gustaberg (106)
 -----------------------------------
+local ID = zones[xi.zone.NORTH_GUSTABERG]
 require('scripts/quests/i_can_hear_a_rainbow')
 -----------------------------------
 local zoneObject = {}
@@ -12,6 +13,9 @@ end
 zoneObject.onInitialize = function(zone)
     xi.conq.setRegionalConquestOverseers(zone:getRegionID())
     xi.voidwalker.zoneOnInit(zone)
+    
+    --NM Persistence
+    xi.mob.nmTODPersistCache(zone, ID.mob.BEDROCK_BARRY)
 end
 
 zoneObject.onZoneIn = function(player, prevZone)

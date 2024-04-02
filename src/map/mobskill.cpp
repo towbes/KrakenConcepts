@@ -45,7 +45,7 @@ CMobSkill::CMobSkill(uint16 id)
 
 bool CMobSkill::hasMissMsg() const
 {
-    return m_Message == 158 || m_Message == 188 || m_Message == 31 || m_Message == 30;
+    return m_Message == 158 || m_Message == 188 || m_Message == 31 || m_Message == 30 || m_Message == 354;
 }
 
 bool CMobSkill::isAoE() const
@@ -101,9 +101,9 @@ void CMobSkill::setTotalTargets(uint16 targets)
     m_TotalTargets = targets;
 }
 
-void CMobSkill::setAnimationID(uint16 animID)
+void CMobSkill::setAnimationID(uint16 aid)
 {
-    m_AnimID = animID;
+    m_AnimID = aid;
 }
 
 const std::string& CMobSkill::getName()
@@ -192,6 +192,44 @@ uint16 CMobSkill::getPetAnimationID() const
     {
         return m_AnimID - 493;
     }
+
+        // Diabolos pet animation range 141 to 149.
+    // Pet animations 142, 145, 148, 149 are directly referenced in sql
+    if (m_AnimID == 915) // Diabolos Camisado
+    {
+        return 141;
+    }
+    if (m_AnimID == 916) // Diabolos Noctoshield
+    {
+        return 143;
+    }
+    if (m_AnimID == 917) // Diabolos Ultimate Terror
+    {
+        return 144;
+    }
+    if (m_AnimID == 918) // Diabolos Nightmare
+    {
+        return 146;
+    }
+    //  return 147; pet animationID 147 is an unused Diabolos aoe move encircling him in red rings/script
+
+    if (m_AnimID == 1125) // Diabolos Ruinous Omen
+    {
+        return 149;
+    }
+    if (m_AnimID == 1126) // Diabolos Somnolence
+    {
+        return 142;
+    }
+    if (m_AnimID == 1127) // Diabolos Dream Shroud
+    {
+        return 145;
+    }
+    if (m_AnimID == 1129) // Diabolos Nether Blast
+    {
+        return 148;
+    }
+
 
     return m_AnimID;
 }

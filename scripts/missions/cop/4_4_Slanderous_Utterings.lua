@@ -52,6 +52,8 @@ mission.sections =
                 end,
             },
 
+            ['Sueleen'] = mission:event(21),
+
             onEventFinish =
             {
                 [13] = function(player, csid, option, npc)

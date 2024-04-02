@@ -1,6 +1,6 @@
 -----------------------------------
 -- xi.effect.PROWESS
--- Enhanced "Cure" potency
+-- Enhanced 'Cure' potency
 -----------------------------------
 local effectObject = {}
 

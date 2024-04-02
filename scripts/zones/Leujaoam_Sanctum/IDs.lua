@@ -19,15 +19,25 @@ zones[xi.zone.LEUJAOAM_SANCTUM] =
         LOGIN_CAMPAIGN_UNDERWAY       = 7002, -- The [/January/February/March/April/May/June/July/August/September/October/November/December] <number> Login Campaign is currently underway!
         LOGIN_NUMBER                  = 7003, -- In celebration of your most recent login (login no. <number>), we have provided you with <number> points! You currently have a total of <number> points.
         MEMBERS_LEVELS_ARE_RESTRICTED = 7023, -- Your party is unable to participate because certain members' levels are restricted.
-        PLAYER_OBTAINS_ITEM           = 7320, -- <name> obtains <item>!
-        ASSAULT_START_OFFSET          = 7455, -- Max MP Down removed for <name>.
-        TIME_TO_COMPLETE              = 7516, -- You have <number> [minute/minutes] (Earth time) to complete this mission.
-        MISSION_FAILED                = 7517, -- The mission has failed. Leaving area.
-        RUNE_UNLOCKED_POS             = 7518, -- ission objective completed. Unlocking Rune of Release ([A/B/C/D/E/F/G/H/I/J/K/L/M/N/O/P/Q/R/S/T/U/V/W/X/Y/Z]-#).
-        ASSAULT_POINTS_OBTAINED       = 7520, -- You gain <number> [Assault point/Assault points]!
-        TIME_REMAINING_MINUTES        = 7521, -- ime remaining: <number> [minute/minutes] (Earth time).
-        TIME_REMAINING_SECONDS        = 7522, -- ime remaining: <number> [second/seconds] (Earth time).
-        PARTY_FALLEN                  = 7524, -- ll party members have fallen in battle. Mission failure in <number> [minute/minutes].
+        PLAYER_OBTAINS_ITEM           = 7319, -- <name> obtains <item>!
+        ASSAULT_START_OFFSET          = 7454, -- Max MP Down removed for <name>.
+        TIME_TO_COMPLETE              = 7515, -- You have <number> [minute/minutes] (Earth time) to complete this mission.
+        MISSION_FAILED                = 7516, -- The mission has failed. Leaving area.
+        RUNE_UNLOCKED_POS             = 7517, -- ission objective completed. Unlocking Rune of Release ([A/B/C/D/E/F/G/H/I/J/K/L/M/N/O/P/Q/R/S/T/U/V/W/X/Y/Z]-#).
+        ASSAULT_POINTS_OBTAINED       = 7519, -- You gain <number> [Assault point/Assault points]!
+        TIME_REMAINING_MINUTES        = 7520, -- ime remaining: <number> [minute/minutes] (Earth time).
+        TIME_REMAINING_SECONDS        = 7521, -- ime remaining: <number> [second/seconds] (Earth time).
+        PARTY_FALLEN                  = 7523, -- All party members have fallen in battle. Mission failure in <number> [minute/minutes].
+        FIND_NOTHING                  = 7532, -- You find nothing.
+        PICKAXE_BREAKS                = 7535, -- Your <item> (temporary item) breaks!
+        MINING_POSSIBLE               = 7536, -- Mining is possible here if you have a <item> (temporary item).
+        MOVE_CLOSER                   = 7537, -- You must move closer to the target.
+        CANT_MINE                     = 7538, -- You can't mine here right now...
+        FOUND_SOME                    = 7540, -- You found some? Let's take a look then...
+        LOOK_AT_IT_SHINE              = 7541, -- Amazing... Look at it shine! This is definitely a <item>.
+        RUMORS_TRUE                   = 7542, -- The rumors were true! Excellent work!
+        GET_MOVING                    = 7543, -- You only get as many <item> as you need. Now, get moving!
+        TAKE_THIS                     = 7544, -- Take this. If you come across a <item>, bring it back to me.
     },
 
     mob =
@@ -46,10 +56,6 @@ zones[xi.zone.LEUJAOAM_SANCTUM] =
             {
                 17059856, 17059857, 17059858, 17059859, 17059860, 17059861, 17059862, 17059863,
             },
-            MINING_POINTS =
-            {
-                17060016, 17060017, 17060018, 17060019, 17060020, 17060021, 17060022, 17060023, 17060024, 17060025,
-            },
         },
     },
 
@@ -58,6 +64,10 @@ zones[xi.zone.LEUJAOAM_SANCTUM] =
         ANCIENT_LOCKBOX = 17060014,
         RUNE_OF_RELEASE = 17060015,
         MULWAHAH        = 17060026,
+        MINING_POINTS =
+        {
+            17060016, 17060017, 17060018, 17060019, 17060020, 17060021, 17060022, 17060023, 17060024, 17060025,
+        },
     }
 }
 

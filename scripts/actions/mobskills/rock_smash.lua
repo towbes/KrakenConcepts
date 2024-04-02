@@ -4,22 +4,27 @@
 --  Type: Physical
 --  Utsusemi/Blink absorb: 1 shadow
 --  Range: Melee
+--  Notes: Requires No Weapon or Broken Weapon
 -----------------------------------
 local mobskillObject = {}
 
 mobskillObject.onMobSkillCheck = function(target, mob, skill)
-    if mob:getFamily() == 91 then
+    if(mob:getFamily() == 91) then
         local mobSkin = mob:getModelId()
-
-        if mobSkin == 1680 then
-            return 0
-        else
-            return 1
-        end
-    end
-
-    return 0
-end
+           if (mobSkin == 1680) then
+               return 0
+           else
+               return 1
+           end
+      end
+      if mob:getAnimationSub() == 1 or mob:getMainJob() == xi.job.MNK or mob:getMainJob() == xi.job.PUP then     
+           return 0
+      else 
+           return 1
+      end
+   
+   end
+   
 
 mobskillObject.onMobWeaponSkill = function(target, mob, skill)
     local numhits = 1

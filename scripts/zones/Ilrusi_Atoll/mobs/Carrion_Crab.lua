@@ -6,20 +6,28 @@ local ID = zones[xi.zone.ILRUSI_ATOLL]
 -----------------------------------
 local entity = {}
 
+entity.onMobSpawn = function(mob)
+    xi.assault.adjustMobLevel(mob)
+end
+
 entity.onMobDeath = function(mob, player, optParams)
+    if optParams.isKiller then
+        local instance = mob:getInstance()
+        local id = mob:getID()
+        -- Spawn NM if placeholder
+        -- Otherwise progress instance
+        if
+            id == instance:getLocalVar('chosenMob1') or
+            id == instance:getLocalVar('chosenMob2')
+        then
+            SpawnMob(ID.mob[xi.assault.mission.EXTERMINATION].UNDEAD_CRAB, instance)
+        else
+            xi.assault.progressInstance(mob, 1)
+        end
+    end
 end
 
 entity.onMobDespawn = function(mob)
-    local instance = mob:getInstance()
-    local crabMob  = GetMobByID(ID.mob.UNDEAD_CRAB, instance)
-    local randVal  = math.random(1, 5)
-
-    if randVal == 1 and crabMob:getLocalVar('CrabSpawned') == 0 then
-        SpawnMob(ID.mob.UNDEAD_CRAB, instance)
-        crabMob:setLocalVar('CrabSpawned', 1)
-    else
-        instance:setProgress(instance:getProgress() + 1)
-    end
 end
 
 return entity

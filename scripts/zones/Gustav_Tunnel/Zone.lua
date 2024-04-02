@@ -6,8 +6,8 @@ local ID = zones[xi.zone.GUSTAV_TUNNEL]
 local zoneObject = {}
 
 zoneObject.onInitialize = function(zone)
-    UpdateNMSpawnPoint(ID.mob.BUNE)
-    GetMobByID(ID.mob.BUNE):setRespawnTime(math.random(900, 10800))
+    -- NM Persistence
+    xi.mob.nmTODPersistCache(zone, ID.mob.BUNE)
 end
 
 zoneObject.onConquestUpdate = function(zone, updatetype, influence, owner, ranking, isConquestAlliance)

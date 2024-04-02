@@ -15,26 +15,27 @@ zones[xi.zone.ILRUSI_ATOLL] =
         LOGIN_CAMPAIGN_UNDERWAY       = 7002, -- The [/January/February/March/April/May/June/July/August/September/October/November/December] <number> Login Campaign is currently underway!
         LOGIN_NUMBER                  = 7003, -- In celebration of your most recent login (login no. <number>), we have provided you with <number> points! You currently have a total of <number> points.
         MEMBERS_LEVELS_ARE_RESTRICTED = 7023, -- Your party is unable to participate because certain members' levels are restricted.
-        ASSAULT_41_START              = 7466, -- Commencing <assault>! Objective: Rescue the agent
-        ASSAULT_42_START              = 7467, -- Commencing <assault>! Objective: Destroy the assassins
-        ASSAULT_43_START              = 7468, -- Commencing <assault>! Objective: Defeat Sagelord Molaal Ja
-        ASSAULT_44_START              = 7469, -- Commencing <assault>! Objective: Steal the supplies
-        ASSAULT_45_START              = 7470, -- Commencing <assault>! Objective: Apprehend the spy
-        ASSAULT_46_START              = 7471, -- Commencing <assault>! Objective: Recover the treasure
-        ASSAULT_47_START              = 7472, -- Commencing <assault>! Objective: Annihilate the enemy
-        ASSAULT_48_START              = 7473, -- Commencing <assault>! Objective: Neutralize the marids
-        ASSAULT_49_START              = 7474, -- Commencing <assault>! Objective: Gather pathological data
-        ASSAULT_50_START              = 7475, -- Commencing <assault>! Objective: Defeat Orochi
-        TIME_TO_COMPLETE              = 7516, -- You have <number> [minute/minutes] (Earth time) to complete this mission.
-        MISSION_FAILED                = 7517, -- The mission has failed. Leaving area.
-        RUNE_UNLOCKED_POS             = 7518, -- ission objective completed. Unlocking Rune of Release ([A/B/C/D/E/F/G/H/I/J/K/L/M/N/O/P/Q/R/S/T/U/V/W/X/Y/Z]-#).
-        RUNE_UNLOCKED                 = 7519, -- ission objective completed. Unlocking Rune of Release.
-        ASSAULT_POINTS_OBTAINED       = 7520, -- You gain <number> [Assault point/Assault points]!
-        TIME_REMAINING_MINUTES        = 7521, -- ime remaining: <number> [minute/minutes] (Earth time).
-        TIME_REMAINING_SECONDS        = 7522, -- ime remaining: <number> [second/seconds] (Earth time).
-        PARTY_FALLEN                  = 7524, -- ll party members have fallen in battle. Mission failure in <number> [minute/minutes].
-        CHEST                         = 7534, -- The chest contains...
-        GOLDEN                        = 7535, -- ...a golden figurehead!
+        ASSAULT_START_OFFSET          = 7354, -- Max MP Down removed for <name>.
+        ASSAULT_41_START              = 7465, -- Commencing <assault>! Objective: Rescue the agent
+        ASSAULT_42_START              = 7466, -- Commencing <assault>! Objective: Destroy the assassins
+        ASSAULT_43_START              = 7467, -- Commencing <assault>! Objective: Defeat Sagelord Molaal Ja
+        ASSAULT_44_START              = 7468, -- Commencing <assault>! Objective: Steal the supplies
+        ASSAULT_45_START              = 7469, -- Commencing <assault>! Objective: Apprehend the spy
+        ASSAULT_46_START              = 7470, -- Commencing <assault>! Objective: Recover the treasure
+        ASSAULT_47_START              = 7471, -- Commencing <assault>! Objective: Annihilate the enemy
+        ASSAULT_48_START              = 7472, -- Commencing <assault>! Objective: Neutralize the marids
+        ASSAULT_49_START              = 7473, -- Commencing <assault>! Objective: Gather pathological data
+        ASSAULT_50_START              = 7474, -- Commencing <assault>! Objective: Defeat Orochi
+        TIME_TO_COMPLETE              = 7515, -- You have <number> [minute/minutes] (Earth time) to complete this mission.
+        MISSION_FAILED                = 7516, -- The mission has failed. Leaving area.
+        RUNE_UNLOCKED_POS             = 7517, -- ission objective completed. Unlocking Rune of Release ([A/B/C/D/E/F/G/H/I/J/K/L/M/N/O/P/Q/R/S/T/U/V/W/X/Y/Z]-#).
+        RUNE_UNLOCKED                 = 7518, -- ission objective completed. Unlocking Rune of Release.
+        ASSAULT_POINTS_OBTAINED       = 7519, -- You gain <number> [Assault point/Assault points]!
+        TIME_REMAINING_MINUTES        = 7520, -- ime remaining: <number> [minute/minutes] (Earth time).
+        TIME_REMAINING_SECONDS        = 7521, -- ime remaining: <number> [second/seconds] (Earth time).
+        PARTY_FALLEN                  = 7523, -- ll party members have fallen in battle. Mission failure in <number> [minute/minutes].
+        CHEST                         = 7533, -- The chest contains...
+        GOLDEN                        = 7534, -- ...a golden figurehead!
     },
     mob =
     {
@@ -64,32 +65,17 @@ zones[xi.zone.ILRUSI_ATOLL] =
             CURSED_CHEST11 = 17002515,
             CURSED_CHEST12 = 17002516,
         },
-        [43] =
+        [xi.assault.mission.EXTERMINATION] =
         {
-            CARRION_CRAB1   = 17002521,
-            CARRION_LEECH1  = 17002522,
-            CARRION_CRAB2   = 17002523,
-            CARRION_CRAB3   = 17002524,
-            CARRION_LEECH2  = 17002525,
-            CARRION_CRAB4   = 17002526,
-            CARRION_CRAB5   = 17002527,
-            CARRION_CRAB6   = 17002528,
-            CARRION_SLIME1  = 17002529,
-            CARRION_SLIME2  = 17002530,
-            CARRION_SLIME3  = 17002531,
-            CARRION_CRAB7   = 17002532,
-            CARRION_LEECH3  = 17002533,
-            CARRION_LEECH4  = 17002534,
-            CARRION_LEECH5  = 17002535,
-            CARRION_LEECH6  = 17002536,
-            CARRION_LEECH7  = 17002537,
-            CARRION_LEECH8  = 17002538,
-            CARRION_TOAD1   = 17002539,
-            CARRION_TOAD2   = 17002540,
-            UNDEAD_CRAB     = 17002541,
-            UNDEAD_LEECH    = 17002542,
-            UNDEAD_SLIME    = 17002543,
-            UNDEAD_TOAD     = 17002544,
+            MOBS_START =
+            {
+                17002521, 17002522, 17002523, 17002524, 17002525, 17002526, 17002527, 17002528, 17002529, 17002530,
+                17002531, 17002532, 17002533, 17002534, 17002535, 17002536, 17002537, 17002538, 17002539, 17002540,
+            },
+            UNDEAD_CRAB  = 17002541,
+            UNDEAD_LEECH = 17002542,
+            UNDEAD_SLIME = 17002543,
+            UNDEAD_TOAD  = 17002544,
         },
     },
     npc =

@@ -7,24 +7,18 @@
 local itemObject = {}
 
 itemObject.onItemCheck = function(target)
-    local effect = target:getStatusEffect(xi.effect.ENCHANTMENT)
-    if effect ~= nil and effect:getSubType() == 14789 then
-        target:delStatusEffect(xi.effect.ENCHANTMENT)
+    local effect = target:getStatusEffect(xi.effect.ENMITY_BOOST)
+    if effect ~= nil and effect:getItemSourceID() == xi.item.NARUKO_EARRING then
+        target:delStatusEffect(xi.effect.ENMITY_BOOST)
     end
 
     return 0
 end
 
 itemObject.onItemUse = function(target)
-    target:addStatusEffect(xi.effect.ENCHANTMENT, 0, 0, 180, 14789)
-end
-
-itemObject.onEffectGain = function(target, effect)
-    target:addMod(xi.mod.ENMITY, 10)
-end
-
-itemObject.onEffectLose = function(target, effect)
-    target:delMod(xi.mod.ENMITY, 10)
+    if target:hasEquipped(xi.item.NARUKO_EARRING) then
+        target:addStatusEffect(xi.effect.ENMITY_BOOST, 10, 0, 180, 0, 0, 0, xi.item.NARUKO_EARRING)
+    end
 end
 
 return itemObject

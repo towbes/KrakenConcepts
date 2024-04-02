@@ -1,61 +1,62 @@
 -----------------------------------
 -- Area: The Shrine of Ru'Avitau
 --  Mob: Faust
--- TODO: Faust should WS ~3 times in a row each time.
 -----------------------------------
 local entity = {}
 
-local east = 0
-local north = 192
-local home = { 740, -0.463, -99 }
-
-local setFaustNextTurnTime = function(faust)
-    faust:setLocalVar('NextTurnTime', os.time() + math.random(45, 75))
-end
-
-local faustNextTurnTime = function(faust)
-    return faust:getLocalVar('NextTurnTime')
-end
-
-local setFaustFacingDirection = function(faust, direction)
-    faust:setLocalVar('FacingDirection', direction)
-    faust:setRotation(direction)
-end
-
-local faustFacingDirection = function(faust)
-    return faust:getLocalVar('FacingDirection')
-end
-
-local handleFaustFacingDirectionMechanics = function(faust)
-    if os.time() > faustNextTurnTime(faust) then
-        if faustFacingDirection(faust) == north then
-            setFaustFacingDirection(faust, east)
-        else
-            setFaustFacingDirection(faust, north)
-        end
-
-        setFaustNextTurnTime(faust)
-    end
+entity.onMobInitialize = function(mob)
+    mob:setMod(xi.mod.REGAIN, 1000)
+    mob:setSpeed(100)
+    mob:setMobMod(xi.mobMod.SIGHT_RANGE, 30)
 end
 
 entity.onMobSpawn = function(mob)
-    setFaustNextTurnTime(mob)
-    setFaustFacingDirection(mob, north) -- start him facing north (though the database technically already does this, we need to absorb the local dir)
+    mob:setMobMod(xi.mobMod.NO_MOVE, 1)
+    mob:setLocalVar('moveTime', os.time() + 6)
+end
+
+entity.onMobEngage = function(mob)
+    mob:setMobMod(xi.mobMod.NO_MOVE, 0)
 end
 
 entity.onMobRoam = function(mob)
-    if mob:atPoint(home) then
-        handleFaustFacingDirectionMechanics(mob)
+    local spawn = mob:getSpawnPos()
+    local distance = mob:checkDistance(spawn.x, spawn.y, spawn.z)
+
+    -- Faust doesn't move from spawn point and rotates every 4-10 seconds
+    if distance < 3 then
+        mob:setMobMod(xi.mobMod.NO_MOVE, 1)
+        if os.time() > mob:getLocalVar('moveTime') then
+            local newTime = math.random(3, 10)
+            mob:setLocalVar('moveTime', os.time() + newTime)
+            if mob:getRotPos() == 255 then
+                mob:setRotation(191)
+            else
+                mob:setRotation(255)
+            end
+        end
     else
-        mob:pathThrough(home, xi.pathflag.NONE)
+        mob:pathTo(spawn.x, spawn.y, spawn.z)
     end
+end
+
+entity.onMobFight = function(mob, target)
+    -- Doesn't seem to reliably remove in onMobEngaged
+    if mob:getMobMod(xi.mobMod.NO_MOVE) > 0 then
+        mob:setMobMod(xi.mobMod.NO_MOVE, 0)
+    end
+end
+
+entity.onMobDisengage = function(mob)
+    local spawn = mob:getSpawnPos()
+    mob:pathTo(spawn.x, spawn.y, spawn.z)
 end
 
 entity.onMobDeath = function(mob, player, optParams)
 end
 
 entity.onMobDespawn = function(mob)
-    mob:setRespawnTime(math.random(10800, 21600)) -- respawn 3-6 hrs
+    xi.mob.nmTODPersist(mob, math.random(10800, 21600)) -- 3 to 6 hrs
 end
 
 return entity

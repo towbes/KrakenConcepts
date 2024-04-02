@@ -106,7 +106,11 @@ local function calculateVivaciousPulseHealing(target)
 
     if tenebraeRuneCount > 0 then -- only restore MP if there's one or more tenebrae rune active
         local mpHealAmount = math.floor(divineMagicSkillLevel / 10 * (100 + target:getJobPointLevel(xi.jp.VIVACIOUS_PULSE_EFFECT)) / 100) * (tenebraeRuneCount + 1)
-        target:addMP(mpHealAmount) -- augment bonusPct does not apply here according to testing.
+        if target:hasStatusEffect(xi.effect.CURSE_II) then
+            target:messageBasic(xi.msg.basic.NO_EFFECT)
+        else
+            target:addMP(mpHealAmount) -- augment bonusPct does not apply here according to testing.
+        end
     end
 
     if debuffCount > 0 and target:getMod(xi.mod.AUGMENTS_VIVACIOUS_PULSE) > 0 then -- add random removal of Poison, Paralyze, Blind, Silence, Mute, Curse, Bane, Doom, Virus, Plague, Petrification via AF3 head (source: https://www.bg-wiki.com/ffxi/Erilaz_Galea)
@@ -364,7 +368,7 @@ xi.job_utils.rune_fencer.useVallationValiance = function(player, target, ability
     local abilityID   = ability:getID()
     local highestRune = player:getHighestRuneEffect()
 
-    action:speceffect(target:getID(), getSpecEffectElementWard(highestRune)) -- set element color for animation. This is set even on "sub targets" for valiance on retail even if the animation doesn't seem to change.
+    action:speceffect(target:getID(), getSpecEffectElementWard(highestRune)) -- set element color for animation. This is set even on 'sub targets' for valiance on retail even if the animation doesn't seem to change.
 
     if player:getID() ~= target:getID() then -- Only the caster can apply effects, including to the party if valiance.
 
@@ -374,7 +378,7 @@ xi.job_utils.rune_fencer.useVallationValiance = function(player, target, ability
             target:hasStatusEffect(xi.effect.LIEMENT)
         then
             -- Valiance is being used on them, and they have Vallation already up or they have liement
-            ability:setMsg(xi.msg.basic.NO_EFFECT) -- "No effect on <Target>"
+            ability:setMsg(xi.msg.basic.NO_EFFECT) -- 'No effect on <Target>'
         else
             ability:setMsg(xi.msg.basic.VALIANCE_GAIN_PARTY)
         end
@@ -417,7 +421,7 @@ xi.job_utils.rune_fencer.useVallationValiance = function(player, target, ability
                     member:addStatusEffect(xi.effect.FAST_CAST, inspirationFCBonus, 0, duration)
                 end
             elseif member:getID() == player:getID() then    -- caster has Vallation, set no effect message.
-                ability:setMsg(xi.msg.basic.JA_NO_EFFECT_2) -- "<Player> uses Valiance.\nNo effect on <Player>."
+                ability:setMsg(xi.msg.basic.JA_NO_EFFECT_2) -- '<Player> uses Valiance.\nNo effect on <Player>.'
             end
         end
     else -- apply effects to target (Vallation)
@@ -571,7 +575,7 @@ xi.job_utils.rune_fencer.useSwipeLunge = function(player, target, ability, actio
             local multipliers = getSwipeLungeDamageMultipliers(player, target, element, bonusMacc) -- store multipliers in case we need them for lowering rune strength on lunge
             local damage      = calculateSwipeLungeDamage(player, target, skillModifier, gearBonus, runeStrength, multipliers)
 
-            -- set absorb flag in case we end up dealing 0 damage cumulatively. For example using a wind swipe/lunge vs Puk with full hp will report it "absorbed" 0 HP.
+            -- set absorb flag in case we end up dealing 0 damage cumulatively. For example using a wind swipe/lunge vs Puk with full hp will report it 'absorbed' 0 HP.
             if multipliers.nukeAbsorbOrNullify == -1 then
                 absorbed = true
             end
@@ -646,7 +650,7 @@ end
 
 -- see http://wiki.ffo.jp/html/1720.html, the effects resisted are against the strong element.
 -- for example, Amnesia is fire based, therefore water runes (Unda) add resist Amnesia.
--- These effects seem to match the "Resist X" traits that all jobs have, including unused player traits that made it into autotranslate; Resist Curse/Charm
+-- These effects seem to match the 'Resist X' traits that all jobs have, including unused player traits that made it into autotranslate; Resist Curse/Charm
 local function addPflugResistType(type, effect, power)
     local pflugResistTypes =
     {
@@ -681,12 +685,12 @@ end
 
 xi.job_utils.rune_fencer.usePflug = function(player, target, ability, action)
     local highestRune  = player:getHighestRuneEffect()
-    local baseStrength = 10
+    local baseStrength = 15 -- Default 10
     local meritBonus   = player:getMerit(xi.merit.MERIT_PFLUG_EFFECT)
 
-    if player:getMainJob() == xi.job.RUN then
-        baseStrength = 15
-    end
+    --if player:getMainJob() == xi.job.RUN then
+    --    baseStrength = 15
+    --end
 
     action:speceffect(target:getID(), getSpecEffectElementWard(highestRune))
 
@@ -775,7 +779,7 @@ end
 xi.job_utils.rune_fencer.useLiement = function(player, target, ability, action)
     local highestRune = player:getHighestRuneEffect()
 
-    action:speceffect(target:getID(), getSpecEffectElementWard(highestRune)) -- set element color for animation. This is set even on "sub targets" for aoe liement on retail even if the animation doesn't seem to change.
+    action:speceffect(target:getID(), getSpecEffectElementWard(highestRune)) -- set element color for animation. This is set even on 'sub targets' for aoe liement on retail even if the animation doesn't seem to change.
 
     if player:getID() ~= target:getID() then -- Only the caster can apply effects
         return

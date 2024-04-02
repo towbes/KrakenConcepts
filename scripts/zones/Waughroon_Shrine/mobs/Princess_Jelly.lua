@@ -3,6 +3,12 @@
 -- Mob: Princess Jelly
 -- BCNM: Royal Jelly
 -----------------------------------
+local ID = zones[xi.zone.WAUGHROON_SHRINE]
+require('scripts/globals/pathfind')
+require('scripts/globals/utils')
+
+
+-----------------------------------
 local elementalSpells =
 {
     { xi.magic.spell.BURN,  xi.magic.spell.FIRE },
@@ -39,7 +45,7 @@ entity.onMobInitialize = function(mob)
 end
 
 entity.onMobSpawn = function(mob)
-    mob:setSpeed((50 + xi.settings.map.SPEED_MOD) * 0.05) -- ~5% of normal movementspeed
+    mob:setSpeed((50 + xi.settings.map.MOB_SPEED_MOD) * 0.05) -- ~5% of normal movementspeed
     mob:setMod(xi.mod.REGEN, 3)
     mob:setLocalVar('mobElement', math.random(1, 8))
     mob:addMod(mevaList[mob:getLocalVar('mobElement')][1], -250)

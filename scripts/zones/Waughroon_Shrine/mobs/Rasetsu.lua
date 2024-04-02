@@ -1,7 +1,9 @@
 -----------------------------------
 -- Area: Waughroon Shrine
---  Mob: Rasetsu
--- a Thief in Norg BCNM Fight
+--   NM: Rasetsu
+-- Involved in Quest: A Thief in Norg
+-----------------------------------
+mixins = {require('scripts/mixins/job_special')}
 -----------------------------------
 local entity = {}
 

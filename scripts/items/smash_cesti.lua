@@ -7,16 +7,17 @@
 local itemObject = {}
 
 itemObject.onItemCheck = function(target)
-    local effect = target:getStatusEffect(xi.effect.ENCHANTMENT)
-    if effect ~= nil and effect:getSubType() == 18747 then
-        target:delStatusEffect(xi.effect.ENCHANTMENT)
+    if target:getStatusEffect(xi.effect.ENCHANTMENT, nil, xi.item.SMASH_CESTI) ~= nil then
+        target:delStatusEffect(xi.effect.ENCHANTMENT, nil, xi.item.SMASH_CESTI)
     end
 
     return 0
 end
 
 itemObject.onItemUse = function(target)
-    target:addStatusEffect(xi.effect.ENCHANTMENT, 0, 0, 1800, 18747)
+    if target:hasEquipped(xi.item.SMASH_CESTI) then
+        target:addStatusEffect(xi.effect.ENCHANTMENT, 0, 0, 1800, 0, 0, 0, xi.item.SMASH_CESTI)
+    end
 end
 
 itemObject.onEffectGain = function(target, effect)

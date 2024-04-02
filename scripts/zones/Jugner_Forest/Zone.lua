@@ -12,19 +12,18 @@ zoneObject.onChocoboDig = function(player, precheck)
 end
 
 zoneObject.onInitialize = function(zone)
-    zone:registerTriggerArea(1, -484, 10, 292, 0, 0, 0) -- Sets Mark for "Under Oath" Quest cutscene.
+    zone:registerTriggerArea(1, -484, 10, 292, 0, 0, 0) -- Sets Mark for 'Under Oath' Quest cutscene.
 
-    UpdateNMSpawnPoint(ID.mob.FRAELISSA)
-    GetMobByID(ID.mob.FRAELISSA):setRespawnTime(math.random(900, 10800))
+    -- NM Persistence
+    xi.mob.nmTODPersistCache(zone, ID.mob.METEORMAULER)
+    xi.mob.nmTODPersistCache(zone, ID.mob.FRAELISSA)
+    for offset = 1, 10 do
+        xi.mob.nmTODPersistCache(zone, ID.mob.KING_ARTHRO - offset)
+    end
 
     xi.conq.setRegionalConquestOverseers(zone:getRegionID())
 
     xi.helm.initZone(zone, xi.helmType.LOGGING)
-
-    local respawnTime = 900 + math.random(0, 6) * 1800 -- 0:15 to 3:15 spawn timer in 30 minute intervals
-    for offset = 1, 10 do
-        GetMobByID(ID.mob.KING_ARTHRO - offset):setRespawnTime(respawnTime)
-    end
 
     xi.voidwalker.zoneOnInit(zone)
 end

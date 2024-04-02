@@ -1,6 +1,6 @@
 require('scripts/globals/mixins')
 -----------------------------------
--- TODO: Lycopodiums should use a regen move on players with the title "Babban's Traveling Companion"
+-- TODO: Lycopodiums should use a regen move on players with the title 'Babban's Traveling Companion'
 
 xi = xi or {}
 xi.mix = xi.mix or {}

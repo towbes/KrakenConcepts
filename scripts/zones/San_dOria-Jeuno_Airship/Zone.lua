@@ -26,7 +26,7 @@ zoneObject.onGameHour = function(zone)
 
     if
         IsMoonFull() and
-        vanadielHour >= 18 and
+        vanadielHour >= 18 or
         vanadielHour < 6
     then
         qmObj:setStatus(xi.status.NORMAL)
@@ -45,6 +45,11 @@ zoneObject.onEventFinish = function(player, csid, option, npc)
         if prevzone == xi.zone.PORT_JEUNO then
             player:setPos(0, 0, 0, 0, 232)
         elseif prevzone == xi.zone.PORT_SAN_DORIA then
+            player:setPos(0, 0, 0, 0, 246)
+        else
+            --fix for black screen if prevzone is not getting set correctly
+            --or the player logged out during the airship, and the pos_prevzone was set TO the airship
+            --set to Port Jeuno position 0, 0, 0
             player:setPos(0, 0, 0, 0, 246)
         end
     end

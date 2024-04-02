@@ -1,6 +1,7 @@
 -----------------------------------
 -- Zone: West_Ronfaure (100)
 -----------------------------------
+local ID = zones[xi.zone.WEST_RONFAURE]
 require('scripts/quests/i_can_hear_a_rainbow')
 -----------------------------------
 local zoneObject = {}
@@ -11,6 +12,8 @@ end
 
 zoneObject.onInitialize = function(zone)
     xi.conq.setRegionalConquestOverseers(zone:getRegionID())
+    --NM Persistence
+    xi.mob.nmTODPersistCache(zone, ID.mob.AMANITA)
 end
 
 zoneObject.onZoneIn = function(player, prevZone)

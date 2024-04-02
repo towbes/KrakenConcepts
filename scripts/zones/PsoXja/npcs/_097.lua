@@ -10,7 +10,8 @@ local entity = {}
 
 entity.onTrade = function(player, npc, trade)
     if
-        player:getMainJob() == xi.job.THF and
+        (player:getMainJob() == xi.job.THF or
+        player:getSubJob() == xi.job.THF) and
         trade:getItemCount() == 1 and
         (
             trade:hasItemQty(xi.item.SKELETON_KEY, 1) or

@@ -7,21 +7,9 @@
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)
-    if player:getQuestStatus(xi.quest.log_id.SANDORIA, xi.quest.id.sandoria.FEAR_OF_THE_DARK) ~= QUEST_AVAILABLE then
-        if trade:hasItemQty(xi.item.BAT_WING, 2) and trade:getItemCount() == 2 then
-            player:startEvent(18)
-        end
-    end
 end
 
 entity.onTrigger = function(player, npc)
-    local fearOfTheDark = player:getQuestStatus(xi.quest.log_id.SANDORIA, xi.quest.id.sandoria.FEAR_OF_THE_DARK)
-
-    if fearOfTheDark == QUEST_AVAILABLE then
-        player:startEvent(19)
-    else
-        player:startEvent(17)
-    end
 end
 
 entity.onEventUpdate = function(player, csid, option, npc)

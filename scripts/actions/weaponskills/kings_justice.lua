@@ -7,7 +7,6 @@
 -- Aligned with the Breeze Gorget, Thunder Gorget & Soil Gorget.
 -- Aligned with the Breeze Belt, Thunder Belt & Soil Belt.
 -- Element: None
--- Staff weapon skill Skill level: 10 Delivers a single-hit attack. Damage varies with TP. Element: Non
 -- Modifiers: STR:50%
 -- 100%TP    200%TP    300%TP
 -- 1.00      1.25      1.50
@@ -21,7 +20,9 @@ weaponskillObject.onUseWeaponSkill = function(player, target, wsID, tp, primary,
     params.str_wsc = 0.5
 
     if xi.settings.main.USE_ADOULIN_WEAPON_SKILL_CHANGES then
-        params.ftpMod = { 1.0, 3.0, 5.0 }
+        params.ftpMod = { 2.25, 4.00, 5.50 }
+        -- params.ftpMod = { 1.0, 3.0, 5.0 }
+        params.multiHitfTP = true
     end
 
     -- Apply aftermath

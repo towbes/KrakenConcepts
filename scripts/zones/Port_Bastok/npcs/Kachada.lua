@@ -8,9 +8,8 @@ entity.onTrade = function(player, npc, trade)
 end
 
 entity.onTrigger = function(player, npc)
-    -- Currently selecting option 1 will result in a hard lock of the player requiring them to force quit the client.
-    -- This likely needs special handling in the core.
     -- player:startEvent(96)--, 0, 0, 0, 0, 0, -1, 2)
+    player:printToPlayer('The Vana\'diel Adventurer Recruitment Program isn\'t running currently. World Passes aren\'t available for purchase at this time.', xi.msg.channel.SAY, npc:getPacketName())
 end
 
 entity.onEventUpdate = function(player, csid, option, npc)

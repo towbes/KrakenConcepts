@@ -76,7 +76,12 @@ end
 entity.onEventUpdate = function(player, csid, option, npc)
 end
 
-entity.onEventFinish = function(player, csid, option)
+entity.onEventFinish = function(player, csid, option, npc)
+    -- ON SABBATICAL
+    if csid == 2 then
+        npcUtil.giveKeyItem(player, xi.ki.SCHULTZS_SEALED_LETTER)
+        player:setCharVar('OnSabbatical', 3)
+    end
 end
 
 return entity

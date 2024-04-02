@@ -55,6 +55,7 @@ instanceObject.onInstanceComplete = function(instance)
 end
 
 instanceObject.onEventFinish = function(player, csid, option, npc)
+    xi.assault.instanceOnEventFinish(player, csid, xi.zone.MOUNT_ZHAYOLM)
 end
 
 return instanceObject

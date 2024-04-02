@@ -15,7 +15,8 @@ local weaponskillObject = {}
 
 weaponskillObject.onUseWeaponSkill = function(player, target, wsID, tp, primary, action, taChar)
     local params = {}
-    params.ftpMod = { 3.5, 3.5, 3.5 }
+    params.ftpMod = { 3.0, 3.0, 3.0 }
+    -- params.ftpMod = { 3.5, 3.5, 3.5 }
     params.str_wsc = 0.3 params.int_wsc = 0.3
     params.ele = xi.element.DARK
     params.skill = xi.skill.SCYTHE
@@ -30,6 +31,7 @@ weaponskillObject.onUseWeaponSkill = function(player, target, wsID, tp, primary,
     if damage > 0 and not target:hasStatusEffect(xi.effect.ATTACK_DOWN) then
         local duration = (tp / 1000 * 180) * applyResistanceAddEffect(player, target, xi.element.WATER, 0)
         target:addStatusEffect(xi.effect.ATTACK_DOWN, 25, 0, duration)
+        player:messagePublic(xi.msg.basic.SKILL_ENFEEB, target, wsID, xi.effect.ATTACK_DOWN)
     end
 
     return tpHits, extraHits, criticalHit, damage

@@ -21,7 +21,7 @@ quest.sections =
     {
         check = function(player, status, vars)
             return status == QUEST_AVAILABLE and
-                player:canEquipItem(xi.item.CLUB_OF_TRIALS, true) and
+                -- player:canEquipItem(xi.item.CLUB_OF_TRIALS, true) and
                 player:getCharSkillLevel(xi.skill.CLUB) / 10 >= 230 and
                 not player:hasKeyItem(xi.keyItem.WEAPON_TRAINING_GUIDE)
         end,

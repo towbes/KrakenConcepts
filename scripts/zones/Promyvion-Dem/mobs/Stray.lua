@@ -2,6 +2,12 @@
 -- Area: Promyvion-Dem
 --   NM: Stray
 -----------------------------------
+require('scripts/globals/promyvion')
+mixins =
+{
+    require('scripts/mixins/families/empty')
+}
+-----------------------------------
 local entity = {}
 
 entity.onMobSpawn = function(mob)

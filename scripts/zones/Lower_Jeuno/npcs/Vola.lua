@@ -17,7 +17,7 @@ entity.onTrade = function(player, npc, trade)
         trade:hasItemQty(xi.item.DODO_SKIN, 1) and
         trade:getItemCount() == 3
     then
-        player:startEvent(213) -- Finish Quest "Fistful of Fury"
+        player:startEvent(213) -- Finish Quest 'Fistful of Fury'
     end
 end
 
@@ -30,21 +30,23 @@ entity.onTrigger = function(player, npc)
         fistfulOfFury == QUEST_AVAILABLE and
         player:getQuestStatus(xi.quest.log_id.BASTOK, xi.quest.id.bastok.SILENCE_OF_THE_RAMS) == QUEST_COMPLETED
     then
-        player:startEvent(216) -- Start Quest "Fistful of Fury"
+        player:startEvent(216) -- Start Quest 'Fistful of Fury'
 
     elseif fistfulOfFury == QUEST_ACCEPTED then
-        player:startEvent(215) -- During Quest "Fistful of Fury"
+        player:startEvent(215) -- During Quest 'Fistful of Fury'
 
     elseif
         beatAroundTheBushin == QUEST_AVAILABLE and
         player:getMainJob() == xi.job.MNK and
-        player:getMainLvl() >= 71 and
+        player:getMainLvl() >= 71 or
+        player:getSubJob() == xi.job.MNK and
+        player:getSubLvl() >= 71 and
         player:getFameLevel(xi.quest.fame_area.NORG) >= 6
     then
-        player:startEvent(160) -- Start Quest "Beat Around the Bushin"
+        player:startEvent(160) -- Start Quest 'Beat Around the Bushin'
 
     elseif beatAroundTheBushin ~= QUEST_AVAILABLE then
-        player:startEvent(214) -- During & After Quest "Beat Around the Bushin"
+        player:startEvent(214) -- During & After Quest 'Beat Around the Bushin'
 
     else
         player:startEvent(212) -- Standard dialog
@@ -74,7 +76,7 @@ entity.onEventFinish = function(player, csid, option, npc)
         csid == 160 and
         player:getQuestStatus(xi.quest.log_id.JEUNO, xi.quest.id.jeuno.BEAT_AROUND_THE_BUSHIN) == QUEST_AVAILABLE
     then
-        player:setCharVar('BeatAroundTheBushin', 1) -- For the next quest "Beat around the Bushin"
+        player:setCharVar('BeatAroundTheBushin', 1) -- For the next quest 'Beat around the Bushin'
     end
 end
 

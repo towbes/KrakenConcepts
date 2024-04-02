@@ -1,7 +1,7 @@
 -----------------------------------
 -- ID: 15320
 -- Powder Boots
---  Enchantment: "Flee"
+--  Enchantment: 'Flee'
 -----------------------------------
 local itemObject = {}
 
@@ -11,7 +11,7 @@ end
 
 itemObject.onItemUse = function(target)
     target:delStatusEffect(xi.effect.FLEE)
-    target:addStatusEffect(xi.effect.FLEE, 100, 0, 30)
+    target:addStatusEffect(xi.effect.FLEE, 100, 0, 30, 0, 0, 0, xi.item.POWDER_BOOTS)
 end
 
 return itemObject

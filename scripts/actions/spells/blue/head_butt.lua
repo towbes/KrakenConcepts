@@ -1,6 +1,6 @@
 -----------------------------------
 -- Spell: Head Butt
--- Damage varies with TP. Additional effect: "Stun"
+-- Damage varies with TP. Additional effect: 'Stun'
 -- Spell cost: 12 MP
 -- Monster Type: Beastmen
 -- Spell Type: Physical (Blunt)
@@ -26,10 +26,10 @@ spellObject.onSpellCast = function(caster, target, spell)
     params.damageType = xi.damageType.BLUNT
     params.scattr = xi.skillchainType.IMPACTION
     params.numhits = 1
-    params.multiplier = 1.75
-    params.tp150 = 2.125
-    params.tp300 = 2.25
-    params.azuretp = 2.375
+    params.multiplier = 1.75 -- Default: 1.75
+    params.tp150 = 2.125 -- Default: 2.125
+    params.tp300 = 2.25 -- Default: 2.25
+    params.azuretp = 2.375 -- Default: 2.375
     params.duppercap = 17
     params.str_wsc = 0.2
     params.dex_wsc = 0.0

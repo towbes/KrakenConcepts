@@ -1,9 +1,20 @@
 -----------------------------------
 -- Area: Waughroon Shrine
---  Mob: Metal Crab
+-- Mob: Metal Crab
 -- BCNM: Crustacean Conundrum
--- TODO: You can only do 0-2 damage no matter what your attack is.
 -----------------------------------
+require('scripts/globals/mobs')
+-----------------------------------
+local dots =
+    {
+        xi.effect.DIA,
+        xi.effect.POISON,
+        xi.effect.BIO,
+        xi.effect.REQUIEM,
+        xi.effect.CHOKE,
+        xi.effect.SHOCK,
+        xi.effect.FROST,
+    }
 local entity = {}
 
 entity.onMobInitialize = function(mob)
@@ -14,10 +25,26 @@ entity.onMobSpawn = function(mob)
     if VanadielDayOfTheWeek() == xi.day.WATERSDAY then
         mob:setMod(xi.mod.REGEN, 6, 3, 0)
     end
+    mob:setMod(xi.mod.DMGMAGIC_CAP, 1)
+    mob:setMod(xi.mod.DMGPHYS_CAP, 1)
+    mob:setMod(xi.mod.DMGRANGE_CAP, 1)
+    mob:setMod(xi.mod.DMGBREATH_CAP, 1)
 end
 
 entity.onAdditionalEffect = function(mob, target, damage)
-    return xi.mob.onAddEffect(mob, target, damage, xi.mob.ae.HP_DRAIN)
+    return xi.mob.onAddEffect(mob, target, damage, xi.mob.ae.HP_DRAIN, { power = 30 })
+end
+
+entity.onMobFight = function(mob, target)
+    local count = 0
+
+    for _, v in pairs(dots) do
+        if mob:hasStatusEffect(v) then
+            count = count + 1
+        end
+    end
+
+    mob:setMod(xi.mod.REGEN_DOWN, count)
 end
 
 entity.onMobDeath = function(mob, player, optParams)

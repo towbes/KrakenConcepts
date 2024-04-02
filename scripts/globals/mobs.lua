@@ -31,8 +31,91 @@ local function lotteryPrimed(phList)
     return false
 end
 
+local function persistLotteryPrimed(phList)
+    local nm
+    for k, v in pairs(phList) do
+        nm = GetMobByID(v)
+        local zone = nm:getZone()
+        local respawnPersist = zone:getLocalVar(string.format('\\[SPAWN\\]%s', nm:getID()))
+
+        if respawnPersist == 0 then
+            return false
+        elseif
+            nm ~= nil and
+            (nm:isSpawned() or nm:getRespawnTime() ~= 0 or
+            (respawnPersist > os.time()))
+        then
+            return true
+        end
+    end
+
+    return false
+end
+
+-- Needs to be added to the NM's onDespawn() function.
+xi.mob.nmTODPersist = function(mob, cooldown)
+    if xi.settings.main.NM_PERSISTENCE == 1 then
+        SetServerVariable(string.format('[SPAWN]%s', mob:getID()), cooldown + os.time())
+        mob:getZone():setLocalVar(string.format('[SPAWN]%s', mob:getID()), cooldown + os.time())
+    end
+
+    UpdateNMSpawnPoint(mob:getID())
+
+    mob:setRespawnTime(cooldown)
+end
+
+-- Needs to be added to the NM's zone onInit() function.
+xi.mob.nmTODPersistCache = function(zone, mobId)
+    if xi.settings.main.NM_PERSISTENCE == 1 then
+        local mob = GetMobByID(mobId)
+        if mob == nil then
+            return
+        end
+
+        local respawn = GetServerVariable(string.format('\\[SPAWN\\]%s', mobId))
+        zone:setLocalVar(string.format('[SPAWN]%s', mobId), respawn)
+        if
+            mob ~= nil and
+            mob:isSpawned() and
+            os.time() < respawn -- Spawned, but hasn't reached its time yet
+        then
+            DespawnMob(mobId)
+            if CheckNMSpawnPoint(mobId) then
+                UpdateNMSpawnPoint(mobId)
+            end
+
+            mob:setRespawnTime(respawn - os.time())
+        elseif os.time() >= respawn then -- Mob should be spawned.  Give it a few seconds.
+            UpdateNMSpawnPoint(mobId)
+            mob:setRespawnTime(30)
+        else
+            UpdateNMSpawnPoint(mobId)
+            mob:setRespawnTime(respawn - os.time()) -- Is dead when server restarts set its respawn timer
+        end
+    end
+end
+
+-- Needs to be added to the NM's onDespawn() function.
+xi.mob.lotteryPersist = function(mob, cooldown)
+    SetServerVariable(string.format('[SPAWN]%s', mob:getID()), cooldown + os.time())
+    mob:getZone():setLocalVar(string.format('[SPAWN]%s', mob:getID()), cooldown + os.time())
+end
+
+-- Needs to be added to the NM's zone onInit() function.
+xi.mob.lotteryPersistCache = function(zone, mobId)
+    local mob = GetMobByID(mobId)
+    local respawn = GetServerVariable(string.format('\\[SPAWN\\]%s', mob:getID()))
+    zone:setLocalVar(string.format('[SPAWN]%s', mob:getID()), respawn)
+end
+
 -- potential lottery placeholder was killed
 xi.mob.phOnDespawn = function(ph, phList, chance, cooldown, params)
+
+    -- Confirm the mob is actually dead
+    if ph:getHP() > 0 then
+        return
+    end
+
     params = params or {}
     --[[
         params.immediate   = true    pop NM without waiting for next PH pop time
@@ -73,6 +156,7 @@ xi.mob.phOnDespawn = function(ph, phList, chance, cooldown, params)
             if
                 os.time() > pop and
                 not lotteryPrimed(phList) and
+                not persistLotteryPrimed(phList) and
                 math.random(1, 1000) <= chance
             then
                 local nextRepopTime = os.time() + GetMobRespawnTime(phId)
@@ -104,7 +188,7 @@ xi.mob.phOnDespawn = function(ph, phList, chance, cooldown, params)
                 nm:addListener('DESPAWN', 'DESPAWN_' .. nmId, function(m)
                     -- on NM death, replace NM repop with PH repop
                     DisallowRespawn(nmId, true)
-                    DisallowRespawn(phId, false)
+                    -- DisallowRespawn(phId, false)
                     GetMobByID(phId):setRespawnTime(GetMobRespawnTime(phId))
 
                     if m:getLocalVar('doNotInvokeCooldown') == 0 then
@@ -161,6 +245,9 @@ xi.mob.additionalEffect =
     TERROR     = 20,
     TP_DRAIN   = 21,
     WEIGHT     = 22,
+    DISPEL     = 23,
+    SLEEP      = 24,
+    BIND       = 25,
 }
 xi.mob.ae = xi.mob.additionalEffect
 
@@ -450,6 +537,45 @@ local additionalEffects =
         eff         = xi.effect.WEIGHT,
         power       = 1,
         duration    = 30,
+        minDuration = 1,
+        maxDuration = 45,
+    },
+
+    [xi.mob.ae.DISPEL] =
+    {
+        chance = 20,
+        ele = xi.element.DARK,
+        sub = xi.subEffect.DISPEL,
+        msg = xi.msg.basic.ADD_EFFECT_DISPEL,
+        mod = xi.mod.INT,
+        bonusAbilityParams = { bonusmab = 0, includemab = false },
+        code = function(mob, target) target:dispelStatusEffect()
+        end,
+    },
+    [xi.mob.ae.SLEEP] =
+    {
+        chance = 25,
+        ele = xi.element.DARK,
+        sub = xi.subEffect.SLEEP,
+        msg = xi.msg.basic.ADD_EFFECT_STATUS,
+        applyEffect = true,
+        eff = xi.effect.SLEEP_I,
+        power = 20,
+        duration = 30,
+        minDuration = 1,
+        maxDuration = 45,
+    },
+
+    [xi.mob.ae.BIND] =
+    {
+        chance = 25,
+        ele = xi.element.ICE,
+        sub = xi.subEffect.BIND,
+        msg = xi.msg.basic.ADD_EFFECT_STATUS,
+        applyEffect = true,
+        eff = xi.effect.BIND,
+        power = 1,
+        duration = 30,
         minDuration = 1,
         maxDuration = 45,
     },

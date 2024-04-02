@@ -10,7 +10,7 @@
 local mobskillObject = {}
 
 mobskillObject.onMobSkillCheck = function(target, mob, skill)
-    if mob:getAnimationSub() == 0 then
+    if mob:getAnimationSub() == 0 or mob:getAnimationSub() == 2 then
         return 0
     else
         return 1
@@ -24,6 +24,18 @@ mobskillObject.onMobWeaponSkill = function(target, mob, skill)
     local info = xi.mobskills.mobPhysicalMove(mob, target, skill, numhits, accmod, dmgmod, xi.mobskills.magicalTpBonus.NO_EFFECT)
     local dmg = xi.mobskills.mobFinalAdjustments(info.dmg, mob, skill, target, xi.attackType.PHYSICAL, xi.damageType.SLASHING, info.hitslanded)
     target:takeDamage(dmg, mob, xi.attackType.PHYSICAL, xi.damageType.SLASHING)
+
+    -- Zareehkl the Jubilant's Leaping Cleave
+    if skill:getID() == 2363 then
+        -- has a chance to stun
+        if math.random() > 0.25 then
+        xi.mobskills.mobStatusEffectMove(mob, target, xi.effect.STUN, 1, 0, 4)
+        end
+
+        -- does not display the regular message (mimics auto attack)
+        skill:setMsg(xi.msg.basic.DAMAGE_SECONDARY)
+    end
+
     return dmg
 end
 

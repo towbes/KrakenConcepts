@@ -2,6 +2,8 @@
 -- Area: Temple of Uggalepih
 --  Mob: Hover Tank
 -----------------------------------
+mixins = { require('scripts/mixins/prelate_door') }
+-----------------------------------
 local entity = {}
 
 entity.onMobDeath = function(mob, player, optParams)

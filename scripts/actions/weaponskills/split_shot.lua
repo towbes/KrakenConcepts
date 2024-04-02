@@ -20,11 +20,13 @@ weaponskillObject.onUseWeaponSkill = function(player, target, wsID, tp, primary,
     params.agi_wsc = 0.3
 
     if xi.settings.main.USE_ADOULIN_WEAPON_SKILL_CHANGES then
+        params.ftpMod = { 1.5, 1.5, 1.5 }
         params.agi_wsc = 0.7
     end
 
     -- Defense ignored is 0%, 35%, 50% as per wiki.bluegartr.com
-    params.ignoredDefense = { 0.0, 0.35, 0.5 }
+    -- params.ignoredDefense = { 0.0, 0.35, 0.5 }
+    params.ignoredDefense = { 0.25, 0.50, 0.75 }
 
     local damage, criticalHit, tpHits, extraHits = xi.weaponskills.doRangedWeaponskill(player, target, wsID, params, tp, action, primary)
     return tpHits, extraHits, criticalHit, damage

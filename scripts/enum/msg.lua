@@ -36,7 +36,7 @@ xi.msg.channel =
     YELL           = 26,
     LINKSHELL2     = 27, -- Second LS color. Default is Green
     NS_LINKSHELL2  = 28, -- Same as LINKSHELL_2 but has but has no speaker object displayed
-    SYSTEM_3       = 29, -- "Basic system messages" in config menu. Yellow by default.
+    SYSTEM_3       = 29, -- 'Basic system messages' in config menu. Yellow by default.
     LINKSHELL3     = 30, -- Yes really it looks like a 3rd LS may have been planned at some point.
     NS_LINKSHELL3  = 31, -- (assumed as it follows pattern and color)
     UNKNOWN_32     = 32, -- Looks the same as 31
@@ -177,9 +177,9 @@ xi.msg.basic =
     REQUIRES_SHIELD        = 199, -- That action requires a shield.
     DISAPPEAR_NUM          = 231, -- <num> of <target>'s effects disappear!
     MUG_FAIL               = 244, -- <user> fails to mug <target>.
-    IS_EFFECT              = 277, -- "is <status>" - that's the entire message.
+    IS_EFFECT              = 277, -- 'is <status>' - that's the entire message.
     EVADES                 = 282, -- <target> evades.
-    NO_EFFECT              = 283, -- "No effect" - that's the entire message.
+    NO_EFFECT              = 283, -- 'No effect' - that's the entire message.
     NEEDS_2H_WEAPON        = 307, -- That action requires a two-handed weapon.
     LEVEL_IS_RESTRICTED    = 314, -- <target>'s level is currently restricted to <number>. Equipment affected by the level restriction will be adjusted accordingly.
     CANT_BE_USED_IN_AREA   = 316, -- That action cannot be used in this area.
@@ -202,6 +202,8 @@ xi.msg.basic =
     UNABLE_TO_SEE_TARG     = 5,   -- Unable to see <target>.
     LOSE_SIGHT             = 36,  -- You lose sight of <target>.
     TOO_FAR_AWAY           = 78,  -- <target> is too far away.
+    DRAWN_IN               = 232, -- <target> is drawn in!
+
 
     -- Weaponskills
     READIES_WS             = 43,  -- <actor> readies <weapon_skill>.
@@ -218,6 +220,7 @@ xi.msg.basic =
     STATUS_INCREASED       = 562, -- The status parameters of <target> have increased.
     PET_CANNOT_DO_ACTION   = 574, -- <player>'s pet is currently unable to perform that action.
     PET_NOT_ENOUGH_TP      = 575, -- <player>'s pet does not have enough TP to perform that action.
+    PET_MAGIC_BURST        = 747, -- <user> uses <skill>. Magic Burst! <target> takes <number> point(s) of damage.
     SPIRIT_BOND            = 800, -- Spirit Bond Activates. <Player> takes <number> points of damage. -- Wyvern Spirit bond
 
     -- Food

@@ -103,7 +103,7 @@ quest.sections =
                                 player:addQuest(xi.quest.log_id.JEUNO, xi.quest.id.jeuno.BEYOND_INFINITY)
                             end
 
-                            -- This options also warp you to a BCNM. Note that the quest "Beyond Infinity" is already activated in this cases.
+                            -- This options also warp you to a BCNM. Note that the quest 'Beyond Infinity' is already activated in this cases.
                             if option == 14 then
                                 player:setPos(-511.459, 159.004, -210.543, 10, 139) -- Horlais Peek
                             elseif option == 19 then

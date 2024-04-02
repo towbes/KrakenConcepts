@@ -7,18 +7,9 @@
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)
-    if player:getQuestStatus(xi.quest.log_id.SANDORIA, xi.quest.id.sandoria.WARDING_VAMPIRES) ~= QUEST_AVAILABLE then
-        if
-            trade:hasItemQty(xi.item.BULB_OF_SHAMAN_GARLIC, 2) and
-            trade:getItemCount() == 2
-        then
-            player:startEvent(23)
-        end
-    end
 end
 
 entity.onTrigger = function(player, npc)
-    local warding = player:getQuestStatus(xi.quest.log_id.SANDORIA, xi.quest.id.sandoria.WARDING_VAMPIRES)
     local wildcatSandy = player:getCharVar('WildcatSandy')
 
     if
@@ -26,18 +17,6 @@ entity.onTrigger = function(player, npc)
         not utils.mask.getBit(wildcatSandy, 7)
     then
         player:startEvent(807)
-    elseif
-        warding == QUEST_AVAILABLE and
-        player:getFameLevel(xi.quest.fame_area.SANDORIA) >= 3
-    then
-        -- Quest available for fame superior or equal to 3
-        player:startEvent(24)
-    elseif warding == QUEST_ACCEPTED then --Quest accepted, and he just tell me where to get item.
-        player:startEvent(22)
-    elseif warding == QUEST_COMPLETED then --Since the quest is repeatable, he tells me where to find (again) the items.
-        player:startEvent(22)
-    else
-        player:startEvent(21)
     end
 end
 

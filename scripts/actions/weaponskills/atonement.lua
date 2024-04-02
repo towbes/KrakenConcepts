@@ -77,7 +77,7 @@ weaponskillObject.onUseWeaponSkill = function(player, target, wsID, tp, primary,
             damage = damage * (100 + player:getMod(xi.mod.WEAPONSKILL_DAMAGE_BASE + wsID)) / 100
         end
 
-        damage = damage * xi.settings.main.WEAPON_SKILL_POWER
+        -- damage = damage * xi.settings.main.WEAPON_SKILL_POWER
         calcParams.finalDmg = damage
 
         if damage > 0 then

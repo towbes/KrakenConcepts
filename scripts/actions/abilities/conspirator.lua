@@ -1,6 +1,6 @@
 -----------------------------------
 -- Ability: Conspirator
--- Enhances accuracy and "Subtle Blow" effect for party members within area of effect.
+-- Enhances accuracy and 'Subtle Blow' effect for party members within area of effect.
 -- Does not affect the party member being targeted by the enemy.
 -- Obtained: Thief Level 87
 -- Recast Time: 5:00

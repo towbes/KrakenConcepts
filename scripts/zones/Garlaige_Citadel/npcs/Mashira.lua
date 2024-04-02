@@ -16,7 +16,7 @@ entity.onTrigger = function(player, npc)
         player:getQuestStatus(xi.quest.log_id.JEUNO, xi.quest.id.jeuno.RUBBISH_DAY) == QUEST_ACCEPTED and
         player:getCharVar('RubbishDayVar') == 0
     then
-        player:startEvent(11, 1) -- For the quest "Rubbish day"
+        player:startEvent(11, 1) -- For the quest 'Rubbish day'
     elseif player:getQuestStatus(xi.quest.log_id.WINDURST, xi.quest.id.windurst.MAKING_AMENS) == QUEST_ACCEPTED then
         if player:hasKeyItem(xi.ki.BROKEN_WAND) then
             player:startEvent(11, 3)

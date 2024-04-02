@@ -57,8 +57,8 @@ quest.sections =
                         npcUtil.tradeHasExactly(trade, { { xi.item.SLICE_OF_HARE_MEAT, 5 } })
                     then
                         return quest:progressEvent(528)
-                    else
-                        return quest:event(529)
+                    -- else
+                        -- return quest:progressEvent(529)
                     end
                 end,
 

@@ -1,6 +1,6 @@
 -----------------------------------
 -- Ability: Courser's Roll
--- Enhances "Snapshot" effect for party members within area of effect.
+-- Enhances 'Snapshot' effect for party members within area of effect.
 -- Optimal Job: None
 -- Lucky Number: 3
 -- Unlucky Number: 9

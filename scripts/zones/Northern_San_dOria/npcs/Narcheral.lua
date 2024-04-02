@@ -14,7 +14,7 @@ entity.onTrade = function(player, npc, trade)
             trade:hasItemQty(xi.item.TAVNAZIA_PASS, 1) and
             trade:getItemCount() == 1
         then
-            player:startEvent(690) -- Finish quest "Messenger from Beyond"
+            player:startEvent(690) -- Finish quest 'Messenger from Beyond'
         end
     elseif player:getQuestStatus(xi.quest.log_id.SANDORIA, xi.quest.id.sandoria.PRELUDE_OF_BLACK_AND_WHITE) == QUEST_ACCEPTED then
         if
@@ -23,14 +23,14 @@ entity.onTrade = function(player, npc, trade)
             trade:getItemCount() == 2
         then
             -- Trade Yagudo Holy Water & Moccasins
-            player:startEvent(691) -- Finish quest "Prelude of Black and White"
+            player:startEvent(691) -- Finish quest 'Prelude of Black and White'
         end
     elseif player:getQuestStatus(xi.quest.log_id.SANDORIA, xi.quest.id.sandoria.PIEUJE_S_DECISION) == QUEST_ACCEPTED then
         if
             trade:hasItemQty(xi.item.TAVNAZIAN_MASK, 1) and
             trade:getItemCount() == 1
         then
-            player:startEvent(692) -- Finish quest "Pieuje's Decision"
+            player:startEvent(692) -- Finish quest 'Pieuje's Decision'
         end
     end
 end
@@ -41,13 +41,17 @@ entity.onTrigger = function(player, npc)
     -- Checking levels and jobs for af quest
     local mLvl = player:getMainLvl()
     local mJob = player:getMainJob()
+    local sLvl = player:getSubLvl()
+    local sJob = player:getSubJob()
 
     if
         messengerFromBeyond == QUEST_AVAILABLE and
-        mJob == xi.job.WHM and
-        mLvl >= xi.settings.main.AF1_QUEST_LEVEL
+        ((mJob == xi.job.WHM and
+        mLvl >= xi.settings.main.AF1_QUEST_LEVEL) or
+        (sJob == xi.job.WHM and
+        sLvl >= xi.settings.main.AF1_QUEST_LEVEL)) --Umeboshi
     then
-        player:startEvent(689) -- Start quest "Messenger from Beyond"
+        player:startEvent(689) -- Start quest 'Messenger from Beyond'
     else
         player:startEvent(688) -- Standard dialog
     end

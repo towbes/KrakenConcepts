@@ -2,7 +2,7 @@
 -- Area: Batallia Downs
 --  NPC: qm1 (???)
 -- !pos -407.526 -23.507 412.544 105
--- Notes: Spawns Vegnix Greenthumb for ACP mission "Gatherer of Light (I)"
+-- Notes: Spawns Vegnix Greenthumb for ACP mission 'Gatherer of Light (I)'
 -----------------------------------
 local ID = zones[xi.zone.BATALLIA_DOWNS]
 -----------------------------------

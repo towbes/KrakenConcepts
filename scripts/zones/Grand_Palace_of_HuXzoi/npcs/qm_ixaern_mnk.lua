@@ -11,7 +11,7 @@ local entity = {}
 entity.onTrade = function(player, npc, trade)
     local nm = GetMobByID(ID.mob.IXAERN_MNK)
 
-    if not nm:isSpawned() then
+    if npc:getStatus() == xi.status.NORMAL and not nm:isSpawned() then
         local chance = 0 -- percent chance that an item will drop.
 
         if npcUtil.tradeHas(trade, { { xi.item.HIGH_QUALITY_AERN_ORGAN, 3 } }) then
@@ -31,7 +31,6 @@ entity.onTrade = function(player, npc, trade)
             local mob = SpawnMob(ID.mob.IXAERN_MNK)
             mob:updateClaim(player)
             mob:setLocalVar('[SEA]IxAern_DropRate', chance * 10)
-
             if chance >= 66 then
                 GetMobByID(ID.mob.IXAERN_MNK + 1):setSpawn(npc:getXPos(), npc:getYPos(), npc:getZPos() - 4)
                 SpawnMob(ID.mob.IXAERN_MNK + 1):updateClaim(player)

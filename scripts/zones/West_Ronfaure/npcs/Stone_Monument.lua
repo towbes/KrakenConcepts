@@ -1,7 +1,7 @@
 -----------------------------------
 -- Area: West Ronfaure
 --  NPC: Stone Monument
---  Involved in quest "An Explorer's Footsteps"
+--  Involved in quest 'An Explorer's Footsteps'
 -- !pos -183.734 -12.678 -395.722 100
 -----------------------------------
 local entity = {}

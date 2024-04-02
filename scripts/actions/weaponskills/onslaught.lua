@@ -23,6 +23,9 @@ weaponskillObject.onUseWeaponSkill = function(player, target, wsID, tp, primary,
     params.dex_wsc = 0.6
 
     if xi.settings.main.USE_ADOULIN_WEAPON_SKILL_CHANGES then
+        params.numHits = 5
+        params.ftpMod = { 1.25, 1.25, 1.25 }
+        params.multiHitfTP = true
         params.dex_wsc = 0.8
     end
 
@@ -34,6 +37,7 @@ weaponskillObject.onUseWeaponSkill = function(player, target, wsID, tp, primary,
         if not target:hasStatusEffect(xi.effect.ACCURACY_DOWN) then
             local duration = tp / 1000 * 20 * applyResistanceAddEffect(player, target, xi.element.EARTH, 0)
             target:addStatusEffect(xi.effect.ACCURACY_DOWN, 20, 0, duration)
+            player:messagePublic(xi.msg.basic.SKILL_ENFEEB, target, wsID, xi.effect.ACCURACY_DOWN)
         end
     end
 

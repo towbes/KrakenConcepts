@@ -22,7 +22,7 @@ local hnmSystem = Module:new('custom_HNM_System')
 -- Module enable/disable
 -----------------------------------
 -- Do not use along era_HNM_System module. Choose one or the other.
-hnmSystem:setEnabled(false)
+hnmSystem:setEnabled(true)
 
 -----------------------------------
 -- Dragon's Aery: Fafnir, Nidhogg
@@ -66,11 +66,19 @@ end)
 hnmSystem:addOverride('xi.zones.Dragons_Aery.npcs.qm0.onTrade', function(player, npc, trade)
     if
         not GetMobByID(dragonsAeryID.mob.FAFNIR):isSpawned() and
-        not GetMobByID(dragonsAeryID.mob.NIDHOGG):isSpawned() and
-        npcUtil.tradeHasExactly(trade, xi.item.SWEET_TEA) and
-        npcUtil.popFromQM(player, npc, dragonsAeryID.mob.NIDHOGG)
+        not GetMobByID(dragonsAeryID.mob.NIDHOGG):isSpawned()
     then
-        player:confirmTrade()
+        if
+            npcUtil.tradeHasExactly(trade, xi.item.JUG_OF_HONEY_WINE) and
+            npcUtil.popFromQM(player, npc, dragonsAeryID.mob.FAFNIR)
+        then
+            player:confirmTrade()
+        elseif
+            npcUtil.tradeHasExactly(trade, xi.item.SWEET_TEA) and
+            npcUtil.popFromQM(player, npc, dragonsAeryID.mob.NIDHOGG)
+        then
+            player:confirmTrade()
+        end
     end
 end)
 
@@ -116,11 +124,19 @@ end)
 hnmSystem:addOverride('xi.zones.Valley_of_Sorrows.npcs.qm1.onTrade', function(player, npc, trade)
     if
         not GetMobByID(valleySorrowsID.mob.ADAMANTOISE):isSpawned() and
-        not GetMobByID(valleySorrowsID.mob.ASPIDOCHELONE):isSpawned() and
-        npcUtil.tradeHasExactly(trade, xi.item.RED_PONDWEED) and
-        npcUtil.popFromQM(player, npc, valleySorrowsID.mob.ASPIDOCHELONE)
+        not GetMobByID(valleySorrowsID.mob.ASPIDOCHELONE):isSpawned()
     then
-        player:confirmTrade()
+        if
+            npcUtil.tradeHasExactly(trade, xi.item.CLUMP_OF_BLUE_PONDWEED) and
+            npcUtil.popFromQM(player, npc, valleySorrowsID.mob.ADAMANTOISE)
+        then
+            player:confirmTrade()
+        elseif
+            npcUtil.tradeHasExactly(trade, xi.item.RED_PONDWEED) and
+            npcUtil.popFromQM(player, npc, valleySorrowsID.mob.ASPIDOCHELONE)
+        then
+            player:confirmTrade()
+        end
     end
 end)
 
@@ -166,11 +182,19 @@ end)
 hnmSystem:addOverride('xi.zones.Behemoths_Dominion.npcs.qm2.onTrade', function(player, npc, trade)
     if
         not GetMobByID(behemothDomID.mob.BEHEMOTH):isSpawned() and
-        not GetMobByID(behemothDomID.mob.KING_BEHEMOTH):isSpawned() and
-        npcUtil.tradeHasExactly(trade, xi.item.SAVORY_SHANK) and
-        npcUtil.popFromQM(player, npc, behemothDomID.mob.KING_BEHEMOTH)
+        not GetMobByID(behemothDomID.mob.KING_BEHEMOTH):isSpawned()
     then
-        player:confirmTrade()
+        if
+            npcUtil.tradeHasExactly(trade, xi.item.BEASTLY_SHANK) and
+            npcUtil.popFromQM(player, npc, behemothDomID.mob.BEHEMOTH)
+        then
+            player:confirmTrade()
+        elseif
+            npcUtil.tradeHasExactly(trade, xi.item.SAVORY_SHANK) and
+            npcUtil.popFromQM(player, npc, behemothDomID.mob.KING_BEHEMOTH)
+        then
+            player:confirmTrade()
+        end
     end
 end)
 

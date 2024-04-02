@@ -20,38 +20,38 @@ entity.onTrigger = function(player, npc)
         cooksPride == QUEST_AVAILABLE
     then
         if player:getCharVar('CooksPrideVar') == 0 then
-            player:startEvent(189) -- Start quest "Cook's pride" Long CS
+            player:startEvent(189) -- Start quest 'Cook's pride' Long CS
         else
-            player:startEvent(188) -- Start quest "Cook's pride" Short CS
+            player:startEvent(188) -- Start quest 'Cook's pride' Short CS
         end
 
     elseif
         cooksPride == QUEST_ACCEPTED and
         not player:hasKeyItem(xi.ki.SUPER_SOUP_POT)
     then
-        player:startEvent(186) -- During quest "Cook's pride"
+        player:startEvent(186) -- During quest 'Cook's pride'
 
     elseif player:hasKeyItem(xi.ki.SUPER_SOUP_POT) then
-        player:startEvent(187) -- Finish quest "Cook's pride"
+        player:startEvent(187) -- Finish quest 'Cook's pride'
 
     elseif
         cooksPride == QUEST_COMPLETED and
         theKindCardian == QUEST_AVAILABLE
     then
         if player:getCharVar('theLostCardianVar') == 0 then
-            player:startEvent(31) -- During quests "The lost cardian"
+            player:startEvent(31) -- During quests 'The lost cardian'
         else
-            player:startEvent(71) -- During quests "The lost cardian"
+            player:startEvent(71) -- During quests 'The lost cardian'
         end
 
     elseif
         cooksPride == QUEST_COMPLETED and
         theKindCardian ~= QUEST_COMPLETED
     then
-        player:startEvent(71) -- During quests "The kind cardien"
+        player:startEvent(71) -- During quests 'The kind cardien'
 
     elseif theKindCardian == QUEST_COMPLETED then
-        player:startEvent(72) -- New standard dialog after the quest "The kind cardien"
+        player:startEvent(72) -- New standard dialog after the quest 'The kind cardien'
 
     else
         player:startEvent(98) -- Standard dialog

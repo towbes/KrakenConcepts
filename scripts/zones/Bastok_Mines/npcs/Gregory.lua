@@ -4,13 +4,15 @@
 -- Type: ENM
 -- !pos 51.530 -1 -83.940 234
 -----------------------------------
+require('scripts/globals/enm')
+-----------------------------------
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)
 end
 
 entity.onTrigger = function(player, npc)
-    player:startEvent(256)
+    xi.enm.timerNpcOnTrigger(player, npc)
 end
 
 entity.onEventUpdate = function(player, csid, option, npc)

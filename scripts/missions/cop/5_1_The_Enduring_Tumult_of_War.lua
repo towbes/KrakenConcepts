@@ -49,6 +49,11 @@ mission.sections =
             },
         },
 
+        [xi.zone.SEALIONS_DEN] =
+        {
+            ['Sueleen'] = mission:event(22),
+        },
+
         [xi.zone.NORTHERN_SAN_DORIA] =
         {
             ['Chasalvige'] =

@@ -55,4 +55,5 @@ g_mixins.families.chigoe = function(chigoeMob)
     end)
 end
 
+
 return g_mixins.families.chigoe

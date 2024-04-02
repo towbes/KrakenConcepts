@@ -201,7 +201,9 @@ xi.job_utils.thief.useDespoil = function(player, target, ability, action)
     -- TODO: Need to verify if there's a message associated with this
     local jpValue = player:getJobPointLevel(xi.jp.DESPOIL_EFFECT)
 
-    if jpValue > 0 and player:getMainJob() == xi.job.THF then
+    if jpValue > 0
+    -- and player:getMainJob() == xi.job.THF
+    then
         local tpSteal = jpValue * 0.02
         local mobTP = target:getTP()
 
@@ -324,7 +326,9 @@ xi.job_utils.thief.useMug = function(player, target, ability, action)
     -- TODO: Need to verify if there's a message associated with this
     local jpValue = player:getJobPointLevel(xi.jp.MUG_EFFECT)
 
-    if jpValue > 0 and player:getMainJob() == xi.job.THF then
+    if jpValue > 0 
+    -- and player:getMainJob() == xi.job.THF 
+    then
         local hpSteal = ((player:getStat(xi.mod.AGI) + player:getStat(xi.mod.DEX)) * jpValue) * 0.05
         local mobHP = target:getHP()
 

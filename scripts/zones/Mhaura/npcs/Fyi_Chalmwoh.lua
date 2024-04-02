@@ -58,12 +58,12 @@ entity.onEventFinish = function(player, csid, option, npc)
     -- 0x08: Hurray!
     -- 0x09 -> 0x0E: <blank, same as Hurray!, maybe different hand positions depending on weapon?>
     -- 0x0F: <blank, mannequin disappears>
-    -- 0x10: "Superhero landing"
+    -- 0x10: 'Superhero landing'
     -- TODO: Map this space
-    -- 0x20: "Superhero landing"
+    -- 0x20: 'Superhero landing'
 
     -- TODO: Map the 0x20 -> 0xFF
-    -- TODO: Capture "Special Order" pose
+    -- TODO: Capture 'Special Order' pose
 
     --if csid == 318 then
     --    -- A mannequin will not function without exdata[18] correctly set!

@@ -15,4 +15,5 @@ return {
     ['Shivivi']    = { event = 85 },
     ['Verctissa']  = { event = 114 },
     ['Washu']      = { event = 80 },
+    ['Stray_Cloud'] = { event = 231 },
 }

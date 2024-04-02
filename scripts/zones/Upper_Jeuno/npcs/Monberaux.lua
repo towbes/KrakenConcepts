@@ -21,14 +21,14 @@ entity.onTrigger = function(player, npc)
         theLostCardien == QUEST_AVAILABLE and
         player:getCharVar('theLostCardianVar') == 2
     then
-        player:startEvent(33) -- Long CS & Finish Quest "The Lost Cardian"
+        player:startEvent(33) -- Long CS & Finish Quest 'The Lost Cardian'
 
     elseif
         cooksPride == QUEST_COMPLETED and
         theLostCardien == QUEST_AVAILABLE and
         player:getCharVar('theLostCardianVar') == 3
     then
-        player:startEvent(34) -- Shot CS & Finish Quest "The Lost Cardian"
+        player:startEvent(34) -- Shot CS & Finish Quest 'The Lost Cardian'
 
     elseif
         theLostCardien == QUEST_COMPLETED and
@@ -74,7 +74,7 @@ entity.onEventFinish = function(player, csid, option, npc)
         player:messageSpecial(ID.text.KEYITEM_OBTAINED, xi.ki.TWO_OF_SWORDS) -- Two of Swords (Key Item)
         player:addFame(xi.quest.fame_area.JEUNO, 30)
         player:completeQuest(xi.quest.log_id.JEUNO, xi.quest.id.jeuno.THE_LOST_CARDIAN)
-        player:addQuest(xi.quest.log_id.JEUNO, xi.quest.id.jeuno.THE_KIND_CARDIAN) -- Start next quest "THE_KING_CARDIAN"
+        player:addQuest(xi.quest.log_id.JEUNO, xi.quest.id.jeuno.THE_KIND_CARDIAN) -- Start next quest 'THE_KING_CARDIAN'
     elseif csid == 33 and option == 1 then
         player:setCharVar('theLostCardianVar', 3)
     end

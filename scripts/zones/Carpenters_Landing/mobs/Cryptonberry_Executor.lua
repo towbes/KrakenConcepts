@@ -13,6 +13,8 @@ entity.onMobInitialize = function(mob)
 end
 
 entity.onMobSpawn = function(mob)
+    mob:setLocalVar('addSpawnTimer', os.time() + 20)
+
     xi.mix.jobSpecial.config(mob, {
         delay = 180,
         specials =
@@ -30,9 +32,15 @@ end
 
 entity.onMobFight = function(mob, target)
     -- spawn Assassins when enmity is gained against Executor
-    if mob:getLocalVar('spawnedAssassins') == 0 and mob:getCE(target) > 0 then
+    if
+        mob:getLocalVar('spawnedAssassins') == 0 and
+        mob:getCE(target) > 0 and
+        mob:getLocalVar('addSpawnTimer') < os.time()
+    then
         mob:setLocalVar('spawnedAssassins', 1)
-
+        local tp = mob:getTP()
+        mob:useMobAbility(625) -- 2hr dust cloud to spawn assassins
+        mob:addTP(tp)
         for i = 1, 3 do
             SpawnMob(ID.mob.CRYPTONBERRY_EXECUTOR + i)
         end

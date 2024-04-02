@@ -1,6 +1,6 @@
 -----------------------------------
 -- Spell: Sudden Lunge
--- Damage varies with TP. Additional effect: "Stun."
+-- Damage varies with TP. Additional effect: 'Stun.'
 -- Spell cost: 18 MP
 -- Monster Type: Vermin
 -- Spell Type: Physical (Slashing)
@@ -28,7 +28,7 @@ spellObject.onSpellCast = function(caster, target, spell)
     params.attribute = xi.mod.INT
     params.skillType = xi.skill.BLUE_MAGIC
     params.numhits = 1
-    params.multiplier = 1.5
+    params.multiplier = 2 -- 1.5
     params.tp150 = 2.5
     params.tp300 = 3
     params.azuretp = 3.5

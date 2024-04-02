@@ -14,8 +14,8 @@ local oztrojaGlobal =
         local combo = {}
 
         -- https://ffxiclopedia.wikia.com/wiki/Talk:Castle_Oztroja
-        -- "the combination seems to always be two levers up and two levers down."
-        -- "False. I just had a combo that was [Up, Up, Down, Up]. It isn't always 2 up and 2 down."
+        -- 'the combination seems to always be two levers up and two levers down.'
+        -- 'False. I just had a combo that was [Up, Up, Down, Up]. It isn't always 2 up and 2 down.'
         -- Let's interpret this to mean a valid combination has at least two levers up (open)
 
         repeat

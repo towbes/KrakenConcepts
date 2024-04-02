@@ -9,7 +9,11 @@ mobskillObject.onMobSkillCheck = function(target, mob, skill)
 end
 
 mobskillObject.onMobWeaponSkill = function(target, mob, skill)
-    skill:setMsg(xi.mobskills.mobBuffMove(mob, xi.effect.DEFENSE_BOOST, 30, 0, 120))
+    local power = 70
+    if mob:getZone():getTypeMask() == xi.zoneType.DYNAMIS and not mob:isPet() then -- Nightmare Bugard - 2x DEFENSE_BOOST
+        power = 100
+    end
+    skill:setMsg(xi.mobskills.mobBuffMove(mob, xi.effect.DEFENSE_BOOST, power, 0, 120))
 
     return xi.effect.DEFENSE_BOOST
 end

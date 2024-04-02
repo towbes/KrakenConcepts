@@ -178,8 +178,10 @@ quest.sections =
 
                 onTrigger = function(player, npc)
                     if
-                        player:getMainLvl() < xi.settings.main.AF1_QUEST_LEVEL and
-                        player:getMainJob() == xi.job.PUP
+                        ((player:getMainLvl() < xi.settings.main.AF1_QUEST_LEVEL and
+                        player:getMainJob() == xi.job.PUP) or
+                        (player:getSubLvl() < xi.settings.main.AF1_QUEST_LEVEL and
+                        player:getSubJob() == xi.job.PUP))
                     then
                         return quest:progressEvent(267)
                     end

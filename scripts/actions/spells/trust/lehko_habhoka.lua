@@ -36,7 +36,7 @@ spellObject.onMobSpawn = function(mob)
 
     -- MPP 150 migrated to mob_pool_mods
     -- https://forum.square-enix.com/ffxi/threads/49425-Dec-10-2015-%28JST%29-Version-Update?p=567979&viewfull=1#post567979
-    -- The attribute "Enhanced Magic Accuracy" has been added.
+    -- The attribute 'Enhanced Magic Accuracy' has been added.
     local power = mob:getMainLvl() / 10
     mob:addMod(xi.mod.MACC, power)
 end

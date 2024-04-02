@@ -37,13 +37,13 @@ local carpentersLandingGlobal =
 
         if npcUtil.tradeHas(trade, xi.item.POT_OF_HONEY) then
             if npc:getLocalVar('honey') == 0 then
-                player:messageSpecial(msgOffset + 4, xi.item.POT_OF_HONEY) -- "You plaster the contents of a pot of honey on the tree."
+                player:messageSpecial(msgOffset + 4, xi.item.POT_OF_HONEY) -- 'You plaster the contents of a pot of honey on the tree.'
 
                 local hour = VanadielHour()
                 npc:setLocalVar('honey', (hour >= 22 or hour < 4) and 1 or 2) -- 1 = trade was done in time (before 4am). 2 = trade was too late.
                 player:confirmTrade()
             else
-                player:messageSpecial(msgOffset + 1, xi.item.POT_OF_HONEY) -- "The bark is sticky. The tree has already been plastered with the contents of a pot of honey."
+                player:messageSpecial(msgOffset + 1, xi.item.POT_OF_HONEY) -- 'The bark is sticky. The tree has already been plastered with the contents of a pot of honey.'
             end
         end
     end,
@@ -57,10 +57,10 @@ local carpentersLandingGlobal =
         local hour      = VanadielHour()
 
         if npc:getLocalVar('honey') == 0 then
-            player:messageSpecial(msgOffset + 2) -- "You smell something sweet."
+            player:messageSpecial(msgOffset + 2) -- 'You smell something sweet.'
         else
             if hour >= 22 or hour < 4 then
-                player:messageSpecial(msgOffset) -- "There is nothing here yet. Check again in the morning."
+                player:messageSpecial(msgOffset) -- 'There is nothing here yet. Check again in the morning.'
             else
                 local mob = GetMobByID(ID.mob.HERCULES_BEETLE)
                 if
@@ -71,7 +71,7 @@ local carpentersLandingGlobal =
                 then
                     mob:setLocalVar('hasSpawned', 1)
                 else
-                    player:messageSpecial(msgOffset + 3) -- "You did not catch anything."
+                    player:messageSpecial(msgOffset + 3) -- 'You did not catch anything.'
                 end
 
                 npc:setStatus(xi.status.DISAPPEAR)

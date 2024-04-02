@@ -3,6 +3,13 @@
 --    Mob Ability: 2432
 --  Description: Deals damage within a fan-shaped area. Additional effect: Silence.
 --  Type: Magical
+--  Utsusemi/Blink absorb: Ignores?
+--  Range: 20' Cone
+--  Notes: Additional effect: Silence
+---------------------------------------------
+
+
+
 -----------------------------------
 local mobskillObject = {}
 

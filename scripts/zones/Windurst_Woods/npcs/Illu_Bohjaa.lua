@@ -1,7 +1,7 @@
 -----------------------------------
 -- Area: Windurst Woods
 --  NPC: Illu Bohjaa
--- Involved in the repeatable quest "Creepy Crawlies"
+-- Involved in the repeatable quest 'Creepy Crawlies'
 -----------------------------------
 local entity = {}
 

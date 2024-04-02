@@ -1,10 +1,14 @@
 -----------------------------------
 -- Zone: The_Boyahda_Tree (153)
 -----------------------------------
+local ID = zones[xi.zone.THE_BOYAHDA_TREE]
 local zoneObject = {}
 
 zoneObject.onInitialize = function(zone)
     xi.treasure.initZone(zone)
+
+    -- NM Persistence
+    xi.mob.nmTODPersistCache(zone, ID.mob.ANCIENT_GOOBBUE)
 end
 
 zoneObject.onConquestUpdate = function(zone, updatetype, influence, owner, ranking, isConquestAlliance)

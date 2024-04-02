@@ -51,7 +51,7 @@ quest.sections =
             ['Glenne'] =
             {
                 onTrade = function(player, npc, trade)
-                    return quest:event(514) -- "I cannot accept this. Take it back."
+                    return quest:event(514) -- 'I cannot accept this. Take it back.'
                 end,
 
                 onTrigger = function(player, npc)
@@ -78,12 +78,12 @@ quest.sections =
                 onTrade = function(player, npc, trade)
                     if npcUtil.tradeHasExactly(trade, xi.item.DOSE_OF_OINTMENT) then
                         if player:getFreeSlotsCount() == 0 then
-                            return quest:event(118) -- "Ah...but it seems you're already carrying too much."
+                            return quest:event(118) -- 'Ah...but it seems you're already carrying too much.'
                         else
                             return quest:progressEvent(100)
                         end
                     else
-                        return quest:event(106) -- "What's this? I can't accept gifts from strangers."
+                        return quest:event(106) -- 'What's this? I can't accept gifts from strangers.'
                     end
                 end,
             },
@@ -112,7 +112,7 @@ quest.sections =
             {
                 onTrigger = function(player, npc)
                     if player:hasItem(xi.item.OINTMENT_CASE) then
-                        return quest:message(westRonfaureID.text.AAVELEON_HEALED) -- "My wounds are healed, thanks to you!"
+                        return quest:message(westRonfaureID.text.AAVELEON_HEALED) -- 'My wounds are healed, thanks to you!'
                     else
                         return quest:progressEvent(126, xi.item.OINTMENT_CASE) -- reacquire ointment case
                     end
@@ -141,7 +141,7 @@ quest.sections =
                     if npcUtil.tradeHasExactly(trade, xi.item.OINTMENT_CASE) then
                         return quest:progressEvent(513)
                     else
-                        return quest:event(514) -- "I cannot accept this. Take it back."
+                        return quest:event(514) -- 'I cannot accept this. Take it back.'
                     end
                 end,
             },

@@ -6,8 +6,7 @@ local entity = {}
 
 entity.onMobInitialize = function(mob)
     mob:setMobMod(xi.mobMod.ADD_EFFECT, 1)
-    mob:setMod(xi.mod.DOUBLE_ATTACK, 10) -- "Noted Double Attack"
-    mob:addMod(xi.mod.REGAIN, 50) -- "fairly potent Regain effect"
+    mob:addMod(xi.mod.REGAIN, 50) -- 'fairly potent Regain effect'
 end
 
 entity.onAdditionalEffect = function(mob, target, damage)

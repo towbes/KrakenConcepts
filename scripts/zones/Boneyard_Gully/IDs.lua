@@ -15,13 +15,38 @@ zones[xi.zone.BONEYARD_GULLY] =
         LOGIN_CAMPAIGN_UNDERWAY       = 7002, -- The [/January/February/March/April/May/June/July/August/September/October/November/December] <number> Login Campaign is currently underway!
         LOGIN_NUMBER                  = 7003, -- In celebration of your most recent login (login no. <number>), we have provided you with <number> points! You currently have a total of <number> points.
         MEMBERS_LEVELS_ARE_RESTRICTED = 7023, -- Your party is unable to participate because certain members' levels are restricted.
-        PARTY_MEMBERS_HAVE_FALLEN     = 7411, -- All party members have fallen in battle. Now leaving the battlefield.
-        THE_PARTY_WILL_BE_REMOVED     = 7418, -- If all party members' HP are still zero after # minute[/s], the party will be removed from the battlefield.
-        CONQUEST_BASE                 = 7435, -- Tallying conquest results...
-        TUCHULCHA_SANDPIT             = 7754, -- Tuchulcha retreats beneath the soil!
+        PARTY_MEMBERS_HAVE_FALLEN     = 7410, -- All party members have fallen in battle. Now leaving the battlefield.
+        THE_PARTY_WILL_BE_REMOVED     = 7417, -- If all party members' HP are still zero after # minute[/s], the party will be removed from the battlefield.
+        CONQUEST_BASE                 = 7434, -- Tallying conquest results...
+        HOW_IS_THIS_POSSIBLE          = 7718, -- H-how...is this possible...?
+        TIME_WASTED                   = 7719, -- Enough time has been wasted!
+        FOLLOW_LEAD                   = 7720, -- Follow my lead!
+        TIME_TO_DIE                   = 7721, -- Time to die!
+        SINS_JUDGED                   = 7722, -- Your sins will be judged!
+        I_LOST                        = 7729, -- I...I can't have lost...
+        READY_TO_REAP                 = 7730, -- Ready to rrrreap!
+        MASSACRE_BEGIN                = 7731, -- Let the massacrrrre begin!
+        SUGARPLUM                     = 7732, -- Just for you, sugarplum!
+        HONEYCAKES                    = 7733, -- In your eye, honeycakes!
+        READY_TO_RUMBLE               = 7741, -- Ready to rrrumble!
+        MITHRAN_TRACKERS              = 7742, -- Mithran Trackers! Time to hunt!
+        MY_TURN                       = 7743, -- My turn! My Turn!
+        YOURE_MINE                    = 7744, -- You're mine!
+        TUCHULCHA_SANDPIT             = 7753, -- Tuchulcha retreats beneath the soil!
+        GIANT_ANTLION                 = 7754, -- A giant antlion appears! This one may be carrying an armoury crate!
+        ANTLION_ESCAPED               = 7755, -- It's the antlion that escaped earlier!
+        SMALL_ANTLION                 = 7756, -- A small antlion appears! It doesn't seem large enough to carry an armoury crate.
+        TUCHCULA_CRATE                = 7757, -- Tuchulcha drops an armoury crate!
+        BLOOD_RACING                  = 7808, -- I'll get your blood rrracing!
+        SCENT_OF_BLOOD                = 7810, -- Ah, the scent of frrrresh blood!
+        AT_MY_BEST                    = 7812, -- Even at my best...
+        END_THE_HUNT                  = 7813, -- Time to end the hunt! Go for the jugular!
+        ADVENTURER_STEAK              = 7814, -- Dinner time! Tonight we're having 'Adventurer Steak'!
     },
     mob =
     {
+        SHIKAREE_HEADWIND_START = 16809985,
+        SHIKAREE_HEADWIND_END   = 16809997,
     },
     npc =
     {

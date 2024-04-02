@@ -12,6 +12,13 @@ entity.onMobInitialize = function(mob)
     mob:setMod(xi.mod.SILENCE_MEVA, 80)
 end
 
+entity.onCastStarting = function(mob, spell)
+    if (mob:getLocalVar('Xenoglossia') > 0) then
+        mob:setLocalVar('Xenoglossia', 0)
+        spell:setCastTime(1)
+    end
+end
+
 entity.onMobFight = function(mob, target)
     if mob:getLocalVar('Regain') == 0 then
         if mob:getHPP() <= 50 then

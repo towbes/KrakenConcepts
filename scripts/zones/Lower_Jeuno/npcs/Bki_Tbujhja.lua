@@ -35,20 +35,22 @@ entity.onTrigger = function(player, npc)
     elseif
         player:getQuestStatus(xi.quest.log_id.JEUNO, xi.quest.id.jeuno.PAINFUL_MEMORY) == QUEST_COMPLETED and
         theRequiem == QUEST_AVAILABLE and
-        player:getMainJob() == xi.job.BRD and
-        player:getMainLvl() >= xi.settings.main.AF2_QUEST_LEVEL
+        (player:getMainJob() == xi.job.BRD and
+        player:getMainLvl() >= xi.settings.main.AF2_QUEST_LEVEL) or
+        (player:getSubJob() == xi.job.BRD and -- Umeboshi
+        player:getSubLvl() >= xi.settings.main.AF2_QUEST_LEVEL)
     then
         if player:getCharVar('TheRequiemCS') == 0 then
-            player:startEvent(145) -- Long dialog & Start Quest "The Requiem"
+            player:startEvent(145) -- Long dialog & Start Quest 'The Requiem'
         else
-            player:startEvent(148) -- Shot dialog & Start Quest "The Requiem"
+            player:startEvent(148) -- Shot dialog & Start Quest 'The Requiem'
         end
 
     elseif
         theRequiem == QUEST_ACCEPTED and
         player:getCharVar('TheRequiemCS') == 2
     then
-        player:startEvent(146) -- During Quest "The Requiem" (before trading Holy Water)
+        player:startEvent(146) -- During Quest 'The Requiem' (before trading Holy Water)
 
     elseif
         theRequiem == QUEST_ACCEPTED and
@@ -65,10 +67,10 @@ entity.onTrigger = function(player, npc)
         theRequiem == QUEST_ACCEPTED and
         player:hasKeyItem(xi.ki.STAR_RING1)
     then
-        player:startEvent(150) -- Finish Quest "The Requiem"
+        player:startEvent(150) -- Finish Quest 'The Requiem'
 
     elseif theRequiem == QUEST_COMPLETED then
-        player:startEvent(134) -- Standard dialog after "The Requiem"
+        player:startEvent(134) -- Standard dialog after 'The Requiem'
 
     -- DEFAULT DIALOG
     else

@@ -1,6 +1,6 @@
 -----------------------------------
 -- Spell: Tail Slap
--- Delivers an area attack. Additional effect: "Stun." Damage varies with TP
+-- Delivers an area attack. Additional effect: 'Stun.' Damage varies with TP
 -- Spell cost: 77 MP
 -- Monster Type: Beastmen
 -- Spell Type: Physical (Blunt)
@@ -28,10 +28,10 @@ spellObject.onSpellCast = function(caster, target, spell)
     params.attribute = xi.mod.INT
     params.skillType = xi.skill.BLUE_MAGIC
     params.numhits = 1
-    params.multiplier = 1.625
-    params.tp150 = 1.625
-    params.tp300 = 1.625
-    params.azuretp = 1.625
+    params.multiplier = 2.65 -- Default: 1.625
+    params.tp150 = 2.80
+    params.tp300 = 3.15
+    params.azuretp = 3.25
     params.duppercap = 75
     params.str_wsc = 0.2
     params.dex_wsc = 0.0

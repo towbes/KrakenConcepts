@@ -4,25 +4,23 @@
 -----------------------------------
 local entity = {}
 
+require('scripts/globals/missions')
+require('scripts/globals/bcnm')
+
 entity.onTrade = function(player, npc, trade)
-    return 1
+    xi.bcnm.onTrade(player, npc, trade)
 end
 
 entity.onTrigger = function(player, npc)
-    if player:hasCompletedMission(xi.mission.log_id.COP, xi.mission.id.cop.WHEN_ANGELS_FALL) then
-        player:startEvent(112)
-    end
-
-    return 1
+    player:startEvent(32003)
 end
 
-entity.onEventUpdate = function(player, csid, option, npc)
+entity.onEventUpdate = function(player, csid, option, extras)
+    xi.bcnm.onEventUpdate(player, csid, option, extras)
 end
 
-entity.onEventFinish = function(player, csid, option, npc)
-    if csid == 112 and option == 1 then
-        player:setPos(-20, 0, -355, 192, 34)
-    end
+entity.onEventFinish = function(player, csid, option)
+    xi.bcnm.onEventFinish(player, csid, option)
 end
 
 return entity

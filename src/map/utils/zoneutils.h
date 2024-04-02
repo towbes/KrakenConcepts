@@ -54,6 +54,7 @@ namespace zoneutils
     uint64       GetZoneIPP(uint16 zoneid);                      // returns IPP for zone ID
     bool         IsResidentialArea(CCharEntity*);                // returns whether or not the area is a residential zone
     bool         IsAlwaysOutOfNationControl(REGION_TYPE region); // returns true if a region should never trigger "in areas outside own nation's control" latent effect; false otherwise.
+    uint8        GetFameAreaFromZone(uint16 ZoneID);             // returns fame from zone
 
     void AfterZoneIn(CBaseEntity* PEntity); // triggers after a player has finished zoning in
 

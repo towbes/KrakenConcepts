@@ -15,7 +15,15 @@ local effectObject = {}
 
 effectObject.onEffectGain = function(target, effect)
     local power = effect:getPower()
-    if power == 3 then
+    local magicalStoneskinAmount = 2000
+    
+    if (target:isNM()) then
+        magicalStoneskinAmount = 2000
+    end
+
+    if power == 4 then
+        target:setMod(xi.mod.MAGIC_STONESKIN, magicalStoneskinAmount)
+    elseif power == 3 then
         target:addMod(xi.mod.MAGIC_ABSORB, 100)
     elseif power == 2 then
         target:addMod(xi.mod.FIRE_ABSORB, 100)
@@ -38,7 +46,9 @@ end
 
 effectObject.onEffectLose = function(target, effect)
     local power = effect:getPower()
-    if power == 3 then
+    if power == 4 then
+       target:setMod(xi.mod.MAGIC_STONSKIN, 0)
+    elseif power == 3 then
         target:delMod(xi.mod.MAGIC_ABSORB, 100)
     elseif power == 2 then
         target:delMod(xi.mod.FIRE_ABSORB, 100)

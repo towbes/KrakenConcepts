@@ -226,7 +226,7 @@ xi.job_utils.dragoon.useAncientCircle = function(player, target, ability)
     local jpValue  = player:getJobPointLevel(xi.jp.ANCIENT_CIRCLE_EFFECT)
     local power    = 5
 
-    if player:getMainJob() == xi.job.DRG then
+    if player:getMainJob() == xi.job.DRG or player:getSubJob() == xi.job.DRG then
         power = 15 + jpValue
     end
 
@@ -407,8 +407,11 @@ xi.job_utils.dragoon.useSpiritLink = function(player, target, ability)
     if player:getEquipID(xi.slot.HEAD) == xi.item.DRACHEN_ARMET_P1 then
         healPet = healPet + 15
     end
-
-    return wyvern:addHP(healPet) -- add the hp to wyvern
+    if target:hasStatusEffect(xi.effect.CURSE_II) then
+        target:messageBasic(xi.msg.basic.NO_EFFECT)
+    else
+        return wyvern:addHP(healPet) -- add the hp to wyvern
+    end
 end
 
 xi.job_utils.dragoon.useHighJump = function(player, target, ability, action)
@@ -417,9 +420,9 @@ xi.job_utils.dragoon.useHighJump = function(player, target, ability, action)
 
     if target:isMob() then
         local enmityShed = 50
-        if player:getMainJob() ~= xi.job.DRG then
-            enmityShed = 30
-        end
+        -- if player:getMainJob() ~= xi.job.DRG then
+        --     enmityShed = 30
+        -- end
 
         target:lowerEnmity(player, enmityShed + player:getMod(xi.mod.HIGH_JUMP_ENMITY_REDUCTION)) -- reduce total accumulated enmity
     end
@@ -505,8 +508,13 @@ xi.job_utils.dragoon.useAngon = function(player, target, ability)
     end
 
     target:updateClaim(player)
-    player:removeAmmo()
 
+-- if dragoon's earring equipped, chance to not consume angon
+    local preserveAmmoChance = (player:getEquipID(xi.slot.EAR1) == 16000 or player:getEquipID(xi.slot.EAR2) == 16000) and 25 or 0
+    if math.random(100) >= preserveAmmoChance then
+        player:removeAmmo()
+    end
+    
     return xi.effect.DEFENSE_DOWN
 end
 
@@ -595,6 +603,10 @@ end
 
 -- Breath Formula: https://www.bg-wiki.com/ffxi/Wyvern_(Dragoon_Pet)#Healing_Breath
 xi.job_utils.dragoon.useHealingBreath = function(wyvern, target, skill, action)
+    if target:hasStatusEffect(xi.effect.CURSE_II) then
+        skill:setMsg(xi.msg.basic.NO_EFFECT) -- no effect
+        return 1
+    end
     local healingBreathTable =
     {
         --                                   { base, multiplier }

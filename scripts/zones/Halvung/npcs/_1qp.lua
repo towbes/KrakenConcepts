@@ -2,41 +2,33 @@
 -- Area: Halvung
 --  NPC: Decorative Bronze Gate (_1qp)
 -----------------------------------
-local ID = zones[xi.zone.HALVUNG]
------------------------------------
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)
-    if
-        npcUtil.tradeHasExactly(trade,
-        {
-            xi.item.HALVUNG_SHAKUDO_KEY,
-            xi.item.HALVUNG_BRONZE_KEY,
-            xi.item.HALVUNG_BRASS_KEY
-        })
-    then
+    local item = xi.items.HALVUNG_SHAKUDO_KEY
+
+    if npcUtil.tradeHasExactly(trade, { item, item + 1, item + 2 }) then
         player:confirmTrade()
-        npc:openDoor()
-        player:messageSpecial(ID.text.KEY_BREAKS,
-            xi.item.HALVUNG_SHAKUDO_KEY,
-            xi.item.HALVUNG_BRONZE_KEY,
-            xi.item.HALVUNG_BRASS_KEY
-        )
+        npc:openDoor(15)
+        player:messageSpecial(zones[npc:getZoneID()].text.KEY_BREAKS, item, item + 1, item + 2)
     end
 end
 
 entity.onTrigger = function(player, npc)
-    if player:getZPos() <= 79.75 and npc:getAnimation() == xi.anim.CLOSE_DOOR then -- from inside the door
-        npc:openDoor()
-    else
-        player:messageSpecial(ID.text.WIDE_TRENCH)
+    -- All other Beastman HNM have events that teleport them out of the room
+    -- **Event call is unknown***
+    if
+        player:getZPos() <= 79.75 and
+        npc:getAnimation() == xi.anim.CLOSE_DOOR
+    then
+        -- player:startEvent(??)
     end
 end
 
-entity.onEventUpdate = function(player, csid, option, npc)
+entity.onEventUpdate = function(player, csid, option)
 end
 
-entity.onEventFinish = function(player, csid, option, npc)
+entity.onEventFinish = function(player, csid, option)
 end
 
 return entity

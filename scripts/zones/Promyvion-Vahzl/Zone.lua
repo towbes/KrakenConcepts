@@ -1,10 +1,15 @@
 -----------------------------------
 -- Zone: Promyvion-Vahzl (22)
 -----------------------------------
+local ID = zones[xi.zone.PROMYVION_VAHZL]
+require('scripts/globals/promyvion')
+require('scripts/globals/exp_controller')
+-----------------------------------
 local zoneObject = {}
 
 zoneObject.onInitialize = function(zone)
     xi.promyvion.initZone(zone)
+    xi.exp_controller.onInitialize(zone)
 end
 
 zoneObject.onZoneIn = function(player, prevZone)
@@ -38,6 +43,9 @@ zoneObject.onEventFinish = function(player, csid, option, npc)
     if csid == 45 and option == 1 then
         player:setPos(-379.947, 48.045, 334.059, 192, 9) -- To Pso'Xja (R)
     end
+end
+
+zoneObject.onGameDay = function(zone)
 end
 
 return zoneObject

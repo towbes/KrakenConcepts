@@ -17,7 +17,7 @@ quest.reward =
     title    = xi.title.DOCTOR_SHANTOTTOS_FLAVOR_OF_THE_MONTH,
 }
 
--- Block used by mobs which can remove "Shantotto's New Spell" key item.  This needs
+-- Block used by mobs which can remove 'Shantotto's New Spell' key item.  This needs
 -- verification regarding it being all mobs or if limited to current implementation,
 -- and also if there is a chance or limit for kills before removal.
 local feiyinMob =

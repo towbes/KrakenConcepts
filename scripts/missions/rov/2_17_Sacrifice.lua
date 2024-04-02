@@ -29,8 +29,8 @@ mission.sections =
                 onTrigger = function(player, npc)
                     -- NOTE: These initial checks are intentional fallthroughs to other potential calls to allow for the message to
                     -- be displayed and still trigger other events or default action to match retail behavior.  This also implements
-                    -- a non-retail behavior by displaying the proper message for "Champion of the Dawn" blocking status, in which
-                    -- retail displays "A Forbidden Reunion" for both blocking quests.
+                    -- a non-retail behavior by displaying the proper message for 'Champion of the Dawn' blocking status, in which
+                    -- retail displays 'A Forbidden Reunion' for both blocking quests.
 
                     if mission:getVar(player, 'Status') <= 1 then
                         if not xi.rhapsodies.charactersAvailable(player) then

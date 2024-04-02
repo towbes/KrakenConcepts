@@ -7,24 +7,18 @@
 local itemObject = {}
 
 itemObject.onItemCheck = function(target)
-    local effect = target:getStatusEffect(xi.effect.ENCHANTMENT)
-    if effect ~= nil and effect:getSubType() == 15864 then
-        target:delStatusEffect(xi.effect.ENCHANTMENT)
+    local effect = target:getStatusEffect(xi.effect.VIT_BOOST)
+    if effect ~= nil and effect:getItemSourceID() == xi.item.TOUGH_BELT then
+        target:delStatusEffect(xi.effect.VIT_BOOST)
     end
 
     return 0
 end
 
 itemObject.onItemUse = function(target)
-    target:addStatusEffect(xi.effect.ENCHANTMENT, 0, 0, 600, 15864)
-end
-
-itemObject.onEffectGain = function(target, effect)
-    target:addMod(xi.mod.VIT, 3)
-end
-
-itemObject.onEffectLose = function(target, effect)
-    target:delMod(xi.mod.VIT, 3)
+    if target:hasEquipped(xi.item.TOUGH_BELT) then
+        target:addStatusEffect(xi.effect.VIT_BOOST, 3, 0, 60, 0, 0, 0, xi.item.TOUGH_BELT)
+    end
 end
 
 return itemObject

@@ -18,7 +18,7 @@ abilityObject.onAbilityCheck = function(player, target, ability)
     elseif player:getTP() < waltzCost then
         return xi.msg.basic.NOT_ENOUGH_TP, 0
     else
-        --[[ Apply "Waltz Ability Delay" reduction
+        --[[ Apply 'Waltz Ability Delay' reduction
             1 modifier = 1 second]]
         local recastMod = player:getMod(xi.mod.WALTZ_DELAY)
         if recastMod ~= 0 then
@@ -26,7 +26,7 @@ abilityObject.onAbilityCheck = function(player, target, ability)
             ability:setRecast(utils.clamp(newRecast, 0, newRecast))
         end
 
-        -- Apply "Fan Dance" Waltz recast reduction
+        -- Apply 'Fan Dance' Waltz recast reduction
         if player:hasStatusEffect(xi.effect.FAN_DANCE) then
             local fanDanceMerits = target:getMerit(xi.merit.FAN_DANCE)
             -- Every tier beyond the 1st is -5% recast time

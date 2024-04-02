@@ -10,7 +10,7 @@ mobskillObject.onMobSkillCheck = function(target, mob, skill)
         mob:hasStatusEffect(xi.effect.SUPER_BUFF) or
         mob:hasStatusEffect(xi.effect.INVINCIBLE) or
         mob:hasStatusEffect(xi.effect.BLOOD_WEAPON) or
-        not target:isInfront(mob, 128) or
+        target:isBehind(mob, 96) or
         mob:getAnimationSub() == 1
     then
         return 1
@@ -21,10 +21,11 @@ end
 
 mobskillObject.onMobWeaponSkill = function(target, mob, skill)
     local power    = 30
-    local duration = 30 --  Reference: http://wiki.ffxiclopedia.org/wiki/Absolute_Terror
-
+    local duration
     if skill:isAoE() then
-        duration = 10
+        duration = math.random(10,18)
+    else
+        duration = 10 + math.random(0,40)
     end
 
     skill:setMsg(xi.mobskills.mobStatusEffectMove(mob, target, xi.effect.TERROR, power, 0, duration))

@@ -6,8 +6,8 @@ local ID = zones[xi.zone.FEIYIN]
 local zoneObject = {}
 
 zoneObject.onInitialize = function(zone)
-    UpdateNMSpawnPoint(ID.mob.CAPRICIOUS_CASSIE)
-    GetMobByID(ID.mob.CAPRICIOUS_CASSIE):setRespawnTime(math.random(900, 10800))
+    -- NM Persistence
+    xi.mob.nmTODPersistCache(zone, ID.mob.CAPRICIOUS_CASSIE)
 
     xi.treasure.initZone(zone)
 end
@@ -21,13 +21,6 @@ zoneObject.onZoneIn = function(player, prevZone)
         player:getZPos() == 0
     then
         player:setPos(-180, -24, -187, 198)
-    end
-
-    if
-        player:getCharVar('peaceForTheSpiritCS') == 1 and
-        not player:hasItem(xi.item.ANTIQUE_COIN) -- Antique Coin
-    then
-        SpawnMob(ID.mob.MISER_MURPHY) -- RDM AF
     end
 
     if player:getCurrentMission(xi.mission.log_id.ACP) == xi.mission.id.acp.THOSE_WHO_LURK_IN_SHADOWS_I then

@@ -7,6 +7,10 @@ local ID = zones[xi.zone.RUAUN_GARDENS]
 -----------------------------------
 local entity = {}
 
+entity.onMobInitialize = function(mob)
+    mob:setMobMod(xi.mobMod.LEDGE_AGGRO, 1)
+end
+
 entity.onMobDeath = function(mob, player, optParams)
     xi.regime.checkRegime(player, mob, 143, 2, xi.regime.type.FIELDS)
     xi.regime.checkRegime(player, mob, 144, 1, xi.regime.type.FIELDS)

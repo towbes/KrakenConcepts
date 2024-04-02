@@ -15,15 +15,26 @@ mobskillObject.onMobSkillCheck = function(target, mob, skill)
 end
 
 mobskillObject.onMobWeaponSkill = function(target, mob, skill)
-    local power   = 5
-    local realDmg = power * target:getCharVar('EVERYONES_GRUDGE_KILLS') -- Damage is 5 times the amount you have killed
+    local grudgeKills = 0
+    local player = nil
 
-    if target:getID() > 100000 then
-        realDmg = power * math.random(30, 100)
-    elseif mob:isNM() then
-        realDmg = realDmg * 10 -- sets the multiplier to 50 for NM's
+    if target:isPC() then
+        grudgeKills = target:getCharVar('EVERYONES_GRUDGE_KILLS')
+        player = target
+    elseif target:isPet() then
+        grudgeKills = target:getMaster():getCharVar('EVERYONES_GRUDGE_KILLS')
+        player = target:getMaster()
     end
 
+    local realDmg = 5 * grudgeKills -- Damage is 5 times the amount you have killed
+
+    if
+        player and
+        player:getEquipID(xi.slot.NECK) == xi.item.UGGALEPIH_NECKLACE
+    then
+        realDmg = math.floor(realDmg * (1 - (player:getTP() / 3000)))
+        player:setTP(0)
+    end
     target:takeDamage(realDmg, mob, xi.attackType.MAGICAL, xi.damageType.ELEMENTAL)
 
     return realDmg

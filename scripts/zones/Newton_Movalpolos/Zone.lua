@@ -1,11 +1,15 @@
 -----------------------------------
 -- Zone: Newton_Movalpolos (12)
 -----------------------------------
+local ID = zones[xi.zone.NEWTON_MOVALPOLOS]
+require('scripts/globals/exp_controller')
+-----------------------------------
 local zoneObject = {}
 
 zoneObject.onInitialize = function(zone)
     xi.treasure.initZone(zone)
     xi.helm.initZone(zone, xi.helmType.MINING)
+    xi.exp_controller.onInitialize(zone)
 end
 
 zoneObject.onZoneIn = function(player, prevZone)

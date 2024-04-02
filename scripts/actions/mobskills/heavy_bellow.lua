@@ -1,11 +1,14 @@
 -----------------------------------
 -- Heavy Bellow
--- Description: Additional effect: "Stun."
+-- Description: Additional effect: 'Stun.'
 -- Type: Physical (Blunt)
 -----------------------------------
 local mobskillObject = {}
 
 mobskillObject.onMobSkillCheck = function(target, mob, skill)
+    if mob:getZone():getTypeMask() == xi.zoneType.DYNAMIS then
+        skill:setAoE(4)
+    end
     return 0
 end
 

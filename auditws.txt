@@ -1,0 +1,35 @@
+Groundburst 1926
+
+593 berserk
+594 pl_vulcanian_impact
+595 heat_wave
+596 pl_hellstorm
+
+1792 nullsong
+
+1332 extremely_bad_breath
+
+1960 frog_cheer
+1962 providence
+1963 frog chorus
+
+2112 nocturnal_servitude
+
+1895 overthrow
+1899 quake_stomp
+
+2107 decollation
+2108 nosferatu's kiss
+2109 heliovoid
+2112 Nocturnal Servitude
+
+1929 pole_swing
+1761 arrow_deluge
+
+INSERT INTO `mob_skill_lists` VALUES('Nuhn', 5305, 1693); -- gnash
+INSERT INTO `mob_skill_lists` VALUES('Nuhn', 5305, 1977); -- deathgnash
+INSERT INTO `mob_skill_lists` VALUES('Nuhn', 5305, 1695); -- hypnic lamp
+INSERT INTO `mob_skill_lists` VALUES('Nuhntwo', 5306, 1697); -- SeaSpray
+INSERT INTO `mob_skill_lists` VALUES('Nuhntwo', 5306, 1694); -- Vile Belch
+INSERT INTO `mob_skill_lists` VALUES('Nuhntwo', 5306, 1696); -- Seismic Tail
+

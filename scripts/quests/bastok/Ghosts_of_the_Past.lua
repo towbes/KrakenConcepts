@@ -22,8 +22,10 @@ quest.sections =
     {
         check = function(player, status, vars)
             return status == QUEST_AVAILABLE and
-                player:getMainJob() == xi.job.MNK and
-                player:getMainLvl() >= 40
+                ((player:getMainJob() == xi.job.MNK and
+                player:getMainLvl() >= 40) or
+                (player:getSubJob() == xi.job.MNK and
+                player:getSubLvl() >= 40))
         end,
 
         [xi.zone.PORT_BASTOK] =

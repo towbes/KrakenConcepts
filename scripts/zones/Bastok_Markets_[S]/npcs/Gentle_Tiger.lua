@@ -24,8 +24,10 @@ end
 entity.onEventUpdate = function(player, csid, option, npc)
 end
 
-entity.onEventFinish = function(player, csid, option)
-    if csid == 160 then
+entity.onEventFinish = function(player, csid, option, npc)
+    if csid == 46 then
+        player:setCharVar('OnSabbatical', 2)
+    elseif csid == 160 then
         player:setCharVar('FiresOfDiscProg', 6)
     end
 end

@@ -764,8 +764,8 @@ local overseerInvNation =
         [32849] = { rank =  6, cp = 24000, lvl = 55, item = 13106 },                -- royal_guards_collar
         [32850] = { rank =  6, cp = 24000, lvl = 55, item = 12430 },                -- royal_knights_bascinet
         [32851] = { rank =  6, cp = 24000, lvl = 55, item = 13722 },                -- royal_knights_aketon
-        [32852] = { rank =  6, cp = 24000, lvl = 55, item = 12558, place = 1 },     -- royal_knights_chainmail
-        [32853] = { rank =  6, cp = 24000, lvl = 55, item = 12814, place = 1 },     -- royal_knights_breeches
+        [32852] = { rank =  6, cp = 24000, lvl = 55, item = 12558, place = 2 },     -- royal_knights_chainmail
+        [32853] = { rank =  6, cp = 24000, lvl = 55, item = 12814, place = 2 },     -- royal_knights_breeches
         [32854] = { rank =  6, cp = 24000, lvl = 55, item = 12321, place = 2 },     -- royal_guards_shield
         [32855] = { rank =  6, cp = 24000, lvl = 55, item = 17067, place = 1 },     -- royal_guards_rod
         [32856] = { rank =  6, cp = 24000, lvl = 55, item = 16599, place = 1 },     -- royal_guards_sword
@@ -1137,11 +1137,13 @@ xi.conquest.overseerOnTrade = function(player, npc, trade, guardNation, guardTyp
                     player:setCharVar('CONQUEST_RING_RECHARGE', 1, NextConquestTally())
                     player:showText(npc, mOffset + 58, item, ring.cp, ring.charges) -- 'Your ring is now fully recharged.'
                 else
+                    -- player:tradeComplete(false) -- Umeboshi
                     player:showText(npc, mOffset + 55, item, ring.cp) -- 'You do not have the required conquest points to recharge.'
                 end
             else
                 -- TODO: Verify that message is retail correct.
                 -- This gives feedback on a failure at least, and is grouped with the recharge messages.  Confident enough for a commit.
+                -- player:tradeComplete(false) -- Umeboshi
                 player:showText(npc, mOffset + 56, item) -- 'Please be aware that you can only purchase or recharge <item> once during the period between each conquest results tally.
             end
         end

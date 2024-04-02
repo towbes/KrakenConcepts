@@ -9,17 +9,17 @@ local ID = zones[xi.zone.BIBIKI_BAY]
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)
-    local shenId = player:getZone():queryEntitiesByName('Shen')[1]:getID()
     if
         npcUtil.tradeHasExactly(trade, xi.item.SHRIMP_LANTERN) and
-        npcUtil.popFromQM(player, npc, shenId)
+        npcUtil.popFromQM(player, npc, ID.mob.SHEN)
     then
         player:confirmTrade()
+        player:messageSpecial(ID.text.SHEN_SPAWN)
     end
 end
 
 entity.onTrigger = function(player, npc)
-    player:messageSpecial(ID.text.NOTHING_OUT_OF_ORDINARY)
+    player:messageSpecial(ID.text.SHEN_QM)
 end
 
 entity.onEventUpdate = function(player, csid, option, npc)

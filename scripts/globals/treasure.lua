@@ -31,6 +31,21 @@ local thiefKeyInfo =
     [keyType.LIVING_KEY  ] = { xi.item.LIVING_KEY,          0.15 },
 }
 
+local function getIndexAtPosition(targetChest, typeId, zoneId)
+    local treasurePoints = xi.treasure.treasureInfo[typeId].zone[zoneId].points
+    local targetChestPos = targetChest:getPos()
+    for chestId, chestCoords in pairs(treasurePoints) do
+        if
+            math.abs(tonumber(chestCoords[1]) - tonumber(targetChestPos['x']) ) < 1 and
+            math.abs(tonumber(chestCoords[3]) - tonumber(targetChestPos['z']) ) < 1
+        then
+            return chestId
+        end
+    end
+
+    return 0
+end
+
 xi.treasure.treasureInfo =
 {
     [xi.treasure.type.CHEST] =
@@ -86,16 +101,33 @@ xi.treasure.treasureInfo =
             {
                 treasureLvl = 53,
                 key = 1061,
+                misc =
+                {
+                    {
+                        test = function(player)
+                            return player:getQuestStatus(xi.quest.log_id.OTHER_AREAS, xi.quest.id.otherAreas.PARADISE_SALVATION_AND_MAPS) == QUEST_ACCEPTED and
+                                not player:hasKeyItem(xi.ki.PIECE_OF_RIPPED_FLOORPLANS)
+                        end,
+
+                        code = function(player, npc)
+                            player:setCharVar(string.format('Quest[%s][%s]Chest', xi.quest.log_id.OTHER_AREAS, xi.quest.id.otherAreas.PARADISE_SALVATION_AND_MAPS), getIndexAtPosition(npc, xi.treasure.type.CHEST, xi.zone.SACRARIUM))
+                            npcUtil.giveKeyItem(player, xi.ki.PIECE_OF_RIPPED_FLOORPLANS)
+                        end,
+                    },
+                },
                 points =
                 {
-                    { 179.709,   -7.693,  -97.007, 192 },
-                    { 111.451,   -2.000, -100.159,  65 },
-                    {   8.974,   -2.179, -133.075, 190 },
-                    { 260.391,    0.000,   21.487,  60 },
-                    { 177.600,    8.310,  100.000, 130 },
-                    {  89.034,   -2.000,   99.248, 190 },
-                    {  88.223,   -2.000,  -36.017,   0 },
-                    {  31.021,   -2.000,   99.013, 190 },
+                    -- These points are sequenced to align to the indeces required for the quest
+                    -- Paradise, Salvation, and Maps
+                    -- If you change the order or locations of these, the quest may not function as intended
+                    {  31.021, -2.000,   99.013, 190 }, -- (F-5)
+                    {  89.034, -2.000,   99.248, 190 }, -- (H-5)
+                    {  88.223, -2.000,  -36.017,   0 }, -- (H-9)
+                    { 177.600,  8.310,  100.000, 130 }, -- (J-6)
+                    { 179.709, -7.693,  -97.007, 192 }, -- (J-10)
+                    { 260.391,  0.000,   21.487,  60 }, -- (L-8)
+                    { 111.451, -2.000, -100.159,  65 }, -- (H-11)
+                    {   8.974, -2.179, -133.075, 190 }, -- (F-11)
                 },
                 gil = { 0.929, 5100, 9900 },
                 gem = { 0.071, 790, 799, 815, 788, 796 },
@@ -360,6 +392,7 @@ xi.treasure.treasureInfo =
 
                         code = function(player)
                             npcUtil.giveKeyItem(player, xi.ki.UN_MOMENT)
+                            player:incrementCharVar('Quest[1][62]Prog', 1)
                         end,
                     },
                 },
@@ -400,6 +433,7 @@ xi.treasure.treasureInfo =
 
                         code = function(player)
                             npcUtil.giveKeyItem(player, xi.ki.UN_MOMENT)
+                            player:incrementCharVar('Quest[1][62]Prog', 1)
                         end,
                     },
                 },
@@ -427,6 +461,7 @@ xi.treasure.treasureInfo =
 
                         code = function(player)
                             npcUtil.giveKeyItem(player, xi.ki.LEPHEMERE)
+                            player:incrementCharVar('Quest[1][62]Prog', 1)
                         end,
                     },
                 },
@@ -800,6 +835,7 @@ xi.treasure.treasureInfo =
 
                         code = function(player)
                             npcUtil.giveKeyItem(player, xi.ki.LANCIENNE)
+                            player:incrementCharVar('Quest[1][62]Prog', 1)
                         end,
                     },
                 },
@@ -965,7 +1001,7 @@ xi.treasure.treasureInfo =
                 },
                 gil = { 0.652, 7320, 18000 },
                 gem = { 0.044, 791, 801, 810, 784, 802, 797, 803, 805 },
-                item = { 0.304, 14670 },
+                item = { 0.304, 14670, xi.item.ASTRAL_RING },
             },
 
             [xi.zone.THE_BOYAHDA_TREE] = -- 153
@@ -1476,7 +1512,7 @@ end
 local function getKeyTraded(player, trade, chestInfo)
     if npcUtil.tradeHasExactly(trade, chestInfo.key) then
         return keyType.ZONE_KEY
-    elseif player:getMainJob() == xi.job.THF then
+    elseif (player:getMainJob() == xi.job.THF or player:getSubJob() == xi.job.THF) then -- Umeboshi 'Thf Sub'
         for keyValue, keyData in pairs(thiefKeyInfo) do
             if npcUtil.tradeHasExactly(trade, keyData[1]) then
                 return keyValue
@@ -1489,7 +1525,7 @@ end
 
 local function getLockpickSuccessRate(player, keyTraded, chestInfo)
     if
-        player:getMainJob() == xi.job.THF and
+        (player:getMainJob() == xi.job.THF or player:getSubJob() == xi.job.THF) and --Umeboshi 
         player:getMainLvl() >= chestInfo.treasureLvl - 10
     then
         return (player:getMainLvl() / chestInfo.treasureLvl) - 0.50 + thiefKeyInfo[keyTraded][2]
@@ -1500,12 +1536,12 @@ end
 
 local function handleLockpickFailure(player, npc, messageOffset, failureType)
     if failureType == 1 then
-        player:messageSpecial(messageOffset + 1, player:getID()) -- "<name> fails to open the chest."
+        player:messageSpecial(messageOffset + 1, player:getID()) -- '<name> fails to open the chest.'
     elseif failureType == 2 then
-        player:messageSpecial(messageOffset + 2) -- "The chest was trapped!"
+        player:messageSpecial(messageOffset + 2) -- 'The chest was trapped!'
         player:addStatusEffect(xi.effect.WEAKNESS, 1, 0, math.random(300, 10800)) -- 5 minutes to 3 hours
     else
-        player:messageSpecial(messageOffset + 4) -- "The chest was a mimic!"
+        player:messageSpecial(messageOffset + 4) -- 'The chest was a mimic!'
         spawnMimic(player, npc)
     end
 end
@@ -1516,6 +1552,7 @@ xi.treasure.onTrade = function(player, npc, trade, chestType)
     local msgBase = ID.text.CHEST_UNLOCKED
     local info = xi.treasure.treasureInfo[chestType].zone[zoneId]
     local mJob = player:getMainJob()
+    local sJob = player:getSubJob()
     local activeHands = player:getCharVar('BorghertzAlreadyActiveWithJob')
     local illusionCooldown  = npc:getLocalVar('illusionCooldown')
 
@@ -1582,6 +1619,19 @@ xi.treasure.onTrade = function(player, npc, trade, chestType)
                 player:confirmTrade()
                 moveChest(npc, zoneId, chestType)
             end
+        -- artifact armor subjob Umeboshi 'AF quests for subjobs'
+        elseif
+            info.af and
+            info.af[sJob] and
+            player:getQuestStatus(xi.quest.log_id.JEUNO, info.af[sJob].quest) >= QUEST_ACCEPTED and
+            not player:hasItem(info.af[sJob].reward)
+        then
+            player:messageSpecial(msgBase)
+            player:delStatusEffectsByFlag(xi.effectFlag.DETECTABLE)
+            if npcUtil.giveItem(player, info.af[sJob].reward) then
+            player:confirmTrade()
+            moveChest(npc, zoneId, chestType)
+            end
 
             return
         end
@@ -1592,7 +1642,7 @@ xi.treasure.onTrade = function(player, npc, trade, chestType)
         for _, v in pairs(info.misc) do
             if v.test(player) then
                 player:messageSpecial(msgBase)
-                v.code(player)
+                v.code(player, npc)
                 player:confirmTrade()
                 moveChest(npc, zoneId, chestType)
                 return

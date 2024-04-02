@@ -5,10 +5,10 @@
 -- Type: Magical
 -- Can be dispelled: N/A
 -- Utsusemi/Blink absorb: Wipes shadows
--- Range: Unknown radial "Extremely large damage radius." says wiki.
+-- Range: Unknown radial 'Extremely large damage radius.' says wiki.
 -- Notes: Accompanied by text
--- "Open thine eyes...
--- My radiance...shall guide thee..."
+-- 'Open thine eyes...
+-- My radiance...shall guide thee...'
 -----------------------------------
 local mobskillObject = {}
 

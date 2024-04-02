@@ -1,6 +1,7 @@
 -----------------------------------
 -- Zone: Attohwa_Chasm (7)
 -----------------------------------
+require('scripts/globals/exp_controller')
 local ID = zones[xi.zone.ATTOHWA_CHASM]
 -----------------------------------
 local zoneObject = {}
@@ -38,10 +39,22 @@ zoneObject.onInitialize = function(zone)
     zone:registerTriggerArea(29, -238, 5, -118, 0, 0, 0)
     zone:registerTriggerArea(30, -385.349, 5, -173.973, 0, 0, 0)
 
-    UpdateNMSpawnPoint(ID.mob.TIAMAT)
-    GetMobByID(ID.mob.TIAMAT):setRespawnTime(math.random(86400, 259200))
+    -- Parradamo Tor miasma walls
+    GetNPCByID(ID.npc.PARRA_MIASMA[1]):addPeriodicTrigger(0, 3, 0)
+    GetNPCByID(ID.npc.PARRA_MIASMA[2]):addPeriodicTrigger(0, 3, 0)
+    GetNPCByID(ID.npc.PARRA_MIASMA[3]):addPeriodicTrigger(0, 3, 0)
+    GetNPCByID(ID.npc.PARRA_MIASMA[4]):addPeriodicTrigger(0, 3, 0)
+
+
+
+    -- NM Persistence
+    xi.mob.nmTODPersistCache(zone, ID.mob.TIAMAT)
+    xi.mob.nmTODPersistCache(zone, ID.mob.SEKHMET)
 
     xi.helm.initZone(zone, xi.helmType.EXCAVATION)
+
+    xi.exp_controller.onInitialize(zone)
+
 end
 
 zoneObject.onZoneIn = function(player, prevZone)
@@ -63,7 +76,7 @@ zoneObject.onConquestUpdate = function(zone, updatetype, influence, owner, ranki
 end
 
 zoneObject.onTriggerAreaEnter = function(player, triggerArea)
-    -- TODO: Gasponia's shouldn't "always" poison you. However, in retail trigger areas constantly reapply themselves without having to re-enter the trigger area.
+    -- TODO: Gasponia's shouldn't 'always' poison you. However, in retail trigger areas constantly reapply themselves without having to re-enter the trigger area.
     -- That doesn't happen currently so I'm leaving it as-is for now.
     local triggerAreaID = triggerArea:GetTriggerAreaID()
 
@@ -89,6 +102,20 @@ zoneObject.onGameHour = function(zone)
         starting at ID.npc.MIASMA_OFFSET. some are supposed to toggle open, but need retail test
         to determine which.  for now, they're just statically set per npc_list.animation
     --]]
+        -- Don't allow Citipati or Xolotl to spawn outside of night
+        local xolre = GetServerVariable(string.format('\\[SPAWN\\]'..ID.mob.XOLOTL))
+
+    if VanadielHour() >= 4 and VanadielHour() < 20 then
+        DisallowRespawn(ID.mob.CITIPATI, true)
+        DisallowRespawn(ID.mob.XOLOTL, true)
+    else
+        DisallowRespawn(ID.mob.CITIPATI, false)
+        DisallowRespawn(ID.mob.XOLOTL, false)
+        if os.time() > xolre and VanadielHour() == 20 then
+            SpawnMob(ID.mob.XOLOTL)
+            GetMobByID(ID.mob.XOLOTL):setLocalVar('xolotlDead', 0)
+        end
+    end
 end
 
 zoneObject.onEventUpdate = function(player, csid, option, npc)

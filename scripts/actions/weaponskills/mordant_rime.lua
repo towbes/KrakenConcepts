@@ -22,7 +22,8 @@ weaponskillObject.onUseWeaponSkill = function(player, target, wsID, tp, primary,
     params.chr_wsc = 0.5
 
     if xi.settings.main.USE_ADOULIN_WEAPON_SKILL_CHANGES then
-        params.ftpMod = { 5.0, 5.0, 5.0 }
+        params.ftpMod = { 3.75, 3.75, 3.75 }
+        -- params.ftpMod = { 5.0, 5.0, 5.0 }
         params.chr_wsc = 0.7
     end
 
@@ -31,10 +32,11 @@ weaponskillObject.onUseWeaponSkill = function(player, target, wsID, tp, primary,
 
     local damage, criticalHit, tpHits, extraHits = xi.weaponskills.doPhysicalWeaponskill(player, target, wsID, params, tp, action, primary, taChar)
 
-    if damage > 0 and not target:hasStatusEffect(xi.effect.WEIGHT) then
+    if damage > 0 and not target:hasStatusEffect(xi.effect.WEIGHT) and not target:hasImmunity(xi.immunity.GRAVITY) then
         if not target:hasStatusEffect(xi.effect.WEIGHT) then
             if tp - 1000 > math.random() * 150 then
                 target:addStatusEffect(xi.effect.WEIGHT, 50, 0, 60)
+                player:messagePublic(xi.msg.basic.SKILL_ENFEEB, target, wsID, xi.effect.WEIGHT)
             end
         end
     end

@@ -1,6 +1,7 @@
 -----------------------------------
 -- Zone: South_Gustaberg (107)
 -----------------------------------
+local ID = zones[xi.zone.SOUTH_GUSTABERG]
 require('scripts/quests/i_can_hear_a_rainbow')
 -----------------------------------
 local zoneObject = {}
@@ -10,6 +11,8 @@ zoneObject.onChocoboDig = function(player, precheck)
 end
 
 zoneObject.onInitialize = function(zone)
+    -- NM Persistence
+    xi.mob.nmTODPersistCache(zone, ID.mob.TOCOCO)
 end
 
 zoneObject.onZoneIn = function(player, prevZone)

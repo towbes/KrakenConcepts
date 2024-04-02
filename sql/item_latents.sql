@@ -96,12 +96,22 @@ INSERT INTO `item_latents` VALUES (11367,288,5,49,4278); -- double attack 5% Sho
 INSERT INTO `item_latents` VALUES (11367,302,1,49,5928); -- triple attack 1% Hinesama Rice Ball
 INSERT INTO `item_latents` VALUES (11367,302,2,49,5929); -- triple attack 2% Ojo Rice Ball
 
+-- Kyoshu Kyahan
+INSERT INTO `item_latents` VALUES (11405,23,20,13,406);  -- Kickattack Stance ATT +20
+INSERT INTO `item_latents` VALUES (11405,25,20,13,406);  -- Kickattack Stance ACC +20
+
+-- Morana's Pigaches
+INSERT INTO `item_latents` VALUES (11408,974,10,9,14);   -- Shiva MACC + 10
+
 -- Louhi's Mask
 INSERT INTO `item_latents` VALUES (11474,161,-300,26,0);   -- Daytime: Physical damage taken -3%
 INSERT INTO `item_latents` VALUES (11474,163,-300,26,1);   -- Nighttime: Magic damage taken -3%
 
 -- Diana Corona
 INSERT INTO `item_latents` VALUES (11486,28,4,37,4);     -- Full moon magic attack bonus +4
+
+-- Fenrir's Crown
+INSERT INTO `item_latents` VALUES (11496,2022,5,9,9); -- Fenrir acc + 5
 
 -- Trainee's Spectacles
 INSERT INTO `item_latents` VALUES (11499,127,1,24,48); -- SYNTH_TRAINEE: SKILL_FISHING - FISH: 1
@@ -204,29 +214,29 @@ INSERT INTO `item_latents` VALUES (12390,12,2,8,2);      -- INT+2 when MNK Subjo
 -- Healer's Shield
 INSERT INTO `item_latents` VALUES (12391,9,2,8,3);       -- DEX+2 when WHM subjob
 
-INSERT INTO `item_latents` VALUES (12392,8,2,8,4);
-INSERT INTO `item_latents` VALUES (12393,2,7,8,5);
-INSERT INTO `item_latents` VALUES (12393,5,7,8,5);
-INSERT INTO `item_latents` VALUES (12394,109,5,8,6);
-INSERT INTO `item_latents` VALUES (12395,11,2,8,7);
-INSERT INTO `item_latents` VALUES (12396,5,5,8,8);
-INSERT INTO `item_latents` VALUES (12396,14,2,8,8);
-INSERT INTO `item_latents` VALUES (12397,13,2,8,9);
-INSERT INTO `item_latents` VALUES (12398,110,5,8,10);
-INSERT INTO `item_latents` VALUES (12399,68,2,8,11);
-INSERT INTO `item_latents` VALUES (12400,106,5,8,12);
-INSERT INTO `item_latents` VALUES (12401,23,5,8,13);
-INSERT INTO `item_latents` VALUES (12402,384,100,8,14);  -- Wyvern Targe Latent effect: Haste+1%
-INSERT INTO `item_latents` VALUES (12403,2,10,8,15);
-INSERT INTO `item_latents` VALUES (12403,5,5,8,15);
-INSERT INTO `item_latents` VALUES (12461,369,1,13,4);
-INSERT INTO `item_latents` VALUES (12589,370,2,13,3);
-INSERT INTO `item_latents` VALUES (12621,370,2,13,3);
-INSERT INTO `item_latents` VALUES (12717,71,5,13,6);
-INSERT INTO `item_latents` VALUES (12742,1,32,56,0);     -- Rune Bangles +32 Def.
-INSERT INTO `item_latents` VALUES (12742,68,5,56,0);     -- Rune Bangles +5 Eva.
-INSERT INTO `item_latents` VALUES (12742,369,-4,56,0);   -- Rune Bangles -4MP/tic
-INSERT INTO `item_latents` VALUES (12751,71,4,13,6);
+INSERT INTO `item_latents` VALUES  (12392,8,2,8,4);
+INSERT INTO `item_latents` VALUES  (12393,2,7,8,5);
+INSERT INTO `item_latents` VALUES  (12393,5,7,8,5);
+INSERT INTO `item_latents` VALUES  (12394,109,5,8,6);
+INSERT INTO `item_latents` VALUES  (12395,11,2,8,7);
+INSERT INTO `item_latents` VALUES  (12396,5,5,8,8);
+INSERT INTO `item_latents` VALUES  (12396,14,2,8,8);
+INSERT INTO `item_latents` VALUES  (12397,13,2,8,9);
+INSERT INTO `item_latents` VALUES  (12398,110,5,8,10);
+INSERT INTO `item_latents` VALUES  (12399,68,2,8,11);
+INSERT INTO `item_latents` VALUES  (12400,106,5,8,12);
+INSERT INTO `item_latents` VALUES  (12401,23,5,8,13);
+INSERT INTO `item_latents` VALUES  (12402,384,100,8,14);  -- Wyvern Targe Latent effect: Haste+1%
+INSERT INTO `item_latents` VALUES  (12403,2,10,8,15);
+INSERT INTO `item_latents` VALUES  (12403,5,5,8,15);
+INSERT INTO `item_latents` VALUES  (12461,369,1,13,4);
+INSERT INTO `item_latents` VALUES  (12589,370,2,13,3);
+INSERT INTO `item_latents` VALUES  (12621,370,2,13,3);
+INSERT INTO `item_latents` VALUES  (12717,71,5,13,6);
+INSERT INTO `item_latents` VALUES  (12742,1,32,56,0);     -- Rune Bangles +32 Def.
+INSERT INTO `item_latents` VALUES  (12742,68,5,56,0);     -- Rune Bangles +5 Eva.
+INSERT INTO `item_latents` VALUES  (12742,369,-4,56,0);   -- Rune Bangles -4MP/tic
+INSERT INTO `item_latents` VALUES  (12751,71,4,13,6);
 
 -- Brisingamen
 INSERT INTO `item_latents` VALUES (13097,2,10,26,0);     -- Daytime: HP +10
@@ -301,7 +311,7 @@ INSERT INTO `item_latents` VALUES (13245,9,3,35,0);      -- +3 DEX on Lightnings
 -- Water Belt
 INSERT INTO `item_latents` VALUES (13246,13,3,30,0);     -- +3 MND on Watersday
 
-INSERT INTO `item_latents` VALUES (13248,384,800,13,4);
+INSERT INTO `item_latents` VALUES  (13248,384,800,13,4);
 
 -- Royal Knight's Belt +1/+2
 INSERT INTO `item_latents` VALUES (13277,24,5,53,0);     -- RATK +5 in areas inside own nation's control
@@ -374,9 +384,9 @@ INSERT INTO `item_latents` VALUES (13300,346,1,2,75);    -- Avatar perpetuation 
 INSERT INTO `item_latents` VALUES (13399,23,10,26,0);    -- Daytime: ATT +10
 INSERT INTO `item_latents` VALUES (13399,24,10,26,1);    -- Nighttime: RATT +10
 
-INSERT INTO `item_latents` VALUES (13400,26,5,13,9);
-INSERT INTO `item_latents` VALUES (13400,26,5,13,20);
-INSERT INTO `item_latents` VALUES (13416,68,15,13,5);
+INSERT INTO `item_latents` VALUES  (13400,26,5,13,9);
+INSERT INTO `item_latents` VALUES  (13400,26,5,13,20);
+INSERT INTO `item_latents` VALUES  (13416,68,15,13,5);
 
 -- Soldier's Earring
 INSERT INTO `item_latents` VALUES (13419,63,20,2,25);    -- DEF:20% when HP <=25% and TP <=100%
@@ -432,8 +442,8 @@ INSERT INTO `item_latents` VALUES (13436,2,30,8,2);      -- HP+30 when MNK Subjo
 -- Healer's Earring
 INSERT INTO `item_latents` VALUES (13437,27,-1,8,3);     -- Enmity -1 when WHM subjob
 
-INSERT INTO `item_latents` VALUES (13438,115,5,8,4);
-INSERT INTO `item_latents` VALUES (13439,71,1,8,5);
+INSERT INTO `item_latents` VALUES  (13438,115,5,8,4);
+INSERT INTO `item_latents` VALUES  (13439,71,1,8,5);
 
 -- Grand Knight's Ring
 INSERT INTO `item_latents` VALUES (13557,5,6,53,0);      -- MP +6 in areas inside own nation's control
@@ -442,7 +452,7 @@ INSERT INTO `item_latents` VALUES (13557,13,3,53,0);     -- MND +3 in areas insi
 
 -- Gold Musketeer's Ring
 INSERT INTO `item_latents` VALUES (13558,1,4,53,0);      -- DEF +4 in areas inside own nation's control
-INSERT INTO `item_latents` VALUES (13558,10,2,53,0);     -- VIT +3 in areas inside own nation's control
+INSERT INTO `item_latents` VALUES (13558,10,3,53,0);     -- VIT +3 in areas inside own nation's control
 INSERT INTO `item_latents` VALUES (13558,11,2,53,0);     -- AGI +2 in areas inside own nation's control
 
 -- Patriarch Protector's Ring
@@ -483,8 +493,8 @@ INSERT INTO `item_latents` VALUES (13572,27,3,26,1);     -- Nighttime: Enmity +3
 -- Cheviot/Umbra Cape (physical damage reduction doubled at night)
 INSERT INTO `item_latents` VALUES (13651,161,-500,26,1);
 
-INSERT INTO `item_latents` VALUES (13652,161,-600,26,1);
-INSERT INTO `item_latents` VALUES (13655,161,-2000,13,7);
+INSERT INTO `item_latents` VALUES  (13652,161,-600,26,1);
+INSERT INTO `item_latents` VALUES  (13655,161,-2000,13,7);
 
 -- Shadow Mantle
 INSERT INTO `item_latents` VALUES (13658,10,20,32,0);    -- Darksday: VIT+20
@@ -498,18 +508,18 @@ INSERT INTO `item_latents` VALUES (13660,173,10,8,2);    -- Enhances "Martial Ar
 -- Healer's Mantle
 INSERT INTO `item_latents` VALUES (13661,29,1,8,3);      -- Magic Defense Bonus while WHM subjob
 
-INSERT INTO `item_latents` VALUES (13662,71,1,8,4);
-INSERT INTO `item_latents` VALUES (13663,170,2,8,5);
-INSERT INTO `item_latents` VALUES (13664,68,4,8,6);
-INSERT INTO `item_latents` VALUES (13665,231,4,8,7);
-INSERT INTO `item_latents` VALUES (13666,116,5,8,8);
-INSERT INTO `item_latents` VALUES (13667,250,5,8,9);
-INSERT INTO `item_latents` VALUES (13668,244,5,8,10);
-INSERT INTO `item_latents` VALUES (13669,359,5,8,11);
-INSERT INTO `item_latents` VALUES (13670,243,5,8,12);
-INSERT INTO `item_latents` VALUES (13671,247,5,8,13);
-INSERT INTO `item_latents` VALUES (13672,23,6,8,14);
-INSERT INTO `item_latents` VALUES (13673,117,5,8,15);
+INSERT INTO `item_latents` VALUES  (13662,71,1,8,4);
+INSERT INTO `item_latents` VALUES  (13663,170,2,8,5);
+INSERT INTO `item_latents` VALUES  (13664,68,4,8,6);
+INSERT INTO `item_latents` VALUES  (13665,231,4,8,7);
+INSERT INTO `item_latents` VALUES  (13666,116,5,8,8);
+INSERT INTO `item_latents` VALUES  (13667,250,5,8,9);
+INSERT INTO `item_latents` VALUES  (13668,244,5,8,10);
+INSERT INTO `item_latents` VALUES  (13669,359,5,8,11);
+INSERT INTO `item_latents` VALUES  (13670,243,5,8,12);
+INSERT INTO `item_latents` VALUES  (13671,247,5,8,13);
+INSERT INTO `item_latents` VALUES  (13672,23,6,8,14);
+INSERT INTO `item_latents` VALUES  (13673,117,5,8,15);
 
 -- Variable Mantle
 INSERT INTO `item_latents` VALUES (13680,1,1,51,30);     -- DEF+1 per 10 Level over 20
@@ -544,10 +554,11 @@ INSERT INTO `item_latents` VALUES (13681,5,2,51,85);
 INSERT INTO `item_latents` VALUES (13681,5,2,51,90);
 INSERT INTO `item_latents` VALUES (13681,5,2,51,95);
 
-INSERT INTO `item_latents` VALUES (13693,369,1,13,2);
-INSERT INTO `item_latents` VALUES (13693,369,1,13,19);
-INSERT INTO `item_latents` VALUES (13693,370,1,13,2);
-INSERT INTO `item_latents` VALUES (13693,370,1,13,19);
+-- Aries Mantle
+INSERT INTO `item_latents` VALUES  (13693,369,1,13,2);
+INSERT INTO `item_latents` VALUES  (13693,369,1,13,19);
+INSERT INTO `item_latents` VALUES  (13693,370,1,13,2);
+INSERT INTO `item_latents` VALUES  (13693,370,1,13,19);
 
 -- Carapace Breastplate
 INSERT INTO `item_latents` VALUES (13789,1,44,0,25);     -- DEF:44 whem HP<=25%
@@ -557,7 +568,8 @@ INSERT INTO `item_latents` VALUES (13789,23,12,0,25);    -- Attack+12 when HP <=
 INSERT INTO `item_latents` VALUES (13790,1,45,0,25);     -- DEF:45 when HP <=25%
 INSERT INTO `item_latents` VALUES (13790,23,13,0,25);    -- Attack+13 when HP <=25%
 
-INSERT INTO `item_latents` VALUES (13846,369,1,13,4);
+-- Scorpion Helm
+INSERT INTO `item_latents` VALUES  (13846,369,1,13,4);
 
 -- Suijin Kabuto
 INSERT INTO `item_latents` VALUES (13852,370,2,30,0);    -- Watersdays: Adds "Regen" effect
@@ -570,7 +582,7 @@ INSERT INTO `item_latents` VALUES (13870,5,50,49,4596);  -- MP +50 (wild pamamas
 INSERT INTO `item_latents` VALUES (13870,14,14,49,4468); -- CHR +14 (pamamas)
 INSERT INTO `item_latents` VALUES (13870,14,14,49,4596); -- CHR +14 (wild pamamas)
 
-INSERT INTO `item_latents` VALUES (13875,68,8,52,6);     -- Jinpachi: Evasion +8 in Water weather
+INSERT INTO `item_latents` VALUES  (13875,68,8,52,6);     -- Jinpachi: Evasion +8 in Water weather
 
 -- Carapace Helm
 INSERT INTO `item_latents` VALUES (13878,1,23,0,50);     -- DEF:23 when HP <=50%
@@ -684,7 +696,7 @@ INSERT INTO `item_latents` VALUES (13972,288,5,49,4278); -- double attack 5% Sho
 INSERT INTO `item_latents` VALUES (13972,302,1,49,5928); -- triple attack 1% Hinesama Rice Ball
 INSERT INTO `item_latents` VALUES (13972,302,2,49,5929); -- triple attack 2% Ojo Rice Ball
 
-INSERT INTO `item_latents` VALUES (14005,25,8,52,6);     -- Tekko: Accuracy +8 in Water weather
+INSERT INTO `item_latents` VALUES  (14005,25,8,52,6);     -- Tekko: Accuracy +8 in Water weather
 
 -- Carapace Gauntlets
 INSERT INTO `item_latents` VALUES (14008,1,16,0,75);     -- DEF:16 whem HP <= 75%
@@ -696,15 +708,15 @@ INSERT INTO `item_latents` VALUES (14009,23,9,0,75);     -- Attack+9 when HP <=7
 
 -- Grand Temple Knight's Gauntlets
 INSERT INTO `item_latents` VALUES (14013,9,2,53,1);      -- DEX +2 in areas outside own nation's control
-INSERT INTO `item_latents` VALUES (14013,110,10,53,1);   -- DEX +2 in areas outside own nation's control
+INSERT INTO `item_latents` VALUES (14013,110,10,53,1);   -- PARRY +10 in areas outside own nation's control
 
 -- Grand Temple Knight's Bangles
 INSERT INTO `item_latents` VALUES (14014,11,2,53,1);     -- AGI +2 in areas outside own nation's control
-INSERT INTO `item_latents` VALUES (14014,68,7,53,1);     -- EVA +7 in areas outside own nation's control
+INSERT INTO `item_latents` VALUES (14014,108,7,53,1);    -- Evasion Skill +7 in areas outside own nation's control
 
 -- Praefectus's Gloves
 INSERT INTO `item_latents` VALUES (14015,10,2,53,1);     -- VIT +2 in areas outside own nation's control
-INSERT INTO `item_latents` VALUES (14015,68,5,53,1);     -- EVA +5 in areas outside own nation's control
+INSERT INTO `item_latents` VALUES (14015,108,5,53,1);     -- EVA +5 in areas outside own nation's control
 INSERT INTO `item_latents` VALUES (14015,110,5,53,1);    -- Parrying skill +5 in areas outside own nation's control
 
 -- Master Caster's Mitts
@@ -717,8 +729,8 @@ INSERT INTO `item_latents` VALUES (14017,13,1,53,1);     -- MND +1 in areas outs
 INSERT INTO `item_latents` VALUES (14017,114,7,53,1);    -- Enfeeb +7 in areas outside own nation's control
 INSERT INTO `item_latents` VALUES (14017,115,7,53,1);    -- element +7 in areas outside own nation's control
 
-INSERT INTO `item_latents` VALUES (14026,25,9,52,6);     -- Hailstorm Tekko: Accuracy +9 in Water weather
-INSERT INTO `item_latents` VALUES (14027,25,10,52,6);    -- Hailstorm Tekko +1: Accuracy +10 in Water weather
+INSERT INTO `item_latents` VALUES  (14026,25,9,52,6);     -- Hailstorm Tekko: Accuracy +9 in Water weather
+INSERT INTO `item_latents` VALUES  (14027,25,10,52,6);    -- Hailstorm Tekko +1: Accuracy +10 in Water weather
 
 -- Royal Knight's Mufflers +1/+2
 INSERT INTO `item_latents` VALUES (14029,26,5,53,0);     -- RACC +5 in areas inside own nation's control
@@ -756,7 +768,7 @@ INSERT INTO `item_latents` VALUES (14055,23,7,1,75);     -- Attack+7 when HP >75
 -- Unicorn Mittens +1
 INSERT INTO `item_latents` VALUES (14056,23,8,1,75);     -- Attack+8 when HP >75%
 
-INSERT INTO `item_latents` VALUES (14062,346,0,9,8);
+INSERT INTO `item_latents` VALUES  (14062,346,0,9,8);
 
 -- Garden Bangles / Feronia's Bangles
 INSERT INTO `item_latents` VALUES (14065,370,1,26,0);    -- Daytime: Regen +1HP/tick
@@ -769,7 +781,7 @@ INSERT INTO `item_latents` VALUES (14085,370,1,26,1);    -- Nighttime: Adds "Reg
 -- Ninja Kyahan
 INSERT INTO `item_latents` VALUES (14101,76,25,26,1);   -- MOVE_SPEED_GEAR_BONUS %25 during nighttime
 
-INSERT INTO `item_latents` VALUES (14122,68,8,52,6);     -- Kyahan: Evasion +8 in Water weather
+INSERT INTO `item_latents` VALUES  (14122,68,8,52,6);     -- Kyahan: Evasion +8 in Water weather
 
 -- Royal Knight's Sollerets +1/+2
 INSERT INTO `item_latents` VALUES (14137,10,3,53,0);     -- VIT +3 in areas inside own nation's control
@@ -859,10 +871,10 @@ INSERT INTO `item_latents` VALUES (14289,7,25,26,1);     -- Nighttime: Converts 
 -- Rasetsu Hakama
 INSERT INTO `item_latents` VALUES (14299,291,1,0,25);    -- Counter+1 when HP <25%
 
-INSERT INTO `item_latents` VALUES (14324,68,2,29,0);
-INSERT INTO `item_latents` VALUES (14326,68,2,29,0);
-INSERT INTO `item_latents` VALUES (14330,68,2,29,0);
-INSERT INTO `item_latents` VALUES (14330,68,2,31,0);
+INSERT INTO `item_latents` VALUES  (14324,68,2,29,0);
+INSERT INTO `item_latents` VALUES  (14326,68,2,29,0);
+INSERT INTO `item_latents` VALUES  (14330,68,2,29,0);
+INSERT INTO `item_latents` VALUES  (14330,68,2,31,0);
 
 -- Royal Squire's Chainmail +1/+2
 INSERT INTO `item_latents` VALUES (14340,23,6,53,0);     -- ATK +6 in areas inside own nation's control
@@ -905,14 +917,14 @@ INSERT INTO `item_latents` VALUES (14363,5,20,53,0);     -- MP +20 in areas insi
 -- Rasetsu Samue
 INSERT INTO `item_latents` VALUES (14376,291,1,0,25);    -- Counter+1 when HP <25%
 
-INSERT INTO `item_latents` VALUES (14401,346,1,9,7);
-INSERT INTO `item_latents` VALUES (14410,346,1,9,6);
+INSERT INTO `item_latents` VALUES  (14401,346,1,9,7);
+INSERT INTO `item_latents` VALUES  (14410,346,1,9,6);
 
 -- Gaudy Harness
 INSERT INTO `item_latents` VALUES (14413,369,1,5,49);    -- "Refresh" effect while MP under 49 (actual number,not %)
 
-INSERT INTO `item_latents` VALUES (14423,68,2,29,0);
-INSERT INTO `item_latents` VALUES (14425,68,2,29,0);
+INSERT INTO `item_latents` VALUES  (14423,68,2,29,0);
+INSERT INTO `item_latents` VALUES  (14425,68,2,29,0);
 
 -- Kingdom Aketon
 INSERT INTO `item_latents` VALUES (14428,76,12,54,19);
@@ -923,8 +935,8 @@ INSERT INTO `item_latents` VALUES (14429,76,12,54,20);
 -- Federation Aketon
 INSERT INTO `item_latents` VALUES (14430,76,12,54,21);
 
-INSERT INTO `item_latents` VALUES (14432,68,2,29,0);
-INSERT INTO `item_latents` VALUES (14432,68,2,31,0);
+INSERT INTO `item_latents` VALUES  (14432,68,2,29,0);
+INSERT INTO `item_latents` VALUES  (14432,68,2,31,0);
 
 -- Vampire Cloak
 INSERT INTO `item_latents` VALUES (14443,369,1,26,1);    -- Nighttime: Refresh +1MP/tick
@@ -935,6 +947,11 @@ INSERT INTO `item_latents` VALUES (14448,10,6,1,71);     -- VIT+6 when HP >71%
 
 -- Unicorn Harness +1
 INSERT INTO `item_latents` VALUES (14449,10,7,1,71);     -- VIT+7 when HP >71%
+
+-- Nanban Kariginu
+INSERT INTO `item_latents` VALUES(14465,68,10,49,4468); -- EVA +10 with Pamama Food Active
+INSERT INTO `item_latents` VALUES(14465,25,1,49,4468);  -- ACC +1 with Pamama Food Active
+
 INSERT INTO `item_latents` VALUES (14500,68,10,13,58);  -- WAR AF2 +1 Body Reduces evasion penalty by 10 if Aggressor Active
 INSERT INTO `item_latents` VALUES (14509,8,8,10,0);
 INSERT INTO `item_latents` VALUES (14509,9,8,10,0);
@@ -958,16 +975,21 @@ INSERT INTO `item_latents` VALUES (14725,108,5,25,0);     -- EVA Skill +5 song/r
 -- Melody Earring +1
 INSERT INTO `item_latents` VALUES (14726,108,6,25,0);     -- EVA Skill +6 song/roll active
 
-INSERT INTO `item_latents` VALUES (14729,9,2,8,6);
-INSERT INTO `item_latents` VALUES (14730,1,5,8,7);
-INSERT INTO `item_latents` VALUES (14731,23,5,8,8);
-INSERT INTO `item_latents` VALUES (14732,25,5,8,9);
-INSERT INTO `item_latents` VALUES (14733,68,5,8,10);
-INSERT INTO `item_latents` VALUES (14734,26,3,8,11);
-INSERT INTO `item_latents` VALUES (14735,110,5,8,12);
-INSERT INTO `item_latents` VALUES (14736,11,4,8,13);
-INSERT INTO `item_latents` VALUES (14737,384,500,8,14);
-INSERT INTO `item_latents` VALUES (14738,5,30,8,15);
+INSERT INTO `item_latents` VALUES  (14729,9,2,8,6);
+INSERT INTO `item_latents` VALUES  (14730,1,5,8,7);
+INSERT INTO `item_latents` VALUES  (14731,23,5,8,8);
+INSERT INTO `item_latents` VALUES  (14732,25,5,8,9);
+INSERT INTO `item_latents` VALUES  (14733,68,5,8,10);
+INSERT INTO `item_latents` VALUES  (14734,26,3,8,11);
+INSERT INTO `item_latents` VALUES  (14735,110,5,8,12);
+INSERT INTO `item_latents` VALUES  (14736,11,4,8,13);
+INSERT INTO `item_latents` VALUES  (14737,384,500,8,14);
+INSERT INTO `item_latents` VALUES  (14738,5,30,8,15);
+
+-- -------------------------------------------------------
+-- Minuet Earring
+-- -------------------------------------------------------
+INSERT INTO `item_latents` VALUES (14764,25,3,13,198);  -- Minuet: Accuracy+3
 
 -- Vampire Earring
 INSERT INTO `item_latents` VALUES (14783,8,4,26,1);      -- STR+4 during Nighttime
@@ -1037,16 +1059,16 @@ INSERT INTO `item_latents` VALUES (14937,71,3,58,0);     -- storm gages hmp +3
 INSERT INTO `item_latents` VALUES (14944,26,10,13,4);    -- Paralysis: Ranged Accuracy+10
 INSERT INTO `item_latents` VALUES (14944,26,10,13,566);
 
-INSERT INTO `item_latents` VALUES (14946,346,1,13,2);
-INSERT INTO `item_latents` VALUES (14946,346,1,13,19);
+INSERT INTO `item_latents` VALUES  (14946,346,1,13,2);
+INSERT INTO `item_latents` VALUES  (14946,346,1,13,19);
 
 -- Sadhu Bracelets (Triggered when not under food effect.)
 INSERT INTO `item_latents` VALUES (14953,288,2,14,0);    -- "Double Attack"+2%
 INSERT INTO `item_latents` VALUES (14953,384,100,14,0);  -- Haste+1%
 
-INSERT INTO `item_latents` VALUES (14954,5,35,14,0);
-INSERT INTO `item_latents` VALUES (14954,71,1,14,0);
-INSERT INTO `item_latents` VALUES (14954,168,-5,14,0);
+INSERT INTO `item_latents` VALUES  (14954,5,35,14,0);
+INSERT INTO `item_latents` VALUES  (14954,71,1,14,0);
+INSERT INTO `item_latents` VALUES  (14954,168,-5,14,0);
 
 -- Trainee Gloves
 INSERT INTO `item_latents` VALUES (15008,133,1,24,54); -- SYNTH_TRAINEE: BONE - BONE: 1
@@ -1067,32 +1089,32 @@ INSERT INTO `item_latents` VALUES (15069,385,200,48,0);  -- Augments "Shield Bas
 -- Koga Hatsuburi
 INSERT INTO `item_latents` VALUES (15084,110,10,26,1);   -- Nighttime: Parry +10
 
-INSERT INTO `item_latents` VALUES (15087,68,10,13,58);  -- WAR AF2 Body Reduces evasion penalty by 10 if Aggressor Active
+INSERT INTO `item_latents` VALUES  (15087,68,10,13,58);  -- WAR AF2 Body Reduces evasion penalty by 10 if Aggressor Active
 
-INSERT INTO `item_latents` VALUES (15096,8,8,10,0);
-INSERT INTO `item_latents` VALUES (15096,9,8,10,0);
-INSERT INTO `item_latents` VALUES (15096,10,8,10,0);
-INSERT INTO `item_latents` VALUES (15096,11,8,10,0);
-INSERT INTO `item_latents` VALUES (15096,12,-8,10,0);
-INSERT INTO `item_latents` VALUES (15096,13,-8,10,0);
-INSERT INTO `item_latents` VALUES (15096,14,-8,10,0);
+INSERT INTO `item_latents` VALUES  (15096,8,8,10,0);
+INSERT INTO `item_latents` VALUES  (15096,9,8,10,0);
+INSERT INTO `item_latents` VALUES  (15096,10,8,10,0);
+INSERT INTO `item_latents` VALUES  (15096,11,8,10,0);
+INSERT INTO `item_latents` VALUES  (15096,12,-8,10,0);
+INSERT INTO `item_latents` VALUES  (15096,13,-8,10,0);
+INSERT INTO `item_latents` VALUES  (15096,14,-8,10,0);
 
 -- Koga Tekko
 INSERT INTO `item_latents` VALUES (15114,8,12,26,1);     -- STR +12 during nighttime
 INSERT INTO `item_latents` VALUES (15114,384,400,26,1);  -- Haste +%4 during nighttime
 
-INSERT INTO `item_latents` VALUES (15126,8,-8,11,0);
-INSERT INTO `item_latents` VALUES (15126,9,-8,11,0);
-INSERT INTO `item_latents` VALUES (15126,10,-8,11,0);
-INSERT INTO `item_latents` VALUES (15126,11,-8,11,0);
-INSERT INTO `item_latents` VALUES (15126,12,8,11,0);
-INSERT INTO `item_latents` VALUES (15126,13,8,11,0);
-INSERT INTO `item_latents` VALUES (15126,14,8,11,0);
+INSERT INTO `item_latents` VALUES  (15126,8,-8,11,0);
+INSERT INTO `item_latents` VALUES  (15126,9,-8,11,0);
+INSERT INTO `item_latents` VALUES  (15126,10,-8,11,0);
+INSERT INTO `item_latents` VALUES  (15126,11,-8,11,0);
+INSERT INTO `item_latents` VALUES  (15126,12,8,11,0);
+INSERT INTO `item_latents` VALUES  (15126,13,8,11,0);
+INSERT INTO `item_latents` VALUES  (15126,14,8,11,0);
 
 -- Koga Hakama
 INSERT INTO `item_latents` VALUES (15129,68,10,26,1);    -- Nighttime: EVA +10
 
-INSERT INTO `item_latents` VALUES (15132,63,10,13,56);  -- WAR AF2 Feet Reduces defense penalty by 10% if Berserk Active
+INSERT INTO `item_latents` VALUES  (15132,63,10,13,56);  -- WAR AF2 Feet Reduces defense penalty by 10% if Berserk Active
 
 -- Abyss Sollerets
 INSERT INTO `item_latents` VALUES (15139,63,10,13,64);   -- Enhances "Last Resort" effect
@@ -1100,10 +1122,10 @@ INSERT INTO `item_latents` VALUES (15139,63,10,13,64);   -- Enhances "Last Resor
 -- Koga Kyahan
 INSERT INTO `item_latents` VALUES (15144,9,7,26,1);      -- DEX +7 during nighttime
 
-INSERT INTO `item_latents` VALUES (15162,68,2,29,0);
-INSERT INTO `item_latents` VALUES (15164,68,2,29,0);
-INSERT INTO `item_latents` VALUES (15168,68,2,29,0);
-INSERT INTO `item_latents` VALUES (15168,68,2,31,0);
+INSERT INTO `item_latents` VALUES  (15162,68,2,29,0);
+INSERT INTO `item_latents` VALUES  (15164,68,2,29,0);
+INSERT INTO `item_latents` VALUES  (15168,68,2,29,0);
+INSERT INTO `item_latents` VALUES  (15168,68,2,31,0);
 
 INSERT INTO `item_latents` VALUES (15174,25,12,10,0);
 INSERT INTO `item_latents` VALUES (15174,384,400,10,0);
@@ -1146,7 +1168,8 @@ INSERT INTO `item_latents` VALUES (15187,288,3,7,1000);  -- "Double Attack"+3% w
 INSERT INTO `item_latents` VALUES (15188,288,2,7,1000);  -- "Double Attack"+2% while TP >=100%
 
 -- Vampire Mask
-INSERT INTO `item_latents` VALUES (15197,25,3,26,1);     -- Nighttime: ACC +3
+-- -------------------------------------------------------
+INSERT INTO `item_latents` VALUES  (15197,25,3,26,1);     -- Nighttime: ACC +3
 
 -- Unicorn Cap
 INSERT INTO `item_latents` VALUES (15209,8,4,1,75);      -- STR+4 when HP >75%
@@ -1189,7 +1212,7 @@ INSERT INTO `item_latents` VALUES (15318,68,2,31,0);
 -- Caitiff's Socks
 -- INSERT INTO `item_latents` VALUES (15324,???,1,2,25); -- Flee when HP <25% and TP <100%
 
-INSERT INTO `item_latents` VALUES (15328,370,2,13,11);
+INSERT INTO `item_latents` VALUES  (15328,370,2,13,11);
 
 -- Vampire Boots
 INSERT INTO `item_latents` VALUES (15338,68,10,26,1);    -- Nighttime: EVA +10
@@ -1218,8 +1241,8 @@ INSERT INTO `item_latents` VALUES (15407,68,4,1,75);     -- Evasion+4 when HP >7
 -- Resentment Cape
 INSERT INTO `item_latents` VALUES (15468,163,-500,53,1);   -- magic damge taken -5% ( in areas outside own nation's control
 
-INSERT INTO `item_latents` VALUES (15483,2,75,58,0);     -- Storm Mantle hp +75
-INSERT INTO `item_latents` VALUES (15489,71,2,58,0);     -- Storm Cape hmp +2
+INSERT INTO `item_latents` VALUES  (15483,2,75,58,0);     -- Storm Mantle hp +75
+INSERT INTO `item_latents` VALUES  (15489,71,2,58,0);     -- Storm Cape hmp +2
 
 -- Ajase Beads
 INSERT INTO `item_latents` VALUES (15504,23,3,53,0);     -- ATK +3 in areas inside own nation's control
@@ -1288,14 +1311,14 @@ INSERT INTO `item_latents` VALUES (15557,116,15,32,0);   -- +15 Dark magic skill
 -- Ninja Hakama +1
 INSERT INTO `item_latents` VALUES (15573,68,10,26,2);    -- Dusk - Dawn: EVA +10
 
-INSERT INTO `item_latents` VALUES (15589,12,8,11,0);
-INSERT INTO `item_latents` VALUES (15589,13,8,11,0);
-INSERT INTO `item_latents` VALUES (15589,14,8,11,0);
+INSERT INTO `item_latents` VALUES  (15589,12,8,11,0);
+INSERT INTO `item_latents` VALUES  (15589,13,8,11,0);
+INSERT INTO `item_latents` VALUES  (15589,14,8,11,0);
 
 -- Koga Hakama +1
 INSERT INTO `item_latents` VALUES (15592,68,12,26,2);    -- Dusk - Dawn: EVA +12
 
-INSERT INTO `item_latents` VALUES (15665,63,10,13,56);  -- WAR AF2 +1 Feet Reduces defense penalty by 10% if Berserk Active
+INSERT INTO `item_latents` VALUES  (15665,63,10,13,56);  -- WAR AF2 +1 Feet Reduces defense penalty by 10% if Berserk Active
 
 -- Abyss Sollerets +1
 INSERT INTO `item_latents` VALUES (15672,63,10,13,64);   -- +1: Enhances "Last Resort" effect
@@ -1349,9 +1372,9 @@ INSERT INTO `item_latents` VALUES (15816,5,22,26,0);     -- MP+22 during Daytime
 -- Desperado Ring
 INSERT INTO `item_latents` VALUES (15835,23,5,4,5);      -- Attack+5 while MP <=5%
 
-INSERT INTO `item_latents` VALUES (15882,25,15,58,0);    -- storm belt acc +15
-INSERT INTO `item_latents` VALUES (15883,12,6,58,0);     -- storm sash int +6
-INSERT INTO `item_latents` VALUES (15883,14,6,58,0);     -- chr +6
+INSERT INTO `item_latents` VALUES  (15882,25,15,58,0);    -- storm belt acc +15
+INSERT INTO `item_latents` VALUES  (15883,12,6,58,0);     -- storm sash int +6
+INSERT INTO `item_latents` VALUES  (15883,14,6,58,0);     -- chr +6
 
 -- Sothic Rope
 INSERT INTO `item_latents` VALUES (15915,5,20,37,4);     -- Full Moon: MP+20
@@ -1380,49 +1403,51 @@ INSERT INTO `item_latents` VALUES (15955,421,2,13,376);  -- critical hit damage 
 -- NEED STATUS # INSERT INTO `item_latents` VALUES (15955,421,2,13,??); -- critical hit damage 2% under status mijin gakure (nin)
 -- NEED STATUS # INSERT INTO `item_latents` VALUES (15955,421,2,13,??); -- critical hit damage 2% under status wild card (cor)
 
-INSERT INTO `item_latents` VALUES (15968,23,10,58,0);    -- storm loop
-INSERT INTO `item_latents` VALUES (15969,5,15,58,0);     -- storm earring mp +15
-INSERT INTO `item_latents` VALUES (15969,27,-4,58,0);    -- enmity -4
-INSERT INTO `item_latents` VALUES (15975,122,5,8,16);
-INSERT INTO `item_latents` VALUES (15976,24,5,8,17);
-INSERT INTO `item_latents` VALUES (15977,107,5,8,18);
-INSERT INTO `item_latents` VALUES (15981,73,2,13,117);
-INSERT INTO `item_latents` VALUES (15982,1,8,13,74);
-INSERT INTO `item_latents` VALUES (15983,23,7,13,75);
+INSERT INTO `item_latents` VALUES  (15968,23,10,58,0);    -- storm loop
+INSERT INTO `item_latents` VALUES  (15969,5,15,58,0);     -- storm earring mp +15
+INSERT INTO `item_latents` VALUES  (15969,27,-4,58,0);    -- enmity -4
+INSERT INTO `item_latents` VALUES  (15975,122,5,8,16);
+INSERT INTO `item_latents` VALUES  (15976,24,5,8,17);
+INSERT INTO `item_latents` VALUES  (15977,107,5,8,18);
+INSERT INTO `item_latents` VALUES  (15981,73,2,13,117);
+INSERT INTO `item_latents` VALUES  (15982,1,8,13,74);
+INSERT INTO `item_latents` VALUES  (15983,23,7,13,75);
 
 -- Ladybug Earring / Ladybug Earring +1
 INSERT INTO `item_latents` VALUES (15996,24,3,26,0);     -- Ranged Attack+3 during Daytime
 
-INSERT INTO `item_latents` VALUES (15997,24,4,26,0);     -- Ranged Attack+4 during Daytime
+INSERT INTO `item_latents` VALUES  (15997,24,4,26,0);     -- Ranged Attack+4 during Daytime
 
-INSERT INTO `item_latents` VALUES (16014,23,4,22,1);     -- Stormer Earring,ATT+4 if WAR is in party
-INSERT INTO `item_latents` VALUES (16015,2,20,22,2);     -- Esse Earring,HP+20 if MNK is in party
-INSERT INTO `item_latents` VALUES (16016,27,-1,22,3);    -- Chary Earring,Enmity-1 if WHM is in party
-INSERT INTO `item_latents` VALUES (16017,28,1,22,4);     -- Ardent Earring,MATT+1 if BLM is in party
-INSERT INTO `item_latents` VALUES (16018,30,1,22,5);     -- Ataraxy Earring,MACC+1 if RDM is in party
-INSERT INTO `item_latents` VALUES (16019,9,1,22,6);      -- Forte Earring,DEX+1 if THF is in party
-INSERT INTO `item_latents` VALUES (16020,10,1,22,7);     -- Survivor Earring,VIT+1 if PLD is in party
-INSERT INTO `item_latents` VALUES (16021,8,1,22,8);      -- Brawn Earring,STR+1 if DRK is in party
-INSERT INTO `item_latents` VALUES (16023,14,1,22,10);    -- Mystique Earring,CHR+1 if BRD is in party
-INSERT INTO `item_latents` VALUES (16024,24,1,22,11);    -- Impetus Earring,RATT+1 if RNG is in party
-INSERT INTO `item_latents` VALUES (16025,73,1,22,12);    -- Rathe Earring,Store TP+1 if SAM is in party
-INSERT INTO `item_latents` VALUES (16026,68,4,22,13);    -- Elan Earring,EVA+4 if NIN is in party
-INSERT INTO `item_latents` VALUES (16027,25,1,22,14);    -- Seeker Earring,ACC+1 if DRG is in party
-INSERT INTO `item_latents` VALUES (16028,5,15,22,15);    -- Psyche Earring,MP+15 if SMN is in party
-INSERT INTO `item_latents` VALUES (16029,2,10,22,16);    -- Booster Earring,HP+10 if BLU is in party
-INSERT INTO `item_latents` VALUES (16029,5,10,22,16);    -- Booster Earring,MP+10 if BLU is in party
-INSERT INTO `item_latents` VALUES (16030,26,1,22,17);    -- Soarer Earring,RACC+1 if COR is in party
-INSERT INTO `item_latents` VALUES (16032,289,3,22,19);   -- Muffle Earring,Subtle Blow +3 if DNC is in party
-INSERT INTO `item_latents` VALUES (16033,71,1,22,20);    -- Sylph Earring,Healing MP +1 if SCH is in party
+INSERT INTO `item_latents` VALUES  (16014,23,4,22,1);     -- Stormer Earring, ATT+4         if WAR is in party
+INSERT INTO `item_latents` VALUES  (16015,2,20,22,2);     -- Esse Earring,    HP+20         if MNK is in party
+INSERT INTO `item_latents` VALUES  (16016,27,-1,22,3);    -- Chary Earring,   Enmity-1      if WHM is in party
+INSERT INTO `item_latents` VALUES  (16017,28,1,22,4);     -- Ardent Earring,  MATT+1        if BLM is in party
+INSERT INTO `item_latents` VALUES  (16018,30,1,22,5);     -- Ataraxy Earring, MACC+1        if RDM is in party
+INSERT INTO `item_latents` VALUES  (16019,9,1,22,6);      -- Forte Earring,   DEX+1         if THF is in party
+INSERT INTO `item_latents` VALUES  (16020,10,1,22,7);     -- Survivor Earring,VIT+1         if PLD is in party
+INSERT INTO `item_latents` VALUES  (16021,8,1,22,8);      -- Brawn Earring,   STR+1         if DRK is in party
+INSERT INTO `item_latents` VALUES  (16022,2022,10,22,9);  -- Fidelity Earring,PetACC+10     if BST in party
+INSERT INTO `item_latents` VALUES  (16023,14,1,22,10);    -- Mystique Earring,CHR+1         if BRD is in party
+INSERT INTO `item_latents` VALUES  (16024,24,1,22,11);    -- Impetus Earring, RATT+1        if RNG is in party
+INSERT INTO `item_latents` VALUES  (16025,73,1,22,12);    -- Rathe Earring,   StoreTP+1     if SAM is in party
+INSERT INTO `item_latents` VALUES  (16026,68,4,22,13);    -- Elan Earring,    EVA+4         if NIN is in party
+INSERT INTO `item_latents` VALUES  (16027,25,1,22,14);    -- Seeker Earring,  ACC+1         if DRG is in party
+INSERT INTO `item_latents` VALUES  (16028,5,15,22,15);    -- Psyche Earring,  MP+15         if SMN is in party
+INSERT INTO `item_latents` VALUES  (16029,2,10,22,16);    -- Booster Earring, HP+10         if BLU is in party
+INSERT INTO `item_latents` VALUES  (16029,5,10,22,16);    -- Booster Earring, MP+10         if BLU is in party
+INSERT INTO `item_latents` VALUES  (16030,26,1,22,17);    -- Soarer Earring,  RACC+1        if COR is in party
+INSERT INTO `item_latents` VALUES  (16031,2021,10,22,18); -- Affinity Earring,PetATT+10     if PUP is in party
+INSERT INTO `item_latents` VALUES  (16032,289,3,22,19);   -- Muffle Earring,  Subtle Blow+3 if DNC is in party
+INSERT INTO `item_latents` VALUES  (16033,71,1,22,20);    -- Sylph Earring,   Healing MP+1  if SCH is in party
 
 -- Aesir Ear Pendant
--- NEED modID# INSERT INTO `item_latents` VALUES (16057,??,6,52,8); -- conserve tp+6 during dark weather
+INSERT INTO `item_latents` VALUES (16057,944,6,52,8); -- conserve tp+6 during dark weather
 
 -- Colossus's Earring
 INSERT INTO `item_latents` VALUES (16058,161,-100,52,7);   -- physical damage -2% during light weather (has -1% normally)
 
-INSERT INTO `item_latents` VALUES (16071,48,5,13,5);
-INSERT INTO `item_latents` VALUES (16071,165,5,13,5);
+INSERT INTO `item_latents` VALUES  (16071,48,5,13,5);
+INSERT INTO `item_latents` VALUES  (16071,165,5,13,5);
 
 -- Coven Hat
 INSERT INTO `item_latents` VALUES (16076,3,3,38,0);      -- HP+3% is active when your current job level is odd.
@@ -1473,16 +1498,20 @@ INSERT INTO `item_latents` VALUES (16124,68,2,23,65);
 INSERT INTO `item_latents` VALUES (16132,25,-20,26,1);   -- Nighttime: ACC -20
 INSERT INTO `item_latents` VALUES (16133,25,-30,26,1);   -- Nighttime: ACC -30
 
-INSERT INTO `item_latents` VALUES (16154,346,2,9,13);
-INSERT INTO `item_latents` VALUES (16165,109,5,58,0);    -- storm shield shiel skill +5
-INSERT INTO `item_latents` VALUES (16217,240,5,8,16);
-INSERT INTO `item_latents` VALUES (16218,242,5,8,17);
-INSERT INTO `item_latents` VALUES (16219,27,-2,8,18);
+-- Karura Hachigane
+INSERT INTO `item_latents` VALUES (16154,346,2,9,13);    -- Garuda Perp Cost - 2
+INSERT INTO `item_latents` VALUES (16154,2021,10,9,13);  -- Garuda ATT +10
+INSERT INTO `item_latents` VALUES (16154,2022,10,9,13);  -- Garuda ACC +10
+
+INSERT INTO `item_latents` VALUES  (16165,109,5,58,0);    -- storm shield shiel skill +5
+INSERT INTO `item_latents` VALUES  (16217,240,5,8,16);
+INSERT INTO `item_latents` VALUES  (16218,242,5,8,17);
+INSERT INTO `item_latents` VALUES  (16219,27,-2,8,18);
 
 -- Volitional Mantle (Latent effect is active when Cover is active.)
 INSERT INTO `item_latents` VALUES (16220,10,10,13,114);  -- VIT+10
 
-INSERT INTO `item_latents` VALUES (16238,369,1,13,3);
+INSERT INTO `item_latents` VALUES  (16238,369,1,13,3);
 
 -- Casaba Melon Tank
 INSERT INTO `item_latents` VALUES (16251,71,3,52,1);     -- Healing MP +3 in Fire weather
@@ -1508,9 +1537,9 @@ INSERT INTO `item_latents` VALUES (16367,8,4,52,1);      -- cumulative STR+5 in 
 INSERT INTO `item_latents` VALUES (16378,14,1,26,1);     -- CHR+1 during Nighttime
 INSERT INTO `item_latents` VALUES (16378,27,-1,0,75);    -- Enmity-1 when HP <75%
 
-INSERT INTO `item_latents` VALUES (16408,8,7,56,0);      -- Rune Baghnakhs +7 STR
-INSERT INTO `item_latents` VALUES (16408,291,1,56,0);    -- Rune Baghnakhs +1 Counter
-INSERT INTO `item_latents` VALUES (16408,369,-4,56,0);   -- Rune Baghnakhs -4MP/tic
+INSERT INTO `item_latents` VALUES  (16408,8,7,56,0);      -- Rune Baghnakhs +7 STR
+INSERT INTO `item_latents` VALUES  (16408,291,1,56,0);    -- Rune Baghnakhs +1 Counter
+INSERT INTO `item_latents` VALUES  (16408,369,-4,56,0);   -- Rune Baghnakhs -4MP/tic
 
 -- Avengers
 INSERT INTO `item_latents` VALUES (16426,25,2,0,1);
@@ -1535,9 +1564,9 @@ INSERT INTO `item_latents` VALUES (16427,25,9,37,2);         -- Acc+9 First Quar
 INSERT INTO `item_latents` VALUES (16427,25,9,37,6);         -- Acc+9 Last Quarter Moon
 INSERT INTO `item_latents` VALUES (16427,25,15,37,4);        -- Acc+15 Full Moon
 
-INSERT INTO `item_latents` VALUES (16563,9,5,56,0);      -- Rune Blade +5 DEX while drawn and MP > 0
-INSERT INTO `item_latents` VALUES (16563,287,4,56,0);    -- Rune Blade DMG:43 while drawn and MP > 0
-INSERT INTO `item_latents` VALUES (16563,369,-4,56,0);   -- Rune Blade -4MP/tic while drawn and MP > 0
+INSERT INTO `item_latents` VALUES  (16563,9,5,56,0);      -- Rune Blade +5 DEX while drawn and MP > 0
+INSERT INTO `item_latents` VALUES  (16563,287,4,56,0);    -- Rune Blade DMG:43 while drawn and MP > 0
+INSERT INTO `item_latents` VALUES  (16563,369,-4,56,0);   -- Rune Blade -4MP/tic while drawn and MP > 0
 
 -- Perdu Sword
 INSERT INTO `item_latents` VALUES (16602,23,12,6,1000);  -- Attack+12 while TP <100%
@@ -1547,34 +1576,34 @@ INSERT INTO `item_latents` VALUES (16602,287,4,6,1000);  -- DMG+4 while TP <100%
 -- Save The Queen
 INSERT INTO `item_latents` VALUES (16604,25,20,13,114);  -- Accuracy+20 (Latent effect is active when Cover is active.)
 
-INSERT INTO `item_latents` VALUES (16605,23,16,13,94);
-INSERT INTO `item_latents` VALUES (16605,23,16,13,95);
-INSERT INTO `item_latents` VALUES (16605,23,16,13,96);
-INSERT INTO `item_latents` VALUES (16605,23,16,13,97);
-INSERT INTO `item_latents` VALUES (16605,23,16,13,98);
-INSERT INTO `item_latents` VALUES (16605,23,16,13,99);
-INSERT INTO `item_latents` VALUES (16605,23,16,13,277);
-INSERT INTO `item_latents` VALUES (16605,23,16,13,278);
-INSERT INTO `item_latents` VALUES (16605,23,16,13,279);
-INSERT INTO `item_latents` VALUES (16605,23,16,13,280);
-INSERT INTO `item_latents` VALUES (16605,23,16,13,281);
-INSERT INTO `item_latents` VALUES (16605,23,16,13,282);
-INSERT INTO `item_latents` VALUES (16605,25,8,13,94);
-INSERT INTO `item_latents` VALUES (16605,25,8,13,95);
-INSERT INTO `item_latents` VALUES (16605,25,8,13,96);
-INSERT INTO `item_latents` VALUES (16605,25,8,13,97);
-INSERT INTO `item_latents` VALUES (16605,25,8,13,98);
-INSERT INTO `item_latents` VALUES (16605,25,8,13,99);
-INSERT INTO `item_latents` VALUES (16605,25,8,13,277);
-INSERT INTO `item_latents` VALUES (16605,25,8,13,278);
-INSERT INTO `item_latents` VALUES (16605,25,8,13,279);
-INSERT INTO `item_latents` VALUES (16605,25,8,13,280);
-INSERT INTO `item_latents` VALUES (16605,25,8,13,281);
-INSERT INTO `item_latents` VALUES (16605,25,8,13,282);
-INSERT INTO `item_latents` VALUES (16647,23,5,56,0);     -- Rune Axe +5 Atk.
-INSERT INTO `item_latents` VALUES (16647,369,-3,56,0);   -- Rune Axe -3MP/tic
-INSERT INTO `item_latents` VALUES (16647,370,5,56,0);    -- Rune Axe +5HP/tic
-INSERT INTO `item_latents` VALUES (16686,165,7,59,3);    -- Arcanabane - Vs. arcana: Critical hit rate +7%
+INSERT INTO `item_latents` VALUES  (16605,23,16,13,94);
+INSERT INTO `item_latents` VALUES  (16605,23,16,13,95);
+INSERT INTO `item_latents` VALUES  (16605,23,16,13,96);
+INSERT INTO `item_latents` VALUES  (16605,23,16,13,97);
+INSERT INTO `item_latents` VALUES  (16605,23,16,13,98);
+INSERT INTO `item_latents` VALUES  (16605,23,16,13,99);
+INSERT INTO `item_latents` VALUES  (16605,23,16,13,277);
+INSERT INTO `item_latents` VALUES  (16605,23,16,13,278);
+INSERT INTO `item_latents` VALUES  (16605,23,16,13,279);
+INSERT INTO `item_latents` VALUES  (16605,23,16,13,280);
+INSERT INTO `item_latents` VALUES  (16605,23,16,13,281);
+INSERT INTO `item_latents` VALUES  (16605,23,16,13,282);
+INSERT INTO `item_latents` VALUES  (16605,25,8,13,94);
+INSERT INTO `item_latents` VALUES  (16605,25,8,13,95);
+INSERT INTO `item_latents` VALUES  (16605,25,8,13,96);
+INSERT INTO `item_latents` VALUES  (16605,25,8,13,97);
+INSERT INTO `item_latents` VALUES  (16605,25,8,13,98);
+INSERT INTO `item_latents` VALUES  (16605,25,8,13,99);
+INSERT INTO `item_latents` VALUES  (16605,25,8,13,277);
+INSERT INTO `item_latents` VALUES  (16605,25,8,13,278);
+INSERT INTO `item_latents` VALUES  (16605,25,8,13,279);
+INSERT INTO `item_latents` VALUES  (16605,25,8,13,280);
+INSERT INTO `item_latents` VALUES  (16605,25,8,13,281);
+INSERT INTO `item_latents` VALUES  (16605,25,8,13,282);
+INSERT INTO `item_latents` VALUES  (16647,23,5,56,0);     -- Rune Axe +5 Atk.
+INSERT INTO `item_latents` VALUES  (16647,369,-3,56,0);   -- Rune Axe -3MP/tic
+INSERT INTO `item_latents` VALUES  (16647,370,5,56,0);    -- Rune Axe +5HP/tic
+INSERT INTO `item_latents` VALUES  (16686,165,7,59,3);    -- Arcanabane - Vs. arcana: Critical hit rate +7%
 
 -- Schwarz Axt
 INSERT INTO `item_latents` VALUES (16728,25,10,26,1);    -- Nighttime: ACC +10
@@ -1583,9 +1612,9 @@ INSERT INTO `item_latents` VALUES (16728,25,10,26,1);    -- Nighttime: ACC +10
 INSERT INTO `item_latents` VALUES (16732,8,1,53,1);      -- STR +1 in areas outside own nation's control
 INSERT INTO `item_latents` VALUES (16733,8,2,53,1);      -- STR +2 in areas outside own nation's control
 
-INSERT INTO `item_latents` VALUES (16735,2,-20,47,0);
-INSERT INTO `item_latents` VALUES (16735,18,-10,47,0);
-INSERT INTO `item_latents` VALUES (16735,20,-10,47,0);
+INSERT INTO `item_latents` VALUES  (16735,2,-20,47,0);
+INSERT INTO `item_latents` VALUES  (16735,18,-10,47,0);
+INSERT INTO `item_latents` VALUES  (16735,20,-10,47,0);
 
 -- Leste Jambiya
 INSERT INTO `item_latents` VALUES (16756,68,20,31,0);    -- Windsdays: Evasion+20
@@ -1618,7 +1647,7 @@ INSERT INTO `item_latents` VALUES (16911,287,1,0,73);    -- DMG 29~40, increases
 INSERT INTO `item_latents` VALUES (16911,287,1,0,82);    -- DMG 29~40, increases as HP% decreases
 INSERT INTO `item_latents` VALUES (16911,287,1,0,92);    -- DMG 29~40, increases as HP% decreases
 
-INSERT INTO `item_latents` VALUES (16912,165,5,59,17);   -- Kitsutsuki - Vs. plantoids: Critical hit rate +5%
+INSERT INTO `item_latents` VALUES  (16912,165,5,59,17);   -- Kitsutsuki - Vs. plantoids: Critical hit rate +5%
 
 -- Royal Swordsman's Blade +1/+2
 INSERT INTO `item_latents` VALUES (16948,10,2,53,1);     -- VIT +2 in areas outside own nation's control
@@ -1639,16 +1668,16 @@ INSERT INTO `item_latents` VALUES (16976,23,18,6,1000);  -- Attack+18 while TP <
 INSERT INTO `item_latents` VALUES (16976,25,5,6,1000);   -- Accuracy+5 while TP <100%
 INSERT INTO `item_latents` VALUES (16976,287,6,6,1000);  -- DMG+6 while TP <100%
 
-INSERT INTO `item_latents` VALUES (17073,369,1,7,2);     -- Mistilteinn adds Refresh 1MP per tick
-INSERT INTO `item_latents` VALUES (17073,406,30,7,2);    -- Mistilteinn drains 30TP if TP >= 30
-INSERT INTO `item_latents` VALUES (17093,12,2,56,0);     -- Rune Staff +2 INT
-INSERT INTO `item_latents` VALUES (17093,13,2,56,0);     -- Rune Staff +2 MND
-INSERT INTO `item_latents` VALUES (17093,14,2,56,0);     -- Rune Staff +2 CHR
-INSERT INTO `item_latents` VALUES (17093,28,1,56,0);     -- Rune Staff +1 MAB
-INSERT INTO `item_latents` VALUES (17093,369,-4,56,0);   -- Rune Staff -4MP/tic
-INSERT INTO `item_latents` VALUES (17158,26,5,56,0);     -- Rune Bow +5 R. Acc.
-INSERT INTO `item_latents` VALUES (17158,27,-2,56,0);    -- Rune Bow -2 Enmity
-INSERT INTO `item_latents` VALUES (17158,369,-4,56,0);   -- Rune Bow -4MP/tic
+INSERT INTO `item_latents` VALUES  (17073,369,1,7,2);     -- Mistilteinn adds Refresh 1MP per tick
+INSERT INTO `item_latents` VALUES  (17073,406,30,7,2);    -- Mistilteinn drains 30TP if TP >= 30
+INSERT INTO `item_latents` VALUES  (17093,12,2,56,0);     -- Rune Staff +2 INT
+INSERT INTO `item_latents` VALUES  (17093,13,2,56,0);     -- Rune Staff +2 MND
+INSERT INTO `item_latents` VALUES  (17093,14,2,56,0);     -- Rune Staff +2 CHR
+INSERT INTO `item_latents` VALUES  (17093,28,1,56,0);     -- Rune Staff +1 MAB
+INSERT INTO `item_latents` VALUES  (17093,369,-4,56,0);   -- Rune Staff -4MP/tic
+INSERT INTO `item_latents` VALUES  (17158,26,5,56,0);     -- Rune Bow +5 R. Acc.
+INSERT INTO `item_latents` VALUES  (17158,27,-2,56,0);    -- Rune Bow -2 Enmity
+INSERT INTO `item_latents` VALUES  (17158,369,-4,56,0);   -- Rune Bow -4MP/tic
 
 -- Arco de Velocidad
 INSERT INTO `item_latents` VALUES (17165,370,1,26,0);    -- Daytime: Regen +1HP/tick
@@ -1656,11 +1685,11 @@ INSERT INTO `item_latents` VALUES (17165,370,1,26,0);    -- Daytime: Regen +1HP/
 -- Ifrit's Bow
 INSERT INTO `item_latents` VALUES (17192,165,3,21,10);   -- Increases Critical Hit Rate
 
-INSERT INTO `item_latents` VALUES (17204,17,15,31,0);    -- Mighty Bow [Element: Wind]+15 on Windsday
-INSERT INTO `item_latents` VALUES (17204,287,10,31,0);   -- Mighty Bow DMG+10 on Windsday
-INSERT INTO `item_latents` VALUES (17207,287,13,47,0);   -- Expunger DMG+13 when broken (500 WS points)
-INSERT INTO `item_latents` VALUES (17208,26,10,59,12);   -- Hamayumi - Vs. Empty: Ranged Accuracy+10
-INSERT INTO `item_latents` VALUES (17208,66,10,59,12);   -- Vs. Empty: Ranged Attack+10%
+INSERT INTO `item_latents` VALUES  (17204,17,15,31,0);    -- Mighty Bow [Element: Wind]+15 on Windsday
+INSERT INTO `item_latents` VALUES  (17204,287,10,31,0);   -- Mighty Bow DMG+10 on Windsday
+INSERT INTO `item_latents` VALUES  (17207,287,13,47,0);   -- Expunger DMG+13 when broken (500 WS points)
+INSERT INTO `item_latents` VALUES  (17208,26,10,59,12);   -- Hamayumi - Vs. Empty: Ranged Accuracy+10
+INSERT INTO `item_latents` VALUES  (17208,66,10,59,12);   -- Vs. Empty: Ranged Attack+10%
 
 -- Selene's Bow
 INSERT INTO `item_latents` VALUES (17212,24,5,37,4);     -- Full moon
@@ -1684,12 +1713,12 @@ INSERT INTO `item_latents` VALUES (17212,26,25,37,4);
 INSERT INTO `item_latents` VALUES (17269,24,8,53,1);     -- RATT +8 in areas outside own nation's control
 INSERT INTO `item_latents` VALUES (17270,24,9,53,1);     -- RATT +9 in areas outside own nation's control
 
--- INSERT INTO `item_latents` VALUES (17275,165,6,47,0);    -- Coffinmaker Crit Rate +6% when broken (500 WS points) (TODO: Remove? This is not on wiki.)
-INSERT INTO `item_latents` VALUES (17275,287,13,47,0);   -- Coffinmaker DMG+13 when broken (500 WS points)
-INSERT INTO `item_latents` VALUES (17333,10,1,56,0);     -- Rune Arrow +1 VIT
-INSERT INTO `item_latents` VALUES (17333,24,10,56,0);    -- Rune Arrow +10 R.Atk.
-INSERT INTO `item_latents` VALUES (17333,369,-1,56,0);   -- Rune Arrow -1MP/tic
-INSERT INTO `item_latents` VALUES (17365,8,4,25,0);      -- Frenzy Fife,STR+4 song/roll active
+-- INSERT INTO `item_latents` VALUES  (17275,165,6,47,0);    -- Coffinmaker Crit Rate +6% when broken (500 WS points) (TODO: Remove? This is not on wiki.)
+INSERT INTO `item_latents` VALUES  (17275,287,13,47,0);   -- Coffinmaker DMG+13 when broken (500 WS points)
+INSERT INTO `item_latents` VALUES  (17333,10,1,56,0);     -- Rune Arrow +1 VIT
+INSERT INTO `item_latents` VALUES  (17333,24,10,56,0);    -- Rune Arrow +10 R.Atk.
+INSERT INTO `item_latents` VALUES  (17333,369,-1,56,0);   -- Rune Arrow -1MP/tic
+INSERT INTO `item_latents` VALUES  (17365,8,4,25,0);      -- Frenzy Fife,STR+4 song/roll active
 
 -- Tactician Magician's Wand +1/+2
 INSERT INTO `item_latents` VALUES (17446,5,18,53,1);     -- MP +18 in areas outside own nation's control
@@ -1709,6 +1738,9 @@ INSERT INTO `item_latents` VALUES (17456,20,-10,47,0);
 -- Reserve Captain's mace
 INSERT INTO `item_latents` VALUES (17458,71,7,44,0);  -- Citizens of San d'Oria: MP recovered while healing +7
 
+-- Senior Musketeer Rod
+INSERT INTO `item_latents` VALUES  (17457,71,7,70,1);     -- Senior Musketeer Rod
+
 INSERT INTO `item_latents` VALUES (17461,23,10,56,0);    -- Rune Rod +10 Atk.
 INSERT INTO `item_latents` VALUES (17461,112,6,56,0);    -- Rune Rod +6 Healing Magic Skill
 INSERT INTO `item_latents` VALUES (17461,369,-4,56,0);   -- Rune Rod -4MP/tic
@@ -1727,12 +1759,12 @@ INSERT INTO `item_latents` VALUES (17492,501,6,34,0);    -- Increased Add Effect
 INSERT INTO `item_latents` VALUES (17501,14,3,53,1);     -- CHR +3 in areas outside own nation's control
 INSERT INTO `item_latents` VALUES (17502,14,4,53,1);     -- CHR +4 in areas outside own nation's control
 
-INSERT INTO `item_latents` VALUES (17507,2,-20,47,0);
-INSERT INTO `item_latents` VALUES (17507,18,-10,47,0);
-INSERT INTO `item_latents` VALUES (17507,20,-10,47,0);
+INSERT INTO `item_latents` VALUES  (17507,2,-20,47,0);
+INSERT INTO `item_latents` VALUES  (17507,18,-10,47,0);
+INSERT INTO `item_latents` VALUES  (17507,20,-10,47,0);
 
 -- Master Caster's baghnakhs
--- INSERT INTO `item_latents` VALUES (17508,23,10,?,?);  -- Citizens of Windurst: Attack+10
+INSERT INTO `item_latents` VALUES (17508,23,10,70,2);     -- Citizens of Windurst: Attack+10
 
 INSERT INTO `item_latents` VALUES (17509,165,6,47,0);    -- Destroyers Crit Rate +6% when broken (500 WS points)
 INSERT INTO `item_latents` VALUES (17509,287,13,47,0);   -- Destroyers DMG+13 when broken (500 WS points)
@@ -1741,50 +1773,51 @@ INSERT INTO `item_latents` VALUES (17527,5,-10,47,0);
 INSERT INTO `item_latents` VALUES (17527,15,-10,47,0);
 INSERT INTO `item_latents` VALUES (17527,21,-10,47,0);
 
+-- Master Casters Pole
+INSERT INTO `item_latents` VALUES (17530,71,8,70,2);
+
 -- Musketeer's Pole +1/+2
 INSERT INTO `item_latents` VALUES (17539,2,10,53,1);     -- HP +10 in areas outside own nation's control
 INSERT INTO `item_latents` VALUES (17539,5,10,53,1);     -- MP +10 in areas outside own nation's control
 INSERT INTO `item_latents` VALUES (17540,2,12,53,1);     -- HP +12 in areas outside own nation's control
 INSERT INTO `item_latents` VALUES (17540,5,12,53,1);     -- MP +12 in areas outside own nation's control
 
-INSERT INTO `item_latents` VALUES (17581,17,15,31,0);    -- Mighty Pole [Element: Wind]+15 on Windsday
-INSERT INTO `item_latents` VALUES (17581,111,13,31,0);   -- Mighty Pole Divine magic skill +13 Windsday
-INSERT INTO `item_latents` VALUES (17581,115,13,31,0);   -- Mighty Pole Elemental magic skill +13 Windsday
-INSERT INTO `item_latents` VALUES (17589,165,6,47,0);    -- Thyrsusstab Crit Rate +6% when broken (500 WS points)
-INSERT INTO `item_latents` VALUES (17589,287,13,47,0);   -- Thyrsusstab DMG+13 when broken (500 WS points)
-INSERT INTO `item_latents` VALUES (17590,25,10,49,4468); -- Primate Staff (pamamas)
-INSERT INTO `item_latents` VALUES (17590,25,10,49,4596); -- (wild pamamas)
-INSERT INTO `item_latents` VALUES (17590,171,83,49,4468); -- (pamamas)
-INSERT INTO `item_latents` VALUES (17590,171,83,49,4596); -- (wild pamamas)
-INSERT INTO `item_latents` VALUES (17591,25,12,49,4468); -- Primate Staff +1 (pamamas)
-INSERT INTO `item_latents` VALUES (17591,25,12,49,4596); -- (wild pamamas)
-INSERT INTO `item_latents` VALUES (17591,171,80,49,4468); -- (pamamas)
-INSERT INTO `item_latents` VALUES (17591,171,80,49,4596); -- (wild pamamas)
-INSERT INTO `item_latents` VALUES (17592,25,10,49,4468); -- Kinkobo (pamamas)
-INSERT INTO `item_latents` VALUES (17592,25,10,49,4596); -- (wild pamamas)
-INSERT INTO `item_latents` VALUES (17592,171,83,49,4468); -- (pamamas)
-INSERT INTO `item_latents` VALUES (17592,171,83,49,4596); -- (wild pamamas)
+INSERT INTO `item_latents` VALUES  (17581,17,15,31,0);    -- Mighty Pole [Element: Wind]+15 on Windsday
+INSERT INTO `item_latents` VALUES  (17581,111,13,31,0);   -- Mighty Pole Divine magic skill +13 Windsday
+INSERT INTO `item_latents` VALUES  (17581,115,13,31,0);   -- Mighty Pole Elemental magic skill +13 Windsday
+INSERT INTO `item_latents` VALUES  (17589,165,6,47,0);    -- Thyrsusstab Crit Rate +6% when broken (500 WS points)
+INSERT INTO `item_latents` VALUES  (17589,287,13,47,0);   -- Thyrsusstab DMG+13 when broken (500 WS points)
+INSERT INTO `item_latents` VALUES  (17590,25,10,49,4468); -- Primate Staff (pamamas)
+INSERT INTO `item_latents` VALUES  (17590,25,10,49,4596); -- (wild pamamas)
+INSERT INTO `item_latents` VALUES  (17590,171,83,49,4468); -- (pamamas)
+INSERT INTO `item_latents` VALUES  (17590,171,83,49,4596); -- (wild pamamas)
+INSERT INTO `item_latents` VALUES  (17591,25,12,49,4468); -- Primate Staff +1 (pamamas)
+INSERT INTO `item_latents` VALUES  (17591,25,12,49,4596); -- (wild pamamas)
+INSERT INTO `item_latents` VALUES  (17591,171,80,49,4468); -- (pamamas)
+INSERT INTO `item_latents` VALUES  (17591,171,80,49,4596); -- (wild pamamas)
+INSERT INTO `item_latents` VALUES  (17592,25,10,49,4468); -- Kinkobo (pamamas)
+INSERT INTO `item_latents` VALUES  (17592,25,10,49,4596); -- (wild pamamas)
+INSERT INTO `item_latents` VALUES  (17592,171,83,49,4468); -- (pamamas)
+INSERT INTO `item_latents` VALUES  (17592,171,83,49,4596); -- (wild pamamas)
 
 -- Diabolos's Pole
 INSERT INTO `item_latents` VALUES (17599,315,25,52,8);   -- +25% drain/aspir potency in Dark weather
 
-INSERT INTO `item_latents` VALUES (17616,2,-20,47,0);
-INSERT INTO `item_latents` VALUES (17616,16,-10,47,0);
-INSERT INTO `item_latents` VALUES (17616,18,-10,47,0);
+INSERT INTO `item_latents` VALUES  (17616,2,-20,47,0);
+INSERT INTO `item_latents` VALUES  (17616,16,-10,47,0);
+INSERT INTO `item_latents` VALUES  (17616,18,-10,47,0);
 
 -- Daylight Dagger
 INSERT INTO `item_latents` VALUES (17619,25,12,26,0);    -- Daytime: ACC +12
 
-INSERT INTO `item_latents` VALUES (17624,165,7,13,3);
+INSERT INTO `item_latents` VALUES  (17624,165,7,13,3);
 
 -- Nightmare Sword
 INSERT INTO `item_latents` VALUES (17649,25,12,26,1);    -- Nighttime: ACC +12
 
-INSERT INTO `item_latents` VALUES (17654,2,-20,47,0);
-INSERT INTO `item_latents` VALUES (17654,15,-10,47,0);
-INSERT INTO `item_latents` VALUES (17654,17,-10,47,0);
-INSERT INTO `item_latents` VALUES (17661,27,5,58,0);     -- Storm Scimitar Enmity +5 in Assault
-INSERT INTO `item_latents` VALUES (17661,287,4,58,0);    -- Storm Scimitar DMG+4 in Assault
+INSERT INTO `item_latents` VALUES  (17654,2,-20,47,0);
+INSERT INTO `item_latents` VALUES  (17654,15,-10,47,0);
+INSERT INTO `item_latents` VALUES  (17654,17,-10,47,0);
 
 -- Company Sword
 INSERT INTO `item_latents` VALUES (17662,287,2,15,3);    -- DMG: 46~54, increases by 2 for every person above 2 in party
@@ -1820,10 +1853,10 @@ INSERT INTO `item_latents` VALUES (17677,2,20,53,1);     -- HP +20 in areas outs
 INSERT INTO `item_latents` VALUES (17680,5,18,53,1);     -- MP +18 in areas outside own nation's control
 INSERT INTO `item_latents` VALUES (17681,5,20,53,1);     -- MP +20 in areas outside own nation's control
 
-INSERT INTO `item_latents` VALUES (17697,17,15,31,0);    -- Mighty Talwar [Element: Wind]+15 on Windsday
-INSERT INTO `item_latents` VALUES (17697,287,8,31,0);    -- Mighty Talwar DMG+8 on Windsday
-INSERT INTO `item_latents` VALUES (17699,165,6,47,0);    -- Dissector Crit Rate +6% when broken (500 WS points)
-INSERT INTO `item_latents` VALUES (17699,287,13,47,0);   -- Dissector DMG+13 when broken (500 WS points)
+INSERT INTO `item_latents` VALUES  (17697,17,15,31,0);    -- Mighty Talwar [Element: Wind]+15 on Windsday
+INSERT INTO `item_latents` VALUES  (17697,287,8,31,0);    -- Mighty Talwar DMG+8 on Windsday
+INSERT INTO `item_latents` VALUES  (17699,165,6,47,0);    -- Dissector Crit Rate +6% when broken (500 WS points)
+INSERT INTO `item_latents` VALUES  (17699,287,13,47,0);   -- Dissector DMG+13 when broken (500 WS points)
 
 -- Shiva's Shotel
 INSERT INTO `item_latents` VALUES (17711,431,1,21,14);   -- Additional effect: Ice damage
@@ -1846,13 +1879,12 @@ INSERT INTO `item_latents` VALUES (17741,23,15,6,1000);  -- Attack+15 while TP <
 INSERT INTO `item_latents` VALUES (17741,25,5,6,1000);   -- Accuracy+5 while TP <100%
 INSERT INTO `item_latents` VALUES (17741,287,6,6,1000);  -- DMG+6 while TP <100%
 
-INSERT INTO `item_latents` VALUES (17759,165,7,59,20);   -- Koggelmander - Vs. vermin: Critical hit rate +7%
+-- Sylphid Epee
+INSERT INTO `item_latents` VALUES (17754,23,10,31,0); -- Windsday: Attack +10
 
-INSERT INTO `item_latents` VALUES (17761,287,6,40,0);    -- Oberon's Rapier DMG+6 in Main hand
+INSERT INTO `item_latents` VALUES  (17759,165,7,59,20);   -- Koggelmander - Vs. vermin: Critical hit rate +7%
 
-INSERT INTO `item_latents` VALUES (17762,287,4,40,0);    -- Erlking's Sword DMG+4 in Main hand
-
-INSERT INTO `item_latents` VALUES (17763,287,6,40,0);    -- Erlking's Blade DMG+6 in Main hand
+INSERT INTO `item_latents` VALUES  (17761,287,6,40,0);    -- Oberon's Rapier DMG+6 in Main hand
 
 -- Lyft Scimitar
 INSERT INTO `item_latents` VALUES (17766,10,2,16,3);     -- VIT +1~4,party size 3+. Effect strengthens with more members
@@ -1860,16 +1892,16 @@ INSERT INTO `item_latents` VALUES (17766,10,2,16,4);     -- VIT +1~4,party size 
 INSERT INTO `item_latents` VALUES (17766,10,2,16,5);     -- VIT +1~4,party size 3+. Effect strengthens with more members
 INSERT INTO `item_latents` VALUES (17766,10,2,16,6);     -- VIT +1~4,party size 3+. Effect strengthens with more members
 
-INSERT INTO `item_latents` VALUES (17773,2,-20,47,0);
-INSERT INTO `item_latents` VALUES (17773,15,-10,47,0);
-INSERT INTO `item_latents` VALUES (17773,21,-10,47,0);
-INSERT INTO `item_latents` VALUES (17788,8,4,32,0);      -- Sairen STR +4 on Darksday (has 3 base STR to total +7)
-INSERT INTO `item_latents` VALUES (17788,27,1,32,0);     -- Enmity +1
-INSERT INTO `item_latents` VALUES (17791,15,15,28,0);    -- Rai Kunimitsu [Element: Fire]+15 on Firesday
-INSERT INTO `item_latents` VALUES (17791,287,7,28,0);    -- Rai Kunimitsu DMG+7 on Firesday
-INSERT INTO `item_latents` VALUES (17793,165,6,47,0);    -- Senjuinrikio Crit Rate +6% when broken (500 WS points)
-INSERT INTO `item_latents` VALUES (17793,287,13,47,0);   -- Senjuinrikio DMG+13 when broken (500 WS points)
-INSERT INTO `item_latents` VALUES (17804,25,7,59,6);     -- Ushikirimaru - Vs. beasts: Accuracy+7
+INSERT INTO `item_latents` VALUES  (17773,2,-20,47,0);
+INSERT INTO `item_latents` VALUES  (17773,15,-10,47,0);
+INSERT INTO `item_latents` VALUES  (17773,21,-10,47,0);
+INSERT INTO `item_latents` VALUES  (17788,8,4,32,0);      -- Sairen STR +4 on Darksday (has 3 base STR to total +7)
+INSERT INTO `item_latents` VALUES  (17788,27,1,32,0);     -- Enmity +1
+INSERT INTO `item_latents` VALUES  (17791,15,15,28,0);    -- Rai Kunimitsu [Element: Fire]+15 on Firesday
+INSERT INTO `item_latents` VALUES  (17791,287,7,28,0);    -- Rai Kunimitsu DMG+7 on Firesday
+INSERT INTO `item_latents` VALUES  (17793,165,6,47,0);    -- Senjuinrikio Crit Rate +6% when broken (500 WS points)
+INSERT INTO `item_latents` VALUES  (17793,287,13,47,0);   -- Senjuinrikio DMG+13 when broken (500 WS points)
+INSERT INTO `item_latents` VALUES  (17804,25,7,59,6);     -- Ushikirimaru - Vs. beasts: Accuracy+7
 
 -- Futsuno Mitama
 INSERT INTO `item_latents` VALUES (17810,8,8,6,1);       -- Latent effect: STR+8
@@ -1890,7 +1922,7 @@ INSERT INTO `item_latents` VALUES (17831,370,1,13,19);
 -- Oliphant
 INSERT INTO `item_latents` VALUES (17843,121,3,53,1);    -- WIND +3 in areas outside own nation's control
 
-INSERT INTO `item_latents` VALUES (17851,442,1,58,0);    -- storm fife
+INSERT INTO `item_latents` VALUES  (17851,442,1,58,0);    -- storm fife
 
 -- Combat Caster's Axe +1/+2
 INSERT INTO `item_latents` VALUES (17931,9,2,53,1);      -- DEX +2 in areas outside own nation's control
@@ -1917,8 +1949,8 @@ INSERT INTO `item_latents` VALUES (17946,287,6,6,1000);  -- DMG+6 while TP <100%
 INSERT INTO `item_latents` VALUES (17947,24,3,53,0);     -- RATK +3 in areas inside own nation's control
 INSERT INTO `item_latents` VALUES (17947,26,3,53,0);     -- RACC +3 in areas inside own nation's control
 
-INSERT INTO `item_latents` VALUES (17950,287,4,58,0);    -- Marid Ancus dmg +4
-INSERT INTO `item_latents` VALUES (17950,391,2,58,0);    -- charm +2
+INSERT INTO `item_latents` VALUES  (17950,287,4,58,0);    -- Marid Ancus dmg +4
+INSERT INTO `item_latents` VALUES  (17950,391,2,58,0);    -- charm +2
 
 -- Sirius Axe
 INSERT INTO `item_latents` VALUES (17952,287,2,16,3);    -- DMG: 43~51, increases by 2 for every person above 2 in party
@@ -1926,9 +1958,9 @@ INSERT INTO `item_latents` VALUES (17952,287,2,16,4);    -- DMG: 43~51, increase
 INSERT INTO `item_latents` VALUES (17952,287,2,16,5);    -- DMG: 43~51, increases by 2 for every person above 2 in party
 INSERT INTO `item_latents` VALUES (17952,287,2,16,6);    -- DMG: 43~51, increases by 2 for every person above 2 in party
 
-INSERT INTO `item_latents` VALUES (17964,165,7,59,17);   -- Barkborer - Vs. plantoid: Critical hit rate +7%
+INSERT INTO `item_latents` VALUES  (17964,165,7,59,17);   -- Barkborer - Vs. plantoid: Critical hit rate +7%
 
-INSERT INTO `item_latents` VALUES (17966,287,4,40,0);    -- Erlking's Tabar DMG+4 in Main hand
+INSERT INTO `item_latents` VALUES  (17966,287,4,40,0);    -- Erlking's Tabar DMG+4 in Main hand
 
 -- Lyft Tabar
 INSERT INTO `item_latents` VALUES (17970,9,1,16,3);      -- DEX +1~4,party size 3+. Effect strengthens with more members
@@ -1965,10 +1997,10 @@ INSERT INTO `item_latents` VALUES (17983,287,1,0,92);    -- DMG: 24~35, increase
 INSERT INTO `item_latents` VALUES (17990,5,14,53,1);     -- MP +14 in areas outside own nation's control
 INSERT INTO `item_latents` VALUES (17991,5,16,53,1);     -- MP +16 in areas outside own nation's control
 
-INSERT INTO `item_latents` VALUES (18000,17,15,31,0);    -- Mighty Knife [Element: Wind]+15 on Windsday
-INSERT INTO `item_latents` VALUES (18000,287,10,31,0);   -- Mighty Knife DMG+10 on Windsday
-INSERT INTO `item_latents` VALUES (18005,165,6,47,0);    -- Heart Snatcher Crit Rate +6% when broken (500 WS points)
-INSERT INTO `item_latents` VALUES (18005,287,15,47,0);   -- Heart Snatcher DMG+15 when broken (500 WS points)
+INSERT INTO `item_latents` VALUES  (18000,17,15,31,0);    -- Mighty Knife [Element: Wind]+15 on Windsday
+INSERT INTO `item_latents` VALUES  (18000,287,10,31,0);   -- Mighty Knife DMG+10 on Windsday
+INSERT INTO `item_latents` VALUES  (18005,165,6,47,0);    -- Heart Snatcher Crit Rate +6% when broken (500 WS points)
+INSERT INTO `item_latents` VALUES  (18005,287,15,47,0);   -- Heart Snatcher DMG+15 when broken (500 WS points)
 
 -- Blau Dolch
 INSERT INTO `item_latents` VALUES (18015,23,16,6,1000);  -- Attack+16 while TP <100%
@@ -1981,17 +2013,17 @@ INSERT INTO `item_latents` VALUES (18021,287,5,21,11);   -- DMG+5 when a party m
 -- Windurstian Scythe/Federation Scythe
 INSERT INTO `item_latents` VALUES (18036,5,10,53,1);     -- MP +10 in areas outside own nation's control
 
-INSERT INTO `item_latents` VALUES (18037,5,12,53,1);     -- MP +12 in areas outside own nation's control
-INSERT INTO `item_latents` VALUES (18049,17,15,31,0);    -- Mighty Zaghnal [Element: Wind]+15 on Windsday
-INSERT INTO `item_latents` VALUES (18049,287,8,31,0);    -- Mighty Zaghnal DMG+8 on Windsday
-INSERT INTO `item_latents` VALUES (18053,165,6,47,0);    -- Gravedigger Crit Rate +6% when broken (500 WS points)
-INSERT INTO `item_latents` VALUES (18053,287,13,47,0);   -- Gravedigger DMG+13 when broken (500 WS points)
+INSERT INTO `item_latents` VALUES  (18037,5,12,53,1);     -- MP +12 in areas outside own nation's control
+INSERT INTO `item_latents` VALUES  (18049,17,15,31,0);    -- Mighty Zaghnal [Element: Wind]+15 on Windsday
+INSERT INTO `item_latents` VALUES  (18049,287,8,31,0);    -- Mighty Zaghnal DMG+8 on Windsday
+INSERT INTO `item_latents` VALUES  (18053,165,6,47,0);    -- Gravedigger Crit Rate +6% when broken (500 WS points)
+INSERT INTO `item_latents` VALUES  (18053,287,13,47,0);   -- Gravedigger DMG+13 when broken (500 WS points)
 
 -- Garuda's Sickle
 INSERT INTO `item_latents` VALUES (18063,25,13,21,13);
 
-INSERT INTO `item_latents` VALUES (18064,23,6,58,0);     -- Volunteer's Scythe Attack +6 in Assault
-INSERT INTO `item_latents` VALUES (18064,287,2,58,0);    -- Volunteer's Scythe DMG+2 in Assault
+INSERT INTO `item_latents` VALUES  (18064,23,6,58,0);     -- Volunteer's Scythe Attack +6 in Assault
+INSERT INTO `item_latents` VALUES  (18064,287,2,58,0);    -- Volunteer's Scythe DMG+2 in Assault
 
 -- San d'Orian Halberd / Kingdom Halberd
 INSERT INTO `item_latents` VALUES (18070,25,3,53,1);     -- ACC +3 in areas outside own nation's control
@@ -2004,14 +2036,14 @@ INSERT INTO `item_latents` VALUES (18073,23,9,53,1);     -- ATT +9 in areas outs
 -- Rossignol
 INSERT INTO `item_latents` VALUES (18075,8,2,26,2);      -- Dusk - Dawn: STR +2
 
-INSERT INTO `item_latents` VALUES (18084,9,6,56,0);      -- Rune Halberd +6 DEX
-INSERT INTO `item_latents` VALUES (18084,288,5,56,0);    -- Rune Halberd +5% Dbl.Atk.
-INSERT INTO `item_latents` VALUES (18084,369,-3,56,0);   -- Rune Halberd -3MP/tic
+INSERT INTO `item_latents` VALUES  (18084,9,6,56,0);      -- Rune Halberd +6 DEX
+INSERT INTO `item_latents` VALUES  (18084,288,5,56,0);    -- Rune Halberd +5% Dbl.Atk.
+INSERT INTO `item_latents` VALUES  (18084,369,-3,56,0);   -- Rune Halberd -3MP/tic
 
-INSERT INTO `item_latents` VALUES (18091,15,15,28,0);    -- Mighty Lance [Element: Fire]+15 on Firesday
-INSERT INTO `item_latents` VALUES (18091,287,12,28,0);   -- Mighty Lance DMG+12 on Firesday
-INSERT INTO `item_latents` VALUES (18097,165,6,47,0);    -- Gondo-Shizunori Crit Rate +6% when broken (500 WS points)
-INSERT INTO `item_latents` VALUES (18097,287,13,47,0);   -- Gondo-Shizunori DMG+13 when broken (500 WS points)
+INSERT INTO `item_latents` VALUES  (18091,15,15,28,0);    -- Mighty Lance [Element: Fire]+15 on Firesday
+INSERT INTO `item_latents` VALUES  (18091,287,12,28,0);   -- Mighty Lance DMG+12 on Firesday
+INSERT INTO `item_latents` VALUES  (18097,165,6,47,0);    -- Gondo-Shizunori Crit Rate +6% when broken (500 WS points)
+INSERT INTO `item_latents` VALUES  (18097,287,13,47,0);   -- Gondo-Shizunori DMG+13 when broken (500 WS points)
 
 -- Stone-splitter
 INSERT INTO `item_latents` VALUES (18099,23,24,6,1000);  -- Attack+24 while TP <100%
@@ -2021,7 +2053,7 @@ INSERT INTO `item_latents` VALUES (18099,287,5,6,1000);  -- DMG+5 while TP <100%
 -- Leviathan's Couse
 -- TODO: INSERT INTO `item_latents` VALUES (18109,431,1,21,12); -- Additional effect: Water damage while you or a party member has Leviathan summoned
 
-INSERT INTO `item_latents` VALUES (18112,287,9,58,0);    -- Puk Lance DMG+9 in Assault
+INSERT INTO `item_latents` VALUES  (18112,287,9,58,0);    -- Puk Lance DMG+9 in Assault
 -- TODO: -- Puk Lance Wyvern: HP +50 in Assault
 
 -- Combat Caster's Boomerang +1/+2
@@ -2043,6 +2075,9 @@ INSERT INTO `item_latents` VALUES (18143,26,8,62,12);     -- RACC +8 for Samurai
 INSERT INTO `item_latents` VALUES (18144,2,-20,47,0);
 INSERT INTO `item_latents` VALUES (18144,17,-10,47,0);
 INSERT INTO `item_latents` VALUES (18144,19,-10,47,0);
+
+INSERT INTO `item_latents` VALUES (18145,26,7,70,2);     -- Master Casters Bow
+
 INSERT INTO `item_latents` VALUES (18146,2,-20,47,0);
 INSERT INTO `item_latents` VALUES (18146,18,-10,47,0);
 INSERT INTO `item_latents` VALUES (18146,20,-10,47,0);
@@ -2051,16 +2086,17 @@ INSERT INTO `item_latents` VALUES (18146,20,-10,47,0);
 INSERT INTO `item_latents` VALUES (18165,2,30,26,0);     -- Daytime: HP+30
 INSERT INTO `item_latents` VALUES (18165,68,10,26,1);    -- Nighttime: Evasion+10
 
-INSERT INTO `item_latents` VALUES (18206,25,5,56,0);     -- Rune Chopper +5 Acc.
-INSERT INTO `item_latents` VALUES (18206,369,-3,56,0);   -- Rune Chopper -3MP/tic
-INSERT INTO `item_latents` VALUES (18206,384,900,56,0);  -- Rune Chopper +9% haste
-INSERT INTO `item_latents` VALUES (18213,15,15,28,0);    -- Mighty Axe [Element: Fire]+15 on Firesday
-INSERT INTO `item_latents` VALUES (18213,287,10,28,0);   -- Mighty Axe DMG+10 on Firesday
-INSERT INTO `item_latents` VALUES (18217,165,6,47,0);    -- Rampager Crit Rate +6% when broken (500 WS points)
-INSERT INTO `item_latents` VALUES (18217,287,13,47,0);   -- Rampager DMG+13 when broken (500 WS points)
-INSERT INTO `item_latents` VALUES (18256,23,1,25,0);     -- Orphic Egg,ATT+1 song/roll active
-INSERT INTO `item_latents` VALUES (18256,25,1,25,0);     -- Orphic Egg,ACC+1 song/roll active
-INSERT INTO `item_latents` VALUES (18256,68,1,25,0);     -- Orphic Egg,EVA+1 song/roll active
+INSERT INTO `item_latents` VALUES  (18196,23,10,70,1);    -- Senior Musketeers Axe
+INSERT INTO `item_latents` VALUES  (18206,25,5,56,0);     -- Rune Chopper +5 Acc.
+INSERT INTO `item_latents` VALUES  (18206,369,-3,56,0);   -- Rune Chopper -3MP/tic
+INSERT INTO `item_latents` VALUES  (18206,384,900,56,0);  -- Rune Chopper +9% haste
+INSERT INTO `item_latents` VALUES  (18213,15,15,28,0);    -- Mighty Axe [Element: Fire]+15 on Firesday
+INSERT INTO `item_latents` VALUES  (18213,287,10,28,0);   -- Mighty Axe DMG+10 on Firesday
+INSERT INTO `item_latents` VALUES  (18217,165,6,47,0);    -- Rampager Crit Rate +6% when broken (500 WS points)
+INSERT INTO `item_latents` VALUES  (18217,287,13,47,0);   -- Rampager DMG+13 when broken (500 WS points)
+INSERT INTO `item_latents` VALUES  (18256,23,1,25,0);     -- Orphic Egg,ATT+1 song/roll active
+INSERT INTO `item_latents` VALUES  (18256,25,1,25,0);     -- Orphic Egg,ACC+1 song/roll active
+INSERT INTO `item_latents` VALUES  (18256,68,1,25,0);     -- Orphic Egg,EVA+1 song/roll active
 
 -- Militant Knuckles
 INSERT INTO `item_latents` VALUES (18261,20,7,48,0);     -- [Element: Water]+7 in Dynamis
@@ -2186,8 +2222,8 @@ INSERT INTO `item_latents` VALUES (18345,287,67,48,0);   -- DMG:68 in Dynamis
 INSERT INTO `item_latents` VALUES (18346,20,9,48,0);     -- [Element: Water]+9 in Dynamis
 INSERT INTO `item_latents` VALUES (18346,287,3,48,0);    -- DMG:71 in Dynamis
 
-INSERT INTO `item_latents` VALUES (18352,15,15,28,0);    -- Mighty Patas [Element: Fire]+15
-INSERT INTO `item_latents` VALUES (18352,287,5,28,0);    -- Mighty Patas DMG+10 on Firesday
+INSERT INTO `item_latents` VALUES  (18352,15,15,28,0);    -- Mighty Patas [Element: Fire]+15
+INSERT INTO `item_latents` VALUES  (18352,287,5,28,0);    -- Mighty Patas DMG+10 on Firesday
 
 -- Wagh Baghnakhs
 INSERT INTO `item_latents` VALUES (18358,23,14,6,1000);  -- Attack+14 while TP <100%
@@ -2222,12 +2258,22 @@ INSERT INTO `item_latents` VALUES (18425,23,10,6,1000);  -- Attack+10 while TP <
 INSERT INTO `item_latents` VALUES (18425,25,5,6,1000);   -- Accuracy+5 while TP <100%
 INSERT INTO `item_latents` VALUES (18425,287,5,6,1000);  -- DMG+5 while TP <100%
 
-INSERT INTO `item_latents` VALUES (18434,73,2,58,0);     -- Kosetsusamonji Store TP +2 in Assault
-INSERT INTO `item_latents` VALUES (18434,287,3,58,0);    -- Kosetsusamonji DMG+3 in Assault
-INSERT INTO `item_latents` VALUES (18438,165,8,59,20);   -- Kumokirimaru - Vs. vermin: Critical hit rate +8%
+INSERT INTO `item_latents` VALUES  (18434,73,2,58,0);     -- Kosetsusamonji Store TP +2 in Assault
+INSERT INTO `item_latents` VALUES  (18434,287,3,58,0);    -- Kosetsusamonji DMG+3 in Assault
+INSERT INTO `item_latents` VALUES  (18438,165,8,59,20);   -- Kumokirimaru - Vs. vermin: Critical hit rate +8%
 
 -- Amakura
 INSERT INTO `item_latents` VALUES (18445,73,10,0,50);    -- "Store TP"+10 when HP <50%
+
+--  Unshomaru
+INSERT INTO `item_latents` VALUES (18453,8,1,16,1);
+INSERT INTO `item_latents` VALUES (18453,8,1,16,2);
+INSERT INTO `item_latents` VALUES (18453,8,1,16,3);
+INSERT INTO `item_latents` VALUES (18453,8,1,16,4);
+INSERT INTO `item_latents` VALUES (18453,73,2,16,1);
+INSERT INTO `item_latents` VALUES (18453,73,2,16,2);
+INSERT INTO `item_latents` VALUES (18453,73,2,16,3);
+INSERT INTO `item_latents` VALUES (18453,73,2,16,4);
 
 INSERT INTO `item_latents` VALUES (18484,287,5,58,0);    -- Wamoura Axe DMG+5 in Assault
 INSERT INTO `item_latents` VALUES (18484,288,1,58,0);    -- Wamoura Axe Double Attack +1% in Assault
@@ -2238,7 +2284,17 @@ INSERT INTO `item_latents` VALUES (18491,23,10,6,1000);  -- Attack+10 while TP <
 INSERT INTO `item_latents` VALUES (18491,25,5,6,1000);   -- Accuracy+5 while TP <100%
 INSERT INTO `item_latents` VALUES (18491,287,5,6,1000);  -- DMG+5 while TP <100%
 
-INSERT INTO `item_latents` VALUES (18504,165,7,59,17);   -- Eventreuse - Vs. plantoid: Critical hit rate +7%
+INSERT INTO `item_latents` VALUES (18497,8,8,6,500);     -- Foolkiller
+
+-- Wootz Amood
+INSERT INTO `item_latents` VALUES (18495,865,50,37,2);   -- First Quarter Moon: Occ Attacks Twice
+INSERT INTO `item_latents` VALUES (18495,287,-33,37,2);   -- First Quarter Moon: DMG 57
+
+-- Wootz Amood +1
+INSERT INTO `item_latents` VALUES (18496,865,50,37,2);   -- First Quarter Moon: Occ Attacks Twice
+INSERT INTO `item_latents` VALUES (18496,287,-33,37,2);   -- First Quarter Moon: DMG 57
+
+INSERT INTO `item_latents` VALUES  (18504,165,7,59,17);   -- Eventreuse - Vs. plantoid: Critical hit rate +7%
 
 -- Lyft Voulge
 INSERT INTO `item_latents` VALUES (18508,8,1,16,3);      -- STR +1~4,party size 3+. Effect strengthens with more members
@@ -2253,19 +2309,30 @@ INSERT INTO `item_latents` VALUES (18508,25,2,16,6);     -- ACC +2~8,party size 
 -- Carbuncle's Pole-
 INSERT INTO `item_latents` VALUES (18581,431,2,21,8);    -- Additional effect: Light damage
 
-INSERT INTO `item_latents` VALUES (18582,6,2,58,0);      -- Yigit Staff MP% +2 in Assault
-INSERT INTO `item_latents` VALUES (18582,287,1,58,0);    -- Yigit Staff DMG+1 in Assault
+INSERT INTO `item_latents` VALUES  (18582,6,2,58,0);      -- Yigit Staff MP% +2 in Assault
+INSERT INTO `item_latents` VALUES  (18582,287,1,58,0);    -- Yigit Staff DMG+1 in Assault
 
 -- Perdu Staff
 INSERT INTO `item_latents` VALUES (18588,23,10,6,1000);  -- Attack+10 while TP <100%
 INSERT INTO `item_latents` VALUES (18588,25,6,6,1000);   -- Accuracy+6 while TP <100%
 INSERT INTO `item_latents` VALUES (18588,287,6,6,1000);  -- DMG+6 while TP <100%
 
-INSERT INTO `item_latents` VALUES (18683,26,10,58,0);    -- Imperial Bow Ranged Accuracy +10 in Assault
-INSERT INTO `item_latents` VALUES (18683,287,2,58,0);    -- Imperial Bow DMG+2 in Assault
+-- Lyft Pole
+INSERT INTO `item_latents` VALUES (18609,23,2,16,2);
+INSERT INTO `item_latents` VALUES (18609,23,2,16,4);
+INSERT INTO `item_latents` VALUES (18609,23,2,16,6);
+INSERT INTO `item_latents` VALUES (18609,23,2,16,8);
 
-INSERT INTO `item_latents` VALUES (18684,24,10,58,0);    -- Storm Zamburak Ranged Attack +10 in Assault
-INSERT INTO `item_latents` VALUES (18684,287,2,58,0);    -- Storm Zamburak DMG+2 in Assault
+INSERT INTO `item_latents` VALUES  (18683,26,10,58,0);    -- Imperial Bow Ranged Accuracy +10 in Assault
+INSERT INTO `item_latents` VALUES  (18683,287,2,58,0);    -- Imperial Bow DMG+2 in Assault
+
+INSERT INTO `item_latents` VALUES  (18684,24,10,58,0);    -- Storm Zamburak Ranged Attack +10 in Assault
+INSERT INTO `item_latents` VALUES  (18684,287,2,58,0);    -- Storm Zamburak DMG+2 in Assault
+
+INSERT INTO `item_latents` VALUES (18708,8,5,13,3); -- Snakeye and Snakeeye +1
+INSERT INTO `item_latents` VALUES (18708,404,20,13,3);
+INSERT INTO `item_latents` VALUES (18709,8,6,13,3);
+INSERT INTO `item_latents` VALUES (18709,404,20,13,3);
 
 -- Perdu Bow
 INSERT INTO `item_latents` VALUES (18717,24,10,6,1000);  -- Ranged Attack+10 while TP <100%,changed to value on bg since it is different value than ffxicyclopedia
@@ -2322,11 +2389,13 @@ INSERT INTO `item_latents` VALUES (18852,978,6,38,8);    -- Occasionally attacks
 INSERT INTO `item_latents` VALUES (18859,370,3,0,50);    -- Regen+3 when HP <51%
 
 INSERT INTO `item_latents` VALUES (18865,165,7,59,20);   -- Zonure - Vs. vermin: Critical hit rate +7%
-INSERT INTO `item_latents` VALUES (18870,287,3,40,0);    -- Dweomer Maul DMG+3 in Main hand
 
 -- Hannibal's Sword
 INSERT INTO `item_latents` VALUES (18891,368,10,56,0);       -- Regain +10
 INSERT INTO `item_latents` VALUES (18891,369,-3,56,0);       -- Refresh -3
+
+-- Dweomer Maul 
+INSERT INTO `item_latents` VALUES (18870,287,3,40,0); -- DMG+3 in Main hand
 
 -- Chimeric Fleuret
 INSERT INTO `item_latents` VALUES (18895,288,4,13,94);       -- Double attack +4 ENFIRE
@@ -2392,18 +2461,24 @@ INSERT INTO `item_latents` VALUES (19081,976,5,13,60);   -- Guard +5% if Dodge A
 -- Zareehkl Jambiya
 INSERT INTO `item_latents` VALUES (19108,287,5,0,75);    -- DNG:36 when HP <=75%
 
--- INSERT INTO `item_latents` VALUES (19110,132,1,24,x); -- Trainee's Needle - : +1 Leather craft (x not implemented)
-INSERT INTO `item_latents` VALUES (19113,165,7,59,14);   -- Ermine's Tail - Vs. lizards: Critical hit rate +7%
+-- Trilling Dagger 
+INSERT INTO `item_latents` VALUES (19109,23,10,13,6);    -- +10 attack when silenced
 
-INSERT INTO `item_latents` VALUES (19115,287,5,40,0);    -- Fane Baselard DMG+5 in Main hand
+INSERT INTO `item_latents` VALUES  (19110,132,1,24,40);   -- Trainee's Needle - : +1 Leather craft (Under Level 40)
+INSERT INTO `item_latents` VALUES  (19113,165,7,59,14);   -- Ermine's Tail - Vs. lizards: Critical hit rate +7%
 
-INSERT INTO `item_latents` VALUES (19116,287,3,40,0);    -- Dweomer Knife DMG+3 in Main hand
+INSERT INTO `item_latents` VALUES  (19115,287,5,40,0);    -- Fane Baselard DMG+5 in Main hand
 
-INSERT INTO `item_latents` VALUES (19117,287,6,40,0);    -- Ogre Jambiya DMG+6 in Main hand
+INSERT INTO `item_latents` VALUES  (19116,287,3,40,0);    -- Dweomer Knife DMG+3 in Main hand
 
-INSERT INTO `item_latents` VALUES (19120,25,6,13,368);
-INSERT INTO `item_latents` VALUES (19120,25,6,13,369);
-INSERT INTO `item_latents` VALUES (19120,25,6,13,370);
+INSERT INTO `item_latents` VALUES  (19117,287,6,40,0);    -- Ogre Jambiya DMG+6 in Main hand
+
+INSERT INTO `item_latents` VALUES  (19120,25,6,13,368);
+INSERT INTO `item_latents` VALUES  (19120,25,6,13,369);
+INSERT INTO `item_latents` VALUES  (19120,25,6,13,370);
+
+-- Cinquedea  
+INSERT INTO `item_latents` VALUES (19123,73,5,7,1000);
 
 -- Lyft Jambiya
 INSERT INTO `item_latents` VALUES (19125,9,1,16,3);      -- DEX +1~4,party size 3+. Effect strengthens with more members
@@ -2416,7 +2491,7 @@ INSERT INTO `item_latents` VALUES (19126,23,14,6,1000);      -- ATT+14 TP<1000
 INSERT INTO `item_latents` VALUES (19126,25,5,6,1000);       -- ACC+5  TP<1000
 INSERT INTO `item_latents` VALUES (19126,287,6,6,1000);      -- DMG+6  TP<1000
 
-INSERT INTO `item_latents` VALUES (19158,165,7,59,14);   -- Scheherazade - Vs. lizards: Critical hit rate +7%
+INSERT INTO `item_latents` VALUES  (19158,165,7,59,14);   -- Scheherazade - Vs. lizards: Critical hit rate +7%
 
 -- Lyft Claymore
 INSERT INTO `item_latents` VALUES (19161,8,1,16,3);      -- STR +1~4,party size 3+. Effect strengthens with more members
@@ -2439,9 +2514,9 @@ INSERT INTO `item_latents` VALUES (19234,11,1,16,4);     -- AGI +1~4,party size 
 INSERT INTO `item_latents` VALUES (19234,11,1,16,5);     -- AGI +1~4,party size 3+. Effect strengthens with more members
 INSERT INTO `item_latents` VALUES (19234,11,1,16,6);     -- AGI +1~4,party size 3+. Effect strengthens with more members
 
-INSERT INTO `item_latents` VALUES (19273,165,7,59,6);    -- Onishibari - Vs. beasts: Critical hit rate +7%
+INSERT INTO `item_latents` VALUES  (19273,165,7,59,6);    -- Onishibari - Vs. beasts: Critical hit rate +7%
 
-INSERT INTO `item_latents` VALUES (19275,287,4,40,0);    -- Tsukumo DMG+4 in Main hand
+INSERT INTO `item_latents` VALUES  (19275,287,4,40,0);    -- Tsukumo DMG+4 in Main hand
 
 -- Musanto
 INSERT INTO `item_latents` VALUES (19279,9,1,16,3);      -- DEX +1~4,party size 3+. Effect strengthens with more members
@@ -2628,90 +2703,90 @@ INSERT INTO `item_latents` VALUES (21817,2,10,56,0);     -- HP+10
 INSERT INTO `item_latents` VALUES (21817,165,5,56,0);    -- Critical hit rate +5
 INSERT INTO `item_latents` VALUES (21817,369,-3,56,0);   -- Drains 3 MP/tic from player
 
--- INSERT INTO `item_latents` VALUES (21823,25,10,??,0); -- Abyss Scythe: (D): Accuracy+10
--- INSERT INTO `item_latents` VALUES (21823,30,10,??,0); -- Abyss Scythe: (D): Magic Accuracy+10
--- INSERT INTO `item_latents` VALUES (21824,25,10,??,0); -- Fallen's Scythe: (D): Accuracy+10
--- INSERT INTO `item_latents` VALUES (21824,30,10,??,0); -- Fallen's Scythe: (D): Magic Accuracy+10
--- INSERT INTO `item_latents` VALUES (21876,25,10,??,0); -- Wyrm Lance: (D): Accuracy+10
--- INSERT INTO `item_latents` VALUES (21876,30,10,??,0); -- Wyrm Lance: (D): Magic Accuracy+10
--- INSERT INTO `item_latents` VALUES (21877,25,10,??,0); -- Pteroslaver Lance: (D): Accuracy+10
--- INSERT INTO `item_latents` VALUES (21877,30,10,??,0); -- Pteroslaver Lance: (D): Magic Accuracy+10
--- INSERT INTO `item_latents` VALUES (21915,23,5,??,??); -- Koga shinobi-gatana: Attack+5 for each Utsusemi shadow image
--- INSERT INTO `item_latents` VALUES (21915,25,10,??,0); -- Koga shinobi-gatana: (D): Accuracy+10
--- INSERT INTO `item_latents` VALUES (21915,30,10,??,0); -- Koga shinobi-gatana: (D): Magic Accuracy+10
--- INSERT INTO `item_latents` VALUES (21916,23,10,??,??); -- Mochizuki shinobi-gatana: Attack+10 for each Utsusemi shadow image
--- INSERT INTO `item_latents` VALUES (21916,25,10,??,0); -- Mochizuki shinobi-gatana: (D): Accuracy+10
--- INSERT INTO `item_latents` VALUES (21916,30,10,??,0); -- Mochizuki shinobi-gatana: (D): Magic Accuracy+10
--- INSERT INTO `item_latents` VALUES (21917,23,15,??,??); -- Fudo Masamune: Attack+15 for each Utsusemi shadow image
--- INSERT INTO `item_latents` VALUES (21922,368,1,??,??); -- Gokotai: Regain based on Dual Wield,1 TP/tic for every 1 Dual Wield
--- INSERT INTO `item_latents` VALUES (21968,25,10,??,0); -- Saotome-no-Tachi: (D): Accuracy+10
--- INSERT INTO `item_latents` VALUES (21968,30,10,??,0); -- Saotome-no-Tachi: (D): Magic Accuracy+10
-INSERT INTO `item_latents` VALUES (21968,345,50,13,408); -- Saotome-no-Tachi: Sekkanoki: TP Bonus +50% based on remaining TP
--- INSERT INTO `item_latents` VALUES (21969,25,10,??,0); -- Sakonji-no-Tachi: (D): Accuracy+10
--- INSERT INTO `item_latents` VALUES (21969,30,10,??,0); -- Sakonji-no-Tachi: (D): Magic Accuracy+10
--- INSERT INTO `item_latents` VALUES (21969,??,50,??,0); -- Sakonji-no-Tachi: Sekkanoki: TP Bonus +60% based on remaining TP
--- INSERT INTO `item_latents` VALUES (21970,??,70,13,408); -- Fusenaikyo: Sekkanoki: TP Bonus +70% based on remaining TP
-INSERT INTO `item_latents` VALUES (21970,355,144,13,408); -- Fusenaikyo: Sekkanoki: Able to use all Great Katana weapon skills (Enpi)
-INSERT INTO `item_latents` VALUES (21970,355,145,13,408); -- Fusenaikyo: Sekkanoki: Able to use all Great Katana weapon skills (Hobaku)
-INSERT INTO `item_latents` VALUES (21970,355,146,13,408); -- Fusenaikyo: Sekkanoki: Able to use all Great Katana weapon skills (Goten)
-INSERT INTO `item_latents` VALUES (21970,355,147,13,408); -- Fusenaikyo: Sekkanoki: Able to use all Great Katana weapon skills (Kagero)
-INSERT INTO `item_latents` VALUES (21970,355,148,13,408); -- Fusenaikyo: Sekkanoki: Able to use all Great Katana weapon skills (Jinpu)
-INSERT INTO `item_latents` VALUES (21970,355,149,13,408); -- Fusenaikyo: Sekkanoki: Able to use all Great Katana weapon skills (Koki)
-INSERT INTO `item_latents` VALUES (21970,355,150,13,408); -- Fusenaikyo: Sekkanoki: Able to use all Great Katana weapon skills (Yukikaze)
-INSERT INTO `item_latents` VALUES (21970,355,151,13,408); -- Fusenaikyo: Sekkanoki: Able to use all Great Katana weapon skills (Gekko)
-INSERT INTO `item_latents` VALUES (21970,355,152,13,408); -- Fusenaikyo: Sekkanoki: Able to use all Great Katana weapon skills (Kasha)
-INSERT INTO `item_latents` VALUES (21970,355,153,13,408); -- Fusenaikyo: Sekkanoki: Able to use all Great Katana weapon skills (Kaiten)
-INSERT INTO `item_latents` VALUES (21970,355,154,13,408); -- Fusenaikyo: Sekkanoki: Able to use all Great Katana weapon skills (Rana)
-INSERT INTO `item_latents` VALUES (21970,355,155,13,408); -- Fusenaikyo: Sekkanoki: Able to use all Great Katana weapon skills (Ageha)
-INSERT INTO `item_latents` VALUES (21970,355,156,13,408); -- Fusenaikyo: Sekkanoki: Able to use all Great Katana weapon skills (Fudo)
-INSERT INTO `item_latents` VALUES (21970,355,157,13,408); -- Fusenaikyo: Sekkanoki: Able to use all Great Katana weapon skills (Shoha)
-INSERT INTO `item_latents` VALUES (21970,355,158,13,408); -- Fusenaikyo: Sekkanoki: Able to use all Great Katana weapon skills (Suikawari)
--- INSERT INTO `item_latents` VALUES (22031,??,??,??,0); -- Maxentius: Main hand: Increases magic burst damage based on skillchain length
--- INSERT INTO `item_latents` VALUES (22033,25,10,??,0); -- Cleric's Wand: (D): Accuracy+10
--- INSERT INTO `item_latents` VALUES (22033,30,10,??,0); -- Cleric's Wand: (D): Magic Accuracy+10
--- INSERT INTO `item_latents` VALUES (22033,??,??,??,0); -- Cleric's Wand: Afflatus Misery: Esuna removes one extra status ailment
--- INSERT INTO `item_latents` VALUES (22034,25,10,??,0); -- Piety Wand: (D): Accuracy+10
--- INSERT INTO `item_latents` VALUES (22034,30,10,??,0); -- Piety Wand: (D): Magic Accuracy+10
--- INSERT INTO `item_latents` VALUES (22034,??,??,??,0); -- Piety Wand: Afflatus Misery: Esuna removes two extra status ailments
--- INSERT INTO `item_latents` VALUES (22035,??,??,??,0); -- Asclepius: Afflatus Misery: Esuna removes three extra status ailments
--- INSERT INTO `item_latents` VALUES (22036,25,10,??,0); -- Bagua Wand: (D): Accuracy+10
--- INSERT INTO `item_latents` VALUES (22036,30,10,??,0); -- Bagua Wand: (D): Magic Accuracy+10
--- INSERT INTO `item_latents` VALUES (22037,25,10,??,0); -- Sifang Wand: (D): Accuracy+10
--- INSERT INTO `item_latents` VALUES (22037,30,10,??,0); -- Sifang Wand: (D): Magic Accuracy+10
--- INSERT INTO `item_latents` VALUES (22057,369,1,??,0); -- Contemplator: Unity Ranking: "Refresh"+1
--- INSERT INTO `item_latents` VALUES (22058,369,1,??,0); -- Contemplator +1: Unity Ranking: "Refresh"+1~2
--- INSERT INTO `item_latents` VALUES (22091,25,10,??,0); -- Sorcerer's Staff: (D): Accuracy+10
--- INSERT INTO `item_latents` VALUES (22091,30,10,??,0); -- Sorcerer's Staff: (D): Magic Accuracy+10
--- INSERT INTO `item_latents` VALUES (22092,25,10,??,0); -- Archmage's Staff: (D): Accuracy+10
--- INSERT INTO `item_latents` VALUES (22092,30,10,??,0); -- Archmage's Staff: (D): Magic Accuracy+10
--- INSERT INTO `item_latents` VALUES (22094,25,10,??,0); -- Summoner's Staff: (D): Accuracy+10
--- INSERT INTO `item_latents` VALUES (22094,30,10,??,0); -- Summoner's Staff: (D): Magic Accuracy+10
--- INSERT INTO `item_latents` VALUES (22094,??,30,??,0); -- Summoner's Staff: (D): Avatar: Accuracy+30
--- INSERT INTO `item_latents` VALUES (22094,??,30,??,0); -- Summoner's Staff: (D): Avatar: Ranged Accuracy+30
--- INSERT INTO `item_latents` VALUES (22094,??,30,??,0); -- Summoner's Staff: (D): Avatar: Magic Accuracy+30
--- INSERT INTO `item_latents` VALUES (22095,25,10,??,0); -- Glyphic Staff: (D): Accuracy+10
--- INSERT INTO `item_latents` VALUES (22095,30,10,??,0); -- Glyphic Staff: (D): Magic Accuracy+10
--- INSERT INTO `item_latents` VALUES (22095,??,40,??,0); -- Glyphic Staff: (D): Avatar: Accuracy+40
--- INSERT INTO `item_latents` VALUES (22095,??,40,??,0); -- Glyphic Staff: (D): Avatar: Ranged Accuracy+40
--- INSERT INTO `item_latents` VALUES (22095,??,40,??,0); -- Glyphic Staff: (D): Avatar: Magic Accuracy+40
--- INSERT INTO `item_latents` VALUES (22097,25,10,??,0); -- Argute Staff: (D): Accuracy+10
--- INSERT INTO `item_latents` VALUES (22097,30,10,??,0); -- Argute Staff: (D): Magic Accuracy+10
--- INSERT INTO `item_latents` VALUES (22098,25,10,??,0); -- Pedagogy Staff: (D): Accuracy+10
--- INSERT INTO `item_latents` VALUES (22098,30,10,??,0); -- Pedagogy Staff: (D): Magic Accuracy+10
-INSERT INTO `item_latents` VALUES (22118,24,35,13,198);  -- Venery Bow: Minuet: Ranged Attack+35
-INSERT INTO `item_latents` VALUES (22118,174,5,13,198);  -- Venery Bow: Minuet: "Skillchain Bonus"+5
-INSERT INTO `item_latents` VALUES (22118,944,5,13,198);  -- Venery Bow: Minuet: "Conserve TP"+5
--- INSERT INTO `item_latents` VALUES (22120,24,??,??,0); -- Imati: Unity Ranking: Ranged Attack+20~30
--- INSERT INTO `item_latents` VALUES (22121,24,??,??,0); -- Imati +1: Unity Ranking: Ranged Attack+20~30
--- INSERT INTO `item_latents` VALUES (22143,??,500,??,??); -- Fomalhaut: "TP Bonus"+500 (only applied to Marksmanship weapon skills)
--- INSERT INTO `item_latents` VALUES (22147,26,10,??,0); -- Scout's Crossbow: (D): Ranged Accuracy+10
--- INSERT INTO `item_latents` VALUES (22147,30,10,??,0); -- Scout's Crossbow: (D): Magic Accuracy+10
--- INSERT INTO `item_latents` VALUES (22148,26,10,??,0); -- Arke Crossbow: (D): Ranged Accuracy+10
--- INSERT INTO `item_latents` VALUES (22148,30,10,??,0); -- Arke Crossbow: (D): Magic Accuracy+10
--- INSERT INTO `item_latents` VALUES (22254,8,??,??,0);  -- Seething Bomblet: Unity ranking: STR+1～5
--- INSERT INTO `item_latents` VALUES (22255,8,??,??,0);  -- Seething Bomblet +1: Unity ranking: STR+1～5
--- INSERT INTO `item_latents` VALUES (22266,288,??,??,0); -- Antitail: Unity Ranking: "Double Attack"+1~3%
--- INSERT INTO `item_latents` VALUES (22267,288,??,??,0); -- Antitail +1: Unity Ranking: "Double Attack"+1~3%
+-- INSERT INTO `item_latents` VALUES  (21823,25,10,??,0); -- Abyss Scythe: (D): Accuracy+10
+-- INSERT INTO `item_latents` VALUES  (21823,30,10,??,0); -- Abyss Scythe: (D): Magic Accuracy+10
+-- INSERT INTO `item_latents` VALUES  (21824,25,10,??,0); -- Fallen's Scythe: (D): Accuracy+10
+-- INSERT INTO `item_latents` VALUES  (21824,30,10,??,0); -- Fallen's Scythe: (D): Magic Accuracy+10
+-- INSERT INTO `item_latents` VALUES  (21876,25,10,??,0); -- Wyrm Lance: (D): Accuracy+10
+-- INSERT INTO `item_latents` VALUES  (21876,30,10,??,0); -- Wyrm Lance: (D): Magic Accuracy+10
+-- INSERT INTO `item_latents` VALUES  (21877,25,10,??,0); -- Pteroslaver Lance: (D): Accuracy+10
+-- INSERT INTO `item_latents` VALUES  (21877,30,10,??,0); -- Pteroslaver Lance: (D): Magic Accuracy+10
+-- INSERT INTO `item_latents` VALUES  (21915,23,5,??,??); -- Koga shinobi-gatana: Attack+5 for each Utsusemi shadow image
+-- INSERT INTO `item_latents` VALUES  (21915,25,10,??,0); -- Koga shinobi-gatana: (D): Accuracy+10
+-- INSERT INTO `item_latents` VALUES  (21915,30,10,??,0); -- Koga shinobi-gatana: (D): Magic Accuracy+10
+-- INSERT INTO `item_latents` VALUES  (21916,23,10,??,??); -- Mochizuki shinobi-gatana: Attack+10 for each Utsusemi shadow image
+-- INSERT INTO `item_latents` VALUES  (21916,25,10,??,0); -- Mochizuki shinobi-gatana: (D): Accuracy+10
+-- INSERT INTO `item_latents` VALUES  (21916,30,10,??,0); -- Mochizuki shinobi-gatana: (D): Magic Accuracy+10
+-- INSERT INTO `item_latents` VALUES  (21917,23,15,??,??); -- Fudo Masamune: Attack+15 for each Utsusemi shadow image
+-- INSERT INTO `item_latents` VALUES  (21922,368,1,??,??); -- Gokotai: Regain based on Dual Wield,1 TP/tic for every 1 Dual Wield
+-- INSERT INTO `item_latents` VALUES  (21968,25,10,??,0); -- Saotome-no-Tachi: (D): Accuracy+10
+-- INSERT INTO `item_latents` VALUES  (21968,30,10,??,0); -- Saotome-no-Tachi: (D): Magic Accuracy+10
+INSERT INTO `item_latents` VALUES  (21968,345,50,13,408); -- Saotome-no-Tachi: Sekkanoki: TP Bonus +50% based on remaining TP
+-- INSERT INTO `item_latents` VALUES  (21969,25,10,??,0); -- Sakonji-no-Tachi: (D): Accuracy+10
+-- INSERT INTO `item_latents` VALUES  (21969,30,10,??,0); -- Sakonji-no-Tachi: (D): Magic Accuracy+10
+-- INSERT INTO `item_latents` VALUES  (21969,??,50,??,0); -- Sakonji-no-Tachi: Sekkanoki: TP Bonus +60% based on remaining TP
+-- INSERT INTO `item_latents` VALUES  (21970,??,70,13,408); -- Fusenaikyo: Sekkanoki: TP Bonus +70% based on remaining TP
+INSERT INTO `item_latents` VALUES  (21970,355,144,13,408); -- Fusenaikyo: Sekkanoki: Able to use all Great Katana weapon skills (Enpi)
+INSERT INTO `item_latents` VALUES  (21970,355,145,13,408); -- Fusenaikyo: Sekkanoki: Able to use all Great Katana weapon skills (Hobaku)
+INSERT INTO `item_latents` VALUES  (21970,355,146,13,408); -- Fusenaikyo: Sekkanoki: Able to use all Great Katana weapon skills (Goten)
+INSERT INTO `item_latents` VALUES  (21970,355,147,13,408); -- Fusenaikyo: Sekkanoki: Able to use all Great Katana weapon skills (Kagero)
+INSERT INTO `item_latents` VALUES  (21970,355,148,13,408); -- Fusenaikyo: Sekkanoki: Able to use all Great Katana weapon skills (Jinpu)
+INSERT INTO `item_latents` VALUES  (21970,355,149,13,408); -- Fusenaikyo: Sekkanoki: Able to use all Great Katana weapon skills (Koki)
+INSERT INTO `item_latents` VALUES  (21970,355,150,13,408); -- Fusenaikyo: Sekkanoki: Able to use all Great Katana weapon skills (Yukikaze)
+INSERT INTO `item_latents` VALUES  (21970,355,151,13,408); -- Fusenaikyo: Sekkanoki: Able to use all Great Katana weapon skills (Gekko)
+INSERT INTO `item_latents` VALUES  (21970,355,152,13,408); -- Fusenaikyo: Sekkanoki: Able to use all Great Katana weapon skills (Kasha)
+INSERT INTO `item_latents` VALUES  (21970,355,153,13,408); -- Fusenaikyo: Sekkanoki: Able to use all Great Katana weapon skills (Kaiten)
+INSERT INTO `item_latents` VALUES  (21970,355,154,13,408); -- Fusenaikyo: Sekkanoki: Able to use all Great Katana weapon skills (Rana)
+INSERT INTO `item_latents` VALUES  (21970,355,155,13,408); -- Fusenaikyo: Sekkanoki: Able to use all Great Katana weapon skills (Ageha)
+INSERT INTO `item_latents` VALUES  (21970,355,156,13,408); -- Fusenaikyo: Sekkanoki: Able to use all Great Katana weapon skills (Fudo)
+INSERT INTO `item_latents` VALUES  (21970,355,157,13,408); -- Fusenaikyo: Sekkanoki: Able to use all Great Katana weapon skills (Shoha)
+INSERT INTO `item_latents` VALUES  (21970,355,158,13,408); -- Fusenaikyo: Sekkanoki: Able to use all Great Katana weapon skills (Suikawari)
+-- INSERT INTO `item_latents` VALUES  (22031,??,??,??,0); -- Maxentius: Main hand: Increases magic burst damage based on skillchain length
+-- INSERT INTO `item_latents` VALUES  (22033,25,10,??,0); -- Cleric's Wand: (D): Accuracy+10
+-- INSERT INTO `item_latents` VALUES  (22033,30,10,??,0); -- Cleric's Wand: (D): Magic Accuracy+10
+-- INSERT INTO `item_latents` VALUES  (22033,??,??,??,0); -- Cleric's Wand: Afflatus Misery: Esuna removes one extra status ailment
+-- INSERT INTO `item_latents` VALUES  (22034,25,10,??,0); -- Piety Wand: (D): Accuracy+10
+-- INSERT INTO `item_latents` VALUES  (22034,30,10,??,0); -- Piety Wand: (D): Magic Accuracy+10
+-- INSERT INTO `item_latents` VALUES  (22034,??,??,??,0); -- Piety Wand: Afflatus Misery: Esuna removes two extra status ailments
+-- INSERT INTO `item_latents` VALUES  (22035,??,??,??,0); -- Asclepius: Afflatus Misery: Esuna removes three extra status ailments
+-- INSERT INTO `item_latents` VALUES  (22036,25,10,??,0); -- Bagua Wand: (D): Accuracy+10
+-- INSERT INTO `item_latents` VALUES  (22036,30,10,??,0); -- Bagua Wand: (D): Magic Accuracy+10
+-- INSERT INTO `item_latents` VALUES  (22037,25,10,??,0); -- Sifang Wand: (D): Accuracy+10
+-- INSERT INTO `item_latents` VALUES  (22037,30,10,??,0); -- Sifang Wand: (D): Magic Accuracy+10
+-- INSERT INTO `item_latents` VALUES  (22057,369,1,??,0); -- Contemplator: Unity Ranking: "Refresh"+1
+-- INSERT INTO `item_latents` VALUES  (22058,369,1,??,0); -- Contemplator +1: Unity Ranking: "Refresh"+1~2
+-- INSERT INTO `item_latents` VALUES  (22091,25,10,??,0); -- Sorcerer's Staff: (D): Accuracy+10
+-- INSERT INTO `item_latents` VALUES  (22091,30,10,??,0); -- Sorcerer's Staff: (D): Magic Accuracy+10
+-- INSERT INTO `item_latents` VALUES  (22092,25,10,??,0); -- Archmage's Staff: (D): Accuracy+10
+-- INSERT INTO `item_latents` VALUES  (22092,30,10,??,0); -- Archmage's Staff: (D): Magic Accuracy+10
+-- INSERT INTO `item_latents` VALUES  (22094,25,10,??,0); -- Summoner's Staff: (D): Accuracy+10
+-- INSERT INTO `item_latents` VALUES  (22094,30,10,??,0); -- Summoner's Staff: (D): Magic Accuracy+10
+-- INSERT INTO `item_latents` VALUES  (22094,??,30,??,0); -- Summoner's Staff: (D): Avatar: Accuracy+30
+-- INSERT INTO `item_latents` VALUES  (22094,??,30,??,0); -- Summoner's Staff: (D): Avatar: Ranged Accuracy+30
+-- INSERT INTO `item_latents` VALUES  (22094,??,30,??,0); -- Summoner's Staff: (D): Avatar: Magic Accuracy+30
+-- INSERT INTO `item_latents` VALUES  (22095,25,10,??,0); -- Glyphic Staff: (D): Accuracy+10
+-- INSERT INTO `item_latents` VALUES  (22095,30,10,??,0); -- Glyphic Staff: (D): Magic Accuracy+10
+-- INSERT INTO `item_latents` VALUES  (22095,??,40,??,0); -- Glyphic Staff: (D): Avatar: Accuracy+40
+-- INSERT INTO `item_latents` VALUES  (22095,??,40,??,0); -- Glyphic Staff: (D): Avatar: Ranged Accuracy+40
+-- INSERT INTO `item_latents` VALUES  (22095,??,40,??,0); -- Glyphic Staff: (D): Avatar: Magic Accuracy+40
+-- INSERT INTO `item_latents` VALUES  (22097,25,10,??,0); -- Argute Staff: (D): Accuracy+10
+-- INSERT INTO `item_latents` VALUES  (22097,30,10,??,0); -- Argute Staff: (D): Magic Accuracy+10
+-- INSERT INTO `item_latents` VALUES  (22098,25,10,??,0); -- Pedagogy Staff: (D): Accuracy+10
+-- INSERT INTO `item_latents` VALUES  (22098,30,10,??,0); -- Pedagogy Staff: (D): Magic Accuracy+10
+INSERT INTO `item_latents` VALUES  (22118,24,35,13,198);  -- Venery Bow: Minuet: Ranged Attack+35
+INSERT INTO `item_latents` VALUES  (22118,174,5,13,198);  -- Venery Bow: Minuet: "Skillchain Bonus"+5
+INSERT INTO `item_latents` VALUES  (22118,944,5,13,198);  -- Venery Bow: Minuet: "Conserve TP"+5
+-- INSERT INTO `item_latents` VALUES  (22120,24,??,??,0); -- Imati: Unity Ranking: Ranged Attack+20~30
+-- INSERT INTO `item_latents` VALUES  (22121,24,??,??,0); -- Imati +1: Unity Ranking: Ranged Attack+20~30
+-- INSERT INTO `item_latents` VALUES  (22143,??,500,??,??); -- Fomalhaut: "TP Bonus"+500 (only applied to Marksmanship weapon skills)
+-- INSERT INTO `item_latents` VALUES  (22147,26,10,??,0); -- Scout's Crossbow: (D): Ranged Accuracy+10
+-- INSERT INTO `item_latents` VALUES  (22147,30,10,??,0); -- Scout's Crossbow: (D): Magic Accuracy+10
+-- INSERT INTO `item_latents` VALUES  (22148,26,10,??,0); -- Arke Crossbow: (D): Ranged Accuracy+10
+-- INSERT INTO `item_latents` VALUES  (22148,30,10,??,0); -- Arke Crossbow: (D): Magic Accuracy+10
+-- INSERT INTO `item_latents` VALUES  (22254,8,??,??,0);  -- Seething Bomblet: Unity ranking: STR+1～5
+-- INSERT INTO `item_latents` VALUES  (22255,8,??,??,0);  -- Seething Bomblet +1: Unity ranking: STR+1～5
+-- INSERT INTO `item_latents` VALUES  (22266,288,??,??,0); -- Antitail: Unity Ranking: "Double Attack"+1~3%
+-- INSERT INTO `item_latents` VALUES  (22267,288,??,??,0); -- Antitail +1: Unity Ranking: "Double Attack"+1~3%
 
 INSERT INTO `item_latents` VALUES (23096,291,16,13,354); -- Kasuga Kabuto +2: EFFECT_SEIGAN: COUNTER: 16
 

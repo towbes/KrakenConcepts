@@ -1,6 +1,6 @@
 -----------------------------------
 -- Spell: Blitzstrahl
--- Deals lightning damage to an enemy. Additional effect: "Stun"
+-- Deals lightning damage to an enemy. Additional effect: 'Stun'
 -- Spell cost: 70 MP
 -- Monster Type: Arcana
 -- Spell Type: Magical (Lightning)
@@ -24,9 +24,9 @@ spellObject.onSpellCast = function(caster, target, spell)
     params.attackType = xi.damageType.MAGICAL
     params.damageType = xi.damageType.THUNDER
     params.attribute = xi.mod.INT
-    params.multiplier = 1.5625
+    params.multiplier = 3.5  -- Default: 1.5625
     params.tMultiplier = 1.0
-    params.duppercap = 61
+    params.duppercap = 70 -- 61
     params.str_wsc = 0.0
     params.dex_wsc = 0.0
     params.vit_wsc = 0.0

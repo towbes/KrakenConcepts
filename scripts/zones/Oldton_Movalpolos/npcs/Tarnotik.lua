@@ -10,7 +10,11 @@ entity.onTrade = function(player, npc, trade)
         player:getCurrentMission(xi.mission.log_id.COP) >= xi.mission.id.cop.THREE_PATHS and
         npcUtil.tradeHas(trade, xi.item.SNOW_LILY)
     then
-        player:startEvent(32)
+        if player:hasKeyItem(xi.ki.SHAFT_2716_OPERATING_LEVER) then
+            player:startEvent(54)
+        else
+            player:startEvent(32)
+        end
     end
 end
 
@@ -28,7 +32,9 @@ end
 entity.onEventFinish = function(player, csid, option, npc)
     if csid == 32 then
         player:confirmTrade()
-        player:setPos(-116, -119, -620, 253, 13)
+        xi.teleport.to(player, xi.teleport.id.MINESHAFT)
+    elseif csid == 54 and option == 1 then
+        player:delKeyItem(xi.ki.SHAFT_2716_OPERATING_LEVER)
     end
 end
 

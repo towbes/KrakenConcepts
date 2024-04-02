@@ -2,7 +2,7 @@
 --  NPC: ??? (QM5)
 -- Type: Eggblix (dice roll game part 3)
 -- !pos -462.436 2.456 -141.171 191
--- Involved in quest "As Thick As Thieves"
+-- Involved in quest 'As Thick As Thieves'
 -----------------------------------
 local entity = {}
 

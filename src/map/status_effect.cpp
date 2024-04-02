@@ -81,6 +81,11 @@ uint8 CStatusEffect::GetEffectSlot() const
     return m_Slot;
 }
 
+uint16 CStatusEffect::GetItemSourceID() const
+{
+    return m_ItemSourceID;
+}
+
 uint16 CStatusEffect::GetIcon() const
 {
     return m_Icon;
@@ -190,6 +195,11 @@ void CStatusEffect::SetTier(uint16 tier)
 void CStatusEffect::SetDuration(uint32 Duration)
 {
     m_Duration = Duration;
+}
+
+void CStatusEffect::SetItemSourceID(uint16 ItemSourceID)
+{
+    m_ItemSourceID = ItemSourceID;
 }
 
 void CStatusEffect::SetStartTime(time_point StartTime)

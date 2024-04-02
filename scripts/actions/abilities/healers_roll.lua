@@ -1,6 +1,6 @@
 -----------------------------------
 -- Ability: Healer's Roll
--- Increases potency of "Cure" effect received for party members within area of effect
+-- Increases potency of 'Cure' effect received for party members within area of effect
 -- Optimal Job: White Mage
 -- Lucky Number: 3
 -- Unlucky Number: 7

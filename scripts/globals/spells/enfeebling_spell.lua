@@ -42,9 +42,13 @@ local pTable =
     [xi.magic.spell.POISON        ] = { xi.effect.POISON,             xi.mod.INT, xi.mod.POISONRES,   xi.mod.POISON_MEVA,      0,   3,       90,      2,   0,      256, true,        0 },
     [xi.magic.spell.POISON_II     ] = { xi.effect.POISON,             xi.mod.INT, xi.mod.POISONRES,   xi.mod.POISON_MEVA,      0,   3,      120,      2,   0,      256, true,       30 },
     [xi.magic.spell.POISON_III    ] = { xi.effect.POISON,             xi.mod.INT, xi.mod.POISONRES,   xi.mod.POISON_MEVA,      0,   3,      150,      2,   0,      256, true,        0 },
+    [xi.magic.spell.POISON_IV     ] = { xi.effect.POISON,             xi.mod.INT, xi.mod.POISONRES,   xi.mod.POISON_MEVA,      0,   3,      175,      2,   0,      256, true,        0 },
+    [xi.magic.spell.POISON_V      ] = { xi.effect.POISON,             xi.mod.INT, xi.mod.POISONRES,   xi.mod.POISON_MEVA,      0,   3,      200,      2,   0,      256, true,        0 },
     [xi.magic.spell.POISONGA      ] = { xi.effect.POISON,             xi.mod.INT, xi.mod.POISONRES,   xi.mod.POISON_MEVA,      0,   3,       90,      2,   0,      256, true,        0 },
     [xi.magic.spell.POISONGA_II   ] = { xi.effect.POISON,             xi.mod.INT, xi.mod.POISONRES,   xi.mod.POISON_MEVA,      0,   3,      120,      2,   0,      256, true,        0 },
     [xi.magic.spell.POISONGA_III  ] = { xi.effect.POISON,             xi.mod.INT, xi.mod.POISONRES,   xi.mod.POISON_MEVA,      0,   3,      150,      2,   0,      256, true,        0 },
+    [xi.magic.spell.POISONGA_IV   ] = { xi.effect.POISON,             xi.mod.INT, xi.mod.POISONRES,   xi.mod.POISON_MEVA,      0,   3,      175,      2,   0,      256, true,        0 },
+    [xi.magic.spell.POISONGA_V    ] = { xi.effect.POISON,             xi.mod.INT, xi.mod.POISONRES,   xi.mod.POISON_MEVA,      0,   3,      200,      2,   0,      256, true,        0 },
     [xi.magic.spell.RASP          ] = { xi.effect.RASP,               xi.mod.INT, 0,                  0,                       0,   3,       90,      3,   1,        0, true,        0 },
     [xi.magic.spell.SHOCK         ] = { xi.effect.SHOCK,              xi.mod.INT, 0,                  0,                       0,   3,       90,      3,   1,        0, true,        0 },
     [xi.magic.spell.SLEEP         ] = { xi.effect.SLEEP_I,            xi.mod.INT, xi.mod.SLEEPRES,    xi.mod.SLEEP_MEVA,       1,   0,       60,      2,   0,        1, false,       0 },
@@ -200,6 +204,21 @@ xi.spells.enfeebling.calculatePotency = function(caster, target, spellId, spellE
                 if skillLevel > 400 then
                     potency = skillLevel * 49 / 183 - 55 -- No cap can be reached yet
                 end
+            elseif
+                spellId == xi.magic.spell.POISON_III or
+                spellId == xi.magic.spell.POISONGA_III
+            then
+                potency = math.max(skillLevel / 15, 4)
+            elseif
+                spellId == xi.magic.spell.POISON_IV or
+                spellId == xi.magic.spell.POISONGA_IV
+            then
+                potency = math.max(skillLevel / 10, 4)
+            elseif
+                spellId == xi.magic.spell.POISON_V or
+                spellId == xi.magic.spell.POISONGA_V
+            then
+                potency = math.max(skillLevel / 5, 4)
             else
                 potency = skillLevel / 10 + 1
             end
@@ -301,13 +320,19 @@ xi.spells.enfeebling.calculateDuration = function(caster, target, spellId, spell
             end
         end
 
-        -- After Saboteur according to bg-wiki
+    -- After Saboteur according to bg-wiki
+    if
+        (caster:getMainJob() == xi.job.RDM or
+        caster:getSubJob() == xi.job.RDM) and
+        skillType == xi.skill.ENFEEBLING_MAGIC
+    then
+        -- RDM Merit: Enfeebling Magic Duration
+        duration = duration + caster:getMerit(xi.merit.ENFEEBLING_MAGIC_DURATION)
+        
         if caster:getMainJob() == xi.job.RDM then
-            -- RDM Merit: Enfeebling Magic Duration
-            duration = duration + caster:getMerit(xi.merit.ENFEEBLING_MAGIC_DURATION)
-
             -- RDM Job Point: Enfeebling Magic Duration
             duration = duration + caster:getJobPointLevel(xi.jp.ENFEEBLE_DURATION)
+        end
 
             -- RDM Job Point: Stymie effect
             if caster:hasStatusEffect(xi.effect.STYMIE) then
@@ -324,7 +349,7 @@ xi.spells.enfeebling.handleEffectNullification = function(caster, target, spell,
     if target:isMob() then
         local value = pTable[spellId][10]
 
-        -- Mob is completely immune. Set "Completely resists" message and nullify effect.
+        -- Mob is completely immune. Set 'Completely resists' message and nullify effect.
         if
             value > 0 and
             target:hasImmunity(value)
@@ -346,7 +371,7 @@ xi.spells.enfeebling.handleEffectNullification = function(caster, target, spell,
             traitPower = traitPower / 2
         end
 
-        -- Trait trigers. Set "Resist!" message and nullify effect.
+        -- Trait trigers. Set 'Resist!' message and nullify effect.
         if roll <= traitPower then
             spell:setModifier(xi.msg.actionModifier.RESIST)
             spell:setMsg(xi.msg.basic.MAGIC_RESIST)
@@ -392,6 +417,9 @@ xi.spells.enfeebling.useEnfeeblingSpell = function(caster, target, spell)
     local spellId     = spell:getID()
     local spellEffect = pTable[spellId][1]
 
+    if caster:hasStatusEffect(xi.effect.MANAWELL) and spell:getSpellGroup() ~= xi.magic.spellGroup.NINJUTSU then
+        caster:delStatusEffectSilent(xi.effect.MANAWELL)
+    end
     ------------------------------
     -- STEP 1: Check spell nullification.
     ------------------------------
@@ -518,7 +546,7 @@ xi.spells.enfeebling.useEnfeeblingSpell = function(caster, target, spell)
             caster:delStatusEffect(xi.effect.STYMIE)
         end
 
-        -- Add "Magic Burst!" message
+        -- Add 'Magic Burst!' message
         local _, skillchainCount = xi.magicburst.formMagicBurst(spellElement, target) -- External function. Not present in magic.lua.
 
         if skillchainCount > 0 then

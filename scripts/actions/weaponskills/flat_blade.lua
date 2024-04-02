@@ -20,15 +20,17 @@ weaponskillObject.onUseWeaponSkill = function(player, target, wsID, tp, primary,
     params.str_wsc = 0.3
 
     if xi.settings.main.USE_ADOULIN_WEAPON_SKILL_CHANGES then
+        params.ftpMod = { 1.2, 1.2, 1.2 }
         params.str_wsc = 1.0
     end
 
     local damage, criticalHit, tpHits, extraHits = xi.weaponskills.doPhysicalWeaponskill(player, target, wsID, params, tp, action, primary, taChar)
 
     local chance = (tp-1000) * applyResistanceAddEffect(player, target, xi.element.THUNDER, 0) > math.random() * 150
-    if damage > 0 and not target:hasStatusEffect(xi.effect.STUN) and chance then
+    if damage > 0 and not target:hasStatusEffect(xi.effect.STUN) and chance and not target:hasImmunity(xi.immunity.STUN) then
         local duration = 4 * applyResistanceAddEffect(player, target, xi.element.THUNDER, 0)
         target:addStatusEffect(xi.effect.STUN, 1, 0, duration)
+        player:messagePublic(xi.msg.basic.SKILL_ENFEEB, target, wsID, xi.effect.STUN)
     end
 
     return tpHits, extraHits, criticalHit, damage

@@ -1,6 +1,6 @@
 -----------------------------------
 -- Zone: Lufaise_Meadows (24)
------------------------------------
+require('scripts/globals/exp_controller')
 local ID = zones[xi.zone.LUFAISE_MEADOWS]
 -----------------------------------
 local zoneObject = {}
@@ -10,14 +10,23 @@ zoneObject.onInitialize = function(zone)
 
     SetServerVariable('realPadfoot', math.random(1, 5))
     for _, v in pairs(ID.mob.PADFOOT) do
-        SpawnMob(v)
+        local respawnP = GetServerVariable('\\[SPAWN\\]'..v)
+        if os.time() > respawnP then
+            SpawnMob(v)
+        else
+            GetMobByID(v):setRespawnTime(respawnP - os.time())
+        end
     end
+
+    GetMobByID(ID.mob.YALUN_EKE):setLocalVar('chooseYalun', math.random(1, 2))
 
     xi.conq.setRegionalConquestOverseers(zone:getRegionID())
 
     GetMobByID(ID.mob.FLOCKBOCK):setRespawnTime(math.random(3600, 7200))
 
     xi.helm.initZone(zone, xi.helmType.LOGGING)
+    xi.exp_controller.onInitialize(zone)
+
 end
 
 zoneObject.onConquestUpdate = function(zone, updatetype, influence, owner, ranking, isConquestAlliance)
@@ -34,32 +43,39 @@ zoneObject.onZoneIn = function(player, prevZone)
     then
         player:setPos(458, 6, -4, 82)
     end
-
-    return cs
+end
+zoneObject.onEventFinish = function(player, csid, option, npc)
 end
 
-zoneObject.onTriggerAreaEnter = function(player, triggerArea)
-    local triggerAreaID = triggerArea:GetTriggerAreaID()
-
-    if
-        triggerAreaID == 1 and
-        player:getCurrentMission(xi.mission.log_id.COP) == xi.mission.id.cop.DAWN and
-        player:getCharVar('PromathiaStatus') == 6
-    then
-        player:startEvent(116)
+zoneObject.onGameHour = function(zone)
+    local cooldown = GetMobByID(ID.mob.SENGANN):getLocalVar('cooldown')
+    -- Don't allow Sengann to spawn outside of night
+    if VanadielHour() >= 4 and VanadielHour() < 20 then
+        DisallowRespawn(ID.mob.SENGANN, true)
+    elseif os.time() > cooldown then
+        DisallowRespawn(ID.mob.SENGANN, false)
     end
 end
 
-zoneObject.onTriggerAreaLeave = function(player, triggerArea)
-end
-
-zoneObject.onEventUpdate = function(player, csid, option, npc)
-end
-
-zoneObject.onEventFinish = function(player, csid, option, npc)
-    if csid == 116 then
-        player:setCharVar('PromathiaStatus', 7)
-        player:addTitle(xi.title.BANISHER_OF_EMPTINESS)
+zoneObject.onZoneWeatherChange = function(weather)
+    if
+        os.time() > GetMobByID(ID.mob.YALUN_EKE):getLocalVar('yalunRespawn') and
+        weather == xi.weather.FOG
+    then
+        local chooseYalun = GetMobByID(ID.mob.YALUN_EKE):getLocalVar('chooseYalun')
+        local count = 1
+        for k, v in pairs(ID.mob.YALUN_EKE_PH) do
+            if count == chooseYalun then
+                DisallowRespawn(k, true)
+                DisallowRespawn(v, false)
+                local pos = GetMobByID(k):getSpawnPos()
+                DespawnMob(k) -- Ensure PH is not up
+                GetMobByID(v):setSpawn(pos.x, pos.y, pos.z)
+                SpawnMob(v) -- Spawn Yal-Un Eke
+            else
+                count = count + 1
+            end
+        end
     end
 end
 

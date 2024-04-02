@@ -6,30 +6,44 @@
 local mobskillObject = {}
 
 mobskillObject.onMobSkillCheck = function(target, mob, skill)
-    local momma = mob:getID()
-    local fam = 1
-    for i = momma + 1, momma + mob:getLocalVar('maxBabies') do
+    local id = mob:getID()
+
+    for i = id + 1, id + mob:getLocalVar('maxBabies') do
         local baby = GetMobByID(i)
         if not baby:isSpawned() then
-            fam = 0
-            break
+            return 0
         end
     end
 
-    return fam
+    return 1
 end
 
 mobskillObject.onMobWeaponSkill = function(target, mob, skill)
-    local momma = mob:getID()
+    local id = mob:getID()
     local pos = mob:getPos()
-    for babyID = momma + 1, momma + mob:getLocalVar('maxBabies') do
-        local baby = GetMobByID(babyID)
-        if not baby:isSpawned() then
-            SpawnMob(babyID):updateEnmity(mob:getTarget())
-            baby:setPos(pos.x, pos.y, pos.z)
-            break
+
+    -- Ingester - ENM: You are what you eat
+    if mob:getPool() == 2080 then
+        for i = 4, 1, -1 do
+            if not GetMobByID(id + i):isSpawned() then
+                GetMobByID(id + i):setSpawn(pos.x, pos.y, pos.z)
+                SpawnMob(id + i):updateEnmity(mob:getTarget())
+                break
+            end
+        end
+    else
+        for babyID = id + 1, id + mob:getLocalVar('maxBabies') do
+            local baby = GetMobByID(babyID)
+            if not baby:isSpawned() then
+                SpawnMob(babyID):updateEnmity(mob:getTarget())
+                baby:setPos(pos.x, pos.y, pos.z)
+                break
+            end
         end
     end
+
+    skill:setMsg(xi.msg.basic.NONE)
+    return 0
 end
 
 return mobskillObject

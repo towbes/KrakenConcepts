@@ -3,7 +3,8 @@
 -- Description: Channels a wave of negative energy, damaging all targets in very wide area of effect.
 -- Type: Magical
 -- Wipes Shadows
--- Range: 10' radial
+-- Range: 30' radial
+-- Notes:
 -----------------------------------
 local mobskillObject = {}
 

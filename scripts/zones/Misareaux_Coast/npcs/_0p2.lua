@@ -22,9 +22,9 @@ entity.onTrigger = function(player, npc)
     then
         player:startEvent(559)
     -- Can pass after completing COP 2-4
-    elseif
-        copCurrentMission > copMissions.AN_ETERNAL_MELODY or
-        player:hasCompletedMission(xi.mission.log_id.COP, copMissions.THE_LAST_VERSE)
+    elseif 
+        copCurrentMission > copMissions.AN_ETERNAL_MELODY or 
+        player:hasCompletedMission(xi.mission.log_id.COP, copMissions.THE_LAST_VERSE) 
     then
         player:startEvent(552)
     else

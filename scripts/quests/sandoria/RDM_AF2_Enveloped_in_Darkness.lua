@@ -25,8 +25,10 @@ quest.sections =
         check = function(player, status, vars)
             return status == QUEST_AVAILABLE and
                 player:getQuestStatus(xi.quest.log_id.SANDORIA, xi.quest.id.sandoria.THE_CRIMSON_TRIAL) == QUEST_COMPLETED and
-                player:getMainJob() == xi.job.RDM and
-                player:getMainLvl() >= 50
+                ((player:getMainJob() == xi.job.RDM and
+                player:getMainLvl() >= 50) or 
+                (player:getSubJob() == xi.job.RDM and --Umeboshi
+                player:getSubLvl() >= 50))
         end,
 
         [xi.zone.CHATEAU_DORAGUILLE] =

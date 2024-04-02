@@ -1,9 +1,13 @@
 -----------------------------------
 -- Zone: Toraimarai Canal (169)
 -----------------------------------
+local ID = zones[xi.zone.TORAIMARAI_CANAL]
 local zoneObject = {}
 
 zoneObject.onInitialize = function(zone)
+    -- NM Persistence
+    xi.mob.nmTODPersistCache(zone, ID.mob.ONI_CARCASS)
+
     xi.treasure.initZone(zone)
 end
 

@@ -2,6 +2,8 @@
 -- Area: Heaven's Tower
 --  NPC: Jatata
 -----------------------------------
+
+-----------------------------------
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)

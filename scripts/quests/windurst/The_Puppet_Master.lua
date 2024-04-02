@@ -21,8 +21,10 @@ quest.sections =
     {
         check = function(player, status, vars)
             return status == QUEST_AVAILABLE and
-                player:getMainLvl() >= xi.settings.main.AF1_QUEST_LEVEL and
-                player:getMainJob() == xi.job.SMN and
+                ((player:getMainLvl() >= xi.settings.main.AF1_QUEST_LEVEL and
+                player:getMainJob() == xi.job.SMN) or
+                (player:getSubLvl() >= xi.settings.main.AF1_QUEST_LEVEL and
+                player:getSubJob() == xi.job.SMN)) and
                 not quest:getMustZone(player)
         end,
 

@@ -1,12 +1,15 @@
 -----------------------------------
 -- Zone: Oldton_Movalpolos (11)
 -----------------------------------
+require('scripts/globals/exp_controller')
+-----------------------------------
 local zoneObject = {}
 
 zoneObject.onInitialize = function(zone)
     xi.conq.setRegionalConquestOverseers(zone:getRegionID())
     xi.treasure.initZone(zone)
     xi.helm.initZone(zone, xi.helmType.MINING)
+    xi.exp_controller.onInitialize(zone)
 end
 
 zoneObject.onConquestUpdate = function(zone, updatetype, influence, owner, ranking, isConquestAlliance)
@@ -24,15 +27,6 @@ zoneObject.onZoneIn = function(player, prevZone)
         player:setPos(-286, 0, -99, 253)
     end
 
-    if
-        player:getCurrentMission(xi.mission.log_id.COP) == xi.mission.id.cop.DAWN and
-        player:getCharVar('PromathiaStatus') == 3 and
-        player:getCharVar('Promathia_kill_day') < os.time() and
-        player:getCharVar('COP_jabbos_story') == 0
-    then
-        cs = 57
-    end
-
     return cs
 end
 
@@ -43,9 +37,6 @@ zoneObject.onEventUpdate = function(player, csid, option, npc)
 end
 
 zoneObject.onEventFinish = function(player, csid, option, npc)
-    if csid == 57 then
-        player:setCharVar('COP_jabbos_story', 1)
-    end
 end
 
 return zoneObject

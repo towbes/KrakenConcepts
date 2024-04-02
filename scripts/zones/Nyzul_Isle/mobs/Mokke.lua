@@ -22,6 +22,10 @@ entity.onMobSpawn = function(mob)
     mob:setAnimationSub(4)
 end
 
+entity.onMobWeaponSkillPrepare = function(mob, target)
+    return 1709 -- Abrasive Tantara
+end
+
 entity.onMobDeath = function(mob, player, optParams)
     if optParams.isKiller or optParams.noKiller then
         xi.nyzul.spawnChest(mob, player)

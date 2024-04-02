@@ -118,6 +118,7 @@
 #include "packets/event_string.h"
 #include "packets/event_update.h"
 #include "packets/event_update_string.h"
+#include "packets/fellow_despawn.h"
 #include "packets/guild_menu.h"
 #include "packets/guild_menu_buy.h"
 #include "packets/independent_animation.h"
@@ -155,6 +156,7 @@
 #include "utils/battleutils.h"
 #include "utils/blueutils.h"
 #include "utils/charutils.h"
+#include "utils/fellowutils.h"
 #include "utils/guildutils.h"
 #include "utils/instanceutils.h"
 #include "utils/itemutils.h"
@@ -2420,7 +2422,7 @@ void CLuaBaseEntity::leaveGame()
  *  Notes   : Currently only used for HELM animations.
  ************************************************************************/
 
-void CLuaBaseEntity::sendEmote(CLuaBaseEntity* target, uint8 emID, uint8 emMode)
+void CLuaBaseEntity::sendEmote(CLuaBaseEntity* target, uint8 emID, uint8 emMode, bool self)
 {
     if (m_PBaseEntity->objtype != TYPE_PC)
     {
@@ -2440,6 +2442,10 @@ void CLuaBaseEntity::sendEmote(CLuaBaseEntity* target, uint8 emID, uint8 emMode)
 
             PChar->loc.zone->PushPacket(PChar, CHAR_INRANGE,
                                         new CCharEmotionPacket(PChar, PTarget->id, PTarget->targid, emoteID, emoteMode, 0));
+            if (self)
+            {
+                PChar->pushPacket(new CCharEmotionPacket(PChar, PTarget->id, PTarget->targid, emoteID, emoteMode, 0));
+            }
         }
     }
 }
@@ -3681,10 +3687,32 @@ std::optional<CLuaItem> CLuaBaseEntity::getEquippedItem(uint8 slot)
 }
 
 /************************************************************************
+ *  Function: hasEquipped(equipmentID)
+ *  Purpose : Returns true if the player has the item equipped in any slot
+ *  Example : player:hasEquipped(xi.items.BREATH_MANTLE)
+ *  Notes   :
+ ************************************************************************/
+
+bool CLuaBaseEntity::hasEquipped(uint16 equipmentID)
+{
+    if (m_PBaseEntity->objtype == TYPE_PC)
+    {
+        for (uint8 equipmentSlot = 0; equipmentSlot <= 15; equipmentSlot++)
+        {
+            if (getEquipID((SLOTTYPE)equipmentSlot) == equipmentID)
+            {
+                return true;
+            }
+        }
+    }
+    return false;
+}
+
+/************************************************************************
  *  Function: hasItem()
  *  Purpose : Returns true if a player possesses an item
  *  Example : if player:hasItem(500) then -- Second var optional
- *  Notes   : Send with an L2 value to specify container
+ *  Notes   : Can specify Power of the Effect as an option or the Item Source (will use power if both specified)
  ************************************************************************/
 
 bool CLuaBaseEntity::hasItem(uint16 itemID, sol::object const& location)
@@ -4356,7 +4384,7 @@ bool CLuaBaseEntity::addLinkpearl(std::string const& lsname, bool equip)
     return false;
 }
 
-auto CLuaBaseEntity::addSoulPlate(std::string const& name, uint16 mobFamily, uint8 zeni, uint16 skillIndex, uint8 fp) -> std::optional<CLuaItem>
+auto CLuaBaseEntity::addSoulPlate(std::string const& name, uint8 fauna, uint8 subOfInterest, uint8 ecoSystem, uint8 zeni, uint16 skillIndex, uint8 fp) -> std::optional<CLuaItem>
 {
     if (m_PBaseEntity->objtype != TYPE_PC)
     {
@@ -4381,7 +4409,7 @@ auto CLuaBaseEntity::addSoulPlate(std::string const& name, uint16 mobFamily, uin
         }
 
         PItem->setQuantity(1);
-        PItem->setSoulPlateData(name, mobFamily, zeni, skillIndex, fp);
+        PItem->setSoulPlateData(name, fauna, subOfInterest, ecoSystem, zeni, skillIndex, fp);
         auto SlotID = charutils::AddItem(PChar, LOC_INVENTORY, PItem, true);
         if (SlotID == ERROR_SLOTID)
         {
@@ -4505,7 +4533,7 @@ void CLuaBaseEntity::confirmTrade()
  *  Example : player:tradeComplete()
  ************************************************************************/
 
-void CLuaBaseEntity::tradeComplete()
+void CLuaBaseEntity::tradeComplete(sol::object const& shouldTakeItems)
 {
     if (m_PBaseEntity->objtype != TYPE_PC)
     {
@@ -4513,7 +4541,8 @@ void CLuaBaseEntity::tradeComplete()
         return;
     }
 
-    auto* PChar = static_cast<CCharEntity*>(m_PBaseEntity);
+    bool  takeItems = (shouldTakeItems != sol::lua_nil) ? shouldTakeItems.as<bool>() : true;
+    auto* PChar     = static_cast<CCharEntity*>(m_PBaseEntity);
 
     for (uint8 slotID = 0; slotID < TRADE_CONTAINER_SIZE; ++slotID)
     {
@@ -4525,7 +4554,10 @@ void CLuaBaseEntity::tradeComplete()
             if (PItem)
             {
                 PItem->setReserve(0);
-                charutils::UpdateItem(PChar, LOC_INVENTORY, invSlotID, -quantity);
+                if (takeItems)
+                {
+                    charutils::UpdateItem(PChar, LOC_INVENTORY, invSlotID, -quantity);
+                }
             }
         }
     }
@@ -4653,7 +4685,7 @@ void CLuaBaseEntity::setEquipBlock(uint16 equipBlock)
     {
         auto* PChar         = static_cast<CCharEntity*>(m_PBaseEntity);
         PChar->m_EquipBlock = equipBlock;
-        PChar->pushPacket(new CCharJobsPacket(PChar));
+        PChar->pushPacket(new CCharJobsPacket(PChar, true)); // Umeboshi "resetflips"
     }
 }
 
@@ -4685,7 +4717,7 @@ void CLuaBaseEntity::lockEquipSlot(uint8 slot)
     PChar->m_EquipBlock |= 1 << slot;
     PChar->pushPacket(new CCharAppearancePacket(PChar));
     PChar->pushPacket(new CEquipPacket(0, slot, LOC_INVENTORY));
-    PChar->pushPacket(new CCharJobsPacket(PChar));
+    PChar->pushPacket(new CCharJobsPacket(PChar, true)); // Umeboshi "resetflips"
     PChar->updatemask |= UPDATE_LOOK;
 }
 
@@ -4713,7 +4745,7 @@ void CLuaBaseEntity::unlockEquipSlot(uint8 slot)
     auto* PChar = static_cast<CCharEntity*>(m_PBaseEntity);
 
     PChar->m_EquipBlock &= ~(1 << slot);
-    PChar->pushPacket(new CCharJobsPacket(PChar));
+    PChar->pushPacket(new CCharJobsPacket(PChar, true)); // Umeboshi "resetflips"
 }
 
 /************************************************************************
@@ -5344,6 +5376,59 @@ void CLuaBaseEntity::setAnimationSub(uint8 animationsub)
 }
 
 /************************************************************************
+ *  Function: setAnimPath()
+ *  Purpose : Updates an animation path for NPC
+ *  Example : GetNPCByID(Door_Offset+12):setAnimPath(1)
+ ************************************************************************/
+
+void CLuaBaseEntity::setAnimPath(uint8 animPath)
+{
+    m_PBaseEntity->manualConfig = true;
+    m_PBaseEntity->animPath     = animPath;
+}
+
+/************************************************************************
+ *  Function: setAnimStart()
+ *  Purpose : Initializes NPC start frames
+ *  Example : GetNPCByID(Door_Offset+12):setAnimStart(1724234413)
+ ************************************************************************/
+
+void CLuaBaseEntity::setAnimStart(bool animStart)
+{
+    m_PBaseEntity->animStart = animStart;
+}
+
+/************************************************************************
+ *  Function: setAnimBegin()
+ *  Purpose : Updates an animation start time for NPC
+ *  Example : GetNPCByID(Door_Offset+12):setAnimStart(1724234413)
+ ************************************************************************/
+
+void CLuaBaseEntity::setAnimBegin(uint32 animBegin)
+{
+    m_PBaseEntity->animBegin = animBegin;
+}
+
+/************************************************************************
+ *  Function: sendUpdateToZoneCharsInRange()
+ *  Purpose : Sends an entity update packet to all players in range within the zone
+ ************************************************************************/
+
+void CLuaBaseEntity::sendUpdateToZoneCharsInRange(float maxDistance = 0.0f)
+{
+    EntityList_t charList = m_PBaseEntity->loc.zone->GetZoneEntities()->GetCharList();
+
+    for (EntityList_t::const_iterator it = charList.begin(); it != charList.end(); ++it)
+    {
+        CCharEntity* PChar = (CCharEntity*)it->second;
+        if (maxDistance == 0 || distance(PChar->loc.p, m_PBaseEntity->loc.p) < maxDistance)
+        {
+            PChar->pushPacket(new CEntityUpdatePacket(m_PBaseEntity, ENTITY_SPAWN, UPDATE_ALL_MOB));
+        }
+    }
+}
+
+/************************************************************************
  *  Function: getCallForHelpFlag()
  *  Purpose : Find out if CFH has been called on a mob.
  *  Example : mob:getCallForHelpFlag()
@@ -5887,6 +5972,7 @@ void CLuaBaseEntity::changeJob(uint8 newJob)
     JOBTYPE prevjob = PChar->GetMJob();
 
     PChar->resetPetZoningInfo();
+    PChar->resetFellowZoningInfo();
 
     PChar->jobs.unlocked |= (1 << newJob);
     PChar->SetMJob(newJob);
@@ -5929,8 +6015,8 @@ void CLuaBaseEntity::changeJob(uint8 newJob)
     charutils::SaveCharExp(PChar, PChar->GetMJob());
     PChar->updatemask |= UPDATE_HP;
 
-    PChar->pushPacket(new CCharJobsPacket(PChar));
-    PChar->pushPacket(new CCharStatsPacket(PChar));
+    PChar->pushPacket(new CCharJobsPacket(PChar, true));  // Umeboshi "resetflips"
+    PChar->pushPacket(new CCharStatsPacket(PChar, true)); // Umeboshi "resetflips"
     PChar->pushPacket(new CCharSkillsPacket(PChar));
     PChar->pushPacket(new CCharRecastPacket(PChar));
     PChar->pushPacket(new CCharAbilitiesPacket(PChar));
@@ -6005,7 +6091,7 @@ void CLuaBaseEntity::unlockJob(uint8 JobID)
         }
 
         charutils::SaveCharJob(PChar, static_cast<JOBTYPE>(JobID));
-        PChar->pushPacket(new CCharJobsPacket(PChar));
+        PChar->pushPacket(new CCharJobsPacket(PChar, true)); // Umeboshi "resetflips"
     }
 }
 
@@ -6128,8 +6214,8 @@ void CLuaBaseEntity::setLevel(uint8 level)
         charutils::SaveCharExp(PChar, PChar->GetMJob());
         PChar->updatemask |= UPDATE_HP;
 
-        PChar->pushPacket(new CCharJobsPacket(PChar));
-        PChar->pushPacket(new CCharStatsPacket(PChar));
+        PChar->pushPacket(new CCharJobsPacket(PChar, true));  // Umeboshi "resetflips"
+        PChar->pushPacket(new CCharStatsPacket(PChar, true)); // Umeboshi "resetflips"
         PChar->pushPacket(new CCharSkillsPacket(PChar));
         PChar->pushPacket(new CCharRecastPacket(PChar));
         PChar->pushPacket(new CCharAbilitiesPacket(PChar));
@@ -6185,8 +6271,8 @@ void CLuaBaseEntity::setsLevel(uint8 slevel)
     charutils::SaveCharJob(PChar, PChar->GetSJob());
     charutils::SaveCharExp(PChar, PChar->GetMJob());
 
-    PChar->pushPacket(new CCharJobsPacket(PChar));
-    PChar->pushPacket(new CCharStatsPacket(PChar));
+    PChar->pushPacket(new CCharJobsPacket(PChar, true));  // Umeboshi "resetflips"
+    PChar->pushPacket(new CCharStatsPacket(PChar, true)); // Umeboshi "resetflips"
     PChar->pushPacket(new CCharSkillsPacket(PChar));
     PChar->pushPacket(new CCharRecastPacket(PChar));
     PChar->pushPacket(new CCharAbilitiesPacket(PChar));
@@ -6293,8 +6379,8 @@ uint8 CLuaBaseEntity::levelRestriction(sol::object const& level)
                     PChar->PAutomaton->setElementalCapacityBonus(PChar->getMod(Mod::AUTO_ELEM_CAPACITY));
                 }
 
-                PChar->pushPacket(new CCharJobsPacket(PChar));
-                PChar->pushPacket(new CCharStatsPacket(PChar));
+                PChar->pushPacket(new CCharJobsPacket(PChar, true));  // Umeboshi "resetflips"
+                PChar->pushPacket(new CCharStatsPacket(PChar, true)); // Umeboshi "resetflips"
                 PChar->pushPacket(new CCharSkillsPacket(PChar));
                 PChar->pushPacket(new CCharRecastPacket(PChar));
                 PChar->pushPacket(new CCharAbilitiesPacket(PChar));
@@ -6372,6 +6458,12 @@ uint8 CLuaBaseEntity::levelRestriction(sol::object const& level)
                 PPet->health.hp = std::min(hp, PPet->GetMaxHP());
                 PPet->health.mp = std::min(mp, PPet->GetMaxMP());
                 PPet->updatemask |= UPDATE_HP;
+            }
+            if (PChar->m_PFellow != nullptr)
+            {
+                CBaseEntity* PFellow = (CBaseEntity*)PChar->m_PFellow;
+                PChar->loc.zone->PushPacket(PChar, CHAR_INRANGE_SELF, new CFellowDespawnPacket(PFellow));
+                PChar->RemoveFellow();
             }
         }
     }
@@ -6526,6 +6618,41 @@ void CLuaBaseEntity::setMonstrosityEntryData(float x, float y, float z, uint8 ro
 }
 
 /************************************************************************
+ *  Function: getTraits
+ *  Purpose : Return list of active traits
+ *  Example : player:getTraits()
+ ************************************************************************/
+
+sol::table CLuaBaseEntity::getTraits()
+{
+    if (m_PBaseEntity->objtype == TYPE_NPC)
+    {
+        ShowWarning("Invalid Entity (NPC: %s) calling function.", m_PBaseEntity->getName());
+        return 0;
+    }
+
+    CBattleEntity* PEntity = static_cast<CBattleEntity*>(m_PBaseEntity);
+
+    if (PEntity != nullptr)
+    {
+        auto table = lua.create_table();
+        for (std::size_t i = 0; i < PEntity->TraitList.size(); ++i)
+        {
+            auto subTable = lua.create_table();
+
+            subTable["id"]    = PEntity->TraitList.at(i)->getID();
+            subTable["value"] = PEntity->TraitList.at(i)->getValue();
+
+            table.add(subTable);
+        }
+
+        return table;
+    }
+
+    return {};
+}
+
+/************************************************************************
  *  Function: getTitle()
  *  Purpose : Returns the integer value of the player's current title
  *  Example : if player:getTitle()) == xi.title.FAKE_MOUSTACHED_INVESTIGATOR then
@@ -6577,7 +6704,7 @@ void CLuaBaseEntity::addTitle(uint16 titleID)
     auto* PChar = static_cast<CCharEntity*>(m_PBaseEntity);
 
     PChar->profile.title = titleID;
-    PChar->pushPacket(new CCharStatsPacket(PChar));
+    PChar->pushPacket(new CCharStatsPacket(PChar, true)); // Umeboshi "resetflips"
 
     charutils::addTitle(PChar, titleID);
     charutils::SaveTitles(PChar);
@@ -6624,7 +6751,7 @@ void CLuaBaseEntity::delTitle(uint16 titleID)
             PChar->profile.title = 0;
         }
 
-        PChar->pushPacket(new CCharStatsPacket(PChar));
+        PChar->pushPacket(new CCharStatsPacket(PChar, true)); // Umeboshi "resetflips"
         charutils::SaveTitles(PChar);
     }
 }
@@ -9186,6 +9313,12 @@ void CLuaBaseEntity::takeDamage(int32 damage, sol::object const& attacker, sol::
         breakBind     = flag_map["breakBind"];
     }
 
+    // Check to see if Nightmare is active on the target
+    // If so, taking damage will not wake the target up
+    if (PDefender->StatusEffectContainer->GetStatusEffect(EFFECT_SLEEP) &&
+        PDefender->StatusEffectContainer->GetStatusEffect(EFFECT_SLEEP)->GetSubID() == (uint32)EFFECT_BIO)
+        wakeUp = false;
+
     ATTACK_TYPE attackType = (atkType != sol::lua_nil) ? static_cast<ATTACK_TYPE>(atkType.as<uint8>()) : ATTACK_TYPE::NONE;
     DAMAGE_TYPE damageType = (dmgType != sol::lua_nil) ? static_cast<DAMAGE_TYPE>(dmgType.as<uint8>()) : DAMAGE_TYPE::NONE;
 
@@ -10172,6 +10305,11 @@ bool CLuaBaseEntity::hasPartyJob(uint8 job)
             CCharEntity* PTarget = static_cast<CCharEntity*>(member);
 
             if (PTarget->GetMJob() == job)
+            {
+                return true;
+            }
+
+            if (PTarget->GetSJob() == job) // Umeboshi "Subjobs are treated as a main job on Cactuar"
             {
                 return true;
             }
@@ -11658,8 +11796,8 @@ void CLuaBaseEntity::recalculateStats()
 
         PChar->UpdateHealth();
 
-        PChar->pushPacket(new CCharJobsPacket(PChar));
-        PChar->pushPacket(new CCharStatsPacket(PChar));
+        PChar->pushPacket(new CCharJobsPacket(PChar, true));  // Umeboshi "resetflips" "Line new to LSB codebase, bookmarking"
+        PChar->pushPacket(new CCharStatsPacket(PChar, true)); // Umeboshi "resetflips"
         PChar->pushPacket(new CCharSkillsPacket(PChar));
         PChar->pushPacket(new CCharRecastPacket(PChar));
         PChar->pushPacket(new CCharAbilitiesPacket(PChar));
@@ -11720,7 +11858,15 @@ bool CLuaBaseEntity::checkImbuedItems()
 bool CLuaBaseEntity::isDualWielding()
 {
     CBattleEntity* PBattleEntity = dynamic_cast<CBattleEntity*>(m_PBaseEntity);
-    if (PBattleEntity)
+    if (m_PBaseEntity->objtype == TYPE_PC)
+    {
+        CCharEntity* PChar = dynamic_cast<CCharEntity*>(m_PBaseEntity);
+        if (PChar->getEquip(SLOT_SUB) && !PChar->getEquip(SLOT_SUB)->IsShield())
+        {
+            return PBattleEntity->m_dualWield;
+        }
+    }
+    else if (PBattleEntity)
     {
         return PBattleEntity->m_dualWield;
     }
@@ -12270,6 +12416,29 @@ sol::table CLuaBaseEntity::getNotorietyList()
 }
 
 /************************************************************************
+ *  Function: clearEnmity()
+ *  Purpose : Clears all enmity towards target
+ *  Example : mob:clearEnmity(target)
+ *  Notes   :
+ ************************************************************************/
+void CLuaBaseEntity::clearEnmity(CLuaBaseEntity* PEntity)
+{
+    auto* PMob = static_cast<CMobEntity*>(m_PBaseEntity);
+
+    if (PEntity != nullptr && PEntity->GetBaseEntity()->objtype != TYPE_NPC)
+    {
+        auto* PBattleEntity = static_cast<CBattleEntity*>(PEntity->m_PBaseEntity);
+        PMob->PEnmityContainer->Clear(PBattleEntity->id);
+        if (PEntity->getPet().has_value())
+        {
+            PMob->PEnmityContainer->Clear(PEntity->getPet().value().getID());
+        }
+        auto* PTarget = PMob->PEnmityContainer->GetHighestEnmity();
+        PMob->SetBattleTargetID(PTarget ? PTarget->targid : 0);
+    }
+}
+
+/************************************************************************
  *  Function: setClaimable(...)
  *  Purpose : sets m_IsClaimable for a mob
  *  Example : mob:setClaimable(false)
@@ -12355,9 +12524,10 @@ bool CLuaBaseEntity::addStatusEffect(sol::variadic_args va)
         auto duration   = static_cast<uint32>(va[3].as<double>());
 
         // Optional
-        auto subType  = va[4].is<uint32>() ? va[4].as<uint32>() : 0;
-        auto subPower = va[5].is<uint16>() ? va[5].as<uint16>() : 0;
-        auto tier     = va[6].is<uint16>() ? va[6].as<uint16>() : 0;
+        auto subType      = va[4].is<uint32>() ? va[4].as<uint32>() : 0;
+        auto subPower     = va[5].is<uint16>() ? va[5].as<uint16>() : 0;
+        auto tier         = va[6].is<uint16>() ? va[6].as<uint16>() : 0;
+        auto itemSourceID = va[7].is<uint16>() ? va[7].as<uint16>() : 0;
 
         CStatusEffect* PEffect = new CStatusEffect(effectID,
                                                    effectIcon,
@@ -12367,6 +12537,11 @@ bool CLuaBaseEntity::addStatusEffect(sol::variadic_args va)
                                                    subType,
                                                    subPower,
                                                    tier);
+
+        if (itemSourceID > 0)
+        {
+            PEffect->SetItemSourceID(itemSourceID);
+        }
 
         if (PEffect->GetStatusID() == EFFECT_FOOD)
         {
@@ -12441,7 +12616,7 @@ bool CLuaBaseEntity::addStatusEffectEx(sol::variadic_args va)
  *  Notes   :
  ************************************************************************/
 
-std::optional<CLuaStatusEffect> CLuaBaseEntity::getStatusEffect(uint16 StatusID, sol::object const& SubType)
+std::optional<CLuaStatusEffect> CLuaBaseEntity::getStatusEffect(uint16 StatusID, sol::object const& SubType, sol::object const& ItemSourceID)
 {
     if (m_PBaseEntity->objtype == TYPE_NPC)
     {
@@ -12649,7 +12824,7 @@ uint8 CLuaBaseEntity::countEffect(uint16 StatusID)
  *  Notes   : Can specify Power of the Effect as an option
  ************************************************************************/
 
-bool CLuaBaseEntity::delStatusEffect(uint16 StatusID, sol::object const& SubType)
+bool CLuaBaseEntity::delStatusEffect(uint16 StatusID, sol::object const& SubType, sol::object const& ItemSourceID)
 {
     if (m_PBaseEntity->objtype == TYPE_NPC)
     {
@@ -13042,6 +13217,25 @@ void CLuaBaseEntity::doWildCard(CLuaBaseEntity* PEntity, uint8 total)
 }
 
 /************************************************************************
+ *  Function: doRandomDeal()
+ *  Purpose : Executes the Random Deal job ability
+ *  Example : player:doRandomDeal(target)
+ *  Notes   : Calls the DoRandomDealToEntity function of battleutils
+ ************************************************************************/
+void CLuaBaseEntity::doRandomDeal(CLuaBaseEntity* PTarget)
+{
+
+    if (m_PBaseEntity->objtype != TYPE_PC)
+    {
+         ShowWarning("Invalid entity type calling function (%s).", m_PBaseEntity->getName());
+         return;
+    }
+
+    battleutils::DoRandomDealToEntity(static_cast<CCharEntity*>(m_PBaseEntity), static_cast<CCharEntity*>(PTarget->m_PBaseEntity));
+}
+
+
+/************************************************************************
  *  Function: addCorsairRoll()
  *  Purpose : Adds the Corsair Roll to the Target's Status Effect Container
  *  Example : target:addCorsairRoll(caster:getMainJob(), caster:getMerit(xi.merit.BUST_DURATION), xi.effect.CHAOS_ROLL, effectpower, 0, duration, caster:getID(),
@@ -13068,10 +13262,11 @@ bool CLuaBaseEntity::addCorsairRoll(uint8 casterJob, uint8 bustDuration, uint16 
 
     uint8 maxRolls = 2;
 
-    if (casterJob != JOB_COR)
-    {
-        maxRolls = 1;
-    }
+    // Umeboshi "Subjobs are not nerfed on cactuar. Max rolls will always be 2"
+    // if (casterJob != JOB_COR)
+    // {
+    //     maxRolls = 1;
+    // }
 
     return static_cast<CBattleEntity*>(m_PBaseEntity)->StatusEffectContainer->ApplyCorsairEffect(PEffect, maxRolls, bustDuration);
 }
@@ -13209,6 +13404,18 @@ void CLuaBaseEntity::uncharm()
 }
 
 /************************************************************************
+ *  Function: isTandemValid()
+ *  Purpose : checks if the entity satifies all conditions of tandem
+ *  Example : player:isTandemValid()
+ *  Notes   : for tandem strike and tandem blow
+ ************************************************************************/
+
+bool CLuaBaseEntity::isTandemValid()
+{
+    return battleutils::IsTandemValid(static_cast<CBattleEntity*>(m_PBaseEntity));
+}
+
+/************************************************************************
  *  Function: addBurden()
  *  Purpose : Adds a Burden to a Target
  *  Example : local overload = target:addBurden(xi.magic.ele.EARTH - 1, burden)
@@ -13256,7 +13463,7 @@ void CLuaBaseEntity::setStatDebilitation(uint16 statDebil)
     {
         auto* PChar{ static_cast<CCharEntity*>(m_PBaseEntity) };
         PChar->m_StatsDebilitation = statDebil;
-        PChar->pushPacket(new CCharJobsPacket(PChar));
+        PChar->pushPacket(new CCharJobsPacket(PChar, true)); // Umeboshi "resetflips"
     }
 }
 
@@ -13587,6 +13794,89 @@ bool CLuaBaseEntity::isWeaponTwoHanded()
     }
 
     return weapon->isTwoHanded();
+}
+
+/************************************************************************
+ *  Function: getGuardRate()
+ *  Purpose : Return guard rate.
+ *  Example : defender:getGuardRate(attacker)
+ *  Notes   : Battleutils calculates via GetGuardRate
+ ************************************************************************/
+
+uint8 CLuaBaseEntity::getGuardRate(CLuaBaseEntity* PLuaBaseEntity)
+{
+    if (m_PBaseEntity->objtype == TYPE_NPC)
+    {
+        ShowWarning("Invalid Entity (NPC: %s) calling function.", m_PBaseEntity->getName());
+        return false;
+    }
+
+    CBattleEntity* PDefender = static_cast<CBattleEntity*>(m_PBaseEntity);
+    CBattleEntity* PAttacker = static_cast<CBattleEntity*>(PLuaBaseEntity->GetBaseEntity());
+
+    return battleutils::GetGuardRate(PAttacker, PDefender);
+}
+
+/************************************************************************
+ *  Function: getBlockRate()
+ *  Purpose : Return block rate.
+ *  Example : defender:getBlockRate(attacker)
+ *  Notes   : Battleutils calculates via GetBlockRate
+ ************************************************************************/
+
+uint8 CLuaBaseEntity::getBlockRate(CLuaBaseEntity* PLuaBaseEntity)
+{
+    if (m_PBaseEntity->objtype == TYPE_NPC)
+    {
+        ShowWarning("Invalid Entity (NPC: %s) calling function.", m_PBaseEntity->getName());
+        return false;
+    }
+
+    CBattleEntity* PDefender = static_cast<CBattleEntity*>(m_PBaseEntity);
+    CBattleEntity* PAttacker = static_cast<CBattleEntity*>(PLuaBaseEntity->GetBaseEntity());
+
+    return battleutils::GetBlockRate(PAttacker, PDefender);
+}
+
+/************************************************************************
+ *  Function: getParryRate()
+ *  Purpose : Return block rate.
+ *  Example : defender:getParryRate(attacker)
+ *  Notes   : Battleutils calculates via GetParryRate
+ ************************************************************************/
+
+uint8 CLuaBaseEntity::getParryRate(CLuaBaseEntity* PLuaBaseEntity)
+{
+    if (m_PBaseEntity->objtype == TYPE_NPC)
+    {
+        ShowWarning("Invalid Entity (NPC: %s) calling function.", m_PBaseEntity->getName());
+        return false;
+    }
+
+    CBattleEntity* PDefender = static_cast<CBattleEntity*>(m_PBaseEntity);
+    CBattleEntity* PAttacker = static_cast<CBattleEntity*>(PLuaBaseEntity->GetBaseEntity());
+
+    return battleutils::GetParryRate(PAttacker, PDefender);
+}
+
+/************************************************************************
+ *  Function: getShieldAbsorptionRate()
+ *  Purpose : Return absorbtion rate.
+ *  Example : target:getShieldAbsorbtionRate()
+ *  Notes   : CItem calculates the amount to absorb.
+ ************************************************************************/
+
+uint8 CLuaBaseEntity::getShieldAbsorptionRate()
+{
+    if (m_PBaseEntity->objtype == TYPE_NPC)
+    {
+        ShowWarning("Invalid Entity (NPC: %s) calling function.", m_PBaseEntity->getName());
+        return false;
+    }
+
+    CBattleEntity* PDefender = static_cast<CBattleEntity*>(m_PBaseEntity);
+
+    return PDefender->m_Weapons[SLOT_SUB]->getShieldAbsorption();
 }
 
 /************************************************************************
@@ -14585,6 +14875,184 @@ void CLuaBaseEntity::setPetName(uint8 pType, uint16 value, sol::object const& ar
                         nameValue);
         }
     }
+}
+
+/************************************************************************
+ *  Function: spawnFellow()
+ *  Purpose : Spawns an NPC Fellow
+ *  Example : caster:spawnFellow(fellowid)
+ *  Notes   :
+ ************************************************************************/
+
+void CLuaBaseEntity::spawnFellow(uint8 fellowId)
+{
+    // XI_DEBUG_BREAK_IF(m_PBaseEntity == nullptr);
+    // XI_DEBUG_BREAK_IF(m_PBaseEntity->objtype != TYPE_PC);
+
+    fellowutils::SpawnFellow((CCharEntity*)m_PBaseEntity, fellowId, false);
+}
+
+/************************************************************************
+ *  Function: despawnFellow()
+ *  Purpose : Despawns an NPC Fellow
+ *  Example : target:despawnFellow()
+ *  Notes   :
+ ************************************************************************/
+
+void CLuaBaseEntity::despawnFellow()
+{
+    // XI_DEBUG_BREAK_IF(m_PBaseEntity == nullptr);
+    // XI_DEBUG_BREAK_IF(m_PBaseEntity->objtype != TYPE_PC);
+
+    CCharEntity* PChar   = (CCharEntity*)m_PBaseEntity;
+    CBaseEntity* PFellow = (CBaseEntity*)PChar->m_PFellow;
+    if (PFellow != nullptr)
+    {
+        PChar->loc.zone->PushPacket(PChar, CHAR_INRANGE_SELF, new CFellowDespawnPacket(PFellow));
+        PChar->RemoveFellow();
+    }
+}
+
+/************************************************************************
+ *  Function: getFellow()
+ *  Purpose : Returns the Entity Object of a player's fellow entity
+ *  Example : local fellow = player:getFellow()
+ *  Notes   :
+ ************************************************************************/
+
+std::optional<CLuaBaseEntity> CLuaBaseEntity::getFellow()
+{
+    // XI_DEBUG_BREAK_IF(m_PBaseEntity == nullptr);
+    // XI_DEBUG_BREAK_IF(m_PBaseEntity->objtype != TYPE_PC);
+
+    if (((CCharEntity*)m_PBaseEntity)->m_PFellow != nullptr)
+    {
+        return std::optional<CLuaBaseEntity>((CMobEntity*)(((CCharEntity*)m_PBaseEntity)->m_PFellow));
+    }
+
+    return std::nullopt;
+}
+
+/************************************************************************
+ *  Function: triggerFellowChat()
+ *  Purpose : calls the Chat system when talking to a fellow
+ *  Example : player:triggerFellowChat(CHAT_GENERAL)
+ *  Notes   :
+ ************************************************************************/
+
+void CLuaBaseEntity::triggerFellowChat(uint8 chatType)
+{
+    // XI_DEBUG_BREAK_IF(m_PBaseEntity == nullptr);
+    // XI_DEBUG_BREAK_IF(m_PBaseEntity->objtype != TYPE_PC);
+
+    fellowutils::TriggerFellowChat(static_cast<CCharEntity*>(m_PBaseEntity), chatType);
+}
+
+/************************************************************************
+ *  Function: fellowAttack()
+ *  Purpose : forces the fellow to engage a target
+ *  Example : player:fellowAttack(target)
+ *  Notes   :
+ ************************************************************************/
+
+void CLuaBaseEntity::fellowAttack(CLuaBaseEntity* PEntity)
+{
+    // XI_DEBUG_BREAK_IF(m_PBaseEntity == nullptr);
+    // XI_DEBUG_BREAK_IF(m_PBaseEntity->objtype != TYPE_PC);
+
+    CFellowEntity* PFellow = ((CCharEntity*)m_PBaseEntity)->m_PFellow;
+
+    if (PFellow != nullptr)
+    {
+        fellowutils::AttackTarget(static_cast<CBattleEntity*>(m_PBaseEntity), static_cast<CBattleEntity*>(PEntity->GetBaseEntity()));
+    }
+}
+
+/************************************************************************
+ *  Function: fellowRetreat()
+ *  Purpose : Disengages a fellow from battle, returns to master
+ *  Example : player:fellowRetreat()
+ *  Notes   :
+ ************************************************************************/
+
+void CLuaBaseEntity::fellowRetreat()
+{
+    // XI_DEBUG_BREAK_IF(m_PBaseEntity == nullptr);
+    // XI_DEBUG_BREAK_IF(m_PBaseEntity->objtype != TYPE_PC);
+
+    CFellowEntity* PFellow = ((CCharEntity*)m_PBaseEntity)->m_PFellow;
+
+    if (PFellow != nullptr)
+    {
+        fellowutils::RetreatToMaster(static_cast<CBattleEntity*>(m_PBaseEntity));
+    }
+}
+
+/************************************************************************
+ *  Function: getFellowValue()
+ *  Purpose : Returns the value for the passed column value option
+ *  Example : local name = player:getFellowValue("personality")
+ *  Notes   :
+ ************************************************************************/
+
+int32 CLuaBaseEntity::getFellowValue(std::string const& option)
+{
+    // XI_DEBUG_BREAK_IF(m_PBaseEntity == nullptr);
+    // XI_DEBUG_BREAK_IF(m_PBaseEntity->objtype != TYPE_PC);
+
+    const char* Query = "SELECT %s FROM char_fellow WHERE charid = %u;";
+    int32       ret   = sql->Query(Query, option, m_PBaseEntity->id);
+
+    if (ret != SQL_ERROR && sql->NumRows() != 0 && sql->NextRow() == SQL_SUCCESS)
+    {
+        return sql->GetIntData(0);
+    }
+    ShowDebug("Failed to getFellowValue from db. option %s", option);
+    return 0;
+}
+
+/************************************************************************
+ *  Function: setFellowValue()
+ *  Purpose : char_fellow value manipulation
+ *  Example : player:setFellowValue("personality",option)
+ *  Notes   :
+ ************************************************************************/
+
+void CLuaBaseEntity::setFellowValue(std::string const& option, int32 value)
+{
+    // XI_DEBUG_BREAK_IF(m_PBaseEntity == nullptr);
+    // XI_DEBUG_BREAK_IF(m_PBaseEntity->objtype != TYPE_PC);
+
+    if (strcmp(option.c_str(), "bond") == 0)
+    {
+        int         bondCap = 30; // default cap
+        const char* Query   = "SELECT bondcap FROM char_fellow WHERE charid = %u;";
+        int32       ret     = sql->Query(Query, m_PBaseEntity->id);
+        if (ret != SQL_ERROR && sql->NumRows() != 0 && sql->NextRow() == SQL_SUCCESS)
+        {
+            bondCap = sql->GetIntData(0);
+        }
+        if (value > bondCap)
+            return;
+    }
+    const char* Query = "INSERT INTO char_fellow SET charId = %u, %s = %u ON DUPLICATE KEY UPDATE %s = %u;";
+    sql->Query(Query, m_PBaseEntity->id, option, value, option, value);
+}
+
+/************************************************************************
+ *  Function: delFellowValue()
+ *  Purpose : char_fellow deletion
+ *  Example : player:delFellowValue()
+ *  Notes   :
+ ************************************************************************/
+
+void CLuaBaseEntity::delFellowValue()
+{
+    // XI_DEBUG_BREAK_IF(m_PBaseEntity == nullptr);
+    // XI_DEBUG_BREAK_IF(m_PBaseEntity->objtype != TYPE_PC);
+
+    const char* Query = "DELETE FROM char_fellow WHERE charId = %u LIMIT 1";
+    sql->Query(Query, "DELETE FROM char_fellow WHERE charId = %u LIMIT 1", m_PBaseEntity->id);
 }
 
 void CLuaBaseEntity::registerChocobo(uint32 value)
@@ -15808,6 +16276,25 @@ void CLuaBaseEntity::setDelay(uint16 delay)
 }
 
 /************************************************************************
+ *  Function: getDelay()
+ *  Purpose : Get current delay settings for a mob
+ *  Example : mob:getDelay()
+ ************************************************************************/
+
+int16 CLuaBaseEntity::getDelay()
+{
+    auto* PMobEntity = static_cast<CMobEntity*>(m_PBaseEntity);
+    auto* PItem      = static_cast<CItemWeapon*>(PMobEntity->m_Weapons[SLOT_MAIN]);
+
+    if (PItem)
+    {
+        return PItem->getDelay();
+    }
+
+    return 0;
+}
+
+/************************************************************************
  *  Function: setDamage()
  *  Purpose : Override default damage settings for a Mob
  *  Example : mob:setDamage(40)
@@ -15933,6 +16420,30 @@ void CLuaBaseEntity::setMobSkillAttack(int16 listId)
     }
 
     static_cast<CMobEntity*>(m_PBaseEntity)->setMobMod(MOBMOD_ATTACK_SKILL_LIST, listId);
+}
+
+/************************************************************************
+ *  Function: isMagicCastingEnabled()
+ *  Purpose : Returns true if magic casting is enabled
+ *  Example : mob:isMagicCastingEnabled()
+ *  Notes   :
+ ************************************************************************/
+
+bool CLuaBaseEntity::isMagicCastingEnabled()
+{
+    return m_PBaseEntity->PAI->GetController()->IsMagicCastingEnabled();
+}
+
+/************************************************************************
+ *  Function: isAutoAttackEnabled()
+ *  Purpose : Returns true if auto attack is enabled
+ *  Example : mob:isAutoAttackEnabled()
+ *  Notes   :
+ ************************************************************************/
+
+bool CLuaBaseEntity::isAutoAttackEnabled()
+{
+    return m_PBaseEntity->PAI->GetController()->IsAutoAttackEnabled();
 }
 
 /************************************************************************
@@ -16093,6 +16604,39 @@ void CLuaBaseEntity::setRoamFlags(uint16 newRoamFlags)
     }
 
     static_cast<CMobEntity*>(m_PBaseEntity)->m_roamFlags = newRoamFlags;
+}
+
+/************************************************************************
+ *  Function: getPixieHate()
+ *  Purpose : Returns the current pixie hate of the player
+ *  Example : local status = player:getFomorHate()
+ ************************************************************************/
+
+uint32 CLuaBaseEntity::getPixieHate()
+{
+    if (m_PBaseEntity->objtype != TYPE_PC)
+    {
+        return 0;
+    }
+
+    return static_cast<CCharEntity*>(m_PBaseEntity)->m_pixieHate;
+}
+
+/************************************************************************
+ *  Function: setPixieHate()
+ *  Purpose : Returns the current pixie hate of the player
+ *  Example : local status = player:getFomorHate()
+ ************************************************************************/
+
+void CLuaBaseEntity::setPixieHate(uint32 pixieHate)
+{
+    if (m_PBaseEntity->objtype != TYPE_PC)
+    {
+        return;
+    }
+
+    auto* PChar = static_cast<CCharEntity*>(m_PBaseEntity);
+    PChar->SetPixieHate(pixieHate);
 }
 
 /************************************************************************
@@ -16317,7 +16861,7 @@ void CLuaBaseEntity::useJobAbility(uint16 skillID, sol::object const& pet)
 
 void CLuaBaseEntity::useMobAbility(sol::variadic_args va)
 {
-    if (m_PBaseEntity->objtype != TYPE_TRUST && m_PBaseEntity->objtype != TYPE_MOB && m_PBaseEntity->objtype != TYPE_PET)
+    if (m_PBaseEntity->objtype != TYPE_TRUST && m_PBaseEntity->objtype != TYPE_MOB && m_PBaseEntity->objtype != TYPE_PET && m_PBaseEntity->objtype != TYPE_FELLOW)
     {
         ShowWarning("Entity is not a Trust, Mob, or Pet (%s).", m_PBaseEntity->getName());
         return;
@@ -16372,6 +16916,60 @@ void CLuaBaseEntity::useMobAbility(sol::variadic_args va)
         }
     }));
     // clang-format on
+}
+
+/************************************************************************
+ *  Function: triggerDrawIn()
+ *  Purpose : Forces a mob to use DrawIn on the mob's current target
+ *  Example : mob:triggerDrawIn(bool includeParty, CLuaBaseEntity* PEntity)
+ *  Note    : Params can assume a default value by passing nil
+ *          : e.g. triggerDrawIn(true) to pull in a party/alliance
+ ************************************************************************/
+inline int32 CLuaBaseEntity::triggerDrawIn(CLuaBaseEntity* PMobEntity, sol::object const& includePt, sol::object const& drawRange, sol::object const& maxReach, sol::object const& target, sol::object const& incDeadAndMount)
+{
+    auto*          PMob    = static_cast<CMobEntity*>(PMobEntity->m_PBaseEntity);
+    CBattleEntity* PTarget = PMob->GetBattleTarget();
+
+    // Default values
+    uint8  drawInRange         = PMob->GetMeleeRange() * 2;
+    uint16 maximumReach        = 0xFFFF;
+    bool   includeParty        = false;
+    float  offset              = PMob->GetMeleeRange() - 0.2f;
+    bool   includeDeadAndMount = false;
+
+    if ((drawRange != sol::lua_nil) && drawRange.is<uint8>())
+    {
+        drawInRange = drawRange.as<uint8>();
+    }
+
+    if ((maxReach != sol::lua_nil) && maxReach.is<uint16>())
+    {
+        maximumReach = maxReach.as<uint16>();
+    }
+
+    if ((target != sol::lua_nil) && target.is<CLuaBaseEntity*>())
+    {
+        CLuaBaseEntity* PTargetEntity = target.as<CLuaBaseEntity*>();
+        PTarget                       = dynamic_cast<CBattleEntity*>(PTargetEntity->m_PBaseEntity);
+    }
+
+    if (includePt != sol::lua_nil)
+    {
+        includeParty = includePt.as<bool>();
+    }
+
+    if (incDeadAndMount != sol::lua_nil)
+    {
+        includeDeadAndMount = incDeadAndMount.as<bool>();
+    }
+
+    if (PTarget)
+    {
+        // Draw in requires a target
+        battleutils::DrawIn(PTarget, PMob, offset, drawInRange, maximumReach, includeParty, includeDeadAndMount);
+    }
+
+    return 0;
 }
 
 /************************************************************************
@@ -16527,7 +17125,7 @@ void CLuaBaseEntity::untargetableAndUnactionable(uint32 milliseconds)
 
 uint32 CLuaBaseEntity::getPool()
 {
-    if (m_PBaseEntity->objtype == TYPE_MOB || m_PBaseEntity->objtype == TYPE_TRUST)
+    if (m_PBaseEntity->objtype == TYPE_MOB || m_PBaseEntity->objtype == TYPE_TRUST || m_PBaseEntity->objtype == TYPE_FELLOW)
     {
         CMobEntity* PMob = static_cast<CMobEntity*>(m_PBaseEntity);
         return PMob->m_Pool;
@@ -17197,6 +17795,109 @@ void CLuaBaseEntity::clearPacketMods()
     }
 }
 
+/************************************************************************
+*  Function: sendNpcEmote()
+*  Purpose : Makes an NPC entity emit an emote.
+*  Example : taru:sendEmote(target, tpz.emote.PANIC, tpz.emoteMode.MOTION)
+*  Notes   : Originally added for Pirate / Brigand chart events
+             target parameter can be nil
+************************************************************************/
+
+void CLuaBaseEntity::sendNpcEmote(CLuaBaseEntity* PBaseEntity, sol::object const& p0, sol::object const& p1, sol::object const& p2)
+{
+    // XI_DEBUG_BREAK_IF(m_PBaseEntity == nullptr);
+    // XI_DEBUG_BREAK_IF(m_PBaseEntity->objtype != TYPE_NPC);
+
+    // 1st parameter is optional
+    // XI_DEBUG_BREAK_IF(p0 == sol::lua_nil);
+    // XI_DEBUG_BREAK_IF(p1 == sol::lua_nil);
+    // 4th parameter is optional
+
+    CNpcEntity* PNpc        = dynamic_cast<CNpcEntity*>(m_PBaseEntity);
+    uint32      EntityId    = 0;
+    uint16      EntityIndex = 0;
+
+    if (PBaseEntity != nullptr)
+    {
+        EntityId    = PBaseEntity->getID();
+        EntityIndex = PBaseEntity->getTargID();
+    }
+
+    uint16 emoteId     = (p0 != sol::lua_nil) ? p0.as<uint16>() : 0;
+    uint16 emoteModeId = (p1 != sol::lua_nil) ? p1.as<uint16>() : 0;
+    uint16 extra       = (p2 != sol::lua_nil) ? p2.as<uint32>() : 0;
+
+    if (PNpc)
+    {
+        const Emote     emoteID   = static_cast<Emote>(emoteId);
+        const EmoteMode emoteMode = static_cast<EmoteMode>(emoteModeId);
+
+        PNpc->loc.zone->PushPacket(PNpc, CHAR_INRANGE,
+                                   new CCharEmotionPacket(PNpc, EntityId, EntityIndex, emoteID, emoteMode, extra));
+    }
+}
+
+/************************************************************************
+*  Function: sendMobEmote()
+*  Purpose : Makes a mob entity emit an emote.
+*  Example : mob:sendMobEmote(target, xi.emote.PANIC, xi.emoteMode.MOTION)
+*  Notes   : Intended only for humanoid mobs that have the
+             same skeletal meshes for animations as players; such as fomor
+************************************************************************/
+
+void CLuaBaseEntity::sendMobEmote(CLuaBaseEntity* PBaseEntity, sol::object const& p0, sol::object const& p1, sol::object const& p2)
+{
+    // XI_DEBUG_BREAK_IF(m_PBaseEntity == nullptr);
+    // XI_DEBUG_BREAK_IF(m_PBaseEntity->objtype != TYPE_MOB);
+
+    // 1st parameter is optional
+    // XI_DEBUG_BREAK_IF(p0 == sol::lua_nil);
+    // XI_DEBUG_BREAK_IF(p1 == sol::lua_nil);
+    // 4th parameter is optional
+
+    CMobEntity* PMob        = dynamic_cast<CMobEntity*>(m_PBaseEntity);
+    uint32      EntityId    = 0;
+    uint16      EntityIndex = 0;
+
+    if (PBaseEntity != nullptr)
+    {
+        EntityId    = PBaseEntity->getID();
+        EntityIndex = PBaseEntity->getTargID();
+    }
+
+    uint16 emoteId     = (p0 != sol::lua_nil) ? p0.as<uint16>() : 0;
+    uint16 emoteModeId = (p1 != sol::lua_nil) ? p1.as<uint16>() : 0;
+    uint16 extra       = (p2 != sol::lua_nil) ? p2.as<uint32>() : 0;
+
+    if (PMob)
+    {
+        const Emote     emoteID   = static_cast<Emote>(emoteId);
+        const EmoteMode emoteMode = static_cast<EmoteMode>(emoteModeId);
+
+        PMob->loc.zone->PushPacket(PMob, CHAR_INRANGE,
+                                   new CCharEmotionPacket(PMob, EntityId, EntityIndex, emoteID, emoteMode, extra));
+    }
+}
+
+/************************************************************************
+ *  Function: clearSession()
+ *  Purpose : Delete player's account session
+ *  Example : player:clearSession()
+ ************************************************************************/
+
+bool CLuaBaseEntity::clearSession(std::string const& playerName)
+{
+    const char* charName = playerName.c_str();
+    const char* Query    = "DELETE FROM accounts_sessions WHERE charid IN (SELECT charid from chars where charname = '%s')";
+
+    if (sql->Query(Query, charName) == SQL_SUCCESS && sql->AffectedRows() > 0)
+    {
+        return true;
+    }
+
+    return false;
+}
+
 //==========================================================//
 
 void CLuaBaseEntity::Register()
@@ -17355,6 +18056,7 @@ void CLuaBaseEntity::Register()
     // Items
     SOL_REGISTER("getEquipID", CLuaBaseEntity::getEquipID);
     SOL_REGISTER("getEquippedItem", CLuaBaseEntity::getEquippedItem);
+    SOL_REGISTER("hasEquipped", CLuaBaseEntity::hasEquipped);
     SOL_REGISTER("hasItem", CLuaBaseEntity::hasItem);
     SOL_REGISTER("getItemCount", CLuaBaseEntity::getItemCount);
     SOL_REGISTER("addItem", CLuaBaseEntity::addItem);
@@ -17755,6 +18457,7 @@ void CLuaBaseEntity::Register()
     SOL_REGISTER("updateClaim", CLuaBaseEntity::updateClaim);
     SOL_REGISTER("hasEnmity", CLuaBaseEntity::hasEnmity);
     SOL_REGISTER("getNotorietyList", CLuaBaseEntity::getNotorietyList);
+    SOL_REGISTER("clearEnmity", CLuaBaseEntity::clearEnmity);
     SOL_REGISTER("setClaimable", CLuaBaseEntity::setClaimable);
     SOL_REGISTER("getClaimable", CLuaBaseEntity::getClaimable);
     SOL_REGISTER("clearEnmityForEntity", CLuaBaseEntity::clearEnmityForEntity);
@@ -17790,6 +18493,7 @@ void CLuaBaseEntity::Register()
 
     SOL_REGISTER("fold", CLuaBaseEntity::fold);
     SOL_REGISTER("doWildCard", CLuaBaseEntity::doWildCard);
+    SOL_REGISTER("doRandomDeal", CLuaBaseEntity::doRandomDeal);
     SOL_REGISTER("addCorsairRoll", CLuaBaseEntity::addCorsairRoll);
     SOL_REGISTER("hasCorsairEffect", CLuaBaseEntity::hasCorsairEffect);
     SOL_REGISTER("hasBustEffect", CLuaBaseEntity::hasBustEffect);
@@ -17800,6 +18504,7 @@ void CLuaBaseEntity::Register()
     // BST
     SOL_REGISTER("charm", CLuaBaseEntity::charm);
     SOL_REGISTER("uncharm", CLuaBaseEntity::uncharm);
+    SOL_REGISTER("isTandemValid", CLuaBaseEntity::isTandemValid);
 
     // PUP
     SOL_REGISTER("addBurden", CLuaBaseEntity::addBurden);
@@ -17833,6 +18538,10 @@ void CLuaBaseEntity::Register()
     SOL_REGISTER("getRangedDmgRank", CLuaBaseEntity::getRangedDmgRank);
     SOL_REGISTER("getAmmoDmg", CLuaBaseEntity::getAmmoDmg);
     SOL_REGISTER("getWeaponHitCount", CLuaBaseEntity::getWeaponHitCount);
+    SOL_REGISTER("getGuardRate", CLuaBaseEntity::getGuardRate);
+    SOL_REGISTER("getBlockRate", CLuaBaseEntity::getBlockRate);
+    SOL_REGISTER("getParryRate", CLuaBaseEntity::getParryRate);
+    SOL_REGISTER("getShieldAbsorptionRate", CLuaBaseEntity::getShieldAbsorptionRate);
 
     SOL_REGISTER("removeAmmo", CLuaBaseEntity::removeAmmo);
 
@@ -17911,6 +18620,17 @@ void CLuaBaseEntity::Register()
     SOL_REGISTER("removeAllSimpleGambits", CLuaBaseEntity::removeAllSimpleGambits);
     SOL_REGISTER("setTrustTPSkillSettings", CLuaBaseEntity::setTrustTPSkillSettings);
 
+    // Adventuring Fellow related
+    SOL_REGISTER("spawnFellow", CLuaBaseEntity::spawnFellow);
+    SOL_REGISTER("despawnFellow", CLuaBaseEntity::despawnFellow);
+    SOL_REGISTER("getFellow", CLuaBaseEntity::getFellow);
+    SOL_REGISTER("triggerFellowChat", CLuaBaseEntity::triggerFellowChat);
+    SOL_REGISTER("fellowAttack", CLuaBaseEntity::fellowAttack);
+    SOL_REGISTER("fellowRetreat", CLuaBaseEntity::fellowRetreat);
+    SOL_REGISTER("getFellowValue", CLuaBaseEntity::getFellowValue);
+    SOL_REGISTER("setFellowValue", CLuaBaseEntity::setFellowValue);
+    SOL_REGISTER("delFellowValue", CLuaBaseEntity::delFellowValue);
+
     // Mob Entity-Specific
     SOL_REGISTER("setMobLevel", CLuaBaseEntity::setMobLevel);
     SOL_REGISTER("getEcosystem", CLuaBaseEntity::getEcosystem);
@@ -17948,6 +18668,7 @@ void CLuaBaseEntity::Register()
     SOL_REGISTER("isAggroable", CLuaBaseEntity::isAggroable);
 
     SOL_REGISTER("setDelay", CLuaBaseEntity::setDelay);
+    SOL_REGISTER("getDelay", CLuaBaseEntity::getDelay);
     SOL_REGISTER("setDamage", CLuaBaseEntity::setDamage);
     SOL_REGISTER("hasSpellList", CLuaBaseEntity::hasSpellList);
     SOL_REGISTER("setSpellList", CLuaBaseEntity::setSpellList);
@@ -17955,6 +18676,8 @@ void CLuaBaseEntity::Register()
     SOL_REGISTER("setMagicCastingEnabled", CLuaBaseEntity::setMagicCastingEnabled);
     SOL_REGISTER("setMobAbilityEnabled", CLuaBaseEntity::setMobAbilityEnabled);
     SOL_REGISTER("setMobSkillAttack", CLuaBaseEntity::setMobSkillAttack);
+    SOL_REGISTER("isMagicCastingEnabled", CLuaBaseEntity::isMagicCastingEnabled);
+    SOL_REGISTER("isAutoAttackEnabled", CLuaBaseEntity::isAutoAttackEnabled);
 
     SOL_REGISTER("getMobMod", CLuaBaseEntity::getMobMod);
     SOL_REGISTER("setMobMod", CLuaBaseEntity::setMobMod);
@@ -17967,6 +18690,8 @@ void CLuaBaseEntity::Register()
     SOL_REGISTER("setBehaviour", CLuaBaseEntity::setBehaviour);
     SOL_REGISTER("getRoamFlags", CLuaBaseEntity::getRoamFlags);
     SOL_REGISTER("setRoamFlags", CLuaBaseEntity::setRoamFlags);
+    SOL_REGISTER("getPixieHate", CLuaBaseEntity::getPixieHate);
+    SOL_REGISTER("setPixieHate", CLuaBaseEntity::setPixieHate);
 
     SOL_REGISTER("getTarget", CLuaBaseEntity::getTarget);
     SOL_REGISTER("updateTarget", CLuaBaseEntity::updateTarget);
@@ -17978,6 +18703,7 @@ void CLuaBaseEntity::Register()
     SOL_REGISTER("castSpell", CLuaBaseEntity::castSpell);
     SOL_REGISTER("useJobAbility", CLuaBaseEntity::useJobAbility);
     SOL_REGISTER("useMobAbility", CLuaBaseEntity::useMobAbility);
+    SOL_REGISTER("triggerDrawIn", CLuaBaseEntity::triggerDrawIn);
     SOL_REGISTER("hasTPMoves", CLuaBaseEntity::hasTPMoves);
 
     SOL_REGISTER("weaknessTrigger", CLuaBaseEntity::weaknessTrigger);
@@ -18002,6 +18728,11 @@ void CLuaBaseEntity::Register()
     SOL_REGISTER("forceRezone", CLuaBaseEntity::forceRezone);
     SOL_REGISTER("forceLogout", CLuaBaseEntity::forceLogout);
 
+    SOL_REGISTER("setAnimPath", CLuaBaseEntity::setAnimPath);
+    SOL_REGISTER("setAnimStart", CLuaBaseEntity::setAnimStart);
+    SOL_REGISTER("setAnimBegin", CLuaBaseEntity::setAnimBegin);
+    SOL_REGISTER("sendUpdateToZoneCharsInRange", CLuaBaseEntity::sendUpdateToZoneCharsInRange);
+
     // Abyssea
     SOL_REGISTER("getAvailableTraverserStones", CLuaBaseEntity::getAvailableTraverserStones);
     SOL_REGISTER("getTraverserEpoch", CLuaBaseEntity::getTraverserEpoch);
@@ -18024,6 +18755,13 @@ void CLuaBaseEntity::Register()
 
     SOL_REGISTER("addPacketMod", CLuaBaseEntity::addPacketMod);
     SOL_REGISTER("clearPacketMods", CLuaBaseEntity::clearPacketMods);
+
+    SOL_REGISTER("clearActionQueue", CLuaBaseEntity::clearActionQueue);
+    SOL_REGISTER("clearTimerQueue", CLuaBaseEntity::clearTimerQueue);
+    SOL_REGISTER("getTraits", CLuaBaseEntity::getTraits);
+    SOL_REGISTER("sendNpcEmote", CLuaBaseEntity::sendNpcEmote);
+    SOL_REGISTER("sendMobEmote", CLuaBaseEntity::sendMobEmote);
+    SOL_REGISTER("clearSession", CLuaBaseEntity::clearSession);
 }
 
 std::ostream& operator<<(std::ostream& os, const CLuaBaseEntity& entity)

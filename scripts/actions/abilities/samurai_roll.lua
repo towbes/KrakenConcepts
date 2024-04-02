@@ -1,6 +1,6 @@
 -----------------------------------
 -- Ability: Samurai Roll
--- Enhances "Store TP" effect for party members within area of effect
+-- Enhances 'Store TP' effect for party members within area of effect
 -- Optimal Job: Samurai
 -- Lucky Number: 2
 -- Unlucky Number: 6

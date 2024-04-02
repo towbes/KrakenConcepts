@@ -188,7 +188,7 @@ local function dropChance(player)
     end
 
     local rand = math.random()
-    if rand < utils.clamp(xi.settings.main.CASKET_DROP_RATE + kupowersMMBPower + prowessCasketsPower, 0, 1) then
+    if rand < utils.clamp(xi.settings.main.CASKET_DROP_RATE + kupowersMMBPower + prowessCasketsPower, 0, 1) and not player:hasStatusEffect(xi.effect.CONFRONTATION) then
         return true
     end
 
@@ -745,7 +745,8 @@ xi.caskets.onTrade = function(player, npc, trade)
 
     if locked == 1 then
         if
-            player:getMainJob() == xi.job.THF and
+            (player:getMainJob() == xi.job.THF or
+            player:getSubJob() == xi.job.THF) and
             npcUtil.tradeHasExactly(trade, xi.item.SET_OF_THIEFS_TOOLS)
         then
             local splitNumbers = {}

@@ -188,12 +188,14 @@ local pTable =
     [xi.magic.spell.BANISH_II     ] = { xi.mod.MND,    0,   85,    1,   85, 113, 0 },
     [xi.magic.spell.BANISH_III    ] = { xi.mod.MND,    0,  198,  1.5,  198, 250, 0 },
     [xi.magic.spell.BANISH_IV     ] = { xi.mod.MND,    0,  420,  1.5,  420, 400, 0 }, -- Enemy only. Stats unknown/unchecked.
+    [xi.magic.spell.BANISH_V      ] = { xi.mod.MND,    0,  650,  1.5,  650, 600, 0 }, -- Enemy only. Stats unknown/unchecked.
     [xi.magic.spell.BANISHGA      ] = { xi.mod.MND,    0,   50,    1,   50,  46, 0 },
     [xi.magic.spell.BANISHGA_II   ] = { xi.mod.MND,    0,  180,    1,  180, 133, 0 },
     [xi.magic.spell.BANISHGA_III  ] = { xi.mod.MND,    0,  480,  1.5,  480, 450, 0 }, -- Enemy only. Stats unknown.
     [xi.magic.spell.BANISHGA_IV   ] = { xi.mod.MND,    0,  600,  1.5,  600, 600, 0 }, -- Enemy only. Stats unknown.
-    [xi.magic.spell.HOLY          ] = { xi.mod.MND,    0,  125,    1,  125, 150, 0 },
-    [xi.magic.spell.HOLY_II       ] = { xi.mod.MND,    0,  250,    2,  250, 300, 0 },
+    [xi.magic.spell.BANISHGA_V    ] = { xi.mod.MND,    0,  750,  1.5,  750, 750, 0 }, -- Enemy only. Stats unknown.
+    [xi.magic.spell.HOLY          ] = { xi.mod.MND,    0,  250,    1,  250, 300, 0 },
+    [xi.magic.spell.HOLY_II       ] = { xi.mod.MND,    0,  350,    2,  350, 350, 0 },
 
 -- Dark spells.
 --                                       1          2     3     4      5      6    7    8    9     10    11    12    13
@@ -290,7 +292,7 @@ xi.spells.damage.calculateBaseDamage = function(caster, target, spellId, spellGr
         end
 
         -- BLM Job Point: With Manawell mDMG +1
-        if caster:hasStatusEffect(xi.effect.MANAWELL) then
+        if caster:hasStatusEffect(xi.effect.MANAWELL) and spellGroup ~= xi.magic.spellGroup.NINJUTSU then
             baseSpellDamageBonus = baseSpellDamageBonus + caster:getJobPointLevel(xi.jp.MANAWELL_EFFECT)
             caster:delStatusEffectSilent(xi.effect.MANAWELL)
         end
@@ -306,16 +308,73 @@ xi.spells.damage.calculateBaseDamage = function(caster, target, spellId, spellGr
         end
 
         -- SCH Job Point: Stratagem Effect III
+        -- TODO: SCH Mainjob only?
         if
             (spellGroup == xi.magic.spellGroup.WHITE and caster:hasStatusEffect(xi.effect.RAPTURE)) or
             (spellGroup == xi.magic.spellGroup.BLACK and caster:hasStatusEffect(xi.effect.EBULLIENCE))
         then
             baseSpellDamageBonus = baseSpellDamageBonus + caster:getJobPointLevel(xi.jp.STRATEGEM_EFFECT_III) * 2
         end
+
+        -- WHM Merit: Banish Effect
+        if
+            (spellId >= xi.magic.spell.BANISH and spellId <= xi.magic.spell.BANISH_V) or
+            (spellId >= xi.magic.spell.BANISHGA and spellId <= xi.magic.spell.BANISHGA_V)
+        then
+            baseSpellDamageBonus = baseSpellDamageBonus + (caster:getMerit(xi.merit.BANISH_EFFECT) * 2)
+        end
     end
 
     -- Bonus to spell base damage from gear.
     baseSpellDamageBonus = baseSpellDamageBonus + caster:getMod(xi.mod.MAGIC_DAMAGE)
+
+    if caster:hasStatusEffect(xi.effect.CASCADE) then
+        caster:delStatusEffectSilent(xi.effect.CASCADE)
+        caster:setTP(0)
+    end
+
+    -- Banish: Afflatus Misery
+    if caster:hasStatusEffect(xi.effect.AFFLATUS_MISERY) and
+        (spellId >= xi.magic.spell.BANISH and spellId <= xi.magic.spell.BANISH_V) or
+        (spellId >= xi.magic.spell.BANISHGA and spellId <= xi.magic.spell.BANISHGA_V)
+    then
+        -- caster:setLocalVar('Misery_Power', caster:getMod(xi.mod.AFFLATUS_MISERY))
+        -- local misery = caster:getLocalVar('Misery_Power')
+        local misery      = caster:getMod(xi.mod.AFFLATUS_MISERY)
+        local miseryBonus = 0
+        local miseryMerit = (1 + caster:getMerit(xi.merit.ANIMUS_MISERY) / 100)
+        misery = misery * miseryMerit -- Merits increase stored damage.
+
+        if misery > 195 then
+            miseryBonus = 150
+        elseif misery > 135 then
+            local range = 195 - 135 -- Damage Taken Tiers
+            local scale = (misery - 135) / range -- Linear scaling between tiers based on misery.
+            miseryBonus = math.floor(scale * 50 + 50)
+        elseif misery > 45 then
+            local range = 135 - 45 -- Damage Taken Tiers
+            local scale = (misery - 45) / range -- Linear scaling between tiers based on misery.
+            miseryBonus = math.floor(scale * 40 + 10)
+        else
+            miseryBonus = 0
+        end
+
+        if spellId == xi.magic.spell.BANISH then
+            miseryBonus = miseryBonus
+        elseif spellId == xi.magic.spell.BANISH_II or spellId == xi.magic.spell.BANISHGA then
+            miseryBonus = miseryBonus * 1.5
+        elseif spellId == xi.magic.spell.BANISH_III  or spellId == xi.magic.spell.BANISHGA_II then
+            miseryBonus = miseryBonus * 2.0
+        elseif spellId == xi.magic.spell.BANISH_IV  or spellId == xi.magic.spell.BANISHGA_III then -- Not used by players, value unknown.
+            miseryBonus = miseryBonus * 2.5
+        end
+
+        baseSpellDamageBonus = baseSpellDamageBonus + miseryBonus
+        --Afflatus Misery Mod Gets Used Up
+        caster:setMod(xi.mod.AFFLATUS_MISERY, 0)
+    end
+
+    
 
     -----------------------------------
     -- STEP 4: Spell Damage
@@ -380,7 +439,7 @@ xi.spells.damage.calculateMagianAffinity = function()
     local magianAffinity = 1
 
     -- TODO: Code Magian Trials affinity.
-    -- TODO: ADD (because it's additive) bonuses from atmas. Also, not sure the current affinity mod is the ACTUAL "affinity" mod as understood in wikis.
+    -- TODO: ADD (because it's additive) bonuses from atmas. Also, not sure the current affinity mod is the ACTUAL 'affinity' mod as understood in wikis.
 
     return magianAffinity
 end
@@ -395,7 +454,7 @@ xi.spells.damage.calculateSDT = function(target, spellElement)
 
     -- SDT (Species/Specific Damage Taken) is a stat/mod present in mobs and players that applies a % to specific damage types.
     -- Each of the 8 elements has an SDT modifier (Modifiers 54 to 61. Check script(globals/status.lua)
-    -- Mob elemental modifiers are populated by the values set in "mob_resistances.sql" (The database). SDT columns.
+    -- Mob elemental modifiers are populated by the values set in 'mob_resistances.sql' (The database). SDT columns.
     -- The value of the modifiers are base 10000. Positive numbers mean less damage taken. Negative mean more damage taken.
     -- Examples:
     -- A value of 5000 -> 50% LESS damage taken.
@@ -407,7 +466,7 @@ xi.spells.damage.calculateSDT = function(target, spellElement)
     -- A word on SDT as understood in some wikis, even if they are refering to resistance and not actual SDT
     -- SDT under 50% applies a flat 1/2 *, which was for a long time confused with an additional resist tier, which, in reality, its an independent multiplier.
     -- This is understandable, because in a way, it is effectively a whole tier, but recent testing with skillchains/magic bursts after resist was removed from them, proved this.
-    -- SDT affects magic burst damage, but never in a "negative" way.
+    -- SDT affects magic burst damage, but never in a 'negative' way.
     -- https://www.bg-wiki.com/ffxi/Resist for some SDT info.
     -- *perhaps this simply means there is a cap/clamp limiting it there.
 
@@ -482,7 +541,14 @@ xi.spells.damage.calculateIfMagicBurstBonus = function(caster, target, spellId, 
 
         caster:delStatusEffectSilent(xi.effect.BURST_AFFINITY)
     end
-
+    
+    if spellGroup == xi.magic.spellGroup.BLACK then
+        if
+            not caster:hasStatusEffect(xi.effect.IMMANENCE)
+        then
+            return magicBurstBonus
+        end
+    end
     -- Obtain multiplier from gear, atma and job traits -- Job traits should be done separately
     modBurst = modBurst + (caster:getMod(xi.mod.MAG_BURST_BONUS) / 100) + ancientMagicBurstBonus
 
@@ -573,6 +639,7 @@ xi.spells.damage.calculateMagicBonusDiff = function(caster, target, spellId, ski
     local mab            = caster:getMod(xi.mod.MATT)
     local mabCrit        = caster:getMod(xi.mod.MAGIC_CRITHITRATE)
     local mDefBarBonus   = 0
+    local eleATT         = 0
 
     -- Ninja spell bonuses
     if skillType == xi.skill.NINJUTSU then
@@ -647,8 +714,26 @@ xi.spells.damage.calculateMagicBonusDiff = function(caster, target, spellId, ski
         mab = mab + caster:getMerit(xi.merit.ANCIENT_MAGIC_ATK_BONUS)
     end
 
+    if spellElement == xi.element.FIRE then
+        eleATT = eleATT + caster:getMod(xi.mod.FIREATT)
+    elseif spellElement == xi.element.ICE then
+        eleATT = eleATT + caster:getMod(xi.mod.ICEATT)
+    elseif spellElement == xi.element.WIND then
+        eleATT = eleATT + caster:getMod(xi.mod.WINDATT)
+    elseif spellElement == xi.element.EARTH then
+        eleATT = eleATT + caster:getMod(xi.mod.EARTHATT)
+    elseif spellElement == xi.element.THUNDER then
+        eleATT = eleATT + caster:getMod(xi.mod.THUNDERATT)
+    elseif spellElement == xi.element.WATER then
+        eleATT = eleATT + caster:getMod(xi.mod.WATERATT)
+    elseif spellElement == xi.element.LIGHT then
+        eleATT = eleATT + caster:getMod(xi.mod.LIGHTATT)
+    elseif spellElement == xi.element.DARK then
+        eleATT = eleATT + caster:getMod(xi.mod.DARKATT)
+    end
+
     -- Final operations
-    local finalCasterMAB = (100 + mab) * (1 + caster:getMod(xi.mod.AUTO_MAB_COEFFICIENT) / 100)
+    local finalCasterMAB = (100 + mab + eleATT) * (1 + caster:getMod(xi.mod.AUTO_MAB_COEFFICIENT) / 100)
     local finalTargetMDB = 100 + target:getMod(xi.mod.MDEF) + mDefBarBonus
 
     magicBonusDiff = utils.clamp(finalCasterMAB / finalTargetMDB, 0, 10)
@@ -658,7 +743,7 @@ end
 
 -- Calculate: Target Magic Damage Adjustment (TMDA)
 -- SDT follow-up. This time for specific modifiers.
--- Referred to on item as "Magic Damage Taken -%", "Damage Taken -%" (Ex. Defending Ring) and "Magic Damage Taken II -%" (Aegis)
+-- Referred to on item as 'Magic Damage Taken -%', 'Damage Taken -%' (Ex. Defending Ring) and 'Magic Damage Taken II -%' (Aegis)
 xi.spells.damage.calculateTMDA = function(target, spellElement)
     local damageType                  = xi.damageType.ELEMENTAL + spellElement
     local targetMagicDamageAdjustment = target:checkLiementAbsorb(damageType) -- Check for Liement.
@@ -670,15 +755,15 @@ xi.spells.damage.calculateTMDA = function(target, spellElement)
     -- The values set for this modifiers are base 10000.
     -- -2500 in item_mods.sql means -25% damage recived.
     -- 2500 would mean 25% ADDITIONAL damage taken.
-    -- The effects of the "Shell" spells are also included in this step.
+    -- The effects of the 'Shell' spells are also included in this step.
 
     local globalDamageTaken   = target:getMod(xi.mod.DMG) / 10000         -- Mod is base 10000
     local magicDamageTaken    = target:getMod(xi.mod.DMGMAGIC) / 10000    -- Mod is base 10000
     local magicDamageTakenII  = target:getMod(xi.mod.DMGMAGIC_II) / 10000 -- Mod is base 10000
     local uMagicDamageTaken   = target:getMod(xi.mod.UDMGMAGIC) / 10000   -- Mod is base 10000.
-    local combinedDamageTaken = utils.clamp(magicDamageTaken + globalDamageTaken, -0.5, 0.5) -- The combination of regular "Damage Taken" and "Magic Damage Taken" caps at 50% both ways.
+    local combinedDamageTaken = utils.clamp(magicDamageTaken + globalDamageTaken, -0.5, 0.5) -- The combination of regular 'Damage Taken' and 'Magic Damage Taken' caps at 50% both ways.
 
-    targetMagicDamageAdjustment = utils.clamp(targetMagicDamageAdjustment + combinedDamageTaken + magicDamageTakenII, 0.125, 1.875) -- "Magic Damage Taken II" bypasses the regular cap, but combined cap is 87.5% both ways.
+    targetMagicDamageAdjustment = utils.clamp(targetMagicDamageAdjustment + combinedDamageTaken + magicDamageTakenII, 0.125, 1.875) -- 'Magic Damage Taken II' bypasses the regular cap, but combined cap is 87.5% both ways.
     targetMagicDamageAdjustment = utils.clamp(targetMagicDamageAdjustment + uMagicDamageTaken, 0, 2) -- Uncapped magic damage modifier. Cap is 100% both ways.
 
     return targetMagicDamageAdjustment
@@ -758,7 +843,7 @@ xi.spells.damage.calculateNinSkillBonus = function(caster, spellId, skillType)
         [3] = { 275, 500 },
     }
 
-    if skillType == xi.skill.NINJUTSU and caster:getMainJob() == xi.job.NIN then
+if skillType == xi.skill.NINJUTSU and (caster:getMainJob() == xi.job.NIN or caster:getSubJob() == xi.job.NIN) then
         -- Get spell tier.
         local spellTier = 3
 
@@ -821,8 +906,8 @@ xi.spells.damage.calculateScarletDeliriumMultiplier = function(caster)
     -- Scarlet delirium are 2 different status effects. SCARLET_DELIRIUM_1 is the one that boosts power.
     if caster:hasStatusEffect(xi.effect.SCARLET_DELIRIUM_1) then
         local power = caster:getStatusEffect(xi.effect.SCARLET_DELIRIUM_1):getPower()
-
         scarletDeliriumMultiplier = 1 + power / 100
+        -- caster:printToPlayer(string.format('SD Multiplier: %s', scarletDeliriumMultiplier), xi.msg.channel.SYSTEM_3) -- Debug to see modifier of each hit in a weapon skill.
     end
 
     return scarletDeliriumMultiplier
@@ -877,7 +962,7 @@ xi.spells.damage.calculateNukeAbsorbOrNullify = function(target, spellElement)
     return nukeAbsorbOrNullify
 end
 
--- Consecutive Elemental Damage Penalty. Most commonly known as "Nuke Wall".
+-- Consecutive Elemental Damage Penalty. Most commonly known as 'Nuke Wall'.
 xi.spells.damage.calculateNukeWallFactor = function(target, spellElement, finalDamage)
     local nukeWallFactor = 1
 
@@ -966,8 +1051,11 @@ xi.spells.damage.useDamageSpell = function(caster, target, spell)
     finalDamage = math.floor(finalDamage * magianAffinity)
     finalDamage = math.floor(finalDamage * sdt)
     finalDamage = math.floor(finalDamage * resist)
+
+    if not caster:hasStatusEffect(xi.effect.IMMANENCE) then
     finalDamage = math.floor(finalDamage * magicBurst)
     finalDamage = math.floor(finalDamage * magicBurstBonus)
+    end
     finalDamage = math.floor(finalDamage * dayAndWeather)
     finalDamage = math.floor(finalDamage * magicBonusDiff)
     finalDamage = math.floor(finalDamage * targetMagicDamageAdjustment)
@@ -984,7 +1072,17 @@ xi.spells.damage.useDamageSpell = function(caster, target, spell)
     finalDamage = math.floor(finalDamage * areaOfEffectResistance)
     finalDamage = math.floor(finalDamage * nukeAbsorbOrNullify)
 
-    -- Handle "Nuke Wall". It must be handled after all previous calculations, but before clamp.
+    if 
+        target:getAllegiance() == 2 or
+        target:getAllegiance() == 3 or
+        target:getAllegiance() == 4 or
+        target:getAllegiance() == 5 or
+        target:getAllegiance() == 6
+    then
+        finalDamage = math.floor(finalDamage * 0.45)
+    end
+
+    -- Handle 'Nuke Wall'. It must be handled after all previous calculations, but before clamp.
     local nukeWallFactor = xi.spells.damage.calculateNukeWallFactor(target, spellElement, finalDamage)
 
     finalDamage = math.floor(finalDamage * nukeWallFactor)
@@ -999,6 +1097,11 @@ xi.spells.damage.useDamageSpell = function(caster, target, spell)
         finalDamage = utils.clamp(utils.oneforall(target, finalDamage), 0, 99999)
     end
 
+    -- Handle Magic Stoneskin
+    if finalDamage > 0 then
+        finalDamage = utils.clamp(utils.magicstoneskin(target, finalDamage), -99999, 99999)
+    end
+
     -- Handle Stoneskin
     if finalDamage > 0 then
         finalDamage = utils.clamp(utils.stoneskin(target, finalDamage), -99999, 99999)
@@ -1008,9 +1111,14 @@ xi.spells.damage.useDamageSpell = function(caster, target, spell)
     if finalDamage < 0 then
         finalDamage = target:addHP(-finalDamage)
         spell:setMsg(xi.msg.basic.MAGIC_RECOVERS_HP)
+    end
+
+    if target:getMod(xi.mod.DMGMAGIC_CAP) > 0 and finalDamage > target:getMod(xi.mod.DMGMAGIC_CAP) then
+        finalDamage = target:getMod(xi.mod.DMGMAGIC_CAP)
 
     -- Handle final adjustments. Most are located in core. TODO: Decide if we want core handling this.
     else
+
         -- Handle Bind break and TP?
         target:takeSpellDamage(caster, spell, finalDamage, xi.attackType.MAGICAL, xi.damageType.ELEMENTAL + spellElement)
 
@@ -1025,10 +1133,11 @@ xi.spells.damage.useDamageSpell = function(caster, target, spell)
             target:addTP(100)
         end
 
-        -- Add "Magic Burst!" message
-        if magicBurst > 1 then
+        -- Add 'Magic Burst!' message
+        if magicBurst > 1 and not caster:hasStatusEffect(xi.effect.IMMANENCE) then
             spell:setMsg(xi.msg.basic.MAGIC_BURST_DAMAGE)
             caster:triggerRoeEvent(xi.roeTrigger.MAGIC_BURST)
+
         end
     end
 

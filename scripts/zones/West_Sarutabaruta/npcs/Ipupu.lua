@@ -1,7 +1,7 @@
 -----------------------------------
 -- Area: West Sarutabaruta
 --  NPC: Ipupu
--- Note: Involved in Quest "Glyph Hanger"
+-- Note: Involved in Quest 'Glyph Hanger'
 -- !pos 251.745 -5.5 35.539 115
 -----------------------------------
 local entity = {}

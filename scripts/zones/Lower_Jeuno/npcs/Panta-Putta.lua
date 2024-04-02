@@ -21,16 +21,16 @@ entity.onTrigger = function(player, npc)
         player:getFameLevel(xi.quest.fame_area.JEUNO) >= 4 and
         theWonderMagicSet == QUEST_AVAILABLE
     then
-        player:startEvent(77) -- Start quest "The wonder magic set"
+        player:startEvent(77) -- Start quest 'The wonder magic set'
 
     elseif
         theWonderMagicSet == QUEST_ACCEPTED and
         not hasWonderMagicSet
     then
-        player:startEvent(55) -- During quest "The wonder magic set"
+        player:startEvent(55) -- During quest 'The wonder magic set'
 
     elseif hasWonderMagicSet then
-        player:startEvent(33) -- Finish quest "The wonder magic set"
+        player:startEvent(33) -- Finish quest 'The wonder magic set'
 
     elseif
         theWonderMagicSet == QUEST_COMPLETED and
@@ -43,7 +43,7 @@ entity.onTrigger = function(player, npc)
         player:getQuestStatus(xi.quest.log_id.JEUNO, xi.quest.id.jeuno.THE_LOST_CARDIAN) == QUEST_AVAILABLE
     then
         if player:getCharVar('theLostCardianVar') >= 1 then
-            player:startEvent(30) -- Second dialog for "The lost cardien" quest
+            player:startEvent(30) -- Second dialog for 'The lost cardien' quest
         else
             player:startEvent(40) -- Standard dialog
         end
@@ -52,10 +52,10 @@ entity.onTrigger = function(player, npc)
         theKindCardian == QUEST_ACCEPTED and
         player:getCharVar('theKindCardianVar') == 2
     then
-        player:startEvent(35) -- Finish quest "The kind cardien"
+        player:startEvent(35) -- Finish quest 'The kind cardien'
 
     elseif theKindCardian == QUEST_COMPLETED then
-        player:startEvent(76) -- New standard dialog after "The kind cardien"
+        player:startEvent(76) -- New standard dialog after 'The kind cardien'
 
     else
         player:startEvent(78) -- Base standard dialog

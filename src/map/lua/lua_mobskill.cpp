@@ -65,6 +65,16 @@ bool CLuaMobSkill::isAoE()
     return m_PLuaMobSkill->isAoE();
 }
 
+void CLuaMobSkill::setAoE(uint8 aoe)
+{
+    m_PLuaMobSkill->setAoe(aoe);
+}
+
+void CLuaMobSkill::setAnimationID(uint16 animID)
+{
+    m_PLuaMobSkill->setAnimationID(animID);
+}
+
 bool CLuaMobSkill::isConal()
 {
     return m_PLuaMobSkill->isConal();
@@ -88,6 +98,11 @@ uint16 CLuaMobSkill::getID()
 int16 CLuaMobSkill::getParam()
 {
     return m_PLuaMobSkill->getParam();
+}
+
+void CLuaMobSkill::setKnockBack(uint8 knockback)
+{
+    m_PLuaMobSkill->setKnockback(knockback);
 }
 
 /*************************************************************************
@@ -116,6 +131,8 @@ void CLuaMobSkill::Register()
     SOL_REGISTER("getMsg", CLuaMobSkill::getMsg);
     SOL_REGISTER("hasMissMsg", CLuaMobSkill::hasMissMsg);
     SOL_REGISTER("isAoE", CLuaMobSkill::isAoE);
+    SOL_REGISTER("setAoE", CLuaMobSkill::setAoE);
+    SOL_REGISTER("setKnockBack", CLuaMobSkill::setKnockBack);
     SOL_REGISTER("isConal", CLuaMobSkill::isConal);
     SOL_REGISTER("isSingle", CLuaMobSkill::isSingle);
     SOL_REGISTER("getParam", CLuaMobSkill::getParam);
@@ -123,6 +140,8 @@ void CLuaMobSkill::Register()
     SOL_REGISTER("getTotalTargets", CLuaMobSkill::getTotalTargets);
     SOL_REGISTER("getTP", CLuaMobSkill::getTP);
     SOL_REGISTER("getMobHPP", CLuaMobSkill::getMobHPP);
+    SOL_REGISTER("setKnockBack", CLuaMobSkill::setKnockBack);
+    SOL_REGISTER("setAnimationID", CLuaMobSkill::setAnimationID);
 }
 
 std::ostream& operator<<(std::ostream& os, const CLuaMobSkill& mobskill)

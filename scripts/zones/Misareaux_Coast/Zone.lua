@@ -1,6 +1,8 @@
 -----------------------------------
 -- Zone: Misareaux_Coast (25)
 -----------------------------------
+require('scripts/globals/exp_controller')
+local ID = zones[xi.zone.MISAREAUX_COAST]
 local misareauxGlobal = require('scripts/zones/Misareaux_Coast/globals')
 -----------------------------------
 local zoneObject = {}
@@ -8,6 +10,12 @@ local zoneObject = {}
 zoneObject.onInitialize = function(zone)
     xi.helm.initZone(zone, xi.helmType.LOGGING)
     misareauxGlobal.ziphiusHandleQM()
+
+    -- NM Persistence
+    xi.mob.nmTODPersistCache(zone, ID.mob.ODQAN)
+
+    xi.exp_controller.onInitialize(zone)
+
 end
 
 zoneObject.onConquestUpdate = function(zone, updatetype, influence, owner, ranking, isConquestAlliance)
@@ -43,6 +51,28 @@ zoneObject.onEventUpdate = function(player, csid, option, npc)
 end
 
 zoneObject.onEventFinish = function(player, csid, option, npc)
+end
+
+zoneObject.onZoneWeatherChange = function(weather)
+    local odqan = ID.mob.ODQAN
+
+    if
+        os.time() > GetServerVariable(string.format('\\[SPAWN\\]%s', odqan)) and
+        weather == xi.weather.FOG
+    then
+        local ph = ID.mob.ODQAN_PH[math.random(1, 2)]
+        local pos = GetMobByID(ph):getPos()
+
+        DisallowRespawn(odqan, false)
+        DisallowRespawn(ph, true)
+        DespawnMob(ph)
+        GetMobByID(odqan):setSpawn(pos.x, pos.y, pos.z)
+        SpawnMob(odqan)
+        -- need to set local var after spawning since spawning resets local vars
+        GetMobByID(odqan):setLocalVar('ph', ph)
+    else
+        DisallowRespawn(odqan, true)
+    end
 end
 
 return zoneObject
