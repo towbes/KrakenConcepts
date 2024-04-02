@@ -1338,10 +1338,10 @@ bool CMobEntity::PixieShouldSpawn()
     time_t now = time(NULL);
     if (g_pixieLastAmityRefresh + 60 < now)
     {
-        int32 ret = sql->Query("SELECT value FROM server_variables WHERE name = 'PixieAmity';");
-        if (ret != SQL_ERROR && sql->NumRows() != 0 && (sql->NextRow() == SQL_SUCCESS))
+        int32 ret = _sql->Query("SELECT value FROM server_variables WHERE name = 'PixieAmity';");
+        if (ret != SQL_ERROR && _sql->NumRows() != 0 && (_sql->NextRow() == SQL_SUCCESS))
         {
-            amity = sql->GetUIntData(0);
+            amity = _sql->GetUIntData(0);
         }
         g_pixieAmity            = amity;
         g_pixieLastAmityRefresh = now;

@@ -476,10 +476,10 @@ void SmallPacket0x00C(map_session_data_t* const PSession, CCharEntity* const PCh
             if (PChar->loc.zone->GetContinentID() == CONTINENT_TYPE::THE_SHADOWREIGN_ERA)
             {
                 const char* Query = "SELECT wotg_unlock FROM char_fellow WHERE charid = %u;";
-                int32       ret   = sql->Query(Query, PChar->id);
-                if (ret != SQL_ERROR && sql->NumRows() != 0 && sql->NextRow() == SQL_SUCCESS)
+                int32       ret   = _sql->Query(Query, PChar->id);
+                if (ret != SQL_ERROR && _sql->NumRows() != 0 && _sql->NextRow() == SQL_SUCCESS)
                 {
-                    if (sql->GetIntData(0) == 0)
+                    if (_sql->GetIntData(0) == 0)
                         fellowutils::SpawnFellow(PChar, PChar->fellowZoningInfo.fellowID, true);
                 }
             }
@@ -576,13 +576,13 @@ void SmallPacket0x00D(map_session_data_t* const PSession, CCharEntity* const PCh
         {
             uint16      maxTime  = 0;
             const char* QueryMax = "SELECT maxTime FROM char_fellow WHERE charid = %u";
-            if (sql->Query(QueryMax, PChar->id) != SQL_ERROR && sql->NumRows() != 0 && sql->NextRow() == SQL_SUCCESS)
-                maxTime = (uint16)sql->GetIntData(0);
+            if (_sql->Query(QueryMax, PChar->id) != SQL_ERROR && _sql->NumRows() != 0 && _sql->NextRow() == SQL_SUCCESS)
+                maxTime = (uint16)_sql->GetIntData(0);
             uint32      spawnTime  = 0;
             const char* QuerySpawn = "SELECT spawnTime FROM char_fellow WHERE charid = %u";
-            if (sql->Query(QuerySpawn, PChar->id) != SQL_ERROR && sql->NumRows() != 0 && sql->NextRow() == SQL_SUCCESS)
-                spawnTime = (uint32)sql->GetIntData(0);
-            sql->Query("UPDATE char_fellow SET maxTime = %u WHERE charid = %u",
+            if (_sql->Query(QuerySpawn, PChar->id) != SQL_ERROR && _sql->NumRows() != 0 && _sql->NextRow() == SQL_SUCCESS)
+                spawnTime = (uint32)_sql->GetIntData(0);
+            _sql->Query("UPDATE char_fellow SET maxTime = %u WHERE charid = %u",
                        maxTime - (CVanaTime::getInstance()->getVanaTime() + 1009810800 - spawnTime), PChar->id);
             PChar->setFellowZoningInfo();
         }
@@ -4003,13 +4003,13 @@ void SmallPacket0x05E(map_session_data_t* const PSession, CCharEntity* const PCh
     {
         uint16      maxTime  = 0;
         const char* QueryMax = "SELECT maxTime FROM char_fellow WHERE charid = %u";
-        if (sql->Query(QueryMax, PChar->id) != SQL_ERROR && sql->NumRows() != 0 && sql->NextRow() == SQL_SUCCESS)
-            maxTime = (uint16)sql->GetIntData(0);
+        if (_sql->Query(QueryMax, PChar->id) != SQL_ERROR && _sql->NumRows() != 0 && _sql->NextRow() == SQL_SUCCESS)
+            maxTime = (uint16)_sql->GetIntData(0);
         uint32      spawnTime  = 0;
         const char* QuerySpawn = "SELECT spawnTime FROM char_fellow WHERE charid = %u";
-        if (sql->Query(QuerySpawn, PChar->id) != SQL_ERROR && sql->NumRows() != 0 && sql->NextRow() == SQL_SUCCESS)
-            spawnTime = (uint32)sql->GetIntData(0);
-        sql->Query("UPDATE char_fellow SET maxTime = %u WHERE charid = %u",
+        if (_sql->Query(QuerySpawn, PChar->id) != SQL_ERROR && _sql->NumRows() != 0 && _sql->NextRow() == SQL_SUCCESS)
+            spawnTime = (uint32)_sql->GetIntData(0);
+        _sql->Query("UPDATE char_fellow SET maxTime = %u WHERE charid = %u",
                    maxTime - (CVanaTime::getInstance()->getVanaTime() + 1009810800 - spawnTime), PChar->id);
         PChar->setFellowZoningInfo();
         PChar->RemoveFellow();

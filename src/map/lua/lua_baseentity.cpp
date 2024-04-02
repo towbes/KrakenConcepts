@@ -15001,11 +15001,11 @@ int32 CLuaBaseEntity::getFellowValue(std::string const& option)
     // XI_DEBUG_BREAK_IF(m_PBaseEntity->objtype != TYPE_PC);
 
     const char* Query = "SELECT %s FROM char_fellow WHERE charid = %u;";
-    int32       ret   = sql->Query(Query, option, m_PBaseEntity->id);
+    int32       ret   = _sql->Query(Query, option, m_PBaseEntity->id);
 
-    if (ret != SQL_ERROR && sql->NumRows() != 0 && sql->NextRow() == SQL_SUCCESS)
+    if (ret != SQL_ERROR && _sql->NumRows() != 0 && _sql->NextRow() == SQL_SUCCESS)
     {
-        return sql->GetIntData(0);
+        return _sql->GetIntData(0);
     }
     ShowDebug("Failed to getFellowValue from db. option %s", option);
     return 0;
@@ -15027,16 +15027,16 @@ void CLuaBaseEntity::setFellowValue(std::string const& option, int32 value)
     {
         int         bondCap = 30; // default cap
         const char* Query   = "SELECT bondcap FROM char_fellow WHERE charid = %u;";
-        int32       ret     = sql->Query(Query, m_PBaseEntity->id);
-        if (ret != SQL_ERROR && sql->NumRows() != 0 && sql->NextRow() == SQL_SUCCESS)
+        int32       ret     = _sql->Query(Query, m_PBaseEntity->id);
+        if (ret != SQL_ERROR && _sql->NumRows() != 0 && _sql->NextRow() == SQL_SUCCESS)
         {
-            bondCap = sql->GetIntData(0);
+            bondCap = _sql->GetIntData(0);
         }
         if (value > bondCap)
             return;
     }
     const char* Query = "INSERT INTO char_fellow SET charId = %u, %s = %u ON DUPLICATE KEY UPDATE %s = %u;";
-    sql->Query(Query, m_PBaseEntity->id, option, value, option, value);
+    _sql->Query(Query, m_PBaseEntity->id, option, value, option, value);
 }
 
 /************************************************************************
@@ -15052,7 +15052,7 @@ void CLuaBaseEntity::delFellowValue()
     // XI_DEBUG_BREAK_IF(m_PBaseEntity->objtype != TYPE_PC);
 
     const char* Query = "DELETE FROM char_fellow WHERE charId = %u LIMIT 1";
-    sql->Query(Query, "DELETE FROM char_fellow WHERE charId = %u LIMIT 1", m_PBaseEntity->id);
+    _sql->Query(Query, "DELETE FROM char_fellow WHERE charId = %u LIMIT 1", m_PBaseEntity->id);
 }
 
 void CLuaBaseEntity::registerChocobo(uint32 value)
@@ -17890,7 +17890,7 @@ bool CLuaBaseEntity::clearSession(std::string const& playerName)
     const char* charName = playerName.c_str();
     const char* Query    = "DELETE FROM accounts_sessions WHERE charid IN (SELECT charid from chars where charname = '%s')";
 
-    if (sql->Query(Query, charName) == SQL_SUCCESS && sql->AffectedRows() > 0)
+    if (_sql->Query(Query, charName) == SQL_SUCCESS && _sql->AffectedRows() > 0)
     {
         return true;
     }

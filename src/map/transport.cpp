@@ -160,7 +160,7 @@ void CTransportHandler::InitializeTransport()
             zoneTown.ship.timeDepartDock  = zoneTown.ship.timeArriveDock + (uint16)_sql->GetIntData(13);
             zoneTown.ship.timeVoyageStart = zoneTown.ship.timeDepartDock + (uint16)_sql->GetIntData(15) - 1;
 
-            zoneTown.ship.npc->animPath = (uint8)sql->GetIntData(16);
+            zoneTown.ship.npc->animPath = (uint8)_sql->GetIntData(16);
             zoneTown.ship.origin.p      = zoneTown.ship.npc->loc.p;
             zoneTown.ship.state         = STATE_TRANSPORT_INIT;
             zoneTown.ship.setVisible(false);

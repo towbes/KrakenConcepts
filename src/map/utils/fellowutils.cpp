@@ -180,35 +180,35 @@ namespace fellowutils
                 mob_family_system.CHR\
                 FROM fellow_list, mob_family_system\
                 WHERE fellow_list.familyid = mob_family_system.familyid;";
-        if (sql->Query(Query) != SQL_ERROR && sql->NumRows() != 0)
+        if (_sql->Query(Query) != SQL_ERROR && _sql->NumRows() != 0)
         {
-            while (sql->NextRow() == SQL_SUCCESS)
+            while (_sql->NextRow() == SQL_SUCCESS)
             {
                 Fellow_t* Fellow = new Fellow_t();
 
-                Fellow->name.insert(0, (const char*)sql->GetData(1));
+                Fellow->name.insert(0, (const char*)_sql->GetData(1));
 
-                Fellow->m_Family = (uint16)sql->GetIntData(2);
+                Fellow->m_Family = (uint16)_sql->GetIntData(2);
                 uint16 sqlModelID[10];
-                memcpy(&sqlModelID, sql->GetData(3), 20);
+                memcpy(&sqlModelID, _sql->GetData(3), 20);
                 Fellow->look      = look_t(sqlModelID);
                 Fellow->size      = 0;
-                Fellow->EcoSystem = (ECOSYSTEM)sql->GetIntData(4);
+                Fellow->EcoSystem = (ECOSYSTEM)_sql->GetIntData(4);
                 Fellow->m_Element = 0;
                 Fellow->zoneKills = 0;
 
-                Fellow->HPscale = sql->GetFloatData(5);
-                Fellow->MPscale = sql->GetFloatData(6);
+                Fellow->HPscale = _sql->GetFloatData(5);
+                Fellow->MPscale = _sql->GetFloatData(6);
 
-                Fellow->speed = (uint8)sql->GetIntData(7);
+                Fellow->speed = (uint8)_sql->GetIntData(7);
 
-                Fellow->strRank = (uint8)sql->GetIntData(8);
-                Fellow->dexRank = (uint8)sql->GetIntData(9);
-                Fellow->vitRank = (uint8)sql->GetIntData(10);
-                Fellow->agiRank = (uint8)sql->GetIntData(11);
-                Fellow->intRank = (uint8)sql->GetIntData(12);
-                Fellow->mndRank = (uint8)sql->GetIntData(13);
-                Fellow->chrRank = (uint8)sql->GetIntData(14);
+                Fellow->strRank = (uint8)_sql->GetIntData(8);
+                Fellow->dexRank = (uint8)_sql->GetIntData(9);
+                Fellow->vitRank = (uint8)_sql->GetIntData(10);
+                Fellow->agiRank = (uint8)_sql->GetIntData(11);
+                Fellow->intRank = (uint8)_sql->GetIntData(12);
+                Fellow->mndRank = (uint8)_sql->GetIntData(13);
+                Fellow->chrRank = (uint8)_sql->GetIntData(14);
                 Fellow->defRank = 1;
                 Fellow->attRank = 1;
                 Fellow->accRank = 1;
@@ -219,7 +219,7 @@ namespace fellowutils
                 Fellow->cmbDelay    = (uint16)240;
                 Fellow->name_prefix = (uint8)40;
 
-                uint16 fellowId         = (uint16)sql->GetUIntData(0);
+                uint16 fellowId         = (uint16)_sql->GetUIntData(0);
                 g_PFellowList[fellowId] = Fellow;
             }
         }
@@ -485,7 +485,7 @@ namespace fellowutils
             }
             else if (spawningFromZone == false)
             {
-                sql->Query("UPDATE char_fellow SET kills = 0, maxTime = %u WHERE charid = %u", GetMaxTime(PMaster), PMaster->id);
+                _sql->Query("UPDATE char_fellow SET kills = 0, maxTime = %u WHERE charid = %u", GetMaxTime(PMaster), PMaster->id);
                 if (PMaster->GetLocalVar("triggerFellow") == 0)
                     PMaster->pushPacket(
                         new CMessageSpecialPacket(PFellow, GetMessageOffset(PMaster->getZone()) + FELLOWMESSAGEOFFSET_CALL + GetPersonalityOffset(PMaster)));
@@ -502,8 +502,8 @@ namespace fellowutils
         uint8       bond    = 0;
         uint16      maxTime = 45 * 60; // 45 min
         const char* QueryP  = "SELECT bond FROM char_fellow WHERE charid = %u";
-        if (sql->Query(QueryP, PChar->id) != SQL_ERROR && sql->NumRows() != 0 && sql->NextRow() == SQL_SUCCESS)
-            bond = (uint8)sql->GetIntData(0);
+        if (_sql->Query(QueryP, PChar->id) != SQL_ERROR && _sql->NumRows() != 0 && _sql->NextRow() == SQL_SUCCESS)
+            bond = (uint8)_sql->GetIntData(0);
         if (bond >= 120)
             maxTime = 90 * 60; // 90 min
         else if (bond >= 100)
@@ -542,73 +542,73 @@ namespace fellowutils
 
         const char* QueryFace = "SELECT char_fellow.face FROM char_fellow WHERE\
             charid = %u";
-        if (sql->Query(QueryFace, PMaster->id) != SQL_ERROR && sql->NumRows() != 0 && sql->NextRow() == SQL_SUCCESS)
+        if (_sql->Query(QueryFace, PMaster->id) != SQL_ERROR && _sql->NumRows() != 0 && _sql->NextRow() == SQL_SUCCESS)
         {
-            PFellow->look.face = (uint8)sql->GetIntData(0);
+            PFellow->look.face = (uint8)_sql->GetIntData(0);
         }
         const char* QueryMain = "SELECT item_equipment.MId FROM item_equipment, char_fellow WHERE\
             char_fellow.main = item_equipment.itemId AND\
             charid = %u";
-        if (sql->Query(QueryMain, PMaster->id) != SQL_ERROR && sql->NumRows() != 0 && sql->NextRow() == SQL_SUCCESS)
+        if (_sql->Query(QueryMain, PMaster->id) != SQL_ERROR && _sql->NumRows() != 0 && _sql->NextRow() == SQL_SUCCESS)
         {
-            PFellow->look.main = (uint16)sql->GetIntData(0) + 0x6000;
+            PFellow->look.main = (uint16)_sql->GetIntData(0) + 0x6000;
         }
         const char* QuerySub = "SELECT item_equipment.MId, item_weapon.skill FROM char_fellow LEFT JOIN\
             item_equipment ON (item_equipment.itemId=char_fellow.sub) LEFT JOIN item_weapon ON\
             (item_weapon.itemId=char_fellow.main) WHERE char_fellow.charid = %d";
-        if (sql->Query(QuerySub, PMaster->id) != SQL_ERROR && sql->NumRows() != 0 && sql->NextRow() == SQL_SUCCESS)
+        if (_sql->Query(QuerySub, PMaster->id) != SQL_ERROR && _sql->NumRows() != 0 && _sql->NextRow() == SQL_SUCCESS)
         {
-            PFellow->look.sub = (uint16)sql->GetIntData(0) + 0x7000;
+            PFellow->look.sub = (uint16)_sql->GetIntData(0) + 0x7000;
         }
 
-        if ((uint16)sql->GetIntData(1) == SKILL_HAND_TO_HAND || (((uint16)sql->GetIntData(1) == SKILL_KATANA) && settings::get<bool>("main.ALLOW_ADVENTURING_FELLOW_KATANA_DW")))
+        if ((uint16)_sql->GetIntData(1) == SKILL_HAND_TO_HAND || (((uint16)_sql->GetIntData(1) == SKILL_KATANA) && settings::get<bool>("main.ALLOW_ADVENTURING_FELLOW_KATANA_DW")))
         {
             PFellow->look.sub = PFellow->look.main + 0x1000;
         }
-        else if ((uint16)sql->GetIntData(1) == SKILL_GREAT_SWORD || (uint16)sql->GetIntData(1) == SKILL_GREAT_AXE ||
-                 (uint16)sql->GetIntData(1) == SKILL_SCYTHE || (uint16)sql->GetIntData(1) == SKILL_POLEARM ||
-                 (uint16)sql->GetIntData(1) == SKILL_GREAT_KATANA || (uint16)sql->GetIntData(1) == SKILL_STAFF)
+        else if ((uint16)_sql->GetIntData(1) == SKILL_GREAT_SWORD || (uint16)_sql->GetIntData(1) == SKILL_GREAT_AXE ||
+                 (uint16)_sql->GetIntData(1) == SKILL_SCYTHE || (uint16)_sql->GetIntData(1) == SKILL_POLEARM ||
+                 (uint16)_sql->GetIntData(1) == SKILL_GREAT_KATANA || (uint16)_sql->GetIntData(1) == SKILL_STAFF)
         {
             PFellow->look.sub = 0;
         }
         uint8       personality = 0;
         const char* QueryP      = "SELECT personality FROM char_fellow WHERE charid = %u";
-        if (sql->Query(QueryP, PMaster->id) != SQL_ERROR && sql->NumRows() != 0 && sql->NextRow() == SQL_SUCCESS)
-            personality = (uint8)sql->GetIntData(0);
+        if (_sql->Query(QueryP, PMaster->id) != SQL_ERROR && _sql->NumRows() != 0 && _sql->NextRow() == SQL_SUCCESS)
+            personality = (uint8)_sql->GetIntData(0);
         const char* QueryHead = "SELECT fellow_headgear.%s FROM fellow_headgear, char_fellow WHERE\
             char_fellow.head = fellow_headgear.rank AND\
             charid = %u";
-        if (sql->Query(QueryHead, std::to_string(personality), PMaster->id) != SQL_ERROR && sql->NumRows() != 0 && sql->NextRow() == SQL_SUCCESS)
+        if (_sql->Query(QueryHead, std::to_string(personality), PMaster->id) != SQL_ERROR && _sql->NumRows() != 0 && _sql->NextRow() == SQL_SUCCESS)
         {
-            PFellow->look.head = (uint16)sql->GetIntData(0) + 0x1000;
+            PFellow->look.head = (uint16)_sql->GetIntData(0) + 0x1000;
         }
         const char* QueryBody = "SELECT fellow_armor.body FROM fellow_armor, char_fellow WHERE\
             char_fellow.body = fellow_armor.rank AND\
             charid = %u";
-        if (sql->Query(QueryBody, PMaster->id) != SQL_ERROR && sql->NumRows() != 0 && sql->NextRow() == SQL_SUCCESS)
+        if (_sql->Query(QueryBody, PMaster->id) != SQL_ERROR && _sql->NumRows() != 0 && _sql->NextRow() == SQL_SUCCESS)
         {
-            PFellow->look.body = (uint16)sql->GetIntData(0) + 0x2000;
+            PFellow->look.body = (uint16)_sql->GetIntData(0) + 0x2000;
         }
         const char* QueryHands = "SELECT fellow_armor.hands FROM fellow_armor, char_fellow WHERE\
             char_fellow.hands = fellow_armor.rank AND\
             charid = %u";
-        if (sql->Query(QueryHands, PMaster->id) != SQL_ERROR && sql->NumRows() != 0 && sql->NextRow() == SQL_SUCCESS)
+        if (_sql->Query(QueryHands, PMaster->id) != SQL_ERROR && _sql->NumRows() != 0 && _sql->NextRow() == SQL_SUCCESS)
         {
-            PFellow->look.hands = (uint16)sql->GetIntData(0) + 0x3000;
+            PFellow->look.hands = (uint16)_sql->GetIntData(0) + 0x3000;
         }
         const char* QueryLegs = "SELECT fellow_armor.legs FROM fellow_armor, char_fellow WHERE\
             char_fellow.legs = fellow_armor.rank AND\
             charid = %u";
-        if (sql->Query(QueryLegs, PMaster->id) != SQL_ERROR && sql->NumRows() != 0 && sql->NextRow() == SQL_SUCCESS)
+        if (_sql->Query(QueryLegs, PMaster->id) != SQL_ERROR && _sql->NumRows() != 0 && _sql->NextRow() == SQL_SUCCESS)
         {
-            PFellow->look.legs = (uint16)sql->GetIntData(0) + 0x4000;
+            PFellow->look.legs = (uint16)_sql->GetIntData(0) + 0x4000;
         }
         const char* QueryFeet = "SELECT fellow_armor.feet FROM fellow_armor, char_fellow WHERE\
             char_fellow.feet = fellow_armor.rank AND\
             charid = %u";
-        if (sql->Query(QueryFeet, PMaster->id) != SQL_ERROR && sql->NumRows() != 0 && sql->NextRow() == SQL_SUCCESS)
+        if (_sql->Query(QueryFeet, PMaster->id) != SQL_ERROR && _sql->NumRows() != 0 && _sql->NextRow() == SQL_SUCCESS)
         {
-            PFellow->look.feet = (uint16)sql->GetIntData(0) + 0x5000;
+            PFellow->look.feet = (uint16)_sql->GetIntData(0) + 0x5000;
         }
         const char* Query = "SELECT\
                 char_fellow.fellowid,\
@@ -618,13 +618,13 @@ namespace fellowutils
                 char_fellow.size\
                 FROM char_fellow, fellow_list\
                 WHERE char_fellow.fellowid = fellow_list.fellowid AND char_fellow.charid = %u";
-        if (sql->Query(Query, PMaster->id) != SQL_ERROR && sql->NumRows() != 0 && sql->NextRow() == SQL_SUCCESS)
+        if (_sql->Query(Query, PMaster->id) != SQL_ERROR && _sql->NumRows() != 0 && _sql->NextRow() == SQL_SUCCESS)
         {
             PFellow->name.clear();
-            PFellow->name.insert(0, (const char*)sql->GetData(1));
-            PFellow->packetName.insert(0, (const char*)sql->GetData(1));
+            PFellow->name.insert(0, (const char*)_sql->GetData(1));
+            PFellow->packetName.insert(0, (const char*)_sql->GetData(1));
 
-            uint8 mlvl = (uint8)sql->GetIntData(2); // pull lvl from db
+            uint8 mlvl = (uint8)_sql->GetIntData(2); // pull lvl from db
             if (PMaster->GetMLevel() < mlvl)
                 mlvl = PMaster->GetMLevel();
             PFellow->SetMLevel(mlvl);
@@ -632,7 +632,7 @@ namespace fellowutils
 
             uint8 job  = 0;
             uint8 sjob = 0;
-            type       = (uint8)sql->GetIntData(3);
+            type       = (uint8)_sql->GetIntData(3);
             switch (type)
             {
                 case 1:
@@ -663,7 +663,7 @@ namespace fellowutils
             PFellow->SetMJob(job);
             PFellow->SetSJob(sjob);
 
-            PFellow->m_ModelRadius = (uint8)sql->GetIntData(4) / 4;
+            PFellow->m_ModelRadius = (uint8)_sql->GetIntData(4) / 4;
 
             const char* Query3 = "SELECT\
                     char_fellow.main,\
@@ -674,21 +674,21 @@ namespace fellowutils
                     item_weapon.dmg\
                     FROM char_fellow, item_weapon\
                     WHERE char_fellow.main = item_weapon.itemId AND char_fellow.charid = %u";
-            if (sql->Query(Query3, PMaster->id) != SQL_ERROR && sql->NumRows() != 0 && sql->NextRow() == SQL_SUCCESS)
+            if (_sql->Query(Query3, PMaster->id) != SQL_ERROR && _sql->NumRows() != 0 && _sql->NextRow() == SQL_SUCCESS)
             {
-                uint16 delay  = GetWeaponDelayByTypeAndLevel((SKILLTYPE)sql->GetIntData(1), mlvl);
-                uint16 damage = GetWeaponDmgByTypeAndLevel((SKILLTYPE)sql->GetIntData(1), mlvl);
-                ((CItemWeapon*)PFellow->m_Weapons[SLOT_MAIN])->setSkillType((uint8)sql->GetIntData(1));
-                ((CItemWeapon*)PFellow->m_Weapons[SLOT_MAIN])->setMaxHit((uint8)sql->GetIntData(3));
+                uint16 delay  = GetWeaponDelayByTypeAndLevel((SKILLTYPE)_sql->GetIntData(1), mlvl);
+                uint16 damage = GetWeaponDmgByTypeAndLevel((SKILLTYPE)_sql->GetIntData(1), mlvl);
+                ((CItemWeapon*)PFellow->m_Weapons[SLOT_MAIN])->setSkillType((uint8)_sql->GetIntData(1));
+                ((CItemWeapon*)PFellow->m_Weapons[SLOT_MAIN])->setMaxHit((uint8)_sql->GetIntData(3));
                 ((CItemWeapon*)PFellow->m_Weapons[SLOT_MAIN])->setDelay(delay);
                 ((CItemWeapon*)PFellow->m_Weapons[SLOT_MAIN])->setBaseDelay(delay);
                 ((CItemWeapon*)PFellow->m_Weapons[SLOT_MAIN])->setDamage(damage);
 
-                if (((uint16)sql->GetIntData(1) == SKILL_KATANA) && settings::get<bool>("main.ALLOW_ADVENTURING_FELLOW_KATANA_DW"))
+                if (((uint16)_sql->GetIntData(1) == SKILL_KATANA) && settings::get<bool>("main.ALLOW_ADVENTURING_FELLOW_KATANA_DW"))
                 {
                     PFellow->m_dualWield = true;
-                    ((CItemWeapon*)PFellow->m_Weapons[SLOT_SUB])->setSkillType((uint8)sql->GetIntData(1));
-                    ((CItemWeapon*)PFellow->m_Weapons[SLOT_SUB])->setMaxHit((uint8)sql->GetIntData(3));
+                    ((CItemWeapon*)PFellow->m_Weapons[SLOT_SUB])->setSkillType((uint8)_sql->GetIntData(1));
+                    ((CItemWeapon*)PFellow->m_Weapons[SLOT_SUB])->setMaxHit((uint8)_sql->GetIntData(3));
                     // the way mobs currently attack via dual wield is to attack twice on the base delay, sub is not considered.
                     ((CItemWeapon*)PFellow->m_Weapons[SLOT_MAIN])->setDelay(delay * 2);
                     ((CItemWeapon*)PFellow->m_Weapons[SLOT_MAIN])->setBaseDelay(delay * 2);
@@ -1025,13 +1025,13 @@ namespace fellowutils
                 FROM char_fellow\
                 WHERE char_fellow.charid = %u";
 
-        int32 ret = sql->Query(fmtQuery, PMaster->id);
+        int32 ret = _sql->Query(fmtQuery, PMaster->id);
 
-        if (ret != SQL_ERROR && sql->NumRows() != 0 && sql->NextRow() == SQL_SUCCESS)
+        if (ret != SQL_ERROR && _sql->NumRows() != 0 && _sql->NextRow() == SQL_SUCCESS)
         {
-            uint8  currentCap = (uint8)sql->GetIntData(0);
-            uint8  currentLvl = (uint8)sql->GetIntData(1);
-            uint32 currentExp = (uint32)sql->GetIntData(2);
+            uint8  currentCap = (uint8)_sql->GetIntData(0);
+            uint8  currentLvl = (uint8)_sql->GetIntData(1);
+            uint32 currentExp = (uint32)_sql->GetIntData(2);
 
             if (exp != 0)
                 currentExp += exp; // add normal exp
@@ -1074,7 +1074,7 @@ namespace fellowutils
     {
         const char* Query;
         Query = "UPDATE char_fellow SET level = %u, exp = %u WHERE charid = %u";
-        sql->Query(Query, currentLvl, currentExp, PMaster->id);
+        _sql->Query(Query, currentLvl, currentExp, PMaster->id);
     }
 
     void AddKillCount(CCharEntity* PMaster)
@@ -1085,12 +1085,12 @@ namespace fellowutils
                 FROM char_fellow\
                 WHERE char_fellow.charid = %u";
 
-        int32 ret = sql->Query(fmtQuery, PMaster->id);
+        int32 ret = _sql->Query(fmtQuery, PMaster->id);
 
-        if (ret != SQL_ERROR && sql->NumRows() != 0 && sql->NextRow() == SQL_SUCCESS)
+        if (ret != SQL_ERROR && _sql->NumRows() != 0 && _sql->NextRow() == SQL_SUCCESS)
         {
-            uint16 fellowBond = (uint16)sql->GetIntData(0);
-            uint16 kills      = (uint16)sql->GetIntData(1);
+            uint16 fellowBond = (uint16)_sql->GetIntData(0);
+            uint16 kills      = (uint16)_sql->GetIntData(1);
             kills += 1;
             PMaster->m_PFellow->zoneKills += 1;
 
@@ -1115,7 +1115,7 @@ namespace fellowutils
             }
             const char* Query;
             Query = "UPDATE char_fellow SET kills = %u WHERE charid = %u";
-            sql->Query(Query, kills, PMaster->id);
+            _sql->Query(Query, kills, PMaster->id);
         }
     }
 
@@ -1123,8 +1123,8 @@ namespace fellowutils
     {
         uint8       personality = 0;
         const char* QueryP      = "SELECT personality FROM char_fellow WHERE charid = %u";
-        if (sql->Query(QueryP, PChar->id) != SQL_ERROR && sql->NumRows() != 0 && sql->NextRow() == SQL_SUCCESS)
-            personality = (uint8)sql->GetIntData(0);
+        if (_sql->Query(QueryP, PChar->id) != SQL_ERROR && _sql->NumRows() != 0 && _sql->NextRow() == SQL_SUCCESS)
+            personality = (uint8)_sql->GetIntData(0);
         switch (personality)
         {
             case 4:
@@ -1191,16 +1191,16 @@ namespace fellowutils
                 FROM char_fellow\
                 WHERE char_fellow.charid = %u";
 
-        int32 ret = sql->Query(fmtQuery, PChar->id);
+        int32 ret = _sql->Query(fmtQuery, PChar->id);
 
-        if (ret != SQL_ERROR && sql->NumRows() != 0 && sql->NextRow() == SQL_SUCCESS)
+        if (ret != SQL_ERROR && _sql->NumRows() != 0 && _sql->NextRow() == SQL_SUCCESS)
         {
-            currentCap = (uint8)sql->GetIntData(0);
-            currentLvl = (uint8)sql->GetIntData(1);
-            currentExp = (uint32)sql->GetIntData(2);
+            currentCap = (uint8)_sql->GetIntData(0);
+            currentLvl = (uint8)_sql->GetIntData(1);
+            currentExp = (uint32)_sql->GetIntData(2);
             expNEXTLvl = GetExpNEXTLevel(currentLvl);
-            type       = (uint8)sql->GetIntData(3);
-            kills      = (uint16)sql->GetIntData(4);
+            type       = (uint8)_sql->GetIntData(3);
+            kills      = (uint16)_sql->GetIntData(4);
             // ShowDebug("fellowutils:: exp: %u kills: %u\n",currentExp,kills);
         }
         if (option == FELLOWCHAT_GENERAL)

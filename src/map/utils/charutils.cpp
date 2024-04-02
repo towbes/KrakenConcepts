@@ -729,19 +729,18 @@ namespace charutils
 
         
         fmtQuery = "SELECT fellowid, zone_hp, zone_mp "
-                   "FROM char_fellow WHERE charid = %u;";
+                   "FROM char_fellow WHERE charid = (?);";
 
-        ret = rset->Query(fmtQuery, PChar->id);
-
-        if (ret != SQL_ERROR && rset->NumRows() != 0 && rset->NextRow() == SQL_SUCCESS)
+        rset = db::preparedStmt(fmtQuery, PChar->id);
+        if (rset && rset->rowsCount() && rset->next())
         {
             // Determine if the fellow should be respawned.
-            int16 fellowHP = rset->GetUIntData(1);
+            int16 fellowHP = rset->getInt("zone_hp");
             if (fellowHP)
             {
                 PChar->fellowZoningInfo.fellowHP      = fellowHP;
-                PChar->fellowZoningInfo.fellowID      = rset->GetUIntData(0);
-                PChar->fellowZoningInfo.fellowMP      = rset->GetUIntData(2);
+                PChar->fellowZoningInfo.fellowID      = rset->getInt("fellowid");
+                PChar->fellowZoningInfo.fellowMP      = rset->getInt("zone_mp");
                 PChar->fellowZoningInfo.respawnFellow = true;
             }
         }
@@ -5461,7 +5460,7 @@ namespace charutils
                              "SET zone_hp = %u, zone_mp = %u "
                              "WHERE charid = %u;";
 
-        sql->Query(Query2, PChar->fellowZoningInfo.fellowHP, PChar->fellowZoningInfo.fellowMP, PChar->id);
+        _sql->Query(Query2, PChar->fellowZoningInfo.fellowHP, PChar->fellowZoningInfo.fellowMP, PChar->id);
     }
 
     /************************************************************************
