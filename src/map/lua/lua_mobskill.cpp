@@ -70,11 +70,6 @@ void CLuaMobSkill::setAoE(uint8 aoe)
     m_PLuaMobSkill->setAoe(aoe);
 }
 
-void CLuaMobSkill::setKnockback(uint8 knockbackValue)
-{
-    m_PLuaMobSkill->setKnockback(knockbackValue);
-}
-
 void CLuaMobSkill::setAnimationID(uint16 animID)
 {
     m_PLuaMobSkill->setAnimationID(animID);
@@ -145,7 +140,7 @@ void CLuaMobSkill::Register()
     SOL_REGISTER("getTotalTargets", CLuaMobSkill::getTotalTargets);
     SOL_REGISTER("getTP", CLuaMobSkill::getTP);
     SOL_REGISTER("getMobHPP", CLuaMobSkill::getMobHPP);
-    SOL_REGISTER("setKnockback", CLuaMobSkill::setKnockback);
+    SOL_REGISTER("setKnockBack", CLuaMobSkill::setKnockBack);
     SOL_REGISTER("setAnimationID", CLuaMobSkill::setAnimationID);
 }
 
