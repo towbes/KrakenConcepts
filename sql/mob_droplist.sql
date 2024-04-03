@@ -17052,6 +17052,7 @@ INSERT INTO `mob_droplist` VALUES (2141,0,0,1000,1817,210);   -- Cactus Arm (21.
 INSERT INTO `mob_droplist` VALUES (2141,0,0,1000,1236,180);   -- Bag Of Cactus Stems (18.0%)
 INSERT INTO `mob_droplist` VALUES (2141,0,0,1000,916,130);    -- Cactuar Needle (13.0%)
 INSERT INTO `mob_droplist` VALUES (2141,0,0,1000,1051,@RARE); -- Kuftal Coffer Key (Rare, 5%)
+INSERT INTO `mob_droplist` VALUES (2141,4,0,1000,1592,0);     -- Cactuar Root (Despoil)
 
 -- ZoneID: 159 - Sacrificial Goblet
 INSERT INTO `mob_droplist` VALUES (2142,0,0,1000,12381,@ALWAYS); -- Charging Shield (Always, 100%)
