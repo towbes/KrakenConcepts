@@ -2604,9 +2604,11 @@ namespace charutils
 
         // if player attempts to change thier ranged weapon during a ranged state then prevent equip
         // this prevents players from starting a RA with short delay x-bow and ending with high dmg longbow
-        if (equipSlotID == SLOT_RANGED || (equipSlotID == SLOT_AMMO && !PChar->getEquip(SLOT_RANGED)))
+        if (PChar->PAI && PChar->PAI->IsCurrentState<CRangeState>())
+        // if (equipSlotID == SLOT_RANGED || (equipSlotID == SLOT_AMMO && !PChar->getEquip(SLOT_RANGED)))
         {
-            if (PChar->PAI && PChar->PAI->IsCurrentState<CRangeState>())
+            // if (PChar->PAI && PChar->PAI->IsCurrentState<CRangeState>())
+            if (equipSlotID == SLOT_RANGED || (equipSlotID == SLOT_AMMO && !PChar->getEquip(SLOT_RANGED)))
             {
                 return;
             }
