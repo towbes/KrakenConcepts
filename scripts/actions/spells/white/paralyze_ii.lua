@@ -4,7 +4,7 @@
 local spellObject = {}
 
 spellObject.onMagicCastingCheck = function(caster, target, spell)
-    if caster:isMob() and target:hasStatusEffect(xi.effect.PARALYZE) then
+    if caster:isMob() and target:hasStatusEffect(xi.effect.PARALYSIS) then
         return 1
     else
         return 0
