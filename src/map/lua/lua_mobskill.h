@@ -55,6 +55,7 @@ public:
     uint16 getTotalTargets();
     void   setAnimationID(uint16 animID);
     void   setKnockBack(uint8 knockback);
+    uint32 getPrimaryTargetID();
 
     bool operator==(const CLuaMobSkill& other) const
     {
