@@ -57,6 +57,12 @@ m:addOverride('xi.zones.Southern_San_dOria.Zone.onInitialize', function(zone)
             
             player:confirmTrade()
 
+            -- For auditing
+            sandoriaCurrencyTraded = bronzepieceCount + (silverpieceCount * 100) + (goldpieceCount * 10000)
+            bastokCurrencyTraded   = onebyneCount + (onehundredbyneCount * 100) + (onethousandbyneCount * 10000)
+            windurstCurrencyTraded = whiteshellCount + (jadeshellCount * 100) + (stripeshellCount * 10000)
+            print("[AUDIT] Traded Dynamis Currency",  "Player:",player:getName(), player:getID(), "Sandoria:",sandoriaCurrencyTraded, "Bastok:",bastokCurrencyTraded, "Windurst:",windurstCurrencyTraded)
+
             player:setCharVar('Dynamis_Currency[1452]', sandoriaCurrencyTotal + bronzepieceCount + (silverpieceCount * 100) + (goldpieceCount * 10000))
             player:setCharVar('Dynamis_Currency[1455]', bastokCurrencyTotal + onebyneCount + (onehundredbyneCount * 100) + (onethousandbyneCount * 10000))
             player:setCharVar('Dynamis_Currency[1449]', windurstCurrencyTotal + whiteshellCount + (jadeshellCount * 100) + (stripeshellCount * 10000))
@@ -872,7 +878,7 @@ m:addOverride('xi.zones.Bastok_Mines.Zone.onInitialize', function(zone)
             sandoriaCurrencyTotal = player:getCharVar('Dynamis_Currency[1452]')
             bastokCurrencyTotal = player:getCharVar('Dynamis_Currency[1455]')
             windurstCurrencyTotal = player:getCharVar('Dynamis_Currency[1449]')
-            
+
             trade:confirmItem(xi.item.ORDELLE_BRONZEPIECE, bronzepieceCount)
             trade:confirmItem(xi.item.MONTIONT_SILVERPIECE, silverpieceCount)
             trade:confirmItem(xi.item.RANPERRE_GOLDPIECE, goldpieceCount)
@@ -886,6 +892,12 @@ m:addOverride('xi.zones.Bastok_Mines.Zone.onInitialize', function(zone)
             trade:confirmItem(xi.item.RIMILALA_STRIPESHELL, stripeshellCount)
             
             player:confirmTrade()
+
+            -- For auditing
+            sandoriaCurrencyTraded = bronzepieceCount + (silverpieceCount * 100) + (goldpieceCount * 10000)
+            bastokCurrencyTraded   = onebyneCount + (onehundredbyneCount * 100) + (onethousandbyneCount * 10000)
+            windurstCurrencyTraded = whiteshellCount + (jadeshellCount * 100) + (stripeshellCount * 10000)
+            print("[AUDIT] Traded Dynamis Currency",  "Player:",player:getName(), player:getID(), "Sandoria:",sandoriaCurrencyTraded, "Bastok:",bastokCurrencyTraded, "Windurst:",windurstCurrencyTraded)
 
             player:setCharVar('Dynamis_Currency[1452]', sandoriaCurrencyTotal + bronzepieceCount + (silverpieceCount * 100) + (goldpieceCount * 10000))
             player:setCharVar('Dynamis_Currency[1455]', bastokCurrencyTotal + onebyneCount + (onehundredbyneCount * 100) + (onethousandbyneCount * 10000))
@@ -1717,6 +1729,12 @@ m:addOverride('xi.zones.Windurst_Walls.Zone.onInitialize', function(zone)
             
             player:confirmTrade()
 
+            -- For auditing
+            sandoriaCurrencyTraded = bronzepieceCount + (silverpieceCount * 100) + (goldpieceCount * 10000)
+            bastokCurrencyTraded   = onebyneCount + (onehundredbyneCount * 100) + (onethousandbyneCount * 10000)
+            windurstCurrencyTraded = whiteshellCount + (jadeshellCount * 100) + (stripeshellCount * 10000)
+            print("[AUDIT] Traded Dynamis Currency",  "Player:",player:getName(), player:getID(), "Sandoria:",sandoriaCurrencyTraded, "Bastok:",bastokCurrencyTraded, "Windurst:",windurstCurrencyTraded)
+
             player:setCharVar('Dynamis_Currency[1452]', sandoriaCurrencyTotal + bronzepieceCount + (silverpieceCount * 100) + (goldpieceCount * 10000))
             player:setCharVar('Dynamis_Currency[1455]', bastokCurrencyTotal + onebyneCount + (onehundredbyneCount * 100) + (onethousandbyneCount * 10000))
             player:setCharVar('Dynamis_Currency[1449]', windurstCurrencyTotal + whiteshellCount + (jadeshellCount * 100) + (stripeshellCount * 10000))
@@ -2546,6 +2564,12 @@ m:addOverride('xi.zones.RuLude_Gardens.Zone.onInitialize', function(zone)
             trade:confirmItem(xi.item.RIMILALA_STRIPESHELL, stripeshellCount)
             
             player:confirmTrade()
+
+            -- For auditing
+            sandoriaCurrencyTraded = bronzepieceCount + (silverpieceCount * 100) + (goldpieceCount * 10000)
+            bastokCurrencyTraded   = onebyneCount + (onehundredbyneCount * 100) + (onethousandbyneCount * 10000)
+            windurstCurrencyTraded = whiteshellCount + (jadeshellCount * 100) + (stripeshellCount * 10000)
+            print("[AUDIT] Traded Dynamis Currency",  "Player:",player:getName(), player:getID(), "Sandoria:",sandoriaCurrencyTraded, "Bastok:",bastokCurrencyTraded, "Windurst:",windurstCurrencyTraded)
 
             player:setCharVar('Dynamis_Currency[1452]', sandoriaCurrencyTotal + bronzepieceCount + (silverpieceCount * 100) + (goldpieceCount * 10000))
             player:setCharVar('Dynamis_Currency[1455]', bastokCurrencyTotal + onebyneCount + (onehundredbyneCount * 100) + (onethousandbyneCount * 10000))

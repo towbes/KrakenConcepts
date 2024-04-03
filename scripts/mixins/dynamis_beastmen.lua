@@ -133,6 +133,7 @@ g_mixins.dynamis_beastmen = function(dynamisBeastmenMob)
             if mob:getLocalVar('dynamis_proc') >= 2 then
                 killer:addTreasure(currency, mob, singleChance)
                 killer:addTreasure(currency, mob, singleChance)
+                killer:addTreasure(currency + 1, mob, (hundredChance * 0.50))
             end
 
             -- blue (low) adds single slot
@@ -154,14 +155,26 @@ g_mixins.dynamis_beastmen = function(dynamisBeastmenMob)
                     rollBonus = rollBonus + 5 -- Higher level tier mobs give more rolls.
                 end
                 
-                if partySize > 1 then
-                    partySizeBonus = math.floor(1.25 * partySize)
-                end
+
                 
                 -- Creates a list of current party members and randomly distributes currency drops to them.
                 local memberTotalCurrencyChange = {}
+                local membersInZone = {}
+
+                local partyMembers = killer:getParty()
+                local membersInZone = {}
+                for i = 1, #partyMembers do
+                    if mob:getZoneID() == partyMembers[i]:getZoneID() then
+                        table.insert(membersInZone, partyMembers[i])
+                    end
+                end
+
+                if #membersInZone > 1 then
+                    partySizeBonus = math.floor(1.25 * #membersInZone)
+                end
+
                 for i = 1, 10 + rollBonus do -- 10 drops distributed between members
-                    local randomIndex = math.random(1, partySize) -- Randomly select a party member
+                    local randomIndex = math.random(1, #membersInZone) -- Randomly select a party member
                     local partyMember = party[randomIndex]
                     local partyMemberCurrency = partyMember:getCharVar('Dynamis_Currency[' .. currency .. ']')
                     partyMemberCurrency = partyMemberCurrency + 1 -- Increment the currency for the selected party member
@@ -173,7 +186,7 @@ g_mixins.dynamis_beastmen = function(dynamisBeastmenMob)
                 end
                 
                 -- Handle party bonus drops
-                if partySize > 1 then
+                if #membersInZone > 1 then
                     for _, v in pairs(party) do
                         if v:getZone() == mob:getZone() then
                             for i = 1, partySizeBonus do
