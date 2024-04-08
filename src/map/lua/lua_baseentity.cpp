@@ -6168,6 +6168,43 @@ uint8 CLuaBaseEntity::getJobLevel(uint8 JobID)
 }
 
 /************************************************************************
+ *  Function: setJobLevel()
+ *  Purpose : Sets a players job level (Regardless of current job)
+ *  Example : player:setJobLevel(xi.job.WAR, 50)
+ *  Notes   : Current use on Cactuar: Used to get around Job Point menu
+ *            restriction in moghouse.
+ ************************************************************************/
+
+void CLuaBaseEntity::setJobLevel(uint8 JobID, uint8 level)
+{
+    if (m_PBaseEntity->objtype != TYPE_PC)
+    {
+        ShowWarning("Attempt to change Main Job level for non-PC (%s).", m_PBaseEntity->getName());
+        return;
+    }
+
+    if (level > 99)
+    {
+        ShowWarning("Attempt to set player level (%d) that exceeds maximum.", level);
+        return;
+    }
+
+    if (auto* PChar = dynamic_cast<CCharEntity*>(m_PBaseEntity))
+    {
+        if (PChar->GetMJob() == JobID)
+        {
+            PChar->SetMLevel(level);
+            PChar->SetSLevel(PChar->jobs.job[PChar->GetSJob()]);
+        }
+        else
+        {
+            PChar->jobs.job[JobID] = level;
+            PChar->SetSLevel(PChar->jobs.job[PChar->GetSJob()]);
+        }
+    }
+}
+
+/************************************************************************
  *  Function: setLevel()
  *  Purpose : Updates the level of the entity's main job
  *  Example : player:setLevel(50)
@@ -18167,6 +18204,7 @@ void CLuaBaseEntity::Register()
     SOL_REGISTER("getMainLvl", CLuaBaseEntity::getMainLvl);
     SOL_REGISTER("getSubLvl", CLuaBaseEntity::getSubLvl);
     SOL_REGISTER("getJobLevel", CLuaBaseEntity::getJobLevel);
+    SOL_REGISTER("setJobLevel", CLuaBaseEntity::setJobLevel);
     SOL_REGISTER("setLevel", CLuaBaseEntity::setLevel);
     SOL_REGISTER("setsLevel", CLuaBaseEntity::setsLevel);
     SOL_REGISTER("getLevelCap", CLuaBaseEntity::getLevelCap);

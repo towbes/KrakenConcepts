@@ -10,6 +10,10 @@ zoneObject.onZoneIn = function(player, prevZone)
     return xi.moghouse.onMoghouseZoneIn(player, prevZone)
 end
 
+zoneObject.onZoneOut = function(player)
+    return xi.moghouse.onMoghouseZoneOut(player)
+end
+
 zoneObject.onTriggerAreaEnter = function(player, triggerArea)
 end
 

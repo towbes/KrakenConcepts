@@ -331,6 +331,7 @@ public:
     uint8 getMainLvl();
     uint8 getSubLvl();
     uint8 getJobLevel(uint8 JobID); // Gets character job level for specified JOBTYPE
+    void  setJobLevel(uint8 JobID, uint8 level); // sets the character's Job Levels
     void  setLevel(uint8 level);    // sets the character's mainjob level
     void  setsLevel(uint8 slevel);  // sets the character's subjob level
     uint8 getLevelCap();            // genkai
