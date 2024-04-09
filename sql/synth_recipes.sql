@@ -4783,6 +4783,7 @@ INSERT INTO `synth_recipes` VALUES (76009, 1, 0, 0, 0, 102, 0, 0, 0, 0, 0, 4100,
 INSERT INTO `synth_recipes` VALUES (76010, 1, 0, 0, 0, 102, 0, 0, 0, 0, 0, 4100, 4242, 14644, 0, 0, 0, 0, 0, 0, 0, 747, 747, 747, 1306, 1, 1, 2, 1, 'Dark Ring (Desynth)');
 INSERT INTO `synth_recipes` VALUES (76011,1,0,0,87,0,0,0,0,0,0,4100,4242,17286,0,0,0,0,0,0,0,914,1225,1225,657,1,4,6,1,'Rising Sun (desynth)');
 INSERT INTO `synth_recipes` VALUES (76012,0,0,0,0,0,0,0,0,9,0,4100,4242,629,629,629,629,629,629,629,4100,2215,2215,2215,2215,4,6,8,10,'Cornstarch Large Batch');
+INSERT INTO `synth_recipes` VALUES (76013,1,0,0,0,0,0,0,89,0,0,4100,4242,13460,0,0,0,0,0,0,0,883,883,883,883,1,1,1,1,'Behemoth Ring (Desynth)');
 -- -----------
 -- RECIPES END
 
