@@ -1400,7 +1400,7 @@ xi.weaponskills.cMeleeRatio = function(attacker, defender, params, ignoredDef, t
 
     if ratioMod then
         cratio = attacker:getStat(ratioMod) * atkMultiplier / (defender:getStat(xi.mod.DEF) - ignoredDef)
-        print(ratioMod)
+        -- print(ratioMod)
     end
 
     -- cratio = utils.clamp(cratio, 0, 2.25)
@@ -1467,7 +1467,7 @@ xi.weaponskills.handleParry = function(attacker, target, missChance, guaranteedH
     then -- Try parry, if so miss.
         if target:getEcosystem() == xi.eco.BEASTMEN or target:isPC() then
             missChance = 1
-             print('parried')
+            -- print('parried')
         end
 
         if target:isPC() then
@@ -1495,7 +1495,7 @@ xi.weaponskills.handleGuard = function(attacker, target, missChance, guaranteedH
             -- Per testing shown by genome mob skills register as a miss when guarded
             -- https://genomeffxi.livejournal.com/18269.html
             missChance = 1
-            print('guarded')
+            -- print('guarded')
             target:trySkillUp(xi.skill.GUARD, attacker:getMainLvl())
         end
     end
