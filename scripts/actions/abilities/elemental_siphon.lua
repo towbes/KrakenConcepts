@@ -68,8 +68,12 @@ abilityObject.onUseAbility = function(player, target, ability)
     power        = utils.clamp(power, 0, player:getMaxMP() - player:getMP()) -- cap MP drained at the max MP - current MP
 
     spirit:delMP(power)
+    if target:hasStatusEffect(xi.effect.CURSE_II) then
+        target:messageBasic(xi.msg.basic.NO_EFFECT)
+    else
 
-    return player:addMP(power)
+        return player:addMP(power)
+    end
 end
 
 return abilityObject

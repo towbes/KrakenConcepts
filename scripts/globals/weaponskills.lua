@@ -337,7 +337,7 @@ local function getRangedHitRate(attacker, target, capHitRate, bonus)
         bonus = bonus - target:getStatusEffect(xi.effect.YONIN):getPower()
     end
 
-    if attacker:hasTrait(76) and attacker:isBehind(target, 23) then --TRAIT_AMBUSH
+    if attacker:hasTrait(xi.trait.AMBUSH) and attacker:isBehind(target, 23) then
         bonus = bonus + attacker:getMerit(xi.merit.AMBUSH)
     end
 
@@ -832,7 +832,7 @@ xi.weaponskills.doPhysicalWeaponskill = function(attacker, target, wsID, wsParam
     calcParams.sneakApplicable         = attacker:hasStatusEffect(xi.effect.SNEAK_ATTACK) and (attacker:isBehind(target) or attacker:hasStatusEffect(xi.effect.HIDE) or target:hasStatusEffect(xi.effect.DOUBT))
     calcParams.taChar                  = taChar
     calcParams.trickApplicable         = calcParams.taChar ~= nil
-    calcParams.assassinApplicable      = calcParams.trickApplicable and attacker:hasTrait(68)
+    calcParams.assassinApplicable      = calcParams.trickApplicable and attacker:hasTrait(xi.trait.ASSASSIN)
     calcParams.guaranteedHit           = calcParams.sneakApplicable or calcParams.trickApplicable
     calcParams.mightyStrikesApplicable = attacker:hasStatusEffect(xi.effect.MIGHTY_STRIKES)
     calcParams.forcedFirstCrit         = calcParams.sneakApplicable or calcParams.assassinApplicable
@@ -1302,7 +1302,7 @@ xi.weaponskills.getHitRate = function(attacker, target, capHitRate, bonus)
         bonus = bonus - target:getStatusEffect(xi.effect.YONIN):getPower()
     end
 
-    if attacker:hasTrait(76) and attacker:isBehind(target, 23) then --TRAIT_AMBUSH
+    if attacker:hasTrait(xi.trait.AMBUSH) and attacker:isBehind(target, 23) then
         bonus = bonus + attacker:getMerit(xi.merit.AMBUSH)
     end
 
@@ -1400,7 +1400,7 @@ xi.weaponskills.cMeleeRatio = function(attacker, defender, params, ignoredDef, t
 
     if ratioMod then
         cratio = attacker:getStat(ratioMod) * atkMultiplier / (defender:getStat(xi.mod.DEF) - ignoredDef)
-        print(ratioMod)
+        -- print(ratioMod)
     end
 
     -- cratio = utils.clamp(cratio, 0, 2.25)
@@ -1467,7 +1467,7 @@ xi.weaponskills.handleParry = function(attacker, target, missChance, guaranteedH
     then -- Try parry, if so miss.
         if target:getEcosystem() == xi.eco.BEASTMEN or target:isPC() then
             missChance = 1
-             print('parried')
+            -- print('parried')
         end
 
         if target:isPC() then
@@ -1495,7 +1495,7 @@ xi.weaponskills.handleGuard = function(attacker, target, missChance, guaranteedH
             -- Per testing shown by genome mob skills register as a miss when guarded
             -- https://genomeffxi.livejournal.com/18269.html
             missChance = 1
-            print('guarded')
+            -- print('guarded')
             target:trySkillUp(xi.skill.GUARD, attacker:getMainLvl())
         end
     end

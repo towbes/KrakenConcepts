@@ -1,0 +1,28 @@
+MODEL IDs Slots: 0=main 1=sub 2=ranged 3=ammo 4=head 5=body 6=hands 7=legs 8=feet
+
+MiD, Slot,  Item Name or Description.
+
+452 (Body) "Red Yukata, Purple satchet"
+
+460 (Body) "Porrogo Body RED"
+461 (Legs) Morbol Subligar
+
+472 (Body) "Watermelon Mandragora Suit"
+
+472 (Sub) "Meeble H2H"
+
+475 (Body) Crab Apron
+
+478 (Body) Morbol Apron
+
+479 (Legs) Denim Pants
+
+480 (Body) Esthete's Coat
+480 (Legs) Esthete's Hose
+480 (Head) Esthete's Mask
+
+673 (Sub) Troth
+
+675 (Sub) Ark Shield
+676 (Sub) "Black Aegis" (Has Aura Effect)
+677 (Sub) Ageist "Joke Aegis"

@@ -57,12 +57,18 @@ m:addOverride('xi.zones.Southern_San_dOria.Zone.onInitialize', function(zone)
             
             player:confirmTrade()
 
+            -- For auditing
+            sandoriaCurrencyTraded = bronzepieceCount + (silverpieceCount * 100) + (goldpieceCount * 10000)
+            bastokCurrencyTraded   = onebyneCount + (onehundredbyneCount * 100) + (onethousandbyneCount * 10000)
+            windurstCurrencyTraded = whiteshellCount + (jadeshellCount * 100) + (stripeshellCount * 10000)
+            print("[AUDIT] Traded Dynamis Currency",  "Player:",player:getName(), player:getID(), "Sandoria:",sandoriaCurrencyTraded, "Bastok:",bastokCurrencyTraded, "Windurst:",windurstCurrencyTraded)
+
             player:setCharVar('Dynamis_Currency[1452]', sandoriaCurrencyTotal + bronzepieceCount + (silverpieceCount * 100) + (goldpieceCount * 10000))
             player:setCharVar('Dynamis_Currency[1455]', bastokCurrencyTotal + onebyneCount + (onehundredbyneCount * 100) + (onethousandbyneCount * 10000))
             player:setCharVar('Dynamis_Currency[1449]', windurstCurrencyTotal + whiteshellCount + (jadeshellCount * 100) + (stripeshellCount * 10000))
 
             npc:facePlayer(player)
-            player:printToPlayer('CurrencyNPC: I have tallied the currency you traded me and stored it in your bank.', xi.msg.channel.NS_SAY)
+            player:printToPlayer('Alvinne Claiveur: I have tallied the currency you traded me and stored it in your bank.', xi.msg.channel.NS_SAY)
 
 
             player:printToPlayer('You now have '.. sandoriaCurrencyTotal + bronzepieceCount + (silverpieceCount * 100) + (goldpieceCount * 10000) ..' Bronzepieces stored.', xi.msg.channel.NS_SAY)
@@ -198,7 +204,7 @@ page3 =
             zoneID        = zones[player:getZoneID()]
             if playerArg:getFreeSlotsCount() ~= 0 and currencyTotal >= quantity then
                 playerArg:addItem(xi.item.ORDELLE_BRONZEPIECE, quantity)
-                playerArg:messageSpecial(zoneID.text.YOU_OBTAIN_ITEM, xi.item.ORDELLE_BRONZEPIECE, quantity)
+                playerArg:messageSpecial(zoneID.text.ITEM_OBTAINED, xi.item.ORDELLE_BRONZEPIECE, quantity)
                 playerArg:setCharVar('Dynamis_Currency[1452]', newTotal)
                 playerArg:printToPlayer('You withdraw '.. quantity ..' Ordelle Bronzepieces. You have ('.. newTotal ..') bronzepieces remaining.', xi.msg.channel.SYSTEM_3)
             elseif currencyTotal < quantity then
@@ -220,7 +226,7 @@ page3 =
             zoneID        = zones[player:getZoneID()]
             if playerArg:getFreeSlotsCount() ~= 0 and currencyTotal >= quantity then
                 playerArg:addItem(xi.item.ORDELLE_BRONZEPIECE, quantity)
-                playerArg:messageSpecial(zoneID.text.YOU_OBTAIN_ITEM, xi.item.ORDELLE_BRONZEPIECE, quantity)
+                playerArg:messageSpecial(zoneID.text.ITEM_OBTAINED, xi.item.ORDELLE_BRONZEPIECE, quantity)
                 playerArg:setCharVar('Dynamis_Currency[1452]', newTotal)
                 playerArg:printToPlayer('You withdraw '.. quantity ..' Ordelle Bronzepieces. You have ('.. newTotal ..') bronzepieces remaining.', xi.msg.channel.SYSTEM_3)
             elseif currencyTotal < quantity then
@@ -242,7 +248,7 @@ page3 =
             zoneID        = zones[player:getZoneID()]
             if playerArg:getFreeSlotsCount() ~= 0 and currencyTotal >= quantity then
                 playerArg:addItem(xi.item.ORDELLE_BRONZEPIECE, quantity)
-                playerArg:messageSpecial(zoneID.text.YOU_OBTAIN_ITEM, xi.item.ORDELLE_BRONZEPIECE, quantity)
+                playerArg:messageSpecial(zoneID.text.ITEM_OBTAINED, xi.item.ORDELLE_BRONZEPIECE, quantity)
                 playerArg:setCharVar('Dynamis_Currency[1452]', newTotal)
                 playerArg:printToPlayer('You withdraw '.. quantity ..' Ordelle Bronzepieces. You have ('.. newTotal ..') bronzepieces remaining.', xi.msg.channel.SYSTEM_3)
             elseif currencyTotal < quantity then
@@ -276,7 +282,7 @@ page4 =
             zoneID        = zones[player:getZoneID()]
             if playerArg:getFreeSlotsCount() ~= 0 and currencyTotal >= (quantity * 100) then
                 playerArg:addItem(xi.item.MONTIONT_SILVERPIECE, quantity)
-                playerArg:messageSpecial(zoneID.text.YOU_OBTAIN_ITEM, xi.item.MONTIONT_SILVERPIECE, quantity)
+                playerArg:messageSpecial(zoneID.text.ITEM_OBTAINED, xi.item.MONTIONT_SILVERPIECE, quantity)
                 playerArg:setCharVar('Dynamis_Currency[1452]', newTotal)
                 playerArg:printToPlayer('You withdraw '.. quantity ..' Montiont Silverpiece. You have ('.. newTotal ..') Ordelle Bronzepieces remaining.', xi.msg.channel.SYSTEM_3)
             elseif currencyTotal < quantity then
@@ -298,7 +304,7 @@ page4 =
             zoneID        = zones[player:getZoneID()]
             if playerArg:getFreeSlotsCount() ~= 0 and currencyTotal >= (quantity * 100) then
                 playerArg:addItem(xi.item.MONTIONT_SILVERPIECE, quantity)
-                playerArg:messageSpecial(zoneID.text.YOU_OBTAIN_ITEM, xi.item.MONTIONT_SILVERPIECE, quantity)
+                playerArg:messageSpecial(zoneID.text.ITEM_OBTAINED, xi.item.MONTIONT_SILVERPIECE, quantity)
                 playerArg:setCharVar('Dynamis_Currency[1452]', newTotal)
                 playerArg:printToPlayer('You withdraw '.. quantity ..' Montiont Silverpieces. You have ('.. newTotal ..') Ordelle Bronzepieces remaining.', xi.msg.channel.SYSTEM_3)
             elseif currencyTotal < quantity then
@@ -320,7 +326,7 @@ page4 =
             zoneID        = zones[player:getZoneID()]
             if playerArg:getFreeSlotsCount() ~= 0 and currencyTotal >= (quantity * 100) then
                 playerArg:addItem(xi.item.MONTIONT_SILVERPIECE, quantity)
-                playerArg:messageSpecial(zoneID.text.YOU_OBTAIN_ITEM, xi.item.MONTIONT_SILVERPIECE, quantity)
+                playerArg:messageSpecial(zoneID.text.ITEM_OBTAINED, xi.item.MONTIONT_SILVERPIECE, quantity)
                 playerArg:setCharVar('Dynamis_Currency[1452]', newTotal)
                 playerArg:printToPlayer('You withdraw '.. quantity ..' Montiont Silverpieces. You have ('.. newTotal ..') Ordelle Bronzepieces remaining.', xi.msg.channel.SYSTEM_3)
             elseif currencyTotal < quantity then
@@ -354,7 +360,7 @@ page5 =
             zoneID        = zones[player:getZoneID()]
             if playerArg:getFreeSlotsCount() ~= 0 and currencyTotal >= (quantity * 10000) then
                 playerArg:addItem(xi.item.RANPERRE_GOLDPIECE, quantity)
-                playerArg:messageSpecial(zoneID.text.YOU_OBTAIN_ITEM, xi.item.RANPERRE_GOLDPIECE, quantity)
+                playerArg:messageSpecial(zoneID.text.ITEM_OBTAINED, xi.item.RANPERRE_GOLDPIECE, quantity)
                 playerArg:setCharVar('Dynamis_Currency[1452]', newTotal)
                 playerArg:printToPlayer('You withdraw '.. quantity ..' Ranperre Goldpiece. You have ('.. newTotal ..') Ordelle Bronzepieces remaining.', xi.msg.channel.SYSTEM_3)
             elseif currencyTotal < quantity then
@@ -398,7 +404,7 @@ page6 =
     {
         'Ten Thousand Byne Bills',
         function(playerArg)
-            menu.options = page8
+            menu.options = page9
             delaySendMenu(playerArg)
         end,
     },
@@ -424,7 +430,7 @@ page7 =
             zoneID        = zones[player:getZoneID()]
             if playerArg:getFreeSlotsCount() ~= 0 and currencyTotal >= quantity then
                 playerArg:addItem(xi.item.ONE_BYNE_BILL, quantity)
-                playerArg:messageSpecial(zoneID.text.YOU_OBTAIN_ITEM, xi.item.ONE_BYNE_BILL, quantity)
+                playerArg:messageSpecial(zoneID.text.ITEM_OBTAINED, xi.item.ONE_BYNE_BILL, quantity)
                 playerArg:setCharVar('Dynamis_Currency[1455]', newTotal)
                 playerArg:printToPlayer('You withdraw '.. quantity ..' One Byne Bills. You have ('.. newTotal ..') Byne Bills remaining.', xi.msg.channel.SYSTEM_3)
             elseif currencyTotal < quantity then
@@ -446,7 +452,7 @@ page7 =
             zoneID        = zones[player:getZoneID()]
             if playerArg:getFreeSlotsCount() ~= 0 and currencyTotal >= quantity then
                 playerArg:addItem(xi.item.ONE_BYNE_BILL, quantity)
-                playerArg:messageSpecial(zoneID.text.YOU_OBTAIN_ITEM, xi.item.ONE_BYNE_BILL, quantity)
+                playerArg:messageSpecial(zoneID.text.ITEM_OBTAINED, xi.item.ONE_BYNE_BILL, quantity)
                 playerArg:setCharVar('Dynamis_Currency[1455]', newTotal)
                 playerArg:printToPlayer('You withdraw '.. quantity ..' One Byne Bills. You have ('.. newTotal ..') Byne Bills remaining.', xi.msg.channel.SYSTEM_3)
             elseif currencyTotal < quantity then
@@ -468,7 +474,7 @@ page7 =
             zoneID        = zones[player:getZoneID()]
             if playerArg:getFreeSlotsCount() ~= 0 and currencyTotal >= quantity then
                 playerArg:addItem(xi.item.ONE_BYNE_BILL, quantity)
-                playerArg:messageSpecial(zoneID.text.YOU_OBTAIN_ITEM, xi.item.ONE_BYNE_BILL, quantity)
+                playerArg:messageSpecial(zoneID.text.ITEM_OBTAINED, xi.item.ONE_BYNE_BILL, quantity)
                 playerArg:setCharVar('Dynamis_Currency[1455]', newTotal)
                 playerArg:printToPlayer('You withdraw '.. quantity ..' One Byne Bills. You have ('.. newTotal ..') Byne Bills remaining.', xi.msg.channel.SYSTEM_3)
             elseif currencyTotal < quantity then
@@ -502,7 +508,7 @@ page8 =
             zoneID        = zones[player:getZoneID()]
             if playerArg:getFreeSlotsCount() ~= 0 and currencyTotal >= (quantity * 100) then
                 playerArg:addItem(xi.item.ONE_HUNDRED_BYNE_BILL, quantity)
-                playerArg:messageSpecial(zoneID.text.YOU_OBTAIN_ITEM, xi.item.ONE_HUNDRED_BYNE_BILL, quantity)
+                playerArg:messageSpecial(zoneID.text.ITEM_OBTAINED, xi.item.ONE_HUNDRED_BYNE_BILL, quantity)
                 playerArg:setCharVar('Dynamis_Currency[1455]', newTotal)
                 playerArg:printToPlayer('You withdraw '.. quantity ..' One Hundred Byne Bills. You have ('.. newTotal ..') Byne Bills remaining.', xi.msg.channel.SYSTEM_3)
             elseif currencyTotal < quantity then
@@ -524,7 +530,7 @@ page8 =
             zoneID        = zones[player:getZoneID()]
             if playerArg:getFreeSlotsCount() ~= 0 and currencyTotal >= (quantity * 100) then
                 playerArg:addItem(xi.item.ONE_HUNDRED_BYNE_BILL, quantity)
-                playerArg:messageSpecial(zoneID.text.YOU_OBTAIN_ITEM, xi.item.ONE_HUNDRED_BYNE_BILL, quantity)
+                playerArg:messageSpecial(zoneID.text.ITEM_OBTAINED, xi.item.ONE_HUNDRED_BYNE_BILL, quantity)
                 playerArg:setCharVar('Dynamis_Currency[1455]', newTotal)
                 playerArg:printToPlayer('You withdraw '.. quantity ..' One Hundred Byne Bills. You have ('.. newTotal ..') Byne Bills remaining.', xi.msg.channel.SYSTEM_3)
             elseif currencyTotal < quantity then
@@ -546,7 +552,7 @@ page8 =
             zoneID        = zones[player:getZoneID()]
             if playerArg:getFreeSlotsCount() ~= 0 and currencyTotal >= (quantity * 100) then
                 playerArg:addItem(xi.item.ONE_HUNDRED_BYNE_BILL, quantity)
-                playerArg:messageSpecial(zoneID.text.YOU_OBTAIN_ITEM, xi.item.ONE_HUNDRED_BYNE_BILL, quantity)
+                playerArg:messageSpecial(zoneID.text.ITEM_OBTAINED, xi.item.ONE_HUNDRED_BYNE_BILL, quantity)
                 playerArg:setCharVar('Dynamis_Currency[1455]', newTotal)
                 playerArg:printToPlayer('You withdraw '.. quantity ..' One Hundred Byne Bills. You have ('.. newTotal ..') Byne Bills remaining.', xi.msg.channel.SYSTEM_3)
             elseif currencyTotal < quantity then
@@ -575,13 +581,13 @@ page9 =
         'Ten Thousand Byne Bill (1)',
         function(playerArg)
             quantity      = 1
-            currencyTotal = playerArg:getCharVar('Dynamis_Currency[1452]')
+            currencyTotal = playerArg:getCharVar('Dynamis_Currency[1455]')
             newTotal      = currencyTotal - quantity * 10000
             zoneID        = zones[player:getZoneID()]
             if playerArg:getFreeSlotsCount() ~= 0 and currencyTotal >= (quantity * 10000) then
                 playerArg:addItem(xi.item.TEN_THOUSAND_BYNE_BILL, quantity)
-                playerArg:messageSpecial(zoneID.text.YOU_OBTAIN_ITEM, xi.item.TEN_THOUSAND_BYNE_BILL, quantity)
-                playerArg:setCharVar('Dynamis_Currency[1452]', newTotal)
+                playerArg:messageSpecial(zoneID.text.ITEM_OBTAINED, xi.item.TEN_THOUSAND_BYNE_BILL, quantity)
+                playerArg:setCharVar('Dynamis_Currency[1455]', newTotal)
                 playerArg:printToPlayer('You withdraw '.. quantity ..' Ten Thousand Byne Bill. You have ('.. newTotal ..') Byne Bills remaining.', xi.msg.channel.SYSTEM_3)
             elseif currencyTotal < quantity then
                 playerArg:printToPlayer('Quantity: '.. quantity ..' Ten Thousand Byne Bill is more than what you have in storage. Unable to withdraw.', xi.msg.channel.SYSTEM_3)
@@ -650,7 +656,7 @@ page11 =
             zoneID        = zones[player:getZoneID()]
             if playerArg:getFreeSlotsCount() ~= 0 and currencyTotal >= quantity then
                 playerArg:addItem(xi.item.TUKUKU_WHITESHELL, quantity)
-                playerArg:messageSpecial(zoneID.text.YOU_OBTAIN_ITEM, xi.item.TUKUKU_WHITESHELL, quantity)
+                playerArg:messageSpecial(zoneID.text.ITEM_OBTAINED, xi.item.TUKUKU_WHITESHELL, quantity)
                 playerArg:setCharVar('Dynamis_Currency[1449]', newTotal)
                 playerArg:printToPlayer('You withdraw '.. quantity ..' Tukuku Whiteshells. You have ('.. newTotal ..') Tukuku Whiteshells remaining.', xi.msg.channel.SYSTEM_3)
             elseif currencyTotal < quantity then
@@ -672,7 +678,7 @@ page11 =
             zoneID        = zones[player:getZoneID()]
             if playerArg:getFreeSlotsCount() ~= 0 and currencyTotal >= quantity then
                 playerArg:addItem(xi.item.TUKUKU_WHITESHELL, quantity)
-                playerArg:messageSpecial(zoneID.text.YOU_OBTAIN_ITEM, xi.item.TUKUKU_WHITESHELL, quantity)
+                playerArg:messageSpecial(zoneID.text.ITEM_OBTAINED, xi.item.TUKUKU_WHITESHELL, quantity)
                 playerArg:setCharVar('Dynamis_Currency[1449]', newTotal)
                 playerArg:printToPlayer('You withdraw '.. quantity ..' Tukuku Whiteshells. You have ('.. newTotal ..') Tukuku Whiteshells remaining.', xi.msg.channel.SYSTEM_3)
             elseif currencyTotal < quantity then
@@ -694,7 +700,7 @@ page11 =
             zoneID        = zones[player:getZoneID()]
             if playerArg:getFreeSlotsCount() ~= 0 and currencyTotal >= quantity then
                 playerArg:addItem(xi.item.TUKUKU_WHITESHELL, quantity)
-                playerArg:messageSpecial(zoneID.text.YOU_OBTAIN_ITEM, xi.item.TUKUKU_WHITESHELL, quantity)
+                playerArg:messageSpecial(zoneID.text.ITEM_OBTAINED, xi.item.TUKUKU_WHITESHELL, quantity)
                 playerArg:setCharVar('Dynamis_Currency[1449]', newTotal)
                 playerArg:printToPlayer('You withdraw '.. quantity ..' Tukuku Whiteshells. You have ('.. newTotal ..') Tukuku Whiteshells remaining.', xi.msg.channel.SYSTEM_3)
             elseif currencyTotal < quantity then
@@ -728,7 +734,7 @@ page12 =
             zoneID        = zones[player:getZoneID()]
             if playerArg:getFreeSlotsCount() ~= 0 and currencyTotal >= (quantity * 100) then
                 playerArg:addItem(xi.item.LUNGO_NANGO_JADESHELL, quantity)
-                playerArg:messageSpecial(zoneID.text.YOU_OBTAIN_ITEM, xi.item.LUNGO_NANGO_JADESHELL, quantity)
+                playerArg:messageSpecial(zoneID.text.ITEM_OBTAINED, xi.item.LUNGO_NANGO_JADESHELL, quantity)
                 playerArg:setCharVar('Dynamis_Currency[1449]', newTotal)
                 playerArg:printToPlayer('You withdraw '.. quantity ..' Lungo Nango Jadeshells. You have ('.. newTotal ..') Tukuku Whiteshells remaining.', xi.msg.channel.SYSTEM_3)
             elseif currencyTotal < quantity then
@@ -750,7 +756,7 @@ page12 =
             zoneID        = zones[player:getZoneID()]
             if playerArg:getFreeSlotsCount() ~= 0 and currencyTotal >= (quantity * 100) then
                 playerArg:addItem(xi.item.LUNGO_NANGO_JADESHELL, quantity)
-                playerArg:messageSpecial(zoneID.text.YOU_OBTAIN_ITEM, xi.item.LUNGO_NANGO_JADESHELL, quantity)
+                playerArg:messageSpecial(zoneID.text.ITEM_OBTAINED, xi.item.LUNGO_NANGO_JADESHELL, quantity)
                 playerArg:setCharVar('Dynamis_Currency[1449]', newTotal)
                 playerArg:printToPlayer('You withdraw '.. quantity ..' Lungo Nango Jadeshells. You have ('.. newTotal ..') Tukuku Whiteshells remaining.', xi.msg.channel.SYSTEM_3)
             elseif currencyTotal < quantity then
@@ -772,7 +778,7 @@ page12 =
             zoneID        = zones[player:getZoneID()]
             if playerArg:getFreeSlotsCount() ~= 0 and currencyTotal >= (quantity * 100) then
                 playerArg:addItem(xi.item.LUNGO_NANGO_JADESHELL, quantity)
-                playerArg:messageSpecial(zoneID.text.YOU_OBTAIN_ITEM, xi.item.LUNGO_NANGO_JADESHELL, quantity)
+                playerArg:messageSpecial(zoneID.text.ITEM_OBTAINED, xi.item.LUNGO_NANGO_JADESHELL, quantity)
                 playerArg:setCharVar('Dynamis_Currency[1449]', newTotal)
                 playerArg:printToPlayer('You withdraw '.. quantity ..' Lungo Nango Jadeshells. You have ('.. newTotal ..') Tukuku Whiteshells remaining.', xi.msg.channel.SYSTEM_3)
             elseif currencyTotal < quantity then
@@ -801,13 +807,13 @@ page13 =
         'Rimilala Stripeshell (1)',
         function(playerArg)
             quantity      = 1
-            currencyTotal = playerArg:getCharVar('Dynamis_Currency[1452]')
+            currencyTotal = playerArg:getCharVar('Dynamis_Currency[1449]')
             newTotal      = currencyTotal - quantity * 10000
             zoneID        = zones[player:getZoneID()]
             if playerArg:getFreeSlotsCount() ~= 0 and currencyTotal >= (quantity * 10000) then
                 playerArg:addItem(xi.item.RIMILALA_STRIPESHELL, quantity)
-                playerArg:messageSpecial(zoneID.text.YOU_OBTAIN_ITEM, xi.item.RIMILALA_STRIPESHELL, quantity)
-                playerArg:setCharVar('Dynamis_Currency[1452]', newTotal)
+                playerArg:messageSpecial(zoneID.text.ITEM_OBTAINED, xi.item.RIMILALA_STRIPESHELL, quantity)
+                playerArg:setCharVar('Dynamis_Currency[1449]', newTotal)
                 playerArg:printToPlayer('You withdraw '.. quantity ..' Rimilala Stripeshells. You have ('.. newTotal ..') Tukuku Whiteshells remaining.', xi.msg.channel.SYSTEM_3)
             elseif currencyTotal < quantity then
                 playerArg:printToPlayer('Quantity: '.. quantity ..' Rimilala Stripeshells is more than what you have in storage. Unable to withdraw.', xi.msg.channel.SYSTEM_3)
@@ -872,7 +878,7 @@ m:addOverride('xi.zones.Bastok_Mines.Zone.onInitialize', function(zone)
             sandoriaCurrencyTotal = player:getCharVar('Dynamis_Currency[1452]')
             bastokCurrencyTotal = player:getCharVar('Dynamis_Currency[1455]')
             windurstCurrencyTotal = player:getCharVar('Dynamis_Currency[1449]')
-            
+
             trade:confirmItem(xi.item.ORDELLE_BRONZEPIECE, bronzepieceCount)
             trade:confirmItem(xi.item.MONTIONT_SILVERPIECE, silverpieceCount)
             trade:confirmItem(xi.item.RANPERRE_GOLDPIECE, goldpieceCount)
@@ -887,12 +893,18 @@ m:addOverride('xi.zones.Bastok_Mines.Zone.onInitialize', function(zone)
             
             player:confirmTrade()
 
+            -- For auditing
+            sandoriaCurrencyTraded = bronzepieceCount + (silverpieceCount * 100) + (goldpieceCount * 10000)
+            bastokCurrencyTraded   = onebyneCount + (onehundredbyneCount * 100) + (onethousandbyneCount * 10000)
+            windurstCurrencyTraded = whiteshellCount + (jadeshellCount * 100) + (stripeshellCount * 10000)
+            print("[AUDIT] Traded Dynamis Currency",  "Player:",player:getName(), player:getID(), "Sandoria:",sandoriaCurrencyTraded, "Bastok:",bastokCurrencyTraded, "Windurst:",windurstCurrencyTraded)
+
             player:setCharVar('Dynamis_Currency[1452]', sandoriaCurrencyTotal + bronzepieceCount + (silverpieceCount * 100) + (goldpieceCount * 10000))
             player:setCharVar('Dynamis_Currency[1455]', bastokCurrencyTotal + onebyneCount + (onehundredbyneCount * 100) + (onethousandbyneCount * 10000))
             player:setCharVar('Dynamis_Currency[1449]', windurstCurrencyTotal + whiteshellCount + (jadeshellCount * 100) + (stripeshellCount * 10000))
 
             npc:facePlayer(player)
-            player:printToPlayer('CurrencyNPC: I have tallied the currency you traded me and stored it in your bank.', xi.msg.channel.NS_SAY)
+            player:printToPlayer('Rising Bull: I have tallied the currency you traded me and stored it in your bank.', xi.msg.channel.NS_SAY)
 
 
             player:printToPlayer('You now have '.. sandoriaCurrencyTotal + bronzepieceCount + (silverpieceCount * 100) + (goldpieceCount * 10000) ..' Bronzepieces stored.', xi.msg.channel.NS_SAY)
@@ -1028,7 +1040,7 @@ page3 =
             zoneID        = zones[player:getZoneID()]
             if playerArg:getFreeSlotsCount() ~= 0 and currencyTotal >= quantity then
                 playerArg:addItem(xi.item.ORDELLE_BRONZEPIECE, quantity)
-                playerArg:messageSpecial(zoneID.text.YOU_OBTAIN_ITEM, xi.item.ORDELLE_BRONZEPIECE, quantity)
+                playerArg:messageSpecial(zoneID.text.ITEM_OBTAINED, xi.item.ORDELLE_BRONZEPIECE, quantity)
                 playerArg:setCharVar('Dynamis_Currency[1452]', newTotal)
                 playerArg:printToPlayer('You withdraw '.. quantity ..' Ordelle Bronzepieces. You have ('.. newTotal ..') bronzepieces remaining.', xi.msg.channel.SYSTEM_3)
             elseif currencyTotal < quantity then
@@ -1050,7 +1062,7 @@ page3 =
             zoneID        = zones[player:getZoneID()]
             if playerArg:getFreeSlotsCount() ~= 0 and currencyTotal >= quantity then
                 playerArg:addItem(xi.item.ORDELLE_BRONZEPIECE, quantity)
-                playerArg:messageSpecial(zoneID.text.YOU_OBTAIN_ITEM, xi.item.ORDELLE_BRONZEPIECE, quantity)
+                playerArg:messageSpecial(zoneID.text.ITEM_OBTAINED, xi.item.ORDELLE_BRONZEPIECE, quantity)
                 playerArg:setCharVar('Dynamis_Currency[1452]', newTotal)
                 playerArg:printToPlayer('You withdraw '.. quantity ..' Ordelle Bronzepieces. You have ('.. newTotal ..') bronzepieces remaining.', xi.msg.channel.SYSTEM_3)
             elseif currencyTotal < quantity then
@@ -1072,7 +1084,7 @@ page3 =
             zoneID        = zones[player:getZoneID()]
             if playerArg:getFreeSlotsCount() ~= 0 and currencyTotal >= quantity then
                 playerArg:addItem(xi.item.ORDELLE_BRONZEPIECE, quantity)
-                playerArg:messageSpecial(zoneID.text.YOU_OBTAIN_ITEM, xi.item.ORDELLE_BRONZEPIECE, quantity)
+                playerArg:messageSpecial(zoneID.text.ITEM_OBTAINED, xi.item.ORDELLE_BRONZEPIECE, quantity)
                 playerArg:setCharVar('Dynamis_Currency[1452]', newTotal)
                 playerArg:printToPlayer('You withdraw '.. quantity ..' Ordelle Bronzepieces. You have ('.. newTotal ..') bronzepieces remaining.', xi.msg.channel.SYSTEM_3)
             elseif currencyTotal < quantity then
@@ -1106,7 +1118,7 @@ page4 =
             zoneID        = zones[player:getZoneID()]
             if playerArg:getFreeSlotsCount() ~= 0 and currencyTotal >= (quantity * 100) then
                 playerArg:addItem(xi.item.MONTIONT_SILVERPIECE, quantity)
-                playerArg:messageSpecial(zoneID.text.YOU_OBTAIN_ITEM, xi.item.MONTIONT_SILVERPIECE, quantity)
+                playerArg:messageSpecial(zoneID.text.ITEM_OBTAINED, xi.item.MONTIONT_SILVERPIECE, quantity)
                 playerArg:setCharVar('Dynamis_Currency[1452]', newTotal)
                 playerArg:printToPlayer('You withdraw '.. quantity ..' Montiont Silverpiece. You have ('.. newTotal ..') Ordelle Bronzepieces remaining.', xi.msg.channel.SYSTEM_3)
             elseif currencyTotal < quantity then
@@ -1128,7 +1140,7 @@ page4 =
             zoneID        = zones[player:getZoneID()]
             if playerArg:getFreeSlotsCount() ~= 0 and currencyTotal >= (quantity * 100) then
                 playerArg:addItem(xi.item.MONTIONT_SILVERPIECE, quantity)
-                playerArg:messageSpecial(zoneID.text.YOU_OBTAIN_ITEM, xi.item.MONTIONT_SILVERPIECE, quantity)
+                playerArg:messageSpecial(zoneID.text.ITEM_OBTAINED, xi.item.MONTIONT_SILVERPIECE, quantity)
                 playerArg:setCharVar('Dynamis_Currency[1452]', newTotal)
                 playerArg:printToPlayer('You withdraw '.. quantity ..' Montiont Silverpieces. You have ('.. newTotal ..') Ordelle Bronzepieces remaining.', xi.msg.channel.SYSTEM_3)
             elseif currencyTotal < quantity then
@@ -1150,7 +1162,7 @@ page4 =
             zoneID        = zones[player:getZoneID()]
             if playerArg:getFreeSlotsCount() ~= 0 and currencyTotal >= (quantity * 100) then
                 playerArg:addItem(xi.item.MONTIONT_SILVERPIECE, quantity)
-                playerArg:messageSpecial(zoneID.text.YOU_OBTAIN_ITEM, xi.item.MONTIONT_SILVERPIECE, quantity)
+                playerArg:messageSpecial(zoneID.text.ITEM_OBTAINED, xi.item.MONTIONT_SILVERPIECE, quantity)
                 playerArg:setCharVar('Dynamis_Currency[1452]', newTotal)
                 playerArg:printToPlayer('You withdraw '.. quantity ..' Montiont Silverpieces. You have ('.. newTotal ..') Ordelle Bronzepieces remaining.', xi.msg.channel.SYSTEM_3)
             elseif currencyTotal < quantity then
@@ -1184,7 +1196,7 @@ page5 =
             zoneID        = zones[player:getZoneID()]
             if playerArg:getFreeSlotsCount() ~= 0 and currencyTotal >= (quantity * 10000) then
                 playerArg:addItem(xi.item.RANPERRE_GOLDPIECE, quantity)
-                playerArg:messageSpecial(zoneID.text.YOU_OBTAIN_ITEM, xi.item.RANPERRE_GOLDPIECE, quantity)
+                playerArg:messageSpecial(zoneID.text.ITEM_OBTAINED, xi.item.RANPERRE_GOLDPIECE, quantity)
                 playerArg:setCharVar('Dynamis_Currency[1452]', newTotal)
                 playerArg:printToPlayer('You withdraw '.. quantity ..' Ranperre Goldpiece. You have ('.. newTotal ..') Ordelle Bronzepieces remaining.', xi.msg.channel.SYSTEM_3)
             elseif currencyTotal < quantity then
@@ -1228,7 +1240,7 @@ page6 =
     {
         'Ten Thousand Byne Bills',
         function(playerArg)
-            menu.options = page8
+            menu.options = page9
             delaySendMenu(playerArg)
         end,
     },
@@ -1254,7 +1266,7 @@ page7 =
             zoneID        = zones[player:getZoneID()]
             if playerArg:getFreeSlotsCount() ~= 0 and currencyTotal >= quantity then
                 playerArg:addItem(xi.item.ONE_BYNE_BILL, quantity)
-                playerArg:messageSpecial(zoneID.text.YOU_OBTAIN_ITEM, xi.item.ONE_BYNE_BILL, quantity)
+                playerArg:messageSpecial(zoneID.text.ITEM_OBTAINED, xi.item.ONE_BYNE_BILL, quantity)
                 playerArg:setCharVar('Dynamis_Currency[1455]', newTotal)
                 playerArg:printToPlayer('You withdraw '.. quantity ..' One Byne Bills. You have ('.. newTotal ..') Byne Bills remaining.', xi.msg.channel.SYSTEM_3)
             elseif currencyTotal < quantity then
@@ -1276,7 +1288,7 @@ page7 =
             zoneID        = zones[player:getZoneID()]
             if playerArg:getFreeSlotsCount() ~= 0 and currencyTotal >= quantity then
                 playerArg:addItem(xi.item.ONE_BYNE_BILL, quantity)
-                playerArg:messageSpecial(zoneID.text.YOU_OBTAIN_ITEM, xi.item.ONE_BYNE_BILL, quantity)
+                playerArg:messageSpecial(zoneID.text.ITEM_OBTAINED, xi.item.ONE_BYNE_BILL, quantity)
                 playerArg:setCharVar('Dynamis_Currency[1455]', newTotal)
                 playerArg:printToPlayer('You withdraw '.. quantity ..' One Byne Bills. You have ('.. newTotal ..') Byne Bills remaining.', xi.msg.channel.SYSTEM_3)
             elseif currencyTotal < quantity then
@@ -1298,7 +1310,7 @@ page7 =
             zoneID        = zones[player:getZoneID()]
             if playerArg:getFreeSlotsCount() ~= 0 and currencyTotal >= quantity then
                 playerArg:addItem(xi.item.ONE_BYNE_BILL, quantity)
-                playerArg:messageSpecial(zoneID.text.YOU_OBTAIN_ITEM, xi.item.ONE_BYNE_BILL, quantity)
+                playerArg:messageSpecial(zoneID.text.ITEM_OBTAINED, xi.item.ONE_BYNE_BILL, quantity)
                 playerArg:setCharVar('Dynamis_Currency[1455]', newTotal)
                 playerArg:printToPlayer('You withdraw '.. quantity ..' One Byne Bills. You have ('.. newTotal ..') Byne Bills remaining.', xi.msg.channel.SYSTEM_3)
             elseif currencyTotal < quantity then
@@ -1332,7 +1344,7 @@ page8 =
             zoneID        = zones[player:getZoneID()]
             if playerArg:getFreeSlotsCount() ~= 0 and currencyTotal >= (quantity * 100) then
                 playerArg:addItem(xi.item.ONE_HUNDRED_BYNE_BILL, quantity)
-                playerArg:messageSpecial(zoneID.text.YOU_OBTAIN_ITEM, xi.item.ONE_HUNDRED_BYNE_BILL, quantity)
+                playerArg:messageSpecial(zoneID.text.ITEM_OBTAINED, xi.item.ONE_HUNDRED_BYNE_BILL, quantity)
                 playerArg:setCharVar('Dynamis_Currency[1455]', newTotal)
                 playerArg:printToPlayer('You withdraw '.. quantity ..' One Hundred Byne Bills. You have ('.. newTotal ..') Byne Bills remaining.', xi.msg.channel.SYSTEM_3)
             elseif currencyTotal < quantity then
@@ -1354,7 +1366,7 @@ page8 =
             zoneID        = zones[player:getZoneID()]
             if playerArg:getFreeSlotsCount() ~= 0 and currencyTotal >= (quantity * 100) then
                 playerArg:addItem(xi.item.ONE_HUNDRED_BYNE_BILL, quantity)
-                playerArg:messageSpecial(zoneID.text.YOU_OBTAIN_ITEM, xi.item.ONE_HUNDRED_BYNE_BILL, quantity)
+                playerArg:messageSpecial(zoneID.text.ITEM_OBTAINED, xi.item.ONE_HUNDRED_BYNE_BILL, quantity)
                 playerArg:setCharVar('Dynamis_Currency[1455]', newTotal)
                 playerArg:printToPlayer('You withdraw '.. quantity ..' One Hundred Byne Bills. You have ('.. newTotal ..') Byne Bills remaining.', xi.msg.channel.SYSTEM_3)
             elseif currencyTotal < quantity then
@@ -1376,7 +1388,7 @@ page8 =
             zoneID        = zones[player:getZoneID()]
             if playerArg:getFreeSlotsCount() ~= 0 and currencyTotal >= (quantity * 100) then
                 playerArg:addItem(xi.item.ONE_HUNDRED_BYNE_BILL, quantity)
-                playerArg:messageSpecial(zoneID.text.YOU_OBTAIN_ITEM, xi.item.ONE_HUNDRED_BYNE_BILL, quantity)
+                playerArg:messageSpecial(zoneID.text.ITEM_OBTAINED, xi.item.ONE_HUNDRED_BYNE_BILL, quantity)
                 playerArg:setCharVar('Dynamis_Currency[1455]', newTotal)
                 playerArg:printToPlayer('You withdraw '.. quantity ..' One Hundred Byne Bills. You have ('.. newTotal ..') Byne Bills remaining.', xi.msg.channel.SYSTEM_3)
             elseif currencyTotal < quantity then
@@ -1405,13 +1417,13 @@ page9 =
         'Ten Thousand Byne Bill (1)',
         function(playerArg)
             quantity      = 1
-            currencyTotal = playerArg:getCharVar('Dynamis_Currency[1452]')
-            newTotal      = currencyTotal - quantity * 01000
+            currencyTotal = playerArg:getCharVar('Dynamis_Currency[1455]')
+            newTotal      = currencyTotal - quantity * 10000
             zoneID        = zones[player:getZoneID()]
             if playerArg:getFreeSlotsCount() ~= 0 and currencyTotal >= (quantity * 10000) then
                 playerArg:addItem(xi.item.TEN_THOUSAND_BYNE_BILL, quantity)
-                playerArg:messageSpecial(zoneID.text.YOU_OBTAIN_ITEM, xi.item.TEN_THOUSAND_BYNE_BILL, quantity)
-                playerArg:setCharVar('Dynamis_Currency[1452]', newTotal)
+                playerArg:messageSpecial(zoneID.text.ITEM_OBTAINED, xi.item.TEN_THOUSAND_BYNE_BILL, quantity)
+                playerArg:setCharVar('Dynamis_Currency[1455]', newTotal)
                 playerArg:printToPlayer('You withdraw '.. quantity ..' Ten Thousand Byne Bill. You have ('.. newTotal ..') Byne Bills remaining.', xi.msg.channel.SYSTEM_3)
             elseif currencyTotal < quantity then
                 playerArg:printToPlayer('Quantity: '.. quantity ..' Ten Thousand Byne Bill is more than what you have in storage. Unable to withdraw.', xi.msg.channel.SYSTEM_3)
@@ -1480,7 +1492,7 @@ page11 =
             zoneID        = zones[player:getZoneID()]
             if playerArg:getFreeSlotsCount() ~= 0 and currencyTotal >= quantity then
                 playerArg:addItem(xi.item.TUKUKU_WHITESHELL, quantity)
-                playerArg:messageSpecial(zoneID.text.YOU_OBTAIN_ITEM, xi.item.TUKUKU_WHITESHELL, quantity)
+                playerArg:messageSpecial(zoneID.text.ITEM_OBTAINED, xi.item.TUKUKU_WHITESHELL, quantity)
                 playerArg:setCharVar('Dynamis_Currency[1449]', newTotal)
                 playerArg:printToPlayer('You withdraw '.. quantity ..' Tukuku Whiteshells. You have ('.. newTotal ..') Tukuku Whiteshells remaining.', xi.msg.channel.SYSTEM_3)
             elseif currencyTotal < quantity then
@@ -1502,7 +1514,7 @@ page11 =
             zoneID        = zones[player:getZoneID()]
             if playerArg:getFreeSlotsCount() ~= 0 and currencyTotal >= quantity then
                 playerArg:addItem(xi.item.TUKUKU_WHITESHELL, quantity)
-                playerArg:messageSpecial(zoneID.text.YOU_OBTAIN_ITEM, xi.item.TUKUKU_WHITESHELL, quantity)
+                playerArg:messageSpecial(zoneID.text.ITEM_OBTAINED, xi.item.TUKUKU_WHITESHELL, quantity)
                 playerArg:setCharVar('Dynamis_Currency[1449]', newTotal)
                 playerArg:printToPlayer('You withdraw '.. quantity ..' Tukuku Whiteshells. You have ('.. newTotal ..') Tukuku Whiteshells remaining.', xi.msg.channel.SYSTEM_3)
             elseif currencyTotal < quantity then
@@ -1524,7 +1536,7 @@ page11 =
             zoneID        = zones[player:getZoneID()]
             if playerArg:getFreeSlotsCount() ~= 0 and currencyTotal >= quantity then
                 playerArg:addItem(xi.item.TUKUKU_WHITESHELL, quantity)
-                playerArg:messageSpecial(zoneID.text.YOU_OBTAIN_ITEM, xi.item.TUKUKU_WHITESHELL, quantity)
+                playerArg:messageSpecial(zoneID.text.ITEM_OBTAINED, xi.item.TUKUKU_WHITESHELL, quantity)
                 playerArg:setCharVar('Dynamis_Currency[1449]', newTotal)
                 playerArg:printToPlayer('You withdraw '.. quantity ..' Tukuku Whiteshells. You have ('.. newTotal ..') Tukuku Whiteshells remaining.', xi.msg.channel.SYSTEM_3)
             elseif currencyTotal < quantity then
@@ -1558,7 +1570,7 @@ page12 =
             zoneID        = zones[player:getZoneID()]
             if playerArg:getFreeSlotsCount() ~= 0 and currencyTotal >= (quantity * 100) then
                 playerArg:addItem(xi.item.LUNGO_NANGO_JADESHELL, quantity)
-                playerArg:messageSpecial(zoneID.text.YOU_OBTAIN_ITEM, xi.item.LUNGO_NANGO_JADESHELL, quantity)
+                playerArg:messageSpecial(zoneID.text.ITEM_OBTAINED, xi.item.LUNGO_NANGO_JADESHELL, quantity)
                 playerArg:setCharVar('Dynamis_Currency[1449]', newTotal)
                 playerArg:printToPlayer('You withdraw '.. quantity ..' Lungo Nango Jadeshells. You have ('.. newTotal ..') Tukuku Whiteshells remaining.', xi.msg.channel.SYSTEM_3)
             elseif currencyTotal < quantity then
@@ -1580,7 +1592,7 @@ page12 =
             zoneID        = zones[player:getZoneID()]
             if playerArg:getFreeSlotsCount() ~= 0 and currencyTotal >= (quantity * 100) then
                 playerArg:addItem(xi.item.LUNGO_NANGO_JADESHELL, quantity)
-                playerArg:messageSpecial(zoneID.text.YOU_OBTAIN_ITEM, xi.item.LUNGO_NANGO_JADESHELL, quantity)
+                playerArg:messageSpecial(zoneID.text.ITEM_OBTAINED, xi.item.LUNGO_NANGO_JADESHELL, quantity)
                 playerArg:setCharVar('Dynamis_Currency[1449]', newTotal)
                 playerArg:printToPlayer('You withdraw '.. quantity ..' Lungo Nango Jadeshells. You have ('.. newTotal ..') Tukuku Whiteshells remaining.', xi.msg.channel.SYSTEM_3)
             elseif currencyTotal < quantity then
@@ -1602,7 +1614,7 @@ page12 =
             zoneID        = zones[player:getZoneID()]
             if playerArg:getFreeSlotsCount() ~= 0 and currencyTotal >= (quantity * 100) then
                 playerArg:addItem(xi.item.LUNGO_NANGO_JADESHELL, quantity)
-                playerArg:messageSpecial(zoneID.text.YOU_OBTAIN_ITEM, xi.item.LUNGO_NANGO_JADESHELL, quantity)
+                playerArg:messageSpecial(zoneID.text.ITEM_OBTAINED, xi.item.LUNGO_NANGO_JADESHELL, quantity)
                 playerArg:setCharVar('Dynamis_Currency[1449]', newTotal)
                 playerArg:printToPlayer('You withdraw '.. quantity ..' Lungo Nango Jadeshells. You have ('.. newTotal ..') Tukuku Whiteshells remaining.', xi.msg.channel.SYSTEM_3)
             elseif currencyTotal < quantity then
@@ -1631,13 +1643,13 @@ page13 =
         'Rimilala Stripeshell (1)',
         function(playerArg)
             quantity      = 1
-            currencyTotal = playerArg:getCharVar('Dynamis_Currency[1452]')
+            currencyTotal = playerArg:getCharVar('Dynamis_Currency[1449]')
             newTotal      = currencyTotal - quantity * 10000
             zoneID        = zones[player:getZoneID()]
             if playerArg:getFreeSlotsCount() ~= 0 and currencyTotal >= (quantity * 10000) then
                 playerArg:addItem(xi.item.RIMILALA_STRIPESHELL, quantity)
-                playerArg:messageSpecial(zoneID.text.YOU_OBTAIN_ITEM, xi.item.RIMILALA_STRIPESHELL, quantity)
-                playerArg:setCharVar('Dynamis_Currency[1452]', newTotal)
+                playerArg:messageSpecial(zoneID.text.ITEM_OBTAINED, xi.item.RIMILALA_STRIPESHELL, quantity)
+                playerArg:setCharVar('Dynamis_Currency[1449]', newTotal)
                 playerArg:printToPlayer('You withdraw '.. quantity ..' Rimilala Stripeshells. You have ('.. newTotal ..') Tukuku Whiteshells remaining.', xi.msg.channel.SYSTEM_3)
             elseif currencyTotal < quantity then
                 playerArg:printToPlayer('Quantity: '.. quantity ..' Rimilala Stripeshells is more than what you have in storage. Unable to withdraw.', xi.msg.channel.SYSTEM_3)
@@ -1717,12 +1729,18 @@ m:addOverride('xi.zones.Windurst_Walls.Zone.onInitialize', function(zone)
             
             player:confirmTrade()
 
+            -- For auditing
+            sandoriaCurrencyTraded = bronzepieceCount + (silverpieceCount * 100) + (goldpieceCount * 10000)
+            bastokCurrencyTraded   = onebyneCount + (onehundredbyneCount * 100) + (onethousandbyneCount * 10000)
+            windurstCurrencyTraded = whiteshellCount + (jadeshellCount * 100) + (stripeshellCount * 10000)
+            print("[AUDIT] Traded Dynamis Currency",  "Player:",player:getName(), player:getID(), "Sandoria:",sandoriaCurrencyTraded, "Bastok:",bastokCurrencyTraded, "Windurst:",windurstCurrencyTraded)
+
             player:setCharVar('Dynamis_Currency[1452]', sandoriaCurrencyTotal + bronzepieceCount + (silverpieceCount * 100) + (goldpieceCount * 10000))
             player:setCharVar('Dynamis_Currency[1455]', bastokCurrencyTotal + onebyneCount + (onehundredbyneCount * 100) + (onethousandbyneCount * 10000))
             player:setCharVar('Dynamis_Currency[1449]', windurstCurrencyTotal + whiteshellCount + (jadeshellCount * 100) + (stripeshellCount * 10000))
 
             npc:facePlayer(player)
-            player:printToPlayer('CurrencyNPC: I have tallied the currency you traded me and stored it in your bank.', xi.msg.channel.NS_SAY)
+            player:printToPlayer('Ahko Mewlmirih: I have tallied the currency you traded me and stored it in your bank.', xi.msg.channel.NS_SAY)
 
 
             player:printToPlayer('You now have '.. sandoriaCurrencyTotal + bronzepieceCount + (silverpieceCount * 100) + (goldpieceCount * 10000) ..' Bronzepieces stored.', xi.msg.channel.NS_SAY)
@@ -1858,7 +1876,7 @@ page3 =
             zoneID        = zones[player:getZoneID()]
             if playerArg:getFreeSlotsCount() ~= 0 and currencyTotal >= quantity then
                 playerArg:addItem(xi.item.ORDELLE_BRONZEPIECE, quantity)
-                playerArg:messageSpecial(zoneID.text.YOU_OBTAIN_ITEM, xi.item.ORDELLE_BRONZEPIECE, quantity)
+                playerArg:messageSpecial(zoneID.text.ITEM_OBTAINED, xi.item.ORDELLE_BRONZEPIECE, quantity)
                 playerArg:setCharVar('Dynamis_Currency[1452]', newTotal)
                 playerArg:printToPlayer('You withdraw '.. quantity ..' Ordelle Bronzepieces. You have ('.. newTotal ..') bronzepieces remaining.', xi.msg.channel.SYSTEM_3)
             elseif currencyTotal < quantity then
@@ -1880,7 +1898,7 @@ page3 =
             zoneID        = zones[player:getZoneID()]
             if playerArg:getFreeSlotsCount() ~= 0 and currencyTotal >= quantity then
                 playerArg:addItem(xi.item.ORDELLE_BRONZEPIECE, quantity)
-                playerArg:messageSpecial(zoneID.text.YOU_OBTAIN_ITEM, xi.item.ORDELLE_BRONZEPIECE, quantity)
+                playerArg:messageSpecial(zoneID.text.ITEM_OBTAINED, xi.item.ORDELLE_BRONZEPIECE, quantity)
                 playerArg:setCharVar('Dynamis_Currency[1452]', newTotal)
                 playerArg:printToPlayer('You withdraw '.. quantity ..' Ordelle Bronzepieces. You have ('.. newTotal ..') bronzepieces remaining.', xi.msg.channel.SYSTEM_3)
             elseif currencyTotal < quantity then
@@ -1902,7 +1920,7 @@ page3 =
             zoneID        = zones[player:getZoneID()]
             if playerArg:getFreeSlotsCount() ~= 0 and currencyTotal >= quantity then
                 playerArg:addItem(xi.item.ORDELLE_BRONZEPIECE, quantity)
-                playerArg:messageSpecial(zoneID.text.YOU_OBTAIN_ITEM, xi.item.ORDELLE_BRONZEPIECE, quantity)
+                playerArg:messageSpecial(zoneID.text.ITEM_OBTAINED, xi.item.ORDELLE_BRONZEPIECE, quantity)
                 playerArg:setCharVar('Dynamis_Currency[1452]', newTotal)
                 playerArg:printToPlayer('You withdraw '.. quantity ..' Ordelle Bronzepieces. You have ('.. newTotal ..') bronzepieces remaining.', xi.msg.channel.SYSTEM_3)
             elseif currencyTotal < quantity then
@@ -1936,7 +1954,7 @@ page4 =
             zoneID        = zones[player:getZoneID()]
             if playerArg:getFreeSlotsCount() ~= 0 and currencyTotal >= (quantity * 100) then
                 playerArg:addItem(xi.item.MONTIONT_SILVERPIECE, quantity)
-                playerArg:messageSpecial(zoneID.text.YOU_OBTAIN_ITEM, xi.item.MONTIONT_SILVERPIECE, quantity)
+                playerArg:messageSpecial(zoneID.text.ITEM_OBTAINED, xi.item.MONTIONT_SILVERPIECE, quantity)
                 playerArg:setCharVar('Dynamis_Currency[1452]', newTotal)
                 playerArg:printToPlayer('You withdraw '.. quantity ..' Montiont Silverpiece. You have ('.. newTotal ..') Ordelle Bronzepieces remaining.', xi.msg.channel.SYSTEM_3)
             elseif currencyTotal < quantity then
@@ -1958,7 +1976,7 @@ page4 =
             zoneID        = zones[player:getZoneID()]
             if playerArg:getFreeSlotsCount() ~= 0 and currencyTotal >= (quantity * 100) then
                 playerArg:addItem(xi.item.MONTIONT_SILVERPIECE, quantity)
-                playerArg:messageSpecial(zoneID.text.YOU_OBTAIN_ITEM, xi.item.MONTIONT_SILVERPIECE, quantity)
+                playerArg:messageSpecial(zoneID.text.ITEM_OBTAINED, xi.item.MONTIONT_SILVERPIECE, quantity)
                 playerArg:setCharVar('Dynamis_Currency[1452]', newTotal)
                 playerArg:printToPlayer('You withdraw '.. quantity ..' Montiont Silverpieces. You have ('.. newTotal ..') Ordelle Bronzepieces remaining.', xi.msg.channel.SYSTEM_3)
             elseif currencyTotal < quantity then
@@ -1980,7 +1998,7 @@ page4 =
             zoneID        = zones[player:getZoneID()]
             if playerArg:getFreeSlotsCount() ~= 0 and currencyTotal >= (quantity * 100) then
                 playerArg:addItem(xi.item.MONTIONT_SILVERPIECE, quantity)
-                playerArg:messageSpecial(zoneID.text.YOU_OBTAIN_ITEM, xi.item.MONTIONT_SILVERPIECE, quantity)
+                playerArg:messageSpecial(zoneID.text.ITEM_OBTAINED, xi.item.MONTIONT_SILVERPIECE, quantity)
                 playerArg:setCharVar('Dynamis_Currency[1452]', newTotal)
                 playerArg:printToPlayer('You withdraw '.. quantity ..' Montiont Silverpieces. You have ('.. newTotal ..') Ordelle Bronzepieces remaining.', xi.msg.channel.SYSTEM_3)
             elseif currencyTotal < quantity then
@@ -2014,7 +2032,7 @@ page5 =
             zoneID        = zones[player:getZoneID()]
             if playerArg:getFreeSlotsCount() ~= 0 and currencyTotal >= (quantity * 10000) then
                 playerArg:addItem(xi.item.RANPERRE_GOLDPIECE, quantity)
-                playerArg:messageSpecial(zoneID.text.YOU_OBTAIN_ITEM, xi.item.RANPERRE_GOLDPIECE, quantity)
+                playerArg:messageSpecial(zoneID.text.ITEM_OBTAINED, xi.item.RANPERRE_GOLDPIECE, quantity)
                 playerArg:setCharVar('Dynamis_Currency[1452]', newTotal)
                 playerArg:printToPlayer('You withdraw '.. quantity ..' Ranperre Goldpiece. You have ('.. newTotal ..') Ordelle Bronzepieces remaining.', xi.msg.channel.SYSTEM_3)
             elseif currencyTotal < quantity then
@@ -2058,7 +2076,7 @@ page6 =
     {
         'Ten Thousand Byne Bills',
         function(playerArg)
-            menu.options = page8
+            menu.options = page9
             delaySendMenu(playerArg)
         end,
     },
@@ -2084,7 +2102,7 @@ page7 =
             zoneID        = zones[player:getZoneID()]
             if playerArg:getFreeSlotsCount() ~= 0 and currencyTotal >= quantity then
                 playerArg:addItem(xi.item.ONE_BYNE_BILL, quantity)
-                playerArg:messageSpecial(zoneID.text.YOU_OBTAIN_ITEM, xi.item.ONE_BYNE_BILL, quantity)
+                playerArg:messageSpecial(zoneID.text.ITEM_OBTAINED, xi.item.ONE_BYNE_BILL, quantity)
                 playerArg:setCharVar('Dynamis_Currency[1455]', newTotal)
                 playerArg:printToPlayer('You withdraw '.. quantity ..' One Byne Bills. You have ('.. newTotal ..') Byne Bills remaining.', xi.msg.channel.SYSTEM_3)
             elseif currencyTotal < quantity then
@@ -2106,7 +2124,7 @@ page7 =
             zoneID        = zones[player:getZoneID()]
             if playerArg:getFreeSlotsCount() ~= 0 and currencyTotal >= quantity then
                 playerArg:addItem(xi.item.ONE_BYNE_BILL, quantity)
-                playerArg:messageSpecial(zoneID.text.YOU_OBTAIN_ITEM, xi.item.ONE_BYNE_BILL, quantity)
+                playerArg:messageSpecial(zoneID.text.ITEM_OBTAINED, xi.item.ONE_BYNE_BILL, quantity)
                 playerArg:setCharVar('Dynamis_Currency[1455]', newTotal)
                 playerArg:printToPlayer('You withdraw '.. quantity ..' One Byne Bills. You have ('.. newTotal ..') Byne Bills remaining.', xi.msg.channel.SYSTEM_3)
             elseif currencyTotal < quantity then
@@ -2128,7 +2146,7 @@ page7 =
             zoneID        = zones[player:getZoneID()]
             if playerArg:getFreeSlotsCount() ~= 0 and currencyTotal >= quantity then
                 playerArg:addItem(xi.item.ONE_BYNE_BILL, quantity)
-                playerArg:messageSpecial(zoneID.text.YOU_OBTAIN_ITEM, xi.item.ONE_BYNE_BILL, quantity)
+                playerArg:messageSpecial(zoneID.text.ITEM_OBTAINED, xi.item.ONE_BYNE_BILL, quantity)
                 playerArg:setCharVar('Dynamis_Currency[1455]', newTotal)
                 playerArg:printToPlayer('You withdraw '.. quantity ..' One Byne Bills. You have ('.. newTotal ..') Byne Bills remaining.', xi.msg.channel.SYSTEM_3)
             elseif currencyTotal < quantity then
@@ -2162,7 +2180,7 @@ page8 =
             zoneID        = zones[player:getZoneID()]
             if playerArg:getFreeSlotsCount() ~= 0 and currencyTotal >= (quantity * 100) then
                 playerArg:addItem(xi.item.ONE_HUNDRED_BYNE_BILL, quantity)
-                playerArg:messageSpecial(zoneID.text.YOU_OBTAIN_ITEM, xi.item.ONE_HUNDRED_BYNE_BILL, quantity)
+                playerArg:messageSpecial(zoneID.text.ITEM_OBTAINED, xi.item.ONE_HUNDRED_BYNE_BILL, quantity)
                 playerArg:setCharVar('Dynamis_Currency[1455]', newTotal)
                 playerArg:printToPlayer('You withdraw '.. quantity ..' One Hundred Byne Bills. You have ('.. newTotal ..') Byne Bills remaining.', xi.msg.channel.SYSTEM_3)
             elseif currencyTotal < quantity then
@@ -2184,7 +2202,7 @@ page8 =
             zoneID        = zones[player:getZoneID()]
             if playerArg:getFreeSlotsCount() ~= 0 and currencyTotal >= (quantity * 100) then
                 playerArg:addItem(xi.item.ONE_HUNDRED_BYNE_BILL, quantity)
-                playerArg:messageSpecial(zoneID.text.YOU_OBTAIN_ITEM, xi.item.ONE_HUNDRED_BYNE_BILL, quantity)
+                playerArg:messageSpecial(zoneID.text.ITEM_OBTAINED, xi.item.ONE_HUNDRED_BYNE_BILL, quantity)
                 playerArg:setCharVar('Dynamis_Currency[1455]', newTotal)
                 playerArg:printToPlayer('You withdraw '.. quantity ..' One Hundred Byne Bills. You have ('.. newTotal ..') Byne Bills remaining.', xi.msg.channel.SYSTEM_3)
             elseif currencyTotal < quantity then
@@ -2206,7 +2224,7 @@ page8 =
             zoneID        = zones[player:getZoneID()]
             if playerArg:getFreeSlotsCount() ~= 0 and currencyTotal >= (quantity * 100) then
                 playerArg:addItem(xi.item.ONE_HUNDRED_BYNE_BILL, quantity)
-                playerArg:messageSpecial(zoneID.text.YOU_OBTAIN_ITEM, xi.item.ONE_HUNDRED_BYNE_BILL, quantity)
+                playerArg:messageSpecial(zoneID.text.ITEM_OBTAINED, xi.item.ONE_HUNDRED_BYNE_BILL, quantity)
                 playerArg:setCharVar('Dynamis_Currency[1455]', newTotal)
                 playerArg:printToPlayer('You withdraw '.. quantity ..' One Hundred Byne Bills. You have ('.. newTotal ..') Byne Bills remaining.', xi.msg.channel.SYSTEM_3)
             elseif currencyTotal < quantity then
@@ -2235,13 +2253,13 @@ page9 =
         'Ten Thousand Byne Bill (1)',
         function(playerArg)
             quantity      = 1
-            currencyTotal = playerArg:getCharVar('Dynamis_Currency[1452]')
+            currencyTotal = playerArg:getCharVar('Dynamis_Currency[1455]')
             newTotal      = currencyTotal - quantity * 10000
             zoneID        = zones[player:getZoneID()]
             if playerArg:getFreeSlotsCount() ~= 0 and currencyTotal >= (quantity * 10000) then
                 playerArg:addItem(xi.item.TEN_THOUSAND_BYNE_BILL, quantity)
-                playerArg:messageSpecial(zoneID.text.YOU_OBTAIN_ITEM, xi.item.TEN_THOUSAND_BYNE_BILL, quantity)
-                playerArg:setCharVar('Dynamis_Currency[1452]', newTotal)
+                playerArg:messageSpecial(zoneID.text.ITEM_OBTAINED, xi.item.TEN_THOUSAND_BYNE_BILL, quantity)
+                playerArg:setCharVar('Dynamis_Currency[1455]', newTotal)
                 playerArg:printToPlayer('You withdraw '.. quantity ..' Ten Thousand Byne Bill. You have ('.. newTotal ..') Byne Bills remaining.', xi.msg.channel.SYSTEM_3)
             elseif currencyTotal < quantity then
                 playerArg:printToPlayer('Quantity: '.. quantity ..' Ten Thousand Byne Bill is more than what you have in storage. Unable to withdraw.', xi.msg.channel.SYSTEM_3)
@@ -2310,7 +2328,7 @@ page11 =
             zoneID        = zones[player:getZoneID()]
             if playerArg:getFreeSlotsCount() ~= 0 and currencyTotal >= quantity then
                 playerArg:addItem(xi.item.TUKUKU_WHITESHELL, quantity)
-                playerArg:messageSpecial(zoneID.text.YOU_OBTAIN_ITEM, xi.item.TUKUKU_WHITESHELL, quantity)
+                playerArg:messageSpecial(zoneID.text.ITEM_OBTAINED, xi.item.TUKUKU_WHITESHELL, quantity)
                 playerArg:setCharVar('Dynamis_Currency[1449]', newTotal)
                 playerArg:printToPlayer('You withdraw '.. quantity ..' Tukuku Whiteshells. You have ('.. newTotal ..') Tukuku Whiteshells remaining.', xi.msg.channel.SYSTEM_3)
             elseif currencyTotal < quantity then
@@ -2332,7 +2350,7 @@ page11 =
             zoneID        = zones[player:getZoneID()]
             if playerArg:getFreeSlotsCount() ~= 0 and currencyTotal >= quantity then
                 playerArg:addItem(xi.item.TUKUKU_WHITESHELL, quantity)
-                playerArg:messageSpecial(zoneID.text.YOU_OBTAIN_ITEM, xi.item.TUKUKU_WHITESHELL, quantity)
+                playerArg:messageSpecial(zoneID.text.ITEM_OBTAINED, xi.item.TUKUKU_WHITESHELL, quantity)
                 playerArg:setCharVar('Dynamis_Currency[1449]', newTotal)
                 playerArg:printToPlayer('You withdraw '.. quantity ..' Tukuku Whiteshells. You have ('.. newTotal ..') Tukuku Whiteshells remaining.', xi.msg.channel.SYSTEM_3)
             elseif currencyTotal < quantity then
@@ -2354,7 +2372,7 @@ page11 =
             zoneID        = zones[player:getZoneID()]
             if playerArg:getFreeSlotsCount() ~= 0 and currencyTotal >= quantity then
                 playerArg:addItem(xi.item.TUKUKU_WHITESHELL, quantity)
-                playerArg:messageSpecial(zoneID.text.YOU_OBTAIN_ITEM, xi.item.TUKUKU_WHITESHELL, quantity)
+                playerArg:messageSpecial(zoneID.text.ITEM_OBTAINED, xi.item.TUKUKU_WHITESHELL, quantity)
                 playerArg:setCharVar('Dynamis_Currency[1449]', newTotal)
                 playerArg:printToPlayer('You withdraw '.. quantity ..' Tukuku Whiteshells. You have ('.. newTotal ..') Tukuku Whiteshells remaining.', xi.msg.channel.SYSTEM_3)
             elseif currencyTotal < quantity then
@@ -2388,7 +2406,7 @@ page12 =
             zoneID        = zones[player:getZoneID()]
             if playerArg:getFreeSlotsCount() ~= 0 and currencyTotal >= (quantity * 100) then
                 playerArg:addItem(xi.item.LUNGO_NANGO_JADESHELL, quantity)
-                playerArg:messageSpecial(zoneID.text.YOU_OBTAIN_ITEM, xi.item.LUNGO_NANGO_JADESHELL, quantity)
+                playerArg:messageSpecial(zoneID.text.ITEM_OBTAINED, xi.item.LUNGO_NANGO_JADESHELL, quantity)
                 playerArg:setCharVar('Dynamis_Currency[1449]', newTotal)
                 playerArg:printToPlayer('You withdraw '.. quantity ..' Lungo Nango Jadeshells. You have ('.. newTotal ..') Tukuku Whiteshells remaining.', xi.msg.channel.SYSTEM_3)
             elseif currencyTotal < quantity then
@@ -2410,7 +2428,7 @@ page12 =
             zoneID        = zones[player:getZoneID()]
             if playerArg:getFreeSlotsCount() ~= 0 and currencyTotal >= (quantity * 100) then
                 playerArg:addItem(xi.item.LUNGO_NANGO_JADESHELL, quantity)
-                playerArg:messageSpecial(zoneID.text.YOU_OBTAIN_ITEM, xi.item.LUNGO_NANGO_JADESHELL, quantity)
+                playerArg:messageSpecial(zoneID.text.ITEM_OBTAINED, xi.item.LUNGO_NANGO_JADESHELL, quantity)
                 playerArg:setCharVar('Dynamis_Currency[1449]', newTotal)
                 playerArg:printToPlayer('You withdraw '.. quantity ..' Lungo Nango Jadeshells. You have ('.. newTotal ..') Tukuku Whiteshells remaining.', xi.msg.channel.SYSTEM_3)
             elseif currencyTotal < quantity then
@@ -2432,7 +2450,7 @@ page12 =
             zoneID        = zones[player:getZoneID()]
             if playerArg:getFreeSlotsCount() ~= 0 and currencyTotal >= (quantity * 100) then
                 playerArg:addItem(xi.item.LUNGO_NANGO_JADESHELL, quantity)
-                playerArg:messageSpecial(zoneID.text.YOU_OBTAIN_ITEM, xi.item.LUNGO_NANGO_JADESHELL, quantity)
+                playerArg:messageSpecial(zoneID.text.ITEM_OBTAINED, xi.item.LUNGO_NANGO_JADESHELL, quantity)
                 playerArg:setCharVar('Dynamis_Currency[1449]', newTotal)
                 playerArg:printToPlayer('You withdraw '.. quantity ..' Lungo Nango Jadeshells. You have ('.. newTotal ..') Tukuku Whiteshells remaining.', xi.msg.channel.SYSTEM_3)
             elseif currencyTotal < quantity then
@@ -2461,13 +2479,13 @@ page13 =
         'Rimilala Stripeshell (1)',
         function(playerArg)
             quantity      = 1
-            currencyTotal = playerArg:getCharVar('Dynamis_Currency[1452]')
+            currencyTotal = playerArg:getCharVar('Dynamis_Currency[1449]')
             newTotal      = currencyTotal - quantity * 10000
             zoneID        = zones[player:getZoneID()]
             if playerArg:getFreeSlotsCount() ~= 0 and currencyTotal >= (quantity * 10000) then
                 playerArg:addItem(xi.item.RIMILALA_STRIPESHELL, quantity)
-                playerArg:messageSpecial(zoneID.text.YOU_OBTAIN_ITEM, xi.item.RIMILALA_STRIPESHELL, quantity)
-                playerArg:setCharVar('Dynamis_Currency[1452]', newTotal)
+                playerArg:messageSpecial(zoneID.text.ITEM_OBTAINED, xi.item.RIMILALA_STRIPESHELL, quantity)
+                playerArg:setCharVar('Dynamis_Currency[1449]', newTotal)
                 playerArg:printToPlayer('You withdraw '.. quantity ..' Rimilala Stripeshells. You have ('.. newTotal ..') Tukuku Whiteshells remaining.', xi.msg.channel.SYSTEM_3)
             elseif currencyTotal < quantity then
                 playerArg:printToPlayer('Quantity: '.. quantity ..' Rimilala Stripeshells is more than what you have in storage. Unable to withdraw.', xi.msg.channel.SYSTEM_3)
@@ -2547,12 +2565,18 @@ m:addOverride('xi.zones.RuLude_Gardens.Zone.onInitialize', function(zone)
             
             player:confirmTrade()
 
+            -- For auditing
+            sandoriaCurrencyTraded = bronzepieceCount + (silverpieceCount * 100) + (goldpieceCount * 10000)
+            bastokCurrencyTraded   = onebyneCount + (onehundredbyneCount * 100) + (onethousandbyneCount * 10000)
+            windurstCurrencyTraded = whiteshellCount + (jadeshellCount * 100) + (stripeshellCount * 10000)
+            print("[AUDIT] Traded Dynamis Currency",  "Player:",player:getName(), player:getID(), "Sandoria:",sandoriaCurrencyTraded, "Bastok:",bastokCurrencyTraded, "Windurst:",windurstCurrencyTraded)
+
             player:setCharVar('Dynamis_Currency[1452]', sandoriaCurrencyTotal + bronzepieceCount + (silverpieceCount * 100) + (goldpieceCount * 10000))
             player:setCharVar('Dynamis_Currency[1455]', bastokCurrencyTotal + onebyneCount + (onehundredbyneCount * 100) + (onethousandbyneCount * 10000))
             player:setCharVar('Dynamis_Currency[1449]', windurstCurrencyTotal + whiteshellCount + (jadeshellCount * 100) + (stripeshellCount * 10000))
 
             npc:facePlayer(player)
-            player:printToPlayer('CurrencyNPC: I have tallied the currency you traded me and stored it in your bank.', xi.msg.channel.NS_SAY)
+            player:printToPlayer('Siggurd: I have tallied the currency you traded me and stored it in your bank.', xi.msg.channel.NS_SAY)
 
 
             player:printToPlayer('You now have '.. sandoriaCurrencyTotal + bronzepieceCount + (silverpieceCount * 100) + (goldpieceCount * 10000) ..' Bronzepieces stored.', xi.msg.channel.NS_SAY)
@@ -2688,7 +2712,7 @@ page3 =
             zoneID        = zones[player:getZoneID()]
             if playerArg:getFreeSlotsCount() ~= 0 and currencyTotal >= quantity then
                 playerArg:addItem(xi.item.ORDELLE_BRONZEPIECE, quantity)
-                playerArg:messageSpecial(zoneID.text.YOU_OBTAIN_ITEM, xi.item.ORDELLE_BRONZEPIECE, quantity)
+                playerArg:messageSpecial(zoneID.text.ITEM_OBTAINED, xi.item.ORDELLE_BRONZEPIECE, quantity)
                 playerArg:setCharVar('Dynamis_Currency[1452]', newTotal)
                 playerArg:printToPlayer('You withdraw '.. quantity ..' Ordelle Bronzepieces. You have ('.. newTotal ..') bronzepieces remaining.', xi.msg.channel.SYSTEM_3)
             elseif currencyTotal < quantity then
@@ -2710,7 +2734,7 @@ page3 =
             zoneID        = zones[player:getZoneID()]
             if playerArg:getFreeSlotsCount() ~= 0 and currencyTotal >= quantity then
                 playerArg:addItem(xi.item.ORDELLE_BRONZEPIECE, quantity)
-                playerArg:messageSpecial(zoneID.text.YOU_OBTAIN_ITEM, xi.item.ORDELLE_BRONZEPIECE, quantity)
+                playerArg:messageSpecial(zoneID.text.ITEM_OBTAINED, xi.item.ORDELLE_BRONZEPIECE, quantity)
                 playerArg:setCharVar('Dynamis_Currency[1452]', newTotal)
                 playerArg:printToPlayer('You withdraw '.. quantity ..' Ordelle Bronzepieces. You have ('.. newTotal ..') bronzepieces remaining.', xi.msg.channel.SYSTEM_3)
             elseif currencyTotal < quantity then
@@ -2732,7 +2756,7 @@ page3 =
             zoneID        = zones[player:getZoneID()]
             if playerArg:getFreeSlotsCount() ~= 0 and currencyTotal >= quantity then
                 playerArg:addItem(xi.item.ORDELLE_BRONZEPIECE, quantity)
-                playerArg:messageSpecial(zoneID.text.YOU_OBTAIN_ITEM, xi.item.ORDELLE_BRONZEPIECE, quantity)
+                playerArg:messageSpecial(zoneID.text.ITEM_OBTAINED, xi.item.ORDELLE_BRONZEPIECE, quantity)
                 playerArg:setCharVar('Dynamis_Currency[1452]', newTotal)
                 playerArg:printToPlayer('You withdraw '.. quantity ..' Ordelle Bronzepieces. You have ('.. newTotal ..') bronzepieces remaining.', xi.msg.channel.SYSTEM_3)
             elseif currencyTotal < quantity then
@@ -2766,7 +2790,7 @@ page4 =
             zoneID        = zones[player:getZoneID()]
             if playerArg:getFreeSlotsCount() ~= 0 and currencyTotal >= (quantity * 100) then
                 playerArg:addItem(xi.item.MONTIONT_SILVERPIECE, quantity)
-                playerArg:messageSpecial(zoneID.text.YOU_OBTAIN_ITEM, xi.item.MONTIONT_SILVERPIECE, quantity)
+                playerArg:messageSpecial(zoneID.text.ITEM_OBTAINED, xi.item.MONTIONT_SILVERPIECE, quantity)
                 playerArg:setCharVar('Dynamis_Currency[1452]', newTotal)
                 playerArg:printToPlayer('You withdraw '.. quantity ..' Montiont Silverpiece. You have ('.. newTotal ..') Ordelle Bronzepieces remaining.', xi.msg.channel.SYSTEM_3)
             elseif currencyTotal < quantity then
@@ -2788,7 +2812,7 @@ page4 =
             zoneID        = zones[player:getZoneID()]
             if playerArg:getFreeSlotsCount() ~= 0 and currencyTotal >= (quantity * 100) then
                 playerArg:addItem(xi.item.MONTIONT_SILVERPIECE, quantity)
-                playerArg:messageSpecial(zoneID.text.YOU_OBTAIN_ITEM, xi.item.MONTIONT_SILVERPIECE, quantity)
+                playerArg:messageSpecial(zoneID.text.ITEM_OBTAINED, xi.item.MONTIONT_SILVERPIECE, quantity)
                 playerArg:setCharVar('Dynamis_Currency[1452]', newTotal)
                 playerArg:printToPlayer('You withdraw '.. quantity ..' Montiont Silverpieces. You have ('.. newTotal ..') Ordelle Bronzepieces remaining.', xi.msg.channel.SYSTEM_3)
             elseif currencyTotal < quantity then
@@ -2810,7 +2834,7 @@ page4 =
             zoneID        = zones[player:getZoneID()]
             if playerArg:getFreeSlotsCount() ~= 0 and currencyTotal >= (quantity * 100) then
                 playerArg:addItem(xi.item.MONTIONT_SILVERPIECE, quantity)
-                playerArg:messageSpecial(zoneID.text.YOU_OBTAIN_ITEM, xi.item.MONTIONT_SILVERPIECE, quantity)
+                playerArg:messageSpecial(zoneID.text.ITEM_OBTAINED, xi.item.MONTIONT_SILVERPIECE, quantity)
                 playerArg:setCharVar('Dynamis_Currency[1452]', newTotal)
                 playerArg:printToPlayer('You withdraw '.. quantity ..' Montiont Silverpieces. You have ('.. newTotal ..') Ordelle Bronzepieces remaining.', xi.msg.channel.SYSTEM_3)
             elseif currencyTotal < quantity then
@@ -2844,7 +2868,7 @@ page5 =
             zoneID        = zones[player:getZoneID()]
             if playerArg:getFreeSlotsCount() ~= 0 and currencyTotal >= (quantity * 10000) then
                 playerArg:addItem(xi.item.RANPERRE_GOLDPIECE, quantity)
-                playerArg:messageSpecial(zoneID.text.YOU_OBTAIN_ITEM, xi.item.RANPERRE_GOLDPIECE, quantity)
+                playerArg:messageSpecial(zoneID.text.ITEM_OBTAINED, xi.item.RANPERRE_GOLDPIECE, quantity)
                 playerArg:setCharVar('Dynamis_Currency[1452]', newTotal)
                 playerArg:printToPlayer('You withdraw '.. quantity ..' Ranperre Goldpiece. You have ('.. newTotal ..') Ordelle Bronzepieces remaining.', xi.msg.channel.SYSTEM_3)
             elseif currencyTotal < quantity then
@@ -2888,7 +2912,7 @@ page6 =
     {
         'Ten Thousand Byne Bills',
         function(playerArg)
-            menu.options = page8
+            menu.options = page9
             delaySendMenu(playerArg)
         end,
     },
@@ -2914,7 +2938,7 @@ page7 =
             zoneID        = zones[player:getZoneID()]
             if playerArg:getFreeSlotsCount() ~= 0 and currencyTotal >= quantity then
                 playerArg:addItem(xi.item.ONE_BYNE_BILL, quantity)
-                playerArg:messageSpecial(zoneID.text.YOU_OBTAIN_ITEM, xi.item.ONE_BYNE_BILL, quantity)
+                playerArg:messageSpecial(zoneID.text.ITEM_OBTAINED, xi.item.ONE_BYNE_BILL, quantity)
                 playerArg:setCharVar('Dynamis_Currency[1455]', newTotal)
                 playerArg:printToPlayer('You withdraw '.. quantity ..' One Byne Bills. You have ('.. newTotal ..') Byne Bills remaining.', xi.msg.channel.SYSTEM_3)
             elseif currencyTotal < quantity then
@@ -2936,7 +2960,7 @@ page7 =
             zoneID        = zones[player:getZoneID()]
             if playerArg:getFreeSlotsCount() ~= 0 and currencyTotal >= quantity then
                 playerArg:addItem(xi.item.ONE_BYNE_BILL, quantity)
-                playerArg:messageSpecial(zoneID.text.YOU_OBTAIN_ITEM, xi.item.ONE_BYNE_BILL, quantity)
+                playerArg:messageSpecial(zoneID.text.ITEM_OBTAINED, xi.item.ONE_BYNE_BILL, quantity)
                 playerArg:setCharVar('Dynamis_Currency[1455]', newTotal)
                 playerArg:printToPlayer('You withdraw '.. quantity ..' One Byne Bills. You have ('.. newTotal ..') Byne Bills remaining.', xi.msg.channel.SYSTEM_3)
             elseif currencyTotal < quantity then
@@ -2958,7 +2982,7 @@ page7 =
             zoneID        = zones[player:getZoneID()]
             if playerArg:getFreeSlotsCount() ~= 0 and currencyTotal >= quantity then
                 playerArg:addItem(xi.item.ONE_BYNE_BILL, quantity)
-                playerArg:messageSpecial(zoneID.text.YOU_OBTAIN_ITEM, xi.item.ONE_BYNE_BILL, quantity)
+                playerArg:messageSpecial(zoneID.text.ITEM_OBTAINED, xi.item.ONE_BYNE_BILL, quantity)
                 playerArg:setCharVar('Dynamis_Currency[1455]', newTotal)
                 playerArg:printToPlayer('You withdraw '.. quantity ..' One Byne Bills. You have ('.. newTotal ..') Byne Bills remaining.', xi.msg.channel.SYSTEM_3)
             elseif currencyTotal < quantity then
@@ -2992,7 +3016,7 @@ page8 =
             zoneID        = zones[player:getZoneID()]
             if playerArg:getFreeSlotsCount() ~= 0 and currencyTotal >= (quantity * 100) then
                 playerArg:addItem(xi.item.ONE_HUNDRED_BYNE_BILL, quantity)
-                playerArg:messageSpecial(zoneID.text.YOU_OBTAIN_ITEM, xi.item.ONE_HUNDRED_BYNE_BILL, quantity)
+                playerArg:messageSpecial(zoneID.text.ITEM_OBTAINED, xi.item.ONE_HUNDRED_BYNE_BILL, quantity)
                 playerArg:setCharVar('Dynamis_Currency[1455]', newTotal)
                 playerArg:printToPlayer('You withdraw '.. quantity ..' One Hundred Byne Bills. You have ('.. newTotal ..') Byne Bills remaining.', xi.msg.channel.SYSTEM_3)
             elseif currencyTotal < quantity then
@@ -3014,7 +3038,7 @@ page8 =
             zoneID        = zones[player:getZoneID()]
             if playerArg:getFreeSlotsCount() ~= 0 and currencyTotal >= (quantity * 100) then
                 playerArg:addItem(xi.item.ONE_HUNDRED_BYNE_BILL, quantity)
-                playerArg:messageSpecial(zoneID.text.YOU_OBTAIN_ITEM, xi.item.ONE_HUNDRED_BYNE_BILL, quantity)
+                playerArg:messageSpecial(zoneID.text.ITEM_OBTAINED, xi.item.ONE_HUNDRED_BYNE_BILL, quantity)
                 playerArg:setCharVar('Dynamis_Currency[1455]', newTotal)
                 playerArg:printToPlayer('You withdraw '.. quantity ..' One Hundred Byne Bills. You have ('.. newTotal ..') Byne Bills remaining.', xi.msg.channel.SYSTEM_3)
             elseif currencyTotal < quantity then
@@ -3036,7 +3060,7 @@ page8 =
             zoneID        = zones[player:getZoneID()]
             if playerArg:getFreeSlotsCount() ~= 0 and currencyTotal >= (quantity * 100) then
                 playerArg:addItem(xi.item.ONE_HUNDRED_BYNE_BILL, quantity)
-                playerArg:messageSpecial(zoneID.text.YOU_OBTAIN_ITEM, xi.item.ONE_HUNDRED_BYNE_BILL, quantity)
+                playerArg:messageSpecial(zoneID.text.ITEM_OBTAINED, xi.item.ONE_HUNDRED_BYNE_BILL, quantity)
                 playerArg:setCharVar('Dynamis_Currency[1455]', newTotal)
                 playerArg:printToPlayer('You withdraw '.. quantity ..' One Hundred Byne Bills. You have ('.. newTotal ..') Byne Bills remaining.', xi.msg.channel.SYSTEM_3)
             elseif currencyTotal < quantity then
@@ -3065,13 +3089,13 @@ page9 =
         'Ten Thousand Byne Bill (1)',
         function(playerArg)
             quantity      = 1
-            currencyTotal = playerArg:getCharVar('Dynamis_Currency[1452]')
+            currencyTotal = playerArg:getCharVar('Dynamis_Currency[1455]')
             newTotal      = currencyTotal - quantity * 10000
             zoneID        = zones[player:getZoneID()]
             if playerArg:getFreeSlotsCount() ~= 0 and currencyTotal >= (quantity * 10000) then
                 playerArg:addItem(xi.item.TEN_THOUSAND_BYNE_BILL, quantity)
-                playerArg:messageSpecial(zoneID.text.YOU_OBTAIN_ITEM, xi.item.TEN_THOUSAND_BYNE_BILL, quantity)
-                playerArg:setCharVar('Dynamis_Currency[1452]', newTotal)
+                playerArg:messageSpecial(zoneID.text.ITEM_OBTAINED, xi.item.TEN_THOUSAND_BYNE_BILL, quantity)
+                playerArg:setCharVar('Dynamis_Currency[1455]', newTotal)
                 playerArg:printToPlayer('You withdraw '.. quantity ..' Ten Thousand Byne Bill. You have ('.. newTotal ..') Byne Bills remaining.', xi.msg.channel.SYSTEM_3)
             elseif currencyTotal < quantity then
                 playerArg:printToPlayer('Quantity: '.. quantity ..' Ten Thousand Byne Bill is more than what you have in storage. Unable to withdraw.', xi.msg.channel.SYSTEM_3)
@@ -3140,7 +3164,7 @@ page11 =
             zoneID        = zones[player:getZoneID()]
             if playerArg:getFreeSlotsCount() ~= 0 and currencyTotal >= quantity then
                 playerArg:addItem(xi.item.TUKUKU_WHITESHELL, quantity)
-                playerArg:messageSpecial(zoneID.text.YOU_OBTAIN_ITEM, xi.item.TUKUKU_WHITESHELL, quantity)
+                playerArg:messageSpecial(zoneID.text.ITEM_OBTAINED, xi.item.TUKUKU_WHITESHELL, quantity)
                 playerArg:setCharVar('Dynamis_Currency[1449]', newTotal)
                 playerArg:printToPlayer('You withdraw '.. quantity ..' Tukuku Whiteshells. You have ('.. newTotal ..') Tukuku Whiteshells remaining.', xi.msg.channel.SYSTEM_3)
             elseif currencyTotal < quantity then
@@ -3162,7 +3186,7 @@ page11 =
             zoneID        = zones[player:getZoneID()]
             if playerArg:getFreeSlotsCount() ~= 0 and currencyTotal >= quantity then
                 playerArg:addItem(xi.item.TUKUKU_WHITESHELL, quantity)
-                playerArg:messageSpecial(zoneID.text.YOU_OBTAIN_ITEM, xi.item.TUKUKU_WHITESHELL, quantity)
+                playerArg:messageSpecial(zoneID.text.ITEM_OBTAINED, xi.item.TUKUKU_WHITESHELL, quantity)
                 playerArg:setCharVar('Dynamis_Currency[1449]', newTotal)
                 playerArg:printToPlayer('You withdraw '.. quantity ..' Tukuku Whiteshells. You have ('.. newTotal ..') Tukuku Whiteshells remaining.', xi.msg.channel.SYSTEM_3)
             elseif currencyTotal < quantity then
@@ -3184,7 +3208,7 @@ page11 =
             zoneID        = zones[player:getZoneID()]
             if playerArg:getFreeSlotsCount() ~= 0 and currencyTotal >= quantity then
                 playerArg:addItem(xi.item.TUKUKU_WHITESHELL, quantity)
-                playerArg:messageSpecial(zoneID.text.YOU_OBTAIN_ITEM, xi.item.TUKUKU_WHITESHELL, quantity)
+                playerArg:messageSpecial(zoneID.text.ITEM_OBTAINED, xi.item.TUKUKU_WHITESHELL, quantity)
                 playerArg:setCharVar('Dynamis_Currency[1449]', newTotal)
                 playerArg:printToPlayer('You withdraw '.. quantity ..' Tukuku Whiteshells. You have ('.. newTotal ..') Tukuku Whiteshells remaining.', xi.msg.channel.SYSTEM_3)
             elseif currencyTotal < quantity then
@@ -3218,7 +3242,7 @@ page12 =
             zoneID        = zones[player:getZoneID()]
             if playerArg:getFreeSlotsCount() ~= 0 and currencyTotal >= (quantity * 100) then
                 playerArg:addItem(xi.item.LUNGO_NANGO_JADESHELL, quantity)
-                playerArg:messageSpecial(zoneID.text.YOU_OBTAIN_ITEM, xi.item.LUNGO_NANGO_JADESHELL, quantity)
+                playerArg:messageSpecial(zoneID.text.ITEM_OBTAINED, xi.item.LUNGO_NANGO_JADESHELL, quantity)
                 playerArg:setCharVar('Dynamis_Currency[1449]', newTotal)
                 playerArg:printToPlayer('You withdraw '.. quantity ..' Lungo Nango Jadeshells. You have ('.. newTotal ..') Tukuku Whiteshells remaining.', xi.msg.channel.SYSTEM_3)
             elseif currencyTotal < quantity then
@@ -3240,7 +3264,7 @@ page12 =
             zoneID        = zones[player:getZoneID()]
             if playerArg:getFreeSlotsCount() ~= 0 and currencyTotal >= (quantity * 100) then
                 playerArg:addItem(xi.item.LUNGO_NANGO_JADESHELL, quantity)
-                playerArg:messageSpecial(zoneID.text.YOU_OBTAIN_ITEM, xi.item.LUNGO_NANGO_JADESHELL, quantity)
+                playerArg:messageSpecial(zoneID.text.ITEM_OBTAINED, xi.item.LUNGO_NANGO_JADESHELL, quantity)
                 playerArg:setCharVar('Dynamis_Currency[1449]', newTotal)
                 playerArg:printToPlayer('You withdraw '.. quantity ..' Lungo Nango Jadeshells. You have ('.. newTotal ..') Tukuku Whiteshells remaining.', xi.msg.channel.SYSTEM_3)
             elseif currencyTotal < quantity then
@@ -3262,7 +3286,7 @@ page12 =
             zoneID        = zones[player:getZoneID()]
             if playerArg:getFreeSlotsCount() ~= 0 and currencyTotal >= (quantity * 100) then
                 playerArg:addItem(xi.item.LUNGO_NANGO_JADESHELL, quantity)
-                playerArg:messageSpecial(zoneID.text.YOU_OBTAIN_ITEM, xi.item.LUNGO_NANGO_JADESHELL, quantity)
+                playerArg:messageSpecial(zoneID.text.ITEM_OBTAINED, xi.item.LUNGO_NANGO_JADESHELL, quantity)
                 playerArg:setCharVar('Dynamis_Currency[1449]', newTotal)
                 playerArg:printToPlayer('You withdraw '.. quantity ..' Lungo Nango Jadeshells. You have ('.. newTotal ..') Tukuku Whiteshells remaining.', xi.msg.channel.SYSTEM_3)
             elseif currencyTotal < quantity then
@@ -3291,13 +3315,13 @@ page13 =
         'Rimilala Stripeshell (1)',
         function(playerArg)
             quantity      = 1
-            currencyTotal = playerArg:getCharVar('Dynamis_Currency[1452]')
+            currencyTotal = playerArg:getCharVar('Dynamis_Currency[1449]')
             newTotal      = currencyTotal - quantity * 10000
             zoneID        = zones[player:getZoneID()]
             if playerArg:getFreeSlotsCount() ~= 0 and currencyTotal >= (quantity * 10000) then
                 playerArg:addItem(xi.item.RIMILALA_STRIPESHELL, quantity)
-                playerArg:messageSpecial(zoneID.text.YOU_OBTAIN_ITEM, xi.item.RIMILALA_STRIPESHELL, quantity)
-                playerArg:setCharVar('Dynamis_Currency[1452]', newTotal)
+                playerArg:messageSpecial(zoneID.text.ITEM_OBTAINED, xi.item.RIMILALA_STRIPESHELL, quantity)
+                playerArg:setCharVar('Dynamis_Currency[1449]', newTotal)
                 playerArg:printToPlayer('You withdraw '.. quantity ..' Rimilala Stripeshells. You have ('.. newTotal ..') Tukuku Whiteshells remaining.', xi.msg.channel.SYSTEM_3)
             elseif currencyTotal < quantity then
                 playerArg:printToPlayer('Quantity: '.. quantity ..' Rimilala Stripeshells is more than what you have in storage. Unable to withdraw.', xi.msg.channel.SYSTEM_3)

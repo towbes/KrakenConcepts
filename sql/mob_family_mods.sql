@@ -940,6 +940,9 @@ INSERT INTO `mob_family_mods` VALUES (404,36,35,1); -- ROAM_COOL: 35
 INSERT INTO `mob_family_mods` VALUES (404,51,3,1);  -- ROAM_TURNS: 3
 INSERT INTO `mob_family_mods` VALUES (404,52,30,1); -- ROAM_RATE: 30
 
+-- Umbril
+INSERT INTO `mob_family_mods` VALUES (468,3,50,1); -- MP_BASE: 50
+
 -- Lamiae-Medusa
 INSERT INTO `mob_family_mods` VALUES (469,10,10,1); -- SUBLINK: 10
 
@@ -957,7 +960,14 @@ INSERT INTO `mob_family_mods` VALUES (495,56,-1,1); -- HP_STANDBACK: -1
 INSERT INTO `mob_family_mods` VALUES (512,1,-10,0); -- DEF: -10
 INSERT INTO `mob_family_mods` VALUES (512,29,-1,0); -- MDEF: -10
 
+-- Pixie (Player Friendly)
 INSERT INTO `mob_family_mods` VALUES (195,201,1,1); -- I am a Pixie
+
+-- Craklaw
+-- INSERT INTO `mob_family_mods` VALUES (344,63,5397,1); -- Skill Attacks
+
+-- Matamata
+-- INSERT INTO `mob_family_mods` VALUES (275,63,5397,1); -- Skill Attacks
 
 /*!40000 ALTER TABLE `mob_family_mods` ENABLE KEYS */;
 UNLOCK TABLES;

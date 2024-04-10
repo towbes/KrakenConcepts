@@ -130,19 +130,22 @@ abilityObject.onUseAbility = function(player, target, ability, action)
     }
 
     -- Adding bonus to the total to heal.
+    if target:hasStatusEffect(xi.effect.CURSE_II) then
+        target:messageBasic(xi.msg.basic.NO_EFFECT)
+    else
+        if rewardHealingMod ~= nil and rewardHealingMod > 0 then
+            totalHealing = totalHealing + math.floor(totalHealing * rewardHealingMod / 100)
+        end
 
-    if rewardHealingMod ~= nil and rewardHealingMod > 0 then
-        totalHealing = totalHealing + math.floor(totalHealing * rewardHealingMod / 100)
+        local diff = petMaxHP - petCurrentHP
+
+        if diff < totalHealing then
+            totalHealing = diff
+        end
+
+        pet:addHP(totalHealing)
+        pet:wakeUp()
     end
-
-    local diff = petMaxHP - petCurrentHP
-
-    if diff < totalHealing then
-        totalHealing = diff
-    end
-
-    pet:addHP(totalHealing)
-    pet:wakeUp()
 
     -- Apply regen xi.effect.
 

@@ -63,6 +63,15 @@ xi.moghouse.moghouse2FUnlockCSs =
     [xi.zone.WINDURST_WOODS]     = 885,
 }
 
+local jobs =
+{
+    xi.job.WAR, xi.job.MNK, xi.job.WHM, xi.job.BLM, xi.job.RDM,
+    xi.job.THF, xi.job.PLD, xi.job.DRK, xi.job.BST, xi.job.BRD,
+    xi.job.RNG, xi.job.SAM, xi.job.NIN, xi.job.DRG, xi.job.SMN,
+    xi.job.BLU, xi.job.COR, xi.job.PUP, xi.job.DNC, xi.job.SCH,
+    xi.job.GEO, xi.job.RUN
+}
+
 xi.moghouse.isInMogHouseInHomeNation = function(player)
     if not player:isInMogHouse() then
         return false
@@ -107,11 +116,34 @@ xi.moghouse.set2ndFloorStyle = function(player, style)
     player:setMoghouseFlag(mhflag)
 end
 
+xi.moghouse.onMoghouseZoneOut = function(player)
+    -- For Job Levels and Merit WS.
+    -- Set any job above level 99 back to 75 as we are 75 cap server.
+    for _, job in ipairs(jobs) do
+        if player:getJobLevel(job) > 75 then
+            player:setJobLevel(job, 75)
+        end
+    end
+end
+
 xi.moghouse.onMoghouseZoneIn = function(player, prevZone)
     local cs = -1
 
     player:eraseAllStatusEffect()
     player:setPos(0, 0, 0, 192)
+
+    -- For Job Levels and Merit WS.
+    -- If player meets requirements, set their job to 99 so they can access job point/merit ws menus in game (Level requirement is client locked at 99).
+    if
+        player:hasKeyItem(xi.ki.JOB_BREAKER) or      -- Job Point Menu
+        player:hasKeyItem(xi.ki.HEART_OF_THE_BUSHIN) -- Merit Weaponskills Menu
+    then
+        for _, job in ipairs(jobs) do
+            if player:getJobLevel(job) == 75 then
+                player:setJobLevel(job, 99)
+            end
+        end
+    end
 
     -- Moghouse data (bit-packed)
     -- 0x0001: SANDORIA exit quest flag
@@ -159,7 +191,6 @@ xi.moghouse.onMoghouseZoneIn = function(player, prevZone)
             player:setCharVar('mhflagCheck', 1)
         end
     end
-
 
     local mhflag = player:getMoghouseFlag()
 

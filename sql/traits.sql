@@ -359,15 +359,23 @@ INSERT INTO `traits` VALUES (63,'resist amnesia',9,75,4,253,25,NULL,0);
 INSERT INTO `traits` VALUES (63,'resist amnesia',9,95,5,253,30,'ABYSSEA',0);
 INSERT INTO `traits` VALUES (81,'beast affinity ',9,75,1,0,0,'TOAU',0);
 INSERT INTO `traits` VALUES (82,'beast healer',9,75,1,0,0,'TOAU',0);
-INSERT INTO `traits` VALUES (103,'stout servant',9,50,1,0,5,NULL,0);
-INSERT INTO `traits` VALUES (103,'stout servant',9,70,2,0,7,NULL,0);
-INSERT INTO `traits` VALUES (103,'stout servant',9,98,3,0,9,'ABYSSEA',0);
+INSERT INTO `traits` VALUES (103,'stout servant',9,25,1,0,5,NULL,0);
+INSERT INTO `traits` VALUES (103,'stout servant',9,50,2,0,7,NULL,0);
+INSERT INTO `traits` VALUES (103,'stout servant',9,70,3,0,9,NULL,0);
 INSERT INTO `traits` VALUES (107,'fencer',9,50,1,903,200,NULL,0);
 INSERT INTO `traits` VALUES (107,'fencer',9,50,1,904,3,NULL,0);
 INSERT INTO `traits` VALUES (107,'fencer',9,87,2,903,300,'ABYSSEA',0);
 INSERT INTO `traits` VALUES (107,'fencer',9,87,2,904,5,'ABYSSEA',0);
 INSERT INTO `traits` VALUES (107,'fencer',9,94,3,903,400,'ABYSSEA',0);
 INSERT INTO `traits` VALUES (107,'fencer',9,94,3,904,7,'ABYSSEA',0);
+INSERT INTO `traits` VALUES (137,'tandem strike',9,30,1,271,10,NULL,0);
+INSERT INTO `traits` VALUES (137,'tandem strike',9,45,2,271,20,NULL,0);
+INSERT INTO `traits` VALUES (137,'tandem strike',9,60,3,271,30,NULL,0);
+INSERT INTO `traits` VALUES (137,'tandem strike',9,75,4,271,40,NULL,0);
+INSERT INTO `traits` VALUES (137,'tandem strike',9,90,5,271,50,'ROV',0);
+INSERT INTO `traits` VALUES (138,'tandem blow',9,40,1,272,5,NULL,0);
+INSERT INTO `traits` VALUES (138,'tandem blow',9,60,2,272,10,NULL,0);
+INSERT INTO `traits` VALUES (138,'tandem blow',9,80,3,272,15,'ROV',0);
 
 -- Bard
 
@@ -639,7 +647,7 @@ INSERT INTO `traits` VALUES (100,'tactical parry',19,77,1,486,20,'ABYSSEA',0);
 INSERT INTO `traits` VALUES (100,'tactical parry',19,84,2,486,30,'ABYSSEA',0);
 INSERT INTO `traits` VALUES (100,'tactical parry',19,91,3,486,40,'ABYSSEA',0);
 INSERT INTO `traits` VALUES (100,'tactical parry',19,97,4,486,50,'ABYSSEA',0);
-INSERT INTO `traits` VALUES (106,'skillchain bonus',19,45,1,174,8,'ABYSSEA',0);
+INSERT INTO `traits` VALUES (106,'skillchain bonus',19,45,1,174,8,NULL,0);
 INSERT INTO `traits` VALUES (106,'skillchain bonus',19,58,2,174,12,'ABYSSEA',0);
 INSERT INTO `traits` VALUES (106,'skillchain bonus',19,71,3,174,16,'ABYSSEA',0);
 INSERT INTO `traits` VALUES (106,'skillchain bonus',19,84,4,174,20,'ABYSSEA',0);
@@ -797,7 +805,7 @@ INSERT INTO `traits` VALUES (55,'resist curse',0,0,1,248,2,NULL,0);
 INSERT INTO `traits` VALUES (56,'resist stun',0,0,1,251,2,NULL,0);
 INSERT INTO `traits` VALUES (60,'resist charm',0,0,1,252,2,NULL,0);
 
-INSERT INTO `traits` VALUES (129,'damage limit+',1,40,1,1080,10,NULL,0);
+/*INSERT INTO `traits` VALUES (129,'damage limit+',1,40,1,1080,10,NULL,0);
 INSERT INTO `traits` VALUES (129,'damage limit+',1,80,2,1080,20,NULL,0);
 INSERT INTO `traits` VALUES (129,'damage limit+',2,30,1,1080,10,NULL,0);
 INSERT INTO `traits` VALUES (129,'damage limit+',2,60,2,1080,20,NULL,0);
@@ -823,16 +831,7 @@ INSERT INTO `traits` VALUES (129,'damage limit+',14,90,3,1080,30,NULL,0);
 INSERT INTO `traits` VALUES (129,'damage limit+',18,45,1,1080,10,NULL,0);
 INSERT INTO `traits` VALUES (129,'damage limit+',18,90,2,1080,20,NULL,0);
 INSERT INTO `traits` VALUES (129,'damage limit+',19,45,1,1080,10,NULL,0);
-INSERT INTO `traits` VALUES (129,'damage limit+',19,90,2,1080,20,NULL,0);
-
-INSERT INTO `traits` VALUES (137,'tandem strike',9,30,1,271,10,'ROV',0);
-INSERT INTO `traits` VALUES (137,'tandem strike',9,45,2,271,20,'ROV',0);
-INSERT INTO `traits` VALUES (137,'tandem strike',9,60,3,271,30,'ROV',0);
-INSERT INTO `traits` VALUES (137,'tandem strike',9,75,4,271,40,'ROV',0);
-INSERT INTO `traits` VALUES (137,'tandem strike',9,90,5,271,50,'ROV',0);
-INSERT INTO `traits` VALUES (138,'tandem blow',9,40,1,272,5,'ROV',0);
-INSERT INTO `traits` VALUES (138,'tandem blow',9,60,2,272,10,'ROV',0);
-INSERT INTO `traits` VALUES (138,'tandem blow',9,80,3,272,15,'ROV',0);
+INSERT INTO `traits` VALUES (129,'damage limit+',19,90,2,1080,20,NULL,0);*/
 
 /*!40000 ALTER TABLE `traits` ENABLE KEYS */;
 UNLOCK TABLES;

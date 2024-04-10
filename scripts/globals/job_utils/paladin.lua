@@ -24,7 +24,7 @@ xi.job_utils.paladin.checkIntervene = function(player, target, ability)
     if player:getShieldSize() == 0 then
         return xi.msg.basic.REQUIRES_SHIELD, 0
     else
-        ability:setRecast(ability:getRecast() - player:getMod(xi.mod.ONE_HOUR_RECAST))
+        ability:setRecast(math.max(0, ability:getRecast() - player:getMod(xi.mod.ONE_HOUR_RECAST) * 60))
 
         return 0, 0
     end
@@ -34,7 +34,7 @@ xi.job_utils.paladin.checkInvincible = function(player, target, ability)
     local jpValue = player:getJobPointLevel(xi.jp.INVINCIBLE_EFFECT)
 
     ability:setVE(ability:getVE() + 100 * jpValue)
-    ability:setRecast(ability:getRecast() - player:getMod(xi.mod.ONE_HOUR_RECAST))
+    ability:setRecast(math.max(0, ability:getRecast() - player:getMod(xi.mod.ONE_HOUR_RECAST) * 60))
 
     return 0, 0
 end
@@ -66,8 +66,11 @@ xi.job_utils.paladin.useChivalry = function(player, target, ability)
     local amount = (tp * base) + (0.0015 * tp * target:getStat(xi.mod.MND)) * ((100 + merits) / 100)
 
     target:setTP(0)
-
-    return target:addMP(amount)
+    if target:hasStatusEffect(xi.effect.CURSE_II) then
+        target:messageBasic(xi.msg.basic.NO_EFFECT)
+    else
+        return target:addMP(amount)
+    end
 end
 
 xi.job_utils.paladin.useCover = function(player, target, ability)

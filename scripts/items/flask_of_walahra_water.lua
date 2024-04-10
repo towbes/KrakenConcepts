@@ -10,6 +10,10 @@ itemObject.onItemCheck = function(target)
 end
 
 itemObject.onItemUse = function(target)
+    if target:hasStatusEffect(xi.effect.CURSE_II) then
+        target:messageBasic(xi.msg.basic.NO_EFFECT)
+        return 1
+    end
     -- TODO: Prevents the use of items, spells, and abilities for 5 seconds after use.
     target:addHP(target:getMaxHP() * 0.05)
     target:addMP(target:getMaxMP() * 0.05)

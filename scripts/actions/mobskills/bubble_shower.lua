@@ -28,7 +28,7 @@ mobskillObject.onMobWeaponSkill = function(target, mob, skill)
 
     xi.mobskills.mobStatusEffectMove(mob, target, typeEffect, power, 3, 120)
 
-    local dmgmod = xi.mobskills.mobBreathMove(mob, target, hpdmg, 1, xi.element.WATER, bubbleCap)
+    local dmgmod = xi.mobskills.mobBreathMove(mob, target, skill, hpdmg, 1, xi.element.WATER, bubbleCap)
 
     local dmg = xi.mobskills.mobFinalAdjustments(dmgmod, mob, skill, target, xi.attackType.BREATH, xi.damageType.WATER, xi.mobskills.shadowBehavior.IGNORE_SHADOWS)
 

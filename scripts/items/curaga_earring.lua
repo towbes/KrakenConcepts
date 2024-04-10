@@ -20,9 +20,12 @@ itemObject.onItemUse = function(target)
         if healAmount > diff then
             healAmount = diff
         end
-
-        member:addHP(healAmount)
-        member:messageBasic(xi.msg.basic.RECOVERS_HP, 0, healAmount)
+        if member:hasStatusEffect(xi.effect.CURSE_II) then
+            member:messageBasic(xi.msg.basic.NO_EFFECT)
+        else
+            member:addHP(healAmount)
+            member:messageBasic(xi.msg.basic.RECOVERS_HP, 0, healAmount)
+        end
     end)
 end
 

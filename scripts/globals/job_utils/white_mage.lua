@@ -26,12 +26,12 @@ local removables =
 -- Ability Check Functions
 -----------------------------------
 xi.job_utils.white_mage.checkAsylum = function(player, target, ability)
-    ability:setRecast(ability:getRecast() - player:getMod(xi.mod.ONE_HOUR_RECAST))
+    ability:setRecast(math.max(0, ability:getRecast() - player:getMod(xi.mod.ONE_HOUR_RECAST) * 60))
     return 0, 0
 end
 
 xi.job_utils.white_mage.checkBenediction = function(player, target, ability)
-    ability:setRecast(ability:getRecast() - player:getMod(xi.mod.ONE_HOUR_RECAST))
+    ability:setRecast(math.max(0, ability:getRecast() - player:getMod(xi.mod.ONE_HOUR_RECAST) * 60))
     return 0, 0
 end
 
@@ -116,9 +116,13 @@ xi.job_utils.white_mage.useDevotion = function(player, target, ability)
     healMP = utils.clamp(healMP, 0, target:getMaxMP() - target:getMP())
 
     damageHP = utils.stoneskin(player, damageHP)
-    player:delHP(damageHP)
-    target:addMP(healMP)
-
+    if target:hasStatusEffect(xi.effect.CURSE_II) then
+        target:messageBasic(xi.msg.basic.NO_EFFECT)
+    else
+        player:delHP(damageHP)
+        target:addMP(healMP)
+    end
+    
     return healMP
 end
 

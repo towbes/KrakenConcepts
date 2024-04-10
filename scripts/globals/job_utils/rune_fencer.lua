@@ -106,7 +106,11 @@ local function calculateVivaciousPulseHealing(target)
 
     if tenebraeRuneCount > 0 then -- only restore MP if there's one or more tenebrae rune active
         local mpHealAmount = math.floor(divineMagicSkillLevel / 10 * (100 + target:getJobPointLevel(xi.jp.VIVACIOUS_PULSE_EFFECT)) / 100) * (tenebraeRuneCount + 1)
-        target:addMP(mpHealAmount) -- augment bonusPct does not apply here according to testing.
+        if target:hasStatusEffect(xi.effect.CURSE_II) then
+            target:messageBasic(xi.msg.basic.NO_EFFECT)
+        else
+            target:addMP(mpHealAmount) -- augment bonusPct does not apply here according to testing.
+        end
     end
 
     if debuffCount > 0 and target:getMod(xi.mod.AUGMENTS_VIVACIOUS_PULSE) > 0 then -- add random removal of Poison, Paralyze, Blind, Silence, Mute, Curse, Bane, Doom, Virus, Plague, Petrification via AF3 head (source: https://www.bg-wiki.com/ffxi/Erilaz_Galea)

@@ -5961,7 +5961,7 @@ INSERT INTO `nm_spawn_points` VALUES (17572147,2,530.000,0.000,775.000);
 INSERT INTO `nm_spawn_points` VALUES (17576008,0,-244.445,0.725,108.502); -- Anemone
 INSERT INTO `nm_spawn_points` VALUES (17576054,0,-395.612,-0.102,378.777); -- Cwn Cyrff
 INSERT INTO `nm_spawn_points` VALUES (17576067,0,-614.559,-0.2,174.452); -- Anemone
-INSERT INTO `nm_spawn_points` VALUES (17092827,0,-148.69,2.35,332.657); -- Juggler Hecatomb
+INSERT INTO `nm_spawn_points` VALUES (17580248,0,-148.69,2.35,332.657); -- Juggler Hecatomb
 INSERT INTO `nm_spawn_points` VALUES (17584312,0,-216.8,-0.931,-345.6); -- Dynast Beetle
 INSERT INTO `nm_spawn_points` VALUES (17584398,0,-103.000,-1.000,311.000);
 INSERT INTO `nm_spawn_points` VALUES (17584398,1,-89.000,-1.000,301.000);

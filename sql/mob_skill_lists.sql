@@ -1529,6 +1529,7 @@ INSERT INTO `mob_skill_lists` VALUES ('QuadavNM',337,762);
 INSERT INTO `mob_skill_lists` VALUES ('Twitherym',338,2950);
 INSERT INTO `mob_skill_lists` VALUES ('Twitherym',338,2951);
 INSERT INTO `mob_skill_lists` VALUES ('Twitherym',338,2952);
+INSERT INTO `mob_skill_lists` VALUES ('Twitherym',338,2953); -- Smouldering_Swarm
 INSERT INTO `mob_skill_lists` VALUES ('Chapuli',339,2945);
 INSERT INTO `mob_skill_lists` VALUES ('Chapuli',339,2946);
 INSERT INTO `mob_skill_lists` VALUES ('Chapuli',339,2947);
@@ -1539,7 +1540,7 @@ INSERT INTO `mob_skill_lists` VALUES ('Mantis',340,2752);
 INSERT INTO `mob_skill_lists` VALUES ('Mantis',340,2753);
 INSERT INTO `mob_skill_lists` VALUES ('Mantis',340,2754);
 INSERT INTO `mob_skill_lists` VALUES ('Mantis',340,2755);
-INSERT INTO `mob_skill_lists` VALUES ('Mantis',340,2756);
+-- INSERT INTO `mob_skill_lists` VALUES ('Mantis',340,2756); -- NM ONLY
 -- 341: Numbing_Blossom
 INSERT INTO `mob_skill_lists` VALUES ('Velkk',342,2988);
 INSERT INTO `mob_skill_lists` VALUES ('Velkk',342,2989);
@@ -4316,6 +4317,30 @@ INSERT INTO `mob_skill_lists` VALUES ('Jaded_Jody',5395,319);  -- Bad Breath
 INSERT INTO `mob_skill_lists` VALUES ('Jaded_Jody',5395,320);  -- Sweet Breath
 
 INSERT INTO `mob_skill_lists` VALUES ('AnimatedWeapon-Shield',5396,1461);
+
+INSERT INTO `mob_skill_lists` VALUES ('Craklaw_Auto_Attacks',5397,2954);
+INSERT INTO `mob_skill_lists` VALUES ('Craklaw_Auto_Attacks',5397,2955);
+INSERT INTO `mob_skill_lists` VALUES ('Craklaw_Auto_Attacks',5397,2956);
+
+INSERT INTO `mob_skill_lists` VALUES ('Craklaw_Mobskills',5398,2957);
+INSERT INTO `mob_skill_lists` VALUES ('Craklaw_Mobskills',5398,2958);
+INSERT INTO `mob_skill_lists` VALUES ('Craklaw_Mobskills',5398,2959);
+INSERT INTO `mob_skill_lists` VALUES ('Craklaw_Mobskills',5398,2960);
+INSERT INTO `mob_skill_lists` VALUES ('Craklaw_Mobskills',5398,2961);
+
+INSERT INTO `mob_skill_lists` VALUES ('Matamata_Auto_Attacks',5399,2962);
+INSERT INTO `mob_skill_lists` VALUES ('Matamata_Auto_Attacks',5399,2963);
+INSERT INTO `mob_skill_lists` VALUES ('Matamata_Auto_Attacks',5399,2964);
+
+INSERT INTO `mob_skill_lists` VALUES ('Matamata_Mobskills',5400,2965);
+INSERT INTO `mob_skill_lists` VALUES ('Matamata_Mobskills',5400,2966);
+INSERT INTO `mob_skill_lists` VALUES ('Matamata_Mobskills',5400,2967);
+INSERT INTO `mob_skill_lists` VALUES ('Matamata_Mobskills',5400,2968);
+INSERT INTO `mob_skill_lists` VALUES ('Matamata_Mobskills',5400,2969);
+
+INSERT INTO `mob_skill_lists` VALUES ('Mantid_Auto_Attacks',5401,2748);
+INSERT INTO `mob_skill_lists` VALUES ('Mantid_Auto_Attacks',5401,2749);
+INSERT INTO `mob_skill_lists` VALUES ('Mantid_Auto_Attacks',5401,2750);
 
 -- ------------------------------------------------------------
 -- Start of Ambuscade section

@@ -76,16 +76,8 @@ zones[xi.zone.MAZE_OF_SHAKHRAMI] =
             17588743,
         },
         ICHOROUS_IRE_FOSSIL_ROCK = 17588745,
-        TREASURE_CHEST           = 17588773,
-        EXCAVATION =
-        {
-            17588774,
-            17588775,
-            17588776,
-            17588777,
-            17588778,
-            17588779,
-        },
+        TREASURE_CHEST     = 17588773,
+        EXCAVATION         = GetTableOfIDs('Excavation_Point'),
     },
 }
 
