@@ -52,8 +52,8 @@ zones[xi.zone.PALBOROUGH_MINES] =
     },
     npc =
     {
-        TREASURE_CHEST = 17363375,
-        MINING         = GetTableOfIDs('Mining_Point'),
+        TREASURE_CHEST  = GetFirstID('Treasure_Chest'),
+        MINING          = GetTableOfIDs('Mining_Point'),
     },
 }
 

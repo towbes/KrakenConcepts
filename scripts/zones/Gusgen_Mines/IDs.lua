@@ -60,8 +60,8 @@ zones[xi.zone.GUSGEN_MINES] =
     },
     npc =
     {
-        TREASURE_CHEST = 17580404,
-        MINING         = GetTableOfIDs('Mining_Point'),
+        TREASURE_CHEST  = GetFirstID('Treasure_Chest'),
+        MINING          = GetTableOfIDs('Mining_Point'),
     },
 }
 

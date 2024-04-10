@@ -69,7 +69,7 @@ zones[xi.zone.MIDDLE_DELKFUTTS_TOWER] =
     },
     npc =
     {
-        TREASURE_CHEST = 17420677,
+        TREASURE_CHEST  = GetFirstID('Treasure_Chest'),
     },
 }
 
