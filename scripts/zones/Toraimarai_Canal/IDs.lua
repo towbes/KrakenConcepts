@@ -52,7 +52,7 @@ zones[xi.zone.TORAIMARAI_CANAL] =
     npc =
     {
         TOME_OF_MAGIC_OFFSET = 17469828,
-        TREASURE_COFFER      = 17469835,
+        TREASURE_COFFER      = GetFirstID('Treasure_Coffer'),
     },
 }
 

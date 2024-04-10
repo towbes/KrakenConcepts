@@ -64,7 +64,7 @@ zones[xi.zone.PSOXJA] =
         STONE_DOOR_OFFSET          = 16814445, -- _090 in npc_list
         BLUE_BRACELET_DOOR         = 16814499,
         GREEN_BRACELET_DOOR        = 16814502,
-        TREASURE_CHEST             = 16814557,
+        TREASURE_CHEST             = GetFirstID('Treasure_Chest'),
     },
 }
 
