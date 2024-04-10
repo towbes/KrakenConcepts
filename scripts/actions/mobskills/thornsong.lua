@@ -38,6 +38,7 @@ end
 mobskillObject.onMobWeaponSkill = function(target, mob, skill)
     local power = mob:getMainLvl() * 2
     local typeEffect = xi.effect.BLAZE_SPIKES
+    local duration = 180
 
     if
         mob:getName() == 'Aitvaras' or
