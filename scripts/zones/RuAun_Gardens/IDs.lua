@@ -63,7 +63,7 @@ zones[xi.zone.RUAUN_GARDENS] =
 
     npc =
     {
-        TREASURE_COFFER  = GetFirstID('Treasure_Coffer'),
+        TREASURE_COFFER  = 17310019,
         PORTAL_TO_SEIRYU = 17310056,
         PORTAL_TO_GENBU  = 17310059,
         PORTAL_TO_BYAKKO = 17310062,

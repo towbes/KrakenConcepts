@@ -78,7 +78,7 @@ zones[xi.zone.FEIYIN] =
     npc =
     {
         AFTERGRLOW_OFFSET       = 17613147,
-        TREASURE_CHEST     = GetFirstID('Treasure_Chest'),
+        TREASURE_CHEST          = 17613241,
         UNDERGROUND_POOL_OFFSET = 17613246,
     },
 }

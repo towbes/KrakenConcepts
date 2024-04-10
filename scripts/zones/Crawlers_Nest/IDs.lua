@@ -54,8 +54,8 @@ zones[xi.zone.CRAWLERS_NEST] =
     },
     npc =
     {
-        TREASURE_CHEST  = GetFirstID('Treasure_Chest'),
-        TREASURE_COFFER = GetFirstID('Treasure_Coffer'),
+        TREASURE_CHEST  = 17584475,
+        TREASURE_COFFER = 17584476,
     },
 }
 

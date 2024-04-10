@@ -64,7 +64,7 @@ zones[xi.zone.VELUGANNON_PALACE] =
         B_DOOR_OFFSET   = 17502616,
         Y_LITH_OFFSET   = 17502624,
         B_LITH_OFFSET   = 17502634,
-        TREASURE_COFFER = GetFirstID('Treasure_Coffer'),
+        TREASURE_COFFER = 17502699,
     },
 }
 

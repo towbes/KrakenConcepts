@@ -51,8 +51,8 @@ zones[xi.zone.CASTLE_ZVAHL_BAILEYS] =
     npc =
     {
         TORCH_OFFSET    = 17436984,
-        TREASURE_CHEST  = GetFirstID('Treasure_Chest'),
-        TREASURE_COFFER = GetFirstID('Treasure_Coffer'),
+        TREASURE_CHEST  = 17436997,
+        TREASURE_COFFER = 17436998,
     },
 }
 

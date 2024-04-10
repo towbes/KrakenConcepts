@@ -88,7 +88,7 @@ zones[xi.zone.TEMPLE_OF_UGGALEPIH] =
         TEMPLE_GUARDIAN_DOOR = 17428978,
         PRELATE_DOOR         = 17428986,
         DOOR_TO_RANCOR       = 17428989,
-        TREASURE_COFFER      = GetFirstID('Treasure_Coffer'),
+        TREASURE_COFFER      = 17429007,
     },
 }
 
