@@ -1029,6 +1029,8 @@ xi.mod =
     TANDEM_STRIKE            = 2040, -- Beastmaster trait - provides acc/macc to master and pet when both engage the same target
     TANDEM_BLOW              = 2041, -- Beastmaster trait - provides subtle blow to master and pet when both engage the same target
     RANDOM_DEAL_BONUS        = 2042, -- % chance to reset 2 abilities
+    BANISH_POTENCY           = 2043, -- % Increase to Banish SDT debuff effect potency.
+    YAEGASUMI_BONUS          = 2044, -- % Increase to weaponskill damage. Calculated after WSD modifiers.
     -- IF YOU ADD ANY NEW MODIFIER HERE, ADD IT IN src/map/modifier.h ASWELL!
 
     -- The spares take care of finding the next ID to use so long as we don't forget to list IDs that have been freed up by refactoring.

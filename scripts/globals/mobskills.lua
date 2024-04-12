@@ -504,7 +504,14 @@ xi.mobskills.mobPhysicalMove = function(mob, target, skill, numHits, accMod, dmg
     end
 
     -- all hits missed
-    if hitslanded == 0 or finaldmg == 0 then
+    if target:hasStatusEffect(xi.effect.YAEGASUMI) then
+        local yaegasumiEffect      = target:getStatusEffect(xi.effect.YAEGASUMI)
+        local yaegasumiEffectPower = yaegasumiEffect:getPower()
+        finaldmg   = 0
+        hitslanded = 0
+        yaegasumiEffect:setPower(yaegasumiEffectPower + 1) -- 1 power = 20% Damage Increase
+        skill:setMsg(xi.msg.basic.EVADES)
+    elseif hitslanded == 0 or finaldmg == 0 then
         finaldmg   = 0
         hitslanded = 0
         skill:setMsg(xi.msg.basic.SKILL_MISS)
@@ -626,6 +633,14 @@ xi.mobskills.mobMagicalMove = function(mob, target, skill, damage, element, dmgm
     local burst = xi.mobskills.calculateMobMagicBurst(mob, element, target)
     if burst > 1.0 then
         finaldmg = finaldmg * burst
+    end
+
+    if target:hasStatusEffect(xi.effect.YAEGASUMI) then
+        local yaegasumiEffect      = target:getStatusEffect(xi.effect.YAEGASUMI)
+        local yaegasumiEffectPower = yaegasumiEffect:getPower()
+        finaldmg   = 0
+        yaegasumiEffect:setPower(yaegasumiEffectPower + 1)
+        skill:setMsg(xi.msg.basic.EVADES)
     end
 
     --Handle Magic Stoneskin - Umeboshi
@@ -812,9 +827,18 @@ xi.mobskills.mobBreathMove = function(mob, target, skill, percent, base, element
             damage = 0
         end
     end
+
     if mob:getMobMod(xi.mobMod.BREATH_ATTACK_LINEAR) == 1 then
-    local mobScalingHP = mob:getMaxHP() / mob:getHP()
-    damage = (damage / mobScalingHP)
+        local mobScalingHP = mob:getMaxHP() / mob:getHP()
+        damage = (damage / mobScalingHP)
+    end
+
+    if target:hasStatusEffect(xi.effect.YAEGASUMI) then
+        local yaegasumiEffect      = target:getStatusEffect(xi.effect.YAEGASUMI)
+        local yaegasumiEffectPower = yaegasumiEffect:getPower()
+        damage = 0
+        yaegasumiEffect:setPower(yaegasumiEffectPower + 1)
+        skill:setMsg(xi.msg.basic.EVADES)
     end
 
     -- breath mob skills are single hit so provide single Melee hit TP return if primary target

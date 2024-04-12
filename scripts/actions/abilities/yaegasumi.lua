@@ -14,7 +14,7 @@ abilityObject.onAbilityCheck = function(player, target, ability)
 end
 
 abilityObject.onUseAbility = function(player, target, ability)
-    player:addStatusEffect(xi.effect.YAEGASUMI, 12, 0, 45)
+    player:addStatusEffect(xi.effect.YAEGASUMI, 0, 3, 45)
 end
 
 return abilityObject

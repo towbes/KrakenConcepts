@@ -1089,6 +1089,7 @@ xi.weaponskills.doMagicWeaponskill = function(attacker, target, wsID, wsParams, 
         -- Add in bonusdmg
         dmg = dmg * (100 + bonusdmg) / 100 -- Apply our "all hits" WS dmg bonuses
         dmg = dmg + dmg * attacker:getMod(xi.mod.ALL_WSDMG_FIRST_HIT) / 100 -- Add in our "first hit" WS dmg bonus
+        dmg = dmg + dmg * attacker:getMod(xi.mod.YAEGASUMI_BONUS) / 100
 
         -- Calculate magical bonuses and reductions
         dmg = addBonusesAbility(attacker, wsParams.ele, target, dmg, wsParams)
