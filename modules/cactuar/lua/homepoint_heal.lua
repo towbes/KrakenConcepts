@@ -8,8 +8,15 @@ require('scripts/globals/homepoint')
 local m = Module:new('homepoint_heal')
 
 m:addOverride('xi.homepoint.onTrigger', function(player, csid, index)
-    player:addHP(player:getMaxHP())
-    player:addMP(player:getMaxMP())
+    local playerzone = player:getZone()
+    if playerzone:getTypeMask() == xi.zoneType.CITY then
+        player:addHP(player:getMaxHP())
+        player:addMP(player:getMaxMP())
+
+        -- Reset Call Wyvern & Deploy
+        player:resetRecast(xi.recast.ABILITY, 163)
+        player:resetRecast(xi.recast.ABILITY, 205)
+    end
     super(player, csid, index)
 end)
 
