@@ -192,6 +192,7 @@ UPDATE npc_list SET status = 2 WHERE npcid = "17776731" AND polutils_name = "Hom
 
 -- Windurst Walls
 UPDATE npc_list SET status = 2 WHERE npcid = "17756266" AND polutils_name = "Home Point #4";
+UPDATE npc_list SET status = 2 WHERE npcid = "17756267" AND polutils_name = "Home Point #5";
 
 -- Windurst Waters
 UPDATE npc_list SET status = 2 WHERE npcid = "17752220" AND polutils_name = "Home Point #5";
