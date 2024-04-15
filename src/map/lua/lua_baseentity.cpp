@@ -13275,24 +13275,29 @@ void CLuaBaseEntity::doWildCard(CLuaBaseEntity* PEntity, uint8 total)
     battleutils::DoWildCardToEntity(static_cast<CCharEntity*>(m_PBaseEntity), static_cast<CCharEntity*>(PEntity->m_PBaseEntity), total);
 }
 
+
 /************************************************************************
  *  Function: doRandomDeal()
  *  Purpose : Executes the Random Deal job ability
  *  Example : player:doRandomDeal(target)
  *  Notes   : Calls the DoRandomDealToEntity function of battleutils
  ************************************************************************/
-void CLuaBaseEntity::doRandomDeal(CLuaBaseEntity* PTarget)
+bool CLuaBaseEntity::doRandomDeal(CLuaBaseEntity* PTarget)
 {
-
     if (m_PBaseEntity->objtype != TYPE_PC)
     {
-         ShowWarning("Invalid entity type calling function (%s).", m_PBaseEntity->getName());
-         return;
+        ShowWarning("Invalid entity type calling function (%s).", m_PBaseEntity->getName());
+        return false;
     }
 
-    battleutils::DoRandomDealToEntity(static_cast<CCharEntity*>(m_PBaseEntity), static_cast<CCharEntity*>(PTarget->m_PBaseEntity));
-}
+    if (!PTarget || !PTarget->m_PBaseEntity)
+    {
+        ShowWarning("Invalid entity type passed as target (%s).", m_PBaseEntity->getName());
+        return false;
+    }
 
+    return battleutils::DoRandomDealToEntity(static_cast<CCharEntity*>(m_PBaseEntity), static_cast<CCharEntity*>(PTarget->m_PBaseEntity));
+}
 
 /************************************************************************
  *  Function: addCorsairRoll()

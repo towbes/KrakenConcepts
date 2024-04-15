@@ -581,8 +581,8 @@ INSERT INTO `traits` VALUES (63,'resist amnesia',17,90,4,253,25,'ABYSSEA',0);
 INSERT INTO `traits` VALUES (84,'recycle',17,35,1,305,10,NULL,0);
 INSERT INTO `traits` VALUES (84,'recycle',17,65,2,305,20,NULL,0);
 INSERT INTO `traits` VALUES (84,'recycle',17,95,3,305,30,'SOA',0);
-INSERT INTO `traits` VALUES (92,'winning streak',17,75,1,0,0,'TOAU',0);
-INSERT INTO `traits` VALUES (93,'loaded deck',17,75,1,0,0,'TOAU',0);
+INSERT INTO `traits` VALUES (92,'winning streak',17,75,1,0,0,'TOAU',3076);
+INSERT INTO `traits` VALUES (93,'loaded deck',17,75,1,0,0,'TOAU',3078);
 
 -- Puppet Master
 
