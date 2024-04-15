@@ -30,6 +30,9 @@ UPDATE npc_list SET status = 2 WHERE npcid = "17101362" AND polutils_name = "Hom
 -- Cape Teriggan
 UPDATE npc_list SET status = 2 WHERE npcid = "17240529" AND polutils_name = "Home Point #1";
 UPDATE npc_list SET status = 2 WHERE npcid = "17240530" AND polutils_name = "Home Point #2";
+UPDATE npc_list SET status = 2 WHERE npcid = "17240531" AND polutils_name = "Home Point #3";
+UPDATE npc_list SET status = 2 WHERE npcid = "17240532" AND polutils_name = "Home Point #4";
+UPDATE npc_list SET status = 2 WHERE npcid = "17240533" AND polutils_name = "Home Point #5";
 
 -- Castle Zvahl Keep
 UPDATE npc_list SET status = 2 WHERE npcid = "17441102" AND polutils_name = "Home Point #1";
