@@ -51,7 +51,7 @@ xi.mobskills.magicalTpBonus =
     PDIF_BONUS  = 5,
 }
 
-local function MobTPMod(tp)
+--[[local function MobTPMod(tp)
     -- increase damage based on tp
     if tp >= 3000 then
         return 2
@@ -60,7 +60,7 @@ local function MobTPMod(tp)
     end
 
     return 1
-end
+end]]
 
 local burstMultipliersByTier =
 {
@@ -88,7 +88,7 @@ local function MobTakeAoEShadow(mob, target, max)
     if
         (target:getMainJob() == xi.job.NIN or
         target:getSubJob() == xi.job.NIN) and
-        math.random() < 0.6 
+        math.random() < 0.6
     then
         max = max - 1
         if max < 1 then
@@ -103,7 +103,6 @@ xi.mobskills.mobRangedMove = function(mob, target, skill, numHits, accMod, dmgMo
     local returninfo    = {}
     local dSTR          = utils.clamp(mob:getStat(xi.mod.STR) - target:getStat(xi.mod.VIT), -10, 10)
     local targetEvasion = target:getEVA() + target:getMod(xi.mod.SPECIAL_ATTACK_EVASION)
-    local tp = skill:getTP()
 
     if
         target:hasStatusEffect(xi.effect.YONIN) and
@@ -245,7 +244,6 @@ end
 xi.mobskills.mobPhysicalMove = function(mob, target, skill, numHits, accMod, dmgMod, tpEffect1, tpEffect1_ftp100, tpEffect1_ftp200, tpEffect1_ftp300, tpEffect2, tpEffect2_ftp100, tpEffect2_ftp200, tpEffect2_ftp300, critPerc, attMod)
     local returninfo    = {}
     local fStr = 0
-    local tp = skill:getTP()
 
     -- nil checks
 
@@ -394,7 +392,7 @@ xi.mobskills.mobPhysicalMove = function(mob, target, skill, numHits, accMod, dmg
         firstHitChance = hitrate * 1.2
     end]]
 
-    if 
+    if
         tpEffect1 == xi.mobskills.physicalTpBonus.RANGED or
         tpEffect2 == xi.mobskills.physicalTpBonus.RANGED
     then -- (ASB)

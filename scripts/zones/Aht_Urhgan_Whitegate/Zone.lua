@@ -18,11 +18,11 @@ zoneObject.onInitialize = function(zone)
     zone:registerTriggerArea(12, -77,   10,   0,     0,    0,    0) -- Promotion Sergeant (Balrahn Way).
 
     -- If server vars are set to the basic install values - trigger a change
-    if (GetServerVariable("[ZNM]SubjectsOfInterest") == 55) then
+    if GetServerVariable('[ZNM]SubjectsOfInterest') == 55 then
         xi.znm.changeSubjectsOfInterest()
     end
 
-    if (GetServerVariable("[ZNM]Fauna") == 62) then
+    if GetServerVariable('[ZNM]Fauna') == 62 then
         xi.znm.changeFauna()
     end
 

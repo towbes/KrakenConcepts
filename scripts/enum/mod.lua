@@ -590,7 +590,6 @@ xi.mod =
     REFRESH_DOWN                    = 405, -- plague, reduce mp
     REGAIN_DOWN                     = 406, -- plague, reduce tp
     MAGIC_DAMAGE                    = 311, --  Magic damage added directly to the spell's base damage
-    BANISH_POTENCY                  = 2043, -- % Increase to Banish SDT debuff effect potency. 
 
     -- Gear set modifiers
     DA_DOUBLE_DMG_RATE              = 408,  -- Double attack's double damage chance %.
@@ -983,7 +982,7 @@ xi.mod =
 
     MAGIC_STONESKIN              = 2000, -- Magic Stoneskin. Primary used for mobskill Immortal Shield.
     --FIRE_BURDEN_DECAY            = 2001, -- Era works for Fire, Abyssia onwards uses 'BURDEN_DECAY = 847'
-    --BURDEN_DECAY_IGNORE_CHANCE   = 2002, -- Era Tactical Processor used this to increase tendancy to overload. 
+    --BURDEN_DECAY_IGNORE_CHANCE   = 2002, -- Era Tactical Processor used this to increase tendancy to overload.
     FIRE_BURDEN_PERC_EXTRA       = 2003, -- Increases fire burden when Flame Holder attatchment is used.
 
     -- Damage mods/reductions for circle effects.
