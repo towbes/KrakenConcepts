@@ -29,7 +29,7 @@ xi.events.loginCampaign.isCampaignActive = function()
             sec = 0
         }) + localUtcOffset + jstUtcOffset
         local campaignEndDate = campaignStartDate + loginCampaignDuration * 24 * 60 * 60
-        EndDate = os.date('%B %d, %Y %I:%M %p', campaignEndDate)
+        EndDate = os.date('%B %d, %Y', campaignEndDate)
 
         if os.time() < campaignEndDate and os.time() > campaignStartDate then
             return true
@@ -66,7 +66,7 @@ xi.events.loginCampaign.onGameIn = function(player)
         loginCount = 0
     end
 
-    player:printToPlayer('The current Login Campaign will run until ' .. EndDate, 0xD)
+    
 
     if nextMidnight ~= getMidnight() then
         if loginCount == 0 then
@@ -87,6 +87,7 @@ xi.events.loginCampaign.onGameIn = function(player)
         end
 
         player:setCharVar('LoginCampaignLoginNumber', loginCount)
+        player:printToPlayer('The current Login Campaign will run until ' .. EndDate, xi.msg.channel.NS_SAY)
     end
 end
 
@@ -94,8 +95,8 @@ end
 -- Handles showing the correct list of prices and hiding the options that are not available
 xi.events.loginCampaign.onTrigger = function(player, csid)
     if not xi.events.loginCampaign.isCampaignActive() then
-        player:printToPlayer('Greeter Moogle : Unfortunately, the Login Campaign is not currently underway, kupo.', 0xD)
-        player:printToPlayer('Please come back another time to see all the exciting prizes we have in store for you, kupo!', 0xD)
+        player:printToPlayer('Greeter Moogle : Unfortunately, the Login Campaign is not currently underway, kupo.', xi.msg.channel.NS_SAY)
+        player:printToPlayer('Greeter Moogle : Please come back another time to see all the exciting prizes we have in store for you, kupo!', xi.msg.channel.NS_SAY)
         return
     end
 
