@@ -2626,6 +2626,7 @@ INSERT INTO `item_mods` VALUES (10686,8,5);   -- STR: 5
 INSERT INTO `item_mods` VALUES (10686,11,5);  -- AGI: 5
 INSERT INTO `item_mods` VALUES (10686,24,12); -- RATT: 12
 INSERT INTO `item_mods` VALUES (10686,25,12); -- ACC: 12
+INSERT INTO `item_mods` VALUES (10686,220,5); -- RANDOM_DEAL_BONUS: 5
 
 -- Pantin Tobe +2
 INSERT INTO `item_mods` VALUES (10687,1,59);  -- DEF: 59
@@ -6155,18 +6156,18 @@ INSERT INTO `item_mods` VALUES (11294,24,5);  -- RATT: 5
 INSERT INTO `item_mods` VALUES (11294,26,10); -- RACC: 10
 
 -- Commodore Frac
-INSERT INTO `item_mods` VALUES (11295,1,45);   -- DEF: 45
-INSERT INTO `item_mods` VALUES (11295,8,3);    -- STR: 3
-INSERT INTO `item_mods` VALUES (11295,24,8);   -- RATT: 8
-INSERT INTO `item_mods` VALUES (11295,25,8);   -- ACC: 8
-INSERT INTO `item_mods` VALUES (11295,2042,5); -- RANDOM_DEAL_BONUS: 5
+INSERT INTO `item_mods` VALUES (11295,1,45); -- DEF: 45
+INSERT INTO `item_mods` VALUES (11295,8,3);  -- STR: 3
+INSERT INTO `item_mods` VALUES (11295,24,8); -- RATT: 8
+INSERT INTO `item_mods` VALUES (11295,25,8); -- ACC: 8
+INSERT INTO `item_mods` VALUES (11295,220,5); -- RANDOM_DEAL_BONUS: 5
 
 -- Commodore Frac +1
 INSERT INTO `item_mods` VALUES (11296,1,46);  -- DEF: 46
 INSERT INTO `item_mods` VALUES (11296,8,3);   -- STR: 3
 INSERT INTO `item_mods` VALUES (11296,24,10); -- RATT: 10
 INSERT INTO `item_mods` VALUES (11296,25,10); -- ACC: 10
-INSERT INTO `item_mods` VALUES (11296,2042,5); -- RANDOM_DEAL_BONUS: 5
+INSERT INTO `item_mods` VALUES (11296,220,5); -- RANDOM_DEAL_BONUS: 5
 
 -- Puppetry Tobe +1
 INSERT INTO `item_mods` VALUES (11297,1,37); -- DEF: 37
@@ -49515,7 +49516,7 @@ INSERT INTO `item_mods` VALUES (23146,31,74);    -- MEVA: 74
 INSERT INTO `item_mods` VALUES (23146,68,59);    -- EVA: 59
 INSERT INTO `item_mods` VALUES (23146,161,-500); -- DMGPHYS: -5%
 INSERT INTO `item_mods` VALUES (23146,384,400);  -- HASTE_GEAR: 4%
--- TODO: "Random Deal" effect +50: Occasionally allows Random Deal to restore two used job abilities.
+INSERT INTO `item_mods` VALUES (23146,220,50);   -- RANDOM_DEAL_BONUS: 50
 
 -- Pitre Tobe +2
 INSERT INTO `item_mods` VALUES (23147,1,143);   -- DEF: 143
@@ -62195,6 +62196,12 @@ INSERT INTO `item_mods` VALUES (26218,9,3);  -- DEX: 3
 INSERT INTO `item_mods` VALUES (26218,10,3); -- VIT: 3
 INSERT INTO `item_mods` VALUES (26218,11,3); -- AGI: 3
 
+-- Naji's Loop
+INSERT INTO `item_mods` VALUES (26219,27,-1); -- ENMITY: -1
+INSERT INTO `item_mods` VALUES (26219,170,1); -- FASTCAST: 1
+INSERT INTO `item_mods` VALUES (26219,260,1); -- CURE_POTENCY_II: 1
+INSERT INTO `item_mods` VALUES (26219,374,1); -- CURE_POTENCY: 1
+
 -- Sroda Ring
 INSERT INTO `item_mods` VALUES (26221,8,15);  -- STR: 15
 INSERT INTO `item_mods` VALUES (26221,9,-20); -- DEX: -20
@@ -65151,6 +65158,7 @@ INSERT INTO `item_mods` VALUES (26832,31,43);    -- MEVA: 43
 INSERT INTO `item_mods` VALUES (26832,68,23);    -- EVA: 23
 INSERT INTO `item_mods` VALUES (26832,161,-300); -- DMGPHYS: -300
 INSERT INTO `item_mods` VALUES (26832,384,400);  -- HASTE_GEAR: 400
+INSERT INTO `item_mods` VALUES (26832,220,50);   -- RANDOM_DEAL_BONUS: 50
 
 -- Lanun Frac +1
 INSERT INTO `item_mods` VALUES (26833,1,131);    -- DEF: 131
@@ -65171,6 +65179,7 @@ INSERT INTO `item_mods` VALUES (26833,31,64);    -- MEVA: 64
 INSERT INTO `item_mods` VALUES (26833,68,49);    -- EVA: 49
 INSERT INTO `item_mods` VALUES (26833,161,-400); -- DMGPHYS: -400
 INSERT INTO `item_mods` VALUES (26833,384,400);  -- HASTE_GEAR: 400
+INSERT INTO `item_mods` VALUES (26833,220,50);   -- RANDOM_DEAL_BONUS: 50
 
 -- Pitre Tobe
 INSERT INTO `item_mods` VALUES (26834,1,94);    -- DEF: 94

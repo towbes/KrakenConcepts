@@ -590,7 +590,6 @@ xi.mod =
     REFRESH_DOWN                    = 405, -- plague, reduce mp
     REGAIN_DOWN                     = 406, -- plague, reduce tp
     MAGIC_DAMAGE                    = 311, --  Magic damage added directly to the spell's base damage
-    BANISH_POTENCY                  = 2043, -- % Increase to Banish SDT debuff effect potency. 
 
     -- Gear set modifiers
     DA_DOUBLE_DMG_RATE              = 408,  -- Double attack's double damage chance %.
@@ -761,6 +760,7 @@ xi.mod =
     DAY_NUKE_BONUS                  = 565, -- Bonus damage from 'Elemental magic affected by day' (Sorc. Tonban)
     IRIDESCENCE                     = 566, -- Iridescence trait (additional weather damage/penalty)
     BARSPELL_AMOUNT                 = 567, -- Additional elemental resistance granted by bar- spells
+    RANDOM_DEAL_BONUS               = 220, -- % chance to reset 2 abilities
     BARSPELL_MDEF_BONUS             = 827, -- Extra magic defense bonus granted to the bar- spell effect
     RAPTURE_AMOUNT                  = 568, -- Bonus amount added to Rapture effect
     EBULLIENCE_AMOUNT               = 569, -- Bonus amount added to Ebullience effect
@@ -982,7 +982,7 @@ xi.mod =
 
     MAGIC_STONESKIN              = 2000, -- Magic Stoneskin. Primary used for mobskill Immortal Shield.
     --FIRE_BURDEN_DECAY            = 2001, -- Era works for Fire, Abyssia onwards uses 'BURDEN_DECAY = 847'
-    --BURDEN_DECAY_IGNORE_CHANCE   = 2002, -- Era Tactical Processor used this to increase tendancy to overload. 
+    --BURDEN_DECAY_IGNORE_CHANCE   = 2002, -- Era Tactical Processor used this to increase tendancy to overload.
     FIRE_BURDEN_PERC_EXTRA       = 2003, -- Increases fire burden when Flame Holder attatchment is used.
 
     -- Damage mods/reductions for circle effects.
@@ -1028,7 +1028,7 @@ xi.mod =
     ENH_DRAIN                = 2039, -- % damage boost to DRAIN
     TANDEM_STRIKE            = 2040, -- Beastmaster trait - provides acc/macc to master and pet when both engage the same target
     TANDEM_BLOW              = 2041, -- Beastmaster trait - provides subtle blow to master and pet when both engage the same target
-    RANDOM_DEAL_BONUS        = 2042, -- % chance to reset 2 abilities
+    --                       = 2042, -- Empty Slot
     BANISH_POTENCY           = 2043, -- % Increase to Banish SDT debuff effect potency.
     YAEGASUMI_BONUS          = 2044, -- % Increase to weaponskill damage. Calculated after WSD modifiers.
     -- IF YOU ADD ANY NEW MODIFIER HERE, ADD IT IN src/map/modifier.h ASWELL!

@@ -601,6 +601,7 @@ enum class Mod
     EXP_BONUS         = 382,  //
     ROLL_RANGE        = 528,  // Additional range for COR roll abilities.
     JOB_BONUS_CHANCE  = 542,  // Chance to apply job bonus to COR roll without having the job in the party.
+    RANDOM_DEAL_BONUS = 220,  // % chance to reset 2 abilities
     TRIPLE_SHOT_RATE  = 999,  // Percent increase to Triple Shot Rate
     QUICK_DRAW_RECAST = 1060, // Quick Draw Charge Reduction (seconds)
 
@@ -1090,7 +1091,7 @@ enum class Mod
     ENH_DRAIN              = 2039, // % damage boost to DRAIN
     TANDEM_STRIKE          = 2040, // Beastmaster trait - provides acc/macc to master and pet when both engage the same target
     TANDEM_BLOW            = 2041, // Beastmaster trait - provides subtle blow to master and pet when both engage the same target
-    RANDOM_DEAL_BONUS      = 2042, // % chance to reset 2 abilities
+    //                     = 2042, // Empty Slot
     BANISH_POTENCY         = 2043, // % Increase to Banish SDT debuff effect potency.
     YAEGASUMI_BONUS        = 2044, // % Increase to weaponskill damage. Calculated after WSD modifiers.
     // ITEM_ADDEFFECT_OPTION   = 2045, // Additional parameters for more specific latents required to proc LOCATED ABOVE
@@ -1101,7 +1102,7 @@ enum class Mod
     // 570 through 825 used by WS DMG mods these are not spares.
     //
     // SPARE IDs:
-    // 220 to 222
+    // 221 to 222
     // 274 to 276
     //
     // SPARE = 1082 and onward
