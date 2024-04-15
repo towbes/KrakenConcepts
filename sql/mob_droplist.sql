@@ -26687,6 +26687,9 @@ INSERT INTO `mob_droplist` VALUES (3295,0,0,1000,2816,@COMMON);   -- Aptant: Tac
 -- ZoneID 123 - Pyuu the Spatemaker
 INSERT INTO `mob_droplist` VALUES (3296,0,0,1000,2850,@UNCOMMON); -- Ingot of Sahagin gold (Uncommon, 10%)
 
+-- ZoneID:  91 - Erle
+INSERT INTO `mob_droplist` VALUES (3297,0,0,1000,19122,@UNCOMMON); -- Courser's Pugio (Uncommon, 10%)
+
 -- ZoneID: 187 - Xuu Bhoqa the Enigma
 INSERT INTO `mob_droplist` VALUES (4000,0,0,1000,11671,@COMMON);  -- Oneiros Ring (15.0%)
 INSERT INTO `mob_droplist` VALUES (4000,0,0,1000,3415,@ALWAYS);   -- Fiendish Tome Chapter 12

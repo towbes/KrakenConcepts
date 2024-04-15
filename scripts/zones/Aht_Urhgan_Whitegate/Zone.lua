@@ -18,11 +18,11 @@ zoneObject.onInitialize = function(zone)
     zone:registerTriggerArea(12, -77,   10,   0,     0,    0,    0) -- Promotion Sergeant (Balrahn Way).
 
     -- If server vars are set to the basic install values - trigger a change
-    if (GetServerVariable("[ZNM]SubjectsOfInterest") == 55) then
+    if GetServerVariable('[ZNM]SubjectsOfInterest') == 55 then
         xi.znm.changeSubjectsOfInterest()
     end
 
-    if (GetServerVariable("[ZNM]Fauna") == 62) then
+    if GetServerVariable('[ZNM]Fauna') == 62 then
         xi.znm.changeFauna()
     end
 
@@ -37,10 +37,13 @@ zoneObject.onZoneIn = function(player, prevZone)
         player:getZPos() == 0
     then
         if prevZone == xi.zone.OPEN_SEA_ROUTE_TO_AL_ZAHBI then
+            player:setPos(-11, 5, -142, 192)
             cs = 201
-        elseif prevZone == xi.zone.SILVER_SEA_ROUTE_TO_AL_ZAHBI then
-            cs = 204
-        elseif prevZone == xi.zone.SILVER_SEA_ROUTE_TO_NASHMAU then
+        elseif
+            prevZone == xi.zone.SILVER_SEA_ROUTE_TO_AL_ZAHBI or
+            prevZone == xi.zone.SILVER_SEA_ROUTE_TO_NASHMAU
+        then
+            player:setPos(11, 5, 142, 64)
             cs = 204
         else
             -- MOG HOUSE EXIT

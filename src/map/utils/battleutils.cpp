@@ -64,6 +64,7 @@
 #include "modifier.h"
 #include "notoriety_container.h"
 #include "packets/char_abilities.h"
+#include "packets/char_recast.h"
 #include "packets/char_sync.h"
 #include "packets/char_recast.h"
 #include "packets/lock_on.h"
@@ -872,7 +873,7 @@ namespace battleutils
                 bool crit = battleutils::GetCritHitRate(PDefender, PAttacker, true) > xirand::GetRandomNumber(100);
 
                 // Dmg math.
-                float  DamageRatio = GetDamageRatio(PDefender, PAttacker, crit, 1.f, skilltype);
+                float  DamageRatio = GetDamageRatio(PDefender, PAttacker, crit, 1.f, skilltype, SLOT_MAIN);
                 uint16 dmg         = (uint32)((PDefender->GetMainWeaponDmg() + battleutils::GetFSTR(PDefender, PAttacker, SLOT_MAIN)) * DamageRatio);
                 dmg                = attackutils::CheckForDamageMultiplier(((CCharEntity*)PDefender), dynamic_cast<CItemWeapon*>(PDefender->m_Weapons[SLOT_MAIN]), dmg,
                                                                            PHYSICAL_ATTACK_TYPE::NORMAL, SLOT_MAIN);
@@ -3093,7 +3094,7 @@ namespace battleutils
      *                                                                       *
      ************************************************************************/
 
-    float GetDamageRatio(CBattleEntity* PAttacker, CBattleEntity* PDefender, bool isCritical, float bonusAttPercent, SKILLTYPE weaponType)
+    float GetDamageRatio(CBattleEntity* PAttacker, CBattleEntity* PDefender, bool isCritical, float bonusAttPercent, SKILLTYPE weaponType, SLOTTYPE weaponSlot)
     {
         float pDIF = 1.0f;
 
@@ -3111,7 +3112,7 @@ namespace battleutils
                 return pDIF;
             }
 
-            auto meleePDIFFuncResult = meleePDIFFunc(luaAttackerEntity, CLuaBaseEntity(PDefender), weaponType, bonusAttPercent, isCritical, levelCorrectionResult.get<bool>(0), false, 0.0, false);
+            auto meleePDIFFuncResult = meleePDIFFunc(luaAttackerEntity, CLuaBaseEntity(PDefender), weaponType, bonusAttPercent, isCritical, levelCorrectionResult.get<bool>(0), false, 0.0, false, weaponSlot);
             if (!meleePDIFFuncResult.valid())
             {
                 sol::error err = meleePDIFFuncResult;
@@ -6155,15 +6156,15 @@ namespace battleutils
         }
     }
 
-        /************************************************************************
+    /************************************************************************
      *                                                                       *
      *   Does the random deal effect to a specific character (reset ability) *
      *                                                                       *
      ************************************************************************/
     bool DoRandomDealToEntity(CCharEntity* PChar, CCharEntity* PTarget)
     {
-        std::vector<uint16> ResetCandidateList;
-        std::vector<uint16> ActiveCooldownList;
+        std::vector<uint16> resetCandidateList;
+        std::vector<uint16> activeCooldownList;
 
         if (PChar == nullptr || PTarget == nullptr)
         {
@@ -6181,15 +6182,15 @@ namespace battleutils
             // Do not reset 2hrs or Random Deal
             if (recast->ID != 0 && recast->ID != 196)
             {
-                ResetCandidateList.push_back(i);
+                resetCandidateList.push_back(i);
                 if (recast->RecastTime > 0)
                 {
-                    ActiveCooldownList.push_back(i);
+                    activeCooldownList.push_back(i);
                 }
             }
         }
 
-        if (ResetCandidateList.size() == 0)
+        if (resetCandidateList.size() == 0 || activeCooldownList.size() == 0)
         {
             // Evade because we have no abilities that can be reset
             return false;
@@ -6199,24 +6200,23 @@ namespace battleutils
         uint8 loadedDeckChance = 50 + loadedDeck;
         uint8 resetTwoChance   = std::min<int8>(PChar->getMod(Mod::RANDOM_DEAL_BONUS), 50);
 
-        // Loaded Deck Merit Version
-        if (loadedDeck && ActiveCooldownList.size() > 0)
+        if (loadedDeck > 0) // Loaded Deck Merit Version
         {
-            if (ActiveCooldownList.size() > 1)
+            if (activeCooldownList.size() > 1)
             {
                 // Shuffle active cooldowns and take first (loaded deck)
-                std::shuffle(std::begin(ActiveCooldownList), std::end(ActiveCooldownList), xirand::rng());
+                std::shuffle(std::begin(activeCooldownList), std::end(activeCooldownList), xirand::rng());
                 loadedDeckChance = 100;
             }
 
-            if (loadedDeckChance >= xirand::GetRandomNumber(1, 100))
+            if (loadedDeckChance >= xirand::GetRandomNumber(100))
             {
-                PTarget->PRecastContainer->DeleteByIndex(RECAST_ABILITY, ActiveCooldownList.at(0));
+                PTarget->PRecastContainer->DeleteByIndex(RECAST_ABILITY, activeCooldownList.at(0));
 
                 // Reset 2 abilities by chance
-                if (ActiveCooldownList.size() > 1 && resetTwoChance >= xirand::GetRandomNumber(1, 100))
+                if (activeCooldownList.size() > 1 && resetTwoChance >= xirand::GetRandomNumber(100))
                 {
-                    PTarget->PRecastContainer->DeleteByIndex(RECAST_ABILITY, ActiveCooldownList.at(1));
+                    PTarget->PRecastContainer->DeleteByIndex(RECAST_ABILITY, activeCooldownList.at(1));
                 }
                 if (PChar != PTarget)
                 {
@@ -6231,19 +6231,19 @@ namespace battleutils
         }
         else // Standard Version
         {
-            if (ResetCandidateList.size() > 1)
+            if (resetCandidateList.size() > 1)
             {
                 // Shuffle if more than 1 ability
-                std::shuffle(std::begin(ResetCandidateList), std::end(ResetCandidateList), xirand::rng());
+                std::shuffle(std::begin(resetCandidateList), std::end(resetCandidateList), xirand::rng());
             }
 
             // Reset first ability (shuffled or only)
-            PTarget->PRecastContainer->DeleteByIndex(RECAST_ABILITY, ResetCandidateList.at(0));
+            PTarget->PRecastContainer->DeleteByIndex(RECAST_ABILITY, resetCandidateList.at(0));
 
             // Reset 2 abilities by chance (could be 2 abilitie that don't need resets)
-            if (ResetCandidateList.size() > 1 && ActiveCooldownList.size() > 1 && resetTwoChance >= xirand::GetRandomNumber(1, 100))
+            if (resetCandidateList.size() > 1 && activeCooldownList.size() > 1 && resetTwoChance >= xirand::GetRandomNumber(1, 100))
             {
-                PTarget->PRecastContainer->DeleteByIndex(RECAST_ABILITY, ResetCandidateList.at(1));
+                PTarget->PRecastContainer->DeleteByIndex(RECAST_ABILITY, resetCandidateList.at(1));
             }
 
             if (PChar != PTarget)
@@ -6254,11 +6254,7 @@ namespace battleutils
 
             return true;
         }
-
-        // How did you get here!?
-        return false;
     }
-
 
     /************************************************************************
      *                                                                       *

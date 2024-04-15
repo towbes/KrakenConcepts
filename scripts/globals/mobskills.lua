@@ -51,7 +51,7 @@ xi.mobskills.magicalTpBonus =
     PDIF_BONUS  = 5,
 }
 
-local function MobTPMod(tp)
+--[[local function MobTPMod(tp)
     -- increase damage based on tp
     if tp >= 3000 then
         return 2
@@ -60,7 +60,7 @@ local function MobTPMod(tp)
     end
 
     return 1
-end
+end]]
 
 local burstMultipliersByTier =
 {
@@ -88,7 +88,7 @@ local function MobTakeAoEShadow(mob, target, max)
     if
         (target:getMainJob() == xi.job.NIN or
         target:getSubJob() == xi.job.NIN) and
-        math.random() < 0.6 
+        math.random() < 0.6
     then
         max = max - 1
         if max < 1 then
@@ -103,7 +103,6 @@ xi.mobskills.mobRangedMove = function(mob, target, skill, numHits, accMod, dmgMo
     local returninfo    = {}
     local dSTR          = utils.clamp(mob:getStat(xi.mod.STR) - target:getStat(xi.mod.VIT), -10, 10)
     local targetEvasion = target:getEVA() + target:getMod(xi.mod.SPECIAL_ATTACK_EVASION)
-    local tp = skill:getTP()
 
     if
         target:hasStatusEffect(xi.effect.YONIN) and
@@ -245,7 +244,6 @@ end
 xi.mobskills.mobPhysicalMove = function(mob, target, skill, numHits, accMod, dmgMod, tpEffect1, tpEffect1_ftp100, tpEffect1_ftp200, tpEffect1_ftp300, tpEffect2, tpEffect2_ftp100, tpEffect2_ftp200, tpEffect2_ftp300, critPerc, attMod)
     local returninfo    = {}
     local fStr = 0
-    local tp = skill:getTP()
 
     -- nil checks
 
@@ -394,7 +392,7 @@ xi.mobskills.mobPhysicalMove = function(mob, target, skill, numHits, accMod, dmg
         firstHitChance = hitrate * 1.2
     end]]
 
-    if 
+    if
         tpEffect1 == xi.mobskills.physicalTpBonus.RANGED or
         tpEffect2 == xi.mobskills.physicalTpBonus.RANGED
     then -- (ASB)
@@ -504,7 +502,14 @@ xi.mobskills.mobPhysicalMove = function(mob, target, skill, numHits, accMod, dmg
     end
 
     -- all hits missed
-    if hitslanded == 0 or finaldmg == 0 then
+    if target:hasStatusEffect(xi.effect.YAEGASUMI) then
+        local yaegasumiEffect      = target:getStatusEffect(xi.effect.YAEGASUMI)
+        local yaegasumiEffectPower = yaegasumiEffect:getPower()
+        finaldmg   = 0
+        hitslanded = 0
+        yaegasumiEffect:setPower(yaegasumiEffectPower + 1) -- 1 power = 20% Damage Increase
+        skill:setMsg(xi.msg.basic.EVADES)
+    elseif hitslanded == 0 or finaldmg == 0 then
         finaldmg   = 0
         hitslanded = 0
         skill:setMsg(xi.msg.basic.SKILL_MISS)
@@ -626,6 +631,14 @@ xi.mobskills.mobMagicalMove = function(mob, target, skill, damage, element, dmgm
     local burst = xi.mobskills.calculateMobMagicBurst(mob, element, target)
     if burst > 1.0 then
         finaldmg = finaldmg * burst
+    end
+
+    if target:hasStatusEffect(xi.effect.YAEGASUMI) then
+        local yaegasumiEffect      = target:getStatusEffect(xi.effect.YAEGASUMI)
+        local yaegasumiEffectPower = yaegasumiEffect:getPower()
+        finaldmg   = 0
+        yaegasumiEffect:setPower(yaegasumiEffectPower + 1)
+        skill:setMsg(xi.msg.basic.EVADES)
     end
 
     --Handle Magic Stoneskin - Umeboshi
@@ -812,9 +825,18 @@ xi.mobskills.mobBreathMove = function(mob, target, skill, percent, base, element
             damage = 0
         end
     end
+
     if mob:getMobMod(xi.mobMod.BREATH_ATTACK_LINEAR) == 1 then
-    local mobScalingHP = mob:getMaxHP() / mob:getHP()
-    damage = (damage / mobScalingHP)
+        local mobScalingHP = mob:getMaxHP() / mob:getHP()
+        damage = (damage / mobScalingHP)
+    end
+
+    if target:hasStatusEffect(xi.effect.YAEGASUMI) then
+        local yaegasumiEffect      = target:getStatusEffect(xi.effect.YAEGASUMI)
+        local yaegasumiEffectPower = yaegasumiEffect:getPower()
+        damage = 0
+        yaegasumiEffect:setPower(yaegasumiEffectPower + 1)
+        skill:setMsg(xi.msg.basic.EVADES)
     end
 
     -- breath mob skills are single hit so provide single Melee hit TP return if primary target
