@@ -13275,24 +13275,29 @@ void CLuaBaseEntity::doWildCard(CLuaBaseEntity* PEntity, uint8 total)
     battleutils::DoWildCardToEntity(static_cast<CCharEntity*>(m_PBaseEntity), static_cast<CCharEntity*>(PEntity->m_PBaseEntity), total);
 }
 
+
 /************************************************************************
  *  Function: doRandomDeal()
  *  Purpose : Executes the Random Deal job ability
  *  Example : player:doRandomDeal(target)
  *  Notes   : Calls the DoRandomDealToEntity function of battleutils
  ************************************************************************/
-void CLuaBaseEntity::doRandomDeal(CLuaBaseEntity* PTarget)
+bool CLuaBaseEntity::doRandomDeal(CLuaBaseEntity* PTarget)
 {
-
     if (m_PBaseEntity->objtype != TYPE_PC)
     {
-         ShowWarning("Invalid entity type calling function (%s).", m_PBaseEntity->getName());
-         return;
+        ShowWarning("Invalid entity type calling function (%s).", m_PBaseEntity->getName());
+        return false;
     }
 
-    battleutils::DoRandomDealToEntity(static_cast<CCharEntity*>(m_PBaseEntity), static_cast<CCharEntity*>(PTarget->m_PBaseEntity));
-}
+    if (!PTarget || !PTarget->m_PBaseEntity)
+    {
+        ShowWarning("Invalid entity type passed as target (%s).", m_PBaseEntity->getName());
+        return false;
+    }
 
+    return battleutils::DoRandomDealToEntity(static_cast<CCharEntity*>(m_PBaseEntity), static_cast<CCharEntity*>(PTarget->m_PBaseEntity));
+}
 
 /************************************************************************
  *  Function: addCorsairRoll()
@@ -13530,10 +13535,10 @@ void CLuaBaseEntity::setStatDebilitation(uint16 statDebil)
  *  Function: getStat()
  *  Purpose : Returns a particular stat for an Entity
  *  Example : caster:getStat(xi.mod.INT)
- *  Notes   :
+ *  Notes   : weaponSlot param is used only for ATT (optional and defaults to SLOT_MAIN)
  ************************************************************************/
 
-uint16 CLuaBaseEntity::getStat(uint16 statId)
+uint16 CLuaBaseEntity::getStat(uint16 statId, sol::variadic_args va)
 {
     if (m_PBaseEntity->objtype == TYPE_NPC)
     {
@@ -13568,8 +13573,11 @@ uint16 CLuaBaseEntity::getStat(uint16 statId)
             value = PEntity->CHR();
             break;
         case Mod::ATT:
-            value = PEntity->ATT();
-            break;
+        {
+            SLOTTYPE weaponSlot = va[0].is<uint32>() ? va[0].as<SLOTTYPE>() : SLOTTYPE::SLOT_MAIN;
+            value               = PEntity->ATT(weaponSlot);
+        }
+        break;
         case Mod::DEF:
             value = PEntity->DEF();
             break;

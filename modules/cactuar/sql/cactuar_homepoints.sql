@@ -30,6 +30,9 @@ UPDATE npc_list SET status = 2 WHERE npcid = "17101362" AND polutils_name = "Hom
 -- Cape Teriggan
 UPDATE npc_list SET status = 2 WHERE npcid = "17240529" AND polutils_name = "Home Point #1";
 UPDATE npc_list SET status = 2 WHERE npcid = "17240530" AND polutils_name = "Home Point #2";
+UPDATE npc_list SET status = 2 WHERE npcid = "17240531" AND polutils_name = "Home Point #3";
+UPDATE npc_list SET status = 2 WHERE npcid = "17240532" AND polutils_name = "Home Point #4";
+UPDATE npc_list SET status = 2 WHERE npcid = "17240533" AND polutils_name = "Home Point #5";
 
 -- Castle Zvahl Keep
 UPDATE npc_list SET status = 2 WHERE npcid = "17441102" AND polutils_name = "Home Point #1";
@@ -69,7 +72,7 @@ UPDATE npc_list SET status = 2 WHERE npcid = "17617279" AND polutils_name = "Hom
 -- Lower Jueno
 UPDATE npc_list SET status = 2 WHERE npcid = "17780875" AND polutils_name = "Home Point #3";
 UPDATE npc_list SET status = 2 WHERE npcid = "17780876" AND polutils_name = "Home Point #4";
-UPDATE npc_list SET status = 2 WHERE npcid = "17780876" AND polutils_name = "Home Point #5";
+UPDATE npc_list SET status = 2 WHERE npcid = "17780877" AND polutils_name = "Home Point #5";
 
 -- Mhaura
 UPDATE npc_list SET status = 2 WHERE npcid = "17797162" AND polutils_name = "Home Point #2";
@@ -189,6 +192,10 @@ UPDATE npc_list SET status = 2 WHERE npcid = "17424571" AND polutils_name = "Hom
 -- Upper Jeuno
 UPDATE npc_list SET status = 2 WHERE npcid = "17776730" AND polutils_name = "Home Point #4";
 UPDATE npc_list SET status = 2 WHERE npcid = "17776731" AND polutils_name = "Home Point #5";
+
+-- Windurst Walls
+UPDATE npc_list SET status = 2 WHERE npcid = "17756266" AND polutils_name = "Home Point #4";
+UPDATE npc_list SET status = 2 WHERE npcid = "17756267" AND polutils_name = "Home Point #5";
 
 -- Windurst Waters
 UPDATE npc_list SET status = 2 WHERE npcid = "17752220" AND polutils_name = "Home Point #5";
