@@ -245,7 +245,7 @@ xi.job_utils.dancer.useStepAbility = function(player, target, ability, action, s
     end
 
     if math.random() <= xi.weaponskills.getHitRate(player, target, true, 10 + player:getMod(xi.mod.STEP_ACCURACY)) then
-        local maxSteps         = player:getMainJob() == xi.job.DNC and 10 or 5
+        local maxSteps         = 10
         local debuffEffect     = target:getStatusEffect(stepEffect)
         local origDebuffStacks = 0
         hitType                = hitId
