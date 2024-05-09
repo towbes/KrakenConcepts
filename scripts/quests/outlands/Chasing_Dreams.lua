@@ -14,13 +14,13 @@ require('scripts/globals/interaction/quest')
 local ID = zones[xi.zone.KORROLOKA_TUNNEL]
 -----------------------------------
 
-local quest = Quest:new(xi.quest.log_id.OUTLANDS, xi.quest.id.outlands.CHASING_DREAMS)
+local quest = Quest:new(xi.questLog.OUTLANDS, xi.quest.id.outlands.CHASING_DREAMS)
 
 quest.reward =
 {
     fame     = 30,
     item     = xi.item.VENERER_RING,
-    fameArea = xi.quest.fame_area.SELBINA_RABAO,
+    fameArea = xi.fameArea.SELBINA_RABAO,
     gil      = 4000,
 }
 
@@ -42,7 +42,7 @@ quest.sections =
 {
     {
         check = function(player, status, vars)
-            return status == QUEST_AVAILABLE
+            return status == xi.questStatus.QUEST_AVAILABLE
         end,
 
         [xi.zone.RABAO] =
@@ -61,7 +61,7 @@ quest.sections =
     {
         -- Quest stage preceding and including getting clam water
         check = function(player, status, vars)
-            return status == QUEST_ACCEPTED and vars.Prog <= 3
+            return status == xi.questStatus.QUEST_ACCEPTED and vars.Prog <= 3
         end,
 
         [xi.zone.RABAO] =
@@ -188,7 +188,7 @@ quest.sections =
     {
         -- Quest section suceeding having gathered the clam water
         check = function(player, status, vars)
-            return status == QUEST_ACCEPTED and vars.Prog >= 4
+            return status == xi.questStatus.QUEST_ACCEPTED and vars.Prog >= 4
         end,
 
         [xi.zone.NORG] =

@@ -266,11 +266,18 @@ local attackTypeShields =
 }
 
 xi.summon.avatarFinalAdjustments = function(dmg, mob, skill, target, skilltype, damagetype, shadowbehav)
+    local missMessage = xi.msg.basic.SKILL_MISS
+    if mob:getCurrentAction() == xi.action.PET_MOBABILITY_FINISH then
+        missMessage = xi.msg.basic.JA_MISS_2
+    end
+
     -- Physical Attack Missed
     if
         skilltype == xi.attackType.PHYSICAL and
         dmg == 0
     then
+        skill:setMsg(missMessage)
+
         return 0
     end
 
@@ -330,10 +337,12 @@ xi.summon.avatarFinalAdjustments = function(dmg, mob, skill, target, skilltype, 
 
     -- handle pd
     if
-        target:hasStatusEffect(xi.effect.PERFECT_DODGE) or
-        target:hasStatusEffect(xi.effect.ALL_MISS) and
+        (target:hasStatusEffect(xi.effect.PERFECT_DODGE) or
+        target:hasStatusEffect(xi.effect.ALL_MISS)) and
         skilltype == xi.attackType.PHYSICAL
     then
+        skill:setMsg(missMessage)
+
         return 0
     end
 

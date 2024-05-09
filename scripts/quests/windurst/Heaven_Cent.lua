@@ -12,7 +12,7 @@ require('scripts/globals/quests')
 local ID = require('scripts/zones/Maze_of_Shakhrami/IDs')
 -----------------------------------
 
-local quest = Quest:new(xi.quest.log_id.WINDURST, xi.quest.id.windurst.HEAVEN_CENT)
+local quest = Quest:new(xi.questLog.WINDURST, xi.quest.id.windurst.HEAVEN_CENT)
 
 local incorrect =
 {
@@ -35,15 +35,15 @@ quest.reward =
     gil = 4800,
     title = xi.title.NIGHT_SKY_NAVIGATOR,
     fame = 100,
-    fameArea = xi.quest.fame_area.WINDURST,
+    fameArea = xi.fameArea.WINDURST,
 }
 
 quest.sections =
 {
     {
         check = function(player, status, vars)
-            return status == QUEST_AVAILABLE and
-            player:getFameLevel(xi.quest.fame_area.WINDURST) >= 5
+            return status == xi.questStatus.QUEST_AVAILABLE and
+            player:getFameLevel(xi.fameArea.WINDURST) >= 5
         end,
 
         [xi.zone.WINDURST_WATERS] =
@@ -60,7 +60,7 @@ quest.sections =
     },
     {
         check = function(player, status, vars)
-            return status == QUEST_ACCEPTED and
+            return status == xi.questStatus.QUEST_ACCEPTED and
             vars.Prog == 0
         end,
 
@@ -87,7 +87,7 @@ quest.sections =
 
     {
         check = function(player, status, vars)
-            return status == QUEST_ACCEPTED and
+            return status == xi.questStatus.QUEST_ACCEPTED and
             vars.Prog == 1
         end,
 

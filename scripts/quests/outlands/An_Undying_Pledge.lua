@@ -14,12 +14,12 @@ require('scripts/globals/interaction/quest')
 -----------------------------------
 local ID = zones[xi.zone.SEA_SERPENT_GROTTO]
 
-local quest = Quest:new(xi.quest.log_id.OUTLANDS, xi.quest.id.outlands.AN_UNDYING_PLEDGE)
+local quest = Quest:new(xi.questLog.OUTLANDS, xi.quest.id.outlands.AN_UNDYING_PLEDGE)
 
 quest.reward =
 {
     item = xi.item.LIGHT_BUCKLER,
-    fameArea = xi.quest.fame_area.NORG,
+    fameArea = xi.fameArea.NORG,
     fame = 50,
 }
 
@@ -27,8 +27,8 @@ quest.sections =
 {
     {
         check = function(player, status, vars)
-            return status == QUEST_AVAILABLE and
-                player:getFameLevel(xi.quest.fame_area.NORG) >= 4
+            return status == xi.questStatus.QUEST_AVAILABLE and
+                player:getFameLevel(xi.fameArea.NORG) >= 4
         end,
 
         [xi.zone.NORG] =
@@ -47,7 +47,7 @@ quest.sections =
 
     {
         check = function(player, status, vars)
-            return status == QUEST_ACCEPTED
+            return status == xi.questStatus.QUEST_ACCEPTED
         end,
 
         [xi.zone.NORG] =
@@ -110,7 +110,7 @@ quest.sections =
 
     {
         check = function(player, status, vars)
-            return status == QUEST_COMPLETED
+            return status == xi.questStatus.QUEST_COMPLETED
         end,
 
         [xi.zone.NORG] =

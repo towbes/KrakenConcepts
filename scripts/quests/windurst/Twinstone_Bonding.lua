@@ -4,15 +4,7 @@
 -- !addquest 2 62
 -- Gioh Ajirhri : !pos 107 -5 174 241
 -----------------------------------
-require('scripts/globals/interaction/quest')
-
-require('scripts/globals/npc_util')
-require('scripts/globals/quests')
-
-
-
------------------------------------
-local quest = Quest:new(xi.quest.log_id.WINDURST, xi.quest.id.windurst.TWINSTONE_BONDING)
+local quest = Quest:new(xi.questLog.WINDURST, xi.quest.id.windurst.TWINSTONE_BONDING)
 
 quest.sections =
 {
@@ -20,8 +12,8 @@ quest.sections =
     {
         check = function(player, status, vars)
             return
-                player:getFameLevel(xi.quest.fame_area.WINDURST) >= 2 and
-                status == QUEST_AVAILABLE
+                player:getFameLevel(xi.fameArea.WINDURST) >= 2 and
+                status == xi.questStatus.QUEST_AVAILABLE
         end,
 
         [xi.zone.WINDURST_WOODS] =
@@ -41,7 +33,7 @@ quest.sections =
     -- Quest Initial Completion
     {
         check = function(player, status, vars)
-            return status >= QUEST_ACCEPTED
+            return status >= xi.questStatus.QUEST_ACCEPTED
         end,
 
         [xi.zone.WINDURST_WOODS] =
@@ -75,12 +67,12 @@ quest.sections =
                 end,
 
                 [490] = function(player, csid, option, npc)
-                    if player:getQuestStatus(quest.areaId, quest.questId) == QUEST_COMPLETED then
+                    if player:getQuestStatus(quest.areaId, quest.questId) == xi.questStatus.QUEST_COMPLETED then
                         -- rewards for repeat completion
                         quest.reward =
                         {
                             fame = 10,
-                            fameArea = xi.quest.fame_area.WINDURST,
+                            fameArea = xi.fameArea.WINDURST,
                             gil = 900 * xi.settings.main.GIL_RATE
                         }
                     else
@@ -88,7 +80,7 @@ quest.sections =
                         quest.reward =
                         {
                             fame = 80,
-                            fameArea = xi.quest.fame_area.WINDURST,
+                            fameArea = xi.fameArea.WINDURST,
                             item = xi.item.WRAPPED_BOW,
                             title = xi.title.BOND_FIXER
                         }

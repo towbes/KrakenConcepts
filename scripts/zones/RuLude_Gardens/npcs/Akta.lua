@@ -13,7 +13,7 @@ end
 entity.onTrigger = function(player, npc)
     local fellowQuest = player:getCharVar('[Quest]Unlisted_Qualities')
     if
-        player:getQuestStatus(xi.quest.log_id.JEUNO, xi.quest.id.jeuno.UNLISTED_QUALITIES) == QUEST_ACCEPTED and
+        player:getQuestStatus(xi.questLog.JEUNO, xi.quest.id.jeuno.UNLISTED_QUALITIES) == xi.questStatus.QUEST_ACCEPTED and
         not utils.mask.getBit(fellowQuest, 0)
     then
         player:startEvent(10103, 0, 0, 0, 0, 0, 0, 0, player:getFellowValue('fellowid'))

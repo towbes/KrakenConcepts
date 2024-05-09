@@ -13,21 +13,21 @@ require('scripts/globals/quests')
 local bibikiID = require('scripts/zones/Bibiki_Bay/IDs')
 -----------------------------------
 
-local quest = Quest:new(xi.quest.log_id.WINDURST, xi.quest.id.windurst.ONE_GOOD_DEED)
+local quest = Quest:new(xi.questLog.WINDURST, xi.quest.id.windurst.ONE_GOOD_DEED)
 
 quest.reward =
 {
     gil = 3200,
     fame = 50,
-    fameArea = xi.quest.fame_area.WINDURST,
+    fameArea = xi.fameArea.WINDURST,
 }
 
 quest.sections =
 {
     {
         check = function(player, status, vars)
-            return status == QUEST_AVAILABLE and
-            player:getFameLevel(xi.quest.fame_area.WINDURST) >= 6
+            return status == xi.questStatus.QUEST_AVAILABLE and
+            player:getFameLevel(xi.fameArea.WINDURST) >= 6
         end,
 
         [xi.zone.PORT_WINDURST] =
@@ -46,7 +46,7 @@ quest.sections =
     },
     {
         check = function(player, status, vars)
-            return status == QUEST_ACCEPTED
+            return status == xi.questStatus.QUEST_ACCEPTED
         end,
 
         [xi.zone.PORT_WINDURST] =

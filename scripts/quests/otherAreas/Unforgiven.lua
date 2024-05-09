@@ -6,15 +6,9 @@
 -- Pradiulot !pos -20.814 -22 8.399 26
 -- ???       !pos 110.714 -40.856 -53.154 26
 -----------------------------------
-
-require('scripts/globals/npc_util')
-require('scripts/globals/quests')
-
-require('scripts/globals/interaction/quest')
------------------------------------
 local ID = zones[xi.zone.TAVNAZIAN_SAFEHOLD]
 -----------------------------------
-local quest = Quest:new(xi.quest.log_id.OTHER_AREAS, xi.quest.id.otherAreas.UNFORGIVEN)
+local quest = Quest:new(xi.questLog.OTHER_AREAS, xi.quest.id.otherAreas.UNFORGIVEN)
 
 quest.reward =
 {
@@ -25,7 +19,7 @@ quest.sections =
 {
     {
         check = function(player, status, vars)
-            return status == QUEST_AVAILABLE
+            return status == xi.questStatus.QUEST_AVAILABLE
         end,
 
         [xi.zone.TAVNAZIAN_SAFEHOLD] =
@@ -43,7 +37,7 @@ quest.sections =
 
     {
         check = function(player, status, vars)
-            return status == QUEST_ACCEPTED
+            return status == xi.questStatus.QUEST_ACCEPTED
         end,
 
         [xi.zone.TAVNAZIAN_SAFEHOLD] =
@@ -100,7 +94,7 @@ quest.sections =
 
     {
         check = function(player, status, vars)
-            return status == QUEST_COMPLETED
+            return status == xi.questStatus.QUEST_COMPLETED
         end,
 
         [xi.zone.TAVNAZIAN_SAFEHOLD] =

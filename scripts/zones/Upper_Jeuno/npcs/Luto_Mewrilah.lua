@@ -151,8 +151,8 @@ entity.onTrade = function(player, npc, trade)
         return
     end
 
-    local unlistedQualities = player:getQuestStatus(xi.quest.log_id.JEUNO, xi.quest.id.jeuno.UNLISTED_QUALITIES)
-    if unlistedQualities == QUEST_COMPLETED then
+    local unlistedQualities = player:getQuestStatus(xi.questLog.JEUNO, xi.quest.id.jeuno.UNLISTED_QUALITIES)
+    if unlistedQualities == xi.questStatus.QUEST_COMPLETED then
         local weaponlevel = player:getFellowValue('weaponlvl')
         local weapon = updateMatchingFellowWeapon(player, weaponlevel, trade)
         if weapon == nil then
@@ -171,86 +171,86 @@ end
 -- TODO: Reduce complexity in this function by converting to IF
 
 entity.onTrigger = function(player, npc)
-    local unlistedQualities = player:getQuestStatus(xi.quest.log_id.JEUNO, xi.quest.id.jeuno.UNLISTED_QUALITIES)
+    local unlistedQualities = player:getQuestStatus(xi.questLog.JEUNO, xi.quest.id.jeuno.UNLISTED_QUALITIES)
     local unlistedQualitiesProgress = player:getCharVar('[Quest]Unlisted_Qualities')
-    local lookingGlass = player:getQuestStatus(xi.quest.log_id.JEUNO, xi.quest.id.jeuno.GIRL_IN_THE_LOOKING_GLASS)
+    local lookingGlass = player:getQuestStatus(xi.questLog.JEUNO, xi.quest.id.jeuno.GIRL_IN_THE_LOOKING_GLASS)
     local lookingGlassProgress = player:getCharVar('[Quest]Looking_Glass')
-    local mirrorMirror = player:getQuestStatus(xi.quest.log_id.JEUNO, xi.quest.id.jeuno.MIRROR_MIRROR)
+    local mirrorMirror = player:getQuestStatus(xi.questLog.JEUNO, xi.quest.id.jeuno.MIRROR_MIRROR)
     local mirrorMirrorProgress = player:getCharVar('[Quest]Mirror_Mirror')
     local needToZone = player:needToZone()
     local fellowParam = 0
     local bond = 0
     local weaponlevel = 0
-    if unlistedQualities == QUEST_COMPLETED then
+    if unlistedQualities == xi.questStatus.QUEST_COMPLETED then
         fellowParam = xi.fellow_utils.getFellowParam(player)
         bond = player:getFellowValue('bond')
         weaponlevel = player:getFellowValue('weaponlvl')
     end
 
     if
-        unlistedQualities == QUEST_AVAILABLE -- and
+        unlistedQualities == xi.questStatus.QUEST_AVAILABLE -- and
         -- player:getRank(player:getNation()) >= 4 and -- Rank 4 not required after 2013
         -- xi.settings.main.ENABLE_ADVENTURING_FELLOWS
     then
         player:startEvent(10031)
     elseif
-        unlistedQualities == QUEST_ACCEPTED and
+        unlistedQualities == xi.questStatus.QUEST_ACCEPTED and
         unlistedQualitiesProgress < 15
     then
         player:startEvent(10033)
     elseif
-        unlistedQualities == QUEST_ACCEPTED and
+        unlistedQualities == xi.questStatus.QUEST_ACCEPTED and
         unlistedQualitiesProgress == 15
     then
         player:startEvent(10032)
     elseif
-        unlistedQualities == QUEST_COMPLETED and
-        lookingGlass < QUEST_ACCEPTED and
+        unlistedQualities == xi.questStatus.QUEST_COMPLETED and
+        lookingGlass < xi.questStatus.QUEST_ACCEPTED and
         needToZone
     then
         player:startEvent(10034)
     elseif
-        unlistedQualities == QUEST_COMPLETED and
-        lookingGlass == QUEST_AVAILABLE
+        unlistedQualities == xi.questStatus.QUEST_COMPLETED and
+        lookingGlass == xi.questStatus.QUEST_AVAILABLE
     then
         player:startEvent(10039)
     elseif
-        lookingGlass == QUEST_ACCEPTED and
+        lookingGlass == xi.questStatus.QUEST_ACCEPTED and
         lookingGlassProgress < 4
     then
         player:startEvent(10042)
     elseif
-        lookingGlass == QUEST_ACCEPTED and
+        lookingGlass == xi.questStatus.QUEST_ACCEPTED and
         lookingGlassProgress == 4
     then
         player:startEvent(10043, 244, 0, 0, 0, 0, 0, 0, fellowParam)
     elseif
-        lookingGlass == QUEST_COMPLETED and
-        mirrorMirror < QUEST_ACCEPTED and
+        lookingGlass == xi.questStatus.QUEST_COMPLETED and
+        mirrorMirror < xi.questStatus.QUEST_ACCEPTED and
         needToZone
     then
         player:startEvent(10048)
     elseif
-        lookingGlass == QUEST_COMPLETED and
-        mirrorMirror == QUEST_AVAILABLE
+        lookingGlass == xi.questStatus.QUEST_COMPLETED and
+        mirrorMirror == xi.questStatus.QUEST_AVAILABLE
     then
         player:startEvent(10044, 244, 0, 0, 0, 0, 0, 0, fellowParam)
     elseif
-        mirrorMirror == QUEST_ACCEPTED and
+        mirrorMirror == xi.questStatus.QUEST_ACCEPTED and
         mirrorMirrorProgress < 3
     then
         player:startEvent(10045)
     elseif
-        mirrorMirror == QUEST_ACCEPTED and
+        mirrorMirror == xi.questStatus.QUEST_ACCEPTED and
         mirrorMirrorProgress == 3
     then
         player:startEvent(10046, 244, 14810, 0, 0, 0, 0, 0, fellowParam)
     elseif
-        mirrorMirror == QUEST_COMPLETED and
+        mirrorMirror == xi.questStatus.QUEST_COMPLETED and
         player:getLocalVar('StartOver') == 1
     then
         player:startEvent(10053, 244, 14810, 0, 0, 0, 0, 0, fellowParam)
-    elseif mirrorMirror == QUEST_COMPLETED then
+    elseif mirrorMirror == xi.questStatus.QUEST_COMPLETED then
         if
             player:getEquipID(xi.slot.EAR1) == 14810 or
             player:getEquipID(xi.slot.EAR2) == 14810
@@ -310,7 +310,7 @@ entity.onEventFinish = function(player, csid, option, npc)
         option >= 0 and
         option <= 119
     then
-        player:addQuest(xi.quest.log_id.JEUNO, xi.quest.id.jeuno.UNLISTED_QUALITIES)
+        player:addQuest(xi.questLog.JEUNO, xi.quest.id.jeuno.UNLISTED_QUALITIES)
         player:setFellowValue('fellowid', option)
 --[[
 Adventuring Fellow Name Options:
@@ -389,23 +389,23 @@ Adventuring Fellow Name Options:
 --]]
     elseif csid == 10032 then
         if npcUtil.giveItem(player, 744) then
-            player:completeQuest(xi.quest.log_id.JEUNO, xi.quest.id.jeuno.UNLISTED_QUALITIES)
+            player:completeQuest(xi.questLog.JEUNO, xi.quest.id.jeuno.UNLISTED_QUALITIES)
             player:setCharVar('[Quest]Unlisted_Qualities', 0)
             player:needToZone(true)
         end
     elseif csid == 10039 then
-        player:addQuest(xi.quest.log_id.JEUNO, xi.quest.id.jeuno.GIRL_IN_THE_LOOKING_GLASS)
+        player:addQuest(xi.questLog.JEUNO, xi.quest.id.jeuno.GIRL_IN_THE_LOOKING_GLASS)
         player:setCharVar('[Quest]Looking_Glass', 1)
     elseif csid == 10043 then
-        player:completeQuest(xi.quest.log_id.JEUNO, xi.quest.id.jeuno.GIRL_IN_THE_LOOKING_GLASS)
+        player:completeQuest(xi.questLog.JEUNO, xi.quest.id.jeuno.GIRL_IN_THE_LOOKING_GLASS)
         player:setCharVar('[Quest]Looking_Glass', 0)
         player:needToZone(true)
     elseif csid == 10044 then
-        player:addQuest(xi.quest.log_id.JEUNO, xi.quest.id.jeuno.MIRROR_MIRROR)
+        player:addQuest(xi.questLog.JEUNO, xi.quest.id.jeuno.MIRROR_MIRROR)
         player:setCharVar('[Quest]Mirror_Mirror', 1)
     elseif csid == 10046 then
         if npcUtil.giveItem(player, 14810) then
-            player:completeQuest(xi.quest.log_id.JEUNO, xi.quest.id.jeuno.MIRROR_MIRROR)
+            player:completeQuest(xi.questLog.JEUNO, xi.quest.id.jeuno.MIRROR_MIRROR)
             player:setCharVar('[Quest]Mirror_Mirror', 0)
         end
     elseif
@@ -419,17 +419,17 @@ Adventuring Fellow Name Options:
     then
         player:setLocalVar('StartOver', 0)
     elseif csid == 10049 then
-        player:delQuest(xi.quest.log_id.JEUNO, xi.quest.id.jeuno.CLASH_OF_THE_COMRADES)
-        player:delQuest(xi.quest.log_id.JEUNO, xi.quest.id.jeuno.MIXED_SIGNALS)
-        player:delQuest(xi.quest.log_id.JEUNO, xi.quest.id.jeuno.REGAINING_TRUST)
-        player:delQuest(xi.quest.log_id.JEUNO, xi.quest.id.jeuno.CHAMELEON_CAPERS)
-        player:delQuest(xi.quest.log_id.JEUNO, xi.quest.id.jeuno.MIRROR_IMAGES)
-        player:delQuest(xi.quest.log_id.JEUNO, xi.quest.id.jeuno.BLESSED_RADIANCE)
-        player:delQuest(xi.quest.log_id.JEUNO, xi.quest.id.jeuno.BLIGHTED_GLOOM)
-        player:delQuest(xi.quest.log_id.JEUNO, xi.quest.id.jeuno.PAST_REFLECTIONS)
-        player:delQuest(xi.quest.log_id.JEUNO, xi.quest.id.jeuno.MIRROR_MIRROR)
-        player:delQuest(xi.quest.log_id.JEUNO, xi.quest.id.jeuno.GIRL_IN_THE_LOOKING_GLASS)
-        player:delQuest(xi.quest.log_id.JEUNO, xi.quest.id.jeuno.UNLISTED_QUALITIES)
+        player:delQuest(xi.questLog.JEUNO, xi.quest.id.jeuno.CLASH_OF_THE_COMRADES)
+        player:delQuest(xi.questLog.JEUNO, xi.quest.id.jeuno.MIXED_SIGNALS)
+        player:delQuest(xi.questLog.JEUNO, xi.quest.id.jeuno.REGAINING_TRUST)
+        player:delQuest(xi.questLog.JEUNO, xi.quest.id.jeuno.CHAMELEON_CAPERS)
+        player:delQuest(xi.questLog.JEUNO, xi.quest.id.jeuno.MIRROR_IMAGES)
+        player:delQuest(xi.questLog.JEUNO, xi.quest.id.jeuno.BLESSED_RADIANCE)
+        player:delQuest(xi.questLog.JEUNO, xi.quest.id.jeuno.BLIGHTED_GLOOM)
+        player:delQuest(xi.questLog.JEUNO, xi.quest.id.jeuno.PAST_REFLECTIONS)
+        player:delQuest(xi.questLog.JEUNO, xi.quest.id.jeuno.MIRROR_MIRROR)
+        player:delQuest(xi.questLog.JEUNO, xi.quest.id.jeuno.GIRL_IN_THE_LOOKING_GLASS)
+        player:delQuest(xi.questLog.JEUNO, xi.quest.id.jeuno.UNLISTED_QUALITIES)
         player:delFellowValue()
         player:setLocalVar('StartOver', 0)
         player:confirmTrade()

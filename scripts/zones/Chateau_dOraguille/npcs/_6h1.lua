@@ -11,9 +11,9 @@ end
 
 entity.onTrigger = function(player, npc)
     local sandyQuests = xi.quest.id.sandoria
-    local whmAf1 = player:getQuestStatus(xi.quest.log_id.SANDORIA, sandyQuests.MESSENGER_FROM_BEYOND)
-    local whmAf2 = player:getQuestStatus(xi.quest.log_id.SANDORIA, sandyQuests.PRELUDE_OF_BLACK_AND_WHITE)
-    local whmAf3 = player:getQuestStatus(xi.quest.log_id.SANDORIA, sandyQuests.PIEUJE_S_DECISION)
+    local whmAf1 = player:getQuestStatus(xi.questLog.SANDORIA, sandyQuests.MESSENGER_FROM_BEYOND)
+    local whmAf2 = player:getQuestStatus(xi.questLog.SANDORIA, sandyQuests.PRELUDE_OF_BLACK_AND_WHITE)
+    local whmAf3 = player:getQuestStatus(xi.questLog.SANDORIA, sandyQuests.PIEUJE_S_DECISION)
 
     -- WHM AF quests
     if
@@ -22,10 +22,10 @@ entity.onTrigger = function(player, npc)
         (player:getSubJob() == xi.job.WHM and --Umeboshi
         player:getSubLvl() >= xi.settings.main.AF2_QUEST_LEVEL))
     then
-        if whmAf1 == QUEST_COMPLETED and whmAf2 == QUEST_AVAILABLE then
-            player:startEvent(551) -- Start Quest 'Prelude of Black and White'
-        elseif whmAf2 == QUEST_COMPLETED and whmAf3 == QUEST_AVAILABLE then
-            player:startEvent(552) -- Start Quest 'Pieuje's Decision'
+        if whmAf1 == xi.questStatus.QUEST_COMPLETED and whmAf2 == xi.questStatus.QUEST_AVAILABLE then
+            player:startEvent(551) -- Start Quest "Prelude of Black and White"
+        elseif whmAf2 == xi.questStatus.QUEST_COMPLETED and whmAf3 == xi.questStatus.QUEST_AVAILABLE then
+            player:startEvent(552) -- Start Quest "Pieuje's Decision"
         end
 
     -- San d'Oria Rank 10 (new default)
@@ -46,9 +46,9 @@ end
 
 entity.onEventFinish = function(player, csid, option, npc)
     if csid == 551 then
-        player:addQuest(xi.quest.log_id.SANDORIA, xi.quest.id.sandoria.PRELUDE_OF_BLACK_AND_WHITE)
+        player:addQuest(xi.questLog.SANDORIA, xi.quest.id.sandoria.PRELUDE_OF_BLACK_AND_WHITE)
     elseif csid == 552 then
-        player:addQuest(xi.quest.log_id.SANDORIA, xi.quest.id.sandoria.PIEUJE_S_DECISION)
+        player:addQuest(xi.questLog.SANDORIA, xi.quest.id.sandoria.PIEUJE_S_DECISION)
     end
 end
 

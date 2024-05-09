@@ -9,7 +9,8 @@ entity.onTrade = function(player, npc, trade)
 end
 
 entity.onTrigger = function(player, npc)
-    if player:hasCompletedQuest(xi.quest.log_id.JEUNO, xi.quest.id.jeuno.SHATTERING_STARS) then
+    -- if player:hasCompletedQuest(xi.questLog.JEUNO, xi.questLog.jeuno.BEYOND_INFINITY) then
+    if player:hasCompletedQuest(xi.questLog.JEUNO, xi.questLog.jeuno.SHATTERING_STARS) then -- Enables Warps for 75 Cap
         player:startEvent(10115, player:getGil())
     else
         player:startEvent(10116)

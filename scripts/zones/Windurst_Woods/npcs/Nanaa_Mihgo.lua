@@ -18,17 +18,17 @@ local trustMemory = function(player)
     end
 
     -- 4 - ROCK_RACKETEER
-    if player:hasCompletedQuest(xi.quest.log_id.WINDURST, xi.quest.id.windurst.ROCK_RACKETEER) then
+    if player:hasCompletedQuest(xi.questLog.WINDURST, xi.quest.id.windurst.ROCK_RACKETEER) then
         memories = memories + 4
     end
 
     -- 8 - HITTING_THE_MARQUISATE
-    if player:hasCompletedQuest(xi.quest.log_id.WINDURST, xi.quest.id.windurst.HITTING_THE_MARQUISATE) then
+    if player:hasCompletedQuest(xi.questLog.WINDURST, xi.quest.id.windurst.HITTING_THE_MARQUISATE) then
         memories = memories + 8
     end
 
     -- 16 - CRYING_OVER_ONIONS
-    if player:hasCompletedQuest(xi.quest.log_id.WINDURST, xi.quest.id.windurst.CRYING_OVER_ONIONS) then
+    if player:hasCompletedQuest(xi.questLog.WINDURST, xi.quest.id.windurst.CRYING_OVER_ONIONS) then
         memories = memories + 16
     end
 
@@ -50,12 +50,12 @@ end
 
 entity.onTrigger = function(player, npc)
     local wildcatWindurst = player:getCharVar('WildcatWindurst')
-    local mihgosAmigo = player:getQuestStatus(xi.quest.log_id.WINDURST, xi.quest.id.windurst.MIHGO_S_AMIGO)
+    local mihgosAmigo = player:getQuestStatus(xi.questLog.WINDURST, xi.quest.id.windurst.MIHGO_S_AMIGO)
 
     -- LURE OF THE WILDCAT (WINDURST 2-1)
     -- Simply checks this NPC as talked to for the PC, should be highest priority
     if
-        player:getQuestStatus(xi.quest.log_id.WINDURST, xi.quest.id.windurst.LURE_OF_THE_WILDCAT) == QUEST_ACCEPTED and
+        player:getQuestStatus(xi.questLog.WINDURST, xi.quest.id.windurst.LURE_OF_THE_WILDCAT) == xi.questStatus.QUEST_ACCEPTED and
         not utils.mask.getBit(wildcatWindurst, 4)
     then
         player:startEvent(732)
@@ -66,7 +66,7 @@ entity.onTrigger = function(player, npc)
         not player:hasSpell(xi.magic.spell.NANAA_MIHGO) and
         player:getLocalVar('TrustDialogue') == 0
     then
-        local trustFlag = (player:getRank(player:getNation()) >= 3 and 1 or 0) + (mihgosAmigo == QUEST_COMPLETED and 2 or 0)
+        local trustFlag = (player:getRank(player:getNation()) >= 3 and 1 or 0) + (mihgosAmigo == xi.questStatus.QUEST_COMPLETED and 2 or 0)
 
         player:setLocalVar('TrustDialogue', 1)
 
@@ -84,19 +84,19 @@ entity.onEventFinish = function(player, csid, option, npc)
 
     -- MIHGO'S AMIGO
     elseif csid == 80 or csid == 81 then
-        player:addQuest(xi.quest.log_id.WINDURST, xi.quest.id.windurst.MIHGO_S_AMIGO)
+        player:addQuest(xi.questLog.WINDURST, xi.quest.id.windurst.MIHGO_S_AMIGO)
     elseif csid == 88 then
         player:confirmTrade()
-        player:completeQuest(xi.quest.log_id.WINDURST, xi.quest.id.windurst.MIHGO_S_AMIGO)
+        player:completeQuest(xi.questLog.WINDURST, xi.quest.id.windurst.MIHGO_S_AMIGO)
         player:addTitle(xi.title.CAT_BURGLAR_GROUPIE)
         player:addGil(xi.settings.main.GIL_RATE * 200)
-        player:addFame(xi.quest.fame_area.NORG, 60)
+        player:addFame(xi.fameArea.NORG, 60)
         player:needToZone(true)
     elseif csid == 494 then
         player:confirmTrade()
         player:addTitle(xi.title.CAT_BURGLAR_GROUPIE)
         player:addGil(xi.settings.main.GIL_RATE * 200)
-        player:addFame(xi.quest.fame_area.NORG, 30)
+        player:addFame(xi.fameArea.NORG, 30)
     elseif csid == 865 and option == 2 then
         player:addSpell(xi.magic.spell.NANAA_MIHGO, true, true)
         player:messageSpecial(ID.text.YOU_LEARNED_TRUST, 0, xi.magic.spell.NANAA_MIHGO)

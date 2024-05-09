@@ -18,7 +18,7 @@ require('scripts/globals/quests')
 require('scripts/globals/interaction/quest')
 -----------------------------------
 
-local quest = Quest:new(xi.quest.log_id.OTHER_AREAS, xi.quest.id.otherAreas.REQUIEM_OF_SIN)
+local quest = Quest:new(xi.questLog.OTHER_AREAS, xi.quest.id.otherAreas.REQUIEM_OF_SIN)
 
 -- Quest completion is handled by battlefield
 
@@ -26,8 +26,8 @@ quest.sections =
 {
     {
         check = function(player, status, vars)
-            return status == QUEST_AVAILABLE and
-            player:hasCompletedQuest(xi.quest.log_id.OTHER_AREAS, xi.quest.id.otherAreas.TANGO_WITH_A_TRACKER) and
+            return status == xi.questStatus.QUEST_AVAILABLE and
+            player:hasCompletedQuest(xi.questLog.OTHER_AREAS, xi.quest.id.otherAreas.TANGO_WITH_A_TRACKER) and
             quest:getVar(player, 'conquestRequiem') <= os.time() and
             quest:getVar(player, 'conquestRequiem') > 0 -- Prevents players from getting this quest too early.
         end,
@@ -50,7 +50,7 @@ quest.sections =
     {
         -- If player loses battlefield, they must return to Despachiaire for another KI
         check = function(player, status, vars)
-            return status == QUEST_ACCEPTED and
+            return status == xi.questStatus.QUEST_ACCEPTED and
             not player:hasKeyItem(xi.ki.LETTER_FROM_SHIKAREE_Y)
         end,
 
@@ -70,7 +70,7 @@ quest.sections =
 
     {
         check = function(player, status, vars)
-            return status == QUEST_COMPLETED and
+            return status == xi.questStatus.QUEST_COMPLETED and
             not player:hasKeyItem(xi.ki.LETTER_FROM_THE_MITHRAN_TRACKERS) and
             quest:getVar(player, 'conquestRequiem') <= os.time()
         end,

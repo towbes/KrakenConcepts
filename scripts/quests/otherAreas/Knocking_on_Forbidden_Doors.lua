@@ -12,7 +12,7 @@ local phomiunaID  = zones[xi.zone.PHOMIUNA_AQUEDUCTS]
 local misareauxID = zones[xi.zone.MISAREAUX_COAST]
 -----------------------------------
 
-local quest = Quest:new(xi.quest.log_id.OTHER_AREAS, xi.quest.id.otherAreas.KNOCKING_ON_FORBIDDEN_DOORS)
+local quest = Quest:new(xi.questLog.OTHER_AREAS, xi.quest.id.otherAreas.KNOCKING_ON_FORBIDDEN_DOORS)
 
 quest.sections =
 {
@@ -20,8 +20,8 @@ quest.sections =
     -- QUEST AVAILABLE
     {
         check = function(player, status, vars)
-            return status == QUEST_AVAILABLE and
-                player:hasCompletedQuest(xi.quest.log_id.OTHER_AREAS, xi.quest.id.otherAreas.BEHIND_THE_SMILE)
+            return status == xi.questStatus.QUEST_AVAILABLE and
+                player:hasCompletedQuest(xi.questLog.OTHER_AREAS, xi.quest.id.otherAreas.BEHIND_THE_SMILE)
         end,
 
         [xi.zone.TAVNAZIAN_SAFEHOLD] =
@@ -40,7 +40,7 @@ quest.sections =
     -- QUEST ACCEPTED
     {
         check = function(player, status, vars)
-            return status == QUEST_ACCEPTED
+            return status == xi.questStatus.QUEST_ACCEPTED
         end,
 
         [xi.zone.TAVNAZIAN_SAFEHOLD] =
@@ -220,7 +220,7 @@ quest.sections =
     -- Quest complete
     {
         check = function(player, status, vars)
-            return status == QUEST_COMPLETED and
+            return status == xi.questStatus.QUEST_COMPLETED and
                 player:hasKeyItem(xi.ki.BETTER_HUMES_AND_MANNEQUINS)
         end,
 

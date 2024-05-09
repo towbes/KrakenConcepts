@@ -9,20 +9,20 @@ require('scripts/globals/npc_util')
 require('scripts/globals/quests')
 
 
-local quest = Quest:new(xi.quest.log_id.SANDORIA, xi.quest.id.sandoria.FEAR_OF_THE_DARK)
+local quest = Quest:new(xi.questLog.SANDORIA, xi.quest.id.sandoria.FEAR_OF_THE_DARK)
 
 quest.reward =
 {
     fame = 30,
     gil = 200 * xi.settings.main.GIL_RATE,
-    fameArea = xi.quest.fame_area.SANDORIA,
+    fameArea = xi.fameArea.SANDORIA,
 }
 
 quest.sections =
 {
     {
         check = function(player, status, vars)
-            return status == QUEST_AVAILABLE
+            return status == xi.questStatus.QUEST_AVAILABLE
         end,
 
         [xi.zone.NORTHERN_SAN_DORIA] =
@@ -47,7 +47,7 @@ quest.sections =
 
     {
         check = function(player, status, vars)
-            return status >= QUEST_ACCEPTED
+            return status >= xi.questStatus.QUEST_ACCEPTED
         end,
 
         [xi.zone.NORTHERN_SAN_DORIA] =
@@ -69,7 +69,7 @@ quest.sections =
             {
                 [18] = function(player, csid, option, npc)
                     player:tradeComplete()
-                    if player:getQuestStatus(quest.areaId, quest.questId) == QUEST_COMPLETED then
+                    if player:getQuestStatus(quest.areaId, quest.questId) == xi.questStatus.QUEST_COMPLETED then
                         -- Quest is repeatable but only gives 5 fame per turn in instead of the 30 for the original completion
                         quest.reward.fame = 5
                     end

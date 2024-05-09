@@ -9,23 +9,23 @@ require('scripts/globals/quests')
 ----------------------------------
 local ID = zones[xi.zone.PORT_SAN_DORIA]
 ----------------------------------
-local quest = Quest:new(xi.quest.log_id.SANDORIA, xi.quest.id.sandoria.A_JOB_FOR_THE_CONSORTIUM)
+local quest = Quest:new(xi.questLog.SANDORIA, xi.quest.id.sandoria.A_JOB_FOR_THE_CONSORTIUM)
 
 quest.reward =
 {
     gil = 1000,
     fame = 25,
-    fameArea = xi.quest.fame_area.NORG,
+    fameArea = xi.fameArea.NORG,
 }
 
 quest.sections =
 {
     {
         check = function(player, status, vars)
-            return status == QUEST_AVAILABLE and
-                player:getQuestStatus(xi.quest.log_id.SANDORIA, xi.quest.id.sandoria.THE_BRUGAIRE_CONSORTIUM) == QUEST_COMPLETED and
+            return status == xi.questStatus.QUEST_AVAILABLE and
+                player:getQuestStatus(xi.questLog.SANDORIA, xi.quest.id.sandoria.THE_BRUGAIRE_CONSORTIUM) == xi.questStatus.QUEST_COMPLETED and
                 player:hasKeyItem(xi.ki.TENSHODO_MEMBERS_CARD) and
-                player:getFameLevel(xi.quest.fame_area.SANDORIA) >= 5
+                player:getFameLevel(xi.fameArea.SANDORIA) >= 5
         end,
 
         [xi.zone.PORT_SAN_DORIA] =
@@ -57,7 +57,7 @@ quest.sections =
 
     {
         check = function(player, status, vars)
-            return status == QUEST_ACCEPTED
+            return status == xi.questStatus.QUEST_ACCEPTED
         end,
 
         [xi.zone.PORT_SAN_DORIA] =
@@ -83,7 +83,7 @@ quest.sections =
             onEventFinish =
             {
                 [654] = function(player, csid, option, npc)
-                    player:delQuest(xi.quest.log_id.SANDORIA, xi.quest.id.sandoria.A_JOB_FOR_THE_CONSORTIUM)
+                    player:delQuest(xi.questLog.SANDORIA, xi.quest.id.sandoria.A_JOB_FOR_THE_CONSORTIUM)
                 end,
                 [653] = function(player, csid, option, npc)
                     quest:complete(player)
@@ -145,7 +145,7 @@ quest.sections =
                 end,
                 [218] = function(player, csid, option, npc)
                     player:delKeyItem(xi.ki.BRUGAIRE_GOODS)
-                    player:delQuest(xi.quest.log_id.SANDORIA, xi.quest.id.sandoria.A_JOB_FOR_THE_CONSORTIUM)
+                    player:delQuest(xi.questLog.SANDORIA, xi.quest.id.sandoria.A_JOB_FOR_THE_CONSORTIUM)
                 end,
             },
         },
@@ -153,7 +153,7 @@ quest.sections =
 
     {
         check = function(player, status, vars)
-            return status == QUEST_COMPLETED and
+            return status == xi.questStatus.QUEST_COMPLETED and
                 quest:getVar(player, 'Stage') < os.time()
         end,
 
@@ -165,7 +165,7 @@ quest.sections =
             {
                 [651] = function(player, csid, option, npc)
                     if option == 1 then
-                        player:delQuest(xi.quest.log_id.SANDORIA, xi.quest.id.sandoria.A_JOB_FOR_THE_CONSORTIUM)
+                        player:delQuest(xi.questLog.SANDORIA, xi.quest.id.sandoria.A_JOB_FOR_THE_CONSORTIUM)
                         npcUtil.giveKeyItem(player, xi.ki.BRUGAIRE_GOODS)
                         quest:begin(player)
                     end

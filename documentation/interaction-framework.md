@@ -15,7 +15,7 @@ A container/quest/mission is made up of one or more "sections", which are all of
 {
     -- If this "check" function returns true, then this section will be used to determine which action should be taken
     check = function(player, status, questVars, globalVars)
-        return status == QUEST_AVAILABLE
+        return status == xi.questStatus.QUEST_AVAILABLE
     end,
 
     -- Each section is split into the different zones that each NPC/trigger is in
@@ -47,7 +47,7 @@ You can use the `questVars` argument to automatically get quest-related variable
 
 ```lua
 check = function(player, status, questVars, globalVars)
-    return status == QUEST_AVAILABLE and questVars.Prog == 0
+    return status == xi.questStatus.QUEST_AVAILABLE and questVars.Prog == 0
 end,
 ```
 
@@ -195,7 +195,7 @@ Below is a more-exhaustive mock example of how a section can be set up, and it t
 {
     -- If this "check" function returns true, this section will be used to determine which action should be taken
     check = function(player, status, vars)
-        return status == QUEST_AVAILABLE and vars.Prog == 0
+        return status == xi.questStatus.QUEST_AVAILABLE and vars.Prog == 0
     end,
 
     -- Each section is split into the different zones that each NPC/trigger is in

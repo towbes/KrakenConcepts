@@ -11,7 +11,7 @@ require('scripts/globals/interaction/quest')
 local metalworksID = require('scripts/zones/Metalworks/IDs')
 -----------------------------------
 
-local quest = Quest:new(xi.quest.log_id.BASTOK, xi.quest.id.bastok.CHIPS)
+local quest = Quest:new(xi.questLog.BASTOK, xi.quest.id.bastok.CHIPS)
 
 quest.reward =
 {
@@ -22,7 +22,7 @@ quest.sections =
 {
     {
         check = function(player, status, vars)
-            return status == QUEST_AVAILABLE and
+            return status == xi.questStatus.QUEST_AVAILABLE and
             (player:getCurrentMission(xi.mission.log_id.COP) > xi.mission.id.cop.ONE_TO_BE_FEARED or
             (player:getCurrentMission(xi.mission.log_id.COP) == xi.mission.id.cop.ONE_TO_BE_FEARED and
             player:getCharVar('Mission[6][638]Status') >= 1))
@@ -43,7 +43,7 @@ quest.sections =
 
     {
         check = function(player, status, vars)
-            return status == QUEST_ACCEPTED
+            return status == xi.questStatus.QUEST_ACCEPTED
         end,
 
         [xi.zone.METALWORKS] =
@@ -79,7 +79,7 @@ quest.sections =
 
     {
         check = function(player, status, vars)
-            return status == QUEST_COMPLETED
+            return status == xi.questStatus.QUEST_COMPLETED
         end,
 
         [xi.zone.METALWORKS] =

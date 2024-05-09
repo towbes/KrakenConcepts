@@ -10,7 +10,7 @@ require('scripts/globals/quests')
 
 -----------------------------------
 
-local quest = Quest:new(xi.quest.log_id.WINDURST, xi.quest.id.windurst.SCOOPED)
+local quest = Quest:new(xi.questLog.WINDURST, xi.quest.id.windurst.SCOOPED)
 
 quest.reward =
 {
@@ -21,8 +21,8 @@ quest.sections =
 {
     {
         check = function(player, status, vars)
-            return status == QUEST_AVAILABLE and
-                player:hasCompletedQuest(xi.quest.log_id.WINDURST, xi.quest.id.windurst.MAKING_HEADLINES) and
+            return status == xi.questStatus.QUEST_AVAILABLE and
+                player:hasCompletedQuest(xi.questLog.WINDURST, xi.quest.id.windurst.MAKING_HEADLINES) and
                 not player:needToZone()
         end,
 
@@ -41,7 +41,7 @@ quest.sections =
 
     {
         check = function(player, status, vars)
-            return status == QUEST_ACCEPTED
+            return status == xi.questStatus.QUEST_ACCEPTED
         end,
 
         [xi.zone.WINDURST_WATERS] =

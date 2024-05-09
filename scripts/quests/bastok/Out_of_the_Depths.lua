@@ -16,7 +16,7 @@ require('scripts/globals/interaction/quest')
 -----------------------------------
 ID = require('scripts/zones/Bastok_Markets/IDs')
 -----------------------------------
-local quest = Quest:new(xi.quest.log_id.BASTOK, xi.quest.id.bastok.OUT_OF_THE_DEPTHS)
+local quest = Quest:new(xi.questLog.BASTOK, xi.quest.id.bastok.OUT_OF_THE_DEPTHS)
 
 quest.reward =
 {
@@ -28,8 +28,8 @@ quest.sections =
 {
     {
         check = function(player, status, vars)
-            return status == QUEST_AVAILABLE and
-            player:getFameLevel(xi.quest.fame_area.BASTOK) >= 3
+            return status == xi.questStatus.QUEST_AVAILABLE and
+            player:getFameLevel(xi.fameArea.BASTOK) >= 3
         end,
 
         [xi.zone.METALWORKS] =
@@ -49,7 +49,7 @@ quest.sections =
 
     {
         check = function(player, status, vars)
-            return status == QUEST_ACCEPTED
+            return status == xi.questStatus.QUEST_ACCEPTED
         end,
 
         [xi.zone.PORT_BASTOK] =
@@ -208,7 +208,7 @@ quest.sections =
             onEventFinish =
             {
                 [238] = function(player, csid, option, npc)
-                    player:addFame(xi.quest.fame_area.BASTOK, 80)
+                    player:addFame(xi.fameArea.BASTOK, 80)
                     quest:complete(player)
                 end,
             },

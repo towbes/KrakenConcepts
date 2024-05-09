@@ -6,21 +6,15 @@
 -- Ardea      : !pos -198 -6   -69     235
 -- Varun      : !pos 7.8  -3.5 -10.064 241
 -----------------------------------
-
-require('scripts/globals/quests')
-
-
-require('scripts/globals/interaction/quest')
------------------------------------
-local bastokID     = require('scripts/zones/Bastok_Markets/IDs')
+local bastokID = zones[xi.zone.BASTOK_MARKETS]
 -----------------------------------
 
-local quest = Quest:new(xi.quest.log_id.WINDURST, xi.quest.id.windurst.ROCK_RACKETEER)
+local quest = Quest:new(xi.questLog.WINDURST, xi.quest.id.windurst.ROCK_RACKETEER)
 
 quest.reward =
 {
     fame = 40,
-    fameArea = xi.quest.fame_area.WINDURST,
+    fameArea = xi.fameArea.WINDURST,
     -- NOTE: 2100 gil is given out automatically at the end
 }
 
@@ -29,9 +23,9 @@ quest.sections =
     {
         -- QUEST AVAILABLE.  Talk to Nanaa Mihgo, get the KI.
         check = function(player, status, vars)
-            return status == QUEST_AVAILABLE and
-                player:getFameLevel(xi.quest.fame_area.WINDURST) >= 3 and
-                player:hasCompletedQuest(xi.quest.log_id.WINDURST, xi.quest.id.windurst.MIHGO_S_AMIGO) and
+            return status == xi.questStatus.QUEST_AVAILABLE and
+                player:getFameLevel(xi.fameArea.WINDURST) >= 3 and
+                player:hasCompletedQuest(xi.questLog.WINDURST, xi.quest.id.windurst.MIHGO_S_AMIGO) and
                 player:getCurrentMission(xi.mission.log_id.WINDURST) ~= xi.mission.id.windurst.LOST_FOR_WORDS and
                 quest:getMustZone(player) == false
         end,
@@ -57,7 +51,7 @@ quest.sections =
     -- Talk to Ardea in Bastok Markets
     {
         check = function(player, status, vars)
-            return status == QUEST_ACCEPTED and
+            return status == xi.questStatus.QUEST_ACCEPTED and
             player:hasKeyItem(xi.ki.SHARP_GRAY_STONE)
         end,
 
@@ -87,7 +81,7 @@ quest.sections =
 
     {
         check = function(player, status, vars)
-            return status == QUEST_ACCEPTED and
+            return status == xi.questStatus.QUEST_ACCEPTED and
             not player:hasKeyItem(xi.ki.SHARP_GRAY_STONE) and
             quest:getVar(player, 'Prog') < 1
         end,
@@ -113,7 +107,7 @@ quest.sections =
     -- Talk to Varun in Windurst Woods
     {
         check = function(player, status, vars)
-            return status == QUEST_ACCEPTED and
+            return status == xi.questStatus.QUEST_ACCEPTED and
             not player:hasKeyItem(xi.ki.SHARP_GRAY_STONE) and
             quest:getVar(player, 'Prog') == 1
         end,
@@ -135,7 +129,7 @@ quest.sections =
     -- Trade the sharp stone to complete the quest
     {
         check = function(player, status, vars)
-            return status == QUEST_ACCEPTED and
+            return status == xi.questStatus.QUEST_ACCEPTED and
             not player:hasKeyItem(xi.ki.SHARP_GRAY_STONE) and
             quest:getVar(player, 'Prog') == 2
         end,
@@ -212,7 +206,7 @@ quest.sections =
     -- QUEST COMPLETE
     {
         check = function(player, status, vars)
-            return status == QUEST_COMPLETED
+            return status == xi.questStatus.QUEST_COMPLETED
         end,
 
         [xi.zone.WINDURST_WOODS] =

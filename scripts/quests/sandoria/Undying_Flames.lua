@@ -9,12 +9,12 @@ require('scripts/globals/quests')
 
 require('scripts/globals/interaction/quest')
 
-local quest = Quest:new(xi.quest.log_id.SANDORIA, xi.quest.id.sandoria.UNDYING_FLAMES)
+local quest = Quest:new(xi.questLog.SANDORIA, xi.quest.id.sandoria.UNDYING_FLAMES)
 
 quest.reward =
 {
     fame = 30,
-    fameArea = xi.quest.fame_area.SANDORIA,
+    fameArea = xi.fameArea.SANDORIA,
     title    = xi.title.FAITH_LIKE_A_CANDLE,
     item   = xi.item.FRIARS_ROPE,
 
@@ -24,7 +24,7 @@ quest.sections =
 {
     {
         check = function(player, status, vars)
-            return status == QUEST_AVAILABLE
+            return status == xi.questStatus.QUEST_AVAILABLE
         end,
 
         [xi.zone.NORTHERN_SAN_DORIA] =
@@ -49,7 +49,7 @@ quest.sections =
 
     {
         check = function(player, status, vars)
-            return status == QUEST_ACCEPTED
+            return status == xi.questStatus.QUEST_ACCEPTED
         end,
 
         [xi.zone.NORTHERN_SAN_DORIA] =
@@ -80,7 +80,7 @@ quest.sections =
 
     {
         check = function(player, status, vars)
-            return status == QUEST_COMPLETED
+            return status == xi.questStatus.QUEST_COMPLETED
         end,
 
         [xi.zone.NORTHERN_SAN_DORIA] =

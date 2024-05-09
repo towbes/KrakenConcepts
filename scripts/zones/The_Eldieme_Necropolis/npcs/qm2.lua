@@ -20,13 +20,13 @@ entity.onTrigger = function(player, npc)
     local queue = GetServerVariable('[Looking_Glass]Queue')
 
     if
-        player:getQuestStatus(xi.quest.log_id.JEUNO, xi.quest.id.jeuno.GIRL_IN_THE_LOOKING_GLASS) == QUEST_ACCEPTED and
+        player:getQuestStatus(xi.questLog.JEUNO, xi.quest.id.jeuno.GIRL_IN_THE_LOOKING_GLASS) == xi.questStatus.QUEST_ACCEPTED and
         (GetMobByID(ID.mob.NAMORODO):isSpawned() or
         triggerFellow == 1 or queue > os.time())
     then
         player:messageSpecial(ID.text.NOT_TIME_TO_SEARCH)
     elseif
-        player:getQuestStatus(xi.quest.log_id.JEUNO, xi.quest.id.jeuno.GIRL_IN_THE_LOOKING_GLASS) == QUEST_ACCEPTED and
+        player:getQuestStatus(xi.questLog.JEUNO, xi.quest.id.jeuno.GIRL_IN_THE_LOOKING_GLASS) == xi.questStatus.QUEST_ACCEPTED and
         (lookingGlass == 2 or
         lookingGlass == 3)
     then

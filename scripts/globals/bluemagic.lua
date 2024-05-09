@@ -291,6 +291,10 @@ xi.spells.blue.usePhysicalSpell = function(caster, target, spell, params)
 
     caster:delStatusEffectSilent(xi.effect.MANAWELL)
 
+    if finaldmg <= 0 then
+        spell:setMsg(xi.msg.basic.MAGIC_NO_EFFECT)
+    end
+
     return xi.spells.blue.applySpellDamage(caster, target, spell, finaldmg, params, trickAttackTarget)
 end
 

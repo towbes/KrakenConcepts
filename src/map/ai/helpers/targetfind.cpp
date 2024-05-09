@@ -292,11 +292,17 @@ void CTargetFind::addAllInParty(CBattleEntity* PTarget, bool withPet)
     {
         static_cast<CCharEntity*>(PTarget)->ForPartyWithTrusts([this, withPet](CBattleEntity* PMember)
         {
-            addEntity(PMember, withPet);
+            if (!PMember->isInMogHouse())
+            {
+                addEntity(PMember, withPet);
+            }
+
             // if the caster is in the same the party as the aoe target, and has a fellow - include the fellow in the buff
             // this covers AoEs orginated by the caster that target others (curaga, sch accession, divine veil)
             if (PMember == m_PBattleEntity && ((CCharEntity*)m_PBattleEntity)->m_PFellow != nullptr)
+            {
                 addEntity(((CCharEntity*)m_PBattleEntity)->m_PFellow, false);
+            }
         });
     }
     else

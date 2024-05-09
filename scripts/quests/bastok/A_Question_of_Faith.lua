@@ -16,7 +16,7 @@ require('scripts/globals/interaction/quest')
 -----------------------------------
 local ID = require('scripts/zones/Oldton_Movalpolos/IDs')
 -----------------------------------
-local quest = Quest:new(xi.quest.log_id.BASTOK, xi.quest.id.bastok.A_QUESTION_OF_FAITH)
+local quest = Quest:new(xi.questLog.BASTOK, xi.quest.id.bastok.A_QUESTION_OF_FAITH)
 
 quest.reward =
 {
@@ -27,9 +27,9 @@ quest.sections =
 {
     {
         check = function(player, status, vars)
-            return status == QUEST_AVAILABLE and
-            player:getFameLevel(xi.quest.fame_area.BASTOK) >= 4 and
-            player:hasCompletedQuest(xi.quest.log_id.BASTOK, xi.quest.id.bastok.OUT_OF_THE_DEPTHS)
+            return status == xi.questStatus.QUEST_AVAILABLE and
+            player:getFameLevel(xi.fameArea.BASTOK) >= 4 and
+            player:hasCompletedQuest(xi.questLog.BASTOK, xi.quest.id.bastok.OUT_OF_THE_DEPTHS)
         end,
 
         [xi.zone.METALWORKS] =
@@ -48,7 +48,7 @@ quest.sections =
 
     {
         check = function(player, status, vars)
-            return status == QUEST_ACCEPTED
+            return status == xi.questStatus.QUEST_ACCEPTED
         end,
 
         [xi.zone.BASTOK_MINES] =
@@ -73,7 +73,7 @@ quest.sections =
                 end,
 
                 [241] = function(player, csid, option, npc)
-                        player:addFame(xi.quest.fame_area.BASTOK, 50)
+                        player:addFame(xi.fameArea.BASTOK, 50)
                         quest:complete(player)
                 end,
             },

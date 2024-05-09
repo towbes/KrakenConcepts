@@ -111,7 +111,7 @@ local valerianoShop = function(player, npc)
         xi.item.SCROLL_OF_GODDESS_HYMNUS,    90000,
     }
 
-    xi.shop.general(player, stock, xi.quest.fame_area.JEUNO)
+    xi.shop.general(player, stock, xi.fameArea.JEUNO)
 end
 
 local bundleTrade = function(player, npc, trade, tblNPC)

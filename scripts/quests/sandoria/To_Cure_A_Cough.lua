@@ -7,21 +7,13 @@
 -- QM1     : !gotoid 17388011
 -- Signpost: !gotoid 17191510
 -----------------------------------
-require('scripts/globals/npc_util')
 
-
-require('scripts/globals/quests')
-
-
-require('scripts/globals/interaction/quest')
------------------------------------
-
-local quest = Quest:new(xi.quest.log_id.SANDORIA, xi.quest.id.sandoria.TO_CURE_A_COUGH)
+local quest = Quest:new(xi.questLog.SANDORIA, xi.quest.id.sandoria.TO_CURE_A_COUGH)
 
 quest.reward =
 {
     fame     = 30,
-    fameArea = xi.quest.fame_area.SANDORIA,
+    fameArea = xi.fameArea.SANDORIA,
     title    = xi.title.A_MOSS_KIND_PERSON,
 }
 
@@ -29,9 +21,9 @@ quest.sections =
 {
     {
         check = function(player, status, vars)
-            return status == QUEST_AVAILABLE and
-                player:hasCompletedQuest(xi.quest.log_id.SANDORIA, xi.quest.id.sandoria.THE_MEDICINE_WOMAN) and
-                player:getFameLevel(xi.quest.fame_area.SANDORIA) >= 3
+            return status == xi.questStatus.QUEST_AVAILABLE and
+                player:hasCompletedQuest(xi.questLog.SANDORIA, xi.quest.id.sandoria.THE_MEDICINE_WOMAN) and
+                player:getFameLevel(xi.fameArea.SANDORIA) >= 3
         end,
 
         [xi.zone.SOUTHERN_SAN_DORIA] =
@@ -81,7 +73,7 @@ quest.sections =
 
     {
         check = function(player, status, vars)
-            return status == QUEST_ACCEPTED
+            return status == xi.questStatus.QUEST_ACCEPTED
         end,
 
         [xi.zone.DAVOI] =

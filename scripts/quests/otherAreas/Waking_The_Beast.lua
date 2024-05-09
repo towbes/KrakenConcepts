@@ -14,7 +14,7 @@ require('scripts/globals/quests')
 require('scripts/globals/interaction/quest')
 -----------------------------------
 
-local quest = Quest:new(xi.quest.log_id.OTHER_AREAS, xi.quest.id.otherAreas.WAKING_THE_BEAST)
+local quest = Quest:new(xi.questLog.OTHER_AREAS, xi.quest.id.otherAreas.WAKING_THE_BEAST)
 
 quest.reward =
 {
@@ -25,7 +25,7 @@ quest.sections =
 {
     {
         check = function(player, status, vars)
-            return status == QUEST_AVAILABLE and
+            return status == xi.questStatus.QUEST_AVAILABLE and
             player:hasSpell(xi.magic.spell.IFRIT) and
             player:hasSpell(xi.magic.spell.GARUDA) and
             player:hasSpell(xi.magic.spell.SHIVA) and
@@ -50,7 +50,7 @@ quest.sections =
 
     {
         check = function(player, status, vars)
-            return status == QUEST_ACCEPTED and
+            return status == xi.questStatus.QUEST_ACCEPTED and
             player:hasKeyItem(xi.ki.FADED_RUBY)
         end,
 
@@ -78,7 +78,7 @@ quest.sections =
 
     {
         check = function(player, status, vars)
-            return status == QUEST_COMPLETED and
+            return status == xi.questStatus.QUEST_COMPLETED and
             quest:getVar(player, 'Option') < NextConquestTally()
         end,
 

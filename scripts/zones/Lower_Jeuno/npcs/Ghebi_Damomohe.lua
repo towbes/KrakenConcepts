@@ -22,7 +22,7 @@ entity.onTrade = function(player, npc, trade)
 
     elseif
         trade:getItemQty(xi.item.TENSHODO_INVITE) > 0 and
-        player:getQuestStatus(xi.quest.log_id.JEUNO, xi.quest.id.jeuno.TENSHODO_MEMBERSHIP) ~= QUEST_COMPLETED
+        player:getQuestStatus(xi.questLog.JEUNO, xi.quest.id.jeuno.TENSHODO_MEMBERSHIP) ~= xi.questStatus.QUEST_COMPLETED
     then
         if player:getFreeSlotsCount() > 0 then
             if npcUtil.tradeHas(trade, xi.item.TENSHODO_INVITE) then
@@ -67,10 +67,10 @@ entity.onEventFinish = function(player, csid, option, npc)
             4467,    3, -- Garlic Cracker
         }
 
-        xi.shop.general(player, stock, xi.quest.fame_area.NORG)
+        xi.shop.general(player, stock, xi.fameArea.NORG)
 
-    elseif csid == 108 then
-        player:completeQuest(xi.quest.log_id.JEUNO, xi.quest.id.jeuno.TENSHODO_MEMBERSHIP)
+    elseif csid == 108 then -- Umeboshi TODO: "Is this needed? Check in quest's lua later to confirm."
+        player:completeQuest(xi.questLog.JEUNO, xi.quest.id.jeuno.TENSHODO_MEMBERSHIP)
         npcUtil.giveKeyItem(player, xi.ki.TENSHODO_MEMBERS_CARD)
         player:setTitle(xi.title.TENSHODO_MEMBER)
 

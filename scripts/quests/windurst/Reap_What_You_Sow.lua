@@ -4,21 +4,17 @@
 -- !addquest 2 29
 -- Mashuu-Ajuu 130 -5 167
 -----------------------------------
-
-require('scripts/globals/quests')
-require('scripts/globals/interaction/quest')
------------------------------------
-local ID = require('scripts/zones/Windurst_Waters/IDs')
+local ID = zones[xi.zone.WINDURST_WATERS]
 -----------------------------------
 
-local quest = Quest:new(xi.quest.log_id.WINDURST, xi.quest.id.windurst.REAP_WHAT_YOU_SOW)
+local quest = Quest:new(xi.questLog.WINDURST, xi.quest.id.windurst.REAP_WHAT_YOU_SOW)
 
 quest.reward =
 {
     item = xi.item.STATIONERY_SET,
     gil = 700,
     fame = 75,
-    fameArea = xi.quest.fame_area.WINDURST,
+    fameArea = xi.fameArea.WINDURST,
 }
 
 quest.sections =
@@ -27,9 +23,9 @@ quest.sections =
         -- Players can only start the quest if they are below rank 4 fame
         -- else they must complete let sleeping dogs lie
         check = function(player, status, vars)
-            return status == QUEST_AVAILABLE and
-            (player:getFameLevel(xi.quest.fame_area.WINDURST) < 4 or
-            player:hasCompletedQuest(xi.quest.log_id.WINDURST, xi.quest.id.windurst.LET_SLEEPING_DOGS_LIE))
+            return status == xi.questStatus.QUEST_AVAILABLE and
+            (player:getFameLevel(xi.fameArea.WINDURST) < 4 or
+            player:hasCompletedQuest(xi.questLog.WINDURST, xi.quest.id.windurst.LET_SLEEPING_DOGS_LIE))
         end,
 
         [xi.zone.WINDURST_WATERS] =
@@ -37,7 +33,7 @@ quest.sections =
             ['Mashuu-Ajuu'] =
             {
                 onTrigger = function(player, npc)
-                    if player:getFameLevel(xi.quest.fame_area.WINDURST) >= 4 then
+                    if player:getFameLevel(xi.fameArea.WINDURST) >= 4 then
                         return quest:progressEvent(483)
                     else
                         return quest:progressEvent(463, 0, xi.item.SOBBING_FUNGUS, xi.item.BAG_OF_HERB_SEEDS)
@@ -58,7 +54,7 @@ quest.sections =
 
     {
         check = function(player, status, vars)
-            return status == QUEST_ACCEPTED
+            return status == xi.questStatus.QUEST_ACCEPTED
         end,
 
         [xi.zone.WINDURST_WATERS] =

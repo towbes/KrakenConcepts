@@ -649,7 +649,7 @@ void CZoneEntities::SpawnMOBs(CCharEntity* PChar)
             }
 
             // Check to skip aggro routine
-            if (PChar->isDead() || PChar->nameflags.flags & FLAG_GM || PCurrentMob->PMaster)
+            if (PChar->isDead() || PChar->visibleGmLevel >= 3 || PCurrentMob->PMaster)
             {
                 continue;
             }

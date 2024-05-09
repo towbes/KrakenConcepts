@@ -3,16 +3,8 @@
 -- Taillegeas - !pos 31 1.996 57.971
 -- Log ID [3] - Quest ID [68]
 -----------------------------------
-
-
-require('scripts/globals/npc_util')
-require('scripts/globals/quests')
-
-require('scripts/globals/utils')
-
-require('scripts/globals/interaction/quest')
+local quest = Quest:new(xi.questLog.JEUNO, xi.quest.id.jeuno.DUCAL_HOSPITALITY)
 -----------------------------------
-local quest = Quest:new(xi.quest.log_id.JEUNO, xi.quest.id.jeuno.DUCAL_HOSPITALITY)
 
 local questItemSets =
 {
@@ -80,7 +72,7 @@ local questItemSets =
 quest.reward =
 {
     fame = 50,
-    fameArea = xi.quest.fame_area.JEUNO,
+    fameArea = xi.fameArea.JEUNO,
     gil = 4000,
     title = xi.title.DUCAL_DUPE,
 }
@@ -90,26 +82,26 @@ quest.sections =
     -- Quest: AVAILABLE
     {
         check = function(player, status, vars)
-            return status == QUEST_AVAILABLE and
+            return status == xi.questStatus.QUEST_AVAILABLE and
                 player:hasCompletedMission(xi.mission.log_id.COP, xi.mission.id.cop.A_VESSEL_WITHOUT_A_CAPTAIN) and
-                player:getFameLevel(xi.quest.fame_area.JEUNO) >= 4
+                player:getFameLevel(xi.fameArea.JEUNO) >= 4
         end,
 
         [xi.zone.RULUDE_GARDENS] =
         {
             ['Taillegeas'] =
             {
-                onTrigger = function (player, npc)
+                onTrigger = function(player, npc)
                     local questItemSet = math.random(#questItemSets)
                     quest:setVar(player, 'ItemSet', questItemSet)
                     return quest:progressEvent(10057, { [0] = utils.ternary(player:hasCompletedMission(xi.mission.log_id.COP, xi.mission.id.cop.THE_WARRIORS_PATH), 1, 0),
-                                                        [1] = questItemSets[questItemSet].items[1],
-                                                        [2] = questItemSets[questItemSet].items[2],
-                                                        [3] = questItemSets[questItemSet].items[3],
-                                                        [4] = questItemSets[questItemSet].items[4] or 0,
-                                                        [5] = questItemSets[questItemSet].items[5] or 0,
-                                                        [6] = questItemSets[questItemSet].textOption,
-                                                        })
+                        [1] = questItemSets[questItemSet].items[1],
+                        [2] = questItemSets[questItemSet].items[2],
+                        [3] = questItemSets[questItemSet].items[3],
+                        [4] = questItemSets[questItemSet].items[4] or 0,
+                        [5] = questItemSets[questItemSet].items[5] or 0,
+                        [6] = questItemSets[questItemSet].textOption,
+                    })
                 end,
             },
 
@@ -129,34 +121,34 @@ quest.sections =
     -- Quest: ACCEPTED
     {
         check = function(player, status, vars)
-            return status == QUEST_ACCEPTED
+            return status == xi.questStatus.QUEST_ACCEPTED
         end,
 
         [xi.zone.RULUDE_GARDENS] =
         {
             ['Taillegeas'] =
             {
-                onTrigger = function (player, npc)
+                onTrigger = function(player, npc)
                     local questItemSet = quest:getVar(player, 'ItemSet')
                     return quest:progressEvent(10059, { [0] = utils.ternary(player:hasCompletedMission(xi.mission.log_id.COP, xi.mission.id.cop.THE_WARRIORS_PATH), 1, 0),
-                                                        [1] = questItemSets[questItemSet].items[1],
-                                                        [2] = questItemSets[questItemSet].items[2],
-                                                        [3] = questItemSets[questItemSet].items[3],
-                                                        [4] = questItemSets[questItemSet].items[4] or 0,
-                                                        [5] = questItemSets[questItemSet].items[5] or 0,
-                                                        [6] = questItemSets[questItemSet].textOption,
-                                                        })
+                        [1] = questItemSets[questItemSet].items[1],
+                        [2] = questItemSets[questItemSet].items[2],
+                        [3] = questItemSets[questItemSet].items[3],
+                        [4] = questItemSets[questItemSet].items[4] or 0,
+                        [5] = questItemSets[questItemSet].items[5] or 0,
+                        [6] = questItemSets[questItemSet].textOption,
+                    })
                 end,
 
-                onTrade = function (player, npc, trade)
+                onTrade = function(player, npc, trade)
                     local questItemSet = quest:getVar(player, 'ItemSet')
                     if
                         questItemSet > 0 and
                         npcUtil.tradeHasExactly(trade, questItemSets[questItemSet].items)
                     then
                         return quest:progressEvent(10058, { [0] = utils.ternary(player:hasCompletedMission(xi.mission.log_id.COP, xi.mission.id.cop.THE_WARRIORS_PATH), 1, 0),
-                                                            [6] = questItemSet - 1,
-                                                            })
+                            [6] = questItemSet - 1,
+                        })
                     end
                 end,
             },
@@ -178,26 +170,26 @@ quest.sections =
     -- Allows for repeats of the quest
     {
         check = function(player, status, vars)
-            return status == QUEST_COMPLETED
+            return status == xi.questStatus.QUEST_COMPLETED
         end,
 
         [xi.zone.RULUDE_GARDENS] =
         {
             ['Taillegeas'] =
             {
-                onTrigger = function (player, npc)
+                onTrigger = function(player, npc)
                     local questItemSet = quest:getVar(player, 'ItemSet')
 
                     if questItemSet > 0 then
                         -- Quest has been re-started and an item-set was assigned to the player
                         return quest:progressEvent(10059, { [0] = utils.ternary(player:hasCompletedMission(xi.mission.log_id.COP, xi.mission.id.cop.THE_WARRIORS_PATH), 1, 0),
-                                                            [1] = questItemSets[questItemSet].items[1],
-                                                            [2] = questItemSets[questItemSet].items[2],
-                                                            [3] = questItemSets[questItemSet].items[3],
-                                                            [4] = questItemSets[questItemSet].items[4] or 0,
-                                                            [5] = questItemSets[questItemSet].items[5] or 0,
-                                                            [6] = questItemSets[questItemSet].textOption,
-                                                            })
+                            [1] = questItemSets[questItemSet].items[1],
+                            [2] = questItemSets[questItemSet].items[2],
+                            [3] = questItemSets[questItemSet].items[3],
+                            [4] = questItemSets[questItemSet].items[4] or 0,
+                            [5] = questItemSets[questItemSet].items[5] or 0,
+                            [6] = questItemSets[questItemSet].textOption,
+                        })
                     elseif quest:getMustZone(player) then
                         -- Player just completed the quest, needs to zone before re-starting
                         return quest:progressEvent(10060, { [0] = utils.ternary(player:hasCompletedMission(xi.mission.log_id.COP, xi.mission.id.cop.THE_WARRIORS_PATH), 1, 0) })
@@ -206,25 +198,25 @@ quest.sections =
                         questItemSet = math.random(#questItemSets)
                         quest:setVar(player, 'ItemSet', questItemSet)
                         return quest:progressEvent(10057, { [0] = utils.ternary(player:hasCompletedMission(xi.mission.log_id.COP, xi.mission.id.cop.THE_WARRIORS_PATH), 1, 0),
-                                                            [1] = questItemSets[questItemSet].items[1],
-                                                            [2] = questItemSets[questItemSet].items[2],
-                                                            [3] = questItemSets[questItemSet].items[3],
-                                                            [4] = questItemSets[questItemSet].items[4] or 0,
-                                                            [5] = questItemSets[questItemSet].items[5] or 0,
-                                                            [6] = questItemSets[questItemSet].textOption,
-                                                            })
+                            [1] = questItemSets[questItemSet].items[1],
+                            [2] = questItemSets[questItemSet].items[2],
+                            [3] = questItemSets[questItemSet].items[3],
+                            [4] = questItemSets[questItemSet].items[4] or 0,
+                            [5] = questItemSets[questItemSet].items[5] or 0,
+                            [6] = questItemSets[questItemSet].textOption,
+                        })
                     end
                 end,
 
-                onTrade = function (player, npc, trade)
+                onTrade = function(player, npc, trade)
                     local questItemSet = quest:getVar(player, 'ItemSet')
                     if
                         questItemSet > 0 and
                         npcUtil.tradeHasExactly(trade, questItemSets[questItemSet].items)
                     then
                         return quest:progressEvent(10058, { [0] = utils.ternary(player:hasCompletedMission(xi.mission.log_id.COP, xi.mission.id.cop.THE_WARRIORS_PATH), 1, 0),
-                                                            [6] = questItemSet - 1,
-                                                            })
+                            [6] = questItemSet - 1,
+                        })
                     end
                 end,
             },
@@ -238,11 +230,13 @@ quest.sections =
                 end,
 
                 [10058] = function(player, csid, option, npc)
-                    player:confirmTrade()
-                    quest:setMustZone(player)
-                    quest:setVar(player, 'ItemSet', 0)
-                    npcUtil.giveCurrency(player, 'gil', 4000)
-                    player:addFame(xi.quest.fame_area.JEUNO, 50)
+                    if not quest:getMustZone(player) then -- if we don't check this we get double reward immediately after first completion
+                        player:confirmTrade()
+                        quest:setMustZone(player)
+                        quest:setVar(player, 'ItemSet', 0)
+                        npcUtil.giveCurrency(player, 'gil', 4000)
+                        player:addFame(xi.fameArea.JEUNO, 50)
+                    end
                 end,
             },
         },

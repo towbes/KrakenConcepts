@@ -13,13 +13,13 @@ entity.onTrade = function(player, npc, trade)
 end
 
 entity.onTrigger = function(player, npc)
-    local unlistedQualities = player:getQuestStatus(xi.quest.log_id.JEUNO, xi.quest.id.jeuno.UNLISTED_QUALITIES)
+    local unlistedQualities = player:getQuestStatus(xi.questLog.JEUNO, xi.quest.id.jeuno.UNLISTED_QUALITIES)
     local unlistedQualitiesProgress = player:getCharVar('[Quest]Unlisted_Qualities')
-    local lookingGlass = player:getQuestStatus(xi.quest.log_id.JEUNO, xi.quest.id.jeuno.GIRL_IN_THE_LOOKING_GLASS)
+    local lookingGlass = player:getQuestStatus(xi.questLog.JEUNO, xi.quest.id.jeuno.GIRL_IN_THE_LOOKING_GLASS)
     local lookingGlassProgress = player:getCharVar('[Quest]Looking_Glass')
     local fellowParam = 0
     if
-        unlistedQualities >= QUEST_ACCEPTED and
+        unlistedQualities >= xi.questStatus.QUEST_ACCEPTED and
         (unlistedQualitiesProgress >= 7 or
         unlistedQualitiesProgress == 0)
     then
@@ -27,17 +27,17 @@ entity.onTrigger = function(player, npc)
     end
 
     if
-        unlistedQualities == QUEST_ACCEPTED and
+        unlistedQualities == xi.questStatus.QUEST_ACCEPTED and
         unlistedQualitiesProgress < 7
     then
         player:startEvent(10037)
     elseif
-        unlistedQualities == QUEST_ACCEPTED and
+        unlistedQualities == xi.questStatus.QUEST_ACCEPTED and
         unlistedQualitiesProgress == 7
     then
         player:startEvent(10171, 0, 0, 0, 0, 0, 0, 0, fellowParam)
     elseif
-        lookingGlass == QUEST_ACCEPTED and
+        lookingGlass == xi.questStatus.QUEST_ACCEPTED and
         lookingGlassProgress == 1
     then
         player:startEvent(10040, 244, 0, 0, 0, 0, 0, 0, fellowParam)

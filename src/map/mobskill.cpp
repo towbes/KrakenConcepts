@@ -173,67 +173,6 @@ uint16 CMobSkill::getAnimationID() const
     return m_AnimID;
 }
 
-uint16 CMobSkill::getPetAnimationID() const
-{
-    // shiva
-    if (m_AnimID >= 578 && m_AnimID <= 586)
-    {
-        return m_AnimID - 482;
-    }
-
-    // rumah
-    if (m_AnimID >= 591 && m_AnimID <= 599)
-    {
-        return m_AnimID - 479;
-    }
-
-    // wyvern
-    if (m_AnimID >= 621 && m_AnimID <= 632)
-    {
-        return m_AnimID - 493;
-    }
-
-        // Diabolos pet animation range 141 to 149.
-    // Pet animations 142, 145, 148, 149 are directly referenced in sql
-    if (m_AnimID == 915) // Diabolos Camisado
-    {
-        return 141;
-    }
-    if (m_AnimID == 916) // Diabolos Noctoshield
-    {
-        return 143;
-    }
-    if (m_AnimID == 917) // Diabolos Ultimate Terror
-    {
-        return 144;
-    }
-    if (m_AnimID == 918) // Diabolos Nightmare
-    {
-        return 146;
-    }
-    //  return 147; pet animationID 147 is an unused Diabolos aoe move encircling him in red rings/script
-
-    if (m_AnimID == 1125) // Diabolos Ruinous Omen
-    {
-        return 149;
-    }
-    if (m_AnimID == 1126) // Diabolos Somnolence
-    {
-        return 142;
-    }
-    if (m_AnimID == 1127) // Diabolos Dream Shroud
-    {
-        return 145;
-    }
-    if (m_AnimID == 1129) // Diabolos Nether Blast
-    {
-        return 148;
-    }
-
-
-    return m_AnimID;
-}
-
 int16 CMobSkill::getTP() const
 {
     return m_TP;

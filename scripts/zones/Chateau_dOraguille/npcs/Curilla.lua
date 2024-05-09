@@ -14,12 +14,12 @@ local sandyQuests = xi.quest.id.sandoria
 local trustMemory = function(player)
     local memories = 0
     -- 2 - PEACE_FOR_THE_SPIRIT
-    if player:hasCompletedQuest(xi.quest.log_id.SANDORIA, xi.quest.id.sandoria.PEACE_FOR_THE_SPIRIT) then
+    if player:hasCompletedQuest(xi.questLog.SANDORIA, xi.quest.id.sandoria.PEACE_FOR_THE_SPIRIT) then
         memories = memories + 2
     end
 
     -- 4 - OLD_WOUNDS
-    if player:hasCompletedQuest(xi.quest.log_id.SANDORIA, xi.quest.id.sandoria.OLD_WOUNDS) then
+    if player:hasCompletedQuest(xi.questLog.SANDORIA, xi.quest.id.sandoria.OLD_WOUNDS) then
         memories = memories + 4
     end
 
@@ -33,7 +33,7 @@ local trustMemory = function(player)
     --  memories = memories + 16
     -- end
     -- 32 - FIT_FOR_A_PRINCE
-    if player:hasCompletedQuest(xi.quest.log_id.SANDORIA, xi.quest.id.sandoria.FIT_FOR_A_PRINCE) then
+    if player:hasCompletedQuest(xi.questLog.SANDORIA, xi.quest.id.sandoria.FIT_FOR_A_PRINCE) then
         memories = memories + 32
     end
 
@@ -57,7 +57,7 @@ entity.onTrigger = function(player, npc)
 
     -- 'Lure of the Wildcat'
     elseif
-        player:getQuestStatus(xi.quest.log_id.SANDORIA, sandyQuests.LURE_OF_THE_WILDCAT) == QUEST_ACCEPTED and
+        player:getQuestStatus(xi.questLog.SANDORIA, sandyQuests.LURE_OF_THE_WILDCAT) == xi.questStatus.QUEST_ACCEPTED and
         not utils.mask.getBit(player:getCharVar('WildcatSandy'), 15)
     then
         player:startEvent(562)

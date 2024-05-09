@@ -47,7 +47,7 @@ end
 battlefield_object.onEventFinish = function(player, csid, option)
     if csid == 32001 then
         player:addTitle(xi.title.DISCIPLE_OF_JUSTICE)
-        player:completeQuest(xi.quest.log_id.OTHER_AREAS, xi.quest.id.otherAreas.REQUIEM_OF_SIN)
+        player:completeQuest(xi.questLog.OTHER_AREAS, xi.quest.id.otherAreas.REQUIEM_OF_SIN)
     elseif csid == 32002 then
         -- Allow player to get new key item
         player:setCharVar('CONQUEST_REQUIEM_OF_SIN', 0)

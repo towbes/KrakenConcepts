@@ -7,12 +7,12 @@
 local tremorsID = zones[xi.zone.CLOISTER_OF_TREMORS]
 -----------------------------------
 
-local quest = Quest:new(xi.quest.log_id.BASTOK, xi.quest.id.bastok.TRIAL_SIZE_TRIAL_BY_EARTH)
+local quest = Quest:new(xi.questLog.BASTOK, xi.quest.id.bastok.TRIAL_SIZE_TRIAL_BY_EARTH)
 
 quest.reward =
 {
     fame     = 30,
-    fameArea = xi.quest.fame_area.BASTOK,
+    fameArea = xi.fameArea.BASTOK,
     item     = xi.item.SCROLL_OF_INSTANT_WARP,
 }
 
@@ -20,12 +20,12 @@ quest.sections =
 {
     {
         check = function(player, status, vars)
-            return status == QUEST_AVAILABLE and
-            ((player:getMainLvl() >= 20 and
-            player:getMainJob() == xi.job.SMN) or
-            (player:getSubLvl() >= 20 and
-            player:getSubJob() == xi.job.SMN)) and
-            player:getFameLevel(xi.quest.fame_area.BASTOK) >= 2
+            return status == xi.questStatus.QUEST_AVAILABLE and
+                ((player:getMainLvl() >= 20 and
+                player:getMainJob() == xi.job.SMN) or
+                (player:getSubLvl() >= 20 and
+                player:getSubJob() == xi.job.SMN)) and
+                player:getFameLevel(xi.fameArea.BASTOK) >= 2
         end,
 
         [xi.zone.PORT_BASTOK] =
@@ -51,7 +51,7 @@ quest.sections =
 
     {
         check = function(player, status, vars)
-            return status == QUEST_ACCEPTED
+            return status == xi.questStatus.QUEST_ACCEPTED
         end,
 
         [xi.zone.PORT_BASTOK] =
@@ -113,7 +113,7 @@ quest.sections =
 
     {
         check = function(player, status, vars)
-            return status == QUEST_COMPLETED
+            return status == xi.questStatus.QUEST_COMPLETED
         end,
 
         [xi.zone.PORT_BASTOK] =

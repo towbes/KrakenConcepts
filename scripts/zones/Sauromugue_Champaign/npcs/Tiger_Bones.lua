@@ -12,14 +12,15 @@ entity.onTrade = function(player, npc, trade)
 end
 
 entity.onTrigger = function(player, npc)
-    local fangedOne = player:getQuestStatus(xi.quest.log_id.WINDURST, xi.quest.id.windurst.THE_FANGED_ONE)
+    local fangedOne = player:getQuestStatus(xi.questLog.WINDURST, xi.quest.id.windurst.THE_FANGED_ONE)
     local fangedOneCS = player:getCharVar('TheFangedOneCS')
     local timer = player:getCharVar('TheFangedOneTimer')
 
     -- THE FANGED ONE
     local tiger = GetMobByID(ID.mob.OLD_SABERTOOTH)
-    if 
-    fangedOne == QUEST_ACCEPTED and fangedOneCS == 1 and
+    if
+        fangedOne == xi.questStatus.QUEST_ACCEPTED and
+        fangedOneCS == 1 and
         not tiger:isSpawned() and
         os.time() > timer
     then
@@ -27,7 +28,7 @@ entity.onTrigger = function(player, npc)
         tiger:addStatusEffect(xi.effect.POISON, 10, 10, 500)
         player:messageSpecial(ID.text.OLD_SABERTOOTH_DIALOG_I)
     elseif
-        fangedOne == QUEST_ACCEPTED and
+        fangedOne == xi.questStatus.QUEST_ACCEPTED and
         fangedOneCS == 2 and
         not player:hasKeyItem(xi.ki.OLD_TIGERS_FANG)
     then

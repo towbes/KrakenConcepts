@@ -15,7 +15,7 @@ require('scripts/globals/interaction/quest')
 -----------------------------------
 local ID = require('scripts/zones/Beadeaux/IDs')
 -----------------------------------
-local quest = Quest:new(xi.quest.log_id.OTHER_AREAS, xi.quest.id.otherAreas.FOR_THE_BIRDS)
+local quest = Quest:new(xi.questLog.OTHER_AREAS, xi.quest.id.otherAreas.FOR_THE_BIRDS)
 
 quest.reward =
 {
@@ -26,8 +26,8 @@ quest.sections =
 {
     {
         check = function(player, status, vars)
-            return status == QUEST_AVAILABLE and
-            player:hasCompletedQuest(xi.quest.log_id.OTHER_AREAS, xi.quest.id.otherAreas.MISSIONARY_MOBLIN) and
+            return status == xi.questStatus.QUEST_AVAILABLE and
+            player:hasCompletedQuest(xi.questLog.OTHER_AREAS, xi.quest.id.otherAreas.MISSIONARY_MOBLIN) and
             not quest:getMustZone(player)
         end,
 
@@ -47,7 +47,7 @@ quest.sections =
     },
     {
         check = function(player, status, vars)
-            return status == QUEST_ACCEPTED
+            return status == xi.questStatus.QUEST_ACCEPTED
         end,
 
         [xi.zone.OLDTON_MOVALPOLOS] =
@@ -79,7 +79,7 @@ quest.sections =
                 [18] = function(player, csid, option, npc)
                     if quest:complete(player) then
                         player:delKeyItem(xi.ki.GLITTERING_FRAGMENT)
-                        xi.quest.setMustZone(player, xi.quest.log_id.OTHER_AREAS, xi.quest.id.otherAreas.BETTER_THE_DEMON_YOU_KNOW)
+                        xi.quest.setMustZone(player, xi.questLog.OTHER_AREAS, xi.quest.id.otherAreas.BETTER_THE_DEMON_YOU_KNOW)
                     end
                 end,
             },

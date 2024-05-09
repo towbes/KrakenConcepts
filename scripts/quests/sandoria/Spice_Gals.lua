@@ -5,20 +5,20 @@
 local ID = zones[xi.zone.RIVERNE_SITE_A01]
 -----------------------------------
 
-local quest = Quest:new(xi.quest.log_id.SANDORIA, xi.quest.id.sandoria.SPICE_GALS)
+local quest = Quest:new(xi.questLog.SANDORIA, xi.quest.id.sandoria.SPICE_GALS)
 
 quest.reward =
 {
     item = xi.item.MIRATETES_MEMOIRS,
     fame = 40,
-    fameArea = xi.quest.fame_area.SANDORIA,
+    fameArea = xi.fameArea.SANDORIA,
 }
 
 quest.sections =
 {
     {
         check = function(player, status, vars)
-            return status == QUEST_AVAILABLE and
+            return status == xi.questStatus.QUEST_AVAILABLE and
             player:getCurrentMission(xi.mission.log_id.COP) >= xi.mission.id.cop.ANCIENT_VOWS
         end,
 
@@ -37,7 +37,7 @@ quest.sections =
 
     {
         check = function(player, status, vars)
-            return status == QUEST_ACCEPTED
+            return status == xi.questStatus.QUEST_ACCEPTED
         end,
 
         [xi.zone.SOUTHERN_SAN_DORIA] =
@@ -93,7 +93,7 @@ quest.sections =
 
     {
         check = function(player, status, vars)
-            return status == QUEST_COMPLETED and
+            return status == xi.questStatus.QUEST_COMPLETED and
                 quest:getVar(player, 'Option') < NextConquestTally()
         end,
 

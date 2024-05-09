@@ -1,30 +1,23 @@
 -----------------------------------
 -- Area: Uleguerand Range
---   NM: Mountain Worm
+--  Mob: Mountain Worm NM
+--  https://www.bg-wiki.com/ffxi/Mountain_Worm_(NM)
+-- TODO allow deaggro (core CMobEntity::CanDeaggro() forces NM and Battlefield mobs to never stop chasing)
 -----------------------------------
 require('scripts/globals/hunts')
 
 -----------------------------------
 local entity = {}
 
-entity.onMobInitialize = function(mob)
-    mob:addMod(xi.mod.REGEN, 50)
+entity.onMobSpawn = function(mob)
+    mob:setMod(xi.mod.REGEN, mob:getMaxHP() / 100)
 end
 
-entity.onMobEngage = function(mob, target)
-    mob:setLocalVar('disengage', 0)
+entity.onMobFight = function(mob, target)
+    -- TODO should only cast if out of melee range, but this PR should resolve that https://github.com/LandSandBoat/server/pull/5313
 end
 
-entity.onMobDisengage = function(mob)
-    -- According to wiki, Mountain Worm will despawn shortly
-    --  after disengaging. 10 seconds is being assumed and
-    --  needs further information
-    mob:setLocalVar('disengage', 1)
-    mob:timer(10000, function(mobArg)
-        if mob:getLocalVar('disengage') == 1 then
-            DespawnMob(mobArg:getID())
-        end
-    end)
+entity.onMobDeath = function(mob, player, optParams)
 end
 
 entity.onMobDewpawn = function(mob)
