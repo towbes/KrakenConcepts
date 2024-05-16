@@ -25,7 +25,7 @@ UPDATE npc_list SET status = 2 WHERE npcid = "16806387" AND polutils_name = "Hom
 UPDATE npc_list SET status = 2 WHERE npcid = "16990618" AND polutils_name = "Home Point #1";
 
 -- Caedarva Mire
-UPDATE npc_list SET status = 2 WHERE npcid = "17101362" AND polutils_name = "Home Point #1";
+UPDATE npc_list SET status = 2 WHERE npcid = "17101398" AND polutils_name = "Home Point #1";
 
 -- Cape Teriggan
 UPDATE npc_list SET status = 2 WHERE npcid = "17240529" AND polutils_name = "Home Point #1";

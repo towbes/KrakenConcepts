@@ -169,7 +169,8 @@ end
 
 -- Functions called by homepoint scripts.
 xi.homepoint.onTrigger = function(player, csid, index)
-    if xi.settings.main.HOMEPOINT_TELEPORT ~= 1 then -- Settings.lua Homepoints disabled
+    local playerzone = player:getZone()
+    if xi.settings.main.HOMEPOINT_TELEPORT ~= 1 or playerzone:getTypeMask() ~= xi.zoneType.CITY then -- Settings.lua Homepoints disabled
         player:startEvent(csid, 0, 0, 0, 0, 0, player:getGil(), 4095, index)
         return
     end
@@ -178,6 +179,7 @@ xi.homepoint.onTrigger = function(player, csid, index)
     local hpSet  = math.floor(index / 32)
     local menu   = player:getTeleportMenu(xi.teleport.type.HOMEPOINT)
     local params = bit.bor(index, bit.lshift(menu[10] < 1 and 0 or 1, 18)) -- Include menu layout
+
 
     if not player:hasTeleport(xi.teleport.type.HOMEPOINT, hpBit, hpSet) then
         player:addTeleport(xi.teleport.type.HOMEPOINT, hpBit, hpSet)
