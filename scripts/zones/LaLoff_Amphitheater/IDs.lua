@@ -18,13 +18,27 @@ zones[xi.zone.LALOFF_AMPHITHEATER] =
         CONQUEST_BASE                 = 7060, -- Tallying conquest results...
         PARTY_MEMBERS_HAVE_FALLEN     = 7569, -- All party members have fallen in battle. Now leaving the battlefield.
         THE_PARTY_WILL_BE_REMOVED     = 7576, -- If all party members' HP are still zero after # minute[/s], the party will be removed from the battlefield.
+
+        -- TODO Shift IDs
+        TIME_IN_THE_BATTLEFIELD_IS_UP = 7224, -- Your time in the battlefield is up! Now exiting...
+        MEMBERS_OF_YOUR_PARTY         = 7530, -- Currently, # members of your party (including yourself) have clearance to enter the battlefield.
+        MEMBERS_OF_YOUR_ALLIANCE      = 7531, -- Currently, # members of your alliance (including yourself) have clearance to enter the battlefield.
+        TIME_LIMIT_FOR_THIS_BATTLE_IS = 7533, -- The time limit for this battle is <number> minutes.
+        LARGE_CRACK_RUNNING_DOWN      = 7589, -- The <item> has a large crack running straight down the side.
+        NO_RESPONSE_CANNOT_ESCAPE     = 7592, -- There is no response. You cannot escape!
+        ENTERING_THE_BATTLEFIELD_FOR  = 7596, -- Entering the battlefield for [Ark Angels (1)/Ark Angels (2)/Ark Angels (3)/Ark Angels (4)/Ark Angels (5)/Divine Might/Ark Angels (1)/Ark Angels (2)/Ark Angels (3)/Ark Angels (4)/Ark Angels (5)/Divine Might]!
+        THE_SEAL_FADES                = 7607, -- The seal on the <item> flares brightly for an instant, then fades away!
     },
     mob =
     {
+        ARK_ANGEL_EV = GetFirstID('Ark_Angel_EV'),
+        ARK_ANGEL_GK = GetFirstID('Ark_Angel_GK'),
+        ARK_ANGEL_HM = GetFirstID('Ark_Angel_HM'),
+        ARK_ANGEL_MR = GetFirstID('Ark_Angel_MR'),
+        ARK_ANGEL_TT = GetFirstID('Ark_Angel_TT'),
     },
     npc =
     {
-        ENTRANCE_OFFSET = 17514791, -- used by scripts/globals/bcnm.lua
     },
 }
 

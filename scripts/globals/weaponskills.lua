@@ -318,7 +318,7 @@ local function cRangedRatio(attacker, defender, params, ignoredDef, tp)
     return pdif, pdifcrit
 end
 
-local function getRangedHitRate(attacker, target, capHitRate, bonus)
+local function getRangedHitRate(attacker, target, bonus)
     local acc = attacker:getRACC()
     local eva = target:getEVA() + target:getMod(xi.mod.SPECIAL_ATTACK_EVASION)
 
@@ -350,11 +350,7 @@ local function getRangedHitRate(attacker, target, capHitRate, bonus)
     local hitrate = (75 + hitdiff) / 100
 
     -- Applying hitrate caps
-    if capHitRate then -- this isn't capped for when acc varies with tp, as more penalties are due
-        hitrate = math.min(capHitRate, 0.95)
-    end
-
-    hitrate = math.max(hitrate, 0.2)
+    hitrate = utils.clamp(hitrate, 0.2, 0.95)
 
     return hitrate
 end
@@ -389,7 +385,8 @@ local function getSingleHitDamage(attacker, target, dmg, ftp, wsParams, calcPara
                 calcParams.pdif = xi.weaponskills.generatePdif(calcParams.cratio[1], calcParams.cratio[2], true)
             end
 
-            finaldmg = (dmg + consumeManaBonus(attacker)) * ftp * calcParams.pdif
+            -- finaldmg = (dmg + consumeManaBonus(attacker)) * ftp * calcParams.pdif
+            finaldmg = dmg * ftp * calcParams.pdif
 
             -- Duplicate the first hit with an added magical component for hybrid WSes
             if calcParams.hybridHit then
@@ -530,14 +527,6 @@ end
 xi.weaponskills.calculateRawWSDmg = function(attacker, target, wsID, tp, action, wsParams, calcParams)
     local targetLvl = target:getMainLvl()
     local targetHp  = target:getHP() + target:getMod(xi.mod.STONESKIN)
-
-    -- Recalculate accuracy if it varies with TP, applied to all hits (This is a penalty!)
-    if wsParams.accVaries then
-        local accLost      = calcParams.accStat - calcParams.accStat * xi.weaponskills.fTP(tp, wsParams.accVaries)
-        calcParams.hitRate = calcParams.hitRate - accLost / 200
-    end
-
-    calcParams.hitRate = utils.clamp(calcParams.hitRate, 0.2, 0.95)
 
     -- Calculate alpha, WSC, and our modifiers for our base per-hit damage
     calcParams.alpha = getAlpha(attacker:getMainLvl())
@@ -849,8 +838,14 @@ xi.weaponskills.doPhysicalWeaponskill = function(attacker, target, wsID, wsParam
         calcParams.bonusWSmods = wsParams.bonusWSmods or 0
     end
 
-    calcParams.firstHitRate = xi.weaponskills.getHitRate(attacker, target, true, calcParams.bonusAcc + 100)
-    calcParams.hitRate      = xi.weaponskills.getHitRate(attacker, target, false, calcParams.bonusAcc)
+    if wsParams.accVaries then
+        -- applied to all hits (This is a penalty!)
+        local accLost       = calcParams.accStat * (1 - xi.weaponskills.fTP(tp, wsParams.accVaries))
+        calcParams.bonusAcc = calcParams.bonusAcc - accLost
+    end
+
+    calcParams.firstHitRate = xi.weaponskills.getHitRate(attacker, target, calcParams.bonusAcc + 100)
+    calcParams.hitRate      = xi.weaponskills.getHitRate(attacker, target, calcParams.bonusAcc)
     calcParams.skillType    = attack.weaponType
 
     -- Send our wsParams off to calculate our raw WS damage, hits landed, and shadows absorbed
@@ -935,12 +930,19 @@ xi.weaponskills.doRangedWeaponskill = function(attacker, target, wsID, wsParams,
         bonusAcc                = (gorgetBeltAcc or 0) + attacker:getMod(xi.mod.WSACC),
         bonusWSmods             = wsParams.bonusWSmods or 0
     }
+    if wsParams.accVaries then
+        -- applied to all hits (This is a penalty!)
+        local accLost       = calcParams.accStat * (1 - xi.weaponskills.fTP(tp, wsParams.accVaries))
+        calcParams.bonusAcc = calcParams.bonusAcc - accLost
+    end
+
+    calcParams.hitRate = getRangedHitRate(attacker, target, calcParams.bonusAcc)
+
     if attacker:hasStatusEffect(xi.effect.CONSUME_MANA) then
         weaponDamage = { attacker:getRangedDmg() * xi.weaponskills.consumeManaBonusWeaponDamage(attacker, wsParams) }
         attacker:delMP(attacker:getMP() * 0.25)
         attacker:delStatusEffect(xi.effect.CONSUME_MANA)
     end
-    calcParams.hitRate = getRangedHitRate(attacker, target, false, calcParams.bonusAcc)
 
     -- Send our params off to calculate our raw WS damage, hits landed, and shadows absorbed
     calcParams = xi.weaponskills.calculateRawWSDmg(attacker, target, wsID, tp, action, wsParams, calcParams)
@@ -1266,7 +1268,7 @@ xi.weaponskills.getMeleeDmg = function(attacker, weaponType, kick)
     return { mainhandDamage, offhandDamage }
 end
 
-xi.weaponskills.getHitRate = function(attacker, target, capHitRate, bonus)
+xi.weaponskills.getHitRate = function(attacker, target, bonus)
     local flourishEffect = attacker:getStatusEffect(xi.effect.BUILDING_FLOURISH)
 
     if flourishEffect ~= nil and flourishEffect:getPower() >= 1 then -- 1 or more Finishing moves used.
@@ -1319,11 +1321,7 @@ xi.weaponskills.getHitRate = function(attacker, target, capHitRate, bonus)
     local hitrate = (75 + hitdiff) / 100
 
     -- Applying hitrate caps
-    if capHitRate then -- this isn't capped for when acc varies with tp, as more penalties are due
-        hitrate = math.min(hitrate, 0.95)
-    end
-
-    hitrate = math.max(hitrate, 0.2)
+    hitrate = utils.clamp(hitrate, 0.2, 0.95)
 
     return hitrate
 end
@@ -1555,6 +1553,7 @@ xi.weaponskills.handleWSGorgetBelt = function(attacker)
 
         local neck                      = attacker:getEquipID(xi.slot.NECK)
         local belt                      = attacker:getEquipID(xi.slot.WAIST)
+        local weapon                    = attacker:getEquipID(xi.slot.MAIN)
         local scProp1, scProp2, scProp3 = attacker:getWSSkillchainProp()
 
         for i, v in ipairs(elementalGorget) do
@@ -1594,6 +1593,15 @@ xi.weaponskills.handleWSGorgetBelt = function(attacker)
 
         if belt == xi.item.FOTIA_BELT then -- Fotia Belt
             accBonus = accBonus + 10
+            ftpBonus = ftpBonus + 0.1
+        end
+
+        if
+            weapon == xi.item.PRESTER and
+            (xi.magicburst.doesElementMatchWeaponskill(xi.element.WIND, scProp1) or
+            xi.magicburst.doesElementMatchWeaponskill(xi.element.WIND, scProp2) or
+            xi.magicburst.doesElementMatchWeaponskill(xi.element.WIND, scProp3))
+        then -- Prester
             ftpBonus = ftpBonus + 0.1
         end
     end

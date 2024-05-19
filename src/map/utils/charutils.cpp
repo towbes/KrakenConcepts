@@ -882,10 +882,7 @@ namespace charutils
         BuildingCharTraitsTable(PChar);
 
         // Order matters as this uses merits and JP gifts.
-        if (PChar->petZoningInfo.petID >= PETID_HARLEQUINFRAME && PChar->petZoningInfo.petID <= PETID_STORMWAKERFRAME)
-        {
-            puppetutils::LoadAutomaton(PChar);
-        }
+        puppetutils::LoadAutomaton(PChar); // Take care not to reset petZoningInfo with this call
 
         PChar->animation = (HP == 0 ? ANIMATION_DEATH : ANIMATION_NONE);
 
@@ -1925,7 +1922,8 @@ namespace charutils
         // if ((PChar->m_EquipBlock & (1 << equipSlotID)) || !(PItem->getJobs() & (1 << (PChar->GetMJob() - 1))) ||
         if ((PChar->m_EquipBlock & (1 << equipSlotID)) || (!(PItem->getJobs() & (1 << (PChar->GetMJob() - 1))) && !(PItem->getJobs() & (1 << (PChar->GetSJob() - 1)))) || // Umeboshi "Allows player to equip items usable by subjob"
             (PItem->getSuperiorLevel() > PChar->getMod(Mod::SUPERIOR_LEVEL)) ||
-            (PItem->getReqLvl() > (settings::get<bool>("map.DISABLE_GEAR_SCALING") ? PChar->GetMLevel() : PChar->jobs.job[PChar->GetMJob()])))
+            (PItem->getReqLvl() > (settings::get<bool>("map.DISABLE_GEAR_SCALING") ? PChar->GetMLevel() : PChar->jobs.job[PChar->GetMJob()])) ||
+            !PItem->isEquippableByRace(PChar->look.race))
         {
             return false;
         }
@@ -5503,7 +5501,7 @@ namespace charutils
 
         _sql->Query(Query, "chars", "gmlevel =", PChar->m_GMlevel, PChar->id);
 
-        _sql->Query(Query, "char_flags", "gmModeEnabled =", PChar->m_GMlevel >= 3 ? 1 : 0, PChar->id);
+        _sql->Query(Query, "char_flags", "gmModeEnabled =", PChar->visibleGmLevel >= 3 ? 1 : 0, PChar->id);
     }
 
     void SaveMentorFlag(CCharEntity* PChar)

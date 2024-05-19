@@ -10,7 +10,7 @@ require('scripts/globals/battlefield')
 -----------------------------------
 local entity = {}
 
-local lootOffset = 20
+--[[local lootOffset = 20
 
 local loot =
 {
@@ -279,13 +279,13 @@ local loot =
             { itemid = xi.item.SMOKER_SCREEN,      droprate = 100 },
         },
     },
-}
+}]]
 
 entity.onTrade = function(player, npc, trade)
 end
 
 entity.onTrigger = function(player, npc)
-    local battlefield = player:getBattlefield()
+--[[local battlefield = player:getBattlefield()
     local bfID = player:getBattlefieldID()
 
     if bfID == 740 then
@@ -303,7 +303,7 @@ entity.onTrigger = function(player, npc)
     elseif battlefield then
         xi.battlefield.HandleLootRolls(battlefield, loot[battlefield:getID()], nil, npc)
     end
-
+]]
 end
 
 entity.onEventUpdate = function(player, csid, option)

@@ -532,7 +532,6 @@ local function checkReqs(player, npc, bfid, registrant)
     local subLevel = player:getSubLvl()
 
     local sandoriaMission  = player:getCurrentMission(xi.mission.log_id.SANDORIA)
-    local bastokMission    = player:getCurrentMission(xi.mission.log_id.BASTOK)
     local windurstMission  = player:getCurrentMission(xi.mission.log_id.WINDURST)
     local zilartMission    = player:getCurrentMission(xi.mission.log_id.ZILART)
     local promathiaMission = player:getCurrentMission(xi.mission.log_id.COP)
@@ -551,35 +550,6 @@ local function checkReqs(player, npc, bfid, registrant)
     -- Requirements to register a battlefield
     local registerReqs =
     {
-        [0] = function() -- Mission 2-3
-            return nationStatus == 9 and
-                (
-                    bastokMission == xi.mission.id.bastok.THE_EMISSARY_SANDORIA2 or
-                    windurstMission == xi.mission.id.windurst.THE_THREE_KINGDOMS_SANDORIA2
-                )
-        end,
-
-        [3] = function() -- San d'Oria 7-2: The Secret Weapon
-            return sandoriaMission == xi.mission.id.sandoria.THE_SECRET_WEAPON and
-                nationStatus == 2
-        end,
-
-        [5] = function() -- Quest: Shattering Stars (WAR LB5)
-            return mainJob == xi.job.WAR and mainLevel >= 66
-        end,
-
-        [6] = function() -- Quest: Shattering Stars (BLM LB5)
-            return mainJob == xi.job.BLM and mainLevel >= 66
-        end,
-
-        [7] = function() -- Quest: Shattering Stars (RNG LB5)
-            return mainJob == xi.job.RNG and mainLevel >= 66
-        end,
-
-        [20] = function() -- Quest: Beyond Infinity
-            return player:hasKeyItem(xi.ki.SOUL_GEM_CLASP)
-        end,
-
         [32] = function() -- San d'Oria 1-3: Save the Children
             local hasCompletedSaveTheChildren = player:hasCompletedMission(xi.mission.log_id.SANDORIA, xi.mission.id.sandoria.SAVE_THE_CHILDREN)
 
@@ -594,44 +564,8 @@ local function checkReqs(player, npc, bfid, registrant)
             return player:hasKeyItem(xi.ki.DRAGON_CURSE_REMEDY)
         end,
 
-        [37] = function() -- Quest: Mirror Mirror
+        [37] = function() -- Quest: Mirror Mirror TODO: Convert to new battlefield system
             return player:getQuestStatus(xi.questLog.JEUNO, xi.quest.id.jeuno.MIRROR_MIRROR) == xi.questStatus.QUEST_ACCEPTED and player:getCharVar('[Quest]Mirror_Mirror') == 2
-        end,
-
-        [64] = function() -- Mission 2-3
-            return nationStatus == 10 and
-                (
-                    sandoriaMission == xi.mission.id.sandoria.JOURNEY_TO_BASTOK2 or
-                    windurstMission == xi.mission.id.windurst.THE_THREE_KINGDOMS_BASTOK2
-                )
-        end,
-
-        [67] = function() -- Bastok 7-2: On My Way
-            return bastokMission == xi.mission.id.bastok.ON_MY_WAY and nationStatus == 2
-        end,
-
-        [68] = function() -- Quest: A Thief in Norg!?
-            return player:getCharVar('Quest[5][142]Prog') == 6
-        end,
-
-        [70] = function() -- Quest: Shattering Stars (RDM LB5)
-            return mainJob == xi.job.RDM and mainLevel >= 66
-        end,
-
-        [71] = function() -- Quest: Shattering Stars (THF LB5)
-            return mainJob == xi.job.THF and mainLevel >= 66
-        end,
-
-        [72] = function() -- Quest: Shattering Stars (BST LB5)
-            return mainJob == xi.job.BST and mainLevel >= 66
-        end,
-
-        [85] = function() -- Quest: Beyond Infinity
-            return player:hasKeyItem(xi.ki.SOUL_GEM_CLASP)
-        end,
-
-        [116] = function() -- Quest: Beyond Infinity
-            return player:hasKeyItem(xi.ki.SOUL_GEM_CLASP)
         end,
 
         [128] = function() -- ZM4: The Temple of Uggalepih
@@ -679,46 +613,6 @@ local function checkReqs(player, npc, bfid, registrant)
         [256] = function() -- ZM8: Return to Delkfutt's Tower
             return zilartMission == xi.mission.id.zilart.RETURN_TO_DELKFUTTS_TOWER and
                 zilartStatus == 2
-        end,
-
-        [288] = function() -- ZM14: Ark Angels (Hume)
-            return zilartMission == xi.mission.id.zilart.ARK_ANGELS and
-                zilartStatus == 1 and
-                npcId == getEntranceOffset(0) and
-                not player:hasKeyItem(xi.ki.SHARD_OF_APATHY)
-        end,
-
-        [289] = function() -- ZM14: Ark Angels (Tarutaru)
-            return zilartMission == xi.mission.id.zilart.ARK_ANGELS and
-                zilartStatus == 1 and
-                npcId == getEntranceOffset(1) and
-                not player:hasKeyItem(xi.ki.SHARD_OF_COWARDICE)
-        end,
-
-        [290] = function() -- ZM14: Ark Angels (Mithra)
-            return zilartMission == xi.mission.id.zilart.ARK_ANGELS and
-                zilartStatus == 1 and
-                npcId == getEntranceOffset(2) and
-                not player:hasKeyItem(xi.ki.SHARD_OF_ENVY)
-        end,
-
-        [291] = function() -- ZM14: Ark Angels (Elvaan)
-            return zilartMission == xi.mission.id.zilart.ARK_ANGELS and
-                zilartStatus == 1 and
-                npcId == getEntranceOffset(3) and
-                not player:hasKeyItem(xi.ki.SHARD_OF_ARROGANCE)
-        end,
-
-        [292] = function() -- ZM14: Ark Angels (Galka)
-            return zilartMission == xi.mission.id.zilart.ARK_ANGELS and
-                zilartStatus == 1 and
-                npcId == getEntranceOffset(4) and
-                not player:hasKeyItem(xi.ki.SHARD_OF_RAGE)
-        end,
-
-        [293] = function() -- ZM14 Divine Might
-            return player:getQuestStatus(xi.questLog.OUTLANDS, xi.quest.id.outlands.DIVINE_MIGHT) == xi.questStatus.QUEST_ACCEPTED or
-                player:getQuestStatus(xi.questLog.OUTLANDS, xi.quest.id.outlands.DIVINE_MIGHT_REPEAT) == xi.questStatus.QUEST_ACCEPTED
         end,
 
         [320] = function() -- ZM16: The Celestial Nexus
@@ -950,15 +844,10 @@ local function checkReqs(player, npc, bfid, registrant)
             return player:hasKeyItem(xi.ki.VIAL_OF_DREAM_INCENSE)
         end,
 
-        [736] = function() -- PM5-3 L3: A Century of Hardship
-            return promathiaMission == xi.mission.id.cop.THREE_PATHS and
-                player:getMissionStatus(xi.mission.log_id.COP, xi.mission.status.COP.LOUVERANCE) == 8
-        end,
-
-        [737] = function() -- Quest: Return to the Depths
+        --[[[737] = function() -- Quest: Return to the Depths TODO: Convert battlefield to new system
             return player:getCharVar('Quest[1][78]prog') >= 9 or
                 player:hasCompletedQuest(xi.questLog.BASTOK, xi.quest.id.bastok.RETURN_TO_THE_DEPTHS)
-        end,
+        end,]]
 
         [738] = function() -- ENM: Bionic Bug
             return player:hasKeyItem(xi.ki.SHAFT_2716_OPERATING_LEVER)
@@ -1435,24 +1324,6 @@ local function checkSkip(player, bfid)
     -- Requirements to skip a battlefield
     local skipReqs =
     {
-        [0] = function() -- Mission 2-3
-            return player:hasCompletedMission(xi.mission.log_id.BASTOK, xi.mission.id.bastok.THE_EMISSARY_SANDORIA2) or
-                player:hasCompletedMission(xi.mission.log_id.WINDURST, xi.mission.id.windurst.THE_THREE_KINGDOMS_SANDORIA2) or
-                nationStatus > 9 and
-                (
-                    bastokMission == xi.mission.id.bastok.THE_EMISSARY_SANDORIA2 or
-                    windurstMission == xi.mission.id.windurst.THE_THREE_KINGDOMS_SANDORIA2
-                )
-        end,
-
-        [3] = function() -- San d'Oria 7-2: The Secret Weapon
-            return player:hasCompletedMission(xi.mission.log_id.SANDORIA, xi.mission.id.sandoria.THE_SECRET_WEAPON) or
-                (
-                    sandoriaMission == xi.mission.id.sandoria.THE_SECRET_WEAPON and
-                    nationStatus > 2
-                )
-        end,
-
         [32] = function() -- San d'Oria 1-3: Save the Children
             return player:hasCompletedMission(xi.mission.log_id.SANDORIA, xi.mission.id.sandoria.SAVE_THE_CHILDREN) or
                 (
@@ -1463,24 +1334,6 @@ local function checkSkip(player, bfid)
 
         [33] = function() -- Quest: The Holy Crest
             return player:hasCompletedQuest(xi.questLog.SANDORIA, xi.quest.id.sandoria.THE_HOLY_CREST)
-        end,
-
-        [64] = function() -- Mission 2-3
-            return player:hasCompletedMission(xi.mission.log_id.SANDORIA, xi.mission.id.sandoria.JOURNEY_TO_BASTOK2) or
-                player:hasCompletedMission(xi.mission.log_id.WINDURST, xi.mission.id.windurst.THE_THREE_KINGDOMS_BASTOK2) or
-                nationStatus > 10 and
-                (
-                    sandoriaMission == xi.mission.id.sandoria.JOURNEY_TO_BASTOK2 or
-                    windurstMission == xi.mission.id.windurst.THE_THREE_KINGDOMS_BASTOK2
-                )
-        end,
-
-        [67] = function() -- Bastok 7-2: On My Way
-            return player:hasCompletedMission(xi.mission.log_id.BASTOK, xi.mission.id.bastok.ON_MY_WAY) or
-                (
-                    bastokMission == xi.mission.id.bastok.ON_MY_WAY and
-                    nationStatus > 2
-                )
         end,
 
         [161] = function() -- Bastok 9-2: Where Two Paths Converge
@@ -1538,26 +1391,6 @@ local function checkSkip(player, bfid)
 
         [256] = function() -- ZM8: Return to Delkfutt's Tower
             return player:hasCompletedMission(xi.mission.log_id.ZILART, xi.mission.id.zilart.RETURN_TO_DELKFUTTS_TOWER)
-        end,
-
-        [288] = function() -- ZM14: Ark Angels (Hume)
-            return player:hasCompletedMission(xi.mission.log_id.ZILART, xi.mission.id.zilart.ARK_ANGELS)
-        end,
-
-        [289] = function() -- ZM14: Ark Angels (Tarutaru)
-            return player:hasCompletedMission(xi.mission.log_id.ZILART, xi.mission.id.zilart.ARK_ANGELS)
-        end,
-
-        [290] = function() -- ZM14: Ark Angels (Mithra)
-            return player:hasCompletedMission(xi.mission.log_id.ZILART, xi.mission.id.zilart.ARK_ANGELS)
-        end,
-
-        [291] = function() -- ZM14: Ark Angels (Elvaan)
-            return player:hasCompletedMission(xi.mission.log_id.ZILART, xi.mission.id.zilart.ARK_ANGELS)
-        end,
-
-        [292] = function() -- ZM14: Ark Angels (Galka)
-            return player:hasCompletedMission(xi.mission.log_id.ZILART, xi.mission.id.zilart.ARK_ANGELS)
         end,
 
         [320] = function() -- ZM16: The Celestial Nexus
@@ -1645,14 +1478,6 @@ local function checkSkip(player, bfid)
         [706] = function() -- Quest: Waking Dreams
             return player:hasCompletedQuest(xi.questLog.WINDURST, xi.quest.id.windurst.WAKING_DREAMS) or
                 player:hasKeyItem(xi.ki.WHISPER_OF_DREAMS)
-        end,
-
-        [736] = function() -- PM5-3 L3: A Century of Hardship
-            return player:hasCompletedMission(xi.mission.log_id.COP, xi.mission.id.cop.THREE_PATHS) or
-                (
-                    promathiaMission == xi.mission.id.cop.THREE_PATHS and
-                    player:getMissionStatus(xi.mission.log_id.COP, xi.mission.status.COP.LOUVERANCE) > 8
-                )
         end,
 
         [768] = function() -- PM1-3: The Mothercrystals

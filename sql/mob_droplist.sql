@@ -4192,7 +4192,7 @@ INSERT INTO `mob_droplist` VALUES (465,0,0,1000,3155,@UNCOMMON); -- Raiders Seal
 -- ZoneID:  89 - Chigoe
 -- ZoneID:  91 - Chigoe
 INSERT INTO `mob_droplist` VALUES (466,0,0,1000,2229,@UNCOMMON); -- Vial Of Chimera Blood (Uncommon, 10%)
-INSERT INTO `mob_droplist` VALUES (466,0,0,1000,2365,20);        -- Vial Of Demon Blood (2.0%)
+INSERT INTO `mob_droplist` VALUES (466,0,0,1000,2365,@VRARE);    -- Vial Of Demon Blood (Very Rare, 1%)
 
 -- ZoneID:  68 - Chigre
 INSERT INTO `mob_droplist` VALUES (467,0,0,1000,2638,@ALWAYS); -- Chigre (Always, 100%)
@@ -6045,8 +6045,8 @@ INSERT INTO `mob_droplist` VALUES (726,0,0,1000,3206,30);         -- Navarchs Se
 INSERT INTO `mob_droplist` VALUES (727,0,0,1000,2956,@UNCOMMON); -- High Kindreds Crest (Uncommon, 10%)
 
 -- ZoneID:  91 - Dyinyinga
-INSERT INTO `mob_droplist` VALUES (728,0,0,1000,15759,200); -- Mahant Sandals (20.0%)
-INSERT INTO `mob_droplist` VALUES (728,0,0,1000,2509,30);   -- Slug Eye (3.0%)
+INSERT INTO `mob_droplist` VALUES (728,0,0,1000,15759,@COMMON); -- Mahant Sandals (Common, 15%)
+INSERT INTO `mob_droplist` VALUES (728,0,0,1000,2509,@VRARE);   -- Slug Eye (Very Rare, 1%)
 
 -- ZoneID: Unknown - Unknown
 INSERT INTO `mob_droplist` VALUES (729,0,0,1000,4249,@ALWAYS); -- Copy Of Schultz Stratagems (Always, 100%)
@@ -24452,7 +24452,7 @@ INSERT INTO `mob_droplist` VALUES (3035,0,0,1000,19208,222); -- Grand Crossbow (
 INSERT INTO `mob_droplist` VALUES (3036,0,0,1000,16030,@UNCOMMON); -- Soarer Earring (Uncommon, 10%)
 
 -- ZoneID:  90 - Nommo
-INSERT INTO `mob_droplist` VALUES (3037,0,0,1000,19306,250); -- Lyft Lance (25.0%)
+INSERT INTO `mob_droplist` VALUES (3037,0,0,1000,19306,@UNCOMMON); -- Lyft Lance (Uncommon, 10%)
 
 -- ZoneID:  91 - Delicieuse Delphine
 INSERT INTO `mob_droplist` VALUES (3038,0,0,1000,11406,@UNCOMMON); -- Stimulus Sabots (Uncommon, 10%)
@@ -24473,7 +24473,7 @@ INSERT INTO `mob_droplist` VALUES (3041,0,0,1000,2815,417); -- Aptant Of Arkhe (
 INSERT INTO `mob_droplist` VALUES (3041,0,0,1000,2816,167); -- Aptant Of Tachus (16.7%)
 
 -- ZoneID: 137 - Tikbalang
-INSERT INTO `mob_droplist` VALUES (3042,0,0,1000,19306,@UNCOMMON); -- Lyft Lance (Uncommon, 10%)
+INSERT INTO `mob_droplist` VALUES (3042,0,0,1000,18609,@UNCOMMON); -- Lyft Pole (Uncommon, 10%)
 
 -- ZoneID:  84 - Burlibix Brawnback
 INSERT INTO `mob_droplist` VALUES (3043,0,0,1000,15854,113); -- Sortie Ring (11.3%)
@@ -24614,7 +24614,7 @@ INSERT INTO `mob_droplist` VALUES (3083,0,0,1000,11496,48); -- Fenrirs Crown (4.
 INSERT INTO `mob_droplist` VALUES (3084,0,0,1000,16035,41); -- Altdorfs Earring (4.1%)
 
 -- ZoneID:  89 - Sarcopsylla
-INSERT INTO `mob_droplist` VALUES (3085,0,0,1000,11408,63); -- Moranas Pigaches (6.3%)
+INSERT INTO `mob_droplist` VALUES (3085,0,0,1000,11408,@RARE); -- Moranas Pigaches (Rare, 5%)
 
 -- ZoneID: 122 - Rogue Receptacle
 INSERT INTO `mob_droplist` VALUES (3086,0,0,1000,11533,333); -- Lyricists Gonnelle (33.3%)

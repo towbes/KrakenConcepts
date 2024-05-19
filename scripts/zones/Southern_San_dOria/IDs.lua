@@ -26,7 +26,7 @@ zones[xi.zone.SOUTHERN_SAN_DORIA] =
         YOU_LEARNED_TRUST              = 6497,  -- You learned Trust: <name>!
         CALL_MULTIPLE_ALTER_EGO        = 6498,  -- You are now able to call multiple alter egos.
         MOG_LOCKER_OFFSET              = 6689,  -- Your Mog Locker lease is valid until <timestamp>, kupo.
-        LEATHER_SUPPORT                = 6805,  -- Your [fishing/woodworking/smithing/goldsmithing/clothcraft/leatherworking/bonecraft/alchemy/cooking] skills went up [a little/ever so slightly/ever so slightly].
+        IMAGE_SUPPORT                  = 6805,  -- Your [fishing/woodworking/smithing/goldsmithing/clothcraft/leatherworking/bonecraft/alchemy/cooking] skills went up [a little/ever so slightly/ever so slightly].
         GUILD_TERMINATE_CONTRACT       = 6819,  -- You have terminated your trading contract with the [Fishermen's/Carpenters'/Blacksmiths'/Goldsmiths'/Weavers'/Tanners'/Boneworkers'/Alchemists'/Culinarians'] Guild and formed a new one with the [Fishermen's/Carpenters'/Blacksmiths'/Goldsmiths'/Weavers'/Tanners'/Boneworkers'/Alchemists'/Culinarians'] Guild.
         GUILD_NEW_CONTRACT             = 6827,  -- You have formed a new trading contract with the [Fishermen's/Carpenters'/Blacksmiths'/Goldsmiths'/Weavers'/Tanners'/Boneworkers'/Alchemists'/Culinarians'] Guild.
         NO_MORE_GP_ELIGIBLE            = 6834,  -- You are not eligible to receive guild points at this time.
@@ -131,8 +131,8 @@ zones[xi.zone.SOUTHERN_SAN_DORIA] =
             [17719306] = 46, -- Apairemant
             [17719493] = 49, -- Pourette
         },
-        LUSIANE  = 17719350,
-        ARPETION = 17719409,
+        LUSIANE  = GetFirstID('Lusiane'),
+        ARPETION = GetFirstID('Arpetion'),
     },
 }
 

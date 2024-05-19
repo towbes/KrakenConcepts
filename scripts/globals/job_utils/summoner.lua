@@ -101,6 +101,17 @@ local function getBaseMPCost(player, ability)
         [xi.jobAbility.CHAOTIC_STRIKE]   = 164,
         [xi.jobAbility.THUNDERSTORM]     = 182,
         [xi.jobAbility.VOLT_STRIKE]      = 229,
+        -- Diabolos
+        [xi.jobAbility.CAMISADO]         =  20,
+        [xi.jobAbility.ULTIMATE_TERROR]  =  27,
+        [xi.jobAbility.SOMNOLENCE]       =  30,
+        [xi.jobAbility.NIGHTMARE]        =  42,
+        [xi.jobAbility.NOCTOSHIELD]      =  92,
+        [xi.jobAbility.NETHER_BLAST]     = 109,
+        [xi.jobAbility.DREAM_SHROUD]     = 121,
+        [xi.jobAbility.BLINDSIDE]        = 147,
+        [xi.jobAbility.NIGHT_TERROR]     = 177,
+        [xi.jobAbility.PAVOR_NOCTURNUS]  = 246,
         -- Siren
         [xi.jobAbility.WELT]             =   9,
         [xi.jobAbility.ROUNDHOUSE]       =  52,
@@ -173,6 +184,18 @@ xi.job_utils.summoner.canUseBloodPact = function(player, pet, target, petAbility
         -- check if player is too far from target
         if target:checkDistance(player) >= 22 then
             return xi.msg.basic.TARG_OUT_OF_RANGE, 0
+        end
+
+        local petAction = pet:getCurrentAction()
+
+        -- check if avatar is under status effect
+        if petAction == xi.action.SLEEP or petAction == xi.action.STUN then
+            return xi.msg.basic.PET_CANNOT_DO_ACTION, 0 -- TODO: verify exact message in packet.
+        end
+
+        -- check if avatar is using a move already
+        if petAction == xi.action.PET_MOBABILITY_FINISH then
+            return xi.msg.basic.PET_CANNOT_DO_ACTION, 0 -- TODO: verify exact message in packet.
         end
 
         local baseMPCost = getBaseMPCost(player, petAbility)

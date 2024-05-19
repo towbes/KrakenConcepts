@@ -72,9 +72,15 @@ entity.onTrigger = function(player, npc)
         operationTeaTime == xi.questStatus.QUEST_AVAILABLE
     then
         player:startEvent(778)
-    elseif operationTeaTime == xi.questStatus.QUEST_ACCEPTED and operationTeaTimeProgress == 1 then
+    elseif
+        operationTeaTime == xi.questStatus.QUEST_ACCEPTED and
+        operationTeaTimeProgress == 1
+    then
         player:startEvent(779) -- Reminds you to get items
-    elseif operationTeaTime == xi.questStatus.QUEST_ACCEPTED and operationTeaTimeProgress == 2 then
+    elseif
+        operationTeaTime == xi.questStatus.QUEST_ACCEPTED and
+        operationTeaTimeProgress == 2
+    then
         player:startEvent(781) -- Reminds you to get items
     --[[elseif operationTeaTime == xi.questStatus.QUEST_COMPLETED then
         player:startEvent(777)]]

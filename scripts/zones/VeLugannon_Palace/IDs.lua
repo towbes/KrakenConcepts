@@ -30,7 +30,9 @@ zones[xi.zone.VELUGANNON_PALACE] =
     },
     mob =
     {
-        MIMIC                   = 17502567,
+        MIMIC            = GetFirstID('Mimic'),
+        BRIGANDISH_BLADE = GetFirstID('Brigandish_Blade'),
+        STEAM_CLEANER    = GetFirstID('Steam_Cleaner'),
         BRIGANDISH_BLADE        = 17502568,
         STEAM_CLEANER           = 17502569,
         ZIPACNA                 = 17502570,
@@ -59,11 +61,11 @@ zones[xi.zone.VELUGANNON_PALACE] =
     },
     npc =
     {
-        QM3             = 17502583,
-        Y_DOOR_OFFSET   = 17502608,
-        B_DOOR_OFFSET   = 17502616,
-        Y_LITH_OFFSET   = 17502624,
-        B_LITH_OFFSET   = 17502634,
+        QM3             = GetFirstID('qm3'),
+        Y_DOOR_OFFSET   = GetFirstID('_4x0'),
+        B_DOOR_OFFSET   = GetFirstID('_4x8'),
+        Y_LITH_OFFSET   = GetTableOfIDs('Monolith')[1],
+        B_LITH_OFFSET   = GetTableOfIDs('Monolith')[6],
         TREASURE_COFFER = GetFirstID('Treasure_Coffer'),
     },
 }

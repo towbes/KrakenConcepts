@@ -74,76 +74,76 @@ xi.battlefield.leaveCode =
 
 xi.battlefield.id =
 {
-    RANK_2_MISSION_1                           = 0,
-    TAILS_OF_WOE                               = 1,
-    DISMEMBERMENT_BRIGADE                      = 2,
-    THE_SECRET_WEAPON                          = 3,
-    HOSTILE_HERBIVORES                         = 4,
-    SHATTERING_STARS_WAR                       = 5,
-    SHATTERING_STARS_BLM                       = 6,
-    SHATTERING_STARS_RNG                       = 7,
-    CARAPACE_COMBATANTS                        = 8,
-    SHOOTING_FISH                              = 9,
-    DROPPING_LIKE_FLIES                        = 10,
-    HORNS_OF_WAR                               = 11,
-    UNDER_OBSERVATION                          = 12,
-    EYE_OF_THE_TIGER                           = 13,
-    SHOTS_IN_THE_DARK                          = 14,
-    DOUBLE_DRAGONIAN                           = 15,
+    RANK_2_MISSION_1                           = 0,   -- Converted
+    TAILS_OF_WOE                               = 1,   -- Converted
+    DISMEMBERMENT_BRIGADE                      = 2,   -- Converted
+    THE_SECRET_WEAPON                          = 3,   -- Converted
+    HOSTILE_HERBIVORES                         = 4,   -- Converted
+    SHATTERING_STARS_WAR                       = 5,   -- Converted
+    SHATTERING_STARS_BLM                       = 6,   -- Converted
+    SHATTERING_STARS_RNG                       = 7,   -- Converted
+    CARAPACE_COMBATANTS                        = 8,   -- Converted
+    SHOOTING_FISH                              = 9,   -- Experimental
+    DROPPING_LIKE_FLIES                        = 10,  -- Converted
+    HORNS_OF_WAR                               = 11,  -- Experimental
+    UNDER_OBSERVATION                          = 12,  -- Converted
+    EYE_OF_THE_TIGER                           = 13,  -- Converted
+    SHOTS_IN_THE_DARK                          = 14,  -- Experimental
+    DOUBLE_DRAGONIAN                           = 15,  -- Converted
     TODAYS_HOROSCOPE                           = 16,
-    CONTAMINATED_COLOSSEUM                     = 17,
+    CONTAMINATED_COLOSSEUM                     = 17,  -- Converted
     KINDERGARTEN_CAP                           = 18,
     LAST_ORC_SHUNNED_HERO                      = 19,
-    BEYOND_INFINITY_HORLAIS_PEAK               = 20,
+    BEYOND_INFINITY_HORLAIS_PEAK               = 20,  -- Converted
     SAVE_THE_CHILDREN                          = 32,
     HOLY_CREST                                 = 33,
     WINGS_OF_FURY                              = 34,
     PETRIFYING_PAIR                            = 35,
     TOADAL_RECALL                              = 36,
     MIRROR_MIRROR                              = 37,
-    RANK_2_MISSION_2                           = 64,
-    WORMS_TURN                                 = 65,
-    GRIMSHELL_SHOCKTROOPERS                    = 66,
-    ON_MY_WAY                                  = 67,
+    RANK_2_MISSION_2                           = 64,  -- Converted
+    WORMS_TURN                                 = 65,  -- Converted
+    GRIMSHELL_SHOCKTROOPERS                    = 66,  -- Converted
+    ON_MY_WAY                                  = 67,  -- Converted
     THIEF_IN_NORG                              = 68,
-    THREE_TWO_ONE                              = 69,
-    SHATTERING_STARS_RDM                       = 70,
-    SHATTERING_STARS_THF                       = 71,
-    SHATTERING_STARS_BST                       = 72,
-    BIRDS_OF_A_FEATHER                         = 73,
-    CRUSTACEAN_CONUNDRUM                       = 74,
-    GROVE_GUARDIANS                            = 75,
-    HILLS_ARE_ALIVE                            = 76,
-    ROYAL_JELLY                                = 77,
-    FINAL_BOUT                                 = 78,
-    UP_IN_ARMS                                 = 79,
+    THREE_TWO_ONE                              = 69,  -- Converted
+    SHATTERING_STARS_RDM                       = 70,  -- Converted
+    SHATTERING_STARS_THF                       = 71,  -- Converted
+    SHATTERING_STARS_BST                       = 72,  -- Converted
+    BIRDS_OF_A_FEATHER                         = 73,  -- Converted
+    CRUSTACEAN_CONUNDRUM                       = 74,  -- Experimental
+    GROVE_GUARDIANS                            = 75,  -- Converted
+    HILLS_ARE_ALIVE                            = 76,  -- Experimental
+    ROYAL_JELLY                                = 77,  -- Converted
+    FINAL_BOUT                                 = 78,  -- Experimental
+    UP_IN_ARMS                                 = 79,  -- Converted
     COPYCAT                                    = 80,
-    OPERATION_DESERT_SWARM                     = 81,
-    PREHISTORIC_PIGEONS                        = 82,
+    OPERATION_DESERT_SWARM                     = 81,  -- Experimental
+    PREHISTORIC_PIGEONS                        = 82,  -- Experimental
     PALBOROUGH_PROJECT                         = 83,
     SHELL_SHOCKED                              = 84,
-    BEYOND_INFINITY_WAUGHROON_SHRINE           = 85,
-    RANK_2_MISSION                             = 96,
-    STEAMED_SPROUTS                            = 97,
-    DIVINE_PUNISHERS                           = 98,
-    SAINTLY_INVITATION                         = 99,
-    TREASURE_AND_TRIBULATIONS                  = 100,
-    SHATTERING_STARS_MNK                       = 101,
-    SHATTERING_STARS_WHM                       = 102,
-    SHATTERING_STARS_SMN                       = 103,
-    CREEPING_DOOM                              = 104,
-    CHARMING_TRIO                              = 105,
-    HAREM_SCAREM                               = 106,
-    EARLY_BIRD_CATCHES_THE_WYRM                = 107,
-    ROYAL_SUCCESSION                           = 108,
-    RAPID_RAPTORS                              = 109,
-    WILD_WILD_WHISKERS                         = 110,
+    BEYOND_INFINITY_WAUGHROON_SHRINE           = 85,  -- Converted
+    RANK_2_MISSION                             = 96,  -- Converted
+    STEAMED_SPROUTS                            = 97,  -- Converted
+    DIVINE_PUNISHERS                           = 98,  -- Converted
+    SAINTLY_INVITATION                         = 99,  -- Converted
+    TREASURE_AND_TRIBULATIONS                  = 100, -- Converted
+    SHATTERING_STARS_MNK                       = 101, -- Converted
+    SHATTERING_STARS_WHM                       = 102, -- Converted
+    SHATTERING_STARS_SMN                       = 103, -- Converted
+    CREEPING_DOOM                              = 104, -- Converted
+    CHARMING_TRIO                              = 105, -- Converted
+    HAREM_SCAREM                               = 106, -- Converted
+    EARLY_BIRD_CATCHES_THE_WYRM                = 107, -- Experimental
+    ROYAL_SUCCESSION                           = 108, -- Converted
+    RAPID_RAPTORS                              = 109, -- Converted
+    WILD_WILD_WHISKERS                         = 110, -- Converted
     SEASONS_GREETINGS                          = 111,
     ROYALE_RAMBLE                              = 112,
     MOA_CONSTRICTORS                           = 113,
     V_FORMATION                                = 114,
     AVIAN_APOSTATES                            = 115,
-    BEYOND_INFINITY_BALGAS_DAIS                = 116,
+    BEYOND_INFINITY_BALGAS_DAIS                = 116, -- Converted
     TEMPLE_OF_UGGALEPIH                        = 128,
     JUNGLE_BOOGYMEN                            = 129,
     AMPHIBIAN_ASSAULT                          = 130,
@@ -175,12 +175,12 @@ xi.battlefield.id =
     HEROINES_COMBAT                            = 260,
     MERCENARY_CAMP                             = 261,
     ODE_OF_LIFE_BESTOWING                      = 262,
-    ARK_ANGELS_1                               = 288,
-    ARK_ANGELS_2                               = 289,
-    ARK_ANGELS_3                               = 290,
-    ARK_ANGELS_4                               = 291,
-    ARK_ANGELS_5                               = 292,
-    DIVINE_MIGHT                               = 293,
+    ARK_ANGELS_1                               = 288, -- Converted
+    ARK_ANGELS_2                               = 289, -- Converted
+    ARK_ANGELS_3                               = 290, -- Converted
+    ARK_ANGELS_4                               = 291, -- Converted
+    ARK_ANGELS_5                               = 292, -- Converted
+    DIVINE_MIGHT                               = 293, -- Converted
     CELESTIAL_NEXUS                            = 320,
     FIAT_LUX                                   = 352,
     DARKNESS_DESCENDS                          = 353,
@@ -252,7 +252,7 @@ xi.battlefield.id =
     DARKNESS_NAMED                             = 704,
     TEST_YOUR_MITE                             = 705,
     WAKING_DREAMS                              = 706,
-    CENTURY_OF_HARDSHIP                        = 736,
+    CENTURY_OF_HARDSHIP                        = 736, -- Converted
     RETURN_TO_THE_DEPTHS                       = 737,
     BIONIC_BUG                                 = 738,
     PULLING_THE_STRINGS                        = 739,
@@ -383,7 +383,13 @@ function Battlefield:new(data)
     obj.maxPlayers    = data.maxPlayers
     obj.timeLimit     = data.timeLimit
     obj.index         = data.index
-    obj.entryNpc      = data.entryNpc
+
+    if data.entryNpcs then
+        obj.entryNpcs = data.entryNpcs
+    elseif data.entryNpc then
+        obj.entryNpcs = { data.entryNpc }
+    end
+
     obj.area          = data.area
 
     if data.exitNpcs then
@@ -405,6 +411,7 @@ function Battlefield:new(data)
     obj.requiredKeyItems = data.requiredKeyItems or {}
     obj.lossEventParams  = data.lossEventParams or {}
     obj.armouryCrates    = data.armouryCrates or false
+    obj.experimental     = data.experimental or false
 
     obj.sections = { { [obj.zoneId] = {} } }
     obj.groups   = {}
@@ -427,9 +434,9 @@ end
 
 function Battlefield:register()
     -- Only hookup the entry and exit listeners if there aren't any other battlefields already registered for that entrance
-    local setupEvents   = true
-    local setupEntryNpc = true
-    local setupExitNpcs = true
+    local setupEvents    = true
+    local setupEntryNpcs = true
+    local setupExitNpcs  = true
 
     if utils.hasKey(self.zoneId, xi.battlefield.contentsByZone) then
         local contents = xi.battlefield.contentsByZone[self.zoneId]
@@ -437,9 +444,9 @@ function Battlefield:register()
         for _, content in ipairs(contents) do
             -- Always setup listeners if we're reloading a battlefield
             if self.battlefieldId == content.battlefieldId and content.hasListeners then
-                setupEvents   = true
-                setupEntryNpc = true
-                setupExitNpcs = true
+                setupEvents    = true
+                setupEntryNpcs = true
+                setupExitNpcs  = true
 
                 break
             end
@@ -448,8 +455,14 @@ function Battlefield:register()
             setupEvents = false
 
             -- Do not setup npcs if there is another battlefield using the same entry npc
-            if self.entryNpc == content.entryNpc then
-                setupEntryNpc = false
+            if self.entryNpcs then
+                for _, entryNpc in ipairs(self.entryNpcs) do
+                    if utils.contains(entryNpc, content.entryNpcs) then
+                        setupEntryNpcs = false
+
+                        break
+                    end
+                end
             end
 
             -- If there is any overlap between the exit NPCs then we do not setup the exit NPCs
@@ -486,22 +499,25 @@ function Battlefield:register()
         self.hasListeners = true
     end
 
-    if setupEntryNpc and self.entryNpc then
-        utils.append(zoneSection, {
-            [self.entryNpc] =
-            {
-                onTrade = Battlefield.onEntryTrade,
-                onTrigger = Battlefield.onEntryTrigger,
-            }
-        })
+    if setupEntryNpcs and self.entryNpcs then
+        for _, entryNpc in ipairs(self.entryNpcs) do
+            utils.append(zoneSection, {
+                [entryNpc] =
+                {
+                    onTrade   = Battlefield.onEntryTrade,
+                    onTrigger = Battlefield.onEntryTrigger,
+                }
+            })
+        end
     end
 
     if setupExitNpcs and self.exitNpcs then
+        local exitTrigger = self.onExitTrigger and self.onExitTrigger or Battlefield.onExitTrigger
         for _, exitNpc in ipairs(self.exitNpcs) do
             utils.append(zoneSection, {
                 [exitNpc] =
                 {
-                    onTrigger = Battlefield.onExitTrigger,
+                    onTrigger = exitTrigger,
                 }
             })
         end
@@ -519,7 +535,7 @@ function Battlefield:register()
 end
 
 function Battlefield:isValidEntry(player, npc)
-    return self.entryNpc == npc:getName()
+    return utils.contains(npc:getName(), self.entryNpcs)
 end
 
 -- Allow for Battlefield scripts to easily add additional requirements for entry by
@@ -637,7 +653,9 @@ function Battlefield.onEntryTrade(player, npc, trade, onUpdate)
             local totalUses = xi.battlefield.itemUses[itemId] or 1
 
             if player:getWornUses(itemId) >= totalUses then
-                if totalUses > 1 then
+                if type(content.requiredItems.wornMessage) == 'table' then
+                    player:messageSpecial(unpack(content.requiredItems.wornMessage))
+                elseif totalUses > 1 then
                     player:messageSpecial(content.requiredItems.wornMessage, itemId)
                 else
                     player:messageSpecial(content.requiredItems.wornMessage, 0, 0, 0, itemId)
@@ -650,7 +668,7 @@ function Battlefield.onEntryTrade(player, npc, trade, onUpdate)
 
     if not onUpdate then
         -- Open menu of valid battlefields
-        player:startEvent(32000, 0, 0, 0, options, 0, 0, 0, 0)
+        return Battlefield:event(32000, 0, 0, 0, options, 0, 0, 0, 0)
     end
 end
 
@@ -676,9 +694,7 @@ function Battlefield.onEntryTrigger(player, npc)
         end
 
         local options = utils.mask.setBit(0, content.index, true)
-        player:startEvent(32000, 0, 0, 0, options, 0, 0, 0, 0)
-
-        return
+        return Battlefield:event(32000, 0, 0, 0, options, 0, 0, 0, 0)
     end
 
     -- Player doesn't have battlefield status effect. That means player wants to register a new battlefield OR is attempting to enter a closed one.
@@ -711,7 +727,7 @@ function Battlefield.onEntryTrigger(player, npc)
         return
     end
 
-    player:startEvent(32000, 0, 0, 0, options, 0, 0, 0, 0)
+    return Battlefield:event(32000, 0, 0, 0, options, 0, 0, 0, 0)
 end
 
 -- Static function to lookup the correct battlefield to handle this event update
@@ -839,11 +855,16 @@ function Battlefield:onEventFinishWin(player, csid, option, npc)
     if self.grantXP then
         player:addExp(self.grantXP)
     end
+
+    if self.grantGil then
+        player:addGil(self.grantGil)
+        player:messageSpecial(ID.text.GIL_OBTAINED, self.grantGil)
+    end
 end
 
 function Battlefield.onExitTrigger(player, npc)
     if player:getBattlefield() then
-        player:startOptionalCutscene(32003)
+        return Battlefield:progressCutscene(32003)
     end
 end
 
@@ -875,6 +896,15 @@ function Battlefield:onBattlefieldInitialise(battlefield)
 
     local hasMultipleAreas = not self.area
     battlefield:addGroups(self.groups, hasMultipleAreas)
+
+    -- NOTE: Experimental battlefields are at most partially implemented.  Increase mob levels
+    -- for temporary tuning.
+    if self.experimental then
+        local battlefieldMobs = battlefield:getMobs(true, true)
+        for _, mobObj in ipairs(battlefieldMobs) do
+            mobObj:setMobLevel(math.min(mobObj:getMainLvl() * 2, 255))
+        end
+    end
 
     for mobId, path in pairs(self.paths) do
         GetMobByID(mobId):pathThrough(path, xi.path.flag.PATROL)
@@ -1025,6 +1055,10 @@ function Battlefield:onBattlefieldEnter(player, battlefield)
     end
 
     player:messageSpecial(ID.text.TIME_LIMIT_FOR_THIS_BATTLE_IS, 0, 0, 0, math.floor(self.timeLimit / 60))
+
+    if self.experimental then
+        player:printToPlayer('This battlefield has been marked as experimental.  Enemy levels have increased!', xi.msg.channel.NS_SHOUT)
+    end
 end
 
 function Battlefield:onBattlefieldDestroy(battlefield)
@@ -1118,6 +1152,7 @@ function Battlefield:handleAllMonstersDefeated(battlefield, mob)
     if crateId ~= 0 then
         local crate = GetNPCByID(crateId)
 
+        battlefield:insertEntity(crate:getTargID(), false, true)
         npcUtil.showCrate(crate)
         crate:addListener('ON_TRIGGER', 'TRIGGER_CRATE', utils.bind(self.handleOpenArmouryCrate, self))
     else
@@ -1199,7 +1234,8 @@ function xi.battlefield.getBattlefieldOptions(player, npc, trade)
     for _, content in ipairs(contents) do
         if
             content:checkRequirements(player, npc, true, trade) and
-            not player:battlefieldAtCapacity(content.battlefieldId)
+            not player:battlefieldAtCapacity(content.battlefieldId) and
+            (xi.settings.map.BCNM_ENABLE_EXPERIMENTAL or not content.experimental)
         then
             result = utils.mask.setBit(result, content.index, true)
         end

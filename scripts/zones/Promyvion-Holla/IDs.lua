@@ -17,23 +17,27 @@ zones[xi.zone.PROMYVION_HOLLA] =
         LOGIN_CAMPAIGN_UNDERWAY       = 7002, -- The [/January/February/March/April/May/June/July/August/September/October/November/December] <number> Login Campaign is currently underway!
         LOGIN_NUMBER                  = 7003, -- In celebration of your most recent login (login no. <number>), we have provided you with <number> points! You currently have a total of <number> points.
         MEMBERS_LEVELS_ARE_RESTRICTED = 7023, -- Your party is unable to participate because certain members' levels are restricted.
+
+        -- TODO: Shift IDs
         BARRIER_WOVEN                 = 7222, -- It appears to be a barrier woven from the energy of overflowing memories...
+        NOTHING_OUT_OF_ORDINARY_MAP   = 7224, -- There is nothing out of the ordinary here.
+        EERIE_GREEN_GLOW              = 7225, -- The sphere is emitting an eerie green glow.
     },
     mob =
     {
         MEMORY_RECEPTACLES =
         {
-            [16842781] = { group = 1, strays = 3, stream = 16843060 },
-            [16842841] = { group = 2, strays = 5, stream = 16843056 },
-            [16842848] = { group = 2, strays = 5, stream = 16843057 },
-            [16842855] = { group = 2, strays = 5, stream = 16843058 },
-            [16842862] = { group = 2, strays = 5, stream = 16843059 },
-            [16842888] = { group = 3, strays = 7, stream = 16843053 },
-            [16842897] = { group = 3, strays = 7, stream = 16843054 },
-            [16842906] = { group = 3, strays = 7, stream = 16843055 },
-            [16842940] = { group = 4, strays = 7, stream = 16843061 },
-            [16842949] = { group = 4, strays = 7, stream = 16843062 },
-            [16842958] = { group = 4, strays = 7, stream = 16843063 },
+            [16842781] = { 1, 3, 16843061 },
+            [16842841] = { 2, 5, 16843057 },
+            [16842848] = { 2, 5, 16843058 },
+            [16842855] = { 2, 5, 16843059 },
+            [16842862] = { 2, 5, 16843060 },
+            [16842888] = { 3, 7, 16843054 },
+            [16842897] = { 3, 7, 16843055 },
+            [16842906] = { 3, 7, 16843056 },
+            [16842940] = { 4, 7, 16843062 },
+            [16842949] = { 4, 7, 16843063 },
+            [16842958] = { 4, 7, 16843064 },
         },
 
         CEREBRATOR    = 16843043,
@@ -42,22 +46,26 @@ zones[xi.zone.PROMYVION_HOLLA] =
     {
         MEMORY_STREAMS =
         {
-            [11]        = { triggerArea = {   78, -4,   78,   82, 4,   82 }, destinations = { 46     } }, -- floor 1 return
-            [21]        = { triggerArea = { -122, -4,   -2, -118, 4,    2 }, destinations = { 41     } }, -- floor 2 return
-            [31]        = { triggerArea = { -162, -4,  118, -158, 4,  122 }, destinations = { 42     } }, -- floor 3 return
-            [32]        = { triggerArea = {  158, -4,  238,  162, 4,  242 }, destinations = { 42     } }, -- floor 3 return
-            [41]        = { triggerArea = {  118, -4, -322,  121, 4, -318 }, destinations = { 33     } }, -- floor 4 return
-            [16843060]  = { triggerArea = {  -42, -4,  198,  -38, 4,  202 }, destinations = { 37     } }, -- floor 1 MR1
-            [16843056]  = { triggerArea = { -240, -4,   38, -237, 4,   41 }, destinations = { 33, 34 } }, -- floor 2 MR1
-            [16843057]  = { triggerArea = { -282, -4,  -42, -278, 4,  -38 }, destinations = { 33, 34 } }, -- floor 2 MR2
-            [16843058]  = { triggerArea = { -162, -4, -202, -157, 4, -198 }, destinations = { 33, 34 } }, -- floor 2 MR3
-            [16843059]  = { triggerArea = {   -2, -4,  -42,    2, 4,  -38 }, destinations = { 33, 34 } }, -- floor 2 MR4
-            [16843053]  = { triggerArea = { -282, -4,  277, -278, 4,  282 }, destinations = { 30     } }, -- floor 3 MR1
-            [16843054]  = { triggerArea = { -362, -4,  237, -358, 4,  242 }, destinations = { 30     } }, -- floor 3 MR2
-            [16843055]  = { triggerArea = { -362, -4,  118, -358, 4,  122 }, destinations = { 30     } }, -- floor 3 MR3
-            [16843061]  = { triggerArea = {   38, -4,  318,   42, 4,  322 }, destinations = { 30     } }, -- floor 3 MR4
-            [16843062]  = { triggerArea = {  158, -4,  358,  162, 4,  362 }, destinations = { 30     } }, -- floor 3 MR5
-            [16843063]  = { triggerArea = {  278, -4,  197,  282, 4,  202 }, destinations = { 30     } }, -- floor 3 MR6
+            [11]       = {   78, -4,   78,   82, 4,   82, { 46 } }, -- Floor 1 return
+            [21]       = { -122, -4,   -2, -118, 4,    2, { 41 } }, -- Floor 2 return
+            [31]       = { -162, -4,  118, -158, 4,  122, { 42 } }, -- Floor 3 (West) return
+            [32]       = {  158, -4,  238,  162, 4,  242, { 45 } }, -- Floor 3 (East) return
+            [41]       = {  118, -4, -322,  121, 4, -318, { 44 } }, -- Floor 4 return
+            -- TODO: Cleanup promyvions. It knows where you came from and will only return the apropiate event acordingly.
+            -- Event 43 -> Return to floor 3 East
+            -- Event 44 -> Return to floor 3 West
+
+            [16843061] = {  -42, -4,  198,  -38, 4,  202, { 37 } }, -- Floor 1 MR
+            [16843057] = { -240, -4,   38, -237, 4,   41, { 33 } }, -- Floor 2 MR NW - Destination: East
+            [16843058] = { -282, -4,  -42, -278, 4,  -38, { 34 } }, -- Floor 2 MR SW - Destination: West
+            [16843059] = { -162, -4, -202, -157, 4, -198, { 35 } }, -- Floor 2 MR SE - Destination: East
+            [16843060] = {   -2, -4,  -42,    2, 4,  -38, { 36 } }, -- Floor 2 MR NE - Destination: West
+            [16843054] = { -282, -4,  277, -278, 4,  282, { 30 } }, -- Floor 3 (West) MR NE
+            [16843055] = { -362, -4,  237, -358, 4,  242, { 31 } }, -- Floor 3 (West) MR NW
+            [16843056] = { -362, -4,  118, -358, 4,  122, { 32 } }, -- Floor 3 (West) MR SW
+            [16843062] = {   38, -4,  318,   42, 4,  322, { 38 } }, -- Floor 3 (East) MR NW
+            [16843063] = {  158, -4,  358,  162, 4,  362, { 39 } }, -- Floor 3 (East) MR NE
+            [16843064] = {  278, -4,  197,  282, 4,  202, { 40 } }, -- Floor 3 (East) MR SE
         },
     },
 }

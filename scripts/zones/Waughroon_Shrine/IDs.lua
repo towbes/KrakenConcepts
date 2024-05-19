@@ -11,6 +11,7 @@ zones[xi.zone.WAUGHROON_SHRINE] =
         ITEM_OBTAINED                 = 6390, -- Obtained: <item>.
         GIL_OBTAINED                  = 6391, -- Obtained <number> gil.
         KEYITEM_OBTAINED              = 6393, -- Obtained key item: <keyitem>.
+        LOST_KEYITEM                  = 6394, -- Lost key item: <keyitem>.
         CARRIED_OVER_POINTS           = 7001, -- You have carried over <number> login point[/s].
         LOGIN_CAMPAIGN_UNDERWAY       = 7002, -- The [/January/February/March/April/May/June/July/August/September/October/November/December] <number> Login Campaign is currently underway!
         LOGIN_NUMBER                  = 7003, -- In celebration of your most recent login (login no. <number>), we have provided you with <number> points! You currently have a total of <number> points.
@@ -45,55 +46,39 @@ zones[xi.zone.WAUGHROON_SHRINE] =
         HUH_IS_THAT_ALL               = 7737, -- Huh? Is that all? I haven't even broken a sweataru...
         YIKEY_WIKEYS                  = 7738, -- Yikey-wikeys! Get that thing away from meee!
         WHATS_THE_MATTARU             = 7739, -- <Pant, wheeze>... What's the mattaru, <name>? Too much of a pansy-wansy to fight fair?
+
+        -- TODO: Shift IDs
+        TIME_IN_THE_BATTLEFIELD_IS_UP = 7224, -- Your time in the battlefield is up! Now exiting...
+        NO_BATTLEFIELD_ENTRY          = 7238, -- A cursed seal has been placed upon this platform.
+        PARTY_MEMBERS_ARE_ENGAGED     = 7239, -- The battlefield where your party members are engaged in combat is locked. Access is denied.
+        TESTIMONY_IS_TORN             = 7282, -- Your <item> is torn...
+        TESTIMONY_WEARS               = 7283, -- Your <item> [/rips into shreds!/is on the verge of tearing apart.../is showing signs of wear...] (# [use remains/uses remain].)
+        MEMBERS_OF_YOUR_PARTY         = 7530, -- Currently, # members of your party (including yourself) have clearance to enter the battlefield.
+        MEMBERS_OF_YOUR_ALLIANCE      = 7531, -- Currently, # members of your alliance (including yourself) have clearance to enter the battlefield.
+        TIME_LIMIT_FOR_THIS_BATTLE_IS = 7533, -- The time limit for this battle is <number> minutes.
+        ORB_IS_CRACKED                = 7534, -- There is a crack in the %. It no longer contains a monster.
+        A_CRACK_HAS_FORMED            = 7535, -- A crack has formed on the <item>, and the beast inside has been unleashed!
+        PARTY_MEMBERS_HAVE_FALLEN     = 7569, -- All party members have fallen in battle. Now leaving the battlefield.
+        THE_PARTY_WILL_BE_REMOVED     = 7576, -- If all party members' HP are still zero after # minute[/s], the party will be removed from the battlefield.
+        ENTERING_THE_BATTLEFIELD_FOR  = 7597, -- Entering the battlefield for [The Rank 2 Final Mission/The Worm's Turn/Grimshell Shocktroopers/On My Way/A Thief in Norg!?/3, 2, 1.../Shattering Stars (RDM)/Shattering Stars (THF)/Shattering Stars (BST)/Birds of a Feather/Crustacean Conundrum/Grove Guardians/The Hills are Alive/Royal Jelly/The Final Bout/Up in Arms/Copycat/Operation Desert Swarm/Prehistoric Pigeons/The Palborough Project/Shell Shocked/Beyond Infinity/The Worm's Tail/Grimshell Shocktroopers/A Feast Most Dire/A.M.A.N. Trove (Mars)/A.M.A.N. Trove (Venus)/Invitation from Naji/Invitation from Naji and Co.]!
+        SOUL_GEM_REACTS               = 7718, -- The <keyitem> reacts to the <keyitem>, sending a jolt of energy through your veins!
     },
 
     mob =
     {
-        ATORI_TUTORI = GetFirstID('Atori-Tutori_qm')
+        ATORI_TUTORI      = GetFirstID('Atori-Tutori_qm'),
+        DARK_DRAGON       = GetFirstID('Dark_Dragon'),
+        FLAYER_FRANZ      = GetFirstID('Flayer_Franz'),
+        GAKI              = GetFirstID('Gaki'),
+        KUJHU_GRANITESKIN = GetFirstID('KuJhu_Graniteskin'),
+        MAAT              = GetFirstID('Maat'),
+        PLATOON_SCORPION  = GetFirstID('Platoon_Scorpion'),
+        YOBHU_HIDEOUSMASK = GetFirstID('YoBhu_Hideousmask'),
+        QUEEN_JELLY       = GetFirstID('Queen_Jelly'),
     },
 
     npc =
     {
-    },
-
-    operationDesertSwarm =
-    {
-        [1] =
-        {
-            17367266,
-            17367267,
-            17367268,
-            17367269,
-            17367270,
-            17367271,
-        },
-
-        [2] =
-        {
-            17367273,
-            17367274,
-            17367275,
-            17367276,
-            17367277,
-            17367278,
-        },
-
-        [3] =
-        {
-            17367280,
-            17367281,
-            17367282,
-            17367283,
-            17367284,
-            17367285,
-        },
-    },
-
-    royalJellyQueens =
-    {
-            17367173,
-            17367183,
-            17367193,
     },
 }
 

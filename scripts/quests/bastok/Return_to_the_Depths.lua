@@ -215,6 +215,10 @@ quest.sections =
                 [5] = function(player, csid, option, npc)
                     quest:setVar(player, 'prog', 9)
                 end,
+
+                [32001] = function(player, csid, option, npc)
+                    quest:setVar(player, 'prog', 10)
+                end,
             },
         },
     },

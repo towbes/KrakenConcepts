@@ -12,6 +12,7 @@ zones[xi.zone.HORLAIS_PEAK] =
         ITEM_OBTAINED                 = 6390, -- Obtained: <item>.
         GIL_OBTAINED                  = 6391, -- Obtained <number> gil.
         KEYITEM_OBTAINED              = 6393, -- Obtained key item: <keyitem>.
+        LOST_KEYITEM                  = 6394, -- Lost key item: <keyitem>.
         ITEMS_OBTAINED                = 6399, -- You obtain <number> <item>!
         NOTHING_OUT_OF_ORDINARY       = 6404, -- There is nothing out of the ordinary here.
         CARRIED_OVER_POINTS           = 7001, -- You have carried over <number> login point[/s].
@@ -37,10 +38,30 @@ zones[xi.zone.HORLAIS_PEAK] =
         HUH_IS_THAT_ALL               = 7968, -- Huh? Is that all? I haven't even broken a sweataru...
         YIKEY_WIKEYS                  = 7969, -- Yikey-wikeys! Get that thing away from meee!
         WHATS_THE_MATTARU             = 7970, -- <Pant, wheeze>... What's the mattaru, <name>? Too much of a pansy-wansy to fight fair?
+
+        -- TODO: Shift IDs
+        TIME_IN_THE_BATTLEFIELD_IS_UP = 7224, -- Your time in the battlefield is up! Now exiting...
+        NO_BATTLEFIELD_ENTRY          = 7238, -- A cursed seal has been placed upon this platform.
+        PARTY_MEMBERS_ARE_ENGAGED     = 7239, -- The battlefield where your party members are engaged in combat is locked. Access is denied.
+        TESTIMONY_IS_TORN             = 7282, -- Your <item> is torn...
+        TESTIMONY_WEARS               = 7283, -- Your <item> [/rips into shreds!/is on the verge of tearing apart.../is showing signs of wear...] (# [use remains/uses remain].)
+        MEMBERS_OF_YOUR_PARTY         = 7530, -- Currently, # members of your party (including yourself) have clearance to enter the battlefield.
+        MEMBERS_OF_YOUR_ALLIANCE      = 7531, -- Currently, # members of your alliance (including yourself) have clearance to enter the battlefield.
+        TIME_LIMIT_FOR_THIS_BATTLE_IS = 7533, -- The time limit for this battle is <number> minutes.
+        ORB_IS_CRACKED                = 7534, -- There is a crack in the %. It no longer contains a monster.
+        A_CRACK_HAS_FORMED            = 7535, -- A crack has formed on the <item>, and the beast inside has been unleashed!
+        ENTERING_THE_BATTLEFIELD_FOR  = 7597, -- Entering the battlefield for [The Rank 2 Final Mission/Tails of Woe/Dismemberment Brigade/The Secret Weapon/Hostile Herbivores/Shattering Stars (WAR)/Shattering Stars (BLM)/Shattering Stars (RNG)/Carapace Combatants/Shooting Fish/Dropping Like Flies/Horns of War/Under Observation/Eye of the Tiger/Shots in the Dark/Double Dragonian/Today's Horoscope/Contaminated Colosseum/Kindergarten Cap/Last Orc-Shunned Hero/Beyond Infinity/Tails of Woe/Dismemberment Brigade/A Feast Most Dire/A.M.A.N. Trove (Mars)/A.M.A.N. Trove (Venus)/Inv. from Excenmille/Inv. from Excenmille and Co.]!
+        SOUL_GEM_REACTS               = 7949, -- The <keyitem> reacts to the <keyitem>, sending a jolt of energy through your veins!
+
     },
     mob =
     {
-        ATORI_TUTORI = GetFirstID('Atori-Tutori_qm')
+        ARMSMASTER_DEKBUK       = GetFirstID('Armsmaster_Dekbuk'),
+        ATORI_TUTORI            = GetFirstID('Atori-Tutori_qm'),
+        DAROKBOK_OF_CLAN_REAPER = GetFirstID('Darokbok_of_Clan_Reaper'),
+        DREAD_DRAGON            = GetFirstID('Dread_Dragon'),
+        HELLTAIL_HARRY          = GetFirstID('Helltail_Harry'),
+        MAAT                    = GetFirstID('Maat'),
     },
     npc =
     {

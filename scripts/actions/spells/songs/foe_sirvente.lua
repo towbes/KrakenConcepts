@@ -1,5 +1,6 @@
 -----------------------------------
--- Spell: Foe Requiem
+-- Spell: Foe Sirvente
+-- Reduces target party member's enmity loss.
 -----------------------------------
 local spellObject = {}
 

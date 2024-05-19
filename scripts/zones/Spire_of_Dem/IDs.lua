@@ -19,6 +19,17 @@ zones[xi.zone.SPIRE_OF_DEM] =
         PARTY_MEMBERS_HAVE_FALLEN     = 7410, -- All party members have fallen in battle. Now leaving the battlefield.
         THE_PARTY_WILL_BE_REMOVED     = 7417, -- If all party members' HP are still zero after # minute[/s], the party will be removed from the battlefield.
         CANT_REMEMBER                 = 7646, -- You cannot remember when exactly, but you have obtained <item>!
+
+        -- TODO: Shift IDs
+        TIME_IN_THE_BATTLEFIELD_IS_UP = 7065, -- Your time in the battlefield is up! Now exiting...
+        PARTY_MEMBERS_ARE_ENGAGED     = 7080, -- The battlefield where your party members are engaged in combat is locked. Access is denied.
+        NO_BATTLEFIELD_ENTRY          = 7093, -- You can hear a faint scraping sound from within, but the way is barred by some strange membrane...
+        MEMBERS_OF_YOUR_PARTY         = 7371, -- Currently, # members of your party (including yourself) have clearance to enter the battlefield.
+        MEMBERS_OF_YOUR_ALLIANCE      = 7372, -- Currently, # members of your alliance (including yourself) have clearance to enter the battlefield.
+        TIME_LIMIT_FOR_THIS_BATTLE_IS = 7374, -- The time limit for this battle is <number> minutes.
+        ORB_IS_CRACKED                = 7375, -- There is a crack in the %. It no longer contains a monster.
+        A_CRACK_HAS_FORMED            = 7376, -- A crack has formed on the <item>, and the beast inside has been unleashed!
+        ENTERING_THE_BATTLEFIELD_FOR  = 7616, -- Entering the battlefield for [Ancient Flames Beckon/You Are What You Eat/Empty Dreams]!
     },
     mob =
     {

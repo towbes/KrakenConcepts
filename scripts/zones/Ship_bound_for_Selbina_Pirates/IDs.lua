@@ -23,6 +23,8 @@ zones[xi.zone.SHIP_BOUND_FOR_SELBINA_PIRATES] =
     },
     mob =
     {
+        BLACKBEARD = GetFirstID('Blackbeard'),
+        SHIP_WIGHT = GetFirstID('Ship_Wight'),
         SEA_CREATURES = 17707014,   -- Starting Sea Creature Offset
         PHANTOM = 17707019,
         CROSSBONES = 17707020, -- Starting Pirate Offset

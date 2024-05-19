@@ -22,6 +22,8 @@ zones[xi.zone.FULL_MOON_FOUNTAIN] =
         PLAY_TIME_IS_OVER             = 7765, -- Play time is over! Powers of dark mana, answer my call!
         YOU_SHOULD_BE_THANKFUL        = 7766, -- You should be thankful. I'll give you a shortaru trip back to the hell you came from!
         DONT_GIVE_UP                  = 7767, -- Don't give up, adventurer! You are Windurst's guiding star, our beacon of hope!
+
+        NO_BATTLEFIELD_ENTRY          = 7342, -- A strong magical force is whirling up from the platform.
     },
     mob =
     {

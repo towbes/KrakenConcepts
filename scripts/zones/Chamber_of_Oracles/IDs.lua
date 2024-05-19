@@ -31,6 +31,19 @@ zones[xi.zone.CHAMBER_OF_ORACLES] =
         TAKE_THAT_YOU_WHIPPERSNAPPER     = 7657, -- Take that, you whippersnapper!
         NOW_THAT_IM_WARMED_UP            = 7658, -- Now that I'm warmed up...
         THAT_LL_HURT_IN_THE_MORNING      = 7659, -- Ungh... That'll hurt in the morning...
+
+        TIME_IN_THE_BATTLEFIELD_IS_UP    = 7224, -- Your time in the battlefield is up! Now exiting...
+        PARTY_MEMBERS_ARE_ENGAGED        = 7239, -- The battlefield where your party members are engaged in combat is locked. Access is denied.
+        NO_BATTLEFIELD_ENTRY             = 7242, -- A mysterious force is sealing the platform.
+        TESTIMONY_IS_TORN                = 7282, -- Your <item> is torn...
+        TESTIMONY_WEARS                  = 7283, -- Your <item> [/rips into shreds!/is on the verge of tearing apart.../is showing signs of wear...] (# [use remains/uses remain].)
+        MEMBERS_OF_YOUR_PARTY            = 7530, -- Currently, # members of your party (including yourself) have clearance to enter the battlefield.
+        MEMBERS_OF_YOUR_ALLIANCE         = 7531, -- Currently, # members of your alliance (including yourself) have clearance to enter the battlefield.
+        TIME_LIMIT_FOR_THIS_BATTLE_IS    = 7533, -- The time limit for this battle is <number> minutes.
+        ORB_IS_CRACKED                   = 7534, -- There is a crack in the %. It no longer contains a monster.
+        A_CRACK_HAS_FORMED               = 7535, -- A crack has formed on the <item>, and the beast inside has been unleashed!
+        ENTERING_THE_BATTLEFIELD_FOR     = 7596, -- Entering the battlefield for [Through the Quicksand Caves/Legion XI Comitatensis/Shattering Stars (SAM)/Shattering Stars (NIN)/Shattering Stars (DRG)/Cactuar Suave/Eye of the Storm/The Scarlet King/Roar! A Cat Burglar Bares Her Fangs/Dragon Scales/Legion XI Comitatensis]!
+
     },
     mob =
     {

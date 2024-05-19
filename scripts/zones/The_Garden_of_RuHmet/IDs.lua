@@ -46,7 +46,7 @@ zones[xi.zone.THE_GARDEN_OF_RUHMET] =
             16920665, -- SE
         },
 
-        QNZDEI_GROUP_1 =
+                QNZDEI_GROUP_1 =
         {
             16920577,
             16920578,
@@ -70,18 +70,46 @@ zones[xi.zone.THE_GARDEN_OF_RUHMET] =
             16920588,
         },
 
-        JAILER_OF_FORTITUDE = 16921015,
-        KFGHRAH_WHM         = 16921016,
-        KFGHRAH_BLM         = 16921017,
-        IXAERN_DRK          = 16921018,
-        JAILER_OF_FAITH     = 16921021,
-        IXAERN_DRG          = 16921022,
-        IXZDEI_BASE         = 16921011,
-        QNZDEI_OFFSET       = 16920577,
+        JAILER_OF_FORTITUDE     = GetFirstID('Jailer_of_Fortitude'),
+        KFGHRAH_WHM             = GetFirstID('Kfghrah_WHM'),
+        KFGHRAH_BLM             = GetFirstID('Kfghrah_BLM'),
+        IXAERN_DRK              = GetFirstID('Ixaern_DRK'),
+        JAILER_OF_FAITH         = GetFirstID('Jailer_of_Faith'),
+        IXAERN_DRG              = GetFirstID('Ixaern_DRG'),
+        IXZDEI_BASE             = GetFirstID('Ixzdei_RDM'),
+        QNZDEI_OFFSET           = GetFirstID('Qnzdei'),
+
+        QNZDEI_GROUP_1 =
+        {
+            16920577,
+            16920578,
+            16920579,
+            16920580,
+        },
+
+        QNZDEI_GROUP_2 =
+        {
+            16920581,
+            16920582,
+            16920583,
+            16920584,
+        },
+
+        QNZDEI_GROUP_3 =
+        {
+            16920585,
+            16920586,
+            16920587,
+            16920588,
+        },
     },
 
     npc =
     {
+        QM_JAILER_OF_FORTITUDE  = GetFirstID('qm_jailer_of_fortitude'),
+        QM_IXAERN_DRK           = GetFirstID('qm_ixaern_drk'),
+        QM_JAILER_OF_FAITH      = GetFirstID('qm_jailer_of_faith'),
+        QNZDEI_DOOR_OFFSET      = GetFirstID('_0zw'),
         QM_IXAERN_DRK_POS =
         {
             { -560, 5.00, 239 }, -- Taru-Mithra
@@ -107,11 +135,6 @@ zones[xi.zone.THE_GARDEN_OF_RUHMET] =
             { -580.00, 0.00, -644.00 }, -- SW / Tarutaru tower.
             { -683.00, 0.00, -340.00 }, -- NW / Mithra tower.
         },
-
-        QM_JAILER_OF_FORTITUDE     = 16921027,
-        QM_IXAERN_DRK              = 16921028,
-        QM_JAILER_OF_FAITH         = 16921029,
-        QNZDEI_DOOR_OFFSET         = 16921068,
     },
 }
 

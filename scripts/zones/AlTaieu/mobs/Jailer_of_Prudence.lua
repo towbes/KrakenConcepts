@@ -12,7 +12,7 @@ entity.onMobInitialize = function(mob)
     mob:setMobMod(xi.mobMod.NO_DROPS, 1)
     mob:setMobMod(xi.mobMod.ALLI_HATE, 30)
     mob:addListener('WEAPONSKILL_STATE_ENTER', 'PRUDENCE_MIMIC_START', function(mobArg, skillID)
-        local prudenceIDs = { ID.mob.JAILER_OF_PRUDENCE_1, ID.mob.JAILER_OF_PRUDENCE_2 }
+        local prudenceIDs = { ID.mob.JAILER_OF_PRUDENCE, ID.mob.JAILER_OF_PRUDENCE + 1 }
         if mobArg:getLocalVar('[JoP]mimic') ~= 1 and mobArg:isAlive() then
             for _, jailer in ipairs(prudenceIDs) do
                 if mobArg:getID() ~= jailer then
@@ -92,11 +92,13 @@ entity.onMobDisengage = function(mob)
 end
 
 entity.onMobDeath = function(mob, player, optParams)
-    local firstPrudence  = GetMobByID(ID.mob.JAILER_OF_PRUDENCE_1)
-    local secondPrudence = GetMobByID(ID.mob.JAILER_OF_PRUDENCE_2)
-    local count          = player:getLocalVar('prudenceCount')
+    local count = player:getLocalVar('prudenceCount')
+    local mobId = mob:getID()
 
-    if firstPrudence or secondPrudence then
+    if
+        mobId == ID.mob.JAILER_OF_PRUDENCE or
+        mobId == ID.mob.JAILER_OF_PRUDENCE + 1
+    then
         player:setLocalVar('prudenceCount', count + 1)
     end
 
@@ -107,10 +109,9 @@ entity.onMobDeath = function(mob, player, optParams)
 end
 
 entity.onMobDespawn = function(mob)
-    local firstPrudence  = GetMobByID(ID.mob.JAILER_OF_PRUDENCE_1)
-    local secondPrudence = GetMobByID(ID.mob.JAILER_OF_PRUDENCE_2)
+    if mob:getID() == ID.mob.JAILER_OF_PRUDENCE then
+        local secondPrudence = GetMobByID(ID.mob.JAILER_OF_PRUDENCE + 1)
 
-    if mob:getID() == ID.mob.JAILER_OF_PRUDENCE_1 then
         secondPrudence:setMobMod(xi.mobMod.NO_DROPS, 0)
         secondPrudence:setAnimationSub(3) -- Mouth Open
         -- 100% triple attack
@@ -121,6 +122,8 @@ entity.onMobDespawn = function(mob)
         secondPrudence:setMod(xi.mod.UDMGMAGIC, 5000)
         secondPrudence:setMod(xi.mod.UDMGBREATH, 5000)
     else
+        local firstPrudence = GetMobByID(ID.mob.JAILER_OF_PRUDENCE)
+
         firstPrudence:setMobMod(xi.mobMod.NO_DROPS, 0)
         firstPrudence:setAnimationSub(3) -- Mouth Open
         -- 100% triple attack

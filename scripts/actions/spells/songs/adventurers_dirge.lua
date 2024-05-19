@@ -1,5 +1,6 @@
 -----------------------------------
--- Spell: Foe Requiem
+-- Spell: Adventurer's Dirge
+-- Reduces target party member's enmity.
 -----------------------------------
 local spellObject = {}
 

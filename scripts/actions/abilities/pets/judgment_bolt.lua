@@ -16,20 +16,12 @@ abilityObject.onPetAbility = function(target, pet, petskill, summoner, action)
     local damage = 48 + (level * 8)
     damage = damage + (dINT * 1.5)
     damage = xi.mobskills.mobMagicalMove(pet, target, petskill, damage, xi.element.THUNDER, 1, xi.mobskills.magicalTpBonus.NO_EFFECT, 0)
-    damage = xi.mobskills.mobAddBonuses(pet, target, damage.dmg, xi.element.THUNDER)
+    damage = xi.mobskills.mobAddBonuses(pet, target, damage.dmg, xi.element.THUNDER, petskill)
     damage = xi.summon.avatarFinalAdjustments(damage, pet, petskill, target, xi.attackType.MAGICAL, xi.damageType.THUNDER, 1)
 
     summoner:setMP(0)
     target:takeDamage(damage, pet, xi.attackType.MAGICAL, xi.damageType.THUNDER)
     target:updateEnmityFromDamage(pet, damage)
-
-    local ele = xi.element.THUNDER
-    local magicBurst = xi.mobskills.calculateMobMagicBurst(pet, ele, target)
-    if (magicBurst > 1) and target:hasStatusEffect(xi.effect.SKILLCHAIN) then -- Gated as this is run per target.
-        skill:setMsg(xi.msg.basic.JA_MAGIC_BURST)
-    else
-        skill:setMsg(xi.msg.basic.DAMAGE)
-    end
 
     return damage
 end

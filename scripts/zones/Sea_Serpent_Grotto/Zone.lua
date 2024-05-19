@@ -6,19 +6,13 @@ local ID = zones[xi.zone.SEA_SERPENT_GROTTO]
 local zoneObject = {}
 
 zoneObject.onInitialize = function(zone)
-    -- Only one Charbydis PH is up at one time
-    local chooseManta = math.random(1,2)
-    local mantaOne = ID.mob.CHARYBDIS - 2
-    local mantaTwo = ID.mob.CHARYBDIS - 4
-    if chooseManta == 2 then
-        DisallowRespawn(mantaOne, true)
-        DespawnMob(mantaOne)
-        SpawnMob(mantaTwo)
-    else
-        DisallowRespawn(mantaTwo, true)
-        DespawnMob(mantaTwo)
-        SpawnMob(mantaOne)
-    end
+    -- Charybdis PH alternates, remove one
+    local keys = {}
+
+    table.insert(keys, ID.mob.CHARYBDIS - 2)
+    table.insert(keys, ID.mob.CHARYBDIS - 4)
+
+    DespawnMob(keys[math.random(1, #keys)])
 
     xi.treasure.initZone(zone)
 end

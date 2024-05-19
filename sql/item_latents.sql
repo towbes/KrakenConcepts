@@ -100,8 +100,7 @@ INSERT INTO `item_latents` VALUES (11367,302,2,49,5929); -- triple attack 2% Ojo
 INSERT INTO `item_latents` VALUES (11405,23,20,13,406);  -- Kickattack Stance ATT +20
 INSERT INTO `item_latents` VALUES (11405,25,20,13,406);  -- Kickattack Stance ACC +20
 
--- Morana's Pigaches
-INSERT INTO `item_latents` VALUES (11408,974,10,9,14);   -- Shiva MACC + 10
+-- Morana Pigaches (11408) (pet latent via item lua)
 
 -- Louhi's Mask
 INSERT INTO `item_latents` VALUES (11474,161,-300,26,0);   -- Daytime: Physical damage taken -3%
@@ -110,8 +109,7 @@ INSERT INTO `item_latents` VALUES (11474,163,-300,26,1);   -- Nighttime: Magic d
 -- Diana Corona
 INSERT INTO `item_latents` VALUES (11486,28,4,37,4);     -- Full moon magic attack bonus +4
 
--- Fenrir's Crown
-INSERT INTO `item_latents` VALUES (11496,2022,5,9,9); -- Fenrir acc + 5
+-- Fenrir's Crown (11496) (pet latent via item lua)
 
 -- Trainee's Spectacles
 INSERT INTO `item_latents` VALUES (11499,127,1,24,48); -- SYNTH_TRAINEE: SKILL_FISHING - FISH: 1
@@ -167,6 +165,8 @@ INSERT INTO `item_latents` VALUES (11667,369,1,57,0);    -- Rollers Ring Refresh
 -- Oneiros Ring
 INSERT INTO `item_latents` VALUES (11671,302,2,55,100);  -- Triple Attack +2% when mp is greater than or equal to 100
 
+-- Fervor Ring (pet latent via item lua)
+
 -- Flock Ring
 INSERT INTO `item_latents` VALUES (11676,26,1,16,3);
 INSERT INTO `item_latents` VALUES (11676,26,1,16,4);
@@ -179,9 +179,12 @@ INSERT INTO `item_latents` VALUES (11727,68,1,16,4);
 INSERT INTO `item_latents` VALUES (11727,68,1,16,5);
 INSERT INTO `item_latents` VALUES (11727,68,1,16,6);
 
+-- Diabolos's Rope
+INSERT INTO `item_latents` VALUES (11752,346,1,9,16);    -- Diabolos perpetuation cost -1
+
 -- Destrier Beret
-INSERT INTO `item_latents` VALUES (11811,64,1,50,31);   -- Combat Skill Gain +1
-INSERT INTO `item_latents` VALUES (11811,65,1,50,31);   -- Magic Skill Gain +1
+INSERT INTO `item_latents` VALUES (11811,64,1,50,31);    -- Combat Skill Gain +1
+INSERT INTO `item_latents` VALUES (11811,65,1,50,31);    -- Magic Skill Gain +1
 INSERT INTO `item_latents` VALUES (11811,76,12,50,31);   -- MOVE_SPEED_GEAR_BONUS +12%
 INSERT INTO `item_latents` VALUES (11811,369,1,50,31);   -- Adds "Refresh"
 INSERT INTO `item_latents` VALUES (11811,370,1,50,31);   -- Adds "Regen"
@@ -214,29 +217,33 @@ INSERT INTO `item_latents` VALUES (12390,12,2,8,2);      -- INT+2 when MNK Subjo
 -- Healer's Shield
 INSERT INTO `item_latents` VALUES (12391,9,2,8,3);       -- DEX+2 when WHM subjob
 
-INSERT INTO `item_latents` VALUES  (12392,8,2,8,4);
-INSERT INTO `item_latents` VALUES  (12393,2,7,8,5);
-INSERT INTO `item_latents` VALUES  (12393,5,7,8,5);
-INSERT INTO `item_latents` VALUES  (12394,109,5,8,6);
-INSERT INTO `item_latents` VALUES  (12395,11,2,8,7);
-INSERT INTO `item_latents` VALUES  (12396,5,5,8,8);
-INSERT INTO `item_latents` VALUES  (12396,14,2,8,8);
-INSERT INTO `item_latents` VALUES  (12397,13,2,8,9);
-INSERT INTO `item_latents` VALUES  (12398,110,5,8,10);
-INSERT INTO `item_latents` VALUES  (12399,68,2,8,11);
-INSERT INTO `item_latents` VALUES  (12400,106,5,8,12);
-INSERT INTO `item_latents` VALUES  (12401,23,5,8,13);
-INSERT INTO `item_latents` VALUES  (12402,384,100,8,14);  -- Wyvern Targe Latent effect: Haste+1%
-INSERT INTO `item_latents` VALUES  (12403,2,10,8,15);
-INSERT INTO `item_latents` VALUES  (12403,5,5,8,15);
-INSERT INTO `item_latents` VALUES  (12461,369,1,13,4);
-INSERT INTO `item_latents` VALUES  (12589,370,2,13,3);
-INSERT INTO `item_latents` VALUES  (12621,370,2,13,3);
-INSERT INTO `item_latents` VALUES  (12717,71,5,13,6);
-INSERT INTO `item_latents` VALUES  (12742,1,32,56,0);     -- Rune Bangles +32 Def.
-INSERT INTO `item_latents` VALUES  (12742,68,5,56,0);     -- Rune Bangles +5 Eva.
-INSERT INTO `item_latents` VALUES  (12742,369,-4,56,0);   -- Rune Bangles -4MP/tic
-INSERT INTO `item_latents` VALUES  (12751,71,4,13,6);
+INSERT INTO `item_latents` VALUES (12392,8,2,8,4);
+INSERT INTO `item_latents` VALUES (12393,2,7,8,5);
+INSERT INTO `item_latents` VALUES (12393,5,7,8,5);
+INSERT INTO `item_latents` VALUES (12394,109,5,8,6);
+INSERT INTO `item_latents` VALUES (12395,11,2,8,7);
+INSERT INTO `item_latents` VALUES (12396,5,5,8,8);
+INSERT INTO `item_latents` VALUES (12396,14,2,8,8);
+INSERT INTO `item_latents` VALUES (12397,13,2,8,9);
+INSERT INTO `item_latents` VALUES (12398,110,5,8,10);
+INSERT INTO `item_latents` VALUES (12399,68,2,8,11);
+INSERT INTO `item_latents` VALUES (12400,106,5,8,12);
+INSERT INTO `item_latents` VALUES (12401,23,5,8,13);
+INSERT INTO `item_latents` VALUES (12402,384,100,8,14);  -- Wyvern Targe Latent effect: Haste+1%
+INSERT INTO `item_latents` VALUES (12403,2,10,8,15);
+INSERT INTO `item_latents` VALUES (12403,5,5,8,15);
+INSERT INTO `item_latents` VALUES (12461,369,1,13,4);
+
+-- Accord Hat
+INSERT INTO `item_latents` VALUES (12493,346,1,9,9); -- Fenrir perpetuation cost -1
+
+INSERT INTO `item_latents` VALUES (12589,370,2,13,3);
+INSERT INTO `item_latents` VALUES (12621,370,2,13,3);
+INSERT INTO `item_latents` VALUES (12717,71,5,13,6);
+INSERT INTO `item_latents` VALUES (12742,1,32,56,0);     -- Rune Bangles +32 Def.
+INSERT INTO `item_latents` VALUES (12742,68,5,56,0);     -- Rune Bangles +5 Eva.
+INSERT INTO `item_latents` VALUES (12742,369,-4,56,0);   -- Rune Bangles -4MP/tic
+INSERT INTO `item_latents` VALUES (12751,71,4,13,6);
 
 -- Brisingamen
 INSERT INTO `item_latents` VALUES (13097,2,10,26,0);     -- Daytime: HP +10
@@ -768,7 +775,8 @@ INSERT INTO `item_latents` VALUES (14055,23,7,1,75);     -- Attack+7 when HP >75
 -- Unicorn Mittens +1
 INSERT INTO `item_latents` VALUES (14056,23,8,1,75);     -- Attack+8 when HP >75%
 
-INSERT INTO `item_latents` VALUES  (14062,346,0,9,8);
+-- Carbunle Mitts
+INSERT INTO `item_latents` VALUES (14062,346,0,9,8);     -- Perpetuation placeholder (real logic is in status_effect_container.cpp)
 
 -- Garden Bangles / Feronia's Bangles
 INSERT INTO `item_latents` VALUES (14065,370,1,26,0);    -- Daytime: Regen +1HP/tick
@@ -917,8 +925,11 @@ INSERT INTO `item_latents` VALUES (14363,5,20,53,0);     -- MP +20 in areas insi
 -- Rasetsu Samue
 INSERT INTO `item_latents` VALUES (14376,291,1,0,25);    -- Counter+1 when HP <25%
 
-INSERT INTO `item_latents` VALUES  (14401,346,1,9,7);
-INSERT INTO `item_latents` VALUES  (14410,346,1,9,6);
+-- Duende Cotehardie
+INSERT INTO `item_latents` VALUES (14401,346,1,9,7);     -- Dark Spirit perpetuation -1
+
+-- Nimbus Doublet
+INSERT INTO `item_latents` VALUES (14410,346,1,9,6);     -- Light Spirit perpetuation -1
 
 -- Gaudy Harness
 INSERT INTO `item_latents` VALUES (14413,369,1,5,49);    -- "Refresh" effect while MP under 49 (actual number,not %)
@@ -1069,6 +1080,8 @@ INSERT INTO `item_latents` VALUES (14953,384,100,14,0);  -- Haste+1%
 INSERT INTO `item_latents` VALUES  (14954,5,35,14,0);
 INSERT INTO `item_latents` VALUES  (14954,71,1,14,0);
 INSERT INTO `item_latents` VALUES  (14954,168,-5,14,0);
+
+-- Evoker's Gages (14960) (pet latent via item lua)
 
 -- Trainee Gloves
 INSERT INTO `item_latents` VALUES (15008,133,1,24,54); -- SYNTH_TRAINEE: BONE - BONE: 1
@@ -1258,10 +1271,9 @@ INSERT INTO `item_latents` VALUES (15516,26,-16,52,8);   -- cumulative ranged ac
 INSERT INTO `item_latents` VALUES (15519,370,1,58,0);    -- storm muffler regen +1
 INSERT INTO `item_latents` VALUES (15520,68,7,58,0);     -- storm torque eva +7
 
--- Sacrifice Torque
+-- Sacrifice Torque (pet latent via item lua)
 INSERT INTO `item_latents` VALUES (15528,369,-3,21,21); -- AVATAR_IN_PARTY: 21 - REFRESH: -3
 INSERT INTO `item_latents` VALUES (15528,370,-8,21,21); -- AVATAR_IN_PARTY: 21 - REGEN:   -8
--- TODO: INSERT INTO `item_latents` VALUES (15528,??,3,21,21); -- AVATAR_IN_PARTY: 21 - Avatar ATT: 3
 
 -- Ace's Locket
 INSERT INTO `item_latents` VALUES (15529,291,5,0,25); -- HP_UNDER_PERCENT: 25 - COUNTER: 5
@@ -1498,15 +1510,13 @@ INSERT INTO `item_latents` VALUES (16124,68,2,23,65);
 INSERT INTO `item_latents` VALUES (16132,25,-20,26,1);   -- Nighttime: ACC -20
 INSERT INTO `item_latents` VALUES (16133,25,-30,26,1);   -- Nighttime: ACC -30
 
--- Karura Hachigane
-INSERT INTO `item_latents` VALUES (16154,346,2,9,13);    -- Garuda Perp Cost - 2
-INSERT INTO `item_latents` VALUES (16154,2021,10,9,13);  -- Garuda ATT +10
-INSERT INTO `item_latents` VALUES (16154,2022,10,9,13);  -- Garuda ACC +10
+-- Karura Hachigane (pet latent via item lua)
+INSERT INTO `item_latents` VALUES (16154,346,2,9,13);
 
-INSERT INTO `item_latents` VALUES  (16165,109,5,58,0);    -- storm shield shiel skill +5
-INSERT INTO `item_latents` VALUES  (16217,240,5,8,16);
-INSERT INTO `item_latents` VALUES  (16218,242,5,8,17);
-INSERT INTO `item_latents` VALUES  (16219,27,-2,8,18);
+INSERT INTO `item_latents` VALUES (16165,109,5,58,0);    -- storm shield shiel skill +5
+INSERT INTO `item_latents` VALUES (16217,240,5,8,16);
+INSERT INTO `item_latents` VALUES (16218,242,5,8,17);
+INSERT INTO `item_latents` VALUES (16219,27,-2,8,18);
 
 -- Volitional Mantle (Latent effect is active when Cover is active.)
 INSERT INTO `item_latents` VALUES (16220,10,10,13,114);  -- VIT+10
@@ -2844,6 +2854,9 @@ INSERT INTO `item_latents` VALUES (23804,416,5,30,0);    -- Watersday: NULL_PHYS
 INSERT INTO `item_latents` VALUES (23804,476,5,30,0);    -- Watersday: MAGIC_NULL 5% chance
 INSERT INTO `item_latents` VALUES (23804,958,25,30,0);   -- Watersday: STATUSRES +20
 -- TODO: "Occasionaly null breath dmg" OR "Occasionally null all damage"
+
+-- Carbie Cap +1
+INSERT INTO `item_latents` VALUES (25633,346,1,9,8);     -- Carbuncle perpetuation -1
 
 INSERT INTO `item_latents` VALUES (27342,63,10,13,64);   -- Fallen's Sollerets,"Last Resort"+1
 INSERT INTO `item_latents` VALUES (27343,63,10,13,64);   -- Fallen's Sollerets +1,"Last Resort"+1

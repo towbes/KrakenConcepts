@@ -86,13 +86,13 @@ zones[xi.zone.PERIQIA] =
 
     npc =
     {
-        ANCIENT_LOCKBOX = 17006809,
-        RUNE_OF_RELEASE = 17006810,
-        _1K6            = 17006845,
-        _1KX            = 17006872,
-        _1KZ            = 17006874,
-        _JK1            = 17006876,
-        _JK3            = 17006878,
+        ANCIENT_LOCKBOX = GetFirstID('Ancient_Lockbox'),
+        RUNE_OF_RELEASE = GetFirstID('Rune_of_Release'),
+        _1K6            = GetFirstID('_1k6'),
+        _1KX            = GetFirstID('_1kx'),
+        _1KZ            = GetFirstID('_1kz'),
+        _JK1            = GetFirstID('_jk1'),
+        _JK3            = GetFirstID('_jk3'),
     }
 }
 

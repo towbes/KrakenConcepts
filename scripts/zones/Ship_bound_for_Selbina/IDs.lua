@@ -23,10 +23,10 @@ zones[xi.zone.SHIP_BOUND_FOR_SELBINA] =
     },
     mob =
     {
+        ENAGAKURE = GetFirstID('Enagakure'),
         SEA_CREATURES = 17678342, -- Sea Creature Offset
         SEA_HORROR = 17678350,
         PHANTOM = 17678347,
-        ENAGAKURE = 17678351,
     },
 }
 

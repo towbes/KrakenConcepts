@@ -26,15 +26,24 @@ zones[xi.zone.NAVUKGO_EXECUTION_CHAMBER] =
         KARABARA_LIGHTNING            = 7648, -- How I love to rip things asunder! Witness the power of lightning and thunder!
         KARABARA_WATER                = 7649, -- Water is more dangerous than most expect. Never fear, I'll teach you respect!
         KARABABA_QUIT                 = 7657, -- What a completely useless shield. It's time for me to quit the field.
+
+        -- TODO: Shift IDs
+        TIME_IN_THE_BATTLEFIELD_IS_UP = 7224, -- Your time in the battlefield is up! Now exiting...
+        PARTY_MEMBERS_ARE_ENGAGED     = 7239, -- The battlefield where your party members are engaged in combat is locked. Access is denied.
+        NO_BATTLEFIELD_ENTRY          = 7264, -- The door is locked.
+        TESTIMONY_IS_TORN             = 7282, -- Your <item> is torn...
+        TESTIMONY_WEARS               = 7283, -- Your <item> [/rips into shreds!/is on the verge of tearing apart.../is showing signs of wear...] (# [use remains/uses remain].)
+        MEMBERS_OF_YOUR_PARTY         = 7530, -- Currently, # members of your party (including yourself) have clearance to enter the battlefield.
+        MEMBERS_OF_YOUR_ALLIANCE      = 7531, -- Currently, # members of your alliance (including yourself) have clearance to enter the battlefield.
+        TIME_LIMIT_FOR_THIS_BATTLE_IS = 7533, -- The time limit for this battle is <number> minutes.
+        ORB_IS_CRACKED                = 7534, -- There is a crack in the %. It no longer contains a monster.
+        A_CRACK_HAS_FORMED            = 7535, -- A crack has formed on the <item>, and the beast inside has been unleashed!
+        ENTERING_THE_BATTLEFIELD_FOR  = 7597, -- Entering the battlefield for [Tough Nut to Crack/Happy Caster/Omens/Achieving True Power/Shield of Diplomacy]!
     },
     mob =
     {
-        KARABABA_OFFSET = 17039401,
-        IMMORTAL_FLAN2  = 17039375, -- IMMORTAL_FLAN1 always pops in battlefield, other flans pop depending on party size
-        IMMORTAL_FLAN3  = 17039376,
-        IMMORTAL_FLAN4  = 17039377,
-        IMMORTAL_FLAN5  = 17039378,
-        IMMORTAL_FLAN6  = 17039379,
+        KARABABA_OFFSET      = GetFirstID('Karababa'),
+        IMMORTAL_FLAN_OFFSET = GetFirstID('Immortal_Flan'),
     },
     npc =
     {

@@ -29,25 +29,24 @@ zones[xi.zone.ALTAIEU] =
     },
     mob =
     {
-        EUVHIS_WHITE         = 16912811,
-        EUVHIS_RED           = 16912817,
-        EUVHIS_BLACK         = 16912823,
-        RUAERN_BASE          = 16912829,
-        JAILER_OF_HOPE       = 16912838,
-        JAILER_OF_JUSTICE    = 16912839,
+        EUVHIS_OFFSET      = GetFirstID('Aweuvhi'),
+        RUAERN_OFFSET      = GetFirstID('Ruaern'),
+        RUAERN_BASE        = 16912829, -- Used by ASB IF Missions. Adapt to RUAERN_OFFSET at some point.
+        JAILER_OF_HOPE     = GetFirstID('Jailer_of_Hope'),
+        JAILER_OF_JUSTICE  = GetFirstID('Jailer_of_Justice'),
+        JAILER_OF_PRUDENCE = GetFirstID('Jailer_of_Prudence'),
+        JAILER_OF_LOVE     = GetFirstID('Jailer_of_Love'),
+        ABSOLUTE_VIRTUE    = GetFirstID('Absolute_Virtue'),
         QN_XZOMIT_START      = 16912840,
         QN_XZOMIT_END        = 16912845,
-        JAILER_OF_PRUDENCE_1 = 16912846,
-        JAILER_OF_PRUDENCE_2 = 16912847,
-        JAILER_OF_LOVE       = 16912848,
-        ABSOLUTE_VIRTUE      = 16912876,
     },
     npc =
     {
-        RUBIOUS_CRYSTAL_BASE      = 16912899,
-        AURORAL_UPDRAFT_OFFSET    = 16912902,
-        SWIRLING_VORTEX_OFFSET    = 16912908,
-        DIMENSIONAL_PORTAL_OFFSET = 16912910,
+        RUBIOUS_CRYSTAL_OFFSET    = GetFirstID('_0x1'),
+        RUBIOUS_CRYSTAL_BASE      = GetFirstID('_0x1'), -- From ASB, adding for compatability till LSB converts missions to IF
+        AURORAL_UPDRAFT_OFFSET    = GetFirstID('Auroral_Updraft'),
+        SWIRLING_VORTEX_OFFSET    = GetFirstID('Swirling_Vortex'),
+        DIMENSIONAL_PORTAL_OFFSET = GetFirstID('Dimensional_Portal'),
     },
 }
 

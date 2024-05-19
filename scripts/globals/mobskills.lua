@@ -613,15 +613,23 @@ xi.mobskills.mobMagicalMove = function(mob, target, skill, damage, element, dmgm
     local finaldmg = damage * mab * ftpMult + dStat -- dmgmod
 
     -- get resistance
-    local avatarAccBonus = 0
+    local petAccBonus = 0
     if mob:isPet() and mob:getMaster() ~= nil then
         local master = mob:getMaster()
         if mob:isAvatar() then
-            avatarAccBonus = utils.clamp(master:getSkillLevel(xi.skill.SUMMONING_MAGIC) - master:getMaxSkillLevel(mob:getMainLvl(), xi.job.SMN, xi.skill.SUMMONING_MAGIC), 0, 200)
+            petAccBonus = utils.clamp(master:getSkillLevel(xi.skill.SUMMONING_MAGIC) - master:getMaxSkillLevel(mob:getMainLvl(), xi.job.SMN, xi.skill.SUMMONING_MAGIC), 0, 200)
+        end
+
+        local skillchainTier, _ = xi.magicburst.formMagicBurst(element, target)
+        if
+            mob:getPetID() > 0 and
+            skillchainTier > 0
+        then
+            petAccBonus = petAccBonus + 25
         end
     end
 
-    local resist       = xi.mobskills.applyPlayerResistance(mob, nil, target, mob:getStat(xi.mod.INT)-target:getStat(xi.mod.INT), avatarAccBonus, element)
+    local resist       = xi.mobskills.applyPlayerResistance(mob, nil, target, mob:getStat(xi.mod.INT)-target:getStat(xi.mod.INT), petAccBonus, element)
     local magicDefense = getElementalDamageReduction(target, element)
 
     if not ignoreres then
@@ -685,17 +693,18 @@ xi.mobskills.applyPlayerResistance = function(mob, effect, target, diff, bonus, 
         percentBonus = percentBonus - xi.magic.getEffectResistance(target, effect)
     end
 
-    local p = getMagicHitRate(mob, target, 0, element, percentBonus, magicaccbonus)
+    local magicHitRate = getMagicHitRate(mob, target, 0, element, percentBonus, magicaccbonus)
 
-    return getMagicResist(p)
+    return getMagicResist(mob, target, xi.skill.NONE, element, magicHitRate)
 end
 
-xi.mobskills.mobAddBonuses = function(caster, target, dmg, ele, ignoreresist) -- used for SMN magical bloodpacts, despite the name.
+xi.mobskills.mobAddBonuses = function(caster, target, dmg, ele, skill, ignoreresist) -- used for SMN magical bloodpacts, despite the name.
     if ignoreresist == 0 then
         ignoreresist = false
     end
 
     local magicDefense = getElementalDamageReduction(target, ele)
+
     if ignoreresist == true then
         dmg = math.floor(dmg)
     else
@@ -736,6 +745,14 @@ xi.mobskills.mobAddBonuses = function(caster, target, dmg, ele, ignoreresist) --
     dmg             = math.floor(dmg * dayWeatherBonus)
 
     local burst = xi.mobskills.calculateMobMagicBurst(caster, ele, target)
+    if
+        skill and
+        burst > 1.0 and
+        caster:getPetID() > 0 -- all pets except charmed pets can get magic burst message, but only with petskill action
+    then
+        skill:setMsg(xi.msg.basic.JA_MAGIC_BURST)
+    end
+
     dmg         = math.floor(dmg * burst)
 
     local mdefBarBonus = 0
@@ -872,7 +889,13 @@ xi.mobskills.mobFinalAdjustments = function(dmg, mob, skill, target, attackType,
 
     -- set message to damage
     -- this is for AoE because its only set once
-    skill:setMsg(xi.msg.basic.DAMAGE)
+    if mob:getCurrentAction() == xi.action.PET_MOBABILITY_FINISH then
+        if skill:getMsg() ~= xi.msg.basic.JA_MAGIC_BURST then
+            skill:setMsg(xi.msg.basic.USES_JA_TAKE_DAMAGE)
+        end
+    else
+        skill:setMsg(xi.msg.basic.DAMAGE)
+    end
 
     --Handle shadows depending on shadow behaviour / attackType
     if

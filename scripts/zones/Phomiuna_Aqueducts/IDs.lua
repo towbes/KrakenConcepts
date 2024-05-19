@@ -52,7 +52,7 @@ zones[xi.zone.PHOMIUNA_AQUEDUCTS] =
     },
     npc =
     {
-        LADDER_KNOCKING       = 16888096,
+        LADDER_KNOCKING = GetTableOfIDs('Wooden_Ladder')[4], -- 4th Wooden Ladder on the list
         QM_TAVNAZIAN_COOKBOOK = 16888123,
     },
 }

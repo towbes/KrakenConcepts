@@ -258,9 +258,12 @@ namespace battleutils
     bool    DrawIn(CBattleEntity* PTarget, CMobEntity* PMob, float offset, uint8 drawInRange, uint16 maximumReach, bool includeParty, bool includeDeadAndMount = false);
     void    DoWildCardToEntity(CCharEntity* PCaster, CCharEntity* PTarget, uint8 roll);
     bool    DoRandomDealToEntity(CCharEntity* PChar, CCharEntity* PTarget);
-    void    AddTraits(CBattleEntity* PEntity, TraitList_t* TraitList, uint8 level);
-    void    AddTraitsSJ(CBattleEntity* PEntity, TraitList_t* TraitList, uint8 level, size_t cutoff);
-    bool    HasClaim(CBattleEntity* PEntity, CBattleEntity* PTarget);
+
+    void turnTowardsTarget(CBaseEntity* PEntity, CBaseEntity* PTarget, bool force = false);
+
+    void AddTraits(CBattleEntity* PEntity, TraitList_t* TraitList, uint8 level);
+    void AddTraitsSJ(CBattleEntity* PEntity, TraitList_t* TraitList, uint8 level, size_t cutoff);
+    bool HasClaim(CBattleEntity* PEntity, CBattleEntity* PTarget);
 
     uint32 CalculateSpellCastTime(CBattleEntity*, CMagicState*);
     uint16 CalculateSpellCost(CBattleEntity*, CSpell*);

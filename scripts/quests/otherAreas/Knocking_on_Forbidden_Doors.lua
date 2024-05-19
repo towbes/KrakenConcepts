@@ -214,7 +214,7 @@ quest.sections =
                     quest:complete(player)
                 end,
             },
-        },
+        }
     },
 
     -- Quest complete
@@ -228,13 +228,13 @@ quest.sections =
         {
             ['Fyi_Chalmwoh'] =
             {
-                onTrigger = function(player, npc)
-                    return quest:event(321, { [1] = xi.mannequin.getMannequins(player),
-                    [2] = xi.mannequin.cost.PURCHASE,
-                    [3] = xi.mannequin.cost.TRADE,
-                    [4] = xi.mannequin.cost.POSE,
-                    [5] = player:getGil(),
-                    })
+                onTrigger = function(player, csid, option, npc)
+                    return quest:progressEvent(321, { [1] = xi.mannequin.getMannequins(player),
+                        [2] = xi.mannequin.cost.PURCHASE,
+                        [3] = xi.mannequin.cost.TRADE,
+                        [4] = xi.mannequin.cost.POSE,
+                        [5] = player:getGil(),
+                        })
                 end,
 
                 onTrade = function(player, npc, trade)
