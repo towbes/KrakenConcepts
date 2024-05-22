@@ -25,9 +25,9 @@ quest.sections =
         check = function(player, status, vars)
             return status == xi.questStatus.QUEST_AVAILABLE and
                 ((player:getMainJob() == xi.job.RDM and
-                player:getMainLvl() >= 40) or
+                player:getMainLvl() >= xi.settings.main.AF1_QUEST_LEVEL) or
                 (player:getSubJob() == xi.job.RDM and
-                player:getSubLvl() >= 40))
+                player:getSubLvl() >= xi.settings.main.AF1_QUEST_LEVEL))
         end,
 
         [xi.zone.SOUTHERN_SAN_DORIA] =

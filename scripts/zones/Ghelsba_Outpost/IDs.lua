@@ -12,11 +12,11 @@ zones[xi.zone.GHELSBA_OUTPOST] =
         TIME_IN_THE_BATTLEFIELD_IS_UP    = 164,  -- Your time in the battlefield is up! Now exiting...
         PARTY_MEMBERS_ARE_ENGAGED        = 179,  -- The battlefield where your party members are engaged in combat is locked. Access is denied.
         UNABLE_TO_PROTECT                = 218,  -- You were unable to protect the special character. Now leaving the battlefield.
-        MEMBERS_OF_YOUR_PARTY            = 470, -- Currently, # members of your party (including yourself) have clearance to enter the battlefield.
-        MEMBERS_OF_YOUR_ALLIANCE         = 471, -- Currently, # members of your alliance (including yourself) have clearance to enter the battlefield.
-        TIME_LIMIT_FOR_THIS_BATTLE_IS    = 473, -- The time limit for this battle is <number> minutes.
-        ORB_IS_CRACKED                   = 474, -- There is a crack in the %. It no longer contains a monster.
-        A_CRACK_HAS_FORMED               = 475, -- A crack has formed on the <item>, and the beast inside has been unleashed!
+        MEMBERS_OF_YOUR_PARTY            = 470,  -- Currently, # members of your party (including yourself) have clearance to enter the battlefield.
+        MEMBERS_OF_YOUR_ALLIANCE         = 471,  -- Currently, # members of your alliance (including yourself) have clearance to enter the battlefield.
+        TIME_LIMIT_FOR_THIS_BATTLE_IS    = 473,  -- The time limit for this battle is <number> minutes.
+        ORB_IS_CRACKED                   = 474,  -- There is a crack in the %. It no longer contains a monster.
+        A_CRACK_HAS_FORMED               = 475,  -- A crack has formed on the <item>, and the beast inside has been unleashed!
         PARTY_MEMBERS_HAVE_FALLEN        = 509,  -- All party members have fallen in battle. Now leaving the battlefield.
         THE_PARTY_WILL_BE_REMOVED        = 516,  -- If all party members' HP are still zero after # minute[/s], the party will be removed from the battlefield.
         ITEM_CANNOT_BE_OBTAINED          = 6916, -- You cannot obtain the <item>. Come back after sorting your inventory.
@@ -39,19 +39,9 @@ zones[xi.zone.GHELSBA_OUTPOST] =
     },
     mob =
     {
-        THOUSANDARM_DESHGLESH_PH =
-        {
-            [17350825] = 17350826, -- 123.357 -0.102 332.706
-            [17350818] = 17350826, -- 94.576 -1.274 333.168
-            [17350819] = 17350826, -- 98.658 -0.319 328.269
-            [17350820] = 17350826, -- 96.763 -0.047 319.781
-            [17350821] = 17350826, -- 85.215 -0.739 344.257
-            [17350817] = 17350826, -- 80.000 -0.249 328.000
-            [17350806] = 17350826, -- 75.988 -0.084 382.437
-            [17350824] = 17350826, -- 82.000 -0.500 366.000
-        },
+        THOUSANDARM_DESHGLESH = GetFirstID('Thousandarm_Deshglesh'),
+        CARRION_DRAGON        = GetFirstID('Carrion_Dragon'),
         ORCISH_BARRICADER = 17350801,
-        CARRION_DRAGON    = 17350941,
     },
     npc =
     {

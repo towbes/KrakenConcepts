@@ -24,7 +24,6 @@ zones[xi.zone.BEAUCEDINE_GLACIER_S] =
         NO_RESPONSE                   = 8591, -- There is no response...
         VOIDWALKER_DESPAWN            = 8614, -- The monster fades before your eyes, a look of disappointment on its face.
         GREETINGS_TRAVELER            = 8618, -- Greetings, fair traveler. My people would entreat thy assistance, and offer rich reward in return. Thou shouldst speak with my sister Callisto, who abides in Grauberg's Witchfire Glen.
-        SCYLLA_DESPAWN                = 8664, -- You have lost sight of the monster and can no longer sense its presence.
         VOIDWALKER_NO_MOB             = 8665, -- The <keyitem> quivers ever so slightly, but emits no light. There seem to be no monsters in the area.
         VOIDWALKER_MOB_TOO_FAR        = 8666, -- The <keyitem> quivers ever so slightly and emits a faint light. There seem to be no monsters in the immediate vicinity.
         VOIDWALKER_MOB_HINT           = 8667, -- The <keyitem> resonates [feebly/softly/solidly/strongly/very strongly/furiously], sending a radiant beam of light lancing towards a spot roughly <number> [yalm/yalms] [east/southeast/south/southwest/west/northwest/north/northeast] of here.
@@ -36,19 +35,14 @@ zones[xi.zone.BEAUCEDINE_GLACIER_S] =
         GATHERED_DAWNDROPS_LIGHT      = 8693, -- The gathered dawndrops unleash a brilliant light, melding together to form <keyitem>!
         RETRACED_ALL_JUNCTIONS        = 8694, -- You have retraced all junctions of eventualities. Hasten back to where Cait Sith and Lilisette await.
         COMMON_SENSE_SURVIVAL         = 8698, -- It appears that you have arrived at a new survival guide provided by the Servicemen's Mutual Aid Network. Common sense dictates that you should now be able to teleport here from similar tomes throughout the world.
+
+        SCYLLA_DESPAWN                = 8664, -- You have lost sight of the monster and can no longer sense its presence.
     },
 
     mob =
     {
+        GRANDGOULE         = GetFirstID('GrandGoule'),
         ORCISH_BLOODLETTER = GetFirstID('Orcish_Bloodletter'),
-
-        GRANDGOULE_PH =
-        {
-            [17334475] = 17334482,
-            [17334476] = 17334482,
-            [17334477] = 17334482,
-        },
-
         SCYLLA = 17334336,
 
         VOIDWALKER =

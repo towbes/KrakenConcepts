@@ -40,13 +40,14 @@ zones[xi.zone.BIBIKI_BAY] =
         HAVE_BILLET                   = 7497, -- You cannot buy morrre than one <item>. Use the one you have now to ride the next ship.
         LEFT_BILLET                   = 7502, -- You use your <item>. (<number> trip[/s] remaining)
         END_BILLET                    = 7503, -- You use up your <item>.
-        MTICKET_ADDED                 = 7504, -- Ticket # was/were added to your xxxx
-        SHEN_QM                       = 7618, -- Innumerable shrimp shells are floating in the water here.
-        SHEN_SPAWN                    = 7619, -- The <item> begins skimming quietly across the surface of the water. What's this!? An enormous creature is chasing after it from below!!!
         NOTHING_LEFT_INTEREST         = 7620, -- There is nothing left of interest here.
         UNITY_WANTED_BATTLE_INTERACT  = 8626, -- Those who have accepted % must pay # Unity accolades to participate. The content for this Wanted battle is #. [Ready to begin?/You do not have the appropriate object set, so your rewards will be limited.]
         COMMON_SENSE_SURVIVAL         = 8648, -- It appears that you have arrived at a new survival guide provided by the Adventurers' Mutual Aid Network. Common sense dictates that you should now be able to teleport here from similar tomes throughout the world.
         NEWS_BILLET                   = 8671, -- <item> has been [added to your list of favorites/removed from your list of favorites].
+
+        MTICKET_ADDED                 = 7504, -- Ticket # was/were added to your xxxx
+        SHEN_QM                       = 7618, -- Innumerable shrimp shells are floating in the water here.
+        SHEN_SPAWN                    = 7619, -- The <item> begins skimming quietly across the surface of the water. What's this!? An enormous creature is chasing after it from below!!!
     },
     mob =
     {

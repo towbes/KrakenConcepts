@@ -14,7 +14,6 @@ zones[xi.zone.LUFAISE_MEADOWS] =
         KEYITEM_LOST                  = 6394, -- Lost key item: <keyitem>.
         NOTHING_OUT_OF_ORDINARY       = 6404, -- There is nothing out of the ordinary here.
         SENSE_OF_FOREBODING           = 6405, -- You are suddenly overcome with a sense of foreboding...
-        FELLOW_MESSAGE_OFFSET         = 6419, -- I'm ready. I suppose.
         CARRIED_OVER_POINTS           = 7001, -- You have carried over <number> login point[/s].
         LOGIN_CAMPAIGN_UNDERWAY       = 7002, -- The [/January/February/March/April/May/June/July/August/September/October/November/December] <number> Login Campaign is currently underway!
         LOGIN_NUMBER                  = 7003, -- In celebration of your most recent login (login no. <number>), we have provided you with <number> points! You currently have a total of <number> points.
@@ -48,22 +47,21 @@ zones[xi.zone.LUFAISE_MEADOWS] =
         KURREA_TEXT                   = 7793, -- The stench of rotten flesh fills the air around you. Some scavenger must have made this place its territory.
         COMMON_SENSE_SURVIVAL         = 8745, -- It appears that you have arrived at a new survival guide provided by the Adventurers' Mutual Aid Network. Common sense dictates that you should now be able to teleport here from similar tomes throughout the world.
         UNITY_WANTED_BATTLE_INTERACT  = 8809, -- Those who have accepted % must pay # Unity accolades to participate. The content for this Wanted battle is #. [Ready to begin?/You do not have the appropriate object set, so your rewards will be limited.]
+        FELLOW_MESSAGE_OFFSET         = 6419, -- I'm ready. I suppose.
     },
     mob =
     {
-        PADFOOT               =
-        {
-            16875552, -- !pos -43.689 0.487 -328.028
-            16875578, -- !pos 260.445 -1.761 -27.862
-            16875615, -- !pos 412.447 -0.057 -200.161
-            16875703, -- !pos -378.950 -15.742 144.215
-            16875748, -- !pos -141.523 -15.529 91.709
-        },
+        PADFOOT               = GetTableOfIDs('Padfoot'),
         FLOCKBOCK             = GetFirstID('Flockbock'),
-        MEGALOBUGARD_PH       =
-        {
-            [16875720] = 16875741, -- -137.168 -15.390 91.016
-        },
+        MEGALOBUGARD          = GetFirstID('Megalobugard'),
+        LESHY_OFFSET          = GetFirstID('Leshy'),
+        COLORFUL_LESHY        = GetFirstID('Colorful_Leshy'),
+        SPLINTERSPINE_GRUKJUK = GetFirstID('Splinterspine_Grukjuk'),
+        KURREA                = GetFirstID('Kurrea'),
+        AMALTHEIA             = GetFirstID('Amaltheia'),
+        SENGANN               = 16875690,
+        YALUN_EKE             = 16875600,
+        BAUMESEL              = 16875777,
         YALUN_EKE_PH          =
         {
             [16875593] = 16875600, -- 236.418, -0.573, -118.742
@@ -74,14 +72,6 @@ zones[xi.zone.LUFAISE_MEADOWS] =
             16875775,
             16875776,
         },
-        LESHY_OFFSET          = 16875754,
-        COLORFUL_LESHY        = 16875762,
-        SPLINTERSPINE_GRUKJUK = 16875774,
-        KURREA                = 16875778,
-        AMALTHEIA             = 16875779,
-        SENGANN               = 16875690,
-        YALUN_EKE             = 16875600,
-        BAUMESEL              = 16875777,
     },
     npc =
     {

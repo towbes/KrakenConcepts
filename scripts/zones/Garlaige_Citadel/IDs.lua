@@ -34,15 +34,6 @@ zones[xi.zone.GARLAIGE_CITADEL] =
         HEAT_FROM_CEILING             = 7307,  -- You feel a terrible heat from the ceiling.
         THE_PRESENCE_MOVES            = 7311,  -- The presence in the ceiling seems to have moved to the east.
         CHEST_UNLOCKED                = 7337,  -- You unlock the chest!
-        BOX_DEFAULT                   = 7347,  -- Boxes are carelessly scattered here.
-        BOX_SCATTERED                 = 7348,  -- Boxes are carelessly scattered here. Perhaps you could open them with Nail Puller
-        WHATS_WRONG                   = 7453,  -- What's wrong?
-        I_THANK_YOU                   = 7455,  -- I thank you from the bee-bop-bottom of my itsy-bitsy heartaru! You can collect your reward from Dehn!
-        LETS_GO                       = 7454,  -- I'm ready when you and your buddie-wuddies are. Let's go go go!
-        RAN_OUT_OF_TIME               = 7456,  -- Well, ding-dang-dong! We've run out of time!
-        TIME_LIMIT                    = 7458,  -- You have { e:0 } minutes (Earth time) to complete this quest.
-        LOST_SIGHT                    = 7459,  -- You have lost sight of Wanzo-Unzozo...
-        BYE_BYE                       = 7460,  -- I'll see you around sometime! Bye-bee-bye!
         ITEMS_ITEMS_LA_LA             = 7464,  -- You can hear a strange voice... Items, items, la la la la la
         GOBLIN_SLIPPED_AWAY           = 7470,  -- The Goblin slipped away when you were not looking...
         YOU_COULD_OPEN_THE_GATE       = 7522,  -- If only you had %, you could open the banishing gate...
@@ -58,25 +49,28 @@ zones[xi.zone.GARLAIGE_CITADEL] =
         UNCANNY_SENSATION             = 11536, -- You are assaulted by an uncanny sensation.
         COMMON_SENSE_SURVIVAL         = 11567, -- It appears that you have arrived at a new survival guide provided by the Adventurers' Mutual Aid Network. Common sense dictates that you should now be able to teleport here from similar tomes throughout the world.
         UNITY_WANTED_BATTLE_INTERACT  = 11631, -- Those who have accepted % must pay # Unity accolades to participate. The content for this Wanted battle is #. [Ready to begin?/You do not have the appropriate object set, so your rewards will be limited.]
+
+        BOX_DEFAULT                   = 7347,  -- Boxes are carelessly scattered here.
+        BOX_SCATTERED                 = 7348,  -- Boxes are carelessly scattered here. Perhaps you could open them with Nail Puller
+        WHATS_WRONG                   = 7453,  -- What's wrong?
+        I_THANK_YOU                   = 7455,  -- I thank you from the bee-bop-bottom of my itsy-bitsy heartaru! You can collect your reward from Dehn!
+        LETS_GO                       = 7454,  -- I'm ready when you and your buddie-wuddies are. Let's go go go!
+        RAN_OUT_OF_TIME               = 7456,  -- Well, ding-dang-dong! We've run out of time!
+        TIME_LIMIT                    = 7458,  -- You have { e:0 } minutes (Earth time) to complete this quest.
+        LOST_SIGHT                    = 7459,  -- You have lost sight of Wanzo-Unzozo...
+        BYE_BYE                       = 7460,  -- I'll see you around sometime! Bye-bee-bye!
     },
     mob =
     {
-        HAZMAT_PH =
-        {
-            [17596515] = 17596520,
-        },
-        HOVERING_HOTPOT_PH =
-        {
-            [17596623] = 17596628, -- 182.157 -0.012 29.941
-            [17596625] = 17596628, -- 188.229 -0.018 20.151
-        },
-        OLD_TWO_WINGS       = 17596506,
-        SKEWER_SAM          = 17596507,
-        CHANDELIER          = 17596533,
-        GUARDIAN_STATUE     = 17596643,
-        SERKET              = 17596720,
-        MIMIC               = 17596728,
-        APPARATUS_ELEMENTAL = 17596729,
+        HAZMAT              = GetFirstID('Hazmat'),
+        HOVERING_HOTPOT     = GetFirstID('Hovering_Hotpot'),
+        OLD_TWO_WINGS       = GetFirstID('Old_Two-Wings'),
+        SKEWER_SAM          = GetFirstID('Skewer_Sam'),
+        CHANDELIER          = GetFirstID('Chandelier'),
+        GUARDIAN_STATUE     = GetFirstID('Guardian_Statue'),
+        SERKET              = GetFirstID('Serket'),
+        MIMIC               = GetFirstID('Mimic'),
+        APPARATUS_ELEMENTAL = GetFirstID('Light_Elemental'),
     },
     npc =
     {

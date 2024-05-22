@@ -43,10 +43,12 @@ zones[xi.zone.CHAMBER_OF_ORACLES] =
         ORB_IS_CRACKED                   = 7534, -- There is a crack in the %. It no longer contains a monster.
         A_CRACK_HAS_FORMED               = 7535, -- A crack has formed on the <item>, and the beast inside has been unleashed!
         ENTERING_THE_BATTLEFIELD_FOR     = 7596, -- Entering the battlefield for [Through the Quicksand Caves/Legion XI Comitatensis/Shattering Stars (SAM)/Shattering Stars (NIN)/Shattering Stars (DRG)/Cactuar Suave/Eye of the Storm/The Scarlet King/Roar! A Cat Burglar Bares Her Fangs/Dragon Scales/Legion XI Comitatensis]!
-
     },
     mob =
     {
+        CENTURIO_V_III   = GetFirstID('Centurio_V-III'),
+        MAAT             = GetFirstID('Maat'),
+        SECUTOR_XI_XXXII = GetFirstID('Secutor_XI-XXXII'),
     },
     npc =
     {

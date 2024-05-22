@@ -33,6 +33,7 @@ zones[xi.zone.SPIRE_OF_VAHZL] =
     },
     mob =
     {
+        AGONIZER = GetFirstID('Agonizer'),
     },
     npc =
     {

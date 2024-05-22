@@ -17,7 +17,6 @@ zones[xi.zone.ARRAPAGO_REEF] =
         LOGIN_CAMPAIGN_UNDERWAY       = 7002, -- The [/January/February/March/April/May/June/July/August/September/October/November/December] <number> Login Campaign is currently underway!
         LOGIN_NUMBER                  = 7003, -- In celebration of your most recent login (login no. <number>), we have provided you with <number> points! You currently have a total of <number> points.
         MEMBERS_LEVELS_ARE_RESTRICTED = 7023, -- Your party is unable to participate because certain members' levels are restricted.
-        ASSAULT_START_OFFSET          = 7454, -- Max MP Down removed for <name>.
         FISHING_MESSAGE_OFFSET        = 7057, -- You can't fish here.
         STAGING_GATE_CLOSER           = 7317, -- You must move closer.
         STAGING_GATE_INTERACT         = 7318, -- This gate guards an area under Imperial control.
@@ -34,14 +33,11 @@ zones[xi.zone.ARRAPAGO_REEF] =
         THE_PARTY_WILL_BE_REMOVED     = 7899, -- If all party members' HP are still zero after # minute[/s], the party will be removed from the battlefield.
         YOU_NO_REQS                   = 7903, -- You do not meet the requirements to enter the battlefield with your party members. Access is denied.
         YOUR_IMPERIAL_STANDING        = 7919, -- Your Imperial Standing has increased!
-        FEEL_A_CHILL                  = 8377, -- You feel a chill run down your spine!
         HAND_OVER_TO_IMMORTAL         = 8437, -- You hand over the % to the Immortal.
         CANNOT_ENTER                  = 8456, -- You cannot enter at this time. Please wait a while before trying again.
         AREA_FULL                     = 8457, -- This area is fully occupied. You were unable to enter.
         MEMBER_NO_REQS                = 8461, -- Not all of your party members meet the requirements for this objective. Unable to enter area.
         MEMBER_TOO_FAR                = 8465, -- One or more party members are too far away from the entrance. Unable to enter area.
-        KEYHOLE                       = 8548, -- Fragments of bone, claws, and teeth are scattered around the gate...
-        KEYS_SHATTER                  = 8549, -- The <item> shatters... The <item> shatters... The <item> shatters...
         MEDUSA_ENGAGE                 = 8567, -- Foolish two-legs... Have you forgotten the terrible power of the gorgons you created? It is time you were reminded...
         MEDUSA_DEATH                  = 8568, -- No... I cannot leave my sisters...
         GLITTERING_FRAGMENTS          = 8891, -- Minute glittering fragments are scattered all over...
@@ -50,6 +46,11 @@ zones[xi.zone.ARRAPAGO_REEF] =
         FLUTTERY_OBJECTS              = 8915, -- Light, fluttery objects litter the ground...
         DRAWS_NEAR                    = 8920, -- Something draws near!
         COMMON_SENSE_SURVIVAL         = 9791, -- It appears that you have arrived at a new survival guide provided by the Adventurers' Mutual Aid Network. Common sense dictates that you should now be able to teleport here from similar tomes throughout the world.
+
+        ASSAULT_START_OFFSET          = 7454, -- Max MP Down removed for <name>.
+        FEEL_A_CHILL                  = 8377, -- You feel a chill run down your spine!
+        KEYHOLE                       = 8548, -- Fragments of bone, claws, and teeth are scattered around the gate...
+        KEYS_SHATTER                  = 8549, -- The <item> shatters... The <item> shatters... The <item> shatters...
     },
     mob =
     {

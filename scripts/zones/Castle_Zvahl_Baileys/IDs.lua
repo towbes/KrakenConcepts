@@ -20,18 +20,22 @@ zones[xi.zone.CASTLE_ZVAHL_BAILEYS] =
         LOGIN_NUMBER                  = 7162, -- In celebration of your most recent login (login no. <number>), we have provided you with <number> points! You currently have a total of <number> points.
         MEMBERS_LEVELS_ARE_RESTRICTED = 7182, -- Your party is unable to participate because certain members' levels are restricted.
         CHEST_UNLOCKED                = 7234, -- You unlock the chest!
+        COMMON_SENSE_SURVIVAL         = 7609, -- It appears that you have arrived at a new survival guide provided by the Adventurers' Mutual Aid Network. Common sense dictates that you should now be able to teleport here from similar tomes throughout the world.
+
         MOBLIN_EARPLUG                = 7560, -- You see a moblin earplug on the ground. Could Zeelok have met his end here?
         MINIONS_ATTACK                = 7561, -- Marquis Andrealphus and his minions attack!
         BEGONE                        = 7563, -- Insolent adventurer! Begone from these halls!
-        COMMON_SENSE_SURVIVAL         = 7609, -- It appears that you have arrived at a new survival guide provided by the Adventurers' Mutual Aid Network. Common sense dictates that you should now be able to teleport here from similar tomes throughout the world.
     },
     mob =
     {
-        MARQUIS_SABNOCK_PH =
-        {
-            [17436879] = 17436881,
-            [17436882] = 17436881,
-        },
+        MARQUIS_SABNOCK  = GetFirstID('Marquis_Sabnock'),
+        LIKHO            = GetFirstID('Likho'),
+        MARQUIS_ALLOCEN  = GetFirstID('Marquis_Allocen'),
+        MARQUIS_AMON     = GetFirstID('Marquis_Amon'),
+        DUKE_HABORYM     = GetFirstID('Duke_Haborym'),
+        GRAND_DUKE_BATYM = GetFirstID('Grand_Duke_Batym'),
+        DARK_SPARK       = GetFirstID('Dark_Spark'),
+        MIMIC            = GetFirstID('Mimic'),
         DEMON_YOU_KNOW   =
         {
             17436966,
@@ -40,17 +44,10 @@ zones[xi.zone.CASTLE_ZVAHL_BAILEYS] =
             17436969,
             17436970,
         },
-        LIKHO            = 17436714,
-        MARQUIS_ALLOCEN  = 17436913,
-        MARQUIS_AMON     = 17436918,
-        DUKE_HABORYM     = 17436923,
-        GRAND_DUKE_BATYM = 17436927,
-        DARK_SPARK       = 17436964,
-        MIMIC            = 17436965,
     },
     npc =
     {
-        TORCH_OFFSET    = 17436984,
+        TORCH_OFFSET    = GetFirstID('Torch'),
         TREASURE_CHEST  = GetFirstID('Treasure_Chest'),
         TREASURE_COFFER = GetFirstID('Treasure_Coffer'),
     },

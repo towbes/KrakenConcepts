@@ -33,6 +33,8 @@ zones[xi.zone.SPIRE_OF_DEM] =
     },
     mob =
     {
+        PROGENERATOR = GetFirstID('Progenerator'),
+        INGESTER     = GetFirstID('Ingester'),
     },
     npc =
     {

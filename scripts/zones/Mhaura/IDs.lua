@@ -41,9 +41,9 @@ zones[xi.zone.MHAURA] =
     },
     npc =
     {
+        LAUGHING_BISON  = GetFirstID('Laughing_Bison'),
+        EXPLORER_MOOGLE = GetFirstID('Explorer_Moogle'),
         SHIP            = 17797182,
-        LAUGHING_BISON  = 17797183,
-        EXPLORER_MOOGLE = 17797253,
     },
 }
 

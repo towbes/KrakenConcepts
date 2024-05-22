@@ -22,17 +22,6 @@ zones[xi.zone.MAZE_OF_SHAKHRAMI] =
         NOTHING_FOSSIL                = 7061,  -- It looks like a rock with fossils embedded in it. Nothing out of the ordinary.
         NO_NEED_INVESTIGATE           = 7065,  -- There is no need to investigate it any further.
         JUST_A_ROCK                   = 7068,  -- It is just a rock. There is no need to investigate it.
-        CHEST_EMPTY                   = 7070,  -- The chest looks empty.
-        TOO_RUSTY                     = 7071,  -- The chest is too rusty to open.
-        IRON_DOOR                     = 7072,  -- The lock is broken and cannot be opened.
-        ALEXANDER_NE                  = 7075,  -- You picked up a coin with Alexander drawn to the northeast.
-        SHIVA_EAST                    = 7076,  -- You picked up a coin with Shiva drawn to the east.
-        ODIN_NORTH                    = 7077,  -- You picked up a coin with Odin drawn to the north.
-        ODIN_EAST                     = 7078,  -- You picked up a coin with Odin drawn to the east.
-        TITAN_NORTH                   = 7079,  -- You picked up a coin with Titan drawn to the north.
-        LEAVIATHAN_SOUTH              = 7080,  -- You picked up a coin with Leviathan drawn to the south.
-        SHIVA_WEST                    = 7081,  -- You picked up a coin with Shiva drawn to the west.
-        IFRIT_NW                      = 7082,  -- You picked up a coin with Ifrit drawn to the northwest.
         CONQUEST_BASE                 = 7088,  -- Tallying conquest results...
         DEVICE_NOT_WORKING            = 7261,  -- The device is not working.
         SYS_OVERLOAD                  = 7270,  -- Warning! Sys...verload! Enterin...fety mode. ID eras...d.
@@ -48,24 +37,35 @@ zones[xi.zone.MAZE_OF_SHAKHRAMI] =
         NO_COMBINATION                = 8282,  -- You were unable to enter a combination.
         REGIME_REGISTERED             = 10360, -- New training regime registered!
         COMMON_SENSE_SURVIVAL         = 11432, -- It appears that you have arrived at a new survival guide provided by the Adventurers' Mutual Aid Network. Common sense dictates that you should now be able to teleport here from similar tomes throughout the world.
+
+        CHEST_EMPTY                   = 7070,  -- The chest looks empty.
+        TOO_RUSTY                     = 7071,  -- The chest is too rusty to open.
+        IRON_DOOR                     = 7072,  -- The lock is broken and cannot be opened.
+        ALEXANDER_NE                  = 7075,  -- You picked up a coin with Alexander drawn to the northeast.
+        SHIVA_EAST                    = 7076,  -- You picked up a coin with Shiva drawn to the east.
+        ODIN_NORTH                    = 7077,  -- You picked up a coin with Odin drawn to the north.
+        ODIN_EAST                     = 7078,  -- You picked up a coin with Odin drawn to the east.
+        TITAN_NORTH                   = 7079,  -- You picked up a coin with Titan drawn to the north.
+        LEAVIATHAN_SOUTH              = 7080,  -- You picked up a coin with Leviathan drawn to the south.
+        SHIVA_WEST                    = 7081,  -- You picked up a coin with Shiva drawn to the west.
+        IFRIT_NW                      = 7082,  -- You picked up a coin with Ifrit drawn to the northwest.
     },
     mob =
     {
-        TREMBLER_TABITHA_PH =
-        {
-            [17588276] = 17588278,
-            [17588277] = 17588278,
-        },
-        ICHOROUS_IRE        = 17588225,
-        ARGUS               = 17588674,
-        LEECH_KING          = 17588685,
-        WYRMFLY_OFFSET      = 17588701,
-        APPARATUS_ELEMENTAL = 17588704,
-        AROMA_CRAWLER       = 17588705,
-        LOST_SOUL           = 17588706,
+        TREMBLER_TABITHA    = GetFirstID('Trembler_Tabitha'),
+        ICHOROUS_IRE        = GetFirstID('Ichorous_Ire'),
+        ARGUS               = GetFirstID('Argus'),
+        LEECH_KING          = GetFirstID('Leech_King'),
+        WYRMFLY_OFFSET      = GetFirstID('Wyrmfly'),
+        APPARATUS_ELEMENTAL = GetFirstID('Dark_Elemental'),
+        AROMA_CRAWLER       = GetFirstID('Aroma_Crawler'),
+        LOST_SOUL           = GetFirstID('Lost_Soul'),
     },
     npc =
     {
+        FOSSIL_ROCK_OFFSET = GetFirstID('Fossil_Rock'),
+        TREASURE_CHEST     = GetFirstID('Treasure_Chest'),
+        EXCAVATION         = GetTableOfIDs('Excavation_Point'),
         FOSSIL_ROCKS =
         {
             17588737,
@@ -76,8 +76,6 @@ zones[xi.zone.MAZE_OF_SHAKHRAMI] =
             17588743,
         },
         ICHOROUS_IRE_FOSSIL_ROCK = 17588745,
-        TREASURE_CHEST           = GetFirstID('Treasure_Chest'),
-        EXCAVATION               = GetTableOfIDs('Excavation_Point'),
     },
 }
 

@@ -52,7 +52,6 @@ zones[xi.zone.HORLAIS_PEAK] =
         A_CRACK_HAS_FORMED            = 7535, -- A crack has formed on the <item>, and the beast inside has been unleashed!
         ENTERING_THE_BATTLEFIELD_FOR  = 7597, -- Entering the battlefield for [The Rank 2 Final Mission/Tails of Woe/Dismemberment Brigade/The Secret Weapon/Hostile Herbivores/Shattering Stars (WAR)/Shattering Stars (BLM)/Shattering Stars (RNG)/Carapace Combatants/Shooting Fish/Dropping Like Flies/Horns of War/Under Observation/Eye of the Tiger/Shots in the Dark/Double Dragonian/Today's Horoscope/Contaminated Colosseum/Kindergarten Cap/Last Orc-Shunned Hero/Beyond Infinity/Tails of Woe/Dismemberment Brigade/A Feast Most Dire/A.M.A.N. Trove (Mars)/A.M.A.N. Trove (Venus)/Inv. from Excenmille/Inv. from Excenmille and Co.]!
         SOUL_GEM_REACTS               = 7949, -- The <keyitem> reacts to the <keyitem>, sending a jolt of energy through your veins!
-
     },
     mob =
     {

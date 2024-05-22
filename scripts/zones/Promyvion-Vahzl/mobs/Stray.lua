@@ -2,7 +2,6 @@
 -- Area: Promyvion-Vahzl
 --   NM: Stray
 -----------------------------------
-require('scripts/globals/promyvion')
 mixins =
 {
     require('scripts/mixins/families/empty')
@@ -11,6 +10,7 @@ mixins =
 local entity = {}
 
 entity.onMobSpawn = function(mob)
+    xi.promyvion.strayOnMobSpawn(mob)
 end
 
 entity.onMobDeath = function(mob, player, optParams)

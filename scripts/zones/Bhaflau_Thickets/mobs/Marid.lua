@@ -12,15 +12,18 @@ local ID = zones[xi.zone.BHAFLAU_THICKETS]
 -----------------------------------
 local entity = {}
 
+local mahishasuraPHTable =
+{
+    [ID.mob.MAHISHASURA - 10] = ID.mob.MAHISHASURA, -- 215.000 -18.000 372.000
+}
+
 entity.onMobDeath = function(mob, player, optParams)
 end
 
 entity.onMobDespawn = function(mob)
-    if xi.mob.phOnDespawn(mob, ID.mob.MAHISHASURA_PH, 5, 10800) then -- 3 hours
-    elseif xi.mob.phOnDespawn(mob, ID.mob.GRAND_MARID1_PH, 5, 1800) then
-    else
-        xi.mob.phOnDespawn(mob, ID.mob.GRAND_MARID2_PH, 5, 1800)
-    end
+    xi.mob.phOnDespawn(mob, mahishasuraPHTable, 5, 10800) -- 3 hours
+    xi.mob.phOnDespawn(mob, ID.mob.GRAND_MARID1_PH, 5, 1800)
+    xi.mob.phOnDespawn(mob, ID.mob.GRAND_MARID2_PH, 5, 1800)
 end
 
 return entity

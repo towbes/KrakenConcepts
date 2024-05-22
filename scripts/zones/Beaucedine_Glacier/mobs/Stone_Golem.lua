@@ -7,11 +7,16 @@ local ID = zones[xi.zone.BEAUCEDINE_GLACIER]
 -----------------------------------
 local entity = {}
 
+local gargantuaPHTable =
+{
+    [ID.mob.GARGANTUA - 1] = ID.mob.GARGANTUA, -- 339 -0.472 -20
+}
+
 entity.onMobDeath = function(mob, player, optParams)
 end
 
 entity.onMobDespawn = function(mob)
-    xi.mob.phOnDespawn(mob, ID.mob.GARGANTUA_PH, 5, 1300) -- 30 minute minimum
+    xi.mob.phOnDespawn(mob, gargantuaPHTable, 5, 1300) -- 30 minute minimum
 end
 
 return entity

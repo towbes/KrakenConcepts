@@ -28,6 +28,7 @@ zones[xi.zone.LEUJAOAM_SANCTUM] =
         TIME_REMAINING_MINUTES        = 7520, -- ime remaining: <number> [minute/minutes] (Earth time).
         TIME_REMAINING_SECONDS        = 7521, -- ime remaining: <number> [second/seconds] (Earth time).
         PARTY_FALLEN                  = 7523, -- All party members have fallen in battle. Mission failure in <number> [minute/minutes].
+
         FIND_NOTHING                  = 7532, -- You find nothing.
         PICKAXE_BREAKS                = 7535, -- Your <item> (temporary item) breaks!
         MINING_POSSIBLE               = 7536, -- Mining is possible here if you have a <item> (temporary item).
@@ -61,9 +62,9 @@ zones[xi.zone.LEUJAOAM_SANCTUM] =
 
     npc =
     {
-        ANCIENT_LOCKBOX = 17060014,
-        RUNE_OF_RELEASE = 17060015,
-        MULWAHAH        = 17060026,
+        ANCIENT_LOCKBOX = GetFirstID('Ancient_Lockbox'),
+        RUNE_OF_RELEASE = GetFirstID('Rune_of_Release'),
+        MULWAHAH        = GetFirstID('Mulwahah'),
         MINING_POINTS =
         {
             17060016, 17060017, 17060018, 17060019, 17060020, 17060021, 17060022, 17060023, 17060024, 17060025,

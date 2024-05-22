@@ -49,6 +49,9 @@ zones[xi.zone.BALGAS_DAIS] =
         MACAN_WHISKERS_WILDLY         = 7669, -- Gadangan's whiskers begin to twitch wildly.
         MACAN_WHISKERS_VIOLENTLY      = 7670, -- Gadangan's whiskers begin to twitch violently.
         MACAN_WHISKERS_UNCONTROLLABLY = 7671, -- Gadangan's whiskers begin to twitch uncontrollably.
+
+        NO_BATTLEFIELD_ENTRY          = 7241, -- A cursed seal has been placed upon this platform.
+        PARTY_MEMBERS_ARE_ENGAGED     = 7242, -- The battlefield where your party members are engaged in combat is locked. Access is denied.
     },
     mob =
     {

@@ -44,28 +44,25 @@ zones[xi.zone.MISAREAUX_COAST] =
     },
     mob =
     {
-        OKYUPETE_PH =
-        {
-            [16879839] = 16879847,
-        },
+        OKYUPETE         = GetFirstID('Okyupete'),
+        PM6_2_MOB_OFFSET = GetFirstID('Warder_Aglaia'),
+        BOGGELMANN       = GetFirstID('Boggelmann'),
+        GRATION          = GetFirstID('Gration'),
+        ZIPHIUS          = GetFirstID('Ziphius'),
+        ALSHA            = GetFirstID('Alsha'),
+        ODQAN            = 16879737,
+        BLOODY_COFFIN    = 16879896,
         ODQAN_PH =
         {
             16879722,
             16879833,
         },
-        PM6_2_MOB_OFFSET = 16879893,
-        BOGGELMANN       = 16879897,
-        GRATION          = 16879899,
-        ZIPHIUS          = 16879900,
-        ALSHA            = 16879898,
-        ODQAN            = 16879737,
-        BLOODY_COFFIN    = 16879896,
     },
     npc =
     {
-        LOGGING          = GetTableOfIDs('Logging_Point'),
-        ZIPHIUS_QM_BASE  = 16879919,
-        ALSHA_QM         = 16879978,
+        LOGGING         = GetTableOfIDs('Logging_Point'),
+        ZIPHIUS_QM_BASE = GetFirstID('qm_ziphius'),
+        ALSHA_QM        = GetFirstID('qm_alsha'),
         GRATION_QM       = 16879918,
     },
 }

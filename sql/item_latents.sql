@@ -97,8 +97,8 @@ INSERT INTO `item_latents` VALUES (11367,302,1,49,5928); -- triple attack 1% Hin
 INSERT INTO `item_latents` VALUES (11367,302,2,49,5929); -- triple attack 2% Ojo Rice Ball
 
 -- Kyoshu Kyahan
-INSERT INTO `item_latents` VALUES (11405,23,20,13,406);  -- Kickattack Stance ATT +20
-INSERT INTO `item_latents` VALUES (11405,25,20,13,406);  -- Kickattack Stance ACC +20
+INSERT INTO `item_latents` VALUES(11405,23,20,13,406); -- +20 attack during Footwork
+INSERT INTO `item_latents` VALUES(11405,25,20,13,406); -- +20 accuracy during Footwork
 
 -- Morana Pigaches (11408) (pet latent via item lua)
 

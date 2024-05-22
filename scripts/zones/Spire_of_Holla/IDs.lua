@@ -34,6 +34,7 @@ zones[xi.zone.SPIRE_OF_HOLLA] =
     },
     mob =
     {
+        WREAKER = GetFirstID('Wreaker'),
     },
     npc =
     {

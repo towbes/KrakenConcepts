@@ -331,7 +331,8 @@ namespace luautils
     bool   CheckNMSpawnPoint(uint32 mobid); // Check to see if NM has extra spawn points
 
 
-    std::string GetServerMessage(uint8 language); // Get the message to be delivered to player on first zone in of a session
+    std::string GetServerMessage(uint8 language);               // Get the message to be delivered to player on first zone in of a session
+    auto        GetRecentFishers(uint16 minutes) -> sol::table; // returns a list of recently active fishers (that fished in the last specified minutes)
 
     int32 OnAdditionalEffect(CBattleEntity* PAttacker, CBattleEntity* PDefender, actionTarget_t* Action, int32 damage);                                      // for mobs with additional effects
     int32 OnSpikesDamage(CBattleEntity* PDefender, CBattleEntity* PAttacker, actionTarget_t* Action, int32 damage);                                          // for mobs with spikes

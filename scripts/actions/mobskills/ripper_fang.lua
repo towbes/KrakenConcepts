@@ -1,7 +1,7 @@
 -----------------------------------
---  Sprout Smack
---  Description: Additional effect: Slow.  Duration of effect varies with TP.
---  Type: Physical (Blunt)
+--  Ripper Fang
+--  Description: Deals physical damage. Damage varies with TP.
+--  Type: Physical (Slashing)
 -----------------------------------
 local mobskillObject = {}
 
@@ -20,8 +20,7 @@ mobskillObject.onMobWeaponSkill = function(target, mob, skill)
     local info      = xi.mobskills.mobPhysicalMove(mob, target, skill, numhits, accmod, dmgmod, tpEffect1, 2.5, 3.25, 4, tpEffect2, 1, 2, 3, crit, attmod)
     local dmg       = xi.mobskills.mobFinalAdjustments(info.dmg, mob, skill, target, xi.attackType.PHYSICAL, xi.damageType.PIERCING, info.hitslanded)
 
-    xi.mobskills.mobPhysicalStatusEffectMove(mob, target, skill, xi.effect.SLOW, 1250, 0, 120)
-    target:takeDamage(dmg, mob, xi.attackType.PHYSICAL, xi.damageType.PIERCING)
+    target:takeDamage(dmg, mob, xi.attackType.PHYSICAL, xi.damageType.SLASHING)
 
     return dmg
 end

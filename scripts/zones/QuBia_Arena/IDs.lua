@@ -11,6 +11,7 @@ zones[xi.zone.QUBIA_ARENA] =
         ITEM_OBTAINED                 = 6390, -- Obtained: <item>.
         GIL_OBTAINED                  = 6391, -- Obtained <number> gil.
         KEYITEM_OBTAINED              = 6393, -- Obtained key item: <keyitem>.
+        LOST_KEYITEM                  = 6394, -- Lost key item: <keyitem>.
         CARRIED_OVER_POINTS           = 7001, -- You have carried over <number> login point[/s].
         LOGIN_CAMPAIGN_UNDERWAY       = 7002, -- The [/January/February/March/April/May/June/July/August/September/October/November/December] <number> Login Campaign is currently underway!
         LOGIN_NUMBER                  = 7003, -- In celebration of your most recent login (login no. <number>), we have provided you with <number> points! You currently have a total of <number> points.
@@ -51,11 +52,23 @@ zones[xi.zone.QUBIA_ARENA] =
         TIME_LIMIT_FOR_THIS_BATTLE_IS = 7534, -- The time limit for this battle is <number> minutes.
         ORB_IS_CRACKED                = 7535, -- There is a crack in the %. It no longer contains a monster.
         A_CRACK_HAS_FORMED            = 7536, -- A crack has formed on the <item>, and the beast inside has been unleashed!
+
+        -- TODO: Shift IDs
+        SOUL_GEM_REACTS               = 8006, -- The <keyitem> reacts to the <keyitem>, sending a jolt of energy through your veins!
     },
+
     mob =
     {
-        HEIR_TO_THE_LIGHT_OFFSET = GetFirstID('Warlord_Rojgnoj'),
+        ARCHLICH_TABERQUOAN      = GetFirstID('Archlich_Taberquoan'),
         ATORI_TUTORI             = GetFirstID('Atori-Tutori_qm'),
+        CHAHNAMEEDS_STOMACH      = GetFirstID('Chahnameeds_Stomach'),
+        DOLL_FACTORY             = GetFirstID('Doll_Factory'),
+        GHUL_I_BEABAN            = GetFirstID('Ghul-I-Beaban'),
+        MAAT                     = GetFirstID('Maat'),
+        NEPHIYL_RAMPARTBREACHER  = GetFirstID('Nephiyl_Rampartbreacher'),
+        SEED_ORC                 = GetFirstID('Seed_Orc'),
+        VAICOLIAUX_B_DAURPHE     = GetFirstID('Vaicoliaux_B_DAurphe'),
+        WARLORD_ROJGNOJ          = GetFirstID('Warlord_Rojgnoj'),
         IDOL_THOUGHTS =
         {
             {
@@ -78,6 +91,7 @@ zones[xi.zone.QUBIA_ARENA] =
             },
         },
     },
+
     npc =
     {
     },

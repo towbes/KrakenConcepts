@@ -60,9 +60,9 @@ zones[xi.zone.PSOXJA] =
             16814498,
         },
         STONE_DOOR_OFFSET       = GetFirstID('_090'),
+        TREASURE_CHEST          = GetTableOfIDs('Treasure_Chest')[7],
         BLUE_BRACELET_DOOR         = 16814499,
         GREEN_BRACELET_DOOR        = 16814502,
-        TREASURE_CHEST             = 16814557,
     },
 }
 

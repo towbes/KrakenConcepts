@@ -12,7 +12,6 @@ zones[xi.zone.BATALLIA_DOWNS_S] =
         ITEM_OBTAINED                 = 6390, -- Obtained: <item>.
         GIL_OBTAINED                  = 6391, -- Obtained <number> gil.
         KEYITEM_OBTAINED              = 6393, -- Obtained key item: <keyitem>.
-        FELLOW_MESSAGE_OFFSET         = 6417, -- I'm ready. I suppose.
         NOTHING_OUT_OF_ORDINARY       = 6404, -- There is nothing out of the ordinary here.
         CARRIED_OVER_POINTS           = 7001, -- You have carried over <number> login point[/s].
         LOGIN_CAMPAIGN_UNDERWAY       = 7002, -- The [/January/February/March/April/May/June/July/August/September/October/November/December] <number> Login Campaign is currently underway!
@@ -33,27 +32,16 @@ zones[xi.zone.BATALLIA_DOWNS_S] =
         VOIDWALKER_BREAK_KI           = 8320, -- The <keyitem> shatters into tiny fragments.
         VOIDWALKER_OBTAIN_KI          = 8321, -- Obtained key item: <keyitem>!
         COMMON_SENSE_SURVIVAL         = 9596, -- It appears that you have arrived at a new survival guide provided by the Servicemen's Mutual Aid Network. Common sense dictates that you should now be able to teleport here from similar tomes throughout the world.
+
+        FELLOW_MESSAGE_OFFSET         = 6417, -- I'm ready. I suppose.
     },
 
     mob =
     {
-        BURLIBIX_BRAWNBACK_PH =
-        {
-            [17121398] = 17121399,
-            [17121402] = 17121399,
-        },
-
-        LA_VELUE_PH =
-        {
-            [17121554] = 17121576, -- -314.365 -18.745 -56.016
-        },
-
-        HABERGOASS_PH =
-        {
-            [17121602] = 17121603,
-        },
-
-        MENECHME = GetFirstID('Menechme'),
+        BURLIBIX_BRAWNBACK = GetFirstID('Burlibix_Brawnback'),
+        HABERGOASS         = GetFirstID('Habergoass'),
+        LA_VELUE           = GetFirstID('La_Velue'),
+        MENECHME           = GetFirstID('Menechme'),
 
         VOIDWALKER =
         {

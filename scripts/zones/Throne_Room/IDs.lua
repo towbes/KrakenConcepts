@@ -37,7 +37,6 @@ zones[xi.zone.THRONE_ROOM] =
         NO_BATTLEFIELD_ENTRY          = 7241, -- The door is sealed shut with an evil curse.
         TESTIMONY_IS_TORN             = 7282, -- Your <item> is torn...
         TESTIMONY_WEARS               = 7283, -- Your <item> [/rips into shreds!/is on the verge of tearing apart.../is showing signs of wear...] (# [use remains/uses remain].)
-        ORB_IS_CRACKED                = 7534, -- There is a crack in the %. It no longer contains a monster.
     },
     mob =
     {

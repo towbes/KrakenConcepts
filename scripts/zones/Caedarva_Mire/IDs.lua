@@ -28,7 +28,6 @@ zones[xi.zone.CAEDARVA_MIRE] =
         CANNOT_LEAVE                  = 7328, -- You cannot leave this area while in the possession of <keyitem>.
         RESPONSE                      = 7337, -- There is no response...
         LOGGING_IS_POSSIBLE_HERE      = 7351, -- Logging is possible here if you have <item>.
-        LEG_STUCK                     = 7358, -- Your leg is stuck in the swampy ground!
         HAND_OVER_TO_IMMORTAL         = 7432, -- You hand over the % to the Immortal.
         YOUR_IMPERIAL_STANDING        = 7433, -- Your Imperial Standing has increased!
         CANNOT_ENTER                  = 7471, -- You cannot enter at this time. Please wait a while before trying again.
@@ -45,34 +44,29 @@ zones[xi.zone.CAEDARVA_MIRE] =
         HOMEPOINT_SET                 = 8982, -- Home point set!
         UNITY_WANTED_BATTLE_INTERACT  = 9040, -- Those who have accepted % must pay # Unity accolades to participate. The content for this Wanted battle is #. [Ready to begin?/You do not have the appropriate object set, so your rewards will be limited.]
         COMMON_SENSE_SURVIVAL         = 9062, -- It appears that you have arrived at a new survival guide provided by the Adventurers' Mutual Aid Network. Common sense dictates that you should now be able to teleport here from similar tomes throughout the world.
+
+        LEG_STUCK                     = 7358, -- Your leg is stuck in the swampy ground!
     },
     mob =
     {
+        AYNU_KAYSEY           = GetFirstID('Aynu-kaysey'),
+        CAEDARVA_TOAD         = GetFirstID('Caedarva_Toad'),
         CHIGOES =
         {
             ['Wild_Karakul'] = GetTableOfIDs('Chigoe', 5),
             ['Mosshorn']     = GetTableOfIDs('Chigoe', 5, 5),
         },
-        PEALLAIDH_PH =
-        {
-            [17100870] = 17101143, -- 333.885 -9.646 -447.557
-            [17100871] = 17101143, -- 309.638 -8.548 -447.557
-            [17100872] = 17101143, -- 307.320 -10.088 -451.786
-            [17100873] = 17101143, -- 295.122 -12.271 -414.418
-            [17100874] = 17101143, -- 287.607 -16.220 -387.671
-            [17100875] = 17101143, -- 315.793 -16.336 -402.407
-            [17100876] = 17101143, -- 321.809 -16.843 -373.780
-        },
-        AYNU_KAYSEY           = 17101099,
-        CAEDARVA_TOAD         = 17101145,
-        JAZARAAT              = 17101146,
-        LAMIA_NO27            = 17101148,
-        MOSHDAHN              = 17101149,
-        KHIMAIRA              = 17101197,
-        VERDELET              = 17101198,
-        TYGER                 = 17101199,
-        MAHJLAEF_THE_PAINTORN = 17101200,
-        EXPERIMENTAL_LAMIA    = 17101201,
+        EXPERIMENTAL_LAMIA    = GetFirstID('Experimental_Lamia'),
+        JAZARAAT              = GetFirstID('Jazaraat'),
+        KHIMAIRA              = GetFirstID('Khimaira'),
+        LAMIA_NO27            = GetFirstID('Lamia_No27'),
+        MAHJLAEF_THE_PAINTORN = GetFirstID('Mahjlaef_the_Paintorn'),
+        MOSHDAHN              = GetFirstID('Moshdahn'),
+        PEALLAIDH             = GetFirstID('Peallaidh'),
+        PEALLAIDH_PH_OFFSET   = GetFirstID('Wild_Karakul'), -- These are 270IDs away. Use offset in case of weird shift.
+        TYGER                 = GetFirstID('Tyger'),
+        VERDELET              = GetFirstID('Verdelet'),
+
         ZIKKO                 = 17101144,
         VIDHUWA_PH            =
         {
@@ -82,8 +76,8 @@ zones[xi.zone.CAEDARVA_MIRE] =
     npc =
     {
         LOGGING             = GetTableOfIDs('Logging_Point'),
-        RUNIC_PORTAL_AZOUPH = 17101318,
-        RUNIC_PORTAL_DVUCCA = 17101321,
+        RUNIC_PORTAL_AZOUPH = GetFirstID('Runic_Portal_Azouph'),
+        RUNIC_PORTAL_DVUCCA = GetFirstID('Runic_Portal_Dvucca'),
     },
 }
 
