@@ -17,9 +17,9 @@ mobskillObject.onMobWeaponSkill = function(target, mob, skill)
     local master = mob:getMaster()
     local skillID = skill:getID()
     if mob:isPet() then
-        -- isJugPet is really hasJugPet.  Given an entity it returns true if that entity has a pet and the pet is a jug pet
-        -- TODO - Rule of 3 counter = 1 - rename isJugPet to has, add isJugPet
-        if master and master:isJugPet() and master:checkDistance(mob) < 8.5 then
+        -- hasJugPet is really hasJugPet.  Given an entity it returns true if that entity has a pet and the pet is a jug pet
+        -- TODO - Rule of 3 counter = 1 - rename hasJugPet to has, add hasJugPet
+        if master and master:hasJugPet() and master:checkDistance(mob) < 8.5 then
             local tp = skill:getTP()
             duration = 180
             duration = math.max(60, duration * (tp/1000)) -- Minimum 1 minutes. Maximum 9 minutes.

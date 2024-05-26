@@ -9,8 +9,10 @@ return {
     ['Cheh_Raihah']  = { event = 73 },
     ['Gioh_Ajihri']  = { event = 424 },
     ['Hae_Jakkya']   = { event = 41 },
+    ['Kapeh_Myohrye'] = { event = 340 },-- There is at current an unknown mission/quest/status that alters their dialog. Windurst citizens get something different than other nations.
     ['Kototo']       = { event = 410 },
     ['Mourices']     = { event = 441 },
+    ['Muhk_Johldy']   = { event = 339 },-- There is at current an unknown mission/quest/status that alters their dialog. Windurst citizens get something different than other nations.
     ['Nanaa_Mihgo']  = { event = 76 },
     ['Perih_Vashai'] = { event = 338 },
     ['Roberta']      = { event = 436 },

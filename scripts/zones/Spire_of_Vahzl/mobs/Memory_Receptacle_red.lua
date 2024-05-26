@@ -21,11 +21,12 @@ entity.onMobSpawn = function(mob)
 end
 
 entity.onMobEngage = function(mob, target)
-    local battlefield = mob:getBattlefield()
-    local bfID = battlefield:getArea()
-    SpawnMob(ID.pullingThePlug[bfID].GREEN_ID):updateEnmity(target)
-    SpawnMob(ID.pullingThePlug[bfID].BLUE_ID):updateEnmity(target)
-    SpawnMob(ID.pullingThePlug[bfID].TEAL_ID):updateEnmity(target)
+    local battlefieldArea = mob:getBattlefield():getArea()
+    local battlefield     = mob:getBattlefield()
+    
+    SpawnMob(ID.mob.pullingThePlug[battlefieldArea].GREEN_ID):updateEnmity(target)
+    SpawnMob(ID.mob.pullingThePlug[battlefieldArea].BLUE_ID):updateEnmity(target)
+    SpawnMob(ID.mob.pullingThePlug[battlefieldArea].TEAL_ID):updateEnmity(target)
 
     mob:setMod(xi.mod.REGAIN, 450)
     mob:setLocalVar('drawInTime', os.time() + 20)
@@ -33,7 +34,7 @@ entity.onMobEngage = function(mob, target)
 end
 
 entity.onMobWeaponSkillPrepare = function(target, mob, skill)
-    local bfID = mob:getBattlefield():getArea()
+    local battlefieldArea = mob:getBattlefield():getArea()
     local tpNumber = mob:getLocalVar('tpNumber')
     local tpDelay = mob:getLocalVar('tpDelay')
 
@@ -41,9 +42,9 @@ entity.onMobWeaponSkillPrepare = function(target, mob, skill)
     if tpNumber < 2 then
         mob:setLocalVar('tpNumber', tpNumber + 1)
     elseif tpNumber >= 2 and os.time() > tpDelay then
-        GetMobByID(ID.pullingThePlug[bfID].GREEN_ID):useMobAbility(542)
-        GetMobByID(ID.pullingThePlug[bfID].BLUE_ID):useMobAbility(542)
-        GetMobByID(ID.pullingThePlug[bfID].TEAL_ID):useMobAbility(542)
+        GetMobByID(ID.mob.pullingThePlug[battlefieldArea].GREEN_ID):useMobAbility(542)
+        GetMobByID(ID.mob.pullingThePlug[battlefieldArea].BLUE_ID):useMobAbility(542)
+        GetMobByID(ID.mob.pullingThePlug[battlefieldArea].TEAL_ID):useMobAbility(542)
         mob:setLocalVar('tpNumber', 0)
         mob:setLocalVar('tpDelay', os.time() + 10)
     end

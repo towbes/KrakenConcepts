@@ -17,7 +17,7 @@ local content = Battlefield:new({
     exitNpc          = 'Burning_Circle',
     requiredItems    = { xi.item.COMET_ORB, wearMessage = waughroonID.text.A_CRACK_HAS_FORMED, wornMessage = waughroonID.text.ORB_IS_CRACKED },
 
-    experimental = true,
+    -- experimental = true,
 })
 
 content:addEssentialMobs({ 'The_Waughroon_Kid' })

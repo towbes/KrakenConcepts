@@ -50,10 +50,10 @@ entity.onMobSpawn = function(mob)
     mob:setMobAbilityEnabled(false)
 
     -- Give orbs a random spawn location
-    local battlefield = mob:getBattlefield()
-    local bfID = battlefield:getArea()
-    local posNum = GetMobByID(ID.pullingThePlug[bfID].RED_ID):getLocalVar('positionNum')
-    local posSet = positions[bfID]
+    local battlefieldArea = mob:getBattlefield():getArea()
+    print(battlefieldArea)
+    local posNum = GetMobByID(ID.mob.pullingThePlug[battlefieldArea].RED_ID):getLocalVar('positionNum')
+    local posSet = positions[battlefieldArea]
     for k, pos in pairs(posSet) do
         if k == posNum then
             mob:setPos(pos.x, pos.y, pos.z)
@@ -64,9 +64,9 @@ end
 
 entity.onMobFight = function(mob, target)
     -- Orbs move every 30 seconds
-    local battlefield = mob:getBattlefield()
-    local posNum = GetMobByID(ID.pullingThePlug[battlefield:getArea()].RED_ID):getLocalVar('positionNum')
-    local posSet = positions[battlefield:getArea()]
+    local battlefieldArea = mob:getBattlefield():getArea()
+    local posNum = GetMobByID(ID.mob.pullingThePlug[battlefieldArea].RED_ID):getLocalVar('positionNum')
+    local posSet = positions[battlefieldArea]
     local moveX = 0
     local moveY = 0
     local moveZ = 0
@@ -94,11 +94,12 @@ end
 
 entity.onMobDeath = function(mob, player, isKiller)
     -- Spawn mob from body and let main receptacle know you died
-    local bfID = mob:getBattlefield():getArea()
+    local battlefieldArea = mob:getBattlefield():getArea()
     local pos = mob:getPos()
-    local insurgitator = GetMobByID(ID.pullingThePlug[bfID].INGURGITATOR)
+    local insurgitator = GetMobByID(ID.mob.pullingThePlug[battlefieldArea].INGURGITATOR)
     insurgitator:setSpawn(pos.x, pos.y, pos.z, pos.rot)
     insurgitator:spawn()
+    insurgitator:updateEnmity(player)
 
     mob:getBattlefield():setLocalVar('GreenDead', 1)
 end

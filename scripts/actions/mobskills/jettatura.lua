@@ -17,7 +17,7 @@ mobskillObject.onMobWeaponSkill = function(target, mob, skill)
     local master   = mob:getMaster()
     local skillID  = skill:getID()
     if mob:isPet() then
-        if master and master:isJugPet() then
+        if master and master:hasJugPet() then
             local tp = skill:getTP()
             duration = 9
             duration = math.max(15, duration * (tp/1000)) -- Minimum 15 seconds. Maximum 27~ Seconds.

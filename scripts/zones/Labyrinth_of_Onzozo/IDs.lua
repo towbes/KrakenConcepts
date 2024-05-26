@@ -32,7 +32,7 @@ zones[xi.zone.LABYRINTH_OF_ONZOZO] =
         UNITY_WANTED_BATTLE_INTERACT  = 10547, -- Those who have accepted % must pay # Unity accolades to participate. The content for this Wanted battle is #. [Ready to begin?/You do not have the appropriate object set, so your rewards will be limited.]
 
         -- TODO: Shift ID
-        NEST_OF_LARGE_BIRD            = 7339,  -- It looks like the nest of a very large bird.
+        NEST_OF_LARGE_BIRD            = 7341,  -- It looks like the nest of a very large bird.
     },
     mob =
     {

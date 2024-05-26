@@ -8,13 +8,42 @@ local ID = zones[xi.zone.BONEYARD_GULLY]
 -----------------------------------
 local entity = {}
 
+local sandpitID = 276
+
 entity.onMobSpawn = function(mob)
     -- Aggros via ambush, not superlinking
     mob:setMobMod(xi.mobMod.SUPERLINK, 0)
 
     -- Used with HPP to keep track of the number of Sandpits
     mob:setLocalVar('Sandpits', 0)
-    mob:setRoamFlags(xi.roamFlag.SCRIPTED)
+
+    mob:addListener('WEAPONSKILL_STATE_EXIT', 'TUCHULCHA_SANDPIT', function(tuchulcha, skillID)
+        if skillID == sandpitID then
+            tuchulcha:disengage()
+            tuchulcha:setMobMod(xi.mobMod.NO_MOVE, 1)
+            tuchulcha:setMobMod(xi.mobMod.NO_REST, 1)
+            local posIndex = tuchulcha:getLocalVar('sand_pit' .. tuchulcha:getLocalVar('Sandpits'))
+            local coords   = ID.sheepInAntlionsClothing[tuchulcha:getBattlefield():getArea()].ant_positions[posIndex]
+            local players  = tuchulcha:getBattlefield():getPlayers()
+            for _, char in pairs(players) do
+                char:messageSpecial(ID.text.TUCHULCHA_SANDPIT)
+                char:disengage()
+                if char:hasPet() then
+                    char:petRetreat()
+                end
+            end
+
+            -- ensure the client doesn't get the position update
+            tuchulcha:setStatus(xi.status.INVISIBLE)
+            tuchulcha:setPos(coords)
+        end
+    end)
+
+    mob:addListener('ENGAGE', 'TUCHULCHA_ENGAGE', function(mobArg)
+        if mobArg:getStatus() ~= xi.status.UPDATE then
+            mobArg:setStatus(xi.status.UPDATE)
+        end
+    end)
 end
 
 -- Reset restHP when re-engaging after a sandpit
@@ -22,17 +51,6 @@ entity.onMobEngage = function(mob, target)
     if mob:getMobMod(xi.mobMod.NO_REST) == 1 then
         mob:setMobMod(xi.mobMod.NO_MOVE, 0)
         mob:setMobMod(xi.mobMod.NO_REST, 0)
-    end
-    local engaged = mob:getLocalVar('engaged')
-    if engaged == 0 then
-        for _, v in pairs(mob:getBattlefield():getPlayers()) do
-            v:messageSpecial(ID.text.GIANT_ANTLION)
-        end
-        mob:setLocalVar('engaged', 1)
-    else
-        for _, v in pairs(mob:getBattlefield():getPlayers()) do
-            v:messageSpecial(ID.text.ANTLION_ESCAPED)
-        end
     end
 end
 
@@ -45,40 +63,18 @@ entity.onMobFight = function(mob, target)
         (mob:getHPP() < 25 and mob:getLocalVar('Sandpits') == 2)
     then
         mob:setLocalVar('Sandpits', mob:getLocalVar('Sandpits') + 1)
-        mob:useMobAbility(276)
-        mob:timer(4000, function(tuchulcha)
-            tuchulcha:disengage()
-            tuchulcha:setMobMod(xi.mobMod.NO_MOVE, 1)
-            tuchulcha:setMobMod(xi.mobMod.NO_REST, 1)
-            local posIndex = tuchulcha:getLocalVar('sand_pit' .. tuchulcha:getLocalVar('Sandpits'))
-            local coords   = ID.sheepInAntlionsClothing[tuchulcha:getBattlefield():getArea()].ant_positions[posIndex]
-            tuchulcha:setSpawn(coords[1],coords[2],coords[3],0)
-            tuchulcha:setPos(coords)
-            local players = tuchulcha:getBattlefield():getPlayers()
-            for _, char in pairs(players) do
-                char:messageSpecial(ID.text.TUCHULCHA_SANDPIT)
-                char:disengage()
-                if char:hasPet() then
-                    char:petRetreat()
-                end
-            end
-        end)
+        mob:useMobAbility(sandpitID)
     end
 end
 
 entity.onMobDeath = function(mob, player, optParams)
+    -- Used to grab the mob IDs
     -- Despawn the hunters
     if optParams.isKiller then
         local bfID = mob:getBattlefield():getArea()
         DespawnMob(ID.sheepInAntlionsClothing[bfID].SWIFT_HUNTER_ID)
         DespawnMob(ID.sheepInAntlionsClothing[bfID].SHREWD_HUNTER_ID)
         DespawnMob(ID.sheepInAntlionsClothing[bfID].ARMORED_HUNTER_ID)
-        
-        -- Armoury Crate drops at Tuchulchua's feet
-        GetNPCByID(mob:getID()+4):setPos(mob:getXPos(), mob:getYPos(), mob:getZPos())
-        for _, v in pairs(mob:getBattlefield():getPlayers()) do
-            v:messageSpecial(ID.text.TUCHCULA_CRATE)
-        end
     end
 end
 

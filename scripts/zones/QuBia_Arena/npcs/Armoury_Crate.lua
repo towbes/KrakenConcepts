@@ -64,6 +64,7 @@ local entity = {}
                 {itemid = 4175, droprate = 70}, -- Vile Elixer +1
                 {itemid = 1132, droprate = 70}, -- Raxa
             },
+
             {
                 {itemid = 0,    droprate = 270}, -- nothing
                 {itemid = 658,  droprate =  50}, -- Damascus Ingot

@@ -34,6 +34,7 @@ zones[xi.zone.GRAUBERG_S] =
         KOTAN_KOR_KAMUY      = GetFirstID('Kotan-kor_Kamuy'),
         SCITALIS             = GetFirstID('Scitalis'),
         MIGRATORY_HIPPOGRYPH = GetFirstID('Migratory_Hippogryph'),
+        VASILICERATOPS       = GetFirstID('Vasiliceratops'),
     },
     npc =
     {

@@ -48,7 +48,7 @@ quest.sections =
         },
     },
 
-    {
+    --[[{
         check = function(player, status, vars)
             return status == xi.questStatus.QUEST_ACCEPTED and
             player:hasKeyItem(xi.ki.FADED_RUBY)
@@ -68,13 +68,13 @@ quest.sections =
                         if quest:getVar(player, 'Option') == 0 then
                             player:addTitle(xi.title.DISTURBER_OF_SLUMBER)
                         else
-                            player:addTitle(quest.reward.INTERRUPTOR_OF_DREAMS)
+                            player:addTitle(xi.title.INTERRUPTOR_OF_DREAMS)
                         end
                     end
                 end,
             },
         },
-    },
+    },]]
 
     {
         check = function(player, status, vars)
@@ -109,7 +109,7 @@ quest.sections =
                         if quest:getVar(player, 'Option') == 0 then
                             player:addTitle(xi.title.DISTURBER_OF_SLUMBER)
                         else
-                            player:addTitle(quest.reward.INTERRUPTOR_OF_DREAMS)
+                            player:addTitle(xi.title.INTERRUPTOR_OF_DREAMS)
                         end
                     end
                 end,

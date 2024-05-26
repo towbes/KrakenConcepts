@@ -28,6 +28,7 @@ zones[xi.zone.FULL_MOON_FOUNTAIN] =
     mob =
     {
         MOON_READING_OFFSET = GetFirstID('Ace_of_Cups'),
+        CARBUNCLE_PRIME_WTB = GetFirstID('Carbuncle_Prime'),
     },
     npc =
     {

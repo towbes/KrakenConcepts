@@ -143,7 +143,7 @@ xi.weaponskills.consumeManaBonusWeaponDamage = function(attacker, wsParams) -- F
             local MPConsumption = attacker:getMP() * 0.05 -- MP Consumed.
             local power = ((100 + (MPConsumption)) / 100) -- Damage Modifier based on MP consumed.
             bonus = power                  -- Weapon Damage * Modifier
-             -- attacker:printToPlayer(string.format('Weapon Damage: %s', bonus), xi.msg.channel.SYSTEM_3) -- Debug to see modifier of each hit in a weapon skill.
+              -- attacker:printToPlayer(string.format('Weapon Damage: %s', bonus), xi.msg.channel.SYSTEM_3) -- Debug to see modifier of each hit in a weapon skill.
         return bonus
         end
     end

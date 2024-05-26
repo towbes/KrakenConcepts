@@ -21,7 +21,7 @@ mobskillObject.onMobWeaponSkill = function(target, mob, skill)
 
     -- Jug pet rabbits' Wild Carrot is an AOE party heal. Heal varies with pet TP. 10 Yalm Range.
     if mob:isPet() then
-        if master and master:isJugPet() then
+        if master and master:hasJugPet() then
             local tp = skill:getTP()
             --duration = math.max(270, duration * (tp/1000)) -- Minimum 4.5 minutes. Maximum 9 minutes.
             master:forMembersInRange(10, function(member)

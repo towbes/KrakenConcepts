@@ -24,9 +24,21 @@ zones[xi.zone.CLOISTER_OF_TREMORS] =
         TITAN_UNLOCKED                   = 7579, -- You are now able to summon [Ifrit/Titan/Leviathan/Garuda/Shiva/Ramuh].
         ATTACH_SEAL                      = 7731, -- <player> attaches <item> to the protocrystal.
         POWER_STYMIES                    = 7732, -- An unseen power stymies your efforts to attach <item> to the protocrystal.
+
+        -- TODO: Shift IDs
+        TIME_IN_THE_BATTLEFIELD_IS_UP    = 7224, -- Your time in the battlefield is up! Now exiting...
+        PARTY_MEMBERS_ARE_ENGAGED        = 7239, -- The battlefield where your party members are engaged in combat is locked. Access is denied.
+        MEMBERS_OF_YOUR_PARTY            = 7530, -- Currently, # members of your party (including yourself) have clearance to enter the battlefield.
+        MEMBERS_OF_YOUR_ALLIANCE         = 7531, -- Currently, # members of your alliance (including yourself) have clearance to enter the battlefield.
+        TIME_LIMIT_FOR_THIS_BATTLE_IS    = 7533, -- The time limit for this battle is <number> minutes.
+        ENTERING_THE_BATTLEFIELD_FOR     = 7667, -- Entering the battlefield for [Trial by Earth/The Puppet Master/Trial-Size Trial by Earth/Waking the Beast/Sugar-coated Directive/Trial by Earth]!
     },
     mob =
     {
+        GALGALIM        = GetFirstID('Galgalim'),
+        TITAN_PRIME     = GetFirstID('Titan_Prime_Trial'),
+        TITAN_PRIME_ASA = GetFirstID('Titan_Prime_ASA'),
+        TITAN_PRIME_WTB = GetFirstID('Titan_Prime_WTB'),
     },
     npc =
     {

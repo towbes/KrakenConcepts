@@ -16,7 +16,7 @@ local content = Battlefield:new({
     exitNpc          = 'Burning_Circle',
     requiredItems    = { xi.item.THEMIS_ORB, wearMessage = horlaisID.text.A_CRACK_HAS_FORMED, wornMessage = horlaisID.text.ORB_IS_CRACKED },
 
-    experimental = true,
+    -- experimental = true,
 })
 
 content:addEssentialMobs({ 'Chlevnik' })

@@ -82,7 +82,7 @@ battlefieldObject.onEventFinish = function(player, csid, option)
         }
         local check = true
 
-        for i = 0, 7 do
+        for i = 1, 7 do
             if not player:hasKeyItem(key[i]) then
                 check = false
                 return
@@ -90,8 +90,8 @@ battlefieldObject.onEventFinish = function(player, csid, option)
         end
 
         if check then
-            for i = 0, 7 do
-                player:delKeyItem(xi.ki.key[i])
+            for i = 1, 7 do
+                player:delKeyItem(key[i])
             end
 
             npcUtil.giveKeyItem(player, xi.ki.FADED_RUBY)

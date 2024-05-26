@@ -14,7 +14,7 @@ local content = Battlefield:new({
     index            = 2,
     entryNpc         = '_0d0',
     exitNpc          = { '_0d1', '_0d2', '_0d3' },
-    requiredItems    = { xi.item.SYLVAN_STONE, wearMessage = mineshaftID.text.A_CRACK_HAS_FORMED, wornMessage = mineshaftID.text.ORB_IS_CRACKED },
+    requiredKeyItems = { xi.ki.SHAFT_2716_OPERATING_LEVER, message = mineshaftID.text.THE_PARTY_WILL_BE_REMOVED + 8 },
     grantXP          = 3500,
 })
 
