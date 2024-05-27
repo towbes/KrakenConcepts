@@ -26789,6 +26789,54 @@ INSERT INTO `mob_droplist` VALUES (4019,0,0,1000,17669,@COMMON);  -- Sagasinger 
 INSERT INTO `mob_droplist` VALUES (4019,0,0,1000,10975,@COMMON);  -- Archon Cape (15.0%)
 INSERT INTO `mob_droplist` VALUES (4019,0,0,1000,11674,@COMMON);  -- Archon Ring (15.0%)
 
+-- Nyzul Isle Boss Drops (Floor 20)
+INSERT INTO `mob_droplist` VALUES (4019,1,1,1000,15734,@COMMON);  -- Denali Gamashes (11.5%)
+INSERT INTO `mob_droplist` VALUES (4019,1,1,1000,15733,@COMMON);  -- Askar Gambieras (12.9%)
+INSERT INTO `mob_droplist` VALUES (4019,1,1,1000,15735,@COMMON);  -- Goliard Clogs (13.8%)
+INSERT INTO `mob_droplist` VALUES (4019,1,2,1000,15734,@COMMON);  -- Denali Gamashes (11.5%)
+INSERT INTO `mob_droplist` VALUES (4019,1,2,1000,15733,@COMMON);  -- Askar Gambieras (12.9%)
+INSERT INTO `mob_droplist` VALUES (4019,1,2,1000,15735,@COMMON);  -- Goliard Clogs (13.8%)
+
+-- Nyzul Isle Boss Drops (Floor 20)
+INSERT INTO `mob_droplist` VALUES (4020,1,1,1000,15734,@COMMON);  -- Denali Gamashes
+INSERT INTO `mob_droplist` VALUES (4020,1,1,1000,15733,@COMMON);  -- Askar Gambieras
+INSERT INTO `mob_droplist` VALUES (4020,1,1,1000,15735,@COMMON);  -- Goliard Clogs
+INSERT INTO `mob_droplist` VALUES (4020,1,2,1000,15734,@COMMON);  -- Denali Gamashes
+INSERT INTO `mob_droplist` VALUES (4020,1,2,1000,15733,@COMMON);  -- Askar Gambieras
+INSERT INTO `mob_droplist` VALUES (4020,1,2,1000,15735,@COMMON);  -- Goliard Clogs
+
+-- Nyzul Isle Boss Drops (Floor 40)
+INSERT INTO `mob_droplist` VALUES (4021,1,1,1000,15648,@COMMON);  -- Denali Kecks
+INSERT INTO `mob_droplist` VALUES (4021,1,1,1000,15647,@COMMON);  -- Askar Dirs
+INSERT INTO `mob_droplist` VALUES (4021,1,1,1000,15649,@COMMON);  -- Goliard Trews
+INSERT INTO `mob_droplist` VALUES (4021,1,2,1000,15648,@COMMON);  -- Denali Gamashes
+INSERT INTO `mob_droplist` VALUES (4021,1,2,1000,15647,@COMMON);  -- Askar Gambieras
+INSERT INTO `mob_droplist` VALUES (4021,1,2,1000,15649,@COMMON);  -- Goliard Clogs
+
+-- Nyzul Isle Boss Drops (Floor 60)
+INSERT INTO `mob_droplist` VALUES (4022,1,1,1000,14984,@COMMON);  -- Denali Wristbands
+INSERT INTO `mob_droplist` VALUES (4022,1,1,1000,14983,@COMMON);  -- Askar Manopolas
+INSERT INTO `mob_droplist` VALUES (4022,1,1,1000,14985,@COMMON);  -- Goliard Cuffs
+INSERT INTO `mob_droplist` VALUES (4022,1,2,1000,14984,@COMMON);  -- Denali Wristbands
+INSERT INTO `mob_droplist` VALUES (4022,1,2,1000,14983,@COMMON);  -- Askar Manopolas
+INSERT INTO `mob_droplist` VALUES (4022,1,2,1000,14985,@COMMON);  -- Goliard Cuffs
+
+-- Nyzul Isle Boss Drops (Floor 80)
+INSERT INTO `mob_droplist` VALUES (4023,1,1,1000,14569,@COMMON);  -- Denali Jacket
+INSERT INTO `mob_droplist` VALUES (4023,1,1,1000,14568,@COMMON);  -- Askar Korazin
+INSERT INTO `mob_droplist` VALUES (4023,1,1,1000,14570,@COMMON);  -- Goliard Saio
+INSERT INTO `mob_droplist` VALUES (4023,1,2,1000,14569,@COMMON);  -- Denali Jacket
+INSERT INTO `mob_droplist` VALUES (4023,1,2,1000,14568,@COMMON);  -- Askar Korazin
+INSERT INTO `mob_droplist` VALUES (4023,1,2,1000,14570,@COMMON);  -- Goliard Saio
+
+-- Nyzul Isle Boss Drops (Floor 100)
+INSERT INTO `mob_droplist` VALUES (4024,1,1,1000,16107,@COMMON);  -- Denali Bonnet
+INSERT INTO `mob_droplist` VALUES (4024,1,1,1000,16106,@COMMON);  -- Askar Zucchetto
+INSERT INTO `mob_droplist` VALUES (4024,1,1,1000,16108,@COMMON);  -- Goliard Chapeau
+INSERT INTO `mob_droplist` VALUES (4024,1,2,1000,16107,@COMMON);  -- Denali Bonnet
+INSERT INTO `mob_droplist` VALUES (4024,1,2,1000,16106,@COMMON);  -- Askar Zucchetto
+INSERT INTO `mob_droplist` VALUES (4024,1,2,1000,16108,@COMMON);  -- Goliard Chapeau
+
 
 /*!40000 ALTER TABLE `mob_droplist` ENABLE KEYS */;
 UNLOCK TABLES;
