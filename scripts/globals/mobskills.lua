@@ -7,6 +7,7 @@
 require('scripts/globals/combat/magic_hit_rate')
 require('scripts/globals/magicburst')
 require('scripts/globals/magic')
+require('scripts/globals/spells/damage_spell')
 require('scripts/globals/utils')
 -----------------------------------
 xi = xi or {}
@@ -73,9 +74,9 @@ local burstMultipliersByTier =
     [5] = 1.5,
 }
 
-xi.mobskills.calculateMobMagicBurst = function(caster, ele, target)
+xi.mobskills.calculateMobMagicBurst = function(caster, element, target)
     local burstMultiplier = 1.0
-    local skillchainTier, skillchainCount = xi.magicburst.formMagicBurst(ele, target)
+    local skillchainTier, skillchainCount = xi.magicburst.formMagicBurst(element, target)
 
     if skillchainTier > 0 then
         burstMultiplier = burstMultipliersByTier[skillchainCount]
@@ -556,96 +557,53 @@ end
 -- xi.mobskills.magicalTpBonus.DMG_BONUS and TP = 100, tpvalue = 2, assume V=150  --> damage is now 150*(TP*2) / 100 = 300
 -- xi.mobskills.magicalTpBonus.DMG_BONUS and TP = 200, tpvalue = 2, assume V=150  --> damage is now 150*(TP*2) / 100 = 600
 
-xi.mobskills.mobMagicalMove = function(mob, target, skill, damage, element, dmgmod, tpEffect, tpvalue, ignoreresist, ftp100, ftp200, ftp300, dStatMult)
-    local returninfo = {}
+xi.mobskills.mobMagicalMove = function(actor, target, action, baseDamage, actionElement, damageModifier, tpEffect, tpMultiplier, ignoreresist, ftp100, ftp200, ftp300, dStatMult)
+    local returnInfo = {} -- TODO: Destroy
 
-    if ignoreresist == 0 then
-        ignoreresist = false
-    end
+    local finalDamage = 0
 
-    local ignoreres = ignoreresist or false
-    local resist = 1
-    local tp = skill:getTP()
-
-    -- This needs to be taken out - to not cause Nil errors leave and set to damage
+    -- Base damage
     if tpEffect == xi.mobskills.magicalTpBonus.DMG_BONUS then
-        damage = damage -- Fail safe
+        finalDamage = math.floor(baseDamage * action:getTP() * tpMultiplier / 1000)
     end
 
-    -- Calculating with the known era pdif ratio for weaponskills.
-    if ftp100 == nil or ftp200 == nil or ftp300 == nil then -- Nil gate, will default mtp for each level to 1.
-        ftp100 = 1.0
-        ftp200 = 1.0
-        ftp300 = 1.0
-    end
-
-    local dStat = 0
-    -- if need to add Dstat as damage bonus then calc
-    if dStatMult then
-        dStat = (mob:getStat(xi.mod.INT)-target:getStat(xi.mod.INT)) * dStatMult
-    end
-
-    local ftpMult = xi.mobskills.fTP(tp, ftp100, ftp200, ftp300)
-
-    local mdefBarBonus = 0
-    if
-        element >= xi.element.FIRE and
-        element <= xi.element.WATER and
-        target:hasStatusEffect(xi.magic.barSpell[element])
-    then -- bar- spell magic defense bonus
-        mdefBarBonus = target:getStatusEffect(xi.magic.barSpell[element]):getSubPower()
-    end
-
-    -- plus 100 forces it to be a number
-    local mATT = mob:getMod(xi.mod.MATT)
-
-    if tpEffect == xi.mobskills.magicalTpBonus.MAB_BONUS then
-        mATT = mATT * (((skill:getTP() / 10) * tpvalue) / 100)
-    end
-    
-    local mab = (100 + mATT) / (100 + target:getMod(xi.mod.MDEF) + mdefBarBonus)
-    mab = utils.clamp(mab, 0.6, 1.5) -- 0.7 - 1.3
-
-    if tpEffect == xi.mobskills.magicalTpBonus.DMG_BONUS then
-        damage = damage -- * (((skill:getTP() / 10) * tpvalue) / 100)
-    end
-
-    -- resistance is added last
-    local finaldmg = damage * mab * ftpMult + dStat -- dmgmod
-
-    -- get resistance
+    -- Get bonus macc.
     local petAccBonus = 0
-    if mob:isPet() and mob:getMaster() ~= nil then
-        local master = mob:getMaster()
-        if mob:isAvatar() then
-            petAccBonus = utils.clamp(master:getSkillLevel(xi.skill.SUMMONING_MAGIC) - master:getMaxSkillLevel(mob:getMainLvl(), xi.job.SMN, xi.skill.SUMMONING_MAGIC), 0, 200)
+    if actor:isPet() and actor:getMaster() ~= nil then
+        local master = actor:getMaster()
+        if actor:isAvatar() then
+            petAccBonus = utils.clamp(master:getSkillLevel(xi.skill.SUMMONING_MAGIC) - master:getMaxSkillLevel(actor:getMainLvl(), xi.job.SMN, xi.skill.SUMMONING_MAGIC), 0, 200)
         end
 
-        local skillchainTier, _ = xi.magicburst.formMagicBurst(element, target)
+        local skillchainTier, _ = xi.magicburst.formMagicBurst(actionElement, target)
         if
-            mob:getPetID() > 0 and
+            actor:getPetID() > 0 and
             skillchainTier > 0
         then
             petAccBonus = petAccBonus + 25
         end
     end
 
-    local resist       = xi.mobskills.applyPlayerResistance(mob, nil, target, mob:getStat(xi.mod.INT)-target:getStat(xi.mod.INT), petAccBonus, element)
-    local magicDefense = getElementalDamageReduction(target, element)
+    -- Multipliers.
+    local sdt                         = xi.spells.damage.calculateSDT(target, actionElement)
+    local resist                      = xi.mobskills.applyPlayerResistance(actor, nil, target, actor:getStat(xi.mod.INT) - target:getStat(xi.mod.INT), petAccBonus, actionElement)
+    local dayAndWeather               = xi.spells.damage.calculateDayAndWeather(actor, 0, actionElement)
+    local magicBonusDiff              = xi.spells.damage.calculateMagicBonusDiff(actor, target, 0, 0, actionElement)
+    local targetMagicDamageAdjustment = xi.spells.damage.calculateTMDA(target, actionElement)
 
-    if not ignoreres then
-        finaldmg = finaldmg * resist * magicDefense
-    end
-
-    local burst = xi.mobskills.calculateMobMagicBurst(mob, element, target)
-    if burst > 1.0 then
-        finaldmg = finaldmg * burst
-    end
+    -- Calculate final damage.
+    finalDamage = math.floor(finalDamage * sdt)
+    finalDamage = math.floor(finalDamage * resist)
+    finalDamage = math.floor(finalDamage * dayAndWeather)
+    finalDamage = math.floor(finalDamage * magicBonusDiff)
+    finalDamage = math.floor(finalDamage * targetMagicDamageAdjustment)
+    finalDamage = math.floor(finalDamage * damageModifier)
 
     if target:hasStatusEffect(xi.effect.YAEGASUMI) then
         local yaegasumiEffect      = target:getStatusEffect(xi.effect.YAEGASUMI)
         local yaegasumiEffectPower = yaegasumiEffect:getPower()
-        finaldmg   = 0
+
+        finalDamage  = 0
         yaegasumiEffect:setPower(yaegasumiEffectPower + 1)
         skill:setMsg(xi.msg.basic.EVADES)
     end
@@ -653,24 +611,25 @@ xi.mobskills.mobMagicalMove = function(mob, target, skill, damage, element, dmgm
     --Handle Magic Stoneskin - Umeboshi
     local magicSS = target:getMod(xi.mod.MAGIC_STONESKIN)
     if magicSS > 0 then
-        if finaldmg >= magicSS then
+        if finalDamage >= magicSS then
             target:setMod(xi.mod.MAGIC_STONESKIN, 0)
-            finaldmg = finaldmg - magicSS
+            finalDamage = finalDamage - magicSS
         else
-            target:setMod(xi.mod.MAGIC_STONESKIN, magicSS - finaldmg)
-            finaldmg = 0
+            target:setMod(xi.mod.MAGIC_STONESKIN, magicSS - finalDamage)
+            finalDamage = 0
         end
     end
 
-    returninfo.dmg = finaldmg
-
     -- magical mob skills are single hit so provide single Melee hit TP return if primary target
-    if finaldmg > 0 and skill:getPrimaryTargetID() == target:getID() then
-        local tpReturn = xi.combat.tp.getSingleMeleeHitTPReturn(mob, target)
-        mob:addTP(tpReturn)
+    -- TODO: This should probably be moved to AFTER all damage is calculated, since this is not the final step.
+    if finalDamage > 0 and action:getPrimaryTargetID() == target:getID() then
+        local tpReturn = xi.combat.tp.getSingleMeleeHitTPReturn(actor, target)
+        actor:addTP(tpReturn)
     end
 
-    return returninfo
+    returnInfo.dmg = finalDamage
+
+    return returnInfo
 end
 
 -- effect = xi.effect.WHATEVER if enfeeble
@@ -704,81 +663,20 @@ xi.mobskills.applyPlayerResistance = function(actor, effect, target, diff, bonus
     return resistRate
 end
 
-xi.mobskills.mobAddBonuses = function(caster, target, dmg, ele, skill, ignoreresist) -- used for SMN magical bloodpacts, despite the name.
-    if ignoreresist == 0 then
-        ignoreresist = false
-    end
+xi.mobskills.mobAddBonuses = function(actor, target, damage, element, skill) -- used for SMN magical bloodpacts, despite the name.
+    local burst = xi.mobskills.calculateMobMagicBurst(actor, element, target)
 
-    local magicDefense = getElementalDamageReduction(target, ele)
-
-    if ignoreresist == true then
-        dmg = math.floor(dmg)
-    else
-        dmg = math.floor(dmg * magicDefense)
-    end
-
-    local dayWeatherBonus = 1.00
-
-    if caster:getWeather() == xi.magic.singleWeatherStrong[ele] then
-        if math.random() < 0.33 then
-            dayWeatherBonus = dayWeatherBonus + 0.10
-        end
-    elseif caster:getWeather() == xi.magic.singleWeatherWeak[ele] then
-        if math.random() < 0.33 then
-            dayWeatherBonus = dayWeatherBonus - 0.10
-        end
-    elseif caster:getWeather() == xi.magic.doubleWeatherStrong[ele] then
-        if math.random() < 0.33 then
-            dayWeatherBonus = dayWeatherBonus + 0.25
-        end
-    elseif caster:getWeather() == xi.magic.doubleWeatherWeak[ele] then
-        if math.random() < 0.33 then
-            dayWeatherBonus = dayWeatherBonus - 0.25
-        end
-    end
-
-    if VanadielDayElement() == xi.magic.dayStrong[ele] then
-        if math.random() < 0.33 then
-            dayWeatherBonus = dayWeatherBonus + 0.10
-        end
-    elseif VanadielDayElement() == xi.magic.dayWeak[ele] then
-        if math.random() < 0.33 then
-            dayWeatherBonus = dayWeatherBonus - 0.10
-        end
-    end
-
-    dayWeatherBonus = math.min(1.35, dayWeatherBonus)
-    dmg             = math.floor(dmg * dayWeatherBonus)
-
-    local burst = xi.mobskills.calculateMobMagicBurst(caster, ele, target)
     if
         skill and
-        burst > 1.0 and
-        caster:getPetID() > 0 -- all pets except charmed pets can get magic burst message, but only with petskill action
+        burst > 1 and
+        actor:getPetID() > 0 -- all pets except charmed pets can get magic burst message, but only with petskill action
     then
         skill:setMsg(xi.msg.basic.JA_MAGIC_BURST)
     end
 
-    dmg         = math.floor(dmg * burst)
+    damage = math.floor(damage * burst)
 
-    local mdefBarBonus = 0
-    if
-        ele >= xi.element.FIRE and
-        ele <= xi.element.WATER and
-        target:hasStatusEffect(xi.magic.barSpell[ele])
-    then -- bar- spell magic defense bonus
-        mdefBarBonus = target:getStatusEffect(xi.magic.barSpell[ele]):getSubPower()
-    end
-
-    local mab = (100 + caster:getMod(xi.mod.MATT)) / (100 + target:getMod(xi.mod.MDEF) + mdefBarBonus)
-
-    dmg = math.floor(dmg * mab)
-
-    local magicDmgMod = (10000 + target:getMod(xi.mod.DMGMAGIC)) / 10000
-
-    dmg = math.floor(dmg * magicDmgMod)
-
-    return dmg
+    return damage
 end
 
 -- Calculates breath damage
