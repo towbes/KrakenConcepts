@@ -56,11 +56,19 @@ entity.onMobFight = function(mob, target)
     local party = target:getParty()
 
     if os.time() > drawInTime then
-        local victim = math.random(1,#party)
-        for k, v in pairs(party) do
-            if v:isAlive() and k == victim and not v:isInEvent() then
-                mob:triggerDrawIn(mob, false, 1, 35, v)
+        -- Select a random party member to be the potential victim
+        local victimIndex = math.random(1,#party)
+
+        -- Iterate through the party members
+        for index, member in pairs(party) do
+            -- Check if the member is the chosen victim, is alive, not in an event, and within draw in max reach distance of mob.
+            if member:isAlive() and index == victimIndex and not member:isInEvent() and mob:checkDistance(member) < 35 then
+                mob:drawIn(member)
+
+                -- Set the drawIn cooldown to 20 seconds
                 mob:setLocalVar('drawInTime', os.time() + 20)
+
+                -- Mob Pulled someone, exit the loop.
                 break
             end
         end

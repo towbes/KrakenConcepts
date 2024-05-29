@@ -51,9 +51,15 @@ entity.onMobWeaponSkill = function(target, mob, skill)
     then
         local chance = math.random(1, 2)
         if chance == 1 then
-            mob:triggerDrawIn(mob, true, 1, 35, target, true)
+
+            local alliance = target:getAlliance()
+            local allainceIndex = math.random(1,#alliance)
+            -- Iterate through the alliance members
+            for index, member in pairs(alliance) do
+                    mob:drawIn(member)
+            end
         else
-            mob:triggerDrawIn(mob, false, 1, 35, target, true)
+            mob:drawIn(target)
         end
 
         -- KV always does an AOE TP move followed by a single target TP move
