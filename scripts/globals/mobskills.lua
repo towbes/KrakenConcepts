@@ -560,7 +560,25 @@ end
 xi.mobskills.mobMagicalMove = function(actor, target, action, baseDamage, actionElement, damageModifier, tpEffect, tpMultiplier, ignoreresist, ftp100, ftp200, ftp300, dStatMult)
     local returnInfo = {} -- TODO: Destroy
 
-    local finalDamage = 0
+    if tpMultiplier == nil then
+        tpMultiplier = 1
+    end
+
+    if ignoreresist == 0 then
+        ignoreresist = false
+    end
+
+    -- Calculating with the known era pdif ratio for weaponskills.
+    if ftp100 == nil or ftp200 == nil or ftp300 == nil then -- Nil gate, will default mtp for each level to 1.
+        ftp100 = 1.0
+        ftp200 = 1.0
+        ftp300 = 1.0
+    end
+
+    local tp          = action:getTP()
+    local ignoreres   = ignoreresist or false
+    local ftpMult     = xi.mobskills.fTP(tp, ftp100, ftp200, ftp300)
+    local finalDamage = math.floor(baseDamage * ftpMult)
 
     -- Base damage
     if tpEffect == xi.mobskills.magicalTpBonus.DMG_BONUS then
@@ -605,7 +623,7 @@ xi.mobskills.mobMagicalMove = function(actor, target, action, baseDamage, action
 
         finalDamage  = 0
         yaegasumiEffect:setPower(yaegasumiEffectPower + 1)
-        skill:setMsg(xi.msg.basic.EVADES)
+        action:setMsg(xi.msg.basic.EVADES)
     end
 
     --Handle Magic Stoneskin - Umeboshi
