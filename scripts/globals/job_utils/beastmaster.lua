@@ -72,8 +72,8 @@ xi.job_utils.beastmaster.onAbilityCheckJug = function(player, target, ability)
     if player:getPet() ~= nil then
         return xi.msg.basic.ALREADY_HAS_A_PET, 0
     elseif
-        not player:hasValidJugPetItem() or
-        player:getMainLvl() < jugLevelTable[petId]
+        not player:hasValidJugPetItem()
+        -- player:getMainLvl() < jugLevelTable[petId]
     then
         return xi.msg.basic.NO_JUG_PET_ITEM, 0
     elseif not player:canUseMisc(xi.zoneMisc.PET) then

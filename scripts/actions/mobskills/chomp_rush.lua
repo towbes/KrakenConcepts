@@ -23,6 +23,14 @@ mobskillObject.onMobWeaponSkill = function(target, mob, skill)
     local info           = xi.mobskills.mobPhysicalMove(mob, target, skill, numhits, accmod, dmgmod, tpEffect1, 1.5, 2, 2.50, tpEffect2, 1, 2, 3, crit, attmod)
     local info           = xi.mobskills.mobPhysicalMove(mob, target, skill, numhits, accmod, dmgmod, xi.mobskills.magicalTpBonus.NO_EFFECT)
     local dmg            = xi.mobskills.mobFinalAdjustments(info.dmg, mob, skill, target, xi.attackType.PHYSICAL, xi.damageType.SLASHING, info.hitslanded)
+    
+    local master = mob:getMaster()
+    if mob:isPet() then
+        if master and master:hasJugPet() then
+            skill:setSkillchainProps(xi.skillchainType.DARKNESS, xi.skillchainType.GRAVITATION, xi.skillchainType.NONE)
+        end
+    end
+    
     target:takeDamage(dmg, mob, xi.attackType.PHYSICAL, xi.damageType.SLASHING)
 
     xi.mobskills.mobPhysicalStatusEffectMove(mob, target, skill, xi.effect.SLOW, 2500, 0, 60)

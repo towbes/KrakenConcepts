@@ -13,6 +13,15 @@ end
 mobskillObject.onMobWeaponSkill = function(target, mob, skill)
         -- from http://ffxiclopedia.wikia.com/wiki/%3F%3F%3F_Needles
         -- "Seen totals ranging from 15, 000 to 55, 000 needles."
+
+        
+    local master = mob:getMaster()
+    if mob:isPet() then
+        if master and master:hasJugPet() then
+            skill:setSkillchainProps(xi.skillchainType.DARKNESS, xi.skillchainType.FRAGMENTATION, xi.skillchainType.NONE)
+        end
+    end
+    
     if mob:getID() == zones[xi.zone.ABYSSEA_ALTEPA].mob.CUIJATENDER then
         local needles = math.random(15000, 55000) / skill:getTotalTargets()
         local dmg     = xi.mobskills.mobFinalAdjustments(needles, mob, skill, target, xi.attackType.PHYSICAL, xi.damageType.PIERCING, xi.mobskills.shadowBehavior.WIPE_SHADOWS)
