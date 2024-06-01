@@ -18,14 +18,23 @@ zones[xi.zone.THE_SHROUDED_MAW] =
         PARTY_MEMBERS_HAVE_FALLEN     = 7410, -- All party members have fallen in battle. Now leaving the battlefield.
         THE_PARTY_WILL_BE_REMOVED     = 7417, -- If all party members' HP are still zero after # minute[/s], the party will be removed from the battlefield.
         CONQUEST_BASE                 = 7434, -- Tallying conquest results...
+
+        -- TODO: Shift IDs
+        TIME_IN_THE_BATTLEFIELD_IS_UP = 7065, -- Your time in the battlefield is up! Now exiting...
+        PARTY_MEMBERS_ARE_ENGAGED     = 7080, -- The battlefield where your party members are engaged in combat is locked. Access is denied.
+        NO_BATTLEFIELD_ENTRY          = 7090, -- An unfathomable light is rising from this strangely marked platform...
+        MEMBERS_OF_YOUR_PARTY         = 7371, -- Currently, # members of your party (including yourself) have clearance to enter the battlefield.
+        MEMBERS_OF_YOUR_ALLIANCE      = 7372, -- Currently, # members of your alliance (including yourself) have clearance to enter the battlefield.
+        TIME_LIMIT_FOR_THIS_BATTLE_IS = 7374, -- The time limit for this battle is <number> minutes.
+        ENTERING_THE_BATTLEFIELD_FOR  = 7597, -- Entering the battlefield for [Darkness Named/Test Your Mite/Waking Dreams/Waking Dreams]!
     },
     mob =
     {
-        DIABOLOS_OFFSET = 16818177,
+        DIABOLOS_OFFSET = GetFirstID('Diabolos'),
     },
     npc =
     {
-        DARKNESS_NAMED_TILE_OFFSET = 16818259, -- _0a0 in npc_list
+        DARKNESS_NAMED_TILE_OFFSET = GetFirstID('_0a0'),
     },
 }
 

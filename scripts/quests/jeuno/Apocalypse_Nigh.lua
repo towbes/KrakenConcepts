@@ -12,7 +12,7 @@ require('scripts/globals/quests')
 
 -----------------------------------
 
-local quest = Quest:new(xi.quest.log_id.JEUNO, xi.quest.id.jeuno.APOCALYPSE_NIGH)
+local quest = Quest:new(xi.questLog.JEUNO, xi.quest.id.jeuno.APOCALYPSE_NIGH)
 
 quest.reward =
 {
@@ -48,8 +48,8 @@ local function resetProgress(player, option)
         player:addMission(xi.mission.log_id.COP, xi.mission.id.cop.DAWN)
         player:addMission(xi.mission.log_id.ZILART, xi.mission.id.zilart.AWAKENING)
         player:setMissionStatus(xi.mission.log_id.ZILART, 3)
-        player:delQuest(xi.quest.log_id.JEUNO, xi.quest.id.jeuno.SHADOWS_OF_THE_DEPARTED)
-        player:delQuest(xi.quest.log_id.JEUNO, xi.quest.id.jeuno.APOCALYPSE_NIGH)
+        player:delQuest(xi.questLog.JEUNO, xi.quest.id.jeuno.SHADOWS_OF_THE_DEPARTED)
+        player:delQuest(xi.questLog.JEUNO, xi.quest.id.jeuno.APOCALYPSE_NIGH)
 
         quest:setVar(player, 'Status', 0)
     end
@@ -65,8 +65,8 @@ quest.sections =
 {
     {
         check = function(player, status, vars)
-            return status == QUEST_AVAILABLE and -- Needs to be available
-            player:hasCompletedQuest(xi.quest.log_id.JEUNO, xi.quest.id.jeuno.SHADOWS_OF_THE_DEPARTED) and -- Requires Shadows of the Departed
+            return status == xi.questStatus.QUEST_AVAILABLE and -- Needs to be available
+            player:hasCompletedQuest(xi.questLog.JEUNO, xi.quest.id.jeuno.SHADOWS_OF_THE_DEPARTED) and -- Requires Shadows of the Departed
             quest:getVar(player, 'Timer') <= VanadielUniqueDay() and
             not quest:getMustZone(player)
         end,
@@ -91,7 +91,7 @@ quest.sections =
 
     {
         check = function(player, status, vars)
-            return status == QUEST_ACCEPTED
+            return status == xi.questStatus.QUEST_ACCEPTED
         end,
 
         [xi.zone.SEALIONS_DEN] =
@@ -270,7 +270,7 @@ quest.sections =
 
     {
         check = function(player, status, vars)
-            return status == QUEST_COMPLETED
+            return status == xi.questStatus.QUEST_COMPLETED
         end,
 
         [xi.zone.NORG] =

@@ -32,26 +32,16 @@ zones[xi.zone.TORAIMARAI_CANAL] =
     },
     mob =
     {
-        CANAL_MOOCHER_PH =
-        {
-            [17469575] = 17469578,
-            [17469576] = 17469578,
-            [17469577] = 17469578,
-        },
-        KONJAC_PH =
-        {
-            [17469629] = 17469632,
-            [17469630] = 17469632,
-            [17469631] = 17469632,
-        },
-        HINGE_OILS_OFFSET = 17469666,
-        MAGIC_SLUDGE      = 17469516,
+        CANAL_MOOCHER     = GetFirstID('Canal_Moocher'),
+        KONJAC            = GetFirstID('Konjac'),
+        MAGIC_SLUDGE      = GetFirstID('Magic_Sludge'),
+        HINGE_OILS_OFFSET = GetFirstID('Hinge_Oil'),
+        MIMIC             = GetFirstID('Mimic'),
         ONI_CARCASS       = 17469587,
-        MIMIC             = 17469761,
     },
     npc =
     {
-        TOME_OF_MAGIC_OFFSET = 17469828,
+        TOME_OF_MAGIC_OFFSET = GetFirstID('Tome_of_Magic'),
         TREASURE_COFFER      = GetFirstID('Treasure_Coffer'),
     },
 }

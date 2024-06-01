@@ -105,12 +105,12 @@ xi.treasure.treasureInfo =
                 {
                     {
                         test = function(player)
-                            return player:getQuestStatus(xi.quest.log_id.OTHER_AREAS, xi.quest.id.otherAreas.PARADISE_SALVATION_AND_MAPS) == QUEST_ACCEPTED and
+                            return player:getQuestStatus(xi.questLog.OTHER_AREAS, xi.quest.id.otherAreas.PARADISE_SALVATION_AND_MAPS) == xi.questStatus.QUEST_ACCEPTED and
                                 not player:hasKeyItem(xi.ki.PIECE_OF_RIPPED_FLOORPLANS)
                         end,
 
                         code = function(player, npc)
-                            player:setCharVar(string.format('Quest[%s][%s]Chest', xi.quest.log_id.OTHER_AREAS, xi.quest.id.otherAreas.PARADISE_SALVATION_AND_MAPS), getIndexAtPosition(npc, xi.treasure.type.CHEST, xi.zone.SACRARIUM))
+                            player:setCharVar(string.format('Quest[%s][%s]Chest', xi.questLog.OTHER_AREAS, xi.quest.id.otherAreas.PARADISE_SALVATION_AND_MAPS), getIndexAtPosition(npc, xi.treasure.type.CHEST, xi.zone.SACRARIUM))
                             npcUtil.giveKeyItem(player, xi.ki.PIECE_OF_RIPPED_FLOORPLANS)
                         end,
                     },
@@ -177,8 +177,8 @@ xi.treasure.treasureInfo =
                 {
                     {
                         test = function(player)
-                            return player:getQuestStatus(xi.quest.log_id.BASTOK, xi.quest.id.bastok.FADED_PROMISES) == QUEST_ACCEPTED and
-                                xi.quest.getVar(player, xi.quest.log_id.BASTOK, xi.quest.id.bastok.FADED_PROMISES, 'Prog') == 1 and
+                            return player:getQuestStatus(xi.questLog.BASTOK, xi.quest.id.bastok.FADED_PROMISES) == xi.questStatus.QUEST_ACCEPTED and
+                                xi.quest.getVar(player, xi.questLog.BASTOK, xi.quest.id.bastok.FADED_PROMISES, 'Prog') == 1 and
                                 not player:hasKeyItem(xi.ki.DIARY_OF_MUKUNDA)
                         end,
 
@@ -286,7 +286,7 @@ xi.treasure.treasureInfo =
                 {
                     {
                         test = function(player)
-                            return player:getQuestStatus(xi.quest.log_id.JEUNO, xi.quest.id.jeuno.SCATTERED_INTO_SHADOW) == QUEST_ACCEPTED and
+                            return player:getQuestStatus(xi.questLog.JEUNO, xi.quest.id.jeuno.SCATTERED_INTO_SHADOW) == xi.questStatus.QUEST_ACCEPTED and
                                 player:getCharVar('scatIntoShadowCS') == 1 and not player:hasItem(xi.item.BEAST_COLLAR)
                         end,
 
@@ -324,7 +324,7 @@ xi.treasure.treasureInfo =
                 {
                     {
                         test = function(player)
-                            return player:getQuestStatus(xi.quest.log_id.JEUNO, xi.quest.id.jeuno.WINGS_OF_GOLD) == QUEST_ACCEPTED and
+                            return player:getQuestStatus(xi.questLog.JEUNO, xi.quest.id.jeuno.WINGS_OF_GOLD) == xi.questStatus.QUEST_ACCEPTED and
                                 not player:hasKeyItem(xi.ki.GUIDING_BELL)
                         end,
 
@@ -357,7 +357,7 @@ xi.treasure.treasureInfo =
                 {
                     {
                         test = function(player)
-                            return player:getQuestStatus(xi.quest.log_id.JEUNO, xi.quest.id.jeuno.WINGS_OF_GOLD) == QUEST_ACCEPTED and
+                            return player:getQuestStatus(xi.questLog.JEUNO, xi.quest.id.jeuno.WINGS_OF_GOLD) == xi.questStatus.QUEST_ACCEPTED and
                                 not player:hasKeyItem(xi.ki.GUIDING_BELL)
                         end,
 
@@ -386,7 +386,7 @@ xi.treasure.treasureInfo =
                 {
                     {
                         test = function(player)
-                            return player:getQuestStatus(xi.quest.log_id.BASTOK, xi.quest.id.bastok.A_TEST_OF_TRUE_LOVE) == QUEST_ACCEPTED and
+                            return player:getQuestStatus(xi.questLog.BASTOK, xi.quest.id.bastok.A_TEST_OF_TRUE_LOVE) == xi.questStatus.QUEST_ACCEPTED and
                                 not player:hasKeyItem(xi.ki.UN_MOMENT)
                         end,
 
@@ -427,7 +427,7 @@ xi.treasure.treasureInfo =
                 {
                     {
                         test = function(player)
-                            return player:getQuestStatus(xi.quest.log_id.BASTOK, xi.quest.id.bastok.A_TEST_OF_TRUE_LOVE) == QUEST_ACCEPTED and
+                            return player:getQuestStatus(xi.questLog.BASTOK, xi.quest.id.bastok.A_TEST_OF_TRUE_LOVE) == xi.questStatus.QUEST_ACCEPTED and
                                 not player:hasKeyItem(xi.ki.UN_MOMENT)
                         end,
 
@@ -455,7 +455,7 @@ xi.treasure.treasureInfo =
                 {
                     {
                         test = function(player)
-                            return player:getQuestStatus(xi.quest.log_id.BASTOK, xi.quest.id.bastok.A_TEST_OF_TRUE_LOVE) == QUEST_ACCEPTED and
+                            return player:getQuestStatus(xi.questLog.BASTOK, xi.quest.id.bastok.A_TEST_OF_TRUE_LOVE) == xi.questStatus.QUEST_ACCEPTED and
                                 not player:hasKeyItem(xi.ki.LEPHEMERE)
                         end,
 
@@ -557,7 +557,7 @@ xi.treasure.treasureInfo =
                 {
                     {
                         test = function(player)
-                            return player:getQuestStatus(xi.quest.log_id.SANDORIA, xi.quest.id.sandoria.SIGNED_IN_BLOOD) == QUEST_ACCEPTED and
+                            return player:getQuestStatus(xi.questLog.SANDORIA, xi.quest.id.sandoria.SIGNED_IN_BLOOD) == xi.questStatus.QUEST_ACCEPTED and
                                 player:getCharVar('Quest[0][108]Prog') == 2 and
                                 not player:hasKeyItem(xi.ki.TORN_OUT_PAGES)
                         end,
@@ -569,7 +569,7 @@ xi.treasure.treasureInfo =
 
                     {
                         test = function(player)
-                            return player:getQuestStatus(xi.quest.log_id.JEUNO, xi.quest.id.jeuno.THE_GOBLIN_TAILOR) >= QUEST_ACCEPTED and
+                            return player:getQuestStatus(xi.questLog.JEUNO, xi.quest.id.jeuno.THE_GOBLIN_TAILOR) >= xi.questStatus.QUEST_ACCEPTED and
                                 VanadielRSELocation() == 0 and
                                 VanadielRSERace() == player:getRace() and
                                 not player:hasKeyItem(xi.ki.MAGICAL_PATTERN)
@@ -646,7 +646,7 @@ xi.treasure.treasureInfo =
                 {
                     {
                         test = function(player)
-                            return player:getQuestStatus(xi.quest.log_id.JEUNO, xi.quest.id.jeuno.THE_GOBLIN_TAILOR) >= QUEST_ACCEPTED and
+                            return player:getQuestStatus(xi.questLog.JEUNO, xi.quest.id.jeuno.THE_GOBLIN_TAILOR) >= xi.questStatus.QUEST_ACCEPTED and
                                 VanadielRSELocation() == 1 and
                                 VanadielRSERace() == player:getRace() and
                                 not player:hasKeyItem(xi.ki.MAGICAL_PATTERN)
@@ -685,8 +685,8 @@ xi.treasure.treasureInfo =
                 {
                     {
                         test = function(player)
-                            return xi.quest.getVar(player, xi.quest.log_id.SANDORIA, xi.quest.id.sandoria.ENVELOPED_IN_DARKNESS, 'Prog') >= 2 and
-                                xi.quest.getVar(player, xi.quest.log_id.SANDORIA, xi.quest.id.sandoria.ENVELOPED_IN_DARKNESS, 'Time') == 0 and
+                            return xi.quest.getVar(player, xi.questLog.SANDORIA, xi.quest.id.sandoria.ENVELOPED_IN_DARKNESS, 'Prog') >= 2 and
+                                xi.quest.getVar(player, xi.questLog.SANDORIA, xi.quest.id.sandoria.ENVELOPED_IN_DARKNESS, 'Time') == 0 and
                                 not player:hasKeyItem(xi.ki.CRAWLER_BLOOD)
                         end,
 
@@ -724,7 +724,7 @@ xi.treasure.treasureInfo =
                 {
                     {
                         test = function(player)
-                            return player:getQuestStatus(xi.quest.log_id.JEUNO, xi.quest.id.jeuno.THE_GOBLIN_TAILOR) >= QUEST_ACCEPTED and
+                            return player:getQuestStatus(xi.questLog.JEUNO, xi.quest.id.jeuno.THE_GOBLIN_TAILOR) >= xi.questStatus.QUEST_ACCEPTED and
                                 VanadielRSELocation() == 2 and
                                 VanadielRSERace() == player:getRace() and
                                 not player:hasKeyItem(xi.ki.MAGICAL_PATTERN)
@@ -789,7 +789,7 @@ xi.treasure.treasureInfo =
                 {
                     {
                         test = function(player)
-                            return player:getQuestStatus(xi.quest.log_id.SANDORIA, xi.quest.id.sandoria.SORCERY_OF_THE_NORTH) == QUEST_ACCEPTED and
+                            return player:getQuestStatus(xi.questLog.SANDORIA, xi.quest.id.sandoria.SORCERY_OF_THE_NORTH) == xi.questStatus.QUEST_ACCEPTED and
                                 not player:hasKeyItem(xi.ki.FEIYIN_MAGIC_TOME)
                         end,
 
@@ -829,7 +829,7 @@ xi.treasure.treasureInfo =
                 {
                     {
                         test = function(player)
-                            return player:getQuestStatus(xi.quest.log_id.BASTOK, xi.quest.id.bastok.A_TEST_OF_TRUE_LOVE) == QUEST_ACCEPTED and
+                            return player:getQuestStatus(xi.questLog.BASTOK, xi.quest.id.bastok.A_TEST_OF_TRUE_LOVE) == xi.questStatus.QUEST_ACCEPTED and
                                 not player:hasKeyItem(xi.ki.LANCIENNE)
                         end,
 
@@ -1187,7 +1187,7 @@ xi.treasure.treasureInfo =
                 {
                     {
                         test = function(player)
-                            return player:getQuestStatus(xi.quest.log_id.OUTLANDS, xi.quest.id.outlands.TRUE_WILL) == QUEST_ACCEPTED and
+                            return player:getQuestStatus(xi.questLog.OUTLANDS, xi.quest.id.outlands.TRUE_WILL) == xi.questStatus.QUEST_ACCEPTED and
                                 player:getCharVar('trueWillCS') == 2 and
                                 not player:hasKeyItem(xi.ki.LARGE_TRICK_BOX)
                         end,
@@ -1199,7 +1199,7 @@ xi.treasure.treasureInfo =
 
                     {
                         test = function(player)
-                            return player:getQuestStatus(xi.quest.log_id.SANDORIA, xi.quest.id.sandoria.KNIGHT_STALKER) == QUEST_ACCEPTED and
+                            return player:getQuestStatus(xi.questLog.SANDORIA, xi.quest.id.sandoria.KNIGHT_STALKER) == xi.questStatus.QUEST_ACCEPTED and
                                 player:getCharVar('KnightStalker_Progress') == 1
                         end,
 
@@ -1611,7 +1611,7 @@ xi.treasure.onTrade = function(player, npc, trade, chestType)
         if
             info.af and
             info.af[mJob] and
-            player:getQuestStatus(xi.quest.log_id.JEUNO, info.af[mJob].quest) >= QUEST_ACCEPTED and
+            player:getQuestStatus(xi.questLog.JEUNO, info.af[mJob].quest) >= xi.questStatus.QUEST_ACCEPTED and
             not player:hasItem(info.af[mJob].reward)
         then
             player:messageSpecial(msgBase)
@@ -1623,7 +1623,7 @@ xi.treasure.onTrade = function(player, npc, trade, chestType)
         elseif
             info.af and
             info.af[sJob] and
-            player:getQuestStatus(xi.quest.log_id.JEUNO, info.af[sJob].quest) >= QUEST_ACCEPTED and
+            player:getQuestStatus(xi.questLog.JEUNO, info.af[sJob].quest) >= xi.questStatus.QUEST_ACCEPTED and
             not player:hasItem(info.af[sJob].reward)
         then
             player:messageSpecial(msgBase)

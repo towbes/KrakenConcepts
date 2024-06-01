@@ -10,6 +10,8 @@ mixins = {
     require('scripts/mixins/rage'),
          }
 -----------------------------------
+mixins = { require('scripts/mixins/families/ruszor') }
+-----------------------------------
 local entity = {}
 
 entity.onMobInitialize = function(mob)

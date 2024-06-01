@@ -14,13 +14,13 @@ require('scripts/globals/quests')
 
 -----------------------------------
 
-local quest = Quest:new(xi.quest.log_id.WINDURST, xi.quest.id.windurst.LET_SLEEPING_DOGS_LIE)
+local quest = Quest:new(xi.questLog.WINDURST, xi.quest.id.windurst.LET_SLEEPING_DOGS_LIE)
 
 quest.reward =
 {
     item = xi.item.HYPNO_STAFF,
     fame = 75,
-    fameArea = xi.quest.fame_area.WINDURST,
+    fameArea = xi.fameArea.WINDURST,
     title = xi.title.SPOILSPORT,
 }
 
@@ -28,9 +28,9 @@ quest.sections =
 {
     {
         check = function(player, status, vars)
-            return status == QUEST_AVAILABLE and
-            player:getFameLevel(xi.quest.fame_area.WINDURST) >= 4 and
-            player:getQuestStatus(xi.quest.log_id.WINDURST, xi.quest.id.windurst.REAP_WHAT_YOU_SOW) ~= QUEST_ACCEPTED
+            return status == xi.questStatus.QUEST_AVAILABLE and
+            player:getFameLevel(xi.fameArea.WINDURST) >= 4 and
+            player:getQuestStatus(xi.questLog.WINDURST, xi.quest.id.windurst.REAP_WHAT_YOU_SOW) ~= xi.questStatus.QUEST_ACCEPTED
         end,
 
         [xi.zone.WINDURST_WATERS] =
@@ -48,7 +48,7 @@ quest.sections =
 
     {
         check = function(player, status, vars)
-            return status == QUEST_ACCEPTED
+            return status == xi.questStatus.QUEST_ACCEPTED
         end,
 
         [xi.zone.WINDURST_WATERS] =
@@ -161,7 +161,7 @@ quest.sections =
 
     {
         check = function(player, status, vars)
-            return status == QUEST_COMPLETED
+            return status == xi.questStatus.QUEST_COMPLETED
         end,
 
         [xi.zone.WINDURST_WATERS] =
@@ -169,7 +169,7 @@ quest.sections =
             ['Chomoro-Kyotoro'] =
             {
                 onTrigger = function(player, npc)
-                    if player:getQuestStatus(xi.quest.log_id.WINDURST, xi.quest.id.windurst.HAT_IN_HAND) ~= QUEST_ACCEPTED then
+                    if player:getQuestStatus(xi.questLog.WINDURST, xi.quest.id.windurst.HAT_IN_HAND) ~= xi.questStatus.QUEST_ACCEPTED then
                         quest:event(498)
                     end
                 end,

@@ -23,7 +23,7 @@ require('scripts/globals/interaction/quest')
     4 = On Cooldown Due to Loss
 ]]
 
-local quest = Quest:new(xi.quest.log_id.OTHER_AREAS, xi.quest.id.otherAreas.UNINVITED_GUESTS)
+local quest = Quest:new(xi.questLog.OTHER_AREAS, xi.quest.id.otherAreas.UNINVITED_GUESTS)
 
 local rewards =
 {
@@ -110,7 +110,7 @@ quest.sections =
 {
     {
         check = function(player, status, vars)
-            return status == QUEST_AVAILABLE and
+            return status == xi.questStatus.QUEST_AVAILABLE and
             player:hasCompletedMission(xi.mission.log_id.COP, xi.mission.id.cop.THE_SAVAGE)
         end,
 
@@ -131,7 +131,7 @@ quest.sections =
     },
     {
         check = function(player, status, vars)
-            return (status == QUEST_ACCEPTED) or (status == QUEST_COMPLETED)
+            return (status == xi.questStatus.QUEST_ACCEPTED) or (status == xi.questStatus.QUEST_COMPLETED)
         end,
 
         [xi.zone.TAVNAZIAN_SAFEHOLD] =
@@ -140,11 +140,11 @@ quest.sections =
             {
                 onTrigger = function(player, npc)
                     local uninvitedGuests = player:getCharVar('UninvitedGuestsStatus')
-                    local questStatus = player:getQuestStatus(xi.quest.log_id.OTHER_AREAS, xi.quest.id.otherAreas.UNINVITED_GUESTS)
+                    local questStatus = player:getQuestStatus(xi.questLog.OTHER_AREAS, xi.quest.id.otherAreas.UNINVITED_GUESTS)
                     -- Reminder to go to Monarch Linn
                     if
                         uninvitedGuests == 1 and
-                        questStatus == QUEST_ACCEPTED
+                        questStatus == xi.questStatus.QUEST_ACCEPTED
                     then
                         return quest:progressEvent(571)
                     -- Player won, give reward

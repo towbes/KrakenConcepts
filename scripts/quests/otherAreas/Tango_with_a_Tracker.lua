@@ -13,7 +13,7 @@ require('scripts/globals/quests')
 require('scripts/globals/interaction/quest')
 -----------------------------------
 
-local quest = Quest:new(xi.quest.log_id.OTHER_AREAS, xi.quest.id.otherAreas.TANGO_WITH_A_TRACKER)
+local quest = Quest:new(xi.questLog.OTHER_AREAS, xi.quest.id.otherAreas.TANGO_WITH_A_TRACKER)
 
 -- Quest completion is handled by battlefield
 
@@ -21,7 +21,7 @@ quest.sections =
 {
     {
         check = function(player, status, vars)
-            return status == QUEST_AVAILABLE and
+            return status == xi.questStatus.QUEST_AVAILABLE and
             player:hasKeyItem(xi.ki.TEAR_OF_ALTANA)
         end,
 
@@ -42,7 +42,7 @@ quest.sections =
     {
         -- If player loses battlefield, they must return to Despachiaire for another KI
         check = function(player, status, vars)
-            return status == QUEST_ACCEPTED and
+            return status == xi.questStatus.QUEST_ACCEPTED and
             not player:hasKeyItem(xi.ki.LETTER_FROM_SHIKAREE_X)
         end,
 

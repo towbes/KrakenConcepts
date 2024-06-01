@@ -1834,86 +1834,68 @@ namespace battleutils
 
     bool TryInterruptSpell(CBattleEntity* PAttacker, CBattleEntity* PDefender, CSpell* PSpell)
     {
-        if (PDefender->objtype == TYPE_TRUST)
+        // Exceptions.
+        if (PDefender->objtype == TYPE_TRUST ||                                   // Caster is a trust.
+            PDefender->StatusEffectContainer->HasStatusEffect(EFFECT_MANAFONT) || // Caster has Manafont.
+            (SKILLTYPE)PSpell->getSkillType() == SKILL_SINGING)                   // Spell is a song.
         {
             return false;
         }
 
-        // cannot interrupt when manafont is active
-        if (PDefender->StatusEffectContainer->HasStatusEffect(EFFECT_MANAFONT))
+        // Calculate level ratio.
+        int   baseRate   = (PDefender->objtype == TYPE_MOB) ? 5 : 50;
+        float levelRatio = (float)(baseRate + PAttacker->GetMLevel() - PDefender->GetMLevel()) / 100.0f;
+
+        if (levelRatio < 0.01)
         {
-            return false;
+            levelRatio = 0.01f;
         }
 
-        // Songs cannot be interrupted by physical attacks.
-        if ((SKILLTYPE)PSpell->getSkillType() == SKILL_SINGING)
-        {
-            return false;
-        }
-
-        // Reasonable assumption for the time being.
-        int base = 40;
-
-        int diff = PAttacker->GetMLevel() - PDefender->GetMLevel();
-
-        if (PDefender->objtype == TYPE_MOB)
-        {
-            base = 5;
-        }
-
-        float check          = (float)(base + diff);
+        // Calculate skill ratio.
+        float skillRatio     = 1.0f;
         uint8 meritReduction = 0;
 
         if (PDefender->objtype == TYPE_PC)
-        { // Check player's skill.
-            // For mobs, we can assume their skill is capped at their level, so this term is 1 anyway.
-            CCharEntity* PChar = (CCharEntity*)PDefender;
-            float        skill = PChar->GetSkill(PSpell->getSkillType());
-            if (skill <= 0)
+        {
+            CCharEntity* PChar      = (CCharEntity*)PDefender;
+            float        skillCap   = GetMaxSkill((SKILLTYPE)PSpell->getSkillType(), PChar->GetMJob(), PChar->GetMLevel());
+            float        skillLevel = PChar->GetSkill(PSpell->getSkillType());
+
+            // If skill cap is 0, player may be using a spell from their subjob.
+            if (skillCap == 0)
             {
-                skill = 1;
+                skillCap = GetMaxSkill((SKILLTYPE)PSpell->getSkillType(), PChar->GetSJob(), PChar->GetMLevel()); // This may need to be re-investigated in the future.
             }
 
-            float cap = GetMaxSkill((SKILLTYPE)PSpell->getSkillType(), PChar->GetMJob(), PChar->GetMLevel());
-
-            // if cap is 0 then player is using a spell from their subjob
-            if (cap == 0)
+            // If skill level is 0, set ratio to 10.
+            if (skillLevel <= 0)
             {
-                cap = GetMaxSkill((SKILLTYPE)PSpell->getSkillType(), PChar->GetSJob(),
-                                  PChar->GetMLevel()); // This may need to be re-investigated in the future...
+                skillRatio = 10.0f;
+            }
+            else
+            {
+                skillRatio = skillCap / skillLevel;
             }
 
-            if (skill > cap)
-            {
-                skill = cap;
-            }
-
-            float ratio = cap / skill;
-            check *= ratio;
-
-            // prevent from spilling over 100 - resulting in players never being interupted
-            if (check > 100)
-            {
-                check = 100;
-            }
-
-            // apply any merit reduction
+            // Fetch player-only interruption rate reduction from merits.
             meritReduction = ((CCharEntity*)PDefender)->PMeritPoints->GetMeritValue(MERIT_SPELL_INTERUPTION_RATE, (CCharEntity*)PDefender);
         }
 
-        float interruptRate = ((100.0f - (meritReduction + (float)PDefender->getMod(Mod::SPELLINTERRUPT))) / 100.0f);
-        check *= interruptRate;
-        uint8 chance = xirand::GetRandomNumber(100);
+        // SIRD reduces the interrupt after all the calculations are done -- as evidenced by the infamous "102% SIRD" builds.
+        // Anything less than 102% interrupt results in the ability to be interrupted.
+        // Note: the 102% is probably an x/256 x/1024 nonsense -- sometimes 101% works.
+        float SIRDRatio = (100.0f - meritReduction - (float)PDefender->getMod(Mod::SPELLINTERRUPT)) / 100.0f;
+        float chance    = xirand::GetRandomNumber<float>(1.0f);
 
-        // caps, always give a 1% chance of interrupt
-        if (check < 1)
-        {
-            check = 0;
-        }
+        // This are all ratios.
+        // levelRatio : 0.01 to infinity.
+        // skillRatio:  1.0 to infinity.
+        // SIRDRatio:   No limits. Can be negative. A negative value will guarantee NOT being interrupted.
+        float finalRatio = levelRatio * skillRatio * SIRDRatio; // TL;DR Higher = Worse = More chances to get interrupted.
 
-        if (chance < check)
+        // You get interrupted. Handle aquaveil.
+        if (chance < finalRatio)
         {
-            // Prevent interrupt if Aquaveil is active, if it were to interrupt.
             if (PDefender->StatusEffectContainer->HasStatusEffect(EFFECT_AQUAVEIL))
             {
                 auto aquaCount = PDefender->StatusEffectContainer->GetStatusEffect(EFFECT_AQUAVEIL)->GetPower();
@@ -1927,7 +1909,7 @@ namespace battleutils
                 }
                 return false;
             }
-            // Otherwise interrupt the spell cast.
+
             return true;
         }
 
@@ -2284,8 +2266,7 @@ namespace battleutils
 
                         // Shield Mastery
                         if ((std::max(damage - (PDefender->getMod(Mod::PHALANX) + PDefender->getMod(Mod::STONESKIN)), 0) > 0) &&
-                            // charutils::hasTrait((CCharEntity*)PDefender, TRAIT_SHIELD_MASTERY))
-                            PDefender->getMod(Mod::SHIELD_MASTERY_TP) > 0) // Umeboshi "Ungated Shield Mastery Mods to not require the job trait"
+                            PDefender->getMod(Mod::SHIELD_MASTERY_TP))
                         {
                             // If the player blocked with a shield and has shield mastery, add shield mastery TP bonus
                             // unblocked damage (before block but as if affected by stoneskin/phalanx) must be greater than zero
@@ -2532,7 +2513,7 @@ namespace battleutils
             ((CMobEntity*)PDefender)->PEnmityContainer->UpdateEnmityFromDamage(PAttacker, 0);
         }
 
-        if (PAttacker->objtype == TYPE_PC && !isRanged)
+        if (PAttacker->objtype == TYPE_PC && !isRanged && !isCounter)
         {
             PAttacker->StatusEffectContainer->DelStatusEffectsByFlag(EFFECTFLAG_ATTACK);
         }
@@ -2915,7 +2896,7 @@ namespace battleutils
      *                                                                       *
      ************************************************************************/
 
-    uint8 GetCritHitRate(CBattleEntity* PAttacker, CBattleEntity* PDefender, bool ignoreSneakTrickAttack)
+    uint8 GetCritHitRate(CBattleEntity* PAttacker, CBattleEntity* PDefender, bool ignoreSneakTrickAttack, SLOTTYPE weaponSlot)
     {
         int32 critHitRate = 5;
         if (PAttacker->StatusEffectContainer->HasStatusEffect(EFFECT_MIGHTY_STRIKES, 0) ||
@@ -2989,6 +2970,17 @@ namespace battleutils
             critHitRate += GetDexCritBonus(PAttacker, PDefender);
             critHitRate += PAttacker->getMod(Mod::CRITHITRATE);
             critHitRate += PDefender->getMod(Mod::ENEMYCRITRATE);
+
+            // need to check for mods that only impact attacks with a specific weapon (like Senjuinrikio)
+            if (auto* player = dynamic_cast<CCharEntity*>(PAttacker))
+            {
+                auto* weapon = dynamic_cast<CItemWeapon*>(player->getEquip(weaponSlot));
+                if (weapon && weapon->getModifier(Mod::CRITHITRATE_ONLY_WEP) > 0)
+                {
+                    critHitRate += weapon->getModifier(Mod::CRITHITRATE_ONLY_WEP);
+                }
+            }
+
             critHitRate = std::clamp(critHitRate, 0, 100);
         }
         return (uint8)critHitRate;
@@ -3939,6 +3931,17 @@ namespace battleutils
                 }
             }
 
+            Mod resistanceRankMods[] = { Mod::FIRE_RES_RANK, Mod::ICE_RES_RANK, Mod::WIND_RES_RANK, Mod::EARTH_RES_RANK, Mod::THUNDER_RES_RANK, Mod::ICE_RES_RANK, Mod::LIGHT_RES_RANK, Mod::DARK_RES_RANK };
+
+            // Reset any resistance rank mods on the defender
+            PDefender->delModifiers(&PSCEffect->modList);
+
+            // Reset the effects resistance rank mods
+            for (auto& resistanceRank : resistanceRankMods)
+            {
+                PSCEffect->setMod(resistanceRank, 0);
+            }
+
             if (skillchain != SC_NONE)
             {
                 PSCEffect->SetStartTime(server_clock::now());
@@ -3946,6 +3949,17 @@ namespace battleutils
                 PSCEffect->SetTier(GetSkillchainTier(skillchain));
                 PSCEffect->SetPower(skillchain);
                 PSCEffect->SetSubPower(std::min(PSCEffect->GetSubPower() + 1, 5)); // Linked, limited to 5
+
+                // Set new resistance rank modifiers
+                // https://www.bg-wiki.com/ffxi/Resist#Modifying_Resistance_Rank
+                for (auto& element : GetSkillchainMagicElement(skillchain))
+                {
+                    Mod resistanceRankMod = GetResistanceRankModFromElement(element);
+                    PSCEffect->setMod(resistanceRankMod, -1);
+                }
+
+                // Add the mods back to the player (effect cleanup will destroy the mods for us later)
+                PDefender->addModifiers(&PSCEffect->modList);
 
                 return (SUBEFFECT)GetSkillchainSubeffect(skillchain);
             }
@@ -4103,6 +4117,22 @@ namespace battleutils
         };
 
         return resonanceToElement.at(skillchain);
+    }
+
+    Mod GetResistanceRankModFromElement(ELEMENT& element)
+    {
+        static const std::unordered_map<ELEMENT, Mod> elementToMod = {
+            { ELEMENT_FIRE, Mod::FIRE_RES_RANK },
+            { ELEMENT_WATER, Mod::WATER_RES_RANK },
+            { ELEMENT_WIND, Mod::WIND_RES_RANK },
+            { ELEMENT_EARTH, Mod::EARTH_RES_RANK },
+            { ELEMENT_THUNDER, Mod::EARTH_RES_RANK },
+            { ELEMENT_ICE, Mod::ICE_RES_RANK },
+            { ELEMENT_LIGHT, Mod::LIGHT_RES_RANK },
+            { ELEMENT_DARK, Mod::DARK_RES_RANK },
+        };
+
+        return elementToMod.at(element);
     }
 
     int32 TakeSkillchainDamage(CBattleEntity* PAttacker, CBattleEntity* PDefender, int32 lastSkillDamage, CBattleEntity* taChar)
@@ -4598,17 +4628,18 @@ namespace battleutils
         return damage;
     }
 
-    uint16 doConsumeManaEffect(CCharEntity* m_PChar, uint32 damage)
+    uint16 doConsumeManaEffect(CCharEntity* m_PChar)
     {
+        auto bonusDmg = 0;
         if (m_PChar->StatusEffectContainer->HasStatusEffect(EFFECT_CONSUME_MANA))
         {
-            // damage += (uint32)(floor(m_PChar->health.mp / 20));
-            // m_PChar->SetLocalVar("damageTrack", damage);
-            damage *= ((m_PChar->health.mp / 10) + 100) / 100;
+            // bonusDmg += (uint32)(floor(m_PChar->health.mp / 10));
+            // m_PChar->health.mp = 0;
+            bonusDmg *= ((m_PChar->health.mp / 10) + 100) / 100;
             m_PChar->addMP(-(m_PChar->health.mp * 0.05));
             // m_PChar->StatusEffectContainer->DelStatusEffect(EFFECT_CONSUME_MANA);
         }
-        return damage;
+        return bonusDmg;
     }
 
     /************************************************************************
@@ -5057,7 +5088,9 @@ namespace battleutils
     {
         TracyZoneScoped;
 
-        if (PDefender == nullptr || (PDefender && PDefender->objtype != ENTITYTYPE::TYPE_MOB)) // Do not try to claim anything but mobs (trusts, pets, players don't count)
+        if (PDefender == nullptr ||
+            (PDefender && PDefender->objtype != ENTITYTYPE::TYPE_MOB) ||                                                   // Do not try to claim anything but mobs (trusts, pets, players don't count)
+            (PDefender && PDefender->objtype == ENTITYTYPE::TYPE_MOB && PDefender->allegiance == ALLEGIANCE_TYPE::PLAYER)) // Added mobs that are in allied with player
         {
             return;
         }
@@ -5963,13 +5996,8 @@ namespace battleutils
         }
     }
 
-    bool DrawIn(CBattleEntity* PTarget, CMobEntity* PMob, float offset, uint8 drawInRange, uint16 maximumReach, bool includeParty, bool includeDeadAndMount)
+    bool DrawIn(CBattleEntity* PTarget, CMobEntity* PMob, float offset)
     {
-        if (std::chrono::time_point_cast<std::chrono::seconds>(server_clock::now()).time_since_epoch().count() - PMob->GetLocalVar("DrawInTime") < 2)
-        {
-            return false;
-        }
-
         position_t& pos        = PMob->loc.p;
         position_t  nearEntity = nearPosition(pos, offset, (float)0);
 
@@ -5995,54 +6023,52 @@ namespace battleutils
         // Move the target a little higher, just in case
         nearEntity.y -= 1.0f;
 
-        bool success = false;
-        // float drawInDistance = (float)(PMob->getMobMod(MOBMOD_DRAW_IN) > 1 ? PMob->getMobMod(MOBMOD_DRAW_IN) : PMob->GetMeleeRange() * 2);
+        bool  success        = false;
+        float drawInDistance = (float)(PMob->getMobMod(MOBMOD_DRAW_IN) > 1 ? PMob->getMobMod(MOBMOD_DRAW_IN) : PMob->GetMeleeRange() * 2);
 
-        // if (std::chrono::time_point_cast<std::chrono::seconds>(server_clock::now()).time_since_epoch().count() - PMob->GetLocalVar("DrawInTime") < 2)
-        // {
-        //     return false;
-        // }
+        if (std::chrono::time_point_cast<std::chrono::seconds>(server_clock::now()).time_since_epoch().count() - PMob->GetLocalVar("DrawInTime") < 2)
+        {
+            return false;
+        }
 
-        std::function<void(CBattleEntity*)> drawInFunc = [PMob, drawInRange, maximumReach, includeDeadAndMount, &nearEntity, &success](CBattleEntity* PMember)
+        std::function<void(CBattleEntity*)> drawInFunc = [PMob, drawInDistance, &nearEntity, &success](CBattleEntity* PMember)
         {
             float pDistance = distance(PMob->loc.p, PMember->loc.p);
 
-            if (PMob->loc.zone == PMember->loc.zone && pDistance > drawInRange && pDistance < maximumReach &&
-                PMember->status != STATUS_TYPE::CUTSCENE_ONLY &&
-                (includeDeadAndMount || (!PMember->isDead() && !PMember->isMounted())))
-            // if (PMob->loc.zone == PMember->loc.zone && dist > drawInRange && dist < maximumReach &&
-            //     PMember->status != STATUS_TYPE::STATUS_CUTSCENE_ONLY && !PMember->isDead() && !PMember->isMounted())
+            if (PMob->loc.zone == PMember->loc.zone && pDistance > drawInDistance && PMember->status != STATUS_TYPE::CUTSCENE_ONLY)
             {
-                // draw in!
-                if (PMob->getMobMod(MOBMOD_DRAW_IN_FRONT))
+                // don't draw in dead players for now!
+                // see tractor
+                if (PMember->isDead() || PMember->isMounted())
                 {
+                    // don't do anything
+                }
+                else
+                {
+                    // draw in!
                     PMember->loc.p.x = nearEntity.x;
                     PMember->loc.p.y = nearEntity.y;
                     PMember->loc.p.z = nearEntity.z;
+
+                    if (PMember->objtype == TYPE_PC)
+                    {
+                        CCharEntity* PChar = static_cast<CCharEntity*>(PMember);
+                        PChar->pushPacket(new CPositionPacket(PChar));
+                    }
+                    else
+                    {
+                        PMember->loc.zone->UpdateEntityPacket(PMember, ENTITY_UPDATE, UPDATE_POS);
+                    }
+
+                    luautils::OnMobDrawIn(PMob, PMember);
+                    PMob->loc.zone->PushPacket(PMob, CHAR_INRANGE, new CMessageBasicPacket(PMember, PMember, 0, 0, 232));
+                    success = true;
                 }
-                else
-                {
-                    PMember->loc.p.x = PMob->loc.p.x;
-                    PMember->loc.p.y = nearEntity.y;
-                    PMember->loc.p.z = PMob->loc.p.z;
-                }
-                if (PMember->objtype == TYPE_PC)
-                {
-                    CCharEntity* PChar = static_cast<CCharEntity*>(PMember);
-                    PChar->pushPacket(new CPositionPacket(PChar));
-                }
-                else
-                {
-                    PMember->loc.zone->UpdateEntityPacket(PMember, ENTITY_UPDATE, UPDATE_POS);
-                }
-                luautils::OnMobDrawIn(PMob, PMember);
-                PMob->loc.zone->PushPacket(PMob, CHAR_INRANGE, new CMessageBasicPacket(PMember, PMember, 0, 0, 232));
-                success = true;
             }
         };
 
         // check if i should draw-in party/alliance
-        if (includeParty)
+        if (PMob->getMobMod(MOBMOD_DRAW_IN) > 1)
         {
             PTarget->ForAlliance(drawInFunc);
         }
@@ -6246,7 +6272,7 @@ namespace battleutils
                 PTarget->PRecastContainer->DeleteByIndex(RECAST_ABILITY, resetCandidateList.at(1));
             }
 
-            if (PChar != PTarget)
+            if (PChar != PTarget && PTarget->objtype == TYPE_PC)
             {
                 // Update target's recast state; caster's will be handled in CCharEntity::OnAbility.
                 PTarget->pushPacket(new CCharRecastPacket(PTarget));
@@ -6254,6 +6280,29 @@ namespace battleutils
 
             return true;
         }
+    }
+
+    // turn towards target unless mob behavior ignores this (but can be forced to anyway)
+    void turnTowardsTarget(CBaseEntity* PEntity, CBaseEntity* PTarget, bool force)
+    {
+        // Quick rejects
+        if (!PEntity || !PTarget)
+        {
+            return;
+        }
+
+        CMobEntity* PMob = dynamic_cast<CMobEntity*>(PEntity);
+
+        // Big mobs typically should ignore this -- Such as dragons/wyrms or other big things.
+        // Some TP moves like Petro Eyes from normal dragons _also_ ignore their standard behavior, so we must allow it sometimes.
+        if (PMob && (PMob->m_Behaviour & BEHAVIOUR_NO_TURN) && !force)
+        {
+            return;
+        }
+
+        PEntity->loc.p.rotation = worldAngle(PEntity->loc.p, PTarget->loc.p);
+        PEntity->updatemask |= UPDATE_POS;
+        PEntity->loc.zone->UpdateEntityPacket(PTarget, ENTITY_UPDATE, UPDATE_POS);
     }
 
     /************************************************************************
@@ -6333,7 +6382,7 @@ namespace battleutils
 
     void AddTraits(CBattleEntity* PEntity, TraitList_t* traitList, uint8 level)
     {
-        CCharEntity* PChar = PEntity->objtype == TYPE_PC ? static_cast<CCharEntity*>(PEntity) : nullptr;
+        auto* PChar = dynamic_cast<CCharEntity*>(PEntity);
 
         for (auto&& PTrait : *traitList)
         {
@@ -6780,8 +6829,10 @@ namespace battleutils
         recast = static_cast<int32>(recast * ((100.0f - (fastCastReduction + inspirationRecastReduction)) / 100.0f));
 
         // Apply Haste (Magic and Gear)
-        int32 haste = PEntity->getMod(Mod::HASTE_MAGIC) + PEntity->getMod(Mod::HASTE_GEAR);
-        recast      = static_cast<int32>(recast * ((10000.0f - haste) / 10000.0f));
+        int32 hasteMagic = std::clamp<int32>(PEntity->getMod(Mod::HASTE_MAGIC), -10000, 4375); // 43.75% cap -- handle 100% slow for weakness
+        int32 hasteGear  = std::clamp<int32>(PEntity->getMod(Mod::HASTE_GEAR), -2500, 2500);   // 25%
+        int32 haste      = hasteMagic + hasteGear;
+        recast           = static_cast<int32>(recast * ((10000.0f - haste) / 10000.0f));
 
         if (PSpell->getSpellGroup() == SPELLGROUP_NINJUTSU)
         {

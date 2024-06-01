@@ -26,7 +26,7 @@ zones[xi.zone.BASTOK_MINES] =
         MARIADOK_DIALOG                = 6751,  -- Your fate rides on the changing winds of Vana'diel. I can give you insight on the local weather.
         MOG_LOCKER_OFFSET              = 6864,  -- Your Mog Locker lease is valid until <timestamp>, kupo.
         MAP_MARKER_TUTORIAL            = 7076,  -- Selecting Map from the main menu opens the map of the area in which you currently reside. Select Markers and press the right arrow key to see all the markers placed on your map.
-        ALCHEMY_SUPPORT                = 7083,  -- Your [fishing/woodworking/smithing/goldsmithing/clothcraft/leatherworking/bonecraft/alchemy/cooking] skills went up [a little/ever so slightly/ever so slightly].
+        IMAGE_SUPPORT                  = 7083,  -- Your [fishing/woodworking/smithing/goldsmithing/clothcraft/leatherworking/bonecraft/alchemy/cooking] skills went up [a little/ever so slightly/ever so slightly].
         HEMEWMEW_DIALOG                = 7090,  -- Hello, [sir/ma'am]. I have been appointed by the Guildworkers' Union to manage the trading of manufactured crafts and the exchange of guild points.
         GUILD_TERMINATE_CONTRACT       = 7097,  -- You have terminated your trading contract with the [Fishermen's/Carpenters'/Blacksmiths'/Goldsmiths'/Weavers'/Tanners'/Boneworkers'/Alchemists'/Culinarians'] Guild and formed a new one with the [Fishermen's/Carpenters'/Blacksmiths'/Goldsmiths'/Weavers'/Tanners'/Boneworkers'/Alchemists'/Culinarians'] Guild.
         GUILD_NEW_CONTRACT             = 7105,  -- You have formed a new trading contract with the [Fishermen's/Carpenters'/Blacksmiths'/Goldsmiths'/Weavers'/Tanners'/Boneworkers'/Alchemists'/Culinarians'] Guild.
@@ -101,8 +101,8 @@ zones[xi.zone.BASTOK_MINES] =
             [17735795] = 40, -- Proud Beard
             [17735818] = 44, -- Emaliveulaux
         },
-        LELEROON_BLUE_DOOR = 17735847,
-        EXPLORER_MOOGLE    = 17735856,
+        EXPLORER_MOOGLE    = GetFirstID('Explorer_Moogle'),
+        LELEROON_BLUE_DOOR = GetFirstID('Door_House'),
     },
 }
 

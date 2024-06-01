@@ -9,21 +9,21 @@ require('scripts/globals/interaction/quest')
 require('scripts/globals/npc_util')
 -----------------------------------
 
-local quest = Quest:new(xi.quest.log_id.WINDURST, xi.quest.id.windurst.ALL_AT_SEA)
+local quest = Quest:new(xi.questLog.WINDURST, xi.quest.id.windurst.ALL_AT_SEA)
 
 quest.reward =
 {
     item = xi.items.LEATHER_RING,
     fame = 30,
-    fameArea = xi.quest.fame_area.WINDURST,
+    fameArea = xi.fameArea.WINDURST,
 }
 
 quest.sections =
 {
     {
         check = function(player, status, vars)
-            return status == QUEST_AVAILABLE and
-            player:getFameLevel(xi.quest.fame_area.WINDURST) >= 3
+            return status == xi.questStatus.QUEST_AVAILABLE and
+            player:getFameLevel(xi.fameArea.WINDURST) >= 3
         end,
 
         [xi.zone.PORT_WINDURST] =
@@ -52,7 +52,7 @@ quest.sections =
 
     {
         check = function(player, status, vars)
-            return status == QUEST_ACCEPTED
+            return status == xi.questStatus.QUEST_ACCEPTED
         end,
 
         [xi.zone.PORT_WINDURST] =

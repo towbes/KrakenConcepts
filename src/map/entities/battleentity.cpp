@@ -47,6 +47,7 @@
 #include "utils/battleutils.h"
 #include "utils/petutils.h"
 #include "utils/puppetutils.h"
+#include "utils/zoneutils.h"
 #include "weapon_skill.h"
 
 CBattleEntity::CBattleEntity()
@@ -111,9 +112,10 @@ bool CBattleEntity::isAlive()
 
 bool CBattleEntity::isInDynamis()
 {
-    if (loc.zone != nullptr)
+    auto* PZone = loc.zone == nullptr ? zoneutils::GetZone(loc.destination) : loc.zone;
+    if (PZone)
     {
-        return loc.zone->GetTypeMask() & ZONE_TYPE::DYNAMIS;
+        return PZone->GetTypeMask() & ZONE_TYPE::DYNAMIS;
     }
     return false;
 }
@@ -125,6 +127,16 @@ bool CBattleEntity::isInAssault()
         return loc.zone->GetTypeMask() & ZONE_TYPE::INSTANCED &&
                (loc.zone->GetRegionID() >= REGION_TYPE::WEST_AHT_URHGAN && loc.zone->GetRegionID() <= REGION_TYPE::ALZADAAL);
     }
+    return false;
+}
+
+bool CBattleEntity::isInMogHouse()
+{
+    if (this->objtype == TYPE_PC)
+    {
+        return static_cast<CCharEntity*>(this)->m_moghouseID;
+    }
+
     return false;
 }
 
@@ -1520,7 +1532,7 @@ bool CBattleEntity::ValidTarget(CBattleEntity* PInitiator, uint16 targetFlags)
 bool CBattleEntity::CanUseSpell(CSpell* PSpell)
 {
     TracyZoneScoped;
-    return spell::CanUseSpell(this, PSpell);
+    return spell::CanUseSpell(this, PSpell) && !PRecastContainer->Has(RECAST_MAGIC, static_cast<uint16>(PSpell->getID()));
 }
 
 void CBattleEntity::Spawn()
@@ -1604,14 +1616,14 @@ void CBattleEntity::OnCastFinished(CMagicState& state, action_t& action)
     {
         float distance = spell::GetSpellRadius(PSpell, this);
 
-        PAI->TargetFind->findWithinArea(PActionTarget, AOE_RADIUS::TARGET, distance, flags);
+        PAI->TargetFind->findWithinArea(PActionTarget, AOE_RADIUS::TARGET, distance, flags, PSpell->getValidTarget());
     }
     else if (aoeType == SPELLAOE_CONAL)
     {
         // TODO: actual radius calculation
         float radius = spell::GetSpellRadius(PSpell, this);
 
-        PAI->TargetFind->findWithinCone(PActionTarget, radius, 45, flags);
+        PAI->TargetFind->findWithinCone(PActionTarget, radius, 45, flags, PSpell->getValidTarget());
     }
     else
     {
@@ -1626,7 +1638,7 @@ void CBattleEntity::OnCastFinished(CMagicState& state, action_t& action)
             }
         }
         // only add target
-        PAI->TargetFind->findSingleTarget(PActionTarget, flags);
+        PAI->TargetFind->findSingleTarget(PActionTarget, flags, PSpell->getValidTarget());
     }
 
     auto totalTargets = (uint16)PAI->TargetFind->m_targets.size();
@@ -1775,7 +1787,9 @@ void CBattleEntity::OnCastFinished(CMagicState& state, action_t& action)
         PActionTarget->StatusEffectContainer->DelStatusEffectsByFlag(EFFECTFLAG_DETECTABLE);
     }
 
-    this->StatusEffectContainer->DelStatusEffectsByFlag(EFFECTFLAG_MAGIC_END);
+    StatusEffectContainer->DelStatusEffectsByFlag(EFFECTFLAG_MAGIC_END);
+
+    PRecastContainer->Add(RECAST_MAGIC, static_cast<uint16>(PSpell->getID()), action.recast);
 }
 
 void CBattleEntity::OnCastInterrupted(CMagicState& state, action_t& action, MSGBASIC_ID msg, bool blockedCast)
@@ -1885,12 +1899,12 @@ void CBattleEntity::OnMobSkillFinished(CMobSkillState& state, action_t& action)
     {
         if (PSkill->isAoE())
         {
-            PAI->TargetFind->findWithinArea(PTarget, static_cast<AOE_RADIUS>(PSkill->getAoe()), PSkill->getRadius(), findFlags);
+            PAI->TargetFind->findWithinArea(PTarget, static_cast<AOE_RADIUS>(PSkill->getAoe()), PSkill->getRadius(), findFlags, PSkill->getValidTargets());
         }
         else if (PSkill->isConal())
         {
             float angle = 45.0f;
-            PAI->TargetFind->findWithinCone(PTarget, distance, angle, findFlags, PSkill->getAoe());
+            PAI->TargetFind->findWithinCone(PTarget, distance, angle, findFlags, PSkill->getValidTargets(), PSkill->getAoe());
         }
         else
         {
@@ -1903,7 +1917,7 @@ void CBattleEntity::OnMobSkillFinished(CMobSkillState& state, action_t& action)
                 }
             }
 
-            PAI->TargetFind->findSingleTarget(PTarget, findFlags);
+            PAI->TargetFind->findSingleTarget(PTarget, findFlags, PSkill->getValidTargets());
         }
     }
     else // Out of range
@@ -1920,20 +1934,45 @@ void CBattleEntity::OnMobSkillFinished(CMobSkillState& state, action_t& action)
         return;
     }
 
-    uint16 targets = static_cast<uint16>(PAI->TargetFind->m_targets.size());
+    uint16 targets  = static_cast<uint16>(PAI->TargetFind->m_targets.size());
+    auto   skipSelf = false;
+
+    if ((PSkill->getValidTargets() & TARGET_MOB_AND_PLAYER) && (PSkill->getValidTargets() & TARGET_SELF))
+    {
+        // This ability targets self for aoe skills (such as Frozen Mist)
+        // Should be impossible for self to not be in target list, but just in case
+        if (targets > 0)
+        {
+            targets -= 1;
+        }
+        skipSelf = true;
+    }
 
     // No targets, perhaps something like Super Jump or otherwise untargetable
     if (targets == 0)
     {
-        action.actiontype         = ACTION_MOBABILITY_INTERRUPT;
-        action.actionid           = 28787; // Some hardcoded magic for interrupts
         actionList_t& actionList  = action.getNewActionList();
         actionList.ActionTargetID = id;
 
         actionTarget_t& actionTarget = actionList.getNewActionTarget();
-        actionTarget.animation       = 0x1FC; // Hardcoded magic sent from the server
-        actionTarget.messageID       = 0;
-        actionTarget.reaction        = REACTION::ABILITY | REACTION::HIT;
+        if (skipSelf)
+        {
+            // This ability targets self for aoe skills (such as Frozen Mist)
+            // And it found no valid targets in range, the skill and animation should still trigger
+            // action.actiontype unchanged
+            actionTarget.animation  = PSkill->getAnimationID();
+            actionTarget.messageID  = 0;
+            actionTarget.reaction   = REACTION::MISS | REACTION::HIT | REACTION::GUARDED;
+            actionTarget.speceffect = SPECEFFECT::SELFAOE_MISS;
+        }
+        else
+        {
+            action.actiontype      = ACTION_MOBABILITY_INTERRUPT;
+            action.actionid        = 28787; // Some hardcoded magic for interrupts
+            actionTarget.animation = 0x1FC; // Hardcoded magic sent from the server
+            actionTarget.messageID = 0;
+            actionTarget.reaction  = REACTION::ABILITY | REACTION::HIT;
+        }
 
         return;
     }
@@ -1949,6 +1988,14 @@ void CBattleEntity::OnMobSkillFinished(CMobSkillState& state, action_t& action)
     bool first{ true };
     for (auto&& PTargetFound : PAI->TargetFind->m_targets)
     {
+        if (PTarget == PTargetFound && skipSelf)
+        {
+            // This ability targets self for aoe skills (such as Frozen Mist)
+            // Ignore self completely
+
+            continue;
+        }
+
         actionList_t& list = action.getNewActionList();
 
         list.ActionTargetID = PTargetFound->id;
@@ -1968,11 +2015,6 @@ void CBattleEntity::OnMobSkillFinished(CMobSkillState& state, action_t& action)
         {
             PET_TYPE petType = static_cast<CPetEntity*>(this)->getPetType();
 
-            if (static_cast<CPetEntity*>(this)->getPetType() == PET_TYPE::AVATAR || static_cast<CPetEntity*>(this)->getPetType() == PET_TYPE::WYVERN)
-            {
-                target.animation = PSkill->getPetAnimationID();
-            }
-
             if (petType == PET_TYPE::AUTOMATON)
             {
                 damage = luautils::OnAutomatonAbility(PTargetFound, this, PSkill, PMaster, &action);
@@ -1984,7 +2026,7 @@ void CBattleEntity::OnMobSkillFinished(CMobSkillState& state, action_t& action)
         }
         else
         {
-            damage = luautils::OnMobWeaponSkill(PTargetFound, this, PSkill, &action);
+            damage = luautils::OnMobWeaponSkill(PTargetFound, this, &PSkill, &action);
             this->PAI->EventHandler.triggerListener("WEAPONSKILL_USE", CLuaBaseEntity(this), CLuaBaseEntity(PTargetFound), PSkill->getID(), state.GetSpentTP(), CLuaAction(&action), damage);
             PTarget->PAI->EventHandler.triggerListener("WEAPONSKILL_TAKE", CLuaBaseEntity(PTargetFound), CLuaBaseEntity(this), PSkill->getID(), state.GetSpentTP(), CLuaAction(&action));
         }
@@ -2206,7 +2248,7 @@ bool CBattleEntity::OnAttack(CAttackState& state, action_t& action)
                  !PTarget->StatusEffectContainer->HasStatusEffect(EFFECT_ALL_MISS))
         {
             // Check parry.
-            if (attack.IsParried())
+            if (attack.CheckParried())
             {
                 actionTarget.messageID  = 70;
                 actionTarget.reaction   = REACTION::PARRY | REACTION::HIT;
@@ -2300,8 +2342,9 @@ bool CBattleEntity::OnAttack(CAttackState& state, action_t& action)
             }
             else
             {
+                SLOTTYPE weaponSlot = static_cast<SLOTTYPE>(attack.GetWeaponSlot());
                 // Set this attack's critical flag.
-                attack.SetCritical(xirand::GetRandomNumber(100) < battleutils::GetCritHitRate(this, PTarget, !attack.IsFirstSwing()));
+                attack.SetCritical(xirand::GetRandomNumber(100) < battleutils::GetCritHitRate(this, PTarget, !attack.IsFirstSwing(), weaponSlot));
 
                 this->PAI->EventHandler.triggerListener("MELEE_SWING_HIT", CLuaBaseEntity(this), CLuaBaseEntity(PTarget), CLuaAttack(&attack));
 

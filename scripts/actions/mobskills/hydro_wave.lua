@@ -1,7 +1,6 @@
 -----------------------------------
 --  Hydro Wave
---
---  Description: Fires a blast of Water, dealing damage in a fan-shaped area. Additional effect: Removes a single piece of equipment.
+--  Description: Deals water damage to enemies around the caster.
 --  Type: Magical (Water)
 --  Utsusemi/Blink absorb: Wipes shadows
 --  Range: Area of Effect (10 yalms)
@@ -16,11 +15,19 @@ mobskillObject.onMobSkillCheck = function(target, mob, skill)
 end
 
 mobskillObject.onMobWeaponSkill = function(target, mob, skill)
-    local dmgmod = 1
-    local info   = xi.mobskills.mobMagicalMove(mob, target, skill, mob:getWeaponDmg() * 3, xi.element.WATER, dmgmod, xi.mobskills.magicalTpBonus.NO_EFFECT)
+    local power    = math.random(1, 16)
+    local resist   = xi.mobskills.applyPlayerResistance(mob, xi.effect.ENCUMBRANCE_II, target, mob:getStat(xi.mod.INT) - target:getStat(xi.mod.INT), 0, 0)
+    local duration = 30 * resist
+
+    xi.mobskills.mobStatusEffectMove(mob, target, xi.effect.ENCUMBRANCE_II, power, 0, duration)
+
+    local dmgmod = 2.5
+    local info   = xi.mobskills.mobMagicalMove(mob, target, skill, mob:getWeaponDmg(), xi.element.WATER, dmgmod, xi.mobskills.magicalTpBonus.NO_EFFECT)
     local dmg    = xi.mobskills.mobFinalAdjustments(info.dmg, mob, skill, target, xi.attackType.MAGICAL, xi.damageType.WATER, xi.mobskills.shadowBehavior.WIPE_SHADOWS)
 
     target:takeDamage(dmg, mob, xi.attackType.MAGICAL, xi.damageType.WATER)
+
+    mob:addStatusEffect(xi.effect.STONESKIN, 0, 0, 180, 2, 1500)
     --local remove = 0xFFFF
     local numberToUnequip = 1
 

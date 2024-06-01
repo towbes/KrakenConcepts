@@ -4,7 +4,7 @@
 -----------------------------------
 local entity = {}
 
-local loot =
+--[[local loot =
 {
         -- Come into my Parlor
         [513] =
@@ -64,6 +64,7 @@ local loot =
                 {itemid = 4175, droprate = 70}, -- Vile Elixer +1
                 {itemid = 1132, droprate = 70}, -- Raxa
             },
+
             {
                 {itemid = 0,    droprate = 270}, -- nothing
                 {itemid = 658,  droprate =  50}, -- Damascus Ingot
@@ -749,16 +750,12 @@ local loot =
             { itemid = xi.item.ZIRCON,           droprate =  50 }, -- zircon
         },
     },
-}
+}]]
 
 entity.onTrade = function(player, npc, trade)
 end
 
 entity.onTrigger = function(player, npc)
-    local battlefield = player:getBattlefield()
-    if battlefield then
-        xi.battlefield.HandleLootRolls(battlefield, loot[battlefield:getID()], nil, npc)
-    end
 end
 
 entity.onEventUpdate = function(player, csid, option, npc)

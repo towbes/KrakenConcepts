@@ -41,7 +41,7 @@ battlefield_object.onEventFinish = function(player, csid, option)
     if csid == 32001 then
         player:addGil(10000)
         player:addTitle(xi.title.SIN_HUNTER_HUNTER)
-        player:completeQuest(xi.quest.log_id.OTHER_AREAS, xi.quest.id.otherAreas.TANGO_WITH_A_TRACKER)
+        player:completeQuest(xi.questLog.OTHER_AREAS, xi.quest.id.otherAreas.TANGO_WITH_A_TRACKER)
     end
 end
 

@@ -26,6 +26,13 @@ mobskillObject.onMobWeaponSkill = function(target, mob, skill)
     local power     = math.floor(mob:getMainLvl() / 10) + 1
     local duration  = 90
 
+    local master = mob:getMaster()
+    if mob:isPet() then
+        if master and master:hasJugPet() then
+            skill:setSkillchainProps(xi.skillchainType.SCISSION, xi.skillchainType.NONE, xi.skillchainType.NONE)
+        end
+    end
+
     if mob:getMainLvl() < 10 then
         duration = duration / 2
     end

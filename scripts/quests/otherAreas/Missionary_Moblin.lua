@@ -3,7 +3,7 @@
 -- Koblakiq !pos -64.851 21.834 -117.521 11
 -----------------------------------
 
-local quest = Quest:new(xi.quest.log_id.OTHER_AREAS, xi.quest.id.otherAreas.MISSIONARY_MOBLIN)
+local quest = Quest:new(xi.questLog.OTHER_AREAS, xi.quest.id.otherAreas.MISSIONARY_MOBLIN)
 
 quest.reward =
 {
@@ -14,7 +14,7 @@ quest.sections =
 {
     {
         check = function(player, status, vars)
-            return status == QUEST_AVAILABLE
+            return status == xi.questStatus.QUEST_AVAILABLE
         end,
 
         [xi.zone.OLDTON_MOVALPOLOS] =
@@ -34,7 +34,7 @@ quest.sections =
 
     {
         check = function(player, status, vars)
-            return status == QUEST_ACCEPTED
+            return status == xi.questStatus.QUEST_ACCEPTED
         end,
 
         [xi.zone.OLDTON_MOVALPOLOS] =
@@ -56,15 +56,15 @@ quest.sections =
             {
                 [9] = function(player, csid, option, npc)
                     quest:complete(player)
-                    xi.quest.setMustZone(player, xi.quest.log_id.OTHER_AREAS, xi.quest.id.otherAreas.FOR_THE_BIRDS)
+                    xi.quest.setMustZone(player, xi.questLog.OTHER_AREAS, xi.quest.id.otherAreas.FOR_THE_BIRDS)
                 end,
             },
         },
     },
     {
         check = function(player, status, vars)
-            return status == QUEST_COMPLETED and
-            player:getQuestStatus(xi.quest.log_id.OTHER_AREAS, xi.quest.id.otherAreas.BETTER_THE_DEMON_YOU_KNOW) == QUEST_AVAILABLE
+            return status == xi.questStatus.QUEST_COMPLETED and
+            player:getQuestStatus(xi.questLog.OTHER_AREAS, xi.quest.id.otherAreas.BETTER_THE_DEMON_YOU_KNOW) == xi.questStatus.QUEST_AVAILABLE
         end,
 
         [xi.zone.OLDTON_MOVALPOLOS] =

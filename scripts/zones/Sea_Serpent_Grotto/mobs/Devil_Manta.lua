@@ -7,26 +7,18 @@ local ID = zones[xi.zone.SEA_SERPENT_GROTTO]
 -----------------------------------
 local entity = {}
 
+local charybdisPHTable =
+{
+    [ID.mob.CHARYBDIS - 4] = ID.mob.CHARYBDIS, -- -138.181, 48.389, -338.001
+    [ID.mob.CHARYBDIS - 2] = ID.mob.CHARYBDIS, -- -212.407, 38.538, -342.544
+}
+
 entity.onMobDeath = function(mob, player, optParams)
     xi.regime.checkRegime(player, mob, 810, 2, xi.regime.type.GROUNDS)
 end
 
 entity.onMobDespawn = function(mob)
-    -- Only one Charbydis PH is up at one time
-    local chooseManta = math.random(1,2)
-    local mantaOne = ID.mob.CHARYBDIS - 2
-    local mantaTwo = ID.mob.CHARYBDIS - 4
-    if mob:getID() == mantaOne and chooseManta == 2 then
-        DisallowRespawn(mantaOne, true)
-        DisallowRespawn(mantaTwo, false)
-        GetMobByID(mantaTwo):setRespawnTime(300)
-    elseif mob:getID() == mantaTwo and chooseManta == 1 then
-        DisallowRespawn(mantaOne, false)
-        DisallowRespawn(mantaTwo, true)
-        GetMobByID(mantaOne):setRespawnTime(300)
-    end
-
-    xi.mob.phOnDespawn(mob, ID.mob.CHARYBDIS_PH, 10, 28800) -- 8 hour minimum
+    xi.mob.phOnDespawn(mob, charybdisPHTable, 10, math.random(28800, 43200)) -- 8 - 12 hours
 end
 
 return entity

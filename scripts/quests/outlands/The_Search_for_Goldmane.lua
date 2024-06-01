@@ -13,12 +13,12 @@ require('scripts/globals/interaction/quest')
 local ID = zones[xi.zone.BIBIKI_BAY]
 -----------------------------------
 
-local quest = Quest:new(xi.quest.log_id.OUTLANDS, xi.quest.id.outlands.THE_SEARCH_FOR_GOLDMANE)
+local quest = Quest:new(xi.questLog.OUTLANDS, xi.quest.id.outlands.THE_SEARCH_FOR_GOLDMANE)
 
 quest.reward =
 {
     fame     = 40,
-    fameArea = xi.quest.fame_area.SELBINA_RABAO,
+    fameArea = xi.fameArea.SELBINA_RABAO,
     gil      = 3000,
     title    = xi.title.ROOKIE_HERO_INSTRUCTOR,
 }
@@ -27,8 +27,8 @@ quest.sections =
 {
     {
         check = function(player, status, vars)
-            return status == QUEST_AVAILABLE and
-            player:hasCompletedQuest(xi.quest.log_id.OUTLANDS, xi.quest.id.outlands.CHASING_DREAMS) and
+            return status == xi.questStatus.QUEST_AVAILABLE and
+            player:hasCompletedQuest(xi.questLog.OUTLANDS, xi.quest.id.outlands.CHASING_DREAMS) and
             player:hasCompletedMission(xi.mission.log_id.COP, xi.mission.id.cop.ANCIENT_VOWS)
         end,
 
@@ -50,7 +50,7 @@ quest.sections =
 
     {
         check = function(player, status, vars)
-            return status == QUEST_ACCEPTED
+            return status == xi.questStatus.QUEST_ACCEPTED
         end,
 
         [xi.zone.TAVNAZIAN_SAFEHOLD] =

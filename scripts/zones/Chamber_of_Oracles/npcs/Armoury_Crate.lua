@@ -4,7 +4,7 @@
 -----------------------------------
 local entity = {}
 
-local loot =
+--[[local loot =
 {
     -- BCNM Legion XI Comitatensis
     [193] =
@@ -261,16 +261,12 @@ local loot =
             {itemid = 1132, droprate = 100}, -- Square Of Raxa
         }
     },
-}
+}]]
 
 entity.onTrade = function(player, npc, trade)
 end
 
 entity.onTrigger = function(player, npc)
-    local battlefield = player:getBattlefield()
-    if battlefield then
-        xi.battlefield.HandleLootRolls(battlefield, loot[battlefield:getID()], nil, npc)
-    end
 end
 
 entity.onEventUpdate = function(player, csid, option, npc)

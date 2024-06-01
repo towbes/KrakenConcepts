@@ -19,7 +19,7 @@ end
 
 entity.onEventFinish = function(player, csid, option, npc)
     if csid == 681 and option == 0 then
-        player:addQuest(xi.quest.log_id.SANDORIA, xi.quest.id.sandoria.HEALING_THE_LAND)
+        player:addQuest(xi.questLog.SANDORIA, xi.quest.id.sandoria.HEALING_THE_LAND)
         player:addKeyItem(xi.ki.SEAL_OF_BANISHING)
         player:messageSpecial(ID.text.KEYITEM_OBTAINED, xi.ki.SEAL_OF_BANISHING)
     elseif csid == 683 then
@@ -30,8 +30,8 @@ entity.onEventFinish = function(player, csid, option, npc)
             player:addItem(xi.item.SCROLL_OF_TELEPORT_HOLLA)
             player:messageSpecial(ID.text.ITEM_OBTAINED, xi.item.SCROLL_OF_TELEPORT_HOLLA) -- Scroll of Teleport-Holla
             player:needToZone(true)
-            player:addFame(xi.quest.fame_area.SANDORIA, 30)
-            player:completeQuest(xi.quest.log_id.SANDORIA, xi.quest.id.sandoria.HEALING_THE_LAND)
+            player:addFame(xi.fameArea.SANDORIA, 30)
+            player:completeQuest(xi.questLog.SANDORIA, xi.quest.id.sandoria.HEALING_THE_LAND)
         end
     end
 end

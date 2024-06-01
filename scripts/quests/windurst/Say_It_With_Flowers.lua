@@ -9,16 +9,11 @@
 -- Kenapa-Keppa   : !pos 27 -6 -199 238
 -- Tahrongi Cacti : !pos -308 7 264 117
 -----------------------------------
-require('scripts/globals/interaction/quest')
-require('scripts/globals/npc_util')
-require('scripts/globals/quests')
-
------------------------------------
-local windurstWatersIDs = require('scripts/zones/Windurst_Waters/IDs')
-local tahrongiID = require('scripts/zones/Tahrongi_Canyon/IDs')
+local windurstWatersIDs = zones[xi.zone.WINDURST_WATERS]
+local tahrongiID = zones[xi.zone.TAHRONGI_CANYON]
 -----------------------------------
 
-local quest = Quest:new(xi.quest.log_id.WINDURST, xi.quest.id.windurst.SAY_IT_WITH_FLOWERS)
+local quest = Quest:new(xi.questLog.WINDURST, xi.quest.id.windurst.SAY_IT_WITH_FLOWERS)
 
 local flowerList =
 {
@@ -39,10 +34,10 @@ quest.sections =
     -- Quest Available
     {
         check = function(player, status, vars)
-            return player:getFameLevel(xi.quest.log_id.WINDURST) >= 2 and
-                (status == QUEST_AVAILABLE or
+            return player:getFameLevel(xi.questLog.WINDURST) >= 2 and
+                (status == xi.questStatus.QUEST_AVAILABLE or
                     (
-                        status == QUEST_COMPLETED and
+                        status == xi.questStatus.QUEST_COMPLETED and
                         vars.Prog == 0 and
                         not quest:getMustZone(player)
                     )
@@ -68,7 +63,7 @@ quest.sections =
     -- Quest in Progress - Stage 1
     {
         check = function(player, status, vars)
-            return status >= QUEST_ACCEPTED and
+            return status >= xi.questStatus.QUEST_ACCEPTED and
             vars.Prog == 1
         end,
 
@@ -114,7 +109,7 @@ quest.sections =
     -- Quest in Progress - Stage 2
     {
         check = function(player, status, vars)
-            return status >= QUEST_ACCEPTED and
+            return status >= xi.questStatus.QUEST_ACCEPTED and
             vars.Prog == 2
         end,
 
@@ -153,7 +148,7 @@ quest.sections =
     -- Quest in Progress - Stage 3
     {
         check = function(player, status, vars)
-            return status >= QUEST_ACCEPTED and
+            return status >= xi.questStatus.QUEST_ACCEPTED and
             vars.Prog >= 3
         end,
 
@@ -176,7 +171,7 @@ quest.sections =
                         xi.item.MARGUERITE,
                     }
                     if npcUtil.tradeHasExactly(trade, { xi.item.TAHRONGI_CACTUS }) then
-                        if player:hasCompletedQuest(xi.quest.log_id.WINDURST, xi.quest.id.windurst.SAY_IT_WITH_FLOWERS) then
+                        if player:hasCompletedQuest(xi.questLog.WINDURST, xi.quest.id.windurst.SAY_IT_WITH_FLOWERS) then
                             return quest:progressEvent(525, 400)
                         else
                             return quest:progressEvent(520)
@@ -209,7 +204,7 @@ quest.sections =
                         quest.reward =
                         {
                             fame     = 30,
-                            fameArea = xi.quest.fame_area.WINDURST,
+                            fameArea = xi.fameArea.WINDURST,
                             title    = xi.title.CUPIDS_FLORIST,
                             gil      = 400,
                         }
@@ -223,7 +218,7 @@ quest.sections =
                     quest.reward =
                     {
                         fame     = 10,
-                        fameArea = xi.quest.fame_area.WINDURST,
+                        fameArea = xi.fameArea.WINDURST,
                         gil      = 100,
                     }
                     quest:complete(player)
@@ -235,7 +230,7 @@ quest.sections =
                     quest.reward =
                     {
                         fame     = 30,
-                        fameArea = xi.quest.fame_area.WINDURST,
+                        fameArea = xi.fameArea.WINDURST,
                         title    = xi.title.CUPIDS_FLORIST,
                         gil      = 400,
                     }
@@ -249,7 +244,7 @@ quest.sections =
     -- Quest in Progress - Able to Collect Cactus
     {
         check = function(player, status, vars)
-            return status >= QUEST_ACCEPTED and
+            return status >= xi.questStatus.QUEST_ACCEPTED and
             vars.CactusAvailable
         end,
 

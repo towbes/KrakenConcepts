@@ -7,18 +7,14 @@
 -- Varun      : !pos 7.8  -3.5 -10.064 241
 -----------------------------------
 
-require('scripts/globals/quests')
-require('scripts/globals/interaction/quest')
------------------------------------
-
-local quest = Quest:new(xi.quest.log_id.WINDURST, xi.quest.id.windurst.MIHGO_S_AMIGO)
+local quest = Quest:new(xi.questLog.WINDURST, xi.quest.id.windurst.MIHGO_S_AMIGO)
 
 local gilPerTrade = 200
 
 quest.reward =
 {
     fame = 4, -- Baesd on 212 yag necklaces needed to reach level 4 tenshodo fame.
-    fameArea = xi.quest.fame_area.NORG,
+    fameArea = xi.fameArea.NORG,
     title = xi.title.CAT_BURGLAR_GROUPIE,
 }
 
@@ -27,10 +23,10 @@ quest.sections =
     {
         -- QUEST AVAILABLE
         check = function(player, status, vars)
-            return status == QUEST_AVAILABLE and
-                player:getFameLevel(xi.quest.fame_area.NORG) >= 1 and
-                player:getQuestStatus(xi.quest.log_id.WINDURST, xi.quest.id.windurst.THE_TENSHODO_SHOWDOWN) ~= QUEST_ACCEPTED and
-                player:getQuestStatus(xi.quest.log_id.WINDURST, xi.quest.id.windurst.AS_THICK_AS_THIEVES) ~= QUEST_ACCEPTED and
+            return status == xi.questStatus.QUEST_AVAILABLE and
+                player:getFameLevel(xi.fameArea.NORG) >= 1 and
+                player:getQuestStatus(xi.questLog.WINDURST, xi.quest.id.windurst.THE_TENSHODO_SHOWDOWN) ~= xi.questStatus.QUEST_ACCEPTED and
+                player:getQuestStatus(xi.questLog.WINDURST, xi.quest.id.windurst.AS_THICK_AS_THIEVES) ~= xi.questStatus.QUEST_ACCEPTED and
                 not player:hasItem(xi.item.MARAUDERS_KNIFE)
         end,
 
@@ -39,7 +35,7 @@ quest.sections =
             ['Nanaa_Mihgo'] =
             {
                 onTrigger = function(player, npc)
-                    if player:getQuestStatus(xi.quest.log_id.WINDURST, xi.quest.id.windurst.CRYING_OVER_ONIONS) == QUEST_ACCEPTED then
+                    if player:getQuestStatus(xi.questLog.WINDURST, xi.quest.id.windurst.CRYING_OVER_ONIONS) == xi.questStatus.QUEST_ACCEPTED then
                         return quest:progressEvent(81)
                     else
                         return quest:progressEvent(80)
@@ -63,7 +59,7 @@ quest.sections =
     {
         -- QUEST ACCEPTED
         check = function(player, status, vars)
-            return status == QUEST_ACCEPTED
+            return status == xi.questStatus.QUEST_ACCEPTED
         end,
 
         [xi.zone.WINDURST_WOODS] =
@@ -87,7 +83,7 @@ quest.sections =
                     player:confirmTrade()
                     player:addGil(gilPerTrade)
                     quest:complete(player)
-                    xi.quest.setMustZone(player, xi.quest.log_id.WINDURST, xi.quest.id.windurst.ROCK_RACKETEER)
+                    xi.quest.setMustZone(player, xi.questLog.WINDURST, xi.quest.id.windurst.ROCK_RACKETEER)
                 end,
             },
         },
@@ -96,7 +92,7 @@ quest.sections =
     -- QUEST COMPLETE
     {
         check = function(player, status, vars)
-            return status == QUEST_COMPLETED
+            return status == xi.questStatus.QUEST_COMPLETED
         end,
 
         [xi.zone.WINDURST_WOODS] =
@@ -104,7 +100,7 @@ quest.sections =
             ['Nanaa_Mihgo'] =
             {
                 onTrigger = function (player, npc)
-                    if player:getQuestStatus(xi.quest.log_id.WINDURST, xi.quest.id.windurst.ROCK_RACKETEER) < QUEST_ACCEPTED then
+                    if player:getQuestStatus(xi.questLog.WINDURST, xi.quest.id.windurst.ROCK_RACKETEER) < xi.questStatus.QUEST_ACCEPTED then
                         return quest:event(89):replaceDefault()
                     end
                 end,
@@ -121,7 +117,7 @@ quest.sections =
                 [494] = function(player, csid, option, npc)
                     player:confirmTrade()
                     player:addGil(gilPerTrade)
-                    player:addFame(xi.quest.fame_area.NORG, 4)
+                    player:addFame(xi.fameArea.NORG, 4)
                 end,
             },
         },

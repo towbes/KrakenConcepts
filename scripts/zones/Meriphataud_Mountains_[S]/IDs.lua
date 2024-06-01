@@ -11,7 +11,6 @@ zones[xi.zone.MERIPHATAUD_MOUNTAINS_S] =
         ITEM_OBTAINED                 = 6390, -- Obtained: <item>.
         GIL_OBTAINED                  = 6391, -- Obtained <number> gil.
         KEYITEM_OBTAINED              = 6393, -- Obtained key item: <keyitem>.
-        FELLOW_MESSAGE_OFFSET         = 6417, -- I'm ready. I suppose.
         NOTHING_OUT_OF_ORDINARY       = 6404, -- There is nothing out of the ordinary here.
         CARRIED_OVER_POINTS           = 7001, -- You have carried over <number> login point[/s].
         LOGIN_CAMPAIGN_UNDERWAY       = 7002, -- The [/January/February/March/April/May/June/July/August/September/October/November/December] <number> Login Campaign is currently underway!
@@ -29,16 +28,14 @@ zones[xi.zone.MERIPHATAUD_MOUNTAINS_S] =
         VOIDWALKER_BREAK_KI           = 7925, -- The <keyitem> shatters into tiny fragments.
         VOIDWALKER_OBTAIN_KI          = 7926, -- Obtained key item: <keyitem>!
         COMMON_SENSE_SURVIVAL         = 8951, -- It appears that you have arrived at a new survival guide provided by the Servicemen's Mutual Aid Network. Common sense dictates that you should now be able to teleport here from similar tomes throughout the world.
+
+        FELLOW_MESSAGE_OFFSET         = 6417, -- I'm ready. I suppose.
     },
 
     mob =
     {
-        CENTIPEDAL_CENTRUROIDES_PH =
-        {
-            [17174708] = 17174709,
-        },
-
-        BLOODLAPPER = 17174889,
+        CENTIPEDAL_CENTRUROIDES = GetFirstID('Centipedal_Centruroides'),
+        BLOODLAPPER             = GetFirstID('Bloodlapper'),
 
         VOIDWALKER =
         {

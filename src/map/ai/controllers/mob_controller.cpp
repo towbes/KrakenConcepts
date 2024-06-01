@@ -24,6 +24,7 @@ along with this program.  If not, see http://www.gnu.org/licenses/
 #include "ai/ai_container.h"
 #include "ai/helpers/targetfind.h"
 #include "ai/states/ability_state.h"
+#include "ai/states/attack_state.h"
 #include "ai/states/inactive_state.h"
 #include "ai/states/magic_state.h"
 #include "ai/states/weaponskill_state.h"
@@ -206,7 +207,7 @@ void CMobController::TryLink()
     // my pet should help as well
     if (PMob->PPet != nullptr && PMob->PPet->PAI->IsRoaming())
     {
-        ((CMobEntity*)PMob->PPet)->PEnmityContainer->AddBaseEnmity(PTarget);
+        PMob->PPet->PAI->Engage(PTarget->targid);
     }
 
     // Handle monster linking if they are close enough
@@ -224,14 +225,7 @@ void CMobController::TryLink()
 
             if (PPartyMember->PAI->IsRoaming() && PPartyMember->CanLink(&PMob->loc.p, PMob->getMobMod(MOBMOD_SUPERLINK)))
             {
-                PPartyMember->PEnmityContainer->AddBaseEnmity(PTarget);
-
-                if (PPartyMember->m_roamFlags & ROAMFLAG_IGNORE)
-                {
-                    // force into attack action
-                    // TODO
-                    PPartyMember->PAI->Engage(PTarget->targid);
-                }
+                PPartyMember->PAI->Engage(PTarget->targid);
             }
         }
     }
@@ -243,7 +237,7 @@ void CMobController::TryLink()
 
         if (PMaster->PAI->IsRoaming() && PMaster->CanLink(&PMob->loc.p, PMob->getMobMod(MOBMOD_SUPERLINK)))
         {
-            PMaster->PEnmityContainer->AddBaseEnmity(PTarget);
+            PMaster->PAI->Engage(PTarget->targid);
         }
     }
 }
@@ -367,11 +361,11 @@ bool CMobController::MobSkill(int wsList)
                 continue;
             }
 
-            if (PMobSkill->getValidTargets() == TARGET_ENEMY) // enemy
+            if (PMobSkill->getValidTargets() & TARGET_ENEMY) // enemy
             {
                 PActionTarget = PTarget;
             }
-            else if (PMobSkill->getValidTargets() == TARGET_SELF) // self
+            else if (PMobSkill->getValidTargets() & TARGET_SELF) // self
             {
                 PActionTarget = PMob;
             }
@@ -552,7 +546,7 @@ void CMobController::CastSpell(SpellID spellid)
             {
                 // find the valid targets and build the target list
                 PMob->PAI->TargetFind->reset();
-                PMob->PAI->TargetFind->findWithinArea(PMob, AOE_RADIUS::ATTACKER, PSpell->getRange());
+                PMob->PAI->TargetFind->findWithinArea(PMob, AOE_RADIUS::ATTACKER, PSpell->getRange(), FINDFLAGS_NONE, TARGET_NONE);
 
                 // chance to target my master
                 if (PMob->PMaster != nullptr && xirand::GetRandomNumber(2) == 0)
@@ -564,7 +558,7 @@ void CMobController::CastSpell(SpellID spellid)
                 {
                     // chance to target party
                     // PMob->PAI->TargetFind->reset();
-                    // PMob->PAI->TargetFind->findWithinArea(PMob, AOE_RADIUS::ATTACKER, PSpell->getRange());
+                    // PMob->PAI->TargetFind->findWithinArea(PMob, AOE_RADIUS::ATTACKER, PSpell->getRange(), FINDFLAGS_NONE, TARGET_NONE);
 
                     if (!PMob->PAI->TargetFind->m_targets.empty())
                     {
@@ -630,7 +624,7 @@ void CMobController::DoCombatTick(time_point tick)
         PMob->PAI->EventHandler.triggerListener("COMBAT_TICK", CLuaBaseEntity(PMob));
         luautils::OnMobFight(PMob, PTarget);
 
-        if (PMob->PAI->IsCurrentState<CInactiveState>())
+        if (PMob->PAI->IsCurrentState<CInactiveState>() || !PMob->PAI->CanChangeState())
         {
             return;
         }
@@ -738,25 +732,12 @@ void CMobController::Move()
         if (((currentDistance > closeDistance) || move) && PMob->PAI->CanFollowPath())
         {
             // #TODO: can this be moved to scripts entirely?
-            if (PMob->getMobMod(MOBMOD_DRAW_IN))
+            if (PMob->getMobMod(MOBMOD_DRAW_IN) > 0)
             {
-                uint8  drawInRange  = PMob->getMobMod(MOBMOD_DRAW_IN_CUSTOM_RANGE) > 0 ? PMob->getMobMod(MOBMOD_DRAW_IN_CUSTOM_RANGE) : PMob->GetMeleeRange() * 2;
-                uint16 maximumReach = PMob->getMobMod(MOBMOD_DRAW_IN_MAXIMUM_REACH) > 0 ? PMob->getMobMod(MOBMOD_DRAW_IN_MAXIMUM_REACH) : 0xFFFF;
-                bool   includeParty = PMob->getMobMod(MOBMOD_DRAW_IN_INCLUDE_PARTY); // (and alliance)
-
-                if (currentDistance > drawInRange && currentDistance < maximumReach && battleutils::DrawIn(PTarget, PMob, PMob->GetMeleeRange() - 0.2f, drawInRange, maximumReach, includeParty))
+                if (currentDistance >= PMob->GetMeleeRange() * 2 && battleutils::DrawIn(PTarget, PMob, PMob->GetMeleeRange() - 0.2f))
                 {
                     FaceTarget();
                     return;
-                }
-                else
-                {
-                    drawInRange = PMob->GetMeleeRange(); // if i'm bound/can't move, draw in the moment they leave my melee range
-                    if ((PMob->speed == 0 || PMob->getMobMod(MOBMOD_NO_MOVE)) && !PMob->getMobMod(MOBMOD_DRAW_IN_IGNORE_STATIONARY) &&
-                        currentDistance > drawInRange && currentDistance < maximumReach && battleutils::DrawIn(PTarget, PMob, PMob->GetMeleeRange() - 1.2f, drawInRange, maximumReach, includeParty))
-                    {
-                        FaceTarget();
-                    }
                 }
             }
 
@@ -857,25 +838,71 @@ void CMobController::HandleEnmity()
 {
     TracyZoneScoped;
     PMob->PEnmityContainer->DecayEnmity();
+    auto* PHighestEnmityTarget{ PMob->PEnmityContainer->GetHighestEnmity() };
+
     if (PMob->getMobMod(MOBMOD_SHARE_TARGET) > 0 && PMob->GetEntity(PMob->getMobMod(MOBMOD_SHARE_TARGET), TYPE_MOB))
     {
         ChangeTarget(static_cast<CMobEntity*>(PMob->GetEntity(PMob->getMobMod(MOBMOD_SHARE_TARGET), TYPE_MOB))->GetBattleTargetID());
 
         if (!PMob->GetBattleTargetID())
         {
-            auto* PTarget{ PMob->PEnmityContainer->GetHighestEnmity() };
-            if (PTarget)
+            if (PHighestEnmityTarget)
             {
-                ChangeTarget(PTarget ? PTarget->targid : 0);
+                ChangeTarget(PHighestEnmityTarget->targid);
             }
         }
     }
     else
     {
-        auto* PTarget{ PMob->PEnmityContainer->GetHighestEnmity() };
+        if (PHighestEnmityTarget)
+        {
+            ChangeTarget(PHighestEnmityTarget->targid);
+        }
+    }
+
+    // Bind special case
+    // Target the closest person on hate list with enmity
+    // TODO: do mobs with bind attack players *without* enmity if they are in the same party?
+    // TODO: do jug pets do this?
+    // TODO: This code is assuming charmed mobs can do this -- they DO keep an enmity table, after all..
+    if (PMob->objtype == TYPE_MOB && PMob->StatusEffectContainer && PMob->StatusEffectContainer->HasStatusEffect(EFFECT::EFFECT_BIND) && PMob->PAI->IsCurrentState<CAttackState>())
+    {
+        CBattleEntity*                PNewTarget = nullptr;
+        std::unique_ptr<CBasicPacket> m_errorMsg; // Ignored
+        if (PTarget && !PMob->CanAttack(PTarget, m_errorMsg) && PMob->PEnmityContainer)
+        {
+            float minDistance = 999999;
+            int32 totalEnmity = -1;
+
+            auto enmityList = PMob->PEnmityContainer->GetEnmityList();
+            for (auto enmityItem : *enmityList)
+            {
+                const EnmityObject_t& enmityObject = enmityItem.second;
+                CBattleEntity*        PEnmityOwner = enmityObject.PEnmityOwner;
+
+                // Check total enmity first
+                if (PEnmityOwner && (enmityObject.CE + enmityObject.VE) > totalEnmity)
+                {
+                    float targetDistance = distance(PEnmityOwner->loc.p, PMob->loc.p);
+
+                    if (targetDistance < minDistance && PMob->CanAttack(PEnmityOwner, m_errorMsg))
+                    {
+                        minDistance = targetDistance;
+                        totalEnmity = enmityObject.CE + enmityObject.VE;
+                        PNewTarget  = PEnmityOwner;
+                    }
+                }
+            }
+        }
+
+        if (PNewTarget)
+        {
+            ChangeTarget(PNewTarget->targid);
+        }
+
         if (PTarget)
         {
-            ChangeTarget(PTarget->targid);
+            FaceTarget(PTarget->targid);
         }
     }
 }
@@ -891,12 +918,11 @@ void CMobController::DoRoamTick(time_point tick)
     }
     else if (PMob->m_OwnerID.id != 0 && !(PMob->m_roamFlags & ROAMFLAG_IGNORE))
     {
-        // i'm claimed by someone and need hate towards this person
+        // i'm claimed by someone and want to be fighting them
         PTarget = (CBattleEntity*)PMob->GetEntity(PMob->m_OwnerID.targid, TYPE_PC | TYPE_MOB | TYPE_PET | TYPE_TRUST);
 
         if (PTarget != nullptr)
         {
-            PMob->PEnmityContainer->AddBaseEnmity(PTarget);
             Engage(PTarget->targid);
         }
 
@@ -961,9 +987,13 @@ void CMobController::DoRoamTick(time_point tick)
             // if I just disengaged check if I should despawn
             if (!PMob->getMobMod(MOBMOD_DONT_ROAM_HOME) && PMob->IsFarFromHome())
             {
-                if (PMob->CanRoamHome() && PMob->PAI->PathFind->PathTo(PMob->m_SpawnPoint))
+                if (PMob->CanRoamHome())
                 {
                     // walk back to spawn if too far away
+                    if (!PMob->PAI->PathFind->IsFollowingPath() && !PMob->PAI->PathFind->PathTo(PMob->m_SpawnPoint))
+                    {
+                        PMob->PAI->PathFind->PathInRange(PMob->m_SpawnPoint, PMob->m_maxRoamDistance, PATHFLAG_RUN | PATHFLAG_WALLHACK);
+                    }
 
                     // limit total path to just 10 or
                     // else we'll move straight back to spawn
@@ -1198,6 +1228,12 @@ bool CMobController::Engage(uint16 targid)
                                 std::chrono::milliseconds(xirand::GetRandomNumber(PMob->getBigMobMod(MOBMOD_SPECIAL_DELAY)));
             //m_LastSpecialTime = m_Tick - std::chrono::milliseconds(PMob->getBigMobMod(MOBMOD_SPECIAL_COOL) +
                                                                    //xirand::GetRandomNumber(PMob->getBigMobMod(MOBMOD_SPECIAL_DELAY)));
+        }
+
+        // Pet should also fight the target if they can
+        if (PMob->PPet && !PMob->PPet->PAI->IsEngaged())
+        {
+            PMob->PPet->PAI->Engage(targid);
         }
     }
     return ret;

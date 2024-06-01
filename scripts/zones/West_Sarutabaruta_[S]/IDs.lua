@@ -11,7 +11,6 @@ zones[xi.zone.WEST_SARUTABARUTA_S] =
         ITEM_OBTAINED                 = 6390, -- Obtained: <item>.
         GIL_OBTAINED                  = 6391, -- Obtained <number> gil.
         KEYITEM_OBTAINED              = 6393, -- Obtained key item: <keyitem>.
-        FELLOW_MESSAGE_OFFSET         = 6417, -- I'm ready. I suppose.
         CARRIED_OVER_POINTS           = 7001, -- You have carried over <number> login point[/s].
         LOGIN_CAMPAIGN_UNDERWAY       = 7002, -- The [/January/February/March/April/May/June/July/August/September/October/November/December] <number> Login Campaign is currently underway!
         LOGIN_NUMBER                  = 7003, -- In celebration of your most recent login (login no. <number>), we have provided you with <number> points! You currently have a total of <number> points.
@@ -30,20 +29,13 @@ zones[xi.zone.WEST_SARUTABARUTA_S] =
         VOIDWALKER_BREAK_KI           = 8376, -- The <keyitem> shatters into tiny fragments.
         VOIDWALKER_OBTAIN_KI          = 8377, -- Obtained key item: <keyitem>!
         COMMON_SENSE_SURVIVAL         = 9269, -- It appears that you have arrived at a new survival guide provided by the Servicemen's Mutual Aid Network. Common sense dictates that you should now be able to teleport here from similar tomes throughout the world.
+        FELLOW_MESSAGE_OFFSET         = 6417, -- I'm ready. I suppose.
     },
 
     mob =
     {
-        JEDUAH_PH =
-        {
-            [17166542] = 17166543, -- 113.797 -0.8 -310.342
-        },
-
-        RAMPONNEAU_PH =
-        {
-            [17166701] = 17166705, -- 78.836 -0.109 -199.204
-        },
-
+        JEDUAH = GetFirstID('Jeduah'),
+        RAMPONNEAU = GetFirstID('Ramponneau'),
         VOIDWALKER =
         {
             [xi.keyItem.CLEAR_ABYSSITE] =

@@ -50,7 +50,7 @@ zones[xi.zone.PORT_WINDURST] =
         MAP_MARKER_TUTORIAL             = 11405, -- The map will open when you select Map from the main menu. Choose Markers and scroll to the right to check the location.
         MOG_LOCKER_OFFSET               = 11490, -- Your Mog Locker lease is valid until <timestamp>, kupo.
         FISHING_MESSAGE_OFFSET          = 11602, -- You can't fish here.
-        FISHING_SUPPORT                 = 11706, -- Your [fishing/woodworking/smithing/goldsmithing/clothcraft/leatherworking/bonecraft/alchemy/cooking] skills went up [a little/ever so slightly/ever so slightly].
+        IMAGE_SUPPORT                   = 11706, -- Your [fishing/woodworking/smithing/goldsmithing/clothcraft/leatherworking/bonecraft/alchemy/cooking] skills went up [a little/ever so slightly/ever so slightly].
         GUILD_TERMINATE_CONTRACT        = 11720, -- You have terminated your trading contract with the [Fishermen's/Carpenters'/Blacksmiths'/Goldsmiths'/Weavers'/Tanners'/Boneworkers'/Alchemists'/Culinarians'] Guild and formed a new one with the [Fishermen's/Carpenters'/Blacksmiths'/Goldsmiths'/Weavers'/Tanners'/Boneworkers'/Alchemists'/Culinarians'] Guild.
         GUILD_NEW_CONTRACT              = 11728, -- You have formed a new trading contract with the [Fishermen's/Carpenters'/Blacksmiths'/Goldsmiths'/Weavers'/Tanners'/Boneworkers'/Alchemists'/Culinarians'] Guild.
         NO_MORE_GP_ELIGIBLE             = 11735, -- You are not eligible to receive guild points at this time.
@@ -80,7 +80,7 @@ zones[xi.zone.PORT_WINDURST] =
     },
     npc =
     {
-        EXPLORER_MOOGLE = 17760450,
+        EXPLORER_MOOGLE = GetFirstID('Explorer_Moogle'),
     },
 }
 

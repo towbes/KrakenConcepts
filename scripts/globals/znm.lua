@@ -710,6 +710,13 @@ xi.znm.sanraku.onEventUpdate = function(player, csid, option, npc)
     -- taken from sanraku.lua
     if csid == 909 then
         local zeni = player:getCurrency('zeni_point')
+        
+        -- initialize these so they aren't global and persist across different players...
+        local tier = 0
+        local salt = 0
+        local keyitem1 = nil
+        local keyitem2 = nil
+        local keyitem3 = nil
     
         if option >= 300 and option <= 302 then
             if option == 300 then
@@ -743,7 +750,6 @@ xi.znm.sanraku.onEventUpdate = function(player, csid, option, npc)
             else
                 tier = 4
             end
-           
 
             if option >= 100 and option <= 130 then
                 item = lures[option-99]
@@ -767,11 +773,13 @@ xi.znm.sanraku.onEventUpdate = function(player, csid, option, npc)
                 elseif option == 429 then -- Tyger
                     keyitem1 = xi.ki.TAUPE_COLORED_SEAL keyitem2 = xi.ki.FALLOW_COLORED_SEAL keyitem3 = xi.ki.SIENNA_COLORED_SEAL
                 else
-                    keyitem1 = seals[option - 402] keyitem2 = nil keyitem3 = nil
+                    if tier > 1 then -- If it's tier 2 or above
+                        keyitem1 = seals[option - 402] keyitem2 = nil keyitem3 = nil -- select they key item that needs to be deleted to buy the pop
+                    end
                 end
 
                 if cost > zeni then
-                    player:updateEvent(2, cost, item, keyitem1,keyitem2,keyitem3) -- you don't have enough zeni.
+                    player:updateEvent(2, cost, item, keyitem1, keyitem2, keyitem3) -- you don't have enough zeni.
                 elseif player:addItem(item) then
                     if keyitem1 ~= nil then
                         player:delKeyItem(keyitem1)
@@ -783,18 +791,17 @@ xi.znm.sanraku.onEventUpdate = function(player, csid, option, npc)
                         player:delKeyItem(keyitem3)
                     end
 
-                    player:updateEvent(1, cost, item, keyitem1,keyitem2,keyitem3)
+                    player:updateEvent(1, cost, item, keyitem1, keyitem2, keyitem3)
                     player:delCurrency('zeni_point', cost)
                     local itemVarName = string.format('[ZNM]PopItemCost' ..item.. '')
                     local currentUpcharge = GetServerVariable(itemVarName)
                     SetServerVariable(itemVarName, currentUpcharge + 100)
                 else
-                    player:updateEvent(4, cost, item, keyitem1,keyitem2,keyitem3) -- Cannot obtain.
+                    player:updateEvent(4, cost, item, keyitem1, keyitem2, keyitem3) -- Cannot obtain.
                 end
             elseif option == 500 or option == 1 then -- player has declined to buy a pop item
                 local allowIslet = 0
-                    -- dont allow players to buy the salts to teleport to Tier4 NMs unless Tier4 NMs are enabled
-                    allowIslet = player:getCharVar('[ZNM][Ryo]IsletDiscussion') 
+                allowIslet = player:getCharVar('[ZNM][Ryo]IsletDiscussion') 
                 player:updateEvent(allowIslet)
             end
         end

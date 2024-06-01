@@ -42,43 +42,25 @@ zones[xi.zone.CASTLE_OZTROJA] =
     },
     mob =
     {
-        MEE_DEGGI_THE_PUNISHER_PH  =
-        {
-            [17395798] = 17395800, -- -207.840 -0.498 109.939
-            [17395799] = 17395800, -- -227.415 -4.340 145.213
-        },
-        MOO_OUZI_THE_SWIFTBLADE_PH =
-        {
-            [17395809] = 17395816, -- -18.415 -0.075 -92.889
-            [17395813] = 17395816, -- -38.689 0.191 -101.068
-        },
-        QUU_DOMI_THE_GALLANT_PH    =
-        {
-            [17395868] = 17395870, -- 35.847 -0.500 -101.685
-            [17395867] = 17395870, -- 59.000 -4.000 -131.000
-        },
-        YAA_HAQA_THE_PROFANE_PH    =
-        {
-            [17395950] = 17395954, -- -24.719 -16.250 -139.678
-            [17395951] = 17395954, -- -22.395 -16.250 -139.341
-            [17395952] = 17395954, -- -25.044 -16.250 -141.534
-            [17395953] = 17395954, -- -32.302 -16.250 -139.169
-        },
-        YAGUDO_AVATAR              = 17396134,
+        MEE_DEGGI_THE_PUNISHER  = GetFirstID('Mee_Deggi_the_Punisher'),
+        MOO_OUZI_THE_SWIFTBLADE = GetFirstID('Moo_Ouzi_the_Swiftblade'),
+        QUU_DOMI_THE_GALLANT    = GetFirstID('Quu_Domi_the_Gallant'),
+        YAA_HAQA_THE_PROFANE    = GetFirstID('Yaa_Haqa_the_Profane'),
+        YAGUDO_AVATAR           = GetFirstID('Yagudo_Avatar'),
+        HUU_XALMO_THE_SAVAGE    = GetFirstID('Huu_Xalmo_the_Savage'),
+        MIMIC                   = GetFirstID('Mimic'),
         TZEE_XICU_THE_MANIFEST     = 17396137,
-        HUU_XALMO_THE_SAVAGE       = 17396140,
-        MIMIC                      = 17396144,
     },
     npc =
     {
-        HANDLE_DOOR_FLOOR_2    = 17396160,
-        FIRST_PASSWORD_STATUE  = 17396168,
-        SECOND_PASSWORD_STATUE = 17396173,
-        THIRD_PASSWORD_STATUE  = 17396178,
-        BRASS_DOOR_FLOOR_4_H7  = 17396185,
-        TRAP_DOOR_FLOOR_4      = 17396191,
-        FINAL_PASSWORD_STATUE  = 17396192,
-        HINT_HANDLE_OFFSET     = 17396196,
+        HANDLE_DOOR_FLOOR_2    = GetFirstID('_471'),
+        FIRST_PASSWORD_STATUE  = GetTableOfIDs('Brass_Statue')[1],
+        SECOND_PASSWORD_STATUE = GetTableOfIDs('Brass_Statue')[2],
+        THIRD_PASSWORD_STATUE  = GetTableOfIDs('Brass_Statue')[3],
+        FINAL_PASSWORD_STATUE  = GetTableOfIDs('Brass_Statue')[4],
+        BRASS_DOOR_FLOOR_4_H7  = GetFirstID('_477'),
+        TRAP_DOOR_FLOOR_4      = GetFirstID('_478'),
+        HINT_HANDLE_OFFSET     = GetFirstID('_47q'),
         TREASURE_CHEST         = GetFirstID('Treasure_Chest'),
         TREASURE_COFFER        = GetFirstID('Treasure_Coffer'),
     },

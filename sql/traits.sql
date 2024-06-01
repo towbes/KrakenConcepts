@@ -265,6 +265,7 @@ INSERT INTO `traits` VALUES (25,'shield mastery',7,25,1,485,10,NULL,0);
 INSERT INTO `traits` VALUES (25,'shield mastery',7,50,2,485,20,NULL,0);
 INSERT INTO `traits` VALUES (25,'shield mastery',7,75,3,485,30,NULL,0);
 INSERT INTO `traits` VALUES (25,'shield mastery',7,96,4,485,40,'ABYSSEA',0);
+INSERT INTO `traits` VALUES (136,'shield barrier',7,70,1,1082,1,'ROV',0);
 INSERT INTO `traits` VALUES (39,'undead killer',7,5,1,231,8,NULL,0);
 INSERT INTO `traits` VALUES (39,'undead killer',7,70,2,231,10,NULL,0);
 INSERT INTO `traits` VALUES (48,'resist sleep',7,20,1,240,10,NULL,0);

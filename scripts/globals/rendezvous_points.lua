@@ -44,8 +44,8 @@ xi.rendezvousPoints.onTrigger = function(player, npc)
     local lookParam     = xi.fellow_utils.getLookParam(player)
     local fellowParam   = xi.fellow_utils.getFellowParam(player)
 
-    if player:getQuestStatus(xi.quest.log_id.JEUNO, xi.quest.id.jeuno.MIRROR_MIRROR) == QUEST_COMPLETED then
-        if player:getQuestStatus(xi.quest.log_id.JEUNO, xi.quest.id.jeuno.CHAMELEON_CAPERS) == QUEST_COMPLETED then
+    if player:getQuestStatus(xi.questLog.JEUNO, xi.quest.id.jeuno.MIRROR_MIRROR) == xi.questStatus.QUEST_COMPLETED then
+        if player:getQuestStatus(xi.questLog.JEUNO, xi.quest.id.jeuno.CHAMELEON_CAPERS) == xi.questStatus.QUEST_COMPLETED then
             if
                 player:hasItem(xi.items.TACTICS_MANUAL_OF_FORTITUDE) and
                 (bit.band(optionsMask, bit.lshift(1, 5)) == 0)
@@ -84,7 +84,7 @@ xi.rendezvousPoints.onEventUpdate = function(player, csid, option)
     local fellowParam   = xi.fellow_utils.getFellowParam(player)
     local questParam    = 0 -- default quest chat
     -- TODO: Quest options as quests are implemented
-    if player:getQuestStatus(xi.quest.log_id.JEUNO, xi.quest.id.jeuno.PAST_REFLECTIONS) == QUEST_ACCEPTED then
+    if player:getQuestStatus(xi.questLog.JEUNO, xi.quest.id.jeuno.PAST_REFLECTIONS) == xi.questStatus.QUEST_ACCEPTED then
     --    if player:getCharVar('[Quest]PastReflections') == 2 then
             questParam = 1
     --    end

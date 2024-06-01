@@ -14,13 +14,13 @@ require('scripts/globals/quests')
 ID = require('scripts/zones/Garlaige_Citadel/IDs')
 -----------------------------------
 
-local quest = Quest:new(xi.quest.log_id.WINDURST, xi.quest.id.windurst.ESCORT_FOR_HIRE)
+local quest = Quest:new(xi.questLog.WINDURST, xi.quest.id.windurst.ESCORT_FOR_HIRE)
 
 quest.reward =
 {
     gil = 10000,
     fame = 100,
-    fameArea = xi.quest.fame_area.WINDURST,
+    fameArea = xi.fameArea.WINDURST,
     item = xi.item.MIRATETES_MEMOIRS,
 }
 
@@ -28,10 +28,10 @@ quest.sections =
 {
     {
         check = function(player, status, vars)
-            return status == QUEST_AVAILABLE and
-            player:getQuestStatus(xi.quest.log_id.BASTOK, xi.quest.id.windurst.ESCORT_FOR_HIRE) ~= QUEST_ACCEPTED and
-            player:getQuestStatus(xi.quest.log_id.SANDORIA, xi.quest.id.windurst.ESCORT_FOR_HIRE) ~= QUEST_ACCEPTED and
-            player:getFameLevel(xi.quest.fame_area.WINDURST) >= 6 and
+            return status == xi.questStatus.QUEST_AVAILABLE and
+            player:getQuestStatus(xi.questLog.BASTOK, xi.quest.id.windurst.ESCORT_FOR_HIRE) ~= xi.questStatus.QUEST_ACCEPTED and
+            player:getQuestStatus(xi.questLog.SANDORIA, xi.quest.id.windurst.ESCORT_FOR_HIRE) ~= xi.questStatus.QUEST_ACCEPTED and
+            player:getFameLevel(xi.fameArea.WINDURST) >= 6 and
             player:getCharVar('ESCORT_CONQUEST') < NextConquestTally() and false -- Disables the quest
         end,
 
@@ -50,7 +50,7 @@ quest.sections =
 
     {
         check = function(player, status, vars)
-            return status == QUEST_ACCEPTED
+            return status == xi.questStatus.QUEST_ACCEPTED
         end,
 
         [xi.zone.GARLAIGE_CITADEL] =
@@ -108,7 +108,7 @@ quest.sections =
                 end,
                 [10015] = function(player, csid, option, npc)
                     if option == 0 then
-                        player:delQuest(xi.quest.log_id.WINDURST, xi.quest.id.windurst.ESCORT_FOR_HIRE)
+                        player:delQuest(xi.questLog.WINDURST, xi.quest.id.windurst.ESCORT_FOR_HIRE)
                     end
                 end,
             },
@@ -117,9 +117,9 @@ quest.sections =
 
     {
         check = function(player, status, vars)
-            return status == QUEST_COMPLETED and
-            player:getQuestStatus(xi.quest.log_id.BASTOK, xi.quest.id.windurst.ESCORT_FOR_HIRE) ~= QUEST_ACCEPTED and
-            player:getQuestStatus(xi.quest.log_id.SANDORIA, xi.quest.id.windurst.ESCORT_FOR_HIRE) ~= QUEST_ACCEPTED
+            return status == xi.questStatus.QUEST_COMPLETED and
+            player:getQuestStatus(xi.questLog.BASTOK, xi.quest.id.windurst.ESCORT_FOR_HIRE) ~= xi.questStatus.QUEST_ACCEPTED and
+            player:getQuestStatus(xi.questLog.SANDORIA, xi.quest.id.windurst.ESCORT_FOR_HIRE) ~= xi.questStatus.QUEST_ACCEPTED
         end,
 
         [xi.zone.PORT_WINDURST] =
@@ -138,7 +138,7 @@ quest.sections =
             onEventFinish =
             {
                 [10014] = function(player, csid, option, npc)
-                    player:delQuest(xi.quest.log_id.WINDURST, xi.quest.id.windurst.ESCORT_FOR_HIRE)
+                    player:delQuest(xi.questLog.WINDURST, xi.quest.id.windurst.ESCORT_FOR_HIRE)
                     quest:begin(player)
                 end,
             },

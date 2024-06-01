@@ -13,7 +13,6 @@ zones[xi.zone.JUGNER_FOREST_S] =
         GIL_OBTAINED                  = 6391, -- Obtained <number> gil.
         KEYITEM_OBTAINED              = 6393, -- Obtained key item: <keyitem>.
         NOTHING_OUT_OF_ORDINARY       = 6404, -- There is nothing out of the ordinary here.
-        FELLOW_MESSAGE_OFFSET         = 6417, -- I'm ready. I suppose.
         CARRIED_OVER_POINTS           = 7001, -- You have carried over <number> login point[/s].
         LOGIN_CAMPAIGN_UNDERWAY       = 7002, -- The [/January/February/March/April/May/June/July/August/September/October/November/December] <number> Login Campaign is currently underway!
         LOGIN_NUMBER                  = 7003, -- In celebration of your most recent login (login no. <number>), we have provided you with <number> points! You currently have a total of <number> points.
@@ -42,17 +41,15 @@ zones[xi.zone.JUGNER_FOREST_S] =
         GATHERED_DAWNDROPS_LIGHT      = 8636, -- The gathered dawndrops unleash a brilliant light, melding together to form <keyitem>!
         RETRACED_ALL_JUNCTIONS        = 8637, -- You have retraced all junctions of eventualities. Hasten back to where Cait Sith and Lilisette await.
         COMMON_SENSE_SURVIVAL         = 9511, -- It appears that you have arrived at a new survival guide provided by the Servicemen's Mutual Aid Network. Common sense dictates that you should now be able to teleport here from similar tomes throughout the world.
+
+        FELLOW_MESSAGE_OFFSET         = 6417, -- I'm ready. I suppose.
     },
 
     mob =
     {
-        DRUMSKULL_ZOGDREGG_PH =
-        {
-            [17113380] = 17113381, -- 195.578 -0.556 -347.699
-        },
-
-        FINGERFILCHER_DRADZAD = 17113462,
-        COBRACLAW_BUCHZVOTCH  = 17113464,
+        DRUMSKULL_ZOGDREGG    = GetFirstID('Drumskull_Zogdregg'),
+        FINGERFILCHER_DRADZAD = GetFirstID('Fingerfilcher_Dradzad'),
+        COBRACLAW_BUCHZVOTCH  = GetFirstID('Cobraclaw_Buchzvotch'),
 
         VOIDWALKER =
         {

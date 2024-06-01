@@ -23,9 +23,9 @@ local craftingItems = {
 }
 
 entity.onTrade = function(player, npc, trade)
-    local PuppetmasterBlues = player:getQuestStatus(xi.quest.log_id.AHT_URHGAN, xi.quest.id.ahtUrhgan.PUPPETMASTER_BLUES)
+    local PuppetmasterBlues = player:getQuestStatus(xi.questLog.AHT_URHGAN, xi.quest.id.ahtUrhgan.PUPPETMASTER_BLUES)
 
-    if PuppetmasterBlues >= QUEST_ACCEPTED then
+    if PuppetmasterBlues >= xi.questStatus.QUEST_ACCEPTED then
         if (player:getCharVar('[PUPAF]Current') > 0 and player:getCharVar('[PUPAF]TradeDone') == 0) then
             if (npcUtil.tradeHasExactly(trade, craftingItems[player:getCharVar('[PUPAF]Current')].materials)) then
                 player:startEvent(795)
@@ -35,9 +35,9 @@ entity.onTrade = function(player, npc, trade)
 end
 
 entity.onTrigger = function(player, npc)
-    local PuppetmasterBlues = player:getQuestStatus(xi.quest.log_id.AHT_URHGAN, xi.quest.id.ahtUrhgan.PUPPETMASTER_BLUES)
+    local PuppetmasterBlues = player:getQuestStatus(xi.questLog.AHT_URHGAN, xi.quest.id.ahtUrhgan.PUPPETMASTER_BLUES)
 
-    if PuppetmasterBlues >= QUEST_ACCEPTED then
+    if PuppetmasterBlues >= xi.questStatus.QUEST_ACCEPTED then
         local remainingPUPAF = player:getCharVar('[PUPAF]Remaining') -- Bitmask of AF the player has NOT crafted
         local totalCraftedPieces = 3 - utils.mask.countBits(remainingPUPAF)
         local currentTask = player:getCharVar('[PUPAF]Current')

@@ -32,12 +32,17 @@ zones[xi.zone.THRONE_ROOM] =
         RETURN_TO_THE_DARKNESS        = 7714, -- Return with your soul to the darkness you came from!
         CANT_UNDERSTAND               = 7715, -- You--a man who has never lived bound by the chains of his country--how can you understand my pain!?
         BLADE_ANSWER                  = 7716, -- Let my blade be the answer!
+
+        -- TODO: Shift IDs
+        NO_BATTLEFIELD_ENTRY          = 7241, -- The door is sealed shut with an evil curse.
+        TESTIMONY_IS_TORN             = 7282, -- Your <item> is torn...
+        TESTIMONY_WEARS               = 7283, -- Your <item> [/rips into shreds!/is on the verge of tearing apart.../is showing signs of wear...] (# [use remains/uses remain].)
     },
     mob =
     {
-        SHADOW_LORD_PHASE_1_OFFSET = 17453057,
-        SHADOW_LORD_PHASE_2_OFFSET = 17453060,
-        ZEID_BCNM_OFFSET           = 17453063,
+        SHADOW_LORD_PHASE_1_OFFSET = GetTableOfIDs('Shadow_Lord')[1],
+        SHADOW_LORD_PHASE_2_OFFSET = GetTableOfIDs('Shadow_Lord')[4],
+        ZEID_BCNM_OFFSET           = GetFirstID('Zeid'),
     },
     npc =
     {

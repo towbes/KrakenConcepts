@@ -8,7 +8,7 @@
 local sepulcherID = zones[xi.zone.JADE_SEPULCHER]
 -----------------------------------
 
-local quest = Quest:new(xi.quest.log_id.AHT_URHGAN, xi.quest.id.ahtUrhgan.THE_BEAST_WITHIN)
+local quest = Quest:new(xi.questLog.AHT_URHGAN, xi.quest.id.ahtUrhgan.THE_BEAST_WITHIN)
 
 quest.reward =
 {
@@ -19,8 +19,8 @@ quest.sections =
 {
     {
         check = function(player, status, vars)
-            return status == QUEST_AVAILABLE and
-                player:hasCompletedQuest(xi.quest.log_id.AHT_URHGAN, xi.quest.id.ahtUrhgan.TRANSFORMATIONS) and
+            return status == xi.questStatus.QUEST_AVAILABLE and
+                player:hasCompletedQuest(xi.questLog.AHT_URHGAN, xi.quest.id.ahtUrhgan.TRANSFORMATIONS) and
                 player:getMainJob() == xi.job.BLU and
                 player:getMainLvl() >= 66
         end,
@@ -30,7 +30,7 @@ quest.sections =
             ['Waoud'] =
             {
                 onTrigger = function(player, npc)
-                    local lastDivination = xi.quest.getVar(player, xi.quest.log_id.AHT_URHGAN, xi.quest.id.ahtUrhgan.TRANSFORMATIONS, 'Timer')
+                    local lastDivination = xi.quest.getVar(player, xi.questLog.AHT_URHGAN, xi.quest.id.ahtUrhgan.TRANSFORMATIONS, 'Timer')
                     if
                         lastDivination <= VanadielUniqueDay() and
                         not quest:getMustZone(player)
@@ -52,7 +52,7 @@ quest.sections =
 
     {
         check = function(player, status, vars)
-            return status == QUEST_ACCEPTED and
+            return status == xi.questStatus.QUEST_ACCEPTED and
             player:getMainJob() == xi.job.BLU and
             player:getMainLvl() >= 66
         end,

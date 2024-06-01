@@ -14,12 +14,12 @@ require('scripts/globals/interaction/quest')
 local ID = zones[xi.zone.NORTHERN_SAN_DORIA]
 -----------------------------------
 
-local quest = Quest:new(xi.quest.log_id.SANDORIA, xi.quest.id.sandoria.WARDING_VAMPIRES)
+local quest = Quest:new(xi.questLog.SANDORIA, xi.quest.id.sandoria.WARDING_VAMPIRES)
 
 quest.reward =
 {
     fame     = 30,
-    fameArea = xi.quest.fame_area.SANDORIA,
+    fameArea = xi.fameArea.SANDORIA,
     gil      = 900,
     title    = xi.title.VAMPIRE_HUNTER_D_MINUS,
 }
@@ -28,8 +28,8 @@ quest.sections =
 {
     {
         check = function(player, status, vars)
-            return status == QUEST_AVAILABLE and
-            player:getFameLevel(xi.quest.fame_area.SANDORIA) >= 3
+            return status == xi.questStatus.QUEST_AVAILABLE and
+            player:getFameLevel(xi.fameArea.SANDORIA) >= 3
         end,
 
         [xi.zone.NORTHERN_SAN_DORIA] =
@@ -47,11 +47,11 @@ quest.sections =
         },
     },
 
-    -- These functions check the status of ~= QUEST_AVAILABLE to support repeating
+    -- These functions check the status of ~= xi.questStatus.QUEST_AVAILABLE to support repeating
     -- the quest.  Does not have to be flagged again to complete an additional time.
     {
         check = function(player, status, vars)
-            return status ~= QUEST_AVAILABLE
+            return status ~= xi.questStatus.QUEST_AVAILABLE
         end,
 
         [xi.zone.NORTHERN_SAN_DORIA] =
@@ -76,7 +76,7 @@ quest.sections =
                     if not player:hasCompletedQuest(quest.areaId, quest.questId) then
                         quest:complete(player)
                     else
-                        player:addFame(xi.quest.fame_area.SANDORIA, 5)
+                        player:addFame(xi.fameArea.SANDORIA, 5)
                         npcUtil.giveCurrency(player, 'gil', xi.settings.main.GIL_RATE * 900)
                     end
                 end,

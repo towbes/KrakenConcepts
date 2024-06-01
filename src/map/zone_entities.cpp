@@ -649,7 +649,7 @@ void CZoneEntities::SpawnMOBs(CCharEntity* PChar)
             }
 
             // Check to skip aggro routine
-            if (PChar->isDead() || PChar->nameflags.flags & FLAG_GM || PCurrentMob->PMaster)
+            if (PChar->isDead() || PChar->visibleGmLevel >= 3 || PCurrentMob->PMaster)
             {
                 continue;
             }
@@ -663,7 +663,7 @@ void CZoneEntities::SpawnMOBs(CCharEntity* PChar)
 
             if (validAggro && PController->CanAggroTarget(PChar))
             {
-                PCurrentMob->PEnmityContainer->AddBaseEnmity(PChar);
+                PCurrentMob->PAI->Engage(PChar->targid);
                 PCurrentMob->PAI->EventHandler.triggerListener("ON_AGGRO_PLAYER", PCurrentMob, PChar); // Umeboshi
             }
         }
@@ -1593,7 +1593,7 @@ void CZoneEntities::ZoneServer(time_point tick)
                 CMobController* PController = static_cast<CMobController*>(PCurrentMob->PAI->GetController());
                 if (PController != nullptr && PController->CanAggroTarget(PMob))
                 {
-                    PCurrentMob->PEnmityContainer->AddBaseEnmity(PMob);
+                    PCurrentMob->PAI->Engage(PMob->targid);
                 }
             }
         }

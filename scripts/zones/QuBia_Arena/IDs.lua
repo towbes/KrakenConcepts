@@ -11,6 +11,7 @@ zones[xi.zone.QUBIA_ARENA] =
         ITEM_OBTAINED                 = 6390, -- Obtained: <item>.
         GIL_OBTAINED                  = 6391, -- Obtained <number> gil.
         KEYITEM_OBTAINED              = 6393, -- Obtained key item: <keyitem>.
+        LOST_KEYITEM                  = 6394, -- Lost key item: <keyitem>.
         CARRIED_OVER_POINTS           = 7001, -- You have carried over <number> login point[/s].
         LOGIN_CAMPAIGN_UNDERWAY       = 7002, -- The [/January/February/March/April/May/June/July/August/September/October/November/December] <number> Login Campaign is currently underway!
         LOGIN_NUMBER                  = 7003, -- In celebration of your most recent login (login no. <number>), we have provided you with <number> points! You currently have a total of <number> points.
@@ -38,16 +39,38 @@ zones[xi.zone.QUBIA_ARENA] =
         HUH_IS_THAT_ALL               = 8021, -- Huh? Is that all? I haven't even broken a sweataru...
         YIKEY_WIKEYS                  = 8022, -- Yikey-wikeys! Get that thing away from meee!
         WHATS_THE_MATTARU             = 8023, -- <Pant, wheeze>... What's the mattaru, <name>? Too much of a pansy-wansy to fight fair?
+
+        -- TODO: Shift IDs
+        ENTERING_THE_BATTLEFIELD_FOR  = 7596, -- Entering the battlefield for [The Rank 5 Mission/Come Into My Parlor/E-vase-ive Action/Infernal Swarm/The Heir to the Light/Shattering Stars (PLD)/Shattering Stars (DRK)/Shattering Stars (BRD)/Demolition Squad/Die by the Sword/Let Sleeping Dogs Die/Brothers D'Aurphe/Undying Promise/Factory Rejects/Idol Thoughts/An Awful Autopsy/Celery/Mirror Images/A Furious Finale/Clash of the Comrades/Those Who Lurk in Shadows/Beyond Infinity/Factory Rejects/Demolition Squad/Brothers D'Aurphe/Mumor's Encore]!
+        TIME_IN_THE_BATTLEFIELD_IS_UP = 7224, -- Your time in the battlefield is up! Now exiting...
+        PARTY_MEMBERS_ARE_ENGAGED     = 7239, -- The battlefield where your party members are engaged in combat is locked. Access is denied.
+        NO_BATTLEFIELD_ENTRY          = 7242, -- A mysterious force is sealing the platform.
+        TESTIMONY_IS_TORN             = 7282, -- Your <item> is torn...
+        TESTIMONY_WEARS               = 7283, -- Your <item> [/rips into shreds!/is on the verge of tearing apart.../is showing signs of wear...] (# [use remains/uses remain].)
+        MEMBERS_OF_YOUR_PARTY         = 7530, -- Currently, # members of your party (including yourself) have clearance to enter the battlefield.
+        MEMBERS_OF_YOUR_ALLIANCE      = 7531, -- Currently, # members of your alliance (including yourself) have clearance to enter the battlefield.
+        TIME_LIMIT_FOR_THIS_BATTLE_IS = 7533, -- The time limit for this battle is <number> minutes.
+        ORB_IS_CRACKED                = 7534, -- There is a crack in the %. It no longer contains a monster.
+        A_CRACK_HAS_FORMED            = 7535, -- A crack has formed on the <item>, and the beast inside has been unleashed!
+
+        -- TODO: Shift IDs
+        SOUL_GEM_REACTS               = 8002, -- The <keyitem> reacts to the <keyitem>, sending a jolt of energy through your veins!
     },
+
     mob =
     {
-        HEIR_TO_THE_LIGHT_OFFSET   = 17621014,
-        ATORI_TUTORI_QM            =
-        {
-            17621302,
-            17621303,
-            17621304,
-        },
+        ARCHLICH_TABERQUOAN      = GetFirstID('Archlich_Taberquoan'),
+        ATORI_TUTORI             = GetFirstID('Atori-Tutori_qm'),
+        CHAHNAMEEDS_STOMACH      = GetFirstID('Chahnameeds_Stomach'),
+        DOLL_FACTORY             = GetFirstID('Doll_Factory'),
+        GHUL_I_BEABAN            = GetFirstID('Ghul-I-Beaban'),
+        MAAT                     = GetFirstID('Maat'),
+        NEPHIYL_RAMPARTBREACHER  = GetFirstID('Nephiyl_Rampartbreacher'),
+        SEED_ORC                 = GetFirstID('Seed_Orc'),
+        VAICOLIAUX_B_DAURPHE     = GetFirstID('Vaicoliaux_B_DAurphe'),
+        WARLORD_ROJGNOJ          = GetFirstID('Warlord_Rojgnoj'),
+        ANANSI                   = GetFirstID('Anansi'),
+        SON_OF_ANANSI            = GetFirstID('Son_of_Anansi'),
         IDOL_THOUGHTS =
         {
             {
@@ -70,6 +93,7 @@ zones[xi.zone.QUBIA_ARENA] =
             },
         },
     },
+
     npc =
     {
     },

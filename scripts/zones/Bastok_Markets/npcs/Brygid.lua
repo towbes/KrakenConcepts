@@ -9,8 +9,8 @@ entity.onTrade = function(player, npc, trade)
 end
 
 entity.onTrigger = function(player, npc)
-    local brygidTheStylist = player:getQuestStatus(xi.quest.log_id.BASTOK, xi.quest.id.bastok.BRYGID_THE_STYLIST)
-    local brygidReturns = player:getQuestStatus(xi.quest.log_id.BASTOK, xi.quest.id.bastok.BRYGID_THE_STYLIST_RETURNS)
+    local brygidTheStylist = player:getQuestStatus(xi.questLog.BASTOK, xi.quest.id.bastok.BRYGID_THE_STYLIST)
+    local brygidReturns = player:getQuestStatus(xi.questLog.BASTOK, xi.quest.id.bastok.BRYGID_THE_STYLIST_RETURNS)
     local head = player:getEquipID(xi.slot.HEAD)
     local body = player:getEquipID(xi.slot.BODY)
     local hands = player:getEquipID(xi.slot.HANDS)
@@ -24,8 +24,8 @@ entity.onTrigger = function(player, npc)
     local robeEquipped = body == xi.item.ROBE and 1 or 0
 
     if
-        brygidReturns ~= QUEST_ACCEPTED and
-        brygidTheStylist == QUEST_COMPLETED and
+        brygidReturns ~= xi.questStatus.QUEST_ACCEPTED and
+        brygidTheStylist == xi.questStatus.QUEST_COMPLETED and
         (
             xi.equip.isArtifactArmor(head) or
             xi.equip.isArtifactArmor(body) or
@@ -49,7 +49,7 @@ entity.onTrigger = function(player, npc)
         player:startEvent(380, robeEquipped, getBody, getLegs, player:getMainJob())
 
     elseif
-        brygidReturns == QUEST_ACCEPTED and
+        brygidReturns == xi.questStatus.QUEST_ACCEPTED and
         body == getBody and
         legs == getLegs and
         wantsSubligar == 0
@@ -57,11 +57,11 @@ entity.onTrigger = function(player, npc)
         -- Have the right equips, proceed with quest
         player:startEvent(382)
 
-    elseif brygidReturns == QUEST_ACCEPTED and wantsSubligar == 0 then
+    elseif brygidReturns == xi.questStatus.QUEST_ACCEPTED and wantsSubligar == 0 then
         -- Remind player what they need to wear
         player:startEvent(381, robeEquipped, getBody, getLegs, player:getMainJob())
 
-    elseif brygidReturns == QUEST_ACCEPTED and wantsSubligar ~= 0 then
+    elseif brygidReturns == xi.questStatus.QUEST_ACCEPTED and wantsSubligar ~= 0 then
         -- Remind player what subligar they need to turn in and the reward
         if wantsSubligar == 13 then
             player:startEvent(385, 0, 14400 + wantsSubligar, 15375 + wantsSubligar)
@@ -93,8 +93,8 @@ entity.onEventFinish = function(player, csid, option, npc)
     local wantsSubligar = player:getCharVar('BrygidWantsSubligar')
 
     if csid == 380 then
-        player:delQuest(xi.quest.log_id.BASTOK, xi.quest.id.bastok.BRYGID_THE_STYLIST_RETURNS)
-        player:addQuest(xi.quest.log_id.BASTOK, xi.quest.id.bastok.BRYGID_THE_STYLIST_RETURNS)
+        player:delQuest(xi.questLog.BASTOK, xi.quest.id.bastok.BRYGID_THE_STYLIST_RETURNS)
+        player:addQuest(xi.questLog.BASTOK, xi.quest.id.bastok.BRYGID_THE_STYLIST_RETURNS)
 
     elseif csid == 382 and option ~= 99 then
         player:setCharVar('BrygidWantsSubligar', option)
@@ -106,8 +106,8 @@ entity.onEventFinish = function(player, csid, option, npc)
         player:addTitle(xi.title.BASTOKS_SECOND_BEST_DRESSED)
         player:addItem(14400 + wantsSubligar)
         player:messageSpecial(ID.text.ITEM_OBTAINED, 14400 + wantsSubligar)
-        player:addFame(xi.quest.fame_area.BASTOK, 30)
-        player:completeQuest(xi.quest.log_id.BASTOK, xi.quest.id.bastok.BRYGID_THE_STYLIST_RETURNS)
+        player:addFame(xi.fameArea.BASTOK, 30)
+        player:completeQuest(xi.questLog.BASTOK, xi.quest.id.bastok.BRYGID_THE_STYLIST_RETURNS)
     end
 end
 

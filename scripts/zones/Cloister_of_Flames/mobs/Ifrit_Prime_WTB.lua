@@ -16,7 +16,7 @@ end
 
 entity.onMobSpawn = function(mob)
     mob:setLocalVar('HPThreshold', math.random(10, 90))
-    mob:setMod(xi.mod.FIRE_ABSORB, 1000)
+    mob:setMod(xi.mod.FIRE_ABSORB, 100)
 end
 
 entity.onAdditionalEffect = function(mob, target, damage)
@@ -40,23 +40,27 @@ entity.onMobWeaponSkill = function(target, mob, skill)
 end
 
 entity.onMobEngage = function(mob, target)
-    mob:setLocalVar('timer', os.time() + math.random(30,60))
-    mob:setLocalVar('hateTimer', os.time() + math.random(10,20))
+    mob:setLocalVar('timer', os.time() + math.random(30, 60))
+    mob:setLocalVar('hateTimer', os.time() + math.random(10, 20))
 end
 
 entity.onMobFight = function(mob, target)
-    if mob:getLocalVar('control') == 0 and mob:getHPP() < mob:getLocalVar('HPThreshold') then
+    if
+        mob:getLocalVar('control') == 0 and
+        mob:getHPP() < mob:getLocalVar('HPThreshold')
+    then
         mob:setLocalVar('control', 1)
         mob:useMobAbility(848)
     end
 
     if mob:getLocalVar('timer') < os.time() then
         for i = 1, 4 do
-            local elemental = GetMobByID(mob:getID()+i)
+            local elemental = GetMobByID(mob:getID() + i)
 
             if elemental:isAlive() then
+                print('IT WORKED')
                 elemental:castSpell(xi.magic.spell.FIRE_IV, mob)
-                mob:setLocalVar('timer', os.time() + math.random(30,60))
+                mob:setLocalVar('timer', os.time() + math.random(30, 60))
                 break
             end
         end
@@ -64,11 +68,11 @@ entity.onMobFight = function(mob, target)
 
     if mob:getLocalVar('hateTimer') < os.time() then
         for i = 1, 4 do
-            local elemental = GetMobByID(mob:getID()+i)
+            local elemental = GetMobByID(mob:getID() + i)
 
             if elemental:isAlive() then
                 elemental:updateEnmity(target)
-                mob:setLocalVar('hateTimer', os.time() + math.random(10,20))
+                mob:setLocalVar('hateTimer', os.time() + math.random(10, 20))
             end
         end
     end
@@ -77,8 +81,8 @@ end
 entity.onMobDeath = function(mob, player, optParams)
     if optParams.isKiller then
         for i = 1, 4 do
-            if GetMobByID(mob:getID()+i):isAlive() then
-                GetMobByID(mob:getID()+i):setHP(0)
+            if GetMobByID(mob:getID() + i):isAlive() then
+                GetMobByID(mob:getID() + i):setHP(0)
             end
         end
     end

@@ -20,27 +20,24 @@ zones[xi.zone.AYDEEWA_SUBTERRANE] =
         MEMBERS_LEVELS_ARE_RESTRICTED = 7023, -- Your party is unable to participate because certain members' levels are restricted.
         FISHING_MESSAGE_OFFSET        = 7057, -- You can't fish here.
         MINING_IS_POSSIBLE_HERE       = 7328, -- Mining is possible here if you have <item>.
-        MUSHROOM_GROWING_HERE         = 7413, -- There is a mushroom growing here. It might grow larger if it had some fertilizer.
-        MUSHROOM_INTO_MONSTER         = 7416, -- The mushroom has grown into a monster!
-        MUSHROOM_GROWN_A_BIT          = 7417, -- The mushroom seems to have grown a bit.
-        MUSHROOM_NO_MORE_FERT         = 7418, -- The mushroom does not need any more fertilizer now.
         SENSE_OMINOUS_PRESENCE        = 8007, -- You sense an ominous presence...
         BLOOD_STAINS                  = 8013, -- The ground is smeared with bloodstains...
         DRAWS_NEAR                    = 8038, -- Something draws near!
         COMMON_SENSE_SURVIVAL         = 8910, -- It appears that you have arrived at a new survival guide provided by the Adventurers' Mutual Aid Network. Common sense dictates that you should now be able to teleport here from similar tomes throughout the world.
         UNITY_WANTED_BATTLE_INTERACT  = 8974, -- Those who have accepted % must pay # Unity accolades to participate. The content for this Wanted battle is #. [Ready to begin?/You do not have the appropriate object set, so your rewards will be limited.]
+
+        MUSHROOM_GROWING_HERE         = 7413, -- There is a mushroom growing here. It might grow larger if it had some fertilizer.
+        MUSHROOM_INTO_MONSTER         = 7416, -- The mushroom has grown into a monster!
+        MUSHROOM_GROWN_A_BIT          = 7417, -- The mushroom seems to have grown a bit.
+        MUSHROOM_NO_MORE_FERT         = 7418, -- The mushroom does not need any more fertilizer now.
     },
     mob =
     {
-        BLUESTREAK_GYUGYUROON_PH =
-        {
-            [17055941] = 17056156, -- -221.7 13.762 -346.83
-            [17055942] = 17056156, -- -219 14.003 -364.83
-        },
-        CRYSTAL_EATER      = 17056155,
-        NOSFERATU          = 17056157,
-        PANDEMONIUM_WARDEN = 17056168,
-        CHIGRE             = 17056186,
+        BLUESTREAK_GYUGYUROON = GetFirstID('Bluestreak_Gyugyuroon'),
+        NOSFERATU             = GetFirstID('Nosferatu'),
+        PANDEMONIUM_WARDEN    = GetFirstID('Pandemonium_Warden'), -- 2 Copies: +0, +1
+        CHIGRE                = GetFirstID('Chigre'),
+        CRYSTAL_EATER         = 17056155,
     },
     npc =
     {

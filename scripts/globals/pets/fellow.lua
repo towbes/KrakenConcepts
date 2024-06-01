@@ -599,7 +599,7 @@ entity.onTrigger = function(player, mob)
     end
 
     if
-        player:getQuestStatus(xi.quest.log_id.JEUNO, xi.quest.id.jeuno.GIRL_IN_THE_LOOKING_GLASS) == QUEST_ACCEPTED and
+        player:getQuestStatus(xi.questLog.JEUNO, xi.quest.id.jeuno.GIRL_IN_THE_LOOKING_GLASS) == xi.questStatus.QUEST_ACCEPTED and
         player:getCharVar('[Quest]Looking_Glass') == 3
     then
         player:setLocalVar('triggerFellow', 0)

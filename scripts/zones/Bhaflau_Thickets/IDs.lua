@@ -12,8 +12,6 @@ zones[xi.zone.BHAFLAU_THICKETS] =
         ITEM_OBTAINED                 = 6390, -- Obtained: <item>.
         GIL_OBTAINED                  = 6391, -- Obtained <number> gil.
         KEYITEM_OBTAINED              = 6393, -- Obtained key item: <keyitem>.
-        GIGANTIC_WARHORSE             = 6400, -- You find the hoofprint of a gigantic warhorse...≺Prompt≻
-        PLACE_QUARTZ                  = 6401, -- You set the ≺Possible Special Code: 01≻≺Possible Special Code: 05≻3≺BAD CHAR: 8280≻≺BAD CHAR: 80≻≺BAD CHAR: 80≻ in the warhorse hoofprint.≺Prompt≻
         FELLOW_MESSAGE_OFFSET         = 6419, -- I'm ready. I suppose.
         CARRIED_OVER_POINTS           = 7001, -- You have carried over <number> login point[/s].
         LOGIN_CAMPAIGN_UNDERWAY       = 7002, -- The [/January/February/March/April/May/June/July/August/September/October/November/December] <number> Login Campaign is currently underway!
@@ -38,6 +36,9 @@ zones[xi.zone.BHAFLAU_THICKETS] =
         BLOOD_STAINS                  = 7664, -- The ground is smeared with bloodstains...
         DRAWS_NEAR                    = 7689, -- Something draws near!
         HOMEPOINT_SET                 = 7700, -- Home point set!
+
+        GIGANTIC_WARHORSE             = 6400, -- You find the hoofprint of a gigantic warhorse...≺Prompt≻
+        PLACE_QUARTZ                  = 6401, -- You set the ≺Possible Special Code: 01≻≺Possible Special Code: 05≻3≺BAD CHAR: 8280≻≺BAD CHAR: 80≻≺BAD CHAR: 80≻ in the warhorse hoofprint.≺Prompt≻
     },
     mob =
     {
@@ -46,27 +47,13 @@ zones[xi.zone.BHAFLAU_THICKETS] =
             ['Marid']        = GetTableOfIDs('Chigoe', 5),
             ['Grand_Marid']  = GetTableOfIDs('Chigoe', 5),
         },
-        MAHISHASURA_PH       =
-        {
-            [16990296] = 16990306, -- 215.000 -18.000 372.000
-        },
-        EMERGENT_ELM_PH    =
-        {
-            [16990374] = 16990376, -- 86.000 -35.000 621.000
-        },
-        NIS_PUK_PH         =
-        {
-            [16990383] = 16990403, -- -135 -18 -648
-            [16990384] = 16990403, -- -104 -18 -636
-            [16990385] = 16990403, -- -123 -16 -638
-            [16990391] = 16990403, -- -106 -16 -613
-            [16990392] = 16990403, -- -109 -15 -600
-            [16990393] = 16990403, -- -128 -15 -602
-            [16990394] = 16990403, -- -132 -16 -612
-            [16990398] = 16990403, -- -119 -15 -651
-        },
-        HARVESTMAN         = 16990252,
+        DEA                = GetFirstID('Dea'),
+        EMERGENT_ELM       = GetFirstID('Emergent_Elm'),
+        HARVESTMAN         = GetFirstID('Harvestman'),
         LIVIDROOT_AMOOSHAH = GetFirstID('Lividroot_Amooshah'),
+        MAHISHASURA        = GetFirstID('Mahishasura'),
+        NIS_PUK            = GetFirstID('Nis_Puk'),
+
         DEA                = GetFirstID('Dea'),
         CHIGOE_POOLS =
         {

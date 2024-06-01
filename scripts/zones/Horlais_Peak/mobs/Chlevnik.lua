@@ -60,7 +60,7 @@ entity.onMobFight = function(mob, target)
 end
 
 entity.onAdditionalEffect = function(mob, target, damage)
-    return xi.mob.onAddEffect(mob, target, damage, xi.mob.ae.STUN, { power = math.random(7, 8), chance = 20 }) --based on captures
+    return xi.mob.onAddEffect(mob, target, damage, xi.mob.ae.STUN, { chance = 20, duration = math.random(5, 10) })
 end
 
 entity.onMobWeaponSkill = function(target, mob, skill)

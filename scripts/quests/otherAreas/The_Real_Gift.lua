@@ -11,7 +11,7 @@ require('scripts/globals/quests')
 require('scripts/globals/interaction/quest')
 -----------------------------------
 
-local quest = Quest:new(xi.quest.log_id.OTHER_AREAS, xi.quest.id.otherAreas.THE_REAL_GIFT)
+local quest = Quest:new(xi.questLog.OTHER_AREAS, xi.quest.id.otherAreas.THE_REAL_GIFT)
 
 quest.reward =
 {
@@ -23,9 +23,9 @@ quest.sections =
 {
     {
         check = function(player, status, vars)
-            return status == QUEST_AVAILABLE and
-            player:getQuestStatus(xi.quest.log_id.OTHER_AREAS, xi.quest.id.otherAreas.THE_GIFT) == QUEST_COMPLETED and
-            player:getQuestStatus(xi.quest.log_id.OTHER_AREAS, xi.quest.id.otherAreas.THE_SAND_CHARM) == QUEST_COMPLETED
+            return status == xi.questStatus.QUEST_AVAILABLE and
+            player:getQuestStatus(xi.questLog.OTHER_AREAS, xi.quest.id.otherAreas.THE_GIFT) == xi.questStatus.QUEST_COMPLETED and
+            player:getQuestStatus(xi.questLog.OTHER_AREAS, xi.quest.id.otherAreas.THE_SAND_CHARM) == xi.questStatus.QUEST_COMPLETED
         end,
 
         [xi.zone.SELBINA] =
@@ -45,7 +45,7 @@ quest.sections =
 
     {
         check = function(player, status, vars)
-            return status == QUEST_ACCEPTED
+            return status == xi.questStatus.QUEST_ACCEPTED
         end,
 
         [xi.zone.SELBINA] =
@@ -76,7 +76,7 @@ quest.sections =
     {
         {
             check = function(player, status, vars)
-                return status == QUEST_COMPLETED
+                return status == xi.questStatus.QUEST_COMPLETED
             end,
 
             [xi.zone.SELBINA] =

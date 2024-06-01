@@ -58,7 +58,7 @@ end
 
 quests.flyers_for_regine.onTriggerAreaEnter = function(player, triggerArea)
     if
-        player:getQuestStatus(xi.quest.log_id.SANDORIA, xi.quest.id.sandoria.FLYERS_FOR_REGINE) == QUEST_ACCEPTED and
+        player:getQuestStatus(xi.questLog.SANDORIA, xi.quest.id.sandoria.FLYERS_FOR_REGINE) == xi.questStatus.QUEST_ACCEPTED and
         os.time() > player:getLocalVar('regineTimer')
     then
         local zoneId        = player:getZoneID()
@@ -86,7 +86,7 @@ end
 
 quests.flyers_for_regine.onTrade = function(player, npc, trade, ffrId)
     if
-        player:getQuestStatus(xi.quest.log_id.SANDORIA, xi.quest.id.sandoria.FLYERS_FOR_REGINE) == QUEST_ACCEPTED and
+        player:getQuestStatus(xi.questLog.SANDORIA, xi.quest.id.sandoria.FLYERS_FOR_REGINE) == xi.questStatus.QUEST_ACCEPTED and
         npcUtil.tradeHas(trade, xi.item.MAGICMART_FLYER)
     then
         local zoneId = player:getZoneID()

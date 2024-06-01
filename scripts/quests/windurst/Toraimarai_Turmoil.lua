@@ -5,21 +5,14 @@
 -- Ohbiru-Dohbiru : !pos 23 -5 -193 238
 -- Giddeus Spring : !pos -258 -2 -249 145
 -----------------------------------
-require('scripts/globals/interaction/quest')
 
-
-require('scripts/globals/npc_util')
-require('scripts/globals/quests')
-
------------------------------------
-
-local quest = Quest:new(xi.quest.log_id.WINDURST, xi.quest.id.windurst.TORAIMARAI_TURMOIL)
+local quest = Quest:new(xi.questLog.WINDURST, xi.quest.id.windurst.TORAIMARAI_TURMOIL)
 
 quest.reward =
 {
     gil  = 4500,
     fame = 100,
-    fameArea = xi.quest.fame_area.WINDURST,
+    fameArea = xi.fameArea.WINDURST,
     title = xi.title.CERTIFIED_RHINOSTERY_VENTURER
 }
 
@@ -27,9 +20,9 @@ quest.sections =
 {
     {
         check = function(player, status, vars)
-            return status == QUEST_AVAILABLE and
-                player:hasCompletedQuest(xi.quest.log_id.WINDURST, xi.quest.id.windurst.BLUE_RIBBON_BLUES) and
-                player:getFameLevel(xi.quest.fame_area.WINDURST) >= 6 and
+            return status == xi.questStatus.QUEST_AVAILABLE and
+                player:hasCompletedQuest(xi.questLog.WINDURST, xi.quest.id.windurst.BLUE_RIBBON_BLUES) and
+                player:getFameLevel(xi.fameArea.WINDURST) >= 6 and
                 not quest:getMustZone(player)
         end,
 
@@ -52,7 +45,7 @@ quest.sections =
     {
         --initial completion
         check = function(player, status, vars)
-            return status == QUEST_ACCEPTED
+            return status == xi.questStatus.QUEST_ACCEPTED
         end,
 
         [xi.zone.WINDURST_WATERS] =
@@ -83,7 +76,7 @@ quest.sections =
     {
         --repeat completion
         check = function(player, status, vars)
-            return status == QUEST_COMPLETED
+            return status == xi.questStatus.QUEST_COMPLETED
         end,
 
         [xi.zone.WINDURST_WATERS] =
@@ -106,7 +99,7 @@ quest.sections =
                     player:confirmTrade()
                     --From previous implementation, award 100 fame on first completion,
                     -- and 50 fame for any subsequent trade.
-                    player:addFame(xi.quest.fame_area.WINDURST, 50)
+                    player:addFame(xi.fameArea.WINDURST, 50)
                 end,
             },
         },

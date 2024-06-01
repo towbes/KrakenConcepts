@@ -17,13 +17,13 @@ require('scripts/globals/interaction/quest')
 local ID = require('scripts/zones/Jugner_Forest/IDs')
 -----------------------------------
 
-local quest = Quest:new(xi.quest.log_id.SANDORIA, xi.quest.id.sandoria.A_TIMELY_VISIT)
+local quest = Quest:new(xi.questLog.SANDORIA, xi.quest.id.sandoria.A_TIMELY_VISIT)
 
 quest.reward =
 {
     item = xi.item.MEDIEVAL_COLLAR,
     fame = 60,
-    fameArea = xi.quest.fame_area.SANDORIA,
+    fameArea = xi.fameArea.SANDORIA,
     title = xi.title.OBSIDIAN_STORM,
 }
 
@@ -31,8 +31,8 @@ quest.sections =
 {
     {
         check = function(player, status, vars)
-            return status == QUEST_AVAILABLE and
-                player:getFameLevel(xi.quest.fame_area.SANDORIA) >= 3
+            return status == xi.questStatus.QUEST_AVAILABLE and
+                player:getFameLevel(xi.fameArea.SANDORIA) >= 3
         end,
 
         [xi.zone.SOUTHERN_SAN_DORIA] =
@@ -52,7 +52,7 @@ quest.sections =
 
     {
         check = function(player, status, vars)
-            return status == QUEST_ACCEPTED
+            return status == xi.questStatus.QUEST_ACCEPTED
         end,
 
         [xi.zone.SOUTHERN_SAN_DORIA] =

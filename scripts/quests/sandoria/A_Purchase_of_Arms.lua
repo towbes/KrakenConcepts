@@ -5,19 +5,15 @@
 -- Helbort: !gotoid 17719353
 -- Alexius: !gotoid 17203813
 -----------------------------------
-
-require('scripts/globals/quests')
-
-require('scripts/globals/interaction/quest')
 local ID = zones[xi.zone.SOUTHERN_SAN_DORIA]
-local jugnerID = require('scripts/zones/Jugner_Forest/IDs')
+local jugnerID = zones[xi.zone.JUGNER_FOREST]
 
-local quest = Quest:new(xi.quest.log_id.SANDORIA, xi.quest.id.sandoria.A_PURCHASE_OF_ARMS)
+local quest = Quest:new(xi.questLog.SANDORIA, xi.quest.id.sandoria.A_PURCHASE_OF_ARMS)
 
 quest.reward =
 {
     fame = 30,
-    fameArea = xi.quest.fame_area.SANDORIA,
+    fameArea = xi.fameArea.SANDORIA,
     title    = xi.title.ARMS_TRADER,
     item     = xi.item.ELM_STAFF,
 
@@ -27,9 +23,9 @@ quest.sections =
 {
     {
         check = function(player, status, vars)
-            return status == QUEST_AVAILABLE and
-            player:getQuestStatus(xi.quest.log_id.SANDORIA, xi.quest.id.sandoria.FATHER_AND_SON) == QUEST_COMPLETED and
-            player:getFameLevel(xi.quest.fame_area.SANDORIA) >= 2
+            return status == xi.questStatus.QUEST_AVAILABLE and
+            player:getQuestStatus(xi.questLog.SANDORIA, xi.quest.id.sandoria.FATHER_AND_SON) == xi.questStatus.QUEST_COMPLETED and
+            player:getFameLevel(xi.fameArea.SANDORIA) >= 2
         end,
 
         [xi.zone.SOUTHERN_SAN_DORIA] =
@@ -50,7 +46,7 @@ quest.sections =
 
     {
         check = function(player, status, vars)
-            return status == QUEST_ACCEPTED
+            return status == xi.questStatus.QUEST_ACCEPTED
         end,
 
         [xi.zone.SOUTHERN_SAN_DORIA] =

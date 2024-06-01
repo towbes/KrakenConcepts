@@ -15,7 +15,7 @@ require('scripts/globals/quests')
 local ID = require('scripts/zones/Sacrarium/IDs')
 -----------------------------------
 
-local quest = Quest:new(xi.quest.log_id.OTHER_AREAS, xi.quest.id.otherAreas.SECRETS_OF_OVENS_LOST)
+local quest = Quest:new(xi.questLog.OTHER_AREAS, xi.quest.id.otherAreas.SECRETS_OF_OVENS_LOST)
 
 quest.reward =
 {
@@ -28,9 +28,9 @@ quest.sections =
         -- Pre Quest CS with Despachiaire
         check = function(player, status, vars)
             return
-                status == QUEST_AVAILABLE and
+                status == xi.questStatus.QUEST_AVAILABLE and
                 quest:getVar(player, 'Prog') == 0 and
-                player:getQuestStatus(xi.quest.log_id.SANDORIA, xi.quest.id.sandoria.SPICE_GALS) == QUEST_COMPLETED
+                player:getQuestStatus(xi.questLog.SANDORIA, xi.quest.id.sandoria.SPICE_GALS) == xi.questStatus.QUEST_COMPLETED
         end,
 
         [xi.zone.TAVNAZIAN_SAFEHOLD] =
@@ -49,7 +49,7 @@ quest.sections =
         -- Initial Quest Start with Jonette
         check = function(player, status, vars)
             return
-                status == QUEST_AVAILABLE and
+                status == xi.questStatus.QUEST_AVAILABLE and
                 quest:getVar(player, 'Prog') == 1
         end,
 
@@ -68,7 +68,7 @@ quest.sections =
     {
         -- Mid Quest, reused for the repeat as well
         check = function(player, status, vars)
-            return status == QUEST_ACCEPTED
+            return status == xi.questStatus.QUEST_ACCEPTED
         end,
 
         [xi.zone.TAVNAZIAN_SAFEHOLD] =
@@ -122,7 +122,7 @@ quest.sections =
         -- Quest Repeat
         check = function(player, status, vars)
             return
-                status == QUEST_COMPLETED and
+                status == xi.questStatus.QUEST_COMPLETED and
                 quest:getVar(player, 'Option') < NextConquestTally()
         end,
 
@@ -135,7 +135,7 @@ quest.sections =
                 [507] = function(player, csid, option, npc)
                     -- This quest specifically has wiki notes that it shows back up in the quest log for repeats
                     -- To achieve this, we delete it from the players log then accept it
-                    player:delQuest(xi.quest.log_id.OTHER_AREAS, xi.quest.id.otherAreas.SECRETS_OF_OVENS_LOST)
+                    player:delQuest(xi.questLog.OTHER_AREAS, xi.quest.id.otherAreas.SECRETS_OF_OVENS_LOST)
                     quest:begin(player)
                 end,
             },

@@ -25,12 +25,8 @@ zones[xi.zone.JUGNER_FOREST] =
         DIG_THROW_AWAY                = 7728,  -- You dig up <item>, but your inventory is full. You regretfully throw the <item> away.
         FIND_NOTHING                  = 7730,  -- You dig and you dig, but find nothing.
         AMK_DIGGING_OFFSET            = 7796,  -- You spot some familiar footprints. You are convinced that your moogle friend has been digging in the immediate vicinity.
-        ALEXIUS_DEFAULT               = 7896,  -- An adventurer, are you? Well, welcome to Lake Mechieume.
         LOGGING_IS_POSSIBLE_HERE      = 7908,  -- Logging is possible here if you have <item>.
         VOIDWALKER_OBTAIN_KI          = 7915,  -- Obtained key item: <keyitem>!
-        DUG_UP                        = 8019,  -- Something was dug up here...
-        PRETERNATURAL_FORCES          = 8020,  -- For some reason, you are unable to investigate this spot. There is a preternatural force at work here...
-        FOREBODING                    = 8021,  -- A sense of foreboding fills the air...
         CONQUEST                      = 8059,  -- You've earned conquest points!
         GARRISON_BASE                 = 8426,  -- Hm? What is this? %? How do I know this is not some [San d'Orian/Bastokan/Windurstian] trick?
         PLAYER_OBTAINS_ITEM           = 8649,  -- <name> obtains <item>!
@@ -52,36 +48,27 @@ zones[xi.zone.JUGNER_FOREST] =
         VOIDWALKER_UPGRADE_KI_2       = 12086, -- The <keyitem> takes on a deeper, richer hue and becomes <keyitem>!
         VOIDWALKER_BREAK_KI           = 12087, -- The <keyitem> shatters into tiny fragments.
         COMMON_SENSE_SURVIVAL         = 13091, -- It appears that you have arrived at a new survival guide provided by the Adventurers' Mutual Aid Network. Common sense dictates that you should now be able to teleport here from similar tomes throughout the world.
+
+        ALEXIUS_DEFAULT               = 7896,  -- An adventurer, are you? Well, welcome to Lake Mechieume.
+        DUG_UP                        = 8019,  -- Something was dug up here...
+        PRETERNATURAL_FORCES          = 8020,  -- For some reason, you are unable to investigate this spot. There is a preternatural force at work here...
+        FOREBODING                    = 8021,  -- A sense of foreboding fills the air...
     },
 
     mob =
     {
-        PANZER_PERCIVAL_PH =
-        {
-            [17203581] = 17203585, -- 535.504 -1.517 152.171 (southeast)
-            [17203637] = 17203642, -- 239.541 -0.365 559.722 (northwest)
-        },
-
-        SUPPLESPINE_MUJWUJ_PH =
-        {
-            [17203437] = 17203475,
-        },
-
-        FRADUBIO_PH =
-        {
-            [17203447] = 17203448,
-        },
-
+        PANZER_PERCIVAL    = GetTableOfIDs('Panzer_Percival'), -- 2 NMs
+        SUPPLESPINE_MUJWUJ = GetFirstID('Supplespine_Mujwuj'),
+        KING_ARTHRO        = GetFirstID('King_Arthro'),
+        FRAELISSA          = GetFirstID('Fraelissa'),
+        FRADUBIO           = GetFirstID('Fradubio'),
+        METEORMAULER       = GetFirstID('Meteormauler_Zhagtegg'),
+        CERNUNNOS          = GetFirstID('Cernunnos'),
         TIMELY_VISIT =
         {
             17203666,
             17203667,
         },
-
-        KING_ARTHRO          = 17203216,
-        FRAELISSA            = 17203447,
-        FRADUBIO             = 17203448,
-        METEORMAULER         = 17203414,
 
         VOIDWALKER =
         {
@@ -114,7 +101,6 @@ zones[xi.zone.JUGNER_FOREST] =
             }
         },
 
-        CERNUNNOS = 17203677,
     },
 
     npc =

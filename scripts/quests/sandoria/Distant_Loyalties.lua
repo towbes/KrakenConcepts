@@ -5,19 +5,15 @@
 -- Femitte: !gotoid 17719491
 -- Michea: !gotoid 17739820
 -----------------------------------
-require('scripts/globals/interaction/quest')
-require('scripts/globals/npc_util')
-require('scripts/globals/quests')
-
 local ID = zones[xi.zone.SOUTHERN_SAN_DORIA]
 -----------------------------------
 
-local quest = Quest:new(xi.quest.log_id.SANDORIA, xi.quest.id.sandoria.DISTANT_LOYALTIES)
+local quest = Quest:new(xi.questLog.SANDORIA, xi.quest.id.sandoria.DISTANT_LOYALTIES)
 
 quest.reward =
 {
     fame = 30,
-    fameArea = xi.quest.fame_area.SANDORIA,
+    fameArea = xi.fameArea.SANDORIA,
     item = xi.item.WHITE_CAPE,
 }
 
@@ -25,8 +21,8 @@ quest.sections =
 {
     {
         check = function(player, status, vars)
-            return status == QUEST_AVAILABLE and
-            player:getFameLevel(xi.quest.fame_area.SANDORIA) >= 4
+            return status == xi.questStatus.QUEST_AVAILABLE and
+            player:getFameLevel(xi.fameArea.SANDORIA) >= 4
         end,
 
         [xi.zone.SOUTHERN_SAN_DORIA] =
@@ -48,7 +44,7 @@ quest.sections =
 
     {
         check = function(player, status, vars)
-            return status == QUEST_ACCEPTED
+            return status == xi.questStatus.QUEST_ACCEPTED
         end,
 
         [xi.zone.SOUTHERN_SAN_DORIA] =
@@ -135,7 +131,7 @@ quest.sections =
 
     {
         check = function(player, status, vars)
-            return status == QUEST_COMPLETED
+            return status == xi.questStatus.QUEST_COMPLETED
         end,
 
         [xi.zone.BASTOK_MARKETS] =

@@ -19,7 +19,7 @@ mobskillObject.onMobWeaponSkill = function(target, mob, skill)
     local master = mob:getMaster()
     local skillID = skill:getID()
     if mob:isPet() then
-        if master and master:isJugPet() and master:checkDistance(mob) < 8.5 then
+        if master and master:hasJugPet() and master:checkDistance(mob) < 8.5 then
             local tp = skill:getTP()
             power    = 25
             duration = 180

@@ -21,11 +21,12 @@ entity.onMobSpawn = function(mob)
 end
 
 entity.onMobEngage = function(mob, target)
-    local battlefield = mob:getBattlefield()
-    local bfID = battlefield:getArea()
-    SpawnMob(ID.pullingThePlug[bfID].GREEN_ID):updateEnmity(target)
-    SpawnMob(ID.pullingThePlug[bfID].BLUE_ID):updateEnmity(target)
-    SpawnMob(ID.pullingThePlug[bfID].TEAL_ID):updateEnmity(target)
+    local battlefieldArea = mob:getBattlefield():getArea()
+    local battlefield     = mob:getBattlefield()
+    
+    SpawnMob(ID.mob.pullingThePlug[battlefieldArea].GREEN_ID):updateEnmity(target)
+    SpawnMob(ID.mob.pullingThePlug[battlefieldArea].BLUE_ID):updateEnmity(target)
+    SpawnMob(ID.mob.pullingThePlug[battlefieldArea].TEAL_ID):updateEnmity(target)
 
     mob:setMod(xi.mod.REGAIN, 450)
     mob:setLocalVar('drawInTime', os.time() + 20)
@@ -33,7 +34,7 @@ entity.onMobEngage = function(mob, target)
 end
 
 entity.onMobWeaponSkillPrepare = function(target, mob, skill)
-    local bfID = mob:getBattlefield():getArea()
+    local battlefieldArea = mob:getBattlefield():getArea()
     local tpNumber = mob:getLocalVar('tpNumber')
     local tpDelay = mob:getLocalVar('tpDelay')
 
@@ -41,9 +42,9 @@ entity.onMobWeaponSkillPrepare = function(target, mob, skill)
     if tpNumber < 2 then
         mob:setLocalVar('tpNumber', tpNumber + 1)
     elseif tpNumber >= 2 and os.time() > tpDelay then
-        GetMobByID(ID.pullingThePlug[bfID].GREEN_ID):useMobAbility(542)
-        GetMobByID(ID.pullingThePlug[bfID].BLUE_ID):useMobAbility(542)
-        GetMobByID(ID.pullingThePlug[bfID].TEAL_ID):useMobAbility(542)
+        GetMobByID(ID.mob.pullingThePlug[battlefieldArea].GREEN_ID):useMobAbility(542)
+        GetMobByID(ID.mob.pullingThePlug[battlefieldArea].BLUE_ID):useMobAbility(542)
+        GetMobByID(ID.mob.pullingThePlug[battlefieldArea].TEAL_ID):useMobAbility(542)
         mob:setLocalVar('tpNumber', 0)
         mob:setLocalVar('tpDelay', os.time() + 10)
     end
@@ -55,11 +56,19 @@ entity.onMobFight = function(mob, target)
     local party = target:getParty()
 
     if os.time() > drawInTime then
-        local victim = math.random(1,#party)
-        for k, v in pairs(party) do
-            if v:isAlive() and k == victim and not v:isInEvent() then
-                mob:triggerDrawIn(mob, false, 1, 35, v)
+        -- Select a random party member to be the potential victim
+        local victimIndex = math.random(1,#party)
+
+        -- Iterate through the party members
+        for index, member in pairs(party) do
+            -- Check if the member is the chosen victim, is alive, not in an event, and within draw in max reach distance of mob.
+            if member:isAlive() and index == victimIndex and not member:isInEvent() and mob:checkDistance(member) < 35 then
+                mob:drawIn(member)
+
+                -- Set the drawIn cooldown to 20 seconds
                 mob:setLocalVar('drawInTime', os.time() + 20)
+
+                -- Mob Pulled someone, exit the loop.
                 break
             end
         end

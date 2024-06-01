@@ -9,7 +9,7 @@
 -----------------------------------
 local arrapagoID = zones[xi.zone.ARRAPAGO_REEF]
 -----------------------------------
-local quest = Quest:new(xi.quest.log_id.AHT_URHGAN, xi.quest.id.ahtUrhgan.THE_DIE_IS_CAST)
+local quest = Quest:new(xi.questLog.AHT_URHGAN, xi.quest.id.ahtUrhgan.THE_DIE_IS_CAST)
 
 quest.reward =
 {
@@ -20,8 +20,8 @@ quest.sections =
 {
     {
         check = function(player, status, vars)
-            return status == QUEST_AVAILABLE and
-            player:getQuestStatus(xi.quest.log_id.AHT_URHGAN, xi.quest.id.ahtUrhgan.LUCK_OF_THE_DRAW) ~= QUEST_AVAILABLE -- accepted or complete
+            return status == xi.questStatus.QUEST_AVAILABLE and
+            player:getQuestStatus(xi.questLog.AHT_URHGAN, xi.quest.id.ahtUrhgan.LUCK_OF_THE_DRAW) ~= xi.questStatus.QUEST_AVAILABLE -- accepted or complete
         end,
 
         [xi.zone.AHT_URHGAN_WHITEGATE] =
@@ -39,7 +39,7 @@ quest.sections =
 
     {
         check = function(player, status, vars)
-            return status == QUEST_ACCEPTED
+            return status == xi.questStatus.QUEST_ACCEPTED
         end,
 
         [xi.zone.AHT_URHGAN_WHITEGATE] =

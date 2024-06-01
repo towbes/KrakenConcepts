@@ -12,12 +12,12 @@ require('scripts/globals/npc_util')
 
 -----------------------------------
 
-local quest = Quest:new(xi.quest.log_id.BASTOK, xi.quest.id.bastok.RETURN_TO_THE_DEPTHS)
+local quest = Quest:new(xi.questLog.BASTOK, xi.quest.id.bastok.RETURN_TO_THE_DEPTHS)
 
 quest.reward =
 {
     fame     = 60,
-    fameArea = xi.quest.fame_area.BASTOK,
+    fameArea = xi.fameArea.BASTOK,
     item     = xi.item.BOWYER_RING,
     title    = xi.title.GOBLIN_IN_DISGUISE,
 }
@@ -27,9 +27,9 @@ quest.sections =
     -- Available
     {
         check = function(player, status, vars)
-            return status == QUEST_AVAILABLE and
-            player:getFameLevel(xi.quest.fame_area.BASTOK) >= 5 and
-            player:hasCompletedQuest(xi.quest.log_id.BASTOK, xi.quest.id.bastok.A_QUESTION_OF_FAITH)
+            return status == xi.questStatus.QUEST_AVAILABLE and
+            player:getFameLevel(xi.fameArea.BASTOK) >= 5 and
+            player:hasCompletedQuest(xi.questLog.BASTOK, xi.quest.id.bastok.A_QUESTION_OF_FAITH)
         end,
 
         [xi.zone.METALWORKS] =
@@ -48,7 +48,7 @@ quest.sections =
     -- Accepted
     {
         check = function(player, status, vars)
-            return status == QUEST_ACCEPTED
+            return status == xi.questStatus.QUEST_ACCEPTED
         end,
 
         [xi.zone.METALWORKS] =
@@ -215,6 +215,10 @@ quest.sections =
                 [5] = function(player, csid, option, npc)
                     quest:setVar(player, 'prog', 9)
                 end,
+
+                [32001] = function(player, csid, option, npc)
+                    quest:setVar(player, 'prog', 10)
+                end,
             },
         },
     },
@@ -222,7 +226,7 @@ quest.sections =
     -- Completed
     {
         check = function(player, status, vars)
-            return status == QUEST_COMPLETED
+            return status == xi.questStatus.QUEST_COMPLETED
         end,
 
         [xi.zone.PORT_BASTOK] =

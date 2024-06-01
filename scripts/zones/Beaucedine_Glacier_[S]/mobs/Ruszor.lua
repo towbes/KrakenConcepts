@@ -1,11 +1,8 @@
 -----------------------------------
 -- Area: Beaucedine Glacier [S]
+--  Mob: Ruszor
 -----------------------------------
-local ID = require('scripts/zones/Beaucedine_Glacier_[S]/IDs')
-mixins = 
-{
-    require('scripts/mixins/families/ruszor'),
-}
+mixins = { require('scripts/mixins/families/ruszor') }
 -----------------------------------
 local entity = {}
 

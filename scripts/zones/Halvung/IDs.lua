@@ -21,8 +21,6 @@ zones[xi.zone.HALVUNG] =
         THE_PARTY_WILL_BE_REMOVED     = 7799, -- If all party members' HP are still zero after # minute[/s], the party will be removed from the battlefield.
         WIDE_TRENCH                   = 7911, -- There is a wide trench around the gate here. There are three keyholes of differing sizes inside the trench.
         MINING_IS_POSSIBLE_HERE       = 7934, -- Mining is possible here if you have <item>.
-        GURFURLUR_ENGAGE              = 7971, -- I is Gurfurlur, the big boss. And you is dead.
-        GURFURLUR_DEAD                = 7972, -- I is dead? But I is the strongest...
         BLUE_FLAMES                   = 7973, -- You can see blue flames flickering from a hole in the ground here...
         SICKLY_SWEET                  = 8025, -- A sickly sweet fragrance pervades the air...
         THIN_LAYER_OF_CINDER          = 8032, -- The ground is carpeted in a thin layer of cinder.
@@ -31,22 +29,25 @@ zones[xi.zone.HALVUNG] =
         LIFT_LEVER                    = 8051, -- You lift the lever with all your might!
         UNITY_WANTED_BATTLE_INTERACT  = 8090, -- Those who have accepted % must pay # Unity accolades to participate. The content for this Wanted battle is #. [Ready to begin?/You do not have the appropriate object set, so your rewards will be limited.]
         COMMON_SENSE_SURVIVAL         = 8112, -- It appears that you have arrived at a new survival guide provided by the Adventurers' Mutual Aid Network. Common sense dictates that you should now be able to teleport here from similar tomes throughout the world.
+
+        GURFURLUR_ENGAGE              = 7971, -- I is Gurfurlur, the big boss. And you is dead.
+        GURFURLUR_DEAD                = 7972, -- I is dead? But I is the strongest...
     },
     mob =
     {
         BIG_BOMB               = GetFirstID('Big_Bomb'),
-        GURFURLUR_THE_MENACING = 17031592,
-        DEXTROSE               = 17031598,
-        REACTON                = 17031599,
-        ACHAMOTH               = 17031600,
+        GURFURLUR_THE_MENACING = GetFirstID('Gurfurlur_the_Menacing'),
+        DEXTROSE               = GetFirstID('Dextrose'),
+        REACTON                = GetFirstID('Reacton'),
+        ACHAMOTH               = GetFirstID('Achamoth'),
     },
     npc =
     {
-        LEVER_AB_DOOR = 17031668,
-        LEVER_CD_DOOR = 17031672,
-        LEVER_EF_DOOR = 17031676,
-        LEVER_GH_DOOR = 17031680,
-        LEVER_IJ_DOOR = 17031684,
+        LEVER_AB_DOOR = GetFirstID('_1qf'),
+        LEVER_CD_DOOR = GetFirstID('_1qh'),
+        LEVER_EF_DOOR = GetFirstID('_1qj'),
+        LEVER_GH_DOOR = GetFirstID('_1ql'),
+        LEVER_IJ_DOOR = GetFirstID('_1qn'),
         MINING        = GetTableOfIDs('Mining_Point'),
     },
 }

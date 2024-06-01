@@ -21,6 +21,13 @@ mobskillObject.onMobWeaponSkill = function(target, mob, skill)
         shadowsTaken = xi.mobskills.shadowBehavior.IGNORE_SHADOWS
     end
 
+    local master = mob:getMaster()
+    if mob:isPet() then
+        if master and master:hasJugPet() then
+            skill:setSkillchainProps(xi.skillchainType.REVERBERATION, xi.skillchainType.NONE, xi.skillchainType.NONE)
+        end
+    end
+
     -- Level 50+ rabbits have a different type of foot kick that has a 2.0 FTP instead of 1.0 This version also crits 100% of the time.
     if mob:getMainLvl() >= 50 then
         info = xi.mobskills.mobPhysicalMove(mob, target, skill, numhits, accmod, dmgmod, tpEffect1, 2.25, 3.50, 5.0, tpEffect2, 1, 2, 3, crit)

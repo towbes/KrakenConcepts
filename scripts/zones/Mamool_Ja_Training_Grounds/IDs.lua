@@ -25,6 +25,7 @@ zones[xi.zone.MAMOOL_JA_TRAINING_GROUNDS] =
         TIME_REMAINING_SECONDS        = 7521, -- ime remaining: <number> [second/seconds] (Earth time).
         PARTY_FALLEN                  = 7523, -- ll party members have fallen in battle. Mission failure in <number> [minute/minutes].
         BRUJEEL_TEXT                  = 7532, -- Am I glad to see you!
+
         PECULIAR_SENSATION            = 7545, -- <player> is overcome by a peculia sensation.
         QUHAAJA_DIALOGUE_OFFSET       = 7548, -- The time for this mission is limited. Get as many supplies as you can from those lizard bastards before time runs out. Let's give 'em hell, soldier!'
         TRAINER_DIALOGUE_OFFSET       = 7554, -- Scaleless heathen... A taste of my wrath, you shall have!
@@ -67,13 +68,13 @@ zones[xi.zone.MAMOOL_JA_TRAINING_GROUNDS] =
 
     npc =
     {
-        ANCIENT_LOCKBOX = 17047808,
-        RUNE_OF_RELEASE = 17047809,
-        BRUJEEL         = 17047810,
-        DOOR_1          = 17047898, -- north
-        DOOR_2          = 17047900, -- southwest
-        DOOR_3          = 17047902, -- southest
-        POT_HATCH       = 17047916,
+        ANCIENT_LOCKBOX = GetFirstID('Ancient_Lockbox'),
+        RUNE_OF_RELEASE = GetFirstID('Rune_of_Release'),
+        BRUJEEL         = GetFirstID('Brujeel'),
+        DOOR_1          = GetFirstID('_ju3'), -- north
+        DOOR_2          = GetFirstID('_ju5'), -- southwest
+        DOOR_3          = GetFirstID('_ju7'), -- southest
+        POT_HATCH       = GetFirstID('_jul'),
     },
 }
 

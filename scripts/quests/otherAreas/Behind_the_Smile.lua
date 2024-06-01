@@ -17,7 +17,7 @@ require('scripts/globals/interaction/quest')
 local landingID = require('scripts/zones/Carpenters_Landing/IDs')
 -----------------------------------
 
-local quest = Quest:new(xi.quest.log_id.OTHER_AREAS, xi.quest.id.otherAreas.BEHIND_THE_SMILE)
+local quest = Quest:new(xi.questLog.OTHER_AREAS, xi.quest.id.otherAreas.BEHIND_THE_SMILE)
 
 quest.reward =
 {
@@ -30,8 +30,8 @@ quest.sections =
     -- QUEST AVAILABLE
     {
         check = function(player, status, vars)
-            return status == QUEST_AVAILABLE and
-            player:hasCompletedQuest(xi.quest.log_id.OTHER_AREAS, xi.quest.id.otherAreas.ITS_RAINING_MANNEQUINS)
+            return status == xi.questStatus.QUEST_AVAILABLE and
+            player:hasCompletedQuest(xi.questLog.OTHER_AREAS, xi.quest.id.otherAreas.ITS_RAINING_MANNEQUINS)
         end,
 
         [xi.zone.TAVNAZIAN_SAFEHOLD] =
@@ -50,7 +50,7 @@ quest.sections =
     -- QUEST ACCEPTED
     {
         check = function(player, status, vars)
-            return status == QUEST_ACCEPTED
+            return status == xi.questStatus.QUEST_ACCEPTED
         end,
 
         [xi.zone.MHAURA] =

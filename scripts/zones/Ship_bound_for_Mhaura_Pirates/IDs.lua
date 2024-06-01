@@ -23,6 +23,8 @@ zones[xi.zone.SHIP_BOUND_FOR_MHAURA_PIRATES] =
     },
     mob =
     {
+        WIGHT      = GetFirstID('Ship_Wight'),
+        SILVERHOOK = GetFirstID('Silverhook'),
         SEA_CREATURES = 17711110, -- Starting Sea Creature offset
         PHANTOM = 17711115,
         CROSSBONES = 17711116, -- Starting pirate offset

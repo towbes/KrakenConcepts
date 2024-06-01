@@ -10,15 +10,15 @@ require('scripts/globals/npc_util')
 require('scripts/globals/quests')
 
 local ID = zones[xi.zone.NORTHERN_SAN_DORIA]
-local laTheineID = require('scripts/zones/La_Theine_Plateau/IDs')
+local laTheineID = zones[xi.zone.LA_THEINE_PLATEAU]
 -----------------------------------
 
-local quest = Quest:new(xi.quest.log_id.SANDORIA, xi.quest.id.sandoria.GATES_TO_PARADISE)
+local quest = Quest:new(xi.questLog.SANDORIA, xi.quest.id.sandoria.GATES_TO_PARADISE)
 
 quest.reward =
 {
     fame = 30,
-    fameArea = xi.quest.fame_area.SANDORIA,
+    fameArea = xi.fameArea.SANDORIA,
     item = xi.item.COTTON_CAPE,
     title = xi.title.THE_PIOUS_ONE,
 }
@@ -27,8 +27,8 @@ quest.sections =
 {
     {
         check = function(player, status, vars)
-            return status == QUEST_AVAILABLE and
-                player:getFameLevel(xi.quest.fame_area.SANDORIA) >= 2
+            return status == xi.questStatus.QUEST_AVAILABLE and
+                player:getFameLevel(xi.fameArea.SANDORIA) >= 2
         end,
 
         [xi.zone.NORTHERN_SAN_DORIA] =
@@ -49,7 +49,7 @@ quest.sections =
 
     {
         check = function(player, status, vars)
-            return status == QUEST_ACCEPTED
+            return status == xi.questStatus.QUEST_ACCEPTED
         end,
 
         [xi.zone.NORTHERN_SAN_DORIA] =

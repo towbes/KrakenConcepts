@@ -182,6 +182,9 @@ INSERT INTO `item_mods_pet` VALUES (11720,28,3,3); -- Automaton - MATT: 3
 INSERT INTO `item_mods_pet` VALUES (11739,27,2,1); -- Avatar - ENMITY: 2
 INSERT INTO `item_mods_pet` VALUES (11739,28,2,1); -- Avatar - MATT: 2
 
+-- Mujin Obi
+INSERT INTO `item_mods_pet` VALUES (11776,23,10,1); -- Avatar - ATT: 10
+
 -- Ngen Seraweels
 INSERT INTO `item_mods_pet` VALUES (11987,126,5,1); -- Avatar - BP_DAMAGE: 5
 INSERT INTO `item_mods_pet` VALUES (11987,370,1,1); -- Avatar - REGEN: 1

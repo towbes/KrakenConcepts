@@ -17,10 +17,7 @@ mobskillObject.onMobWeaponSkill = function(target, mob, skill)
         dmg = targetcurrentHP - hpset
     end
 
-    target:takeDamage(dmg, mob, xi.attackType.MAGICAL, xi.damageType.ELEMENTAL)
-
-    xi.mobskills.mobStatusEffectMove(mob, target, xi.effect.BIND, 1, 0, 30)
-
+    target:takeDamage(dmg, mob, xi.attackType.MAGICAL, xi.damageType.ELEMENTAL, { breakBind = false })
     return dmg
 end
 

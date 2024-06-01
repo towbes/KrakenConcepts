@@ -254,7 +254,8 @@ public:
     void lockEquipSlot(uint8 slot);
     void unlockEquipSlot(uint8 slot);
 
-    int8 getShieldSize();
+    int8  getShieldSize();
+    int16 getShieldDefense();
 
     bool hasGearSetMod(uint8 modNameId);
     void addGearSetMod(uint8 modNameId, Mod modId, uint16 modValue);
@@ -273,7 +274,6 @@ public:
     auto   getPacketName() -> std::string;
     void   renameEntity(std::string const& newName, sol::object const& arg2);
     void   hideName(bool isHidden);
-    bool   checkNameFlags(uint32 flags); // this is check and not get because it tests for a flag, it doesn't return all flags
     uint16 getModelId();
     void   setModelId(uint16 modelId, sol::object const& slotObj);
     uint16 getCostume();
@@ -306,8 +306,12 @@ public:
 
     uint8 getGMLevel();
     void  setGMLevel(uint8 level);
+    void  setVisibleGMLevel(uint8 level);
+    uint8 getVisibleGMLevel();
     bool  getGMHidden();
     void  setGMHidden(bool isHidden);
+    bool  getWallhack();
+    void  setWallhack(bool enable);
 
     bool isJailed();
     void jail();
@@ -515,6 +519,7 @@ public:
 
     void recalculateSkillsTable();
     void recalculateAbilitiesTable();
+    auto getEntitiesInRange(CLuaBaseEntity* PLuaEntityTarget, sol::variadic_args va) -> sol::table;
 
     // Parties and Alliances
     auto   getParty() -> sol::table;
@@ -661,6 +666,7 @@ public:
 
     void addLatent(uint16 condID, uint16 conditionValue, uint16 mID, int16 modValue);
     bool delLatent(uint16 condID, uint16 conditionValue, uint16 mID, int16 modValue);
+    bool hasAllLatentsActive(uint8 slot);
 
     void   fold();
     void   doWildCard(CLuaBaseEntity* PEntity, uint8 total);
@@ -739,10 +745,10 @@ public:
     void   removeAllSimpleGambits();
     void   setTrustTPSkillSettings(uint16 trigger, uint16 select, sol::object const& value);
 
-    bool isJugPet();
     bool hasValidJugPetItem();
 
     bool   hasPet();
+    bool   hasJugPet();
     auto   getPet() -> std::optional<CLuaBaseEntity>;
     uint32 getPetID();
     bool   isAutomaton();
@@ -874,10 +880,12 @@ public:
     void castSpell(sol::object const& spell, sol::object const& entity); // forces a mob to cast a spell (parameter = spell ID, otherwise picks a spell from its list)
     void useJobAbility(uint16 skillID, sol::object const& pet);          // forces a job ability use (players/pets only)
     void useMobAbility(sol::variadic_args va);                           // forces a mob to use a mobability (parameter = skill ID)
+    auto getAbilityDistance(uint16 skillID) -> float;                    // Returns the specified distance for mob skill
 
     int32 triggerDrawIn(CLuaBaseEntity* PMobEntity, sol::object const& includePt, sol::object const& drawRange, sol::object const& maxReach, sol::object const& target, sol::object const& incDeadAndMount); // forces a mob to draw in target
 
     bool hasTPMoves();
+    void drawIn(sol::variadic_args va); // Forces a mob to draw-in the specified target, or its current target with no args
 
     void weaknessTrigger(uint8 level);
     void restoreFromChest(CLuaBaseEntity* PLuaBaseEntity, uint32 restoreType);

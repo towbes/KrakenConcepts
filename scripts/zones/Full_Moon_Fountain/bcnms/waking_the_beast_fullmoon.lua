@@ -41,7 +41,7 @@ end
 battlefieldObject.onBattlefieldLeave = function(player, battlefield, leavecode)
     if leavecode == xi.battlefield.leaveCode.WON then
         local _, clearTime, partySize = battlefield:getRecord()
-        local arg8 = (player:hasCompletedQuest(xi.quest.log_id.OTHER_AREAS, xi.quest.id.otherAreas.WAKING_THE_BEAST)) and 1 or 0
+        local arg8 = (player:hasCompletedQuest(xi.questLog.OTHER_AREAS, xi.quest.id.otherAreas.WAKING_THE_BEAST)) and 1 or 0
 
         if battlefield:getLocalVar('loot') == 0 then
             battlefield:setLocalVar('loot', 1)
@@ -82,7 +82,7 @@ battlefieldObject.onEventFinish = function(player, csid, option)
         }
         local check = true
 
-        for i = 0, 7 do
+        for i = 1, 7 do
             if not player:hasKeyItem(key[i]) then
                 check = false
                 return
@@ -90,8 +90,8 @@ battlefieldObject.onEventFinish = function(player, csid, option)
         end
 
         if check then
-            for i = 0, 7 do
-                player:delKeyItem(xi.ki.key[i])
+            for i = 1, 7 do
+                player:delKeyItem(key[i])
             end
 
             npcUtil.giveKeyItem(player, xi.ki.FADED_RUBY)

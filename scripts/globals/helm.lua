@@ -1687,7 +1687,7 @@ xi.helm.result = function(player, helmType, broke, itemID)
     -- Quest: Vanishing Act
     if
         helmType == xi.helmType.HARVESTING and
-        player:getQuestStatus(xi.quest.log_id.AHT_URHGAN, xi.quest.id.ahtUrhgan.VANISHING_ACT) == QUEST_ACCEPTED and
+        player:getQuestStatus(xi.questLog.AHT_URHGAN, xi.quest.id.ahtUrhgan.VANISHING_ACT) == xi.questStatus.QUEST_ACCEPTED and
         not player:hasKeyItem(xi.ki.RAINBOW_BERRY) and
         broke ~= 1 and
         zoneId == xi.zone.WAJAOM_WOODLANDS
@@ -1695,7 +1695,7 @@ xi.helm.result = function(player, helmType, broke, itemID)
         npcUtil.giveKeyItem(player, xi.ki.RAINBOW_BERRY)
     end
 
-    -- Missiom: AMK04
+    -- AMK mission 4 (index 3)
     if xi.settings.main.ENABLE_AMK == 1 then
         xi.amk.helpers.helmTrade(player, helmType, broke)
     end

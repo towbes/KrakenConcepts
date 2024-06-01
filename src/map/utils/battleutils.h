@@ -141,6 +141,7 @@ namespace battleutils
     uint8                GetSkillchainSubeffect(SKILLCHAIN_ELEMENT skillchain);
     int16                GetSkillchainMinimumResistance(SKILLCHAIN_ELEMENT element, CBattleEntity* PDefender, ELEMENT* appliedEle);
     std::vector<ELEMENT> GetSkillchainMagicElement(SKILLCHAIN_ELEMENT skillchain);
+    Mod                  GetResistanceRankModFromElement(ELEMENT& element);
 
     bool IsParalyzed(CBattleEntity* PAttacker);
     bool IsAbsorbByShadow(CBattleEntity* PDefender, CBattleEntity* PAttacker);
@@ -152,7 +153,7 @@ namespace battleutils
     uint8 GetHitRate(CBattleEntity* PAttacker, CBattleEntity* PDefender);
     uint8 GetHitRate(CBattleEntity* PAttacker, CBattleEntity* PDefender, uint8 attackNumber);
     uint8 GetHitRate(CBattleEntity* PAttacker, CBattleEntity* PDefender, uint8 attackNumber, int8 offsetAccuracy);
-    uint8 GetCritHitRate(CBattleEntity* PAttacker, CBattleEntity* PDefender, bool ignoreSneakTrickAttack);
+    uint8 GetCritHitRate(CBattleEntity* PAttacker, CBattleEntity* PDefender, bool ignoreSneakTrickAttack, SLOTTYPE weaponSlot = SLOT_MAIN);
     uint8 GetRangedCritHitRate(CBattleEntity* PAttacker, CBattleEntity* PDefender);
     int8  GetDexCritBonus(CBattleEntity* PAttacker, CBattleEntity* PDefender);
     int8  GetAGICritBonus(CBattleEntity* PAttacker, CBattleEntity* PDefender);
@@ -207,7 +208,7 @@ namespace battleutils
     void  unCharm(CBattleEntity* PEntity);
 
     uint16 doSoulEaterEffect(CCharEntity* m_PChar, uint32 damage);
-    uint16 doConsumeManaEffect(CCharEntity* m_PChar, uint32 damage);
+    uint16 doConsumeManaEffect(CCharEntity* m_PChar);
     int32  getOverWhelmDamageBonus(CCharEntity* m_PChar, CBattleEntity* PDefender, int32 damage);
 
     void  TransferEnmity(CBattleEntity* PHateReceiver, CBattleEntity* PHateGiver, CMobEntity* PMob, uint8 percentToTransfer);
@@ -255,12 +256,15 @@ namespace battleutils
     WEATHER GetWeather(CBattleEntity* PEntity, bool ignoreScholar);
     WEATHER GetWeather(CBattleEntity* PEntity, bool ignoreScholar, uint16 zoneWeather);
     bool    WeatherMatchesElement(WEATHER weather, uint8 element);
-    bool    DrawIn(CBattleEntity* PTarget, CMobEntity* PMob, float offset, uint8 drawInRange, uint16 maximumReach, bool includeParty, bool includeDeadAndMount = false);
+    bool    DrawIn(CBattleEntity* PEntity, CMobEntity* PMob, float offset);
     void    DoWildCardToEntity(CCharEntity* PCaster, CCharEntity* PTarget, uint8 roll);
     bool    DoRandomDealToEntity(CCharEntity* PChar, CCharEntity* PTarget);
-    void    AddTraits(CBattleEntity* PEntity, TraitList_t* TraitList, uint8 level);
-    void    AddTraitsSJ(CBattleEntity* PEntity, TraitList_t* TraitList, uint8 level, size_t cutoff);
-    bool    HasClaim(CBattleEntity* PEntity, CBattleEntity* PTarget);
+
+    void turnTowardsTarget(CBaseEntity* PEntity, CBaseEntity* PTarget, bool force = false);
+
+    void AddTraits(CBattleEntity* PEntity, TraitList_t* TraitList, uint8 level);
+    void AddTraitsSJ(CBattleEntity* PEntity, TraitList_t* TraitList, uint8 level, size_t cutoff);
+    bool HasClaim(CBattleEntity* PEntity, CBattleEntity* PTarget);
 
     uint32 CalculateSpellCastTime(CBattleEntity*, CMagicState*);
     uint16 CalculateSpellCost(CBattleEntity*, CSpell*);

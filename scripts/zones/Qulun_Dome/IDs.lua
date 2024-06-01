@@ -29,7 +29,7 @@ zones[xi.zone.QULUN_DOME] =
     },
     mob =
     {
-        DIAMOND_QUADAV             = 17383442,
+        DIAMOND_QUADAV             = GetFirstID('Diamond_Quadav'), -- Also used for An Affable Adamantking? offset
         ZADHA_ADAMANTKING          = 17383443,
         AFFABLE_ADAMANTKING_OFFSET = 17383444,
     },

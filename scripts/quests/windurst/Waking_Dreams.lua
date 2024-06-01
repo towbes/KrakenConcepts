@@ -7,20 +7,15 @@
 --  !addquest 2 93
 -----------------------------------
 local ID = zones[xi.zone.WINDURST_WATERS]
-require('scripts/globals/interaction/quest')
-
-require('scripts/globals/npc_util')
-require('scripts/globals/quests')
-
 -----------------------------------
 
-local quest = Quest:new(xi.quest.log_id.WINDURST, xi.quest.id.windurst.WAKING_DREAMS)
+local quest = Quest:new(xi.questLog.WINDURST, xi.quest.id.windurst.WAKING_DREAMS)
 
 quest.sections =
 {
     {
         check = function(player, status, vars)
-            return status ~= QUEST_ACCEPTED and
+            return status ~= xi.questStatus.QUEST_ACCEPTED and
                 player:hasCompletedMission(xi.mission.log_id.COP, xi.mission.id.cop.DARKNESS_NAMED) and
                 not player:hasKeyItem(xi.ki.VIAL_OF_DREAM_INCENSE) and
                 vars.Stage < os.time()
@@ -42,7 +37,7 @@ quest.sections =
 
     {
         check = function(player, status, vars)
-            return status ~= QUEST_AVAILABLE
+            return status ~= xi.questStatus.QUEST_AVAILABLE
         end,
 
         [xi.zone.WINDURST_WATERS] =

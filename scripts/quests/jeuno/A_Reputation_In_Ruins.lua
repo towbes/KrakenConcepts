@@ -13,7 +13,7 @@ require('scripts/globals/interaction/quest')
 -----------------------------------
 local ID = zones[xi.zone.PSOXJA]
 -----------------------------------
-local quest = Quest:new(xi.quest.log_id.JEUNO, xi.quest.id.jeuno.A_REPUTATION_IN_RUINS)
+local quest = Quest:new(xi.questLog.JEUNO, xi.quest.id.jeuno.A_REPUTATION_IN_RUINS)
 
 quest.reward =
 {
@@ -24,7 +24,7 @@ quest.sections =
 {
     {
         check = function(player, status, vars)
-            return status == QUEST_AVAILABLE and
+            return status == xi.questStatus.QUEST_AVAILABLE and
             player:getCurrentMission(xi.mission.log_id.COP) > xi.mission.id.cop.THE_ROAD_FORKS
         end,
 
@@ -57,7 +57,7 @@ quest.sections =
 
     {
         check = function(player, status, vars)
-            return status == QUEST_ACCEPTED
+            return status == xi.questStatus.QUEST_ACCEPTED
         end,
 
         [xi.zone.PSOXJA] =

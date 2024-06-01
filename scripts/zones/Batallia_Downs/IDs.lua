@@ -76,12 +76,14 @@ zones[xi.zone.BATALLIA_DOWNS] =
             17207703,
         },
         WEEPING_WILLOW    = 17207302,
-        AHTU              = 17207657,
+        AHTU              = GetFirstID('Ahtu'),
         BADSHAH_OFFSET    = GetFirstID('Badshah'),
-        STURMTIGER        = 17207696,
-        SUPARNA           = 17207697,
-        SUPARNA_FLEDGLING = 17207698,
-        VEGNIX_GREENTHUMB = 17207710,
+        PRANKSTER_MAVERIX = GetFirstID('Prankster_Maverix'),
+        STURMTIGER        = GetFirstID('Sturmtiger'),
+        SUPARNA           = GetFirstID('Suparna'),
+        SUPARNA_FLEDGLING = GetFirstID('Suparna_Fledgling'),
+        TOTTERING_TOBY    = GetFirstID('Tottering_Toby'),
+        VEGNIX_GREENTHUMB = GetFirstID('Vegnix_Greenthumb'),
 
         VOIDWALKER =
         {
@@ -117,9 +119,9 @@ zones[xi.zone.BATALLIA_DOWNS] =
 
     npc =
     {
-        SYRILLIA         = GetFirstID('Syrillia'),
         BLUE_BEAM_BASE   = GetFirstID('NPC[2a4]'),
         RAPTOR_FOOD_BASE = GetFirstID('Raptors_Food_0'),
+        SYRILLIA         = GetFirstID('Syrillia'),
     },
 }
 

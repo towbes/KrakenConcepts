@@ -14,13 +14,13 @@ entity.onTrade = function(player, npc, trade)
 end
 
 entity.onTrigger = function(player, npc)
-    local circleOfTime = player:getQuestStatus(xi.quest.log_id.JEUNO, xi.quest.id.jeuno.THE_CIRCLE_OF_TIME)
+    local circleOfTime = player:getQuestStatus(xi.questLog.JEUNO, xi.quest.id.jeuno.THE_CIRCLE_OF_TIME)
     local circleProgress = player:getCharVar('circleTime')
-    local lureOfTheWildcat = player:getQuestStatus(xi.quest.log_id.SANDORIA, xi.quest.id.sandoria.LURE_OF_THE_WILDCAT)
+    local lureOfTheWildcat = player:getQuestStatus(xi.questLog.SANDORIA, xi.quest.id.sandoria.LURE_OF_THE_WILDCAT)
     local wildcatSandy = player:getCharVar('WildcatSandy')
 
     -- CIRCLE OF TIME (Bard AF3)
-    if circleOfTime == QUEST_ACCEPTED then
+    if circleOfTime == xi.questStatus.QUEST_ACCEPTED then
         if circleProgress == 5 then
             player:startEvent(99)
         elseif circleProgress == 6 then
@@ -33,7 +33,7 @@ entity.onTrigger = function(player, npc)
 
     -- LURE OF THE WILDCAT
     elseif
-        lureOfTheWildcat == QUEST_ACCEPTED and
+        lureOfTheWildcat == xi.questStatus.QUEST_ACCEPTED and
         not utils.mask.getBit(wildcatSandy, 19)
     then
         player:startEvent(561)
@@ -55,7 +55,7 @@ entity.onEventFinish = function(player, csid, option, npc)
         if player:getFreeSlotsCount() ~= 0 then
             player:addItem(xi.item.CHORAL_JUSTAUCORPS)
             player:messageSpecial(ID.text.ITEM_OBTAINED, xi.item.CHORAL_JUSTAUCORPS)
-            player:completeQuest(xi.quest.log_id.JEUNO, xi.quest.id.jeuno.THE_CIRCLE_OF_TIME)
+            player:completeQuest(xi.questLog.JEUNO, xi.quest.id.jeuno.THE_CIRCLE_OF_TIME)
             player:addTitle(xi.title.PARAGON_OF_BARD_EXCELLENCE)
             player:setCharVar('circleTime', 0)
         else

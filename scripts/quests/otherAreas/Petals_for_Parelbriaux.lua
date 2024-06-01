@@ -17,7 +17,7 @@ require('scripts/globals/interaction/quest')
 -----------------------------------
 local ID = zones[xi.zone.LUFAISE_MEADOWS]
 -----------------------------------
-local quest = Quest:new(xi.quest.log_id.OTHER_AREAS, xi.quest.id.otherAreas.PETALS_FOR_PARELBRIAUX)
+local quest = Quest:new(xi.questLog.OTHER_AREAS, xi.quest.id.otherAreas.PETALS_FOR_PARELBRIAUX)
 
 quest.reward =
 {
@@ -29,7 +29,7 @@ quest.sections =
 {
     {
         check = function(player, status, vars)
-            return status == QUEST_AVAILABLE and
+            return status == xi.questStatus.QUEST_AVAILABLE and
             player:getCurrentMission(xi.mission.log_id.COP) > xi.mission.id.cop.DARKNESS_NAMED
         end,
 
@@ -80,7 +80,7 @@ quest.sections =
 
     {
         check = function(player, status, vars)
-            return status == QUEST_ACCEPTED
+            return status == xi.questStatus.QUEST_ACCEPTED
         end,
 
         [xi.zone.TAVNAZIAN_SAFEHOLD] =

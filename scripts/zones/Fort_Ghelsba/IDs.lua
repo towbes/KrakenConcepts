@@ -22,12 +22,9 @@ zones[xi.zone.FORT_GHELSBA] =
     },
     mob =
     {
-        HUNDREDSCAR_HAJWAJ_PH =
-        {
-            [17354823] = 17354828,
-        },
+        HUNDREDSCAR_HAJWAJ = GetFirstID('Hundredscar_Hajwaj'),
+        ORCISH_PANZER      = GetFirstID('Orcish_Panzer'),
         KEGPAUNCH_DOSHGNOSH = 17354922,
-        ORCISH_PANZER = 17354894,
     },
     npc =
     {

@@ -25,9 +25,9 @@ entity.onTrade = function(player, npc, trade)
 end
 
 entity.onTrigger = function(player, npc)
-    local fatherAndSon = player:getQuestStatus(xi.quest.log_id.SANDORIA, xi.quest.id.sandoria.FATHER_AND_SON)
-    local sharpeningTheSword = player:getQuestStatus(xi.quest.log_id.SANDORIA, xi.quest.id.sandoria.SHARPENING_THE_SWORD)
-    local aBoysDream = player:getQuestStatus(xi.quest.log_id.SANDORIA, xi.quest.id.sandoria.A_BOY_S_DREAM)
+    local fatherAndSon = player:getQuestStatus(xi.questLog.SANDORIA, xi.quest.id.sandoria.FATHER_AND_SON)
+    local sharpeningTheSword = player:getQuestStatus(xi.questLog.SANDORIA, xi.quest.id.sandoria.SHARPENING_THE_SWORD)
+    local aBoysDream = player:getQuestStatus(xi.questLog.SANDORIA, xi.quest.id.sandoria.A_BOY_S_DREAM)
 
     -- Checking levels and jobs for af quest
     local mLvl = player:getMainLvl()
@@ -42,8 +42,8 @@ entity.onTrigger = function(player, npc)
     -- Additional Dialog after completing 'Father and Son', but is not displayed from prior conditions:
     -- CSID: 12
     if
-        sharpeningTheSword == QUEST_AVAILABLE and
-        fatherAndSon == QUEST_COMPLETED and
+        sharpeningTheSword == xi.questStatus.QUEST_AVAILABLE and
+        fatherAndSon == xi.questStatus.QUEST_COMPLETED and
         player:getCharVar('Quest[0][4]Prog') == 0
     then
     -- 'Sharpening the Sword' Quest Dialogs
@@ -59,13 +59,19 @@ entity.onTrigger = function(player, npc)
         then
             player:startEvent(43) -- Start Quest 'Sharpening the Sword'
         end
-    elseif sharpeningTheSword == QUEST_ACCEPTED and not hasOrdelleWhetstone then
+    elseif
+        sharpeningTheSword == xi.questStatus.QUEST_ACCEPTED and
+        not hasOrdelleWhetstone
+    then
         player:startEvent(42) -- During Quest 'Sharpening the Sword'
-    elseif sharpeningTheSword == QUEST_ACCEPTED and hasOrdelleWhetstone then
+    elseif
+        sharpeningTheSword == xi.questStatus.QUEST_ACCEPTED and
+        hasOrdelleWhetstone
+    then
         player:startEvent(44) -- Finish Quest 'Sharpening the Sword'
     -- 'A Boy's Dream' Quest Dialogs
     elseif 
-        aBoysDream == QUEST_AVAILABLE and
+        aBoysDream == xi.questStatus.QUEST_AVAILABLE and
         ((mJob == xi.job.PLD and mLvl >= 50) or
         (sJob == xi.job.PLD and sLvl >= 50))
     then
@@ -102,7 +108,7 @@ end
 entity.onEventFinish = function(player, csid, option, npc)
     -- 'Sharpening the Sword'
     if (csid == 45 or csid == 43) and option == 1 then
-        player:addQuest(xi.quest.log_id.SANDORIA, xi.quest.id.sandoria.SHARPENING_THE_SWORD)
+        player:addQuest(xi.questLog.SANDORIA, xi.quest.id.sandoria.SHARPENING_THE_SWORD)
         player:setCharVar('sharpeningTheSwordCS', 2)
         player:setCharVar('returnedAilbecheRod', 0)
     elseif csid == 45 and option == 0 then
@@ -115,12 +121,12 @@ entity.onEventFinish = function(player, csid, option, npc)
             player:addItem(xi.item.HONOR_SWORD)
             player:messageSpecial(ID.text.ITEM_OBTAINED, xi.item.HONOR_SWORD) -- Honor Sword
             player:setCharVar('sharpeningTheSwordCS', 0)
-            player:addFame(xi.quest.fame_area.SANDORIA, 30)
-            player:completeQuest(xi.quest.log_id.SANDORIA, xi.quest.id.sandoria.SHARPENING_THE_SWORD)
+            player:addFame(xi.fameArea.SANDORIA, 30)
+            player:completeQuest(xi.questLog.SANDORIA, xi.quest.id.sandoria.SHARPENING_THE_SWORD)
         end
     -- 'A Boy's Dream'
     elseif (csid == 41 or csid == 40) and option == 1 then
-        player:addQuest(xi.quest.log_id.SANDORIA, xi.quest.id.sandoria.A_BOY_S_DREAM)
+        player:addQuest(xi.questLog.SANDORIA, xi.quest.id.sandoria.A_BOY_S_DREAM)
         player:setCharVar('aBoysDreamCS', 2)
     elseif csid == 41 and option == 0 then
         player:setCharVar('aBoysDreamCS', 1)

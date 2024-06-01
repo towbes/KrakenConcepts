@@ -11,23 +11,23 @@ require('scripts/globals/quests')
 
 
 -----------------------------------
-local ID = require('scripts/zones/RuLude_Gardens/IDs')
-local meaID = require('scripts/zones/Promyvion-Mea/IDs')
-local demID = require('scripts/zones/Promyvion-Dem/IDs')
-local hollaID = require('scripts/zones/Promyvion-Holla/IDs')
+local ID = zones[xi.zone.RULUDE_GARDENS]
+local meaID = zones[xi.zone.PROMYVION_MEA]
+local demID = zones[xi.zone.PROMYVION_DEM]
+local hollaID = zones[xi.zone.PROMYVION_HOLLA]
 -----------------------------------
 
-local quest = Quest:new(xi.quest.log_id.JEUNO, xi.quest.id.jeuno.SHADOWS_OF_THE_DEPARTED)
+local quest = Quest:new(xi.questLog.JEUNO, xi.quest.id.jeuno.SHADOWS_OF_THE_DEPARTED)
 
 quest.sections =
 {
     {
         check = function(player, status, vars)
-            return status == QUEST_AVAILABLE and
-            player:hasCompletedQuest(xi.quest.log_id.JEUNO, xi.quest.id.jeuno.STORMS_OF_FATE) and
+            return status == xi.questStatus.QUEST_AVAILABLE and
+            player:hasCompletedQuest(xi.questLog.JEUNO, xi.quest.id.jeuno.STORMS_OF_FATE) and
             player:getCurrentMission(xi.mission.log_id.ZILART) == xi.mission.id.zilart.AWAKENING and
             player:getMissionStatus(xi.mission.log_id.ZILART) >= 3 and
-            player:getQuestStatus(xi.quest.log_id.JEUNO, xi.quest.id.jeuno.SHADOWS_OF_THE_DEPARTED) == QUEST_AVAILABLE and
+            player:getQuestStatus(xi.questLog.JEUNO, xi.quest.id.jeuno.SHADOWS_OF_THE_DEPARTED) == xi.questStatus.QUEST_AVAILABLE and
             player:getCharVar('StormsOfFateWait') <= os.time()
         end,
 
@@ -52,7 +52,7 @@ quest.sections =
 
     {
         check = function(player, status, vars)
-            return status == QUEST_ACCEPTED
+            return status == xi.questStatus.QUEST_ACCEPTED
         end,
 
         [xi.zone.PROMYVION_DEM] =
@@ -123,8 +123,8 @@ quest.sections =
                         player:delKeyItem(xi.ki.PROMYVION_DEM_SLIVER)
                         player:delKeyItem(xi.ki.PROMYVION_MEA_SLIVER)
                         player:messageSpecial(ID.text.YOU_HAND_THE_THREE_SLIVERS)
-                        xi.quest.setVar(player, xi.quest.log_id.JEUNO, xi.quest.id.jeuno.APOCALYPSE_NIGH, 'Timer', VanadielUniqueDay() + 1)
-                        xi.quest.setMustZone(player, xi.quest.log_id.JEUNO, xi.quest.id.jeuno.APOCALYPSE_NIGH)
+                        xi.quest.setVar(player, xi.questLog.JEUNO, xi.quest.id.jeuno.APOCALYPSE_NIGH, 'Timer', VanadielUniqueDay() + 1)
+                        xi.quest.setMustZone(player, xi.questLog.JEUNO, xi.quest.id.jeuno.APOCALYPSE_NIGH)
                     end
                 end,
             },

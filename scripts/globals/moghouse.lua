@@ -130,6 +130,11 @@ xi.moghouse.onMoghouseZoneIn = function(player, prevZone)
     local cs = -1
 
     player:eraseAllStatusEffect()
+    player:delStatusEffectSilent(xi.effect.POISON)
+    player:delStatusEffectSilent(xi.effect.BLINDNESS)
+    player:delStatusEffectSilent(xi.effect.PARALYSIS)
+    player:delStatusEffectSilent(xi.effect.SILENCE)
+
     player:setPos(0, 0, 0, 192)
 
     -- For Job Levels and Merit WS.
@@ -165,27 +170,27 @@ xi.moghouse.onMoghouseZoneIn = function(player, prevZone)
     end
     
     if player:getCharVar('mhflagCheck') == 0 then
-        if player:getQuestStatus(xi.quest.log_id.SANDORIA, xi.quest.id.sandoria.GROWING_FLOWERS) == QUEST_COMPLETED then
+        if player:getQuestStatus(xi.questLog.SANDORIA, xi.quest.id.sandoria.GROWING_FLOWERS) == xi.questStatus.QUEST_COMPLETED then
             local mhflag = player:getMoghouseFlag()
             player:setCharVar('mhflagCheck', 1)
             player:setMoghouseFlag(mhflag + 0x0001)
         end
-        if player:getQuestStatus(xi.quest.log_id.BASTOK, xi.quest.id.bastok.A_LADYS_HEART) == QUEST_COMPLETED then
+        if player:getQuestStatus(xi.questLog.BASTOK, xi.quest.id.bastok.A_LADYS_HEART) == xi.questStatus.QUEST_COMPLETED then
             local mhflag = player:getMoghouseFlag()
             player:setMoghouseFlag(mhflag + 0x0002)
             player:setCharVar('mhflagCheck', 1)
         end
-        if player:getQuestStatus(xi.quest.log_id.WINDURST, xi.quest.id.windurst.FLOWER_CHILD) == QUEST_COMPLETED then
+        if player:getQuestStatus(xi.questLog.WINDURST, xi.quest.id.windurst.FLOWER_CHILD) == xi.questStatus.QUEST_COMPLETED then
             local mhflag = player:getMoghouseFlag()
             player:setMoghouseFlag(mhflag + 0x0004)
             player:setCharVar('mhflagCheck', 1)
         end
-        if player:getQuestStatus(xi.quest.log_id.JEUNO, xi.quest.id.jeuno.PRETTY_LITTLE_THINGS) == QUEST_COMPLETED then
+        if player:getQuestStatus(xi.questLog.JEUNO, xi.quest.id.jeuno.PRETTY_LITTLE_THINGS) == xi.questStatus.QUEST_COMPLETED then
             local mhflag = player:getMoghouseFlag()
             player:setMoghouseFlag(mhflag + 0x0008)
             player:setCharVar('mhflagCheck', 1)
         end
-        if player:getQuestStatus(xi.quest.log_id.AHT_URHGAN, xi.quest.id.ahtUrhgan.KEEPING_NOTES) == QUEST_COMPLETED then
+        if player:getQuestStatus(xi.questLog.AHT_URHGAN, xi.quest.id.ahtUrhgan.KEEPING_NOTES) == xi.questStatus.QUEST_COMPLETED then
             local mhflag = player:getMoghouseFlag()
             player:setMoghouseFlag(mhflag + 0x0010)
             player:setCharVar('mhflagCheck', 1)

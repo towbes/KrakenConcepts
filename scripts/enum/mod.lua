@@ -225,6 +225,7 @@ xi.mod =
     DARK_ABSORB                     = 466, -- Occasionally absorbs dark elemental damage.
 
     CRITHITRATE                     = 165,
+    CRITHITRATE_ONLY_WEP            = 141,
     CRIT_DMG_INCREASE               = 421,
     RANGED_CRIT_DMG_INCREASE        = 964, -- Increases ranged critical damage by a percent
     ENEMYCRITRATE                   = 166,
@@ -437,6 +438,7 @@ xi.mod =
     PALISADE_BLOCK_BONUS            = 1066, -- Increases base block rate while under the effects of Palisade (additive, not multiplicative)
     REPRISAL_BLOCK_BONUS            = 1067, -- Increases block rate while under the effects of Reprisal (multiplicative, not additive)
     REPRISAL_SPIKES_BONUS           = 1068, -- Increases Reprisal spikes damage by percentage (e.g. mod value of 50 will increase spikes damage by 50%)
+    SHIELD_BARRIER                  = 1082, -- Grants a bonus to Protect spells cast by self while a shield is equipped.
 
     -- Dark Knight
     ARCANE_CIRCLE_POTENCY           = 1069, -- Increases the potency of the Arcane Circle effect (e.g. mod value 2 = +2% Arcana Killer)
@@ -708,7 +710,9 @@ xi.mod =
     EAT_RAW_MEAT                    = 413, -- Without this, only Galka can eat raw meat (item cannot be used)
     DRINK_DISTILLED                 = 159, -- Without this, Distilled Water cannot be consumed (item can still be used)
 
-    ENHANCES_CURSNA_RCVD            = 67,   -- Potency of 'Cursna' effects received
+    EQUIPMENT_ONLY_RACE             = 276, -- An 8-bit flag that denotes that only a certain race(s) can use this equipment (0 means all races can use)
+
+    ENHANCES_CURSNA_RCVD            = 67,   -- Potency of "Cursna" effects received
     ENHANCES_CURSNA                 = 310,  -- Raises success rate of Cursna when removing effect (like Doom) that are not 100% chance to remove
     ENHANCES_HOLYWATER              = 495,  -- Used by gear with the 'Enhances Holy Water' or 'Holy Water+' attribute
     ENHANCES_PROT_SHELL_RCVD        = 977,  -- Enhances Protect and Shell Effects Received (Binary MOD)
@@ -1036,26 +1040,4 @@ xi.mod =
     -- The spares take care of finding the next ID to use so long as we don't forget to list IDs that have been freed up by refactoring.
     -- 570 - 825 used by WS DMG mods these are not spares.
     -- For Next ID, see modifier.h
-}
-
-
-xi.immunity =
-{
-    NONE        = 0,
-    SLEEP       = 1,
-    GRAVITY     = 2,
-    BIND        = 4,
-    STUN        = 8,
-    SILENCE     = 16,
-    PARALYZE    = 32,
-    BLIND       = 64,
-    SLOW        = 128,
-    POISON      = 256,
-    ELEGY       = 512,
-    REQUIEM     = 1024,
-    LIGHT_SLEEP = 2048,
-    DARK_SLEEP  = 4096,
-    ASPIR       = 8192,
-    TERROR      = 16384,
-    DISPEL      = 32768,
 }

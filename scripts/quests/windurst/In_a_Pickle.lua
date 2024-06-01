@@ -4,26 +4,21 @@
 -- !addquest 2 5
 -- Hariga-Origa : !pos -70.244,-3.800,-4.439
 -----------------------------------
-require('scripts/globals/interaction/quest')
-require('scripts/globals/npc_util')
-require('scripts/globals/quests')
 
------------------------------------
-
-local quest = Quest:new(xi.quest.log_id.WINDURST, xi.quest.id.windurst.IN_A_PICKLE)
+local quest = Quest:new(xi.questLog.WINDURST, xi.quest.id.windurst.IN_A_PICKLE)
 
 quest.reward =
 {
     gil = 200,
     fame = 8,
-    fameArea = xi.quest.fame_area.WINDURST,
+    fameArea = xi.fameArea.WINDURST,
 }
 
 quest.sections =
 {
     {
         check = function(player, status, vars)
-            return status == QUEST_AVAILABLE
+            return status == xi.questStatus.QUEST_AVAILABLE
         end,
 
         [xi.zone.WINDURST_WATERS] =
@@ -43,7 +38,7 @@ quest.sections =
 
     {
         check = function(player, status, vars)
-            return status == QUEST_ACCEPTED
+            return status == xi.questStatus.QUEST_ACCEPTED
         end,
 
         [xi.zone.WINDURST_WATERS] =
@@ -77,7 +72,7 @@ quest.sections =
                         player:confirmTrade()
                         player:needToZone(true)
                         npcUtil.giveItem(player, xi.item.BONE_HAIRPIN)
-                        player:addFame(xi.quest.fame_area.WINDURST, 75)
+                        player:addFame(xi.fameArea.WINDURST, 75)
                     end
                 end,
             },
@@ -86,7 +81,7 @@ quest.sections =
 
     {
         check = function(player, status, vars)
-            return status == QUEST_COMPLETED
+            return status == xi.questStatus.QUEST_COMPLETED
         end,
 
         [xi.zone.WINDURST_WATERS] =
@@ -130,7 +125,7 @@ quest.sections =
                     player:confirmTrade()
                     player:needToZone(true)
                     quest:setVar(player, 'repeat', 0)
-                    player:addFame(xi.quest.fame_area.WINDURST, 8)
+                    player:addFame(xi.fameArea.WINDURST, 8)
                 end,
             },
         },
