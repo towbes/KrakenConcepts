@@ -14,8 +14,8 @@ m:addOverride('xi.homepoint.onTrigger', function(player, csid, index)
         player:addMP(player:getMaxMP())
 
         -- Reset Call Wyvern & Deploy
-        player:resetRecast(xi.recast.ABILITY, 163)
-        player:resetRecast(xi.recast.ABILITY, 205)
+        player:resetRecast(xi.recast.ABILITY, xi.jobAbility.CALL_WYVERN)
+        player:resetRecast(xi.recast.ABILITY, xi.jobAbility.DEPLOY)
     end
     super(player, csid, index)
 end)
